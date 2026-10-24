@@ -350,7 +350,7 @@ public partial class ShakeBox : Node2D
         if (!_chest.Sounds(item, level, Magnet)) return false;
         if (item.Def.Loud) _lastClank = _time;
         // While metal clanks, delicate things can't be heard over it.
-        if (item.Def.Delicate && (_chest.Clanks(level, Magnet) || _time - _lastClank < MaskSeconds)) return false;
+        if (item.Def.Delicate && !_chest.Unmasked && (_chest.Clanks(level, Magnet) || _time - _lastClank < MaskSeconds)) return false;
 
         HeardAnything = true;
         float loud = Mathf.Clamp((strength - ImpactThreshold) / 600f, 0f, 1f);

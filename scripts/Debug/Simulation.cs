@@ -13,7 +13,7 @@ namespace Keywright.Debug;
 /// the debt (with the Key whole, now and then the Crown Chest), careless play is foreclosed within a few weeks, and every seller's
 /// quirk is worth putting up with.
 /// </summary>
-public static class Simulation
+public static partial class Simulation
 {
     /// <summary>The debt's eight weeks, then a few of the Guild's endless ones.</summary>
     const int MaxWeeks = Guild.Weeks + 4;
@@ -23,8 +23,8 @@ public static class Simulation
     /// <summary>The order a sensible player buys things in.</summary>
     public static readonly string[] BuyOrder =
     {
-        "shop2", "sign", "scales", "shop3", "cabinet1", "picks", "cabinet2", "crier", "block", "lamp", "shop4", "charter", "case", "cabinet3",
-        "cabinet4", "warrant", "night", "magnet", "cabinet5", "seal", "cabinet6", "patrons", "velvet",
+        "shop2", "sign", "scales", "shop3", "bench", "cabinet1", "picks", "cabinet2", "crier", "block", "lamp", "shop4", "workshop", "charter",
+        "case", "cabinet3", "cabinet4", "warrant", "night", "master", "magnet", "cabinet5", "seal", "cabinet6", "patrons", "velvet",
     };
 
 
@@ -36,8 +36,12 @@ public static class Simulation
     /// better they get (<see cref="Slip"/>).
     /// </param>
     /// <param name="Shown">A Heartsong on display from the first day, to see what it's worth.</param>
+    /// <param name="Guided">Bram's tips and lessons on, as a first-timer has them (the experience playtest).</param>
+    /// <param name="Given">Curios owned from the first day (the builds report).</param>
+    /// <param name="Focus">The way of trading Nim's curios are bought for (a build).</param>
     sealed record Style(string Name, Care Care, bool Collects, bool Curios = true, bool Synergies = true, string Character = Characters.Kit,
-        int Challenge = 0, string[] Talents = null, float Skill = 1, string Shown = null);
+        int Challenge = 0, string[] Talents = null, float Skill = 1, string Shown = null, bool Guided = false, string[] Given = null,
+        CurioTag? Focus = null);
 
     static readonly Style[] Styles =
     {
@@ -90,6 +94,12 @@ public static class Simulation
 
         /// <summary>Chests that held a Heartsong, those bought, and those whose Heartsong went on display; the day the first was found.</summary>
         public int SongsOffered, SongsFound, SongsShown, FirstSong;
+
+        /// <summary>The experience playtest's record of the run, if it's being kept.</summary>
+        public Recorder Rec;
+
+        /// <summary>What the run took in to the end of the debt's eighth week (or until it was lost): chests, commissions, curios.</summary>
+        public long Takings;
     }
 
     /// <param name="quick">
@@ -355,10 +365,17 @@ public static class Simulation
     }
 
     /// <summary>Handles the chest and trades for it in this style. Returns the price paid, or null if no deal.</summary>
-    static int? Deal(Visit visit, GameState state, Random rng, Care care, out Appraisal slip, float skill = 1)
+    static int? Deal(Visit visit, GameState state, Random rng, Care care, out Appraisal slip, float skill = 1) =>
+        Deal(visit, state, rng, care, out slip, out _, out _, skill);
+
+    /// <param name="heard">What the player heard (null if they didn't listen).</param>
+    /// <param name="worthOut">What the chest was worth to them (0 if they didn't judge it).</param>
+    static int? Deal(Visit visit, GameState state, Random rng, Care care, out Appraisal slip, out Hearing heard, out int worthOut, float skill = 1)
     {
         int tier = state.Tier;
         var chest = visit.Chest;
+        heard = null;
+        worthOut = 0;
         if (care == Care.Blind)
         {
             slip = new Appraisal(visit, tier);
@@ -396,23 +413,25 @@ public static class Simulation
             if (skill < 1) Slip(visit, slip, rng, 1 - skill);
         }
         // The slip says what things fetch here; the King's price is whatever it says.
-        slip.Sale = state.SaleRate;
+        slip.Model = state;
         visit.SetSlipPrice(slip.Worth);
 
         int worth = Strategy.Worth(visit, slip, hearing, state);
         // A learner's sense of what it's worth wanders, more the less they know.
         if (skill < 1) worth = (int)(worth * MathF.Exp(Normal(rng) * JudgmentNoise * (1 - skill)));
+        heard = hearing;
+        worthOut = worth;
         switch (visit.Trade)
         {
             case Trade.Fixed:
                 return Strategy.WorthBuying(visit, worth, state, hearing) && state.Gold >= visit.Ask ? Paid(visit, rng) : null;
             case Trade.Haggle:
             {
-                int offer = Math.Min(state.Gold, Strategy.FirstOffer(visit, worth));
+                int offer = Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state.Boosts.Floor));
                 if (offer <= 0 || worth <= offer) return null;
                 var response = visit.Offer(offer, rng);
                 // A haggler who hears you out lets you try again after a cheeky first offer.
-                if (response.Kind == ResponseKind.TryAgain) response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth)), rng);
+                if (response.Kind == ResponseKind.TryAgain) response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state.Boosts.Floor)), rng);
                 if (response.Kind == ResponseKind.Accept) return response.Price;
                 if (response.Kind == ResponseKind.Counter && worth > visit.Ask && state.Gold >= visit.Ask) return Paid(visit, rng);
                 return null;
@@ -420,10 +439,10 @@ public static class Simulation
             default:
             {
                 if (worth <= 1) return null;
-                var response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth)), rng);
+                var response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state.Boosts.Floor)), rng);
                 if (response.Kind == ResponseKind.Accept) return response.Price;
                 if (response.Kind != ResponseKind.TryAgain) return null;
-                response = visit.Offer(Math.Min(state.Gold, Strategy.SecondOffer(worth)), rng);
+                response = visit.Offer(Math.Min(state.Gold, Strategy.SecondOffer(worth, state.Boosts.Floor)), rng);
                 return response.Kind == ResponseKind.Accept ? response.Price : null;
             }
         }
@@ -524,14 +543,19 @@ public static class Simulation
 
     /// <summary>One run in this style, until the Guild takes the shop or the days run out.</summary>
     /// <param name="songbook">The Heartsongs this career has opened before (they're likelier to be ones it hasn't).</param>
-    static (Log Log, GameState State) Play(Style style, int seed, int days = Days, IEnumerable<string> songbook = null)
+    /// <param name="rec">Records the run for the experience playtest.</param>
+    /// <param name="taught">What Bram taught in this career's earlier runs (tips and lessons not given again).</param>
+    /// <param name="curios">What Nim carries (a career's profile: <see cref="Profile.OpenCurios"/>); null: everything.</param>
+    static (Log Log, GameState State) Play(Style style, int seed, int days = Days, IEnumerable<string> songbook = null, Recorder rec = null,
+        IEnumerable<string> taught = null, IEnumerable<string> curios = null)
     {
-        var state = GameState.NewRun(seed, style.Character, style.Challenge, style.Talents, guided: false);
+        var state = GameState.NewRun(seed, style.Character, style.Challenge, style.Talents, guided: style.Guided, taught, curios);
         if (songbook != null) state.Songbook.UnionWith(songbook);
         if (style.Shown != null && Heartsongs.Exists(style.Shown)) state.Display.Add(Heartsongs.Make(Heartsongs.Get(style.Shown), Rarity.Common));
         // Or a curio from the first day, to compare with.
         else if (style.Shown != null) state.BuyCurio(Curios.Get(style.Shown), 0);
-        var log = new Log();
+        foreach (var key in style.Given ?? Array.Empty<string>()) state.GiveCurio(key);
+        var log = new Log { Rec = rec };
         var rng = new Random(seed);
         for (int day = 1; day <= days; day++)
         {
@@ -540,11 +564,19 @@ public static class Simulation
                 log.LostWeek = state.Week;
                 break;
             }
-            if (day == Guild.Weeks * Guild.DaysPerWeek) Scored(state, log);
+            if (day == Guild.Weeks * Guild.DaysPerWeek)
+            {
+                Scored(state, log);
+                log.Takings = state.TotalEarned + log.CurioGold;
+            }
             for (int t = 2; t <= 4; t++)
                 if (log.ReachedTier[t] == 0 && state.Tier >= t) log.ReachedTier[t] = day;
         }
-        if (log.LostWeek > 0 || days < Guild.Weeks * Guild.DaysPerWeek) Scored(state, log);
+        if (log.LostWeek > 0 || days < Guild.Weeks * Guild.DaysPerWeek)
+        {
+            Scored(state, log);
+            log.Takings = state.TotalEarned + log.CurioGold;
+        }
         log.WeeksPaid = state.WeeksPaid;
         log.Stash = state.StashUsed;
         log.Pieces = state.MapPieces;
@@ -610,7 +642,7 @@ public static class Simulation
                 float skill = best - (best - start) * MathF.Exp(-pace * r);
                 int level = profile.MaxChallenge(Characters.Kit);
                 var (log, state) = Play(Learner(skill, Characters.Kit, level, profile.Talents.ToArray()), 500000 + c * 1000 + r, Guild.Weeks * Guild.DaysPerWeek,
-                    profile.Songs);
+                    profile.Songs, curios: profile.OpenCurios);
                 profile.Runs++;
                 bool knewAll = profile.Songs.Count >= Heartsongs.All.Length;
                 profile.Note(state);
@@ -678,35 +710,54 @@ public static class Simulation
     /// <summary>One day in this style: Nim, the customers, the evening's upgrades, the Guild. False if foreclosed.</summary>
     static bool PlayDay(GameState state, Style style, Random rng, Log log)
     {
+        var rec = log.Rec;
         state.StartDay();
-        if (state.PeddlerToday && style.Curios) VisitPeddler(state, log, rng, style.Skill);
+        if (rec != null)
+        {
+            if (state.DayOfWeek == 1 && state.Week >= 2) rec.Scene(state, Story.WeekStart(state).Count);
+            rec.Morning(state);
+        }
+        if (state.PeddlerToday && style.Curios) VisitPeddler(state, log, rng, style.Skill, style.Focus);
         while (state.NextCustomer())
         {
             var visit = state.Current;
             int tier = state.Tier;
+            bool lesson = visit.Lesson != null;
             log.CustomersByTier[tier]++;
             bool home = visit.Seller.Tier == tier;
             if (visit.Chest.Song != null) log.SongsOffered++;
             if (home) log.BySeller[visit.Seller.Key] = (log.BySeller.GetValueOrDefault(visit.Seller.Key).Visits + 1, log.BySeller.GetValueOrDefault(visit.Seller.Key).Profit);
-            int? paid = Deal(visit, state, rng, style.Care, out var slip, style.Skill);
+            int? paid = Deal(visit, state, rng, style.Care, out var slip, out var heard, out int worth, style.Skill);
             if (paid is not int price)
             {
                 if (visit.Deciding) visit.Pass(rng);
                 state.Pass();
+                rec?.Customer(state, visit, heard, worth, null, null, lesson);
                 continue;
             }
             var purchase = state.Buy(visit, slip);
-            bool perfect = slip.Check(visit.Chest).Perfect;
+            var report = slip.Check(visit.Chest);
+            bool perfect = report.Perfect;
             var grade = Pick(visit, state, rng, style.Care, style.Skill);
+            var opened = rec == null ? null : new Opened
+            {
+                Paid = price, LuckChanged = purchase.Improved, Locked = visit.Chest.Lock.Locked, Forced = grade == PickGrade.Forced,
+                WardNamed = visit.Chest.Unwarded != null, Fooled = report.Items.Any(r => r.Kind == ReadKind.Fooled), Perfect = perfect,
+            };
             int value = 0, earned = 0;
             foreach (var item in visit.Chest.Everything)
             {
-                int sale = purchase.IsClaimed(item) ? purchase.ClaimPays : state.SaleValue(item, grade);
+                int sale = purchase.IsClaimed(item) ? purchase.ClaimPays : state.SaleValue(item, grade, purchase);
                 value += sale;
                 if (item.IsSong)
                 {
                     log.SongsFound++;
                     if (log.FirstSong == 0) log.FirstSong = state.Day;
+                    if (opened != null)
+                    {
+                        opened.Song = true;
+                        opened.SongFirst = !state.Songbook.Contains(item.Song);
+                    }
                 }
                 else if (!item.Fake && !item.Broken)
                 {
@@ -716,6 +767,16 @@ public static class Simulation
                     if (steps >= 2) log.BetterTwo++;
                     log.Held += item.Value;
                     if (steps > 0) log.SurpriseGold += item.Value - Categories.Value(item.Category, visit.Chest.Quality, item.Magic);
+                    if (opened != null)
+                    {
+                        if (steps > 0) opened.Surprises.Add((item.Quality, steps));
+                        opened.FirstFinds.Add(item.Entry);
+                    }
+                }
+                if (opened != null)
+                {
+                    opened.Items++;
+                    if (item.Broken) opened.Broke = true;
                 }
                 state.Collect(item);
                 // The seller's claim: an heirloom paid for, or a devil's due.
@@ -728,6 +789,7 @@ public static class Simulation
                 if (commission != null)
                 {
                     int reward = state.Deliver(item, commission);
+                    if (opened != null) opened.Delivered++;
                     if (commission.Done)
                     {
                         log.Commissions++;
@@ -745,6 +807,7 @@ public static class Simulation
                         state.Earn(sale);
                         state.Keep(item, sale);
                         if (item.IsSong) log.SongsShown++;
+                        if (opened != null) opened.Kept++;
                         continue;
                     }
                 }
@@ -753,18 +816,27 @@ public static class Simulation
             int settled = state.Settle(purchase, perfect, value);
             earned += settled;
             value += settled;
-            if (perfect) earned += state.KeenFee(value);
+            if (perfect) earned += state.PerfectFee(value);
             state.RecordRead(perfect);
             state.Earn(earned);
             log.Bought++;
-            if (value > price) log.GoodBuys++;
+            // What it really cost: a haggler's purse gives some back.
+            int cost = price - purchase.Rebate;
+            if (value > cost) log.GoodBuys++;
             if (perfect) log.Perfect++;
-            log.ProfitByTier[tier] += value - price;
-            if (home) log.BySeller[visit.Seller.Key] = (log.BySeller[visit.Seller.Key].Visits, log.BySeller[visit.Seller.Key].Profit + value - price);
+            log.ProfitByTier[tier] += value - cost;
+            if (home) log.BySeller[visit.Seller.Key] = (log.BySeller[visit.Seller.Key].Visits, log.BySeller[visit.Seller.Key].Profit + value - cost);
+            if (opened != null)
+            {
+                opened.Value = value;
+                opened.Paid = cost;
+                rec.Customer(state, visit, heard, worth, cost, opened, lesson);
+            }
         }
         state.EndDay();
         log.CurioGold += state.Today.Curios;
         log.CurioSpent += state.Today.CurioSpent;
+        bool wasCleared = state.DebtCleared;
         if (state.DuesTonight && !Dues(state, log)) return false;
         if (Strategy.ShouldPayOff(state))
         {
@@ -772,25 +844,52 @@ public static class Simulation
             log.PaidOffWeek = state.Week;
         }
         if (state.DebtCleared && log.ClearedDay == 0) log.ClearedDay = state.Day;
+        if (!wasCleared && state.DebtCleared) rec?.Cleared(state, state.Week < Guild.Weeks || !state.DuesTonight);
         if (state.VaultDue)
         {
             var vault = state.VaultPurchase();
             state.VaultOpened = true;
             state.Earn(vault.Chest.Everything.Sum(i => state.SaleValue(i)));
             log.VaultDay = state.Day;
+            rec?.Vault(state);
         }
+        var owned = rec == null ? null : Upgrades.All.Where(u => state.Has(u.Key)).ToHashSet();
+        int affordable = rec == null ? 0 : Upgrades.Available(state).Count(u => Strategy.Affordable(state, u));
         BuyUpgrades(state, style.Care == Care.Tools, style.Collects);
-        if (style.Care >= Care.Listens && style.Synergies) ChooseSynergies(state);
+        var before = state.ActiveSynergies.ToHashSet();
+        bool choosing = style.Care >= Care.Listens && style.Synergies;
+        if (choosing) ChooseSynergies(state);
         if (log.FirstSynergy == 0 && Synergies.All.Any(s => s.Level(state) > 0)) log.FirstSynergy = state.Day;
+        if (rec != null)
+        {
+            var bought = Upgrades.All.Where(u => state.Has(u.Key) && !owned.Contains(u)).ToList();
+            bool synergyChoice = choosing && state.SynergiesOpen && Synergies.All.Count(s => s.Level(state) > 0) > state.SynergySlots;
+            rec.Evening(state, bought.Count, bought, synergyChoice || !before.SetEquals(state.ActiveSynergies), affordable);
+        }
         return true;
     }
 
     /// <summary>Nim's morning: buy what a careful player would, keeping enough back for the Guild.</summary>
-    static void VisitPeddler(GameState state, Log log, Random rng = null, float skill = 1)
+    static void VisitPeddler(GameState state, Log log, Random rng = null, float skill = 1, CurioTag? focus = null)
+    {
+        var shown = state.PeddlerStock.ToList();
+        int affordable = shown.Count(c => state.CuriosPrice(c) <= state.Gold);
+        var bought = new List<CurioDef>();
+        try
+        {
+            Shop(state, log, rng, skill, bought, focus);
+        }
+        finally
+        {
+            log.Rec?.Peddler(state, shown.Union(state.PeddlerStock).ToList(), bought, affordable);
+        }
+    }
+
+    static void Shop(GameState state, Log log, Random rng, float skill, List<CurioDef> bought, CurioTag? focus)
     {
         for (int i = 0; i < 2; i++)
         {
-            var (curio, sell) = Strategy.ChooseCurio(state, state.PeddlerStock);
+            var (curio, sell) = Strategy.ChooseCurio(state, state.PeddlerStock, focus);
             // A learner picks on a whim: whatever catches the eye and leaves a little in the purse.
             if (skill < 1 && rng.NextFloat() < Whim * (1 - skill))
             {
@@ -802,11 +901,11 @@ public static class Simulation
             if (curio == null && state.CanRerollPeddler)
             {
                 state.RerollPeddler();
-                (curio, sell) = Strategy.ChooseCurio(state, state.PeddlerStock);
+                (curio, sell) = Strategy.ChooseCurio(state, state.PeddlerStock, focus);
             }
             if (curio == null) return;
             if (sell != null) state.SellCurio(sell);
-            state.BuyCurio(curio, state.CuriosPrice(curio));
+            if (state.BuyCurio(curio, state.CuriosPrice(curio))) bought.Add(curio);
             log.Curios.Add(curio.Key);
         }
     }
@@ -816,6 +915,8 @@ public static class Simulation
     {
         int week = state.Week;
         if (state.OfferTonight && Strategy.TakeOffer(state)) state.GiveMap();
+        int gold = state.Gold, due = state.DueNow;
+        string outcome = "paid";
         if (week <= MaxWeeks)
         {
             log.GoldAtDues[week] = state.Gold;
@@ -829,27 +930,32 @@ public static class Simulation
             {
                 log.Mara = week;
                 state.AskMara();
+                outcome = "grace";
             }
             else if (order == null && state.CanAskGrace)
             {
                 log.Grace = week;
                 state.AskGrace();
+                outcome = "grace";
             }
             else if (order == null)
             {
                 state.Foreclose();
+                log.Rec?.Guild(state, gold, due, "lost");
                 return false;
             }
             else
             {
                 log.Short++;
                 log.ShortWeeks.Add(week);
+                outcome = "pawned";
                 foreach (var thing in order)
                     log.Pawned += thing is Item item ? state.Pawn(item) : state.SellCurio((string)thing);
             }
         }
         if (!state.PaidThisWeek) state.PayDues();
         if (week <= MaxWeeks) log.Paid[week] = true;
+        log.Rec?.Guild(state, gold, due, outcome);
         return true;
     }
 
@@ -923,9 +1029,9 @@ public static class Simulation
             int worth = Strategy.Worth(visit, slip, hearing);
             if (visit.CanOffer)
             {
-                visit.Offer(Strategy.FirstOffer(visit, worth), rng);
+                visit.Offer(Strategy.FirstOffer(visit, worth, state.Boosts.Floor), rng);
                 Advance();
-                if (visit.CanOffer) visit.Offer(Strategy.SecondOffer(worth), rng);
+                if (visit.CanOffer) visit.Offer(Strategy.SecondOffer(worth, state.Boosts.Floor), rng);
                 Advance();
             }
             bool done = step >= steps.Count;

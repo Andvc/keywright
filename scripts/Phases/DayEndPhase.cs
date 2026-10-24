@@ -197,12 +197,14 @@ public partial class DayEndPhase : Phase
         if (State.CurioKeys.Count == 0)
             curios.AddChild(UiKit.MakeLabel(State.NextPeddler > 0 ? $"Nim the peddler comes by on day {State.NextPeddler}." : "Nim comes by once a week.", 16, Palette.Muted)
                 .Wrapped().Place(14, 30, SideW - 28, 40));
+        // Up to six (cases and a talent): closer together when there are more than four.
+        float step = Math.Min(60, (SideW - 124) / Math.Max(1, State.CurioKeys.Count));
         for (int i = 0; i < State.CurioKeys.Count; i++)
         {
             var curio = Curios.Get(State.CurioKeys[i]);
             var spot = new Control { TooltipText = $"{curio.Name}: {curio.Blurb}", MouseFilter = Control.MouseFilterEnum.Pass }
-                .Place(120 + i * 60, 6, 56, 62);
-            spot.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(28, 31)));
+                .Place(120 + i * step, 6, step - 4, 62);
+            spot.AddChild(UiKit.MakeCurioIcon(curio, new Vector2((step - 4) / 2, 31)));
             curios.AddChild(spot);
         }
     }

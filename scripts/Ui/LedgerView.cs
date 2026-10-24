@@ -329,12 +329,13 @@ public partial class LedgerView : Node2D
         string due = _state.DebtCleared ? $"Bram's debt is cleared; the Guild still comes for {_state.NextDue}g on day {today + _state.DaysToNextDue}."
             : _state.DuesTonight && !_state.PaidThisWeek ? $"The Guild comes tonight for {_state.DueNow}g."
             : $"The Guild comes next for {_state.NextDue}g at the end of day {today + _state.DaysToNextDue}.";
-        // The Guild's nights show once Vane has introduced them (the first evening).
+        // The Guild's nights show once Vane has introduced them (the second evening).
         bool guild = _state.GuildIntroduced;
         _page.AddChild(UiKit.MakeLabel($"Today is day {today}: week {_state.Week}, day {_state.DayOfWeek} of {Guild.DaysPerWeek}.{(guild ? $" {due}" : "")}", 16, Palette.Muted)
             .Place(TableX, PanelY + 60, PanelW - 48, 20));
 
-        const float cellX = 180, cellW = 200, gap = 8, rowH = 108, gridY = PanelY + 90;
+        // Three days to a week: each day a third of the page.
+        const float cellX = 180, cellW = 330, gap = 8, rowH = 108, gridY = PanelY + 90;
         var detail = UiKit.MakeLabel("", 16, Palette.Text).Wrapped();
         detail.Place(TableX, gridY + 3 * rowH + 8, PanelW - 48, 64);
         string upcoming = null;
@@ -355,14 +356,14 @@ public partial class LedgerView : Node2D
                 cell.MouseFilter = Control.MouseFilterEnum.Stop;
                 if (past) cell.Modulate = new Color(1, 1, 1, 0.45f);
                 cell.AddChild(UiKit.MakeLabel($"DAY {day}", 16, isToday ? Palette.Gold : Palette.Muted).Place(10, 6, 100, 20));
-                if (isToday) cell.AddChild(UiKit.MakeLabel("today", 16, Palette.Gold, HorizontalAlignment.Right).Place(90, 6, 100, 20));
+                if (isToday) cell.AddChild(UiKit.MakeLabel("today", 16, Palette.Gold, HorizontalAlignment.Right).Place(cellW - 110, 6, 100, 20));
 
                 var lines = new System.Collections.Generic.List<string>();
                 float ly = 28;
                 if (plan?.On(d) is string key && Events.Find(key) is EventDef e)
                 {
                     cell.AddChild(UiKit.MakeLabel(Events.Tag(e, plan.Wanted), 16, Palette.Magic).Wrapped().Place(10, ly, cellW - 20, 40));
-                    ly += Events.Tag(e, plan.Wanted).Length > 20 ? 40 : 20;
+                    ly += Events.Tag(e, plan.Wanted).Length > 36 ? 40 : 20;
                     lines.Add($"{e.Name}: {Events.Describe(e, plan.Wanted)}");
                 }
                 if (plan != null && plan.Peddler == d)
@@ -381,7 +382,7 @@ public partial class LedgerView : Node2D
                     lines.Add(paid ? "The Guild's night: this week's tithe is already paid." : $"The Guild's night: Mister Vane comes for {owed}g after closing.");
                 }
                 if (plan == null && d == 1)
-                    lines.Add("Next week's plan is made at the start of this one: two days with something on, and Nim's.");
+                    lines.Add("Next week's plan is made at the start of this one: the days with something on, and Nim's.");
                 string story = $"Day {day}{(isToday ? " (today)" : "")}: " + (lines.Count == 0 ? "nothing special planned." : string.Join(" ", lines));
                 if (!past && !isToday && upcoming == null && lines.Count > 0) upcoming = "Next: " + story;
                 cell.MouseEntered += () => detail.Text = story;

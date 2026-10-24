@@ -310,7 +310,7 @@ public partial class Autoplay : Node
                 break;
             case Trade.Haggle:
             {
-                int offer = Math.Min(State.Gold, Strategy.FirstOffer(visit, worth));
+                int offer = Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State.Boosts.Floor));
                 if (offer <= 0 || worth <= offer) break;
                 counter.MakeOffer(offer);
                 await Wait(1.4);
@@ -320,7 +320,7 @@ public partial class Autoplay : Node
                 {
                     await ReadTips(counter.Mentor);
                     if (!IsInstanceValid(counter) || !visit.Deciding) return;
-                    counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth)));
+                    counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State.Boosts.Floor)));
                     await Wait(1.4);
                     if (!IsInstanceValid(counter) || !visit.Deciding) return;
                 }
@@ -334,12 +334,12 @@ public partial class Autoplay : Node
             default:
             {
                 if (worth <= 1) break;
-                counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth)));
+                counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State.Boosts.Floor)));
                 await Wait(1.4);
                 if (!IsInstanceValid(counter) || !visit.Deciding) return;
                 await ReadTips(counter.Mentor);
                 if (!IsInstanceValid(counter) || !visit.Deciding) return;
-                counter.MakeOffer(Math.Min(State.Gold, Strategy.SecondOffer(worth)));
+                counter.MakeOffer(Math.Min(State.Gold, Strategy.SecondOffer(worth, State.Boosts.Floor)));
                 return;
             }
         }

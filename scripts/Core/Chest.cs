@@ -127,25 +127,33 @@ public sealed class Chest
     /// <summary>The thing as it is now (it may have broken since you last looked).</summary>
     public Item Now(Item item) => Everything.FirstOrDefault(i => i.Id == item.Id) ?? item;
 
+    /// <summary>
+    /// You hear it through an ear trumpet: a clank never drowns anything out, and straw muffles nothing. The rest of the
+    /// world hears it plain (<c>plain</c>: a seller's ears).
+    /// </summary>
+    public bool Unmasked { get; set; }
+
+    bool Muffled(bool plain) => plain || !Unmasked;
+
     /// <summary>Whether this thing moves at this shake.</summary>
-    public bool Stirs(Item item, Shake level, bool magnet = false) => (int)level >= Needs(item) && !(magnet && item.Iron);
+    public bool Stirs(Item item, Shake level, bool magnet = false, bool plain = false) => (int)level >= Needs(item, plain) && !(magnet && item.Iron);
 
     /// <summary>
     /// The gentlest shake that stirs this thing in this chest: its own, or a strength harder in straw (4: never). Straw
     /// can't still a Heartsong: it sings at the gentlest shake whatever it's packed in.
     /// </summary>
-    public int Needs(Item item) => (int)item.StirsAt + (Packed && !item.IsSong ? 1 : 0);
+    public int Needs(Item item, bool plain = false) => (int)item.StirsAt + (Packed && !item.IsSong && Muffled(plain) ? 1 : 0);
 
     /// <summary>It moves and you'd hear it, if nothing louder drowned it out. Nothing moves in a sealed chest.</summary>
-    public bool Sounds(Item item, Shake level, bool magnet = false) => !Sealed && Stirs(item, level, magnet);
+    public bool Sounds(Item item, Shake level, bool magnet = false, bool plain = false) => !Sealed && Stirs(item, level, magnet, plain);
 
     /// <summary>Something loud is clanking at this shake: it drowns out anything delicate.</summary>
-    public bool Clanks(Shake level, bool magnet = false) => _items.Any(i => i.Def.Loud && Sounds(i, level, magnet));
+    public bool Clanks(Shake level, bool magnet = false, bool plain = false) => _items.Any(i => i.Def.Loud && Sounds(i, level, magnet, plain));
 
-    public bool Audible(Item item, Shake level, bool magnet = false) =>
-        Sounds(item, level, magnet) && !(item.Def.Delicate && Clanks(level, magnet));
+    public bool Audible(Item item, Shake level, bool magnet = false, bool plain = false) =>
+        Sounds(item, level, magnet, plain) && !(item.Def.Delicate && Muffled(plain) && Clanks(level, magnet, plain));
 
-    public IEnumerable<Item> HeardAt(Shake level, bool magnet = false) => _items.Where(i => Audible(i, level, magnet));
+    public IEnumerable<Item> HeardAt(Shake level, bool magnet = false, bool plain = false) => _items.Where(i => Audible(i, level, magnet, plain));
 
     /// <summary>Chance that glass breaks when the chest is dropped.</summary>
     public const float DropBreakChance = 0.5f;

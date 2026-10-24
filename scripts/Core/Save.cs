@@ -11,7 +11,8 @@ namespace Keywright.Core;
 /// </summary>
 public sealed class SaveData
 {
-    public const int CurrentVersion = 2;
+    /// <summary>3: 0.20's three-day weeks (a version 2 save is moved onto them, keeping its week).</summary>
+    public const int CurrentVersion = 3;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -37,6 +38,9 @@ public sealed class SaveData
 
     public List<string> Owned { get; set; } = new();
     public List<string> HintsSeen { get; set; } = new();
+
+    /// <summary>The scripted first day was taught in an earlier run (from the profile): this run starts like any other.</summary>
+    public bool FirstDayTaught { get; set; }
     public List<string> Met { get; set; } = new();
     public List<string> Found { get; set; } = new();
     public List<string> FoundEnchanted { get; set; } = new();
@@ -60,6 +64,17 @@ public sealed class SaveData
     public int ClearedDay { get; set; }
     public int CloverWeek { get; set; }
     public int DrySpell { get; set; }
+
+    /// <summary>The curios Nim carries this run (null: all of them, as before 0.20).</summary>
+    public List<string> CuriosOpen { get; set; }
+
+    /// <summary>The build's counters (0.20): chests passed since the last bought, chests in a row with a surprise, enchanted things named, surprises, finds, bargains.</summary>
+    public int PassStreak { get; set; }
+    public int LuckStreak { get; set; }
+    public int MagicNamed { get; set; }
+    public int Surprises { get; set; }
+    public int HiddenFound { get; set; }
+    public int Bargains { get; set; }
     public bool BramPiece { get; set; }
     public int HoodPieces { get; set; }
     public bool MapGiven { get; set; }
@@ -97,10 +112,22 @@ public sealed class SaveData
             if (data == null || data.Tier < 1 || data.Version > CurrentVersion || data.Version < 1) return null;
             if (data.Version == 1)
             {
-                data.Version = CurrentVersion;
-                data.WeeksPaid = data.Day / Guild.DaysPerWeek;
-                data.BramPiece = data.Day >= Guild.DaysPerWeek;
+                data.Version = 2;
+                data.WeeksPaid = data.Day / OldDaysPerWeek;
+                data.BramPiece = data.Day >= OldDaysPerWeek;
                 data.Owned.Remove("warrant");
+            }
+            // Five-day weeks to three: the same week, at the same point in it (the last two days fold into its last), and
+            // the week's plan made again for three days.
+            if (data.Version == 2)
+            {
+                data.Version = CurrentVersion;
+                int week = data.Day / OldDaysPerWeek, into = data.Day % OldDaysPerWeek;
+                data.Day = week * Guild.DaysPerWeek + Math.Min(into, Guild.DaysPerWeek - 1);
+                data.Plan = null;
+                data.NextPlan = null;
+                data.EventDay = 0;
+                data.PeddlerDay = 0;
             }
             return data;
         }
@@ -109,6 +136,9 @@ public sealed class SaveData
             return null;
         }
     }
+
+    /// <summary>Days in a week before 0.20.</summary>
+    const int OldDaysPerWeek = 5;
 
     /// <summary>A line for the title screen: "Week 3, day 2, Town Shop, 840g".</summary>
     public string Summary => $"Week {Day / Guild.DaysPerWeek + 1}, day {Day % Guild.DaysPerWeek + 1}, {ShopTiers.Name(Tier)}, {Gold}g";
@@ -156,6 +186,23 @@ public sealed class Profile
     public int BestWeek { get; set; }
     public int BestGold { get; set; }
 
+    /// <summary>The grandest shop any run has had (Nim's stock grows with it).</summary>
+    public int BestTier { get; set; }
+
+    /// <summary>Whether Nim carries a curio yet: his stock grows as Bram's kin get further (<see cref="CurioUnlock"/>).</summary>
+    public bool Opens(CurioDef curio) => curio.Unlock switch
+    {
+        CurioUnlock.SecondRun => Runs >= 1,
+        CurioUnlock.Crownhold => BestTier >= 3 || Runs >= 2,
+        CurioUnlock.Emporium => BestTier >= 4 || Runs >= 4,
+        CurioUnlock.Cleared => Cleared > 0,
+        CurioUnlock.Heartsong => Songs.Count > 0,
+        _ => true,
+    };
+
+    /// <summary>Everything Nim carries now.</summary>
+    public IEnumerable<string> OpenCurios => Curios.All.Where(Opens).Select(c => c.Key);
+
     /// <summary>The fewest days it's taken to clear Bram's debt (0 until it's been cleared).</summary>
     public int FastestClear { get; set; }
 
@@ -164,6 +211,12 @@ public sealed class Profile
     public int RenownEarned { get; set; }
 
     public List<string> Talents { get; set; } = new();
+
+    /// <summary>
+    /// What Bram has taught, across runs: his tips by key, each seller's lesson ("lesson:" and their key), and the scripted
+    /// first day ("firstday"). A new run with tips on doesn't teach them again (Settings can start the lessons over).
+    /// </summary>
+    public List<string> Taught { get; set; } = new();
 
     /// <summary>Per character: the highest challenge level open (clearing the debt at a level opens the next).</summary>
     public Dictionary<string, int> Challenge { get; set; } = new();
@@ -229,8 +282,10 @@ public sealed class Profile
     public void Note(GameState state)
     {
         Learn(state);
+        foreach (string key in state.Taught.Where(k => !Taught.Contains(k))) Taught.Add(key);
         BestWeek = Math.Max(BestWeek, state.Week);
         BestGold = Math.Max(BestGold, state.Gold);
+        BestTier = Math.Max(BestTier, state.Tier);
         if (state.ClearedDay > 0 && (FastestClear == 0 || state.ClearedDay < FastestClear)) FastestClear = state.ClearedDay;
     }
 

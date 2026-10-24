@@ -35,7 +35,10 @@ public sealed partial class GameState
     public bool GivesLessons => Guided && Is(Characters.Kit);
 
     /// <summary>A new run: who, on what terms, with which talents; and the gold and tools they start with.</summary>
-    public static GameState NewRun(int seed, string character = Characters.Kit, int challenge = 0, IEnumerable<string> talents = null, bool guided = true)
+    /// <param name="taught">What Bram taught in earlier runs (<see cref="Profile.Taught"/>): not taught again.</param>
+    /// <param name="curios">The curios Nim carries this run (<see cref="Profile.OpenCurios"/>); null: all of them.</param>
+    public static GameState NewRun(int seed, string character = Characters.Kit, int challenge = 0, IEnumerable<string> talents = null, bool guided = true,
+        IEnumerable<string> taught = null, IEnumerable<string> curios = null)
     {
         var state = new GameState(seed)
         {
@@ -43,7 +46,14 @@ public sealed partial class GameState
             Challenge = Math.Clamp(challenge, 0, Challenges.Max),
             Talents = new HashSet<string>((talents ?? Enumerable.Empty<string>()).Where(Core.Talents.Exists)),
         };
+        foreach (string key in taught ?? Enumerable.Empty<string>())
+        {
+            if (key == FirstDayKey) state.FirstDayTaught = true;
+            else if (key.StartsWith(LessonKey)) state.Tutored.Add(key[LessonKey.Length..]);
+            else state.HintsSeen.Add(key);
+        }
         state.Guided = guided;
+        state.CuriosOpen = curios?.ToHashSet();
         state.Gold = StartGold(state);
         if (state.Knows("ledger")) state.Met.UnionWith(Sellers.All.Select(s => s.Key));
         return state;
@@ -156,8 +166,8 @@ public sealed partial class GameState
     public bool NoUse(CurioDef curio) => curio.Key switch
     {
         "crate" => !CanDrop,
-        "signet" => HagglesAll,
         "book" => Is(Characters.Isolde),
+        "monocle" => Has("lamp") || Shows(Heartsongs.Star),
         _ => false,
     };
 
@@ -203,7 +213,4 @@ public sealed partial class GameState
 
     /// <summary>How many curios Nim lays out.</summary>
     public int PeddlerCount => 3 + (Knows("nim4") ? Core.Talents.MoreStock : 0);
-
-    /// <summary>What Nim asks for a curio today (nothing, while the keepsake is still to give).</summary>
-    public int CuriosPrice(CurioDef curio) => Keepsake ? 0 : Curios.Price(curio, Week);
 }

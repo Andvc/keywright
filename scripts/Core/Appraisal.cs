@@ -72,23 +72,29 @@ public sealed class Appraisal
     IReadOnlyList<(int Value, float Chance)> _outcomes;
 
     /// <summary>
-    /// What one gold of a kind's worth fetches at this shop today (its buyers' trades, its name, the day; enchanted, the
-    /// Arcanist's): every value on the slip, the odds bar and the careful player's sums are what things would sell for
-    /// here, not what they're worth in the abstract. Null: their worth.
+    /// The shop the slip is filled in at (<see cref="GameState"/>): what a thing you name fetches there today (its trades,
+    /// its name, its curios, the day) and how likely it is to come out better than its chest (its luck). Every value on
+    /// the slip, the odds bar and the careful player's sums are what the things it names would sell for here if the read
+    /// is right, not what they're worth in the abstract. Null: their worth, at the chest's odds.
     /// </summary>
-    public Func<Category, bool, float> Sale
+    public ISlipModel Model
     {
-        get => _sale;
+        get => _model;
         set
         {
-            _sale = value;
+            _model = value;
             _outcomes = null;
         }
     }
 
-    Func<Category, bool, float> _sale;
+    ISlipModel _model;
 
-    float Rate(Category kind, bool magic) => _sale?.Invoke(kind, magic) ?? 1f;
+    /// <summary>What one named thing of a kind fetches at this quality (with <see cref="Count"/> of its kind named).</summary>
+    float Fetch(Category kind, Rarity quality, bool magic, bool hidden = false) =>
+        _model?.Value(kind, quality, magic, Chest, Math.Max(1, Count(kind)), hidden) ?? Categories.Value(kind, quality, magic);
+
+    /// <summary>How good a named thing of this kind is likely to come out.</summary>
+    (Rarity Quality, float Chance)[] Odds(Category kind, bool hidden = false) => _model != null ? _model.Odds(kind, Chest, hidden) : Categories.Odds(Chest);
 
     /// <summary>The most of one kind the slip counts: two or three of a kind turn up from the town shop on.</summary>
     public int MaxCount => Tier >= Market.PairsTier ? 3 : 1;
@@ -148,8 +154,7 @@ public sealed class Appraisal
     public IEnumerable<Category> Marked => Categories.All.Select(c => c.Category).Where(c => Count(c) > 0);
 
     /// <summary>What one of this kind fetches here if it's as good as the chest's colour.</summary>
-    public int OneValue(Category category, bool magic = false) =>
-        (int)MathF.Round(Categories.Nominal(category, Chest) * (magic ? Categories.MagicMultiplier : 1) * Rate(category, magic));
+    public int OneValue(Category category, bool magic = false) => (int)MathF.Round(Fetch(category, Chest, magic));
 
     /// <summary>What the slip says this kind adds up to.</summary>
     public int ValueOf(Category category)
@@ -160,7 +165,7 @@ public sealed class Appraisal
     }
 
     /// <summary>What a false bottom fetches here, on average over what people hide, as good as the colour promises.</summary>
-    public int HiddenValue => (int)MathF.Round(Market.HiddenOdds(Tier).Sum(h => h.Chance * Categories.Nominal(h.Kind, Chest) * Rate(h.Kind, false)));
+    public int HiddenValue => (int)MathF.Round(Market.HiddenOdds(Tier).Sum(h => h.Chance * Fetch(h.Kind, Chest, false, true)));
 
     /// <summary>What the chest is worth if the slip is right and everything is as good as its colour.</summary>
     public int Worth => Marked.Sum(ValueOf) + (Hidden ? HiddenValue : 0);
@@ -169,9 +174,13 @@ public sealed class Appraisal
     /// What it's worth on average if the slip is right, allowing for things coming out better or worse than the colour.
     /// The careful player's model knows this; the screen doesn't show it.
     /// </summary>
-    public int ExpectedWorth => (int)MathF.Round(Marked.Sum(c => Categories.Expected(c, Chest) * Rate(c, false) *
-                                                                 (Count(c) + (Magic(c) ? Categories.MagicMultiplier - 1 : 0))) +
-                                                 (Hidden ? Market.HiddenValue(Chest, Tier, expected: true) : 0));
+    public int ExpectedWorth => (int)MathF.Round(Marked.Sum(c => (Count(c) - (Magic(c) ? 1 : 0)) * Expected(c, false) + (Magic(c) ? Expected(c, true) : 0)) +
+                                                 (Hidden ? Market.HiddenOdds(Tier).Sum(h => h.Chance * Expected(h.Kind, false, true)) : 0));
+
+    /// <summary>What one named thing of this kind fetches here on average, luck and all.</summary>
+    float Expected(Category kind, bool magic, bool hidden = false) => kind == Category.Heartsong
+        ? Fetch(kind, Chest, false)
+        : Odds(kind, hidden).Sum(o => o.Chance * Fetch(kind, o.Quality, magic, hidden));
 
     /// <summary>
     /// Everything the chest could turn out to be worth if the slip is right, with how likely each total is: each thing's
@@ -192,15 +201,15 @@ public sealed class Appraisal
             totals = next;
         }
         // A Heartsong is priced as a trinket exactly as fine as its chest: no spread.
-        IEnumerable<(float, float)> One(Category kind, bool magic) => kind == Category.Heartsong
-            ? new[] { (Categories.Nominal(kind, Chest) * Rate(kind, false), 1f) }
-            : Categories.Odds(Chest).Select(o => (Categories.Value(kind, o.Quality, magic) * Rate(kind, magic), o.Chance));
+        IEnumerable<(float, float)> One(Category kind, bool magic, bool hidden = false) => kind == Category.Heartsong
+            ? new[] { (Fetch(kind, Chest, false), 1f) }
+            : Odds(kind, hidden).Select(o => (Fetch(kind, o.Quality, magic, hidden), o.Chance));
 
         foreach (var kind in Marked)
             for (int i = 0; i < Count(kind); i++)
                 Add(One(kind, Magic(kind) && i == 0));
         if (Hidden)
-            Add(Market.HiddenOdds(Tier).SelectMany(h => One(h.Kind, false).Select(o => (o.Item1, o.Item2 * h.Chance))));
+            Add(Market.HiddenOdds(Tier).SelectMany(h => One(h.Kind, false, true).Select(o => (o.Item1, o.Item2 * h.Chance))));
         return totals.GroupBy(t => (int)MathF.Round(t.Key)).Select(g => (g.Key, g.Sum(t => t.Value))).OrderBy(o => o.Key).ToList();
     }
 

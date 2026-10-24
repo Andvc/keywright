@@ -94,7 +94,8 @@ public static class Patrons
     /// <summary>Regulars start asking from this week (after the first visit from the Guild).</summary>
     public const int FromWeek = 2;
 
-    public const int PerWeek = 3;
+    /// <summary>Commissions the regulars post each week (a week is three days: more would mostly lapse).</summary>
+    public const int PerWeek = 2;
 
     /// <summary>A piece pays this many times what it's worth as good as asked; a lot, this many times each.</summary>
     public const float PieceReward = 2f, LotReward = 1.5f;
@@ -113,7 +114,8 @@ public static class Patrons
         var list = new List<Commission>();
         var crowd = Sellers.All.Where(s => s.Tier <= state.Tier && (state.Met.Contains(s.Key) || state.Met.Count < 3)).ToList();
         var kinds = Categories.UpTo(state.Tier).Select(c => c.Category).ToList();
-        int wanted = PerWeek + Upgrades.All.Where(u => state.Has(u.Key)).Sum(u => u.Commissions) + (state.Shows(Heartsongs.Lark) ? Heartsongs.LarkCommissions : 0);
+        int wanted = PerWeek + Upgrades.All.Where(u => state.Has(u.Key)).Sum(u => u.Commissions) + (state.Shows(Heartsongs.Lark) ? Heartsongs.LarkCommissions : 0) +
+                     (state.HasCurio("errand") ? Curios.ErrandCommissions : 0);
         while (list.Count < wanted && crowd.Count > 0)
         {
             var patron = rng.PickWeighted(crowd.ToArray(), s => s.Tier == state.Tier ? 2f : 1f);

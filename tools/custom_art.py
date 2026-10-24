@@ -1904,6 +1904,360 @@ def _curio_dome():
     return c
 
 
+# 0.20's curios, by way of trading: luck, reading, bargains, crowds, display, the trades, hollows, arcana, the fence,
+# coffers, patrons and Heartsongs.
+
+def _curio_foot():
+    c = Canvas(S, S)
+    # A rabbit's foot on a chain: a long furry foot, toes down to the left, a gold cap at the top right.
+    c.poly([(13, 6), (18, 10), (9, 21), (4, 22), (3, 18)], "rag")
+    c.ellipse(1, 16, 8, 23, "rag")
+    c.line([(6, 18), (11, 12)], "ermine").line([(8, 19), (13, 13)], "ermine")
+    c.dots([(2, 20), (3, 22), (5, 22)], "ermine")
+    c.poly([(13, 4), (17, 2), (20, 8), (16, 10)], "gold")
+    c.ellipse(17, 0, 22, 4, "gold").dot(19, 2, "hole")
+    c.glint(15, 4)
+    return c
+
+
+def _curio_wishbone():
+    c = Canvas(S, S)
+    c.line([(11, 20), (11, 13)], "paper", 2)
+    c.line([(11, 13), (6, 6), (4, 2)], "paper", 2)
+    c.line([(12, 13), (17, 6), (19, 2)], "paper", 2)
+    c.ellipse(8, 18, 15, 22, "paper")
+    return c
+
+
+def _curio_horseshoe():
+    c = Canvas(S, S)
+    c.ellipse(3, 3, 20, 21, "iron").ellipse(7, 7, 16, 17, "hole").rect(7, 0, 16, 11, "hole")
+    for x, y in ((5, 10), (5, 15), (18, 10), (18, 15), (8, 19), (15, 19)):
+        c.dot(x, y, "hole")
+    c.glint(4, 9)
+    return c
+
+
+def _curio_star():
+    c = Canvas(S, S)
+    c.line([(1, 22), (10, 13)], "starlight", 2)
+    c.line([(4, 22), (11, 15)], "nectar")
+    pts = []
+    for i in range(10):
+        r = 7.5 if i % 2 == 0 else 3.2
+        a = -math.pi / 2 + i * math.pi / 5
+        pts.append((15 + r * math.cos(a), 9 + r * math.sin(a)))
+    c.poly(pts, "gold")
+    c.glint(15, 6).glint(14, 8)
+    return c
+
+
+def _curio_trumpet():
+    c = Canvas(S, S)
+    c.poly([(1, 3), (11, 9), (11, 14), (1, 20)], "brass")
+    c.rect(11, 10, 18, 13, "brass")
+    c.line([(18, 11), (21, 14), (21, 19)], "brass", 2)
+    c.ellipse(0, 4, 3, 19, "black")
+    c.glint(5, 7).glint(6, 8)
+    return c
+
+
+def _curio_seal():
+    c = Canvas(S, S)
+    c.ellipse(8, 0, 15, 6, "wood").rect(10, 5, 13, 11, "wood")
+    c.rect(7, 11, 16, 14, "brass")
+    c.ellipse(3, 15, 20, 22, "royal")
+    c.dots([(10, 18), (11, 17), (12, 18), (13, 17), (11, 19), (12, 19)], "line")
+    return c
+
+
+def _curio_beads():
+    c = Canvas(S, S)
+    c.rect(2, 3, 21, 4, "wood").rect(2, 19, 21, 20, "wood").rect(2, 3, 3, 20, "wood").rect(20, 3, 21, 20, "wood")
+    for i, (y, mat) in enumerate(((7, "ruby"), (11, "amber"), (15, "emerald"))):
+        c.line([(4, y), (19, y)], "line")
+        for j in range(4 - i):
+            x = 5 + j * 3 + i * 3
+            c.ellipse(x, y - 1, x + 2, y + 1, mat)
+    return c
+
+
+def _curio_monocle():
+    c = Canvas(S, S)
+    c.ellipse(3, 3, 16, 16, "gold").ellipse(5, 5, 14, 14, "witch")
+    c.line([(15, 15), (18, 19), (22, 21)], "gold")
+    c.dots([(18, 4), (20, 7), (19, 2)], "rune")
+    c.glint(7, 7).glint(8, 7).glint(7, 8)
+    return c
+
+
+def _curio_fork():
+    c = Canvas(S, S)
+    c.rect(7, 2, 16, 13, "steel").rect(10, 0, 13, 10, "hole")
+    c.line([(11, 13), (11, 22)], "steel", 2)
+    c.dots([(4, 3), (3, 5), (4, 7), (19, 3), (20, 5), (19, 7)], "rune")
+    c.glint(8, 4)
+    return c
+
+
+def _curio_ledger():
+    c = book(Canvas(S, S), "bookblue", 3, 2, 20, 21)
+    c.rect(8, 6, 16, 14, "paper")
+    c.line([(9, 10), (11, 12), (15, 7)], "emerald")
+    c.rect(19, 9, 21, 13, "gold")
+    return c
+
+
+def _curio_tongue():
+    c = Canvas(S, S)
+    c.ellipse(2, 6, 21, 17, "silver")
+    c.line([(4, 11), (19, 11)], "line")
+    c.poly([(8, 12), (15, 12), (14, 19), (11, 21), (9, 19)], "silk")
+    c.line([(11, 13), (11, 18)], "royal")
+    c.glint(6, 7).glint(7, 7)
+    return c
+
+
+def _curio_hourglass():
+    c = Canvas(S, S)
+    c.rect(3, 1, 20, 3, "wood").rect(3, 20, 20, 22, "wood")
+    c.poly([(6, 4), (17, 4), (12, 11), (11, 11)], "glass").poly([(11, 12), (12, 12), (17, 19), (6, 19)], "glass")
+    c.poly([(9, 7), (14, 7), (12, 10), (11, 10)], "sand").poly([(9, 16), (14, 16), (17, 19), (6, 19)], "sand")
+    c.line([(11, 11), (11, 15)], "sand")
+    c.rect(4, 4, 4, 19, "wood").rect(19, 4, 19, 19, "wood")
+    return c
+
+
+def _curio_bell():
+    c = Canvas(S, S)
+    c.rect(10, 0, 13, 6, "wood")
+    c.ellipse(6, 5, 17, 11, "brass").poly([(6, 8), (17, 8), (19, 18), (4, 18)], "brass")
+    c.rect(3, 17, 20, 19, "brass")
+    c.ellipse(10, 18, 13, 22, "iron")
+    c.glint(8, 8).glint(7, 10)
+    return c
+
+
+def _curio_coffer():
+    c = Canvas(S, S)
+    c.ellipse(2, 7, 15, 21, "leather")
+    c.poly([(5, 8), (12, 8), (13, 3), (4, 3)], "leather")
+    c.line([(4, 7), (13, 7)], "string")
+    coin(c, 12, 13, "gold")
+    coin(c, 14, 17, "gold")
+    return c
+
+
+def _curio_queue():
+    c = Canvas(S, S)
+    c.rect(2, 6, 21, 17, "parchment")
+    for y in range(7, 17, 2):
+        c.dot(15, y, "hole")
+    c.dots([(6, 9), (7, 9), (8, 9), (8, 10), (6, 11), (7, 11), (8, 11), (6, 12), (6, 13), (7, 13), (8, 13)], "inkred")
+    c.line([(17, 9), (19, 9)], "ink").line([(17, 12), (19, 12)], "ink")
+    c.line([(10, 10), (12, 10)], "ink").line([(10, 12), (12, 12)], "ink")
+    return c
+
+
+def _curio_horn():
+    c = Canvas(S, S)
+    # A herald's horn: a long brass tube flaring to a wide bell, a crier's red pennant hung from it.
+    c.line([(1, 14), (12, 10)], "brass", 2)
+    c.poly([(11, 8), (22, 2), (22, 17), (11, 12)], "brass")
+    c.ellipse(20, 2, 23, 17, "black")
+    c.poly([(4, 14), (12, 12), (12, 19), (8, 17), (4, 20)], "royal")
+    c.glint(13, 9).glint(15, 8)
+    return c
+
+
+def _curio_guestbook():
+    c = book(Canvas(S, S), "royal", 3, 3, 18, 21)
+    c.rect(7, 6, 14, 9, "gold").line([(8, 7), (13, 7)], "line")
+    c.rect(15, 0, 16, 5, "gold")
+    c.ellipse(17, 14, 22, 21, "black").line([(20, 15), (23, 7)], "white")
+    return c
+
+
+def _curio_rope():
+    c = Canvas(S, S)
+    for x in (1, 18):
+        c.rect(x + 1, 6, x + 2, 19, "brass").ellipse(x, 2, x + 4, 6, "brass").rect(x - 1, 19, x + 5, 22, "brass")
+    c.line([(4, 8), (8, 13), (12, 14), (16, 13), (19, 8)], "silk", 2)
+    return c
+
+
+def _curio_lamps():
+    c = Canvas(S, S)
+    c.rect(10, 9, 13, 20, "brass").rect(6, 20, 17, 22, "brass")
+    c.line([(3, 13), (11, 16), (20, 13)], "brass", 2)
+    for x in (2, 10, 18):
+        c.rect(x, 8, x + 3, 12, "paper")
+        c.ellipse(x, 1, x + 3, 7, "fire")
+        c.dot(x + 1, 4, "glowwarm").dot(x + 2, 4, "glowwarm")
+    return c
+
+
+def _curio_whetstone():
+    c = Canvas(S, S)
+    c.rect(2, 14, 21, 20, "paste").rect(2, 20, 21, 21, "clay")
+    c.line([(5, 12), (21, 4)], "steel", 2)
+    c.line([(2, 14), (5, 12)], "black", 2)
+    c.dots([(9, 12), (11, 9), (13, 12), (12, 10)], "ember")
+    return c
+
+
+def _curio_dummy():
+    c = Canvas(S, S)
+    c.ellipse(9, 0, 14, 3, "wood")
+    c.poly([(5, 4), (18, 4), (16, 10), (15, 15), (8, 15), (7, 10)], "rag")
+    c.rect(11, 15, 12, 20, "wood")
+    c.line([(6, 22), (11, 20), (17, 22)], "wood", 2)
+    c.line([(7, 7), (16, 8)], "string")
+    c.dots([(9, 11), (12, 11), (14, 11)], "brass")
+    return c
+
+
+def _curio_scales():
+    c = Canvas(S, S)
+    c.rect(11, 3, 12, 20, "brass").rect(7, 20, 16, 22, "brass")
+    c.line([(3, 6), (20, 6)], "brass")
+    c.ellipse(9, 1, 14, 5, "brass")
+    for x in (3, 20):
+        c.line([(x, 6), (x - 2, 13)], "line").line([(x, 6), (x + 2, 13)], "line")
+        c.ellipse(x - 3, 13, x + 3, 16, "brass")
+    c.ellipse(1, 11, 5, 13, "gold").ellipse(18, 11, 22, 13, "gold")
+    return c
+
+
+def _curio_still():
+    c = Canvas(S, S)
+    c.ellipse(1, 9, 13, 21, "copper")
+    c.rect(5, 5, 9, 9, "copper")
+    c.line([(7, 5), (14, 3), (18, 7), (18, 14)], "copper", 2)
+    c.rect(15, 14, 22, 21, "glass").rect(16, 17, 21, 21, "witch")
+    c.dots([(4, 22), (8, 22), (6, 22)], "fire")
+    c.glint(4, 12)
+    return c
+
+
+def _curio_desk():
+    c = Canvas(S, S)
+    c.poly([(1, 12), (21, 7), (21, 12), (1, 16)], "wood")
+    c.rect(2, 16, 3, 22, "wood").rect(19, 12, 20, 22, "wood")
+    c.poly([(4, 12), (15, 9), (15, 11), (4, 14)], "parchment")
+    c.ellipse(15, 3, 19, 7, "black")
+    c.line([(17, 4), (22, 0)], "white")
+    return c
+
+
+def _curio_wheel():
+    c = Canvas(S, S)
+    c.ellipse(1, 1, 16, 16, "paste").ellipse(7, 7, 10, 10, "iron")
+    c.line([(8, 10), (8, 20)], "wood", 2)
+    c.rect(3, 20, 14, 22, "wood")
+    c.poly([(17, 11), (21, 13), (20, 18), (15, 16)], "sapphire")
+    c.dots([(14, 6), (16, 8)], "ember")
+    c.glint(18, 12)
+    return c
+
+
+def _curio_rod():
+    c = Canvas(S, S)
+    c.line([(4, 19), (18, 5)], "brass", 4)
+    c.ellipse(16, 1, 22, 7, "brass").ellipse(17, 2, 21, 6, "black")
+    c.line([(5, 21), (2, 18)], "leather", 3)
+    c.glint(9, 13)
+    return c
+
+
+def _curio_pillow():
+    c = Canvas(S, S)
+    c.poly([(2, 7), (21, 5), (22, 18), (3, 20)], "mantle")
+    c.ellipse(8, 8, 15, 15, "moon").ellipse(11, 7, 17, 13, "mantle")
+    c.dots([(17, 15), (6, 16), (6, 10)], "starlight")
+    c.dots([(1, 6), (22, 4), (23, 19), (2, 21)], "gold")
+    return c
+
+
+def _curio_wardkey():
+    c = Canvas(S, S)
+    c.ellipse(1, 1, 10, 10, "silver").ellipse(4, 4, 7, 7, "hole")
+    c.line([(8, 8), (20, 20)], "silver", 2)
+    c.line([(17, 17), (14, 20)], "silver", 2).line([(20, 20), (18, 23)], "silver", 2)
+    c.dots([(12, 3), (14, 5), (3, 13), (5, 15), (13, 9)], "rune")
+    c.glint(3, 3)
+    return c
+
+
+def _curio_aether():
+    c = Canvas(S, S)
+    c.rect(5, 6, 18, 21, "glass").rect(7, 3, 16, 6, "cork")
+    c.ellipse(8, 10, 15, 18, "rune")
+    c.dots([(10, 12), (13, 15), (11, 16), (12, 11)], "white")
+    c.glint(6, 8).glint(6, 9)
+    return c
+
+
+def _curio_ring():
+    c = ring(Canvas(S, S), "silver", cy=16)
+    c.poly([(11, 2), (15, 6), (11, 10), (7, 6)], "witch")
+    c.glint(10, 4)
+    c.dots([(4, 4), (18, 3), (19, 9), (3, 9)], "rune")
+    return c
+
+
+def _curio_mark():
+    c = Canvas(S, S)
+    c.ellipse(3, 3, 20, 20, "black")
+    c.line([(7, 7), (16, 16)], "inkred", 2).line([(16, 7), (7, 16)], "inkred", 2)
+    c.glint(6, 6)
+    return c
+
+
+def _curio_lockbox():
+    c = Canvas(S, S)
+    c.rect(2, 8, 21, 21, "iron")
+    c.line([(2, 11), (21, 11)], "line")
+    c.ellipse(9, 2, 14, 10, "brass").ellipse(10, 4, 13, 7, "hole")
+    c.rect(8, 9, 15, 16, "brass")
+    c.dot(11, 12, "line").dot(12, 12, "line").dot(11, 13, "line")
+    c.dots([(4, 13), (19, 13), (4, 19), (19, 19)], "brass")
+    return c
+
+
+def _curio_ribbon():
+    c = Canvas(S, S)
+    c.poly([(8, 12), (11, 13), (8, 22), (5, 20)], "royal").poly([(12, 13), (15, 12), (18, 20), (15, 22)], "royal")
+    c.ellipse(4, 1, 18, 15, "mantle")
+    for x, y in ((4, 8), (18, 8), (11, 1), (11, 15), (6, 3), (16, 3), (6, 13), (16, 13)):
+        c.dot(x, y, "hole")
+    c.ellipse(7, 4, 15, 12, "gold")
+    c.glint(9, 6)
+    return c
+
+
+def _curio_errand():
+    c = Canvas(S, S)
+    c.rect(4, 2, 19, 21, "parchment").rect(4, 2, 6, 21, "leather")
+    for y in (6, 10, 14, 18):
+        c.rect(8, y - 1, 9, y, "line")
+        c.line([(11, y), (17, y)], "ink")
+    c.dots([(8, 5), (9, 6)], "emerald").dots([(8, 9), (9, 10)], "emerald")
+    return c
+
+
+def _curio_net():
+    c = Canvas(S, S)
+    c.line([(1, 22), (10, 13)], "wood", 2)
+    c.ellipse(8, 1, 22, 15, "wood").ellipse(9, 2, 21, 14, "hole")
+    for x in (12, 15, 18):
+        c.line([(x, 3), (x, 13)], "paper")
+    for y in (5, 8, 11):
+        c.line([(10, y), (20, y)], "paper")
+    c.dots([(14, 6), (14, 7), (13, 8), (14, 8), (15, 4), (16, 4)], "ruby")
+    return c
+
+
 CURIOS = {
     "coin": _curio_coin, "shell": _curio_shell, "lantern": _curio_lantern, "catalogue": _curio_catalogue,
     "crate": _curio_crate, "oil": _curio_oil, "purse": _curio_purse, "ticket": _curio_ticket, "signet": _curio_signet,
@@ -1911,6 +2265,13 @@ CURIOS = {
     "watch": _curio_watch, "token": _curio_token, "crescent": _curio_crescent, "marker": _curio_marker,
     "gauntlet": _curio_gauntlet, "cap": _curio_cap, "loupe": _curio_loupe, "clover": _curio_clover, "book": _curio_book,
     "gloves": _curio_gloves, "dome": _curio_dome,
+    "foot": _curio_foot, "wishbone": _curio_wishbone, "horseshoe": _curio_horseshoe, "star": _curio_star, "trumpet": _curio_trumpet,
+    "seal": _curio_seal, "beads": _curio_beads, "monocle": _curio_monocle, "fork": _curio_fork, "ledger": _curio_ledger,
+    "tongue": _curio_tongue, "hourglass": _curio_hourglass, "bell": _curio_bell, "coffer": _curio_coffer, "queue": _curio_queue,
+    "horn": _curio_horn, "guestbook": _curio_guestbook, "rope": _curio_rope, "lamps": _curio_lamps, "whetstone": _curio_whetstone,
+    "dummy": _curio_dummy, "scales": _curio_scales, "still": _curio_still, "desk": _curio_desk, "wheel": _curio_wheel,
+    "rod": _curio_rod, "pillow": _curio_pillow, "wardkey": _curio_wardkey, "aether": _curio_aether, "ring": _curio_ring,
+    "mark": _curio_mark, "lockbox": _curio_lockbox, "ribbon": _curio_ribbon, "errand": _curio_errand, "net": _curio_net,
 }
 
 

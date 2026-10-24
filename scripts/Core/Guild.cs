@@ -12,7 +12,11 @@ namespace Keywright.Core;
 /// </summary>
 public static class Guild
 {
-    public const int DaysPerWeek = 5;
+    /// <summary>
+    /// A Guild week: three days of trading, then Vane. (Five until 0.20: runs took three hours and more, most of it at the
+    /// Royal Emporium doing the same again; three keeps a night with the Guild in every stretch of play.)
+    /// </summary>
+    public const int DaysPerWeek = 3;
 
     /// <summary>The weeks of Bram's debt. After the last, the dues keep coming (endless).</summary>
     public const int Weeks = 8;
@@ -23,7 +27,7 @@ public static class Guild
     /// run usually falls in the middle weeks; better judgment and talents push that later, until the debt is cleared. A
     /// strong run can have all of it a week or two early, and pay it off.
     /// </summary>
-    static readonly int[] Dues = { 40, 100, 280, 900, 5000, 30000, 130000, 420000 };
+    static readonly int[] Dues = { 15, 30, 60, 150, 400, 1500, 20000, 170000 };
 
     /// <summary>After the debt: each week twice as much, for as long as you last.</summary>
     const float EndlessGrowth = 2f;

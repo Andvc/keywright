@@ -80,6 +80,15 @@ public sealed record Item(Category Category, Rarity Quality, bool Magic = false,
     /// <summary>Which one this is: two purses alike are still two things. Kept when it breaks.</summary>
     public int Id { get; init; } = Interlocked.Increment(ref _lastId);
 
+    /// <summary>
+    /// You named it on the slip you bought the chest on (counted it, without counting more of its kind than there were):
+    /// curios, synergies and talents put their bonuses on what you named (<see cref="GameState.Name"/>).
+    /// </summary>
+    public bool Named { get; init; }
+
+    /// <summary>Named, and marked enchanted too: what an enchantment's bonuses need.</summary>
+    public bool MagicNamed { get; init; }
+
     public CategoryDef Def => Categories.Get(Category);
 
     /// <summary>One of the nine Heartsongs.</summary>
@@ -181,6 +190,14 @@ public static class Categories
     {
         var steps = rng.PickWeighted(Spread.Where(s => s.Steps != 0).ToArray(), s => s.Chance).Steps;
         return (Rarity)Math.Clamp((int)quality + steps, 0, 4);
+    }
+
+    /// <summary>Where a <see cref="Swing"/> lands, and how often: the same spread without staying put.</summary>
+    public static (Rarity Quality, float Chance)[] SwingOdds(Rarity quality)
+    {
+        float moved = Spread.Where(s => s.Steps != 0).Sum(s => s.Chance);
+        return Spread.Where(s => s.Steps != 0).GroupBy(s => (Rarity)Math.Clamp((int)quality + s.Steps, 0, 4))
+            .Select(g => (g.Key, g.Sum(s => s.Chance) / moved)).OrderBy(o => o.Key).ToArray();
     }
 
     /// <summary>

@@ -77,15 +77,37 @@ public sealed class Visit
 
     readonly int _firstAsk;
 
+    /// <summary>What they first asked (0 if they wait for an offer): what a haggle talks them down from.</summary>
+    public int FirstAsk => _firstAsk;
+
     /// <summary>They walked out once and came back (the Shepherd's Pipe): they won't come back twice.</summary>
     public bool Returned { get; private init; }
 
-    /// <summary>The same seller with the same chest, back at the end of the day, calmer, at their first price.</summary>
-    public Visit Again() => new(Seller, Chest, Claim, Trade, _firstAsk, Floor,
-        _firstAsk > 0 ? $"I came back. {_firstAsk}g, and no hard feelings." : "I came back. Make me an offer, then.")
+    /// <summary>
+    /// The same seller with the same chest, back at the end of the day, calmer, at their first price (or less, with a
+    /// queue ticket: <paramref name="factor"/>).
+    /// </summary>
+    public Visit Again(float factor = 1)
     {
-        Origin = Origin, Fee = Fee, HearsOut = HearsOut, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says,
-    };
+        // Someone who waits for an offer still waits for one.
+        int ask = _firstAsk > 0 ? Money.Round(_firstAsk * factor) : 0;
+        return new Visit(Seller, Chest, Claim, Trade, ask, Money.Round(Floor * factor),
+            ask > 0 ? $"I came back. {ask}g, and no hard feelings." : "I came back. Make me an offer, then.")
+        {
+            Origin = Origin, Fee = Fee, HearsOut = HearsOut, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says,
+        };
+    }
+
+    /// <summary>A curio's word on the price (the Waiting Game, the Closing Bell), for under the chest; or null.</summary>
+    public string PriceNote { get; private set; }
+
+    /// <summary>Brings the price down (a curio's doing), and says why.</summary>
+    public void Reduce(float factor, string why)
+    {
+        if (!Deciding || factor >= 1) return;
+        Raise(factor);
+        PriceNote = PriceNote == null ? why : $"{PriceNote} {why}";
+    }
 
     public bool Deciding => Outcome == VisitOutcome.Deciding;
 
@@ -258,10 +280,10 @@ public sealed class Visit
             if (unheard.Count > 0)
             {
                 string words = Join(unheard.Select(i => i.Word).Distinct());
-                string why = unheard.All(i => i.Def.Delicate && Chest.Clanks(Seller.Shakes)) ? $"The clank drowned out the {words} for {name}"
-                    : Chest.Packed && unheard.All(i => Chest.Needs(i) > (int)Shake.Hard) ? $"Nothing stirs the {words} through straw"
-                    : Chest.Packed && unheard.All(i => Chest.Needs(i) > (int)Seller.Shakes) ? $"Through the straw, {name}'s shake was too gentle to stir the {words}"
-                    : unheard.All(i => Chest.Needs(i) > (int)Seller.Shakes) ? $"{Capital(name)} didn't shake hard enough to stir the {words}"
+                string why = unheard.All(i => i.Def.Delicate && Chest.Clanks(Seller.Shakes, plain: true)) ? $"The clank drowned out the {words} for {name}"
+                    : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Shake.Hard) ? $"Nothing stirs the {words} through straw"
+                    : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? $"Through the straw, {name}'s shake was too gentle to stir the {words}"
+                    : unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? $"{Capital(name)} didn't shake hard enough to stir the {words}"
                     : $"{Capital(name)} shook {Categories.Adverb(Seller.Shakes)} and missed the {words}";
                 lines.Add($"{why}: {Join(unheard.Select(i => i.Name))}, unpriced.");
             }

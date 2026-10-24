@@ -175,6 +175,25 @@ ICON_PALETTE = {
     "p": (160, 110, 230), "R": (255, 70, 90), "m": (150, 24, 44),
 }
 ICONS = {
+    # The restorers' upgrades: a workbench with a hammer, and the glint of a thing made better.
+    "bench": [
+        "................",
+        "...........k....",
+        "..........kgk...",
+        "...........k....",
+        "..kkkkkk........",
+        "..kSSSSk..k.....",
+        "..kkkkkk.kwk....",
+        "....kbk...k.....",
+        "....kbk.........",
+        ".kkkkkkkkkkkkkk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kBBBBBBBBBBBBk.",
+        ".kkkkkkkkkkkkkk.",
+        "..kBk......kBk..",
+        "..kBk......kBk..",
+        "..kkk......kkk..",
+    ],
     "sign": [
         "................",
         ".kkkkkkkkkkkkkk.",

@@ -129,7 +129,7 @@ public static class Market
         }
         all = all.Take(MaxItems).ToList();
 
-        float magicChance = shopTier >= 3 ? seller.MagicChance + boosts.Magic : 0f;
+        float magicChance = shopTier >= 3 ? (seller.MagicChance + boosts.Magic) * boosts.MagicFactor : 0f;
         var items = all.Select(c =>
         {
             // Forgers about: any coin might be a gilded slug, whoever brings it.
@@ -142,7 +142,7 @@ public static class Market
 
         // People hide money, gems and spellbooks under a false bottom.
         Item hidden = null;
-        if (shopTier >= 2 && rng.NextFloat() < seller.HiddenChance + boosts.Hidden)
+        if (shopTier >= 2 && rng.NextFloat() < (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor)
         {
             var hideable = HiddenKinds.Where(k => Categories.Get(k.Kind).Tier <= shopTier).ToArray();
             hidden = new Item(rng.PickWeighted(hideable, k => k.Weight).Kind, Categories.RollQuality(rng, colour));
@@ -350,6 +350,8 @@ public static class Market
                 floor = price;
                 break;
         }
+        // A silver tongue (or a Haggler's name): whoever bargains comes down further.
+        if (format is Trade.Haggle or Trade.Offer) floor *= boosts.Floor;
         int asking = ask ?? Money.Round(price);
         int fee = seller.Heirloom is Category heirloom ? Money.Round(Categories.Nominal(heirloom, chest.Quality) * HeirloomShare) : 0;
         var clue = MakeClue(rng, seller, chest);
@@ -499,6 +501,15 @@ public sealed record Boosts(float BetterChests = 0, float Hidden = 0, float Magi
     float Slugs = 0, bool Haggles = false)
 {
     public static readonly Boosts None = new();
+
+    /// <summary>What the chance of a false bottom is multiplied by (a smuggler's hook: smugglers come your way).</summary>
+    public float HiddenFactor { get; init; } = 1;
+
+    /// <summary>What the chance each thing is enchanted is multiplied by (a witch's draught).</summary>
+    public float MagicFactor { get; init; } = 1;
+
+    /// <summary>What the least a haggler, or a seller who waits for your offer, will take is multiplied by (a silver tongue, a Haggler's name).</summary>
+    public float Floor { get; init; } = 1;
 
     /// <summary>How likely a seller is to have put a thing of this kind in, against what they usually bring.</summary>
     public float Weight(Category category) => category is Category.Coins or Category.Gems ? 1 + MoneyKinds : 1;

@@ -19,18 +19,20 @@ public partial class ShakeTest : Node2D
     public int Count = 40;
     public double Seconds = 1.6;
 
-    static readonly (Shake Level, bool Magnet)[] Trials =
+    // The last is through an ear trumpet: nothing drowned out.
+    static readonly (Shake Level, bool Magnet, bool Trumpet)[] Trials =
     {
-        (Shake.Gentle, false), (Shake.Firm, false), (Shake.Hard, false), (Shake.Gentle, true), (Shake.Firm, true),
+        (Shake.Gentle, false, false), (Shake.Firm, false, false), (Shake.Hard, false, false), (Shake.Gentle, true, false), (Shake.Firm, true, false),
+        (Shake.Hard, false, true),
     };
 
     public override async void _Ready()
     {
         var rng = new Random(11);
-        var expected = new Dictionary<(Shake, bool), int>();
-        var heardRight = new Dictionary<(Shake, bool), int>();
-        var leaks = new Dictionary<(Shake, bool), int>();
-        var levelOk = new Dictionary<(Shake, bool), int>();
+        var expected = new Dictionary<(Shake, bool, bool), int>();
+        var heardRight = new Dictionary<(Shake, bool, bool), int>();
+        var leaks = new Dictionary<(Shake, bool, bool), int>();
+        var levelOk = new Dictionary<(Shake, bool, bool), int>();
         var missedBy = new Dictionary<Category, int>();
         int pairs = 0, sand = 0;
         for (int i = 0; i < Count; i++)
@@ -43,6 +45,7 @@ public partial class ShakeTest : Node2D
             if (chest.Items.Any(it => it.Fake && !it.Def.FakeIron)) sand++;
             foreach (var trial in Trials)
             {
+                chest.Unmasked = trial.Trumpet;
                 var box = new ShakeBox(chest, new Rect2(452, 220, 232, 196))
                     { Position = new Vector2(556, 416), Magnet = trial.Magnet };
                 var got = new HashSet<int>();
@@ -76,7 +79,7 @@ public partial class ShakeTest : Node2D
         GD.Print($"Shake test: {Count} town and Emporium chests ({pairs} with two of a kind, {sand} with sand), " +
                  $"{Seconds}s per shake");
         foreach (var trial in Trials)
-            GD.Print($"  {Categories.LevelName(trial.Level),-6}{(trial.Magnet ? " + magnet" : "         ")}: " +
+            GD.Print($"  {Categories.LevelName(trial.Level),-6}{(trial.Magnet ? " + magnet " : trial.Trumpet ? " + trumpet" : "          ")}: " +
                      $"heard {heardRight[trial]}/{expected[trial]} that should sound, {leaks[trial]} leaks, " +
                      $"at the right level {levelOk.GetValueOrDefault(trial)}/{Count} shakes");
         foreach (var (category, n) in missedBy.OrderByDescending(p => p.Value))

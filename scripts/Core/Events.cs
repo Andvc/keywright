@@ -5,7 +5,7 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <param name="MinTier">Only from this shop tier, where it makes a difference.</param>
-/// <param name="Gentle">Can come in the first week, while the stall's still new: it changes the day, not how to judge a chest.</param>
+/// <param name="Gentle">Can come in the first week with anything on, while the stall's still new: it changes the day, not how to judge a chest.</param>
 public sealed record EventDef(string Key, string Name, string Blurb, int MinTier = 1, bool Gentle = false);
 
 /// <summary>
@@ -30,17 +30,24 @@ public sealed class WeekPlan
 }
 
 /// <summary>
-/// Twice a week (once in the first), something happens in town for a day, and each changes what a good day looks like:
+/// Most weeks something happens in town for a day (from the fourth, two days of every three), and each changes what a good day looks like:
 /// more customers or fewer, better prices or worse, a stranger with a chained chest, a royal chest, a rule everyone
 /// keeps that day. Some are puzzles: on the Sleepers' Moon every seller dreams true, on Wardens' Day every chest has a
 /// warded thing and a riddle for it, on the Guild's Count a clerk tallies every article. Nim comes every week.
 /// </summary>
 public static class Events
 {
-    /// <summary>Two events a week from this week; the first week has one, late in the week.</summary>
-    public const int FromWeek = 2, PerWeek = 2, FirstWeekDay = 4;
+    /// <summary>Nothing's on in the first week (it's for learning the stall: the playtest found it crowded enough).</summary>
+    public const int FromWeek = 2;
 
-    /// <summary>Nim's first visit: the first week's third morning, once the stall's found its feet.</summary>
+    /// <summary>
+    /// How many days of a week have something on: one in the first three weeks, while there's plenty that's new; two from
+    /// the fourth, when the shop's crowd is familiar (the experience playtest found the long stays at Crownhold and the
+    /// Emporium the dullest stretches of a run).
+    /// </summary>
+    public static int PerWeek(int week) => week < 4 ? 1 : 2;
+
+    /// <summary>Nim's first visit: the first week's last morning, once the stall's found its feet (and before Vane's first visit).</summary>
     public const int FirstPeddlerDay = 3;
 
     public const int MarketCustomers = 3, StormCustomers = -2;
@@ -103,24 +110,22 @@ public static class Events
     public static string Describe(EventDef e, Category kind) => e.Blurb.Replace("{kind}", Kind(kind));
 
     /// <summary>
-    /// The plan for a week: Nim's day (the first week's third, else any day but the Guild's), and one event (in the first
-    /// week, a gentle one on its fourth day) or two, on other days, that haven't come lately (they all come round before
-    /// any comes twice).
+    /// The plan for a week: Nim's day (the first week's last, else any day but the Guild's), and its events
+    /// (<see cref="PerWeek"/>: none in the first week), on other days than Nim's while there are any, that haven't come
+    /// lately (they all come round before any comes twice).
     /// </summary>
     public static WeekPlan Plan(int seed, int week, int tier, ICollection<string> seen)
     {
         var rng = new Random(unchecked(seed * 104729 + week * 7907));
         var plan = new WeekPlan { Week = week, Days = Enumerable.Repeat<string>(null, Guild.DaysPerWeek).ToList() };
-        plan.Peddler = week == 1 ? FirstPeddlerDay : rng.Next(1, Guild.DaysPerWeek);
+        // Not two mornings running: after his first visit (the first week's last morning), the second week's second.
+        plan.Peddler = week == 1 ? FirstPeddlerDay : week == 2 ? 2 : rng.Next(1, Guild.DaysPerWeek);
         plan.Wanted = rng.PickOne(Categories.UpTo(tier).Select(c => c.Category).ToArray());
-        if (week < FromWeek)
-        {
-            plan.Days[FirstWeekDay - 1] = Pick(rng, tier, seen, plan.Days, gentle: true).Key;
-            return plan;
-        }
-        var days = Enumerable.Range(1, Guild.DaysPerWeek).Where(d => d != plan.Peddler).OrderBy(_ => rng.Next()).Take(PerWeek);
+        if (week < FromWeek) return plan;
+        var days = Enumerable.Range(1, Guild.DaysPerWeek).OrderBy(d => d == plan.Peddler ? 1 : 0).ThenBy(_ => rng.Next()).Take(PerWeek(week));
+        // The first week with anything on has a gentle one: it changes the day, not how to judge a chest.
         foreach (int day in days.OrderBy(d => d))
-            plan.Days[day - 1] = Pick(rng, tier, seen, plan.Days).Key;
+            plan.Days[day - 1] = Pick(rng, tier, seen, plan.Days, gentle: week == FromWeek).Key;
         return plan;
     }
 
@@ -143,18 +148,19 @@ public static class Events
     /// whose price is your slip): on the Sleepers' Moon a dream (of what they warded, or else the dearest thing), on
     /// Wardens' Day a riddle for the thing they warded, on the Guild's Count the clerk's tally.
     /// </summary>
-    public static Visit Restate(Random rng, Visit visit, string eventKey, int tier)
+    /// <param name="ward">They've warded something, whatever the day (a sleeper's pillow's dreams).</param>
+    public static Visit Restate(Random rng, Visit visit, string eventKey, int tier, bool ward = false)
     {
         if (visit.Lesson != null || visit.Says != Clue.None || visit.Chest.Sealed || visit.Seller.SlipPrice) return visit;
         var says = eventKey switch { "dreaming" => Clue.Dream, "wardens" => Clue.Riddle, "census" => Clue.Tally, _ => Clue.None };
         if (says == Clue.None) return visit;
-        if (says == Clue.Riddle || (says == Clue.Dream && rng.NextFloat() < DreamWards)) Market.WardOne(rng, visit.Seller, visit.Chest, tier);
+        if (ward || says == Clue.Riddle || (says == Clue.Dream && rng.NextFloat() < DreamWards)) Market.WardOne(rng, visit.Seller, visit.Chest, tier);
         // A riddle is only left for a warded thing: a chest with every kind in it already has nothing to ward.
         if (says == Clue.Riddle && visit.Chest.Warded == null) return visit;
         var clue = Market.MakeClue(rng, visit.Seller, visit.Chest, says);
         return new Visit(visit.Seller, visit.Chest, visit.Claim, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
         {
-            Origin = visit.Origin, Fee = visit.Fee, Clue = clue.Note, ClueKinds = clue.Kinds, Says = says,
+            Origin = visit.Origin, Fee = visit.Fee, Clue = clue.Note, ClueKinds = clue.Kinds, Says = says, HearsOut = visit.HearsOut,
         };
     }
 

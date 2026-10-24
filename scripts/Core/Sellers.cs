@@ -232,8 +232,8 @@ public sealed class SellerDef
     {
         Judgment.Crook => chest.Items,
         Judgment.Jeweller => chest.Items.Where(i => i.Category == Category.Gems),
-        Judgment.Thorough => chest.HeardAt(Shake.Gentle).Union(chest.HeardAt(Shake.Hard)),
-        _ when Listens => chest.HeardAt(Shakes),
+        Judgment.Thorough => chest.HeardAt(Shake.Gentle, plain: true).Union(chest.HeardAt(Shake.Hard, plain: true)),
+        _ when Listens => chest.HeardAt(Shakes, plain: true),
         _ => Enumerable.Empty<Item>(),
     }).Where(i => !i.IsSong);
 
@@ -265,9 +265,10 @@ public static class Sellers
 {
     static readonly string[] Shrug = { "Suit yourself.", "Your loss.", "Another time, then." };
 
-    // Chest colours by shop: villagers bring wood, the court brings purple.
-    static readonly float[] Stall = { 0.75f, 0.25f, 0, 0 }, Village = { 0.1f, 0.65f, 0.25f, 0 },
-        Town = { 0, 0.25f, 0.65f, 0.1f }, Emporium = { 0, 0, 0.45f, 0.55f };
+    // Chest colours by shop: villagers bring wood, the court brings purple. (0.20: Thornwick's and Crownhold's a little
+    // finer, so each move inward pays about as well as the last, and a shorter run doesn't stall in the middle.)
+    static readonly float[] Stall = { 0.75f, 0.25f, 0, 0 }, Village = { 0.1f, 0.55f, 0.35f, 0 },
+        Town = { 0, 0.15f, 0.6f, 0.25f }, Emporium = { 0, 0, 0.45f, 0.55f };
 
     static Dictionary<string, string[]> Tell(params (string Origin, string[] Lines)[] stories) => stories.ToDictionary(s => s.Origin, s => s.Lines);
 
@@ -345,7 +346,7 @@ public static class Sellers
         new()
         {
             Key = "wenna", Name = "Wenna the Huntress", Tier = 2, Judge = Judgment.Weight, States = Clue.Pounds, Packhorse = true,
-            Markup = (0.85f, 1.05f), Colours = Village, LockChance = 0.8f,
+            Markup = (0.9f, 1.1f), Colours = Village, LockChance = 0.8f,
             From = new[] { ("camp", 2f), ("den", 1f) },
             Stories = Tell(
                 ("camp", new[] { "Took it off an outlaws' camp on the Thornwick road. My game scale says {pounds}. {price}. Gently: the mare spooks.",

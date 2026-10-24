@@ -33,7 +33,7 @@ public sealed record HeartsongDef(string Key, string Name, string Word, string F
 public static class Heartsongs
 {
     /// <summary>The chance any chest a seller brings holds one (--heartsongs=N sets it, for screenshots).</summary>
-    public static float Chance { get; set; } = 0.003f;
+    public static float Chance { get; set; } = 0.007f;
 
     /// <summary>What a merchant pays for one as a trinket, times the quality multiplier of its chest's colour.</summary>
     public const int BaseValue = 10;

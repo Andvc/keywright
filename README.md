@@ -8,15 +8,17 @@ stall. People bring you chests and price them their own way (by what they heard,
 a dream) and tell you where they found them. Shake each one yourself, gently, firmly and hard, find what they missed
 or misjudged, work out what their dreams, riddles and tags point at, trade for it, and open it on the spot. Move the shop inward, from the Brindle
 crossroads to Thornwick Market, the capital and the Royal Emporium by the Gate, because the stall comes with twenty
-years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 40g to 420,000g in
-eight weeks. Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
+years of Bram's unpaid tithe: every third evening the Gilded Guild comes for a due that climbs from 15g to 170,000g in
+eight weeks (24 days: a run is an hour and a half to two hours). Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.19): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+**Status:** Early Access (0.20): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
 of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
-puzzle brings out), runs of eight weeks against the Guild's dues (then endless), with curios, commissions, seventeen
-kinds of event twice a week, a calendar, and a story; nine **Heartsongs**, the rarest
+puzzle brings out), runs of eight three-day weeks against the Guild's dues (then endless); **60 curios** that make the
+run's build, in a dozen ways of trading that make each other stronger (luck, reading, bargains, crowds, display, the
+trades, hollows, arcana, rough hands, fakes, coffers, patrons), with Nim's stock growing across runs; restorers that
+make things come out better; commissions, seventeen kinds of event, a calendar, and a story; nine **Heartsongs**, the rarest
 things in the realm, each with its own song and its own use on display, and an ending that needs all nine; four of
 Bram's kin to play, eight challenge levels each, and a talent tree bought with the renown runs earn; saves, settings
 and a guided start. The pixel art is drawn in code (`tools/custom_art.py`) as a placeholder until dedicated art
@@ -61,19 +63,24 @@ and repository now belong to a different game. Saves and the profile from then c
    out last, in mythic red, and it's worth far more singing in your shop than any merchant will pay: each one changes
    the trade (two more customers a day, coin and gems at double, a bell that counts what's in every chest...). Find all
    nine, over your runs, and the Crown Chest ends differently.
-5. **End of day:** once the stall has earned 120g, spend your earnings on moving inward (each place brings richer
+5. **End of day:** once the stall has earned 50g, spend your earnings on moving inward (each place brings richer
    customers, a new look and something new), tools (the Witchlight shows what's enchanted, the Lodestone silences iron
    and demon gold, Fine Lockpicks), cabinets, a crier and a night market for more customers, and a buyers' trade that
-   puts up everything you sell (brass scales, an auction block, a royal warrant). From Crownhold, choose which of the
-   shop's synergies to put to work (ten of a kind at a quality earns one; each puts up what its kind sells for). Once
+   puts up everything you sell (brass scales, an auction block, a royal warrant), and restorers who make what you name
+   likelier to come out better than its chest. From Crownhold, choose which of the shop's synergies to put to work (six
+   of a kind at a quality earns one, or a feat: perfect reads, surprises, hidden things found, bargains; each puts up
+   what its kind of thing you name sells for). Once
    your purse could pay off everything you owe, the Guild offers its **Bookkeeping Engine** for exactly that sum: it
    reads every chest for you, so a won run can be finished fast.
-6. **The week:** every fifth evening Mister Vane collects the Guild's tithe. Short, pawn what's on display or sell your
+6. **The week:** every third evening Mister Vane collects the Guild's tithe. Short, pawn what's on display or sell your
    curios back; once a run Bram will vouch for you; otherwise the Guild seals the shop. Start a day nearly broke and
-   Bram dips into his secret stash for you (three times a run). Every week Nim the
-   peddler sells **curios** that bend one rule each (a lucky coin, kid gloves no seller minds, a gambler's token...;
-   priced to keep pace with the weeks); from the second, regulars post **commissions** (deliver what they want from a
-   chest instead of selling it), and twice a week something happens in town: a fair, Locking Day, the Crown's buyer, a
+   Bram dips into his secret stash for you (twice a run). Every week Nim the peddler brings **curios**, the run's
+   build: each bends one rule (a lucky coin, a queue ticket that brings back whoever you passed, a sleeper's pillow that
+   fills the day with warded puzzles, a ledger that pays for perfect reads...), each card says which ways of trading
+   it's for and what it goes with, and he asks a share of what's in your purse. What a curio adds, it adds to what you
+   named on your slip: a build amplifies your judgment, and a wrong read loses it. From the second week, regulars post
+   **commissions** (deliver what they want from a chest instead of selling it), and a day or two a week something
+   happens in town: a fair, Locking Day, the Crown's buyer, a
    tourney, a foreclosure sale, a day of mourning when nobody shakes hard, the crier's reward, the Sleepers' Moon when
    every seller dreams true, Wardens' Day riddles, the Guild's count, a storm, the Stranger with a chained chest... The
    ledger's **calendar** shows this week and next: the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
@@ -97,8 +104,9 @@ their next challenge level: each adds one of the Guild's harsher terms (Bram's
 stretched thin, fussy sellers, demon gold about, a lean start, thin crowds, the Guild's interest, sharp sellers, a hurried town)
 and a quarter more renown.
 
-Day one is guided: Uncle Bram, who's handing you the stall, brings in four customers with one lesson each. After
-that, each seller's first visit is a lesson in their habit and their rule, and each new part of the shop (moves, lockpicking,
+Day one is guided: Uncle Bram, who's handing you the stall, brings in three customers with one lesson each (and a
+fourth, on passing, opens the second morning). After that, each seller's first visit is a lesson in their habit and
+their rule (taught once: a second run doesn't repeat them), and each new part of the shop (moves, lockpicking,
 the display shelf, synergies, the Guild, curios, commissions) comes with a word from Bram when it opens up. The shop
 saves at the start of every day; your best runs are kept on the title screen.
 
@@ -119,7 +127,7 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Keep something for display | Its Keep button after an opening (Swap when the display is full); sell it back from the exhibition at day end |
 | Deliver to a commission | Its Deliver button after an opening |
 | Buy or sell back a curio | Nim's screen, the morning he visits |
-| Pay the Guild, pawn, ask Bram | The Guild's screen, every fifth evening |
+| Pay the Guild, pawn, ask Bram | The Guild's screen, every third evening |
 | Pay off the whole debt early | "Pay it all off" on the day-end Guild panel (or "Pay it all" on the Guild's night), once you have it |
 | Choose synergies | Synergies, at the end of a day |
 | Next tip from Bram | Click his box |
@@ -136,11 +144,11 @@ The code is split so the game rules can be tested without the engine:
 
 | Folder | What's in it |
 |---|---|
-| `scripts/Core` | Pure C# rules: kinds, qualities and the shaking rules, chests, where chests come from (`Origins.cs`), sellers and how they judge, trade and tell their stories, the appraisal slip, a careful player's read and strategy, sellers' lessons, synergies, upgrades, the shop's progress and exhibition, the run (the Guild's dues, curios, commissions, events, the story), Bram's kin, challenge levels, talents and the score (`Meta.cs`, `Kin.cs`), Bram's hints. No Godot types. |
+| `scripts/Core` | Pure C# rules: kinds, qualities and the shaking rules, chests, where chests come from (`Origins.cs`), sellers and how they judge, trade and tell their stories, the appraisal slip, a careful player's read and strategy, sellers' lessons, synergies, upgrades, the shop's progress and exhibition, the build (`Build.cs`: naming, luck, what things fetch), the run (the Guild's dues, curios, commissions, events, the story), Bram's kin, challenge levels, talents and the score (`Meta.cs`, `Kin.cs`), Bram's hints. No Godot types. |
 | `scripts/Phases` | The screens: title, the character screen, counter, lockpicking, opening, end of day, the Guild's night, Nim's curios, story scenes, the end of a run. |
 | `scripts/Ui` | Visuals: the shakeable chest, the ledger, Bram, the seller, HUD, particles and styling. |
 | `scripts/Audio` | Recorded sounds, the synthesized slosh, and placeholder effects. |
-| `scripts/Debug` | Balance simulation (with the lesson test), the shake test and an autoplay bot for screenshots and recordings. |
+| `scripts/Debug` | Balance simulation (with the lesson test, the builds report and the experience playtest), the shake test and an autoplay bot for screenshots and recordings. |
 | `assets/` | Sprites, portraits, backgrounds, sounds, icons, UI frames and font, generated by `tools/import_art.py` from CC0 packs. |
 
 Useful commands (Linux; run `tools/setup-cloud.sh` first in a fresh container):
@@ -148,12 +156,17 @@ Useful commands (Linux; run `tools/setup-cloud.sh` first in a fresh container):
 ```bash
 dotnet build                                               # compile
 godot --headless --path . -- --sim                         # balance report
+godot --headless --path . -- --sim=quick                   # the economy in a few minutes
+godot --headless --path . -- --sim=builds                  # each curio, each way of trading, pairs, blind buyers with builds
+godot --headless --path . -- --sim=experience              # a player's first three runs: pace, load, freshness, peaks
+godot --headless --path . -- --sim=trace --seed=1001       # one careful run, day by day
 godot --headless --path . -- --shake-test                  # check that shaking follows the rules
 xvfb-run -a godot --path . --rendering-driver opengl3 -- \
   --autoplay --days=1 --shots=$PWD/shots                   # play the guided day, save screenshots
 # add --start-tier=3 --gold=600 to jump ahead with the tools you'd have by then,
 # or --start-week=6 for a shop as a careful player would have it by then (--gold=N sets its purse);
-# --character=hesk|rosa|isolde, --challenge=N and --talents=all play one of Bram's kin on those terms
+# --character=hesk|rosa|isolde, --challenge=N and --talents=all play one of Bram's kin on those terms;
+# --curios=foot,star,ledger starts with those curios
 xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, talents, pause, settings
 xvfb-run -a godot --path . -- --vault-demo --quit-at-end --shots=$PWD/shots_vault  # the finale: the Crown Chest
 godot --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe

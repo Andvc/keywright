@@ -12,7 +12,7 @@ namespace Keywright;
 /// <summary>
 /// Root of the game: owns the game state, audio, HUD and screen effects, and swaps between phases. It opens on the title
 /// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the week's scene
-/// (from the second week), Nim's curios on his day, the counter, the day's end, and on the fifth day the Guild's due.
+/// (from the second week), Nim's curios on his day, the counter, the day's end, and on the third day the Guild's due.
 /// What you've done across runs is kept in user://profile.json.
 /// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --export-sounds=DIR, --autoplay,
 /// --shots=DIR, --quit-at-end, --days=N, --no-tutorial (no tips, no scripted first day),
@@ -23,7 +23,7 @@ namespace Keywright;
 /// --start-week=N (a shop as a careful player would have it by then, played
 /// through by the balance simulation; --gold=N then sets its purse). Autoplay sets --days=N to stop after that many days.
 /// --character=KEY, --challenge=N and --talents=all play one of Bram's kin, at a challenge level, with every talent.
-/// --engine starts with the Bookkeeping Engine, to see it read every chest.
+/// --engine starts with the Bookkeeping Engine, to see it read every chest. --curios=a,b,c owns those curios from the start.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
 /// (with --vault-demo, the Crown Chest's other ending).
 /// </summary>
@@ -31,7 +31,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.19";
+    public const string Version = "Early Access 0.20";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -60,44 +60,55 @@ public partial class Main : Node2D
     public string[] KinAtStart { get; private set; } = System.Array.Empty<string>();
     public int LevelsAtStart { get; private set; }
 
+    /// <summary>What Nim carried when the run began: his stock grows as Bram's kin get further.</summary>
+    public string[] CuriosAtStart { get; private set; } = System.Array.Empty<string>();
+
     public override void _Ready()
     {
         Instance = this;
         var args = OS.GetCmdlineUserArgs();
-        if (Arg(args, "--sim") == "songs")
+        if (args.Contains("--sim") || Arg(args, "--sim") != null)
         {
-            Simulation.Songs(int.Parse(Arg(args, "--n") ?? "150"));
-            GetTree().Quit();
-            return;
-        }
-        if (Arg(args, "--sim") == "sellers")
-        {
-            Simulation.PrintSellers();
-            Simulation.LessonTest();
-            GetTree().Quit();
-            return;
-        }
-        if (Arg(args, "--sim") == "seller")
-        {
-            Simulation.ShowSeller(Arg(args, "--who") ?? "tam");
-            GetTree().Quit();
-            return;
-        }
-        if (Arg(args, "--sim") == "kin")
-        {
-            Simulation.Meta(int.Parse(Arg(args, "--n") ?? "100"), Arg(args, "--who"));
-            GetTree().Quit();
-            return;
-        }
-        if (Arg(args, "--sim") == "quick")
-        {
-            Simulation.Run(int.Parse(Arg(args, "--n") ?? "120"), quick: true);
-            GetTree().Quit();
-            return;
-        }
-        if (args.Contains("--sim"))
-        {
-            Simulation.Run(int.Parse(Arg(args, "--n") ?? "300"));
+            // A report that throws still quits (a headless run would otherwise wait forever).
+            try
+            {
+                int N(int fallback) => int.Parse(Arg(args, "--n") ?? fallback.ToString());
+                switch (Arg(args, "--sim"))
+                {
+                    case "songs":
+                        Simulation.Songs(N(150));
+                        break;
+                    case "sellers":
+                        Simulation.PrintSellers();
+                        Simulation.LessonTest();
+                        break;
+                    case "seller":
+                        Simulation.ShowSeller(Arg(args, "--who") ?? "tam");
+                        break;
+                    case "kin":
+                        Simulation.Meta(N(100), Arg(args, "--who"));
+                        break;
+                    case "builds":
+                        Simulation.Builds(N(60));
+                        break;
+                    case "trace":
+                        Simulation.Trace(int.Parse(Arg(args, "--seed") ?? "1000"));
+                        break;
+                    case "experience":
+                        Simulation.ExperienceReport(N(30), int.Parse(Arg(args, "--runs") ?? "3"));
+                        break;
+                    case "quick":
+                        Simulation.Run(N(120), quick: true);
+                        break;
+                    default:
+                        Simulation.Run(N(300));
+                        break;
+                }
+            }
+            catch (System.Exception e)
+            {
+                GD.PrintErr(e.ToString());
+            }
             GetTree().Quit();
             return;
         }
@@ -141,6 +152,8 @@ public partial class Main : Node2D
                     State.HintsSeen.Add(key);
             }
             if (args.Contains("--engine")) State.Grant(Upgrades.Engine);
+            foreach (var key in (Arg(args, "--curios") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries).Where(Curios.Exists))
+                State.GiveCurio(key);
             if (Arg(args, "--event") is string forced && Events.Find(forced) != null) State.ForcedEvent = forced;
             NoteStart();
         }
@@ -357,7 +370,7 @@ public partial class Main : Node2D
             Profile.Bank(GameState.Load(old));
             DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(SavePath));
         }
-        State = GameState.NewRun(_seed, character, challenge, Profile.Talents, Settings.Tips);
+        State = GameState.NewRun(_seed, character, challenge, Profile.Talents, Settings.Tips, Profile.Taught, Profile.OpenCurios);
         State.Songbook.UnionWith(Profile.Songs);
         _seed++;
         _saving = !_demo;
@@ -373,6 +386,7 @@ public partial class Main : Node2D
     {
         KinAtStart = Characters.All.Where(Profile.Unlocked).Select(c => c.Key).ToArray();
         LevelsAtStart = Profile.MaxChallenge(State.Character);
+        CuriosAtStart = Profile.OpenCurios.ToArray();
     }
 
     /// <summary>A Heartsong's just been opened: into the profile's songbook straight away.</summary>
@@ -517,7 +531,7 @@ public partial class Main : Node2D
     /// <summary>After the day's end: the Guild's introduction (the first evening), its due (the fifth), or the next morning.</summary>
     public void CloseDay()
     {
-        if (!State.GuildIntroduced) SwitchTo(new ScenePhase(Story.Intro(), StartDay, "THE GILDED GUILD"));
+        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(), StartDay, "THE GILDED GUILD"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
         // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
         else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, "THE ALDRIC KEY"));

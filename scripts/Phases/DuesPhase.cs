@@ -272,6 +272,8 @@ public partial class DuesPhase : Phase
         Game.Shake(0.15f);
         _vane.Say(Guild.Paid(State.Week), Palette.Good);
         _vane.Bob();
+        // A miser's lockbox: what's left grows a little, once the Guild's been.
+        if (State.Hoarded > 0) FloatText($"Miser's Lockbox +{State.Hoarded}g", new Vector2(PanelX + PanelW / 2, 400), Palette.Magic, 24);
         Teach("dues");
         AfterSettled(null);
     }

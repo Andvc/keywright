@@ -33,7 +33,7 @@ the Gate", wants you opening chests as fast as you can, and wants its tithe in g
 | When | You learn | You're left wondering |
 |---|---|---|
 | Day 1 | Bram's stall is yours; your hand carries the Key-mark; chests open for you once you've paid for them; you judge them by ear. | Why the stall is so cheap to take over. |
-| Day 1, evening | Mister Vane of the Gilded Guild: Bram opened chests unlicensed for twenty years; the Guild's back-tithe is due in eight weekly payments, or the Guild seals the shop. | What the Guild does with the gold. |
+| Day 2, evening | Mister Vane of the Gilded Guild: Bram opened chests unlicensed for twenty years; the Guild's back-tithe is due in eight weekly payments, or the Guild seals the shop. | What the Guild does with the gold. |
 | Week 2 | Bram tells you about the Locking and the Maw, and shows you his one secret: a shard of the **Aldric Key**, broken in four when the Locking was made. | What the Key opens. |
 | Week 3 | The Hooded Woman asks for things only a Keywright's chests hold, and pays in shards. | Who she is. |
 | Week 5 | She tells you the Key opens the **Crown Chest**, King Aldric's own, which holds the heart of the Locking. The Guild's been buying every chest with a royal seal. | Why the Guild wants it. |
@@ -222,7 +222,18 @@ by Crownhold's tinkers, reads a chest set before it and writes out what's inside
 The Guild sells one to any Keywright whose purse could pay off everything they owe, for exactly that sum: it would
 rather be paid twice. With it on the counter, every chest's contents are on the slip before you touch it, and a run
 that's already won can be finished in an afternoon.
-- *Curios.* Oddments from the Locking that bend a rule of the trade. Nim finds them; nobody asks where.
+- *Curios.* Oddments from the Locking that bend a rule of the trade. Nim finds them; nobody asks where. Each was made
+  for a trade (a gambler's token, a smuggler's hook, a fence's mark, an appraiser's seal), and things made for the same
+  trade work together, the way a fence's mark and a jeweller's loupe do in any thieves' kitchen. Nim knows a collector
+  when he sees one, and brings what goes with what you keep; his stock grows as word of you gets round (the further
+  you've got, the more he trusts you with).
+- *Naming.* A Keywright vouches for what they name. Buyers pay more for a thing whose finder said what it was before the
+  chest was opened, the Guild's restorers work from the slip, and Nim's oddments work on what you meant to buy: a lucky
+  coin brings luck to the purse you heard, not to whatever else happens to be in the box. Name it wrong (count two
+  blades where there was one) and you've vouched for nothing of that kind: it sells as found.
+- *Restorers.* Things kept three hundred years in a Locking chest come out tarnished, creased and dusty. A restorer
+  cleans, mends and polishes what you name, and some of it comes up better than the chest promised; sellers know the
+  shop does it, and ask a little more.
 - *Heartsongs.* Things loved more than gold, sung into the Locking: a Keywright hears them through the ward because the
   ward is their song. Nobody else knows they're there, so they're never priced, and they're worth a trinket's price to
   anyone but you.
@@ -238,7 +249,7 @@ that's already won can be finished in an afternoon.
 
 ## What happens in town
 
-Twice a week something happens for a day, and the ledger's calendar shows this week's and next week's (and the days Nim
+A day or two a week (from the second) something happens for a day, and the ledger's calendar shows this week's and next week's (and the days Nim
 comes by, and the Guild's nights). Each has a reason anyone in town would give you:
 
 - **Fair Day**: the county's in town. **Locking Day**: the Locking's anniversary, and everyone spends. **The Crown's

@@ -53,7 +53,7 @@ public static class Story
                   "the Gate. Your uncle never did."),
         new(Bram, "Twenty years I opened chests for folk who couldn't pay a Guild Keywright! For pennies!"),
         new(Vane, $"Twenty years of tithe, Bram: {Guild.Debt}g. The Guild will take it in {Guild.Weeks} weekly payments, starting " +
-                  $"small. {Guild.Due(1)}g at the end of the week. Each week, more."),
+                  $"small. {Guild.Due(1)}g tomorrow night, at the end of the week. Each week, more."),
         new(Vane, "Miss one, and the Guild seals the shop. Good evening, Keywright."),
         new(Bram, $"Every {Guild.DaysPerWeek} days. Don't worry: a good ear pays any debt. We'll talk in the morning."),
     };

@@ -113,6 +113,11 @@ public partial class RunEndPhase : Phase
             news.Add($"{kin.Name} can mind the stall now!");
         int levels = profile.MaxChallenge(State.Character);
         if (levels > Game.LevelsAtStart) news.Add($"Challenge level {levels} is open for {State.Kin.Name}.");
+        // Nim's stock grows as Bram's kin get further: what he'll bring from the next run on.
+        var curios = Curios.All.Where(c => profile.Opens(c) && !Game.CuriosAtStart.Contains(c.Key)).ToList();
+        if (curios.Count > 0)
+            news.Add(curios.Count <= 3 ? $"Nim has new curios for your next run: {string.Join(", ", curios.Select(c => c.Name))}."
+                : $"Nim has {curios.Count} new curios for your next run, the {curios[0].Name} among them.");
         if (_cleared && State.Week <= Guild.Weeks) news.Add("Keep trading and every week you keep the Guild paid adds to the score.");
         if (news.Count > 0) return string.Join("  ", news);
         return profile is { Runs: > 0 }

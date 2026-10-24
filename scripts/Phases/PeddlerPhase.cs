@@ -7,12 +7,13 @@ namespace Keywright.Phases;
 
 /// <summary>
 /// Nim the peddler drops by before the shop opens, once a week from the first: three curios laid out on the counter,
-/// each bending one rule of the trade, at prices that climb with the weeks. Buy what suits how you deal (there's room
-/// for a few), sell back what doesn't for half, and open the shop.
+/// each bending one rule of the trade, each asking a share of what's in your purse this morning. Each card says which
+/// ways of trading it's for, and which of yours it goes with. Buy what suits how you deal (there's room for a few),
+/// sell back what doesn't for half, and open the shop.
 /// </summary>
 public partial class PeddlerPhase : Phase
 {
-    const float CardH = 316, CardsY = 96, CardGap = 20, CardsRight = 1260;
+    const float CardH = 360, CardsY = 96, CardGap = 20, CardsRight = 1260;
 
     // Three cards to the right of Nim; four (a familiar face) start nearer him and are a little narrower.
     float CardW => State.PeddlerCount > 3 ? 225 : 260;
@@ -53,15 +54,18 @@ public partial class PeddlerPhase : Phase
         if (stock.Count == 0)
             _board.AddChild(UiKit.MakeLabel("Nim's sold out: you own everything Nim carries!", 24, Palette.Muted, HorizontalAlignment.Center)
                 .Place(CardsX, 220, CardsRight - CardsX, 30));
-        if (State.Keepsake && stock.Count > 0)
-            _board.AddChild(UiKit.MakeLabel("Keepsake: one of these is a gift, whichever you like.", 16, Palette.Good, HorizontalAlignment.Center, outline: 4)
+        string note = State.Keepsake && stock.Count > 0 ? "Keepsake: one of these is a gift, whichever you like."
+            : $"Nim asks a share of what was in your purse this morning ({State.PeddlerPurse}g): " +
+              $"{Synergies.Pct(Curios.Share(CurioRarity.Common))}, {Synergies.Pct(Curios.Share(CurioRarity.Uncommon))} or {Synergies.Pct(Curios.Share(CurioRarity.Rare))}.";
+        if (stock.Count > 0)
+            _board.AddChild(UiKit.MakeLabel(note, 16, State.Keepsake ? Palette.Good : Palette.Muted, HorizontalAlignment.Center, outline: 4)
                 .Place(CardsX, CardsY + CardH + 6, CardsRight - CardsX, 20));
         // Second Look (a talent): once a visit, Nim packs these away and lays out something else.
         if (State.CanRerollPeddler)
             _board.AddChild(UiKit.MakeButton("Show me something else", Palette.Magic, 16, Reroll).Place(660, 610, 300, 64));
 
         // Your curios: click one to sell it back for half.
-        const float y = 440;
+        const float y = CardsY + CardH + 40;
         _board.AddChild(UiKit.MakeLabel($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}", 16, Palette.Magic).Place(CardsX, y, 300, 20));
         _board.AddChild(UiKit.MakeLabel("Click one to sell it back to Nim for half what you paid.", 16, Palette.Muted).Place(CardsX + 220, y, 600, 20));
         for (int i = 0; i < State.CurioSlots; i++)
@@ -100,9 +104,13 @@ public partial class PeddlerPhase : Phase
         float nameH = narrow ? 40 : 60;
         card.AddChild(UiKit.MakeLabel(curio.Name, narrow ? 16 : 24, owned ? Palette.Muted : Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Wrapped().Place(10, 100, CardW - 20, nameH));
-        card.AddChild(UiKit.MakeLabel(Curios.RarityName(curio.Rarity), 16, color, HorizontalAlignment.Center).Place(0, 100 + nameH, CardW, 20));
+        card.AddChild(UiKit.MakeLabel($"{Curios.RarityName(curio.Rarity)}: {Curios.Tags(curio)}", 16, color, HorizontalAlignment.Center)
+            .Place(0, 100 + nameH, CardW, 20));
         card.AddChild(UiKit.MakeLabel(curio.Blurb, 16, Palette.Muted, HorizontalAlignment.Center).Wrapped()
-            .Place(14, 124 + nameH, CardW - 28, CardH - 60 - 124 - nameH));
+            .Place(14, 124 + nameH, CardW - 28, CardH - 84 - 124 - nameH));
+        // What it goes with: a curio you keep that shares a way of trading with it.
+        if (!owned && State.OwnedCurios.FirstOrDefault(c => c.Tags.Intersect(curio.Tags).Any()) is CurioDef kin)
+            card.AddChild(UiKit.MakeLabel($"Goes with your {kin.Name}", 16, Palette.Good, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
         if (owned)
         {
             card.AddChild(UiKit.MakeLabel("Yours", 24, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, CardH - 50, CardW, 30));

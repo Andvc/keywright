@@ -70,12 +70,12 @@ public static class Hints
         // The run: the Guild's dues, curios, commissions, events.
         ["dues"] = "Paid. Next week the Guild wants more, and more the week after. Whatever you spend on the shop has to " +
                    "earn its keep before Vane comes back.",
-        ["peddler"] = "Nim sells curios: oddments from the Locking that each bend one rule of the trade. You've room for three. " +
-                      "Nim's prices climb each week, like the Guild's, so a good one is cheapest now. Don't ask what Nim is.",
+        ["peddler"] = "Nim sells curios: oddments from the Locking that each bend one rule of the trade. You've room for three, so " +
+                      "pick ones that go together. Nim asks a share of what's in your purse, rich or poor. Don't ask what Nim is.",
         ["commissions"] = "Regulars want things now: see the board on the left. When something they want comes out of a chest, " +
                           "hand it over instead of selling it. A commission pays far more than a sale.",
         ["deliver"] = "Someone wants this! Deliver it for the commission, or sell it as usual.",
-        ["event"] = "Something's happening in town today: two days a week are different. It's up in the top bar (click it to read it " +
+        ["event"] = "Something's happening in town today: a day or two every week is different. It's up in the top bar (click it to read it " +
                     "again), and your ledger's calendar shows what's coming this week and next.",
         ["stranger"] = "The Stranger. That chest's wrapped in iron chains: nothing inside can move, so there's nothing to hear. " +
                        "Drop it to feel how heavy it is. Heavy ones hold more.",

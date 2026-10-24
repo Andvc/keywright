@@ -22,14 +22,16 @@ public static class Strategy
     public static Shake[] Levels(Visit visit, GameState state = null)
     {
         bool hard = (state?.CanShakeHardAt(visit.Seller) ?? !visit.Seller.Packhorse) && !(state?.MindsHardShake(visit.Seller) ?? visit.Seller.HatesHardShake);
+        // Through an ear trumpet nothing is drowned out or muffled: a hard shake hears it all.
+        if (visit.Chest.Unmasked && hard) return new[] { Shake.Hard };
         if (visit.Seller.ShakeLimit > 0) return new[] { DelicateShare(visit) > 0.5f ? Shake.Gentle : hard ? Shake.Hard : Shake.Firm };
-        if (visit.Chest.Packed) return hard ? new[] { Shake.Firm, Shake.Hard } : new[] { Shake.Firm };
+        if (visit.Chest.Packed && !visit.Chest.Unmasked) return hard ? new[] { Shake.Firm, Shake.Hard } : new[] { Shake.Firm };
         if (!hard) return new[] { Shake.Gentle, Shake.Firm };
         return Rushed(visit, state) || visit.Seller.ShakeFee > 0 ? new[] { Shake.Gentle, Shake.Hard } : Every;
     }
 
     /// <summary>The gentlest shake that stirs this kind in this chest (straw muffles a strength; 4: never).</summary>
-    static int Needs(Visit visit, Category kind) => (int)Categories.Get(kind).StirsAt + (visit.Chest.Packed ? 1 : 0);
+    static int Needs(Visit visit, Category kind) => (int)Categories.Get(kind).StirsAt + (visit.Chest.Packed && !visit.Chest.Unmasked ? 1 : 0);
 
     /// <summary>Whether the shaking so far could have stirred this kind (it might still be drowned out).</summary>
     static bool CouldStir(Visit visit, Hearing hearing, Category kind) => Every.Any(l => hearing.HasTried(l, false) && (int)l >= Needs(visit, kind));
@@ -38,7 +40,7 @@ public static class Strategy
     /// Whether a clank may have drowned out something delicate: weapons sounded, and no strength was tried that stirs
     /// delicate things but not weapons (gently, or firmly through straw), nor with the magnet holding the iron still.
     /// </summary>
-    static bool MaybeDrowned(Visit visit, Hearing hearing) => hearing.HeardAny(Category.Arms) &&
+    static bool MaybeDrowned(Visit visit, Hearing hearing) => !visit.Chest.Unmasked && hearing.HeardAny(Category.Arms) &&
         !Every.Any(l => (int)l >= Needs(visit, Category.Coins) && (hearing.HasTried(l, true) || (hearing.HasTried(l, false) && (int)l < Needs(visit, Category.Arms))));
 
     /// <summary>Every kind at this shop could have been stirred, and nothing delicate drowned out: what sounded is all there is, but a false bottom.</summary>
@@ -229,13 +231,14 @@ public static class Strategy
     /// A haggler's first answer: about half their asking price, never more than the chest is worth to you. When they ask
     /// you to name a price: half what it's worth to you, or just a few coins to someone who has no idea.
     /// </summary>
-    public static int FirstOffer(Visit visit, int worth) => visit.Trade switch
+    /// <param name="floor">How much further than usual sellers come down for this shop (a silver tongue, a Haggler's name: <see cref="Boosts.Floor"/>).</param>
+    public static int FirstOffer(Visit visit, int worth, float floor = 1) => visit.Trade switch
     {
         // A haggler who'll hear you out (a merchant's signet) can be tried with a cheeky offer first.
-        Trade.Haggle when visit.HearsOut && visit.OffersMade == 0 => Money.Round(Math.Min(visit.Ask * 0.3f, worth * 0.8f)),
-        Trade.Haggle => Money.Round(Math.Min(visit.Ask * 0.55f, worth * 0.8f)),
-        _ when visit.Seller.Judge == Judgment.Clueless => Money.Round(Math.Min(worth * 0.5f, visit.Seller.Tier * 4)),
-        _ => Money.Round(Math.Max(1, worth * 0.5f)),
+        Trade.Haggle when visit.HearsOut && visit.OffersMade == 0 => Money.Round(Math.Min(visit.Ask * 0.3f, worth * 0.8f) * floor),
+        Trade.Haggle => Money.Round(Math.Min(visit.Ask * 0.55f, worth * 0.8f) * floor),
+        _ when visit.Seller.Judge == Judgment.Clueless => Money.Round(Math.Min(worth * 0.5f, visit.Seller.Tier * 4) * floor),
+        _ => Money.Round(Math.Max(1, worth * 0.5f * floor)),
     };
 
     /// <summary>
@@ -248,7 +251,7 @@ public static class Strategy
     public static int Worth(Visit visit, Appraisal slip, Hearing hearing, GameState state = null)
     {
         var seller = visit.Seller;
-        if (state != null) slip.Sale ??= state.SaleRate;
+        if (state != null) slip.Model ??= state;
         float worth = slip.LikelyWorth() + (state == null ? 0 : CommissionWorth(state, slip));
         // A scale (Hesk's, or Wenna's word for hers) has already accounted for what couldn't be heard, and the Bookkeeping
         // Engine for everything.
@@ -260,11 +263,13 @@ public static class Strategy
         bool drowned = !Recorded(visit, state) && MaybeDrowned(visit, hearing);
         foreach (var kind in Categories.UpTo(slip.Tier).Where(k => slip.Count(k.Category) == 0))
             if ((!CouldStir(visit, hearing, kind.Category) && !weighed) || (kind.Delicate && drowned))
-                worth += likely[(int)kind.Category] / total * 2.5f * Categories.Expected(kind.Category, slip.Chest) * 0.8f;
+                worth += likely[(int)kind.Category] / total * 2.5f * (state?.Unnamed(kind.Category, slip.Chest) ?? Categories.Expected(kind.Category, slip.Chest)) * 0.8f;
         // Pell's ticket settles a false bottom once everything has been heard; so does a scale.
         bool counted = Counted(visit, state) && HeardAll(visit, hearing, slip.Tier);
         if (!hearing.Dropped && !slip.Hidden && slip.Tier >= 2 && !weighed && !counted)
             worth += seller.HiddenChance * slip.HiddenValue;
+        // A fence's mark sells a fake for what the real thing would fetch: what was caught out is worth having after all.
+        if (state?.HasCurio("mark") ?? false) worth += hearing.Spotted().Sum(k => Categories.Expected(k, slip.Chest) * state.SaleMultiplier(k));
         worth *= 1 + seller.QualityBoost * 1.2f;
         // A knight's claim on the family arms: the best of them goes for his fee. A devil's: the dearest thing, for nothing.
         if (seller.Heirloom is Category heirloom && slip.Count(heirloom) > 0)
@@ -295,7 +300,7 @@ public static class Strategy
     const float GazeBuys = 0.4f;
 
     /// <summary>When they want more than your first offer: most of what it's worth to you.</summary>
-    public static int SecondOffer(int worth) => Money.Round(Math.Max(1, worth * 0.85f));
+    public static int SecondOffer(int worth, float floor = 1) => Money.Round(Math.Max(1, worth * 0.85f * floor));
 
     /// <summary>
     /// What the commissions add to a chest: for each one the slip's kinds could fill, the chance one of them is good
@@ -355,42 +360,97 @@ public static class Strategy
     /// </summary>
     static int Saving(GameState state) => Upgrades.Available(state).FirstOrDefault(u => u.IsRenovation) is Upgrade next ? state.Cost(next) : 0;
 
-    /// <summary>A careful player's taste in curios, best first.</summary>
-    public static readonly string[] CurioOrder =
+    /// <summary>
+    /// About what each curio adds to a careful player's run on its own, in hundredths of what the run takes in (the
+    /// sim's builds report, `--sim=builds`): where to start. What it's worth to a particular shop is <see cref="CurioScore"/>.
+    /// </summary>
+    public static readonly Dictionary<string, float> CurioWorth = new()
     {
-        "clover", "coin", "dome", "letter", "book", "gloves", "jar", "signet", "shell", "gauntlet", "cap", "oil", "catalogue", "lantern",
-        "hook", "draught", "watch", "crate", "knife", "purse", "ticket", "marker", "loupe",
+        ["coin"] = 13, ["shell"] = 4, ["foot"] = 8, ["wishbone"] = 16, ["horseshoe"] = 15, ["token"] = 8, ["clover"] = 30, ["star"] = 30,
+        ["trumpet"] = 2, ["crescent"] = 12, ["seal"] = 16, ["beads"] = 2, ["monocle"] = 2, ["fork"] = 20, ["ledger"] = 28,
+        ["signet"] = 2, ["tongue"] = 3, ["hourglass"] = 16, ["bell"] = 16, ["coffer"] = 12,
+        ["lantern"] = 14, ["queue"] = 18, ["horn"] = 12, ["guestbook"] = 14,
+        ["catalogue"] = 5, ["dome"] = 4, ["book"] = 12, ["rope"] = 5, ["lamps"] = 14,
+        ["gauntlet"] = 5, ["cap"] = 4, ["whetstone"] = 6, ["dummy"] = 6, ["scales"] = 17, ["still"] = 9, ["desk"] = 3, ["wheel"] = 15,
+        ["hook"] = 14, ["crate"] = 1, ["rod"] = 14, ["pillow"] = 17, ["wardkey"] = 24,
+        ["draught"] = 11, ["aether"] = 11, ["ring"] = 14,
+        ["oil"] = 4, ["knife"] = 1, ["gloves"] = 2,
+        ["loupe"] = 1, ["mark"] = 10,
+        ["purse"] = 1, ["ticket"] = 1, ["jar"] = 15, ["marker"] = 1, ["lockbox"] = 12,
+        ["letter"] = 11, ["ribbon"] = 8, ["errand"] = 3,
+        ["watch"] = 2, ["net"] = 18,
     };
 
-    /// <summary>What a careful player never buys: a gamble, and a curse.</summary>
-    static readonly string[] Shuns = { "token", "crescent" };
-
-    static int Rank(string key) => Array.IndexOf(CurioOrder, key) is var i and >= 0 ? i : CurioOrder.Length;
+    /// <summary>A cursed crescent holds everything to its chest's colour: luck is wasted beside it, and it on luck.</summary>
+    const float Cursed = 15f;
 
     /// <summary>
-    /// What to buy from Nim: the best curio on offer that leaves enough for the Guild, if there's room, or if it's much
-    /// better than the worst one owned (which goes back to Nim for half). Returns the curio and the one to sell, or nulls.
+    /// What a careful player sees in a curio that shares a way of trading with one they keep: it's worth more together, by
+    /// this share of its own worth for each (a weak curio doesn't become a strong one by having company).
     /// </summary>
-    public static (CurioDef Buy, string Sell) ChooseCurio(GameState state, IEnumerable<CurioDef> stock)
+    const float Kindred = 0.3f;
+
+    /// <summary>How much a careful player building around one way of trading (the sim's builds) wants curios for it.</summary>
+    const float Focused = 12f;
+
+    /// <summary>
+    /// What a curio is worth to this shop, now: its own worth, less if the shop can't use it yet (a display curio without
+    /// a display, a trade's curio for a kind it doesn't see), more for each curio kept that shares a way of trading with
+    /// it (<see cref="Kindred"/>), less beside a cursed crescent if it's luck, and much more for the way of trading a
+    /// build is about (<paramref name="focus"/>).
+    /// </summary>
+    public static float CurioScore(GameState state, CurioDef curio, CurioTag? focus = null, string without = null)
     {
-        // The Visitors' Book is no use without an exhibition.
-        var wanted = stock.Where(c => !state.HasCurio(c.Key) && !Shuns.Contains(c.Key) && (c.Key != "book" || state.Exhibition >= 10))
-            .OrderBy(c => Rank(c.Key));
-        foreach (var curio in wanted)
+        float score = CurioWorth.GetValueOrDefault(curio.Key, 3);
+        bool display = state.DisplayOpen || state.DisplaySlots > 0;
+        score *= curio.Key switch
+        {
+            "book" => state.Exhibition >= 10 ? 1 : 0.2f,
+            "rope" or "lamps" or "dome" => display ? 1 : 0.3f,
+            "letter" or "ribbon" or "errand" => state.Week >= Patrons.FromWeek - 1 ? 1 : 0.5f,
+            "catalogue" => state.Week <= 3 ? 1 : 0.4f,
+            "watch" => state.Tier >= 4 ? 1 : 0.5f,
+            _ => 1,
+        };
+        if (curio.Kind is Category kind && Categories.Get(kind).Tier > state.Tier) score *= 0.3f;
+        var kept = state.OwnedCurios.Where(c => c.Key != curio.Key && c.Key != without).ToList();
+        score *= 1 + Kindred * kept.Count(c => c.Tags.Intersect(curio.Tags).Any());
+        if (curio.Key == "crescent") score -= Cursed * kept.Count(c => c.Has(CurioTag.Luck));
+        else if (curio.Has(CurioTag.Luck) && kept.Any(c => c.Key == "crescent")) score -= Cursed;
+        // A trade's curio goes with the shop's name for that kind (a smith's, a tailor's...).
+        if (curio.Kind is Category trade && state.ActiveSynergies.Any(s => Synergies.All.First(d => d.Key == s).Kinds.Contains(trade))) score *= 1 + Kindred;
+        if (focus is CurioTag f && curio.Has(f)) score += Focused;
+        return score;
+    }
+
+    /// <summary>
+    /// What to buy from Nim: the curio on offer worth most to this shop (<see cref="CurioScore"/>) that leaves enough for
+    /// the Guild, if there's room, or if it's clearly better than the least useful one kept (which goes back to Nim for
+    /// half). Returns the curio and the one to sell, or nulls.
+    /// </summary>
+    public static (CurioDef Buy, string Sell) ChooseCurio(GameState state, IEnumerable<CurioDef> stock, CurioTag? focus = null)
+    {
+        var wanted = stock.Where(c => !state.HasCurio(c.Key)).Select(c => (Curio: c, Score: CurioScore(state, c, focus)))
+            .Where(c => c.Score > 0).OrderByDescending(c => c.Score);
+        foreach (var (curio, score) in wanted)
         {
             int price = state.CuriosPrice(curio);
             string sell = null;
             if (state.CuriosFull)
             {
-                var worst = state.CurioKeys.OrderByDescending(Rank).First();
-                if (Rank(worst) - Rank(curio.Key) < 4) continue;
+                var (worst, least) = state.OwnedCurios.Select(c => (c.Key, Score: CurioScore(state, c, focus, curio.Key))).OrderBy(c => c.Score).First();
+                if (score - least < 4) continue;
                 sell = worst;
                 price -= state.CurioValue(worst);
             }
-            if (state.Gold - price >= Reserve(state) + Saving(state) || price == 0) return (curio, sell);
+            // A curio is priced at a share of the purse, so it never waits on saving for the next move: only on the Guild.
+            if (state.Gold - price >= Reserve(state) || price == 0) return (curio, sell);
         }
         return (null, null);
     }
+
+    /// <summary>The curio a careful player would part with first: the least use to the shop.</summary>
+    static IEnumerable<string> LeastUseFirst(GameState state) => state.OwnedCurios.OrderBy(c => CurioScore(state, c)).Select(c => c.Key);
 
     /// <summary>What to pawn when short, cheapest loss first: displayed things, then curios. Null when it's hopeless.</summary>
     public static List<object> PawnOrder(GameState state)
@@ -404,7 +464,7 @@ public static class Strategy
             order.Add(item);
             gold += state.PawnValue(item);
         }
-        foreach (var key in state.CurioKeys.OrderByDescending(Rank))
+        foreach (var key in LeastUseFirst(state).ToList())
         {
             if (gold >= state.DueNow) break;
             order.Add(key);

@@ -101,7 +101,7 @@ public partial class CounterPhase : Phase
     {
         _visit = State.Current;
         // Valued at what things fetch here: the shop's trades and name, the day.
-        _slip = new Appraisal(_visit, State.Tier) { Sale = State.SaleRate };
+        _slip = new Appraisal(_visit, State.Tier) { Model = State };
         _patience = State.Patience(_visit.Seller);
         Add(UiKit.MakeShop(State.Tier, 0.92f));
         BuildShelf();
@@ -151,6 +151,7 @@ public partial class CounterPhase : Phase
         Note(ChestNote());
         if (State.Terms(_visit) is string terms) Note(terms);
         if (_visit.Clue != null) Note(_visit.Clue);
+        if (_visit.PriceNote != null) Note(_visit.PriceNote);
         if (State.Shows(Heartsongs.Bell)) TollBell(Market.ArticleCount(_visit.Chest));
         if (State.Has(Upgrades.Engine)) Record();
         Refresh();
@@ -293,14 +294,15 @@ public partial class CounterPhase : Phase
     {
         bool firstOfDay = State.Today.Bought + State.Today.Passed == 0;
         bool met = State.Meet(_visit.Seller);
-        if (State.Day == 1 && State.Tier == 1 && State.GivesLessons)
+        // The scripted first day, and Mags opening the second (passing).
+        if (State.Tier == 1 && State.GivesLessons && (State.Day == 1 || (State.Day == 2 && firstOfDay && State.FirstDayScripted)))
         {
             Teach(_visit.Seller.Key == "tam" ? "intro" : $"first_{_visit.Seller.Key}");
             return;
         }
         // Everyone else gets a word about their own way with a chest, the first morning.
         if (!State.Is(Characters.Kit)) Teach($"kin_{State.Character}");
-        if (firstOfDay && State.Day == 2) Teach("colours");
+        if (State.Day == 2) Teach("colours");
         if (!firstOfDay && State.Day >= 2) Teach("ledger");
         if (State.Day >= 2 && _visit.Origin != null && _visit.Seller.Stories.Count > 0) Teach("story");
         // Someone whose clue can point at a warded thing: what a ward is, and how to name what's in it.
@@ -421,12 +423,28 @@ public partial class CounterPhase : Phase
 
     void BuildQueue()
     {
+        BuildCurios();
         if (State.Queue.Count == 0) return;
         Add(UiKit.MakeLabel("Waiting", 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
         for (int i = 0; i < Math.Min(7, State.Queue.Count); i++)
         {
             var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1));
             face.Modulate = new Color(0.8f, 0.8f, 0.85f);
+        }
+    }
+
+    /// <summary>Your curios, on the counter beside the queue: what's working for you today (hover for what each does).</summary>
+    void BuildCurios()
+    {
+        var curios = State.OwnedCurios.ToList();
+        if (curios.Count == 0) return;
+        const float x0 = 330;
+        Add(UiKit.MakeLabel("Curios", 16, Palette.Magic, outline: 4).Place(x0, 616, 120, 20));
+        for (int i = 0; i < curios.Count; i++)
+        {
+            var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = $"{curios[i].Name}: {curios[i].Blurb}" }
+                .Place(x0 + i * 40, 642, 36, 36));
+            spot.AddChild(UiKit.MakeCurioIcon(curios[i], new Vector2(18, 18)));
         }
     }
 

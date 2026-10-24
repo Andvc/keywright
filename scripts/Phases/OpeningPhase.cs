@@ -89,9 +89,11 @@ public partial class OpeningPhase : Phase
             y += 22;
         }
         // Kept to the tally's width, clear of the profit stamp.
-        if (_purchase.Luck != null)
-            tally.AddChild(UiKit.MakeLabel(Curios.LuckLine(_purchase.Luck, _purchase.Improved), 16, Palette.Good, outline: 4).Wrapped()
-                .Place(40, y, 280, 44));
+        foreach (var (curio, changed) in _purchase.Luck.Take(3))
+        {
+            tally.AddChild(UiKit.MakeLabel(Curios.LuckLine(curio, changed), 16, Palette.Good, outline: 4).Wrapped().Place(40, y, 280, 44));
+            y += 46;
+        }
     }
 
     public override void _Process(double delta)
@@ -523,7 +525,7 @@ public partial class OpeningPhase : Phase
         if (item.IsSong) Game.NoteSongs();
         // The seller's claim (a knight's heirloom, a devil's due) goes back to them, for what they pay for it.
         bool claimed = _purchase.IsClaimed(item);
-        int worth = claimed ? _purchase.ClaimPays : State.SaleValue(item, _purchase.Grade);
+        int worth = claimed ? _purchase.ClaimPays : State.SaleValue(item, _purchase.Grade, _purchase);
         _landed.Add((item, at, worth));
         if (claimed)
         {
@@ -661,10 +663,10 @@ public partial class OpeningPhase : Phase
         int settle = State.Settle(_purchase, perfect, _worth);
         _worth += settle;
         // A keen eye's fee for a perfect read.
-        int fee = perfect ? State.KeenFee(_worth) : 0;
+        int fee = perfect ? State.PerfectFee(_worth) : 0;
         int held = _worth;
         _worth += fee;
-        int profit = _worth - _purchase.Paid;
+        int profit = _worth - _purchase.Paid + _purchase.Rebate;
         State.Earn(_worth);
         State.RecordRead(perfect);
         if (perfect) State.Today.PerfectReads++;
@@ -719,7 +721,8 @@ public partial class OpeningPhase : Phase
             _ => "",
         };
         grade += Terms(visit, perfect, settle);
-        if (fee > 0) grade += $" Keen Eye: a valuer's fee of {fee}g.";
+        if (fee > 0) grade += $" A perfect read: a valuer's fee of {fee}g.";
+        if (_purchase.Rebate > 0) grade += $" Haggler's Purse: {_purchase.Rebate}g back.";
         Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 64));
         bool last = State.Queue.Count == 0;
         Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? "Go on" : last ? "Close up for the day" : "Next customer", Palette.Gold, 24, Next)
@@ -727,7 +730,7 @@ public partial class OpeningPhase : Phase
         foreach (var (item, at, worth) in _landed)
             if (State.DisplayOpen || item.IsSong) AddKeepButton(item, at, worth);
         foreach (var (item, at, worth) in _landed) AddDeliverButton(item, at, worth);
-        if (_purchase.Luck != null)
+        if (_purchase.Luck.Count > 0)
         {
             Sfx.Play("chime", 1.2f, -4);
             Game.Moment("08_luck", 0.3);
