@@ -72,8 +72,8 @@ public static class Curios
     /// <summary>Room for this many curios, more with a curio case.</summary>
     public const int Slots = 3;
 
-    /// <summary>Nim's first visit is in the second week.</summary>
-    public const int FirstWeek = 2;
+    /// <summary>Nim comes every week, from the first (its third day).</summary>
+    public const int FirstWeek = 1;
 
     /// <summary>A curio's price as a share of the week's due: about what it's worth to a shop that's keeping up.</summary>
     static float Share(CurioRarity rarity) => rarity switch

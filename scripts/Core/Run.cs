@@ -327,7 +327,7 @@ public sealed partial class GameState
     }
 
     /// <summary>The day of the week Nim comes by this week (0: not this week).</summary>
-    public int PeddlerDay { get; private set; }
+    public int PeddlerDay => Plan?.Peddler ?? 0;
 
     public bool PeddlerToday => PeddlerDay > 0 && DayOfWeek == PeddlerDay;
 
@@ -404,7 +404,9 @@ public sealed partial class GameState
 
     /// <summary>What today's event does to the price of a thing of this kind.</summary>
     float EventSales(Category kind) => (EventIs("festival") ? Events.FestivalSales : 1) *
-                                       (EventIs("buyer") && kind == BuyerKind ? Events.BuyerSales : 1);
+                                       (EventIs("buyer") && kind == BuyerKind ? Events.BuyerSales : 1) *
+                                       (EventIs("tourney") && kind is Category.Arms or Category.Garb ? Events.TourneySales : 1) *
+                                       (EventIs("assessor") ? Events.AssessorSales : 1);
 
     /// <summary>What a fake sells for: nothing much, unless a jeweller's loupe knows good paste from a bag of sand.</summary>
     float FakeValue(Item item) => HasCurio("loupe") && item.Category is Category.Coins or Category.Gems
@@ -457,53 +459,62 @@ public sealed partial class GameState
 
     // ---- Events ----
 
-    /// <summary>This week's event and the day of the week it happens.</summary>
-    public string WeekEvent { get; private set; }
-    public int EventDay { get; private set; }
+    /// <summary>This week's plan (its events, the kind wanted, Nim's day) and next week's, made a week ahead.</summary>
+    public WeekPlan Plan { get; private set; }
+    public WeekPlan NextPlan { get; private set; }
 
-    /// <summary>The kind the Royal Buyer pays double for.</summary>
-    public Category BuyerKind { get; private set; }
+    /// <summary>The kind the Crown's buyer pays double for (or the crier's reward is for) this week.</summary>
+    public Category BuyerKind => Plan?.Wanted ?? Category.Coins;
 
     readonly List<string> _eventsSeen = new();
 
-    public EventDef TodayEvent => WeekEvent != null && EventDay > 0 && DayOfWeek == EventDay ? Events.Get(WeekEvent) : null;
+    /// <summary>The plan for a week, if it's been made yet (this week's and next week's have).</summary>
+    public WeekPlan PlanFor(int week) => Plan?.Week == week ? Plan : NextPlan?.Week == week ? NextPlan : null;
+
+    /// <summary>A day's number, from its week and its day of the week.</summary>
+    public static int DayNumber(int week, int dayOfWeek) => (week - 1) * Guild.DaysPerWeek + dayOfWeek;
+
+    /// <summary>The next day Nim comes by after today, or 0 if that isn't planned yet.</summary>
+    public int NextPeddler => Plan != null && Plan.Week == Week && Plan.Peddler > DayOfWeek ? DayNumber(Week, Plan.Peddler)
+        : NextPlan != null && NextPlan.Week > Week ? DayNumber(NextPlan.Week, NextPlan.Peddler) : 0;
+
+    public EventDef TodayEvent => Day <= 0 ? null : ForcedEvent != null ? Events.Find(ForcedEvent)
+        : Plan?.On(DayOfWeek) is string key ? Events.Find(key) : null;
+
+    /// <summary>For checking an event's screens (the bot's --event): it happens every day.</summary>
+    public string ForcedEvent { get; set; }
 
     public bool EventIs(string key) => TodayEvent?.Key == key;
 
     int EventCustomers => EventIs("market") ? Events.MarketCustomers : EventIs("storm") ? Events.StormCustomers : 0;
 
     /// <summary>
-    /// A new week: last week's commissions lapse; from the second week, the regulars ask for things, the Hooded Woman
-    /// for hers, an event is set for one day and Nim for another. All from the seed, so a saved shop gets the same week.
+    /// A new week: last week's commissions lapse; from the second week, the regulars ask for things and the Hooded Woman
+    /// for hers. Last week's plan for this one comes due (Nim's day and the events), and next week's is made. All from
+    /// the seed, so a saved shop gets the same week.
     /// </summary>
     void StartWeek()
     {
         var rng = new Random(unchecked(Seed * 104729 + Week * 7907));
         Commissions.Clear();
-        WeekEvent = null;
-        EventDay = 0;
-        PeddlerDay = 0;
         _snubbed.Clear();
+        Plan = NextPlan?.Week == Week ? NextPlan : Events.Plan(Seed, Week, Tier, _eventsSeen);
+        NextPlan = Events.Plan(Seed, Week + 1, Tier, _eventsSeen);
         if (Week < 2) return;
 
         BramPiece = true;
         Commissions.AddRange(Patrons.Roll(rng, this));
         if (!MapGiven && Week <= Guild.Weeks && HoodPieces < Story.Pieces - 1 && HoodPieces < HoodScheduled(Week))
             Commissions.Insert(0, Patrons.Hood(HoodPieces + 1, Tier));
-
-        var e = Events.Pick(rng, Tier, _eventsSeen);
-        WeekEvent = e.Key;
-        // The first event comes later in its week: that week's first morning already brings Nim and the commissions.
-        EventDay = rng.Next(Week == Events.FromWeek ? 3 : 1, Guild.DaysPerWeek + 1);
-        var kinds = Categories.UpTo(Tier).Select(c => c.Category).ToArray();
-        BuyerKind = rng.PickOne(kinds);
-        // Nim's first visit is the morning after the Guild's first: something new just when the shop's found its feet.
-        PeddlerDay = Week == 2 ? 1 : rng.Next(1, Guild.DaysPerWeek);
     }
 
-    /// <summary>Today's event, if it brings someone: the Stranger joins the queue, or one chest is gilded.</summary>
+    /// <summary>
+    /// Today's event, if it brings someone or something: the Stranger joins the queue, one chest is gilded, the crier
+    /// posts a reward, or every seller tells you a dream, a riddle or a clerk's tally.
+    /// </summary>
     void StageEvent()
     {
+        Commissions.RemoveAll(c => c.Lapses > 0 && c.Lapses < Day);
         if (EventIs("stranger"))
             Queue.Insert(Rng.Next(1, Queue.Count + 1), Sing(Events.StrangerVisit(Rng, Tier)));
         if (EventIs("gilded"))
@@ -515,6 +526,9 @@ public sealed partial class GameState
                 Queue[index] = Events.Gild(Rng, visit);
             }
         }
+        if (EventIs(Events.Crier)) Commissions.Add(Events.Reward(BuyerKind, Tier, Day));
+        if (TodayEvent is { Key: "dreaming" or "wardens" or "census" } e)
+            for (int i = 0; i < Queue.Count; i++) Queue[i] = Events.Restate(Rng, Queue[i], e.Key, Tier);
     }
 
     // ---- Each night ----

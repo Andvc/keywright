@@ -12,6 +12,11 @@ namespace Keywright.Core;
 /// tight and never rattles, but the hollow booms if the chest is dropped. A chest packed in straw (a smuggler's) muffles
 /// everything a strength: each thing stirs only at the next strength up, and soft things not at all. A Heartsong sings at the gentlest shake and
 /// nothing drowns it out or stills it, but only a Keywright hears it: no seller ever does (<see cref="SellerDef.Notices"/>).
+/// <para>
+/// A warded thing (<see cref="Warded"/>) is sealed in the ward itself: it makes no sound, weighs nothing, and isn't under
+/// any false bottom. The ward gives it up only to a Keywright who names it truly (<see cref="Names"/>), so the only way
+/// to know it's there is a clue from whoever brought the chest.
+/// </para>
 /// </summary>
 public sealed class Chest
 {
@@ -41,8 +46,53 @@ public sealed class Chest
 
     public string Skin => Sealed ? "black" : Gilded ? "gold" : Categories.ChestSkin(Quality);
 
-    /// <summary>Everything, including what's under the false bottom.</summary>
+    /// <summary>Everything, including what's under the false bottom (a warded thing only once the ward has given it up).</summary>
     public IEnumerable<Item> Everything => Hidden == null ? _items : _items.Append(Hidden);
+
+    /// <summary>
+    /// A thing sealed in the ward itself, or null: when the Locking was sung, owners could ward their dearest thing into
+    /// it. It makes no sound and weighs nothing; the ward gives it up only to a Keywright who names it. Nobody prices it.
+    /// </summary>
+    public Item Warded { get; private set; }
+
+    /// <summary>The warded thing the ward gave up when the chest was opened (now one of <see cref="Items"/>), or null.</summary>
+    public Item Unwarded { get; private set; }
+
+    /// <summary>Everything that's really in it: <see cref="Everything"/> and a warded thing still sealed.</summary>
+    public IEnumerable<Item> All => Warded == null ? Everything : Everything.Append(Warded);
+
+    /// <summary>Seals a thing in the ward (when the chest is packed).</summary>
+    public void Ward(Item item) => Warded = item;
+
+    /// <summary>Takes a thing out (a bride's dowry thing, to ward it instead).</summary>
+    public void Remove(Item item) => _items.Remove(item);
+
+    /// <summary>
+    /// Whether a slip names the warded thing truly: one more of its kind marked than there is to hear (a false bottom
+    /// never counts: it's elsewhere), and nothing marked that isn't there. A ward opens only to the truth: name something
+    /// that isn't inside, and it stays shut.
+    /// </summary>
+    public bool Names(Appraisal slip)
+    {
+        if (Warded == null) return false;
+        foreach (var kind in Categories.All.Select(c => c.Category))
+        {
+            int there = _items.Count(i => i.Category == kind) + (kind == Warded.Category ? 1 : 0);
+            if (slip.Count(kind) > there) return false;
+        }
+        return slip.Count(Warded.Category) > _items.Count(i => i.Category == Warded.Category) && (!slip.Hidden || Hidden != null);
+    }
+
+    /// <summary>The chest is opened on this slip: if it names the warded thing, the ward gives it up. Returns whether it did.</summary>
+    public bool Open(Appraisal slip)
+    {
+        if (!Names(slip)) return false;
+        Unwarded = Warded;
+        _items.Add(Warded);
+        _items.Sort((a, b) => a.Category.CompareTo(b.Category));
+        Warded = null;
+        return true;
+    }
 
     public int Value => Everything.Sum(i => i.Value);
 

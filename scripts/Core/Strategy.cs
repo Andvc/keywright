@@ -83,8 +83,9 @@ public static class Strategy
     public static bool ShouldUseMagnet(Visit visit, Hearing hearing, GameState state) => MagnetLevels(visit, hearing, state).Length > 0;
 
     /// <summary>
-    /// What a careful player ticks on faith when they couldn't shake hard enough to hear it: a soft kind the seller
-    /// usually brings, or the place holds (Brother Ansel's crypt vestments). Their habit is in the ledger.
+    /// What a careful player ticks when they couldn't shake hard enough to hear it: a soft kind the seller says they
+    /// heard (always true: Gerda shakes hard on a day of mourning), else on faith, one the seller usually brings or the
+    /// place holds (Brother Ansel's crypt vestments). Their habit is in the ledger.
     /// </summary>
     public static void OnFaith(Visit visit, Appraisal slip, Hearing hearing, GameState state = null)
     {
@@ -92,38 +93,66 @@ public static class Strategy
         var likely = Likely(visit);
         float total = likely.Sum();
         foreach (var kind in Categories.UpTo(slip.Tier).Where(k => k.StirsAt == Shake.Hard && slip.Count(k.Category) == 0 && !CouldStir(visit, hearing, k.Category)))
-            if (likely[(int)kind.Category] / total >= FaithShare) slip.Set(kind.Category, 1);
+            if (visit.Claim.Contains(kind.Category) || likely[(int)kind.Category] / total >= FaithShare) slip.Set(kind.Category, 1);
     }
 
     /// <summary>The Bookkeeping Engine read this chest (it can't through chains).</summary>
     public static bool Recorded(Visit visit, GameState state) => (state?.Has(Upgrades.Engine) ?? false) && !visit.Chest.Sealed;
 
     /// <summary>Someone counted what's inside, false bottom and all: Pell's ticket, or the Drowned Bell.</summary>
-    static bool Counted(Visit visit, GameState state) => visit.Seller.States == Clue.Articles || (state?.Shows(Heartsongs.Bell) ?? false);
+    static bool Counted(Visit visit, GameState state) => visit.Says is Clue.Articles or Clue.Tally || (state?.Shows(Heartsongs.Bell) ?? false);
 
     /// <summary>A scale has accounted for what couldn't be heard: Hesk's, or Wenna's (she says what hers read).</summary>
-    static bool Weighed(Visit visit, GameState state) => (state?.Weighs ?? false) || visit.Seller.States == Clue.Pounds;
+    static bool Weighed(Visit visit, GameState state) => (state?.Weighs ?? false) || visit.Says == Clue.Pounds;
 
     /// <summary>
     /// A careful read of what the seller said besides what they heard. A weight (Wenna's game scale, or Hesk's) accounts
     /// for what couldn't be heard; Pell's ticket counts every article, so once everything has been heard, one more is
-    /// under a false bottom; Mother Bramble dreams of the dearest thing inside, so if it never sounded, it's under one.
+    /// under a false bottom; a clue that points at a warded thing (<see cref="WardedKind"/>) gets it named: one more of
+    /// its kind on the slip.
     /// </summary>
     public static void Reckon(Appraisal slip, Hearing hearing, Visit visit, GameState state = null)
     {
         if (Weighed(visit, state)) Weigh(slip, hearing, visit, state);
         else if (Counted(visit, state) && HeardAll(visit, hearing, slip.Tier))
             slip.Hidden = Market.ArticleCount(visit.Chest) > slip.Marked.Where(k => k != Category.Heartsong).Sum(slip.Count) + hearing.Spotted().Count();
-        else if (visit.Seller.States == Clue.Dream)
-        {
-            if (Market.Dearest(visit.Chest) is not Item dearest) slip.Hidden = false;
-            else if (slip.Count(dearest.Category) == 0 && HeardAll(visit, hearing, slip.Tier)) slip.Hidden = true;
-        }
+        if (WardedKind(visit, slip, hearing) is Category warded) slip.Set(warded, slip.Count(warded) + 1, slip.Magic(warded));
         // The Imp's Ember burns every fake true: what was caught out counts after all.
         if (state?.Shows(Heartsongs.Ember) ?? false)
             foreach (var kind in hearing.Spotted().GroupBy(k => k))
                 slip.Set(kind.Key, slip.Count(kind.Key) + kind.Count(), slip.Magic(kind.Key));
     }
+
+    /// <summary>
+    /// What a careful player works out is warded, from the seller's clue and what they heard, or null:
+    /// Mother Bramble's sign, or grandmother's riddle, names a kind there's nothing of to hear; a kind on the Arcanum's
+    /// tag, or in a Thornwick dowry, never sounded; the faded ward-roll names it; a suit came up twice in Madame Oriel's
+    /// cards; Skrae's echoes come back off one more of a kind than sounded. The ones that turn on hearing wait until
+    /// that kind has had a fair chance to sound.
+    /// </summary>
+    public static Category? WardedKind(Visit visit, Appraisal slip, Hearing hearing)
+    {
+        var kinds = visit.ClueKinds;
+        bool Silent(Category kind) => slip.Count(kind) == 0 && FairChance(visit, hearing, kind);
+        return visit.Says switch
+        {
+            Clue.Dream or Clue.Riddle when kinds.Length == 1 && Silent(kinds[0]) => kinds[0],
+            Clue.Tag or Clue.Dowry => kinds.Where(Silent).Select(k => (Category?)k).FirstOrDefault(),
+            Clue.Roll when kinds.Length == 1 => kinds[0],
+            Clue.Cards => kinds.GroupBy(k => k).Where(g => g.Count() > 1).Select(g => (Category?)g.Key).FirstOrDefault(),
+            Clue.Echo => kinds.GroupBy(k => k).Where(g => g.Count() > slip.Count(g.Key) && FairChance(visit, hearing, g.Key))
+                .Select(g => (Category?)g.Key).FirstOrDefault(),
+            _ => null,
+        };
+    }
+
+    /// <summary>
+    /// Whether a kind has had a fair chance to sound: a strength that stirs it, and nothing that could have drowned it
+    /// (a delicate thing under a clank). What hasn't, can't be called silent (Hesk, who never shakes hard, can still
+    /// tell a warded potion from a dream of a river).
+    /// </summary>
+    static bool FairChance(Visit visit, Hearing hearing, Category kind) =>
+        CouldStir(visit, hearing, kind) && !(Categories.Get(kind).Delicate && MaybeDrowned(visit, hearing));
 
     /// <summary>How much of what a seller brings has to be one kind before a careful player takes it on faith.</summary>
     const float FaithShare = 0.35f;
@@ -206,8 +235,6 @@ public static class Strategy
         Trade.Haggle when visit.HearsOut && visit.OffersMade == 0 => Money.Round(Math.Min(visit.Ask * 0.3f, worth * 0.8f)),
         Trade.Haggle => Money.Round(Math.Min(visit.Ask * 0.55f, worth * 0.8f)),
         _ when visit.Seller.Judge == Judgment.Clueless => Money.Round(Math.Min(worth * 0.5f, visit.Seller.Tier * 4)),
-        // Someone who only knows magic takes a modest sum when there's none.
-        _ when visit.Seller.Judge == Judgment.MagicSense => Money.Round(Math.Min(worth * 0.5f, visit.Seller.Tier * 8)),
         _ => Money.Round(Math.Max(1, worth * 0.5f)),
     };
 
@@ -221,7 +248,8 @@ public static class Strategy
     public static int Worth(Visit visit, Appraisal slip, Hearing hearing, GameState state = null)
     {
         var seller = visit.Seller;
-        float worth = slip.LikelyWorth(state == null ? null : state.SaleMultiplier) + (state == null ? 0 : CommissionWorth(state, slip));
+        if (state != null) slip.Sale ??= state.SaleRate;
+        float worth = slip.LikelyWorth() + (state == null ? 0 : CommissionWorth(state, slip));
         // A scale (Hesk's, or Wenna's word for hers) has already accounted for what couldn't be heard, and the Bookkeeping
         // Engine for everything.
         bool weighed = Weighed(visit, state) || Recorded(visit, state);
@@ -236,7 +264,7 @@ public static class Strategy
         // Pell's ticket settles a false bottom once everything has been heard; so does a scale.
         bool counted = Counted(visit, state) && HeardAll(visit, hearing, slip.Tier);
         if (!hearing.Dropped && !slip.Hidden && slip.Tier >= 2 && !weighed && !counted)
-            worth += seller.HiddenChance * Market.HiddenValue(slip.Chest, slip.Tier, expected: true);
+            worth += seller.HiddenChance * slip.HiddenValue;
         worth *= 1 + seller.QualityBoost * 1.2f;
         // A knight's claim on the family arms: the best of them goes for his fee. A devil's: the dearest thing, for nothing.
         if (seller.Heirloom is Category heirloom && slip.Count(heirloom) > 0)

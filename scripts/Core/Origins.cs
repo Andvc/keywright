@@ -37,6 +37,9 @@ public static class Origins
         new("warchest", "a knight's war chest", "weapons and a cloak", new[] { 2f, 5, 3, 1, 1, 1 }),
         new("gate", "the Maw's hoard", "gold and gems (some of it demon gold)", new[] { 5f, 2, 1, 1, 1, 5 }),
         new("treasury", "the Royal Treasury", "the best of everything", new[] { 3f, 3, 2, 2, 2, 3 }),
+        new("dowry", "a bride's dowry", "coin for luck, a cloak for warmth, a potion for health", new[] { 3f, 0.3f, 3, 3, 0.5f, 1 }),
+        new("archive", "the Archive vaults", "deeds, spellbooks, coin and seals", new[] { 2f, 1, 1, 1, 4, 2 }),
+        new("court", "a courtier's chest", "jewels, fine clothes and purses", new[] { 3f, 1, 3, 2, 1, 4 }),
     };
 
     public static OriginDef Get(string key) => All.First(o => o.Key == key);

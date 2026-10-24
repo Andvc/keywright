@@ -127,8 +127,7 @@ the red quality nothing else reaches.
 ## Where chests come from (origins)
 
 Every chest has a story, and the story says what tends to be in it. Sellers always tell you where theirs came from, and
-it's always true: nobody in the trade gains by lying about a millpond. The ledger's **Places** page lists what each
-place tends to hold once you've heard of it.
+it's always true: nobody in the trade gains by lying about a millpond.
 
 | Origin | Holds | Who brings them |
 |---|---|---|
@@ -147,7 +146,10 @@ place tends to hold once you've heard of it.
 | The Arcanum stores | mantles, potions and spellbooks; often enchanted | Wren, Orrin |
 | A dwarf-hold | weapons and gems | Grit |
 | A noble's strongroom | coin, jewels and fine clothes | Lady Corisande, Lady Ermine |
+| A bride's dowry | coin for luck, a cloak for warmth, a potion for health (the Thornwick custom) | Gerda |
 | A forgotten pawn lot | anything, in twos and threes | Pell |
+| The Archive vaults | deeds, spellbooks, coin and seals, each chest with its ward-roll | Quill |
+| A courtier's chest | jewels, fine clothes and purses | Madame Oriel |
 | The Aldwater mud | drowned wizards' potions and spellbooks (and sand) | Shelly |
 | A knight's war chest | weapons and a cloak | Sir Aldous |
 | The Maw's hoard | gold and gems, some of it demon gold | the demons |
@@ -158,7 +160,9 @@ place tends to hold once you've heard of it.
 Every seller has one way of judging their chest (which decides their price, and what they miss), maybe one rule that
 changes what you can do or what the deal is, a place their chests come from, and a story they tell about it. What they
 say is always true; what they miss is the opening. Some tell you something more, and it's always worth working out:
-Pell's pawn ticket, Wenna's game scale, Mother Bramble's dreams.
+Pell's pawn ticket, Wenna's game scale, and the puzzles that point at a **warded thing** (below): Mother Bramble's
+dreams, Gerda's dowries, Wren's packing tags, Lady Corisande's riddles, Quill's faded ward-rolls, Skrae's echoes and
+Madame Oriel's cards.
 
 | Tier | Seller | Who | Judges by | Their rule, or what they tell you |
 |---|---|---|---|---|
@@ -169,20 +173,23 @@ Pell's pawn ticket, Wenna's game scale, Mother Bramble's dreams.
 | 1 | Dorrin the Delver | a young adventurer back from the Barrow | the chest's colour | **a rotten chest**: two seconds of shaking, all told, then it creaks and won't be shaken again |
 | 2 | Snikkit the Goblin | a goblin from the hills with a sack of stolen chests | a gentle shake | **every strength after the first puts his price up a tenth** |
 | 2 | Wenna the Huntress | finds chests in outlaws' camps and wolves' dens | weight | **her game scale**: she says what the chest weighs; her chests hang on a skittish mare, so nobody shakes them hard, and the weight left over is what never stirred |
-| 2 | Mother Bramble | a druid of the Old Wood | a dream | **dreams her price**, and always dreams true of the dearest thing inside, as a sign (a magpie for coin, a thorn for a weapon, a raven's wing for a cloak, a river for a potion, an owl for a spell, a star for a gem) |
+| 2 | Mother Bramble | a druid of the Old Wood | a dream | **dreams her price**, and always dreams true, as a sign (a magpie for coin, a thorn for a weapon, a raven's wing for a cloak, a river for a potion, an owl for a spell, a star for a gem): of what the Wood warded inside, or else of the dearest thing. A sign for a kind you can't hear is the warded thing |
+| 2 | Gerda the Matchmaker | sells dowries from weddings that never happened | a hard shake | **a Thornwick dowry always holds coin, a cloak and a potion**: one of the three you can't hear is the one the bride warded |
 | 2 | Brother Ansel | a young monk selling the abbey crypt's chests | a firm shake | **won't have the saint's things shaken hard** |
 | 2 | Fennick the Smuggler | runs brandy past the Wardens' toll on the forest road | a firm shake | haggles; **packs in straw** so nothing clinks at the toll: everything stirs a strength later, and cloaks and spells never; often a false bottom |
-| 3 | Wren the Apprentice | an archmage's apprentice | a sense for magic | name your price; she wants more if something's enchanted |
+| 3 | Wren the Apprentice | an archmage's apprentice clearing the Arcanum stores | the chest's colour | name your price; **the packing tag** lists every kind packed, warded or not: a kind on the tag you can't hear is warded |
 | 3 | Archmage Orrin | an archmage of the Arcanum | the chest's colour | **wagers**: read it exactly and he returns a third of your price |
 | 3 | Grit the Miner | a dwarf from the Ironroot hold | knows weapons; takes every tinkle for a diamond | haggles |
-| 3 | Lady Corisande | a noblewoman selling grandmother's trick boxes | colour, and she feels magic | **won't have them dropped**; half hide a false bottom |
+| 3 | Lady Corisande | a noblewoman selling grandmother's trick boxes | the chest's colour | **grandmother's riddle** on each lid is about one thing inside, the warded one if she warded one: answer it, and if you can't hear the answer, it's warded |
 | 3 | Pell the Pawnbroker | sells lots nobody redeemed | a firm shake; never counts | **the pawn ticket** counts every article pledged, false bottom and all; he won't have pledges dropped |
+| 3 | Quill the Archivist | the Royal Archive's clerk, selling unclaimed vault chests | counts rattles | **the ward-roll** names the warded thing, every other letter faded ("B_o_d R_b_"): work out the name, and you know its kind |
 | 3 | Shelly the Mudlark | combs the Aldwater mud | a hard shake | fixed price; her "spellbooks" are often sand |
 | 3 | Sir Aldous | a knight looking for his grandfather's sword | colour | **heirloom**: if there are weapons inside, the best is his, for a price he names |
 | 4 | Vexis the Imp | an imp with an hourglass | colour | **twelve seconds** |
 | 4 | Malbranche | a skeletal devil who deals in bargains | colour | **cheap, but the dearest thing inside is his** |
-| 4 | Skrae | a demon with ears like a bat | hears everything | fixed price, fair; misses only magic and false bottoms |
+| 4 | Skrae | a demon with ears like a bat | hears everything | fixed price, fair; **its echoes** come back off the shape of everything inside, warded or not (round, long, soft, hollow, flat, tiny): one more echo of a shape than you heard is warded |
 | 4 | Lady Ermine | a lady of the court | knows only her own gems | **no lodestone near her gems**; some are paste |
+| 4 | Madame Oriel | the court's cartomancer | the chest's colour | **three cards from the Locking's deck** (Coins, Swords, Mantles, Cups, Wands, Stars): a suit drawn twice is what the ward holds; three different suits, nothing |
 | 4 | Silas Gilt | fence for the Maw | knows exactly | sells demon gold as gold, cheap |
 | 4 | Old Aldo | the King, in a plain cloak | (none: you name the contents) | **his price is your slip**: read it exactly and he takes a quarter off; read it wrong and you pay what it held and a quarter more |
 | 4 | the Gilded Maw | Avarax, in a borrowed body | the chest's colour | **one coin, but everyone after him today asks twice as much** |
@@ -202,6 +209,11 @@ Pell's pawn ticket, Wenna's game scale, Mother Bramble's dreams.
   what a gentle shake would stir needs a firm one, and soft things (cloth, paper) never stir through it.
 - *Weight and counts.* A thing weighs what it weighs and is one thing, wherever it's hidden: a scale or a pawn ticket
   counts the false bottom too.
+- *Warded things.* Anyone who knows the old craft can ward one thing inside a chest, the way the Locking warded the
+  chest: it makes no sound and weighs nothing, and it only comes out for someone who names it. A seller can't name it
+  (they never priced it), so it goes with the chest; a Keywright who works out what it is and marks one more of its
+  kind on the slip than they can hear gets it when the chest opens, and anyone else leaves it in the ward. Whoever
+  warded it always leaves a sign: a dream, a dowry's custom, a packing tag, a riddle, a faded roll, an echo, a card.
 
 ## The Bookkeeping Engine
 
@@ -223,3 +235,23 @@ that's already won can be finished in an afternoon.
 - *The King's game.* Aldric IX needs a Keywright he can trust with the Crown Chest, so he tests them the only way that
   counts: name what's inside. He comes by one day in four or so, the Maw one day in ten.
 - *The Maw's gaze.* Greed is catching. Take his coin, and everyone in the city wants more today.
+
+## What happens in town
+
+Twice a week something happens for a day, and the ledger's calendar shows this week's and next week's (and the days Nim
+comes by, and the Guild's nights). Each has a reason anyone in town would give you:
+
+- **Fair Day**: the county's in town. **Locking Day**: the Locking's anniversary, and everyone spends. **The Crown's
+  Buyer**: the Crown stocks up on one kind. **A Storm**: only those with something worth the soaking come out.
+- **A Foreclosure Sale**: the Guild has taken a manor for its tithe and wants the chests gone, cheap.
+- **The Tourney**: knights from four counties, buying steel and cloaks.
+- **A Royal Chest**, **The Stranger**, **A Barge Aground**: someone (or something) unusual comes to the counter.
+- **A Day of Mourning**: the old Duke is buried, and nobody shakes a chest hard in a town in black.
+- **The Town Crier**: Lord Harrow lost his family's heirloom to the Locking, and pays three times its price for one,
+  today.
+- **The Minstrels' Fair**: minstrels trade songs, and whoever has a box that hums brings it in.
+- **The Sleepers' Moon**: the Old Wood's moon is full, and everyone who slept under it dreamt true, like Mother
+  Bramble. **Wardens' Day**: the Wardens carried the Locking's chests; on their day folk ward a keepsake into a chest
+  the old way and leave a riddle for it. **The Guild's Count**: the Guild tallies everything that changes hands.
+- **The Guild's Assessor**: the Guild sends a man to sit in your corner and take its tenth.
+- **A Witchlight Moon**: the old enchantments wake under it.

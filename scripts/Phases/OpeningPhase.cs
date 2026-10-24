@@ -14,7 +14,7 @@ namespace Keywright.Phases;
 /// table; something better than its chest rises out glowing in the chest's colour and climbs, quality by quality, to
 /// what it really is before it slams down, with more fuss for every step (two or three steps up stops the clock). Each
 /// quality lands with its own effect: dust, sparkles, a pillar of light, crackling lightning, turning rays and a coin
-/// fountain. A false bottom gives up its secret last, and a Heartsong comes out after everything: the room goes dark, it
+/// fountain. A warded thing you named comes out last, out of thin air as the ward lets go, and a Heartsong after everything: the room goes dark, it
 /// sings, and it rises in mythic red with its name and its story. Then the verdict slams down with your gut's opinion, the
 /// coins fly into your purse, and a perfect read gets its banner. Anything grand can be kept for display (a Heartsong is
 /// highly recommended), and anything a commission wants can be delivered instead of sold.
@@ -78,8 +78,10 @@ public partial class OpeningPhase : Phase
         tally.AddChild(_worthLabel);
         // What's making things sell for more today, and a curio's luck with what's inside.
         var bonuses = new List<string>();
-        if (State.EventIs("festival")) bonuses.Add("Festival +25%");
-        if (State.EventIs("buyer")) bonuses.Add($"Royal Buyer: {Categories.Get(State.BuyerKind).Name.ToLowerInvariant()} x2");
+        if (State.EventIs("festival")) bonuses.Add("Locking Day +25%");
+        if (State.EventIs("buyer")) bonuses.Add($"Crown's Buyer: {Categories.Get(State.BuyerKind).Name.ToLowerInvariant()} x2");
+        if (State.EventIs("tourney")) bonuses.Add("Tourney: weapons, cloaks +50%");
+        if (State.EventIs("assessor")) bonuses.Add("The Guild's assessor -10%");
         float y = 140;
         foreach (var bonus in bonuses)
         {
@@ -170,9 +172,9 @@ public partial class OpeningPhase : Phase
     async Task FlyOut()
     {
         _step = Step.Reveal;
-        // The letdowns first, then what the chest promised, worst to best; then the surprises, smallest first; whatever
-        // was under a false bottom comes out last of all.
-        var reads = _report.Items.OrderBy(r => r.Item.IsSong).ThenBy(r => r.Hidden).ThenBy(r => StepsUp(r.Item)).ThenBy(r => r.Item.Value).ToList();
+        // The letdowns first, then what the chest promised, worst to best; then the surprises, smallest first; a warded
+        // thing you named comes out last of all, when the ward lets go of it.
+        var reads = _report.Items.OrderBy(r => r.Item.IsSong).ThenBy(r => r.Warded).ThenBy(r => StepsUp(r.Item)).ThenBy(r => r.Item.Value).ToList();
         int n = reads.Count;
         float spacing = n == 0 ? 0 : Math.Min(232f, 1180f / n);
         _spacing = spacing;
@@ -180,13 +182,9 @@ public partial class OpeningPhase : Phase
         {
             bool last = i == n - 1;
             float x = 640 + (i - (n - 1) / 2f) * spacing;
-            if (reads[i].Hidden)
+            if (reads[i].Warded)
             {
-                _chest.Wobble(1f);
-                Sfx.Play("hollow", 1.2f, -2);
-                Sfx.Play("strain", 1.1f, -2);
-                FloatText("...wait. A false bottom!", SeamPos + new Vector2(0, -150), Palette.Gold, 32);
-                await Wait(0.9);
+                await Unward();
                 if (!Alive) return;
             }
             if (reads[i].Item.IsSong)
@@ -228,6 +226,10 @@ public partial class OpeningPhase : Phase
         var ghosts = _report.Ghosts.GroupBy(c => c).Select(g => g.Count() == 1 ? $"no {Categories.Get(g.Key).Name.ToLowerInvariant()}?"
             : $"{g.Count()} fewer {Categories.Get(g.Key).Name.ToLowerInvariant()}?").ToList();
         if (_report.GhostHidden) ghosts.Add("no false bottom?");
+        // A warded thing you never named truly stays in the ward: you only learn what it was.
+        if (_report.KeptWarded is Item kept)
+            ghosts.Add(_report.Ghosts.Count > 0 || _report.GhostHidden ? $"warded {kept.Name}: you named something that wasn't there"
+                : $"warded, never named: {kept.Name}");
         for (int g = 0; g < ghosts.Count; g++)
         {
             var ghost = UiKit.MakeLabel(ghosts[g], 16, Palette.Bad, HorizontalAlignment.Center, outline: 4)
@@ -242,6 +244,23 @@ public partial class OpeningPhase : Phase
         await Wait(0.3);
         if (!Alive) return;
         Verdict();
+    }
+
+    /// <summary>
+    /// The ward lets go of what you named: the chest shudders, a ring of light opens over it, and the thing comes out of
+    /// nothing. The delay is the reveal: you named it without ever hearing it.
+    /// </summary>
+    async Task Unward()
+    {
+        _chest.Wobble(1.2f);
+        Sfx.Play("ward", 1f, -2);
+        var violet = Palette.Magic;
+        Fx.Ring(this, SeamPos + new Vector2(0, -60), violet, 220f, 0.7f, 6f);
+        Fx.Burst(this, SeamPos + new Vector2(0, -60), violet, 60, 200f);
+        Game.Flash(violet, 0.25f, 0.5f);
+        FloatText("...wait. The ward lets go of what you named!", SeamPos + new Vector2(0, -150), violet, 24);
+        Game.Moment("07_warded", 0.3);
+        await Wait(1.1);
     }
 
     /// <summary>Where a thing stands on the table, however tall it is.</summary>

@@ -114,9 +114,10 @@ public static class Heartsongs
     /// </summary>
     /// <param name="known">The ones Bram's kin have ever opened.</param>
     /// <param name="taken">The ones found (or on the counter) this run.</param>
-    public static HeartsongDef Roll(Random rng, ICollection<string> known, ICollection<string> taken)
+    /// <param name="boost">How many times likelier than usual (the Minstrels' Fair).</param>
+    public static HeartsongDef Roll(Random rng, ICollection<string> known, ICollection<string> taken, float boost = 1)
     {
-        if (rng.NextFloat() >= Chance) return null;
+        if (rng.NextFloat() >= Chance * boost) return null;
         var free = All.Where(h => !taken.Contains(h.Key)).ToArray();
         return free.Length == 0 ? null : rng.PickWeighted(free, h => known.Contains(h.Key) ? 1f : NewWeight);
     }

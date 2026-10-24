@@ -81,10 +81,10 @@ public partial class Hud : CanvasLayer
             CloseEvent();
             return;
         }
-        _eventPopup = UiKit.MakePanel(Palette.Magic.Darkened(0.2f)).Place(188, 60, 460, 156);
+        _eventPopup = UiKit.MakePanel(Palette.Magic.Darkened(0.2f)).Place(188, 60, 460, 178);
         _eventPopup.AddChild(UiKit.MakeLabel(_eventTitle.ToUpperInvariant(), 24, Palette.Magic, outline: 4).Place(20, 14, 420, 30));
-        _eventPopup.AddChild(UiKit.MakeLabel(_eventText, 16, Palette.Text).Wrapped().Place(20, 50, 420, 60));
-        _eventPopup.AddChild(UiKit.MakeButton("Close", Palette.PanelBorder.Lightened(0.15f), 16, CloseEvent).Place(170, 110, 120, 34));
+        _eventPopup.AddChild(UiKit.MakeLabel(_eventText, 16, Palette.Text).Wrapped().Place(20, 50, 420, 84));
+        _eventPopup.AddChild(UiKit.MakeButton("Close", Palette.PanelBorder.Lightened(0.15f), 16, CloseEvent).Place(170, 132, 120, 34));
         AddChild(_eventPopup);
         Main.Instance?.Moment("30_event_popup", 0.3);
     }

@@ -323,6 +323,26 @@ public static class Simulation
         }
     }
 
+    /// <summary>A few of one seller's visits, chest and read and price (--sim=seller --who=KEY), for checking a new rule.</summary>
+    public static void ShowSeller(string key, int n = 8)
+    {
+        var seller = Sellers.Get(key);
+        var state = new GameState(1) { Guided = false };
+        state.SkipTo(seller.Tier, 100000);
+        var rng = new Random(9);
+        for (int i = 0; i < n; i++)
+        {
+            var visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
+            var hearing = Hearing.Simulate(visit.Chest, Strategy.Levels(visit, state));
+            var slip = hearing.Read(visit.Chest.Quality, state.Tier);
+            Strategy.Reckon(slip, hearing, visit, state);
+            int worth = Strategy.Worth(visit, slip, hearing, state);
+            GD.Print($"{string.Join(", ", visit.Chest.Items.Select(it => it.Name))}{(visit.Chest.Warded is Item w ? $" + warded {w.Name}" : "")} | " +
+                     $"{visit.Clue} | slip {string.Join(" ", slip.Marked.Select(k => $"{k}x{slip.Count(k)}"))} names {visit.Chest.Names(slip)} | " +
+                     $"worth {worth} ask {visit.Ask} fetches {state.Fetches(visit.Chest)}");
+        }
+    }
+
     static float BlindValue(Visit visit, GameState state, Random rng)
     {
         int price = visit.Trade == Trade.Offer ? Math.Max(1, visit.Seller.Tier * 6) : visit.Ask;
@@ -375,7 +395,8 @@ public static class Simulation
             else if (state.Weighs) Strategy.Weigh(slip, hearing, visit, state);
             if (skill < 1) Slip(visit, slip, rng, 1 - skill);
         }
-        // The King's price is whatever the slip says.
+        // The slip says what things fetch here; the King's price is whatever it says.
+        slip.Sale = state.SaleRate;
         visit.SetSlipPrice(slip.Worth);
 
         int worth = Strategy.Worth(visit, slip, hearing, state);

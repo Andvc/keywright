@@ -26,8 +26,6 @@ public enum Judgment
     Miner,
     /// <summary>Knows her own gems (at what she paid for them) and nothing else in the chest.</summary>
     Jeweller,
-    /// <summary>Can't tell a coin from a cloak, but can feel magic, and knows it's worth a lot.</summary>
-    MagicSense,
     /// <summary>Never shook it, has no idea, takes a few coins.</summary>
     Clueless,
     /// <summary>Knows exactly what's in it, because he packed the fakes himself.</summary>
@@ -42,8 +40,22 @@ public enum Clue
     Articles,
     /// <summary>The weight on a game scale, to the half pound (Wenna).</summary>
     Pounds,
-    /// <summary>A dream of the dearest thing inside, as a sign (Mother Bramble).</summary>
+    /// <summary>A dream, as a sign, of what the Wood warded in it, or else of the dearest thing (Mother Bramble).</summary>
     Dream,
+    /// <summary>The Arcanum's packing tag: every kind of thing packed, warded or not (Wren).</summary>
+    Tag,
+    /// <summary>Grandmother's riddle about one thing inside: the warded one, if there is one (Lady Corisande).</summary>
+    Riddle,
+    /// <summary>The Thornwick custom: a dowry chest always holds coin, a cloak and a potion (Gerda).</summary>
+    Dowry,
+    /// <summary>The Archive's ward-roll: the warded thing's name, faded (Quill).</summary>
+    Roll,
+    /// <summary>A bat's echoes: the shape of every thing inside, warded or not (Skrae).</summary>
+    Echo,
+    /// <summary>Three cards from the Locking's deck: a suit drawn twice is what's warded (Madame Oriel).</summary>
+    Cards,
+    /// <summary>A Guild clerk's tally of every article in it, false bottom and all (the Guild's Count).</summary>
+    Tally,
 }
 
 /// <summary>How a seller trades.</summary>
@@ -86,6 +98,12 @@ public sealed class SellerDef
 
     /// <summary>What they tell you besides what they heard.</summary>
     public Clue States { get; init; }
+
+    /// <summary>
+    /// How often their chest holds a warded thing (<see cref="Chest.Warded"/>): sealed in the ward, silent and weightless,
+    /// given up only to a Keywright who names it. Only sellers whose clue can tell you it's there bring them.
+    /// </summary>
+    public float Wards { get; init; }
 
     /// <summary>Their chests hang on a packhorse that spooks at a hard shake: nobody shakes them hard (Wenna's).</summary>
     public bool Packhorse { get; init; }
@@ -162,9 +180,6 @@ public sealed class SellerDef
     /// <summary>Shake their chest hard and they put the price up by half.</summary>
     public bool HatesHardShake { get; init; }
 
-    /// <summary>Feels magic, and prices it in.</summary>
-    public bool SensesMagic { get; init; }
-
     public float MagicChance { get; init; } = 0.05f;
 
     /// <summary>How often their chest has a false bottom (from the village shop on).</summary>
@@ -233,7 +248,6 @@ public sealed class SellerDef
         Judgment.Dreamer => "dreams up a price",
         Judgment.Miner => "knows only weapons",
         Judgment.Jeweller => "knows only her own gems",
-        Judgment.MagicSense => "feels for magic",
         Judgment.Clueless => "has no idea",
         _ => "knows exactly",
     };
@@ -316,7 +330,7 @@ public static class Sellers
             Accepts = new[] { "Drinks are on me!", "Back to the Barrow!" },
         },
 
-        // Thornwick Market: a goblin, a huntress, a druid, a monk and a smuggler.
+        // Thornwick Market: a goblin, a huntress, a druid, a monk, a smuggler and a matchmaker.
         new()
         {
             Key = "snikkit", Name = "Snikkit the Goblin", Tier = 2, Shakes = Shake.Gentle, ShakeFee = 0.1f, MissRate = 0.6f, Markup = (1.25f, 1.5f), Visits = 0.5f, Colours = Village,
@@ -344,13 +358,14 @@ public static class Sellers
         },
         new()
         {
-            Key = "bramble", Name = "Mother Bramble", Tier = 2, Judge = Judgment.Dreamer, States = Clue.Dream, Markup = (1.2f, 1.2f), Colours = Village,
-            HiddenChance = 0.25f,
+            Key = "bramble", Name = "Mother Bramble", Tier = 2, Judge = Judgment.Dreamer, States = Clue.Dream, Wards = 0.5f, Markup = (1.2f, 1.2f),
+            Colours = Village, HiddenChance = 0f,
             From = new[] { ("wood", 1f) },
             Stories = Tell(("wood", new[] { "The Old Wood let this one go. I slept on it and dreamt of {dream}. The oaks whispered its price: {price}.",
                                             "Moss grew on it for a hundred years. Last night I dreamt of {dream}, and of a price: {price}." })),
-            Habit = "A druid of the Old Wood. Her price comes from a dream and has nothing to do with the chest, but she always dreams true of the dearest " +
-                    "thing inside, as a sign: a magpie for coin, a thorn for a weapon, a raven's wing for a cloak, a river for a potion, an owl for a spell, a star for a gem.",
+            Habit = "A druid of the Old Wood. Her price is a dream, but she always dreams true: of what the Wood warded in the chest, or else of the dearest " +
+                    "thing in it, as a sign: a magpie for coin, a thorn for a weapon, a raven's wing for a cloak, a river for a potion, an owl for a spell, a star " +
+                    "for a gem. A sign you can't hear is warded: name it.",
             Accepts = new[] { "As the Wood wills.", "The oaks approve." },
         },
         new()
@@ -376,19 +391,30 @@ public static class Sellers
             Counters = new[] { "{price}, and you're robbing me.", "Tch. {price}, final." },
             Leaves = new[] { "Hmph. Plenty of other buyers." },
         },
-
-        // Crownhold: an archmage and his apprentice, a dwarf, a noblewoman, a pawnbroker, a mudlark and a knight.
         new()
         {
-            Key = "wren", Name = "Wren the Apprentice", Tier = 3, Judge = Judgment.MagicSense, SensesMagic = true, Trade = Trade.Offer, MagicChance = 0.25f,
-            Colours = new[] { 0.2f, 0.6f, 0.2f, 0 },
+            Key = "gerda", Name = "Gerda the Matchmaker", Tier = 2, Shakes = Shake.Hard, States = Clue.Dowry, Wards = 0.5f, MissRate = 0f,
+            Markup = (1.15f, 1.35f), Colours = Village, HiddenChance = 0f,
+            From = new[] { ("dowry", 1f) },
+            Stories = Tell(("dowry", new[] { "A dowry, love, from a wedding that never was: {clue}, as ever. I gave it a good shake: {heard}. {price}.",
+                                             "The groom ran off to the Barrow. Her dowry: {clue}, like every Thornwick bride's. {heard}. {price}." })),
+            Habit = "Thornwick's matchmaker, selling dowries from weddings that never happened. A Thornwick dowry always holds coin for luck, a cloak for " +
+                    "warmth and a potion for health, and a bride often wards one of the three: whichever you can't hear is warded. Shakes hard and " +
+                    "prices what she hears, never a warded thing.",
+            Accepts = new[] { "May it bring you luck.", "Mind you use it well, love." },
+        },
+
+        // Crownhold: an archmage and his apprentice, a dwarf, a noblewoman, a pawnbroker, an archivist, a mudlark and a knight.
+        new()
+        {
+            Key = "wren", Name = "Wren the Apprentice", Tier = 3, Judge = Judgment.Colour, States = Clue.Tag, Wards = 0.5f, MagicChance = 0.25f,
+            HiddenChance = 0f, Markup = (1.3f, 1.5f), Colours = new[] { 0.2f, 0.6f, 0.2f, 0 },
             From = new[] { ("arcanum", 1f) },
-            Stories = Tell(("arcanum", new[] { "Master Orrin said to clear the Arcanum stores. I can't tell what's in it, but I'll know if it's special. What's it worth?",
-                                               "From the third cellar of the Arcanum. Don't tell Master. What would you give?" })),
-            Habit = "An archmage's apprentice. Can't tell a coin from a cloak, but feels magic. Name a price: she takes a little, unless something's enchanted.",
+            Stories = Tell(("arcanum", new[] { "Master Orrin said to clear the Arcanum stores. The tag says: packed, {clue}. Master's price is {price}.",
+                                               "From the third cellar. I can read the tag, at least: {clue}. {price}, Master says." })),
+            Habit = "An archmage's apprentice clearing the Arcanum stores. Every chest has its packing tag, listing each kind of thing packed, and the " +
+                    "archmages warded the most dangerous: a kind on the tag that you can't hear is warded. Prices by colour.",
             Accepts = new[] { "Oh good! Don't tell Master.", "Thank you!" },
-            Refusals = new[] { "No... there's something special in there. More, please." },
-            Leaves = new[] { "I should ask Master first. Sorry!" },
         },
         new()
         {
@@ -412,14 +438,14 @@ public static class Sellers
         },
         new()
         {
-            Key = "corisande", Name = "Lady Corisande", Tier = 3, Judge = Judgment.Colour, SensesMagic = true, HatesDrop = true, MagicChance = 0.15f,
-            HiddenChance = 0.5f, Markup = (1.05f, 1.3f), Colours = Town,
+            Key = "corisande", Name = "Lady Corisande", Tier = 3, Judge = Judgment.Colour, States = Clue.Riddle, Wards = 0.5f, MagicChance = 0.15f,
+            HiddenChance = 0f, Markup = (1.05f, 1.3f), Colours = Town,
             From = new[] { ("strongroom", 1f) },
-            Stories = Tell(("strongroom", new[] { "One of grandmother's trick boxes, from the de Vere strongroom. A {colour} chest, and {magic}. {price}. You'll not drop it.",
-                                                  "Grandmother hid things in everything. A {colour} chest; {magic}. {price}. Handle it as a lady would." })),
-            Habit = "A noblewoman selling her grandmother's trick boxes: half hide a false bottom she never prices. Prices by colour and feels magic. Drop one and it's half again.",
+            Stories = Tell(("strongroom", new[] { "Grandmother's trick box. Her riddle on the lid: \"{clue}\" {price}.",
+                                                  "From the de Vere strongroom: {price}. Grandmother's riddle: \"{clue}\"" })),
+            Habit = "A noblewoman selling her grandmother's trick boxes. Each lid has grandmother's riddle about one thing inside, and if she warded " +
+                    "something, the riddle's about that: solve it, and if you can't hear it, it's warded. Prices by colour.",
             Accepts = new[] { "How delightful.", "Grandmother would approve." },
-            Angry = new[] { "You DROPPED a de Vere heirloom? Half again." },
         },
         new()
         {
@@ -431,6 +457,17 @@ public static class Sellers
             Habit = "Sells lots nobody redeemed, two or three of a kind. Says which kinds he heard, never how many. The ticket counts every article pledged, " +
                     "false bottom and all, and he won't have pledges dropped: count what you hear against it.",
             Accepts = new[] { "Done. No refunds.", "Sold, as heard." },
+        },
+        new()
+        {
+            Key = "quill", Name = "Quill the Archivist", Tier = 3, Shakes = Shake.Firm, Judge = Judgment.Counter, States = Clue.Roll, Wards = 0.5f,
+            HiddenChance = 0f, Markup = (1.7f, 2f), Colours = Town,
+            From = new[] { ("archive", 1f) },
+            Stories = Tell(("archive", new[] { "From the Royal Archive's vaults, with its ward-roll: {clue}. Three hundred years of damp. {count}: {price}.",
+                                               "Unclaimed since the Locking. The ward-roll reads {clue}, as far as I can make out. {count}, so {price}." })),
+            Habit = "The Royal Archive's clerk, selling unclaimed vault chests with their ward-rolls: the roll names the warded thing, letters faded " +
+                    "by three hundred years. Read the name: that's what to name. A blank roll, nothing warded. Counts the rattles at a firm shake.",
+            Accepts = new[] { "Duly recorded.", "I'll file the receipt." },
         },
         new()
         {
@@ -452,7 +489,7 @@ public static class Sellers
             Accepts = new[] { "Honour is satisfied.", "For the de Lacys!" },
         },
 
-        // The Royal Emporium, by the Gilded Gate: demons, a court lady, a fence, the King, and once in a while the Maw.
+        // The Royal Emporium, by the Gilded Gate: demons, a court lady, a cartomancer, a fence, the King, and once in a while the Maw.
         new()
         {
             Key = "vexis", Name = "Vexis the Imp", Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.2f, Markup = (1.35f, 1.65f),
@@ -475,12 +512,13 @@ public static class Sellers
         },
         new()
         {
-            Key = "skrae", Name = "Skrae", Tier = 4, Judge = Judgment.Thorough, MissRate = 0f, MagicChance = 0.2f, HiddenChance = 0.3f, Markup = (1.2f, 1.45f),
-            Colours = Emporium,
+            Key = "skrae", Name = "Skrae", Tier = 4, Judge = Judgment.Thorough, States = Clue.Echo, Wards = 0.5f, MissRate = 0f, MagicChance = 0.2f,
+            HiddenChance = 0f, Markup = (1.2f, 1.45f), Colours = Emporium,
             From = new[] { ("gate", 1f) },
-            Stories = Tell(("gate", new[] { "I listened gently, then hard. I hear every coin in the realm. {heard}. {price}, fair.",
-                                            "My ears never miss a jingle. {heard}. {price}. The magic, I can't hear. The floor, I never check." })),
-            Habit = "A demon with ears like a bat: listens gently, then hard, and prices what it hears fairly. Only enchantment and false bottoms get past it, and it brings plenty of both.",
+            Stories = Tell(("gate", new[] { "{heard}, gently then hard: {price}, fair. And I clicked, like a bat. The echoes: {clue}.",
+                                            "I hear every coin in the realm: {heard}. {price}. My echoes say {clue}. Wards don't stop echoes." })),
+            Habit = "A demon with ears like a bat: prices what it hears, fairly, and clicks to hear the echoes, which come back off everything, warded or " +
+                    "not: round is coin, long a weapon, soft a cloak, hollow a potion, flat a spell, tiny a gem. An echo you can't hear is warded.",
             Accepts = new[] { "Fair.", "You won't regret it. Probably." },
         },
         new()
@@ -493,6 +531,17 @@ public static class Sellers
             Habit = "A lady of the court. Knows only her own gems, at what she paid; whatever else her maid packed comes free. Some gems are paste. Bring a lodestone near them and it's half again.",
             Accepts = new[] { "Charming.", "Do look after them." },
             Angry = new[] { "A lodestone? On MY gems? Half again, for the insult." },
+        },
+        new()
+        {
+            Key = "oriel", Name = "Madame Oriel", Tier = 4, Judge = Judgment.Colour, States = Clue.Cards, Wards = 0.5f, MagicChance = 0.15f, HiddenChance = 0f,
+            Markup = (1.3f, 1.5f), Colours = Emporium,
+            From = new[] { ("court", 1f) },
+            Stories = Tell(("court", new[] { "A courtier's chest, sold for gambling debts. I drew three from the Locking's deck: {clue}. {price}.",
+                                             "The cards chose this one for you, dear. {clue}. A {colour} chest: {price}." })),
+            Habit = "The court's cartomancer. She draws three cards from the Locking's own deck: a suit drawn twice is what the ward holds (Coins, " +
+                    "Swords for weapons, Mantles for cloaks, Cups for potions, Wands for spells, Stars for gems); three different, nothing's warded.",
+            Accepts = new[] { "The cards are never wrong.", "As it was foretold." },
         },
         new()
         {

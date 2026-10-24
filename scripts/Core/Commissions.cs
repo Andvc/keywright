@@ -39,9 +39,17 @@ public sealed class Commission
     /// <summary>Kept open another week by the Clockwork Lark (it lapses at the next Guild's night).</summary>
     public bool Carried { get; set; }
 
+    /// <summary>The day it lapses after (the crier's reward is for one day), or 0: at the week's end.</summary>
+    public int Lapses { get; init; }
+
     public bool Done => Delivered >= Needed;
 
-    public string PatronName => Story ? Core.Story.HoodName : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Name ?? Patron;
+    public string PatronName => Story ? Core.Story.HoodName : Patron == Events.Crier ? "Lord Harrow's crier"
+        : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Name ?? Patron;
+
+    /// <summary>Who wants it, as the commission board lists them.</summary>
+    public string Who => Story ? "The Hooded Woman" : Patron == Events.Crier ? "Lord Harrow (today)"
+        : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Who ?? Patron;
 
     /// <summary>Whether this thing would do. Fakes and broken things never do.</summary>
     /// <param name="leeway">How many qualities lower than asked they'll take (a letter of introduction).</param>

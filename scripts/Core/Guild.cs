@@ -18,15 +18,15 @@ public static class Guild
     public const int Weeks = 8;
 
     /// <summary>
-    /// Each week's due: small for the first four weeks, while you learn the stall and a growing purse is all you need,
-    /// then climbing faster than a learner's shop grows, with the last week the wall. A first run usually falls in the
-    /// middle weeks; better judgment and talents push that later, until the debt is cleared (the sim's careers: usually
-    /// around the eighth run). A lucky run can have all of it a week early, and pay it off.
+    /// Each week's due: small for the first three weeks, while you learn the stall and a growing purse is all you need,
+    /// then climbing (three to six times a week) faster than a learner's shop grows, with the last week the wall. A first
+    /// run usually falls in the middle weeks; better judgment and talents push that later, until the debt is cleared. A
+    /// strong run can have all of it a week or two early, and pay it off.
     /// </summary>
-    static readonly int[] Dues = { 40, 100, 200, 400, 1200, 7000, 55000, 200000 };
+    static readonly int[] Dues = { 40, 100, 280, 900, 5000, 30000, 130000, 420000 };
 
-    /// <summary>After the debt: each week half as much again, for as long as you last.</summary>
-    const float EndlessGrowth = 1.5f;
+    /// <summary>After the debt: each week twice as much, for as long as you last.</summary>
+    const float EndlessGrowth = 2f;
 
     /// <summary>What the Guild wants at the end of this week.</summary>
     public static int Due(int week)
@@ -49,10 +49,10 @@ public static class Guild
     {
         "Evening. The Guild's tithe, if you please. In gold.",
         "Week two. You're still here. Good: the Guild hates to waste a Keywright.",
-        "Two hundred. Your uncle never made it past week three, you know.",
+        "Two hundred and eighty. Your uncle never made it past week three, you know.",
         "I hear you've been opening a great many chests. The Guild approves. Keep opening.",
         "My masters are curious about you. That's rarely good news.",
-        "Seven thousand. The Guild is starting to take you seriously. So is its master.",
+        "Thirty thousand. The Guild is starting to take you seriously. So is its master.",
         "One more week after this. Then the tithe's paid. Unless you'd like to sell us the shop now?",
         "The last of it. Every coin, mind. Gold you can see.",
     };

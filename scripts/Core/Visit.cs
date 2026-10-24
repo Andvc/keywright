@@ -26,8 +26,17 @@ public sealed class Visit
     /// <summary>Where the chest really came from (null for the vault and the Stranger).</summary>
     public OriginDef Origin { get; init; }
 
-    /// <summary>What the seller states besides what they heard (<see cref="Market.Clue"/>), or null.</summary>
+    /// <summary>What the seller states besides what they heard, as Bram notes it (<see cref="Market.MakeClue"/>), or null.</summary>
     public string Clue { get; init; }
+
+    /// <summary>The kinds the seller's clue names, for the careful player's read (<see cref="Strategy.Reckon"/>).</summary>
+    public Category[] ClueKinds { get; init; } = Array.Empty<Category>();
+
+    /// <summary>What kind of clue it is: the seller's own (<see cref="SellerDef.States"/>), or one a day's event gave them.</summary>
+    public Clue Says { get; init; }
+
+    /// <summary>The clue points at a warded thing (a dream, a riddle, a tag, cards...), not at a count or a weight.</summary>
+    public bool PointsAtWard => Says is not (Core.Clue.None or Core.Clue.Articles or Core.Clue.Pounds or Core.Clue.Tally);
 
     /// <summary>What an heirloom-hunter pays for the best thing of theirs inside (0 if they don't).</summary>
     public int Fee { get; init; }
@@ -75,7 +84,7 @@ public sealed class Visit
     public Visit Again() => new(Seller, Chest, Claim, Trade, _firstAsk, Floor,
         _firstAsk > 0 ? $"I came back. {_firstAsk}g, and no hard feelings." : "I came back. Make me an offer, then.")
     {
-        Origin = Origin, Fee = Fee, HearsOut = HearsOut, Returned = true, Clue = Clue,
+        Origin = Origin, Fee = Fee, HearsOut = HearsOut, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says,
     };
 
     public bool Deciding => Outcome == VisitOutcome.Deciding;
@@ -218,16 +227,10 @@ public sealed class Visit
                 lines.Add($"One coin for a {Categories.ChestSkin(Chest.Quality)} chest. The price comes later, from everyone after.");
                 break;
             case Judgment.Colour:
-                lines.Add($"{Capital(name)} priced it as an ordinary {Categories.ChestSkin(Chest.Quality)} chest" +
-                          (Seller.SensesMagic ? ", and felt for magic." : ", without looking inside."));
+                lines.Add($"{Capital(name)} priced it as an ordinary {Categories.ChestSkin(Chest.Quality)} chest, without looking inside.");
                 break;
             case Judgment.Dreamer:
                 lines.Add($"{Capital(name)}'s price came from a dream. Only the chest could tell you what it was worth.");
-                break;
-            case Judgment.MagicSense:
-                lines.Add(Chest.Items.Any(i => i.Magic)
-                    ? $"{Capital(name)} felt the magic and wanted its price; the rest she couldn't tell."
-                    : $"{Capital(name)} felt no magic, so she took what you offered.");
                 break;
             case Judgment.Jeweller:
                 lines.Add($"{Capital(name)} priced her gems at what she paid for them; everything else came free.");
@@ -267,14 +270,18 @@ public sealed class Visit
                     lines.Add($"{Capital(name)} heard the {group.First().Word} but never counted: {Sellers.Number(group.Count())} for the price of one.");
         }
         if (Chest.Hidden != null)
-            lines.Add(Seller.States == Core.Clue.Articles ? $"The ticket counted the false bottom, but {name} never reads tickets: {Chest.Hidden.Name}."
+            lines.Add(Says == Core.Clue.Articles ? $"The ticket counted the false bottom, but {name} never reads tickets: {Chest.Hidden.Name}."
+                : Says == Core.Clue.Tally ? $"The Guild's tally counted the false bottom too: {Chest.Hidden.Name}."
                 : $"A false bottom nobody knew about: {Chest.Hidden.Name}.");
-        if (Seller.States == Core.Clue.Dream && Market.Dearest(Chest) is Item dearest)
-            lines.Add($"{Capital(Categories.Sign(dearest.Category))} in her dream: the {dearest.Name}, the dearest thing inside.");
+        // A warded thing: named and given up, or still in the ward, and the clue that said so.
+        if (Chest.Unwarded is Item freed)
+            lines.Add($"You named what the ward held, and it gave it up: the {freed.Name}. Nobody had priced it.");
+        else if (Chest.Warded is Item kept)
+            lines.Add($"Warded, silent and weightless: the {kept.Name}. {WardHint(kept)}");
         if (Chest.Song is Item song)
             lines.Add($"Only a Keywright hears a Heartsong sing: nobody knew {song.Name} was in it.");
         var magic = Chest.Everything.Where(i => i.Magic).ToList();
-        if (magic.Count > 0 && !Seller.SensesMagic)
+        if (magic.Count > 0)
             lines.Add($"Nobody can hear enchantment: the {Join(magic.Select(i => i.Name))} went for the price of plain goods.");
         if (lines.Count == 0)
             lines.Add(Trade == Trade.Fixed
@@ -282,6 +289,19 @@ public sealed class Visit
                 : $"{Capital(name)} heard everything. The deal was in the price you agreed.");
         return string.Join(" ", lines);
     }
+
+    /// <summary>How the seller's clue pointed at a warded thing nobody named.</summary>
+    string WardHint(Item kept) => Says switch
+    {
+        Core.Clue.Dream => $"{Capital(Categories.Sign(kept.Category))} in the dream, and nothing of the kind to hear: that was it.",
+        Core.Clue.Tag => $"{Capital(Categories.One(kept.Category))} on the tag that never made a sound: that was it.",
+        Core.Clue.Riddle => "The riddle was about it, and it never made a sound.",
+        Core.Clue.Dowry => $"The dowry's {Categories.One(kept.Category).Replace("a ", "")} never made a sound: the bride had warded it.",
+        Core.Clue.Roll => $"The roll's '{Market.Faded(kept.Name)}' was the {kept.Name}.",
+        Core.Clue.Echo => $"A {Categories.Shape(kept.Category)} echo that never made a sound: that was it.",
+        Core.Clue.Cards => $"{Categories.Suit(kept.Category)} came up twice.",
+        _ => "Nobody could have known.",
+    };
 
     static string Capital(string word) => char.ToUpperInvariant(word[0]) + word[1..];
 

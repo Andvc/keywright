@@ -45,8 +45,7 @@ public static class Hints
                      "or storm off if you insult them.",
         ["offer"] = "This one wants you to name a price. Offer what it's worth to you, less a little. You get two tries.",
         ["try_again"] = "Too low. One more try, then they'll go.",
-        ["story"] = "Listen to where they say it came from: a barrow holds grave goods, a goblin warren holds coin. The ledger's " +
-                    "Places page keeps what each place tends to hold.",
+        ["story"] = "Listen to where they say it came from: a barrow holds grave goods, a goblin warren holds coin, a dwarf-hold weapons and gems.",
         ["keep"] = "Something grand? You can keep it for display instead of selling it. A good exhibition brings more customers, " +
                    "and better ones. Enchanted things count double.",
         ["kept"] = "On display. You'll see it on the shelf behind the counter.",
@@ -63,8 +62,8 @@ public static class Hints
         ["slots"] = "Another synergy slot: open Synergies and put one more to work.",
         ["emporium"] = "The Royal Emporium, in the palace's shadow. The Gate's just down the street: you can feel it hum. Bigger " +
                        "things to grow into now: a night market, a patrons' book, a velvet case for curios. Keep enough back for Vane.",
-        ["ledger"] = "Forgotten a sound, or someone's habits? Press L for your ledger: the sounds, the places chests come from, the regulars " +
-                     "you've met, and everything you've found.",
+        ["ledger"] = "Forgotten a sound, or someone's habits? Press L for your ledger: the sounds, the regulars you've met, a calendar " +
+                     "of what's coming, and everything you've found.",
         ["lockpick"] = "The ward's let go: the chest is yours. Now the old lock under it. The pick sweeps round: press Space, or " +
                        "click, while it's in the green to set a pin. Set every pin cleanly and nothing inside gets scratched.",
 
@@ -76,7 +75,8 @@ public static class Hints
         ["commissions"] = "Regulars want things now: see the board on the left. When something they want comes out of a chest, " +
                           "hand it over instead of selling it. A commission pays far more than a sale.",
         ["deliver"] = "Someone wants this! Deliver it for the commission, or sell it as usual.",
-        ["event"] = "Something's happening in town today: one day a week is different. It's up in the top bar: click it to read it again.",
+        ["event"] = "Something's happening in town today: two days a week are different. It's up in the top bar (click it to read it " +
+                    "again), and your ledger's calendar shows what's coming this week and next.",
         ["stranger"] = "The Stranger. That chest's wrapped in iron chains: nothing inside can move, so there's nothing to hear. " +
                        "Drop it to feel how heavy it is. Heavy ones hold more.",
         ["gilded"] = "A royal seal! One of King Aldric's own chests, gilded. Its seller thinks the gold is paint, and priced it as " +
@@ -120,18 +120,23 @@ public static class Hints
         ["seller_penn"] = "Penn only shakes gently. Heavy things and soft things make no sound for her.",
         ["seller_dorrin"] = "Dorrin's Barrow chests are rotten: about two seconds of shaking, all told. One strength, then: pick it well.",
         ["seller_snikkit"] = "Snikkit puts his price up a tenth for every strength you try after the first. Pick two: gentle and hard.",
-        ["seller_bramble"] = "Mother Bramble dreams her price, but she always dreams true of the dearest thing inside. If it never sounds, it's under a false bottom.",
+        ["seller_bramble"] = "Mother Bramble always dreams true, as a sign. If you can't hear what she dreamt of, it's warded: name it.",
+        ["seller_gerda"] = "A Thornwick dowry: coin, a cloak and a potion, always. Whichever of the three you can't hear is warded.",
+        ["seller_wren"] = "Wren's tag lists every kind packed. A kind on the tag that never sounds is warded: name it.",
+        ["seller_quill"] = "Quill's ward-roll names the warded thing, faded. Make out the name, and tick its kind.",
+        ["seller_oriel"] = "Madame Oriel's cards: a suit drawn twice is what the ward holds. Three different, nothing's warded.",
+        ["warded"] = "A warded thing makes no sound and weighs nothing. Name it on the slip, and nothing that isn't there, and the ward gives it up.",
         ["engine"] = "You could pay off the Guild now. Or buy its Bookkeeping Engine for the same sum: every chest read for you, to finish the run fast.",
         ["seller_wenna"] = "Wenna's scale says what her chest weighs. Take away what you heard: what's left never stirred (cloak 3 lb, spell 1).",
         ["seller_pell"] = "Pell's ticket counts every article, false bottom and all. Count what you hear: one short means one under the floor.",
         ["seller_ansel"] = "Brother Ansel won't have his chests shaken hard: half again if you do. Crypt chests are full of holy cloaks.",
         ["seller_fennick"] = "Fennick packs in straw: everything stirs a strength later, cloaks and spells never. Firm, hard, then drop it.",
         ["seller_orrin"] = "Orrin wagers: read his chest exactly, every kind and every count, and he gives back a third of the price.",
-        ["seller_corisande"] = "Lady Corisande's trick boxes often hide a false bottom, and she'll have half again if you drop one.",
+        ["seller_corisande"] = "Solve grandmother's riddle. If you can't hear what it's about, it's warded: name it.",
         ["seller_aldous"] = "Sir Aldous takes the best weapon in his chest, for the fee he names. Value what's left.",
         ["seller_vexis"] = "Vexis gives you twelve seconds. Gently, then hard, and decide.",
         ["seller_malbranche"] = "Malbranche is cheap, but the dearest thing inside is his. Many middling things suit his bargain.",
-        ["seller_skrae"] = "Skrae hears everything but magic and the floor. Look for a glow, and drop it.",
+        ["seller_skrae"] = "Skrae's echoes come off everything, warded or not. An echo with nothing to hear is warded.",
         ["seller_ermine"] = "Lady Ermine prices only her gems; the rest comes free. Some are paste, and she won't have a lodestone near.",
         ["seller_aldo"] = "Old Aldo's price is your slip. Exactly right: a quarter off. Wrong: what it holds, and a quarter more.",
         ["seller_maw"] = "The Maw sells for one coin, but everyone after him today asks twice as much. Count who's still waiting.",

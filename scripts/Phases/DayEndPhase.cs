@@ -183,7 +183,7 @@ public partial class DayEndPhase : Phase
             var c = State.Commissions[i];
             float y = 36 + i * 39;
             var color = c.Done ? Palette.Good : c.Story ? Palette.Magic : Palette.Text;
-            string patron = c.Story ? "The Hooded Woman" : Sellers.All.FirstOrDefault(s => s.Key == c.Patron)?.Who ?? c.Patron;
+            string patron = c.Who;
             string reward = c.Done ? "DONE" : c.Story ? $"{State.CommissionReward(c)}g + shard" : $"{State.CommissionReward(c)}g";
             board.AddChild(UiKit.MakeLabel(patron, 16, color).Place(14, y, 220, 20));
             board.AddChild(UiKit.MakeLabel(reward, 16, c.Done ? Palette.Good : Palette.Gold, HorizontalAlignment.Right).Place(180, y, 174, 20));
@@ -195,7 +195,7 @@ public partial class DayEndPhase : Phase
         _side.AddChild(curios);
         curios.AddChild(UiKit.MakeLabel($"CURIOS {State.CurioKeys.Count}/{State.CurioSlots}", 16, Palette.Magic).Place(14, 8, 120, 20));
         if (State.CurioKeys.Count == 0)
-            curios.AddChild(UiKit.MakeLabel(State.Week < 2 ? "Nim the peddler comes by from week 2." : "Nim comes by once a week.", 16, Palette.Muted)
+            curios.AddChild(UiKit.MakeLabel(State.NextPeddler > 0 ? $"Nim the peddler comes by on day {State.NextPeddler}." : "Nim comes by once a week.", 16, Palette.Muted)
                 .Wrapped().Place(14, 30, SideW - 28, 40));
         for (int i = 0; i < State.CurioKeys.Count; i++)
         {

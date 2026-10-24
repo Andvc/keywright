@@ -6,7 +6,7 @@ using Keywright.Ui;
 namespace Keywright.Phases;
 
 /// <summary>
-/// Nim the peddler drops by before the shop opens, once a week from the second: three curios laid out on the counter,
+/// Nim the peddler drops by before the shop opens, once a week from the first: three curios laid out on the counter,
 /// each bending one rule of the trade, at prices that climb with the weeks. Buy what suits how you deal (there's room
 /// for a few), sell back what doesn't for half, and open the shop.
 /// </summary>

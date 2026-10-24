@@ -24,10 +24,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    run, the dues week by week and profit per customer at each shop, for tuning the economy.
    `-- --sim=songs` runs only the Heartsongs section (how often, each one on display from day 1 against curios, and the
    careful player with and without Heartsongs) for tuning them quickly; `-- --sim=sellers` only the per-seller table and
-   the lesson test (ten seconds), for a seller's rule.
+   the lesson test (ten seconds), for a seller's rule; `-- --sim=seller --who=KEY` plays one seller's visits and prints
+   each chest, clue, slip and deal, for debugging a rule.
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.
    Bot flags: `--seed=N --quit-at-end --days=N --no-tutorial --start-tier=N --gold=N --start-week=N --character=KEY
-   --challenge=N --talents=all --heartsongs=P --songs=all` (`--quit-at-end` quits after the first opening: use `--days`
+   --challenge=N --talents=all --heartsongs=P --songs=all --event=KEY` (`--event` makes every day that event, to check
+   its screens; `--quit-at-end` quits after the first opening: use `--days`
    for longer runs; `--heartsongs=0.3` puts a Heartsong in that share of chests, `--songs=all` plays as if all nine were
    known, so `--vault-demo --songs=all` shows the other ending). `--start-tier`
    jumps to a shop tier with the tools a player would own by then (use it to check later tiers' screens);
@@ -57,7 +59,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Categories.Odds`) so openings still surprise. Clues are
   perceptual (which sounds come at which strength, what glows, what the lodestone silences, a hollow drop, what straw
   muffles) or stated, and always true (what the seller says they heard, where it came from, and what some tell you
-  besides: `SellerDef.States`, Pell's ticket counting every article, Wenna's scale, Bramble's dream of the dearest thing).
+  besides: `SellerDef.States`, Pell's ticket counting every article, Wenna's scale, and the signs that point at a warded
+  thing).
   No mechanic is about whether a seller is lying: none of them do. Any new way to judge a chest must follow a rule
   people know from real life, and should be a deduction (subtract what you heard from a count or a weight, read a sign).
   The slip values things as good as the chest's colour promises (`Categories.Nominal`); sellers price by the average
@@ -101,17 +104,26 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `CanPayOff`, for exactly `DebtLeft` (`GameState.Cost`), it marks every chest's real contents on the slip as it comes
   in (`Appraisal.Recorded`, `CounterPhase.Record`), so a won run can be finished fast; the sim's careful player pays off
   instead.
+- Warded things (`Chest.Warded`, `SellerDef.Wards`, `Market.WardOne`): one thing a chest's last owner warded never
+  sounds, weighs nothing, isn't counted by a ticket or a bell, and is never priced; it comes out on opening only if the
+  slip named it (`Chest.Names`: one more of its kind marked than the chest holds, no kind over-marked, no false false
+  bottom), with the reveal the false bottoms used to have (`OpeningPhase.Unward`), and the gut counts it. Each is
+  pointed at by a stated clue (`Clue`, carried by the visit as `Visit.Says`, made by `Market.MakeClue`): Bramble's
+  dream sign, Gerda's dowry custom, Wren's tag, Corisande's riddle, Quill's faded roll, Skrae's echoes, Oriel's cards,
+  and the Sleepers' Moon's dreams and Wardens' Day's riddles for everyone. `Strategy.WardedKind` is the careful
+  player's solution: each is a deduction (a kind named that you can't hear), never a guess. A new puzzle seller needs
+  its clue there, a `Visit.WardHint` line, a lesson and a portrait.
 - The run (`Run.cs`, a partial of `GameState`): five-day weeks; the Gilded Guild's tithe every fifth evening (`Guild.Due`,
-  eight weeks then endless x1.5); pawning, Bram's word once a run, foreclosure. Curios (`Curios.cs`, from Nim weekly)
+  eight weeks then endless x2); pawning, Bram's word once a run, foreclosure. Curios (`Curios.cs`, from Nim weekly)
   each bend one rule and never reveal what's in a chest, and are priced as a share of the week's due (commons 1g on
   Nim's first visit); commissions (`Commissions.cs`) pay for delivering finds;
-  one event a week (`Events.cs`); the story's scenes and the shards of the Aldric Key that open the Crown Chest
+  two events a week (one in the first; `Events.cs`), planned a week ahead with Nim's day (`Events.Plan`,
+  `GameState.Plan`/`NextPlan`) for the ledger's calendar (`LedgerView.BuildCalendar`); the story's scenes and the shards of the Aldric Key that open the Crown Chest
   (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
-  judgment and talents each push that later; only the two together clear the debt more often than not (v18: the careful
-  player with no talents a little under half the time, with every talent three in four; a first run one in ten, nearly
-  always on a Heartsong's luck); careers first clear around the sixth run, open level 4 around the seventeenth, and
+  judgment and talents each push that later; only the two together clear the debt more often than not (v19: the careful
+  player with no talents about three runs in ten, with every talent about six in ten; a first run almost never); careers first clear around the sixth run, open level 4 around the seventeenth, and
   level 8 stays a wall. `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
   are foreclosed within a few weeks, and no early week sends careful players to Bram's word. Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, three times a run) tops up a day that starts
@@ -145,19 +157,21 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   flashes: route new screen effects through `Main.Shake`/`Flash`. Anything added to `GameState` that should survive
   a day boundary goes in `SaveData` too.
 - Every seller has one way of judging a chest (`Judgment`: listening, counting rattles, weight, colour, a dream, a
-  trade they know, a sense for magic, no idea) with a blind spot a careful player can see through, one way to trade,
+  trade they know, no idea) with a blind spot a careful player can see through, one way to trade,
   places their chests come from (`From`, `Origins.cs`: the place decides what a chest tends to hold) with a story for
   each (`Stories`, always true), and maybe one rule of their own that changes what you can do, what you're told or what
   the deal is (`Patience`, `HatesDrop`, `HatesMagnet`, `HatesHardShake`, `ShakeLimit`, `ShakeFee`, `Packs`, `Packhorse`,
-  `States`, `Wager`, `Heirloom`, `TakesDearest`, `SlipPrice`, `Gaze`), worded under the chest by `GameState.Terms` (and
-  `Visit.Clue` for what they state). `Strategy.Reckon` is the careful player's read of a stated clue.
+  `States`, `Wards`, `Wager`, `Heirloom`, `TakesDearest`, `SlipPrice`, `Gaze`), worded under the chest by `GameState.Terms` (and
+  `Visit.Clue` for what they state). `Strategy.Reckon` is the careful player's read of a stated clue. A rule must
+  change what a careful player can work out or do, every visit: one a tool makes moot goes (v19 replaced Wren's and
+  Corisande's sense for magic, which the witchlight made pointless, and Skrae's "hears all but magic", with puzzles).
   `Visits` sets how often they come (the Maw rarely). `Market` rolls and prices their chests; `Visit` trades, and its
   `Explain` says on the results and pass screens why a deal went the way it did;
   `Shop.Buy` takes a seller's claim and `Shop.Settle` a wager or the King's game. A new rule needs the sim, the bot
   (`Strategy.Levels`, `Worth`, `WorthBuying`) and a lesson. The sim's per-seller table must show a careful player
   profits from each, and buying blind shouldn't (Tam, who takes a few coins, and the Maw, whose coin costs the rest of
   the day, are the exceptions). Stories name what was heard (`{heard}`, `{count}`, `{heft}`, `{colour}`, `{magic}`,
-  `{articles}`, `{pounds}`, `{dream}`, `{price}`, `{fee}`) and must fit the speech bubble (about 170 characters with the
+  `{articles}`, `{pounds}`, `{dream}`, `{clue}`, `{price}`, `{fee}`) and must fit the speech bubble (about 170 characters with the
   price filled in).
 - `ShakeBox` gates sounds with the same rules as `Chest.Audible`: change both together (the shake test checks them).
 - UI is built in code with `UiKit` and `Painter` (absolute positions on a 1280x720 canvas), not in .tscn files.

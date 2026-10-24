@@ -261,6 +261,42 @@ public static class Categories
         _ => "a song",
     };
 
+    /// <summary>One of a kind, in a list: "coin", "a weapon", "a cloak" (the Arcanum's packing tags).</summary>
+    public static string One(Category kind) => kind switch
+    {
+        Category.Coins => "coin",
+        Category.Arms => "a weapon",
+        Category.Garb => "a cloak",
+        Category.Potions => "a potion",
+        Category.Scrolls => "a spell",
+        Category.Gems => "a gem",
+        _ => "a song",
+    };
+
+    /// <summary>What a kind of thing echoes like, to a bat's ears (Skrae's): round coin, long weapons, soft cloaks...</summary>
+    public static string Shape(Category kind) => kind switch
+    {
+        Category.Coins => "round",
+        Category.Arms => "long",
+        Category.Garb => "soft",
+        Category.Potions => "hollow",
+        Category.Scrolls => "flat",
+        Category.Gems => "tiny",
+        _ => "singing",
+    };
+
+    /// <summary>A kind's suit in the Locking's deck (Madame Oriel's cards).</summary>
+    public static string Suit(Category kind) => kind switch
+    {
+        Category.Coins => "Coins",
+        Category.Arms => "Swords",
+        Category.Garb => "Mantles",
+        Category.Potions => "Cups",
+        Category.Scrolls => "Wands",
+        Category.Gems => "Stars",
+        _ => "Songs",
+    };
+
     /// <summary>Every item sprite the game can show, for the importer and the collection.</summary>
     public static IEnumerable<string> AllSprites() =>
         All.SelectMany(c => c.Sprites.Append(c.FakeSprite)).Concat(Heartsongs.All.Select(h => h.Sprite)).Where(s => s != null).Distinct();

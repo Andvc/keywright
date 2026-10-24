@@ -7,7 +7,7 @@ demon Avarax, the Gilded Maw. The chests are still everywhere, and only a Keywri
 theirs: everyone else sells them unopened, and the ward lets nothing through but sound (the whole world is in
 `docs/world.md`). You're one of Bram's kin, with the Key-mark, and Bram hands you his stall at the Brindle crossroads.
 People bring you chests and price them their own way: some shake them and price what they heard, some go by the
-weight or the chest's colour, some feel for magic, some dream up a number, and each has a rule of their own (a rotten
+weight or the chest's colour, some go by a trade they know, some dream up a number, and each has a rule of their own (a rotten
 chest, a fee for every shake, a wager, a clock, a claim on what's inside). They tell you where the chest came from, and
 not all of them tell the truth. Shake each one yourself (gently, firmly, hard), drop it to listen for a false bottom,
 count the rattles, and work out what they missed, made up or misjudged. Mark what you think is inside on your
@@ -17,8 +17,8 @@ cross against your slip, and now and then something far better than the chest pr
 shop's name (synergies) and its exhibition, which draw more and better customers, and the shop moves inward, from the
 crossroads to Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate. The stall comes with Bram's twenty
 years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due that climbs from 40g to
-12,000g over eight weeks. Curios from Nim the peddler bend the rules in your favour, regulars pay well for
-commissions, something different happens in town once a week, and a hooded woman trades shards of the Aldric Key for
+420,000g over eight weeks. Curios from Nim the peddler bend the rules in your favour, regulars pay well for
+commissions, something different happens in town twice a week, and a hooded woman trades shards of the Aldric Key for
 the finds only a good ear turns up. Pay all eight dues, or the whole of what's left at once whenever you have it, and
 the stall is free (and with the Key whole, the Crown Chest opens on your counter and the Locking holds); fall short and
 the Guild seals the shop.
@@ -45,9 +45,9 @@ pawnbroker and a mudlark in Crownhold; demons, a court lady, a fence, the King i
 himself at the Royal Emporium. Every chest has an **origin** (`Origins`: the millpond, the Barrow, a goblin warren, the
 abbey crypt, the Maw's hoard...), and the origin decides what it tends to hold. Sellers say where theirs came from
 (`SellerDef.Stories`), always truthfully: whether a seller is lying was never a mechanic worth playing (v18 took the
-tall tales out), so the place is a clue to read, never a trap. The ledger keeps a Places page of what each place tends
-to hold, and a careful player reads every chest by its place (`Strategy.Likely`). Some sellers tell you something
-more, always true and always worth working out (`SellerDef.States`, below).
+tall tales out), so the place is a clue to read, never a trap, and a careful player reads every chest by its place
+(`Strategy.Likely`). Some sellers tell you something more, always true and always worth working out
+(`SellerDef.States`, below).
 
 ## The puzzle: rules you'd expect from real life
 
@@ -190,7 +190,7 @@ Each answers one question by a rule you'd expect from real life. All of them are
 | How | From | Tells you | Cost or risk |
 |---|---|---|---|
 | Shake gently, firmly, hard | start | which kinds are inside, and how many of each | Brother Ansel hates a hard shake; Dorrin's chests stand two seconds of it; Snikkit charges for every strength after the first |
-| Drop it (lift it high, let go) | Thornwick | a hollow BOOM means a false bottom | glass may break (half the time each); Lady Corisande hates it |
+| Drop it (lift it high, let go) | Thornwick | a hollow BOOM means a false bottom | glass may break (half the time each); Pell hates it |
 | Witchlight (200g) | Crownhold | always lit once bought: anything enchanted glows when it makes a sound | none |
 | Lodestone (400g) | Royal Emporium | iron can't move: no clanks to drown things out, and demon gold goes quiet | Lady Ermine hates it |
 
@@ -238,14 +238,13 @@ something a real person might insist on. Not every visit is a deal: often the ri
 | How they judge | Who | Their blind spot | How to beat it |
 |---|---|---|---|
 | Listen at one strength | Penn, Snikkit and Fennick (gently), Ansel and Pell (firmly), Hob and Shelly (hard) | what their strength can't stir or a clank drowns; they never count | shake at the strengths they didn't; count |
-| Listen gently, then hard | Skrae | nothing it can hear; enchantment and false bottoms | witchlight and drop: it brings plenty of both |
-| Count the rattles | Mags | a rattle's a rattle: a dagger costs what a purse does | buy when the rattles are good kinds |
+| Listen gently, then hard | Skrae, Gerda (hard) | nothing they can hear; enchantment, and what's warded | the witchlight; the echoes and the dowry custom (below) |
+| Count the rattles | Mags, Quill (firmly) | a rattle's a rattle: a dagger costs what a purse does | buy when the rattles are good kinds |
 | Weight | Wenna | heavy means valuable: arms are heavy and cheap, potions and scrolls light | buy light chests of good things |
-| The chest's colour | Dorrin, Orrin, Corisande (feels magic), Aldous, Vexis, Malbranche, the Maw | never look inside | buy when it holds more than a chest that colour usually does |
+| The chest's colour | Dorrin, Wren, Orrin, Corisande, Aldous, Vexis, Malbranche, Madame Oriel, the Maw | never look inside | buy when it holds more than a chest that colour usually does |
 | A dream | Mother Bramble | the price has nothing to do with the chest | add it up, buy when the dream's cheap |
 | Knows only arms | Grit | prices other things at half, and gems as diamonds | haggle; mind the tinkles |
 | Knows only her gems | Ermine | prices her gems at what she paid; the rest comes free, but some gems are paste | weigh the free things against the paste |
-| Feels magic | Wren | can't tell a coin from a coat; wants more only for enchanted things | name a low price; a refusal means something's enchanted |
 | No idea | Tam, Old Aldo | Tam takes a few coins (and his millpond chests are sometimes empty); Aldo lets your slip set the price | shake first; read Aldo's exactly |
 | Packed it himself | Silas | sells demon gold as gold and gems, cheap | the lodestone silences fakes |
 
@@ -257,7 +256,7 @@ something a real person might insist on. Not every visit is a deal: often the ri
 | A rotten chest (`ShakeLimit`) | Dorrin | two seconds of shaking, all told, then it creaks and won't be shaken again | one strength: hard hears everything that isn't drowned out; gentle hears the coin a clank would hide |
 | A fee for shaking (`ShakeFee`) | Snikkit | every strength you try after the first puts his price up a tenth | is the hard shake worth a tenth? Gentle and hard between them hear everything firm would |
 | No hard shake (`HatesHardShake`) | Brother Ansel | half again if you do | the crypt's vestments only flump at a hard shake: tick them on faith or pay to be sure |
-| No drop (`HatesDrop`) | Lady Corisande | half again if you do | half her grandmother's trick boxes hide a false bottom |
+| No drop (`HatesDrop`) | Pell | half again if you do | his ticket counts the false bottom instead |
 | No lodestone (`HatesMagnet`) | Lady Ermine | half again if you use it | a quarter of her gems are paste |
 | A clock (`Patience`) | Vexis | twelve seconds | gently, then hard, and decide |
 | A dream price | Mother Bramble | the price is a dream (0.4 to 1.8 times a usual chest) | add it up yourself |
@@ -280,7 +279,24 @@ of hearing. Each is a deduction, on a rule from real life, taught by its seller'
 | Fennick the Smuggler | **straw** (`Packs`, `Chest.Packed`): packed so nothing clinks at the Wardens' toll | everything stirs a strength later (`Chest.Needs`): a gentle shake proves nothing, a firm one hears coin, potions and gems, a hard one weapons (whose clank then drowns the rest), and cloaks and spells never stir. He shakes firmly, so he never prices a weapon; nobody can price the soft things, so read them by the road's odds. Still often a false bottom: drop it |
 | Pell the Pawnbroker | **the pawn ticket** (`Clue.Articles`): how many articles were pledged, false bottom and all; he won't have pledges dropped | count every separate sound at every strength against the ticket: one short is under the false bottom |
 | Wenna the Huntress | **her game scale** (`Clue.Pounds`): the weight, to the pound; her chests hang on a mare who spooks at a hard shake (`Packhorse`) | take what you heard from the weight: what's left never stirred (a cloak 3 lb, a spell 1, a purse under the floor 4). Her scale shows beside the chest, like Hesk's |
-| Mother Bramble | **a dream** (`Clue.Dream`): she always dreams true of the dearest thing inside, as a sign (magpie, thorn, raven's wing, river, owl, star) | if the dreamt kind never sounds, it's under a false bottom; if a cheap kind is the dearest, it's finer than its colour (or the dear one is worse) |
+| Mother Bramble | **a dream** (`Clue.Dream`, `Market.DreamtOf`): she always dreams true, as a sign (magpie, thorn, raven's wing, river, owl, star), of what the Wood warded inside, or else of the dearest thing (never under a false bottom) | if the dreamt kind never sounds at any strength, it's the warded thing: name it |
+| Gerda the Matchmaker | **the dowry custom** (`Clue.Dowry`): a Thornwick dowry always holds coin, a cloak and a potion | she shakes hard and hears everything; whichever of the three you can't hear (after every strength) is warded |
+| Wren the Apprentice | **the packing tag** (`Clue.Tag`): every kind packed, warded or not | a kind on the tag that never sounds is warded |
+| Lady Corisande | **grandmother's riddle** (`Clue.Riddle`) on the lid, about one thing inside (the warded one, if there is one) | answer the riddle; if the answer never sounds, it's warded |
+| Quill the Archivist | **the ward-roll** (`Clue.Roll`): the warded thing's name, every other letter faded ("B_o_d R_b_"); a blank roll, nothing warded | read the name (the words are ordinary ones: 'R_b_' is a ruby, 'E_i_i_' an elixir) and name its kind |
+| Skrae | **its echoes** (`Clue.Echo`): the shape of everything inside, warded or not (round coin, long weapon, soft cloak, hollow potion, flat spell, tiny gem) | one more echo of a shape than you can hear is warded |
+| Madame Oriel | **three cards** (`Clue.Cards`) from the Locking's deck (Coins, Swords, Mantles, Cups, Wands, Stars) | a suit drawn twice is what the ward holds; three different suits, nothing |
+
+**Warded things** (`Chest.Warded`, from Thornwick). Some chests hold one thing their last owner warded: it never
+sounds, weighs nothing, isn't on a pawn ticket or counted by the Drowned Bell, and nobody prices it. It comes out on
+opening only if your slip named it (`Chest.Names`): one more of its kind marked than the chest otherwise holds, with no
+kind over-marked and no false bottom ticked that isn't there, so guessing at every kind doesn't work. Named, the ward
+lets go after everything else has landed, with the slow reveal false bottoms used to have ("...wait. The ward lets go
+of what you named!"); not named, it shows, greyed, in the ward, and the results say which clue pointed at it
+(`Visit.WardHint`). The gut on a pass counts it, and so does the odds bar once you've marked it. Each seller who wards
+says something that points at it (above), always true, and solving it is a deduction from what you can and can't hear:
+a kind the clue names that never sounds. The Sleepers' Moon and Wardens' Day hand everyone a dream or a riddle.
+(v19: a false bottom is now just a hollow you hear with a drop; the puzzle that pays for working out is the ward.)
 
 Three ways to trade:
 - **Fixed price**: buy or pass.
@@ -297,19 +313,22 @@ Three ways to trade:
 | Dorrin the Delver | Brindle | the Barrow | colour | fixed, cheap | a rotten chest |
 | Snikkit the Goblin | Thornwick | a goblin warren | a gentle shake | fixed | a tenth more per strength |
 | Wenna the Huntress | Thornwick | outlaws' camps, wolves' dens | weight | fixed, fair | her game scale; no hard shake (her mare); 80% locked |
-| Mother Bramble | Thornwick | the Old Wood | a dream | fixed | dreams of the dearest thing (25% false bottoms) |
+| Mother Bramble | Thornwick | the Old Wood | a dream | fixed | her dream (half warded) |
 | Brother Ansel | Thornwick | the abbey crypt | a firm shake | fixed, steep | no hard shake |
 | Fennick the Smuggler | Thornwick | the smugglers' road | a firm shake, through straw | haggle | straw (45% false bottoms) |
-| Wren the Apprentice | Crownhold | the Arcanum stores | feeling for magic | name a price | (25% enchanted) |
+| Gerda the Matchmaker | Thornwick | a bride's dowry | a hard shake | fixed | the dowry custom (half warded) |
+| Wren the Apprentice | Crownhold | the Arcanum stores | colour | name a price | the packing tag (half warded; 25% enchanted) |
 | Archmage Orrin | Crownhold | the Arcanum stores | colour | fixed | a wager |
 | Grit the Miner | Crownhold | a dwarf-hold | knowing arms (hard) | haggle | |
-| Lady Corisande | Crownhold | a noble's strongroom | colour, plus magic | fixed | no drop (50% false bottoms) |
+| Lady Corisande | Crownhold | a noble's strongroom | colour | fixed | grandmother's riddle (half warded) |
 | Pell the Pawnbroker | Crownhold | forgotten pawn lots | a firm shake, never counting | fixed, steep | the pawn ticket; no drop (60% pairs, 35% false bottoms) |
+| Quill the Archivist | Crownhold | the Archive vaults | counting rattles (firmly) | fixed, steep | the ward-roll (half warded) |
 | Shelly the Mudlark | Crownhold | the Aldwater mud | a hard shake | fixed | (half her scrolls are sand) |
 | Sir Aldous | Crownhold | a knight's war chest | colour | fixed | an heirloom |
 | Vexis the Imp | Royal Emporium | the Maw's hoard | colour | fixed | twelve seconds (things often better than their colour) |
 | Malbranche | Royal Emporium | the Maw's hoard | colour | fixed, cheap | a devil's due |
-| Skrae | Royal Emporium | the Maw's hoard | a gentle shake, then a hard one | fixed | (enchantment 20%, false bottoms 30%) |
+| Skrae | Royal Emporium | the Maw's hoard | a gentle shake, then a hard one | fixed | its echoes (half warded; enchantment 20%) |
+| Madame Oriel | Royal Emporium | a courtier's chest | colour | fixed | three cards (half warded) |
 | Lady Ermine | Royal Emporium | a noble's strongroom | her gems, at what she paid | fixed | no lodestone (25% paste) |
 | Silas Gilt | Royal Emporium | the Maw's hoard | packed it himself | fixed, at about half | (60% demon gold) |
 | Old Aldo | Royal Emporium | the Royal Treasury | none | your slip | the King's game |
@@ -375,7 +394,7 @@ with nothing new, too long.)
 
 The days come in weeks of five. At the end of each week's fifth day Mister Vane, Collector for the Gilded Guild, comes
 for the week's tithe (`Guild.Due`, `DuesPhase`). Bram's debt is eight weeks long; after that the Guild keeps coming for "interest",
-half as much again each week, for as long as you last (endless).
+twice as much each week since v19 (half as much again before), for as long as you last (endless).
 
 | Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | then |
 |---|---|---|---|---|---|---|---|---|---|
@@ -410,11 +429,24 @@ and then climb six to eight times a week, as fast as a growing shop does:
 A careful collector's purse on the Guild's night goes from about 130g in week 1 to 2,000g in week 3, 20,000g in week 5
 and 200,000g in week 8; a strong run takes off at the Royal Emporium and pays it all off in week 6 or 7.
 
+**v19: the debt grows faster.** The owner: the debt grew too slowly, and the game was too easy even with no talents.
+Warded things and two events a week had also put up what a careful shop earns (the careful collector with no talents
+cleared 64% of runs before this). The first three weeks stay small, for learning the stall; from week 4 each due is
+three to six times the last, so the Guild's night is felt every week, and after the debt the interest doubles weekly:
+
+| Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | then |
+|---|---|---|---|---|---|---|---|---|---|
+| Due | 40g | 100g | 280g | 900g | 5,000g | 30,000g | 130,000g | 420,000g | x2 a week |
+
+The careful collector with no talents now clears about three runs in ten (v18: a little under half), with every
+talent about six in ten (v18: three in four); a first run almost never does, and gets through the first three weeks
+before the dues outgrow it.
+
 **Paying it off early.** Whenever you have all that's left of the debt (`GameState.DebtLeft`: this week's due if it's
 unpaid, and every week's after it to the eighth), you can pay it at once: from the day-end screen's Guild panel, which
 shows what's left and turns into a "Pay it all off" button (with a confirmation), or on the Guild's night beside the
 week's due. The debt is cleared and the run is won, however early (`ClearedDay`; the profile keeps your fastest).
-Keep trading after, and nobody comes until week 9, when the Guild's interest starts. Since v18 a run that takes off
+Keep trading after, and nobody comes until week 9, when the Guild's interest starts (twice the week before, every week). Since v18 a run that takes off
 pays it off a week or two early (or buys the Bookkeeping Engine for the same sum and finishes fast); the rest meet the
 wall on the eighth night.
 
@@ -443,8 +475,8 @@ shop and the run is over. A short night is also the most dramatic moment the sho
 
 ## Curios
 
-Nim the peddler (horned, cheerful, half-something; nobody asks) drops by before opening once a week from week 2
-(`PeddlerPhase`; Nim's first visit is the morning after the Guild's first) with three curios, oddments that came out of
+Nim the peddler (horned, cheerful, half-something; nobody asks) drops by before opening once a week from the first
+(`PeddlerPhase`; Nim's first visit is the first week's third morning, and the calendar shows each week's) with three curios, oddments that came out of
 Locking chests and bend a rule of the trade (`Curios.Stock`: rarer ones more often as the weeks go by). Each bends one rule of
 and you have room for three (a Curio Case, 250g in Crownhold, and a Velvet Case at the Royal Emporium add one
 each), so which ones you keep shapes how you play. None of them tells you what a chest holds before you buy it, and
@@ -503,20 +535,43 @@ a chest with a flump in it is worth chasing when Penn wants silk.
 
 ## Events
 
-Once a week from week 2, on a day of its own, something happens in town (the day card announces it, and a chip in the
-top bar keeps it there all day: click it to read it again; `Events`):
+Twice a week (once in the first, on its fourth day), on days of their own, something happens in town (the day card
+announces it, and a chip in the top bar keeps it there all day: click it to read it again; `Events`). Each week's plan
+(its two event days, the kind wanted, and Nim's day) is made a week ahead (`Events.Plan`, `GameState.Plan` and
+`NextPlan`, saved), so the ledger's calendar can show this week and next. They all come round before any comes twice;
+the first week's is a gentle one (it changes the day, not how to judge a chest).
 
-| Event | That day |
-|---|---|
-| Fair Day | three more customers |
-| Locking Day | three hundred years since the Locking: everything sells for a quarter more |
-| The Crown's Buyer | one kind of thing sells for double |
-| A Royal Chest | someone brings one of King Aldric's own chests, gilded with the royal seal: a colour better than its seller thinks, with something enchanted inside |
-| The Stranger | an extra customer with a black chest wrapped in iron chains: nothing rattles, but a drop tells you how heavy it is (heavy ones hold more: often junk, sometimes a fortune) |
-| A Storm | two fewer customers, but every chest a colour better |
-| A Barge Aground (Crownhold on) | a treasure barge on the Aldwater: lots come in twos and threes |
+| Event | From | That day |
+|---|---|---|
+| Fair Day | start | three more customers |
+| Locking Day | start | three hundred years since the Locking: everything sells for a quarter more |
+| The Crown's Buyer | start | one kind of thing sells for double |
+| A Foreclosure Sale | start | the Guild has foreclosed on a manor: everyone asks a fifth less |
+| The Tourney | start | knights in town: weapons and cloaks sell for half again as much |
+| A Storm | start | two fewer customers, but every chest a colour better |
+| A Royal Chest | start | someone brings one of King Aldric's own chests, gilded with the royal seal: a colour better than its seller thinks, with something enchanted inside |
+| The Stranger | start | an extra customer with a black chest wrapped in iron chains: nothing rattles, but a drop tells you how heavy it is (heavy ones hold more: often junk, sometimes a fortune) |
+| A Day of Mourning | start | the old Duke's funeral: nobody stands for a hard shake (cloaks and spells go unheard; read the rest) |
+| The Town Crier | start | Lord Harrow's crier posts a reward for one thing of a kind, as good as the regulars ask: three times its price, today only (a one-day commission) |
+| The Minstrels' Fair | start | anyone with a box that hums brings it: a Heartsong three times as likely |
+| The Sleepers' Moon | Thornwick | everyone dreamt true, like Mother Bramble: every ordinary seller tells you their dream (of the thing they warded, if they warded one, which most did; else of the dearest thing that can sound: a dream never reaches under a false bottom) |
+| Wardens' Day | Thornwick | the old custom: every ordinary seller has warded one thing and left a riddle for it |
+| The Guild's Count | Thornwick | a Guild clerk tallies every article in every chest, false bottoms and all (Pell's ticket, for everyone) |
+| The Guild's Assessor | Thornwick | a tenth of every sale goes to the Guild |
+| A Barge Aground | Crownhold | a treasure barge on the Aldwater: lots come in twos and threes |
+| A Witchlight Moon | Crownhold | the old enchantments wake: things are far likelier to be enchanted |
 
-They all come round before any comes twice.
+The puzzle days (`Events.Restate`) give every seller without a clue of their own (and not the King, whose price is your
+slip) the day's clue, so the whole day is a run of Mother Bramble's and Lady Corisande's puzzles, or of Pell's
+counting.
+
+## The ledger's calendar
+
+The ledger's Calendar page (it replaced Places, which was reference nobody needed once every seller says where their
+chest came from) shows three weeks, a day to a box: today framed in gold, the days gone by faded, each day's event
+(this week's and next week's are planned), the morning Nim comes by, and each Guild's night with what it will want
+(this week's in red if the purse is short). Hovering a day tells its whole story; until then, the next thing coming is
+told under the grid. Nim comes every week from the first (its third morning), on a day without an event when he can.
 
 ## The story
 
@@ -691,9 +746,9 @@ Book curio, Isolde's door, the Hearthstone).
 | Place | Cost | Customers/day | Chests | New |
 |---|---|---|---|---|
 | Bram's Stall, the Brindle crossroads | start | 4 | mostly wood | jingle, clank, flump; three strengths; clanks drown jingles; from day 2, haggling, naming a price, counting rattles, stories; Dorrin's rotten Barrow chests |
-| Thornwick Market | 60g, once the stall has earned 120g | 5 | mostly green | slosh and rustle; locks; false bottoms and the drop; the display shelf and cabinets; Snikkit's fee, Wenna's scale and mare, Bramble's dreams, Ansel's crypt, Fennick's straw |
-| Crownhold | 300g | 6 | mostly blue | gems; two or three of a kind and the pawn ticket (Pell); sand (Shelly); enchantment and the Witchlight; synergies and the Crownhold Charter; Wren, Orrin's wager, Grit, Corisande's trick boxes, Sir Aldous's heirloom |
-| The Royal Emporium | 4,000g | 7 | blue and purple | Vexis's hourglass, Malbranche's due, Skrae, Silas's demon gold, Ermine's paste, the King's game, the Maw's gaze, the Lodestone, the Royal Seal |
+| Thornwick Market | 60g, once the stall has earned 120g | 5 | mostly green | slosh and rustle; locks; false bottoms and the drop; the display shelf and cabinets; Snikkit's fee, Wenna's scale and mare, warded things with Bramble's dreams and Gerda's dowries, Ansel's crypt, Fennick's straw |
+| Crownhold | 300g | 6 | mostly blue | gems; two or three of a kind and the pawn ticket (Pell); sand (Shelly); enchantment and the Witchlight; synergies and the Crownhold Charter; Wren's packing tags, Orrin's wager, Grit, Corisande's riddles, Quill's ward-rolls, Sir Aldous's heirloom |
+| The Royal Emporium | 4,000g | 7 | blue and purple | Vexis's hourglass, Malbranche's due, Skrae's echoes, Madame Oriel's cards, Silas's demon gold, Ermine's paste, the King's game, the Maw's gaze, the Lodestone, the Royal Seal |
 
 Each move multiplies what a customer is worth (the sim's careful player: about 8g of profit a customer at the stall,
 17g at Thornwick, 100g at Crownhold, 1,400g at the Royal Emporium), so a careful player saves for the next move before
@@ -720,63 +775,71 @@ Each style plays whole runs as Kit at level 0 with no talents: buying chests, cu
 keeping enough back for the Guild) and upgrades (keeping Bram's working purse), delivering commissions, paying the
 Guild (pawning, or Bram's word, when short), taking Bram's stash when a day starts nearly broke, and paying off the
 whole debt as soon as it can (always paying off rather than buying the Bookkeeping Engine). These are the perfect
-listeners; how real players get there is in *Balance across a career*, below. v18's numbers:
+listeners; how real players get there is in *Balance across a career*, below. v19's numbers:
 
 | Style | Still trading after each due, weeks 1-8 | Debt cleared | Crown Chest | Foreclosed (median week) | Thornwick | Crownhold | Royal Emporium |
 |---|---|---|---|---|---|---|---|
-| Pays their price, every chest | 100 89 65 37 23 12 4 0% | 0% | 0% | all (week 4) | day 6 | never | never |
-| One hard shake, keeps the seller's marks | 100 100 98 91 77 56 31 0% | 0% | 0% | all (week 7) | day 4 | day 13 | day 27 |
-| Every strength, drops when safe | 100 100 100 98 96 88 75 9% | 9% | 9% | 99% (week 8) | day 3 | day 11 | day 19 |
-| + Witchlight and Lodestone | 100 100 100 98 96 88 74 25% | 25% | 25% | 99% (week 8) | day 3 | day 11 | day 20 |
-| + keeps grand things | 100 100 100 98 96 89 82 38% | 38% | 38% | 96% (week 8) | day 3 | day 11 | day 20 |
+| Pays their price, every chest | 100 94 60 28 11 2 1 0% | 0% | 0% | all (week 4) | day 5 | never | never |
+| One hard shake, keeps the seller's marks | 100 100 95 84 60 25 6 0% | 0% | 0% | all (week 6) | day 4 | day 11 | never |
+| Every strength, drops when safe | 100 100 99 98 91 70 63 6% | 6% | 6% | all (week 8) | day 3 | day 8 | day 16 |
+| + Witchlight and Lodestone | 100 100 99 98 92 74 68 14% | 14% | 14% | all (week 8) | day 3 | day 8 | day 16 |
+| + keeps grand things | 100 100 99 98 92 78 73 30% | 30% | 30% | all (week 8) | day 3 | day 8 | day 16 |
 
-("Foreclosed" counts the Guild's endless interest after the debt, which catches nearly every shop by week 12.)
+("Foreclosed" counts the Guild's endless interest after the debt, which doubles weekly and catches every shop by week
+11.)
 
-The tools now matter (9% to 25%), and the exhibition more (38%). Week 8 is the wall (200,000g, nearly four times
-week 7).
+The tools matter (6% to 14%), and the exhibition more (30%). Week 8 is the wall (420,000g, more than three times
+week 7), and the middle weeks are felt: a fifth of careful runs fall at weeks 5 to 7, and half need Bram's word
+(median week 6). v18's careful collector cleared 38%, and with this version's warded things and twice-weekly events
+would have cleared 64%.
 
 Week by week for the careful collector (gold on the Guild's night, before paying):
 
 | Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 |---|---|---|---|---|---|---|---|---|---|
-| Due | 40 | 100 | 200 | 400 | 1,200 | 7,000 | 55,000 | 200,000 | 300,000 |
-| Gold, 10th percentile | 80 | 182 | 336 | 662 | 814 | 3,642 | 11,804 | 16,637 | 333,630 |
-| Gold, median | 136 | 469 | 1,915 | 4,007 | 9,388 | 36,574 | 89,485 | 121,801 | 538,668 |
-| Paid | 100% | 100% | 100% | 99% | 98% | 93% | 91% | 36% | 92% |
-| At the Royal Emporium | 0% | 1% | 17% | 48% | 84% | 93% | 96% | 97% | 100% |
+| Due | 40 | 100 | 280 | 900 | 5,000 | 30,000 | 130,000 | 420,000 | 840,000 |
+| Gold, 10th percentile | 88 | 227 | 589 | 782 | 1,546 | 8,159 | 41,887 | 36,745 | 241,181 |
+| Gold, median | 169 | 680 | 3,355 | 6,393 | 37,562 | 101,883 | 207,547 | 181,714 | 950,532 |
+| Paid | 100% | 100% | 99% | 99% | 94% | 85% | 94% | 20% | 58% |
+| At the Royal Emporium | 0% | 10% | 37% | 74% | 93% | 96% | 98% | 100% | 100% |
 
-Profit per customer at each shop, for the careful collector: about 8g at the stall, 17g at Thornwick, 95g at Crownhold
-and 1,500g at the Royal Emporium. A collector fills about 19 commissions a run (11,000g), opens Bram's stash less than
-once, and needs Bram's word in about a third of runs, almost all in week 7, short of the dues that the Emporium hasn't
-had long enough to pay. Surprises: about one thing in eight comes out a step better than its chest (0.7% two or more),
-worth 27% of what the chests held (v17: 14%).
+Profit per customer at each shop, for the careful collector: about 9g at the stall, 20g at Thornwick, 100g at Crownhold
+and 1,200g at the Royal Emporium. A collector fills about 18 commissions a run (11,000g), opens Bram's stash less than
+once, and needs Bram's word in about half of runs (median week 6). Surprises: about one thing in eight comes out a step
+better than its chest (0.7% two or more), worth 27% of what the chests held.
 
 What curios and synergies are worth, to the careful player with both tools who sells everything:
 
 | | Debt cleared | Median day cleared | Median gold on the night, week 4 / 6 / 8 |
 |---|---|---|---|
-| With both | 25% | 35 | 3,716 / 21,128 / 56,891 |
-| No curios | 18% | 35 | 3,754 / 22,710 / 52,247 |
-| No synergies | 1% | 36 | 2,990 / 5,925 / 8,035 |
-| Neither | 1% | 37 | 2,832 / 5,920 / 5,853 |
+| With both | 14% | 37 | 6,335 / 53,700 / 112,468 |
+| No curios | 4% | 35 | 3,050 / 24,726 / 31,851 |
+| No synergies | 0% | - | 3,657 / 12,898 / 10,138 |
+| Neither | 0% | - | 2,321 / 5,633 / 6,751 |
 
-Synergies are now the shop's spine (a tenth a level on their kinds' sale prices, with up to three active); curios
-are a real edge (the Lucky Coin and the Four-Leaf Clover most).
+Synergies are the shop's spine (a tenth a level on their kinds' sale prices, with up to three active); curios are a
+real edge (the Lucky Coin most).
 
 Per seller, at their own place (with the shop's tools and buyers' trades), profit per visit for a careful player,
 against paying their price blind. Every habit and every rule pays for putting up with it; only Tam (a few coins for
-anything), Wren (a modest sum when nothing's enchanted), Mags and Wenna pay a little blind, and the Maw's coin pays
-anyone (its price is the rest of the day, which the table doesn't count):
+anything), Mags and Wenna pay a little blind, and the Maw's coin pays anyone (its price is the rest of the day, which
+the table doesn't count). The puzzle sellers (Bramble, Gerda, Wren, Corisande, Quill, Skrae, Oriel) pay the careful
+player for solving their clue, and lose the blind buyer money:
 
-| | Tam | Penn | Hob | Mags | Dorrin | Snikkit | Wenna | Bramble | Ansel | Fennick | Wren | Orrin |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Careful | +13 | +5 | +11 | +7 | +2 | +9 | +16 | +18 | +21 | +17 | +61 | +114 |
-| Blind | +12 | 0 | 0 | +3 | -1 | -6 | +4 | -6 | -1 | -41 | +12 | -42 |
+| | Tam | Penn | Hob | Mags | Dorrin | Snikkit | Wenna | Bramble | Ansel |
+|---|---|---|---|---|---|---|---|---|---|
+| Careful | +13 | +5 | +11 | +7 | +2 | +10 | +16 | +22 | +21 |
+| Blind | +12 | 0 | 0 | +3 | -1 | -6 | +4 | -17 | -1 |
 
-| | Grit | Corisande | Pell | Shelly | Aldous | Vexis | Malbranche | Skrae | Ermine | Silas | Aldo | the Maw |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Careful | +207 | +42 | +198 | +40 | +49 | +82 | +10 | +154 | +98 | +182 | +620 | +1,481 |
-| Blind | -1,088 | -23 | -44 | -40 | -29 | -532 | -195 | -29 | -226 | -61 | -573 | +1,418 |
+| | Fennick | Gerda | Wren | Orrin | Grit | Corisande | Pell | Quill | Shelly |
+|---|---|---|---|---|---|---|---|---|---|
+| Careful | +18 | +12 | +42 | +122 | +216 | +81 | +195 | +102 | +34 |
+| Blind | -41 | -31 | -20 | -32 | -1,099 | -60 | -41 | -3 | -42 |
+
+| | Aldous | Vexis | Malbranche | Skrae | Ermine | Oriel | Silas | Aldo | the Maw |
+|---|---|---|---|---|---|---|---|---|---|
+| Careful | +47 | +96 | +48 | +151 | +100 | +76 | +178 | +331 | +1,535 |
+| Blind | -36 | -521 | -222 | -155 | -160 | -494 | -35 | -577 | +1,452 |
 
 The careful player plays the King's game only on a read it could check every way (every strength and the drop): a
 wrong read costs a quarter more than the chest held, and Hesk, who can't shake hard or drop, never plays it. It buys

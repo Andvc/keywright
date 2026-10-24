@@ -1315,6 +1315,40 @@ def _fennick(c):
     c.dot(f.right + 1, f.eyes + 4, "gold")  # an earring
 
 
+def _gerda(c):
+    body(c, "wine", collar="apron", neck="ruddy", wide=17)
+    f = head(Face(c, top=8, width=19, height=19), "ruddy")
+    hair(f, "hairgrey", "bun")
+    c.poly([(f.left - 2, f.top + 4), (f.cx, f.top - 3), (f.right + 2, f.top + 4), (f.right, f.top + 1), (f.left, f.top + 1)], "tunicred")  # a kerchief
+    c.dot(f.right + 2, f.top + 5, "tunicred").dot(f.right + 3, f.top + 7, "tunicred")
+    eyes(f, "closed"), brows(f, "hairgrey"), nose(f, "ruddy"), mouth(f, "smile", width=2)
+    c.dots([(13, 22), (14, 22), (24, 22), (25, 22)], "blush")
+    c.ellipse(26, 29, 30, 33, "plume").dot(28, 31, "gold")  # a wedding flower on her shawl
+
+
+def _quill(c):
+    body(c, "olive", collar="apron", neck="fair")
+    c.dots([(14, 33), (15, 34), (23, 32)], "line")  # ink stains
+    f = head(Face(c, top=7, height=20), "fair")
+    hair(f, "hairbrown", "combover")
+    eyes(f, "dot", dy=1), brows(f, "hairbrown"), nose(f, "fair", big=True), mouth(f, "flat", width=1)
+    c.ellipse(12, 14, 17, 19, "glass").ellipse(21, 14, 26, 19, "glass").line([(17, 16), (21, 16)], "gold")  # spectacles
+    c.dot(14, 16, "pupil").dot(23, 16, "pupil")
+    c.line([(f.right + 1, f.top + 2), (f.right + 5, f.top - 6)], "white", 2)  # a quill behind his ear
+    c.line([(f.right + 2, f.top + 1), (f.right + 1, f.top + 4)], "line")
+
+
+def _oriel(c):
+    body(c, "plum", collar="gold", neck="tan")
+    f = head(Face(c), "tan")
+    hair(f, "hairblack", "long")
+    c.ellipse(f.left - 3, f.top - 5, f.right + 3, f.top + 5, "lavender").rect(f.left - 3, f.top + 1, f.right + 3, f.top + 4, "lavender")  # a headwrap
+    c.dot(f.cx, f.top + 2, "ruby")
+    eyes(f, "narrow"), brows(f, "hairblack"), nose(f, "brown"), mouth(f, "smirk", width=1)
+    c.dots([(f.left - 2, f.eyes + 4), (f.left - 2, f.eyes + 5), (f.right + 2, f.eyes + 4), (f.right + 2, f.eyes + 5)], "gold")  # hoops
+    c.rect(26, 27, 31, 35, "white").rect(27, 28, 30, 34, "pearl").dot(28, 31, "ruby").dot(29, 31, "ruby")  # a card
+
+
 def _wren(c):
     body(c, "tunicblue", collar="apron", neck="fair")
     f = head(Face(c), "fair")
@@ -1533,12 +1567,12 @@ PORTRAITS = {
     "tam": ("stall", _tam), "penn": ("stall", _penn), "hob": ("stall", _hob), "mags": ("stall", _mags),
     "dorrin": ("stall", _dorrin),
     "snikkit": ("thornwick", _snikkit), "wenna": ("thornwick", _wenna), "bramble": ("thornwick", _bramble),
-    "ansel": ("thornwick", _ansel), "fennick": ("thornwick", _fennick),
+    "ansel": ("thornwick", _ansel), "fennick": ("thornwick", _fennick), "gerda": ("thornwick", _gerda),
     "wren": ("crownhold", _wren), "orrin": ("crownhold", _orrin), "grit": ("crownhold", _grit),
     "corisande": ("crownhold", _corisande), "pell": ("crownhold", _pell), "shelly": ("crownhold", _shelly),
-    "aldous": ("crownhold", _aldous),
+    "aldous": ("crownhold", _aldous), "quill": ("crownhold", _quill),
     "vexis": ("emporium", _vexis), "malbranche": ("emporium", _malbranche), "skrae": ("emporium", _skrae),
-    "ermine": ("emporium", _ermine), "silas": ("emporium", _silas), "aldo": ("emporium", _aldo), "maw": ("emporium", _maw),
+    "ermine": ("emporium", _ermine), "oriel": ("emporium", _oriel), "silas": ("emporium", _silas), "aldo": ("emporium", _aldo), "maw": ("emporium", _maw),
     "bram": ("kin", _bram), "vane": ("story", _vane), "hood": ("story", _hood), "nim": ("story", _nim),
     "stranger": ("story", _stranger),
     "kit": ("kin", _kit), "hesk": ("kin", _hesk), "rosa": ("kin", _rosa), "isolde": ("kin", _isolde),

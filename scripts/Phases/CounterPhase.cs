@@ -100,7 +100,8 @@ public partial class CounterPhase : Phase
     public override void _Ready()
     {
         _visit = State.Current;
-        _slip = new Appraisal(_visit, State.Tier);
+        // Valued at what things fetch here: the shop's trades and name, the day.
+        _slip = new Appraisal(_visit, State.Tier) { Sale = State.SaleRate };
         _patience = State.Patience(_visit.Seller);
         Add(UiKit.MakeShop(State.Tier, 0.92f));
         BuildShelf();
@@ -118,7 +119,7 @@ public partial class CounterPhase : Phase
         _hint = Add(UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(316, 478, 484, 20));
         _hint.ZIndex = 10;
         BuildStrength();
-        if (State.Weighs || _visit.Seller.States == Clue.Pounds) BuildScale();
+        if (State.Weighs || _visit.Says == Clue.Pounds) BuildScale();
         _notes = Add(UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(316, 500, 484, 84));
         _notes.ZIndex = 10;
         _timer = Add(UiKit.MakeLabel("", 32, Palette.Warn, HorizontalAlignment.Center, outline: 6).Place(206, 92, 64, 40));
@@ -212,7 +213,7 @@ public partial class CounterPhase : Phase
         var tried = Levels.Where(level => _hearing.HasTried(level, _magnet)).ToList();
         if (tried.Count == 0) return "";
         // Not a nudge to shake a chest hard when its seller won't have it.
-        var untried = Levels.Where(level => !tried.Contains(level) && !(level == Core.Shake.Hard && (State.MindsHardShake(_visit.Seller) || !State.CanShakeHard)))
+        var untried = Levels.Where(level => !tried.Contains(level) && !(level == Core.Shake.Hard && (State.MindsHardShake(_visit.Seller) || !State.CanShakeHardAt(_visit.Seller))))
             .ToList();
         string done = $"Shaken {string.Join(" and ", tried.Select(Categories.Adverb))}.";
         // A rotten chest that's had all the shaking it stands won't be shaken again.
@@ -302,6 +303,8 @@ public partial class CounterPhase : Phase
         if (firstOfDay && State.Day == 2) Teach("colours");
         if (!firstOfDay && State.Day >= 2) Teach("ledger");
         if (State.Day >= 2 && _visit.Origin != null && _visit.Seller.Stories.Count > 0) Teach("story");
+        // Someone whose clue can point at a warded thing: what a ward is, and how to name what's in it.
+        if (_visit.Seller.Wards > 0 || _visit.PointsAtWard) Teach("warded");
         if (firstOfDay && State.Tier > 1) Teach($"tier{State.Tier}");
         // A seller's first visit is a lesson; one without a lesson gets Bram's tip.
         if (met && _visit.Lesson == null) Teach($"seller_{_visit.Seller.Key}");
@@ -679,7 +682,7 @@ public partial class CounterPhase : Phase
         // The King's price is the slip: the odds are about your read, not the price. The Maw's is a coin: it's the rest of
         // the day that pays.
         bool odds = priced && !_visit.Seller.SlipPrice && _visit.Seller.Gaze <= 0;
-        _chanceShown = odds ? _slip.ChanceAbove(price, State.SaleMultiplier) : -1;
+        _chanceShown = odds ? _slip.ChanceAbove(price) : -1;
         int waiting = State.Queue.Count;
         _chanceText.Text = _visit.Seller.SlipPrice && !bought ? "Exactly right: a quarter off. Wrong: a quarter more."
             : _visit.Seller.Gaze > 0 && !bought ? waiting == 0 ? "One coin, and nobody's waiting." : $"One coin. And {waiting} still waiting, at x{_visit.Seller.Gaze:0.#}."
@@ -1045,7 +1048,8 @@ public partial class CounterPhase : Phase
         await Wait(0.5);
         if (!Alive) return;
 
-        int held = _visit.Chest.Value, price = _visit.Price;
+        // What it would have fetched here, everything inside counted.
+        int held = State.Fetches(_visit.Chest), price = _visit.Price;
         int mood = Gut.PassMood(held, price);
         string line = Gut.Pass(held, price, _rng);
         // Green for a pass that dodged a bad deal, red for one that let a bargain walk out the door.

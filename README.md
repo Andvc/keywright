@@ -5,17 +5,18 @@ in the realm into a warded chest, to starve the demon of greed chained behind th
 everywhere, and only a Keywright can open one, once it's rightfully theirs; everyone else sells them unopened, and the
 ward lets nothing through but sound. You're one of Bram's kin, with the Key-mark on your hand, and he hands you his
 stall. People bring you chests and price them their own way (by what they heard, by weight, by the chest's colour, by
-a dream) and tell you where they found them, not always truthfully. Shake each one yourself, gently, firmly and hard,
-find what they missed or misjudged, trade for it, and open it on the spot. Move the shop inward, from the Brindle
+a dream) and tell you where they found them. Shake each one yourself, gently, firmly and hard, find what they missed
+or misjudged, work out what their dreams, riddles and tags point at, trade for it, and open it on the spot. Move the shop inward, from the Brindle
 crossroads to Thornwick Market, the capital and the Royal Emporium by the Gate, because the stall comes with twenty
-years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 40g to 12,000g in
+years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 40g to 420,000g in
 eight weeks. Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.18): a rebuilt world (four places, 24 sellers with their own stories and rules, six kinds
-of things a sword-and-sorcery realm would lock away, every one a find worth having), runs of eight weeks against the
-Guild's dues (then endless), with curios, commissions, weekly events and a story; nine **Heartsongs**, the rarest
+**Status:** Early Access (0.19): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
+puzzle brings out), runs of eight weeks against the Guild's dues (then endless), with curios, commissions, seventeen
+kinds of event twice a week, a calendar, and a story; nine **Heartsongs**, the rarest
 things in the realm, each with its own song and its own use on display, and an ending that needs all nine; four of
 Bram's kin to play, eight challenge levels each, and a talent tree bought with the renown runs earn; saves, settings
 and a guided start. The pixel art is drawn in code (`tools/custom_art.py`) as a placeholder until dedicated art
@@ -29,13 +30,18 @@ and repository now belong to a different game. Saves and the profile from then c
 
 1. **A customer brings a chest**, tells you where it came from (a millpond, the Barrow, a goblin warren, the Maw's
    hoard; the place says what it tends to hold) and prices it their way: some say how hard they
-   shook it and what they heard, some heft it, some go by its colour, some feel for magic, some have no idea. The
+   shook it and what they heard, some heft it, some go by its colour, some dream, some have no idea. The
    chest's colour (wood, green, blue, purple) says how good things inside tend to be. Each customer has one habit worth
    learning, and many have a rule of their own: a rotten chest that stands two seconds of shaking, a goblin who charges
    for every shake, a smuggler who packs his chests in straw (everything stirs a strength later), a pawn ticket that
-   counts every article (false bottom and all), a huntress's game scale, a druid who dreams of the dearest thing inside,
-   an imp with an hourglass, an archmage's wager, a knight's claim on the family sword, a devil's due, an old man whose
-   price is whatever your slip says. What they tell you is always true: working out what it means is the game.
+   counts every article (false bottom and all), a huntress's game scale, an imp with an hourglass, an archmage's wager,
+   a knight's claim on the family sword, a devil's due, an old man whose price is whatever your slip says. What they tell
+   you is always true: working out what it means is the game.
+   Some chests hold a **warded thing**: it makes no sound and weighs nothing, and it only comes out for someone who names
+   it. Whoever warded it left a sign, and working it out is a puzzle: a druid's dream (a river means a potion), a
+   Thornwick dowry (always coin, a cloak and a potion), an apprentice's packing tag, grandmother's riddle on the lid, a
+   ward-roll with every other letter faded, a bat-eared demon's echoes, a cartomancer's cards. If the sign names
+   something you can't hear, mark one more of it on the slip; open the chest, and the ward gives it up.
 2. **Shake it yourself.** How fast you drag is how hard you shake (the words under the chest show gentle, firm or
    hard as you go, and which you've tried). Light things (coin jingles, potions slosh, gems
    tinkle) rattle at a gentle shake; weapons only clank at a firm one, and their clanking drowns out anything delicate;
@@ -64,11 +70,13 @@ and repository now belong to a different game. Saves and the profile from then c
    reads every chest for you, so a won run can be finished fast.
 6. **The week:** every fifth evening Mister Vane collects the Guild's tithe. Short, pawn what's on display or sell your
    curios back; once a run Bram will vouch for you; otherwise the Guild seals the shop. Start a day nearly broke and
-   Bram dips into his secret stash for you (three times a run). From the second week, Nim the
+   Bram dips into his secret stash for you (three times a run). Every week Nim the
    peddler sells **curios** that bend one rule each (a lucky coin, kid gloves no seller minds, a gambler's token...;
-   priced to keep pace with the weeks), regulars post **commissions** (deliver what they want from a chest instead of selling it), and once a
-   week something happens in town: a fair, Locking Day, the Crown's buyer, a royal chest, a storm, a barge aground,
-   or the Stranger with a chained chest that nothing rattles in. The Hooded Woman trades shards of the Aldric Key for
+   priced to keep pace with the weeks); from the second, regulars post **commissions** (deliver what they want from a
+   chest instead of selling it), and twice a week something happens in town: a fair, Locking Day, the Crown's buyer, a
+   tourney, a foreclosure sale, a day of mourning when nobody shakes hard, the crier's reward, the Sleepers' Moon when
+   every seller dreams true, Wardens' Day riddles, the Guild's count, a storm, the Stranger with a chained chest... The
+   ledger's **calendar** shows this week and next: the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
    the finds she asks for. Whenever you have all that's left of the debt, you can pay it off and finish early.
 
 **Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the Crown Chest, the shop, the

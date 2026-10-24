@@ -31,7 +31,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.18";
+    public const string Version = "Early Access 0.19";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -74,6 +74,12 @@ public partial class Main : Node2D
         {
             Simulation.PrintSellers();
             Simulation.LessonTest();
+            GetTree().Quit();
+            return;
+        }
+        if (Arg(args, "--sim") == "seller")
+        {
+            Simulation.ShowSeller(Arg(args, "--who") ?? "tam");
             GetTree().Quit();
             return;
         }
@@ -135,6 +141,7 @@ public partial class Main : Node2D
                     State.HintsSeen.Add(key);
             }
             if (args.Contains("--engine")) State.Grant(Upgrades.Engine);
+            if (Arg(args, "--event") is string forced && Events.Find(forced) != null) State.ForcedEvent = forced;
             NoteStart();
         }
         GD.Print($"Keywright seed {_seed}");
@@ -597,7 +604,7 @@ public partial class Main : Node2D
         int stash = State.Today.Stash;
         // The Guild's due shows once Vane has introduced it (the first evening).
         bool guild = State.GuildIntroduced;
-        float h = (e == null ? 136 : 216) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28);
+        float h = (e == null ? 136 : 238) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28);
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(306, 130, 500, h);
         card.MouseFilter = Control.MouseFilterEnum.Ignore;
         card.AddChild(UiKit.MakeLabel($"DAY {State.Day}", 48, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 12, 500, 56));
@@ -623,7 +630,7 @@ public partial class Main : Node2D
         {
             card.AddChild(UiKit.MakeLabel(e.Name.ToUpperInvariant(), 24, Palette.Magic, HorizontalAlignment.Center, outline: 4).Place(0, y, 500, 30));
             card.AddChild(UiKit.MakeLabel(Events.Describe(e, State.BuyerKind), 16, Palette.Text, HorizontalAlignment.Center).Wrapped()
-                .Place(20, y + 32, 460, 44));
+                .Place(20, y + 32, 460, 66));
             Sfx.Play("chime", 1f, -6);
         }
         layer.AddChild(card);

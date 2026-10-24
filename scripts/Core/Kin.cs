@@ -61,7 +61,7 @@ public sealed partial class GameState
     public bool CanShakeHard => !Is(Characters.Hesk);
 
     /// <summary>Nor will Wenna's mare, for anyone.</summary>
-    public bool CanShakeHardAt(SellerDef seller) => CanShakeHard && !seller.Packhorse;
+    public bool CanShakeHardAt(SellerDef seller) => CanShakeHard && !seller.Packhorse && !EventIs("mourning");
 
     /// <summary>Nor lift it to drop it.</summary>
     public bool CanDrop => !Is(Characters.Hesk);
@@ -125,6 +125,7 @@ public sealed partial class GameState
         if (seller.ShakeLimit > 0) terms.Add($"Rotten: {seller.ShakeLimit:0} seconds of shaking, all told.");
         if (visit.Chest.Packed) terms.Add("Packed in straw: everything stirs a strength later.");
         if (seller.Packhorse) terms.Add("On a skittish mare: no hard shake.");
+        else if (EventIs("mourning") && CanShakeHard) terms.Add("A day of mourning: no hard shake.");
         if (seller.ShakeFee > 0) terms.Add($"Each strength after your first: price +{Synergies.Pct(seller.ShakeFee)}.");
         if (seller.Wager > 0) terms.Add("Read it exactly: a third of the price back.");
         if (seller.Heirloom is Category heirloom) terms.Add($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside are his, for {visit.Fee}g.");

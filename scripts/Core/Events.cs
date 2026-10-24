@@ -4,64 +4,166 @@ using System.Linq;
 
 namespace Keywright.Core;
 
-/// <param name="Bram">What Bram says about it the first time (and the day card shows every time).</param>
 /// <param name="MinTier">Only from this shop tier, where it makes a difference.</param>
-public sealed record EventDef(string Key, string Name, string Blurb, int MinTier = 1);
+/// <param name="Gentle">Can come in the first week, while the stall's still new: it changes the day, not how to judge a chest.</param>
+public sealed record EventDef(string Key, string Name, string Blurb, int MinTier = 1, bool Gentle = false);
 
 /// <summary>
-/// Once a week, from the second, something happens in town for a day: a fair, Locking Day, the Crown's buyer, a
-/// royal chest, the Stranger with a chained chest, a storm, a barge aground. Each changes what a good day looks like.
+/// A week's plan, made a week ahead so the ledger's calendar can show it: which days something happens in town, the
+/// kind the Crown's buyer (or the crier's lord) wants, and the day Nim comes by. All from the seed.
+/// </summary>
+public sealed class WeekPlan
+{
+    public int Week { get; set; }
+
+    /// <summary>Each day's event (index: the day of the week less one), or null.</summary>
+    public List<string> Days { get; set; } = new();
+
+    /// <summary>The kind the Crown's buyer pays double for, or the crier's reward is for.</summary>
+    public Category Wanted { get; set; }
+
+    /// <summary>The day of the week Nim comes by.</summary>
+    public int Peddler { get; set; }
+
+    public string On(int dayOfWeek) => dayOfWeek >= 1 && dayOfWeek <= Days.Count ? Days[dayOfWeek - 1] : null;
+
+}
+
+/// <summary>
+/// Twice a week (once in the first), something happens in town for a day, and each changes what a good day looks like:
+/// more customers or fewer, better prices or worse, a stranger with a chained chest, a royal chest, a rule everyone
+/// keeps that day. Some are puzzles: on the Sleepers' Moon every seller dreams true, on Wardens' Day every chest has a
+/// warded thing and a riddle for it, on the Guild's Count a clerk tallies every article. Nim comes every week.
 /// </summary>
 public static class Events
 {
-    public const int FromWeek = 2;
+    /// <summary>Two events a week from this week; the first week has one, late in the week.</summary>
+    public const int FromWeek = 2, PerWeek = 2, FirstWeekDay = 4;
+
+    /// <summary>Nim's first visit: the first week's third morning, once the stall's found its feet.</summary>
+    public const int FirstPeddlerDay = 3;
 
     public const int MarketCustomers = 3, StormCustomers = -2;
-    public const float FestivalSales = 1.25f, BuyerSales = 2f, WreckPairs = 0.35f;
+    public const float FestivalSales = 1.25f, BuyerSales = 2f, WreckPairs = 0.35f, TourneySales = 1.5f, AssessorSales = 0.9f,
+        EstatePrices = 0.8f, MoonMagic = 0.3f, MinstrelSongs = 3f, DreamWards = 0.6f, CrierReward = 3f;
+
+    public const string Crier = "crier";
 
     public static readonly EventDef[] All =
     {
-        new("market", "Fair Day", "The whole county's in town for the fair: three more customers today."),
-        new("festival", "Locking Day", "Three hundred years since the Locking, and everyone's celebrating: everything sells for a quarter more today."),
-        new("buyer", "The Crown's Buyer", "The Crown's buyer is in town, paying double for {kind} today."),
+        new("market", "Fair Day", "The whole county's in town for the fair: three more customers today.", Gentle: true),
+        new("festival", "Locking Day", "Three hundred years since the Locking, and everyone's celebrating: everything sells for a quarter more today.", Gentle: true),
+        new("buyer", "The Crown's Buyer", "The Crown's buyer is in town, paying double for {kind} today.", Gentle: true),
         new("gilded", "A Royal Chest", "Someone's bringing in one of King Aldric's own chests, gilded, with the royal seal. They think the gold is paint."),
         new("stranger", "The Stranger", "A stranger in black is coming by with a chest wrapped in iron chains. Nothing in it can rattle."),
-        new("storm", "A Storm", "Few will brave the rain, but those who do bring their best: chests come in a colour better."),
+        new("storm", "A Storm", "Few will brave the rain, but those who do bring their best: chests come in a colour better.", Gentle: true),
         new("wreck", "A Barge Aground", "A treasure barge ran aground on the Aldwater: today's lots come in twos and threes.", MinTier: 3),
+        new("estate", "A Foreclosure Sale", "The Guild has foreclosed on a manor, and its chests are being sold off quick: everyone asks a fifth less today.", Gentle: true),
+        new("tourney", "The Tourney", "Knights from four counties are in town for the tourney: weapons and cloaks sell for half again as much today.", Gentle: true),
+        new("mourning", "A Day of Mourning", "The old Duke is being buried, and the whole town's in black. Nobody will stand for a hard shake today."),
+        new("crier", "The Town Crier", "Old Lord Harrow lost his family's {kind} to the Locking. His crier offers a reward for one today: three times its price."),
+        new("minstrel", "The Minstrels' Fair", "Minstrels are trading songs in the square, and anyone with a box that hums has brought it: a Heartsong is three times as likely today."),
+        new("dreaming", "The Sleepers' Moon", "The Old Wood's moon was full, and all who slept under it dreamt true, like Mother Bramble: every seller tells you their dream. Some warded something.", MinTier: 2),
+        new("wardens", "Wardens' Day", "The old custom: ward a keepsake into a chest before you sell it, and leave a riddle for it. Name the answer, and the ward gives it up.", MinTier: 2),
+        new("census", "The Guild's Count", "The Gilded Guild is counting everything that changes hands: a clerk tallies every article in every chest today, false bottoms and all.", MinTier: 2),
+        new("assessor", "The Guild's Assessor", "A Guild assessor sits in the corner all day, and takes a tenth of every sale for the Guild.", MinTier: 2),
+        new("moon", "A Witchlight Moon", "Under a witchlight moon the old enchantments wake: things in today's chests are far likelier to be enchanted.", MinTier: 3),
     };
 
     public static EventDef Get(string key) => All.First(e => e.Key == key);
 
-    /// <summary>The event in a few words, for the top bar (click it for the whole story).</summary>
+    public static EventDef Find(string key) => All.FirstOrDefault(e => e.Key == key);
+
+    static string Kind(Category kind) => Categories.Get(kind).Name.ToLowerInvariant();
+
+    /// <summary>The event in a few words (23 letters at most: the top bar's chip), for the top bar and the calendar.</summary>
     public static string Tag(EventDef e, Category kind) => e.Key switch
     {
         "market" => "Fair Day: +3 customers",
         "festival" => "Locking Day: sales +25%",
-        "buyer" => $"Crown's Buyer: {Categories.Get(kind).Name.ToLowerInvariant()} x2",
+        "buyer" => $"Crown buys {Kind(kind)} x2",
         "gilded" => "A royal chest today",
         "stranger" => "The Stranger's in town",
         "storm" => "Storm: better chests",
-        "wreck" => "Barge aground: lots of pairs",
+        "wreck" => "Barge aground: pairs",
+        "estate" => "Foreclosure sale: -20%",
+        "tourney" => "Tourney: arms, cloaks",
+        "mourning" => "Mourning: no hard shake",
+        "crier" => $"Crier wants {Kind(kind)}",
+        "minstrel" => "Minstrels: songs x3",
+        "dreaming" => "Sleepers' Moon: dreams",
+        "wardens" => "Wardens' Day: riddles",
+        "census" => "The Guild's Count",
+        "assessor" => "Assessor: sales -10%",
+        "moon" => "Witchlight: more magic",
         _ => e.Name,
     };
 
-    /// <summary>The event's blurb, with the buyer's kind filled in.</summary>
-    public static string Describe(EventDef e, Category kind) =>
-        e.Blurb.Replace("{kind}", Categories.Get(kind).Name.ToLowerInvariant());
+    /// <summary>The event's blurb, with the buyer's (or the crier's) kind filled in.</summary>
+    public static string Describe(EventDef e, Category kind) => e.Blurb.Replace("{kind}", Kind(kind));
 
-    /// <summary>This week's event: one you haven't had lately (they all come round before any comes twice).</summary>
-    public static EventDef Pick(Random rng, int tier, ICollection<string> seen)
+    /// <summary>
+    /// The plan for a week: Nim's day (the first week's third, else any day but the Guild's), and one event (in the first
+    /// week, a gentle one on its fourth day) or two, on other days, that haven't come lately (they all come round before
+    /// any comes twice).
+    /// </summary>
+    public static WeekPlan Plan(int seed, int week, int tier, ICollection<string> seen)
     {
-        var fresh = All.Where(e => e.MinTier <= tier && !seen.Contains(e.Key)).ToArray();
+        var rng = new Random(unchecked(seed * 104729 + week * 7907));
+        var plan = new WeekPlan { Week = week, Days = Enumerable.Repeat<string>(null, Guild.DaysPerWeek).ToList() };
+        plan.Peddler = week == 1 ? FirstPeddlerDay : rng.Next(1, Guild.DaysPerWeek);
+        plan.Wanted = rng.PickOne(Categories.UpTo(tier).Select(c => c.Category).ToArray());
+        if (week < FromWeek)
+        {
+            plan.Days[FirstWeekDay - 1] = Pick(rng, tier, seen, plan.Days, gentle: true).Key;
+            return plan;
+        }
+        var days = Enumerable.Range(1, Guild.DaysPerWeek).Where(d => d != plan.Peddler).OrderBy(_ => rng.Next()).Take(PerWeek);
+        foreach (int day in days.OrderBy(d => d))
+            plan.Days[day - 1] = Pick(rng, tier, seen, plan.Days).Key;
+        return plan;
+    }
+
+    static EventDef Pick(Random rng, int tier, ICollection<string> seen, IList<string> week, bool gentle = false)
+    {
+        bool Fits(EventDef e) => e.MinTier <= tier && (!gentle || e.Gentle) && !week.Contains(e.Key);
+        var fresh = All.Where(e => Fits(e) && !seen.Contains(e.Key)).ToArray();
         if (fresh.Length == 0)
         {
-            seen.Clear();
-            fresh = All.Where(e => e.MinTier <= tier).ToArray();
+            foreach (var e in All.Where(Fits)) seen.Remove(e.Key);
+            fresh = All.Where(Fits).ToArray();
         }
         var pick = rng.PickOne(fresh);
         seen.Add(pick.Key);
         return pick;
     }
+
+    /// <summary>
+    /// A day's puzzle, told to every ordinary seller (not a lesson's, nor anyone with a clue of their own, nor the King,
+    /// whose price is your slip): on the Sleepers' Moon a dream (of what they warded, or else the dearest thing), on
+    /// Wardens' Day a riddle for the thing they warded, on the Guild's Count the clerk's tally.
+    /// </summary>
+    public static Visit Restate(Random rng, Visit visit, string eventKey, int tier)
+    {
+        if (visit.Lesson != null || visit.Says != Clue.None || visit.Chest.Sealed || visit.Seller.SlipPrice) return visit;
+        var says = eventKey switch { "dreaming" => Clue.Dream, "wardens" => Clue.Riddle, "census" => Clue.Tally, _ => Clue.None };
+        if (says == Clue.None) return visit;
+        if (says == Clue.Riddle || (says == Clue.Dream && rng.NextFloat() < DreamWards)) Market.WardOne(rng, visit.Seller, visit.Chest, tier);
+        // A riddle is only left for a warded thing: a chest with every kind in it already has nothing to ward.
+        if (says == Clue.Riddle && visit.Chest.Warded == null) return visit;
+        var clue = Market.MakeClue(rng, visit.Seller, visit.Chest, says);
+        return new Visit(visit.Seller, visit.Chest, visit.Claim, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
+        {
+            Origin = visit.Origin, Fee = visit.Fee, Clue = clue.Note, ClueKinds = clue.Kinds, Says = says,
+        };
+    }
+
+    /// <summary>The crier's reward: one thing of the wanted kind, as good as the regulars ask for, today only.</summary>
+    public static Commission Reward(Category kind, int tier, int day) => new()
+    {
+        Patron = Crier, Kind = CommissionKind.Piece, Category = kind, Quality = Patrons.Asked(tier), Lapses = day,
+        Reward = Money.Round(CrierReward * Categories.Nominal(kind, Patrons.Asked(tier))),
+    };
 
     /// <summary>
     /// The Stranger: never says where it's from, never lets you open it first. It's wrapped tight in iron chains, so
@@ -126,7 +228,7 @@ public static class Events
         var chest = new Chest(items, colour, old.Hidden, old.Lock, gilded: true, packed: old.Packed);
         return new Visit(visit.Seller, chest, visit.Claim, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
         {
-            Origin = visit.Origin, Fee = visit.Fee, Clue = visit.Clue,
+            Origin = visit.Origin, Fee = visit.Fee, Clue = visit.Clue, ClueKinds = visit.ClueKinds, Says = visit.Says,
         };
     }
 }

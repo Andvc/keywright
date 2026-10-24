@@ -49,6 +49,13 @@ public static class Lessons
 {
     static Item I(Category kind, Rarity quality, bool magic = false, bool fake = false) => new(kind, quality, magic, fake);
 
+    /// <summary>A lesson's chest with a thing sealed in its ward.</summary>
+    static Chest Warded(Chest chest, Item warded)
+    {
+        chest.Ward(warded);
+        return chest;
+    }
+
     static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, IEnumerable<Category> claim = null, int? floor = null,
         string pitch = null, string from = null) =>
         Market.Price(rng, Sellers.Get(seller), chest, tier, ask, null, pitch, claim, floor, origin: from == null ? null : Origins.Get(from));
@@ -108,7 +115,7 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new("The Barrow: Dorrin always says where a chest came from, and the place tells you what it tends to hold. " +
-                    "Barrow chests hold grave goods: coin, weapons, a shroud. Your ledger's Places page keeps them."),
+                    "Barrow chests hold grave goods: coin, weapons, a shroud."),
                 new("His chests are rotten through: about two seconds of shaking and no more. One strength, then. Hard stirs " +
                     "everything, but a clank would drown the coin. Shake it hard.", c => c.Tried(Shake.Hard)),
             },
@@ -145,18 +152,21 @@ public static class Lessons
         new()
         {
             Seller = "bramble",
+            Covers = new[] { "warded" },
             Make = (rng, tier) =>
             {
-                var chest = new Chest(new[] { I(Category.Potions, Rarity.Uncommon), I(Category.Garb, Rarity.Uncommon), I(Category.Scrolls, Rarity.Uncommon) },
-                    Rarity.Uncommon, I(Category.Gems, Rarity.Uncommon));
+                var chest = Warded(new Chest(new[] { I(Category.Garb, Rarity.Uncommon), I(Category.Scrolls, Rarity.Uncommon) }, Rarity.Uncommon),
+                    I(Category.Potions, Rarity.Uncommon));
                 return Price(rng, "bramble", chest, tier, ask: Money.Round(Market.TypicalChest(Sellers.Get("bramble"), Rarity.Uncommon, tier) * 0.8f));
             },
             Steps = new LessonStep[]
             {
-                new("Mother Bramble's price comes from a dream, not the chest. But she always dreams true of the dearest thing " +
-                    "inside, as a sign: a star is a gem. Shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
-                new("A slosh, a flump, a rustle, and no tinkle. The gem she dreamt of is somewhere no shake can reach: under a " +
-                    "false bottom. Tick False bottom.", c => c.Slip.Hidden),
+                new("Mother Bramble's price is a dream, but she always dreams true: of what the Wood warded in the chest, or else the " +
+                    "dearest thing in it, as a sign. A river is a potion. Shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                new("A flump and a rustle, and no slosh. The potion is warded: sealed in the ward itself, silent and weightless. " +
+                    "Name it: tick Potions.", c => c.Slip.Count(Category.Potions) > 0),
+                new("A ward gives up only to the truth. Name what's there and nothing that isn't, and the warded thing comes out " +
+                    "when you open the chest. Nobody priced it."),
             },
         },
         new()
@@ -189,19 +199,33 @@ public static class Lessons
             },
         },
 
+        new()
+        {
+            Seller = "gerda",
+            Covers = new[] { "warded" },
+            Make = (rng, tier) => Price(rng, "gerda", Warded(new Chest(new[] { I(Category.Coins, Rarity.Uncommon), I(Category.Garb, Rarity.Uncommon) },
+                Rarity.Uncommon), I(Category.Potions, Rarity.Uncommon)), tier, from: "dowry"),
+            Steps = new LessonStep[]
+            {
+                new("Gerda sells dowries from weddings that never were. A Thornwick dowry always holds coin for luck, a cloak for " +
+                    "warmth and a potion for health. Shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                new("A jingle and a flump: luck and warmth. No slosh: the bride warded her potion, silent and weightless. Name it: " +
+                    "tick Potions.", c => c.Slip.Count(Category.Potions) > 0),
+            },
+        },
+
         // Crownhold.
         new()
         {
             Seller = "wren",
-            Covers = new[] { "offer", "try_again" },
-            Make = (rng, tier) => Price(rng, "wren", new Chest(new[] { I(Category.Potions, Rarity.Uncommon, magic: true), I(Category.Coins, Rarity.Uncommon) },
-                Rarity.Uncommon), tier),
+            Make = (rng, tier) => Price(rng, "wren", Warded(new Chest(new[] { I(Category.Garb, Rarity.Uncommon), I(Category.Scrolls, Rarity.Uncommon) },
+                Rarity.Uncommon), I(Category.Gems, Rarity.Uncommon)), tier),
             Steps = new LessonStep[]
             {
-                new("Wren can't tell what's in a chest, but she feels magic. Name a low price: a few coins.", c => c.Visit.OffersMade > 0,
-                    Trades: true),
-                new("She wants more: she can feel something special. Something in there is enchanted, worth twice as much. " +
-                    "Offer again, if it's worth it to you.", c => c.Visit.OffersMade > 1, Trades: true),
+                new("Wren reads the Arcanum's packing tag: it lists each kind of thing packed, and the archmages warded the most " +
+                    "dangerous. Shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                new("A flump and a rustle: the cloak and the spell. The gem on the tag never tinkled: it's warded. Name it: tick Gems.",
+                    c => c.Slip.Count(Category.Gems) > 0),
             },
         },
         new()
@@ -231,14 +255,14 @@ public static class Lessons
         new()
         {
             Seller = "corisande",
-            Make = (rng, tier) => Price(rng, "corisande", new Chest(new[] { I(Category.Garb, Rarity.Rare), I(Category.Scrolls, Rarity.Rare) }, Rarity.Rare,
-                I(Category.Gems, Rarity.Rare)), tier),
+            Make = (rng, tier) => Price(rng, "corisande", Warded(new Chest(new[] { I(Category.Coins, Rarity.Rare), I(Category.Garb, Rarity.Rare) },
+                Rarity.Rare), I(Category.Arms, Rarity.Rare)), tier),
             Steps = new LessonStep[]
             {
-                new("Lady Corisande prices by the chest's colour, and she feels magic, so that's in her price. Half her " +
-                    "grandmother's trick boxes hide a false bottom she never prices."),
-                new("But she won't have one dropped: half again if you do. Tick False bottom on faith, or drop it and pay for " +
-                    "certainty. Your call."),
+                new("Grandmother de Vere left a riddle on each lid about one thing inside, and if she warded something, it's about " +
+                    "that. Read it, then shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                new("A hilt and an edge, or forged and sheathed: a weapon. And nothing clanked: grandmother warded it. Name it: tick " +
+                    "Weapons.", c => c.Slip.Count(Category.Arms) > 0),
             },
         },
         new()
@@ -256,6 +280,19 @@ public static class Lessons
                 new("Two jingles and a rustle: three things, and he priced one purse. But the ticket counts every article pledged, " +
                     "and it says four. He won't have pledges dropped: the fourth is under a false bottom. Tick two Coins and False bottom.",
                     c => c.Slip.Count(Category.Coins) == 2 && c.Slip.Hidden),
+            },
+        },
+        new()
+        {
+            Seller = "quill",
+            Make = (rng, tier) => Price(rng, "quill", Warded(new Chest(new[] { I(Category.Coins, Rarity.Rare), I(Category.Potions, Rarity.Rare) },
+                Rarity.Rare), I(Category.Gems, Rarity.Rare)), tier),
+            Steps = new LessonStep[]
+            {
+                new("Quill sells the Archive's vault chests with their ward-rolls, faded by three hundred years. The roll names " +
+                    "what was warded: 'B_o_d R_b_'."),
+                new("The Blood Ruby: a gem. Name it, and the ward gives it up when you open the chest: tick Gems.",
+                    c => c.Slip.Count(Category.Gems) > 0),
             },
         },
         new()
@@ -314,18 +351,15 @@ public static class Lessons
         new()
         {
             Seller = "skrae",
-            Covers = new[] { "glow" },
-            Make = (rng, tier) => Price(rng, "skrae", new Chest(new[] { I(Category.Arms, Rarity.Rare), I(Category.Scrolls, Rarity.Rare, magic: true) },
-                Rarity.Rare, I(Category.Gems, Rarity.Rare)), tier),
+            Make = (rng, tier) => Price(rng, "skrae", Warded(new Chest(new[] { I(Category.Coins, Rarity.Rare), I(Category.Arms, Rarity.Rare) },
+                Rarity.Rare), I(Category.Potions, Rarity.Rare)), tier),
             Steps = new LessonStep[]
             {
-                new("Skrae hears everything. But a demon can't see enchantment, and never checks the floor. Shake it at every " +
-                    "strength under the witchlight.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), When: s => s.Has("lamp")),
-                new("Something glowed: it's enchanted, worth twice as much. Click the star on its row to mark it.",
-                    c => c.Slip.Magic(Category.Scrolls), When: s => s.Has("lamp")),
-                new("Skrae hears everything. But a demon never checks for enchantment, and never checks the floor.", When: s => !s.Has("lamp")),
-                new("Now drop it.", c => c.Hearing.Dropped),
-                new("A boom! Tick False bottom: it never priced it.", c => c.Slip.Hidden),
+                new("Skrae clicks like a bat and listens to the echoes: round is coin, long a weapon, soft a cloak, hollow a potion, " +
+                    "flat a spell, tiny a gem. Echoes come back off warded things too. Shake it at every strength.",
+                    c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                new("A jingle and a clank: the round one and the long one. Nothing sloshed, so the hollow one is warded: tick Potions.",
+                    c => c.Slip.Count(Category.Potions) > 0),
             },
         },
         new()
@@ -339,6 +373,18 @@ public static class Lessons
                     "it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
                 new("Tick everything you heard: the rest is a gift. Some of her gems are paste, though, and she won't have a " +
                     "lodestone near them.", c => c.Slip.Count(Category.Scrolls) > 0 && c.Slip.Count(Category.Potions) > 0),
+            },
+        },
+        new()
+        {
+            Seller = "oriel",
+            Make = (rng, tier) => Price(rng, "oriel", Warded(new Chest(new[] { I(Category.Gems, Rarity.Epic), I(Category.Garb, Rarity.Epic) },
+                Rarity.Epic), I(Category.Coins, Rarity.Epic)), tier),
+            Steps = new LessonStep[]
+            {
+                new("Madame Oriel draws three cards from the Locking's own deck: a suit drawn twice is what the ward holds; three " +
+                    "different, nothing. Coins came up twice."),
+                new("So there's warded coin. Name it: tick Coin.", c => c.Slip.Count(Category.Coins) > 0),
             },
         },
         new()

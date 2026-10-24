@@ -7,7 +7,9 @@ namespace Keywright.Core;
 /// <summary>How one thing in an opened chest compares with what the slip said.</summary>
 public enum ReadKind { Right, RightMagic, SpottedFake, SpottedBroken, FoundHidden, Missed, MissedMagic, NotMagic, Fooled, Broken, MissedHidden }
 
-public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false)
+/// <param name="Hidden">It was under a false bottom.</param>
+/// <param name="Warded">The ward gave it up: you named it.</param>
+public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false, bool Warded = false)
 {
     public bool Right => Kind is ReadKind.Right or ReadKind.RightMagic or ReadKind.SpottedFake or ReadKind.SpottedBroken or ReadKind.FoundHidden;
 
@@ -30,9 +32,10 @@ public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false)
 /// <summary>The slip checked against what was really inside.</summary>
 /// <param name="Ghosts">One entry for each thing the slip counted that wasn't in the chest.</param>
 /// <param name="GhostHidden">A false bottom marked on the slip that wasn't there.</param>
-public sealed record ReadReport(IReadOnlyList<ItemRead> Items, IReadOnlyList<Category> Ghosts, bool GhostHidden)
+/// <param name="KeptWarded">A warded thing the ward kept, because the slip didn't name it truly, or null.</param>
+public sealed record ReadReport(IReadOnlyList<ItemRead> Items, IReadOnlyList<Category> Ghosts, bool GhostHidden, Item KeptWarded = null)
 {
-    public bool Perfect => Items.All(r => r.Right) && Ghosts.Count == 0 && !GhostHidden;
+    public bool Perfect => Items.All(r => r.Right) && Ghosts.Count == 0 && !GhostHidden && KeptWarded == null;
 }
 
 /// <summary>
@@ -67,7 +70,25 @@ public sealed class Appraisal
 
     // The outcomes, worked out once per state of the slip (the odds bar asks again whenever the offer slider moves).
     IReadOnlyList<(int Value, float Chance)> _outcomes;
-    Func<Category, float> _outcomesSale;
+
+    /// <summary>
+    /// What one gold of a kind's worth fetches at this shop today (its buyers' trades, its name, the day; enchanted, the
+    /// Arcanist's): every value on the slip, the odds bar and the careful player's sums are what things would sell for
+    /// here, not what they're worth in the abstract. Null: their worth.
+    /// </summary>
+    public Func<Category, bool, float> Sale
+    {
+        get => _sale;
+        set
+        {
+            _sale = value;
+            _outcomes = null;
+        }
+    }
+
+    Func<Category, bool, float> _sale;
+
+    float Rate(Category kind, bool magic) => _sale?.Invoke(kind, magic) ?? 1f;
 
     /// <summary>The most of one kind the slip counts: two or three of a kind turn up from the town shop on.</summary>
     public int MaxCount => Tier >= Market.PairsTier ? 3 : 1;
@@ -92,7 +113,9 @@ public sealed class Appraisal
     public static Appraisal Recorded(Chest chest, int tier)
     {
         var slip = new Appraisal(chest.Quality, tier) { Hidden = chest.Hidden != null && tier >= 2 };
-        foreach (var kind in chest.Items.Where(i => !i.Fake && !i.Broken).GroupBy(i => i.Category))
+        // The Guild's assessors register warded goods too: the engine names it.
+        var things = chest.Items.Where(i => !i.Fake && !i.Broken).Concat(chest.Warded == null ? Array.Empty<Item>() : new[] { chest.Warded });
+        foreach (var kind in things.GroupBy(i => i.Category))
             slip.Set(kind.Key, kind.Count(), kind.Any(i => i.Magic));
         return slip;
     }
@@ -124,9 +147,9 @@ public sealed class Appraisal
 
     public IEnumerable<Category> Marked => Categories.All.Select(c => c.Category).Where(c => Count(c) > 0);
 
-    /// <summary>What one of this kind is worth if it's as good as the chest's colour.</summary>
+    /// <summary>What one of this kind fetches here if it's as good as the chest's colour.</summary>
     public int OneValue(Category category, bool magic = false) =>
-        Categories.Nominal(category, Chest) * (magic ? Categories.MagicMultiplier : 1);
+        (int)MathF.Round(Categories.Nominal(category, Chest) * (magic ? Categories.MagicMultiplier : 1) * Rate(category, magic));
 
     /// <summary>What the slip says this kind adds up to.</summary>
     public int ValueOf(Category category)
@@ -136,7 +159,8 @@ public sealed class Appraisal
         return Magic(category) ? (count - 1) * OneValue(category) + OneValue(category, true) : count * OneValue(category);
     }
 
-    public int HiddenValue => Market.HiddenValue(Chest, Tier);
+    /// <summary>What a false bottom fetches here, on average over what people hide, as good as the colour promises.</summary>
+    public int HiddenValue => (int)MathF.Round(Market.HiddenOdds(Tier).Sum(h => h.Chance * Categories.Nominal(h.Kind, Chest) * Rate(h.Kind, false)));
 
     /// <summary>What the chest is worth if the slip is right and everything is as good as its colour.</summary>
     public int Worth => Marked.Sum(ValueOf) + (Hidden ? HiddenValue : 0);
@@ -145,23 +169,18 @@ public sealed class Appraisal
     /// What it's worth on average if the slip is right, allowing for things coming out better or worse than the colour.
     /// The careful player's model knows this; the screen doesn't show it.
     /// </summary>
-    public int ExpectedWorth => Marked.Sum(c => Categories.Expected(c, Chest) * (Count(c) + (Magic(c) ? Categories.MagicMultiplier - 1 : 0))) +
-                                (Hidden ? Market.HiddenValue(Chest, Tier, expected: true) : 0);
+    public int ExpectedWorth => (int)MathF.Round(Marked.Sum(c => Categories.Expected(c, Chest) * Rate(c, false) *
+                                                                 (Count(c) + (Magic(c) ? Categories.MagicMultiplier - 1 : 0))) +
+                                                 (Hidden ? Market.HiddenValue(Chest, Tier, expected: true) : 0));
 
     /// <summary>
     /// Everything the chest could turn out to be worth if the slip is right, with how likely each total is: each thing's
     /// quality lands around the chest's colour (<see cref="Categories.Odds"/>), and a false bottom might hold any of the
     /// things people hide. Mostly it's what the colour promises; sometimes less; now and then a lot more.
     /// </summary>
-    /// <param name="sale">What one thing of a kind fetches for each gold it's worth (the shop's synergies).</param>
-    public IReadOnlyList<(int Value, float Chance)> Outcomes(Func<Category, float> sale = null)
-    {
-        if (_outcomes != null && Equals(sale, _outcomesSale)) return _outcomes;
-        _outcomesSale = sale;
-        return _outcomes = Work(sale ?? (_ => 1f));
-    }
+    public IReadOnlyList<(int Value, float Chance)> Outcomes() => _outcomes ??= Work();
 
-    IReadOnlyList<(int Value, float Chance)> Work(Func<Category, float> sale)
+    IReadOnlyList<(int Value, float Chance)> Work()
     {
         var totals = new Dictionary<float, float> { [0f] = 1f };
         void Add(IEnumerable<(float Value, float Chance)> thing)
@@ -174,8 +193,8 @@ public sealed class Appraisal
         }
         // A Heartsong is priced as a trinket exactly as fine as its chest: no spread.
         IEnumerable<(float, float)> One(Category kind, bool magic) => kind == Category.Heartsong
-            ? new[] { (Categories.Nominal(kind, Chest) * sale(kind), 1f) }
-            : Categories.Odds(Chest).Select(o => (Categories.Value(kind, o.Quality, magic) * sale(kind), o.Chance));
+            ? new[] { (Categories.Nominal(kind, Chest) * Rate(kind, false), 1f) }
+            : Categories.Odds(Chest).Select(o => (Categories.Value(kind, o.Quality, magic) * Rate(kind, magic), o.Chance));
 
         foreach (var kind in Marked)
             for (int i = 0; i < Count(kind); i++)
@@ -189,17 +208,16 @@ public sealed class Appraisal
     /// What the chest is more likely than not worth at least, if the slip is right: the most you can pay and still have
     /// the odds bar on your side.
     /// </summary>
-    public int LikelyWorth(Func<Category, float> sale = null)
+    public int LikelyWorth()
     {
         float below = 0;
-        foreach (var (value, chance) in Outcomes(sale))
+        foreach (var (value, chance) in Outcomes())
             if ((below += chance) >= 0.5f) return value;
         return 0;
     }
 
     /// <summary>The chance the chest is worth more than this price, if the slip is right.</summary>
-    public float ChanceAbove(int price, Func<Category, float> sale = null) =>
-        Outcomes(sale).Where(o => o.Value > price).Sum(o => o.Chance);
+    public float ChanceAbove(int price) => Outcomes().Where(o => o.Value > price).Sum(o => o.Chance);
 
     /// <summary>
     /// Checks the slip against the chest. Of each kind, the slip's count goes to the real, whole things first (magic
@@ -226,7 +244,7 @@ public sealed class Appraisal
                 else if (item.Magic) read = magicLeft ? ReadKind.RightMagic : ReadKind.MissedMagic;
                 else read = ReadKind.Right;
                 if (read == ReadKind.RightMagic) magicLeft = false;
-                reads.Add(new ItemRead(item, read));
+                reads.Add(new ItemRead(item, read, Warded: chest.Unwarded != null && item.Id == chest.Unwarded.Id));
             }
             // Marked magic but nothing magic was there: the first one counted wasn't.
             if (magicLeft && !items.Any(i => i.Magic && !i.Fake))
@@ -238,6 +256,6 @@ public sealed class Appraisal
         }
         if (chest.Hidden != null)
             reads.Add(new ItemRead(chest.Hidden, Hidden ? ReadKind.FoundHidden : ReadKind.MissedHidden, true));
-        return new ReadReport(reads, ghosts, Hidden && chest.Hidden == null);
+        return new ReadReport(reads, ghosts, Hidden && chest.Hidden == null, chest.Warded);
     }
 }

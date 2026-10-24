@@ -222,6 +222,13 @@ public partial class Sfx : Node
             creak.Tone(t, 0.04f, R(260, 420), R(0.15f, 0.35f) * MathF.Sin(MathF.PI * t / 0.7f), 60);
         Add("strain", creak);
 
+        // A ward letting go of what you named: a low hum swells, a rising shimmer of chimes, and a soft click.
+        var ward = new Synth(1.4f).Tone(0, 1.3f, 110, 0.35f, 1.6f, attack: 0.4f).Tone(0, 1.3f, 165, 0.2f, 1.8f, attack: 0.5f);
+        float[] notes = { 659, 784, 988, 1175, 1319, 1568 };
+        for (int i = 0; i < notes.Length; i++) ward.Tone(0.15f + i * 0.09f, 0.9f, notes[i], 0.14f, 3.5f).Tone(0.15f + i * 0.09f, 0.9f, notes[i] * 1.004f, 0.08f, 3.5f);
+        ward.Noise(0.75f, 0.05f, 0.4f, 60, 0.6f);
+        Add("ward", ward);
+
         var shatter = new Synth(0.6f).Noise(0, 0.45f, 0.55f, 11, 0.9f, highpass: true);
         for (int i = 0; i < 12; i++) shatter.Tone(R(0, 0.3f), 0.2f, R(2800, 5600), R(0.08f, 0.18f), R(25, 45));
         Add("shatter", shatter);

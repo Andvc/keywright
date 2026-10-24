@@ -216,9 +216,11 @@ public sealed partial class GameState
     /// <summary>What the exhibition, synergies, the Guild's terms and who's at the counter do to the chests people bring.</summary>
     public Boosts Boosts => new(BetterChests + (EventIs("storm") ? 1 : 0),
         Synergies.HiddenBonus(Active("archivist")) + (HasCurio("hook") ? Curios.HookHidden : 0),
-        Synergies.MagicBonus(Active("arcane")) + (HasCurio("draught") ? Curios.DraughtMagic : 0) + (Shows(Heartsongs.Star) ? Heartsongs.StarMagic : 0),
+        Synergies.MagicBonus(Active("arcane")) + (HasCurio("draught") ? Curios.DraughtMagic : 0) + (Shows(Heartsongs.Star) ? Heartsongs.StarMagic : 0) +
+        (EventIs("moon") ? Events.MoonMagic : 0),
         EventIs("wreck") ? Events.WreckPairs : 0, Synergies.MoneyKinds(Active("jewelry")),
-        (Under(Challenges.SharpSellers) ? Challenges.SharpPrices : 1) * (Shows(Heartsongs.Lullaby) ? Heartsongs.LullabyPrices : 1) * Buyers,
+        (Under(Challenges.SharpSellers) ? Challenges.SharpPrices : 1) * (Shows(Heartsongs.Lullaby) ? Heartsongs.LullabyPrices : 1) * Buyers *
+        (EventIs("estate") ? Events.EstatePrices : 1),
         Under(Challenges.Forgers) ? Challenges.SlugChance : 0, HagglesAll);
 
     /// <summary>How much less likely glass is to break (a vintner's packing).</summary>
@@ -266,6 +268,12 @@ public sealed partial class GameState
     /// </summary>
     public float SaleMultiplier(Category kind) => EventSales(kind) * Buyers * (1 + Synergies.SaleBonus(this, kind)) *
                                                   (kind is Category.Coins or Category.Gems && Shows(Heartsongs.Egg) ? Heartsongs.EggSales : 1);
+
+    /// <summary>What one gold of worth of this kind fetches here today (enchanted: with the Arcanist's name too), for the slip.</summary>
+    public float SaleRate(Category kind, bool magic) => SaleMultiplier(kind) * (magic ? 1 + Synergies.MagicSales(this) : 1);
+
+    /// <summary>What everything in a chest would sell for here today: a false bottom's and a warded thing's too.</summary>
+    public int Fetches(Chest chest) => chest.All.Sum(i => SaleValue(i));
 
     /// <summary>
     /// What the buyers' trades you've set up put on every sale, multiplied together. Word gets round: sellers ask that
@@ -349,12 +357,11 @@ public sealed partial class GameState
             WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, BramPiece = BramPiece, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek,
             CurioPaid = _curios.Select(key => _curioPaid.GetValueOrDefault(key)).ToList(),
             DrySpell = DrySpell, HoodPieces = HoodPieces, MapGiven = MapGiven, VaultOpened = VaultOpened,
-            Curios = _curios.ToList(), EventsSeen = _eventsSeen.ToList(), WeekEvent = WeekEvent, EventDay = EventDay,
-            BuyerKind = BuyerKind, PeddlerDay = PeddlerDay,
+            Curios = _curios.ToList(), EventsSeen = _eventsSeen.ToList(), Plan = Plan, NextPlan = NextPlan,
             Commissions = Commissions.Select(c => new SavedCommission
             {
                 Patron = c.Patron, Kind = c.Kind, Category = c.Category, Quality = c.Quality, Needed = c.Needed, Delivered = c.Delivered,
-                Reward = c.Reward, Story = c.Story, Carried = c.Carried,
+                Reward = c.Reward, Story = c.Story, Carried = c.Carried, Lapses = c.Lapses,
             }).ToList(),
         };
         foreach (int count in _acquired) data.Acquired.Add(count);
@@ -376,8 +383,13 @@ public sealed partial class GameState
             WeeksPaid = data.WeeksPaid, Arrears = data.Arrears, GraceUsed = Math.Max(data.GraceCount, data.GraceUsed ? 1 : 0), BramPiece = data.BramPiece,
             StashUsed = Math.Max(0, data.StashUsed), ClearedDay = data.ClearedDay, CloverWeek = data.CloverWeek, DrySpell = data.DrySpell, HoodPieces = data.HoodPieces,
             MapGiven = data.MapGiven,
-            VaultOpened = data.VaultOpened, WeekEvent = data.WeekEvent, EventDay = data.EventDay, BuyerKind = data.BuyerKind,
-            PeddlerDay = data.PeddlerDay,
+            VaultOpened = data.VaultOpened, NextPlan = data.NextPlan,
+            // A save from before plans: this week's one event and Nim's day, as they were.
+            Plan = data.Plan ?? new WeekPlan
+            {
+                Week = Math.Max(0, data.Day - 1) / Guild.DaysPerWeek + 1, Wanted = data.BuyerKind, Peddler = data.PeddlerDay,
+                Days = Enumerable.Range(1, Guild.DaysPerWeek).Select(d => d == data.EventDay ? data.WeekEvent : null).ToList(),
+            },
         };
         // Curios from an older version that are gone now are simply gone; the rest keep what you paid (or half today's price).
         for (int i = 0; i < data.Curios.Count; i++)
@@ -388,11 +400,13 @@ public sealed partial class GameState
             if (i < data.CurioPaid.Count && data.CurioPaid[i] > 0) state._curioPaid[key] = data.CurioPaid[i];
         }
         state._eventsSeen.AddRange(data.EventsSeen);
+        // A save from before plans: next week's is made now, as it would have been this week.
+        state.NextPlan ??= Events.Plan(state.Seed, state.Plan.Week + 1, state.Tier, state._eventsSeen);
         state._snubbed.UnionWith(data.Snubbed);
         state.Commissions.AddRange(data.Commissions.Select(c => new Commission
         {
             Patron = c.Patron, Kind = c.Kind, Category = c.Category, Quality = c.Quality, Needed = c.Needed, Delivered = c.Delivered,
-            Reward = c.Reward, Story = c.Story, Carried = c.Carried,
+            Reward = c.Reward, Story = c.Story, Carried = c.Carried, Lapses = c.Lapses,
         }));
         state._owned.UnionWith(data.Owned);
         state.HintsSeen.UnionWith(data.HintsSeen);
@@ -502,7 +516,7 @@ public sealed partial class GameState
     Visit Sing(Visit visit)
     {
         var taken = SongsFound.Concat(Queue.Select(v => v.Chest.Song?.Song)).Where(k => k != null).ToHashSet();
-        if (Heartsongs.Roll(_songRng, Songbook, taken) is HeartsongDef song) visit.Chest.AddSong(Heartsongs.Make(song, visit.Chest.Quality));
+        if (Heartsongs.Roll(_songRng, Songbook, taken, EventIs("minstrel") ? Events.MinstrelSongs : 1) is HeartsongDef song) visit.Chest.AddSong(Heartsongs.Make(song, visit.Chest.Quality));
         return visit;
     }
 
@@ -543,6 +557,8 @@ public sealed partial class GameState
         Gold -= visit.PricePaid;
         Today.Bought++;
         Today.Spent += visit.PricePaid;
+        // Named truly, a warded thing comes out of the ward: it's in the chest for the luck and the opening.
+        visit.Chest.Open(slip);
         var (luck, changed) = Luck(visit.Chest);
         Pity(visit.Chest);
         Steady(visit.Chest);

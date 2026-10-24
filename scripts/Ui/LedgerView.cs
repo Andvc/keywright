@@ -8,7 +8,8 @@ namespace Keywright.Ui;
 /// <summary>
 /// The shop's ledger. Sounds: one row per kind of thing your shop sees (its sound, how hard you must shake to hear it,
 /// how heavy it is, and what one is worth if it's as good as each colour of chest promises; click a row to hear it),
-/// and the rules of listening. Regulars: how each seller you've met judges a chest, trades and behaves. Places: where chests come from, and what each tends to hold. Collection:
+/// and the rules of listening. Regulars: how each seller you've met judges a chest, trades and behaves. Calendar: today, the Guild's
+/// nights and what they'll cost, the days Nim comes by, and what's happening in town this week and next. Collection:
 /// everything you've found so far. Synergies: what the shop could be known for, how far along each is, and
 /// (at the end of a day) which are active. Songs: the Heartsongs Bram's kin have opened, once there's one to show.
 /// </summary>
@@ -50,7 +51,7 @@ public partial class LedgerView : Node2D
         AddChild(UiKit.MakeLabel("LEDGER", 32, Palette.Gold, outline: 4).Place(PanelX + 24, PanelY + 10, 200, 40));
         AddChild(UiKit.MakeButton("Sounds", Palette.Text, 16, () => ShowPage(0)).Place(PanelX + 220, PanelY + 14, 120, 36));
         AddChild(UiKit.MakeButton("Regulars", Palette.Text, 16, () => ShowPage(1)).Place(PanelX + 348, PanelY + 14, 140, 36));
-        AddChild(UiKit.MakeButton("Places", Palette.Text, 16, () => ShowPage(4)).Place(PanelX + 496, PanelY + 14, 120, 36));
+        AddChild(UiKit.MakeButton("Calendar", Palette.Text, 16, () => ShowPage(4)).Place(PanelX + 496, PanelY + 14, 120, 36));
         AddChild(UiKit.MakeButton("Collection", Palette.Text, 16, () => ShowPage(2)).Place(PanelX + 624, PanelY + 14, 160, 36));
         // Synergies come with Crownhold: before that, the journal just keeps its tally.
         if (_state.SynergiesOpen)
@@ -67,14 +68,14 @@ public partial class LedgerView : Node2D
         CreateTween().TweenProperty(this, "modulate", Colors.White, 0.15f);
     }
 
-    /// <summary>0: sounds, 1: regulars, 2: collection, 3: synergies, 4: places, 5: Heartsongs.</summary>
+    /// <summary>0: sounds, 1: regulars, 2: collection, 3: synergies, 4: calendar, 5: Heartsongs.</summary>
     public void ShowPage(int page)
     {
         foreach (var child in _page.GetChildren()) child.QueueFree();
         if (page == 5 && _state.Songbook.Count > 0) BuildSongs();
         else if (page == 1) BuildRegulars(Spread(_state.Tier));
         else if (page == 2) BuildCollection();
-        else if (page == 4) BuildPlaces();
+        else if (page == 4) BuildCalendar();
         else if (page == 3 && _state.SynergiesOpen) BuildSynergies();
         else BuildSounds();
     }
@@ -318,37 +319,78 @@ public partial class LedgerView : Node2D
     }
 
     /// <summary>
-    /// Where chests come from, two columns of them: what each place tends to hold, and the kinds you'd mostly hear. Only
-    /// places a seller has told you of are filled in.
+    /// Three weeks, a row each, a day to a box: today framed in gold and the days gone by faded; each day's event (this
+    /// week's and next week's are planned), Nim's day, and the Guild's night with what it'll want. Hover a day for the
+    /// whole story; until then, the next thing coming is told below.
     /// </summary>
-    void BuildPlaces()
+    void BuildCalendar()
     {
-        var kinds = Categories.UpTo(_state.Tier).ToList();
-        var places = Origins.All.Where(o => _state.Places.Contains(o.Key)).ToList();
-        _page.AddChild(UiKit.MakeLabel($"{places.Count} of {Origins.All.Length} places heard of. Where a chest came from says what it " +
-                                       "tends to hold.", 16, Palette.Muted).Place(TableX, PanelY + 60, PanelW - 48, 20));
-        if (places.Count == 0)
+        int today = _state.Day;
+        string due = _state.DebtCleared ? $"Bram's debt is cleared; the Guild still comes for {_state.NextDue}g on day {today + _state.DaysToNextDue}."
+            : _state.DuesTonight && !_state.PaidThisWeek ? $"The Guild comes tonight for {_state.DueNow}g."
+            : $"The Guild comes next for {_state.NextDue}g at the end of day {today + _state.DaysToNextDue}.";
+        // The Guild's nights show once Vane has introduced them (the first evening).
+        bool guild = _state.GuildIntroduced;
+        _page.AddChild(UiKit.MakeLabel($"Today is day {today}: week {_state.Week}, day {_state.DayOfWeek} of {Guild.DaysPerWeek}.{(guild ? $" {due}" : "")}", 16, Palette.Muted)
+            .Place(TableX, PanelY + 60, PanelW - 48, 20));
+
+        const float cellX = 180, cellW = 200, gap = 8, rowH = 108, gridY = PanelY + 90;
+        var detail = UiKit.MakeLabel("", 16, Palette.Text).Wrapped();
+        detail.Place(TableX, gridY + 3 * rowH + 8, PanelW - 48, 64);
+        string upcoming = null;
+        for (int row = 0; row < 3; row++)
         {
-            _page.AddChild(UiKit.MakeLabel("Nobody's told you where their chest came from yet.", 24, Palette.Muted, HorizontalAlignment.Center)
-                .Place(PanelX, 300, PanelW, 30));
-            return;
-        }
-        const float rowH = 42;
-        for (int i = 0; i < places.Count; i++)
-        {
-            var place = places[i];
-            float x = TableX + i / 10 * 580, y = PanelY + 88 + i % 10 * rowH;
-            _page.AddChild(UiKit.MakeLabel(Capital(place.Name), 16, Palette.Gold).Place(x, y, 300, 20));
-            _page.AddChild(UiKit.MakeLabel(place.Holds, 16, Palette.Text).Place(x, y + 18, 400, 20));
-            // The kinds you'd mostly hear in a chest from there (at this shop): the likeliest first.
-            float total = kinds.Sum(k => place.Kinds[(int)k.Category]);
-            var mostly = kinds.Where(k => place.Kinds[(int)k.Category] / total >= 0.2f).OrderByDescending(k => place.Kinds[(int)k.Category]).Take(3).ToList();
-            for (int k = 0; k < mostly.Count; k++)
+            int week = _state.Week + row;
+            var plan = _state.PlanFor(week);
+            float y = gridY + row * rowH;
+            _page.AddChild(UiKit.MakeLabel($"WEEK {week}", 16, Palette.Gold).Place(TableX, y + 8, 110, 20));
+            _page.AddChild(UiKit.MakeLabel(row == 0 ? "this week" : row == 1 ? "next week" : "not planned", 16, Palette.Muted).Place(TableX, y + 28, 110, 20));
+            if (week > Guild.Weeks)
+                _page.AddChild(UiKit.MakeLabel("after the debt", 16, Palette.Muted).Place(TableX, y + 48, 116, 20));
+            for (int d = 1; d <= Guild.DaysPerWeek; d++)
             {
-                var icon = UiKit.MakeKindIcon(mostly[k].Category, new Vector2(x + 440 + k * 36, y + 18));
-                _page.AddChild(icon);
+                int day = GameState.DayNumber(week, d);
+                bool isToday = day == today, past = day < today;
+                var cell = UiKit.MakePanel(isToday ? Palette.Gold : Palette.PanelBorder).Place(cellX + (d - 1) * (cellW + gap), y, cellW, rowH - 8);
+                cell.MouseFilter = Control.MouseFilterEnum.Stop;
+                if (past) cell.Modulate = new Color(1, 1, 1, 0.45f);
+                cell.AddChild(UiKit.MakeLabel($"DAY {day}", 16, isToday ? Palette.Gold : Palette.Muted).Place(10, 6, 100, 20));
+                if (isToday) cell.AddChild(UiKit.MakeLabel("today", 16, Palette.Gold, HorizontalAlignment.Right).Place(90, 6, 100, 20));
+
+                var lines = new System.Collections.Generic.List<string>();
+                float ly = 28;
+                if (plan?.On(d) is string key && Events.Find(key) is EventDef e)
+                {
+                    cell.AddChild(UiKit.MakeLabel(Events.Tag(e, plan.Wanted), 16, Palette.Magic).Wrapped().Place(10, ly, cellW - 20, 40));
+                    ly += Events.Tag(e, plan.Wanted).Length > 20 ? 40 : 20;
+                    lines.Add($"{e.Name}: {Events.Describe(e, plan.Wanted)}");
+                }
+                if (plan != null && plan.Peddler == d)
+                {
+                    cell.AddChild(UiKit.MakeLabel("Nim: curios", 16, Palette.Good).Place(10, ly, cellW - 20, 20));
+                    ly += 20;
+                    lines.Add("Nim the peddler comes by in the morning with curios.");
+                }
+                if (d == Guild.DaysPerWeek && guild)
+                {
+                    bool paid = week <= _state.WeeksPaid;
+                    int owed = week == _state.Week ? _state.DueNow : _state.DueFor(week);
+                    string text = paid ? "Guild: paid" : $"Guild: {owed}g";
+                    var colour = paid ? Palette.Good : week == _state.Week && _state.Gold < owed ? Palette.Warn : Palette.Text;
+                    cell.AddChild(UiKit.MakeLabel(text, 16, colour).Place(10, rowH - 32, cellW - 20, 20));
+                    lines.Add(paid ? "The Guild's night: this week's tithe is already paid." : $"The Guild's night: Mister Vane comes for {owed}g after closing.");
+                }
+                if (plan == null && d == 1)
+                    lines.Add("Next week's plan is made at the start of this one: two days with something on, and Nim's.");
+                string story = $"Day {day}{(isToday ? " (today)" : "")}: " + (lines.Count == 0 ? "nothing special planned." : string.Join(" ", lines));
+                if (!past && !isToday && upcoming == null && lines.Count > 0) upcoming = "Next: " + story;
+                cell.MouseEntered += () => detail.Text = story;
+                cell.MouseExited += () => detail.Text = upcoming ?? "";
+                _page.AddChild(cell);
             }
         }
+        detail.Text = upcoming ?? "";
+        _page.AddChild(detail);
     }
 
     static string Capital(string text) => char.ToUpperInvariant(text[0]) + text[1..];

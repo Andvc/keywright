@@ -108,6 +108,12 @@ public static class Market
         var fakeable = kinds.Where(seller.Fakes.Contains).ToArray();
         if (seller.Judge == Judgment.Crook && fakeable.Length > 0) picked.Add(rng.PickWeighted(fakeable, c => likely[(int)c]));
         if (seller.Always is Category always && kinds.Contains(always)) picked.Add(always);
+        // A Thornwick dowry always holds coin for luck, a cloak for warmth and a potion for health.
+        if (seller.States == Core.Clue.Dowry)
+        {
+            picked.AddRange(Dowry.Where(kinds.Contains));
+            count = Math.Max(count, picked.Count);
+        }
         while (picked.Count < count)
             picked.Add(rng.PickWeighted(kinds.Except(picked).ToArray(), c => likely[(int)c] * boosts.Weight(c)));
 
@@ -141,7 +147,47 @@ public static class Market
             var hideable = HiddenKinds.Where(k => Categories.Get(k.Kind).Tier <= shopTier).ToArray();
             hidden = new Item(rng.PickWeighted(hideable, k => k.Weight).Kind, Categories.RollQuality(rng, colour));
         }
-        return new Chest(items, colour, hidden, lockTier, packed: seller.Packs);
+        var chest = new Chest(items, colour, hidden, lockTier, packed: seller.Packs);
+        if (shopTier >= 2 && seller.Wards > 0 && rng.NextFloat() < seller.Wards && Warding(rng, seller, chest, kinds, likely) is Item warded)
+            chest.Ward(warded);
+        return chest;
+    }
+
+    /// <summary>The Thornwick dowry: coin for luck, a cloak for warmth, a potion for health.</summary>
+    public static readonly Category[] Dowry = { Category.Coins, Category.Garb, Category.Potions };
+
+    /// <summary>
+    /// What the owner warded into the Locking, or null: a kind there's none of to hear (so naming it means one more of it
+    /// on the slip, at any shop), as good as the chest's colour tends to be. A bride wards one of her three dowry things,
+    /// so it comes out of the chest's things instead.
+    /// </summary>
+    static Item Warding(Random rng, SellerDef seller, Chest chest, List<Category> kinds, float[] likely)
+    {
+        var quality = Categories.RollQuality(rng, chest.Quality);
+        if (quality < Rarity.Legendary && rng.NextFloat() < seller.QualityBoost) quality++;
+        if (seller.States == Core.Clue.Dowry)
+        {
+            var dowry = chest.Items.Where(i => Dowry.Contains(i.Category) && !i.IsSong).ToList();
+            if (dowry.Count == 0) return null;
+            var taken = rng.PickOne(dowry.ToArray());
+            chest.Remove(taken);
+            return taken;
+        }
+        var free = kinds.Where(k => !chest.Items.Any(i => i.Category == k)).ToArray();
+        return free.Length == 0 ? null : new Item(rng.PickWeighted(free, k => Math.Max(0.05f, likely[(int)k])), quality);
+    }
+
+    /// <summary>
+    /// Wards one thing into a chest that has nothing warded yet (a day's custom): of a kind that isn't already in it, the
+    /// kinds the seller tends to bring likelier, as good as the chest promises. False if every kind is already in it.
+    /// </summary>
+    public static bool WardOne(Random rng, SellerDef seller, Chest chest, int shopTier)
+    {
+        if (chest.Warded != null || chest.Sealed) return false;
+        var free = Categories.UpTo(shopTier).Select(c => c.Category).Where(k => chest.Items.All(i => i.Category != k)).ToArray();
+        if (free.Length == 0) return false;
+        chest.Ward(new Item(rng.PickWeighted(free, k => Math.Max(0.05f, seller.Kinds[(int)k])), Categories.RollQuality(rng, chest.Quality)));
+        return true;
     }
 
     static readonly (Category Kind, float Weight)[] HiddenKinds =
@@ -193,8 +239,8 @@ public static class Market
     }
 
     /// <summary>
-    /// What the seller thinks the chest is worth, their way. Nobody but a fortune-teller or an apprentice feels magic,
-    /// and nobody knows what's under a false bottom (though a smuggler always swears there's something).
+    /// What the seller thinks the chest is worth, their way. Nobody prices magic they can't see, what's under a false
+    /// bottom, or a warded thing.
     /// </summary>
     static float Estimate(Random rng, SellerDef seller, Chest chest, IReadOnlyList<Category> claim, int shopTier)
     {
@@ -205,7 +251,7 @@ public static class Market
             Judgment.Counter => claim.Count * TypicalItem(seller, colour, shopTier),
             Judgment.Weight => chest.Items.Sum(i => Categories.Heft(i.Category)) * TypicalItem(seller, colour, shopTier) /
                                (TypicalHeft(seller, shopTier) / TypicalCount(seller, shopTier)),
-            Judgment.Colour => TypicalChest(seller, colour, shopTier) + (seller.SensesMagic ? MagicExtra(chest) : 0),
+            Judgment.Colour => TypicalChest(seller, colour, shopTier),
             Judgment.Dreamer => TypicalChest(seller, colour, shopTier) * rng.Between(DreamMin, DreamMax),
             Judgment.Miner => claim.Sum(c => c switch
             {
@@ -214,16 +260,11 @@ public static class Market
                 _ => plain(c) / 2,
             }),
             Judgment.Jeweller => claim.Sum(c => plain(c) * JewellerPaid),
-            Judgment.MagicSense => MagicExtra(chest) + chest.Items.Where(i => i.Magic).Sum(i => plain(i.Category)),
             Judgment.Clueless => 0,
             _ => claim.Sum(plain),
         };
         return estimate;
     }
-
-    /// <summary>What magic adds to the chest, for those who can feel it.</summary>
-    static float MagicExtra(Chest chest) =>
-        chest.Items.Where(i => i.Magic).Sum(i => (Categories.MagicMultiplier - 1) * Categories.Expected(i.Category, chest.Quality));
 
     /// <summary>The seller judges the chest their way, says what they think is in it, and prices it.</summary>
     /// <param name="ask">A scripted asking price (the first day, lessons).</param>
@@ -297,10 +338,8 @@ public static class Market
                 break;
             case Trade.Offer:
                 price = 0;
-                // An apprentice with nothing magic to sell takes a modest sum; a boy takes pocket money.
-                floor = estimate > 0 ? estimate * rng.Between(0.9f, 1.15f)
-                    : seller.Judge == Judgment.MagicSense ? seller.Tier * rng.Between(5f, 10f)
-                    : seller.Tier * rng.Between(2f, 6f);
+                // A boy takes pocket money.
+                floor = estimate > 0 ? estimate * rng.Between(0.9f, 1.15f) : seller.Tier * rng.Between(2f, 6f);
                 break;
             default:
                 // The King's price waits on your slip; the Maw's is a single coin.
@@ -313,36 +352,127 @@ public static class Market
         }
         int asking = ask ?? Money.Round(price);
         int fee = seller.Heirloom is Category heirloom ? Money.Round(Categories.Nominal(heirloom, chest.Quality) * HeirloomShare) : 0;
-        string line = Fill(pitch ?? Story(rng, seller, origin), seller, chest, claim, shopTier)
+        var clue = MakeClue(rng, seller, chest);
+        string line = Fill(pitch ?? Story(rng, seller, origin), seller, chest, claim, shopTier).Replace("{clue}", clue?.Said ?? "")
             .Replace("{price}", seller.SlipPrice ? "your slip's worth" : $"{asking}g").Replace("{fee}", $"{fee}g").Replace("{origin}", origin?.Name ?? "somewhere");
         return new Visit(seller, chest, claim, format, format == Trade.Offer ? 0 : asking, Money.Round(floor), line)
         {
-            Origin = origin, Fee = fee, Clue = Clue(seller, chest),
+            Origin = origin, Fee = fee, Clue = clue?.Note, ClueKinds = clue?.Kinds ?? Array.Empty<Category>(),
+            Says = clue == null ? Core.Clue.None : seller.States,
         };
     }
 
     /// <summary>
-    /// What a seller states besides what they heard, as Bram would note it under the chest: the count on Pell's pawn
-    /// ticket, the weight off Wenna's game scale, the sign in Mother Bramble's dream. Always true; reading it is the work.
+    /// What a seller states besides what they heard: as they say it ({clue} in their story), as Bram notes it under the
+    /// chest, and the kinds it names, for the careful player's read (<see cref="Strategy.Reckon"/>). Always true;
+    /// reading it is the work.
     /// </summary>
-    public static string Clue(SellerDef seller, Chest chest) => seller.States switch
+    public sealed record ClueText(string Said, string Note, Category[] Kinds);
+
+    /// <param name="says">The kind of clue, if not the seller's own (a day's event gives them one).</param>
+    public static ClueText MakeClue(Random rng, SellerDef seller, Chest chest, Clue? says = null)
     {
-        Core.Clue.Articles => $"The pawn ticket says {Articles(chest)}.",
-        Core.Clue.Pounds => $"{seller.Short}'s game scale says {Characters.Weight(chest.Pounds)}.",
-        Core.Clue.Dream => $"{seller.Short} dreamt of {Dream(chest)}.",
-        _ => null,
+        var things = chest.Items.Where(i => !i.IsSong).ToList();
+        var warded = chest.Warded;
+        bool own = says == null || says == seller.States;
+        switch (says ?? seller.States)
+        {
+            case Core.Clue.Articles:
+                return new(Articles(chest), $"The pawn ticket says {Articles(chest)}.", Array.Empty<Category>());
+            case Core.Clue.Tally:
+                return new(Articles(chest), $"The Guild clerk's tally: {Articles(chest)}.", Array.Empty<Category>());
+            case Core.Clue.Pounds:
+            {
+                string pounds = Characters.Weight(chest.Pounds);
+                return new(pounds, $"{seller.Short}'s game scale says {pounds}.", Array.Empty<Category>());
+            }
+            case Core.Clue.Dream:
+            {
+                // Of what the Wood warded, or else of the dearest thing in it.
+                var kind = DreamtOf(chest)?.Category;
+                string sign = kind is Category k ? Categories.Sign(k) : "nothing at all";
+                return new(sign, $"{seller.Short} dreamt of {sign}.", kind is Category c ? new[] { c } : Array.Empty<Category>());
+            }
+            case Core.Clue.Tag:
+            {
+                var kinds = things.Select(i => (Category?)i.Category).Append(warded?.Category).OfType<Category>().Distinct().OrderBy(k => k).ToArray();
+                string list = kinds.Length == 0 ? "nothing" : Sellers.Join(kinds.Select(Categories.One).ToList());
+                return new(list, $"The Arcanum's tag: packed, {list}.", kinds);
+            }
+            case Core.Clue.Riddle:
+            {
+                // About the warded thing, if grandmother warded one; else about something else inside.
+                var kind = warded?.Category ?? (things.Count == 0 ? null : rng.PickOne(things.ToArray()).Category);
+                if (kind is not Category k) return new("A riddle with no answer: nothing at all.", "Grandmother left no riddle: the box is empty.", Array.Empty<Category>());
+                string riddle = rng.PickOne(Riddles[k]);
+                return new(riddle, $"{(own ? "Grandmother" : seller.Short)}'s riddle: \"{riddle}\"", new[] { k });
+            }
+            case Core.Clue.Dowry:
+                return new("coin for luck, a cloak for warmth and a potion for health", "A Thornwick dowry always holds coin, a cloak and a potion.",
+                    Dowry);
+            case Core.Clue.Roll:
+                return warded == null
+                    ? new("nothing: it's blank", "The ward-roll is blank: nothing was warded.", Array.Empty<Category>())
+                    : new($"'{Faded(warded.Name)}'", $"The ward-roll, faded: '{Faded(warded.Name)}'.", new[] { warded.Category });
+            case Core.Clue.Echo:
+            {
+                // Every thing inside, warded or not (a false bottom's floor stops the echo).
+                var all = things.Select(i => (Category?)i.Category).Append(warded?.Category).OfType<Category>().OrderBy(k => k).ToArray();
+                string shapes = all.Length == 0 ? "nothing at all"
+                    : Sellers.Join(all.GroupBy(k => k).Select(g => $"{Sellers.Number(g.Count())} {Categories.Shape(g.Key)}").ToList());
+                return new(shapes, $"Skrae's echoes: {shapes}.", all);
+            }
+            case Core.Clue.Cards:
+            {
+                // A suit twice names what the ward holds; three different suits, nothing.
+                var suits = Categories.Kinds.Select(c => c.Category).ToList();
+                var cards = new List<Category>();
+                if (warded != null)
+                {
+                    cards.Add(warded.Category);
+                    cards.Add(warded.Category);
+                    cards.Add(rng.PickOne(suits.Where(s => s != warded.Category).ToArray()));
+                }
+                else
+                    while (cards.Count < 3)
+                        cards.Add(rng.PickOne(suits.Except(cards).ToArray()));
+                cards = cards.OrderBy(_ => rng.Next()).ToList();
+                string spread = string.Join(", ", cards.Select(Categories.Suit));
+                return new($"the {Sellers.Join(cards.Select(Categories.Suit).ToList())}", $"Madame Oriel's cards: {spread}.", cards.ToArray());
+            }
+            default:
+                return null;
+        }
+    }
+
+    /// <summary>Grandmother de Vere's riddles, two for each kind of thing.</summary>
+    static readonly Dictionary<Category, string[]> Riddles = new()
+    {
+        [Category.Coins] = new[] { "I've a head and a tail, but no body at all.", "Round and bright, I pass from hand to hand, and buy the bread and the land." },
+        [Category.Arms] = new[] { "I've a hilt but no hill, and an edge but no cliff.", "Forged in fire, drawn in anger, sheathed in peace." },
+        [Category.Garb] = new[] { "I've a hood but no head, and I keep the rain off.", "I hang in the hall all day, and keep you warm on the road at night." },
+        [Category.Potions] = new[] { "I'm poured but I'm not rain, drunk but I'm not wine, and I live in glass.", "Uncork me and I heal; drop me and I'm gone." },
+        [Category.Scrolls] = new[] { "Read me once and I'm gone; my words do what they say.", "I'm rolled, but I'm not bread; I'm written, but I'm no letter." },
+        [Category.Gems] = new[] { "Born in the dark, I shine in the light; the more I'm cut, the more I'm worth.", "Hard as ice, but I never melt; I sleep in a ring of gold." },
     };
+
+    /// <summary>A name three hundred years faded: every other letter of each word gone ("Blood Ruby": "B_o_d R_b_").</summary>
+    public static string Faded(string name) => string.Join(" ", name.Split(' ').Select(word =>
+        new string(word.Select((c, i) => i % 2 == 1 && char.IsLetter(c) ? '_' : c).ToArray())));
 
     /// <summary>How many things the pawn ticket lists: everything that was pledged, false bottom and all (never a Heartsong).</summary>
     public static int ArticleCount(Chest chest) => chest.Everything.Count(i => !i.IsSong);
 
     static string Articles(Chest chest) => ArticleCount(chest) is var n && n == 1 ? "one article" : $"{Sellers.Number(n)} articles";
 
-    /// <summary>The dearest thing inside, false bottom and all (never a Heartsong: it isn't greed's to dream of), or null.</summary>
-    public static Item Dearest(Chest chest) => chest.Everything.Where(i => !i.IsSong).OrderByDescending(i => i.Value).FirstOrDefault();
+    /// <summary>The sign in Mother Bramble's dream: of what the Wood warded, or else the dearest thing ("nothing at all" for an empty chest).</summary>
+    public static string Dream(Chest chest) => DreamtOf(chest) is Item dreamt ? Categories.Sign(dreamt.Category) : "nothing at all";
 
-    /// <summary>The sign of the dearest thing inside, as it comes to her in a dream ("nothing at all" for an empty chest).</summary>
-    public static string Dream(Chest chest) => Dearest(chest) is Item dearest ? Categories.Sign(dearest.Category) : "nothing at all";
+    /// <summary>
+    /// What a true dream is of: the warded thing, or else the dearest thing that could sound (a dream never reaches under
+    /// a false bottom, so a dreamt kind you can't hear is always the warded one).
+    /// </summary>
+    public static Item DreamtOf(Chest chest) => chest.Warded ?? chest.Items.Where(i => !i.IsSong).OrderByDescending(i => i.Value).FirstOrDefault();
 
     static string Fill(string line, SellerDef seller, Chest chest, IReadOnlyList<Category> claim, int shopTier)
     {

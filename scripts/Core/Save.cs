@@ -69,6 +69,12 @@ public sealed class SaveData
     /// <summary>What was paid for each curio, in the same order.</summary>
     public List<int> CurioPaid { get; set; } = new();
     public List<string> EventsSeen { get; set; } = new();
+
+    /// <summary>This week's plan and next week's (the calendar's).</summary>
+    public WeekPlan Plan { get; set; }
+    public WeekPlan NextPlan { get; set; }
+
+    /// <summary>Before plans (0.18): the week's one event, its day, the buyer's kind and Nim's day.</summary>
     public string WeekEvent { get; set; }
     public int EventDay { get; set; }
     public Category BuyerKind { get; set; }
@@ -120,6 +126,7 @@ public sealed class SavedCommission
     public int Reward { get; set; }
     public bool Story { get; set; }
     public bool Carried { get; set; }
+    public int Lapses { get; set; }
 }
 
 /// <summary>
