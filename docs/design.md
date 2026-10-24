@@ -781,16 +781,16 @@ listeners; how real players get there is in *Balance across a career*, below. v1
 |---|---|---|---|---|---|---|---|
 | Pays their price, every chest | 100 94 60 28 11 2 1 0% | 0% | 0% | all (week 4) | day 5 | never | never |
 | One hard shake, keeps the seller's marks | 100 100 95 84 60 25 6 0% | 0% | 0% | all (week 6) | day 4 | day 11 | never |
-| Every strength, drops when safe | 100 100 99 98 91 70 63 6% | 6% | 6% | all (week 8) | day 3 | day 8 | day 16 |
-| + Witchlight and Lodestone | 100 100 99 98 92 74 68 14% | 14% | 14% | all (week 8) | day 3 | day 8 | day 16 |
-| + keeps grand things | 100 100 99 98 92 78 73 30% | 30% | 30% | all (week 8) | day 3 | day 8 | day 16 |
+| Every strength, drops when safe | 100 100 99 98 91 70 64 7% | 7% | 7% | all (week 8) | day 3 | day 8 | day 16 |
+| + Witchlight and Lodestone | 100 100 99 98 91 72 68 14% | 14% | 14% | all (week 8) | day 3 | day 8 | day 16 |
+| + keeps grand things | 100 100 99 98 91 76 72 30% | 30% | 30% | all (week 8) | day 3 | day 8 | day 16 |
 
 ("Foreclosed" counts the Guild's endless interest after the debt, which doubles weekly and catches every shop by week
 11.)
 
-The tools matter (6% to 14%), and the exhibition more (30%). Week 8 is the wall (420,000g, more than three times
-week 7), and the middle weeks are felt: a fifth of careful runs fall at weeks 5 to 7, and half need Bram's word
-(median week 6). v18's careful collector cleared 38%, and with this version's warded things and twice-weekly events
+The tools matter (7% to 14%), and the exhibition more (30%). Week 8 is the wall (420,000g, more than three times
+week 7), and the middle weeks are felt: a quarter of careful runs fall at weeks 5 to 7, and half need Bram's word
+(median week 5). v18's careful collector cleared 38%, and with this version's warded things and twice-weekly events
 would have cleared 64%.
 
 Week by week for the careful collector (gold on the Guild's night, before paying):
@@ -798,24 +798,24 @@ Week by week for the careful collector (gold on the Guild's night, before paying
 | Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 |---|---|---|---|---|---|---|---|---|---|
 | Due | 40 | 100 | 280 | 900 | 5,000 | 30,000 | 130,000 | 420,000 | 840,000 |
-| Gold, 10th percentile | 88 | 227 | 589 | 782 | 1,546 | 8,159 | 41,887 | 36,745 | 241,181 |
-| Gold, median | 169 | 680 | 3,355 | 6,393 | 37,562 | 101,883 | 207,547 | 181,714 | 950,532 |
-| Paid | 100% | 100% | 99% | 99% | 94% | 85% | 94% | 20% | 58% |
-| At the Royal Emporium | 0% | 10% | 37% | 74% | 93% | 96% | 98% | 100% | 100% |
+| Gold, 10th percentile | 88 | 230 | 586 | 908 | 1,486 | 8,159 | 43,538 | 37,106 | 229,369 |
+| Gold, median | 169 | 697 | 3,330 | 6,393 | 37,347 | 93,821 | 214,142 | 181,565 | 912,229 |
+| Paid | 100% | 100% | 99% | 99% | 93% | 84% | 95% | 21% | 58% |
+| At the Royal Emporium | 0% | 10% | 37% | 73% | 93% | 97% | 99% | 100% | 100% |
 
 Profit per customer at each shop, for the careful collector: about 9g at the stall, 20g at Thornwick, 100g at Crownhold
 and 1,200g at the Royal Emporium. A collector fills about 18 commissions a run (11,000g), opens Bram's stash less than
-once, and needs Bram's word in about half of runs (median week 6). Surprises: about one thing in eight comes out a step
+once, and needs Bram's word in about half of runs (median week 5). Surprises: about one thing in eight comes out a step
 better than its chest (0.7% two or more), worth 27% of what the chests held.
 
 What curios and synergies are worth, to the careful player with both tools who sells everything:
 
 | | Debt cleared | Median day cleared | Median gold on the night, week 4 / 6 / 8 |
 |---|---|---|---|
-| With both | 14% | 37 | 6,335 / 53,700 / 112,468 |
-| No curios | 4% | 35 | 3,050 / 24,726 / 31,851 |
-| No synergies | 0% | - | 3,657 / 12,898 / 10,138 |
-| Neither | 0% | - | 2,321 / 5,633 / 6,751 |
+| With both | 14% | 36 | 6,446 / 53,829 / 120,283 |
+| No curios | 3% | 35 | 3,004 / 25,184 / 31,782 |
+| No synergies | 0% | - | 3,657 / 12,782 / 10,388 |
+| Neither | 0% | - | 2,259 / 5,633 / 7,614 |
 
 Synergies are the shop's spine (a tenth a level on their kinds' sale prices, with up to three active); curios are a
 real edge (the Lucky Coin most).
@@ -828,18 +828,18 @@ player for solving their clue, and lose the blind buyer money:
 
 | | Tam | Penn | Hob | Mags | Dorrin | Snikkit | Wenna | Bramble | Ansel |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +13 | +5 | +11 | +7 | +2 | +10 | +16 | +22 | +21 |
-| Blind | +12 | 0 | 0 | +3 | -1 | -6 | +4 | -17 | -1 |
+| Careful | +13 | +5 | +11 | +7 | +3 | +9 | +16 | +22 | +21 |
+| Blind | +12 | 0 | 0 | +3 | -1 | -6 | +4 | -17 | -2 |
 
 | | Fennick | Gerda | Wren | Orrin | Grit | Corisande | Pell | Quill | Shelly |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +18 | +12 | +42 | +122 | +216 | +81 | +195 | +102 | +34 |
-| Blind | -41 | -31 | -20 | -32 | -1,099 | -60 | -41 | -3 | -42 |
+| Careful | +17 | +13 | +40 | +119 | +214 | +82 | +198 | +99 | +36 |
+| Blind | -42 | -31 | -19 | -31 | -1,101 | -63 | -45 | -6 | -43 |
 
 | | Aldous | Vexis | Malbranche | Skrae | Ermine | Oriel | Silas | Aldo | the Maw |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +47 | +96 | +48 | +151 | +100 | +76 | +178 | +331 | +1,535 |
-| Blind | -36 | -521 | -222 | -155 | -160 | -494 | -35 | -577 | +1,452 |
+| Careful | +46 | +96 | +49 | +153 | +99 | +77 | +178 | +336 | +1,528 |
+| Blind | -36 | -522 | -223 | -164 | -158 | -486 | -37 | -578 | +1,456 |
 
 The careful player plays the King's game only on a read it could check every way (every strength and the drop): a
 wrong read costs a quarter more than the chest held, and Hesk, who can't shake hard or drop, never plays it. It buys
@@ -851,7 +851,7 @@ Every seller's lesson completes, played the careful way, with and without the to
 ## Balance across a career
 
 v13 gave runs a meta-progression; v14 sets the balance for a career, not a run, and v15 keeps that curve through the
-new world (every number below is v15's). The goal, in the owner's words: no
+new world (the numbers below are v19's unless marked). The goal, in the owner's words: no
 pressure before players have learned the puzzles, no easy win in the first few runs, a purse that keeps growing but not
 steeply enough for the middle and late dues, and judgment and talents together pushing the curve up until a run
 clears; then the challenge levels.
@@ -865,14 +865,14 @@ they know the rules but don't yet apply them every time.
 
 | Skill (Kit, level 0) | No talents: cleared, still trading after weeks 4 / 5 / 6 / 7 | Every talent |
 |---|---|---|
-| 0.15 (a first run) | 10%; 81 / 68 / 57 / 41%, lost in week 7 | 18% |
-| 0.5 | 13%; 93 / 84 / 75 / 61% | 36% |
-| 0.75 | 25%; 95 / 90 / 83 / 70% | 47% |
-| 1 (the careful collector) | 42%; 99 / 95 / 89 / 83% | 75% |
+| 0.15 (a first run) | 1%; 80 / 59 / 49 / 39%, lost in week 6 | 9% |
+| 0.5 | 7%; 87 / 77 / 53 / 49% | 15% |
+| 0.75 | 13%; 94 / 86 / 71 / 61% | 29% |
+| 1 (the careful collector) | 29%; 98 / 91 / 77 / 74% | 61% |
 
-(v18's figures. A first run clears one time in ten, and nearly always because a Heartsong turned up: without them
-it's 3%, and the careful player's 30%. The Heartsongs are meant to be that strong; they're also rare, about one run
-in two.)
+(v19's figures. A first run gets through the first three weeks and almost never clears; without Heartsongs the
+careful player clears about one run in five. The Heartsongs are meant to be that strong; they're also rare, about
+one run in two. v18's were 10%, 13%, 25% and 42% with no talents, 18% to 75% with all.)
 
 **Careers.** Each simulated player starts at skill 0 to 0.3 and improves toward their own best (0.75 to 1) at their
 own pace (a tenth to three tenths of the way each run); every run is Kit's at the highest level open, scored at the
@@ -881,19 +881,21 @@ guess; what the sim shows is the shape (`--sim`, 40 players over 30 runs):
 
 | Run | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 12 | 16 | 20 | 24 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Run | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 12 | 16 | 20 | 24 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Skill | 0.15 | 0.29 | 0.41 | 0.50 | 0.57 | 0.63 | 0.68 | 0.71 | 0.74 | 0.77 | 0.80 | 0.84 | 0.86 | 0.87 |
-| Cleared | 8% | 5% | 10% | 20% | 15% | 28% | 23% | 20% | 33% | 40% | 35% | 48% | 18% | 15% |
-| Lost in week (median) | 7 | 8 | 8 | 8 | 8 | 7 | 8 | 8 | 8 | 8 | 8 | 8 | 8 | 7 |
-| Challenge level | 0 | 0.1 | 0.1 | 0.2 | 0.4 | 0.6 | 0.9 | 1.1 | 1.3 | 1.6 | 2.2 | 3.7 | 5.1 | 5.9 |
-| Talents (of 13) | 2.1 | 3.7 | 4.7 | 5.8 | 6.7 | 7.5 | 8.0 | 8.6 | 9.3 | 10.0 | 11.0 | 12.7 | 13 | 13 |
-| Renown | 205 | 220 | 230 | 281 | 286 | 338 | 342 | 345 | 421 | 456 | 510 | 713 | 615 | 586 |
+| Cleared | 3% | 3% | 5% | 8% | 8% | 5% | 13% | 20% | 25% | 23% | 13% | 23% | 28% | 20% |
+| Lost in week (median) | 6 | 6 | 6 | 7 | 6 | 7 | 7 | 8 | 8 | 8 | 8 | 8 | 8 | 8 |
+| Challenge level | 0 | 0 | 0.1 | 0.1 | 0.2 | 0.3 | 0.3 | 0.4 | 0.6 | 0.9 | 1.4 | 2.3 | 3.4 | 4.2 |
+| Talents (of 13) | 2.1 | 3.6 | 4.6 | 5.5 | 6.3 | 6.9 | 7.5 | 8.1 | 8.8 | 9.4 | 10.3 | 12.2 | 12.9 | 13 |
+| Renown | 203 | 202 | 207 | 230 | 234 | 249 | 281 | 309 | 341 | 356 | 354 | 498 | 632 | 565 |
 
-v18: the first run gets to week 7 and loses there (one in ten clears, on a Heartsong's luck); the debt is first
-cleared around the sixth run (a quarter of players by run 4, half by 6, three quarters by 9), a few runs sooner than
-0.17's ninth: bigger growth forgives a learner's mistakes a little more. Then the levels: level 1 around run 10, 2
-around 12, 4 around 17 (every player by run 30), 6 around 28 (55% by run 30); level 8 stays a wall (nobody by run
-30). All nine Heartsongs are known around run 17 and the Crown Chest is first sung whole around run 19 (78% of
-players by run 30). The whole talent tree is learned around run 18; after that the climb is the challenge levels.
+v19: the first run loses in week 6 (it almost never clears); the debt is first cleared around the eighth run (a
+quarter of players by run 6, half by 8, three quarters by 10), two runs later than v18's sixth. Then the levels:
+level 1 around run 13, 2 around 17, 4 around 25 (83% by run 30); level 6 is reached by a tenth of players by run 30
+and level 8 by none. All nine Heartsongs are known around run 16 and the Crown Chest is first sung whole around run
+18 (98% of players by run 30). The whole talent tree is learned around run 21; after that the climb is the challenge
+levels. (v18: first clear around run 6, level 4 around 17, 6 around 28.)
 
 Getting there: v13's dues (40, 100, 300, 800, 1,400, 2,400, 3,800, 7,000) let the careful player with no talents
 clear 61% of the time and half of all careers clear by their fifth run, with a third of first-timers already short in
@@ -909,14 +911,19 @@ moved from level 6 to 8; the rest kept their places (within a few points of each
 All together, level by level: 81, 81, 72, 67, 61, 43, 31, 13, 6%. The first levels are an on-ramp for a careful player
 and bite a learner who still leans on Bram's stash and word and drops glass.
 
-**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; v18):
+**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; v19):
 
 | | No talents | All, level 0 | Level 2 | Level 4 | Level 6 | Level 8 |
 |---|---|---|---|---|---|---|
-| Kit | 42% | 75% | 68% | 53% | 23% | 9% |
-| Hesk | 31% | 64% | 64% | 52% | 17% | 9% |
-| Rosa | 43% | 77% | 73% | 64% | 29% | 14% |
-| Isolde | 49% | 82% | 80% | 67% | 30% | 13% |
+| Kit | 29% | 61% | 66% | 42% | 15% | 5% |
+| Hesk | 25% | 48% | 48% | 25% | 6% | 5% |
+| Rosa | 41% | 70% | 70% | 58% | 22% | 10% |
+| Isolde | 41% | 69% | 66% | 51% | 19% | 7% |
+
+(v18: Kit 42 / 75 / 68 / 53 / 23 / 9%. v19's warded puzzles first held Hesk back, 19% with no talents and 35% with
+all: the careful player only called a named kind silent once every strength had been tried, and he never shakes hard.
+It now asks only that the named kind had a fair chance to sound, as a player would: a dream of a river and no slosh
+at a gentle shake is enough.)
 
 v18's bigger economy shrugged off the old terms (level 8 cleared 31% with every talent), so they're sharper: the
 Guild's interest a quarter (was a tenth), sharp sellers a tenth (a twentieth), thin crowds at every shop (the stall

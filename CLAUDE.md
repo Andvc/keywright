@@ -123,8 +123,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
   judgment and talents each push that later; only the two together clear the debt more often than not (v19: the careful
-  player with no talents about three runs in ten, with every talent about six in ten; a first run almost never); careers first clear around the sixth run, open level 4 around the seventeenth, and
-  level 8 stays a wall. `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
+  player with no talents about three runs in ten, with every talent about six in ten; a first run almost never); careers first clear around the eighth run, open level 4 around the twenty-fifth, and
+  levels 6 and 8 stay a wall. `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
   are foreclosed within a few weeks, and no early week sends careful players to Bram's word. Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, three times a run) tops up a day that starts
   nearly broke. Bram's working purse (`ShopTiers.Working`) is both the day-end advice (orange prices) and what
