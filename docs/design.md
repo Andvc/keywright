@@ -962,13 +962,14 @@ since a blind buyer still names what each seller said they heard, but no further
 
 Per seller, at their own place (with the shop's tools, buyers' trades and restorers), profit per visit for a careful
 player, against paying their price blind. Every habit and every rule pays for putting up with it; only Tam (a few
-coins for anything), Mags and Ansel pay a little blind, and the Maw's coin pays anyone (its price is the rest of the
-day, which the table doesn't count):
+coins for anything) pays blind, Hob and Mags by a coin or three at the stall (Mags as in v19), and the Maw's coin pays
+anyone (its price is the rest of the day, which the table doesn't count). Ansel's markup went up a tenth (1.8-2.1) when
+Thornwick's chests got finer: the cloaks he won't shake hard enough to hear were paying a blind buyer 2g a visit.
 
 | | Tam | Penn | Hob | Mags | Dorrin | Snikkit | Wenna | Bramble | Ansel |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +13 | +5 | +12 | +7 | +2 | +10 | +13 | +26 | +22 |
-| Blind | +12 | 0 | +1 | +3 | 0 | -5 | -2 | -22 | +2 |
+| Careful | +13 | +5 | +12 | +7 | +2 | +10 | +13 | +26 | +23 |
+| Blind | +12 | 0 | +1 | +3 | 0 | -5 | -2 | -22 | -5 |
 
 | | Fennick | Gerda | Wren | Orrin | Grit | Corisande | Pell | Quill | Shelly |
 |---|---|---|---|---|---|---|---|---|---|

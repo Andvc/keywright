@@ -161,8 +161,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `Strategy.Reserve` keeps, so the advice is what the sim's careful player does: tune them together. The whole debt
   can be paid off early (`GameState.DebtLeft`, `PayOff`) from the day end or the Guild's night; the sim's careful
   player does, and reports the week each run cleared (a strong run takes off and clears in weeks 6-7; week 8 is the wall
-  for the rest). Surprises (`Categories.Odds`, about one thing in eight a step better) are worth a quarter of what the
-  chests hold, with a pity counter (`GameState.DrySpell`); the sim reports their share of income.
+  for the rest). Surprises (`Categories.Odds`, about one thing in eight a step better; the restorers and luck curios take
+  a careful player to one in four) are worth about half of what the chests hold, with a pity counter
+  (`GameState.DrySpell`); the sim reports their share of income.
 - Across runs (`Meta.cs` for the definitions and the score, `Kin.cs` for what they do to a run): four of Bram's kin
   (`Characters`), each changing one part of how chests are judged or the shop is run and paying for it (Hesk: no hard
   shake or drop, a scale; Rosa: everybody haggles, walkouts stay away a week; Isolde: a shelf and door money from day

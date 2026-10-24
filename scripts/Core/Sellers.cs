@@ -371,7 +371,7 @@ public static class Sellers
         },
         new()
         {
-            Key = "ansel", Name = "Brother Ansel", Tier = 2, Shakes = Shake.Firm, HatesHardShake = true, MissRate = 0.55f, Markup = (1.7f, 2f), Colours = Village,
+            Key = "ansel", Name = "Brother Ansel", Tier = 2, Shakes = Shake.Firm, HatesHardShake = true, MissRate = 0.55f, Markup = (1.8f, 2.1f), Colours = Village,
             From = new[] { ("crypt", 1f) },
             Stories = Tell(("crypt", new[] { "From the abbey crypt, by the Abbot's leave. A firm shake: {heard}. {price}. Not hard, please: the saints are resting.",
                                              "Brother Cuthbert's reliquary. I shook it firmly, as is seemly: {heard}. {price}, for the roof fund." })),
