@@ -103,6 +103,7 @@ public partial class Main : Node2D
             return;
         }
 
+        CarryOverOldFiles();
         Settings.Load();
         Profile = ReadProfile();
         GetTree().Root.Theme = MakeTheme();
@@ -136,7 +137,7 @@ public partial class Main : Node2D
             if (args.Contains("--engine")) State.Grant(Upgrades.Engine);
             NoteStart();
         }
-        GD.Print($"LootFall seed {_seed}");
+        GD.Print($"Keywright seed {_seed}");
 
         AddChild(new Painter(DrawBackground));
         _camera = new Camera2D { Position = new Vector2(640, 360) };
@@ -266,6 +267,31 @@ public partial class Main : Node2D
     {
         using var file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
         file?.StoreString(State.Save().ToJson());
+    }
+
+    /// <summary>
+    /// Until 0.18 the game was called LootFall, and Godot keeps a game's files in a folder named after it. The first time
+    /// Keywright starts, it brings the profile and the run in progress over from that folder. The name now belongs to
+    /// another game, so only what this one can read comes over (its settings don't), and nothing here is overwritten.
+    /// </summary>
+    static void CarryOverOldFiles()
+    {
+        string here = OS.GetUserDataDir();
+        string old = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(here) ?? "", "LootFall");
+        if (!System.IO.Directory.Exists(old)) return;
+        try
+        {
+            System.IO.Directory.CreateDirectory(here);
+            string profile = System.IO.Path.Combine(old, "profile.json"), save = System.IO.Path.Combine(old, "save.json");
+            if (System.IO.File.Exists(profile) && !FileAccess.FileExists(ProfilePath))
+                System.IO.File.Copy(profile, ProjectSettings.GlobalizePath(ProfilePath));
+            if (System.IO.File.Exists(save) && !FileAccess.FileExists(SavePath) && SaveData.FromJson(System.IO.File.ReadAllText(save)) != null)
+                System.IO.File.Copy(save, ProjectSettings.GlobalizePath(SavePath));
+        }
+        catch (Exception e)
+        {
+            GD.PushWarning($"Couldn't bring the old files over from {old}: {e.Message}");
+        }
     }
 
     static Profile ReadProfile()

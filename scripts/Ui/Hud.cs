@@ -28,7 +28,7 @@ public partial class Hud : CanvasLayer
             p.DrawRect(new Rect2(0, 57, 1280, 3), new Color(0, 0, 0, 0.6f));
         }));
         AddChild(UiKit.MakeSprite("res://assets/sprites/items/dwarf_gold_crowns.png", Purse, 2));
-        AddChild(UiKit.MakeLabel("LOOTFALL", 32, Palette.Gold, outline: 4).Place(24, 8, 300, 40));
+        AddChild(UiKit.MakeLabel("KEYWRIGHT", 32, Palette.Gold, outline: 4).Place(24, 8, 300, 40));
         _earlyAccess = UiKit.MakeLabel("early access", 16, Palette.Muted).Place(196, 20, 160, 20);
         AddChild(_earlyAccess);
         _event = UiKit.MakeButton("", Palette.Magic.Darkened(0.3f), 16, ToggleEvent).Place(188, 9, 222, 38);

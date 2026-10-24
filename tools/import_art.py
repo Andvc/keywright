@@ -4,7 +4,7 @@ drawing there or a mapping below.
 
 Sources:
   - The pictures (things, portraits, chests, curios, backdrops, effects): drawn in code by tools/custom_art.py for
-    LootFall; the UI frames and icons below are drawn here.
+    Keywright; the UI frames and icons below are drawn here.
   - Kenney Font Package, Impact Sounds, RPG Audio, Casino Audio, Interface Sounds (CC0, see CREDITS.md)
     https://kenney.nl (mirror: github.com/ETdoFresh/kenney.nl)
 
@@ -887,7 +887,7 @@ def pixel_icon(rows, name):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cache", default=os.path.expanduser("~/.cache/lootfall-art"))
+    parser.add_argument("--cache", default=os.path.expanduser("~/.cache/keywright-art"))
     args = parser.parse_args()
     os.makedirs(args.cache, exist_ok=True)
 

@@ -98,7 +98,7 @@ public static class Simulation
     /// </param>
     public static void Run(int campaigns, bool quick = false)
     {
-        GD.Print($"=== LootFall balance report ({campaigns} runs per style, up to {MaxWeeks} weeks of {Guild.DaysPerWeek} days) ===");
+        GD.Print($"=== Keywright balance report ({campaigns} runs per style, up to {MaxWeeks} weeks of {Guild.DaysPerWeek} days) ===");
         var all = Styles.ToDictionary(s => s, s => Enumerable.Range(0, campaigns).Select(i => Play(s, 1000 + i).Log).ToList());
 
         GD.Print("\nStyle                   % still trading at each due (week 1..8)        cleared  crown  lost (median wk)  " +

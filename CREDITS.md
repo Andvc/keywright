@@ -2,7 +2,7 @@
 
 ## Art
 
-The pictures are LootFall's own, drawn for this game as pixel art in code (placeholders, until dedicated art replaces
+The pictures are Keywright's own, drawn for this game as pixel art in code (placeholders, until dedicated art replaces
 them), so anyone can rebuild them with `python3 tools/import_art.py`:
 
 - `tools/custom_art.py`: the 33 things in chests (six kinds, five qualities, three fakes), the nine Heartsongs, the

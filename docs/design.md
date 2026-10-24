@@ -1,4 +1,4 @@
-# LootFall design notes
+# Keywright design notes
 
 ## The game in one paragraph
 

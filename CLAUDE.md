@@ -1,7 +1,12 @@
-# LootFall: notes for Claude
+# Keywright: notes for Claude
 
 Solo-developed PC game for Steam (Godot 4.7.2 .NET, C#, 2D, GL Compatibility renderer). The owner knows Unity/C#
 and works through cloud sessions rather than locally, so changes must be verified here, not left for them to test.
+
+Until 0.18 the game was called LootFall and lived on the `prototype/chest-loop` branch of Andvc/LootFall. That name
+and repository now belong to a different game (an auto-battler about opening chests); the two share only the
+toolchain. Godot keeps a game's files in a folder named after it, so on first start `Main.CarryOverOldFiles` brings
+the profile and a readable save over from the old `app_userdata/LootFall` folder.
 
 ## Setup in a fresh container
 

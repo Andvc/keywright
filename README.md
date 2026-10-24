@@ -1,4 +1,4 @@
-# LootFall
+# Keywright
 
 A small game about the satisfaction of opening treasure chests. Three hundred years ago the Locking shut every treasure
 in the realm into a warded chest, to starve the demon of greed chained behind the Gilded Gate. The chests are still
@@ -21,6 +21,9 @@ Bram's kin to play, eight challenge levels each, and a talent tree bought with t
 and a guided start. The pixel art is drawn in code (`tools/custom_art.py`) as a placeholder until dedicated art
 replaces it; recorded sounds and the font are from Kenney's CC0 packs (see [CREDITS.md](CREDITS.md)). Built with Godot
 4.7 (.NET / C#), targeting PC on Steam. Design rationale: [docs/design.md](docs/design.md).
+
+Keywright was called LootFall until 0.18, on a branch of [Andvc/LootFall](https://github.com/Andvc/LootFall); that name
+and repository now belong to a different game. Saves and the profile from then come over on the first start.
 
 ## The loop
 
@@ -145,7 +148,7 @@ xvfb-run -a godot --path . --rendering-driver opengl3 -- \
 # --character=hesk|rosa|isolde, --challenge=N and --talents=all play one of Bram's kin on those terms
 xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, talents, pause, settings
 xvfb-run -a godot --path . -- --vault-demo --quit-at-end --shots=$PWD/shots_vault  # the finale: the Crown Chest
-godot --headless --path . --export-release "Windows Desktop" build/windows/LootFall.exe
+godot --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe
 ```
 
 Add `--write-movie movies/day.avi --fixed-fps 60` to the autoplay command to record video with sound, and

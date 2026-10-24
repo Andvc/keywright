@@ -1,4 +1,4 @@
-"""LootFall's own pixel art, drawn in code: everything the game shows that belongs to its world.
+"""Keywright's own pixel art, drawn in code: everything the game shows that belongs to its world.
 
 Shapes are drawn with a handful of primitives onto a grid of materials; rendering shades each material with its own
 ramp (lit on the top and left edges, shadowed on the bottom and right) and adds a dark outline, so every sprite has the

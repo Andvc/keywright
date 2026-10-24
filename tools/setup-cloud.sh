@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs the LootFall toolchain (Godot 4.7.2 .NET + .NET 8 SDK) in a fresh Ubuntu 24.04 container.
+# Installs the Keywright toolchain (Godot 4.7.2 .NET + .NET 8 SDK) in a fresh Ubuntu 24.04 container.
 # Safe to re-run: skips anything already installed.
 #   tools/setup-cloud.sh                      # editor/runtime only
 #   tools/setup-cloud.sh --export-templates   # also the Windows export templates (~1 GB download)

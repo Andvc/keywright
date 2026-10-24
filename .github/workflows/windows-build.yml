@@ -38,14 +38,14 @@ jobs:
         run: |
           & $env:GODOT --headless --path . --import
           New-Item -ItemType Directory -Force build/windows | Out-Null
-          & $env:GODOT --headless --path . --export-release "Windows Desktop" build/windows/LootFall.exe
-          if (-not (Test-Path build/windows/LootFall.exe)) { throw "Export failed" }
+          & $env:GODOT --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe
+          if (-not (Test-Path build/windows/Keywright.exe)) { throw "Export failed" }
 
       - name: Smoke test (bot plays the guided day and a random one)
         shell: pwsh
         run: |
           $log = Join-Path $pwd "smoke.log"
-          $game = Start-Process build/windows/LootFall.exe -PassThru -ArgumentList `
+          $game = Start-Process build/windows/Keywright.exe -PassThru -ArgumentList `
             "--headless", "--log-file", "`"$log`"", "--", "--autoplay", "--seed=4306", "--days=2"
           if (-not $game.WaitForExit(840000)) { $game.Kill(); throw "Game did not finish within 14 minutes" }
           Get-Content $log
@@ -53,6 +53,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: LootFall-windows-x64
+          name: Keywright-windows-x64
           path: build/windows/
           retention-days: 30

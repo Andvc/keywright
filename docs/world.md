@@ -1,4 +1,4 @@
-# LootFall: the world
+# Keywright: the world
 
 The world exists to explain the game. Every mechanic should have a reason you could tell a stranger in a tavern, and
 every reason should make you want to open one more chest. This is the reference for anything that speaks, sells, falls
