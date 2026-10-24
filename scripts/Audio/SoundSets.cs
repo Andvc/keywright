@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Audio;
+namespace Keywright.Audio;
 
 /// <summary>
 /// The sound each kind of thing makes, with alternatives to choose from in Settings > Item sounds. Each option is a

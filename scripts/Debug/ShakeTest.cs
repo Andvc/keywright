@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Debug;
+namespace Keywright.Debug;
 
 /// <summary>
 /// Checks that shaking follows the rules: `godot --headless --path . -- --shake-test [--n=40]`. Shakes random town

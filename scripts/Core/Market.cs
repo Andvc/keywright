@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>Builds a visit: what the seller brings, what they say about it, and how they price it.</summary>
 public static class Market

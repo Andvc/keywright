@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// Uncle Bram at your elbow: a face and one short tip at a time about what's in front of you. Tips that come up

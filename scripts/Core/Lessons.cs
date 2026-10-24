@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>What a lesson step can check: the visit, the slip, what's been heard, and the shop.</summary>
 public sealed class LessonCheck

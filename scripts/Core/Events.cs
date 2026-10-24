@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <param name="Bram">What Bram says about it the first time (and the day card shows every time).</param>
 /// <param name="MinTier">Only from this shop tier, where it makes a difference.</param>

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <RootNamespace>LootFall</RootNamespace>
+    <RootNamespace>Keywright</RootNamespace>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
 </Project>

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Debug;
+namespace Keywright.Debug;
 
 /// <summary>
 /// Headless balance report: `godot --headless --path . -- --sim [--n=200]`. Plays whole runs with simple player styles:

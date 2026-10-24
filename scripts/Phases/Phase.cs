@@ -1,9 +1,9 @@
 using Godot;
-using LootFall.Audio;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Audio;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>Base for one screen of the loop (auction, lockpick, opening). Main swaps them in and out.</summary>
 public partial class Phase : Node2D

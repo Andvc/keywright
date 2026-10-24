@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 public enum CurioRarity { Common, Uncommon, Rare }
 

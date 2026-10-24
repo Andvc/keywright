@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// The Guild's night, at the end of each week: Mister Vane comes for the due. Pay it and he's gone until next week (and

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// What kind of thing it is: coin, weapons, cloaks, potions, spells, gems (Arms, Garb and Scrolls in code, so saves carry

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// The payoff, right after you buy. The chest opens by itself: it rumbles, glows in its own colour, and bursts. The lid

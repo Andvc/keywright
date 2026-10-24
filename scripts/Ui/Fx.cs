@@ -1,6 +1,6 @@
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>Particle presets and pixel effects for the "juice".</summary>
 public static class Fx

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace LootFall;
+namespace Keywright;
 
 /// <summary>
 /// The player's settings, kept in user://settings.cfg: volume, fullscreen, how much the screen shakes and flashes,

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 public static class RandomExtensions
 {

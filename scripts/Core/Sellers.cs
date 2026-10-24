@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// How a seller decides what their chest is worth. Each is something a real person might do, and each has a blind spot

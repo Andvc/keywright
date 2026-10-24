@@ -2,10 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using LootFall.Core;
-using LootFall.Phases;
+using Keywright.Core;
+using Keywright.Phases;
 
-namespace LootFall.Debug;
+namespace Keywright.Debug;
 
 /// <summary>
 /// Plays the shop hands-free so it can be screenshotted, recorded or smoke-tested headlessly:

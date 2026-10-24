@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// Esc (or the Menu button) during a day: the game stops while it's up. Resume, the settings, back to the title

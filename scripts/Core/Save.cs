@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// Everything that carries over from one day to the next, kept as plain data so it can be written to a file. The shop

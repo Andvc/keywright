@@ -1,9 +1,9 @@
 using System;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// The lock between you and your chest. Timing mini-game: the pick sweeps around the lock; press when it's inside the

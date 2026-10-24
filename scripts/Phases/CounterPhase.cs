@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// One seller, one chest, one puzzle. The seller judges the chest their way, says what they think is in it, and prices

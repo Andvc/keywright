@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// Uncle Bram's tips. Each one shows the first time its moment comes up (a sound, a customer, a tool, a renovation),

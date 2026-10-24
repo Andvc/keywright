@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// The chest, drawn in tools/custom_art.py and split into lid and body by tools/import_art.py,

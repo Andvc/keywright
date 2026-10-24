@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// A chest on the counter: a few things (from the town shop on, sometimes two or three of a kind), maybe one more

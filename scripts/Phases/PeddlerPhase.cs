@@ -1,9 +1,9 @@
 using System.Linq;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// Nim the peddler drops by before the shop opens, once a week from the second: three curios laid out on the counter,

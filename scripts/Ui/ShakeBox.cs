@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using LootFall.Audio;
-using LootFall.Core;
+using Keywright.Audio;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// A closed chest you can pick up and shake. How hard you shake it (how fast you drag) sets the shake level; whatever

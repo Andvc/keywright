@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// The Gilded Guild: it licenses Keywrights and takes a weekly tithe "to keep the Gate" (and sends it through the Gate,

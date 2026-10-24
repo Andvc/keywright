@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using LootFall.Audio;
-using LootFall.Core;
+using Keywright.Audio;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// Settings > Item sounds: for each kind of thing, which sound it makes when shaken. Click a kind's choice to cycle

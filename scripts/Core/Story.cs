@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>One line in a scene: who says it (a portrait key) and what they say.</summary>
 public sealed record Line(string Speaker, string Text);

@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// Where a chest came from: a millpond, the Barrow, a goblin warren, the Maw's hoard. Three hundred years after the

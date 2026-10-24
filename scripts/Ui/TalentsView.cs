@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using Godot;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// The talent tree, over the title or the character screen: what Bram's kin have learned across runs, bought with the

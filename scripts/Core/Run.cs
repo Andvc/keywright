@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// The run around the days: five-day weeks, each ending with the Guild's due; curios that bend the shop's rules;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>The shop's size: who comes in, how many, and what they bring.</summary>
 public static class ShopTiers

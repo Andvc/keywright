@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace LootFall.Audio;
+namespace Keywright.Audio;
 
 /// <summary>
 /// Two kinds of sound: recorded CC0 samples in groups under res://assets/audio/ (what each kind of thing sounds like

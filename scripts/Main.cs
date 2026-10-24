@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
 using Godot;
-using LootFall.Audio;
-using LootFall.Core;
-using LootFall.Debug;
-using LootFall.Phases;
-using LootFall.Ui;
+using Keywright.Audio;
+using Keywright.Core;
+using Keywright.Debug;
+using Keywright.Phases;
+using Keywright.Ui;
 
-namespace LootFall;
+namespace Keywright;
 
 /// <summary>
 /// Root of the game: owns the game state, audio, HUD and screen effects, and swaps between phases. It opens on the title

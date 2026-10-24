@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>A Node2D whose drawing is supplied as a callback, so visuals can be built without a class per shape.</summary>
 public partial class Painter : Node2D

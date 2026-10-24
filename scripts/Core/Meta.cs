@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// One of Bram's kin, who comes to mind the stall. Each reads chests or runs the shop their own way: one rule of the

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// Top bar: title, today's event (click it to read it again), day and shop, the Guild's next due, gold, and a Menu

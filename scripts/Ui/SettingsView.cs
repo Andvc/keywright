@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// The settings, over whatever screen you're on (it keeps working while the game is paused): volume, fullscreen,

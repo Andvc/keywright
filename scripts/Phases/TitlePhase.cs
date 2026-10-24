@@ -1,9 +1,9 @@
 using System;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// The title screen: your shop as you left it (or the roadside stall), a chest that won't keep still, and Continue,

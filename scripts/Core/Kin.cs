@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// Who's minding the stall this run (one of Bram's kin), on what terms (the challenge level), and with what talents

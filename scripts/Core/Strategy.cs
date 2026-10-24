@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// How a careful player plays: when to drop a chest or use the magnet, what to offer, what to keep for display. The

@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using Godot;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>
 /// The shop's ledger. Sounds: one row per kind of thing your shop sees (its sound, how hard you must shake to hear it,

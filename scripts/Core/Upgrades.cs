@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <param name="MinTier">The shop tier needed before it's on offer.</param>
 /// <param name="SetsTier">For renovations: the shop tier it moves you to.</param>

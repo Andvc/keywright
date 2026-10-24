@@ -1,7 +1,7 @@
 using Godot;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 public static class Palette
 {

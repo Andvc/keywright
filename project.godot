@@ -20,7 +20,7 @@ window/stretch/aspect="keep"
 
 [dotnet]
 
-project/assembly_name="LootFall"
+project/assembly_name="Keywright"
 
 [gui]
 

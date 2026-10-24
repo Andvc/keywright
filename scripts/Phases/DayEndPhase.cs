@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using Godot;
-using LootFall.Core;
-using LootFall.Ui;
+using Keywright.Core;
+using Keywright.Ui;
 
-namespace LootFall.Phases;
+namespace Keywright.Phases;
 
 /// <summary>
 /// After the last customer: how the day went, then what to spend it on. Until the stall has earned its keep there's

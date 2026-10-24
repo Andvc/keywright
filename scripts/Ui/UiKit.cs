@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>Small helpers for building pixel-art UI in code with consistent styling.</summary>
 public static class UiKit

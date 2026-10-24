@@ -1,7 +1,7 @@
 using Godot;
-using LootFall.Core;
+using Keywright.Core;
 
-namespace LootFall.Ui;
+namespace Keywright.Ui;
 
 /// <summary>The person across the counter: face, name, and what they're saying, in a bubble under them.</summary>
 public partial class SellerView : Node2D

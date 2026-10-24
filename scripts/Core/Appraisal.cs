@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>How one thing in an opened chest compares with what the slip said.</summary>
 public enum ReadKind { Right, RightMagic, SpottedFake, SpottedBroken, FoundHidden, Missed, MissedMagic, NotMagic, Fooled, Broken, MissedHidden }

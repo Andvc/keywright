@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LootFall.Core;
+namespace Keywright.Core;
 
 /// <summary>
 /// One of the nine Heartsongs: a thing someone loved more than gold, sung into the Locking (docs/world.md).
