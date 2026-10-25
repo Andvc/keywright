@@ -14,3 +14,7 @@ build/
 shots*/
 movies/
 __pycache__/
+
+# Raw image-generator output (keep only small .webp previews under art/generated/_raw/)
+art/generated/_raw/*.png
+art/generated/_raw/*.jpg

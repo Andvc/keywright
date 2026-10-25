@@ -1,0 +1,78 @@
+GIMP Palette
+Name: Keywright
+Columns: 9
+#
+ 11   8  16	night1
+ 26  20  32	night2
+ 43  34  54	night3
+ 59  49  80	night4
+ 85  75 105	night5
+118 109 139	night6
+155 146 173	night7
+201 196 212	night8
+236 230 245	night9
+255 255 255	night10
+ 40  12   6	umber1
+ 75  34  18	umber2
+110  61  34	umber3
+142  91  55	umber4
+173 125  82	umber5
+201 160 117	umber6
+226 198 159	umber7
+ 97  61  54	skin1
+145  90  71	skin2
+189 126  95	skin3
+225 168 130	skin4
+254 213 179	skin5
+ 73  33   0	gold1
+119  63   0	gold2
+160 101   0	gold3
+194 144  38	gold4
+242 193  78	gold5
+251 237 164	gold6
+133  60  47	flame1
+206  94   0	flame2
+255 181  46	flame3
+255 228 125	flame4
+ 59   0  20	crimson1
+108   0  38	crimson2
+156  24  57	crimson3
+199  65  78	crimson4
+255  64  88	crimson5
+255 158 146	crimson6
+144  98 115	rose1
+217 130 151	rose2
+255 188 192	rose3
+  0  37  17	leaf1
+  0  78  34	leaf2
+ 14 119  52	leaf3
+ 88 160  76	leaf4
+ 98 212 111	leaf5
+213 241 167	leaf6
+ 42  56  28	moss1
+ 93 103  42	moss2
+151 149 105	moss3
+  0  41  43	sea1
+  0  87  84	sea2
+ 38 135 122	sea3
+104 183 161	sea4
+176 230 205	sea5
+  8  17  55	azure1
+ 20  55 113	azure2
+ 33 100 167	azure3
+ 78 163 255	azure4
+104 199 253	azure5
+167 248 255	azure6
+ 24   9  57	arcane1
+ 63  38 113	arcane2
+108  72 165	arcane3
+180 107 255	arcane4
+199 146 255	arcane5
+253 208 255	arcane6
+ 56  61  72	steel1
+ 98 109 128	steel2
+147 162 182	steel3
+204 217 232	steel4
+157 136 114	parchment1
+210 182 136	parchment2
+247 235 198	parchment3
