@@ -231,9 +231,9 @@ the game's scaling.
 ### Emblems and story props (`emblem.*`, `story.*`)
 
 - The Gilded Guild's emblem (24x24): a gold coin stamped with a watching eye above a keyhole. Shown at 2x and 1x.
-- The Aldric Key: four shards (each on a 32x16 canvas) that fit together into the whole key (`story.key_whole`,
-  96x24): a royal key whose bow is a crown, snapped into four jagged pieces. The shards are what the Hooded Woman pays
-  in; the game shows how many you hold.
+- The Aldric Key (`story.key_whole`, 96x24): a royal gold key whose bow is a crown. Its four shards are cut from it
+  along jagged lines and kept in place on the same 96x24 canvas, so they stack back into the whole key. The shards are
+  what the Hooded Woman pays in; the game shows the ones you hold.
 
 ### UI skin (`ui.*`)
 
