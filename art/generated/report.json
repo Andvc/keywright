@@ -1,0 +1,1092 @@
+{
+ "summary": {
+  "ok": 10,
+  "missing": 253
+ },
+ "assets": {
+  "bg.shop1": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 48,
+   "priority": "P1"
+  },
+  "bg.shop2": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "bg.shop3": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "bg.shop4": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.wood.lid": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1"
+  },
+  "chest.wood.body": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1"
+  },
+  "chest.wood.open": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1"
+  },
+  "chest.green.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.green.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.green.open": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.blue.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.blue.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.blue.open": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.purple.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.purple.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.purple.open": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.gold.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.gold.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.gold.open": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.black.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.black.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.black.open": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.crown.lid": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "chest.crown.body": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "chest.crown.open": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "chest.lock.rusty.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.lock.rusty.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.lock.guild.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.lock.guild.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.lock.dwarven.lid": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "chest.lock.dwarven.body": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.shop2": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.shop3": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.shop4": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.sign": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.scales": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.cabinet1": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.cabinet2": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.cabinet3": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.cabinet4": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.cabinet5": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.cabinet6": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.picks": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.bench": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.workshop": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.master": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.lamp": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [
+    "content is only 59% of the width: small for an icon"
+   ],
+   "colours": 12,
+   "priority": "P1"
+  },
+  "icon.upgrade.crier": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.block": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.charter": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.case": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.velvet": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.magnet": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.seal": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.night": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.warrant": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.patrons": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.upgrade.engine": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.coins": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
+   "priority": "P1"
+  },
+  "icon.kind.arms": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.garb": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.potions": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.scrolls": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.gems": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.heartsong": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "icon.kind.hidden": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "emblem.guild": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "story.key_whole": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "story.key_shard_1": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "story.key_shard_2": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "story.key_shard_3": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "story.key_shard_4": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "ui.panel": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "ui.frame": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "ui.button": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "ui.button_pressed": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "ui.slip_paper": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "ui.bubble": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "ui.bubble_tail": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "fx.explosion": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "fx.coin_spin": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "fx.sparkle": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "fx.dust": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "lock.face.rusty": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "lock.face.guild": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "lock.face.dwarven": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "brand.logo": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "brand.app_icon_64": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "brand.app_icon_48": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "brand.app_icon_32": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "brand.app_icon_16": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "scene.guild": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "scene.bram": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "scene.keyhold": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "scene.vault": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.header_capsule": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.small_capsule": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.main_capsule": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.vertical_capsule": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.page_background": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.library_capsule": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.library_hero": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.community_icon": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "store.library_logo": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "portrait.tam": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.penn": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.hob": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.mags": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.dorrin": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.snikkit": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.wenna": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.bramble": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.ansel": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.fennick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.gerda": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.wren": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.orrin": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.grit": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.corisande": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.pell": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.quill": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.shelly": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.aldous": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.vexis": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.malbranche": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.skrae": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.ermine": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.oriel": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.silas": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.aldo": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.maw": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.bram": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
+   "priority": "P1"
+  },
+  "portrait.vane": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.hood": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.nim": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.stranger": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.kit": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.hesk": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.rosa": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.isolde": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "portrait.mara": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "portrait.king": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "item.barrow_silver": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.moonsilver_marks": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.dwarf_gold_crowns": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1"
+  },
+  "item.sunken_sovereigns": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.dragon_gold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.demon_gold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.goblin_cleaver": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.dwarven_axe": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.wardens_blade": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.flamebrand": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.dragonslayer": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.wolfskin_cloak": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.elven_cloak": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.cloak_of_shadows": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.archmages_mantle": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.phoenix_mantle": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.healing_draught": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.elixir_of_vigour": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.invisibility_draught": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.mermaids_breath": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.ambrosia": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.scroll_of_sparks": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.scroll_of_fireball": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.summoners_grimoire": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.lichs_tome": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.keyhold_codex": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.sand_case": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.moonstone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.elfstone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.blood_ruby": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.starstone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.dragons_eye": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "item.paste_gem": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.lullaby_box": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1"
+  },
+  "heartsong.shepherds_pipe": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.fey_chimes": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.dragons_egg": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.clockwork_lark": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.hearthstone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.drowned_bell": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.bottled_star": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "heartsong.imps_ember": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.monocle": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1"
+  },
+  "curio.draught": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.aether": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.chalk": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.ring": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.staff": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.sealed": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.dip": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.bond": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.wholesale": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.token": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.blindfold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.signet": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.tongue": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.knot": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.hourglass": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.bell": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.coffer": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.goldentongue": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.trumpet": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.watch": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.beads": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.seal": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.register": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.crescent": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.fork": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.ledger": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.truthglass": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.crate": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.hook": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.rod": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.log": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.pass": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.compass": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.wardlamp": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.pillow": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.wardtally": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.wardkey": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.aldricseal": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.shell": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.coin": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.foot": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.wishbone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.horseshoe": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.clover": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.star": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.spindle": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.lantern": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.queue": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.horn": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.guestbook": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.catalogue": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.dome": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.book": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.rope": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.lamps": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.gauntlet": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.cap": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.whetstone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.dummy": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.scales": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.still": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.desk": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.wheel": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.oil": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.knife": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.gloves": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.loupe": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.mark": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.purse": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.ticket": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.marker": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.jar": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.lockbox": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.note": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.letter": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.ribbon": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.errand": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "curio.net": {
+   "status": "missing",
+   "priority": "P1"
+  }
+ }
+}

@@ -1,0 +1,92 @@
+{
+  "bg.shop1": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: bg.shop1",
+    "raw_sha256": "24a1a6499215e081dea3a8a70630b8a0b286e3673ba097737e13fe0bf52d6154",
+    "output": "art/generated/backgrounds/shop1.png",
+    "mode": "area",
+    "note": "Simplified counter skirt; registered source shelf, counter and awning to the fixed layout."
+  },
+  "portrait.bram": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: portrait.bram",
+    "raw_sha256": "333d200e1e96f42e39c55acba775952adfbfae1651c2c6e51cfe199c640ec2f5",
+    "output": "art/generated/portraits/bram.png",
+    "mode": "grid",
+    "note": ""
+  },
+  "item.dwarf_gold_crowns": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: item.dwarf_gold_crowns",
+    "raw_sha256": "949e5acfb2b316c33dc1b4392ed16be672030e5628c85e98b2a1ceab7fb2443d",
+    "output": "art/generated/items/dwarf_gold_crowns.png",
+    "mode": "grid",
+    "note": ""
+  },
+  "heartsong.lullaby_box": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: heartsong.lullaby_box",
+    "raw_sha256": "02bed4d0b5b40ce07b2dee7ee7649a3beeca2ffbcd6d668c6e67c42da7b24a55",
+    "output": "art/generated/heartsongs/lullaby_box.png",
+    "mode": "grid",
+    "note": ""
+  },
+  "curio.monocle": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: curio.monocle",
+    "raw_sha256": "6c859e113839d5411f2faa3b3d5de02356e344f2510ea11c0e69e8a6e9a1b55e",
+    "output": "art/generated/curios/monocle.png",
+    "mode": "grid",
+    "note": ""
+  },
+  "icon.upgrade.lamp": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: icon.upgrade.lamp",
+    "raw_sha256": "ec967cc68b7eaec905a4e2b21492488277eb5105143b76b02131d169f06a19db",
+    "output": "art/generated/icons/upgrade_lamp.png",
+    "mode": "grid",
+    "note": ""
+  },
+  "icon.kind.coins": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: icon.kind.coins",
+    "raw_sha256": "1256e9f5b5d54c1aa1f3b3facb68b7f383befa31cd4b4d528ce09102a231fbda",
+    "output": "art/generated/kinds/kind_coins.png",
+    "mode": "grid",
+    "note": ""
+  },
+  "chest.wood.lid": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: chest.wood.lid",
+    "raw_sha256": "e59657ef1de5ad56c428a84c85bb5eee9e3db479fce38a072a49ba9904d3facc",
+    "output": "art/generated/chest/wood_lid.png",
+    "mode": "grid",
+    "note": "Registered source to part envelope; repaired seam rows and lock seat; open frame reuses the exact body."
+  },
+  "chest.wood.body": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: chest.wood.body",
+    "raw_sha256": "aaab68cdd52937df5b7c42d2e2748b68ef7adc625883751cb2b9448460e2a103",
+    "output": "art/generated/chest/wood_body.png",
+    "mode": "grid",
+    "note": "Registered source to part envelope; repaired seam rows and lock seat; open frame reuses the exact body."
+  },
+  "chest.wood.open": {
+    "tool": "built-in image_gen",
+    "requested_model": "gpt-image-2",
+    "prompt_source": "art/manifest.json: chest.wood.open",
+    "raw_sha256": "22182f12bf1c77d376a82b7acc283f396536cf9b9cf43cb1274d3c5b079443fc",
+    "output": "art/generated/chest/wood_open.png",
+    "mode": "grid",
+    "note": "Registered source to part envelope; repaired seam rows and lock seat; open frame reuses the exact body."
+  }
+}
