@@ -7,6 +7,7 @@ from collections import Counter
 import argparse
 import hashlib
 import json
+import re
 import sys
 
 from PIL import Image
@@ -90,6 +91,7 @@ def main():
     ap.add_argument("--mode", choices=["grid", "area"])
     ap.add_argument("--block", type=float)
     ap.add_argument("--note", default="")
+    ap.add_argument("--candidate", type=int)
     args = ap.parse_args()
     manifest = artlib.load_manifest()
     spec = artlib.asset(manifest, args.id)
@@ -104,20 +106,34 @@ def main():
         if bounds:
             img = img.crop(bounds).resize((spec["size"][0]*16, spec["size"][1]*16), Image.Resampling.NEAREST)
     process = pixelize.process_sheet if spec.get("frames") else pixelize.process
-    result = process(img, spec, manifest, mode=args.mode, block=args.block)
+    processing_spec = spec
+    if spec["category"] in ("item", "heartsong") and spec.get("size_hint"):
+        ranges = re.findall(r"(\d+)(?:-(\d+))? px", spec["size_hint"])
+        if ranges:
+            limits = [int(high or low) for low, high in ranges]
+            tw, th = (limits[0], limits[1]) if len(limits) > 1 else (limits[0], limits[0])
+            processing_spec = {**spec, "size": [tw+2, th+2], "baseline": th}
+    result = process(img, processing_spec, manifest, mode=args.mode, block=args.block)
+    if processing_spec is not spec:
+        result = pixelize.place(result, spec)
     if spec["category"] == "chest":
         result = repair_chest(result, spec, manifest)
     result = cap_with_outline(result, spec)
     if spec.get("outline"):
         result = pixelize.enforce_outline(result, spec)
     path = ROOT / spec["output"]
+    if args.candidate:
+        path = ROOT / f"art/generated/_review/candidates/{args.id}.c{args.candidate}.png"
     path.parent.mkdir(parents=True, exist_ok=True)
     result.save(path)
     preview = ROOT / "art/generated/_review/anchors" / (args.id + "_4x.png")
-    if spec["batch"] == 0:
+    if spec["batch"] == 0 and not args.candidate:
         preview.parent.mkdir(parents=True, exist_ok=True)
         result.resize((result.width*4, result.height*4), Image.Resampling.NEAREST).save(preview)
     rec_path = ROOT / "art/generated/_workflow/generations.json"
+    if args.candidate:
+        rec_path = ROOT / f"art/generated/_workflow/candidates/{args.id}.c{args.candidate}.json"
+        rec_path.parent.mkdir(parents=True, exist_ok=True)
     records = json.loads(rec_path.read_text("utf-8")) if rec_path.exists() else {}
     records[args.id] = {
         "tool": "built-in image_gen",

@@ -1,7 +1,7 @@
 {
  "summary": {
-  "ok": 10,
-  "missing": 253
+  "ok": 45,
+  "missing": 218
  },
  "assets": {
   "bg.shop1": {
@@ -441,111 +441,192 @@
    "priority": "P3"
   },
   "portrait.tam": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.penn": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.hob": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.mags": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.dorrin": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 31,
    "priority": "P1"
   },
   "portrait.snikkit": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 31,
    "priority": "P1"
   },
   "portrait.wenna": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.bramble": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.ansel": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 26,
    "priority": "P1"
   },
   "portrait.fennick": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.gerda": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.wren": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.orrin": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.grit": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.corisande": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.pell": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.quill": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.shelly": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.aldous": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.vexis": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.malbranche": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.skrae": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.ermine": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.oriel": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.silas": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.aldo": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.maw": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 30,
    "priority": "P1"
   },
   "portrait.bram": {
@@ -556,35 +637,59 @@
    "priority": "P1"
   },
   "portrait.vane": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 30,
    "priority": "P1"
   },
   "portrait.hood": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 25,
    "priority": "P1"
   },
   "portrait.nim": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.stranger": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 23,
    "priority": "P1"
   },
   "portrait.kit": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.hesk": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.rosa": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.isolde": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P1"
   },
   "portrait.mara": {
@@ -607,7 +712,7 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 14,
    "priority": "P1"
   },
   "item.sunken_sovereigns": {
