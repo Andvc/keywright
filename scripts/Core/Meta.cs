@@ -178,8 +178,7 @@ public static class Talents
         new("keepsake", "Keepsake", "On Nim's first visit, one curio of your choice is a gift.", 500, Favour, "reroll"),
         new("curio", "Curio Cabinet", "Room for one more curio.", 1000, Favour, "keepsake"),
 
-        new("ledger", "Bram's Ledger", "Every seller's habits are in your ledger before you meet them.", 100, Trade, "kin"),
-        new("early", "Early Name", "Synergies open at Thornwick, not Crownhold.", 250, Trade, "ledger"),
+        new("early", "Early Name", "Synergies open at Thornwick, not Crownhold.", 250, Trade, "kin"),
         new("tools", "Trade Secrets", "The witchlight and the lodestone cost half.", 500, Trade, "early"),
         new("favour", "Royal Favour", "One more synergy active at once.", 1000, Trade, "tools"),
     };
@@ -195,6 +194,9 @@ public static class Talents
 
     // What the talents do.
     public const int KinGold = 10, MoreStock = 1;
+
+    /// <summary>What Bram's Ledger cost, given back to a profile that had it (0.21 keeps every regular in the ledger).</summary>
+    public const int LedgerRefund = 100;
     public const float PawnRate = 0.7f;
 }
 

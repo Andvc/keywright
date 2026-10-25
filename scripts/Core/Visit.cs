@@ -94,8 +94,38 @@ public sealed class Visit
         return new Visit(Seller, Chest, Claim, Trade, ask, Money.Round(Floor * factor),
             ask > 0 ? $"I came back. {ask}g, and no hard feelings." : "I came back. Make me an offer, then.")
         {
-            Origin = Origin, Fee = Fee, HearsOut = HearsOut, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says,
+            Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says, Handled = Handled,
         };
+    }
+
+    /// <summary>You've laid a hand on the chest (a shake, a drop, the lodestone): it's no longer sight unseen.</summary>
+    public bool Handled { get; private set; }
+
+    float _unseen = 1;
+    string _unseenNote;
+
+    /// <summary>What they'd take for the chest sight unseen (a sealed bid, a blindfold): their price until you lay a hand on it.</summary>
+    public void Seal(float factor, string why)
+    {
+        if (!Deciding || Handled || factor >= 1) return;
+        _unseen = factor;
+        _unseenNote = why;
+        Reduce(factor, why);
+    }
+
+    /// <summary>
+    /// You've shaken it, dropped it or put the lodestone to it: a sight-unseen price is off. Returns what the seller says
+    /// about it (null if the price didn't change).
+    /// </summary>
+    public string Handle()
+    {
+        if (Handled) return null;
+        Handled = true;
+        if (_unseen >= 1 || !Deciding) return null;
+        Raise(1 / _unseen);
+        _unseen = 1;
+        PriceNote = PriceNote?.Replace(_unseenNote, "").Trim() is { Length: > 0 } rest ? rest : null;
+        return $"Had your hands on it now. {Price}g, then.";
     }
 
     /// <summary>A curio's word on the price (the Waiting Game, the Closing Bell), for under the chest; or null.</summary>
@@ -114,6 +144,9 @@ public sealed class Visit
     /// <summary>A haggler who hears you out (a merchant's signet): an offer too low gets a second try, not a slammed door.</summary>
     public bool HearsOut { get; set; }
 
+    /// <summary>Nobody walks out on you (a golden tongue): an offer too low, however low, gets the least they'd take.</summary>
+    public bool Unruffled { get; set; }
+
     bool _retry;
 
     /// <summary>Whether you can make an offer now.</summary>
@@ -129,6 +162,11 @@ public sealed class Visit
         _retry = false;
         amount = Math.Max(1, amount);
         if (amount >= Floor) return new Response(ResponseKind.Accept, amount, Sell(amount, rng));
+        if (Unruffled)
+        {
+            Ask = Floor;
+            return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", $"{Ask}g"));
+        }
         if (Trade == Trade.Offer)
         {
             if (OffersMade == 1) return new Response(ResponseKind.TryAgain, 0, rng.PickOne(Seller.Refusals));

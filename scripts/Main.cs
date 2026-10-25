@@ -31,7 +31,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.20";
+    public const string Version = "Early Access 0.21";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -91,6 +91,18 @@ public partial class Main : Node2D
                     case "builds":
                         Simulation.Builds(N(60));
                         break;
+                    case "focus":
+                        Simulation.FocusReport(Arg(args, "--who") ?? "compartments", N(100), args.Contains("--trace"));
+                        break;
+                    case "curio":
+                        Simulation.CurioCheck((Arg(args, "--who") ?? "seal").Split(','), N(100));
+                        break;
+                    case "index":
+                        Simulation.IndexReport();
+                        break;
+                    case "curiolist":
+                        Simulation.CurioTable();
+                        break;
                     case "trace":
                         Simulation.Trace(int.Parse(Arg(args, "--seed") ?? "1000"));
                         break;
@@ -122,6 +134,7 @@ public partial class Main : Node2D
 
         CarryOverOldFiles();
         Settings.Load();
+        if (args.Contains("--gm")) Settings.Gm = true;
         Profile = ReadProfile();
         GetTree().Root.Theme = MakeTheme();
         _seed = int.TryParse(Arg(args, "--seed"), out var s) ? s : (int)(Time.GetUnixTimeFromSystem() % 1_000_000);
@@ -249,6 +262,23 @@ public partial class Main : Node2D
         await Wait(0.6);
         Moment("13_item_sounds");
         await Wait(0.8);
+        // With GM mode on: its buttons at work (the day can't be skipped during a scene), and the journal it filled.
+        if (Settings.Gm)
+        {
+            settings.QueueFree();
+            await Wait(0.3);
+            GD.Print($"GM: {GmGold()} {GmUnlockJournal()} Skip: {CanSkipDay ?? "allowed"}");
+            await Wait(0.5);
+            Moment("14_gm");
+            var ledger = new LedgerView(State, 6) { ProcessMode = ProcessModeEnum.Always };
+            AddChild(ledger);
+            await Wait(0.8);
+            Moment("15_gm_curios");
+            ledger.ShowPage(2);
+            await Wait(0.5);
+            Moment("16_gm_collection");
+            await Wait(0.3);
+        }
         QuitGame();
     }
 
@@ -372,6 +402,7 @@ public partial class Main : Node2D
         }
         State = GameState.NewRun(_seed, character, challenge, Profile.Talents, Settings.Tips, Profile.Taught, Profile.OpenCurios);
         State.Songbook.UnionWith(Profile.Songs);
+        State.Remember(Profile);
         _seed++;
         _saving = !_demo;
         Profile.LastCharacter = character;
@@ -406,6 +437,7 @@ public partial class Main : Node2D
     {
         State = GameState.Load(save);
         State.Songbook.UnionWith(Profile.Songs);
+        State.Remember(Profile);
         _saving = true;
         NoteStart();
         BeginPlaying();
@@ -416,6 +448,45 @@ public partial class Main : Node2D
         Hud.Visible = true;
         Hud.SetGold(State.Gold, animate: false);
         StartDay();
+    }
+
+    // ---- GM mode (Settings.Gm, or --gm): the pause menu's testing buttons ----
+
+    /// <summary>GM: 99,999 gold in the purse. Returns what the pause menu says.</summary>
+    public string GmGold()
+    {
+        State.Gold += 99999;
+        // The game's paused under the GM panel: no counting up, the purse shows it at once.
+        Hud.SetGold(State.Gold, animate: false);
+        Hud.SetDue(State);
+        return $"In the purse: {State.Gold}g.";
+    }
+
+    /// <summary>GM: every page of the journal filled, this run's and the profile's.</summary>
+    public string GmUnlockJournal()
+    {
+        State.KnowAll();
+        WriteProfile(p => p.KnowAll());
+        return "The journal's full: every regular, every thing, every curio, and all nine Heartsongs.";
+    }
+
+    /// <summary>Why the day can't be skipped now, or null: only from Nim's counter, the shop's counter or the day's end.</summary>
+    public string CanSkipDay => _phase is CounterPhase or PeddlerPhase or DayEndPhase ? null : "Not now: finish what's in hand first.";
+
+    /// <summary>
+    /// GM: the rest of today skipped. Everyone still waiting goes home and it's the evening (from the day's end: the next
+    /// morning, the Guild coming first if it's due).
+    /// </summary>
+    public void GmSkipDay()
+    {
+        if (CanSkipDay != null) return;
+        if (_phase is DayEndPhase)
+        {
+            CloseDay();
+            return;
+        }
+        State.SkipRestOfDay();
+        SwitchTo(new DayEndPhase());
     }
 
     /// <summary>Esc during a day, or the HUD's Menu button: pause.</summary>
@@ -501,13 +572,13 @@ public partial class Main : Node2D
         Hud.SetDue(State);
         Hud.SetEvent(State);
         if (_bot != null && !_bot.OnDayStarted(State.Day)) return;
-        // The first morning of a week (from the second): who comes by, and what they want.
-        if (State.DayOfWeek == 1 && State.Week >= 2)
+        // A story morning: who comes by, and what they want.
+        if (State.StoryToday)
         {
             var lines = Story.WeekStart(State);
             if (lines.Count > 0)
             {
-                SwitchTo(new ScenePhase(lines, Peddler, $"WEEK {State.Week}"));
+                SwitchTo(new ScenePhase(lines, Peddler, State.Week == 1 ? "BRAM'S STALL" : $"WEEK {State.Week}"));
                 return;
             }
         }
@@ -616,9 +687,11 @@ public partial class Main : Node2D
         AddChild(layer);
         var e = State.TodayEvent;
         int stash = State.Today.Stash;
+        // The week's note, on its first day (a week without a story morning): the Hooded Woman's word, the debt's last week.
+        string note = State.DayOfWeek == 1 ? Story.WeekNote(State) : null;
         // The Guild's due shows once Vane has introduced it (the first evening).
         bool guild = State.GuildIntroduced;
-        float h = (e == null ? 136 : 238) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28);
+        float h = (e == null ? 136 : 238) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28) + (note == null ? 0 : 76);
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(306, 130, 500, h);
         card.MouseFilter = Control.MouseFilterEnum.Ignore;
         card.AddChild(UiKit.MakeLabel($"DAY {State.Day}", 48, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 12, 500, 56));
@@ -640,6 +713,11 @@ public partial class Main : Node2D
             Hud.SetGold(State.Gold);
             y += 28;
         }
+        if (note != null)
+        {
+            card.AddChild(UiKit.MakeLabel(note, 16, Palette.Gold, HorizontalAlignment.Center).Wrapped().Place(20, y - 4, 460, 70));
+            y += 76;
+        }
         if (e != null)
         {
             card.AddChild(UiKit.MakeLabel(e.Name.ToUpperInvariant(), 24, Palette.Magic, HorizontalAlignment.Center, outline: 4).Place(0, y, 500, 30));
@@ -654,7 +732,7 @@ public partial class Main : Node2D
         var tween = card.CreateTween();
         tween.TweenProperty(card, "modulate", Colors.White, 0.25f).SetDelay(0.2f);
         tween.Parallel().TweenProperty(card, "scale", Vector2.One, 0.25f).SetDelay(0.2f).SetTrans(Tween.TransitionType.Back);
-        tween.TweenInterval(e == null && stash == 0 ? 1.0 : 2.6);
+        tween.TweenInterval(e == null && stash == 0 && note == null ? 1.0 : note == null ? 2.6 : 4.0);
         tween.TweenProperty(card, "modulate", Colors.Transparent, 0.35f);
         tween.TweenCallback(Callable.From(layer.QueueFree));
         Moment(e != null ? $"00_event_{e.Key}" : stash > 0 ? "00_stash" : "00_daycard", 0.6);

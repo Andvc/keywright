@@ -8,17 +8,22 @@ stall. People bring you chests and price them their own way (by what they heard,
 a dream) and tell you where they found them. Shake each one yourself, gently, firmly and hard, find what they missed
 or misjudged, work out what their dreams, riddles and tags point at, trade for it, and open it on the spot. Move the shop inward, from the Brindle
 crossroads to Thornwick Market, the capital and the Royal Emporium by the Gate, because the stall comes with twenty
-years of Bram's unpaid tithe: every third evening the Gilded Guild comes for a due that climbs from 15g to 170,000g in
-eight weeks (24 days: a run is an hour and a half to two hours). Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
+years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 20g to 45,000g in
+five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.20): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+**Status:** Early Access (0.21): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
 of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
-puzzle brings out), runs of eight three-day weeks against the Guild's dues (then endless); **60 curios** that make the
-run's build, in a dozen ways of trading that make each other stronger (luck, reading, bargains, crowds, display, the
-trades, hollows, arcana, rough hands, fakes, coffers, patrons), with Nim's stock growing across runs; restorers that
-make things come out better; commissions, seventeen kinds of event, a calendar, and a story; nine **Heartsongs**, the rarest
+puzzle brings out), runs of five five-day weeks against the Guild's dues (then endless), each day with its business
+(the Guild's night, two days with something on in town, Nim's days and the story's); one model for the economy (the
+shop's **power index**: what makes ordinary things fetch more puts every seller's price up as much, so the shop's
+growth makes the numbers bigger, not the game easier, and a purchase that would leave you unable to afford chests
+warns first); **78 curios** in four rarities that make the run's build, six of them ways to play of their own
+(enchantment, buying sight unseen, haggling, the perfect read, false bottoms and wards) with a legendary capstone
+each, with Nim bringing more of what you buy and his stock growing across runs; restorers that make things come out
+better; commissions, seventeen kinds of event, a calendar, and a story; a journal that remembers every regular, find
+and curio across runs; nine **Heartsongs**, the rarest
 things in the realm, each with its own song and its own use on display, and an ending that needs all nine; four of
 Bram's kin to play, eight challenge levels each, and a talent tree bought with the renown runs earn; saves, settings
 and a guided start. The pixel art is drawn in code (`tools/custom_art.py`) as a placeholder until dedicated art
@@ -66,28 +71,30 @@ and repository now belong to a different game. Saves and the profile from then c
 5. **End of day:** once the stall has earned 50g, spend your earnings on moving inward (each place brings richer
    customers, a new look and something new), tools (the Witchlight shows what's enchanted, the Lodestone silences iron
    and demon gold, Fine Lockpicks), cabinets, a crier and a night market for more customers, and a buyers' trade that
-   puts up everything you sell (brass scales, an auction block, a royal warrant), and restorers who make what you name
+   puts up everything you sell (brass scales, an auction block, a royal warrant), and restorers who make everything
    likelier to come out better than its chest. From Crownhold, choose which of the shop's synergies to put to work (six
    of a kind at a quality earns one, or a feat: perfect reads, surprises, hidden things found, bargains; each puts up
-   what its kind of thing you name sells for). Once
+   what its kind of thing sells for). Sellers hear of everything that makes ordinary things fetch more at your shop,
+   and ask that much more (the shop's power index): an upgrade makes the numbers bigger, and anything that would leave
+   you less than two typical chests' worth shows its price in red and asks first. Once
    your purse could pay off everything you owe, the Guild offers its **Bookkeeping Engine** for exactly that sum: it
    reads every chest for you, so a won run can be finished fast.
-6. **The week:** every third evening Mister Vane collects the Guild's tithe. Short, pawn what's on display or sell your
-   curios back; once a run Bram will vouch for you; otherwise the Guild seals the shop. Start a day nearly broke and
-   Bram dips into his secret stash for you (twice a run). Every week Nim the peddler brings **curios**, the run's
-   build: each bends one rule (a lucky coin, a queue ticket that brings back whoever you passed, a sleeper's pillow that
-   fills the day with warded puzzles, a ledger that pays for perfect reads...), each card says which ways of trading
-   it's for and what it goes with, and he asks a share of what's in your purse. What a curio adds, it adds to what you
-   named on your slip: a build amplifies your judgment, and a wrong read loses it. From the second week, regulars post
-   **commissions** (deliver what they want from a chest instead of selling it), and a day or two a week something
-   happens in town: a fair, Locking Day, the Crown's buyer, a
+6. **The week:** five days, each with its business: on the fifth evening Mister Vane collects the Guild's tithe; on a
+   story week the first morning is the story's. Short, pawn what's on display or sell your curios back; once a run Bram
+   will vouch for you; otherwise the Guild seals the shop. Start a day nearly broke and Bram dips into his secret stash
+   for you (twice a run). Twice a week (once on a story week) Nim the peddler brings **curios**, the run's build: each
+   bends one rule (a sealed bid for chests you never touch, a haggler's knot, a smuggler's hook, a truthglass that pays
+   for perfect reads...), each card shows its rarity (common, uncommon, rare, legendary), which ways of trading it's for
+   and what it goes with, and costs a fixed sum by rarity plus a share of your purse. Nim notices what you buy and brings
+   more like it, and keeps his legendaries for a collector. From the second week, regulars post **commissions**
+   (deliver what they want from a chest instead of selling it), and two days a week something happens in town: a fair, Locking Day, the Crown's buyer, a
    tourney, a foreclosure sale, a day of mourning when nobody shakes hard, the crier's reward, the Sleepers' Moon when
    every seller dreams true, Wardens' Day riddles, the Guild's count, a storm, the Stranger with a chained chest... The
-   ledger's **calendar** shows this week and next: the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
+   ledger's **calendar** shows this week and next, day by day: the story, the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
    the finds she asks for. Whenever you have all that's left of the debt, you can pay it off and finish early.
 
 **Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the Crown Chest, the shop, the
-collection) that becomes **renown**, multiplied by the run's challenge level. Renown buys **talents** (a tree of 13:
+collection) that becomes **renown**, multiplied by the run's challenge level. Renown buys **talents** (a tree of 12:
 a softer bad night, more choice from Nim, the shop's name sooner; none adds a share to what things sell for), kept for
 every run. New game asks who minds the stall:
 
@@ -120,20 +127,21 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Mark one of a kind enchanted | Click the star on its row (once you have the Witchlight, which stays lit) |
 | Make an offer | Set the slider, then Offer |
 | Lodestone | Button on the right, once you own it |
-| Ledger (sounds, regulars and how far to trust them, places, collection, synergies) | L, or the Ledger button |
+| Ledger (sounds, regulars, calendar, collection, curios, synergies) | L, or the Ledger button |
 | Skip a seller's lesson | Skip lesson, over Bram's box |
 | Pick a lock | Space or left click when the pick is in the green; F for the crowbar |
 | Open the chest | It opens by itself (click or Space to hurry it) |
 | Keep something for display | Its Keep button after an opening (Swap when the display is full); sell it back from the exhibition at day end |
 | Deliver to a commission | Its Deliver button after an opening |
 | Buy or sell back a curio | Nim's screen, the morning he visits |
-| Pay the Guild, pawn, ask Bram | The Guild's screen, every third evening |
+| Pay the Guild, pawn, ask Bram | The Guild's screen, every fifth evening |
 | Pay off the whole debt early | "Pay it all off" on the day-end Guild panel (or "Pay it all" on the Guild's night), once you have it |
 | Choose synergies | Synergies, at the end of a day |
 | Next tip from Bram | Click his box |
 | Reread today's event | Click it in the top bar |
 | Choose each kind's sound | Settings, Item sounds: click a kind's sound to hear the next |
 | Pause, settings, quit to title | Esc, or Menu in the top bar |
+| GM mode (testing: +99,999 gold, skip the day, unlock the journal) | Settings, GM mode; then its panel beside the pause menu |
 | Choose who minds the stall, and the challenge level | New game: click a character, then - and + |
 | Learn talents | Talents, on the title or the character screen: click a gold one |
 | Ask Nim for something else | Show me something else, on Nim's screen (with Second Look) |

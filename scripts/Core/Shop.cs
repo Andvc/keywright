@@ -30,23 +30,24 @@ public static class ShopTiers
     };
 
     /// <summary>
-    /// Customers a day at a shop of this tier, before signs, criers and an exhibition: three at the stall, five from
-    /// Thornwick on. (Four to seven until 0.20, and twice the extras: a day at the Emporium could run to seventeen.)
+    /// Customers a day at a shop of this tier, before signs, criers and an exhibition: four at the stall, six at
+    /// Thornwick and in Crownhold, five at the Emporium, whose every customer is worth a day's takings anywhere else.
+    /// (Four to seven until 0.20; 0.20's three at the stall and five after it left 0.21's working purse, two typical
+    /// chests, out of reach for days after each move.)
     /// </summary>
     public static int Customers(int tier) => tier switch
     {
-        1 => 3,
+        1 => 4,
+        2 or 3 => 6,
         _ => 5,
     };
 
-    /// <summary>Gold to keep for a day's chests at a shop of this tier: Bram's advice before spending on the shop.</summary>
-    public static int Working(int tier) => tier switch
-    {
-        1 => 20,
-        2 => 40,
-        3 => 250,
-        _ => 2500,
-    };
+    /// <summary>
+    /// The colour a shop of this tier's chests usually are (the median of what its crowd brings): common at the stall,
+    /// green at Thornwick, blue in Crownhold, purple at the Emporium. Purple is the finest a chest comes; the power index
+    /// and the working purse are worked out at it.
+    /// </summary>
+    public static Rarity Typical(int tier) => (Rarity)Math.Clamp(tier - 1, 0, (int)Rarity.Epic);
 }
 
 /// <summary>A chest bought today, with the slip the player bought it on. It's opened straight away.</summary>
@@ -78,6 +79,9 @@ public sealed class Purchase
 
     /// <summary>What a haggler's purse gave back when you bought it (already in your purse).</summary>
     public int Rebate { get; init; }
+
+    /// <summary>Taken sight unseen: bought without a shake, a drop or the lodestone.</summary>
+    public bool SightUnseen => !Visit.Handled;
 
     public Purchase(Visit visit, Appraisal slip)
     {
@@ -141,6 +145,47 @@ public sealed partial class GameState
 
     /// <summary>Collection entries you've also found enchanted (the journal stars them).</summary>
     public HashSet<string> FoundEnchanted { get; } = new();
+
+    /// <summary>Curios Nim has laid out for you, or you've owned, this run (the journal's curio page).</summary>
+    public HashSet<string> CuriosSeen { get; } = new();
+
+    /// <summary>The journal from earlier runs (the profile's): the ledger shows it with this run's finds.</summary>
+    public Journal Known { get; } = new();
+
+    /// <summary>
+    /// What Bram's kin remember from earlier runs: the profile's journal, and its regulars as people you've met (their
+    /// habits are in the ledger, and they post commissions like any regular).
+    /// </summary>
+    public void Remember(Profile profile)
+    {
+        Known.Met.UnionWith(profile.Met);
+        Known.Found.UnionWith(profile.Found);
+        Known.Enchanted.UnionWith(profile.FoundEnchanted);
+        Known.Curios.UnionWith(profile.CuriosSeen);
+        Met.UnionWith(profile.Met);
+    }
+
+    /// <summary>The journal has this thing: found this run or an earlier one.</summary>
+    public bool InJournal(string entry) => Found.Contains(entry) || Known.Found.Contains(entry);
+
+    /// <summary>The journal has this thing found enchanted.</summary>
+    public bool InJournalEnchanted(string entry) => FoundEnchanted.Contains(entry) || Known.Enchanted.Contains(entry);
+
+    /// <summary>The journal's count of things found, all runs together.</summary>
+    public int JournalFound => Found.Union(Known.Found).Count();
+
+    /// <summary>The journal's curio page shows this curio: Nim's laid it out, or you've had it, this run or an earlier one.</summary>
+    public bool SawCurio(string key) => CuriosSeen.Contains(key) || Known.Curios.Contains(key) || HasCurio(key);
+
+    /// <summary>For the GM: every page of the journal filled (regulars, things, curios), and every Heartsong known.</summary>
+    public void KnowAll()
+    {
+        Met.UnionWith(Sellers.All.Select(s => s.Key));
+        Known.Found.UnionWith(Collection.Entries.Select(e => e.Entry));
+        Known.Enchanted.UnionWith(Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
+        Known.Curios.UnionWith(Curios.All.Select(c => c.Key));
+        Songbook.UnionWith(Heartsongs.All.Select(h => h.Key));
+    }
 
     /// <summary>What you kept to show off in the shop instead of selling (Heartsongs too, which take no shelf space).</summary>
     public List<Item> Display { get; } = new();
@@ -242,18 +287,23 @@ public sealed partial class GameState
         return true;
     }
 
-    /// <summary>What the exhibition, synergies, the Guild's terms and who's at the counter do to the chests people bring.</summary>
+    /// <summary>What the exhibition, synergies, the Guild's terms, curios and who's at the counter do to the chests people bring.</summary>
     public Boosts Boosts => new(BetterChests + (EventIs("storm") ? 1 : 0),
-        Synergies.HiddenBonus(Active("archivist")) + Synergies.FinderHidden(Active("finder")),
-        Synergies.MagicBonus(Active("arcane")) + (Shows(Heartsongs.Star) ? Heartsongs.StarMagic : 0) + (EventIs("moon") ? Events.MoonMagic : 0),
-        EventIs("wreck") ? Events.WreckPairs : 0, Synergies.MoneyKinds(Active("jewelry")),
-        (Under(Challenges.SharpSellers) ? Challenges.SharpPrices : 1) * (Shows(Heartsongs.Lullaby) ? Heartsongs.LullabyPrices : 1) * PriceLevel *
-        (EventIs("estate") ? Events.EstatePrices : 1) * (HasCurio("horn") ? Curios.HornDearer : 1) * (HasCurio("crescent") ? Curios.CrescentPrices : 1),
-        Under(Challenges.Forgers) ? Challenges.SlugChance : 0, HagglesAll || HasCurio("coffer"))
+        Synergies.HiddenBonus(Active("archivist")) + Synergies.FinderHidden(Active("finder")) +
+        (HasCurio("log") ? Math.Min(Curios.LogMax, Curios.LogStep * BottomsOpened) : 0),
+        Synergies.MagicBonus(Active("arcane")) + (Shows(Heartsongs.Star) ? Heartsongs.StarMagic : 0) + (EventIs("moon") ? Events.MoonMagic : 0) +
+        (HasCurio("aether") ? Math.Min(Curios.AetherMax, Curios.AetherStep * MagicFound) : 0),
+        EventIs("wreck") ? Events.WreckPairs : 0, Synergies.MoneyKinds(Active("jewelry")), PriceFactor,
+        Under(Challenges.Forgers) ? Challenges.SlugChance : 0, HagglesAll || HasCurio("coffer") || HasCurio("goldentongue"))
     {
         HiddenFactor = HasCurio("hook") ? Curios.HookHidden : 1,
         MagicFactor = HasCurio("draught") ? Curios.DraughtMagic : 1,
-        Floor = (HasCurio("tongue") ? Curios.TongueFloor : 1) * (HasCurio("signet") ? Curios.SignetFloor : 1) * (1 - Synergies.HagglerFloor(Active("haggler"))),
+        Floor = (HasCurio("tongue") ? Curios.TongueFloor : 1) * (HasCurio("signet") ? Curios.SignetFloor : 1) * (1 - Synergies.HagglerFloor(Active("haggler"))) *
+                (HasCurio("goldentongue") ? Curios.GoldenFloor : 1),
+        AlwaysHidden = HasCurio("compass"),
+        AlwaysWard = HasCurio("wardlamp") || HasCurio("aldricseal"),
+        MagicSpreads = HasCurio("chalk"),
+        MagicAll = HasCurio("staff"),
     };
 
     /// <summary>How much less likely glass is to break (a vintner's packing).</summary>
@@ -287,29 +337,18 @@ public sealed partial class GameState
     public bool Witchlight => Has("lamp") || Shows(Heartsongs.Star) || HasCurio("monocle");
 
     /// <summary>
-    /// What everything of this kind sells for here today, against its worth, named or not: the buyers' trades you've set
-    /// up (scales, the auction block, the royal warrant, multiplied together), the Dragon's Egg for coin and gems, and
-    /// today's event. (What naming a thing adds is <see cref="NamedBonus"/>.)
+    /// What everything of this kind sells for here today, against its worth: the buyers' trades you've set up (scales,
+    /// the auction block, the royal warrant, multiplied together), the Dragon's Egg for coin and gems, and today's event.
+    /// (What the shop's name and build add is <see cref="General"/> and <see cref="Special"/>.)
     /// </summary>
-    public float SaleMultiplier(Category kind) => EventSales(kind) * Buyers *
-                                                  (kind is Category.Coins or Category.Gems && Shows(Heartsongs.Egg) ? Heartsongs.EggSales : 1);
+    public float SaleMultiplier(Category kind) => EventSales(kind) * PlainSales(kind);
 
     /// <summary>
-    /// What the buyers' trades you've set up put on every sale, multiplied together. Word gets round: sellers ask that
-    /// much more of a shop known to sell high (<see cref="PriceLevel"/>), so a trade multiplies your edge; it never makes
-    /// buying blind pay.
+    /// What the buyers' trades you've set up put on every sale, multiplied together. Word gets round: they're in the
+    /// shop's power index, so sellers ask that much more of a shop known to sell high, and a trade multiplies your edge;
+    /// it never makes buying blind pay.
     /// </summary>
     public float Buyers => Upgrades.All.Where(u => u.Sales > 0 && Has(u.Key)).Aggregate(1f, (m, u) => m * (1 + u.Sales));
-
-    /// <summary>
-    /// What sellers ask of this shop, against what they'd ask anyone: as much more as the trades put on sales, and about
-    /// half what the restorers make a thing worth (word gets round that it comes out better here; they work from your
-    /// slip, so what they do for a careful eye nobody can price). What curios do is yours alone.
-    /// </summary>
-    public float PriceLevel => Buyers * (1 + RestorerLuck * RestorerPricedIn);
-
-    /// <summary>How much of a restorer's worth sellers ask for: a step better is worth about three times as much.</summary>
-    const float RestorerPricedIn = 1.2f;
 
     /// <summary>Notes something you opened in the journal.</summary>
     public void Acquire(Item item)
@@ -323,6 +362,7 @@ public sealed partial class GameState
     public void RecordRead(bool perfect)
     {
         PerfectStreak = perfect ? PerfectStreak + 1 : 0;
+        if (perfect) PerfectReads++;
         BestStreak = Math.Max(BestStreak, PerfectStreak);
     }
 
@@ -351,7 +391,17 @@ public sealed partial class GameState
     public int CustomersPerDay => Math.Max(2, ShopTiers.Customers(Tier) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Customers) + ExhibitionCustomers +
                                             (Shows(Heartsongs.Pipe) ? Heartsongs.PipeCustomers : 0) +
                                             (HasCurio("lantern") ? Curios.LanternCustomers : 0) + (HasCurio("horn") ? Curios.HornCustomers : 0) +
-                                            EventCustomers - (Under(Challenges.ThinCrowds) ? 1 : 0));
+                                            EventCustomers - (Under(Challenges.ThinCrowds) ? 1 : 0) - (QuietOpening ? 1 : 0));
+
+    /// <summary>The first day the shop's had at this tier (a move inward is bought the evening before).</summary>
+    public int TierSince { get; private set; }
+
+    /// <summary>
+    /// With Bram's tips on, the first day at a grander shop is a quieter one, a customer short, while you find your feet:
+    /// a move brings a new place, new sellers and new things to learn all at once (the experience playtest: too much on one
+    /// day at Thornwick).
+    /// </summary>
+    bool QuietOpening => Guided && Tier > 1 && Day == TierSince;
 
     public bool CanBuy(Upgrade upgrade) => UpgradesOpen && Gold >= Cost(upgrade) && Upgrades.Available(this).Contains(upgrade);
 
@@ -360,7 +410,11 @@ public sealed partial class GameState
         if (!CanBuy(upgrade)) return;
         Gold -= Cost(upgrade);
         _owned.Add(upgrade.Key);
-        if (upgrade.SetsTier > 0) Tier = upgrade.SetsTier;
+        if (upgrade.SetsTier > 0)
+        {
+            Tier = upgrade.SetsTier;
+            TierSince = Day + 1;
+        }
     }
 
     /// <summary>Hands out a hint key once. Returns false if it's been shown before or tips are off.</summary>
@@ -377,14 +431,15 @@ public sealed partial class GameState
             KeepsakeTaken = KeepsakeTaken, FirstDayTaught = FirstDayTaught,
             UpgradesOpen = UpgradesOpen, MagicFound = MagicFound, PerfectStreak = PerfectStreak, BestStreak = BestStreak,
             Owned = _owned.ToList(), HintsSeen = HintsSeen.ToList(), Met = Met.ToList(), Found = Found.ToList(),
-            FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(),
+            FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(),
             Places = Places.ToList(),
             Display = Display.Select(i => new SavedItem { Category = i.Category, Quality = i.Quality, Magic = i.Magic, Song = i.Song }).ToList(),
             SongsFound = SongsFound.ToList(),
-            WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, BramPiece = BramPiece, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek,
+            WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, BramPiece = BramPiece, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek, PeddlerTier = PeddlerTier, TierSince = TierSince,
             CurioPaid = _curios.Select(key => _curioPaid.GetValueOrDefault(key)).ToList(),
             DrySpell = DrySpell, HoodPieces = HoodPieces, MapGiven = MapGiven, VaultOpened = VaultOpened,
-            PassStreak = PassStreak, LuckStreak = LuckStreak, MagicNamed = MagicNamed, Surprises = Surprises, HiddenFound = HiddenFound, Bargains = Bargains,
+            PassStreak = PassStreak, LuckStreak = LuckStreak, Surprises = Surprises, HiddenFound = HiddenFound, Bargains = Bargains,
+            PerfectReads = PerfectReads, BottomsOpened = BottomsOpened, WardsNamed = WardsNamed, SightUnseen = SightUnseen,
             CuriosOpen = CuriosOpen?.ToList(), Curios = _curios.ToList(), EventsSeen = _eventsSeen.ToList(), Plan = Plan, NextPlan = NextPlan,
             Commissions = Commissions.Select(c => new SavedCommission
             {
@@ -409,11 +464,12 @@ public sealed partial class GameState
             TotalEarned = data.TotalEarned, UpgradesOpen = data.UpgradesOpen, MagicFound = data.MagicFound,
             PerfectStreak = data.PerfectStreak, BestStreak = data.BestStreak,
             WeeksPaid = data.WeeksPaid, Arrears = data.Arrears, GraceUsed = Math.Max(data.GraceCount, data.GraceUsed ? 1 : 0), BramPiece = data.BramPiece,
-            StashUsed = Math.Max(0, data.StashUsed), ClearedDay = data.ClearedDay, CloverWeek = data.CloverWeek, DrySpell = data.DrySpell, HoodPieces = data.HoodPieces,
+            StashUsed = Math.Max(0, data.StashUsed), ClearedDay = data.ClearedDay, CloverWeek = data.CloverWeek, PeddlerTier = data.PeddlerTier, TierSince = data.TierSince, DrySpell = data.DrySpell, HoodPieces = data.HoodPieces,
             MapGiven = data.MapGiven,
             VaultOpened = data.VaultOpened, NextPlan = data.NextPlan,
-            PassStreak = data.PassStreak, LuckStreak = data.LuckStreak, MagicNamed = data.MagicNamed, Surprises = data.Surprises,
-            HiddenFound = data.HiddenFound, Bargains = data.Bargains, CuriosOpen = data.CuriosOpen?.Where(Curios.Exists).ToHashSet(),
+            PassStreak = data.PassStreak, LuckStreak = data.LuckStreak, Surprises = data.Surprises,
+            HiddenFound = data.HiddenFound, Bargains = data.Bargains, PerfectReads = data.PerfectReads, BottomsOpened = data.BottomsOpened,
+            WardsNamed = data.WardsNamed, SightUnseen = data.SightUnseen, CuriosOpen = data.CuriosOpen?.Where(Curios.Exists).ToHashSet(),
             // A save from before plans: this week's one event and Nim's day, as they were.
             Plan = data.Plan ?? new WeekPlan
             {
@@ -447,6 +503,7 @@ public sealed partial class GameState
         state.SongsFound.AddRange(data.SongsFound.Where(Heartsongs.Exists).Distinct());
         state.Songbook.UnionWith(state.SongsFound);
         state.Tutored.UnionWith(data.Tutored);
+        state.CuriosSeen.UnionWith(data.CuriosSeen.Where(Curios.Exists));
         state.Places.UnionWith(data.Places.Where(key => Origins.All.Any(o => o.Key == key)));
         state.ActiveSynergies.UnionWith(data.ActiveSynergies.Where(key => Synergies.All.Any(s => s.Key == key)));
         state.Display.AddRange(data.Display.Where(i => i.Category != Category.Heartsong || Heartsongs.Exists(i.Song))
@@ -483,7 +540,12 @@ public sealed partial class GameState
         if (DayOfWeek == 1) StartWeek();
         PeddlerStock.Clear();
         PeddlerPurse = Gold;
-        if (PeddlerToday) PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day)), this, PeddlerCount));
+        if (PeddlerToday)
+        {
+            PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day)), this, PeddlerCount));
+            PeddlerTier = Tier;
+        }
+        CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
 
         if (Day == 1 && FirstDayScripted)
         {
@@ -511,8 +573,8 @@ public sealed partial class GameState
             // A fence's mark draws crooks: whoever deals in fakes comes twice as often.
             var seller = Rng.PickWeighted(pool, s => (s.Tier == Tier ? 3f : s.Tier == Tier - 1 ? 0.6f : 0.15f) * (s.Metalworker ? smiths : 1f) *
                                                      (s.Fakes.Length > 0 && HasCurio("mark") ? Curios.MarkCrooks : 1f));
-            // A guest book: every third customer of the day is the better sort, with a chest a colour finer.
-            Queue.Add(NewVisit(seller, HasCurio("guestbook") && (Queue.Count + 1) % Curios.GuestbookEvery == 0));
+            // A guest book: the day's first customer is the better sort, with a chest a colour finer.
+            Queue.Add(NewVisit(seller, HasCurio("guestbook") && Queue.Count == 0));
         }
         // The scripted first day's last lesson, passing, opens the second (the playtest: four new things on the first day
         // and Vane's debt besides was too much at once).
@@ -549,8 +611,10 @@ public sealed partial class GameState
             return visit;
         }
         var fresh = Market.CreateVisit(Rng, seller, Tier, finer ? Boosts with { BetterChests = 1 } : Boosts);
-        // A merchant's signet (or Rosa's charm): hagglers hear out an offer that's too low, instead of storming off.
-        fresh.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll;
+        // A merchant's signet (or Rosa's charm): hagglers hear out an offer that's too low, instead of storming off. A
+        // golden tongue: nobody storms off at all.
+        fresh.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll || HasCurio("goldentongue");
+        fresh.Unruffled = HasCurio("goldentongue");
         Sing(fresh);
         return fresh;
     }
@@ -612,13 +676,11 @@ public sealed partial class GameState
         int rebate = Rebate(visit);
         Gold += rebate;
         Today.Spent -= rebate;
-        // Named truly, a warded thing comes out of the ward: it's in the chest for the luck and the opening. What the
-        // slip named is marked before luck turns anything, so luck knows what the build reaches.
+        // Named truly, a warded thing comes out of the ward: it's in the chest for the luck and the opening.
         visit.Chest.Open(slip);
-        Name(visit.Chest, slip);
-        var luck = Luck(visit.Chest);
+        var luck = Luck(visit.Chest, !visit.Handled);
         Pity(visit.Chest);
-        Counted(visit, visit.Chest);
+        Counted(visit, visit.Chest, slip);
         var (claimed, pays) = Claim(visit);
         HeardStory(visit);
         // The Maw's gaze: everyone still waiting today wants a little more.
@@ -661,8 +723,9 @@ public sealed partial class GameState
     }
 
     /// <summary>
-    /// Notes a find in the collection and the journal. True the first time this thing turns up (a Heartsong: the first
-    /// time Bram's kin have ever opened it).
+    /// Notes a find in the collection and the journal (a new kind of find this run pays a collector's catalogue). True
+    /// the first time it's in the journal at all, this run or any before (a Heartsong: the first time Bram's kin have
+    /// ever opened it).
     /// </summary>
     public bool Collect(Item item)
     {
@@ -675,10 +738,11 @@ public sealed partial class GameState
         }
         Acquire(item);
         if (item.Magic && !item.Broken && !item.Fake) FoundEnchanted.Add(item.Entry);
+        bool known = Known.Found.Contains(item.Entry);
         if (item.Broken || !Found.Add(item.Entry)) return false;
         Today.NewFinds++;
         Catalogue();
-        return true;
+        return !known;
     }
 
     /// <summary>
@@ -699,6 +763,18 @@ public sealed partial class GameState
     {
         if (!Display.Remove(item)) return;
         Gold += SaleValue(item);
+    }
+
+    /// <summary>For the GM: the rest of today skipped. The customer at the counter and everyone waiting go home.</summary>
+    public void SkipRestOfDay()
+    {
+        if (Current is { Deciding: true })
+        {
+            Current.Pass(Rng);
+            Pass();
+        }
+        Current = null;
+        Queue.Clear();
     }
 
     /// <summary>The customer at the counter has gone without a sale (passed, or walked out).</summary>

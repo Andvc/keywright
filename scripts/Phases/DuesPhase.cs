@@ -57,9 +57,10 @@ public partial class DuesPhase : Phase
     void BuildTrack()
     {
         foreach (var child in _track.GetChildren()) child.QueueFree();
-        const float y = 108, w = 112, gap = 8;
-        int first = State.Week > Guild.Weeks ? State.Week - 7 : 1;
-        for (int i = 0; i < 8; i++)
+        // One box for each week of the debt (the last five weeks, after it).
+        const float y = 108, w = 184, gap = 8;
+        int first = State.Week > Guild.Weeks ? State.Week - (Guild.Weeks - 1) : 1;
+        for (int i = 0; i < Guild.Weeks; i++)
         {
             int week = first + i;
             bool paid = week < State.Week || (week == State.Week && State.PaidThisWeek);
@@ -74,7 +75,7 @@ public partial class DuesPhase : Phase
         }
         // The Aldric Key: Bram's shard and the Hooded Woman's three.
         if (State.Week < 2) return;
-        float mx = 40 + 8 * (w + gap) + 12;
+        float mx = 40 + Guild.Weeks * (w + gap) + 12;
         _track.AddChild(UiKit.MakeLabel(State.MapGiven ? "KEY: THE GUILD'S" : $"KEY {State.MapPieces}/{Story.Pieces}", 16, Palette.Magic)
             .Place(mx, y - 2, 220, 20));
         for (int i = 0; i < Story.Pieces; i++)

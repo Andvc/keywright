@@ -79,7 +79,9 @@ public partial class DayEndPhase : Phase
         if (today.Admission > 0) figures.Add(("Visitors", $"+{today.Admission}g", Palette.Magic));
         if (today.PerfectReads > 0) figures.Add(("Perfect reads", today.PerfectReads.ToString(), Palette.Gold));
         if (today.NewFinds > 0) figures.Add(("New finds", today.NewFinds.ToString(), Palette.Magic));
-        const float w = 140, gap = 8;
+        // Up to nine side by side: narrower when there are many, so they always fit the screen.
+        const float gap = 8;
+        float w = Math.Min(140, (1240 - (figures.Count - 1) * gap) / figures.Count);
         float x0 = 640 - (figures.Count * w + (figures.Count - 1) * gap) / 2;
         for (int i = 0; i < figures.Count; i++)
         {
@@ -124,8 +126,8 @@ public partial class DayEndPhase : Phase
         BuildSide();
         // Bram's working purse, and (with a renovation on offer) the bigger one its shop would need.
         var next = Upgrades.Available(State).FirstOrDefault(u => u.IsRenovation);
-        string keep = next == null ? $"Keep about {ShopTiers.Working(State.Tier)}g for tomorrow's chests."
-            : $"Keep about {ShopTiers.Working(State.Tier)}g for chests ({ShopTiers.Working(next.SetsTier)}g after renovating).";
+        string keep = next == null ? $"Keep about {State.WorkingPurse}g for tomorrow's chests."
+            : $"Keep about {State.WorkingPurse}g for chests ({State.ReserveIf(next)}g after renovating).";
         _goldLabel.Text = State.UpgradesOpen ? $"You have {State.Gold}g. {keep}" : $"You have {State.Gold}g";
         _header.Text = State.UpgradesOpen ? "SPEND IT ON THE SHOP" : "FIX UP THE STALL";
         if (!State.UpgradesOpen)
@@ -377,16 +379,15 @@ public partial class DayEndPhase : Phase
     }
 
     /// <summary>
-    /// An upgrade: icon, name, what it does, and its price (a Buy button once you can afford it, orange if it would
-    /// leave you short for the Guild tonight).
+    /// An upgrade: icon, name, what it does, and its price (a Buy button once you can afford it, red, with a question
+    /// first, if it would leave you short for the Guild tonight or for two of the shop's typical chests after it).
     /// </summary>
     Control MakeCard(Upgrade upgrade, float x, float y)
     {
         int cost = State.Cost(upgrade);
         bool affordable = State.Gold >= cost, engine = upgrade.Key == Upgrades.Engine;
-        int left = State.Gold - cost, keep = ShopTiers.Working(Math.Max(State.Tier, upgrade.SetsTier));
-        bool shortForGuild = State.DuesTonight && !State.PaidThisWeek && left < State.DueNow;
-        bool risky = shortForGuild || left < keep;
+        int left = State.Gold - cost;
+        string warning = engine ? null : State.ShortNote(cost, upgrade);
         var card = UiKit.MakePanel(upgrade.IsRenovation || engine ? Palette.Gold : Palette.PanelBorder).Place(x, y, CardW, CardH);
         card.AddChild(new TextureRect
         {
@@ -399,12 +400,9 @@ public partial class DayEndPhase : Phase
         card.AddChild(UiKit.MakeLabel(upgrade.Blurb, 16, Palette.Muted).Wrapped().Place(70, 40, CardW - 82, 66));
         if (affordable)
         {
-            var buy = UiKit.MakeButton($"{cost}g", risky ? Palette.Warn : Palette.Good, 16, () => Buy(upgrade)).Place(CardW - 112, 8, 100, 30);
+            var buy = UiKit.MakeButton($"{cost}g", warning != null ? Palette.Bad : Palette.Good, 16, () => AskBuy(upgrade)).Place(CardW - 112, 8, 100, 30);
             buy.TooltipText = engine ? $"Every chest read for you, for good. You'd still owe the Guild {State.DebtLeft}g, and have {left}g to earn it with."
-                : shortForGuild ? "You'd be short for the Guild tonight!"
-                : left < keep ? $"That leaves you {left}g. A day's chests at the {ShopTiers.Name(Math.Max(State.Tier, upgrade.SetsTier))} " +
-                                $"usually need about {keep}g: maybe wait a day."
-                : $"Buy the {upgrade.Name}. Leaves you {left}g.";
+                : warning ?? $"Buy the {upgrade.Name}. Leaves you {left}g.";
             card.AddChild(buy);
         }
         else
@@ -415,6 +413,24 @@ public partial class DayEndPhase : Phase
             card.AddChild(price);
         }
         return card;
+    }
+
+    /// <summary>Buys it, or first asks if it would leave you short (<see cref="GameState.ShortNote"/>).</summary>
+    public void AskBuy(Upgrade upgrade)
+    {
+        if (_confirm != null || !State.CanBuy(upgrade)) return;
+        string warning = upgrade.Key == Upgrades.Engine ? null : State.ShortNote(State.Cost(upgrade), upgrade);
+        if (warning == null)
+        {
+            Buy(upgrade);
+            return;
+        }
+        _confirm = Add(UiKit.MakeConfirm("ARE YOU SURE?", warning, Palette.Bad, "Buy anyway", () =>
+        {
+            CancelPayOff();
+            Buy(upgrade);
+        }, "Not now", CancelPayOff));
+        Game.Moment("09_short", 0.4);
     }
 
     public void Buy(Upgrade upgrade)

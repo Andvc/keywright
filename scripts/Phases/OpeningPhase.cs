@@ -666,7 +666,9 @@ public partial class OpeningPhase : Phase
         int fee = perfect ? State.PerfectFee(_worth) : 0;
         int held = _worth;
         _worth += fee;
-        int profit = _worth - _purchase.Paid + _purchase.Rebate;
+        // The Underwriters' bond: a chest taken sight unseen that held less than you paid gives some of it back.
+        int insured = State.Insure(_purchase, held);
+        int profit = _worth - _purchase.Paid + _purchase.Rebate + insured;
         State.Earn(_worth);
         State.RecordRead(perfect);
         if (perfect) State.Today.PerfectReads++;
@@ -723,6 +725,7 @@ public partial class OpeningPhase : Phase
         grade += Terms(visit, perfect, settle);
         if (fee > 0) grade += $" A perfect read: a valuer's fee of {fee}g.";
         if (_purchase.Rebate > 0) grade += $" Haggler's Purse: {_purchase.Rebate}g back.";
+        if (insured > 0) grade += $" Underwriter's Bond: {insured}g back.";
         Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 64));
         bool last = State.Queue.Count == 0;
         Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? "Go on" : last ? "Close up for the day" : "Next customer", Palette.Gold, 24, Next)

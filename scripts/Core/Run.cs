@@ -5,8 +5,8 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <summary>
-/// The run around the days: five-day weeks, each ending with the Guild's due; curios that bend the shop's rules;
-/// commissions from regulars; one event a week; and the map to King Aldric's vault.
+/// The run around the days: five-day weeks, each day with its business (the story, something on in town, Nim, the
+/// Guild's night); curios that bend the shop's rules; commissions from regulars; and the shards of the Aldric Key.
 /// </summary>
 public sealed partial class GameState
 {
@@ -109,7 +109,7 @@ public sealed partial class GameState
     float PawnRate => HasCurio("ticket") ? Curios.TicketRate : Knows("pawn") ? Core.Talents.PawnRate : Guild.PawnRate;
 
     /// <summary>What a curio fetches if you sell it back: half what you paid for it.</summary>
-    public int CurioValue(string key) => Math.Max(1, (_curioPaid.TryGetValue(key, out int paid) ? paid : Curios.Floor(Curios.Get(key).Rarity, Tier)) / 2);
+    public int CurioValue(string key) => Math.Max(1, (_curioPaid.TryGetValue(key, out int paid) ? paid : Curios.Base(Curios.Get(key).Rarity)) / 2);
 
     /// <summary>Everything that could be pawned to make up a due.</summary>
     public int PawnableWorth => Display.Where(CanPawn).Sum(PawnValue) + _curios.Sum(CurioValue);
@@ -332,6 +332,7 @@ public sealed partial class GameState
     public void GiveCurio(string key)
     {
         if (!HasCurio(key)) _curios.Add(key);
+        CuriosSeen.Add(key);
     }
     public IEnumerable<CurioDef> OwnedCurios => _curios.Select(Curios.Get);
     public bool HasCurio(string key) => _curios.Contains(key);
@@ -344,15 +345,20 @@ public sealed partial class GameState
         Gold -= price;
         _curios.Add(curio.Key);
         _curioPaid[curio.Key] = price;
+        CuriosSeen.Add(curio.Key);
         Today.CurioSpent += price;
         if (Keepsake) KeepsakeTaken = true;
         return true;
     }
 
-    /// <summary>The day of the week Nim comes by this week (0: not this week).</summary>
-    public int PeddlerDay => Plan?.Peddler ?? 0;
+    /// <summary>Nim comes by this morning.</summary>
+    public bool PeddlerToday => Plan != null && Plan.Week == Week && Plan.NimOn(DayOfWeek);
 
-    public bool PeddlerToday => PeddlerDay > 0 && DayOfWeek == PeddlerDay;
+    /// <summary>The week's story is told this morning.</summary>
+    public bool StoryToday => Plan != null && Plan.Week == Week && Plan.StoryDay > 0 && Plan.StoryDay == DayOfWeek;
+
+    /// <summary>What today is for (<see cref="WeekPlan.Role"/>).</summary>
+    public DayRole TodayRole => Plan != null && Plan.Week == Week ? Plan.Role(DayOfWeek) : DayOfWeek == Guild.DaysPerWeek ? DayRole.Tax : DayRole.None;
 
     /// <summary>What Nim has today.</summary>
     public List<CurioDef> PeddlerStock { get; } = new();
@@ -409,10 +415,10 @@ public sealed partial class GameState
     }
 
     /// <summary>
-    /// When the Hooded Woman wants her next piece's price: week 3, 5 and 7 (or the week after, if you missed one), until
-    /// the debt's last week. After that she's gone looking on her own.
+    /// When the Hooded Woman wants her next piece's price: weeks 2, 3 and 4 (or the week after, if you missed one),
+    /// until the debt's last week. After that she's gone looking on her own.
     /// </summary>
-    static int HoodScheduled(int week) => week >= 7 ? 3 : week >= 5 ? 2 : week >= 3 ? 1 : 0;
+    static int HoodScheduled(int week) => week >= 4 ? 3 : week >= 3 ? 2 : week >= 2 ? 1 : 0;
 
     // ---- Events ----
 
@@ -432,8 +438,19 @@ public sealed partial class GameState
     public static int DayNumber(int week, int dayOfWeek) => (week - 1) * Guild.DaysPerWeek + dayOfWeek;
 
     /// <summary>The next day Nim comes by after today, or 0 if that isn't planned yet.</summary>
-    public int NextPeddler => Plan != null && Plan.Week == Week && Plan.Peddler > DayOfWeek ? DayNumber(Week, Plan.Peddler)
-        : NextPlan != null && NextPlan.Week > Week ? DayNumber(NextPlan.Week, NextPlan.Peddler) : 0;
+    public int NextPeddler
+    {
+        get
+        {
+            foreach (var plan in new[] { Plan, NextPlan })
+            {
+                if (plan == null || plan.Week < Week) continue;
+                for (int d = 1; d < Guild.DaysPerWeek; d++)
+                    if (plan.NimOn(d) && DayNumber(plan.Week, d) > Day) return DayNumber(plan.Week, d);
+            }
+            return 0;
+        }
+    }
 
     public EventDef TodayEvent => Day <= 0 ? null : ForcedEvent != null ? Events.Find(ForcedEvent)
         : Plan?.On(DayOfWeek) is string key ? Events.Find(key) : null;
@@ -473,7 +490,7 @@ public sealed partial class GameState
     {
         Commissions.RemoveAll(c => c.Lapses > 0 && c.Lapses < Day);
         if (EventIs("stranger"))
-            Queue.Insert(Rng.Next(1, Queue.Count + 1), Sing(Events.StrangerVisit(Rng, Tier)));
+            Queue.Insert(Rng.Next(1, Queue.Count + 1), Sing(Events.StrangerVisit(Rng, Tier, PriceFactor)));
         if (EventIs("gilded"))
         {
             var plain = Queue.Select((v, i) => (v, i)).Where(p => p.v.Lesson == null).ToArray();

@@ -139,16 +139,28 @@ public static class Market
             if (quality < Rarity.Legendary && rng.NextFloat() < seller.QualityBoost) quality++;
             return new Item(c, quality, magic, fake);
         }).ToList();
+        // An enchantment spreads (enchanter's chalk: one more thing; the archmage's staff: everything real in the chest).
+        if (items.Any(i => i.Magic))
+        {
+            var plain = items.Where(i => !i.Magic && !i.Fake).ToList();
+            if (boosts.MagicAll) items = items.Select(i => i.Fake ? i : i with { Magic = true }).ToList();
+            else if (boosts.MagicSpreads && plain.Count > 0)
+            {
+                var spread = rng.PickOne(plain.ToArray());
+                items[items.IndexOf(spread)] = spread with { Magic = true };
+            }
+        }
 
-        // People hide money, gems and spellbooks under a false bottom.
+        // People hide money, gems and spellbooks under a false bottom (always, with the smugglers' compass).
         Item hidden = null;
-        if (shopTier >= 2 && rng.NextFloat() < (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor)
+        if (shopTier >= 2 && (boosts.AlwaysHidden || rng.NextFloat() < (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor))
         {
             var hideable = HiddenKinds.Where(k => Categories.Get(k.Kind).Tier <= shopTier).ToArray();
             hidden = new Item(rng.PickWeighted(hideable, k => k.Weight).Kind, Categories.RollQuality(rng, colour));
         }
         var chest = new Chest(items, colour, hidden, lockTier, packed: seller.Packs);
-        if (shopTier >= 2 && seller.Wards > 0 && rng.NextFloat() < seller.Wards && Warding(rng, seller, chest, kinds, likely) is Item warded)
+        // A seller who leaves a sign wards something half the time (always, with a warden's lantern).
+        if (shopTier >= 2 && seller.Wards > 0 && (boosts.AlwaysWard || rng.NextFloat() < seller.Wards) && Warding(rng, seller, chest, kinds, likely) is Item warded)
             chest.Ward(warded);
         return chest;
     }
@@ -230,6 +242,55 @@ public static class Market
     /// <summary>What a chest of this colour from this seller usually holds: what someone who goes by colour asks for.</summary>
     public static float TypicalChest(SellerDef seller, Rarity colour, int shopTier) =>
         TypicalCount(seller, shopTier) * TypicalItem(seller, colour, shopTier);
+
+    /// <summary>
+    /// How often each seller comes to a shop of this tier, against the others (as <see cref="GameState.StartDay"/> picks
+    /// them): its own tier's crowd mostly, the tier below's now and then, older ones rarely, each as often as they visit.
+    /// </summary>
+    public static float Weight(SellerDef seller, int shopTier) =>
+        seller.Tier > shopTier ? 0 : (seller.Tier == shopTier ? 3f : seller.Tier == shopTier - 1 ? 0.6f : 0.15f) * Math.Min(1, seller.Visits);
+
+    static readonly Lazy<(Category Kind, float Share)[][]> Shares = new(() => Enumerable.Range(0, ShopTiers.Max + 1).Select(tier =>
+    {
+        if (tier == 0) return Array.Empty<(Category, float)>();
+        var colour = ShopTiers.Typical(tier);
+        var kinds = Categories.UpTo(tier).Select(c => c.Category).ToArray();
+        var worth = kinds.Select(k => Sellers.All.Sum(s => Weight(s, tier) * s.Kinds[(int)k] / Math.Max(0.01f, kinds.Sum(o => s.Kinds[(int)o]))) *
+                                      Categories.Expected(k, colour)).ToArray();
+        float total = worth.Sum();
+        return kinds.Select((k, i) => (k, worth[i] / total)).ToArray();
+    }).ToArray());
+
+    /// <summary>
+    /// Each kind's share of what's in the chests a shop of this tier's crowd brings, at its usual colour: what the power
+    /// index averages over (<see cref="GameState.PowerIndex"/>).
+    /// </summary>
+    public static IReadOnlyList<(Category Kind, float Share)> ValueShares(int shopTier) => Shares.Value[Math.Clamp(shopTier, 1, ShopTiers.Max)];
+
+    static readonly Lazy<int[]> Asks = new(() => Enumerable.Range(0, ShopTiers.Max + 1).Select(tier =>
+    {
+        if (tier == 0) return 0;
+        // The crowd that comes to this shop, at plain prices, with chests of its usual colour; the King (whose price is
+        // your slip) and the Maw (a coin) aside.
+        var rng = new Random(9001 + tier);
+        var colour = ShopTiers.Typical(tier);
+        var crowd = Sellers.All.Where(s => Weight(s, tier) > 0 && !s.SlipPrice && s.Gaze <= 0).ToArray();
+        var asks = new List<int>();
+        for (int i = 0; i < 4000 && asks.Count < 400; i++)
+        {
+            var visit = CreateVisit(rng, rng.PickWeighted(crowd, s => Weight(s, tier)), tier);
+            if (visit.Chest.Quality == colour) asks.Add(visit.Price);
+        }
+        asks.Sort();
+        return asks[asks.Count / 2];
+    }).ToArray());
+
+    /// <summary>
+    /// What a typical chest at a shop of this tier costs at plain prices: one of the colour its chests usually are
+    /// (<see cref="ShopTiers.Typical"/>), at the median of what its crowd asks for one (a few hundred visits, from a fixed
+    /// seed). The working purse keeps two of them, at what sellers ask here (<see cref="GameState.WorkingPurse"/>).
+    /// </summary>
+    public static int TypicalAsk(int shopTier) => Asks.Value[Math.Clamp(shopTier, 1, ShopTiers.Max)];
 
     /// <summary>The weight someone who goes by weight expects of a chest from them.</summary>
     static float TypicalHeft(SellerDef seller, int shopTier)
@@ -510,6 +571,18 @@ public sealed record Boosts(float BetterChests = 0, float Hidden = 0, float Magi
 
     /// <summary>What the least a haggler, or a seller who waits for your offer, will take is multiplied by (a silver tongue, a Haggler's name).</summary>
     public float Floor { get; init; } = 1;
+
+    /// <summary>Every chest has a false bottom (the smugglers' compass).</summary>
+    public bool AlwaysHidden { get; init; }
+
+    /// <summary>A seller who leaves a sign always wards something (a warden's lantern, the Aldric Seal).</summary>
+    public bool AlwaysWard { get; init; }
+
+    /// <summary>A chest with an enchanted thing in it has a second (enchanter's chalk).</summary>
+    public bool MagicSpreads { get; init; }
+
+    /// <summary>Everything real in a chest with an enchanted thing in it is enchanted (the archmage's staff).</summary>
+    public bool MagicAll { get; init; }
 
     /// <summary>How likely a seller is to have put a thing of this kind in, against what they usually bring.</summary>
     public float Weight(Category category) => category is Category.Coins or Category.Gems ? 1 + MoneyKinds : 1;

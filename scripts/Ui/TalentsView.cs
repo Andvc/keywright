@@ -50,7 +50,7 @@ public partial class TalentsView : Control
             {
                 float cx = Columns[b] + NodeW / 2;
                 p.DrawLine(new Vector2(rootX + NodeW / 2, RootY + NodeH - 20), new Vector2(cx, BranchY - 24), line, 4);
-                for (int i = 1; i < 4; i++)
+                for (int i = 1; i < Talents.On(Talents.Branches[b]).Count(); i++)
                     p.DrawLine(new Vector2(cx, BranchY + i * (NodeH + NodeGap) - NodeGap - 2), new Vector2(cx, BranchY + i * (NodeH + NodeGap) + 2), line, 4);
             }
         }));

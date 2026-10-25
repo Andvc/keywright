@@ -6,28 +6,30 @@ namespace Keywright.Core;
 /// <summary>
 /// The Gilded Guild: it licenses Keywrights and takes a weekly tithe "to keep the Gate" (and sends it through the Gate,
 /// to the Maw). Bram opened chests unlicensed for twenty years, and the back-tithe comes with the stall. Its Collector,
-/// Mister Vane, comes for the week's due at the end of every fifth day, and each week's due is bigger than the last. Pay all eight
+/// Mister Vane, comes for the week's due at the end of every fifth day, and each week's due is bigger than the last. Pay all five
 /// and Bram's debt is cleared; the Guild keeps coming after that, for whatever more it can squeeze (endless). Fall
 /// short and you can pawn what's on display and your curios; if that's still not enough, the Guild takes the shop.
 /// </summary>
 public static class Guild
 {
     /// <summary>
-    /// A Guild week: three days of trading, then Vane. (Five until 0.20: runs took three hours and more, most of it at the
-    /// Royal Emporium doing the same again; three keeps a night with the Guild in every stretch of play.)
+    /// A Guild week: five days, each with its own business (<see cref="WeekPlan"/>): the Guild's night on the last, two
+    /// days with something on in town, and Nim twice (or Nim once and the story). 0.20 tried three-day weeks to shorten
+    /// the run; v21 keeps the week a working week and shortens the run by weeks instead.
     /// </summary>
-    public const int DaysPerWeek = 3;
+    public const int DaysPerWeek = 5;
 
-    /// <summary>The weeks of Bram's debt. After the last, the dues keep coming (endless).</summary>
-    public const int Weeks = 8;
+    /// <summary>The weeks of Bram's debt (eight until 0.20's shorter runs). After the last, the dues keep coming (endless).</summary>
+    public const int Weeks = 5;
 
     /// <summary>
     /// Each week's due: small for the first three weeks, while you learn the stall and a growing purse is all you need,
-    /// then climbing (three to six times a week) faster than a learner's shop grows, with the last week the wall. A first
-    /// run usually falls in the middle weeks; better judgment and talents push that later, until the debt is cleared. A
-    /// strong run can have all of it a week or two early, and pay it off.
+    /// then a steep climb: the fourth asks for a few good days at the capital, and the last for more than ordinary trade
+    /// makes even at the Royal Emporium with every upgrade (the power index has a ceiling, and chests top out at purple).
+    /// Carrying it takes a build come together (or a Heartsong's luck). A first run usually needs Bram's word in the
+    /// fourth week and falls in the fifth; a strong run can have all of it early, and pay it off.
     /// </summary>
-    static readonly int[] Dues = { 15, 30, 60, 150, 400, 1500, 20000, 170000 };
+    static readonly int[] Dues = { 20, 60, 300, 4000, 45000 };
 
     /// <summary>After the debt: each week twice as much, for as long as you last.</summary>
     const float EndlessGrowth = 2f;
@@ -53,11 +55,8 @@ public static class Guild
     {
         "Evening. The Guild's tithe, if you please. In gold.",
         "Week two. You're still here. Good: the Guild hates to waste a Keywright.",
-        "Two hundred and eighty. Your uncle never made it past week three, you know.",
         "I hear you've been opening a great many chests. The Guild approves. Keep opening.",
-        "My masters are curious about you. That's rarely good news.",
-        "Thirty thousand. The Guild is starting to take you seriously. So is its master.",
-        "One more week after this. Then the tithe's paid. Unless you'd like to sell us the shop now?",
+        "My masters are curious about you. That's rarely good news. One more week after this.",
         "The last of it. Every coin, mind. Gold you can see.",
     };
 

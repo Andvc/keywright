@@ -11,8 +11,8 @@ namespace Keywright.Core;
 /// </summary>
 public sealed class SaveData
 {
-    /// <summary>3: 0.20's three-day weeks (a version 2 save is moved onto them, keeping its week).</summary>
-    public const int CurrentVersion = 3;
+    /// <summary>4: 0.21's five weeks of five days (older saves are moved onto them: <see cref="FromJson"/>).</summary>
+    public const int CurrentVersion = 4;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -46,6 +46,9 @@ public sealed class SaveData
     public List<string> FoundEnchanted { get; set; } = new();
     public List<string> Tutored { get; set; } = new();
 
+    /// <summary>Curios seen this run (0.21: the journal's curio page).</summary>
+    public List<string> CuriosSeen { get; set; } = new();
+
     /// <summary>Places heard of.</summary>
     public List<string> Places { get; set; } = new();
     public List<string> ActiveSynergies { get; set; } = new();
@@ -63,15 +66,24 @@ public sealed class SaveData
     public int StashUsed { get; set; }
     public int ClearedDay { get; set; }
     public int CloverWeek { get; set; }
+
+    /// <summary>The shop Nim last came to (0.21): on his first visit to a grander one he brings something that opens there.</summary>
+    public int PeddlerTier { get; set; }
+
+    /// <summary>The first day at the shop's tier (0.21): with tips on, a quieter one.</summary>
+    public int TierSince { get; set; }
     public int DrySpell { get; set; }
 
     /// <summary>The curios Nim carries this run (null: all of them, as before 0.20).</summary>
     public List<string> CuriosOpen { get; set; }
 
-    /// <summary>The build's counters (0.20): chests passed since the last bought, chests in a row with a surprise, enchanted things named, surprises, finds, bargains.</summary>
+    /// <summary>The build's counters: chests passed since the last bought, chests in a row with a surprise, surprises, finds, bargains (0.20), perfect reads, false bottoms opened, wards named and chests taken sight unseen (0.21).</summary>
     public int PassStreak { get; set; }
     public int LuckStreak { get; set; }
-    public int MagicNamed { get; set; }
+    public int PerfectReads { get; set; }
+    public int BottomsOpened { get; set; }
+    public int WardsNamed { get; set; }
+    public int SightUnseen { get; set; }
     public int Surprises { get; set; }
     public int HiddenFound { get; set; }
     public int Bargains { get; set; }
@@ -117,13 +129,19 @@ public sealed class SaveData
                 data.BramPiece = data.Day >= OldDaysPerWeek;
                 data.Owned.Remove("warrant");
             }
-            // Five-day weeks to three: the same week, at the same point in it (the last two days fold into its last), and
-            // the week's plan made again for three days.
-            if (data.Version == 2)
+            // 0.20's three-day weeks (version 3), or the five-day weeks before them (version 2), onto 0.21's five weeks of
+            // five days: as much of the debt behind you (eight weeks of it then), at the same point in the week, and the
+            // week's plan made again.
+            if (data.Version is 2 or 3)
             {
+                int oldDays = data.Version == 2 ? OldDaysPerWeek : ShortDaysPerWeek;
+                int week = data.Day / oldDays, into = data.Day % oldDays;
+                int Weeks(int old) => (int)Math.Round(old * Guild.Weeks / (double)OldWeeks);
+                into = data.Version == 3 ? into * 2 : into;
+                data.Day = Weeks(week) * Guild.DaysPerWeek + Math.Min(into, Guild.DaysPerWeek - 1);
+                data.WeeksPaid = Math.Min(data.Day / Guild.DaysPerWeek, Weeks(data.WeeksPaid));
+                if (data.ClearedDay > 0) data.ClearedDay = Math.Max(1, data.Day);
                 data.Version = CurrentVersion;
-                int week = data.Day / OldDaysPerWeek, into = data.Day % OldDaysPerWeek;
-                data.Day = week * Guild.DaysPerWeek + Math.Min(into, Guild.DaysPerWeek - 1);
                 data.Plan = null;
                 data.NextPlan = null;
                 data.EventDay = 0;
@@ -137,8 +155,8 @@ public sealed class SaveData
         }
     }
 
-    /// <summary>Days in a week before 0.20.</summary>
-    const int OldDaysPerWeek = 5;
+    /// <summary>Days in a week before 0.20, and in 0.20's; weeks of Bram's debt before 0.21.</summary>
+    const int OldDaysPerWeek = 5, ShortDaysPerWeek = 3, OldWeeks = 8;
 
     /// <summary>A line for the title screen: "Week 3, day 2, Town Shop, 840g".</summary>
     public string Summary => $"Week {Day / Guild.DaysPerWeek + 1}, day {Day % Guild.DaysPerWeek + 1}, {ShopTiers.Name(Tier)}, {Gold}g";
@@ -197,8 +215,28 @@ public sealed class Profile
         CurioUnlock.Emporium => BestTier >= 4 || Runs >= 4,
         CurioUnlock.Cleared => Cleared > 0,
         CurioUnlock.Heartsong => Songs.Count > 0,
+        CurioUnlock.Feat => Curios.Feats.TryGetValue(curio.Key, out var feat) && Done(feat.Feat) >= feat.Needed,
         _ => true,
     };
+
+    /// <summary>Whether Nim will carry a curio once this run is banked: a legendary one counts the run's feats too.</summary>
+    public bool OpensAfter(CurioDef curio, GameState run) => Opens(curio) ||
+        (curio.Unlock == CurioUnlock.Feat && Curios.Feats.TryGetValue(curio.Key, out var feat) && Done(feat.Feat) + Curios.Progress(run, feat.Feat) >= feat.Needed);
+
+    /// <summary>What Bram's kin have done across every run that opens a legendary curio (a <see cref="Core.Feat"/>'s name: how many).</summary>
+    public Dictionary<string, int> Feats { get; set; } = new();
+
+    /// <summary>How many times Bram's kin have done this, all told.</summary>
+    public int Done(Feat feat) => Feats.GetValueOrDefault(feat.ToString());
+
+    /// <summary>
+    /// The collection journal, across runs: the regulars you've met (their habits), the things you've found (and found
+    /// enchanted), and the curios you've seen. Each unlocks when you first come across it and stays unlocked.
+    /// </summary>
+    public List<string> Met { get; set; } = new();
+    public List<string> Found { get; set; } = new();
+    public List<string> FoundEnchanted { get; set; } = new();
+    public List<string> CuriosSeen { get; set; } = new();
 
     /// <summary>Everything Nim carries now.</summary>
     public IEnumerable<string> OpenCurios => Curios.All.Where(Opens).Select(c => c.Key);
@@ -249,9 +287,10 @@ public sealed class Profile
     public void ClearedAt(GameState state) =>
         Challenge[state.Character] = Math.Max(MaxChallenge(state.Character), Math.Min(Challenges.Max, state.Challenge + 1));
 
-    /// <summary>A run is over: its renown is banked, and its score noted. Returns the renown it earned.</summary>
+    /// <summary>A run is over: its renown and its feats are banked, and its score noted. Returns the renown it earned.</summary>
     public int Bank(GameState state)
     {
+        foreach (var feat in Enum.GetValues<Feat>()) Feats[feat.ToString()] = Done(feat) + Curios.Progress(state, feat);
         int renown = Score.Renown(state), score = Score.Total(state);
         Renown += renown;
         RenownEarned += renown;
@@ -268,6 +307,8 @@ public sealed class Profile
         try
         {
             var profile = JsonSerializer.Deserialize<Profile>(json) ?? new Profile();
+            // Bram's Ledger (a talent until 0.21, when every regular you meet stays in the ledger anyway): its renown back.
+            if (profile.Talents.Remove("ledger")) profile.Renown += Core.Talents.LedgerRefund;
             profile.Talents.RemoveAll(t => !Core.Talents.Exists(t));
             profile.Songs.RemoveAll(s => !Heartsongs.Exists(s));
             return profile;
@@ -282,11 +323,30 @@ public sealed class Profile
     public void Note(GameState state)
     {
         Learn(state);
+        Remember(Met, state.Met);
+        Remember(Found, state.Found);
+        Remember(FoundEnchanted, state.FoundEnchanted);
+        Remember(CuriosSeen, state.CuriosSeen);
         foreach (string key in state.Taught.Where(k => !Taught.Contains(k))) Taught.Add(key);
         BestWeek = Math.Max(BestWeek, state.Week);
         BestGold = Math.Max(BestGold, state.Gold);
         BestTier = Math.Max(BestTier, state.Tier);
         if (state.ClearedDay > 0 && (FastestClear == 0 || state.ClearedDay < FastestClear)) FastestClear = state.ClearedDay;
+    }
+
+    static void Remember(List<string> journal, IEnumerable<string> found)
+    {
+        foreach (string key in found) if (!journal.Contains(key)) journal.Add(key);
+    }
+
+    /// <summary>For the GM: every page of the journal filled, and every Heartsong known.</summary>
+    public void KnowAll()
+    {
+        Remember(Met, Sellers.All.Select(s => s.Key));
+        Remember(Found, Collection.Entries.Select(e => e.Entry));
+        Remember(FoundEnchanted, Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
+        Remember(CuriosSeen, Curios.All.Select(c => c.Key));
+        Remember(Songs, Heartsongs.All.Select(h => h.Key));
     }
 
     /// <summary>A line for the title screen, or null before the first run.</summary>
@@ -304,4 +364,16 @@ public sealed class SavedItem
 
     /// <summary>Which Heartsong (for the Heartsong kind).</summary>
     public string Song { get; set; }
+}
+
+/// <summary>
+/// What Bram's kin remember from earlier runs (the profile's journal, <see cref="Profile.Met"/> and the rest): regulars
+/// met, things found and found enchanted, curios seen. A run starts with it and adds its own.
+/// </summary>
+public sealed class Journal
+{
+    public HashSet<string> Met { get; } = new();
+    public HashSet<string> Found { get; } = new();
+    public HashSet<string> Enchanted { get; } = new();
+    public HashSet<string> Curios { get; } = new();
 }

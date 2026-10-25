@@ -33,13 +33,10 @@ the Gate", wants you opening chests as fast as you can, and wants its tithe in g
 | When | You learn | You're left wondering |
 |---|---|---|
 | Day 1 | Bram's stall is yours; your hand carries the Key-mark; chests open for you once you've paid for them; you judge them by ear. | Why the stall is so cheap to take over. |
-| Day 2, evening | Mister Vane of the Gilded Guild: Bram opened chests unlicensed for twenty years; the Guild's back-tithe is due in eight weekly payments, or the Guild seals the shop. | What the Guild does with the gold. |
-| Week 2 | Bram tells you about the Locking and the Maw, and shows you his one secret: a shard of the **Aldric Key**, broken in four when the Locking was made. | What the Key opens. |
-| Week 3 | The Hooded Woman asks for things only a Keywright's chests hold, and pays in shards. | Who she is. |
-| Week 5 | She tells you the Key opens the **Crown Chest**, King Aldric's own, which holds the heart of the Locking. The Guild's been buying every chest with a royal seal. | Why the Guild wants it. |
-| Week 6 | Vane offers to forget half a week's tithe for your shards. | Whether to trust him. |
-| Week 7 | Her name is Mara, the last archmage of the Keyhold, Bram's old partner. The tithe goes down through the Gilded Gate: the Maw is buying his way out, and the Guild is his. A tired old man who's been selling you chests at the Emporium is the King. | Whether you'll be ready. |
-| Week 8 | The last tithe. With the Key whole, Mara knows where the Crown Chest is. | |
+| Day 2, evening | Mister Vane of the Gilded Guild: Bram opened chests unlicensed for twenty years; the Guild's back-tithe is due in five weekly payments, or the Guild seals the shop. | What the Guild does with the gold. |
+| Week 2 | Bram tells you about the Locking and the Maw, and shows you his one secret: a shard of the **Aldric Key**, broken in four when the Locking was made. The Hooded Woman asks for things only a Keywright's chests hold, and pays in shards. | What the Key opens; who she is. |
+| Week 4 | Her name is Mara, the last archmage of the Keyhold, Bram's old partner. The Key opens the **Crown Chest**, King Aldric's own, which holds the heart of the Locking; the tithe goes down through the Gilded Gate: the Maw is buying his way out, and the Guild is his. A tired old man who's been selling you chests at the Emporium is the King. That night Vane offers to forget half a week's tithe for your shards. | Whether to trust him; whether you'll be ready. |
+| Week 5 | The last tithe. With the Key whole, Mara knows where the Crown Chest is. | |
 | Any day, about one run in two | A sound like nothing in any chest: a Heartsong. Bram heard one once in forty years. | What the nine of them are for. |
 | The Crown Chest | Opened by a Keywright who rightfully owns it, it renews the Locking: the Maw falls silent, and King Aldric's hoard is on your counter. The Locking was a song in nine verses, Mara says: the Heartsongs. | What the Guild does next (endless). |
 | The Crown Chest, with all nine Heartsongs known | Mara sings the Locking whole. A lock sung whole is an ending: the Maw starves, the Gate is only a gate, and every chest in Aldmark opens at once. | |
@@ -225,15 +222,21 @@ that's already won can be finished in an afternoon.
 - *Curios.* Oddments from the Locking that bend a rule of the trade. Nim finds them; nobody asks where. Each was made
   for a trade (a gambler's token, a smuggler's hook, a fence's mark, an appraiser's seal), and things made for the same
   trade work together, the way a fence's mark and a jeweller's loupe do in any thieves' kitchen. Nim knows a collector
-  when he sees one, and brings what goes with what you keep; his stock grows as word of you gets round (the further
-  you've got, the more he trusts you with).
-- *Naming.* A Keywright vouches for what they name. Buyers pay more for a thing whose finder said what it was before the
-  chest was opened, the Guild's restorers work from the slip, and Nim's oddments work on what you meant to buy: a lucky
-  coin brings luck to the purse you heard, not to whatever else happens to be in the box. Name it wrong (count two
-  blades where there was one) and you've vouched for nothing of that kind: it sells as found.
+  when he sees one: he notices what you buy and brings more like it, and he keeps the rarest (a curio made for the
+  greatest of a trade, the Truthglass or the Golden Tongue) for someone who's shown him they're in that trade. His stock
+  grows as word of you gets round (the further you've got, the more he trusts you with), and the very rarest only come
+  to him once Bram's kin have done that trade often enough for the story to reach him.
+- *Word gets round.* Sellers talk. A shop known to sell high, or to have things come out better than their chest, or
+  to have a name for a kind of thing, pays more for its chests: everyone who brings one has heard, and asks that much
+  more. What nobody can hear of is your eye, your tongue and your luck on the day: what's enchanted or under a false
+  bottom or in a ward, a perfect read, a hard bargain, a chest taken without a hand laid on it.
+- *Sight unseen.* A seller will knock something off for a buyer who takes a chest on their word, without a shake: it
+  spares them the haggling over what was heard. Lay a hand on it, and the price is the price.
 - *Restorers.* Things kept three hundred years in a Locking chest come out tarnished, creased and dusty. A restorer
-  cleans, mends and polishes what you name, and some of it comes up better than the chest promised; sellers know the
+  cleans, mends and polishes what you buy, and some of it comes up better than the chest promised; sellers know the
   shop does it, and ask a little more.
+- *The ledger.* Bram's kin keep one ledger between them: a regular met, a find made, a curio seen goes in once and stays
+  in, whoever's minding the stall.
 - *Heartsongs.* Things loved more than gold, sung into the Locking: a Keywright hears them through the ward because the
   ward is their song. Nobody else knows they're there, so they're never priced, and they're worth a trinket's price to
   anyone but you.
@@ -249,8 +252,9 @@ that's already won can be finished in an afternoon.
 
 ## What happens in town
 
-A day or two a week (from the second) something happens for a day, and the ledger's calendar shows this week's and next week's (and the days Nim
-comes by, and the Guild's nights). Each has a reason anyone in town would give you:
+Two days a week something happens for a day (something small in the first week, while you find your feet), and the
+ledger's calendar shows this week's and next week's, day by day (with the story's mornings, the days Nim comes by, and
+the Guild's nights). Each has a reason anyone in town would give you:
 
 - **Fair Day**: the county's in town. **Locking Day**: the Locking's anniversary, and everyone spends. **The Crown's
   Buyer**: the Crown stocks up on one kind. **A Storm**: only those with something worth the soaking come out.

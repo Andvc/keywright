@@ -80,15 +80,6 @@ public sealed record Item(Category Category, Rarity Quality, bool Magic = false,
     /// <summary>Which one this is: two purses alike are still two things. Kept when it breaks.</summary>
     public int Id { get; init; } = Interlocked.Increment(ref _lastId);
 
-    /// <summary>
-    /// You named it on the slip you bought the chest on (counted it, without counting more of its kind than there were):
-    /// curios, synergies and talents put their bonuses on what you named (<see cref="GameState.Name"/>).
-    /// </summary>
-    public bool Named { get; init; }
-
-    /// <summary>Named, and marked enchanted too: what an enchantment's bonuses need.</summary>
-    public bool MagicNamed { get; init; }
-
     public CategoryDef Def => Categories.Get(Category);
 
     /// <summary>One of the nine Heartsongs.</summary>

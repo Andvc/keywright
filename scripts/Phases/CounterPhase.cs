@@ -125,7 +125,7 @@ public partial class CounterPhase : Phase
         _timer = Add(UiKit.MakeLabel("", 32, Palette.Warn, HorizontalAlignment.Center, outline: 6).Place(206, 92, 64, 40));
         _timer.ZIndex = 10;
         // A rotten chest stands so much shaking, and no more: what's left, above it.
-        if (_visit.Seller.ShakeLimit > 0)
+        if (State.ShakeLimit(_visit.Seller) > 0)
         {
             _rot = Add(UiKit.MakeLabel("", 16, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(316, 104, 484, 20));
             _rot.ZIndex = 10;
@@ -151,7 +151,7 @@ public partial class CounterPhase : Phase
         Note(ChestNote());
         if (State.Terms(_visit) is string terms) Note(terms);
         if (_visit.Clue != null) Note(_visit.Clue);
-        if (_visit.PriceNote != null) Note(_visit.PriceNote);
+        if (_visit.PriceNote != null) Note(_priceNote = _visit.PriceNote);
         if (State.Shows(Heartsongs.Bell)) TollBell(Market.ArticleCount(_visit.Chest));
         if (State.Has(Upgrades.Engine)) Record();
         Refresh();
@@ -218,7 +218,7 @@ public partial class CounterPhase : Phase
             .ToList();
         string done = $"Shaken {string.Join(" and ", tried.Select(Categories.Adverb))}.";
         // A rotten chest that's had all the shaking it stands won't be shaken again.
-        bool spent = _visit.Seller.ShakeLimit > 0 && _rotten >= _visit.Seller.ShakeLimit;
+        bool spent = State.ShakeLimit(_visit.Seller) > 0 && _rotten >= State.ShakeLimit(_visit.Seller);
         return untried.Count == 0 || spent ? done : $"{done} Not {string.Join(" or ", untried.Select(Categories.Adverb))} yet.";
     }
 
@@ -340,6 +340,7 @@ public partial class CounterPhase : Phase
             if (before < TryTime && _shaken[key] >= TryTime)
             {
                 _hearing.Tried(level, _magnet);
+                Handled();
                 // A goblin charges for every strength after the first.
                 if (_visit.Shook(level, _rng) is string up && !Concluded)
                 {
@@ -350,10 +351,10 @@ public partial class CounterPhase : Phase
                 }
             }
             // A rotten chest takes so much shaking, then comes apart in your hands.
-            if (_visit.Seller.ShakeLimit > 0 && _rotten < _visit.Seller.ShakeLimit && !Concluded)
+            if (State.ShakeLimit(_visit.Seller) > 0 && _rotten < State.ShakeLimit(_visit.Seller) && !Concluded)
             {
                 _rotten += delta;
-                if (_rotten >= _visit.Seller.ShakeLimit) Rot();
+                if (_rotten >= State.ShakeLimit(_visit.Seller)) Rot();
             }
             // Some sellers won't have their chest shaken hard: a moment of it (not a stray flick) and up goes the price.
             if (level == Core.Shake.Hard && State.MindsHardShake(_visit.Seller) && _shaken[key] >= HardShakeTolerance && !Concluded &&
@@ -363,8 +364,8 @@ public partial class CounterPhase : Phase
         CheckLesson();
         UpdateStrength();
         if (_rot != null)
-            _rot.Text = Concluded ? "" : _rotten >= _visit.Seller.ShakeLimit ? "Coming apart: no more shaking"
-                : $"Rotten: {_visit.Seller.ShakeLimit - _rotten:0.0}s of shaking left";
+            _rot.Text = Concluded ? "" : _rotten >= State.ShakeLimit(_visit.Seller) ? "Coming apart: no more shaking"
+                : $"Rotten: {State.ShakeLimit(_visit.Seller) - _rotten:0.0}s of shaking left";
         string tried = TriedSoFar();
         _hint.Text = Busy || Concluded || _shake.Dragging ? ""
             : _shake.Hover && tried == "" ? State.CanDrop ? "Drag to shake it. Lift it high and let go to drop it." : "Drag to shake it, gently or firmly: mind your back."
@@ -745,6 +746,9 @@ public partial class CounterPhase : Phase
         p.DrawRect(new Rect2(0, 0, PanelW, 22), Palette.PanelBorder, false, 3);
     }
 
+    /// <summary>The price note as it was put under the chest (what curios took off), to update when a hand's laid on it.</summary>
+    string _priceNote;
+
     void Note(string line)
     {
         _noteLines.Add(line);
@@ -788,6 +792,7 @@ public partial class CounterPhase : Phase
     void OnLanded(float height)
     {
         if (height < ShakeBox.DropHeight || Concluded || Busy) return;
+        Handled();
         if (_visit.Chest.Sealed)
         {
             // Chained tight: no boom, nothing breaks. All it tells you is how heavy it is.
@@ -897,6 +902,25 @@ public partial class CounterPhase : Phase
     }
 
     /// <summary>Lifts the chest and lets it fall (the bot uses this).</summary>
+    /// <summary>You've laid a hand on the chest: a price for it sight unseen is off, and the seller says so.</summary>
+    void Handled()
+    {
+        if (_visit.Handle() is not string line || Concluded) return;
+        // The price note under the chest loses its sight-unseen part (and goes, if that was all of it).
+        int at = _priceNote == null ? -1 : _noteLines.IndexOf(_priceNote);
+        if (at >= 0)
+        {
+            if (_visit.PriceNote != null) _noteLines[at] = _visit.PriceNote;
+            else _noteLines.RemoveAt(at);
+            _notes.Text = string.Join("\n", _noteLines.TakeLast(3));
+        }
+        _priceNote = _visit.PriceNote;
+        _seller.Say(line, Palette.Warn);
+        FloatText("Full price now", new Vector2(1036, 520), Palette.Warn, 24);
+        Sfx.Play("bid", 1.1f, -4);
+        Refresh();
+    }
+
     public void DropChest()
     {
         if (Busy || Concluded || !State.CanDrop) return;
@@ -911,6 +935,7 @@ public partial class CounterPhase : Phase
         Sfx.PlayGroup("clack", _magnet ? 1.2f : 0.9f, -2);
         _shake.View.Wobble(0.4f);
         if (_magnet) Teach("magnet");
+        if (_magnet) Handled();
         if (_magnet && State.MindsMagnet(_visit.Seller)) Angered(_visit.Anger(_rng));
         Refresh();
         Game.Moment("05_magnet", 0.6);

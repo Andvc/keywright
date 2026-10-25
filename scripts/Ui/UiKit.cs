@@ -149,6 +149,23 @@ public static class UiKit
     public static Sprite2D MakeCurioIcon(Core.CurioDef curio, Vector2 center) => MakeSprite($"res://assets/ui/curios/{curio.Icon}.png", center, 1);
 
     /// <summary>
+    /// A question that wants an answer before going on: the screen dimmed, a framed panel with a title and what's at
+    /// stake, and two buttons. The caller adds it, and frees it when either is pressed.
+    /// </summary>
+    public static Control MakeConfirm(string title, string text, Color color, string yes, Action onYes, string no, Action onNo)
+    {
+        var root = new Control { ZIndex = 50 }.Place(0, 0, 1280, 720);
+        root.AddChild(new ColorRect { Color = new Color(0, 0, 0, 0.6f), MouseFilter = Control.MouseFilterEnum.Stop }.Place(-100, -100, 1480, 920));
+        var panel = MakePanel(color.Darkened(0.2f)).Place(330, 200, 620, 290);
+        root.AddChild(panel);
+        panel.AddChild(MakeLabel(title, 32, color, HorizontalAlignment.Center, outline: 4).Place(0, 20, 620, 40));
+        panel.AddChild(MakeLabel(text, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 72, 540, 112));
+        panel.AddChild(MakeButton(yes, color, 24, onYes).Place(60, 204, 240, 56));
+        panel.AddChild(MakeButton(no, Palette.PanelBorder.Lightened(0.2f), 24, onNo).Place(320, 204, 240, 56));
+        return root;
+    }
+
+    /// <summary>
     /// How your gut rates a call: a strip running from red (a bad call) to green (a great one), with a marker that slides
     /// out from the middle to <paramref name="score"/> (0 to 1). The words at either end say what each end means.
     /// </summary>

@@ -4,7 +4,8 @@ namespace Keywright;
 
 /// <summary>
 /// The player's settings, kept in user://settings.cfg: volume, fullscreen, how much the screen shakes and flashes,
-/// whether Uncle Bram gives tips (for new games, and for the one in progress), and which sound each kind of thing makes.
+/// whether Uncle Bram gives tips (for new games, and for the one in progress), which sound each kind of thing makes,
+/// and GM mode (for testing: the pause menu gets gold, a skipped day and the whole journal).
 /// </summary>
 public static class Settings
 {
@@ -19,6 +20,9 @@ public static class Settings
     public static float Shake { get; set; } = 1f;
 
     public static bool Tips { get; set; } = true;
+
+    /// <summary>GM mode, for testing: the pause menu adds 99,999 gold, skips the day, or fills the journal (--gm turns it on too).</summary>
+    public static bool Gm { get; set; }
 
     /// <summary>For each kind of thing, which of its sounds to use (an index into <see cref="Audio.SoundSets.For"/>).</summary>
     static readonly int[] _soundSets = new int[System.Enum.GetValues<Core.Category>().Length];
@@ -36,6 +40,7 @@ public static class Settings
             Fullscreen = (bool)file.GetValue("video", "fullscreen", Fullscreen);
             Shake = (float)file.GetValue("video", "shake", Shake);
             Tips = (bool)file.GetValue("game", "tips", Tips);
+            Gm = Gm || (bool)file.GetValue("game", "gm", Gm);
             foreach (var kind in System.Enum.GetValues<Core.Category>())
                 _soundSets[(int)kind] = (int)file.GetValue("sounds", kind.ToString().ToLowerInvariant(), 0);
         }
@@ -49,6 +54,7 @@ public static class Settings
         file.SetValue("video", "fullscreen", Fullscreen);
         file.SetValue("video", "shake", Shake);
         file.SetValue("game", "tips", Tips);
+        file.SetValue("game", "gm", Gm);
         foreach (var kind in System.Enum.GetValues<Core.Category>())
             file.SetValue("sounds", kind.ToString().ToLowerInvariant(), _soundSets[(int)kind]);
         file.Save(Path);

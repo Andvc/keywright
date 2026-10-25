@@ -10,11 +10,11 @@ namespace Keywright.Ui;
 /// </summary>
 public partial class SettingsView : Control
 {
-    const float W = 640, H = 436, X = (1280 - W) / 2, Y = (720 - H) / 2, ControlX = X + 320;
+    const float W = 640, H = 492, X = (1280 - W) / 2, Y = (720 - H) / 2, ControlX = X + 320;
 
     public event Action Closed;
 
-    Button _fullscreen, _shake, _tips;
+    Button _fullscreen, _shake, _tips, _gm;
     Label _volume;
 
     public override void _Ready()
@@ -63,6 +63,11 @@ public partial class SettingsView : Control
         Row("Item sounds", row);
         AddChild(UiKit.MakeButton("Choose...", Palette.PanelBorder.Lightened(0.2f), 16, OpenSounds).Place(ControlX, row - 4, 200, 36));
 
+        row += 56;
+        Row("GM mode (for testing)", row);
+        _gm = Put(Toggle(row, () => Settings.Gm = !Settings.Gm));
+        _gm.TooltipText = "Puts gold, a skipped day and the whole journal in the pause menu.";
+
         AddChild(UiKit.MakeButton("Done", Palette.Gold, 24, Close).Place(X + W / 2 - 100, Y + H - 68, 200, 48));
         Refresh();
         Modulate = Colors.Transparent;
@@ -100,6 +105,7 @@ public partial class SettingsView : Control
         _fullscreen.Text = Settings.Fullscreen ? "On" : "Off";
         _shake.Text = Settings.ShakeWord;
         _tips.Text = Settings.Tips ? "On" : "Off";
+        _gm.Text = Settings.Gm ? "On" : "Off";
     }
 
     public override void _UnhandledInput(InputEvent e)

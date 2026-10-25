@@ -12,8 +12,9 @@ public sealed record Line(string Speaker, string Text);
 /// open one, once it's rightfully theirs, and every one opened loosens the Locking. Bram opened chests unlicensed for
 /// twenty years: the Gilded Guild, which licenses Keywrights and secretly serves the Maw, wants its back-tithe. Bram
 /// kept one shard of the Aldric Key; Mara, the last archmage of the Keyhold, trades the others for things only a
-/// Keywright's chests hold. The whole Key opens the Crown Chest, which renews the Locking. Scenes play at the start of
-/// some weeks, when the Guild comes, and at the end.
+/// Keywright's chests hold. The whole Key opens the Crown Chest, which renews the Locking. Scenes play on the story
+/// mornings (the first day of weeks 1, 2 and 4, and of the first week after the debt: <see cref="TellsOn"/>), when the
+/// Guild comes, and at the end; a week without a story morning may have a note on its first day's card.
 /// </summary>
 public static class Story
 {
@@ -25,7 +26,13 @@ public static class Story
     public const int Pieces = 4;
 
     /// <summary>The week the Guild offers to take the shards off your hands for half that week's due.</summary>
-    public const int OfferWeek = 6;
+    public const int OfferWeek = 4;
+
+    /// <summary>
+    /// Whether a week has a story morning (its first day): the welcome, Bram's secret and the Hooded Woman, Mara's
+    /// truth, and the Guild's interest after the debt. Those weeks Nim comes once; the rest, twice.
+    /// </summary>
+    public static bool TellsOn(int week) => week is 1 or 2 or 4 || week == Guild.Weeks + 1;
 
     /// <summary>Who brings the Crown Chest to the counter (nobody's selling: it's yours, by the King's gift).</summary>
     public static readonly SellerDef VaultSeller = new()
@@ -52,19 +59,29 @@ public static class Story
         new(Vane, $"Evening. {Guild.Collector}, Collector for the Gilded Guild. Every Keywright pays the Guild a tithe, to keep " +
                   "the Gate. Your uncle never did."),
         new(Bram, "Twenty years I opened chests for folk who couldn't pay a Guild Keywright! For pennies!"),
-        new(Vane, $"Twenty years of tithe, Bram: {Guild.Debt}g. The Guild will take it in {Guild.Weeks} weekly payments, starting " +
-                  $"small. {Guild.Due(1)}g tomorrow night, at the end of the week. Each week, more."),
+        new(Vane, $"Twenty years of tithe, Bram: {Guild.Debt}g. The Guild will take it in {Sellers.Number(Guild.Weeks)} weekly payments, " +
+                  $"starting small. {Guild.Due(1)}g in {Sellers.Number(Guild.DaysPerWeek - GameState.IntroDay)} nights, at the end of the week. Each week, more."),
         new(Vane, "Miss one, and the Guild seals the shop. Good evening, Keywright."),
         new(Bram, $"Every {Guild.DaysPerWeek} days. Don't worry: a good ear pays any debt. We'll talk in the morning."),
     };
 
-    /// <summary>The morning a week begins (from the second): who comes by, and what they want.</summary>
+    /// <summary>
+    /// A story morning (<see cref="TellsOn"/>): the welcome on the first day, Bram's secret and the Hooded Woman in week
+    /// 2, Mara's truth in week 4 (the night the Guild makes its offer), the Guild's interest after the debt. Whenever she
+    /// wants something for her next shard, she says what.
+    /// </summary>
     public static List<Line> WeekStart(GameState state)
     {
         int week = state.Week;
         var lines = new List<Line>();
         switch (week)
         {
+            case 1:
+                lines.Add(state.FirstDayTaught
+                    ? new(Bram, $"Another season at the crossroads, {state.Kin.Name}. The Guild hasn't come sniffing yet. Let's make the most of it.")
+                    : new(Bram, $"There you are, {state.Kin.Name}! My mark's faded, but look: it's on your hand now. The stall is yours."));
+                lines.Add(new(Bram, "Folk bring chests nobody else can open. You buy one, it opens for you, you sell what's inside. Listen before you buy: that's the trade."));
+                break;
             case 2:
                 lines.Add(new(Bram, "You've a right to know what the chests are. Three hundred years ago the Maw, Avarax, ruled this " +
                                     "realm through its gold. Every coin was his eye."));
@@ -72,64 +89,64 @@ public static class Story
                                     "Gate. The Locking. The chests are what's left of it."));
                 lines.Add(new(Bram, "And this is my one secret: a shard of the Aldric Key, broken in four when the Locking was made. " +
                                     "It's yours now. Don't show the Guild."));
-                break;
-            case 3:
-                lines.Add(new(Hood, "You're Bram's kin. You have the mark, and his ear for a chest, they say."));
-                lines.Add(new(Hood, "I have something your uncle has wanted for twenty years. Find me what I ask for, and it's yours."));
+                lines.Add(new(Hood, "You're Bram's kin. You have the mark, and his ear for a chest, they say. I have something your uncle " +
+                                    "has wanted for twenty years. Find me what I ask for, and it's yours."));
                 break;
             case 4:
                 lines.Add(state.MapPieces >= 2
                     ? new(Bram, "That's... a second shard. Where did she get it? Never mind. Never mind!")
-                    : new(Bram, "That woman in the hood. I know that voice. Do what she asks."));
-                lines.Add(new(Bram, "And word is the Guild's been buying every chest with a royal seal. Funny, for tithe-takers."));
-                break;
-            case 5:
-                lines.Add(new(Hood, "The whole Key opens the Crown Chest: King Aldric's own. The heart of the Locking is in it."));
-                lines.Add(new(Hood, "The Guild doesn't want your gold. It wants the Chest. Your uncle's debt is a leash. Keep paying them, " +
-                                    "and keep finding me things."));
-                break;
-            case 6:
-                lines.Add(new(Bram, "Vane's been asking about the shards. Whatever he offers you, think hard."));
-                break;
-            case 7:
-                if (state.MapGiven)
-                {
-                    lines.Add(new(Hood, "You gave them the shards. Then the Guild will have the Crown Chest, and the Gate will open."));
-                    if (!state.DebtCleared) lines.Add(new(Hood, "Pay your debt, then. It's all you have left."));
-                }
-                else
-                {
-                    lines.Add(new(Hood, "My name is Mara. I was the last archmage of the Keyhold. Your uncle and I found the first shard " +
-                                        "together, a long time ago."));
-                    lines.Add(new(Hood, "Every tithe the Guild takes goes down through the Gilded Gate. The Maw is buying his way out, " +
-                                        "a coin at a time. And every chest you open loosens the Locking."));
-                    lines.Add(state.Tier >= 4
-                        ? new(Bram, $"And that old fellow at the Emporium, the one with the ring? Look at the seal on it, {state.Kin.Name}. " +
-                                    "That's the King. He's been testing you.")
-                        : new(Hood, "The King knows. He's looking for a Keywright he can trust with the Crown Chest. Be one."));
-                }
-                break;
-            case 8 when state.DebtCleared:
-                lines.Add(new(Bram, "The last week of the tithe, and it's already paid. Nobody's coming for anything this week."));
-                if (state.MapPieces >= Pieces - 1 && !state.MapGiven)
-                    lines.Add(new(Bram, "If Mara gets what she's after, the Key is whole. Let's find it for her."));
-                break;
-            case 8:
-                lines.Add(new(Bram, "The last week. Pay this, and the stall is ours. Truly ours."));
-                if (state.MapPieces >= Pieces)
-                    lines.Add(new(Bram, "And with the Key whole... Mara says she knows where the Crown Chest is."));
+                    : new(Bram, "That woman in the hood. I know that voice. Hear her out."));
+                lines.Add(new(Hood, "My name is Mara. I was the last archmage of the Keyhold. Your uncle and I found the first shard " +
+                                    "together, a long time ago."));
+                lines.Add(new(Hood, "The whole Key opens the Crown Chest: King Aldric's own, with the heart of the Locking in it. The " +
+                                    "Guild doesn't want your gold. It wants the Chest."));
+                lines.Add(new(Hood, "Every tithe the Guild takes goes down through the Gilded Gate. The Maw is buying his way out, a coin " +
+                                    "at a time. And every chest you open loosens the Locking."));
+                lines.Add(state.Tier >= 4
+                    ? new(Bram, $"And that old fellow at the Emporium, the one with the ring? Look at the seal on it, {state.Kin.Name}. " +
+                                "That's the King. He's been testing you.")
+                    : new(Hood, "The King knows. He's looking for a Keywright he can trust with the Crown Chest. Be one."));
+                if (state.MapPieces > 0)
+                    lines.Add(new(Bram, "Vane's been asking about the shards. Whatever he offers you tonight, think hard."));
                 break;
             case Guild.Weeks + 1:
                 lines.Add(new(Vane, "The tithe is paid. But the Gate is hungry, and the Guild has decided you owe us for our patience."));
-                lines.Add(new(Bram, "They'll keep coming, and every week they'll want half as much again. Let's see how long we can make them wait."));
+                lines.Add(new(Bram, "They'll keep coming, and every week they'll want twice as much. Let's see how long we can make them wait."));
                 break;
         }
-        // Whenever she wants something for her next shard, she says what.
         var ask = state.Commissions.FirstOrDefault(c => c.Story);
-        if (ask != null)
-            lines.Add(new(Hood, $"{HoodAsks(ask)} Bring me {ask.Phrase} {(state.DebtCleared ? "this week" : "before the Guild comes again")}, " +
-                                "and the next shard is yours."));
+        if (ask != null) lines.Add(new(Hood, HoodRequest(state, ask)));
         return lines;
+    }
+
+    /// <summary>What a story morning holds, in a few words (the calendar's): 20 letters at most.</summary>
+    public static string Teaser(int week) => week switch
+    {
+        1 => "Bram's welcome",
+        2 => "Bram's secret",
+        4 => "The Hooded Woman",
+        _ => "The Guild's terms",
+    };
+
+    /// <summary>What the Hooded Woman asks for her next shard, and by when.</summary>
+    static string HoodRequest(GameState state, Commission ask) =>
+        $"{HoodAsks(ask)} Bring me {ask.Phrase} {(state.DebtCleared ? "this week" : "before the Guild comes again")}, and the next shard is yours.";
+
+    /// <summary>
+    /// A week without a story morning: a word on its first day's card, or null. The Hooded Woman's note when she wants
+    /// something; the debt's last week.
+    /// </summary>
+    public static string WeekNote(GameState state)
+    {
+        if (TellsOn(state.Week)) return null;
+        var ask = state.Commissions.FirstOrDefault(c => c.Story);
+        if (ask != null) return $"A note from the Hooded Woman: \"{HoodRequest(state, ask)}\"";
+        if (state.MapGiven && state.Week == OfferWeek + 1)
+            return "A note from the Hooded Woman: \"You gave them the shards. Then the Guild will have the Crown Chest. Pay your debt: it's all you have left.\"";
+        if (state.Week == Guild.Weeks)
+            return state.DebtCleared ? "The last week of the tithe, and it's already paid: nobody's coming for anything this week."
+                : "The debt's last week. Pay this, and the stall is yours. Truly yours.";
+        return null;
     }
 
     /// <summary>What the Hooded Woman says when she asks for the next shard's price: why she wants it.</summary>

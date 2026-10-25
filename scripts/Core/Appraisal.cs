@@ -72,10 +72,10 @@ public sealed class Appraisal
     IReadOnlyList<(int Value, float Chance)> _outcomes;
 
     /// <summary>
-    /// The shop the slip is filled in at (<see cref="GameState"/>): what a thing you name fetches there today (its trades,
-    /// its name, its curios, the day) and how likely it is to come out better than its chest (its luck). Every value on
-    /// the slip, the odds bar and the careful player's sums are what the things it names would sell for here if the read
-    /// is right, not what they're worth in the abstract. Null: their worth, at the chest's odds.
+    /// The shop the slip is filled in at (<see cref="GameState"/>): what a thing marked on it fetches there today (its
+    /// trades, its name, its curios, the day) and how likely it is to come out better than its chest (its luck). Every
+    /// value on the slip, the odds bar and the careful player's sums are what the things it marks would sell for here if
+    /// the read is right, not what they're worth in the abstract. Null: their worth, at the chest's odds.
     /// </summary>
     public ISlipModel Model
     {

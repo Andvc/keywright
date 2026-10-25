@@ -70,12 +70,12 @@ public static class Hints
         // The run: the Guild's dues, curios, commissions, events.
         ["dues"] = "Paid. Next week the Guild wants more, and more the week after. Whatever you spend on the shop has to " +
                    "earn its keep before Vane comes back.",
-        ["peddler"] = "Nim sells curios: oddments from the Locking that each bend one rule of the trade. You've room for three, so " +
-                      "pick ones that go together. Nim asks a share of what's in your purse, rich or poor. Don't ask what Nim is.",
+        ["peddler"] = "Nim sells curios: oddments from the Locking, each bending one rule of the trade. You've room for three: pick ones " +
+                      "that go together. Nim notices what you buy and brings more like it, and keeps his rarest for a collector. Don't ask what Nim is.",
         ["commissions"] = "Regulars want things now: see the board on the left. When something they want comes out of a chest, " +
                           "hand it over instead of selling it. A commission pays far more than a sale.",
         ["deliver"] = "Someone wants this! Deliver it for the commission, or sell it as usual.",
-        ["event"] = "Something's happening in town today: a day or two every week is different. It's up in the top bar (click it to read it " +
+        ["event"] = "Something's happening in town today: two days every week are different. It's up in the top bar (click it to read it " +
                     "again), and your ledger's calendar shows what's coming this week and next.",
         ["stranger"] = "The Stranger. That chest's wrapped in iron chains: nothing inside can move, so there's nothing to hear. " +
                        "Drop it to feel how heavy it is. Heavy ones hold more.",
@@ -88,7 +88,8 @@ public static class Hints
 
         // Each move brings one new thing.
         ["tier2"] = "Thornwick folk bring two new sounds. Potions slosh at a gentle shake, like coin. Spells, scrolls and " +
-                    "spellbooks, rustle only at a hard shake, like cloaks. And some chests are locked, or have a false bottom.",
+                    "spellbooks, rustle only at a hard shake, like cloaks. And some chests are locked, or have a false bottom. " +
+                    "A quiet first day, while word gets round.",
         ["locked"] = "Locked. Buy it and you'll pick the lock before you open it. A crowbar's quicker, but it breaks glass.",
         ["dropped"] = "Dropped! A solid thud is a plain chest. A hollow boom means a false bottom: something hidden nobody's priced.",
         ["hollow"] = "Hear that boom? A false bottom. Tick it on your slip: whatever's in there, nobody's priced it.",

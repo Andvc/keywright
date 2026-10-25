@@ -60,4 +60,13 @@ public static class Palette
         Rarity.Mythic => new Color("#ff4058"),
         _ => new Color("#ffb52e"),
     };
+
+    /// <summary>A curio's rarity, a step above the things': green, blue, purple, and gold for a legendary one.</summary>
+    public static Color Of(CurioRarity rarity) => rarity switch
+    {
+        CurioRarity.Legendary => Of(Rarity.Legendary),
+        CurioRarity.Rare => Of(Rarity.Epic),
+        CurioRarity.Uncommon => Of(Rarity.Rare),
+        _ => Of(Rarity.Uncommon),
+    };
 }

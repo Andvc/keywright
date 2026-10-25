@@ -68,8 +68,8 @@ public partial class RunEndPhase : Phase
         {
             Add(UiKit.MakeButton("Keep trading", Palette.Gold, 24, KeepTrading).Place(340, 580, 290, 64)).TooltipText =
                 State.Week < Guild.Weeks
-                    ? $"Nobody's coming for anything until week {Guild.Weeks + 1}: then the Guild wants interest, half as much again each week."
-                    : "The Guild keeps coming, for half as much again each week. How long can you last?";
+                    ? $"Nobody's coming for anything until week {Guild.Weeks + 1}: then the Guild wants interest, twice as much each week."
+                    : "The Guild keeps coming, for twice as much each week. How long can you last?";
             Add(UiKit.MakeButton("Retire", Palette.Text, 24, Retire).Place(650, 580, 290, 64)).TooltipText = "Hang up your apron: back to the title.";
             Sfx.Play("fanfare", 1f, -2);
             Fx.Confetti(this, new Vector2(640, 120), 160);
@@ -114,7 +114,7 @@ public partial class RunEndPhase : Phase
         int levels = profile.MaxChallenge(State.Character);
         if (levels > Game.LevelsAtStart) news.Add($"Challenge level {levels} is open for {State.Kin.Name}.");
         // Nim's stock grows as Bram's kin get further: what he'll bring from the next run on.
-        var curios = Curios.All.Where(c => profile.Opens(c) && !Game.CuriosAtStart.Contains(c.Key)).ToList();
+        var curios = Curios.All.Where(c => profile.OpensAfter(c, State) && !Game.CuriosAtStart.Contains(c.Key)).ToList();
         if (curios.Count > 0)
             news.Add(curios.Count <= 3 ? $"Nim has new curios for your next run: {string.Join(", ", curios.Select(c => c.Name))}."
                 : $"Nim has {curios.Count} new curios for your next run, the {curios[0].Name} among them.");

@@ -6,10 +6,11 @@ using Keywright.Ui;
 namespace Keywright.Phases;
 
 /// <summary>
-/// Nim the peddler drops by before the shop opens, once a week from the first: three curios laid out on the counter,
-/// each bending one rule of the trade, each asking a share of what's in your purse this morning. Each card says which
-/// ways of trading it's for, and which of yours it goes with. Buy what suits how you deal (there's room for a few),
-/// sell back what doesn't for half, and open the shop.
+/// Nim the peddler drops by before the shop opens, twice a week (once on a story week): three curios laid out on the
+/// counter, each bending one rule of the trade, each asking a fixed sum by its rarity and a share of what's in your
+/// purse this morning. Each card says which ways of trading it's for, and which of yours it goes with. Buy what suits
+/// how you deal (there's room for a few), sell back what doesn't for half, and open the shop. A curio that would leave
+/// you short of two of the shop's typical chests has a red price, and Nim asks first.
 /// </summary>
 public partial class PeddlerPhase : Phase
 {
@@ -22,6 +23,7 @@ public partial class PeddlerPhase : Phase
     SellerView _nim;
     MentorView _mentor;
     Node2D _board;
+    Control _confirm;
     bool _leaving;
 
     public MentorView Mentor => _mentor;
@@ -55,8 +57,7 @@ public partial class PeddlerPhase : Phase
             _board.AddChild(UiKit.MakeLabel("Nim's sold out: you own everything Nim carries!", 24, Palette.Muted, HorizontalAlignment.Center)
                 .Place(CardsX, 220, CardsRight - CardsX, 30));
         string note = State.Keepsake && stock.Count > 0 ? "Keepsake: one of these is a gift, whichever you like."
-            : $"Nim asks a share of what was in your purse this morning ({State.PeddlerPurse}g): " +
-              $"{Synergies.Pct(Curios.Share(CurioRarity.Common))}, {Synergies.Pct(Curios.Share(CurioRarity.Uncommon))} or {Synergies.Pct(Curios.Share(CurioRarity.Rare))}.";
+            : $"Nim asks a fixed sum by rarity, plus a share of what was in your purse this morning ({State.PeddlerPurse}g).";
         if (stock.Count > 0)
             _board.AddChild(UiKit.MakeLabel(note, 16, State.Keepsake ? Palette.Good : Palette.Muted, HorizontalAlignment.Center, outline: 4)
                 .Place(CardsX, CardsY + CardH + 6, CardsRight - CardsX, 20));
@@ -91,7 +92,7 @@ public partial class PeddlerPhase : Phase
     {
         bool owned = State.HasCurio(curio.Key);
         int price = State.CuriosPrice(curio);
-        var color = RarityColor(curio.Rarity);
+        var color = Palette.Of(curio.Rarity);
         var card = UiKit.MakePanel(owned ? Palette.PanelBorder : color).Place(x, y, CardW, CardH);
         var shine = new Painter(p =>
         {
@@ -104,32 +105,66 @@ public partial class PeddlerPhase : Phase
         float nameH = narrow ? 40 : 60;
         card.AddChild(UiKit.MakeLabel(curio.Name, narrow ? 16 : 24, owned ? Palette.Muted : Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Wrapped().Place(10, 100, CardW - 20, nameH));
-        card.AddChild(UiKit.MakeLabel($"{Curios.RarityName(curio.Rarity)}: {Curios.Tags(curio)}", 16, color, HorizontalAlignment.Center)
-            .Place(0, 100 + nameH, CardW, 20));
+        // Its rarity in the corner, and what it's for under its name (just the first way of trading on a narrow card).
+        card.AddChild(UiKit.MakeLabel(Curios.RarityName(curio.Rarity), 16, color, HorizontalAlignment.Right).Place(CardW - 110, 8, 100, 20));
+        string tags = narrow ? Curios.TagName(curio.Tags[0], curio) : Curios.Tags(curio);
+        card.AddChild(UiKit.MakeLabel(tags, 16, color, HorizontalAlignment.Center).Place(0, 100 + nameH, CardW, 20));
         card.AddChild(UiKit.MakeLabel(curio.Blurb, 16, Palette.Muted, HorizontalAlignment.Center).Wrapped()
             .Place(14, 124 + nameH, CardW - 28, CardH - 84 - 124 - nameH));
-        // What it goes with: a curio you keep that shares a way of trading with it.
+        // What it goes with: a curio you keep that shares a way of trading with it; or a way of trading this shop opens.
         if (!owned && State.OwnedCurios.FirstOrDefault(c => c.Tags.Intersect(curio.Tags).Any()) is CurioDef kin)
-            card.AddChild(UiKit.MakeLabel($"Goes with your {kin.Name}", 16, Palette.Good, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
+        {
+            // As much of it as fits: the curio it goes with, or the way of trading they share.
+            const int perLetter = 9;
+            string with = $"Goes with your {kin.Name}";
+            if (with.Length * perLetter > CardW - 8) with = $"With your {kin.Name}";
+            if (with.Length * perLetter > CardW - 8) with = $"Goes with your {Curios.TagName(kin.Tags.Intersect(curio.Tags).First(), kin)}";
+            card.AddChild(UiKit.MakeLabel(with, 16, Palette.Good, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
+        }
+        else if (!owned && curio.MinTier == State.Tier && curio.MinTier > 1 && curio.Tags.Any(Curios.Main.Contains))
+            card.AddChild(UiKit.MakeLabel($"New at {ShopTiers.Name(State.Tier)}", 16, Palette.Magic, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
         if (owned)
         {
             card.AddChild(UiKit.MakeLabel("Yours", 24, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, CardH - 50, CardW, 30));
             return card;
         }
-        var buy = UiKit.MakeButton(State.CuriosFull ? "No room" : price == 0 ? "Take it, free" : $"Buy {price}g", price == 0 ? Palette.Good : Palette.Gold, 16,
-            () => Buy(curio)).Place(30, CardH - 56, CardW - 60, 44);
+        string warning = price == 0 ? null : State.ShortNote(price, curio: curio);
+        var buy = UiKit.MakeButton(State.CuriosFull ? "No room" : price == 0 ? "Take it, free" : $"Buy {price}g",
+            price == 0 ? Palette.Good : warning != null ? Palette.Bad : Palette.Gold, 16, () => AskBuy(curio)).Place(30, CardH - 56, CardW - 60, 44);
         buy.Disabled = State.CuriosFull || State.Gold < price;
-        if (State.CuriosFull) buy.TooltipText = "Sell a curio back to Nim first to make room.";
+        buy.TooltipText = State.CuriosFull ? "Sell a curio back to Nim first to make room."
+            : $"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse this morning." +
+              (warning != null ? $" {warning}" : "");
         card.AddChild(buy);
         return card;
     }
 
-    static Color RarityColor(CurioRarity rarity) => rarity switch
+    /// <summary>Buys it, or first asks if it would leave you short (<see cref="GameState.ShortNote"/>).</summary>
+    public void AskBuy(CurioDef curio)
     {
-        CurioRarity.Rare => Palette.Of(Rarity.Legendary),
-        CurioRarity.Uncommon => Palette.Of(Rarity.Rare),
-        _ => Palette.Of(Rarity.Uncommon),
-    };
+        if (_confirm != null) return;
+        int price = State.CuriosPrice(curio);
+        string warning = price == 0 ? null : State.ShortNote(price, curio: curio);
+        if (warning == null)
+        {
+            Buy(curio);
+            return;
+        }
+        _nim.Say("Bit of a stretch, that. Sure?");
+        _confirm = Add(UiKit.MakeConfirm("ARE YOU SURE?", warning, Palette.Bad, "Buy anyway", () =>
+        {
+            CloseConfirm();
+            Buy(curio);
+        }, "Not now", CloseConfirm));
+        Game.Moment("22_short", 0.4);
+    }
+
+    /// <summary>"Not now": closes the warning without buying (the bot uses this).</summary>
+    public void CloseConfirm()
+    {
+        _confirm?.QueueFree();
+        _confirm = null;
+    }
 
     public bool Buy(CurioDef curio)
     {

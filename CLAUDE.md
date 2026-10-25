@@ -19,36 +19,43 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 2. Gameplay/balance changes: `godot --headless --path . -- --sim` and compare the report before and after. Its last
    section is the lesson test: every seller's lesson must complete when played the careful way; the one before it,
    "Bram's kin", plays each character with no talents and with all of them at challenge levels 0 to 8.
-   `-- --sim=quick` (three minutes) prints the main table, the careful collector week by week, the career targets
-   (careful with no talents and with all, learners, both without Heartsongs) and, for the careful player and a first
-   run, the dues week by week and profit per customer at each shop, for tuning the economy.
+   `-- --sim=quick` (three minutes) prints the main table, the careful collector week by week, the margins by power
+   index, the career targets (careful with no talents and with all, learners, both without Heartsongs, and the careful
+   player with no curios) and, for the careful player and a first run, the dues week by week and profit per customer
+   at each shop, for tuning the economy.
    `-- --sim=songs` runs only the Heartsongs section (how often, each one on display from day 1 against curios, and the
    careful player with and without Heartsongs) for tuning them quickly; `-- --sim=sellers` only the per-seller table and
    the lesson test (ten seconds), for a seller's rule; `-- --sim=seller --who=KEY` plays one seller's visits and prints
-   each chest, clue, slip and deal, for debugging a rule. `-- --sim=builds [--n=100]` (eight minutes) is the curio
-   report: each curio alone from day 1 (takings as a geometric mean, and clear rate, against the careful collector with
-   no curios), each way of trading's best three and a careful player buying for it (`Style.Focus`), the designed pairs
-   against their parts, and a blind buyer with each build (must still be foreclosed). `-- --sim=experience` plays 30
+   each chest, clue, slip and deal, for debugging a rule. `-- --sim=builds [--n=100]` (ten minutes) is the curio
+   report: each curio alone, given when Nim could first have brought it (`Style.Arrives`; takings as a geometric mean,
+   and clear rate, against the careful collector with no curios), each way of trading's best three the same way and a
+   careful player buying for it (`Style.Focus`), the sight-unseen build a piece at a time (`Care.Unseen`), the designed
+   pairs against their parts, and a blind buyer with each other build. `-- --sim=curio --who=a,b` measures a few curios
+   quickly; `-- --sim=focus --who=TAG` (or `any`, or `--trace` for Nim's visits) shows what a builder ends up keeping;
+   `-- --sim=index` prints the power index, typical asks and working purse by shop, and each curio's share of the
+   index; `-- --sim=curiolist` prints the curio table for `docs/design.md`. `-- --sim=experience` plays 30
    learners through their first three runs (tips on, profile carried over) and reports a human's minutes, what's new
    and how much at once (load), peaks, choices and stale stretches, day by day, with what to change.
    `-- --sim=trace --seed=N` prints one careful collector's run day by day (purse, customers, spending, upgrades,
    curios, the Guild) for tuning the economy's pace.
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.
    Bot flags: `--seed=N --quit-at-end --days=N --no-tutorial --start-tier=N --gold=N --start-week=N --character=KEY
-   --challenge=N --talents=all --heartsongs=P --songs=all --event=KEY --curios=a,b,c` (`--curios` owns those from the
-   start, to see a build's screens; `--event` makes every day that event, to check
+   --challenge=N --talents=all --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm` (`--curios` owns those from the
+   start, to see a build's screens; `--gm` turns GM mode on, for its panel beside the pause menu; `--event` makes every
+   day that event, to check
    its screens; `--quit-at-end` quits after the first opening: use `--days`
    for longer runs; `--heartsongs=0.3` puts a Heartsong in that share of chests, `--songs=all` plays as if all nine were
    known, so `--vault-demo --songs=all` shows the other ending). `--start-tier`
    jumps to a shop tier with the tools a player would own by then (use it to check later tiers' screens);
    `--start-week` fast-forwards a run with the sim's careful collector (curios, commissions, exhibition and all; `--gold`
-   then sets the purse, e.g. 0 to see a short night and foreclosure). The bot plays scenes, Nim, the Guild's night and
-   deliveries, and quits when a run ends. With tips
+   then sets the purse, e.g. 0 to see a short night and foreclosure; `--days` counts from day 1, so add the weeks
+   skipped). The bot plays scenes, Nim, the Guild's night and deliveries, opens the short-of-chests warning once (and
+   says "Not now"), and quits when a run ends. With tips
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine.
    `--shell-demo` walks the title screen, the character screen and talents (with a made-up profile), a new game (Hesk),
-   the pause menu and the settings.
+   the pause menu and the settings (with `--gm`, the GM panel too: gold, the journal unlocked, a skip refused mid-scene).
    Keep screenshot folders named `shots*` (git- and export-ignored).
 4. Shaking or physics changes: `godot --headless --path . -- --shake-test` should hear everything the rules say is
    audible at each strength (and with the magnet, the lodestone in game), with no leaks.
@@ -72,8 +79,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   No mechanic is about whether a seller is lying: none of them do. Any new way to judge a chest must follow a rule
   people know from real life, and should be a deduction (subtract what you heard from a count or a weight, read a sign).
   The slip values things as good as the chest's colour promises (`Categories.Nominal`); sellers price by the average
-  (`Categories.Expected`); `Strategy` buys when the odds bar is on its side (`Appraisal.LikelyWorth`), like a player
-  would. Layers of deduction (false bottoms, counting, sound-alikes like sand and demon gold) arrive one shop at a
+  (`Categories.Expected`), times the shop's power index (`GameState.PriceFactor`, below); `Strategy` buys when the odds
+  bar is on its side (`Appraisal.LikelyWorth`), like a player would. Layers of deduction (false bottoms, counting, sound-alikes like sand and demon gold) arrive one shop at a
   time, each taught by the seller it belongs to. Rules apply every time or not at all: a hidden roll that makes a rule
   work only sometimes reads as a bug, and a rule people can't reason about from real life (v7's cloth padding) goes. Enchantment (`Item.Magic`) is something any
   thing can be: x2 value and exhibition, same quality, colour and sprite.
@@ -101,37 +108,56 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   from day 1; none shows what a chest is worth). Luck (`Chest.Improve`) never touches one.
   The profile's songbook (`Profile.Songs`, merged into `GameState.Songbook`) changes the Crown Chest's ending with all
   nine (`Story.VaultEpilogue`). Iterate `Categories.Kinds` (not `All`) where the six ordinary kinds are meant.
-- Curios are the run's build (`Curios.cs`, `Build.cs`, v20): 60 of them, each bending one rule, each tagged with the
-  ways of trading it rewards (`CurioTag`: luck, reading, bargains, crowds, display, a trade, hollows, arcana, rough
-  hands, fakes, coffers, patrons, Heartsongs); curios that share a tag should be worth more together (`--sim=builds`
-  measures pairs). The named rule: what a curio, synergy or restorer adds to a chest it adds to what the slip you
-  bought it on **named** (`GameState.Name`, `Item.Named`: counted right, no kind over-marked), so builds amplify
-  judgment, never pay for buying blind, and a misread forfeits them; the shop's trades still reach everything and are
-  priced in. The slip values things through the shop (`Appraisal.Model`, `ISlipModel`: `GameState.Odds` with the
-  build's luck, `GameState.Value` with what naming adds), so the odds bar is honest about a build. Luck runs in one
-  order (`GameState.Rules`, `Turn`) both as a roll at purchase and as a transform of the odds. Nim asks a share of the
-  purse he found you with (`Curios.Share`, `GameState.PeddlerPurse`), brings more of what goes with what you keep
-  (`Curios.Stock`), and his stock grows across runs (`CurioUnlock`, `Profile.Opens`, `GameState.CuriosOpen`): a new
-  curio needs its tags, its unlock, a `Strategy.CurioWorth` from the builds report, its drawing in `CURIOS`
-  (`tools/custom_art.py`), and its effect wherever the rule lives (`Build.cs` for luck, value and the counters). Never
-  let a curio tell you what a chest holds.
+- The shop's power index (`GameState.PowerIndex`, `Build.cs`, v21) is the economy's one model: what an ordinary thing a
+  seller brings fetches here against its plain worth, averaged over the shop's kinds (`Market.ValueShares`) at its
+  typical colour (`ShopTiers.Typical`: common to purple). In it, in full: the buyers' trades and the Dragon's Egg, an
+  active synergy's sale bonus, the trades' curios and the gallery lamps; luck (restorers, the Lucky Shop, luck curios)
+  at half (`LuckPricedIn`), a day's or a week's first chest weighted by how often. Out: what no seller can price
+  (enchantment, false bottoms, wards, Heartsongs in a chest, the shooting star), fees and bonuses for a perfect read,
+  price cuts, and today's event. Every ask is multiplied by it (`PriceFactor`, with the sharp sellers, the Lullaby Box,
+  the estate sale, the horn and the crescent; the seller's markup, the dice and the colour stay their own), so ordinary
+  growth makes the numbers bigger and leaves the careful player's margin flat (the sim's margins report: check it holds
+  when anything is added to the index or left out of it), and a build's edge is what isn't priced. With every upgrade
+  it's about 2.7 at the Emporium; the last due (45,000g) is set above what that earns on a careful margin, so carrying
+  it takes a build. Bram's working purse (`GameState.WorkingPurse`: two typical chests, `Market.TypicalAsk`, at
+  `PriceFactor`) is the day-end advice, what `Strategy.Reserve` keeps, and the line a purchase warns before crossing:
+  `ReserveIf`/`ShortNote` work out the purse after the purchase (its effect on the index; the bigger shop for a move),
+  and DayEndPhase and PeddlerPhase show a red price and a confirmation. Route anything that changes prices through
+  `PriceFactor` and anything that changes what ordinary things fetch through the index, deciding whether a seller could
+  know of it.
+- Curios are the run's build (`Curios.cs`, `Build.cs`): 78 of them, each bending one rule, each tagged with the ways of
+  trading it rewards (`CurioTag`); six are the main builds, each a different way to play (`Curios.Main`: enchantment,
+  sight unseen, haggling, the perfect read, false bottoms, wards), each with a way in, a multiplier, an engine and a
+  legendary capstone. Rarities (`CurioRarity`: common, uncommon, rare, legendary) are rolled per card by week
+  (`Curios.Rates`: rares from week 2, legendaries from week 3) and gated by shop (`RarityTier`); a legendary opens for good
+  by a feat across runs (`Feat`, `Curios.Feats`, `Profile.Feats`, banked in `Profile.Bank`). Price: a fixed sum by
+  rarity plus a share of the purse Nim found you with (`Curios.Price`, `GameState.PeddlerPurse`). Nim builds with you
+  (`Curios.Stock`): curios sharing a tag four times as likely, always one for the way of trading of the curio you got
+  last (`Leaning`; two once you keep two of it, `Building`), one that opens at a grander shop on his first visit there
+  (`PeddlerTier`), legendaries only for a way of trading you're building. There's no named rule since v21: a curio
+  reaches everything in a chest, and the power index keeps the balance; wards still need naming (that's their puzzle).
+  A sight-unseen chest is one bought without a shake, a drop or the lodestone (`Visit.Handled`, set by
+  `CounterPhase.Handled` and the sim's `Deal`; `Purchase.SightUnseen`). Each curio is held to its rarity's budget as Nim
+  would bring it (the builds report), and a way of trading's curios should multiply each other. The slip values things
+  through the shop (`Appraisal.Model`, `ISlipModel`), so the odds bar is honest about a build. Luck runs in one order
+  (`GameState.Rules`, `Turn`) both as a roll at purchase and as a transform of the odds. A new curio needs its tags,
+  rarity and unlock, a `Strategy.CurioWorth` (about a fifth of what it adds as Nim brings it), its drawing in `CURIOS`
+  (`tools/custom_art.py`), its effect wherever the rule lives (`Build.cs` for luck, value, prices and the counters), and
+  a decision about the index. Never let a curio tell you what a chest holds.
 - Synergies (`Synergies.cs`) come from what's been acquired (six of a kind at a quality per level) or achieved (perfect
-  reads, surprises named, hidden things found, bargains, enchanted things); only active ones (one slot, more with
-  upgrades) do anything, chosen at the end of a day. Each is a real power: its effect and 20% a level on what you name
-  of its kind (`Synergies.SaleBonus`, through `GameState.NamedBonus`).
+  reads, surprises, hidden things found, bargains, enchanted things); only active ones (one slot, more with upgrades)
+  do anything, chosen at the end of a day. Each is a real power: its effect and 20% a level on what its kind sells for
+  (`Synergies.SaleBonus`, priced into the power index).
 - The economy grows fast and the Guild's dues grow faster (v18: the old tight constraints made upgrades feel optional).
   Qualities are worth 1/3/10/30/100 times a common (`Categories.QualityMultiplier`); each move inward multiplies what a
   customer is worth several times over (the sim's "profit per customer at each shop"); buyers' trades (`Upgrade.Sales`:
-  scales, auction block, royal warrant) multiply what everything sells for, and sellers ask that much more of a shop known
-  to sell high (`GameState.Buyers` in `Boosts.Dearer`), so a trade multiplies your edge and never makes buying blind pay;
-  flat sums (curios' fees, door money) grow with `ShopTiers.Scale`. Restorers (`Upgrade.Luck`: the bench, the workshop,
-  the master) make what you name likelier to come out a step better, and sellers ask about half of that
-  (`GameState.PriceLevel`): all of it priced in made the odds-bar player buy less, none made blind buying pay at the
-  Emporium. The careful player saves for the next move before anything else (`Strategy.Saving`), except curios, which
-  are priced at a share of the purse. The Bookkeeping Engine (`Upgrades.Engine`) is the Guild's: offered once
-  `CanPayOff`, for exactly `DebtLeft` (`GameState.Cost`), it marks every chest's real contents on the slip as it comes
-  in (`Appraisal.Recorded`, `CounterPhase.Record`), so a won run can be finished fast; the sim's careful player pays off
-  instead.
+  scales, auction block, royal warrant) multiply what everything sells for, and restorers (`Upgrade.Luck`: the bench,
+  the workshop, the master) make everything likelier to come out a step better; both go into the power index. Flat
+  sums (door money, a catalogue's fee) grow with `ShopTiers.Scale`. The careful player saves for the next move before
+  anything else (`Strategy.Saving`), except curios. The Bookkeeping Engine (`Upgrades.Engine`) is the Guild's: offered
+  once `CanPayOff`, for exactly `DebtLeft` (`GameState.Cost`), it marks every chest's real contents on the slip as it
+  comes in (`Appraisal.Recorded`, `CounterPhase.Record`), so a won run can be finished fast; the sim's careful player
+  pays off instead.
 - Warded things (`Chest.Warded`, `SellerDef.Wards`, `Market.WardOne`): one thing a chest's last owner warded never
   sounds, weighs nothing, isn't counted by a ticket or a bell, and is never priced; it comes out on opening only if the
   slip named it (`Chest.Names`: one more of its kind marked than the chest holds, no kind over-marked, no false false
@@ -141,27 +167,29 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   and the Sleepers' Moon's dreams and Wardens' Day's riddles for everyone. `Strategy.WardedKind` is the careful
   player's solution: each is a deduction (a kind named that you can't hear), never a guess. A new puzzle seller needs
   its clue there, a `Visit.WardHint` line, a lesson and a portrait.
-- The run (`Run.cs`, a partial of `GameState`): three-day weeks (v20: five made runs of three to five hours); the
-  Gilded Guild's tithe every third evening (`Guild.Due`, eight weeks then endless x2; Vane introduces it on the second
-  evening, `GameState.IntroDay`); pawning, Bram's word once a run, foreclosure. Curios from Nim weekly (his first visit
-  the first week's last morning); commissions (`Commissions.cs`) pay for delivering finds; no event in the first week,
-  one a week in weeks 2-3, two from week 4 (`Events.PerWeek`), planned a week ahead with Nim's day (`Events.Plan`,
-  `GameState.Plan`/`NextPlan`) for the ledger's calendar (`LedgerView.BuildCalendar`); the story's scenes and the shards of the Aldric Key that open the Crown Chest
+- The run (`Run.cs`, a partial of `GameState`): five weeks of five days (v21; 0.20 had eight of three); every day has a
+  role (`DayRole`, `WeekPlan.Role`), planned a week ahead (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the ledger's
+  calendar (`LedgerView.BuildCalendar`): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 300, 4,000 and
+  45,000g, then endless x2; Vane introduces it on the second evening, `GameState.IntroDay`); a story week's first day
+  is the story's (`Story.TellsOn`: weeks 1, 2 and 4, and the week after the debt; `GameState.StoryToday`); Nim comes on
+  two days that aren't next to each other (once on a story week; the third day in the first; `GameState.PeddlerToday`);
+  and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
+  foreclosure; commissions (`Commissions.cs`) pay for delivering finds; the story's scenes and the shards of the Aldric Key that open the Crown Chest
   (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
-  judgment and talents each push that later; only the two together clear the debt more often than not (v20: the careful
-  player buying curios as they come, no talents, about four runs in ten, with every talent about eight in ten; a first
-  run about one in twenty, nearly always on a Heartsong); careers first clear around the seventh run, open level 4
-  around the sixteenth and level 6 in the twenties, and level 8 stays a wall. A run's length is part of the
+  judgment and talents each push that later; only the two together clear the debt more often than not (v21: the careful
+  player buying curios as they come, no talents, about four runs in ten, with every talent about eight in ten; the same
+  player with no curios one in seven, mostly on a Heartsong's luck; a first run about one in twenty); careers first
+  clear around the seventh run, open level 4 around the sixteenth and level 6 in the twenties, and level 8 stays a wall. A run's length is part of the
   balance: `--sim=experience` should keep a first run under two hours and no day over its load (6). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
-  are foreclosed within a few weeks, and no early week sends careful players to Bram's word. Anything added to the run goes in `SaveData` too; the profile across runs is
+  are foreclosed within a few weeks, and no early week sends careful players to Bram's word (the fourth of five does
+  for about a fifth of them: the ones still at Thornwick). Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts
-  nearly broke. Bram's working purse (`ShopTiers.Working`) is both the day-end advice (orange prices) and what
+  nearly broke. Bram's working purse (`GameState.WorkingPurse`) is the day-end advice, the purchase warning and what
   `Strategy.Reserve` keeps, so the advice is what the sim's careful player does: tune them together. The whole debt
   can be paid off early (`GameState.DebtLeft`, `PayOff`) from the day end or the Guild's night; the sim's careful
-  player does, and reports the week each run cleared (a strong run takes off and clears in weeks 6-7; week 8 is the wall
-  for the rest). Surprises (`Categories.Odds`, about one thing in eight a step better; the restorers and luck curios take
+  player does, and reports the week each run cleared (a strong run clears in week 4; week 5 is the wall for the rest). Surprises (`Categories.Odds`, about one thing in eight a step better; the restorers and luck curios take
   a careful player to one in four) are worth about half of what the chests hold, with a pity counter
   (`GameState.DrySpell`); the sim reports their share of income.
 - Across runs (`Meta.cs` for the definitions and the score, `Kin.cs` for what they do to a run): four of Bram's kin
@@ -169,7 +197,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   shake or drop, a scale; Rosa: everybody haggles, walkouts stay away a week; Isolde: a shelf and door money from day
   one, no pawning her collection); eight cumulative challenge levels (`Challenges`, opened per character by clearing
   at the level below, a quarter more renown each; order them by what each term does alone, the sim's `Trial`); and
-  13 talents (`Talents`) bought with renown (`Score` times the level's multiplier, banked in `Main.EndRun` or when a
+  12 talents (`Talents`) bought with renown (`Score` times the level's multiplier, banked in `Main.EndRun` or when a
   saved run is abandoned). Talents and characters add no share to sale prices and take none off dues (the shop's growth
   is upgrades', synergies' and Heartsongs'); check the "Bram's kin" table that a full tree doesn't move the median clear
   day much. Bram's lessons are
@@ -177,14 +205,21 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `GameState.MindsDrop`/`MindsMagnet`/`MindsHardShake`/`Impatient` and upgrade prices through `GameState.Cost`, so the
   terms and talents apply everywhere. The profile (`Profile`) keeps renown, talents and each character's open levels.
 - The shop opens up a step at a time, moving inward (`ShopTiers.Name`: Bram's Stall, Thornwick Market, Crownhold, the
-  Royal Emporium; `GameState.UpgradesOpen` once it has earned `UpgradesAt`, `DisplayOpen` with Thornwick,
-  `SynergiesOpen` with Crownhold), each introduced by a Bram tip when it happens. Gate new
+  Royal Emporium; 4, 6, 6 and 5 customers a day, `ShopTiers.Customers`; `GameState.UpgradesOpen` once it has earned
+  `UpgradesAt`, `DisplayOpen` with Thornwick, `SynergiesOpen` with Crownhold), each introduced by a Bram tip when it
+  happens. Gate new
   systems the same way, in Core, so the sim and the bot follow them.
 - Each shop tier has its own picture (`assets/backgrounds/shop{tier}.png`, drawn by `build_shops` in
   `tools/import_art.py`, shown with `UiKit.MakeShop`); keep the counter top at y 476 and the shelf at y 196.
+- The ledger's journal is kept across runs (v21): regulars met, finds (and enchanted ones) and curios seen are in the
+  profile (`Profile.Met`, `Found`, `FoundEnchanted`, `CuriosSeen`) and merged into a run's `GameState.Known` by
+  `GameState.Remember` at the start and on continuing; the run's own `Found` still scores and pays a catalogue. The
+  ledger has a Curios page (`LedgerView.BuildCurios`). GM mode (`Settings.Gm`, `--gm`) puts a panel beside the pause
+  menu: +99,999 gold (`Main.GmGold`), skip the day (`GameState.SkipRestOfDay`), unlock the journal (`KnowAll` on the run
+  and the profile).
 - The game opens on `TitlePhase`; `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
   for the bot or debugging flags) and Esc opens `PauseMenu`. A day: `Main.StartDay` (the week's scene, Nim), the
-  counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening, `DuesPhase` on the third). `Settings` (user://settings.cfg) scales screen shake and
+  counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening, `DuesPhase` on the fifth). `Settings` (user://settings.cfg) scales screen shake and
   flashes: route new screen effects through `Main.Shake`/`Flash`. Anything added to `GameState` that should survive
   a day boundary goes in `SaveData` too.
 - Every seller has one way of judging a chest (`Judgment`: listening, counting rattles, weight, colour, a dream, a

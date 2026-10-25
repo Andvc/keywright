@@ -23,16 +23,16 @@ public sealed record Upgrade(string Key, string Name, string Blurb, int Cost, in
 /// <summary>
 /// What you can spend your earnings on. Moves (renovations) bring richer customers and new things to learn; tools each answer
 /// one question your ears can't; cabinets show off what you keep, which draws more and better customers; a buyers' trade
-/// (scales, an auction block, a royal warrant) puts up what everything sells for, and a restorer's bench makes what you
-/// name likelier to come out better than its chest. Each is a real step up: the Guild's dues climb fast enough to need
-/// them. Sellers hear about the trades, and ask more of a shop that has them (<see cref="GameState.Buyers"/>); a
-/// restorer works from your slip, which no seller sees.
+/// (scales, an auction block, a royal warrant) puts up what everything sells for, and a restorer's bench makes everything
+/// you buy likelier to come out better than its chest. Each is a real step up: the Guild's dues climb fast enough to need
+/// them. Sellers hear about the trades and the restorers, and ask more of a shop that has them (the shop's power index,
+/// <see cref="GameState.PowerIndex"/>), so they make the numbers bigger, not a bad buy good.
 /// </summary>
 public static class Upgrades
 {
     public static readonly Upgrade[] All =
     {
-        new("shop2", "Move to Thornwick", "A shop at Thornwick Market: 5 customers a day, better chests, locks, and two new sounds: potions and spells.",
+        new("shop2", "Move to Thornwick", "A shop at Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells.",
             50, 1, "shop", SetsTier: 2),
 
         new("sign", "Painted Sign", "One more customer every day.", 60, 2, "sign", Customers: 1),
@@ -40,7 +40,7 @@ public static class Upgrades
         new("cabinet1", "Oak Cabinet", "Room to display one more thing. Displays draw customers.", 80, 2, "cabinet", Slots: 1),
         new("picks", "Fine Lockpicks", "A wider sweet spot when you pick a lock.", 80, 2, "picks"),
         new("cabinet2", "Oak Dresser", "Room to display one more thing.", 160, 2, "cabinet", Slots: 1, Requires: "cabinet1"),
-        new("bench", "Restorer's Bench", "What you name gets cleaned and mended: each thing is 5% likelier to come out a step better than its chest.",
+        new("bench", "Restorer's Bench", "Everything you buy gets cleaned and mended: each thing is 5% likelier to come out a step better than its chest.",
             200, 2, "bench", Luck: 0.05f),
         new("shop3", "Move to Crownhold", "A shop in the capital: richer customers, archmages with enchanted things, a dwarf, and gems.",
             160, 2, "shop", SetsTier: 3),
@@ -52,7 +52,7 @@ public static class Upgrades
         new("charter", "Crownhold Charter", "Two synergies at once.", 600, 3, "charter", SynergySlots: 1),
         new("case", "Curio Case", "Room for one more curio.", 500, 3, "case", CurioSlots: 1),
         new("cabinet4", "Glass Case", "Room to display one more thing.", 700, 3, "cabinet", Slots: 1, Requires: "cabinet3"),
-        new("workshop", "Restorer's Workshop", "A workshop and a journeyman: what you name is another 6% likelier to come out a step better.", 1500, 3, "bench",
+        new("workshop", "Restorer's Workshop", "A workshop and a journeyman: everything is another 6% likelier to come out a step better.", 1500, 3, "bench",
             Requires: "bench", Luck: 0.06f),
         new("shop4", "The Royal Emporium", "By the Gilded Gate: 5 customers a day, the court, demons, and a fence for the Maw.", 1200, 3, "shop",
             SetsTier: 4),
@@ -66,7 +66,7 @@ public static class Upgrades
         new("night", "Night Market", "Open after dark: one more customer every day.", 6000, 4, "night", Customers: 1),
         new("warrant", "Royal Warrant", "By appointment to the Crown: everything sells for half as much again.", 12000, 4, "warrant", Sales: 0.5f),
         new("patrons", "Patrons' Book", "The regulars post two more commissions a week.", 8000, 4, "patrons", Commissions: 2),
-        new("master", "Master Restorer", "A master of the craft, from the palace workshops: what you name is another 8% likelier to come out a step better.",
+        new("master", "Master Restorer", "A master of the craft, from the palace workshops: everything is another 8% likelier to come out a step better.",
             15000, 4, "bench", Requires: "workshop", Luck: 0.08f),
         new("velvet", "Velvet Case", "Room for one more curio.", 10000, 4, "case", CurioSlots: 1, Requires: "case"),
 

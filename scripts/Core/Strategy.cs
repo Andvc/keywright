@@ -24,7 +24,10 @@ public static class Strategy
         bool hard = (state?.CanShakeHardAt(visit.Seller) ?? !visit.Seller.Packhorse) && !(state?.MindsHardShake(visit.Seller) ?? visit.Seller.HatesHardShake);
         // Through an ear trumpet nothing is drowned out or muffled: a hard shake hears it all.
         if (visit.Chest.Unmasked && hard) return new[] { Shake.Hard };
-        if (visit.Seller.ShakeLimit > 0) return new[] { DelicateShare(visit) > 0.5f ? Shake.Gentle : hard ? Shake.Hard : Shake.Firm };
+        // A rotten chest stands one strength (two, with a pocket watch's patience).
+        float limit = state?.ShakeLimit(visit.Seller) ?? visit.Seller.ShakeLimit;
+        if (limit > 0 && limit < 2 * visit.Seller.ShakeLimit) return new[] { DelicateShare(visit) > 0.5f ? Shake.Gentle : hard ? Shake.Hard : Shake.Firm };
+        if (limit > 0) return hard ? new[] { Shake.Gentle, Shake.Hard } : new[] { Shake.Gentle, Shake.Firm };
         if (visit.Chest.Packed && !visit.Chest.Unmasked) return hard ? new[] { Shake.Firm, Shake.Hard } : new[] { Shake.Firm };
         if (!hard) return new[] { Shake.Gentle, Shake.Firm };
         return Rushed(visit, state) || visit.Seller.ShakeFee > 0 ? new[] { Shake.Gentle, Shake.Hard } : Every;
@@ -234,6 +237,8 @@ public static class Strategy
     /// <param name="floor">How much further than usual sellers come down for this shop (a silver tongue, a Haggler's name: <see cref="Boosts.Floor"/>).</param>
     public static int FirstOffer(Visit visit, int worth, float floor = 1) => visit.Trade switch
     {
+        // Nobody walks out on a golden tongue: a coin, and they come down to the least they'd take.
+        _ when visit.Unruffled => 1,
         // A haggler who'll hear you out (a merchant's signet) can be tried with a cheeky offer first.
         Trade.Haggle when visit.HearsOut && visit.OffersMade == 0 => Money.Round(Math.Min(visit.Ask * 0.3f, worth * 0.8f) * floor),
         Trade.Haggle => Money.Round(Math.Min(visit.Ask * 0.55f, worth * 0.8f) * floor),
@@ -263,11 +268,11 @@ public static class Strategy
         bool drowned = !Recorded(visit, state) && MaybeDrowned(visit, hearing);
         foreach (var kind in Categories.UpTo(slip.Tier).Where(k => slip.Count(k.Category) == 0))
             if ((!CouldStir(visit, hearing, kind.Category) && !weighed) || (kind.Delicate && drowned))
-                worth += likely[(int)kind.Category] / total * 2.5f * (state?.Unnamed(kind.Category, slip.Chest) ?? Categories.Expected(kind.Category, slip.Chest)) * 0.8f;
+                worth += likely[(int)kind.Category] / total * 2.5f * (state?.Expected(kind.Category, slip.Chest) ?? Categories.Expected(kind.Category, slip.Chest)) * 0.8f;
         // Pell's ticket settles a false bottom once everything has been heard; so does a scale.
         bool counted = Counted(visit, state) && HeardAll(visit, hearing, slip.Tier);
         if (!hearing.Dropped && !slip.Hidden && slip.Tier >= 2 && !weighed && !counted)
-            worth += seller.HiddenChance * slip.HiddenValue;
+            worth += (state?.HiddenChance(seller) ?? seller.HiddenChance) * slip.HiddenValue;
         // A fence's mark sells a fake for what the real thing would fetch: what was caught out is worth having after all.
         if (state?.HasCurio("mark") ?? false) worth += hearing.Spotted().Sum(k => Categories.Expected(k, slip.Chest) * state.SaleMultiplier(k));
         worth *= 1 + seller.QualityBoost * 1.2f;
@@ -330,17 +335,23 @@ public static class Strategy
     }
 
     /// <summary>What a careful player's shop of each tier clears in a bad day's trading (about half a usual one).</summary>
-    static readonly int[] BadDay = { 0, 15, 40, 300, 5000 };
+    static readonly int[] BadDay = { 0, 20, 70, 500, 7000 };
 
     /// <summary>
-    /// Gold to keep back: enough to buy tomorrow's chests (Bram's advice, <see cref="ShopTiers.Working"/>), and whatever
-    /// of the next due a run of bad days before the Guild comes wouldn't cover (at the shop's tier after a renovation
-    /// being considered; the first day back is spent building up again, so it doesn't count).
+    /// Gold to keep back: the working purse (two of the shop's typical chests at what sellers ask here, Bram's advice and
+    /// the line the shop warns before crossing: <see cref="GameState.WorkingPurse"/>), as it would be after the upgrade
+    /// or curio being considered (at the bigger shop, for a move inward), and whatever of the next due a run of bad days
+    /// before the Guild comes wouldn't cover (the first day back is spent building up again, so it doesn't count).
     /// </summary>
-    public static int Reserve(GameState state, int tier = 0)
+    /// <remarks>
+    /// A curio is bought to earn: against it, only what usual days (twice a bad one) wouldn't cover is kept back for the
+    /// Guild, or no build would ever come together in the weeks the dues are steepest.
+    /// </remarks>
+    public static int Reserve(GameState state, Upgrade upgrade = null, CurioDef curio = null)
     {
-        tier = Math.Max(tier, state.Tier);
-        return ShopTiers.Working(tier) + Math.Max(0, state.NextDue - Math.Max(0, state.DaysToNextDue - 1) * BadDay[tier]);
+        int tier = Math.Max(upgrade?.SetsTier ?? 0, state.Tier);
+        int day = BadDay[tier] * (curio != null ? 2 : 1);
+        return state.ReserveIf(upgrade, curio) + Math.Max(0, state.NextDue - Math.Max(0, state.DaysToNextDue - 1) * day);
     }
 
     /// <summary>
@@ -349,10 +360,16 @@ public static class Strategy
     /// </summary>
     public static bool Affordable(GameState state, Upgrade upgrade)
     {
-        int reserve = Reserve(state, upgrade.SetsTier) + (upgrade.IsRenovation ? 0 : Saving(state)), cost = state.Cost(upgrade);
+        int reserve = Reserve(state, upgrade) + (upgrade.IsRenovation ? 0 : Saving(state)), cost = state.Cost(upgrade);
+        // A move inward, when the shop as it is couldn't make the next due before the Guild comes: the move is the way to
+        // pay it, so only the bigger shop's working purse is kept back.
+        if (upgrade.IsRenovation && !CouldStay(state)) reserve = state.ReserveIf(upgrade);
         if (!upgrade.IsRenovation && cost >= 1000) reserve += state.DueFor(state.Week + (state.PaidThisWeek ? 2 : 1));
         return state.CanBuy(upgrade) && state.Gold - cost >= reserve;
     }
+
+    /// <summary>Whether the shop as it is could make the next due before the Guild comes (a usual day being twice a bad one).</summary>
+    static bool CouldStay(GameState state) => state.Gold + state.DaysToNextDue * 2 * BadDay[state.Tier] >= state.NextDue;
 
     /// <summary>
     /// What a careful player puts by for the next move inward before spending on anything else: each move multiplies
@@ -361,24 +378,25 @@ public static class Strategy
     static int Saving(GameState state) => Upgrades.Available(state).FirstOrDefault(u => u.IsRenovation) is Upgrade next ? state.Cost(next) : 0;
 
     /// <summary>
-    /// About what each curio adds to a careful player's run on its own, in hundredths of what the run takes in (the
-    /// sim's builds report, `--sim=builds`): where to start. What it's worth to a particular shop is <see cref="CurioScore"/>.
+    /// About what each curio adds to a careful player's run on its own, a fifth of the hundredths it adds to what the run
+    /// takes in when Nim brings it (the sim's builds report, `--sim=builds`): where to start. What it's worth to a particular shop is <see cref="CurioScore"/>.
     /// </summary>
     public static readonly Dictionary<string, float> CurioWorth = new()
     {
-        ["coin"] = 13, ["shell"] = 4, ["foot"] = 8, ["wishbone"] = 16, ["horseshoe"] = 15, ["token"] = 8, ["clover"] = 30, ["star"] = 30,
-        ["trumpet"] = 2, ["crescent"] = 12, ["seal"] = 16, ["beads"] = 2, ["monocle"] = 2, ["fork"] = 20, ["ledger"] = 28,
-        ["signet"] = 2, ["tongue"] = 3, ["hourglass"] = 16, ["bell"] = 16, ["coffer"] = 12,
-        ["lantern"] = 14, ["queue"] = 18, ["horn"] = 12, ["guestbook"] = 14,
-        ["catalogue"] = 5, ["dome"] = 4, ["book"] = 12, ["rope"] = 5, ["lamps"] = 14,
-        ["gauntlet"] = 5, ["cap"] = 4, ["whetstone"] = 6, ["dummy"] = 6, ["scales"] = 17, ["still"] = 9, ["desk"] = 3, ["wheel"] = 15,
-        ["hook"] = 14, ["crate"] = 1, ["rod"] = 14, ["pillow"] = 17, ["wardkey"] = 24,
-        ["draught"] = 11, ["aether"] = 11, ["ring"] = 14,
-        ["oil"] = 4, ["knife"] = 1, ["gloves"] = 2,
-        ["loupe"] = 1, ["mark"] = 10,
-        ["purse"] = 1, ["ticket"] = 1, ["jar"] = 15, ["marker"] = 1, ["lockbox"] = 12,
-        ["letter"] = 11, ["ribbon"] = 8, ["errand"] = 3,
-        ["watch"] = 2, ["net"] = 18,
+        ["monocle"] = 2, ["draught"] = 8, ["aether"] = 5, ["chalk"] = 3, ["ring"] = 7, ["staff"] = 9,
+        ["sealed"] = 0, ["dip"] = 0, ["bond"] = 0, ["wholesale"] = 0, ["token"] = 4, ["blindfold"] = 0,
+        ["signet"] = 2, ["tongue"] = 4, ["knot"] = 13, ["hourglass"] = 12, ["bell"] = 11, ["coffer"] = 9, ["goldentongue"] = 9,
+        ["trumpet"] = 4, ["watch"] = 3, ["beads"] = 2, ["seal"] = 10, ["register"] = 10, ["crescent"] = 3, ["fork"] = 16, ["ledger"] = 20,
+        ["truthglass"] = 22,
+        ["crate"] = 3, ["hook"] = 14, ["rod"] = 16, ["log"] = 12, ["pass"] = 14, ["compass"] = 22,
+        ["wardlamp"] = 13, ["pillow"] = 7, ["wardtally"] = 4, ["wardkey"] = 14, ["aldricseal"] = 11,
+        ["shell"] = 7, ["coin"] = 3, ["foot"] = 12, ["wishbone"] = 3, ["horseshoe"] = 10, ["clover"] = 6, ["star"] = 18, ["spindle"] = 12,
+        ["lantern"] = 14, ["queue"] = 16, ["horn"] = 8, ["guestbook"] = 10,
+        ["catalogue"] = 6, ["dome"] = 2, ["book"] = 12, ["rope"] = 2, ["lamps"] = 4,
+        ["gauntlet"] = 4, ["cap"] = 4, ["whetstone"] = 4, ["dummy"] = 4, ["scales"] = 6, ["still"] = 4, ["desk"] = 2, ["wheel"] = 8,
+        ["oil"] = 2, ["knife"] = 1, ["gloves"] = 3, ["loupe"] = 1, ["mark"] = 2,
+        ["purse"] = 1, ["ticket"] = 1, ["marker"] = 1, ["jar"] = 12, ["lockbox"] = 4,
+        ["letter"] = 9, ["ribbon"] = 11, ["errand"] = 3, ["net"] = 7,
     };
 
     /// <summary>A cursed crescent holds everything to its chest's colour: luck is wasted beside it, and it on luck.</summary>
@@ -388,7 +406,7 @@ public static class Strategy
     /// What a careful player sees in a curio that shares a way of trading with one they keep: it's worth more together, by
     /// this share of its own worth for each (a weak curio doesn't become a strong one by having company).
     /// </summary>
-    const float Kindred = 0.3f;
+    const float Kindred = 0.5f;
 
     /// <summary>How much a careful player building around one way of trading (the sim's builds) wants curios for it.</summary>
     const float Focused = 12f;
@@ -408,8 +426,7 @@ public static class Strategy
             "book" => state.Exhibition >= 10 ? 1 : 0.2f,
             "rope" or "lamps" or "dome" => display ? 1 : 0.3f,
             "letter" or "ribbon" or "errand" => state.Week >= Patrons.FromWeek - 1 ? 1 : 0.5f,
-            "catalogue" => state.Week <= 3 ? 1 : 0.4f,
-            "watch" => state.Tier >= 4 ? 1 : 0.5f,
+            "catalogue" => state.Week <= 2 ? 1 : 0.4f,
             _ => 1,
         };
         if (curio.Kind is Category kind && Categories.Get(kind).Tier > state.Tier) score *= 0.3f;
@@ -419,7 +436,10 @@ public static class Strategy
         else if (curio.Has(CurioTag.Luck) && kept.Any(c => c.Key == "crescent")) score -= Cursed;
         // A trade's curio goes with the shop's name for that kind (a smith's, a tailor's...).
         if (curio.Kind is Category trade && state.ActiveSynergies.Any(s => Synergies.All.First(d => d.Key == s).Kinds.Contains(trade))) score *= 1 + Kindred;
-        if (focus is CurioTag f && curio.Has(f)) score += Focused;
+        // Building around one way of trading: its curios are wanted far more, and once Nim could bring them, anything
+        // else is a stopgap.
+        if (focus is CurioTag f && curio.Has(f)) score = score * 1.5f + Focused;
+        else if (focus is CurioTag g && Curios.All.Any(c => c.Has(g) && Curios.Reachable(state, c))) score *= 0.5f;
         return score;
     }
 
@@ -443,8 +463,9 @@ public static class Strategy
                 sell = worst;
                 price -= state.CurioValue(worst);
             }
-            // A curio is priced at a share of the purse, so it never waits on saving for the next move: only on the Guild.
-            if (state.Gold - price >= Reserve(state) || price == 0) return (curio, sell);
+            // A curio is priced mostly at a share of the purse, so it never waits on saving for the next move: only on
+            // the Guild and the working purse it would leave.
+            if (state.Gold - price >= Reserve(state, curio: curio) || price == 0) return (curio, sell);
         }
         return (null, null);
     }

@@ -2258,6 +2258,224 @@ def _curio_net():
     return c
 
 
+# 0.21's curios: the six builds' new pieces and their legendary capstones.
+
+def _curio_chalk():
+    """Enchanter's Chalk: a stick of chalk, and the glowing rune it's drawn."""
+    c = Canvas(S, S)
+    c.line([(3, 18), (8, 13), (12, 17), (17, 12), (21, 16)], "rune", 1)
+    c.dots([(5, 8), (19, 6), (12, 4)], "rune")
+    c.poly([(4, 21), (16, 9), (19, 12), (7, 24)], "pale")
+    c.poly([(16, 9), (18, 7), (21, 10), (19, 12)], "white")
+    c.glint(17, 9)
+    return c
+
+
+def _curio_staff():
+    """The Archmage's Staff: a gnarled staff, its crystal alight."""
+    c = Canvas(S, S)
+    c.line([(4, 23), (15, 10)], "wood", 2)
+    c.line([(14, 11), (12, 8)], "wood").line([(16, 9), (19, 9)], "wood")
+    c.ellipse(13, 1, 21, 9, "witch")
+    c.ellipse(15, 3, 19, 7, "starlight")
+    c.dots([(11, 3), (22, 2), (22, 11), (10, 12)], "spark")
+    c.glint(16, 4)
+    return c
+
+
+def _curio_sealed():
+    """Sealed Bid: a folded letter, sealed in red wax."""
+    c = Canvas(S, S)
+    c.rect(2, 6, 21, 19, "parchment")
+    c.line([(2, 6), (11, 13), (21, 6)], "line")
+    c.ellipse(8, 10, 15, 17, "red")
+    c.dots([(10, 13), (11, 12), (12, 13), (11, 14)], "line")
+    c.glint(9, 11)
+    return c
+
+
+def _curio_dip():
+    """Lucky Dip: a tied sack with stars spilling out of the neck."""
+    c = Canvas(S, S)
+    c.ellipse(3, 9, 20, 23, "tan")
+    c.poly([(8, 9), (15, 9), (17, 5), (6, 5)], "tan")
+    c.rect(7, 8, 16, 9, "string")
+    c.dots([(9, 2), (13, 1), (16, 3), (6, 3)], "spark")
+    c.dots([(9, 14), (14, 17), (11, 19)], "rag")
+    c.glint(6, 12)
+    return c
+
+
+def _curio_bond():
+    """Underwriter's Bond: a rolled bond under a copper seal and ribbon."""
+    c = Canvas(S, S)
+    c.rect(4, 3, 19, 18, "paper")
+    for y in (6, 9, 12):
+        c.line([(6, y), (17, y)], "ink")
+    c.ellipse(1, 1, 5, 20, "paper").ellipse(18, 1, 22, 20, "paper")
+    c.poly([(11, 16), (14, 16), (16, 23), (12, 20), (9, 23)], "ribbon")
+    c.ellipse(9, 13, 16, 19, "copper")
+    c.glint(11, 14)
+    return c
+
+
+def _curio_wholesale():
+    """Wholesaler's Tally: a tally stick, notched for every lot."""
+    c = Canvas(S, S)
+    c.poly([(2, 18), (18, 2), (22, 6), (6, 22)], "wood")
+    for i in range(6):
+        x, y = 6 + i * 2, 16 - i * 2
+        c.line([(x, y), (x + 2, y + 2)], "line")
+    c.glint(18, 4)
+    return c
+
+
+def _curio_blindfold():
+    """Fortune's Blindfold: a silk blindfold, its eyes stitched shut, and luck's stars over it."""
+    c = Canvas(S, S)
+    c.line([(0, 12), (3, 12)], "string").line([(20, 12), (23, 12)], "string")
+    c.ellipse(2, 8, 21, 17, "plum")
+    c.line([(5, 12), (7, 14), (9, 12)], "line").line([(14, 12), (16, 14), (18, 12)], "line")
+    c.dots([(5, 3), (11, 1), (17, 4), (8, 5), (14, 6)], "spark")
+    c.dot(11, 3, "gold")
+    return c
+
+
+def _curio_knot():
+    """Haggler's Knot: a Thornwick knot, tied tight."""
+    c = Canvas(S, S)
+    c.ellipse(5, 4, 18, 17, "straw")
+    c.ellipse(8, 7, 15, 14, "hole")
+    c.line([(6, 15), (2, 22)], "straw", 2).line([(17, 15), (21, 22)], "straw", 2)
+    c.line([(8, 10), (15, 10)], "straw", 1)
+    c.dots([(7, 6), (16, 6), (11, 4)], "rust")
+    return c
+
+
+def _curio_goldentongue():
+    """Golden Tongue: a gold medallion of a smiling mouth, on a chain."""
+    c = Canvas(S, S)
+    c.line([(4, 1), (11, 6), (18, 1)], "gold")
+    c.ellipse(3, 5, 20, 22, "gold")
+    c.poly([(6, 12), (11, 10), (17, 12), (11, 18)], "red")
+    c.line([(6, 12), (17, 12)], "line")
+    c.poly([(9, 14), (13, 14), (11, 17)], "blush")
+    c.glint(6, 8).glint(7, 7)
+    return c
+
+
+def _curio_register():
+    """Valuer's Register: the valuers' ledger, every perfect read ticked off."""
+    c = Canvas(S, S)
+    c.rect(3, 2, 20, 21, "bookblue").rect(3, 2, 5, 21, "leather")
+    c.rect(8, 5, 18, 18, "paper")
+    for y in (8, 11, 14):
+        c.dots([(9, y), (10, y + 1), (11, y)], "emerald")
+        c.line([(13, y), (17, y)], "ink")
+    c.poly([(16, 0), (18, 0), (18, 6), (17, 5), (16, 6)], "ribbon")
+    return c
+
+
+def _curio_truthglass():
+    """Truthglass: a lens that sees a thing for exactly what it is."""
+    c = Canvas(S, S)
+    c.line([(15, 15), (21, 21)], "wood", 2)
+    c.ellipse(2, 2, 17, 17, "gold")
+    c.ellipse(4, 4, 15, 15, "glass")
+    c.poly([(9, 6), (10, 9), (13, 10), (10, 11), (9, 14), (8, 11), (5, 10), (8, 9)], "starlight")
+    c.glint(6, 6).glint(7, 5)
+    return c
+
+
+def _curio_log():
+    """Smuggler's Log: a salt-stained notebook, tied shut with twine."""
+    c = Canvas(S, S)
+    c.rect(4, 3, 19, 21, "leather")
+    c.rect(6, 5, 17, 19, "brown")
+    c.line([(4, 12), (19, 12)], "string").line([(19, 12), (22, 16)], "string")
+    c.dots([(8, 7), (9, 8), (10, 7), (14, 16), (15, 17)], "sand")
+    c.dots([(11, 8), (12, 9), (13, 8), (12, 7)], "bone")
+    return c
+
+
+def _curio_pass():
+    """Black Market Pass: a black token with a silver keyhole, Thornwick's smugglers' sign."""
+    c = Canvas(S, S)
+    c.ellipse(2, 2, 21, 21, "coal")
+    c.ellipse(4, 4, 19, 19, "black")
+    c.ellipse(9, 6, 14, 11, "silver")
+    c.poly([(10, 10), (13, 10), (14, 17), (9, 17)], "silver")
+    c.dots([(11, 8), (12, 8), (11, 9), (12, 9), (11, 12), (12, 12), (11, 14), (12, 14)], "black")
+    c.glint(6, 6)
+    return c
+
+
+def _curio_compass():
+    """Smugglers' Compass: brass, and its needle points under the floor."""
+    c = Canvas(S, S)
+    c.ellipse(2, 2, 21, 21, "brass")
+    c.ellipse(4, 4, 19, 19, "parchment")
+    c.poly([(11, 5), (13, 11), (11, 12), (10, 11)], "red")
+    c.poly([(11, 12), (13, 11), (12, 18), (10, 11)], "iron")
+    c.dot(11, 11, "line")
+    c.dots([(11, 0), (11, 1)], "brass")
+    c.glint(6, 6)
+    return c
+
+
+def _curio_wardlamp():
+    """Warden's Lantern: an old Warden's lantern, burning with a ward's blue light."""
+    c = Canvas(S, S)
+    c.ellipse(8, 0, 15, 5, "iron").ellipse(10, 1, 13, 4, "hole")
+    c.rect(6, 5, 17, 7, "iron")
+    c.rect(6, 8, 17, 19, "glass")
+    c.ellipse(8, 9, 15, 18, "sapphire")
+    c.ellipse(10, 11, 13, 16, "starlight")
+    c.rect(5, 19, 18, 22, "iron")
+    c.line([(6, 8), (6, 19)], "iron").line([(17, 8), (17, 19)], "iron")
+    return c
+
+
+def _curio_wardtally():
+    """Wardbreaker's Tally: a slate, a broken ward's ring chalked on it, and the tally beside."""
+    c = Canvas(S, S)
+    c.rect(2, 3, 21, 20, "wood")
+    c.rect(4, 5, 19, 18, "coal")
+    c.ellipse(5, 7, 12, 14, "rune").ellipse(6, 8, 11, 13, "coal")
+    c.line([(7, 9), (10, 12)], "coal")
+    for x in (14, 16, 18):
+        c.line([(x, 8), (x, 15)], "pale")
+    c.line([(13, 14), (19, 9)], "pale")
+    return c
+
+
+def _curio_aldricseal():
+    """The Aldric Seal: King Aldric's own seal, the Key and the crown."""
+    c = Canvas(S, S)
+    c.ellipse(1, 1, 22, 22, "gold")
+    c.ellipse(3, 3, 20, 20, "oldgold")
+    c.poly([(6, 9), (8, 5), (11, 8), (14, 5), (17, 9)], "gold")
+    c.rect(6, 9, 17, 10, "gold")
+    c.ellipse(9, 12, 14, 17, "royal").ellipse(10, 13, 13, 16, "oldgold")
+    c.rect(11, 16, 12, 20, "royal")
+    c.glint(5, 5).glint(6, 4)
+    return c
+
+
+def _curio_spindle():
+    """Fate's Spindle: a fey spindle, spun full of golden thread."""
+    c = Canvas(S, S)
+    c.line([(11, 0), (11, 23)], "wood")
+    c.ellipse(5, 7, 18, 17, "gold")
+    for y in (9, 12, 15):
+        c.line([(6, y), (17, y - 1)], "oldgold")
+    c.ellipse(8, 19, 15, 23, "wood")
+    c.line([(18, 12), (22, 6), (20, 2)], "gold")
+    c.dots([(3, 4), (20, 18), (4, 19)], "spark")
+    c.glint(8, 9)
+    return c
+
+
 CURIOS = {
     "coin": _curio_coin, "shell": _curio_shell, "lantern": _curio_lantern, "catalogue": _curio_catalogue,
     "crate": _curio_crate, "oil": _curio_oil, "purse": _curio_purse, "ticket": _curio_ticket, "signet": _curio_signet,
@@ -2272,6 +2490,10 @@ CURIOS = {
     "dummy": _curio_dummy, "scales": _curio_scales, "still": _curio_still, "desk": _curio_desk, "wheel": _curio_wheel,
     "rod": _curio_rod, "pillow": _curio_pillow, "wardkey": _curio_wardkey, "aether": _curio_aether, "ring": _curio_ring,
     "mark": _curio_mark, "lockbox": _curio_lockbox, "ribbon": _curio_ribbon, "errand": _curio_errand, "net": _curio_net,
+    "chalk": _curio_chalk, "staff": _curio_staff, "sealed": _curio_sealed, "dip": _curio_dip, "bond": _curio_bond,
+    "wholesale": _curio_wholesale, "blindfold": _curio_blindfold, "knot": _curio_knot, "goldentongue": _curio_goldentongue,
+    "register": _curio_register, "truthglass": _curio_truthglass, "log": _curio_log, "pass": _curio_pass, "compass": _curio_compass,
+    "wardlamp": _curio_wardlamp, "wardtally": _curio_wardtally, "aldricseal": _curio_aldricseal, "spindle": _curio_spindle,
 }
 
 

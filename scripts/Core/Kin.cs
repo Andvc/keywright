@@ -55,7 +55,6 @@ public sealed partial class GameState
         state.Guided = guided;
         state.CuriosOpen = curios?.ToHashSet();
         state.Gold = StartGold(state);
-        if (state.Knows("ledger")) state.Met.UnionWith(Sellers.All.Select(s => s.Key));
         return state;
     }
 
@@ -121,6 +120,20 @@ public sealed partial class GameState
 
     public bool MindsHardShake(SellerDef seller) => seller.HatesHardShake && !KidGloves;
 
+    /// <summary>
+    /// How likely this seller's chest is to have a false bottom at this shop: their own habit, and what the shop's name
+    /// and curios add (always, with the smugglers' compass).
+    /// </summary>
+    public float HiddenChance(SellerDef seller)
+    {
+        if (Tier < 2) return 0;
+        var boosts = Boosts;
+        return boosts.AlwaysHidden ? 1 : Math.Min(1, (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor);
+    }
+
+    /// <summary>How many seconds of shaking a rotten chest stands (0: as long as you like): twice as long with a pocket watch.</summary>
+    public float ShakeLimit(SellerDef seller) => seller.ShakeLimit * (HasCurio("watch") ? Curios.WatchPatience : 1);
+
     /// <summary>A seller who won't wait all day (everyone, when the town's in a hurry).</summary>
     public bool Impatient(SellerDef seller) => Patience(seller) > 0;
 
@@ -132,7 +145,7 @@ public sealed partial class GameState
     {
         var seller = visit.Seller;
         var terms = new List<string>();
-        if (seller.ShakeLimit > 0) terms.Add($"Rotten: {seller.ShakeLimit:0} seconds of shaking, all told.");
+        if (seller.ShakeLimit > 0) terms.Add($"Rotten: {ShakeLimit(seller):0} seconds of shaking, all told.");
         if (visit.Chest.Packed) terms.Add("Packed in straw: everything stirs a strength later.");
         if (seller.Packhorse) terms.Add("On a skittish mare: no hard shake.");
         else if (EventIs("mourning") && CanShakeHard) terms.Add("A day of mourning: no hard shake.");
@@ -203,6 +216,7 @@ public sealed partial class GameState
         var shown = PeddlerStock.Select(c => c.Key).ToHashSet();
         PeddlerStock.Clear();
         PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day * 31 + 7)), this, PeddlerCount, shown));
+        CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
     }
 
     /// <summary>Whether Nim's keepsake (a talent) has been given: one curio, free, on his first visit.</summary>

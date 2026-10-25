@@ -27,7 +27,7 @@ public partial class Autoplay : Node
 
     const double ShakeSeconds = 1.6;
 
-    bool _ledgerShown, _collectionShown, _songsShown;
+    bool _ledgerShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown;
 
     static GameState State => Main.Instance.State;
 
@@ -100,6 +100,18 @@ public partial class Autoplay : Node
     async Task DrivePeddler(PeddlerPhase peddler)
     {
         await ReadTips(peddler.Mentor);
+        // Once a run, a look at the warning a curio that would leave you short gets (and "Not now").
+        if (!_shortShown && peddler.Stock.FirstOrDefault(c => State.CuriosPrice(c) > 0 && State.CuriosPrice(c) <= State.Gold && !State.CuriosFull &&
+                                                            State.ShortNote(State.CuriosPrice(c), curio: c) != null) is CurioDef dear)
+        {
+            _shortShown = true;
+            peddler.AskBuy(dear);
+            await Wait(1.5);
+            if (!IsInstanceValid(peddler)) return;
+            peddler.CloseConfirm();
+            await Wait(0.5);
+            if (!IsInstanceValid(peddler)) return;
+        }
         for (int i = 0; i < 2 && IsInstanceValid(peddler); i++)
         {
             var (curio, sell) = Strategy.ChooseCurio(State, peddler.Stock.ToList());
@@ -193,7 +205,7 @@ public partial class Autoplay : Node
         // Every strength, but only gently and hard for an impatient seller, and never hard for one who'd mind.
         bool hurried = State.Impatient(visit.Seller) && !State.HasCurio("watch");
         // A rotten chest: one short shake, well inside what it stands.
-        double seconds = visit.Seller.ShakeLimit > 0 ? Math.Min(ShakeSeconds, visit.Seller.ShakeLimit - 0.6) : hurried ? 1.2 : ShakeSeconds;
+        double seconds = State.ShakeLimit(visit.Seller) > 0 ? Math.Min(ShakeSeconds, State.ShakeLimit(visit.Seller) / Strategy.Levels(visit, State).Length - 0.6) : hurried ? 1.2 : ShakeSeconds;
         // The Bookkeeping Engine has marked the slip already: nothing to shake (unless a lesson asks for it).
         bool recorded = Strategy.Recorded(visit, State) && visit.Lesson == null;
         if (!recorded)
@@ -225,7 +237,7 @@ public partial class Autoplay : Node
             _ledgerShown = true;
             counter.OpenLedger();
             await Wait(2.0);
-            foreach (int page in new[] { 1, 4, 3 })
+            foreach (int page in new[] { 1, 4, 6, 3 })
             {
                 if (!IsInstanceValid(counter)) break;
                 counter.LedgerPage(page);
@@ -340,6 +352,10 @@ public partial class Autoplay : Node
                 await ReadTips(counter.Mentor);
                 if (!IsInstanceValid(counter) || !visit.Deciding) return;
                 counter.MakeOffer(Math.Min(State.Gold, Strategy.SecondOffer(worth, State.Boosts.Floor)));
+                await Wait(1.4);
+                if (!IsInstanceValid(counter) || !visit.Deciding) return;
+                // Someone who never walks out (a golden tongue) names the least they'd take instead.
+                if (visit.CanBuy && worth > visit.Ask && State.Gold >= visit.Ask) counter.Buy();
                 return;
             }
         }
@@ -357,6 +373,18 @@ public partial class Autoplay : Node
         if (!IsInstanceValid(dayEnd)) return;
         await ReadTips(dayEnd.Mentor);
         if (!IsInstanceValid(dayEnd)) return;
+        // Once a run, a look at the warning an upgrade that would leave you short gets (and "Not now").
+        if (!_shortUpgradeShown && Upgrades.Available(State).FirstOrDefault(u => u.Key != Upgrades.Engine && State.CanBuy(u) &&
+                                                                              State.ShortNote(State.Cost(u), u) != null) is Upgrade dear)
+        {
+            _shortUpgradeShown = true;
+            dayEnd.AskBuy(dear);
+            await Wait(1.5);
+            if (!IsInstanceValid(dayEnd)) return;
+            dayEnd.CancelPayOff();
+            await Wait(0.5);
+            if (!IsInstanceValid(dayEnd)) return;
+        }
         dayEnd.BuyInOrder(Simulation.BuyOrder);
         await Wait(1.2);
         if (!IsInstanceValid(dayEnd)) return;

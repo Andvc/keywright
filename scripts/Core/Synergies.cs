@@ -67,9 +67,10 @@ public sealed class SynergyDef
 
 /// <summary>
 /// What the shop gets known for. A name brings people and chances your way (more of a kind in the chests, smiths at the
-/// door, false bottoms, enchanted things, luck), spares you some breakage, and makes buyers pay more for what you can
-/// vouch for: the things you named (<see cref="Item.Named"/>). Five levels each, from what you've collected or done;
-/// picking which to have active is a choice that shapes the run, and each feeds the way of trading that earned it.
+/// door, false bottoms, enchanted things, luck), spares you some breakage, and makes buyers pay more for the kind of thing
+/// it's known for (and sellers, who hear of it, ask more for chests full of it: <see cref="GameState.PowerIndex"/>). Five
+/// levels each, from what you've collected or done; picking which to have active is a choice that shapes the run, and
+/// each feeds the way of trading that earned it.
 /// </summary>
 public static class Synergies
 {
@@ -78,28 +79,28 @@ public static class Synergies
         new()
         {
             Key = "jewelry", Name = "Goldsmith", Blurb = "Coin and gems", Kinds = new[] { Category.Coins, Category.Gems }, Tier = 3,
-            Effect = l => $"Moneychangers and jewellers come your way: coin and gems turn up {Pct(MoneyKinds(l))} more often, and those you name sell for {Pct(KindSales(l))} more.",
+            Effect = l => $"Moneychangers and jewellers come your way: coin and gems turn up {Pct(MoneyKinds(l))} more often, and they sell for {Pct(KindSales(l))} more.",
         },
         new()
         {
             Key = "smith", Name = "Armourer", Blurb = "Weapons", Kinds = new[] { Category.Arms },
-            Effect = l => $"Soldiers, knights and dwarves come {Pct(SmithVisits(l) - 1)} more often, and weapons you name sell for {Pct(KindSales(l))} more.",
+            Effect = l => $"Soldiers, knights and dwarves come {Pct(SmithVisits(l) - 1)} more often, and weapons sell for {Pct(KindSales(l))} more.",
         },
         new()
         {
             Key = "vintner", Name = "Apothecary", Blurb = "Potions", Kinds = new[] { Category.Potions }, Tier = 2,
             Effect = l => (l >= SynergyDef.MaxLevel ? "Glass never breaks, dropped or forced" : $"Glass is {Pct(Sturdier(l))} less likely to break") +
-                          $", and potions you name sell for {Pct(KindSales(l))} more.",
+                          $", and potions sell for {Pct(KindSales(l))} more.",
         },
         new()
         {
             Key = "archivist", Name = "Spellkeeper", Blurb = "Spells", Kinds = new[] { Category.Scrolls }, Tier = 2,
-            Effect = l => $"People trust you with secrets: chests are {Pct(HiddenBonus(l))} likelier to have a false bottom, and spells you name sell for {Pct(KindSales(l))} more.",
+            Effect = l => $"People trust you with secrets: chests are {Pct(HiddenBonus(l))} likelier to have a false bottom, and spells sell for {Pct(KindSales(l))} more.",
         },
         new()
         {
             Key = "tailor", Name = "Cloakmaker", Blurb = "Cloaks", Kinds = new[] { Category.Garb },
-            Effect = l => $"Fine drapery: your exhibition counts +{Pct(ShowBonus(l))}, and cloaks you name sell for {Pct(KindSales(l))} more.",
+            Effect = l => $"Fine drapery: your exhibition counts +{Pct(ShowBonus(l))}, and cloaks sell for {Pct(KindSales(l))} more.",
         },
         new()
         {
@@ -109,9 +110,9 @@ public static class Synergies
         },
         new()
         {
-            Key = "fortune", Name = "Lucky Shop", Blurb = "Surprises named", Steps = new[] { 3, 6, 10, 15, 22 }, StepWord = "surprises in things you named",
+            Key = "fortune", Name = "Lucky Shop", Blurb = "Surprises", Steps = new[] { 3, 6, 10, 15, 22 }, StepWord = "things better than their chest",
             Achieved = s => s.Surprises,
-            Effect = l => $"Luck follows a lucky shop: everything you name is {Pct(LuckBonus(l))} likelier to come out a step better.",
+            Effect = l => $"Luck follows a lucky shop: everything you open is {Pct(LuckBonus(l))} likelier to come out a step better.",
         },
         new()
         {
@@ -129,7 +130,7 @@ public static class Synergies
         {
             Key = "arcane", Name = "Arcanist", Blurb = "Enchanted things found", Steps = new[] { 2, 5, 9, 14, 20 }, StepWord = "enchanted things", Tier = 3,
             Achieved = s => s.MagicFound,
-            Effect = l => $"Mages seek you out: each thing is {Pct(MagicBonus(l))} likelier to be enchanted, and enchanted things you name sell for {Pct(KindSales(l))} more.",
+            Effect = l => $"Mages seek you out: each thing is {Pct(MagicBonus(l))} likelier to be enchanted, and enchanted things sell for {Pct(KindSales(l))} more.",
         },
     };
 
@@ -149,7 +150,7 @@ public static class Synergies
     public static float FinderSales(int level) => 0.25f * level;
     public static float HagglerFloor(int level) => 0.04f * level;
 
-    /// <summary>What a name for a kind of thing puts on what you name of it, at a level.</summary>
+    /// <summary>What a name for a kind of thing puts on what it fetches, at a level.</summary>
     public static float KindSales(int level) => 0.2f * level;
 
     /// <summary>The synergies that put up what a thing of a kind sells for, by key (the Arcanist's is for enchanted things, below).</summary>
@@ -159,7 +160,7 @@ public static class Synergies
         ("archivist", Category.Scrolls), ("tailor", Category.Garb),
     };
 
-    /// <summary>What the active synergies put on the sale price of a thing of this kind you named.</summary>
+    /// <summary>What the active synergies put on the sale price of a thing of this kind.</summary>
     public static float SaleBonus(GameState state, Category kind) => Trades.Where(t => t.Kind == kind).Sum(t => KindSales(state.Active(t.Key)));
 
     /// <summary>And on an enchanted thing's, with the Arcanist active.</summary>

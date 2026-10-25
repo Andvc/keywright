@@ -181,8 +181,8 @@ public static partial class Simulation
             if (lines == 0) return;
             Begin(s, BeatKind.Scene, $"week {s.Week}", 5 * lines);
             Meet($"story:week{s.Week}", 0.3f, 1.5f, $"week {s.Week}'s scene");
-            // The reveals: the Locking (week 2), the Crown Chest (5), Mara and the King (7).
-            if (s.Week is 2 or 5 or 7) Peak("a story reveal", 2.5f);
+            // The reveals: the Locking and the Hooded Woman (week 2); Mara, the King and the Crown Chest (4).
+            if (s.Week is 2 or Story.OfferWeek) Peak("a story reveal", 2.5f);
         }
 
         public void Peddler(GameState s, IReadOnlyList<CurioDef> stock, IReadOnlyList<CurioDef> bought, int affordable)
@@ -196,7 +196,7 @@ public static partial class Simulation
                 // first time two go together (a way of trading) is a build taking shape.
                 Meet($"own:{curio.Key}", 0.5f, 1f, $"owning the {curio.Name}");
                 foreach (var tag in curio.Tags.Where(t => s.OwnedCurios.Any(o => o.Key != curio.Key && o.Has(t))))
-                    Meet($"build:{tag}", 0.3f, 1f, tag == CurioTag.Kind ? "a trade's build" : $"a {Curios.TagName(tag)} build");
+                    Meet($"build:{tag}", 0.3f, 1f, tag == CurioTag.Trade ? "a trade's build" : $"a {Curios.TagName(tag)} build");
                 Peak("a curio", 0.8f);
             }
             if (affordable >= 2) _beat.Choice += 1;

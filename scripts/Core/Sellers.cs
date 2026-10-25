@@ -462,7 +462,7 @@ public static class Sellers
         new()
         {
             Key = "quill", Name = "Quill the Archivist", Tier = 3, Shakes = Shake.Firm, Judge = Judgment.Counter, States = Clue.Roll, Wards = 0.5f,
-            HiddenChance = 0f, Markup = (1.7f, 2f), Colours = Town,
+            HiddenChance = 0f, Markup = (1.85f, 2.15f), Colours = Town,
             From = new[] { ("archive", 1f) },
             Stories = Tell(("archive", new[] { "From the Royal Archive's vaults, with its ward-roll: {clue}. Three hundred years of damp. {count}: {price}.",
                                                "Unclaimed since the Locking. The ward-roll reads {clue}, as far as I can make out. {count}, so {price}." })),
@@ -546,7 +546,7 @@ public static class Sellers
         },
         new()
         {
-            Key = "silas", Name = "Silas Gilt", Tier = 4, Judge = Judgment.Crook, MissRate = 0f, Fakes = new[] { Category.Coins, Category.Gems }, FakeChance = 0.6f,
+            Key = "silas", Name = "Silas Gilt", Tier = 4, Judge = Judgment.Crook, MissRate = 0f, Fakes = new[] { Category.Coins, Category.Gems }, FakeChance = 0.65f,
             HiddenChance = 0f, Colours = Emporium,
             From = new[] { ("gate", 1f) },
             Stories = Tell(("gate", new[] { "{heard}, friend. Out of the Maw's hoard, through a crack in the Gate. I'm leaving town tonight, so {price}.",

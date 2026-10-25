@@ -5,7 +5,8 @@ namespace Keywright.Ui;
 
 /// <summary>
 /// Esc (or the Menu button) during a day: the game stops while it's up. Resume, the settings, back to the title
-/// screen, or quit. The shop is saved at the start of each day, so leaving mid-day starts that day over.
+/// screen, or quit. The shop is saved at the start of each day, so leaving mid-day starts that day over. In GM mode
+/// (Settings), a panel beside it adds gold, skips the day, or fills the journal.
 /// </summary>
 public partial class PauseMenu : CanvasLayer
 {
@@ -30,7 +31,38 @@ public partial class PauseMenu : CanvasLayer
         root.AddChild(UiKit.MakeButton("Quit game", Palette.Bad, 16, () => Leave(toTitle: false)).Place(X + 60, y + 182, W - 120, 44));
         root.AddChild(UiKit.MakeLabel("The shop is saved at the start of each day: leave now and today starts over.", 16, Palette.Muted,
             HorizontalAlignment.Center).Wrapped().Place(X + 24, y + 238, W - 48, 44));
+        if (Settings.Gm && Main.Instance.State != null) BuildGm(root);
         Main.Instance.Sfx.PlayGroup("book", 1.2f, -8);
+    }
+
+    Label _gmNote;
+
+    /// <summary>GM mode: 99,999 gold, the rest of the day skipped, every page of the journal filled.</summary>
+    void BuildGm(Control root)
+    {
+        const float gx = X + W + 24, gw = 260;
+        root.AddChild(UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(gx, Y, gw, H));
+        root.AddChild(UiKit.MakeLabel("GM", 32, Palette.Magic, HorizontalAlignment.Center, outline: 4).Place(gx, Y + 18, gw, 40));
+        float y = Y + 80;
+        root.AddChild(UiKit.MakeButton("+99,999 gold", Palette.Gold, 16, () => Gm(Main.Instance.GmGold())).Place(gx + 20, y, gw - 40, 44));
+        root.AddChild(UiKit.MakeButton("Skip the day", Palette.Text, 16, SkipDay).Place(gx + 20, y + 58, gw - 40, 44));
+        root.AddChild(UiKit.MakeButton("Unlock the journal", Palette.Magic, 16, () => Gm(Main.Instance.GmUnlockJournal())).Place(gx + 20, y + 116, gw - 40, 44));
+        _gmNote = UiKit.MakeLabel("For testing: nothing here is fair.", 16, Palette.Muted, HorizontalAlignment.Center).Wrapped();
+        root.AddChild(_gmNote.Place(gx + 16, y + 176, gw - 32, 120));
+    }
+
+    void Gm(string done) => _gmNote.Text = done;
+
+    void SkipDay()
+    {
+        string why = Main.Instance.CanSkipDay;
+        if (why != null)
+        {
+            Gm(why);
+            return;
+        }
+        Resume();
+        Main.Instance.GmSkipDay();
     }
 
     public override void _UnhandledInput(InputEvent e)
