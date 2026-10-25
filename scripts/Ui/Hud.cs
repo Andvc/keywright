@@ -113,23 +113,40 @@ public partial class Hud : CanvasLayer
         _when.AddThemeColorOverride("font_color", state.DuesTonight && !state.PaidThisWeek ? Palette.Warn : Palette.Muted);
     }
 
-    public void SetGold(int gold, bool animate = true)
+    Tween _goldTween;
+
+    /// <summary>
+    /// Counts the purse up (or down) to <paramref name="gold"/>: quickly, easing out; or, <paramref name="steady"/>, at an
+    /// even pace over <paramref name="seconds"/>, so it keeps time with coins dropping into it one by one.
+    /// </summary>
+    public void SetGold(int gold, bool animate = true, float seconds = 0.8f, bool steady = false)
     {
+        _goldTween?.Kill();
         if (!animate)
         {
             _shownGold = gold;
             _gold.Text = $"{gold}g";
             return;
         }
-        var tween = CreateTween();
-        tween.TweenMethod(Callable.From<float>(v =>
+        _goldTween = CreateTween();
+        var count = _goldTween.TweenMethod(Callable.From<float>(v =>
         {
             _shownGold = v;
             _gold.Text = $"{Mathf.RoundToInt(v)}g";
-        }), _shownGold, (float)gold, 0.8f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        }), _shownGold, (float)gold, seconds);
+        if (steady) count.SetTrans(Tween.TransitionType.Linear);
+        else count.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        Bump();
+    }
 
-        var pulse = CreateTween();
-        pulse.TweenProperty(_gold, "scale", Vector2.One * 1.25f, 0.1f);
-        pulse.TweenProperty(_gold, "scale", Vector2.One, 0.25f);
+    Tween _pulse;
+
+    /// <summary>The purse jumps a little: a coin's gone in.</summary>
+    public void Bump()
+    {
+        _pulse?.Kill();
+        _pulse = CreateTween();
+        _pulse.TweenProperty(_gold, "scale", Vector2.One * 1.2f, 0.06f);
+        _pulse.TweenProperty(_gold, "scale", Vector2.One, 0.2f);
     }
 }

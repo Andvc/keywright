@@ -77,7 +77,7 @@ public partial class CounterPhase : Phase
     public ShakeBox Shake => _shake;
     public MentorView Mentor => _mentor;
     public bool Concluded => !_visit.Deciding;
-    public bool Busy => _busy || _ledger != null;
+    public bool Busy => _busy || _ledger != null || _sellConfirm != null;
 
     /// <summary>A lesson is under way.</summary>
     public bool InLesson => _steps != null;
@@ -101,12 +101,14 @@ public partial class CounterPhase : Phase
     {
         _visit = State.Current;
         // Valued at what things fetch here: the shop's trades and name, the day.
-        _slip = new Appraisal(_visit, State.Tier) { Model = State };
+        _slip = new Appraisal(_visit.Chest.Quality, State.Tier) { Model = State };
         _patience = State.Patience(_visit.Seller);
         Add(UiKit.MakeShop(State.Tier, 0.92f));
         BuildShelf();
 
-        _seller = Add(new SellerView(_visit.Seller) { Position = new Vector2(150, 196) });
+        // Click them for their page in the ledger.
+        _seller = Add(new SellerView(_visit.Seller) { Position = new Vector2(150, 196), Clickable = true });
+        _seller.Clicked += OpenLedger;
         // Hesk can't lift a chest high enough to drop it, or shake it hard.
         var bounds = State.CanDrop ? DragBounds : new Rect2(DragBounds.Position.X, ChestRest.Y - LiftLimit, DragBounds.Size.X, LiftLimit);
         _shake = Add(new ShakeBox(_visit.Chest, bounds) { Position = ChestRest, MaxLevel = State.CanShakeHardAt(_visit.Seller) ? Core.Shake.Hard : Core.Shake.Firm });
@@ -228,6 +230,8 @@ public partial class CounterPhase : Phase
         _step = 0;
         if (_steps.Count == 0) _steps = null;
         else ShowStep();
+        // Given for good: quitting before the day's out doesn't bring it back.
+        Game.NoteTaught();
     }
 
     void ShowStep()
@@ -302,6 +306,8 @@ public partial class CounterPhase : Phase
         }
         // Everyone else gets a word about their own way with a chest, the first morning.
         if (!State.Is(Characters.Kit)) Teach($"kin_{State.Character}");
+        // Mother Bramble's first visit: clicking someone opens their page in the ledger (her lesson teaches it to Kit).
+        if (_visit.Seller.Key == "bramble") Teach("lookup");
         if (State.Day == 2) Teach("colours");
         if (!firstOfDay && State.Day >= 2) Teach("ledger");
         if (State.Day >= 2 && _visit.Origin != null && _visit.Seller.Stories.Count > 0) Teach("story");
@@ -324,8 +330,7 @@ public partial class CounterPhase : Phase
     void Teach(string key)
     {
         // A lesson has Bram's attention. Anything else waits until its moment comes round again.
-        if (InLesson || !State.FirstTime(key)) return;
-        _mentor.Say(Hints.Get(key));
+        if (InLesson || !_mentor.Teach(State, key)) return;
         Game.Moment($"1_hint_{key}", 0.4);
     }
 
@@ -394,32 +399,96 @@ public partial class CounterPhase : Phase
         }
     }
 
+    Node2D _shelf;
+    Control _sellConfirm;
+
     /// <summary>
     /// Whatever you've kept on display, standing on the shop's shelf (part of the picture from the village shop on), and
-    /// any Heartsong, which needs no shelf: it hangs on a cord above it, glowing, at any shop.
+    /// any Heartsong, which needs no shelf: it hangs on a cord above it, glowing, at any shop. Hover one for what it does;
+    /// click it to sell it (a Heartsong fetches nothing: it goes back to the Locking), after a question.
     /// </summary>
     void BuildShelf()
     {
+        _shelf ??= Add(new Node2D());
+        foreach (var child in _shelf.GetChildren()) child.QueueFree();
         var songs = State.Display.Where(i => i.IsSong).ToList();
         for (int i = 0; i < songs.Count; i++)
         {
+            var song = songs[i];
             var at = new Vector2(360 + i * 64, 132);
-            Add(new Painter(p =>
+            _shelf.AddChild(new Painter(p =>
             {
                 for (int r = 3; r >= 1; r--) p.DrawCircle(Vector2.Zero, 10 + r * 8, Palette.Of(Rarity.Mythic) with { A = 0.07f });
             }) { Position = at, Material = Fx.Additive() });
-            Add(new Painter(p => p.DrawLine(new Vector2(0, -70), new Vector2(0, -18), new Color(0.15f, 0.1f, 0.12f), 2)) { Position = at });
-            Add(UiKit.MakeItemIcon(songs[i], at, 40));
+            _shelf.AddChild(new Painter(p => p.DrawLine(new Vector2(0, -70), new Vector2(0, -18), new Color(0.15f, 0.1f, 0.12f), 2)) { Position = at });
+            _shelf.AddChild(UiKit.MakeItemIcon(song, at, 40));
+            ShelfButton(song, new Rect2(at.X - 24, at.Y - 24, 48, 48), $"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing).");
         }
         if (!State.DisplayOpen) return;
         const float y = 196, x0 = 300, w = 504;
         var shown = State.Display.Where(i => !i.IsSong).ToList();
         for (int i = 0; i < shown.Count; i++)
         {
-            float slot = w / Math.Max(6, shown.Count);
-            var icon = Add(UiKit.MakeItemIcon(shown[i], new Vector2(x0 + slot * (i + 0.5f), y), 48, standing: true));
+            var item = shown[i];
+            float slot = w / Math.Max(6, shown.Count), x = x0 + slot * (i + 0.5f);
+            var icon = UiKit.MakeItemIcon(item, new Vector2(x, y), 48, standing: true);
             icon.Modulate = new Color(0.85f, 0.85f, 0.9f);
+            _shelf.AddChild(icon);
+            ShelfButton(item, new Rect2(x - Math.Min(28, slot / 2), y - 52, Math.Min(56, slot), 54),
+                $"{item.Name}: {item.Prestige} exhibition points{(item.Magic ? " (double: enchanted)" : "")}. Click to sell it for {State.SaleValue(item)}g.");
         }
+    }
+
+    /// <summary>An invisible button over something on display: what it does on hover, and a click to sell it.</summary>
+    void ShelfButton(Item item, Rect2 area, string tooltip)
+    {
+        var button = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = tooltip, MouseDefaultCursorShape = Control.CursorShape.PointingHand };
+        button.Pressed += () => AskSell(item);
+        _shelf.AddChild(button.Place(area.Position.X, area.Position.Y, area.Size.X, area.Size.Y));
+    }
+
+    /// <summary>Sell something on display (or let a Heartsong go)? Asked first: it comes off display, and what it did with it.</summary>
+    public void AskSell(Item item)
+    {
+        if (_sellConfirm != null || _busy || !State.Display.Contains(item)) return;
+        int value = State.SaleValue(item);
+        string text = item.IsSong
+            ? $"{item.Name} goes back to the Locking, and takes this with it: {item.SongDef.Effect} It fetches nothing."
+            : $"Sell the {item.Name} for {value}g? It comes off display: {item.Prestige} exhibition points fewer.";
+        _sellConfirm = Add(UiKit.MakeConfirm(item.IsSong ? "LET IT GO?" : "SELL IT?", text, item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold,
+            item.IsSong ? "Let it go" : $"Sell: +{value}g", () => SellFromDisplay(item), "Keep it", CloseSell));
+        Game.Moment("01_sell_confirm", 0.3);
+    }
+
+    /// <summary>Keeps it after all: the question goes away (the bot uses this).</summary>
+    public void CancelSell() => CloseSell();
+
+    void CloseSell()
+    {
+        _sellConfirm?.QueueFree();
+        _sellConfirm = null;
+    }
+
+    /// <summary>Takes it off display and sells it (the bot uses this).</summary>
+    public void SellFromDisplay(Item item)
+    {
+        CloseSell();
+        if (!State.Display.Contains(item)) return;
+        int value = State.SaleValue(item);
+        State.SellFromDisplay(item);
+        Game.Hud.SetGold(State.Gold);
+        if (item.IsSong)
+        {
+            Sfx.Play("deflate", 0.8f, -4);
+            FloatText($"{item.Name} goes back to the Locking.", new Vector2(560, 120), Palette.Of(Rarity.Mythic), 16);
+        }
+        else
+        {
+            Sfx.PlayGroup("pay");
+            FloatText($"+{value}g", new Vector2(560, 150), Palette.Gold, 24);
+        }
+        BuildShelf();
+        Refresh();
     }
 
     void BuildQueue()
@@ -465,9 +534,10 @@ public partial class CounterPhase : Phase
             var color = c.Story ? Palette.Magic : Palette.Text;
             var line = UiKit.MakeLabel(what, 16, color).Place(12, 28 + i * 24, 180, 20);
             line.MouseFilter = Control.MouseFilterEnum.Pass;
-            line.TooltipText = $"{c.PatronName} wants {c.Phrase}: {State.CommissionReward(c)}g{(c.Story ? " and a shard of the Aldric Key" : "")}.";
+            line.TooltipText = $"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? " each" : "")}" +
+                               $"{(c.Story ? " and a shard of the Aldric Key" : "")}, or a quarter over what it would sell for, if that's more.";
             board.AddChild(line);
-            board.AddChild(UiKit.MakeLabel(c.Story ? "shard" : $"{State.CommissionReward(c)}g", 16, c.Story ? Palette.Magic : Palette.Gold,
+            board.AddChild(UiKit.MakeLabel(c.Story ? "shard" : c.Needed > 1 ? $"{State.CommissionEach(c)}g ea" : $"{State.CommissionEach(c)}g", 16, c.Story ? Palette.Magic : Palette.Gold,
                 HorizontalAlignment.Right).Place(180, 28 + i * 24, 100, 20));
         }
     }
@@ -483,13 +553,13 @@ public partial class CounterPhase : Phase
         _ledgerButton = UiKit.MakeButton("Ledger [L]", Palette.Gold, 16, OpenLedger).Place(PanelX + 236, 72, 148, 36);
         panel.AddChild(_ledgerButton);
         var seller = _visit.Seller;
-        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? "Ticked: what the Bookkeeping Engine read."
-            : _visit.Claim.Count == 0
-            ? seller.Listens ? $"{seller.Who} heard nothing, so nothing's ticked." : $"{seller.Who} didn't listen, so nothing's ticked."
-            : seller.Listens ? $"Ticked: what {seller.Short} heard." : $"Ticked: what {seller.Short} says is inside.";
+        // Nobody says what's inside: the slip is yours to fill (or the Engine's), and how the seller priced it is the reminder.
+        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? "Ticked: what the Bookkeeping Engine read." : seller.Priced;
         string values = _visit.Chest.Sealed ? "Sealed: nothing to hear. Go by its weight."
             : $"Values: as good as a {(_visit.Chest.Gilded ? "gilded" : Categories.ChestSkin(_visit.Chest.Quality))} chest promises.";
-        _ticked = UiKit.MakeLabel($"{who} {values}", 16, Palette.Muted).Wrapped().Place(PanelX, 106, PanelW, 40);
+        // A line each; how they priced it takes both when it's long (the chest's colour is under it anyway).
+        bool longWho = UiKit.Font.GetStringSize(who, HorizontalAlignment.Left, -1, 16).X > PanelW;
+        _ticked = UiKit.MakeLabel(longWho ? who : $"{who}\n{values}", 16, Palette.Muted).Wrapped().Place(PanelX, 106, PanelW, 40);
         panel.AddChild(_ticked);
         _panel = panel;
 
@@ -594,8 +664,6 @@ public partial class CounterPhase : Phase
         button.AddChild(UiKit.MakeLabel(name, 16, Palette.Text).Place(80, 8, 120, 20));
         // Just a reminder of each kind's sound: the slip doesn't keep track of what you've heard.
         button.AddChild(UiKit.MakeLabel(word, 16, Palette.Muted.Darkened(0.2f)).Place(192, 8, 60, 20));
-        if (category is Category claimed && _visit.Claim.Contains(claimed))
-            button.AddChild(UiKit.MakeLabel("said", 16, Palette.Muted).Place(250, 8, 40, 20));
         if (category is Category magicKind && magicKind != Category.Heartsong && _lamp)
         {
             row.Star = UiKit.MakeLabel("*", 32, Palette.Muted.Darkened(0.2f), HorizontalAlignment.Center).Place(288, -3, 28, 40);
@@ -941,10 +1009,12 @@ public partial class CounterPhase : Phase
         Game.Moment("05_magnet", 0.6);
     }
 
+    /// <summary>The ledger, open at the page of whoever's at the counter (their entry framed): clicking them, the button, or L.</summary>
     public void OpenLedger()
     {
         if (Busy) return;
-        _ledger = Add(new LedgerView(State) { ZIndex = 30 });
+        _ledger = Add(new LedgerView(State, page: 1, current: _visit.Seller.Key) { ZIndex = 30 });
+        _visit.LookUp();
         _ledger.Closed += () =>
         {
             _ledger = null;
@@ -1066,9 +1136,55 @@ public partial class CounterPhase : Phase
     public void Pass()
     {
         if (Busy || !TradeOpen || Concluded) return;
+        // A Heartsong singing in a chest you can't afford won't leave with its seller: the chest bursts and lets it out.
+        var burst = State.Bursts(_visit);
         _seller.Say(_visit.Pass(State.Rng));
         State.Pass();
-        ShowGut(0.6);
+        if (burst != null) BurstFree(burst);
+        else ShowGut(0.6);
+    }
+
+    /// <summary>A Heartsong's Keep and Decline are up (the bot chooses through this).</summary>
+    public SongReveal SongChoice => _songReveal is { Open: true } ? _songReveal : null;
+
+    /// <summary>A chest you passed on has burst, and its Heartsong is on its way out.</summary>
+    public bool Bursting => _songReveal != null;
+
+    SongReveal _songReveal;
+
+    /// <summary>
+    /// You passed on a chest you couldn't afford, and a Heartsong was singing in it: the chest shudders and bursts, and
+    /// the song comes out to you alone (keep it or decline it). Its seller goes off with everything else.
+    /// </summary>
+    async void BurstFree(Item song)
+    {
+        _busy = true;
+        EndLesson();
+        Refresh();
+        var red = Palette.Of(Rarity.Mythic);
+        var seam = _shake.Position + new Vector2(0, -40);
+        _shake.View.Wobble(1.4f);
+        Sfx.Play("strain", 1.2f, -2);
+        Sfx.Play($"song_{song.Song}", 1f, -4);
+        await Wait(0.8);
+        if (!Alive) return;
+        Sfx.Play("boom", 0.9f, 0);
+        Game.Shake(0.6f);
+        Game.Flash(red, 0.6f, 0.5f);
+        Fx.Explosion(this, seam, 6, red);
+        Fx.Burst(this, seam, red, 120, 460f);
+        _seller.Say("Wha-! It burst! What was... keep that thing, then. I'm off.", Palette.Warn);
+        Game.Moment("03_burst", 0.2);
+        var reveal = Add(new SongReveal(song, seam, "The chest bursts open!"));
+        _songReveal = reveal;
+        bool keep = await reveal.Chosen;
+        _songReveal = null;
+        if (!Alive) return;
+        State.Burst(_visit, keep);
+        Game.NoteSongs();
+        Teach(keep ? "song_shown" : "song_found");
+        BuildShelf();
+        ShowGut(0.3);
     }
 
     /// <summary>

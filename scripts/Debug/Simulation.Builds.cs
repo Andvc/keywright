@@ -203,7 +203,7 @@ public static partial class Simulation
     public static void Trace(int seed, int days = Guild.Weeks * Guild.DaysPerWeek)
     {
         var style = Styles[^1];
-        var state = GameState.NewRun(seed, style.Character, style.Challenge, style.Talents, guided: false);
+        var state = GameState.NewRun(seed, style.Character, style.Challenge, guided: false);
         var log = new Log();
         var rng = new Random(seed);
         GD.Print($"Trace: the careful collector, seed {seed}");

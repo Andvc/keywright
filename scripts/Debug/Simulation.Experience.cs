@@ -276,6 +276,15 @@ public static partial class Simulation
             if (o.Delivered > 0) Peak("a commission done", 1);
         }
 
+        /// <summary>A chest you couldn't afford burst as you passed, and let its Heartsong out to you.</summary>
+        public void Burst(GameState s, Item song)
+        {
+            Begin(s, BeatKind.Customer, "a Heartsong bursts free", 20);
+            Meet("mech:burst", 0.5f, 2, "a Heartsong bursting free");
+            Peak("a Heartsong", s.Songbook.Contains(song.Song) ? 5 : 8);
+            _beat.Choice += 1;
+        }
+
         public void Evening(GameState s, int bought, IReadOnlyList<Upgrade> upgrades, bool synergyChoice, int affordable)
         {
             Begin(s, BeatKind.Evening, $"day {s.Day} ends", 18 + 8 * upgrades.Count + (synergyChoice ? 10 : 0));
@@ -401,8 +410,8 @@ public static partial class Simulation
 
     /// <summary>
     /// The experience playtest: <paramref name="players"/> players, each starting with no knowledge and playing
-    /// <paramref name="runs"/> runs (Kit, tips on, improving as <see cref="Careers"/> does, renown spent on talents
-    /// between runs). Prints run by run: how long it takes, where it goes stale, where it overloads, its peaks, a
+    /// <paramref name="runs"/> runs (Kit, tips on, improving as <see cref="Careers"/> does; nothing else carries over
+    /// but the journal and what Bram has taught). Prints run by run: how long it takes, where it goes stale, where it overloads, its peaks, a
     /// day-by-day curve, and what would improve it.
     /// </summary>
     public static void ExperienceReport(int players, int runs = 3)
@@ -418,7 +427,7 @@ public static partial class Simulation
             {
                 float skill = best - (best - start) * MathF.Exp(-pace * r);
                 var rec = new Recorder(know);
-                var style = Learner(skill, Characters.Kit, profile.MaxChallenge(Characters.Kit), profile.Talents.ToArray()) with { Guided = true };
+                var style = Learner(skill, Characters.Kit, profile.MaxChallenge(Characters.Kit)) with { Guided = true };
                 var (_, state) = Play(style, 700000 + p * 1000 + r, Guild.Weeks * Guild.DaysPerWeek, profile.Songs, rec, profile.Taught, profile.OpenCurios);
                 profile.Runs++;
                 profile.Note(state);
@@ -429,7 +438,6 @@ public static partial class Simulation
                 }
                 if (state.VaultOpened) profile.Vaults++;
                 profile.Bank(state);
-                while (Talents.All.Where(profile.CanLearn).OrderBy(t => t.Cost).FirstOrDefault() is TalentDef next) profile.Learn(next);
                 all.Add(new Played(r + 1, skill, Characters.Kit, state, rec.Beats));
             }
         }

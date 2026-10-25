@@ -66,7 +66,7 @@ public sealed partial class GameState
     /// </summary>
     public bool GraceLeft => GraceUsed < Graces;
 
-    public int Graces => 1 + (HasCurio("marker") ? 1 : 0) + (Knows("word") ? 1 : 0) - (Under(Challenges.Stretched) ? 1 : 0);
+    public int Graces => 1 + (HasCurio("marker") ? 1 : 0) - (Under(Challenges.Stretched) ? 1 : 0);
 
     /// <summary>The Guild's interest on a due that rolls over.</summary>
     public const float GraceInterest = 1.5f;
@@ -106,7 +106,7 @@ public sealed partial class GameState
     /// <summary>What pawning a displayed thing fetches tonight: the Guild's price (better for a pawnbroker's friend, better still with a pawn ticket).</summary>
     public int PawnValue(Item item) => (int)MathF.Round(SaleValue(item) * PawnRate);
 
-    float PawnRate => HasCurio("ticket") ? Curios.TicketRate : Knows("pawn") ? Core.Talents.PawnRate : Guild.PawnRate;
+    float PawnRate => HasCurio("ticket") ? Curios.TicketRate : Guild.PawnRate;
 
     /// <summary>What a curio fetches if you sell it back: half what you paid for it.</summary>
     public int CurioValue(string key) => Math.Max(1, (_curioPaid.TryGetValue(key, out int paid) ? paid : Curios.Base(Curios.Get(key).Rarity)) / 2);
@@ -196,7 +196,7 @@ public sealed partial class GameState
 
     public int StashUsed { get; private set; }
 
-    public int StashLeft => Math.Max(0, StashTimes + (HasCurio("purse") ? 1 : 0) + (Knows("rainy") ? 1 : 0) - (Under(Challenges.Stretched) ? 1 : 0) - StashUsed);
+    public int StashLeft => Math.Max(0, StashTimes + (HasCurio("purse") ? 1 : 0) - (Under(Challenges.Stretched) ? 1 : 0) - StashUsed);
 
     /// <summary>
     /// Start a day with less than <c>Below</c> and Bram slips you <c>Gift</c> from his secret stash, while it lasts: a
@@ -336,7 +336,7 @@ public sealed partial class GameState
     }
     public IEnumerable<CurioDef> OwnedCurios => _curios.Select(Curios.Get);
     public bool HasCurio(string key) => _curios.Contains(key);
-    public int CurioSlots => Curios.Slots + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.CurioSlots) + (Knows("curio") ? 1 : 0);
+    public int CurioSlots => Curios.Slots + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.CurioSlots);
     public bool CuriosFull => _curios.Count >= CurioSlots;
 
     public bool BuyCurio(CurioDef curio, int price)
@@ -347,7 +347,6 @@ public sealed partial class GameState
         _curioPaid[curio.Key] = price;
         CuriosSeen.Add(curio.Key);
         Today.CurioSpent += price;
-        if (Keepsake) KeepsakeTaken = true;
         return true;
     }
 
@@ -392,26 +391,36 @@ public sealed partial class GameState
     /// <summary>How many qualities lower than asked a commission will take.</summary>
     public int LetterLeeway(Commission c) => HasCurio("letter") && !c.Story ? 1 : 0;
 
+    /// <summary>What a commission offers, all told, before what a thing would sell for comes into it (a lot: for all of it).</summary>
     public int CommissionReward(Commission c) => (int)MathF.Round(c.Reward * (Shows(Heartsongs.Lark) ? Heartsongs.LarkPay : 1) *
                                                                    (HasCurio("ribbon") && !c.Story ? Curios.RibbonPay : 1));
 
+    /// <summary>What a commission offers for each thing it takes (a lot's reward shared out).</summary>
+    public int CommissionEach(Commission c) => Money.Round(CommissionReward(c) / (float)c.Needed);
+
+    /// <summary>
+    /// What handing over a thing that would sell for <paramref name="sale"/> pays: the commission's share for it, and
+    /// never less than a quarter over the sale (<see cref="Patrons.Premium"/>). A commission always pays more than selling.
+    /// </summary>
+    public int CommissionPay(Commission c, int sale) => Math.Max(CommissionEach(c), Math.Max(sale + 1, (int)MathF.Ceiling(sale * Patrons.Premium)));
+
     /// <summary>
     /// Hands something over for a commission instead of selling it (giving up <paramref name="forgo"/>, its sale price,
-    /// if that was already counted). Returns what it paid (once it's complete; 0 for a lot still short).
+    /// if that was already counted; <paramref name="sale"/> is what it would sell for). Each thing pays as it's handed
+    /// over, a lot's too. Returns what it paid.
     /// </summary>
-    public int Deliver(Item item, Commission commission, int forgo = 0)
+    public int Deliver(Item item, Commission commission, int forgo = 0, int sale = -1)
     {
         if (!Takes(commission, item)) return 0;
+        int pay = CommissionPay(commission, sale >= 0 ? sale : Math.Max(forgo, SaleValue(item)));
         Gold -= forgo;
         Today.Earned -= forgo;
         commission.Delivered++;
         Today.Delivered++;
-        if (!commission.Done) return 0;
-        int reward = CommissionReward(commission);
-        Gold += reward;
-        Today.Commissions += reward;
-        if (commission.Story) HoodPieces++;
-        return reward;
+        Gold += pay;
+        Today.Commissions += pay;
+        if (commission.Story && commission.Done) HoodPieces++;
+        return pay;
     }
 
     /// <summary>

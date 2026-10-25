@@ -43,7 +43,7 @@ public partial class PeddlerPhase : Phase
         _board = Add(new Node2D());
         _mentor = Add(new MentorView { Position = new Vector2(24, 560), ZIndex = 20 });
         Build();
-        if (State.FirstTime("peddler")) _mentor.Say(Hints.Get("peddler"));
+        _mentor.Teach(State, "peddler");
         Game.Hud.SetGold(State.Gold, animate: false);
         Game.Moment("22_peddler", 0.8);
     }
@@ -56,12 +56,11 @@ public partial class PeddlerPhase : Phase
         if (stock.Count == 0)
             _board.AddChild(UiKit.MakeLabel("Nim's sold out: you own everything Nim carries!", 24, Palette.Muted, HorizontalAlignment.Center)
                 .Place(CardsX, 220, CardsRight - CardsX, 30));
-        string note = State.Keepsake && stock.Count > 0 ? "Keepsake: one of these is a gift, whichever you like."
-            : $"Nim asks a fixed sum by rarity, plus a share of what was in your purse this morning ({State.PeddlerPurse}g).";
+        string note = $"Nim asks a fixed sum by rarity, plus a share of what was in your purse this morning ({State.PeddlerPurse}g).";
         if (stock.Count > 0)
-            _board.AddChild(UiKit.MakeLabel(note, 16, State.Keepsake ? Palette.Good : Palette.Muted, HorizontalAlignment.Center, outline: 4)
+            _board.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
                 .Place(CardsX, CardsY + CardH + 6, CardsRight - CardsX, 20));
-        // Second Look (a talent): once a visit, Nim packs these away and lays out something else.
+        // Once a visit, Nim packs these away and lays out something else.
         if (State.CanRerollPeddler)
             _board.AddChild(UiKit.MakeButton("Show me something else", Palette.Magic, 16, Reroll).Place(660, 610, 300, 64));
 

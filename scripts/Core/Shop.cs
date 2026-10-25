@@ -112,7 +112,8 @@ public sealed class DayStats
 
 public sealed partial class GameState
 {
-    public const int StartingGold = 40;
+    /// <summary>What every run starts with (0.22: what Bram's Kin, a talent, gave on top of 40 is everyone's now).</summary>
+    public const int StartingGold = 50;
 
     /// <summary>Display space you start with: a shelf behind the counter, with room for one thing.</summary>
     public const int ShelfSlots = 1;
@@ -153,6 +154,19 @@ public sealed partial class GameState
     public Journal Known { get; } = new();
 
     /// <summary>
+    /// The story's people met this run (<see cref="Story.People"/>): Nim on his first morning, Mister Vane once he's
+    /// introduced the Guild, the Hooded Woman from the second week, and Mara once she's said who she is. Uncle Bram's
+    /// page is always in the ledger.
+    /// </summary>
+    public HashSet<string> People { get; } = new();
+
+    /// <summary>Bram's kin know this person: met this run or an earlier one (Uncle Bram always).</summary>
+    public bool HasMet(string person) => person == Story.Bram || People.Contains(person) || Known.People.Contains(person);
+
+    /// <summary>The grandest shop the ledger knows: this run's, or any earlier run's (what was learned there stays in it).</summary>
+    public int JournalTier => Math.Max(Tier, Math.Min(ShopTiers.Max, Known.Tier));
+
+    /// <summary>
     /// What Bram's kin remember from earlier runs: the profile's journal, and its regulars as people you've met (their
     /// habits are in the ledger, and they post commissions like any regular).
     /// </summary>
@@ -162,7 +176,28 @@ public sealed partial class GameState
         Known.Found.UnionWith(profile.Found);
         Known.Enchanted.UnionWith(profile.FoundEnchanted);
         Known.Curios.UnionWith(profile.CuriosSeen);
+        Known.People.UnionWith(profile.People);
+        Known.Tier = Math.Max(Known.Tier, profile.BestTier);
         Met.UnionWith(profile.Met);
+        // What Bram has taught on this profile, in any run (even a day that's being played over): never again.
+        Learned(profile.Taught, firstDay: false);
+    }
+
+    /// <summary>
+    /// Takes in what Bram has already taught (<see cref="Profile.Taught"/>): his tips, sellers' lessons and (for a new
+    /// run) the scripted first day, so none of them comes up again.
+    /// </summary>
+    void Learned(IEnumerable<string> taught, bool firstDay)
+    {
+        foreach (string key in taught ?? Enumerable.Empty<string>())
+        {
+            if (key == FirstDayKey)
+            {
+                if (firstDay) FirstDayTaught = true;
+            }
+            else if (key.StartsWith(LessonKey)) Tutored.Add(key[LessonKey.Length..]);
+            else HintsSeen.Add(key);
+        }
     }
 
     /// <summary>The journal has this thing: found this run or an earlier one.</summary>
@@ -184,6 +219,7 @@ public sealed partial class GameState
         Known.Found.UnionWith(Collection.Entries.Select(e => e.Entry));
         Known.Enchanted.UnionWith(Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
         Known.Curios.UnionWith(Curios.All.Select(c => c.Key));
+        Known.People.UnionWith(Story.People);
         Songbook.UnionWith(Heartsongs.All.Select(h => h.Key));
     }
 
@@ -196,8 +232,44 @@ public sealed partial class GameState
     /// </summary>
     public HashSet<string> Songbook { get; } = new();
 
-    /// <summary>The Heartsongs opened this run, in the order they turned up.</summary>
+    /// <summary>The Heartsongs opened this run, in the order they turned up (kept or let go).</summary>
     public List<string> SongsFound { get; } = new();
+
+    /// <summary>Heartsongs taken in this run: each makes the next a quarter as likely (<see cref="Heartsongs.Fade"/>).</summary>
+    public int SongsKept { get; private set; }
+
+    /// <summary>
+    /// Keeps a Heartsong: on display, for nothing (it needs no shelf and costs no gold), and it does its one big thing
+    /// from now on. Each one taken in makes the next a quarter as likely.
+    /// </summary>
+    public void TakeSong(Item song)
+    {
+        if (!song.IsSong || Display.Contains(song)) return;
+        Collect(song);
+        Display.Add(song);
+        SongsKept++;
+    }
+
+    /// <summary>Lets a Heartsong go back to the Locking: it's in the songbook now, but not in the shop.</summary>
+    public void LetGo(Item song)
+    {
+        if (song.IsSong) Collect(song);
+    }
+
+    /// <summary>
+    /// The Heartsong that bursts out of this chest if you pass on it: one sings in it and you can't afford its price. It
+    /// comes to you alone (keep it or let it go); the seller goes off with the rest.
+    /// </summary>
+    public Item Bursts(Visit visit) => visit?.Chest.Song is Item song && Gold < visit.Price ? song : null;
+
+    /// <summary>A Heartsong burst out of the chest at the counter: out of the chest, and kept or let go.</summary>
+    public void Burst(Visit visit, bool keep)
+    {
+        if (Bursts(visit) is not Item song) return;
+        visit.Chest.RemoveSong();
+        if (keep) TakeSong(song);
+        else LetGo(song);
+    }
 
     /// <summary>This Heartsong is on display: its effect is on.</summary>
     public bool Shows(string song) => Display.Any(i => i.IsSong && i.Song == song);
@@ -216,9 +288,12 @@ public sealed partial class GameState
 
     public const string FirstDayKey = "firstday", LessonKey = "lesson:";
 
-    /// <summary>What Bram has taught this run, as the profile keeps it (<see cref="Profile.Taught"/>).</summary>
-    public IEnumerable<string> Taught => HintsSeen.Concat(Tutored.Select(k => LessonKey + k))
-        .Concat(FirstDayTaught || (Day >= 1 && GivesLessons) ? new[] { FirstDayKey } : Array.Empty<string>());
+    /// <summary>
+    /// What Bram has taught this run, as the profile keeps it (<see cref="Profile.Taught"/>): a lesson once its seller
+    /// has come to the counter (not while they're still in today's queue).
+    /// </summary>
+    public IEnumerable<string> Taught => HintsSeen.Concat(Tutored.Where(k => !Queue.Any(v => v.Lesson != null && v.Seller.Key == k)).Select(k => LessonKey + k))
+        .Concat(FirstDayTaught || (Day >= 2 && GivesLessons) ? new[] { FirstDayKey } : Array.Empty<string>());
 
     /// <summary>Places chests come from that you've heard of (from a seller's story): the ledger's Places page.</summary>
     public HashSet<string> Places { get; } = new();
@@ -241,8 +316,8 @@ public sealed partial class GameState
     /// <summary>Keeping things for display: from the village shop, which has a shelf (Isolde brings her own).</summary>
     public bool DisplayOpen => Tier >= 2 || Is(Characters.Isolde);
 
-    /// <summary>Synergies: from the town shop (the village shop, with an early name).</summary>
-    public bool SynergiesOpen => Tier >= (Knows("early") ? 2 : 3);
+    /// <summary>Synergies: from the town shop.</summary>
+    public bool SynergiesOpen => Tier >= 3;
 
     public int DisplaySlots => DisplayOpen ? (Is(Characters.Isolde) ? Characters.IsoldeShelf : ShelfSlots) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Slots) +
                                              (HasCurio("dome") ? 1 : 0) : 0;
@@ -271,7 +346,7 @@ public sealed partial class GameState
     public HashSet<string> ActiveSynergies { get; } = new();
 
     /// <summary>One synergy at a time, more with a guild charter and a royal seal.</summary>
-    public int SynergySlots => 1 + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.SynergySlots) + (Knows("favour") ? 1 : 0);
+    public int SynergySlots => 1 + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.SynergySlots);
 
     public int SynergyLevel(string key) => Synergies.Get(key).Level(this);
 
@@ -427,14 +502,13 @@ public sealed partial class GameState
         {
             SavedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
             Seed = Seed, Gold = Gold, Day = Day, Tier = Tier, Guided = Guided, TotalEarned = TotalEarned,
-            Character = Character, Challenge = Challenge, Talents = Talents.ToList(), Snubbed = _snubbed.ToList(), MaraUsed = MaraUsed,
-            KeepsakeTaken = KeepsakeTaken, FirstDayTaught = FirstDayTaught,
+            Character = Character, Challenge = Challenge, Snubbed = _snubbed.ToList(), MaraUsed = NoteUsed, FirstDayTaught = FirstDayTaught,
             UpgradesOpen = UpgradesOpen, MagicFound = MagicFound, PerfectStreak = PerfectStreak, BestStreak = BestStreak,
             Owned = _owned.ToList(), HintsSeen = HintsSeen.ToList(), Met = Met.ToList(), Found = Found.ToList(),
-            FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(),
+            FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(), People = People.ToList(),
             Places = Places.ToList(),
             Display = Display.Select(i => new SavedItem { Category = i.Category, Quality = i.Quality, Magic = i.Magic, Song = i.Song }).ToList(),
-            SongsFound = SongsFound.ToList(),
+            SongsFound = SongsFound.ToList(), SongsKept = SongsKept,
             WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, BramPiece = BramPiece, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek, PeddlerTier = PeddlerTier, TierSince = TierSince,
             CurioPaid = _curios.Select(key => _curioPaid.GetValueOrDefault(key)).ToList(),
             DrySpell = DrySpell, HoodPieces = HoodPieces, MapGiven = MapGiven, VaultOpened = VaultOpened,
@@ -458,8 +532,7 @@ public sealed partial class GameState
         {
             Character = Characters.Exists(data.Character) ? data.Character : Characters.Kit,
             Challenge = Math.Clamp(data.Challenge, 0, Challenges.Max),
-            Talents = new HashSet<string>(data.Talents.Where(Core.Talents.Exists)),
-            MaraUsed = data.MaraUsed, KeepsakeTaken = data.KeepsakeTaken, FirstDayTaught = data.FirstDayTaught,
+            NoteUsed = data.MaraUsed, FirstDayTaught = data.FirstDayTaught,
             Gold = data.Gold, Day = data.Day, Tier = Math.Clamp(data.Tier, 1, ShopTiers.Max), Guided = data.Guided,
             TotalEarned = data.TotalEarned, UpgradesOpen = data.UpgradesOpen, MagicFound = data.MagicFound,
             PerfectStreak = data.PerfectStreak, BestStreak = data.BestStreak,
@@ -501,9 +574,11 @@ public sealed partial class GameState
         state.Found.UnionWith(data.Found.Select(name => Categories.Renamed.GetValueOrDefault(name, name)));
         state.FoundEnchanted.UnionWith(data.FoundEnchanted.Select(name => Categories.Renamed.GetValueOrDefault(name, name)));
         state.SongsFound.AddRange(data.SongsFound.Where(Heartsongs.Exists).Distinct());
+        state.SongsKept = data.SongsKept;
         state.Songbook.UnionWith(state.SongsFound);
         state.Tutored.UnionWith(data.Tutored);
         state.CuriosSeen.UnionWith(data.CuriosSeen.Where(Curios.Exists));
+        state.People.UnionWith(data.People);
         state.Places.UnionWith(data.Places.Where(key => Origins.All.Any(o => o.Key == key)));
         state.ActiveSynergies.UnionWith(data.ActiveSynergies.Where(key => Synergies.All.Any(s => s.Key == key)));
         state.Display.AddRange(data.Display.Where(i => i.Category != Category.Heartsong || Heartsongs.Exists(i.Song))
@@ -546,6 +621,7 @@ public sealed partial class GameState
             PeddlerTier = Tier;
         }
         CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
+        MeetPeople();
 
         if (Day == 1 && FirstDayScripted)
         {
@@ -596,6 +672,18 @@ public sealed partial class GameState
     /// </summary>
     public static int LessonsPerDay(int tier) => tier == 2 ? 1 : 2;
 
+    /// <summary>
+    /// The story's people, as the day brings them: Nim on a morning he comes, Mister Vane once he's introduced the Guild,
+    /// the Hooded Woman from the second week (her story morning), and Mara once she's said her name.
+    /// </summary>
+    void MeetPeople()
+    {
+        if (PeddlerToday) People.Add(Story.Nim);
+        if (GuildIntroduced) People.Add(Story.Vane);
+        if (Week >= 2) People.Add(Story.Hood);
+        if (Week >= Story.OfferWeek) People.Add(Story.Mara);
+    }
+
     /// <summary>Their next visit would be a lesson.</summary>
     bool Teaches(SellerDef seller) => GivesLessons && Lessons.For(seller.Key) != null && !Tutored.Contains(seller.Key);
 
@@ -629,7 +717,8 @@ public sealed partial class GameState
     Visit Sing(Visit visit)
     {
         var taken = SongsFound.Concat(Queue.Select(v => v.Chest.Song?.Song)).Where(k => k != null).ToHashSet();
-        if (Heartsongs.Roll(_songRng, Songbook, taken, (EventIs("minstrel") ? Events.MinstrelSongs : 1) * (HasCurio("net") ? Curios.NetSongs : 1)) is HeartsongDef song) visit.Chest.AddSong(Heartsongs.Make(song, visit.Chest.Quality));
+        float odds = (EventIs("minstrel") ? Events.MinstrelSongs : 1) * (HasCurio("net") ? Curios.NetSongs : 1) * MathF.Pow(Heartsongs.Fade, SongsKept);
+        if (Heartsongs.Roll(_songRng, Songbook, taken, odds) is HeartsongDef song) visit.Chest.AddSong(Heartsongs.Make(song, visit.Chest.Quality));
         return visit;
     }
 

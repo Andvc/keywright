@@ -71,7 +71,7 @@ public sealed record CategoryDef(
 /// <param name="Broken">Glass that broke when the chest was dropped or forced: worth nothing now.</param>
 /// <param name="Song">
 /// Which Heartsong it is (<see cref="Heartsongs"/>), for the Heartsong kind. Its <paramref name="Quality"/> is the colour
-/// of the chest it came in: a merchant prices it as a trinket that fine. To a Keywright it's mythic.
+/// of the chest it came in (for its reveal): it's worth nothing in gold. To a Keywright it's mythic.
 /// </param>
 public sealed record Item(Category Category, Rarity Quality, bool Magic = false, bool Fake = false, bool Broken = false, string Song = null)
 {
@@ -121,6 +121,12 @@ public static class Categories
     public static readonly int[] QualityMultiplier = { 1, 3, 10, 30, 100, 100 };
 
     public const int MagicMultiplier = 2;
+
+    /// <summary>
+    /// What a hidden thing (under a false bottom, or warded) fetches against its worth: never enchanted (nobody could see
+    /// it glow, so no read could be right about it), but what someone thought worth hiding is a little special.
+    /// </summary>
+    public const float HiddenMultiplier = 1.3f;
 
     public static readonly CategoryDef[] All =
     {
@@ -193,7 +199,7 @@ public static class Categories
 
     /// <summary>
     /// What one plain thing of this kind is worth on average in a chest of this colour. Sellers price by this. A Heartsong
-    /// is priced as a trinket exactly as fine as its chest.
+    /// is worth nothing in gold.
     /// </summary>
     public static int Expected(Category category, Rarity chest) => category == Category.Heartsong ? Nominal(category, chest)
         : (int)MathF.Round(Odds(chest).Sum(o => o.Chance * Value(category, o.Quality, false)));

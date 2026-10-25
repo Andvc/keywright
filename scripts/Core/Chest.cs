@@ -61,8 +61,11 @@ public sealed class Chest
     /// <summary>Everything that's really in it: <see cref="Everything"/> and a warded thing still sealed.</summary>
     public IEnumerable<Item> All => Warded == null ? Everything : Everything.Append(Warded);
 
-    /// <summary>Seals a thing in the ward (when the chest is packed).</summary>
-    public void Ward(Item item) => Warded = item;
+    /// <summary>
+    /// Seals a thing in the ward (when the chest is packed). A hidden thing is never enchanted: nobody could see it glow,
+    /// so no read could be right about it. It fetches a third more instead (<see cref="Categories.HiddenMultiplier"/>).
+    /// </summary>
+    public void Ward(Item item) => Warded = item with { Magic = false };
 
     /// <summary>Takes a thing out (a bride's dowry thing, to ward it instead).</summary>
     public void Remove(Item item) => _items.Remove(item);
@@ -103,7 +106,8 @@ public sealed class Chest
         Packed = packed;
         _items = items.OrderBy(i => i.Category).ToList();
         Quality = quality;
-        Hidden = hidden;
+        // Under a false bottom it can't be heard, so it can't be seen to glow: never enchanted (a third more instead).
+        Hidden = hidden == null ? null : hidden with { Magic = false };
         Lock = lockTier ?? LockTiers.All[0];
         Sealed = isSealed;
     }
@@ -118,6 +122,9 @@ public sealed class Chest
     {
         if (Song == null) _items.Add(song);
     }
+
+    /// <summary>The Heartsong's out (it burst free of a chest you passed on): the rest goes with the seller.</summary>
+    public void RemoveSong() => _items.RemoveAll(i => i.IsSong);
 
     public bool Has(Category category) => Get(category) != null;
 
@@ -199,7 +206,7 @@ public sealed class Chest
     {
         for (int i = 0; i < _items.Count; i++)
             if (!_items[i].IsSong) _items[i] = change(_items[i]) with { Id = _items[i].Id };
-        if (Hidden != null) Hidden = change(Hidden) with { Id = Hidden.Id };
+        if (Hidden != null) Hidden = change(Hidden) with { Id = Hidden.Id, Magic = false };
     }
 
     void Break(Item item)

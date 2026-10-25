@@ -198,6 +198,9 @@ public static class Curios
         new("jar", "Savings Jar", $"Every night: {Pct(InterestRate)} of your gold as interest (up to {InterestPerTier}g at the stall, more in a grander shop).", U, "jar", 1,
             T(Coffers)),
         new("lockbox", "Miser's Lockbox", $"Every Guild night, once you've paid: {Pct(LockboxShare)} of what's left in your purse.", R, "lockbox", 2, T(Coffers)),
+        // Mara's favour (a talent until 0.22): the Guild honours its own paper, once.
+        new("note", "Guild Promissory Note", "The Guild's own paper, from before the Locking: once a run, on a Guild night nothing you own can cover, " +
+                                             "it pays what's short (not in the last week).", R, "note", 1, T(Coffers)),
 
         // Patrons: commissions.
         new("letter", "Letter of Introduction", "Regulars take what you deliver a quality lower than they asked for.", U, "letter", 1, T(Patrons)),
@@ -230,6 +233,7 @@ public static class Curios
         ["chalk"] = CurioUnlock.Crownhold, ["wholesale"] = CurioUnlock.Crownhold,
         ["fork"] = CurioUnlock.Emporium, ["ledger"] = CurioUnlock.Emporium, ["coffer"] = CurioUnlock.Emporium, ["lamps"] = CurioUnlock.Emporium,
         ["ring"] = CurioUnlock.Emporium, ["wardkey"] = CurioUnlock.Emporium, ["mark"] = CurioUnlock.Emporium, ["lockbox"] = CurioUnlock.Emporium,
+        ["note"] = CurioUnlock.Crownhold,
         ["pass"] = CurioUnlock.Emporium,
         ["star"] = CurioUnlock.Cleared, ["net"] = CurioUnlock.Heartsong,
         ["spindle"] = CurioUnlock.Feat, ["truthglass"] = CurioUnlock.Feat, ["goldentongue"] = CurioUnlock.Feat, ["compass"] = CurioUnlock.Feat,
@@ -290,6 +294,9 @@ public static class Curios
 
     /// <summary>Room for this many curios, more with a curio case.</summary>
     public const int Slots = 3;
+
+    /// <summary>How many curios Nim lays out on a visit (0.22: four for everyone, as Familiar Face, a talent, gave).</summary>
+    public const int Laid = 4;
 
     /// <summary>Nim comes every week, from the first.</summary>
     public const int FirstWeek = 1;

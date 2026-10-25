@@ -37,7 +37,7 @@ the Gate", wants you opening chests as fast as you can, and wants its tithe in g
 | Week 2 | Bram tells you about the Locking and the Maw, and shows you his one secret: a shard of the **Aldric Key**, broken in four when the Locking was made. The Hooded Woman asks for things only a Keywright's chests hold, and pays in shards. | What the Key opens; who she is. |
 | Week 4 | Her name is Mara, the last archmage of the Keyhold, Bram's old partner. The Key opens the **Crown Chest**, King Aldric's own, which holds the heart of the Locking; the tithe goes down through the Gilded Gate: the Maw is buying his way out, and the Guild is his. A tired old man who's been selling you chests at the Emporium is the King. That night Vane offers to forget half a week's tithe for your shards. | Whether to trust him; whether you'll be ready. |
 | Week 5 | The last tithe. With the Key whole, Mara knows where the Crown Chest is. | |
-| Any day, about one run in two | A sound like nothing in any chest: a Heartsong. Bram heard one once in forty years. | What the nine of them are for. |
+| Any day, about one run in three | A sound like nothing in any chest: a Heartsong. Bram heard one once in forty years. | What the nine of them are for. |
 | The Crown Chest | Opened by a Keywright who rightfully owns it, it renews the Locking: the Maw falls silent, and King Aldric's hoard is on your counter. The Locking was a song in nine verses, Mara says: the Heartsongs. | What the Guild does next (endless). |
 | The Crown Chest, with all nine Heartsongs known | Mara sings the Locking whole. A lock sung whole is an ending: the Maw starves, the Gate is only a gate, and every chest in Aldmark opens at once. | |
 
@@ -99,11 +99,14 @@ the red quality nothing else reaches.
 - **Why you hear them.** Only a Keywright hears a Heartsong sing: the ward that's made of the same song lets it through.
   It sings at the gentlest shake, and nothing drowns it out or stills it, lodestone or not. It doesn't knock about like a
   thing: each sings its own song, nothing like coin or glass. No seller has ever heard one, so none is ever priced.
-- **Why they're worth so little.** To anyone without the Key-mark a Heartsong is a trinket: a music box that won't play,
-  a cold stone, a tin bird. A merchant pays what a trinket as fine as its chest fetches. The Guild won't take one in pawn:
-  greed can't put a price on it.
-- **Why they turn up anywhere, and again.** Sell one and it goes back to the Locking, to turn up in some other chest some
-  day: a millpond chest as easily as the King's. About one run in two, in any chest a seller brings.
+- **Why they're worth nothing.** To anyone without the Key-mark a Heartsong is junk: a music box that won't play, a
+  cold stone, a tin bird. No merchant would give a penny for one. The Guild won't take one in pawn: greed can't put a
+  price on it.
+- **Why they turn up anywhere, and again.** Let one go and it goes back to the Locking, to turn up in some other chest
+  some day: a millpond chest as easily as the King's. About one run in three, in any chest a seller brings; the Locking
+  keeps its verses apart, so each one you keep makes the next harder to find.
+- **Why they won't stay in a chest you can't buy.** A Heartsong knows a Keywright. Pass on a chest you can't afford
+  with one singing in it, and the chest bursts and lets it out to you: it alone, the seller's goods go home with them.
 - **Why you keep them.** On display (no shelf needed: one hangs from the awning at Bram's stall), each one does something
   for the shop, the way the thing itself would.
 - **Why they matter.** Bram's kin remember every one they've opened. The Crown Chest holds the Locking's tune; the
@@ -225,7 +228,9 @@ that's already won can be finished in an afternoon.
   when he sees one: he notices what you buy and brings more like it, and he keeps the rarest (a curio made for the
   greatest of a trade, the Truthglass or the Golden Tongue) for someone who's shown him they're in that trade. His stock
   grows as word of you gets round (the further you've got, the more he trusts you with), and the very rarest only come
-  to him once Bram's kin have done that trade often enough for the story to reach him.
+  to him once Bram's kin have done that trade often enough for the story to reach him. Some aren't a trade's at all: a
+  Guild promissory note from before the Locking, still good, which the Guild honours once (it honours its own paper,
+  whoever holds it).
 - *Word gets round.* Sellers talk. A shop known to sell high, or to have things come out better than their chest, or
   to have a name for a kind of thing, pays more for its chests: everyone who brings one has heard, and asks that much
   more. What nobody can hear of is your eye, your tongue and your luck on the day: what's enchanted or under a false
@@ -238,8 +243,15 @@ that's already won can be finished in an afternoon.
 - *The ledger.* Bram's kin keep one ledger between them: a regular met, a find made, a curio seen goes in once and stays
   in, whoever's minding the stall.
 - *Heartsongs.* Things loved more than gold, sung into the Locking: a Keywright hears them through the ward because the
-  ward is their song. Nobody else knows they're there, so they're never priced, and they're worth a trinket's price to
-  anyone but you.
+  ward is their song. Nobody else knows they're there, so they're never priced, and they're worth nothing to anyone but
+  you.
+- *Hidden things.* Nobody could see an enchantment glow under a false bottom or in a ward, and nobody puts a spell on
+  what they hide: what's hidden is never enchanted. But what someone thought worth hiding is a little special, and
+  fetches a third more.
+- *Commissions.* A regular who wants a thing pays more for it than any merchant would: always a quarter over what it
+  would sell for, at least.
+- *Who's who.* Bram's kin keep a page in the ledger for everyone they've traded with; look at whoever's across the
+  counter and you know which.
 - *Bram's stash and his word.* Old Keywrights keep a little by, and the Guild still takes Bram's word, once.
 - *A rotten chest.* The ward holds a lid shut for ever; it doesn't stop the wood rotting. Barrow damp gets into
   everything, and a chest from there stands about two seconds of shaking before it starts to come apart.

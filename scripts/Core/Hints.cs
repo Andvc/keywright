@@ -24,9 +24,9 @@ public static class Hints
         ["heard_Coins"] = "A jingle: coin. Light things rattle at the gentlest shake. Tick Coin on your slip, on the right.",
         ["slip"] = "The slip adds up what you've ticked, as good as the chest promises. The bar under it is your odds it's " +
                    "worth more than the price: the greener, the safer.",
-        ["first_penn"] = "Penn only shook it gently and heard nothing. Try every strength yourself: gentle, firm, hard.",
+        ["first_penn"] = "Penn only shook it gently: nothing heavy or soft stirs for that, and she's priced what she could hear. Try every strength yourself: gentle, firm, hard.",
         ["heard_Garb"] = "Flump: a cloak. Soft things only make a sound when you shake hard.",
-        ["first_hob"] = "Hob shook it hard and heard a clank. Shake it yourself, at every strength.",
+        ["first_hob"] = "Hob shook it hard, and a clank drowns out anything delicate. Shake it yourself, at every strength.",
         ["heard_Arms"] = "Clank: a weapon, an axe or a blade. It only moves at a firm shake, and while it clanks you can't hear anything " +
                          "delicate. Shake gently to hear past it.",
         ["first_mags"] = "Mags counts the rattles at a firm shake and charges the same for each. If you hear nothing she " +
@@ -45,6 +45,8 @@ public static class Hints
                      "or storm off if you insult them.",
         ["offer"] = "This one wants you to name a price. Offer what it's worth to you, less a little. You get two tries.",
         ["try_again"] = "Too low. One more try, then they'll go.",
+        ["lookup"] = "Everyone you've traded with has a page in your ledger: how they judge a chest, how they trade, what they're like. " +
+                     "Click whoever's at the counter to read theirs.",
         ["story"] = "Listen to where they say it came from: a barrow holds grave goods, a goblin warren holds coin, a dwarf-hold weapons and gems.",
         ["keep"] = "Something grand? You can keep it for display instead of selling it. A good exhibition brings more customers, " +
                    "and better ones. Enchanted things count double.",
@@ -73,8 +75,8 @@ public static class Hints
         ["peddler"] = "Nim sells curios: oddments from the Locking, each bending one rule of the trade. You've room for three: pick ones " +
                       "that go together. Nim notices what you buy and brings more like it, and keeps his rarest for a collector. Don't ask what Nim is.",
         ["commissions"] = "Regulars want things now: see the board on the left. When something they want comes out of a chest, " +
-                          "hand it over instead of selling it. A commission pays far more than a sale.",
-        ["deliver"] = "Someone wants this! Deliver it for the commission, or sell it as usual.",
+                          "hand it over instead of selling it. A commission always pays more than a sale, and a lot pays piece by piece.",
+        ["deliver"] = "Someone wants this! Deliver it: a commission always pays more than selling it would.",
         ["event"] = "Something's happening in town today: two days every week are different. It's up in the top bar (click it to read it " +
                     "again), and your ledger's calendar shows what's coming this week and next.",
         ["stranger"] = "The Stranger. That chest's wrapped in iron chains: nothing inside can move, so there's nothing to hear. " +
@@ -111,9 +113,10 @@ public static class Hints
 
         // Heartsongs (Heartsongs.cs): about one a run, in any chest.
         ["heard_Heartsong"] = "That sound... I've heard it once in forty years. A Heartsong! Only a Keywright hears one sing: the " +
-                              "seller has no idea it's there. Tick it on your slip, and buy that chest.",
-        ["song_found"] = "A Heartsong. Keep it on display: it needs no shelf, and it's worth more singing in the shop than any " +
-                         "merchant will pay. Each one does something different.",
+                              "seller has no idea it's there. It's worth nothing in gold and everything in the shop: buy that chest. " +
+                              "And if you can't afford it, pass: a Heartsong won't leave with them.",
+        ["song_found"] = "A Heartsong. Nobody would pay a penny for one, but singing in the shop each does something no gold can. " +
+                         "Keep it or let it go: each one you keep makes the next rarer.",
         ["song_shown"] = "Hear that? The whole stall's different with it singing. It'll sing as long as it's ours.",
 
         // A regular with nothing new to teach gets a tip the first time they come in after the first day; the rest have

@@ -18,7 +18,10 @@ public sealed record Line(string Speaker, string Text);
 /// </summary>
 public static class Story
 {
-    public const string Bram = "bram", Vane = "vane", Hood = "hood", Nim = "nim", StrangerKey = "stranger";
+    public const string Bram = "bram", Vane = "vane", Hood = "hood", Nim = "nim", StrangerKey = "stranger", Mara = "mara";
+
+    /// <summary>The story's people, for the ledger's Friends page: Uncle Bram, Nim, Mister Vane, the Hooded Woman (Mara, once she says so).</summary>
+    public static readonly string[] People = { Bram, Nim, Vane, Hood, Mara };
 
     public const string HoodName = "The Hooded Woman";
 

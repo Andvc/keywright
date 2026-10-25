@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Keywright.Core;
+using Keywright.Ui;
 using Keywright.Phases;
 
 namespace Keywright.Debug;
@@ -27,7 +28,7 @@ public partial class Autoplay : Node
 
     const double ShakeSeconds = 1.6;
 
-    bool _ledgerShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown;
+    bool _ledgerShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked;
 
     static GameState State => Main.Instance.State;
 
@@ -154,7 +155,7 @@ public partial class Autoplay : Node
         if (State.Gold < State.DueNow)
         {
             var order = Strategy.PawnOrder(State);
-            if (order == null && State.CanAskMara) dues.AskMara();
+            if (order == null && State.CanCallNote) dues.CallNote();
             else if (order == null && State.CanAskGrace) dues.AskGrace();
             else if (order != null)
                 foreach (var thing in order)
@@ -201,6 +202,30 @@ public partial class Autoplay : Node
         var visit = counter.Visit;
         await ReadTips(counter.Mentor);
         if (!IsInstanceValid(counter)) return;
+        // Once a run, with something on display: a look at selling it from the shelf (and "Keep it").
+        if (!_sellAsked && State.Display.Count > 0 && !counter.InLesson)
+        {
+            _sellAsked = true;
+            counter.AskSell(State.Display[^1]);
+            await Wait(1.5);
+            if (!IsInstanceValid(counter)) return;
+            counter.CancelSell();
+            await Wait(0.3);
+            if (!IsInstanceValid(counter)) return;
+        }
+        // A newcomer: click them for their page in the ledger, framed (Mother Bramble's lesson asks for it).
+        if (visit.Lesson != null && !visit.LookedUp)
+        {
+            counter.OpenLedger();
+            Main.Instance.Moment($"02_lookup_{visit.Seller.Key}", 0.4);
+            await Wait(1.2);
+            if (!IsInstanceValid(counter)) return;
+            counter.CloseLedger();
+            await Wait(0.4);
+            if (!IsInstanceValid(counter)) return;
+            await ReadTips(counter.Mentor);
+            if (!IsInstanceValid(counter)) return;
+        }
 
         // Every strength, but only gently and hard for an impatient seller, and never hard for one who'd mind.
         bool hurried = State.Impatient(visit.Seller) && !State.HasCurio("watch");
@@ -363,6 +388,18 @@ public partial class Autoplay : Node
         counter.Pass();
         await Wait(2.6);
         if (!IsInstanceValid(counter)) return;
+        // A chest it couldn't afford burst, and a Heartsong came out: keep it (once it's had a look).
+        while (IsInstanceValid(counter) && counter.Bursting && counter.SongChoice == null)
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        if (IsInstanceValid(counter) && counter.SongChoice is SongReveal burst)
+        {
+            GD.Print($"Autoplay: a Heartsong burst out of {visit.Seller.Name}'s chest");
+            await Wait(2.5);
+            if (!IsInstanceValid(counter)) return;
+            burst.Keep();
+            await Wait(4.0);
+            if (!IsInstanceValid(counter)) return;
+        }
         await ReadTips(counter.Mentor);
         if (IsInstanceValid(counter)) counter.Continue();
     }
@@ -439,9 +476,17 @@ public partial class Autoplay : Node
 
     async Task DriveOpening(OpeningPhase opening)
     {
-        // It opens by itself.
+        // It opens by itself; a Heartsong waits for a choice: keep it, once it's had a look.
         while (IsInstanceValid(opening) && !opening.Finished)
+        {
+            if (opening.SongChoice is SongReveal song)
+            {
+                await Wait(2.5);
+                if (!IsInstanceValid(opening)) return;
+                song.Keep();
+            }
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        }
 
         await Wait(3.0);
         if (!IsInstanceValid(opening)) return;
@@ -459,7 +504,7 @@ public partial class Autoplay : Node
         foreach (var (item, worth) in opening.Revealed.ToList())
         {
             if (!IsInstanceValid(opening)) return;
-            if (opening.Delivered(item)) continue;
+            if (opening.Delivered(item) || item.IsSong) continue;
             var (keep, replace) = Strategy.ShouldKeep(State, item, worth);
             if (!keep || !IsInstanceValid(opening)) continue;
             opening.Keep(item);

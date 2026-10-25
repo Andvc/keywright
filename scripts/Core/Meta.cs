@@ -97,7 +97,7 @@ public static class Characters
 
 /// <summary>
 /// A challenge level's term: one more of the Guild's harsh terms, on top of every level below it. Clearing Bram's debt
-/// at a level opens the next for that character, and each level adds a quarter to the renown a run earns.
+/// at a level opens the next for that character, and each level adds a quarter to a run's score.
 /// </summary>
 public sealed record ChallengeDef(string Key, string Name, string Rule)
 {
@@ -144,67 +144,14 @@ public static class Challenges
     /// <summary>The terms in force at a level: every one up to it.</summary>
     public static IEnumerable<ChallengeDef> Upto(int level) => All.Where(c => c.Level <= level);
 
-    /// <summary>What a level does to the renown a run earns: a quarter more for each.</summary>
+    /// <summary>What a level does to a run's score: a quarter more for each.</summary>
     public static float Multiplier(int level) => 1 + 0.25f * Math.Clamp(level, 0, Max);
-}
-
-/// <summary>
-/// A talent: something Bram's kin learn once and keep for every run after, bought with renown. A talent widens your
-/// choices or softens a bad night; none adds a share to what things sell for or makes the debt smaller, so a run still
-/// grows by your judgment.
-/// </summary>
-/// <param name="Branch">The branch of the tree it's on (null: the root).</param>
-/// <param name="Requires">The talent before it on its branch.</param>
-public sealed record TalentDef(string Key, string Name, string Blurb, int Cost, string Branch, string Requires);
-
-public static class Talents
-{
-    public const string Lessons = "Bram's Lessons", Favour = "Nim's Favour", Trade = "The Trade";
-
-    public static readonly string[] Branches = { Lessons, Favour, Trade };
-
-    public static readonly TalentDef[] All =
-    {
-        new("kin", "Bram's Kin", "Start every run with 10g more.", 50, null, null),
-
-        new("rainy", "Rainy Day", "Bram's secret stash has one more dip in it.", 100, Lessons, "kin"),
-        new("pawn", "Pawnbroker's Friend", "Pawned things fetch seven-tenths of their price, not three-fifths.", 250, Lessons, "rainy"),
-        new("word", "Good Word", "Bram can vouch for you twice a run.", 500, Lessons, "pawn"),
-        new("mara", "Mara's Favour", "Once a run, on a night nothing you own can cover, Mara pays what's short (not in the last week).", 1000,
-            Lessons, "word"),
-
-        new("nim4", "Familiar Face", "Nim lays out four curios, not three.", 100, Favour, "kin"),
-        new("reroll", "Second Look", "Once a visit, Nim will show you something else.", 250, Favour, "nim4"),
-        new("keepsake", "Keepsake", "On Nim's first visit, one curio of your choice is a gift.", 500, Favour, "reroll"),
-        new("curio", "Curio Cabinet", "Room for one more curio.", 1000, Favour, "keepsake"),
-
-        new("early", "Early Name", "Synergies open at Thornwick, not Crownhold.", 250, Trade, "kin"),
-        new("tools", "Trade Secrets", "The witchlight and the lodestone cost half.", 500, Trade, "early"),
-        new("favour", "Royal Favour", "One more synergy active at once.", 1000, Trade, "tools"),
-    };
-
-    public static TalentDef Get(string key) => All.First(t => t.Key == key);
-
-    public static bool Exists(string key) => All.Any(t => t.Key == key);
-
-    public static IEnumerable<TalentDef> On(string branch) => All.Where(t => t.Branch == branch);
-
-    /// <summary>Every talent's cost, all told.</summary>
-    public static int Total => All.Sum(t => t.Cost);
-
-    // What the talents do.
-    public const int KinGold = 10, MoreStock = 1;
-
-    /// <summary>What Bram's Ledger cost, given back to a profile that had it (0.21 keeps every regular in the ledger).</summary>
-    public const int LedgerRefund = 100;
-    public const float PawnRate = 0.7f;
 }
 
 /// <summary>
 /// How a run went, in points: the Guild's dues paid, the debt cleared (and how early), the vault (sung whole, with all nine
 /// Heartsongs known), the map, the shop, the collection, the Heartsongs found, and every week after the debt you kept the
-/// Guild paid. Points times the challenge level's multiplier are
-/// the renown the run earns.
+/// Guild paid. Points times the challenge level's multiplier are the run's score (each of Bram's kin keeps their best).
 /// </summary>
 public static class Score
 {
@@ -240,6 +187,6 @@ public static class Score
 
     public static int Total(GameState state) => Lines(state).Sum(l => l.Points);
 
-    /// <summary>What the run earns: its points, times its challenge level's multiplier.</summary>
-    public static int Renown(GameState state) => (int)MathF.Round(Total(state) * Challenges.Multiplier(state.Challenge));
+    /// <summary>The run's score: its points, times its challenge level's multiplier.</summary>
+    public static int Final(GameState state) => (int)MathF.Round(Total(state) * Challenges.Multiplier(state.Challenge));
 }

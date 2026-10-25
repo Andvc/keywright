@@ -23,13 +23,13 @@ public sealed class SaveData
     public int Tier { get; set; }
     public bool Guided { get; set; }
 
-    /// <summary>Who's minding the stall, on what terms, with what talents (fixed for the run).</summary>
+    /// <summary>Who's minding the stall, and on what terms (fixed for the run).</summary>
     public string Character { get; set; }
     public int Challenge { get; set; }
-    public List<string> Talents { get; set; } = new();
     public List<string> Snubbed { get; set; } = new();
+
+    /// <summary>The Guild Promissory Note has paid a short night (until 0.22, Mara's favour: a talent).</summary>
     public bool MaraUsed { get; set; }
-    public bool KeepsakeTaken { get; set; }
     public int TotalEarned { get; set; }
     public bool UpgradesOpen { get; set; }
     public int MagicFound { get; set; }
@@ -49,11 +49,17 @@ public sealed class SaveData
     /// <summary>Curios seen this run (0.21: the journal's curio page).</summary>
     public List<string> CuriosSeen { get; set; } = new();
 
+    /// <summary>The story's people met this run (0.22: the ledger's Friends page).</summary>
+    public List<string> People { get; set; } = new();
+
     /// <summary>Places heard of.</summary>
     public List<string> Places { get; set; } = new();
     public List<string> ActiveSynergies { get; set; } = new();
     public List<SavedItem> Display { get; set; } = new();
     public List<string> SongsFound { get; set; } = new();
+
+    /// <summary>Heartsongs taken in this run (0.22: each makes the next a quarter as likely).</summary>
+    public int SongsKept { get; set; }
 
     /// <summary>The journal's tally: kind by kind, five qualities each.</summary>
     public List<int> Acquired { get; set; } = new();
@@ -179,8 +185,9 @@ public sealed class SavedCommission
 
 /// <summary>
 /// What you've done across every run, kept apart from the saved shop: runs started, debts cleared, vaults opened, the
-/// furthest week reached and the most gold held; renown to spend and the talents it's bought; and for each of Bram's
-/// kin, the highest challenge level open and the best score.
+/// furthest week reached and the most gold held; the journal and what Bram has taught; and for each of Bram's kin, the
+/// highest challenge level open and the best score. Nothing in it makes a run stronger: every run starts the same
+/// (0.22 retired the talents bought with renown).
 /// </summary>
 public sealed class Profile
 {
@@ -238,17 +245,14 @@ public sealed class Profile
     public List<string> FoundEnchanted { get; set; } = new();
     public List<string> CuriosSeen { get; set; } = new();
 
+    /// <summary>The story's people Bram's kin have met (Nim, Mister Vane, the Hooded Woman, Mara): the ledger's Friends page.</summary>
+    public List<string> People { get; set; } = new();
+
     /// <summary>Everything Nim carries now.</summary>
     public IEnumerable<string> OpenCurios => Curios.All.Where(Opens).Select(c => c.Key);
 
     /// <summary>The fewest days it's taken to clear Bram's debt (0 until it's been cleared).</summary>
     public int FastestClear { get; set; }
-
-    /// <summary>Renown to spend on talents, and all that's ever been earned.</summary>
-    public int Renown { get; set; }
-    public int RenownEarned { get; set; }
-
-    public List<string> Talents { get; set; } = new();
 
     /// <summary>
     /// What Bram has taught, across runs: his tips by key, each seller's lesson ("lesson:" and their key), and the scripted
@@ -270,32 +274,17 @@ public sealed class Profile
 
     public int MaxChallenge(string character) => Challenge.GetValueOrDefault(character);
 
-    public bool Knows(string talent) => Talents.Contains(talent);
-
-    /// <summary>A talent that's next on its branch (what it builds on is learned) and affordable.</summary>
-    public bool CanLearn(TalentDef talent) => !Knows(talent.Key) && (talent.Requires == null || Knows(talent.Requires)) && Renown >= talent.Cost;
-
-    public bool Learn(TalentDef talent)
-    {
-        if (!CanLearn(talent)) return false;
-        Renown -= talent.Cost;
-        Talents.Add(talent.Key);
-        return true;
-    }
-
     /// <summary>The debt's been cleared at this run's level: the next level opens for this character.</summary>
     public void ClearedAt(GameState state) =>
         Challenge[state.Character] = Math.Max(MaxChallenge(state.Character), Math.Min(Challenges.Max, state.Challenge + 1));
 
-    /// <summary>A run is over: its renown and its feats are banked, and its score noted. Returns the renown it earned.</summary>
+    /// <summary>A run is over: its feats are banked, and its score noted. Returns the score.</summary>
     public int Bank(GameState state)
     {
         foreach (var feat in Enum.GetValues<Feat>()) Feats[feat.ToString()] = Done(feat) + Curios.Progress(state, feat);
-        int renown = Score.Renown(state), score = Score.Total(state);
-        Renown += renown;
-        RenownEarned += renown;
+        int score = Score.Final(state);
         BestScore[state.Character] = Math.Max(BestScore.GetValueOrDefault(state.Character), score);
-        return renown;
+        return score;
     }
 
     static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
@@ -306,10 +295,8 @@ public sealed class Profile
     {
         try
         {
+            // An older profile's renown and talents (retired in 0.22) are left behind: every run starts the same now.
             var profile = JsonSerializer.Deserialize<Profile>(json) ?? new Profile();
-            // Bram's Ledger (a talent until 0.21, when every regular you meet stays in the ledger anyway): its renown back.
-            if (profile.Talents.Remove("ledger")) profile.Renown += Core.Talents.LedgerRefund;
-            profile.Talents.RemoveAll(t => !Core.Talents.Exists(t));
             profile.Songs.RemoveAll(s => !Heartsongs.Exists(s));
             return profile;
         }
@@ -327,6 +314,7 @@ public sealed class Profile
         Remember(Found, state.Found);
         Remember(FoundEnchanted, state.FoundEnchanted);
         Remember(CuriosSeen, state.CuriosSeen);
+        Remember(People, state.People);
         foreach (string key in state.Taught.Where(k => !Taught.Contains(k))) Taught.Add(key);
         BestWeek = Math.Max(BestWeek, state.Week);
         BestGold = Math.Max(BestGold, state.Gold);
@@ -346,6 +334,7 @@ public sealed class Profile
         Remember(Found, Collection.Entries.Select(e => e.Entry));
         Remember(FoundEnchanted, Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
         Remember(CuriosSeen, Curios.All.Select(c => c.Key));
+        Remember(People, Story.People);
         Remember(Songs, Heartsongs.All.Select(h => h.Key));
     }
 
@@ -376,4 +365,10 @@ public sealed class Journal
     public HashSet<string> Found { get; } = new();
     public HashSet<string> Enchanted { get; } = new();
     public HashSet<string> Curios { get; } = new();
+
+    /// <summary>The story's people met (<see cref="GameState.People"/>): Nim, Mister Vane, the Hooded Woman, Mara.</summary>
+    public HashSet<string> People { get; } = new();
+
+    /// <summary>The grandest shop any run has reached: the ledger keeps what was learned there.</summary>
+    public int Tier { get; set; }
 }

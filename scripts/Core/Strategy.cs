@@ -53,6 +53,13 @@ public static class Strategy
     /// <summary>What a careful player expects in this chest: what the place it came from holds, or what the seller usually brings.</summary>
     static float[] Likely(Visit visit) => visit.Origin?.Kinds ?? visit.Seller.Kinds;
 
+    /// <summary>The kind a chest from this place (or this seller) most often holds, at this shop.</summary>
+    public static Category? MostLikely(Visit visit, int tier)
+    {
+        var likely = Likely(visit);
+        return Categories.UpTo(tier).OrderByDescending(k => likely[(int)k.Category]).Select(k => (Category?)k.Category).FirstOrDefault();
+    }
+
     /// <summary>How much of what's likely in this chest is delicate (coin, potions, gems), at this seller's shop.</summary>
     static float DelicateShare(Visit visit)
     {
@@ -88,9 +95,8 @@ public static class Strategy
     public static bool ShouldUseMagnet(Visit visit, Hearing hearing, GameState state) => MagnetLevels(visit, hearing, state).Length > 0;
 
     /// <summary>
-    /// What a careful player ticks when they couldn't shake hard enough to hear it: a soft kind the seller says they
-    /// heard (always true: Gerda shakes hard on a day of mourning), else on faith, one the seller usually brings or the
-    /// place holds (Brother Ansel's crypt vestments). Their habit is in the ledger.
+    /// What a careful player ticks when they couldn't shake hard enough to hear it: on faith, a soft kind the seller
+    /// usually brings or the place holds (Brother Ansel's crypt vestments). Their habit is in the ledger.
     /// </summary>
     public static void OnFaith(Visit visit, Appraisal slip, Hearing hearing, GameState state = null)
     {
@@ -98,7 +104,7 @@ public static class Strategy
         var likely = Likely(visit);
         float total = likely.Sum();
         foreach (var kind in Categories.UpTo(slip.Tier).Where(k => k.StirsAt == Shake.Hard && slip.Count(k.Category) == 0 && !CouldStir(visit, hearing, k.Category)))
-            if (visit.Claim.Contains(kind.Category) || likely[(int)kind.Category] / total >= FaithShare) slip.Set(kind.Category, 1);
+            if (likely[(int)kind.Category] / total >= FaithShare) slip.Set(kind.Category, 1);
     }
 
     /// <summary>The Bookkeeping Engine read this chest (it can't through chains).</summary>
@@ -281,6 +287,9 @@ public static class Strategy
             worth -= Math.Max(0, slip.OneValue(heirloom, slip.Magic(heirloom)) - visit.Fee);
         if (seller.TakesDearest)
             worth -= slip.Marked.Select(k => (float)slip.OneValue(k, slip.Magic(k))).Append(slip.Hidden ? slip.HiddenValue : 0).DefaultIfEmpty(0).Max();
+        // A Heartsong's worth nothing in gold, but singing in the shop it's worth more than any chest: a careful player
+        // pays up for one (what two of the shop's chests would cost).
+        if (state != null && slip.Count(Category.Heartsong) > 0) worth += state.WorkingPurse;
         return (int)worth;
     }
 
@@ -320,19 +329,15 @@ public static class Strategy
             if (n == 0) continue;
             float p = Categories.Odds(slip.Chest).Where(o => o.Quality >= c.Quality - state.LetterLeeway(c)).Sum(o => o.Chance);
             float hit = 1 - MathF.Pow(1 - p, Math.Min(n, c.Needed - c.Delivered));
-            float each = state.CommissionReward(c) / (float)c.Needed - Categories.Nominal(c.Category, c.Quality) * state.SaleMultiplier(c.Category);
+            float sale = Categories.Nominal(c.Category, c.Quality) * state.SaleMultiplier(c.Category);
+            float each = Math.Max(state.CommissionEach(c), sale * Patrons.Premium) - sale;
             extra += hit * Math.Max(0, each) * (c.Story ? 1f : 0.5f);
         }
         return extra;
     }
 
-    /// <summary>Hand it over if a commission wants it and pays more than selling it would (story ones always).</summary>
-    public static Commission ShouldDeliver(GameState state, Item item, int saleValue)
-    {
-        var c = state.WantedBy(item);
-        if (c == null) return null;
-        return c.Story || state.CommissionReward(c) / (float)c.Needed >= saleValue ? c : null;
-    }
+    /// <summary>Hand it over if a commission wants it: it always pays more than selling it would.</summary>
+    public static Commission ShouldDeliver(GameState state, Item item, int saleValue) => state.WantedBy(item);
 
     /// <summary>What a careful player's shop of each tier clears in a bad day's trading (about half a usual one).</summary>
     static readonly int[] BadDay = { 0, 20, 70, 500, 7000 };
@@ -395,7 +400,7 @@ public static class Strategy
         ["catalogue"] = 6, ["dome"] = 2, ["book"] = 12, ["rope"] = 2, ["lamps"] = 4,
         ["gauntlet"] = 4, ["cap"] = 4, ["whetstone"] = 4, ["dummy"] = 4, ["scales"] = 6, ["still"] = 4, ["desk"] = 2, ["wheel"] = 8,
         ["oil"] = 2, ["knife"] = 1, ["gloves"] = 3, ["loupe"] = 1, ["mark"] = 2,
-        ["purse"] = 1, ["ticket"] = 1, ["marker"] = 1, ["jar"] = 12, ["lockbox"] = 4,
+        ["purse"] = 1, ["ticket"] = 1, ["marker"] = 1, ["note"] = 2, ["jar"] = 12, ["lockbox"] = 4,
         ["letter"] = 9, ["ribbon"] = 11, ["errand"] = 3, ["net"] = 7,
     };
 
@@ -511,8 +516,8 @@ public static class Strategy
     /// <returns>Whether to keep it, and what to sell from the display to make room (or null).</returns>
     public static (bool Keep, Item Replace) ShouldKeep(GameState state, Item item, int value)
     {
-        // A Heartsong: highly recommended, and it takes no room. Kept unless its price is what pays the Guild tonight.
-        if (item.IsSong) return (state.Gold - value >= (state.DuesTonight ? state.DueNow : 0), null);
+        // A Heartsong: worth nothing sold, a great deal singing in the shop, and it takes no room. Always kept.
+        if (item.IsSong) return (true, null);
         if (state.Is(Characters.Isolde)) return Collects(state, item, value);
         if (!item.Displayable || item.Prestige < 2 || state.Tier < 3 || (state.Exhibition >= GameState.ExhibitionCap && !state.HasCurio("book")) ||
             value > item.Prestige * GoldPerPoint || state.Gold - value < 20 + 15 * state.Tier)

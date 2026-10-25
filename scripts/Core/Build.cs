@@ -275,14 +275,15 @@ public sealed partial class GameState : ISlipModel
 
     /// <summary>
     /// What a thing nobody but you knows is there fetches, against an ordinary one (never in the index): enchantment (the
-    /// Arcanist's name, a spellbinder's ring), what was under a false bottom (a Finder's name, a black-market pass), a
-    /// warded thing named (a Finder's name, a wardbreaker's tally).
+    /// Arcanist's name, a spellbinder's ring), what was under a false bottom (a third more, a Finder's name, a black-market
+    /// pass), a warded thing named (a third more, a Finder's name, a wardbreaker's tally).
     /// </summary>
     float Special(bool magic, bool hidden, bool warded)
     {
         float b = 1;
         if (magic) b *= (1 + Synergies.MagicSales(this)) * (HasCurio("ring") ? Curios.RingMagic / Categories.MagicMultiplier : 1);
-        if (hidden || warded) b *= 1 + Synergies.FinderSales(Active("finder"));
+        // A hidden thing is never enchanted: it fetches a third more instead (what someone hid is a little special).
+        if (hidden || warded) b *= Categories.HiddenMultiplier * (1 + Synergies.FinderSales(Active("finder")));
         if (hidden && HasCurio("pass")) b *= Curios.PassBonus;
         if (warded && HasCurio("wardtally")) b *= 1 + Curios.WardTallyStep * WardsNamed;
         return b;
@@ -621,5 +622,5 @@ public sealed partial class GameState : ISlipModel
     public int PeddlerTier { get; private set; }
 
     /// <summary>What Nim asks for a curio today (nothing, while the keepsake is still to give).</summary>
-    public int CuriosPrice(CurioDef curio) => Keepsake ? 0 : Curios.Price(curio, PeddlerPurse);
+    public int CuriosPrice(CurioDef curio) => Curios.Price(curio, PeddlerPurse);
 }

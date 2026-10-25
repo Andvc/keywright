@@ -8,11 +8,13 @@ namespace Keywright.Ui;
 /// <summary>
 /// The shop's ledger. Sounds: one row per kind of thing your shop sees (its sound, how hard you must shake to hear it,
 /// how heavy it is, and what one is worth if it's as good as each colour of chest promises; click a row to hear it),
-/// and the rules of listening. Regulars: how each seller you've met judges a chest, trades and behaves. Calendar: today, the Guild's
+/// and the rules of listening. Regulars: how each seller you've met judges a chest, trades and behaves (whoever's at the
+/// counter framed), and Uncle Bram and the story's people on the Friends spread. Calendar: today, the Guild's
 /// nights and what they'll cost, the days Nim comes by, and what's happening in town this week and next. Collection:
 /// everything Bram's kin have found, this run and every one before. Curios: every curio, the ones you've seen, the ones
 /// Nim carries, and what opens the rest. Synergies: what the shop could be known for, how far along each is, and (at the
-/// end of a day) which are active. Songs: the Heartsongs Bram's kin have opened, once there's one to show.
+/// end of a day) which are active. Songs: the Heartsongs Bram's kin have opened, once there's one to show. What any
+/// run has learned stays in it: the sounds and regulars of the grandest shop any run reached (<see cref="GameState.JournalTier"/>).
 /// </summary>
 public partial class LedgerView : Node2D
 {
@@ -23,6 +25,9 @@ public partial class LedgerView : Node2D
     readonly GameState _state;
     readonly int _firstPage;
     readonly bool _choosing;
+
+    /// <summary>Whoever's at the counter: the Regulars page opens at their place, their entry framed.</summary>
+    readonly string _current;
     Node2D _page;
     bool _closing;
 
@@ -31,11 +36,13 @@ public partial class LedgerView : Node2D
     public LedgerView() { }
 
     /// <param name="choosing">Synergies can be switched on and off (at the end of a day).</param>
-    public LedgerView(GameState state, int page = 0, bool choosing = false)
+    /// <param name="current">The seller at the counter, if any.</param>
+    public LedgerView(GameState state, int page = 0, bool choosing = false, string current = null)
     {
         _state = state;
         _firstPage = page;
         _choosing = choosing;
+        _current = current;
     }
 
     static Audio.Sfx Sfx => Main.Instance.Sfx;
@@ -76,7 +83,7 @@ public partial class LedgerView : Node2D
         foreach (var child in _page.GetChildren()) child.QueueFree();
         if (page == 5 && _state.Songbook.Count > 0) BuildSongs();
         else if (page == 6) BuildCurios();
-        else if (page == 1) BuildRegulars(Spread(_state.Tier));
+        else if (page == 1) BuildRegulars(CurrentSpread);
         else if (page == 2) BuildCollection();
         else if (page == 4) BuildCalendar();
         else if (page == 3 && _state.SynergiesOpen) BuildSynergies();
@@ -150,7 +157,7 @@ public partial class LedgerView : Node2D
     {
         int known = Heartsongs.All.Count(h => _state.Songbook.Contains(h.Key));
         _page.AddChild(UiKit.MakeLabel("Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a " +
-                                       "Keywright hears one sing; to anyone else it's a trinket. Hover a card for its story. " +
+                                       "Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. " +
                                        $"Bram's kin know {known} of the nine" +
                                        (known == Heartsongs.All.Length ? ": the Crown Chest can be sung whole." : ": with all nine, the Crown Chest's ending changes."),
             16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
@@ -280,7 +287,7 @@ public partial class LedgerView : Node2D
 
     void BuildSounds()
     {
-        int tier = _state.Tier;
+        int tier = _state.JournalTier;
         float y = PanelY + 60;
         Header("Kind", TableX + 48, y);
         Header("Sound", TableX + 220, y);
@@ -338,39 +345,117 @@ public partial class LedgerView : Node2D
     /// <summary>Which spread of the regulars a shop tier's sellers are on: one per place.</summary>
     static int Spread(int tier) => Math.Clamp(tier, 1, ShopTiers.Max) - 1;
 
-    /// <summary>The regulars, a spread per place, with buttons along the bottom.</summary>
+    /// <summary>The Friends spread, after the four places: Uncle Bram and the story's people.</summary>
+    const int FriendsSpread = ShopTiers.Max;
+
+    /// <summary>The spread to open on: the place of whoever's at the counter, or this shop's.</summary>
+    int CurrentSpread => Sellers.All.FirstOrDefault(s => s.Key == _current) is SellerDef seller ? Spread(seller.Tier) : Spread(_state.Tier);
+
+    /// <summary>The person whose page is open below the list (whoever's at the counter, to begin with).</summary>
+    string _selected;
+
+    /// <summary>
+    /// The regulars, a spread per place (every place any run has reached: what's learned stays learned), and the
+    /// Friends spread; buttons along the bottom. Each person is a line in the list (whoever's at the counter framed in
+    /// gold); click one for their page below it.
+    /// </summary>
     void BuildRegulars(int spread)
     {
-        int total = Sellers.All.Count(s => s.Tier <= _state.Tier);
-        int metCount = Sellers.All.Count(s => s.Tier <= _state.Tier && _state.Met.Contains(s.Key));
+        int tier = _state.JournalTier;
+        int total = Sellers.All.Count(s => s.Tier <= tier);
+        int metCount = Sellers.All.Count(s => s.Tier <= tier && _state.Met.Contains(s.Key));
         _page.AddChild(UiKit.MakeLabel($"{metCount} of {total} met", 16, Palette.Muted, HorizontalAlignment.Right)
             .Place(PanelX + PanelW - 224, PanelY + PanelH - 32, 200, 20));
-        for (int i = 0; i <= Spread(_state.Tier) && _state.Tier >= 2; i++)
+        const float buttonW = 180, step = 188;
+        for (int i = 0; i <= Spread(tier); i++)
         {
             int which = i;
             _page.AddChild(UiKit.MakeButton(ShopTiers.Name(i + 1), spread == i ? Palette.Gold : Palette.Text, 16, () => ShowRegulars(which))
-                .Place(TableX + i * 216, PanelY + PanelH - 44, 208, 34));
+                .Place(TableX + i * step, PanelY + PanelH - 44, buttonW, 34));
         }
+        _page.AddChild(UiKit.MakeButton("Friends & foes", spread == FriendsSpread ? Palette.Gold : Palette.Magic, 16, () => ShowRegulars(FriendsSpread))
+            .Place(TableX + (Spread(tier) + 1) * step, PanelY + PanelH - 44, buttonW, 34));
 
-        var met = Sellers.All.Where(s => s.Tier <= _state.Tier && Spread(s.Tier) == spread && _state.Met.Contains(s.Key)).ToList();
-        if (met.Count == 0)
+        var people = spread == FriendsSpread ? Friends() : Sellers.All.Where(s => s.Tier <= tier && Spread(s.Tier) == spread && _state.Met.Contains(s.Key))
+            .Select(s => (s.Key, s.Name, Role: $"{s.JudgeWord}; {Trade(s)}", About: s.Habit)).ToList();
+        if (people.Count == 0)
         {
-            _page.AddChild(UiKit.MakeLabel("You haven't met anyone yet.", 24, Palette.Muted, HorizontalAlignment.Center).Place(PanelX, 300, PanelW, 30));
+            _page.AddChild(UiKit.MakeLabel("You haven't met anyone here yet.", 24, Palette.Muted, HorizontalAlignment.Center).Place(PanelX, 300, PanelW, 30));
             return;
         }
-        for (int i = 0; i < met.Count; i++)
+        if (people.All(p => p.Key != _selected)) _selected = people.Any(p => p.Key == _current) ? _current : people[0].Key;
+        for (int i = 0; i < people.Count; i++) Entry(i, people[i].Key, people[i].Name, people[i].Role, spread);
+        var chosen = people.First(p => p.Key == _selected);
+        Page(chosen.Key, chosen.Name, chosen.Role, chosen.About);
+    }
+
+    static string Trade(SellerDef seller) => seller.Trade switch { Core.Trade.Haggle => "haggles", Core.Trade.Offer => "you name the price", _ => "fixed price" };
+
+    /// <summary>Uncle Bram (always) and the story's people you've met: Nim, Mister Vane, the Hooded Woman, who's Mara.</summary>
+    System.Collections.Generic.List<(string Key, string Name, string Role, string About)> Friends()
+    {
+        var people = new System.Collections.Generic.List<(string Key, string Name, string Role, string About)>
         {
-            var seller = met[i];
-            float x = TableX + i % 2 * 580, y = PanelY + 58 + i / 2 * 98;
-            _page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{seller.Key}.png", new Vector2(x + 20, y + 24), 1));
-            string trade = seller.Trade switch { Trade.Haggle => "haggles", Trade.Offer => "you name the price", _ => "fixed price" };
-            var name = UiKit.MakeLabel(seller.Name, 16, Palette.Gold).Place(x + 52, y + 2, 260, 20);
-            name.TooltipText = $"{seller.Name} {seller.JudgeWord}; {trade}.";
-            name.MouseFilter = Control.MouseFilterEnum.Pass;
-            _page.AddChild(name);
-            _page.AddChild(UiKit.MakeLabel($"{seller.JudgeWord}; {trade}", 16, Palette.Muted, HorizontalAlignment.Right).Place(x + 252, y + 2, 300, 20));
-            _page.AddChild(UiKit.MakeLabel(seller.Habit, 16, Palette.Text).Wrapped().Place(x + 52, y + 22, 510, 70));
+            (Story.Bram, Hints.Mentor, "your mentor", "Keywright at the Brindle crossroads for forty years, until his Key-mark faded and showed on " +
+                                                  "your hand. Keeps a stash for bad days and a tip for everything. Never paid the Guild a penny."),
+        };
+        if (_state.HasMet(Story.Nim))
+            people.Add((Story.Nim, Peddler.Name, "sells curios", "Comes by twice a week with oddments from the Locking, each bending one rule of the trade. " +
+                                                             "Notices what you buy and brings more like it. Don't ask what Nim is."));
+        if (_state.HasMet(Story.Vane))
+            people.Add((Story.Vane, Guild.Collector, "the Gilded Guild", "Collector for the Guild that keeps the Gate. Comes at the end of every week for " +
+                                                                    "the tithe Bram never paid. Miss one, and the Guild seals the shop."));
+        if (_state.HasMet(Story.Mara))
+            people.Add((Story.Hood, "Mara", "the Hooded Woman", Story.VaultSeller.Habit + " She trades the Key's shards for what she asks."));
+        else if (_state.HasMet(Story.Hood))
+            people.Add((Story.Hood, Story.HoodName, "trades shards", "Knows Bram, and the Key-mark on your hand. Trades shards of the Aldric Key for " +
+                                                                 "things she asks for, and won't say who she is."));
+        return people;
+    }
+
+    /// <summary>
+    /// One person in the list, two to a row: face, name and how they deal. Whoever's at the counter is framed in gold, and
+    /// the frame breathes; the one whose page is open below is marked. Click for their page.
+    /// </summary>
+    void Entry(int i, string key, string name, string role, int spread)
+    {
+        const float w = 566, h = 46;
+        float x = TableX - 8 + i % 2 * 580, y = PanelY + 56 + i / 2 * 52;
+        bool current = key == _current, selected = key == _selected;
+        var row = UiKit.MakePanel(current ? Palette.Gold : selected ? Palette.Magic : Palette.PanelBorder).Place(x, y, w, h);
+        row.MouseFilter = Control.MouseFilterEnum.Stop;
+        row.MouseDefaultCursorShape = Control.CursorShape.PointingHand;
+        row.TooltipText = $"{name}: {role}. Click for their page.";
+        row.GuiInput += e =>
+        {
+            if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) return;
+            _selected = key;
+            Sfx.Play("tick", 1.2f, -8);
+            ShowRegulars(spread);
+        };
+        _page.AddChild(row);
+        if (current)
+        {
+            var pulse = row.CreateTween().SetLoops();
+            pulse.TweenProperty(row, "self_modulate", new Color(1.35f, 1.3f, 1f), 0.7f);
+            pulse.TweenProperty(row, "self_modulate", Colors.White, 0.7f);
         }
+        row.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{key}.png", new Vector2(26, h / 2), 1));
+        row.AddChild(UiKit.MakeLabel(name, 16, current ? Palette.Gold : Palette.Text).Place(52, 4, 300, 20));
+        row.AddChild(UiKit.MakeLabel(current ? "at your counter" : role, 16, current ? Palette.Gold : Palette.Muted).Place(52, 24, 500, 20));
+    }
+
+    /// <summary>The open page under the list: a big face, the name, how they deal, and everything you know of them.</summary>
+    void Page(string key, string name, string role, string about)
+    {
+        float y = PanelY + 56 + 4 * 52 + 6;
+        var page = UiKit.MakePanel(key == _current ? Palette.Gold.Darkened(0.2f) : Palette.PanelBorder).Place(TableX - 8, y, PanelW - 32, PanelY + PanelH - 52 - y);
+        page.MouseFilter = Control.MouseFilterEnum.Ignore;
+        _page.AddChild(page);
+        page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{key}.png", new Vector2(56, 58), 2));
+        page.AddChild(UiKit.MakeLabel(name, 24, Palette.Gold, outline: 4).Place(112, 10, 600, 30));
+        page.AddChild(UiKit.MakeLabel(role, 16, Palette.Muted, HorizontalAlignment.Right).Place(600, 16, PanelW - 660, 20));
+        page.AddChild(UiKit.MakeLabel(about, 16, Palette.Text).Wrapped().Place(112, 44, PanelW - 168, 96));
     }
 
     /// <summary>

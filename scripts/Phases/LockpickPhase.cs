@@ -63,7 +63,7 @@ public partial class LockpickPhase : Phase
         Add(UiKit.MakeLabel(warning, 16, glass ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 688, 1280, 20));
         _crowbar = Add(UiKit.MakeButton("Force it with a crowbar  [F]", Palette.Bad, 16, Force).Place(480, 624, 320, 52));
         _mentor = Add(new MentorView { Position = new Vector2(24, 300), ZIndex = 20 });
-        if (State.FirstTime("lockpick")) _mentor.Say(Hints.Get("lockpick"));
+        _mentor.Teach(State, "lockpick");
         Game.Moment("06_lockpick", 0.6);
     }
 

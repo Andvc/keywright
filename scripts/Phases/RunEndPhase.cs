@@ -83,8 +83,8 @@ public partial class RunEndPhase : Phase
     }
 
     /// <summary>
-    /// The run's score, line by line, and the renown it earns at this challenge level: banked when the run ends (a
-    /// cleared run that keeps trading adds to it every week it keeps the Guild paid).
+    /// The run's score, line by line, and times this challenge level's multiplier: noted as the character's best when the
+    /// run ends (a cleared run that keeps trading adds to it every week it keeps the Guild paid).
     /// </summary>
     void BuildScore(Color color)
     {
@@ -98,10 +98,11 @@ public partial class RunEndPhase : Phase
             panel.AddChild(UiKit.MakeLabel(label, 16, Palette.Muted).Place(32, 50 + i * 26, 380, 20));
             panel.AddChild(UiKit.MakeLabel($"{points}", 16, Palette.Text, HorizontalAlignment.Right).Place(400, 50 + i * 26, 108, 20));
         }
-        int total = Score.Total(State), renown = Score.Renown(State);
+        int total = Score.Total(State), final = Score.Final(State);
         string times = State.Challenge > 0 ? $"{total} x{Challenges.Multiplier(State.Challenge):0.##} = " : "";
-        panel.AddChild(UiKit.MakeLabel("Renown", 24, Palette.Gold, outline: 4).Place(32, 254, 200, 30));
-        panel.AddChild(UiKit.MakeLabel($"{times}{renown}", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 254, 308, 30));
+        int best = Game.Profile?.BestScore.GetValueOrDefault(State.Character) ?? 0;
+        panel.AddChild(UiKit.MakeLabel(final > best ? "Score: a new best!" : "Score", 24, Palette.Gold, outline: 4).Place(32, 254, 260, 30));
+        panel.AddChild(UiKit.MakeLabel($"{times}{final}", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 254, 308, 30));
     }
 
     /// <summary>What this run opened up: another of Bram's kin, the next challenge level; or the record across runs.</summary>

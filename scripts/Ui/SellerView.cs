@@ -11,6 +11,12 @@ public partial class SellerView : Node2D
 
     readonly SellerDef _seller;
     Node2D _body;
+
+    /// <summary>Clicking the face: the counter opens their page in the ledger.</summary>
+    public event System.Action Clicked;
+
+    /// <summary>The face can be clicked (set before it's added).</summary>
+    public bool Clickable { get; init; }
     Label _text;
     Panel _bubble;
 
@@ -32,6 +38,16 @@ public partial class SellerView : Node2D
             Scale = Vector2.One * FaceScale,
         });
         _body.AddChild(UiKit.MakeLabel(_seller.Name, 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-140, 94, 280, 30));
+        if (Clickable)
+        {
+            var face = new Button
+            {
+                Flat = true, FocusMode = Control.FocusModeEnum.None, MouseDefaultCursorShape = Control.CursorShape.PointingHand,
+                TooltipText = $"{_seller.Name}: click to read their page in your ledger.",
+            };
+            face.Pressed += () => Clicked?.Invoke();
+            _body.AddChild(face.Place(-88, -88, 176, 176));
+        }
 
         _bubble = UiKit.MakePanel(Palette.Text);
         _bubble.Place(-BubbleW / 2, 136, BubbleW, BubbleH);

@@ -19,10 +19,13 @@ public sealed record HeartsongDef(string Key, string Name, string Word, string F
 /// things they loved more than gold, and sang the Locking into nine of them. Then they hid each one in an ordinary chest
 /// among millions, where the Maw would never find them all, and when one is sold it goes back to the Locking, to turn up
 /// in some other chest some day. Only a Keywright hears one sing: it sings at the gentlest shake, and nothing drowns it
-/// out or stills it. To anyone else it's a trinket, worth what a trinket as fine as its chest fetches (no seller ever
-/// prices one, or knows it's there), and the Guild won't take one in pawn: greed can't put a price on it.
+/// out or stills it. It's worth nothing in gold (no seller ever prices one, or knows it's there; no merchant would buy
+/// one), and the Guild won't take one in pawn: greed can't put a price on it.
 /// <para>
-/// Every chest a seller brings (not a lesson's, not the first day's) has a small chance of holding one: about one run in two.
+/// Every chest a seller brings (not a lesson's, not the first day's) has a small chance of holding one: about one run in
+/// three, and each one Bram's kin take in makes the next a quarter as likely (<see cref="Fade"/>). When one comes out
+/// you keep it (free) or let it go back to the Locking. If you can't afford a chest one's singing in and pass, the chest
+/// bursts and lets it out to you (and only it: the rest goes with the seller).
 /// On display (any shop, no shelf needed, no slot taken), each changes the trade for good: they're the rarest things in
 /// Aldmark, and each one is worth a run built around it. None of them shows what a chest is worth: the Drowned Bell
 /// counts what's inside, the Bottled Star lights up enchantment, and the rest is still yours to work out. Bram's kin
@@ -32,11 +35,17 @@ public sealed record HeartsongDef(string Key, string Name, string Word, string F
 /// </summary>
 public static class Heartsongs
 {
-    /// <summary>The chance any chest a seller brings holds one (--heartsongs=N sets it, for screenshots).</summary>
-    public static float Chance { get; set; } = 0.007f;
+    /// <summary>
+    /// The chance any chest a seller brings holds one (--heartsongs=N sets it, for screenshots): about a third of a
+    /// Heartsong a run, careful or not (0.22; 0.21's 0.7% was nearly one a run).
+    /// </summary>
+    public static float Chance { get; set; } = 0.0024f;
 
-    /// <summary>What a merchant pays for one as a trinket, times the quality multiplier of its chest's colour.</summary>
-    public const int BaseValue = 10;
+    /// <summary>Each Heartsong taken in this run makes the next this much as likely (a quarter: three-quarters less).</summary>
+    public const float Fade = 0.25f;
+
+    /// <summary>What one fetches: nothing. Greed can't put a price on it.</summary>
+    public const int BaseValue = 0;
 
     /// <summary>One you've never found is this many times likelier to turn up than one you have.</summary>
     public const float NewWeight = 3f;
@@ -105,8 +114,8 @@ public static class Heartsongs
     public const string Lore =
         "A lock of gold could never hold the demon of greed. So at the Locking the archmages asked the peoples of Aldmark " +
         "for things they loved more than gold, and sang the Locking into nine of them: the Heartsongs. Then they hid each in " +
-        "an ordinary chest, among millions. Only a Keywright hears one sing. To anyone else it's a trinket, and the Guild " +
-        "won't touch one: greed can't put a price on it.";
+        "an ordinary chest, among millions. Only a Keywright hears one sing. To anyone else it's worth nothing, and the " +
+        "Guild won't touch one: greed can't put a price on it.";
 
     /// <summary>
     /// Whether this chest holds a Heartsong, and which: one you've never found is likelier (<see cref="NewWeight"/>), and
@@ -122,6 +131,6 @@ public static class Heartsongs
         return free.Length == 0 ? null : rng.PickWeighted(free, h => known.Contains(h.Key) ? 1f : NewWeight);
     }
 
-    /// <summary>A Heartsong in a chest of this colour (priced as a trinket that fine).</summary>
+    /// <summary>A Heartsong in a chest of this colour (it keeps the colour for the reveal: it's worth nothing either way).</summary>
     public static Item Make(HeartsongDef song, Rarity chest) => new(Category.Heartsong, chest, Song: song.Key);
 }

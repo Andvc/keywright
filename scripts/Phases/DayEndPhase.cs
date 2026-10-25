@@ -24,6 +24,7 @@ public partial class DayEndPhase : Phase
     MentorView _mentor;
     Button _synergies;
     LedgerView _ledger;
+    bool _built;
 
     public MentorView Mentor => _mentor;
 
@@ -44,6 +45,8 @@ public partial class DayEndPhase : Phase
         _goldLabel = Add(UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(256, 182, 600, 20));
         _cards = Add(new Node2D());
         _side = Add(new Node2D());
+        // Bram first: building the cards can already call for a tip (the Bookkeeping Engine's, the first time it's offered).
+        _mentor = Add(new MentorView { Position = new Vector2(40, 440), ZIndex = 20 });
         BuildCards();
 
         bool dues = State.DuesTonight && !State.PaidThisWeek;
@@ -52,13 +55,13 @@ public partial class DayEndPhase : Phase
             dues ? Palette.Warn : Palette.Gold, dues ? 16 : 24, NextDay).Place(SideX, 626, SideW, 64));
         _synergies = Add(UiKit.MakeButton("", Palette.Magic.Darkened(0.2f), 16, OpenSynergies).Place(SideX, 586, SideW, 34));
         RefreshSynergyButton();
-        _mentor = Add(new MentorView { Position = new Vector2(40, 440), ZIndex = 20 });
-        Teach(State.UpgradesOpen ? null : "dayend");
-        if (!shopWasOpen && State.UpgradesOpen) Celebrate("The shop's open for business!");
-        if (State.UpgradesOpen) Teach("upgrades");
-        Unlocked();
-        if (State.Display.Count > 0) Teach("exhibition");
+        // One tip at a time, the most pressing first: the rest wait for an evening when they're still news.
         if (State.CanPayOff) Teach("payoff");
+        if (State.EngineOffered) Teach("engine");
+        if (!shopWasOpen && State.UpgradesOpen) Celebrate("The shop's open for business!");
+        Unlocked();
+        Teach(State.UpgradesOpen ? "upgrades" : "dayend");
+        if (State.Display.Count > 0) Teach("exhibition");
         Sfx.Play(today.Profit >= 0 ? "win" : "lose", 1f, -6);
         Game.Moment("09_dayend", 0.5);
     }
@@ -92,13 +95,8 @@ public partial class DayEndPhase : Phase
         }
     }
 
-    /// <summary>Bram's tip, the first time. True if he said it.</summary>
-    bool Teach(string key)
-    {
-        if (key == null || !State.FirstTime(key)) return false;
-        _mentor.Say(Hints.Get(key));
-        return true;
-    }
+    /// <summary>Bram's tip, the first time, if he isn't saying something else. True if he said it.</summary>
+    bool Teach(string key) => _mentor.Teach(State, key);
 
     /// <summary>What the shop's grown into brings, said once: a shelf to display things on, synergies, the Emporium.</summary>
     void Unlocked()
@@ -148,7 +146,9 @@ public partial class DayEndPhase : Phase
             float x = CardsX + i % 2 * (CardW + CardGapX), y = CardsY + i / 2 * (CardH + CardGapY);
             _cards.AddChild(MakeCard(offers[i], x, y));
         }
-        if (offers.Any(u => u.Key == Upgrades.Engine)) Teach("engine");
+        // Offered after something sold off the display: the evening's own tips have had their turn.
+        if (_built && offers.Any(u => u.Key == Upgrades.Engine)) Teach("engine");
+        _built = true;
 
         BuildExhibition();
     }
@@ -186,7 +186,7 @@ public partial class DayEndPhase : Phase
             float y = 36 + i * 39;
             var color = c.Done ? Palette.Good : c.Story ? Palette.Magic : Palette.Text;
             string patron = c.Who;
-            string reward = c.Done ? "DONE" : c.Story ? $"{State.CommissionReward(c)}g + shard" : $"{State.CommissionReward(c)}g";
+            string reward = c.Done ? "DONE" : c.Story ? $"{State.CommissionEach(c)}g + shard" : c.Needed > 1 ? $"{State.CommissionEach(c)}g each" : $"{State.CommissionEach(c)}g";
             board.AddChild(UiKit.MakeLabel(patron, 16, color).Place(14, y, 220, 20));
             board.AddChild(UiKit.MakeLabel(reward, 16, c.Done ? Palette.Good : Palette.Gold, HorizontalAlignment.Right).Place(180, y, 174, 20));
             board.AddChild(UiKit.MakeLabel($"{c.What} {c.Progress}", 16, Palette.Muted).Place(14, y + 18, SideW - 28, 20));
@@ -199,7 +199,7 @@ public partial class DayEndPhase : Phase
         if (State.CurioKeys.Count == 0)
             curios.AddChild(UiKit.MakeLabel(State.NextPeddler > 0 ? $"Nim the peddler comes by on day {State.NextPeddler}." : "Nim comes by once a week.", 16, Palette.Muted)
                 .Wrapped().Place(14, 30, SideW - 28, 40));
-        // Up to six (cases and a talent): closer together when there are more than four.
+        // Up to six (with curio cases): closer together when there are more than four.
         float step = Math.Min(60, (SideW - 124) / Math.Max(1, State.CurioKeys.Count));
         for (int i = 0; i < State.CurioKeys.Count; i++)
         {
@@ -236,7 +236,7 @@ public partial class DayEndPhase : Phase
         if (State.CanPayOff)
         {
             var payOff = UiKit.MakeButton($"Pay it all off: {State.DebtLeft}g", Palette.Good, 16, ConfirmPayOff).Place(14, 72, SideW - 28, 32);
-            payOff.TooltipText = "Every week's due that's left of Bram's debt, to the eighth, all at once. The run is won; you can keep trading after.";
+            payOff.TooltipText = "Every week's due that's left of Bram's debt, to the last, all at once. The run is won; you can keep trading after.";
             guild.AddChild(payOff);
             return;
         }
@@ -265,7 +265,7 @@ public partial class DayEndPhase : Phase
         _confirm.AddChild(panel);
         panel.AddChild(UiKit.MakeLabel("PAY OFF THE DEBT?", 32, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, 20, 620, 40));
         string weeks = State.Week < Guild.Weeks ? $", {Guild.Weeks - State.Week} week{(Guild.Weeks - State.Week == 1 ? "" : "s")} early" : "";
-        panel.AddChild(UiKit.MakeLabel($"Pay the Guild {left}g now: every week's due that's left, to the eighth. Bram's debt is cleared{weeks}, " +
+        panel.AddChild(UiKit.MakeLabel($"Pay the Guild {left}g now: every week's due that's left, to the last. Bram's debt is cleared{weeks}, " +
                                        $"and you'd have {State.Gold - left}g left. You can keep trading after.", 16, Palette.Text, HorizontalAlignment.Center)
             .Wrapped().Place(40, 74, 540, 90));
         panel.AddChild(UiKit.MakeButton("Pay it off", Palette.Good, 24, PayOff).Place(60, 184, 240, 56));
@@ -308,8 +308,8 @@ public partial class DayEndPhase : Phase
             if (!filled) continue;
             var item = shown[i];
             slot.AddChild(UiKit.MakeItemIcon(item, new Vector2(25, 25), 44));
-            var sell = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = $"{item.Name}, {item.Prestige} points{(item.Magic ? " (double: enchanted)" : "")}. Click to sell it for {item.Value}g." };
-            sell.Pressed += () => SellFromDisplay(item);
+            var sell = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = $"{item.Name}, {item.Prestige} points{(item.Magic ? " (double: enchanted)" : "")}. Click to sell it for {State.SaleValue(item)}g." };
+            sell.Pressed += () => AskSell(item);
             slot.AddChild(sell.Place(0, 0, 50, 50));
         }
         string found = $"Collection: {State.Found.Count} of {Collection.Size} found.";
@@ -338,18 +338,34 @@ public partial class DayEndPhase : Phase
             _cards.AddChild(slot);
             slot.AddChild(UiKit.MakeItemIcon(item, new Vector2(25, 25), 44));
             var sell = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None,
-                TooltipText = $"{item.Name}, singing: {item.SongDef.Effect} Click to sell it for {item.Value}g (it goes back to the Locking)." };
-            sell.Pressed += () => SellFromDisplay(item);
+                TooltipText = $"{item.Name}, singing: {item.SongDef.Effect} Click to let it go (it fetches nothing)." };
+            sell.Pressed += () => AskSell(item);
             slot.AddChild(sell.Place(0, 0, 50, 50));
         }
     }
 
+    /// <summary>Sell something on display (or let a Heartsong go)? Asked first: it comes off display, and what it did with it.</summary>
+    public void AskSell(Item item)
+    {
+        if (_confirm != null || !State.Display.Contains(item)) return;
+        int value = State.SaleValue(item);
+        string text = item.IsSong
+            ? $"{item.Name} goes back to the Locking, and takes this with it: {item.SongDef.Effect} It fetches nothing."
+            : $"Sell the {item.Name} for {value}g? It comes off display: {item.Prestige} exhibition points fewer.";
+        _confirm = Add(UiKit.MakeConfirm(item.IsSong ? "LET IT GO?" : "SELL IT?", text, item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold,
+            item.IsSong ? "Let it go" : $"Sell: +{value}g", () => SellFromDisplay(item), "Keep it", CancelPayOff));
+    }
+
     public void SellFromDisplay(Item item)
     {
+        CancelPayOff();
+        if (!State.Display.Contains(item)) return;
+        int value = State.SaleValue(item);
         State.SellFromDisplay(item);
         Game.Hud.SetGold(State.Gold);
-        Sfx.PlayGroup("pay");
-        FloatText($"+{item.Value}g", new Vector2(640, 560), Palette.Gold, 24);
+        if (item.IsSong) Sfx.Play("deflate", 0.8f, -4);
+        else Sfx.PlayGroup("pay");
+        FloatText(item.IsSong ? $"{item.Name} goes back to the Locking." : $"+{value}g", new Vector2(640, 560), item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold, 24);
         BuildCards();
     }
 

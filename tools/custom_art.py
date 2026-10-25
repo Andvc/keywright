@@ -1839,6 +1839,19 @@ def _curio_marker():
     return c
 
 
+def _curio_note():
+    # The Guild's own promissory note: a sheet rolled at both ends, three lines of Guild hand, its gold seal and ribbons.
+    c = Canvas(S, S)
+    c.rect(4, 5, 19, 19, "paper")
+    c.ellipse(3, 3, 20, 7, "paper").ellipse(3, 17, 20, 21, "paper")
+    for y in (9, 11, 13):
+        c.line([(7, y), (16, y)], "ink")
+    c.line([(14, 18), (12, 22)], "ruby").line([(16, 18), (18, 22)], "ruby")
+    c.ellipse(11, 12, 18, 19, "gold").dot(14, 15, "oldgold").dot(15, 15, "oldgold")
+    c.glint(12, 13)
+    return c
+
+
 def _curio_gauntlet():
     c = Canvas(S, S)
     c.rect(6, 15, 17, 21, "leather").rect(6, 8, 17, 15, "leather")
@@ -2480,7 +2493,7 @@ CURIOS = {
     "coin": _curio_coin, "shell": _curio_shell, "lantern": _curio_lantern, "catalogue": _curio_catalogue,
     "crate": _curio_crate, "oil": _curio_oil, "purse": _curio_purse, "ticket": _curio_ticket, "signet": _curio_signet,
     "jar": _curio_jar, "letter": _curio_letter, "knife": _curio_knife, "hook": _curio_hook, "draught": _curio_draught,
-    "watch": _curio_watch, "token": _curio_token, "crescent": _curio_crescent, "marker": _curio_marker,
+    "watch": _curio_watch, "token": _curio_token, "crescent": _curio_crescent, "marker": _curio_marker, "note": _curio_note,
     "gauntlet": _curio_gauntlet, "cap": _curio_cap, "loupe": _curio_loupe, "clover": _curio_clover, "book": _curio_book,
     "gloves": _curio_gloves, "dome": _curio_dome,
     "foot": _curio_foot, "wishbone": _curio_wishbone, "horseshoe": _curio_horseshoe, "star": _curio_star, "trumpet": _curio_trumpet,

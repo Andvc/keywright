@@ -5,8 +5,8 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <summary>
-/// Who's minding the stall this run (one of Bram's kin), on what terms (the challenge level), and with what talents
-/// learned in runs before. Each is fixed when the run starts.
+/// Who's minding the stall this run (one of Bram's kin), and on what terms (the challenge level). Both are fixed when the
+/// run starts; nothing else carries over from runs before but what's known (the journal, what Bram has taught).
 /// </summary>
 public sealed partial class GameState
 {
@@ -23,46 +23,31 @@ public sealed partial class GameState
     /// <summary>One of the Guild's terms is in force: the challenge level is at least the one it comes in at.</summary>
     public bool Under(string term) => Challenge >= Challenges.LevelOf(term);
 
-    /// <summary>Talents learned in earlier runs (from the profile, when the run started).</summary>
-    public HashSet<string> Talents { get; init; } = new();
-
-    public bool Knows(string talent) => Talents.Contains(talent);
-
     /// <summary>
     /// Bram's lessons (each new seller's first visit, and the scripted first day) are for Kit, with tips on: the others
     /// come to the stall knowing the trade, though Bram still has a word for what's new.
     /// </summary>
     public bool GivesLessons => Guided && Is(Characters.Kit);
 
-    /// <summary>A new run: who, on what terms, with which talents; and the gold and tools they start with.</summary>
+    /// <summary>A new run: who, and on what terms; and the gold and tools they start with. Every run starts the same.</summary>
     /// <param name="taught">What Bram taught in earlier runs (<see cref="Profile.Taught"/>): not taught again.</param>
     /// <param name="curios">The curios Nim carries this run (<see cref="Profile.OpenCurios"/>); null: all of them.</param>
-    public static GameState NewRun(int seed, string character = Characters.Kit, int challenge = 0, IEnumerable<string> talents = null, bool guided = true,
+    public static GameState NewRun(int seed, string character = Characters.Kit, int challenge = 0, bool guided = true,
         IEnumerable<string> taught = null, IEnumerable<string> curios = null)
     {
         var state = new GameState(seed)
         {
             Character = Characters.Exists(character) ? character : Characters.Kit,
             Challenge = Math.Clamp(challenge, 0, Challenges.Max),
-            Talents = new HashSet<string>((talents ?? Enumerable.Empty<string>()).Where(Core.Talents.Exists)),
         };
-        foreach (string key in taught ?? Enumerable.Empty<string>())
-        {
-            if (key == FirstDayKey) state.FirstDayTaught = true;
-            else if (key.StartsWith(LessonKey)) state.Tutored.Add(key[LessonKey.Length..]);
-            else state.HintsSeen.Add(key);
-        }
+        state.Learned(taught, firstDay: true);
         state.Guided = guided;
         state.CuriosOpen = curios?.ToHashSet();
         state.Gold = StartGold(state);
         return state;
     }
 
-    static int StartGold(GameState state)
-    {
-        int gold = StartingGold + (state.Knows("kin") ? Core.Talents.KinGold : 0);
-        return state.Under(Challenges.LeanStart) ? gold / 2 : gold;
-    }
+    static int StartGold(GameState state) => state.Under(Challenges.LeanStart) ? StartingGold / 2 : StartingGold;
 
     // ---- Hesk: a bad back and an honest scale ----
 
@@ -163,12 +148,8 @@ public sealed partial class GameState
         return terms.Count == 0 ? null : string.Join(" ", terms);
     }
 
-    /// <summary>
-    /// What an upgrade costs this run: its price, but the witchlight and the magnet at half with Trade Secrets, and the
-    /// Bookkeeping Engine whatever is left of the debt.
-    /// </summary>
-    public int Cost(Upgrade upgrade) => upgrade.Key == Upgrades.Engine ? DebtLeft
-        : Knows("tools") && upgrade.Key is "lamp" or "magnet" ? upgrade.Cost / 2 : upgrade.Cost;
+    /// <summary>What an upgrade costs this run: its price, and the Bookkeeping Engine whatever is left of the debt.</summary>
+    public int Cost(Upgrade upgrade) => upgrade.Key == Upgrades.Engine ? DebtLeft : upgrade.Cost;
 
     /// <summary>
     /// The Guild offers its Bookkeeping Engine once you could pay off everything you owe: it would rather be paid twice.
@@ -184,31 +165,32 @@ public sealed partial class GameState
         _ => false,
     };
 
-    // ---- Talents ----
+    // ---- Nim's visits, and the Guild's own paper ----
 
-    /// <summary>Mara's favour (a talent): she'll cover one short night a run.</summary>
-    public bool MaraUsed { get; private set; }
+    /// <summary>The Guild Promissory Note (a curio) has paid a short night: it's spent.</summary>
+    public bool NoteUsed { get; private set; }
 
-    /// <summary>Mara would pay what's short tonight: nothing you own can cover it, and it's not the last week.</summary>
-    public bool CanAskMara => Knows("mara") && !MaraUsed && DuesTonight && !PaidThisWeek && !CanCover && Week < Guild.Weeks;
+    /// <summary>The note would pay what's short tonight: nothing you own can cover it, and it's not the last week.</summary>
+    public bool CanCallNote => HasCurio("note") && !NoteUsed && DuesTonight && !PaidThisWeek && !CanCover && Week < Guild.Weeks;
 
-    /// <summary>Mara pays what's short, and the due is paid. Returns what she paid.</summary>
-    public int AskMara()
+    /// <summary>The note pays what's short, and the due is paid. Returns what it paid.</summary>
+    public int CallNote()
     {
-        if (!CanAskMara) return 0;
-        int gift = DueNow - Gold;
-        MaraUsed = true;
-        Gold += gift;
+        if (!CanCallNote) return 0;
+        int paid = DueNow - Gold;
+        NoteUsed = true;
+        Gold += paid;
         PayDues();
-        return gift;
+        return paid;
     }
 
-    /// <summary>Nim has shown you something else on this visit (Second Look).</summary>
+    /// <summary>Nim has shown you something else on this visit.</summary>
     public bool PeddlerRerolled { get; private set; }
 
-    public bool CanRerollPeddler => Knows("reroll") && PeddlerToday && !PeddlerRerolled;
+    /// <summary>Once a visit, Nim will pack up what's on the counter and show you something else.</summary>
+    public bool CanRerollPeddler => PeddlerToday && !PeddlerRerolled;
 
-    /// <summary>Second Look: Nim packs up what's on the counter and lays out something else.</summary>
+    /// <summary>Nim packs up what's on the counter and lays out something else.</summary>
     public void RerollPeddler()
     {
         if (!CanRerollPeddler) return;
@@ -219,12 +201,6 @@ public sealed partial class GameState
         CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
     }
 
-    /// <summary>Whether Nim's keepsake (a talent) has been given: one curio, free, on his first visit.</summary>
-    public bool KeepsakeTaken { get; private set; }
-
-    /// <summary>On Nim's first visit, one curio of your choice is a gift.</summary>
-    public bool Keepsake => Knows("keepsake") && !KeepsakeTaken && Week == Curios.FirstWeek && PeddlerToday;
-
     /// <summary>How many curios Nim lays out.</summary>
-    public int PeddlerCount => 3 + (Knows("nim4") ? Core.Talents.MoreStock : 0);
+    public int PeddlerCount => Curios.Laid;
 }

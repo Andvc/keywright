@@ -107,10 +107,6 @@ public sealed class Appraisal
             _count[(int)category] = Math.Min(MaxCount, _count[(int)category] + 1);
     }
 
-    public Appraisal(Visit visit, int tier) : this(visit.Chest.Quality, tier, visit.Claim)
-    {
-    }
-
     /// <summary>
     /// The Bookkeeping Engine's record of a chest: every real thing inside by kind (gilded iron and sand aren't), whether
     /// any of a kind is enchanted, and a false bottom if there is one. How good each thing is, it can't say: that's still
@@ -200,7 +196,7 @@ public sealed class Appraisal
                 next[total + value] = next.GetValueOrDefault(total + value) + p * q;
             totals = next;
         }
-        // A Heartsong is priced as a trinket exactly as fine as its chest: no spread.
+        // A Heartsong fetches nothing, whatever its chest (it's worth nothing in gold): no spread.
         IEnumerable<(float, float)> One(Category kind, bool magic, bool hidden = false) => kind == Category.Heartsong
             ? new[] { (Fetch(kind, Chest, false), 1f) }
             : Odds(kind, hidden).Select(o => (Fetch(kind, o.Quality, magic, hidden), o.Chance));

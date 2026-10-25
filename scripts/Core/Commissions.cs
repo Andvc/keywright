@@ -16,8 +16,9 @@ public enum CommissionKind
 
 /// <summary>
 /// Someone wants something, and will pay well over its price for it: a regular's commission, good until the Guild's
-/// next visit. Anything that comes out of a chest you open can go to it instead of being sold. The Hooded Woman's pay
-/// in shards of the Aldric Key, and she asks again the next week if you miss one.
+/// next visit. Anything that comes out of a chest you open can go to it instead of being sold, and each thing pays as
+/// it's handed over, always more than it would sell for (<see cref="GameState.CommissionPay"/>). The Hooded Woman's pay
+/// in shards of the Aldric Key too, and she asks again the next week if you miss one.
 /// </summary>
 public sealed class Commission
 {
@@ -99,6 +100,12 @@ public static class Patrons
 
     /// <summary>A piece pays this many times what it's worth as good as asked; a lot, this many times each.</summary>
     public const float PieceReward = 2f, LotReward = 1.5f;
+
+    /// <summary>
+    /// Whatever it asks for, a commission pays at least this much over what the thing would sell for (a better thing
+    /// than asked, an enchanted one, a shop that sells high): handing it over always beats selling it.
+    /// </summary>
+    public const float Premium = 1.25f;
 
     /// <summary>The quality a regular asks for at each shop: a step better than its chests usually are, epic at most.</summary>
     public static Rarity Asked(int tier) => tier switch

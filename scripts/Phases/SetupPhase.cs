@@ -9,7 +9,7 @@ namespace Keywright.Phases;
 /// <summary>
 /// Before a new run: which of Bram's kin minds the stall (each reads chests or runs the shop their own way; the others
 /// unlock as you go), and at what challenge level (every level adds one of the Guild's harsh terms, and a quarter more
-/// renown). The talents learned with renown come along on every run.
+/// to the score). Every run starts the same: nothing carries over but what's known.
 /// </summary>
 public partial class SetupPhase : Phase
 {
@@ -18,12 +18,10 @@ public partial class SetupPhase : Phase
     Node2D _board;
     string _character;
     int _level;
-    TalentsView _talents;
 
     Profile Profile => Game.Profile;
 
     public string Character => _character;
-    public TalentsView TalentsOpen => _talents;
     public int Level => _level;
 
     public override void _Ready()
@@ -41,13 +39,13 @@ public partial class SetupPhase : Phase
     void Build()
     {
         foreach (var child in _board.GetChildren()) child.QueueFree();
-        _board.AddChild(UiKit.MakeLabel($"Renown: {Profile.Renown}", 16, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(900, 34, 310, 20));
+        if (Profile.BestScore.GetValueOrDefault(_character) is int best and > 0)
+            _board.AddChild(UiKit.MakeLabel($"{Characters.Get(_character).Name}'s best score: {best}", 16, Palette.Gold, HorizontalAlignment.Right, outline: 4)
+                .Place(800, 34, 410, 20));
         for (int i = 0; i < Characters.All.Length; i++)
             _board.AddChild(MakeCard(Characters.All[i], CardsX + i * (CardW + CardGap), CardsY));
         BuildDetails();
         _board.AddChild(UiKit.MakeButton("Back", Palette.Text, 16, Back).Place(CardsX, 652, 200, 52));
-        _board.AddChild(UiKit.MakeButton($"Talents ({Profile.Talents.Count}/{Talents.All.Length})", Palette.Magic, 16, OpenTalents)
-            .Place(CardsX + 220, 652, 260, 52));
         _board.AddChild(UiKit.MakeButton("Open the stall", Palette.Gold, 24, Start).Place(1210 - 300, 652, 300, 52));
     }
 
@@ -111,13 +109,13 @@ public partial class SetupPhase : Phase
         up.Disabled = _level >= max;
         up.TooltipText = max >= Challenges.Max ? "The top level." : $"Clear Bram's debt at level {max} with {kin.Name} to open level {max + 1}.";
         panel.AddChild(up);
-        panel.AddChild(UiKit.MakeLabel($"Renown x{Challenges.Multiplier(_level):0.##}", 24, Palette.Gold, outline: 4).Place(cx + 210, 48, 260, 30));
+        panel.AddChild(UiKit.MakeLabel($"Score x{Challenges.Multiplier(_level):0.##}", 24, Palette.Gold, outline: 4).Place(cx + 210, 48, 260, 30));
         panel.AddChild(UiKit.MakeLabel(max >= Challenges.Max ? "Every level open." : $"Levels open: 0 to {max}.", 16, Palette.Muted)
             .Place(cx + 210, 80, 260, 20));
         if (_level == 0)
         {
             panel.AddChild(UiKit.MakeLabel("The Guild's usual terms. Clear Bram's debt to open the next level: each adds one harsher term, " +
-                                           "and a quarter more renown.", 16, Palette.Muted).Wrapped().Place(cx, 112, 456, 100));
+                                           "and a quarter more to the score.", 16, Palette.Muted).Wrapped().Place(cx, 112, 456, 100));
             return;
         }
         var newest = Challenges.Get(_level);
@@ -153,28 +151,11 @@ public partial class SetupPhase : Phase
         Build();
     }
 
-    public void OpenTalents()
-    {
-        if (_talents != null) return;
-        _talents = Add(new TalentsView());
-        _talents.ZIndex = 30;
-        _talents.Closed += () =>
-        {
-            _talents = null;
-            Build();
-        };
-    }
-
     public void Start()
     {
-        if (_talents != null) return;
         Sfx.Play("bid");
         Game.StartRun(_character, _level);
     }
 
-    void Back()
-    {
-        if (_talents != null) return;
-        Game.ToTitle();
-    }
+    void Back() => Game.ToTitle();
 }

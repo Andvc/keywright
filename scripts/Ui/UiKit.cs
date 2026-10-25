@@ -24,6 +24,19 @@ public static class UiKit
     /// <summary>Kenney Mini is drawn on an 8px grid; other sizes render with uneven pixels.</summary>
     public static int SnapFont(int size) => Math.Max(16, (int)MathF.Round(size / 8f) * 8);
 
+    /// <summary>The text, or as much of it as fits in this width with "..." after it (Kenney Mini has no ellipsis).</summary>
+    public static string Fit(string text, float width, int size = 16)
+    {
+        size = SnapFont(size);
+        if (Font.GetStringSize(text, HorizontalAlignment.Left, -1, size).X <= width) return text;
+        for (int n = text.Length - 1; n > 0; n--)
+        {
+            string cut = text[..n].TrimEnd() + "...";
+            if (Font.GetStringSize(cut, HorizontalAlignment.Left, -1, size).X <= width) return cut;
+        }
+        return text;
+    }
+
     public static Label MakeLabel(string text, int size, Color color,
         HorizontalAlignment align = HorizontalAlignment.Left, int outline = 0)
     {

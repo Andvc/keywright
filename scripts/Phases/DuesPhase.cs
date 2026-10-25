@@ -220,25 +220,25 @@ public partial class DuesPhase : Phase
             Put(UiKit.MakeLabel($"({times}: you pay {State.Gold}g now, {(int)MathF.Ceiling((due - State.Gold) * GameState.GraceInterest)}g more next week)",
                 16, Palette.Muted).Place(PanelX, by + 56, PanelW, 20));
         }
-        // Mara's favour (a talent): once a run, she pays what nothing you own can cover.
-        if (State.CanAskMara)
-            Put(UiKit.MakeButton("Mara pays what's short", Palette.Magic, 16, AskMara).Place(PanelX + PanelW - 370, by, 370, 52)).TooltipText =
-                $"Once a run, Mara covers a night nothing you own can: {due - State.Gold}g, and nothing owed after.";
+        // The Guild Promissory Note (a curio): once a run, it pays what nothing you own can cover.
+        if (State.CanCallNote)
+            Put(UiKit.MakeButton("Call in the Guild's note", Palette.Magic, 16, CallNote).Place(PanelX + PanelW - 370, by, 370, 52)).TooltipText =
+                $"Once a run, the Guild's own paper covers a night nothing you own can: {due - State.Gold}g, and nothing owed after.";
         else if (!State.CanCover)
             Put(UiKit.MakeButton("Let the Guild take the shop", Palette.Bad, 16, Foreclose).Place(PanelX + PanelW - 370, by, 370, 52));
     }
 
-    public void AskMara()
+    public void CallNote()
     {
-        if (_paid || !State.CanAskMara) return;
-        int gift = State.AskMara();
+        if (_paid || !State.CanCallNote) return;
+        int paid = State.CallNote();
         _paid = true;
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDue(State);
         BuildTrack();
-        _vane.Say("The Hooded Woman pays for you? ...The Guild doesn't care whose gold it is. Paid.", Palette.Warn);
-        AfterSettled($"Mara paid {gift}g of it. She won't do it twice.");
+        _vane.Say("A Guild note? From before the Locking? ...The Guild honours its own paper. Paid.", Palette.Warn);
+        AfterSettled($"The note paid {paid}g of it. It's spent now.");
     }
 
     public void Pawn(Item item)
@@ -349,8 +349,5 @@ public partial class DuesPhase : Phase
         Game.AfterDues();
     }
 
-    void Teach(string key)
-    {
-        if (State.FirstTime(key)) _mentor.Say(Hints.Get(key));
-    }
+    void Teach(string key) => _mentor.Teach(State, key);
 }

@@ -22,7 +22,7 @@ namespace Keywright;
 /// settings, one screenshot each, then quits), --vault-demo (opens King Aldric's vault; quits after with --quit-at-end),
 /// --start-week=N (a shop as a careful player would have it by then, played
 /// through by the balance simulation; --gold=N then sets its purse). Autoplay sets --days=N to stop after that many days.
-/// --character=KEY, --challenge=N and --talents=all play one of Bram's kin, at a challenge level, with every talent.
+/// --character=KEY and --challenge=N play one of Bram's kin, at a challenge level.
 /// --engine starts with the Bookkeeping Engine, to see it read every chest. --curios=a,b,c owns those curios from the start.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
 /// (with --vault-demo, the Crown Chest's other ending).
@@ -31,7 +31,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.21";
+    public const string Version = "Early Access 0.22";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -73,10 +73,17 @@ public partial class Main : Node2D
             try
             {
                 int N(int fallback) => int.Parse(Arg(args, "--n") ?? fallback.ToString());
+                // --heartsongs=P: try another chance a chest holds one (for tuning it).
+                if (float.TryParse(Arg(args, "--heartsongs"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
+                        out var songOdds))
+                    Heartsongs.Chance = songOdds;
                 switch (Arg(args, "--sim"))
                 {
                     case "songs":
                         Simulation.Songs(N(150));
+                        break;
+                    case "songcount":
+                        Simulation.SongCount(N(300));
                         break;
                     case "sellers":
                         Simulation.PrintSellers();
@@ -144,7 +151,7 @@ public partial class Main : Node2D
         if (direct)
         {
             State = GameState.NewRun(_seed, Arg(args, "--character") ?? Characters.Kit, int.TryParse(Arg(args, "--challenge"), out var level) ? level : 0,
-                Arg(args, "--talents") == "all" ? Talents.All.Select(t => t.Key) : null, !args.Contains("--no-tutorial"));
+                !args.Contains("--no-tutorial"));
             // --songs=all: as if Bram's kin had opened every Heartsong (the Crown Chest's other ending). --heartsongs=0.5:
             // half of all chests hold one, to see them turn up.
             if (Arg(args, "--songs") == "all") State.Songbook.UnionWith(Heartsongs.All.Select(h => h.Key));
@@ -223,9 +230,8 @@ public partial class Main : Node2D
     {
         SignalAwaiter Wait(double s) => ToSignal(GetTree().CreateTimer(s, true), SceneTreeTimer.SignalName.Timeout);
         _demo = true;
-        // A profile with some runs behind it, so the character screen and the talents have something to show.
-        Profile = new Profile { Runs = 9, Cleared = 2, Vaults = 0, BestWeek = 8, Renown = 640, LastCharacter = Characters.Hesk };
-        Profile.Talents.AddRange(new[] { "kin", "rainy", "nim4", "ledger" });
+        // A profile with some runs behind it, so the character screen has something to show.
+        Profile = new Profile { Runs = 9, Cleared = 2, Vaults = 0, BestWeek = 8, BestTier = 3, LastCharacter = Characters.Hesk };
         Profile.Challenge[Characters.Kit] = 2;
         Profile.Challenge[Characters.Hesk] = 1;
         Profile.BestScore[Characters.Kit] = 452;
@@ -237,12 +243,6 @@ public partial class Main : Node2D
         setup.SetLevel(1);
         await Wait(0.6);
         Moment("09_setup");
-        await Wait(0.3);
-        setup.OpenTalents();
-        await Wait(0.8);
-        Moment("09_talents");
-        await Wait(0.3);
-        setup.TalentsOpen?.Close();
         await Wait(0.5);
         StartRun(Characters.Hesk, 1);
         await Wait(3.5);
@@ -361,7 +361,7 @@ public partial class Main : Node2D
         file?.StoreString(Profile.ToJson());
     }
 
-    /// <summary>The run is over (foreclosed, or retired): its renown is banked, the saved shop goes, and it's back to the title.</summary>
+    /// <summary>The run is over (foreclosed, or retired): its feats and score are banked, the saved shop goes, and it's back to the title.</summary>
     public void EndRun()
     {
         WriteProfile(p => p.Bank(State));
@@ -390,8 +390,8 @@ public partial class Main : Node2D
     }
 
     /// <summary>
-    /// A new shop, minded by one of Bram's kin at a challenge level, with every talent learned so far; saved over any old
-    /// one when its first day starts (an old run still banks its renown).
+    /// A new shop, minded by one of Bram's kin at a challenge level; saved over any old one when its first day starts (an
+    /// old run still banks its feats and score).
     /// </summary>
     public void StartRun(string character, int challenge)
     {
@@ -400,7 +400,7 @@ public partial class Main : Node2D
             Profile.Bank(GameState.Load(old));
             DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(SavePath));
         }
-        State = GameState.NewRun(_seed, character, challenge, Profile.Talents, Settings.Tips, Profile.Taught, Profile.OpenCurios);
+        State = GameState.NewRun(_seed, character, challenge, Settings.Tips, Profile.Taught, Profile.OpenCurios);
         State.Songbook.UnionWith(Profile.Songs);
         State.Remember(Profile);
         _seed++;
@@ -423,15 +423,8 @@ public partial class Main : Node2D
     /// <summary>A Heartsong's just been opened: into the profile's songbook straight away.</summary>
     public void NoteSongs() => WriteProfile();
 
-    /// <summary>Learns a talent with renown, and keeps it in the profile.</summary>
-    public bool LearnTalent(TalentDef talent)
-    {
-        if (!Profile.Learn(talent)) return false;
-        if (_demo) return true;
-        using var file = FileAccess.Open(ProfilePath, FileAccess.ModeFlags.Write);
-        file?.StoreString(Profile.ToJson());
-        return true;
-    }
+    /// <summary>Bram's just taught something (a tip, a lesson): into the profile straight away, so it's never taught again.</summary>
+    public void NoteTaught() => WriteProfile();
 
     public void ContinueGame(SaveData save)
     {
@@ -533,7 +526,16 @@ public partial class Main : Node2D
         State.Opening = State.Buy(visit, new Appraisal(chest.Quality, ShopTiers.Max, chest.Items.Select(i => i.Category)));
         var opening = new Phases.OpeningPhase();
         SwitchTo(opening);
-        while (IsInstanceValid(opening) && !opening.Finished) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        // The Heartsong waits for a choice: keep it, once it's had its moment.
+        while (IsInstanceValid(opening) && !opening.Finished)
+        {
+            if (opening.SongChoice is SongReveal song)
+            {
+                await ToSignal(GetTree().CreateTimer(3.0), SceneTreeTimer.SignalName.Timeout);
+                if (IsInstanceValid(song)) song.Keep();
+            }
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        }
         await ToSignal(GetTree().CreateTimer(3.0), SceneTreeTimer.SignalName.Timeout);
         if (quit) QuitGame();
     }

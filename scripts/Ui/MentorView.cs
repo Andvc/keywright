@@ -6,9 +6,10 @@ using Keywright.Core;
 namespace Keywright.Ui;
 
 /// <summary>
-/// Uncle Bram at your elbow: a face and one short tip at a time about what's in front of you. Tips that come up
-/// together wait their turn; click the box for the next one. A seller's lesson waits until the tips already up have
-/// been read; then the box shows the step to do and stays up until it's done (or skipped).
+/// Uncle Bram at your elbow: a face and one short tip at a time about what's in front of you. When two tips come up
+/// at once he gives one (<see cref="Teach"/>); the other isn't marked as taught, so it comes up the next time it
+/// applies. A seller's lesson waits until the tip already up has been read; then the box shows the step to do and
+/// stays up until it's done (or skipped).
 /// </summary>
 public partial class MentorView : Control
 {
@@ -70,7 +71,24 @@ public partial class MentorView : Control
         Visible = false;
     }
 
-    /// <summary>Shows a tip now, or after the ones already waiting (and after any lesson).</summary>
+    /// <summary>Bram has something up, or waiting to be: a tip, a line, or a lesson.</summary>
+    public bool Busy => Visible || _lesson || _queue.Count > 0 || _held != null;
+
+    /// <summary>
+    /// Bram's tip for <paramref name="key"/> the first time it applies, if he isn't already saying something: one at a
+    /// time. A tip he can't give now isn't marked as taught, so it comes up again the next time it applies. True if he
+    /// gave it.
+    /// </summary>
+    public bool Teach(GameState state, string key)
+    {
+        if (key == null || Busy || Hints.Get(key) == null || !state.FirstTime(key)) return false;
+        Say(Hints.Get(key));
+        // Taught for good, at once: quitting before the day's out doesn't bring it back.
+        Main.Instance.NoteTaught();
+        return true;
+    }
+
+    /// <summary>Shows a line now, or after the ones already waiting (and after any lesson).</summary>
     public void Say(string text)
     {
         if (string.IsNullOrEmpty(text)) return;

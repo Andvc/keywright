@@ -303,51 +303,51 @@ public static class Market
     /// What the seller thinks the chest is worth, their way. Nobody prices magic they can't see, what's under a false
     /// bottom, or a warded thing.
     /// </summary>
-    static float Estimate(Random rng, SellerDef seller, Chest chest, IReadOnlyList<Category> claim, int shopTier)
+    static float Estimate(Random rng, SellerDef seller, Chest chest, IReadOnlyList<Category> noticed, int shopTier)
     {
         var colour = chest.Quality;
         float plain(Category c) => Categories.Expected(c, colour);
         float estimate = seller.Judge switch
         {
-            Judgment.Counter => claim.Count * TypicalItem(seller, colour, shopTier),
+            Judgment.Counter => noticed.Count * TypicalItem(seller, colour, shopTier),
             Judgment.Weight => chest.Items.Sum(i => Categories.Heft(i.Category)) * TypicalItem(seller, colour, shopTier) /
                                (TypicalHeft(seller, shopTier) / TypicalCount(seller, shopTier)),
             Judgment.Colour => TypicalChest(seller, colour, shopTier),
             Judgment.Dreamer => TypicalChest(seller, colour, shopTier) * rng.Between(DreamMin, DreamMax),
-            Judgment.Miner => claim.Sum(c => c switch
+            Judgment.Miner => noticed.Sum(c => c switch
             {
                 Category.Arms => plain(c),
                 Category.Gems => Categories.Value(c, Rarity.Legendary, false),
                 _ => plain(c) / 2,
             }),
-            Judgment.Jeweller => claim.Sum(c => plain(c) * JewellerPaid),
+            Judgment.Jeweller => noticed.Sum(c => plain(c) * JewellerPaid),
             Judgment.Clueless => 0,
-            _ => claim.Sum(plain),
+            _ => noticed.Sum(plain),
         };
         return estimate;
     }
 
-    /// <summary>The seller judges the chest their way, says what they think is in it, and prices it.</summary>
+    /// <summary>The seller judges the chest their way and prices what they think is in it (without saying what that is).</summary>
     /// <param name="ask">A scripted asking price (the first day, lessons).</param>
     /// <param name="trade">A scripted way of trading (the first day).</param>
     /// <param name="pitch">A scripted line, with {price}.</param>
-    /// <param name="claim">A scripted claim (a lesson's made-up sound).</param>
+    /// <param name="noticed">What they noticed, scripted (a lesson's).</param>
     /// <param name="floor">A scripted least they'll take (a lesson's).</param>
     /// <param name="boosts">The shop's terms: sharp sellers' prices, and whether everybody haggles (with Rosa).</param>
     /// <param name="origin">Where the chest came from (one of the seller's places, if not given).</param>
     public static Visit Price(Random rng, SellerDef seller, Chest chest, int shopTier, int? ask = null, Trade? trade = null, string pitch = null,
-        IEnumerable<Category> claim = null, int? floor = null, Boosts boosts = null, OriginDef origin = null)
+        IEnumerable<Category> noticed = null, int? floor = null, Boosts boosts = null, OriginDef origin = null)
     {
-        var said = claim?.ToList() ?? Claim(rng, seller, chest, shopTier);
-        said.Sort();
+        var priced = noticed?.ToList() ?? Notice(seller, chest);
+        priced.Sort();
         origin ??= PickOrigin(rng, seller);
-        var visit = Price(rng, seller, chest, shopTier, said, ask, trade, pitch, boosts ?? Boosts.None, origin);
+        var visit = Price(rng, seller, chest, shopTier, priced, ask, trade, pitch, boosts ?? Boosts.None, origin);
         if (floor is int least) visit.SetFloor(least);
         return visit;
     }
 
-    /// <summary>What they say is in it: what they noticed (once per kind, unless they count).</summary>
-    static List<Category> Claim(Random rng, SellerDef seller, Chest chest, int shopTier)
+    /// <summary>What they think is in it: what they noticed (once per kind, unless they count).</summary>
+    static List<Category> Notice(SellerDef seller, Chest chest)
     {
         var noticed = seller.Notices(chest).Select(i => i.Category);
         return (seller.Counts ? noticed : noticed.Distinct()).ToList();
@@ -366,10 +366,10 @@ public static class Market
         return rng.PickOne(seller.Pitches);
     }
 
-    static Visit Price(Random rng, SellerDef seller, Chest chest, int shopTier, List<Category> claim, int? ask, Trade? trade, string pitch, Boosts boosts,
+    static Visit Price(Random rng, SellerDef seller, Chest chest, int shopTier, List<Category> noticed, int? ask, Trade? trade, string pitch, Boosts boosts,
         OriginDef origin)
     {
-        float estimate = Estimate(rng, seller, chest, claim, shopTier) * boosts.Dearer;
+        float estimate = Estimate(rng, seller, chest, noticed, shopTier) * boosts.Dearer;
         var format = trade ?? seller.Trade;
         // Everybody haggles with Rosa: a fixed price becomes an opening ask (a crook still wants rid of his fakes quick,
         // and nobody haggles with the King, or the Maw).
@@ -416,9 +416,9 @@ public static class Market
         int asking = ask ?? Money.Round(price);
         int fee = seller.Heirloom is Category heirloom ? Money.Round(Categories.Nominal(heirloom, chest.Quality) * HeirloomShare) : 0;
         var clue = MakeClue(rng, seller, chest);
-        string line = Fill(pitch ?? Story(rng, seller, origin), seller, chest, claim, shopTier).Replace("{clue}", clue?.Said ?? "")
+        string line = Fill(pitch ?? Story(rng, seller, origin), seller, chest, shopTier).Replace("{clue}", clue?.Said ?? "")
             .Replace("{price}", seller.SlipPrice ? "your slip's worth" : $"{asking}g").Replace("{fee}", $"{fee}g").Replace("{origin}", origin?.Name ?? "somewhere");
-        return new Visit(seller, chest, claim, format, format == Trade.Offer ? 0 : asking, Money.Round(floor), line)
+        return new Visit(seller, chest, noticed, format, format == Trade.Offer ? 0 : asking, Money.Round(floor), line)
         {
             Origin = origin, Fee = fee, Clue = clue?.Note, ClueKinds = clue?.Kinds ?? Array.Empty<Category>(),
             Says = clue == null ? Core.Clue.None : seller.States,
@@ -537,12 +537,11 @@ public static class Market
     /// </summary>
     public static Item DreamtOf(Chest chest) => chest.Warded ?? chest.Items.Where(i => !i.IsSong).OrderByDescending(i => i.Value).FirstOrDefault();
 
-    static string Fill(string line, SellerDef seller, Chest chest, IReadOnlyList<Category> claim, int shopTier)
+    static string Fill(string line, SellerDef seller, Chest chest, int shopTier)
     {
-        string count = claim.Count switch { 0 => "Not a rattle", 1 => "One rattle", 2 => "Two rattles", 3 => "Three rattles", _ => $"{claim.Count} rattles" };
         float heft = chest.Items.Sum(i => Categories.Heft(i.Category)) / Math.Max(0.1f, TypicalHeft(seller, shopTier));
         string heftWord = heft > 1.3f ? "Heavy as a mule" : heft < 0.7f ? "Light, mind" : "A fair weight";
-        return line.Replace("{heard}", Sellers.Heard(claim)).Replace("{count}", count).Replace("{heft}", heftWord)
+        return line.Replace("{heft}", heftWord)
             .Replace("{colour}", Categories.ChestSkin(chest.Quality))
             .Replace("{magic}", chest.Items.Any(i => i.Magic) ? "there's magic in it" : "there's no magic in it")
             .Replace("{articles}", Articles(chest)).Replace("{pounds}", Characters.Weight(chest.Pounds)).Replace("{dream}", Dream(chest));

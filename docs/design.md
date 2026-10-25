@@ -30,8 +30,8 @@ the Guild seals the shop.
 
 Across runs, four of Bram's kin can mind the stall, each reading chests or running the shop their own way: Kit listens,
 Hesk weighs, Rosa haggles, Isolde collects. Clearing the debt with one opens the next of eight challenge levels for
-them, each adding one of the Guild's harsher terms. Every run ends with a score; times the challenge level's
-multiplier, it's renown, which buys talents that come along on every run.
+them, each adding one of the Guild's harsher terms. Every run ends with a score, times the challenge level's
+multiplier. Nothing carries over that makes the next run stronger: what grows is what you know.
 
 ## The world
 
@@ -62,8 +62,9 @@ Three core rules, from the first day:
    jingles, potions slosh and gems tinkle at the gentlest shake; arms only clank at a firm one; garb flumps and
    scrolls rustle only at a hard one.
 2. **While arms clank, you can't hear anything delicate.** Shake gently and the steel stays put.
-3. **Sellers price only what they think is there.** Each has their own way of judging (below). Those who listen say
-   what they heard, and the slip starts marked with it.
+3. **Sellers price only what they think is there.** Each has their own way of judging (below). Nobody says what they
+   heard (v22): the slip starts empty, its header says how the seller came to their price ("Penn priced what a gentle
+   shake stirs"), and working out what they priced is yours, by shaking the way they did.
 
 Then, one at a time as the shop grows, more layers of deduction, each taught by the seller it belongs to:
 
@@ -72,7 +73,7 @@ Then, one at a time as the shop grows, more layers of deduction, each taught by 
 | False bottoms | Thornwick | a sealed hollow under the floor never rattles | drop the chest: a hollow BOOM (glass may break) |
 | Two or three of a kind | Crownhold | each thing sounds from its own spot, so more of them rattle more often | count the words over the chest; most sellers never count |
 | Sand | Crownhold | a scroll case of river sand rustles just like a scroll, but pours at the gentlest shake; parchment never does | a rustle at a gentle shake is sand |
-| Enchantment | Crownhold | anything can be enchanted (worth double); it sounds like anything else | under the **Witchlight** it glows |
+| Enchantment | Crownhold | anything you can hear can be enchanted (worth double); it sounds like anything else. A hidden thing (under a false bottom, or warded) never is: it fetches a third more instead | under the **Witchlight** it glows |
 | Demon gold | Royal Emporium | gilded iron jingles and tinkles like gold and gems | near the **Lodestone** iron can't move: a fake goes quiet |
 
 Sound-alikes (sand, demon gold) are the deductive heart of the later shops: the sound tells you the kind of thing,
@@ -151,16 +152,31 @@ reveal like nothing else in the game.
   apply it the same way, and the shake test checks it). Only a Keywright hears one, so no seller ever prices one
   (`SellerDef.Notices`): hearing one means the chest is worth more than its price says. When one sings, its row takes the
   top of the slip, in red; tick it like anything else (a perfect read counts it).
-- **Rare.** Any chest a seller brings (not a lesson's or the first day's) has a 0.3% chance (`Heartsongs.Chance`), rolled
-  with its own dice so nothing else changes. That's about one run in two for the careful player (about two runs in three
-  see one by the last week, the first around day 13; v17's 0.4% was one a run, but a find is worth far more now). One you've never found is three times likelier; never two of the same in a run.
-- **An ordinary price.** A merchant takes it for a trinket as fine as its chest: 10g times the chest colour's multiplier
-  (10g in wood, 300g in purple), on the slip and in the sale. The Guild won't take one in pawn.
-- **Display: highly recommended.** It needs no shelf and takes no slot (it hangs on a cord over the counter, at any
-  shop, even Bram's stall); the opening's button says so. It adds no exhibition points: each does one big thing instead.
-  They're the rarest things in Aldmark, so each is worth a run built around it (v17's were a percent here and there, and
-  a find felt like nothing). None shows what a chest is worth: the Bell counts, the Star lights up enchantment, the
-  rest is still yours to work out.
+- **Rare, and rarer for each one kept** (v22). Any chest a seller brings (not a lesson's or the first day's) has a
+  0.24% chance (`Heartsongs.Chance`), rolled with its own dice so nothing else changes, and each one kept this run makes
+  the next a quarter as likely (`Heartsongs.Fade`, `GameState.SongsKept`). That's about a third of a Heartsong a run
+  (`--sim=songcount`: 0.39 for the careful player while the debt lasts, 0.33 for a first run): a third of runs see one
+  (0.21's 0.7% was nearly one a run, and they stopped feeling rare). One you've never found is three times likelier;
+  never two of the same in a run. At this pace all nine take a long career (one player in eight by run 30).
+- **Worth nothing in gold** (v22). No merchant would buy one and no seller knows it's there: it adds nothing to the
+  slip, the sale or the gut, and the Guild won't take one in pawn (`Heartsongs.BaseValue` is 0). A careful player still
+  pays up for a chest one sings in (the sim's: up to a working purse over what the rest is worth), because of what it
+  does on display.
+- **Its own moment, and a choice** (`SongReveal`, v22). When one comes out, everything stops: the room goes dark, the
+  song plays, a pillar of red light stands on the chest and the thing rises out of it into turning rays, then a hit of
+  white, shockwaves, sparks, lightning and confetti as the banner slams in. Its name, who gave it, its story and what it
+  does on display stay up, with **Keep it** and **Decline**, until you choose (it sings again now and then while you
+  think). Kept, it flies up to sing in the shop, free: no shelf, no slot, no gold. Declined, it comes apart into red
+  motes and goes back to the Locking; it's in the songbook either way. Declining is a real choice: each one kept makes
+  the next rarer, so a player after a particular song may let another go.
+- **It won't leave with its seller** (v22). Pass on a chest you can't afford while a Heartsong sings in it, and the
+  chest shudders and bursts: the song comes out to you alone, with its reveal and the same choice, and the seller goes
+  off with everything else (`GameState.Bursts`, `Burst`). What you can afford and pass on goes with them.
+- **On display.** It needs no shelf and takes no slot (it hangs on a cord over the counter, at any shop, even Bram's
+  stall; hover it there for what it does, click it to let it go). It adds no exhibition points: each does one big thing
+  instead. They're the rarest things in Aldmark, so each is worth a run built around it (v17's were a percent here and
+  there, and a find felt like nothing). None shows what a chest is worth: the Bell counts, the Star lights up
+  enchantment, the rest is still yours to work out.
 
 | Heartsong | On display |
 |---|---|
@@ -174,12 +190,12 @@ reveal like nothing else in the game.
 | The Bottled Star | enchanted things glow whenever they sound, with or without the witchlight, and are 15 points likelier |
 | The Imp's Ember | glass never breaks, dropped or forced; nothing comes out worse than its chest promised; every fake you open (demon gold, paste, sand) turns real |
 
-Tuning (`--sim=songs`, the careful collector, v20): on display from the first day, against 48% of runs cleared with
-none, the Dragon's Egg clears 99%, the Fey Chimes 96%, the Lullaby Box 87%, the Shepherd's Pipe 85%, the Imp's Ember
-68%, the Clockwork Lark 64%, the Hearthstone 60% and the Bottled Star 59% (a Four-Leaf Clover from day 1: 80%, a
-Lucky Coin 57%). The Drowned Bell is the exception in the sim (51%), because the sim's careful player already counts
-perfectly; for a person it's a Pell's ticket on every chest. As they really turn up (in about three runs in five, from
-mid-run), the careful player clears 45% with no talents, against a third with no Heartsongs at all.
+Tuning (`--sim=songs`, the careful collector, v22): on display from the first day, against 48% of runs cleared with
+none, the Lullaby Box clears 94%, the Fey Chimes 93%, the Shepherd's Pipe 85%, the Clockwork Lark 83%, the Dragon's
+Egg and the Imp's Ember 75%, the Hearthstone 65% and the Bottled Star 58% (a curio from day 1: a Lucky Coin 55%, a
+Four-Leaf Clover 51%). The Drowned Bell is the exception in the sim (46%), because the sim's careful player already
+counts perfectly; for a person it's a Pell's ticket on every chest. As they really turn up (in about a third of runs,
+the first around day 15), the careful player clears 48%, against 43% with no Heartsongs at all.
 
 **The ending.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the ledger's Songs page). The Crown
 Chest holds the Locking's tune; the Heartsongs are its verses. With all nine known when it's opened, Mara sings the
@@ -231,7 +247,13 @@ each step with a flash, a ring and a rising arpeggio, before it slams onto the t
 time, flash the room white, and throw confetti and a fanfare. Each quality lands with its own effect, not just its
 colour: common, a puff of dust; uncommon, rising sparkles and a chime; rare, a pillar of light and a ring; epic,
 crackling lightning, a boom and a lingering aura; legendary, all that with turning rays, a fountain of coins and a
-fanfare. `--opening-demo` opens a crafted chest with one of each to preview them.
+fanfare. A Heartsong comes out last, with its own reveal and a choice (above). `--opening-demo` opens a crafted chest
+with one of each to preview them.
+
+What the shop's curios and the day did to the chest ("Rabbit's Foot: 2 things came out better!", "Locking Day +25%")
+slides in under the tally only once everything is out (v22: told first, it gave the surprises away). The profit's
+coins fly into the purse one by one, and the purse counts up as they land, from the first coin to the last (v22: it
+used to wait for the last one, then count).
 
 ## Sellers: one way of judging, one rule, and a story
 
@@ -272,9 +294,12 @@ something a real person might insist on. Not every visit is a deal: often the ri
 | The Maw's gaze (`Gaze`) | Avarax, the Gilded Maw | one coin for the chest, but everyone after him today asks twice as much | count who's still waiting |
 
 **Stories** (`SellerDef.Stories`; `Market.Story`). Every seller's line is a story about where the chest came from and
-what happened to them, with what they heard or how heavy it felt woven in ("Turned up under the plough on the old
-battlefield. Shook it hard: heard a clank. 30g, and that's a bargain!"). It's always true: the place decides what the
-chest tends to hold, so the careful player reads every chest by its place.
+what happened to them, with how they shook it or what they state woven in ("Turned up under the plough on the old
+battlefield. Shook it hard, like I do. 30g, and that's a bargain!"). It's always true: the place decides what the chest
+tends to hold, so the careful player reads every chest by its place. Nobody says what they heard (v22 retired the
+claims, and the slip they marked): a seller still prices only what they noticed (`Visit.Noticed`), so the deduction
+is the player's, from how they judge (the slip's header, `SellerDef.Priced`): shake as gently as Penn did, and what
+you hear is what she priced.
 
 **What they tell you besides** (`SellerDef.States`, `Visit.Clue`, `Strategy.Reckon`), and chests that change the rules
 of hearing. Each is a deduction, on a rule from real life, taught by its seller's lesson:
@@ -362,7 +387,18 @@ first visit after it.
 
 **Taught once, across runs** (v20). What Bram has taught (his tips, each seller's lesson, the scripted first day) is
 kept in the profile (`Profile.Taught`, given to `GameState.NewRun`), so a second run with tips on doesn't teach it
-again: the experience playtest found runs 2 and 3 replaying a dozen lessons the player had already had.
+again: the experience playtest found runs 2 and 3 replaying a dozen lessons the player had already had. Since v22 it's
+written the moment he says it (`Main.NoteTaught`; a lesson once its seller is at the counter, not while they're
+queued), and merged into a continued run too (`GameState.Remember`), so a day played over after quitting doesn't
+teach it twice either.
+
+**One tip at a time** (v22, `MentorView.Teach`). When two tips come up together Bram gives one; the other isn't marked
+as taught, so it comes up the next time it applies (the most pressing is asked first: at the day's end, paying off the
+debt before the Bookkeeping Engine before the shop's news).
+
+**Who's who** (v22). Clicking whoever's at the counter opens the ledger on their page, their line framed in gold; the
+ledger button and L do the same. Mother Bramble's lesson starts with it ("click her to read hers", `Visit.LookedUp`),
+and the `lookup` tip tells Bram's kin who come without lessons.
 
 Lessons and Bram's tips never talk over each other. A lesson waits until any tip already up (a new shop, a lock, a
 new way of trading) has been read. While a lesson runs, tips that would come up don't pile up behind it: they wait
@@ -610,7 +646,7 @@ a talent another), so a run is a handful of choices that have to fit together. 0
 and the named rule, which held what they added to what your slip named). 0.21 (the owner: rare curios came too often
 and too early, the named rule was clumsy, builds are the heart of the fun and each should play differently) gives them
 rarities, has Nim build with you, lets the numbers do what the named rule did, and gives six ways of trading a way to
-play of their own: 78 curios in all.
+play of their own: 78 curios in all, and 0.22's Guild Promissory Note (Mara's Favour, a talent until then) makes 79.
 
 **Rarity** (`CurioRarity`: common, uncommon, rare and legendary; green, blue, purple and gold on Nim's cloth,
 `Palette.Of`). Each card's rarity is rolled first, by week (`Curios.Rates`): commons and uncommons only in the first
@@ -753,6 +789,7 @@ read). The whole list (`--sim=curiolist`; T: the shop tier Nim brings it from):
 |  | Guildsman's Marker | C | Bram's word is good twice a run, not once. | from the start |
 |  | Savings Jar | U | Every night: 3% of your gold as interest (up to 20g at the stall, more in a grander shop). | from the start |
 |  | Miser's Lockbox | R, T2 | Every Guild night, once you've paid: 25% of what's left in your purse. | once you've had the Royal Emporium, or after four runs |
+|  | Guild Promissory Note | R | The Guild's own paper, from before the Locking: once a run, on a Guild night nothing you own can cover, it pays what's short (not in the last week). | once you've had a shop in Crownhold, or after two runs |
 | patrons | Letter of Introduction | U | Regulars take what you deliver a quality lower than they asked for. | from the start |
 |  | Patron's Ribbon | U | Commissions pay half as much again. | from the start |
 |  | Errand Book | U, T2 | The regulars post 2 more commissions every week. | once you've had a shop in Crownhold, or after two runs |
@@ -813,6 +850,12 @@ visit: one thing of a kind at a quality (a step better than the shop's chests us
 for. A board under the seller lists them, the slip marks the kinds they want with a gold pennant, and anything that
 comes out of a chest you open can be delivered instead of sold. A commission makes a sound worth more than its price:
 a chest with a flump in it is worth chasing when Penn wants silk.
+
+**Always more than selling** (v22, `GameState.CommissionPay`). What a commission pays for a thing is its share of the
+reward, and never less than a quarter over what that thing would sell for here (`Patrons.Premium`): a thing better
+than asked, an enchanted one, a shop whose buyers' trades put everything up, all pay more delivered than sold. Each
+thing pays as it's handed over, a lot's pieces too (they used to pay only when the last came in, and a lot that
+lapsed had cost you its sales). The deliver button says what it pays; the board says what each piece is worth at least.
 
 ## Events
 
@@ -883,12 +926,14 @@ Internally the shards are still `MapPieces` and the Crown Chest is the vault (`V
 saves and profiles carry over. Every run is recorded in `user://profile.json` (runs, debts cleared, Crown Chests
 opened, the furthest week), shown on the title screen and at the end of a run.
 
-## Across runs: Bram's kin, challenge levels and talents
+## Across runs: Bram's kin and challenge levels
 
 A run's own loop (a chest, a day, a week, five weeks) needed a reason to play another run that isn't the same run
-again. Three things carry over, all in `scripts/Core/Meta.cs` (definitions, the score) and `Kin.cs` (what they do to a
-run, as a partial of `GameState`); the profile (`Profile` in `Save.cs`, user://profile.json) keeps renown, talents, each
-character's open levels and best score.
+again. Since v22 nothing carries over that makes a run stronger: every run starts the same, and what grows is the
+player (and what's known: the journal, what Bram has taught, Nim's stock, the legendaries' feats). Two things vary a
+run, both in `scripts/Core/Meta.cs` (definitions, the score) and `Kin.cs` (what they do to a run, as a partial of
+`GameState`); the profile (`Profile` in `Save.cs`, user://profile.json) keeps each character's open levels and best
+score.
 
 **Bram's kin** (`Characters`). Each changes one part of how you judge a chest or run the shop, and pays for it; the rest
 of the game is the same. They're all Bram's family, so the story's lines ("your uncle") hold for each.
@@ -909,7 +954,7 @@ knowing the trade, `GameState.GivesLessons`); each of the others gets a first-mo
 signet for Rosa, no visitors' book for Isolde).
 
 **Challenge levels** (`Challenges`). Eight, each adding one term on top of the ones below, opened one at a time per
-character by clearing the debt at the level below. Each adds a quarter to the renown a run earns (x3 at level 8).
+character by clearing the debt at the level below. Each adds a quarter to a run's score (x3 at level 8).
 Terms are rules that hold every time, not hidden rolls:
 
 | Level | Term |
@@ -923,35 +968,33 @@ Terms are rules that hold every time, not hidden rolls:
 | 7 | Sharp sellers: everyone asks, and takes, a tenth more |
 | 8 | Hurried: every seller gives you 20 seconds |
 
-They're ordered mildest first by what each does on its own to the careful player with every talent (the sim's
-`Trial`, one term at a time; v14's figures are in *Balance across a career*): the stash and the word matter to people
+They're ordered mildest first by what each does on its own to the careful player (the sim's `Trial`, one term at a
+time; v14's figures, with every talent, are in *Balance across a career*): the stash and the word matter to people
 who get into trouble more than to the careful player, so they come first; a thinner margin on every chest is the
 hardest, because the last weeks need every coin the shop's growth can compound.
 
-**Score and renown** (`Score`). Points for the Guild dues paid (10 each), the debt cleared (100) and every day to
-spare (5), the Crown Chest (100) or the Key's shards held (10 each), moves (25 each), the collection (2 per find) and
-every week after the debt you kept the Guild paid (25). A foreclosed run still scores what it did, so every run moves
-you on. Renown is the score times the level's multiplier, banked when the run ends (retiring, foreclosure, or starting
-over on a saved shop); the run's end shows the lines, the renown and anything it opened.
+**Score** (`Score`). Points for the Guild dues paid (10 each), the debt cleared (100) and every day to spare (5), the
+Crown Chest (100) or the Key's shards held (10 each), moves (25 each), the collection (2 per find), the Heartsongs
+found (20 each) and every week after the debt you kept the Guild paid (25), times the level's multiplier
+(`Score.Final`). A foreclosed run still scores what it did. Each of Bram's kin keeps their best (`Profile.BestScore`,
+on the character screen); the run's end shows the lines, the score and anything it opened.
 
-**Talents** (`Talents`). A root and three branches, each talent building on the one above it (12 in all, 5,500
-renown). Like curios and synergies, **no talent adds a share to what things sell for or takes one off the
-dues**: they soften a bad night, widen your choice of curios, or open the shop's name sooner.
+**Talents: retired** (v22). Until 0.21 a run's score was renown, spent between runs on 12 talents in a tree (5,500
+renown in all). They made a run stronger for having played before (the careful player cleared four runs in ten with
+none, eight in ten with all), so a run's outcome said as much about the profile as about the play. Each went one of
+three ways:
 
-| Branch | Talents (cost) |
+| Talent | Now |
 |---|---|
-| (root) | Bram's Kin (50): start with 10g more |
-| Bram's Lessons | Rainy Day (100): a fourth stash dip; Pawnbroker's Friend (250): pawning at 70%; Good Word (500): Bram vouches twice; Mara's Favour (1,000): once a run, Mara pays a night nothing you own can cover (not the last week) |
-| Nim's Favour | Familiar Face (100): four curios on Nim's counter; Second Look (250): once a visit, another four; Keepsake (500): on Nim's first visit, one curio of your choice is free; Curio Cabinet (1,000): a fourth curio slot |
-| The Trade | Early Name (250): synergies from Thornwick; Trade Secrets (500): the witchlight and the lodestone at half price; Royal Favour (1,000): one more synergy slot |
+| Bram's Kin (start with 10g more) | everyone's: every run starts with 50g (`GameState.StartingGold`) |
+| Familiar Face (four curios on Nim's counter) | everyone's (`Curios.Laid`): more of a choice, not more power |
+| Second Look (once a visit, Nim shows something else) | everyone's (`GameState.RerollPeddler`): a build is easier to find, not stronger |
+| Mara's Favour (once a run, Mara pays a night nothing you own can cover) | a curio: the **Guild Promissory Note** (rare, Coffers, from a run that's reached Crownhold): the Guild honours its own paper, once |
+| Rainy Day (a fourth stash dip), Pawnbroker's Friend (pawning at 70%), Good Word (Bram vouches twice) | already curios: the Rainy-Day Purse, the Pawn Ticket (80%), the Guildsman's Marker |
+| Curio Cabinet (a fourth curio slot), Royal Favour (a second synergy) | already upgrades: the Curio Case, the Crownhold Charter |
+| Keepsake (a free curio on Nim's first visit), Early Name (synergies from Thornwick), Trade Secrets (the tools at half price) | gone: each sped a run up without widening it |
 
-Bram's Ledger (100: every seller's habits in the ledger from the start) went in v21, when the ledger started keeping
-every regular you've met across runs.
-
-Two first drafts sped the run up rather than widening it, and went: Keepsake as a free common curio on the first
-morning (alone, +8 points of clears; with Early Name and Old Picks, free fine lockpicks from the start, +22), because a
-curio or 50g on day one compounds through the whole run. A curio of your choice on Nim's first visit, and the sellers'
-habits in the ledger, widen choices without moving the timeline as much.
+An old profile's renown and talents are left behind when it loads (`Profile.FromJson`).
 
 ## The shop's look
 
@@ -973,7 +1016,7 @@ crown from the vault sit together on a shelf.
 
 ## Title, saves and settings
 
-The game opens on a title screen (Continue, New game, Talents once there's a run behind you, Settings, Quit) over
+The game opens on a title screen (Continue, New game, Settings, Quit) over
 your shop as you left it. New game opens the character screen (`SetupPhase`): the four of Bram's kin (locked ones say
 what unlocks them), the chosen one's rules, and the challenge level with its terms and multiplier. The shop is
 saved to `user://save.json` at the start of each day (`GameState.Save` and `Load`, plain JSON from Core), so leaving
@@ -1000,10 +1043,10 @@ you discover them, and stay open). It's Bram's kin's ledger, not the run's: a re
 come to your counter, a collection entry the first time you find the thing, a curio the first time Nim lays it out,
 and each stays open in every run after (`Profile.Met`, `Found`, `FoundEnchanted` and `CuriosSeen`, merged into a run by
 `GameState.Remember`; `Profile.Note` keeps them when a run ends). The run's own finds still score and still pay a
-collector's catalogue. The ledger's **Curios** page shows all 78: the ones you've met with what they do, the ones you
+collector's catalogue. The ledger's **Curios** page shows all 79: the ones you've met with what they do, the ones you
 keep, and the ones Nim doesn't carry for you yet, dark, with what opens them (a legendary's feat with how far along you
-are). Bram's Ledger, the talent that showed every regular from the start, had nothing left to do and went; a profile
-that had it gets its 100 renown back. Each thing looks the same everywhere: the collection, the shelf, the exhibition and the keep chooser
+are). Bram's Ledger, the talent that showed every regular from the start, had nothing left to do and went in v21 (the
+rest of the talents followed in v22). Each thing looks the same everywhere: the collection, the shelf, the exhibition and the keep chooser
 all show its own sprite (`UiKit.MakeItemIcon`, from icons `tools/import_art.py` halves when a sprite is too big).
 
 **Synergies** turn that tally into goals. Each has five levels; six of a kind at common or better reaches level 1
@@ -1084,20 +1127,20 @@ listening past a clank); the second morning opens with Mags, who heard everythin
 
 ## Evidence (`godot --headless --path . -- --sim`, 300 runs per style, up to 9 weeks)
 
-Each style plays whole runs as Kit at level 0 with no talents: buying chests, curios (a careful player's taste,
+Each style plays whole runs as Kit at level 0: buying chests, curios (a careful player's taste,
 `Strategy.CurioScore`, keeping enough back for the Guild) and upgrades (keeping Bram's working purse), delivering
 commissions, paying the Guild (pawning, or Bram's word, when short), taking Bram's stash when a day starts nearly
 broke, and paying off the whole debt as soon as it can (always paying off rather than buying the Bookkeeping Engine).
-These are the perfect listeners; how real players get there is in *Balance across a career*, below. v21's numbers
-(five five-day weeks; v20's three-day weeks are in the git history):
+These are the perfect listeners; how real players get there is in *Balance across a career*, below. v22's numbers
+(five five-day weeks; earlier versions' are in the git history):
 
 | Style | Still trading after each due, weeks 1-5 | Debt cleared | Crown Chest | Foreclosed (median week) | Thornwick | Crownhold | Royal Emporium |
 |---|---|---|---|---|---|---|---|
-| Pays their price, every chest | 100 100 95 47 1% | 1% | 1% | all (week 4) | day 8 | never | never |
-| One hard shake, keeps the seller's marks | 100 100 100 95 0% | 0% | 0% | all (week 5) | day 7 | day 23 | never |
-| Every strength, drops when safe | 100 100 100 99 22% | 22% | 21% | 99% (week 5) | day 7 | day 16 | day 20 |
-| + Witchlight and Lodestone | 100 100 100 99 30% | 30% | 28% | 98% (week 5) | day 7 | day 16 | day 20 |
-| + keeps grand things | 100 100 100 99 35% | 35% | 33% | 97% (week 5) | day 7 | day 16 | day 20 |
+| Pays their price, every chest | 100 100 95 48 0% | 0% | 0% | all (week 4) | day 8 | never | never |
+| One hard shake, ticks what it hears | 100 100 100 93 1% | 1% | 1% | all (week 5) | day 7 | day 19 | never |
+| Every strength, drops when safe | 100 100 100 98 34% | 34% | 33% | 95% (week 5) | day 7 | day 13 | day 18 |
+| + Witchlight and Lodestone | 100 100 100 98 42% | 42% | 40% | 94% (week 5) | day 7 | day 13 | day 17 |
+| + keeps grand things | 100 100 100 98 48% | 48% | 45% | 91% (week 5) | day 7 | day 14 | day 17 |
 
 ("Foreclosed" counts the Guild's endless interest after the debt, which doubles weekly.)
 
@@ -1106,37 +1149,37 @@ Week by week for the careful collector (gold on the Guild's night, before paying
 | Week (day) | 1 (5) | 2 (10) | 3 (15) | 4 (20) | 5 (25) | 6 (30) | 7 (35) |
 |---|---|---|---|---|---|---|---|
 | Due | 20 | 60 | 300 | 4,000 | 45,000 | 90,000 | 180,000 |
-| Gold, 10th percentile | 79 | 195 | 412 | 748 | 698 | 57,475 | 73,436 |
-| Gold, median | 161 | 459 | 1,097 | 7,211 | 18,684 | 143,853 | 183,045 |
-| Paid on the night | 100% | 100% | 100% | 99% | 25% | 78% | 53% |
-| At the Royal Emporium | 0% | 0% | 14% | 49% | 78% | 100% | 100% |
+| Gold, 10th percentile | 84 | 187 | 384 | 836 | 1,740 | 58,145 | 73,835 |
+| Gold, median | 166 | 476 | 2,179 | 11,973 | 26,578 | 159,308 | 185,505 |
+| Paid on the night | 100% | 100% | 100% | 98% | 36% | 84% | 53% |
+| At the Royal Emporium | 0% | 1% | 23% | 57% | 82% | 100% | 100% |
 
-The first three weeks are for growing; the fourth sends about a quarter of careful runs to Bram's word (the ones
-still at Thornwick or new to Crownhold); the fifth is the wall. The careful collector pays the debt off early in 31% of
-runs (cleared in week 4: 12%, week 5: 21%, the rest of the 35% on the night), fills about 11 commissions a run, opens
-Bram's stash once in three runs. Profit per customer: about 10g at the stall, 29g at Thornwick, 200g in Crownhold and
-2,000g at the Royal Emporium. Surprises: about one thing in four comes out a step better than its chest (one in fifty
-two or more), worth 47% of what the chests held.
+The first three weeks are for growing; the fourth sends about a fifth of careful runs to Bram's word (the ones still
+at Thornwick or new to Crownhold); the fifth is the wall. The careful collector pays the debt off early in 42% of
+runs (cleared in week 3: 5%, week 4: 16%, week 5: 27%), fills about 13 commissions a run (24,000g: each piece pays at
+least a quarter over what it would sell for), opens Bram's stash once in three runs. Profit per customer: about 10g at
+the stall, 32g at Thornwick, 210g in Crownhold and 3,500g at the Royal Emporium. Surprises: a little over one thing in
+four comes out a step better than its chest (one in fifty two or more), worth 49% of what the chests held.
 
 What curios and synergies are worth, to the careful player with both tools who sells everything:
 
 | | Debt cleared | Median day cleared | Median gold on the night, week 2 / 4 / 5 |
 |---|---|---|---|
-| With both | 30% | 22 | 464 / 6,657 / 18,305 |
-| No curios | 14% | 21 | 509 / 6,431 / 11,168 |
-| No synergies | 4% | 22 | 464 / 5,121 / 7,876 |
-| Neither | 1% | 24 | 509 / 4,517 / 5,251 |
+| With both | 42% | 21 | 489 / 12,065 / 24,699 |
+| No curios | 18% | 21 | 574 / 7,564 / 16,383 |
+| No synergies | 8% | 22 | 489 / 7,024 / 11,094 |
+| Neither | 0% | - | 574 / 4,997 / 6,177 |
 
-Ordinary progression alone (every upgrade, no curio) clears about one run in seven, most of those with a Heartsong on
-display; the build doubles it, and a build that comes together (three or more curios of one way of trading) clears
-two to three times as often again (*Curios: builds*). Without synergies, almost nothing clears: the shop's name for a
-kind (priced in) and the Keen Eye's fee for a perfect read (not) are most of a careful shop's late growth. The margins
-(*The shop's power index*): the careful player's held 1.70-1.85 per gold spent at every index, the blind buyer's
-1.14-1.24, the careful collector's climbing from 1.85 to 2.50 as its build comes together.
+Ordinary progression alone (every upgrade, no curio) clears about one run in five; the build more than doubles it, and
+a build that comes together (three or more curios of one way of trading) clears half as often again or more
+(*Curios: builds*). Without synergies, almost nothing clears: the shop's name for a kind (priced in) and the Keen Eye's
+fee for a perfect read (not) are most of a careful shop's late growth. The margins (*The shop's power index*): the
+careful player's held 1.75-1.92 per gold spent at every index, the blind buyer's 1.09-1.19, the careful collector's
+climbing from 1.91 to 3.6 as its build comes together.
 
 Per seller, at their own place (with the shop's tools, buyers' trades and restorers), profit per visit for a careful
 player, against paying their price blind. Every habit and every rule pays for putting up with it; only Tam (a few
-coins for anything) pays blind, Hob and Mags by a coin or three at the stall (Mags as in v19), and the Maw's coin pays
+coins for anything) pays blind, Mags by three coins at the stall (as in v19), and the Maw's coin pays
 anyone (its price is the rest of the day, which the table doesn't count). Ansel's markup went up a tenth (1.8-2.1) when
 Thornwick's chests got finer, and in v21 Quill's (1.85-2.15) and Silas's demon gold (two coins in three of the gold
 and gems he sells): without the named rule, a restorer's luck reaches what a blind buyer bought, and both had tipped
@@ -1144,18 +1187,18 @@ into paying a blind buyer a few coins a visit.
 
 | | Tam | Penn | Hob | Mags | Dorrin | Snikkit | Wenna | Bramble | Ansel |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +13 | +5 | +11 | +7 | +2 | +11 | +13 | +25 | +22 |
-| Blind | +12 | 0 | +1 | +3 | 0 | -6 | -1 | -22 | -6 |
+| Careful | +13 | +5 | +11 | +7 | +2 | +10 | +16 | +25 | +22 |
+| Blind | +12 | 0 | 0 | +3 | -1 | -5 | 0 | -22 | -5 |
 
 | | Fennick | Gerda | Wren | Orrin | Grit | Corisande | Pell | Quill | Shelly |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +20 | +15 | +41 | +193 | +312 | +119 | +299 | +119 | +31 |
-| Blind | -45 | -32 | -16 | -14 | -1,095 | -42 | -28 | -26 | -28 |
+| Careful | +24 | +13 | +35 | +187 | +317 | +124 | +292 | +125 | +34 |
+| Blind | -46 | -33 | -15 | -9 | -1,092 | -51 | -47 | -28 | -25 |
 
 | | Aldous | Vexis | Malbranche | Skrae | Ermine | Oriel | Silas | Aldo | the Maw |
 |---|---|---|---|---|---|---|---|---|---|
-| Careful | +77 | +82 | +56 | +201 | +138 | +138 | +185 | +529 | +1,850 |
-| Blind | -35 | -494 | -211 | -2 | -76 | -452 | -74 | -694 | +1,699 |
+| Careful | +78 | +92 | +57 | +205 | +121 | +144 | +203 | +511 | +1,807 |
+| Blind | -32 | -490 | -205 | -56 | -57 | -481 | -76 | -689 | +1,696 |
 
 The careful player plays the King's game only on a read it could check every way (every strength and the drop): a
 wrong read costs a quarter more than the chest held, and Hesk, who can't shake hard or drop, never plays it. It buys
@@ -1167,50 +1210,56 @@ Every seller's lesson completes, played the careful way, with and without the to
 ## Balance across a career
 
 v13 gave runs a meta-progression; v14 sets the balance for a career, not a run, and v15 keeps that curve through the
-new world (the numbers below are v21's unless marked: runs of 25 days, an hour and a half to two hours each). The goal, in the owner's words: no
+new world (the numbers below are v22's unless marked: runs of 25 days, an hour and a half to two hours each). The goal, in the owner's words: no
 pressure before players have learned the puzzles, no easy win in the first few runs, a purse that keeps growing but not
-steeply enough for the middle and late dues, and judgment and talents together pushing the curve up until a run
-clears; then the challenge levels.
+steeply enough for the middle and late dues, and judgment pushing the curve up until a run clears; then the challenge
+levels. Since v22 only judgment, and what's known (the journal, Nim's stock, the legendaries' feats), carries from run
+to run: until then talents did half the pushing.
 
 **Learners.** The sim's careful player is a perfect listener. A learner (`Style.Skill`, 0 to 1) plays the same way
 with a learner's mistakes, each shrinking as skill grows: at skill 0 they skip each strength 40% of the time, count a
-pair as one half the time, believe a seller's claim a third of the time, forget the drop half the time (and drop
+pair as one half the time, tick the kind a place usually holds without hearing it a third of the time, forget the
+drop half the time (and drop
 glass a quarter of the time), forget the lodestone, miss a glow or a boom on the slip, judge a chest's worth with a 45%
 spread either way, pick locks worse, and buy curios on a whim. Skill 0 is a first-timer who has had Bram's lessons:
 they know the rules but don't yet apply them every time.
 
-| Skill (Kit, level 0) | No talents: cleared, still trading after week 4 | Every talent |
+| Skill (Kit, level 0) | Cleared | Still trading after week 4 |
 |---|---|---|
-| 0.15 (a first run) | 5%; 91% | 11% |
-| 0.5 | 13%; 93% | 36% |
-| 0.75 | 21%; 97% | 62% |
-| 1 (the careful collector) | 40%; 99% | 79% |
+| 0.15 (a first run) | 4% | 85% |
+| 0.3 | 7% | 91% |
+| 0.5 | 11% | 95% |
+| 0.75 | 28% | 98% |
+| 0.9 | 37% | 100% |
+| 1 (the careful collector) | 48% | 100% |
 
 (A first run gets through the first three weeks, needs Bram's word in the fourth about half the time, and falls in
-the fifth; it clears about one time in twenty, nearly always with a Heartsong on display; without Heartsongs the
-careful player clears a little over a fifth of the time. v20's were 5%, 13%, 24% and 48% with no talents, 27% to 85%
-with all.)
+the fifth; it clears about one time in twenty-five, Heartsong or not. The careful player clears 43% with no Heartsongs
+at all, and 23% buying no curios. v21's were 5%, 13%, 21% and 40% with no talents, 11% to 79% with all; v20's 5% to
+48% with none, 27% to 85% with all.)
 
 **Careers.** Each simulated player starts at skill 0 to 0.3 and improves toward their own best (0.75 to 1) at their
 own pace (a tenth to three tenths of the way each run); every run is Kit's at the highest level open, scored at the
-end of the debt's last week or when the shop is lost, and its renown spent on the cheapest talent going. The pace of learning is a
-guess; what the sim shows is the shape (`--sim`, 40 players over 30 runs):
+end of the debt's last week or when the shop is lost. The pace of learning is a guess; what the sim shows is the shape
+(`--sim`, 40 players over 30 runs):
 
 | Run | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 12 | 16 | 20 | 24 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Skill | 0.15 | 0.29 | 0.41 | 0.50 | 0.57 | 0.63 | 0.68 | 0.71 | 0.74 | 0.77 | 0.80 | 0.84 | 0.86 | 0.87 |
-| Cleared | 3% | 5% | 5% | 8% | 5% | 10% | 20% | 28% | 28% | 35% | 30% | 38% | 35% | 20% |
-| Lost in week (median) | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
-| Challenge level | 0 | 0 | 0.1 | 0.1 | 0.2 | 0.3 | 0.4 | 0.6 | 0.8 | 1.1 | 1.8 | 3.0 | 4.3 | 5.5 |
-| Talents (of 12) | 1.6 | 2.9 | 3.5 | 4.3 | 5.0 | 5.7 | 6.3 | 6.8 | 7.4 | 8.1 | 9.2 | 10.8 | 11.8 | 12 |
-| Renown | 163 | 175 | 161 | 189 | 195 | 229 | 245 | 294 | 328 | 395 | 409 | 547 | 630 | 589 |
+| Cleared | 5% | 3% | 8% | 8% | 18% | 13% | 23% | 23% | 25% | 38% | 28% | 30% | 18% | 8% |
+| Lost in week (median) | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 4 |
+| Challenge level | 0 | 0.1 | 0.1 | 0.2 | 0.2 | 0.4 | 0.5 | 0.8 | 1.0 | 1.2 | 1.9 | 2.9 | 3.9 | 4.5 |
+| Score | 165 | 173 | 185 | 203 | 220 | 217 | 254 | 241 | 294 | 349 | 345 | 394 | 399 | 325 |
 
-v21: a run that's lost is lost in the last week (the fourth sends half of the first runs to Bram's word, the fifth
-is the wall); the debt is first cleared around the eighth run (a quarter of players by run 6, half by 8, three
-quarters by 11). Then the levels: level 1 around run 11, 2 around 14, 4 around 20 (all by run 30); level 6 is reached
-by about half of players by run 30, and level 8 stays a wall (nobody by run 30). All nine Heartsongs are known around
-run 17 and the Crown Chest is first sung whole around run 19. (v20: first clear around run 7, level 4 around 16, level
-6 around 26.)
+v22: a run that's lost is lost in the last week (the fourth sends half of the first runs to Bram's word, the fifth
+is the wall); the debt is first cleared around the seventh run (a quarter of players by run 5, half by 7, three
+quarters by 10). Then the levels: level 1 around run 11, 2 around 13, 4 around 23 (three players in four by run 30);
+level 6 is cleared by one player in seven by run 30, and level 8 stays a wall (3%). With a Heartsong in about one run
+in three, all nine are known by one player in eight by run 30, and the Crown Chest sung whole by one in ten: the
+songbook is a long collection now. (v21, talents bought cheapest first: first clear around run 8, level 4 around 20,
+level 6 by half of players by run 30, all nine Heartsongs around run 17. v20: first clear around run 7, level 4 around
+16, level 6 around 26.) Without the talents' lift, the higher levels are steeper than they were: a question for the
+owner is whether levels 5 to 8 should be gentler (*Open questions*).
 
 Getting there: v13's dues (40, 100, 300, 800, 1,400, 2,400, 3,800, 7,000) let the careful player with no talents
 clear 61% of the time and half of all careers clear by their fifth run, with a third of first-timers already short in
@@ -1223,21 +1272,23 @@ usual terms; v15's figures): Bram stretched thin (81%), demon gold about (73%), 
 the stall (69%), a lean start (67%), the Guild's interest (67%), sharp sellers (61%), a hurried town (59%). The new
 world's hurried town is the harshest (twenty seconds for a goblin's fee, a rotten chest and the King's game), so it
 moved from level 6 to 8; the rest kept their places (within a few points of each other, which is noise at 150 runs).
-All together, level by level: 81, 81, 72, 67, 61, 43, 31, 13, 6%. The first levels are an on-ramp for a careful player
-and bite a learner who still leans on Bram's stash and word and drops glass.
+All together, level by level: 81, 81, 72, 67, 61, 43, 31, 13, 6% (v22, with no talents to have: Kit 48, 48, 42, 32, 24,
+-, 11, -, 4%). The first levels are an on-ramp for a careful player and bite a learner who still leans on Bram's stash
+and word and drops glass.
 
-**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; v21):
+**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; v22):
 
-| | No talents | All, level 0 | Level 2 | Level 4 | Level 6 | Level 8 |
-|---|---|---|---|---|---|---|
-| Kit | 40% | 79% | 77% | 55% | 25% | 7% |
-| Hesk | 40% | 73% | 73% | 57% | 23% | 10% |
-| Rosa | 40% | 81% | 81% | 69% | 31% | 19% |
-| Isolde | 46% | 81% | 76% | 57% | 23% | 13% |
+| | Level 0 | Level 2 | Level 4 | Level 6 | Level 8 |
+|---|---|---|---|---|---|
+| Kit | 48% | 42% | 24% | 11% | 4% |
+| Hesk | 41% | 41% | 33% | 11% | 3% |
+| Rosa | 57% | 53% | 35% | 12% | 7% |
+| Isolde | 51% | 41% | 33% | 10% | 6% |
 
-A full talent tree moves the median clear day from 21 to 18 (the shop's growth is the build's, not the talents'),
-and the four of Bram's kin are within a few points of each other (v20: Kit 48 / 85 / 76 / 66 / 24 / 16%; Rosa's
-haggling and the Golden Tongue suit each other, which keeps her a little ahead at the top). (v19: Kit 29 / 61 / 66 / 42 / 15 / 5%; v18: Kit
+The median clear day is 20 to 24 at every level, and the four of Bram's kin are within a few points of each other
+(Rosa's haggling and the Golden Tongue suit each other, which keeps her a little ahead). (v21, no talents and then
+every talent at levels 0, 2, 4, 6 and 8: Kit 40 / 79 / 77 / 55 / 25 / 7%; v20: Kit 48 / 85 / 76 / 66 / 24 / 16%;
+v19: Kit 29 / 61 / 66 / 42 / 15 / 5%; v18: Kit
 42 / 75 / 68 / 53 / 23 / 9%. v19's warded puzzles first held Hesk back, 19% with no talents and 35% with
 all: the careful player only called a named kind silent once every strength had been tried, and he never shakes hard.
 It now asks only that the named kind had a fair chance to sound, as a player would: a dream of a river and no slosh
@@ -1397,17 +1448,36 @@ the unlocked curios), and more ways for a familiar shop to play differently.
     week one; v21 adds a fixed sum by rarity and keeps rares and legendaries for later weeks and grander shops.
 
 15. **Bram's Ledger (talent, v13 to v20)**, which showed every regular from the start. With the journal kept across
-    runs there was nothing left for it to do; profiles that had it get their renown back.
+    runs there was nothing left for it to do (v21 gave its renown back; v22 retired renown with the other talents).
 
 16. **v20's working purse** (20, 40, 250 and 2,500g by shop). It didn't follow what an upgrade does to prices, so an
     auction block could leave a shop that had kept exactly that much unable to buy a chest for days. v21's is two of the
     shop's typical chests at what sellers ask now, worked out again for every purchase.
 
+17. **Sellers' claims (v5 to v21).** Every listener said what they'd heard ("Shook it hard: heard a clank"), and the
+    slip started ticked with it. It did the first half of the puzzle for you, and a pre-ticked slip read as the seller's
+    word to be trusted or untrusted when nobody lies. v22: sellers still price only what they noticed, but nobody says
+    it and the slip starts empty; its header says how they came to their price, and what they priced is the player's
+    to work out by shaking the way they did.
+
+18. **Talents (v13 to v21).** Twelve, bought between runs with renown. They made a run stronger for having played
+    before: by v21 the careful player cleared four runs in ten with none and eight in ten with all, so the outcome said
+    as much about the profile as about the play. v22 retires them (*Across runs*): three are everyone's now, one is a
+    curio, five were curios or upgrades already, three went. Renown went with them; the score stays.
+
+19. **A Heartsong's price (v16 to v21).** It sold as a trinket as fine as its chest, so keeping one meant paying its
+    price to keep it ("Display it (-300g)"), and at nearly one a run they stopped feeling rare. v22: worth nothing in
+    gold, kept for free or declined, a third as often, rarer still for each one kept, and the reveal waits for you.
+
+20. **Enchanted hidden things (v8 to v21).** A thing under a false bottom or warded could be enchanted, and nothing
+    could show it (no sound, so no glow): a read could be perfect in every way you could check and still be wrong. v22:
+    a hidden thing is never enchanted, and fetches a third more instead.
+
 ## Open questions
 
-- Heartsongs: is a sound you've never heard, then a reveal, the heart-racing moment it should be, and does "highly
-  recommended" read as advice rather than an order? About one run in two finds one: rare enough, and is a find that
-  can win a run a thrill or a fluke?
+- Heartsongs: is a sound you've never heard, then the reveal and its choice, the heart-racing moment it should be?
+  About a third of a Heartsong a run, rarer for each kept: rare enough to cheer, and is declining one ever the right
+  call? Is a find that can win a run a thrill or a fluke?
   Is the songbook (nine, across runs) a goal people chase, and is the ending worth it?
 - The stories: do players read them, and use a place as a clue (a barrow's grave goods, a goblin warren's coin)? Do
   the stated clues read as puzzles (subtract the heard from Wenna's weight, count against Pell's ticket, read the
@@ -1451,11 +1521,15 @@ the unlocked curios), and more ways for a familiar shop to play differently.
   her own game, with sellers asking her more? Does Isolde's door money make keeping things a real choice from the
   stall on?
 - Careers: the learner model's mistakes and its pace of learning are guesses. Playtest how many runs a first clear
-  takes (the sim says about eight) and whether losing in week 5 several runs running feels like "nearly" or
-  like a wall. The talents lift the careful player from 41% to 79%; should the tree be a loadout instead?
+  takes (the sim says about seven) and whether losing in week 5 several runs running feels like "nearly" or
+  like a wall. With the talents gone (v22), every run starts the same, and the higher challenge levels are steeper
+  than they were (the careful collector clears level 4 about a quarter of the time, level 6 a tenth, against 55% and
+  25% with every talent in v21): should levels 5 to 8 be gentler, or is a wall there right?
+- A third of a Heartsong a run makes the songbook a long collection (all nine by one player in eight by run 30, the
+  sim says): is finding a new one a peak worth the wait, or should unknown songs be likelier still?
 - With the steeper late dues, the exhibition matters: a careful player who sells everything clears 21%, one who keeps
   grand things 44%. Is keeping things taught early enough (Bram's "keep" tip) for that to be fair?
 - Challenge levels 1 to 3 barely trouble the careful player (they bite people who use the stash and the drop); is
-  that a gentle on-ramp or free renown?
+  that a gentle on-ramp or a free multiplier on the score?
 - The Crown Chest usually comes with clearing the debt for a careful player (the Hooded Woman's asks are met by volume at
   the Emporium). Should her asks be harder, or limited to their own week?

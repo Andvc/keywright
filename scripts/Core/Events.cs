@@ -179,7 +179,7 @@ public static class Events
         // A riddle is only left for a warded thing: a chest with every kind in it already has nothing to ward.
         if (says == Clue.Riddle && visit.Chest.Warded == null) return visit;
         var clue = Market.MakeClue(rng, visit.Seller, visit.Chest, says);
-        return new Visit(visit.Seller, visit.Chest, visit.Claim, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
+        return new Visit(visit.Seller, visit.Chest, visit.Noticed, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
         {
             Origin = visit.Origin, Fee = visit.Fee, Clue = clue.Note, ClueKinds = clue.Kinds, Says = says, HearsOut = visit.HearsOut, Unruffled = visit.Unruffled,
         };
@@ -238,7 +238,7 @@ public static class Events
         }
         var chest = new Chest(items, colour, isSealed: true);
         int ask = Money.Round(Market.TypicalChest(Sellers.All.First(s => s.Tier == tier), colour, tier) * 1.1f * prices);
-        return Market.Price(rng, Stranger, chest, tier, ask, Trade.Fixed, claim: Array.Empty<Category>());
+        return Market.Price(rng, Stranger, chest, tier, ask, Trade.Fixed, noticed: Array.Empty<Category>());
     }
 
     /// <summary>
@@ -249,12 +249,15 @@ public static class Events
     {
         var old = visit.Chest;
         var colour = (Rarity)Math.Min(4, (int)old.Quality + 1);
-        var items = old.Items.Select(i => i with { Quality = Categories.RollQuality(rng, colour) }).ToList();
-        if (items.Count == 0) items.Add(new Item(Category.Coins, Categories.RollQuality(rng, colour)));
-        int magic = rng.Next(items.Count);
-        items[magic] = items[magic] with { Magic = true, Fake = false };
+        // A Heartsong stays as it is (it's no seller's, and never enchanted); so does what's warded, a colour finer.
+        var items = old.Items.Select(i => i.IsSong ? i : i with { Quality = Categories.RollQuality(rng, colour) }).ToList();
+        if (items.All(i => i.IsSong)) items.Add(new Item(Category.Coins, Categories.RollQuality(rng, colour)));
+        var plain = items.Where(i => !i.IsSong).ToArray();
+        var lit = rng.PickOne(plain);
+        items[items.IndexOf(lit)] = lit with { Magic = true, Fake = false };
         var chest = new Chest(items, colour, old.Hidden, old.Lock, gilded: true, packed: old.Packed);
-        return new Visit(visit.Seller, chest, visit.Claim, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
+        if (old.Warded != null) chest.Ward(old.Warded with { Quality = Categories.RollQuality(rng, colour) });
+        return new Visit(visit.Seller, chest, visit.Noticed, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
         {
             Origin = visit.Origin, Fee = visit.Fee, Clue = visit.Clue, ClueKinds = visit.ClueKinds, Says = visit.Says, HearsOut = visit.HearsOut,
             Unruffled = visit.Unruffled,

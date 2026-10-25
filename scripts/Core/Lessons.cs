@@ -56,9 +56,8 @@ public static class Lessons
         return chest;
     }
 
-    static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, IEnumerable<Category> claim = null, int? floor = null,
-        string pitch = null, string from = null) =>
-        Market.Price(rng, Sellers.Get(seller), chest, tier, ask, null, pitch, claim, floor, origin: from == null ? null : Origins.Get(from));
+    static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, int? floor = null, string pitch = null, string from = null) =>
+        Market.Price(rng, Sellers.Get(seller), chest, tier, ask, null, pitch, null, floor, origin: from == null ? null : Origins.Get(from));
 
     static readonly Dictionary<string, Lesson> ByKey = new Lesson[]
     {
@@ -88,8 +87,8 @@ public static class Lessons
             },
             Steps = new LessonStep[]
             {
-                new("Hob shook it hard and heard a clank. He haggles: he always asks about double. Shake it yourself, gently " +
-                    "too.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                new("Hob shakes hard, so a clank drowns out anything delicate for him. He haggles: he always asks about double. " +
+                    "Shake it yourself, gently too.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
                 new("Tick what you heard. Then use the slider to offer him about half his price. You get one offer: much " +
                     "lower and he storms off.", c => c.Visit.OffersMade > 0, Trades: true),
             },
@@ -152,7 +151,7 @@ public static class Lessons
         new()
         {
             Seller = "bramble",
-            Covers = new[] { "warded" },
+            Covers = new[] { "warded", "lookup" },
             Make = (rng, tier) =>
             {
                 var chest = Warded(new Chest(new[] { I(Category.Garb, Rarity.Uncommon), I(Category.Scrolls, Rarity.Uncommon) }, Rarity.Uncommon),
@@ -161,6 +160,8 @@ public static class Lessons
             },
             Steps = new LessonStep[]
             {
+                new("Everyone you've traded with has a page in your ledger: how they judge a chest, and what they're like. Click " +
+                    "Mother Bramble to read hers.", c => c.Visit.LookedUp),
                 new("Mother Bramble's price is a dream, but she always dreams true: of what the Wood warded in the chest, or else the " +
                     "dearest thing in it, as a sign. A river is a potion. Shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
                 new("A flump and a rustle, and no slosh. The potion is warded: sealed in the ward itself, silent and weightless. " +
@@ -247,9 +248,9 @@ public static class Lessons
             Make = (rng, tier) => Price(rng, "grit", new Chest(new[] { I(Category.Gems, Rarity.Uncommon), I(Category.Scrolls, Rarity.Rare) }, Rarity.Rare), tier),
             Steps = new LessonStep[]
             {
-                new("Grit heard a tinkle: a gem. He's a dwarf: he knows weapons, and thinks every tinkle is a diamond. Shake it " +
+                new("Grit's a dwarf: he knows weapons, prices the rest at half, and takes every tinkle for a diamond. Shake it " +
                     "gently yourself.", c => c.Tried(Shake.Gentle)),
-                new("An elfstone, priced like the crown jewels. Offer what it's really worth, or let him keep it."),
+                new("A tinkle: a gem, and he's priced it like the crown jewels. Offer what it's really worth, or let him keep it."),
             },
         },
         new()
@@ -275,7 +276,7 @@ public static class Lessons
             }, Rarity.Rare, I(Category.Gems, Rarity.Rare)), tier),
             Steps = new LessonStep[]
             {
-                new("Pell sells pawn by the lot, two or three of a kind, and only says which kinds he heard. Shake it at every " +
+                new("Pell sells pawn by the lot, two or three of a kind, and prices one of each kind he hears. Shake it at every " +
                     "strength and count: each thing sounds from its own spot.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
                 new("Two jingles and a rustle: three things, and he priced one purse. But the ticket counts every article pledged, " +
                     "and it says four. He won't have pledges dropped: the fourth is under a false bottom. Tick two Coins and False bottom.",
@@ -302,9 +303,9 @@ public static class Lessons
                 Rarity.Rare), tier),
             Steps = new LessonStep[]
             {
-                new("Shelly heard a rustle and swears it's a drowned wizard's spellbook. Shake it gently.", c => c.Tried(Shake.Gentle)),
-                new("A rustle at a gentle shake? Parchment only rustles when it's shaken hard. That's river sand pouring. Untick " +
-                    "Spells.", c => c.Slip.Count(Category.Scrolls) == 0),
+                new("Shelly shakes hard and prices every rustle as a drowned wizard's spellbook. Shake it gently.", c => c.Tried(Shake.Gentle)),
+                new("A rustle at a gentle shake? Parchment only rustles when it's shaken hard: that's river sand pouring, worth " +
+                    "nothing. Tick only the slosh: Potions.", c => c.Slip.Count(Category.Potions) > 0 && c.Slip.Count(Category.Scrolls) == 0),
             },
         },
         new()
@@ -396,7 +397,8 @@ public static class Lessons
             {
                 new("Silas sells demon gold: gilded iron, and it jingles just like the real thing. Turn the lodestone on and " +
                     "shake it gently.", c => c.Hearing.HasTried(Shake.Gentle, true), When: s => s.Has("magnet")),
-                new("The jingle went quiet: iron, gilded. Untick Coins.", c => c.Slip.Count(Category.Coins) == 0, When: s => s.Has("magnet")),
+                new("The jingle went quiet: iron, gilded, worth nothing. The tinkle's real: tick Gems, and leave Coin unticked.",
+                    c => c.Slip.Count(Category.Gems) > 0 && c.Slip.Count(Category.Coins) == 0, When: s => s.Has("magnet")),
                 new("Silas sells demon gold, gilded iron, as gold and gems, and it sounds just like the real thing. Only a " +
                     "lodestone can tell. Too cheap to be true, usually.", When: s => !s.Has("magnet")),
             },

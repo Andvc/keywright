@@ -13,20 +13,20 @@ five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.21): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+**Status:** Early Access (0.22): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
 of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
 puzzle brings out), runs of five five-day weeks against the Guild's dues (then endless), each day with its business
 (the Guild's night, two days with something on in town, Nim's days and the story's); one model for the economy (the
 shop's **power index**: what makes ordinary things fetch more puts every seller's price up as much, so the shop's
 growth makes the numbers bigger, not the game easier, and a purchase that would leave you unable to afford chests
-warns first); **78 curios** in four rarities that make the run's build, six of them ways to play of their own
+warns first); **79 curios** in four rarities that make the run's build, six of them ways to play of their own
 (enchantment, buying sight unseen, haggling, the perfect read, false bottoms and wards) with a legendary capstone
 each, with Nim bringing more of what you buy and his stock growing across runs; restorers that make things come out
 better; commissions, seventeen kinds of event, a calendar, and a story; a journal that remembers every regular, find
 and curio across runs; nine **Heartsongs**, the rarest
-things in the realm, each with its own song and its own use on display, and an ending that needs all nine; four of
-Bram's kin to play, eight challenge levels each, and a talent tree bought with the renown runs earn; saves, settings
-and a guided start. The pixel art is drawn in code (`tools/custom_art.py`) as a placeholder until dedicated art
+things in the realm (about a third of one a run, worth nothing in gold, each with its own song, its own reveal and its
+own use on display), and an ending that needs all nine; four of Bram's kin to play and eight challenge levels each,
+every run starting the same; saves, settings and a guided start. The pixel art is drawn in code (`tools/custom_art.py`) as a placeholder until dedicated art
 replaces it; recorded sounds and the font are from Kenney's CC0 packs (see [CREDITS.md](CREDITS.md)). Built with Godot
 4.7 (.NET / C#), targeting PC on Steam. Design rationale: [docs/design.md](docs/design.md).
 
@@ -63,11 +63,12 @@ and repository now belong to a different game. Saves and the profile from then c
    against your slip; anything better than its chest climbs, quality by quality, with more fuss for every step, and
    anything worse sags as its colour drains. The profit is stamped across the screen with your gut's verdict and why
    the seller missed it. Keep grand things for your exhibition (enchanted ones count double).
-   Once in a long while, about one run in two, a chest sings: a sound like nothing else, that only you can hear. That's a
-   **Heartsong**, one of nine things loved more than gold that the Locking was sung into. Nobody's priced it; it comes
-   out last, in mythic red, and it's worth far more singing in your shop than any merchant will pay: each one changes
-   the trade (two more customers a day, coin and gems at double, a bell that counts what's in every chest...). Find all
-   nine, over your runs, and the Crown Chest ends differently.
+   Once in a long while, about one run in three, a chest sings: a sound like nothing else, that only you can hear.
+   That's a **Heartsong**, one of nine things loved more than gold that the Locking was sung into. Nobody's priced it;
+   it comes out last, in mythic red, with what it does on display, and it's yours to keep (free) or let go. No merchant
+   would pay a coin for one, but singing in your shop each one changes the trade (two more customers a day, coin and
+   gems at double, a bell that counts what's in every chest...). Find all nine, over your runs, and the Crown Chest
+   ends differently.
 5. **End of day:** once the stall has earned 50g, spend your earnings on moving inward (each place brings richer
    customers, a new look and something new), tools (the Witchlight shows what's enchanted, the Lodestone silences iron
    and demon gold, Fine Lockpicks), cabinets, a crier and a night market for more customers, and a buyers' trade that
@@ -94,9 +95,9 @@ and repository now belong to a different game. Saves and the profile from then c
    the finds she asks for. Whenever you have all that's left of the debt, you can pay it off and finish early.
 
 **Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the Crown Chest, the shop, the
-collection) that becomes **renown**, multiplied by the run's challenge level. Renown buys **talents** (a tree of 12:
-a softer bad night, more choice from Nim, the shop's name sooner; none adds a share to what things sell for), kept for
-every run. New game asks who minds the stall:
+collection, the Heartsongs), multiplied by the run's challenge level; each of Bram's kin keeps their best. Nothing
+carries over that makes a run stronger (0.22 retired the talents): what grows is your judgment, the journal, and Nim's
+stock. New game asks who minds the stall:
 
 | Who | Plays |
 |---|---|
@@ -106,10 +107,10 @@ every run. New game asks who minds the stall:
 | Isolde, the Collection | displays from the first day and visitors pay a coin a point every night, but her collection can't be pawned (unlocked by opening the Crown Chest) |
 
 The first weeks are gentle and a first run usually falls in the middle ones, with a purse that grew, just not fast
-enough; it takes a few runs of sharper judgment and a few talents to clear the debt. Clearing it with someone opens
+enough; it takes a few runs of sharper judgment, and a build that comes together, to clear the debt. Clearing it with someone opens
 their next challenge level: each adds one of the Guild's harsher terms (Bram's
 stretched thin, fussy sellers, demon gold about, a lean start, thin crowds, the Guild's interest, sharp sellers, a hurried town)
-and a quarter more renown.
+and a quarter more to the score.
 
 Day one is guided: Uncle Bram, who's handing you the stall, brings in three customers with one lesson each (and a
 fourth, on passing, opens the second morning). After that, each seller's first visit is a lesson in their habit and
@@ -143,8 +144,10 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Pause, settings, quit to title | Esc, or Menu in the top bar |
 | GM mode (testing: +99,999 gold, skip the day, unlock the journal) | Settings, GM mode; then its panel beside the pause menu |
 | Choose who minds the stall, and the challenge level | New game: click a character, then - and + |
-| Learn talents | Talents, on the title or the character screen: click a gold one |
-| Ask Nim for something else | Show me something else, on Nim's screen (with Second Look) |
+| Read a seller's page in the ledger | Click them (or Ledger, or L): their line is framed |
+| Sell something on display | Click it on the shelf (at the counter or the day's end), then Sell |
+| Keep or decline a Heartsong | Keep it or Decline, on its reveal |
+| Ask Nim for something else | Show me something else, on Nim's screen (once a visit) |
 
 ## Development
 
@@ -152,7 +155,7 @@ The code is split so the game rules can be tested without the engine:
 
 | Folder | What's in it |
 |---|---|
-| `scripts/Core` | Pure C# rules: kinds, qualities and the shaking rules, chests, where chests come from (`Origins.cs`), sellers and how they judge, trade and tell their stories, the appraisal slip, a careful player's read and strategy, sellers' lessons, synergies, upgrades, the shop's progress and exhibition, the build (`Build.cs`: naming, luck, what things fetch), the run (the Guild's dues, curios, commissions, events, the story), Bram's kin, challenge levels, talents and the score (`Meta.cs`, `Kin.cs`), Bram's hints. No Godot types. |
+| `scripts/Core` | Pure C# rules: kinds, qualities and the shaking rules, chests, where chests come from (`Origins.cs`), sellers and how they judge, trade and tell their stories, the appraisal slip, a careful player's read and strategy, sellers' lessons, synergies, upgrades, the shop's progress and exhibition, the build (`Build.cs`: naming, luck, what things fetch), the run (the Guild's dues, curios, commissions, events, the story), Bram's kin, challenge levels and the score (`Meta.cs`, `Kin.cs`), Bram's hints. No Godot types. |
 | `scripts/Phases` | The screens: title, the character screen, counter, lockpicking, opening, end of day, the Guild's night, Nim's curios, story scenes, the end of a run. |
 | `scripts/Ui` | Visuals: the shakeable chest, the ledger, Bram, the seller, HUD, particles and styling. |
 | `scripts/Audio` | Recorded sounds, the synthesized slosh, and placeholder effects. |
@@ -173,9 +176,9 @@ xvfb-run -a godot --path . --rendering-driver opengl3 -- \
   --autoplay --days=1 --shots=$PWD/shots                   # play the guided day, save screenshots
 # add --start-tier=3 --gold=600 to jump ahead with the tools you'd have by then,
 # or --start-week=6 for a shop as a careful player would have it by then (--gold=N sets its purse);
-# --character=hesk|rosa|isolde, --challenge=N and --talents=all play one of Bram's kin on those terms;
+# --character=hesk|rosa|isolde and --challenge=N play one of Bram's kin on those terms;
 # --curios=foot,star,ledger starts with those curios
-xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, talents, pause, settings
+xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, pause, settings
 xvfb-run -a godot --path . -- --vault-demo --quit-at-end --shots=$PWD/shots_vault  # the finale: the Crown Chest
 godot --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe
 ```

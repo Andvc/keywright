@@ -20,13 +20,16 @@ public sealed class Visit
     public SellerDef Seller { get; }
     public Chest Chest { get; }
 
-    /// <summary>The kinds of things the seller says are inside (what they heard, or what they packed).</summary>
-    public IReadOnlyList<Category> Claim { get; }
+    /// <summary>
+    /// The kinds of things the seller noticed (what they heard, or what they packed): what they priced. Nobody says it
+    /// and the slip doesn't know it; a careful player works it out from how the seller judges a chest.
+    /// </summary>
+    public IReadOnlyList<Category> Noticed { get; }
 
     /// <summary>Where the chest really came from (null for the vault and the Stranger).</summary>
     public OriginDef Origin { get; init; }
 
-    /// <summary>What the seller states besides what they heard, as Bram notes it (<see cref="Market.MakeClue"/>), or null.</summary>
+    /// <summary>What the seller states (a count, a weight, a sign), as Bram notes it (<see cref="Market.MakeClue"/>), or null.</summary>
     public string Clue { get; init; }
 
     /// <summary>The kinds the seller's clue names, for the careful player's read (<see cref="Strategy.Reckon"/>).</summary>
@@ -58,17 +61,22 @@ public sealed class Visit
     /// <summary>The lesson this visit teaches, if it's a seller's first visit.</summary>
     public Lesson Lesson { get; set; }
 
+    /// <summary>You've read the seller's page in your ledger (clicked them, or opened it) while they waited.</summary>
+    public bool LookedUp { get; private set; }
+
+    public void LookUp() => LookedUp = true;
+
     /// <summary>A lesson's scripted least they'll take.</summary>
     internal void SetFloor(int floor) => Floor = Math.Max(1, floor);
 
     /// <summary>What they'd have sold it for: the price on the table, or the least they'd have taken.</summary>
     public int Price => Ask > 0 ? Ask : Floor;
 
-    public Visit(SellerDef seller, Chest chest, IReadOnlyList<Category> claim, Trade trade, int ask, int floor, string pitch)
+    public Visit(SellerDef seller, Chest chest, IReadOnlyList<Category> noticed, Trade trade, int ask, int floor, string pitch)
     {
         Seller = seller;
         Chest = chest;
-        Claim = claim;
+        Noticed = noticed;
         Trade = trade;
         Ask = _firstAsk = ask;
         Floor = Math.Max(1, floor);
@@ -91,7 +99,7 @@ public sealed class Visit
     {
         // Someone who waits for an offer still waits for one.
         int ask = _firstAsk > 0 ? Money.Round(_firstAsk * factor) : 0;
-        return new Visit(Seller, Chest, Claim, Trade, ask, Money.Round(Floor * factor),
+        return new Visit(Seller, Chest, Noticed, Trade, ask, Money.Round(Floor * factor),
             ask > 0 ? $"I came back. {ask}g, and no hard feelings." : "I came back. Make me an offer, then.")
         {
             Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says, Handled = Handled,
@@ -273,7 +281,7 @@ public sealed class Visit
         switch (Seller.Judge)
         {
             case Judgment.Counter:
-                lines.Add($"{Capital(name)} charged the same for every rattle she heard: {Claim.Count} of them, whatever they were.");
+                lines.Add($"{Capital(name)} charged the same for every rattle she heard: {Noticed.Count} of them, whatever they were.");
                 break;
             case Judgment.Weight:
             {
@@ -298,8 +306,8 @@ public sealed class Visit
             case Judgment.Miner:
             {
                 var gems = Chest.Get(Category.Gems);
-                if (gems != null && Claim.Contains(Category.Gems)) lines.Add($"{Capital(name)} priced the {gems.Name} like a diamond fit for a crown.");
-                var junk = Chest.Items.Where(i => Claim.Contains(i.Category) && i.Category is not (Category.Arms or Category.Gems)).ToList();
+                if (gems != null && Noticed.Contains(Category.Gems)) lines.Add($"{Capital(name)} priced the {gems.Name} like a diamond fit for a crown.");
+                var junk = Chest.Items.Where(i => Noticed.Contains(i.Category) && i.Category is not (Category.Arms or Category.Gems)).ToList();
                 if (junk.Count > 0) lines.Add($"He priced the {Join(junk.Select(i => i.Word))} at half.");
                 break;
             }
