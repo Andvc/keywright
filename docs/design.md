@@ -553,7 +553,7 @@ average, times their own markup.
 **The staircase.** Each shop has a typical colour (`ShopTiers.Typical`: common at the stall, green at Thornwick, blue in
 Crownhold, purple at the Emporium) and its own crowd; the median ask among its typical chests at plain prices
 (`Market.TypicalAsk`) is 13g, 80g, 355g and 1,580g. A careful player makes about 10g of profit a customer at the stall,
-30g at Thornwick, 215g in Crownhold and 3,000g at the Emporium. Each move inward is the big step; within a shop, the
+30g at Thornwick, 200g in Crownhold and 2,000g at the Emporium. Each move inward is the big step; within a shop, the
 upgrades and the build grow it.
 
 **The power index** (`GameState.PowerIndex`): what an ordinary thing a seller brings fetches here, luck and all, against
@@ -564,10 +564,10 @@ trades' curios and the gallery lamps; and luck (the restorers, the Lucky Shop, t
 priced in whole made the careful player, who goes by the odds bar, buy less), a lucky coin's chest weighted by how many
 chests a day are bought and a clover's by the week. Left out: what no seller can price (enchantment, false bottoms,
 wards, a Heartsong in the chest, a shooting star), your eye (fees and bonuses for a perfect read), what's taken off a
-price (a haggler's tricks, a sealed bid) and today's event. With the upgrades a careful player owns by each move it's 1.0 at the stall and Thornwick, about 1.3
-in Crownhold and 1.7 at the Emporium (a working purse of 26g, 160g, 890g and 5,420g), and with every upgrade 2.7
-(8,660g) (`--sim=index` prints it shop by shop, and each curio's share of it); only synergies, curios and Heartsongs
-take it further, and a chest's colour stops at purple.
+price (a haggler's tricks, a sealed bid) and today's event. With the upgrades a careful player owns by each move it's
+1.0 at the stall and Thornwick, about 1.3 in Crownhold and 1.7 at the Emporium (a working purse of 26g, 160g, 890g and
+5,420g), and with every upgrade 2.7 (8,660g); `--sim=index` prints it shop by shop, and each curio's share of it. Only
+synergies, curios and Heartsongs take it further, and a chest's colour stops at purple.
 
 **Prices** (`GameState.PriceFactor`, used as `Boosts.Dearer`): a seller's ask is their estimate, times their own
 markup and the dice, times the index, times what puts prices up or down besides (the Guild's sharp sellers, the
@@ -580,17 +580,17 @@ fast a careful player's purse grows; buying blind has next to none. Measured by 
 
 | Index when bought | under 1.05 | 1.05-1.3 | 1.3-1.7 | 1.7-2.2 | 2.2 and up |
 |---|---|---|---|---|---|
-| Careful, no curios | 1.86 | 1.70 | 1.73 | 1.73 | 1.81 |
-| Pays the asking price | 1.19 | 1.15 | 1.14 | (1.37) | (1.19) |
-| Careful collector, with curios | 1.88 | 1.86 | 1.98 | 2.10 | 2.60 |
+| Careful, no curios | 1.85 | 1.75 | 1.75 | 1.70 | 1.83 |
+| Pays the asking price | 1.17 | 1.14 | 1.21 | (1.24) | (1.18) |
+| Careful collector, with curios | 1.85 | 1.85 | 2.06 | 2.06 | 2.50 |
 
 Ordinary growth leaves the careful player's margin where it was and the blind buyer's next to nothing: the numbers
 get bigger, not the game easier. The collector's margin climbs as its build comes together: the curve gets steeper.
-(Bracketed: a blind buyer rarely gets that far, under 2% of their chests.)
+(Bracketed: a blind buyer rarely gets that far, under 1% of their chests.)
 
 **Dues against the ceiling.** The dues climb faster than ordinary growth, and the last week's 45,000g is more than the
 Royal Emporium makes with every upgrade on a careful player's margin: a careful player who buys no curios clears about
-one run in seven, most of those on a Heartsong's luck, against three in ten for one who builds as Nim's curios come,
+one run in seven, most of those on a Heartsong's luck, against a third for one who builds as Nim's curios come,
 and two to nine in ten once a way of trading has come together (*Curios: builds*).
 
 **The working purse** (`GameState.WorkingPurse`): two typical chests at what sellers ask here; every purchase that
