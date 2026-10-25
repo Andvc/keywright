@@ -44,8 +44,22 @@ The Dwarf-Gold Crowns anchor was also fitted to its specified 20-24 pixel conten
 envelope. Item processing now respects each asset's size hint before baseline
 placement, so small coins and large weapons retain their relative size.
 
+## Batch 2: things in chests and Heartsongs
+
+Delivered all 40 assets in this batch: 32 additional chest items and eight
+Heartsongs, completing the item and Heartsong categories with their anchors.
+Two successful candidates per asset were compared after retrying two transport
+failures. All 85 finished assets pass the supplied validator.
+
+Appended reference instructions identify the palette and category anchor as
+style references only. The per-item size hint is repeated in the instruction
+and enforced during processing, then the content is placed on baseline row 30.
+The exact instructions and chosen candidate are in `_workflow/generations.json`.
+The native-size review checks include coin material, weapon silhouette, cloak
+shape, bottle shape, book emblems, gems and each Heartsong's distinctive detail.
+
 ## Remaining work
 
-Batches 2-8 are pending. The report lists undelivered assets explicitly.
+Batches 3-8 are pending. The report lists undelivered assets explicitly.
 This is a staged delivery, not yet a complete P1/P2 replacement set.
 Game-side integration is outside this art brief.

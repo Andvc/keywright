@@ -7,6 +7,7 @@ from collections import Counter
 import argparse
 import hashlib
 import json
+import math
 import re
 import sys
 
@@ -24,6 +25,11 @@ def cap_with_outline(img, spec):
     if len(counts) <= limit:
         return img
     required = [pixelize.OUTLINE] if spec.get("outline") else []
+    if spec["category"] == "chest" and spec.get("part") == "open":
+        body_path = ROOT / f"art/generated/chest/{spec['skin']}_body.png"
+        if body_path.exists():
+            body = Image.open(body_path).convert("RGBA")
+            required += sorted({c[:3] for c in body.getdata() if c[3]} - set(required))
     keep = required + [c for c, _ in counts.most_common() if c not in required][:limit-len(required)]
     return pixelize.snap(img, keep)
 
@@ -84,6 +90,29 @@ def align_shop1_source(img):
     return img.transform((w, h), Image.Transform.MESH, mesh, Image.Resampling.NEAREST)
 
 
+def process_fx(img, spec, manifest):
+    """Use one source scale for the entire row so animation growth is preserved."""
+    img = pixelize.remove_background(img, None)
+    mask = img.getchannel("A").point(lambda a: 255 if a >= 128 else 0)
+    box = mask.getbbox()
+    if not box:
+        return Image.new("RGBA", tuple(spec["size"]))
+    count = spec["frames"]
+    fw, fh = spec["frame_size"]
+    step = img.width / count
+    viewport_h = step * fh / fw
+    cy = (box[1] + box[3]) / 2
+    out = Image.new("RGBA", tuple(spec["size"]))
+    palette = sorted(artlib.allowed_colours(spec, manifest))
+    for n in range(count):
+        tile = img.crop((round(n*step), round(cy-viewport_h/2),
+                         round((n+1)*step), round(cy+viewport_h/2)))
+        tile = tile.resize((fw,fh), Image.Resampling.BOX)
+        tile.putalpha(tile.getchannel("A").point(lambda a: 255 if a >= 128 else 0))
+        tile = pixelize.snap(tile, palette)
+        out.alpha_composite(tile,(n*fw,0))
+    return out
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--id", required=True)
@@ -107,17 +136,31 @@ def main():
             img = img.crop(bounds).resize((spec["size"][0]*16, spec["size"][1]*16), Image.Resampling.NEAREST)
     process = pixelize.process_sheet if spec.get("frames") else pixelize.process
     processing_spec = spec
+    if spec["category"] == "chest_lock":
+        x0, y0, x1, y1 = spec["geometry"][spec["part"]]["lock_seat"]
+        processing_spec = {**spec, "size": [x1-x0+1, y1-y0+1],
+                           "category": "isolated_lock", "margin": 0}
     if spec["category"] in ("item", "heartsong") and spec.get("size_hint"):
         ranges = re.findall(r"(\d+)(?:-(\d+))? px", spec["size_hint"])
         if ranges:
             limits = [int(high or low) for low, high in ranges]
             tw, th = (limits[0], limits[1]) if len(limits) > 1 else (limits[0], limits[0])
             processing_spec = {**spec, "size": [tw+2, th+2], "baseline": th}
-    result = process(img, processing_spec, manifest, mode=args.mode, block=args.block)
+    if spec.get("frames"):
+        result = process_fx(img, spec, manifest)
+    else:
+        result = process(img, processing_spec, manifest, mode=args.mode, block=args.block)
     if processing_spec is not spec:
         result = pixelize.place(result, spec)
     if spec["category"] == "chest":
         result = repair_chest(result, spec, manifest)
+    if spec["category"] == "lock_face":
+        cx, cy = spec["geometry"]["centre"]
+        r0, r1 = spec["geometry"]["track_radius"]
+        for y in range(result.height):
+            for x in range(result.width):
+                if r0 <= math.hypot(x-cx, y-cy) <= r1:
+                    result.putpixel((x, y), (26, 20, 32, 255))
     result = cap_with_outline(result, spec)
     if spec.get("outline"):
         result = pixelize.enforce_outline(result, spec)

@@ -1,7 +1,7 @@
 {
  "summary": {
-  "ok": 45,
-  "missing": 218
+  "ok": 85,
+  "missing": 178
  },
  "assets": {
   "bg.shop1": {
@@ -701,11 +701,17 @@
    "priority": "P3"
   },
   "item.barrow_silver": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
    "priority": "P1"
   },
   "item.moonsilver_marks": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "item.dwarf_gold_crowns": {
@@ -716,123 +722,213 @@
    "priority": "P1"
   },
   "item.sunken_sovereigns": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.dragon_gold": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.demon_gold": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "item.goblin_cleaver": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "item.dwarven_axe": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.wardens_blade": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "item.flamebrand": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "item.dragonslayer": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "item.wolfskin_cloak": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.elven_cloak": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "item.cloak_of_shadows": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
    "priority": "P1"
   },
   "item.archmages_mantle": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.phoenix_mantle": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "item.healing_draught": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.elixir_of_vigour": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.invisibility_draught": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P1"
   },
   "item.mermaids_breath": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "item.ambrosia": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
    "priority": "P1"
   },
   "item.scroll_of_sparks": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.scroll_of_fireball": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.summoners_grimoire": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.lichs_tome": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "item.keyhold_codex": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.sand_case": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.moonstone": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
    "priority": "P1"
   },
   "item.elfstone": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P1"
   },
   "item.blood_ruby": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P1"
   },
   "item.starstone": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "item.dragons_eye": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "item.paste_gem": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "heartsong.lullaby_box": {
@@ -843,35 +939,59 @@
    "priority": "P1"
   },
   "heartsong.shepherds_pipe": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "heartsong.fey_chimes": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "heartsong.dragons_egg": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "heartsong.clockwork_lark": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "heartsong.hearthstone": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "heartsong.drowned_bell": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "heartsong.bottled_star": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "heartsong.imps_ember": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.monocle": {
