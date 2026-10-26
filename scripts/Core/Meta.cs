@@ -96,53 +96,153 @@ public static class Characters
 }
 
 /// <summary>
-/// A challenge level's term: one more of the Guild's harsh terms, on top of every level below it. Clearing Bram's debt
-/// at a level opens the next for that character, and each level adds a quarter to a run's score.
+/// One of a challenge level's terms: a bane the season brings against you, or a boon that eases one of the trade's
+/// frustrations. A run at level N draws N of each (<see cref="Challenges.Draw"/>), on top of dues a step higher a level.
 /// </summary>
-public sealed record ChallengeDef(string Key, string Name, string Rule)
-{
-    /// <summary>The level it comes in at: every level above keeps it.</summary>
-    public int Level => Array.IndexOf(Challenges.All, this) + 1;
-}
+/// <param name="Good">A boon, not a bane.</param>
+/// <param name="Name">What it's called, in two to four words.</param>
+/// <param name="Rule">What it does, in a sentence.</param>
+/// <param name="Why">Why, in Aldmark: the reason you'd give a stranger in a tavern (docs/world.md).</param>
+/// <param name="Clashes">A term of the other kind it can't be drawn with: they'd contradict each other.</param>
+public sealed record TermDef(string Key, bool Good, string Name, string Rule, string Why, string Clashes = null);
 
+/// <summary>
+/// Challenge levels (opened per character by clearing Bram's debt at the level below, each a quarter more to the score).
+/// At level N the Guild's dues are higher by N steps, and the run draws N banes and N boons: the season is harder, but
+/// something always goes your way. The banes make the trade harder; the boons smooth over what's most frustrating about
+/// it (a slow start, a short Guild night, a sweeping clock, a lock that slips, a curio you can't find).
+/// </summary>
 public static class Challenges
 {
     public const int Max = 8;
 
-    public const string LeanStart = "lean", Stretched = "stretched", FussySellers = "fussy", SharpSellers = "sharp", Forgers = "forgers",
-        Hurried = "hurried", Interest = "interest", ThinCrowds = "thin";
+    /// <summary>Each level puts every due up by this share of what it was at level 0 (settable, for the sim's tuning).</summary>
+    public static float DebtStep { get; set; } = 0.1f;
 
-    /// <summary>Sharp sellers ask this much more, and take no less.</summary>
-    public const float SharpPrices = 1.1f;
+    /// <summary>What a level does to the Guild's dues.</summary>
+    public static float DebtFactor(int level) => 1 + DebtStep * Math.Clamp(level, 0, Max);
 
-    /// <summary>The Guild's interest on every due.</summary>
-    public const float InterestRate = 1.25f;
+    // The banes.
+    public const string ThinCrowds = "thin", SharpSellers = "sharp", Forgers = "forgers", Hurried = "hurried", FussySellers = "fussy",
+        Stretched = "stretched", LeanStart = "lean", DearCurios = "dearcurios", Builders = "builders", Rust = "rust", Wary = "wary", Sparse = "sparse";
+
+    // The boons.
+    public const string Gifts = "gifts", NimsFavour = "nim", Savings = "savings", OldPicks = "oldpicks", Invited = "invited", Patient = "patient",
+        Prepared = "prepared", HonestClerk = "pawn", GoodName = "goodname", Charm = "charm", FairDays = "fairdays", Drawer = "drawer";
+
+    /// <summary>With thin crowds: how many of the week's last days (the Guild's day, and the day its collectors ride in) are a customer short.</summary>
+    public const int ThinDays = 2;
+
+    /// <summary>With sharp sellers: what the least a haggler (or a boy waiting for your offer) will take is multiplied by.</summary>
+    public const float SharpFloor = 1.15f;
 
     /// <summary>With demon gold about: the chance any coin from any seller is gilded iron.</summary>
     public const float SlugChance = 0.1f;
 
-    /// <summary>When everyone's in a hurry: seconds each seller gives you.</summary>
+    /// <summary>In a hurried season: seconds each seller gives you.</summary>
     public const float HurriedPatience = 20f;
 
-    public static readonly ChallengeDef[] All =
+    /// <summary>What Nim asks more, when he's raised his prices; and what the Guild's builders charge more.</summary>
+    public const float DearCurioPrices = 1.25f, BuilderPrices = 1.25f;
+
+    /// <summary>A slow season: impatient sellers give you this much longer, and a rotten chest stands this much more.</summary>
+    public const float PatientFactor = 2f;
+
+    /// <summary>
+    /// With welcome gifts: how many of the first day's customers hand you their chest, and what for (a coin for luck: a
+    /// chest opens only once it's bought or given).
+    /// </summary>
+    public const int Gifted = 2, GiftPrice = 1;
+
+    /// <summary>With Bram's savings: what the starting purse is multiplied by.</summary>
+    public const float SavingsFactor = 1.5f;
+
+    public static readonly TermDef[] Banes =
     {
-        new(Stretched, "Bram's stretched thin", "Bram's secret stash has one dip fewer, and his word is good one time fewer."),
-        new(FussySellers, "Fussy sellers", "Every seller minds a drop, and puts the price up by half."),
-        new(Forgers, "Demon gold about", "One coin in ten is demon gold, whoever brings it."),
-        new(LeanStart, "Lean start", "You start with half the gold."),
-        new(ThinCrowds, "Thin crowds", "One customer fewer every day."),
-        new(Interest, "The Guild's interest", "Every week's due is a quarter higher."),
-        new(SharpSellers, "Sharp sellers", "Every seller asks a tenth more, and takes a tenth more."),
-        new(Hurried, "Hurried", $"Every seller gives you {HurriedPatience:0} seconds."),
+        new(ThinCrowds, false, "Thin crowds", "On the last two days of every week, one customer fewer.",
+            "The Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door while they're about."),
+        new(SharpSellers, false, "Sharp sellers", $"Sellers who haggle hold out for more: the least they'll take is {Synergies.Pct(SharpFloor - 1)} higher.",
+            "Word's out that the Guild has you by the purse, and sellers think you'll pay what they ask."),
+        new(Forgers, false, "Demon gold about", "One coin in ten is demon gold, whoever brings it.",
+            "The Gate's cracking wider, and the Maw's gilded iron has spread all over the realm."),
+        new(Hurried, false, "A hurried season", $"Every seller gives you {HurriedPatience:0} seconds to decide.",
+            "It's harvest time, and nobody can spare more than a moment at your counter."),
+        new(FussySellers, false, "Fussy sellers", "Every seller minds a drop: drop their chest and they ask half again.",
+            "Old chests are the fashion this year, and everyone's precious about theirs."),
+        new(Stretched, false, "Bram's stretched thin", "Bram's stash has one dip fewer, and his word is good one time fewer.",
+            "Bram spent his savings mending the roof, and the Guild has stopped taking his word."),
+        new(LeanStart, false, "A lean start", "You start with half the gold.",
+            "The stall's licence cost more than Bram thought."),
+        new(DearCurios, false, "Nim's raised his prices", "Nim asks a quarter more for every curio.",
+            "The Guild is hunting Nim this season, and he charges for the risk."),
+        new(Builders, false, "The Guild's builders", "Every upgrade and move costs a quarter more.",
+            "The Guild says only its own builders may work on a licensed shop, at its own rates."),
+        new(Rust, false, "A wet year", "Every lock has one more pin to pick.",
+            "A wet winter has rusted every old lock in the realm stiff."),
+        new(Wary, false, "Wary regulars", "The regulars post one commission fewer each week.",
+            "Folk aren't sure your stall will last, and won't set you errands."),
+        new(Sparse, false, "Nim's lean month", "Nim lays out three curios, not four.",
+            "Pickings have been slim among the Locking's oddments."),
     };
 
-    public static ChallengeDef Get(int level) => All[Math.Clamp(level, 1, Max) - 1];
+    public static readonly TermDef[] Boons =
+    {
+        new(Gifts, true, "Welcome gifts", $"Your first {Sellers.Number(Gifted)} customers hand you their chests for a coin each.",
+            "The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny."),
+        new(NimsFavour, true, "Nim's soft spot", "Nim will show you something else twice a visit, not once.",
+            "Nim owes Bram a favour, and has decided you're it."),
+        new(Savings, true, "Bram's savings", "You start with half as much gold again.",
+            "Bram sold his old cart, and the money's yours.", LeanStart),
+        new(OldPicks, true, "Bram's old picks", "You start with the Fine Lockpicks: a wider sweet spot on every lock.",
+            "Bram found his old picks at the bottom of a drawer."),
+        new(Invited, true, "Thornwick wants you", "The move to Thornwick Market costs half.",
+            "Thornwick's council wants a Keywright in the market, and pays half the rent.", Builders),
+        new(Patient, true, "A slow season", "Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking.",
+            "Nobody's in a hurry this year.", Hurried),
+        new(Prepared, true, "Bram's prepared", "Bram's stash has one more dip in it, and his word is good once more.",
+            "Bram's been putting a little by, and the Guild still owes him a favour.", Stretched),
+        new(HonestClerk, true, "An honest clerk", "On a short night, what you pawn fetches its full price.",
+            "The Guild's pawn clerk was at school with your mother."),
+        new(GoodName, true, "A good name", "Hagglers hear you out: an offer that's too low gets a second try, not a slammed door.",
+            "Bram's kin have a name for fair dealing."),
+        new(Charm, true, "A lucky charm", "After a run of plain finds, your luck turns twice as soon.",
+            "Bram tied his mother's old lucky charm to your apron."),
+        new(FairDays, true, "Fair days", "No days of mourning and no Guild assessors in town.",
+            "The old Duke's in good health, and the Guild's assessors have their hands full in the capital."),
+        new(Drawer, true, "Room for more", "Room for one more curio, from the start.",
+            "Bram cleared out a drawer for your curios."),
+    };
 
-    /// <summary>The level a term comes in at.</summary>
-    public static int LevelOf(string key) => Array.FindIndex(All, c => c.Key == key) + 1;
+    public static TermDef Get(string key) => Banes.FirstOrDefault(t => t.Key == key) ?? Boons.FirstOrDefault(t => t.Key == key);
 
-    /// <summary>The terms in force at a level: every one up to it.</summary>
-    public static IEnumerable<ChallengeDef> Upto(int level) => All.Where(c => c.Level <= level);
+    static bool Clash(string a, string b) => Get(a)?.Clashes == b || Get(b)?.Clashes == a;
+
+    /// <summary>
+    /// A run's terms at this level: so many banes and as many boons, drawn a pair at a time (a bane, then a boon) from one
+    /// shuffle of each pool, so a level's draw is the level below's with one more of each, and no boon is ever drawn with
+    /// the bane it would contradict (twelve of each and four such pairs leave room for eight of each).
+    /// </summary>
+    public static (List<string> Boons, List<string> Banes) Draw(int seed, int level)
+    {
+        var rng = new Random(unchecked(seed * 92821 + 17));
+        var banes = Banes.OrderBy(_ => rng.Next()).Select(t => t.Key).ToList();
+        var boons = Boons.OrderBy(_ => rng.Next()).Select(t => t.Key).ToList();
+        var good = new List<string>();
+        var bad = new List<string>();
+        for (int i = 0; i < Math.Clamp(level, 0, Max); i++)
+        {
+            bad.Add(banes.First(b => !bad.Contains(b) && !good.Any(g => Clash(g, b))));
+            good.Add(boons.First(g => !good.Contains(g) && !bad.Any(b => Clash(g, b))));
+        }
+        return (good, bad);
+    }
+
+    /// <summary>These terms, by key, as a run's boons and banes (for debugging a term's screens: --terms).</summary>
+    public static (List<string> Boons, List<string> Banes) Named(IEnumerable<string> keys)
+    {
+        var terms = keys.Select(k => Get(k.Trim())).Where(t => t != null).Distinct().ToList();
+        return (terms.Where(t => t.Good).Select(t => t.Key).ToList(), terms.Where(t => !t.Good).Select(t => t.Key).ToList());
+    }
 
     /// <summary>What a level does to a run's score: a quarter more for each.</summary>
     public static float Multiplier(int level) => 1 + 0.25f * Math.Clamp(level, 0, Max);

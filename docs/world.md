@@ -283,3 +283,46 @@ the Guild's nights). Each has a reason anyone in town would give you:
   the old way and leave a riddle for it. **The Guild's Count**: the Guild tallies everything that changes hands.
 - **The Guild's Assessor**: the Guild sends a man to sit in your corner and take its tenth.
 - **A Witchlight Moon**: the old enchantments wake under it.
+
+## A harder season (challenge levels)
+
+Bram's kin who've cleared his debt once can mind the stall in a harder season: the Guild, having been paid, wants more
+(its dues go up at every level), and the year brings its own troubles. But no year is all bad, and Bram has a few
+things put by. Every level deals the run as many of each as its number, drawn fresh for every run; none of them is a
+hidden roll, and each has a reason anyone at the crossroads would give you.
+
+What goes against you:
+
+- **Thin crowds**: the Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door
+  while they're about (a customer fewer on the week's last two days).
+- **Sharp sellers**: word's out that the Guild has you by the purse, so hagglers hold out for more.
+- **Demon gold about**: the Gate's cracking wider, and the Maw's gilded iron has spread all over the realm.
+- **A hurried season**: it's harvest, and nobody can spare more than a moment at your counter.
+- **Fussy sellers**: old chests are the fashion this year, and everyone minds a drop.
+- **Bram's stretched thin**: he spent his savings mending the roof, and the Guild has stopped taking his word.
+- **A lean start**: the stall's licence cost more than Bram thought.
+- **Nim's raised his prices**: the Guild is hunting Nim this season, and he charges for the risk.
+- **The Guild's builders**: only the Guild's own builders may work on a licensed shop, at the Guild's rates.
+- **A wet year**: a wet winter has rusted every old lock stiff (a pin more to pick).
+- **Wary regulars**: folk aren't sure the stall will last, and won't set you errands.
+- **Nim's lean month**: pickings have been slim among the Locking's oddments.
+
+What goes your way (mostly the things that make the trade a chore: a slow start, a short night, a sweeping clock, a
+lock that slips, a curio you can't find):
+
+- **Welcome gifts**: the crossroads loved Bram, and on your first morning two of his old regulars give you their
+  chests for a lucky penny (a chest only opens for its rightful owner, and a gift is as rightful as a sale).
+- **Nim's soft spot**: Nim owes Bram a favour, and has decided you're it.
+- **Bram's savings**: Bram sold his old cart, and the money's yours.
+- **Bram's old picks**: his old picks turned up at the bottom of a drawer.
+- **Thornwick wants you**: the town council wants a Keywright in the market, and pays half the rent of the move.
+- **A slow season**: nobody's in a hurry this year, and a rotten chest gets gentler handling.
+- **Bram's prepared**: he's been putting a little by, and the Guild still owes him a favour.
+- **An honest clerk**: the Guild's pawn clerk was at school with your mother.
+- **A good name**: Bram's kin have a name for fair dealing, so hagglers hear you out.
+- **A lucky charm**: Bram ties his mother's old lucky charm to your apron.
+- **Fair days**: the old Duke's in good health, and the Guild's assessors have their hands full in the capital.
+- **Room for more**: Bram clears out a drawer for your curios.
+
+A boon never comes with the bane it would contradict (savings and a lean start, Thornwick's welcome and the Guild's
+builders, a slow season and a hurried one, Bram prepared and Bram stretched thin).

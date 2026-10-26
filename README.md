@@ -13,7 +13,7 @@ five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.23): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+**Status:** Early Access (0.24): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
 of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
 puzzle brings out), runs of five five-day weeks against the Guild's dues (then endless), each day with its business
 (the Guild's night, two days with something on in town, Nim's days and the story's); one model for the economy (the
@@ -109,9 +109,10 @@ stock. New game asks who minds the stall:
 
 The first weeks are gentle and a first run usually falls in the middle ones, with a purse that grew, just not fast
 enough; it takes a few runs of sharper judgment, and a build that comes together, to clear the debt. Clearing it with someone opens
-their next challenge level: each adds one of the Guild's harsher terms (Bram's
-stretched thin, fussy sellers, demon gold about, a lean start, thin crowds, the Guild's interest, sharp sellers, a hurried town)
-and a quarter more to the score.
+their next challenge level, and a quarter more to the score. Each level raises the Guild's dues, and deals the run as
+many banes as its number (thin crowds, sharp sellers, demon gold about, a wet year that rusts every lock, ...) and as
+many boons (welcome gifts on the first morning, Bram's old picks, a slow season, room for one more curio, ...), drawn
+from twelve of each for every run and shown before it starts.
 
 Day one is guided: Uncle Bram, who's handing you the stall, brings in three customers with one lesson each (and a
 fourth, on passing, opens the second morning). After that, each seller's first visit is a lesson in their habit and
@@ -173,12 +174,13 @@ godot --headless --path . -- --sim=quick                   # the economy in a fe
 godot --headless --path . -- --sim=builds                  # each curio, each way of trading, pairs, blind buyers with builds
 godot --headless --path . -- --sim=experience              # a player's first three runs: pace, load, freshness, peaks
 godot --headless --path . -- --sim=trace --seed=1001       # one careful run, day by day
+godot --headless --path . -- --sim=terms                   # each challenge boon and bane alone, then whole levels
 godot --headless --path . -- --shake-test                  # check that shaking follows the rules
 xvfb-run -a godot --path . --rendering-driver opengl3 -- \
   --autoplay --days=1 --shots=$PWD/shots                   # play the guided day, save screenshots
 # add --start-tier=3 --gold=600 to jump ahead with the tools you'd have by then,
 # or --start-week=6 for a shop as a careful player would have it by then (--gold=N sets its purse);
-# --character=hesk|rosa|isolde and --challenge=N play one of Bram's kin on those terms;
+# --character=hesk|rosa|isolde and --challenge=N play one of Bram's kin at a level (--terms=gifts,rust: just those terms);
 # --curios=foot,star,ledger starts with those curios
 xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, pause, settings
 xvfb-run -a godot --path . -- --vault-demo --quit-at-end --shots=$PWD/shots_vault  # the finale: the Crown Chest

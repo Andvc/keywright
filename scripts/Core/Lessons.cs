@@ -101,9 +101,9 @@ public static class Lessons
                 pitch: "A tinker paid his tab with it. One rattle, like a fish in a crate. A rattle's a rattle: {price}, love."),
             Steps = new LessonStep[]
             {
-                new("Mags counts the rattles and charges the same for each, whatever's rattling: a purse costs what a rusty " +
-                    "dagger does. Shake it: what's rattling?", c => c.Tried(Shake.Gentle)),
-                new("A jingle: coins, worth more than a dagger. At dagger prices, that's a bargain."),
+                new("Mags counts the rattles and charges the same for each, whatever's rattling: a purse of coin costs what a " +
+                    "goblin's cleaver does. Shake it: what's rattling?", c => c.Tried(Shake.Gentle)),
+                new("A jingle: coin, worth more than any cleaver. At cleaver prices, that's a bargain."),
             },
         },
         new()

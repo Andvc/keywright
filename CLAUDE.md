@@ -38,10 +38,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    learners through their first three runs (tips on, profile carried over) and reports a human's minutes, what's new
    and how much at once (load), peaks, choices and stale stretches, day by day, with what to change.
    `-- --sim=trace --seed=N` prints one careful collector's run day by day (purse, customers, spending, upgrades,
-   curios, the Guild) for tuning the economy's pace.
+   curios, the Guild) for tuning the economy's pace. `-- --sim=terms [--who=a,b]` (ten minutes) plays Kit with each
+   challenge term alone, then the dues alone and whole levels as drawn; `-- --sim=levels [--debtstep=S]` just the
+   levels, one to eight; `-- --sim=careers` just the careers (learners at the highest level open, run by run).
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.
    Bot flags: `--seed=N --quit-at-end --days=N --no-tutorial --start-tier=N --gold=N --start-week=N --character=KEY
-   --challenge=N --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm` (`--curios` owns those from the
+   --challenge=N --terms=a,b --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm` (`--terms` plays just those
+   challenge boons and banes, by key, whatever the level deals; `--curios` owns those from the
    start, to see a build's screens; `--gm` turns GM mode on, for its panel beside the pause menu; `--event` makes every
    day that event, to check
    its screens; `--quit-at-end` quits after the first opening: use `--days`
@@ -55,8 +58,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine.
-   `--shell-demo` walks the title screen, the character screen (with a made-up profile), a new game (Hesk),
-   the pause menu and the settings (with `--gm`, the GM panel too: gold, the journal unlocked, a skip refused mid-scene).
+   `--shell-demo` walks the title screen, the character screen (with a made-up profile), a new game (Hesk, at
+   challenge level 8: the most boons and banes the character screen and the pause menu ever list), the pause menu and
+   the settings (with `--gm`, the GM panel too: gold, the journal unlocked, a skip refused mid-scene).
    Keep screenshot folders named `shots*` (git- and export-ignored).
 4. Shaking or physics changes: `godot --headless --path . -- --shake-test` should hear everything the rules say is
    audible at each strength (and with the magnet, the lodestone in game), with no leaks.
@@ -198,7 +202,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   judgment pushes that later, and the run's build decides the rest (v22: the careful player buying curios as they come
   clears about half the time, 48%; the same player with no curios about one in five, and with no Heartsongs 43%; a
   first run about one in twenty-five); careers first clear around the seventh run, clear level 4 in the twenties, and
-  levels 6 and 8 stay walls (one career in seven has cleared level 6 by run 30). A run's length is part of the
+  each level after costs a few points more (one career in three has cleared level 6 by run 30, one in twelve level 8). A run's length is part of the
   balance: `--sim=experience` should keep a first run under two hours and no day over its load (6). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
   are foreclosed within a few weeks, and no early week sends careful players to Bram's word (the fourth of five does
   for about a fifth of them: the ones still at Thornwick). Anything added to the run goes in `SaveData` too; the profile across runs is
@@ -212,9 +216,16 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - Across runs (`Meta.cs` for the definitions and the score, `Kin.cs` for what they do to a run): four of Bram's kin
   (`Characters`), each changing one part of how chests are judged or the shop is run and paying for it (Hesk: no hard
   shake or drop, a scale; Rosa: everybody haggles, walkouts stay away a week; Isolde: a shelf and door money from day
-  one, no pawning her collection); and eight cumulative challenge levels (`Challenges`, opened per character by
-  clearing at the level below, a quarter more to the score each; order them by what each term does alone, the sim's
-  `Trial`). Every run starts the same: nothing carries over that makes a run stronger (v22 retired the talents bought
+  one, no pawning her collection); and eight challenge levels (`Challenges`, opened per character by clearing at the
+  level below, a quarter more to the score each). A level raises every due by `Challenges.DebtStep` and deals the run
+  that many banes and as many boons (`TermDef`, `Challenges.Draw`: nested, so a level's draw is the one below's and a
+  pair more, and never a boon with the bane it contradicts; a real run draws from `Profile.TermsSeed`, so the setup
+  screen shows what will be played, and keeps them in `SaveData`). Banes make the trade harder; boons smooth over what's
+  most frustrating about it (a slow start, a short night, the clock, a slipping lock, a curio you can't find). A term
+  is a rule that holds every time, with a reason in `docs/world.md`, routed through `GameState.Under`/`Favoured` where
+  its rule lives; the setup screen and the pause menu list a run's terms (`UiKit.MakeTermList`). `--sim=terms` measures
+  each alone and the levels, `--sim=levels` just the levels as drawn (`--debtstep=S` tries another step): keep each
+  term within several points of the others and every level harder than the one below. Every run starts the same: nothing carries over that makes a run stronger (v22 retired the talents bought
   with renown: Bram's Kin's 10g, Familiar Face's fourth card and Second Look's reroll are everyone's now,
   `GameState.StartingGold`, `Curios.Laid`, `RerollPeddler`; Mara's Favour is the Guild Promissory Note, a curio; the
   rest were curios or upgrades already, or went), only what's known (the journal, what Bram has taught, Nim's stock and

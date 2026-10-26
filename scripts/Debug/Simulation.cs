@@ -54,9 +54,10 @@ public static partial class Simulation
     /// <param name="Given">Curios owned from the first day (the builds report).</param>
     /// <param name="Focus">The way of trading Nim's curios are bought for (a build).</param>
     /// <param name="Arrives">The given curios come when Nim could first have brought each (its tier, rarity and week), not on the first day.</param>
+    /// <param name="Terms">The challenge level's boons and banes, given (the terms report); null: drawn from each run's seed.</param>
     sealed record Style(string Name, Care Care, bool Collects, bool Curios = true, bool Synergies = true, string Character = Characters.Kit,
         int Challenge = 0, float Skill = 1, string Shown = null, bool Guided = false, string[] Given = null,
-        CurioTag? Focus = null, bool Arrives = false);
+        CurioTag? Focus = null, bool Arrives = false, (List<string> Boons, List<string> Banes)? Terms = null);
 
     static readonly Style[] Styles =
     {
@@ -320,10 +321,47 @@ public static partial class Simulation
         GD.Print("(lost first: foreclosed before the debt was cleared, and the median week)");
     }
 
-    /// <summary>One line of the meta report: this character on these terms, over so many runs.</summary>
-    public static string Trial(string character, int challenge, int campaigns, float skill = 1, bool curios = true)
+    /// <summary>
+    /// The challenge levels' terms one at a time (`--sim=terms`): the careful collector (Kit) with just that boon or bane
+    /// and the usual dues, against no terms at all; then the dues alone, a level's step at a time, and whole levels as
+    /// they're drawn. A bane should cost a few points of the clear rate and a boon give a few back, so that whatever a run
+    /// draws, each level is harder than the one below it.
+    /// </summary>
+    /// <param name="only">Just these terms, comma-separated (and no levels), to tune a few quickly.</param>
+    public static void TermsReport(int campaigns, string only = null)
     {
-        var style = Learner(skill, character, challenge) with { Curios = curios };
+        GD.Print($"\nChallenge terms ({campaigns} runs each, Kit, the careful collector): alone, at the usual dues");
+        GD.Print("term                       cleared   lost first   day   score  final");
+        var none = (new List<string>(), new List<string>());
+        GD.Print($"{"(none)",-24}  {Trial(Characters.Kit, 0, campaigns, terms: none)}");
+        var keys = only?.Split(',');
+        foreach (var term in Challenges.Banes.Concat(Challenges.Boons).Where(t => keys == null || keys.Contains(t.Key)))
+        {
+            var terms = term.Good ? (new List<string> { term.Key }, new List<string>()) : (new List<string>(), new List<string> { term.Key });
+            GD.Print($"{(term.Good ? "+ " : "- ") + term.Name,-24}  {Trial(Characters.Kit, 0, campaigns, terms: terms)}");
+        }
+        if (keys != null) return;
+        TermLevels(campaigns, true);
+    }
+
+    /// <summary>Kit at each level, as drawn (and with the dues alone, unless just the levels are wanted).</summary>
+    public static void TermLevels(int campaigns, bool dues = false)
+    {
+        var none = (new List<string>(), new List<string>());
+        GD.Print($"\n{(dues ? "The dues alone, and w" : "W")}hole levels as drawn (Kit, {campaigns} runs each; the dues +{Synergies.Pct(Challenges.DebtStep)} a level):");
+        foreach (int level in dues ? new[] { 1, 2, 4, 6, Challenges.Max } : Enumerable.Range(1, Challenges.Max))
+        {
+            if (dues) GD.Print($"dues of level {level,-12}  {Trial(Characters.Kit, level, campaigns, terms: none)}");
+            GD.Print($"level {level} as drawn{"",-7}  {Trial(Characters.Kit, level, campaigns)}");
+        }
+    }
+
+    /// <summary>One line of the meta report: this character on these terms, over so many runs.</summary>
+    /// <param name="terms">The boons and banes, given; null: each run's own draw for its level.</param>
+    public static string Trial(string character, int challenge, int campaigns, float skill = 1, bool curios = true,
+        (List<string> Boons, List<string> Banes)? terms = null)
+    {
+        var style = Learner(skill, character, challenge) with { Curios = curios, Terms = terms };
         var logs = Enumerable.Range(0, campaigns).Select(i => Play(style, 1000 + i).Log).ToList();
         var lost = logs.Where(l => l.LostWeek > 0 && l.ClearedDay == 0).Select(l => l.LostWeek).OrderBy(w => w).ToList();
         var days = logs.Where(l => l.ClearedDay > 0).Select(l => l.ClearedDay).OrderBy(d => d).ToList();
@@ -571,7 +609,8 @@ public static partial class Simulation
         var grade = PickGrade.Clean;
         if (visit.Chest.Lock.Locked)
         {
-            float roll = rng.NextFloat(), oil = state.HasCurio("oil") ? 0.1f : 0f;
+            // A pin fewer (a locksmith's oil) or more (a wet year) moves the odds a tenth.
+            float roll = rng.NextFloat(), oil = 0.1f * (visit.Chest.Lock.Pins - state.Oiled(visit.Chest.Lock).Pins);
             grade = state.HasCurio("knife") ? PickGrade.Forced
                 : skill < 1 ? (roll < 0.3f * skill + oil ? PickGrade.Masterful : roll < 0.6f + 0.25f * skill + oil / 2 ? PickGrade.Clean : PickGrade.Forced)
                 : care >= Care.Listens ? (roll < 0.3f + oil ? PickGrade.Masterful : roll < 0.85f + oil / 2 ? PickGrade.Clean : PickGrade.Forced)
@@ -591,7 +630,7 @@ public static partial class Simulation
     static (Log Log, GameState State) Play(Style style, int seed, int days = Days, IEnumerable<string> songbook = null, Recorder rec = null,
         IEnumerable<string> taught = null, IEnumerable<string> curios = null)
     {
-        var state = GameState.NewRun(seed, style.Character, style.Challenge, guided: style.Guided, taught: taught, curios: curios);
+        var state = GameState.NewRun(seed, style.Character, style.Challenge, guided: style.Guided, taught: taught, curios: curios, terms: style.Terms);
         if (songbook != null) state.Songbook.UnionWith(songbook);
         if (style.Shown != null && Heartsongs.Exists(style.Shown)) state.Display.Add(Heartsongs.Make(Heartsongs.Get(style.Shown), Rarity.Common));
         // Or a curio from the first day, to compare with.
@@ -973,8 +1012,8 @@ public static partial class Simulation
                 curio = whim.Length > 0 && !state.CuriosFull ? rng.PickOne(whim) : null;
                 sell = null;
             }
-            // Nothing worth it on the counter: ask Nim for a second look, if he'll give one.
-            if (curio == null && state.CanRerollPeddler)
+            // Nothing worth it on the counter: ask Nim for another look, as often as he'll give one.
+            while (curio == null && state.CanRerollPeddler)
             {
                 state.RerollPeddler();
                 (curio, sell) = Strategy.ChooseCurio(state, state.PeddlerStock, focus);

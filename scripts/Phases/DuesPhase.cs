@@ -238,7 +238,7 @@ public partial class DuesPhase : Phase
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDue(State);
         BuildTrack();
-        _vane.Say("A Guild note? From before the Locking? ...The Guild honours its own paper. Paid.", Palette.Warn);
+        _vane.Say(Guild.NotePaid, Palette.Warn);
         AfterSettled($"The note paid {paid}g of it. It's spent now.");
     }
 
@@ -291,7 +291,7 @@ public partial class DuesPhase : Phase
         Game.Hud.SetDue(State);
         BuildTrack();
         Game.Shake(0.25f);
-        _vane.Say("All of it? Tonight? ...Very well. The Guild has no further claim on Bram's stall.", Palette.Good);
+        _vane.Say(Guild.PaidOff, Palette.Good);
         _vane.Bob();
         AfterSettled(null);
     }
@@ -305,7 +305,7 @@ public partial class DuesPhase : Phase
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDue(State);
         BuildTrack();
-        _vane.Say("Bram's word. How touching. One week, then: the rest, with interest.", Palette.Warn);
+        _vane.Say(Guild.Grace, Palette.Warn);
         AfterSettled($"{owed}g goes on next week's due.");
     }
 

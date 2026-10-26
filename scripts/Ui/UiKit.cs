@@ -37,6 +37,28 @@ public static class UiKit
         return text;
     }
 
+    /// <summary>
+    /// A column of a run's boons or banes under a title, a name to a line, each with what it does (and why) on hover.
+    /// Returns where the next line would go.
+    /// </summary>
+    public static float MakeTermList(Control parent, string title, System.Collections.Generic.IEnumerable<string> keys, Color color, float x, float y,
+        float width, int count)
+    {
+        parent.AddChild(MakeLabel(title, 16, color.Darkened(0.15f)).Place(x, y, width, 20));
+        float pitch = count > 6 ? 17 : 20;
+        y += 21;
+        foreach (string key in keys)
+        {
+            var term = Core.Challenges.Get(key);
+            var line = MakeLabel(Fit(term.Name, width), 16, color).Place(x, y, width, 20);
+            line.MouseFilter = Control.MouseFilterEnum.Pass;
+            line.TooltipText = $"{term.Name}: {term.Rule}\n{term.Why}";
+            parent.AddChild(line);
+            y += pitch;
+        }
+        return y;
+    }
+
     public static Label MakeLabel(string text, int size, Color color,
         HorizontalAlignment align = HorizontalAlignment.Left, int outline = 0)
     {

@@ -132,7 +132,7 @@ public static class Market
         float magicChance = shopTier >= 3 ? (seller.MagicChance + boosts.Magic) * boosts.MagicFactor : 0f;
         var items = all.Select(c =>
         {
-            // Forgers about: any coin might be a gilded slug, whoever brings it.
+            // Demon gold about: any coin might be gilded iron, whoever brings it.
             bool fake = (seller.Fakes.Contains(c) && rng.NextFloat() < seller.FakeChance) || (c == Category.Coins && boosts.Slugs > 0 && rng.NextFloat() < boosts.Slugs);
             bool magic = !fake && rng.NextFloat() < magicChance;
             var quality = Categories.RollQuality(rng, colour);
@@ -417,7 +417,7 @@ public static class Market
         int fee = seller.Heirloom is Category heirloom ? Money.Round(Categories.Nominal(heirloom, chest.Quality) * HeirloomShare) : 0;
         var clue = MakeClue(rng, seller, chest);
         string line = Fill(pitch ?? Story(rng, seller, origin), seller, chest, shopTier).Replace("{clue}", clue?.Said ?? "")
-            .Replace("{price}", seller.SlipPrice ? "your slip's worth" : $"{asking}g").Replace("{fee}", $"{fee}g").Replace("{origin}", origin?.Name ?? "somewhere");
+            .Replace("{price}", seller.SlipPrice ? "your slip's worth" : Money.Say(asking)).Replace("{fee}", Money.Say(fee)).Replace("{origin}", origin?.Name ?? "somewhere");
         return new Visit(seller, chest, noticed, format, format == Trade.Offer ? 0 : asking, Money.Round(floor), line)
         {
             Origin = origin, Fee = fee, Clue = clue?.Note, ClueKinds = clue?.Kinds ?? Array.Empty<Category>(),
@@ -554,8 +554,8 @@ public static class Market
 /// <param name="Magic">Added to the chance each thing is magic.</param>
 /// <param name="Pairs">Added to the chance (from the town shop on) of two or three of a kind.</param>
 /// <param name="MoneyKinds">How much more often coins and jewelry turn up (a jewelry tycoon's name): 0.2 is a fifth more.</param>
-/// <param name="Dearer">What sellers' prices are multiplied by (sharp sellers about, a shop known to sell high, the Lullaby Box).</param>
-/// <param name="Slugs">The chance any coin is a gilded slug (forgers about).</param>
+/// <param name="Dearer">What sellers' prices are multiplied by (a shop known to sell high, the Lullaby Box).</param>
+/// <param name="Slugs">The chance any coin is a gilded slug (demon gold about).</param>
 /// <param name="Haggles">Everybody haggles (with Rosa at the counter).</param>
 public sealed record Boosts(float BetterChests = 0, float Hidden = 0, float Magic = 0, float Pairs = 0, float MoneyKinds = 0, float Dearer = 1,
     float Slugs = 0, bool Haggles = false)
@@ -568,7 +568,7 @@ public sealed record Boosts(float BetterChests = 0, float Hidden = 0, float Magi
     /// <summary>What the chance each thing is enchanted is multiplied by (a witch's draught).</summary>
     public float MagicFactor { get; init; } = 1;
 
-    /// <summary>What the least a haggler, or a seller who waits for your offer, will take is multiplied by (a silver tongue, a Haggler's name).</summary>
+    /// <summary>What the least a haggler, or a seller who waits for your offer, will take is multiplied by (a silver tongue, a Haggler's name; sharp sellers).</summary>
     public float Floor { get; init; } = 1;
 
     /// <summary>Every chest has a false bottom (the smugglers' compass).</summary>

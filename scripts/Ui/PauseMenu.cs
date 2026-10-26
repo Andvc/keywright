@@ -31,8 +31,23 @@ public partial class PauseMenu : CanvasLayer
         root.AddChild(UiKit.MakeButton("Quit game", Palette.Bad, 16, () => Leave(toTitle: false)).Place(X + 60, y + 182, W - 120, 44));
         root.AddChild(UiKit.MakeLabel("The shop is saved at the start of each day: leave now and today starts over.", 16, Palette.Muted,
             HorizontalAlignment.Center).Wrapped().Place(X + 24, y + 238, W - 48, 44));
+        if (Main.Instance.State is { Challenge: > 0 } state) BuildTerms(root, state);
         if (Settings.Gm && Main.Instance.State != null) BuildGm(root);
         Main.Instance.Sfx.PlayGroup("book", 1.2f, -8);
+    }
+
+    /// <summary>A challenge run's level, what it does to the dues, and its boons and banes (each explained on hover).</summary>
+    static void BuildTerms(Control root, Core.GameState state)
+    {
+        const float tw = 260, tx = X - 24 - tw, th = 540, ty = (720 - th) / 2;
+        int level = state.Challenge;
+        root.AddChild(UiKit.MakePanel(Palette.Warn.Darkened(0.3f)).Place(tx, ty, tw, th));
+        root.AddChild(UiKit.MakeLabel($"LEVEL {level}", 32, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(tx, ty + 18, tw, 40));
+        root.AddChild(UiKit.MakeLabel($"The Guild's dues +{Core.Synergies.Pct(Core.Challenges.DebtFactor(level) - 1)}", 16, Palette.Warn,
+            HorizontalAlignment.Center).Place(tx, ty + 62, tw, 20));
+        float y = UiKit.MakeTermList(root, "FOR YOU", state.Boons, Palette.Good, tx + 20, ty + 96, tw - 40, state.Boons.Count);
+        y = UiKit.MakeTermList(root, "AGAINST YOU", state.Banes, Palette.Warn, tx + 20, y + 10, tw - 40, state.Banes.Count);
+        root.AddChild(UiKit.MakeLabel("Hover over one to read it.", 16, Palette.Muted, HorizontalAlignment.Center).Place(tx, Math.Max(y + 8, ty + th - 36), tw, 20));
     }
 
     Label _gmNote;

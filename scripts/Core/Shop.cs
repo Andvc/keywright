@@ -374,7 +374,7 @@ public sealed partial class GameState
         HiddenFactor = HasCurio("hook") ? Curios.HookHidden : 1,
         MagicFactor = HasCurio("draught") ? Curios.DraughtMagic : 1,
         Floor = (HasCurio("tongue") ? Curios.TongueFloor : 1) * (HasCurio("signet") ? Curios.SignetFloor : 1) * (1 - Synergies.HagglerFloor(Active("haggler"))) *
-                (HasCurio("goldentongue") ? Curios.GoldenFloor : 1),
+                (HasCurio("goldentongue") ? Curios.GoldenFloor : 1) * (Under(Challenges.SharpSellers) ? Challenges.SharpFloor : 1),
         AlwaysHidden = HasCurio("compass"),
         AlwaysWard = HasCurio("wardlamp") || HasCurio("aldricseal"),
         MagicSpreads = HasCurio("chalk"),
@@ -387,19 +387,24 @@ public sealed partial class GameState
     /// <summary>When you drop a chest: in a padded crate, or by the Imp's Ember, glass never breaks.</summary>
     public float DropSturdier => HasCurio("crate") || Shows(Heartsongs.Ember) ? 1f : Sturdier;
 
-    /// <summary>A lock as you'll pick it: one pin fewer with a locksmith's oil.</summary>
-    public LockTier Oiled(LockTier lockTier) => HasCurio("oil") && lockTier.Pins > 1 ? lockTier with { Pins = lockTier.Pins - 1 } : lockTier;
+    /// <summary>A lock as you'll pick it: one pin fewer with a locksmith's oil, one more in a wet year.</summary>
+    public LockTier Oiled(LockTier lockTier)
+    {
+        if (!lockTier.Locked) return lockTier;
+        int pins = lockTier.Pins + (Under(Challenges.Rust) ? 1 : 0) - (HasCurio("oil") ? 1 : 0);
+        return lockTier with { Pins = Math.Max(1, pins) };
+    }
 
     /// <summary>
-    /// How long a seller gives you, in seconds (0: all day): an impatient one's patience, or everyone's when the town is
-    /// in a hurry; twice as long with a pocket watch, and all day while the Lullaby Box plays.
+    /// How long a seller gives you, in seconds (0: all day): an impatient one's patience, or everyone's in a hurried
+    /// season; twice as long with a pocket watch, and in a slow season; all day while the Lullaby Box plays.
     /// </summary>
     public float Patience(SellerDef seller)
     {
         if (Shows(Heartsongs.Lullaby)) return 0;
         float patience = seller.Patience;
         if (Under(Challenges.Hurried)) patience = patience > 0 ? Math.Min(patience, Challenges.HurriedPatience) : Challenges.HurriedPatience;
-        return patience * (HasCurio("watch") ? Curios.WatchPatience : 1);
+        return patience * (HasCurio("watch") ? Curios.WatchPatience : 1) * (Favoured(Challenges.Patient) ? Challenges.PatientFactor : 1);
     }
 
     /// <summary>
@@ -466,7 +471,7 @@ public sealed partial class GameState
     public int CustomersPerDay => Math.Max(2, ShopTiers.Customers(Tier) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Customers) + ExhibitionCustomers +
                                             (Shows(Heartsongs.Pipe) ? Heartsongs.PipeCustomers : 0) +
                                             (HasCurio("lantern") ? Curios.LanternCustomers : 0) + (HasCurio("horn") ? Curios.HornCustomers : 0) +
-                                            EventCustomers - (Under(Challenges.ThinCrowds) ? 1 : 0) - (QuietOpening ? 1 : 0));
+                                            EventCustomers - (Under(Challenges.ThinCrowds) && DayOfWeek > Guild.DaysPerWeek - Challenges.ThinDays ? 1 : 0) - (QuietOpening ? 1 : 0));
 
     /// <summary>The first day the shop's had at this tier (a move inward is bought the evening before).</summary>
     public int TierSince { get; private set; }
@@ -502,7 +507,8 @@ public sealed partial class GameState
         {
             SavedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
             Seed = Seed, Gold = Gold, Day = Day, Tier = Tier, Guided = Guided, TotalEarned = TotalEarned,
-            Character = Character, Challenge = Challenge, Snubbed = _snubbed.ToList(), MaraUsed = NoteUsed, FirstDayTaught = FirstDayTaught,
+            Character = Character, Challenge = Challenge, Boons = Boons.ToList(), Banes = Banes.ToList(), Snubbed = _snubbed.ToList(),
+            MaraUsed = NoteUsed, FirstDayTaught = FirstDayTaught,
             UpgradesOpen = UpgradesOpen, MagicFound = MagicFound, PerfectStreak = PerfectStreak, BestStreak = BestStreak,
             Owned = _owned.ToList(), HintsSeen = HintsSeen.ToList(), Met = Met.ToList(), Found = Found.ToList(),
             FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(), People = People.ToList(),
@@ -550,6 +556,10 @@ public sealed partial class GameState
                 Days = Enumerable.Range(1, Guild.DaysPerWeek).Select(d => d == data.EventDay ? data.WeekEvent : null).ToList(),
             },
         };
+        // The level's terms as drawn; a save from before 0.24 (when every level's terms were fixed) draws them now.
+        var (boons, banes) = data.Boons != null && data.Banes != null ? (data.Boons, data.Banes) : Challenges.Draw(data.Seed, state.Challenge);
+        state.Boons.AddRange(boons.Where(k => Challenges.Get(k) != null).Distinct());
+        state.Banes.AddRange(banes.Where(k => Challenges.Get(k) != null).Distinct());
         // Curios from an older version that are gone now are simply gone; the rest keep what you paid (or half today's price).
         for (int i = 0; i < data.Curios.Count; i++)
         {
@@ -560,7 +570,7 @@ public sealed partial class GameState
         }
         state._eventsSeen.AddRange(data.EventsSeen);
         // A save from before plans: next week's is made now, as it would have been this week.
-        state.NextPlan ??= Events.Plan(state.Seed, state.Plan.Week + 1, state.Tier, state._eventsSeen);
+        state.NextPlan ??= Events.Plan(state.Seed, state.Plan.Week + 1, state.Tier, state._eventsSeen, state.Favoured(Challenges.FairDays));
         state._snubbed.UnionWith(data.Snubbed);
         state.Commissions.AddRange(data.Commissions.Select(c => new Commission
         {
@@ -610,7 +620,7 @@ public sealed partial class GameState
         Current = null;
         Today = new DayStats();
         _songRng = new Random(unchecked(Seed * 3571 + Day));
-        PeddlerRerolled = false;
+        PeddlerRerolls = 0;
         DipIntoStash();
         if (DayOfWeek == 1) StartWeek();
         PeddlerStock.Clear();
@@ -664,6 +674,14 @@ public sealed partial class GameState
         }
         StageEvent();
         Curiosities();
+        // Welcome gifts: on the first morning, two of Bram's old regulars hand you their chests for a lucky penny.
+        if (Day == 1 && Favoured(Challenges.Gifts))
+            for (int i = 0, given = 0; i < Queue.Count && given < Challenges.Gifted; i++)
+                if (Queue[i].Lesson == null)
+                {
+                    Queue[i] = Queue[i].Given(Rng);
+                    given++;
+                }
     }
 
     /// <summary>
@@ -699,9 +717,9 @@ public sealed partial class GameState
             return visit;
         }
         var fresh = Market.CreateVisit(Rng, seller, Tier, finer ? Boosts with { BetterChests = 1 } : Boosts);
-        // A merchant's signet (or Rosa's charm): hagglers hear out an offer that's too low, instead of storming off. A
-        // golden tongue: nobody storms off at all.
-        fresh.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll || HasCurio("goldentongue");
+        // A merchant's signet (or Rosa's charm, or a good name): hagglers hear out an offer that's too low, instead of
+        // storming off. A golden tongue: nobody storms off at all.
+        fresh.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll || HasCurio("goldentongue") || Favoured(Challenges.GoodName);
         fresh.Unruffled = HasCurio("goldentongue");
         Sing(fresh);
         return fresh;

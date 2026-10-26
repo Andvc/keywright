@@ -116,8 +116,8 @@ public partial class Autoplay : Node
         for (int i = 0; i < 2 && IsInstanceValid(peddler); i++)
         {
             var (curio, sell) = Strategy.ChooseCurio(State, peddler.Stock.ToList());
-            // Nothing worth it: a second look, if Nim will give one.
-            if (curio == null && State.CanRerollPeddler)
+            // Nothing worth it: another look, as often as Nim will give one.
+            while (curio == null && State.CanRerollPeddler && IsInstanceValid(peddler))
             {
                 peddler.Reroll();
                 Main.Instance.Moment("22_reroll", 0.4);

@@ -100,11 +100,25 @@ public sealed class Visit
         // Someone who waits for an offer still waits for one.
         int ask = _firstAsk > 0 ? Money.Round(_firstAsk * factor) : 0;
         return new Visit(Seller, Chest, Noticed, Trade, ask, Money.Round(Floor * factor),
-            ask > 0 ? $"I came back. {ask}g, and no hard feelings." : "I came back. Make me an offer, then.")
+            ask > 0 ? $"I've come back. {Money.Say(ask)}, and no hard feelings." : "I've come back. Make me an offer, then.")
         {
             Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says, Handled = Handled,
         };
     }
+
+    /// <summary>What the crossroads say when they hand Bram's kin a chest on the first day (welcome gifts).</summary>
+    static readonly string[] GiftLines =
+    {
+        "Bram's kin at the stall at last! One coin for it, for luck. Not a penny more, I won't hear of it.",
+        "Bram was good to us for forty years. One coin and it's yours. Welcome to the crossroads.",
+        "A welcome present for the new Keywright. One coin, mind: it's bad luck to give a chest for nothing.",
+    };
+
+    /// <summary>The same chest, offered as a welcome gift: for a single coin, take it or leave it.</summary>
+    public Visit Given(Random rng) => new(Seller, Chest, Noticed, Trade.Fixed, Challenges.GiftPrice, Challenges.GiftPrice, rng.PickOne(GiftLines))
+    {
+        Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Clue = Clue, ClueKinds = ClueKinds, Says = Says,
+    };
 
     /// <summary>You've laid a hand on the chest (a shake, a drop, the lodestone): it's no longer sight unseen.</summary>
     public bool Handled { get; private set; }
@@ -133,7 +147,7 @@ public sealed class Visit
         Raise(1 / _unseen);
         _unseen = 1;
         PriceNote = PriceNote?.Replace(_unseenNote, "").Trim() is { Length: > 0 } rest ? rest : null;
-        return $"Had your hands on it now. {Price}g, then.";
+        return $"Ah, you've had your hands on it. Then it's {Money.Say(Price)}.";
     }
 
     /// <summary>A curio's word on the price (the Waiting Game, the Closing Bell), for under the chest; or null.</summary>
@@ -173,7 +187,7 @@ public sealed class Visit
         if (Unruffled)
         {
             Ask = Floor;
-            return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", $"{Ask}g"));
+            return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", Money.Say(Ask)));
         }
         if (Trade == Trade.Offer)
         {
@@ -188,7 +202,7 @@ public sealed class Visit
         }
         // Not enough: they meet you partway, never below what they'd really take, and that's final.
         Ask = Math.Max(Floor, Money.Round((amount + Ask) / 2f));
-        return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", $"{Ask}g"));
+        return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", Money.Say(Ask)));
     }
 
     Response Leave(Random rng)
@@ -202,7 +216,7 @@ public sealed class Visit
     public string Pass(Random rng)
     {
         Outcome = VisitOutcome.Passed;
-        return Sellers.PassLine(rng);
+        return Sellers.PassLine(rng, Seller);
     }
 
     /// <summary>They ran out of patience and took their chest home.</summary>
@@ -218,7 +232,7 @@ public sealed class Visit
     {
         if (Seller.ShakeFee <= 0 || !Deciding || level == Shake.Still || !_shook.Add(level) || _shook.Count < 2) return null;
         Raise(1 + Seller.ShakeFee);
-        return rng.PickOne(Seller.PriceUp).Replace("{price}", $"{Price}g");
+        return rng.PickOne(Seller.PriceUp).Replace("{price}", Money.Say(Price));
     }
 
     /// <summary>The King's game: the price is what your slip says it holds.</summary>
@@ -238,13 +252,14 @@ public sealed class Visit
     }
 
     /// <summary>Doing what they asked you not to: up goes the price, once.</summary>
-    public string Anger(Random rng)
+    /// <param name="own">It's their own dislike (not a drop minded only because sellers are fussy this season).</param>
+    public string Anger(Random rng, bool own = true)
     {
         if (Angered || !Deciding) return null;
         Angered = true;
         if (Ask > 0) Ask = Money.Round(Ask * Market.AngerMarkup);
         Floor = Money.Round(Floor * Market.AngerMarkup);
-        return rng.PickOne(Seller.Angry);
+        return rng.PickOne(own ? Seller.Angry : Seller.Fussed);
     }
 
     string Sell(int price, Random rng)

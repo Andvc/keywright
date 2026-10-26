@@ -127,7 +127,8 @@ public static class Events
     /// (they all come round before any comes twice). The first week is fixed: the welcome, a gentle day, Nim's first
     /// visit, another gentle day, the first due.
     /// </summary>
-    public static WeekPlan Plan(int seed, int week, int tier, ICollection<string> seen)
+    /// <param name="fair">Fair days (a challenge's boon): no days of mourning, and no Guild assessors.</param>
+    public static WeekPlan Plan(int seed, int week, int tier, ICollection<string> seen, bool fair = false)
     {
         var rng = new Random(unchecked(seed * 104729 + week * 7907));
         var plan = new WeekPlan { Week = week, Days = Enumerable.Repeat<string>(null, Guild.DaysPerWeek).ToList() };
@@ -143,16 +144,19 @@ public static class Events
         else plan.Peddlers.AddRange(rng.PickOne(Apart));
         foreach (int day in plan.Peddlers) open.Remove(day);
         foreach (int day in open.Take(PerWeek))
-            plan.Days[day - 1] = Pick(rng, tier, seen, plan.Days, gentle: week == 1).Key;
+            plan.Days[day - 1] = Pick(rng, tier, seen, plan.Days, gentle: week == 1, fair).Key;
         return plan;
     }
 
     /// <summary>Two of the first four mornings that aren't next to each other: Nim's, in a week without a story.</summary>
     static readonly int[][] Apart = { new[] { 1, 3 }, new[] { 1, 4 }, new[] { 2, 4 } };
 
-    static EventDef Pick(Random rng, int tier, ICollection<string> seen, IList<string> week, bool gentle = false)
+    /// <summary>The days a fair season never brings.</summary>
+    static readonly string[] Unfair = { "mourning", "assessor" };
+
+    static EventDef Pick(Random rng, int tier, ICollection<string> seen, IList<string> week, bool gentle = false, bool fair = false)
     {
-        bool Fits(EventDef e) => e.MinTier <= tier && (!gentle || e.Gentle) && !week.Contains(e.Key);
+        bool Fits(EventDef e) => e.MinTier <= tier && (!gentle || e.Gentle) && !week.Contains(e.Key) && !(fair && Unfair.Contains(e.Key));
         var fresh = All.Where(e => Fits(e) && !seen.Contains(e.Key)).ToArray();
         if (fresh.Length == 0)
         {
@@ -200,11 +204,15 @@ public static class Events
     {
         Key = "stranger", Name = "The Stranger", Tier = 1, Judge = Judgment.Clueless,
         Kinds = new[] { 1f, 1, 1, 1, 1, 1 }, Colours = new[] { 1f, 0, 0, 0 },
-        Habit = "Sells chests wrapped in iron chains: nothing inside can move, so nothing rattles. Heavy ones hold more.",
-        Pitches = new[] { "Chained tight. No rattles, no questions. {price}.", "Where from? Somewhere that wanted it kept shut. {price}.",
+        Habit = "A stranger in black who sells chests wrapped tight in iron chains, and never says where they're from. Nothing inside " +
+                "can move, so nothing rattles: all you can learn is how heavy it is, and heavy ones hold more.",
+        Pitches = new[] { "Chained tight. No rattles, and no questions. {price}.", "Where's it from? Somewhere that wanted it kept shut. {price}.",
                           "Some chests are better left shut. Not this one. {price}." },
         Accepts = new[] { "Wise.", "We'll meet again." },
         Leaves = new[] { "Another time." },
+        Passes = new[] { "As you like.", "Someone else, then." },
+        Startled = new[] { "Careful.", "It won't open for that." },
+        Fussed = new[] { "Careful. That will cost you." },
     };
 
     public const float StrangerJunk = 0.45f, StrangerTreasure = 0.2f;

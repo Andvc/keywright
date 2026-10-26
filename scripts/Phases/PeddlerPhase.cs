@@ -14,7 +14,8 @@ namespace Keywright.Phases;
 /// </summary>
 public partial class PeddlerPhase : Phase
 {
-    const float CardH = 360, CardsY = 96, CardGap = 20, CardsRight = 1260;
+    // Tall enough for five lines of a narrow card's description above what it goes with.
+    const float CardH = 384, CardsY = 96, CardGap = 20, CardsRight = 1260;
 
     // Three cards to the right of Nim; four (a familiar face) start nearer him and are a little narrower.
     float CardW => State.PeddlerCount > 3 ? 225 : 260;
@@ -54,18 +55,18 @@ public partial class PeddlerPhase : Phase
         var stock = State.PeddlerStock;
         for (int i = 0; i < stock.Count; i++) _board.AddChild(MakeCard(stock[i], CardsX + i * (CardW + CardGap), CardsY));
         if (stock.Count == 0)
-            _board.AddChild(UiKit.MakeLabel("Nim's sold out: you own everything Nim carries!", 24, Palette.Muted, HorizontalAlignment.Center)
+            _board.AddChild(UiKit.MakeLabel("Nim's sold out: you own every curio Nim carries!", 24, Palette.Muted, HorizontalAlignment.Center)
                 .Place(CardsX, 220, CardsRight - CardsX, 30));
-        string note = $"Nim asks a fixed sum by rarity, plus a share of what was in your purse this morning ({State.PeddlerPurse}g).";
+        string note = $"Each curio costs a set sum for its rarity, plus a share of the gold you had this morning ({State.PeddlerPurse}g).";
         if (stock.Count > 0)
             _board.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
-                .Place(CardsX, CardsY + CardH + 6, CardsRight - CardsX, 20));
+                .Place(CardsX, CardsY + CardH + 4, CardsRight - CardsX, 20));
         // Once a visit, Nim packs these away and lays out something else.
         if (State.CanRerollPeddler)
             _board.AddChild(UiKit.MakeButton("Show me something else", Palette.Magic, 16, Reroll).Place(660, 610, 300, 64));
 
         // Your curios: click one to sell it back for half.
-        const float y = CardsY + CardH + 40;
+        const float y = CardsY + CardH + 32;
         _board.AddChild(UiKit.MakeLabel($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}", 16, Palette.Magic).Place(CardsX, y, 300, 20));
         _board.AddChild(UiKit.MakeLabel("Click one to sell it back to Nim for half what you paid.", 16, Palette.Muted).Place(CardsX + 220, y, 600, 20));
         for (int i = 0; i < State.CurioSlots; i++)
@@ -149,7 +150,7 @@ public partial class PeddlerPhase : Phase
             Buy(curio);
             return;
         }
-        _nim.Say("Bit of a stretch, that. Sure?");
+        _nim.Say(Peddler.Stretch);
         _confirm = Add(UiKit.MakeConfirm("ARE YOU SURE?", warning, Palette.Bad, "Buy anyway", () =>
         {
             CloseConfirm();
@@ -185,7 +186,7 @@ public partial class PeddlerPhase : Phase
         if (!State.CanRerollPeddler) return;
         State.RerollPeddler();
         Sfx.PlayGroup("clack", 1.1f, -4);
-        _nim.Say("Not to your taste? Nim has more. Nim always has more.");
+        _nim.Say(Peddler.More);
         Build();
     }
 
@@ -195,7 +196,7 @@ public partial class PeddlerPhase : Phase
         if (value <= 0) return;
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
-        _nim.Say("Back it comes. Nim never forgets a curio.");
+        _nim.Say(Peddler.Back);
         FloatText($"+{value}g", new Vector2(CardsX + 120, 420), Palette.Gold, 24);
         Build();
     }

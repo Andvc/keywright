@@ -295,11 +295,19 @@ something a real person might insist on. Not every visit is a deal: often the ri
 
 **Stories** (`SellerDef.Stories`; `Market.Story`). Every seller's line is a story about where the chest came from and
 what happened to them, with how they shook it or what they state woven in ("Turned up under the plough on the old
-battlefield. Shook it hard, like I do. 30g, and that's a bargain!"). It's always true: the place decides what the chest
-tends to hold, so the careful player reads every chest by its place. Nobody says what they heard (v22 retired the
+battlefield. I gave it a good hard shake, like the hay. 30 gold, and that's a bargain!"). It's always true: the place
+decides what the chest tends to hold, so the careful player reads every chest by its place. Nobody says what they heard (v22 retired the
 claims, and the slip they marked): a seller still prices only what they noticed (`Visit.Noticed`), so the deduction
 is the player's, from how they judge (the slip's header, `SellerDef.Priced`): shake as gently as Penn did, and what
 you hear is what she priced.
+
+**Voices** (v24). Everyone talks like who they are, wants what they want and says what they'd plausibly say at a
+market counter: a farmer about the harvest, a goblin about shinies, a knight about honour, Vane politely and coldly,
+Nim about Nim. Each seller has their own lines for a deal (`Accepts`), a walkout (`Leaves`), a pass (`Passes`), a drop
+they don't mind (`Startled`) and one they do (`Fussed`), falling back on a few shared ones (`Sellers.PassLine`,
+`StartleLine`). Speech says money the way people do (`Money.Say`: "30 gold", "one coin"); the interface keeps "30g".
+Bram's tips and lessons, the rules under the chest (`GameState.Terms`), the slip's header and the descriptions of
+curios, upgrades, events and terms are plain explanation: what it does, in a sentence, and why if it isn't obvious.
 
 **What they tell you besides** (`SellerDef.States`, `Visit.Clue`, `Strategy.Reckon`), and chests that change the rules
 of hearing. Each is a deduction, on a rule from real life, taught by its seller's lesson:
@@ -953,25 +961,51 @@ knowing the trade, `GameState.GivesLessons`); each of the others gets a first-mo
 `Hints.cs`). Curios a character can't use aren't in Nim's stock (`GameState.NoUse`: no padded crate for Hesk, no
 signet for Rosa, no visitors' book for Isolde).
 
-**Challenge levels** (`Challenges`). Eight, each adding one term on top of the ones below, opened one at a time per
-character by clearing the debt at the level below. Each adds a quarter to a run's score (x3 at level 8).
-Terms are rules that hold every time, not hidden rolls:
+**Challenge levels** (`Challenges`, v24). Eight, opened one at a time per character by clearing the debt at the level
+below, each a quarter more to a run's score (x3 at level 8). A level does two things:
 
-| Level | Term |
-|---|---|
-| 1 | Bram's stretched thin: his stash has one dip fewer, his word one time fewer |
-| 2 | Fussy sellers: everyone minds a drop (price up by half) |
-| 3 | Demon gold about: one coin in ten is demon gold, whoever brings it |
-| 4 | Lean start: half the starting gold |
-| 5 | Thin crowds: one customer fewer every day |
-| 6 | The Guild's interest: every due a quarter higher |
-| 7 | Sharp sellers: everyone asks, and takes, a tenth more |
-| 8 | Hurried: every seller gives you 20 seconds |
+- **The Guild's dues** go up by a tenth of what they were at level 0 for each level (`Challenges.DebtStep`,
+  `GameState.DueFor`): level 8's are 1.8 times as much.
+- **Its terms**: the run is dealt as many **banes** as the level's number and as many **boons** (`TermDef`,
+  `Challenges.Draw`), from twelve of each. The deal is nested (a bane, then a boon, from one shuffle of each pool), so a
+  level's terms are the level below's and one pair more, and a boon never comes with the bane it contradicts (four
+  pairs: savings and a lean start, Thornwick's welcome and the Guild's builders, a slow season and a hurried one, Bram
+  prepared and Bram stretched thin). A real run deals from `Profile.TermsSeed` (the number of runs started), so the
+  setup screen shows exactly what will be played; the pause menu shows them during the run, each explained on hover,
+  and the save keeps them.
 
-They're ordered mildest first by what each does on its own to the careful player (the sim's `Trial`, one term at a
-time; v14's figures, with every talent, are in *Balance across a career*): the stash and the word matter to people
-who get into trouble more than to the careful player, so they come first; a thinner margin on every chest is the
-hardest, because the last weeks need every coin the shop's growth can compound.
+Banes make the trade harder; boons smooth over what's most frustrating about it (a slow start, a short night, a
+sweeping clock, a lock that slips, a curio you can't find), so a harder season is never all bad, and two runs at the
+same level differ. Every term is a rule that holds every time, with a reason in `docs/world.md`, routed through
+`GameState.Under` or `Favoured` where its rule lives (so the sim and the bot play it too). What each does alone to the
+careful collector (Kit, 150 runs at the usual dues, 49% with none; `--sim=terms`; a few points either way is noise):
+
+| Bane | Rule | Cleared | | Boon | Rule | Cleared |
+|---|---|---|---|---|---|---|
+| Thin crowds | the week's last two days, a customer fewer | 42% | | Welcome gifts | the first two customers' chests for a coin each | 60% |
+| Sharp sellers | hagglers' least is 15% higher | 45% | | Nim's soft spot | Nim shows something else twice a visit | 46% |
+| Demon gold about | one coin in ten is demon gold | 43% | | Bram's savings | half as much gold again to start | 55% |
+| A hurried season | every seller gives you 20 seconds | 43% | | Bram's old picks | the Fine Lockpicks from the start | 48% |
+| Fussy sellers | everyone minds a drop | 43% | | Thornwick wants you | the move to Thornwick at half price | 59% |
+| Bram's stretched thin | a stash dip fewer, Bram's word once fewer | 49% | | A slow season | twice the patience and twice a rotten chest's shaking | 51% |
+| A lean start | half the gold to start | 45% | | Bram's prepared | a stash dip more, Bram's word once more | 49% |
+| Nim's raised his prices | curios a quarter dearer | 44% | | An honest clerk | pawning at full price | 47% |
+| The Guild's builders | upgrades and moves a quarter dearer | 41% | | A good name | hagglers hear you out | 45% |
+| A wet year | a pin more in every lock | 45% | | A lucky charm | the dry spell ends twice as soon | 52% |
+| Wary regulars | a commission fewer a week | 43% | | Fair days | no mourning, no assessors | 53% |
+| Nim's lean month | three curios on Nim's counter, not four | 45% | | Room for more | a curio slot more | 51% |
+
+Banes are kept within a few points of each other (thin crowds over every day, and sellers asking a tenth more, cost
+a quarter of all clears on their own, and were cut down). Several boons hardly move the careful collector, who never
+needs a second look from Nim or a second try with a haggler and has a steady hand on a lock: they're there for people,
+and the few that do move it (the first morning's gifts, Thornwick's welcome) are the lucky draws. Bram stretched thin
+doesn't change how often the careful collector clears, but ends a run that would have leaned on Bram's word a week
+sooner.
+
+Whole levels as drawn (Kit, 200 runs each): 49 (level 0), 41, 33, 29, 24, 20, 20, 17 and 16% (v22's fixed terms: 48, 48,
+42, 32, 24, -, 11, -, 4%). A step of 7% a level flattened out after level 4 (42, 36, 33, 25, 24, 25, 21, 18%); the
+first draft, at 15% a level and with the two strongest banes and boons as they first were, made levels 6 and 8 a wall
+again (8 and 6%).
 
 **Score** (`Score`). Points for the Guild dues paid (10 each), the debt cleared (100) and every day to spare (5), the
 Crown Chest (100) or the Key's shards held (10 each), moves (25 each), the collection (2 per find), the Heartsongs
@@ -1251,20 +1285,20 @@ end of the debt's last week or when the shop is lost. The pace of learning is a 
 | Run | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 12 | 16 | 20 | 24 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Skill | 0.15 | 0.29 | 0.41 | 0.50 | 0.57 | 0.63 | 0.68 | 0.71 | 0.74 | 0.77 | 0.80 | 0.84 | 0.86 | 0.87 |
-| Cleared | 5% | 3% | 8% | 8% | 18% | 13% | 23% | 23% | 25% | 38% | 28% | 30% | 18% | 8% |
-| Lost in week (median) | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 4 |
-| Challenge level | 0 | 0.1 | 0.1 | 0.2 | 0.2 | 0.4 | 0.5 | 0.8 | 1.0 | 1.2 | 1.9 | 2.9 | 3.9 | 4.5 |
-| Score | 165 | 173 | 185 | 203 | 220 | 217 | 254 | 241 | 294 | 349 | 345 | 394 | 399 | 325 |
+| Cleared | 5% | 5% | 8% | 5% | 15% | 10% | 23% | 23% | 23% | 25% | 23% | 38% | 20% | 18% |
+| Lost in week (median) | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
+| Challenge level | 0 | 0.1 | 0.1 | 0.2 | 0.2 | 0.4 | 0.5 | 0.7 | 0.9 | 1.2 | 1.6 | 2.5 | 3.4 | 4.5 |
+| Score | 169 | 172 | 190 | 203 | 203 | 217 | 260 | 261 | 291 | 308 | 321 | 417 | 414 | 462 |
 
-v22: a run that's lost is lost in the last week (the fourth sends half of the first runs to Bram's word, the fifth
+v24: a run that's lost is lost in the last week (the fourth sends half of the first runs to Bram's word, the fifth
 is the wall); the debt is first cleared around the seventh run (a quarter of players by run 5, half by 7, three
-quarters by 10). Then the levels: level 1 around run 11, 2 around 13, 4 around 23 (three players in four by run 30);
-level 6 is cleared by one player in seven by run 30, and level 8 stays a wall (3%). With a Heartsong in about one run
-in three, all nine are known by one player in eight by run 30, and the Crown Chest sung whole by one in ten: the
-songbook is a long collection now. (v21, talents bought cheapest first: first clear around run 8, level 4 around 20,
-level 6 by half of players by run 30, all nine Heartsongs around run 17. v20: first clear around run 7, level 4 around
-16, level 6 around 26.) Without the talents' lift, the higher levels are steeper than they were: a question for the
-owner is whether levels 5 to 8 should be gentler (*Open questions*).
+quarters by 10). Then the levels, each a little harder than the last: level 1 around run 12, 2 around 16, 4 around 25
+(two players in three by run 30); level 6 is cleared by one player in three by run 30 and level 8 by one in twelve.
+With a Heartsong in about one run in three, all nine are known by one player in five by run 30, and the Crown Chest
+sung whole by one in eight: the songbook is a long collection. (v22's fixed terms: level 1 around run 11, 2 around 13,
+4 around 23, level 6 by one player in seven by run 30 and level 8 a wall, 3%. v21, talents bought cheapest first:
+first clear around run 8, level 4 around 20, level 6 by half of players by run 30, all nine Heartsongs around run 17.
+v20: first clear around run 7, level 4 around 16, level 6 around 26.)
 
 Getting there: v13's dues (40, 100, 300, 800, 1,400, 2,400, 3,800, 7,000) let the careful player with no talents
 clear 61% of the time and half of all careers clear by their fifth run, with a third of first-timers already short in
@@ -1272,25 +1306,23 @@ week 3 (Bram's word then, his interest sinking them in week 4). Raising the late
 without making it gentler; making week 7 heavy did nothing (anyone short in week 7 leans on Bram's word, and its
 interest lands on week 8). Lighter early dues with a heavier last week did both.
 
-**The challenge levels**, ordered by what each term does alone to the careful player with every talent (81% on the
-usual terms; v15's figures): Bram stretched thin (81%), demon gold about (73%), fussy sellers (72%), thin crowds at
-the stall (69%), a lean start (67%), the Guild's interest (67%), sharp sellers (61%), a hurried town (59%). The new
-world's hurried town is the harshest (twenty seconds for a goblin's fee, a rotten chest and the King's game), so it
-moved from level 6 to 8; the rest kept their places (within a few points of each other, which is noise at 150 runs).
-All together, level by level: 81, 81, 72, 67, 61, 43, 31, 13, 6% (v22, with no talents to have: Kit 48, 48, 42, 32, 24,
--, 11, -, 4%). The first levels are an on-ramp for a careful player and bite a learner who still leans on Bram's stash
-and word and drops glass.
+**The challenge levels** (v24: the dues a tenth higher a level, and as many boons as banes drawn for each run; see
+*Across runs*). Until v23 each level added one fixed term, ordered by what each did alone (v15, with every talent:
+Bram stretched thin 81%, demon gold about 73%, fussy sellers 72%, thin crowds 69%, a lean start 67%, the Guild's
+interest 67%, sharp sellers 61%, a hurried town 59%); with the talents gone (v22) the top levels were a wall and the
+first two were free. Now each level costs a few points, all the way up.
 
-**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; v22):
+**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; v24, with v22's fixed terms after
+the slash):
 
-| | Level 0 | Level 2 | Level 4 | Level 6 | Level 8 |
-|---|---|---|---|---|---|
-| Kit | 48% | 42% | 24% | 11% | 4% |
-| Hesk | 41% | 41% | 33% | 11% | 3% |
-| Rosa | 57% | 53% | 35% | 12% | 7% |
-| Isolde | 51% | 41% | 33% | 10% | 6% |
+| | Level 0 | Level 1 | Level 2 | Level 4 | Level 6 | Level 8 |
+|---|---|---|---|---|---|---|
+| Kit | 49% | 41 / 48% | 31 / 42% | 23 / 24% | 19 / 11% | 13 / 4% |
+| Hesk | 43% | 41 / 41% | 32 / 41% | 22 / 33% | 19 / 11% | 13 / 3% |
+| Rosa | 59% | 55 / 57% | 48 / 53% | 35 / 35% | 24 / 12% | 21 / 7% |
+| Isolde | 51% | 42 / 51% | 37 / 41% | 25 / 33% | 25 / 10% | 19 / 6% |
 
-The median clear day is 20 to 24 at every level, and the four of Bram's kin are within a few points of each other
+The median clear day is 20 to 23 at every level, and the four of Bram's kin are within a few points of each other
 (Rosa's haggling and the Golden Tongue suit each other, which keeps her a little ahead). (v21, no talents and then
 every talent at levels 0, 2, 4, 6 and 8: Kit 40 / 79 / 77 / 55 / 25 / 7%; v20: Kit 48 / 85 / 76 / 66 / 24 / 16%;
 v19: Kit 29 / 61 / 66 / 42 / 15 / 5%; v18: Kit
@@ -1477,6 +1509,11 @@ the unlocked curios), and more ways for a familiar shop to play differently.
 20. **Enchanted hidden things (v8 to v21).** A thing under a false bottom or warded could be enchanted, and nothing
     could show it (no sound, so no glow): a read could be perfect in every way you could check and still be wrong. v22:
     a hidden thing is never enchanted, and fetches a third more instead.
+21. **Fixed challenge terms (v13 to v23).** Eight levels, each adding one of the Guild's harsher terms on top of the
+    ones below, always the same order. Tuned when talents could carry a player past them, they made levels 6 to 8 a
+    wall once the talents went (the careful collector cleared level 8 one run in twenty-five), and every level-5 run
+    was the same run. v24: every level raises the dues a little and deals as many boons as banes, drawn for each run,
+    so a level is harder but never all bad, and two runs at it differ.
 
 ## Open questions
 
@@ -1527,14 +1564,16 @@ the unlocked curios), and more ways for a familiar shop to play differently.
   stall on?
 - Careers: the learner model's mistakes and its pace of learning are guesses. Playtest how many runs a first clear
   takes (the sim says about seven) and whether losing in week 5 several runs running feels like "nearly" or
-  like a wall. With the talents gone (v22), every run starts the same, and the higher challenge levels are steeper
-  than they were (the careful collector clears level 4 about a quarter of the time, level 6 a tenth, against 55% and
-  25% with every talent in v21): should levels 5 to 8 be gentler, or is a wall there right?
+  like a wall. With the talents gone (v22), every run starts the same; v24's challenge levels step down a few points a
+  level (the careful collector clears level 4 about a quarter of the time and level 8 about one run in six). Does each
+  level feel harder than the last, or do the boons make some draws feel easy?
 - A third of a Heartsong a run makes the songbook a long collection (all nine by one player in eight by run 30, the
   sim says): is finding a new one a peak worth the wait, or should unknown songs be likelier still?
 - With the steeper late dues, the exhibition matters: a careful player who sells everything clears 21%, one who keeps
   grand things 44%. Is keeping things taught early enough (Bram's "keep" tip) for that to be fair?
-- Challenge levels 1 to 3 barely trouble the careful player (they bite people who use the stash and the drop); is
-  that a gentle on-ramp or a free multiplier on the score?
+- Challenge terms (v24): do players read a run's boons and banes before they start, and plan around them (save for
+  Thornwick when it's half price, keep the lockpicks busy, skip the drop when sellers are fussy)? Is a draw that's
+  plainly kind (the first morning's gifts and Thornwick's welcome together) a treat or a flaw, and should a player be
+  able to see the next draw before choosing a level, as they can now (the setup screen shows the run's own)?
 - The Crown Chest usually comes with clearing the debt for a careful player (the Hooded Woman's asks are met by volume at
   the Emporium). Should her asks be harder, or limited to their own week?

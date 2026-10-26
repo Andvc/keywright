@@ -26,6 +26,10 @@ public sealed class SaveData
     /// <summary>Who's minding the stall, and on what terms (fixed for the run).</summary>
     public string Character { get; set; }
     public int Challenge { get; set; }
+
+    /// <summary>The challenge level's boons and banes this run (0.24; a save from before draws them from its seed).</summary>
+    public List<string> Boons { get; set; }
+    public List<string> Banes { get; set; }
     public List<string> Snubbed { get; set; } = new();
 
     /// <summary>The Guild Promissory Note has paid a short night (until 0.22, Mara's favour: a talent).</summary>
@@ -192,6 +196,13 @@ public sealed class SavedCommission
 public sealed class Profile
 {
     public int Runs { get; set; }
+
+    /// <summary>
+    /// What the next run's challenge terms are drawn from (<see cref="Challenges.Draw"/>): one draw per run, so the
+    /// character screen shows what will be played, and going back to it doesn't deal again.
+    /// </summary>
+    [System.Text.Json.Serialization.JsonIgnore]
+    public int TermsSeed => unchecked(Runs * 7919 + 104729);
     public int Cleared { get; set; }
     public int Vaults { get; set; }
 

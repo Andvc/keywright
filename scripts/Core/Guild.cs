@@ -53,17 +53,17 @@ public static class Guild
     /// <summary>What Vane says when he comes for a week's due, week by week (the last line repeats).</summary>
     static readonly string[] Arrivals =
     {
-        "Evening. The Guild's tithe, if you please. In gold.",
-        "Week two. You're still here. Good: the Guild hates to waste a Keywright.",
-        "I hear you've been opening a great many chests. The Guild approves. Keep opening.",
-        "My masters are curious about you. That's rarely good news. One more week after this.",
-        "The last of it. Every coin, mind. Gold you can see.",
+        "Good evening. The Guild's tithe, if you please. In gold: the Guild has no use for promises.",
+        "Still here, I see. Good. The Guild hates to see a Keywright go to waste.",
+        "I hear you've opened a great many chests this week. The Guild approves. Do keep opening them.",
+        "My masters have begun to ask about you. That is rarely good news. One more week after this one.",
+        "The last of Bram's debt. Every coin of it, mind. Gold you can see.",
     };
 
     static readonly string[] Endless =
     {
-        "Debts are funny things. They grow when you're not looking.",
-        "The Gate is hungry this week. The Guild has decided you owe us for our patience.",
+        "Debts are curious things, Keywright. They grow while nobody's watching them.",
+        "The Gate is hungry this week, and the Guild has decided you owe it something for its patience.",
         "Interest, you understand. Nothing personal. My master is very fond of interest.",
     };
 
@@ -72,11 +72,20 @@ public static class Guild
     public static string Paid(int week) => week switch
     {
         Weeks => "Paid in full. The Guild has no further claim on Bram's stall. For now.",
-        > Weeks => "Paid. See you next week.",
-        _ => "Paid. Until next week, then.",
+        > Weeks => "Paid. Until next week, Keywright.",
+        _ => "Paid, and promptly. Until next week, then.",
     };
 
-    public const string Short = "Short? Then the Guild will take what's on your shelves. What you've got, at our price.";
+    public const string Short = "Short? Then the Guild will take what's on your shelf instead. At the Guild's price, naturally.";
 
-    public const string Foreclosed = "Not enough. The Guild seals this shop, and your licence with it. Your uncle would be so disappointed.";
+    public const string Foreclosed = "Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed.";
+
+    /// <summary>When the Guild Promissory Note pays a night.</summary>
+    public const string NotePaid = "A Guild note, older than the Locking? ...However did you come by that? The Guild honours its own paper. Paid.";
+
+    /// <summary>When the whole debt is paid off at once.</summary>
+    public const string PaidOff = "All of it, tonight? ...How very thorough of you. The Guild has no further claim on Bram's stall.";
+
+    /// <summary>When Bram's word buys a week.</summary>
+    public const string Grace = "Bram's word? How touching. One week, then. The rest comes due next week, and half as much again.";
 }

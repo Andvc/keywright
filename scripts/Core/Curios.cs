@@ -75,36 +75,36 @@ public static class Curios
         // Enchantment: nobody can hear it, and no seller prices it. See it glow, find more of it, make it worth more.
         new("monocle", "Witch's Monocle", "Enchanted things glow when they sound, witchlight or not.", C, "monocle", 3, T(Enchantment, Appraisal)),
         new("draught", "Witch's Draught", "Enchanted things turn up three times as often.", U, "draught", 3, T(Enchantment)),
-        new("aether", "Aether Jar", $"Each enchanted thing you find this run makes every thing {Pct(AetherStep)} likelier to be enchanted (up to {Pct(AetherMax)}).",
+        new("aether", "Aether Jar", $"Each enchanted thing you find this run makes everything {Pct(AetherStep)} likelier to be enchanted (up to {Pct(AetherMax)}).",
             U, "aether", 3, T(Enchantment)),
         new("chalk", "Enchanter's Chalk", "An enchantment spreads: a chest with an enchanted thing in it has a second one.", U, "chalk", 3, T(Enchantment)),
         new("ring", "Spellbinder's Ring", "Enchanted things are worth four times as much, not twice.", R, "ring", 3, T(Enchantment)),
         new("staff", "Archmage's Staff", "Everything in a chest with an enchanted thing in it is enchanted.", L, "staff", 3, T(Enchantment)),
 
         // Sight unseen: buy a chest without laying a hand on it. Cheaper, luckier, insured: the build that needs no ear.
-        new("sealed", "Sealed Bid", $"Take a chest on its seller's word, without a shake, a drop or the lodestone, and they knock {Pct(1 - SealedPrice)} off.",
+        new("sealed", "Sealed Bid", $"Take a chest on its seller's word (no shake, drop or lodestone) and they knock {Pct(1 - SealedPrice)} off.",
             C, "sealed", 1, T(Blind)),
         new("dip", "Lucky Dip", $"Everything in a chest you take sight unseen is {Pct(DipLuck)} likelier to come out a step better.", U, "dip", 1, T(Blind, Luck)),
-        new("bond", "Underwriter's Bond", $"A chest taken sight unseen that holds less than you paid: the Underwriters pay back {Pct(BondShare)} of the difference.",
+        new("bond", "Underwriter's Bond", $"A chest bought sight unseen holds less than you paid? The Underwriters pay {Pct(BondShare)} of it back.",
             U, "bond", 2, T(Blind, Coffers)),
         new("wholesale", "Wholesaler's Tally", $"Every chest you buy today: the next seller asks {Pct(WholesaleStep)} less (up to {Pct(WholesaleMax)}).",
             U, "wholesale", 2, T(Blind, Haggling)),
-        new("token", "Gambler's Token", "Luck swings both ways: twice as many surprises, good and bad, in everything you open.", U, "token", 1, T(Luck, Blind)),
-        new("blindfold", "Fortune's Blindfold", $"A chest you take sight unseen costs {Pct(1 - BlindfoldPrice)} less, and nothing in it comes out worse than its chest.", L,
+        new("token", "Gambler's Token", "Twice as many surprises in everything you open: good ones and bad ones.", U, "token", 1, T(Luck, Blind)),
+        new("blindfold", "Fortune's Blindfold", $"Sight unseen, a chest costs {Pct(1 - BlindfoldPrice)} less, and nothing in it comes out worse than promised.", L,
             "blindfold", 3, T(Blind)),
 
         // Haggling: what you pay. Talk them down, and word gets round.
         new("signet", "Merchant's Signet", $"Hagglers hear you out (an offer too low gets a second try), and come down {Pct(1 - SignetFloor)} further.", C, "signet", 1,
             T(Haggling)),
-        new("tongue", "Silver Tongue", "Hagglers come down a fifth further, and sellers who wait for your offer take a fifth less.", U, "tongue", 1, T(Haggling)),
-        new("knot", "Haggler's Knot", $"Word gets round: each chest you've talked down this run makes every seller ask {Pct(KnotStep)} less (up to {Pct(KnotMax)}).",
+        new("tongue", "Silver Tongue", "Hagglers come down a fifth further, and those who wait for an offer take a fifth less.", U, "tongue", 1, T(Haggling)),
+        new("knot", "Haggler's Knot", $"Each chest you talk down this run makes every seller ask {Pct(KnotStep)} less (up to {Pct(KnotMax)}).",
             U, "knot", 2, T(Haggling)),
         new("hourglass", "Waiting Game", $"Every chest you pass makes the next seller ask {Pct(WaitStep)} less (up to {Pct(WaitMax)}). Buying starts it again.",
             U, "hourglass", 1, T(Haggling, Crowds)),
         new("bell", "Closing Bell", $"The last customer of the day asks {Pct(1 - BellPrice)} less.", U, "bell", 1, T(Haggling)),
-        new("coffer", "Haggler's Purse", $"Everyone haggles with you, and {Pct(CofferShare)} of whatever you talk them down by comes back to you.", R, "coffer", 2,
+        new("coffer", "Haggler's Purse", $"Everyone haggles with you, and you keep {Pct(CofferShare)} of whatever you talk them down by.", R, "coffer", 2,
             T(Haggling, Coffers)),
-        new("goldentongue", "Golden Tongue", $"Everyone haggles with you, and nobody walks out on an offer: however low, they come down to the least they'd take, and {Pct(1 - GoldenFloor)} less than that.",
+        new("goldentongue", "Golden Tongue", $"Everyone haggles and nobody walks out: go low, and they take {Pct(1 - GoldenFloor)} under their least.",
             L, "goldentongue", 3, T(Haggling)),
 
         // The perfect read: count every thing, mark every glow and boom, and be paid for it.
@@ -112,11 +112,11 @@ public static class Curios
         new("watch", "Pocket Watch", "Impatient sellers give you twice as long, and a rotten chest stands twice the shaking.", C, "watch", 1, T(Appraisal)),
         new("beads", "Counting Beads", "Every chest comes with a tally of how many things are in it, false bottom and all.", C, "beads", 2, T(Appraisal, Compartments)),
         new("seal", "Appraiser's Seal", $"A perfect read pays you a valuer's fee: {Pct(SealFee)} of what the chest held.", U, "seal", 1, T(Appraisal)),
-        new("register", "Valuer's Register", $"A perfect read pays {Fine(RegisterStep)} of what the chest held for every perfect read so far this run (up to {Pct(RegisterMax)}).",
+        new("register", "Valuer's Register", $"A perfect read pays {Fine(RegisterStep)} of what the chest held for each one so far this run (up to {Pct(RegisterMax)}).",
             U, "register", 2, T(Appraisal)),
-        new("crescent", "Cursed Crescent", $"No surprises, no letdowns: everything comes out exactly as its chest promised. Sellers sense the curse and ask {Pct(1 - CrescentPrices)} less.",
+        new("crescent", "Cursed Crescent", $"Everything comes out exactly as its chest promised. Sellers sense the curse and ask {Pct(1 - CrescentPrices)} less.",
             U, "crescent", 1, T(Appraisal, Haggling)),
-        new("fork", "Tuning Fork", $"Each perfect read in a row: everything in the next chest sells for {Pct(ForkStep)} more (up to {Pct(ForkMax)}). A wrong slip starts again.",
+        new("fork", "Tuning Fork", $"Each perfect read in a row: the next chest's things sell for {Pct(ForkStep)} more (up to {Pct(ForkMax)}).",
             R, "fork", 1, T(Appraisal)),
         new("ledger", "Ledger of Certainty", $"A perfect read: everything in the chest sells for {Pct(LedgerRight - 1)} more. A wrong slip: {Pct(1 - LedgerWrong)} less.",
             R, "ledger", 2, T(Appraisal)),
@@ -126,13 +126,13 @@ public static class Curios
         new("crate", "Padded Crate", "Glass never breaks when you drop a chest.", C, "crate", 2, T(Compartments, Rough)),
         new("hook", "Smuggler's Hook", "Smugglers come your way: false bottoms turn up twice as often.", U, "hook", 2, T(Compartments)),
         new("rod", "Hollow Rod", "What's under a false bottom comes out a step better: people hid their best.", U, "rod", 2, T(Compartments)),
-        new("log", "Smuggler's Log", $"Each false bottom you open this run makes them {Pct(LogStep)} likelier (up to {Pct(LogMax)}): smugglers trust a buyer who keeps quiet.",
+        new("log", "Smuggler's Log", $"Smugglers trust a buyer who keeps quiet: each false bottom you open makes them {Pct(LogStep)} likelier (up to {Pct(LogMax)}).",
             U, "log", 2, T(Compartments)),
-        new("pass", "Black Market Pass", "Thornwick's black market pays double for anything that came out from under a false bottom.", R, "pass", 2, T(Compartments)),
+        new("pass", "Black Market Pass", "Thornwick's black market pays double for anything from under a false bottom.", R, "pass", 2, T(Compartments)),
         new("compass", "Smugglers' Compass", "Every chest has a false bottom.", L, "compass", 3, T(Compartments)),
 
         // Wards: read the sign, name what never sounds, and the ward gives it up.
-        new("wardlamp", "Warden's Lantern", "A seller who leaves a sign always means it: every dream, dowry, tag, riddle, roll, echo and card points at a warded thing.",
+        new("wardlamp", "Warden's Lantern", "Every sign a seller leaves (a dream, a tag, a riddle, a card...) points at a warded thing.",
             C, "wardlamp", 2, T(Wards)),
         new("pillow", "Sleeper's Pillow", $"Sellers dream true for you: {Pct(PillowShare)} of them have warded something, and tell you their dream.", U, "pillow", 2,
             T(Wards)),
@@ -146,7 +146,7 @@ public static class Curios
         new("coin", "Lucky Coin", "The first chest you buy each day: everything in it gets two tries at its quality.", U, "coin", 1, T(Luck)),
         new("foot", "Rabbit's Foot", $"Everything you open is {Pct(FootLuck)} likelier to come out a step better than its chest.", U, "foot", 1, T(Luck)),
         new("wishbone", "Wishbone", "Something that comes out better than its chest sells for half as much again.", U, "wishbone", 1, T(Luck)),
-        new("horseshoe", "Horseshoe", $"Luck runs in streaks: each chest with a surprise in it makes the next {Pct(HorseshoeStep)} luckier (up to {Pct(HorseshoeMax)}).",
+        new("horseshoe", "Horseshoe", $"Luck runs in streaks: each chest with a surprise makes the next {Pct(HorseshoeStep)} luckier (up to {Pct(HorseshoeMax)}).",
             U, "horseshoe", 2, T(Luck)),
         new("clover", "Four-Leaf Clover", "The first chest you buy each week: everything in it comes out a step better.", R, "clover", 2, T(Luck)),
         new("star", "Shooting Star", "Once a day, the first thing to come out better than its chest climbs a step further.", R, "star", 2, T(Luck)),
@@ -163,16 +163,16 @@ public static class Curios
         // Display: what you keep.
         new("catalogue", "Collector's Catalogue", $"Every new kind of find this run pays {CataloguePerTier}g (more in a grander shop).", C, "catalogue", 1, T(Display)),
         new("dome", "Bell Jar", "Room to display one more thing.", C, "dome", 2, T(Display)),
-        new("book", "Visitors' Book", $"Every night, visitors leave {BookPerPoint}g for each point of your exhibition (more in a grander shop).", U, "book", 2,
+        new("book", "Visitors' Book", $"Every night, visitors leave {BookPerPoint}g per exhibition point (more in a grander shop).", U, "book", 2,
             T(Display, Coffers)),
         new("rope", "Velvet Rope", "Your exhibition counts double.", U, "rope", 2, T(Display)),
-        new("lamps", "Gallery Lamps", $"Your exhibition sells for you: everything fetches {Fine(LampsPerPoint)} more for each point of it (up to {Pct(LampsPerPoint * GameState.ExhibitionCap)}).",
+        new("lamps", "Gallery Lamps", $"Everything sells for {Fine(LampsPerPoint)} more per exhibition point (up to {Pct(LampsPerPoint * GameState.ExhibitionCap)}).",
             R, "lamps", 2, T(Display)),
 
         // The trades: one kind of thing. What it adds every seller hears of, so it pays in the chests full of that kind.
-        new("gauntlet", "Smith's Glove", $"You mend weapons: they never come out worse than their chest promised, and are {Pct(TradeLuck)} likelier to come out better.",
+        new("gauntlet", "Smith's Glove", $"You mend weapons: never worse than their chest promised, and {Pct(TradeLuck)} likelier to come out better.",
             C, "gauntlet", 1, T(Trade, Luck), Category.Arms),
-        new("cap", "Hatter's Cap", $"You mend cloaks: they never come out worse than their chest promised, and are {Pct(TradeLuck)} likelier to come out better.",
+        new("cap", "Hatter's Cap", $"You mend cloaks: never worse than their chest promised, and {Pct(TradeLuck)} likelier to come out better.",
             C, "cap", 1, T(Trade, Luck), Category.Garb),
         new("whetstone", "Whetstone", "Weapons sell for three-quarters more.", U, "whetstone", 1, T(Trade), Category.Arms),
         new("dummy", "Tailor's Dummy", $"Cloaks sell for half as much again, and count {DummyPrestige} times over on display.", U, "dummy", 1, T(Trade, Display), Category.Garb),
@@ -188,7 +188,7 @@ public static class Curios
 
         // The fence: fakes.
         new("loupe", "Jeweller's Loupe", "Paste gems and demon gold sell as costume pieces: a quarter of the real thing.", C, "loupe", 4, T(Fakes)),
-        new("mark", "Fence's Mark", "Crooks come your way twice as often, and the Maw's buyers take any fake off you for what the real thing would fetch.", R, "mark", 3,
+        new("mark", "Fence's Mark", "Crooks come twice as often, and the Maw's buyers pay for any fake what the real thing fetches.", R, "mark", 3,
             T(Fakes, Appraisal)),
 
         // Coffers: the purse, and bad nights.
@@ -199,8 +199,7 @@ public static class Curios
             T(Coffers)),
         new("lockbox", "Miser's Lockbox", $"Every Guild night, once you've paid: {Pct(LockboxShare)} of what's left in your purse.", R, "lockbox", 2, T(Coffers)),
         // Mara's favour (a talent until 0.22): the Guild honours its own paper, once.
-        new("note", "Guild Promissory Note", "The Guild's own paper, from before the Locking: once a run, on a Guild night nothing you own can cover, " +
-                                             "it pays what's short (not in the last week).", R, "note", 1, T(Coffers)),
+        new("note", "Guild Promissory Note", "The Guild's own paper: once a run, on a Guild night you can't cover, it pays what's short (not the last week).", R, "note", 1, T(Coffers)),
 
         // Patrons: commissions.
         new("letter", "Letter of Introduction", "Regulars take what you deliver a quality lower than they asked for.", U, "letter", 1, T(Patrons)),
@@ -484,14 +483,30 @@ public static class Peddler
 {
     public const string Name = "Nim the Peddler";
 
+    // Nim talks about Nim the way other people talk about the weather: cheerfully, and as if it couldn't be helped.
     public static readonly string[] Greetings =
     {
-        "Psst. Curios! Lucky, cursed, and everything in between.",
-        "Back again! Nim's got just the thing. Several things, actually.",
-        "Don't tell the Guild I was here. Now, what catches your eye?",
-        "Fresh from a dead wizard's attic. Mostly fresh.",
+        "Psst! Keywright! Nim's pack is full of things that came out of chests and never went back in. Have a look.",
+        "Back again! Nim kept the good ones for you. Well. Nim kept some ones for you.",
+        "Quick, before the Guild's men come round the corner. Look, look, but don't point.",
+        "Out of a wizard's strongroom, these. The wizard won't miss them. Nim checked.",
     };
 
-    public static readonly string[] Thanks = { "A fine choice. Mostly harmless.", "Pleasure doing business!", "It likes you. I can tell." };
-    public static readonly string[] Bye = { "See you in a day or two. Same time, roughly.", "Off I go. Mind the Guild." };
+    public static readonly string[] Thanks =
+    {
+        "Good eye. Nim would have kept that one, if Nim were the keeping sort.",
+        "Done! Treat it kindly. It's older than the Guild.",
+        "It likes you. Nim can always tell when they like someone.",
+    };
+
+    public static readonly string[] Bye = { "Nim's off. Two days, three. Nim comes when Nim comes.", "Mind the Guild, Keywright. Nim always does." };
+
+    /// <summary>When a curio would leave you short of Bram's working purse.</summary>
+    public const string Stretch = "That would leave your purse thin, that would. Still want it?";
+
+    /// <summary>When you ask to see something else.</summary>
+    public const string More = "Not to your taste? Nim has more. Nim always has more.";
+
+    /// <summary>When you sell one back.</summary>
+    public const string Back = "Back in the pack it goes. Half what you paid: Nim's fair, ask anyone.";
 }

@@ -197,7 +197,7 @@ public partial class DayEndPhase : Phase
         _side.AddChild(curios);
         curios.AddChild(UiKit.MakeLabel($"CURIOS {State.CurioKeys.Count}/{State.CurioSlots}", 16, Palette.Magic).Place(14, 8, 120, 20));
         if (State.CurioKeys.Count == 0)
-            curios.AddChild(UiKit.MakeLabel(State.NextPeddler > 0 ? $"Nim the peddler comes by on day {State.NextPeddler}." : "Nim comes by once a week.", 16, Palette.Muted)
+            curios.AddChild(UiKit.MakeLabel(State.NextPeddler > 0 ? $"Nim the peddler comes by on day {State.NextPeddler}." : "Nim comes by every week.", 16, Palette.Muted)
                 .Wrapped().Place(14, 30, SideW - 28, 40));
         // Up to six (with curio cases): closer together when there are more than four.
         float step = Math.Min(60, (SideW - 124) / Math.Max(1, State.CurioKeys.Count));

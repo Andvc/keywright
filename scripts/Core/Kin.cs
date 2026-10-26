@@ -5,8 +5,9 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <summary>
-/// Who's minding the stall this run (one of Bram's kin), and on what terms (the challenge level). Both are fixed when the
-/// run starts; nothing else carries over from runs before but what's known (the journal, what Bram has taught).
+/// Who's minding the stall this run (one of Bram's kin), and on what terms (the challenge level, and the banes and boons it
+/// drew). All fixed when the run starts; nothing else carries over from runs before but what's known (the journal, what
+/// Bram has taught).
 /// </summary>
 public sealed partial class GameState
 {
@@ -17,11 +18,20 @@ public sealed partial class GameState
 
     public bool Is(string character) => Character == character;
 
-    /// <summary>The challenge level: every one of the Guild's terms up to it is in force.</summary>
+    /// <summary>The challenge level: the Guild's dues are that many steps higher, and the run has as many banes and boons.</summary>
     public int Challenge { get; init; }
 
-    /// <summary>One of the Guild's terms is in force: the challenge level is at least the one it comes in at.</summary>
-    public bool Under(string term) => Challenge >= Challenges.LevelOf(term);
+    /// <summary>This run's banes (<see cref="Challenges.Banes"/>), in the order they were dealt when it started.</summary>
+    public List<string> Banes { get; } = new();
+
+    /// <summary>This run's boons (<see cref="Challenges.Boons"/>), in the order they were dealt when it started.</summary>
+    public List<string> Boons { get; } = new();
+
+    /// <summary>One of the season's banes is against you this run.</summary>
+    public bool Under(string bane) => Banes.Contains(bane);
+
+    /// <summary>One of the boons is with you this run.</summary>
+    public bool Favoured(string boon) => Boons.Contains(boon);
 
     /// <summary>
     /// Bram's lessons (each new seller's first visit, and the scripted first day) are for Kit, with tips on: the others
@@ -32,22 +42,29 @@ public sealed partial class GameState
     /// <summary>A new run: who, and on what terms; and the gold and tools they start with. Every run starts the same.</summary>
     /// <param name="taught">What Bram taught in earlier runs (<see cref="Profile.Taught"/>): not taught again.</param>
     /// <param name="curios">The curios Nim carries this run (<see cref="Profile.OpenCurios"/>); null: all of them.</param>
+    /// <param name="terms">The level's banes and boons, drawn on the character screen; null: drawn from the run's seed.</param>
     public static GameState NewRun(int seed, string character = Characters.Kit, int challenge = 0, bool guided = true,
-        IEnumerable<string> taught = null, IEnumerable<string> curios = null)
+        IEnumerable<string> taught = null, IEnumerable<string> curios = null, (List<string> Boons, List<string> Banes)? terms = null)
     {
         var state = new GameState(seed)
         {
             Character = Characters.Exists(character) ? character : Characters.Kit,
             Challenge = Math.Clamp(challenge, 0, Challenges.Max),
         };
+        var (boons, banes) = terms ?? Challenges.Draw(seed, state.Challenge);
+        state.Boons.AddRange(boons);
+        state.Banes.AddRange(banes);
         state.Learned(taught, firstDay: true);
         state.Guided = guided;
         state.CuriosOpen = curios?.ToHashSet();
         state.Gold = StartGold(state);
+        // Bram's old picks: the fine lockpicks from the first day.
+        if (state.Favoured(Challenges.OldPicks)) state._owned.Add("picks");
         return state;
     }
 
-    static int StartGold(GameState state) => state.Under(Challenges.LeanStart) ? StartingGold / 2 : StartingGold;
+    static int StartGold(GameState state) => state.Under(Challenges.LeanStart) ? StartingGold / 2
+        : state.Favoured(Challenges.Savings) ? Money.Round(StartingGold * Challenges.SavingsFactor) : StartingGold;
 
     // ---- Hesk: a bad back and an honest scale ----
 
@@ -116,8 +133,12 @@ public sealed partial class GameState
         return boosts.AlwaysHidden ? 1 : Math.Min(1, (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor);
     }
 
-    /// <summary>How many seconds of shaking a rotten chest stands (0: as long as you like): twice as long with a pocket watch.</summary>
-    public float ShakeLimit(SellerDef seller) => seller.ShakeLimit * (HasCurio("watch") ? Curios.WatchPatience : 1);
+    /// <summary>
+    /// How many seconds of shaking a rotten chest stands (0: as long as you like): twice as long with a pocket watch, and
+    /// in a slow season.
+    /// </summary>
+    public float ShakeLimit(SellerDef seller) => seller.ShakeLimit * (HasCurio("watch") ? Curios.WatchPatience : 1) *
+                                                 (Favoured(Challenges.Patient) ? Challenges.PatientFactor : 1);
 
     /// <summary>A seller who won't wait all day (everyone, when the town's in a hurry).</summary>
     public bool Impatient(SellerDef seller) => Patience(seller) > 0;
@@ -130,26 +151,31 @@ public sealed partial class GameState
     {
         var seller = visit.Seller;
         var terms = new List<string>();
-        if (seller.ShakeLimit > 0) terms.Add($"Rotten: {ShakeLimit(seller):0} seconds of shaking, all told.");
-        if (visit.Chest.Packed) terms.Add("Packed in straw: everything stirs a strength later.");
+        if (seller.ShakeLimit > 0) terms.Add($"Rotten: it stands {ShakeLimit(seller):0} seconds of shaking, all told.");
+        if (visit.Chest.Packed) terms.Add("Packed in straw: everything needs a strength harder to stir.");
         if (seller.Packhorse) terms.Add("On a skittish mare: no hard shake.");
         else if (EventIs("mourning") && CanShakeHard) terms.Add("A day of mourning: no hard shake.");
-        if (seller.ShakeFee > 0) terms.Add($"Each strength after your first: price +{Synergies.Pct(seller.ShakeFee)}.");
-        if (seller.Wager > 0) terms.Add("Read it exactly: a third of the price back.");
-        if (seller.Heirloom is Category heirloom) terms.Add($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside are his, for {visit.Fee}g.");
+        if (seller.ShakeFee > 0) terms.Add($"Each strength you try after the first puts the price up {Synergies.Pct(seller.ShakeFee)}.");
+        if (seller.Wager > 0) terms.Add("Read it exactly right and he gives back a third of the price.");
+        if (seller.Heirloom is Category heirloom) terms.Add($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g.");
         if (seller.TakesDearest) terms.Add("The dearest thing inside is his.");
-        if (seller.SlipPrice) terms.Add("Price: your slip. Exact: 25% off. Wrong: its worth +25%.");
-        if (seller.Gaze > 0) terms.Add($"Buy, and everyone after him today asks x{seller.Gaze:0.#}.");
+        if (seller.SlipPrice) terms.Add("His price is your slip: exactly right, a quarter off; wrong, what it holds and a quarter more.");
+        if (seller.Gaze > 0) terms.Add($"Buy, and everyone after him today asks {(seller.Gaze == 2 ? "twice as much" : $"x{seller.Gaze:0.#}")}.");
         var minds = new List<string>();
         if (MindsHardShake(seller)) minds.Add("a hard shake");
         if (MindsDrop(seller)) minds.Add("a drop");
         if (MindsMagnet(seller)) minds.Add("the lodestone");
-        if (minds.Count > 0) terms.Add($"Minds {Sellers.Join(minds)}: half again.");
+        if (minds.Count > 0) terms.Add($"Minds {Sellers.Join(minds)}: half again if you do.");
         return terms.Count == 0 ? null : string.Join(" ", terms);
     }
 
-    /// <summary>What an upgrade costs this run: its price, and the Bookkeeping Engine whatever is left of the debt.</summary>
-    public int Cost(Upgrade upgrade) => upgrade.Key == Upgrades.Engine ? DebtLeft : upgrade.Cost;
+    /// <summary>
+    /// What an upgrade costs this run: its price (a quarter more from the Guild's builders; the move to Thornwick half,
+    /// when Thornwick wants you), and the Bookkeeping Engine whatever is left of the debt.
+    /// </summary>
+    public int Cost(Upgrade upgrade) => upgrade.Key == Upgrades.Engine ? DebtLeft
+        : Money.Round(upgrade.Cost * (Under(Challenges.Builders) ? Challenges.BuilderPrices : 1) *
+                      (upgrade.SetsTier == 2 && Favoured(Challenges.Invited) ? 0.5f : 1));
 
     /// <summary>
     /// The Guild offers its Bookkeeping Engine once you could pay off everything you owe: it would rather be paid twice.
@@ -162,6 +188,9 @@ public sealed partial class GameState
         "crate" => !CanDrop,
         "book" => Is(Characters.Isolde),
         "monocle" => Has("lamp") || Shows(Heartsongs.Star),
+        // What a boon already does as well.
+        "ticket" => Favoured(Challenges.HonestClerk),
+        "shell" => Favoured(Challenges.Charm),
         _ => false,
     };
 
@@ -184,23 +213,26 @@ public sealed partial class GameState
         return paid;
     }
 
-    /// <summary>Nim has shown you something else on this visit.</summary>
-    public bool PeddlerRerolled { get; private set; }
+    /// <summary>How many times Nim has shown you something else on this visit.</summary>
+    public int PeddlerRerolls { get; private set; }
 
-    /// <summary>Once a visit, Nim will pack up what's on the counter and show you something else.</summary>
-    public bool CanRerollPeddler => PeddlerToday && !PeddlerRerolled;
+    /// <summary>How many times a visit Nim will show you something else: once, or twice when he has a soft spot for you.</summary>
+    public int RerollsPerVisit => Favoured(Challenges.NimsFavour) ? 2 : 1;
+
+    /// <summary>Nim will pack up what's on the counter and show you something else.</summary>
+    public bool CanRerollPeddler => PeddlerToday && PeddlerRerolls < RerollsPerVisit;
 
     /// <summary>Nim packs up what's on the counter and lays out something else.</summary>
     public void RerollPeddler()
     {
         if (!CanRerollPeddler) return;
-        PeddlerRerolled = true;
+        PeddlerRerolls++;
         var shown = PeddlerStock.Select(c => c.Key).ToHashSet();
         PeddlerStock.Clear();
-        PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day * 31 + 7)), this, PeddlerCount, shown));
+        PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day * 31 + 7 * PeddlerRerolls)), this, PeddlerCount, shown));
         CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
     }
 
-    /// <summary>How many curios Nim lays out.</summary>
-    public int PeddlerCount => Curios.Laid;
+    /// <summary>How many curios Nim lays out (one fewer in a lean month).</summary>
+    public int PeddlerCount => Curios.Laid - (Under(Challenges.Sparse) ? 1 : 0);
 }

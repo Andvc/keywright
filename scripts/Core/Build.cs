@@ -540,11 +540,11 @@ public sealed partial class GameState : ISlipModel
 
     /// <summary>
     /// What sellers ask of this shop, against what they'd ask anyone: its power index, and what puts prices up or down
-    /// besides (the Guild's sharp sellers, the Lullaby Box, a foreclosure sale, a barker's horn, the cursed crescent).
+    /// besides (the Lullaby Box, a foreclosure sale, a barker's horn, the cursed crescent).
     /// </summary>
     public float PriceFactor => PriceFactorAt(Tier);
 
-    float PriceFactorAt(int tier) => IndexAt(tier) * (Under(Challenges.SharpSellers) ? Challenges.SharpPrices : 1) *
+    float PriceFactorAt(int tier) => IndexAt(tier) *
                                      (Shows(Heartsongs.Lullaby) ? Heartsongs.LullabyPrices : 1) * (EventIs("estate") ? Events.EstatePrices : 1) *
                                      (HasCurio("horn") ? Curios.HornDearer : 1) * (HasCurio("crescent") ? Curios.CrescentPrices : 1);
 
@@ -622,5 +622,5 @@ public sealed partial class GameState : ISlipModel
     public int PeddlerTier { get; private set; }
 
     /// <summary>What Nim asks for a curio today (nothing, while the keepsake is still to give).</summary>
-    public int CuriosPrice(CurioDef curio) => Curios.Price(curio, PeddlerPurse);
+    public int CuriosPrice(CurioDef curio) => Money.Round(Curios.Price(curio, PeddlerPurse) * (Under(Challenges.DearCurios) ? Challenges.DearCurioPrices : 1));
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Keywright.Audio;
@@ -22,7 +23,7 @@ namespace Keywright;
 /// settings, one screenshot each, then quits), --vault-demo (opens King Aldric's vault; quits after with --quit-at-end),
 /// --start-week=N (a shop as a careful player would have it by then, played
 /// through by the balance simulation; --gold=N then sets its purse). Autoplay sets --days=N to stop after that many days.
-/// --character=KEY and --challenge=N play one of Bram's kin, at a challenge level.
+/// --character=KEY and --challenge=N play one of Bram's kin, at a challenge level (--terms=a,b: with just those boons and banes).
 /// --engine starts with the Bookkeeping Engine, to see it read every chest. --curios=a,b,c owns those curios from the start.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
 /// (with --vault-demo, the Crown Chest's other ending).
@@ -31,7 +32,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.23";
+    public const string Version = "Early Access 0.24";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -77,6 +78,10 @@ public partial class Main : Node2D
                 if (float.TryParse(Arg(args, "--heartsongs"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
                         out var songOdds))
                     Heartsongs.Chance = songOdds;
+                // --debtstep=S: try another rise in the Guild's dues a challenge level (for tuning it).
+                if (float.TryParse(Arg(args, "--debtstep"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
+                        out var debtStep))
+                    Challenges.DebtStep = debtStep;
                 switch (Arg(args, "--sim"))
                 {
                     case "songs":
@@ -94,6 +99,15 @@ public partial class Main : Node2D
                         break;
                     case "kin":
                         Simulation.Meta(N(100), Arg(args, "--who"));
+                        break;
+                    case "terms":
+                        Simulation.TermsReport(N(200), Arg(args, "--who"));
+                        break;
+                    case "levels":
+                        Simulation.TermLevels(N(200));
+                        break;
+                    case "careers":
+                        Simulation.Careers(N(40), 30);
                         break;
                     case "builds":
                         Simulation.Builds(N(60));
@@ -150,8 +164,13 @@ public partial class Main : Node2D
                       Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null;
         if (direct)
         {
+            // --terms=gifts,thin: just these boons and banes (to see a term's screens), whatever the level deals.
+            var terms = Arg(args, "--terms") is string named ? Challenges.Named(named.Split(',')) : ((List<string>, List<string>)?)null;
             State = GameState.NewRun(_seed, Arg(args, "--character") ?? Characters.Kit, int.TryParse(Arg(args, "--challenge"), out var level) ? level : 0,
-                !args.Contains("--no-tutorial"));
+                !args.Contains("--no-tutorial"), terms: terms);
+            if (State.Boons.Count + State.Banes.Count > 0)
+                GD.Print($"Terms: for you {(State.Boons.Count > 0 ? string.Join(", ", State.Boons) : "none")}; " +
+                         $"against you {(State.Banes.Count > 0 ? string.Join(", ", State.Banes) : "none")}");
             // --songs=all: as if Bram's kin had opened every Heartsong (the Crown Chest's other ending). --heartsongs=0.5:
             // half of all chests hold one, to see them turn up.
             if (Arg(args, "--songs") == "all") State.Songbook.UnionWith(Heartsongs.All.Select(h => h.Key));
@@ -233,18 +252,19 @@ public partial class Main : Node2D
         // A profile with some runs behind it, so the character screen has something to show.
         Profile = new Profile { Runs = 9, Cleared = 2, Vaults = 0, BestWeek = 8, BestTier = 3, LastCharacter = Characters.Hesk };
         Profile.Challenge[Characters.Kit] = 2;
-        Profile.Challenge[Characters.Hesk] = 1;
+        // Hesk at the top level: the most boons and banes the setup screen and the pause menu ever list.
+        Profile.Challenge[Characters.Hesk] = Challenges.Max;
         Profile.BestScore[Characters.Kit] = 452;
         ToTitle();
         await Wait(2.5);
         OpenSetup();
         await Wait(1.2);
         var setup = (SetupPhase)_phase;
-        setup.SetLevel(1);
+        setup.SetLevel(Challenges.Max);
         await Wait(0.6);
         Moment("09_setup");
         await Wait(0.5);
-        StartRun(Characters.Hesk, 1);
+        StartRun(Characters.Hesk, Challenges.Max);
         await Wait(3.5);
         Moment("10_newgame");
         await Wait(0.5);
@@ -400,7 +420,8 @@ public partial class Main : Node2D
             Profile.Bank(GameState.Load(old));
             DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(SavePath));
         }
-        State = GameState.NewRun(_seed, character, challenge, Settings.Tips, Profile.Taught, Profile.OpenCurios);
+        State = GameState.NewRun(_seed, character, challenge, Settings.Tips, Profile.Taught, Profile.OpenCurios,
+            Challenges.Draw(Profile.TermsSeed, challenge));
         State.Songbook.UnionWith(Profile.Songs);
         State.Remember(Profile);
         _seed++;
@@ -604,7 +625,7 @@ public partial class Main : Node2D
     /// <summary>After the day's end: the Guild's introduction (the first evening), its due (the fifth), or the next morning.</summary>
     public void CloseDay()
     {
-        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(), StartDay, "THE GILDED GUILD", "guild"));
+        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), StartDay, "THE GILDED GUILD", "guild"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
         // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
         else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, "THE ALDRIC KEY", "vault"));

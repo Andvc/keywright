@@ -873,7 +873,7 @@ public partial class CounterPhase : Phase
             _shake.Say(weight.ToUpperInvariant(), Palette.Word, 32);
             Note($"Dropped it: it lands {(weight == "heavy" ? "with a heavy thump" : weight == "light" ? "light as a feather" : "with a middling thud")}. " +
                  "Heavy ones hold more.");
-            _seller.Say("Careful.");
+            _seller.Say(Sellers.StartleLine(_rng, _visit.Seller));
             Refresh();
             Game.Moment("05_drop_sealed", 0.3);
             return;
@@ -902,8 +902,8 @@ public partial class CounterPhase : Phase
             Teach("broke");
         }
         Teach("dropped");
-        if (State.MindsDrop(_visit.Seller)) Angered(_visit.Anger(_rng));
-        else _seller.Say(_rng.PickOne(new[] { "Oi! Careful with that.", "Mind the floor!", "Easy!" }));
+        if (State.MindsDrop(_visit.Seller)) Angered(_visit.Anger(_rng, own: _visit.Seller.HatesDrop));
+        else _seller.Say(Sellers.StartleLine(_rng, _visit.Seller));
         Refresh();
         Game.Moment("05_drop", 0.3);
     }
@@ -1175,7 +1175,7 @@ public partial class CounterPhase : Phase
         Game.Flash(red, 0.6f, 0.5f);
         Fx.Explosion(this, seam, 4, red);
         Fx.Burst(this, seam, red, 120, 460f);
-        _seller.Say("Wha-! It burst! What was... keep that thing, then. I'm off.", Palette.Warn);
+        _seller.Say(Sellers.BurstLine, Palette.Warn);
         Game.Moment("03_burst", 0.2);
         var reveal = Add(new SongReveal(song, seam, "The chest bursts open!"));
         _songReveal = reveal;
