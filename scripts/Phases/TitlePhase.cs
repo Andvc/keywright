@@ -40,12 +40,11 @@ public partial class TitlePhase : Phase
             }
         }));
 
-        var logo = Add(UiKit.MakeLabel("KEYWRIGHT", 80, Palette.Gold, HorizontalAlignment.Center, outline: 10).Place(0, 64, 1280, 96));
-        logo.PivotOffset = new Vector2(640, 48);
+        Add(UiKit.MakeSprite("res://assets/ui/logo.png", new Vector2(640, 92), 2));
         Add(UiKit.MakeLabel("Every treasure in Aldmark is locked in a chest. Only a Keywright can open one.", 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Place(0, 164, 1280, 24));
 
-        _chest = Add(new ChestView { Position = new Vector2(640, 300), PixelSize = 8, Skin = "purple", GlowColor = Palette.Of(Rarity.Legendary) });
+        _chest = Add(new ChestView { Position = new Vector2(640, 300), Skin = "purple", Lock = 2, GlowColor = Palette.Of(Rarity.Legendary) });
 
         float y = 380;
         if (_save != null)

@@ -6,7 +6,6 @@ namespace Keywright.Core;
 /// <param name="MinTier">The shop tier needed before it's on offer.</param>
 /// <param name="SetsTier">For renovations: the shop tier it moves you to.</param>
 /// <param name="Slots">For display cabinets: how many things it shows.</param>
-/// <param name="Icon">Icon under res://assets/ui/icons/.</param>
 /// <param name="SynergySlots">How many more synergies it lets you have active.</param>
 /// <param name="CurioSlots">How many more curios it gives you room for.</param>
 /// <param name="Customers">How many more customers come every day.</param>
@@ -14,7 +13,7 @@ namespace Keywright.Core;
 /// <param name="Requires">An upgrade that has to be bought first (the cabinet before it, the charter before the seal).</param>
 /// <param name="Sales">How much more everything sells for (a buyers' trade: they multiply together).</param>
 /// <param name="Luck">How much likelier everything you open is to come out a step better (a restorer: they add up).</param>
-public sealed record Upgrade(string Key, string Name, string Blurb, int Cost, int MinTier, string Icon, int SetsTier = 0, int Slots = 0,
+public sealed record Upgrade(string Key, string Name, string Blurb, int Cost, int MinTier, int SetsTier = 0, int Slots = 0,
     int SynergySlots = 0, int CurioSlots = 0, int Customers = 0, int Commissions = 0, string Requires = null, float Sales = 0, float Luck = 0)
 {
     public bool IsRenovation => SetsTier > 0;
@@ -33,46 +32,46 @@ public static class Upgrades
     public static readonly Upgrade[] All =
     {
         new("shop2", "Move to Thornwick", "A shop at Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells.",
-            50, 1, "shop", SetsTier: 2),
+            50, 1, SetsTier: 2),
 
-        new("sign", "Painted Sign", "One more customer every day.", 60, 2, "sign", Customers: 1),
-        new("scales", "Brass Scales", "Honest weights draw buyers who pay for them: everything sells for a fifth more.", 150, 2, "scales", Sales: 0.2f),
-        new("cabinet1", "Oak Cabinet", "Room to display one more thing. Displays draw customers.", 80, 2, "cabinet", Slots: 1),
-        new("picks", "Fine Lockpicks", "A wider sweet spot when you pick a lock.", 80, 2, "picks"),
-        new("cabinet2", "Oak Dresser", "Room to display one more thing.", 160, 2, "cabinet", Slots: 1, Requires: "cabinet1"),
+        new("sign", "Painted Sign", "One more customer every day.", 60, 2, Customers: 1),
+        new("scales", "Brass Scales", "Honest weights draw buyers who pay for them: everything sells for a fifth more.", 150, 2, Sales: 0.2f),
+        new("cabinet1", "Oak Cabinet", "Room to display one more thing. Displays draw customers.", 80, 2, Slots: 1),
+        new("picks", "Fine Lockpicks", "A wider sweet spot when you pick a lock.", 80, 2),
+        new("cabinet2", "Oak Dresser", "Room to display one more thing.", 160, 2, Slots: 1, Requires: "cabinet1"),
         new("bench", "Restorer's Bench", "Everything you buy gets cleaned and mended: each thing is 5% likelier to come out a step better than its chest.",
-            200, 2, "bench", Luck: 0.05f),
+            200, 2, Luck: 0.05f),
         new("shop3", "Move to Crownhold", "A shop in the capital: richer customers, archmages with enchanted things, a dwarf, and gems.",
-            160, 2, "shop", SetsTier: 3),
+            160, 2, SetsTier: 3),
 
-        new("lamp", "Witchlight", "Always lit: anything enchanted glows when it makes a sound. Nobody else can see it.", 400, 3, "lamp"),
-        new("crier", "Town Crier", "Your name, shouted across Crownhold: one more customer every day.", 700, 3, "crier", Customers: 1),
-        new("block", "Auction Block", "Buyers bid against each other for what you sell: everything fetches 30% more.", 1200, 3, "block", Sales: 0.3f),
-        new("cabinet3", "Glass Cabinet", "Room to display one more thing.", 400, 3, "cabinet", Slots: 1, Requires: "cabinet2"),
-        new("charter", "Crownhold Charter", "Two synergies at once.", 600, 3, "charter", SynergySlots: 1),
-        new("case", "Curio Case", "Room for one more curio.", 500, 3, "case", CurioSlots: 1),
-        new("cabinet4", "Glass Case", "Room to display one more thing.", 700, 3, "cabinet", Slots: 1, Requires: "cabinet3"),
-        new("workshop", "Restorer's Workshop", "A workshop and a journeyman: everything is another 6% likelier to come out a step better.", 1500, 3, "bench",
+        new("lamp", "Witchlight", "Always lit: anything enchanted glows when it makes a sound. Nobody else can see it.", 400, 3),
+        new("crier", "Town Crier", "Your name, shouted across Crownhold: one more customer every day.", 700, 3, Customers: 1),
+        new("block", "Auction Block", "Buyers bid against each other for what you sell: everything fetches 30% more.", 1200, 3, Sales: 0.3f),
+        new("cabinet3", "Glass Cabinet", "Room to display one more thing.", 400, 3, Slots: 1, Requires: "cabinet2"),
+        new("charter", "Crownhold Charter", "Two synergies at once.", 600, 3, SynergySlots: 1),
+        new("case", "Curio Case", "Room for one more curio.", 500, 3, CurioSlots: 1),
+        new("cabinet4", "Glass Case", "Room to display one more thing.", 700, 3, Slots: 1, Requires: "cabinet3"),
+        new("workshop", "Restorer's Workshop", "A workshop and a journeyman: everything is another 6% likelier to come out a step better.", 1500, 3,
             Requires: "bench", Luck: 0.06f),
-        new("shop4", "The Royal Emporium", "By the Gilded Gate: 5 customers a day, the court, demons, and a fence for the Maw.", 1200, 3, "shop",
+        new("shop4", "The Royal Emporium", "By the Gilded Gate: 5 customers a day, the court, demons, and a fence for the Maw.", 1200, 3,
             SetsTier: 4),
 
-        new("magnet", "Lodestone", "Iron can't move near it: no clanking, and demon gold goes quiet.", 1000, 4, "magnet"),
-        new("cabinet5", "Gilded Cabinet", "Room to display one more thing.", 1500, 4, "cabinet", Slots: 1, Requires: "cabinet4"),
-        new("seal", "Royal Seal", "Three synergies at once.", 2500, 4, "seal", SynergySlots: 1, Requires: "charter"),
-        new("cabinet6", "Gilded Case", "Room to display one more thing.", 2500, 4, "cabinet", Slots: 1, Requires: "cabinet5"),
+        new("magnet", "Lodestone", "Iron can't move near it: no clanking, and demon gold goes quiet.", 1000, 4),
+        new("cabinet5", "Gilded Cabinet", "Room to display one more thing.", 1500, 4, Slots: 1, Requires: "cabinet4"),
+        new("seal", "Royal Seal", "Three synergies at once.", 2500, 4, SynergySlots: 1, Requires: "charter"),
+        new("cabinet6", "Gilded Case", "Room to display one more thing.", 2500, 4, Slots: 1, Requires: "cabinet5"),
 
         // The Royal Emporium's own: big sums to grow into while the Guild's dues climb.
-        new("night", "Night Market", "Open after dark: one more customer every day.", 6000, 4, "night", Customers: 1),
-        new("warrant", "Royal Warrant", "By appointment to the Crown: everything sells for half as much again.", 12000, 4, "warrant", Sales: 0.5f),
-        new("patrons", "Patrons' Book", "The regulars post two more commissions a week.", 8000, 4, "patrons", Commissions: 2),
+        new("night", "Night Market", "Open after dark: one more customer every day.", 6000, 4, Customers: 1),
+        new("warrant", "Royal Warrant", "By appointment to the Crown: everything sells for half as much again.", 12000, 4, Sales: 0.5f),
+        new("patrons", "Patrons' Book", "The regulars post two more commissions a week.", 8000, 4, Commissions: 2),
         new("master", "Master Restorer", "A master of the craft, from the palace workshops: everything is another 8% likelier to come out a step better.",
-            15000, 4, "bench", Requires: "workshop", Luck: 0.08f),
-        new("velvet", "Velvet Case", "Room for one more curio.", 10000, 4, "case", CurioSlots: 1, Requires: "case"),
+            15000, 4, Requires: "workshop", Luck: 0.08f),
+        new("velvet", "Velvet Case", "Room for one more curio.", 10000, 4, CurioSlots: 1, Requires: "case"),
 
         // The Guild's own counting-house clockwork, sold for exactly what you still owe (GameState.Cost): on offer once you could pay it.
         new(Engine, "Bookkeeping Engine", "The Guild's clockwork reads every chest on your counter and ticks the slip for you. " +
-            "Costs all you owe.", 0, 1, "engine"),
+            "Costs all you owe.", 0, 1),
     };
 
     public const string Engine = "engine";

@@ -4692,8 +4692,8 @@
     8
    ],
    "replaces": null,
-   "description": "New: the speech bubble's tail pointing up, night10 with a 1px night2 outline, its top row open so it joins the bubble's border.",
-   "notes": "With ui.bubble.",
+   "description": "New: the speech bubble's tail, pointing up from the bubble's top edge: night10 with a 1px night2 outline along its two slanted sides and its tip; its bottom row night10 with no outline, so it covers the bubble's border where they join.",
+   "notes": "With ui.bubble. (The first delivery followed an older wording that left the tip open instead.)",
    "palette": [
     "night:2",
     "night:10"
@@ -4704,7 +4704,7 @@
     "anything outside the recipe"
    ],
    "output": "art/generated/ui/bubble_tail.png",
-   "prompt": "Pixel art game asset for Keywright, a warm, lantern-lit fantasy merchant game set in the sword-and-sorcery realm of Aldmark. Clean, hand-placed pixel art on a strict square grid: every art pixel is one solid, perfectly square block of a single flat colour. No anti-aliasing, no blur, no gradients, no texture noise, no dithering, no painterly brushwork. A limited palette of warm, hue-shifted colours: shadows lean violet-blue, highlights lean warm yellow. One warm key light from the upper left, cool violet ambient shadow on the right and underneath. Strong readable silhouette. No text, letters, numbers, runes that look like writing, signatures or watermarks.\n\n(Draw by script or by hand from the exact recipe below; no image generation needed.)\n\nSubject: New: the speech bubble's tail pointing up, night10 with a 1px night2 outline, its top row open so it joins the bubble's border.\n\nLean on these palette ramps (dark to light): night 2,10 (#1a1420 #ffffff).\n\nAvoid: anything outside the recipe."
+   "prompt": "Pixel art game asset for Keywright, a warm, lantern-lit fantasy merchant game set in the sword-and-sorcery realm of Aldmark. Clean, hand-placed pixel art on a strict square grid: every art pixel is one solid, perfectly square block of a single flat colour. No anti-aliasing, no blur, no gradients, no texture noise, no dithering, no painterly brushwork. A limited palette of warm, hue-shifted colours: shadows lean violet-blue, highlights lean warm yellow. One warm key light from the upper left, cool violet ambient shadow on the right and underneath. Strong readable silhouette. No text, letters, numbers, runes that look like writing, signatures or watermarks.\n\n(Draw by script or by hand from the exact recipe below; no image generation needed.)\n\nSubject: New: the speech bubble's tail, pointing up from the bubble's top edge: night10 with a 1px night2 outline along its two slanted sides and its tip; its bottom row night10 with no outline, so it covers the bubble's border where they join.\n\nLean on these palette ramps (dark to light): night 2,10 (#1a1420 #ffffff).\n\nAvoid: anything outside the recipe."
   },
   {
    "background": "transparent",

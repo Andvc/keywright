@@ -78,9 +78,10 @@ public partial class DuesPhase : Phase
         float mx = 40 + Guild.Weeks * (w + gap) + 12;
         _track.AddChild(UiKit.MakeLabel(State.MapGiven ? "KEY: THE GUILD'S" : $"KEY {State.MapPieces}/{Story.Pieces}", 16, Palette.Magic)
             .Place(mx, y - 2, 220, 20));
+        // Each shard in its place in the whole key: the ones still to find in shadow.
         for (int i = 0; i < Story.Pieces; i++)
         {
-            var piece = UiKit.MakeSprite("res://assets/ui/key.png", new Vector2(mx + 16 + i * 34, y + 36), 1);
+            var piece = UiKit.MakeSprite($"res://assets/ui/key_{i + 1}.png", new Vector2(mx + 96, y + 44), 1);
             if (i >= State.MapPieces) piece.Modulate = new Color(0.25f, 0.22f, 0.3f);
             _track.AddChild(piece);
         }

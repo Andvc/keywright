@@ -300,8 +300,9 @@ UI = [
      "(the tail is ui.bubble_tail). Nine-slice margins: 8px. Not tinted.",
      "New look for sellers' speech (integration: SellerView)."),
     ("bubble_tail", [12, 8], "P3", None,
-     "New: the speech bubble's tail pointing up, night10 with a 1px night2 outline, its top row open so it joins the "
-     "bubble's border.", "With ui.bubble."),
+     "New: the speech bubble's tail, pointing up from the bubble's top edge: night10 with a 1px night2 outline along "
+     "its two slanted sides and its tip; its bottom row night10 with no outline, so it covers the bubble's border where "
+     "they join.", "With ui.bubble. (The first delivery followed an older wording that left the tip open instead.)"),
 ]
 for key, size, priority, replaces, recipe, notes in UI:
     add(id=f"ui.{key}", category="ui", title=key.replace("_", " ").capitalize(), size=size, priority=priority,

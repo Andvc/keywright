@@ -36,7 +36,7 @@ the Gate", wants you opening chests as fast as you can, and wants its tithe in g
 | Day 2, evening | Mister Vane of the Gilded Guild: Bram opened chests unlicensed for twenty years; the Guild's back-tithe is due in five weekly payments, or the Guild seals the shop. | What the Guild does with the gold. |
 | Week 2 | Bram tells you about the Locking and the Maw, and shows you his one secret: a shard of the **Aldric Key**, broken in four when the Locking was made. The Hooded Woman asks for things only a Keywright's chests hold, and pays in shards. | What the Key opens; who she is. |
 | Week 4 | Her name is Mara, the last archmage of the Keyhold, Bram's old partner. The Key opens the **Crown Chest**, King Aldric's own, which holds the heart of the Locking; the tithe goes down through the Gilded Gate: the Maw is buying his way out, and the Guild is his. A tired old man who's been selling you chests at the Emporium is the King. That night Vane offers to forget half a week's tithe for your shards. | Whether to trust him; whether you'll be ready. |
-| Week 5 | The last tithe. With the Key whole, Mara knows where the Crown Chest is. | |
+| Week 5 | The last tithe. With the Key whole, Mara comes for Bram, and the King comes with her, as himself this time, with the Crown Chest: three hundred years in his family, and none of them could open it. It's yours by right. | |
 | Any day, about one run in three | A sound like nothing in any chest: a Heartsong. Bram heard one once in forty years. | What the nine of them are for. |
 | The Crown Chest | Opened by a Keywright who rightfully owns it, it renews the Locking: the Maw falls silent, and King Aldric's hoard is on your counter. The Locking was a song in nine verses, Mara says: the Heartsongs. | What the Guild does next (endless). |
 | The Crown Chest, with all nine Heartsongs known | Mara sings the Locking whole. A lock sung whole is an ending: the Maw starves, the Gate is only a gate, and every chest in Aldmark opens at once. | |
@@ -65,7 +65,8 @@ Each move costs the renovation's price: "Move to Thornwick", "Move to Crownhold"
   and bend the rules of the trade. Nobody asks what Nim is.
 - **The Stranger**: brings a chest wrapped in iron chains, so nothing inside can move. Never says where from.
 - **King Aldric IX**: old, tired, worried about the Gate. Calls himself Old Aldo, and sells you chests from the Royal
-  Treasury to see if you're the Keywright the realm needs.
+  Treasury to see if you're the Keywright the realm needs. When the Key is whole he brings you the Crown Chest himself,
+  crowned.
 - **Avarax, the Gilded Maw**: the demon of greed. Weak enough to need the Guild, strong enough to visit the Emporium in
   a borrowed body dripping with rings.
 

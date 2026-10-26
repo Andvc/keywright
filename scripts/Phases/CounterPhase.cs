@@ -112,7 +112,7 @@ public partial class CounterPhase : Phase
         // Hesk can't lift a chest high enough to drop it, or shake it hard.
         var bounds = State.CanDrop ? DragBounds : new Rect2(DragBounds.Position.X, ChestRest.Y - LiftLimit, DragBounds.Size.X, LiftLimit);
         _shake = Add(new ShakeBox(_visit.Chest, bounds) { Position = ChestRest, MaxLevel = State.CanShakeHardAt(_visit.Seller) ? Core.Shake.Hard : Core.Shake.Firm });
-        _shake.View.LockColor = Palette.Lock(_visit.Chest.Lock);
+        _shake.View.Lock = _visit.Chest.Lock.Index;
         _shake.Heard += OnHeard;
         _shake.Landed += OnLanded;
         // Once you own the witchlight it's always lit: anything enchanted glows when it makes a sound.
@@ -415,14 +415,14 @@ public partial class CounterPhase : Phase
         for (int i = 0; i < songs.Count; i++)
         {
             var song = songs[i];
-            var at = new Vector2(360 + i * 64, 132);
+            var at = new Vector2(360 + i * 72, 100);
             _shelf.AddChild(new Painter(p =>
             {
-                for (int r = 3; r >= 1; r--) p.DrawCircle(Vector2.Zero, 10 + r * 8, Palette.Of(Rarity.Mythic) with { A = 0.07f });
+                for (int r = 3; r >= 1; r--) p.DrawCircle(Vector2.Zero, 14 + r * 10, Palette.Of(Rarity.Mythic) with { A = 0.07f });
             }) { Position = at, Material = Fx.Additive() });
-            _shelf.AddChild(new Painter(p => p.DrawLine(new Vector2(0, -70), new Vector2(0, -18), new Color(0.15f, 0.1f, 0.12f), 2)) { Position = at });
-            _shelf.AddChild(UiKit.MakeItemIcon(song, at, 40));
-            ShelfButton(song, new Rect2(at.X - 24, at.Y - 24, 48, 48), $"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing).");
+            _shelf.AddChild(new Painter(p => p.DrawLine(new Vector2(0, -60), new Vector2(0, -28), new Color(0.15f, 0.1f, 0.12f), 2)) { Position = at });
+            _shelf.AddChild(UiKit.MakeItemIcon(song, at, 64));
+            ShelfButton(song, new Rect2(at.X - 32, at.Y - 32, 64, 64), $"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing).");
         }
         if (!State.DisplayOpen) return;
         const float y = 196, x0 = 300, w = 504;
@@ -431,10 +431,11 @@ public partial class CounterPhase : Phase
         {
             var item = shown[i];
             float slot = w / Math.Max(6, shown.Count), x = x0 + slot * (i + 0.5f);
-            var icon = UiKit.MakeItemIcon(item, new Vector2(x, y), 48, standing: true);
+            // Things stand at 2x, as on the table, while there's room for them.
+            var icon = UiKit.MakeItemIcon(item, new Vector2(x, y), Math.Min(64, slot), standing: true);
             icon.Modulate = new Color(0.85f, 0.85f, 0.9f);
             _shelf.AddChild(icon);
-            ShelfButton(item, new Rect2(x - Math.Min(28, slot / 2), y - 52, Math.Min(56, slot), 54),
+            ShelfButton(item, new Rect2(x - Math.Min(32, slot / 2), y - 62, Math.Min(64, slot), 64),
                 $"{item.Name}: {item.Prestige} exhibition points{(item.Magic ? " (double: enchanted)" : "")}. Click to sell it for {State.SaleValue(item)}g.");
         }
     }
@@ -498,7 +499,7 @@ public partial class CounterPhase : Phase
         Add(UiKit.MakeLabel("Waiting", 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
         for (int i = 0; i < Math.Min(7, State.Queue.Count); i++)
         {
-            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1));
+            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1));
             face.Modulate = new Color(0.8f, 0.8f, 0.85f);
         }
     }
@@ -589,9 +590,9 @@ public partial class CounterPhase : Phase
             foreach (var (icon, shortName, longName) in signs)
             {
                 var lit = UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(x, y + 2, w, 36);
-                // Tool icons are 16px art at 3x; two thirds of that is exactly 2x, which fits the sign.
+                // Upgrade icons are 24px art at 2x; half of that is the art itself, which fits the sign.
                 var sign = UiKit.MakeSprite($"res://assets/ui/icons/{icon}.png", new Vector2(20, 18), 1);
-                sign.Scale = Vector2.One * (2f / 3f);
+                sign.Scale = Vector2.One * 0.5f;
                 lit.AddChild(sign);
                 lit.AddChild(UiKit.MakeLabel(tools == 1 ? longName : shortName, 16, Palette.Magic).Place(36, 8, w - 40, 20));
                 panel.AddChild(lit);
@@ -696,7 +697,8 @@ public partial class CounterPhase : Phase
         var button = UiKit.MakeButton("", Palette.Magic.Darkened(0.45f), 16, use);
         button.Icon = GD.Load<Texture2D>($"res://assets/ui/icons/{icon}.png");
         button.ExpandIcon = false;
-        button.AddThemeConstantOverride("icon_max_width", 32);
+        // The upgrade icon at its art size (half the 2x file), so its pixels stay square.
+        button.AddThemeConstantOverride("icon_max_width", 24);
         button.ClipText = true;
         return button;
     }
@@ -1171,7 +1173,7 @@ public partial class CounterPhase : Phase
         Sfx.Play("boom", 0.9f, 0);
         Game.Shake(0.6f);
         Game.Flash(red, 0.6f, 0.5f);
-        Fx.Explosion(this, seam, 6, red);
+        Fx.Explosion(this, seam, 4, red);
         Fx.Burst(this, seam, red, 120, 460f);
         _seller.Say("Wha-! It burst! What was... keep that thing, then. I'm off.", Palette.Warn);
         Game.Moment("03_burst", 0.2);

@@ -31,7 +31,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.22";
+    public const string Version = "Early Access 0.23";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -551,7 +551,7 @@ public partial class Main : Node2D
         while (IsInstanceValid(opening) && !opening.Finished) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         await ToSignal(GetTree().CreateTimer(3.0), SceneTreeTimer.SignalName.Timeout);
         // Then the epilogue (sung whole with --songs=all), a line every two seconds.
-        var scene = new ScenePhase(Story.VaultEpilogue(State), () => { }, State.SongWhole ? "THE LOCKING, SUNG WHOLE" : "THE CROWN CHEST");
+        var scene = new ScenePhase(Story.VaultEpilogue(State), () => { }, State.SongWhole ? "THE LOCKING, SUNG WHOLE" : "THE CROWN CHEST", "vault");
         SwitchTo(scene);
         while (IsInstanceValid(scene) && !scene.Done)
         {
@@ -580,7 +580,7 @@ public partial class Main : Node2D
             var lines = Story.WeekStart(State);
             if (lines.Count > 0)
             {
-                SwitchTo(new ScenePhase(lines, Peddler, State.Week == 1 ? "BRAM'S STALL" : $"WEEK {State.Week}"));
+                SwitchTo(new ScenePhase(lines, Peddler, State.Week == 1 ? "BRAM'S STALL" : $"WEEK {State.Week}", Story.Setting(State.Week)));
                 return;
             }
         }
@@ -604,10 +604,10 @@ public partial class Main : Node2D
     /// <summary>After the day's end: the Guild's introduction (the first evening), its due (the fifth), or the next morning.</summary>
     public void CloseDay()
     {
-        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(), StartDay, "THE GILDED GUILD"));
+        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(), StartDay, "THE GILDED GUILD", "guild"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
         // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
-        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, "THE ALDRIC KEY"));
+        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, "THE ALDRIC KEY", "vault"));
         else StartDay();
     }
 
@@ -616,7 +616,7 @@ public partial class Main : Node2D
     {
         if (State.Foreclosed)
         {
-            SwitchTo(new ScenePhase(Story.Foreclosed(State), () => SwitchTo(new RunEndPhase(cleared: false))));
+            SwitchTo(new ScenePhase(Story.Foreclosed(State), () => SwitchTo(new RunEndPhase(cleared: false)), backdrop: "guild"));
             return;
         }
         if (State.DebtCleared && State.ClearedDay == State.Day)
@@ -648,7 +648,7 @@ public partial class Main : Node2D
             p.Cleared++;
             p.ClearedAt(State);
         });
-        SwitchTo(new ScenePhase(Story.Cleared(State), Vault, "FREE AND CLEAR"));
+        SwitchTo(new ScenePhase(Story.Cleared(State), Vault, "FREE AND CLEAR", "bram"));
     }
 
     /// <summary>With the whole map, Mara and Bram bring King Aldric's vault to the counter: pick its lock and open it.</summary>
@@ -673,7 +673,7 @@ public partial class Main : Node2D
         {
             if (State.SongWhole) WriteProfile(p => p.SungWhole++);
             SwitchTo(new ScenePhase(Story.VaultEpilogue(State), () => SwitchTo(new RunEndPhase(cleared: true)),
-                State.SongWhole ? "THE LOCKING, SUNG WHOLE" : "THE CROWN CHEST"));
+                State.SongWhole ? "THE LOCKING, SUNG WHOLE" : "THE CROWN CHEST", "vault"));
             return;
         }
         NextCustomer();
@@ -757,6 +757,12 @@ public partial class Main : Node2D
             var fadeOut = CreateTween();
             fadeOut.TweenProperty(_fade, "color:a", 1f, 0.18f);
             await ToSignal(fadeOut, Tween.SignalName.Finished);
+            // The game quit while the screen faded: there's nothing to switch to.
+            if (_quitting)
+            {
+                next.Free();
+                return;
+            }
             _phase.QueueFree();
             Zoom(1f, Center);
         }

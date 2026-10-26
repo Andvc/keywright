@@ -55,7 +55,7 @@ public partial class SetupPhase : Phase
         var card = UiKit.MakePanel(chosen ? Palette.Gold : open ? Palette.PanelBorder.Lightened(0.2f) : Palette.PanelBorder).Place(x, y, CardW, CardH);
         var face = new Sprite2D
         {
-            Texture = GD.Load<Texture2D>($"res://assets/sprites/sellers/{kin.Key}.png"),
+            Texture = GD.Load<Texture2D>($"res://assets/sprites/sellers/faces/{kin.Key}.png"),
             Position = new Vector2(CardW / 2, 64),
             Scale = Vector2.One * 3,
             Modulate = open ? Colors.White : new Color(0.15f, 0.12f, 0.2f),

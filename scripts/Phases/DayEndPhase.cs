@@ -374,7 +374,7 @@ public partial class DayEndPhase : Phase
     {
         const float w = 2 * CardW + CardGapX, h = 168;
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(CardsX, CardsY, w, h);
-        card.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/icons/shop.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
+        card.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/icons/shop2.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(20, 20, 48, 48));
         card.AddChild(UiKit.MakeLabel("Earn your keep", 24, Palette.Gold).Place(84, 16, 600, 30));
         card.AddChild(UiKit.MakeLabel($"Once the stall has earned {GameState.UpgradesAt}g, all told, you can move on to Thornwick Market: " +
@@ -407,7 +407,7 @@ public partial class DayEndPhase : Phase
         var card = UiKit.MakePanel(upgrade.IsRenovation || engine ? Palette.Gold : Palette.PanelBorder).Place(x, y, CardW, CardH);
         card.AddChild(new TextureRect
         {
-            Texture = GD.Load<Texture2D>($"res://assets/ui/icons/{upgrade.Icon}.png"),
+            Texture = GD.Load<Texture2D>($"res://assets/ui/icons/{upgrade.Key}.png"),
             MouseFilter = Control.MouseFilterEnum.Ignore,
         }.Place(12, 12, 48, 48));
         // A long name steps down a size, so the price beside it never covers it.

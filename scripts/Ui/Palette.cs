@@ -35,7 +35,7 @@ public static class Palette
         _ => Warn,
     };
 
-    /// <summary>Lock plate colour by maker (see LockTiers); null for no lock.</summary>
+    /// <summary>A lock maker's metal (see LockTiers), for its name on the lockpicking screen; null for no lock.</summary>
     public static Color? Lock(LockTier lockTier) => lockTier.Index switch
     {
         0 => null,

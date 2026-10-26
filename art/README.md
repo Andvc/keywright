@@ -90,26 +90,32 @@ The manifest is generated: edit `tools/assets_*.py` (or `build_manifest.py` for 
 `python3 art/tools/build_manifest.py`. The palette comes from `tools/make_palette.py`. Don't edit `manifest.json` or
 `INVENTORY.md` by hand.
 
-## After delivery: putting it in the game (for the game's side, not the generator)
+## Putting it in the game (done in 0.23)
 
-Today's art is drawn by `tools/custom_art.py` and built into `assets/` by `tools/import_art.py`. The new art replaces
-it at these sizes (native, then the game scales by whole numbers):
+Until 0.23 the art was drawn by `tools/custom_art.py` and built into `assets/` by `tools/import_art.py`. The delivered
+art replaced it at these sizes (native, then the game scales by whole numbers):
 
-| Category | New native size | Today | Code that changes |
+| Category | New native size | Before | Code that changed |
 |---|---|---|---|
 | Shop backgrounds | 640x360 | the same | none: drop-in |
 | Portraits | 76x76 | 38x38 | `SellerView.FaceScale` 4 to 2, `ScenePhase.FaceScale` 6 to 3, ledger and Bram's tips 2 to 1, the setup screen's cards, the waiting queue and ledger rows use the 38x38 face crop |
-| Things, Heartsongs | 32x32 | up to 24x24 | `OpeningPhase.ScaleFor`, the slot sizes in `UiKit.MakeItemIcon` callers (the shelf, exhibition, pawn list, ledger) |
+| Things, Heartsongs | 32x32 | up to 24x24 | one scale for every thing (`OpeningPhase.ThingScale`, `UiKit.MakeItemIcon` by the art's 30px box), so sizes compare; the shelf's slots |
 | Curios | 28x28 | 24x24 | none: the importer scales 2x into the same 56x56 slot |
 | Chest | 96 wide (lid 42, body 30, open 60) | 16 wide at 12-14x | `ChestView` art size constants and `PixelSize` 2; the lock overlays replace `DrawLidLock`/`DrawBodyLock`; a `crown` skin for the vault |
-| Upgrade icons | 24x24 | 16x16 at 3x | each upgrade gets its own (`Upgrade.Icon` = its key); the importer scales 2x into the same 48x48 |
+| Upgrade icons | 24x24 | 16x16 at 3x | each upgrade has its own, by key (`Upgrade.Icon` is gone); the importer scales 2x into the same 48x48 |
 | Kind icons | 16x16 | the same | none: the importer scales 2x |
 | Guild emblem, Aldric Key | 24x24; 96x24 (whole and four shards) | 22x24; one 18x10 shard | the dues screen shows shard n for the nth piece |
 | Effects | explosion 8 frames of 128x128; coin, sparkle, dust sheets | 6 frames of 112x100; code-drawn | `Fx.Explosion`'s frame count and scale; `Fx.Coin` and particles use the new sheets |
 | UI frames | 12x12 at 2x | 8x8 at 3x | `UiKit`'s nine-slice margins |
 | Lock faces | 160x160 | vector circles | `LockpickPhase.DrawDial` draws over the face |
-| Logo, app icon | 320x72; 16-64 | a text label; the purple chest | the title screen; `assets/ui/icon.png`; the .exe icon in CI |
+| Logo, app icon | 320x72; 16-64 | a text label; the purple chest | the title screen; `assets/ui/icon.png`; the .exe's `assets/ui/icon.ico` (Godot writes it into the exe itself) |
 | Story scenes, Mara and the King unmasked, new UI pieces | 640x360; 76x76 | none | `ScenePhase` backdrops; the vault and the reveal's portraits; the slip and the speech bubble |
 
-`tools/import_art.py` will take `art/generated/` as its source for these instead of drawing them, so `assets/` stays a
-build product.
+Not used yet: the parchment slip and the white speech bubble (`ui.slip_paper`, `ui.bubble`, `ui.bubble_tail`). They're
+light, and every colour the slip and the sellers' lines use is made for the dark panels; using them means a dark set of
+text colours for both. The importer builds them into `assets/ui/` all the same.
+
+`tools/import_art.py` takes `art/generated/` as its source for these instead of drawing them, so `assets/` stays a
+build product; for anything not in `art/generated/` (a new seller, thing or curio, until its picture is made) it falls
+back to the code-drawn placeholder at the same size. New art follows the same brief: add the asset to
+`tools/assets_*.py`, rebuild the manifest, generate, pixelize and validate it, and re-run the importer.

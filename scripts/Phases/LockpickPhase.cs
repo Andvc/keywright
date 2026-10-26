@@ -51,6 +51,8 @@ public partial class LockpickPhase : Phase
         Add(UiKit.MakeLabel("PICK THE LOCK", 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 64, 1280, 40));
         Add(UiKit.MakeLabel($"{_lock.Name}: {_lock.Pins} pins", 16, metal, HorizontalAlignment.Center, outline: 4).Place(0, 102, 1280, 24));
 
+        // The lock's own face, its dark ring track under the dial's zone (art radius 52-68 at 2x: around Radius).
+        Add(UiKit.MakeSprite($"res://assets/sprites/lockpick/face_{ChestView.Maker(Math.Clamp(_lock.Index, 1, 3))}.png", Center, 2));
         _dial = Add(new Painter(DrawDial) { Position = Center });
         _status = Add(UiKit.MakeLabel("[Space] or [Left Click] when the pick is in the green.", 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Place(0, 566, 1280, 24));
@@ -185,22 +187,13 @@ public partial class LockpickPhase : Phase
 
     void DrawDial(Painter p)
     {
-        var metal = Palette.Lock(_lock) ?? Palette.MetalLight;
-        p.DrawCircle(Vector2.Zero, Radius + 36, metal.Darkened(0.6f));
-        p.DrawCircle(Vector2.Zero, Radius + 26, metal.Darkened(0.35f));
-        p.DrawCircle(Vector2.Zero, Radius - 13, new Color("#16121e"));
-        p.DrawArc(Vector2.Zero, Radius, 0, Mathf.Tau, 96, new Color("#2b2338"), 18, false);
-
         if (!Done)
         {
             var zone = new Color("#3fbf6a").Lerp(Colors.White, _zoneFlash);
-            p.DrawArc(Vector2.Zero, Radius, Rad(_zoneCenter - _zoneWidth / 2), Rad(_zoneCenter + _zoneWidth / 2), 24, zone, 18, false);
+            p.DrawArc(Vector2.Zero, Radius, Rad(_zoneCenter - _zoneWidth / 2), Rad(_zoneCenter + _zoneWidth / 2), 24, zone, 24, false);
             p.DrawArc(Vector2.Zero, Radius, Rad(_zoneCenter - _perfectWidth / 2), Rad(_zoneCenter + _perfectWidth / 2), 12,
-                new Color("#c8ffd8"), 18, false);
+                new Color("#c8ffd8"), 24, false);
         }
-
-        p.DrawCircle(new Vector2(0, -16), 18, Colors.Black);
-        p.DrawColoredPolygon(new[] { new Vector2(-9, -6), new Vector2(9, -6), new Vector2(15, 40), new Vector2(-15, 40) }, Colors.Black);
 
         var dir = Vector2.FromAngle(Rad(_angle));
         var pickColor = new Color("#e8e2d6");

@@ -53,7 +53,6 @@ public partial class MentorView : Control
         {
             Texture = GD.Load<Texture2D>("res://assets/sprites/sellers/bram.png"),
             Position = new Vector2(52, 58),
-            Scale = Vector2.One * 2,
         });
         AddChild(UiKit.MakeLabel(Hints.Mentor.ToUpperInvariant(), 16, Palette.Gold, HorizontalAlignment.Center).Place(4, 98, 96, 20));
         _text = UiKit.MakeLabel("", 16, Palette.Text).Wrapped().Place(104, 8, W - 116, H - 30);

@@ -323,7 +323,7 @@ Style anchors (batch 0, approved before the rest): `bg.shop1`, `chest.wood.lid`,
 | `ui.button_pressed` | Button pressed | 12x12 | P2 | `art/generated/ui/button_pressed.png` | `assets/ui/button_pressed.png` | The pressed button: as ui.button with the bevel swapped (top and left #828282, bottom and right #ebebeb) and the fill #828282. Nine-slice margins: 4px. Palette exception: neutral greys. |
 | `ui.slip_paper` | Slip paper | 24x24 | P3 | `art/generated/ui/slip_paper.png` | `(new)` | New: a parchment nine-slice for the appraisal slip: parchment3 fill with a few parchment2 fibres near the edges, a 1px umber2 border with slightly ragged corners, a 2px darker parchment1 band inside the bottom edge. Nine-slice margins: 8px. Not tinted. |
 | `ui.bubble` | Bubble | 24x24 | P3 | `art/generated/ui/bubble.png` | `(new)` | New: a speech-bubble nine-slice: night10 fill, a 1px night2 border with rounded corners (two-pixel radius), no tail (the tail is ui.bubble_tail). Nine-slice margins: 8px. Not tinted. |
-| `ui.bubble_tail` | Bubble tail | 12x8 | P3 | `art/generated/ui/bubble_tail.png` | `(new)` | New: the speech bubble's tail pointing up, night10 with a 1px night2 outline, its top row open so it joins the bubble's border. |
+| `ui.bubble_tail` | Bubble tail | 12x8 | P3 | `art/generated/ui/bubble_tail.png` | `(new)` | New: the speech bubble's tail, pointing up from the bubble's top edge: night10 with a 1px night2 outline along its two slanted sides and its tip; its bottom row night10 with no outline, so it covers the bubble's border where they join. |
 
 ## fx
 

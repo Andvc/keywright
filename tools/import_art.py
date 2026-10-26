@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Builds assets/ from the art drawn in tools/custom_art.py and the Kenney font and sounds. Re-run after changing a
-drawing there or a mapping below.
+"""Builds assets/ from Keywright's art and the Kenney font and sounds. Re-run after the art changes.
 
 Sources:
-  - The pictures (things, portraits, chests, curios, backdrops, effects): drawn in code by tools/custom_art.py for
-    Keywright; the UI frames and icons below are drawn here.
+  - The pictures: art/generated/ (the dedicated art, made to the brief in art/; see art/README.md), at their native
+    sizes, scaled here where a slot wants them bigger. Anything missing there falls back to the placeholder drawn in
+    code by tools/custom_art.py (things, portraits, chests, curios, backdrops, effects) or below (UI frames, icons),
+    scaled to the same sizes.
   - Kenney Font Package, Impact Sounds, RPG Audio, Casino Audio, Interface Sounds (CC0, see CREDITS.md)
     https://kenney.nl (mirror: github.com/ETdoFresh/kenney.nl)
 
@@ -23,6 +24,25 @@ import custom_art
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(ROOT, "assets")
+GENERATED = os.path.join(ROOT, "art", "generated")
+
+# A portrait's face, for the small places (the waiting queue, the ledger's rows): the 38x38 box every portrait keeps
+# its face in (art/ART_DIRECTION.md's composition template).
+FACE = (19, 14, 57, 52)
+
+
+def gen(*parts):
+    """A picture from art/generated, or None if it wasn't delivered."""
+    path = os.path.join(GENERATED, *parts)
+    return Image.open(path).convert("RGBA") if os.path.exists(path) else None
+
+
+def scaled(img, k):
+    return img.resize((img.width * k, img.height * k), Image.NEAREST)
+
+
+def trimmed(img):
+    return img.crop(img.getbbox())
 
 KENNEY = ("https://github.com/ETdoFresh/kenney.nl", [
     "kenney_fontpackage", "kenney_impactsounds", "kenney_rpgaudio", "kenney_casinoaudio", "kenney_interfacesounds",
@@ -116,6 +136,12 @@ def save(image, *parts):
 
 
 def build_chests():
+    """The chest's parts (lid, body, open) in each finish, and the lock makers' overlays: 96 art pixels wide, shown at
+    2x. The placeholder is 16 wide, so it's scaled 6x to the same geometry."""
+    if gen("chest", "wood_lid.png"):
+        for name in sorted(os.listdir(os.path.join(GENERATED, "chest"))):
+            save(gen("chest", name), "sprites", "chest", name)
+        return
     closed, opened = custom_art.chest()
     base = [hex_rgb(c) for c in CHEST_BASE]
     for skin, colors in CHEST_SKINS.items():
@@ -129,43 +155,78 @@ def build_chests():
                     r, g, b, a = px[x, y]
                     if a and (r, g, b) in swap:
                         px[x, y] = (*swap[(r, g, b)], a)
-            return out
+            return scaled(out, 6)
 
-        if skin == "purple":
-            # The window icon: the purple chest at 4x, centred on a 64px square.
-            icon = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
-            icon.alpha_composite(recolor(closed).resize((64, 56), Image.NEAREST), (0, 4))
-            save(icon, "ui", "icon.png")
         save(recolor(closed.crop((0, LID_ROWS[0], 16, LID_ROWS[1]))), "sprites", "chest", f"{skin}_lid.png")
         save(recolor(closed.crop((0, BODY_ROWS[0], 16, BODY_ROWS[1]))), "sprites", "chest", f"{skin}_body.png")
         save(recolor(opened.crop((0, OPEN_BODY_ROWS[0], 16, OPEN_BODY_ROWS[1]))), "sprites", "chest", f"{skin}_open.png")
 
 
+def build_brand():
+    """The logo (title screen), the window icon (the purple chest with a key) and the .exe's, from the icon drawn for
+    each size (16 to 64; 128 and 256 are the 64 scaled up)."""
+    logo = gen("brand", "logo.png")
+    if logo:
+        save(logo, "ui", "logo.png")
+    sizes = [gen("brand", f"app_icon_{n}.png") for n in (16, 32, 48, 64)]
+    if all(sizes):
+        big = [scaled(sizes[-1], 2), scaled(sizes[-1], 4)]
+        os.makedirs(os.path.join(ASSETS, "ui"), exist_ok=True)
+        big[-1].save(os.path.join(ASSETS, "ui", "icon.ico"), format="ICO", sizes=[(n, n) for n in (16, 32, 48, 64, 128, 256)],
+                     append_images=sizes + big[:1])
+    icon = gen("brand", "app_icon_64.png")
+    if icon is None:
+        closed, _ = custom_art.chest()
+        swap = dict(zip([hex_rgb(c) for c in CHEST_BASE], [hex_rgb(c) for c in CHEST_SKINS["purple"]]))
+        closed = closed.copy()
+        px = closed.load()
+        for y in range(closed.height):
+            for x in range(closed.width):
+                r, g, b, a = px[x, y]
+                if a and (r, g, b) in swap:
+                    px[x, y] = (*swap[(r, g, b)], a)
+        icon = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+        icon.alpha_composite(closed.resize((64, 56), Image.NEAREST), (0, 4))
+    save(icon, "ui", "icon.png")
+
+
 def build_ui():
-    """Pixel-art 9-slice frames, pre-scaled so one art pixel is UI_SCALE screen pixels."""
-    k, hi, fill, lo = (2, 2, 2, 255), (59, 49, 80, 255), (29, 24, 40, 255), (18, 14, 26, 255)
-    white, light, mid, dark = (255, 255, 255, 255), (235, 235, 235, 255), (190, 190, 190, 255), (130, 130, 130, 255)
+    """Pixel-art 9-slice frames: 12x12 art, shown at 2x (UiKit.Px), with 4-pixel slice margins. The panel's colours are
+    its own; the frame and the buttons are greys the game tints."""
+    pieces = ("panel", "frame", "button", "button_pressed", "slip_paper", "bubble", "bubble_tail")
+    if gen("ui", "panel.png"):
+        for name in pieces:
+            art = gen("ui", f"{name}.png")
+            if art:
+                save(scaled(art, 2), "ui", f"{name}.png")
+        return
+    k0, k1, k2, k3, k4 = (11, 8, 16, 255), (26, 20, 32, 255), (43, 34, 54, 255), (59, 49, 80, 255), (194, 144, 38, 255)
     clear = (0, 0, 0, 0)
 
-    def frame(fill_color, top, bottom, border=None, size=8):
-        img = Image.new("RGBA", (size, size), fill_color)
+    def frame(fill, top, bottom, border, gold=None, size=12):
+        img = Image.new("RGBA", (size, size), fill)
         px = img.load()
         for i in range(size):
-            px[i, 0] = px[i, size - 1] = px[0, i] = px[size - 1, i] = k
+            px[i, 0] = px[i, size - 1] = px[0, i] = px[size - 1, i] = border
         for i in range(1, size - 1):
             px[i, 1], px[1, i] = top, top
             px[i, size - 2], px[size - 2, i] = bottom, bottom
-        if border:
-            for i in range(1, size - 1):
-                px[i, 1] = px[i, size - 2] = px[1, i] = px[size - 2, i] = border
         for x, y in [(0, 0), (size - 1, 0), (0, size - 1), (size - 1, size - 1)]:
             px[x, y] = clear
-        return img.resize((size * UI_SCALE, size * UI_SCALE), Image.NEAREST)
+        if gold:
+            for x, y in [(2, 2), (size - 3, 2), (2, size - 3), (size - 3, size - 3)]:
+                px[x, y] = gold
+        return scaled(img, 2)
 
-    save(frame(fill, hi, lo), "ui", "panel.png")
-    save(frame(clear, white, white, border=white), "ui", "frame.png")
-    save(frame(mid, light, dark), "ui", "button.png")
-    save(frame(dark, dark, light), "ui", "button_pressed.png")
+    save(frame(k2, k3, k1, k0, gold=k4), "ui", "panel.png")
+    line = Image.new("RGBA", (12, 12), clear)
+    px = line.load()
+    for i in range(2, 10):
+        px[i, 1] = px[i, 10] = px[1, i] = px[10, i] = (255, 255, 255, 255)
+    save(scaled(line, 2), "ui", "frame.png")
+    grey = lambda v: (v, v, v, 255)
+    save(frame(grey(190), grey(235), grey(130), grey(2)), "ui", "button.png")
+    save(frame(grey(130), grey(130), grey(235), grey(2)), "ui", "button_pressed.png")
 
 
 # Tool and upgrade icons, 16x16 pixel art drawn here (no CC0 pack has these), pre-scaled like the UI frames.
@@ -859,38 +920,100 @@ def build_shops():
     shops[4] = img
 
     for tier, img in shops.items():
-        save(img, "backgrounds", f"shop{tier}.png")
+        save(gen("backgrounds", f"shop{tier}.png") or img, "backgrounds", f"shop{tier}.png")
 
 
 def build_items():
-    """Each thing's sprite, for the opening (shown 2x) and, the same picture, for the small slots (the collection, the
-    exhibition, the keep chooser), so a thing looks the same everywhere."""
+    """Each thing's sprite (32x32 art, trimmed to what's drawn), for the opening and the shelf (2x) and the same picture
+    for the small slots (the collection, the exhibition, the keep chooser), so a thing looks the same everywhere."""
     for key, img in custom_art.items().items():
-        img = img.crop(img.getbbox())
+        art = gen("items", f"{key}.png") or gen("heartsongs", f"{key}.png")
+        img = trimmed(art if art else img)
         save(img, "sprites", "items", f"{key}.png")
         save(img, "sprites", "items", "icons", f"{key}.png")
 
 
+def build_portraits():
+    """Every face (76x76, shown 2x at the counter, 3x in scenes, 1x in the ledger), and its 38x38 face for the small
+    places; the placeholders are 38x38, so they're scaled 2x."""
+    drawn = custom_art.portraits()
+    keys = list(drawn) + [k for k in ("mara", "king") if gen("portraits", f"{k}.png")]
+    for key in keys:
+        art = gen("portraits", f"{key}.png")
+        img = art if art else scaled(drawn[key], 2)
+        save(img, "sprites", "sellers", f"{key}.png")
+        save(img.crop(FACE), "sprites", "sellers", "faces", f"{key}.png")
+
+
 def build_curios():
+    """Curios fill a 56px slot at 2x: 28x28 art, or a 24x24 placeholder centred."""
     for key, img in custom_art.curios().items():
-        img = img.crop(img.getbbox())
-        img = img.resize((img.width * 2, img.height * 2), Image.NEAREST)
+        art = gen("curios", f"{key}.png")
+        if art:
+            save(scaled(art, 2), "ui", "curios", f"{key}.png")
+            continue
+        img = scaled(trimmed(img), 2)
         slot = Image.new("RGBA", (CURIO_SLOT, CURIO_SLOT), (0, 0, 0, 0))
         slot.alpha_composite(img, ((CURIO_SLOT - img.width) // 2, (CURIO_SLOT - img.height) // 2))
         save(slot, "ui", "curios", f"{key}.png")
 
 
 def build_signs():
-    """The Gilded Guild's sign and a shard of the Aldric Key (the story's four), at 2x."""
-    for name, img in (("guild", custom_art.guild_sign()), ("key", custom_art.key_shard())):
-        save(img.resize((img.width * 2, img.height * 2), Image.NEAREST), "ui", f"{name}.png")
+    """The Gilded Guild's emblem, and the Aldric Key whole and in its four shards, at 2x. Each shard keeps its place on the
+    whole key's canvas, so the ones you hold stack back into the key."""
+    save(scaled(gen("emblems", "guild.png") or custom_art.guild_sign(), 2), "ui", "guild.png")
+    whole = gen("story", "key_whole.png")
+    if whole:
+        save(scaled(whole, 2), "ui", "key_whole.png")
+        for n in range(1, 5):
+            save(scaled(gen("story", f"key_shard_{n}.png"), 2), "ui", f"key_{n}.png")
+        return
+    shard = custom_art.key_shard()
+    whole = Image.new("RGBA", (96, 24), (0, 0, 0, 0))
+    for n in range(1, 5):
+        piece = Image.new("RGBA", (96, 24), (0, 0, 0, 0))
+        piece.alpha_composite(shard, ((n - 1) * 24, (24 - shard.height) // 2))
+        whole.alpha_composite(piece)
+        save(scaled(piece, 2), "ui", f"key_{n}.png")
+    save(scaled(whole, 2), "ui", "key_whole.png")
 
 
 def build_icons():
-    for name, rows in ICONS.items():
-        save(pixel_icon(rows, name).resize((16 * UI_SCALE, 16 * UI_SCALE), Image.NEAREST), "ui", "icons", f"{name}.png")
+    """An icon per upgrade (24x24 art at 2x: 48px) and per kind of thing (16x16 at 2x: 32px)."""
+    folder = os.path.join(GENERATED, "icons")
+    if os.path.isdir(folder):
+        for name in sorted(os.listdir(folder)):
+            if name.startswith("upgrade_"):
+                save(scaled(gen("icons", name), 2), "ui", "icons", name[len("upgrade_"):])
+    else:
+        for name, rows in ICONS.items():
+            save(pixel_icon(rows, name).resize((16 * UI_SCALE, 16 * UI_SCALE), Image.NEAREST), "ui", "icons", f"{name}.png")
     for name, rows in KIND_ICONS.items():
-        save(pixel_icon(rows, name).resize((32, 32), Image.NEAREST), "ui", "kinds", f"{name}.png")
+        art = gen("kinds", f"kind_{name}.png")
+        save(scaled(art, 2) if art else pixel_icon(rows, name).resize((32, 32), Image.NEAREST), "ui", "kinds", f"{name}.png")
+
+
+def build_effects():
+    """The burst (a row of frames the game tints and adds), the spinning coin, a sparkle and a puff of dust; and the
+    faces of the three lock makers' locks, for picking."""
+    save(gen("fx", "explosion.png") or custom_art.burst(), "sprites", "fx", "burst.png")
+    for name in ("coin_spin", "sparkle", "dust"):
+        art = gen("fx", f"{name}.png")
+        if art:
+            save(art, "sprites", "fx", f"{name}.png")
+    for maker in ("rusty", "guild", "dwarven"):
+        art = gen("lockpick", f"face_{maker}.png")
+        if art:
+            save(art, "sprites", "lockpick", f"face_{maker}.png")
+
+
+def build_scenes():
+    """The story's own backdrops (640x360, at 2x), where there are any: Bram's back room, the Guild's counting-house,
+    the Keyhold, the vault under the Gate."""
+    for key in ("bram", "guild", "keyhold", "vault"):
+        art = gen("scenes", f"{key}.png")
+        if art:
+            save(art, "backgrounds", f"scene_{key}.png")
 
 
 def pixel_icon(rows, name):
@@ -921,13 +1044,14 @@ def main():
                 os.remove(path)
 
     build_items()
-    for key, img in custom_art.portraits().items():
-        save(img, "sprites", "sellers", f"{key}.png")
-    save(custom_art.burst(), "sprites", "fx", "burst.png")
+    build_portraits()
+    build_effects()
     build_chests()
+    build_brand()
     build_curios()
     build_signs()
     build_shops()
+    build_scenes()
     build_ui()
     build_icons()
 

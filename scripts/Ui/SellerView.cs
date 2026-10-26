@@ -6,7 +6,7 @@ namespace Keywright.Ui;
 /// <summary>The person across the counter: face, name, and what they're saying, in a bubble under them.</summary>
 public partial class SellerView : Node2D
 {
-    const int FaceScale = 4;
+    const int FaceScale = 2;
     public const float BubbleW = 280, BubbleH = 150;
 
     readonly SellerDef _seller;

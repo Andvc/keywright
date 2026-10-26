@@ -2,18 +2,42 @@ using Godot;
 
 namespace Keywright.Ui;
 
-/// <summary>Particle presets and pixel effects for the "juice".</summary>
+/// <summary>
+/// Particle presets and pixel effects for the "juice". The sprite sheets (assets/sprites/fx: the burst, the spinning
+/// coin, a sparkle, a puff of dust) are rows of frames at their art size, shown at 2x or more.
+/// </summary>
 public static class Fx
 {
-    const int BurstFrames = 6;
+    const int BurstFrames = 8, CoinFrames = 6, SparkleFrames = 4, DustFrames = 5;
 
-    static Texture2D _pixel;
-    static Texture2D _coin;
-    static SpriteFrames _burst;
+    static Texture2D _pixel, _coin, _sparkle;
+    static SpriteFrames _burst, _dust;
 
     /// <summary>A hard 2x2 square: scaled up, particles read as chunky pixels rather than soft dots.</summary>
     public static Texture2D Pixel => _pixel ??= MakeSquare(2);
-    public static Texture2D Coin => _coin ??= GD.Load<Texture2D>("res://assets/sprites/items/dwarf_gold_crowns.png");
+
+    /// <summary>A gold coin spinning: <see cref="CoinFrames"/> frames in a row (a sprite's Hframes, or particles').</summary>
+    public static Texture2D Coin => _coin ??= GD.Load<Texture2D>("res://assets/sprites/fx/coin_spin.png");
+
+    static Texture2D Sparkle => _sparkle ??= GD.Load<Texture2D>("res://assets/sprites/fx/sparkle.png");
+
+    /// <summary>Particles that play a row of frames (the coin's spin, a sparkle's twinkle) over their life.</summary>
+    static CanvasItemMaterial Animated(int frames, bool additive) => new()
+    {
+        BlendMode = additive ? CanvasItemMaterial.BlendModeEnum.Add : CanvasItemMaterial.BlendModeEnum.Mix,
+        ParticlesAnimation = true,
+        ParticlesAnimHFrames = frames,
+        ParticlesAnimVFrames = 1,
+        ParticlesAnimLoop = true,
+    };
+
+    /// <summary>A coin that spins as it goes (two turns a second), at 2x.</summary>
+    public static Sprite2D SpinningCoin(Vector2 at)
+    {
+        var coin = new Sprite2D { Texture = Coin, Hframes = CoinFrames, Scale = Vector2.One * 2, Position = at };
+        coin.CreateTween().SetLoops().TweenProperty(coin, "frame", CoinFrames - 1, 0.45f).From(0);
+        return coin;
+    }
 
     public static CanvasItemMaterial Additive() => new() { BlendMode = CanvasItemMaterial.BlendModeEnum.Add };
 
@@ -45,6 +69,7 @@ public static class Fx
         };
     }
 
+    /// <summary>A fountain of spinning gold coins.</summary>
     public static CpuParticles2D Coins(int amount) => new()
     {
         Emitting = false,
@@ -53,28 +78,52 @@ public static class Fx
         Lifetime = 1.8f,
         Explosiveness = 0.9f,
         Texture = Coin,
+        Material = Animated(CoinFrames, additive: false),
+        AnimSpeedMin = 3,
+        AnimSpeedMax = 5,
+        AnimOffsetMax = 1,
         Direction = Vector2.Up,
         Spread = 50,
         InitialVelocityMin = 450,
         InitialVelocityMax = 850,
         Gravity = new Vector2(0, 1400),
-        ScaleAmountMin = 1.5f,
+        ScaleAmountMin = 2f,
         ScaleAmountMax = 2f,
     };
 
-    /// <summary>A one-shot spark burst that frees itself.</summary>
+    /// <summary>A one-shot burst of sparks, and a few sparkles twinkling among them, that frees itself.</summary>
     public static void Burst(Node parent, Vector2 position, Color color, int amount = 40, float speed = 260f)
     {
         var particles = Sparks(color, amount, speed * 0.4f, speed, spread: 180f, lifetime: 0.8f, gravity: 200f);
         particles.Position = position;
         parent.AddChild(particles);
         particles.Emitting = true;
+        var twinkles = Sparks(color, Mathf.Max(4, amount / 6), speed * 0.2f, speed * 0.7f, spread: 180f, lifetime: 0.9f, gravity: 80f);
+        twinkles.Texture = Sparkle;
+        twinkles.Material = Animated(SparkleFrames, additive: true);
+        twinkles.AnimSpeedMin = twinkles.AnimSpeedMax = 1;
+        twinkles.ScaleAmountMin = twinkles.ScaleAmountMax = 2f;
+        twinkles.Position = position;
+        parent.AddChild(twinkles);
+        twinkles.Emitting = true;
         parent.GetTree().CreateTimer(1.2).Timeout += particles.QueueFree;
+        parent.GetTree().CreateTimer(1.2).Timeout += twinkles.QueueFree;
     }
 
-    /// <summary>A puff of dust where something lands, freed when done.</summary>
+    /// <summary>A puff of dust where something lands (the dust cloud, and a scatter of grit), freed when done.</summary>
     public static void Dust(Node parent, Vector2 position, float strength = 1f)
     {
+        var cloud = new AnimatedSprite2D
+        {
+            SpriteFrames = DustPuff(),
+            Position = position + new Vector2(0, -8 * (strength >= 1.5f ? 3 : 2)),
+            Scale = Vector2.One * (strength >= 1.5f ? 3 : 2),
+            Modulate = new Color("#c9b79a") with { A = 0.85f },
+        };
+        parent.AddChild(cloud);
+        cloud.AnimationFinished += cloud.QueueFree;
+        cloud.Play("puff");
+
         var ramp = new Gradient();
         ramp.Offsets = new[] { 0f, 1f };
         ramp.Colors = new[] { new Color("#c9b79a") with { A = 0.8f }, new Color("#c9b79a") with { A = 0f } };
@@ -103,7 +152,7 @@ public static class Fx
         parent.GetTree().CreateTimer(1.0).Timeout += dust.QueueFree;
     }
 
-    /// <summary>The pixel explosion ring (drawn in tools/custom_art.py), played once and freed.</summary>
+    /// <summary>The burst (a star, a ring of light and debris, puffs), tinted, played once and freed.</summary>
     public static void Explosion(Node parent, Vector2 position, int scale, Color tint)
     {
         var sprite = new AnimatedSprite2D
@@ -119,19 +168,23 @@ public static class Fx
         sprite.Play("burst");
     }
 
-    static SpriteFrames ExplosionFrames()
+    static SpriteFrames ExplosionFrames() => _burst ??= Frames("res://assets/sprites/fx/burst.png", BurstFrames, "burst", 20);
+
+    static SpriteFrames DustPuff() => _dust ??= Frames("res://assets/sprites/fx/dust.png", DustFrames, "puff", 12);
+
+    /// <summary>A row of equal frames as a one-shot animation.</summary>
+    static SpriteFrames Frames(string path, int count, string name, int fps)
     {
-        if (_burst != null) return _burst;
-        var sheet = GD.Load<Texture2D>("res://assets/sprites/fx/burst.png");
-        int w = sheet.GetWidth() / BurstFrames, h = sheet.GetHeight();
-        _burst = new SpriteFrames();
-        _burst.RemoveAnimation("default");
-        _burst.AddAnimation("burst");
-        _burst.SetAnimationLoopMode("burst", SpriteFrames.LoopMode.None);
-        _burst.SetAnimationSpeed("burst", 16);
-        for (int i = 0; i < BurstFrames; i++)
-            _burst.AddFrame("burst", new AtlasTexture { Atlas = sheet, Region = new Rect2(i * w, 0, w, h) });
-        return _burst;
+        var sheet = GD.Load<Texture2D>(path);
+        int w = sheet.GetWidth() / count, h = sheet.GetHeight();
+        var frames = new SpriteFrames();
+        frames.RemoveAnimation("default");
+        frames.AddAnimation(name);
+        frames.SetAnimationLoopMode(name, SpriteFrames.LoopMode.None);
+        frames.SetAnimationSpeed(name, fps);
+        for (int i = 0; i < count; i++)
+            frames.AddFrame(name, new AtlasTexture { Atlas = sheet, Region = new Rect2(i * w, 0, w, h) });
+        return frames;
     }
 
     /// <summary>A beam of light standing on a spot (a rare find), fading out.</summary>

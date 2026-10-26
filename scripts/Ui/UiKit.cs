@@ -7,10 +7,10 @@ namespace Keywright.Ui;
 public static class UiKit
 {
     /// <summary>Screen pixels per UI art pixel. The 9-slice frames in assets/ui are pre-scaled by this.</summary>
-    public const int Px = 3;
+    public const int Px = 2;
 
-    /// <summary>9-slice margin: outline + bevel + one pixel of fill.</summary>
-    const int Slice = 3 * Px;
+    /// <summary>9-slice margin: the frames are 12x12 art with 4-pixel margins (outline, bevel, a corner rivet and fill).</summary>
+    const int Slice = 4 * Px;
 
     static Font _font;
     static Texture2D _panel, _frame, _button, _buttonPressed;
@@ -136,15 +136,19 @@ public static class UiKit
         };
     }
 
+    /// <summary>The square every thing's art fits in (trimmed, a sprite is at most this): slots scale by it, so things
+    /// side by side are all at the same scale and their sizes compare.</summary>
+    const int ThingArt = 30;
+
     /// <summary>
-    /// A thing's own sprite for a small slot, the same picture it had when it came out of the chest: its icon at the
-    /// largest integer scale that fits a <paramref name="box"/>-pixel square, centered on
+    /// A thing's own sprite for a small slot, the same picture it had when it came out of the chest: at the largest
+    /// integer scale at which any thing would fit a <paramref name="box"/>-pixel square, centered on
     /// <paramref name="center"/> (or standing on it). Something enchanted glows behind it; fakes and broken things look dull.
     /// </summary>
     public static Node2D MakeItemIcon(Core.Item item, Vector2 center, float box, bool standing = false)
     {
         var texture = GD.Load<Texture2D>($"res://assets/sprites/items/icons/{item.Sprite}.png");
-        int scale = Math.Max(1, (int)(box / Math.Max(texture.GetWidth(), texture.GetHeight())));
+        int scale = Math.Max(1, (int)(box / ThingArt));
         var middle = standing ? new Vector2(0, -texture.GetHeight() * scale / 2f) : Vector2.Zero;
         var icon = new Node2D { Position = center };
         if (item.Magic && !item.Broken)
@@ -257,14 +261,18 @@ public static class UiKit
     /// Emporium (640x360 pictures from tools/import_art.py, at 2x). Dimmed behind screens where the UI and effects
     /// should stand out. The counter's top edge is at y 476; the display shelf (from the village shop) at y 196.
     /// </summary>
-    public static Node2D MakeShop(int tier, float brightness = 1f)
+    public static Node2D MakeShop(int tier, float brightness = 1f) =>
+        MakeBackdrop($"res://assets/backgrounds/shop{Math.Clamp(tier, 1, Core.ShopTiers.Max)}.png", brightness);
+
+    /// <summary>A 640x360 picture filling the screen at 2x, dimmed to <paramref name="brightness"/>, with a vignette.</summary>
+    public static Node2D MakeBackdrop(string path, float brightness = 1f)
     {
         var root = new Node2D();
         // Beyond the picture's edges, for when the camera shakes or leans in.
         root.AddChild(new ColorRect { Color = Palette.Bg, MouseFilter = Control.MouseFilterEnum.Ignore }.Place(-120, -120, 1520, 960));
         root.AddChild(new Sprite2D
         {
-            Texture = GD.Load<Texture2D>($"res://assets/backgrounds/shop{Math.Clamp(tier, 1, Core.ShopTiers.Max)}.png"),
+            Texture = GD.Load<Texture2D>(path),
             Centered = false,
             Scale = Vector2.One * 2,
             Modulate = new Color(brightness, brightness, brightness * 1.03f),

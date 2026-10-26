@@ -25,11 +25,13 @@ public partial class OpeningPhase : Phase
     enum Step { Build, Burst, Reveal, Done }
 
     const float BuildSeconds = 0.9f;
-    const int ChestPixel = 14;
     const float LandY = 564;
 
     /// <summary>The chest's origin is its lid seam, where light and loot come out.</summary>
     static readonly Vector2 SeamPos = new(640, 400);
+
+    /// <summary>Where things come out of the open chest: inside it, just behind the rim.</summary>
+    static readonly Vector2 Mouth = SeamPos + new Vector2(0, -42);
 
     /// <summary>Where a better-than-expected find hangs while it climbs.</summary>
     static readonly Vector2 HoverPos = new(640, 236);
@@ -61,7 +63,9 @@ public partial class OpeningPhase : Phase
 
         Add(UiKit.MakeShop(State.Tier, 0.42f));
         _rays = Add(new Painter(DrawRays) { Position = SeamPos, Material = Fx.Additive() });
-        _chest = Add(new ChestView { Position = SeamPos, PixelSize = ChestPixel, Skin = _purchase.Chest.Skin, GlowColor = Palette.Of(_colour) });
+        // The Crown Chest is King Aldric's own.
+        string skin = _purchase.Visit.Seller == Story.VaultSeller ? "crown" : _purchase.Chest.Skin;
+        _chest = Add(new ChestView { Position = SeamPos, Skin = skin, GlowColor = Palette.Of(_colour) });
         // The burst is in the chest's own colour: what's better than that is for the things inside to show.
         _sparks = Add(Fx.Sparks(Palette.Of(_colour), 140, 280, 820, spread: 70f, lifetime: 1.4f));
         _sparks.Position = SeamPos;
@@ -157,7 +161,7 @@ public partial class OpeningPhase : Phase
         _chest.GlowColor = color;
         FlingLid(_chest.DetachLid());
         _chest.ShowOpen();
-        Fx.Explosion(this, SeamPos + new Vector2(0, -ChestPixel * 2), 4, color.Lightened(0.3f));
+        Fx.Explosion(this, SeamPos + new Vector2(0, -28), 3, color.Lightened(0.3f));
         Fx.Dust(this, SeamPos + new Vector2(-90, 70), 1.5f);
         Fx.Dust(this, SeamPos + new Vector2(90, 70), 1.5f);
         _sparks.Emitting = true;
@@ -283,12 +287,13 @@ public partial class OpeningPhase : Phase
     /// <summary>Where a thing stands on the table, however tall it is.</summary>
     static Vector2 TableSpot(float x, Texture2D texture, int scale) => new(x, LandY - texture.GetHeight() * scale / 2f);
 
-    static int ScaleFor(Texture2D texture) => Math.Max(1, (int)MathF.Min(64f / texture.GetHeight(), 72f / texture.GetWidth()));
+    /// <summary>Every thing on the table is shown at the same scale (its art's 2x), so a purse looks smaller than a sword.</summary>
+    const int ThingScale = 2;
 
     Sprite2D MakeSprite(Item item, out int scale)
     {
         var texture = GD.Load<Texture2D>($"res://assets/sprites/items/{item.Sprite}.png");
-        scale = ScaleFor(texture);
+        scale = ThingScale;
         var sprite = Add(new Sprite2D { Texture = texture, Scale = Vector2.One * scale, ZIndex = 7 });
         if (item.Fake) sprite.Modulate = new Color(0.75f, 0.75f, 0.8f);
         return sprite;
@@ -299,7 +304,7 @@ public partial class OpeningPhase : Phase
     {
         var sprite = MakeSprite(read.Item, out int scale);
         var land = TableSpot(x, sprite.Texture, scale);
-        var start = SeamPos + new Vector2(0, -ChestPixel * 3);
+        var start = Mouth;
         float height = 240 + 40 * index;
         float spin = (index % 2 == 0 ? 1 : -1) * Mathf.Tau;
         Sfx.Play("whoosh", 1.4f + 0.1f * index, -12);
@@ -321,7 +326,7 @@ public partial class OpeningPhase : Phase
     {
         var item = read.Item;
         var sprite = MakeSprite(item, out int scale);
-        var start = SeamPos + new Vector2(0, -ChestPixel * 3);
+        var start = Mouth;
         var peak = new Vector2(Mathf.Lerp(start.X, x, 0.3f), start.Y - 170);
         sprite.Position = start;
         sprite.Modulate = Palette.Of(_colour).Lightened(0.3f);
@@ -364,7 +369,7 @@ public partial class OpeningPhase : Phase
         var item = read.Item;
         int steps = StepsUp(item);
         var sprite = MakeSprite(item, out int scale);
-        var start = SeamPos + new Vector2(0, -ChestPixel * 3);
+        var start = Mouth;
         sprite.Position = start;
         sprite.Scale = Vector2.One * scale * 0.5f;
         // It shows the colour it was expected to be until it proves otherwise.
@@ -437,7 +442,7 @@ public partial class OpeningPhase : Phase
     {
         var item = read.Item;
         _chest.Wobble(0.5f);
-        var reveal = Add(new SongReveal(item, SeamPos + new Vector2(0, -ChestPixel * 3)));
+        var reveal = Add(new SongReveal(item, Mouth));
         _songReveal = reveal;
         bool keep = await reveal.Chosen;
         _songReveal = null;
@@ -1029,7 +1034,7 @@ public partial class OpeningPhase : Phase
         var layer = Add(new CanvasLayer { Layer = 11 });
         for (int i = 0; i < count; i++)
         {
-            var coin = new Sprite2D { Texture = Fx.Coin, Scale = Vector2.One * 2, Position = from };
+            var coin = Fx.SpinningCoin(from);
             layer.AddChild(coin);
             var spread = new Vector2((float)GD.RandRange(-160, 160), (float)GD.RandRange(-90, 40));
             float delay = i * 0.035f;

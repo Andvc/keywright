@@ -2,17 +2,18 @@
 
 ## Art
 
-The pictures are Keywright's own, drawn for this game as pixel art in code (placeholders, until dedicated art replaces
-them), so anyone can rebuild them with `python3 tools/import_art.py`:
+The pictures were made for Keywright (0.23) to the brief in `art/`: one style (`art/ART_DIRECTION.md`), one palette
+(`art/palette/`), and every asset's spec and prompt (`art/manifest.json`). A Codex workflow generated them with OpenAI's
+image generation (GPT-Image-2 requested), then fitted each to the game's pixel grid, palette and outline and checked it
+with `art/tools/pixelize.py` and `validate.py`; `art/generated/DELIVERY.md` records how each batch was made and every
+prompt change. They're in `art/generated/`: the four shops behind the counter and four story scenes, 38 portraits, the
+33 things in chests and the nine Heartsongs, the 79 curios, the chest in seven finishes with the three lock makers'
+locks and their faces, an icon for each upgrade and each kind of thing, the Gilded Guild's emblem, the Aldric Key and
+its four shards, the UI frames, the burst, coin, sparkle and dust, the logo and the app icons.
+`python3 tools/import_art.py` builds `assets/` from them.
 
-- `tools/custom_art.py`: the 33 things in chests (six kinds, five qualities, three fakes), the nine Heartsongs, the
-  portraits of every seller, Bram, his kin, Mister Vane, Nim, the Hooded Woman and the Stranger, each against the place
-  they come from; the chest (recoloured per lot origin), the shards of the Aldric Key, the Gilded Guild's sign, the 25 curios, the
-  four places behind the counter (the Brindle crossroads at dusk, Thornwick's stone wall onto the Old Wood,
-  Crownhold's roofs and palace, the Royal Emporium's colonnade and the Gilded Gate), the props on the counters, and
-  the burst a chest opens with.
-- `tools/import_art.py`: the 9-slice frames, the tool, upgrade and kind icons, and the shops' architecture (awning,
-  beams, panelling, drapes, shelves and counters).
+Until 0.23 the pictures were placeholders drawn in code (`tools/custom_art.py`, with the frames, icons and shop
+architecture in `tools/import_art.py`); the importer still draws those for anything not yet in `art/generated/`.
 
 ## Font and sound
 

@@ -4,21 +4,38 @@ using Godot;
 namespace Keywright.Ui;
 
 /// <summary>
-/// The chest, drawn in tools/custom_art.py and split into lid and body by tools/import_art.py,
-/// plus the light that leaks from the seam. The node's origin is the centre of the lid seam.
+/// The chest in its finish (lid, body and the open box, 96 art pixels wide: art/generated/chest, built into assets/ by
+/// tools/import_art.py), its lock maker's hasp and plate over the seam, and the light that leaks from it. The node's
+/// origin is the centre of the lid seam.
 /// </summary>
 public partial class ChestView : Node2D
 {
-    const int ArtWidth = 16, LidRows = 7, BodyRows = 5, OpenRimRows = 5;
+    const int ArtWidth = 96, LidRows = 42, BodyRows = 30, OpenRimRows = 30;
+
+    static readonly string[] Makers = { null, "rusty", "guild", "dwarven" };
+
+    /// <summary>
+    /// A lock's maker, by <see cref="Core.LockTier.Index"/>, for its pictures (the chest's lock_{maker}_* overlays, the lock's
+    /// face when it's picked), or null for no lock.
+    /// </summary>
+    public static string Maker(int lockIndex) => lockIndex > 0 && lockIndex < Makers.Length ? Makers[lockIndex] : null;
 
     /// <summary>Screen pixels per art pixel. Set before adding to the tree.</summary>
-    public int PixelSize = 12;
+    public int PixelSize = 2;
 
-    /// <summary>Sprite set under res://assets/sprites/chest/ (red, blue, purple, wood, green).</summary>
-    public string Skin = "red";
+    /// <summary>Sprite set under res://assets/sprites/chest/ (wood, green, blue, purple, gold, black, crown).</summary>
+    public string Skin = "wood";
 
-    /// <summary>The lock plate's colour, by maker; null leaves the plain brass hasp of an unlocked chest.</summary>
-    public Color? LockColor;
+    /// <summary>Its lock, by maker (<see cref="Core.LockTier.Index"/>); 0 leaves the seat empty, as on a chest already opened.</summary>
+    public int Lock
+    {
+        get => _lock;
+        set
+        {
+            _lock = value;
+            if (_lid != null) FitLock();
+        }
+    }
 
     /// <summary>0..1 continuous jitter while the lid strains.</summary>
     public float Rumble;
@@ -35,13 +52,17 @@ public partial class ChestView : Node2D
     public float Top => -LidRows * PixelSize;
     public float Bottom => BodyRows * PixelSize;
 
+    /// <summary>The glow and its shafts are measured in sixteenths of the chest's width, whatever its art.</summary>
+    float Unit => Width / 16f;
+
     readonly Random _rng = new();
     Node2D _rig;
-    Sprite2D _lid, _body;
-    Painter _shadow, _backGlow, _seamLight, _lidLock, _bodyLock;
+    Sprite2D _lid, _body, _lidLock, _bodyLock;
+    Painter _shadow, _backGlow, _seamLight;
     float _time;
     float _wobble;
     bool _lidDetached, _open;
+    int _lock;
 
     public override void _Ready()
     {
@@ -65,11 +86,12 @@ public partial class ChestView : Node2D
         };
         _seamLight = new Painter(DrawSeamLight) { Material = Fx.Additive() };
 
-        // Lock plate overlays, drawn in art pixels on the sprites they belong to.
-        _lidLock = new Painter(DrawLidLock);
-        _bodyLock = new Painter(DrawBodyLock);
+        // The lock's hasp and plate: the size of the parts they sit on, so they lie on them exactly.
+        _lidLock = new Sprite2D();
+        _bodyLock = new Sprite2D { Centered = false };
         _lid.AddChild(_lidLock);
         _body.AddChild(_bodyLock);
+        FitLock();
 
         _rig.AddChild(_shadow);
         _rig.AddChild(_backGlow);
@@ -79,7 +101,14 @@ public partial class ChestView : Node2D
         PlaceLid();
     }
 
-    Texture2D Load(string part) => GD.Load<Texture2D>($"res://assets/sprites/chest/{Skin}_{part}.png");
+    Texture2D Load(string part, string skin = null) => GD.Load<Texture2D>($"res://assets/sprites/chest/{skin ?? Skin}_{part}.png");
+
+    void FitLock()
+    {
+        string maker = Maker(_lock);
+        _lidLock.Texture = maker == null ? null : Load("lid", $"lock_{maker}");
+        _bodyLock.Texture = maker == null || _open ? null : Load("body", $"lock_{maker}");
+    }
 
     /// <summary>A quick side-to-side rattle, e.g. when shaken.</summary>
     public void Wobble(float amount) => _wobble = Mathf.Max(_wobble, amount);
@@ -91,13 +120,13 @@ public partial class ChestView : Node2D
         return _lid;
     }
 
-    /// <summary>Swaps the body for the open sprite: gold rim and the dark interior.</summary>
+    /// <summary>Swaps the body for the open box: the lid gone, its rim and the dark inside.</summary>
     public void ShowOpen()
     {
         _open = true;
         _body.Texture = Load("open");
         _body.Position = new Vector2(-Width / 2, -OpenRimRows * PixelSize);
-        _bodyLock.Visible = false;
+        _bodyLock.Texture = null;
     }
 
     public override void _Process(double delta)
@@ -121,57 +150,42 @@ public partial class ChestView : Node2D
 
     void DrawShadow(Painter p)
     {
-        float y = Bottom + PixelSize * 0.5f;
+        float y = Bottom + Unit * 0.5f;
         float w = Width * 0.5f;
-        // Stepped oval: three flat rectangles read as a pixel-art shadow.
-        p.DrawRect(new Rect2(-w, y - PixelSize * 0.5f, w * 2, PixelSize), new Color(0, 0, 0, 0.35f));
-        p.DrawRect(new Rect2(-w * 0.85f, y - PixelSize, w * 1.7f, PixelSize * 2), new Color(0, 0, 0, 0.2f));
-    }
-
-    // The lock sits on the gold band: lid row 6 (cols 7-9), body row 0 (cols 6 and 9, keyhole 7-8), body row 1 (cols 6-9).
-    void DrawLidLock(Painter p)
-    {
-        if (LockColor is not Color c) return;
-        p.DrawRect(new Rect2(7 - ArtWidth / 2f, 6 - LidRows / 2f, 3, 1), c);
-    }
-
-    void DrawBodyLock(Painter p)
-    {
-        if (LockColor is not Color c) return;
-        p.DrawRect(new Rect2(6, 0, 1, 1), c);
-        p.DrawRect(new Rect2(9, 0, 1, 1), c);
-        p.DrawRect(new Rect2(6, 1, 4, 1), c.Darkened(0.3f));
+        // Stepped oval: flat rectangles read as a pixel-art shadow.
+        p.DrawRect(new Rect2(-w, y - Unit * 0.5f, w * 2, Unit), new Color(0, 0, 0, 0.35f));
+        p.DrawRect(new Rect2(-w * 0.85f, y - Unit, w * 1.7f, Unit * 2), new Color(0, 0, 0, 0.2f));
     }
 
     void DrawBackGlow(Painter p)
     {
         if (Glow <= 0.01f) return;
-        var center = new Vector2(0, -PixelSize * 2);
+        var center = new Vector2(0, -Unit * 2);
         for (int i = 6; i >= 1; i--)
         {
-            float r = PixelSize * (3 + i * 2.6f * (0.6f + Glow * 0.7f));
+            float r = Unit * (3 + i * 2.6f * (0.6f + Glow * 0.7f));
             p.DrawCircle(center, r, GlowColor with { A = 0.05f * Glow });
         }
         // Bright band behind the seam: visible only through the gap as the lid lifts.
         if (!_open)
-            p.DrawRect(new Rect2(-Width / 2 + PixelSize, -LidGap - 1, Width - 2 * PixelSize, LidGap + 2), GlowColor.Lightened(0.6f) with { A = Glow });
+            p.DrawRect(new Rect2(-Width / 2 + Unit, -LidGap - 1, Width - 2 * Unit, LidGap + 2), GlowColor.Lightened(0.6f) with { A = Glow });
     }
 
     void DrawSeamLight(Painter p)
     {
         if (Glow <= 0.01f) return;
         var c = GlowColor.Lightened(0.4f);
-        float y = _open ? -OpenRimRows * PixelSize + PixelSize : -LidGap * 0.5f;
-        float half = Width / 2 - PixelSize;
-        p.DrawRect(new Rect2(-half, y - PixelSize / 4f, half * 2, PixelSize / 2f), c with { A = 0.6f * Glow });
+        float y = _open ? -OpenRimRows * PixelSize + Unit : -LidGap * 0.5f;
+        float half = Width / 2 - Unit;
+        p.DrawRect(new Rect2(-half, y - Unit / 4f, half * 2, Unit / 2f), c with { A = 0.6f * Glow });
 
         const int shafts = 7;
         for (int i = 0; i < shafts; i++)
         {
             float x = -half * 0.85f + i * (half * 1.7f / (shafts - 1));
             float flicker = 0.6f + 0.4f * MathF.Sin(_time * 9 + i * 1.7f);
-            float h = PixelSize * (2 + 9 * Glow * flicker);
-            float w = PixelSize * 0.5f;
+            float h = Unit * (2 + 9 * Glow * flicker);
+            float w = Unit * 0.5f;
             var shaft = new[]
             {
                 new Vector2(x - w, y), new Vector2(x + w, y),

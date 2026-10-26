@@ -116,7 +116,7 @@ public partial class ShakeBox : Node2D
         _rest = _pos = _target = Position;
         Position = Vector2.Zero;
 
-        View = new ChestView { Position = _rest, PixelSize = 12, Skin = _chest.Skin };
+        View = new ChestView { Position = _rest, Skin = _chest.Skin };
         AddChild(View);
 
         _box = new AnimatableBody2D { SyncToPhysics = true, Position = _rest, CollisionLayer = 1, CollisionMask = 0 };

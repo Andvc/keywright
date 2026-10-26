@@ -8,18 +8,28 @@ using Keywright.Ui;
 namespace Keywright.Phases;
 
 /// <summary>
-/// A few lines between the people behind the story: Bram on the right, whoever he's talking to on the left, the one
-/// speaking lit and the other in shadow. Click (or Space) for the next line; Skip jumps to the end. Then it hands on.
+/// A few lines between the people behind the story, over the scene's own backdrop (or the shop, dimmed): Bram on the
+/// right, whoever he's talking to on the left, the one speaking lit and the other in shadow. Click (or Space) for the next
+/// line; Skip jumps to the end. Then it hands on.
 /// </summary>
 public partial class ScenePhase : Phase
 {
-    const int FaceScale = 6;
+    const int FaceScale = 3;
     static readonly Vector2 Left = new(250, 300), Right = new(1030, 300);
 
+    /// <summary>A face in the scene: who it shows now (Mara takes the Hooded Woman's place when she lowers her hood).</summary>
+    sealed class Face
+    {
+        public Node2D Root;
+        public Sprite2D Portrait;
+        public Label Name;
+        public string Who;
+    }
+
     readonly List<Line> _lines;
-    readonly string _title;
+    readonly string _title, _backdrop;
     readonly Action _then;
-    readonly Dictionary<string, Node2D> _faces = new();
+    readonly Dictionary<string, Face> _faces = new();
     Label _name, _text, _more;
     int _index = -1;
     bool _done;
@@ -27,12 +37,17 @@ public partial class ScenePhase : Phase
     /// <summary>The bot reads the lines through.</summary>
     public static Action<string> Trace;
 
-    public ScenePhase(List<Line> lines, Action then, string title = null)
+    /// <param name="backdrop">A picture under res://assets/backgrounds/scene_*.png (bram, guild, keyhold, vault), or the shop.</param>
+    public ScenePhase(List<Line> lines, Action then, string title = null, string backdrop = null)
     {
         _lines = lines;
         _then = then;
         _title = title;
+        _backdrop = backdrop;
     }
+
+    /// <summary>Whose place a speaker takes: Mara is the Hooded Woman, with her hood down.</summary>
+    static string Place(string speaker) => speaker == Story.Mara ? Story.Hood : speaker;
 
     public ScenePhase() { }
 
@@ -40,18 +55,19 @@ public partial class ScenePhase : Phase
 
     public override void _Ready()
     {
-        Add(UiKit.MakeShop(State.Tier, 0.3f));
+        Add(_backdrop == null ? UiKit.MakeShop(State.Tier, 0.3f) : UiKit.MakeBackdrop($"res://assets/backgrounds/scene_{_backdrop}.png", 0.6f));
         if (_title != null)
             Add(UiKit.MakeLabel(_title, 32, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 72, 1280, 40));
 
         // Bram stands on the right; everyone else takes the left, in the order they first speak.
-        var speakers = _lines.Select(l => l.Speaker).Distinct().ToList();
-        var others = speakers.Where(s => s != Story.Bram).ToList();
-        for (int i = 0; i < speakers.Count; i++)
+        var places = _lines.Select(l => Place(l.Speaker)).Distinct().ToList();
+        var others = places.Where(s => s != Story.Bram).ToList();
+        foreach (string place in places)
         {
-            string key = speakers[i];
-            var at = key == Story.Bram ? Right : Left + new Vector2(others.IndexOf(key) * 260, 0);
-            _faces[key] = Add(MakeFace(key, at));
+            var at = place == Story.Bram ? Right : Left + new Vector2(others.IndexOf(place) * 260, 0);
+            var face = MakeFace(_lines.First(l => Place(l.Speaker) == place).Speaker, at);
+            Add(face.Root);
+            _faces[place] = face;
         }
 
         var box = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.3f)).Place(140, 500, 1000, 160));
@@ -68,17 +84,22 @@ public partial class ScenePhase : Phase
         Advance();
     }
 
-    static Node2D MakeFace(string key, Vector2 at)
+    static Face MakeFace(string key, Vector2 at)
     {
-        var face = new Node2D { Position = at };
-        face.AddChild(UiKit.MakePanel(Palette.PanelBorder).Place(-128, -128, 256, 256));
-        face.AddChild(new Sprite2D
-        {
-            Texture = GD.Load<Texture2D>($"res://assets/sprites/sellers/{key}.png"),
-            Scale = Vector2.One * FaceScale,
-        });
-        face.AddChild(UiKit.MakeLabel(Story.Name(key), 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-200, 134, 400, 30));
+        var face = new Face { Root = new Node2D { Position = at }, Portrait = new Sprite2D { Scale = Vector2.One * FaceScale } };
+        face.Root.AddChild(UiKit.MakePanel(Palette.PanelBorder).Place(-128, -128, 256, 256));
+        face.Root.AddChild(face.Portrait);
+        face.Name = UiKit.MakeLabel("", 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-200, 134, 400, 30);
+        face.Root.AddChild(face.Name);
+        Show(face, key);
         return face;
+    }
+
+    static void Show(Face face, string key)
+    {
+        face.Who = key;
+        face.Portrait.Texture = GD.Load<Texture2D>($"res://assets/sprites/sellers/{key}.png");
+        face.Name.Text = Story.Name(key);
     }
 
     public override void _UnhandledInput(InputEvent e)
@@ -104,13 +125,19 @@ public partial class ScenePhase : Phase
         _name.Text = Story.Name(line.Speaker);
         _text.Text = line.Text;
         _more.Text = _index < _lines.Count - 1 ? "click for more" : "click to go on";
-        foreach (var (key, face) in _faces)
+        foreach (var (place, face) in _faces)
         {
-            bool speaking = key == line.Speaker;
-            face.Modulate = speaking ? Colors.White : new Color(0.45f, 0.42f, 0.5f);
+            bool speaking = place == Place(line.Speaker);
+            face.Root.Modulate = speaking ? Colors.White : new Color(0.45f, 0.42f, 0.5f);
             if (!speaking) continue;
-            face.Scale = Vector2.One * 1.04f;
-            face.CreateTween().TweenProperty(face, "scale", Vector2.One, 0.18f).SetTrans(Tween.TransitionType.Back);
+            if (face.Who != line.Speaker)
+            {
+                // The hood comes down.
+                Show(face, line.Speaker);
+                Game.Flash(Palette.Magic, 0.25f);
+            }
+            face.Root.Scale = Vector2.One * 1.04f;
+            face.Root.CreateTween().TweenProperty(face.Root, "scale", Vector2.One, 0.18f).SetTrans(Tween.TransitionType.Back);
         }
         Sfx.Play("tick", line.Speaker == Story.Vane ? 0.7f : line.Speaker == Story.Bram ? 1f : 1.25f, -8);
         Game.Moment($"20_scene_{line.Speaker}", 0.4);

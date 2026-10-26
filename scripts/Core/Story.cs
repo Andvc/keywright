@@ -18,7 +18,7 @@ public sealed record Line(string Speaker, string Text);
 /// </summary>
 public static class Story
 {
-    public const string Bram = "bram", Vane = "vane", Hood = "hood", Nim = "nim", StrangerKey = "stranger", Mara = "mara";
+    public const string Bram = "bram", Vane = "vane", Hood = "hood", Nim = "nim", StrangerKey = "stranger", Mara = "mara", King = "king";
 
     /// <summary>The story's people, for the ledger's Friends page: Uncle Bram, Nim, Mister Vane, the Hooded Woman (Mara, once she says so).</summary>
     public static readonly string[] People = { Bram, Nim, Vane, Hood, Mara };
@@ -37,6 +37,12 @@ public static class Story
     /// </summary>
     public static bool TellsOn(int week) => week is 1 or 2 or 4 || week == Guild.Weeks + 1;
 
+    /// <summary>
+    /// The picture behind a story morning (assets/backgrounds/scene_*.png): Bram's back room for his welcome and his secret,
+    /// the Keyhold for Mara's truth, the Guild's counting-house once the debt's paid.
+    /// </summary>
+    public static string Setting(int week) => week > Guild.Weeks ? "guild" : week >= OfferWeek ? "keyhold" : "bram";
+
     /// <summary>Who brings the Crown Chest to the counter (nobody's selling: it's yours, by the King's gift).</summary>
     public static readonly SellerDef VaultSeller = new()
     {
@@ -51,6 +57,8 @@ public static class Story
         Bram => Hints.Mentor,
         Vane => Guild.Collector,
         Hood => HoodName,
+        Mara => "Mara",
+        King => "King Aldric",
         Nim => Peddler.Name,
         StrangerKey => Events.Stranger.Name,
         _ => speaker,
@@ -99,16 +107,17 @@ public static class Story
                 lines.Add(state.MapPieces >= 2
                     ? new(Bram, "That's... a second shard. Where did she get it? Never mind. Never mind!")
                     : new(Bram, "That woman in the hood. I know that voice. Hear her out."));
+                // She gives her name with her hood up, and lowers it after.
                 lines.Add(new(Hood, "My name is Mara. I was the last archmage of the Keyhold. Your uncle and I found the first shard " +
                                     "together, a long time ago."));
-                lines.Add(new(Hood, "The whole Key opens the Crown Chest: King Aldric's own, with the heart of the Locking in it. The " +
+                lines.Add(new(Mara, "The whole Key opens the Crown Chest: King Aldric's own, with the heart of the Locking in it. The " +
                                     "Guild doesn't want your gold. It wants the Chest."));
-                lines.Add(new(Hood, "Every tithe the Guild takes goes down through the Gilded Gate. The Maw is buying his way out, a coin " +
+                lines.Add(new(Mara, "Every tithe the Guild takes goes down through the Gilded Gate. The Maw is buying his way out, a coin " +
                                     "at a time. And every chest you open loosens the Locking."));
                 lines.Add(state.Tier >= 4
                     ? new(Bram, $"And that old fellow at the Emporium, the one with the ring? Look at the seal on it, {state.Kin.Name}. " +
                                 "That's the King. He's been testing you.")
-                    : new(Hood, "The King knows. He's looking for a Keywright he can trust with the Crown Chest. Be one."));
+                    : new(Mara, "The King knows. He's looking for a Keywright he can trust with the Crown Chest. Be one."));
                 if (state.MapPieces > 0)
                     lines.Add(new(Bram, "Vane's been asking about the shards. Whatever he offers you tonight, think hard."));
                 break;
@@ -118,7 +127,7 @@ public static class Story
                 break;
         }
         var ask = state.Commissions.FirstOrDefault(c => c.Story);
-        if (ask != null) lines.Add(new(Hood, HoodRequest(state, ask)));
+        if (ask != null) lines.Add(new(week >= OfferWeek ? Mara : Hood, HoodRequest(state, ask)));
         return lines;
     }
 
@@ -210,13 +219,14 @@ public static class Story
         return lines;
     }
 
-    /// <summary>The Key is whole and the debt is paid: Mara comes for Bram, and the Crown Chest.</summary>
+    /// <summary>The Key is whole and the debt is paid: Mara comes for Bram, and the King brings the Crown Chest.</summary>
     public static List<Line> MapWhole() => new()
     {
-        new(Hood, "Bram. It's been a long time."),
+        new(Mara, "Bram. It's been a long time."),
         new(Bram, "Mara. The Key. You found all of it."),
-        new(Hood, "Your kin did the finding. The King has given us the Crown Chest: it's yours by right now, Keywright. It opens " +
-                  "for nobody else. Quickly: the Guild is a day behind us."),
+        new(Mara, "Your kin did the finding. And the King has come himself, with the Crown Chest. Quickly: the Guild is a day behind us."),
+        new(King, "Three hundred years it's waited in my family, and not one of us could open it. It's yours by right now, Keywright. " +
+                  "It opens for nobody else."),
     };
 
     /// <summary>
@@ -230,20 +240,20 @@ public static class Story
         if (state.SongWhole)
             return new()
             {
-                new(Hood, "The tune's in here. And your family knows every verse: all nine Heartsongs. Then we don't renew the Locking. We finish it."),
-                new(Hood, "Listen. That's the Maw. Starving, with nothing left to want. The Gate's just a gate now."),
+                new(Mara, "The tune's in here. And your family knows every verse: all nine Heartsongs. Then we don't renew the Locking. We finish it."),
+                new(Mara, "Listen. That's the Maw. Starving, with nothing left to want. The Gate's just a gate now."),
                 new(Bram, "And the chests, Mara. Every chest in Aldmark. They're opening. All of them, all at once."),
-                new(Hood, "The Guild has nothing to sell, and nothing to keep. Go home, Mister Vane."),
+                new(Mara, "The Guild has nothing to sell, and nothing to keep. Go home, Mister Vane."),
                 new(Bram, "Three hundred years of treasure, back in the light. We're going to need a bigger stall."),
             };
         var lines = new List<Line>
         {
-            new(Hood, "Listen. The Gate's gone quiet. The Locking holds: another three hundred years, if we're lucky."),
+            new(Mara, "Listen. The Gate's gone quiet. The Locking holds: another three hundred years, if we're lucky."),
             new(Bram, "King Aldric's own hoard, on our counter. The old man said it's ours to keep."),
         };
         lines.Add(known == 0
-            ? new(Hood, "The Locking was a song, in nine verses: nine Heartsongs, hidden in chests. If you ever hear one sing, keep it.")
-            : new(Hood, $"Your family knows {Sellers.Number(known)} of the nine Heartsongs. Find every verse, and the next Keywright won't renew the Locking. They'll finish it."));
+            ? new(Mara, "The Locking was a song, in nine verses: nine Heartsongs, hidden in chests. If you ever hear one sing, keep it.")
+            : new(Mara, $"Your family knows {Sellers.Number(known)} of the nine Heartsongs. Find every verse, and the next Keywright won't renew the Locking. They'll finish it."));
         lines.Add(new(Bram, "The Guild will keep coming, you know. Debts are funny things. But now we can afford to make them wait."));
         return lines;
     }
