@@ -104,8 +104,8 @@ def stores(manifest):
             # Use the original logo at an integer size to retain sharp letter pixels.
             usable_w=int(final.width*0.88)
             factor=max(1,usable_w//logo.width)
-            if spec["id"]=="store.main_capsule":
-                factor=2
+            if spec["id"] in ("store.header_capsule", "store.main_capsule"):
+                factor=1
             placed=logo.resize((logo.width*factor,logo.height*factor),Image.Resampling.NEAREST)
             x=(final.width-placed.width)//2
             if spec["id"]=="store.small_capsule":

@@ -58,8 +58,103 @@ The exact instructions and chosen candidate are in `_workflow/generations.json`.
 The native-size review checks include coin material, weapon silhouette, cloak
 shape, bottle shape, book emblems, gems and each Heartsong's distinctive detail.
 
-## Remaining work
+## Batch 3: Curios
 
-Batches 3-8 are pending. The report lists undelivered assets explicitly.
-This is a staged delivery, not yet a complete P1/P2 replacement set.
-Game-side integration is outside this art brief.
+Delivered all 78 Curios, completing the category with its Monocle anchor.
+Two successful candidates per asset were compared at 28x28 and enlarged size;
+interrupted requests were retried. The approved warm storybook pixel style was
+retained throughout. The silver tongue charm was recoloured from skin-like
+highlights to the steel ramp. The errand notebook received distinct checkboxes
+and a pencil after reduction softened those small details.
+
+## Batch 4: shops, chest finishes and locks
+
+Delivered all 24 assets: three shop backgrounds, five sets of chest finishes
+and six lock overlays. Shelf surfaces are registered to row 98 and counter
+surfaces to row 238. Final source landmark values are recorded per background
+in `_workflow/generations.json`; the counter mock-ups were visually checked.
+
+Every chest finish shares the wood template's alpha silhouette. Closed parts
+meet on full-width seams, lock overlays fit their mounting seats, and each open
+chest uses the exact finished body pixels in its lower half. The wood anchor's
+open image was refreshed to enforce that same byte-for-byte relationship.
+The black chest's central seats carry crossed chains instead of empty plates.
+
+## Batch 5: icons, Guild emblem and Aldric Key
+
+Delivered all 39 assets, including 26 upgrade icons, seven kind icons, the Guild
+emblem, the whole Aldric Key and four derived shards. All generated subjects
+had two successful candidates. The shards retain their positions on the 96x24
+canvas, use jagged breaks near x26, x50 and x74, and have outlined break edges.
+They do not overlap and reconstruct the delivered whole key exactly.
+
+## Batch 6: Crown Chest, UI, effects and lock faces
+
+Delivered all 14 assets. The four UI pieces follow the manifest's exact pixel
+recipes. The three lock faces retain a plain dark interaction annulus from
+radius 52 through 68 around (80,80). Effects are equal-cell strips; common
+sampling preserves relative expansion and rotation across frames. The four
+sparkle motifs were restored by hand after reduction lost the smallest mark.
+The Crown Chest uses the shared silhouette and exact body reuse. Pixels newly
+exposed by applying the shared mask are snapped back to the master palette.
+
+## Batch 7: branding and story assets
+
+Delivered all 14 assets: three scripted UI pieces, the English Keywright logo,
+four independently generated app-icon sizes, four story scenes and the two new
+portraits. The King uses Aldo as his identity reference. The 64px and 48px icon
+keys were polished to the gold ramp, and the 16px key was simplified by hand.
+Gold is reserved during colour reduction so the small key remains visible.
+
+## Batch 8: Steam art
+
+Delivered all nine native assets plus all nine required Steam-size exports
+under `store/final/`. Exports use the specified integer nearest-neighbour scale.
+The approved English logo is composited at an integer scale in the requested
+areas; the header and main capsule use a smaller logo to preserve faces.
+The library logo is derived from the approved brand logo on transparency.
+
+The library hero received a third candidate to concentrate both sellers, the
+chest and the player's hands inside its central third. The outer thirds retain
+scenery suitable for cropping. Store compositions and final logo placements
+were visually reviewed, including the small capsule at its delivery size.
+
+## Prompt changes and provenance
+
+Original manifest prompts were retained. Palette and approved-anchor reference
+instructions were appended to identify the reference's role and prevent copying
+the anchor's subject. Their exact text is recorded by asset ID in
+`_workflow/generations.json` and `_workflow/prompt_changes.json`.
+
+| Asset | Additional correction and reason |
+| --- | --- |
+| `bg.shop1` | Align the counter, shelf and awning; simplify noisy foliage and keep the counter front calm. |
+| `portrait.bram` | Reduce and register the head to the required face crop, eye line and chin line. |
+| `chest.wood.body` | Generate the body alone with a full-width rectangular seam and an opaque mounting seat. |
+| `chest.wood.open` | Remove the lid entirely, show an empty interior and preserve the matching lower body. |
+| `portrait.bramble` | Make the character explicitly an elderly woman with a bare chin after the male reference influenced initial attempts. |
+| `store.library_hero` | Reduce the narrative group into the central third to satisfy the crop-safe composition. |
+
+Exact correction text is in `_workflow/prompt_changes.json`. Candidate choices,
+raw source hashes, pixel repairs, landmark registration and final PNG hashes
+are recorded in `_workflow/generations.json`. Full-resolution raw generations
+and unselected candidates are retained locally outside the delivery checkout.
+`_workflow/delivery_manifest.json` lists every native and Steam export hash.
+
+## Final verification
+
+All 263 manifest assets are delivered, including optional batches 7 and 8.
+`python art/tools/validate.py --strict --sheets` reports 263 OK, zero failures
+and zero missing assets. Nothing is skipped. Cross-asset checks additionally
+verify chest bodies and masks, non-overlapping key shards and exact reassembly,
+visible animation frames, Steam dimensions and gold in all four app icons.
+
+Six width warnings are accepted after native-size review: Witchlight (59%),
+Glass Cabinet (45%), Royal Seal (55%), Warden's Lantern (58%), Fate's Spindle
+(58%) and Tailor's Dummy (42%). These are deliberately tall objects; increasing
+their width would distort the lanterns, cabinet, stamp handle, spindle or stand.
+
+Uploaded filenames and text contain no Chinese. PNG metadata is checked, and
+visible lettering was reviewed separately: branding reads KEYWRIGHT; object
+scribbles are nonlinguistic marks. All repository changes stay in
+`art/generated/`. Game-side integration remains outside this art brief.

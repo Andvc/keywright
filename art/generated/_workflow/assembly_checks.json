@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "checks": [
+    "All seven chest assemblies reuse exact body pixels and matching alpha silhouettes.",
+    "Four nonempty key shards are disjoint and reconstruct the whole key exactly.",
+    "Every animation frame has visible content in its equal-size frame cell.",
+    "All nine Steam exports match their required delivery dimensions.",
+    "Each independently drawn app icon retains gold key colours."
+  ]
+}

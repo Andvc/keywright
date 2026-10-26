@@ -21,10 +21,18 @@ import pixelize
 
 def cap_with_outline(img, spec):
     limit = spec.get("max_colours", 96)
+    allowed = artlib.allowed_colours(spec, artlib.load_manifest())
+    actual = {c[:3] for c in img.getdata() if c[3]}
+    if actual - allowed:
+        # Shared alpha templates can expose previously transparent RGB pixels.
+        img = pixelize.snap(img, sorted(allowed))
     counts = Counter(c[:3] for c in img.getdata() if c[3])
     if len(counts) <= limit:
         return img
     required = [pixelize.OUTLINE] if spec.get("outline") else []
+    if spec["id"].startswith("brand.app_icon_"):
+        # Preserve the small but identifying golden key during colour reduction.
+        required += [c for c in ((160,101,0),(242,193,78),(251,237,164)) if c in counts]
     if spec["category"] == "chest" and spec.get("part") == "open":
         body_path = ROOT / f"art/generated/chest/{spec['skin']}_body.png"
         if body_path.exists():

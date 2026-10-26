@@ -1,0 +1,2704 @@
+[
+  {
+    "id": "bg.shop1",
+    "batch": 0,
+    "native": "art/generated/backgrounds/shop1.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "82711ecbdadae6791b881508a7b3bff8f26eb7de5d539d1562683f026410b7a1"
+  },
+  {
+    "id": "bg.shop2",
+    "batch": 4,
+    "native": "art/generated/backgrounds/shop2.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "4e82b130a45aad7c44eb001851df9970e9956c13a80bf2dacc21ec6ba563dbb9"
+  },
+  {
+    "id": "bg.shop3",
+    "batch": 4,
+    "native": "art/generated/backgrounds/shop3.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "4ba153f87f50bf14e8276719c88973381a85e62e9a58bf2ebb514b476b00ad12"
+  },
+  {
+    "id": "bg.shop4",
+    "batch": 4,
+    "native": "art/generated/backgrounds/shop4.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "0280591cd6aa8ba30be1a6a803da048ee2c99942150731de2724a5b9b696ddc3"
+  },
+  {
+    "id": "chest.wood.lid",
+    "batch": 0,
+    "native": "art/generated/chest/wood_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "910624a9a36b83dbb36c9a2993e5de35aa315713d8045e80609fad5a111cd359"
+  },
+  {
+    "id": "chest.wood.body",
+    "batch": 0,
+    "native": "art/generated/chest/wood_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "7000181732b6eb2ce686212cf45a52f5525903ad58c14ccd2f3b8c1e3f631468"
+  },
+  {
+    "id": "chest.wood.open",
+    "batch": 0,
+    "native": "art/generated/chest/wood_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "16540badcccb504a8149298383db3653c7d61e8c0cd28a82912ade2c341435a0"
+  },
+  {
+    "id": "chest.green.lid",
+    "batch": 4,
+    "native": "art/generated/chest/green_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "17781c0a65f73f30d8f54cd548cc01239ed1f253290bccc6c46151cfee2edb48"
+  },
+  {
+    "id": "chest.green.body",
+    "batch": 4,
+    "native": "art/generated/chest/green_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "51738f439c2dd6023a56899ccf5ce96cf904f54c6b1bafce146d61231431cda1"
+  },
+  {
+    "id": "chest.green.open",
+    "batch": 4,
+    "native": "art/generated/chest/green_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "adf8f37e036ebb46fef9f35310461c3925c15fcd39dedba526f53e39555a0d91"
+  },
+  {
+    "id": "chest.blue.lid",
+    "batch": 4,
+    "native": "art/generated/chest/blue_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "e9a483063e6eaae92b46e49292c51641452b008f96c11c375bc7e1d376f610e8"
+  },
+  {
+    "id": "chest.blue.body",
+    "batch": 4,
+    "native": "art/generated/chest/blue_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "19e0896410283c1c22d1e40f35c0a0409876aa01ee7e6ff8d8a68e382a2e5545"
+  },
+  {
+    "id": "chest.blue.open",
+    "batch": 4,
+    "native": "art/generated/chest/blue_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "28a52db1320271eb490f4dc13b806922b7c45435ee7e07fb190da2d5c52f440d"
+  },
+  {
+    "id": "chest.purple.lid",
+    "batch": 4,
+    "native": "art/generated/chest/purple_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "55a4e94fd64a97f0779554b272d2e6c065f319a34b4c3b3fd3b86abaa255b323"
+  },
+  {
+    "id": "chest.purple.body",
+    "batch": 4,
+    "native": "art/generated/chest/purple_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "2bc9eb5c5742504a4a20829e04b88def873d6987e9713b4630735ff9f6764791"
+  },
+  {
+    "id": "chest.purple.open",
+    "batch": 4,
+    "native": "art/generated/chest/purple_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "bab5093e701ae2793c49c85c58718cbc96aa6dcc25f66c7e2b0c3b6ae33c4c64"
+  },
+  {
+    "id": "chest.gold.lid",
+    "batch": 4,
+    "native": "art/generated/chest/gold_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "919bad1bea1de599ab39530675d5d3949501ce67b9746bfd32ebae2b5e7493fd"
+  },
+  {
+    "id": "chest.gold.body",
+    "batch": 4,
+    "native": "art/generated/chest/gold_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "45120bc444114ce653d9a48b174c96c6f940d321b97b91c9947250e0c20b7cc6"
+  },
+  {
+    "id": "chest.gold.open",
+    "batch": 4,
+    "native": "art/generated/chest/gold_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "5516e83d2e7175e6e80e2c28d245c35e8f7eeb1d99f9252c02edbc118ccf3122"
+  },
+  {
+    "id": "chest.black.lid",
+    "batch": 4,
+    "native": "art/generated/chest/black_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "f76caf14f96add71ddd52beb798e637031156168efc5e87ef9c34870d52caa6e"
+  },
+  {
+    "id": "chest.black.body",
+    "batch": 4,
+    "native": "art/generated/chest/black_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "b3c23e5e2ee4de2e32925a8cb26016ff29c6ab5f103c8c81b38999d506d8881c"
+  },
+  {
+    "id": "chest.black.open",
+    "batch": 4,
+    "native": "art/generated/chest/black_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "07c62055faed40f715ba2f55911e41b1d956f56b6c3d6d727964e42688ca7d8f"
+  },
+  {
+    "id": "chest.crown.lid",
+    "batch": 6,
+    "native": "art/generated/chest/crown_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "0215c151b7acd0acb0579b4fec8802668d454bb6ad4260c18cbd2e5950421e54"
+  },
+  {
+    "id": "chest.crown.body",
+    "batch": 6,
+    "native": "art/generated/chest/crown_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "7c08be45c51a0974eb940149be22c1fba47bf37405ac4f075773219a2ed4f4f9"
+  },
+  {
+    "id": "chest.crown.open",
+    "batch": 6,
+    "native": "art/generated/chest/crown_open.png",
+    "size": [
+      96,
+      60
+    ],
+    "sha256": "be7a79d3674f15a5fab839b1a034e1cf14167dbfcbe36f7a822f0edcad978138"
+  },
+  {
+    "id": "chest.lock.rusty.lid",
+    "batch": 4,
+    "native": "art/generated/chest/lock_rusty_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "e887ab1e8415c0b5a4289158773826a850f82a44ebb36d2ca0f3e3f809742781"
+  },
+  {
+    "id": "chest.lock.rusty.body",
+    "batch": 4,
+    "native": "art/generated/chest/lock_rusty_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "16aff2672a470141d121f62acca99bc8ddb5515d7f45f24d4d4aab8a042e4b4b"
+  },
+  {
+    "id": "chest.lock.guild.lid",
+    "batch": 4,
+    "native": "art/generated/chest/lock_guild_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "b0ddc8f74d672e03986cf08e441b55f9291fe366f5a9069fd64f6eb9ef13e26b"
+  },
+  {
+    "id": "chest.lock.guild.body",
+    "batch": 4,
+    "native": "art/generated/chest/lock_guild_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "f4ccd83a66c45b1d2d31ed43deaa1dbb24dd6fd6cf8a7ecd15200b632b734c08"
+  },
+  {
+    "id": "chest.lock.dwarven.lid",
+    "batch": 4,
+    "native": "art/generated/chest/lock_dwarven_lid.png",
+    "size": [
+      96,
+      42
+    ],
+    "sha256": "124f4ddb5cd31c9392aa77ad1d4d05ae83272b04b036e07656d2bdf0eabe53cf"
+  },
+  {
+    "id": "chest.lock.dwarven.body",
+    "batch": 4,
+    "native": "art/generated/chest/lock_dwarven_body.png",
+    "size": [
+      96,
+      30
+    ],
+    "sha256": "68df69b87cbdadc38052863b2f319af4f8e6a414aafa7990efc51e8d0877723b"
+  },
+  {
+    "id": "icon.upgrade.shop2",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_shop2.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "452c4ba4c02ce8e0151b6e105223f5c9c9ec1c32d9e23e6854fc10eebc467412"
+  },
+  {
+    "id": "icon.upgrade.shop3",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_shop3.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "cc13bf0b3678e72c4d557d7921761088917b9a4cfb2606347ecdaa1756790053"
+  },
+  {
+    "id": "icon.upgrade.shop4",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_shop4.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "c057d20a45329c085c0bb5b70b8379ca70691eed90784789690546d2dfb90837"
+  },
+  {
+    "id": "icon.upgrade.sign",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_sign.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "d445a8f62d885025d05e9ebeeec4f461e590d11fb3e1c3eaa9d22148995589ac"
+  },
+  {
+    "id": "icon.upgrade.scales",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_scales.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "1d8010d2b51538ff1725c7c4aa90c9c41f0b14d4b42ca81fcf4744609a6efec0"
+  },
+  {
+    "id": "icon.upgrade.cabinet1",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_cabinet1.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "7b93d908467fc70c6812faedc85d2a5f7d333a8a5792a2399252e624209becd0"
+  },
+  {
+    "id": "icon.upgrade.cabinet2",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_cabinet2.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "4fc660177bc65e611670b8864cc00f66b1c5e5f04a4ed93e50951a72d8c671e4"
+  },
+  {
+    "id": "icon.upgrade.cabinet3",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_cabinet3.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "39bcc6600e2366f03acb89e8cf91e19c626bb96877266209f5223dffb16d3662"
+  },
+  {
+    "id": "icon.upgrade.cabinet4",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_cabinet4.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "3b5f03fb172e3e58aca6d7001a91347e28f0c5a8e16271d893ca5ee962361efe"
+  },
+  {
+    "id": "icon.upgrade.cabinet5",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_cabinet5.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "c03237ab093e6a7ce25b3b78d9e44a83aba2763279d5ef83bf937d8f72a51dc4"
+  },
+  {
+    "id": "icon.upgrade.cabinet6",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_cabinet6.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "09e2168ba60954e9e87bdb2a6a4e02018d69c7846344bd7eaf60d380e7429701"
+  },
+  {
+    "id": "icon.upgrade.picks",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_picks.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "f51e33ee6f689089adacb5c0ce6bc1dca71d3d62770a26d30916d0127446a7b8"
+  },
+  {
+    "id": "icon.upgrade.bench",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_bench.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "80c86afd207ea685eb5cdefed3c0b6e0eb279b8178043a9326298ee80169988c"
+  },
+  {
+    "id": "icon.upgrade.workshop",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_workshop.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "a19ce017af1861cf0e3cd0220e39982b73b728919a5ace505b76b79f3bc35279"
+  },
+  {
+    "id": "icon.upgrade.master",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_master.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "7ca07ec4e4fc3238321b68fee02f63ed816eb1551659aa5f8ce609fe67262fe0"
+  },
+  {
+    "id": "icon.upgrade.lamp",
+    "batch": 0,
+    "native": "art/generated/icons/upgrade_lamp.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "4b5d56a1ca0ae6d0f13786e34f534593474c7097b7782141cb6bbcbd88e2ad97"
+  },
+  {
+    "id": "icon.upgrade.crier",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_crier.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "71b98509108cdd4f4fd5d7f4c2969ef7c544bca2671b5b0f225bcfc9abe1ecd3"
+  },
+  {
+    "id": "icon.upgrade.block",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_block.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "6a88f3487b9a8d430ea9d81af589fe39d632c3212c81230189ab67672d95b5c7"
+  },
+  {
+    "id": "icon.upgrade.charter",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_charter.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "2209099f16a01cbfaa544540c34695f1fe0f76f4a3c2888efb494091786261f6"
+  },
+  {
+    "id": "icon.upgrade.case",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_case.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "205db99c0c731fd95ee63dcb85420bf30f89937c641a754ba6441a2caa09aded"
+  },
+  {
+    "id": "icon.upgrade.velvet",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_velvet.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "1ea4c45ac710ef380ecc0b41d2d5b8b0813d0bdce38e91cfec091db338e73214"
+  },
+  {
+    "id": "icon.upgrade.magnet",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_magnet.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "46e2ced2e5f0079b7084365934f8851febb068af3b2a159191d62c0ab663010f"
+  },
+  {
+    "id": "icon.upgrade.seal",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_seal.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "72a56c909e8345e22309d0bfc67e729f62fd94964059bb622f48c163404f8a4e"
+  },
+  {
+    "id": "icon.upgrade.night",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_night.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "f0f24eb33531ce88c649d2b0f837f479fbe4fe0736291dc0f81d657f633bae14"
+  },
+  {
+    "id": "icon.upgrade.warrant",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_warrant.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "e060ea6029a802d26669298b56f8e1fd2d6f0785b62af82dec1a75e5dde55e11"
+  },
+  {
+    "id": "icon.upgrade.patrons",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_patrons.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "1e1976c237a1f6aee94cc08963a7376363d90e48db85277ca1f5f2953bd9894a"
+  },
+  {
+    "id": "icon.upgrade.engine",
+    "batch": 5,
+    "native": "art/generated/icons/upgrade_engine.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "637cf91b1a40d711bbcf0befafc479bfbd5e0aeaf37dcf847d3d27575ed9a97f"
+  },
+  {
+    "id": "icon.kind.coins",
+    "batch": 0,
+    "native": "art/generated/kinds/kind_coins.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "c481cd6ad0f3d3d4986394f93577a9bb02a963f593b7f38f1392c47d552cb04c"
+  },
+  {
+    "id": "icon.kind.arms",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_arms.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "00bf7e94ef4c9a57450a937bf8100716a84efb1598573d7c876d85cdc8a03212"
+  },
+  {
+    "id": "icon.kind.garb",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_garb.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "e38e811f134daa7c45225d26c53812be98561a9419ebad22907871ecd71f8db2"
+  },
+  {
+    "id": "icon.kind.potions",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_potions.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "aad3b64c6dc125f352d854be49b3ffe677796b723a87ebf027af1eed81e64881"
+  },
+  {
+    "id": "icon.kind.scrolls",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_scrolls.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "635173230b76a8198617ce013f5fd5086d3ae10cce7344921e82c1f7db75dff1"
+  },
+  {
+    "id": "icon.kind.gems",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_gems.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "b347f29d2c1d08def6227728f3b1c6e7500302378f27281be4faba029227686b"
+  },
+  {
+    "id": "icon.kind.heartsong",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_heartsong.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "6fe140f2f03f668956e48afb0e4dfb86875448621f52f5d9d6efa1fe6750addc"
+  },
+  {
+    "id": "icon.kind.hidden",
+    "batch": 5,
+    "native": "art/generated/kinds/kind_hidden.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "e545e881a7fbd794d70713d92b1a0cb9763aa2345750853a0c6c670bb018f126"
+  },
+  {
+    "id": "emblem.guild",
+    "batch": 5,
+    "native": "art/generated/emblems/guild.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "9e609ae3b429a9b2db0a5bd0bceea23cee8a64ca053b2b3a454159eba4245964"
+  },
+  {
+    "id": "story.key_whole",
+    "batch": 5,
+    "native": "art/generated/story/key_whole.png",
+    "size": [
+      96,
+      24
+    ],
+    "sha256": "88292b84e57d8206bc16cb81eb4bc8ada4601ef217c89ecffb8da4e352e1a7aa"
+  },
+  {
+    "id": "story.key_shard_1",
+    "batch": 5,
+    "native": "art/generated/story/key_shard_1.png",
+    "size": [
+      96,
+      24
+    ],
+    "sha256": "6819fe357a86c8c78859f7c6d63efbd51d994c78b65478e056bc9d6d5e782ddb"
+  },
+  {
+    "id": "story.key_shard_2",
+    "batch": 5,
+    "native": "art/generated/story/key_shard_2.png",
+    "size": [
+      96,
+      24
+    ],
+    "sha256": "55086e8337d07fe33758fd5bcb5b73d77a5c6c9926f61ac28416e30e1289b969"
+  },
+  {
+    "id": "story.key_shard_3",
+    "batch": 5,
+    "native": "art/generated/story/key_shard_3.png",
+    "size": [
+      96,
+      24
+    ],
+    "sha256": "192863e61362649014a25fb9b05eec70d2ac3294d3a50d33ad37485806ebbf19"
+  },
+  {
+    "id": "story.key_shard_4",
+    "batch": 5,
+    "native": "art/generated/story/key_shard_4.png",
+    "size": [
+      96,
+      24
+    ],
+    "sha256": "803717bb677e078e57c2278414ce0162cd2bc7368b7266b9f90a270fc4f705eb"
+  },
+  {
+    "id": "ui.panel",
+    "batch": 6,
+    "native": "art/generated/ui/panel.png",
+    "size": [
+      12,
+      12
+    ],
+    "sha256": "8db2ad19d5a336b2903fc5e3c6bf859f1ab0a842a3fb07e31e3c65f23cbbba2e"
+  },
+  {
+    "id": "ui.frame",
+    "batch": 6,
+    "native": "art/generated/ui/frame.png",
+    "size": [
+      12,
+      12
+    ],
+    "sha256": "cc9268578808e78f349733842ce5c6fe7b3e8a0e920c2f4f36780fb8af844695"
+  },
+  {
+    "id": "ui.button",
+    "batch": 6,
+    "native": "art/generated/ui/button.png",
+    "size": [
+      12,
+      12
+    ],
+    "sha256": "a79099901f28ea188949e95114359fa8d9f8ddaeb6a7522c4a135d43417a50d3"
+  },
+  {
+    "id": "ui.button_pressed",
+    "batch": 6,
+    "native": "art/generated/ui/button_pressed.png",
+    "size": [
+      12,
+      12
+    ],
+    "sha256": "8d8f094cb5d0c48ab5e42ceb2b82e2d7d43e2d7d2c5294e1f58888cefea5f05a"
+  },
+  {
+    "id": "ui.slip_paper",
+    "batch": 7,
+    "native": "art/generated/ui/slip_paper.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "700105fc5e8c19bcb5ec681543e369ad33f9443ca5c0d3f7502551bd627492e1"
+  },
+  {
+    "id": "ui.bubble",
+    "batch": 7,
+    "native": "art/generated/ui/bubble.png",
+    "size": [
+      24,
+      24
+    ],
+    "sha256": "da5137eaee688371569a1e616f6c3d41e9d1425ee351eeeb4715ffa030edf222"
+  },
+  {
+    "id": "ui.bubble_tail",
+    "batch": 7,
+    "native": "art/generated/ui/bubble_tail.png",
+    "size": [
+      12,
+      8
+    ],
+    "sha256": "2f0e29a11a2d9c99094cc029b6427a69f6217cb743152358a041a8d655f51400"
+  },
+  {
+    "id": "fx.explosion",
+    "batch": 6,
+    "native": "art/generated/fx/explosion.png",
+    "size": [
+      1024,
+      128
+    ],
+    "sha256": "4da0f051d93bb4314c86c0cf180154ed77dfd99c1eb718d10d7432ce836b1625"
+  },
+  {
+    "id": "fx.coin_spin",
+    "batch": 6,
+    "native": "art/generated/fx/coin_spin.png",
+    "size": [
+      72,
+      12
+    ],
+    "sha256": "f26960b4aff79ece150122b5cf58591b2633e1214f982444cad4f5818c29009a"
+  },
+  {
+    "id": "fx.sparkle",
+    "batch": 6,
+    "native": "art/generated/fx/sparkle.png",
+    "size": [
+      36,
+      9
+    ],
+    "sha256": "13794a7b17d39cdb634c1b9885dd4aae3fe1fb273f012ec550704e6c538ecf9a"
+  },
+  {
+    "id": "fx.dust",
+    "batch": 6,
+    "native": "art/generated/fx/dust.png",
+    "size": [
+      120,
+      16
+    ],
+    "sha256": "5dd8f990442030474865fd3fa9c9a0786bd47a564563eb5276f2b1e7c090dfad"
+  },
+  {
+    "id": "lock.face.rusty",
+    "batch": 6,
+    "native": "art/generated/lockpick/face_rusty.png",
+    "size": [
+      160,
+      160
+    ],
+    "sha256": "f173d96d4461e0d257a4da4fe5e16a574262c5876849c7ed374d6f069aa107a0"
+  },
+  {
+    "id": "lock.face.guild",
+    "batch": 6,
+    "native": "art/generated/lockpick/face_guild.png",
+    "size": [
+      160,
+      160
+    ],
+    "sha256": "59cd940e40116007cd79cd165cc02e5f06f0c2b9aeb8e3f6b014d4f505c88297"
+  },
+  {
+    "id": "lock.face.dwarven",
+    "batch": 6,
+    "native": "art/generated/lockpick/face_dwarven.png",
+    "size": [
+      160,
+      160
+    ],
+    "sha256": "f9bf003884e56be97fdcf9557870233aca9c72174d19432c794c88cecedb77d7"
+  },
+  {
+    "id": "brand.logo",
+    "batch": 7,
+    "native": "art/generated/brand/logo.png",
+    "size": [
+      320,
+      72
+    ],
+    "sha256": "259dc9eca438c569cce7ddb113c818f7fb305c6a1c95bc4dbabac368975af7a0"
+  },
+  {
+    "id": "brand.app_icon_64",
+    "batch": 7,
+    "native": "art/generated/brand/app_icon_64.png",
+    "size": [
+      64,
+      64
+    ],
+    "sha256": "76be9f6566ee3596022c974b9084b7c59e37a30c9d3e0f5046e8be614eb46a39"
+  },
+  {
+    "id": "brand.app_icon_48",
+    "batch": 7,
+    "native": "art/generated/brand/app_icon_48.png",
+    "size": [
+      48,
+      48
+    ],
+    "sha256": "0ca0f21ae3106d5734da82624310b7437b3a458d0c166fefaf739527bb208330"
+  },
+  {
+    "id": "brand.app_icon_32",
+    "batch": 7,
+    "native": "art/generated/brand/app_icon_32.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "b9a16ed421a2c4bf4836d649e8676d4f8dd4107fc45c6cd926283d269be317d7"
+  },
+  {
+    "id": "brand.app_icon_16",
+    "batch": 7,
+    "native": "art/generated/brand/app_icon_16.png",
+    "size": [
+      16,
+      16
+    ],
+    "sha256": "5bd18015f9ac4ae3312570e886ff4d14ddaf7c712507bc230e429862a4a83035"
+  },
+  {
+    "id": "scene.guild",
+    "batch": 7,
+    "native": "art/generated/scenes/guild.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "3c28ded274966a40692e4ec3840ba95c1ff011952e94cc544df5297a751deaa2"
+  },
+  {
+    "id": "scene.bram",
+    "batch": 7,
+    "native": "art/generated/scenes/bram.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "7006592d44a5b3b492b41028b970d067c60c330b6df9e16b5775c7dfed7ef1ed"
+  },
+  {
+    "id": "scene.keyhold",
+    "batch": 7,
+    "native": "art/generated/scenes/keyhold.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "049c628468fcdec273dcce94528640b8a4d3677819e0884d8ed5b64b08c7af72"
+  },
+  {
+    "id": "scene.vault",
+    "batch": 7,
+    "native": "art/generated/scenes/vault.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "f95e88795323e203c4be1684eec705a232d8fcbb32f126dcf45cbc65369f8412"
+  },
+  {
+    "id": "store.header_capsule",
+    "batch": 8,
+    "native": "art/generated/store/header_capsule.png",
+    "size": [
+      460,
+      215
+    ],
+    "sha256": "8ab64ce07da4cf6b17997ce8201843b3a1ba922e483a219ef1fdfb2e62a8bc20",
+    "steam_export": {
+      "path": "art/generated/store/final/header_capsule.png",
+      "size": [
+        920,
+        430
+      ],
+      "sha256": "6722066dfae9c8de8ad2635861e110364585ac58b9540d46fd1a4eff36437ed2"
+    }
+  },
+  {
+    "id": "store.small_capsule",
+    "batch": 8,
+    "native": "art/generated/store/small_capsule.png",
+    "size": [
+      231,
+      87
+    ],
+    "sha256": "484094cc21cf5d4cd8357f1ef82879b6f6de5824c5d59f255094f945c7bfb87c",
+    "steam_export": {
+      "path": "art/generated/store/final/small_capsule.png",
+      "size": [
+        462,
+        174
+      ],
+      "sha256": "92b8059da0a29a325987d3ae6d11e742c1e5eeaa6da9405cfaff90ecf13c827b"
+    }
+  },
+  {
+    "id": "store.main_capsule",
+    "batch": 8,
+    "native": "art/generated/store/main_capsule.png",
+    "size": [
+      616,
+      353
+    ],
+    "sha256": "c27939f3e63808137d68e73c3b263cfc33f65c097a6351d187c2e2365fafe745",
+    "steam_export": {
+      "path": "art/generated/store/final/main_capsule.png",
+      "size": [
+        1232,
+        706
+      ],
+      "sha256": "ac4b8995b095d439d4fcfa3989a8336b51bc6243826da634bbd6bc309351d111"
+    }
+  },
+  {
+    "id": "store.vertical_capsule",
+    "batch": 8,
+    "native": "art/generated/store/vertical_capsule.png",
+    "size": [
+      374,
+      448
+    ],
+    "sha256": "76a6f2ae152eb134b3c129dc66a3bf825775311d8ff6f79ba2c94b6cfaa85cfb",
+    "steam_export": {
+      "path": "art/generated/store/final/vertical_capsule.png",
+      "size": [
+        748,
+        896
+      ],
+      "sha256": "eb5140494af7eae5504aa9ee44be0e278ccef08be058c00dd67b3fb9b6d41025"
+    }
+  },
+  {
+    "id": "store.page_background",
+    "batch": 8,
+    "native": "art/generated/store/page_background.png",
+    "size": [
+      719,
+      405
+    ],
+    "sha256": "50ddc56eddba60b80b6e62aeb069e92d559f3d024e5829af8cb94356bbb97942",
+    "steam_export": {
+      "path": "art/generated/store/final/page_background.png",
+      "size": [
+        1438,
+        810
+      ],
+      "sha256": "f2f02c8de7f2d6c7b6cb10336234ecb905b0ba08afc471ae8ed62642e717fdc3"
+    }
+  },
+  {
+    "id": "store.library_capsule",
+    "batch": 8,
+    "native": "art/generated/store/library_capsule.png",
+    "size": [
+      300,
+      450
+    ],
+    "sha256": "d4d19d8406e7ac6f07ae601844d09e66a9a356e15d1bb8aa698b6aa4a6c6114a",
+    "steam_export": {
+      "path": "art/generated/store/final/library_capsule.png",
+      "size": [
+        600,
+        900
+      ],
+      "sha256": "282849073cc4a40ffd47e12a95842f4c0303a051c279c1ad3aa95febd87becf0"
+    }
+  },
+  {
+    "id": "store.library_hero",
+    "batch": 8,
+    "native": "art/generated/store/library_hero.png",
+    "size": [
+      960,
+      310
+    ],
+    "sha256": "2f90a9065734c9ee7d25e3679846315861a57253eb2bec4ffea909f6703a15ed",
+    "steam_export": {
+      "path": "art/generated/store/final/library_hero.png",
+      "size": [
+        3840,
+        1240
+      ],
+      "sha256": "64a29069030cc84add84495e2612c58bbe28f0383e2bce03bda08ab55b33c0e7"
+    }
+  },
+  {
+    "id": "store.community_icon",
+    "batch": 8,
+    "native": "art/generated/store/community_icon.png",
+    "size": [
+      92,
+      92
+    ],
+    "sha256": "d5495a4f1b910b65d85801c9589ee594e4a57565480946427a52ae0ef283a8e3",
+    "steam_export": {
+      "path": "art/generated/store/final/community_icon.png",
+      "size": [
+        184,
+        184
+      ],
+      "sha256": "888209c632a6e25b647de121482b37d1ac854b5a35c53f9a3b9dee384c9ce79d"
+    }
+  },
+  {
+    "id": "store.library_logo",
+    "batch": 8,
+    "native": "art/generated/store/library_logo.png",
+    "size": [
+      640,
+      360
+    ],
+    "sha256": "9c76995e4976d8db1461adca4c79147015704aa5109856404fb1c90b4f1685dc",
+    "steam_export": {
+      "path": "art/generated/store/final/library_logo.png",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "da93d2a261b2c61f1c7dbdbd13daecfdefd9ec0c76526f81d612a2dd3871c70c"
+    }
+  },
+  {
+    "id": "portrait.tam",
+    "batch": 1,
+    "native": "art/generated/portraits/tam.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "e514400ac45555f7a1ffb96865e4f5d1e53f14618b1136ceafdc846853fcbd1c"
+  },
+  {
+    "id": "portrait.penn",
+    "batch": 1,
+    "native": "art/generated/portraits/penn.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "b7ebb646eea034bd8ebbc191b805858793f259afe249123c53ab5695df789148"
+  },
+  {
+    "id": "portrait.hob",
+    "batch": 1,
+    "native": "art/generated/portraits/hob.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "87baab6e9417a4acfd2c53384c39f42e1852f34a79efeed1e4fe18ac91c0f298"
+  },
+  {
+    "id": "portrait.mags",
+    "batch": 1,
+    "native": "art/generated/portraits/mags.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "e3f174a62d18c32f503cd92b8745722bc4f77eff31cab9198f3256e5bcaae73f"
+  },
+  {
+    "id": "portrait.dorrin",
+    "batch": 1,
+    "native": "art/generated/portraits/dorrin.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "43762b06ac6e96092586a8da7aff4303bb35566addb3d75105ef49c899ff0a7b"
+  },
+  {
+    "id": "portrait.snikkit",
+    "batch": 1,
+    "native": "art/generated/portraits/snikkit.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "101794629de2f03d56b3abcb4bb5e7937ba6ec811849ceee242009ae0efbd790"
+  },
+  {
+    "id": "portrait.wenna",
+    "batch": 1,
+    "native": "art/generated/portraits/wenna.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "dec4fcfa224a219c2bf89291968468b04e0aa5a99c20a82d43f2714c090f5f15"
+  },
+  {
+    "id": "portrait.bramble",
+    "batch": 1,
+    "native": "art/generated/portraits/bramble.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "77e8223b738daf5ae9f0f68721a49c4ce8f6e00074e47a9be73151203b3b235c"
+  },
+  {
+    "id": "portrait.ansel",
+    "batch": 1,
+    "native": "art/generated/portraits/ansel.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "992b93e80d4b2e912f2ef4b15f2e657230207be7482a52ea26b4c15093420f70"
+  },
+  {
+    "id": "portrait.fennick",
+    "batch": 1,
+    "native": "art/generated/portraits/fennick.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "4e0ec96cd1336af6259236f6d894fb33e0222a4de02b5830c7506ac0369a9469"
+  },
+  {
+    "id": "portrait.gerda",
+    "batch": 1,
+    "native": "art/generated/portraits/gerda.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "6d2ef2e6816a259b099fc007702c42d10cd117af7d012561bb11f1759f6a2e9d"
+  },
+  {
+    "id": "portrait.wren",
+    "batch": 1,
+    "native": "art/generated/portraits/wren.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "7a0a766457f2e299a73f09e02a78bc6bfb2112bd9eca81f020c65352ec3a5e14"
+  },
+  {
+    "id": "portrait.orrin",
+    "batch": 1,
+    "native": "art/generated/portraits/orrin.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "e9b20feb33b321976d7691ab97acb521c599ee11ca130c6e10e577c40d33e574"
+  },
+  {
+    "id": "portrait.grit",
+    "batch": 1,
+    "native": "art/generated/portraits/grit.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "cb62840034df445fcdb4624a5e2cd577a1396c310ac180346d00b82bca19e696"
+  },
+  {
+    "id": "portrait.corisande",
+    "batch": 1,
+    "native": "art/generated/portraits/corisande.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "aa37f5d326b373683c0a9a297341856f739d62ff2a1f7bd0126c2b2cc661cdf3"
+  },
+  {
+    "id": "portrait.pell",
+    "batch": 1,
+    "native": "art/generated/portraits/pell.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "916460068afb0974458af370ec23aae26d720a1a6dbd536c78588f2cd0a7dc7d"
+  },
+  {
+    "id": "portrait.quill",
+    "batch": 1,
+    "native": "art/generated/portraits/quill.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "5ff69b6a9e18336442ec5bc8389cdca4b971d4f5c085c1ab0c22e6c21eb80c38"
+  },
+  {
+    "id": "portrait.shelly",
+    "batch": 1,
+    "native": "art/generated/portraits/shelly.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "9750ddf37dcd7621926a43741da96258faf6702ea56d5b3838b70146e392df91"
+  },
+  {
+    "id": "portrait.aldous",
+    "batch": 1,
+    "native": "art/generated/portraits/aldous.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "16365062198af58b158d19cb59af681d5aa8a7a2a7678f86b2539526d24eb521"
+  },
+  {
+    "id": "portrait.vexis",
+    "batch": 1,
+    "native": "art/generated/portraits/vexis.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "7427241737607e9c282df2eecb2e4cda5e5a42c49d64fec48d7510b3a7ba4caf"
+  },
+  {
+    "id": "portrait.malbranche",
+    "batch": 1,
+    "native": "art/generated/portraits/malbranche.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "99f01875acc72ad47057296bd75c435e4f20d90baca16201af52860e8c6f8500"
+  },
+  {
+    "id": "portrait.skrae",
+    "batch": 1,
+    "native": "art/generated/portraits/skrae.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "c02c3eadc3f3a3be94118d1cf5682607edcb06651578f75f8cb257f7c34e5c4a"
+  },
+  {
+    "id": "portrait.ermine",
+    "batch": 1,
+    "native": "art/generated/portraits/ermine.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "85e5122a50443bd874dd7ac220bfe7ee255a44559d31e48c5fa1a75028e86cf1"
+  },
+  {
+    "id": "portrait.oriel",
+    "batch": 1,
+    "native": "art/generated/portraits/oriel.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "f0f251eccc553b10de1d0feb61c8bdb879fcc167dafe931ba011c6822f23c1c3"
+  },
+  {
+    "id": "portrait.silas",
+    "batch": 1,
+    "native": "art/generated/portraits/silas.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "73ca48dd2c2c1732c07fc0b030641025489f6176a68b8623c9743355517408fe"
+  },
+  {
+    "id": "portrait.aldo",
+    "batch": 1,
+    "native": "art/generated/portraits/aldo.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "3148454eb02c1b73bbee57f8d131ba7976a7a711a79b9604b982b06a1250b2cc"
+  },
+  {
+    "id": "portrait.maw",
+    "batch": 1,
+    "native": "art/generated/portraits/maw.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "e82a2c4c26b56f369977fc0d39a98ecd9ea91ab1234c83a59c6395f6e67ba47d"
+  },
+  {
+    "id": "portrait.bram",
+    "batch": 0,
+    "native": "art/generated/portraits/bram.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "170fba987b12b7620f38d62e12bbc8ef7455981297f4ceefb7a2c1ac36989ccd"
+  },
+  {
+    "id": "portrait.vane",
+    "batch": 1,
+    "native": "art/generated/portraits/vane.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "46df9b0e01f369f99cca5538b1d0daa7addc2b4861ba9dc200e10eb24a2f2aff"
+  },
+  {
+    "id": "portrait.hood",
+    "batch": 1,
+    "native": "art/generated/portraits/hood.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "f45a78ac87d01cc3a97f331205b11f385193e443b087180358e64a3ca0cd1ab5"
+  },
+  {
+    "id": "portrait.nim",
+    "batch": 1,
+    "native": "art/generated/portraits/nim.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "ed5c3b44d9f632407dcf206cb14c38ce0c88b2d7087d67312cebccccc3207dce"
+  },
+  {
+    "id": "portrait.stranger",
+    "batch": 1,
+    "native": "art/generated/portraits/stranger.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "9af1b27e5dce6e8ccbab3c2c6d18d3fa6e1a348adc541f5e8cd64bd65671e6fe"
+  },
+  {
+    "id": "portrait.kit",
+    "batch": 1,
+    "native": "art/generated/portraits/kit.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "819b01407b85e15f3620b58e598865d20ddf42c6c69dd13024f16b10990ce162"
+  },
+  {
+    "id": "portrait.hesk",
+    "batch": 1,
+    "native": "art/generated/portraits/hesk.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "80cf81cc339ad87f4d17f43f5ad7849c74754881d73dd74aa76d25ef94046e9d"
+  },
+  {
+    "id": "portrait.rosa",
+    "batch": 1,
+    "native": "art/generated/portraits/rosa.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "7a51137f869626fc1ed16fd30bbc4dea2f35c812a0bf3df2806652b1cbc47207"
+  },
+  {
+    "id": "portrait.isolde",
+    "batch": 1,
+    "native": "art/generated/portraits/isolde.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "48b48375517342b223e8b6844344c4aa2cbcdd3360e003828bee5e3610fda298"
+  },
+  {
+    "id": "portrait.mara",
+    "batch": 7,
+    "native": "art/generated/portraits/mara.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "aca58f629369ffffb04fbe2e2816f44524f80446c64dd8b493dbf7acdbf74a4e"
+  },
+  {
+    "id": "portrait.king",
+    "batch": 7,
+    "native": "art/generated/portraits/king.png",
+    "size": [
+      76,
+      76
+    ],
+    "sha256": "199e60fbc2097e9f4bdfb1043d46c4cecc4b8a66f03890561ed9ae1a5df2cb81"
+  },
+  {
+    "id": "item.barrow_silver",
+    "batch": 2,
+    "native": "art/generated/items/barrow_silver.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "ee311c67ce90e6918ca2153a616375b126f2bf1a04f0d930f26e79a7a629b59a"
+  },
+  {
+    "id": "item.moonsilver_marks",
+    "batch": 2,
+    "native": "art/generated/items/moonsilver_marks.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "989a3f3da2aa936e862de4ccb6597e0f5c46929a51345c9d8c60c624b0a1d4b8"
+  },
+  {
+    "id": "item.dwarf_gold_crowns",
+    "batch": 0,
+    "native": "art/generated/items/dwarf_gold_crowns.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "fac26c917f52d4fc97f019b2545bc79dce18903c713400ccaabae5aae2be6ccb"
+  },
+  {
+    "id": "item.sunken_sovereigns",
+    "batch": 2,
+    "native": "art/generated/items/sunken_sovereigns.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "6c04cc25503eb4498a8ee2e5cea9d717f731ddb562b7ee62835f5d515b962525"
+  },
+  {
+    "id": "item.dragon_gold",
+    "batch": 2,
+    "native": "art/generated/items/dragon_gold.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "ef4b9a3c803edf233a1f971add5c934280831874ee75713bb0141b42e6fe721e"
+  },
+  {
+    "id": "item.demon_gold",
+    "batch": 2,
+    "native": "art/generated/items/demon_gold.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "d4b2be0473dc766a4bdfe49cd13b1fb2de02308808b935583a0c5f3af552272c"
+  },
+  {
+    "id": "item.goblin_cleaver",
+    "batch": 2,
+    "native": "art/generated/items/goblin_cleaver.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "10571823ed289e1cc6c93819db02ffb060bef30c2402d2968f408fe352ff5ac1"
+  },
+  {
+    "id": "item.dwarven_axe",
+    "batch": 2,
+    "native": "art/generated/items/dwarven_axe.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "3649c8490834b70d05d357e8397abd55dbfdf2e6850f57d72973d0f095fe454a"
+  },
+  {
+    "id": "item.wardens_blade",
+    "batch": 2,
+    "native": "art/generated/items/wardens_blade.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "99626cf1903c6e0eca080e592e527594717b701e389dab3d4bdb1e9cb6dd082f"
+  },
+  {
+    "id": "item.flamebrand",
+    "batch": 2,
+    "native": "art/generated/items/flamebrand.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "22788115a27b0e7f7b107addc9d41fa00a51abbf7c1027c3f8ef469b21dcca49"
+  },
+  {
+    "id": "item.dragonslayer",
+    "batch": 2,
+    "native": "art/generated/items/dragonslayer.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "2ca66834f7dc1b69bb599c3d992efebf67191de7bc09d84976092a1766c5caf0"
+  },
+  {
+    "id": "item.wolfskin_cloak",
+    "batch": 2,
+    "native": "art/generated/items/wolfskin_cloak.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "125e20808eaa8a678aa90db8a31505de2b93211c6fc14810402d94478a835a53"
+  },
+  {
+    "id": "item.elven_cloak",
+    "batch": 2,
+    "native": "art/generated/items/elven_cloak.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "77c1d3d596fd9c3659a922fb52bc58e6166b424fa735c1e23af2fab32e3f95fb"
+  },
+  {
+    "id": "item.cloak_of_shadows",
+    "batch": 2,
+    "native": "art/generated/items/cloak_of_shadows.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "e2ca413a813c5e81fb56610036a5a60326a9cc3d2286eb272a8d628cf2d9764b"
+  },
+  {
+    "id": "item.archmages_mantle",
+    "batch": 2,
+    "native": "art/generated/items/archmages_mantle.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "5426a87445acd7c4fc5bcbcd9e580751f4170c4b03ef0c158bf2da6fbfb21337"
+  },
+  {
+    "id": "item.phoenix_mantle",
+    "batch": 2,
+    "native": "art/generated/items/phoenix_mantle.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "6fd3e3f6a9c73a3bc38925449865fda21bbab47ee6c28924aab2340e928a9510"
+  },
+  {
+    "id": "item.healing_draught",
+    "batch": 2,
+    "native": "art/generated/items/healing_draught.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "b2aa923457d22d207ff7582afcbe038d757426c6990a0185357ad01d5c403880"
+  },
+  {
+    "id": "item.elixir_of_vigour",
+    "batch": 2,
+    "native": "art/generated/items/elixir_of_vigour.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "f0204c65ea04a6ac36b1629ab97a67725c7b2c330fdc4aacf2e5353ea2a0534a"
+  },
+  {
+    "id": "item.invisibility_draught",
+    "batch": 2,
+    "native": "art/generated/items/invisibility_draught.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "2ec9a8a2f8154521a3dbbd675f74c1ceecdd4d9041a4eb04719ec1c0354350cc"
+  },
+  {
+    "id": "item.mermaids_breath",
+    "batch": 2,
+    "native": "art/generated/items/mermaids_breath.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "64d6cbd065a0179ae21059e0022392f3b0a7406c09d14afa213beef78202de4e"
+  },
+  {
+    "id": "item.ambrosia",
+    "batch": 2,
+    "native": "art/generated/items/ambrosia.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "cda313ac4356f1a203466907b6170484c337ef65ddec2a6b9f6ae7d1996d45a8"
+  },
+  {
+    "id": "item.scroll_of_sparks",
+    "batch": 2,
+    "native": "art/generated/items/scroll_of_sparks.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "1ce3f406c029fda35704ac13cf9cfd475356c1fb104290c7a4ecf5dbf52bc11a"
+  },
+  {
+    "id": "item.scroll_of_fireball",
+    "batch": 2,
+    "native": "art/generated/items/scroll_of_fireball.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "fbd10a52f85186861fdbb7e339e16225be7817e8e16b1768eaa5ac6b2a6289f7"
+  },
+  {
+    "id": "item.summoners_grimoire",
+    "batch": 2,
+    "native": "art/generated/items/summoners_grimoire.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "587150d58f5d6ed3bfd1eef04cc11bcc3504b4461ca2aabdd0371087ccc07bff"
+  },
+  {
+    "id": "item.lichs_tome",
+    "batch": 2,
+    "native": "art/generated/items/lichs_tome.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "d91001b5a71477582cef6ca2863d5f1bbe09065fc920c56194ed921199c2af0a"
+  },
+  {
+    "id": "item.keyhold_codex",
+    "batch": 2,
+    "native": "art/generated/items/keyhold_codex.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "4150febb13b223cb974f8939cee58f15a64779eb9c3720306768aa943d555c2a"
+  },
+  {
+    "id": "item.sand_case",
+    "batch": 2,
+    "native": "art/generated/items/sand_case.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "45053b09bcf7d640a7f40122ef4135e8665693d41749cbf6f71fe1839784044e"
+  },
+  {
+    "id": "item.moonstone",
+    "batch": 2,
+    "native": "art/generated/items/moonstone.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "40332c2d15906618a890e4162fc559822814f98c90a72f54dcdcf0328a820d25"
+  },
+  {
+    "id": "item.elfstone",
+    "batch": 2,
+    "native": "art/generated/items/elfstone.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "f5c88d022beb620b446884f4f06c9648fe81755585d3d3ba83ab1c94d641f052"
+  },
+  {
+    "id": "item.blood_ruby",
+    "batch": 2,
+    "native": "art/generated/items/blood_ruby.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "b5b442b65c504fc8008e3b26080ade1d7eba5ee83acdf6887799e7bfbf53cd40"
+  },
+  {
+    "id": "item.starstone",
+    "batch": 2,
+    "native": "art/generated/items/starstone.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "94d44c92cb149e81ac1ffea77020424e07c1d6d948ff536f8d5fed4da8917017"
+  },
+  {
+    "id": "item.dragons_eye",
+    "batch": 2,
+    "native": "art/generated/items/dragons_eye.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "8af8479324137f875fa009c55f3f184c9c6bfe87b01e30afdc3c42ce2fb9aaf5"
+  },
+  {
+    "id": "item.paste_gem",
+    "batch": 2,
+    "native": "art/generated/items/paste_gem.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "54e4253fdabead80a7f604935eb2b5ec9b91236a558af2909a58c590de90ca48"
+  },
+  {
+    "id": "heartsong.lullaby_box",
+    "batch": 0,
+    "native": "art/generated/heartsongs/lullaby_box.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "f247a0c7c04c870e982223afb1166842267ba6143c947a8a6fb2b214b7ba588f"
+  },
+  {
+    "id": "heartsong.shepherds_pipe",
+    "batch": 2,
+    "native": "art/generated/heartsongs/shepherds_pipe.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "0c1b76f8860254dfd241993e9c6c09b699c1cc7ed57f1e603b6772feb550a9c5"
+  },
+  {
+    "id": "heartsong.fey_chimes",
+    "batch": 2,
+    "native": "art/generated/heartsongs/fey_chimes.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "9d711401cb3a460babf600a140d3956e63f92cc6c1f84a38adf449ac9375daa5"
+  },
+  {
+    "id": "heartsong.dragons_egg",
+    "batch": 2,
+    "native": "art/generated/heartsongs/dragons_egg.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "99c151ce0d7683649df06bc739550f67bcf1c909daf92968a622b27318b6fd01"
+  },
+  {
+    "id": "heartsong.clockwork_lark",
+    "batch": 2,
+    "native": "art/generated/heartsongs/clockwork_lark.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "35993dc43904d3db88bee4b88b96b7e712b60b1ad8196fe9d0db9afbc552fa82"
+  },
+  {
+    "id": "heartsong.hearthstone",
+    "batch": 2,
+    "native": "art/generated/heartsongs/hearthstone.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "f6f8826d3c389bf4ce3d401b9f1d8d7014c22ddc4bf8ae0366c6f9407ab44581"
+  },
+  {
+    "id": "heartsong.drowned_bell",
+    "batch": 2,
+    "native": "art/generated/heartsongs/drowned_bell.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "99b4f1c8ec82aa53c5b94e3460ed8cd2493587ecf22203ff89282c7325867998"
+  },
+  {
+    "id": "heartsong.bottled_star",
+    "batch": 2,
+    "native": "art/generated/heartsongs/bottled_star.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "aa7181f3a3008c198cb03a8266a2e7b5a87ee5d1d141cb44462913fabc5af0b0"
+  },
+  {
+    "id": "heartsong.imps_ember",
+    "batch": 2,
+    "native": "art/generated/heartsongs/imps_ember.png",
+    "size": [
+      32,
+      32
+    ],
+    "sha256": "a8fa1cfbadbbe6b6daa96f51609f1245e280ad6a9dc813302c7bcc3af0c5c18a"
+  },
+  {
+    "id": "curio.monocle",
+    "batch": 0,
+    "native": "art/generated/curios/monocle.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "111ebeca1ddd63bb752591a4ad8d59fd805ca37e051f021c3f8f19738b33fd39"
+  },
+  {
+    "id": "curio.draught",
+    "batch": 3,
+    "native": "art/generated/curios/draught.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "560a93f9af841bfb782f057b2fb8602447fa3c64fa364090d3c2438b37c1236b"
+  },
+  {
+    "id": "curio.aether",
+    "batch": 3,
+    "native": "art/generated/curios/aether.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "a2c65b98ccf36a241b1c7b6d3b97777fbc6c2687d529329938232ca0809d53d5"
+  },
+  {
+    "id": "curio.chalk",
+    "batch": 3,
+    "native": "art/generated/curios/chalk.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "d80ad10d18a5114d87fea3e6f151eddd1fc682328b87be8411b76f0f27dceff9"
+  },
+  {
+    "id": "curio.ring",
+    "batch": 3,
+    "native": "art/generated/curios/ring.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "003836deaa5626806b00f148616ea877298461552320d6816709bca4463ef88a"
+  },
+  {
+    "id": "curio.staff",
+    "batch": 3,
+    "native": "art/generated/curios/staff.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "2b2bf491c59d4875e3f38f2b6748c1eb3f5d0721d7c97ee9c006b04638049088"
+  },
+  {
+    "id": "curio.sealed",
+    "batch": 3,
+    "native": "art/generated/curios/sealed.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "ee42394ed88ba731669505dcb145a78d31aea93df30610b001f7a60ff7f195ba"
+  },
+  {
+    "id": "curio.dip",
+    "batch": 3,
+    "native": "art/generated/curios/dip.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "ca0e798d3fe564210ec27db1f22b8d9708474c9c3fdd0141d9c6fea2deb0fa73"
+  },
+  {
+    "id": "curio.bond",
+    "batch": 3,
+    "native": "art/generated/curios/bond.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "1a904806b3235511ba523ab80e5e59316e5d37a6908e829064751de9e73b5e9e"
+  },
+  {
+    "id": "curio.wholesale",
+    "batch": 3,
+    "native": "art/generated/curios/wholesale.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "b5bacd03eff157313f5e161c4f2560b463cde14c0391bbd1fd2c21d2ec1fca52"
+  },
+  {
+    "id": "curio.token",
+    "batch": 3,
+    "native": "art/generated/curios/token.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "65f1e74f7f7a45237952255ada5c0a3173368caf0388612a3a66efd49861fa9a"
+  },
+  {
+    "id": "curio.blindfold",
+    "batch": 3,
+    "native": "art/generated/curios/blindfold.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "2f453a53b6a8a8d63c2cc4cf6c93a63a26f986c972351bff3d28a04ebddeff9a"
+  },
+  {
+    "id": "curio.signet",
+    "batch": 3,
+    "native": "art/generated/curios/signet.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "d3d9bdca7fb1f127d3b026bb74d03f0e939561bdf5fa08df02a69f5dbdc513f3"
+  },
+  {
+    "id": "curio.tongue",
+    "batch": 3,
+    "native": "art/generated/curios/tongue.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "4ce84eee2018d1021ea92e15c4ae37a3b43c8bed9542e3afb451f6ec88cad3d7"
+  },
+  {
+    "id": "curio.knot",
+    "batch": 3,
+    "native": "art/generated/curios/knot.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "3c76ca7aa416d309f232423fb52d1e4c2ac0e8c526116800a99a14fd7c381018"
+  },
+  {
+    "id": "curio.hourglass",
+    "batch": 3,
+    "native": "art/generated/curios/hourglass.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "95248b3f43f345e1e633eaf2f67c7657229aa45eb980c5aaa9ac3d34a172465d"
+  },
+  {
+    "id": "curio.bell",
+    "batch": 3,
+    "native": "art/generated/curios/bell.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "d895036628ef4dd95f6f287f1c9f3fbc62a933ed2da06e726530ddc749c0ca84"
+  },
+  {
+    "id": "curio.coffer",
+    "batch": 3,
+    "native": "art/generated/curios/coffer.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "24bab2cf96a49686ccb4127290e981f59f23628b5f8ed2e93184fefc438abcd5"
+  },
+  {
+    "id": "curio.goldentongue",
+    "batch": 3,
+    "native": "art/generated/curios/goldentongue.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "7565e0dc282a79fe2f94722ad80ba4d282e937099f3fca26824998ae0d7ae490"
+  },
+  {
+    "id": "curio.trumpet",
+    "batch": 3,
+    "native": "art/generated/curios/trumpet.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "e463fc72414e8455add126cc922ba2ea59313d548cedda52052e68a8b80a18d7"
+  },
+  {
+    "id": "curio.watch",
+    "batch": 3,
+    "native": "art/generated/curios/watch.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "c3ca92bc58aabfd572d86567df8265ec49f299bf51dd18de8521c56007376137"
+  },
+  {
+    "id": "curio.beads",
+    "batch": 3,
+    "native": "art/generated/curios/beads.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "969c8454ae146732d9f5dc30b767baab5dcf8ff8627c3c780bcce374b78f2224"
+  },
+  {
+    "id": "curio.seal",
+    "batch": 3,
+    "native": "art/generated/curios/seal.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "e630c566a804f48d8651c85b7ae8ad091776c5ed4b12db12e0afdf70b6158d5c"
+  },
+  {
+    "id": "curio.register",
+    "batch": 3,
+    "native": "art/generated/curios/register.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "e5f7833d8ce0fd4e99d9427155abdeb9f96b51c7e5c0710d9f7fee797854bec9"
+  },
+  {
+    "id": "curio.crescent",
+    "batch": 3,
+    "native": "art/generated/curios/crescent.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "27ccc40baad7241cf4e04e6b4fef4f29260a9b1e9b73e46fc2b9908f6b7aea6d"
+  },
+  {
+    "id": "curio.fork",
+    "batch": 3,
+    "native": "art/generated/curios/fork.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "4fc22b40cd44218aaeaf997f1e048eb09d42e11a7e1c4de167a2471b49481a88"
+  },
+  {
+    "id": "curio.ledger",
+    "batch": 3,
+    "native": "art/generated/curios/ledger.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "0c8c5bcb5acfac7fbeed7960f641b2a59202f9e47e028ffab41781950927495f"
+  },
+  {
+    "id": "curio.truthglass",
+    "batch": 3,
+    "native": "art/generated/curios/truthglass.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "890da865b52ad2be3d01266a559a2dba69165222d3cd7622918dce1af1408d4d"
+  },
+  {
+    "id": "curio.crate",
+    "batch": 3,
+    "native": "art/generated/curios/crate.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "10ca7c92050797c38eb221b44a50456b4e51ffbacc97a77f5fa1a8a7ecad54bb"
+  },
+  {
+    "id": "curio.hook",
+    "batch": 3,
+    "native": "art/generated/curios/hook.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "a5544eadfbd518842b1db0e8bdac8709059dfef609395f98a80f4834cf0f1860"
+  },
+  {
+    "id": "curio.rod",
+    "batch": 3,
+    "native": "art/generated/curios/rod.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "d9e7d30f9436cc42bb25f9f9aff607359fd876b4d25774857d33589655d634ac"
+  },
+  {
+    "id": "curio.log",
+    "batch": 3,
+    "native": "art/generated/curios/log.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "8d86137d5789724d9ee5f4bccc422f81e4e4ce655237ed1583d80f9a56cdbea7"
+  },
+  {
+    "id": "curio.pass",
+    "batch": 3,
+    "native": "art/generated/curios/pass.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "91f7e3fe0d3b311d0545fca96f16ba066bcfc522e983bc324d518433ea709733"
+  },
+  {
+    "id": "curio.compass",
+    "batch": 3,
+    "native": "art/generated/curios/compass.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "0f23eb768fc0095bea420c853c634f886fbe66e6821c7fcc958b77f1ff0763e0"
+  },
+  {
+    "id": "curio.wardlamp",
+    "batch": 3,
+    "native": "art/generated/curios/wardlamp.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "9f71af48228bf4613d44589383b843477d5b959f526ffa2c63fa5b0b8cb254ec"
+  },
+  {
+    "id": "curio.pillow",
+    "batch": 3,
+    "native": "art/generated/curios/pillow.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "cd9312f5d4e9e4d65653426d468798fe9c479cab8949b107055260f594fd2020"
+  },
+  {
+    "id": "curio.wardtally",
+    "batch": 3,
+    "native": "art/generated/curios/wardtally.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "4addca11fe706830dffac80013cb395d06319661042805eb12789f5d559976f6"
+  },
+  {
+    "id": "curio.wardkey",
+    "batch": 3,
+    "native": "art/generated/curios/wardkey.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "ee44d0b29c49aaf1e053384e45c9e024f7e41204198f44cd6c218cf9178de6de"
+  },
+  {
+    "id": "curio.aldricseal",
+    "batch": 3,
+    "native": "art/generated/curios/aldricseal.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "69355ed4c9e36b7185bf2e76ff3be79c7e25d7c58a16f386140b18d9b26b3145"
+  },
+  {
+    "id": "curio.shell",
+    "batch": 3,
+    "native": "art/generated/curios/shell.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "61e8688136bfa1b6db3dc8cc70ee256a86c74f7b937a54bf98ca677470a460f2"
+  },
+  {
+    "id": "curio.coin",
+    "batch": 3,
+    "native": "art/generated/curios/coin.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "e464fac0024613f3dab12520cf695bff617570caa1cb9912e6e853575370b6df"
+  },
+  {
+    "id": "curio.foot",
+    "batch": 3,
+    "native": "art/generated/curios/foot.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "291b0846cec8f20797c9b21871df1e037841604baa63462a9c2c15eca3abbef7"
+  },
+  {
+    "id": "curio.wishbone",
+    "batch": 3,
+    "native": "art/generated/curios/wishbone.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "2c8cb68e37b386f21126caf95fb6dc5b5992d6c1282f72246bbff9a9319d49fa"
+  },
+  {
+    "id": "curio.horseshoe",
+    "batch": 3,
+    "native": "art/generated/curios/horseshoe.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "5d30f393cf88d30b22db971b08f6ee477c26bb5b1de10c413aace75985982642"
+  },
+  {
+    "id": "curio.clover",
+    "batch": 3,
+    "native": "art/generated/curios/clover.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "9a6d88d30e64b0a3e29975957c652d439e4c8827fa39dc8f943707ef7da26df4"
+  },
+  {
+    "id": "curio.star",
+    "batch": 3,
+    "native": "art/generated/curios/star.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "c7127d7b442991d9730345de9f204e85a403af2053033a186660796f5e07b3a5"
+  },
+  {
+    "id": "curio.spindle",
+    "batch": 3,
+    "native": "art/generated/curios/spindle.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "3834f6b1552740f7b12b3455890742c7f14e69b18514131ed0cb3551b0511963"
+  },
+  {
+    "id": "curio.lantern",
+    "batch": 3,
+    "native": "art/generated/curios/lantern.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "0c2e7d04d7161e4b46402b9e7dd87fab1045136b8d26bdff225dd9479db3462c"
+  },
+  {
+    "id": "curio.queue",
+    "batch": 3,
+    "native": "art/generated/curios/queue.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "b1849f84cb16de808e04d0398e800d8ca695a8bb8147f405ecf5881019da2be7"
+  },
+  {
+    "id": "curio.horn",
+    "batch": 3,
+    "native": "art/generated/curios/horn.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "7fcc2ad87dd0443dc92ebb09f9ed1f1950dfbd674c6658524ef5422259ad9cff"
+  },
+  {
+    "id": "curio.guestbook",
+    "batch": 3,
+    "native": "art/generated/curios/guestbook.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "4634cfc1aa5038f60fd2ac496fb9f7ac5eae47d03723e31331ff5ee99b98c3cb"
+  },
+  {
+    "id": "curio.catalogue",
+    "batch": 3,
+    "native": "art/generated/curios/catalogue.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "5c4b6d70ea012895894440f7614ea42d76733c7013c9c3b683d164943a592128"
+  },
+  {
+    "id": "curio.dome",
+    "batch": 3,
+    "native": "art/generated/curios/dome.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "6d59808fd8f670de7d4449746cc967000393d257bc196d0744d2b8a4785bb83d"
+  },
+  {
+    "id": "curio.book",
+    "batch": 3,
+    "native": "art/generated/curios/book.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "014219854301fed3d6784d876371297b3bd8323264a78157c21be4ee7dc24146"
+  },
+  {
+    "id": "curio.rope",
+    "batch": 3,
+    "native": "art/generated/curios/rope.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "561503ab0129ee07ce3d2c1bcd579fad5c9ea12c78b1031db881118c215e2d16"
+  },
+  {
+    "id": "curio.lamps",
+    "batch": 3,
+    "native": "art/generated/curios/lamps.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "26fc6647c09f145fa62a69da9d46b0554fdba96b4b0958ad21b86dc46e91dd79"
+  },
+  {
+    "id": "curio.gauntlet",
+    "batch": 3,
+    "native": "art/generated/curios/gauntlet.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "572a68c7fcec61051cdc41d6bf651942b317c66eb756e5422abb460d02bb6730"
+  },
+  {
+    "id": "curio.cap",
+    "batch": 3,
+    "native": "art/generated/curios/cap.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "93ba28b43b53140d663f40912b45a7ceebcdce3d900ebc1ad272e5e71b50b001"
+  },
+  {
+    "id": "curio.whetstone",
+    "batch": 3,
+    "native": "art/generated/curios/whetstone.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "d033d8cccfee053e38813f97327d64816bc3d2777a0c66b02277b058d98e790f"
+  },
+  {
+    "id": "curio.dummy",
+    "batch": 3,
+    "native": "art/generated/curios/dummy.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "3efb6190466fe2feaa081f739304465d843e97801dae956daf0ba8731e7e0d98"
+  },
+  {
+    "id": "curio.scales",
+    "batch": 3,
+    "native": "art/generated/curios/scales.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "d94e46a7b8f0ccfcbbae77ce56724929057cec05668e5efa569a35e4755f4b9d"
+  },
+  {
+    "id": "curio.still",
+    "batch": 3,
+    "native": "art/generated/curios/still.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "63c01a9eb11667b2ba99eca17b59f44258b69645e045a670153c9f4398a9b7a7"
+  },
+  {
+    "id": "curio.desk",
+    "batch": 3,
+    "native": "art/generated/curios/desk.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "64c03e149dffaf74dbef81072be85cdea750617e55c52ef2b0f0261af91f9547"
+  },
+  {
+    "id": "curio.wheel",
+    "batch": 3,
+    "native": "art/generated/curios/wheel.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "1618af77344d2cbcd5115689bc36daa36a1c3d0c7d2a97f3e3632428bf2bef99"
+  },
+  {
+    "id": "curio.oil",
+    "batch": 3,
+    "native": "art/generated/curios/oil.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "89c7c5c1055f6703a11fb9acfa66ee9262cbad5ceed891f43c02d36613a1ae4a"
+  },
+  {
+    "id": "curio.knife",
+    "batch": 3,
+    "native": "art/generated/curios/knife.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "5d70dd18e379af9dbd4bcaf0f5c6634a620d566e23a44c98c7acf71bcb99e29f"
+  },
+  {
+    "id": "curio.gloves",
+    "batch": 3,
+    "native": "art/generated/curios/gloves.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "947c4312e52f84b74ecca864f5dfd6a87c7f5f6506dd23c31ab313a85cabbcad"
+  },
+  {
+    "id": "curio.loupe",
+    "batch": 3,
+    "native": "art/generated/curios/loupe.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "3a3cd2b8f65eea268546a2d72b28baf17ace0600e75d255c2b06269f42023cfe"
+  },
+  {
+    "id": "curio.mark",
+    "batch": 3,
+    "native": "art/generated/curios/mark.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "672369bc100bcd8fcfe303144e003371b3086462f6f0f1003502f1ffb46ed296"
+  },
+  {
+    "id": "curio.purse",
+    "batch": 3,
+    "native": "art/generated/curios/purse.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "003950d68d4325fe39598961180bf016c2de7b0561d8309ce48910cb9bdb40a9"
+  },
+  {
+    "id": "curio.ticket",
+    "batch": 3,
+    "native": "art/generated/curios/ticket.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "884fce41ba626aad4bcbc350724669c0eb8c52c764827d58b72b393690e6ac9b"
+  },
+  {
+    "id": "curio.marker",
+    "batch": 3,
+    "native": "art/generated/curios/marker.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "ea1a9ffaff7c46d43744f1ea50dbc2526ec7f0e356014a8228d09db57d5967c2"
+  },
+  {
+    "id": "curio.jar",
+    "batch": 3,
+    "native": "art/generated/curios/jar.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "2e558a45ceb16802ad76125ace0af556dc07a08241b6f97899cb064772694ee0"
+  },
+  {
+    "id": "curio.lockbox",
+    "batch": 3,
+    "native": "art/generated/curios/lockbox.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "b9ad068fe18cd1f121d7f3b621fbf3b7131baca02fbbd1e93d4d8d96c1971ce2"
+  },
+  {
+    "id": "curio.note",
+    "batch": 3,
+    "native": "art/generated/curios/note.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "8078410353105d479dd3ecf98ad9114c771a54bb7e6b8b57d985bc6685b8d227"
+  },
+  {
+    "id": "curio.letter",
+    "batch": 3,
+    "native": "art/generated/curios/letter.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "2847123f24c565a44bc24fb203572075c034c3bc5c02b46f9c5a36f9ad7a00a7"
+  },
+  {
+    "id": "curio.ribbon",
+    "batch": 3,
+    "native": "art/generated/curios/ribbon.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "f52c1022962938ef26ec5f9a7bce1a4314476850d3028eae17d9bac5fc691b34"
+  },
+  {
+    "id": "curio.errand",
+    "batch": 3,
+    "native": "art/generated/curios/errand.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "162871000cabdf03af28642a2faac5d08620e1eb516c1fb500fa64da5388a62f"
+  },
+  {
+    "id": "curio.net",
+    "batch": 3,
+    "native": "art/generated/curios/net.png",
+    "size": [
+      28,
+      28
+    ],
+    "sha256": "588f46a9ec11290a418d4a85e1a2b94c31fb0ab8e77196892d9dc3e0f1e265e5"
+  }
+]

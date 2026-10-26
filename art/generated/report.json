@@ -1,7 +1,6 @@
 {
  "summary": {
-  "ok": 85,
-  "missing": 178
+  "ok": 263
  },
  "assets": {
   "bg.shop1": {
@@ -12,15 +11,24 @@
    "priority": "P1"
   },
   "bg.shop2": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 48,
    "priority": "P1"
   },
   "bg.shop3": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 48,
    "priority": "P1"
   },
   "bg.shop4": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 48,
    "priority": "P1"
   },
   "chest.wood.lid": {
@@ -45,159 +53,278 @@
    "priority": "P1"
   },
   "chest.green.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.green.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "chest.green.open": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.blue.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.blue.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "chest.blue.open": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.purple.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "chest.purple.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.purple.open": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.gold.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.gold.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.gold.open": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.black.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "chest.black.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.black.open": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "chest.crown.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P2"
   },
   "chest.crown.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P2"
   },
   "chest.crown.open": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P2"
   },
   "chest.lock.rusty.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
    "priority": "P1"
   },
   "chest.lock.rusty.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "chest.lock.guild.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
    "priority": "P1"
   },
   "chest.lock.guild.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "chest.lock.dwarven.lid": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
    "priority": "P1"
   },
   "chest.lock.dwarven.body": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
    "priority": "P1"
   },
   "icon.upgrade.shop2": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.shop3": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.shop4": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.sign": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.scales": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
    "priority": "P1"
   },
   "icon.upgrade.cabinet1": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.cabinet2": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.cabinet3": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [
+    "content is only 45% of the width: small for an icon"
+   ],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.cabinet4": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.cabinet5": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
    "priority": "P1"
   },
   "icon.upgrade.cabinet6": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.picks": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.bench": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.workshop": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.master": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.lamp": {
@@ -210,47 +337,82 @@
    "priority": "P1"
   },
   "icon.upgrade.crier": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.block": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
    "priority": "P1"
   },
   "icon.upgrade.charter": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.case": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.velvet": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.magnet": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.seal": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [
+    "content is only 55% of the width: small for an icon"
+   ],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.night": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.warrant": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.patrons": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.upgrade.engine": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "icon.kind.coins": {
@@ -261,183 +423,318 @@
    "priority": "P1"
   },
   "icon.kind.arms": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
    "priority": "P1"
   },
   "icon.kind.garb": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
    "priority": "P1"
   },
   "icon.kind.potions": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
    "priority": "P1"
   },
   "icon.kind.scrolls": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
    "priority": "P1"
   },
   "icon.kind.gems": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
    "priority": "P1"
   },
   "icon.kind.heartsong": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 6,
    "priority": "P1"
   },
   "icon.kind.hidden": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
    "priority": "P1"
   },
   "emblem.guild": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "story.key_whole": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "story.key_shard_1": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "story.key_shard_2": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "story.key_shard_3": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "story.key_shard_4": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
    "priority": "P1"
   },
   "ui.panel": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 5,
    "priority": "P2"
   },
   "ui.frame": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 1,
    "priority": "P2"
   },
   "ui.button": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 5,
    "priority": "P2"
   },
   "ui.button_pressed": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 4,
    "priority": "P2"
   },
   "ui.slip_paper": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 4,
    "priority": "P3"
   },
   "ui.bubble": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 2,
    "priority": "P3"
   },
   "ui.bubble_tail": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 2,
    "priority": "P3"
   },
   "fx.explosion": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 6,
    "priority": "P1"
   },
   "fx.coin_spin": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 6,
    "priority": "P2"
   },
   "fx.sparkle": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 3,
    "priority": "P2"
   },
   "fx.dust": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 6,
    "priority": "P2"
   },
   "lock.face.rusty": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P2"
   },
   "lock.face.guild": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P2"
   },
   "lock.face.dwarven": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P2"
   },
   "brand.logo": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 24,
    "priority": "P2"
   },
   "brand.app_icon_64": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P2"
   },
   "brand.app_icon_48": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P2"
   },
   "brand.app_icon_32": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P2"
   },
   "brand.app_icon_16": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
    "priority": "P2"
   },
   "scene.guild": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 39,
    "priority": "P3"
   },
   "scene.bram": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 48,
    "priority": "P3"
   },
   "scene.keyhold": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 48,
    "priority": "P3"
   },
   "scene.vault": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 44,
    "priority": "P3"
   },
   "store.header_capsule": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 62,
    "priority": "P3"
   },
   "store.small_capsule": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 58,
    "priority": "P3"
   },
   "store.main_capsule": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 65,
    "priority": "P3"
   },
   "store.vertical_capsule": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 62,
    "priority": "P3"
   },
   "store.page_background": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 66,
    "priority": "P3"
   },
   "store.library_capsule": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 64,
    "priority": "P3"
   },
   "store.library_hero": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 63,
    "priority": "P3"
   },
   "store.community_icon": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 49,
    "priority": "P3"
   },
   "store.library_logo": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 24,
    "priority": "P3"
   },
   "portrait.tam": {
@@ -693,11 +990,17 @@
    "priority": "P1"
   },
   "portrait.mara": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P3"
   },
   "portrait.king": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 32,
    "priority": "P3"
   },
   "item.barrow_silver": {
@@ -1002,315 +1305,555 @@
    "priority": "P1"
   },
   "curio.draught": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.aether": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.chalk": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
    "priority": "P1"
   },
   "curio.ring": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.staff": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.sealed": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.dip": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.bond": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.wholesale": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
    "priority": "P1"
   },
   "curio.token": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.blindfold": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.signet": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.tongue": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
    "priority": "P1"
   },
   "curio.knot": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
    "priority": "P1"
   },
   "curio.hourglass": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.bell": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.coffer": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.goldentongue": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.trumpet": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
    "priority": "P1"
   },
   "curio.watch": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.beads": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.seal": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.register": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.crescent": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.fork": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.ledger": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.truthglass": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.crate": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.hook": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.rod": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.log": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.pass": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.compass": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.wardlamp": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [
+    "content is only 58% of the width: small for an icon"
+   ],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.pillow": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.wardtally": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.wardkey": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.aldricseal": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.shell": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
    "priority": "P1"
   },
   "curio.coin": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.foot": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.wishbone": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 6,
    "priority": "P1"
   },
   "curio.horseshoe": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
    "priority": "P1"
   },
   "curio.clover": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.star": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
    "priority": "P1"
   },
   "curio.spindle": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [
+    "content is only 58% of the width: small for an icon"
+   ],
+   "colours": 14,
    "priority": "P1"
   },
   "curio.lantern": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.queue": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.horn": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.guestbook": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.catalogue": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.dome": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.book": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.rope": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.lamps": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P1"
   },
   "curio.gauntlet": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.cap": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.whetstone": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.dummy": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [
+    "content is only 42% of the width: small for an icon"
+   ],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.scales": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.still": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.desk": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.wheel": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.oil": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   },
   "curio.knife": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P1"
   },
   "curio.gloves": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
    "priority": "P1"
   },
   "curio.loupe": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.mark": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.purse": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.ticket": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.marker": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
    "priority": "P1"
   },
   "curio.jar": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.lockbox": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.note": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.letter": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
    "priority": "P1"
   },
   "curio.ribbon": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.errand": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
    "priority": "P1"
   },
   "curio.net": {
-   "status": "missing",
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
    "priority": "P1"
   }
  }
