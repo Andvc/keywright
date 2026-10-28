@@ -1,517 +1,693 @@
 {
  "summary": {
-  "ok": 263
+  "fail": 210,
+  "ok": 26
  },
  "assets": {
   "bg.shop1": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 48,
    "priority": "P1"
   },
   "bg.shop2": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 48,
    "priority": "P1"
   },
   "bg.shop3": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 48,
    "priority": "P1"
   },
   "bg.shop4": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 48,
    "priority": "P1"
   },
-  "chest.wood.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.wood.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.wood.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.green.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.green.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1"
-  },
-  "chest.green.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.blue.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.blue.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P1"
-  },
-  "chest.blue.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.purple.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1"
-  },
-  "chest.purple.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.purple.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.gold.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.gold.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.gold.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.black.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1"
-  },
-  "chest.black.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.black.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1"
-  },
-  "chest.crown.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P2"
-  },
-  "chest.crown.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P2"
-  },
-  "chest.crown.open": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P2"
-  },
-  "chest.lock.rusty.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 7,
-   "priority": "P1"
-  },
-  "chest.lock.rusty.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 12,
-   "priority": "P1"
-  },
-  "chest.lock.guild.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 7,
-   "priority": "P1"
-  },
-  "chest.lock.guild.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 12,
-   "priority": "P1"
-  },
-  "chest.lock.dwarven.lid": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 8,
-   "priority": "P1"
-  },
-  "chest.lock.dwarven.body": {
-   "status": "ok",
-   "errors": [],
-   "warnings": [],
-   "colours": 10,
-   "priority": "P1"
-  },
   "icon.upgrade.shop2": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.325, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.727, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.325,
+    "edges": 0.727,
+    "busy": 26.826
+   }
   },
   "icon.upgrade.shop3": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.389, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.762, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.389,
+    "edges": 0.762,
+    "busy": 48.828
+   }
   },
   "icon.upgrade.shop4": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.267, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.681, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.267,
+    "edges": 0.681,
+    "busy": 30.368
+   }
   },
   "icon.upgrade.sign": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.378, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.740, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.378,
+    "edges": 0.74,
+    "busy": 22.47
+   }
   },
   "icon.upgrade.scales": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "11 colours, at most 8",
+    "too busy: lone specks 0.587, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.783, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 11,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.587,
+    "edges": 0.783,
+    "busy": 36.253
+   }
   },
   "icon.upgrade.cabinet1": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.145,
+    "edges": 0.597,
+    "busy": 13.743
+   }
   },
   "icon.upgrade.cabinet2": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.252, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.670, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.252,
+    "edges": 0.67,
+    "busy": 21.035
+   }
   },
   "icon.upgrade.cabinet3": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.196, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.657, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [
     "content is only 45% of the width: small for an icon"
    ],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.196,
+    "edges": 0.657,
+    "busy": 28.925
+   }
   },
   "icon.upgrade.cabinet4": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.225, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.225,
+    "edges": 0.566,
+    "busy": 34.026
+   }
   },
   "icon.upgrade.cabinet5": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "11 colours, at most 8",
+    "too busy: lone specks 0.275, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.608, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 11,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.275,
+    "edges": 0.608,
+    "busy": 19.808
+   }
   },
   "icon.upgrade.cabinet6": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.342, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.684, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.342,
+    "edges": 0.684,
+    "busy": 47.422
+   }
   },
   "icon.upgrade.picks": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.506, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.773, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.506,
+    "edges": 0.773,
+    "busy": 55.098
+   }
   },
   "icon.upgrade.bench": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.391, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.718, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.391,
+    "edges": 0.718,
+    "busy": 27.933
+   }
   },
   "icon.upgrade.workshop": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.322, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.699, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.322,
+    "edges": 0.699,
+    "busy": 20.045
+   }
   },
   "icon.upgrade.master": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.418, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.761, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.418,
+    "edges": 0.761,
+    "busy": 29.019
+   }
   },
   "icon.upgrade.lamp": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.368, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.712, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [
     "content is only 59% of the width: small for an icon"
    ],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.368,
+    "edges": 0.712,
+    "busy": 24.863
+   }
   },
   "icon.upgrade.crier": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.363, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.724, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.363,
+    "edges": 0.724,
+    "busy": 50.955
+   }
   },
   "icon.upgrade.block": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "11 colours, at most 8",
+    "too busy: lone specks 0.444, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.711, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 11,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.444,
+    "edges": 0.711,
+    "busy": 19.951
+   }
   },
   "icon.upgrade.charter": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.316, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.707, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.316,
+    "edges": 0.707,
+    "busy": 34.459
+   }
   },
   "icon.upgrade.case": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.361, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.743, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.361,
+    "edges": 0.743,
+    "busy": 26.931
+   }
   },
   "icon.upgrade.velvet": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.296, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.296,
+    "edges": 0.693,
+    "busy": 41.902
+   }
   },
   "icon.upgrade.magnet": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.239, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.633, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.239,
+    "edges": 0.633,
+    "busy": 38.791
+   }
   },
   "icon.upgrade.seal": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.480, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.814, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [
     "content is only 55% of the width: small for an icon"
    ],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.48,
+    "edges": 0.814,
+    "busy": 35.942
+   }
   },
   "icon.upgrade.night": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.342, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.725, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.342,
+    "edges": 0.725,
+    "busy": 33.866
+   }
   },
   "icon.upgrade.warrant": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.434, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.799, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.434,
+    "edges": 0.799,
+    "busy": 46.852
+   }
   },
   "icon.upgrade.patrons": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.301, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.681, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.301,
+    "edges": 0.681,
+    "busy": 35.744
+   }
   },
   "icon.upgrade.engine": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.442, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.781, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.442,
+    "edges": 0.781,
+    "busy": 38.407
+   }
   },
   "icon.kind.coins": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "8 colours, at most 6",
+    "too busy: lone specks 0.366, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.742, at most 0.62 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 8,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.366,
+    "edges": 0.742,
+    "busy": 51.029
+   }
   },
   "icon.kind.arms": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "8 colours, at most 6",
+    "too busy: lone specks 0.375, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 8,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.375,
+    "edges": 0.543,
+    "busy": 56.972
+   }
   },
   "icon.kind.garb": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "8 colours, at most 6",
+    "too busy: lone specks 0.222, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 8,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.222,
+    "edges": 0.62,
+    "busy": 23.171
+   }
   },
   "icon.kind.potions": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "8 colours, at most 6"
+   ],
    "warnings": [],
    "colours": 8,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.121,
+    "edges": 0.463,
+    "busy": 36.987
+   }
   },
   "icon.kind.scrolls": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "8 colours, at most 6",
+    "too busy: lone specks 0.205, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 8,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.205,
+    "edges": 0.609,
+    "busy": 32.283
+   }
   },
   "icon.kind.gems": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "7 colours, at most 6",
+    "too busy: lone specks 0.244, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 7,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.244,
+    "edges": 0.609,
+    "busy": 36.027
+   }
   },
   "icon.kind.heartsong": {
    "status": "ok",
    "errors": [],
    "warnings": [],
    "colours": 6,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.139,
+    "edges": 0.519,
+    "busy": 27.734
+   }
   },
   "icon.kind.hidden": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "8 colours, at most 6",
+    "too busy: lone specks 0.267, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.62 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 8,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.267,
+    "edges": 0.693,
+    "busy": 41.889
+   }
   },
   "emblem.guild": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.484, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.794, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.484,
+    "edges": 0.794,
+    "busy": 69.964
+   }
   },
   "story.key_whole": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.367, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.707, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.367,
+    "edges": 0.707,
+    "busy": 42.336
+   }
   },
   "story.key_shard_1": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.463, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.736, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.463,
+    "edges": 0.736,
+    "busy": 43.388
+   }
   },
   "story.key_shard_2": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.400, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.742, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.4,
+    "edges": 0.742,
+    "busy": 39.144
+   }
   },
   "story.key_shard_3": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.414, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.745, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.414,
+    "edges": 0.745,
+    "busy": 38.37
+   }
   },
   "story.key_shard_4": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "12 colours, at most 8",
+    "too busy: lone specks 0.312, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.6 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.312,
+    "edges": 0.693,
+    "busy": 43.133
+   }
   },
   "ui.panel": {
    "status": "ok",
@@ -591,25 +767,54 @@
    "priority": "P2"
   },
   "lock.face.rusty": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.118, at most 0.04 (draw it simpler)",
+    "too busy: edges between neighbours 0.322, at most 0.22 (draw it simpler)",
+    "too busy: brightness step 11.6, at most 10 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P2"
+   "priority": "P2",
+   "calm": {
+    "specks": 0.118,
+    "edges": 0.322,
+    "busy": 11.564
+   }
   },
   "lock.face.guild": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.110, at most 0.04 (draw it simpler)",
+    "too busy: edges between neighbours 0.319, at most 0.22 (draw it simpler)",
+    "too busy: brightness step 16.1, at most 10 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P2"
+   "priority": "P2",
+   "calm": {
+    "specks": 0.11,
+    "edges": 0.319,
+    "busy": 16.082
+   }
   },
   "lock.face.dwarven": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.090, at most 0.04 (draw it simpler)",
+    "too busy: edges between neighbours 0.255, at most 0.22 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P2"
+   "priority": "P2",
+   "calm": {
+    "specks": 0.09,
+    "edges": 0.255,
+    "busy": 9.269
+   }
   },
   "brand.logo": {
    "status": "ok",
@@ -647,32 +852,40 @@
    "priority": "P2"
   },
   "scene.guild": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 39,
-   "priority": "P3"
+   "priority": "P1"
   },
   "scene.bram": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 48,
-   "priority": "P3"
+   "priority": "P1"
   },
   "scene.keyhold": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 48,
-   "priority": "P3"
+   "priority": "P1"
   },
   "scene.vault": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "size 640x360, want 320x180"
+   ],
    "warnings": [],
    "colours": 44,
-   "priority": "P3"
+   "priority": "P1"
   },
   "store.header_capsule": {
    "status": "ok",
@@ -738,1123 +951,2572 @@
    "priority": "P3"
   },
   "portrait.tam": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.103, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.344, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.103,
+    "edges": 0.344,
+    "busy": 18.46
+   }
   },
   "portrait.penn": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.157, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.414, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.2, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.157,
+    "edges": 0.414,
+    "busy": 21.245
+   }
   },
   "portrait.hob": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.164, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.483, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 26.7, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.164,
+    "edges": 0.483,
+    "busy": 26.704
+   }
   },
   "portrait.mags": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.109, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.394, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 22.6, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.109,
+    "edges": 0.394,
+    "busy": 22.579
+   }
   },
   "portrait.dorrin": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "31 colours, at most 20",
+    "too busy: lone specks 0.121, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.415, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 23.8, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 31,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.121,
+    "edges": 0.415,
+    "busy": 23.779
+   }
   },
   "portrait.snikkit": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "31 colours, at most 20",
+    "too busy: lone specks 0.111, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.372, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 31,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.111,
+    "edges": 0.372,
+    "busy": 18.259
+   }
   },
   "portrait.wenna": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.129, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.396, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 19.8, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.129,
+    "edges": 0.396,
+    "busy": 19.782
+   }
   },
   "portrait.bramble": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.203, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.481, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 28.4, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.203,
+    "edges": 0.481,
+    "busy": 28.42
+   }
   },
   "portrait.ansel": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "26 colours, at most 20",
+    "too busy: lone specks 0.070, at most 0.06 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 26,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.07,
+    "edges": 0.299,
+    "busy": 14.573
+   }
   },
   "portrait.fennick": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.126, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.399, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 20.9, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.126,
+    "edges": 0.399,
+    "busy": 20.911
+   }
   },
   "portrait.gerda": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.144, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.402, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 24.3, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.144,
+    "edges": 0.402,
+    "busy": 24.261
+   }
   },
   "portrait.wren": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.146, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.439, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 26.6, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.146,
+    "edges": 0.439,
+    "busy": 26.617
+   }
   },
   "portrait.orrin": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.135, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.420, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 20.7, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.135,
+    "edges": 0.42,
+    "busy": 20.664
+   }
   },
   "portrait.grit": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.193, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.463, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 25.3, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.193,
+    "edges": 0.463,
+    "busy": 25.28
+   }
   },
   "portrait.corisande": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.151, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.447, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 26.1, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.151,
+    "edges": 0.447,
+    "busy": 26.071
+   }
   },
   "portrait.pell": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.127, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.383, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.3, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.127,
+    "edges": 0.383,
+    "busy": 21.279
+   }
   },
   "portrait.quill": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.112, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.362, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 20.4, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.112,
+    "edges": 0.362,
+    "busy": 20.404
+   }
   },
   "portrait.shelly": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.153, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.446, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 24.0, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.153,
+    "edges": 0.446,
+    "busy": 24.049
+   }
   },
   "portrait.aldous": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.152, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.479, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 30.2, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.152,
+    "edges": 0.479,
+    "busy": 30.203
+   }
   },
   "portrait.vexis": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.101, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.346, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 20.5, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.101,
+    "edges": 0.346,
+    "busy": 20.46
+   }
   },
   "portrait.malbranche": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.131, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.421, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 23.6, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.131,
+    "edges": 0.421,
+    "busy": 23.593
+   }
   },
   "portrait.skrae": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.106, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.407, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 20.4, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.106,
+    "edges": 0.407,
+    "busy": 20.359
+   }
   },
   "portrait.ermine": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.129, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.396, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 23.8, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.129,
+    "edges": 0.396,
+    "busy": 23.808
+   }
   },
   "portrait.oriel": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.171, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.417, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.4, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.171,
+    "edges": 0.417,
+    "busy": 21.366
+   }
   },
   "portrait.silas": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.154, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.403, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.2, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.154,
+    "edges": 0.403,
+    "busy": 21.243
+   }
   },
   "portrait.aldo": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.142, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.382, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 20.7, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.142,
+    "edges": 0.382,
+    "busy": 20.676
+   }
   },
   "portrait.maw": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "30 colours, at most 20",
+    "too busy: lone specks 0.272, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.531, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 37.7, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 30,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.272,
+    "edges": 0.531,
+    "busy": 37.727
+   }
   },
   "portrait.bram": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.093, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.340, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.093,
+    "edges": 0.34,
+    "busy": 18.078
+   }
   },
   "portrait.vane": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "30 colours, at most 20",
+    "too busy: lone specks 0.092, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.326, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 30,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.092,
+    "edges": 0.326,
+    "busy": 16.898
+   }
   },
   "portrait.hood": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "25 colours, at most 20",
+    "too busy: lone specks 0.061, at most 0.06 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 25,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.061,
+    "edges": 0.302,
+    "busy": 11.187
+   }
   },
   "portrait.nim": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.131, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.409, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.6, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.131,
+    "edges": 0.409,
+    "busy": 21.554
+   }
   },
   "portrait.stranger": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "23 colours, at most 20",
+    "too busy: lone specks 0.072, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.321, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 23,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.072,
+    "edges": 0.321,
+    "busy": 12.539
+   }
   },
   "portrait.kit": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.087, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.367, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.087,
+    "edges": 0.367,
+    "busy": 17.321
+   }
   },
   "portrait.hesk": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.104, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.386, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 19.8, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.104,
+    "edges": 0.386,
+    "busy": 19.843
+   }
   },
   "portrait.rosa": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.097, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.390, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.6, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.097,
+    "edges": 0.39,
+    "busy": 21.558
+   }
   },
   "portrait.isolde": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.116, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.373, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 21.1, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.116,
+    "edges": 0.373,
+    "busy": 21.127
+   }
   },
   "portrait.mara": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.098, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.345, at most 0.32 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P3"
+   "priority": "P3",
+   "calm": {
+    "specks": 0.098,
+    "edges": 0.345,
+    "busy": 17.752
+   }
   },
   "portrait.king": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "32 colours, at most 20",
+    "too busy: lone specks 0.155, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.421, at most 0.32 (draw it simpler)",
+    "too busy: brightness step 29.7, at most 19 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 32,
-   "priority": "P3"
+   "priority": "P3",
+   "calm": {
+    "specks": 0.155,
+    "edges": 0.421,
+    "busy": 29.674
+   }
   },
   "item.barrow_silver": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "13 colours, at most 12",
+    "too busy: lone specks 0.487, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.799, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 13,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.487,
+    "edges": 0.799,
+    "busy": 33.142
+   }
   },
   "item.moonsilver_marks": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.446, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.763, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.446,
+    "edges": 0.763,
+    "busy": 33.775
+   }
   },
   "item.dwarf_gold_crowns": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "14 colours, at most 12",
+    "too busy: lone specks 0.281, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.659, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 14,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.281,
+    "edges": 0.659,
+    "busy": 32.572
+   }
   },
   "item.sunken_sovereigns": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.446, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.788, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.446,
+    "edges": 0.788,
+    "busy": 29.517
+   }
   },
   "item.dragon_gold": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.580, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.839, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.58,
+    "edges": 0.839,
+    "busy": 39.696
+   }
   },
   "item.demon_gold": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.399, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.737, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.399,
+    "edges": 0.737,
+    "busy": 28.685
+   }
   },
   "item.goblin_cleaver": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.375, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.694, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.375,
+    "edges": 0.694,
+    "busy": 22.168
+   }
   },
   "item.dwarven_axe": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.405, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.746, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.405,
+    "edges": 0.746,
+    "busy": 26.998
+   }
   },
   "item.wardens_blade": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.700, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.852, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.7,
+    "edges": 0.852,
+    "busy": 38.919
+   }
   },
   "item.flamebrand": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.672, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.878, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.672,
+    "edges": 0.878,
+    "busy": 33.674
+   }
   },
   "item.dragonslayer": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.534, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.770, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.534,
+    "edges": 0.77,
+    "busy": 32.165
+   }
   },
   "item.wolfskin_cloak": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.478, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.778, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.478,
+    "edges": 0.778,
+    "busy": 46.881
+   }
   },
   "item.elven_cloak": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.363, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.751, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.363,
+    "edges": 0.751,
+    "busy": 29.282
+   }
   },
   "item.cloak_of_shadows": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "13 colours, at most 12",
+    "too busy: lone specks 0.284, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.656, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 13,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.284,
+    "edges": 0.656,
+    "busy": 11.965
+   }
   },
   "item.archmages_mantle": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.573, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.841, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.573,
+    "edges": 0.841,
+    "busy": 33.158
+   }
   },
   "item.phoenix_mantle": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.345, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.715, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.345,
+    "edges": 0.715,
+    "busy": 31.189
+   }
   },
   "item.healing_draught": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.347, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.682, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.347,
+    "edges": 0.682,
+    "busy": 29.051
+   }
   },
   "item.elixir_of_vigour": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.340, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.664, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.34,
+    "edges": 0.664,
+    "busy": 22.218
+   }
   },
   "item.invisibility_draught": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "16 colours, at most 12",
+    "too busy: lone specks 0.268, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 16,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.268,
+    "edges": 0.547,
+    "busy": 16.8
+   }
   },
   "item.mermaids_breath": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.333, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.672, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.333,
+    "edges": 0.672,
+    "busy": 31.71
+   }
   },
   "item.ambrosia": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "14 colours, at most 12",
+    "too busy: lone specks 0.430, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.746, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 14,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.43,
+    "edges": 0.746,
+    "busy": 30.826
+   }
   },
   "item.scroll_of_sparks": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.416, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.736, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.416,
+    "edges": 0.736,
+    "busy": 25.129
+   }
   },
   "item.scroll_of_fireball": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.459, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.787, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.459,
+    "edges": 0.787,
+    "busy": 30.684
+   }
   },
   "item.summoners_grimoire": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.444, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.779, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.444,
+    "edges": 0.779,
+    "busy": 29.898
+   }
   },
   "item.lichs_tome": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.335, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.672, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.335,
+    "edges": 0.672,
+    "busy": 29.846
+   }
   },
   "item.keyhold_codex": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.421, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.779, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.421,
+    "edges": 0.779,
+    "busy": 34.572
+   }
   },
   "item.sand_case": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.357, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.727, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.357,
+    "edges": 0.727,
+    "busy": 37.719
+   }
   },
   "item.moonstone": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "too busy: lone specks 0.244, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.599, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 11,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.244,
+    "edges": 0.599,
+    "busy": 13.814
+   }
   },
   "item.elfstone": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "16 colours, at most 12",
+    "too busy: lone specks 0.712, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.906, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 16,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.712,
+    "edges": 0.906,
+    "busy": 43.926
+   }
   },
   "item.blood_ruby": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "16 colours, at most 12",
+    "too busy: lone specks 0.236, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.594, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 16,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.236,
+    "edges": 0.594,
+    "busy": 21.831
+   }
   },
   "item.starstone": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.404, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.741, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.404,
+    "edges": 0.741,
+    "busy": 40.639
+   }
   },
   "item.dragons_eye": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.580, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.837, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.58,
+    "edges": 0.837,
+    "busy": 42.87
+   }
   },
   "item.paste_gem": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "too busy: lone specks 0.328, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.620, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 12,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.328,
+    "edges": 0.62,
+    "busy": 23.737
+   }
   },
   "heartsong.lullaby_box": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.356, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.732, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.356,
+    "edges": 0.732,
+    "busy": 23.185
+   }
   },
   "heartsong.shepherds_pipe": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.509, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.828, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.509,
+    "edges": 0.828,
+    "busy": 36.995
+   }
   },
   "heartsong.fey_chimes": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.489, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.710, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.489,
+    "edges": 0.71,
+    "busy": 34.815
+   }
   },
   "heartsong.dragons_egg": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.494, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.820, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.494,
+    "edges": 0.82,
+    "busy": 51.987
+   }
   },
   "heartsong.clockwork_lark": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.372, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.725, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.372,
+    "edges": 0.725,
+    "busy": 27.168
+   }
   },
   "heartsong.hearthstone": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.379, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.741, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.379,
+    "edges": 0.741,
+    "busy": 20.066
+   }
   },
   "heartsong.drowned_bell": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.500, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.808, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.5,
+    "edges": 0.808,
+    "busy": 41.265
+   }
   },
   "heartsong.bottled_star": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.439, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.757, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.439,
+    "edges": 0.757,
+    "busy": 29.842
+   }
   },
   "heartsong.imps_ember": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.423, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.738, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.423,
+    "edges": 0.738,
+    "busy": 31.889
+   }
   },
   "curio.monocle": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.434, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.434,
+    "edges": 0.693,
+    "busy": 34.434
+   }
   },
   "curio.draught": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.305, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.655, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.305,
+    "edges": 0.655,
+    "busy": 29.754
+   }
   },
   "curio.aether": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.342, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.726, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.342,
+    "edges": 0.726,
+    "busy": 31.753
+   }
   },
   "curio.chalk": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "15 colours, at most 12",
+    "too busy: lone specks 0.556, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.786, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 15,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.556,
+    "edges": 0.786,
+    "busy": 27.477
+   }
   },
   "curio.ring": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.409, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.740, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.409,
+    "edges": 0.74,
+    "busy": 31.466
+   }
   },
   "curio.staff": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.496, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.821, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.496,
+    "edges": 0.821,
+    "busy": 36.732
+   }
   },
   "curio.sealed": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.317, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.640, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.317,
+    "edges": 0.64,
+    "busy": 24.739
+   }
   },
   "curio.dip": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.291, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.694, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.291,
+    "edges": 0.694,
+    "busy": 19.047
+   }
   },
   "curio.bond": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.380, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.756, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.38,
+    "edges": 0.756,
+    "busy": 48.942
+   }
   },
   "curio.wholesale": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "13 colours, at most 12",
+    "too busy: lone specks 0.585, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.832, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 13,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.585,
+    "edges": 0.832,
+    "busy": 59.416
+   }
   },
   "curio.token": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.324, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.677, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.324,
+    "edges": 0.677,
+    "busy": 27.486
+   }
   },
   "curio.blindfold": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.377, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.690, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.377,
+    "edges": 0.69,
+    "busy": 40.188
+   }
   },
   "curio.signet": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.357, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.681, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.357,
+    "edges": 0.681,
+    "busy": 40.516
+   }
   },
   "curio.tongue": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "too busy: lone specks 0.398, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.714, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 11,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.398,
+    "edges": 0.714,
+    "busy": 39.37
+   }
   },
   "curio.knot": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "14 colours, at most 12",
+    "too busy: lone specks 0.636, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.876, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 14,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.636,
+    "edges": 0.876,
+    "busy": 57.828
+   }
   },
   "curio.hourglass": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.344, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.661, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.344,
+    "edges": 0.661,
+    "busy": 24.137
+   }
   },
   "curio.bell": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.516, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.805, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.516,
+    "edges": 0.805,
+    "busy": 32.177
+   }
   },
   "curio.coffer": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.402, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.744, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.402,
+    "edges": 0.744,
+    "busy": 31.045
+   }
   },
   "curio.goldentongue": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.444, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.771, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.444,
+    "edges": 0.771,
+    "busy": 35.855
+   }
   },
   "curio.trumpet": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "15 colours, at most 12",
+    "too busy: lone specks 0.384, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.724, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 15,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.384,
+    "edges": 0.724,
+    "busy": 36.559
+   }
   },
   "curio.watch": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.409, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.659, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.409,
+    "edges": 0.659,
+    "busy": 55.051
+   }
   },
   "curio.beads": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.536, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.831, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.536,
+    "edges": 0.831,
+    "busy": 33.661
+   }
   },
   "curio.seal": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.322, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.682, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.322,
+    "edges": 0.682,
+    "busy": 24.285
+   }
   },
   "curio.register": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.387, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.642, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.387,
+    "edges": 0.642,
+    "busy": 26.603
+   }
   },
   "curio.crescent": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.534, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.815, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.534,
+    "edges": 0.815,
+    "busy": 46.085
+   }
   },
   "curio.fork": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.486, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.713, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.486,
+    "edges": 0.713,
+    "busy": 52.945
+   }
   },
   "curio.ledger": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.530, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.773, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.53,
+    "edges": 0.773,
+    "busy": 35.271
+   }
   },
   "curio.truthglass": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.522, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.759, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.522,
+    "edges": 0.759,
+    "busy": 23.961
+   }
   },
   "curio.crate": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.418, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.746, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.418,
+    "edges": 0.746,
+    "busy": 27.36
+   }
   },
   "curio.hook": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.611, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.817, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.611,
+    "edges": 0.817,
+    "busy": 29.227
+   }
   },
   "curio.rod": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.646, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.859, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.646,
+    "edges": 0.859,
+    "busy": 55.35
+   }
   },
   "curio.log": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.353, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.676, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.353,
+    "edges": 0.676,
+    "busy": 21.586
+   }
   },
   "curio.pass": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.471, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.771, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.471,
+    "edges": 0.771,
+    "busy": 56.559
+   }
   },
   "curio.compass": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.566, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.843, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.566,
+    "edges": 0.843,
+    "busy": 38.659
+   }
   },
   "curio.wardlamp": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.361, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.754, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [
     "content is only 58% of the width: small for an icon"
    ],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.361,
+    "edges": 0.754,
+    "busy": 33.426
+   }
   },
   "curio.pillow": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.358, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.616, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.358,
+    "edges": 0.616,
+    "busy": 28.468
+   }
   },
   "curio.wardtally": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.413, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.758, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.413,
+    "edges": 0.758,
+    "busy": 48.181
+   }
   },
   "curio.wardkey": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.721, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.896, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.721,
+    "edges": 0.896,
+    "busy": 41.289
+   }
   },
   "curio.aldricseal": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.402, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.749, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.402,
+    "edges": 0.749,
+    "busy": 33.944
+   }
   },
   "curio.shell": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "14 colours, at most 12",
+    "too busy: lone specks 0.304, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.682, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 14,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.304,
+    "edges": 0.682,
+    "busy": 23.596
+   }
   },
   "curio.coin": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.393, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.684, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.393,
+    "edges": 0.684,
+    "busy": 30.544
+   }
   },
   "curio.foot": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.491, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.781, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.491,
+    "edges": 0.781,
+    "busy": 32.867
+   }
   },
   "curio.wishbone": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "too busy: lone specks 0.494, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.761, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 6,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.494,
+    "edges": 0.761,
+    "busy": 37.895
+   }
   },
   "curio.horseshoe": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "15 colours, at most 12",
+    "too busy: lone specks 0.386, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.718, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 15,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.386,
+    "edges": 0.718,
+    "busy": 57.56
+   }
   },
   "curio.clover": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.489, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.802, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.489,
+    "edges": 0.802,
+    "busy": 30.23
+   }
   },
   "curio.star": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "13 colours, at most 12",
+    "too busy: lone specks 0.457, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.765, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 13,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.457,
+    "edges": 0.765,
+    "busy": 57.859
+   }
   },
   "curio.spindle": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "14 colours, at most 12",
+    "too busy: lone specks 0.473, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.724, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [
     "content is only 58% of the width: small for an icon"
    ],
    "colours": 14,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.473,
+    "edges": 0.724,
+    "busy": 36.809
+   }
   },
   "curio.lantern": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.434, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.780, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.434,
+    "edges": 0.78,
+    "busy": 54.91
+   }
   },
   "curio.queue": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.390, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.635, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.39,
+    "edges": 0.635,
+    "busy": 24.136
+   }
   },
   "curio.horn": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.450, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.757, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.45,
+    "edges": 0.757,
+    "busy": 52.404
+   }
   },
   "curio.guestbook": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.461, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.743, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.461,
+    "edges": 0.743,
+    "busy": 34.614
+   }
   },
   "curio.catalogue": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.289, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.289,
+    "edges": 0.524,
+    "busy": 20.586
+   }
   },
   "curio.dome": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.233, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.233,
+    "edges": 0.575,
+    "busy": 18.93
+   }
   },
   "curio.book": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.409, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.765, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.409,
+    "edges": 0.765,
+    "busy": 32.855
+   }
   },
   "curio.rope": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.534, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.757, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.534,
+    "edges": 0.757,
+    "busy": 32.026
+   }
   },
   "curio.lamps": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "16 colours, at most 12",
+    "too busy: lone specks 0.590, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.821, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 16,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.59,
+    "edges": 0.821,
+    "busy": 31.143
+   }
   },
   "curio.gauntlet": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.430, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.729, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.43,
+    "edges": 0.729,
+    "busy": 22.338
+   }
   },
   "curio.cap": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.271, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.654, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.271,
+    "edges": 0.654,
+    "busy": 17.67
+   }
   },
   "curio.whetstone": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.301, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.301,
+    "edges": 0.553,
+    "busy": 40.931
+   }
   },
   "curio.dummy": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.343, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.758, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [
     "content is only 42% of the width: small for an icon"
    ],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.343,
+    "edges": 0.758,
+    "busy": 49.415
+   }
   },
   "curio.scales": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.762, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.903, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.762,
+    "edges": 0.903,
+    "busy": 38.649
+   }
   },
   "curio.still": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.589, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.856, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.589,
+    "edges": 0.856,
+    "busy": 41.349
+   }
   },
   "curio.desk": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.545, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.839, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.545,
+    "edges": 0.839,
+    "busy": 31.421
+   }
   },
   "curio.wheel": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.303, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.669, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.303,
+    "edges": 0.669,
+    "busy": 40.951
+   }
   },
   "curio.oil": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.565, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.829, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.565,
+    "edges": 0.829,
+    "busy": 30.441
+   }
   },
   "curio.knife": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "16 colours, at most 12",
+    "too busy: lone specks 0.672, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.843, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 16,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.672,
+    "edges": 0.843,
+    "busy": 33.552
+   }
   },
   "curio.gloves": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "16 colours, at most 12",
+    "too busy: lone specks 0.595, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.827, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 16,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.595,
+    "edges": 0.827,
+    "busy": 34.56
+   }
   },
   "curio.loupe": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.398, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.704, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.398,
+    "edges": 0.704,
+    "busy": 33.619
+   }
   },
   "curio.mark": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.445, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.703, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.445,
+    "edges": 0.703,
+    "busy": 34.825
+   }
   },
   "curio.purse": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.294, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.616, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.294,
+    "edges": 0.616,
+    "busy": 43.262
+   }
   },
   "curio.ticket": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.355, at most 0.15 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.355,
+    "edges": 0.519,
+    "busy": 18.49
+   }
   },
   "curio.marker": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "19 colours, at most 12",
+    "too busy: lone specks 0.378, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.730, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 19,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.378,
+    "edges": 0.73,
+    "busy": 37.969
+   }
   },
   "curio.jar": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.472, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.789, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.472,
+    "edges": 0.789,
+    "busy": 48.027
+   }
   },
   "curio.lockbox": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.475, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.777, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.475,
+    "edges": 0.777,
+    "busy": 31.081
+   }
   },
   "curio.note": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.376, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.737, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.376,
+    "edges": 0.737,
+    "busy": 26.731
+   }
   },
   "curio.letter": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "18 colours, at most 12",
+    "too busy: lone specks 0.407, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.709, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 18,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.407,
+    "edges": 0.709,
+    "busy": 26.466
+   }
   },
   "curio.ribbon": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.309, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.655, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.309,
+    "edges": 0.655,
+    "busy": 31.375
+   }
   },
   "curio.errand": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "20 colours, at most 12",
+    "too busy: lone specks 0.338, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.737, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 20,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.338,
+    "edges": 0.737,
+    "busy": 41.856
+   }
   },
   "curio.net": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "17 colours, at most 12",
+    "too busy: lone specks 0.846, at most 0.15 (draw it simpler)",
+    "too busy: edges between neighbours 0.897, at most 0.58 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 17,
-   "priority": "P1"
+   "priority": "P1",
+   "calm": {
+    "specks": 0.846,
+    "edges": 0.897,
+    "busy": 79.943
+   }
   }
  }
 }

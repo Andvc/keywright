@@ -6,7 +6,9 @@ Turns a generated image into a finished asset at its native size, by its spec in
   3. finds the art-pixel grid the model drew and samples each cell's main colour (--mode grid), or reduces the image by
      area (--mode area: backgrounds, scenes, store art, or any sprite whose grid can't be found);
   4. places the content on the asset's canvas (centred, or on the baseline, or in its box), with binary alpha;
-  5. caps the colour count (merging the least-used colours into their nearest), enforces the 1-pixel outline;
+  5. quiets it (round 2: a lone speck, or a region of a few pixels, takes its neighbour's colour when the two are close,
+     so texture goes and eyes, glints and accents stay; --no-quiet skips it), caps the colour count (merging the
+     least-used colours into their nearest), enforces the 1-pixel outline;
   6. writes the asset's `output` (or --out), and with --preview a 4x copy beside it.
 
 Usage:
@@ -14,7 +16,8 @@ Usage:
   python3 art/tools/pixelize.py raw.png --id bg.shop1 --offset-y 60      # area mode; crop window moved down 60 px
   python3 art/tools/pixelize.py sheet.png --id fx.sparkle                  # sprite sheets: split into frames first
 Options: --mode grid|area, --key '#ff00ff', --block N (the art-pixel size, if detection picks wrong), --despeckle,
---no-outline, --out PATH, --preview. Needs only Pillow. Check the result with art/tools/validate.py.
+--no-quiet, --no-outline, --out PATH, --preview. Needs only Pillow. Check the result with art/tools/validate.py: it holds
+every asset to its category's calm thresholds, and the quiet stage can't rescue a busy drawing (regenerate it simpler).
 """
 import argparse
 import os
@@ -309,7 +312,11 @@ def despeckle(img):
 
 # ---- one asset --------------------------------------------------------------------------------------------------------
 
-def process(img, spec, manifest, mode=None, key=None, block=None, offset_y=0, outline=True, speckles=False):
+# How small a region the quiet stage merges away, by how big the picture is.
+QUIET_REGION = {"background": 6, "scene": 6, "portrait": 3, "lock_face": 4}
+
+
+def process(img, spec, manifest, mode=None, key=None, block=None, offset_y=0, outline=True, speckles=False, calm=True):
     opaque = spec["background"] == "opaque"
     mode = mode or spec.get("mode", "grid")
     if mode == "script":
@@ -331,6 +338,11 @@ def process(img, spec, manifest, mode=None, key=None, block=None, offset_y=0, ou
         found = grid_sample(img, expected, block, span)
         if found:
             small, period = found
+            if opaque and small.height > h:
+                # A picture is drawn to fill the image's width; it's cropped to its aspect here, a whole cell at a time
+                # (centred, or moved down by --offset-y source pixels).
+                top = max(0, min(small.height - h, (small.height - h) // 2 + round(offset_y / period)))
+                small = small.crop((0, top, small.width, top + h))
             sb = artlib.bbox(artlib.opaque_mask(small))
             fits = sb and (sb[2] - sb[0] + 1 <= w - 2 * m + (2 if opaque else 0)) and (sb[3] - sb[1] + 1 <= h - 2 * m + (2 if opaque else 0))
             if not fits:
@@ -351,6 +363,8 @@ def process(img, spec, manifest, mode=None, key=None, block=None, offset_y=0, ou
         out = place(small, spec)
     if speckles:
         out = despeckle(out)
+    if calm and spec.get("calm"):
+        out = artlib.quiet(out, QUIET_REGION.get(spec["category"], 2), keep=OUTLINE_OK)
     out = cap_colours(out, spec.get("max_colours") or 64)
     if outline and spec.get("outline"):
         out = enforce_outline(out, spec)
@@ -380,6 +394,7 @@ def main():
     ap.add_argument("--block", type=float, help="the art-pixel size in the source, if detection picks wrong")
     ap.add_argument("--offset-y", type=int, default=0, help="area mode, opaque: move the crop window down (source px)")
     ap.add_argument("--despeckle", action="store_true")
+    ap.add_argument("--no-quiet", action="store_true", help="skip the quiet stage (texture specks and tiny regions)")
     ap.add_argument("--no-outline", action="store_true")
     ap.add_argument("--out")
     ap.add_argument("--preview", action="store_true")
@@ -390,7 +405,7 @@ def main():
     img = artlib.open_rgba(args.input)
     key = artlib.hex_rgb(args.key) if args.key else None
     kw = dict(mode=args.mode, key=key, block=args.block, offset_y=args.offset_y, outline=not args.no_outline,
-              speckles=args.despeckle)
+              speckles=args.despeckle, calm=not args.no_quiet)
     out = process_sheet(img, spec, manifest, **kw) if spec.get("frames") else process(img, spec, manifest, **kw)
     dest = args.out or artlib.path(spec["output"])
     os.makedirs(os.path.dirname(dest), exist_ok=True)
@@ -398,7 +413,13 @@ def main():
     if args.preview:
         out.resize((out.width * 4, out.height * 4), Image.NEAREST).save(dest[:-4] + "_4x.png")
     colours = len({c[:3] for c in artlib.pixels(out) if c[3]})
-    print(f"{args.id}: {out.size[0]}x{out.size[1]}, {colours} colours -> {os.path.relpath(dest, artlib.ROOT)}")
+    calm = ""
+    if spec.get("calm"):
+        m = artlib.calm_metrics(out)
+        over = [k for k, v in spec["calm"].items() if m[k] > v]
+        calm = (f", specks {m['specks']:.3f} edges {m['edges']:.3f} busy {m['busy']:.1f}"
+                + (f" (too busy: {', '.join(over)}; regenerate it simpler)" if over else " (quiet enough)"))
+    print(f"{args.id}: {out.size[0]}x{out.size[1]}, {colours} colours{calm} -> {os.path.relpath(dest, artlib.ROOT)}")
 
 
 if __name__ == "__main__":

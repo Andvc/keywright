@@ -13,7 +13,7 @@ five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.24): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+**Status:** Early Access (0.25): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
 of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
 puzzle brings out), runs of five five-day weeks against the Guild's dues (then endless), each day with its business
 (the Guild's night, two days with something on in town, Nim's days and the story's); one model for the economy (the
@@ -26,8 +26,9 @@ better; commissions, seventeen kinds of event, a calendar, and a story; a journa
 and curio across runs; nine **Heartsongs**, the rarest
 things in the realm (about a third of one a run, worth nothing in gold, each with its own song, its own reveal and its
 own use on display), and an ending that needs all nine; four of Bram's kin to play and eight challenge levels each,
-every run starting the same; saves, settings and a guided start. The pixel art was made for the game to a written brief
-(`art/`: one style, one palette, every asset specified); recorded sounds and the font are from Kenney's CC0 packs (see
+every run starting the same; saves, settings and a guided start. The pixel art is made for the game to a written brief
+(`art/`: one quiet style, one palette, every asset specified; 0.25 drew the chest in code and asks for the rest to be
+redrawn simpler); recorded sounds and the font are from Kenney's CC0 packs (see
 [CREDITS.md](CREDITS.md)). Built with Godot
 4.7 (.NET / C#), targeting PC on Steam. Design rationale: [docs/design.md](docs/design.md).
 

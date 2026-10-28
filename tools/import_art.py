@@ -41,6 +41,12 @@ def scaled(img, k):
     return img.resize((img.width * k, img.height * k), Image.NEAREST)
 
 
+def backdrop_size(img):
+    """A backdrop at the game's 640x360: round 2 draws them at 320x180 (four screen pixels to an art pixel), doubled here;
+    round 1's were drawn at 640x360."""
+    return scaled(img, 640 // img.width) if img is not None and img.width < 640 else img
+
+
 def trimmed(img):
     return img.crop(img.getbbox())
 
@@ -92,22 +98,6 @@ SOUNDS = {
     "book": [(RPG, "bookOpen")],
 }
 
-# The chest (custom_art.chest) is two 16x14 frames, closed and open, drawn in the red skin. Its body palette (dark,
-# main, highlight, shade) is swapped per lot provenance; the gold rim and orange fittings stay.
-CHEST_BASE = ["#711335", "#dc2728", "#ff5733", "#c03a24"]
-CHEST_SKINS = {
-    "red": CHEST_BASE,
-    "blue": ["#2b2a6e", "#457ad3", "#5cbad7", "#3b5bb0"],
-    "purple": ["#3d1f5c", "#8a4fd1", "#b88cff", "#6a3aa8"],
-    "wood": ["#4a2a14", "#8a5a2b", "#b07a40", "#6e4520"],
-    "green": ["#23402a", "#4f8a3a", "#7fc25a", "#3b6e2e"],
-    "gold": ["#6b4a12", "#e0a82e", "#ffe27a", "#b7841f"],    # the old royal chests (and the vault)
-    "black": ["#0e0b12", "#2a2433", "#4a4058", "#1c1724"],   # the Stranger's, packed in straw
-}
-LID_ROWS = (2, 9)        # rows 2..8 of the closed frame
-BODY_ROWS = (9, 14)      # rows 9..13 of the closed frame (gold band, lock, body)
-OPEN_BODY_ROWS = (4, 14)  # rows 4..13 of the open frame (rim, interior, band, body)
-
 UI_SCALE = 3
 
 
@@ -136,30 +126,15 @@ def save(image, *parts):
 
 
 def build_chests():
-    """The chest's parts (lid, body, open) in each finish, and the lock makers' overlays: 96 art pixels wide, shown at
-    2x. The placeholder is 16 wide, so it's scaled 6x to the same geometry."""
-    if gen("chest", "wood_lid.png"):
-        for name in sorted(os.listdir(os.path.join(GENERATED, "chest"))):
-            save(gen("chest", name), "sprites", "chest", name)
-        return
-    closed, opened = custom_art.chest()
-    base = [hex_rgb(c) for c in CHEST_BASE]
-    for skin, colors in CHEST_SKINS.items():
-        swap = dict(zip(base, [hex_rgb(c) for c in colors]))
-
-        def recolor(img):
-            out = img.copy()
-            px = out.load()
-            for y in range(out.height):
-                for x in range(out.width):
-                    r, g, b, a = px[x, y]
-                    if a and (r, g, b) in swap:
-                        px[x, y] = (*swap[(r, g, b)], a)
-            return scaled(out, 6)
-
-        save(recolor(closed.crop((0, LID_ROWS[0], 16, LID_ROWS[1]))), "sprites", "chest", f"{skin}_lid.png")
-        save(recolor(closed.crop((0, BODY_ROWS[0], 16, BODY_ROWS[1]))), "sprites", "chest", f"{skin}_body.png")
-        save(recolor(opened.crop((0, OPEN_BODY_ROWS[0], 16, OPEN_BODY_ROWS[1]))), "sprites", "chest", f"{skin}_open.png")
+    """The chest's parts (lid, body, open) in each finish, and the lock makers' overlays: drawn in code at 48 art pixels
+    wide (custom_art.chest), scaled 2x to the game's 96 (ChestView shows them at 2x: four screen pixels to a pixel).
+    0.23's generated chests (art/generated/chest) were retired in 0.25: too busy for the thing the player looks at most."""
+    for finish in custom_art.CHEST_FINISHES:
+        for part, img in zip(("lid", "body", "open"), custom_art.chest(finish)):
+            save(scaled(img, 2), "sprites", "chest", f"{finish}_{part}.png")
+    for maker in custom_art.CHEST_LOCKS:
+        for part, img in zip(("lid", "body"), custom_art.chest_lock(maker)):
+            save(scaled(img, 2), "sprites", "chest", f"lock_{maker}_{part}.png")
 
 
 def build_brand():
@@ -176,17 +151,12 @@ def build_brand():
                      append_images=sizes + big[:1])
     icon = gen("brand", "app_icon_64.png")
     if icon is None:
-        closed, _ = custom_art.chest()
-        swap = dict(zip([hex_rgb(c) for c in CHEST_BASE], [hex_rgb(c) for c in CHEST_SKINS["purple"]]))
-        closed = closed.copy()
-        px = closed.load()
-        for y in range(closed.height):
-            for x in range(closed.width):
-                r, g, b, a = px[x, y]
-                if a and (r, g, b) in swap:
-                    px[x, y] = (*swap[(r, g, b)], a)
+        lid, body, _ = custom_art.chest("purple")
+        closed = Image.new("RGBA", (48, 36), (0, 0, 0, 0))
+        closed.alpha_composite(lid, (0, 0))
+        closed.alpha_composite(body, (0, 21))
         icon = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
-        icon.alpha_composite(closed.resize((64, 56), Image.NEAREST), (0, 4))
+        icon.alpha_composite(closed, (8, 14))
     save(icon, "ui", "icon.png")
 
 
@@ -920,7 +890,7 @@ def build_shops():
     shops[4] = img
 
     for tier, img in shops.items():
-        save(gen("backgrounds", f"shop{tier}.png") or img, "backgrounds", f"shop{tier}.png")
+        save(backdrop_size(gen("backgrounds", f"shop{tier}.png")) or img, "backgrounds", f"shop{tier}.png")
 
 
 def build_items():
@@ -1008,12 +978,12 @@ def build_effects():
 
 
 def build_scenes():
-    """The story's own backdrops (640x360, at 2x), where there are any: Bram's back room, the Guild's counting-house,
-    the Keyhold, the vault under the Gate."""
+    """The story's own backdrops (640x360, at 2x; round 2 draws them at 320x180), where there are any: Bram's back room,
+    the Guild's counting-house, the Keyhold, the vault under the Gate."""
     for key in ("bram", "guild", "keyhold", "vault"):
         art = gen("scenes", f"{key}.png")
         if art:
-            save(art, "backgrounds", f"scene_{key}.png")
+            save(backdrop_size(art), "backgrounds", f"scene_{key}.png")
 
 
 def pixel_icon(rows, name):

@@ -4,9 +4,9 @@ using Godot;
 namespace Keywright.Ui;
 
 /// <summary>
-/// The chest in its finish (lid, body and the open box, 96 art pixels wide: art/generated/chest, built into assets/ by
-/// tools/import_art.py), its lock maker's hasp and plate over the seam, and the light that leaks from it. The node's
-/// origin is the centre of the lid seam.
+/// The chest in its finish (lid, body and the open box: drawn 48 pixels wide by tools/custom_art.py and built into
+/// assets/ at 2x by tools/import_art.py, so its pictures are 96 wide), its lock maker's hasp and plate over the seam,
+/// and the light that leaks from it. The node's origin is the centre of the lid seam.
 /// </summary>
 public partial class ChestView : Node2D
 {

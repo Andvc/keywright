@@ -19,152 +19,172 @@ import assets_things  # noqa: E402
 import assets_curios  # noqa: E402
 import assets_world  # noqa: E402
 
-VERSION = 1
+VERSION = 2
 
+# Round 2 (0.25): quiet art. Round 1's preamble asked for clean pixels but its descriptions asked for detail, its grids
+# were fine and its backgrounds were shrunk from paintings; the art came back two to six times as busy as the game's
+# old code-drawn art. This one asks, first of all, for art that's easy to look at for hours.
 STYLE = (
-    "Pixel art game asset for Keywright, a warm, lantern-lit fantasy merchant game set in the sword-and-sorcery realm "
-    "of Aldmark. Clean, hand-placed pixel art on a strict square grid: every art pixel is one solid, perfectly square "
-    "block of a single flat colour. No anti-aliasing, no blur, no gradients, no texture noise, no dithering, no "
-    "painterly brushwork. A limited palette of warm, hue-shifted colours: shadows lean violet-blue, highlights lean "
-    "warm yellow. One warm key light from the upper left, cool violet ambient shadow on the right and underneath. "
-    "Strong readable silhouette. No text, letters, numbers, runes that look like writing, signatures or watermarks."
+    "Pixel art game asset for Keywright, a cosy fantasy merchant game the player looks at for hours, so the art must be "
+    "quiet and comfortable to look at: large, simple shapes of flat colour; a few clear forms; generous plain areas; "
+    "detail only where it tells you what the thing is. Every art pixel is one solid, perfectly square block of a single "
+    "flat colour on a strict grid. No texture of any kind (no wood grain, no stone speckle, no fabric weave, no fur "
+    "strands, no scratches, no noise), no dithering, no gradients, no anti-aliasing, no painterly brushwork, no "
+    "sparkles or glints scattered over surfaces. Shade each material with two or three flat tones in broad bands, and "
+    "at most a highlight or two per object. Soft, muted, warm colour with hue-shifted shadows (toward violet) and "
+    "highlights (toward warm yellow); never neon, never every colour at once. One gentle light from the upper left. A "
+    "clear silhouette. No text, letters, numbers or rune-like writing."
 )
 
-# What every category shares: native size, background, colour cap, outline, placement and the prompt's frame.
+# The counter screen's fixed lines, in the 640x360 the game shows a background at (2x); a round-2 background is drawn
+# at half that (320x180, four screen pixels to an art pixel) and the importer doubles it.
+COUNTER_ROW, SHELF_ROW, SHELF_X, CALM_BOX = 238, 98, (150, 402), (220, 150, 340, 237)
+
+# What makes a picture quiet enough, measured at its native size by art/tools/artlib.py's calm_metrics: specks (lone
+# pixels unlike all four neighbours, as a share of the inside), edges (neighbouring pairs that differ) and busy (the
+# mean brightness step between neighbours, 0-255). Set between the game's old code-drawn art, which passes, and round
+# 1's, which doesn't (a third of the pixels in a typical round-1 thing were lone specks).
+CALM = {
+    "scenery": dict(specks=0.015, edges=0.18, busy=7.5),
+    "portrait": dict(specks=0.06, edges=0.32, busy=19),
+    "sprite": dict(specks=0.15, edges=0.58),
+    "icon": dict(specks=0.15, edges=0.6),
+    "small_icon": dict(specks=0.15, edges=0.62),
+    "lock_face": dict(specks=0.04, edges=0.22, busy=10),
+}
+
+QUIET_AVOID = ["texture or noise of any kind (grain, speckle, weave, strands, scratches)", "fine detail or tiny ornament",
+               "highlights or sparkles scattered over surfaces", "many colours at once"]
+
+# What every category shares: native size, background, colour cap, outline, placement, the prompt's frame, how quiet it
+# must measure (calm), and whether round 2 redraws it (redo, in the given batch; batch 9 is round 2's anchors).
 CATEGORIES = {
     "background": dict(
-        folder="backgrounds", size=(640, 360), background="opaque", max_colours=48, outline=False, margin=0,
-        batch=4, priority="P1", gen_size="1536x1024", mode="area",
-        display="2x behind the counter (1280x720); dimmed to 30-60% behind every other screen",
-        frame=("A {w}x{h} pixel art background for the shop screen of a 2D game (16:9). Front elevation: a flat stage seen "
-               "straight on, no vanishing-point perspective, no people. The shop counter's top is one straight horizontal "
-               "edge across the whole width at {counter_pct}% of the height (row 238 of 360); below it is the counter's "
-               "plain, low-contrast front face. A display shelf's top surface runs across the middle-left at {shelf_pct}% "
-               "of the height (row 98 of 360). The area just above the counter in the middle is calm and mid-dark. "
-               "Full-bleed, opaque, no border, no frame. Generate it 16:9 inside the image; it will be cropped to 16:9 and "
-               "reduced to {w}x{h}."),
+        folder="backgrounds", size=(320, 180), background="opaque", max_colours=24, outline=False, margin=0,
+        batch=10, priority="P1", gen_size="1536x1024", mode="grid", redo=True, calm=CALM["scenery"],
+        display="behind the counter at 4x (the importer doubles it to 640x360, shown at 2x); dimmed to 30-60% behind "
+                "every other screen",
+        frame=("A {w}x{h} pixel art background for the shop screen of a 2D game (16:9), drawn so each art pixel is a "
+               "crisp square block about {k} px wide: the picture is the {w}x{h} grid enlarged to fill the image's width "
+               "(it will be cropped to 16:9). Front elevation: a flat stage seen straight on, no vanishing-point "
+               "perspective, no people. It stays behind the game for hours, so it must be quiet: three to five large "
+               "planes, each nearly one flat colour, muted and fairly dark, with low contrast between them; one soft, "
+               "brighter area (the sky or a window) and nothing else that catches the eye. The counter's top is one "
+               "straight horizontal edge across the whole width at row {counter_row} of {h}; below it the counter's front "
+               "is plain, flat and dark (text sits on it). A display shelf's top surface is one straight line at row "
+               "{shelf_row} (from x {shelf_x0} to x {shelf_x1}). Just above the counter in the middle (x {calm_x0}-"
+               "{calm_x1}, rows {calm_y0}-{calm_y1}) is the quietest part of the picture, one or two flat mid-dark colours, "
+               "because the chest stands there. Full-bleed, opaque, no border, no frame."),
         avoid=["people or animals in the foreground", "text or signs with letters", "objects standing on the counter top",
-               "a vanishing-point floor", "photographic detail"],
+               "a vanishing-point floor", "photographic detail", "a bright, saturated sunset", "busy foliage or many "
+               "small clouds", "strong contrast anywhere but the one focal light"] + QUIET_AVOID,
     ),
     "portrait": dict(
-        folder="portraits", size=(76, 76), background="opaque", max_colours=32, outline=False, margin=0,
-        batch=1, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="portraits", size=(76, 76), background="opaque", max_colours=20, outline=False, margin=0,
+        batch=13, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["portrait"],
         display="2x at the counter (152 px in a 176 px frame), 3x in story scenes, 1x in the ledger and Bram's tips; "
                 "the 38x38 face crop (x 19-56, y 14-51) at 1x in the waiting queue and ledger rows",
         frame=("A {w}x{h} pixel art character portrait (a head-and-shoulders bust) for a game's dialogue box, drawn so each "
                "art pixel is a crisp square block about {k} px wide (the whole image is the {w}x{h} grid enlarged). "
                "{view} The head is centred left-to-right with the eyes about 45% of the way down; the top of the head is "
-               "about a fifth of the way down; the shoulders are cut by the bottom edge. The figure has a 1-pixel very dark "
-               "plum outline where it meets the background. Background: {backdrop}, in three or four flat stepped bands, "
-               "darker toward the corners, nothing else in it. Full-bleed, opaque, no frame, no border, no text."),
+               "about a fifth of the way down; the shoulders are cut by the bottom edge. Simple and easy to read: the face "
+               "in three flat skin tones with clear eyes and mouth; hair as two or three flat masses, no strands; clothes "
+               "in flat colours with a fold or two; one or two signature details, drawn large. The figure has a 1-pixel "
+               "very dark plum outline where it meets the background. Background: {backdrop}, one flat colour, a little "
+               "darker toward the corners in two steps, nothing else in it. Full-bleed, opaque, no frame, no border, no "
+               "text."),
         avoid=["hands or props entering from outside the frame", "a frame or border", "a busy background",
-               "a face outside the centre", "photorealism", "glowing auras"],
+               "a face outside the centre", "photorealism", "glowing auras", "strands of hair",
+               "small accessories crowding the figure"] + QUIET_AVOID,
     ),
     "item": dict(
-        folder="items", size=(32, 32), background="transparent", max_colours=20, outline=True, margin=1, baseline=30,
-        batch=2, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="items", size=(32, 32), background="transparent", max_colours=12, outline=True, margin=1, baseline=30,
+        batch=11, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["sprite"],
         display="2x on the opening table (64 px); 1x or 2x in slots (collection, exhibition, shelf, pawn list); the game "
                 "trims to the content",
         frame=("{title}: a {w}x{h} pixel art game item sprite, drawn so each art pixel is a crisp square block "
                "{k} px wide (the whole image is the {w}x{h} grid enlarged). Three-quarter view from slightly above, as if "
                "resting on a shop counter; upright and centred left-to-right, its lowest pixels on the bottom of the "
-               "frame, filling about 90% of the frame. 1-pixel very dark plum outline around the whole silhouette. "
-               "Transparent background, no shadow, no glow, no frame, nothing else in the image."),
+               "frame, filling about 90% of the frame. A simple, bold shape: each material in two or three flat tones, "
+               "at most one small accent, no engraving or pattern. 1-pixel very dark plum outline around the whole "
+               "silhouette. Transparent background, no shadow, no glow, no frame, nothing else in the image."),
         avoid=["a background or floor", "a drop shadow", "a glow or aura around it", "unrelated extra objects",
-               "text or letters", "soft edges"],
+               "text or letters", "soft edges"] + QUIET_AVOID,
     ),
     "heartsong": dict(
-        folder="heartsongs", size=(32, 32), background="transparent", max_colours=20, outline=True, margin=1, baseline=30,
-        batch=2, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="heartsongs", size=(32, 32), background="transparent", max_colours=12, outline=True, margin=1, baseline=30,
+        batch=11, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["sprite"],
         display="2x at the opening and in the Heartsong reveal (64 px), 1x-2x on the shelf and in the ledger",
         frame=("{title}, one of the nine Heartsongs (a beloved object the realm's archmages sang a spell into): a {w}x{h} "
                "pixel art game item sprite, drawn so each art pixel is a crisp square block {k} px wide (the whole image "
-               "is the {w}x{h} grid enlarged). Handmade, old and lovingly worn, warmer and more personal than any treasure, "
-               "with a single deep-red accent. Three-quarter view from slightly above, upright, centred, its lowest pixels "
-               "on the bottom of the frame, filling about 90% of the frame. 1-pixel very dark plum outline around the "
-               "silhouette. Transparent background, no shadow, no glow, no frame, nothing else in the image."),
+               "is the {w}x{h} grid enlarged). Handmade, old and loved, warmer and more personal than any treasure, with "
+               "a single deep-red accent; a simple, bold shape in flat tones. Three-quarter view from slightly above, "
+               "upright, centred, its lowest pixels on the bottom of the frame, filling about 90% of the frame. 1-pixel "
+               "very dark plum outline around the silhouette. Transparent background, no shadow, no glow, no frame, "
+               "nothing else in the image."),
         avoid=["a background or floor", "a drop shadow", "a glow or aura around it", "musical notes floating",
-               "text or letters", "soft edges"],
+               "text or letters", "soft edges"] + QUIET_AVOID,
     ),
     "curio": dict(
-        folder="curios", size=(28, 28), background="transparent", max_colours=20, outline=True, margin=1,
-        batch=3, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="curios", size=(28, 28), background="transparent", max_colours=12, outline=True, margin=1,
+        batch=12, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["sprite"],
         display="2x in 56 px slots: Nim's cards, the ledger's Curios page, the counter's curio row, the Guild's night",
         frame=("{title}: a {w}x{h} pixel art icon of a single small object, drawn so each art pixel is a crisp square "
                "block about {k} px wide (the whole image is the {w}x{h} grid enlarged). A curio: an oddment from an old "
-               "warded chest, made for a trade. Three-quarter view from slightly above, centred both ways, filling about "
-               "90% of the frame. 1-pixel very dark plum outline around the silhouette. Transparent background, no shadow, "
-               "no glow, no frame, nothing else in the image."),
-        avoid=["a background", "a drop shadow", "a glow or aura around it", "more than one object unless described",
-               "text, letters or numerals", "soft edges"],
-    ),
-    "chest": dict(
-        folder="chest", background="transparent", max_colours=20, outline=True, margin=0,
-        batch=4, priority="P1", gen_size="1536x1024", mode="grid",
-        display="2x at the counter and the opening (192 px wide), 1x-2x on the title screen; the game stacks lid over "
-                "body, lifts the lid when the chest strains, swaps to the open frame, and lets light out of the seam",
-        frame=("A {w}x{h} pixel art piece of a treasure chest for a 2D game, drawn so each art pixel is a crisp square "
-               "block {k} px wide. Front view from slightly above, perfectly symmetrical left to right. {part} "
+               "warded chest, made for a trade. A simple, bold shape: each material in two or three flat tones, at most "
+               "one accent. Three-quarter view from slightly above, centred both ways, filling about 90% of the frame. "
                "1-pixel very dark plum outline around the silhouette. Transparent background, no shadow, no glow, no "
-               "light from the seam, nothing else in the image."),
-        avoid=["perspective that isn't symmetrical", "a glow", "a shadow under it", "text or letters",
-               "a different silhouette from the template"],
-    ),
-    "chest_lock": dict(
-        folder="chest", background="transparent", max_colours=12, outline=True, margin=0,
-        batch=4, priority="P1", gen_size="1024x1024", mode="grid",
-        display="stacked over the chest's lid and body at 2x, on locked chests",
-        frame=("A {w}x{h} pixel art overlay for a treasure chest: only {part}, on a fully transparent canvas the size of "
-               "the chest part it sits on, drawn so each art pixel is a crisp square block {k} px wide. Front view, "
-               "symmetrical. 1-pixel very dark plum outline. Nothing else in the image."),
-        avoid=["any part of the chest itself", "a glow", "text or letters"],
+               "frame, nothing else in the image."),
+        avoid=["a background", "a drop shadow", "a glow or aura around it", "more than one object unless described",
+               "text, letters or numerals", "soft edges"] + QUIET_AVOID,
     ),
     "icon_upgrade": dict(
-        folder="icons", size=(24, 24), background="transparent", max_colours=12, outline=True, margin=1,
-        batch=5, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="icons", size=(24, 24), background="transparent", max_colours=8, outline=True, margin=1,
+        batch=14, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["icon"],
         display="2x (48 px) on the day's-end upgrade cards; 1x on the slip for the Witchlight and the Lodestone",
         frame=("A {w}x{h} pixel art UI icon of {subject}, drawn so each art pixel is a crisp square block about {k} px "
-               "wide. Bold, simple shapes that read at {w} pixels; three-quarter or front view; centred, filling about "
-               "90% of the frame; 1-pixel very dark plum outline. Transparent background, no shadow, no glow, no frame."),
-        avoid=["fine detail that won't read at 24 px", "a background", "text, letters or numerals"],
+               "wide. Bold, simple shapes that read at {w} pixels, in two or three flat tones per material; three-quarter "
+               "or front view; centred, filling about 90% of the frame; 1-pixel very dark plum outline. Transparent "
+               "background, no shadow, no glow, no frame."),
+        avoid=["fine detail that won't read at 24 px", "a background", "text, letters or numerals"] + QUIET_AVOID,
     ),
     "icon_kind": dict(
-        folder="kinds", size=(16, 16), background="transparent", max_colours=8, outline=True, margin=1,
-        batch=5, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="kinds", size=(16, 16), background="transparent", max_colours=6, outline=True, margin=1,
+        batch=14, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["small_icon"],
         display="2x (32 px) at the start of each row of the appraisal slip, in the ledger and in Settings > Item sounds",
         frame=("A {w}x{h} pixel art symbol icon of {subject}, drawn so each art pixel is a crisp square block {k} px wide. "
-               "One simple, iconic shape, like a map symbol, readable at {w} pixels; centred, filling the frame; 1-pixel "
-               "very dark plum outline. Transparent background, nothing else."),
-        avoid=["detail", "more than one object", "a background", "text, letters or numerals"],
+               "One simple, iconic shape, like a map symbol, readable at {w} pixels, in two or three flat tones; centred, "
+               "filling the frame; 1-pixel very dark plum outline. Transparent background, nothing else."),
+        avoid=["detail", "more than one object", "a background", "text, letters or numerals"] + QUIET_AVOID,
     ),
     "emblem": dict(
-        folder="emblems", background="transparent", max_colours=12, outline=True, margin=1,
-        batch=5, priority="P1", gen_size="1024x1024", mode="grid",
+        folder="emblems", background="transparent", max_colours=8, outline=True, margin=1,
+        batch=14, priority="P1", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["icon"],
         display="see the asset",
         frame=("A {w}x{h} pixel art emblem of {subject}, drawn so each art pixel is a crisp square block about {k} px wide. "
-               "Front view, centred, symmetrical where it can be; 1-pixel very dark plum outline. Transparent background, "
-               "no shadow, no glow."),
-        avoid=["text, letters or numerals", "a background", "a glow"],
+               "Front view, centred, symmetrical where it can be, in a few flat tones; 1-pixel very dark plum outline. "
+               "Transparent background, no shadow, no glow."),
+        avoid=["text, letters or numerals", "a background", "a glow"] + QUIET_AVOID,
     ),
     "story": dict(
-        folder="story", background="transparent", max_colours=12, outline=True, margin=1,
-        batch=5, priority="P1", gen_size="1536x1024", mode="grid",
+        folder="story", background="transparent", max_colours=8, outline=True, margin=1,
+        batch=14, priority="P1", gen_size="1536x1024", mode="grid", redo=True, calm=CALM["icon"],
         display="see the asset",
         frame=("A {w}x{h} pixel art game sprite of {subject}, drawn so each art pixel is a crisp square block about {k} px "
-               "wide. Front view, lying flat as if on a table, centred; 1-pixel very dark plum outline. Transparent "
-               "background, no shadow, no glow."),
-        avoid=["text, letters or numerals", "a background", "a glow"],
+               "wide. Front view, lying flat as if on a table, centred, in a few flat tones; 1-pixel very dark plum "
+               "outline. Transparent background, no shadow, no glow."),
+        avoid=["text, letters or numerals", "a background", "a glow"] + QUIET_AVOID,
     ),
     "ui": dict(
         folder="ui", background="transparent", max_colours=8, outline=False, margin=0,
-        batch=6, priority="P2", gen_size="none", mode="script",
+        batch=6, priority="P2", gen_size="none", mode="script", redo=False,
         display="nine-slice UI textures at 2x; see the asset for slice margins and tinting",
         frame="(Draw by script or by hand from the exact recipe below; no image generation needed.)",
         avoid=["anything outside the recipe"],
     ),
     "fx": dict(
         folder="fx", background="transparent", max_colours=6, outline=False, margin=0,
-        batch=6, priority="P2", gen_size="1536x1024", mode="grid",
+        batch=6, priority="P2", gen_size="1536x1024", mode="grid", redo=False,
         display="additive and tinted by the game; see the asset",
         frame=("A pixel art animation sprite sheet: {frames} frames of {fw}x{fh} art pixels in a single row (a {w}x{h} "
                "sheet), each art pixel a crisp square block. {subject} {colour_rule} Transparent background; each frame "
@@ -172,38 +192,42 @@ CATEGORIES = {
         avoid=["a background", "frames of different sizes", "text"],
     ),
     "lock_face": dict(
-        folder="lockpick", size=(160, 160), background="transparent", max_colours=20, outline=True, margin=0,
-        batch=6, priority="P2", gen_size="1024x1024", mode="grid",
+        folder="lockpick", size=(160, 160), background="transparent", max_colours=12, outline=True, margin=0,
+        batch=15, priority="P2", gen_size="1024x1024", mode="grid", redo=True, calm=CALM["lock_face"],
         display="2x (320 px) in the middle of the lockpicking screen; the game draws the sweet spot, pins and the pick on "
                 "top",
         frame=("A {w}x{h} pixel art face of {subject}, seen straight on, as the background of a lockpicking minigame, drawn "
-               "so each art pixel is a crisp square block about {k} px wide. A round lock face, centred, with a keyhole "
-               "in the middle and a plain, dark, empty ring track around it (between 52 and 68 art pixels from the centre) "
-               "where the game draws the pick's sweet spot. 1-pixel very dark plum outline. Transparent outside the lock, "
-               "no shadow, no glow, no text."),
-        avoid=["anything drawn inside the ring track", "a background", "text, letters or numerals", "a pick or key"],
+               "so each art pixel is a crisp square block about {k} px wide. A round lock face, centred, in plain flat "
+               "metal (two or three tones, no scratches), with a keyhole in the middle and a plain, dark, empty ring "
+               "track around it (between 52 and 68 art pixels from the centre) where the game draws the pick's sweet "
+               "spot. 1-pixel very dark plum outline. Transparent outside the lock, no shadow, no glow, no text."),
+        avoid=["anything drawn inside the ring track", "a background", "text, letters or numerals", "a pick or key"]
+              + QUIET_AVOID,
     ),
     "brand": dict(
         folder="brand", background="transparent", max_colours=24, outline=True, margin=1,
-        batch=7, priority="P2", gen_size="1536x1024", mode="grid",
+        batch=7, priority="P2", gen_size="1536x1024", mode="grid", redo=False,
         display="see the asset",
         frame=("{subject}, as {w}x{h} pixel art, each art pixel a crisp square block. 1-pixel very dark plum outline. "
                "Transparent background, no shadow, no glow."),
         avoid=["misspelled letters", "a background", "soft edges"],
     ),
     "scene": dict(
-        folder="scenes", size=(640, 360), background="opaque", max_colours=48, outline=False, margin=0,
-        batch=7, priority="P3", gen_size="1536x1024", mode="area",
-        display="2x behind story scenes, dimmed to about 40% under the dialogue and the portraits",
-        frame=("A {w}x{h} pixel art background for a story scene in a 2D game (16:9). Front elevation, a flat stage seen "
-               "straight on, no people. The centre third and the bottom third stay calm (portraits and a dialogue box "
-               "cover them). Full-bleed, opaque, no border. Generate it 16:9 inside the image; it will be cropped to "
-               "16:9 and reduced to {w}x{h}."),
-        avoid=["people or creatures", "text or letters", "busy detail in the centre"],
+        folder="scenes", size=(320, 180), background="opaque", max_colours=24, outline=False, margin=0,
+        batch=10, priority="P1", gen_size="1536x1024", mode="grid", redo=True, calm=CALM["scenery"],
+        display="behind story scenes at 4x (the importer doubles it to 640x360, shown at 2x), dimmed to about 40% under "
+                "the dialogue and the portraits",
+        frame=("A {w}x{h} pixel art background for a story scene in a 2D game (16:9), drawn so each art pixel is a crisp "
+               "square block about {k} px wide: the picture is the {w}x{h} grid enlarged to fill the image's width (it "
+               "will be cropped to 16:9). Front elevation, a flat stage seen straight on, no people. Quiet: three or four "
+               "large planes of nearly flat, muted colour with low contrast and one soft focal light; the centre third "
+               "and the bottom third stay especially plain (portraits and a dialogue box cover them). Full-bleed, opaque, "
+               "no border."),
+        avoid=["people or creatures", "text or letters", "busy detail in the centre", "strong contrast"] + QUIET_AVOID,
     ),
     "store": dict(
         folder="store", background="opaque", max_colours=96, outline=False, margin=0,
-        batch=8, priority="P3", gen_size="1536x1024", mode="area",
+        batch=8, priority="P3", gen_size="1536x1024", mode="area", redo=False,
         display="the Steam store page and library (not used in the game)",
         frame=("Key art for the Steam store page of Keywright, in the game's pixel art style at a coarse pixel size (each "
                "art pixel a crisp square block). {subject} Leave the logo area described below clear: the logo is added "
@@ -211,6 +235,14 @@ CATEGORIES = {
         avoid=["text or letters (the logo is composited later)", "photorealism", "a 3D render look"],
     ),
 }
+
+# Categories round 2 drops from the manifest: the chest is drawn in code (tools/custom_art.py, chest and chest_lock),
+# so every finish shares one silhouette exactly and it stays as calm as the thing the player looks at most must be.
+RETIRED = {"chest", "chest_lock"}
+
+# Round 2 shows the redrawn things with this many of their listed details at most: the rest only crowd a small picture.
+DETAILS_KEPT = {"portrait": 2, "item": 2, "heartsong": 2, "curio": 2, "icon_upgrade": 2, "icon_kind": 1, "emblem": 2,
+                "story": 2, "lock_face": 2}
 
 
 def palette_lookup():
@@ -253,20 +285,34 @@ def describe_palette(specs, by_name):
     return "; ".join(out)
 
 
+def layout_fields(w):
+    """The counter screen's fixed lines at a picture's own width (640 is the game's; round 2 draws at 320)."""
+    f = w / 640
+    x0, y0, x1, y1 = CALM_BOX
+    return dict(counter_row=round(COUNTER_ROW * f), shelf_row=round(SHELF_ROW * f), shelf_x0=round(SHELF_X[0] * f),
+                shelf_x1=round(SHELF_X[1] * f), calm_x0=round(x0 * f), calm_x1=round(x1 * f), calm_y0=round(y0 * f),
+                calm_y1=round(COUNTER_ROW * f) - 1)
+
+
 def assemble(asset, cat, by_name):
     w, h = asset["size"]
     k = None
     if cat["mode"] == "grid":
         gw, gh = (int(v) for v in cat["gen_size"].split("x"))
-        k = max(1, min(gw // w, gh // h))
+        # A picture fills the image's width (cropped to 16:9 after); a sprite fits whole in it.
+        k = round(gw / w, 1) if cat["background"] == "opaque" else max(1, min(gw // w, gh // h))
     fields = dict(w=w, h=h, k=k, title=asset["title"], subject=asset.get("subject", asset["title"]),
-                  counter_pct=round(238 / 360 * 100), shelf_pct=round(98 / 360 * 100), **asset.get("frame_fields", {}))
+                  **layout_fields(w), **asset.get("frame_fields", {}))
     frame = cat["frame"].format(**fields)
     parts = [STYLE, frame]
     if asset.get("description"):
         parts.append(f"Subject: {asset['description']}")
-    if asset.get("details"):
-        parts.append("It must show: " + "; ".join(asset["details"]) + ".")
+    details = asset.get("details") or []
+    kept = DETAILS_KEPT.get(asset["category"])
+    if kept is not None and len(details) > kept:
+        details = details[:kept]
+    if details:
+        parts.append("It must show: " + "; ".join(details) + (", and nothing smaller." if kept else "."))
     if asset.get("palette"):
         parts.append("Lean on these palette ramps (dark to light): " + describe_palette(asset["palette"], by_name) + ".")
     avoid = cat["avoid"] + asset.get("avoid", [])
@@ -286,9 +332,15 @@ def main():
 
     out_assets = []
     for a in assets:
+        if a["category"] in RETIRED:
+            continue
         cat = CATEGORIES[a["category"]]
         spec = {k: v for k, v in cat.items() if k not in ("frame", "avoid", "folder")}
         spec.update({k: v for k, v in a.items() if k not in ("frame_fields",)})
+        if cat.get("redo"):
+            # Round 2's order: its anchors first (approved before anything else), then each category's batch.
+            spec["batch"] = 9 if a.get("anchor_for") else cat["batch"]
+            spec["size"] = list(cat["size"]) if a["category"] in ("background", "scene") else spec.get("size")
         spec.setdefault("size", cat.get("size"))
         assert spec["size"], f"{a['id']} has no size"
         spec["output"] = a.get("output") or f"art/generated/{cat['folder']}/{a['id'].split('.', 1)[1].replace('.', '_')}.png"
@@ -309,6 +361,9 @@ def main():
                     "swatch": "art/palette/keywright.png", "ramps": "art/palette/ramps.md", "colours": len(flat)},
         "outline_colour": "#1a1420",
         "outline_colours_allowed": ["#1a1420", "#0b0810"],
+        "round": 2,
+        "round_notes": "Round 2 redraws everything marked redo, quieter (art/README.md says how and in what order); the "
+                       "chest is drawn in code now and isn't listed.",
         "style_preamble": STYLE,
         "anchors": [a["id"] for a in out_assets if a.get("anchor_for")],
         "categories": {k: {kk: vv for kk, vv in v.items() if kk not in ("frame",)} for k, v in CATEGORIES.items()},
@@ -332,24 +387,27 @@ def write_inventory(manifest):
              "`art/ART_DIRECTION.md`.", "",
              "Priorities: **P1** replaces something the game shows today; **P2** replaces a code-drawn stand-in or adds "
              "polish the game is ready for; **P3** is new (story scenes, extra portraits, store art) and needs code to "
-             "use it.", ""]
+             "use it.", "",
+             "Round 2 (0.25) redraws every category marked *redraw*, quieter, in batches 9 (its anchors) to 15; the "
+             "chest is drawn in code now (`tools/custom_art.py`) and isn't listed. See `art/README.md`.", ""]
     order = list(CATEGORIES)
     total = {}
     for a in manifest["assets"]:
         total.setdefault(a["category"], []).append(a)
-    lines.append("| Category | Assets | Native size | Batch | Priority |")
-    lines.append("|---|---|---|---|---|")
+    lines.append("| Category | Assets | Native size | Batch | Priority | Round 2 |")
+    lines.append("|---|---|---|---|---|---|")
     for c in order:
         if c not in total:
             continue
         sizes = sorted({f"{a['size'][0]}x{a['size'][1]}" for a in total[c]})
         pr = sorted({a['priority'] for a in total[c]})
         batches = sorted({a['batch'] for a in total[c]})
+        redo = "redraw" if CATEGORIES[c].get("redo") else "keep"
         lines.append(f"| {c} | {len(total[c])} | {', '.join(sizes[:4])}{'...' if len(sizes) > 4 else ''} | "
-                     f"{', '.join(map(str, batches))} | {', '.join(pr)} |")
-    lines.append(f"| **all** | **{len(manifest['assets'])}** | | | |")
+                     f"{', '.join(map(str, batches))} | {', '.join(pr)} | {redo} |")
+    lines.append(f"| **all** | **{len(manifest['assets'])}** | | | | |")
     lines.append("")
-    lines.append("Style anchors (batch 0, approved before the rest): " +
+    lines.append("Style anchors (round 2: batch 9, approved before the rest): " +
                  ", ".join(f"`{i}`" for i in manifest["anchors"]) + ".")
     lines.append("")
     for c in order:

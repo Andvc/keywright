@@ -1032,26 +1032,34 @@ An old profile's renown and talents are left behind when it loads (`Profile.From
 
 ## The shop's look
 
-Each move changes the shop around you: Bram's trestle table under a striped awning at the Brindle crossroads, with
-the mill, the river and the Barrow's stones behind it at dusk; a stone-walled shop at Thornwick Market with timber
-beams, oil lamps and a window onto the Old Wood; a panelled shop in Crownhold whose display window looks over the
-roofs to the palace at sunset; the Royal Emporium's colonnade, crimson drapes and marble counter, with the Gilded Gate
-glowing down the avenue. Each is one 640x360 picture (`art/generated/backgrounds/`), shown at 2x behind the counter
-and dimmed behind the lockpicking, opening and day-end screens (`UiKit.MakeShop`). What you keep stands on the shelf
-(the window sill in town), and a Heartsong hangs above it. The story's scenes have pictures of their own: Bram's back
-room for his welcome and his secret, the Guild's counting-house for Vane, the ruins of the Keyhold where Mara lowers
-her hood, and the vault under the Gate for the Crown Chest.
+Each move changes the shop around you: Bram's trestle table under a striped awning at the Brindle crossroads, with the
+mill, the river and the Barrow's stones behind it at dusk; a stone-walled shop at Thornwick Market with timber beams,
+oil lamps and a window onto the Old Wood; a panelled shop in Crownhold whose display window looks over the roofs to
+the palace at sunset; the Royal Emporium's colonnade, crimson drapes and marble counter, with the Gilded Gate glowing
+down the avenue. Each is one picture (`art/generated/backgrounds/`; round 2's are 320x180, which the importer doubles
+to 640x360), shown at 2x behind the counter and dimmed behind the lockpicking, opening and day-end screens
+(`UiKit.MakeShop`). What you keep stands on the shelf (the window sill in town), and a Heartsong hangs above it. The
+story's scenes have pictures of their own: Bram's back room for his welcome and his secret, the Guild's counting-house
+for Vane, the ruins of the Keyhold where Mara lowers her hood, and the vault under the Gate for the Crown Chest.
 
-All the pictures were made for the game (0.23) to one brief (`art/`: one art pixel to two screen pixels, one
-74-colour palette, one light from the upper left, one dark outline), so they follow the world rather than a pack's:
-every portrait stands against its place (the crossroads' dusk, the Old Wood's green, Crownhold's blue, the Emporium's
-crimson, the story's night), the Maw is a borrowed body gilded all over, demon gold is the real thing gone dull and
-greenish, the paste gem is a cut stone with no fire in it, and a scroll case of sand looks like the mudlark's "maps"
-it is. Things are 32px and all shown at one scale, so a purse is smaller than a sword, and a coin from Brindle and a
-crown from the vault sit together on a shelf. The chest has a finish for each colour (and the Crown Chest its own),
-with its lock maker's hasp and plate on it, and each maker's lock has its own face to pick. Until 0.23 the pictures
-were drawn in code (`tools/custom_art.py`), which still draws a placeholder for anything new until its picture is
-made.
+All the pictures are made for the game to one brief (`art/`: one 74-colour palette, one light from the upper left,
+one dark outline), so they follow the world rather than a pack's: every portrait stands against its place (the
+crossroads' dusk, the Old Wood's green, Crownhold's blue, the Emporium's crimson, the story's night), the Maw is a
+borrowed body gilded all over, demon gold is the real thing gone dull and greenish, the paste gem is a cut stone with no
+fire in it, and a scroll case of sand looks like the mudlark's "maps" it is. Things are 32px and all shown at one scale,
+so a purse is smaller than a sword, and a coin from Brindle and a crown from the vault sit together on a shelf.
+
+The art is the room the player thinks in: they sit with it for hours, reading the slip and listening, so it has to be
+comfortable to look at and never pull the eye from the chest. The first set (0.23) wasn't: generated to a brief that
+asked for fine detail on a fine grid, it was attractive at a glance and tiring over time, with two to six times the
+edges and specks of the old code-drawn art at the size it's seen. So the brief is now quiet first (0.25): a few big,
+flat shapes, no texture, at most two details on a thing or a face, backgrounds muted with one soft light, plain behind
+the chest and dark on the counter front, drawn on a coarser grid; the validator measures how busy each picture is and
+fails one that's too busy, and round 2 redraws the rest of the art to it. The chest, the thing the player looks at
+most, is drawn in code (`tools/custom_art.py`): one silhouette in seven finishes (a colour for each quality, the
+Stranger's chained black and the Crown Chest's crimson), with its lock maker's hasp and plate on it. Each maker's lock
+has its own face to pick. Until 0.23 every picture was drawn in code, and `tools/custom_art.py` still draws a
+placeholder for anything new until its picture is made.
 
 ## Title, saves and settings
 

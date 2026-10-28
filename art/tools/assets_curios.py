@@ -1,10 +1,11 @@
 """Nim's curios (scripts/Core/Curios.cs): oddments from the Locking, each made for a trade, each bending one rule."""
 
+# Rarity shows in the material and one accent, never in ornament (round 2: "careful ornament" drew noise).
 FINISH = {
-    "common": "A plain, honest object: simple materials, little ornament.",
-    "uncommon": "A well-made object: good materials and a craftsman's finish.",
-    "rare": "A precious object: fine materials (silver, gold, a gem) and careful ornament.",
-    "legendary": "The finest thing of its trade: gold, a gem or a rune, unmistakably special.",
+    "common": "A plain, honest object: simple materials, no ornament.",
+    "uncommon": "A well-made object in a good material, still simple in shape.",
+    "rare": "A precious object: one fine material (silver or gold) and a single small gem or trim.",
+    "legendary": "The finest thing of its trade: gold with one gem or rune, still a simple, bold shape.",
 }
 
 

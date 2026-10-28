@@ -52,6 +52,14 @@ def check(spec, manifest, img, delivered):
     cap = spec.get("max_colours")
     if cap and len(used) > cap:
         errors.append(f"{len(used)} colours, at most {cap}")
+    # Round 2: quiet enough to look at for hours (art/ART_DIRECTION.md, "Quiet first").
+    if spec.get("calm"):
+        m = artlib.calm_metrics(img)
+        words = {"specks": "lone specks", "edges": "edges between neighbours", "busy": "brightness step"}
+        for k, limit in spec["calm"].items():
+            if m[k] > limit:
+                shown = f"{m[k]:.3f}" if k != "busy" else f"{m[k]:.1f}"
+                errors.append(f"too busy: {words[k]} {shown}, at most {limit} (draw it simpler)")
 
     if not opaque:
         m = spec.get("margin", 0) or 0
@@ -78,25 +86,6 @@ def check(spec, manifest, img, delivered):
             warnings.append(f"content is only {fill:.0%} of the width: small for an icon")
 
     cat = spec["category"]
-    if cat == "chest":
-        part = spec["part"]
-        if part in ("lid", "body"):
-            rows = [spec["geometry"]["lid"]["seam_row"]] if part == "lid" else [0, h - 1]
-            for r in rows:
-                if any((x, r) not in mask for x in range(w)):
-                    errors.append(f"row {r} must span the full width")
-        ref = delivered.get(f"chest.wood.{part}")
-        if spec["skin"] != "wood" and ref is not None and artlib.opaque_mask(ref) != mask:
-            errors.append(f"silhouette differs from chest.wood.{part}")
-        if spec["skin"] not in ("black",) and part in ("lid", "body"):
-            x0, y0, x1, y1 = spec["geometry"][part]["lock_seat"]
-            if any((x, y) not in mask for x in range(x0, x1 + 1) for y in range(y0, y1 + 1)):
-                warnings.append("the lock seat isn't fully opaque (the lock overlays sit there)")
-    if cat == "chest_lock":
-        x0, y0, x1, y1 = spec["geometry"]["lid" if spec["part"] == "lid" else "body"]["lock_seat"]
-        outside = [p for p in mask if not (x0 <= p[0] <= x1 and y0 <= p[1] <= y1)]
-        if outside:
-            errors.append(f"{len(outside)} pixels outside the lock seat {x0},{y0}-{x1},{y1}")
     if cat == "lock_face":
         cx, cy = spec["geometry"]["centre"]
         r0, r1 = spec["geometry"]["track_radius"]
@@ -127,8 +116,7 @@ def check(spec, manifest, img, delivered):
 
 # ---- review pictures --------------------------------------------------------------------------------------------------
 
-ZOOM = {"background": 1, "scene": 1, "store": 1, "portrait": 2, "item": 4, "heartsong": 4, "curio": 4, "chest": 2,
-        "chest_lock": 2, "icon_upgrade": 4, "icon_kind": 4, "emblem": 4, "story": 4, "ui": 8, "fx": 2, "lock_face": 2,
+ZOOM = {"background": 2, "scene": 2, "store": 1, "portrait": 2, "item": 4, "heartsong": 4, "curio": 4, "icon_upgrade": 4, "icon_kind": 4, "emblem": 4, "story": 4, "ui": 8, "fx": 2, "lock_face": 2,
         "brand": 2}
 
 
@@ -165,8 +153,9 @@ CALM = [(158, 245, 400, 300), (220, 150, 340, 237)]
 
 
 def layout(bg):
-    """A background at 2x with the counter screen's fixed lines and covered areas drawn over it."""
-    frame = bg.resize((bg.width * 2, bg.height * 2), Image.NEAREST)
+    """A background at the game's 1280x720 (2x a round-1 picture, 4x a round-2 one) with the counter screen's fixed lines
+    and covered areas drawn over it."""
+    frame = bg.resize((1280, 720), Image.NEAREST)
     d = ImageDraw.Draw(frame, "RGBA")
     for x0, y0, x1, y1 in COVERED:
         d.rectangle((x0 * 2, y0 * 2, x1 * 2 + 1, y1 * 2 + 1), fill=(255, 64, 88, 50), outline=(255, 64, 88, 255), width=2)
@@ -184,7 +173,7 @@ def mockups(images, manifest):
     made = []
     portraits = [s["id"] for s in manifest["assets"] if s["category"] == "portrait" and s["id"] in images]
     things = [s["id"] for s in manifest["assets"] if s["category"] in ("item", "heartsong") and s["id"] in images]
-    skins = ["wood", "green", "blue", "purple"]
+    skins, locks = ["wood", "green", "blue", "purple"], ["rusty", "guild", "dwarven", "guild"]
     for tier in range(1, 5):
         bg = images.get(f"bg.shop{tier}")
         if bg is None:
@@ -197,15 +186,19 @@ def mockups(images, manifest):
         if portraits:
             p = images[portraits[(tier - 1) * 7 % len(portraits)]]
             frame.alpha_composite(p.resize((152, 152), Image.NEAREST), (74, 120))
-        lid, body = images.get(f"chest.{skins[tier - 1]}.lid"), images.get(f"chest.{skins[tier - 1]}.body")
-        if lid is not None and body is not None:
-            frame.alpha_composite(body.resize((192, 60), Image.NEAREST), (460, 416))
-            frame.alpha_composite(lid.resize((192, 84), Image.NEAREST), (460, 332))
+        # The chest is drawn in code (tools/custom_art.py); the game's build of it, with a lock, at its 2x.
+        for part, y in (("body", 416), ("lid", 332)):
+            for name in (f"{skins[tier - 1]}_{part}", f"lock_{locks[tier - 1]}_{part}"):
+                p = artlib.path(f"assets/sprites/chest/{name}.png")
+                if os.path.exists(p):
+                    img = artlib.open_rgba(p)
+                    frame.alpha_composite(img.resize((img.width * 2, img.height * 2), Image.NEAREST), (460, y))
         for i, tid in enumerate(things[tier * 3:tier * 3 + 5]):
             t = images[tid]
             box = artlib.bbox(artlib.opaque_mask(t))
             t = t.crop((box[0], box[1], box[2] + 1, box[3] + 1))
-            frame.alpha_composite(t, (330 + i * 96 - t.width // 2, 196 - t.height))
+            t = t.resize((t.width * 2, t.height * 2), Image.NEAREST)  # at 2x on the shelf, six slots from x 300
+            frame.alpha_composite(t, (300 + 84 * i + 42 - t.width // 2, 196 - t.height))
         path = os.path.join(REVIEW, f"mockup_counter_tier{tier}.png")
         frame.save(path)
         made.append(path)
@@ -242,6 +235,8 @@ def main():
         colours = len({c[:3] for c in artlib.pixels(img) if c[3]})
         report[s["id"]] = {"status": "fail" if errors else "ok", "errors": errors, "warnings": warnings,
                            "colours": colours, "priority": s["priority"]}
+        if s.get("calm") and img.size == tuple(s["size"]):
+            report[s["id"]]["calm"] = {k: round(v, 3) for k, v in artlib.calm_metrics(img).items()}
         failed += bool(errors)
 
     os.makedirs(artlib.path(args.out), exist_ok=True)

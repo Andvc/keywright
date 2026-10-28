@@ -160,3 +160,87 @@ def path(rel):
 def open_rgba(p):
     img = Image.open(p)
     return img.convert("RGBA")
+
+
+# ---- how quiet a picture is (round 2) --------------------------------------------------------------------------------
+# 0.23's art measured two to six times as busy as the old code-drawn art at the size the player sees it: a third of the
+# pixels in a typical thing were lone specks. These are the measures the validator holds every asset to (thresholds
+# per category in the manifest, `calm`), and the pixelizer's quiet stage works toward.
+
+def _interior(img):
+    """Opaque pixels that don't touch transparency (the outline and the silhouette's edge aren't texture)."""
+    mask = opaque_mask(img)
+    return mask - edge_pixels(mask, img.size) if "A" in img.getbands() else mask
+
+
+def _luma(c):
+    return 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]
+
+
+def calm_metrics(img):
+    """specks: the share of interior pixels unlike all four neighbours; edges: the share of neighbouring interior pairs
+    that differ; busy: the mean brightness step between neighbouring interior pixels (0-255), so many strong edges
+    score high and a few soft ones low."""
+    px = img.load()
+    inside = _interior(img)
+    if not inside:
+        return dict(specks=0.0, edges=0.0, busy=0.0)
+    specks = 0
+    for (x, y) in inside:
+        c = px[x, y]
+        if all(px[x + dx, y + dy] != c for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+            specks += 1
+    pairs = differ = 0
+    step = 0.0
+    for (x, y) in inside:
+        c = px[x, y]
+        for nx, ny in ((x + 1, y), (x, y + 1)):
+            if (nx, ny) in inside:
+                d = px[nx, ny]
+                pairs += 1
+                if d != c:
+                    differ += 1
+                    step += abs(_luma(c) - _luma(d))
+    return dict(specks=specks / len(inside), edges=differ / max(1, pairs), busy=step / max(1, pairs))
+
+
+def quiet(img, min_region=3, max_step=0.09, keep=()):
+    """Takes texture out without touching the drawing: a lone speck, or a region smaller than `min_region`, takes the
+    colour of the neighbour it shares the most border with, but only when the two are close (OKLab distance under
+    `max_step`), so eyes, glints and deliberate accents stay. `keep` colours (the outline) are never changed."""
+    px = img.load()
+    w, h = img.size
+    keep = set(keep)
+    for _ in range(2):
+        seen = set()
+        changes = []
+        for y in range(h):
+            for x in range(w):
+                c = px[x, y]
+                if (x, y) in seen or c[3] == 0 or c[:3] in keep:
+                    continue
+                region, border, queue = [], {}, [(x, y)]
+                seen.add((x, y))
+                while queue:
+                    cx, cy = queue.pop()
+                    region.append((cx, cy))
+                    for nx, ny in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
+                        if not (0 <= nx < w and 0 <= ny < h):
+                            continue
+                        d = px[nx, ny]
+                        if d == c:
+                            if (nx, ny) not in seen:
+                                seen.add((nx, ny))
+                                queue.append((nx, ny))
+                        elif d[3] and d[:3] not in keep:
+                            border[d] = border.get(d, 0) + 1
+                if len(region) >= min_region or not border:
+                    continue
+                target = max(border, key=border.get)
+                if distance(c[:3], target[:3]) < max_step:
+                    changes.extend((p, target) for p in region)
+        if not changes:
+            break
+        for (x, y), target in changes:
+            px[x, y] = target
+    return img

@@ -1,4 +1,4 @@
-"""Backgrounds, the chest, icons, emblems, UI, effects, lock faces, branding, story scenes and store art."""
+"""Backgrounds, icons, emblems, UI, effects, lock faces, branding, story scenes and store art (the chest is drawn in code)."""
 
 ASSETS = []
 
@@ -11,155 +11,61 @@ def add(**asset):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-# Shop backgrounds: one per tier, 640x360, the counter's top at row 238 and the display shelf's top at row 98.
+# Shop backgrounds: one per tier. Round 2 draws them at 320x180 (four screen pixels to an art pixel; the importer doubles
+# them to the game's 640x360), quiet: a few big planes of nearly flat colour, one soft light, and the counter screen's
+# fixed lines (the frame gives them at this size: the counter's top at row 119, the shelf's at row 49, x 75-201, and the
+# calm space for the chest at x 110-170, rows 75-118). Round 1's were full of things to look at, and the player looks
+# at them for hours: each now names three or four.
 
-SHOP_COMMON = ["the counter's top edge is one straight horizontal line across the full width at row 238",
-               "a display shelf whose top surface is at row 98, spanning at least x 150-402",
-               "a calm, mid-dark area just above the counter in the middle (x 220-340, rows 150-237)",
-               "a plain, low-contrast counter front below row 238"]
-
-add(id="bg.shop1", category="background", title="Bram's Stall, Brindle Crossroads", tier=1, batch=0,
+add(id="bg.shop1", category="background", title="Bram's Stall, Brindle Crossroads", tier=1,
     anchor_for="background", replaces="assets/backgrounds/shop1.png",
     description=(
-        "A roadside market stall at dusk where the north road meets the river. Across the top, a red-and-cream striped "
-        "canvas awning with a scalloped edge (rows 28-44), held by two rough wooden posts at the far left and right "
-        "edges; two warm lanterns hang from it. Beyond the counter, the Brindle countryside at dusk: a violet sky with "
-        "warm peach clouds, rolling green fields and hedgerows, a watermill with its wheel by a winding river on the "
-        "left, a distant hill on the right crowned by the silhouette of the castle of Crownhold, a wooden signpost with "
-        "two blank arrow boards, a couple of barrels and a crate by the right post. A plain wooden plank shelf hangs from "
-        "the awning on two ropes, its top at row 98 (x 140-410). The counter top is a worn wooden board; below it, the "
-        "counter's front is a canvas skirt over trestle legs, with grass at the very bottom."),
-    details=SHOP_COMMON + ["the striped awning with a scalloped edge", "the watermill and river at the left",
-                           "the castle silhouette on a far hill at the right", "the hanging plank shelf on ropes",
-                           "warm lantern light against the violet dusk"],
-    palette=["arcane:1-4", "night:2-5", "gold:3-6", "flame:2-3", "leaf:1-4", "umber:1-6", "crimson:2-4", "rose:2-3",
-             "parchment:2-3"],
+        "Bram's roadside stall at dusk, where the north road meets the river. Across the top, a red-and-cream striped "
+        "canvas awning with a plain scalloped edge, on two plain wooden posts at the far left and right, a small lantern "
+        "on each. Beyond the counter, a quiet dusk: a sky in three or four flat bands from violet above to soft peach "
+        "at the horizon, with one long, plain cloud; a low line of dark hills with the small silhouette of a castle on "
+        "the right; a calm river as one flat band at the left, with a small watermill as a simple dark shape. A plain "
+        "plank shelf hangs from the awning on two ropes. The counter top is one plain wooden board; the counter's front "
+        "is a flat canvas skirt."),
+    details=["the striped awning", "the plank shelf on its two ropes", "a castle's small silhouette on the far hills",
+             "the sky as a few flat bands"],
+    palette=["arcane:2-4", "night:2-4", "rose:1-2", "gold:4-5", "leaf:1-3", "umber:1-5", "crimson:2-3", "parchment:2"],
     notes="Also the title screen's and the character screen's background (dimmed).")
 
 add(id="bg.shop2", category="background", title="Thornwick Market", tier=2, replaces="assets/backgrounds/shop2.png",
     description=(
-        "Inside a small stone-walled shop on Thornwick's market square, at the edge of the Old Wood, in the afternoon. A "
-        "wall of grey stone blocks with dark timber beams across the top and in the corners; a long wooden display shelf "
-        "on iron brackets with its top at row 98; a mullioned window on the right showing the dark green pines of the Old "
-        "Wood; two small brass oil lamps hanging from the beams; a few clay jars, a barrel and a sack on the floor by the "
-        "walls. The counter top is a thick polished oak board; the counter's front is vertical oak planks."),
-    details=SHOP_COMMON + ["grey stone wall and timber beams", "the window onto the pines of the Old Wood",
-                           "a long wooden shelf on iron brackets", "two hanging brass lamps"],
-    palette=["night:2-7", "umber:1-6", "leaf:1-4", "sea:1-2", "gold:3-6", "steel:1-3"])
+        "Inside a small stone shop on Thornwick's market square, in the afternoon. A wall of large grey stone blocks, "
+        "drawn as a few flat shapes with thin mortar lines; a dark timber beam across the top; a long wooden shelf on two "
+        "iron brackets; on the right, a window in a plain wooden frame with three or four dark pine shapes against a pale "
+        "sky. A small brass lamp hangs from the beam on each side. The counter top is one plain oak board; the counter's "
+        "front is wide vertical planks in flat brown."),
+    details=["the stone wall as large, flat blocks", "the window onto dark pines", "the long shelf on iron brackets"],
+    palette=["night:2-6", "umber:1-5", "leaf:1-2", "steel:1-2", "gold:4-5"])
 
 add(id="bg.shop3", category="background", title="A shop in Crownhold", tier=3, replaces="assets/backgrounds/shop3.png",
     description=(
-        "A merchant's shop in Crownhold, the capital, at sunset. Warm oak wall panelling with tall rectangular panels; "
-        "above it a wide multi-paned window looking over the capital's slate roofs and spires, the sky orange and gold, "
-        "windows lit, the palace towers in the distance. A white marble sill runs under the window at row 98 and serves "
-        "as the display shelf. A small wall shelf with a few bottles at the right; brass lamps on the panelling. The "
-        "counter top is polished walnut with a thin brass edge; the counter's front is framed oak panels."),
-    details=SHOP_COMMON + ["oak panelling", "the wide window over sunset roofs and spires", "the marble sill as the shelf",
-                           "brass lamps"],
-    palette=["umber:1-6", "azure:1-4", "flame:2-4", "gold:3-6", "night:3-9", "crimson:2-3"])
+        "A merchant's shop in Crownhold, the capital, at sunset. Warm oak panelling in a few tall, plain panels; above it "
+        "a wide window of four or five panes looking over a simple skyline of roofs and spires in one or two dark tones "
+        "against a soft orange sky, with a handful of lit windows as small warm dots. A white marble sill under the "
+        "window is the display shelf. One brass lamp on each side. The counter top is plain walnut with a thin brass "
+        "edge; its front is two or three plain framed panels."),
+    details=["the oak panelling", "the window over a simple skyline at sunset", "the marble sill as the shelf"],
+    palette=["umber:1-5", "azure:1-3", "flame:2-3", "gold:4-5", "night:3-8"])
 
 add(id="bg.shop4", category="background", title="The Royal Emporium", tier=4, replaces="assets/backgrounds/shop4.png",
     description=(
-        "A grand gilded hall in the palace's shadow, beside the Gilded Gate. Crimson velvet drapes at both sides and a "
-        "gold-fringed crimson valance across the top; white marble columns; behind them a pale sky over a crenellated "
-        "palace wall; and in the centre background, the Gilded Gate itself: a tall arched gate of gold bars glowing a "
-        "faint, sickly gold, the one thing that feels wrong. A gilded shelf between two columns at row 98. The counter "
-        "top is white marble with a gold edge; the counter's front is dark navy wood with gold-framed panels."),
-    details=SHOP_COMMON + ["crimson drapes and a gold-fringed valance", "white marble columns",
-                           "the arched Gilded Gate in the centre background, faintly sickly gold",
-                           "a gilded shelf", "gold-framed navy panels on the counter front"],
-    palette=["crimson:1-5", "gold:2-6", "night:6-10", "azure:1-5", "moss:2-3"])
+        "A grand hall in the palace's shadow, beside the Gilded Gate, drawn simply. Crimson velvet drapes at the far left "
+        "and right in a few broad folds, and a plain crimson valance with a thin gold edge across the top; two white "
+        "marble columns; between them, behind, a pale evening sky over a low palace wall, and in the centre background "
+        "the Gilded Gate: a tall arched gate of gold bars, kept small and soft, glowing a faint, sickly gold (the one "
+        "thing that feels wrong). A gilded shelf between the columns. The counter top is white marble with a thin gold "
+        "edge; its front is dark navy with two or three gold-framed panels."),
+    details=["crimson drapes and valance", "two white marble columns",
+             "the arched Gilded Gate, small and faintly sickly gold, in the centre background", "a gilded shelf"],
+    palette=["crimson:2-4", "gold:3-5", "night:5-9", "azure:1-3", "moss:2"])
 
-# ---------------------------------------------------------------------------------------------------------------------
-# The chest: one geometry, seven finishes, three parts; and the three lock makers' overlays.
-
-CHEST_GEOMETRY = {
-    "lid": {"size": [96, 42], "seam_row": 41,
-            "lock_seat": [40, 34, 55, 41],
-            "rows": "0-9: the lid's top face seen from slightly above (a strip); 10-41: the domed front of the lid, its "
-                    "bottom edge (row 41) the seam, straight and full width"},
-    "body": {"size": [96, 30], "lock_seat": [38, 0, 57, 13],
-             "rows": "0-5: the riveted band across the seam; 6-27: the front boards and corner brackets; 28-29: the "
-                     "base, full width"},
-    "open": {"size": [96, 60],
-             "rows": "0-29: the box with its lid gone, seen from slightly above: the inner rim and back wall at the top, "
-                     "a dark interior (deep shadow, nothing in it); 30-59: identical to the body part"},
-    "silhouette": "every finish's lid, body and open parts have exactly the same alpha mask as chest.wood's",
-    "full_width": "the lid's bottom row and the body's top and bottom rows span x 0-95",
-}
-
-FINISHES = [
-    ("wood", "common", "P1", "plain oak boards with visible grain, black iron corner brackets and band, iron rivets",
-     ["umber:1-6", "night:2-5", "steel:1-3"], "Common chests (wood)."),
-    ("green", "uncommon", "P1", "green-painted boards, a little worn at the edges to bare wood, bronze corner brackets and "
-     "band", ["leaf:1-4", "umber:2-4", "gold:2-4"], "Uncommon chests (green)."),
-    ("blue", "rare", "P1", "deep blue lacquer, polished steel bands and brackets, a faint star-rune carved on the lid",
-     ["azure:1-4", "steel:1-4"], "Rare chests (blue)."),
-    ("purple", "epic", "P1", "violet lacquer, silver fittings, a carved star motif on the lid",
-     ["arcane:1-4", "steel:2-4"], "Epic chests (purple); also the window icon and the title screen's chest."),
-    ("gold", "legendary", "P1", "gold leaf over the boards, ornate royal gold fittings with small red gems at the corners",
-     ["gold:1-6", "crimson:3-4"], "Legendary chests, gilded chests (an event), and the old royal chests."),
-    ("black", "sealed", "P1", "black iron plates riveted all over, wrapped twice in heavy iron chains crossing at the "
-     "front (the chains cover the lock seat), no lock showing", ["night:1-5", "steel:1-3"],
-     "The Stranger's sealed chest: wrapped in chains so nothing inside can move."),
-    ("crown", "the Crown Chest", "P2", "royal crimson lacquer, heavy gold fittings, the Aldric crown in gold relief on the "
-     "lid, a gold keyhole plate shaped like a crown", ["crimson:1-5", "gold:2-6"],
-     "New: the Crown Chest, King Aldric's own, opened at the story's end with the whole Key (today it uses the gold "
-     "finish; integration: give the vault its own skin)."),
-]
-
-for skin, quality, priority, look, palette, context in FINISHES:
-    for part, size, what in (
-            ("lid", [96, 42], "Only the closed lid: its top face as a strip at the top, its domed front below, the bottom "
-                              "edge straight and full width (that's where it meets the body)."),
-            ("body", [96, 30], "Only the body below the lid: a riveted band across the top, the front boards with corner "
-                               "brackets, a plain empty lock seat in the middle of the band, the base at the bottom."),
-            ("open", [96, 60], "The open chest with its lid gone: the inner rim and back wall at the top, the dark empty "
-                               "interior, and the same body below.")):
-        is_anchor = skin == "wood"
-        shape = ["perfectly symmetrical left to right",
-                 "a straight, full-width bottom edge (the seam)" if part == "lid" else
-                 "a straight, full-width top edge and base" if part == "body" else
-                 "the body's shape and size in the bottom half",
-                 "a plain, empty lock seat in the middle of the seam" if part != "open" else "a dark, empty interior"]
-        if part == "lid":
-            shape.append("a ward rune carved faintly on the lid's front (not glowing)")
-        if not is_anchor:
-            shape.insert(0, "exactly the same shape and silhouette as the reference wood chest: only materials and colours "
-                            "change")
-        add(id=f"chest.{skin}.{part}", category="chest", title=f"{skin.capitalize()} chest: {part}", size=size,
-            skin=skin, part=part, quality=quality, priority=priority, batch=0 if is_anchor else (4 if priority == "P1" else 6),
-            anchor_for="chest" if is_anchor and part == "lid" else None,
-            replaces=f"assets/sprites/chest/{skin}_{part}.png" if skin != "crown" else None,
-            reference_current="art/reference/current/chest_parts_12x.png",
-            description=f"A warded strongbox: {look}.",
-            details=shape, palette=palette, geometry=CHEST_GEOMETRY, context=context,
-            generation=None if is_anchor else f"Edit chest.wood.{part} (pass it as the input image) to change only the "
-                                              f"materials and colours; keep every pixel of its silhouette.",
-            frame_fields={"part": what})
-
-LOCKS = [
-    ("rusty", "Rusty Padlock", "a rusty iron padlock: pitted grey iron with orange-brown rust", ["steel:1-3", "umber:2-4"],
-     "2 pins; on common chests."),
-    ("guild", "Guild Lock", "a Guild lock: blue-steel plate with a small gold watching eye above the keyhole",
-     ["azure:1-4", "steel:2-4", "gold:4-5"], "3 pins; on uncommon chests; made by the Gilded Guild."),
-    ("dwarven", "Dwarven Tumbler", "a dwarven tumbler lock: bronze with geared edges and rivets",
-     ["gold:1-4", "flame:1-2", "umber:2-3"], "4 pins; on rare and finer chests."),
-]
-for key, title, look, palette, context in LOCKS:
-    add(id=f"chest.lock.{key}.lid", category="chest_lock", title=f"{title}: hasp on the lid", size=[96, 42],
-        replaces=None, lock=key, part="lid",
-        description=f"The hasp of {look}, hanging from the middle of the lid's bottom edge, inside the lid's lock seat "
-                    f"(x 40-55, rows 34-41). Everything else transparent.",
-        details=["only inside x 40-55, rows 34-41", "symmetrical"], palette=palette, geometry=CHEST_GEOMETRY,
-        context=context + " Today ChestView paints a 3-pixel bar in the lock's colour; these replace it.",
-        frame_fields={"part": f"the hasp of {look}"})
-    add(id=f"chest.lock.{key}.body", category="chest_lock", title=f"{title}: lock plate on the body", size=[96, 30],
-        replaces=None, lock=key, part="body",
-        description=f"The lock plate of {look}, with a keyhole, set into the band in the middle of the body's top, inside "
-                    f"the body's lock seat (x 38-57, rows 0-13). Everything else transparent.",
-        details=["only inside x 38-57, rows 0-13", "a clear keyhole", "symmetrical"], palette=palette,
-        geometry=CHEST_GEOMETRY, context=context, frame_fields={"part": f"the lock plate of {look}"})
+# The chest and its locks are drawn in code (tools/custom_art.py: chest, chest_lock) since round 2: one silhouette for
+# every finish, exactly, and as calm as the thing the player looks at most must be.
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Upgrade icons (scripts/Core/Upgrades.cs): one per upgrade. Today several share an icon; the new ones are marked.
@@ -394,25 +300,27 @@ for size in (64, 48, 32, 16):
 
 SCENES = [
     ("guild", "The Gilded Guild's counting-house",
-     "A long, dim counting-house hall: rows of tall ledger shelves, brass scales, stacks of coin, a great iron strongroom "
-     "door at the back with the Guild's eye-and-keyhole emblem in gold above it, cold gold lamplight, black and gold.",
-     ["night:1-6", "gold:2-6", "moss:1-2"], "Mister Vane's evenings and the Guild's nights (DuesPhase)."),
+     "A long, dim counting-house hall: tall ledger shelves as plain dark shapes, a great iron strongroom door at the back "
+     "with the Guild's eye-and-keyhole emblem above it in gold, cold gold light from a single lamp. Black and gold, "
+     "quiet and still.",
+     ["night:1-5", "gold:3-5", "moss:1-2"], "Mister Vane's evenings and the Guild's nights (DuesPhase)."),
     ("bram", "Bram's back room",
-     "The small back room behind Bram's stall: a low beamed ceiling, a hearth with a warm fire, shelves of old opened "
-     "chests and keepsakes, a worn armchair, a window onto the dusk. Cosy and a little shabby.",
-     ["umber:1-6", "flame:1-4", "gold:3-5", "arcane:1-2"], "Bram's scenes (the welcome, his secret shard)."),
+     "The small back room behind Bram's stall: a low beamed ceiling, a hearth with a warm fire at one side, a few "
+     "shelves with old opened chests as simple shapes, a worn armchair, a small window onto the dusk. Cosy and quiet.",
+     ["umber:1-5", "flame:1-3", "gold:4-5", "arcane:1-2"], "Bram's scenes (the welcome, his secret shard)."),
     ("keyhold", "The ruins of the Keyhold",
-     "The broken tower of the archmages at night: a circular chamber open to the stars, cracked pillars, a great stone "
-     "keyhole carved into the floor glowing faintly violet, star maps on the walls.",
-     ["arcane:1-6", "night:1-6", "azure:3-5"], "The Hooded Woman's scenes."),
+     "The broken tower of the archmages at night: a circular chamber open to the sky, a few cracked pillars as plain grey "
+     "shapes, a great keyhole carved into the floor glowing faintly violet, a handful of stars. Calm and dark.",
+     ["arcane:1-5", "night:1-5", "azure:3-4"], "The Hooded Woman's scenes."),
     ("vault", "Beneath the Gilded Gate",
-     "A vault under the palace: steps down to the great arched Gilded Gate, its gold bars glowing sickly, chains, and in "
-     "front of it, on a stone dais, the Crown Chest under a single beam of light.",
-     ["gold:1-6", "crimson:1-4", "night:1-5"], "The Crown Chest's scene and the finale."),
+     "A vault under the palace: a few wide steps down to the great arched Gilded Gate, its gold bars glowing a faint, "
+     "sickly gold, and in front of it, on a plain stone dais, the Crown Chest under a single soft beam of light. Dark "
+     "and still.",
+     ["gold:2-5", "crimson:1-3", "night:1-5"], "The Crown Chest's scene and the finale."),
 ]
 for key, title, description, palette, context in SCENES:
     add(id=f"scene.{key}", category="scene", title=title, description=description, palette=palette, replaces=None,
-        notes=f"New (P3): {context} Integration: ScenePhase picks a backdrop per scene.")
+        notes=f"{context} ScenePhase shows it behind the week's scene (Story.Setting).")
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Steam store art (not used in the game). Native art in the game's pixel style, scaled by whole numbers to Steam's

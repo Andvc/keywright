@@ -17,27 +17,7 @@ def paste(canvas,im,xy,scale=1):
         im=im.resize((im.width*scale,im.height*scale),Image.Resampling.NEAREST)
     canvas.paste(im,xy,im)
 
-sheet=Image.new('RGB',(660,7*250),BG)
-d=ImageDraw.Draw(sheet)
-for row,skin in enumerate(('wood','green','blue','purple','gold','black','crown')):
-    closed=Image.new('RGBA',(96,72))
-    closed.alpha_composite(asset(f'chest.{skin}.lid'),(0,0))
-    closed.alpha_composite(asset(f'chest.{skin}.body'),(0,42))
-    d.text((12,row*250+8),skin,fill='white')
-    paste(sheet,closed,(12,row*250+27),3)
-    paste(sheet,asset(f'chest.{skin}.open'),(342,row*250+27),3)
-sheet.save(OUT/'assembled_chests.png')
-
-sheet=Image.new('RGB',(960,260),BG)
-d=ImageDraw.Draw(sheet)
-for col,lock in enumerate(('rusty','guild','dwarven')):
-    closed=Image.new('RGBA',(96,72))
-    for part,y in (('lid',0),('body',42)):
-        closed.alpha_composite(asset(f'chest.wood.{part}'),(0,y))
-        closed.alpha_composite(asset(f'chest.lock.{lock}.{part}'),(0,y))
-    d.text((col*320+8,8),lock,fill='white')
-    paste(sheet,closed,(col*320+8,30),3)
-sheet.save(OUT/'assembled_locks.png')
+# 0.25: the chest and its locks are drawn in code now (tools/custom_art.py); their sheets went with them.
 
 sheet=Image.new('RGB',(510,5*125),BG)
 d=ImageDraw.Draw(sheet)

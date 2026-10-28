@@ -1585,57 +1585,181 @@ def portraits():
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-# The chest: a warded strongbox, 16x14, a lid of seven rows over a body of five, in the colours of the base skin
-# (CHEST_BASE in import_art.py recolours it per colour). A ward rune on the lid, corner straps, a riveted band, and the
-# lock's place on the band where ChestView paints it (lid row 6, columns 7-9; body rows 0-1, columns 6-9).
-# Letters: a outline, b main, c dark, e highlight, g shade, d light metal, f dark metal.
+# The chest: a warded strongbox, 48 art pixels wide (the game's 96 is this at 2x: four screen pixels to a pixel),
+# drawn calm on purpose. Big flat areas, one board line, two raised straps with a rivet or two, a band at the seam, a
+# mark on the lid, corner brackets at the feet, and nothing else: it's the thing the player looks at most, so it has
+# to be easy to look at (0.25 replaced 0.23's generated chests, whose grain, scratches and rivets made them six times
+# as busy). One design, mirrored from its left half, so every finish shares one silhouette; a finish is a colour swap.
+# Parts: the lid (21 rows, its bottom row the seam), the body (15) and the open box (30: the rim and inside over the
+# body). The lock makers' overlays sit on the lock seats: the lid's x 20-27, rows 17-20; the body's x 19-28, rows 0-6.
+# Letters: o outline, T top, L light, M main, D dark, S shadow (the chest's own material); l m d its fittings; r e a
+# mark on the lid and its jewel; i j k the inside of the open box.
 
-CHEST_LETTERS = {"a": "#020202", "b": "#dc2728", "c": "#711335", "d": "#ffe199", "e": "#ff5733", "f": "#e67732", "g": "#c03a24"}
-
-CHEST_CLOSED = [
-    "................",
-    "................",
-    ".aaaaaaaaaaaaaa.",
-    ".adeeeeeeeeeeda.",
-    ".afbbbbddbbbbfa.",
-    "aafbbbdbbdbbbfaa",
-    "agfbbbbddbbbbfga",
-    "agfccccccccccfga",
-    "agccccdfffdcccga",
-    "adfdfffaafffdfda",
-    "aaccbcffffcbccaa",
-    ".afbbccccccccfa.",
-    ".afbbbbbbbbbbfa.",
-    ".aaaaaaaaaaaaaa.",
+CHEST_LID = [
+    "......oooooooooooooooooo",
+    "....ooTTTTTTTTTTTTTTTTTT",
+    "..ooTTTdlldTTTTTTTTTTTTT",
+    ".oLLLLLdmmdLLLLLLLLLLLLL",
+    "oLLLLLLdmmdLLLLLLLLLLLLL",
+    "oLLLLLLdlldLLLLLLLLLLLLL",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdlldMMMMMMMMMMMMM",
+    "oDDDDDDdmmdDDDDDDDDDDDDD",
+    "oDDDDDDdmmdDDDDDDDDDDDDD",
+    "oSSSSSSddddSSSSSSSSSSSSS",
+    "oddddddddddddddddddddddd",
+    "olllllllllllllllllllllll",
+    "ommmmmmmmmmmmmmmmmmmmmmm",
+    "ommmmmmmmmmmmmmmmmmmmmmm",
+    "oddddddddddddddddddddddd",
 ]
 
-CHEST_OPEN = [
-    "................",
-    "................",
-    "................",
-    "................",
-    "adddddddddddddda",
-    "adaaaaaaaaaaaada",
-    "adacccccccccccda",
-    "adacccccccccccda",
-    "adddddddddddddda",
-] + CHEST_CLOSED[9:]
+CHEST_BODY = [
+    "oSSSSSSSSSSSSSSSSSSSSSSS",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdlldMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "oDDDDDDdmmdDDDDDDDDDDDDD",
+    "oMMMMMMdmmdMMMMMMMMMMMMM",
+    "olllMMMdmmdMMMMMMMMMMMMM",
+    "ommdMMMdlldMMMMMMMMMMMMM",
+    "ommdDDDdmmdDDDDDDDDDDDDD",
+    "ommmmmmmmmmmmmmmmmmmmmmm",
+    "oddddddddddddddddddddddd",
+    "oSSSSSSSSSSSSSSSSSSSSSSS",
+    "oooooooooooooooooooooooo",
+]
+
+# The box with its lid gone, from slightly above: the straight far rim, the inside of the back and side walls, the
+# dark inside, and the near rim (the body below carries on from it).
+CHEST_OPEN_TOP = [
+    "........................",
+    "........................",
+    "........................",
+    "oooooooooooooooooooooooo",
+    "oTTTTTTTTTTTTTTTTTTTTTTT",
+    "oLDDDDDDDDDDDDDDDDDDDDDD",
+    "oLSiiiiiiiiiiiiiiiiiiiii",
+    "oLSjjjjjjjjjjjjjjjjjjjjj",
+    "oLSkkkkkkkkkkkkkkkkkkkkk",
+    "oLSkkkkkkkkkkkkkkkkkkkkk",
+    "oLSkkkkkkkkkkkkkkkkkkkkk",
+    "oLSkkkkkkkkkkkkkkkkkkkkk",
+    "oLSkkkkkkkkkkkkkkkkkkkkk",
+    "oLSkkkkkkkkkkkkkkkkkkkkk",
+    "oTTTTTTTTTTTTTTTTTTTTTTT",
+]
+
+# Marks on the lid's front (left halves, mirrored; "." leaves the lid as it is): the ward mark, a small carved diamond
+# with a jewel in the finer finishes; and the Crown Chest's, the Aldric crown.
+CHEST_MARKS = {
+    "ward": [(7, "." * 23 + "r"), (8, "." * 22 + "rr"), (9, "." * 21 + "rre"), (10, "." * 21 + "rre"),
+             (11, "." * 22 + "rr"), (12, "." * 23 + "r")],
+    "crown": [(6, "." * 20 + "e..e"), (7, "." * 20 + "ee.e"), (8, "." * 20 + "eeee"), (9, "." * 20 + "eeee"),
+              (10, "." * 20 + "rrrr"), (11, "." * 21 + "rrr")],
+}
+
+CHEST_OUTLINE = "#1a1420"
+
+# Each finish (Chest.Skin: the colour promises the quality inside): its material (T L M D S), fittings (l m d), mark
+# (r e) and inside (i j k), all from the master palette (art/palette).
+CHEST_FINISHES = {
+    "wood": dict(T="#c9a075", L="#ad7d52", M="#8e5b37", D="#6e3d22", S="#4b2212", l="#626d80", m="#383d48",
+                 d="#2b2236", r="#6e3d22", e="#6e3d22", i="#6e3d22", j="#4b2212", k="#0b0810", mark="ward"),
+    "green": dict(T="#62d46f", L="#58a04c", M="#0e7734", D="#004e22", S="#002511", l="#c29026", m="#a06500",
+                  d="#773f00", r="#004e22", e="#62d46f", i="#004e22", j="#002511", k="#0b0810", mark="ward"),
+    "blue": dict(T="#4ea3ff", L="#2164a7", M="#143771", D="#081137", S="#0b0810", l="#93a2b6", m="#626d80",
+                 d="#383d48", r="#081137", e="#68c7fd", i="#143771", j="#081137", k="#0b0810", mark="ward"),
+    "purple": dict(T="#b46bff", L="#6c48a5", M="#3f2671", D="#180939", S="#0b0810", l="#ccd9e8", m="#93a2b6",
+                   d="#626d80", r="#180939", e="#c792ff", i="#3f2671", j="#180939", k="#0b0810", mark="ward"),
+    "gold": dict(T="#fbeda4", L="#f2c14e", M="#c29026", D="#a06500", S="#773f00", l="#a06500", m="#773f00",
+                 d="#492100", r="#a06500", e="#ff4058", i="#a06500", j="#773f00", k="#0b0810", mark="ward"),
+    # The Stranger's: black iron, chained shut (no lock: it's sealed).
+    "black": dict(T="#554b69", L="#3b3150", M="#2b2236", D="#1a1420", S="#0b0810", l="#626d80", m="#383d48",
+                  d="#2b2236", r="#2b2236", e="#2b2236", i="#2b2236", j="#1a1420", k="#0b0810", mark=None),
+    # King Aldric's own: royal crimson and gold, the crown on its lid.
+    "crown": dict(T="#ff4058", L="#c7414e", M="#9c1839", D="#6c0026", S="#3b0014", l="#f2c14e", m="#c29026",
+                  d="#a06500", r="#a06500", e="#f2c14e", i="#6c0026", j="#3b0014", k="#0b0810", mark="crown"),
+}
+
+# A chain's links, repeating: an open link face-on (its hole shows the chest), then one edge-on.
+CHAIN_LINKS = [".ll.", "l..l", "l..l", ".ll.", ".mm.", ".mm."]
+CHAIN_COLOURS = {"l": "#93a2b6", "m": "#383d48"}
+
+# The lock makers' overlays, on the lock seats: a hasp hanging from the lid's band (x 20-27, rows 17-20) and a padlock
+# over the body's (x 20-27, rows 0-6). Letters: o outline, h hasp, p plate, q its lit edge, k keyhole, g a maker's mark
+# (the Guild's eye, the dwarves' studs).
+CHEST_LOCKS = {
+    "rusty": dict(h="#626d80", p="#6e3d22", q="#8e5b37", k="#0b0810", g="#0b0810"),
+    "guild": dict(h="#93a2b6", p="#143771", q="#2164a7", k="#0b0810", g="#f2c14e"),
+    "dwarven": dict(h="#c29026", p="#773f00", q="#a06500", k="#0b0810", g="#f2c14e"),
+}
+CHEST_HASP = ["..oooo..", "..ohho..", "..ohho..", "..ohho.."]
+CHEST_PLATES = {
+    "rusty": ["..ohho..", ".oooooo.", "oqqqqqqo", "opppkppo", "oppkkkpo", "oppppppo", ".oooooo."],
+    "guild": ["..ohho..", ".oooooo.", "oqqqqqqo", "oppggppo", "opgkkgpo", "oppggppo", ".oooooo."],
+    "dwarven": ["..ohho..", ".oooooo.", "oqgqqgqo", "opppkppo", "oppkkkpo", "ogppppgo", ".oooooo."],
+}
 
 
-def _grid(rows, letters):
-    img = Image.new("RGBA", (len(rows[0]), len(rows)), (0, 0, 0, 0))
+def _rgba(h):
+    return int(h[1:3], 16), int(h[3:5], 16), int(h[5:7], 16), 255
+
+
+def _mirrored(rows):
+    return [row + row[::-1] for row in rows]
+
+
+def _stamp(img, rows, colours, x0=0, y0=0):
     px = img.load()
-    for y, row in enumerate(rows):
-        for x, ch in enumerate(row):
+    for dy, row in enumerate(rows):
+        for dx, ch in enumerate(row):
             if ch != ".":
-                h = letters[ch]
-                px[x, y] = (int(h[1:3], 16), int(h[3:5], 16), int(h[5:7], 16), 255)
+                px[x0 + dx, y0 + dy] = _rgba(CHEST_OUTLINE if ch == "o" else colours[ch])
+
+
+def _chest_grid(rows, colours):
+    img = Image.new("RGBA", (len(rows[0]), len(rows)), (0, 0, 0, 0))
+    _stamp(img, rows, colours)
     return img
 
 
-def chest():
-    """The closed and open chest, in the base skin's colours: (closed 16x14, open 16x14)."""
-    return _grid(CHEST_CLOSED, CHEST_LETTERS), _grid(CHEST_OPEN, CHEST_LETTERS)
+def chest(finish):
+    """A finish's parts at 48 wide: (lid 48x21, body 48x15, open 48x30)."""
+    c = CHEST_FINISHES[finish]
+    lid = _chest_grid(_mirrored(CHEST_LID), c)
+    body = _chest_grid(_mirrored(CHEST_BODY), c)
+    if c["mark"]:
+        for y, half in CHEST_MARKS[c["mark"]]:
+            _stamp(lid, _mirrored([half]), c, 0, y)
+    if finish == "black":
+        # A chain down the middle, over lid and body, and one round the seam, where you'd chain a chest shut.
+        for y in range(1, 35):
+            img, row = (lid, y) if y < 21 else (body, y - 21)
+            _stamp(img, [CHAIN_LINKS[y % 6]], CHAIN_COLOURS, 22, row)
+        for x in range(1, 47):
+            _stamp(lid, [[ch] for ch in CHAIN_LINKS[x % 6]], CHAIN_COLOURS, x, 17)
+    opened = Image.new("RGBA", (48, 30), (0, 0, 0, 0))
+    opened.alpha_composite(_chest_grid(_mirrored(CHEST_OPEN_TOP), c), (0, 0))
+    opened.alpha_composite(body, (0, 15))
+    return lid, body, opened
+
+
+def chest_lock(maker):
+    """A lock maker's overlays at 48 wide: (the hasp over the lid, 48x21; the padlock over the body, 48x15)."""
+    c = CHEST_LOCKS[maker]
+    lid = Image.new("RGBA", (48, 21), (0, 0, 0, 0))
+    body = Image.new("RGBA", (48, 15), (0, 0, 0, 0))
+    _stamp(lid, CHEST_HASP, c, 20, 17)
+    _stamp(body, CHEST_PLATES[maker], c, 20, 0)
+    return lid, body
 
 
 def key_shard():
