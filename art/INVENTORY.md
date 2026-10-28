@@ -37,10 +37,10 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 
 | Id | Title | Size | Pri | Output | Replaces | Description |
 |---|---|---|---|---|---|---|
-| `sky.morning` | Sky: early morning | 320x180 | P1 | `art/generated/sky/morning.png` | `(new)` | Pale clear blue at the top, through a soft lemon to a warm peach band low down; a low, pale-gold sun near the left edge, half a disc; one long, thin, pale cloud. |
-| `sky.midday` | Sky: midday | 320x180 | P1 | `art/generated/sky/midday.png` | `(new)` | Clear soft blue, a little paler towards the bottom; two or three plain, rounded white clouds; no sun in view. |
-| `sky.evening` | Sky: evening | 320x180 | P1 | `art/generated/sky/evening.png` | `(new)` | Deep violet at the top, through rose to a warm orange band low down; the sun low near the right edge, a half disc of pale gold; one long cloud lit rose underneath. |
-| `sky.night` | Sky: night | 320x180 | P2 | `art/generated/sky/night.png` | `(new)` | Deep blue at the top, a little lighter towards the bottom; a pale full moon high on the left; a few small single stars, far apart. |
+| `sky.morning` | Early morning sky | 320x180 | P1 | `art/generated/sky/morning.png` | `(new)` | Pale clear blue at the top, through a soft lemon to a warm peach band low down; a low, pale-gold sun near the left edge, half a disc; one long, thin, pale cloud. |
+| `sky.midday` | Midday sky | 320x180 | P1 | `art/generated/sky/midday.png` | `(new)` | Clear soft blue, a little paler towards the bottom; two or three plain, rounded white clouds; no sun in view. |
+| `sky.evening` | Evening sky | 320x180 | P1 | `art/generated/sky/evening.png` | `(new)` | Deep violet at the top, through rose to a warm orange band low down; the sun low near the right edge, a half disc of pale gold; one long cloud lit rose underneath. |
+| `sky.night` | Night sky | 320x180 | P2 | `art/generated/sky/night.png` | `(new)` | Deep blue at the top, a little lighter towards the bottom; a pale full moon high on the left; a few small single stars, far apart. |
 
 ## place
 

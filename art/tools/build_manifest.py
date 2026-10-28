@@ -86,10 +86,10 @@ CATEGORIES = {
                "bottom third) and the sky: everything that would be sky, above the skyline and seen through windows, "
                "doors or arches, is flat pure magenta #FF00FF. Nobody is in it. The horizon, or the foot of the far wall, "
                "a little above the middle; the bottom third plain ground or floor; the left third and the middle "
-               "simple, because a person stands on the left and a chest in the middle in front of them; the place's "
+               "simple (the game stands someone at the left and puts things in the middle, in front); the place's "
                "landmark in the middle distance just right of centre. Muted, mid to dark values with low contrast, in "
                "three to five large planes."),
-        avoid=["people or animals", "text or signs with letters", "a counter or table in the foreground", "a sky "
+        avoid=["people or animals", "a chest", "text or signs with letters", "a counter or table in the foreground", "a sky "
                "(it's magenta)", "a vanishing-point floor", "busy foliage or many small things", "strong contrast"]
               + QUIET_AVOID,
     ),

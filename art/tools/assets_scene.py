@@ -37,7 +37,7 @@ SKIES = [
      ["azure:1-2", "night:1-3", "steel:4", "night:9"]),
 ]
 for key, title, priority, description, palette in SKIES:
-    add(id=f"sky.{key}", category="sky", title=f"Sky: {title.lower()}", time=key, priority=priority,
+    add(id=f"sky.{key}", category="sky", title=f"{title} sky", time=key, priority=priority,
         anchor_for="sky" if key == "midday" else None, replaces=None, description=description, palette=palette,
         context=f"Behind every place: the game shows it {'(and tints the scene to match) ' if key != 'midday' else ''}"
                 f"{'for the first customers of a day' if key == 'morning' else 'through the middle of a day' if key == 'midday' else 'for the last customers and the day end' if key == 'evening' else 'on the Guild night'}.")
