@@ -20,6 +20,8 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import artlib  # noqa: E402
+import pixelize  # noqa: E402
+import scene  # noqa: E402
 
 REVIEW = artlib.path("art/generated/_review")
 
@@ -61,6 +63,14 @@ def check(spec, manifest, img, delivered):
                 shown = f"{m[k]:.3f}" if k != "busy" else f"{m[k]:.1f}"
                 errors.append(f"too busy: {words[k]} {shown}, at most {limit} (draw it simpler)")
 
+    if spec.get("value"):
+        lo, hi = spec["value"]
+        lit = [artlib._luma(px[p]) for p in mask]
+        mean = sum(lit) / max(1, len(lit))
+        if not lo <= mean <= hi:
+            errors.append(f"mean brightness {mean:.0f}, want {lo}-{hi} ({'too dark' if mean < lo else 'too light'} for its layer)")
+    errors += layer_checks(spec, img, mask)
+
     if not opaque:
         m = spec.get("margin", 0) or 0
         box = artlib.bbox(mask)
@@ -73,9 +83,9 @@ def check(spec, manifest, img, delivered):
                 errors.append(f"{len(bad)} silhouette pixels aren't the outline colour (e.g. at {bad[0]})")
         if spec.get("baseline") is not None and box[3] != spec["baseline"]:
             errors.append(f"lowest pixel on row {box[3]}, want the baseline {spec['baseline']}")
-        if spec["category"] in ("item", "heartsong", "curio", "icon_upgrade", "icon_kind", "emblem"):
+        if spec["category"] in ("item", "heartsong", "curio", "icon_upgrade", "icon_kind", "emblem", "figure", "prop"):
             cx = (box[0] + box[2]) / 2
-            if abs(cx - (w - 1) / 2) > 1:
+            if abs(cx - (w - 1) / 2) > (4 if spec["category"] == "figure" else 1):
                 errors.append(f"not centred left-to-right (content centre x {cx}, canvas {(w - 1) / 2})")
             if spec["category"] in ("curio", "icon_upgrade", "icon_kind", "emblem"):
                 cy = (box[1] + box[3]) / 2
@@ -114,10 +124,51 @@ def check(spec, manifest, img, delivered):
     return errors, warnings
 
 
+def layer_checks(spec, img, mask):
+    """The shop scene's layers have to fit together (art/tools/scene.py): where each one's edges and lines fall."""
+    errors = []
+    cat, (w, h) = spec["category"], spec["size"]
+    box = artlib.bbox(mask)
+    if not box:
+        return errors
+    px = img.load()
+    if cat == "figure":
+        if box[3] != h - 1:
+            errors.append(f"feet on row {box[3]}, want the bottom row ({h - 1})")
+        tall = box[3] - box[1] + 1
+        if abs(tall - spec["height"]) > 2:
+            errors.append(f"{tall} pixels tall, want {spec['height']} (its height next to everyone else)")
+    if cat == "shelf":
+        top = pixelize._board_top(img)
+        if abs(top - spec["board_row"]) > 1:
+            errors.append(f"the board's top is on row {top}, want row {spec['board_row']} (things stand on it)")
+    if cat == "frame":
+        band = [x for x in range(w) for y in range(scene.HUD_ROWS) if (x, y) not in mask]
+        if band:
+            errors.append(f"the top band (rows 0-{scene.HUD_ROWS - 1}, under the top bar) has {len(band)} gaps: it runs right across")
+        x0, x1, y0, y1 = scene.POST_WIDTH + 4, w - scene.POST_WIDTH - 5, scene.FRAME_DEPTH[1] + 2, scene.COUNTER_ROW - 1
+        inside = [(x, y) for (x, y) in mask if x0 <= x <= x1 and y0 <= y <= y1]
+        if inside:
+            errors.append(f"{len(inside)} pixels in the view (x {x0}-{x1}, rows {y0}-{y1}): the middle stays open")
+    if cat == "place":
+        holes = [(x, y) for y in range(scene.COUNTER_ROW - 7, h) for x in range(w) if (x, y) not in mask]
+        if holes:
+            errors.append(f"{len(holes)} transparent pixels below row {scene.COUNTER_ROW - 7}: the ground or floor runs "
+                          "under the counter")
+    if cat == "sheet":
+        middle = img.crop((12, 12, w - 12, h - 12))
+        m = artlib.calm_metrics(middle)
+        if m["edges"] > 0.02 or m["specks"] > 0.002:
+            errors.append(f"the paper's middle isn't plain (edges {m['edges']:.3f}, specks {m['specks']:.3f}): the slip "
+                          "is printed there")
+    return errors
+
+
 # ---- review pictures --------------------------------------------------------------------------------------------------
 
-ZOOM = {"background": 2, "scene": 2, "store": 1, "portrait": 2, "item": 4, "heartsong": 4, "curio": 4, "icon_upgrade": 4, "icon_kind": 4, "emblem": 4, "story": 4, "ui": 8, "fx": 2, "lock_face": 2,
-        "brand": 2}
+ZOOM = {"scene": 2, "store": 1, "item": 4, "heartsong": 4, "curio": 4, "icon_upgrade": 4, "icon_kind": 4, "emblem": 4,
+        "story": 4, "ui": 8, "fx": 2, "lock_face": 2, "brand": 2, "sky": 2, "place": 2, "frame": 2, "shelf": 4,
+        "counter": 2, "figure": 2, "sheet": 1, "prop": 4}
 
 
 def sheet(category, specs, images, status):
@@ -146,61 +197,75 @@ def sheet(category, specs, images, status):
     return out
 
 
-# Where the counter screen covers a background (native coordinates; see art/reference/layout/counter_overlay.png).
-COVERED = [(0, 0, 639, 27), (31, 54, 119, 142), (6, 167, 144, 240), (410, 33, 626, 353), (6, 245, 151, 300),
-           (12, 310, 125, 345), (160, 310, 250, 345)]
-CALM = [(158, 245, 400, 300), (220, 150, 340, 237)]
+def _chest(skin, lock=None):
+    """The chest as the game draws it (tools/custom_art.py, built into assets/ at 2x), back at its art size."""
+    out = Image.new("RGBA", (48, 36), (0, 0, 0, 0))
+    for part, y in (("lid", 0), ("body", 21)):
+        for name in (f"{skin}_{part}", f"lock_{lock}_{part}" if lock else None):
+            p = artlib.path(f"assets/sprites/chest/{name}.png") if name else None
+            if p and os.path.exists(p):
+                img = artlib.open_rgba(p)
+                out.alpha_composite(img.resize((img.width // 2, img.height // 2), Image.NEAREST), (0, y))
+    return out
 
 
-def layout(bg):
-    """A background at the game's 1280x720 (2x a round-1 picture, 4x a round-2 one) with the counter screen's fixed lines
-    and covered areas drawn over it."""
-    frame = bg.resize((1280, 720), Image.NEAREST)
-    d = ImageDraw.Draw(frame, "RGBA")
-    for x0, y0, x1, y1 in COVERED:
-        d.rectangle((x0 * 2, y0 * 2, x1 * 2 + 1, y1 * 2 + 1), fill=(255, 64, 88, 50), outline=(255, 64, 88, 255), width=2)
-    for x0, y0, x1, y1 in CALM:
-        d.rectangle((x0 * 2, y0 * 2, x1 * 2 + 1, y1 * 2 + 1), outline=(255, 181, 46, 255), width=2)
-    d.line((0, 476, frame.width - 1, 476), fill=(78, 163, 255, 255), width=2)
-    d.line((300, 196, 805, 196), fill=(78, 163, 255, 255), width=2)
-    d.rectangle((460, 332, 652, 475), outline=(199, 146, 255, 255), width=2)
-    return frame
+def _unlit(lantern):
+    """A lantern by day: its bright, warm glass darkened (the game does the same)."""
+    out = lantern.copy()
+    px = out.load()
+    for y in range(out.height):
+        for x in range(out.width):
+            r, g, b, a = px[x, y]
+            if a and artlib._luma((r, g, b)) > 150 and r > b + 40:
+                px[x, y] = (59, 49, 80, 255)
+    return out
 
 
 def mockups(images, manifest):
-    """The counter at each tier with whatever has been delivered: background, a portrait, the chest, things on the
-    shelf, and the slip's panel, at the game's 1280x720."""
+    """The counter at each shop tier, built from whatever's been delivered (placeholders for the rest, as
+    art/tools/scene.py draws them): the four times of day in a grid, and midday at full size with what the counter
+    screen puts over it."""
     made = []
-    portraits = [s["id"] for s in manifest["assets"] if s["category"] == "portrait" and s["id"] in images]
-    things = [s["id"] for s in manifest["assets"] if s["category"] in ("item", "heartsong") and s["id"] in images]
+    specs = {s["id"]: s for s in manifest["assets"]}
     skins, locks = ["wood", "green", "blue", "purple"], ["rusty", "guild", "dwarven", "guild"]
-    for tier in range(1, 5):
-        bg = images.get(f"bg.shop{tier}")
-        if bg is None:
-            continue
-        frame = bg.resize((1280, 720), Image.NEAREST)
-        d = ImageDraw.Draw(frame, "RGBA")
-        d.rectangle((0, 0, 1279, 55), fill=(13, 10, 19, 235))
-        d.rectangle((820, 66, 1252, 706), fill=(33, 27, 45, 245), outline=(59, 49, 80, 255), width=3)
-        d.rectangle((62, 108, 238, 284), fill=(33, 27, 45, 255), outline=(59, 49, 80, 255), width=3)
-        if portraits:
-            p = images[portraits[(tier - 1) * 7 % len(portraits)]]
-            frame.alpha_composite(p.resize((152, 152), Image.NEAREST), (74, 120))
-        # The chest is drawn in code (tools/custom_art.py); the game's build of it, with a lock, at its 2x.
-        for part, y in (("body", 416), ("lid", 332)):
-            for name in (f"{skins[tier - 1]}_{part}", f"lock_{locks[tier - 1]}_{part}"):
-                p = artlib.path(f"assets/sprites/chest/{name}.png")
-                if os.path.exists(p):
-                    img = artlib.open_rgba(p)
-                    frame.alpha_composite(img.resize((img.width * 2, img.height * 2), Image.NEAREST), (460, y))
-        for i, tid in enumerate(things[tier * 3:tier * 3 + 5]):
-            t = images[tid]
-            box = artlib.bbox(artlib.opaque_mask(t))
-            t = t.crop((box[0], box[1], box[2] + 1, box[3] + 1))
-            t = t.resize((t.width * 2, t.height * 2), Image.NEAREST)  # at 2x on the shelf, six slots from x 300
-            frame.alpha_composite(t, (300 + 84 * i + 42 - t.width // 2, 196 - t.height))
-        path = os.path.join(REVIEW, f"mockup_counter_tier{tier}.png")
-        frame.save(path)
+    sellers = {1: ["hob", "mags", "penn"], 2: ["wenna", "fennick", "ansel"], 3: ["pell", "corisande", "aldous"],
+               4: ["silas", "oriel", "vane"]}
+    things = [s["id"] for s in manifest["assets"] if s["category"] in ("item", "heartsong") and s["id"] in images]
+    for tier, key in scene.TIERS.items():
+        who = next((f"figure.{k}" for k in sellers[tier] if f"figure.{k}" in images), f"figure.{sellers[tier][0]}")
+        height = specs[who]["height"] if who in specs else 124
+        frames = {}
+        for time in scene.TIMES:
+            lantern = images.get(f"prop.lantern_{key}")
+            if lantern is not None and not scene.TIMES[time]["lit"]:
+                lantern = _unlit(lantern)
+            layers = {"sky": images.get(f"sky.{time}"), "place": images.get(f"place.{key}"),
+                      "frame": images.get(f"frame.{key}"), "shelf": images.get(f"shelf.{key}"),
+                      "counter": images.get(f"counter.{key}"), "sheet": images.get(f"sheet.{key}"),
+                      "figure": images.get(who), "lantern": lantern,
+                      "prop_left": images.get("prop.scales") if tier >= 2 else None,
+                      "prop_right": images.get("prop.witchlight") if tier >= 3 else None}
+            frame = scene.compose(layers, tier, time, height, chest=_chest(skins[tier - 1], locks[tier - 1]))
+            for i, tid in enumerate(things[tier * 3:tier * 3 + 4] if tier >= 2 else []):
+                t = images[tid]
+                b = artlib.bbox(artlib.opaque_mask(t))
+                t = t.crop((b[0], b[1], b[2] + 1, b[3] + 1))
+                t = t.resize((t.width * 2, t.height * 2), Image.NEAREST)
+                frame.alpha_composite(t, (300 + 84 * i + 42 - t.width // 2, 196 - t.height))
+            frames[time] = frame
+        grid = Image.new("RGBA", (1280, 720), (0, 0, 0, 255))
+        for i, time in enumerate(scene.TIMES):
+            grid.alpha_composite(frames[time].resize((640, 360), Image.NEAREST), ((i % 2) * 640, (i // 2) * 360))
+        path = os.path.join(REVIEW, f"counter_{key}_times.png")
+        grid.save(path)
+        made.append(path)
+        ui = frames["midday"].copy()
+        d = ImageDraw.Draw(ui, "RGBA")
+        d.rectangle((0, 0, 1279, 55), fill=(13, 10, 19, 150))
+        for bx, by, bw, bh in scene.UI.values():
+            d.rectangle((bx, by, bx + bw, by + bh), outline=(255, 64, 88, 220), width=3)
+        path = os.path.join(REVIEW, f"counter_{key}.png")
+        ui.save(path)
         made.append(path)
     return made
 
@@ -263,9 +328,6 @@ def main():
             img = sheet(cat, cs, delivered, report)
             if img is not None:
                 img.save(os.path.join(REVIEW, f"{cat}.png"))
-        for s_ in specs:
-            if s_["category"] == "background" and s_["id"] in delivered:
-                layout(delivered[s_["id"]]).save(os.path.join(REVIEW, f"{s_['id'].replace('.', '_')}_layout.png"))
         for path in mockups(delivered, manifest):
             print(f"mock-up: {os.path.relpath(path, artlib.ROOT)}")
         print(f"contact sheets: {os.path.relpath(REVIEW, artlib.ROOT)}/")

@@ -53,14 +53,14 @@ public partial class CounterPhase : Phase
     SellerView _seller;
     ShakeBox _shake;
     MentorView _mentor;
-    LedgerView _ledger;
+    NotebookView _notebook;
     static readonly Core.Shake[] Levels = { Core.Shake.Gentle, Core.Shake.Firm, Core.Shake.Hard };
     readonly Label[] _strengthWords = new Label[3];
     Node2D _strength;
     Label _hint, _notes, _worth, _askLabel, _ask, _chanceText, _footer, _timer, _scale, _slipWeight, _rot;
     Painter _chance;
     float _chanceShown;
-    Button _buy, _pass, _offer, _magnetButton, _ledgerButton;
+    Button _buy, _pass, _offer, _magnetButton, _notebookButton;
     HSlider _slider;
     Control _reveal;
     bool _busy, _lamp, _magnet;
@@ -77,7 +77,7 @@ public partial class CounterPhase : Phase
     public ShakeBox Shake => _shake;
     public MentorView Mentor => _mentor;
     public bool Concluded => !_visit.Deciding;
-    public bool Busy => _busy || _ledger != null || _sellConfirm != null;
+    public bool Busy => _busy || _notebook != null || _sellConfirm != null;
 
     /// <summary>A lesson is under way.</summary>
     public bool InLesson => _steps != null;
@@ -106,9 +106,9 @@ public partial class CounterPhase : Phase
         Add(UiKit.MakeShop(State.Tier, 0.92f));
         BuildShelf();
 
-        // Click them for their page in the ledger.
+        // Click them for their page in the notebook.
         _seller = Add(new SellerView(_visit.Seller) { Position = new Vector2(150, 196), Clickable = true });
-        _seller.Clicked += OpenLedger;
+        _seller.Clicked += () => OpenNotebook();
         // Hesk can't lift a chest high enough to drop it, or shake it hard.
         var bounds = State.CanDrop ? DragBounds : new Rect2(DragBounds.Position.X, ChestRest.Y - LiftLimit, DragBounds.Size.X, LiftLimit);
         _shake = Add(new ShakeBox(_visit.Chest, bounds) { Position = ChestRest, MaxLevel = State.CanShakeHardAt(_visit.Seller) ? Core.Shake.Hard : Core.Shake.Firm });
@@ -306,10 +306,12 @@ public partial class CounterPhase : Phase
         }
         // Everyone else gets a word about their own way with a chest, the first morning.
         if (!State.Is(Characters.Kit)) Teach($"kin_{State.Character}");
-        // Mother Bramble's first visit: clicking someone opens their page in the ledger (her lesson teaches it to Kit).
+        // Mother Bramble's first visit: clicking someone opens their page in the notebook (her lesson teaches it to Kit).
         if (_visit.Seller.Key == "bramble") Teach("lookup");
         if (State.Day == 2) Teach("colours");
         if (!firstOfDay && State.Day >= 2) Teach("ledger");
+        // Once Vane's told of it, the due up top opens the notebook at the debt.
+        if (State.GuildIntroduced && !State.DebtCleared && State.Day > Core.GameState.IntroDay) Teach("debt");
         if (State.Day >= 2 && _visit.Origin != null && _visit.Seller.Stories.Count > 0) Teach("story");
         // Someone whose clue can point at a warded thing: what a ward is, and how to name what's in it.
         if (_visit.Seller.Wards > 0 || _visit.PointsAtWard) Teach("warded");
@@ -392,10 +394,11 @@ public partial class CounterPhase : Phase
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.L } && !Busy)
+        // N for the notebook (L too, as it was when it was the ledger).
+        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.N or Key.L } && !Busy)
         {
             GetViewport().SetInputAsHandled();
-            OpenLedger();
+            OpenNotebook();
         }
     }
 
@@ -551,8 +554,8 @@ public partial class CounterPhase : Phase
         var panel = Add(new Node2D { ZIndex = 10 });
         panel.AddChild(UiKit.MakePanel().Place(820, 66, 432, 640));
         panel.AddChild(Header("YOUR APPRAISAL", PanelX, 80));
-        _ledgerButton = UiKit.MakeButton("Ledger [L]", Palette.Gold, 16, OpenLedger).Place(PanelX + 236, 72, 148, 36);
-        panel.AddChild(_ledgerButton);
+        _notebookButton = UiKit.MakeButton("Notebook [N]", Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
+        panel.AddChild(_notebookButton);
         var seller = _visit.Seller;
         // Nobody says what's inside: the slip is yours to fill (or the Engine's), and how the seller priced it is the reminder.
         string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? "Ticked: what the Bookkeeping Engine read." : seller.Priced;
@@ -781,7 +784,7 @@ public partial class CounterPhase : Phase
             : !priced ? "Name a price: the bar shows your odds."
             : $"Worth more than {price}g? {ChanceWords(_chanceShown)}";
         _chance.QueueRedraw();
-        _ledgerButton.Disabled = Busy;
+        _notebookButton.Disabled = Busy;
         if (_magnetButton != null)
         {
             // Short, so it fits beside the witchlight's sign; the hint under the chest says what it does.
@@ -1011,25 +1014,36 @@ public partial class CounterPhase : Phase
         Game.Moment("05_magnet", 0.6);
     }
 
-    /// <summary>The ledger, open at the page of whoever's at the counter (their entry framed): clicking them, the button, or L.</summary>
-    public void OpenLedger()
+    /// <summary>
+    /// The notebook, open at the page of whoever's at the counter (their entry framed): clicking them, the button, or N.
+    /// The purse's due in the top bar opens it at the Guild's debt.
+    /// </summary>
+    public void OpenNotebook(int page = NotebookView.RegularsPage, bool focusDebt = false)
     {
         if (Busy) return;
-        _ledger = Add(new LedgerView(State, page: 1, current: _visit.Seller.Key) { ZIndex = 30 });
-        _visit.LookUp();
-        _ledger.Closed += () =>
+        _notebook = Add(new NotebookView(State, page, current: _visit.Seller.Key, focusDebt: focusDebt) { ZIndex = 30 });
+        if (page == NotebookView.RegularsPage) _visit.LookUp();
+        _notebook.Closed += () =>
         {
-            _ledger = null;
+            _notebook = null;
             Refresh();
         };
-        Game.Moment("02_ledger", 0.4);
+        Game.Moment(focusDebt ? "02_debt" : "02_notebook", 0.4);
         Refresh();
     }
 
-    public void CloseLedger() => _ledger?.Close();
+    /// <summary>The top bar's due was clicked: the notebook at the Guild's debt.</summary>
+    public override bool ShowDebt()
+    {
+        if (Busy) return false;
+        OpenNotebook(NotebookView.CalendarPage, focusDebt: true);
+        return true;
+    }
 
-    /// <summary>Turns the open ledger to a page (the bot uses this for screenshots).</summary>
-    public void LedgerPage(int page) => _ledger?.ShowPage(page);
+    public void CloseNotebook() => _notebook?.Close();
+
+    /// <summary>Turns the open notebook to a page (the bot uses this for screenshots).</summary>
+    public void NotebookPage(int page) => _notebook?.ShowPage(page);
 
     public void MakeOffer(int amount)
     {

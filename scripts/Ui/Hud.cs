@@ -3,8 +3,8 @@ using Godot;
 namespace Keywright.Ui;
 
 /// <summary>
-/// Top bar: title, today's event (click it to read it again), day and shop, the Guild's next due, gold, and a Menu
-/// button (the same as Esc). Lives on its own layer so screen shake doesn't move it.
+/// Top bar: title, today's event (click it to read it again), day and shop, the Guild's next due (click it for the whole
+/// debt in the notebook), gold, and a Menu button (the same as Esc). Lives on its own layer so screen shake doesn't move it.
 /// </summary>
 public partial class Hud : CanvasLayer
 {
@@ -40,7 +40,17 @@ public partial class Hud : CanvasLayer
         AddChild(_lot);
         // The Guild's next due, and when: it turns orange when you haven't got it yet.
         _dueChip = UiKit.MakePanel(Palette.PanelBorder).Place(760, 5, 200, 46);
-        _dueChip.TooltipText = "The Gilded Guild's next tithe. Pay it when Mister Vane comes, or the Guild seals the shop.";
+        _dueChip.TooltipText = "The Gilded Guild's next tithe. Pay it when Mister Vane comes, or the Guild seals the shop. " +
+                               "Click for the whole debt in your notebook.";
+        _dueChip.MouseFilter = Control.MouseFilterEnum.Stop;
+        _dueChip.MouseDefaultCursorShape = Control.CursorShape.PointingHand;
+        _dueChip.GuiInput += e =>
+        {
+            if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) return;
+            // Not in the middle of something (a lock, an opening): the chip gives a little shake instead.
+            if (Main.Instance.ShowDebt()) Main.Instance.Sfx.Play("tick", 1.2f, -8);
+            else Nudge(_dueChip);
+        };
         var emblem = UiKit.MakeSprite("res://assets/ui/guild.png", new Vector2(24, 23), 1);
         emblem.Scale = Vector2.One * 0.5f;
         _dueChip.AddChild(emblem);
@@ -137,6 +147,14 @@ public partial class Hud : CanvasLayer
         if (steady) count.SetTrans(Tween.TransitionType.Linear);
         else count.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         Bump();
+    }
+
+    /// <summary>A shake of the head: not now.</summary>
+    static void Nudge(Control control)
+    {
+        float x = control.Position.X;
+        var tween = control.CreateTween();
+        foreach (float dx in new[] { -4f, 4f, -2f, 0f }) tween.TweenProperty(control, "position:x", x + dx, 0.04f);
     }
 
     Tween _pulse;

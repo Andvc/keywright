@@ -23,7 +23,7 @@ public partial class DayEndPhase : Phase
     Label _goldLabel, _header;
     MentorView _mentor;
     Button _synergies;
-    LedgerView _ledger;
+    NotebookView _notebook;
     bool _built;
 
     public MentorView Mentor => _mentor;
@@ -518,24 +518,34 @@ public partial class DayEndPhase : Phase
     /// <summary>Opens the journal on the synergies page, where they can be switched on and off.</summary>
     public void OpenSynergies()
     {
-        if (_ledger != null) return;
-        _ledger = Add(new LedgerView(State, page: 3, choosing: true) { ZIndex = 30 });
-        _ledger.Closed += () =>
+        if (_notebook != null) return;
+        _notebook = Add(new NotebookView(State, NotebookView.SynergiesPage, choosing: true) { ZIndex = 30 });
+        _notebook.Closed += () =>
         {
-            _ledger = null;
+            _notebook = null;
             RefreshSynergyButton();
             BuildCards();
         };
         Game.Moment("09_synergies", 0.4);
     }
 
-    public void CloseSynergies() => _ledger?.Close();
+    public void CloseSynergies() => _notebook?.Close();
+
+    /// <summary>The top bar's due was clicked: the notebook at the Guild's debt (where paying it off is weighed).</summary>
+    public override bool ShowDebt()
+    {
+        if (_notebook != null) return false;
+        _notebook = Add(new NotebookView(State, NotebookView.CalendarPage, focusDebt: true) { ZIndex = 30 });
+        _notebook.Closed += () => _notebook = null;
+        Game.Moment("09_debt", 0.4);
+        return true;
+    }
 
     /// <summary>Keeps the highest synergies active, the way the balance simulation's careful player does (the bot uses this).</summary>
     public void ChooseSynergies()
     {
         Debug.Simulation.ChooseSynergies(State);
-        _ledger?.ShowPage(3);
+        _notebook?.ShowPage(NotebookView.SynergiesPage);
         RefreshSynergyButton();
     }
 

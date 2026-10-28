@@ -93,7 +93,7 @@ and repository now belong to a different game. Saves and the profile from then c
    (deliver what they want from a chest instead of selling it), and two days a week something happens in town: a fair, Locking Day, the Crown's buyer, a
    tourney, a foreclosure sale, a day of mourning when nobody shakes hard, the crier's reward, the Sleepers' Moon when
    every seller dreams true, Wardens' Day riddles, the Guild's count, a storm, the Stranger with a chained chest... The
-   ledger's **calendar** shows this week and next, day by day: the story, the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
+   notebook's **calendar** shows the Guild's debt and this week and next, day by day: the story, the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
    the finds she asks for. Whenever you have all that's left of the debt, you can pay it off and finish early.
 
 **Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the Crown Chest, the shop, the
@@ -131,7 +131,9 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Mark one of a kind enchanted | Click the star on its row (once you have the Witchlight, which stays lit) |
 | Make an offer | Set the slider, then Offer |
 | Lodestone | Button on the right, once you own it |
-| Ledger (sounds, regulars, calendar, collection, curios, synergies) | L, or the Ledger button |
+| Notebook (sounds, regulars, calendar and the debt, synergies) | N, or the Notebook button on the slip |
+| The Guild's debt, week by week | Click the due in the top bar: the notebook opens at it |
+| Collection (finds, curios, Heartsongs, every run) | Collection, on the title screen or in the pause menu |
 | Skip a seller's lesson | Skip lesson, over Bram's box |
 | Pick a lock | Space or left click when the pick is in the green; F for the crowbar |
 | Open the chest | It opens by itself (click or Space to hurry it) |
@@ -145,9 +147,9 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Reread today's event | Click it in the top bar |
 | Choose each kind's sound | Settings, Item sounds: click a kind's sound to hear the next |
 | Pause, settings, quit to title | Esc, or Menu in the top bar |
-| GM mode (testing: +99,999 gold, skip the day, unlock the journal) | Settings, GM mode; then its panel beside the pause menu |
+| GM mode (testing: +99,999 gold, skip the day, fill the notebook and the collection) | Settings, GM mode; then its panel beside the pause menu |
 | Choose who minds the stall, and the challenge level | New game: click a character, then - and + |
-| Read a seller's page in the ledger | Click them (or Ledger, or L): their line is framed |
+| Read a seller's page in the notebook | Click them (or Notebook, or N): their line is framed |
 | Sell something on display | Click it on the shelf (at the counter or the day's end), then Sell |
 | Keep or decline a Heartsong | Keep it or Decline, on its reveal |
 | Ask Nim for something else | Show me something else, on Nim's screen (once a visit) |
@@ -160,7 +162,7 @@ The code is split so the game rules can be tested without the engine:
 |---|---|
 | `scripts/Core` | Pure C# rules: kinds, qualities and the shaking rules, chests, where chests come from (`Origins.cs`), sellers and how they judge, trade and tell their stories, the appraisal slip, a careful player's read and strategy, sellers' lessons, synergies, upgrades, the shop's progress and exhibition, the build (`Build.cs`: naming, luck, what things fetch), the run (the Guild's dues, curios, commissions, events, the story), Bram's kin, challenge levels and the score (`Meta.cs`, `Kin.cs`), Bram's hints. No Godot types. |
 | `scripts/Phases` | The screens: title, the character screen, counter, lockpicking, opening, end of day, the Guild's night, Nim's curios, story scenes, the end of a run. |
-| `scripts/Ui` | Visuals: the shakeable chest, the ledger, Bram, the seller, HUD, particles and styling. |
+| `scripts/Ui` | Visuals: the shakeable chest, the notebook and the collection, Bram, the seller, HUD, particles and styling. |
 | `scripts/Audio` | Recorded sounds, the synthesized slosh, and placeholder effects. |
 | `scripts/Debug` | Balance simulation (with the lesson test, the builds report and the experience playtest), the shake test and an autoplay bot for screenshots and recordings. |
 | `assets/` | Sprites, portraits, backgrounds, sounds, icons, UI frames and font, built by `tools/import_art.py` from `art/generated/` and Kenney's CC0 packs. |

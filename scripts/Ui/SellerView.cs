@@ -12,7 +12,7 @@ public partial class SellerView : Node2D
     readonly SellerDef _seller;
     Node2D _body;
 
-    /// <summary>Clicking the face: the counter opens their page in the ledger.</summary>
+    /// <summary>Clicking the face: the counter opens their page in the notebook.</summary>
     public event System.Action Clicked;
 
     /// <summary>The face can be clicked (set before it's added).</summary>
@@ -43,7 +43,7 @@ public partial class SellerView : Node2D
             var face = new Button
             {
                 Flat = true, FocusMode = Control.FocusModeEnum.None, MouseDefaultCursorShape = Control.CursorShape.PointingHand,
-                TooltipText = $"{_seller.Name}: click to read their page in your ledger.",
+                TooltipText = $"{_seller.Name}: click to read their page in your notebook.",
             };
             face.Pressed += () => Clicked?.Invoke();
             _body.AddChild(face.Place(-88, -88, 176, 176));

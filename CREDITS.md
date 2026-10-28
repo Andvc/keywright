@@ -13,8 +13,8 @@ the burst, coin, sparkle and dust, the logo and the app icons. `python3 tools/im
 them.
 
 The chest (0.25) is drawn in code (`tools/custom_art.py`): seven finishes and the three lock makers' hasps and plates.
-Round 2 of the brief (0.25) asks for the rest to be redrawn quieter; until it's delivered, the pictures above are round
-1's.
+Round 2 of the brief (0.25) asks for the rest to be redrawn flat and quiet, and for the shop scene in layers; until it's
+delivered, the pictures above are round 1's.
 
 Until 0.23 the pictures were placeholders drawn in code (`tools/custom_art.py`, with the frames, icons and shop
 architecture in `tools/import_art.py`); the importer still draws those for anything not yet in `art/generated/`.

@@ -1,4 +1,5 @@
-"""Backgrounds, icons, emblems, UI, effects, lock faces, branding, story scenes and store art (the chest is drawn in code)."""
+"""Icons, emblems, UI, effects, lock faces, branding, story scenes and store art (the shop scene is assets_scene.py's;
+the chest is drawn in code)."""
 
 ASSETS = []
 
@@ -11,58 +12,8 @@ def add(**asset):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-# Shop backgrounds: one per tier. Round 2 draws them at 320x180 (four screen pixels to an art pixel; the importer doubles
-# them to the game's 640x360), quiet: a few big planes of nearly flat colour, one soft light, and the counter screen's
-# fixed lines (the frame gives them at this size: the counter's top at row 119, the shelf's at row 49, x 75-201, and the
-# calm space for the chest at x 110-170, rows 75-118). Round 1's were full of things to look at, and the player looks
-# at them for hours: each now names three or four.
-
-add(id="bg.shop1", category="background", title="Bram's Stall, Brindle Crossroads", tier=1,
-    anchor_for="background", replaces="assets/backgrounds/shop1.png",
-    description=(
-        "Bram's roadside stall at dusk, where the north road meets the river. Across the top, a red-and-cream striped "
-        "canvas awning with a plain scalloped edge, on two plain wooden posts at the far left and right, a small lantern "
-        "on each. Beyond the counter, a quiet dusk: a sky in three or four flat bands from violet above to soft peach "
-        "at the horizon, with one long, plain cloud; a low line of dark hills with the small silhouette of a castle on "
-        "the right; a calm river as one flat band at the left, with a small watermill as a simple dark shape. A plain "
-        "plank shelf hangs from the awning on two ropes. The counter top is one plain wooden board; the counter's front "
-        "is a flat canvas skirt."),
-    details=["the striped awning", "the plank shelf on its two ropes", "a castle's small silhouette on the far hills",
-             "the sky as a few flat bands"],
-    palette=["arcane:2-4", "night:2-4", "rose:1-2", "gold:4-5", "leaf:1-3", "umber:1-5", "crimson:2-3", "parchment:2"],
-    notes="Also the title screen's and the character screen's background (dimmed).")
-
-add(id="bg.shop2", category="background", title="Thornwick Market", tier=2, replaces="assets/backgrounds/shop2.png",
-    description=(
-        "Inside a small stone shop on Thornwick's market square, in the afternoon. A wall of large grey stone blocks, "
-        "drawn as a few flat shapes with thin mortar lines; a dark timber beam across the top; a long wooden shelf on two "
-        "iron brackets; on the right, a window in a plain wooden frame with three or four dark pine shapes against a pale "
-        "sky. A small brass lamp hangs from the beam on each side. The counter top is one plain oak board; the counter's "
-        "front is wide vertical planks in flat brown."),
-    details=["the stone wall as large, flat blocks", "the window onto dark pines", "the long shelf on iron brackets"],
-    palette=["night:2-6", "umber:1-5", "leaf:1-2", "steel:1-2", "gold:4-5"])
-
-add(id="bg.shop3", category="background", title="A shop in Crownhold", tier=3, replaces="assets/backgrounds/shop3.png",
-    description=(
-        "A merchant's shop in Crownhold, the capital, at sunset. Warm oak panelling in a few tall, plain panels; above it "
-        "a wide window of four or five panes looking over a simple skyline of roofs and spires in one or two dark tones "
-        "against a soft orange sky, with a handful of lit windows as small warm dots. A white marble sill under the "
-        "window is the display shelf. One brass lamp on each side. The counter top is plain walnut with a thin brass "
-        "edge; its front is two or three plain framed panels."),
-    details=["the oak panelling", "the window over a simple skyline at sunset", "the marble sill as the shelf"],
-    palette=["umber:1-5", "azure:1-3", "flame:2-3", "gold:4-5", "night:3-8"])
-
-add(id="bg.shop4", category="background", title="The Royal Emporium", tier=4, replaces="assets/backgrounds/shop4.png",
-    description=(
-        "A grand hall in the palace's shadow, beside the Gilded Gate, drawn simply. Crimson velvet drapes at the far left "
-        "and right in a few broad folds, and a plain crimson valance with a thin gold edge across the top; two white "
-        "marble columns; between them, behind, a pale evening sky over a low palace wall, and in the centre background "
-        "the Gilded Gate: a tall arched gate of gold bars, kept small and soft, glowing a faint, sickly gold (the one "
-        "thing that feels wrong). A gilded shelf between the columns. The counter top is white marble with a thin gold "
-        "edge; its front is dark navy with two or three gold-framed panels."),
-    details=["crimson drapes and valance", "two white marble columns",
-             "the arched Gilded Gate, small and faintly sickly gold, in the centre background", "a gilded shelf"],
-    palette=["crimson:2-4", "gold:3-5", "night:5-9", "azure:1-3", "moss:2"])
+# The shop scene (skies, places, the shop's frame, shelves, counters, appraisal sheets, lanterns, props) is in
+# assets_scene.py since round 2: one picture per layer instead of one per shop.
 
 # The chest and its locks are drawn in code (tools/custom_art.py: chest, chest_lock) since round 2: one silhouette for
 # every finish, exactly, and as calm as the thing the player looks at most must be.
@@ -126,7 +77,7 @@ KINDS = [
 for key, title, subject, palette in KINDS:
     add(id=f"icon.kind.{key}", category="icon_kind", title=title, subject=subject, batch=0 if key == "coins" else 5,
         anchor_for="icon_kind" if key == "coins" else None, replaces=f"assets/ui/kinds/{key}.png", palette=palette,
-        context="Starts each row of the appraisal slip and the ledger's sounds table.",
+        context="Starts each row of the appraisal slip and the notebook's sounds table.",
         reference_current="art/reference/current/kind_icons_4x.png")
 
 # ---------------------------------------------------------------------------------------------------------------------

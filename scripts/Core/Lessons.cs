@@ -160,7 +160,7 @@ public static class Lessons
             },
             Steps = new LessonStep[]
             {
-                new("Everyone you've traded with has a page in your ledger: how they judge a chest, and what they're like. Click " +
+                new("Everyone you've traded with has a page in your notebook: how they judge a chest, and what they're like. Click " +
                     "Mother Bramble to read hers.", c => c.Visit.LookedUp),
                 new("Mother Bramble's price is a dream, but she always dreams true: of what the Wood warded in the chest, or else the " +
                     "dearest thing in it, as a sign. A river is a potion. Shake it at every strength.", c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),

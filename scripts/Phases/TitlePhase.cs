@@ -7,7 +7,8 @@ namespace Keywright.Phases;
 
 /// <summary>
 /// The title screen: your shop as you left it (or the roadside stall), a chest that won't keep still, and Continue,
-/// New game, Settings and Quit. Starting over when there's a saved shop asks first.
+/// New game, the Collection (what Bram's kin have gathered in every run), Settings and Quit. Starting over when there's
+/// a saved shop asks first.
 /// </summary>
 public partial class TitlePhase : Phase
 {
@@ -18,6 +19,7 @@ public partial class TitlePhase : Phase
     float _time, _nextRattle = 2.5f;
     Control _confirm;
     SettingsView _settings;
+    CollectionView _collection;
 
     public TitlePhase(SaveData save = null)
     {
@@ -56,6 +58,8 @@ public partial class TitlePhase : Phase
         Add(UiKit.MakeButton("New game", _save == null ? Palette.Gold : Palette.Text, _save == null ? 24 : 16, NewGame)
             .Place(ButtonsX, y, ButtonW, _save == null ? 56 : 44));
         y += _save == null ? 70 : 56;
+        Add(UiKit.MakeButton("Collection", Palette.Text, 16, () => OpenCollection()).Place(ButtonsX, y, ButtonW, 44));
+        y += 56;
         Add(UiKit.MakeButton("Settings", Palette.Text, 16, OpenSettings).Place(ButtonsX, y, ButtonW, 44));
         y += 56;
         Add(UiKit.MakeButton("Quit", Palette.Text, 16, Game.QuitGame).Place(ButtonsX, y, ButtonW, 44));
@@ -107,6 +111,15 @@ public partial class TitlePhase : Phase
             _confirm.QueueFree();
             _confirm = null;
         }).Place(660, 392, 200, 48));
+    }
+
+    /// <summary>Everything Bram's kin have found, the curios they've seen and the Heartsongs they've heard, in every run.</summary>
+    public CollectionView OpenCollection(int page = CollectionView.FindsPage)
+    {
+        if (_collection != null) return _collection;
+        _collection = Add(new CollectionView(new Collected(Game.Profile), page));
+        _collection.Closed += () => _collection = null;
+        return _collection;
     }
 
     void OpenSettings()

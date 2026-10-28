@@ -1,51 +1,308 @@
 {
  "summary": {
-  "fail": 210,
-  "ok": 26
+  "missing": 73,
+  "fail": 169,
+  "ok": 25
  },
  "assets": {
-  "bg.shop1": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
-   "warnings": [],
-   "colours": 48,
+  "sky.morning": {
+   "status": "missing",
    "priority": "P1"
   },
-  "bg.shop2": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
-   "warnings": [],
-   "colours": 48,
+  "sky.midday": {
+   "status": "missing",
    "priority": "P1"
   },
-  "bg.shop3": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
-   "warnings": [],
-   "colours": 48,
+  "sky.evening": {
+   "status": "missing",
    "priority": "P1"
   },
-  "bg.shop4": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
-   "warnings": [],
-   "colours": 48,
+  "sky.night": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "place.stall": {
+   "status": "missing",
    "priority": "P1"
+  },
+  "place.thornwick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "place.crownhold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "place.emporium": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "frame.stall": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "frame.thornwick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "frame.crownhold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "frame.emporium": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "shelf.stall": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "shelf.thornwick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "shelf.crownhold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "shelf.emporium": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "counter.stall": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "counter.thornwick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "counter.crownhold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "counter.emporium": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "sheet.stall": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "sheet.thornwick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "sheet.crownhold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "sheet.emporium": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.lantern_stall": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.lantern_thornwick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.lantern_crownhold": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.lantern_emporium": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.witchlight": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.lodestone": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.scales": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "prop.gavel": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "prop.seal": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "prop.book": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "prop.picks": {
+   "status": "missing",
+   "priority": "P2"
+  },
+  "figure.tam": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.penn": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.hob": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.mags": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.dorrin": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.snikkit": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.wenna": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.bramble": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.ansel": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.fennick": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.gerda": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.wren": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.orrin": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.grit": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.corisande": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.pell": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.quill": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.shelly": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.aldous": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.vexis": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.malbranche": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.skrae": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.ermine": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.oriel": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.silas": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.aldo": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.maw": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.bram": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.vane": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.hood": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.nim": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.stranger": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.kit": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.hesk": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.rosa": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.isolde": {
+   "status": "missing",
+   "priority": "P1"
+  },
+  "figure.mara": {
+   "status": "missing",
+   "priority": "P3"
+  },
+  "figure.king": {
+   "status": "missing",
+   "priority": "P3"
   },
   "icon.upgrade.shop2": {
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.325, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.727, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.325, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.727, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -60,8 +317,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.389, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.762, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.389, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.762, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -76,8 +333,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.267, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.681, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.267, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.681, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -92,8 +349,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.378, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.740, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.378, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.740, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -108,8 +365,8 @@
    "status": "fail",
    "errors": [
     "11 colours, at most 8",
-    "too busy: lone specks 0.587, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.783, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.587, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.783, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 11,
@@ -123,7 +380,9 @@
   "icon.upgrade.cabinet1": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8"
+    "12 colours, at most 8",
+    "too busy: lone specks 0.145, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.597, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -138,8 +397,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.252, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.670, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.252, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.670, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -154,8 +413,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.196, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.657, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.196, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.657, at most 0.55 (draw it simpler)"
    ],
    "warnings": [
     "content is only 45% of the width: small for an icon"
@@ -172,7 +431,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.225, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.225, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.566, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -187,8 +447,8 @@
    "status": "fail",
    "errors": [
     "11 colours, at most 8",
-    "too busy: lone specks 0.275, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.608, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.275, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.608, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 11,
@@ -203,8 +463,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.342, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.684, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.342, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.684, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -219,8 +479,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.506, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.773, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.506, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.773, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -235,8 +495,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.391, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.718, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.391, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.718, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -251,8 +511,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.322, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.699, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.322, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.699, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -267,8 +527,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.418, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.761, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.418, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.761, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -283,8 +543,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.368, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.712, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.368, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.712, at most 0.55 (draw it simpler)"
    ],
    "warnings": [
     "content is only 59% of the width: small for an icon"
@@ -301,8 +561,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.363, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.724, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.363, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.724, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -317,8 +577,8 @@
    "status": "fail",
    "errors": [
     "11 colours, at most 8",
-    "too busy: lone specks 0.444, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.711, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.711, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 11,
@@ -333,8 +593,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.316, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.707, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.316, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.707, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -349,8 +609,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.361, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.743, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.361, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.743, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -365,8 +625,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.296, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.693, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.296, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -381,8 +641,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.239, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.633, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.239, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.633, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -397,8 +657,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.480, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.814, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.480, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.814, at most 0.55 (draw it simpler)"
    ],
    "warnings": [
     "content is only 55% of the width: small for an icon"
@@ -415,8 +675,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.342, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.725, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.342, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.725, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -431,8 +691,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.434, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.799, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.434, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.799, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -447,8 +707,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.301, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.681, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.301, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.681, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -463,8 +723,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.442, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.781, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.442, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.781, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -479,8 +739,8 @@
    "status": "fail",
    "errors": [
     "8 colours, at most 6",
-    "too busy: lone specks 0.366, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.742, at most 0.62 (draw it simpler)"
+    "too busy: lone specks 0.366, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.742, at most 0.6 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 8,
@@ -495,7 +755,7 @@
    "status": "fail",
    "errors": [
     "8 colours, at most 6",
-    "too busy: lone specks 0.375, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.375, at most 0.06 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 8,
@@ -510,7 +770,8 @@
    "status": "fail",
    "errors": [
     "8 colours, at most 6",
-    "too busy: lone specks 0.222, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.222, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.620, at most 0.6 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 8,
@@ -524,7 +785,8 @@
   "icon.kind.potions": {
    "status": "fail",
    "errors": [
-    "8 colours, at most 6"
+    "8 colours, at most 6",
+    "too busy: lone specks 0.121, at most 0.06 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 8,
@@ -539,7 +801,8 @@
    "status": "fail",
    "errors": [
     "8 colours, at most 6",
-    "too busy: lone specks 0.205, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.205, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.609, at most 0.6 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 8,
@@ -554,7 +817,8 @@
    "status": "fail",
    "errors": [
     "7 colours, at most 6",
-    "too busy: lone specks 0.244, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.244, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.609, at most 0.6 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 7,
@@ -566,8 +830,10 @@
    }
   },
   "icon.kind.heartsong": {
-   "status": "ok",
-   "errors": [],
+   "status": "fail",
+   "errors": [
+    "too busy: lone specks 0.139, at most 0.06 (draw it simpler)"
+   ],
    "warnings": [],
    "colours": 6,
    "priority": "P1",
@@ -581,8 +847,8 @@
    "status": "fail",
    "errors": [
     "8 colours, at most 6",
-    "too busy: lone specks 0.267, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.693, at most 0.62 (draw it simpler)"
+    "too busy: lone specks 0.267, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.6 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 8,
@@ -597,8 +863,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.484, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.794, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.484, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.794, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -613,8 +879,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.367, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.707, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.367, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.707, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -629,8 +895,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.463, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.736, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.463, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.736, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -645,8 +911,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.400, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.742, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.400, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.742, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -661,8 +927,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.414, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.745, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.414, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.745, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -677,8 +943,8 @@
    "status": "fail",
    "errors": [
     "12 colours, at most 8",
-    "too busy: lone specks 0.312, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.693, at most 0.6 (draw it simpler)"
+    "too busy: lone specks 0.312, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.55 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -770,9 +1036,9 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.118, at most 0.04 (draw it simpler)",
-    "too busy: edges between neighbours 0.322, at most 0.22 (draw it simpler)",
-    "too busy: brightness step 11.6, at most 10 (draw it simpler)"
+    "too busy: lone specks 0.118, at most 0.03 (draw it simpler)",
+    "too busy: edges between neighbours 0.322, at most 0.2 (draw it simpler)",
+    "too busy: brightness step 11.6, at most 9 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -787,9 +1053,9 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.110, at most 0.04 (draw it simpler)",
-    "too busy: edges between neighbours 0.319, at most 0.22 (draw it simpler)",
-    "too busy: brightness step 16.1, at most 10 (draw it simpler)"
+    "too busy: lone specks 0.110, at most 0.03 (draw it simpler)",
+    "too busy: edges between neighbours 0.319, at most 0.2 (draw it simpler)",
+    "too busy: brightness step 16.1, at most 9 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -804,8 +1070,9 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.090, at most 0.04 (draw it simpler)",
-    "too busy: edges between neighbours 0.255, at most 0.22 (draw it simpler)"
+    "too busy: lone specks 0.090, at most 0.03 (draw it simpler)",
+    "too busy: edges between neighbours 0.255, at most 0.2 (draw it simpler)",
+    "too busy: brightness step 9.3, at most 9 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -950,647 +1217,12 @@
    "colours": 24,
    "priority": "P3"
   },
-  "portrait.tam": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.103, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.344, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.103,
-    "edges": 0.344,
-    "busy": 18.46
-   }
-  },
-  "portrait.penn": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.157, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.414, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.2, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.157,
-    "edges": 0.414,
-    "busy": 21.245
-   }
-  },
-  "portrait.hob": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.164, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.483, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 26.7, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.164,
-    "edges": 0.483,
-    "busy": 26.704
-   }
-  },
-  "portrait.mags": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.109, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.394, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 22.6, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.109,
-    "edges": 0.394,
-    "busy": 22.579
-   }
-  },
-  "portrait.dorrin": {
-   "status": "fail",
-   "errors": [
-    "31 colours, at most 20",
-    "too busy: lone specks 0.121, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.415, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 23.8, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 31,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.121,
-    "edges": 0.415,
-    "busy": 23.779
-   }
-  },
-  "portrait.snikkit": {
-   "status": "fail",
-   "errors": [
-    "31 colours, at most 20",
-    "too busy: lone specks 0.111, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.372, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 31,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.111,
-    "edges": 0.372,
-    "busy": 18.259
-   }
-  },
-  "portrait.wenna": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.129, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.396, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 19.8, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.129,
-    "edges": 0.396,
-    "busy": 19.782
-   }
-  },
-  "portrait.bramble": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.203, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.481, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 28.4, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.203,
-    "edges": 0.481,
-    "busy": 28.42
-   }
-  },
-  "portrait.ansel": {
-   "status": "fail",
-   "errors": [
-    "26 colours, at most 20",
-    "too busy: lone specks 0.070, at most 0.06 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 26,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.07,
-    "edges": 0.299,
-    "busy": 14.573
-   }
-  },
-  "portrait.fennick": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.126, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.399, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 20.9, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.126,
-    "edges": 0.399,
-    "busy": 20.911
-   }
-  },
-  "portrait.gerda": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.144, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.402, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 24.3, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.144,
-    "edges": 0.402,
-    "busy": 24.261
-   }
-  },
-  "portrait.wren": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.146, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.439, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 26.6, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.146,
-    "edges": 0.439,
-    "busy": 26.617
-   }
-  },
-  "portrait.orrin": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.135, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.420, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 20.7, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.135,
-    "edges": 0.42,
-    "busy": 20.664
-   }
-  },
-  "portrait.grit": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.193, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.463, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 25.3, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.193,
-    "edges": 0.463,
-    "busy": 25.28
-   }
-  },
-  "portrait.corisande": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.151, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.447, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 26.1, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.151,
-    "edges": 0.447,
-    "busy": 26.071
-   }
-  },
-  "portrait.pell": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.127, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.383, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.3, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.127,
-    "edges": 0.383,
-    "busy": 21.279
-   }
-  },
-  "portrait.quill": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.112, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.362, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 20.4, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.112,
-    "edges": 0.362,
-    "busy": 20.404
-   }
-  },
-  "portrait.shelly": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.153, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.446, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 24.0, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.153,
-    "edges": 0.446,
-    "busy": 24.049
-   }
-  },
-  "portrait.aldous": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.152, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.479, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 30.2, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.152,
-    "edges": 0.479,
-    "busy": 30.203
-   }
-  },
-  "portrait.vexis": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.101, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.346, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 20.5, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.101,
-    "edges": 0.346,
-    "busy": 20.46
-   }
-  },
-  "portrait.malbranche": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.131, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.421, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 23.6, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.131,
-    "edges": 0.421,
-    "busy": 23.593
-   }
-  },
-  "portrait.skrae": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.106, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.407, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 20.4, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.106,
-    "edges": 0.407,
-    "busy": 20.359
-   }
-  },
-  "portrait.ermine": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.129, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.396, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 23.8, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.129,
-    "edges": 0.396,
-    "busy": 23.808
-   }
-  },
-  "portrait.oriel": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.171, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.417, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.4, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.171,
-    "edges": 0.417,
-    "busy": 21.366
-   }
-  },
-  "portrait.silas": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.154, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.403, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.2, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.154,
-    "edges": 0.403,
-    "busy": 21.243
-   }
-  },
-  "portrait.aldo": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.142, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.382, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 20.7, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.142,
-    "edges": 0.382,
-    "busy": 20.676
-   }
-  },
-  "portrait.maw": {
-   "status": "fail",
-   "errors": [
-    "30 colours, at most 20",
-    "too busy: lone specks 0.272, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.531, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 37.7, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 30,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.272,
-    "edges": 0.531,
-    "busy": 37.727
-   }
-  },
-  "portrait.bram": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.093, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.340, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.093,
-    "edges": 0.34,
-    "busy": 18.078
-   }
-  },
-  "portrait.vane": {
-   "status": "fail",
-   "errors": [
-    "30 colours, at most 20",
-    "too busy: lone specks 0.092, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.326, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 30,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.092,
-    "edges": 0.326,
-    "busy": 16.898
-   }
-  },
-  "portrait.hood": {
-   "status": "fail",
-   "errors": [
-    "25 colours, at most 20",
-    "too busy: lone specks 0.061, at most 0.06 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 25,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.061,
-    "edges": 0.302,
-    "busy": 11.187
-   }
-  },
-  "portrait.nim": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.131, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.409, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.6, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.131,
-    "edges": 0.409,
-    "busy": 21.554
-   }
-  },
-  "portrait.stranger": {
-   "status": "fail",
-   "errors": [
-    "23 colours, at most 20",
-    "too busy: lone specks 0.072, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.321, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 23,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.072,
-    "edges": 0.321,
-    "busy": 12.539
-   }
-  },
-  "portrait.kit": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.087, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.367, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.087,
-    "edges": 0.367,
-    "busy": 17.321
-   }
-  },
-  "portrait.hesk": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.104, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.386, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 19.8, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.104,
-    "edges": 0.386,
-    "busy": 19.843
-   }
-  },
-  "portrait.rosa": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.097, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.390, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.6, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.097,
-    "edges": 0.39,
-    "busy": 21.558
-   }
-  },
-  "portrait.isolde": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.116, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.373, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 21.1, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.116,
-    "edges": 0.373,
-    "busy": 21.127
-   }
-  },
-  "portrait.mara": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.098, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.345, at most 0.32 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P3",
-   "calm": {
-    "specks": 0.098,
-    "edges": 0.345,
-    "busy": 17.752
-   }
-  },
-  "portrait.king": {
-   "status": "fail",
-   "errors": [
-    "32 colours, at most 20",
-    "too busy: lone specks 0.155, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.421, at most 0.32 (draw it simpler)",
-    "too busy: brightness step 29.7, at most 19 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 32,
-   "priority": "P3",
-   "calm": {
-    "specks": 0.155,
-    "edges": 0.421,
-    "busy": 29.674
-   }
-  },
   "item.barrow_silver": {
    "status": "fail",
    "errors": [
     "13 colours, at most 12",
-    "too busy: lone specks 0.487, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.799, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.487, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.799, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 13,
@@ -1605,8 +1237,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.446, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.763, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.446, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.763, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -1621,8 +1253,8 @@
    "status": "fail",
    "errors": [
     "14 colours, at most 12",
-    "too busy: lone specks 0.281, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.659, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.281, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.659, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 14,
@@ -1637,8 +1269,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.446, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.788, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.446, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.788, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1653,8 +1285,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.580, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.839, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.580, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.839, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1669,8 +1301,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.399, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.737, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.399, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -1685,8 +1317,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.375, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.694, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.375, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.694, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -1701,8 +1333,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.405, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.746, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.405, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1717,8 +1349,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.700, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.852, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.700, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.852, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -1733,8 +1365,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.672, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.878, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.672, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.878, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -1749,8 +1381,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.534, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.770, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.770, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -1765,8 +1397,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.478, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.778, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.478, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.778, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1781,8 +1413,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.363, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.751, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.363, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.751, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -1797,8 +1429,8 @@
    "status": "fail",
    "errors": [
     "13 colours, at most 12",
-    "too busy: lone specks 0.284, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.656, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.284, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.656, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 13,
@@ -1813,8 +1445,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.573, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.841, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.573, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.841, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1829,8 +1461,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.345, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.715, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.345, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.715, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -1845,8 +1477,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.347, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.682, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.347, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1861,8 +1493,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.340, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.664, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.340, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.664, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1877,7 +1509,8 @@
    "status": "fail",
    "errors": [
     "16 colours, at most 12",
-    "too busy: lone specks 0.268, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.268, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.547, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 16,
@@ -1892,8 +1525,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.333, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.672, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.333, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.672, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -1908,8 +1541,8 @@
    "status": "fail",
    "errors": [
     "14 colours, at most 12",
-    "too busy: lone specks 0.430, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.746, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.430, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 14,
@@ -1924,8 +1557,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.416, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.736, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.416, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.736, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1940,8 +1573,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.459, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.787, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.459, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.787, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1956,8 +1589,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.444, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.779, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.779, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -1972,8 +1605,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.335, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.672, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.335, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.672, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -1988,8 +1621,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.421, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.779, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.421, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.779, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2004,8 +1637,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.357, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.727, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.357, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.727, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2019,8 +1652,8 @@
   "item.moonstone": {
    "status": "fail",
    "errors": [
-    "too busy: lone specks 0.244, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.599, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.244, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.599, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 11,
@@ -2035,8 +1668,8 @@
    "status": "fail",
    "errors": [
     "16 colours, at most 12",
-    "too busy: lone specks 0.712, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.906, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.712, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.906, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 16,
@@ -2051,8 +1684,8 @@
    "status": "fail",
    "errors": [
     "16 colours, at most 12",
-    "too busy: lone specks 0.236, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.594, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.236, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.594, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 16,
@@ -2067,8 +1700,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.404, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.741, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.404, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.741, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2083,8 +1716,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.580, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.837, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.580, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.837, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2098,8 +1731,8 @@
   "item.paste_gem": {
    "status": "fail",
    "errors": [
-    "too busy: lone specks 0.328, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.620, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.328, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.620, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 12,
@@ -2114,8 +1747,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.356, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.732, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.356, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.732, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2130,8 +1763,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.509, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.828, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.509, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.828, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2146,8 +1779,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.489, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.710, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.489, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.710, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2162,8 +1795,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.494, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.820, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.494, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.820, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2178,8 +1811,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.372, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.725, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.372, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.725, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2194,8 +1827,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.379, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.741, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.379, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.741, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2210,8 +1843,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.500, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.808, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.500, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.808, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2226,8 +1859,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.439, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.757, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.439, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2242,8 +1875,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.423, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.738, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.423, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.738, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2258,8 +1891,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.434, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.693, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.434, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.693, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -2274,8 +1907,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.305, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.655, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.305, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.655, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2290,8 +1923,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.342, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.726, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.342, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.726, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2306,8 +1939,8 @@
    "status": "fail",
    "errors": [
     "15 colours, at most 12",
-    "too busy: lone specks 0.556, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.786, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.556, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.786, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 15,
@@ -2322,8 +1955,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.409, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.740, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.409, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.740, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2338,8 +1971,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.496, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.821, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.496, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.821, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2354,8 +1987,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.317, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.640, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.317, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.640, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -2370,8 +2003,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.291, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.694, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.291, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.694, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -2386,8 +2019,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.380, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.756, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.380, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.756, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2402,8 +2035,8 @@
    "status": "fail",
    "errors": [
     "13 colours, at most 12",
-    "too busy: lone specks 0.585, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.832, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.585, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.832, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 13,
@@ -2418,8 +2051,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.324, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.677, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.324, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.677, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2434,8 +2067,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.377, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.690, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.377, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.690, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -2450,8 +2083,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.357, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.681, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.357, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.681, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2465,8 +2098,8 @@
   "curio.tongue": {
    "status": "fail",
    "errors": [
-    "too busy: lone specks 0.398, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.714, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.398, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.714, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 11,
@@ -2481,8 +2114,8 @@
    "status": "fail",
    "errors": [
     "14 colours, at most 12",
-    "too busy: lone specks 0.636, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.876, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.636, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.876, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 14,
@@ -2497,8 +2130,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.344, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.661, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.344, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.661, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2513,8 +2146,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.516, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.805, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.516, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.805, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -2529,8 +2162,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.402, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.744, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.402, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.744, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2545,8 +2178,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.444, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.771, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.771, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2561,8 +2194,8 @@
    "status": "fail",
    "errors": [
     "15 colours, at most 12",
-    "too busy: lone specks 0.384, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.724, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.384, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.724, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 15,
@@ -2577,8 +2210,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.409, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.659, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.409, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.659, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2593,8 +2226,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.536, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.831, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.536, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.831, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2609,8 +2242,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.322, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.682, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.322, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2625,8 +2258,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.387, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.642, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.387, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.642, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2641,8 +2274,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.534, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.815, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.815, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2657,8 +2290,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.486, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.713, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.486, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.713, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -2673,8 +2306,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.530, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.773, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.530, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.773, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2689,8 +2322,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.522, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.759, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.522, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.759, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2705,8 +2338,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.418, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.746, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.418, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2721,8 +2354,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.611, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.817, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.611, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.817, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -2737,8 +2370,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.646, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.859, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.646, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.859, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2753,8 +2386,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.353, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.676, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.353, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.676, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -2769,8 +2402,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.471, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.771, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.471, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.771, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -2785,8 +2418,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.566, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.843, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.566, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.843, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2801,8 +2434,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.361, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.754, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.361, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.754, at most 0.5 (draw it simpler)"
    ],
    "warnings": [
     "content is only 58% of the width: small for an icon"
@@ -2819,8 +2452,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.358, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.616, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.358, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.616, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -2835,8 +2468,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.413, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.758, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.413, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.758, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2851,8 +2484,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.721, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.896, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.721, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.896, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2867,8 +2500,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.402, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.749, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.402, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.749, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2883,8 +2516,8 @@
    "status": "fail",
    "errors": [
     "14 colours, at most 12",
-    "too busy: lone specks 0.304, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.682, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.304, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 14,
@@ -2899,8 +2532,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.393, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.684, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.393, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.684, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -2915,8 +2548,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.491, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.781, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.491, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.781, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -2930,8 +2563,8 @@
   "curio.wishbone": {
    "status": "fail",
    "errors": [
-    "too busy: lone specks 0.494, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.761, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.494, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.761, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 6,
@@ -2946,8 +2579,8 @@
    "status": "fail",
    "errors": [
     "15 colours, at most 12",
-    "too busy: lone specks 0.386, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.718, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.386, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.718, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 15,
@@ -2962,8 +2595,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.489, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.802, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.489, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.802, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -2978,8 +2611,8 @@
    "status": "fail",
    "errors": [
     "13 colours, at most 12",
-    "too busy: lone specks 0.457, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.765, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.457, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.765, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 13,
@@ -2994,8 +2627,8 @@
    "status": "fail",
    "errors": [
     "14 colours, at most 12",
-    "too busy: lone specks 0.473, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.724, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.473, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.724, at most 0.5 (draw it simpler)"
    ],
    "warnings": [
     "content is only 58% of the width: small for an icon"
@@ -3012,8 +2645,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.434, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.780, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.434, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.780, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3028,8 +2661,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.390, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.635, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.390, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.635, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -3044,8 +2677,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.450, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.757, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.450, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3060,8 +2693,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.461, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.743, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.461, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.743, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3076,7 +2709,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.289, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.289, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.524, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -3091,7 +2725,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.233, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.233, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.575, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -3106,8 +2741,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.409, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.765, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.409, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.765, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -3122,8 +2757,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.534, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.757, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3138,8 +2773,8 @@
    "status": "fail",
    "errors": [
     "16 colours, at most 12",
-    "too busy: lone specks 0.590, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.821, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.590, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.821, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 16,
@@ -3154,8 +2789,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.430, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.729, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.430, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.729, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -3170,8 +2805,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.271, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.654, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.271, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.654, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3186,7 +2821,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.301, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.301, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.553, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3201,8 +2837,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.343, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.758, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.343, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.758, at most 0.5 (draw it simpler)"
    ],
    "warnings": [
     "content is only 42% of the width: small for an icon"
@@ -3219,8 +2855,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.762, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.903, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.762, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.903, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3235,8 +2871,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.589, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.856, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.589, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.856, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -3251,8 +2887,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.545, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.839, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.545, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.839, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3267,8 +2903,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.303, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.669, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.303, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.669, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3283,8 +2919,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.565, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.829, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.565, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.829, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,
@@ -3299,8 +2935,8 @@
    "status": "fail",
    "errors": [
     "16 colours, at most 12",
-    "too busy: lone specks 0.672, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.843, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.672, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.843, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 16,
@@ -3315,8 +2951,8 @@
    "status": "fail",
    "errors": [
     "16 colours, at most 12",
-    "too busy: lone specks 0.595, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.827, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.595, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.827, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 16,
@@ -3331,8 +2967,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.398, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.704, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.398, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.704, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3347,8 +2983,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.445, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.703, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.445, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.703, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3363,8 +2999,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.294, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.616, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.294, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.616, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3379,7 +3015,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.355, at most 0.15 (draw it simpler)"
+    "too busy: lone specks 0.355, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.519, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3394,8 +3031,8 @@
    "status": "fail",
    "errors": [
     "19 colours, at most 12",
-    "too busy: lone specks 0.378, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.730, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.378, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.730, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 19,
@@ -3410,8 +3047,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.472, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.789, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.472, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.789, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3426,8 +3063,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.475, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.777, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.475, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.777, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3442,8 +3079,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.376, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.737, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.376, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3458,8 +3095,8 @@
    "status": "fail",
    "errors": [
     "18 colours, at most 12",
-    "too busy: lone specks 0.407, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.709, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.407, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.709, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 18,
@@ -3474,8 +3111,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.309, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.655, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.309, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.655, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3490,8 +3127,8 @@
    "status": "fail",
    "errors": [
     "20 colours, at most 12",
-    "too busy: lone specks 0.338, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.737, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.338, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 20,
@@ -3506,8 +3143,8 @@
    "status": "fail",
    "errors": [
     "17 colours, at most 12",
-    "too busy: lone specks 0.846, at most 0.15 (draw it simpler)",
-    "too busy: edges between neighbours 0.897, at most 0.58 (draw it simpler)"
+    "too busy: lone specks 0.846, at most 0.06 (draw it simpler)",
+    "too busy: edges between neighbours 0.897, at most 0.5 (draw it simpler)"
    ],
    "warnings": [],
    "colours": 17,

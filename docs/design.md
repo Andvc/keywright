@@ -197,12 +197,12 @@ Four-Leaf Clover 51%). The Drowned Bell is the exception in the sim (46%), becau
 counts perfectly; for a person it's a Pell's ticket on every chest. As they really turn up (in about a third of runs,
 the first around day 15), the careful player clears 48%, against 43% with no Heartsongs at all.
 
-**The ending.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the ledger's Songs page). The Crown
-Chest holds the Locking's tune; the Heartsongs are its verses. With all nine known when it's opened, Mara sings the
-Locking whole: the Maw starves, the Gate is only a gate, every chest in Aldmark opens (`Story.VaultEpilogue`, worth 200
-points). With fewer, she renews it and says how many verses the family knows. In the sim's careers, all nine are known
-around the sixteenth run and the first Crown Chest sung whole comes around the seventeenth: after the first clear,
-before level 4. Each Heartsong found is worth 20 points too.
+**The ending.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the collection's Heartsongs
+page). The Crown Chest holds the Locking's tune; the Heartsongs are its verses. With all nine known when it's opened,
+Mara sings the Locking whole: the Maw starves, the Gate is only a gate, every chest in Aldmark opens
+(`Story.VaultEpilogue`, worth 200 points). With fewer, she renews it and says how many verses the family knows. In the
+sim's careers, all nine are known around the sixteenth run and the first Crown Chest sung whole comes around the
+seventeenth: after the first clear, before level 4. Each Heartsong found is worth 20 points too.
 
 ## Ways to judge a chest
 
@@ -217,7 +217,7 @@ Each answers one question by a rule you'd expect from real life. All of them are
 
 **Left out: the scale.** A weight only means something if you add up what each thing should weigh in your head, which
 isn't intuitive, and the drop already gives the one weight-like fact that matters (hollow or solid). Weight comes back
-as a seller's habit instead (Wenna the Huntress goes by it, and the ledger says which kinds are heavy), and as
+as a seller's habit instead (Wenna the Huntress goes by it, and the notebook says which kinds are heavy), and as
 Hesk's way of reading a chest.
 
 **Lockpicking** (from Thornwick) comes after you buy a locked chest: set each pin when the pick passes the
@@ -404,8 +404,8 @@ teach it twice either.
 as taught, so it comes up the next time it applies (the most pressing is asked first: at the day's end, paying off the
 debt before the Bookkeeping Engine before the shop's news).
 
-**Who's who** (v22). Clicking whoever's at the counter opens the ledger on their page, their line framed in gold; the
-ledger button and L do the same. Mother Bramble's lesson starts with it ("click her to read hers", `Visit.LookedUp`),
+**Who's who** (v22). Clicking whoever's at the counter opens the notebook on their page, their line framed in gold; the
+notebook button and N do the same. Mother Bramble's lesson starts with it ("click her to read hers", `Visit.LookedUp`),
 and the `lookup` tip tells Bram's kin who come without lessons.
 
 Lessons and Bram's tips never talk over each other. A lesson waits until any tip already up (a new shop, a lock, a
@@ -426,7 +426,7 @@ Everything arrives when it's needed, each with a word from Bram, so the first da
 | When | What opens up | Bram explains |
 |---|---|---|
 | Day 1 | shaking, the slip and the odds bar, buying | one lesson per customer (scripted) |
-| Day 2 | passing (Mags, first thing), haggling, naming a price, counting rattles; sellers' stories and the ledger (L) | each seller's first visit is a lesson; the ledger and the story tip on a later customer |
+| Day 2 | passing (Mags, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N) | each seller's first visit is a lesson; the notebook and the story tip on a later customer |
 | The second evening | the Gilded Guild and Bram's twenty years of back-tithe: a due every fifth evening, the first in three nights (until then nothing shows it) | a scene: Vane, then Bram |
 | Day 3 | Nim's curios (his first visit) | a tip: room for three, so pick ones that go together |
 | The stall has earned 50g, all told (`GameState.UpgradesAt`) | moves and tools at the end of the day; until then the day-end screen shows how far there is to go | what Thornwick brings |
@@ -525,7 +525,7 @@ three hours before, and a full careful run about two (24 days, 150 customers) ag
 **v21: working weeks again, and fewer of them.** The owner: keep the five-day week, each with its tax day, two days
 with something on in town, and two days for Nim (or Nim once and the story, on a week with a story); shorten the run by
 weeks instead. A week is five days again (`Guild.DaysPerWeek`) and the debt five weeks (`Guild.Weeks`): 25 days.
-Every day has a role (`DayRole`, planned a week ahead by `Events.Plan` and shown on the ledger's calendar): the fifth
+Every day has a role (`DayRole`, planned a week ahead by `Events.Plan` and shown on the notebook's calendar): the fifth
 is the Guild's; a story week's first (weeks 1, 2 and 4, and the week after the debt: `Story.TellsOn`) is the story's,
 its scene before the shop opens; Nim comes twice a week, never on consecutive days (once on a story week: on the third
 in the first week, after two days at the stall); and the two days left have something on in town (gentle things in the
@@ -663,7 +663,7 @@ shop at Thornwick and a legendary one in Crownhold (`Curios.RarityTier`). A lege
 opened for good by doing that trade often enough across runs (`Feat`, `Curios.Feats`: 40 surprises for Fate's Spindle,
 40 perfect reads for the Truthglass, 25 chests talked down for the Golden Tongue, 15 false bottoms opened for the
 Smugglers' Compass, 10 warded things named for the Aldric Seal, 15 enchanted things for the Archmage's Staff, 20 chests
-taken sight unseen for Fortune's Blindfold), and the ledger's curio page shows how far along you are.
+taken sight unseen for Fortune's Blindfold), and the collection's curio page shows how far along you are.
 
 **Prices: a fixed sum and a share** (`Curios.Price`): 10g and 6% of what was in your purse when Nim arrived for a
 common, 25g and 10% for an uncommon, 75g and 15% for a rare, 250g and 20% for a legendary. The fixed part keeps a curio
@@ -871,7 +871,7 @@ A day or two a week (none in the first, which is for learning the stall; one in 
 days of their own, something happens in town (the day card
 announces it, and a chip in the top bar keeps it there all day: click it to read it again; `Events`). Each week's plan
 (its two event days, the kind wanted, and Nim's day) is made a week ahead (`Events.Plan`, `GameState.Plan` and
-`NextPlan`, saved), so the ledger's calendar can show this week and next. They all come round before any comes twice;
+`NextPlan`, saved), so the notebook's calendar can show this week and next. They all come round before any comes twice;
 the first week with anything on has a gentle one (it changes the day, not how to judge a chest).
 
 | Event | From | That day |
@@ -898,13 +898,17 @@ The puzzle days (`Events.Restate`) give every seller without a clue of their own
 slip) the day's clue, so the whole day is a run of Mother Bramble's and Lady Corisande's puzzles, or of Pell's
 counting.
 
-## The ledger's calendar
+## The notebook's calendar, and the debt
 
-The ledger's Calendar page (it replaced Places, which was reference nobody needed once every seller says where their
-chest came from) shows three weeks, a day to a box: today framed in gold, the days gone by faded, each day's event
-(this week's and next week's are planned), the morning Nim comes by, and each Guild's night with what it will want
-(this week's in red if the purse is short). Hovering a day tells its whole story; until then, the next thing coming is
-told under the grid. Nim comes every week from the first (its third morning), on a day without an event when he can.
+The notebook's Calendar page (it replaced Places, which was reference nobody needed once every seller says where their
+chest came from) opens with the Guild's debt, once Mister Vane has told of it: what's left of it, the next due and
+when, and a box for each of the five weeks (paid in green, this week's framed, orange when the purse is short), then
+what comes after. The due in the top bar opens the notebook right there (0.25): the debt is what the run is about, and
+it was the one thing on screen that didn't explain itself. Under the debt, three weeks, a day to a box: today framed
+in gold, the days gone by faded, each day's event (this week's and next week's are planned), the morning Nim comes by,
+and each Guild's night with what it will want (this week's in red if the purse is short). Hovering a day tells its
+whole story; until then, the next thing coming is told under the grid. Nim comes every week from the first (its third
+morning), on a day without an event when he can.
 
 ## The story
 
@@ -1050,15 +1054,22 @@ fire in it, and a scroll case of sand looks like the mudlark's "maps" it is. Thi
 so a purse is smaller than a sword, and a coin from Brindle and a crown from the vault sit together on a shelf.
 
 The art is the room the player thinks in: they sit with it for hours, reading the slip and listening, so it has to be
-comfortable to look at and never pull the eye from the chest. The first set (0.23) wasn't: generated to a brief that
-asked for fine detail on a fine grid, it was attractive at a glance and tiring over time, with two to six times the
-edges and specks of the old code-drawn art at the size it's seen. So the brief is now quiet first (0.25): a few big,
-flat shapes, no texture, at most two details on a thing or a face, backgrounds muted with one soft light, plain behind
-the chest and dark on the counter front, drawn on a coarser grid; the validator measures how busy each picture is and
-fails one that's too busy, and round 2 redraws the rest of the art to it. The chest, the thing the player looks at
-most, is drawn in code (`tools/custom_art.py`): one silhouette in seven finishes (a colour for each quality, the
-Stranger's chained black and the Crown Chest's crimson), with its lock maker's hasp and plate on it. Each maker's lock
-has its own face to pick. Until 0.23 every picture was drawn in code, and `tools/custom_art.py` still draws a
+comfortable to look at and never pull the eye from the chest. The first set (0.23) wasn't: a model asked for pixel art
+draws texture and glints at every pixel, and it came out attractive at a glance and tiring over time, with two to six
+times the edges and specks of the old code-drawn art at the size it's seen. Round 2 of the brief (0.25) never asks for
+pixels: the generator draws flat-colour illustrations and the pipeline makes the pixel art a flat area at a time, on a
+coarse grid (320x180 for the world, four screen pixels to an art pixel), and the validator fails anything busier than
+it should be. The chest, the thing the player looks at most, is drawn in code (`tools/custom_art.py`): one silhouette
+in seven finishes, with its lock maker's hasp and plate on it.
+
+Round 2 also builds the shop from layers, each with one job, so the place can feel like a place at an hour of the day
+without getting busier: a sky for the time of day (the day goes from morning through midday to evening as the
+customers come, and the Guild comes at night: the sky changes, the rest is tinted, the lanterns are lit); the place
+across the counter; the seller, standing full length on the far side of the counter (it hides their legs; a goblin
+only just shows over it, a knight towers); the display shelf and the shop's own frame (the top bar sits on its band);
+the counter, with the tools you've bought standing beside the chest; and the appraisal sheet the slip is printed on,
+grander at every move. Until those layers are made and put in the game (`art/README.md`), the game shows round 1's
+shop pictures and portraits. Until 0.23 every picture was drawn in code, and `tools/custom_art.py` still draws a
 placeholder for anything new until its picture is made.
 
 ## Title, saves and settings
@@ -1081,16 +1092,19 @@ in the run and the profile). Nothing in it is fair, and the panel says so.
 
 ## Collection, synergies and exhibition
 
-Every thing you open goes in the ledger's collection the first time you find it (33 entries: five qualities of six
+Every thing you open goes in the collection the first time you find it (33 entries: five qualities of six
 kinds and three fakes; finding one enchanted stars its entry) and in the journal's tally of what you've acquired,
 kind by quality.
 
-**The journal is kept across runs** (v21; the owner: a regular's page and a collection entry should open the moment
-you discover them, and stay open). It's Bram's kin's ledger, not the run's: a regular's page opens the first time they
+**Two books, kept across runs** (v21; the owner: a regular's page and a collection entry should open the moment you
+discover them, and stay open). They're Bram's kin's, not the run's: a regular's page opens the first time they
 come to your counter, a collection entry the first time you find the thing, a curio the first time Nim lays it out,
 and each stays open in every run after (`Profile.Met`, `Found`, `FoundEnchanted` and `CuriosSeen`, merged into a run by
 `GameState.Remember`; `Profile.Note` keeps them when a run ends). The run's own finds still score and still pay a
-collector's catalogue. The ledger's **Curios** page shows all 79: the ones you've met with what they do, the ones you
+collector's catalogue. In 0.25 the ledger, which had grown seven pages, became two books: the **notebook**, for
+trading (Sounds, Regulars, Calendar with the debt, Synergies; N, or the button on the slip), and the **collection**, for
+what's been gathered (Finds, Curios, Heartsongs; from the title screen and the pause menu, so it's there between runs
+too). The collection's **Curios** page shows all 79: the ones you've met with what they do, the ones you
 keep, and the ones Nim doesn't carry for you yet, dark, with what opens them (a legendary's feat with how far along you
 are). Bram's Ledger, the talent that showed every regular from the start, had nothing left to do and went in v21 (the
 rest of the talents followed in v22). Each thing looks the same everywhere: the collection, the shelf, the exhibition and the keep chooser

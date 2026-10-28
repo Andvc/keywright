@@ -1,25 +1,32 @@
 """
-Turns a generated image into a finished asset at its native size, by its spec in art/manifest.json:
+Turns a generated image into a finished asset at its native size, by its spec in art/manifest.json.
 
-  1. takes the background out (the image's own alpha, a --key colour, or the colour around the border, flood-filled);
-  2. snaps every colour to the master palette;
-  3. finds the art-pixel grid the model drew and samples each cell's main colour (--mode grid), or reduces the image by
-     area (--mode area: backgrounds, scenes, store art, or any sprite whose grid can't be found);
-  4. places the content on the asset's canvas (centred, or on the baseline, or in its box), with binary alpha;
-  5. quiets it (round 2: a lone speck, or a region of a few pixels, takes its neighbour's colour when the two are close,
-     so texture goes and eyes, glints and accents stay; --no-quiet skips it), caps the colour count (merging the
-     least-used colours into their nearest), enforces the 1-pixel outline;
-  6. writes the asset's `output` (or --out), and with --preview a 4x copy beside it.
+Round 2 (`--mode flat`, every redrawn asset): the image is a flat-colour illustration, not pixel art, and this makes the
+pixel art. It
+  1. takes the background out (the image's own alpha, or the flat key colour, magenta: everywhere for a scene's layers,
+     where the sky shows through windows; flood-filled in from the border for a sprite, so a pink detail inside it stays);
+  2. maps the picture onto the canvas the way its category says (`fit`): the whole frame cropped to the canvas's aspect
+     (a sky, a place, the shop's frame, a sheet, a story scene), the content stretched to a strip (the counter), the
+     content scaled to the figure's height with its feet on the bottom row, to a sprite's box (on its baseline or
+     centred), or to the shelf's width with the board's top on its row;
+  3. snaps every colour to the palette and gives each art pixel the commonest colour of the block of the picture it
+     covers, so flat areas stay flat and anti-aliased edges, stray specks and anything finer than a block don't survive;
+  4. quiets it (a lone speck, or a region of a few pixels, takes its neighbour's colour when the two are close; --no-quiet
+     skips it), caps the colour count, and draws a 1-pixel outline around a sprite's silhouette, outside it;
+  5. writes the asset's `output` (or --out), and with --preview a 4x copy beside it.
+
+Round 1's modes are kept for the assets round 2 doesn't redraw: `grid` finds the art-pixel grid the model drew and
+samples each cell; `area` reduces by area.
 
 Usage:
-  python3 art/tools/pixelize.py raw.png --id item.barrow_silver
-  python3 art/tools/pixelize.py raw.png --id bg.shop1 --offset-y 60      # area mode; crop window moved down 60 px
-  python3 art/tools/pixelize.py sheet.png --id fx.sparkle                  # sprite sheets: split into frames first
-Options: --mode grid|area, --key '#ff00ff', --block N (the art-pixel size, if detection picks wrong), --despeckle,
---no-quiet, --no-outline, --out PATH, --preview. Needs only Pillow. Check the result with art/tools/validate.py: it holds
-every asset to its category's calm thresholds, and the quiet stage can't rescue a busy drawing (regenerate it simpler).
+  python3 art/tools/pixelize.py raw.png --id figure.hob --preview
+  python3 art/tools/pixelize.py raw.png --id place.stall --offset-y 40    # the crop window moved down 40 source pixels
+Options: --mode flat|grid|area, --key '#ff00ff', --block N (grid mode's art-pixel size), --despeckle, --no-quiet,
+--no-outline, --out PATH, --preview. Needs only Pillow. Check the result with art/tools/validate.py: it holds every asset
+to its category's calm thresholds, and the quiet stage can't rescue a busy drawing (regenerate it simpler).
 """
 import argparse
+import math
 import os
 import sys
 from collections import Counter, deque
@@ -313,12 +320,223 @@ def despeckle(img):
 # ---- one asset --------------------------------------------------------------------------------------------------------
 
 # How small a region the quiet stage merges away, by how big the picture is.
-QUIET_REGION = {"background": 6, "scene": 6, "portrait": 3, "lock_face": 4}
+QUIET_REGION = {"background": 6, "scene": 6, "portrait": 3, "lock_face": 4, "sky": 8, "place": 6, "frame": 4,
+                "counter": 6, "sheet": 6, "figure": 3, "shelf": 3}
+
+
+# ---- flat mode (round 2): a flat-colour illustration made into pixel art -------------------------------------------
+
+MAGENTA = (255, 0, 255)
+
+
+def _keyed(c, key, within=150):
+    return sum(abs(a - b) for a, b in zip(c[:3], key)) < within
+
+
+def _key_everywhere(img, key, within):
+    out = img.copy()
+    px = out.load()
+    for y in range(out.height):
+        for x in range(out.width):
+            if px[x, y][3] and _keyed(px[x, y], key, within):
+                px[x, y] = CLEAR
+    return out
+
+
+def flat_alpha(img, spec, key=None):
+    """Binary alpha: the image's own, if it has any; else the key colour taken out. A whole picture is opaque; a scene's
+    layer (and the counter's strip) loses the key everywhere, since the sky shows through windows and arches; a sprite
+    loses it flood-filled in from the border, and then only where it's nearly pure key (a hole through it), so a pink
+    detail inside survives."""
+    fit = spec.get("fit")
+    if spec["background"] == "opaque" and fit != "strip":
+        return Image.merge("RGBA", (*img.convert("RGB").split(), Image.new("L", img.size, 255)))
+    alpha = img.getchannel("A")
+    if sum(1 for v in artlib.pixels(alpha) if v < 128) > img.width * img.height // 100:
+        return _threshold(img)
+    key = key or MAGENTA
+    if fit in ("frame", "strip"):
+        return _key_everywhere(img, key, 150)
+    return _key_everywhere(remove_background(img, key, tolerance=60), key, 60)
+
+
+def _content_box(img):
+    box = artlib.bbox(artlib.opaque_mask(img))
+    if not box:
+        raise SystemExit("nothing left once the background's out: is the key colour right?")
+    return box[0], box[1], box[2] + 1, box[3] + 1
+
+
+def snap_areas(img, colours, clusters=64, merge=0.035):
+    """Every opaque pixel to a palette colour, an area at a time. The picture's own colours are clustered, clusters that
+    look nearly alike (OKLab, under `merge`) are joined (a flat area's noise and anti-aliasing, or two tones too close to
+    tell apart), and each group goes to its nearest palette colour by eye. Snapping pixel by pixel instead makes an area
+    whose colour sits between two palette colours flicker between them: speckle."""
+    rgb = img.convert("RGB")
+    q = rgb.quantize(colors=clusters, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
+    pal = q.getpalette()
+    groups = []  # [count, (r, g, b) weighted sum, oklab of the mean, [palette indices]]
+    for count, index in q.getcolors(256) or []:
+        c = tuple(pal[index * 3:index * 3 + 3])
+        groups.append([count, [v * count for v in c], artlib.oklab(c), [index]])
+    while len(groups) > 1:
+        best = None
+        for i in range(len(groups)):
+            for j in range(i + 1, len(groups)):
+                d = math.dist(groups[i][2], groups[j][2])
+                if best is None or d < best[0]:
+                    best = (d, i, j)
+        if best[0] >= merge:
+            break
+        _, i, j = best
+        a, b = groups[i], groups.pop(j)
+        a[0] += b[0]
+        a[1] = [x + y for x, y in zip(a[1], b[1])]
+        a[2] = artlib.oklab(tuple(v / a[0] for v in a[1]))
+        a[3] += b[3]
+    mapping = list(range(256))
+    targets = []
+    cache = {}
+    for count, total, _, indices in groups:
+        target = artlib.nearest(tuple(round(v / count) for v in total), colours, cache)
+        k = len(targets)
+        targets.append(target)
+        for index in indices:
+            mapping[index] = k
+    flat_pal = [v for c in targets for v in c]
+    q = q.point(mapping)
+    q.putpalette(flat_pal + flat_pal[:3] * (256 - len(targets)))
+    out = Image.new("RGBA", img.size, CLEAR)
+    out.paste(q.convert("RGB"), (0, 0), img.getchannel("A").point(lambda v: 255 if v >= 128 else 0))
+    return out
+
+
+def mode_downscale(img, region, size, colours, alpha_min=0.5):
+    """Each target pixel takes the commonest palette colour of the block of `region` it covers (transparent when less
+    than `alpha_min` of the block is opaque): flat areas stay flat, and anti-aliased edges, specks and texture finer
+    than a block don't survive."""
+    tw, th = size
+    src = snap_areas(img.crop(region), colours)
+    sw, sh = src.size
+    data = artlib.pixels(src)
+    col = [min(tw - 1, x * tw // sw) for x in range(sw)]
+    row = [min(th - 1, y * th // sh) for y in range(sh)]
+    counts = [None] * (tw * th)
+    totals = [0] * (tw * th)
+    for y in range(sh):
+        r, base = row[y] * tw, y * sw
+        for x in range(sw):
+            i = r + col[x]
+            totals[i] += 1
+            c = data[base + x]
+            if c[3]:
+                d = counts[i]
+                if d is None:
+                    d = counts[i] = {}
+                d[c[:3]] = d.get(c[:3], 0) + 1
+    out = Image.new("RGBA", (tw, th), CLEAR)
+    px = out.load()
+    for j in range(th):
+        for i in range(tw):
+            d = counts[j * tw + i]
+            if d and sum(d.values()) >= alpha_min * totals[j * tw + i]:
+                px[i, j] = (*max(d, key=d.get), 255)
+    return out
+
+
+def _cropped_to_aspect(img, w, h, offset_y=0):
+    """The whole picture, cropped to w:h (centred; moved down by offset_y source pixels)."""
+    W, H = img.size
+    crop_h = round(W * h / w)
+    if crop_h <= H:
+        top = max(0, min(H - crop_h, (H - crop_h) // 2 + offset_y))
+        return 0, top, W, top + crop_h
+    crop_w = round(H * w / h)
+    left = (W - crop_w) // 2
+    return left, 0, left + crop_w, H
+
+
+def _board_top(img):
+    """The top row of a shelf's board: the lowest run of rows that are mostly opaque across, from its top."""
+    w, h = img.size
+    px = img.load()
+    wide = [sum(1 for x in range(w) if px[x, y][3]) >= 0.7 * w for y in range(h)]
+    y = h - 1
+    while y >= 0 and not wide[y]:
+        y -= 1
+    while y > 0 and wide[y - 1]:
+        y -= 1
+    return max(0, y)
+
+
+def outline_outside(img):
+    """A 1-pixel outline around the silhouette, outside it: the shape keeps its own edge pixels."""
+    px = img.load()
+    w, h = img.size
+    add = []
+    for y in range(h):
+        for x in range(w):
+            if px[x, y][3]:
+                continue
+            if any(0 <= x + dx < w and 0 <= y + dy < h and px[x + dx, y + dy][3]
+                   for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                add.append((x, y))
+    for x, y in add:
+        px[x, y] = (*OUTLINE, 255)
+    return img
+
+
+def flat(img, spec, manifest, key=None, offset_y=0, calm=True, outline=True):
+    w, h = spec["size"]
+    fit = spec.get("fit", "sprite")
+    colours = sorted(artlib.allowed_colours(spec, manifest))
+    ring = 1 if outline and spec.get("outline") else 0
+    img = flat_alpha(img, spec, key)
+    alpha_min = spec.get("alpha_min", 0.5)
+    canvas = Image.new("RGBA", (w, h), CLEAR)
+    if fit in ("canvas", "frame"):
+        canvas = mode_downscale(img, _cropped_to_aspect(img, w, h, offset_y), (w, h), colours, alpha_min)
+    elif fit == "strip":
+        canvas = mode_downscale(img, _content_box(img), (w, h), colours, alpha_min)
+    else:
+        box = _content_box(img)
+        bw, bh = box[2] - box[0], box[3] - box[1]
+        m = spec.get("margin", 0) or 0
+        if fit == "figure":
+            th = spec["height"] - 2 * ring
+            tw = max(1, round(bw * th / bh))
+            small = mode_downscale(img, box, (min(tw, w - 2 * ring), th), colours, alpha_min)
+            canvas.alpha_composite(small, ((w - small.width) // 2, h - ring - th))
+        elif fit == "shelf":
+            tw = w - 2 * ring
+            th = max(1, round(bh * tw / bw))
+            small = mode_downscale(img, box, (tw, th), colours, alpha_min)
+            canvas.alpha_composite(small, (ring, spec["board_row"] - _board_top(small)))
+        else:
+            iw, ih = w - 2 * m - 2 * ring, h - 2 * m - 2 * ring
+            scale = min(iw / bw, ih / bh)
+            tw, th = max(1, round(bw * scale)), max(1, round(bh * scale))
+            small = mode_downscale(img, box, (tw, th), colours, alpha_min)
+            x = (w - tw) // 2
+            # On its baseline (a thing on the table, a prop on the counter), hung from the top (a lantern), or centred.
+            y = (spec["baseline"] - ring - th + 1 if spec.get("baseline") is not None
+                 else ring if spec.get("hangs") else (h - th) // 2)
+            canvas.alpha_composite(small, (x, y))
+    if spec["background"] == "opaque":
+        canvas = Image.merge("RGBA", (*canvas.convert("RGB").split(), Image.new("L", (w, h), 255)))
+    if calm and spec.get("calm"):
+        canvas = artlib.quiet(canvas, QUIET_REGION.get(spec["category"], 2), keep=OUTLINE_OK)
+    canvas = cap_colours(canvas, spec.get("max_colours") or 64)
+    if ring:
+        canvas = outline_outside(canvas)
+    return canvas
 
 
 def process(img, spec, manifest, mode=None, key=None, block=None, offset_y=0, outline=True, speckles=False, calm=True):
     opaque = spec["background"] == "opaque"
     mode = mode or spec.get("mode", "grid")
+    if mode == "flat":
+        return flat(img, spec, manifest, key, offset_y, calm, outline)
     if mode == "script":
         raise SystemExit(f"{spec['id']} is drawn by script or by hand from its recipe, not from an image")
     colours = sorted(artlib.allowed_colours(spec, manifest))
@@ -389,10 +607,10 @@ def main():
     ap.add_argument("input")
     ap.add_argument("--id", required=True)
     ap.add_argument("--manifest")
-    ap.add_argument("--mode", choices=["grid", "area"])
+    ap.add_argument("--mode", choices=["flat", "grid", "area"])
     ap.add_argument("--key", help="background colour to remove, e.g. '#ff00ff'")
     ap.add_argument("--block", type=float, help="the art-pixel size in the source, if detection picks wrong")
-    ap.add_argument("--offset-y", type=int, default=0, help="area mode, opaque: move the crop window down (source px)")
+    ap.add_argument("--offset-y", type=int, default=0, help="a whole picture: move the crop window down (source px)")
     ap.add_argument("--despeckle", action="store_true")
     ap.add_argument("--no-quiet", action="store_true", help="skip the quiet stage (texture specks and tiny regions)")
     ap.add_argument("--no-outline", action="store_true")

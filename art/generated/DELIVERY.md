@@ -1,8 +1,9 @@
 # Keywright art delivery
 
 > **0.25:** round 1's chest was retired: the chest and its locks are drawn in code now (`tools/custom_art.py`), so
-> its files, its review sheets and `_workflow/finalize_chests.py` were removed (git has them). Round 2 redraws most
-> of the rest, quieter (`art/README.md`); record it in a Round 2 section at the end.
+> its files, its review sheets and `_workflow/finalize_chests.py` were removed (git has them), with round 1's anchors
+> and its counter mock-ups. Round 2 (`art/README.md`) redraws the rest flat and quiet and builds the shop scene from
+> layers; record it in a Round 2 section at the end.
 
 Source brief: `prototype/0.22`, commit `9e52f8380d4873dd2ea0a01fb0ab4704198e72c4`.
 Delivery branch: `art/gpt-image-2`. All changes are confined to `art/generated/`.

@@ -255,8 +255,29 @@ public partial class Main : Node2D
         // Hesk at the top level: the most boons and banes the setup screen and the pause menu ever list.
         Profile.Challenge[Characters.Hesk] = Challenges.Max;
         Profile.BestScore[Characters.Kit] = 452;
+        // ...and a little gathered, for the collection's pages.
+        Profile.Found.AddRange(Collection.Entries.Where((e, i) => i % 3 != 2 && e.Quality <= Rarity.Rare).Select(e => e.Entry));
+        Profile.FoundEnchanted.AddRange(Collection.Entries.Where(e => !e.Fake && e.Quality == Rarity.Uncommon).Take(3).Select(e => e.Entry));
+        Profile.CuriosSeen.AddRange(Curios.All.Where((c, i) => i % 2 == 0).Select(c => c.Key));
+        Profile.Songs.AddRange(Heartsongs.All.Take(2).Select(h => h.Key));
         ToTitle();
         await Wait(2.5);
+        var title = (TitlePhase)_phase;
+        // A page's first frame can take a while (every curio's picture): each picture waits for its own.
+        var gathered = title.OpenCollection();
+        await Wait(0.8);
+        Moment("05_collection_finds");
+        await Wait(1.5);
+        gathered.ShowPage(CollectionView.CuriosPage);
+        await Wait(0.5);
+        Moment("06_collection_curios");
+        await Wait(1.5);
+        gathered.ShowPage(CollectionView.SongsPage);
+        await Wait(0.5);
+        Moment("07_collection_songs");
+        await Wait(1.5);
+        gathered.Close();
+        await Wait(0.5);
         OpenSetup();
         await Wait(1.2);
         var setup = (SetupPhase)_phase;
@@ -273,6 +294,12 @@ public partial class Main : Node2D
         Moment("11_pause");
         await Wait(0.5);
         var pause = GetChildren().OfType<PauseMenu>().First();
+        var during = pause.OpenCollection();
+        await Wait(0.8);
+        Moment("11_pause_collection");
+        await Wait(1.5);
+        during.Close();
+        await Wait(0.4);
         var settings = new SettingsView();
         pause.AddChild(settings);
         await Wait(0.6);
@@ -290,11 +317,10 @@ public partial class Main : Node2D
             GD.Print($"GM: {GmGold()} {GmUnlockJournal()} Skip: {CanSkipDay ?? "allowed"}");
             await Wait(0.5);
             Moment("14_gm");
-            var ledger = new LedgerView(State, 6) { ProcessMode = ProcessModeEnum.Always };
-            AddChild(ledger);
+            var collection = pause.OpenCollection(CollectionView.CuriosPage);
             await Wait(0.8);
             Moment("15_gm_curios");
-            ledger.ShowPage(2);
+            collection.ShowPage(CollectionView.FindsPage);
             await Wait(0.5);
             Moment("16_gm_collection");
             await Wait(0.3);
@@ -476,12 +502,12 @@ public partial class Main : Node2D
         return $"In the purse: {State.Gold}g.";
     }
 
-    /// <summary>GM: every page of the journal filled, this run's and the profile's.</summary>
+    /// <summary>GM: every page of the notebook and the collection filled, this run's and the profile's.</summary>
     public string GmUnlockJournal()
     {
         State.KnowAll();
         WriteProfile(p => p.KnowAll());
-        return "The journal's full: every regular, every thing, every curio, and all nine Heartsongs.";
+        return "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs.";
     }
 
     /// <summary>Why the day can't be skipped now, or null: only from Nim's counter, the shop's counter or the day's end.</summary>
@@ -502,6 +528,12 @@ public partial class Main : Node2D
         State.SkipRestOfDay();
         SwitchTo(new DayEndPhase());
     }
+
+    /// <summary>
+    /// The top bar's due was clicked: the screen open now shows the Guild's debt in the notebook, if it can (not in the
+    /// middle of picking a lock or an opening). Returns whether it did.
+    /// </summary>
+    public bool ShowDebt() => State != null && !GetTree().Paused && _phase != null && _phase.ShowDebt();
 
     /// <summary>Esc during a day, or the HUD's Menu button: pause.</summary>
     public void OpenPause()

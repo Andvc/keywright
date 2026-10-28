@@ -47,7 +47,7 @@ public static class Hints
                      "price, or storm off if you insult them.",
         ["offer"] = "This one wants you to name a price. Offer what it's worth to you, less a little. You get two tries.",
         ["try_again"] = "Too low. One more try, then they'll go.",
-        ["lookup"] = "Everyone you've traded with has a page in your ledger: how they judge a chest, how they trade, what they're " +
+        ["lookup"] = "Everyone you've traded with has a page in your notebook: how they judge a chest, how they trade, what they're " +
                      "like. Click whoever's at the counter to read theirs.",
         ["story"] = "Listen to where they say it came from. A barrow holds grave goods, a goblin warren mostly coin, a dwarf-hold " +
                     "weapons and gems.",
@@ -64,14 +64,16 @@ public static class Hints
                     "day card says how much is left.",
         ["display"] = "A shelf behind the counter, with room for one thing! Keep something grand on display instead of selling " +
                       "it: an exhibition draws more customers, and better chests. Each cabinet you buy makes room for one more.",
-        ["synergy"] = $"Crownhold folk know a shop by what it collects. Your journal has tallied everything you've acquired: " +
+        ["synergy"] = $"Crownhold folk know a shop by what it collects. Your notebook has tallied everything you've acquired: " +
                       $"{Sellers.Number(SynergyDef.PerKind)} of a kind earns a synergy. Open Synergies, bottom right, to put one to work " +
                       "or see how close you are.",
         ["slots"] = "Another synergy slot: open Synergies and put one more to work.",
         ["emporium"] = "The Royal Emporium, in the palace's shadow. The Gate's just down the street: you can feel it hum. There are " +
                        "bigger things to grow into now: a night market, a patrons' book, a velvet case for curios. Keep enough back for Vane.",
-        ["ledger"] = "Forgotten a sound, or someone's habits? Press L for your ledger: the sounds, the regulars you've met, a " +
-                     "calendar of what's coming, and everything you've found.",
+        ["ledger"] = "Forgotten a sound, or someone's habits? Press N for your notebook: the sounds, the regulars you've met, and " +
+                     "a calendar of what's coming.",
+        ["debt"] = "That's the Guild's next due, up top. Click it any time for the whole debt in your notebook: what's paid, " +
+                   "what's left, and what each week will want.",
         ["lockpick"] = "The ward's let go: the chest is yours. Now for the old lock underneath. The pick sweeps round: press Space, " +
                        "or click, while it's in the green to set a pin. Set every pin cleanly and nothing inside gets scratched.",
 
@@ -85,7 +87,7 @@ public static class Hints
                           "hand it over instead of selling it. A commission always pays more than a sale, and a lot pays piece by piece.",
         ["deliver"] = "Someone wants this! Deliver it: a commission always pays more than selling it would.",
         ["event"] = "Something's happening in town today: two days every week are different. It's up in the top bar (click it to " +
-                    "read it again), and your ledger's calendar shows what's coming this week and next.",
+                    "read it again), and your notebook's calendar shows what's coming this week and next.",
         ["stranger"] = "The Stranger. That chest's wrapped in iron chains: nothing inside can move, so there's nothing to hear. " +
                        "Drop it to feel how heavy it is. Heavy ones hold more.",
         ["gilded"] = "A royal seal! That's one of King Aldric's own chests, gilded. The seller thinks the gold is paint, and priced " +

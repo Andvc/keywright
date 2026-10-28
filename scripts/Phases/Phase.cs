@@ -38,6 +38,12 @@ public partial class Phase : Node2D
         tween.Chain().TweenCallback(Callable.From(label.QueueFree));
     }
 
+    /// <summary>
+    /// The top bar's due was clicked: show the Guild's debt in the notebook, if this screen can open it now (the counter
+    /// between moves, the day's end, Nim's morning). Returns whether it did.
+    /// </summary>
+    public virtual bool ShowDebt() => false;
+
     protected static Label Header(string text, float x, float y) =>
         UiKit.MakeLabel(text, 16, Palette.Gold.Darkened(0.2f)).Place(x, y, 300, 20);
 }

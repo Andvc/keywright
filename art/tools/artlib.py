@@ -106,6 +106,10 @@ def outline_borders(spec):
     if spec.get("category") == "chest":
         return {"lid": {"left", "right", "top"}, "body": {"left", "right", "bottom"}}.get(spec.get("part"),
                                                                                       {"left", "right", "top", "bottom"})
+    # A scene's layers run off the canvas's edges (the frame's top and posts, the shelf's supports): only where they
+    # meet transparency is an edge.
+    if spec.get("fit") in ("frame", "shelf"):
+        return set()
     return {"left", "right", "top", "bottom"}
 
 

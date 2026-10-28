@@ -6,21 +6,24 @@ using Keywright.Core;
 namespace Keywright.Ui;
 
 /// <summary>
-/// The shop's ledger. Sounds: one row per kind of thing your shop sees (its sound, how hard you must shake to hear it,
-/// how heavy it is, and what one is worth if it's as good as each colour of chest promises; click a row to hear it),
-/// and the rules of listening. Regulars: how each seller you've met judges a chest, trades and behaves (whoever's at the
-/// counter framed), and Uncle Bram and the story's people on the Friends spread. Calendar: today, the Guild's
-/// nights and what they'll cost, the days Nim comes by, and what's happening in town this week and next. Collection:
-/// everything Bram's kin have found, this run and every one before. Curios: every curio, the ones you've seen, the ones
-/// Nim carries, and what opens the rest. Synergies: what the shop could be known for, how far along each is, and (at the
-/// end of a day) which are active. Songs: the Heartsongs Bram's kin have opened, once there's one to show. What any
-/// run has learned stays in it: the sounds and regulars of the grandest shop any run reached (<see cref="GameState.JournalTier"/>).
+/// The notebook: what Bram's kin keep for trading (N, the button on the slip, or clicking whoever's at the counter).
+/// Sounds: one row per kind of thing your shop sees (its sound, how hard you must shake to hear it, how heavy it is, and
+/// what one is worth if it's as good as each colour of chest promises; click a row to hear it), and the rules of
+/// listening. Regulars: how each seller you've met judges a chest, trades and behaves (whoever's at the counter framed),
+/// and Uncle Bram and the story's people on the Friends spread. Calendar: the Guild's debt (what's paid, what's left and
+/// what's next: the purse's due in the top bar opens it here), today, the Guild's nights, the days Nim comes by, and
+/// what's happening in town this week and next. Synergies: what the shop could be known for, how far along each is, and
+/// (at the end of a day) which are active. What any run has learned stays in it: the sounds and regulars of the grandest
+/// shop any run reached (<see cref="GameState.JournalTier"/>). What's been gathered (finds, curios, Heartsongs) is the
+/// collection's (<see cref="CollectionView"/>).
 /// </summary>
-public partial class LedgerView : Node2D
+public partial class NotebookView : Node2D
 {
-    // Ends above Uncle Bram's box, so his tips stay readable with the ledger open.
+    // Ends above Uncle Bram's box, so his tips stay readable with the notebook open.
     const float PanelX = 40, PanelY = 66, PanelW = 1200, PanelH = 518;
     const float TableX = 64, RowH = 40;
+
+    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3;
 
     readonly GameState _state;
     readonly int _firstPage;
@@ -28,21 +31,26 @@ public partial class LedgerView : Node2D
 
     /// <summary>Whoever's at the counter: the Regulars page opens at their place, their entry framed.</summary>
     readonly string _current;
+
+    /// <summary>Opened from the purse's due in the top bar: the calendar's debt is framed, and breathes for a moment.</summary>
+    readonly bool _focusDebt;
     Node2D _page;
     bool _closing;
 
     public event Action Closed;
 
-    public LedgerView() { }
+    public NotebookView() { }
 
     /// <param name="choosing">Synergies can be switched on and off (at the end of a day).</param>
     /// <param name="current">The seller at the counter, if any.</param>
-    public LedgerView(GameState state, int page = 0, bool choosing = false, string current = null)
+    /// <param name="focusDebt">Opened to look at the debt.</param>
+    public NotebookView(GameState state, int page = SoundsPage, bool choosing = false, string current = null, bool focusDebt = false)
     {
         _state = state;
         _firstPage = page;
         _choosing = choosing;
         _current = current;
+        _focusDebt = focusDebt;
     }
 
     static Audio.Sfx Sfx => Main.Instance.Sfx;
@@ -56,18 +64,13 @@ public partial class LedgerView : Node2D
         };
         AddChild(blocker);
         AddChild(UiKit.MakePanel(Palette.Gold.Darkened(0.3f)).Place(PanelX, PanelY, PanelW, PanelH));
-        AddChild(UiKit.MakeLabel("LEDGER", 32, Palette.Gold, outline: 4).Place(PanelX + 24, PanelY + 10, 200, 40));
-        AddChild(UiKit.MakeButton("Sounds", Palette.Text, 16, () => ShowPage(0)).Place(PanelX + 190, PanelY + 14, 96, 36));
-        AddChild(UiKit.MakeButton("Regulars", Palette.Text, 16, () => ShowPage(1)).Place(PanelX + 292, PanelY + 14, 112, 36));
-        AddChild(UiKit.MakeButton("Calendar", Palette.Text, 16, () => ShowPage(4)).Place(PanelX + 410, PanelY + 14, 112, 36));
-        AddChild(UiKit.MakeButton("Collection", Palette.Text, 16, () => ShowPage(2)).Place(PanelX + 528, PanelY + 14, 128, 36));
-        AddChild(UiKit.MakeButton("Curios", Palette.Magic, 16, () => ShowPage(6)).Place(PanelX + 662, PanelY + 14, 96, 36));
-        // Synergies come with Crownhold: before that, the journal just keeps its tally.
-        if (_state.SynergiesOpen)
-            AddChild(UiKit.MakeButton("Synergies", Palette.Text, 16, () => ShowPage(3)).Place(PanelX + 764, PanelY + 14, 120, 36));
-        if (_state.Songbook.Count > 0)
-            AddChild(UiKit.MakeButton("Songs", Palette.Of(Rarity.Mythic), 16, () => ShowPage(5)).Place(PanelX + 890, PanelY + 14, 88, 36));
-        AddChild(UiKit.MakeButton("Close [L]", Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
+        AddChild(UiKit.MakeLabel("NOTEBOOK", 32, Palette.Gold, outline: 4).Place(PanelX + 24, PanelY + 10, 220, 40));
+        Tab(SoundsPage, "Sounds", PanelX + 236, 96);
+        Tab(RegularsPage, "Regulars", PanelX + 338, 112);
+        Tab(CalendarPage, "Calendar", PanelX + 456, 112);
+        // Synergies come with Crownhold: before that, the notebook just keeps its tally.
+        if (_state.SynergiesOpen) Tab(SynergiesPage, "Synergies", PanelX + 574, 120);
+        AddChild(UiKit.MakeButton("Close [N]", Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
         _page = new Node2D();
         AddChild(_page);
         ShowPage(_firstPage);
@@ -77,16 +80,24 @@ public partial class LedgerView : Node2D
         CreateTween().TweenProperty(this, "modulate", Colors.White, 0.15f);
     }
 
-    /// <summary>0: sounds, 1: regulars, 2: collection, 3: synergies, 4: calendar, 5: Heartsongs, 6: curios.</summary>
+    readonly System.Collections.Generic.Dictionary<int, Button> _tabs = new();
+
+    void Tab(int page, string name, float x, float w)
+    {
+        _tabs[page] = UiKit.MakeButton(name, Palette.Text, 16, () => ShowPage(page)).Place(x, PanelY + 14, w, 36);
+        AddChild(_tabs[page]);
+    }
+
+    /// <summary>0: sounds, 1: regulars, 2: calendar (and the debt), 3: synergies.</summary>
     public void ShowPage(int page)
     {
         foreach (var child in _page.GetChildren()) child.QueueFree();
-        if (page == 5 && _state.Songbook.Count > 0) BuildSongs();
-        else if (page == 6) BuildCurios();
-        else if (page == 1) BuildRegulars(CurrentSpread);
-        else if (page == 2) BuildCollection();
-        else if (page == 4) BuildCalendar();
-        else if (page == 3 && _state.SynergiesOpen) BuildSynergies();
+        if (page == SynergiesPage && !_state.SynergiesOpen) page = SoundsPage;
+        // The page that's open is the tab that's lit.
+        foreach (var (key, tab) in _tabs) tab.Modulate = key == page ? Colors.White : new Color(1, 1, 1, 0.6f);
+        if (page == RegularsPage) BuildRegulars(CurrentSpread);
+        else if (page == CalendarPage) BuildCalendar();
+        else if (page == SynergiesPage) BuildSynergies();
         else BuildSounds();
     }
 
@@ -139,7 +150,7 @@ public partial class LedgerView : Node2D
                 {
                     bool now = _state.ToggleSynergy(synergy.Key);
                     Sfx.Play(now ? "sting" : "tick", now ? 1.3f : 1f, -4);
-                    ShowPage(3);
+                    ShowPage(SynergiesPage);
                 }).Place(1060, 10, 100, 34);
                 toggle.Disabled = !canTurnOn;
                 if (!canTurnOn) toggle.TooltipText = "No free slot: switch another one off first.";
@@ -147,142 +158,6 @@ public partial class LedgerView : Node2D
             }
             else if (on) row.AddChild(UiKit.MakeLabel("Active", 16, Palette.Magic, HorizontalAlignment.Center).Place(1060, 18, 100, 20));
         }
-    }
-
-    /// <summary>
-    /// The songbook: the nine Heartsongs, three by three. One the family has opened shows its picture, who loved it and
-    /// what it does on display (its story on hover), and whether it's singing in the shop now; the rest are "?".
-    /// </summary>
-    void BuildSongs()
-    {
-        int known = Heartsongs.All.Count(h => _state.Songbook.Contains(h.Key));
-        _page.AddChild(UiKit.MakeLabel("Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a " +
-                                       "Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. " +
-                                       $"Bram's kin know {known} of the nine" +
-                                       (known == Heartsongs.All.Length ? ": the Crown Chest can be sung whole." : ": with all nine, the Crown Chest's ending changes."),
-            16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
-        const float cardW = 376, cardH = 128, gap = 8;
-        for (int i = 0; i < Heartsongs.All.Length; i++)
-        {
-            var song = Heartsongs.All[i];
-            bool found = _state.Songbook.Contains(song.Key);
-            bool shown = _state.Shows(song.Key);
-            float x = TableX - 8 + i % 3 * (cardW + gap), y = PanelY + 118 + i / 3 * (cardH + 4);
-            var card = new Panel { MouseFilter = Control.MouseFilterEnum.Pass }.Place(x, y, cardW, cardH);
-            card.AddThemeStyleboxOverride("panel", UiKit.PanelBox(4));
-            if (shown) card.AddChild(UiKit.MakeFrame(Palette.Of(Rarity.Mythic)));
-            _page.AddChild(card);
-            if (!found)
-            {
-                card.AddChild(UiKit.MakeLabel("?", 32, Palette.Muted, HorizontalAlignment.Center).Place(0, 44, cardW, 40));
-                card.TooltipText = "Not heard yet.";
-                continue;
-            }
-            card.TooltipText = $"{song.Name}, from {song.From}. {song.Story}";
-            card.AddChild(UiKit.MakeItemIcon(Heartsongs.Make(song, Rarity.Common), new Vector2(32, 40), 48));
-            // Who gave it is in the tooltip with its story: the card has room for what it does.
-            card.AddChild(UiKit.MakeLabel(song.Name, 16, Palette.Of(Rarity.Mythic)).Place(64, 6, cardW - 72, 20));
-            card.AddChild(UiKit.MakeLabel(song.Effect, 16, Palette.Text).Wrapped().Place(64, 30, cardW - 72, 92));
-            if (shown) card.AddChild(UiKit.MakeLabel("singing", 16, Palette.Gold, HorizontalAlignment.Right).Place(cardW - 100, 6, 92, 20));
-        }
-    }
-
-    /// <summary>
-    /// A grid: one row per kind, one column per quality, then the fake. Found things show as they came out of the chest;
-    /// the rest are "?". A star means you've found one enchanted too.
-    /// </summary>
-    void BuildCollection()
-    {
-        const float cell = 64, gridX = TableX + 140, gridY = PanelY + 92, step = cell + 76;
-        string[] columns = { "Common", "Uncommon", "Rare", "Epic", "Legendary", "Fake" };
-        for (int c = 0; c < columns.Length; c++)
-            _page.AddChild(UiKit.MakeLabel(columns[c], 16, c < 5 ? Palette.Of((Rarity)c) : Palette.Muted, HorizontalAlignment.Center)
-                .Place(gridX + c * step - 38, gridY - 26, cell + 66, 20));
-        var entries = Collection.Entries.ToList();
-        int row = 0;
-        foreach (var kind in Categories.Kinds)
-        {
-            float y = gridY + row * cell;
-            _page.AddChild(UiKit.MakeKindIcon(kind.Category, new Vector2(TableX + 16, y + cell / 2 - 6)));
-            _page.AddChild(UiKit.MakeLabel(kind.Name, 16, Palette.Text).Place(TableX + 40, y + cell / 2 - 16, 100, 20));
-            foreach (var entry in entries.Where(e => e.Category == kind.Category))
-            {
-                int column = entry.Fake ? 5 : (int)entry.Quality;
-                float x = gridX + column * step;
-                bool found = _state.InJournal(entry.Entry);
-                bool enchanted = _state.InJournalEnchanted(entry.Entry);
-                var slot = UiKit.MakePanel(found ? Palette.Of(entry.Rarity) : Palette.PanelBorder).Place(x, y, cell - 10, cell - 10);
-                slot.TooltipText = !found ? "Not found yet"
-                    : $"{entry.Entry}: {entry.Value}g" + (enchanted ? $" (found enchanted too: {entry.Value * Categories.MagicMultiplier}g)" : "");
-                slot.MouseFilter = Control.MouseFilterEnum.Pass;
-                _page.AddChild(slot);
-                if (found)
-                {
-                    slot.AddChild(UiKit.MakeItemIcon(entry, new Vector2((cell - 10) / 2, (cell - 10) / 2), 48));
-                    if (enchanted)
-                        slot.AddChild(UiKit.MakeLabel("*", 24, Palette.Magic, outline: 4).Place(cell - 26, -8, 24, 30));
-                }
-                else
-                {
-                    slot.AddChild(UiKit.MakeLabel("?", 24, Palette.Muted, HorizontalAlignment.Center).Place(0, 16, cell - 10, 30));
-                }
-            }
-            row++;
-        }
-        _page.AddChild(UiKit.MakeLabel($"Found {_state.JournalFound} of {Collection.Size}, in every run so far ({_state.Found.Count} this run). " +
-                                       "A star: found enchanted too. Hover one for its name and price.", 16, Palette.Muted).Place(TableX, PanelY + PanelH - 34, PanelW - 48, 20));
-    }
-
-    /// <summary>
-    /// Every curio, a cell each, in the order of the ways of trading they're for: one you've seen (Nim's laid it out, or
-    /// you've had it) shows its picture in its rarity's colour; one Nim carries that you haven't met yet is a question
-    /// mark; one he keeps back is locked, and says what opens it (a legendary one, with how far along Bram's kin are).
-    /// Hover one for the whole story.
-    /// </summary>
-    void BuildCurios()
-    {
-        const int columns = 14;
-        const float cellW = 76, cellH = 66, gap = 4, gridY = PanelY + 60;
-        var profile = Main.Instance.Profile;
-        var detail = UiKit.MakeLabel("", 16, Palette.Text).Wrapped();
-        detail.Place(TableX, gridY + 6 * (cellH + gap) + 4, PanelW - 48, 44);
-        int seen = Curios.All.Count(c => _state.SawCurio(c.Key)), open = Curios.All.Count(c => _state.CurioOpen(c.Key));
-        string summary = $"Seen {seen} of {Curios.All.Length}; Nim carries {open} of them this run. Hover one for what it does, or what opens it.";
-        for (int i = 0; i < Curios.All.Length; i++)
-        {
-            var curio = Curios.All[i];
-            float x = TableX - 8 + i % columns * (cellW + gap), y = gridY + i / columns * (cellH + gap);
-            bool saw = _state.SawCurio(curio.Key), carried = _state.CurioOpen(curio.Key);
-            var cell = UiKit.MakePanel(saw ? Palette.Of(curio.Rarity) : Palette.PanelBorder).Place(x, y, cellW, cellH);
-            cell.MouseFilter = Control.MouseFilterEnum.Stop;
-            _page.AddChild(cell);
-            string text;
-            if (saw)
-            {
-                cell.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(cellW / 2, cellH / 2)));
-                if (_state.HasCurio(curio.Key)) cell.AddChild(UiKit.MakeLabel("*", 24, Palette.Gold, outline: 4).Place(cellW - 20, -6, 20, 30));
-                text = $"{curio.Name} ({Curios.RarityName(curio.Rarity)}; {Curios.Tags(curio)}{(_state.HasCurio(curio.Key) ? "; yours" : "")}): {curio.Blurb}";
-            }
-            else if (carried)
-            {
-                cell.AddChild(UiKit.MakeLabel("?", 24, Palette.Muted, HorizontalAlignment.Center).Place(0, 18, cellW, 30));
-                text = $"A {Curios.RarityName(curio.Rarity)} curio Nim carries, for {Curios.Tags(curio)}. You haven't seen it yet.";
-            }
-            else
-            {
-                var icon = UiKit.MakeCurioIcon(curio, new Vector2(cellW / 2, cellH / 2));
-                icon.Modulate = new Color(0.08f, 0.07f, 0.1f, 0.9f);
-                cell.AddChild(icon);
-                string progress = curio.Unlock == CurioUnlock.Feat && Curios.Feats.TryGetValue(curio.Key, out var feat)
-                    ? $" So far: {profile.Done(feat.Feat) + Curios.Progress(_state, feat.Feat)} of {feat.Needed}."
-                    : "";
-                text = $"Locked: a {Curios.RarityName(curio.Rarity)} curio for {Curios.Tags(curio)}. Nim brings it {Curios.UnlockText(curio)}.{progress}";
-            }
-            cell.MouseEntered += () => detail.Text = text;
-            cell.MouseExited += () => detail.Text = summary;
-        }
-        detail.Text = summary;
-        _page.AddChild(detail);
     }
 
     void BuildSounds()
@@ -459,25 +334,26 @@ public partial class LedgerView : Node2D
     }
 
     /// <summary>
-    /// Three weeks, a row each, a day to a box: today framed in gold and the days gone by faded. Each day's business
-    /// (this week's and next week's are planned): a story morning, something on in town, Nim's curios, and the Guild's
-    /// night with what it'll want. Hover a day for the whole story; until then, the next thing coming is told below.
+    /// The Guild's debt across the top (once Mister Vane has told of it): what's left, what's next and when, and the five
+    /// weeks of it, paid or to come. Under it, three weeks, a row each, a day to a box: today framed in gold and the days
+    /// gone by faded. Each day's business (this week's and next week's are planned): a story morning, something on in
+    /// town, Nim's curios, and the Guild's night with what it'll want. Hover a day for the whole story; until then, the
+    /// next thing coming is told below.
     /// </summary>
     void BuildCalendar()
     {
         int today = _state.Day;
-        string due = _state.DebtCleared ? $"Bram's debt is cleared; the Guild still comes for {_state.NextDue}g on day {today + _state.DaysToNextDue}."
-            : _state.DuesTonight && !_state.PaidThisWeek ? $"The Guild comes tonight for {_state.DueNow}g."
-            : $"The Guild comes next for {_state.NextDue}g at the end of day {today + _state.DaysToNextDue}.";
         // The Guild's nights show once Vane has introduced them (the second evening).
         bool guild = _state.GuildIntroduced;
-        _page.AddChild(UiKit.MakeLabel($"Today is day {today}: week {_state.Week}, day {_state.DayOfWeek} of {Guild.DaysPerWeek}.{(guild ? $" {due}" : "")}", 16, Palette.Muted)
+        _page.AddChild(UiKit.MakeLabel($"Today is day {today}: week {_state.Week}, day {_state.DayOfWeek} of {Guild.DaysPerWeek}.", 16, Palette.Muted)
             .Place(TableX, PanelY + 60, PanelW - 48, 20));
+        if (guild) BuildDebt(PanelY + 86);
 
         // Five days to a week: a story morning or Nim's, two days with something on, and the Guild's night.
-        const float cellX = 176, cellW = 200, gap = 8, rowH = 108, gridY = PanelY + 90;
+        float gridY = guild ? PanelY + 168 : PanelY + 92;
+        const float cellX = 176, cellW = 200, gap = 8, rowH = 90;
         var detail = UiKit.MakeLabel("", 16, Palette.Text).Wrapped();
-        detail.Place(TableX, gridY + 3 * rowH + 8, PanelW - 48, 64);
+        detail.Place(TableX, gridY + 3 * rowH + 6, PanelW - 48, 64);
         string upcoming = null;
         for (int row = 0; row < 3; row++)
         {
@@ -540,6 +416,58 @@ public partial class LedgerView : Node2D
         _page.AddChild(detail);
     }
 
+    /// <summary>
+    /// The Guild's debt: a line on what's left and what's next, and a box for each week of it (paid in green, this week's
+    /// framed, tonight's in orange when the purse is short), then what comes after. The purse's due in the top bar opens
+    /// the notebook here, the box framed for a moment.
+    /// </summary>
+    void BuildDebt(float y)
+    {
+        const float boxW = 184, boxH = 44, gap = 8;
+        string when = When(_state.DaysToNextDue, _state.NextDueWeek);
+        string line = _state.DebtCleared
+            ? $"Bram's debt is cleared{(_state.ClearedDay > 0 ? $" (day {_state.ClearedDay})" : "")}. The Guild still comes, for its interest: {_state.NextDue}g {when}."
+            : $"{_state.DebtLeft}g of Bram's debt left. Next: {_state.NextDue}g {when}" +
+              (_state.Arrears > 0 ? $" ({_state.Arrears}g rolled over)." : ".") +
+              (_state.CanPayOff ? " You could pay it all off at the day's end." : " Pay it all off early from a day's end.");
+        var block = new Control { MouseFilter = Control.MouseFilterEnum.Ignore }.Place(TableX - 8, y, PanelW - 32, 76);
+        _page.AddChild(block);
+        block.AddChild(UiKit.MakeLabel("THE GUILD'S DEBT", 16, Palette.Gold).Place(8, 0, 200, 20));
+        block.AddChild(UiKit.MakeLabel(line, 16, Palette.Text).Place(184, 0, PanelW - 216, 20));
+        for (int week = 1; week <= Guild.Weeks + 1; week++)
+        {
+            float x = (week - 1) * (boxW + gap);
+            bool after = week > Guild.Weeks;
+            bool paid = !after && week <= _state.WeeksPaid, now = !after && !paid && week == _state.NextDueWeek;
+            bool short_ = now && _state.Gold < _state.NextDue;
+            var colour = paid ? Palette.Good : now ? (short_ ? Palette.Warn : Palette.Gold) : Palette.PanelBorder;
+            var box = UiKit.MakePanel(colour).Place(x, 26, boxW, boxH);
+            box.MouseFilter = Control.MouseFilterEnum.Pass;
+            block.AddChild(box);
+            string title = after ? "THEN" : $"WEEK {week}";
+            string amount = after ? "x2 a week" : paid ? $"{_state.DueFor(week)}g  paid" : $"{(now ? _state.NextDue : _state.DueFor(week))}g";
+            box.AddChild(UiKit.MakeLabel(title, 16, now ? colour : Palette.Muted).Place(10, 4, 80, 20));
+            box.AddChild(UiKit.MakeLabel(amount, 16, paid ? Palette.Good : now ? colour : after ? Palette.Muted : Palette.Text, HorizontalAlignment.Right)
+                .Place(64, 4, boxW - 74, 20));
+            if (now) box.AddChild(UiKit.MakeLabel(when, 16, colour, HorizontalAlignment.Right).Place(10, 22, boxW - 20, 20));
+            box.TooltipText = after ? "Once Bram's debt is paid, the Guild keeps coming for interest: each week twice the last."
+                : paid ? $"Week {week}: paid." : $"Week {week}: Mister Vane comes for {(now ? _state.NextDue : _state.DueFor(week))}g on the fifth evening.";
+            if (now && _focusDebt)
+            {
+                var pulse = box.CreateTween().SetLoops(4);
+                pulse.TweenProperty(box, "self_modulate", new Color(1.5f, 1.4f, 1.1f), 0.35f);
+                pulse.TweenProperty(box, "self_modulate", Colors.White, 0.35f);
+            }
+        }
+    }
+
+    /// <summary>When the Guild comes next, as the top bar says it.</summary>
+    string When(int days, int week) =>
+        !_state.PaidThisWeek && days == 0 ? "tonight!"
+        : week > _state.Week + 1 ? $"in week {week}"
+        : _state.PaidThisWeek ? "next week"
+        : days == 1 ? "tomorrow night" : $"in {days + 1} days";
+
     static string Capital(string text) => char.ToUpperInvariant(text[0]) + text[1..];
 
     void ShowRegulars(int spread)
@@ -550,7 +478,7 @@ public partial class LedgerView : Node2D
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.L or Key.Escape })
+        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.N or Key.L or Key.Escape })
         {
             GetViewport().SetInputAsHandled();
             Close();

@@ -25,6 +25,7 @@ public partial class PeddlerPhase : Phase
     MentorView _mentor;
     Node2D _board;
     Control _confirm;
+    NotebookView _notebook;
     bool _leaving;
 
     public MentorView Mentor => _mentor;
@@ -47,6 +48,15 @@ public partial class PeddlerPhase : Phase
         _mentor.Teach(State, "peddler");
         Game.Hud.SetGold(State.Gold, animate: false);
         Game.Moment("22_peddler", 0.8);
+    }
+
+    /// <summary>The top bar's due was clicked: the notebook at the Guild's debt, to weigh a curio against it.</summary>
+    public override bool ShowDebt()
+    {
+        if (_notebook != null || _confirm != null || _leaving) return false;
+        _notebook = Add(new NotebookView(State, NotebookView.CalendarPage, focusDebt: true) { ZIndex = 30 });
+        _notebook.Closed += () => _notebook = null;
+        return true;
     }
 
     void Build()

@@ -28,7 +28,7 @@ public partial class Autoplay : Node
 
     const double ShakeSeconds = 1.6;
 
-    bool _ledgerShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked;
+    bool _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked;
 
     static GameState State => Main.Instance.State;
 
@@ -213,14 +213,14 @@ public partial class Autoplay : Node
             await Wait(0.3);
             if (!IsInstanceValid(counter)) return;
         }
-        // A newcomer: click them for their page in the ledger, framed (Mother Bramble's lesson asks for it).
+        // A newcomer: click them for their page in the notebook, framed (Mother Bramble's lesson asks for it).
         if (visit.Lesson != null && !visit.LookedUp)
         {
-            counter.OpenLedger();
+            counter.OpenNotebook();
             Main.Instance.Moment($"02_lookup_{visit.Seller.Key}", 0.4);
             await Wait(1.2);
             if (!IsInstanceValid(counter)) return;
-            counter.CloseLedger();
+            counter.CloseNotebook();
             await Wait(0.4);
             if (!IsInstanceValid(counter)) return;
             await ReadTips(counter.Mentor);
@@ -257,49 +257,44 @@ public partial class Autoplay : Node
             if (!IsInstanceValid(counter)) return;
         }
 
-        if (!_ledgerShown && !hurried)
+        if (!_notebookShown && !hurried)
         {
-            _ledgerShown = true;
-            counter.OpenLedger();
+            _notebookShown = true;
+            counter.OpenNotebook();
             await Wait(2.0);
-            foreach (int page in new[] { 1, 4, 6, 3 })
+            foreach (int page in new[] { NotebookView.SoundsPage, NotebookView.CalendarPage, NotebookView.SynergiesPage })
             {
                 if (!IsInstanceValid(counter)) break;
-                counter.LedgerPage(page);
-                Main.Instance.Moment($"02_ledger_{page}", 0.3);
+                counter.NotebookPage(page);
+                Main.Instance.Moment($"02_notebook_{page}", 0.3);
                 await Wait(1.5);
             }
             if (!IsInstanceValid(counter)) return;
-            counter.CloseLedger();
+            counter.CloseNotebook();
             await Wait(0.5);
         }
-        // Once a Heartsong's been found, a look at the songbook.
+        // Once a Heartsong's been found, a look at the songbook (the collection's, as the pause menu opens it).
         else if (!_songsShown && !hurried && State.Songbook.Count > 0)
         {
             _songsShown = true;
-            counter.OpenLedger();
-            await Wait(1.0);
-            if (!IsInstanceValid(counter)) return;
-            counter.LedgerPage(5);
-            Main.Instance.Moment("02_songs", 0.3);
-            await Wait(1.5);
-            if (!IsInstanceValid(counter)) return;
-            counter.CloseLedger();
-            await Wait(0.5);
+            if (!await ShowCollection(counter, CollectionView.SongsPage, "02_songs")) return;
         }
-        // Later, once there's something in it, a look at the collection too.
+        // Later, once there's something in it, a look at the collection's finds and curios too.
         else if (!_collectionShown && !hurried && State.Found.Count >= 10)
         {
             _collectionShown = true;
-            counter.OpenLedger();
-            await Wait(1.0);
+            if (!await ShowCollection(counter, CollectionView.FindsPage, "02_collection")) return;
+        }
+
+        // Once the Guild's due is up top: clicked, it opens the notebook at the debt.
+        if (!_debtShown && !hurried && State.GuildIntroduced && IsInstanceValid(counter) && Main.Instance.ShowDebt())
+        {
+            _debtShown = true;
+            await Wait(1.6);
             if (!IsInstanceValid(counter)) return;
-            counter.LedgerPage(2);
-            Main.Instance.Moment("02_collection", 0.3);
-            await Wait(1.5);
-            if (!IsInstanceValid(counter)) return;
-            counter.CloseLedger();
+            counter.CloseNotebook();
             await Wait(0.5);
+            if (!IsInstanceValid(counter)) return;
         }
 
         // The slip, corrected from what it heard (how many of each, and which glowed), one row at a time.
@@ -520,6 +515,30 @@ public partial class Autoplay : Node
         await ReadTips(opening.Mentor);
         if (QuitAtEnd) Main.Instance.QuitGame();
         else if (IsInstanceValid(opening)) opening.Next();
+    }
+
+    /// <summary>
+    /// The collection over the counter, as the pause menu shows it (opened here unpaused, so the bot's clock keeps
+    /// running), for a screenshot of a page; the finds come with the curios. Returns false if the counter's gone.
+    /// </summary>
+    async System.Threading.Tasks.Task<bool> ShowCollection(CounterPhase counter, int page, string moment)
+    {
+        var view = new CollectionView(new Collected(Main.Instance.Profile, State), page);
+        counter.AddChild(view);
+        await Wait(1.0);
+        if (!IsInstanceValid(counter)) return false;
+        Main.Instance.Moment(moment, 0.3);
+        await Wait(1.2);
+        if (page == CollectionView.FindsPage && IsInstanceValid(view))
+        {
+            view.ShowPage(CollectionView.CuriosPage);
+            Main.Instance.Moment($"{moment}_curios", 0.3);
+            await Wait(1.2);
+        }
+        if (!IsInstanceValid(counter)) return false;
+        view.Close();
+        await Wait(0.5);
+        return IsInstanceValid(counter);
     }
 
     SignalAwaiter Wait(double seconds) => ToSignal(GetTree().CreateTimer(seconds), SceneTreeTimer.SignalName.Timeout);

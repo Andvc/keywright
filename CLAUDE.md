@@ -58,9 +58,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine.
-   `--shell-demo` walks the title screen, the character screen (with a made-up profile), a new game (Hesk, at
-   challenge level 8: the most boons and banes the character screen and the pause menu ever list), the pause menu and
-   the settings (with `--gm`, the GM panel too: gold, the journal unlocked, a skip refused mid-scene).
+   `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the
+   character screen, a new game (Hesk, at challenge level 8: the most boons and banes the character screen and the
+   pause menu ever list), the pause menu and its collection, and the settings (with `--gm`, the GM panel too: gold, the
+   notebook and the collection filled, a skip refused mid-scene). A bot run shows the notebook's pages, clicks the
+   Guild's due in the top bar once it's up (the notebook at the debt), and opens the collection over the counter.
    Keep screenshot folders named `shots*` (git- and export-ignored).
 4. Shaking or physics changes: `godot --headless --path . -- --shake-test` should hear everything the rules say is
    audible at each strength (and with the magnet, the lodestone in game), with no leaks.
@@ -111,7 +113,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   kept in the profile (`Profile.Taught`, `GameState.Taught`) the moment he says it (`Main.NoteTaught`; a lesson once
   its seller is at the counter), and merged into a continued run (`GameState.Remember`), so nothing is taught twice on
   a profile; the scripted first day (`GameState.FirstDayScripted`) teaches three customers, and Mags (passing) opens
-  the second. Clicking whoever's at the counter (or the ledger button, or L) opens the ledger on their page, framed
+  the second. Clicking whoever's at the counter (or the notebook button, or N) opens the notebook on their page, framed
   (`Visit.LookedUp`); Mother Bramble's lesson teaches it (the `lookup` tip for the others).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
   run (v22), in any seller's chest (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
@@ -188,8 +190,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   player's solution: each is a deduction (a kind named that you can't hear), never a guess. A new puzzle seller needs
   its clue there, a `Visit.WardHint` line, a lesson and a portrait.
 - The run (`Run.cs`, a partial of `GameState`): five weeks of five days (v21; 0.20 had eight of three); every day has a
-  role (`DayRole`, `WeekPlan.Role`), planned a week ahead (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the ledger's
-  calendar (`LedgerView.BuildCalendar`): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 300, 4,000 and
+  role (`DayRole`, `WeekPlan.Role`), planned a week ahead (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the notebook's
+  calendar (`NotebookView.BuildCalendar`, with the Guild's debt across its top): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 300, 4,000 and
   45,000g, then endless x2; Vane introduces it on the second evening, `GameState.IntroDay`); a story week's first day
   is the story's (`Story.TellsOn`: weeks 1, 2 and 4, and the week after the debt; `GameState.StoryToday`); Nim comes on
   two days that aren't next to each other (once on a story week; the third day in the first; `GameState.PeddlerToday`);
@@ -243,16 +245,20 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - Each shop tier has its own picture (`art/generated/backgrounds/shop{tier}.png`, built into `assets/backgrounds/` by
   `tools/import_art.py`, shown with `UiKit.MakeShop`); keep the counter top at y 476 and the shelf at y 196. Story
   scenes have their own (`scene_{bram,guild,keyhold,vault}`, `ScenePhase`'s backdrop, `Story.Setting` for a week's).
-- The ledger's journal is kept across runs (v21): regulars met, finds (and enchanted ones) and curios seen are in the
-  profile (`Profile.Met`, `Found`, `FoundEnchanted`, `CuriosSeen`) and merged into a run's `GameState.Known` by
-  `GameState.Remember` at the start and on continuing; the run's own `Found` still scores and pays a catalogue. The
-  ledger has a Curios page (`LedgerView.BuildCurios`). What any run has learned stays in the ledger (v22): its sounds
-  and regulars go as far as the grandest shop any run reached (`GameState.JournalTier`, `Profile.BestTier`), and the
-  Regulars page has a Friends & foes spread (Uncle Bram always; Nim, Mister Vane, the Hooded Woman and Mara as they're
-  met, `GameState.People`/`Profile.People`). The Regulars page is a list with the open page under it; it opens on
-  whoever's at the counter, framed. GM mode (`Settings.Gm`, `--gm`) puts a panel beside the pause
-  menu: +99,999 gold (`Main.GmGold`), skip the day (`GameState.SkipRestOfDay`), unlock the journal (`KnowAll` on the run
-  and the profile).
+- What Bram's kin know is kept in two books (0.25: the ledger had grown too many pages). The **notebook**
+  (`NotebookView`; N, the button on the slip, or clicking whoever's at the counter) is for trading: Sounds, Regulars,
+  Calendar (with the Guild's debt: what's paid, what's left, what's next; clicking the due in the top bar opens it there,
+  `Main.ShowDebt`, wherever a screen can, `Phase.ShowDebt`) and Synergies. The **collection** (`CollectionView`, from the
+  title screen and the pause menu) is what's been gathered: Finds, Curios and Heartsongs, read from the profile and the
+  run being played (`Core.Collected`). Both are kept across runs (v21): regulars met, finds (and enchanted ones) and
+  curios seen are in the profile (`Profile.Met`, `Found`, `FoundEnchanted`, `CuriosSeen`) and merged into a run's
+  `GameState.Known` by `GameState.Remember` at the start and on continuing; the run's own `Found` still scores and pays a
+  catalogue. What any run has learned stays in the notebook (v22): its sounds and regulars go as far as the grandest
+  shop any run reached (`GameState.JournalTier`, `Profile.BestTier`), and the Regulars page has a Friends & foes spread
+  (Uncle Bram always; Nim, Mister Vane, the Hooded Woman and Mara as they're met, `GameState.People`/`Profile.People`).
+  The Regulars page is a list with the open page under it; it opens on whoever's at the counter, framed. GM mode
+  (`Settings.Gm`, `--gm`) puts a panel beside the pause menu: +99,999 gold (`Main.GmGold`), skip the day
+  (`GameState.SkipRestOfDay`), fill the notebook and the collection (`KnowAll` on the run and the profile).
 - The game opens on `TitlePhase`; `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
   for the bot or debugging flags) and Esc opens `PauseMenu`. A day: `Main.StartDay` (the week's scene, Nim), the
   counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening, `DuesPhase` on the fifth). `Settings` (user://settings.cfg) scales screen shake and
@@ -277,7 +283,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   bubble (about 170 characters with the price filled in).
 - `ShakeBox` gates sounds with the same rules as `Chest.Audible`: change both together (the shake test checks them).
 - UI is built in code with `UiKit` and `Painter` (absolute positions on a 1280x720 canvas), not in .tscn files.
-- Buttons use `FocusMode.None`: Space is reserved for lockpicking and holding the chest open. L opens the ledger.
+- Buttons use `FocusMode.None`: Space is reserved for lockpicking and holding the chest open. N opens the notebook (L
+  too, as it did when it was the ledger).
 - `Hearing.Read` and `Strategy` model a careful player (what they hear, when they drop or use the magnet, what they
   offer and keep) for the sim and the bot. Update them when a rule, tool or trade changes.
 - Phases are swapped by `Main.SwitchTo`; check `Alive` after every `await` in a phase. Quit through `Main.QuitGame`
@@ -289,15 +296,24 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 ## Art direction (pixel art)
 
 - The art is in `art/generated/`, made to the brief in `art/` (`README.md` first). Round 1 (0.23) came out too busy to
-  look at for hours; round 2 (0.25) redraws most of it quieter (Codex, on a branch `art/quiet`, its anchors approved by
-  the owner before the rest; `ART_DIRECTION.md`'s "Why round 2" has the measurements and the causes). The style is
-  quiet first: a few big, flat shapes, no texture, at most two details on a thing or a face, backgrounds muted with
-  one soft light and plain behind the chest and on the counter front (`art/reference/quiet/`), the 74-colour palette
-  in `art/palette/`, lit from the upper left, a 1px `#1a1420` outline. `manifest.json` has every asset with its spec,
-  prompt and quiet limits (`calm`: lone specks, edges and brightness step, measured by `artlib.calm_metrics`;
-  generated by `art/tools/build_manifest.py` from `art/tools/assets_*.py`: edit those, not the JSON), and
-  `art/tools/pixelize.py`/`validate.py` turn a generated image into a finished asset and check it (a busy one fails:
-  regenerate it simpler, never filter it; `art/generated/DELIVERY.md` says how each batch was made). The chest isn't
+  look at for hours; round 2 (0.25) redraws it flat and quiet and builds the shop scene from layers (Codex, on a branch
+  `art/round2`, its anchors approved by the owner before the rest; `ART_DIRECTION.md`'s "Why round 2" has the
+  measurements and the causes). The generator never draws pixel art: it draws flat-colour illustrations on magenta, and
+  `art/tools/pixelize.py --mode flat` makes the pixel art an area at a time, so a model's texture never gets in. The
+  style: flat-colour storybook pixel art, a few big flat shapes, no texture or line work, at most two details on a
+  figure or thing, the 74-colour palette in `art/palette/`, lit from the upper left in neutral daylight, a 1px
+  `#1a1420` outline around sprites (the pipeline adds it). The shop scene is layers (`art/tools/scene.py` has the
+  layout, `art/reference/scene/` shows it): a sky per time of day (morning, midday, evening, night; the rest tinted to
+  match), and per shop tier the place across the counter, the shop's frame (the top bar sits on its band), the display
+  shelf, the counter, the appraisal sheet and lanterns; full-length figures stand behind the counter, and props for the
+  tools you've bought beside the chest. Until those layers and figures are delivered and put in the game
+  (`art/README.md`'s last section says how), the game shows round 1's shop pictures and portraits. `manifest.json` has
+  every asset with its spec, prompt and limits (`calm`: lone specks, edges and brightness step, measured by
+  `artlib.calm_metrics`; `value`, a layer's brightness; the layers' lines), generated by `art/tools/build_manifest.py`
+  from `art/tools/assets_*.py` (edit those, not the JSON), and `art/tools/pixelize.py`/`validate.py` turn a generated
+  image into a finished asset and check it (a busy one fails: regenerate it simpler, never filter it; `validate.py
+  --sheets` stacks whatever's delivered into counter mock-ups at every hour; `art/generated/DELIVERY.md` says how each
+  batch was made). The chest isn't
   generated: `tools/custom_art.py` draws it (`chest`, `chest_lock`: one silhouette for every finish), the bar for how
   simple a sprite should be. `tools/import_art.py` builds `assets/` from it (needs Pillow): it copies each picture at
   its art size, scales it by a whole number where a slot wants it pre-scaled (backgrounds and scenes drawn at 320x180,
@@ -308,12 +324,14 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   from `art/generated/`). `art/.gdignore` keeps Godot from importing the folder. Sounds and the font are Kenney's CC0
   packs (only GitHub is reachable from cloud sessions, so new sources must be GitHub-hosted); credit them in
   `CREDITS.md`.
-- Keep pixels square: integer scales only, nearest filtering (project default). Art sizes and how they're shown: shops
-  and scenes 320x180 (round 2; round 1's are 640x360), which the importer doubles to 640x360, shown at 2x; the chest
-  48 wide (lid 21, body 15, open 30), built at 2x and shown at 2x (`ChestView`), with its lock maker's hasp and plate
+- Keep pixels square: integer scales only, nearest filtering (project default). Art sizes and how they're shown: the
+  world (round 2's scene layers, figures 96x160, props) on a 320x180 grid at 4x, the appraisal sheet 216x320 at 2x;
+  story scenes 320x180, which the importer doubles to 640x360, shown at 2x (round 1's shop pictures, 640x360 at 2x,
+  until the layers replace them); the chest 48 wide (lid 21, body 15, open 30), built at 2x and shown at 2x
+  (`ChestView`), with its lock maker's hasp and plate
   laid over it (`ChestView.Lock`) and its own finish for the Crown Chest (`crown`); portraits 76x76 at
-  2x at the counter, 3x in scenes, 1x in the ledger and Bram's tips, and their 38x38 face (`sprites/sellers/faces/`)
-  in the queue, the ledger's rows and, at 3x, the character cards; things 32x32 (trimmed) at 2x on the table and the
+  2x at the counter, 3x in scenes, 1x in the notebook and Bram's tips, and their 38x38 face (`sprites/sellers/faces/`)
+  in the queue, the notebook's rows and, at 3x, the character cards; things 32x32 (trimmed) at 2x on the table and the
   shelf, 1x in small slots; curios 28x28 at 2x; upgrade icons 24x24 at 2x (1x on the slip); kind icons 16x16 at 2x;
   UI frames 12x12 at 2x (`UiKit.Px`, 4-pixel margins); the lock faces 160x160 at 2x under the dial (its ring at
   `LockpickPhase.Radius`); effects at 2-4x (`Fx`); the logo 320x72 at 2x; the window's and the .exe's icons

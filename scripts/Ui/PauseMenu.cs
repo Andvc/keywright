@@ -4,15 +4,16 @@ using Godot;
 namespace Keywright.Ui;
 
 /// <summary>
-/// Esc (or the Menu button) during a day: the game stops while it's up. Resume, the settings, back to the title
-/// screen, or quit. The shop is saved at the start of each day, so leaving mid-day starts that day over. In GM mode
+/// Esc (or the Menu button) during a day: the game stops while it's up. Resume, the collection (what Bram's kin have
+/// gathered, this run and every one before), the settings, back to the title screen, or quit. The shop is saved at the start of each day, so leaving mid-day starts that day over. In GM mode
 /// (Settings), a panel beside it adds gold, skips the day, or fills the journal.
 /// </summary>
 public partial class PauseMenu : CanvasLayer
 {
-    const float W = 420, H = 404, X = (1280 - W) / 2, Y = (720 - H) / 2;
+    const float W = 420, H = 462, X = (1280 - W) / 2, Y = (720 - H) / 2;
 
     SettingsView _settings;
+    CollectionView _collection;
 
     public override void _Ready()
     {
@@ -26,11 +27,12 @@ public partial class PauseMenu : CanvasLayer
         root.AddChild(UiKit.MakeLabel("PAUSED", 32, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(X, Y + 18, W, 40));
         float y = Y + 80;
         root.AddChild(UiKit.MakeButton("Resume", Palette.Gold, 24, Resume).Place(X + 60, y, W - 120, 52));
-        root.AddChild(UiKit.MakeButton("Settings", Palette.Text, 16, OpenSettings).Place(X + 60, y + 66, W - 120, 44));
-        root.AddChild(UiKit.MakeButton("Quit to title", Palette.Text, 16, () => Leave(toTitle: true)).Place(X + 60, y + 124, W - 120, 44));
-        root.AddChild(UiKit.MakeButton("Quit game", Palette.Bad, 16, () => Leave(toTitle: false)).Place(X + 60, y + 182, W - 120, 44));
+        root.AddChild(UiKit.MakeButton("Collection", Palette.Text, 16, () => OpenCollection()).Place(X + 60, y + 66, W - 120, 44));
+        root.AddChild(UiKit.MakeButton("Settings", Palette.Text, 16, OpenSettings).Place(X + 60, y + 124, W - 120, 44));
+        root.AddChild(UiKit.MakeButton("Quit to title", Palette.Text, 16, () => Leave(toTitle: true)).Place(X + 60, y + 182, W - 120, 44));
+        root.AddChild(UiKit.MakeButton("Quit game", Palette.Bad, 16, () => Leave(toTitle: false)).Place(X + 60, y + 240, W - 120, 44));
         root.AddChild(UiKit.MakeLabel("The shop is saved at the start of each day: leave now and today starts over.", 16, Palette.Muted,
-            HorizontalAlignment.Center).Wrapped().Place(X + 24, y + 238, W - 48, 44));
+            HorizontalAlignment.Center).Wrapped().Place(X + 24, y + 296, W - 48, 44));
         if (Main.Instance.State is { Challenge: > 0 } state) BuildTerms(root, state);
         if (Settings.Gm && Main.Instance.State != null) BuildGm(root);
         Main.Instance.Sfx.PlayGroup("book", 1.2f, -8);
@@ -82,11 +84,21 @@ public partial class PauseMenu : CanvasLayer
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape } && _settings == null)
+        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape } && _settings == null && _collection == null)
         {
             GetViewport().SetInputAsHandled();
             Resume();
         }
+    }
+
+    /// <summary>The collection, over the pause menu: every run's finds, curios and Heartsongs, with this run's.</summary>
+    public CollectionView OpenCollection(int page = CollectionView.FindsPage)
+    {
+        if (_collection != null) return _collection;
+        _collection = new CollectionView(new Core.Collected(Main.Instance.Profile, Main.Instance.State), page);
+        _collection.Closed += () => _collection = null;
+        AddChild(_collection);
+        return _collection;
     }
 
     void OpenSettings()
