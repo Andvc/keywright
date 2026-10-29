@@ -163,3 +163,80 @@ Uploaded filenames and text contain no Chinese. PNG metadata is checked, and
 visible lettering was reviewed separately: branding reads KEYWRIGHT; object
 scribbles are nonlinguistic marks. All repository changes stay in
 `art/generated/`. Game-side integration remains outside this art brief.
+
+## Round 2
+
+### Batch 9: anchors - awaiting owner approval
+
+Based on `prototype/0.25` at `35ab8bfd3d35933b1e66b5851098e9e5deb5d329`,
+on branch `art/round2`. All 13 batch-9 anchors are delivered. Batches 10-15
+await the owner's review of these anchors.
+
+Start with [`_review/counter_stall.png`](_review/counter_stall.png) and
+[`_review/counter_stall_times.png`](_review/counter_stall_times.png). The latter
+shows morning, midday, evening and night, in that order. Only the midday sky
+is a batch-9 deliverable; the other three skies are the brief's placeholders.
+All seven stall layers and Hob are the new anchors in these mock-ups. The chest
+is the existing code-drawn chest. The marked rectangles show interface areas.
+[`_review/round2_batch9_sprites.png`](_review/round2_batch9_sprites.png) shows
+the six small anchors at 1x, 2x and 4x without the inherited round-1 assets.
+
+Delivered: `sky.midday`, `place.stall`, `frame.stall`, `shelf.stall`,
+`counter.stall`, `sheet.stall`, `prop.lantern_stall`, `figure.hob`,
+`item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`,
+`icon.upgrade.lamp` and `icon.kind.coins`. Nothing in batch 9 is missing.
+
+The built-in image generator made two candidates per asset and a third for
+the frame (27 generations). The manifest prompt was retained verbatim, with
+request metadata and the corrections below appended. Candidate B was selected
+for every asset except the frame (C). References used for the revision calls
+were the new candidate, the flat-to-pixels process example, the palette and/or
+the code-drawn chest as a simplicity guide; no round-1 art was used as a style
+reference. The tool supplies no independently verifiable model identifier.
+Requested and actual image sizes, exact complete prompts, reference lists,
+candidate checks, source hashes and final hashes are recorded in
+[`_workflow/round2_batch9.json`](_workflow/round2_batch9.json).
+
+All selected images went through the supplied, unmodified `pixelize.py` in
+flat mode. The frame uses `--offset-y -60` (source crop starts at row 20) to
+keep the dark top band and move the scallops out of the open-view area. The
+only manual pixel repair is seven orange pixels in `icon.upgrade.lamp`, changed
+to its existing gold: the pixelizer adds the outline after capping colours,
+which had left nine colours against an eight-colour cap. Their coordinates and
+before/after colours are recorded. No extra blur, smoothing or posterization
+was applied. Small source WebP previews are under `_raw/round2_batch9_*`;
+full-resolution original PNGs and rejected candidates remain in the local
+production archive outside the checkout.
+
+Prompt corrections, beyond the original manifest prompt:
+
+| Asset | Correction and reason |
+|---|---|
+| `sky.midday` | B: three straight bands and two small plain clouds; remove tonal variation and gradients from A. |
+| `place.stall` | B: retain the crossroads landmarks; remove grass tufts, road patches, bushes, reflections and architectural detail. Use broad hill planes, round tree crowns and a simple mill and wheel. |
+| `frame.stall` | B: add a continuous plain dark top band, simplify the scallops and posts. C: make the band taller, scallops shallower and posts flush with the edges; A intruded into the open view and B had a top-band gap. |
+| `shelf.stall` | B: replace twisted rope detail with plain strips and remove wood texture and shading. |
+| `counter.stall` | B: remove diagonal light patches and irregular seams; retain wide flat planks and a straight light lip. |
+| `sheet.stall` | B: smaller corner nails, narrower plain wood rim and uniform unbleached paper, to leave the writing area quiet. |
+| `figure.hob` | B: simplify hat, folds, stubble and hands, relax both arms and use clear dot eyes; preserve the farmer's identity. |
+| `prop.lantern_stall` | B: broad cap, one plain yellow window, simple base and ring; remove bevels, roof tiers and reflections after A failed the speck and colour limits. |
+| `icon.upgrade.lamp` | B: fewer brass shapes and one lavender flame on a dark window; remove sparks, reflections and flame core after A failed quiet and colour limits. |
+| `icon.kind.coins` | B: three flat inks, broad tops/sides/separations; remove rim glints and facets after A exceeded the colour cap. |
+| `item.dwarf_gold_crowns` | B: flat hammer and anvil marks, plain rear coins, fewer highlights; retain the square hole and short stack. |
+| `heartsong.lullaby_box` | B: two flower shapes and a crescent, simple red ribbon and crank; remove leaves, gears, distressed edges and detailed bow after A failed quiet and colour limits. |
+| `curio.monocle` | B: flat violet lens, simple silver rim and a short solid curved chain; remove individual links, scratches and fragmented reflections after A failed the speck limit. |
+
+Validation: `python3 art/tools/validate.py --sheets` was run over the entire
+manifest. **All 13 anchors pass, with zero warnings.** The whole-manifest result
+is **38 OK, 164 failed, 65 missing (58 P1 missing), exit 1**. The failures are
+inherited round-1 assets assigned to later redo batches, and the missing files
+belong to later batches. Before this work the baseline was 25 OK, 169 failed
+and 73 missing. Every non-batch-9 asset's validation result is unchanged.
+`report.json` retains these failures and missing entries; this is an anchor
+delivery, and does not claim round 2 is complete.
+
+The counter composition at all four hours and the native/2x/4x small sprites
+were visually reviewed. Please judge the overall quietness, Hob's readability,
+the muted landscape, the plain writing sheet, and whether the awning and shelf
+feel comfortable around the chest. Morning/evening/night sky artwork will be
+made in batch 10 after approval. No game integration is included in this batch.

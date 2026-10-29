@@ -1,0 +1,1118 @@
+{
+  "round": 2,
+  "batch": 9,
+  "base_branch": "prototype/0.25",
+  "base_commit": "35ab8bfd3d35933b1e66b5851098e9e5deb5d329",
+  "branch": "art/round2",
+  "generator": "built-in image_gen",
+  "status": "awaiting owner approval",
+  "processing": "Unmodified art/tools/pixelize.py flat mode; frame C offset-y -60; seven explicitly listed icon pixels repaired after pixelizing.",
+  "raw_preview_note": "Small WebP review copies only. Full original PNGs remain in the local art-round2/raw archive. Requested generation sizes and actual sizes are both recorded.",
+  "assets": [
+    {
+      "id": "sky.midday",
+      "selected_candidate": "B",
+      "output": "art/generated/sky/midday.png",
+      "native_size": [
+        320,
+        180
+      ],
+      "sha256": "8884c10639defda9c69a6e7e2c4ec237a02e9455d7aed840dd738f6a2b1109bb",
+      "raw_png_sha256": "79473cce2742e3c2ca5934f5cabd5c6412559394a21cd8a7f967ab9a78a5fba6",
+      "raw_size": [
+        1672,
+        941
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_sky_midday_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 4,
+      "calm": {
+        "specks": 0.0,
+        "edges": 0.00929803392717723,
+        "busy": 0.6067040953935758
+      }
+    },
+    {
+      "id": "place.stall",
+      "selected_candidate": "B",
+      "output": "art/generated/place/stall.png",
+      "native_size": [
+        320,
+        180
+      ],
+      "sha256": "aab1ccf0539d587b84d050e82c43b72d930bec388a9544902ed88cabae79130e",
+      "raw_png_sha256": "2c5482b2a66dbf1f88a778b60cc2e1eb3f1ffa599fe2acba285cc3e8cc9b3b6e",
+      "raw_size": [
+        1672,
+        941
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_place_stall_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 6,
+      "calm": {
+        "specks": 0.00011111728429357187,
+        "edges": 0.027295493655301706,
+        "busy": 0.6028259440099573
+      }
+    },
+    {
+      "id": "frame.stall",
+      "selected_candidate": "C",
+      "output": "art/generated/frame/stall.png",
+      "native_size": [
+        320,
+        180
+      ],
+      "sha256": "48609bf327132e522c9fa06f978a80122ee50c249e6cd9c6466ea9144c187ba7",
+      "raw_png_sha256": "24d5ecfab0a685ec1c2e516d0b7757fb6bc9a2e478607dd5e32feda176b34f17",
+      "raw_size": [
+        1536,
+        1024
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_frame_stall_C.webp",
+      "offset_y": -60,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 6,
+      "calm": {
+        "specks": 0.0,
+        "edges": 0.01634918824379301,
+        "busy": 1.5997443443215018
+      }
+    },
+    {
+      "id": "shelf.stall",
+      "selected_candidate": "B",
+      "output": "art/generated/shelf/stall.png",
+      "native_size": [
+        136,
+        40
+      ],
+      "sha256": "45f3676c83475d2efbca7d43b59a7bb1bf854e57c1d22692a2affa7639f81f24",
+      "raw_png_sha256": "b1f7da1aff42e0ee14409b1278d5af188fb2109bf2db876a2506f941e5c65fee",
+      "raw_size": [
+        1536,
+        1024
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_shelf_stall_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 4,
+      "calm": {
+        "specks": 0.0,
+        "edges": 0.015509103169251517,
+        "busy": 0.8230546190155087
+      }
+    },
+    {
+      "id": "counter.stall",
+      "selected_candidate": "B",
+      "output": "art/generated/counter/stall.png",
+      "native_size": [
+        320,
+        61
+      ],
+      "sha256": "79bcc27b29e2a9ad7da8c534885160044b6097d4044a7826190491d5c1e0d614",
+      "raw_png_sha256": "95948d8c33935cabe3937c9ae4134f99f2522bc3ed1fc3fe9aab00b150ae68fd",
+      "raw_size": [
+        1536,
+        1024
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_counter_stall_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 4,
+      "calm": {
+        "specks": 5.329922183136126e-05,
+        "edges": 0.042372196947263574,
+        "busy": 2.359387460629377
+      }
+    },
+    {
+      "id": "sheet.stall",
+      "selected_candidate": "B",
+      "output": "art/generated/sheet/stall.png",
+      "native_size": [
+        216,
+        320
+      ],
+      "sha256": "24e43a8947552403385d92ba202d2238abf9173bc384bc9524bdaff796efd5c8",
+      "raw_png_sha256": "14e87e3825526b9fcb4a4aeefd1367b6f1c881ee18c585bc57f3beeb5c7ab30a",
+      "raw_size": [
+        1024,
+        1536
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_sheet_stall_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 3,
+      "calm": {
+        "specks": 0.0,
+        "edges": 0.008807128315581388,
+        "busy": 0.9913789868114552
+      }
+    },
+    {
+      "id": "prop.lantern_stall",
+      "selected_candidate": "B",
+      "output": "art/generated/props/lantern_stall.png",
+      "native_size": [
+        16,
+        24
+      ],
+      "sha256": "3e29a77d20a51413aa0cc789c18c506f793e83989b6c8769e9de259af3401200",
+      "raw_png_sha256": "81efc57f61943070872876be9ef662add4e4334630577414d4be35a98edd724c",
+      "raw_size": [
+        1254,
+        1254
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_prop_lantern_stall_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 9,
+      "calm": {
+        "specks": 0.023809523809523808,
+        "edges": 0.3586387434554974,
+        "busy": 27.390591623036627
+      }
+    },
+    {
+      "id": "figure.hob",
+      "selected_candidate": "B",
+      "output": "art/generated/figures/hob.png",
+      "native_size": [
+        96,
+        160
+      ],
+      "sha256": "3fe7bce0fd3a78595ab6c583ddcb8a38fe00f398c312427411a10eac803d141d",
+      "raw_png_sha256": "52ab0f1a1164f97819dbc7b07a05cb260ae9a3701226cd5bc047a90a6b56c2a5",
+      "raw_size": [
+        1024,
+        1536
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_figure_hob_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 11,
+      "calm": {
+        "specks": 0.002046663937781416,
+        "edges": 0.11912291798439806,
+        "busy": 6.6784304237824035
+      }
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "selected_candidate": "B",
+      "output": "art/generated/icons/upgrade_lamp.png",
+      "native_size": [
+        24,
+        24
+      ],
+      "sha256": "623e1556cda2247a3f5f55234e6e449bf867576d3a456fe88df2e79457ca161f",
+      "raw_png_sha256": "b546b07f5d9145ddbbf79de5f6c90aa40c8238469595b89dd9935de08ee0d75d",
+      "raw_size": [
+        1254,
+        1254
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_icon_upgrade_lamp_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [
+        {
+          "x": 8,
+          "y": 8,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        },
+        {
+          "x": 8,
+          "y": 9,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        },
+        {
+          "x": 9,
+          "y": 9,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        },
+        {
+          "x": 10,
+          "y": 9,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        },
+        {
+          "x": 11,
+          "y": 9,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        },
+        {
+          "x": 12,
+          "y": 17,
+          "before": "#ffb52e",
+          "after": "#f2c14e"
+        }
+      ],
+      "status": "ok",
+      "warnings": [],
+      "colours": 8,
+      "calm": {
+        "specks": 0.03932584269662921,
+        "edges": 0.4056603773584906,
+        "busy": 29.530314465408793
+      }
+    },
+    {
+      "id": "icon.kind.coins",
+      "selected_candidate": "B",
+      "output": "art/generated/kinds/kind_coins.png",
+      "native_size": [
+        16,
+        16
+      ],
+      "sha256": "227f0a74d39c0fd93f34ca40f415fb88d7626fe715da17a3b17cd58ba94022cc",
+      "raw_png_sha256": "7a29e2f9a7e5fd5f0ee445d209e0b218d23871dd70e466491d84d260fd246510",
+      "raw_size": [
+        1254,
+        1254
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_icon_kind_coins_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 4,
+      "calm": {
+        "specks": 0.01818181818181818,
+        "edges": 0.28426395939086296,
+        "busy": 17.195416243654833
+      }
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "selected_candidate": "B",
+      "output": "art/generated/items/dwarf_gold_crowns.png",
+      "native_size": [
+        32,
+        32
+      ],
+      "sha256": "09941d54efd6a54bd3107a3b2adc3d56549a04f4e523326ce1f30c755c4beda6",
+      "raw_png_sha256": "fe645827a807925b32927f0c097f4a29cd9e12e4b9f7dbebce7320a6514afe90",
+      "raw_size": [
+        1254,
+        1254
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_item_dwarf_gold_crowns_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 7,
+      "calm": {
+        "specks": 0.027881040892193308,
+        "edges": 0.3110236220472441,
+        "busy": 16.264076771653485
+      }
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "selected_candidate": "B",
+      "output": "art/generated/heartsongs/lullaby_box.png",
+      "native_size": [
+        32,
+        32
+      ],
+      "sha256": "e07338ea5dab8d3038fe26b849f9fef461148f43098311b224c23a15ed6ba086",
+      "raw_png_sha256": "1ac87398f8b7fe1428783fb2c6e1bdb0c910e015c64c2cacdbf39a604eab893c",
+      "raw_size": [
+        1254,
+        1254
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_heartsong_lullaby_box_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 11,
+      "calm": {
+        "specks": 0.023508137432188065,
+        "edges": 0.3622497616777884,
+        "busy": 17.68069685414677
+      }
+    },
+    {
+      "id": "curio.monocle",
+      "selected_candidate": "B",
+      "output": "art/generated/curios/monocle.png",
+      "native_size": [
+        28,
+        28
+      ],
+      "sha256": "d57304fe662d2e8e0ce84e89e796db040727a8966c1eddc103b237bf5ef7b40a",
+      "raw_png_sha256": "55a8a31b9f47786312b09f99f89303184212a8272165e3a27cbb5fb0b4ba9512",
+      "raw_size": [
+        1254,
+        1254
+      ],
+      "raw_preview": "art/generated/_raw/round2_batch9_curio_monocle_B.webp",
+      "offset_y": 0,
+      "manual_pixels": [],
+      "status": "ok",
+      "warnings": [],
+      "colours": 6,
+      "calm": {
+        "specks": 0.026706231454005934,
+        "edges": 0.27483443708609273,
+        "busy": 16.049678807946997
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "sky.midday",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nMidday sky: a plain sky for the back of a game scene. It fills the whole 16:9 picture and there is nothing else in it (no ground, hills, buildings, trees or birds). Three to five broad horizontal bands of flat colour from top to bottom, with simple flat shapes for the sun or moon and the clouds.\n\nSubject: Clear soft blue, a little paler towards the bottom; two or three plain, rounded white clouds; no sun in view.\n\nLean on these palette colours (dark to light; the swatch has them all): azure 4-6 (#4ea3ff #68c7fd #a7f8ff); night 9-10 (#ece6f5 #ffffff).\n\nAvoid: anything but sky; stars all over; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1536x1024 PNG, highest quality. Use case: stylized-concept. Preserve the full wide composition so a centred 16:9 crop keeps all essential shapes.",
+      "source_png": "exec-bddbbf67-0692-49b6-b322-bd3f37feeb9a.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "sky.midday",
+        "candidate": "A",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 5.2999788000847996e-05,
+          "edges": 0.01807260983746185,
+          "busy": 1.0370383189012495
+        }
+      }
+    },
+    {
+      "id": "sky.midday",
+      "candidate": "B",
+      "correction": "Correction after candidate A: simpler, absolutely uniform flat fills with no gradients, no subtle tonal variation within a shape. Three broad straight horizontal bands only and two small plain rounded clouds; the sky is quiet negative space.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nMidday sky: a plain sky for the back of a game scene. It fills the whole 16:9 picture and there is nothing else in it (no ground, hills, buildings, trees or birds). Three to five broad horizontal bands of flat colour from top to bottom, with simple flat shapes for the sun or moon and the clouds.\n\nSubject: Clear soft blue, a little paler towards the bottom; two or three plain, rounded white clouds; no sun in view.\n\nLean on these palette colours (dark to light; the swatch has them all): azure 4-6 (#4ea3ff #68c7fd #a7f8ff); night 9-10 (#ece6f5 #ffffff).\n\nAvoid: anything but sky; stars all over; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: simpler, absolutely uniform flat fills with no gradients, no subtle tonal variation within a shape. Three broad straight horizontal bands only and two small plain rounded clouds; the sky is quiet negative space.\n\nOutput request: one complete candidate B, 1536x1024 PNG, highest quality. Use case: stylized-concept. Compose the essential picture within the centred 16:9 crop.",
+      "source_png": "exec-87573215-c016-4ec2-a335-9f40e909bdf5.png",
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "sky.midday",
+        "candidate": "B",
+        "size": [
+          1672,
+          941
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.00929803392717723,
+          "busy": 0.6067040953935758
+        }
+      }
+    },
+    {
+      "id": "place.stall",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe Brindle crossroads, from Bram's Stall: the view across a shop counter, seen straight ahead from behind it at standing eye level, as a 16:9 picture. Two things are left out because the game adds them: the counter itself (it covers the bottom third) and the sky: everything that would be sky, above the skyline and seen through windows, doors or arches, is flat pure magenta #FF00FF. Nobody is in it. The horizon, or the foot of the far wall, a little above the middle; the bottom third plain ground or floor; the left third and the middle simple (the game stands someone at the left and puts things in the middle, in front); the place's landmark in the middle distance just right of centre. Muted, mid to dark values with low contrast, in three to five large planes.\n\nSubject: The Brindle crossroads seen from a roadside stall: a packed-earth road running straight away from the viewer to the horizon, and another crossing it in the middle distance; a plain wooden signpost with two blank arms at the crossing, a little right of centre; low rolling hills along the horizon in two flat tones, with the small silhouette of a castle on a far hill right of centre; a calm river as one flat band on the far right, with a small watermill (a plain wooden house and its wheel); two or three round trees. The bottom third is plain grass and earth.\n\nIt must show: the road running away to the horizon; the signpost at the crossing; a castle's small silhouette on a far hill; the watermill on the right, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): leaf 2-4 (#004e22 #0e7734 #58a04c); moss 2-3 (#5d672a #979569); umber 3-5 (#6e3d22 #8e5b37 #ad7d52); sea 2-3 (#005754 #26877a); night 4-5 (#3b3150 #554b69); parchment 2 (#d2b688).\n\nAvoid: people or animals; a chest; text or signs with letters; a counter or table in the foreground; a sky (it's magenta); a vanishing-point floor; busy foliage or many small things; strong contrast; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1536x1024 PNG, highest quality. Use case: stylized-concept. Compose the essential picture within the centred 16:9 crop.",
+      "source_png": "exec-b1dc4acc-1bc9-4974-b0c0-37783eaff5ab.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "place.stall",
+        "candidate": "A",
+        "size": [
+          1672,
+          941
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0012274045971881276,
+          "edges": 0.08217426732979291,
+          "busy": 1.9039589058417397
+        }
+      }
+    },
+    {
+      "id": "place.stall",
+      "candidate": "B",
+      "correction": "Correction after candidate A: edit the first image, keeping the crossroads, blank signpost, far castle, river and mill in their existing positions, but replace the whole drawing with extremely simple flat vector shapes. Delete ALL grass tufts, bushes, road patches, ripples, reflections, window details, fences, wheel spokes, tree leaves, shading gradients and grain. Two broad hill silhouettes, three solid oval tree crowns, plain road trapezoid, single flat river ribbon, tiny simple mill house and a solid disk wheel. Smooth simple contours, uniform ink fills, three or four large landscape planes. Draw like the LEFT flat example in reference 2 (not its subject). Muted low contrast. This is an environment layer for a quiet game, not a detailed landscape illustration.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe Brindle crossroads, from Bram's Stall: the view across a shop counter, seen straight ahead from behind it at standing eye level, as a 16:9 picture. Two things are left out because the game adds them: the counter itself (it covers the bottom third) and the sky: everything that would be sky, above the skyline and seen through windows, doors or arches, is flat pure magenta #FF00FF. Nobody is in it. The horizon, or the foot of the far wall, a little above the middle; the bottom third plain ground or floor; the left third and the middle simple (the game stands someone at the left and puts things in the middle, in front); the place's landmark in the middle distance just right of centre. Muted, mid to dark values with low contrast, in three to five large planes.\n\nSubject: The Brindle crossroads seen from a roadside stall: a packed-earth road running straight away from the viewer to the horizon, and another crossing it in the middle distance; a plain wooden signpost with two blank arms at the crossing, a little right of centre; low rolling hills along the horizon in two flat tones, with the small silhouette of a castle on a far hill right of centre; a calm river as one flat band on the far right, with a small watermill (a plain wooden house and its wheel); two or three round trees. The bottom third is plain grass and earth.\n\nIt must show: the road running away to the horizon; the signpost at the crossing; a castle's small silhouette on a far hill; the watermill on the right, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): leaf 2-4 (#004e22 #0e7734 #58a04c); moss 2-3 (#5d672a #979569); umber 3-5 (#6e3d22 #8e5b37 #ad7d52); sea 2-3 (#005754 #26877a); night 4-5 (#3b3150 #554b69); parchment 2 (#d2b688).\n\nAvoid: people or animals; a chest; text or signs with letters; a counter or table in the foreground; a sky (it's magenta); a vanishing-point floor; busy foliage or many small things; strong contrast; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: edit the first image, keeping the crossroads, blank signpost, far castle, river and mill in their existing positions, but replace the whole drawing with extremely simple flat vector shapes. Delete ALL grass tufts, bushes, road patches, ripples, reflections, window details, fences, wheel spokes, tree leaves, shading gradients and grain. Two broad hill silhouettes, three solid oval tree crowns, plain road trapezoid, single flat river ribbon, tiny simple mill house and a solid disk wheel. Smooth simple contours, uniform ink fills, three or four large landscape planes. Draw like the LEFT flat example in reference 2 (not its subject). Muted low contrast. This is an environment layer for a quiet game, not a detailed landscape illustration.\n\nOutput request: one complete candidate B, 1536x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-e8824718-0ae5-4929-bacc-84a0bf45d7c2.png",
+      "reference_images": [
+        "exec-b1dc4acc-1bc9-4974-b0c0-37783eaff5ab.png",
+        "reference/scene/flat_to_pixels.png",
+        "palette/keywright.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "place.stall",
+        "candidate": "B",
+        "size": [
+          1672,
+          941
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.00011111728429357187,
+          "edges": 0.027295493655301706,
+          "busy": 0.6028259440099573
+        }
+      }
+    },
+    {
+      "id": "frame.stall",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe shop's frame at the Brindle crossroads (Bram's Stall): the part of a shop nearest the viewer that frames the view, seen straight on from inside. Across the top of the picture, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge, about a sixth of the picture's height deep; the topmost twelfth of the picture is the awning's underside, in shadow, plain and dark (the game's top bar sits on it). Down the left and right edges, two plain wooden posts holding the awning up, each about a twentieth of the picture's width. Everything else, the whole middle of the picture, is flat pure magenta #FF00FF. Symmetrical, and a little darker than the room beyond: it's in the shop's own shade.\n\nSubject: Across the top, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge; at the sides, two plain wooden posts holding the awning up.\n\nIt must show: the front edge of the stall's canvas awning; two plain wooden posts holding the awning up, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): crimson 2-3 (#6c0026 #9c1839); parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37).\n\nAvoid: anything in the middle of the picture; a shelf; lamps or lanterns; people; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1536x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-17de23a5-7dbb-4b23-944c-8d0ccc9825d0.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "frame.stall",
+        "candidate": "A",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [
+          "396 pixels in the view (x 24-295, rows 36-118): the middle stays open"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0013973577235772358,
+          "edges": 0.06583051728619704,
+          "busy": 3.7609083051728556
+        }
+      }
+    },
+    {
+      "id": "frame.stall",
+      "candidate": "B",
+      "correction": "Correction after candidate A: the top bar needs a plain, uninterrupted dark band, not stripes underneath it. Edit the first image into a strictly flat illustration. At 1536x1024, rows 0-70 are one uniform dark umber band edge to edge; below that, eight wide muted red-and-cream scallops, all ending by row 150. Plain straight posts touch the left and right image edges, each 75 pixels wide. Everything else pure magenta. No gradient, curved shadow bands, side highlights, texture or small folds. Preserve symmetrical awning and two posts; remove all extra shading.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe shop's frame at the Brindle crossroads (Bram's Stall): the part of a shop nearest the viewer that frames the view, seen straight on from inside. Across the top of the picture, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge, about a sixth of the picture's height deep; the topmost twelfth of the picture is the awning's underside, in shadow, plain and dark (the game's top bar sits on it). Down the left and right edges, two plain wooden posts holding the awning up, each about a twentieth of the picture's width. Everything else, the whole middle of the picture, is flat pure magenta #FF00FF. Symmetrical, and a little darker than the room beyond: it's in the shop's own shade.\n\nSubject: Across the top, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge; at the sides, two plain wooden posts holding the awning up.\n\nIt must show: the front edge of the stall's canvas awning; two plain wooden posts holding the awning up, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): crimson 2-3 (#6c0026 #9c1839); parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37).\n\nAvoid: anything in the middle of the picture; a shelf; lamps or lanterns; people; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: the top bar needs a plain, uninterrupted dark band, not stripes underneath it. Edit the first image into a strictly flat illustration. At 1536x1024, rows 0-70 are one uniform dark umber band edge to edge; below that, eight wide muted red-and-cream scallops, all ending by row 150. Plain straight posts touch the left and right image edges, each 75 pixels wide. Everything else pure magenta. No gradient, curved shadow bands, side highlights, texture or small folds. Preserve symmetrical awning and two posts; remove all extra shading.\n\nOutput request: one complete candidate B, 1536x1024 PNG, highest quality. Use case: precise-object-edit.",
+      "source_png": "exec-42317753-f7e0-42ea-9c1c-11c9c8377060.png",
+      "reference_images": [
+        "exec-17de23a5-7dbb-4b23-944c-8d0ccc9825d0.png",
+        "reference/scene/flat_to_pixels.png",
+        "palette/keywright.png"
+      ],
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "frame.stall",
+        "candidate": "B",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [
+          "the top band (rows 0-13, under the top bar) has 1 gaps: it runs right across"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.017796522991461783,
+          "busy": 1.6328195315982539
+        }
+      }
+    },
+    {
+      "id": "shelf.stall",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nDisplay shelf at the Brindle crossroads (Bram's Stall): a single long, thin display shelf seen straight on: a plain plank, about twenty times as wide as it is thick, spanning the picture's width, with two ropes rising straight up from its two ends to the top edge of the picture. Nothing on it. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A plain plank, hung on two ropes.\n\nIt must show: a plain plank; two ropes, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 3-5 (#6e3d22 #8e5b37 #ad7d52); parchment 1-2 (#9d8872 #d2b688).\n\nAvoid: things on the shelf; brackets below it; a wall behind it; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1536x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-c4856990-939c-4fb4-baf9-7213f5b0c996.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "shelf.stall",
+        "candidate": "A",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.028083028083028084,
+          "edges": 0.1156271899088998,
+          "busy": 5.349827610371424
+        }
+      }
+    },
+    {
+      "id": "counter.stall",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nCounter at the Brindle crossroads (Bram's Stall): a shop counter's top seen from behind it at standing height: a very wide, flat strip filling the bottom third of the picture from edge to edge, its far edge a straight horizontal line with a slightly lighter lip. Above the strip, flat pure magenta #FF00FF. Plain, calm and mid-dark: the game puts its notes, a chest and a board on it.\n\nSubject: A trestle table top of three or four wide, rough planks, grey-brown, running left to right.\n\nIt must show: a trestle table top of three or four wide, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 2-4 (#4b2212 #6e3d22 #8e5b37); night 3-5 (#2b2236 #3b3150 #554b69).\n\nAvoid: things on the counter; a front panel; perspective lines converging; knots, grain or scratches; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1536x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-5a05a648-2b75-4745-aa67-1a55737acaae.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "counter.stall",
+        "candidate": "A",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.00037309455281952884,
+          "edges": 0.04369128058793442,
+          "busy": 2.026193582254286
+        }
+      }
+    },
+    {
+      "id": "sheet.stall",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nAppraisal sheet at the Brindle crossroads (Bram's Stall): a sheet to write an appraisal on, seen flat and straight on, filling a tall picture (two wide by three tall) from edge to edge: a sheet of rough, pale unbleached paper, its edges a little uneven, one flat light warm tone, plain and empty in the middle (no writing, lines, stains or texture); around it, a rough plank board showing as a narrow rim around it, only a few hundredths of the width thick; two round nail heads in the top corners, small, and nothing else.\n\nSubject: A sheet of rough, pale unbleached paper, its edges a little uneven, on a rough plank board showing as a narrow rim around it; two round nail heads in the top corners.\n\nIt must show: a sheet of rough, pale unbleached paper, its edges a little uneven; two round nail heads in the top corners, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37); night 4 (#3b3150).\n\nAvoid: writing or ruled lines; stains, creases or texture; a dark paper; a table behind it; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1536 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-ed2dc016-0456-4adb-a79f-99612c37696b.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "sheet.stall",
+        "candidate": "A",
+        "size": [
+          1024,
+          1536
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 5.8778581085052606e-05,
+          "edges": 0.014324491782964034,
+          "busy": 1.48154348980614
+        }
+      }
+    },
+    {
+      "id": "shelf.stall",
+      "candidate": "B",
+      "correction": "Correction after candidate A: edit the shelf to remove the rope's spiral details and all wood texture or gradient. Each rope is a single straight flat tan strip, no twists or knots. The board is twenty times wider than it is thick, only two uniform brown planes. Keep everything else pure magenta.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nDisplay shelf at the Brindle crossroads (Bram's Stall): a single long, thin display shelf seen straight on: a plain plank, about twenty times as wide as it is thick, spanning the picture's width, with two ropes rising straight up from its two ends to the top edge of the picture. Nothing on it. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A plain plank, hung on two ropes.\n\nIt must show: a plain plank; two ropes, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 3-5 (#6e3d22 #8e5b37 #ad7d52); parchment 1-2 (#9d8872 #d2b688).\n\nAvoid: things on the shelf; brackets below it; a wall behind it; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: edit the shelf to remove the rope's spiral details and all wood texture or gradient. Each rope is a single straight flat tan strip, no twists or knots. The board is twenty times wider than it is thick, only two uniform brown planes. Keep everything else pure magenta.\n\nOutput request: one complete candidate B, 1536x1024 PNG, highest quality. Use case: precise-object-edit.",
+      "source_png": "exec-91cd1348-d8b8-4031-87bc-1b0974ff22db.png",
+      "reference_images": [
+        "exec-c4856990-939c-4fb4-baf9-7213f5b0c996.png",
+        "reference/scene/flat_to_pixels.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "shelf.stall",
+        "candidate": "B",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.015509103169251517,
+          "busy": 0.8230546190155087
+        }
+      }
+    },
+    {
+      "id": "counter.stall",
+      "candidate": "B",
+      "correction": "Correction after candidate A: edit the counter to remove ALL diagonal patches and shading, gradients and irregular seams. Three or four wide horizontal grey-brown planks only, each one a single uniform muted flat fill, two or three straight subtle seam shapes across the width, a slightly lighter straight top lip. Nothing but the top surface, as a strip; pure magenta above it.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nCounter at the Brindle crossroads (Bram's Stall): a shop counter's top seen from behind it at standing height: a very wide, flat strip filling the bottom third of the picture from edge to edge, its far edge a straight horizontal line with a slightly lighter lip. Above the strip, flat pure magenta #FF00FF. Plain, calm and mid-dark: the game puts its notes, a chest and a board on it.\n\nSubject: A trestle table top of three or four wide, rough planks, grey-brown, running left to right.\n\nIt must show: a trestle table top of three or four wide, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 2-4 (#4b2212 #6e3d22 #8e5b37); night 3-5 (#2b2236 #3b3150 #554b69).\n\nAvoid: things on the counter; a front panel; perspective lines converging; knots, grain or scratches; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: edit the counter to remove ALL diagonal patches and shading, gradients and irregular seams. Three or four wide horizontal grey-brown planks only, each one a single uniform muted flat fill, two or three straight subtle seam shapes across the width, a slightly lighter straight top lip. Nothing but the top surface, as a strip; pure magenta above it.\n\nOutput request: one complete candidate B, 1536x1024 PNG, highest quality. Use case: precise-object-edit.",
+      "source_png": "exec-8f0e6232-b440-4288-8a6b-b347889adb00.png",
+      "reference_images": [
+        "exec-5a05a648-2b75-4745-aa67-1a55737acaae.png",
+        "reference/scene/flat_to_pixels.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "counter.stall",
+        "candidate": "B",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 5.329922183136126e-05,
+          "edges": 0.042372196947263574,
+          "busy": 2.359387460629377
+        }
+      }
+    },
+    {
+      "id": "sheet.stall",
+      "candidate": "B",
+      "correction": "Correction after candidate A: a second, calmer version. Reduce nail heads to tiny simple circles, entirely within the top 4 percent of the picture. Narrow the flat wooden rim to 2 percent of the width; remove wood shading patches. Paper is a completely uniform pale unbleached tan #d2b688, slightly irregular silhouette, no creases or gradients. Preserve the plain empty writing area.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nAppraisal sheet at the Brindle crossroads (Bram's Stall): a sheet to write an appraisal on, seen flat and straight on, filling a tall picture (two wide by three tall) from edge to edge: a sheet of rough, pale unbleached paper, its edges a little uneven, one flat light warm tone, plain and empty in the middle (no writing, lines, stains or texture); around it, a rough plank board showing as a narrow rim around it, only a few hundredths of the width thick; two round nail heads in the top corners, small, and nothing else.\n\nSubject: A sheet of rough, pale unbleached paper, its edges a little uneven, on a rough plank board showing as a narrow rim around it; two round nail heads in the top corners.\n\nIt must show: a sheet of rough, pale unbleached paper, its edges a little uneven; two round nail heads in the top corners, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37); night 4 (#3b3150).\n\nAvoid: writing or ruled lines; stains, creases or texture; a dark paper; a table behind it; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: a second, calmer version. Reduce nail heads to tiny simple circles, entirely within the top 4 percent of the picture. Narrow the flat wooden rim to 2 percent of the width; remove wood shading patches. Paper is a completely uniform pale unbleached tan #d2b688, slightly irregular silhouette, no creases or gradients. Preserve the plain empty writing area.\n\nOutput request: one complete candidate B, 1024x1536 PNG, highest quality. Use case: precise-object-edit.",
+      "source_png": "exec-339c1c2a-191c-45b7-936f-c2381fa7aae1.png",
+      "reference_images": [
+        "exec-ed2dc016-0456-4adb-a79f-99612c37696b.png",
+        "palette/keywright.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "sheet.stall",
+        "candidate": "B",
+        "size": [
+          1024,
+          1536
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.008807128315581388,
+          "busy": 0.9913789868114552
+        }
+      }
+    },
+    {
+      "id": "figure.hob",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nHob the Farmer: a full-length figure for a game, standing upright, from the top of the head (or hat) to the feet, centred and filling about ninety percent of the picture's height. Turned a little toward the right, looking right or at the viewer. Storybook proportions, the head about a fifth of the height; arms relaxed. The face in flat skin tones, the eyes clear dark dots and a simple mouth, readable from across a room. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A broad, sunburnt farmer in his fifties who ploughs chests up out of the old battlefield: a frayed straw hat, a ruddy face with grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt, brown trousers and heavy boots.\n\nIt must show: the straw hat; the brown work smock, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): skin 2-4 (#915a47 #bd7e5f #e1a882); gold 3-5 (#a06500 #c29026 #f2c14e); umber 2-5 (#4b2212 #6e3d22 #8e5b37 #ad7d52).\n\nAvoid: a background or floor; a shadow; a frame; small accessories crowding the figure; strands of hair; a weapon unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1536 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-b955c01a-85b5-4412-a9aa-0db3eec7abb0.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "figure.hob",
+        "candidate": "A",
+        "size": [
+          1024,
+          1536
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.004885301614273577,
+          "edges": 0.17703087365885703,
+          "busy": 5.950074009196429
+        }
+      }
+    },
+    {
+      "id": "figure.hob",
+      "candidate": "B",
+      "correction": "Correction after candidate A: preserve Hob's friendly shrewd middle-aged face, straw hat, brown smock and heavy boots, but simplify him to broad flat picture-book shapes. No small frays, creases, fingers, seams, belt tails, tiny hair, or hat ridges. Two broad tones per material only. Bigger clear head about one fifth of total height, short solid grey stubble shape; eyes dark dots, one short half-smile; both arms relaxed at sides. At most one wide fold on the smock. Use the LEFT flat picture in reference 2 for simplicity, not its exact character. All fills uniform, nothing photographic.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nHob the Farmer: a full-length figure for a game, standing upright, from the top of the head (or hat) to the feet, centred and filling about ninety percent of the picture's height. Turned a little toward the right, looking right or at the viewer. Storybook proportions, the head about a fifth of the height; arms relaxed. The face in flat skin tones, the eyes clear dark dots and a simple mouth, readable from across a room. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A broad, sunburnt farmer in his fifties who ploughs chests up out of the old battlefield: a frayed straw hat, a ruddy face with grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt, brown trousers and heavy boots.\n\nIt must show: the straw hat; the brown work smock, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): skin 2-4 (#915a47 #bd7e5f #e1a882); gold 3-5 (#a06500 #c29026 #f2c14e); umber 2-5 (#4b2212 #6e3d22 #8e5b37 #ad7d52).\n\nAvoid: a background or floor; a shadow; a frame; small accessories crowding the figure; strands of hair; a weapon unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: preserve Hob's friendly shrewd middle-aged face, straw hat, brown smock and heavy boots, but simplify him to broad flat picture-book shapes. No small frays, creases, fingers, seams, belt tails, tiny hair, or hat ridges. Two broad tones per material only. Bigger clear head about one fifth of total height, short solid grey stubble shape; eyes dark dots, one short half-smile; both arms relaxed at sides. At most one wide fold on the smock. Use the LEFT flat picture in reference 2 for simplicity, not its exact character. All fills uniform, nothing photographic.\n\nOutput request: one complete candidate B, 1024x1536 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-6b70b54e-1baf-445b-80b4-b60f7e257163.png",
+      "reference_images": [
+        "exec-b955c01a-85b5-4412-a9aa-0db3eec7abb0.png",
+        "reference/scene/flat_to_pixels.png",
+        "palette/keywright.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "figure.hob",
+        "candidate": "B",
+        "size": [
+          1024,
+          1536
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.002046663937781416,
+          "edges": 0.11912291798439806,
+          "busy": 6.6784304237824035
+        }
+      }
+    },
+    {
+      "id": "prop.lantern_stall",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nLantern at the Brindle crossroads (Bram's Stall): a single small object for a shop game, seen straight on and a little from above, centred, filling about eighty percent of the picture, hanging from the top edge of the picture by its hook. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A small tin lantern with a ring on top, its glass glowing warm yellow, hanging from a short hook.\n\nIt must show: a small tin lantern with a ring on top, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): night 2-4 (#1a1420 #2b2236 #3b3150); gold 4-6 (#c29026 #f2c14e #fbeda4); flame 3-4 (#ffb52e #ffe47d); steel 2-3 (#626d80 #93a2b6).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-f75b09a8-68bd-46be-8cad-055cc227eb00.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "prop.lantern_stall",
+        "candidate": "A",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [
+          "11 colours, at most 10",
+          "too busy: lone specks 0.083, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.08333333333333333,
+          "edges": 0.4985507246376812,
+          "busy": 35.044005797101406
+        }
+      }
+    },
+    {
+      "id": "frame.stall",
+      "candidate": "C",
+      "correction": "Correction after candidate B: keep the same flat awning and posts, but make the continuous DARK BROWN band at the very top TWICE as tall, 100 pixels high on the 1536x1024 canvas. It must touch every pixel of the top and side edges. Below it, make the red and cream scallops SHALLOWER: they end by y=155, so the total awning depth does not increase. Move the plain posts flush to the extreme left and right canvas edges. Top band must be a single dark flat colour without gaps. Preserve everything else; no new objects.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe shop's frame at the Brindle crossroads (Bram's Stall): the part of a shop nearest the viewer that frames the view, seen straight on from inside. Across the top of the picture, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge, about a sixth of the picture's height deep; the topmost twelfth of the picture is the awning's underside, in shadow, plain and dark (the game's top bar sits on it). Down the left and right edges, two plain wooden posts holding the awning up, each about a twentieth of the picture's width. Everything else, the whole middle of the picture, is flat pure magenta #FF00FF. Symmetrical, and a little darker than the room beyond: it's in the shop's own shade.\n\nSubject: Across the top, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge; at the sides, two plain wooden posts holding the awning up.\n\nIt must show: the front edge of the stall's canvas awning; two plain wooden posts holding the awning up, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): crimson 2-3 (#6c0026 #9c1839); parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37).\n\nAvoid: anything in the middle of the picture; a shelf; lamps or lanterns; people; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate B: keep the same flat awning and posts, but make the continuous DARK BROWN band at the very top TWICE as tall, 100 pixels high on the 1536x1024 canvas. It must touch every pixel of the top and side edges. Below it, make the red and cream scallops SHALLOWER: they end by y=155, so the total awning depth does not increase. Move the plain posts flush to the extreme left and right canvas edges. Top band must be a single dark flat colour without gaps. Preserve everything else; no new objects.\n\nOutput request: one complete candidate C, 1536x1024 PNG, highest quality. Use case: precise-object-edit.",
+      "offset_y": -60,
+      "source_png": "exec-828eed97-24ec-4aa8-8b16-51e08550a4f7.png",
+      "reference_images": [
+        "exec-42317753-f7e0-42ea-9c1c-11c9c8377060.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "frame.stall",
+        "candidate": "C",
+        "size": [
+          1536,
+          1024
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.01634918824379301,
+          "busy": 1.5997443443215018
+        }
+      }
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nA bold, simple icon of a small lantern burning with a violet witch-flame, readable when tiny: three-quarter or front view, centred, filling about ninety percent of the picture, each material in two or three flat tones. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nLean on these palette colours (dark to light; the swatch has them all): night 2-10 (#1a1420 #2b2236 #3b3150 #554b69 #766d8b #9b92ad #c9c4d4 #ece6f5 #ffffff); umber (#280c06 #4b2212 #6e3d22 #8e5b37 #ad7d52 #c9a075 #e2c69f); gold (#492100 #773f00 #a06500 #c29026 #f2c14e #fbeda4); steel (#383d48 #626d80 #93a2b6 #ccd9e8).\n\nAvoid: fine detail; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-e32daa71-c6d3-4b8a-9eac-a2bff47fad7f.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "icon.upgrade.lamp",
+        "candidate": "A",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [
+          "9 colours, at most 8",
+          "too busy: lone specks 0.142, at most 0.06 (draw it simpler)",
+          "too busy: edges between neighbours 0.570, at most 0.55 (draw it simpler)"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.14204545454545456,
+          "edges": 0.569620253164557,
+          "busy": 33.14495886075946
+        }
+      }
+    },
+    {
+      "id": "icon.kind.coins",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nA symbol of a small stack of three gold coins, like a map symbol: one simple shape in two or three flat tones, centred, filling the picture. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nLean on these palette colours (dark to light; the swatch has them all): gold 2-6 (#773f00 #a06500 #c29026 #f2c14e #fbeda4).\n\nAvoid: detail; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-6be50cba-8954-441b-b49e-06656052d0b6.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "icon.kind.coins",
+        "candidate": "A",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [
+          "7 colours, at most 6"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.025,
+          "edges": 0.2962962962962963,
+          "busy": 16.0757638888889
+        }
+      }
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nDwarf-Gold Crowns: a single treasure for a game, seen three-quarters from slightly above as if resting on a counter, upright and centred, filling about ninety percent of the picture, its lowest point on the bottom edge. One bold shape, each material in two or three flat tones, at most one small accent. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three.\n\nIt must show: one large face-on coin with a square hole; a hammer-and-anvil stamp, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): gold (#492100 #773f00 #a06500 #c29026 #f2c14e #fbeda4); umber 1-2 (#280c06 #4b2212).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-48802527-65c7-4765-b6fc-dabe4afc6ce7.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "item.dwarf_gold_crowns",
+        "candidate": "A",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.05825242718446602,
+          "edges": 0.3944387229660144,
+          "busy": 25.56174562306902
+        }
+      }
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe Lullaby Box, one of the nine Heartsongs (a beloved object the realm's archmages sang a spell into): a single object, handmade, old and loved, warmer and more personal than any treasure, with one deep-red accent; seen three-quarters from slightly above, upright, centred, filling about ninety percent of the picture, its lowest point on the bottom edge. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: The music box that sang her children to sleep: a small wooden box with a hand-painted lid of flowers and a crescent moon, the lid slightly ajar, a little brass crank on the side, its corners worn pale with years of loving use, a faded red ribbon tied around it.\n\nIt must show: a small wooden music box; painted flowers and a crescent moon on the lid, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 2-6 (#4b2212 #6e3d22 #8e5b37 #ad7d52 #c9a075); gold 4-5 (#c29026 #f2c14e); leaf 3-4 (#0e7734 #58a04c); azure 4 (#4ea3ff); crimson 4-5 (#c7414e #ff4058).\n\nAvoid: musical notes floating; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-733758e8-745c-40e9-8f48-281c55235658.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "heartsong.lullaby_box",
+        "candidate": "A",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [
+          "13 colours, at most 12",
+          "too busy: lone specks 0.088, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.08756567425569177,
+          "edges": 0.44907407407407407,
+          "busy": 14.719276851851854
+        }
+      }
+    },
+    {
+      "id": "curio.monocle",
+      "candidate": "A",
+      "correction": "",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nWitch's Monocle: a single small object, an oddment from an old warded chest, made for a trade; seen three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold shape, each material in two or three flat tones, at most one accent. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A witch's monocle: a round lens tinted violet in a tarnished silver rim, a fine silver chain curling away, a tiny star glint on the glass. A plain, honest object: simple materials, no ornament.\n\nIt must show: a round violet-tinted lens; a tarnished silver rim, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): arcane 3-6 (#6c48a5 #b46bff #c792ff #fdd0ff); steel (#383d48 #626d80 #93a2b6 #ccd9e8).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nOutput request: one complete candidate A, 1024x1024 PNG, highest quality. Use case: stylized-concept.",
+      "source_png": "exec-fa374888-0ca1-482c-9a00-306f729a7f42.png",
+      "selected": false,
+      "check_before_manual_pixels": {
+        "id": "curio.monocle",
+        "candidate": "A",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [
+          "too busy: lone specks 0.148, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.14836795252225518,
+          "edges": 0.4418604651162791,
+          "busy": 26.434858803986742
+        }
+      }
+    },
+    {
+      "id": "prop.lantern_stall",
+      "candidate": "B",
+      "correction": "Correction after candidate A, which becomes speckled at 16x24: redraw the lantern as a tiny flat vector pictogram, not a 3D render. Front view; one broad squat tin cap, one rectangular golden window, one broad base, one small thick ring and short hook. Only five flat inks in the subject: dark violet iron, muted silver-grey, muted steel-blue, gold, pale warm yellow. Glass is one flat yellow rectangle, no facets or white glint. Delete the stepped roof tiers, all bevels, segmented ring and reflections. Each shape a uniform solid colour. Reference 2 LEFT picture shows the flat simplicity required; reference 3 is only a simplicity guide, never copy its subject.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nLantern at the Brindle crossroads (Bram's Stall): a single small object for a shop game, seen straight on and a little from above, centred, filling about eighty percent of the picture, hanging from the top edge of the picture by its hook. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A small tin lantern with a ring on top, its glass glowing warm yellow, hanging from a short hook.\n\nIt must show: a small tin lantern with a ring on top, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): night 2-4 (#1a1420 #2b2236 #3b3150); gold 4-6 (#c29026 #f2c14e #fbeda4); flame 3-4 (#ffb52e #ffe47d); steel 2-3 (#626d80 #93a2b6).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A, which becomes speckled at 16x24: redraw the lantern as a tiny flat vector pictogram, not a 3D render. Front view; one broad squat tin cap, one rectangular golden window, one broad base, one small thick ring and short hook. Only five flat inks in the subject: dark violet iron, muted silver-grey, muted steel-blue, gold, pale warm yellow. Glass is one flat yellow rectangle, no facets or white glint. Delete the stepped roof tiers, all bevels, segmented ring and reflections. Each shape a uniform solid colour. Reference 2 LEFT picture shows the flat simplicity required; reference 3 is only a simplicity guide, never copy its subject.\n\nOutput request: one complete candidate B, 1024x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-85d3ec11-c152-45fc-80cb-cdb59db541e4.png",
+      "reference_images": [
+        "exec-f75b09a8-68bd-46be-8cad-055cc227eb00.png",
+        "reference/scene/flat_to_pixels.png",
+        "reference/quiet/chest_drawn_4x.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "prop.lantern_stall",
+        "candidate": "B",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.023809523809523808,
+          "edges": 0.3586387434554974,
+          "busy": 27.390591623036627
+        }
+      }
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "candidate": "B",
+      "correction": "Correction after candidate A: redraw as an extremely simple flat vector pictogram readable at 24x24. Front view of a small squat brass lantern with one thick handle, one cap, broad sides and a base. One plain dark-violet window with ONE solid lavender flame silhouette. At most five subject inks: dark plum, dark brass, mid brass, gold and lavender. No white flame core, floating sparks, glass reflection, bevels, facets, thin bars or extra roof tiers. No gradients. Reference 2 LEFT picture is the level of flatness; reference 3 only the simplicity level, do not copy its subject.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nA bold, simple icon of a small lantern burning with a violet witch-flame, readable when tiny: three-quarter or front view, centred, filling about ninety percent of the picture, each material in two or three flat tones. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nLean on these palette colours (dark to light; the swatch has them all): night 2-10 (#1a1420 #2b2236 #3b3150 #554b69 #766d8b #9b92ad #c9c4d4 #ece6f5 #ffffff); umber (#280c06 #4b2212 #6e3d22 #8e5b37 #ad7d52 #c9a075 #e2c69f); gold (#492100 #773f00 #a06500 #c29026 #f2c14e #fbeda4); steel (#383d48 #626d80 #93a2b6 #ccd9e8).\n\nAvoid: fine detail; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: redraw as an extremely simple flat vector pictogram readable at 24x24. Front view of a small squat brass lantern with one thick handle, one cap, broad sides and a base. One plain dark-violet window with ONE solid lavender flame silhouette. At most five subject inks: dark plum, dark brass, mid brass, gold and lavender. No white flame core, floating sparks, glass reflection, bevels, facets, thin bars or extra roof tiers. No gradients. Reference 2 LEFT picture is the level of flatness; reference 3 only the simplicity level, do not copy its subject.\n\nOutput request: one complete candidate B, 1024x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-49d11057-97f7-45e3-9443-f39a0ebf101e.png",
+      "reference_images": [
+        "exec-e32daa71-c6d3-4b8a-9eac-a2bff47fad7f.png",
+        "reference/scene/flat_to_pixels.png",
+        "reference/quiet/chest_drawn_4x.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "icon.upgrade.lamp",
+        "candidate": "B",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [
+          "9 colours, at most 8"
+        ],
+        "warnings": [],
+        "calm": {
+          "specks": 0.03932584269662921,
+          "edges": 0.42138364779874216,
+          "busy": 29.444716981132064
+        }
+      }
+    },
+    {
+      "id": "icon.kind.coins",
+      "candidate": "B",
+      "correction": "Correction after candidate A: redraw the same stack of three gold coins as a VERY SIMPLE flat map pictogram, just three uniform inks: #f2c14e for the flat tops, #c29026 for the broad sides, #773f00 for two broad horizontal separations. No separate highlight, bevel, bright rim, vertical facet, gradient or extra colour. Coin silhouettes must remain three stacked rounded disks, on pure magenta. Draw like a simple paper cut-out.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nA symbol of a small stack of three gold coins, like a map symbol: one simple shape in two or three flat tones, centred, filling the picture. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nLean on these palette colours (dark to light; the swatch has them all): gold 2-6 (#773f00 #a06500 #c29026 #f2c14e #fbeda4).\n\nAvoid: detail; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: redraw the same stack of three gold coins as a VERY SIMPLE flat map pictogram, just three uniform inks: #f2c14e for the flat tops, #c29026 for the broad sides, #773f00 for two broad horizontal separations. No separate highlight, bevel, bright rim, vertical facet, gradient or extra colour. Coin silhouettes must remain three stacked rounded disks, on pure magenta. Draw like a simple paper cut-out.\n\nOutput request: one complete candidate B, 1024x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-eb87fc6b-8e4c-40d3-b613-09ece66932e8.png",
+      "reference_images": [
+        "exec-6be50cba-8954-441b-b49e-06656052d0b6.png",
+        "reference/quiet/chest_drawn_4x.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "icon.kind.coins",
+        "candidate": "B",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.01818181818181818,
+          "edges": 0.28426395939086296,
+          "busy": 17.195416243654833
+        }
+      }
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "candidate": "B",
+      "correction": "Correction after candidate A: keep the large front-facing round coin with its square through-hole, the simple hammer-and-anvil stamp and the stack of three behind. Make it flat and simpler: no embossed 3D lettering effect, no beveled rim, no fragmented highlights, no gradient, no stamp on the rear coins. The stamp is two flat dark-gold silhouettes, the hole pure magenta. Five subject inks at most, broad uniform areas. Calm storybook cut-paper shapes, not a rendered metal object. Reference 2 gives only the level of simplicity, do not copy the chest.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nDwarf-Gold Crowns: a single treasure for a game, seen three-quarters from slightly above as if resting on a counter, upright and centred, filling about ninety percent of the picture, its lowest point on the bottom edge. One bold shape, each material in two or three flat tones, at most one small accent. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three.\n\nIt must show: one large face-on coin with a square hole; a hammer-and-anvil stamp, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): gold (#492100 #773f00 #a06500 #c29026 #f2c14e #fbeda4); umber 1-2 (#280c06 #4b2212).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A: keep the large front-facing round coin with its square through-hole, the simple hammer-and-anvil stamp and the stack of three behind. Make it flat and simpler: no embossed 3D lettering effect, no beveled rim, no fragmented highlights, no gradient, no stamp on the rear coins. The stamp is two flat dark-gold silhouettes, the hole pure magenta. Five subject inks at most, broad uniform areas. Calm storybook cut-paper shapes, not a rendered metal object. Reference 2 gives only the level of simplicity, do not copy the chest.\n\nOutput request: one complete candidate B, 1024x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-57d453fa-7032-4553-ae71-2c2299f87c96.png",
+      "reference_images": [
+        "exec-48802527-65c7-4765-b6fc-dabe4afc6ce7.png",
+        "reference/quiet/chest_drawn_4x.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "item.dwarf_gold_crowns",
+        "candidate": "B",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.027881040892193308,
+          "edges": 0.3110236220472441,
+          "busy": 16.264076771653485
+        }
+      }
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "candidate": "B",
+      "correction": "Correction after candidate A, too busy after reduction: redraw the music box as a very simple flat picture-book icon. Preserve box shape, slightly ajar lid, one crescent moon, just TWO simple flower blobs, small brass crank and one muted-red ribbon. Delete every leaf, thin stem, blue flower, distressed scratch, wood grain, bevel, interior gear and tiny mechanical stud. No elaborate bow or trailing ribbon: just one broad red band with a small flat knot. The lid has a plain crescent and two solid flower shapes, nothing else. The slightly open gap is a single dark flat shape. Uniform flat fills in at most seven colours; wood only two tones. Reference 2 LEFT figure shows flatness, reference 3 shows simplicity only.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe Lullaby Box, one of the nine Heartsongs (a beloved object the realm's archmages sang a spell into): a single object, handmade, old and loved, warmer and more personal than any treasure, with one deep-red accent; seen three-quarters from slightly above, upright, centred, filling about ninety percent of the picture, its lowest point on the bottom edge. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: The music box that sang her children to sleep: a small wooden box with a hand-painted lid of flowers and a crescent moon, the lid slightly ajar, a little brass crank on the side, its corners worn pale with years of loving use, a faded red ribbon tied around it.\n\nIt must show: a small wooden music box; painted flowers and a crescent moon on the lid, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 2-6 (#4b2212 #6e3d22 #8e5b37 #ad7d52 #c9a075); gold 4-5 (#c29026 #f2c14e); leaf 3-4 (#0e7734 #58a04c); azure 4 (#4ea3ff); crimson 4-5 (#c7414e #ff4058).\n\nAvoid: musical notes floating; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A, too busy after reduction: redraw the music box as a very simple flat picture-book icon. Preserve box shape, slightly ajar lid, one crescent moon, just TWO simple flower blobs, small brass crank and one muted-red ribbon. Delete every leaf, thin stem, blue flower, distressed scratch, wood grain, bevel, interior gear and tiny mechanical stud. No elaborate bow or trailing ribbon: just one broad red band with a small flat knot. The lid has a plain crescent and two solid flower shapes, nothing else. The slightly open gap is a single dark flat shape. Uniform flat fills in at most seven colours; wood only two tones. Reference 2 LEFT figure shows flatness, reference 3 shows simplicity only.\n\nOutput request: one complete candidate B, 1024x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-2eca48ec-4c3f-4ec9-bc0b-5e49db012211.png",
+      "reference_images": [
+        "exec-733758e8-745c-40e9-8f48-281c55235658.png",
+        "reference/scene/flat_to_pixels.png",
+        "reference/quiet/chest_drawn_4x.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "heartsong.lullaby_box",
+        "candidate": "B",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.023508137432188065,
+          "edges": 0.3622497616777884,
+          "busy": 17.68069685414677
+        }
+      }
+    },
+    {
+      "id": "curio.monocle",
+      "candidate": "B",
+      "correction": "Correction after candidate A, too busy after reduction: redraw as a very simple flat vector icon. A round violet lens, a plain broad tarnished silver rim, and a short curved chain represented by ONE solid curved silver band with NO individual links. Lens is one uniform violet circle with one small pale diamond glint upper left; rim only two broad flat grey tones, no chips, fragments, bevel, inner line, scratches or reflections. Four to five subject colours total, no gradient, no glimmer or aura. Keep chain short so lens dominates. Reference 2 LEFT image is the flat-fill process, reference 3 only the simplicity budget.",
+      "prompt": "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nWitch's Monocle: a single small object, an oddment from an old warded chest, made for a trade; seen three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold shape, each material in two or three flat tones, at most one accent. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A witch's monocle: a round lens tinted violet in a tarnished silver rim, a fine silver chain curling away, a tiny star glint on the glass. A plain, honest object: simple materials, no ornament.\n\nIt must show: a round violet-tinted lens; a tarnished silver rim, and nothing smaller.\n\nLean on these palette colours (dark to light; the swatch has them all): arcane 3-6 (#6c48a5 #b46bff #c792ff #fdd0ff); steel (#383d48 #626d80 #93a2b6 #ccd9e8).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; pixel-art style or visible pixels; texture or noise of any kind; outlines or line work; gradients; fine detail or tiny ornament; highlights scattered over surfaces; many colours at once.\n\nCorrection after candidate A, too busy after reduction: redraw as a very simple flat vector icon. A round violet lens, a plain broad tarnished silver rim, and a short curved chain represented by ONE solid curved silver band with NO individual links. Lens is one uniform violet circle with one small pale diamond glint upper left; rim only two broad flat grey tones, no chips, fragments, bevel, inner line, scratches or reflections. Four to five subject colours total, no gradient, no glimmer or aura. Keep chain short so lens dominates. Reference 2 LEFT image is the flat-fill process, reference 3 only the simplicity budget.\n\nOutput request: one complete candidate B, 1024x1024 PNG, highest quality. Use case: style-transfer.",
+      "source_png": "exec-c5dff5c9-f67d-4f5e-950a-38242587ad47.png",
+      "reference_images": [
+        "exec-fa374888-0ca1-482c-9a00-306f729a7f42.png",
+        "reference/scene/flat_to_pixels.png",
+        "reference/quiet/chest_drawn_4x.png"
+      ],
+      "selected": true,
+      "check_before_manual_pixels": {
+        "id": "curio.monocle",
+        "candidate": "B",
+        "size": [
+          1254,
+          1254
+        ],
+        "errors": [],
+        "warnings": [],
+        "calm": {
+          "specks": 0.026706231454005934,
+          "edges": 0.27483443708609273,
+          "busy": 16.049678807946997
+        }
+      }
+    }
+  ],
+  "validation": {
+    "command": "python3 art/tools/validate.py --sheets",
+    "exit_code": 1,
+    "baseline_summary": {
+      "missing": 73,
+      "fail": 169,
+      "ok": 25
+    },
+    "summary": {
+      "missing": 65,
+      "ok": 38,
+      "fail": 164
+    },
+    "batch9": {
+      "ok": 13,
+      "fail": 0,
+      "missing": 0,
+      "warnings": 0
+    },
+    "non_batch9_results_unchanged": true,
+    "note": "The unchanged round-1 assets and missing future-batch assets keep the full report nonzero. Stop for owner approval before batch 10."
+  }
+}
