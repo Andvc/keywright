@@ -90,7 +90,7 @@ CATEGORIES = {
                "landmark in the middle distance just right of centre. Muted, mid to dark values with low contrast, in "
                "three to five large planes."),
         avoid=["people or animals", "a chest", "text or signs with letters", "a counter or table in the foreground", "a sky "
-               "(it's magenta)", "a vanishing-point floor", "busy foliage or many small things", "strong contrast"]
+               "(it's magenta)", "a floor of tiles or boards in perspective lines", "busy foliage or many small things", "strong contrast"]
               + QUIET_AVOID,
     ),
     "frame": dict(

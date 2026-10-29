@@ -80,6 +80,26 @@ Round 2's answer:
 Post-processing can't fix a busy drawing (0.25 tried flattening round 1's art: it came out smeared and blotchy). The
 drawing itself has to be simple, which is why the generator never draws pixels.
 
+### What batch 9 taught
+
+Batch 9, the anchors, was the method's first real test, and it holds: all thirteen pass every quiet limit with room to
+spare (the stall's place: lone specks 0.000, edges 0.027, brightness step 0.6; Hob: 0.002, 0.119, 6.7), and the stall
+reads calm at every hour. What went wrong wasn't the drawing:
+
+1. **The pipeline joined areas the model drew apart.** Its colour snapping joined clusters by their nearest pair, so the
+   in-between tones along an edge chained two areas into one: Hob's straw brim melted into his face, and his beard into
+   it too. It now joins clusters only when every pair of their colours is alike, leans to the ramps the prompt names
+   when two palette colours are about as near (the stall's earth road had gone gold), keeps areas drawn apart apart (the
+   smaller steps a shade along its ramp), and gives the rim anti-aliased into the magenta the colour inside it.
+   `--recolour` puts right a material that still lands in the wrong ramp.
+2. **The brief asked the stall's counter for "grey-brown"**, with the night ramp beside umber: the model drew a taupe
+   the palette could only meet half purple, half brown. It's plain dark brown wood now, in umber.
+3. **The brief gave the midday sky azure 4**, the palette's strongest blue, which made it the loudest colour on the
+   screen. It's azure 5-6 and steel 4 now: a soft, light blue.
+
+So batch 9 is pixelized again from its originals with the new pipeline, and the sky and the counter are made again from
+their new prompts, before batch 10.
+
 ## The look in one line
 
 **Flat-colour storybook pixel art**: the flat colour plates of an old picture book, in chunky pixels. Big shapes, few
@@ -148,6 +168,9 @@ the middle distance just right of centre; the right third is under the sheet mos
 - **Big enough to survive**: the pipeline gives each art pixel the commonest colour of its block of the picture, so
   anything thinner than about a hundredth of the picture's width (a hair-thin line, a tiny stud) disappears or breaks.
   Make features bold: eyes are clear dark dots, a mouth a short simple shape.
+- **Neighbouring parts in clearly different colours**: a hat unlike the face under it, a beard unlike the skin, a sleeve
+  unlike the smock over it. The pipeline gives each flat area its nearest palette colour, and two parts drawn in nearly
+  the same colour can land on one (batch 9's Hob: a straw brim in the face's tan).
 - **Flat pure magenta (#FF00FF) means empty**: the background behind a sprite, the sky in a place, the open middle of the
   frame. Never use magenta or hot pink in the subject (violet and crimson are fine).
 - **Fill the frame the way the category asks** (each prompt says how): a figure from the top of the head to the feet, a
@@ -194,8 +217,9 @@ to pass**.
 
 ### Camera and perspective
 
-- **The scene**: straight ahead at standing eye level, across the counter. The place is a flat stage (no
-  vanishing-point floor); the counter is a flat strip whose far edge is a straight line.
+- **The scene**: straight ahead at standing eye level, across the counter. The place is a flat stage (no floor of tiles
+  or boards drawn in perspective lines; a road running away is one plain shape); the counter is a flat strip whose far
+  edge is a straight line.
 - **Figures**: full length, standing upright, facing you, **turned a little to the right** (toward the chest), eyes
   looking right or at you. Frontal and symmetrical: the Hooded Woman, the Stranger, Skrae and the Maw.
 - **Things, curios, props, icons**: three-quarter view from slightly above, as if resting on the counter; long things
@@ -377,6 +401,8 @@ art) aren't redrawn; their specs are round 1's.
 | Gradients or soft shading (banding after pixelizing) | regenerate with "flat fills only, two or three tones" |
 | Thin parts break up or vanish (a staff, a rope, a smile) | ask for them bolder; or let them go if the figure still reads |
 | Magenta left in the subject, or the subject keyed out | the subject mustn't be magenta or hot pink; regenerate, or pass `--key` with the background's actual colour |
+| A material lands in the wrong ramp (an earth road gone gold, a shirt's shade gone yellow) | the pipeline snaps each flat area to its nearest palette colour, leaning to the ramps the prompt names; when one still lands wrong, `pixelize.py --recolour '#from=#to'` (palette colour for palette colour) puts it right all over the asset. Record it |
+| Two parts the model drew apart come out one colour (a brim into the face) | the pipeline keeps drawn edges apart by stepping the smaller part a shade along its ramp, but not when that's far from what was drawn: regenerate with the two in clearly different colours |
 | A place or frame off its lines (the counter's edge, the frame's band, the open middle) | move the crop with `--offset-y` (source pixels, down); regenerate if it can't line up |
 | A figure the wrong height or off-centre | the pipeline scales it to its `height`: check the whole figure is in the picture, feet included |
 | The sheet's middle isn't plain | regenerate: "plain and empty in the middle; ornament only in the corners" |

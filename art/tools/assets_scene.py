@@ -25,8 +25,9 @@ SKIES = [
      "edge, half a disc; one long, thin, pale cloud.",
      ["azure:5-6", "parchment:3", "rose:3", "gold:6"]),
     ("midday", "Midday", "P1",
-     "Clear soft blue, a little paler towards the bottom; two or three plain, rounded white clouds; no sun in view.",
-     ["azure:4-6", "night:9-10"]),
+     "A clear, soft, light blue, one even colour over most of the sky and a paler band low down; two or three plain, "
+     "rounded white clouds; no sun in view.",
+     ["azure:5-6", "steel:4", "night:9-10"]),
     ("evening", "Evening", "P1",
      "Deep violet at the top, through rose to a warm orange band low down; the sun low near the right edge, a half disc of "
      "pale gold; one long cloud lit rose underneath.",
@@ -131,17 +132,21 @@ for tier, (board, supports, palette) in SHELVES.items():
 
 # ---- The counter's top: the bottom third of the screen -----------------------------------------------------------------
 
+# Each counter is one material in its own ramp: batch 9's stall counter, asked for "grey-brown" with the night ramp beside
+# umber, came out a taupe the palette could only meet half purple, half brown.
 COUNTERS = {
-    1: ("a trestle table top of three or four wide, rough planks, grey-brown, running left to right", ["umber:2-4", "night:3-5"]),
-    2: ("a solid oak counter top of broad planks running left to right, honey-brown", ["umber:2-5"]),
-    3: ("a polished walnut counter top with a thin brass strip along its far edge", ["umber:1-4", "gold:4-5"]),
+    1: ("a trestle table top of three or four wide planks of plain, weathered dark brown wood, running left to right",
+        "three or four wide planks", ["umber:2-4"]),
+    2: ("a solid oak counter top of broad planks running left to right, honey-brown", "broad oak planks", ["umber:2-5"]),
+    3: ("a polished walnut counter top with a thin brass strip along its far edge", "a thin brass strip along its far edge",
+        ["umber:1-4", "gold:4-5"]),
     4: ("a polished counter top of deep green-black marble with a few soft paler veins, and a thin gold strip along its far "
-        "edge", ["sea:1-2", "night:2-4", "gold:4-5"]),
+        "edge", "a thin gold strip along its far edge", ["sea:1-2", "night:2-4", "gold:4-5"]),
 }
-for tier, (description, palette) in COUNTERS.items():
+for tier, (description, detail, palette) in COUNTERS.items():
     add(id=f"counter.{KEYS[tier]}", category="counter", title=f"Counter at {PLACES[tier]}", tier=tier,
         anchor_for="counter" if tier == 1 else None, priority="P1", replaces=None,
-        description=description[0].upper() + description[1:] + ".", details=[description.split(",")[0]], palette=palette,
+        description=description[0].upper() + description[1:] + ".", details=[detail], palette=palette,
         context="The chest stands on its far edge; the notes, the commission board, the waiting queue, curios and Bram's "
                 "tips sit on it, so it stays plain and mid-dark.")
 

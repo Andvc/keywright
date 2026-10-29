@@ -38,6 +38,26 @@ def palette(manifest=None):
         return [hex_rgb(line.strip()) for line in f if line.strip()]
 
 
+def ramps():
+    """The palette's ramps, {name: [RGB, ...]} dark to light, as make_palette builds them."""
+    from make_palette import build
+    return {name: [hex_rgb(c) for c in cs] for name, cs, _ in build()}
+
+
+def hinted_colours(spec):
+    """The palette colours an asset's prompt asks it to lean on: its `palette` hints, 'umber:2-4', 'gold:5' or 'night'
+    (the whole ramp), steps 1-based."""
+    by_name = ramps()
+    out = set()
+    for hint in spec.get("palette") or []:
+        name, _, steps = hint.partition(":")
+        cs = by_name.get(name, [])
+        lo, _, hi = steps.partition("-")
+        span = range(int(lo), int(hi or lo) + 1) if steps else range(1, len(cs) + 1)
+        out.update(cs[i - 1] for i in span if 1 <= i <= len(cs))
+    return out
+
+
 def allowed_colours(spec, manifest):
     """What an asset's opaque pixels may be: the palette, plus any listed exception."""
     colours = set(palette(manifest))

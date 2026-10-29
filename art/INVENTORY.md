@@ -38,7 +38,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 | Id | Title | Size | Pri | Output | Replaces | Description |
 |---|---|---|---|---|---|---|
 | `sky.morning` | Early morning sky | 320x180 | P1 | `art/generated/sky/morning.png` | `(new)` | Pale clear blue at the top, through a soft lemon to a warm peach band low down; a low, pale-gold sun near the left edge, half a disc; one long, thin, pale cloud. |
-| `sky.midday` | Midday sky | 320x180 | P1 | `art/generated/sky/midday.png` | `(new)` | Clear soft blue, a little paler towards the bottom; two or three plain, rounded white clouds; no sun in view. |
+| `sky.midday` | Midday sky | 320x180 | P1 | `art/generated/sky/midday.png` | `(new)` | A clear, soft, light blue, one even colour over most of the sky and a paler band low down; two or three plain, rounded white clouds; no sun in view. |
 | `sky.evening` | Evening sky | 320x180 | P1 | `art/generated/sky/evening.png` | `(new)` | Deep violet at the top, through rose to a warm orange band low down; the sun low near the right edge, a half disc of pale gold; one long cloud lit rose underneath. |
 | `sky.night` | Night sky | 320x180 | P2 | `art/generated/sky/night.png` | `(new)` | Deep blue at the top, a little lighter towards the bottom; a pale full moon high on the left; a few small single stars, far apart. |
 
@@ -73,7 +73,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 
 | Id | Title | Size | Pri | Output | Replaces | Description |
 |---|---|---|---|---|---|---|
-| `counter.stall` | Counter at the Brindle crossroads (Bram's Stall) | 320x61 | P1 | `art/generated/counter/stall.png` | `(new)` | A trestle table top of three or four wide, rough planks, grey-brown, running left to right. |
+| `counter.stall` | Counter at the Brindle crossroads (Bram's Stall) | 320x61 | P1 | `art/generated/counter/stall.png` | `(new)` | A trestle table top of three or four wide planks of plain, weathered dark brown wood, running left to right. |
 | `counter.thornwick` | Counter at Thornwick Market | 320x61 | P1 | `art/generated/counter/thornwick.png` | `(new)` | A solid oak counter top of broad planks running left to right, honey-brown. |
 | `counter.crownhold` | Counter at Crownhold | 320x61 | P1 | `art/generated/counter/crownhold.png` | `(new)` | A polished walnut counter top with a thin brass strip along its far edge. |
 | `counter.emporium` | Counter at the Royal Emporium | 320x61 | P1 | `art/generated/counter/emporium.png` | `(new)` | A polished counter top of deep green-black marble with a few soft paler veins, and a thin gold strip along its far edge. |

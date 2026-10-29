@@ -9,8 +9,11 @@ pixel art. It
      (a sky, a place, the shop's frame, a sheet, a story scene), the content stretched to a strip (the counter), the
      content scaled to the figure's height with its feet on the bottom row, to a sprite's box (on its baseline or
      centred), or to the shelf's width with the board's top on its row;
-  3. snaps every colour to the palette and gives each art pixel the commonest colour of the block of the picture it
-     covers, so flat areas stay flat and anti-aliased edges, stray specks and anything finer than a block don't survive;
+  3. snaps every colour to the palette an area at a time (each flat area the model drew to its nearest palette colour,
+     leaning to the ramps the prompt named; areas drawn apart kept apart, a detail stepping along its ramp; the rim
+     anti-aliased into the magenta given the colour inside it) and gives each art pixel the commonest colour of the
+     block of the picture it covers, so flat areas stay flat and anti-aliased edges, stray specks and anything finer
+     than a block don't survive; if a material still lands in the wrong ramp, --recolour puts it right;
   4. quiets it (a lone speck, or a region of a few pixels, takes its neighbour's colour when the two are close; --no-quiet
      skips it), caps the colour count, and draws a 1-pixel outline around a sprite's silhouette, outside it;
   5. writes the asset's `output` (or --out), and with --preview a 4x copy beside it.
@@ -21,8 +24,9 @@ samples each cell; `area` reduces by area.
 Usage:
   python3 art/tools/pixelize.py raw.png --id figure.hob --preview
   python3 art/tools/pixelize.py raw.png --id place.stall --offset-y 40    # the crop window moved down 40 source pixels
+  python3 art/tools/pixelize.py raw.png --id place.stall --recolour '#c29026=#ad7d52'   # the road back to earth
 Options: --mode flat|grid|area, --key '#ff00ff', --block N (grid mode's art-pixel size), --despeckle, --no-quiet,
---no-outline, --out PATH, --preview. Needs only Pillow. Check the result with art/tools/validate.py: it holds every asset
+--no-outline, --recolour '#from=#to' (repeatable), --out PATH, --preview. Needs only Pillow. Check the result with art/tools/validate.py: it holds every asset
 to its category's calm thresholds, and the quiet stage can't rescue a busy drawing (regenerate it simpler).
 """
 import argparse
@@ -356,8 +360,42 @@ def flat_alpha(img, spec, key=None):
         return _threshold(img)
     key = key or MAGENTA
     if fit in ("frame", "strip"):
-        return _key_everywhere(img, key, 150)
-    return _key_everywhere(remove_background(img, key, tolerance=60), key, 60)
+        return defringe(_key_everywhere(img, key, 150), key)
+    return defringe(_key_everywhere(remove_background(img, key, tolerance=60), key, 60), key)
+
+
+def defringe(img, key):
+    """The anti-aliased rim where the subject met the key colour: a pixel on the shape's edge that's the colour just
+    inside it with some of the key mixed in takes that inner colour, so the edge doesn't keep a pink line of its own."""
+    from PIL import ImageFilter
+    alpha = img.getchannel("A").point(lambda v: 255 if v >= 128 else 0)
+    inside = alpha.filter(ImageFilter.MinFilter(5))
+    w, h = img.size
+    a, ins = artlib.pixels(alpha), artlib.pixels(inside)
+    px = img.load()
+    changes = []
+    for i, (on, deep) in enumerate(zip(a, ins)):
+        if not on or deep:
+            continue
+        x, y = i % w, i // w
+        p = px[x, y][:3]
+        best = None
+        for dy in range(-3, 4):
+            for dx in range(-3, 4):
+                X, Y = x + dx, y + dy
+                if 0 <= X < w and 0 <= Y < h and ins[Y * w + X]:
+                    c = px[X, Y][:3]
+                    towards = [k - v for k, v in zip(key, c)]
+                    span = math.hypot(*towards) or 1
+                    t = sum((q - v) * k for q, v, k in zip(p, c, towards)) / span ** 2
+                    off = math.dist(p, [v + t * k for v, k in zip(c, towards)])
+                    if best is None or off < best[0]:
+                        best = (off, t, span, c)
+        if best and 0.1 < best[1] < 1 and best[0] < max(8, 0.3 * best[1] * best[2]):
+            changes.append((x, y, best[3]))
+    for x, y, c in changes:
+        px[x, y] = (*c, 255)
+    return img
 
 
 def _content_box(img):
@@ -367,56 +405,129 @@ def _content_box(img):
     return box[0], box[1], box[2] + 1, box[3] + 1
 
 
-def snap_areas(img, colours, clusters=64, merge=0.035):
-    """Every opaque pixel to a palette colour, an area at a time. The picture's own colours are clustered, clusters that
-    look nearly alike (OKLab, under `merge`) are joined (a flat area's noise and anti-aliasing, or two tones too close to
-    tell apart), and each group goes to its nearest palette colour by eye. Snapping pixel by pixel instead makes an area
-    whose colour sits between two palette colours flicker between them: speckle."""
+def snap_areas(img, colours, prefer=(), clusters=128, merge=0.035, edge=0.04, bonus=0.015):
+    """Every opaque pixel to a palette colour, an area at a time (snapping pixel by pixel instead makes an area whose
+    colour sits between two palette colours flicker between them: speckle).
+      1. The picture's own colours are clustered, and clusters that look nearly alike (OKLab, every pair of their
+         colours under `merge`) are joined: a flat area's noise and anti-aliasing. Every pair, so a run of in-between
+         tones along an edge can't chain two areas into one (a hat's brim into the face under it).
+      2. Each area goes to its nearest palette colour by eye, never much louder than drawn (a muted brown between umber
+         and gold goes to the umber), and a little nearer (`bonus`) for a colour the prompt asked for (`prefer`, the
+         asset's ramps) of the same family: the earth road stays earth when gold is as near.
+      3. Two areas the picture draws apart (more than `edge`, along a real stretch of border) that land on one colour
+         are kept apart: one steps along that colour's ramp toward its own lightness, a shade of the same material
+         (the smaller, the detail, unless the larger's step is nearer what was drawn), if that's not much further."""
     rgb = img.convert("RGB")
+    alpha = img.getchannel("A").point(lambda v: 255 if v >= 128 else 0)
     q = rgb.quantize(colors=clusters, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
     pal = q.getpalette()
-    groups = []  # [count, (r, g, b) weighted sum, oklab of the mean, [palette indices]]
-    for count, index in q.getcolors(256) or []:
-        c = tuple(pal[index * 3:index * 3 + 3])
-        groups.append([count, [v * count for v in c], artlib.oklab(c), [index]])
-    while len(groups) > 1:
-        best = None
-        for i in range(len(groups)):
-            for j in range(i + 1, len(groups)):
-                d = math.dist(groups[i][2], groups[j][2])
-                if best is None or d < best[0]:
-                    best = (d, i, j)
-        if best[0] >= merge:
+    index = artlib.pixels(q)
+    opaque = artlib.pixels(alpha)
+    counts = Counter(i for i, a in zip(index, opaque) if a)
+    if not counts:
+        return Image.new("RGBA", img.size, CLEAR)
+    found = list(counts)
+    seeds = [tuple(pal[i * 3:i * 3 + 3]) for i in found]
+    labs = [artlib.oklab(c) for c in seeds]
+    n = len(found)
+    far = [[math.dist(labs[i], labs[j]) for j in range(n)] for i in range(n)]
+    members = {i: [i] for i in range(n)}
+    while len(members) > 1:
+        alive = list(members)
+        d, i, j = min((far[i][j], i, j) for x, i in enumerate(alive) for j in alive[x + 1:])
+        if d >= merge:
             break
-        _, i, j = best
-        a, b = groups[i], groups.pop(j)
-        a[0] += b[0]
-        a[1] = [x + y for x, y in zip(a[1], b[1])]
-        a[2] = artlib.oklab(tuple(v / a[0] for v in a[1]))
-        a[3] += b[3]
-    mapping = list(range(256))
-    targets = []
-    cache = {}
-    for count, total, _, indices in groups:
-        target = artlib.nearest(tuple(round(v / count) for v in total), colours, cache)
-        k = len(targets)
-        targets.append(target)
-        for index in indices:
-            mapping[index] = k
-    flat_pal = [v for c in targets for v in c]
+        members[i] += members.pop(j)
+        for k in members:
+            far[i][k] = far[k][i] = max(far[i][k], far[j][k])
+    groups = list(members.values())
+    group_of = {found[s]: g for g, ss in enumerate(groups) for s in ss}
+    size = [sum(counts[found[s]] for s in ss) for ss in groups]
+    means = [tuple(round(sum(seeds[s][c] * counts[found[s]] for s in ss) / size[g]) for c in range(3))
+             for g, ss in enumerate(groups)]
+
+    prefer = set(prefer)
+
+    def hue(c):
+        _, a, b = artlib.oklab(c)
+        return math.degrees(math.atan2(b, a)) % 360, math.hypot(a, b)
+
+    def kin(a, b):
+        """Two colours of one family: near in hue and in how strong a colour they are (two greys are)."""
+        (ha, ca), (hb, cb) = hue(a), hue(b)
+        if ca < 0.03 or cb < 0.03:
+            return ca < 0.03 and cb < 0.03
+        return abs((ha - hb + 180) % 360 - 180) <= 16 and abs(ca - cb) <= 0.03
+
+    def cost(g, c):
+        # A colour no louder than drawn: a muted brown between umber and gold goes to the umber.
+        louder = max(0.0, hue(c)[1] - hue(means[g])[1] - 0.02)
+        return (artlib.distance(means[g], c) + 0.5 * louder
+                - (bonus if c in prefer and kin(means[g], c) else 0))
+
+    target = [min(colours, key=lambda c: cost(g, c)) for g in range(len(groups))]
+
+    w, h = img.size
+    label = [group_of[i] if a else -1 for i, a in zip(index, opaque)]
+    border = Counter()
+    for y in range(h):
+        row = y * w
+        for x in range(w):
+            g = label[row + x]
+            if g < 0:
+                continue
+            if x + 1 < w and label[row + x + 1] >= 0 and label[row + x + 1] != g:
+                border[min(g, label[row + x + 1]), max(g, label[row + x + 1])] += 1
+            if y + 1 < h and label[row + w + x] >= 0 and label[row + w + x] != g:
+                border[min(g, label[row + w + x]), max(g, label[row + w + x])] += 1
+    neighbours = {}
+    for (a, b), count in border.items():
+        neighbours.setdefault(a, {})[b] = count
+        neighbours.setdefault(b, {})[a] = count
+
+    # 3. Drawn edges.
+    def drawn(a, b):
+        count = border[min(a, b), max(a, b)]
+        return count >= max(8, 0.08 * math.sqrt(min(size[a], size[b]))) and artlib.distance(means[a], means[b]) >= edge
+
+    ramp_of = {c: (cs, i) for cs in artlib.ramps().values() for i, c in enumerate(cs)}
+    def step(g, other):
+        """g a shade along its colour's ramp, toward its own lightness: (how much further from what was drawn, shade)."""
+        ramp, i = ramp_of.get(target[g], (None, None))
+        if ramp is None:
+            return None
+        j = i - 1 if artlib.oklab(means[g])[0] < artlib.oklab(means[other])[0] else i + 1
+        if not 0 <= j < len(ramp) or ramp[j] in {target[o] for o in neighbours.get(g, {}) if drawn(g, o)}:
+            return None
+        return cost(g, ramp[j]) - cost(g, target[g]), ramp[j]
+
+    for a, b in sorted(border, key=lambda pair: -border[pair]):
+        if target[a] != target[b] or not drawn(a, b):
+            continue
+        small, large = (a, b) if size[a] < size[b] else (b, a)
+        options = [(s[0] + extra, g, s[1]) for g, other, extra in ((small, large, 0), (large, small, 0.005))
+                   if (s := step(g, other))]
+        if options and min(options)[0] <= 0.05:
+            _, g, shade = min(options)
+            target[g] = shade
+
+    mapping = [0] * 256
+    for i, g in group_of.items():
+        mapping[i] = g
+    flat_pal = [v for c in target for v in c]
     q = q.point(mapping)
-    q.putpalette(flat_pal + flat_pal[:3] * (256 - len(targets)))
+    q.putpalette(flat_pal + flat_pal[:3] * (256 - len(target)))
     out = Image.new("RGBA", img.size, CLEAR)
-    out.paste(q.convert("RGB"), (0, 0), img.getchannel("A").point(lambda v: 255 if v >= 128 else 0))
+    out.paste(q.convert("RGB"), (0, 0), alpha)
     return out
 
 
-def mode_downscale(img, region, size, colours, alpha_min=0.5):
+def mode_downscale(img, region, size, colours, alpha_min=0.5, prefer=()):
     """Each target pixel takes the commonest palette colour of the block of `region` it covers (transparent when less
     than `alpha_min` of the block is opaque): flat areas stay flat, and anti-aliased edges, specks and texture finer
     than a block don't survive."""
     tw, th = size
-    src = snap_areas(img.crop(region), colours)
+    src = snap_areas(img.crop(region), colours, prefer)
     sw, sh = src.size
     data = artlib.pixels(src)
     col = [min(tw - 1, x * tw // sw) for x in range(sw)]
@@ -492,12 +603,13 @@ def flat(img, spec, manifest, key=None, offset_y=0, calm=True, outline=True):
     colours = sorted(artlib.allowed_colours(spec, manifest))
     ring = 1 if outline and spec.get("outline") else 0
     img = flat_alpha(img, spec, key)
+    prefer = artlib.hinted_colours(spec)
     alpha_min = spec.get("alpha_min", 0.5)
     canvas = Image.new("RGBA", (w, h), CLEAR)
     if fit in ("canvas", "frame"):
-        canvas = mode_downscale(img, _cropped_to_aspect(img, w, h, offset_y), (w, h), colours, alpha_min)
+        canvas = mode_downscale(img, _cropped_to_aspect(img, w, h, offset_y), (w, h), colours, alpha_min, prefer)
     elif fit == "strip":
-        canvas = mode_downscale(img, _content_box(img), (w, h), colours, alpha_min)
+        canvas = mode_downscale(img, _content_box(img), (w, h), colours, alpha_min, prefer)
     else:
         box = _content_box(img)
         bw, bh = box[2] - box[0], box[3] - box[1]
@@ -505,18 +617,18 @@ def flat(img, spec, manifest, key=None, offset_y=0, calm=True, outline=True):
         if fit == "figure":
             th = spec["height"] - 2 * ring
             tw = max(1, round(bw * th / bh))
-            small = mode_downscale(img, box, (min(tw, w - 2 * ring), th), colours, alpha_min)
+            small = mode_downscale(img, box, (min(tw, w - 2 * ring), th), colours, alpha_min, prefer)
             canvas.alpha_composite(small, ((w - small.width) // 2, h - ring - th))
         elif fit == "shelf":
             tw = w - 2 * ring
             th = max(1, round(bh * tw / bw))
-            small = mode_downscale(img, box, (tw, th), colours, alpha_min)
+            small = mode_downscale(img, box, (tw, th), colours, alpha_min, prefer)
             canvas.alpha_composite(small, (ring, spec["board_row"] - _board_top(small)))
         else:
             iw, ih = w - 2 * m - 2 * ring, h - 2 * m - 2 * ring
             scale = min(iw / bw, ih / bh)
             tw, th = max(1, round(bw * scale)), max(1, round(bh * scale))
-            small = mode_downscale(img, box, (tw, th), colours, alpha_min)
+            small = mode_downscale(img, box, (tw, th), colours, alpha_min, prefer)
             x = (w - tw) // 2
             # On its baseline (a thing on the table, a prop on the counter), hung from the top (a lantern), or centred.
             y = (spec["baseline"] - ring - th + 1 if spec.get("baseline") is not None
@@ -602,6 +714,25 @@ def process_sheet(img, spec, manifest, **kw):
     return sheet
 
 
+def recolour(img, swaps, allowed):
+    """A material that snapped into the wrong ramp (an earth road gone gold, a shirt's shade gone yellow) put right
+    the same way everywhere in the asset: '#from=#to', both palette colours."""
+    table = {}
+    for swap in swaps:
+        a, _, b = swap.partition("=")
+        a, b = artlib.hex_rgb(a.strip()), artlib.hex_rgb(b.strip())
+        if b not in allowed:
+            raise SystemExit(f"--recolour {swap}: {artlib.rgb_hex(b)} isn't a palette colour")
+        table[a] = b
+    px = img.load()
+    for y in range(img.height):
+        for x in range(img.width):
+            c = px[x, y]
+            if c[3] and c[:3] in table:
+                px[x, y] = (*table[c[:3]], c[3])
+    return img
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("input")
@@ -614,6 +745,8 @@ def main():
     ap.add_argument("--despeckle", action="store_true")
     ap.add_argument("--no-quiet", action="store_true", help="skip the quiet stage (texture specks and tiny regions)")
     ap.add_argument("--no-outline", action="store_true")
+    ap.add_argument("--recolour", action="append", default=[], metavar="FROM=TO",
+                    help="after snapping, one palette colour for another, e.g. '#c29026=#ad7d52' (repeatable)")
     ap.add_argument("--out")
     ap.add_argument("--preview", action="store_true")
     args = ap.parse_args()
@@ -625,6 +758,8 @@ def main():
     kw = dict(mode=args.mode, key=key, block=args.block, offset_y=args.offset_y, outline=not args.no_outline,
               speckles=args.despeckle, calm=not args.no_quiet)
     out = process_sheet(img, spec, manifest, **kw) if spec.get("frames") else process(img, spec, manifest, **kw)
+    if args.recolour:
+        out = recolour(out, args.recolour, artlib.allowed_colours(spec, manifest))
     dest = args.out or artlib.path(spec["output"])
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     out.save(dest)

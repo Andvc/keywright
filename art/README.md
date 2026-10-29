@@ -12,16 +12,21 @@ what you've bought and full-length figures for everyone who comes to the counter
 [`manifest.json`](manifest.json) (every asset, its spec and its prompt). [`INVENTORY.md`](INVENTORY.md) is the same
 list as tables.
 
-## For the owner: starting round 2
+## For the owner: round 2's next step
 
-Start a Codex session on this repository, on the branch this brief is on, and give it:
+Batch 9 (the anchors) is on `art/round2` and the method holds (`ART_DIRECTION.md`, "What batch 9 taught"). Before
+batch 10, the anchors are pixelized again with the improved pipeline and two of them are made again from corrected
+prompts (batch 9r below). Give Codex, on `art/round2`:
 
-> Follow `art/README.md` for round 2. On a branch `art/round2` made from this one, make batch 9 (the anchors), run
-> `python3 art/tools/validate.py --sheets`, push, and stop: I'll look at `art/generated/_review/` (the
-> `counter_stall*.png` mock-ups first) and approve the anchors or ask for changes before anything else is made.
+> Merge `prototype/0.25` into `art/round2` (it changes `art/tools/` and the manifest, nothing in `art/generated/`). Then
+> do batch 9r from `art/README.md`: pixelize every batch-9 asset again from its full-resolution original with the
+> updated `art/tools/pixelize.py` (same commands and offsets as before), make `sky.midday` and `counter.stall` again from
+> their updated prompts, run `python3 art/tools/validate.py --sheets`, record it in `DELIVERY.md` and push. Then go on
+> with batches 10-15 in order, pushing after each.
 
-Once the anchors are approved, tell it to go on with batches 10-15. When it's done, a Claude session merges
-`art/round2` and puts the layered scene in the game (see the end of this file).
+(To look at the revised anchors before anything else is made, end the message at "and push" instead, and send "go on
+with batches 10-15" once you're happy.) When it's done, a Claude session merges `art/round2` and fills in the rest of
+the layered scene (see the end of this file).
 
 ## What's here
 
@@ -45,7 +50,8 @@ the scene's layers and the figures.
 
 | Batch | What | Assets |
 |---|---|---|
-| 9 | **Anchors**: `sky.midday`, the stall's `place`, `frame`, `shelf`, `counter`, `sheet` and lantern, `figure.hob`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`, `icon.upgrade.lamp`, `icon.kind.coins`. **Stop here for the owner's approval** | 13 |
+| 9 | **Anchors**: `sky.midday`, the stall's `place`, `frame`, `shelf`, `counter`, `sheet` and lantern, `figure.hob`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`, `icon.upgrade.lamp`, `icon.kind.coins`. **Stop here for the owner's approval** (done: delivered and reviewed) | 13 |
+| 9r | **The anchors revised**: every batch-9 asset pixelized again from its original with the 0.25 pipeline (it snaps colours an area at a time without joining areas the model drew apart); `sky.midday` and `counter.stall` made again from their corrected prompts | 13 |
 | 10 | The rest of the scene: the other skies, places, frames, shelves, counters, sheets and lanterns, the counter's props, and the four story scenes | 32 |
 | 11 | The other figures (Mara and the King unmasked last: P3) | 37 |
 | 12 | Things in chests and Heartsongs | 40 |
@@ -75,7 +81,8 @@ anchors.
    fits the picture to the canvas the way its category says, gives each art pixel the commonest colour of its block,
    snaps to the palette, quiets stray specks, caps the colours and adds the outline, then prints the asset's quiet
    measures. For a whole picture (a sky, a place, the frame, a scene), `--offset-y N` moves the 16:9 crop window down N
-   source pixels; for a magenta that isn't pure, `--key '#rrggbb'`.
+   source pixels; for a magenta that isn't pure, `--key '#rrggbb'`. If a material lands in the wrong ramp (an earth road
+   gone gold), `--recolour '#from=#to'` swaps one palette colour for another all over the asset; record it.
 5. **Validate:** `python3 art/tools/validate.py --only <id>`. Fix every failure by regenerating ("too busy" means
    simpler; a layer off its lines means the composition, see `reference/scene/counter_layout.png`). Never blur,
    posterize or smooth a picture to pass. Editing a few pixels by hand is fine.
