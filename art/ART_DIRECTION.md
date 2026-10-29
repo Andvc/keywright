@@ -97,8 +97,10 @@ reads calm at every hour. What went wrong wasn't the drawing:
 3. **The brief gave the midday sky azure 4**, the palette's strongest blue, which made it the loudest colour on the
    screen. It's azure 5-6 and steel 4 now: a soft, light blue.
 
-So batch 9 is pixelized again from its originals with the new pipeline, and the sky and the counter are made again from
-their new prompts, before batch 10.
+And the owner found the anchors calm but a little too plain. So before batch 10, the style study (`art/study/`) draws
+the stall's counter in four styles at three levels of detail and at both densities. Batch 9 is then made again in the
+style chosen, and this document is rewritten for it: the preamble, the detail budgets, and the quiet limits, taken from
+the chosen variant's numbers.
 
 ## The look in one line
 

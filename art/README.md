@@ -14,19 +14,19 @@ list as tables.
 
 ## For the owner: round 2's next step
 
-Batch 9 (the anchors) is on `art/round2` and the method holds (`ART_DIRECTION.md`, "What batch 9 taught"). Before
-batch 10, the anchors are pixelized again with the improved pipeline and two of them are made again from corrected
-prompts (batch 9r below). Give Codex, on `art/round2`:
+Batch 9 (the anchors) is on `art/round2`. It came out calm, but a little too plain. So before anything else is made, the
+style study (`art/study/README.md`) draws the stall's counter in four styles at three levels of detail, at both
+densities, for you to choose a direction. Give Codex, on `art/round2`:
 
-> Merge `prototype/0.25` into `art/round2` (it changes `art/tools/` and the manifest, nothing in `art/generated/`). Then
-> do batch 9r from `art/README.md`: pixelize every batch-9 asset again from its full-resolution original with the
-> updated `art/tools/pixelize.py` (same commands and offsets as before), make `sky.midday` and `counter.stall` again from
-> their updated prompts, run `python3 art/tools/validate.py --sheets`, record it in `DELIVERY.md` and push. Then go on
-> with batches 10-15 in order, pushing after each.
+> Merge `prototype/0.25` into `art/round2`. Then do the style study in `art/study/README.md`: generate each prompt in
+> `art/study/prompts.md` (two candidates each, the palette swatch attached), process the kept ones with
+> `art/tools/study.py`, run `python3 art/tools/study.py review`, write `art/study/NOTES.md`, push, and stop. Make no
+> other round-2 art until I've chosen a direction.
 
-(To look at the revised anchors before anything else is made, end the message at "and push" instead, and send "go on
-with batches 10-15" once you're happy.) When it's done, a Claude session merges `art/round2` and fills in the rest of
-the layered scene (see the end of this file).
+Then look at `art/study/review/` (its README says in what order) and say which direction. The brief is rewritten for it,
+and batch 9 is made again in that style through the improved pipeline (batch 9r below), before batches 10-15. When
+those are done, a Claude session merges `art/round2` and fills in the rest of the layered scene (see the end of this
+file).
 
 ## What's here
 
@@ -40,6 +40,7 @@ the layered scene (see the end of this file).
 | `reference/quiet/` | `chest_drawn_4x.png` (the chest the game draws in code: how simple a sprite should be) and `busy_and_quiet.png` (the old art beside round 1's) |
 | `reference/current/`, `reference/screens/` | The art before round 1, and in-game screenshots from round 1: for **what** each thing is, never for style |
 | `tools/` | `pixelize.py` (raw image to finished asset; `--mode flat` for round 2), `validate.py` (checks, report, contact sheets and the counter mock-ups), `scene.py` (the scene's layout and how the layers stack), `build_manifest.py` and `assets_*.py` (the source of the manifest), `make_references.py`, `make_palette.py`, `artlib.py`. Python 3 and Pillow only |
+| `study/` | The style study: four styles at three levels of detail, its prompts and review pictures (`study/README.md`) |
 | `generated/` | The delivered art (round 1's until round 2 replaces it), `report.json`, `_review/`, `DELIVERY.md` and `_workflow/` (round 1's own scripts, kept as a record) |
 
 ## Round 2: what to make, in what order
@@ -51,7 +52,8 @@ the scene's layers and the figures.
 | Batch | What | Assets |
 |---|---|---|
 | 9 | **Anchors**: `sky.midday`, the stall's `place`, `frame`, `shelf`, `counter`, `sheet` and lantern, `figure.hob`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`, `icon.upgrade.lamp`, `icon.kind.coins`. **Stop here for the owner's approval** (done: delivered and reviewed) | 13 |
-| 9r | **The anchors revised**: every batch-9 asset pixelized again from its original with the 0.25 pipeline (it snaps colours an area at a time without joining areas the model drew apart); `sky.midday` and `counter.stall` made again from their corrected prompts | 13 |
+| S | **The style study** (`art/study/README.md`): the stall's counter in four styles at three levels of detail, and one thing in each style. **Stop for the owner's choice** | 15 |
+| 9r | **The anchors again, in the chosen style**, through the 0.25 pipeline (it snaps colours an area at a time without joining areas the model drew apart), from the brief rewritten for the choice | 13 |
 | 10 | The rest of the scene: the other skies, places, frames, shelves, counters, sheets and lanterns, the counter's props, and the four story scenes | 32 |
 | 11 | The other figures (Mara and the King unmasked last: P3) | 37 |
 | 12 | Things in chests and Heartsongs | 40 |

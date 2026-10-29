@@ -18,3 +18,8 @@ __pycache__/
 # Raw image-generator output (keep only small .webp previews under art/generated/_raw/)
 art/generated/_raw/*.png
 art/generated/_raw/*.jpg
+
+# The style study's raw generations: only small .webp copies are kept
+art/study/raw/*.png
+art/study/raw/*.jpg
+art/study/raw/*.jpeg

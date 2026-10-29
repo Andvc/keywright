@@ -298,7 +298,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The art is in `art/generated/`, made to the brief in `art/` (`README.md` first). Round 1 (0.23) came out too busy to
   look at for hours; round 2 (0.25) redraws it flat and quiet and builds the shop scene from layers (Codex, on a branch
   `art/round2`, its anchors approved by the owner before the rest; `ART_DIRECTION.md`'s "Why round 2" has the
-  measurements and the causes). The generator never draws pixel art: it draws flat-colour illustrations on magenta, and
+  measurements and the causes). Batch 9, the anchors, came out calm but a little too plain, so the style study
+  (`art/study/`, `art/tools/study.py`) draws the stall's counter in four styles at three levels of detail and two
+  densities, as the counter screen, for the owner to choose a direction before anything else is made; the brief below
+  is rewritten for the choice. The generator never draws pixel art: it draws flat-colour illustrations on magenta, and
   `art/tools/pixelize.py --mode flat` makes the pixel art an area at a time, so a model's texture never gets in. The
   style: flat-colour storybook pixel art, a few big flat shapes, no texture or line work, at most two details on a
   figure or thing, the 74-colour palette in `art/palette/`, lit from the upper left in neutral daylight, a 1px
