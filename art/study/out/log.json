@@ -1,0 +1,222 @@
+{
+ "C1_2x.png": {
+  "busy": 7.706,
+  "colours": 30,
+  "edges": 0.131,
+  "offset_y": 0,
+  "out": "C1_2x.png",
+  "raw": "C1_B.png",
+  "raw_sha": "1b9c875b80373f27",
+  "specks": 0.013
+ },
+ "C1_4x.png": {
+  "busy": 11.229,
+  "colours": 30,
+  "edges": 0.17,
+  "offset_y": 0,
+  "out": "C1_4x.png",
+  "raw": "C1_B.png",
+  "raw_sha": "1b9c875b80373f27",
+  "specks": 0.015
+ },
+ "C2_2x.png": {
+  "busy": 10.795,
+  "colours": 28,
+  "edges": 0.233,
+  "offset_y": 73,
+  "out": "C2_2x.png",
+  "raw": "C2_A.png",
+  "raw_sha": "54a2df2c5096e5ae",
+  "specks": 0.041
+ },
+ "C2_4x.png": {
+  "busy": 13.051,
+  "colours": 28,
+  "edges": 0.255,
+  "offset_y": 73,
+  "out": "C2_4x.png",
+  "raw": "C2_A.png",
+  "raw_sha": "54a2df2c5096e5ae",
+  "specks": 0.043
+ },
+ "C3_2x.png": {
+  "busy": 14.03,
+  "colours": 37,
+  "edges": 0.269,
+  "offset_y": 39,
+  "out": "C3_2x.png",
+  "raw": "C3_B.png",
+  "raw_sha": "a3441556db4f2a13",
+  "specks": 0.055
+ },
+ "C3_4x.png": {
+  "busy": 17.104,
+  "colours": 32,
+  "edges": 0.281,
+  "offset_y": 39,
+  "out": "C3_4x.png",
+  "raw": "C3_B.png",
+  "raw_sha": "a3441556db4f2a13",
+  "specks": 0.052
+ },
+ "F2_2x.png": {
+  "busy": 4.813,
+  "colours": 29,
+  "edges": 0.132,
+  "offset_y": 61,
+  "out": "F2_2x.png",
+  "raw": "F2_B.png",
+  "raw_sha": "1abc70d4c5a9c3ed",
+  "specks": 0.01
+ },
+ "F2_4x.png": {
+  "busy": 7.715,
+  "colours": 29,
+  "edges": 0.183,
+  "offset_y": 61,
+  "out": "F2_4x.png",
+  "raw": "F2_B.png",
+  "raw_sha": "1abc70d4c5a9c3ed",
+  "specks": 0.012
+ },
+ "F3_2x.png": {
+  "busy": 7.632,
+  "colours": 30,
+  "edges": 0.186,
+  "offset_y": 49,
+  "out": "F3_2x.png",
+  "raw": "F3_A.png",
+  "raw_sha": "0e62c418d071db12",
+  "specks": 0.022
+ },
+ "F3_4x.png": {
+  "busy": 11.045,
+  "colours": 30,
+  "edges": 0.226,
+  "offset_y": 49,
+  "out": "F3_4x.png",
+  "raw": "F3_A.png",
+  "raw_sha": "0e62c418d071db12",
+  "specks": 0.023
+ },
+ "P1_2x.png": {
+  "busy": 3.64,
+  "colours": 25,
+  "edges": 0.128,
+  "offset_y": 59,
+  "out": "P1_2x.png",
+  "raw": "P1_B.png",
+  "raw_sha": "2106cf16be2f80ab",
+  "specks": 0.008
+ },
+ "P1_4x.png": {
+  "busy": 5.537,
+  "colours": 25,
+  "edges": 0.161,
+  "offset_y": 59,
+  "out": "P1_4x.png",
+  "raw": "P1_B.png",
+  "raw_sha": "2106cf16be2f80ab",
+  "specks": 0.008
+ },
+ "P2_2x.png": {
+  "busy": 8.383,
+  "colours": 22,
+  "edges": 0.287,
+  "offset_y": 80,
+  "out": "P2_2x.png",
+  "raw": "P2_B.png",
+  "raw_sha": "a5ee5538b2be91cb",
+  "specks": 0.031
+ },
+ "P2_4x.png": {
+  "busy": 10.428,
+  "colours": 22,
+  "edges": 0.286,
+  "offset_y": 80,
+  "out": "P2_4x.png",
+  "raw": "P2_B.png",
+  "raw_sha": "a5ee5538b2be91cb",
+  "specks": 0.035
+ },
+ "P3_2x.png": {
+  "busy": 10.419,
+  "colours": 31,
+  "edges": 0.283,
+  "offset_y": 59,
+  "out": "P3_2x.png",
+  "raw": "P3_B.png",
+  "raw_sha": "184cbecce96e8ac4",
+  "specks": 0.041
+ },
+ "P3_4x.png": {
+  "busy": 13.716,
+  "colours": 31,
+  "edges": 0.31,
+  "offset_y": 59,
+  "out": "P3_4x.png",
+  "raw": "P3_B.png",
+  "raw_sha": "184cbecce96e8ac4",
+  "specks": 0.051
+ },
+ "X1_4x.png": {
+  "busy": 11.249,
+  "colours": 32,
+  "edges": 0.241,
+  "offset_y": 73,
+  "out": "X1_4x.png",
+  "raw": "X1_B.png",
+  "raw_sha": "dd76c18899037aa6",
+  "specks": 0.033
+ },
+ "X2_4x.png": {
+  "busy": 14.885,
+  "colours": 32,
+  "edges": 0.324,
+  "offset_y": 65,
+  "out": "X2_4x.png",
+  "raw": "X2_B.png",
+  "raw_sha": "40ea22b13f4225cf",
+  "specks": 0.063
+ },
+ "X2d_2x.png": {
+  "busy": 10.419,
+  "colours": 48,
+  "edges": 0.261,
+  "offset_y": 48,
+  "out": "X2d_2x.png",
+  "raw": "X2d_A.png",
+  "raw_sha": "1babfb515026ccac",
+  "specks": 0.038
+ },
+ "X3_4x.png": {
+  "busy": 20.034,
+  "colours": 32,
+  "edges": 0.367,
+  "offset_y": -1,
+  "out": "X3_4x.png",
+  "raw": "X3_B.png",
+  "raw_sha": "14c4854481e99433",
+  "specks": 0.096
+ },
+ "item_C.png": {
+  "out": "item_C.png",
+  "raw": "item_C_A.png",
+  "raw_sha": "906965e1cb7fa899"
+ },
+ "item_F.png": {
+  "out": "item_F.png",
+  "raw": "item_F_B.png",
+  "raw_sha": "cb1a948f2e950031"
+ },
+ "item_P.png": {
+  "out": "item_P.png",
+  "raw": "item_P_B.png",
+  "raw_sha": "45a60e55b684ec27"
+ },
+ "item_X.png": {
+  "out": "item_X.png",
+  "raw": "item_X_B_alpha.png",
+  "raw_sha": "7817e9471a948e5e"
+ }
+}

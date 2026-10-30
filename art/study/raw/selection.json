@@ -1,0 +1,114 @@
+[
+  {
+    "id": "F2",
+    "candidate": "B",
+    "raw": "F2_B.png",
+    "offset_y": 61,
+    "processing_raw": "F2_B.png"
+  },
+  {
+    "id": "F3",
+    "candidate": "A",
+    "raw": "F3_A.png",
+    "offset_y": 49,
+    "processing_raw": "F3_A.png"
+  },
+  {
+    "id": "C1",
+    "candidate": "B",
+    "raw": "C1_B.png",
+    "offset_y": 0,
+    "processing_raw": "C1_B.png"
+  },
+  {
+    "id": "C2",
+    "candidate": "A",
+    "raw": "C2_A.png",
+    "offset_y": 73,
+    "processing_raw": "C2_A.png"
+  },
+  {
+    "id": "C3",
+    "candidate": "B",
+    "raw": "C3_B.png",
+    "offset_y": 39,
+    "processing_raw": "C3_B.png"
+  },
+  {
+    "id": "P1",
+    "candidate": "B",
+    "raw": "P1_B.png",
+    "offset_y": 59,
+    "processing_raw": "P1_B.png"
+  },
+  {
+    "id": "P2",
+    "candidate": "B",
+    "raw": "P2_B.png",
+    "offset_y": 80,
+    "processing_raw": "P2_B.png"
+  },
+  {
+    "id": "P3",
+    "candidate": "B",
+    "raw": "P3_B.png",
+    "offset_y": 59,
+    "processing_raw": "P3_B.png"
+  },
+  {
+    "id": "X1",
+    "candidate": "B",
+    "raw": "X1_B.png",
+    "offset_y": 73,
+    "processing_raw": "X1_B.png"
+  },
+  {
+    "id": "X2",
+    "candidate": "B",
+    "raw": "X2_B.png",
+    "offset_y": 65,
+    "processing_raw": "X2_B.png"
+  },
+  {
+    "id": "X3",
+    "candidate": "B",
+    "raw": "X3_B.png",
+    "offset_y": -1,
+    "processing_raw": "X3_B.png"
+  },
+  {
+    "id": "X2d",
+    "candidate": "A",
+    "raw": "X2d_A.png",
+    "offset_y": 48,
+    "processing_raw": "X2d_A.png"
+  },
+  {
+    "id": "item_F",
+    "candidate": "B",
+    "raw": "item_F_B.png",
+    "offset_y": 0,
+    "processing_raw": "item_F_B.png"
+  },
+  {
+    "id": "item_C",
+    "candidate": "A",
+    "raw": "item_C_A.png",
+    "offset_y": 0,
+    "processing_raw": "item_C_A.png"
+  },
+  {
+    "id": "item_P",
+    "candidate": "B",
+    "raw": "item_P_B.png",
+    "offset_y": 0,
+    "processing_raw": "item_P_B.png"
+  },
+  {
+    "id": "item_X",
+    "candidate": "B",
+    "raw": "item_X_B.png",
+    "offset_y": 0,
+    "processing_raw": "item_X_B_alpha.png"
+  }
+]

@@ -1,0 +1,521 @@
+{
+  "tool": "built-in image_gen",
+  "palette": "art/palette/keywright.png",
+  "candidates": [
+    {
+      "id": "F2",
+      "candidate": "A",
+      "raw": "F2_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a flat-colour illustration, like a picture book printed in flat inks. Clean, vector-like shapes, each a solid fill with a crisp edge; no outlines or line work, no gradients, no texture. Two or three flat tones for each material: a lit side, a shaded side, a small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: outlines or line work; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-91cabd22-9c37-4aed-9d01-6f2d33b4b3eb.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "7c66796733e9407816fa285d09687f7dfdc26d1e4e2267598a1519c2d1302b12",
+      "kept": false
+    },
+    {
+      "id": "F2",
+      "candidate": "B",
+      "raw": "F2_B.png",
+      "requested_size": "1536x1024",
+      "correction": "Correction: strictly flat vector-like solid colour regions, no gradients and no painterly texture; simplify each part to three or four details. Preserve a substantial top beam within the central 16:9 band; put the counter far edge at two thirds of that band.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a flat-colour illustration, like a picture book printed in flat inks. Clean, vector-like shapes, each a solid fill with a crisp edge; no outlines or line work, no gradients, no texture. Two or three flat tones for each material: a lit side, a shaded side, a small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: outlines or line work; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nCorrection: strictly flat vector-like solid colour regions, no gradients and no painterly texture; simplify each part to three or four details. Preserve a substantial top beam within the central 16:9 band; put the counter far edge at two thirds of that band.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-c03dcf67-5d4d-4e47-a09d-b437f200ab68.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "1abc70d4c5a9c3ed451bd052c1787e6c300792ef839a5067bf683c514dee8d07",
+      "kept": true,
+      "preview": "F2_B.webp",
+      "offset_y": 61
+    },
+    {
+      "id": "F3",
+      "candidate": "A",
+      "raw": "F3_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a flat-colour illustration, like a picture book printed in flat inks. Clean, vector-like shapes, each a solid fill with a crisp edge; no outlines or line work, no gradients, no texture. Two or three flat tones for each material: a lit side, a shaded side, a small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: outlines or line work; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-a7364a07-0d19-41d0-bb28-de17416746bd.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "0e62c418d071db12b7999b67ab24af8737f000b0225f5ee686ebfc3449296d64",
+      "kept": true,
+      "preview": "F3_A.webp",
+      "offset_y": 49
+    },
+    {
+      "id": "F3",
+      "candidate": "B",
+      "raw": "F3_B.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a flat-colour illustration, like a picture book printed in flat inks. Clean, vector-like shapes, each a solid fill with a crisp edge; no outlines or line work, no gradients, no texture. Two or three flat tones for each material: a lit side, a shaded side, a small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: outlines or line work; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-04e3c603-b928-4fa6-b68b-5433c0653115.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "609a094eda860dcaa2d9cd0f37f8e5f3f334dd7041f371f99610f3f50adf2aea",
+      "kept": false
+    },
+    {
+      "id": "C1",
+      "candidate": "A",
+      "raw": "C1_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. Detail: plain. A few big, simple shapes; at most two small details on any part; plain areas stay plain.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: thin, sketchy or broken lines; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-ec358f23-2a7f-4f11-9a3b-51a465c88dfb.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "7d9d4051aea6c269cb1f704dc1edd03b24465994947b86dfa45da71b8d365ef2",
+      "kept": false
+    },
+    {
+      "id": "C1",
+      "candidate": "B",
+      "raw": "C1_B.png",
+      "requested_size": "1536x1024",
+      "correction": "Correction: plain means only a few large shapes and at most two details on any part; use flat cel colours and bold uniform plum outlines throughout, including the background, with no painterly texture. Keep the dark beam visible within the central 16:9 crop. In the 1536x1024 source, put the counter's far edge at about y=650, with its middle empty.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. Detail: plain. A few big, simple shapes; at most two small details on any part; plain areas stay plain.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: thin, sketchy or broken lines; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nCorrection: plain means only a few large shapes and at most two details on any part; use flat cel colours and bold uniform plum outlines throughout, including the background, with no painterly texture. Keep the dark beam visible within the central 16:9 crop. In the 1536x1024 source, put the counter's far edge at about y=650, with its middle empty.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-efe2b67e-a57c-46a6-9fba-efd8abf211e5.png",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "sha256": "1b9c875b80373f274f15444938f9b1b62c4bd65a8dc05c5e13e7b3ef08304774",
+      "kept": true,
+      "preview": "C1_B.webp",
+      "offset_y": 0
+    },
+    {
+      "id": "C2",
+      "candidate": "A",
+      "raw": "C2_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: thin, sketchy or broken lines; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-eff63bcf-8794-4d7b-9ee8-c4d7f23abdbc.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "54a2df2c5096e5ae6b211336db537aeddd3b4d1fb4a37058f48f7efe821c4281",
+      "kept": true,
+      "preview": "C2_A.webp",
+      "offset_y": 73
+    },
+    {
+      "id": "C2",
+      "candidate": "B",
+      "raw": "C2_B.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: thin, sketchy or broken lines; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-f8e9b9db-92cd-47d2-9c88-44d60336a372.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "0c44e21e553225a7a819ae559c63f2e435bcb596fffe4ed346608f2d861fcd0d",
+      "kept": false
+    },
+    {
+      "id": "C3",
+      "candidate": "A",
+      "raw": "C3_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: thin, sketchy or broken lines; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-e1defe26-164c-465b-ae5d-ca1d005051d4.png",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "sha256": "db02eec6a96434129469b589a5f983b265360d0b9e3dc1787bcfeb09e8950c8c",
+      "kept": false
+    },
+    {
+      "id": "C3",
+      "candidate": "B",
+      "raw": "C3_B.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: thin, sketchy or broken lines; gradients; texture or noise; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-1ea96e98-f6af-4c27-bc23-6860a9099104.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "a3441556db4f2a13cf64adbbd69a6810eea44e51bbe05e185a3759d4e69dd571",
+      "kept": true,
+      "preview": "C3_B.webp",
+      "offset_y": 39
+    },
+    {
+      "id": "P1",
+      "candidate": "A",
+      "raw": "P1_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The gradients run across big areas (the sky, the fields, the counter), and distant things are paler and bluer, as in a hazy summer landscape. Detail: plain. A few big, simple shapes; at most two small details on any part; plain areas stay plain.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: harsh contrast; heavy brush texture; photographic detail; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-5dfb8452-1bcb-4523-b310-7eb80eced614.png",
+      "actual_size": [
+        1672,
+        940
+      ],
+      "sha256": "e48a857ed97148a6ddfd7dd92995fab624fa03b57694df0db31bedb9af082eba",
+      "kept": false
+    },
+    {
+      "id": "P1",
+      "candidate": "B",
+      "raw": "P1_B.png",
+      "requested_size": "1536x1024",
+      "correction": "Correction: enforce the plain detail level: at most two details on each part, broad smooth gouache colour shapes, no individual grass blades, leaf stippling, scattered pebbles or wood-grain texture. Keep the entire top beam inside the central 16:9 band and raise the counter's far edge to two thirds of that band; keep the middle empty.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The gradients run across big areas (the sky, the fields, the counter), and distant things are paler and bluer, as in a hazy summer landscape. Detail: plain. A few big, simple shapes; at most two small details on any part; plain areas stay plain.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: harsh contrast; heavy brush texture; photographic detail; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nCorrection: enforce the plain detail level: at most two details on each part, broad smooth gouache colour shapes, no individual grass blades, leaf stippling, scattered pebbles or wood-grain texture. Keep the entire top beam inside the central 16:9 band and raise the counter's far edge to two thirds of that band; keep the middle empty.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-10d1e249-549b-459b-a1e6-333d082beaa1.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "2106cf16be2f80ab3ed4daf094c2f47a3edf5c99669bf59c426f4773d58354bb",
+      "kept": true,
+      "preview": "P1_B.webp",
+      "offset_y": 59
+    },
+    {
+      "id": "P2",
+      "candidate": "A",
+      "raw": "P2_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The gradients run across big areas (the sky, the fields, the counter), and distant things are paler and bluer, as in a hazy summer landscape. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: harsh contrast; heavy brush texture; photographic detail; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-58a03a09-094c-480c-be82-d9fdd16103ba.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "0a9bbf11d5bbe649384638b342e3d40bfb7124a31c783247417b984a09d2ff61",
+      "kept": false
+    },
+    {
+      "id": "P2",
+      "candidate": "B",
+      "raw": "P2_B.png",
+      "requested_size": "1536x1024",
+      "correction": "Correction: this is a soft gouache storybook illustration, not a realistic oil painting or photograph. Use simple broad shapes, softened edges, gentle gradients and only light painterly texture; three or four meaningful details per part. Preserve the empty centre and quiet right third. Keep the top beam within the central 16:9 crop and the counter edge two thirds down that crop.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The gradients run across big areas (the sky, the fields, the counter), and distant things are paler and bluer, as in a hazy summer landscape. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: harsh contrast; heavy brush texture; photographic detail; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nCorrection: this is a soft gouache storybook illustration, not a realistic oil painting or photograph. Use simple broad shapes, softened edges, gentle gradients and only light painterly texture; three or four meaningful details per part. Preserve the empty centre and quiet right third. Keep the top beam within the central 16:9 crop and the counter edge two thirds down that crop.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-9dfd89fe-03af-4406-bef9-7f89d0f9d33a.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "a5ee5538b2be91cbd295522486cb85c5d3507dc8338a33424667aefd6ac4dd2f",
+      "kept": true,
+      "preview": "P2_B.webp",
+      "offset_y": 80
+    },
+    {
+      "id": "P3",
+      "candidate": "A",
+      "raw": "P3_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The gradients run across big areas (the sky, the fields, the counter), and distant things are paler and bluer, as in a hazy summer landscape. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: harsh contrast; heavy brush texture; photographic detail; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-d3bf182d-11e6-4a82-8000-b197bed7a519.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "ebe12f1d25f97bc24564106585c6021744a95e83f30b83d42e6ccdb97e441c69",
+      "kept": false
+    },
+    {
+      "id": "P3",
+      "candidate": "B",
+      "raw": "P3_B.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The gradients run across big areas (the sky, the fields, the counter), and distant things are paler and bluer, as in a hazy summer landscape. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: harsh contrast; heavy brush texture; photographic detail; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-23c9b3be-c3a4-4e79-a175-c0c74c86f17d.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "184cbecce96e8ac4ccb7d39055517d7058e347dba6072b617c67dc4f4cf16dc8",
+      "kept": true,
+      "preview": "P3_B.webp",
+      "offset_y": 59
+    },
+    {
+      "id": "X1",
+      "candidate": "A",
+      "raw": "X1_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 320 by 180 big square pixels (each about 4.8 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: plain. A few big, simple shapes; at most two small details on any part; plain areas stay plain.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-abc2ac79-bf08-4574-a5c4-7cab7834879b.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "c88088388922a0071cf0e9ba5ac7cdf355897f18a6679a0e28c390397b3df082",
+      "kept": false
+    },
+    {
+      "id": "X1",
+      "candidate": "B",
+      "raw": "X1_B.png",
+      "requested_size": "1536x1024",
+      "correction": "Correction: enforce the plain detail budget and uniform large pixel grid. Each pixel is one solid colour; big flat clusters in sky, hills, clothing and counter, no gradients, no microtexture, no stippled grass. Keep a large dark beam inside the middle 16:9 band and the far edge of the counter two thirds down that band.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 320 by 180 big square pixels (each about 4.8 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: plain. A few big, simple shapes; at most two small details on any part; plain areas stay plain.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nCorrection: enforce the plain detail budget and uniform large pixel grid. Each pixel is one solid colour; big flat clusters in sky, hills, clothing and counter, no gradients, no microtexture, no stippled grass. Keep a large dark beam inside the middle 16:9 band and the far edge of the counter two thirds down that band.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-c9c86532-5aaf-47f9-8ace-5a174bedfc91.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "dd76c18899037aa6f4d0ceabb0f751f723deb308bec6b22f4a631951817fe681",
+      "kept": true,
+      "preview": "X1_B.webp",
+      "offset_y": 73
+    },
+    {
+      "id": "X2",
+      "candidate": "A",
+      "raw": "X2_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 320 by 180 big square pixels (each about 4.8 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-dbe580a6-6b5a-4552-85f8-827d746a62fd.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "8ba8a4fd6e5916a683b1c6362345bd43f22643c1ae869437b2ece48083ed619e",
+      "kept": false
+    },
+    {
+      "id": "X2",
+      "candidate": "B",
+      "raw": "X2_B.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 320 by 180 big square pixels (each about 4.8 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-c81417ff-d14f-40b2-8f66-8341f4ef04ba.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "40ea22b13f4225cf0e4675127cdc786468efa62968969e2f4b8895cd27860d05",
+      "kept": true,
+      "preview": "X2_B.webp",
+      "offset_y": 65
+    },
+    {
+      "id": "X3",
+      "candidate": "A",
+      "raw": "X3_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 320 by 180 big square pixels (each about 4.8 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-ce9b60d9-7662-492c-9cba-fe7ea979bd8f.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "375dbe1136022bce4ee744c9fbd0666e855b419dda20ef728a3567a9b1ba3661",
+      "kept": false
+    },
+    {
+      "id": "X3",
+      "candidate": "B",
+      "raw": "X3_B.png",
+      "requested_size": "1536x1024",
+      "correction": "Correction: include the specified cart and two small travellers on the road in the middle distance. Keep the rich details organised around large flat pixel clusters, with a quiet right third and empty middle of the counter. Keep the counter's far edge two thirds down the central 16:9 band.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 320 by 180 big square pixels (each about 4.8 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: rich. A lively scene full of small stories, but organised: the most detail in the middle distance, and calm, simple areas where the game's text sits (above Hob's head, the counter's front, the right third). The awning hung with herb bundles, a bell and a string of little flags; crates, sacks and a sleeping cat at the stall's sides; a cart and two small travellers on the road; fields in strips with fences and flowers, sheep on the hills, the castle with its flags, the watermill with smoke from its chimney; texture suggested with a few strokes (wood grain, straw, stones in the road); sunlight and cast shadows (the awning's shadow along the back of the counter, the posts' shadows).\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nCorrection: include the specified cart and two small travellers on the road in the middle distance. Keep the rich details organised around large flat pixel clusters, with a quiet right third and empty middle of the counter. Keep the counter's far edge two thirds down the central 16:9 band.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-f5edfebf-520d-49fc-a898-1f1afa7d0260.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "14c4854481e99433a2d06c07a51570673ec5733c903c4cfb7a71d6698f12bb07",
+      "kept": true,
+      "preview": "X3_B.webp",
+      "offset_y": -1
+    },
+    {
+      "id": "X2d",
+      "candidate": "A",
+      "raw": "X2d_A.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 640 by 360 big square pixels (each about 2.4 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-80c62a1e-9f46-4a87-8dab-4ccef03f4996.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "1babfb515026ccace9c1eeefe22542cbf5fef3358c85a70808f05917865e4855",
+      "kept": true,
+      "preview": "X2d_A.webp",
+      "offset_y": 48
+    },
+    {
+      "id": "X2d",
+      "candidate": "B",
+      "raw": "X2d_B.png",
+      "requested_size": "1536x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one whole screen of the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 640 by 360 big square pixels (each about 2.4 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. Big areas (the sky, the fields, the counter) stay flat clusters, with no texture over them. Detail: lived-in. Each part has three or four well-chosen details that tell you about the place, and nothing is scattered: a bundle of dried herbs and a little brass bell hanging from the awning; a crate of turnips at the side of the stall; a cart with a barrel on the road; a few flower patches and a low fence along the verge; two birds over the hills; smoke curling from the mill; seams and a few nail heads on the counter's planks.\n\nThe picture: one screen of the game, a 16:9 view (keep everything that matters inside the middle 16:9 band; the top and bottom tenth of this image may be cut off), seen straight ahead from behind the counter of Bram's Stall, a roadside market stall at the Brindle crossroads, at midday. From top to bottom: along the very top, a plain dark wooden beam about an eighth of the view deep (the game's top bar sits on it), and under it the stall's awning, scalloped in alternating crimson and cream, reaching about a fifth of the way down. At the left and right edges, the stall's wooden posts, each with a small tin lantern hanging about a third of the way down. Under the awning, a plain wooden display shelf hung on two ropes, spanning the middle about a quarter of the way down, empty (the game puts things on it). Beyond the stall, the crossroads: a packed-earth road running away to low rolling hills, a wooden signpost with two blank arms just right of centre, a castle's small silhouette on a far hill, a river and a small watermill on the right, round trees, a clear sky with a few clouds. On the left, standing behind the counter and turned a little to the right: Hob the Farmer, a broad, sunburnt man in his fifties with a frayed straw hat, grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt; the counter hides him from the waist down, and his face is about a third of the way down the view. The counter's top fills the bottom third: its far edge a straight horizontal line two thirds of the way down, dark brown planks running left to right; the middle of that edge stays empty (the game stands a chest there). The right third stays quiet and simple (the game covers it with a paper sheet).\n\nColours close to the attached palette (soft, muted and warm). Avoid: noise, speckle or dithering over big areas; blurry or soft pixels; pixels of different sizes; text, letters or numbers; a chest; anyone else at the counter; a border or frame around the picture; a dark vignette.\n\nRequest metadata: Generate one independent candidate, PNG, 1536x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-42655b75-3071-43a2-a3cf-822636f7111c.png",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "sha256": "3b11b3850e38ab0595d865afff36e929e71fc38e9293f71a66003bdf550c2f90",
+      "kept": false
+    },
+    {
+      "id": "item_F",
+      "candidate": "A",
+      "raw": "item_F_A.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: a flat-colour illustration, like a picture book printed in flat inks. Clean, vector-like shapes, each a solid fill with a crisp edge; no outlines or line work, no gradients, no texture. Two or three flat tones for each material: a lit side, a shaded side, a small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-edbe7b10-0152-4d12-a7ee-9d2f10c7b5b2.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "5dbd7c5bfadb3ac9d511251826e0a8174dee279f77f8cf10f68d37fef4a29a22",
+      "kept": false
+    },
+    {
+      "id": "item_F",
+      "candidate": "B",
+      "raw": "item_F_B.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: a flat-colour illustration, like a picture book printed in flat inks. Clean, vector-like shapes, each a solid fill with a crisp edge; no outlines or line work, no gradients, no texture. Two or three flat tones for each material: a lit side, a shaded side, a small highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-7e66125d-cdc5-401e-b899-909d57b436ea.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "cb1a948f2e950031888536454cdbae1a5cb3f068057ef8af623a4f9ccf223475",
+      "kept": true,
+      "preview": "item_F_B.webp",
+      "offset_y": 0
+    },
+    {
+      "id": "item_C",
+      "candidate": "A",
+      "raw": "item_C_A.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-3bce052a-7937-4fb0-b0f7-3fd7ed511bfc.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "906965e1cb7fa899b2cbc385ee4e5201761d8be2db44123e68982b01a79c0e3b",
+      "kept": true,
+      "preview": "item_C_A.webp",
+      "offset_y": 0
+    },
+    {
+      "id": "item_C",
+      "candidate": "B",
+      "raw": "item_C_B.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: a clean cartoon illustration, like a modern storybook adventure game. Every shape has a bold, even outline in dark plum (#1a1420), about half a percent of the picture's width thick; flat cel shading in two or three tones with crisp-edged shadow shapes; no gradients, no texture. Soft, muted, warm colours; one gentle light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-8d899a5e-22a0-4367-a573-237d2baa5055.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "35c7a1df973a79cdbfac631f8e886ca5e89cebd15faf79090a499cf1043092f4",
+      "kept": false
+    },
+    {
+      "id": "item_P",
+      "candidate": "A",
+      "raw": "item_P_A.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-be77f4e4-ee8c-4e87-a5de-7be2477f0c88.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "ac76595ce0237903bb267a0292ef228f7cef7a74d432d92dcf0dd6d40903c1b0",
+      "kept": false
+    },
+    {
+      "id": "item_P",
+      "candidate": "B",
+      "raw": "item_P_B.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: a soft gouache storybook painting. Simple shapes with softened edges, gentle gradients, a light painterly texture, three or four tones for each material. Warm, muted colours; light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-148a7af2-22c8-47b9-8c7b-dff99deeb2ec.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "45a60e55b684ec273cf292d14819da9d9cd962f08fce3cd5130d9649227cac0b",
+      "kept": true,
+      "preview": "item_P_B.webp",
+      "offset_y": 0
+    },
+    {
+      "id": "item_X",
+      "candidate": "A",
+      "raw": "item_X_A.png",
+      "requested_size": "1024x1024",
+      "correction": "",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 32 by 32 big square pixels (each about 32 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-d1f38422-315d-499a-9957-8e3e4249b440.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "97356845a43df55219abf1ddb7963c6f9b11d0c60930aac66c57dbc7409e173f",
+      "kept": false
+    },
+    {
+      "id": "item_X",
+      "candidate": "B",
+      "raw": "item_X_B.png",
+      "requested_size": "1024x1024",
+      "correction": "Correction: use an actual coarse 32 by 32 sprite grid, with large uniform square pixels and one solid palette colour per pixel, no subpixel detail or gradients. Keep the front coin's open square hole broad and square, and simplify the hammer and anvil stamps so they read at 32 by 32.",
+      "prompt": "Concept art for Keywright, a cosy fantasy shop game that people look at for hours: one thing from the game, made to choose the game's art style. Style: hand-made pixel art, like a calm 16-bit adventure game. The whole picture is drawn on a grid of 32 by 32 big square pixels (each about 32 pixels of this image), every pixel one solid colour: large clusters of flat colour, a limited, muted palette, dark outlines around shapes, little or no dithering, no noise or speckle. Warm, soft colours; light from the upper left. The subject, a single thing found in a chest: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three. One object, in a three-quarter view from slightly above as if resting on a table, filling about eighty percent of the picture. Background: flat pure magenta (#FF00FF), nothing else in the picture.\n\nCorrection: use an actual coarse 32 by 32 sprite grid, with large uniform square pixels and one solid palette colour per pixel, no subpixel detail or gradients. Keep the front coin's open square hole broad and square, and simplify the hammer and anvil stamps so they read at 32 by 32.\n\nRequest metadata: Generate one independent candidate, PNG, 1024x1024. The attached image is a colour palette reference only; do not reproduce the swatch or its layout. No other art reference.",
+      "source_file": "exec-10e29f3e-3946-415d-8a29-af1ac458bbee.png",
+      "actual_size": [
+        1254,
+        1254
+      ],
+      "sha256": "3a4e1aeca9f69eb3f3c570e9aaca761464ad93647c85ea4efbc3160605cbce30",
+      "kept": true,
+      "preview": "item_X_B.webp",
+      "offset_y": 0,
+      "prepared_input": "item_X_B_alpha.png",
+      "prepared_sha256": "7817e9471a948e5ee2821c91dfbb9bb1b3169fe2931bb25fed9e51dff46c5450",
+      "preparation": "pixelize.flat_alpha(raw, dwarf_gold_crowns spec, key=(255, 0, 255)); existing repository function, then study.py item X"
+    }
+  ]
+}
