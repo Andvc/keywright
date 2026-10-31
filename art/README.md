@@ -12,7 +12,7 @@ what you've bought and full-length figures for everyone who comes to the counter
 [`manifest.json`](manifest.json) (every asset, its spec and its prompt). [`INVENTORY.md`](INVENTORY.md) is the same
 list as tables.
 
-## For the owner: no-outline anchors approved; batch 10 delivered
+## For the owner: remaining round 2 and integration authorized
 
 The style study is complete. The owner chose **C2 at 4x, with detail allowed** on 2026-10-30, then corrected it to
 **no outlines** on 2026-10-31 and requested rollback of the outlined batch.
@@ -25,8 +25,11 @@ Start with the [counter preview](generated/_review/round2_batch9s_playview.png),
 The owner approved these anchors on 2026-10-31 ("可以，下一步做吧"). **Batch 10 now delivers all 32 remaining
 scene assets, with zero validation errors or warnings.** Review the [four shops](generated/_review/round2_batch10_shops.png),
 [props](generated/_review/round2_batch10_props.png), [story scenes](generated/_review/round2_batch10_stories.png)
-and [batch-10 guide](generated/_review/round2_batch10_README.md). Stop here; later batches and game integration
-are not included in this delivery.
+and [batch-10 guide](generated/_review/round2_batch10_README.md).
+The owner then approved this work and requested completion of everything: **"大致ok接着完成所有内容"**.
+Continue batches 11-15 and the game integration documented below. Batch 11 now delivers all 37 remaining
+figures, including the identity reveals, with zero errors or warnings; see its
+[review guide](generated/_review/round2_batch11_README.md). Batches 12-15 and integration are next.
 The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here

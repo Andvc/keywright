@@ -66,5 +66,11 @@ Batch 9r's rejected files remain in git and the local production archive.
 
 The owner approved batch 9s on 2026-10-31: **“可以，下一步做吧”** — approved; do the next step.
 Batch 10 (the remaining scene assets) was completed against these anchors on 2026-10-31: all 32 pass, with zero
-warnings. See its [review guide](../generated/_review/round2_batch10_README.md). Later batches and game
-integration are not part of this next step; work stops after pushing batch 10.
+warnings. See its [review guide](../generated/_review/round2_batch10_README.md).
+
+The owner subsequently approved batch 10 and requested **“大致ok接着完成所有内容”**: continue and finish
+all remaining work. This supersedes the batch-10 stopping point and authorizes batches 11-15 and the game
+integration listed in `art/README.md`, retaining C2 / 4x / meaningful detail / no outlines.
+Batch 11 delivers all 37 remaining figures, including Mara and the King, with zero errors or warnings.
+See the [figure review guide](../generated/_review/round2_batch11_README.md). Continue the remaining batches
+and integration without another direction checkpoint.

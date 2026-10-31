@@ -425,3 +425,96 @@ small tools and story landmarks were visually checked. The four native assembled
 Original style-study outputs and dedicated batch-9s previews are preserved.
 
 **Stop after pushing batch 10.** No batch-11 figures, later object/icon/lock batches or game integration are included.
+
+
+### Batch 11: full-length figures
+
+The owner approved batch 10 and requested **“大致ok接着完成所有内容”**. This supersedes the previous
+batch-10 stop: complete batches 11-15 and the documented game integration. This commit delivers all 37
+remaining figures, including the P3 identity reveals. No figures were skipped; all 37 pass with zero warnings.
+
+Review [the figure guide](_review/round2_batch11_README.md), its four full-figure pages, five actual-size
+counter crop pages, identity pairs and four full composites. All 38 figures, including the approved Hob, were
+inspected against the counter. Faces stay below the speech bubble; the tallest hats/horns can extend behind it.
+These are reference composites, not live captures, and the overlay uses Hob's example speech for placement.
+All four shops at all four hours were also reviewed. Shelf items still include pending round-1 redraws.
+
+The built-in image tool produced **78 candidates**: A/B for every figure, Snikkit C/D, Wenna C and Vexis C.
+It does not expose a verifiable model identifier. Every unchanged manifest prompt, exact appended instruction,
+reference hash, source size, native check, choice and command is recorded in
+[`_workflow/round2_batch11.json`](_workflow/round2_batch11.json). Full PNG originals and rejected candidates
+remain in the local production archive; only 37 small selected-source WebPs are committed.
+
+Every prompt appended: the approved no-outline Hob as a style reference only, the master palette, full-body
+framing including hats/horns/feet, the exact target height, expressive face and clear signature features,
+broad two-or-three-tone fills, no enclosing or internal ink contours, no floor shadow, flat magenta empty space,
+and PNG/quality/resolution intent. B asks for an independent version of the same specified person and outfit.
+
+Additional prompt changes:
+
+| Asset(s) | Appended change and reason |
+|---|---|
+| `figure.bramble` | Explicitly an elderly woman, without beard or moustache, following Mother Bramble's canon. |
+| `figure.aldo`, `figure.aldous`, `figure.ansel`, `figure.bram`, `figure.bramble`, `figure.corisande`, `figure.ermine`, `figure.fennick`, `figure.gerda`, `figure.grit`, `figure.hesk`, `figure.isolde`, `figure.king`, `figure.kit`, `figure.mara`, `figure.oriel`, `figure.orrin`, `figure.pell`, `figure.quill`, `figure.rosa`, `figure.shelly`, `figure.silas`, `figure.vane`, `figure.wren` | Muted rosy-peach skin, neutral daylight and no gold/yellow/orange skin patches, after early reductions snapped warm skin to the gold ramp. |
+| `figure.king` A/B | Attach selected Aldo A and preserve his face, age, white hair/beard/moustache and ruby ring; change only royal costume and crown. |
+| `figure.mara` A/B | Attach selected Hood A; preserve the violet cloak and silver key clasp while revealing the weathered older woman and cropped silver hair. |
+| `figure.snikkit` C | Edit A's mustard skin to leaf green, retaining identity, clothes and sack. |
+| `figure.snikkit` D | C remained above the edge limit; broaden body and simplify skin, clothes and sack to fewer broad tones and one patch. |
+| `figure.wenna` C | Edit A's gold-looking skin to muted tanned peach; preserve hood, feather, braid, bow and clothing. |
+| `figure.vexis` C | A/B exceeded quiet limits at 64px height; compact body, larger head and fewer broad material tones while retaining horns, wings, tail and hourglass. |
+
+Selections:
+
+| Asset | Kept | Reason |
+|---|---|---|
+| `figure.tam` | A | A has broader clothing regions and a clearer child silhouette; three palette swaps correct yellow skin to the skin ramp. |
+| `figure.penn` | A | Clearer eyes and soft sad smile; grey bun, plum shawl and black mourning dress remain distinct. |
+| `figure.mags` | A | Broader apron folds and a clearer natural skin area than B; red updo and green bodice read well. |
+| `figure.dorrin` | A | Clearer face and less fragmented leather than B, with the headband and belt lantern intact. |
+| `figure.snikkit` | D | Green skin and a clear goblin silhouette with simpler cloth and sack; passes the edge limit that B/C exceeded. |
+| `figure.wenna` | C | Corrects the gold-looking face to natural tanned skin while preserving the green hood, red feather, auburn braid and bow. |
+| `figure.bramble` | B | The broad moss-green cloak, white hair and holly make a clearer elderly woman druid than A's gold streaks. |
+| `figure.ansel` | A | Clearer youthful face with a broad quiet brown habit, rope belt and readable wooden key pendant. |
+| `figure.fennick` | A | The black wide-brim hat and long dark coat read more clearly than B; the thin moustache remains legible. |
+| `figure.gerda` | B | The warmer grandmotherly expression is clearer at native size, with white cap, red bodice and dark skirt intact. |
+| `figure.wren` | B | Cleaner face and paper-tag silhouette after reduction, with quieter blue robe folds than A. |
+| `figure.orrin` | B | Stars remain readable on hat and robe without exceeding calm limits, with a clear white beard and expressive face. |
+| `figure.grit` | A | Stocky dwarf proportions, candle helmet and orange braid remain legible with less fragmented chainmail than B. |
+| `figure.corisande` | A | Clearer face and quieter large lavender folds; pearl hairpin and high lace collar survive reduction. |
+| `figure.pell` | A | Natural skin and quieter olive waistcoat than B's yellow skin and broken shading; clear elderly thin silhouette. |
+| `figure.quill` | B | The face avoids A's yellow patches and the white collar, rolled parchment and dark blue robe stay distinct. |
+| `figure.shelly` | B | Blue headscarf, shell necklace and patched smock are distinct, with more natural bare feet than A. |
+| `figure.aldous` | B | Passes calm checks unlike A, with clear red plume, raised visor, moustache and white heraldic tabard. |
+| `figure.vexis` | C | The compact redraw keeps horns, wings, tail and hourglass readable at 64 pixels and passes calm limits that A/B failed. |
+| `figure.malbranche` | B | The skull, gold seal and black cloak read clearly with broader, less fragmented cloth than A. |
+| `figure.skrae` | B | The huge bat ears, red eyes, fangs and hunched stance read more clearly than A after reduction. |
+| `figure.ermine` | B | Clearer haughty face and complete shoes, with tall white wig, ermine stole and violet gown intact. |
+| `figure.oriel` | B | The three-card fan and face are clearer, with a distinct purple turban and gold hoops. |
+| `figure.silas` | B | Confident pocket pose and readable moustache, gold chains and purple velvet coat with quieter trousers. |
+| `figure.aldo` | A | More readable weary eyes and old face than B; grey travelling cloak, white beard and ruby ring retained. |
+| `figure.maw` | A | Sharper red-eyed expression and clear crown-like gold face, with broad dark cloth between heavy gold chains. |
+| `figure.bram` | B | Clearer kind face and natural skin, stout build, red felt cap and waistcoat with less broken shading than A. |
+| `figure.vane` | A | The pale face and restrained black high-collar coat fit his cold presence; avoids B's yellow facial patches. |
+| `figure.hood` | A | The violet eyes and silver key clasp are clearer than B; face remains fully concealed and cloak folds stay broad. |
+| `figure.nim` | A | Natural warm brown skin and clearer patchwork pockets, pack and horns than B's gold skin patches. |
+| `figure.stranger` | A | A clear heavy iron chain and dark hood with small eye glints; broader quieter cloth than B. |
+| `figure.kit` | B | Keeps natural skin rather than A's yellow face and arms; red headband, ponytail and listening tilt remain distinct. |
+| `figure.hesk` | B | Clearer face and natural arm colour, with the stocky grocer's green cap, apron and hand-at-back pose intact. |
+| `figure.rosa` | A | The confident pose, red scarf and orange ponytail are clear, with much quieter skirt folds than B. |
+| `figure.isolde` | B | Readable braided blonde crown, gold collar and wine gown, with complete feet. Five eye pixels use the existing brown hair-shadow colour to remove false red eyes caused by palette reduction. |
+| `figure.mara` | B | Clearer weathered face and violet eyes, with cropped silver hair and the same cloak and key clasp as Hood A. |
+| `figure.king` | B | Clearer face than A; directly references the selected Aldo A to preserve identity beneath crown and royal mantle. |
+
+
+All selected sources were processed with the unchanged `pixelize.py --no-outline --preview` in flat mode.
+Tam's three supported palette swaps are `#ffb52e=#e1a882`, `#e1a882=#bd7e5f`, `#f2c14e=#fed5b3`.
+Isolde B has five eye pixels changed from `#6c0026` to the existing `#8e5b37` at (49,46), (50,46), (49,47),
+(54,47), (55,47), preventing palette reduction from giving her false red eyes. There are no other manual repairs,
+additional raster filters or changes to caps/quiet limits. Source and output hashes are recorded.
+
+Final `python3 art/tools/validate.py --sheets`: **37/37 batch-11 assets OK, zero warnings**. Full manifest:
+**107 OK, 160 failed, 0 missing (0 P1 missing), exit 1**. The 230 non-batch assets have unchanged output hashes,
+missing states, errors and warnings. The remaining 160 failures are inherited round-1 assets in batches 12-15.
+Historical study pictures and dedicated batch-9s/10 previews remain unchanged.
+
+**Continue batches 12-15, then game integration.** The complete round is not yet finished.

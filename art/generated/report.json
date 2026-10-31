@@ -1,7 +1,6 @@
 {
  "summary": {
-  "ok": 70,
-  "missing": 37,
+  "ok": 107,
   "fail": 160
  },
  "assets": {
@@ -426,12 +425,28 @@
    }
   },
   "figure.tam": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.03,
+    "edges": 0.29,
+    "busy": 12.98
+   }
   },
   "figure.penn": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.021,
+    "edges": 0.227,
+    "busy": 8.919
+   }
   },
   "figure.hob": {
    "status": "ok",
@@ -446,144 +461,424 @@
    }
   },
   "figure.mags": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.015,
+    "edges": 0.233,
+    "busy": 10.357
+   }
   },
   "figure.dorrin": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.027,
+    "edges": 0.292,
+    "busy": 11.463
+   }
   },
   "figure.snikkit": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.024,
+    "edges": 0.305,
+    "busy": 13.61
+   }
   },
   "figure.wenna": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 21,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.028,
+    "edges": 0.306,
+    "busy": 11.88
+   }
   },
   "figure.bramble": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.026,
+    "edges": 0.3,
+    "busy": 11.251
+   }
   },
   "figure.ansel": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.009,
+    "edges": 0.195,
+    "busy": 9.673
+   }
   },
   "figure.fennick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.016,
+    "edges": 0.28,
+    "busy": 10.289
+   }
   },
   "figure.gerda": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.018,
+    "edges": 0.271,
+    "busy": 12.493
+   }
   },
   "figure.wren": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.221,
+    "busy": 10.629
+   }
   },
   "figure.orrin": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.014,
+    "edges": 0.27,
+    "busy": 14.831
+   }
   },
   "figure.grit": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.046,
+    "edges": 0.322,
+    "busy": 12.774
+   }
   },
   "figure.corisande": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.188,
+    "busy": 8.695
+   }
   },
   "figure.pell": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.018,
+    "edges": 0.231,
+    "busy": 8.861
+   }
   },
   "figure.quill": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.008,
+    "edges": 0.226,
+    "busy": 8.679
+   }
   },
   "figure.shelly": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.031,
+    "edges": 0.298,
+    "busy": 13.055
+   }
   },
   "figure.aldous": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 22,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.037,
+    "edges": 0.334,
+    "busy": 18.923
+   }
   },
   "figure.vexis": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.032,
+    "edges": 0.326,
+    "busy": 18.151
+   }
   },
   "figure.malbranche": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.019,
+    "edges": 0.266,
+    "busy": 14.22
+   }
   },
   "figure.skrae": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.03,
+    "edges": 0.312,
+    "busy": 9.68
+   }
   },
   "figure.ermine": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.19,
+    "busy": 11.05
+   }
   },
   "figure.oriel": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.016,
+    "edges": 0.227,
+    "busy": 12.35
+   }
   },
   "figure.silas": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.037,
+    "edges": 0.3,
+    "busy": 15.405
+   }
   },
   "figure.aldo": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.017,
+    "edges": 0.271,
+    "busy": 10.615
+   }
   },
   "figure.maw": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.03,
+    "edges": 0.325,
+    "busy": 17.283
+   }
   },
   "figure.bram": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.021,
+    "edges": 0.229,
+    "busy": 9.773
+   }
   },
   "figure.vane": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.014,
+    "edges": 0.209,
+    "busy": 8.175
+   }
   },
   "figure.hood": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.009,
+    "edges": 0.203,
+    "busy": 8.029
+   }
   },
   "figure.nim": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.033,
+    "edges": 0.322,
+    "busy": 14.713
+   }
   },
   "figure.stranger": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.012,
+    "edges": 0.213,
+    "busy": 7.29
+   }
   },
   "figure.kit": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.026,
+    "edges": 0.277,
+    "busy": 12.648
+   }
   },
   "figure.hesk": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.019,
+    "edges": 0.272,
+    "busy": 12.132
+   }
   },
   "figure.rosa": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.211,
+    "busy": 7.775
+   }
   },
   "figure.isolde": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.02,
+    "edges": 0.213,
+    "busy": 10.105
+   }
   },
   "figure.mara": {
-   "status": "missing",
-   "priority": "P3"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
+   "priority": "P3",
+   "calm": {
+    "specks": 0.015,
+    "edges": 0.26,
+    "busy": 12.773
+   }
   },
   "figure.king": {
-   "status": "missing",
-   "priority": "P3"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 19,
+   "priority": "P3",
+   "calm": {
+    "specks": 0.027,
+    "edges": 0.308,
+    "busy": 20.841
+   }
   },
   "icon.upgrade.shop2": {
    "status": "fail",
