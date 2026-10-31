@@ -55,8 +55,7 @@ add(id="place.stall", category="place", title="The Brindle crossroads, from Bram
         "small watermill (a plain wooden house and its wheel); two or three round trees. The bottom third is plain grass "
         "and earth."),
     details=["the road running away to the horizon", "the signpost at the crossing", "a castle's small silhouette on a far hill",
-             "the watermill on the right", "short fence sections and grouped flowers",
-             "the barrel cart beside the road", "the mill chimney smoke"],
+             "the watermill on the right"],
     palette=["leaf:2-4", "moss:2-3", "umber:3-5", "sea:2-3", "night:4-5", "parchment:2"],
     context="Bram's Stall, tier 1: behind the seller and the chest all day.")
 
@@ -97,10 +96,8 @@ add(id="place.emporium", category="place", title="The Royal Emporium, from the c
 
 FRAMES = {
     1: ("the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge",
-        "two wooden posts with rope lashings, a small tied herb bunch against the left post and a small brass bell "
-        "against the right post, all kept within the outermost twentieth of the width",
-        "a continuous dark brown timber beam, plain and unbroken",
-        ["crimson:2-3", "parchment:2-3", "umber:2-4", "moss:1-3", "gold:3-5"]),
+        "two plain wooden posts holding the awning up", "the awning's underside, in shadow",
+        ["crimson:2-3", "parchment:2-3", "umber:2-4"]),
     2: ("a heavy dark timber beam, with a plain iron hook under each end", "two square timber posts",
         "the beam's face, dark and plain", ["umber:1-4", "night:2-4", "steel:1-2"]),
     3: ("an oak lintel with one plain moulding along it", "two panelled oak pilasters with small brass caps",
@@ -120,7 +117,7 @@ for tier, (top, posts, band, palette) in FRAMES.items():
 # ---- The display shelf, hung from the frame: kept things stand on it ---------------------------------------------------
 
 SHELVES = {
-    1: ("a plank with a broad worn edge and two small nail heads near its ends", "two ropes with visible end knots", ["umber:3-5", "parchment:1-2"]),
+    1: ("a plain plank", "two ropes", ["umber:3-5", "parchment:1-2"]),
     2: ("a long oak shelf", "two black iron chains", ["umber:2-5", "night:2-4"]),
     3: ("a walnut shelf with a thin brass rail along its front", "two brass rods", ["umber:1-4", "gold:3-5"]),
     4: ("a long glass shelf in a slim gilded frame", "two gilded chains", ["steel:3-4", "azure:5-6", "gold:3-5"]),
@@ -138,9 +135,8 @@ for tier, (board, supports, palette) in SHELVES.items():
 # Each counter is one material in its own ramp: batch 9's stall counter, asked for "grey-brown" with the night ramp beside
 # umber, came out a taupe the palette could only meet half purple, half brown.
 COUNTERS = {
-    1: ("a trestle table top of three or four wide planks of weathered dark brown wood, running left to right, "
-        "with clear plank seams, a few paired nail heads near the ends, and broad worn edges; the middle stays calm",
-        "wide planks, readable seams and a few nail heads near the ends", ["umber:2-4"]),
+    1: ("a trestle table top of three or four wide planks of plain, weathered dark brown wood, running left to right",
+        "three or four wide planks", ["umber:2-4"]),
     2: ("a solid oak counter top of broad planks running left to right, honey-brown", "broad oak planks", ["umber:2-5"]),
     3: ("a polished walnut counter top with a thin brass strip along its far edge", "a thin brass strip along its far edge",
         ["umber:1-4", "gold:4-5"]),
