@@ -1,6 +1,8 @@
 # Keywright style study — 2026-10-30
 
-Status: study delivered for the owner's choice. No direction is approved. Stop here before making any other round-2 art.
+Status: study delivered; the owner selected **C2 at 4x, with detail allowed** on 2026-10-30, then requested rollback
+and **no outlines** on 2026-10-31. See [CHOICE.md](CHOICE.md) for the corrected production brief and batch-9s checkpoint.
+The study results and observations below describe the original study delivery and remain unchanged.
 
 ## Integration and scope
 

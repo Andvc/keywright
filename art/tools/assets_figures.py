@@ -53,7 +53,9 @@ figure("hob", "Hob the Farmer", "stall", 128,
        "A broad, sunburnt farmer in his fifties who ploughs chests up out of the old battlefield: a frayed straw hat, a "
        "ruddy face with grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt, brown trousers "
        "and heavy boots.",
-       ["the straw hat", "the brown work smock"], ["skin:2-4", "gold:3-5", "umber:2-5"],
+       ["the frayed straw hat with a dark band", "the brown work smock with a stitched patch",
+        "the grey stubble and shrewd half-smile", "rolled shirt sleeves"],
+       ["skin:2-4", "gold:3-5", "umber:2-5", "steel:2-3"],
        "Tier 1. Shakes hard (a clank drowns out the coin for him) and haggles.", anchor=True)
 figure("mags", "Mags the Innkeeper", "stall", 118,
        "The hearty innkeeper of the Crossed Keys, in her forties: copper-red hair pinned up, rosy freckled cheeks, a wide "

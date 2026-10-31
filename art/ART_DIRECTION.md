@@ -1,11 +1,12 @@
-# Keywright: art direction (round 2: a quiet scene in layers)
+# Keywright: art direction (round 2: C2 at 4x)
 
 This is the style bible for every picture in the game. `art/manifest.json` lists each asset with its own spec;
 `art/tools/scene.py` lays out the shop scene; this document is what they all share. Where they disagree, the
 manifest's per-asset spec wins for that asset, and the disagreement is a bug to report.
 
 Round 1 (0.23) replaced the code-drawn placeholders and came out too busy to live with. Round 2 (0.25) redraws it in a
-different way, and builds the shop from layers. Read "Why round 2" first: it's the reason for every rule below.
+different way, and builds the shop from layers. The owner chose **C2 at 4x, with detail allowed**, on 2026-10-30.
+[study/CHOICE.md](study/CHOICE.md) records the approved reference and measured calibration; the rules below implement it.
 
 ## The game, for an artist
 
@@ -62,23 +63,21 @@ Where it came from:
 5. **One picture per screen.** Each shop was a single painting with the counter, the shelf and the view baked in, at
    full contrast everywhere and the same at every hour.
 
-Round 2's answer:
+Round 2's answer, revised after the style study:
 
-- **Never ask for pixels.** Codex generates **flat-colour illustrations** (clean vector-like shapes, flat fills, no
-  outlines, no texture) on a flat magenta background, and `pixelize.py --mode flat` makes the pixel art: it gives each
-  art pixel the commonest colour of the block of the picture it covers, so flat areas stay flat and nothing finer than a
-  block survives. `art/reference/scene/flat_to_pixels.png` shows it.
-- **A coarse grid for the world**: the scene is drawn at 320x180, four screen pixels to an art pixel.
-- **A detail budget**: two details a figure or thing, three or four elements a place.
-- **The scene in layers**, each with one job (below), lit for the time of day.
-- **Limits that are measured**: every asset has quiet limits and the validator fails anything busier. Every round-1
-  asset fails them; flat art made into pixels passes them easily.
-- **The chest is drawn in code** (`tools/custom_art.py`): the thing the player looks at most. Its sheet,
-  `art/reference/quiet/chest_drawn_4x.png`, is the bar for how simple a sprite should be.
-- **Anchors first**: one of each kind of asset, approved by the owner before anything else is made.
+- **Storybook cartoons without outlines**, generated as smooth illustrations and made into pixels by the existing
+  `pixelize.py --mode flat` pipeline. Colour-defined shapes, expressive faces, useful material and everyday-life details.
+- **A coarse grid for the world**: 320x180 at 4x. UI-sized objects and the sheet keep their specified native sizes at 2x.
+- **A detail budget with room to live**: three or four readable features on a figure or object; scenery groups detail
+  around its edges. A patch, seam, cord or nail should tell you something. Avoid uniform speckling and tiny brushwork.
+- **The scene in layers**, each with one job, lit for the time of day. The writing areas remain plain.
+- **Limits measured from the chosen C2**, with category ceilings calibrated before generation. The first batch's
+  very low limits are superseded; passing them by erasing the chosen detail is not the goal.
+- **The chest stays drawn in code** (`tools/custom_art.py`); its silhouette and footprint are the gameplay reference.
+- **Anchors first**: rebuild batch 9 in C2, push its review and stop for owner approval before making anything else.
 
-Post-processing can't fix a busy drawing (0.25 tried flattening round 1's art: it came out smeared and blotchy). The
-drawing itself has to be simple, which is why the generator never draws pixels.
+Post-processing cannot rescue a busy drawing. Use the supplied pixelizer, then judge at the actual display size;
+regenerate a poor source instead of blurring or posterizing it to satisfy the numbers.
 
 ### What batch 9 taught
 
@@ -97,37 +96,35 @@ reads calm at every hour. What went wrong wasn't the drawing:
 3. **The brief gave the midday sky azure 4**, the palette's strongest blue, which made it the loudest colour on the
    screen. It's azure 5-6 and steel 4 now: a soft, light blue.
 
-And the owner found the anchors calm but a little too plain. So before batch 10, the style study (`art/study/`) draws
-the stall's counter in four styles at three levels of detail and at both densities. Batch 9 is then made again in the
-style chosen, and this document is rewritten for it: the preamble, the detail budgets, and the quiet limits, taken from
-the chosen variant's numbers.
+The owner found these first anchors too plain. The completed study compared four styles, three detail levels and
+two densities. The choice is **C2 at 4x**, explicitly allowing detail and, after the 2026-10-31 correction, forbidding outlines. C2's whole scene measures 0.043 lone specks,
+0.255 edges and a 13.1 brightness step, with 28 colours. Its layout defects are corrected by producing separate layers;
+its warmth and useful details are retained, with outlines removed at the owner's request. The first batch remains historical evidence, not the style target.
 
 ## The look in one line
 
-**Flat-colour storybook pixel art**: the flat colour plates of an old picture book, in chunky pixels. Big shapes, few
-colours, calm surfaces, soft light that changes with the hour, and detail only where it tells you what a thing is.
+**Warm storybook cartoons in chunky pixels, without outlines**, with expressive people, crafted objects and a lived-in world.
+Broad surfaces give the eye somewhere to rest; details tell you who uses a place or object.
 
 ### Pillars
 
-1. **Quiet first.** Every picture is a few large, flat shapes. When in doubt, leave it out: an empty plane of one colour
-   is a feature, not a gap.
-2. **Each layer has one job.** The sky says the hour, the place says where you are, the figure says who you're dealing
-   with, the frame says whose shop it is, the counter is where the trade happens, the sheet is your reasoning. Nothing in
-   a layer competes with another layer's job.
-3. **Shape and value, not detail.** Everything reads at its smallest size by its silhouette and its light and dark.
-4. **No texture, no line work.** Wood is flat with a few plank seams, stone a few flat blocks, cloth flat with a fold
-   or two, hair two or three flat masses. Shapes meet shape to shape, without outlines (the pipeline adds a single dark
-   outline around sprites, outside them).
-5. **A value plan.** The sky and the place are muted and low in contrast; the frame and the counter a little darker
-   (they're nearest, in the shop's shade); the figure and the chest carry the contrast; the sheet is light paper with
-   dark ink. See `art/reference/scene/counter_layout.png`.
-6. **Warm light, cool shadow.** One gentle light from the upper left; shadows lean violet, highlights warm yellow; two
-   or three tones a material, at most a highlight or two an object. The time of day is the game's: it changes the sky
-   and tints the rest.
-7. **One world.** Same palette, same light, same flat style everywhere: a curio and a figure drawn by different hands
-   must still belong on the same counter.
-8. **The game draws the magic.** Glows, auras, sparkles, light rays, enchantment shimmer, rarity colours around slots,
-   shadows under things, lantern glow and screen shake are all drawn at runtime. Never bake them in.
+1. **Readable at the chosen size.** Silhouette and value establish the subject; three or four bold features supply
+   personality. Detail is welcome when it survives the 4x world or the object's actual UI size.
+2. **Each layer has one job.** The sky says the hour, the place says where you are, the figure says who is trading,
+   the frame says whose shop it is, the counter holds the trade, and the sheet supports the player's reasoning.
+3. **No outlines.** Define silhouettes and internal parts with adjacent material colours and cel-shaded areas.
+   No enclosing stroke, dark halo or inked internal tracing. Natural eyes, a mouth, seams and cast shadows may be
+   dark filled features; they must not become a contour around every shape.
+4. **Lived-in detail.** Plank seams, nail heads, patches, folded sleeves, rope knots, herbs, fences, flowers and a
+   parked cart may be visible. Group them instead of covering every empty space with marks.
+5. **A value plan.** Muted scenery; a darker frame and counter in the shop's shade; contrast on the figure and chest;
+   light paper with dark ink. Keep the centre available for the chest and preserve plain writing areas.
+6. **Warm light, cool shadow.** Gentle light from the upper left, two or three principal tones per material and a
+   restrained highlight. The game supplies time-of-day tinting.
+7. **One world.** Same palette, light and colour-defined treatment across scenery, characters and objects. Compare with
+   the selected C2 source first and, after approval, the rebuilt category anchor.
+8. **The game draws the magic.** Glows, auras, sparks, rays, enchantment shimmer, rarity frames, cast shadows under
+   objects and screen shake remain runtime effects.
 
 ## The shop scene
 
@@ -165,8 +162,9 @@ the middle distance just right of centre; the right third is under the sheet mos
 
 ## How to draw for the pipeline
 
-- Draw a **flat-colour illustration**, not pixel art: crisp vector-like shapes, each one flat colour. No outlines, no
-  gradients, no texture, no brush strokes, no dithering, no pixel grid.
+- Draw a **smooth cartoon illustration without outlines**, not a pixel grid. Use adjacent colour fills,
+  broad cel-shaded areas and readable material details. No contour strokes, hatching, grain, dithering or airbrushed
+  gradients. The source must be free of outlines; switching off the pipeline's ring does not erase drawn strokes.
 - **Big enough to survive**: the pipeline gives each art pixel the commonest colour of its block of the picture, so
   anything thinner than about a hundredth of the picture's width (a hair-thin line, a tiny stud) disappears or breaks.
   Make features bold: eyes are clear dark dots, a mouth a short simple shape.
@@ -189,10 +187,10 @@ the middle distance just right of centre; the right third is under the sheet mos
 | Scaling | integer only, nearest-neighbour; never rotate, skew or resample a finished asset |
 | File | PNG, 8 bits per channel, binary alpha (every pixel fully opaque or fully transparent) |
 | Palette | the master palette only (`art/palette/keywright.hex`, 74 colours in 14 ramps): every opaque pixel an exact palette colour (the pipeline snaps them, an area at a time) |
-| Colours per asset | places and story scenes 24; figures and the frame 16; things, Heartsongs, curios, sheets and lock faces 12; the sky, shelf, counter and props 10; upgrade icons, the emblem and the Key 8; kind icons 6 |
+| Colours per asset | places and story scenes 32; figures and the frame 24; shelf, counter, things, Heartsongs, curios and lock faces 16; sheet, props, upgrade icons, the emblem and the Key 12; sky 10; kind icons 8 |
 | Quiet | at most the category's lone specks, edges and brightness step (below); the validator fails anything busier |
 | Value | the counter's opaque pixels average 45-115 in brightness (0-255), the place 45-150, the frame 25-130, the sheet 165-228 |
-| Outline | sprites (figures, props, the shelf, things, curios, icons, lock faces) and the frame's inner edge: a 1-pixel outline in **night2 `#1a1420`**, outside the shape (the pipeline adds it). The sky, places, counter, sheets and scenes have none |
+| Outline | **None for round-2 redraws.** Every `redo` asset has `outline: false`; use `--no-outline` when processing. No drawn ink contour and no automatic silhouette ring. Retained branding and other round-1 assets keep their existing specs |
 | Text | none (no letters, numbers, runes that read as letters, signatures or watermarks), except the logo |
 
 ### How quiet is measured
@@ -203,14 +201,18 @@ the middle distance just right of centre; the right third is under the sheet mos
 | Category | Lone specks | Edges | Brightness step |
 |---|---|---|---|
 | Skies | 0.005 | 0.05 | 3 |
-| Places, story scenes | 0.01 | 0.14 | 6 |
-| The frame | 0.02 | 0.20 | 10 |
-| Counters | 0.01 | 0.10 | 5 |
+| Places, story scenes | 0.06 | 0.35 | 16 |
+| The frame | 0.05 | 0.27 | 14 |
+| Counters | 0.02 | 0.18 | 7 |
 | Sheets (and their middle must be plain: edges 0.02) | 0.01 | 0.08 | 4 |
-| Figures | 0.03 | 0.18 | 9 |
+| Figures | 0.08 | 0.36 | 22 |
 | Things, Heartsongs, curios, props, shelves | 0.06 | 0.50 | |
 | Upgrade icons, the emblem, the Key / kind icons | 0.06 | 0.55 / 0.60 | |
 | Lock faces | 0.03 | 0.20 | 9 |
+
+These revised ceilings come from C2 and its representative crops; [study/CHOICE.md](study/CHOICE.md) gives the
+coordinates, measurements and rounding. They were fixed before new generations. Sky, paper and small-object rules
+retain their functional constraints; a full scene cannot calibrate a tiny isolated silhouette directly.
 
 Passing the numbers is necessary, not sufficient: the review still asks whether anything draws the eye that shouldn't.
 `pixelize.py` also merges a lone speck or a tiny region into its neighbour when the colours are close, but it can't
@@ -297,6 +299,7 @@ sun low on the right), night (deep blue, a moon, a few stars far apart).
 320x180, the sky keyed out (magenta in the generated picture, transparent once pixelized). The view across the counter,
 in three to five large, muted, low-contrast planes; nobody in it; no counter in it (rows from 112 down are hidden by the
 counter, but keep them opaque ground or floor). The horizon or the far wall's foot a little above the middle.
+Keep the core landmarks and up to four groups of everyday details at the edges; soften distant colour contrast.
 
 ### The shop's frame (`frame.*`)
 
@@ -313,14 +316,14 @@ kept things stand on it in the game.
 ### Counter (`counter.*`)
 
 320x61, opaque: the counter's top seen from behind it, its far edge the top row with a slightly lighter lip. Plain and
-mid-dark (average brightness 45-115): text, the board and the chest sit on it. A few plank seams at most.
+mid-dark (average brightness 45-115): text, the board and the chest sit on it. Readable plank seams, a few nail heads and broad worn edges are welcome; avoid busy marks across the text areas.
 
 ### Figures (`figure.*`)
 
 96x160, transparent, full length, feet on the bottom row, horizontally centred. Each has a `height` in the manifest
 (its whole silhouette, hats and horns included): a goblin is 76, most adults 112-128, a knight 142, the archmage in his
 hat 146. The pipeline scales each figure to its height, so they compare. Storybook proportions (the head about a fifth
-of the height), arms relaxed, **two signature details** drawn large, clothes down to the feet, flat skin tones, eyes as
+of the height), arms relaxed, **three or four signature details** drawn large, clothes down to the feet, flat skin tones, eyes as
 clear dark dots. The game crops each face for the queue, the notebook and the character cards, so keep the head
 unhidden (hats are fine; a hood can shadow the face only where the description says so).
 
@@ -333,16 +336,16 @@ ivory vellum in a gilded frame with a wax seal.
 
 ### Props (`prop.*`)
 
-Small sprites at 4x density, transparent, outlined: lanterns hang from their hook at the top (lit, glass glowing warm
+Small sprites at 4x density, transparent, without outlines: lanterns hang from their hook at the top (lit, glass glowing warm
 yellow; the game darkens the glass by day), the rest stand on the bottom row (the Witchlight, the Lodestone, the Brass
 Scales, the gavel, the Royal Seal, the Patrons' Book, the lockpicks). One simple object each, a little smaller than the
 chest.
 
 ### Things (`item.*`) and Heartsongs (`heartsong.*`)
 
-32x32, transparent; the content (with its outline) within 30x30, centred, its lowest pixels on row 30. Shown at 2x on
-the counter and the shelf. One bold shape, two details at most; the six kinds climb from common to legendary by material
-and one accent. **Heartsongs** are the nine rarest things in the realm: warmer, older, more personal, each with one
+32x32, transparent; the content within 30x30, centred, its lowest pixels on row 30. Shown at 2x on
+the counter and the shelf. One bold silhouette with up to four readable features; the six kinds climb from common
+to legendary by material and distinctive details. Do not fill the small image with ornamental specks. **Heartsongs** are the nine rarest things in the realm: warmer, older, more personal, each with one
 mythic-red accent.
 
 ### Curios (`curio.*`)
@@ -352,7 +355,7 @@ material (plain, good, fine with one gem, gold with one gem or rune).
 
 ### Icons, emblems and story props
 
-Upgrade icons 24x24 (8 colours), kind icons 16x16 (6 colours, map symbols), the Guild's emblem 24x24, the Aldric Key
+Upgrade icons 24x24 (12 colours), kind icons 16x16 (8 colours, map symbols), the Guild's emblem 24x24, the Aldric Key
 96x24 with its four shards cut from it along jagged lines. Bold, simple, readable at 1x.
 
 ### Lock faces (`lock.face.*`)
@@ -375,19 +378,19 @@ and plates laid over it.
 `ui.*` (nine-slice frames, drawn by script), `fx.*` (effect sheets), `brand.*` (logo, app icons) and `store.*` (Steam
 art) aren't redrawn; their specs are round 1's.
 
-## Generating with GPT-Image-2
+## Generating with the built-in image tool
 
 1. **Anchors first.** Batch 9 is one of each new kind of asset: the midday sky, the stall's place, frame, shelf,
    counter, sheet and lantern, Hob the Farmer's figure, a thing, a Heartsong, a curio and two icons. Pixelize them, run
    `validate.py --sheets` (its `counter_stall*.png` mock-ups put them together at every hour), push, and **stop until
    the owner approves them**. Every later request passes its category's round-2 anchor as a reference. Never pass round
    1's art: its style is what round 2 moves away from.
-2. **Prompt** = the flat style preamble + the category's frame + the asset's description and details (cut to the
+2. **Prompt** = the corrected C2 no-outline style preamble + the category's frame + the asset's description and details (cut to the
    budget) + the palette ramps + what to avoid; the manifest's `prompt` is assembled. Adjust it only to fix a failed
    attempt, adding a correction at the end ("simpler: fewer, bigger shapes; flat colour; no texture" is the usual one),
    and record what changed.
-3. **Request** `gen_size`, PNG, high quality, 2-4 candidates; keep the calmest that shows what the spec says.
-4. **Pixelize**: `python3 art/tools/pixelize.py raw.png --id <id> --preview`.
+3. **Request** `gen_size`, PNG, high quality, 2-4 candidates; keep the best match to C2 that shows the required features and fits the layer.
+4. **Pixelize**: `python3 art/tools/pixelize.py raw.png --id <id> --no-outline --preview`.
 5. **Validate**: `python3 art/tools/validate.py --only <id>`. Fix every failure by regenerating; editing a few pixels by
    hand is fine.
 6. **Review** at the size it's seen: the counter mock-ups for the scene's layers and figures, the contact sheets beside
@@ -397,9 +400,9 @@ art) aren't redrawn; their specs are round 1's.
 
 | Failure | Fix |
 |---|---|
-| The model draws pixel art anyway (a pixel grid, speckle, dithering) | regenerate restating "a flat vector illustration, not pixel art"; pass the anchor |
+| The model draws pixel art anyway (a pixel grid, speckle, dithering) | regenerate restating "a smooth cartoon illustration without outlines, not pixel art"; pass the anchor |
 | "Too busy" from the validator | regenerate with "simpler: fewer, bigger shapes, flat colour, no texture"; cut a detail if it keeps failing. Never filter it to pass |
-| Outlines or line work in the drawing | regenerate with "no outlines: shapes meet shape to shape" (the pipeline adds the outline) |
+| Outlines appear on a figure, object or layer | regenerate or edit with no contour strokes; retain useful details as filled material shapes and confirm automatic outlines are disabled |
 | Gradients or soft shading (banding after pixelizing) | regenerate with "flat fills only, two or three tones" |
 | Thin parts break up or vanish (a staff, a rope, a smile) | ask for them bolder; or let them go if the figure still reads |
 | Magenta left in the subject, or the subject keyed out | the subject mustn't be magenta or hot pink; regenerate, or pass `--key` with the background's actual colour |
@@ -414,9 +417,9 @@ art) aren't redrawn; their specs are round 1's.
 
 ## Review checklist
 
-- [ ] `validate.py` passes: size, transparency, palette, colour count, outline, quiet, value, and the layer's lines
+- [ ] `validate.py` passes: size, transparency, palette, colour count, quiet, value, and the layer's lines
 - [ ] In the counter mock-ups, at every hour, nothing draws the eye but the seller, the chest and the sheet
-- [ ] A few big, flat shapes; no texture, no line work; at most two details on a figure or thing
+- [ ] No drawn or automatic outlines; C2 shapes, readable features and broad rest areas, with meaningful detail retained
 - [ ] The layer does its one job and nothing else (no counter in a place, nothing in the frame's middle, nothing on the shelf)
 - [ ] Lit from the upper left in neutral daylight; shadows cool, highlights warm
 - [ ] Reads at its smallest size and is the subject the manifest describes

@@ -2,8 +2,10 @@
 
 > **0.25:** round 1's chest was retired: the chest and its locks are drawn in code now (`tools/custom_art.py`), so
 > its files, its review sheets and `_workflow/finalize_chests.py` were removed (git has them), with round 1's anchors
-> and its counter mock-ups. Round 2 (`art/README.md`) redraws the rest flat and quiet and builds the shop scene from
-> layers; record it in a Round 2 section at the end.
+> and its counter mock-ups. Round 2 (`art/README.md`) builds the shop scene from layers. The current direction is
+> C2 at 4x, with detail and **no outlines**. The latest delivery is batch 9s in the Round 2 section below.
+
+## Historical round-1 delivery
 
 Source brief: `prototype/0.22`, commit `9e52f8380d4873dd2ea0a01fb0ab4704198e72c4`.
 Delivery branch: `art/gpt-image-2`. All changes are confined to `art/generated/`.
@@ -166,7 +168,10 @@ scribbles are nonlinguistic marks. All repository changes stay in
 
 ## Round 2
 
-### Batch 9: anchors - awaiting owner approval
+### Batch 9: original anchors - historical
+
+The following records the original plain batch. Its native paths and standard counter previews now show batch 9s;
+the original files remain in git. Use the dedicated batch-9s previews below for the current review.
 
 Based on `prototype/0.25` at `35ab8bfd3d35933b1e66b5851098e9e5deb5d329`,
 on branch `art/round2`. All 13 batch-9 anchors are delivered. Batches 10-15
@@ -240,3 +245,73 @@ were visually reviewed. Please judge the overall quietness, Hob's readability,
 the muted landscape, the plain writing sheet, and whether the awning and shelf
 feel comfortable around the chest. Morning/evening/night sky artwork will be
 made in batch 10 after approval. No game integration is included in this batch.
+
+### Batch 9r: rolled back
+
+The outlined C2 anchors in commit `f4ee68b312fa2116b376100730f25455f0988b62` were rejected.
+On 2026-10-31 the owner requested rollback and clarified: **C2 at 4x, but no outlines**.
+Revert commit `9539d8f` restored the pre-9r state and was pushed before replacement work.
+The rejected art, prompts and delivery record remain available in that original commit and the local archive.
+
+### Batch 9s: C2 at 4x without outlines
+
+Delivered on 2026-10-31. The corrected brief retains C2's warm colours, rounded forms, expressive farmer and
+meaningful details, while removing inked outer and internal contours. Adjacent material colours and cel-shaded
+areas define the shapes. Natural facial features, plank gaps, material rims and shadows remain where needed.
+Every round-2 `redo` specification now has `outline: false`; processing also passes `--no-outline`.
+The 25 retained round-1 specifications are unchanged. See [the owner's decision](../study/CHOICE.md).
+
+Review the [counter with interface](_review/round2_batch9s_playview.png),
+[small objects at 1x/2x/4x](_review/round2_batch9s_sprites.png) and
+[four times of day](_review/counter_stall_times.png).
+The [review guide](_review/round2_batch9s_README.md) also links to individual layers and Hob.
+These are composition mock-ups using the existing study interface and code-drawn chest, not live game captures.
+The world is 320x180 at 4x; inventory and interface assets retain their specified 1x/2x uses.
+Only the midday sky is new; morning, evening and night skies remain existing placeholders.
+
+The built-in image generator made **27 edit candidates for 13 anchors**: two per asset and a third for the
+upgrade-lamp icon. Each request attached the corresponding full-size 9r source as the edit target, the palette
+swatch and the original C2 scene. Reference roles explicitly override the outlines in those sources and preserve
+the asset's geometry, subject and useful details. The lamp's third candidate uses its new outline-free B as the
+target. The tool does not provide an independently verifiable model identifier.
+
+The manifest prompt was sent unchanged, followed by exact edit instructions and the recorded corrections.
+[`_workflow/round2_batch9s.json`](_workflow/round2_batch9s.json) contains all 27 requests, reference hashes,
+requested and actual sizes, candidate checks, selection reasons, processing commands and final PNG hashes.
+Small selected-source WebPs are under `_raw/round2_batch9s_*`; these are lossy viewing copies.
+All full PNGs and rejected candidates remain in the local production archive outside the checkout.
+
+| Asset | Kept | Selection / correction |
+|---|---|---|
+| `sky.midday` | A | Clear cloud groups and open central sky; both pass. |
+| `place.stall` | B | Preserve the road, sign, castle, mill, cart, flowers and fences; broader colour shapes in the foliage. |
+| `frame.stall` | B | Remove enclosing awning strokes while retaining the top beam, herbs, bell and rope lashings. |
+| `shelf.stall` | B | Preserve knots, nail heads and the worn plank; A's reduced highlights create too many lone pixels. |
+| `counter.stall` | A | Readable seams, nails and worn edges with broad, quiet wood areas. |
+| `sheet.stall` | B | Plain writing field with restrained edge shading; no inked paper contour. |
+| `figure.hob` | A | Preserve the hat, stubble, rolled sleeves and patch; A has clearer native-size colour areas. |
+| `prop.lantern_stall` | B | Steel body and warm window without an ink border; fewer fragmented reflections. |
+| `item.dwarf_gold_crowns` | B | Preserve the square hole, hammer/anvil marks and rear stack; A exceeds the speck limit. |
+| `heartsong.lullaby_box` | B | Keep the original two flower marks, crescent, ribbon and crank; remove A's extra sprigs and scattered surface wear. |
+| `curio.monocle` | B | Violet lens, glint and short curled chain; replace A's mottled silver with broad metal tones. |
+| `icon.upgrade.lamp` | C | Broaden the body, shorten the loop, remove the detached flame spark and consolidate metal highlights; A/B exceed the speck limit and are too narrow. |
+| `icon.kind.coins` | B | Three coins separated by their material tones; fewer lone pixels than A. |
+
+The supplied `pixelize.py` and validator are unmodified. All selected sources use flat mode with no automatic
+outline. The frame retains `--offset-y -80` (source crop starts at row zero) to register the top band.
+There are **no manual pixel repairs or palette recolours** in this batch, and no additional blur, smoothing or
+posterization. The C2 colour caps and quiet ceilings were fixed before generation and remain unchanged.
+
+`python3 art/tools/validate.py --sheets` reports **13/13 anchors passing, with zero warnings**.
+The complete manifest reports **38 OK, 164 failed, 65 missing (58 P1 missing), exit 1**: later batches still contain
+inherited art that needs redrawing and missing files. Every non-anchor output hash and validation result is unchanged
+from the baseline under the corrected brief. `report.json` retains the unresolved entries; round 2 is not complete.
+
+Visual review checked the outline-free source and native assets, Hob's face below the dialogue panel, shelf/counter
+registration, plain paper, small-object readability and all four lighting states.
+The composed native world measures 0.011943 specks, 0.180123 edges and 8.7207 brightness step, within the C2
+whole-image comparison ceilings of 0.05 / 0.27 / 14.
+Reproduce the dedicated previews with `python3 art/generated/_workflow/round2_batch9s_review.py`.
+
+The original style-study prompts, outputs and review pictures remain unchanged.
+**Stop for owner review here.** No batches 10-15 or game integration are included.

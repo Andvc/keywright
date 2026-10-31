@@ -1,0 +1,1659 @@
+{
+  "batch": "9s",
+  "direction": "C2 at 4x, detail allowed, NO OUTLINES",
+  "choice_date": "2026-10-30",
+  "correction_date": "2026-10-31",
+  "delivery_date": "2026-10-31",
+  "rejected_commit": "f4ee68b312fa2116b376100730f25455f0988b62",
+  "rollback_commit": "9539d8fba2be7660996a258bcf2a78173e96ca69",
+  "generator": {
+    "tool": "built-in image_gen",
+    "mode": "edit",
+    "model_identifier": "Not independently exposed by the tool"
+  },
+  "request_count": 27,
+  "candidates_per_id": {
+    "sky.midday": 2,
+    "place.stall": 2,
+    "frame.stall": 2,
+    "shelf.stall": 2,
+    "counter.stall": 2,
+    "sheet.stall": 2,
+    "prop.lantern_stall": 2,
+    "figure.hob": 2,
+    "icon.upgrade.lamp": 3,
+    "icon.kind.coins": 2,
+    "item.dwarf_gold_crowns": 2,
+    "heartsong.lullaby_box": 2,
+    "curio.monocle": 2
+  },
+  "manifest_sha256": "5c1584e4b2dbce768b0ae04b87693e4dfaea025be16ce21b5d1d66548eeefdea",
+  "manifest_git_text_sha256": "40ee1f656b6f64ff520815e03223bc346e8f1c47c00156f07427725e9dd8a8fe",
+  "manifest_hash_note": "manifest_sha256 hashes the Windows working copy; manifest_git_text_sha256 normalizes CRLF to LF.",
+  "base_prompts": {
+    "sky.midday": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nMidday sky: a plain sky for the back of a game scene. It fills the whole 16:9 picture and there is nothing else in it (no ground, hills, buildings, trees or birds). Three to five broad horizontal bands of flat colour from top to bottom, with simple flat shapes for the sun or moon and the clouds.\n\nSubject: A clear, soft, light blue, one even colour over most of the sky and a paler band low down; two or three plain, rounded white clouds; no sun in view.\n\nLean on these palette colours (dark to light; the swatch has them all): azure 5-6 (#68c7fd #a7f8ff); steel 4 (#ccd9e8); night 9-10 (#ece6f5 #ffffff).\n\nAvoid: anything but sky; stars all over; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "place.stall": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe Brindle crossroads, from Bram's Stall: the view across a shop counter, seen straight ahead from behind it at standing eye level, as a 16:9 picture. Two things are left out because the game adds them: the counter itself (it covers the bottom third) and the sky: everything that would be sky, above the skyline and seen through windows, doors or arches, is flat pure magenta #FF00FF. Nobody is in it. The horizon, or the foot of the far wall, a little above the middle; the bottom third plain ground or floor; the left third and the middle simple (the game stands someone at the left and puts things in the middle, in front); the place's landmark in the middle distance just right of centre. Muted, mid to dark values with low contrast, in three to five large planes, with small groups of purposeful detail around the edges.\n\nSubject: The Brindle crossroads seen from a roadside stall: a packed-earth road running straight away from the viewer to the horizon, and another crossing it in the middle distance; a plain wooden signpost with two blank arms at the crossing, a little right of centre; low rolling hills along the horizon in two flat tones, with the small silhouette of a castle on a far hill right of centre; a calm river as one flat band on the far right, with a small watermill (a plain wooden house and its wheel); two or three round trees. The bottom third is plain grass and earth.\n\nIt must show: the road running away to the horizon; the signpost at the crossing; a castle's small silhouette on a far hill; the watermill on the right; short fence sections and grouped flowers; the barrel cart beside the road; the mill chimney smoke. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): leaf 2-4 (#004e22 #0e7734 #58a04c); moss 2-3 (#5d672a #979569); umber 3-5 (#6e3d22 #8e5b37 #ad7d52); sea 2-3 (#005754 #26877a); night 4-5 (#3b3150 #554b69); parchment 2 (#d2b688).\n\nAvoid: people or animals; a chest; text or signs with letters; a counter or table in the foreground; a sky (it's magenta); a floor of tiles or boards in perspective lines; uniformly dense foliage or detail across the centre; strong contrast in the distance; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "frame.stall": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe shop's frame at the Brindle crossroads (Bram's Stall): the part of a shop nearest the viewer that frames the view, seen straight on from inside. Across the top of the picture, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge, about a sixth of the picture's height deep; the topmost twelfth of the picture is a continuous dark brown timber beam, plain and unbroken, plain and dark (the game's top bar sits on it). Down the left and right edges, two wooden posts with rope lashings, a small tied herb bunch against the left post and a small brass bell against the right post, all kept within the outermost twentieth of the width, each about a twentieth of the picture's width. Everything else, the whole middle of the picture, is flat pure magenta #FF00FF. Symmetrical, and a little darker than the room beyond: it's in the shop's own shade.\n\nSubject: Across the top, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge; at the sides, two wooden posts with rope lashings, a small tied herb bunch against the left post and a small brass bell against the right post, all kept within the outermost twentieth of the width.\n\nIt must show: the front edge of the stall's canvas awning; two wooden posts with rope lashings, a small tied herb bunch against the left post and a small brass bell against the right post, all kept within the outermost twentieth of the width. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): crimson 2-3 (#6c0026 #9c1839); parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37); moss (#2a381c #5d672a #979569); gold 3-5 (#a06500 #c29026 #f2c14e).\n\nAvoid: anything in the middle of the picture; a shelf; lamps or lanterns; people; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "shelf.stall": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nDisplay shelf at the Brindle crossroads (Bram's Stall): a single long, thin display shelf seen straight on: a plank with a broad worn edge and two small nail heads near its ends, about twenty times as wide as it is thick, spanning the picture's width, with two ropes with visible end knots rising straight up from its two ends to the top edge of the picture. Nothing on it. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A plank with a broad worn edge and two small nail heads near its ends, hung on two ropes with visible end knots.\n\nIt must show: a plank with a broad worn edge and two small nail heads near its ends; two ropes with visible end knots. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 3-5 (#6e3d22 #8e5b37 #ad7d52); parchment 1-2 (#9d8872 #d2b688).\n\nAvoid: things on the shelf; brackets below it; a wall behind it; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "counter.stall": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nCounter at the Brindle crossroads (Bram's Stall): a shop counter's top seen from behind it at standing height: a very wide, flat strip filling the bottom third of the picture from edge to edge, its far edge a straight horizontal line with a slightly lighter lip. Above the strip, flat pure magenta #FF00FF. Plain, calm and mid-dark: the game puts its notes, a chest and a board on it.\n\nSubject: A trestle table top of three or four wide planks of weathered dark brown wood, running left to right, with clear plank seams, a few paired nail heads near the ends, and broad worn edges; the middle stays calm.\n\nIt must show: wide planks, readable seams and a few nail heads near the ends. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 2-4 (#4b2212 #6e3d22 #8e5b37).\n\nAvoid: things on the counter; a front panel; perspective lines converging; all-over grain, scratches or bright decoration in the centre; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "sheet.stall": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nAppraisal sheet at the Brindle crossroads (Bram's Stall): a sheet to write an appraisal on, seen flat and straight on, filling a tall picture (two wide by three tall) from edge to edge: a sheet of rough, pale unbleached paper, its edges a little uneven, one flat light warm tone, plain and empty in the middle (no writing, lines, stains or texture); around it, a rough plank board showing as a narrow rim around it, only a few hundredths of the width thick; two round nail heads in the top corners, small, and nothing else.\n\nSubject: A sheet of rough, pale unbleached paper, its edges a little uneven, on a rough plank board showing as a narrow rim around it; two round nail heads in the top corners.\n\nIt must show: a sheet of rough, pale unbleached paper, its edges a little uneven; two round nail heads in the top corners. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): parchment 2-3 (#d2b688 #f7ebc6); umber 2-4 (#4b2212 #6e3d22 #8e5b37); night 4 (#3b3150).\n\nAvoid: writing or ruled lines; stains, creases or texture; a dark paper; a table behind it; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "prop.lantern_stall": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nLantern at the Brindle crossroads (Bram's Stall): a single small object for a shop game, seen straight on and a little from above, centred, filling about eighty percent of the picture, hanging from the top edge of the picture by its hook. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A small tin lantern with a ring on top, its glass glowing warm yellow, hanging from a short hook.\n\nIt must show: a small tin lantern with a ring on top. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): night 2-4 (#1a1420 #2b2236 #3b3150); gold 4-6 (#c29026 #f2c14e #fbeda4); flame 3-4 (#ffb52e #ffe47d); steel 2-3 (#626d80 #93a2b6).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "figure.hob": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nHob the Farmer: a full-length figure for a game, standing upright, from the top of the head (or hat) to the feet, centred and filling about ninety percent of the picture's height. Turned a little toward the right, looking right or at the viewer. Storybook proportions, the head about a fifth of the height; arms relaxed. The face in flat skin tones, the eyes clear dark dots and a simple mouth, readable from across a room. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A broad, sunburnt farmer in his fifties who ploughs chests up out of the old battlefield: a frayed straw hat, a ruddy face with grey stubble and a shrewd half-smile, a brown work smock over a homespun shirt, brown trousers and heavy boots.\n\nIt must show: the frayed straw hat with a dark band; the brown work smock with a stitched patch; the grey stubble and shrewd half-smile; rolled shirt sleeves. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): skin 2-4 (#915a47 #bd7e5f #e1a882); gold 3-5 (#a06500 #c29026 #f2c14e); umber 2-5 (#4b2212 #6e3d22 #8e5b37 #ad7d52); steel 2-3 (#626d80 #93a2b6).\n\nAvoid: a background or floor; a shadow; a frame; small accessories crowding the figure; strands of hair; a weapon unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "icon.upgrade.lamp": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nA bold, simple icon of a small lantern burning with a violet witch-flame, readable when tiny: three-quarter or front view, centred, filling about ninety percent of the picture, each material in two or three flat tones. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nLean on these palette colours (dark to light; the swatch has them all): night 2-10 (#1a1420 #2b2236 #3b3150 #554b69 #766d8b #9b92ad #c9c4d4 #ece6f5 #ffffff); umber (#280c06 #4b2212 #6e3d22 #8e5b37 #ad7d52 #c9a075 #e2c69f); gold (#492100 #773f00 #a06500 #c29026 #f2c14e #fbeda4); steel (#383d48 #626d80 #93a2b6 #ccd9e8).\n\nAvoid: fine detail; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "icon.kind.coins": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nA symbol of a small stack of three gold coins, like a map symbol: one simple shape in two or three flat tones, centred, filling the picture. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nLean on these palette colours (dark to light; the swatch has them all): gold 2-6 (#773f00 #a06500 #c29026 #f2c14e #fbeda4).\n\nAvoid: detail; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "item.dwarf_gold_crowns": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nDwarf-Gold Crowns: a single treasure for a game, seen three-quarters from slightly above as if resting on a counter, upright and centred, filling about ninety percent of the picture, its lowest point on the bottom edge. One bold silhouette, each material in two or three main tones, with three or four readable features. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: Thick dwarven gold coins with a square hole through the middle, stamped with a hammer and anvil: one big coin standing face-on in front of a short stack of three.\n\nIt must show: one large face-on coin with a square hole; a hammer-and-anvil stamp; a short stack behind it; rich, warm gold. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): gold (#492100 #773f00 #a06500 #c29026 #f2c14e #fbeda4); umber 1-2 (#280c06 #4b2212).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "heartsong.lullaby_box": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nThe Lullaby Box, one of the nine Heartsongs (a beloved object the realm's archmages sang a spell into): a single object, handmade, old and loved, warmer and more personal than any treasure, with one deep-red accent; seen three-quarters from slightly above, upright, centred, filling about ninety percent of the picture, its lowest point on the bottom edge. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: The music box that sang her children to sleep: a small wooden box with a hand-painted lid of flowers and a crescent moon, the lid slightly ajar, a little brass crank on the side, its corners worn pale with years of loving use, a faded red ribbon tied around it.\n\nIt must show: a small wooden music box; painted flowers and a crescent moon on the lid; a brass crank; worn corners. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): umber 2-6 (#4b2212 #6e3d22 #8e5b37 #ad7d52 #c9a075); gold 4-5 (#c29026 #f2c14e); leaf 3-4 (#0e7734 #58a04c); azure 4 (#4ea3ff); crimson 4-5 (#c7414e #ff4058).\n\nAvoid: musical notes floating; a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter.",
+    "curio.monocle": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nWitch's Monocle: a single small object, an oddment from an old warded chest, made for a trade; seen three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold shape, each material in two or three main tones, with up to three readable features. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A witch's monocle: a round lens tinted violet in a tarnished silver rim, a fine silver chain curling away, a tiny star glint on the glass. A plain, honest object: simple materials, no ornament.\n\nIt must show: a round violet-tinted lens; a tarnished silver rim; a curling chain. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): arcane 3-6 (#6c48a5 #b46bff #c792ff #fdd0ff); steel (#383d48 #626d80 #93a2b6 #ccd9e8).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter."
+  },
+  "requests": [
+    {
+      "id": "counter.stall",
+      "candidate": "A",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "counter.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/counter_stall_B.png",
+          "sha256": "f95029a188722ba30a448e43fb032b513e7a74bb4c07437d342a5047ea77952c"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-5c377f97-58a9-4f9d-866a-ef950feab5b6.png",
+      "archived_filename": "counter_stall_A.png",
+      "selected": true,
+      "processing": {
+        "id": "counter.stall",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "be6e020c1290e20ce41606cde5cef8ab99d004e93b31167083ece882e9ece498",
+        "output_sha256": "c0c7b1c7a0408d5e8150d58568cd7c4135e0d23c527c02b6cd431b656bb37d5e",
+        "calm": {
+          "specks": 0.002878157978893508,
+          "edges": 0.11007618381026732,
+          "busy": 6.038287748674051
+        },
+        "colours": 9,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "counter.stall",
+      "candidate": "B",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "counter.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/counter_stall_B.png",
+          "sha256": "f95029a188722ba30a448e43fb032b513e7a74bb4c07437d342a5047ea77952c"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-ad698ae4-5edd-46a8-b74f-b3f164ca8b34.png",
+      "archived_filename": "counter_stall_B.png",
+      "selected": false,
+      "processing": {
+        "id": "counter.stall",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "34bf2320b9596239f23bd0ec9e0cd0126e1cfb0f73eb287b2f30ac1f249d19c2",
+        "output_sha256": "f042f1e622cab2778d67af183efb52e5ba787ec7b15f396c62732f9afa681d49",
+        "calm": {
+          "specks": 0.0043172369683402625,
+          "edges": 0.1348695722400194,
+          "busy": 5.9865686865693934
+        },
+        "colours": 8,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "curio.monocle",
+      "candidate": "A",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "curio.monocle",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/curio_monocle_D.png",
+          "sha256": "febf8b1229c678b3a324b86b164466dba13855779f64a6a202465fac0a8dfff4"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-16238bc6-a11b-4d15-abc3-6d6346e7875d.png",
+      "archived_filename": "curio_monocle_A.png",
+      "selected": false,
+      "processing": {
+        "id": "curio.monocle",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "36ea3e6aefcdf7997af59787584ec43c58fe425eca2eaad2a1e134c7a0943cbf",
+        "output_sha256": "17c6d426fe01c3ac6aaf1a3ccc5472778730f5fbc84d1cad8958feaf6860ea02",
+        "calm": {
+          "specks": 0.10033444816053512,
+          "edges": 0.37842778793418647,
+          "busy": 25.198224862888495
+        },
+        "colours": 14,
+        "errors": [
+          "too busy: lone specks 0.100, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "id": "curio.monocle",
+      "candidate": "B",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.\n\nCandidate B correction: the silver rim and short curled chain must be broad solid shapes in just TWO flat steel-grey tones, with at most one large muted tarnish patch. No mottling, scratches, scattered glints or tiny antique spots. Keep a round violet lens in two broad tones and one clear star glint. Preserve the original target's shape and placement; remove all black or plum contour strokes. The ring is actual silver material, not an ink outline. This must remain clear at 28x28 native pixels.",
+      "transparent_background": false,
+      "base_prompt_id": "curio.monocle",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/curio_monocle_D.png",
+          "sha256": "febf8b1229c678b3a324b86b164466dba13855779f64a6a202465fac0a8dfff4"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-738bf089-1ea5-4f48-b63a-9ccbc6a3d57b.png",
+      "archived_filename": "curio_monocle_B.png",
+      "selected": true,
+      "processing": {
+        "id": "curio.monocle",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "8fe47c32ce670e99f47e617cb00d0ee4c1f90010022d544ad1a1bc22a178e027",
+        "output_sha256": "ad8db9ba2fe16afdd6c7a4408fdc721c73d5dfb2556ee807eb207dbfd0f0efe6",
+        "calm": {
+          "specks": 0.03355704697986577,
+          "edges": 0.24725274725274726,
+          "busy": 13.792139194139201
+        },
+        "colours": 9,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "figure.hob",
+      "candidate": "A",
+      "requested_size": "1024x1536",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1536.",
+      "transparent_background": false,
+      "base_prompt_id": "figure.hob",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/figure_hob_B.png",
+          "sha256": "2fa0e89b0cc0e3da95818e191e92ea2fb4ac4ccd6433585b6ee61afab5350a44"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-5ede8cd2-4473-4b09-b80c-5915c48f1c1a.png",
+      "archived_filename": "figure_hob_A.png",
+      "selected": true,
+      "processing": {
+        "id": "figure.hob",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_sha256": "84137a70b262bd2f405858cdcbd1416bb5a4c3501af77f60b5869f7cc5a0bb85",
+        "output_sha256": "37a5d5b8c798888d61757285b06885669f2eed8ce39d3ebbf2115eede8bfd804",
+        "calm": {
+          "specks": 0.022082810539523212,
+          "edges": 0.24490861618798956,
+          "busy": 11.801926631853823
+        },
+        "colours": 14,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "figure.hob",
+      "candidate": "B",
+      "requested_size": "1024x1536",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1536.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "figure.hob",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/figure_hob_B.png",
+          "sha256": "2fa0e89b0cc0e3da95818e191e92ea2fb4ac4ccd6433585b6ee61afab5350a44"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-2fc48098-f9d8-4dda-be27-870c1d9204f2.png",
+      "archived_filename": "figure_hob_B.png",
+      "selected": false,
+      "processing": {
+        "id": "figure.hob",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_sha256": "d046f3b26361e43858148b997f5cbd0dff6282e7e39ae2c47e4324a8770a1379",
+        "output_sha256": "c484f3ae8d62f3888bd3fd14addfebcef39edb16021b40720ad9cd9775dee075",
+        "calm": {
+          "specks": 0.030997983870967742,
+          "edges": 0.2557071634741538,
+          "busy": 12.302598005772882
+        },
+        "colours": 14,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "frame.stall",
+      "candidate": "A",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "frame.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/frame_stall_D.png",
+          "sha256": "13a784b75257f44723f5e977b1ba74379eb2fa8a7ab2f8a9f1aefb655bee20b4"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-31dec54c-7508-491f-89e0-bdd5c5e216b7.png",
+      "archived_filename": "frame_stall_A.png",
+      "selected": false,
+      "processing": {
+        "id": "frame.stall",
+        "candidate": "A",
+        "offset_y": -80,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "6a1a8c9901c97b81ee3374bc449e6720c8c0c280357304bc926ef2d53641813c",
+        "output_sha256": "488f35e611a4b1037d432666f415a9d909271df3651e412dd09fca67a8f52739",
+        "calm": {
+          "specks": 0.0072401712728688205,
+          "edges": 0.1784897942815896,
+          "busy": 7.656853871756784
+        },
+        "colours": 17,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "frame.stall",
+      "candidate": "B",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "frame.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/frame_stall_D.png",
+          "sha256": "13a784b75257f44723f5e977b1ba74379eb2fa8a7ab2f8a9f1aefb655bee20b4"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-3262b84d-0838-4ebc-beba-314a3c1ac503.png",
+      "archived_filename": "frame_stall_B.png",
+      "selected": true,
+      "processing": {
+        "id": "frame.stall",
+        "candidate": "B",
+        "offset_y": -80,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "005cb38b5ca28a5bee2971c6eab8954c4c9858232b633a0826a7873c35678dc3",
+        "output_sha256": "f316a77cfc187c230f355366600c7cd30ccb37e5208151c45deec1ffe11bfca4",
+        "calm": {
+          "specks": 0.006548686364699462,
+          "edges": 0.14819572110946092,
+          "busy": 6.433536065507994
+        },
+        "colours": 15,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "candidate": "A",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "heartsong.lullaby_box",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/heartsong_lullaby_box_D.png",
+          "sha256": "3fb23178e08ef2c167343de8e143904322836f515d9196bf8f1deaf3c6d3e2c8"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-306c3faf-3909-4d03-b794-a9fbe57c70ec.png",
+      "archived_filename": "heartsong_lullaby_box_A.png",
+      "selected": false,
+      "processing": {
+        "id": "heartsong.lullaby_box",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "4813acbdaf1ad4c565f37ca2a83299baacce761b5f433f032de68883541f97dc",
+        "output_sha256": "8aca78a4e2fcb8bbaa5add4be06f30026dc8f8ceec41d1368ea1bdb86752e3b5",
+        "calm": {
+          "specks": 0.03917910447761194,
+          "edges": 0.4094488188976378,
+          "busy": 20.36324015748033
+        },
+        "colours": 13,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "candidate": "B",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.\n\nCandidate B correction: keep the edit target's original two simple flower marks and crescent; do not add leaves, floral sprigs, dots or other ornaments. Keep the red ribbon, brass crank and a few broad worn corner patches, but leave the wooden faces as broad material tones without brushed grain. Remove the ink strokes while retaining the source's specific features and geometry.",
+      "transparent_background": false,
+      "base_prompt_id": "heartsong.lullaby_box",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/heartsong_lullaby_box_D.png",
+          "sha256": "3fb23178e08ef2c167343de8e143904322836f515d9196bf8f1deaf3c6d3e2c8"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-56a5ef26-30af-43f3-8229-e585f4bffceb.png",
+      "archived_filename": "heartsong_lullaby_box_B.png",
+      "selected": true,
+      "processing": {
+        "id": "heartsong.lullaby_box",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "a9b530d19fb94650fb61191f566ba9949cca57bdb5158dcf3753b6ee48c7bd68",
+        "output_sha256": "5572b249609f939b699060b042c6214a2039afa9803cd3bf9f774f90eaec477c",
+        "calm": {
+          "specks": 0.04924242424242424,
+          "edges": 0.386,
+          "busy": 22.883289999999985
+        },
+        "colours": 14,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "icon.kind.coins",
+      "candidate": "A",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "icon.kind.coins",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/icon_kind_coins_B.png",
+          "sha256": "8ae5f1b6daa0f08e4164eb7789abb4d7c783d0c32786b26a071ce284208e1af9"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-2a28841c-294e-4274-82c6-d15987a0c854.png",
+      "archived_filename": "icon_kind_coins_A.png",
+      "selected": false,
+      "processing": {
+        "id": "icon.kind.coins",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "538503a076209bd4d4cf4a0c2e373d32b36f7f55d4088732f2c8961fdc4d0130",
+        "output_sha256": "e05c14b042b0e9d95cab97393696842c51c5a0957d5066c5ba917bbc3ac6ccf3",
+        "calm": {
+          "specks": 0.028985507246376812,
+          "edges": 0.3305084745762712,
+          "busy": 24.661745762711867
+        },
+        "colours": 4,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "icon.kind.coins",
+      "candidate": "B",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "icon.kind.coins",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/icon_kind_coins_B.png",
+          "sha256": "8ae5f1b6daa0f08e4164eb7789abb4d7c783d0c32786b26a071ce284208e1af9"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-57189bd1-ad40-48f3-ae27-c1e6fc678b6e.png",
+      "archived_filename": "icon_kind_coins_B.png",
+      "selected": true,
+      "processing": {
+        "id": "icon.kind.coins",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "5d2026299530ff5bf175c943906faf55b6771349f7957759550f48cbd52d4e5b",
+        "output_sha256": "672d3ed491ce8519fda994e73162d6a139f2014eb27f432c2ac372a17ffc7067",
+        "calm": {
+          "specks": 0.015384615384615385,
+          "edges": 0.33636363636363636,
+          "busy": 26.51719090909091
+        },
+        "colours": 5,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "candidate": "A",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "icon.upgrade.lamp",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/icon_upgrade_lamp_B.png",
+          "sha256": "ac26b9db1a2ad6c8e72030d6af208d9fd8de53f5c81044934f8a1acc954a762c"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-77b8b3fb-1b8a-47c4-a76c-aea874657d8a.png",
+      "archived_filename": "icon_upgrade_lamp_A.png",
+      "selected": false,
+      "processing": {
+        "id": "icon.upgrade.lamp",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "94092733c3bcead8dbac78346dff6bda9180740f26bf22dbd89386a03b5d3272",
+        "output_sha256": "215097fecfa3c7ebc9ccdab561a8fa65c63b443e02974055232db21b1afa4e5c",
+        "calm": {
+          "specks": 0.07092198581560284,
+          "edges": 0.49603174603174605,
+          "busy": 26.9351349206349
+        },
+        "colours": 12,
+        "errors": [
+          "too busy: lone specks 0.071, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": [
+          "content is only 59% of the width: small for an icon"
+        ]
+      }
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "candidate": "B",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "icon.upgrade.lamp",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/icon_upgrade_lamp_B.png",
+          "sha256": "ac26b9db1a2ad6c8e72030d6af208d9fd8de53f5c81044934f8a1acc954a762c"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-61c789dc-b476-4f71-8f3d-16c880197baf.png",
+      "archived_filename": "icon_upgrade_lamp_B.png",
+      "selected": false,
+      "processing": {
+        "id": "icon.upgrade.lamp",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "74db06f5adebe0b1a032b254bc8a13be1bb140100fcd00991b28af60360f90a2",
+        "output_sha256": "3bc7ad3996e02123b0a4ec2a828e98787a244436e99841474d7c4fdf646f6cc6",
+        "calm": {
+          "specks": 0.06382978723404255,
+          "edges": 0.4722222222222222,
+          "busy": 24.758388888888852
+        },
+        "colours": 12,
+        "errors": [
+          "too busy: lone specks 0.064, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": [
+          "content is only 59% of the width: small for an icon"
+        ]
+      }
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "candidate": "C",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.\n\nCorrection C: use the first reference's outline-free treatment, but shorten the hanging ring and make the main lantern body wider so the total silhouette width is at least two thirds of its total height. Keep the brass loop, a broad charcoal-blue roof and base, a single violet flame and a gold cup. Use only TWO large flat tones per metal, with one broad continuous highlight; remove tiny bevel glints and the detached flame spark. Keep clear colour boundaries, no outlines anywhere, and keep the violet fire and handmade material character. The target is a readable 24x24 icon.",
+      "transparent_background": false,
+      "base_prompt_id": "icon.upgrade.lamp",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9s_c2_4x_no_outline/sources/icon_upgrade_lamp_B.png",
+          "sha256": "74db06f5adebe0b1a032b254bc8a13be1bb140100fcd00991b28af60360f90a2"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-84d0ea83-8ee2-47c9-a011-8b1bf64724ee.png",
+      "archived_filename": "icon_upgrade_lamp_C.png",
+      "selected": true,
+      "processing": {
+        "id": "icon.upgrade.lamp",
+        "candidate": "C",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "45d62e00ae5827c8104bdf772aec9d2f6ed5214650cd31698cb5f067886dab66",
+        "output_sha256": "2beca4676fea3934a40ea85906a3fb5279752dfd18256c1304f82e5ed7883acd",
+        "calm": {
+          "specks": 0.046511627906976744,
+          "edges": 0.48860759493670886,
+          "busy": 29.45890379746834
+        },
+        "colours": 12,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "candidate": "A",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "item.dwarf_gold_crowns",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/item_dwarf_gold_crowns_B.png",
+          "sha256": "b3be4580750b975c9c02d3f06841a33afcd01fdb15a02df8142baf8b87e6c27a"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-2755f2d4-f962-4402-a5b4-713d8d2cfe3c.png",
+      "archived_filename": "item_dwarf_gold_crowns_A.png",
+      "selected": false,
+      "processing": {
+        "id": "item.dwarf_gold_crowns",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "124195a0907ea760f4b408d714d708693232aae01ed53c2fe5ca23adc6662520",
+        "output_sha256": "fda0b28f5ae2e8e524cfcc780e8e4e116e72c869ebcaaf4a9a13521ced384c3d",
+        "calm": {
+          "specks": 0.0645879732739421,
+          "edges": 0.444311377245509,
+          "busy": 28.406749700598798
+        },
+        "colours": 8,
+        "errors": [
+          "too busy: lone specks 0.065, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "candidate": "B",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "item.dwarf_gold_crowns",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/item_dwarf_gold_crowns_B.png",
+          "sha256": "b3be4580750b975c9c02d3f06841a33afcd01fdb15a02df8142baf8b87e6c27a"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-ac6d0db9-11d5-431b-8910-a7cea957a079.png",
+      "archived_filename": "item_dwarf_gold_crowns_B.png",
+      "selected": true,
+      "processing": {
+        "id": "item.dwarf_gold_crowns",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "14afa6247fb182dbedccd34aedb28eecc28b78b077d36d9ef036ead0f1876452",
+        "output_sha256": "b93e1b756cae8aecb3f63b13fe2ac4ce6531e3e306c65ded5a1f611e174e7331",
+        "calm": {
+          "specks": 0.03111111111111111,
+          "edges": 0.3906810035842294,
+          "busy": 25.133181600955783
+        },
+        "colours": 7,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "place.stall",
+      "candidate": "A",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "place.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/place_stall_B.png",
+          "sha256": "f19ae86265c9c876feb59f6b64c42af155ff94a9d33f395ea2a801f34c59b91e"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-7ef63ab2-daa3-4650-be75-fcf612889a1e.png",
+      "archived_filename": "place_stall_A.png",
+      "selected": false,
+      "processing": {
+        "id": "place.stall",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1672,
+          941
+        ],
+        "source_sha256": "5703f03d2cbab009ed5ad5e3b8ad45283934dc46eb1b1918e10d0ecb93cab378",
+        "output_sha256": "a66089ecf90588cf9da12c4bcb8772c410e0cb27efa72054edb46510fe6c29f3",
+        "calm": {
+          "specks": 0.016559984482591408,
+          "edges": 0.21030132033759602,
+          "busy": 8.854671918703442
+        },
+        "colours": 25,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "place.stall",
+      "candidate": "B",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "place.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/place_stall_B.png",
+          "sha256": "f19ae86265c9c876feb59f6b64c42af155ff94a9d33f395ea2a801f34c59b91e"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-f5d40129-48d3-4c69-8763-f7dde652df46.png",
+      "archived_filename": "place_stall_B.png",
+      "selected": true,
+      "processing": {
+        "id": "place.stall",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1672,
+          941
+        ],
+        "source_sha256": "18ab57491aa38339d964b2edc932318022ec9cd386133a300178ff8788b92dd7",
+        "output_sha256": "a30e78c1b111de5aad3482da484e4fa64c7db846276c7fca04e567633152ce8c",
+        "calm": {
+          "specks": 0.012957760124006975,
+          "edges": 0.18852319027984482,
+          "busy": 7.770535157488996
+        },
+        "colours": 26,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "prop.lantern_stall",
+      "candidate": "A",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "prop.lantern_stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/prop_lantern_stall_C.png",
+          "sha256": "237e6ecfee9a86ff0b0db184bbf989c7f7cb262114dd82a00fd30264740539d5"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-49e5ba0b-90e4-4be1-bd55-f7556556f9f3.png",
+      "archived_filename": "prop_lantern_stall_A.png",
+      "selected": false,
+      "processing": {
+        "id": "prop.lantern_stall",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "63f62a182ffdee304b619718be650b330e2851275066a0187433bd76789cc8f2",
+        "output_sha256": "20fb3e75109f7a1bc495d3c42fd1394ad72411a807f97c98ad12ce69d34bb7a7",
+        "calm": {
+          "specks": 0.04,
+          "edges": 0.3936651583710407,
+          "busy": 27.11228054298642
+        },
+        "colours": 11,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "prop.lantern_stall",
+      "candidate": "B",
+      "requested_size": "1024x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "prop.lantern_stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/prop_lantern_stall_C.png",
+          "sha256": "237e6ecfee9a86ff0b0db184bbf989c7f7cb262114dd82a00fd30264740539d5"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-f0fb498a-80d1-4061-8b33-716998e6131c.png",
+      "archived_filename": "prop_lantern_stall_B.png",
+      "selected": true,
+      "processing": {
+        "id": "prop.lantern_stall",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1254,
+          1254
+        ],
+        "source_sha256": "9aa9946d30ba1210fcee1864e75a44f54777a48b35653efd067835de21ac3b98",
+        "output_sha256": "738d6161821ad3be678e17a84daea99b8fea39a1ac3ad2ee25b7bc54946e9186",
+        "calm": {
+          "specks": 0.016260162601626018,
+          "edges": 0.39631336405529954,
+          "busy": 25.224585253456215
+        },
+        "colours": 10,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "sheet.stall",
+      "candidate": "A",
+      "requested_size": "1024x1536",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1536.",
+      "transparent_background": false,
+      "base_prompt_id": "sheet.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/sheet_stall_B.png",
+          "sha256": "cce1ba53a06b1011aacc7d346373ae4f1dd356274a7cbff89e662608a9972944"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-b648bffe-6a55-4566-b1c5-c29b06be249a.png",
+      "archived_filename": "sheet_stall_A.png",
+      "selected": false,
+      "processing": {
+        "id": "sheet.stall",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_sha256": "8cf169ffc46dbac9aa45e05c3ae35b0461b7261c7d9879da0e304c1aa1661c3e",
+        "output_sha256": "851e14bcd633de607cda05c59c424e19ed6d7baca21de9caf76cf5fb5eaeb2f1",
+        "calm": {
+          "specks": 0.00047022864868042085,
+          "edges": 0.019635322928038237,
+          "busy": 1.6993222494319893
+        },
+        "colours": 7,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "sheet.stall",
+      "candidate": "B",
+      "requested_size": "1024x1536",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1024x1536.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "sheet.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/sheet_stall_B.png",
+          "sha256": "cce1ba53a06b1011aacc7d346373ae4f1dd356274a7cbff89e662608a9972944"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-05dc6714-edaa-4c4a-a320-833b4f34ceb3.png",
+      "archived_filename": "sheet_stall_B.png",
+      "selected": true,
+      "processing": {
+        "id": "sheet.stall",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1024,
+          1536
+        ],
+        "source_sha256": "eb93255c8fa2ebc5617f7dde6b952c384c3e737e6e5ede645ebb905aa776b96b",
+        "output_sha256": "f5ed914ea08db6f7ac5ef7ed19554c0c871d7bfa30ec2dbd01d6d81dce75dd76",
+        "calm": {
+          "specks": 0.0003967554223241051,
+          "edges": 0.019532056766884017,
+          "busy": 1.7523697666184146
+        },
+        "colours": 8,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "shelf.stall",
+      "candidate": "A",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "shelf.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/shelf_stall_B.png",
+          "sha256": "c8780e9e5ecbf4a972a08db3f052ee808ea4b6e56cd2f3b93a8cebbe544ec853"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-d303d2b9-eaba-478f-8e12-ed70a3b92a5e.png",
+      "archived_filename": "shelf_stall_A.png",
+      "selected": false,
+      "processing": {
+        "id": "shelf.stall",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "4770a2577cc3e1b5cdf793b63840ec4fa5300792672a6bb084e61d92a2dcb60b",
+        "output_sha256": "5364025f5db52533d6f107f2ae1a39c55a2345d09c6ac758413912372156fdb3",
+        "calm": {
+          "specks": 0.08653846153846154,
+          "edges": 0.41938579654510555,
+          "busy": 19.439408829174667
+        },
+        "colours": 10,
+        "errors": [
+          "too busy: lone specks 0.087, at most 0.06 (draw it simpler)"
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "id": "shelf.stall",
+      "candidate": "B",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "shelf.stall",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/shelf_stall_B.png",
+          "sha256": "c8780e9e5ecbf4a972a08db3f052ee808ea4b6e56cd2f3b93a8cebbe544ec853"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-892a61c5-dc26-491c-9f49-497c37d208e0.png",
+      "archived_filename": "shelf_stall_B.png",
+      "selected": true,
+      "processing": {
+        "id": "shelf.stall",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "6c51edc8ba7c26c48d50e5d98650050702ec77fd686ead2dc305816927609aa4",
+        "output_sha256": "2f8d8d8615029ab6bada0a0b221be96fdfc2a225d4caa9b682f1510a58b28916",
+        "calm": {
+          "specks": 0.048939641109298535,
+          "edges": 0.30392156862745096,
+          "busy": 14.309276470588186
+        },
+        "colours": 12,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "sky.midday",
+      "candidate": "A",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.",
+      "transparent_background": false,
+      "base_prompt_id": "sky.midday",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/sky_midday_B.png",
+          "sha256": "0a2c53bce639d8efb1036245fedbe62c699c50cebfc0647dad0490286d83268b"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-eeb35fb4-e866-4bf6-92ee-0e80f38268d7.png",
+      "archived_filename": "sky_midday_A.png",
+      "selected": true,
+      "processing": {
+        "id": "sky.midday",
+        "candidate": "A",
+        "offset_y": 0,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "578fc53d104671fa5a07c60d9797d158c802d3e7b85637a77910d9aa441121da",
+        "output_sha256": "b5c157cfef457c546808f841718b4622ca49f3b42c5987639ec1309b35893572",
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.01858719568457662,
+          "busy": 0.799019021931992
+        },
+        "colours": 5,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "id": "sky.midday",
+      "candidate": "B",
+      "requested_size": "1536x1024",
+      "appended_text": "\n\nUse case: precise-object-edit. Reference 1 is the EDIT TARGET from the rejected outlined batch. Keep its subject identity, pose, layout, proportions, crop, background and meaningful details. Change its drawing treatment to match the owner's correction: remove ALL enclosing contour strokes and inked internal linework. Continue each adjacent material's own colour fill right to its boundary; model volume using broad cel-shaded filled areas. Do not leave a dark, brown or coloured halo around the object or its parts. Keep natural eyes, mouth, seams, nail heads, rims and cast shadows readable as filled material shapes, not traced borders. Keep the same warm C2 palette and 3-4 useful details; do not turn this into nearly featureless geometric art. Reference 2 is the master palette, colours only. Reference 3 is the original C2 scene, for warmth, shape language and detail only: do NOT copy its outlines or scene composition. Keep the edit target's exact geometry and background so it registers as a game layer. No new objects, text, border or watermark. One high-quality PNG; requested size 1536x1024.\n\nIndependent candidate B: be especially strict about eliminating the enclosing ink stroke. Readability must come from adjacent material tones and silhouette shapes. Preserve the expressive face or defining object features, and retain the target's placement.",
+      "transparent_background": false,
+      "base_prompt_id": "sky.midday",
+      "references": [
+        {
+          "path": "LOCAL_ARCHIVE/batch9r_c2_4x/sources/sky_midday_B.png",
+          "sha256": "0a2c53bce639d8efb1036245fedbe62c699c50cebfc0647dad0490286d83268b"
+        },
+        {
+          "path": "art/palette/keywright.png",
+          "sha256": "3cbf5783461a1ee0544c703c53a5b8e2024e54dfe3beda7c420bfb4c453c27d2"
+        },
+        {
+          "path": "art/study/raw/C2_A.webp",
+          "sha256": "2a44f05a5a4e7fc3083325e7b05032088a0b61fe34b12005f43b3a866396e112"
+        }
+      ],
+      "original_filename": "exec-646743d5-c09b-4f69-86cb-2483b873e490.png",
+      "archived_filename": "sky_midday_B.png",
+      "selected": false,
+      "processing": {
+        "id": "sky.midday",
+        "candidate": "B",
+        "offset_y": 0,
+        "source_size": [
+          1536,
+          1024
+        ],
+        "source_sha256": "65fe4bc2ba33f6925b9c73ed2c88141062474d9620073233271e0ab4d011fcdf",
+        "output_sha256": "6e1b4e7c1b023070ec9bc145a267695a5ce7ead7ca25515191ed3a950d75cf6e",
+        "calm": {
+          "specks": 0.0,
+          "edges": 0.01867591738235503,
+          "busy": 0.8018912981758699
+        },
+        "colours": 5,
+        "errors": [],
+        "warnings": []
+      }
+    }
+  ],
+  "selected": [
+    {
+      "id": "sky.midday",
+      "candidate": "A",
+      "reason": "Clear cloud groups and open centre; both variants pass.",
+      "output": "art/generated/sky/midday.png",
+      "source_file": "sky_midday_A.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_sky_midday_A.webp",
+      "output_sha256": "b5c157cfef457c546808f841718b4622ca49f3b42c5987639ec1309b35893572",
+      "calm": {
+        "specks": 0.0,
+        "edges": 0.01858719568457662,
+        "busy": 0.799019021931992
+      },
+      "colours": 5,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/sky_midday_A.png",
+        "--id",
+        "sky.midday",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "place.stall",
+      "candidate": "B",
+      "reason": "Preserves landmarks, flowers, cart and smoke as colour shapes; broader and calmer foliage than A.",
+      "output": "art/generated/place/stall.png",
+      "source_file": "place_stall_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_place_stall_B.webp",
+      "output_sha256": "a30e78c1b111de5aad3482da484e4fa64c7db846276c7fca04e567633152ce8c",
+      "calm": {
+        "specks": 0.012957760124006975,
+        "edges": 0.18852319027984482,
+        "busy": 7.770535157488996
+      },
+      "colours": 26,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/place_stall_B.png",
+        "--id",
+        "place.stall",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "frame.stall",
+      "candidate": "B",
+      "reason": "No enclosing awning strokes; preserves herb bunch, bell, ropes and top band with fewer small edge marks.",
+      "offset_y": -80,
+      "output": "art/generated/frame/stall.png",
+      "source_file": "frame_stall_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_frame_stall_B.webp",
+      "output_sha256": "f316a77cfc187c230f355366600c7cd30ccb37e5208151c45deec1ffe11bfca4",
+      "calm": {
+        "specks": 0.006548686364699462,
+        "edges": 0.14819572110946092,
+        "busy": 6.433536065507994
+      },
+      "colours": 15,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/frame_stall_B.png",
+        "--id",
+        "frame.stall",
+        "--no-outline",
+        "--preview",
+        "--offset-y",
+        "-80"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "shelf.stall",
+      "candidate": "B",
+      "reason": "Retains knots, worn plank and end nails; A fragments into too many isolated pixels.",
+      "output": "art/generated/shelf/stall.png",
+      "source_file": "shelf_stall_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_shelf_stall_B.webp",
+      "output_sha256": "2f8d8d8615029ab6bada0a0b221be96fdfc2a225d4caa9b682f1510a58b28916",
+      "calm": {
+        "specks": 0.048939641109298535,
+        "edges": 0.30392156862745096,
+        "busy": 14.309276470588186
+      },
+      "colours": 12,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/shelf_stall_B.png",
+        "--id",
+        "shelf.stall",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "counter.stall",
+      "candidate": "A",
+      "reason": "Clear plank seams, worn edges and nail heads; broader quiet wood areas than B.",
+      "output": "art/generated/counter/stall.png",
+      "source_file": "counter_stall_A.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_counter_stall_A.webp",
+      "output_sha256": "c0c7b1c7a0408d5e8150d58568cd7c4135e0d23c527c02b6cd431b656bb37d5e",
+      "calm": {
+        "specks": 0.002878157978893508,
+        "edges": 0.11007618381026732,
+        "busy": 6.038287748674051
+      },
+      "colours": 9,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/counter_stall_A.png",
+        "--id",
+        "counter.stall",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "sheet.stall",
+      "candidate": "B",
+      "reason": "Plain writing field and restrained edge shading without an inked paper border.",
+      "output": "art/generated/sheet/stall.png",
+      "source_file": "sheet_stall_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_sheet_stall_B.webp",
+      "output_sha256": "f5ed914ea08db6f7ac5ef7ed19554c0c871d7bfa30ec2dbd01d6d81dce75dd76",
+      "calm": {
+        "specks": 0.0003967554223241051,
+        "edges": 0.019532056766884017,
+        "busy": 1.7523697666184146
+      },
+      "colours": 8,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/sheet_stall_B.png",
+        "--id",
+        "sheet.stall",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "prop.lantern_stall",
+      "candidate": "B",
+      "reason": "Steel body and warm window retain form without ink; fewer fragmented highlights than A.",
+      "output": "art/generated/props/lantern_stall.png",
+      "source_file": "prop_lantern_stall_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_prop_lantern_stall_B.webp",
+      "output_sha256": "738d6161821ad3be678e17a84daea99b8fea39a1ac3ad2ee25b7bc54946e9186",
+      "calm": {
+        "specks": 0.016260162601626018,
+        "edges": 0.39631336405529954,
+        "busy": 25.224585253456215
+      },
+      "colours": 10,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/prop_lantern_stall_B.png",
+        "--id",
+        "prop.lantern_stall",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "figure.hob",
+      "candidate": "A",
+      "reason": "Warm expressive face, straw hat, stubble, rolled sleeves and patch; clearer native-size planes than B.",
+      "output": "art/generated/figures/hob.png",
+      "source_file": "figure_hob_A.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_figure_hob_A.webp",
+      "output_sha256": "37a5d5b8c798888d61757285b06885669f2eed8ce39d3ebbf2115eede8bfd804",
+      "calm": {
+        "specks": 0.022082810539523212,
+        "edges": 0.24490861618798956,
+        "busy": 11.801926631853823
+      },
+      "colours": 14,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/figure_hob_A.png",
+        "--id",
+        "figure.hob",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "candidate": "B",
+      "reason": "Square hole and hammer/anvil marks remain readable with a rear stack; fewer specks than A.",
+      "output": "art/generated/items/dwarf_gold_crowns.png",
+      "source_file": "item_dwarf_gold_crowns_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_item_dwarf_gold_crowns_B.webp",
+      "output_sha256": "b93e1b756cae8aecb3f63b13fe2ac4ce6531e3e306c65ded5a1f611e174e7331",
+      "calm": {
+        "specks": 0.03111111111111111,
+        "edges": 0.3906810035842294,
+        "busy": 25.133181600955783
+      },
+      "colours": 7,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/item_dwarf_gold_crowns_B.png",
+        "--id",
+        "item.dwarf_gold_crowns",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "candidate": "B",
+      "reason": "Preserves the target's two flower marks, crescent, ribbon and crank without adding A's extra sprigs.",
+      "output": "art/generated/heartsongs/lullaby_box.png",
+      "source_file": "heartsong_lullaby_box_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_heartsong_lullaby_box_B.webp",
+      "output_sha256": "5572b249609f939b699060b042c6214a2039afa9803cd3bf9f774f90eaec477c",
+      "calm": {
+        "specks": 0.04924242424242424,
+        "edges": 0.386,
+        "busy": 22.883289999999985
+      },
+      "colours": 14,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/heartsong_lullaby_box_B.png",
+        "--id",
+        "heartsong.lullaby_box",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "curio.monocle",
+      "candidate": "B",
+      "reason": "Round violet lens and glint, silver rim and short curved chain; broad metal tones avoid A's mottled specks.",
+      "output": "art/generated/curios/monocle.png",
+      "source_file": "curio_monocle_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_curio_monocle_B.webp",
+      "output_sha256": "ad8db9ba2fe16afdd6c7a4408fdc721c73d5dfb2556ee807eb207dbfd0f0efe6",
+      "calm": {
+        "specks": 0.03355704697986577,
+        "edges": 0.24725274725274726,
+        "busy": 13.792139194139201
+      },
+      "colours": 9,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/curio_monocle_B.png",
+        "--id",
+        "curio.monocle",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "candidate": "C",
+      "reason": "Wider lantern and shorter loop remove width warning; broad metal planes retain violet fire and pass without repair.",
+      "output": "art/generated/icons/upgrade_lamp.png",
+      "source_file": "icon_upgrade_lamp_C.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_icon_upgrade_lamp_C.webp",
+      "output_sha256": "2beca4676fea3934a40ea85906a3fb5279752dfd18256c1304f82e5ed7883acd",
+      "calm": {
+        "specks": 0.046511627906976744,
+        "edges": 0.48860759493670886,
+        "busy": 29.45890379746834
+      },
+      "colours": 12,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/icon_upgrade_lamp_C.png",
+        "--id",
+        "icon.upgrade.lamp",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    },
+    {
+      "id": "icon.kind.coins",
+      "candidate": "B",
+      "reason": "Three coins remain distinct without enclosing strokes; fewer lone pixels than A.",
+      "output": "art/generated/kinds/kind_coins.png",
+      "source_file": "icon_kind_coins_B.png",
+      "raw_preview": "art/generated/_raw/round2_batch9s_icon_kind_coins_B.webp",
+      "output_sha256": "672d3ed491ce8519fda994e73162d6a139f2014eb27f432c2ac372a17ffc7067",
+      "calm": {
+        "specks": 0.015384615384615385,
+        "edges": 0.33636363636363636,
+        "busy": 26.51719090909091
+      },
+      "colours": 5,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "python3",
+        "art/tools/pixelize.py",
+        "<full-source-dir>/icon_kind_coins_B.png",
+        "--id",
+        "icon.kind.coins",
+        "--no-outline",
+        "--preview"
+      ],
+      "manual_repairs": [],
+      "recolour": []
+    }
+  ],
+  "validation": {
+    "command": "python3 art/tools/validate.py --sheets",
+    "exit_code": 1,
+    "summary": {
+      "missing": 65,
+      "ok": 38,
+      "fail": 164
+    },
+    "anchors_ok": 13,
+    "anchor_warnings": 0,
+    "missing_p1": 58,
+    "non_anchor_output_changes": [],
+    "non_anchor_check_changes": [],
+    "retained_specs_unchanged": 25
+  },
+  "review": {
+    "world_calm": {
+      "specks": 0.011942618896191082,
+      "edges": 0.18012279082972532,
+      "busy": 8.720722283341862
+    },
+    "visual_checks": [
+      "source and native assets without inked contour rings",
+      "Hob face clear below dialogue panel",
+      "shelf and counter registration",
+      "blank writing field",
+      "1x/2x/4x object readability",
+      "morning/midday/evening/night composite"
+    ],
+    "note": "Composition mock-ups use the existing study interface and code-drawn chest; not live game captures. Only midday sky is new."
+  },
+  "processing_notes": [
+    "Every redo asset has outline=false; selected CLI processing also passes --no-outline.",
+    "Unmodified pixelize.py flat mode. No extra blur, smoothing, posterization, recolour or manual pixel repair.",
+    "All 27 full PNGs are retained locally; committed WebPs are small lossy viewing copies.",
+    "Historical study outputs, prompts and review pictures are unchanged."
+  ],
+  "approval_status": "Batch 9s ready for owner review. Stop before batches 10-15 and game integration."
+}

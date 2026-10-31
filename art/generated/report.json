@@ -13,12 +13,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 4,
+   "colours": 5,
    "priority": "P1",
    "calm": {
     "specks": 0.0,
-    "edges": 0.009,
-    "busy": 0.607
+    "edges": 0.019,
+    "busy": 0.799
    }
   },
   "sky.evening": {
@@ -33,12 +33,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 6,
+   "colours": 26,
    "priority": "P1",
    "calm": {
-    "specks": 0.0,
-    "edges": 0.027,
-    "busy": 0.603
+    "specks": 0.013,
+    "edges": 0.189,
+    "busy": 7.771
    }
   },
   "place.thornwick": {
@@ -57,12 +57,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 6,
+   "colours": 15,
    "priority": "P1",
    "calm": {
-    "specks": 0.0,
-    "edges": 0.016,
-    "busy": 1.6
+    "specks": 0.007,
+    "edges": 0.148,
+    "busy": 6.434
    }
   },
   "frame.thornwick": {
@@ -81,12 +81,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 4,
+   "colours": 12,
    "priority": "P1",
    "calm": {
-    "specks": 0.0,
-    "edges": 0.016,
-    "busy": 0.823
+    "specks": 0.049,
+    "edges": 0.304,
+    "busy": 14.309
    }
   },
   "shelf.thornwick": {
@@ -105,12 +105,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 4,
+   "colours": 9,
    "priority": "P1",
    "calm": {
-    "specks": 0.0,
-    "edges": 0.042,
-    "busy": 2.359
+    "specks": 0.003,
+    "edges": 0.11,
+    "busy": 6.038
    }
   },
   "counter.thornwick": {
@@ -129,12 +129,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 3,
+   "colours": 8,
    "priority": "P1",
    "calm": {
     "specks": 0.0,
-    "edges": 0.009,
-    "busy": 0.991
+    "edges": 0.02,
+    "busy": 1.752
    }
   },
   "sheet.thornwick": {
@@ -153,12 +153,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 9,
+   "colours": 10,
    "priority": "P1",
    "calm": {
-    "specks": 0.024,
-    "edges": 0.359,
-    "busy": 27.391
+    "specks": 0.016,
+    "edges": 0.396,
+    "busy": 25.225
    }
   },
   "prop.lantern_thornwick": {
@@ -213,12 +213,12 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 11,
+   "colours": 14,
    "priority": "P1",
    "calm": {
-    "specks": 0.002,
-    "edges": 0.119,
-    "busy": 6.678
+    "specks": 0.022,
+    "edges": 0.245,
+    "busy": 11.802
    }
   },
   "figure.mags": {
@@ -364,7 +364,6 @@
   "icon.upgrade.shop2": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.325, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.727, at most 0.55 (draw it simpler)"
    ],
@@ -380,7 +379,6 @@
   "icon.upgrade.shop3": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.389, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.762, at most 0.55 (draw it simpler)"
    ],
@@ -396,7 +394,6 @@
   "icon.upgrade.shop4": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.267, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.681, at most 0.55 (draw it simpler)"
    ],
@@ -412,7 +409,6 @@
   "icon.upgrade.sign": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.378, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.740, at most 0.55 (draw it simpler)"
    ],
@@ -428,7 +424,6 @@
   "icon.upgrade.scales": {
    "status": "fail",
    "errors": [
-    "11 colours, at most 8",
     "too busy: lone specks 0.587, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.783, at most 0.55 (draw it simpler)"
    ],
@@ -444,7 +439,6 @@
   "icon.upgrade.cabinet1": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.145, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.597, at most 0.55 (draw it simpler)"
    ],
@@ -460,7 +454,6 @@
   "icon.upgrade.cabinet2": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.252, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.670, at most 0.55 (draw it simpler)"
    ],
@@ -476,7 +469,6 @@
   "icon.upgrade.cabinet3": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.196, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.657, at most 0.55 (draw it simpler)"
    ],
@@ -494,7 +486,6 @@
   "icon.upgrade.cabinet4": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.225, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.566, at most 0.55 (draw it simpler)"
    ],
@@ -510,7 +501,6 @@
   "icon.upgrade.cabinet5": {
    "status": "fail",
    "errors": [
-    "11 colours, at most 8",
     "too busy: lone specks 0.275, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.608, at most 0.55 (draw it simpler)"
    ],
@@ -526,7 +516,6 @@
   "icon.upgrade.cabinet6": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.342, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.684, at most 0.55 (draw it simpler)"
    ],
@@ -542,7 +531,6 @@
   "icon.upgrade.picks": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.506, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.773, at most 0.55 (draw it simpler)"
    ],
@@ -558,7 +546,6 @@
   "icon.upgrade.bench": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.391, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.718, at most 0.55 (draw it simpler)"
    ],
@@ -574,7 +561,6 @@
   "icon.upgrade.workshop": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.322, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.699, at most 0.55 (draw it simpler)"
    ],
@@ -590,7 +576,6 @@
   "icon.upgrade.master": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.418, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.761, at most 0.55 (draw it simpler)"
    ],
@@ -607,18 +592,17 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 8,
+   "colours": 12,
    "priority": "P1",
    "calm": {
-    "specks": 0.039,
-    "edges": 0.406,
-    "busy": 29.53
+    "specks": 0.047,
+    "edges": 0.489,
+    "busy": 29.459
    }
   },
   "icon.upgrade.crier": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.363, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.724, at most 0.55 (draw it simpler)"
    ],
@@ -634,7 +618,6 @@
   "icon.upgrade.block": {
    "status": "fail",
    "errors": [
-    "11 colours, at most 8",
     "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.711, at most 0.55 (draw it simpler)"
    ],
@@ -650,7 +633,6 @@
   "icon.upgrade.charter": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.316, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.707, at most 0.55 (draw it simpler)"
    ],
@@ -666,7 +648,6 @@
   "icon.upgrade.case": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.361, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.743, at most 0.55 (draw it simpler)"
    ],
@@ -682,7 +663,6 @@
   "icon.upgrade.velvet": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.296, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.693, at most 0.55 (draw it simpler)"
    ],
@@ -698,7 +678,6 @@
   "icon.upgrade.magnet": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.239, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.633, at most 0.55 (draw it simpler)"
    ],
@@ -714,7 +693,6 @@
   "icon.upgrade.seal": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.480, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.814, at most 0.55 (draw it simpler)"
    ],
@@ -732,7 +710,6 @@
   "icon.upgrade.night": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.342, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.725, at most 0.55 (draw it simpler)"
    ],
@@ -748,7 +725,6 @@
   "icon.upgrade.warrant": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.434, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.799, at most 0.55 (draw it simpler)"
    ],
@@ -764,7 +740,6 @@
   "icon.upgrade.patrons": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.301, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.681, at most 0.55 (draw it simpler)"
    ],
@@ -780,7 +755,6 @@
   "icon.upgrade.engine": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.442, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.781, at most 0.55 (draw it simpler)"
    ],
@@ -797,18 +771,17 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 4,
+   "colours": 5,
    "priority": "P1",
    "calm": {
-    "specks": 0.018,
-    "edges": 0.284,
-    "busy": 17.195
+    "specks": 0.015,
+    "edges": 0.336,
+    "busy": 26.517
    }
   },
   "icon.kind.arms": {
    "status": "fail",
    "errors": [
-    "8 colours, at most 6",
     "too busy: lone specks 0.375, at most 0.06 (draw it simpler)"
    ],
    "warnings": [],
@@ -823,7 +796,6 @@
   "icon.kind.garb": {
    "status": "fail",
    "errors": [
-    "8 colours, at most 6",
     "too busy: lone specks 0.222, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.620, at most 0.6 (draw it simpler)"
    ],
@@ -839,7 +811,6 @@
   "icon.kind.potions": {
    "status": "fail",
    "errors": [
-    "8 colours, at most 6",
     "too busy: lone specks 0.121, at most 0.06 (draw it simpler)"
    ],
    "warnings": [],
@@ -854,7 +825,6 @@
   "icon.kind.scrolls": {
    "status": "fail",
    "errors": [
-    "8 colours, at most 6",
     "too busy: lone specks 0.205, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.609, at most 0.6 (draw it simpler)"
    ],
@@ -870,7 +840,6 @@
   "icon.kind.gems": {
    "status": "fail",
    "errors": [
-    "7 colours, at most 6",
     "too busy: lone specks 0.244, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.609, at most 0.6 (draw it simpler)"
    ],
@@ -900,7 +869,6 @@
   "icon.kind.hidden": {
    "status": "fail",
    "errors": [
-    "8 colours, at most 6",
     "too busy: lone specks 0.267, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.693, at most 0.6 (draw it simpler)"
    ],
@@ -916,7 +884,6 @@
   "emblem.guild": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.484, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.794, at most 0.55 (draw it simpler)"
    ],
@@ -932,7 +899,6 @@
   "story.key_whole": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.367, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.707, at most 0.55 (draw it simpler)"
    ],
@@ -948,7 +914,6 @@
   "story.key_shard_1": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.463, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.736, at most 0.55 (draw it simpler)"
    ],
@@ -964,7 +929,6 @@
   "story.key_shard_2": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.400, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.742, at most 0.55 (draw it simpler)"
    ],
@@ -980,7 +944,6 @@
   "story.key_shard_3": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.414, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.745, at most 0.55 (draw it simpler)"
    ],
@@ -996,7 +959,6 @@
   "story.key_shard_4": {
    "status": "fail",
    "errors": [
-    "12 colours, at most 8",
     "too busy: lone specks 0.312, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.693, at most 0.55 (draw it simpler)"
    ],
@@ -1089,7 +1051,7 @@
   "lock.face.rusty": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.118, at most 0.03 (draw it simpler)",
     "too busy: edges between neighbours 0.322, at most 0.2 (draw it simpler)",
     "too busy: brightness step 11.6, at most 9 (draw it simpler)"
@@ -1106,7 +1068,7 @@
   "lock.face.guild": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.110, at most 0.03 (draw it simpler)",
     "too busy: edges between neighbours 0.319, at most 0.2 (draw it simpler)",
     "too busy: brightness step 16.1, at most 9 (draw it simpler)"
@@ -1123,7 +1085,7 @@
   "lock.face.dwarven": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.090, at most 0.03 (draw it simpler)",
     "too busy: edges between neighbours 0.255, at most 0.2 (draw it simpler)",
     "too busy: brightness step 9.3, at most 9 (draw it simpler)"
@@ -1274,7 +1236,6 @@
   "item.barrow_silver": {
    "status": "fail",
    "errors": [
-    "13 colours, at most 12",
     "too busy: lone specks 0.487, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.799, at most 0.5 (draw it simpler)"
    ],
@@ -1290,7 +1251,7 @@
   "item.moonsilver_marks": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.446, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.763, at most 0.5 (draw it simpler)"
    ],
@@ -1310,15 +1271,15 @@
    "colours": 7,
    "priority": "P1",
    "calm": {
-    "specks": 0.028,
-    "edges": 0.311,
-    "busy": 16.264
+    "specks": 0.031,
+    "edges": 0.391,
+    "busy": 25.133
    }
   },
   "item.sunken_sovereigns": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.446, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.788, at most 0.5 (draw it simpler)"
    ],
@@ -1334,7 +1295,7 @@
   "item.dragon_gold": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.580, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.839, at most 0.5 (draw it simpler)"
    ],
@@ -1350,7 +1311,7 @@
   "item.demon_gold": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.399, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
    ],
@@ -1366,7 +1327,7 @@
   "item.goblin_cleaver": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.375, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.694, at most 0.5 (draw it simpler)"
    ],
@@ -1382,7 +1343,7 @@
   "item.dwarven_axe": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.405, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
    ],
@@ -1398,7 +1359,7 @@
   "item.wardens_blade": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.700, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.852, at most 0.5 (draw it simpler)"
    ],
@@ -1414,7 +1375,7 @@
   "item.flamebrand": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.672, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.878, at most 0.5 (draw it simpler)"
    ],
@@ -1430,7 +1391,7 @@
   "item.dragonslayer": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.770, at most 0.5 (draw it simpler)"
    ],
@@ -1446,7 +1407,7 @@
   "item.wolfskin_cloak": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.478, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.778, at most 0.5 (draw it simpler)"
    ],
@@ -1462,7 +1423,7 @@
   "item.elven_cloak": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.363, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.751, at most 0.5 (draw it simpler)"
    ],
@@ -1478,7 +1439,6 @@
   "item.cloak_of_shadows": {
    "status": "fail",
    "errors": [
-    "13 colours, at most 12",
     "too busy: lone specks 0.284, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.656, at most 0.5 (draw it simpler)"
    ],
@@ -1494,7 +1454,7 @@
   "item.archmages_mantle": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.573, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.841, at most 0.5 (draw it simpler)"
    ],
@@ -1510,7 +1470,7 @@
   "item.phoenix_mantle": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.345, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.715, at most 0.5 (draw it simpler)"
    ],
@@ -1526,7 +1486,7 @@
   "item.healing_draught": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.347, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
    ],
@@ -1542,7 +1502,7 @@
   "item.elixir_of_vigour": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.340, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.664, at most 0.5 (draw it simpler)"
    ],
@@ -1558,7 +1518,6 @@
   "item.invisibility_draught": {
    "status": "fail",
    "errors": [
-    "16 colours, at most 12",
     "too busy: lone specks 0.268, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.547, at most 0.5 (draw it simpler)"
    ],
@@ -1574,7 +1533,7 @@
   "item.mermaids_breath": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.333, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.672, at most 0.5 (draw it simpler)"
    ],
@@ -1590,7 +1549,6 @@
   "item.ambrosia": {
    "status": "fail",
    "errors": [
-    "14 colours, at most 12",
     "too busy: lone specks 0.430, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
    ],
@@ -1606,7 +1564,7 @@
   "item.scroll_of_sparks": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.416, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.736, at most 0.5 (draw it simpler)"
    ],
@@ -1622,7 +1580,7 @@
   "item.scroll_of_fireball": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.459, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.787, at most 0.5 (draw it simpler)"
    ],
@@ -1638,7 +1596,7 @@
   "item.summoners_grimoire": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.779, at most 0.5 (draw it simpler)"
    ],
@@ -1654,7 +1612,7 @@
   "item.lichs_tome": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.335, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.672, at most 0.5 (draw it simpler)"
    ],
@@ -1670,7 +1628,7 @@
   "item.keyhold_codex": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.421, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.779, at most 0.5 (draw it simpler)"
    ],
@@ -1686,7 +1644,7 @@
   "item.sand_case": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.357, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.727, at most 0.5 (draw it simpler)"
    ],
@@ -1717,7 +1675,6 @@
   "item.elfstone": {
    "status": "fail",
    "errors": [
-    "16 colours, at most 12",
     "too busy: lone specks 0.712, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.906, at most 0.5 (draw it simpler)"
    ],
@@ -1733,7 +1690,6 @@
   "item.blood_ruby": {
    "status": "fail",
    "errors": [
-    "16 colours, at most 12",
     "too busy: lone specks 0.236, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.594, at most 0.5 (draw it simpler)"
    ],
@@ -1749,7 +1705,7 @@
   "item.starstone": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.404, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.741, at most 0.5 (draw it simpler)"
    ],
@@ -1765,7 +1721,7 @@
   "item.dragons_eye": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.580, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.837, at most 0.5 (draw it simpler)"
    ],
@@ -1797,18 +1753,18 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 11,
+   "colours": 14,
    "priority": "P1",
    "calm": {
-    "specks": 0.024,
-    "edges": 0.362,
-    "busy": 17.681
+    "specks": 0.049,
+    "edges": 0.386,
+    "busy": 22.883
    }
   },
   "heartsong.shepherds_pipe": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.509, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.828, at most 0.5 (draw it simpler)"
    ],
@@ -1824,7 +1780,7 @@
   "heartsong.fey_chimes": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.489, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.710, at most 0.5 (draw it simpler)"
    ],
@@ -1840,7 +1796,7 @@
   "heartsong.dragons_egg": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.494, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.820, at most 0.5 (draw it simpler)"
    ],
@@ -1856,7 +1812,7 @@
   "heartsong.clockwork_lark": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.372, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.725, at most 0.5 (draw it simpler)"
    ],
@@ -1872,7 +1828,7 @@
   "heartsong.hearthstone": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.379, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.741, at most 0.5 (draw it simpler)"
    ],
@@ -1888,7 +1844,7 @@
   "heartsong.drowned_bell": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.500, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.808, at most 0.5 (draw it simpler)"
    ],
@@ -1904,7 +1860,7 @@
   "heartsong.bottled_star": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.439, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
    ],
@@ -1920,7 +1876,7 @@
   "heartsong.imps_ember": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.423, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.738, at most 0.5 (draw it simpler)"
    ],
@@ -1937,18 +1893,18 @@
    "status": "ok",
    "errors": [],
    "warnings": [],
-   "colours": 6,
+   "colours": 9,
    "priority": "P1",
    "calm": {
-    "specks": 0.027,
-    "edges": 0.275,
-    "busy": 16.05
+    "specks": 0.034,
+    "edges": 0.247,
+    "busy": 13.792
    }
   },
   "curio.draught": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.305, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.655, at most 0.5 (draw it simpler)"
    ],
@@ -1964,7 +1920,7 @@
   "curio.aether": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.342, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.726, at most 0.5 (draw it simpler)"
    ],
@@ -1980,7 +1936,6 @@
   "curio.chalk": {
    "status": "fail",
    "errors": [
-    "15 colours, at most 12",
     "too busy: lone specks 0.556, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.786, at most 0.5 (draw it simpler)"
    ],
@@ -1996,7 +1951,7 @@
   "curio.ring": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.409, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.740, at most 0.5 (draw it simpler)"
    ],
@@ -2012,7 +1967,7 @@
   "curio.staff": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.496, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.821, at most 0.5 (draw it simpler)"
    ],
@@ -2028,7 +1983,7 @@
   "curio.sealed": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.317, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.640, at most 0.5 (draw it simpler)"
    ],
@@ -2044,7 +1999,7 @@
   "curio.dip": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.291, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.694, at most 0.5 (draw it simpler)"
    ],
@@ -2060,7 +2015,7 @@
   "curio.bond": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.380, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.756, at most 0.5 (draw it simpler)"
    ],
@@ -2076,7 +2031,6 @@
   "curio.wholesale": {
    "status": "fail",
    "errors": [
-    "13 colours, at most 12",
     "too busy: lone specks 0.585, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.832, at most 0.5 (draw it simpler)"
    ],
@@ -2092,7 +2046,7 @@
   "curio.token": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.324, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.677, at most 0.5 (draw it simpler)"
    ],
@@ -2108,7 +2062,7 @@
   "curio.blindfold": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.377, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.690, at most 0.5 (draw it simpler)"
    ],
@@ -2124,7 +2078,7 @@
   "curio.signet": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.357, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.681, at most 0.5 (draw it simpler)"
    ],
@@ -2155,7 +2109,6 @@
   "curio.knot": {
    "status": "fail",
    "errors": [
-    "14 colours, at most 12",
     "too busy: lone specks 0.636, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.876, at most 0.5 (draw it simpler)"
    ],
@@ -2171,7 +2124,7 @@
   "curio.hourglass": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.344, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.661, at most 0.5 (draw it simpler)"
    ],
@@ -2187,7 +2140,7 @@
   "curio.bell": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.516, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.805, at most 0.5 (draw it simpler)"
    ],
@@ -2203,7 +2156,7 @@
   "curio.coffer": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.402, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.744, at most 0.5 (draw it simpler)"
    ],
@@ -2219,7 +2172,7 @@
   "curio.goldentongue": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.771, at most 0.5 (draw it simpler)"
    ],
@@ -2235,7 +2188,6 @@
   "curio.trumpet": {
    "status": "fail",
    "errors": [
-    "15 colours, at most 12",
     "too busy: lone specks 0.384, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.724, at most 0.5 (draw it simpler)"
    ],
@@ -2251,7 +2203,7 @@
   "curio.watch": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.409, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.659, at most 0.5 (draw it simpler)"
    ],
@@ -2267,7 +2219,7 @@
   "curio.beads": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.536, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.831, at most 0.5 (draw it simpler)"
    ],
@@ -2283,7 +2235,7 @@
   "curio.seal": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.322, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
    ],
@@ -2299,7 +2251,7 @@
   "curio.register": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.387, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.642, at most 0.5 (draw it simpler)"
    ],
@@ -2315,7 +2267,7 @@
   "curio.crescent": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.815, at most 0.5 (draw it simpler)"
    ],
@@ -2331,7 +2283,7 @@
   "curio.fork": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.486, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.713, at most 0.5 (draw it simpler)"
    ],
@@ -2347,7 +2299,7 @@
   "curio.ledger": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.530, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.773, at most 0.5 (draw it simpler)"
    ],
@@ -2363,7 +2315,7 @@
   "curio.truthglass": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.522, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.759, at most 0.5 (draw it simpler)"
    ],
@@ -2379,7 +2331,7 @@
   "curio.crate": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.418, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
    ],
@@ -2395,7 +2347,7 @@
   "curio.hook": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.611, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.817, at most 0.5 (draw it simpler)"
    ],
@@ -2411,7 +2363,7 @@
   "curio.rod": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.646, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.859, at most 0.5 (draw it simpler)"
    ],
@@ -2427,7 +2379,7 @@
   "curio.log": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.353, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.676, at most 0.5 (draw it simpler)"
    ],
@@ -2443,7 +2395,7 @@
   "curio.pass": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.471, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.771, at most 0.5 (draw it simpler)"
    ],
@@ -2459,7 +2411,7 @@
   "curio.compass": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.566, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.843, at most 0.5 (draw it simpler)"
    ],
@@ -2475,7 +2427,7 @@
   "curio.wardlamp": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.361, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.754, at most 0.5 (draw it simpler)"
    ],
@@ -2493,7 +2445,7 @@
   "curio.pillow": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.358, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.616, at most 0.5 (draw it simpler)"
    ],
@@ -2509,7 +2461,7 @@
   "curio.wardtally": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.413, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.758, at most 0.5 (draw it simpler)"
    ],
@@ -2525,7 +2477,7 @@
   "curio.wardkey": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.721, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.896, at most 0.5 (draw it simpler)"
    ],
@@ -2541,7 +2493,7 @@
   "curio.aldricseal": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.402, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.749, at most 0.5 (draw it simpler)"
    ],
@@ -2557,7 +2509,6 @@
   "curio.shell": {
    "status": "fail",
    "errors": [
-    "14 colours, at most 12",
     "too busy: lone specks 0.304, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
    ],
@@ -2573,7 +2524,7 @@
   "curio.coin": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.393, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.684, at most 0.5 (draw it simpler)"
    ],
@@ -2589,7 +2540,7 @@
   "curio.foot": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.491, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.781, at most 0.5 (draw it simpler)"
    ],
@@ -2620,7 +2571,6 @@
   "curio.horseshoe": {
    "status": "fail",
    "errors": [
-    "15 colours, at most 12",
     "too busy: lone specks 0.386, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.718, at most 0.5 (draw it simpler)"
    ],
@@ -2636,7 +2586,7 @@
   "curio.clover": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.489, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.802, at most 0.5 (draw it simpler)"
    ],
@@ -2652,7 +2602,6 @@
   "curio.star": {
    "status": "fail",
    "errors": [
-    "13 colours, at most 12",
     "too busy: lone specks 0.457, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.765, at most 0.5 (draw it simpler)"
    ],
@@ -2668,7 +2617,6 @@
   "curio.spindle": {
    "status": "fail",
    "errors": [
-    "14 colours, at most 12",
     "too busy: lone specks 0.473, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.724, at most 0.5 (draw it simpler)"
    ],
@@ -2686,7 +2634,7 @@
   "curio.lantern": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.434, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.780, at most 0.5 (draw it simpler)"
    ],
@@ -2702,7 +2650,7 @@
   "curio.queue": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.390, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.635, at most 0.5 (draw it simpler)"
    ],
@@ -2718,7 +2666,7 @@
   "curio.horn": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.450, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
    ],
@@ -2734,7 +2682,7 @@
   "curio.guestbook": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.461, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.743, at most 0.5 (draw it simpler)"
    ],
@@ -2750,7 +2698,7 @@
   "curio.catalogue": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.289, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.524, at most 0.5 (draw it simpler)"
    ],
@@ -2766,7 +2714,7 @@
   "curio.dome": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.233, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.575, at most 0.5 (draw it simpler)"
    ],
@@ -2782,7 +2730,7 @@
   "curio.book": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.409, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.765, at most 0.5 (draw it simpler)"
    ],
@@ -2798,7 +2746,7 @@
   "curio.rope": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
    ],
@@ -2814,7 +2762,6 @@
   "curio.lamps": {
    "status": "fail",
    "errors": [
-    "16 colours, at most 12",
     "too busy: lone specks 0.590, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.821, at most 0.5 (draw it simpler)"
    ],
@@ -2830,7 +2777,7 @@
   "curio.gauntlet": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.430, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.729, at most 0.5 (draw it simpler)"
    ],
@@ -2846,7 +2793,7 @@
   "curio.cap": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.271, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.654, at most 0.5 (draw it simpler)"
    ],
@@ -2862,7 +2809,7 @@
   "curio.whetstone": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.301, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.553, at most 0.5 (draw it simpler)"
    ],
@@ -2878,7 +2825,7 @@
   "curio.dummy": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.343, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.758, at most 0.5 (draw it simpler)"
    ],
@@ -2896,7 +2843,7 @@
   "curio.scales": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.762, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.903, at most 0.5 (draw it simpler)"
    ],
@@ -2912,7 +2859,7 @@
   "curio.still": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.589, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.856, at most 0.5 (draw it simpler)"
    ],
@@ -2928,7 +2875,7 @@
   "curio.desk": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.545, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.839, at most 0.5 (draw it simpler)"
    ],
@@ -2944,7 +2891,7 @@
   "curio.wheel": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.303, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.669, at most 0.5 (draw it simpler)"
    ],
@@ -2960,7 +2907,7 @@
   "curio.oil": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.565, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.829, at most 0.5 (draw it simpler)"
    ],
@@ -2976,7 +2923,6 @@
   "curio.knife": {
    "status": "fail",
    "errors": [
-    "16 colours, at most 12",
     "too busy: lone specks 0.672, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.843, at most 0.5 (draw it simpler)"
    ],
@@ -2992,7 +2938,6 @@
   "curio.gloves": {
    "status": "fail",
    "errors": [
-    "16 colours, at most 12",
     "too busy: lone specks 0.595, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.827, at most 0.5 (draw it simpler)"
    ],
@@ -3008,7 +2953,7 @@
   "curio.loupe": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.398, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.704, at most 0.5 (draw it simpler)"
    ],
@@ -3024,7 +2969,7 @@
   "curio.mark": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.445, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.703, at most 0.5 (draw it simpler)"
    ],
@@ -3040,7 +2985,7 @@
   "curio.purse": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.294, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.616, at most 0.5 (draw it simpler)"
    ],
@@ -3056,7 +3001,7 @@
   "curio.ticket": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.355, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.519, at most 0.5 (draw it simpler)"
    ],
@@ -3072,7 +3017,7 @@
   "curio.marker": {
    "status": "fail",
    "errors": [
-    "19 colours, at most 12",
+    "19 colours, at most 16",
     "too busy: lone specks 0.378, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.730, at most 0.5 (draw it simpler)"
    ],
@@ -3088,7 +3033,7 @@
   "curio.jar": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.472, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.789, at most 0.5 (draw it simpler)"
    ],
@@ -3104,7 +3049,7 @@
   "curio.lockbox": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.475, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.777, at most 0.5 (draw it simpler)"
    ],
@@ -3120,7 +3065,7 @@
   "curio.note": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.376, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
    ],
@@ -3136,7 +3081,7 @@
   "curio.letter": {
    "status": "fail",
    "errors": [
-    "18 colours, at most 12",
+    "18 colours, at most 16",
     "too busy: lone specks 0.407, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.709, at most 0.5 (draw it simpler)"
    ],
@@ -3152,7 +3097,7 @@
   "curio.ribbon": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.309, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.655, at most 0.5 (draw it simpler)"
    ],
@@ -3168,7 +3113,7 @@
   "curio.errand": {
    "status": "fail",
    "errors": [
-    "20 colours, at most 12",
+    "20 colours, at most 16",
     "too busy: lone specks 0.338, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
    ],
@@ -3184,7 +3129,7 @@
   "curio.net": {
    "status": "fail",
    "errors": [
-    "17 colours, at most 12",
+    "17 colours, at most 16",
     "too busy: lone specks 0.846, at most 0.06 (draw it simpler)",
     "too busy: edges between neighbours 0.897, at most 0.5 (draw it simpler)"
    ],
