@@ -1,13 +1,21 @@
 {
  "summary": {
-  "missing": 65,
-  "ok": 38,
-  "fail": 164
+  "ok": 70,
+  "missing": 37,
+  "fail": 160
  },
  "assets": {
   "sky.morning": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 5,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.0,
+    "edges": 0.013,
+    "busy": 0.324
+   }
   },
   "sky.midday": {
    "status": "ok",
@@ -22,12 +30,28 @@
    }
   },
   "sky.evening": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.0,
+    "edges": 0.02,
+    "busy": 1.086
+   }
   },
   "sky.night": {
-   "status": "missing",
-   "priority": "P2"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 4,
+   "priority": "P2",
+   "calm": {
+    "specks": 0.0,
+    "edges": 0.007,
+    "busy": 0.553
+   }
   },
   "place.stall": {
    "status": "ok",
@@ -42,16 +66,40 @@
    }
   },
   "place.thornwick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.007,
+    "edges": 0.171,
+    "busy": 5.069
+   }
   },
   "place.crownhold": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 20,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.007,
+    "edges": 0.142,
+    "busy": 4.759
+   }
   },
   "place.emporium": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 17,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.005,
+    "edges": 0.114,
+    "busy": 4.316
+   }
   },
   "frame.stall": {
    "status": "ok",
@@ -66,16 +114,40 @@
    }
   },
   "frame.thornwick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.001,
+    "edges": 0.156,
+    "busy": 3.719
+   }
   },
   "frame.crownhold": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.001,
+    "edges": 0.185,
+    "busy": 5.007
+   }
   },
   "frame.emporium": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.002,
+    "edges": 0.143,
+    "busy": 6.503
+   }
   },
   "shelf.stall": {
    "status": "ok",
@@ -90,16 +162,40 @@
    }
   },
   "shelf.thornwick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.012,
+    "edges": 0.309,
+    "busy": 15.539
+   }
   },
   "shelf.crownhold": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.032,
+    "edges": 0.403,
+    "busy": 29.84
+   }
   },
   "shelf.emporium": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.042,
+    "edges": 0.271,
+    "busy": 8.862
+   }
   },
   "counter.stall": {
    "status": "ok",
@@ -114,16 +210,40 @@
    }
   },
   "counter.thornwick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.003,
+    "edges": 0.152,
+    "busy": 5.339
+   }
   },
   "counter.crownhold": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.002,
+    "edges": 0.118,
+    "busy": 4.12
+   }
   },
   "counter.emporium": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.002,
+    "edges": 0.119,
+    "busy": 3.566
+   }
   },
   "sheet.stall": {
    "status": "ok",
@@ -138,16 +258,40 @@
    }
   },
   "sheet.thornwick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.0,
+    "edges": 0.019,
+    "busy": 1.493
+   }
   },
   "sheet.crownhold": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.0,
+    "edges": 0.018,
+    "busy": 1.521
+   }
   },
   "sheet.emporium": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.001,
+    "edges": 0.038,
+    "busy": 2.308
+   }
   },
   "prop.lantern_stall": {
    "status": "ok",
@@ -162,44 +306,124 @@
    }
   },
   "prop.lantern_thornwick": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.029,
+    "edges": 0.397,
+    "busy": 26.342
+   }
   },
   "prop.lantern_crownhold": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.035,
+    "edges": 0.283,
+    "busy": 16.74
+   }
   },
   "prop.lantern_emporium": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.031,
+    "edges": 0.345,
+    "busy": 15.951
+   }
   },
   "prop.witchlight": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.054,
+    "edges": 0.464,
+    "busy": 24.265
+   }
   },
   "prop.lodestone": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.028,
+    "edges": 0.391,
+    "busy": 23.18
+   }
   },
   "prop.scales": {
-   "status": "missing",
-   "priority": "P1"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.012,
+    "edges": 0.463,
+    "busy": 27.719
+   }
   },
   "prop.gavel": {
-   "status": "missing",
-   "priority": "P2"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 5,
+   "priority": "P2",
+   "calm": {
+    "specks": 0.0,
+    "edges": 0.294,
+    "busy": 13.152
+   }
   },
   "prop.seal": {
-   "status": "missing",
-   "priority": "P2"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
+   "priority": "P2",
+   "calm": {
+    "specks": 0.01,
+    "edges": 0.369,
+    "busy": 16.095
+   }
   },
   "prop.book": {
-   "status": "missing",
-   "priority": "P2"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P2",
+   "calm": {
+    "specks": 0.039,
+    "edges": 0.323,
+    "busy": 24.467
+   }
   },
   "prop.picks": {
-   "status": "missing",
-   "priority": "P2"
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P2",
+   "calm": {
+    "specks": 0.055,
+    "edges": 0.44,
+    "busy": 16.147
+   }
   },
   "figure.tam": {
    "status": "missing",
@@ -1135,40 +1359,52 @@
    "priority": "P2"
   },
   "scene.guild": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 39,
-   "priority": "P1"
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.006,
+    "edges": 0.15,
+    "busy": 4.427
+   }
   },
   "scene.bram": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 48,
-   "priority": "P1"
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.005,
+    "edges": 0.14,
+    "busy": 4.075
+   }
   },
   "scene.keyhold": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 48,
-   "priority": "P1"
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.005,
+    "edges": 0.105,
+    "busy": 3.555
+   }
   },
   "scene.vault": {
-   "status": "fail",
-   "errors": [
-    "size 640x360, want 320x180"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 44,
-   "priority": "P1"
+   "colours": 18,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.004,
+    "edges": 0.099,
+    "busy": 3.608
+   }
   },
   "store.header_capsule": {
    "status": "ok",

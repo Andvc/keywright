@@ -3,7 +3,7 @@
 > **0.25:** round 1's chest was retired: the chest and its locks are drawn in code now (`tools/custom_art.py`), so
 > its files, its review sheets and `_workflow/finalize_chests.py` were removed (git has them), with round 1's anchors
 > and its counter mock-ups. Round 2 (`art/README.md`) builds the shop scene from layers. The current direction is
-> C2 at 4x, with detail and **no outlines**. The latest delivery is batch 9s in the Round 2 section below.
+> C2 at 4x, with detail and **no outlines**. The latest delivery is batch 10 in the Round 2 section below.
 
 ## Historical round-1 delivery
 
@@ -315,3 +315,113 @@ Reproduce the dedicated previews with `python3 art/generated/_workflow/round2_ba
 
 The original style-study prompts, outputs and review pictures remain unchanged.
 **Stop for owner review here.** No batches 10-15 or game integration are included.
+
+The owner subsequently approved batch 9s on 2026-10-31. Its dedicated previews remain historical snapshots;
+the standard counter/contact sheets now reflect batch 10 below.
+
+### Batch 10: scenes and counter props without outlines
+
+Delivered on 2026-10-31, based on approved batch 9s at `10d697cce338bcd585c80831fc0271cf105b51d7`.
+The owner approved the no-outline anchors and asked for the next step. All **32 batch-10 assets** are delivered:
+three skies, three places, three frames, three shelves, three counters, three sheets, ten props and four story
+scenes. The selected C2/4x direction and its useful detail remain unchanged.
+
+Start with the [four shops](_review/round2_batch10_shops.png), [small props](_review/round2_batch10_props.png),
+[story scenes](_review/round2_batch10_stories.png) and [review guide](_review/round2_batch10_README.md).
+These are composition mock-ups, not live game captures. The dedicated shop views use approved Hob and the
+same three approved objects throughout; their reused study HUD still names Bram's stall.
+Standard `counter_{shop}.png` and `counter_{shop}_times.png` show the manifest's sellers, using placeholders
+where batch-11 figures are missing, and inherited shelf items awaiting later redraws.
+
+The built-in image tool made **77 candidates**: A/B for all 32, twelve C corrections and a fourth gavel.
+It does not expose an independently verifiable model identifier. Every unchanged manifest prompt, exact appended
+instruction, reference hash, requested/actual size, candidate result, selection and final command is in
+[`_workflow/round2_batch10.json`](_workflow/round2_batch10.json). All requests attached the palette and an
+approved no-outline category anchor; non-lantern props used the approved Lullaby Box for the material language.
+Guild C and vault C additionally used their own A as an edit target. Full-size originals and rejects remain in
+the local archive; only small selected-source WebPs are committed.
+
+Every request appended the reference roles, the required absence of contours, native-size readability and PNG
+quality/size intent. Candidate B requested an independent composition with the same subject and registration.
+Category additions were:
+
+- Skies: opaque sky only, broad horizontal bands, one sun/moon and sparse clouds/stars.
+- Places: magenta only in sky glimpses, opaque lower 40%, visible landmarks away from the top frame, calm floor.
+- Frames: continuous top band, shallow upper structure, narrow side posts, magenta middle and no bottom bar.
+- Shelves: a long slim straight board, supports reaching the top and magenta through all gaps.
+- Counters: a full-width opaque lower strip, level far edge, no legs or front face, restrained dark material tones.
+- Sheets: uniform light writing field, all fittings confined to the rim, no paper texture or ink contour.
+- Props: repeat the native dimensions, broad material features, full silhouette, magenta gaps and no ground shadow.
+- Story scenes: opaque full-bleed setting, quiet middle/lower third, reference for style only, broad side landmarks.
+
+Additional corrections, with the original prompt retained:
+
+| Asset | Appended change and reason |
+|---|---|
+| `sky.morning`, `sky.evening`, `sky.night` | C: uniform broad bands, clear disc without a halo, smaller lower cloud shapes; night has no clouds and four sparse stars. A/B had noisy snapped gradients or large pale clouds. |
+| `place.emporium` | C: shaded grey-lilac marble, mid-dark floor, restrained crimson and distant gold gate; A/B exceeded the brightness ceiling. |
+| `frame.emporium` | C: dark continuous crimson band, shaded marble, restrained gold fringe and no hanging tassel clutter; A/B were too bright. |
+| `prop.lantern_crownhold` | C: shorter ring/cap, broad round glass, plain sides and low foot, with no internal flame or fittings; A/B exceeded quiet limits. |
+| `prop.lantern_emporium` | C: larger crystal globe, simple gold supports and a few broad reflection areas; remove tiny machinery and fragmented reflections. |
+| `prop.lodestone` | C: low wide stone, broad planes and simple brass cup; remove feet, rivets and tiny chips. |
+| `prop.scales` | C: broad beam and pans, short plain post, low foot and fewer material tones; remove finials, collars and small fittings. |
+| `prop.gavel` | C: low horizontal wooden hammer and sound block without metal bands. D: plain cylinder, straight handle and low oval block using uniform broad browns; A/B/C remained too fragmented at 22x12. |
+| `prop.book`, `prop.picks` | Before A/B: low wide shapes, few uniform material areas; single cream page block for the closed book, broad strap and a few steel tips for the pouch. Avoid repeated page lines and tiny stitching. |
+| `scene.guild` | C edits A: preserve the iron door, ledger walls and almond keyhole eye; remove bright side windows, plants, eye rays and reflective floor grid, leaving one hanging light. |
+| `scene.vault` | C edits A: remove extra torches, treasure props, tiled floor and gold floor circles; keep one muted beam on the Crown Chest, with the Gilded Gate and dark side pillars. |
+
+Selections:
+
+| Asset | Kept | Reason |
+|---|---|---|
+| `counter.crownhold` | B | restrained walnut planes and brass far edge; A includes an out-of-palette black crop pixel. |
+| `counter.emporium` | B | dark green marble with broad veins and thin gold far edge; A falls just below the value floor. |
+| `counter.thornwick` | B | broad wood planks with readable knots and end nails, quiet centre. |
+| `frame.crownhold` | B | fewer isolated hardware highlights; both pass. Crop offset -80 preserves the top band. |
+| `frame.emporium` | C | darker crimson top band and shaded marble retain the gold fringe without exceeding the value ceiling. Crop offset -80. |
+| `frame.thornwick` | A | clean top band and side posts; B intrudes into the protected view. Crop offset -80 preserves the band. |
+| `place.crownhold` | B | oak panels, six-pane window, twin spires and doorbell read clearly at native size. |
+| `place.emporium` | C | shaded marble and broad darker floor pass the value limit; distant gilded gate remains legible. |
+| `place.thornwick` | B | readable stone shop, open doorway, well and distant pines with fewer competing colour areas. |
+| `prop.book` | B | green cover, cream page block and gold clasp; A adds leaf decoration and fails quiet limits. |
+| `prop.gavel` | D | broad head, long handle and low sound block in five native colours. A/B/C exceed quiet limits. |
+| `prop.lantern_crownhold` | C | broad round glass and plain brass supports; A/B exceed small-sprite quiet limits. |
+| `prop.lantern_emporium` | C | broad crystal globe and simple gold supports; A/B have fragmented reflections and too many edges. |
+| `prop.lantern_thornwick` | B | clear iron body and warm rectangular glass at 16x24. |
+| `prop.lodestone` | C | low wide stone in a simple brass cup; A/B have narrow stone and fussy mounting hardware. |
+| `prop.picks` | B | broad leather roll, closing strap and steel tips; A exceeds the speck limit. |
+| `prop.scales` | C | level pans, plain beam and short post remain readable at 24x24; A/B have excessive fittings. |
+| `prop.seal` | A | red handle and gold foot stay distinct; B exceeds the speck limit. |
+| `prop.witchlight` | B | purple flame stays recognisable inside brass framework; A exceeds quiet limits. |
+| `scene.bram` | A | hearth, worn chair, open chests and dusk window with a plain lower third; B contains fewer open chests. |
+| `scene.guild` | C | one hanging lamp, iron vault door, almond-shaped keyhole eye and ledger walls; removes A's bright side windows and preserves the eye lost in B. |
+| `scene.keyhold` | B | broken pillars, circular ruin floor and violet keyhole; distant ruins fit the setting better than A's intact castle. |
+| `scene.vault` | C | one muted beam on the Crown Chest and Gilded Gate, plain dark floor. A/B add multiple torches, treasure props and busy floor markings. |
+| `sheet.crownhold` | A | plain cream paper in a green folder, four small gold corner fittings. |
+| `sheet.emporium` | A | thin gold frame and small crimson seal; B adds unnecessary seal ribbons. |
+| `sheet.thornwick` | B | plain writing field, recognisable brass clip and restrained wooden rim. |
+| `shelf.crownhold` | A | brass rods and walnut board; B has fine dark end-cap strokes and more scattered highlights. |
+| `shelf.emporium` | A | pale turquoise glass and gold chains; B is bluer with more isolated highlights. |
+| `shelf.thornwick` | B | iron chains, worn oak board and fittings remain legible with a broad standing surface. |
+| `sky.evening` | C | clear setting sun and low grouped cloud, no dark sun halo; lower warm bands are mostly behind the place layer. |
+| `sky.morning` | C | distinct pale sun and one low cloud; broad flat bands avoid A/B's mottled colour transitions. |
+| `sky.night` | C | cloud-free dark upper field, four sparse stars and a clear moon; A/B inherited large pale clouds. |
+
+All sources were processed by the unchanged `pixelize.py` in flat mode with `--no-outline --preview`.
+The three frames use `--offset-y -80`, placing their source crop at row zero and preserving the HUD band.
+There are **no manual pixel repairs, palette recolours, additional smoothing or changes to validation limits**.
+Native output hashes match the selected pre-delivery candidates.
+
+The final `python3 art/tools/validate.py --sheets` run over everything reports **32/32 batch-10 assets passing,
+zero warnings**. The full manifest is **70 OK, 160 failed, 37 missing (35 P1 missing), exit 1**.
+Compared with the 38/164/65 baseline, this batch replaces four failing story scenes and fills 28 missing layers/props.
+All **235 non-batch-10 asset hashes or missing states, errors and warnings are unchanged**. The remaining
+failures and missing files belong to batches 11-15; the complete round is not yet finished.
+
+Source and native views, all four shops at four hours, paper writing areas, the shelf/counter/HUD registration,
+small tools and story landmarks were visually checked. The four native assembled worlds have specks at most
+0.011943, edges at most 0.189199 and brightness step at most 8.7208, within the C2 comparison ceilings.
+[`round2_batch10_review.py`](_workflow/round2_batch10_review.py) reproduces the dedicated previews.
+Original style-study outputs and dedicated batch-9s previews are preserved.
+
+**Stop after pushing batch 10.** No batch-11 figures, later object/icon/lock batches or game integration are included.

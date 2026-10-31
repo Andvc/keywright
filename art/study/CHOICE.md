@@ -10,7 +10,7 @@ The visual reference is [C2 A](raw/C2_A.webp), processed as [C2 at 4x](out/C2_4x
 Keep its warm cartoon character, expressive farmer, material cues and lived-in setting, using colour shapes and
 cel-shaded material tones without inked outer or internal contours. The world stays
 320x180 at 4x; the sheet, inventory objects and icons retain their specified UI sizes at 2x. This approves a direction;
-the rebuilt batch-9 anchors still require review before batches 10-15.
+the rebuilt batch-9 anchors were approved on 2026-10-31 before starting batch 10.
 
 ## What carries into production
 
@@ -64,4 +64,7 @@ details and valid layer geometry. All 13 pass, with zero warnings. See the
 [delivery record](../generated/DELIVERY.md#batch-9s-c2-at-4x-without-outlines).
 Batch 9r's rejected files remain in git and the local production archive.
 
-This is the stop point for owner review. No later batch or game integration is approved by this direction choice alone.
+The owner approved batch 9s on 2026-10-31: **“可以，下一步做吧”** — approved; do the next step.
+Batch 10 (the remaining scene assets) was completed against these anchors on 2026-10-31: all 32 pass, with zero
+warnings. See its [review guide](../generated/_review/round2_batch10_README.md). Later batches and game
+integration are not part of this next step; work stops after pushing batch 10.

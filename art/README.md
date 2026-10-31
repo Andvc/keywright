@@ -12,7 +12,7 @@ what you've bought and full-length figures for everyone who comes to the counter
 [`manifest.json`](manifest.json) (every asset, its spec and its prompt). [`INVENTORY.md`](INVENTORY.md) is the same
 list as tables.
 
-## For the owner: no-outline anchors ready for review
+## For the owner: no-outline anchors approved; batch 10 delivered
 
 The style study is complete. The owner chose **C2 at 4x, with detail allowed** on 2026-10-30, then corrected it to
 **no outlines** on 2026-10-31 and requested rollback of the outlined batch.
@@ -22,7 +22,11 @@ Batch 9r was reverted. **Batch 9s delivers the same 13 anchors without drawn or 
 Start with the [counter preview](generated/_review/round2_batch9s_playview.png),
 [small objects](generated/_review/round2_batch9s_sprites.png) and
 [review guide](generated/_review/round2_batch9s_README.md).
-Batches 10-15 and game integration wait for anchor approval.
+The owner approved these anchors on 2026-10-31 ("可以，下一步做吧"). **Batch 10 now delivers all 32 remaining
+scene assets, with zero validation errors or warnings.** Review the [four shops](generated/_review/round2_batch10_shops.png),
+[props](generated/_review/round2_batch10_props.png), [story scenes](generated/_review/round2_batch10_stories.png)
+and [batch-10 guide](generated/_review/round2_batch10_README.md). Stop here; later batches and game integration
+are not included in this delivery.
 The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here
@@ -51,8 +55,8 @@ the scene's layers and the figures.
 | 9 | **Anchors**: `sky.midday`, the stall's `place`, `frame`, `shelf`, `counter`, `sheet` and lantern, `figure.hob`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`, `icon.upgrade.lamp`, `icon.kind.coins`. **Stop here for the owner's approval** (done: delivered and reviewed) | 13 |
 | S | **The style study**: completed; owner chose **C2 at 4x, detail allowed**. See `study/CHOICE.md` | 16 prompts |
 | 9r | Reverted: the owner rejected the outlines | 13 |
-| 9s | **Delivered: C2 at 4x with detail, without outlines**, through the 0.25 pipeline with automatic outlines disabled. **Awaiting owner review before batch 10** | 13 |
-| 10 | The rest of the scene: the other skies, places, frames, shelves, counters, sheets and lanterns, the counter's props, and the four story scenes | 32 |
+| 9s | **Approved 2026-10-31: C2 at 4x with detail, without outlines**, through the 0.25 pipeline with automatic outlines disabled | 13 |
+| 10 | **Delivered 2026-10-31:** the other skies, places, frames, shelves, counters, sheets and lanterns, the counter's props, and the four story scenes; all pass | 32 |
 | 11 | The other figures (Mara and the King unmasked last: P3) | 37 |
 | 12 | Things in chests and Heartsongs | 40 |
 | 13 | Curios | 78 |
