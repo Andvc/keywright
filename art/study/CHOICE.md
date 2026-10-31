@@ -78,4 +78,6 @@ and integration without another direction checkpoint.
 Batch 12 delivers all 40 remaining inventory objects and Heartsongs, with zero errors or warnings.
 The small objects retain their specified 32x32 native / 2x UI size; their useful identifying details and
 no-outline treatment follow the same anchors. See the [object review guide](../generated/_review/round2_batch12_README.md).
-Continue batches 13-15 and integration under the existing authorization.
+Batch 13 delivers all 78 remaining curios, with zero errors or warnings. See the
+[curio review guide](../generated/_review/round2_batch13_README.md).
+Continue batches 14-15 and integration under the existing authorization.

@@ -616,3 +616,135 @@ unchanged. The 120 remaining failures are inherited round-1 assets awaiting batc
 limits, pixelizer or validator were changed. Historical study and dedicated batch-9s/10/11 previews remain intact.
 
 **Continue batches 13-15, then the documented game integration.** The complete round is not yet finished.
+
+
+### Batch 13: curios
+
+All **78** remaining curios are delivered and pass with zero warnings; none skipped. The approved
+monocle anchor remains unchanged. C2 / world 4x / useful detail / no outlines remains the direction;
+these UI objects retain the brief's 28x28 native / 2x display size.
+
+See [the review guide](_review/round2_batch13_README.md), the actual-size overview and five 2x/4x
+inspection pages. Selected source illustrations and native results were visually inspected. The four
+shops at all four hours were reviewed as reference composites, separate from live integration captures.
+
+The built-in image tool produced **201 candidates**: A/B for each asset, plus 45 targeted correction
+attempts. It does not expose a verifiable model identifier. Unchanged manifest prompts, exact appends,
+reference hashes, actual source dimensions, all checks and selection decisions are recorded in
+[`_workflow/round2_batch13.json`](_workflow/round2_batch13.json). Full originals and rejects remain
+in the local production archive; only 78 selected-source WebPs are committed.
+
+Every prompt appends the approved monocle as a style reference only, the master palette, complete-object
+framing, the 28x28 target, broad cel-shaded materials, no-outline constraints, pure magenta empty space,
+and PNG/resolution/quality intent. B requests an independent version of the same object.
+The append requests two solid colours per material and at most six overall when possible, no gradients
+or little facets, three broad gem facets, and opaque painted glass rather than magenta showing through it.
+The original manifest prompt is retained verbatim, including when a later correction is appended.
+
+Additional candidates simplify specific fragmented material surfaces, enlarge thin structural parts,
+remove excess glints/fittings and restore signature details that disappear at native size. Books retain
+their distinct colours/attachments; the register has visible ticks; the watch has hands; the compass has
+its red needle; jewellery retains the intended gems and settings. More than four attempts were sometimes
+needed to meet the unchanged quiet limits. Exact candidate-specific instructions are in the JSON.
+
+| Asset | Candidates | Kept | Reason |
+|---|---|---|---|
+| `curio.draught` | A/B | B | Round violet potion flask with visible bubbles, cork and tied twine; B has clearer broad liquid regions and passes at 28x28. |
+| `curio.aether` | A/B/C | C | Corked blue glass and a single broad pale swirl remain distinct at 2x; corrected reflections pass comfortably. |
+| `curio.chalk` | A/B | A | Bright white diagonal chalk, a few violet flecks and a small dust curl; A preserves a broad unbroken body at 2x. |
+| `curio.ring` | A/B | B | Large amethyst and heavy silver ring with two simple engraved diamond motifs; B has calmer silver and gem fields. |
+| `curio.staff` | A/B/C | C | Broad gnarled handle, gold claws and violet orb retain the identity without scattered wood/metal pixels. |
+| `curio.sealed` | A/B | B | Clear folded cream envelope and broad red wax seal at 2x; quieter than A and all checks pass. |
+| `curio.dip` | A/B | A | Round cloth bag, open gathered neck and red drawstring remain readable; calmer broad tan cloth than B. |
+| `curio.bond` | A/B | B | Rolled parchment, red ribbon and gold seal read at 2x; passes the unchanged quiet limits. |
+| `curio.wholesale` | A/B/C | C | Two broad wooden halves, shared notches and binding survive at 2x; the shorter wider tally passes. |
+| `curio.token` | A/B/C | C | Gold sun and iron moon are now large separate readable symbols; broad material fills pass. |
+| `curio.blindfold` | A/B/C | C | Two closed-eye gold crescents, purple silk and gold tassels remain legible without excess embroidery. |
+| `curio.signet` | A/B | A | Heavy gold band with a clear blank square signet face; simple solid material areas pass. |
+| `curio.tongue` | A/B/C | C | All-silver smiling mouth with a curled tongue and hanging ring; broad tones pass. |
+| `curio.knot` | A/B/C | C | Broad interwoven gold rope and two loose ends remain readable; the simplified continuous rope fields pass at 28x28. |
+| `curio.hourglass` | A/B/C | C | Two wood posts, clear glass bulbs and connected sand remain distinct without tiny metal or wood fragments. |
+| `curio.bell` | A/B | A | Brass bell, open mouth and turned wooden handle read well at 2x and pass. |
+| `curio.coffer` | A/B/C | C | Open leather purse, tied pale cord and three gold coins read at 2x; broad cloth and coin shapes pass. |
+| `curio.goldentongue` | A/B/C | C | Gold smiling tongue medallion, red gem and red ribbon retain the trade charm identity with calm solid regions. |
+| `curio.trumpet` | A/B | A | Curved brass hearing horn with a small earpiece and a clearly flared right bell; quieter than B. |
+| `curio.watch` | A/B/C/D | D | Broad cream dial with two hands, four readable markers, crown and looped chain; D removes noisy dial marks while retaining the pocket-watch silhouette. |
+| `curio.beads` | A/B/C | C | Three rows of paired red, gold and green counting beads remain distinct inside a plain wood frame. |
+| `curio.seal` | A/B | A | Wooden stamp, brass face and red wax impression read distinctly at 2x. |
+| `curio.register` | A/B/C/D | D | Broad blue register, red bookmark and two large brown ticks on the cream fore-edge; D restores the required readable marks. |
+| `curio.crescent` | A/B | B | Silver crescent with violet sheen and black thread; calmer than A. |
+| `curio.fork` | A/B | A | Silver U-shaped tuning fork and two paired ripple motifs read without excessive decoration. |
+| `curio.ledger` | A/B | B | Gold check is clearer than A's circled emblem. Joined one interrupted gold spine-band pixel to the adjoining lit gold; all checks then pass. |
+| `curio.truthglass` | A/B/C/D | D | Clear blue lens and broad reflection, simple gold rim and handle; D remains readable at 2x and meets every quiet limit. |
+| `curio.crate` | A/B/C | C | Six broad wood slats and grouped straw retain the padded-crate shape with no scattered wood flecks. |
+| `curio.hook` | A/B/C/D | D | Three thick silver hook prongs and a coiled brown rope remain distinct; D removes fragmented chain highlights and passes all limits. |
+| `curio.rod` | A/B/C | C | Thicker hollow brass tube with a pale rolled note and a separated cap; all three features read at 2x. |
+| `curio.log` | A/B/C/D | D | Weathered brown closed log tied with broad red cord, cream page edge and two worn corners; simplified D retains its identity at 2x. |
+| `curio.pass` | A/B | B | Dark round pass with a red metal rim and silver keyhole stamp; B passes and the keyhole is legible at 2x. |
+| `curio.compass` | A/B/C/D | D | Broad pale dial, four cardinal marks and downward red needle in a gold case; D removes the noisy compass rose. |
+| `curio.wardlamp` | A/B | A | Square iron lantern and bright blue flame stay distinct at 2x; A uses the canvas better and has no warnings. |
+| `curio.pillow` | A/B | B | Blue four-corner pillow with tassels, crescent and two star points; B has calmer uninterrupted fabric. |
+| `curio.wardtally` | A/B | A | Wood tally board with a carved ward motif and several bold tally groups; A passes and the marks remain visible at 2x. |
+| `curio.wardkey` | A/B/C | C | Silver ward key with a bold blue gem, looped bow and two teeth; all features survive 28x28 with calm metal fields. |
+| `curio.aldricseal` | A/B/C | C | Red wax impression and gold crowned stamp with ruby accent remain clear; simplified crown and seal pass without contour strokes. |
+| `curio.shell` | A/B | A | Broad pink shell ribs and fan silhouette are clear; A uses fewer broken pale edge areas. |
+| `curio.coin` | A/B | B | Gold coin with an open centre and tied red cord; one isolated face glint is merged into the adjacent gold to keep the gold surface continuous. |
+| `curio.foot` | A/B | A | Rabbit-foot charm retains its two toe lobes and gold cap and loop; A reads as a paw rather than a plain tassel. |
+| `curio.wishbone` | A/B | B | Simple ivory forked wishbone with broad rounded ends; calm bone shades preserve the Y silhouette. |
+| `curio.horseshoe` | A/B | B | Broad iron horseshoe with six nail holes; B has fewer isolated metal flecks and a clearer open U. |
+| `curio.clover` | A/B/C | C | Four green heart-shaped leaves in a gold setting, stem and centre gem; C keeps the required clover silhouette with calm enamel faces. |
+| `curio.star` | A/B | B | Five-point gold shooting star with broad trailing tails; B keeps the required silhouette without the extra jewel. |
+| `curio.spindle` | A/B/C | C | Gold spindle with a broad ornamental disk, wound thread and trailing end; C retains the thread structure without scattered gold specks. |
+| `curio.lantern` | A/B/C | C | Chunky dark iron lantern with loop handle and large warm candle window; C has continuous metal and glass fields. |
+| `curio.queue` | A/B | A | Cream queue ticket with notched ends, red printed border and a punched hole; A keeps the hole clearer at 2x. |
+| `curio.horn` | A/B | B | Brass coiled horn with flared bell and red tassel; B has broader continuous metal and cloth shapes. |
+| `curio.guestbook` | A/B/C | C | Plain red book, cream page block, two gold corners and large white quill; C is clear at 2x and passes all checks. |
+| `curio.catalogue` | A/B/C | C | Plain brown catalogue with a broad cream page block and three coloured index tabs; C removes noisy spine details. |
+| `curio.dome` | A/B | A | Large red gem under a pale glass bell on a broad wooden base; A has markedly calmer glass and gold fields than B. |
+| `curio.book` | A/B | A | Open cream visitors book, a few grouped ink marks and a large resting quill; A preserves the required details at 2x. |
+| `curio.rope` | A/B/C/D | D | Two gold posts joined by a single thick red velvet rope; enlarged solid forms preserve the silhouette without noisy fittings. |
+| `curio.lamps` | A/B/C | C | Three large cream candles and flames on a broad gold candelabrum with red centre gem; C preserves the three branches and passes all limits. |
+| `curio.gauntlet` | A/B/C | C | Broad brown leather glove with separate fingers and a dark scorched cuff; C removes small finger facets and retains the burn mark. |
+| `curio.cap` | A/B | A | Purple cap with red band, needle and trailing red thread; A has quieter broad cloth regions and the clearer silhouette. |
+| `curio.whetstone` | A/B | A | Gray rectangular sharpening stone and a separate diagonal steel knife with brown handle; A is calmer and the crossing silhouettes remain clear. |
+| `curio.dummy` | A/B/C | C | Broad cream tailor bust, gold measuring tape and stable wooden base remain distinct at 2x; simplified seams pass with very low speck density. |
+| `curio.scales` | A/B/C/D | D | Thick brass beam and supporting arms, two broad pans and coins on the left remain clear; enlarged connected material fields pass the quiet limits. |
+| `curio.still` | A/B | A | Copper alembic with a curved spout, hanging purple drop and collection flask; one isolated bright rivet glint is joined into its adjacent copper face. |
+| `curio.desk` | A/B | B | Small sloping wooden writing desk, broad cream sheet, dark inkpot and pale quill; B preserves all required features and meets the quiet limits. |
+| `curio.wheel` | A/B | A | Broad gray grinding wheel on a wooden frame with a blue gem at its foot; A has the cleaner stone face and distinct base. |
+| `curio.oil` | A/B/C | C | Broad brass oil body, pump and curved spout read cleanly; quieter solid material regions preserve the identity. |
+| `curio.knife` | A/B | B | Thin hooked steel blade with a wrapped brown handle; B has the clearer hooked tip and a quieter blade edge than A. |
+| `curio.gloves` | A/B | B | Two white gloves with separate cuffs and overlapping fingers, pale violet cloth shadows and subtle stitching; B has calmer fabric regions. |
+| `curio.loupe` | A/B | A | Large blue lens with a broad reflection in a gold rim and short wooden handle; A preserves all features and passes without added outlines. |
+| `curio.mark` | A/B/C | C | Dark hanging tag, gold eyelet, brown loop and broad red cross read cleanly at 2x. |
+| `curio.purse` | A/B | B | Blue drawstring purse with a pale blue teardrop patch and pale ties; B preserves the emblem while reducing stitches. |
+| `curio.ticket` | A/B | B | Blank cream ticket tag with a red loop and visible perforation dots; B keeps the ticket feature clearer than A. |
+| `curio.marker` | A/B | B | Gold shield bearing a large raised watching eye; B keeps the eye readable in broad gold planes. |
+| `curio.jar` | A/B | B | Corked pale glass jar with a cluster of gold coins at its base; B has calmer glass fields and a clear cork/coin silhouette. |
+| `curio.lockbox` | A/B/C | C | Wooden strongbox with broad iron straps and a prominent gold padlock; removing rivet specks restores readable structure at 2x. |
+| `curio.note` | A/B/C | C | Rolled cream note with three broad writing bars, gold eye seal and red ribbon tails; all required features remain legible without scattered marks. |
+| `curio.letter` | A/B | A | Cream envelope with clear red heart-shaped wax seal; A has quieter folds than B. |
+| `curio.ribbon` | A/B | A | Blue prize rosette and broad gold medallion remain clear; A has the calmer ribbon folds. |
+| `curio.errand` | A/B | A | Open cream checklist, green check marks and diagonal pencil remain distinct; A avoids B's isolated specks. |
+| `curio.net` | A/B/C/D | D | Thick wooden hoop and short handle, sparse crossed red net and one gold coin remain unmistakable at 2x; solid material fills remove distracting internal edges. |
+
+
+All selected illustrations use the unchanged `pixelize.py --no-outline --preview` in flat mode.
+The following small manual pixel repairs, allowed by the brief, join specific isolated colour fragments.
+No blur, posterize, smoothing or extra raster filter is used.
+
+- `curio.ledger` B: (4,15) `#c29026` to `#f2c14e` — Join the isolated end of the gold spine band to its lit face..
+- `curio.coin` B: (16,19) `#ffe47d` to `#f2c14e` — Merge one isolated highlight pixel into the adjacent gold face..
+- `curio.still` A: (10,16) `#fbeda4` to `#e1a882` — Join an isolated bright rivet glint to the adjacent copper face; keep the alembic band and collection flask intact..
+
+Supported material palette swaps: none.
+
+
+Final `python3 art/tools/validate.py --sheets`: **78/78 batch-13 assets OK, zero warnings**.
+Full manifest: **225 OK, 42 failed, 0 missing (0 P1 missing), exit 1**. All 189 non-batch outputs
+and their checks remain unchanged. The 42 failures are inherited assets awaiting batches 14-15.
+No palette, colour caps, quiet limits, pixelizer or validator were changed. Historical study and
+dedicated earlier batch previews remain intact.
+
+**Continue batches 14-15 and finish the documented game integration.** Completion of the whole round
+remains authorized by the owner's request to finish everything.
