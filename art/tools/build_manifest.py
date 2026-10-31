@@ -21,45 +21,46 @@ import assets_things  # noqa: E402
 import assets_world  # noqa: E402
 import scene  # noqa: E402
 
-VERSION = 3
+VERSION = 4
 
-# Round 2 (0.25): quiet, flat and layered. Round 1 asked a model for pixel art, and a model's idea of pixel art is
-# texture, glints and detail at every pixel: it came back two to six times as busy as the game's old code-drawn art.
-# Round 2 never asks for pixels. It asks for a flat-colour illustration, and pixelize.py's flat mode makes the pixel art,
-# a whole flat area at a time, so the texture never gets in.
+# Owner's choice, 2026-10-30: C2 at 4x, with detail allowed. See art/study/CHOICE.md.
+# Generate outlined illustrations; the existing flat-mode processor supplies the final coarse grid.
 STYLE = (
-    "Flat-colour illustration for Keywright, a cosy fantasy shop game that people look at for hours. A script turns it "
-    "into chunky pixel art afterwards, so don't draw pixels: draw clean, vector-like shapes, like a picture book printed "
-    "in a few flat inks. Every shape is a solid fill of one colour with a crisp edge. No outlines or line work, no "
-    "gradients or blended shading, no texture of any kind (no wood grain, stone speckle, fabric weave, hair strands, "
-    "scratches, noise or brush strokes), no small scattered details, and nothing thinner than about a hundredth of the "
-    "picture's width. Each material in two or three flat tones in big areas: a lit side, a shaded side, at most one small "
-    "highlight. Soft, muted, warm colours; shadows lean toward violet, lights toward warm yellow; one gentle light from "
-    "the upper left. Big, simple shapes with clear silhouettes; plain areas stay plain. No text, letters, numbers or "
-    "rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself."
+    "An outlined storybook cartoon illustration for Keywright, a cosy fantasy shop game, matching the approved C2 "
+    "reference: warm, lived-in and expressive, with dark plum contours, rounded shapes, readable faces and crafted "
+    "objects. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep "
+    "recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, "
+    "such as a patch, a seam, a nail head, a tied cord or a carved mark. Larger scenery can have grouped flowers, "
+    "fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, "
+    "hatching, fine grain or individual hair strands. Draw structural outlines and details boldly enough to survive "
+    "reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has "
+    "softer, lighter contours. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light "
+    "from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like "
+    "marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself."
 )
 
 MAGENTA_BG = "Background: flat pure magenta #FF00FF, nothing else in the picture."
 
 # How quiet a finished asset must measure, at its native size (art/tools/artlib.py's calm_metrics, over the inside of
 # the picture): lone specks (pixels unlike all four neighbours), edges (neighbouring pairs that differ) and busy (the
-# mean brightness step between neighbours, 0-255). Every round-1 asset fails these; flat art made into pixels by
-# pixelize.py's flat mode passes them easily (art/ART_DIRECTION.md has the numbers).
+# mean brightness step between neighbours, 0-255). C2's measured whole image and representative crops establish
+# the revised ceilings before batch 9r generation; crop coordinates and rationale are in art/study/CHOICE.md.
 CALM = {
     "sky": dict(specks=0.005, edges=0.05, busy=3),
-    "scenery": dict(specks=0.01, edges=0.14, busy=6),
-    "frame": dict(specks=0.02, edges=0.2, busy=10),
-    "counter": dict(specks=0.01, edges=0.1, busy=5),
+    "scenery": dict(specks=0.06, edges=0.35, busy=16),
+    "frame": dict(specks=0.05, edges=0.27, busy=14),
+    "counter": dict(specks=0.02, edges=0.18, busy=7),
     "sheet": dict(specks=0.01, edges=0.08, busy=4),
-    "figure": dict(specks=0.03, edges=0.18, busy=9),
+    "figure": dict(specks=0.08, edges=0.36, busy=22),
     "sprite": dict(specks=0.06, edges=0.5),
     "icon": dict(specks=0.06, edges=0.55),
     "small_icon": dict(specks=0.06, edges=0.6),
     "lock_face": dict(specks=0.03, edges=0.2, busy=9),
 }
 
-QUIET_AVOID = ["pixel-art style or visible pixels", "texture or noise of any kind", "outlines or line work",
-               "gradients", "fine detail or tiny ornament", "highlights scattered over surfaces", "many colours at once"]
+QUIET_AVOID = ["pixel-art style or visible pixels", "all-over texture, grain, hatching or noise",
+               "airbrushed gradients", "details too thin to survive reduction", "highlights scattered over surfaces",
+               "unmotivated decorative clutter"]
 SPRITE_AVOID = ["a background other than flat magenta", "a drop shadow", "a glow or aura", "text or letters",
                 "more than one object unless described"] + QUIET_AVOID
 
@@ -77,7 +78,7 @@ CATEGORIES = {
         avoid=["anything but sky", "stars all over"] + QUIET_AVOID,
     ),
     "place": dict(
-        folder="place", size=(320, 180), background="transparent", max_colours=24, outline=False, margin=0, fit="frame",
+        folder="place", size=(320, 180), background="transparent", max_colours=32, outline=False, margin=0, fit="frame",
         batch=10, priority="P1", gen_size="1536x1024", mode="flat", redo=True, calm=CALM["scenery"], value=(45, 150),
         alpha_min=0.5,
         display="at 4x behind the seller and the counter, lit by the time of day; the sky shows where it's keyed out",
@@ -88,13 +89,13 @@ CATEGORIES = {
                "a little above the middle; the bottom third plain ground or floor; the left third and the middle "
                "simple (the game stands someone at the left and puts things in the middle, in front); the place's "
                "landmark in the middle distance just right of centre. Muted, mid to dark values with low contrast, in "
-               "three to five large planes."),
+               "three to five large planes, with small groups of purposeful detail around the edges."),
         avoid=["people or animals", "a chest", "text or signs with letters", "a counter or table in the foreground", "a sky "
-               "(it's magenta)", "a floor of tiles or boards in perspective lines", "busy foliage or many small things", "strong contrast"]
+               "(it's magenta)", "a floor of tiles or boards in perspective lines", "uniformly dense foliage or detail across the centre", "strong contrast in the distance"]
               + QUIET_AVOID,
     ),
     "frame": dict(
-        folder="frame", size=(320, 180), background="transparent", max_colours=16, outline=True, margin=0, fit="frame",
+        folder="frame", size=(320, 180), background="transparent", max_colours=24, outline=True, margin=0, fit="frame",
         batch=10, priority="P1", gen_size="1536x1024", mode="flat", redo=True, calm=CALM["frame"], value=(25, 130),
         display="at 4x in front of the place and the seller: the top bar sits on its top band, the shelf and the "
                 "lanterns hang from it",
@@ -107,7 +108,7 @@ CATEGORIES = {
         avoid=["anything in the middle of the picture", "a shelf", "lamps or lanterns", "people"] + QUIET_AVOID,
     ),
     "shelf": dict(
-        folder="shelf", size=(136, 40), background="transparent", max_colours=10, outline=True, margin=0, fit="shelf",
+        folder="shelf", size=(136, 40), background="transparent", max_colours=16, outline=True, margin=0, fit="shelf",
         board_row=34, batch=10, priority="P1", gen_size="1536x1024", mode="flat", redo=True, calm=CALM["sprite"],
         display="at 4x hung from the frame, its board's top on screen row 196 (x 300-804): kept things stand on it",
         frame=("{title}: a single long, thin display shelf seen straight on: {subject}, about twenty times as wide as it "
@@ -116,18 +117,18 @@ CATEGORIES = {
         avoid=["things on the shelf", "brackets below it", "a wall behind it"] + SPRITE_AVOID,
     ),
     "counter": dict(
-        folder="counter", size=(320, 61), background="opaque", max_colours=10, outline=False, margin=0, fit="strip",
+        folder="counter", size=(320, 61), background="opaque", max_colours=16, outline=False, margin=0, fit="strip",
         batch=10, priority="P1", gen_size="1536x1024", mode="flat", redo=True, calm=CALM["counter"], value=(45, 115),
         display="at 4x across the bottom third of the screen, its far edge on screen row 476",
         frame=("{title}: a shop counter's top seen from behind it at standing height: a very wide, flat strip filling "
                "the bottom third of the picture from edge to edge, its far edge a straight horizontal line with a "
                "slightly lighter lip. Above the strip, flat pure magenta #FF00FF. Plain, calm and mid-dark: the game "
                "puts its notes, a chest and a board on it."),
-        avoid=["things on the counter", "a front panel", "perspective lines converging", "knots, grain or scratches"]
+        avoid=["things on the counter", "a front panel", "perspective lines converging", "all-over grain, scratches or bright decoration in the centre"]
               + QUIET_AVOID,
     ),
     "figure": dict(
-        folder="figures", size=(96, 160), background="transparent", max_colours=16, outline=True, margin=0, fit="figure",
+        folder="figures", size=(96, 160), background="transparent", max_colours=24, outline=True, margin=0, fit="figure",
         batch=11, priority="P1", gen_size="1024x1536", mode="flat", redo=True, calm=CALM["figure"], alpha_min=0.45,
         display="at 4x standing behind the counter (it hides their legs); the face cropped for the queue, the notebook "
                 "and the character cards; standing in story scenes",
@@ -149,7 +150,7 @@ CATEGORIES = {
         avoid=["writing or ruled lines", "stains, creases or texture", "a dark paper", "a table behind it"] + QUIET_AVOID,
     ),
     "prop": dict(
-        folder="props", background="transparent", max_colours=10, outline=True, margin=0, fit="sprite",
+        folder="props", background="transparent", max_colours=12, outline=True, margin=0, fit="sprite",
         batch=10, priority="P1", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["sprite"],
         display="at 4x: on the counter beside the chest, or (lanterns) hung on the frame's posts",
         frame=("{title}: a single small object for a shop game, seen straight on and a little from above, centred, "
@@ -157,17 +158,17 @@ CATEGORIES = {
         avoid=SPRITE_AVOID,
     ),
     "item": dict(
-        folder="items", size=(32, 32), background="transparent", max_colours=12, outline=True, margin=1, baseline=30,
+        folder="items", size=(32, 32), background="transparent", max_colours=16, outline=True, margin=1, baseline=30,
         fit="sprite", batch=12, priority="P1", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["sprite"],
         display="2x on the opening table and the shelf (64 px); 1x or 2x in slots",
         frame=("{title}: a single treasure for a game, seen three-quarters from slightly above as if resting on a "
                "counter, upright and centred, filling about ninety percent of the picture, its lowest point on the "
-               "bottom edge. One bold shape, each material in two or three flat tones, at most one small accent. "
+               "bottom edge. One bold silhouette, each material in two or three main tones, with three or four readable features. "
                + MAGENTA_BG),
         avoid=SPRITE_AVOID,
     ),
     "heartsong": dict(
-        folder="heartsongs", size=(32, 32), background="transparent", max_colours=12, outline=True, margin=1,
+        folder="heartsongs", size=(32, 32), background="transparent", max_colours=16, outline=True, margin=1,
         baseline=30, fit="sprite", batch=12, priority="P1", gen_size="1024x1024", mode="flat", redo=True,
         calm=CALM["sprite"],
         display="2x at the opening and in the Heartsong reveal (64 px), 1x-2x on the shelf and in the collection",
@@ -178,16 +179,16 @@ CATEGORIES = {
         avoid=["musical notes floating"] + SPRITE_AVOID,
     ),
     "curio": dict(
-        folder="curios", size=(28, 28), background="transparent", max_colours=12, outline=True, margin=1, fit="sprite",
+        folder="curios", size=(28, 28), background="transparent", max_colours=16, outline=True, margin=1, fit="sprite",
         batch=13, priority="P1", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["sprite"],
         display="2x in 56 px slots: Nim's cards, the collection, the counter's curio row, the Guild's night",
         frame=("{title}: a single small object, an oddment from an old warded chest, made for a trade; seen "
                "three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold "
-               "shape, each material in two or three flat tones, at most one accent. " + MAGENTA_BG),
+               "shape, each material in two or three main tones, with up to three readable features. " + MAGENTA_BG),
         avoid=SPRITE_AVOID,
     ),
     "icon_upgrade": dict(
-        folder="icons", size=(24, 24), background="transparent", max_colours=8, outline=True, margin=1, fit="sprite",
+        folder="icons", size=(24, 24), background="transparent", max_colours=12, outline=True, margin=1, fit="sprite",
         batch=14, priority="P1", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["icon"],
         display="2x (48 px) on the day's-end upgrade cards; 1x on the slip for the Witchlight and the Lodestone",
         frame=("A bold, simple icon of {subject}, readable when tiny: three-quarter or front view, centred, filling "
@@ -195,7 +196,7 @@ CATEGORIES = {
         avoid=["fine detail"] + SPRITE_AVOID,
     ),
     "icon_kind": dict(
-        folder="kinds", size=(16, 16), background="transparent", max_colours=6, outline=True, margin=1, fit="sprite",
+        folder="kinds", size=(16, 16), background="transparent", max_colours=8, outline=True, margin=1, fit="sprite",
         batch=14, priority="P1", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["small_icon"],
         display="2x (32 px) at the start of each row of the appraisal slip, in the notebook and in Settings",
         frame="A symbol of {subject}, like a map symbol: one simple shape in two or three flat tones, centred, filling "
@@ -203,14 +204,14 @@ CATEGORIES = {
         avoid=["detail"] + SPRITE_AVOID,
     ),
     "emblem": dict(
-        folder="emblems", background="transparent", max_colours=8, outline=True, margin=1, fit="sprite",
+        folder="emblems", background="transparent", max_colours=12, outline=True, margin=1, fit="sprite",
         batch=14, priority="P1", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["icon"],
         display="see the asset",
         frame="An emblem of {subject}: front view, centred, symmetrical where it can be, in a few flat tones. " + MAGENTA_BG,
         avoid=SPRITE_AVOID,
     ),
     "story": dict(
-        folder="story", background="transparent", max_colours=8, outline=True, margin=1, fit="sprite",
+        folder="story", background="transparent", max_colours=12, outline=True, margin=1, fit="sprite",
         batch=14, priority="P1", gen_size="1536x1024", mode="flat", redo=True, calm=CALM["icon"],
         display="see the asset",
         frame="{subject}, seen from straight above as if lying on a table, centred, in a few flat tones. " + MAGENTA_BG,
@@ -233,7 +234,7 @@ CATEGORIES = {
         avoid=["a background", "frames of different sizes", "text"],
     ),
     "lock_face": dict(
-        folder="lockpick", size=(160, 160), background="transparent", max_colours=12, outline=True, margin=0,
+        folder="lockpick", size=(160, 160), background="transparent", max_colours=16, outline=True, margin=0,
         fit="sprite", batch=15, priority="P2", gen_size="1024x1024", mode="flat", redo=True, calm=CALM["lock_face"],
         display="2x (320 px) in the middle of the lockpicking screen; the game draws the sweet spot, pins and the pick "
                 "on top",
@@ -252,7 +253,7 @@ CATEGORIES = {
         avoid=["misspelled letters", "a background", "soft edges"],
     ),
     "scene": dict(
-        folder="scenes", size=(320, 180), background="opaque", max_colours=24, outline=False, margin=0, fit="canvas",
+        folder="scenes", size=(320, 180), background="opaque", max_colours=32, outline=False, margin=0, fit="canvas",
         batch=10, priority="P1", gen_size="1536x1024", mode="flat", redo=True, calm=CALM["scenery"],
         display="behind story scenes at 4x, dimmed to about 40% under the dialogue and the figures",
         frame=("{title}: a picture for a story scene in a game, 16:9, seen straight on, nobody in it: three or four "
@@ -276,8 +277,8 @@ CATEGORIES = {
 RETIRED = {"chest", "chest_lock", "background", "portrait"}
 
 # The most of an asset's listed details its prompt names: the rest only crowd a small picture.
-DETAILS_KEPT = {"figure": 2, "place": 4, "frame": 2, "shelf": 2, "counter": 1, "sheet": 2, "prop": 1, "item": 2,
-                "heartsong": 2, "curio": 2, "icon_upgrade": 2, "icon_kind": 1, "emblem": 2, "story": 2, "lock_face": 2}
+DETAILS_KEPT = {"figure": 4, "place": 8, "frame": 4, "shelf": 3, "counter": 3, "sheet": 2, "prop": 3, "item": 4,
+                "heartsong": 4, "curio": 3, "icon_upgrade": 3, "icon_kind": 1, "emblem": 3, "story": 3, "lock_face": 3}
 
 
 def palette_lookup():
@@ -338,7 +339,8 @@ def assemble(asset, cat, by_name):
     if kept is not None and len(details) > kept:
         details = details[:kept]
     if details:
-        parts.append("It must show: " + "; ".join(details) + (", and nothing smaller." if kept else "."))
+        suffix = ". Keep these features readable after reduction." if cat.get("redo") else "."
+        parts.append("It must show: " + "; ".join(details) + suffix)
     if asset.get("palette"):
         parts.append("Lean on these palette colours (dark to light; the swatch has them all): "
                      + describe_palette(asset["palette"], by_name) + ".")
@@ -410,9 +412,9 @@ def main():
         "outline_colour": "#1a1420",
         "outline_colours_allowed": ["#1a1420", "#0b0810"],
         "round": 2,
-        "round_notes": "Round 2 redraws everything marked redo, quieter and flat, and builds the shop scene from layers "
-                       "(art/README.md says how and in what order): generate flat-colour illustrations, never pixel art; "
-                       "pixelize.py --mode flat makes them pixel art. The chest is drawn in code and isn't listed.",
+        "round_notes": "Owner selected C2 at 4x, with detail allowed (art/study/CHOICE.md). Generate warm outlined "
+                       "cartoon illustrations; pixelize.py --mode flat makes the pixel art. Rebuild the 13 anchors "
+                       "and stop for approval before batches 10-15. The chest is drawn in code and isn't listed.",
         "style_preamble": STYLE,
         "scene": scene_layout(),
         "anchors": [a["id"] for a in out_assets if a.get("anchor_for")],

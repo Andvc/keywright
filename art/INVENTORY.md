@@ -55,7 +55,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 
 | Id | Title | Size | Pri | Output | Replaces | Description |
 |---|---|---|---|---|---|---|
-| `frame.stall` | The shop's frame at the Brindle crossroads (Bram's Stall) | 320x180 | P1 | `art/generated/frame/stall.png` | `(new)` | Across the top, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge; at the sides, two plain wooden posts holding the awning up. |
+| `frame.stall` | The shop's frame at the Brindle crossroads (Bram's Stall) | 320x180 | P1 | `art/generated/frame/stall.png` | `(new)` | Across the top, the front edge of the stall's canvas awning: wide, even red-and-cream stripes ending in a scalloped edge; at the sides, two wooden posts with rope lashings, a small tied herb bunch against the left post and a small brass bell against the right post, all kept within the outermost twentieth of the width. |
 | `frame.thornwick` | The shop's frame at Thornwick Market | 320x180 | P1 | `art/generated/frame/thornwick.png` | `(new)` | Across the top, a heavy dark timber beam, with a plain iron hook under each end; at the sides, two square timber posts. |
 | `frame.crownhold` | The shop's frame at Crownhold | 320x180 | P1 | `art/generated/frame/crownhold.png` | `(new)` | Across the top, an oak lintel with one plain moulding along it; at the sides, two panelled oak pilasters with small brass caps. |
 | `frame.emporium` | The shop's frame at the Royal Emporium | 320x180 | P1 | `art/generated/frame/emporium.png` | `(new)` | Across the top, a crimson velvet valance with a thin gold fringe; at the sides, two white marble columns with plain gold capitals. |
@@ -64,7 +64,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 
 | Id | Title | Size | Pri | Output | Replaces | Description |
 |---|---|---|---|---|---|---|
-| `shelf.stall` | Display shelf at the Brindle crossroads (Bram's Stall) | 136x40 | P1 | `art/generated/shelf/stall.png` | `(new)` | A plain plank, hung on two ropes. |
+| `shelf.stall` | Display shelf at the Brindle crossroads (Bram's Stall) | 136x40 | P1 | `art/generated/shelf/stall.png` | `(new)` | A plank with a broad worn edge and two small nail heads near its ends, hung on two ropes with visible end knots. |
 | `shelf.thornwick` | Display shelf at Thornwick Market | 136x40 | P1 | `art/generated/shelf/thornwick.png` | `(new)` | A long oak shelf, hung on two black iron chains. |
 | `shelf.crownhold` | Display shelf at Crownhold | 136x40 | P1 | `art/generated/shelf/crownhold.png` | `(new)` | A walnut shelf with a thin brass rail along its front, hung on two brass rods. |
 | `shelf.emporium` | Display shelf at the Royal Emporium | 136x40 | P1 | `art/generated/shelf/emporium.png` | `(new)` | A long glass shelf in a slim gilded frame, hung on two gilded chains. |
@@ -73,7 +73,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 
 | Id | Title | Size | Pri | Output | Replaces | Description |
 |---|---|---|---|---|---|---|
-| `counter.stall` | Counter at the Brindle crossroads (Bram's Stall) | 320x61 | P1 | `art/generated/counter/stall.png` | `(new)` | A trestle table top of three or four wide planks of plain, weathered dark brown wood, running left to right. |
+| `counter.stall` | Counter at the Brindle crossroads (Bram's Stall) | 320x61 | P1 | `art/generated/counter/stall.png` | `(new)` | A trestle table top of three or four wide planks of weathered dark brown wood, running left to right, with clear plank seams, a few paired nail heads near the ends, and broad worn edges; the middle stays calm. |
 | `counter.thornwick` | Counter at Thornwick Market | 320x61 | P1 | `art/generated/counter/thornwick.png` | `(new)` | A solid oak counter top of broad planks running left to right, honey-brown. |
 | `counter.crownhold` | Counter at Crownhold | 320x61 | P1 | `art/generated/counter/crownhold.png` | `(new)` | A polished walnut counter top with a thin brass strip along its far edge. |
 | `counter.emporium` | Counter at the Royal Emporium | 320x61 | P1 | `art/generated/counter/emporium.png` | `(new)` | A polished counter top of deep green-black marble with a few soft paler veins, and a thin gold strip along its far edge. |

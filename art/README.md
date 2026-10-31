@@ -1,32 +1,28 @@
 # Keywright art: the brief for generating it
 
-This folder is a complete brief for Keywright's art. A generation workflow (Codex with GPT-Image-2) reads it, makes
+This folder is a complete brief for Keywright's art. A generation workflow (Codex with its built-in image tool) reads it, makes
 the assets, checks each one with the tools here, and pushes the results; the game builds `assets/` from what it
 delivers.
 
 **Round 2 (0.25) is the current job.** Round 1 (0.23) came out far too busy to look at for hours. Round 2 redraws it
-flat and quiet, and builds the shop scene from layers: a sky for each time of day, and for each shop the place across
+in the selected C2 outlined style at 4x, with useful detail, and builds the shop scene from layers: a sky for each time of day, and for each shop the place across
 the counter, the shop's frame, its display shelf, its counter, its appraisal sheet and its lanterns, with props for
 what you've bought and full-length figures for everyone who comes to the counter. **Start with
 [`ART_DIRECTION.md`](ART_DIRECTION.md)** ("Why round 2" and "The shop scene" first), then
 [`manifest.json`](manifest.json) (every asset, its spec and its prompt). [`INVENTORY.md`](INVENTORY.md) is the same
 list as tables.
 
-## For the owner: round 2's next step
+## For the owner: anchors ready for review
 
-Batch 9 (the anchors) is on `art/round2`. It came out calm, but a little too plain. So before anything else is made, the
-style study (`art/study/README.md`) draws the stall's counter in four styles at three levels of detail, at both
-densities, for you to choose a direction. Give Codex, on `art/round2`:
+The style study is complete. The owner chose **C2 at 4x, with detail allowed** on 2026-10-30.
+[study/CHOICE.md](study/CHOICE.md) records the visual reference, detail budgets, colour caps and measured quiet limits.
 
-> Merge `prototype/0.25` into `art/round2`. Then do the style study in `art/study/README.md`: generate each prompt in
-> `art/study/prompts.md` (two candidates each, the palette swatch attached), process the kept ones with
-> `art/tools/study.py`, run `python3 art/tools/study.py review`, write `art/study/NOTES.md`, push, and stop. Make no
-> other round-2 art until I've chosen a direction.
-
-Then look at `art/study/review/` (its README says in what order) and say which direction. The brief is rewritten for it,
-and batch 9 is made again in that style through the improved pipeline (batch 9r below), before batches 10-15. When
-those are done, a Claude session merges `art/round2` and fills in the rest of the layered scene (see the end of this
-file).
+**Batch 9r is delivered: all 13 anchors have been remade in this direction and pass their checks.**
+Start with the [counter preview](generated/_review/round2_batch9r_playview.png) and
+[small objects](generated/_review/round2_batch9r_sprites.png); the
+[review guide](generated/_review/round2_batch9r_README.md) explains what to judge.
+Batches 10-15 and game integration wait for anchor approval.
+The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here
 
@@ -52,8 +48,8 @@ the scene's layers and the figures.
 | Batch | What | Assets |
 |---|---|---|
 | 9 | **Anchors**: `sky.midday`, the stall's `place`, `frame`, `shelf`, `counter`, `sheet` and lantern, `figure.hob`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`, `icon.upgrade.lamp`, `icon.kind.coins`. **Stop here for the owner's approval** (done: delivered and reviewed) | 13 |
-| S | **The style study** (`art/study/README.md`): the stall's counter in four styles at three levels of detail, and one thing in each style. **Stop for the owner's choice** | 15 |
-| 9r | **The anchors again, in the chosen style**, through the 0.25 pipeline (it snaps colours an area at a time without joining areas the model drew apart), from the brief rewritten for the choice | 13 |
+| S | **The style study**: completed; owner chose **C2 at 4x, detail allowed**. See `study/CHOICE.md` | 16 prompts |
+| 9r | **Delivered: the anchors again, in the chosen style**, through the 0.25 pipeline (it snaps colours an area at a time without joining areas the model drew apart), from the brief rewritten for C2 at 4x. **Awaiting owner review before batch 10** | 13 |
 | 10 | The rest of the scene: the other skies, places, frames, shelves, counters, sheets and lanterns, the counter's props, and the four story scenes | 32 |
 | 11 | The other figures (Mara and the King unmasked last: P3) | 37 |
 | 12 | Things in chests and Heartsongs | 40 |
@@ -67,18 +63,16 @@ anchors.
 
 ## Making one asset
 
-1. **Prompt.** Send the asset's `prompt` as it is. It asks for a **flat-colour illustration, never pixel art**, on flat
-   magenta. If an attempt fails, add a correction at the end rather than rewriting it ("simpler: fewer, bigger shapes,
-   flat colour, no texture" is the usual one; "a flat vector illustration, not pixel art"; "no outlines"), and record the
+1. **Prompt.** Send the asset's `prompt` as it is. It asks for a **C2 outlined cartoon illustration, never a pixel grid**, on flat
+   magenta. If an attempt fails, add a correction at the end rather than rewriting it ("retain C2 contours and the required details; make the crowded areas broader"; restate the specific layer geometry), and record the
    change (see Delivery).
 2. **Request.** Size `gen_size` (1536x1024 for scenes, 1024x1536 for figures and sheets, 1024x1024 for the rest), PNG,
-   the highest quality, 2-4 candidates; keep the calmest one that shows what the spec says.
-3. **References** (as input images, when the API takes them): the palette swatch `palette/keywright.png`; for batch 9,
-   `reference/scene/flat_to_pixels.png` (say: draw like the left picture, flat shapes on magenta, in our style, not
-   these shapes) and `reference/quiet/chest_drawn_4x.png` for sprites (the level of simplicity); after batch 9, the
-   category's approved round-2 anchor at 4x (`manifest.json`'s `anchors`), and for each shop's layers after the stall,
-   the stall's approved layer of the same kind. For `figure.king`, pass round 2's `figure.aldo` (the same man). **Never
-   pass round 1's art** (anything in `art/generated/` that isn't round 2's): its style is what round 2 replaces.
+   the highest quality, 2-4 candidates; keep the best C2 match that preserves the required features and fits the layout.
+3. **References**: attach `palette/keywright.png` and the approved `study/raw/C2_A.webp` (or its local full-size
+   PNG), using C2 for appearance and material detail, not its whole-scene layout. For batch 9r use the category's
+   exact layer geometry; `reference/scene/counter_layout.png` explains placement only. After owner approval, use the
+   rebuilt category anchor and the stall's same-kind layer for later shops. For `figure.king`, also pass the new
+   `figure.aldo`. Never use round 1 or the superseded plain batch-9 anchors as a style reference.
 4. **Pixelize**: `python3 art/tools/pixelize.py raw.png --id <id> --preview`. In `flat` mode it keys out the magenta,
    fits the picture to the canvas the way its category says, gives each art pixel the commonest colour of its block,
    snaps to the palette, quiets stray specks, caps the colours and adds the outline, then prints the asset's quiet
@@ -96,7 +90,8 @@ anchors.
 ## Delivery
 
 - Work on a branch named **`art/round2`**, made from the branch this brief is on (`prototype/0.25` when written).
-- Change nothing outside **`art/generated/`**. If a spec is wrong or can't be met, make the closest asset and say so.
+- Production batches change **`art/generated/`**. The owner's style choice additionally authorizes the brief, its
+  source generators, regenerated manifest/inventory and the decision record in `art/study/`; gameplay stays outside scope.
 - Commit per batch ("Art round 2, batch 11: figures"), and push after each batch.
 - What goes in `art/generated/`:
   - every finished PNG at its manifest `output` path (round 1's are replaced where the path is the same);
