@@ -29,7 +29,9 @@ and [batch-10 guide](generated/_review/round2_batch10_README.md).
 The owner then approved this work and requested completion of everything: **"大致ok接着完成所有内容"**.
 Continue batches 11-15 and the game integration documented below. Batch 11 now delivers all 37 remaining
 figures, including the identity reveals, with zero errors or warnings; see its
-[review guide](generated/_review/round2_batch11_README.md). Batches 12-15 and integration are next.
+[review guide](generated/_review/round2_batch11_README.md). Batch 12 now delivers all 40 remaining inventory
+objects and Heartsongs, with zero errors or warnings; see the [object review guide](generated/_review/round2_batch12_README.md).
+Batches 13-15 and integration are next.
 The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here
@@ -60,8 +62,8 @@ the scene's layers and the figures.
 | 9r | Reverted: the owner rejected the outlines | 13 |
 | 9s | **Approved 2026-10-31: C2 at 4x with detail, without outlines**, through the 0.25 pipeline with automatic outlines disabled | 13 |
 | 10 | **Delivered 2026-10-31:** the other skies, places, frames, shelves, counters, sheets and lanterns, the counter's props, and the four story scenes; all pass | 32 |
-| 11 | The other figures (Mara and the King unmasked last: P3) | 37 |
-| 12 | Things in chests and Heartsongs | 40 |
+| 11 | **Delivered:** the other figures, including Mara and the King; all pass | 37 |
+| 12 | **Delivered:** things in chests and Heartsongs; all pass | 40 |
 | 13 | Curios | 78 |
 | 14 | Upgrade and kind icons, the Guild's emblem, the Aldric Key and its shards | 39 |
 | 15 | Lock faces (P2) | 3 |

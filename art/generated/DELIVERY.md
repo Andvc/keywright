@@ -518,3 +518,101 @@ missing states, errors and warnings. The remaining 160 failures are inherited ro
 Historical study pictures and dedicated batch-9s/10 previews remain unchanged.
 
 **Continue batches 12-15, then game integration.** The complete round is not yet finished.
+
+
+### Batch 12: chest items and Heartsongs
+
+The owner's request to finish all remaining work continues to authorize this batch and the following integration.
+All **40** remaining inventory objects and Heartsongs are delivered; none skipped. All pass with zero warnings.
+They retain the approved C2 character, useful material details and no outlines, at the specified 32x32 native /
+2x UI scale. The music box and dwarf-gold anchors remain unchanged.
+
+See [the review guide](_review/round2_batch12_README.md), the actual-size overview and three 2x/4x comparison
+pages. All selected source illustrations and native sprites were inspected. The four shops at all four hours
+were also reviewed; these are reference composites, not live game captures.
+
+The built-in image tool produced **124 candidates**: A/B for every asset plus 44 corrections.
+It does not expose a verifiable model identifier. The unchanged manifest prompts, every exact append,
+reference hashes, actual source dimensions, all candidate checks and selection decisions are in
+[`_workflow/round2_batch12.json`](_workflow/round2_batch12.json). Full original/rejected PNGs remain in the local
+production archive. Only 40 small selected-source WebPs are committed.
+
+Every prompt appends the category anchor as a style reference only, the master palette, full-object framing,
+the 32x32 target, broad cel-shaded surfaces, explicit no-outline constraints, pure magenta empty space and
+PNG/resolution/quality intent. B requests an independent version of the same object. After the first coin/weapon
+attempts, later A/B prompts also request at most eight solid colours, large plain fields, no gradient or
+polygonal patchwork, and three broad gem facets. Exact candidate-specific timing is preserved in the JSON.
+Corrections retain each original manifest prompt and append instructions; no prompt is silently rewritten.
+
+Additional corrections and decisions (full appended wording in the provenance file):
+
+| Asset | Candidates | Kept | Reason |
+|---|---|---|---|
+| `item.barrow_silver` | A/B/C/D/E | E | The corrected edit replaces mottling with broad tarnished silver planes; the crowned profile and rough old-coin silhouette remain readable. E is the first candidate to pass unchanged pipeline limits. |
+| `item.moonsilver_marks` | A/B/C/D | D | The large incised crescent and orderly five-coin stack read cleanly at 2x; D has the calmest broad silver-blue face. |
+| `item.sunken_sovereigns` | A/B/C/D | D | Plain gold coin faces, broad teal corrosion, one cream barnacle and a curved weed ribbon survive reduction. D passes without copying the dwarf anchor emblem. |
+| `item.dragon_gold` | A/B/C/D | C | The staggered tall gold stack, small jewelled crown and distinct red ruby stay legible at 2x. C preserves volume with broad warm fills and passes. |
+| `item.demon_gold` | A/B/C/D | C | C keeps the low old-coin heap, broad worn iron and sickly green patches, and a bold horned stamp. It passes both quiet limits and remains different from bright dragon gold. |
+| `item.goblin_cleaver` | A/B | B | The broad dark blade, notched cutting edge and tied leather grip remain distinct at 2x; B passes both quiet limits without contour strokes. |
+| `item.dwarven_axe` | A/B/C/D | D | The large steel head, single angular knot and brown oak haft with two bronze bands remain clear. D gives the wood the correct brown material and uses broad uninterrupted shading. |
+| `item.wardens_blade` | A/B/C/D | D | D has a broad continuous steel-blue blade, readable key-bow guard, plain blue grip and round pommel; the enlarged blade survives the native 32-pixel scale. |
+| `item.flamebrand` | A/B/C/D/E | E | The edited broad blade preserves a single molten orange branching vein, ember edge, black guard and red-gold fittings. Large charcoal areas remain continuous at 2x and all checks pass. |
+| `item.dragonslayer` | A/B/C/D | D | D gives a broad steel blade, two cyan geometric motifs, wing-shaped guard and ruby pommel. One manual pixel joins the ruby's red front facet, removing an isolated notch without altering its silhouette. |
+| `item.wolfskin_cloak` | A/B/C | C | C preserves the wolf head, ears, bone toggle and broad shaggy pelt. Two manually inspected pixels remove stray fur-colour dots in otherwise continuous cape areas. |
+| `item.elven_cloak` | A/B | A | A preserves the single silver leaf clasp, deep forest-green fabric and broad elegant folds. The hanging cloak silhouette is distinct at 2x and all checks pass. |
+| `item.cloak_of_shadows` | A/B | A | A keeps the blue-black hood, dim violet lining and wispy hem while landing exactly on the required baseline; B loses its bottom pixel during reduction. |
+| `item.archmages_mantle` | A/B | B | B retains the stiff high collar, silver stars, gold braid and indigo main fabric. The stars are grouped on broad panels and the native sprite passes. |
+| `item.phoenix_mantle` | A/B/C | C | C groups the phoenix feathers into broad gold, orange and red tiers; the warm hanging silhouette and gold clasp remain clear with quieter internal surfaces. |
+| `item.healing_draught` | A/B | B | B keeps the round glass flask, red liquid, cork and tied twine with a readable connected highlight and passes at native size. |
+| `item.elixir_of_vigour` | A/B/C | C | C keeps the tall square bottle, orange elixir and red wax seal. Broad liquid faces and a single glass highlight remain calm at native size. |
+| `item.invisibility_draught` | A/B | B | The teardrop bottle and silver stopper stay clear; broad pale blue liquid bands fade toward the clear upper neck, with no magenta holes in the vessel. |
+| `item.mermaids_breath` | A/B/C | C | Shell-like round teal bottle, pearl stopper and two bubbles remain distinct at 2x; the corrected broad glass faces pass without a contour stroke. |
+| `item.ambrosia` | A/B/C | C | Broad golden amphora with two handles and faceted stopper; calmer uninterrupted gold areas preserve its ceremonial silhouette. |
+| `item.scroll_of_sparks` | A/B/C | C | Cream rolled parchment, blue tie and single spark motif stay readable; fewer scroll bands and no scattered sparks. |
+| `item.scroll_of_fireball` | A/B/C | C | Large orange-red flame disc survives on the unrolled cream parchment; two rollers read cleanly without decorative sparks or distressed specks. |
+| `item.summoners_grimoire` | A/B/C | C | Broad purple cover, gold eye and clasp clearly identify the book at 2x; removing the ray border and rivets restores calm surfaces. |
+| `item.lichs_tome` | A/B/C | C | Plain black cover, large ivory skull, iron corners and green-violet page edge remain distinct; simplified skull features read at 2x. |
+| `item.keyhold_codex` | A/B | A | Blue and gold volume with the clearest large keyhole and a readable key clasp; quieter central emblem than B. |
+| `item.sand_case` | A/B | A | Battered iron cylinder, detached lid and spilling yellow sand read clearly at native UI size; A retains broader metal faces and passes. |
+| `item.moonstone` | A/B | B | Round milky blue-white cabochon with one broad shimmer wave; B has the clearest smooth dome at 2x. |
+| `item.elfstone` | A/B/C/D | D | Large green leaf gem in broad silver leaf-shaped setting; a short simple chain loop preserves its pendant identity without noisy alternating link glints. |
+| `item.blood_ruby` | A/B | B | Strong red cut-gem silhouette, broad lit table and dark lower facets; B is calmer with a clear single glint. |
+| `item.starstone` | A/B/C | C | Plain deep-blue sapphire face, single solid six-pointed star and broad gold setting read clearly at 2x; no fragmented gem facets or glossy dots. |
+| `item.dragons_eye` | A/B/C | C | Broad amber oval with dark vertical slit and four gold claws; three isolated brown reduction pixels joined to their surrounding material faces by hand. |
+| `item.paste_gem` | A/B | B | Dull grey cut glass, low-contrast broad facets and an obvious chipped right corner distinguish the fake gem from the saturated treasures. |
+| `heartsong.shepherds_pipe` | A/B/C/D | D | Exactly seven graded wooden pipes, two broad twine bindings and red tassel; the fresh front-facing composition fixes the six-pipe count and passes at 2x. |
+| `heartsong.fey_chimes` | A/B/C | C | Five clearly separated glass-and-silver rods of different lengths, curved birch and red thread; plain rods preserve the distinctive hanging silhouette at 2x. |
+| `heartsong.dragons_egg` | A/B/C/D | D | Upright dark-red scaled egg with broad ember-orange gaps and a small straw nest; larger scale fields and a few wide straw ends preserve its identity at 2x. |
+| `heartsong.clockwork_lark` | A/B/C | C | Compact brass songbird with open beak, red breast, two wing rivets, winding key and wooden perch; broad metal faces stay readable at 2x. |
+| `heartsong.hearthstone` | A/B/C/D | D | Smooth rounded grey stone, broad red branching vein and soot-dark base; plain stone fields read calmly without mottled soot. |
+| `heartsong.drowned_bell` | A/B/C | C | Bronze bell with one broad teal patina region, red rope and river weed; one hand-restored weed-tip pixel brings the silhouette to baseline row 30. |
+| `heartsong.bottled_star` | A/B/C | C | Plain round lavender-blue bottle, cork, four-point warm star, red string and blank tag; broad reflection replaces fragmented glass glints. |
+| `heartsong.imps_ember` | A/B/C | C | Clear heart-shaped red-orange coal, two little flames and plain dark iron dish; the heart stays recognizable without fragmented coal cracks. |
+
+
+Corrections simplify specific fragmented surfaces: coin faces/corrosion; broad blade fields and hilts; cloak
+fur and feather tiers; glass highlights, bottle facets and scroll curls; book frames, rivets and emblems;
+gem settings and chain highlights; pipe bindings, chime ornaments, egg scales/nest, brass bird fittings,
+stone soot and other Heartsong surface details. Required identities, major motifs and material colours remain.
+Some assets required more than the brief's usual two-to-four candidates because their first four failed the
+unchanged native-size quiet limits; these extra correction attempts are recorded rather than relaxing limits.
+
+All selected sources use the unchanged `pixelize.py --no-outline --preview` in flat mode. The only manual
+pixel repairs, explicitly allowed by the brief, are listed below; there are no additional raster filters.
+
+- `item.dragonslayer` D: (4,28) `#9c1839` to `#ff4058` — Join the ruby front facet; keep its darker underside on the bottom row..
+- `item.wolfskin_cloak` C: (8,25) `#9d8872` to `#906273` — Remove a lone grey dot surrounded on all four sides by the same shaded fur..
+- `item.wolfskin_cloak` C: (13,10) `#906273` to `#9d8872` — Join the pale shoulder fur area beside the hood..
+- `item.dragons_eye` C: (6,9) `#8e5b37` to `#ffe47d` — Join the pale upper-left gold claw face; remove an isolated brown reduction pixel..
+- `item.dragons_eye` C: (6,18) `#8e5b37` to `#ce5e00` — Join the orange side field immediately above and below this isolated brown reduction pixel..
+- `item.dragons_eye` C: (10,23) `#8e5b37` to `#ffe47d` — Join the pale lower gold setting face on its right and below..
+- `heartsong.drowned_bell` C: (10,30) `#000000` to `#004e22` — Restore the final river-weed tip pixel lost in block reduction, joining the weed above and meeting baseline row 30..
+
+Supported palette swaps: none.
+
+Final `python3 art/tools/validate.py --sheets`: **40/40 batch-12 assets OK, zero warnings**. Full manifest:
+**147 OK, 120 failed, 0 missing (0 P1 missing), exit 1**. All 227 non-batch outputs and check results are
+unchanged. The 120 remaining failures are inherited round-1 assets awaiting batches 13-15. No caps, quiet
+limits, pixelizer or validator were changed. Historical study and dedicated batch-9s/10/11 previews remain intact.
+
+**Continue batches 13-15, then the documented game integration.** The complete round is not yet finished.

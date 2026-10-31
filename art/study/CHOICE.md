@@ -74,3 +74,8 @@ integration listed in `art/README.md`, retaining C2 / 4x / meaningful detail / n
 Batch 11 delivers all 37 remaining figures, including Mara and the King, with zero errors or warnings.
 See the [figure review guide](../generated/_review/round2_batch11_README.md). Continue the remaining batches
 and integration without another direction checkpoint.
+
+Batch 12 delivers all 40 remaining inventory objects and Heartsongs, with zero errors or warnings.
+The small objects retain their specified 32x32 native / 2x UI size; their useful identifying details and
+no-outline treatment follow the same anchors. See the [object review guide](../generated/_review/round2_batch12_README.md).
+Continue batches 13-15 and integration under the existing authorization.

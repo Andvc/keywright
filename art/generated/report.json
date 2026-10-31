@@ -1,7 +1,7 @@
 {
  "summary": {
-  "ok": 107,
-  "fail": 160
+  "ok": 147,
+  "fail": 120
  },
  "assets": {
   "sky.morning": {
@@ -1765,34 +1765,27 @@
    "priority": "P3"
   },
   "item.barrow_silver": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.487, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.799, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 13,
+   "colours": 6,
    "priority": "P1",
    "calm": {
-    "specks": 0.487,
-    "edges": 0.799,
-    "busy": 33.142
+    "specks": 0.032,
+    "edges": 0.339,
+    "busy": 30.092
    }
   },
   "item.moonsilver_marks": {
-   "status": "fail",
-   "errors": [
-    "18 colours, at most 16",
-    "too busy: lone specks 0.446, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.763, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 18,
+   "colours": 7,
    "priority": "P1",
    "calm": {
-    "specks": 0.446,
-    "edges": 0.763,
-    "busy": 33.775
+    "specks": 0.039,
+    "edges": 0.333,
+    "busy": 18.589
    }
   },
   "item.dwarf_gold_crowns": {
@@ -1808,476 +1801,363 @@
    }
   },
   "item.sunken_sovereigns": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.446, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.788, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 16,
    "priority": "P1",
    "calm": {
-    "specks": 0.446,
-    "edges": 0.788,
-    "busy": 29.517
+    "specks": 0.058,
+    "edges": 0.385,
+    "busy": 23.069
    }
   },
   "item.dragon_gold": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.580, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.839, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.58,
-    "edges": 0.839,
-    "busy": 39.696
-   }
-  },
-  "item.demon_gold": {
-   "status": "fail",
-   "errors": [
-    "18 colours, at most 16",
-    "too busy: lone specks 0.399, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.737, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.399,
-    "edges": 0.737,
-    "busy": 28.685
-   }
-  },
-  "item.goblin_cleaver": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.375, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.694, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.375,
-    "edges": 0.694,
-    "busy": 22.168
-   }
-  },
-  "item.dwarven_axe": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.405, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.405,
-    "edges": 0.746,
-    "busy": 26.998
-   }
-  },
-  "item.wardens_blade": {
-   "status": "fail",
-   "errors": [
-    "18 colours, at most 16",
-    "too busy: lone specks 0.700, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.852, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.7,
-    "edges": 0.852,
-    "busy": 38.919
-   }
-  },
-  "item.flamebrand": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.672, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.878, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.672,
-    "edges": 0.878,
-    "busy": 33.674
-   }
-  },
-  "item.dragonslayer": {
-   "status": "fail",
-   "errors": [
-    "18 colours, at most 16",
-    "too busy: lone specks 0.534, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.770, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.534,
-    "edges": 0.77,
-    "busy": 32.165
-   }
-  },
-  "item.wolfskin_cloak": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.478, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.778, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.478,
-    "edges": 0.778,
-    "busy": 46.881
-   }
-  },
-  "item.elven_cloak": {
-   "status": "fail",
-   "errors": [
-    "17 colours, at most 16",
-    "too busy: lone specks 0.363, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.751, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 17,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.363,
-    "edges": 0.751,
-    "busy": 29.282
-   }
-  },
-  "item.cloak_of_shadows": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.284, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.656, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 13,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.284,
-    "edges": 0.656,
-    "busy": 11.965
-   }
-  },
-  "item.archmages_mantle": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.573, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.841, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.573,
-    "edges": 0.841,
-    "busy": 33.158
-   }
-  },
-  "item.phoenix_mantle": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.345, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.715, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.345,
-    "edges": 0.715,
-    "busy": 31.189
-   }
-  },
-  "item.healing_draught": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.347, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.682, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.347,
-    "edges": 0.682,
-    "busy": 29.051
-   }
-  },
-  "item.elixir_of_vigour": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.340, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.664, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.34,
-    "edges": 0.664,
-    "busy": 22.218
-   }
-  },
-  "item.invisibility_draught": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.268, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.547, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 16,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.268,
-    "edges": 0.547,
-    "busy": 16.8
-   }
-  },
-  "item.mermaids_breath": {
-   "status": "fail",
-   "errors": [
-    "18 colours, at most 16",
-    "too busy: lone specks 0.333, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.672, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.333,
-    "edges": 0.672,
-    "busy": 31.71
-   }
-  },
-  "item.ambrosia": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.430, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.746, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 14,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.43,
-    "edges": 0.746,
-    "busy": 30.826
-   }
-  },
-  "item.scroll_of_sparks": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.416, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.736, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.416,
-    "edges": 0.736,
-    "busy": 25.129
-   }
-  },
-  "item.scroll_of_fireball": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.459, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.787, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.459,
-    "edges": 0.787,
-    "busy": 30.684
-   }
-  },
-  "item.summoners_grimoire": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.444, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.779, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.444,
-    "edges": 0.779,
-    "busy": 29.898
-   }
-  },
-  "item.lichs_tome": {
-   "status": "fail",
-   "errors": [
-    "18 colours, at most 16",
-    "too busy: lone specks 0.335, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.672, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 18,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.335,
-    "edges": 0.672,
-    "busy": 29.846
-   }
-  },
-  "item.keyhold_codex": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.421, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.779, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.421,
-    "edges": 0.779,
-    "busy": 34.572
-   }
-  },
-  "item.sand_case": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.357, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.727, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.357,
-    "edges": 0.727,
-    "busy": 37.719
-   }
-  },
-  "item.moonstone": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.244, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.599, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 11,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.244,
-    "edges": 0.599,
-    "busy": 13.814
-   }
-  },
-  "item.elfstone": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.712, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.906, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 16,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.712,
-    "edges": 0.906,
-    "busy": 43.926
-   }
-  },
-  "item.blood_ruby": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.236, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.594, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 16,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.236,
-    "edges": 0.594,
-    "busy": 21.831
-   }
-  },
-  "item.starstone": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.404, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.741, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 20,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.404,
-    "edges": 0.741,
-    "busy": 40.639
-   }
-  },
-  "item.dragons_eye": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.580, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.837, at most 0.5 (draw it simpler)"
-   ],
-   "warnings": [],
-   "colours": 19,
-   "priority": "P1",
-   "calm": {
-    "specks": 0.58,
-    "edges": 0.837,
-    "busy": 42.87
-   }
-  },
-  "item.paste_gem": {
-   "status": "fail",
-   "errors": [
-    "too busy: lone specks 0.328, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.620, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
    "colours": 12,
    "priority": "P1",
    "calm": {
-    "specks": 0.328,
-    "edges": 0.62,
-    "busy": 23.737
+    "specks": 0.039,
+    "edges": 0.451,
+    "busy": 24.592
+   }
+  },
+  "item.demon_gold": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.05,
+    "edges": 0.414,
+    "busy": 22.668
+   }
+  },
+  "item.goblin_cleaver": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.057,
+    "edges": 0.379,
+    "busy": 19.448
+   }
+  },
+  "item.dwarven_axe": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.029,
+    "edges": 0.399,
+    "busy": 20.085
+   }
+  },
+  "item.wardens_blade": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.022,
+    "edges": 0.288,
+    "busy": 16.554
+   }
+  },
+  "item.flamebrand": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.023,
+    "edges": 0.335,
+    "busy": 21.761
+   }
+  },
+  "item.dragonslayer": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 15,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.038,
+    "edges": 0.497,
+    "busy": 35.27
+   }
+  },
+  "item.wolfskin_cloak": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.06,
+    "edges": 0.386,
+    "busy": 18.142
+   }
+  },
+  "item.elven_cloak": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.059,
+    "edges": 0.392,
+    "busy": 21.735
+   }
+  },
+  "item.cloak_of_shadows": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.048,
+    "edges": 0.458,
+    "busy": 14.282
+   }
+  },
+  "item.archmages_mantle": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 13,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.059,
+    "edges": 0.433,
+    "busy": 37.742
+   }
+  },
+  "item.phoenix_mantle": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 8,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.047,
+    "edges": 0.383,
+    "busy": 24.768
+   }
+  },
+  "item.healing_draught": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.055,
+    "edges": 0.403,
+    "busy": 21.549
+   }
+  },
+  "item.elixir_of_vigour": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 12,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.279,
+    "busy": 13.927
+   }
+  },
+  "item.invisibility_draught": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.01,
+    "edges": 0.273,
+    "busy": 12.611
+   }
+  },
+  "item.mermaids_breath": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.244,
+    "busy": 13.067
+   }
+  },
+  "item.ambrosia": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 6,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.043,
+    "edges": 0.385,
+    "busy": 19.442
+   }
+  },
+  "item.scroll_of_sparks": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 11,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.027,
+    "edges": 0.335,
+    "busy": 18.714
+   }
+  },
+  "item.scroll_of_fireball": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.026,
+    "edges": 0.447,
+    "busy": 26.403
+   }
+  },
+  "item.summoners_grimoire": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.031,
+    "edges": 0.281,
+    "busy": 23.715
+   }
+  },
+  "item.lichs_tome": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.052,
+    "edges": 0.443,
+    "busy": 33.241
+   }
+  },
+  "item.keyhold_codex": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 14,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.052,
+    "edges": 0.428,
+    "busy": 29.096
+   }
+  },
+  "item.sand_case": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 16,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.055,
+    "edges": 0.46,
+    "busy": 22.426
+   }
+  },
+  "item.moonstone": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 7,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.011,
+    "edges": 0.343,
+    "busy": 8.564
+   }
+  },
+  "item.elfstone": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.024,
+    "edges": 0.318,
+    "busy": 31.765
+   }
+  },
+  "item.blood_ruby": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.017,
+    "edges": 0.312,
+    "busy": 18.942
+   }
+  },
+  "item.starstone": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.027,
+    "edges": 0.343,
+    "busy": 30.203
+   }
+  },
+  "item.dragons_eye": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 10,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.056,
+    "edges": 0.405,
+    "busy": 28.581
+   }
+  },
+  "item.paste_gem": {
+   "status": "ok",
+   "errors": [],
+   "warnings": [],
+   "colours": 9,
+   "priority": "P1",
+   "calm": {
+    "specks": 0.009,
+    "edges": 0.283,
+    "busy": 12.072
    }
   },
   "heartsong.lullaby_box": {
@@ -2293,131 +2173,99 @@
    }
   },
   "heartsong.shepherds_pipe": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.509, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.828, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 19,
+   "colours": 14,
    "priority": "P1",
    "calm": {
-    "specks": 0.509,
-    "edges": 0.828,
-    "busy": 36.995
+    "specks": 0.058,
+    "edges": 0.494,
+    "busy": 33.147
    }
   },
   "heartsong.fey_chimes": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.489, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.710, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 19,
+   "colours": 16,
    "priority": "P1",
    "calm": {
-    "specks": 0.489,
-    "edges": 0.71,
-    "busy": 34.815
+    "specks": 0.038,
+    "edges": 0.383,
+    "busy": 19.628
    }
   },
   "heartsong.dragons_egg": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.494, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.820, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 8,
    "priority": "P1",
    "calm": {
-    "specks": 0.494,
-    "edges": 0.82,
-    "busy": 51.987
+    "specks": 0.038,
+    "edges": 0.35,
+    "busy": 28.532
    }
   },
   "heartsong.clockwork_lark": {
-   "status": "fail",
-   "errors": [
-    "19 colours, at most 16",
-    "too busy: lone specks 0.372, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.725, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 19,
+   "colours": 12,
    "priority": "P1",
    "calm": {
-    "specks": 0.372,
-    "edges": 0.725,
-    "busy": 27.168
+    "specks": 0.038,
+    "edges": 0.331,
+    "busy": 17.886
    }
   },
   "heartsong.hearthstone": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.379, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.741, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 8,
    "priority": "P1",
    "calm": {
-    "specks": 0.379,
-    "edges": 0.741,
-    "busy": 20.066
+    "specks": 0.009,
+    "edges": 0.207,
+    "busy": 6.674
    }
   },
   "heartsong.drowned_bell": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.500, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.808, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 16,
    "priority": "P1",
    "calm": {
-    "specks": 0.5,
-    "edges": 0.808,
-    "busy": 41.265
+    "specks": 0.027,
+    "edges": 0.393,
+    "busy": 17.166
    }
   },
   "heartsong.bottled_star": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.439, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.757, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 16,
    "priority": "P1",
    "calm": {
-    "specks": 0.439,
-    "edges": 0.757,
-    "busy": 29.842
+    "specks": 0.033,
+    "edges": 0.344,
+    "busy": 14.56
    }
   },
   "heartsong.imps_ember": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.423, at most 0.06 (draw it simpler)",
-    "too busy: edges between neighbours 0.738, at most 0.5 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 15,
    "priority": "P1",
    "calm": {
-    "specks": 0.423,
-    "edges": 0.738,
-    "busy": 31.889
+    "specks": 0.015,
+    "edges": 0.289,
+    "busy": 11.882
    }
   },
   "curio.monocle": {
