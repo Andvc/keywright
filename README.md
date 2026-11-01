@@ -8,14 +8,14 @@ stall. People bring you chests and price them their own way (by what they heard,
 a dream) and tell you where they found them. Shake each one yourself, gently, firmly and hard, find what they missed
 or misjudged, work out what their dreams, riddles and tags point at, trade for it, and open it on the spot. Move the shop inward, from the Brindle
 crossroads to Thornwick Market, the capital and the Royal Emporium by the Gate, because the stall comes with twenty
-years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 20g to 55,000g in
+years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 20g to 45,000g in
 five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
 **Status:** Early Access (0.28). 0.28 gives the world an order and its people lives
 ([docs/world.md](docs/world.md), [docs/stories.md](docs/stories.md)): a new cast, each with a place, a faction and a
-want; twelve **tales** that run across a season (six or seven drawn each run, some with a secret of their own: who the
+want; eleven **tales** that run across a season (seven drawn each run, some with a secret of their own: who the
 Magpie is, what's behind the Barrow door), told a beat at a time at the counter, at the back door after dark and in
 letters, with choices that cost and change things (gold, chests given freely, curios, people gained and lost, the
 Crown's decree on the tithe); **standing** with nine powers, the four that matter most changing the trade every day;

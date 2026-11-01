@@ -12,7 +12,7 @@ only the owner can do. Written for 0.27 (November 2026).
 | Sound settings | Ready | Master, effects, the Heartsongs' songs; muting when the window loses focus. |
 | Keyboard and mouse | Ready | Every key rebindable; the mouse needs none. |
 | Controllers | Ready | Xbox, PlayStation and Switch layouts; the stick drives the pointer, so a controller does all a mouse does. |
-| Languages | Foundation ready | Every text translatable (2,648 texts in 0.28, about 131,000 characters); no translation yet. |
+| Languages | Foundation ready | Every text translatable (2,647 texts in 0.28, about 131,000 characters); no translation yet. |
 | Fonts | Ready but Chinese | Western European in the house font, the rest of Latin, Cyrillic, Greek, Korean and Japanese in Galmuri. |
 | Steam | Ready to switch on | Achievements, rich presence, overlay pause, launch through Steam: needs the app ID and Steamworks set-up. |
 | Builds | Ready | CI exports Windows and Linux, smoke-tests both and keeps them as artifacts, on every push. |

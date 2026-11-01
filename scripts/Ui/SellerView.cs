@@ -8,6 +8,9 @@ namespace Keywright.Ui;
 public partial class SellerView : Node2D
 {
     public const float BubbleW = 288, BubbleH = 164;
+
+    /// <summary>How wide the bubble gets for a long speech (a tale's news) before it grows any taller.</summary>
+    const float WideW = 420;
     readonly SellerDef _seller;
     Node2D _body;
     public Node2D Figure => _body;
@@ -71,19 +74,27 @@ public partial class SellerView : Node2D
     {
         _text.Text = line;
         // Short replies leave the hats and faces of taller visitors visible below the bubble. Measured at full height,
-        // lines and the spacing between them, with room for the frame under the last.
-        _text.Size = new Vector2(BubbleW - 28, BubbleH - 48);
-        int lines = _text.GetLineCount();
-        float textHeight = lines * _text.GetLineHeight() + Math.Max(0, lines - 1) * _text.GetThemeConstant("line_spacing");
-        float height = Math.Clamp(48 + textHeight + 10, 110, BubbleH);
-        _text.Size = new Vector2(BubbleW - 28, height - 48);
-        _bubble.Size = new Vector2(BubbleW, height);
+        // lines and the spacing between them, with room for the frame under the last. A speech too long for the
+        // bubble widens it first (keeping the speaker's face in view), and only then grows it: it never spills out.
+        float width = BubbleW, height = Fit(width);
+        if (height > BubbleH) height = Fit(width = WideW);
+        _text.Size = new Vector2(width - 28, height - 48);
+        _bubble.Size = new Vector2(width, height);
         _tail.QueueRedraw();
         _text.AddThemeColorOverride("font_color", color ?? Palette.Text);
-        _bubble.PivotOffset = new Vector2(BubbleW / 2, 0);
+        _bubble.PivotOffset = new Vector2(width / 2, 0);
         _bubble.Scale = new Vector2(0.96f, 0.9f);
         _bubble.CreateTween().TweenProperty(_bubble, "scale", Vector2.One, 0.12f).SetTrans(Tween.TransitionType.Back);
     }
+    /// <summary>The bubble's height for the line at this width: at least a short one's, and room for every line.</summary>
+    float Fit(float width)
+    {
+        _text.Size = new Vector2(width - 28, BubbleH - 48);
+        int lines = _text.GetLineCount();
+        float textHeight = lines * _text.GetLineHeight() + Math.Max(0, lines - 1) * _text.GetThemeConstant("line_spacing");
+        return Math.Max(110, 48 + textHeight + 10);
+    }
+
     public void Enter()
     {
         _body.Position = new Vector2(-420, 0);

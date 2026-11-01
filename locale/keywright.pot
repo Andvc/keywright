@@ -1703,71 +1703,71 @@ msgstr ""
 msgid "Careful. That will cost you."
 msgstr ""
 
-#: scripts/Core/Guild.cs:51
+#: scripts/Core/Guild.cs:52
 msgid "Mister Vane"
 msgstr ""
 
-#: scripts/Core/Guild.cs:56
+#: scripts/Core/Guild.cs:57
 msgid "Good evening. The Guild's tithe, if you please. In gold: the Guild has no use for promises."
 msgstr ""
 
-#: scripts/Core/Guild.cs:57
+#: scripts/Core/Guild.cs:58
 msgid "Still here, I see. Good. The Guild hates to see a Keywright go to waste."
 msgstr ""
 
-#: scripts/Core/Guild.cs:58
+#: scripts/Core/Guild.cs:59
 msgid "I hear you've opened a great many chests this week. The Guild approves. Do keep opening them."
 msgstr ""
 
-#: scripts/Core/Guild.cs:59
+#: scripts/Core/Guild.cs:60
 msgid "My masters have begun to ask about you. That is rarely good news. One more week after this one."
 msgstr ""
 
-#: scripts/Core/Guild.cs:60
+#: scripts/Core/Guild.cs:61
 msgid "The last of Bram's debt. Every coin of it, mind. Gold you can see."
 msgstr ""
 
-#: scripts/Core/Guild.cs:65
+#: scripts/Core/Guild.cs:66
 msgid "Debts are curious things, Keywright. They grow while nobody's watching them."
 msgstr ""
 
-#: scripts/Core/Guild.cs:66
+#: scripts/Core/Guild.cs:67
 msgid "The Gate is hungry this week, and the Guild has decided you owe it something for its patience."
 msgstr ""
 
-#: scripts/Core/Guild.cs:67
+#: scripts/Core/Guild.cs:68
 msgid "Interest, you understand. Nothing personal. My master is very fond of interest."
 msgstr ""
 
-#: scripts/Core/Guild.cs:74
+#: scripts/Core/Guild.cs:75
 msgid "Paid in full. The Guild has no further claim on Bram's stall. For now."
 msgstr ""
 
-#: scripts/Core/Guild.cs:75
+#: scripts/Core/Guild.cs:76
 msgid "Paid. Until next week, Keywright."
 msgstr ""
 
-#: scripts/Core/Guild.cs:76
+#: scripts/Core/Guild.cs:77
 msgid "Paid, and promptly. Until next week, then."
 msgstr ""
 
-#: scripts/Core/Guild.cs:79
+#: scripts/Core/Guild.cs:80
 msgid "Short? Then the Guild will take what's on your shelf instead. At the Guild's price, naturally."
 msgstr ""
 
-#: scripts/Core/Guild.cs:81
+#: scripts/Core/Guild.cs:82
 msgid "Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed."
 msgstr ""
 
-#: scripts/Core/Guild.cs:84
+#: scripts/Core/Guild.cs:85
 msgid "A Guild note, older than the Locking? ...However did you come by that? The Guild honours its own paper. Paid."
 msgstr ""
 
-#: scripts/Core/Guild.cs:87
+#: scripts/Core/Guild.cs:88
 msgid "All of it, tonight? ...How very thorough of you. The Guild has no further claim on Bram's stall."
 msgstr ""
 
-#: scripts/Core/Guild.cs:90
+#: scripts/Core/Guild.cs:91
 msgid "Bram's word? How touching. One week, then. The rest comes due next week, and half as much again."
 msgstr ""
 
@@ -6426,26 +6426,21 @@ msgstr ""
 
 #: scripts/Core/TaleBook.cs:223
 #, csharp-format
-msgid "Three more thefts this week, and every one a chest the Guild had foreclosed on. A carter saw the thief going over the wall: {0}."
+msgid "Three more thefts this week, every one a chest the Guild had foreclosed on. A carter saw the thief: {0}."
 msgstr ""
 
 #: scripts/Core/TaleBook.cs:227
 msgid "The carter's word"
 msgstr ""
 
-#: scripts/Core/TaleBook.cs:227
-#, csharp-format
-msgid "A carter saw the Magpie going over a wall: {0}."
-msgstr ""
-
-#: scripts/Core/TaleBook.cs:228
+#: scripts/Core/TaleBook.cs:227 scripts/Core/TaleBook.cs:228
 #, csharp-format
 msgid "A carter saw the Magpie: {0}."
 msgstr ""
 
 #: scripts/Core/TaleBook.cs:234
 #, csharp-format
-msgid "Wardens say a goblin did the abbey. Goblins get the blame for everything! Nettle's cousin saw the thief on the burrow road: {0}. Not a goblin! You tell the sergeant."
+msgid "Wardens say a goblin did the abbey! Nettle's cousin saw the thief on the burrow road: {0}. Not a goblin! Tell the sergeant."
 msgstr ""
 
 #: scripts/Core/TaleBook.cs:238
@@ -10819,7 +10814,7 @@ msgstr ""
 msgid "For testing: nothing here is fair."
 msgstr ""
 
-#: scripts/Ui/SellerView.cs:51
+#: scripts/Ui/SellerView.cs:54
 #, csharp-format
 msgid "{0}: click to read their page in your notebook."
 msgstr ""

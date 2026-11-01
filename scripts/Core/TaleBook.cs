@@ -220,19 +220,19 @@ public static class TaleBook
                 new()
                 {
                     Key = "magpie.carter", Who = Hollis, After = "magpie.feather", Gap = 2, Tier = 2,
-                    Says = s => Say(Hollis, Loc.T($"Three more thefts this week, and every one a chest the Guild had foreclosed on. A carter saw the " +
-                                                  $"thief going over the wall: {Clue(s, 0)}.")),
+                    Says = s => Say(Hollis, Loc.T($"Three more thefts this week, every one a chest the Guild had foreclosed on. A carter saw the " +
+                                                  $"thief: {Clue(s, 0)}.")),
                     Then = s =>
                     {
-                        s.Post("magpie1", Loc.T("The carter's word"), Loc.T($"A carter saw the Magpie going over a wall: {Clue(s, 0)}."));
+                        s.Post("magpie1", Loc.T("The carter's word"), Loc.T($"A carter saw the Magpie: {Clue(s, 0)}."));
                         s.Log("magpie", Loc.T($"A carter saw the Magpie: {Clue(s, 0)}."));
                     },
                 },
                 new()
                 {
                     Key = "magpie.goblins", Who = Nettle, After = "magpie.carter", Gap = 2, Tier = 2,
-                    Says = s => Say(Nettle, Loc.T($"Wardens say a goblin did the abbey. Goblins get the blame for everything! Nettle's cousin saw the " +
-                                                  $"thief on the burrow road: {Clue(s, 1)}. Not a goblin! You tell the sergeant.")),
+                    Says = s => Say(Nettle, Loc.T($"Wardens say a goblin did the abbey! Nettle's cousin saw the thief on the burrow road: " +
+                                                  $"{Clue(s, 1)}. Not a goblin! Tell the sergeant.")),
                     Then = s =>
                     {
                         s.Post("magpie2", Loc.T("A goblin's word"), Loc.T($"Nettle's cousin saw the Magpie on the burrow road: {Clue(s, 1)}."));

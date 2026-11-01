@@ -26,10 +26,11 @@ public static class Guild
     /// Each week's due: small for the first three weeks, while you learn the stall and a growing purse is all you need,
     /// then a steep climb: the fourth asks for a few good days at the capital, and the last for more than ordinary trade
     /// makes even at the Royal Emporium with every upgrade (the power index has a ceiling, and chests top out at purple).
-    /// Carrying it takes a build come together (or a Heartsong's luck). A first run usually needs Bram's word in the
-    /// fourth week and falls in the fifth; a strong run can have all of it early, and pay it off.
+    /// Carrying it takes a build come together, tales gone well, or a Heartsong's luck. A first run usually needs Bram's
+    /// word in the fourth week and falls in the fifth; a strong run can have all of it early, and pay it off. (0.28 tried
+    /// 55,000 for the tales' gold and tools; once their payouts were halved, 45,000 kept the careful player at about half.)
     /// </summary>
-    static readonly int[] Dues = { 20, 60, 300, 4000, 55000 };
+    static readonly int[] Dues = { 20, 60, 300, 4000, 45000 };
 
     /// <summary>After the debt: each week twice as much, for as long as you last.</summary>
     const float EndlessGrowth = 2f;

@@ -126,7 +126,7 @@ Bettany Crane, Aunt Hesper or Rook Varga.
 6. **The goblins' word** (Nettle, a few days on): goblins get the blame for everything; her cousin saw the thief too.
    The second clue.
 7. **The bounty** (Hollis, a few days on): who is it? Name Bettany, Hesper or Rook, or nobody.
-   - Right: the Magpie's taken, and the Guild's foreclosed chests go back to their families. The bounty (a purse),
+   - Right: the Magpie's taken, and the Guild's foreclosed chests go back to their families. The bounty (half a purse),
      Wardens +2, commons +1, Lockless -3; she never comes again.
    - Wrong: an innocent spends the season in the Wardens' cells (never comes again), Wardens -1, commons -1, and the
      Magpie's thank-you note that night: Lockless +1.
@@ -200,8 +200,9 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 1. **The clerk** (Tobias Fenn, the Guild's counting-house): half the chests the Guild forecloses on won't open for any
    Keywright it sells them to. Why? *Seizure isn't a sale* or *ask the Guild*.
 2. **The war chest** (Sir Rowan): the Guild took his family's hall for its tithe and sold its chests; he bought his
-   grandfather's war chest back at the Guild's sale, and gives it to you to open (it's warm: it was always his). A chest
-   given freely; his grandfather's sword is his.
+   grandfather's war chest back at the Guild's sale, and it won't open for their Keywright. He sells it to you (it's
+   warm: it was always his to sell, so it opens for you), priced like any of his chests: the sword is his, for the fee
+   he names, as always.
 3. **The Roll** (Master Quire): the Chest Roll agrees: everything the Guild seized is still in the families' names.
    The Guild's been selling stolen chests for a century, and sending the ones that won't open down through the Gate.
    *Take it to the King* (when you're at the Emporium), *sell your copy to the Guild* (half a purse, Guild +2; Tobias
@@ -212,8 +213,8 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 
 ### The Unlocking (Crownhold)
 
-1. **The brass plate** (Ilse Varrow): Archmage Orme asks a drop of a Keywright's blood on a brass plate, and pays half
-   a purse. *Give it* (Arcanum +1) or *refuse* (Arcanum -1).
+1. **The brass plate** (Ilse Varrow): Archmage Orme asks a drop of a Keywright's blood on a brass plate, and pays a
+   quarter of a purse. *Give it* (Arcanum +1) or *refuse* (Arcanum -1).
 2. **The engine** (Ilse, three days on): Orme has built an engine to copy the mark: any chest would open for anyone,
    and Mara says that's the end of the Locking. *Help her break it* (Arcanum -2; her witchlight at half price, or a
    curio), *tell the Guild* (half a purse, Guild +2, Arcanum -3: Orme's taken away), or *stay out of it*.

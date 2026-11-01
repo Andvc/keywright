@@ -17,7 +17,7 @@ cross against your slip, and now and then something far better than the chest pr
 shop's name (synergies) and its exhibition, which draw more and better customers, and the shop moves inward, from the
 crossroads to Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate. The stall comes with Bram's twenty
 years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due that climbs from 20g to
-55,000g over five weeks (25 days, an hour and a half to two hours of play). Curios from Nim the peddler are the run's
+45,000g over five weeks (25 days, about two hours of play). Curios from Nim the peddler are the run's
 build: each bends a rule of the trade, the ones that share a way of trading (enchantment, sight unseen, haggling, the
 perfect read, false bottoms, wards, and more beside) make each other stronger, and Nim, who notices what you buy,
 brings more of it. Whatever makes ordinary things fetch more puts up what every seller asks as well (the shop's power
@@ -537,7 +537,7 @@ Emporium (`ShopTiers.Customers`), whose every customer is worth a day anywhere e
 | Week | 1 | 2 | 3 | 4 | 5 | then |
 |---|---|---|---|---|---|---|
 | Day | 5 | 10 | 15 | 20 | 25 | |
-| Due | 20g | 60g | 300g | 4,000g | 55,000g (45,000g until 0.28) | x2 a week |
+| Due | 20g | 60g | 300g | 4,000g | 45,000g | x2 a week |
 
 The first three weeks ask little while you learn the stall and move inward (a careful run reaches Thornwick on day 7,
 Crownhold on day 16 and the Royal Emporium on day 18, medians). The fourth asks for a few good days at the capital: a
@@ -634,7 +634,7 @@ Ordinary growth leaves the careful player's margin where it was and the blind bu
 get bigger, not the game easier. The collector's margin climbs as its build comes together: the curve gets steeper.
 (Bracketed: a blind buyer rarely gets that far, under 1% of their chests.)
 
-**Dues against the ceiling.** The dues climb faster than ordinary growth, and the last week's 55,000g is more than the
+**Dues against the ceiling.** The dues climb faster than ordinary growth, and the last week's 45,000g is more than the
 Royal Emporium makes with every upgrade on a careful player's margin: a careful player who buys no curios clears about
 one run in seven, most of those on a Heartsong's luck, against a third for one who builds as Nim's curios come,
 and two to nine in ten once a way of trading has come together (*Curios: builds*).
@@ -1630,7 +1630,7 @@ the unlocked curios), and more ways for a familiar shop to play differently.
 - The shop saves at the start of each day only, and sellers don't remember you.
 - A week at the stall before the first renovation (the careful player moves on day 7): long enough to learn the three
   rules, or too long?
-- The sim's careful player is a perfect listener: real players will clear the debt less often. Is 55,000g in week 5
+- The sim's careful player is a perfect listener: real players will clear the debt less often. Is 45,000g in week 5
   a wall people want to climb again, or a cliff? Bram's word (once a run) and his stash (twice) are the safety nets;
   are they enough for a beginner, and too much for a good player?
 - v21: does Nim's leaning (always something for what you bought last) make a build feel chosen, or handed out? Does
