@@ -198,7 +198,7 @@ public partial class Main : Node2D
         }
         GD.Print($"Keywright seed {_seed}");
 
-        AddChild(new Painter(DrawBackground));
+        AddChild(new Painter(DrawBackground) { ZIndex = -200 });
         _camera = new Camera2D { Position = new Vector2(640, 360) };
         AddChild(_camera);
 
@@ -237,7 +237,8 @@ public partial class Main : Node2D
         _shotsDir = Arg(args, "--shots");
         if (_shotsDir != null) DirAccess.MakeDirRecursiveAbsolute(_shotsDir);
 
-        if (args.Contains("--shell-demo")) ShellDemo();
+        if (args.Contains("--art-review")) ArtReview();
+        else if (args.Contains("--shell-demo")) ShellDemo();
         else if (!direct) ToTitle();
         else if (args.Contains("--opening-demo")) OpeningDemo(args.Contains("--quit-at-end"));
         else if (args.Contains("--vault-demo")) VaultDemo(args.Contains("--quit-at-end"));

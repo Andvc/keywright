@@ -51,6 +51,7 @@ public partial class CounterPhase : Phase
     readonly List<Row> _rows = new();
     readonly Random _rng = new();
     SellerView _seller;
+    ShopView _shop;
     ShakeBox _shake;
     MentorView _mentor;
     NotebookView _notebook;
@@ -103,16 +104,18 @@ public partial class CounterPhase : Phase
         // Valued at what things fetch here: the shop's trades and name, the day.
         _slip = new Appraisal(_visit.Chest.Quality, State.Tier) { Model = State };
         _patience = State.Patience(_visit.Seller);
-        Add(UiKit.MakeShop(State.Tier, 0.92f));
+        _shop = Add(UiKit.MakeShop(State.Tier, 1f, ShopView.CustomerHour(State), State, transition: true));
         BuildShelf();
 
         // Click them for their page in the notebook.
-        _seller = Add(new SellerView(_visit.Seller) { Position = new Vector2(150, 196), Clickable = true });
+        _seller = Add(new SellerView(_visit.Seller) { Clickable = true });
+        _shop.Light(_seller.Figure);
         _seller.Clicked += () => OpenNotebook();
         // Hesk can't lift a chest high enough to drop it, or shake it hard.
         var bounds = State.CanDrop ? DragBounds : new Rect2(DragBounds.Position.X, ChestRest.Y - LiftLimit, DragBounds.Size.X, LiftLimit);
         _shake = Add(new ShakeBox(_visit.Chest, bounds) { Position = ChestRest, MaxLevel = State.CanShakeHardAt(_visit.Seller) ? Core.Shake.Hard : Core.Shake.Firm });
         _shake.View.Lock = _visit.Chest.Lock.Index;
+        _shop.Light(_shake.View, chest: true);
         _shake.Heard += OnHeard;
         _shake.Landed += OnLanded;
         // Once you own the witchlight it's always lit: anything enchanted glows when it makes a sound.
@@ -124,7 +127,7 @@ public partial class CounterPhase : Phase
         if (State.Weighs || _visit.Says == Clue.Pounds) BuildScale();
         _notes = Add(UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(316, 500, 484, 84));
         _notes.ZIndex = 10;
-        _timer = Add(UiKit.MakeLabel("", 32, Palette.Warn, HorizontalAlignment.Center, outline: 6).Place(206, 92, 64, 40));
+        _timer = Add(UiKit.MakeLabel("", 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(230, 222, 64, 32));
         _timer.ZIndex = 10;
         // A rotten chest stands so much shaking, and no more: what's left, above it.
         if (State.ShakeLimit(_visit.Seller) > 0)
@@ -406,26 +409,36 @@ public partial class CounterPhase : Phase
     Control _sellConfirm;
 
     /// <summary>
-    /// Whatever you've kept on display, standing on the shop's shelf (part of the picture from the village shop on), and
+    /// Whatever you've kept on display, standing on the shop's shelf layer, and
     /// any Heartsong, which needs no shelf: it hangs on a cord above it, glowing, at any shop. Hover one for what it does;
     /// click it to sell it (a Heartsong fetches nothing: it goes back to the Locking), after a question.
     /// </summary>
     void BuildShelf()
     {
-        _shelf ??= Add(new Node2D());
+        if (_shelf == null)
+        {
+            _shelf = Add(new Node2D { ZIndex = -65 });
+            _shop.Light(_shelf);
+        }
         foreach (var child in _shelf.GetChildren()) child.QueueFree();
         var songs = State.Display.Where(i => i.IsSong).ToList();
+        float songStep = songs.Count <= 1 ? 0 : Math.Min(72, 448f / (songs.Count - 1));
+        float songBox = songs.Count > 8 ? 56 : 64;
+        float songScale = songs.Count > 8 ? 0.5f : 1f;
         for (int i = 0; i < songs.Count; i++)
         {
             var song = songs[i];
-            var at = new Vector2(360 + i * 72, 100);
+            // All nine fit within the 300-804 shelf span, hanging in front of the frame's awning.
+            var at = new Vector2(330 + i * songStep, 100);
             _shelf.AddChild(new Painter(p =>
             {
-                for (int r = 3; r >= 1; r--) p.DrawCircle(Vector2.Zero, 14 + r * 10, Palette.Of(Rarity.Mythic) with { A = 0.07f });
-            }) { Position = at, Material = Fx.Additive() });
-            _shelf.AddChild(new Painter(p => p.DrawLine(new Vector2(0, -60), new Vector2(0, -28), new Color(0.15f, 0.1f, 0.12f), 2)) { Position = at });
-            _shelf.AddChild(UiKit.MakeItemIcon(song, at, 64));
-            ShelfButton(song, new Rect2(at.X - 32, at.Y - 32, 64, 64), $"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing).");
+                for (int r = 3; r >= 1; r--) p.DrawCircle(Vector2.Zero, (14 + r * 10) * songScale, Palette.Of(Rarity.Mythic) with { A = 0.07f });
+            }) { Position = at, Material = Fx.Additive(), ZIndex = 10 });
+            _shelf.AddChild(new Painter(p => p.DrawLine(new Vector2(0, -60), new Vector2(0, -28 * songScale), new Color(0.15f, 0.1f, 0.12f), 2)) { Position = at, ZIndex = 10 });
+            var hanging = UiKit.MakeItemIcon(song, at, songBox);
+            hanging.ZIndex = 10;
+            _shelf.AddChild(hanging);
+            ShelfButton(song, new Rect2(at.X - songBox / 2, at.Y - songBox / 2, songBox, songBox), $"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing).");
         }
         if (!State.DisplayOpen) return;
         const float y = 196, x0 = 300, w = 504;
@@ -436,7 +449,6 @@ public partial class CounterPhase : Phase
             float slot = w / Math.Max(6, shown.Count), x = x0 + slot * (i + 0.5f);
             // Things stand at 2x, as on the table, while there's room for them.
             var icon = UiKit.MakeItemIcon(item, new Vector2(x, y), Math.Min(64, slot), standing: true);
-            icon.Modulate = new Color(0.85f, 0.85f, 0.9f);
             _shelf.AddChild(icon);
             ShelfButton(item, new Rect2(x - Math.Min(32, slot / 2), y - 62, Math.Min(64, slot), 64),
                 $"{item.Name}: {item.Prestige} exhibition points{(item.Magic ? " (double: enchanted)" : "")}. Click to sell it for {State.SaleValue(item)}g.");
@@ -552,8 +564,8 @@ public partial class CounterPhase : Phase
     void BuildPanel()
     {
         var panel = Add(new Node2D { ZIndex = 10 });
-        panel.AddChild(UiKit.MakePanel().Place(820, 66, 432, 640));
-        panel.AddChild(Header("YOUR APPRAISAL", PanelX, 80));
+        panel.AddChild(new Sprite2D { Texture = GD.Load<Texture2D>($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
+        panel.AddChild(UiKit.MakeLabel("YOUR APPRAISAL", 16, Palette.InkGold).Place(PanelX, 80, 220, 20));
         _notebookButton = UiKit.MakeButton("Notebook [N]", Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
         panel.AddChild(_notebookButton);
         var seller = _visit.Seller;
@@ -563,7 +575,7 @@ public partial class CounterPhase : Phase
             : $"Values: as good as a {(_visit.Chest.Gilded ? "gilded" : Categories.ChestSkin(_visit.Chest.Quality))} chest promises.";
         // A line each; how they priced it takes both when it's long (the chest's colour is under it anyway).
         bool longWho = UiKit.Font.GetStringSize(who, HorizontalAlignment.Left, -1, 16).X > PanelW;
-        _ticked = UiKit.MakeLabel(longWho ? who : $"{who}\n{values}", 16, Palette.Muted).Wrapped().Place(PanelX, 106, PanelW, 40);
+        _ticked = UiKit.MakeLabel(longWho ? who : $"{who}\n{values}", 16, Palette.InkMuted).Wrapped().Place(PanelX, 106, PanelW, 40);
         panel.AddChild(_ticked);
         _panel = panel;
 
@@ -608,12 +620,12 @@ public partial class CounterPhase : Phase
             }
         }
 
-        panel.AddChild(UiKit.MakeLabel("As good as promised, it's worth", 16, Palette.Muted).Place(PanelX, 482, 280, 20));
-        _worth = UiKit.MakeLabel("", 24, Palette.Text, HorizontalAlignment.Right, outline: 4).Place(PanelX + 260, 476, 124, 30);
+        panel.AddChild(UiKit.MakeLabel("As good as promised, it's worth", 16, Palette.InkMuted).Place(PanelX, 482, 280, 20));
+        _worth = UiKit.MakeLabel("", 24, Palette.Ink, HorizontalAlignment.Right).Place(PanelX + 260, 476, 124, 30);
         panel.AddChild(_worth);
-        _askLabel = UiKit.MakeLabel("", 16, Palette.Muted).Place(PanelX, 510, 280, 20);
+        _askLabel = UiKit.MakeLabel("", 16, Palette.InkMuted).Place(PanelX, 510, 280, 20);
         panel.AddChild(_askLabel);
-        _ask = UiKit.MakeLabel("", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(PanelX + 260, 504, 124, 30);
+        _ask = UiKit.MakeLabel("", 24, Palette.InkGold, HorizontalAlignment.Right).Place(PanelX + 260, 504, 124, 30);
         panel.AddChild(_ask);
 
         // The odds the deal pays off, if the slip is right: no sums to do, and it's only as good as your listening.
@@ -633,7 +645,7 @@ public partial class CounterPhase : Phase
         panel.AddChild(_offer);
         panel.AddChild(_buy);
         panel.AddChild(_pass);
-        _footer = UiKit.MakeLabel("", 16, Palette.Muted).Wrapped().Place(PanelX, 648, PanelW, 44);
+        _footer = UiKit.MakeLabel("", 16, Palette.InkMuted).Wrapped().Place(PanelX, 648, PanelW, 44);
         panel.AddChild(_footer);
 
         int guess = Math.Max(1, _visit.Ask > 0 ? Money.Round(_visit.Ask * 0.55f) : Money.Round(_slip.Worth * 0.5f));
@@ -649,10 +661,11 @@ public partial class CounterPhase : Phase
     {
         var row = new Row { Category = category };
         var button = UiKit.MakeButton("", Palette.PanelBorder, 16, () => Cycle(category)).Place(PanelX, y, PanelW, RowH);
+        UiKit.StylePaperButton(button);
         row.Button = button;
         row.Box = new Painter(p => DrawBox(p, CountOf(category), category is Category k && _slip.Magic(k))) { Position = new Vector2(10, 6) };
         button.AddChild(row.Box);
-        row.Count = UiKit.MakeLabel("", 16, Palette.Bg, HorizontalAlignment.Center).Place(10, 8, 24, 20);
+        row.Count = UiKit.MakeLabel("", 16, Palette.Paper, HorizontalAlignment.Center).Place(10, 8, 24, 20);
         button.AddChild(row.Count);
         button.AddChild(category is Category kind ? UiKit.MakeKindIcon(kind, new Vector2(56, RowH / 2)) : UiKit.MakeKindIcon("hidden", new Vector2(56, RowH / 2)));
         // A commission wants this kind: a gold pennant on its icon.
@@ -665,12 +678,12 @@ public partial class CounterPhase : Phase
             }));
             button.TooltipText = "A commission wants this kind of thing (see the board on the left).";
         }
-        button.AddChild(UiKit.MakeLabel(name, 16, Palette.Text).Place(80, 8, 120, 20));
+        button.AddChild(UiKit.MakeLabel(name, 16, category == Category.Heartsong ? Palette.OnPaper(Rarity.Mythic) : Palette.Ink).Place(80, 8, 120, 20));
         // Just a reminder of each kind's sound: the slip doesn't keep track of what you've heard.
-        button.AddChild(UiKit.MakeLabel(word, 16, Palette.Muted.Darkened(0.2f)).Place(192, 8, 60, 20));
+        button.AddChild(UiKit.MakeLabel(word, 16, Palette.InkMuted).Place(212, 8, 68, 20));
         if (category is Category magicKind && magicKind != Category.Heartsong && _lamp)
         {
-            row.Star = UiKit.MakeLabel("*", 32, Palette.Muted.Darkened(0.2f), HorizontalAlignment.Center).Place(288, -3, 28, 40);
+            row.Star = UiKit.MakeLabel("*", 32, Palette.InkMuted, HorizontalAlignment.Center).Place(288, -3, 28, 40);
             row.Star.MouseFilter = Control.MouseFilterEnum.Stop;
             row.Star.TooltipText = "Mark one of them enchanted";
             row.Star.GuiInput += e =>
@@ -679,7 +692,7 @@ public partial class CounterPhase : Phase
             };
             button.AddChild(row.Star);
         }
-        row.Value = UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(PanelW - 70, 8, 60, 20);
+        row.Value = UiKit.MakeLabel("", 16, Palette.InkGold, HorizontalAlignment.Right).Place(PanelW - 70, 8, 60, 20);
         button.AddChild(row.Value);
         _rows.Add(row);
         return button;
@@ -689,8 +702,8 @@ public partial class CounterPhase : Phase
 
     static void DrawBox(Painter p, int count, bool magic)
     {
-        var color = count == 0 ? Palette.Muted.Darkened(0.3f) : magic ? Palette.Magic : Palette.Gold;
-        p.DrawRect(new Rect2(0, 0, 24, 24), new Color(0, 0, 0, 0.5f));
+        var color = count == 0 ? Palette.InkMuted : magic ? Palette.InkMagic : Palette.InkGold;
+        p.DrawRect(new Rect2(0, 0, 24, 24), Palette.Paper);
         if (count > 0) p.DrawRect(new Rect2(3, 3, 18, 18), color);
         p.DrawRect(new Rect2(0, 0, 24, 24), color, false, 3);
     }
@@ -698,10 +711,10 @@ public partial class CounterPhase : Phase
     static Button ToolButton(string icon, Action use)
     {
         var button = UiKit.MakeButton("", Palette.Magic.Darkened(0.45f), 16, use);
-        button.Icon = GD.Load<Texture2D>($"res://assets/ui/icons/{icon}.png");
-        button.ExpandIcon = false;
-        // The upgrade icon at its art size (half the 2x file), so its pixels stay square.
-        button.AddThemeConstantOverride("icon_max_width", 24);
+        // A child sprite keeps the 48px source from increasing the button's minimum height over the totals.
+        var picture = UiKit.MakeSprite($"res://assets/ui/icons/{icon}.png", new Vector2(20, 18), 1);
+        picture.Scale = Vector2.One * 0.5f;
+        button.AddChild(picture);
         button.ClipText = true;
         return button;
     }
@@ -717,12 +730,12 @@ public partial class CounterPhase : Phase
             bool magic = row.Category is Category k && _slip.Magic(k);
             // Marked: what the slip adds up for this kind. Unmarked: what one would be worth. Both as good as promised.
             row.Value.Text = row.Category is Category kind ? $"{(count > 0 ? _slip.ValueOf(kind) : _slip.OneValue(kind))}g" : $"{_slip.HiddenValue}g";
-            row.Value.AddThemeColorOverride("font_color", count == 0 ? Palette.Muted.Darkened(0.2f) : magic ? Palette.Magic : Palette.Gold);
+            row.Value.AddThemeColorOverride("font_color", count == 0 ? Palette.InkMuted : magic ? Palette.InkMagic : Palette.InkGold);
             row.Count.Text = count >= 2 ? count.ToString() : "";
-            if (row.Star != null) row.Star.AddThemeColorOverride("font_color", magic ? Palette.Magic : Palette.Muted.Darkened(0.2f));
+            if (row.Star != null) row.Star.AddThemeColorOverride("font_color", magic ? Palette.InkMagic : Palette.InkMuted);
             row.Box.QueueRedraw();
             row.Button.Disabled = !open;
-            row.Button.Modulate = count == 0 ? new Color(1, 1, 1, 0.75f) : Colors.White;
+            row.Button.Modulate = Colors.White;
         }
 
         int worth = _slip.Worth;
@@ -851,7 +864,6 @@ public partial class CounterPhase : Phase
         if (_songRow != null) return;
         _ticked.Visible = false;
         _songRow = MakeRow(Category.Heartsong, "Heartsong", song.Word, 106);
-        _songRow.SelfModulate = Palette.Of(Rarity.Mythic);
         _panel.AddChild(_songRow);
         bool known = State.Songbook.Contains(song.Song);
         Note(known ? $"That song... you know it. {song.Name}!" : "A sound like nothing in any chest. A Heartsong!");

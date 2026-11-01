@@ -32,7 +32,7 @@ public partial class DayEndPhase : Phase
     {
         bool shopWasOpen = State.UpgradesOpen;
         State.EndDay();
-        Add(UiKit.MakeShop(State.Tier, 0.38f));
+        Add(UiKit.MakeShop(State.Tier, 0.7f, ShopHour.Evening, State));
         Game.Hud.SetDay(State.Day, State.Tier);
         Game.Hud.SetGold(State.Gold);
 

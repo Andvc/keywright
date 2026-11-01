@@ -24,6 +24,23 @@ public static class UiKit
     /// <summary>Kenney Mini is drawn on an 8px grid; other sizes render with uneven pixels.</summary>
     public static int SnapFont(int size) => Math.Max(16, (int)MathF.Round(size / 8f) * 8);
 
+    /// <summary>Low-contrast row backgrounds let the appraisal's dark ink read as printing on paper.</summary>
+    public static void StylePaperButton(Button button)
+    {
+        foreach (string state in new[] { "normal", "hover", "pressed", "disabled", "focus" })
+        {
+            var box = new StyleBoxFlat
+            {
+                BgColor = state == "hover" ? new Color(0.40f, 0.26f, 0.12f, 0.12f)
+                    : state == "pressed" ? new Color(0.40f, 0.26f, 0.12f, 0.2f) : new Color(0.40f, 0.26f, 0.12f, 0.04f),
+                BorderColor = Palette.InkGold, AntiAliasing = false,
+            };
+            if (state == "focus") box.SetBorderWidthAll(2);
+            button.AddThemeStyleboxOverride(state, box);
+        }
+        button.AddThemeColorOverride("font_color", Palette.Ink);
+    }
+
     /// <summary>The text, or as much of it as fits in this width with "..." after it (Kenney Mini has no ellipsis).</summary>
     public static string Fit(string text, float width, int size = 16)
     {
@@ -279,12 +296,11 @@ public static class UiKit
     }
 
     /// <summary>
-    /// The shop as it looks at this tier, counter and all: the roadside stall, the village shop, the town shop or the
-    /// Emporium (640x360 pictures from tools/import_art.py, at 2x). Dimmed behind screens where the UI and effects
-    /// should stand out. The counter's top edge is at y 476; the display shelf (from the village shop) at y 196.
+    /// The shop's native 320x180 layers at 4x, with a sky and lighting for the hour and props for purchased tools.
+    /// The counter's top edge is at y 476 and the display shelf's board is at y 196.
     /// </summary>
-    public static Node2D MakeShop(int tier, float brightness = 1f) =>
-        MakeBackdrop($"res://assets/backgrounds/shop{Math.Clamp(tier, 1, Core.ShopTiers.Max)}.png", brightness);
+    public static ShopView MakeShop(int tier, float brightness = 1f, ShopHour hour = ShopHour.Midday,
+        Core.GameState state = null, bool transition = false) => new(tier, brightness, hour, state, transition);
 
     /// <summary>A 640x360 picture filling the screen at 2x, dimmed to <paramref name="brightness"/>, with a vignette.</summary>
     public static Node2D MakeBackdrop(string path, float brightness = 1f)

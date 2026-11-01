@@ -3,7 +3,8 @@
 > **0.25:** round 1's chest was retired: the chest and its locks are drawn in code now (`tools/custom_art.py`), so
 > its files, its review sheets and `_workflow/finalize_chests.py` were removed (git has them), with round 1's anchors
 > and its counter mock-ups. Round 2 (`art/README.md`) builds the shop scene from layers. The current direction is
-> C2 at 4x, with detail and **no outlines**. The latest delivery is batch 10 in the Round 2 section below.
+> C2 at 4x, with detail and **no outlines**. Batches 9s-15 and game integration are complete. All 267 assets pass;
+> see the [in-game review guide](_review/round2_integration_README.md). Nothing remains in this round's scope.
 
 ## Historical round-1 delivery
 
@@ -861,4 +862,44 @@ All native results and their actual 2x presentation were visually reviewed. The 
 four hours. All 264 non-batch outputs and checks are unchanged. Selected small source WebPs are committed;
 full original and rejected PNGs remain in the local archive. Model identity is not exposed by the image tool.
 See [the review guide](_review/round2_batch15_README.md) and
-[complete provenance](_workflow/round2_batch15.json). Finish the authorized game integration next.
+[complete provenance](_workflow/round2_batch15.json). The final integration follows below.
+
+### Game integration: complete, 2026-11-01
+
+The owner's request to finish all remaining work is fulfilled. All 242 redraws are imported into `assets/` and
+used by the game. The 25 retained assets stay as specified, and the chest remains the 0.25 code-drawn chest.
+The original style study remains unchanged. No additional art was generated for this integration.
+
+The importer preserves native scene layers, creates the lanterns' unlit frames and derives 38 head/shoulder crops
+from the full figures. `ShopView` stacks the world at 4x and crossfades the sky, tint and lantern lighting by customer
+thirds; the Guild is night and Nim's visit is morning. Sellers stand behind the counter, short visitors are raised,
+and Vexis stands on the counter. Story scenes use full figures; the notebook, queue and Bram's tips use head crops.
+The paper uses dark ink, purchased tools occupy the two prop groups, and all nine Heartsongs fit above the shelf.
+When all nine are displayed their sprites use native 1x pixels so the row fits; other item displays keep integer
+scales, usually 2x. The world remains 4x. The Guild track and key progress fit beside Vane.
+
+Verification:
+
+- `python3 art/tools/validate.py --sheets --strict`: **267 OK, 0 failed, 0 missing, 0 warnings** (exit 0 after batch 15;
+  no delivered art changed during integration).
+- [`round2_integration_check.py`](_workflow/round2_integration_check.py): **242 redraws, 364 exact RGBA runtime
+  comparisons, 38 figure metadata entries**, all pass. This checks native copies, nearest-neighbour scales,
+  trimmed items, head crops and unlit lanterns against the delivered sources.
+- .NET build: **0 warnings, 0 errors**. Godot headless import has no errors or warnings.
+- A short controlled visual fixture captures the four shops, paper, tool props, all nine Heartsongs, Nim, Vane,
+  partial key progress, story figures, notebook heads, all three lock faces and upgrade cards. All 12 final captures
+  were visually reviewed. The 38-head sheet was also reviewed. No saved game or multi-day simulation was used.
+- Windows release export completed with no logged errors or warnings. Both `Keywright.exe` and
+  `data_Keywright_windows_x86_64/Keywright.dll` exist. The exported program completed the same 12-capture fixture
+  without stderr; its crowded Emporium screen was visually checked. Figure metadata is explicitly included in
+  `export_presets.cfg`.
+
+The [review guide](_review/round2_integration_README.md) links the actual game captures and gives replay commands.
+The [asset audit](_workflow/round2_integration_assets.json) records every runtime destination; the
+[verification record](_workflow/round2_integration_verification.json) records log, code and screenshot hashes.
+Full logs, earlier review iterations and the local Windows build remain outside the checkout in
+`../records/integration_c2_no_outline/`. Tests used isolated `APPDATA` and `LOCALAPPDATA`; the installed Chinese
+games, version records and player saves were not touched. No gameplay or economy rules changed.
+
+**Remaining: none.** Push the final integration on `art/round2` and stop. There is no further art batch or direction
+checkpoint under this request.

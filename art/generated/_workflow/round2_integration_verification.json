@@ -1,0 +1,208 @@
+{
+  "recorded_utc": "2026-11-01T04:13:43.414132+00:00",
+  "art_delivery_commit": "ae0150c86aaa38fd103f705e874e51f38125ef1e",
+  "direction": "C2 / 4x / meaningful detail / no outlines",
+  "art_validation": {
+    "ok": 267,
+    "failed": 0,
+    "missing": 0,
+    "warnings": 0
+  },
+  "runtime_import": {
+    "redraws": 242,
+    "exact_rgba_checks": 364,
+    "figure_layouts": 38,
+    "failures": 0
+  },
+  "build": {
+    "errors": 0,
+    "warnings": 0,
+    "sdk": ".NET 8",
+    "godot": "4.7.2 stable .NET"
+  },
+  "runtime": {
+    "project_captures": 12,
+    "export_captures": 12,
+    "stderr_bytes": 0,
+    "all_project_captures_visually_reviewed": true,
+    "head_crop_sheet_visually_reviewed": true,
+    "export_captures_visually_reviewed": [
+      "art_04_emporium_imp_tools.png"
+    ],
+    "fixture": "controlled in-memory states; no saves or multi-day simulation",
+    "userdata": "isolated APPDATA and LOCALAPPDATA"
+  },
+  "code": [
+    {
+      "path": "art/generated/_workflow/round2_integration_check.py",
+      "sha256_lf": "fee8e7fada138431df7abfed84352cc102d602f65b0d8496b9d25eb544865691"
+    },
+    {
+      "path": "export_presets.cfg",
+      "sha256_lf": "6108fd037e90ad52b7fe5b1907d88a836c3a7b6847821d721920ab82f237cc33"
+    },
+    {
+      "path": "scripts/Debug/ArtReview.cs",
+      "sha256_lf": "5b3ed0cb42aecc2617f9d505f4681247aac90fb3dec205a75a32cfe713ea5272"
+    },
+    {
+      "path": "scripts/Main.cs",
+      "sha256_lf": "53861b1c0d3f8d9d77b11c7e19c84bf241d147ed63501742bc2a0ed71514f06e"
+    },
+    {
+      "path": "scripts/Phases/CounterPhase.cs",
+      "sha256_lf": "6358c37e31e676a41f5c941b6520101224918cd3997bdd63ed0ae07db73a2886"
+    },
+    {
+      "path": "scripts/Phases/DayEndPhase.cs",
+      "sha256_lf": "e2f560919b85b68cefc33aef2a98b3ce60dd39c09495845742c7b70ca72a32b5"
+    },
+    {
+      "path": "scripts/Phases/DuesPhase.cs",
+      "sha256_lf": "e7c48cd9d2405efd09917dd037148324ed5820ad979d0556e24370001e75d4a5"
+    },
+    {
+      "path": "scripts/Phases/LockpickPhase.cs",
+      "sha256_lf": "fc2f296d647d028e0b5ebff6da22953b527a24c59292d005fdfe6e0aea565301"
+    },
+    {
+      "path": "scripts/Phases/OpeningPhase.cs",
+      "sha256_lf": "909ee826d64ec866df7077a5869dee74928289d1c2976712bc8daa451cccbb09"
+    },
+    {
+      "path": "scripts/Phases/PeddlerPhase.cs",
+      "sha256_lf": "6830644bd4e3268ad70756f001a3ada1a8751151138e75415211545e54490200"
+    },
+    {
+      "path": "scripts/Phases/RunEndPhase.cs",
+      "sha256_lf": "78b1269086931b4f78ed1960ff76f7c32b42e1da16726f4ac071f7ef1f036960"
+    },
+    {
+      "path": "scripts/Phases/ScenePhase.cs",
+      "sha256_lf": "d7a6499299193d7e96ef66c4d38b915a200dc7557e2f9600e0a05e70c91a0624"
+    },
+    {
+      "path": "scripts/Ui/Palette.cs",
+      "sha256_lf": "f5214a53f262ae35373b45e1226779f0d4859314474c63e8acb257457a7dd1b4"
+    },
+    {
+      "path": "scripts/Ui/SellerView.cs",
+      "sha256_lf": "ed63955016fd43333b54a5724611e9126dd4ecc8a4ce2174f8fe9ae186ee969e"
+    },
+    {
+      "path": "scripts/Ui/ShopView.cs",
+      "sha256_lf": "5efba5ad871964cbee0b77feabcd02c21aaed397a7c661f48614002a31aeba04"
+    },
+    {
+      "path": "scripts/Ui/UiKit.cs",
+      "sha256_lf": "92234b9060d9a7de50bdc0535cb72d5df48d6aa00077077e3091a94bf865869b"
+    },
+    {
+      "path": "tools/import_art.py",
+      "sha256_lf": "2c22263c0789ebe76811c819e2bff700c7d4eb074b4c653228ea43790e1ac807"
+    }
+  ],
+  "logs": [
+    {
+      "path": "../records/integration_c2_no_outline/build-final.log",
+      "bytes": 223,
+      "sha256": "13608a897cf08808875e0e88eeb2a3b0d61f24c48617d5155cd423f9ab82f645"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/import-final.log",
+      "bytes": 52909,
+      "sha256": "c301f6ab3ce31d5afa721047138d2cbfd08abf32ed3dcc6ea7476cfbfa891738"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/export-final.log",
+      "bytes": 134549,
+      "sha256": "1db64de07aaddf3be473b3c7628ed6aa44f231f40991e4f29a0733b1236dfa32"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/final02/stdout.log",
+      "bytes": 309,
+      "sha256": "7928fbd3e81f0efa8866bef385398b1a4289f5642aa1c3a8443a016e2ef22ede"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/final02/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/export-review/stdout.log",
+      "bytes": 309,
+      "sha256": "e1ebc0546a60f4c83d8d799e60de60f8fdbc651bbd150cca6a066e07f626c33d"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/export-review/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "art/generated/_review/round2_integration/art_01_stall_morning_short.png",
+      "sha256": "4c0850ae2fab275d06393cfb5c0ddf40f10a747510589a582a1758f7578125c8"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_02_thornwick_midday.png",
+      "sha256": "5ebdb942f8f26801de4df74ad810a8efcdd103e887c5201f0de170a4e6663561"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_03_crownhold_evening_tall.png",
+      "sha256": "dca627672aecb3befe2295dfe6894e01c4ae073efbc72ac9c0661627c57500f0"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_04_emporium_imp_tools.png",
+      "sha256": "9206ff2588bb208389747dd6bf441010db7dce3f7e9d50f58b8677f5f5c97a9f"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_05_nim_morning.png",
+      "sha256": "7f0cdb2561d6ad8cdbffb94d708b780fa3758d695b5047a96cf31ec699be0579"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_06_vane_night.png",
+      "sha256": "70c5903b1c16102470040718e57b6455426e6043085b9784af3752f7b6030139"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_07_story_figures.png",
+      "sha256": "f7b08845b21ee82df141a04e41e2ab72cd97e473bd2ae166d86997c81ea74acc"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_08_notebook_heads.png",
+      "sha256": "d9d57a317bc119b5448bb78d7d82132db3ba76d3ee5236a28214a180520f094a"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_09_lock_1.png",
+      "sha256": "ac18e692b33f711a856f9777a42d43f8a2003ff4f7dad319d9e555019d1f7a22"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_10_lock_2.png",
+      "sha256": "244b8974fb4b69b81bdbf178da64592bdca94ed2c3cc52f17b952c73a68e8bc5"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_11_lock_3.png",
+      "sha256": "5aeb550a60692d48863f815f3de782d004a0986c9d7c1449ebe74e27289ac6f9"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/art_12_upgrade_cards.png",
+      "sha256": "b98005b22e742934a90d024b4e55c11a267da022c9fe23a0d1cdfa1f3417e880"
+    },
+    {
+      "path": "art/generated/_review/round2_integration/heads.png",
+      "sha256": "b322f33ca936e816f11713881722ccc761e40eba2fc1ea53e35cd8741c4d4306"
+    }
+  ],
+  "export": [
+    {
+      "path": "../records/integration_c2_no_outline/windows/Keywright.exe",
+      "bytes": 111234152,
+      "sha256": "e6d6bd379dd63b91df18b1a8eb40dd2645c03cab9ff6a7dfb4523e2658745719"
+    },
+    {
+      "path": "../records/integration_c2_no_outline/windows/data_Keywright_windows_x86_64/Keywright.dll",
+      "bytes": 1100800,
+      "sha256": "a62c4e940b7624e38d118ec8368956c4f6d4fb15d7591825b5d86ff7d282ccdc"
+    }
+  ]
+}

@@ -16,6 +16,22 @@ public static class Palette
     public static readonly Color Bad = new("#ff6b6b");
     public static readonly Color Warn = new("#ffa94d");
     public static readonly Color Magic = new("#c792ff");
+    public static readonly Color Paper = new("#f7ebc6");
+    public static readonly Color Ink = new("#3b3150");
+    public static readonly Color InkMuted = new("#6e3d22");
+    public static readonly Color InkGold = new("#773f00");
+    public static readonly Color InkMagic = new("#56309b");
+
+    /// <summary>Rarity ink with enough contrast on the appraisal paper.</summary>
+    public static Color OnPaper(Rarity rarity) => rarity switch
+    {
+        Rarity.Common => Ink,
+        Rarity.Uncommon => new Color("#23583a"),
+        Rarity.Rare => new Color("#184475"),
+        Rarity.Epic => InkMagic,
+        Rarity.Mythic => new Color("#9c1839"),
+        _ => InkGold,
+    };
 
     /// <summary>The words that pop out of a shaken chest.</summary>
     public static readonly Color Word = new("#fff4dc");

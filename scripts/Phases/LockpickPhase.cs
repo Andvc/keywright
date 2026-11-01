@@ -47,7 +47,7 @@ public partial class LockpickPhase : Phase
         PlaceZone();
 
         var metal = Palette.Lock(_lock) ?? Palette.MetalLight;
-        Add(UiKit.MakeShop(State.Tier, 0.38f));
+        Add(UiKit.MakeShop(State.Tier, 0.5f, ShopView.LastHour, State));
         Add(UiKit.MakeLabel("PICK THE LOCK", 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 64, 1280, 40));
         Add(UiKit.MakeLabel($"{_lock.Name}: {_lock.Pins} pins", 16, metal, HorizontalAlignment.Center, outline: 4).Place(0, 102, 1280, 24));
 

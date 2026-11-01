@@ -12,7 +12,7 @@ what you've bought and full-length figures for everyone who comes to the counter
 [`manifest.json`](manifest.json) (every asset, its spec and its prompt). [`INVENTORY.md`](INVENTORY.md) is the same
 list as tables.
 
-## For the owner: remaining round 2 and integration authorized
+## For the owner: round 2 and game integration complete
 
 The style study is complete. The owner chose **C2 at 4x, with detail allowed** on 2026-10-30, then corrected it to
 **no outlines** on 2026-10-31 and requested rollback of the outlined batch.
@@ -27,7 +27,7 @@ scene assets, with zero validation errors or warnings.** Review the [four shops]
 [props](generated/_review/round2_batch10_props.png), [story scenes](generated/_review/round2_batch10_stories.png)
 and [batch-10 guide](generated/_review/round2_batch10_README.md).
 The owner then approved this work and requested completion of everything: **"大致ok接着完成所有内容"**.
-Continue batches 11-15 and the game integration documented below. Batch 11 now delivers all 37 remaining
+Batches 11-15 and the game integration documented below are complete. Batch 11 delivers all 37 remaining
 figures, including the identity reveals, with zero errors or warnings; see its
 [review guide](generated/_review/round2_batch11_README.md). Batch 12 now delivers all 40 remaining inventory
 objects and Heartsongs, with zero errors or warnings; see the [object review guide](generated/_review/round2_batch12_README.md).
@@ -35,7 +35,11 @@ Batch 13 now delivers all 78 remaining curios, with zero errors or warnings; see
 [curio review guide](generated/_review/round2_batch13_README.md). Batch 14 delivers all 39 icons, emblem and key assets;
 see the [icon and key review guide](generated/_review/round2_batch14_README.md).
 Batch 15 delivers all three [lock faces](generated/_review/round2_batch15_README.md).
-All 267 manifest assets now pass strict validation with zero warnings; finish the authorized game integration next.
+All 267 manifest assets pass strict validation with zero warnings. All 242 redraws are imported into the game;
+364 runtime image comparisons pass, including the 38 figures and their head crops. The C# build, Godot import,
+12-screen visual review and Windows export/launch are complete. Start with the
+[in-game review guide](generated/_review/round2_integration_README.md).
+Nothing remains in the authorized round-2 scope; stop here.
 The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here
@@ -136,8 +140,7 @@ frames, colour caps and quiet limits, and `scene.py` for the scene's layout) and
 **Drop-in as soon as they land** (same paths and sizes as round 1's): things, Heartsongs, curios, upgrade and kind icons,
 the Guild's emblem, the Aldric Key, lock faces and story scenes (320x180: the importer doubles them).
 
-**The next code step, once the scene's layers and the figures are delivered** (until then the game keeps round 1's
-shop pictures and portraits):
+**Implemented in the final integration** (the game now uses the round-2 layers and figures):
 
 1. The importer builds the new folders into `assets/` (`sky`, `place`, `frame`, `shelf`, `counter`, `sheet`, `props`,
    `figures`), the lanterns' unlit frame (the glass darkened, as `validate.py`'s `_unlit` does), and each figure's face

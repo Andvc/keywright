@@ -85,4 +85,7 @@ See the [icon and key review guide](../generated/_review/round2_batch14_README.m
 Batch 15 delivers all three lock faces, with zero errors or warnings. See the
 [lock review guide](../generated/_review/round2_batch15_README.md).
 All 242 redraws are complete; all 267 manifest assets pass strict validation.
-Finish game integration under the existing authorization.
+Game integration is complete on 2026-11-01: all 242 redraws reach their runtime paths, including the layered
+shops, full figures and 38 head crops. The build, import, visual review and Windows export/launch pass.
+See the [in-game review guide](../generated/_review/round2_integration_README.md).
+The authorized round-2 work is complete; stop here.

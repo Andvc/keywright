@@ -35,9 +35,10 @@ public partial class PeddlerPhase : Phase
 
     public override void _Ready()
     {
-        Add(UiKit.MakeShop(State.Tier, 0.6f));
+        var shop = Add(UiKit.MakeShop(State.Tier, 1f, ShopHour.Morning, State));
         var nim = new SellerDef { Key = Story.Nim, Name = Peddler.Name };
-        _nim = Add(new SellerView(nim) { Position = new Vector2(190, 196) });
+        _nim = Add(new SellerView(nim));
+        shop.Light(_nim.Figure);
         _nim.Enter();
         _nim.Say(Peddler.Greetings[(State.Week - 2 + Peddler.Greetings.Length) % Peddler.Greetings.Length]);
         Sfx.PlayGroup("door_open", 1.2f, -6);

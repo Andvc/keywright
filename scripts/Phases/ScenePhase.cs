@@ -14,8 +14,8 @@ namespace Keywright.Phases;
 /// </summary>
 public partial class ScenePhase : Phase
 {
-    const int FaceScale = 3;
-    static readonly Vector2 Left = new(250, 300), Right = new(1030, 300);
+    const int FaceScale = 4;
+    static readonly Vector2 Left = new(250, 688), Right = new(1030, 688);
 
     /// <summary>A face in the scene: who it shows now (Mara takes the Hooded Woman's place when she lowers her hood).</summary>
     sealed class Face
@@ -55,7 +55,7 @@ public partial class ScenePhase : Phase
 
     public override void _Ready()
     {
-        Add(_backdrop == null ? UiKit.MakeShop(State.Tier, 0.3f) : UiKit.MakeBackdrop($"res://assets/backgrounds/scene_{_backdrop}.png", 0.6f));
+        Add(_backdrop == null ? UiKit.MakeShop(State.Tier, 0.65f, ShopView.LastHour, State) : UiKit.MakeBackdrop($"res://assets/backgrounds/scene_{_backdrop}.png", 0.8f));
         if (_title != null)
             Add(UiKit.MakeLabel(_title, 32, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 72, 1280, 40));
 
@@ -86,10 +86,10 @@ public partial class ScenePhase : Phase
 
     static Face MakeFace(string key, Vector2 at)
     {
-        var face = new Face { Root = new Node2D { Position = at }, Portrait = new Sprite2D { Scale = Vector2.One * FaceScale } };
-        face.Root.AddChild(UiKit.MakePanel(Palette.PanelBorder).Place(-128, -128, 256, 256));
+        var face = new Face { Root = new Node2D { Position = at }, Portrait = new Sprite2D
+            { Scale = Vector2.One * FaceScale, Centered = false, Position = new Vector2(-192, -636), TextureFilter = CanvasItem.TextureFilterEnum.Nearest } };
         face.Root.AddChild(face.Portrait);
-        face.Name = UiKit.MakeLabel("", 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-200, 134, 400, 30);
+        face.Name = UiKit.MakeLabel("", 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-200, -210, 400, 30);
         face.Root.AddChild(face.Name);
         Show(face, key);
         return face;
@@ -98,7 +98,7 @@ public partial class ScenePhase : Phase
     static void Show(Face face, string key)
     {
         face.Who = key;
-        face.Portrait.Texture = GD.Load<Texture2D>($"res://assets/sprites/sellers/{key}.png");
+        face.Portrait.Texture = GD.Load<Texture2D>($"res://assets/figures/{key}.png");
         face.Name.Text = Story.Name(key);
     }
 

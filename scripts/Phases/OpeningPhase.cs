@@ -61,7 +61,7 @@ public partial class OpeningPhase : Phase
         _report = _purchase.Slip.Check(_purchase.Chest);
         _colour = _purchase.Chest.Quality;
 
-        Add(UiKit.MakeShop(State.Tier, 0.42f));
+        Add(UiKit.MakeShop(State.Tier, 0.6f, ShopView.LastHour, State));
         _rays = Add(new Painter(DrawRays) { Position = SeamPos, Material = Fx.Additive() });
         // The Crown Chest is King Aldric's own.
         string skin = _purchase.Visit.Seller == Story.VaultSeller ? "crown" : _purchase.Chest.Skin;

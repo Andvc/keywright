@@ -32,10 +32,10 @@ public partial class DuesPhase : Phase
 
     public override void _Ready()
     {
-        Add(UiKit.MakeShop(State.Tier, 0.3f));
-        Add(new Painter(p => p.DrawRect(new Rect2(0, 0, 1280, 720), new Color(0.05f, 0.05f, 0.1f, 0.35f))));
-        Add(UiKit.MakeLabel($"THE GUILD'S DUE: WEEK {State.Week}", 32, Palette.Text, HorizontalAlignment.Center, outline: 6).Place(0, 62, 1280, 40));
-        _vane = Add(new SellerView(new SellerDef { Key = Story.Vane, Name = Guild.Collector }) { Position = new Vector2(220, 300) });
+        var shop = Add(UiKit.MakeShop(State.Tier, 1f, ShopHour.Night, State));
+        Add(UiKit.MakeLabel($"THE GUILD'S DUE: WEEK {State.Week}", 32, Palette.Text, HorizontalAlignment.Center, outline: 6).Place(PanelX, 62, PanelW, 40));
+        _vane = Add(new SellerView(new SellerDef { Key = Story.Vane, Name = Guild.Collector }));
+        shop.Light(_vane.Figure);
         _vane.Enter();
         Sfx.PlayGroup("door_open", 0.8f, -4);
         _vane.Say(Guild.Arrival(State.Week));
@@ -58,7 +58,7 @@ public partial class DuesPhase : Phase
     {
         foreach (var child in _track.GetChildren()) child.QueueFree();
         // One box for each week of the debt (the last five weeks, after it).
-        const float y = 108, w = 184, gap = 8;
+        const float y = 108, w = 100, gap = 8;
         int first = State.Week > Guild.Weeks ? State.Week - (Guild.Weeks - 1) : 1;
         for (int i = 0; i < Guild.Weeks; i++)
         {
@@ -66,7 +66,7 @@ public partial class DuesPhase : Phase
             bool paid = week < State.Week || (week == State.Week && State.PaidThisWeek);
             bool tonight = week == State.Week && !paid;
             var color = paid ? Palette.Good : tonight ? Palette.Warn : Palette.PanelBorder;
-            var box = UiKit.MakePanel(color).Place(40 + i * (w + gap), y, w, 56);
+            var box = UiKit.MakePanel(color).Place(PanelX + i * (w + gap), y, w, 56);
             box.AddChild(UiKit.MakeLabel($"Week {week}", 16, paid ? Palette.Good : tonight ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center)
                 .Place(0, 6, w, 20));
             box.AddChild(UiKit.MakeLabel(paid ? "paid" : $"{State.DueFor(week)}g", 16, paid ? Palette.Good : tonight ? Palette.Gold : Palette.Text,
@@ -75,7 +75,7 @@ public partial class DuesPhase : Phase
         }
         // The Aldric Key: Bram's shard and the Hooded Woman's three.
         if (State.Week < 2) return;
-        float mx = 40 + Guild.Weeks * (w + gap) + 12;
+        float mx = PanelX + Guild.Weeks * (w + gap) + 12;
         _track.AddChild(UiKit.MakeLabel(State.MapGiven ? "KEY: THE GUILD'S" : $"KEY {State.MapPieces}/{Story.Pieces}", 16, Palette.Magic)
             .Place(mx, y - 2, 220, 20));
         // Each shard in its place in the whole key: the ones still to find in shadow.

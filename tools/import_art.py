@@ -13,6 +13,7 @@ Usage: python3 tools/import_art.py [--cache DIR]
 Requires Pillow. Kenney's packs are cloned (partially) into the cache on first run.
 """
 import argparse
+import json
 import os
 import shutil
 import subprocess
@@ -54,7 +55,7 @@ KENNEY = ("https://github.com/ETdoFresh/kenney.nl", [
     "kenney_fontpackage", "kenney_impactsounds", "kenney_rpgaudio", "kenney_casinoaudio", "kenney_interfacesounds",
 ])
 
-# Curios (Curios.All in scripts/Core/Curios.cs) are drawn 24px and shown at 2x in 56px slots.
+# Curios (Curios.All in scripts/Core/Curios.cs) are drawn 28px and shown at 2x in 56px slots.
 CURIO_SLOT = 56
 
 # Group -> Kenney source files (pack folder, file stem).
@@ -904,15 +905,57 @@ def build_items():
 
 
 def build_portraits():
-    """Every face (76x76, shown 2x at the counter, 3x in scenes, 1x in the ledger), and its 38x38 face for the small
-    places; the placeholders are 38x38, so they're scaled 2x."""
+    """Head-and-shoulders crops from the full figures: 76px for cards/tips, 38px for the waiting queue.
+
+    Round-one portraits are only a fallback when a figure has not been delivered yet.
+    """
     drawn = custom_art.portraits()
-    keys = list(drawn) + [k for k in ("mara", "king") if gen("portraits", f"{k}.png")]
+    with open(os.path.join(ROOT, "art", "manifest.json"), encoding="utf-8") as f:
+        figures = {a["id"].split(".", 1)[1]: a for a in json.load(f)["assets"] if a["category"] == "figure"}
+    keys = list(dict.fromkeys([*drawn, *figures]))
+    layout = {}
     for key in keys:
+        figure = gen("figures", f"{key}.png")
+        if figure is not None:
+            save(figure, "figures", f"{key}.png")
+            bounds = figure.getbbox()
+            # Begin at the silhouette's top, so hats and shorter folk retain their identity. Include shoulders,
+            # but not held tools lower down. The figure canon centres the head around column 48.
+            side = max(32, min(48, round(figures[key]["height"] * 0.34)))
+            left = figure.width // 2 - side // 2
+            crop = (left, bounds[1], left + side, bounds[1] + side)
+            face = figure.crop(crop).resize((38, 38), Image.Resampling.NEAREST)
+            save(scaled(face, 2), "sprites", "sellers", f"{key}.png")
+            save(face, "sprites", "sellers", "faces", f"{key}.png")
+            layout[key] = {"height": figures[key]["height"], "bounds": list(bounds), "head_crop": list(crop)}
+            continue
         art = gen("portraits", f"{key}.png")
-        img = art if art else scaled(drawn[key], 2)
+        if art is None and key not in drawn:
+            continue
+        img = art if art is not None else scaled(drawn[key], 2)
         save(img, "sprites", "sellers", f"{key}.png")
         save(img.crop(FACE), "sprites", "sellers", "faces", f"{key}.png")
+    os.makedirs(os.path.join(ASSETS, "figures"), exist_ok=True)
+    with open(os.path.join(ASSETS, "figures", "layout.json"), "w", encoding="utf-8") as f:
+        json.dump(layout, f, indent=2)
+
+
+def build_scene_layers():
+    """Keep scene art native: the shop renders these layers at exactly 4x (the paper at 2x)."""
+    sys.path.insert(0, os.path.join(ROOT, "art", "tools"))
+    from validate import _unlit
+
+    for folder in ("sky", "place", "frame", "shelf", "counter", "sheet", "props"):
+        source = os.path.join(GENERATED, folder)
+        if not os.path.isdir(source):
+            continue
+        for name in sorted(os.listdir(source)):
+            if not name.endswith(".png") or name.endswith("_4x.png"):
+                continue
+            image = gen(folder, name)
+            save(image, folder, name)
+            if folder == "props" and name.startswith("lantern_"):
+                save(_unlit(image), folder, name[:-4] + "_unlit.png")
 
 
 def build_curios():
@@ -1007,7 +1050,8 @@ def main():
 
     # Rebuilt from scratch so renamed or dropped pictures and sounds don't linger. Godot's .import files stay (they
     # keep each file's uid) unless what they import is gone.
-    folders = [os.path.join(ASSETS, f) for f in ("sprites", "audio", "backgrounds", "ui")]
+    folders = [os.path.join(ASSETS, f) for f in
+               ("sprites", "audio", "backgrounds", "ui", "sky", "place", "frame", "shelf", "counter", "sheet", "props", "figures")]
     for folder in folders:
         for path in walk(folder):
             if not path.endswith(".import"):
@@ -1015,6 +1059,7 @@ def main():
 
     build_items()
     build_portraits()
+    build_scene_layers()
     build_effects()
     build_chests()
     build_brand()

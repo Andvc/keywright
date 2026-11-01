@@ -1,0 +1,4633 @@
+{
+  "redraw_assets": 242,
+  "runtime_image_checks": 364,
+  "figure_layout_entries": 38,
+  "failures": 0,
+  "categories": {
+    "counter": 4,
+    "curio": 79,
+    "emblem": 1,
+    "figure": 38,
+    "frame": 4,
+    "heartsong": 9,
+    "icon_kind": 8,
+    "icon_upgrade": 27,
+    "item": 33,
+    "lock_face": 3,
+    "place": 4,
+    "prop": 11,
+    "scene": 4,
+    "sheet": 4,
+    "shelf": 4,
+    "sky": 4,
+    "story": 5
+  },
+  "assets": [
+    {
+      "id": "sky.morning",
+      "source": "art/generated/sky/morning.png",
+      "source_sha256": "93a9a9c8026d6876d5fe4de7e2e2dad2cf5aff1cbebb2ddb5117dd15a5c88add",
+      "destinations": [
+        {
+          "path": "assets/sky/morning.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sky.midday",
+      "source": "art/generated/sky/midday.png",
+      "source_sha256": "b5c157cfef457c546808f841718b4622ca49f3b42c5987639ec1309b35893572",
+      "destinations": [
+        {
+          "path": "assets/sky/midday.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sky.evening",
+      "source": "art/generated/sky/evening.png",
+      "source_sha256": "5c1284512401281c2be09f29fbc795a4eab5a40298870f73651d7db1b79a75cd",
+      "destinations": [
+        {
+          "path": "assets/sky/evening.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sky.night",
+      "source": "art/generated/sky/night.png",
+      "source_sha256": "ca3a37768919bd907896c5a6be67a0005887372b0fa303e0035bcfa3468dd269",
+      "destinations": [
+        {
+          "path": "assets/sky/night.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "place.stall",
+      "source": "art/generated/place/stall.png",
+      "source_sha256": "a30e78c1b111de5aad3482da484e4fa64c7db846276c7fca04e567633152ce8c",
+      "destinations": [
+        {
+          "path": "assets/place/stall.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "place.thornwick",
+      "source": "art/generated/place/thornwick.png",
+      "source_sha256": "c74badb24e5ff2623330fb84edb7bebdd8bc5670dd4f649924761289f2fe97f6",
+      "destinations": [
+        {
+          "path": "assets/place/thornwick.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "place.crownhold",
+      "source": "art/generated/place/crownhold.png",
+      "source_sha256": "d39d03fa0d0e04fec05304242a6e8d283409da91f91900b88c69b480c816ee4b",
+      "destinations": [
+        {
+          "path": "assets/place/crownhold.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "place.emporium",
+      "source": "art/generated/place/emporium.png",
+      "source_sha256": "a693cc855b16738ebbd0c67a6134ca0d6056c00b5635f3b576717eb4e1f5e346",
+      "destinations": [
+        {
+          "path": "assets/place/emporium.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "frame.stall",
+      "source": "art/generated/frame/stall.png",
+      "source_sha256": "f316a77cfc187c230f355366600c7cd30ccb37e5208151c45deec1ffe11bfca4",
+      "destinations": [
+        {
+          "path": "assets/frame/stall.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "frame.thornwick",
+      "source": "art/generated/frame/thornwick.png",
+      "source_sha256": "bf7eb5993a81237c32fb76c8ab7037fff300d682434aab56273fe64f7b0abc15",
+      "destinations": [
+        {
+          "path": "assets/frame/thornwick.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "frame.crownhold",
+      "source": "art/generated/frame/crownhold.png",
+      "source_sha256": "c0465158071a662a2e7687362146dd9a7b28a45e80f0e4a802775e4bbb7be11a",
+      "destinations": [
+        {
+          "path": "assets/frame/crownhold.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "frame.emporium",
+      "source": "art/generated/frame/emporium.png",
+      "source_sha256": "e5fd9fcc010856afd1dec7cfc491f184469607cffaf7ab5d4d987ef6bb0c32f9",
+      "destinations": [
+        {
+          "path": "assets/frame/emporium.png",
+          "size": [
+            320,
+            180
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "shelf.stall",
+      "source": "art/generated/shelf/stall.png",
+      "source_sha256": "2f8d8d8615029ab6bada0a0b221be96fdfc2a225d4caa9b682f1510a58b28916",
+      "destinations": [
+        {
+          "path": "assets/shelf/stall.png",
+          "size": [
+            136,
+            40
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "shelf.thornwick",
+      "source": "art/generated/shelf/thornwick.png",
+      "source_sha256": "4b00190f1ef31ff2d34192bf17cfe7ef32add54e6f323aa7950a4dde36511895",
+      "destinations": [
+        {
+          "path": "assets/shelf/thornwick.png",
+          "size": [
+            136,
+            40
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "shelf.crownhold",
+      "source": "art/generated/shelf/crownhold.png",
+      "source_sha256": "84afcb20159e1f3eeb129b2997cd79c84f4f887a8bbc131ab36afc5b1b97884d",
+      "destinations": [
+        {
+          "path": "assets/shelf/crownhold.png",
+          "size": [
+            136,
+            40
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "shelf.emporium",
+      "source": "art/generated/shelf/emporium.png",
+      "source_sha256": "29867fea8d330430be3bcd7240059632d2e5905887d5d3fd37e3d92e7f8b8cfa",
+      "destinations": [
+        {
+          "path": "assets/shelf/emporium.png",
+          "size": [
+            136,
+            40
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "counter.stall",
+      "source": "art/generated/counter/stall.png",
+      "source_sha256": "c0c7b1c7a0408d5e8150d58568cd7c4135e0d23c527c02b6cd431b656bb37d5e",
+      "destinations": [
+        {
+          "path": "assets/counter/stall.png",
+          "size": [
+            320,
+            61
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "counter.thornwick",
+      "source": "art/generated/counter/thornwick.png",
+      "source_sha256": "7bfd6cfb0315ce792ebca9cca9104bc2839053181ffade46a8556c4c3f1c8e9e",
+      "destinations": [
+        {
+          "path": "assets/counter/thornwick.png",
+          "size": [
+            320,
+            61
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "counter.crownhold",
+      "source": "art/generated/counter/crownhold.png",
+      "source_sha256": "1d0f204b7e23d63d0730e6d013ffea1f5559e41b865beb82ecca92edd320afc7",
+      "destinations": [
+        {
+          "path": "assets/counter/crownhold.png",
+          "size": [
+            320,
+            61
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "counter.emporium",
+      "source": "art/generated/counter/emporium.png",
+      "source_sha256": "fc38c6090f9d0567a554435d0042beced498d54081b88895d4e6fcd032430356",
+      "destinations": [
+        {
+          "path": "assets/counter/emporium.png",
+          "size": [
+            320,
+            61
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sheet.stall",
+      "source": "art/generated/sheet/stall.png",
+      "source_sha256": "f5ed914ea08db6f7ac5ef7ed19554c0c871d7bfa30ec2dbd01d6d81dce75dd76",
+      "destinations": [
+        {
+          "path": "assets/sheet/stall.png",
+          "size": [
+            216,
+            320
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sheet.thornwick",
+      "source": "art/generated/sheet/thornwick.png",
+      "source_sha256": "191b4b2b2adb09c7c4fcb208765cf5e2ab31f9cfafa75b9a6b8c45a7f37cb979",
+      "destinations": [
+        {
+          "path": "assets/sheet/thornwick.png",
+          "size": [
+            216,
+            320
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sheet.crownhold",
+      "source": "art/generated/sheet/crownhold.png",
+      "source_sha256": "f0378c6d521141368341457c74fe5ab61896c6b62b466700a2876e648aefff73",
+      "destinations": [
+        {
+          "path": "assets/sheet/crownhold.png",
+          "size": [
+            216,
+            320
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "sheet.emporium",
+      "source": "art/generated/sheet/emporium.png",
+      "source_sha256": "37db61c54be93586db05d754f9ab2a97102787cd107e8482a0031110ce21cefe",
+      "destinations": [
+        {
+          "path": "assets/sheet/emporium.png",
+          "size": [
+            216,
+            320
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.lantern_stall",
+      "source": "art/generated/props/lantern_stall.png",
+      "source_sha256": "738d6161821ad3be678e17a84daea99b8fea39a1ac3ad2ee25b7bc54946e9186",
+      "destinations": [
+        {
+          "path": "assets/props/lantern_stall.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/props/lantern_stall_unlit.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.lantern_thornwick",
+      "source": "art/generated/props/lantern_thornwick.png",
+      "source_sha256": "761909f3fa79ad7671853a02d93d927796ae4b91dbd673feab34c8f27ec4ff19",
+      "destinations": [
+        {
+          "path": "assets/props/lantern_thornwick.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/props/lantern_thornwick_unlit.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.lantern_crownhold",
+      "source": "art/generated/props/lantern_crownhold.png",
+      "source_sha256": "dfc7a9023cc6404c4bf4220a106dfe747f1938fee5373a1cec2463a6c00115b5",
+      "destinations": [
+        {
+          "path": "assets/props/lantern_crownhold.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/props/lantern_crownhold_unlit.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.lantern_emporium",
+      "source": "art/generated/props/lantern_emporium.png",
+      "source_sha256": "cd8786c0a93cb1c92a1ceb02fa29f2b350531ffc1676a1b25a6f187699b66d37",
+      "destinations": [
+        {
+          "path": "assets/props/lantern_emporium.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/props/lantern_emporium_unlit.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.witchlight",
+      "source": "art/generated/props/witchlight.png",
+      "source_sha256": "f88971a995c13a377fa98c72e6d0049e5ab7d951204f1f58b37605a00c094abf",
+      "destinations": [
+        {
+          "path": "assets/props/witchlight.png",
+          "size": [
+            16,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.lodestone",
+      "source": "art/generated/props/lodestone.png",
+      "source_sha256": "c6fe79e45269717004fc0ae3c4269f6e3e03c4d2d0636ea0419338021fd77efa",
+      "destinations": [
+        {
+          "path": "assets/props/lodestone.png",
+          "size": [
+            20,
+            16
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.scales",
+      "source": "art/generated/props/scales.png",
+      "source_sha256": "a3d6438cc8766ddf8523d22eb6abd7e5e1b4dba863a3ef791f60d2a15013b1f3",
+      "destinations": [
+        {
+          "path": "assets/props/scales.png",
+          "size": [
+            24,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.gavel",
+      "source": "art/generated/props/gavel.png",
+      "source_sha256": "bba258c16d7efa6f8946c37df1bb9f426afc44eca5297d2b710197ea2a60566b",
+      "destinations": [
+        {
+          "path": "assets/props/gavel.png",
+          "size": [
+            22,
+            12
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.seal",
+      "source": "art/generated/props/seal.png",
+      "source_sha256": "1faa45d2d3f71e1234b3b932d65c5492b054d80b64e50a32a5e255b93cd736eb",
+      "destinations": [
+        {
+          "path": "assets/props/seal.png",
+          "size": [
+            12,
+            20
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.book",
+      "source": "art/generated/props/book.png",
+      "source_sha256": "83ef415697b7ebece13d3db7366bb15ea6cdd7ad01a7934dcde9d0ccff01efdd",
+      "destinations": [
+        {
+          "path": "assets/props/book.png",
+          "size": [
+            22,
+            14
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "prop.picks",
+      "source": "art/generated/props/picks.png",
+      "source_sha256": "72b0f8b9df735421045be6e7fe1c47c3db27af65b09b1455799138bbf9e9d5ab",
+      "destinations": [
+        {
+          "path": "assets/props/picks.png",
+          "size": [
+            22,
+            10
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.tam",
+      "source": "art/generated/figures/tam.png",
+      "source_sha256": "f2e386384747d847a4dae291ef7981c67506dee93cc6b3a5ddc4b4d3774fa1b6",
+      "destinations": [
+        {
+          "path": "assets/figures/tam.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/tam.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/tam.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.penn",
+      "source": "art/generated/figures/penn.png",
+      "source_sha256": "8cb3bb10b3b05921b4e31435475c523c0171a24b54f92351bc420dd1701e3b49",
+      "destinations": [
+        {
+          "path": "assets/figures/penn.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/penn.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/penn.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.hob",
+      "source": "art/generated/figures/hob.png",
+      "source_sha256": "37a5d5b8c798888d61757285b06885669f2eed8ce39d3ebbf2115eede8bfd804",
+      "destinations": [
+        {
+          "path": "assets/figures/hob.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/hob.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/hob.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.mags",
+      "source": "art/generated/figures/mags.png",
+      "source_sha256": "d86bcc14a8e90462ee26af6142eb7f9293537e8af10daa194aef7ae840057658",
+      "destinations": [
+        {
+          "path": "assets/figures/mags.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/mags.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/mags.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.dorrin",
+      "source": "art/generated/figures/dorrin.png",
+      "source_sha256": "ea288d8ba5a5871224f7757041a478bd37316b14e98212a5466c1c88345364ac",
+      "destinations": [
+        {
+          "path": "assets/figures/dorrin.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/dorrin.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/dorrin.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.snikkit",
+      "source": "art/generated/figures/snikkit.png",
+      "source_sha256": "a138cd0a9b9f7fc4282b096e785627d90b900a670c713e95d5e90eacc182b71d",
+      "destinations": [
+        {
+          "path": "assets/figures/snikkit.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/snikkit.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/snikkit.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.wenna",
+      "source": "art/generated/figures/wenna.png",
+      "source_sha256": "2c9b887fdd36af58e900e5dd5384321930757ccb2ba6b0af4e6c6d931073fc29",
+      "destinations": [
+        {
+          "path": "assets/figures/wenna.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/wenna.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/wenna.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.bramble",
+      "source": "art/generated/figures/bramble.png",
+      "source_sha256": "2b14f54413bfb4a8ac25ee16c5e0b361ab23dccb2323284587cd84cd51c5ff3a",
+      "destinations": [
+        {
+          "path": "assets/figures/bramble.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/bramble.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/bramble.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.ansel",
+      "source": "art/generated/figures/ansel.png",
+      "source_sha256": "34f637deeed5c9b176ececf3612375cb593072ea939475ce57ba9616b6697963",
+      "destinations": [
+        {
+          "path": "assets/figures/ansel.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/ansel.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/ansel.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.fennick",
+      "source": "art/generated/figures/fennick.png",
+      "source_sha256": "94e3bd9962835d94c3c382a51e2da43cec568b6763604f02e3d72df8eed61fda",
+      "destinations": [
+        {
+          "path": "assets/figures/fennick.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/fennick.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/fennick.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.gerda",
+      "source": "art/generated/figures/gerda.png",
+      "source_sha256": "1ea1645fe84907709caf3fe5784c8f335637db01e2ed7cbac7ddd445c5376db8",
+      "destinations": [
+        {
+          "path": "assets/figures/gerda.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/gerda.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/gerda.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.wren",
+      "source": "art/generated/figures/wren.png",
+      "source_sha256": "3352dcd68cf511d4706070a2ec25fd4fbc1b144205c9d1e4d4e9b86cc8fafb7c",
+      "destinations": [
+        {
+          "path": "assets/figures/wren.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/wren.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/wren.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.orrin",
+      "source": "art/generated/figures/orrin.png",
+      "source_sha256": "38c74d9f9e60bdfe5050f41342d5020f97154321bb698b3110592b17d40fb8c2",
+      "destinations": [
+        {
+          "path": "assets/figures/orrin.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/orrin.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/orrin.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.grit",
+      "source": "art/generated/figures/grit.png",
+      "source_sha256": "1e50fcd53882165ea925db4a8533fb3a3125b97cc649044af8ce2cb08fb53045",
+      "destinations": [
+        {
+          "path": "assets/figures/grit.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/grit.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/grit.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.corisande",
+      "source": "art/generated/figures/corisande.png",
+      "source_sha256": "e80e9fa72ac904da1eb5674a535a0cdb3ada1cfe826f96ef4143f331ad45d1e5",
+      "destinations": [
+        {
+          "path": "assets/figures/corisande.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/corisande.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/corisande.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.pell",
+      "source": "art/generated/figures/pell.png",
+      "source_sha256": "e6140294f747a2ef7ca46aaab9fd1fa19b6488a9862ad823c578d4f136690aea",
+      "destinations": [
+        {
+          "path": "assets/figures/pell.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/pell.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/pell.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.quill",
+      "source": "art/generated/figures/quill.png",
+      "source_sha256": "6ea90abd46a58b3967b2e0ad4216d75b8bf22d62aae98d18395c9055fffe95b7",
+      "destinations": [
+        {
+          "path": "assets/figures/quill.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/quill.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/quill.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.shelly",
+      "source": "art/generated/figures/shelly.png",
+      "source_sha256": "386c0aa55320d6b3135fae04c6eb5ac7cff11571d3141ca59cfe7305032c3519",
+      "destinations": [
+        {
+          "path": "assets/figures/shelly.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/shelly.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/shelly.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.aldous",
+      "source": "art/generated/figures/aldous.png",
+      "source_sha256": "716b9ff4d2717e43b059153320f1b99dc14fe03bb03c48a62a1d26e9feea34dd",
+      "destinations": [
+        {
+          "path": "assets/figures/aldous.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/aldous.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/aldous.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.vexis",
+      "source": "art/generated/figures/vexis.png",
+      "source_sha256": "5c1dd78da6de9f6fa3506e40aaa346979f4acfc44087f2fc61a19dba4b520811",
+      "destinations": [
+        {
+          "path": "assets/figures/vexis.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/vexis.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/vexis.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.malbranche",
+      "source": "art/generated/figures/malbranche.png",
+      "source_sha256": "b2ba98d71ce0145021a0160e778e98b298a6313f79f10cfd1443b739d0ffcc7b",
+      "destinations": [
+        {
+          "path": "assets/figures/malbranche.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/malbranche.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/malbranche.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.skrae",
+      "source": "art/generated/figures/skrae.png",
+      "source_sha256": "5b90d023ca8e51fda71f1d59228b6f7de7d2e2cdb807eb02020d70d35ecdcd6f",
+      "destinations": [
+        {
+          "path": "assets/figures/skrae.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/skrae.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/skrae.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.ermine",
+      "source": "art/generated/figures/ermine.png",
+      "source_sha256": "f6cd6a76cae25c03cf65d3b6ca854336b155d092825dec8897440f60b4acc6f6",
+      "destinations": [
+        {
+          "path": "assets/figures/ermine.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/ermine.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/ermine.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.oriel",
+      "source": "art/generated/figures/oriel.png",
+      "source_sha256": "8f9efbe6db2524e874ced2b7a2cd57a39e20ea76ea705a359b2a34c49e8262b4",
+      "destinations": [
+        {
+          "path": "assets/figures/oriel.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/oriel.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/oriel.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.silas",
+      "source": "art/generated/figures/silas.png",
+      "source_sha256": "a7e1c250dbe120e7cc9fbf33a36038caf7bbb9651d26f7fc821a0bea801c7d05",
+      "destinations": [
+        {
+          "path": "assets/figures/silas.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/silas.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/silas.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.aldo",
+      "source": "art/generated/figures/aldo.png",
+      "source_sha256": "5ab095db6ffd9cd99b1ae95c63f05ee41cf0371caec7787e34a5ab6c3b90c487",
+      "destinations": [
+        {
+          "path": "assets/figures/aldo.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/aldo.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/aldo.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.maw",
+      "source": "art/generated/figures/maw.png",
+      "source_sha256": "6eaf20f25572a8daedf910c5a097d369adfdf8c49545574d3c57d28c1ab72552",
+      "destinations": [
+        {
+          "path": "assets/figures/maw.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/maw.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/maw.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.bram",
+      "source": "art/generated/figures/bram.png",
+      "source_sha256": "6947cc997c78b7cc5b94a1b4d360d14065033863554237d54cb508ace57680ce",
+      "destinations": [
+        {
+          "path": "assets/figures/bram.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/bram.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/bram.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.vane",
+      "source": "art/generated/figures/vane.png",
+      "source_sha256": "eb3d1b9980733302c2b5dfefccc3ce909eeb6566bbfea22a664c19a71a01a8bd",
+      "destinations": [
+        {
+          "path": "assets/figures/vane.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/vane.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/vane.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.hood",
+      "source": "art/generated/figures/hood.png",
+      "source_sha256": "8c6acfa3e7da77efab4d82a6ca5fba19d15c8c46a952ab3db405fbcbb5571fb1",
+      "destinations": [
+        {
+          "path": "assets/figures/hood.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/hood.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/hood.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.nim",
+      "source": "art/generated/figures/nim.png",
+      "source_sha256": "9dd657ef5b5e0fc227a4b350dbcf675ea892755adf170aca9a052d555c77c8d1",
+      "destinations": [
+        {
+          "path": "assets/figures/nim.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/nim.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/nim.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.stranger",
+      "source": "art/generated/figures/stranger.png",
+      "source_sha256": "12ec5354a36a7f3c8c78d109c55dd410b207826899b9129992e3c59ca4ed6fbc",
+      "destinations": [
+        {
+          "path": "assets/figures/stranger.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/stranger.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/stranger.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.kit",
+      "source": "art/generated/figures/kit.png",
+      "source_sha256": "f60cc0f72cec88c2f94de3cfd1ac305c1c6527fa66b27bd97364d9ff0b742029",
+      "destinations": [
+        {
+          "path": "assets/figures/kit.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/kit.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/kit.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.hesk",
+      "source": "art/generated/figures/hesk.png",
+      "source_sha256": "cc73e2cb27c32c24ba5230aae8f14f4ee0b1cf1662082d08a4530390189b4d6f",
+      "destinations": [
+        {
+          "path": "assets/figures/hesk.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/hesk.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/hesk.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.rosa",
+      "source": "art/generated/figures/rosa.png",
+      "source_sha256": "65bc4b092298170d1fcc3a3c25cbdd7528d0c6f6bda0c9e1c28915076b33c5bf",
+      "destinations": [
+        {
+          "path": "assets/figures/rosa.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/rosa.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/rosa.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.isolde",
+      "source": "art/generated/figures/isolde.png",
+      "source_sha256": "2c744d28984fb618d7a6ef502e14d7bfedd0abcbc02cedeb3b868bccfdd9bf5f",
+      "destinations": [
+        {
+          "path": "assets/figures/isolde.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/isolde.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/isolde.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.mara",
+      "source": "art/generated/figures/mara.png",
+      "source_sha256": "c8f68b9ef4924b3d0d883660828bc9c03180aa4a5d88b0986a4345d60790108e",
+      "destinations": [
+        {
+          "path": "assets/figures/mara.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/mara.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/mara.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "figure.king",
+      "source": "art/generated/figures/king.png",
+      "source_sha256": "1498ebe2f87ce3f71bdc3d4ef4850e0a7b4b1783bb6a77888b6a42dfedecbfcd",
+      "destinations": [
+        {
+          "path": "assets/figures/king.png",
+          "size": [
+            96,
+            160
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/faces/king.png",
+          "size": [
+            38,
+            38
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/sellers/king.png",
+          "size": [
+            76,
+            76
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.shop2",
+      "source": "art/generated/icons/upgrade_shop2.png",
+      "source_sha256": "42ee903820f45e24869b894bfa1789873b40ebfc0ef385baeb437374b83544ce",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/shop2.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.shop3",
+      "source": "art/generated/icons/upgrade_shop3.png",
+      "source_sha256": "f1ec1cfb6e57952976d36c7101b9bc01bc2bf1a9f561ef79f5c6ff3a723c8083",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/shop3.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.shop4",
+      "source": "art/generated/icons/upgrade_shop4.png",
+      "source_sha256": "bd0d8e434162be37f23ba34c4ec5bcd9101110967304b8b500de5f8699ed2352",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/shop4.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.sign",
+      "source": "art/generated/icons/upgrade_sign.png",
+      "source_sha256": "b09e46ac0582794945f1eded550616698c9361ae0117cdc0cde455858dd954b5",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/sign.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.scales",
+      "source": "art/generated/icons/upgrade_scales.png",
+      "source_sha256": "a2bfa49b4b5fdaf7e30567c4b6a335b34b59d0b9d8f608d818b02fc7f23ab5c9",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/scales.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.cabinet1",
+      "source": "art/generated/icons/upgrade_cabinet1.png",
+      "source_sha256": "54c34716643b67f91dc6c109f41270129d5ebd46f2d7d77711ca3f3038eff06d",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/cabinet1.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.cabinet2",
+      "source": "art/generated/icons/upgrade_cabinet2.png",
+      "source_sha256": "9458dd852f99bb5881a24d3aeac1c067b68a4c77ca21d38972ec4e7c4f418cae",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/cabinet2.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.cabinet3",
+      "source": "art/generated/icons/upgrade_cabinet3.png",
+      "source_sha256": "34cbf952eee9c1661cb2ef429fa03ffbf80fd7ee8acb4f2ea1247c0aa5321f50",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/cabinet3.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.cabinet4",
+      "source": "art/generated/icons/upgrade_cabinet4.png",
+      "source_sha256": "d93439d155204d2e855db4db500a350cb75b772d09a04fbc4262199e609b1052",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/cabinet4.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.cabinet5",
+      "source": "art/generated/icons/upgrade_cabinet5.png",
+      "source_sha256": "98156042bb58d1fc5596825156b4761bc02a40049a1811cce1a0b0ce767ddb3d",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/cabinet5.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.cabinet6",
+      "source": "art/generated/icons/upgrade_cabinet6.png",
+      "source_sha256": "ee14390ac4671e0fe88c5f480d208b130fa9aba544208e2d4b0d08ac495e0d6c",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/cabinet6.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.picks",
+      "source": "art/generated/icons/upgrade_picks.png",
+      "source_sha256": "f9889d62474c5dee201dd573919688677475af90294e5786f733bea77cc37e4f",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/picks.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.bench",
+      "source": "art/generated/icons/upgrade_bench.png",
+      "source_sha256": "7cfecac72a37a7acef7a0726dc0bfc661cef2249afe1f37d1b6ce3fca2922b60",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/bench.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.workshop",
+      "source": "art/generated/icons/upgrade_workshop.png",
+      "source_sha256": "edf205df84c0e215ab2cf3e8f05266c4bca0a3f92c5a6a892f17ab4ddd3d74d0",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/workshop.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.master",
+      "source": "art/generated/icons/upgrade_master.png",
+      "source_sha256": "6839104a3efa8dae38b6211273c804fc4432cb39fb3d97f818f1f913507b578a",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/master.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.lamp",
+      "source": "art/generated/icons/upgrade_lamp.png",
+      "source_sha256": "2beca4676fea3934a40ea85906a3fb5279752dfd18256c1304f82e5ed7883acd",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/lamp.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.crier",
+      "source": "art/generated/icons/upgrade_crier.png",
+      "source_sha256": "21687914c7d9390a54bbc7e6034a96018f1221dbafc73a66f38f732592b17a5d",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/crier.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.block",
+      "source": "art/generated/icons/upgrade_block.png",
+      "source_sha256": "200e6b4453685c76caa9e69ffa251df1a141a7e6a7ef280333528393862801e2",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/block.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.charter",
+      "source": "art/generated/icons/upgrade_charter.png",
+      "source_sha256": "50d539d5313f4e34e7a36798bdfcea32bd51a75dc2253f3291ba473949339d26",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/charter.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.case",
+      "source": "art/generated/icons/upgrade_case.png",
+      "source_sha256": "4d328eff4d2429fa0ec0d8dda91bfbbdb8f73031a18190ccc68ccb4eb10f4da1",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/case.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.velvet",
+      "source": "art/generated/icons/upgrade_velvet.png",
+      "source_sha256": "3063a7782c9d0da6f36a385bc7b469c1686be3e1dbb03458da500302ba7d7e49",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/velvet.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.magnet",
+      "source": "art/generated/icons/upgrade_magnet.png",
+      "source_sha256": "2e0fb91c0fb9e9b0515208d54a9b83598e7522ae98b5c6c2c7a23f9196c14bbd",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/magnet.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.seal",
+      "source": "art/generated/icons/upgrade_seal.png",
+      "source_sha256": "3b50b50952c1a093a9f1a38f195d26e19bc32b084343171e79822a8cd971b95b",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/seal.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.night",
+      "source": "art/generated/icons/upgrade_night.png",
+      "source_sha256": "2bc60bbe90bc11cdaf16dba29edaf025874a01a5bc5319b698341e8678edd2af",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/night.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.warrant",
+      "source": "art/generated/icons/upgrade_warrant.png",
+      "source_sha256": "13fe2ca1ada7520d7071d4a91c50c91aff211a0bfd732a76f027a2f38c074b7a",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/warrant.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.patrons",
+      "source": "art/generated/icons/upgrade_patrons.png",
+      "source_sha256": "a46b711880059fe28cefdfc57e2fea8eac2b9f84e08054922d1a256d6b1a45a3",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/patrons.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.upgrade.engine",
+      "source": "art/generated/icons/upgrade_engine.png",
+      "source_sha256": "5c6b12af1acd2a83377f6a3fb3f606d7b94aae5059f3efacaf09cb3a5fe05e39",
+      "destinations": [
+        {
+          "path": "assets/ui/icons/engine.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.coins",
+      "source": "art/generated/kinds/kind_coins.png",
+      "source_sha256": "672d3ed491ce8519fda994e73162d6a139f2014eb27f432c2ac372a17ffc7067",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/coins.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.arms",
+      "source": "art/generated/kinds/kind_arms.png",
+      "source_sha256": "e170ee593a14e457eaca8cb57b2d083457fb0d328fee5c08c6d0182b5b552010",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/arms.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.garb",
+      "source": "art/generated/kinds/kind_garb.png",
+      "source_sha256": "ce3555941d01d88e4e4f9d89f3cfca23fdbd7e614a39f01fc32ff71d50132acc",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/garb.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.potions",
+      "source": "art/generated/kinds/kind_potions.png",
+      "source_sha256": "5c7e8073463606246dca056ac047bbda3c16ed5bbc0787351258a9af0938f825",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/potions.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.scrolls",
+      "source": "art/generated/kinds/kind_scrolls.png",
+      "source_sha256": "133a56c82f80029baa8bd085e447302dddd92cf4672a70165ee01600a1d6f2b5",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/scrolls.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.gems",
+      "source": "art/generated/kinds/kind_gems.png",
+      "source_sha256": "6887d01e41eef0822ad47011b21e4b19da58ebf81284d849479fe3603d9087cd",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/gems.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.heartsong",
+      "source": "art/generated/kinds/kind_heartsong.png",
+      "source_sha256": "bea2f61aa4296c86c4364494c3aeaa49611278573330f6045bbf597205008ff3",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/heartsong.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "icon.kind.hidden",
+      "source": "art/generated/kinds/kind_hidden.png",
+      "source_sha256": "4a62308c4328f32a8a0f1f3977150943655e38b098c848faff2609e5abadd2ff",
+      "destinations": [
+        {
+          "path": "assets/ui/kinds/hidden.png",
+          "size": [
+            32,
+            32
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "emblem.guild",
+      "source": "art/generated/emblems/guild.png",
+      "source_sha256": "39e0c13ddee8a850d7478637b4b41951bdd876c6bc1417337edb8fc98f1a9b60",
+      "destinations": [
+        {
+          "path": "assets/ui/guild.png",
+          "size": [
+            48,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "story.key_whole",
+      "source": "art/generated/story/key_whole.png",
+      "source_sha256": "c89c9f694effc9b0e8dbb6fe49c37979c6e21f53f93cad49b856903c6836d9bf",
+      "destinations": [
+        {
+          "path": "assets/ui/key_whole.png",
+          "size": [
+            192,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "story.key_shard_1",
+      "source": "art/generated/story/key_shard_1.png",
+      "source_sha256": "aae6ff145f1421df06c1d6d4070baa6bab534e98d1c2b3016ab16a587d22482b",
+      "destinations": [
+        {
+          "path": "assets/ui/key_1.png",
+          "size": [
+            192,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "story.key_shard_2",
+      "source": "art/generated/story/key_shard_2.png",
+      "source_sha256": "f404b398670f9f87fcbea0e8858127317856c59b30e16cbbe811ce4ef07ff5be",
+      "destinations": [
+        {
+          "path": "assets/ui/key_2.png",
+          "size": [
+            192,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "story.key_shard_3",
+      "source": "art/generated/story/key_shard_3.png",
+      "source_sha256": "8930181b353844f3aa44a42960627c52ee4d39d383bbdc7e2850541a6ae797c4",
+      "destinations": [
+        {
+          "path": "assets/ui/key_3.png",
+          "size": [
+            192,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "story.key_shard_4",
+      "source": "art/generated/story/key_shard_4.png",
+      "source_sha256": "78d89db0398d2bae948b75ec5f765134cdc41552b8308f71215ad38b4490e1e3",
+      "destinations": [
+        {
+          "path": "assets/ui/key_4.png",
+          "size": [
+            192,
+            48
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "lock.face.rusty",
+      "source": "art/generated/lockpick/face_rusty.png",
+      "source_sha256": "e75c5319e74b897a1584276871dc6d87dd95f5808ea91bc0e9fd895486366526",
+      "destinations": [
+        {
+          "path": "assets/sprites/lockpick/face_rusty.png",
+          "size": [
+            160,
+            160
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "lock.face.guild",
+      "source": "art/generated/lockpick/face_guild.png",
+      "source_sha256": "6fed6ec022b36ab56c4771c53a3287f5168926feb348d06ae2c24bb5def8c43f",
+      "destinations": [
+        {
+          "path": "assets/sprites/lockpick/face_guild.png",
+          "size": [
+            160,
+            160
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "lock.face.dwarven",
+      "source": "art/generated/lockpick/face_dwarven.png",
+      "source_sha256": "305c5abe1e4f127d11e830c4caf7ce0cd661f3f209dd8ee4feebf72c9c29a7bf",
+      "destinations": [
+        {
+          "path": "assets/sprites/lockpick/face_dwarven.png",
+          "size": [
+            160,
+            160
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "scene.guild",
+      "source": "art/generated/scenes/guild.png",
+      "source_sha256": "fc999919f8e0b8150f662c92dc89e79f1b81dd2b69c1e17f32e40258c25f70ea",
+      "destinations": [
+        {
+          "path": "assets/backgrounds/scene_guild.png",
+          "size": [
+            640,
+            360
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "scene.bram",
+      "source": "art/generated/scenes/bram.png",
+      "source_sha256": "67547ddd1845ff00e4b77f828ff211908da635f070a168031e0f24d73f4e1f6a",
+      "destinations": [
+        {
+          "path": "assets/backgrounds/scene_bram.png",
+          "size": [
+            640,
+            360
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "scene.keyhold",
+      "source": "art/generated/scenes/keyhold.png",
+      "source_sha256": "952ae25741f24408943c353af0caf818578e363802d4d9588d830467040ee942",
+      "destinations": [
+        {
+          "path": "assets/backgrounds/scene_keyhold.png",
+          "size": [
+            640,
+            360
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "scene.vault",
+      "source": "art/generated/scenes/vault.png",
+      "source_sha256": "c6b9384e8b775657acf9f3ed043346a4d31961dc8c03039e846feedfc455f52a",
+      "destinations": [
+        {
+          "path": "assets/backgrounds/scene_vault.png",
+          "size": [
+            640,
+            360
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.barrow_silver",
+      "source": "art/generated/items/barrow_silver.png",
+      "source_sha256": "a9a655eba30cc739b759e745e8d433b9b85d1ebdc3d9f1d18800689093f19d86",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/barrow_silver.png",
+          "size": [
+            30,
+            25
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/barrow_silver.png",
+          "size": [
+            30,
+            25
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.moonsilver_marks",
+      "source": "art/generated/items/moonsilver_marks.png",
+      "source_sha256": "e029ce262d17934ef6e057dff7331e009fe1c66411a26ebeccc45e24b252a0d3",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/moonsilver_marks.png",
+          "size": [
+            30,
+            25
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/moonsilver_marks.png",
+          "size": [
+            30,
+            25
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "source": "art/generated/items/dwarf_gold_crowns.png",
+      "source_sha256": "b93e1b756cae8aecb3f63b13fe2ac4ce6531e3e306c65ded5a1f611e174e7331",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/dwarf_gold_crowns.png",
+          "size": [
+            30,
+            24
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/dwarf_gold_crowns.png",
+          "size": [
+            30,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.sunken_sovereigns",
+      "source": "art/generated/items/sunken_sovereigns.png",
+      "source_sha256": "79cf68a6f9d55490a6163d61f06b5366ad79342e780f07a411a156c2b11e46d9",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/sunken_sovereigns.png",
+          "size": [
+            30,
+            26
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/sunken_sovereigns.png",
+          "size": [
+            30,
+            26
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.dragon_gold",
+      "source": "art/generated/items/dragon_gold.png",
+      "source_sha256": "6d352656a8ed3865672942d758d50c032c9962d74d2bba697a597616ed6ee0df",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/dragon_gold.png",
+          "size": [
+            25,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/dragon_gold.png",
+          "size": [
+            25,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.demon_gold",
+      "source": "art/generated/items/demon_gold.png",
+      "source_sha256": "27bc069a516348db1cacbcd55c71ff35cdd114a8ad3ada4005c8b308bd4a9161",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/demon_gold.png",
+          "size": [
+            30,
+            20
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/demon_gold.png",
+          "size": [
+            30,
+            20
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.goblin_cleaver",
+      "source": "art/generated/items/goblin_cleaver.png",
+      "source_sha256": "3412c9ba433b5fa8595733643e64d6e4e1689bd18261d947a534179fb4348d11",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/goblin_cleaver.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/goblin_cleaver.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.dwarven_axe",
+      "source": "art/generated/items/dwarven_axe.png",
+      "source_sha256": "f07eaecbae81f8cd461bcf8c7fa5924391fdb46768f7ec1e4fe9cd70c32375ee",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/dwarven_axe.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/dwarven_axe.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.wardens_blade",
+      "source": "art/generated/items/wardens_blade.png",
+      "source_sha256": "76645e188d3bed8136c7db310039b2a3ed9b94a6799905539a57ff92c0803319",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/wardens_blade.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/wardens_blade.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.flamebrand",
+      "source": "art/generated/items/flamebrand.png",
+      "source_sha256": "a1efb34e0ee48c990cee507783c10a14119de4ccca3ec00286d7fdbc5cf3acf7",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/flamebrand.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/flamebrand.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.dragonslayer",
+      "source": "art/generated/items/dragonslayer.png",
+      "source_sha256": "84d22747eab55dbb541158c908a6bcc3fdf821c55790ff3b962bec180204f94b",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/dragonslayer.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/dragonslayer.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.wolfskin_cloak",
+      "source": "art/generated/items/wolfskin_cloak.png",
+      "source_sha256": "53d8bdda5ba47757df99f7a0a1a30e7071aaaa392e508a0ce3a56db9f06ec88b",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/wolfskin_cloak.png",
+          "size": [
+            24,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/wolfskin_cloak.png",
+          "size": [
+            24,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.elven_cloak",
+      "source": "art/generated/items/elven_cloak.png",
+      "source_sha256": "099862eccd8dc57f1487d5971c467bcf6c44f89b863dc0b86153f826dd0f989e",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/elven_cloak.png",
+          "size": [
+            27,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/elven_cloak.png",
+          "size": [
+            27,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.cloak_of_shadows",
+      "source": "art/generated/items/cloak_of_shadows.png",
+      "source_sha256": "2b0a4cf918ea9d85f9ad0c295a7fc77be04a9ab63be8f8fc2485e20b36f078fe",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/cloak_of_shadows.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/cloak_of_shadows.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.archmages_mantle",
+      "source": "art/generated/items/archmages_mantle.png",
+      "source_sha256": "4416ea35974ad1debd0c40166d0e0814845782b12d70cf7bcfd3d4814c3b50f3",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/archmages_mantle.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/archmages_mantle.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.phoenix_mantle",
+      "source": "art/generated/items/phoenix_mantle.png",
+      "source_sha256": "c21d6a3aa1b2f3b6c8a8fe1b97ec23c548d5a5e0b7259714c03b7503e71fd8f1",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/phoenix_mantle.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/phoenix_mantle.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.healing_draught",
+      "source": "art/generated/items/healing_draught.png",
+      "source_sha256": "e6c1da4a9d558b72eda8866c03d60d6a70142445a4e1311192d3ff8d61f92e43",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/healing_draught.png",
+          "size": [
+            24,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/healing_draught.png",
+          "size": [
+            24,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.elixir_of_vigour",
+      "source": "art/generated/items/elixir_of_vigour.png",
+      "source_sha256": "8a37041a03c7dacfd5144630d732b2533a011ea06b68b8236e55d4c06144de9a",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/elixir_of_vigour.png",
+          "size": [
+            19,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/elixir_of_vigour.png",
+          "size": [
+            19,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.invisibility_draught",
+      "source": "art/generated/items/invisibility_draught.png",
+      "source_sha256": "a07b6995028a9d2a11b70b7be41e891df065d570e94eeda7a12004bdd03dff93",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/invisibility_draught.png",
+          "size": [
+            20,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/invisibility_draught.png",
+          "size": [
+            20,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.mermaids_breath",
+      "source": "art/generated/items/mermaids_breath.png",
+      "source_sha256": "9bb705db421bc20347c1ffd17894beba033ad9f14550689cb95e85f87cf4bad2",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/mermaids_breath.png",
+          "size": [
+            25,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/mermaids_breath.png",
+          "size": [
+            25,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.ambrosia",
+      "source": "art/generated/items/ambrosia.png",
+      "source_sha256": "200a73ae2b00604d42cc7523bd287095b5029052633b85c24a496785fa0efbf4",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/ambrosia.png",
+          "size": [
+            21,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/ambrosia.png",
+          "size": [
+            21,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.scroll_of_sparks",
+      "source": "art/generated/items/scroll_of_sparks.png",
+      "source_sha256": "43d550c78e499e7889a788e5aafe4ca1c7b75cfc05f13592cd13c19f3e7002a3",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/scroll_of_sparks.png",
+          "size": [
+            30,
+            26
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/scroll_of_sparks.png",
+          "size": [
+            30,
+            26
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.scroll_of_fireball",
+      "source": "art/generated/items/scroll_of_fireball.png",
+      "source_sha256": "af9e032ae6cd4dab43094097267149d3b5e0512379951f884b2ee4183ff972f6",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/scroll_of_fireball.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/scroll_of_fireball.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.summoners_grimoire",
+      "source": "art/generated/items/summoners_grimoire.png",
+      "source_sha256": "edb8b12e1dea4f465950198b9155c5004eead55a11b06f28551388f81010de45",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/summoners_grimoire.png",
+          "size": [
+            26,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/summoners_grimoire.png",
+          "size": [
+            26,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.lichs_tome",
+      "source": "art/generated/items/lichs_tome.png",
+      "source_sha256": "cf151060287d2159ebac9799ea91975f523504d0b998ef155edae4ff6b439084",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/lichs_tome.png",
+          "size": [
+            26,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/lichs_tome.png",
+          "size": [
+            26,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.keyhold_codex",
+      "source": "art/generated/items/keyhold_codex.png",
+      "source_sha256": "cfc53d8db26fc65f71e865e2e8b4770e4ac2d0767679a22df1dfd7fa8a4b2f5d",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/keyhold_codex.png",
+          "size": [
+            25,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/keyhold_codex.png",
+          "size": [
+            25,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.sand_case",
+      "source": "art/generated/items/sand_case.png",
+      "source_sha256": "5277fd9c4b1caefe8ede021b39c02fb21dac7be3b35b86f6a8362422306005d4",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/sand_case.png",
+          "size": [
+            30,
+            24
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/sand_case.png",
+          "size": [
+            30,
+            24
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.moonstone",
+      "source": "art/generated/items/moonstone.png",
+      "source_sha256": "a2cf44ab67039b3c09fb24dacecc714be0eb5f7cd45b6eb066c39a3a04b1fac2",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/moonstone.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/moonstone.png",
+          "size": [
+            30,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.elfstone",
+      "source": "art/generated/items/elfstone.png",
+      "source_sha256": "1b322cccaa3db49acbde6485a79d345bc408fc05dbb9bf376809653ca15128d7",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/elfstone.png",
+          "size": [
+            24,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/elfstone.png",
+          "size": [
+            24,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.blood_ruby",
+      "source": "art/generated/items/blood_ruby.png",
+      "source_sha256": "3fd81284ce7bd46c8215b7c1d221b7b4fa7d31fcc41868233b92d2e5ac9e1493",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/blood_ruby.png",
+          "size": [
+            30,
+            26
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/blood_ruby.png",
+          "size": [
+            30,
+            26
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.starstone",
+      "source": "art/generated/items/starstone.png",
+      "source_sha256": "cdb90e12614b19f2ec0ff98cc04290ae826276347e0e34254ad7a21b621761f4",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/starstone.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/starstone.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.dragons_eye",
+      "source": "art/generated/items/dragons_eye.png",
+      "source_sha256": "f88387ffd8f07e90b161aa01e5d6f580ca1f9c22a9012f4a324e35ffd3012f67",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/dragons_eye.png",
+          "size": [
+            27,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/dragons_eye.png",
+          "size": [
+            27,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "item.paste_gem",
+      "source": "art/generated/items/paste_gem.png",
+      "source_sha256": "49200b2ae41f6c83014be684497e395afa7b6993c91bbe4fc8275716d5afdd1d",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/paste_gem.png",
+          "size": [
+            30,
+            25
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/paste_gem.png",
+          "size": [
+            30,
+            25
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "source": "art/generated/heartsongs/lullaby_box.png",
+      "source_sha256": "5572b249609f939b699060b042c6214a2039afa9803cd3bf9f774f90eaec477c",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/lullaby_box.png",
+          "size": [
+            30,
+            28
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/lullaby_box.png",
+          "size": [
+            30,
+            28
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.shepherds_pipe",
+      "source": "art/generated/heartsongs/shepherds_pipe.png",
+      "source_sha256": "757c4a8a2332a628add3a3bcb8d3a7812d8c5a072c41bfd6744505d8b7b1b72a",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/shepherds_pipe.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/shepherds_pipe.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.fey_chimes",
+      "source": "art/generated/heartsongs/fey_chimes.png",
+      "source_sha256": "2782374b572271575428aac3dbcffe305d9d57e99db0ac2d9e441d1e70852ebf",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/fey_chimes.png",
+          "size": [
+            28,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/fey_chimes.png",
+          "size": [
+            28,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.dragons_egg",
+      "source": "art/generated/heartsongs/dragons_egg.png",
+      "source_sha256": "6471c9fd1043ef24b92a6fb3404107f9703290fb84bed28590266c4359672df8",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/dragons_egg.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/dragons_egg.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.clockwork_lark",
+      "source": "art/generated/heartsongs/clockwork_lark.png",
+      "source_sha256": "05cf8432803d98896bd45fb1f7c43b0fa0cca672dd44cd16855491a99f5495e1",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/clockwork_lark.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/clockwork_lark.png",
+          "size": [
+            29,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.hearthstone",
+      "source": "art/generated/heartsongs/hearthstone.png",
+      "source_sha256": "6039f89e463c37f00d2b50283cb571889ab307fabc0220f67088dddceecf24ce",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/hearthstone.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/hearthstone.png",
+          "size": [
+            30,
+            29
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.drowned_bell",
+      "source": "art/generated/heartsongs/drowned_bell.png",
+      "source_sha256": "480c2dcd1ef4e1626770d8f3571b07d5fa303f681a2e93fcc640ece55531e96d",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/drowned_bell.png",
+          "size": [
+            28,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/drowned_bell.png",
+          "size": [
+            28,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.bottled_star",
+      "source": "art/generated/heartsongs/bottled_star.png",
+      "source_sha256": "b6429bec59ab99fd4afb9ee79724cfa9f792fc92d9e3c9b7d30210fe4d6016ee",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/bottled_star.png",
+          "size": [
+            27,
+            30
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/bottled_star.png",
+          "size": [
+            27,
+            30
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "heartsong.imps_ember",
+      "source": "art/generated/heartsongs/imps_ember.png",
+      "source_sha256": "71b1ff3ec00b53448164ca4e042e399eac56f50e1ec1a216a6576ba06eeafa90",
+      "destinations": [
+        {
+          "path": "assets/sprites/items/imps_ember.png",
+          "size": [
+            28,
+            29
+          ],
+          "exact_rgba": true
+        },
+        {
+          "path": "assets/sprites/items/icons/imps_ember.png",
+          "size": [
+            28,
+            29
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.monocle",
+      "source": "art/generated/curios/monocle.png",
+      "source_sha256": "ad8db9ba2fe16afdd6c7a4408fdc721c73d5dfb2556ee807eb207dbfd0f0efe6",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/monocle.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.draught",
+      "source": "art/generated/curios/draught.png",
+      "source_sha256": "779e03a54129cd8ed2027734540aeb3dc90ba729dfde080cad40f165c072e156",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/draught.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.aether",
+      "source": "art/generated/curios/aether.png",
+      "source_sha256": "bc0ee7deafc26abb83ef7c01137ccb0f26d1a37f732c35b7ff306b7e08692f4f",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/aether.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.chalk",
+      "source": "art/generated/curios/chalk.png",
+      "source_sha256": "4472457dd0e60a81d99a728e7d83400260ae9ade53b23f8b16f0eeb5e2c0eb28",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/chalk.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.ring",
+      "source": "art/generated/curios/ring.png",
+      "source_sha256": "ea1ff200c25f882a320f503134a3d968cc576d75ba9a8d1414a542a736110cc9",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/ring.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.staff",
+      "source": "art/generated/curios/staff.png",
+      "source_sha256": "74cd685a0fd18300f64346a0a25c62372ba6740a286b61490b1c4c58e9206835",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/staff.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.sealed",
+      "source": "art/generated/curios/sealed.png",
+      "source_sha256": "f4a4466e38db041a54579a81e45d0583e66ca8869c66c7faaaf58ff08db56885",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/sealed.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.dip",
+      "source": "art/generated/curios/dip.png",
+      "source_sha256": "c4c809431b85f99119ea1582bee19c2b4464583891ef36bd7fd70f848ba86a4c",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/dip.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.bond",
+      "source": "art/generated/curios/bond.png",
+      "source_sha256": "f1e416ed33e65774abd35aadc774b5e1017c6f5afc0dbbca9aca7a804d9af723",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/bond.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.wholesale",
+      "source": "art/generated/curios/wholesale.png",
+      "source_sha256": "195c8f5ba0bdc5d5ef4a0fec421aa4288d65aa327e80712efb82a376570030dd",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/wholesale.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.token",
+      "source": "art/generated/curios/token.png",
+      "source_sha256": "9822eed75f418176d340a547756d136b650901553467880e0458a3442826d629",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/token.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.blindfold",
+      "source": "art/generated/curios/blindfold.png",
+      "source_sha256": "566eacc1cf2bd42b7a4b6d5b9a8ba965f118ea13209285d189b9f5c11db79ee3",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/blindfold.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.signet",
+      "source": "art/generated/curios/signet.png",
+      "source_sha256": "618678c23a97653bb2adfcecd5c6189b7f76a3852d311e6f72a3f71f82c6c154",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/signet.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.tongue",
+      "source": "art/generated/curios/tongue.png",
+      "source_sha256": "ee433730c8a67accf015a8113140d08ac0e4ea1a5e64743e6fd91a8b1e97e489",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/tongue.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.knot",
+      "source": "art/generated/curios/knot.png",
+      "source_sha256": "ab90fe32e998c0bce6e0d3ae59f01fa530a127360404bf138f4bd04b48206753",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/knot.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.hourglass",
+      "source": "art/generated/curios/hourglass.png",
+      "source_sha256": "67f610f5404777feb62368a7a4ca9e63ad49829b9f3e53ab5c8afef9758d40d4",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/hourglass.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.bell",
+      "source": "art/generated/curios/bell.png",
+      "source_sha256": "a3efe21150797a576de6084f3ab47c22deab9883dd285ba8e2ef16b6da2c5f41",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/bell.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.coffer",
+      "source": "art/generated/curios/coffer.png",
+      "source_sha256": "5620b59f0c5efbc7782f68ba822dddf693e02fa69bcded5e2cb5f561080d1a2b",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/coffer.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.goldentongue",
+      "source": "art/generated/curios/goldentongue.png",
+      "source_sha256": "224f1cf617cfbcb127bc4c41f64f63b584adfb737d1ba394e80acd0f50d2454f",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/goldentongue.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.trumpet",
+      "source": "art/generated/curios/trumpet.png",
+      "source_sha256": "3f7e8327f9f575da60b2e004d285725d2fa1534dac3bbb7e283e330e28ef31a1",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/trumpet.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.watch",
+      "source": "art/generated/curios/watch.png",
+      "source_sha256": "a93e22063cc7e999614db5c39ac1edd905d52a0549cbb0335ec74d277d7daba1",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/watch.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.beads",
+      "source": "art/generated/curios/beads.png",
+      "source_sha256": "3eafc0f103a05a33a543c1d7f151e890d482ced9f2e2067d40c6831f3d5d56ad",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/beads.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.seal",
+      "source": "art/generated/curios/seal.png",
+      "source_sha256": "aeb8ca2502b4b3c336510c33eeb06c188b4109006059740dfe0ededb4b865bf4",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/seal.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.register",
+      "source": "art/generated/curios/register.png",
+      "source_sha256": "3395a5fb0d8e96406e3df0861ce060d4efe15a2cc9ff47df74f1a17243ef5bd0",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/register.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.crescent",
+      "source": "art/generated/curios/crescent.png",
+      "source_sha256": "e4a8c96eb518fd5c6fd284c3188979c1cdc60e8c8554c53336bb0de2205cd10e",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/crescent.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.fork",
+      "source": "art/generated/curios/fork.png",
+      "source_sha256": "2659262a022d9f6436fe7924309ee641ef343a9ee5ac319803165f8ae4792b85",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/fork.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.ledger",
+      "source": "art/generated/curios/ledger.png",
+      "source_sha256": "b5fd7f636b3f7222a303b80e7817a4c55eb496517796da13beef3c0a3af0bc08",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/ledger.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.truthglass",
+      "source": "art/generated/curios/truthglass.png",
+      "source_sha256": "d7585a3a593b2456c4baea5ff783eb9d95da3bb6c58d646c274caaa0116e5055",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/truthglass.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.crate",
+      "source": "art/generated/curios/crate.png",
+      "source_sha256": "14841abd0bb5c9914bdaa968fb3229589a65d58f6e4502cf49da02adafc8d879",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/crate.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.hook",
+      "source": "art/generated/curios/hook.png",
+      "source_sha256": "23dbad33cdf56d68561a0dc54d119e770b140b81c1ae23ee69786e2188a9f33d",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/hook.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.rod",
+      "source": "art/generated/curios/rod.png",
+      "source_sha256": "31be1c1fd468827628032b0356282d088afc8730686f83959571bcf12f052c9e",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/rod.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.log",
+      "source": "art/generated/curios/log.png",
+      "source_sha256": "d26e7eb2657a37feb455eb4ed4dabbfed5dccd9356e00d66913f45822506548a",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/log.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.pass",
+      "source": "art/generated/curios/pass.png",
+      "source_sha256": "853a45fcbaadaa18249eab8d2dd07c9fc51254099e53252d4c21d24d5ad3cd08",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/pass.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.compass",
+      "source": "art/generated/curios/compass.png",
+      "source_sha256": "35710933feb65342022b4efc634413086e89cdc1280dff0d57c2f170e9a752cb",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/compass.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.wardlamp",
+      "source": "art/generated/curios/wardlamp.png",
+      "source_sha256": "9370bde484b0d03743144e33116690bc034649eecd528de5734eb08d848443ea",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/wardlamp.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.pillow",
+      "source": "art/generated/curios/pillow.png",
+      "source_sha256": "6f8fadd91802bb123b6535de2761ecabc180963e9ab0f960f5e368ddfb5f6c2e",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/pillow.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.wardtally",
+      "source": "art/generated/curios/wardtally.png",
+      "source_sha256": "b0a13a216284804b5e92d9da429139d319ffd6f152e1b443cff68b0fa49529f7",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/wardtally.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.wardkey",
+      "source": "art/generated/curios/wardkey.png",
+      "source_sha256": "ec90f5c69caa3394f4033e79fa338e6aaecccccc1857842ba4d402ce1922ec48",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/wardkey.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.aldricseal",
+      "source": "art/generated/curios/aldricseal.png",
+      "source_sha256": "bbf84289a155b3540d9e717bf30cd99e82d6b3e7478e1827a16bd8da5872f2ed",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/aldricseal.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.shell",
+      "source": "art/generated/curios/shell.png",
+      "source_sha256": "efde76a0d3803c25b1f44564a965dae1b6a2ca815bc3a17e286b9320105e79cd",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/shell.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.coin",
+      "source": "art/generated/curios/coin.png",
+      "source_sha256": "c38c3d33ad5b7ad6d4953905cfea1093f84616b7aed310e150b4842502abadab",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/coin.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.foot",
+      "source": "art/generated/curios/foot.png",
+      "source_sha256": "4fe1842caf9ec1878578dc7a3f1bd530a4d34fb39345a9842e9119d6f6d729e8",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/foot.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.wishbone",
+      "source": "art/generated/curios/wishbone.png",
+      "source_sha256": "2b9ffd82716465a62e0857ed0036b602abc148013fa9c98a9506f618d96cd2b8",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/wishbone.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.horseshoe",
+      "source": "art/generated/curios/horseshoe.png",
+      "source_sha256": "fccbc7cafa47ae043b12902020479a8a5ba51b0a0088e423e257ad444e335e7f",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/horseshoe.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.clover",
+      "source": "art/generated/curios/clover.png",
+      "source_sha256": "8acbb847775771294fa4e0b2b5353a406ae2ef91b103655bf45de27eaf6ce5db",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/clover.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.star",
+      "source": "art/generated/curios/star.png",
+      "source_sha256": "8fb3a76bcf54b51fc617a33b6ef10a4a495bd842dce8c0de23488929df0a22ca",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/star.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.spindle",
+      "source": "art/generated/curios/spindle.png",
+      "source_sha256": "fd026a020ce6d240e22742d03e272c02cec43c3687ced03adc29eab51b3bf9da",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/spindle.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.lantern",
+      "source": "art/generated/curios/lantern.png",
+      "source_sha256": "be6fe0e5f0957a196f305dc18fa06a9fa0afaf6427ffdb5782c4dce3b19b2b9e",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/lantern.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.queue",
+      "source": "art/generated/curios/queue.png",
+      "source_sha256": "7d94368d21299f27730dfac4d4857477aca995306d935ba7530a7325463ec8af",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/queue.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.horn",
+      "source": "art/generated/curios/horn.png",
+      "source_sha256": "07c15ca1dc1b12c5f04d4386a27756afa6c19a2ef71fcf73ee977d22442a2fad",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/horn.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.guestbook",
+      "source": "art/generated/curios/guestbook.png",
+      "source_sha256": "291770f9b55651eb95cbf4a97c05dc571754ea5dad79835f96e7f9802de79b66",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/guestbook.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.catalogue",
+      "source": "art/generated/curios/catalogue.png",
+      "source_sha256": "c83655ca17108ccb33bc3c65640289078f7a6b0213582d7089844586dd14a792",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/catalogue.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.dome",
+      "source": "art/generated/curios/dome.png",
+      "source_sha256": "041596b6a7220b1ea72d01bfc652f5e3f580d5aa8a39c4226bfc766cbca668e4",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/dome.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.book",
+      "source": "art/generated/curios/book.png",
+      "source_sha256": "409fe91dae521d3f29f135a8857e731b01c617a4cdc244380c34859d1d8f5fd8",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/book.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.rope",
+      "source": "art/generated/curios/rope.png",
+      "source_sha256": "7da8aac500950bd2c834a5fa3d2930495cbef1baf5870f3e2514c48664edaad9",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/rope.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.lamps",
+      "source": "art/generated/curios/lamps.png",
+      "source_sha256": "44dfbb894c4dad1e3e7c1edd66fd3300065cff42ee2f67da9dc7b01860e293f3",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/lamps.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.gauntlet",
+      "source": "art/generated/curios/gauntlet.png",
+      "source_sha256": "ef552d9517b201e3ef21b4358cc9d7c391e152353f5f144c429d054029dfd219",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/gauntlet.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.cap",
+      "source": "art/generated/curios/cap.png",
+      "source_sha256": "ed82e587cef1870df75594461352ee22d0f8c4c6a698986dc3d1ab863fb24ac7",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/cap.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.whetstone",
+      "source": "art/generated/curios/whetstone.png",
+      "source_sha256": "894146805337b06c73a320fa58cdd0f20c6e02b7452f6f762a7e44b48f4e1f8f",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/whetstone.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.dummy",
+      "source": "art/generated/curios/dummy.png",
+      "source_sha256": "990f13c270d9265b51d030d7dd4443ba9d9f1ade3206e1b5235df9525b90ec39",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/dummy.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.scales",
+      "source": "art/generated/curios/scales.png",
+      "source_sha256": "0a7bc1152422d2c96f85bcadc7f5365dd3d67cb068df926dccbc2bec3dfc2b1d",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/scales.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.still",
+      "source": "art/generated/curios/still.png",
+      "source_sha256": "4de12cf7380b4e45a92a06a99abe0b2d71d9a2cb1d909d75642e276a5e33adc6",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/still.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.desk",
+      "source": "art/generated/curios/desk.png",
+      "source_sha256": "69f5bb73ca27766081b3923983ef08a43a3387969247e7fdce57fd93506655c0",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/desk.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.wheel",
+      "source": "art/generated/curios/wheel.png",
+      "source_sha256": "b820a4a1e93152c16389d6c84bbbdda75c6cb4357be9cb056b41a815be5dea96",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/wheel.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.oil",
+      "source": "art/generated/curios/oil.png",
+      "source_sha256": "88acc53a415f3ffc2a766240ad67db9904628a54ad4268418561308f94c2ed86",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/oil.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.knife",
+      "source": "art/generated/curios/knife.png",
+      "source_sha256": "e67edd59d396e3c7684f24cee4fbd722aab23a3077078718062eb48e18af9ca3",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/knife.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.gloves",
+      "source": "art/generated/curios/gloves.png",
+      "source_sha256": "0b2260093cf6176af3b219b562055bf3bc34b1823ef8a8ab91ace8b93478a768",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/gloves.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.loupe",
+      "source": "art/generated/curios/loupe.png",
+      "source_sha256": "fdc23c7655e05c7ca36dbca5d58691232921a63e587977f9bb8574c9ff9c6c51",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/loupe.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.mark",
+      "source": "art/generated/curios/mark.png",
+      "source_sha256": "ee74921ece579039e911b80f75a5894f33e223c1fbb27792c08a7a157693a3b6",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/mark.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.purse",
+      "source": "art/generated/curios/purse.png",
+      "source_sha256": "db00117e9e44e5eb3b1800766928616b7a5fda71cbd9d784d205a03bf292b4f4",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/purse.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.ticket",
+      "source": "art/generated/curios/ticket.png",
+      "source_sha256": "240fecab9f57d19604b632638b55df0bdf1acfa84147cd164dbb49f84c1e9d4a",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/ticket.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.marker",
+      "source": "art/generated/curios/marker.png",
+      "source_sha256": "d1aa8bc132da689b05f1f03a35a425c6200fa3176d5eeb31f05647c8a5bcf232",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/marker.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.jar",
+      "source": "art/generated/curios/jar.png",
+      "source_sha256": "45003ba065fb5a96a7b81d01fa9711b5596e51228031aa3add6364090e86d94b",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/jar.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.lockbox",
+      "source": "art/generated/curios/lockbox.png",
+      "source_sha256": "870acb0dbb51365caeed398c8465ae7e42355cb6977d41f63e02d63c8b63e976",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/lockbox.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.note",
+      "source": "art/generated/curios/note.png",
+      "source_sha256": "97cc9f2031bf513239df1f46062825d4e571852c471001e082bb127edce02bee",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/note.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.letter",
+      "source": "art/generated/curios/letter.png",
+      "source_sha256": "0af97b63a7ca0977e657f8eb431761fe94560a79742adde1cb66fbad64ed33ff",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/letter.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.ribbon",
+      "source": "art/generated/curios/ribbon.png",
+      "source_sha256": "4f63fee66988332aa6d072f78b88eb15d4a0263a283c09dd48de2a02060142d7",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/ribbon.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.errand",
+      "source": "art/generated/curios/errand.png",
+      "source_sha256": "d656a1b2af156728672a3d559dd36742a5672f2637708aba22b87747f220edef",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/errand.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    },
+    {
+      "id": "curio.net",
+      "source": "art/generated/curios/net.png",
+      "source_sha256": "c645f3c64315ce19448d2f068bdd19847c0f82d17d2b6b9cf574c697662ef9f6",
+      "destinations": [
+        {
+          "path": "assets/ui/curios/net.png",
+          "size": [
+            56,
+            56
+          ],
+          "exact_rgba": true
+        }
+      ]
+    }
+  ]
+}

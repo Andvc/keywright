@@ -25,7 +25,7 @@ public partial class RunEndPhase : Phase
 
     public override void _Ready()
     {
-        Add(UiKit.MakeShop(State.Tier, _cleared ? 0.55f : 0.25f));
+        Add(UiKit.MakeShop(State.Tier, _cleared ? 0.65f : 0.4f, ShopHour.Evening, State));
         var color = _cleared ? Palette.Gold : Palette.Bad;
         string title = _cleared ? (State.VaultOpened ? "THE LOCKING HOLDS" : "DEBT CLEARED") : "FORECLOSED";
         var logo = Add(UiKit.MakeLabel(title, 64, color, HorizontalAlignment.Center, outline: 8).Place(0, 80, 1280, 80));
