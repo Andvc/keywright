@@ -114,8 +114,12 @@ public static class Challenges
 {
     public const int Max = 8;
 
-    /// <summary>Each level puts every due up by this share of what it was at level 0 (settable, for the sim's tuning).</summary>
-    public static float DebtStep { get; set; } = 0.1f;
+    /// <summary>
+    /// Each level puts every due up by this share of what it was at level 0 (settable, for the sim's tuning). A tenth
+    /// until 0.28, whose tales carried the top levels further (Kit cleared level 8 a fifth of the time): 0.15 keeps the
+    /// curve 0.27 had.
+    /// </summary>
+    public static float DebtStep { get; set; } = 0.15f;
 
     /// <summary>What a level does to the Guild's dues.</summary>
     public static float DebtFactor(int level) => 1 + DebtStep * Math.Clamp(level, 0, Max);

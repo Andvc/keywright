@@ -219,12 +219,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   judgment pushes that later, and the run's build and its tales decide the rest (0.28, 300 runs: the careful player
   buying curios as they come clears about half the time, 47%; the same player with no curios about a third, 36%: the
   tales' gold and tools carry a run without a build further than v22's one in five; with no Heartsongs 43%, with no
-  tales 41%; a first run about one in twenty-five); careers first clear around the seventh run, clear level 4 in the twenties, and
-  each level after costs a few points more (one career in three has cleared level 6 by run 30, one in twelve level 8). A run's length is part of the
+  tales 41%; a first run about one in twenty-five); careers first clear around the fifth run (0.28's tales carry a
+  learner further than 0.27's seventh), clear level 4 in the twenties, and each level after costs a few points more
+  (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6 by run 30, level 8 is a wall). A run's length is part of the
   balance: `--sim=experience` should keep a first run around two hours (0.28: 121 minutes; the tales' talks added ten to
   0.27's 112) and no day over its load (6; the move to Thornwick still is, for about half of first runs, as in 0.27). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
-  are foreclosed within a few weeks, and no early week sends careful players to Bram's word (the fourth of five does
-  for about a fifth of them: the ones still at Thornwick). Anything added to the run goes in `SaveData` too; the profile across runs is
+  are foreclosed within a few weeks, and no early week sends careful players to Bram's word (the third does for about
+  one in thirty since 0.28, a tale gone wrong; the fourth of five for about a fifth of them: the ones still at Thornwick). Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts
   nearly broke. Bram's working purse (`GameState.WorkingPurse`) is the day-end advice, the purchase warning and what
   `Strategy.Reserve` keeps, so the advice is what the sim's careful player does: tune them together. The whole debt
