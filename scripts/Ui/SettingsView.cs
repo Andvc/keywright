@@ -5,16 +5,16 @@ namespace Keywright.Ui;
 
 /// <summary>
 /// The settings, over whatever screen you're on (it keeps working while the game is paused): volume, fullscreen,
-/// screen shake and flashes, Uncle Bram's tips, and which sound each kind of thing makes. Changes apply at once and
-/// are saved when it closes.
+/// screen shake and flashes, outlines, Uncle Bram's tips, and which sound each kind of thing makes. Changes apply at
+/// once and are saved when it closes.
 /// </summary>
 public partial class SettingsView : Control
 {
-    const float W = 640, H = 492, X = (1280 - W) / 2, Y = (720 - H) / 2, ControlX = X + 320;
+    const float W = 640, H = 548, X = (1280 - W) / 2, Y = (720 - H) / 2, ControlX = X + 320;
 
     public event Action Closed;
 
-    Button _fullscreen, _shake, _tips, _gm;
+    Button _fullscreen, _shake, _outlines, _tips, _gm;
     Label _volume;
 
     public override void _Ready()
@@ -52,6 +52,11 @@ public partial class SettingsView : Control
         _shake = Put(Toggle(row, () => Settings.Shake = Settings.Shake >= 1f ? 0.5f : Settings.Shake > 0f ? 0f : 1f));
 
         row += 56;
+        Row("Outlines", row);
+        _outlines = Put(Toggle(row, ToggleOutlines));
+        _outlines.TooltipText = "A dark outline round everyone and along the counter's edge, so they stand out from the scene.";
+
+        row += 56;
         Row("Uncle Bram's tips", row);
         _tips = Put(Toggle(row, () =>
         {
@@ -72,6 +77,14 @@ public partial class SettingsView : Control
         Refresh();
         Modulate = Colors.Transparent;
         CreateTween().TweenProperty(this, "modulate", Colors.White, 0.12f);
+    }
+
+    /// <summary>Outlines on or off, everywhere on screen at once (the bot's shell demo uses this too).</summary>
+    public void ToggleOutlines()
+    {
+        Settings.Outlines = !Settings.Outlines;
+        UiKit.ShowOutlines(GetTree(), Settings.Outlines);
+        if (_outlines != null) _outlines.Text = Settings.Outlines ? "On" : "Off";
     }
 
     SoundSetsView _sounds;
@@ -104,6 +117,7 @@ public partial class SettingsView : Control
         _volume.Text = $"{Mathf.RoundToInt(Settings.Volume * 100)}%";
         _fullscreen.Text = Settings.Fullscreen ? "On" : "Off";
         _shake.Text = Settings.ShakeWord;
+        _outlines.Text = Settings.Outlines ? "On" : "Off";
         _tips.Text = Settings.Tips ? "On" : "Off";
         _gm.Text = Settings.Gm ? "On" : "Off";
     }

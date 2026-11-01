@@ -49,11 +49,11 @@ public partial class MentorView : Control
         _panel = UiKit.MakePanel(Palette.Gold.Darkened(0.25f)).Place(0, 0, W, H);
         _panel.MouseFilter = MouseFilterEnum.Ignore;
         AddChild(_panel);
-        AddChild(new Sprite2D
+        AddChild(UiKit.Outline(new Sprite2D
         {
-            Texture = UiKit.Outlined("res://assets/sprites/sellers/bram.png"),
+            Texture = GD.Load<Texture2D>("res://assets/sprites/sellers/bram.png"),
             Position = new Vector2(52, 58),
-        });
+        }));
         AddChild(UiKit.MakeLabel(Hints.Mentor.ToUpperInvariant(), 16, Palette.Gold, HorizontalAlignment.Center).Place(4, 98, 96, 20));
         _text = UiKit.MakeLabel("", 16, Palette.Text).Wrapped().Place(104, 8, W - 116, H - 30);
         _text.VerticalAlignment = VerticalAlignment.Center;

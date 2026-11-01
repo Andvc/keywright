@@ -98,7 +98,8 @@ public partial class ScenePhase : Phase
     static void Show(Face face, string key)
     {
         face.Who = key;
-        face.Portrait.Texture = UiKit.Outlined($"res://assets/figures/{key}.png", feet: true);
+        face.Portrait.Texture = GD.Load<Texture2D>($"res://assets/figures/{key}.png");
+        UiKit.Outline(face.Portrait, whole: true);
         face.Name.Text = Story.Name(key);
     }
 

@@ -95,10 +95,13 @@ The authorized round-2 work is complete; stop here.
 Owner's request, 2026-11-01: **"Add programmatic outlines to elements that need to stand out, such as characters
 and the countertop, to improve visual clarity."** The art stays without outlines; the game draws them. One pixel of
 `#1a1420` (`Palette.Outline`, the chest's own outline colour) goes outside the silhouette of every character, wherever
-one is shown (`UiKit.Outlined`):
+one is shown (`UiKit.Outline`):
 - full figures at the counter, on Nim's mornings and the Guild's night, and in story scenes;
 - the head crops in the queue, the notebook, Bram's tips and the character cards.
 
 The counter's far edge gets the same line, a row above it across the screen (`ShopView`). It passes behind the
 chest, the props and whoever stands in front of the counter. Things, props, curios and the scene's other layers stay
 without outlines.
+
+The owner then asked for a setting (2026-11-01): **Settings > Outlines** (on by default) shows or hides every outline
+at once, on whatever screen is showing, and the choice is saved in `settings.cfg`.

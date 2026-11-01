@@ -1068,9 +1068,16 @@ customers come, and the Guild comes at night: the sky changes, the rest is tinte
 across the counter; the seller, standing full length on the far side of the counter (it hides their legs; a goblin
 only just shows over it, a knight towers); the display shelf and the shop's own frame (the top bar sits on its band);
 the counter, with the tools you've bought standing beside the chest; and the appraisal sheet the slip is printed on,
-grander at every move. Until those layers are made and put in the game (`art/README.md`), the game shows round 1's
-shop pictures and portraits. Until 0.23 every picture was drawn in code, and `tools/custom_art.py` still draws a
+grander at every move. Until 0.23 every picture was drawn in code, and `tools/custom_art.py` still draws a
 placeholder for anything new until its picture is made.
+
+The first round-2 pictures were calm but too plain, so a style study (`art/study/`) drew the stall's counter in four
+styles at three levels of detail before anything else was made; the owner chose warm storybook cartoons with detail
+(C2, at the 4x grid), drawn without outlines, and 0.26 puts all of it in the game. The art stays without outlines,
+but some things have to stand out from a detailed scene: the person you're trading with, and the counter's edge the
+chest stands on. So the game draws those itself, one dark pixel outside every character's silhouette (full figures and
+the faces cut from them) and a line along the counter's far edge, and a setting turns them off for anyone who'd rather
+have the art as drawn.
 
 ## Title, saves and settings
 
@@ -1079,7 +1086,8 @@ your shop as you left it. New game opens the character screen (`SetupPhase`): th
 what unlocks them), the chosen one's rules, and the challenge level with its terms and multiplier. The shop is
 saved to `user://save.json` at the start of each day (`GameState.Save` and `Load`, plain JSON from Core), so leaving
 mid-day starts that day over; the pause menu (Esc, or Menu in the top bar) says so. Settings (`user://settings.cfg`):
-volume, fullscreen, screen shake and flashes (full, reduced or off), Uncle Bram's tips, and **item sounds**: for each
+volume, fullscreen, screen shake and flashes (full, reduced or off), outlines (round everyone and along the counter's
+edge, on whatever screen is showing: see the art, above), Uncle Bram's tips, and **item sounds**: for each
 kind of thing, which of three or four sounds it makes (`Audio.SoundSets`; recorded ones from Kenney's CC0 packs via
 `tools/import_art.py`, a few synthesized in `Sfx`). Each kind's sound stays the one you'd expect in real life (a
 purse, a pot, a thump of cloth, a bottle, pages, glass), so any set keeps the rules readable; the choice is taste.

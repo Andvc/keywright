@@ -35,12 +35,12 @@ public partial class SellerView : Node2D
                 p.DrawRect(new Rect2(96, 748 - lift * 4, 208, lift * 4), Palette.Wood);
                 p.DrawRect(new Rect2(96, 748 - lift * 4, 208, 12), Palette.WoodLight);
             }));
-        _body.AddChild(new Sprite2D
+        _body.AddChild(UiKit.Outline(new Sprite2D
         {
-            Texture = UiKit.Outlined($"res://assets/figures/{_seller.Key}.png", feet: true),
+            Texture = GD.Load<Texture2D>($"res://assets/figures/{_seller.Key}.png"),
             Centered = false, Position = origin, Scale = Vector2.One * 4,
             TextureFilter = TextureFilterEnum.Nearest,
-        });
+        }, whole: true));
         if (Clickable)
         {
             var face = new Button

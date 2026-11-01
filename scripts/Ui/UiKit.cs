@@ -166,43 +166,73 @@ public static class UiKit
     }
 
     /// <summary>A pixel sprite at an integer scale, centered on <paramref name="center"/> (outlined: see
-    /// <see cref="Outlined"/>).</summary>
+    /// <see cref="Outline"/>).</summary>
     public static Sprite2D MakeSprite(string path, Vector2 center, int scale, bool outlined = false)
     {
-        return new Sprite2D
+        var sprite = new Sprite2D
         {
-            Texture = outlined ? Outlined(path) : GD.Load<Texture2D>(path),
+            Texture = GD.Load<Texture2D>(path),
             Position = center,
             Scale = Vector2.One * scale,
         };
+        return outlined ? Outline(sprite) : sprite;
     }
 
-    static readonly Dictionary<string, Texture2D> _outlined = new();
+    /// <summary>Every outline on screen, which the Outlines setting shows or hides at once (<see cref="ShowOutlines"/>).</summary>
+    public const string Outlines = "outlines";
+
+    static readonly Dictionary<(Texture2D, bool), Texture2D> _rings = new();
 
     /// <summary>
-    /// A picture with a one-pixel outline round its silhouette, outside it, in <see cref="Palette.Outline"/>: what has to
-    /// stand out from the scene behind it (everyone's figure and face). The game draws it rather than the art, which round
-    /// 2 draws without outlines. A full figure's feet are on its bottom edge: <paramref name="feet"/> adds a row under them
-    /// for theirs. Where a face is cut from a figure, the cut gets none (it has nothing transparent beside it).
+    /// Gives <paramref name="sprite"/> a one-pixel outline round its picture's silhouette, outside it, in
+    /// <see cref="Palette.Outline"/>: what has to stand out from the scene behind it (everyone's figure and face). The game
+    /// draws it rather than the art, which round 2 draws without outlines. It's a sprite of its own behind the picture,
+    /// lit and moved with it, and the Outlines setting shows or hides every one. A <paramref name="whole"/> figure is
+    /// outlined beyond its picture's edges too (its feet stand on the bottom one); a face cut from a figure isn't, so the
+    /// cut stays bare. Call it again after changing the sprite's picture.
     /// </summary>
-    public static Texture2D Outlined(string path, bool feet = false)
+    public static T Outline<T>(T sprite, bool whole = false) where T : Sprite2D
     {
-        string key = feet ? path + "|feet" : path;
-        if (_outlined.TryGetValue(key, out var done)) return done;
-        var art = GD.Load<Texture2D>(path).GetImage();
+        foreach (var old in sprite.GetChildren())
+            if (old.IsInGroup(Outlines)) old.QueueFree();
+        var ring = new Sprite2D
+        {
+            Texture = Ring(sprite.Texture, whole),
+            Centered = sprite.Centered,
+            // One pixel bigger all round: centred, it lines up by itself; from the corner, it starts a pixel up and left.
+            Position = sprite.Centered ? Vector2.Zero : new Vector2(-1, -1),
+            ShowBehindParent = true,
+            Visible = Settings.Outlines,
+        };
+        ring.AddToGroup(Outlines);
+        sprite.AddChild(ring);
+        return sprite;
+    }
+
+    /// <summary>Shows or hides every outline on screen, for the Outlines setting.</summary>
+    public static void ShowOutlines(SceneTree tree, bool on)
+    {
+        foreach (var node in tree.GetNodesInGroup(Outlines))
+            if (node is CanvasItem item) item.Visible = on;
+    }
+
+    /// <summary>The outline of a picture alone, a pixel bigger on every side: the ring round its silhouette (inside the
+    /// picture's own edges unless it's <paramref name="whole"/>).</summary>
+    static Texture2D Ring(Texture2D picture, bool whole)
+    {
+        if (_rings.TryGetValue((picture, whole), out var done)) return done;
+        var art = picture.GetImage();
         if (art.IsCompressed()) art.Decompress();
         art.Convert(Image.Format.Rgba8);
-        int w = art.GetWidth(), h = art.GetHeight() + (feet ? 1 : 0);
-        var img = Image.CreateEmpty(w, h, false, Image.Format.Rgba8);
-        img.BlitRect(art, new Rect2I(0, 0, w, art.GetHeight()), Vector2I.Zero);
-        bool Solid(int x, int y) => x >= 0 && y >= 0 && x < w && y < h && img.GetPixel(x, y).A >= 0.5f;
-        var ring = new List<Vector2I>();
-        for (int y = 0; y < h; y++)
-            for (int x = 0; x < w; x++)
+        int w = art.GetWidth(), h = art.GetHeight();
+        bool Solid(int x, int y) => x >= 0 && y >= 0 && x < w && y < h && art.GetPixel(x, y).A >= 0.5f;
+        var ring = Image.CreateEmpty(w + 2, h + 2, false, Image.Format.Rgba8);
+        int edge = whole ? 1 : 0;
+        for (int y = -edge; y < h + edge; y++)
+            for (int x = -edge; x < w + edge; x++)
                 if (!Solid(x, y) && (Solid(x - 1, y) || Solid(x + 1, y) || Solid(x, y - 1) || Solid(x, y + 1)))
-                    ring.Add(new Vector2I(x, y));
-        foreach (var at in ring) img.SetPixelv(at, Palette.Outline);
-        return _outlined[key] = ImageTexture.CreateFromImage(img);
+                    ring.SetPixel(x + 1, y + 1, Palette.Outline);
+        return _rings[(picture, whole)] = ImageTexture.CreateFromImage(ring);
     }
 
     /// <summary>The square every thing's art fits in (trimmed, a sprite is at most this): slots scale by it, so things

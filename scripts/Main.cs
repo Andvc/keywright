@@ -32,7 +32,7 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.25";
+    public const string Version = "Early Access 0.26";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -310,6 +310,14 @@ public partial class Main : Node2D
         await Wait(0.6);
         Moment("13_item_sounds");
         await Wait(0.8);
+        // The Outlines setting at work: off, a look at the scene with the pause menu out of the way, and back on.
+        settings.ToggleOutlines();
+        pause.Visible = false;
+        await Wait(0.4);
+        Moment("13_outlines_off");
+        await Wait(0.5);
+        pause.Visible = true;
+        settings.ToggleOutlines();
         // With GM mode on: its buttons at work (the day can't be skipped during a scene), and the journal it filled.
         if (Settings.Gm)
         {

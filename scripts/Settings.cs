@@ -4,8 +4,9 @@ namespace Keywright;
 
 /// <summary>
 /// The player's settings, kept in user://settings.cfg: volume, fullscreen, how much the screen shakes and flashes,
-/// whether Uncle Bram gives tips (for new games, and for the one in progress), which sound each kind of thing makes,
-/// and GM mode (for testing: the pause menu gets gold, a skipped day and the whole journal).
+/// whether people and the counter are outlined, whether Uncle Bram gives tips (for new games, and for the one in
+/// progress), which sound each kind of thing makes, and GM mode (for testing: the pause menu gets gold, a skipped day and
+/// the whole journal).
 /// </summary>
 public static class Settings
 {
@@ -18,6 +19,9 @@ public static class Settings
 
     /// <summary>How strong screen shake and flashes are: 1 full, 0.5 reduced, 0 off.</summary>
     public static float Shake { get; set; } = 1f;
+
+    /// <summary>The outline round everyone and along the counter's edge (<see cref="Ui.UiKit.Outline"/>).</summary>
+    public static bool Outlines { get; set; } = true;
 
     public static bool Tips { get; set; } = true;
 
@@ -39,6 +43,7 @@ public static class Settings
             Volume = (float)file.GetValue("audio", "volume", Volume);
             Fullscreen = (bool)file.GetValue("video", "fullscreen", Fullscreen);
             Shake = (float)file.GetValue("video", "shake", Shake);
+            Outlines = (bool)file.GetValue("video", "outlines", Outlines);
             Tips = (bool)file.GetValue("game", "tips", Tips);
             Gm = Gm || (bool)file.GetValue("game", "gm", Gm);
             foreach (var kind in System.Enum.GetValues<Core.Category>())
@@ -53,6 +58,7 @@ public static class Settings
         file.SetValue("audio", "volume", Volume);
         file.SetValue("video", "fullscreen", Fullscreen);
         file.SetValue("video", "shake", Shake);
+        file.SetValue("video", "outlines", Outlines);
         file.SetValue("game", "tips", Tips);
         file.SetValue("game", "gm", Gm);
         foreach (var kind in System.Enum.GetValues<Core.Category>())

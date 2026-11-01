@@ -60,7 +60,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine.
    `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the
    character screen, a new game (Hesk, at challenge level 8: the most boons and banes the character screen and the
-   pause menu ever list), the pause menu and its collection, and the settings (with `--gm`, the GM panel too: gold, the
+   pause menu ever list), the pause menu and its collection, and the settings (with a look at the scene with the outlines turned off; with `--gm`, the GM panel too: gold, the
    notebook and the collection filled, a skip refused mid-scene). A bot run shows the notebook's pages, clicks the
    Guild's due in the top bar once it's up (the notebook at the debt), and opens the collection over the counter.
    Keep screenshot folders named `shots*` (git- and export-ignored).
@@ -263,7 +263,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The game opens on `TitlePhase`; `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
   for the bot or debugging flags) and Esc opens `PauseMenu`. A day: `Main.StartDay` (the week's scene, Nim), the
   counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening, `DuesPhase` on the fifth). `Settings` (user://settings.cfg) scales screen shake and
-  flashes: route new screen effects through `Main.Shake`/`Flash`. Anything added to `GameState` that should survive
+  flashes (route new screen effects through `Main.Shake`/`Flash`) and turns the outlines off and on. Anything added to `GameState` that should survive
   a day boundary goes in `SaveData` too.
 - Every seller has one way of judging a chest (`Judgment`: listening, counting rattles, weight, colour, a dream, a
   trade they know, no idea) with a blind spot a careful player can see through, one way to trade,
@@ -307,8 +307,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   figure or thing, no outlines in the art, the 74-colour palette in `art/palette/`, lit from the upper left. The game
   outlines what has to stand out itself (the owner's request, 2026-11-01): one pixel of `Palette.Outline` (`#1a1420`,
   the chest's own) outside every character's silhouette, full figures and the head crops cut from them
-  (`UiKit.Outlined`), and a row of it along the counter's far edge (`ShopView`); things, props and the other layers
-  have none, and nobody draws outlines into the art. The shop scene is layers (`art/tools/scene.py` has the layout): a
+  (`UiKit.Outline`: a sprite of its own behind the picture), and a row of it along the counter's far edge
+  (`ShopView`); things, props and the other layers have none, and nobody draws outlines into the art. Settings >
+  Outlines (`Settings.Outlines`, on by default) shows or hides every one at once: they're all in the `UiKit.Outlines`
+  group (`UiKit.ShowOutlines`), so anything new that's outlined goes in it too. The shop scene is layers (`art/tools/scene.py` has the layout): a
   sky per time of day (morning, midday, evening, night; the rest tinted to match), and per shop tier the place across
   the counter, the shop's frame (the top bar sits on its band), the display shelf, the counter, the appraisal sheet and
   lanterns. `ShopView` stacks them at 4x and lights them for the hour; full-length figures stand behind the counter

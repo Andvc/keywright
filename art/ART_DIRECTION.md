@@ -192,7 +192,7 @@ the middle distance just right of centre; the right third is under the sheet mos
 | Colours per asset | places and story scenes 32; figures and the frame 24; shelf, counter, things, Heartsongs, curios and lock faces 16; sheet, props, upgrade icons, the emblem and the Key 12; sky 10; kind icons 8 |
 | Quiet | at most the category's lone specks, edges and brightness step (below); the validator fails anything busier |
 | Value | the counter's opaque pixels average 45-115 in brightness (0-255), the place 45-150, the frame 25-130, the sheet 165-228 |
-| Outline | **None in the art for round-2 redraws.** Every `redo` asset has `outline: false`; use `--no-outline` when processing. No drawn ink contour and no automatic silhouette ring. Retained branding and other round-1 assets keep their existing specs. The game draws one itself where something must stand out from the scene: one pixel of `#1a1420` outside every character's silhouette (full figures and the head crops cut from them, `UiKit.Outlined`) and a row of it along the counter's far edge (`ShopView`) |
+| Outline | **None in the art for round-2 redraws.** Every `redo` asset has `outline: false`; use `--no-outline` when processing. No drawn ink contour and no automatic silhouette ring. Retained branding and other round-1 assets keep their existing specs. The game draws one itself where something must stand out from the scene: one pixel of `#1a1420` outside every character's silhouette (full figures and the head crops cut from them, `UiKit.Outline`) and a row of it along the counter's far edge (`ShopView`), which players can turn off (Settings > Outlines) |
 | Text | none (no letters, numbers, runes that read as letters, signatures or watermarks), except the logo |
 
 ### How quiet is measured

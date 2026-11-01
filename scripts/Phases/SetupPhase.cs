@@ -55,12 +55,12 @@ public partial class SetupPhase : Phase
         var card = UiKit.MakePanel(chosen ? Palette.Gold : open ? Palette.PanelBorder.Lightened(0.2f) : Palette.PanelBorder).Place(x, y, CardW, CardH);
         var face = new Sprite2D
         {
-            Texture = UiKit.Outlined($"res://assets/sprites/sellers/faces/{kin.Key}.png"),
+            Texture = GD.Load<Texture2D>($"res://assets/sprites/sellers/faces/{kin.Key}.png"),
             Position = new Vector2(CardW / 2, 64),
             Scale = Vector2.One * 3,
             Modulate = open ? Colors.White : new Color(0.15f, 0.12f, 0.2f),
         };
-        card.AddChild(face);
+        card.AddChild(UiKit.Outline(face));
         card.AddChild(UiKit.MakeLabel(kin.Name, 24, open ? Palette.Text : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 122, CardW, 30));
         card.AddChild(UiKit.MakeLabel(kin.Title, 16, open ? Palette.Gold : Palette.Muted, HorizontalAlignment.Center).Place(0, 152, CardW, 20));
         card.AddChild(UiKit.MakeLabel(open ? kin.Blurb : kin.Unlock, 16, open ? Palette.Muted : Palette.Warn, HorizontalAlignment.Center).Wrapped()
