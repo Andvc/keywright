@@ -365,7 +365,7 @@ by right (it was lost, buried or drowned); the rest were sold, pledged or given.
   and they come to your counter to offer them (Nettle's clan picks any lock in the hills; the abbey's restorers mend
   relics; the Arcanum lights its stores with witchlight; the Wardens carry lodestones). Say no, and they'll ask again
   in a few days.
-- *Nim at night.* Nim keeps night hours and comes by every evening after the shutters are down, with whatever the day
+- *Nim at night.* Nim keeps night hours and comes by every evening after the shutters are down (from your third), with whatever the day
   turned up: one curio at first, more as he comes to trust the shop (a lantern over the back door, a stool by the
   counter, a standing order).
 

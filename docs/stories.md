@@ -62,8 +62,9 @@ whose people you're at +2 with offers their tools a quarter cheaper (at -2, half
 
 ## Tools from the counter
 
-The best tools of the trade aren't sold in shops: the people who make them come to the counter to offer them, and if
-you say no they come back in a few days. The day's end keeps the building (moves, cabinets, the sign, the crier, the
+The best tools of the trade aren't sold in shops: the people who make them come to the counter to offer them (never
+on the first day at a new place: word of a move takes a day to get round), and if you say no they come back a few days
+later, once you've the gold to pay them (a tradesman calls on a shop that can afford him). The day's end keeps the building (moves, cabinets, the sign, the crier, the
 charter and the seal) and the Guild's Bookkeeping Engine.
 
 | Tool | Who brings it | Why them |
@@ -84,7 +85,8 @@ charter and the seal) and the Guild's Bookkeeping Engine.
 
 ## Nim's table, every night
 
-Nim comes by every night after the shutters are down (after the Guild on its nights), with whatever the day turned
+Nim comes by every night after the shutters are down (after the Guild on its nights; from the third, so the guided first
+days aren't crowded), with whatever the day turned
 up: **one curio** at first. A lantern over the back door (Nim's Lantern), a stool by the counter (Nim's Stool) and a
 standing order (Nim's Order) each lay out one more, four at most; Nim offers them himself, at his table. The cases he
 offers too. His stock builds with you as before (curios for the way you trade are likelier, a legendary only for a

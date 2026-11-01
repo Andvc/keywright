@@ -29,7 +29,7 @@ public static class Guild
     /// Carrying it takes a build come together (or a Heartsong's luck). A first run usually needs Bram's word in the
     /// fourth week and falls in the fifth; a strong run can have all of it early, and pay it off.
     /// </summary>
-    static readonly int[] Dues = { 20, 60, 300, 4000, 45000 };
+    static readonly int[] Dues = { 20, 60, 300, 4000, 55000 };
 
     /// <summary>After the debt: each week twice as much, for as long as you last.</summary>
     const float EndlessGrowth = 2f;

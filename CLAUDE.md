@@ -152,7 +152,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the estate sale, the horn and the crescent; the seller's markup, the dice and the colour stay their own), so ordinary
   growth makes the numbers bigger and leaves the careful player's margin flat (the sim's margins report: check it holds
   when anything is added to the index or left out of it), and a build's edge is what isn't priced. With every upgrade
-  it's about 2.7 at the Emporium; the last due (45,000g) is set above what that earns on a careful margin, so carrying
+  it's about 2.7 at the Emporium; the last due (55,000g; 45,000 until 0.28's tales) is set above what that earns on a careful margin, so carrying
   it takes a build. Bram's working purse (`GameState.WorkingPurse`: two typical chests, `Market.TypicalAsk`, at
   `PriceFactor`) is the day-end advice, what `Strategy.Reserve` keeps, and the line a purchase warns before crossing:
   `ReserveIf`/`ShortNote` work out the purse after the purchase (its effect on the index; the bigger shop for a move),
@@ -166,7 +166,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Curios.Rates`: rares from week 2, legendaries from week 3) and gated by shop (`RarityTier`); a legendary opens for good
   by a feat across runs (`Feat`, `Curios.Feats`, `Profile.Feats`, banked in `Profile.Bank`). Price: a fixed sum by
   rarity plus a share of the purse Nim found you with (`Curios.Price`, `GameState.PeddlerPurse`). Nim comes every night
-  (0.28: after the day's end and the Guild, `GameState.StartNight`, `PeddlerPhase`) with one curio (`Curios.Laid`), one
+  from the third (0.28: after the day's end and the Guild, `GameState.StartNight`, `PeddlerPhase`, `Curios.FirstNight`) with one curio (`Curios.Laid`), one
   more for each of his own upgrades, which he offers at his table (`Upgrade.NimCards`: his lantern, stool and standing
   order; `GameState.PeddlerCount`), with the curio cases; there's no "show me something else". Nim builds with you
   (`Curios.Stock`): curios sharing a tag four times as likely, one for the way of trading of the curio you got
@@ -208,19 +208,20 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The run (`Run.cs`, a partial of `GameState`): five weeks of five days (v21; 0.20 had eight of three); every day has a
   role (`DayRole`, `WeekPlan.Role`), planned a week ahead (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the notebook's
   calendar (`NotebookView.BuildCalendar`, with the Guild's debt across its top): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 300, 4,000 and
-  45,000g, then endless x2; Vane introduces it on the second evening, `GameState.IntroDay`); a story week's first day
+  55,000g, then endless x2; Vane introduces it on the second evening, `GameState.IntroDay`); a story week's first day
   is the story's (`Story.TellsOn`: weeks 1, 2 and 4, and the week after the debt; `GameState.StoryToday`); Nim comes
-  every night (0.28); and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
+  every night from the third (0.28); and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
   foreclosure; commissions (`Commissions.cs`) pay for each find as it's handed over, always at least a quarter over
   what it would sell for (`GameState.CommissionPay`, `Patrons.Premium`), so delivering always beats selling; the story's scenes and the shards of the Aldric Key that open the Crown Chest
   (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
-  judgment pushes that later, and the run's build decides the rest (v22: the careful player buying curios as they come
-  clears about half the time, 48%; the same player with no curios about one in five, and with no Heartsongs 43%; a
-  first run about one in twenty-five); careers first clear around the seventh run, clear level 4 in the twenties, and
+  judgment pushes that later, and the run's build and its tales decide the rest (0.28: the careful player buying curios
+  as they come clears about half the time, 48%; the same player with no curios a little over a quarter, 28%, with no
+  Heartsongs 45%, with no tales 35%; a first run about one in thirty); careers first clear around the seventh run, clear level 4 in the twenties, and
   each level after costs a few points more (one career in three has cleared level 6 by run 30, one in twelve level 8). A run's length is part of the
-  balance: `--sim=experience` should keep a first run under two hours and no day over its load (6). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
+  balance: `--sim=experience` should keep a first run around two hours (0.28: 121 minutes; the tales' talks added ten to
+  0.27's 112) and no day over its load (6; the move to Thornwick still is, for about half of first runs, as in 0.27). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
   are foreclosed within a few weeks, and no early week sends careful players to Bram's word (the fourth of five does
   for about a fifth of them: the ones still at Thornwick). Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts
@@ -343,8 +344,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`DueFor`, with the King's decree), the Wardens warn or search (`Wardens.Search`), the Lockless pay the fence double
   or rob (`Wardens.Robbery`); the rest price their people's tools (`StandingPrice`). Talks play in `TalkPhase` (counter or
   night), answered in the sim by `Strategy.Choose` (the most `Worth`, kinder on a tie). Tools are offered at the counter
-  by the people who make them (`Upgrade.By`, `Offers.cs`; turned down, back in `GameState.OfferAgain` days;
-  `Strategy.WantsOffer` decides as the day's end would); the day's end keeps the building. Stolen chests
+  by the people who make them (`Upgrade.By`, `Offers.cs`; not on a move's first day; turned down, back in
+  `GameState.OfferAgain` days once the morning's purse could pay; `Strategy.WantsOffer` decides as the day's end would); the day's end keeps the building. Stolen chests
   (`Chest.Owner`, `SellerDef.Steals`: Flick mostly, Corvin now and then, tale chests): the mark goes cold at the first
   touch (`CounterPhase.MarkAnswers`); from Thornwick you can send for the Wardens (`GameState.CallWardens`: the seller
   runs, `VisitOutcome.Reported`, a finder's share); bought, it won't open and waits in the back room (`BackRoom`,

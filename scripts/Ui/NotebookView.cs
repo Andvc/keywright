@@ -467,6 +467,7 @@ public partial class NotebookView : Node2D
             row.AddChild(UiKit.MakeLabel(Factions.Word(standing), 16, standing > 0 ? Palette.Good : standing < 0 ? Palette.Warn : Palette.Muted).Place(368, 5, 164, 20));
             if (Math.Abs(standing) >= Factions.Strong && Factions.Ruling.Contains(f))
                 row.TooltipText = Loc.T($"{Factions.Who(f)}\nNow: {now}");
+            _page.AddChild(row);
         }
         float by = y + 32 + factions.Count * 34;
         int held = _state.BackRoom.Count;
@@ -477,34 +478,51 @@ public partial class NotebookView : Node2D
         // The board, and the tales.
         const float rx = 640, rw = 560;
         _page.AddChild(UiKit.MakeLabel(Loc.T("ON THE BOARD"), 16, Palette.Gold).Place(rx, y, rw, 20));
-        var notices = _state.Notices.AsEnumerable().Reverse().Take(3).ToList();
-        if (notices.Count == 0)
-            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing posted."), 16, Palette.Muted).Place(rx, y + 26, rw, 20));
+        var begun = TaleBook.All.Where(t => _state.TaleLog.ContainsKey(t.Key)).ToList();
+        // Three notices, or two once there are more than three stories to make room for.
+        var notices = _state.Notices.AsEnumerable().Reverse().Take(begun.Count > 3 ? 2 : 3).ToList();
         float ny = y + 26;
+        if (notices.Count == 0)
+        {
+            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing posted."), 16, Palette.Muted).Place(rx, ny, rw, 20));
+            ny += 28;
+        }
         foreach (var notice in notices)
         {
             var card = UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(rx - 8, ny, rw, 64);
             card.MouseFilter = Control.MouseFilterEnum.Stop;
             card.TooltipText = notice.Text;
-            card.AddChild(UiKit.MakeLabel(notice.Title, 16, Palette.Gold).Place(10, 6, rw - 20, 20));
-            card.AddChild(UiKit.MakeLabel(notice.Text, 16, Palette.Text).Place(10, 28, rw - 20, 20));
+            card.AddChild(UiKit.MakeLabel(notice.Title, 16, Palette.Gold).Place(10, 4, rw - 20, 20));
+            var text = UiKit.MakeLabel(notice.Text, 16, Palette.Text).Wrapped();
+            text.MaxLinesVisible = 2;
+            text.ClipText = true;
+            card.AddChild(text.Place(10, 24, rw - 20, 38));
             _page.AddChild(card);
             ny += 70;
         }
-        float ty = Math.Max(ny + 8, y + 26 + 3 * 70 + 8);
+        float ty = ny + 8;
         _page.AddChild(UiKit.MakeLabel(Loc.T("STORIES"), 16, Palette.Gold).Place(rx, ty, rw, 20));
-        var begun = TaleBook.All.Where(t => _state.TaleLog.ContainsKey(t.Key)).ToList();
         if (begun.Count == 0)
             _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing's begun yet. People will come with their troubles."), 16, Palette.Muted).Wrapped().Place(rx, ty + 24, rw, 40));
-        for (int i = 0; i < Math.Min(5, begun.Count); i++)
+        // Each story where it's got to, in two lines when they all fit (one each when they don't); the whole of it on hover.
+        float top = ty + 26, room = PanelY + PanelH - 16 - top;
+        bool two = begun.Count * 48 <= room;
+        float step = two ? 48 : 24;
+        for (int i = 0; i < Math.Min(begun.Count, (int)(room / step)); i++)
         {
             var tale = begun[i];
             var log = _state.TaleLog[tale.Key];
-            var line = UiKit.MakeLabel(Loc.T($"{tale.Title}: {log[^1]}"), 16, Palette.Text).Place(rx, ty + 24 + i * 24, rw, 20);
-            line.MouseFilter = Control.MouseFilterEnum.Stop;
+            var line = UiKit.MakeLabel(Loc.T($"{tale.Title}: {log[^1]}"), 16, Palette.Text);
             line.ClipText = true;
+            line.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            if (two)
+            {
+                line.Wrapped();
+                line.MaxLinesVisible = 2;
+            }
+            line.MouseFilter = Control.MouseFilterEnum.Stop;
             line.TooltipText = $"{tale.Title}\n{tale.Blurb}\n\n{string.Join("\n", log)}";
-            _page.AddChild(line);
+            _page.AddChild(line.Place(rx, top + i * step, rw, step - 4));
         }
     }
 

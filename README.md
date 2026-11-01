@@ -8,7 +8,7 @@ stall. People bring you chests and price them their own way (by what they heard,
 a dream) and tell you where they found them. Shake each one yourself, gently, firmly and hard, find what they missed
 or misjudged, work out what their dreams, riddles and tags point at, trade for it, and open it on the spot. Move the shop inward, from the Brindle
 crossroads to Thornwick Market, the capital and the Royal Emporium by the Gate, because the stall comes with twenty
-years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 20g to 45,000g in
+years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 20g to 55,000g in
 five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
@@ -20,8 +20,8 @@ Magpie is, what's behind the Barrow door), told a beat at a time at the counter,
 letters, with choices that cost and change things (gold, chests given freely, curios, people gained and lost, the
 Crown's decree on the tithe); **standing** with nine powers, the four that matter most changing the trade every day;
 **stolen chests**, which the Key-mark goes cold on, the Wardens pay a finder's share for and the back room keeps; tools
-brought to the counter by the people who make them; and **Nim every night**, one curio at first and more with his own
-upgrades. 0.27 readied it for a Steam release
+brought to the counter by the people who make them; and **Nim every night** from the third, one curio at first and more
+with his own upgrades. 0.27 readied it for a Steam release
 ([docs/release.md](docs/release.md): what's done and what's left): saves that survive crashes and come from older
 versions, a full settings menu (window modes and sizes, scaling, vsync, a frame cap, three volumes, rebindable keys
 and controller buttons), a controller that does everything the mouse does, every text ready for translation (2,100 of

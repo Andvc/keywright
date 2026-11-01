@@ -322,9 +322,15 @@ public static class Strategy
     /// (and it's a tool their style uses); otherwise the choice worth most over the rest of the run that they can pay
     /// for and still keep half a working purse, the kinder one when two are close.
     /// </summary>
-    public static Choice Choose(GameState state, Talk talk, bool tools = true)
+    /// <param name="skill">A learner (below 1) doesn't know where a choice leads: now and then they say whatever feels right.</param>
+    public static Choice Choose(GameState state, Talk talk, bool tools = true, float skill = 1, Random rng = null)
     {
         var options = talk.Options;
+        if (skill < 1 && rng != null && talk.Offer == null && options.Count > 1 && rng.NextFloat() < Guess * (1 - skill))
+        {
+            var any = options.Where(c => state.Gold >= c.Cost).ToArray();
+            if (any.Length > 0) return rng.PickOne(any);
+        }
         if (talk.Offer != null)
         {
             var upgrade = Upgrades.Get(talk.Offer);
@@ -337,6 +343,9 @@ public static class Strategy
         float close = Math.Max(1, Math.Abs(best) * 0.05f);
         return open.Where(c => c.Worth >= best - close).OrderByDescending(c => c.Kind).ThenByDescending(c => c.Worth).First();
     }
+
+    /// <summary>How often a first-timer (skill 0) answers someone at the counter without knowing where it leads.</summary>
+    const float Guess = 0.6f;
 
     /// <summary>Whether to buy a tool someone's brought to the counter, at their price: as the day's end would decide it.</summary>
     public static bool WantsOffer(GameState state, Upgrade upgrade, int price)

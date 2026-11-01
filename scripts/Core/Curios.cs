@@ -301,6 +301,12 @@ public static class Curios
     public const int FirstWeek = 1;
 
     /// <summary>
+    /// The first night Nim comes by: the third, as 0.27's first visit was the third morning (the experience playtest:
+    /// Nim on the first night as well was too much for the guided first day).
+    /// </summary>
+    public const int FirstNight = 3;
+
+    /// <summary>
     /// A curio's price: a fixed sum by how rare it is (<see cref="Base"/>), and a share of what's in your purse when Nim
     /// arrives (<see cref="Share"/>). The fixed part keeps a curio dear at the stall, where a share of a few coins is
     /// nothing; the share keeps it a choice at the Emporium, where any fixed sum would be pocket change.
@@ -314,15 +320,15 @@ public static class Curios
     };
 
     /// <remarks>
-    /// 0.28: a quarter less than 0.27's 6/10/15/20%, now that Nim comes every night: more nights to buy on, so each
-    /// purchase takes a smaller share (the careful collector's spending on curios was half as much again otherwise).
+    /// 0.28: a sixth less than 0.27's 6/10/15/20%, now that Nim comes every night: more nights to buy on, so each
+    /// purchase takes a smaller share.
     /// </remarks>
     public static float Share(CurioRarity rarity) => rarity switch
     {
-        CurioRarity.Common => 0.045f,
-        CurioRarity.Uncommon => 0.075f,
-        CurioRarity.Rare => 0.11f,
-        _ => 0.15f,
+        CurioRarity.Common => 0.05f,
+        CurioRarity.Uncommon => 0.085f,
+        CurioRarity.Rare => 0.125f,
+        _ => 0.17f,
     };
 
     /// <summary>What Nim asks for a curio, from what was in your purse when he arrived.</summary>
@@ -432,7 +438,7 @@ public static class Curios
         // Nim's first night always has something cheap (in place of a card he didn't mean to lay out).
         var commons = pool.Where(c => c.Rarity == CurioRarity.Common).ToArray();
         int loose = stock.FindLastIndex(c => !fixedCards.Contains(c));
-        if (state.Day <= 1 && loose >= 0 && stock.All(c => c.Rarity != CurioRarity.Common) && commons.Length > 0)
+        if (state.Day <= FirstNight && loose >= 0 && stock.All(c => c.Rarity != CurioRarity.Common) && commons.Length > 0)
             stock[loose] = rng.PickOne(commons);
         return stock;
     }

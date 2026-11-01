@@ -248,6 +248,12 @@ public sealed class TaleDef
 /// </summary>
 public sealed partial class GameState
 {
+    /// <summary>
+    /// For the sim's "no curios" diagnostic (ordinary progression, no build): a curio a tale would give comes as its worth
+    /// in gold instead. Always true in the game.
+    /// </summary>
+    public bool TakesCurios { get; set; } = true;
+
     /// <summary>At most this many beats come to the counter a day (a talk comes on top of the day's customers).</summary>
     public const int BeatsPerDay = 2;
 
@@ -477,19 +483,27 @@ public sealed partial class GameState
 
     // ---- Tools offered at the counter ----
 
+    /// <summary>
+    /// A maker comes to the counter with their tool once it's open, a day after the move that opened it at the earliest
+    /// (word of a new shop takes a day to get round, and the first day somewhere grander is busy enough).
+    /// </summary>
     void StageOffers(Random rng)
     {
-        if (Queue.Count(v => v.Talk != null) >= BeatsPerDay) return;
+        if (Queue.Count(v => v.Talk != null) >= BeatsPerDay || Tier > 1 && Day <= TierSince) return;
         var upgrade = Offers.Due(this).FirstOrDefault();
         if (upgrade == null) return;
         Queue.Insert(rng.Next(0, Queue.Count + 1), Visit.Talking(Sellers.Person(Offers.For(upgrade.Key).Who), Offers.Talk(this, upgrade)));
     }
 
-    /// <summary>A tool turned down today: its maker comes back with it in a few days.</summary>
+    /// <summary>A tool turned down today: its maker comes back with it in a few days, once you could pay.</summary>
     public void Declined(string upgrade) => _offerDeclined[upgrade] = Day;
 
-    /// <summary>Whether a tool's maker would come with it today (not turned down in the last few days).</summary>
-    public bool OfferDue(string upgrade) => !_offerDeclined.TryGetValue(upgrade, out int day) || Day >= day + OfferAgain;
+    /// <summary>
+    /// Whether a tool's maker would come with it today: the first time whatever's in your purse (so you know it's there,
+    /// and what it costs); once turned down, a few days later and only when the morning's purse could pay their price.
+    /// </summary>
+    public bool OfferDue(string upgrade) => !_offerDeclined.TryGetValue(upgrade, out int day) ||
+                                            Day >= day + OfferAgain && Gold >= OfferPrice(Upgrades.Get(upgrade));
 
     /// <summary>What a tool costs from the person who makes it: as the day's end would charge, and their people's account of you.</summary>
     public int OfferPrice(Upgrade upgrade) => Money.Round(Cost(upgrade) * StandingPrice(Sellers.Find(Offers.For(upgrade.Key)?.Who)?.Of) *
@@ -579,7 +593,8 @@ public sealed partial class GameState
         if (ReadyBeats(night: true).FirstOrDefault() is Beat beat) Tonight.Add(MakeTalk(beat));
         if (DuesTonight && Foe(Faction.Wardens) && !Friend(Faction.Wardens)) Tonight.Add(Wardens.Search(this));
         if (DayOfWeek == Wardens.RobberyNight && Foe(Faction.Lockless) && Gold > 0) Tonight.Add(Wardens.Robbery(this));
-        StockPeddler();
+        PeddlerStock.Clear();
+        if (PeddlerToday) StockPeddler();
     }
 
     /// <summary>Nim's table tonight: what's in his pack, priced from what's in your purse now.</summary>

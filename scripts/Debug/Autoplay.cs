@@ -106,14 +106,18 @@ public partial class Autoplay : Node
         while (IsInstanceValid(talk) && !talk.Asking && !talk.Answered)
         {
             await Wait(1.4);
-            if (IsInstanceValid(talk) && !talk.Asking) talk.Next();
+            if (IsInstanceValid(talk) && !talk.Asking && !talk.Answered) talk.Next();
         }
-        if (!IsInstanceValid(talk) || talk.Answered) return;
-        await Wait(1.2);
         if (!IsInstanceValid(talk)) return;
-        var choice = Strategy.Choose(State, talk.Talk);
-        GD.Print($"Autoplay: {Sellers.Person(talk.Talk.Who).Name} ({talk.Talk.Key}): \"{choice.Label}\"");
-        talk.Pick(choice);
+        // News with nothing to answer is answered as its last line is said.
+        if (!talk.Answered)
+        {
+            await Wait(1.2);
+            if (!IsInstanceValid(talk)) return;
+            var choice = Strategy.Choose(State, talk.Talk);
+            GD.Print($"Autoplay: {Sellers.Person(talk.Talk.Who).Name} ({talk.Talk.Key}): \"{choice.Label}\"");
+            talk.Pick(choice);
+        }
         await Wait(2.4);
         if (IsInstanceValid(talk)) talk.Leave();
     }

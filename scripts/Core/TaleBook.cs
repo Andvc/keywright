@@ -78,7 +78,7 @@ public static class TaleBook
     {
         var pool = Curios.All.Where(c => !s.HasCurio(c.Key) && s.CurioOpen(c.Key) && !s.NoUse(c) && c.MinTier <= s.Tier && (tag == null || c.Has(tag.Value)))
             .OrderBy(c => Math.Abs((int)c.Rarity - (int)rarity)).ThenBy(_ => rng.Next()).ToList();
-        if (s.CuriosFull || pool.Count == 0)
+        if (s.CuriosFull || pool.Count == 0 || !s.TakesCurios)
         {
             int gold = s.Purses(0.5f);
             s.TaleGold(gold);
@@ -243,11 +243,11 @@ public static class TaleBook
                 {
                     Key = "magpie.bounty", Who = Hollis, After = "magpie.goblins", Gap = 2, Tier = 2,
                     Says = s => Say(Hollis,
-                        Loc.T($"The Magpie's bounty is up to {Money.Say(s.Purses(1))}. We've three names: Bettany Crane at the Crossed Keys, Aunt " +
+                        Loc.T($"The Magpie's bounty is up to {Money.Say(s.Purses(0.5f))}. We've three names: Bettany Crane at the Crossed Keys, Aunt " +
                               "Hesper the matchmaker, and Rook Varga, who's hunting the bounty herself."),
                         Loc.T("You've heard what the carter saw, and the goblin. You've met all three. Who is it?")),
                     Asks = s => Suspects.Select(who => C(Name(who), () => Accuse(s, who),
-                            who == s.Secret("magpie") ? W(s, s.Purses(1), (Faction.Wardens, 2), (Faction.Commons, 1), (Faction.Lockless, -3))
+                            who == s.Secret("magpie") ? W(s, s.Purses(0.5f), (Faction.Wardens, 2), (Faction.Commons, 1), (Faction.Lockless, -3))
                                 : W(s, -s.Purses(0.5f), (Faction.Wardens, -1), (Faction.Commons, -1))))
                         .Append(C(Loc.T("I won't name anyone"), () =>
                         {
@@ -802,10 +802,10 @@ public static class TaleBook
                 new()
                 {
                     Key = "fore.rowan", Who = Rowan, After = "fore.clerk", Gap = 2, Tier = 3, If = s => s.Flagged("fore.told"),
-                    Brings = (s, rng) => Given(s, rng, Rowan, Fill(rng, "warchest", ShopTiers.Typical(s.Tier), s.Tier, 3, Category.Arms),
-                        Loc.T("The Guild took my family's hall for its tithe and sold its chests. I bought my grandfather's war chest back, and it " +
-                              "won't open for their Keywright. Here: freely given. The sword's mine; the rest is yours."), "warchest"),
-                    Bought = (s, v) => s.Log("fore", Loc.T("Sir Rowan gave you his grandfather's war chest, bought back from the Guild: it opened for you.")),
+                    Brings = (s, rng) => Brought(s, rng, Rowan, Fill(rng, "warchest", ShopTiers.Typical(s.Tier), s.Tier, 3, Category.Arms),
+                        Loc.T("The Guild took my family's hall and sold its chests. I bought grandfather's war chest back, and it's mine to sell: it " +
+                              "won't open for their Keywright. The sword's mine, for {fee}. The rest: {price}."), "warchest"),
+                    Bought = (s, v) => s.Log("fore", Loc.T("Sir Rowan sold you his grandfather's war chest, bought back from the Guild: it was his, so it opened for you.")),
                 },
                 new()
                 {
@@ -879,17 +879,17 @@ public static class TaleBook
                 {
                     Key = "unlock.plate", Who = Ilse, Tier = 3, Gap = 11, If = s => s.Day > s.TierSince,
                     Says = s => Say(Ilse, Loc.T($"My mistress, Archmage Orme, asks a favour: one drop of a Keywright's blood, on a brass plate. That's all. " +
-                                                $"She'll pay {Money.Say(s.Purses(0.5f))}.")),
+                                                $"She'll pay {Money.Say(s.Purses(0.25f))}.")),
                     Asks = s => new()
                     {
                         C(Loc.T("Give it"), () =>
                         {
-                            s.TaleGold(s.Purses(0.5f));
+                            s.TaleGold(s.Purses(0.25f));
                             s.Sway(Faction.Arcanum, 1);
                             s.Flags.Add("unlock.gave");
                             s.Log("unlock", Loc.T("You gave Archmage Orme a drop of your blood on a brass plate."));
                             return Loc.T("Thank you! She'll be so pleased. I think.");
-                        }, W(s, s.Purses(0.5f), (Faction.Arcanum, 1))),
+                        }, W(s, s.Purses(0.25f), (Faction.Arcanum, 1))),
                         C(Loc.T("Refuse"), () =>
                         {
                             s.Sway(Faction.Arcanum, -1);
@@ -982,8 +982,8 @@ public static class TaleBook
                     Key = "crown.king", Who = Aldo, After = "crown.ask", Gap = 1, Tier = 4, If = s => s.Flagged("crown.asking"),
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "treasury", Rarity.Epic, s.Tier, 2);
-                        chest = new Chest(chest.Items.Append(new Item(Category.Gems, Rarity.Legendary)), Rarity.Epic, lockTier: chest.Lock);
+                        var chest = Fill(rng, "treasury", Rarity.Rare, s.Tier, 1);
+                        chest = new Chest(chest.Items.Append(new Item(Category.Gems, Rarity.Legendary)), Rarity.Rare, lockTier: chest.Lock);
                         chest.Tale = "crown";
                         return Given(s, rng, Aldo, chest, Loc.T("Ironroot's crown? It's in a chest I can't open, like everything I own. Here: I give it to " +
                                                                 "you. Keep what else is in it, and give the dwarves their crown."), "treasury");
@@ -1226,7 +1226,7 @@ public static class TaleBook
         s.Goes(who);
         if (who == s.Secret("magpie"))
         {
-            s.TaleGold(s.Purses(1));
+            s.TaleGold(s.Purses(0.5f));
             s.Sway(Faction.Wardens, 2);
             s.Sway(Faction.Commons, 1);
             s.Sway(Faction.Lockless, -3);

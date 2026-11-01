@@ -856,7 +856,7 @@ public static partial class Simulation
             // Someone come to talk (a tale's beat, a tool offered): the careful player's answer.
             if (visit.Talk != null)
             {
-                Talked(state, log, visit.Talk, style);
+                Talked(state, log, visit.Talk, style, rng);
                 continue;
             }
             int tier = state.Tier;
@@ -1055,7 +1055,7 @@ public static partial class Simulation
     static void Night(GameState state, Log log, Random rng, Style style)
     {
         state.StartNight();
-        foreach (var talk in state.Tonight.ToList()) Talked(state, log, talk, style);
+        foreach (var talk in state.Tonight.ToList()) Talked(state, log, talk, style, rng);
         foreach (var held in state.BackRoom.Where(h => !h.Kept).ToList())
         {
             int got = Strategy.ReturnHeld(state, held) ? state.ReturnHeld(held) : state.FenceHeld(held);
@@ -1065,7 +1065,7 @@ public static partial class Simulation
         if (style.Arrives)
             foreach (var key in style.Given ?? Array.Empty<string>())
                 if (!state.HasCurio(key) && Curios.Reachable(state, Curios.Get(key))) state.GiveCurio(key);
-        if (!style.Curios) return;
+        if (!style.Curios || !state.PeddlerToday) return;
         int spent = state.Today.CurioSpent;
         while (Strategy.NimUpgrade(state) is Upgrade upgrade && state.BuyOffered(upgrade))
             log.NimUpgrades++;
@@ -1074,9 +1074,10 @@ public static partial class Simulation
     }
 
     /// <summary>What the careful player says to someone (a beat, an offer, the night's news), and what the sim notes of it.</summary>
-    static void Talked(GameState state, Log log, Talk talk, Style style)
+    static void Talked(GameState state, Log log, Talk talk, Style style, Random rng = null)
     {
-        var choice = Strategy.Choose(state, talk, style.Care >= Care.Tools);
+        state.TakesCurios = style.Curios;
+        var choice = Strategy.Choose(state, talk, style.Care >= Care.Tools, style.Skill, rng);
         log.Rec?.Talk(state, talk);
         int gold = state.Gold;
         bool owned = talk.Offer != null && state.Has(talk.Offer);

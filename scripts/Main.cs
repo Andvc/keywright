@@ -792,7 +792,9 @@ public partial class Main : Node2D
             SwitchTo(new TalkPhase(talk));
             return;
         }
-        SwitchTo(new PeddlerPhase());
+        // Nim's table, from his first night on (the third); before that, straight to the morning.
+        if (State.PeddlerToday) SwitchTo(new PeddlerPhase());
+        else StartDay();
     }
 
     /// <summary>After the Guild's visit: the shop lost, Bram's debt cleared (and maybe the vault), or the next morning.</summary>

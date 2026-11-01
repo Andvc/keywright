@@ -127,16 +127,23 @@ public partial class TalkPhase : Phase
         else _person.Say(text, color);
     }
 
-    /// <summary>What you can say: a button each, with what it costs, where the slip would be.</summary>
+    /// <summary>
+    /// What you can say: a button each, with what it costs, where the slip would be. News with nothing to answer happens
+    /// as its last line is said, and Go on (or Good night) sees them off.
+    /// </summary>
     void Ask()
     {
-        if (_panel != null) return;
-        _next.Visible = false;
+        if (_panel != null || _answered) return;
         var options = _talk.Options;
+        if (_talk.Choices.Count == 0)
+        {
+            Pick(options[0]);
+            return;
+        }
+        _next.Visible = false;
         float h = 60 + options.Count * 60;
         _panel = Add(UiKit.MakePanel(_talk.Night ? Palette.Magic.Darkened(0.2f) : Palette.Gold.Darkened(0.2f)).Place(PanelX, PanelY, PanelW, h));
-        _panel.AddChild(UiKit.MakeLabel(_talk.Choices.Count > 0 ? Loc.T("WHAT DO YOU SAY?") : "", 16, Palette.Gold, HorizontalAlignment.Center)
-            .Place(0, 14, PanelW, 20));
+        _panel.AddChild(UiKit.MakeLabel(Loc.T("WHAT DO YOU SAY?"), 16, Palette.Gold, HorizontalAlignment.Center).Place(0, 14, PanelW, 20));
         for (int i = 0; i < options.Count; i++)
         {
             var choice = options[i];
@@ -158,10 +165,9 @@ public partial class TalkPhase : Phase
         _answered = true;
         ScenePhase.Trace?.Invoke($"> {choice.Label}" + (reply != null ? $" / {reply}" : ""));
         if (reply != null) Say(reply, Palette.Good);
-        Sfx.Play("chime", 1f, -8);
-        _panel.QueueFree();
-        ShowWhatChanged();
-        ShowNoted();
+        if (_panel != null) Sfx.Play("chime", 1f, -8);
+        _panel?.QueueFree();
+        ShowNoted(ShowWhatChanged());
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDue(State);
         _next.Visible = true;
@@ -170,8 +176,8 @@ public partial class TalkPhase : Phase
         return true;
     }
 
-    /// <summary>Gold, and every account that moved, under where the choices were.</summary>
-    void ShowWhatChanged()
+    /// <summary>Gold, and every account that moved, where the choices were. Returns where the next thing can go.</summary>
+    float ShowWhatChanged()
     {
         int gold = State.Gold - _goldBefore;
         var lines = State.Swayed.Skip(_swayedBefore).GroupBy(s => s.Faction)
@@ -180,21 +186,26 @@ public partial class TalkPhase : Phase
                           Color: g.By > 0 ? Palette.Good : Palette.Warn)).ToList();
         if (gold != 0) lines.Insert(0, (gold > 0 ? Loc.T($"+{gold}g") : Loc.T($"{gold}g"), gold > 0 ? Palette.Gold : Palette.Bad));
         if (_talk.Offer != null && State.Has(_talk.Offer)) lines.Insert(0, (Loc.T($"Bought: {Upgrades.Get(_talk.Offer).Name}"), Palette.Good));
-        if (lines.Count == 0) return;
-        var box = Add(UiKit.MakePanel(Palette.PanelBorder).Place(PanelX, PanelY, PanelW, 24 + lines.Count * 28));
+        if (lines.Count == 0) return PanelY;
+        float h = 24 + lines.Count * 28;
+        var box = Add(UiKit.MakePanel(Palette.PanelBorder).Place(PanelX, PanelY, PanelW, h));
         for (int i = 0; i < lines.Count; i++)
             box.AddChild(UiKit.MakeLabel(lines[i].Text, 16, lines[i].Color).Place(16, 12 + i * 28, PanelW - 32, 24));
         if (gold != 0) FloatText(gold > 0 ? Loc.T($"+{gold}g") : Loc.T($"{gold}g"), new Vector2(PanelX + PanelW / 2, PanelY - 20), gold > 0 ? Palette.Gold : Palette.Bad, 24);
+        return PanelY + h + 12;
     }
 
-    /// <summary>What the notebook's Town page now says of the tale, on the counter: it's written down, and it'll come back.</summary>
-    void ShowNoted()
+    /// <summary>What the notebook's Town page now says of the tale, under what changed: it's written down, and it'll come back.</summary>
+    void ShowNoted(float y)
     {
         if (Tale == null || TaleLines <= _logBefore) return;
         string line = State.TaleLog[Tale][^1];
-        var note = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(330, 500, 480, 96));
-        note.AddChild(UiKit.MakeLabel(Loc.T($"IN YOUR NOTEBOOK {Controls.Tag(Controls.Notebook)}"), 16, Palette.Gold).Place(16, 10, 448, 20));
-        note.AddChild(UiKit.MakeLabel(line, 16, Palette.Text).Wrapped().Place(16, 34, 448, 56));
+        var note = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(PanelX, y, PanelW, 124));
+        note.AddChild(UiKit.MakeLabel(Loc.T($"IN YOUR NOTEBOOK {Controls.Tag(Controls.Notebook)}"), 16, Palette.Gold).Place(16, 12, PanelW - 32, 20));
+        var text = UiKit.MakeLabel(line, 16, Palette.Text).Wrapped();
+        text.MaxLinesVisible = 4;
+        text.ClipText = true;
+        note.AddChild(text.Place(16, 36, PanelW - 32, 84));
     }
 
     /// <summary>Who's still waiting today, along the counter's edge (as at the counter).</summary>

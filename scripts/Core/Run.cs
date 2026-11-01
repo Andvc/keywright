@@ -377,8 +377,8 @@ public sealed partial class GameState
         return true;
     }
 
-    /// <summary>Nim comes by every night (0.28), after the day's end and the Guild.</summary>
-    public bool PeddlerToday => Day > 0;
+    /// <summary>Nim comes by every night (0.28), after the day's end and the Guild, from the third.</summary>
+    public bool PeddlerToday => Day >= Curios.FirstNight;
 
     /// <summary>The week's story is told this morning.</summary>
     public bool StoryToday => Plan != null && Plan.Week == Week && Plan.StoryDay > 0 && Plan.StoryDay == DayOfWeek;
