@@ -330,6 +330,9 @@ public static class Categories
         ["Spell Scroll"] = "Scroll of Fireball", ["Bestiary"] = "Summoner's Grimoire", ["Grimoire"] = "Lich's Tome",
         ["Locking Codex"] = "Keyhold Codex", ["Brass Ring"] = "Moonstone", ["Silver Amulet"] = "Elfstone", ["Ruby Ring"] = "Blood Ruby",
     };
+
+    /// <summary>A name only the list before 0.17 had (not one that's a thing's name now too).</summary>
+    public static bool OldName(string name) => Renamed.ContainsKey(name) && !Collection.Entries.Any(e => e.Entry == name);
 }
 
 /// <summary>Every kind of thing there is to find, for the ledger's collection page.</summary>

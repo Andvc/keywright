@@ -67,6 +67,13 @@ public partial class TitlePhase : Phase
         Add(UiKit.MakeLabel(Main.Version, 16, Palette.Muted, outline: 4).Place(24, 684, 400, 20));
         if (Game.Profile?.Summary is string record)
             Add(UiKit.MakeLabel(record, 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center, outline: 4).Place(0, 196, 1280, 20));
+        // A file this version couldn't read was set aside (Storage): say so, once.
+        if (Storage.Notices.Count > 0)
+        {
+            Add(UiKit.MakeLabel(string.Join(" ", Storage.Notices), 16, Palette.Warn, HorizontalAlignment.Center, outline: 4)
+                .Wrapped().Place(140, 222, 1000, 44));
+            Storage.Notices.Clear();
+        }
         Add(UiKit.MakeLabel("Sounds and font: Kenney (CC0).", 16, Palette.Muted, HorizontalAlignment.Right, outline: 4)
             .Place(656, 684, 600, 20));
         Game.Moment("00_title", 1.0);

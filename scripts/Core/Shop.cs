@@ -580,9 +580,9 @@ public sealed partial class GameState
         state._owned.UnionWith(data.Owned);
         state.HintsSeen.UnionWith(data.HintsSeen);
         state.Met.UnionWith(data.Met);
-        // Things renamed in 0.17 keep their place in the journal.
-        state.Found.UnionWith(data.Found.Select(name => Categories.Renamed.GetValueOrDefault(name, name)));
-        state.FoundEnchanted.UnionWith(data.FoundEnchanted.Select(name => Categories.Renamed.GetValueOrDefault(name, name)));
+        // (Things renamed in 0.17 are brought up to their new names as an old save is read: SaveData.FromJson.)
+        state.Found.UnionWith(data.Found);
+        state.FoundEnchanted.UnionWith(data.FoundEnchanted);
         state.SongsFound.AddRange(data.SongsFound.Where(Heartsongs.Exists).Distinct());
         state.SongsKept = data.SongsKept;
         state.Songbook.UnionWith(state.SongsFound);

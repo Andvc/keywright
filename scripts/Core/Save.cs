@@ -132,6 +132,16 @@ public sealed class SaveData
         {
             var data = JsonSerializer.Deserialize<SaveData>(json);
             if (data == null || data.Tier < 1 || data.Version > CurrentVersion || data.Version < 1) return null;
+            // 0.17 renamed things (Categories.Renamed), while saves were version 2, so a version 1 or 2 save may have
+            // either names. Some old names are new names too (the old Healing Draught is the Elixir of Vigour now, and
+            // there's a new Healing Draught), so a save is renamed only if it has a name that only the old list had: a
+            // save with the new names, read as old, would have every potion moved up a step (0.26 and before did that to
+            // every save, on every load).
+            if (data.Version <= 2 && data.Found.Concat(data.FoundEnchanted).Any(Categories.OldName))
+            {
+                data.Found = data.Found.Select(name => Categories.Renamed.GetValueOrDefault(name, name)).ToList();
+                data.FoundEnchanted = data.FoundEnchanted.Select(name => Categories.Renamed.GetValueOrDefault(name, name)).ToList();
+            }
             if (data.Version == 1)
             {
                 data.Version = 2;
@@ -159,7 +169,7 @@ public sealed class SaveData
             }
             return data;
         }
-        catch (JsonException)
+        catch (Exception e) when (e is JsonException or NotSupportedException or InvalidOperationException)
         {
             return null;
         }
@@ -195,6 +205,11 @@ public sealed class SavedCommission
 /// </summary>
 public sealed class Profile
 {
+    /// <summary>1: 0.27's, the first with a version (every profile before it reads as 1). A newer one isn't read.</summary>
+    public const int CurrentVersion = 1;
+
+    public int Version { get; set; } = CurrentVersion;
+
     public int Runs { get; set; }
 
     /// <summary>
@@ -302,18 +317,24 @@ public sealed class Profile
 
     public string ToJson() => JsonSerializer.Serialize(this, Options);
 
+    /// <summary>
+    /// The profile in this text, or null if it isn't one this version can read (damaged, or from a newer version): the
+    /// caller sets the file aside rather than writing an empty profile over it.
+    /// </summary>
     public static Profile FromJson(string json)
     {
         try
         {
             // An older profile's renown and talents (retired in 0.22) are left behind: every run starts the same now.
-            var profile = JsonSerializer.Deserialize<Profile>(json) ?? new Profile();
+            var profile = JsonSerializer.Deserialize<Profile>(json);
+            if (profile == null || profile.Version > CurrentVersion || profile.Version < 1) return null;
+            profile.Songs ??= new();
             profile.Songs.RemoveAll(s => !Heartsongs.Exists(s));
             return profile;
         }
-        catch (JsonException)
+        catch (Exception e) when (e is JsonException or NotSupportedException or InvalidOperationException)
         {
-            return new Profile();
+            return null;
         }
     }
 

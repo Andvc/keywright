@@ -10,6 +10,8 @@ config/description="Shake sealed chests, read the clues, strike a deal with each
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://assets/ui/icon.png"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Keywright"
 
 [display]
 

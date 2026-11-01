@@ -15,7 +15,7 @@ namespace Keywright;
 /// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the week's scene
 /// (from the second week), Nim's curios on his day, the counter, the day's end, and on the third day the Guild's due.
 /// What you've done across runs is kept in user://profile.json.
-/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --export-sounds=DIR, --autoplay,
+/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --export-sounds=DIR, --autoplay,
 /// --shots=DIR, --quit-at-end, --days=N, --no-tutorial (no tips, no scripted first day),
 /// --start-tier=N and --gold=N (jump ahead with the tools you'd have by then), --opening-demo (opens a blue chest
 /// holding one thing of each quality, two of them better than the chest, and a Heartsong, to preview the opening's
@@ -143,6 +143,20 @@ public partial class Main : Node2D
                 GD.PrintErr(e.ToString());
             }
             GetTree().Quit();
+            return;
+        }
+        if (args.Contains("--save-test"))
+        {
+            bool passed = false;
+            try
+            {
+                passed = SaveTest.Run();
+            }
+            catch (System.Exception e)
+            {
+                GD.PrintErr(e.ToString());
+            }
+            GetTree().Quit(passed ? 0 : 1);
             return;
         }
         if (args.Contains("--shake-test"))
@@ -360,51 +374,20 @@ public partial class Main : Node2D
         GetTree().Quit();
     }
 
-    /// <summary>The saved shop, or null if there isn't one (or it's from an older version).</summary>
-    public static SaveData ReadSave()
-    {
-        if (!FileAccess.FileExists(SavePath)) return null;
-        using var file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Read);
-        return file == null ? null : SaveData.FromJson(file.GetAsText());
-    }
+    /// <summary>The saved shop (or its backup), or null if there isn't one this version can read (one it can't is set aside).</summary>
+    public static SaveData ReadSave() => Storage.Read(SavePath, SaveData.FromJson);
 
-    void WriteSave()
-    {
-        using var file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
-        file?.StoreString(State.Save().ToJson());
-    }
+    void WriteSave() => Storage.Write(SavePath, State.Save().ToJson());
 
     /// <summary>
-    /// Until 0.18 the game was called LootFall, and Godot keeps a game's files in a folder named after it. The first time
-    /// Keywright starts, it brings the profile and the run in progress over from that folder. The name now belongs to
-    /// another game, so only what this one can read comes over (its settings don't), and nothing here is overwritten.
+    /// Brings the profile and the run in progress over from where earlier versions kept them: Godot's own app_userdata
+    /// folder until 0.27, and LootFall's until 0.18 (see <see cref="Storage.CarryOver"/>).
     /// </summary>
-    static void CarryOverOldFiles()
-    {
-        string here = OS.GetUserDataDir();
-        string old = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(here) ?? "", "LootFall");
-        if (!System.IO.Directory.Exists(old)) return;
-        try
-        {
-            System.IO.Directory.CreateDirectory(here);
-            string profile = System.IO.Path.Combine(old, "profile.json"), save = System.IO.Path.Combine(old, "save.json");
-            if (System.IO.File.Exists(profile) && !FileAccess.FileExists(ProfilePath))
-                System.IO.File.Copy(profile, ProjectSettings.GlobalizePath(ProfilePath));
-            if (System.IO.File.Exists(save) && !FileAccess.FileExists(SavePath) && SaveData.FromJson(System.IO.File.ReadAllText(save)) != null)
-                System.IO.File.Copy(save, ProjectSettings.GlobalizePath(SavePath));
-        }
-        catch (Exception e)
-        {
-            GD.PushWarning($"Couldn't bring the old files over from {old}: {e.Message}");
-        }
-    }
+    static void CarryOverOldFiles() =>
+        Storage.CarryOver(json => SaveData.FromJson(json) != null, json => Profile.FromJson(json) != null);
 
-    static Profile ReadProfile()
-    {
-        if (!FileAccess.FileExists(ProfilePath)) return new Profile();
-        using var file = FileAccess.Open(ProfilePath, FileAccess.ModeFlags.Read);
-        return file == null ? new Profile() : Profile.FromJson(file.GetAsText());
-    }
+    /// <summary>The profile (or its backup); a new one if there's none this version can read (one it can't is set aside).</summary>
+    static Profile ReadProfile() => Storage.Read(ProfilePath, Profile.FromJson) ?? new Profile();
 
     /// <summary>Notes the run's progress in the profile (a real game only) and writes it.</summary>
     void WriteProfile(System.Action<Profile> change = null)
@@ -412,15 +395,14 @@ public partial class Main : Node2D
         if (!_saving || _demo) return;
         change?.Invoke(Profile);
         Profile.Note(State);
-        using var file = FileAccess.Open(ProfilePath, FileAccess.ModeFlags.Write);
-        file?.StoreString(Profile.ToJson());
+        Storage.Write(ProfilePath, Profile.ToJson());
     }
 
     /// <summary>The run is over (foreclosed, or retired): its feats and score are banked, the saved shop goes, and it's back to the title.</summary>
     public void EndRun()
     {
         WriteProfile(p => p.Bank(State));
-        if (_saving && FileAccess.FileExists(SavePath)) DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(SavePath));
+        if (_saving) Storage.Delete(SavePath);
         _saving = false;
         if (_bot != null)
         {
@@ -453,7 +435,7 @@ public partial class Main : Node2D
         if (!_demo && ReadSave() is SaveData old)
         {
             Profile.Bank(GameState.Load(old));
-            DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(SavePath));
+            Storage.Delete(SavePath);
         }
         State = GameState.NewRun(_seed, character, challenge, Settings.Tips, Profile.Taught, Profile.OpenCurios,
             Challenges.Draw(Profile.TermsSeed, challenge));

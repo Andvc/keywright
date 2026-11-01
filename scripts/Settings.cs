@@ -37,8 +37,12 @@ public static class Settings
 
     public static void Load()
     {
-        var file = new ConfigFile();
-        if (file.Load(Path) == Error.Ok)
+        var file = Storage.Read(Path, text =>
+        {
+            var config = new ConfigFile();
+            return config.Parse(text) == Error.Ok ? config : null;
+        });
+        if (file != null)
         {
             Volume = (float)file.GetValue("audio", "volume", Volume);
             Fullscreen = (bool)file.GetValue("video", "fullscreen", Fullscreen);
@@ -63,7 +67,7 @@ public static class Settings
         file.SetValue("game", "gm", Gm);
         foreach (var kind in System.Enum.GetValues<Core.Category>())
             file.SetValue("sounds", kind.ToString().ToLowerInvariant(), _soundSets[(int)kind]);
-        file.Save(Path);
+        Storage.Write(Path, file.EncodeToText());
     }
 
     public static void Apply()
