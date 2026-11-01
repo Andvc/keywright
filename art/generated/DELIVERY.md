@@ -748,3 +748,90 @@ dedicated earlier batch previews remain intact.
 
 **Continue batches 14-15 and finish the documented game integration.** Completion of the whole round
 remains authorized by the owner's request to finish everything.
+
+
+### Batch 14: icons, Guild emblem and Aldric Key
+
+All **39** assets are delivered and pass with zero warnings: **26 upgrade icons, seven kind icons,
+one Guild emblem, one whole key and four derived key shards**. Nothing skipped. Approved lamp and coin anchors
+remain unchanged. See [the review guide](_review/round2_batch14_README.md).
+
+There are **88 processed candidates**: **86 new images** and two reused batch-10 tool-roll sources.
+A/B generation was requested for all 35 subjects, followed by targeted corrections. Four image-tool output
+rejections affected the decorative picks icon; A and correction C returned no image, while B returned one on retry.
+The icon instead reuses the existing no-outline illustration of the same item, reprocessed at its icon dimensions.
+This exception and the original generation prompt are recorded explicitly; no further generation retries were made.
+The tool does not expose a verifiable model identifier. New requests keep the manifest prompts verbatim;
+appends request the approved category anchor for style only, master palette, pure magenta empty space,
+complete framing, highest-quality PNG, the specified native dimensions, broad solid material fills and no outlines.
+Tiny kind symbols request at most four fills and one or two internal divisions. Whole-key geometry is horizontal 4:1.
+Exact requests, reference hashes, source dimensions, checks and decisions are in
+[`_workflow/round2_batch14.json`](_workflow/round2_batch14.json).
+
+Corrections simplify specific fragmented material faces and thin fittings, restore the correct subject where
+a cabinet was mistaken for the lantern reference, and keep distinguishing silhouettes and signature features.
+Every original and rejected image remains in the local archive. The 35 selected-source WebPs are committed.
+
+| Asset | Candidates | Kept | Reason |
+|---|---|---|---|
+| `icon.upgrade.shop2` | A/B/C | C | Small cream shop with a green awning, broad blue roof and a tree; the silhouette reads clearly at actual 2x. |
+| `icon.upgrade.shop3` | A/B/C | C | Two-storey shop with blue awning and gold windows, distinct from the smaller shop and grand red-awning store. |
+| `icon.upgrade.shop4` | A/B/C | C | Broad cream shop facade with red awning and gold crown; restrained material fields keep the architecture clear. |
+| `icon.upgrade.sign` | A/B | A | Broad wooden hanging sign with the gold chest symbol; A has calmer material regions and a compact readable hanger. |
+| `icon.upgrade.scales` | A/B | B | Gold balance with two distinct pans and a broad stable base; B passes with calmer connecting arms than A. |
+| `icon.upgrade.cabinet1` | A/B | A | Small wooden double-door cabinet, glass panes and inner shelf remain clear at actual 2x. |
+| `icon.upgrade.cabinet2` | A/B | A | Open shelf hutch with three broad drawers; A preserves its furniture silhouette and passes without isolated specks. |
+| `icon.upgrade.cabinet3` | A/B/C | C | Gold glass display cabinet with three visible blue shelves; corrected the mistaken lantern identity in B. |
+| `icon.upgrade.cabinet4` | A/B | B | Sloped glass display case with wooden legs and gold corner caps; the broad angled top distinguishes it from the other cabinets. |
+| `icon.upgrade.cabinet5` | A/B/C | C | Wooden double glass-door cabinet and gold crest, with broad panes; corrected the mistaken lantern identity in B. |
+| `icon.upgrade.cabinet6` | A/B | B | Gold glass cabinet with a broad red velvet cushion; B has quieter glass and gold fields while retaining the display shape. |
+| `icon.upgrade.picks` | A/B/C/E/F | F | Existing batch-10 leather tool-roll illustration reused at icon size after tool rejections; restore leather colours and remove three isolated leather flecks. |
+| `icon.upgrade.bench` | A/B/C | C | Wide wooden repair bench, steel hammer and cream cloth remain distinct at 2x, with fewer fragmented fittings. |
+| `icon.upgrade.workshop` | A/B/C/D | D | Broad anvil, vise and three tools remain distinct using calm steel and wood faces. |
+| `icon.upgrade.master` | A/B/C/D | D | Headband magnifier, purple cloth and broad brush; D keeps continuous colour regions at actual icon size. |
+| `icon.upgrade.crier` | A/B/C | C | Gold handbell with red ribbon and brown handle; broad bright bell face and dark interior remain readable. |
+| `icon.upgrade.block` | A/B | A | Compact wooden auction gavel and round block with a broad brass head band; all identifying parts survive at 2x. |
+| `icon.upgrade.charter` | A/B | A | Cream rolled charter with a prominent red seal and ribbon; A preserves broad clean parchment. |
+| `icon.upgrade.case` | A/B/C/D | D | Open four-compartment specimen case preserves the crystal, bottle, leaf and stone with simpler material fields. |
+| `icon.upgrade.velvet` | A/B | B | Open blue-grey case with broad purple velvet lining and gold clasp; B removes the fragmented tuft details. |
+| `icon.upgrade.magnet` | A/B | B | Steel horseshoe magnet with gold pole caps and small iron pieces; B has calmer connected material fields. |
+| `icon.upgrade.seal` | A/B | B | Gold stamp with a fleur-shaped handle and thick round base; B preserves the silhouette without fragmented engraving. |
+| `icon.upgrade.night` | A/B/C | C | Purple-and-cream night tent with crescent and hanging lantern; the open doorway is a clear dark filled region. |
+| `icon.upgrade.warrant` | A/B/C | C | Rolled parchment with a broad gold crown seal and red ribbon; C removes unnecessary tiny bevel highlights. |
+| `icon.upgrade.patrons` | A/B/C | C | Plain green register, broad cream feather and gold clasp keep the same identity with a quieter cover. |
+| `icon.upgrade.engine` | A/B/C | C | Simplified grey counting machine with a large gold gear, eye and two broad paper marks; useful details survive without rivet noise. |
+| `icon.kind.arms` | A/B | B | Steel short-sword silhouette with a clear crossguard; B retains connected blade faces at native 16x16. |
+| `icon.kind.garb` | A/B | A | Red hooded cloak with a broad opening and gold clasp; A gives the clearest hood shape at actual UI size. |
+| `icon.kind.potions` | A/B | B | Round blue bottle with cork and one broad liquid division, clearer and quieter than A at native size. |
+| `icon.kind.scrolls` | A/B | B | Cream rolled scroll and red seal; B keeps a recognizable roll opening at actual 2x. |
+| `icon.kind.gems` | A/B | A | Faceted blue gem with broad light top and connected blue base, no single-pixel flecks. |
+| `icon.kind.heartsong` | A/B | B | Red heart with a connected pale musical note; B keeps the note readable without a detached dot. |
+| `icon.kind.hidden` | A/B | A | Small wooden drawer box with the front partly open; A preserves an identifiable pulled-out drawer at 2x. |
+| `emblem.guild` | A/B | A | Gold round Guild badge with a clearly separated eye and keyhole; the dark inset shapes read at 2x. |
+| `story.key_whole` | A/B | B | Horizontal gold key with crown-like bow, long shaft, thick collars and readable teeth; B has calmer connected gold faces. |
+| `story.key_shard_1` | derived | derived | Exact disjoint jagged cut from story.key_whole; original colours and canvas positions retained, with no outlines at the breaks. |
+| `story.key_shard_2` | derived | derived | Exact disjoint jagged cut from story.key_whole; original colours and canvas positions retained, with no outlines at the breaks. |
+| `story.key_shard_3` | derived | derived | Exact disjoint jagged cut from story.key_whole; original colours and canvas positions retained, with no outlines at the breaks. |
+| `story.key_shard_4` | derived | derived | Exact disjoint jagged cut from story.key_whole; original colours and canvas positions retained, with no outlines at the breaks. |
+
+
+Generated objects use the unchanged `pixelize.py --no-outline --preview` in flat mode. Key shards are cut by
+[`round2_batch14_derive.py`](_workflow/round2_batch14_derive.py) along modest jagged lines near x=26,50,74.
+They retain exact RGBA pixels and positions; the four reconstruct the whole key exactly without overlap.
+The obsolete brief instructions to outline the breaks were corrected in `assets_world.py`, then the manifest
+and inventory were regenerated. This implements the owner's no-outline correction; geometry and validation
+limits are unchanged.
+
+- `icon.upgrade.picks`: {'x': 12, 'y': 9, 'from': '#4b2212', 'to': '#8e5b37', 'reason': 'Remove one isolated leather fleck by continuing the adjacent leather face; preserve the steel tips and tied strap.'}
+- `icon.upgrade.picks`: {'x': 13, 'y': 13, 'from': '#8e5b37', 'to': '#6e3d22', 'reason': 'Remove one isolated leather fleck by continuing the adjacent leather face; preserve the steel tips and tied strap.'}
+- `icon.upgrade.picks`: {'x': 5, 'y': 11, 'from': '#4b2212', 'to': '#6e3d22', 'reason': 'Remove one isolated leather fleck by continuing the adjacent leather face; preserve the steel tips and tied strap.'}
+Supported material palette swaps: {"icon.upgrade.picks": ["#773f00=#6e3d22", "#a06500=#8e5b37", "#c29026=#ad7d52", "#ce5e00=#8e5b37", "#bd7e5f=#ad7d52", "#e1a882=#c9a075"]}.
+
+No blur, smoothing, posterization or extra raster filters. Palette, colour caps, quiet limits, pixelizer and
+validator remain unchanged. All source illustrations and native results were visually reviewed at their actual
+UI scale; four-shop/four-hour reference composites were checked separately from live game captures.
+
+Final `python3 art/tools/validate.py --sheets`: **39/39 batch assets OK, zero warnings**.
+Full manifest: **264 OK, 3 failed, 0 missing (0 P1 missing), exit 1**. All 228 non-batch output files
+and their checks are unchanged. Only the three inherited lock faces remain for batch 15.
+Continue batch 15 and finish game integration under the existing authorization.

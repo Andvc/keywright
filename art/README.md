@@ -32,7 +32,8 @@ figures, including the identity reveals, with zero errors or warnings; see its
 [review guide](generated/_review/round2_batch11_README.md). Batch 12 now delivers all 40 remaining inventory
 objects and Heartsongs, with zero errors or warnings; see the [object review guide](generated/_review/round2_batch12_README.md).
 Batch 13 now delivers all 78 remaining curios, with zero errors or warnings; see the
-[curio review guide](generated/_review/round2_batch13_README.md). Batches 14-15 and integration are next.
+[curio review guide](generated/_review/round2_batch13_README.md). Batch 14 delivers all 39 icons, emblem and key assets;
+see the [icon and key review guide](generated/_review/round2_batch14_README.md). Batch 15 and integration are next.
 The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here
@@ -66,7 +67,7 @@ the scene's layers and the figures.
 | 11 | **Delivered:** the other figures, including Mara and the King; all pass | 37 |
 | 12 | **Delivered:** things in chests and Heartsongs; all pass | 40 |
 | 13 | **Delivered:** curios; all pass | 78 |
-| 14 | Upgrade and kind icons, the Guild's emblem, the Aldric Key and its shards | 39 |
+| 14 | **Delivered:** upgrade and kind icons, the Guild's emblem, the Aldric Key and its shards; all pass | 39 |
 | 15 | Lock faces (P2) | 3 |
 
 Batch 9 decides what everything else looks like, so it waits for a person: push it with the review pictures and stop

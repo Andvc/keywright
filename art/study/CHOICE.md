@@ -80,4 +80,6 @@ The small objects retain their specified 32x32 native / 2x UI size; their useful
 no-outline treatment follow the same anchors. See the [object review guide](../generated/_review/round2_batch12_README.md).
 Batch 13 delivers all 78 remaining curios, with zero errors or warnings. See the
 [curio review guide](../generated/_review/round2_batch13_README.md).
-Continue batches 14-15 and integration under the existing authorization.
+Batch 14 delivers all 39 icons, the Guild emblem and exact key shards, with zero errors or warnings.
+See the [icon and key review guide](../generated/_review/round2_batch14_README.md).
+Continue batch 15 and integration under the existing authorization.

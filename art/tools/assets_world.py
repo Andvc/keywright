@@ -115,11 +115,11 @@ for n, what, box in KEY_SHARDS:
         subject=f"shard {n} of the Aldric Key: {what}",
         description=f"Shard {n} of 4: {what}. Not generated: cut from story.key_whole along jagged lines near x 26, 50 "
                     f"and 74, each piece left in place on the 96x24 canvas (roughly x {box[0]}-{box[2]}), the rest "
-                    f"transparent, re-outlined along its break.",
+                    f"transparent; preserve the original pixels without outlining the break.",
         details=["only this shard's pixels, in place", "a jagged break that fits its neighbours",
                  "the four never overlap and together are exactly story.key_whole"],
         palette=["gold:1-6", "night:10"], box=box,
-        generation="Cut from story.key_whole (by script or by hand), then outline the break edges.",
+        generation="Cut from story.key_whole (by script or by hand), preserving its exact pixels with no outline on the break edges.",
         notes="Today one generic shard (assets/ui/key.png) is drawn four times. Integration: show shard n for the nth "
               "piece held (trimmed to its pixels).",
         context="The Hooded Woman pays in shards; with all four, the Key opens the Crown Chest.")
