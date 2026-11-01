@@ -315,7 +315,7 @@ public partial class NotebookView : Node2D
             pulse.TweenProperty(row, "self_modulate", new Color(1.35f, 1.3f, 1f), 0.7f);
             pulse.TweenProperty(row, "self_modulate", Colors.White, 0.7f);
         }
-        row.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{key}.png", new Vector2(26, h / 2), 1));
+        row.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{key}.png", new Vector2(26, h / 2), 1, outlined: true));
         row.AddChild(UiKit.MakeLabel(name, 16, current ? Palette.Gold : Palette.Text).Place(52, 4, 300, 20));
         row.AddChild(UiKit.MakeLabel(current ? "at your counter" : role, 16, current ? Palette.Gold : Palette.Muted).Place(52, 24, 500, 20));
     }
@@ -327,7 +327,7 @@ public partial class NotebookView : Node2D
         var page = UiKit.MakePanel(key == _current ? Palette.Gold.Darkened(0.2f) : Palette.PanelBorder).Place(TableX - 8, y, PanelW - 32, PanelY + PanelH - 52 - y);
         page.MouseFilter = Control.MouseFilterEnum.Ignore;
         _page.AddChild(page);
-        page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{key}.png", new Vector2(56, 58), 1));
+        page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{key}.png", new Vector2(56, 58), 1, outlined: true));
         page.AddChild(UiKit.MakeLabel(name, 24, Palette.Gold, outline: 4).Place(112, 10, 600, 30));
         page.AddChild(UiKit.MakeLabel(role, 16, Palette.Muted, HorizontalAlignment.Right).Place(600, 16, PanelW - 660, 20));
         page.AddChild(UiKit.MakeLabel(about, 16, Palette.Text).Wrapped().Place(112, 44, PanelW - 168, 96));

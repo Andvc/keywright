@@ -91,6 +91,10 @@ public partial class ShopView : Node2D
             _lit.Add(Layer(this, $"props/lantern_{place}", new Vector2(x - 8, 60), -49));
         }
         Layer(_world, $"counter/{place}", new Vector2(0, 119), -40);
+        // The counter's far edge gets the figures' outline, a row above it, so the counter reads against the place beyond
+        // (the chest, the props and whoever stands in front of it cover it).
+        _world.AddChild(new ColorRect { Color = Palette.Outline, ZIndex = -40, MouseFilter = Control.MouseFilterEnum.Ignore }
+            .Place(0, 118 * ScaleFactor, 320 * ScaleFactor, ScaleFactor));
         BuildProps();
         _glow = new Painter(p =>
         {

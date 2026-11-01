@@ -36,6 +36,9 @@ public static class Palette
     /// <summary>The words that pop out of a shaken chest.</summary>
     public static readonly Color Word = new("#fff4dc");
 
+    /// <summary>The one-pixel outline round what has to stand out from the scene: the chest's own outline colour.</summary>
+    public static readonly Color Outline = new("#1a1420");
+
     public static readonly Color Wood = new("#7a4a24");
     public static readonly Color WoodDark = new("#4e2c12");
     public static readonly Color WoodLight = new("#93602f");

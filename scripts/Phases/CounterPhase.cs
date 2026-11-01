@@ -514,7 +514,7 @@ public partial class CounterPhase : Phase
         Add(UiKit.MakeLabel("Waiting", 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
         for (int i = 0; i < Math.Min(7, State.Queue.Count); i++)
         {
-            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1));
+            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1, outlined: true));
             face.Modulate = new Color(0.8f, 0.8f, 0.85f);
         }
     }

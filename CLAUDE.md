@@ -242,8 +242,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `UpgradesAt`, `DisplayOpen` with Thornwick, `SynergiesOpen` with Crownhold), each introduced by a Bram tip when it
   happens. Gate new
   systems the same way, in Core, so the sim and the bot follow them.
-- Each shop tier has its own picture (`art/generated/backgrounds/shop{tier}.png`, built into `assets/backgrounds/` by
-  `tools/import_art.py`, shown with `UiKit.MakeShop`); keep the counter top at y 476 and the shelf at y 196. Story
+- Each shop tier is a stack of layers (`ShopView`, made by `UiKit.MakeShop`: the sky for the hour, the place, the
+  shelf, the frame and its lanterns, the counter and the tools you've bought as props, each at 4x; the hour follows the
+  day's customers in thirds, night for the Guild); keep the counter top at y 476 and the shelf at y 196. Story
   scenes have their own (`scene_{bram,guild,keyhold,vault}`, `ScenePhase`'s backdrop, `Story.Setting` for a week's).
 - What Bram's kin know is kept in two books (0.25: the ledger had grown too many pages). The **notebook**
   (`NotebookView`; N, the button on the slip, or clicking whoever's at the counter) is for trading: Sounds, Regulars,
@@ -296,21 +297,25 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 ## Art direction (pixel art)
 
 - The art is in `art/generated/`, made to the brief in `art/` (`README.md` first). Round 1 (0.23) came out too busy to
-  look at for hours; round 2 (0.25) redraws it flat and quiet and builds the shop scene from layers (Codex, on a branch
-  `art/round2`, its anchors approved by the owner before the rest; `ART_DIRECTION.md`'s "Why round 2" has the
-  measurements and the causes). Batch 9, the anchors, came out calm but a little too plain, so the style study
-  (`art/study/`, `art/tools/study.py`) draws the stall's counter in four styles at three levels of detail and two
-  densities, as the counter screen, for the owner to choose a direction before anything else is made; the brief below
-  is rewritten for the choice. The generator never draws pixel art: it draws flat-colour illustrations on magenta, and
-  `art/tools/pixelize.py --mode flat` makes the pixel art an area at a time, so a model's texture never gets in. The
-  style: flat-colour storybook pixel art, a few big flat shapes, no texture or line work, at most two details on a
-  figure or thing, the 74-colour palette in `art/palette/`, lit from the upper left in neutral daylight, a 1px
-  `#1a1420` outline around sprites (the pipeline adds it). The shop scene is layers (`art/tools/scene.py` has the
-  layout, `art/reference/scene/` shows it): a sky per time of day (morning, midday, evening, night; the rest tinted to
-  match), and per shop tier the place across the counter, the shop's frame (the top bar sits on its band), the display
-  shelf, the counter, the appraisal sheet and lanterns; full-length figures stand behind the counter, and props for the
-  tools you've bought beside the chest. Until those layers and figures are delivered and put in the game
-  (`art/README.md`'s last section says how), the game shows round 1's shop pictures and portraits. `manifest.json` has
+  look at for hours; round 2 (0.25) redraws it and builds the shop scene from layers (Codex, on the branch
+  `art/round2`; `ART_DIRECTION.md`'s "Why round 2" has the measurements and the causes). Its first anchors came out
+  calm but a little too plain; after the style study (`art/study/`, `art/tools/study.py`: four styles at three levels
+  of detail, as the counter screen) the owner chose C2 at 4x, with detail and without outlines (`art/study/CHOICE.md`),
+  and everything was made that way. The generator never draws pixel art: it draws cartoon illustrations on magenta,
+  and `art/tools/pixelize.py --mode flat --no-outline` makes the pixel art an area at a time, so a model's texture
+  never gets in. The style: warm storybook cartoons in chunky pixels, cel-shaded, three or four readable features on a
+  figure or thing, no outlines in the art, the 74-colour palette in `art/palette/`, lit from the upper left. The game
+  outlines what has to stand out itself (the owner's request, 2026-11-01): one pixel of `Palette.Outline` (`#1a1420`,
+  the chest's own) outside every character's silhouette, full figures and the head crops cut from them
+  (`UiKit.Outlined`), and a row of it along the counter's far edge (`ShopView`); things, props and the other layers
+  have none, and nobody draws outlines into the art. The shop scene is layers (`art/tools/scene.py` has the layout): a
+  sky per time of day (morning, midday, evening, night; the rest tinted to match), and per shop tier the place across
+  the counter, the shop's frame (the top bar sits on its band), the display shelf, the counter, the appraisal sheet and
+  lanterns. `ShopView` stacks them at 4x and lights them for the hour; full-length figures stand behind the counter
+  (`SellerView`: short folk lifted, Vexis the imp in front of it, the speech bubble top left), props for the tools
+  you've bought stand beside the chest, and the slip is printed in dark ink on the sheet (`Palette.Ink`,
+  `Palette.OnPaper`). The queue, the notebook and Bram's tips use head crops cut from the figures
+  (`assets/figures/layout.json`). `manifest.json` has
   every asset with its spec, prompt and limits (`calm`: lone specks, edges and brightness step, measured by
   `artlib.calm_metrics`; `value`, a layer's brightness; the layers' lines), generated by `art/tools/build_manifest.py`
   from `art/tools/assets_*.py` (edit those, not the JSON), and `art/tools/pixelize.py`/`validate.py` turn a generated
@@ -329,12 +334,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `CREDITS.md`.
 - Keep pixels square: integer scales only, nearest filtering (project default). Art sizes and how they're shown: the
   world (round 2's scene layers, figures 96x160, props) on a 320x180 grid at 4x, the appraisal sheet 216x320 at 2x;
-  story scenes 320x180, which the importer doubles to 640x360, shown at 2x (round 1's shop pictures, 640x360 at 2x,
-  until the layers replace them); the chest 48 wide (lid 21, body 15, open 30), built at 2x and shown at 2x
-  (`ChestView`), with its lock maker's hasp and plate
-  laid over it (`ChestView.Lock`) and its own finish for the Crown Chest (`crown`); portraits 76x76 at
-  2x at the counter, 3x in scenes, 1x in the notebook and Bram's tips, and their 38x38 face (`sprites/sellers/faces/`)
-  in the queue, the notebook's rows and, at 3x, the character cards; things 32x32 (trimmed) at 2x on the table and the
+  story scenes 320x180, which the importer doubles to 640x360, shown at 2x; the chest 48 wide (lid 21, body 15, open
+  30), built at 2x and shown at 2x (`ChestView`), with its lock maker's hasp and plate
+  laid over it (`ChestView.Lock`) and its own finish for the Crown Chest (`crown`); full figures 96x160 at 4x at the
+  counter and in story scenes, and their head crops, 76x76 at 1x in the notebook and Bram's tips and 38x38
+  (`sprites/sellers/faces/`) in the queue, the notebook's rows and, at 3x, the character cards; things 32x32 (trimmed) at 2x on the table and the
   shelf, 1x in small slots; curios 28x28 at 2x; upgrade icons 24x24 at 2x (1x on the slip); kind icons 16x16 at 2x;
   UI frames 12x12 at 2x (`UiKit.Px`, 4-pixel margins); the lock faces 160x160 at 2x under the dial (its ring at
   `LockpickPhase.Radius`); effects at 2-4x (`Fx`); the logo 320x72 at 2x; the window's and the .exe's icons

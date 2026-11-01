@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Keywright.Ui;
@@ -164,15 +165,44 @@ public static class UiKit
         return control;
     }
 
-    /// <summary>A pixel sprite at an integer scale, centered on <paramref name="center"/>.</summary>
-    public static Sprite2D MakeSprite(string path, Vector2 center, int scale)
+    /// <summary>A pixel sprite at an integer scale, centered on <paramref name="center"/> (outlined: see
+    /// <see cref="Outlined"/>).</summary>
+    public static Sprite2D MakeSprite(string path, Vector2 center, int scale, bool outlined = false)
     {
         return new Sprite2D
         {
-            Texture = GD.Load<Texture2D>(path),
+            Texture = outlined ? Outlined(path) : GD.Load<Texture2D>(path),
             Position = center,
             Scale = Vector2.One * scale,
         };
+    }
+
+    static readonly Dictionary<string, Texture2D> _outlined = new();
+
+    /// <summary>
+    /// A picture with a one-pixel outline round its silhouette, outside it, in <see cref="Palette.Outline"/>: what has to
+    /// stand out from the scene behind it (everyone's figure and face). The game draws it rather than the art, which round
+    /// 2 draws without outlines. A full figure's feet are on its bottom edge: <paramref name="feet"/> adds a row under them
+    /// for theirs. Where a face is cut from a figure, the cut gets none (it has nothing transparent beside it).
+    /// </summary>
+    public static Texture2D Outlined(string path, bool feet = false)
+    {
+        string key = feet ? path + "|feet" : path;
+        if (_outlined.TryGetValue(key, out var done)) return done;
+        var art = GD.Load<Texture2D>(path).GetImage();
+        if (art.IsCompressed()) art.Decompress();
+        art.Convert(Image.Format.Rgba8);
+        int w = art.GetWidth(), h = art.GetHeight() + (feet ? 1 : 0);
+        var img = Image.CreateEmpty(w, h, false, Image.Format.Rgba8);
+        img.BlitRect(art, new Rect2I(0, 0, w, art.GetHeight()), Vector2I.Zero);
+        bool Solid(int x, int y) => x >= 0 && y >= 0 && x < w && y < h && img.GetPixel(x, y).A >= 0.5f;
+        var ring = new List<Vector2I>();
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                if (!Solid(x, y) && (Solid(x - 1, y) || Solid(x + 1, y) || Solid(x, y - 1) || Solid(x, y + 1)))
+                    ring.Add(new Vector2I(x, y));
+        foreach (var at in ring) img.SetPixelv(at, Palette.Outline);
+        return _outlined[key] = ImageTexture.CreateFromImage(img);
     }
 
     /// <summary>The square every thing's art fits in (trimmed, a sprite is at most this): slots scale by it, so things

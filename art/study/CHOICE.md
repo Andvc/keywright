@@ -89,3 +89,16 @@ Game integration is complete on 2026-11-01: all 242 redraws reach their runtime 
 shops, full figures and 38 head crops. The build, import, visual review and Windows export/launch pass.
 See the [in-game review guide](../generated/_review/round2_integration_README.md).
 The authorized round-2 work is complete; stop here.
+
+## Programmatic outlines in the game
+
+Owner's request, 2026-11-01: **"Add programmatic outlines to elements that need to stand out, such as characters
+and the countertop, to improve visual clarity."** The art stays without outlines; the game draws them. One pixel of
+`#1a1420` (`Palette.Outline`, the chest's own outline colour) goes outside the silhouette of every character, wherever
+one is shown (`UiKit.Outlined`):
+- full figures at the counter, on Nim's mornings and the Guild's night, and in story scenes;
+- the head crops in the queue, the notebook, Bram's tips and the character cards.
+
+The counter's far edge gets the same line, a row above it across the screen (`ShopView`). It passes behind the
+chest, the props and whoever stands in front of the counter. Things, props, curios and the scene's other layers stay
+without outlines.
