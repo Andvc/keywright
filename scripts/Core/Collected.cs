@@ -25,6 +25,9 @@ public sealed class Collected
 
     public bool FoundEnchanted(string entry) => _profile.FoundEnchanted.Contains(entry) || _run?.InJournalEnchanted(entry) == true;
 
+    /// <summary>An achievement earned, in any run (<see cref="Profile.Achievements"/>).</summary>
+    public bool Earned(AchievementDef achievement) => _profile.Achievements.Contains(achievement.Key);
+
     /// <summary>Things found, every run together.</summary>
     public int FoundCount => Collection.Entries.Count(e => Found(e.Entry));
 

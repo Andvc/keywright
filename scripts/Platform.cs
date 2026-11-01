@@ -93,7 +93,7 @@ public static class Platform
     }
 
     /// <summary>
-    /// What the player's doing, for their friends list: "At the title", or "Day 3 at Thornwick Market (week 1 of 5)"
+    /// What the player's doing, for their friends list: "At the title screen", or "Day 3 at Thornwick Market"
     /// (tokens in steam/rich_presence.vdf, worded by Steam in each friend's language).
     /// </summary>
     public static void Presence(GameState state)

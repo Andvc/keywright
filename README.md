@@ -13,7 +13,12 @@ five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.26): a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
+**Status:** Early Access (0.27). 0.27 readies it for a Steam release
+([docs/release.md](docs/release.md): what's done and what's left): saves that survive crashes and come from older
+versions, a full settings menu (window modes and sizes, scaling, vsync, a frame cap, three volumes, rebindable keys
+and controller buttons), a controller that does everything the mouse does, every text ready for translation (2,100 of
+them, with the fonts for most languages), Steam (achievements, rich presence, the overlay, all inert without it),
+credits and licences, and Windows and Linux builds from CI on every push. Before that, 0.26: a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
 of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
 puzzle brings out), runs of five five-day weeks against the Guild's dues (then endless), each day with its business
 (the Guild's night, two days with something on in town, Nim's days and the story's); one model for the economy (the
@@ -133,12 +138,12 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Mark one of a kind enchanted | Click the star on its row (once you have the Witchlight, which stays lit) |
 | Make an offer | Set the slider, then Offer |
 | Lodestone | Button on the right, once you own it |
-| Notebook (sounds, regulars, calendar and the debt, synergies) | N, or the Notebook button on the slip |
+| Notebook (sounds, regulars, calendar and the debt, synergies) | N (Y on a controller), or the Notebook button on the slip |
 | The Guild's debt, week by week | Click the due in the top bar: the notebook opens at it |
 | Collection (finds, curios, Heartsongs, every run) | Collection, on the title screen or in the pause menu |
 | Skip a seller's lesson | Skip lesson, over Bram's box |
-| Pick a lock | Space or left click when the pick is in the green; F for the crowbar |
-| Open the chest | It opens by itself (click or Space to hurry it) |
+| Pick a lock | Space, X on a controller, or left click when the pick is in the green; F or RB for the crowbar |
+| Open the chest | It opens by itself (click, Space or X to hurry it) |
 | Keep something for display | Its Keep button after an opening (Swap when the display is full); sell it back from the exhibition at day end |
 | Deliver to a commission | Its Deliver button after an opening |
 | Buy or sell back a curio | Nim's screen, the morning he visits |
@@ -148,7 +153,12 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Next tip from Bram | Click his box |
 | Reread today's event | Click it in the top bar |
 | Choose each kind's sound | Settings, Item sounds: click a kind's sound to hear the next |
-| Pause, settings, quit to title | Esc, or Menu in the top bar |
+| Pause, settings, quit to title | Esc (Start on a controller), or Menu in the top bar; Esc or B closes what's open |
+| With a controller | The left stick moves the pointer, A clicks and drags (grab a chest and flick the stick to shake it), the D-pad nudges it, the right stick scrolls |
+| Rebind keys and buttons | Settings, Controls: click one, then press the key or button |
+| Change the language | Settings, Game (from the next start) |
+| Achievements | Collection, Achievements (and on Steam) |
+| Credits | Credits, on the title screen |
 | GM mode (testing: +99,999 gold, skip the day, fill the notebook and the collection) | Settings, GM mode; then its panel beside the pause menu |
 | Choose who minds the stall, and the challenge level | New game: click a character, then - and + |
 | Read a seller's page in the notebook | Click them (or Notebook, or N): their line is framed |
@@ -166,7 +176,11 @@ The code is split so the game rules can be tested without the engine:
 | `scripts/Phases` | The screens: title, the character screen, counter, lockpicking, opening, end of day, the Guild's night, Nim's curios, story scenes, the end of a run. |
 | `scripts/Ui` | Visuals: the shakeable chest, the notebook and the collection, Bram, the seller, HUD, particles and styling. |
 | `scripts/Audio` | Recorded sounds, the synthesized slosh, and placeholder effects. |
-| `scripts/Debug` | Balance simulation (with the lesson test, the builds report and the experience playtest), the shake test and an autoplay bot for screenshots and recordings. |
+| `scripts/Debug` | Balance simulation (with the lesson test, the builds report and the experience playtest), the shake, save, language and controller tests, and an autoplay bot for screenshots and recordings. |
+| `scripts/` | The game's frame: `Main` (start, phases, the run's files), `Settings`, `Controls` (actions and bindings), `Localization` (languages and fonts), `Platform` (Steam), `Storage` (crash-safe files). |
+| `locale/` | The text for translators (`keywright.pot`, made by `tools/loc`) and their translations; `locale/README.md` is for them. |
+| `steam/` | The Steam library (Windows and Linux), rich presence's wording, and the Steamworks set-up (`steam/README.md`). |
+| `tools/loc` | Checks that every text the player reads is translatable, and writes the template. |
 | `assets/` | Sprites, portraits, backgrounds, sounds, icons, UI frames and font, built by `tools/import_art.py` from `art/generated/` and Kenney's CC0 packs. |
 | `art/` | The art's brief (its style, palette, and every asset's spec and prompt), the tools that fit and check a picture, and the finished pictures in `art/generated/`. |
 
@@ -180,7 +194,12 @@ godot --headless --path . -- --sim=builds                  # each curio, each wa
 godot --headless --path . -- --sim=experience              # a player's first three runs: pace, load, freshness, peaks
 godot --headless --path . -- --sim=trace --seed=1001       # one careful run, day by day
 godot --headless --path . -- --sim=terms                   # each challenge boon and bane alone, then whole levels
-godot --headless --path . -- --shake-test                  # check that shaking follows the rules
+godot --headless --path . -- --shake-test                  # check that shaking follows the rules (11 minutes)
+godot --headless --path . -- --save-test                   # saves: crash-safe writes, backups, old versions
+godot --headless --path . -- --loc-test                    # the language layer, with a made-up translation
+dotnet run --project tools/loc -- check                    # every text the player reads goes through Loc
+dotnet run --project tools/loc -- extract                  # rewrite locale/keywright.pot
+xvfb-run -a godot --path . -- --pad-test --no-tutorial --seed=5  # play the counter with a simulated controller
 xvfb-run -a godot --path . --rendering-driver opengl3 -- \
   --autoplay --days=1 --shots=$PWD/shots                   # play the guided day, save screenshots
 # add --start-tier=3 --gold=600 to jump ahead with the tools you'd have by then,
@@ -190,7 +209,11 @@ xvfb-run -a godot --path . --rendering-driver opengl3 -- \
 xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, pause, settings
 xvfb-run -a godot --path . -- --vault-demo --quit-at-end --shots=$PWD/shots_vault  # the finale: the Crown Chest
 godot --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe
+godot --headless --path . --export-release "Linux" build/linux/Keywright.x86_64   # then add steam/'s library
 ```
+
+`--pseudo` on any of these shows every text pseudo-translated (bracketed and a third longer), to find untranslated
+text and tight layouts. CI (`.github/workflows/build.yml`) runs the checks and builds Windows and Linux on every push.
 
 Add `--write-movie movies/day.avi --fixed-fps 60` to the autoplay command to record video with sound, and
 `--no-tutorial` to turn off Bram's tips and the scripted first day.

@@ -49,7 +49,8 @@ no translated text is used as a key. `--loc-test` runs a made-up German translat
 `locale/README.md` is for translators.
 
 **Steam.** `Platform` connects when Steam is there and does nothing when it isn't, so the same build is DRM-free
-without the library. On Steam: 23 achievements (kept in the profile too, so none are lost off Steam), rich presence
+without the library. On Steam: 23 achievements (kept in the profile too, so none are lost off Steam, and listed in the
+collection for everyone), rich presence
 ("Day 3 at Thornwick Market"), the overlay pausing the game, and relaunching through Steam once there's an app ID.
 `steam/README.md` is the Steamworks side, step by step. The exported Linux build was tested here with the real Steam
 library and no client: it starts, says so in its log, and plays.
@@ -99,8 +100,6 @@ usual points: full controller support, fullscreen by default, text at least 10px
 - **Chinese** needs its font (above). Japanese uses Galmuri's 6,400 kanji, which covers everyday text.
 - **Saving** happens at the start of each day only: quitting mid-day replays that day (by design so far; see
   docs/design.md).
-- **No achievements screen in game**: they're announced and kept, and Steam lists them. A page in the collection
-  would serve DRM-free players.
 - **No crash reporter.** Godot writes logs to the user folder's `logs/` (Settings > Game > Open the folder), which is
   where a player's bug report should start.
 - **macOS** isn't built: it needs signing and notarization on a Mac account, and Steam doesn't require it.

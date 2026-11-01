@@ -16,7 +16,7 @@ public partial class CollectionView : Node2D
     const float PanelX = 40, PanelY = 100, PanelW = 1200, PanelH = 518;
     const float TableX = 64;
 
-    public const int FindsPage = 0, CuriosPage = 1, SongsPage = 2;
+    public const int FindsPage = 0, CuriosPage = 1, SongsPage = 2, AchievementsPage = 3;
 
     readonly Collected _c;
     readonly int _firstPage;
@@ -53,6 +53,7 @@ public partial class CollectionView : Node2D
             UiKit.MakeButton(Loc.T("Finds"), Palette.Gold, 16, () => ShowPage(FindsPage)).Place(PanelX + 270, PanelY + 14, 96, 36),
             UiKit.MakeButton(Loc.T("Curios"), Palette.Magic, 16, () => ShowPage(CuriosPage)).Place(PanelX + 372, PanelY + 14, 96, 36),
             UiKit.MakeButton(Loc.T("Heartsongs"), Palette.Of(Rarity.Mythic), 16, () => ShowPage(SongsPage)).Place(PanelX + 474, PanelY + 14, 136, 36),
+            UiKit.MakeButton(Loc.T("Achievements"), Palette.Good, 16, () => ShowPage(AchievementsPage)).Place(PanelX + 616, PanelY + 14, 160, 36),
         };
         foreach (var tab in _tabs) AddChild(tab);
         AddChild(UiKit.MakeButton(Loc.T("Close"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
@@ -65,14 +66,42 @@ public partial class CollectionView : Node2D
         CreateTween().TweenProperty(this, "modulate", Colors.White, 0.15f);
     }
 
-    /// <summary>0: finds, 1: curios, 2: Heartsongs.</summary>
+    /// <summary>0: finds, 1: curios, 2: Heartsongs, 3: achievements.</summary>
     public void ShowPage(int page)
     {
         foreach (var child in _page.GetChildren()) child.QueueFree();
         for (int i = 0; i < _tabs.Length; i++) _tabs[i].Modulate = i == page ? Colors.White : new Color(1, 1, 1, 0.6f);
-        if (page == SongsPage) BuildSongs();
+        if (page == AchievementsPage) BuildAchievements();
+        else if (page == SongsPage) BuildSongs();
         else if (page == CuriosPage) BuildCurios();
         else BuildFinds();
+    }
+
+    /// <summary>
+    /// Every achievement, earned ones in gold (on Steam or off it, so a DRM-free player sees them too), how to earn each
+    /// on hover; the secret ones stay secret until they're earned.
+    /// </summary>
+    void BuildAchievements()
+    {
+        var all = Achievements.All;
+        int earned = all.Count(_c.Earned);
+        _page.AddChild(UiKit.MakeLabel(Loc.T($"Earned {earned} of {all.Length}, across your runs. Hover one for how to earn it."), 16, Palette.Muted)
+            .Place(TableX, PanelY + 64, PanelW - 48, 20));
+        const int columns = 4;
+        const float cellW = 270, cellH = 60, gap = 10;
+        for (int i = 0; i < all.Length; i++)
+        {
+            var achievement = all[i];
+            bool got = _c.Earned(achievement), shown = got || !achievement.Hidden;
+            var card = UiKit.MakePanel(got ? Palette.Gold.Darkened(0.4f) : null)
+                .Place(TableX + 4 + i % columns * (cellW + gap), PanelY + 96 + i / columns * (cellH + gap), cellW, cellH);
+            card.TooltipText = shown ? achievement.Text : Loc.T("A secret, until it's earned.");
+            var name = UiKit.MakeLabel(shown ? achievement.Name : "???", 16, got ? Palette.Gold : Palette.Muted, HorizontalAlignment.Center)
+                .Wrapped().Place(8, 6, cellW - 16, cellH - 12);
+            name.VerticalAlignment = VerticalAlignment.Center;
+            card.AddChild(name);
+            _page.AddChild(card);
+        }
     }
 
     /// <summary>

@@ -195,6 +195,8 @@ public partial class Main : Node2D
             return;
         }
         Platform.Unlock(Profile.Achievements);
+        // Steam's callbacks every frame, paused or not (the overlay that paused the game says when it's closed).
+        GetTree().ProcessFrame += Platform.Tick;
         // A controller moves and clicks the pointer (the mouse's own, so everything it can do, a controller can).
         AddChild(new GamepadCursor());
         GetTree().Root.Theme = MakeTheme();
@@ -303,6 +305,7 @@ public partial class Main : Node2D
         Profile.FoundEnchanted.AddRange(Collection.Entries.Where(e => !e.Fake && e.Quality == Rarity.Uncommon).Take(3).Select(e => e.Entry));
         Profile.CuriosSeen.AddRange(Curios.All.Where((c, i) => i % 2 == 0).Select(c => c.Key));
         Profile.Songs.AddRange(Heartsongs.All.Take(2).Select(h => h.Key));
+        Profile.Achievements.AddRange(new[] { "FIRST_CHEST", "THORNWICK", "FIRST_TITHE", "PERFECT_READ", "ENCHANTED" }); // loc: keys
         ToTitle();
         await Wait(2.5);
         var title = (TitlePhase)_phase;
@@ -319,6 +322,10 @@ public partial class Main : Node2D
         await Wait(0.5);
         Moment("07_collection_songs");
         await Wait(1.5);
+        gathered.ShowPage(CollectionView.AchievementsPage);
+        await Wait(0.5);
+        Moment("07_collection_achievements");
+        await Wait(1.0);
         gathered.Close();
         await Wait(0.5);
         // The credits, at the top and further down (the engine's notices).
@@ -418,6 +425,7 @@ public partial class Main : Node2D
         _bot?.QueueFree();
         _bot = null;
         Sfx?.Release();
+        GetTree().ProcessFrame -= Platform.Tick;
         Platform.Stop();
         for (int i = 0; i < 3; i++) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GC.Collect();
@@ -965,7 +973,6 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
-        Platform.Tick();
         if (_camera == null) return;
         _trauma = Mathf.Max(0f, _trauma - (float)delta * 1.6f);
         float strength = _trauma * _trauma;

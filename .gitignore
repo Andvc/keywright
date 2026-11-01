@@ -23,3 +23,6 @@ art/generated/_raw/*.jpg
 art/study/raw/*.png
 art/study/raw/*.jpg
 art/study/raw/*.jpeg
+
+# Steam: the app ID for testing outside the Steam client, never shipped (steam/README.md)
+steam_appid.txt

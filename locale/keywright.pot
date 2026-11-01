@@ -6218,84 +6218,84 @@ msgstr ""
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr ""
 
-#: scripts/Main.cs:482
+#: scripts/Main.cs:490
 #, csharp-format
 msgid "Achievement: {0}"
 msgstr ""
 
-#: scripts/Main.cs:587
+#: scripts/Main.cs:595
 #, csharp-format
 msgid "In the purse: {0}g."
 msgstr ""
 
-#: scripts/Main.cs:595
+#: scripts/Main.cs:603
 msgid "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 
-#: scripts/Main.cs:599
+#: scripts/Main.cs:607
 msgid "Not now: finish what's in hand first."
 msgstr ""
 
-#: scripts/Main.cs:707 scripts/Main.cs:831
+#: scripts/Main.cs:715 scripts/Main.cs:839
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr ""
 
-#: scripts/Main.cs:707 scripts/Main.cs:831
+#: scripts/Main.cs:715 scripts/Main.cs:839
 msgid "THE CROWN CHEST"
 msgstr ""
 
-#: scripts/Main.cs:738
+#: scripts/Main.cs:746
 msgid "BRAM'S STALL"
 msgstr ""
 
-#: scripts/Main.cs:738 scripts/Ui/NotebookView.cs:362 scripts/Ui/NotebookView.cs:444
+#: scripts/Main.cs:746 scripts/Ui/NotebookView.cs:362 scripts/Ui/NotebookView.cs:444
 #, csharp-format
 msgid "WEEK {0}"
 msgstr ""
 
-#: scripts/Main.cs:762
+#: scripts/Main.cs:770
 msgid "THE GILDED GUILD"
 msgstr ""
 
-#: scripts/Main.cs:765
+#: scripts/Main.cs:773
 msgid "THE ALDRIC KEY"
 msgstr ""
 
-#: scripts/Main.cs:806
+#: scripts/Main.cs:814
 msgid "FREE AND CLEAR"
 msgstr ""
 
-#: scripts/Main.cs:854 scripts/Ui/NotebookView.cs:373
+#: scripts/Main.cs:862 scripts/Ui/NotebookView.cs:373
 #, csharp-format
 msgid "DAY {0}"
 msgstr ""
 
-#: scripts/Main.cs:857
+#: scripts/Main.cs:865
 #, csharp-format
 msgid ", level {0}"
 msgstr ""
 
-#: scripts/Main.cs:858
+#: scripts/Main.cs:866
 #, csharp-format
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr ""
 
-#: scripts/Main.cs:858
+#: scripts/Main.cs:866
 #, csharp-format
 msgid " of {0}"
 msgstr ""
 
-#: scripts/Main.cs:859
+#: scripts/Main.cs:867
 #, csharp-format
 msgid "The Guild comes tonight for {0}g."
 msgstr ""
 
-#: scripts/Main.cs:860
+#: scripts/Main.cs:868
 #, csharp-format
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr ""
 
-#: scripts/Main.cs:867
+#: scripts/Main.cs:875
 #, csharp-format
 msgid "Uncle Bram slipped you {0}g from his secret stash ({1} left)."
 msgstr ""
@@ -8034,104 +8034,117 @@ msgstr ""
 msgid "Finds"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:58 scripts/Ui/CreditsView.cs:34 scripts/Ui/Hud.cs:98
+#: scripts/Ui/CollectionView.cs:56
+msgid "Achievements"
+msgstr ""
+
+#: scripts/Ui/CollectionView.cs:59 scripts/Ui/CreditsView.cs:34 scripts/Ui/Hud.cs:98
 msgid "Close"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:85
+#: scripts/Ui/CollectionView.cs:88
+#, csharp-format
+msgid "Earned {0} of {1}, across your runs. Hover one for how to earn it."
+msgstr ""
+
+#: scripts/Ui/CollectionView.cs:98
+msgid "A secret, until it's earned."
+msgstr ""
+
+#: scripts/Ui/CollectionView.cs:114
 msgid "Common"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:85
+#: scripts/Ui/CollectionView.cs:114
 msgid "Uncommon"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:85
+#: scripts/Ui/CollectionView.cs:114
 msgid "Rare"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:85
+#: scripts/Ui/CollectionView.cs:114
 msgid "Epic"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:85
+#: scripts/Ui/CollectionView.cs:114
 msgid "Legendary"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:85
+#: scripts/Ui/CollectionView.cs:114
 msgid "Fake"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:103
+#: scripts/Ui/CollectionView.cs:132
 msgid "Not found yet"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:104
+#: scripts/Ui/CollectionView.cs:133
 #, csharp-format
 msgid "{0}: {1}g{2}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:104
+#: scripts/Ui/CollectionView.cs:133
 #, csharp-format
 msgid " (found enchanted too: {0}g)"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:120
+#: scripts/Ui/CollectionView.cs:149
 #, csharp-format
 msgid " ({0} this run)"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:121
+#: scripts/Ui/CollectionView.cs:150
 #, csharp-format
 msgid "Found {0} of {1}, in every run so far{2}. A star: found enchanted too. Hover one for its name and price."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:138
+#: scripts/Ui/CollectionView.cs:167
 #, csharp-format
 msgid "Seen {0} of {1}; Nim carries {2} of them {3}. Hover one for what it does, or what opens it."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:138
+#: scripts/Ui/CollectionView.cs:167
 msgid "this run"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:152
+#: scripts/Ui/CollectionView.cs:181
 msgid "; yours"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:157
+#: scripts/Ui/CollectionView.cs:186
 #, csharp-format
 msgid "A {0} curio Nim carries, for {1}. You haven't seen it yet."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:165
+#: scripts/Ui/CollectionView.cs:194
 #, csharp-format
 msgid " So far: {0} of {1}."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:167
+#: scripts/Ui/CollectionView.cs:196
 #, csharp-format
 msgid "Locked: a {0} curio for {1}. Nim brings it {2}.{3}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:183
+#: scripts/Ui/CollectionView.cs:212
 #, csharp-format
 msgid "Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. Bram's kin know {0} of the nine{1}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:183
+#: scripts/Ui/CollectionView.cs:212
 msgid ": the Crown Chest can be sung whole."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:183
+#: scripts/Ui/CollectionView.cs:212
 msgid ": with all nine, the Crown Chest's ending changes."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:199
+#: scripts/Ui/CollectionView.cs:228
 msgid "Not heard yet."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:202
+#: scripts/Ui/CollectionView.cs:231
 #, csharp-format
 msgid "{0}, from {1}. {2}"
 msgstr ""

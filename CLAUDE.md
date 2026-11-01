@@ -308,8 +308,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   presence (`Platform.Presence`, worded by steam/rich_presence.vdf), and the overlay opening the pause menu.
   `Platform.AppId` is 0 until there's a store page. Achievements are Core (`Achievements.cs`: each a condition on
   the run or the profile), checked whenever `Main.WriteProfile` runs and at each day's start, kept in
-  `Profile.Achievements` (so they're never lost off Steam, and reach it later), and announced over the top bar when
-  Steam isn't there to announce them; `--achievements` prints the table for Steamworks. A new one needs its API
+  `Profile.Achievements` (so they're never lost off Steam, and reach it later), listed on the collection's
+  Achievements page, and announced over the top bar when Steam isn't there to announce them; `--achievements` prints the table for Steamworks. A new one needs its API
   name added in Steamworks too (steam/README.md has the rest of the Steamworks side).
 - Releases: the version is project.godot's `application/config/version` (`Main.Version`, shown on the title screen
   and stamped into the exe); bump it for each release. The title's Credits (`CreditsView`) list the game's credits
