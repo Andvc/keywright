@@ -1,7 +1,6 @@
 {
  "summary": {
-  "ok": 264,
-  "fail": 3
+  "ok": 267
  },
  "assets": {
   "sky.morning": {
@@ -1450,54 +1449,39 @@
    "priority": "P2"
   },
   "lock.face.rusty": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.118, at most 0.03 (draw it simpler)",
-    "too busy: edges between neighbours 0.322, at most 0.2 (draw it simpler)",
-    "too busy: brightness step 11.6, at most 9 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 13,
    "priority": "P2",
    "calm": {
-    "specks": 0.118,
-    "edges": 0.322,
-    "busy": 11.564
+    "specks": 0.004,
+    "edges": 0.101,
+    "busy": 5.202
    }
   },
   "lock.face.guild": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.110, at most 0.03 (draw it simpler)",
-    "too busy: edges between neighbours 0.319, at most 0.2 (draw it simpler)",
-    "too busy: brightness step 16.1, at most 9 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 13,
    "priority": "P2",
    "calm": {
-    "specks": 0.11,
-    "edges": 0.319,
-    "busy": 16.082
+    "specks": 0.013,
+    "edges": 0.146,
+    "busy": 8.42
    }
   },
   "lock.face.dwarven": {
-   "status": "fail",
-   "errors": [
-    "20 colours, at most 16",
-    "too busy: lone specks 0.090, at most 0.03 (draw it simpler)",
-    "too busy: edges between neighbours 0.255, at most 0.2 (draw it simpler)",
-    "too busy: brightness step 9.3, at most 9 (draw it simpler)"
-   ],
+   "status": "ok",
+   "errors": [],
    "warnings": [],
-   "colours": 20,
+   "colours": 10,
    "priority": "P2",
    "calm": {
-    "specks": 0.09,
-    "edges": 0.255,
-    "busy": 9.269
+    "specks": 0.006,
+    "edges": 0.114,
+    "busy": 7.636
    }
   },
   "brand.logo": {

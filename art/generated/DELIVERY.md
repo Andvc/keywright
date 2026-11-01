@@ -835,3 +835,30 @@ Final `python3 art/tools/validate.py --sheets`: **39/39 batch assets OK, zero wa
 Full manifest: **264 OK, 3 failed, 0 missing (0 P1 missing), exit 1**. All 228 non-batch output files
 and their checks are unchanged. Only the three inherited lock faces remain for batch 15.
 Continue batch 15 and finish game integration under the existing authorization.
+
+
+### Batch 15: lock faces
+
+All **three** lock faces are delivered with zero warnings. Full manifest validation is now
+**267 OK, 0 failed, 0 missing, 0 warnings**, and `python3 art/tools/validate.py --sheets --strict` exits 0.
+All 242 round-2 assets are complete; the 25 retained assets remain as specified.
+
+The built-in image tool produced **ten images**: two initial candidates for each face, then four targeted edits.
+The original prompts remain verbatim. Appends request the approved no-outline style anchor and master palette,
+full framing, pure magenta empty space, broad quiet material faces and the required 160x160 native geometry.
+The initial tracks were too narrow; C widened the plain dark annulus on all three faces, and dwarven D thinned
+the outer metal rim further to clear the gameplay track. No quiet, palette or geometry limits were changed.
+No manual repairs, recolours, blur, smoothing, posterization or other raster filters were applied.
+
+| Asset | Candidates | Kept | Reason |
+|---|---|---|---|
+| `lock.face.rusty` | A/B/C | C | Broad rust patches and two dents retain the worn iron identity. Widened dark track clears the gameplay area; calmness, palette and geometry all pass. |
+| `lock.face.guild` | A/B/C | C | Blue steel, gold eye, rivets and central keyhole remain legible; the full gameplay track is plain dark and every check passes. |
+| `lock.face.dwarven` | A/B/C/D | D | Bronze geared rim, four rivets and broad knot motif remain distinct. The thinner outer rim clears the entire dark gameplay track; all calmness and geometry checks pass. |
+
+
+All native results and their actual 2x presentation were visually reviewed. The four shops were checked at all
+four hours. All 264 non-batch outputs and checks are unchanged. Selected small source WebPs are committed;
+full original and rejected PNGs remain in the local archive. Model identity is not exposed by the image tool.
+See [the review guide](_review/round2_batch15_README.md) and
+[complete provenance](_workflow/round2_batch15.json). Finish the authorized game integration next.

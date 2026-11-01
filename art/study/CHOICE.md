@@ -82,4 +82,7 @@ Batch 13 delivers all 78 remaining curios, with zero errors or warnings. See the
 [curio review guide](../generated/_review/round2_batch13_README.md).
 Batch 14 delivers all 39 icons, the Guild emblem and exact key shards, with zero errors or warnings.
 See the [icon and key review guide](../generated/_review/round2_batch14_README.md).
-Continue batch 15 and integration under the existing authorization.
+Batch 15 delivers all three lock faces, with zero errors or warnings. See the
+[lock review guide](../generated/_review/round2_batch15_README.md).
+All 242 redraws are complete; all 267 manifest assets pass strict validation.
+Finish game integration under the existing authorization.

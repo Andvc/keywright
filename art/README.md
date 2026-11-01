@@ -33,7 +33,9 @@ figures, including the identity reveals, with zero errors or warnings; see its
 objects and Heartsongs, with zero errors or warnings; see the [object review guide](generated/_review/round2_batch12_README.md).
 Batch 13 now delivers all 78 remaining curios, with zero errors or warnings; see the
 [curio review guide](generated/_review/round2_batch13_README.md). Batch 14 delivers all 39 icons, emblem and key assets;
-see the [icon and key review guide](generated/_review/round2_batch14_README.md). Batch 15 and integration are next.
+see the [icon and key review guide](generated/_review/round2_batch14_README.md).
+Batch 15 delivers all three [lock faces](generated/_review/round2_batch15_README.md).
+All 267 manifest assets now pass strict validation with zero warnings; finish the authorized game integration next.
 The original study pictures remain available under `study/review/`; do not regenerate them using the new anchors.
 
 ## What's here
@@ -68,7 +70,7 @@ the scene's layers and the figures.
 | 12 | **Delivered:** things in chests and Heartsongs; all pass | 40 |
 | 13 | **Delivered:** curios; all pass | 78 |
 | 14 | **Delivered:** upgrade and kind icons, the Guild's emblem, the Aldric Key and its shards; all pass | 39 |
-| 15 | Lock faces (P2) | 3 |
+| 15 | **Delivered:** lock faces (P2); all pass | 3 |
 
 Batch 9 decides what everything else looks like, so it waits for a person: push it with the review pictures and stop
 until the owner approves it (or asks for changes: then redo it and stop again). Every later batch is held to its
