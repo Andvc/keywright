@@ -123,7 +123,7 @@ public partial class OpeningPhase : Phase
         if (_step != Step.Build) return;
 
         // It opens by itself; a click or Space hurries it along.
-        bool hurry = Input.IsKeyPressed(Key.Space) || Input.IsMouseButtonPressed(MouseButton.Left);
+        bool hurry = Input.IsActionPressed(Controls.Act) || Input.IsMouseButtonPressed(MouseButton.Left);
         Progress = Mathf.Min(1f, Progress + dt / BuildSeconds * (hurry ? 3f : 1f));
 
         // Everything builds together: rumble, a widening crack of light, the hum, and the camera leaning in.

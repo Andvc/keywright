@@ -7,7 +7,7 @@ namespace Keywright.Ui;
 /// <summary>A full figure across the counter, with their name and speech in the top-left bubble.</summary>
 public partial class SellerView : Node2D
 {
-    public const float BubbleW = 288, BubbleH = 150;
+    public const float BubbleW = 288, BubbleH = 164;
     readonly SellerDef _seller;
     Node2D _body;
     public Node2D Figure => _body;
@@ -69,8 +69,12 @@ public partial class SellerView : Node2D
     public void Say(string line, Color? color = null)
     {
         _text.Text = line;
-        // Short replies leave the hats and faces of taller visitors visible below the bubble.
-        float height = Math.Clamp(48 + _text.GetLineCount() * _text.GetLineHeight(), 110, BubbleH);
+        // Short replies leave the hats and faces of taller visitors visible below the bubble. Measured at full height,
+        // lines and the spacing between them, with room for the frame under the last.
+        _text.Size = new Vector2(BubbleW - 28, BubbleH - 48);
+        int lines = _text.GetLineCount();
+        float textHeight = lines * _text.GetLineHeight() + Math.Max(0, lines - 1) * _text.GetThemeConstant("line_spacing");
+        float height = Math.Clamp(48 + textHeight + 10, 110, BubbleH);
         _text.Size = new Vector2(BubbleW - 28, height - 48);
         _bubble.Size = new Vector2(BubbleW, height);
         _tail.QueueRedraw();

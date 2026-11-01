@@ -32,6 +32,10 @@ By [Kenney](https://kenney.nl), released under [CC0 1.0](https://creativecommons
   chest (coins, tin, cloth, cards, glass), the chest landing, coins, doors and latches.
 
 The license doesn't require attribution; it's given here because Kenney made the game sound good.
+
+**Galmuri 9** by Lee Minseo ([quiple/galmuri](https://github.com/quiple/galmuri)), under the
+[SIL Open Font License 1.1](assets/fonts/galmuri-OFL.txt): the letters Kenney Mini hasn't got (the rest of Latin,
+Cyrillic, Greek, Hangul, kana and the Japanese kanji), for translations.
 `tools/import_art.py` records exactly which source file each sound in `assets/audio/` came from.
 
 Earlier versions (up to 0.15) used pixel art from Pixel-boy's CC0

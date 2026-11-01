@@ -105,7 +105,7 @@ public partial class ScenePhase : Phase
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.Space or Key.Enter })
+        if (e.IsActionPressed(Controls.Act))
         {
             GetViewport().SetInputAsHandled();
             Advance();

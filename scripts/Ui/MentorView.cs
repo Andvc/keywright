@@ -81,7 +81,7 @@ public partial class MentorView : Control
     public bool Teach(GameState state, string key)
     {
         if (key == null || Busy || Hints.Get(key) == null || !state.FirstTime(key)) return false;
-        Say(Hints.Get(key));
+        Say(Controls.Fill(Hints.Get(key)));
         // Taught for good, at once: quitting before the day's out doesn't bring it back.
         Main.Instance.NoteTaught();
         return true;

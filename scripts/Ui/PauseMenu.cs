@@ -84,7 +84,7 @@ public partial class PauseMenu : CanvasLayer
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape } && _settings == null && _collection == null)
+        if ((e.IsActionPressed(Controls.Pause) || e.IsActionPressed(Controls.Back)) && _settings == null && _collection == null)
         {
             GetViewport().SetInputAsHandled();
             Resume();

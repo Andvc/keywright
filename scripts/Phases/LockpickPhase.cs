@@ -54,7 +54,7 @@ public partial class LockpickPhase : Phase
         // The lock's own face, its dark ring track under the dial's zone (art radius 52-68 at 2x: around Radius).
         Add(UiKit.MakeSprite($"res://assets/sprites/lockpick/face_{ChestView.Maker(Math.Clamp(_lock.Index, 1, 3))}.png", Center, 2));
         _dial = Add(new Painter(DrawDial) { Position = Center });
-        _status = Add(UiKit.MakeLabel("[Space] or [Left Click] when the pick is in the green.", 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
+        _status = Add(UiKit.MakeLabel($"{Controls.Tag(Controls.Act)} or [{(Controls.UsingPad ? "A" : "Left Click")}] when the pick is in the green.", 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Place(0, 566, 1280, 24));
         Add(UiKit.MakeLabel("Clean pick: full value.   No slips, mostly perfect: Masterful, +25%.", 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
             .Place(0, 592, 1280, 20));
@@ -63,7 +63,7 @@ public partial class LockpickPhase : Phase
         bool glass = _purchase.Slip.Count(Category.Potions) > 0;
         string warning = glass ? "Your slip says there's glass in there. Forcing it will break it." : "Forcing it is quick, but it scratches everything and breaks glass.";
         Add(UiKit.MakeLabel(warning, 16, glass ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 688, 1280, 20));
-        _crowbar = Add(UiKit.MakeButton("Force it with a crowbar  [F]", Palette.Bad, 16, Force).Place(480, 624, 320, 52));
+        _crowbar = Add(UiKit.MakeButton($"Force it with a crowbar  {Controls.Tag(Controls.Force)}", Palette.Bad, 16, Force).Place(480, 624, 320, 52));
         _mentor = Add(new MentorView { Position = new Vector2(24, 300), ZIndex = 20 });
         _mentor.Teach(State, "lockpick");
         Game.Moment("06_lockpick", 0.6);
@@ -80,11 +80,8 @@ public partial class LockpickPhase : Phase
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false } key)
-        {
-            if (key.Keycode == Key.Space) TryPin();
-            else if (key.Keycode == Key.F) Force();
-        }
+        if (e.IsActionPressed(Controls.Act)) TryPin();
+        else if (e.IsActionPressed(Controls.Force)) Force();
         else if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
         {
             TryPin();

@@ -32,7 +32,7 @@ public partial class Sfx : Node
             AddChild(voice);
             _voices.Add(voice);
         }
-        _hum = new AudioStreamPlayer { Stream = _sounds["hum"], VolumeDb = -80 };
+        _hum = new AudioStreamPlayer { Stream = _sounds["hum"], VolumeDb = -80, Bus = Settings.EffectsBus };
         AddChild(_hum);
     }
 
@@ -62,7 +62,8 @@ public partial class Sfx : Node
             GD.PushWarning($"Unknown sound '{name}'");
             return;
         }
-        PlayStream(stream, pitch, volumeDb);
+        // A Heartsong's song plays on the songs' bus, everything else on the effects' (each has its own volume).
+        PlayStream(stream, pitch, volumeDb, name.StartsWith("song_") ? Settings.SongsBus : Settings.EffectsBus);
     }
 
     /// <summary>
@@ -108,11 +109,12 @@ public partial class Sfx : Node
                 if (takes[i] is AudioStreamWav wav) wav.SaveToWav($"{directory}/{name}_{i}.wav");
     }
 
-    void PlayStream(AudioStream stream, float pitch, float volumeDb)
+    void PlayStream(AudioStream stream, float pitch, float volumeDb, string bus = Settings.EffectsBus)
     {
         if (_released) return;
         var voice = _voices.FirstOrDefault(v => !v.Playing) ?? _voices[_nextVoice++ % _voices.Count];
         voice.Stream = stream;
+        voice.Bus = bus;
         voice.PitchScale = Mathf.Max(0.05f, pitch);
         voice.VolumeDb = volumeDb;
         voice.Play();

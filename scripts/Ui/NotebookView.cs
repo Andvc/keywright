@@ -70,7 +70,7 @@ public partial class NotebookView : Node2D
         Tab(CalendarPage, "Calendar", PanelX + 456, 112);
         // Synergies come with Crownhold: before that, the notebook just keeps its tally.
         if (_state.SynergiesOpen) Tab(SynergiesPage, "Synergies", PanelX + 574, 120);
-        AddChild(UiKit.MakeButton("Close [N]", Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
+        AddChild(UiKit.MakeButton($"Close {Controls.Tag(Controls.Notebook)}", Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
         _page = new Node2D();
         AddChild(_page);
         ShowPage(_firstPage);
@@ -478,7 +478,7 @@ public partial class NotebookView : Node2D
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.N or Key.L or Key.Escape })
+        if (e.IsActionPressed(Controls.Notebook) || e.IsActionPressed(Controls.Back))
         {
             GetViewport().SetInputAsHandled();
             Close();

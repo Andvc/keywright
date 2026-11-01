@@ -169,12 +169,18 @@ public partial class Main : Node2D
 
         CarryOverOldFiles();
         Settings.Load();
+        // The language first, before anything with words in it is built; Godot's own translation of what controls
+        // show is off, since everything shown is translated already (Loc).
+        Localization.Apply(pseudo: args.Contains("--pseudo"));
+        GetTree().Root.AutoTranslateMode = AutoTranslateModeEnum.Disabled;
         if (args.Contains("--gm")) Settings.Gm = true;
         Profile = ReadProfile();
+        // A controller moves and clicks the pointer (the mouse's own, so everything it can do, a controller can).
+        AddChild(new GamepadCursor());
         GetTree().Root.Theme = MakeTheme();
         _seed = int.TryParse(Arg(args, "--seed"), out var s) ? s : (int)(Time.GetUnixTimeFromSystem() % 1_000_000);
         // Straight into a day for the bot and the debugging shortcuts; everyone else gets the title screen.
-        bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--vault-demo") ||
+        bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--vault-demo") || args.Contains("--pad-test") ||
                       Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null;
         if (direct)
         {
@@ -251,12 +257,14 @@ public partial class Main : Node2D
         _shotsDir = Arg(args, "--shots");
         if (_shotsDir != null) DirAccess.MakeDirRecursiveAbsolute(_shotsDir);
 
-        if (args.Contains("--art-review")) ArtReview();
+        if (args.Contains("--font-sheet")) FontSheet();
+        else if (args.Contains("--art-review")) ArtReview();
         else if (args.Contains("--shell-demo")) ShellDemo();
         else if (!direct) ToTitle();
         else if (args.Contains("--opening-demo")) OpeningDemo(args.Contains("--quit-at-end"));
         else if (args.Contains("--vault-demo")) VaultDemo(args.Contains("--quit-at-end"));
         else BeginPlaying();
+        if (args.Contains("--pad-test")) PadTest();
     }
 
     /// <summary>Walks through the title screen, a new game's first moments, the pause menu and the settings, for screenshots.</summary>
@@ -320,6 +328,14 @@ public partial class Main : Node2D
         await Wait(0.6);
         Moment("12_settings");
         await Wait(0.5);
+        foreach (var (page, name) in new[] { (SettingsView.SoundPage, "sound"), (SettingsView.ControlsPage, "controls"), (SettingsView.GamePage, "game") })
+        {
+            settings.ShowPage(page);
+            await Wait(0.4);
+            Moment($"12_settings_{name}");
+            await Wait(0.5);
+        }
+        settings.ShowPage(SettingsView.SoundPage);
         settings.OpenSounds();
         await Wait(0.6);
         Moment("13_item_sounds");
@@ -358,7 +374,7 @@ public partial class Main : Node2D
     /// notice, and collects what the managed side still holds, so the engine doesn't shut down around live objects (after
     /// a long session that could crash on the way out).
     /// </summary>
-    public async void QuitGame()
+    public async void QuitGame(int exitCode = 0)
     {
         if (_quitting) return;
         _quitting = true;
@@ -371,7 +387,7 @@ public partial class Main : Node2D
         for (int i = 0; i < 3; i++) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GC.Collect();
         GC.WaitForPendingFinalizers();
-        GetTree().Quit();
+        GetTree().Quit(exitCode);
     }
 
     /// <summary>The saved shop (or its backup), or null if there isn't one this version can read (one it can't is set aside).</summary>
@@ -535,10 +551,25 @@ public partial class Main : Node2D
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape })
+        if (e.IsActionPressed(Controls.Pause))
         {
             GetViewport().SetInputAsHandled();
             OpenPause();
+        }
+    }
+
+    /// <summary>Another window has the focus: the game pauses (a waiting seller's patience with it) and goes quiet, as the
+    /// player has chosen (Settings); it comes back when they return.</summary>
+    public override void _Notification(int what)
+    {
+        if (what == NotificationApplicationFocusOut)
+        {
+            if (Settings.MuteInBackground) Settings.ApplyAudio(muted: true);
+            if (Settings.PauseInBackground && _bot == null && !_demo) OpenPause();
+        }
+        else if (what == NotificationApplicationFocusIn && Settings.MuteInBackground)
+        {
+            Settings.ApplyAudio();
         }
     }
 

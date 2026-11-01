@@ -398,7 +398,7 @@ public partial class CounterPhase : Phase
     public override void _UnhandledInput(InputEvent e)
     {
         // N for the notebook (L too, as it was when it was the ledger).
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.N or Key.L } && !Busy)
+        if (e.IsActionPressed(Controls.Notebook) && !Busy)
         {
             GetViewport().SetInputAsHandled();
             OpenNotebook();
@@ -566,7 +566,7 @@ public partial class CounterPhase : Phase
         var panel = Add(new Node2D { ZIndex = 10 });
         panel.AddChild(new Sprite2D { Texture = GD.Load<Texture2D>($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
         panel.AddChild(UiKit.MakeLabel("YOUR APPRAISAL", 16, Palette.InkGold).Place(PanelX, 80, 220, 20));
-        _notebookButton = UiKit.MakeButton("Notebook [N]", Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
+        _notebookButton = UiKit.MakeButton($"Notebook {Controls.Tag(Controls.Notebook)}", Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
         panel.AddChild(_notebookButton);
         var seller = _visit.Seller;
         // Nobody says what's inside: the slip is yours to fill (or the Engine's), and how the seller priced it is the reminder.

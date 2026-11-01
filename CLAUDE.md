@@ -67,6 +67,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 4. Shaking or physics changes: `godot --headless --path . -- --shake-test` should hear everything the rules say is
    audible at each strength (and with the magnet, the lodestone in game), with no leaks.
 5. For feel/timing, record with `--write-movie movies/lot.avi --fixed-fps 60` and convert with ffmpeg.
+6. Saves, the profile or `Storage`: `godot --headless --path . -- --save-test` (writes that survive a crash, the
+   `.bak` fallback, unreadable files set aside, old save versions and renames, a newer version left alone). Input,
+   prompts or the pointer: `xvfb-run ... -- --pad-test --no-tutorial --seed=5` plays the counter with a simulated
+   controller (the stick to the chest, A and flicks to a hard shake, Y, B, Start, then rebinding); run it in a scaled
+   window too (a `[video]` `screen=0`, `window_width=1600`, `window_height=900` settings.cfg in the user folder,
+   removed afterwards, under `-screen 0 1920x1080x24`), since the pointer's sums only show there. Both exit 1 on a
+   failure.
 
 ## Conventions
 
@@ -261,10 +268,31 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Settings.Gm`, `--gm`) puts a panel beside the pause menu: +99,999 gold (`Main.GmGold`), skip the day
   (`GameState.SkipRestOfDay`), fill the notebook and the collection (`KnowAll` on the run and the profile).
 - The game opens on `TitlePhase`; `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
-  for the bot or debugging flags) and Esc opens `PauseMenu`. A day: `Main.StartDay` (the week's scene, Nim), the
-  counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening, `DuesPhase` on the fifth). `Settings` (user://settings.cfg) scales screen shake and
-  flashes (route new screen effects through `Main.Shake`/`Flash`) and turns the outlines off and on. Anything added to `GameState` that should survive
-  a day boundary goes in `SaveData` too.
+  for the bot or debugging flags) and the pause action (Esc, Start) opens `PauseMenu`. A day: `Main.StartDay` (the
+  week's scene, Nim), the counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening,
+  `DuesPhase` on the fifth). Anything added to `GameState` that should survive a day boundary goes in `SaveData` too.
+- Files (0.27): everything the game keeps goes through `Storage` (`Read`, `Write`, `Delete`): a write goes to a temp
+  file, flushed, then replaces the old one, which is kept as `.bak`; a read falls back to the `.bak`, and a file that
+  can't be read is set aside (`name.unreadable-<time>.json`) and named on the title screen (`Storage.Notices`), never
+  deleted. The user folder is `Keywright` (`config/use_custom_user_dir`: `%APPDATA%/Keywright` on Windows, so Steam
+  Cloud can name one place), and `Storage.CarryOver` brings files from Godot's old app_userdata folders. `SaveData`
+  (version 4) and `Profile` (`Profile.CurrentVersion`) carry a version: a file from a newer game is left alone, an
+  older one is migrated in `FromJson` (`Categories.Renamed` only for saves up to version 2, from LootFall 0.17).
+- `Settings` (user://settings.cfg; `SettingsView`'s pages Display, Sound, Controls and Game) holds the window
+  (windowed, fullscreen or exclusive, a size that fits the screen, pixel-perfect or smooth scaling, vsync, a frame
+  cap), screen shake and flashes (route new screen effects through `Main.Shake`/`Flash`), the outlines, the volumes
+  (the `Effects` and `Songs` buses, under Master: a Heartsong's "song_" sounds go to Songs), muting and pausing when
+  the window loses focus, tips, language and the controls. `Settings.ApplyDisplay` changes the window through the
+  root `Window` node (its `Mode`, `Size`, `Position`), never the display server alone: the node works out the
+  stretch and the mouse from its own size.
+- Input (0.27): the game asks for an action, never a key (`Controls`: `act` sets a pin, hurries an opening, reads the
+  next line; `force`, `notebook`, `pause`, `back`). Each has keys and controller buttons, rebound on the Controls page
+  (a key another action had moves to the new one, and an action left with none takes the old one; the menu and Back
+  share Esc) and kept in settings.cfg's [controls]. Prompts name what to press through `Controls.Tag`/`Hint`/`Fill`
+  ("[N]", or "[Y]" once a controller's in use, `Controls.UsingPad`; Bram's tips say "{act}"). The mouse needs no
+  binding, and a controller drives the pointer the mouse uses (`GamepadCursor`: the left stick moves it, faster
+  while A is held so a flick shakes hard; A is the left button, by `Input.ParseInputEvent`; the D-pad nudges, the
+  right stick scrolls), so anything the mouse does, a controller does.
 - Every seller has one way of judging a chest (`Judgment`: listening, counting rattles, weight, colour, a dream, a
   trade they know, no idea) with a blind spot a careful player can see through, one way to trade,
   places their chests come from (`From`, `Origins.cs`: the place decides what a chest tends to hold) with a story for
@@ -284,8 +312,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   bubble (about 170 characters with the price filled in).
 - `ShakeBox` gates sounds with the same rules as `Chest.Audible`: change both together (the shake test checks them).
 - UI is built in code with `UiKit` and `Painter` (absolute positions on a 1280x720 canvas), not in .tscn files.
-- Buttons use `FocusMode.None`: Space is reserved for lockpicking and holding the chest open. N opens the notebook (L
-  too, as it did when it was the ledger).
+- Buttons use `FocusMode.None`: the act action (Space) is reserved for lockpicking and holding the chest open. The
+  notebook action is N (L too, as it was when it was the ledger) or Y.
 - `Hearing.Read` and `Strategy` model a careful player (what they hear, when they drop or use the magnet, what they
   offer and keep) for the sim and the bot. Update them when a rule, tool or trade changes.
 - Phases are swapped by `Main.SwitchTo`; check `Alive` after every `await` in a phase. Quit through `Main.QuitGame`
@@ -347,7 +375,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`assets/ui/icon.png`, `icon.ico`, which the Windows export writes into the exe) from the app icon drawn for each
   size. Kenney Mini at multiples of 8px (`UiKit.MakeLabel` snaps sizes;
   min 16).
-- Kenney Mini has no fallback font: stick to ASCII in UI strings.
+- Kenney Mini has ASCII and Latin-1; Galmuri 9 (`Localization.SetUpFont`) is its fallback for other scripts, and
+  `--font-sheet --shots=DIR` shows every script the fonts cover. Keep the English text ASCII all the same: it's the
+  source every translation starts from, and the house style.
 - Panels and buttons use the 9-slice frames from `UiKit` (`MakePanel`, `MakeFrame`, `MakeButton`), not StyleBoxFlat.
 - To show a particular thing in a slot (collection, shelf, exhibition, chooser) use `UiKit.MakeItemIcon`, its own
   sprite from `assets/sprites/items/icons/` at the largest whole scale at which any thing would fit (by the art's 30px

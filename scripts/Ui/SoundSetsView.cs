@@ -67,7 +67,7 @@ public partial class SoundSetsView : Control
 
     public override void _UnhandledInput(InputEvent e)
     {
-        if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape })
+        if (e.IsActionPressed(Controls.Back))
         {
             GetViewport().SetInputAsHandled();
             Close();
