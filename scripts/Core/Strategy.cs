@@ -363,8 +363,12 @@ public static class Strategy
     /// </summary>
     public static float SwayWorth(GameState state, params (Faction Faction, int By)[] sways)
     {
-        int days = Math.Max(0, Guild.Weeks * Guild.DaysPerWeek - state.Day), weeks = Math.Max(0, Guild.Weeks - state.Week + 1);
+        int last = Guild.Weeks * Guild.DaysPerWeek, weeks = Math.Max(0, Guild.Weeks - state.Week + 1);
         float dues = Enumerable.Range(state.Week, weeks).Sum(w => (float)state.DueFor(w));
+        // The days left, at the shop a careful player would have by then: a customer's worth about a third of a working purse.
+        float customers = Enumerable.Range(state.Day + 1, Math.Max(0, last - state.Day)).Sum(d => 0.3f * state.WorkingPurseAt(ExpectedTier(state, d)));
+        // A purse a tenth of which goes each week: about three working purses at the shop of each week left.
+        float purses = Enumerable.Range(state.Week, weeks).Sum(w => 3f * state.WorkingPurseAt(ExpectedTier(state, GameState.DayNumber(w, Wardens.RobberyNight))));
         float total = 0;
         foreach (var group in sways.GroupBy(s => s.Faction))
         {
@@ -374,15 +378,18 @@ public static class Strategy
             float change = Level(then) - Level(now);
             total += faction switch
             {
-                Faction.Commons => change * days * state.Purses(0.25f),
+                Faction.Commons => change * customers,
                 Faction.Guild => change * dues * 0.1f,
-                Faction.Wardens => change * weeks * Math.Min(state.Purses(0.5f), state.DueFor(state.Week) * Wardens.Fine),
-                Faction.Lockless => change * weeks * Math.Max(state.Gold, state.WorkingPurse) * Wardens.Robbed,
+                Faction.Wardens => change * dues * Wardens.Fine,
+                Faction.Lockless => change * purses * Wardens.Robbed,
                 _ => 0,
             } + (then - now) * state.Purses(0.03f);
         }
         return total;
     }
+
+    /// <summary>The shop a careful player would have on a day (the sim's medians: Thornwick by day 9, Crownhold 13, the Emporium 18).</summary>
+    static int ExpectedTier(GameState state, int day) => Math.Max(state.Tier, day >= 18 ? 4 : day >= 13 ? 3 : day >= 9 ? 2 : 1);
 
     /// <summary>
     /// What to do with a chest in the back room tonight: return it to its owner (the Wardens' finder's share), or sell it
@@ -494,6 +501,13 @@ public static class Strategy
     const float Focused = 12f;
 
     /// <summary>
+    /// The least a curio has to be worth to this shop to be bought into a free place, and how much better than the least
+    /// useful one kept it has to be to replace it (that one goes back to Nim for half). With Nim every night there's
+    /// always another night: 0.27's twice-weekly Nim bought anything into a free place, and replaced at 4.
+    /// </summary>
+    const float Choosy = 4f, Churn = 6f;
+
+    /// <summary>
     /// What a curio is worth to this shop, now: its own worth, less if the shop can't use it yet (a display curio without
     /// a display, a trade's curio for a kind it doesn't see), more for each curio kept that shares a way of trading with
     /// it (<see cref="Kindred"/>), less beside a cursed crescent if it's luck, and much more for the way of trading a
@@ -537,11 +551,14 @@ public static class Strategy
         foreach (var (curio, score) in wanted)
         {
             int price = state.CuriosPrice(curio);
+            // Nim comes every night (0.28): a weak curio waits for a better night, rather than filling the case to be sold
+            // back for half when something better comes.
+            if (score < Choosy && price > 0) continue;
             string sell = null;
             if (state.CuriosFull)
             {
                 var (worst, least) = state.OwnedCurios.Select(c => (c.Key, Score: CurioScore(state, c, focus, curio.Key))).OrderBy(c => c.Score).First();
-                if (score - least < 4) continue;
+                if (score - least < Churn) continue;
                 sell = worst;
                 price -= state.CurioValue(worst);
             }

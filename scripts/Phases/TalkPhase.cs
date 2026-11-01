@@ -24,7 +24,13 @@ public partial class TalkPhase : Phase
     Button _next;
     int _line = -1;
     bool _answered, _leaving;
-    int _goldBefore, _swayedBefore;
+    int _goldBefore, _swayedBefore, _logBefore;
+
+    /// <summary>The tale this talk belongs to, if it's a beat.</summary>
+    string Tale => TaleBook.Find(_talk.Key)?.Tale;
+
+    /// <summary>How many lines the tale's story has in the notebook so far.</summary>
+    int TaleLines => Tale != null && State.TaleLog.TryGetValue(Tale, out var log) ? log.Count : 0;
 
     public TalkPhase(Talk talk) => _talk = talk;
 
@@ -73,6 +79,8 @@ public partial class TalkPhase : Phase
         _next = Add(UiKit.MakeButton(Loc.T("Go on"), Palette.Text, 16, Advance).Place(PanelX + PanelW - 180, 620, 180, 48));
         _goldBefore = State.Gold;
         _swayedBefore = State.Swayed.Count;
+        _logBefore = TaleLines;
+        if (!_talk.Night) BuildQueue();
         // Bram's word on what these are, the first time: people with troubles, and people with tools.
         if (_talk.Offer != null) _mentor.Teach(State, "offer");
         else if (!_talk.Night) _mentor.Teach(State, "tales");
@@ -153,6 +161,7 @@ public partial class TalkPhase : Phase
         Sfx.Play("chime", 1f, -8);
         _panel.QueueFree();
         ShowWhatChanged();
+        ShowNoted();
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDue(State);
         _next.Visible = true;
@@ -169,13 +178,35 @@ public partial class TalkPhase : Phase
             .Select(g => (g.Key, By: g.Sum(s => s.By))).Where(g => g.By != 0)
             .Select(g => (Text: Loc.T($"{Factions.Name(g.Key)}: {(g.By > 0 ? "+" : "")}{g.By}, {Factions.Word(State.Standing(g.Key))}"),
                           Color: g.By > 0 ? Palette.Good : Palette.Warn)).ToList();
-        if (gold != 0) lines.Insert(0, (gold > 0 ? $"+{gold}g" : $"{gold}g", gold > 0 ? Palette.Gold : Palette.Bad));
+        if (gold != 0) lines.Insert(0, (gold > 0 ? Loc.T($"+{gold}g") : Loc.T($"{gold}g"), gold > 0 ? Palette.Gold : Palette.Bad));
         if (_talk.Offer != null && State.Has(_talk.Offer)) lines.Insert(0, (Loc.T($"Bought: {Upgrades.Get(_talk.Offer).Name}"), Palette.Good));
         if (lines.Count == 0) return;
         var box = Add(UiKit.MakePanel(Palette.PanelBorder).Place(PanelX, PanelY, PanelW, 24 + lines.Count * 28));
         for (int i = 0; i < lines.Count; i++)
             box.AddChild(UiKit.MakeLabel(lines[i].Text, 16, lines[i].Color).Place(16, 12 + i * 28, PanelW - 32, 24));
-        if (gold != 0) FloatText(gold > 0 ? $"+{gold}g" : $"{gold}g", new Vector2(PanelX + PanelW / 2, PanelY - 20), gold > 0 ? Palette.Gold : Palette.Bad, 24);
+        if (gold != 0) FloatText(gold > 0 ? Loc.T($"+{gold}g") : Loc.T($"{gold}g"), new Vector2(PanelX + PanelW / 2, PanelY - 20), gold > 0 ? Palette.Gold : Palette.Bad, 24);
+    }
+
+    /// <summary>What the notebook's Town page now says of the tale, on the counter: it's written down, and it'll come back.</summary>
+    void ShowNoted()
+    {
+        if (Tale == null || TaleLines <= _logBefore) return;
+        string line = State.TaleLog[Tale][^1];
+        var note = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(330, 500, 480, 96));
+        note.AddChild(UiKit.MakeLabel(Loc.T($"IN YOUR NOTEBOOK {Controls.Tag(Controls.Notebook)}"), 16, Palette.Gold).Place(16, 10, 448, 20));
+        note.AddChild(UiKit.MakeLabel(line, 16, Palette.Text).Wrapped().Place(16, 34, 448, 56));
+    }
+
+    /// <summary>Who's still waiting today, along the counter's edge (as at the counter).</summary>
+    void BuildQueue()
+    {
+        if (State.Queue.Count == 0) return;
+        Add(UiKit.MakeLabel(Loc.T("Waiting"), 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
+        for (int i = 0; i < Math.Min(7, State.Queue.Count); i++)
+        {
+            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Look}.png", new Vector2(44 + i * 38, 668), 1, outlined: true));
+            face.Modulate = new Color(0.8f, 0.8f, 0.85f);
+        }
     }
 
     /// <summary>They go: the next customer, or (at night) the rest of the night.</summary>

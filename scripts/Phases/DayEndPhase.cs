@@ -81,7 +81,7 @@ public partial class DayEndPhase : Phase
         if (today.Curios > 0) figures.Add((Loc.T("Curios"), Loc.T($"+{today.Curios}g"), Palette.Magic));
         if (today.Admission > 0) figures.Add((Loc.T("Visitors"), Loc.T($"+{today.Admission}g"), Palette.Magic));
         // What the day's people brought or cost (rewards, fees, the Wardens' finder's shares), and what went to the back room.
-        if (today.Tales != 0) figures.Add((Loc.T("Town"), today.Tales > 0 ? $"+{today.Tales}g" : $"{today.Tales}g", today.Tales > 0 ? Palette.Good : Palette.Bad));
+        if (today.Tales != 0) figures.Add((Loc.T("Town"), today.Tales > 0 ? Loc.T($"+{today.Tales}g") : Loc.T($"{today.Tales}g"), today.Tales > 0 ? Palette.Good : Palette.Bad));
         if (today.Held > 0) figures.Add((Loc.T("Back room"), today.Held.ToString(), Palette.Warn));
         if (today.PerfectReads > 0) figures.Add((Loc.T("Perfect reads"), today.PerfectReads.ToString(), Palette.Gold));
         if (today.NewFinds > 0) figures.Add((Loc.T("New finds"), today.NewFinds.ToString(), Palette.Magic));

@@ -478,7 +478,7 @@ public sealed partial class GameState
                                             (Shows(Heartsongs.Pipe) ? Heartsongs.PipeCustomers : 0) +
                                             (HasCurio("lantern") ? Curios.LanternCustomers : 0) + (HasCurio("horn") ? Curios.HornCustomers : 0) +
                                             EventCustomers - (Under(Challenges.ThinCrowds) && DayOfWeek > Guild.DaysPerWeek - Challenges.ThinDays ? 1 : 0) - (QuietOpening ? 1 : 0) +
-                                            (Friend(Faction.Commons) ? 1 : 0) - (Foe(Faction.Commons) ? 1 : 0) + (Flagged(TaleBook.Porter) ? 1 : 0));
+                                            (Friend(Faction.Commons) ? 1 : 0) - (Foe(Faction.Commons) ? 1 : 0) + (Day <= PorterUntil ? 1 : 0));
 
     /// <summary>The first day the shop's had at this tier (a move inward is bought the evening before).</summary>
     public int TierSince { get; private set; }
@@ -647,7 +647,7 @@ public sealed partial class GameState
         // a few newcomers (each a lesson) a day: the rest of a new shop's crowd comes in over the next days. Anyone who
         // walked out on Rosa this week stays away, while there's anyone else.
         // Some come in only some days (a delver between barrows, the King, the Maw).
-        // Anyone a tale has taken away (jailed, gone north) stays away; once the Gate's cracking, the Maw comes twice as often.
+        // Anyone a tale has taken away (jailed, gone north, down the Barrow) stays away.
         var sellers = Sellers.All.Where(s => s.Tier <= Tier && !Gone.Contains(s.Key) && !Flagged($"away:{s.Key}") && (s.Visits >= 1 || Rng.NextFloat() < Visits(s))).ToArray();
         if (sellers.Count(s => !_snubbed.Contains(s.Key)) >= 2) sellers = sellers.Where(s => !_snubbed.Contains(s.Key)).ToArray();
         float smiths = Synergies.SmithVisits(Active("smith"));
@@ -689,8 +689,8 @@ public sealed partial class GameState
         StageTales();
     }
 
-    /// <summary>How often someone comes in: their own habit, and the Maw twice as often once the Unlocking has cracked the Gate.</summary>
-    float Visits(SellerDef seller) => seller.Visits * (seller.Gaze > 0 && Flagged(TaleBook.GateCracked) ? 2 : 1);
+    /// <summary>How often someone comes in, as they're inclined.</summary>
+    static float Visits(SellerDef seller) => seller.Visits;
 
     /// <summary>
     /// With tips on, at most this many sellers' lessons in one day (the playtest: three, on a day of four or five customers,

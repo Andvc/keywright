@@ -62,7 +62,7 @@ public static class Factions
     public static (string Friend, string Foe) Effects(Faction faction) => faction switch
     {
         Faction.Commons => (Loc.T("They send their neighbours: one more customer a day."), Loc.T("They stay away: one customer fewer a day.")),
-        Faction.Guild => (Loc.T("It overlooks a tenth of every due."), Loc.T("It audits you: a tenth more on every due.")),
+        Faction.Guild => (Loc.T("It overlooks a twentieth of every due."), Loc.T("It audits you: a twentieth more on every due.")),
         Faction.Wardens => (Loc.T("Hollis warns you before a search, and returns pay a third more."),
                             Loc.T("They search your back room every Guild night: what's stolen is taken, and you're fined.")),
         Faction.Lockless => (Loc.T("Nim's friends pay half what a back-room chest cost you, not a quarter."),
@@ -132,6 +132,14 @@ public sealed class Notice
     public string Title { get; set; }
     public string Text { get; set; }
     public int Day { get; set; }
+}
+
+/// <summary>Someone's word that they'll come by on a day (the calendar shows it): kept or not, it's what they said.</summary>
+public sealed class Promise
+{
+    public int Day { get; set; }
+    public string Who { get; set; }
+    public string Note { get; set; }
 }
 
 /// <summary>A chest in the back room that won't open for you: bought from someone it wasn't theirs to sell, or kept for someone.</summary>
@@ -277,6 +285,9 @@ public sealed partial class GameState
 
     readonly Dictionary<string, int> _beatsDone = new();
 
+    /// <summary>The last day Jory carries chests for you (one more customer a day till then), or 0.</summary>
+    public int PorterUntil { get; set; }
+
     /// <summary>What's been chosen and what's come of it: "pip.apprentice", "magpie.named".</summary>
     public HashSet<string> Flags { get; } = new();
 
@@ -289,6 +300,19 @@ public sealed partial class GameState
     public List<Notice> Notices { get; } = new();
 
     public List<Held> BackRoom { get; } = new();
+
+    /// <summary>Who said they'd come back, and when (the calendar's): a tale's own word, kept until the day comes or it's played.</summary>
+    public List<Promise> Promises { get; } = new();
+
+    /// <summary>Someone says they'll be back on a day: the calendar marks it.</summary>
+    public void Promise(int day, string who, string note)
+    {
+        Promises.RemoveAll(p => p.Who == who);
+        Promises.Add(new Promise { Day = day, Who = who, Note = note });
+    }
+
+    /// <summary>They came (or won't): the calendar's mark goes.</summary>
+    public void Kept(string who) => Promises.RemoveAll(p => p.Who == who);
 
     /// <summary>What a thing a tale set aside would have sold for (Rafe Kettle's sword), for the choice about it.</summary>
     public Dictionary<string, int> Keepsakes { get; } = new();
@@ -448,6 +472,7 @@ public sealed partial class GameState
                 if (beat.Tier > Tier || (beat.If != null && !beat.If(this))) continue;
                 yield return (Math.Max(Day + 1, DoneOn(beat.After) + beat.Gap), beat.Who, beat.Expect);
             }
+        foreach (var promise in Promises.Where(p => p.Day > Day)) yield return (promise.Day, promise.Who, promise.Note);
     }
 
     // ---- Tools offered at the counter ----
@@ -581,6 +606,8 @@ public sealed partial class GameState
         data.TaleLog = TaleLog.ToDictionary(p => p.Key, p => p.Value.ToList());
         data.OffersDeclined = new Dictionary<string, int>(_offerDeclined);
         data.Keepsakes = new Dictionary<string, int>(Keepsakes);
+        data.Promises = Promises.ToList();
+        data.PorterUntil = PorterUntil;
     }
 
     void LoadTales(SaveData data)
@@ -597,6 +624,8 @@ public sealed partial class GameState
         foreach (var (tale, lines) in data.TaleLog ?? new Dictionary<string, List<string>>()) TaleLog[tale] = lines.ToList();
         foreach (var (key, day) in data.OffersDeclined ?? new Dictionary<string, int>()) _offerDeclined[key] = day;
         foreach (var (key, value) in data.Keepsakes ?? new Dictionary<string, int>()) Keepsakes[key] = value;
+        Promises.AddRange(data.Promises ?? new List<Promise>());
+        PorterUntil = data.PorterUntil;
     }
 }
 

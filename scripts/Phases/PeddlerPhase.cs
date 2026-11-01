@@ -17,11 +17,13 @@ namespace Keywright.Phases;
 public partial class PeddlerPhase : Phase
 {
     // Tall enough for five lines of a narrow card's description above what it goes with.
-    const float CardH = 384, CardsY = 96, CardGap = 20, CardsRight = 1260;
+    // Nim stands on the left; his cloth is the rest of the counter, the cards centred on it however many he lays out.
+    // The rows under the cloth start clear of Bram's corner (his tips, bottom left).
+    const float CardH = 384, CardsY = 96, CardGap = 20, AreaX = 340, AreaW = 920, CardsRight = AreaX + AreaW, RowX = 560;
 
     // One card to the right of Nim, up to four (with his upgrades), the fourth starting nearer him and a little narrower.
     float CardW => State.PeddlerCount > 3 ? 225 : 260;
-    float CardsX => CardsRight - State.PeddlerCount * (CardW + CardGap) + CardGap;
+    float CardsX => AreaX + (AreaW - (State.PeddlerCount * (CardW + CardGap) - CardGap)) / 2;
 
     SellerView _nim;
     MentorView _mentor;
@@ -44,7 +46,7 @@ public partial class PeddlerPhase : Phase
         _nim.Enter();
         _nim.Say(Peddler.Greetings[State.Day % Peddler.Greetings.Length]);
         Sfx.PlayGroup("door_open", 1.2f, -6);
-        Add(UiKit.MakeLabel(Loc.T("NIM'S CURIOS"), 32, Palette.Magic, HorizontalAlignment.Center, outline: 6).Place(CardsX, 58, CardsRight - CardsX, 40));
+        Add(UiKit.MakeLabel(Loc.T("NIM'S CURIOS"), 32, Palette.Magic, HorizontalAlignment.Center, outline: 6).Place(AreaX, 58, AreaW, 40));
         _board = Add(new Node2D());
         _mentor = Add(new MentorView { Position = new Vector2(24, 560), ZIndex = 20 });
         Build();
@@ -69,19 +71,19 @@ public partial class PeddlerPhase : Phase
         for (int i = 0; i < stock.Count; i++) _board.AddChild(MakeCard(stock[i], CardsX + i * (CardW + CardGap), CardsY));
         if (stock.Count == 0)
             _board.AddChild(UiKit.MakeLabel(Loc.T("Nim's sold out: you own every curio Nim carries!"), 24, Palette.Muted, HorizontalAlignment.Center)
-                .Place(CardsX, 220, CardsRight - CardsX, 30));
+                .Place(AreaX, 220, AreaW, 30));
         string note = Loc.T($"Each curio costs a set sum for its rarity, plus a share of the gold you have tonight ({State.PeddlerPurse}g).");
         if (stock.Count > 0)
             _board.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
-                .Place(CardsX, CardsY + CardH + 4, CardsRight - CardsX, 20));
+                .Place(AreaX, CardsY + CardH + 4, AreaW, 20));
 
         // Your curios: click one to sell it back for half.
         const float y = CardsY + CardH + 32;
-        _board.AddChild(UiKit.MakeLabel(Loc.T($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(CardsX, y, 300, 20));
-        _board.AddChild(UiKit.MakeLabel(Loc.T("Click one to sell it back to Nim for half what you paid."), 16, Palette.Muted).Place(CardsX + 220, y, 600, 20));
+        _board.AddChild(UiKit.MakeLabel(Loc.T($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(RowX, y, 200, 20));
+        _board.AddChild(UiKit.MakeLabel(Loc.T("Click one to sell it back for half."), 16, Palette.Muted).Place(RowX + 200, y, 500, 20));
         for (int i = 0; i < State.CurioSlots; i++)
         {
-            float x = CardsX + i * 76;
+            float x = RowX + i * 76;
             var slot = UiKit.MakePanel(i < State.CurioKeys.Count ? Palette.Magic.Darkened(0.2f) : Palette.PanelBorder).Place(x, y + 26, 68, 68);
             _board.AddChild(slot);
             if (i >= State.CurioKeys.Count) continue;
@@ -103,19 +105,17 @@ public partial class PeddlerPhase : Phase
         {
             var upgrade = offers[i];
             int price = State.Cost(upgrade);
-            var button = UiKit.MakeButton(Loc.T($"{upgrade.Name} {price}g"), Palette.Magic, 16, () => BuyUpgrade(upgrade)).Place(CardsX + 400 + i * 0, 0, 1, 1);
+            var button = UiKit.MakeButton(Loc.T($"{upgrade.Name} {price}g"), Palette.Magic, 16, () => BuyUpgrade(upgrade));
             button.Disabled = State.Gold < price;
             button.TooltipText = upgrade.Blurb;
-            _board.AddChild(button.Place(520 + i * 252, 610, 244, 30));
+            _board.AddChild(button.Place(RowX + i * 240, 614, 232, 32));
         }
-        if (offers.Count > 0)
-            _board.AddChild(UiKit.MakeLabel(Loc.T("Nim also offers:"), 16, Palette.Magic, HorizontalAlignment.Right).Place(320, 616, 192, 20));
 
         // The back room: chests that won't open for you, and what can be done with them tonight.
         int held = State.BackRoom.Count;
         if (held > 0)
         {
-            var room = UiKit.MakeButton(Loc.T($"The back room ({held})"), Palette.Warn, 16, OpenBackRoom).Place(520, 650, 496, 30);
+            var room = UiKit.MakeButton(Loc.T($"The back room ({held})"), Palette.Warn, 16, OpenBackRoom).Place(RowX, 652, 472, 30);
             room.TooltipText = Loc.T("Chests that won't open for you: return them to their owners, or sell them to Nim's friends.");
             _board.AddChild(room);
         }
@@ -276,7 +276,7 @@ public partial class PeddlerPhase : Phase
         Game.Hud.SetGold(State.Gold);
         _nim.Say(Peddler.Thanks[State.CurioKeys.Count % Peddler.Thanks.Length], Palette.Good);
         _nim.Bob();
-        FloatText($"{curio.Name}!", new Vector2(CardsX + 1.5f * CardW + CardGap, 560), Palette.Magic, 24);
+        FloatText($"{curio.Name}!", new Vector2(AreaX + AreaW / 2, 560), Palette.Magic, 24);
         Build();
         Game.Moment("22_bought", 0.4);
         return true;
@@ -289,7 +289,7 @@ public partial class PeddlerPhase : Phase
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
         _nim.Say(Peddler.Back);
-        FloatText(Loc.T($"+{value}g"), new Vector2(CardsX + 120, 420), Palette.Gold, 24);
+        FloatText(Loc.T($"+{value}g"), new Vector2(RowX + 120, 420), Palette.Gold, 24);
         Build();
     }
 

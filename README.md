@@ -13,7 +13,15 @@ five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or
 shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
 [docs/world.md](docs/world.md).
 
-**Status:** Early Access (0.27). 0.27 readies it for a Steam release
+**Status:** Early Access (0.28). 0.28 gives the world an order and its people lives
+([docs/world.md](docs/world.md), [docs/stories.md](docs/stories.md)): a new cast, each with a place, a faction and a
+want; twelve **tales** that run across a season (six or seven drawn each run, some with a secret of their own: who the
+Magpie is, what's behind the Barrow door), told a beat at a time at the counter, at the back door after dark and in
+letters, with choices that cost and change things (gold, chests given freely, curios, people gained and lost, the
+Crown's decree on the tithe); **standing** with nine powers, the four that matter most changing the trade every day;
+**stolen chests**, which the Key-mark goes cold on, the Wardens pay a finder's share for and the back room keeps; tools
+brought to the counter by the people who make them; and **Nim every night**, one curio at first and more with his own
+upgrades. 0.27 readied it for a Steam release
 ([docs/release.md](docs/release.md): what's done and what's left): saves that survive crashes and come from older
 versions, a full settings menu (window modes and sizes, scaling, vsync, a frame cap, three volumes, rebindable keys
 and controller buttons), a controller that does everything the mouse does, every text ready for translation (2,100 of
@@ -92,7 +100,8 @@ and repository now belong to a different game. Saves and the profile from then c
 6. **The week:** five days, each with its business: on the fifth evening Mister Vane collects the Guild's tithe; on a
    story week the first morning is the story's. Short, pawn what's on display or sell your curios back; once a run Bram
    will vouch for you; otherwise the Guild seals the shop. Start a day nearly broke and Bram dips into his secret stash
-   for you (twice a run). Twice a week (once on a story week) Nim the peddler brings **curios**, the run's build: each
+   for you (twice a run). Every night, after the shutters are down, Nim the peddler brings **curios**, the run's build
+   (one a night at first, more once he has a lantern, a stool and a standing order): each
    bends one rule (a sealed bid for chests you never touch, a haggler's knot, a smuggler's hook, a truthglass that pays
    for perfect reads...), each card shows its rarity (common, uncommon, rare, legendary), which ways of trading it's for
    and what it goes with, and costs a fixed sum by rarity plus a share of your purse. Nim notices what you buy and brings
@@ -100,8 +109,15 @@ and repository now belong to a different game. Saves and the profile from then c
    (deliver what they want from a chest instead of selling it), and two days a week something happens in town: a fair, Locking Day, the Crown's buyer, a
    tourney, a foreclosure sale, a day of mourning when nobody shakes hard, the crier's reward, the Sleepers' Moon when
    every seller dreams true, Wardens' Day riddles, the Guild's count, a storm, the Stranger with a chained chest... The
-   notebook's **calendar** shows the Guild's debt and this week and next, day by day: the story, the events, Nim's days and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
+   notebook's **calendar** shows the Guild's debt and this week and next, day by day: the story, the events, who said
+   they'd come back and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
    the finds she asks for. Whenever you have all that's left of the debt, you can pay it off and finish early.
+7. **The town:** not everyone comes to sell. People come with their troubles (a widow's son in the Guild's debt-house, a
+   millpond boy with the Key-mark and a Mark-Finder on his trail, a sergeant hunting the Magpie), come back when they
+   said they would, ask things of you and remember what you did; the best tools are offered at the counter by the
+   people who make them; a chest your mark goes cold on isn't the seller's to sell (send for the Wardens, or it waits in
+   your back room). The notebook's **Town** page shows where you stand with each power, the notices on the board, and
+   every tale so far.
 
 **Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the Crown Chest, the shop, the
 collection, the Heartsongs), multiplied by the run's challenge level; each of Bram's kin keeps their best. Nothing
@@ -138,7 +154,7 @@ saves at the start of every day; your best runs are kept on the title screen.
 | Mark one of a kind enchanted | Click the star on its row (once you have the Witchlight, which stays lit) |
 | Make an offer | Set the slider, then Offer |
 | Lodestone | Button on the right, once you own it |
-| Notebook (sounds, regulars, calendar and the debt, synergies) | N (Y on a controller), or the Notebook button on the slip |
+| Notebook (sounds, regulars, calendar and the debt, the town, synergies) | N (Y on a controller), or the Notebook button on the slip |
 | The Guild's debt, week by week | Click the due in the top bar: the notebook opens at it |
 | Collection (finds, curios, Heartsongs, every run) | Collection, on the title screen or in the pause menu |
 | Skip a seller's lesson | Skip lesson, over Bram's box |

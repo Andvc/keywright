@@ -55,12 +55,19 @@ public partial class RunEndPhase : Phase
             (Loc.T("Collection"), Loc.T($"{State.Found.Count} of {Collection.Size}")),
             (Loc.T("Key shards"), State.MapGiven ? Loc.T("given to the Guild") : Loc.T($"{State.MapPieces} of {Story.Pieces}")),
             (Loc.T("Curios"), $"{State.CurioKeys.Count}"),
+            // The season's people: how many of its tales got going, and who counts you a friend.
+            (Loc.T("Tales begun"), Loc.T($"{State.TaleLog.Count} of {State.TalesDrawn.Count}")),
+            (Loc.T("Friends"), string.Join(", ", Factions.All.Where(State.Friend).Select(Factions.Name).DefaultIfEmpty(Loc.T("none")))),
         };
         for (int i = 0; i < rows.Count; i++)
         {
             var (label, value) = rows[i];
-            panel.AddChild(UiKit.MakeLabel(label, 16, Palette.Muted).Place(32, 24 + i * 32, 260, 20));
-            panel.AddChild(UiKit.MakeLabel(value, 16, Palette.Text, HorizontalAlignment.Right).Place(260, 24 + i * 32, 248, 20));
+            panel.AddChild(UiKit.MakeLabel(label, 16, Palette.Muted).Place(32, 18 + i * 28, 200, 20));
+            var text = UiKit.MakeLabel(value, 16, Palette.Text, HorizontalAlignment.Right).Place(220, 18 + i * 28, 288, 20);
+            text.ClipText = true;
+            text.TooltipText = value;
+            text.MouseFilter = Control.MouseFilterEnum.Pass;
+            panel.AddChild(text);
         }
         BuildScore(color);
         Add(UiKit.MakeLabel(News(), 16, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, 532, 1280, 20));

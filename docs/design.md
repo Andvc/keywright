@@ -44,10 +44,12 @@ the ward still needs picking; people hid their best things under a false bottom 
 is iron under the gilt, so the lodestone silences it.
 
 The shop's four tiers are four places, a journey inward from the edge of the realm to the Gate at its heart, and each
-brings people who belong there: villagers, an innkeeper and a young delver at the crossroads; a goblin, a huntress, a
-druid, a monk and a smuggler at Thornwick; an archmage and his apprentice, a dwarf, a noblewoman, a knight, a
-pawnbroker and a mudlark in Crownhold; demons, a court lady, a fence, the King in disguise and once in a while the Maw
-himself at the Royal Emporium. Every chest has an **origin** (`Origins`: the millpond, the Barrow, a goblin warren, the
+brings people who belong there: a millpond boy, a soldier's widow, a farmer, the innkeeper and a young delver at the
+crossroads; a goblin, a bounty-huntress, a druid, the abbey's almoner, a smuggler, the matchmaker and the Magpie's
+runner at Thornwick; an archmage and her apprentice, a dwarf, a noblewoman, a knight, the pawnbroker, the Archivist and
+a mudlark in Crownhold; demons, a countess, a cartomancer, the Maw's fence, the King in disguise and once in a while
+the Maw himself at the Royal Emporium. Since 0.28 every one of them is someone, with a faction, a want and a story that
+goes on between visits (below, *The people and their tales*). Every chest has an **origin** (`Origins`: the millpond, the Barrow, a goblin warren, the
 abbey crypt, the Maw's hoard...), and the origin decides what it tends to hold. Sellers say where theirs came from
 (`SellerDef.Stories`), always truthfully: whether a seller is lying was never a mechanic worth playing (v18 took the
 tall tales out), so the place is a clue to read, never a trap, and a careful player reads every chest by its place
@@ -63,7 +65,7 @@ Three core rules, from the first day:
    scrolls rustle only at a hard one.
 2. **While arms clank, you can't hear anything delicate.** Shake gently and the steel stays put.
 3. **Sellers price only what they think is there.** Each has their own way of judging (below). Nobody says what they
-   heard (v22): the slip starts empty, its header says how the seller came to their price ("Penn priced what a gentle
+   heard (v22): the slip starts empty, its header says how the seller came to their price ("Ada priced what a gentle
    shake stirs"), and working out what they priced is yours, by shaking the way they did.
 
 Then, one at a time as the shop grows, more layers of deduction, each taught by the seller it belongs to:
@@ -78,7 +80,7 @@ Then, one at a time as the shop grows, more layers of deduction, each taught by 
 
 Sound-alikes (sand, demon gold) are the deductive heart of the later shops: the sound tells you the kind of thing,
 but only the rules tell you whether it's real. Soft things only sound at a hard shake, which hides them from anyone
-who won't shake hard (most sellers) or isn't allowed to (Brother Ansel's crypt chests: take the vestments on faith,
+who won't shake hard (most sellers) or isn't allowed to (Brother Cadoc's crypt chests: take the vestments on faith,
 or pay to be sure).
 
 How fast you drag sets the shake strength (gentle from 40 px/s, firm from 520, hard from 1150). While you shake,
@@ -186,7 +188,7 @@ reveal like nothing else in the game.
 | The Dragon's Egg | coin and gems sell for twice their worth |
 | The Clockwork Lark | two more commissions every week, and every commission pays half as much again |
 | The Hearthstone | door money every night: 10g a point of exhibition at the stall, more in a grander shop (`ShopTiers.Scale`: x3, x8, x20) |
-| The Drowned Bell | as a chest comes to the counter it tolls once for every thing inside, false bottom and all: Pell's ticket on every chest |
+| The Drowned Bell | as a chest comes to the counter it tolls once for every thing inside, false bottom and all: Brass's ticket on every chest |
 | The Bottled Star | enchanted things glow whenever they sound, with or without the witchlight, and are 15 points likelier |
 | The Imp's Ember | glass never breaks, dropped or forced; nothing comes out worse than its chest promised; every fake you open (demon gold, paste, sand) turns real |
 
@@ -194,7 +196,7 @@ Tuning (`--sim=songs`, the careful collector, v22): on display from the first da
 none, the Lullaby Box clears 94%, the Fey Chimes 93%, the Shepherd's Pipe 85%, the Clockwork Lark 83%, the Dragon's
 Egg and the Imp's Ember 75%, the Hearthstone 65% and the Bottled Star 58% (a curio from day 1: a Lucky Coin 55%, a
 Four-Leaf Clover 51%). The Drowned Bell is the exception in the sim (46%), because the sim's careful player already
-counts perfectly; for a person it's a Pell's ticket on every chest. As they really turn up (in about a third of runs,
+counts perfectly; for a person it's a Brass's ticket on every chest. As they really turn up (in about a third of runs,
 the first around day 15), the careful player clears 48%, against 43% with no Heartsongs at all.
 
 **The ending.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the collection's Heartsongs
@@ -210,14 +212,14 @@ Each answers one question by a rule you'd expect from real life. All of them are
 
 | How | From | Tells you | Cost or risk |
 |---|---|---|---|
-| Shake gently, firmly, hard | start | which kinds are inside, and how many of each | Brother Ansel hates a hard shake; Dorrin's chests stand two seconds of it; Snikkit charges for every strength after the first |
-| Drop it (lift it high, let go) | Thornwick | a hollow BOOM means a false bottom | glass may break (half the time each); Pell hates it |
+| Shake gently, firmly, hard | start | which kinds are inside, and how many of each | Brother Cadoc hates a hard shake; Tobin's chests stand two seconds of it; Nettle charges for every strength after the first |
+| Drop it (lift it high, let go) | Thornwick | a hollow BOOM means a false bottom | glass may break (half the time each); Brass hates it |
 | Witchlight (200g) | Crownhold | always lit once bought: anything enchanted glows when it makes a sound | none |
-| Lodestone (400g) | Royal Emporium | iron can't move: no clanks to drown things out, and demon gold goes quiet | Lady Ermine hates it |
+| Lodestone (400g) | Royal Emporium | iron can't move: no clanks to drown things out, and demon gold goes quiet | Countess Vey hates it |
 
 **Left out: the scale.** A weight only means something if you add up what each thing should weigh in your head, which
 isn't intuitive, and the drop already gives the one weight-like fact that matters (hollow or solid). Weight comes back
-as a seller's habit instead (Wenna the Huntress goes by it, and the notebook says which kinds are heavy), and as
+as a seller's habit instead (Rook Varga goes by it, and the notebook says which kinds are heavy), and as
 Hesk's way of reading a chest.
 
 **Lockpicking** (from Thornwick) comes after you buy a locked chest: set each pin when the pick passes the
@@ -264,32 +266,32 @@ something a real person might insist on. Not every visit is a deal: often the ri
 
 | How they judge | Who | Their blind spot | How to beat it |
 |---|---|---|---|
-| Listen at one strength | Penn, Snikkit and Fennick (gently), Ansel and Pell (firmly), Hob and Shelly (hard) | what their strength can't stir or a clank drowns; they never count | shake at the strengths they didn't; count |
-| Listen gently, then hard | Skrae, Gerda (hard) | nothing they can hear; enchantment, and what's warded | the witchlight; the echoes and the dowry custom (below) |
-| Count the rattles | Mags, Quill (firmly) | a rattle's a rattle: a dagger costs what a purse does | buy when the rattles are good kinds |
-| Weight | Wenna | heavy means valuable: arms are heavy and cheap, potions and scrolls light | buy light chests of good things |
-| The chest's colour | Dorrin, Wren, Orrin, Corisande, Aldous, Vexis, Malbranche, Madame Oriel, the Maw | never look inside | buy when it holds more than a chest that colour usually does |
-| A dream | Mother Bramble | the price has nothing to do with the chest | add it up, buy when the dream's cheap |
-| Knows only arms | Grit | prices other things at half, and gems as diamonds | haggle; mind the tinkles |
-| Knows only her gems | Ermine | prices her gems at what she paid; the rest comes free, but some gems are paste | weigh the free things against the paste |
-| No idea | Tam, Old Aldo | Tam takes a few coins (and his millpond chests are sometimes empty); Aldo lets your slip set the price | shake first; read Aldo's exactly |
-| Packed it himself | Silas | sells demon gold as gold and gems, cheap | the lodestone silences fakes |
+| Listen at one strength | Ada, Nettle and Corvin (gently), Cadoc and Brass (firmly), Garrick and Tilly (hard) | what their strength can't stir or a clank drowns; they never count | shake at the strengths they didn't; count |
+| Listen gently, then hard | Skrae, Hesper (hard) | nothing they can hear; enchantment, and what's warded | the witchlight; the echoes and the dowry custom (below) |
+| Count the rattles | Bettany, Quire (firmly) | a rattle's a rattle: a dagger costs what a purse does | buy when the rattles are good kinds |
+| Weight | Rook | heavy means valuable: arms are heavy and cheap, potions and scrolls light | buy light chests of good things |
+| The chest's colour | Tobin, Ilse, Orme, Isaura, Rowan, Tick, Sallow, Madame Zell, the Maw | never look inside | buy when it holds more than a chest that colour usually does |
+| A dream | Mother Sorrel | the price has nothing to do with the chest | add it up, buy when the dream's cheap |
+| Knows only arms | Durgan | prices other things at half, and gems as diamonds | haggle; mind the tinkles |
+| Knows only her gems | the Countess | prices her gems at what she paid; the rest comes free, but some gems are paste | weigh the free things against the paste |
+| No idea | Pip, Old Aldo | Pip takes a few coins (and his millpond chests are sometimes empty); Aldo lets your slip set the price | shake first; read Aldo's exactly |
+| Packed it himself | Gilt | sells demon gold as gold and gems, cheap | the lodestone silences fakes |
 
 **The rules** (`SellerDef` fields; `Visit`, `Shop.Buy`, `Shop.Settle` and the counter carry them out, and
 `GameState.Terms` puts each under the chest in words):
 
 | Rule | Who | What it does | Why it's a puzzle |
 |---|---|---|---|
-| A rotten chest (`ShakeLimit`) | Dorrin | two seconds of shaking, all told, then it creaks and won't be shaken again | one strength: hard hears everything that isn't drowned out; gentle hears the coin a clank would hide |
-| A fee for shaking (`ShakeFee`) | Snikkit | every strength you try after the first puts his price up a tenth | is the hard shake worth a tenth? Gentle and hard between them hear everything firm would |
-| No hard shake (`HatesHardShake`) | Brother Ansel | half again if you do | the crypt's vestments only flump at a hard shake: tick them on faith or pay to be sure |
-| No drop (`HatesDrop`) | Pell | half again if you do | his ticket counts the false bottom instead |
-| No lodestone (`HatesMagnet`) | Lady Ermine | half again if you use it | a quarter of her gems are paste |
-| A clock (`Patience`) | Vexis | twelve seconds | gently, then hard, and decide |
-| A dream price | Mother Bramble | the price is a dream (0.4 to 1.8 times a usual chest) | add it up yourself |
-| A wager (`Wager`) | Archmage Orrin | read his chest exactly and a third of the price comes back | a careful read makes his dear chests cheap |
-| An heirloom (`Heirloom`) | Sir Aldous | the best arms inside are his, for a fee he names (three-fifths of what it's worth as promised) | value the rest; a chest with no blade is all yours |
-| A devil's due (`TakesDearest`) | Malbranche | half price, but the dearest thing inside is his | many middling things suit his bargain; one grand thing doesn't |
+| A rotten chest (`ShakeLimit`) | Tobin | two seconds of shaking, all told, then it creaks and won't be shaken again | one strength: hard hears everything that isn't drowned out; gentle hears the coin a clank would hide |
+| A fee for shaking (`ShakeFee`) | Nettle | every strength you try after the first puts her price up a tenth | is the hard shake worth a tenth? Gentle and hard between them hear everything firm would |
+| No hard shake (`HatesHardShake`) | Brother Cadoc | half again if you do | the crypt's vestments only flump at a hard shake: tick them on faith or pay to be sure |
+| No drop (`HatesDrop`) | Brass | half again if you do | his ticket counts the false bottom instead |
+| No lodestone (`HatesMagnet`) | Countess Vey | half again if you use it | a quarter of her gems are paste |
+| A clock (`Patience`) | Tick | twelve seconds | gently, then hard, and decide |
+| A dream price | Mother Sorrel | the price is a dream (0.4 to 1.8 times a usual chest) | add it up yourself |
+| A wager (`Wager`) | Archmage Orme | read her chest exactly and a third of the price comes back | a careful read makes her dear chests cheap |
+| An heirloom (`Heirloom`) | Sir Rowan | the best arms inside are his, for a fee he names (three-fifths of what it's worth as promised) | value the rest; a chest with no blade is all yours |
+| A devil's due (`TakesDearest`) | Sallow | half price, but the dearest thing inside is his | many middling things suit his bargain; one grand thing doesn't |
 | The King's game (`SlipPrice`) | Old Aldo | his price is your slip: exactly right and he takes a quarter off; wrong, and you pay what it truly held and a quarter more | the purest test of a read; a careless one costs dear |
 | The Maw's gaze (`Gaze`) | Avarax, the Gilded Maw | one coin for the chest, but everyone after him today asks twice as much | count who's still waiting |
 
@@ -298,7 +300,7 @@ what happened to them, with how they shook it or what they state woven in ("Turn
 battlefield. I gave it a good hard shake, like the hay. 30 gold, and that's a bargain!"). It's always true: the place
 decides what the chest tends to hold, so the careful player reads every chest by its place. Nobody says what they heard (v22 retired the
 claims, and the slip they marked): a seller still prices only what they noticed (`Visit.Noticed`), so the deduction
-is the player's, from how they judge (the slip's header, `SellerDef.Priced`): shake as gently as Penn did, and what
+is the player's, from how they judge (the slip's header, `SellerDef.Priced`): shake as gently as Ada did, and what
 you hear is what she priced.
 
 **Voices** (v24). Everyone talks like who they are, wants what they want and says what they'd plausibly say at a
@@ -314,16 +316,16 @@ of hearing. Each is a deduction, on a rule from real life, taught by its seller'
 
 | Seller | The clue | The deduction |
 |---|---|---|
-| Fennick the Smuggler | **straw** (`Packs`, `Chest.Packed`): packed so nothing clinks at the Wardens' toll | everything stirs a strength later (`Chest.Needs`): a gentle shake proves nothing, a firm one hears coin, potions and gems, a hard one weapons (whose clank then drowns the rest), and cloaks and spells never stir. He shakes firmly, so he never prices a weapon; nobody can price the soft things, so read them by the road's odds. Still often a false bottom: drop it |
-| Pell the Pawnbroker | **the pawn ticket** (`Clue.Articles`): how many articles were pledged, false bottom and all; he won't have pledges dropped | count every separate sound at every strength against the ticket: one short is under the false bottom |
-| Wenna the Huntress | **her game scale** (`Clue.Pounds`): the weight, to the pound; her chests hang on a mare who spooks at a hard shake (`Packhorse`) | take what you heard from the weight: what's left never stirred (a cloak 3 lb, a spell 1, a purse under the floor 4). Her scale shows beside the chest, like Hesk's |
-| Mother Bramble | **a dream** (`Clue.Dream`, `Market.DreamtOf`): she always dreams true, as a sign (magpie, thorn, raven's wing, river, owl, star), of what the Wood warded inside, or else of the dearest thing (never under a false bottom) | if the dreamt kind never sounds at any strength, it's the warded thing: name it |
-| Gerda the Matchmaker | **the dowry custom** (`Clue.Dowry`): a Thornwick dowry always holds coin, a cloak and a potion | she shakes hard and hears everything; whichever of the three you can't hear (after every strength) is warded |
-| Wren the Apprentice | **the packing tag** (`Clue.Tag`): every kind packed, warded or not | a kind on the tag that never sounds is warded |
-| Lady Corisande | **grandmother's riddle** (`Clue.Riddle`) on the lid, about one thing inside (the warded one, if there is one) | answer the riddle; if the answer never sounds, it's warded |
-| Quill the Archivist | **the ward-roll** (`Clue.Roll`): the warded thing's name, every other letter faded ("B_o_d R_b_"); a blank roll, nothing warded | read the name (the words are ordinary ones: 'R_b_' is a ruby, 'E_i_i_' an elixir) and name its kind |
+| Corvin Tallow | **straw** (`Packs`, `Chest.Packed`): packed so nothing clinks at the Wardens' toll | everything stirs a strength later (`Chest.Needs`): a gentle shake proves nothing, a firm one hears coin, potions and gems, a hard one weapons (whose clank then drowns the rest), and cloaks and spells never stir. He shakes firmly, so he never prices a weapon; nobody can price the soft things, so read them by the road's odds. Still often a false bottom: drop it |
+| Gilt Brass | **the pawn ticket** (`Clue.Articles`): how many articles were pledged, false bottom and all; he won't have pledges dropped | count every separate sound at every strength against the ticket: one short is under the false bottom |
+| Rook Varga | **her game scale** (`Clue.Pounds`): the weight, to the pound; her chests hang on a mare who spooks at a hard shake (`Packhorse`) | take what you heard from the weight: what's left never stirred (a cloak 3 lb, a spell 1, a purse under the floor 4). Her scale shows beside the chest, like Hesk's |
+| Mother Sorrel | **a dream** (`Clue.Dream`, `Market.DreamtOf`): she always dreams true, as a sign (magpie, thorn, raven's wing, river, owl, star), of what the Wood warded inside, or else of the dearest thing (never under a false bottom) | if the dreamt kind never sounds at any strength, it's the warded thing: name it |
+| Aunt Hesper | **the dowry custom** (`Clue.Dowry`): a Thornwick dowry always holds coin, a cloak and a potion | she shakes hard and hears everything; whichever of the three you can't hear (after every strength) is warded |
+| Ilse Varrow | **the packing tag** (`Clue.Tag`): every kind packed, warded or not | a kind on the tag that never sounds is warded |
+| Lady Isaura | **grandmother's riddle** (`Clue.Riddle`) on the lid, about one thing inside (the warded one, if there is one) | answer the riddle; if the answer never sounds, it's warded |
+| Master Quire | **the ward-roll** (`Clue.Roll`): the warded thing's name, every other letter faded ("B_o_d R_b_"); a blank roll, nothing warded | read the name (the words are ordinary ones: 'R_b_' is a ruby, 'E_i_i_' an elixir) and name its kind |
 | Skrae | **its echoes** (`Clue.Echo`): the shape of everything inside, warded or not (round coin, long weapon, soft cloak, hollow potion, flat spell, tiny gem) | one more echo of a shape than you can hear is warded |
-| Madame Oriel | **three cards** (`Clue.Cards`) from the Locking's deck (Coins, Swords, Mantles, Cups, Wands, Stars) | a suit drawn twice is what the ward holds; three different suits, nothing |
+| Madame Zell | **three cards** (`Clue.Cards`) from the Locking's deck (Coins, Swords, Mantles, Cups, Wands, Stars) | a suit drawn twice is what the ward holds; three different suits, nothing |
 
 **Warded things** (`Chest.Warded`, from Thornwick). Some chests hold one thing their last owner warded: it never
 sounds, weighs nothing, isn't on a pawn ticket or counted by the Drowned Bell, and nobody prices it. It comes out on
@@ -344,53 +346,53 @@ Three ways to trade:
 
 | Seller | Place | Comes from | Judges by | Trades | Their rule |
 |---|---|---|---|---|---|
-| Little Tam | Brindle | the millpond, Gran's attic | no idea | name a price | (30% empty) |
-| Widow Penn | Brindle | her Tobb's kitbag, the attic | a gentle shake | fixed | |
-| Hob the Farmer | Brindle | the old battlefield | a hard shake | haggle | |
-| Mags the Innkeeper | Brindle | unpaid tabs | counting rattles (firmly) | fixed | |
-| Dorrin the Delver | Brindle | the Barrow | colour | fixed, cheap | a rotten chest |
-| Snikkit the Goblin | Thornwick | a goblin warren | a gentle shake | fixed | a tenth more per strength |
-| Wenna the Huntress | Thornwick | outlaws' camps, wolves' dens | weight | fixed, fair | her game scale; no hard shake (her mare); 80% locked |
-| Mother Bramble | Thornwick | the Old Wood | a dream | fixed | her dream (half warded) |
-| Brother Ansel | Thornwick | the abbey crypt | a firm shake | fixed, steep | no hard shake |
-| Fennick the Smuggler | Thornwick | the smugglers' road | a firm shake, through straw | haggle | straw (45% false bottoms) |
-| Gerda the Matchmaker | Thornwick | a bride's dowry | a hard shake | fixed | the dowry custom (half warded) |
-| Wren the Apprentice | Crownhold | the Arcanum stores | colour | name a price | the packing tag (half warded; 25% enchanted) |
-| Archmage Orrin | Crownhold | the Arcanum stores | colour | fixed | a wager |
-| Grit the Miner | Crownhold | a dwarf-hold | knowing arms (hard) | haggle | |
-| Lady Corisande | Crownhold | a noble's strongroom | colour | fixed | grandmother's riddle (half warded) |
-| Pell the Pawnbroker | Crownhold | forgotten pawn lots | a firm shake, never counting | fixed, steep | the pawn ticket; no drop (60% pairs, 35% false bottoms) |
-| Quill the Archivist | Crownhold | the Archive vaults | counting rattles (firmly) | fixed, steep | the ward-roll (half warded) |
-| Shelly the Mudlark | Crownhold | the Aldwater mud | a hard shake | fixed | (half her scrolls are sand) |
-| Sir Aldous | Crownhold | a knight's war chest | colour | fixed | an heirloom |
-| Vexis the Imp | Royal Emporium | the Maw's hoard | colour | fixed | twelve seconds (things often better than their colour) |
-| Malbranche | Royal Emporium | the Maw's hoard | colour | fixed, cheap | a devil's due |
+| Pip Hollow | Brindle | the millpond, Gran's attic | no idea | name a price | (30% empty) |
+| Ada Kettle | Brindle | her Tobb's kitbag, the attic | a gentle shake | fixed | |
+| Garrick Thorne | Brindle | the old battlefield | a hard shake | haggle | |
+| Bettany Crane | Brindle | unpaid tabs | counting rattles (firmly) | fixed | |
+| Tobin Reed | Brindle | the Barrow | colour | fixed, cheap | a rotten chest |
+| Nettle | Thornwick | a goblin warren | a gentle shake | fixed | a tenth more per strength |
+| Rook Varga | Thornwick | outlaws' camps, wolves' dens | weight | fixed, fair | her game scale; no hard shake (her mare); 80% locked |
+| Mother Sorrel | Thornwick | the Old Wood | a dream | fixed | her dream (half warded) |
+| Brother Cadoc | Thornwick | the abbey crypt | a firm shake | fixed, steep | no hard shake |
+| Corvin Tallow | Thornwick | the smugglers' road | a firm shake, through straw | haggle | straw (45% false bottoms) |
+| Aunt Hesper | Thornwick | a bride's dowry | a hard shake | fixed | the dowry custom (half warded) |
+| Ilse Varrow | Crownhold | the Arcanum stores | colour | name a price | the packing tag (half warded; 25% enchanted) |
+| Archmage Orme | Crownhold | the Arcanum stores | colour | fixed | a wager |
+| Durgan Ironhand | Crownhold | a dwarf-hold | knowing arms (hard) | haggle | |
+| Lady Isaura | Crownhold | a noble's strongroom | colour | fixed | grandmother's riddle (half warded) |
+| Gilt Brass | Crownhold | forgotten pawn lots | a firm shake, never counting | fixed, steep | the pawn ticket; no drop (60% pairs, 35% false bottoms) |
+| Master Quire | Crownhold | the Archive vaults | counting rattles (firmly) | fixed, steep | the ward-roll (half warded) |
+| Tilly Mudge | Crownhold | the Aldwater mud | a hard shake | fixed | (half her scrolls are sand) |
+| Sir Rowan | Crownhold | a knight's war chest | colour | fixed | an heirloom |
+| Tick | Royal Emporium | the Maw's hoard | colour | fixed | twelve seconds (things often better than their colour) |
+| Sallow | Royal Emporium | the Maw's hoard | colour | fixed, cheap | a devil's due |
 | Skrae | Royal Emporium | the Maw's hoard | a gentle shake, then a hard one | fixed | its echoes (half warded; enchantment 20%) |
-| Madame Oriel | Royal Emporium | a courtier's chest | colour | fixed | three cards (half warded) |
-| Lady Ermine | Royal Emporium | a noble's strongroom | her gems, at what she paid | fixed | no lodestone (25% paste) |
-| Silas Gilt | Royal Emporium | the Maw's hoard | packed it himself | fixed, at about half | (60% demon gold) |
+| Madame Zell | Royal Emporium | a courtier's chest | colour | fixed | three cards (half warded) |
+| Countess Vey | Royal Emporium | a noble's strongroom | her gems, at what she paid | fixed | no lodestone (25% paste) |
+| Gilt | Royal Emporium | the Maw's hoard | packed it himself | fixed, at about half | (60% demon gold) |
 | Old Aldo | Royal Emporium | the Royal Treasury | none | your slip | the King's game |
 | Avarax, the Gilded Maw | Royal Emporium | the Maw's hoard | colour | one coin | the Maw's gaze |
 
 For listeners, whether the chest holds something they can't price (unheard, or a second of a kind they didn't count)
-is rolled first, at their miss rate (55% by default; 45% for Pell, 50% for Ansel, 60% for Snikkit; Skrae and Silas
+is rolled first, at their miss rate (55% by default; 45% for Brass, 50% for Cadoc, 60% for Nettle; Skrae and Gilt
 miss nothing), which keeps buying blind from paying while listening does. Everyone brings two of a kind now and
 then (8%, from Crownhold). Old Aldo comes in less often than the others (`Visits`), and the Maw rarely.
 
 ## A seller's first visit is a lesson
 
 The first time each seller comes in (with tips on), their visit is a lesson in their habit, built so it can't fail
-to show it: Fennick's is packed in straw with an unpriced weapon and a false bottom, Pell's ticket counts one more than
-you can hear, Wenna's weighs a cloak more than you heard, Mother Bramble dreams of a star with no tinkle inside, Shelly's
-has a scroll case of sand, Silas's has demon gold, Malbranche's holds four things for him to take the best of. Bram gives one step at a time; each step has a check
+to show it: Corvin's is packed in straw with an unpriced weapon and a false bottom, Brass's ticket counts one more than
+you can hear, Rook's weighs a cloak more than you heard, Mother Sorrel dreams of a star with no tinkle inside, Tilly's
+has a scroll case of sand, Gilt's has demon gold, Sallow's holds four things for him to take the best of. Bram gives one step at a time; each step has a check
 (`LessonStep.Done`, on what's been heard, the slip, the visit) that runs every frame, so a step done early counts.
-Until the steps are done, the trade buttons wait (unless the step is about trading, like naming Tam a price); the
+Until the steps are done, the trade buttons wait (unless the step is about trading, like naming Pip a price); the
 lesson can always be skipped. Steps adapt to the tools you own (Skrae's asks you to mark what glows if you have the
-witchlight; Silas's to use the lodestone if you have one). Ansel's lesson leaves the choice to you: tick the crypt's
+witchlight; Gilt's to use the lodestone if you have one). Cadoc's lesson leaves the choice to you: tick the crypt's
 vestments on faith, or shake hard and pay half again to hear them. The new rules each get theirs: one hard shake for
-Dorrin's rotten chest, gentle-then-hard for Snikkit's fee, an exact read for Orrin's wager and the King's game, the
-queue to count for the Maw. Day one is still the scripted stall day (three customers since 0.20; Mags's lesson in
-passing opens the second morning); Tam, Hob and Mags teach naming a price, haggling and counting rattles on their
+Tobin's rotten chest, gentle-then-hard for Nettle's fee, an exact read for Orme's wager and the King's game, the
+queue to count for the Maw. Day one is still the scripted stall day (three customers since 0.20; Bettany's lesson in
+passing opens the second morning); Pip, Garrick and Bettany teach naming a price, haggling and counting rattles on their
 first visit after it.
 
 **Taught once, across runs** (v20). What Bram has taught (his tips, each seller's lesson, the scripted first day) is
@@ -405,13 +407,13 @@ as taught, so it comes up the next time it applies (the most pressing is asked f
 debt before the Bookkeeping Engine before the shop's news).
 
 **Who's who** (v22). Clicking whoever's at the counter opens the notebook on their page, their line framed in gold; the
-notebook button and N do the same. Mother Bramble's lesson starts with it ("click her to read hers", `Visit.LookedUp`),
+notebook button and N do the same. Mother Sorrel's lesson starts with it ("click her to read hers", `Visit.LookedUp`),
 and the `lookup` tip tells Bram's kin who come without lessons.
 
 Lessons and Bram's tips never talk over each other. A lesson waits until any tip already up (a new shop, a lock, a
 new way of trading) has been read. While a lesson runs, tips that would come up don't pile up behind it: they wait
-for their moment to come round again. And a lesson's `Covers` marks the tips it already teaches as seen (Hob's lesson
-is the haggling tip; Fennick's, the drop and the boom; Dorrin's, the story tip). A new shop's crowd doesn't all arrive
+for their moment to come round again. And a lesson's `Covers` marks the tips it already teaches as seen (Garrick's lesson
+is the haggling tip; Corvin's, the drop and the boom; Tobin's, the story tip). A new shop's crowd doesn't all arrive
 on its first day: with tips on, no more than two lessons a day (`GameState.LessonsPerDay`), and one a day at
 Thornwick, which also brings locks, the drop, straw and warded things (the experience playtest's heaviest days). Bram's kin who come knowing the trade (no lessons) still get a word on each seller's
 terms the first time they meet them (`seller_*` in `Hints.cs`), and the terms are always under the chest. `--autoplay` prints every message Bram shows, and flags any that was replaced before it could be read.
@@ -426,7 +428,7 @@ Everything arrives when it's needed, each with a word from Bram, so the first da
 | When | What opens up | Bram explains |
 |---|---|---|
 | Day 1 | shaking, the slip and the odds bar, buying | one lesson per customer (scripted) |
-| Day 2 | passing (Mags, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N) | each seller's first visit is a lesson; the notebook and the story tip on a later customer |
+| Day 2 | passing (Bettany, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N) | each seller's first visit is a lesson; the notebook and the story tip on a later customer |
 | The second evening | the Gilded Guild and Bram's twenty years of back-tithe: a due every fifth evening, the first in three nights (until then nothing shows it) | a scene: Vane, then Bram |
 | Day 3 | Nim's curios (his first visit) | a tip: room for three, so pick ones that go together |
 | The stall has earned 50g, all told (`GameState.UpgradesAt`) | moves and tools at the end of the day; until then the day-end screen shows how far there is to go | what Thornwick brings |
@@ -665,8 +667,9 @@ opened for good by doing that trade often enough across runs (`Feat`, `Curios.Fe
 Smugglers' Compass, 10 warded things named for the Aldric Seal, 15 enchanted things for the Archmage's Staff, 20 chests
 taken sight unseen for Fortune's Blindfold), and the collection's curio page shows how far along you are.
 
-**Prices: a fixed sum and a share** (`Curios.Price`): 10g and 6% of what was in your purse when Nim arrived for a
-common, 25g and 10% for an uncommon, 75g and 15% for a rare, 250g and 20% for a legendary. The fixed part keeps a curio
+**Prices: a fixed sum and a share** (`Curios.Price`): 10g and 4.5% of what was in your purse when Nim came by for a
+common, 25g and 7.5% for an uncommon, 75g and 11% for a rare, 250g and 15% for a legendary (0.28: a quarter less than
+before, now that Nim comes every night and there are more nights to buy on). The fixed part keeps a curio
 dear at the stall, where a share of a few coins is nothing (0.20's share alone made a common cost a coin or two on
 Nim's first visit); the share keeps one a choice at the Emporium, where any fixed sum would be pocket change. He buys
 them back for half what you paid.
@@ -857,7 +860,7 @@ visit: one thing of a kind at a quality (a step better than the shop's chests us
 (a step lower), or (from Crownhold) anything enchanted. They pay two or three times what such a thing sells
 for. A board under the seller lists them, the slip marks the kinds they want with a gold pennant, and anything that
 comes out of a chest you open can be delivered instead of sold. A commission makes a sound worth more than its price:
-a chest with a flump in it is worth chasing when Penn wants silk.
+a chest with a flump in it is worth chasing when Ada wants silk.
 
 **Always more than selling** (v22, `GameState.CommissionPay`). What a commission pays for a thing is its share of the
 reward, and never less than a quarter over what that thing would sell for here (`Patrons.Premium`): a thing better
@@ -887,15 +890,15 @@ the first week with anything on has a gentle one (it changes the day, not how to
 | A Day of Mourning | start | the old Duke's funeral: nobody stands for a hard shake (cloaks and spells go unheard; read the rest) |
 | The Town Crier | start | Lord Harrow's crier posts a reward for one thing of a kind, as good as the regulars ask: three times its price, today only (a one-day commission) |
 | The Minstrels' Fair | start | anyone with a box that hums brings it: a Heartsong three times as likely |
-| The Sleepers' Moon | Thornwick | everyone dreamt true, like Mother Bramble: every ordinary seller tells you their dream (of the thing they warded, if they warded one, which most did; else of the dearest thing that can sound: a dream never reaches under a false bottom) |
+| The Sleepers' Moon | Thornwick | everyone dreamt true, like Mother Sorrel: every ordinary seller tells you their dream (of the thing they warded, if they warded one, which most did; else of the dearest thing that can sound: a dream never reaches under a false bottom) |
 | Wardens' Day | Thornwick | the old custom: every ordinary seller has warded one thing and left a riddle for it |
-| The Guild's Count | Thornwick | a Guild clerk tallies every article in every chest, false bottoms and all (Pell's ticket, for everyone) |
+| The Guild's Count | Thornwick | a Guild clerk tallies every article in every chest, false bottoms and all (Brass's ticket, for everyone) |
 | The Guild's Assessor | Thornwick | a tenth of every sale goes to the Guild |
 | A Barge Aground | Crownhold | a treasure barge on the Aldwater: lots come in twos and threes |
 | A Witchlight Moon | Crownhold | the old enchantments wake: things are far likelier to be enchanted |
 
 The puzzle days (`Events.Restate`) give every seller without a clue of their own (and not the King, whose price is your
-slip) the day's clue, so the whole day is a run of Mother Bramble's and Lady Corisande's puzzles, or of Pell's
+slip) the day's clue, so the whole day is a run of Mother Sorrel's and Lady Isaura's puzzles, or of Brass's
 counting.
 
 ## The notebook's calendar, and the debt
@@ -909,6 +912,49 @@ in gold, the days gone by faded, each day's event (this week's and next week's a
 and each Guild's night with what it will want (this week's in red if the purse is short). Hovering a day tells its
 whole story; until then, the next thing coming is told under the grid. Nim comes every week from the first (its third
 morning), on a day without an event when he can.
+
+## The people and their tales (0.28)
+
+The owner, after playing a shopkeeper game whose customers had lives (revolutionaries and police, thieves and wanted
+notices): the people at the counter were flat, the only progression across encounters was the Key's shards, and the
+nightly shop wasn't a moment to look forward to. 0.28 thought the premise through (`docs/world.md`: what three hundred
+years of locked treasure made of Aldmark, who rules it, who wants what from a Keywright) and rebuilt the cast and the
+evenings around it. `docs/stories.md` has every tale beat by beat; this is how it works.
+
+- **The order of things.** A chest opens only for a Keywright who rightfully owns it, so the Keywright is the realm's
+  moneychanger and its judge of whose a chest is. Stolen chests won't open for anyone but their owner however often
+  they're sold: theft is ransom, the Wardens of the Road keep the Chest Roll and post wanted notices, the Lockless (the
+  Magpie's people) fence what won't open, and the Gilded Guild forecloses, which the ward doesn't count as a sale.
+- **The cast** (`Sellers.All`, `Sellers.People`): every regular kept an old regular's trading rule (the puzzle's the
+  same) and got a name, a place, a faction (`Of`), a want (`Wants`), and what you notice about them (`Facts`). People who
+  only come when a tale brings them (a Warden sergeant, a Guild clerk, a Mark-Finder, a mother, one of the fair folk)
+  are in `Sellers.People`. Until the new cast is drawn they wear the old figures (`Look`).
+- **Tales** (`TaleDef`, `TaleBook`; the engine in `Tales.cs`): the Shut Chests every season, and six more drawn from the
+  seed (two of Brindle's three, one of Thornwick's two, two of Crownhold's four, the Emporium's). A beat is one person
+  at the counter, or at the back door after dark, or a letter; it comes a set number of days after the one before, at a
+  grand enough shop, if what you chose before allows. Two a day at most, one a night. A talk beat says its piece and
+  asks a question (`TalkPhase`): each answer has a price (on its button), a reply, and what it does. A trading beat brings
+  a chest, and what you do with it is the answer. A tale's secret (who the Magpie is, what's behind the Barrow door) is
+  drawn from the seed when it begins and never changes; nothing is a hidden roll.
+- **What choices do.** Gold and chests given freely (they open), curios, tools for nothing, people gained (Pip as your
+  apprentice, Jory as your porter) or lost for the season (jailed, taken into the Guild's care, down the Barrow), the
+  Crown's decree on the tithe, a cracked Gate, and standing.
+- **Standing** (`Faction`, -3 to +3, `GameState.Sway`): nine powers keep an account of you. At +2 or -2 the four that
+  matter most change the trade every day: the commons a customer more or fewer, the Guild a tenth off or on every due,
+  the Wardens warn you or search your back room every Guild night, the Lockless pay double at the fence or rob you once a
+  week. The rest price their people's tools. The notebook's **Town** page shows where you stand, the notices on the
+  board, every tale begun and what's happened in it; the calendar marks who said they'd come back, and when.
+- **Stolen chests**: Flick (the Magpie's runner) mostly sells them, Corvin now and then, and tales bring some. Lay a
+  hand on one and the mark goes cold (`CounterPhase.MarkAnswers`): from Thornwick you can send for the Wardens (the
+  seller runs, the chest goes home, a finder's share is yours, the Lockless don't forget). Bought anyway, it won't open
+  and waits in the back room, to be returned for the finder's share or sold to Nim's friends at night. A blind buyer
+  pays for every one of them.
+- **Tools from the counter** (`Offers`, `Upgrade.By`): the best tools are brought by the people who make them, at their
+  standing's price, and come back a few days after a no. The day's end keeps the building.
+- **Nim every night** (`StartNight`, `PeddlerPhase`): one curio at first, one more for each of his own upgrades (a
+  lantern, a stool, a standing order), which he offers at his table with the curio cases. Nothing to reroll: there's
+  always tomorrow night. The night also brings a tale's knock, the Wardens' search or the Lockless' visit, and the back
+  room.
 
 ## The story
 
@@ -1160,10 +1206,10 @@ Book curio, Isolde's door, the Hearthstone).
 
 | Place | Cost | Customers/day | Chests | New |
 |---|---|---|---|---|
-| Bram's Stall, the Brindle crossroads | start | 4 | mostly wood | jingle, clank, flump; three strengths; clanks drown jingles; from day 2, haggling, naming a price, counting rattles, stories; Dorrin's rotten Barrow chests |
-| Thornwick Market | 50g, once the stall has earned 50g | 6 | green and blue | slosh and rustle; locks; false bottoms and the drop; the display shelf and cabinets; Snikkit's fee, Wenna's scale and mare, warded things with Bramble's dreams and Gerda's dowries, Ansel's crypt, Fennick's straw |
-| Crownhold | 160g | 6 | mostly blue, some purple | gems; two or three of a kind and the pawn ticket (Pell); sand (Shelly); enchantment and the Witchlight; synergies and the Crownhold Charter; Wren's packing tags, Orrin's wager, Grit, Corisande's riddles, Quill's ward-rolls, Sir Aldous's heirloom |
-| The Royal Emporium | 1,200g | 5 | blue and purple | Vexis's hourglass, Malbranche's due, Skrae's echoes, Madame Oriel's cards, Silas's demon gold, Ermine's paste, the King's game, the Maw's gaze, the Lodestone, the Royal Seal |
+| Bram's Stall, the Brindle crossroads | start | 4 | mostly wood | jingle, clank, flump; three strengths; clanks drown jingles; from day 2, haggling, naming a price, counting rattles, stories; Tobin's rotten Barrow chests |
+| Thornwick Market | 50g, once the stall has earned 50g | 6 | green and blue | slosh and rustle; locks; false bottoms and the drop; the display shelf and cabinets; Nettle's fee, Rook's scale and mare, warded things with Sorrel's dreams and Hesper's dowries, Cadoc's crypt, Corvin's straw |
+| Crownhold | 160g | 6 | mostly blue, some purple | gems; two or three of a kind and the pawn ticket (Brass); sand (Tilly); enchantment and the Witchlight; synergies and the Crownhold Charter; Ilse's packing tags, Orme's wager, Durgan, Isaura's riddles, Quire's ward-rolls, Sir Rowan's heirloom |
+| The Royal Emporium | 1,200g | 5 | blue and purple | Tick's hourglass, Sallow's due, Skrae's echoes, Madame Zell's cards, Gilt's demon gold, the Countess's paste, the King's game, the Maw's gaze, the Lodestone, the Royal Seal |
 
 Each move multiplies what a customer is worth (the sim's careful player, 0.21: about 10g of profit a customer at the
 stall, 30g at Thornwick, 215g at Crownhold, 3,000g at the Royal Emporium with its trades and restorers), so a careful
@@ -1183,7 +1229,7 @@ chest (`Upgrade.Luck`, `GameState.RestorerLuck`): more surprises, and every luck
 round that things come out better at your shop, so sellers ask about half of what the restorers are worth (luck at
 half in the power index, `GameState.LuckPricedIn`): with all of it priced in, a careful player who goes by the odds bar
 bought less (a step better is a long tail, and the bar looks at the middle); with none, buying blind from the sellers
-who hear everything (Skrae, Silas) paid at the Emporium.
+who hear everything (Skrae, Gilt) paid at the Emporium.
 
 **The Bookkeeping Engine** (`Upgrades.Engine`). Once your purse could pay off everything left of the debt
 (`GameState.CanPayOff`), the Guild offers its counting clockwork for exactly that sum (`GameState.Cost`), first on the
@@ -1192,7 +1238,7 @@ every real thing by kind, enchantment, a false bottom; not how good: that's stil
 shake: a run that's already won can be finished in an afternoon, still owing the Guild everything. It can't read
 through the Stranger's chains. The sim's careful player pays off instead; `--engine` starts the bot with it.
 Day one is scripted: three customers, one lesson each (a gentle shake and the slip; a hard shake for a coat;
-listening past a clank); the second morning opens with Mags, who heard everything there was (passing).
+listening past a clank); the second morning opens with Bettany, who heard everything there was (passing).
 
 ## Evidence (`godot --headless --path . -- --sim`, 300 runs per style, up to 9 weeks)
 
@@ -1247,24 +1293,24 @@ careful player's held 1.75-1.92 per gold spent at every index, the blind buyer's
 climbing from 1.91 to 3.6 as its build comes together.
 
 Per seller, at their own place (with the shop's tools, buyers' trades and restorers), profit per visit for a careful
-player, against paying their price blind. Every habit and every rule pays for putting up with it; only Tam (a few
-coins for anything) pays blind, Mags by three coins at the stall (as in v19), and the Maw's coin pays
-anyone (its price is the rest of the day, which the table doesn't count). Ansel's markup went up a tenth (1.8-2.1) when
-Thornwick's chests got finer, and in v21 Quill's (1.85-2.15) and Silas's demon gold (two coins in three of the gold
+player, against paying their price blind. Every habit and every rule pays for putting up with it; only Pip (a few
+coins for anything) pays blind, Bettany by three coins at the stall (as in v19), and the Maw's coin pays
+anyone (its price is the rest of the day, which the table doesn't count). Cadoc's markup went up a tenth (1.8-2.1) when
+Thornwick's chests got finer, and in v21 Quire's (1.85-2.15) and Gilt's demon gold (two coins in three of the gold
 and gems he sells): without the named rule, a restorer's luck reaches what a blind buyer bought, and both had tipped
 into paying a blind buyer a few coins a visit.
 
-| | Tam | Penn | Hob | Mags | Dorrin | Snikkit | Wenna | Bramble | Ansel |
+| | Pip | Ada | Garrick | Bettany | Tobin | Nettle | Rook | Sorrel | Cadoc |
 |---|---|---|---|---|---|---|---|---|---|
 | Careful | +13 | +5 | +11 | +7 | +2 | +10 | +16 | +25 | +22 |
 | Blind | +12 | 0 | 0 | +3 | -1 | -5 | 0 | -22 | -5 |
 
-| | Fennick | Gerda | Wren | Orrin | Grit | Corisande | Pell | Quill | Shelly |
+| | Corvin | Hesper | Ilse | Orme | Durgan | Isaura | Brass | Quire | Tilly |
 |---|---|---|---|---|---|---|---|---|---|
 | Careful | +24 | +13 | +35 | +187 | +317 | +124 | +292 | +125 | +34 |
 | Blind | -46 | -33 | -15 | -9 | -1,092 | -51 | -47 | -28 | -25 |
 
-| | Aldous | Vexis | Malbranche | Skrae | Ermine | Oriel | Silas | Aldo | the Maw |
+| | Rowan | Tick | Sallow | Skrae | the Countess | Zell | Gilt | Aldo | the Maw |
 |---|---|---|---|---|---|---|---|---|---|
 | Careful | +78 | +92 | +57 | +205 | +121 | +144 | +203 | +511 | +1,807 |
 | Blind | -32 | -490 | -205 | -56 | -57 | -481 | -76 | -689 | +1,696 |
@@ -1368,7 +1414,7 @@ only), demon gold one coin in ten (twenty). Isolde's door money grows with the s
 longer open higher for her (a seller who stays away a week is price enough when an Emporium regular is worth
 thousands).
 
-v14 set Rosa's wariness at a twentieth; v15's sellers who'd name a cheap price (Dorrin, Wenna, Malbranche) made
+v14 set Rosa's wariness at a twentieth; v15's sellers who'd name a cheap price (Tobin, Rook, Sallow) made
 haggling dearer for her than their price, so now a seller who'd name a price never holds out for more than it with
 Rosa, and her wariness is 3% (`Market.RosaWary`, `ConvertedAsk`, `ConvertedFloor`). Hesk loses the King's game (he can
 never be sure enough of a read to play it) and wins at the top, where he shrugs off two of the terms (he never drops,
@@ -1485,16 +1531,16 @@ the unlocked curios), and more ways for a familiar shop to play differently.
     Captain Gull always priced in a false bottom. Both were the same puzzle as everyone else's (check it yourself) with
     a hidden roll on top. v15 moves unreliability to where people really lie: where a chest came from. The place is a
     clue (a barrow holds grave goods), the story is true as often as the seller is honest, and the truth comes out when
-    the chest opens. The old cast went with the old world: Sergeant Brask's weight is Wenna's, Old Marta's forgotten
-    false bottoms are Fennick's smuggling chests, Granny Wick's unheard sewing is Brother Ansel's vestments, Madame
-    Zara's trick boxes are Lady Corisande's, Baron Vex's clock is Vexis's hourglass, Pip's sharp ears are Skrae's, and
-    Magister Orrin's dreams went to Mother Bramble while Orrin took up a wager.
+    the chest opens. The old cast went with the old world: Sergeant Brask's weight is Rook's, Old Marta's forgotten
+    false bottoms are Corvin's smuggling chests, Granny Wick's unheard sewing is Brother Cadoc's vestments, Madame
+    Zara's trick boxes are Lady Isaura's, Baron Vex's clock is Tick's hourglass, Pip's sharp ears are Skrae's, and
+    Magister Orme's dreams went to Mother Sorrel while Orme took up a wager.
 
 11. **Lies about where a chest came from (v15 to v17).** The owner, again: "figuring out whether the seller is lying"
     is a false premise; it never changed how anyone played. v18 makes every story true, drops the honesty tally and
-    the tall tales, and gives the sellers who leaned on it a clue worth working out instead: Fennick's straw (a strength
-    later, and soft things never), Pell's ticket (a count, false bottom and all), Wenna's scale (a weight, and a mare
-    who won't be shaken hard) and Mother Bramble's dream (the dearest thing, as a sign). The Drowned Bell, which tolled
+    the tall tales, and gives the sellers who leaned on it a clue worth working out instead: Corvin's straw (a strength
+    later, and soft things never), Brass's ticket (a count, false bottom and all), Rook's scale (a weight, and a mare
+    who won't be shaken hard) and Mother Sorrel's dream (the dearest thing, as a sign). The Drowned Bell, which tolled
     for lies, now counts every chest.
 
 12. **Tight numbers (v12 to v17).** Keeping every curio, synergy and talent off sale prices, and the dues to what
@@ -1552,11 +1598,11 @@ the unlocked curios), and more ways for a familiar shop to play differently.
   call? Is a find that can win a run a thrill or a fluke?
   Is the songbook (nine, across runs) a goal people chase, and is the ending worth it?
 - The stories: do players read them, and use a place as a clue (a barrow's grave goods, a goblin warren's coin)? Do
-  the stated clues read as puzzles (subtract the heard from Wenna's weight, count against Pell's ticket, read the
-  straw a strength late, decode Bramble's dream), or as homework?
+  the stated clues read as puzzles (subtract the heard from Rook's weight, count against Brass's ticket, read the
+  straw a strength late, decode Sorrel's dream), or as homework?
 - v18's numbers: does growth feel exciting from week 4 on, and does the Bookkeeping Engine feel like a reward for a
   won run, or like skipping the game?
-- The new rules: is Dorrin's two seconds readable with the countdown over the chest? Does a goblin's tenth feel like a
+- The new rules: is Tobin's two seconds readable with the countdown over the chest? Does a goblin's tenth feel like a
   real choice? Does the King's game (a quarter off, or a quarter more) feel like a test or a trap for a learner? The
   Maw comes one day in ten: is "everyone after him asks twice as much" a thrill to weigh, or a coin nobody can refuse?
 - Hesk never plays the King's game in the sim (no hard shake, no drop: he can't be sure of a read). Is that a fair
@@ -1568,10 +1614,10 @@ the unlocked curios), and more ways for a familiar shop to play differently.
   piece? (Keep trading, and her last ask still comes.)
 - Is drag speed a good stand-in for shake strength with a real mouse? The thresholds need playtesting; the words under
   the chest now show where you are.
-- Vexis's twelve seconds: enough to shake gently and hard and decide, but is it fun or just stressful?
+- Tick's twelve seconds: enough to shake gently and hard and decide, but is it fun or just stressful?
 - Should displayed things ever sell for more than their price (a famous piece)? Today they only draw customers.
 - Is counting by ear (and by the words over the chest) readable with four or five things rattling at once?
-- Wenna, Mags and Mother Bramble pay a little even blind (a fair price for a heavy chest, a rattle's price for a purse,
+- Rook, Bettany and Mother Sorrel pay a little even blind (a fair price for a heavy chest, a rattle's price for a purse,
   a cheap dream). Kindly sellers, or holes?
 - Synergies reach level 4 within 30 days for most careful players; level 5 is a long goal. Is the pace right?
 - The odds bar takes the arithmetic away but not the read: it only knows what you ticked. Does it still leave room

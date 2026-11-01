@@ -1119,7 +1119,7 @@ public partial class CounterPhase : Phase
         State.Pass();
         Game.Hud.SetGold(State.Gold);
         Sfx.PlayGroup("pay");
-        FloatText($"+{share}g", new Vector2(1036, 560), Palette.Gold, 32);
+        FloatText(Loc.T($"+{share}g"), new Vector2(1036, 560), Palette.Gold, 32);
         if (_wardens != null) _wardens.Visible = false;
         ShowOutcome(Loc.T("THE WARDENS"), Loc.T("Hollis's men take the chest home to its owner, and pay you the finder's share."), Palette.Warn, 0.8);
     }

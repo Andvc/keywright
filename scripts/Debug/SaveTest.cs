@@ -126,8 +126,23 @@ public static class SaveTest
             "a save from before 0.17 has its old names brought up to the new ones");
         Check(Renamed(2, "Healing Draught", "Elixir of Vigour") == "Elixir of Vigour, Healing Draught",
             "a version 2 save with the new names keeps them (no potion moved up a step)");
-        Check(Renamed(4, "Healing Draught", "Elixir of Vigour", "Swamp Tonic") == "Elixir of Vigour, Healing Draught, Swamp Tonic",
+        Check(Renamed(SaveData.CurrentVersion, "Healing Draught", "Elixir of Vigour", "Swamp Tonic") == "Elixir of Vigour, Healing Draught, Swamp Tonic",
             "a current save is never renamed");
+
+        // 0.28's new cast: a 0.27 save's regulars, lessons and tips are brought over to who trades their way now.
+        var cast = JsonNode.Parse(json)!.AsObject();
+        cast["Version"] = 4;
+        // (0.27 had no tales: none of their fields.)
+        foreach (string field in new[] { "Tales", "BeatsDone", "Flags", "Gone", "Standing", "Notices", "BackRoom", "TaleLog", "OffersDeclined", "Keepsakes", "Promises", "PorterUntil" })
+            cast.Remove(field);
+        cast["Met"] = new JsonArray("penn", "tam", "bettany");
+        cast["Tutored"] = new JsonArray("snikkit");
+        cast["HintsSeen"] = new JsonArray("first_penn", "seller_wenna", "colours");
+        var recast = SaveData.FromJson(cast.ToJsonString());
+        Check(recast != null && recast.Met.OrderBy(m => m).SequenceEqual(new[] { "ada", "bettany", "pip" }) && recast.Tutored.SequenceEqual(new[] { "nettle" }) &&
+              recast.HintsSeen.OrderBy(h => h).SequenceEqual(new[] { "colours", "first_ada", "seller_rook" }),
+            "a 0.27 save's regulars, lessons and tips are renamed for the new cast");
+        Check(recast != null && GameState.Load(recast).TalesDrawn.Count == 0, "a 0.27 save loads with no tales yet (they're drawn at the next morning)");
 
         var newer = JsonNode.Parse(json)!.AsObject();
         newer["Version"] = SaveData.CurrentVersion + 1;
@@ -148,7 +163,11 @@ public static class SaveTest
         Check(back != null && back.ToJson() == json, "a profile reads back the same");
         var old = JsonNode.Parse(json)!.AsObject();
         old.Remove("Version");
-        Check(Profile.FromJson(old.ToJsonString())?.Version == 1, "a profile from before versions reads as version 1");
+        old["Met"] = new JsonArray("penn", "grit");
+        old["Taught"] = new JsonArray("lesson:wren", "firstday");
+        var read = Profile.FromJson(old.ToJsonString());
+        Check(read?.Version == Profile.CurrentVersion && read.Met.SequenceEqual(new[] { "ada", "durgan" }) && read.Taught.SequenceEqual(new[] { "lesson:ilse", "firstday" }),
+            "a profile from before versions reads as version 1 and is brought up to the new cast");
         Check(Profile.FromJson("{ \"Runs\": ") == null, "a damaged profile isn't read (so it's never replaced by an empty one)");
     }
 

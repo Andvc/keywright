@@ -132,6 +132,8 @@ public sealed class SaveData
     public Dictionary<string, List<string>> TaleLog { get; set; }
     public Dictionary<string, int> OffersDeclined { get; set; }
     public Dictionary<string, int> Keepsakes { get; set; }
+    public List<Promise> Promises { get; set; }
+    public int PorterUntil { get; set; }
 
     static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
 

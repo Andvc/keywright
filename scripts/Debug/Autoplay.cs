@@ -28,7 +28,7 @@ public partial class Autoplay : Node
 
     const double ShakeSeconds = 1.6;
 
-    bool _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked;
+    bool _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked, _townShown;
 
     static GameState State => Main.Instance.State;
 
@@ -308,6 +308,19 @@ public partial class Autoplay : Node
             if (!IsInstanceValid(counter)) return;
             counter.CloseNotebook();
             await Wait(0.5);
+        }
+        // Once a couple of tales are under way, a look at the notebook's Town page (where you stand, the board, the stories).
+        else if (!_townShown && !hurried && State.TaleLog.Count >= 2)
+        {
+            _townShown = true;
+            counter.OpenNotebook(NotebookView.TownPage);
+            await Wait(0.3);
+            Main.Instance.Moment("02_town", 0.3);
+            await Wait(2.0);
+            if (!IsInstanceValid(counter)) return;
+            counter.CloseNotebook();
+            await Wait(0.5);
+            if (!IsInstanceValid(counter)) return;
         }
         // Once a Heartsong's been found, a look at the songbook (the collection's, as the pause menu opens it).
         else if (!_songsShown && !hurried && State.Songbook.Count > 0)

@@ -614,7 +614,7 @@ public sealed partial class GameState : ISlipModel
 
     // ---- Nim ----
 
-    /// <summary>What was in your purse when Nim arrived this morning: part of his price is a share of it.</summary>
+    /// <summary>What was in your purse when Nim came by tonight: part of his price is a share of it.</summary>
     public int PeddlerPurse { get; private set; }
 
     /// <summary>The shop Nim last came to: on his first visit to a grander one he brings something for a way of trading that opens there.</summary>

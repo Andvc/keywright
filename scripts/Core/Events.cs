@@ -13,8 +13,8 @@ public enum DayRole { None, Story, Event, Curio, Tax }
 
 /// <summary>
 /// A week's plan, made a week ahead so the ledger's calendar can show it. Every one of the five days has its business:
-/// the last is the Guild's night, two have something on in town, and Nim comes on the other two, unless the story has
-/// a morning that week (the first), when Nim comes once. Also the kind the Crown's buyer (or the crier's lord) wants.
+/// the last is the Guild's night, two have something on in town, and a story week's first is the story's (Nim comes every
+/// night since 0.28). Also the kind the Crown's buyer (or the crier's lord) wants.
 /// All from the seed.
 /// </summary>
 public sealed class WeekPlan
@@ -27,7 +27,7 @@ public sealed class WeekPlan
     /// <summary>The kind the Crown's buyer pays double for, or the crier's reward is for.</summary>
     public Category Wanted { get; set; }
 
-    /// <summary>The days of the week Nim comes by: two, or one on a week with a story morning.</summary>
+    /// <summary>The days of the week Nim came by in the morning, in a plan from before 0.28 (he comes every night now).</summary>
     public List<int> Peddlers { get; set; } = new();
 
     /// <summary>The day the week's story is told (0: none this week).</summary>
@@ -38,7 +38,7 @@ public sealed class WeekPlan
 
     public string On(int dayOfWeek) => dayOfWeek >= 1 && dayOfWeek <= Days.Count ? Days[dayOfWeek - 1] : null;
 
-    /// <summary>Nim comes by that morning.</summary>
+    /// <summary>Nim came by that morning (a plan from before 0.28).</summary>
     public bool NimOn(int dayOfWeek) => dayOfWeek > 0 && (Peddlers.Count > 0 ? Peddlers.Contains(dayOfWeek) : Peddler == dayOfWeek);
 
     /// <summary>What a day of the week is for.</summary>
@@ -51,7 +51,7 @@ public sealed class WeekPlan
 /// better prices or worse, a stranger with a chained chest, a royal chest, a rule everyone keeps that day. Some are
 /// puzzles: on the Sleepers' Moon every seller dreams true, on Wardens' Day every chest has a warded thing and a riddle
 /// for it, on the Guild's Count a clerk tallies every article. The first week's are gentle ones: they change the day,
-/// not how to judge a chest. Nim comes twice a week (once when the story has a morning).
+/// not how to judge a chest. Nim comes every night.
 /// </summary>
 public static class Events
 {

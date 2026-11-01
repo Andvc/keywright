@@ -57,10 +57,13 @@ public sealed partial class GameState
     }
 
     /// <summary>
-    /// What the tales do to the Guild's dues (docs/stories.md): a friend of the Guild has a tenth overlooked, a foe is
-    /// audited a tenth more, and the King's decree cuts the tithe by a quarter.
+    /// What the tales do to the Guild's dues (docs/stories.md): a friend of the Guild has a twentieth overlooked, a foe is
+    /// audited a twentieth more, and the King's decree cuts the tithe by a fifth.
     /// </summary>
-    float TaleDues => (Friend(Faction.Guild) ? 0.9f : Foe(Faction.Guild) ? 1.1f : 1f) * (Flagged(TaleBook.Decree) ? 0.75f : 1f);
+    float TaleDues => (Friend(Faction.Guild) ? 1 - GuildFavour : Foe(Faction.Guild) ? 1 + GuildFavour : 1f) * (Flagged(TaleBook.Decree) ? Decreed : 1f);
+
+    /// <summary>What the Guild overlooks for a friend (and adds for a foe), and what's left of a due after the King's decree.</summary>
+    public const float GuildFavour = 0.05f, Decreed = 0.8f;
 
     bool _halfDue;
 
@@ -374,7 +377,6 @@ public sealed partial class GameState
         return true;
     }
 
-    /// <summary>Nim comes by this morning.</summary>
     /// <summary>Nim comes by every night (0.28), after the day's end and the Guild.</summary>
     public bool PeddlerToday => Day > 0;
 

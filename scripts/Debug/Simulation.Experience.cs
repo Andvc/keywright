@@ -41,7 +41,7 @@ public static partial class Simulation
         public int Count => _seen.Count;
     }
 
-    enum BeatKind { Customer, Morning, Peddler, Evening, Guild, Scene }
+    enum BeatKind { Customer, Morning, Peddler, Evening, Guild, Scene, Talk }
 
     /// <summary>One moment of play: a customer, a morning, Nim, an evening, the Guild's night, a scene.</summary>
     sealed class Beat
@@ -183,6 +183,22 @@ public static partial class Simulation
             Meet($"story:week{s.Week}", 0.3f, 1.5f, $"week {s.Week}'s scene");
             // The reveals: the Locking and the Hooded Woman (week 2); Mara, the King and the Crown Chest (4).
             if (s.Week is 2 or Story.OfferWeek) Peak("a story reveal", 2.5f);
+        }
+
+        /// <summary>Someone at the counter (or the back door) to talk: a tale's beat, or a tool offered.</summary>
+        public void Talk(GameState s, Talk talk)
+        {
+            Begin(s, BeatKind.Talk, Sellers.Person(talk.Who).Name, 6 + 7 * talk.Lines.Count);
+            if (talk.Offer != null)
+            {
+                Meet("sys:offers", 0.5f, 0.5f, "tools at the counter");
+                _beat.Choice += 0.5f;
+                return;
+            }
+            Meet("sys:tales", 1f, 1f, "people with troubles");
+            if (TaleBook.Find(talk.Key) is Core.Beat beat) Meet($"tale:{beat.Tale}", 0.3f, 1f, TaleBook.Get(beat.Tale).Title);
+            if (talk.Choices.Count >= 2) _beat.Choice += 1;
+            Peak("a turn in a tale", 0.8f);
         }
 
         public void Peddler(GameState s, IReadOnlyList<CurioDef> stock, IReadOnlyList<CurioDef> bought, int affordable)

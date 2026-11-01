@@ -12,7 +12,7 @@ only the owner can do. Written for 0.27 (November 2026).
 | Sound settings | Ready | Master, effects, the Heartsongs' songs; muting when the window loses focus. |
 | Keyboard and mouse | Ready | Every key rebindable; the mouse needs none. |
 | Controllers | Ready | Xbox, PlayStation and Switch layouts; the stick drives the pointer, so a controller does all a mouse does. |
-| Languages | Foundation ready | Every text translatable (2,123 texts, about 97,000 characters); no translation yet. |
+| Languages | Foundation ready | Every text translatable (2,645 texts in 0.28, about 131,000 characters); no translation yet. |
 | Fonts | Ready but Chinese | Western European in the house font, the rest of Latin, Cyrillic, Greek, Korean and Japanese in Galmuri. |
 | Steam | Ready to switch on | Achievements, rich presence, overlay pause, launch through Steam: needs the app ID and Steamworks set-up. |
 | Builds | Ready | CI exports Windows and Linux, smoke-tests both and keeps them as artifacts, on every push. |
@@ -84,7 +84,7 @@ collects nothing and sends nothing but what Steam does).
 
 **Credits:** set `CreditsView.Studio` to the name the game is published under.
 
-**Translations:** about 17,000 words per language. Professional translation runs roughly $1,500-2,500 per
+**Translations:** about 23,000 words per language (0.28's tales added a third). Professional translation runs roughly $2,000-3,500 per
 language, then a pass of play in that language. Run the game with `--pseudo` first and fix the screens that
 overflow. For Chinese, add a pixel font with the full Simplified set: Fusion Pixel 12px (OFL), from its GitHub
 releases, as a second fallback in `Localization.SetUpFont`.

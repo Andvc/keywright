@@ -1077,11 +1077,12 @@ public static partial class Simulation
     static void Talked(GameState state, Log log, Talk talk, Style style)
     {
         var choice = Strategy.Choose(state, talk, style.Care >= Care.Tools);
+        log.Rec?.Talk(state, talk);
         int gold = state.Gold;
         bool owned = talk.Offer != null && state.Has(talk.Offer);
         state.Choose(talk, choice);
         log.Talks++;
-        log.TaleGold += state.Gold - gold;
+        if (talk.Offer == null) log.TaleGold += state.Gold - gold;
         if (talk.Offer != null && !owned && state.Has(talk.Offer)) log.Offers++;
         if (TaleBook.Find(talk.Key) is Core.Beat beat) log.Beats.Add(beat.Key);
     }

@@ -33,7 +33,7 @@ public static class Story
 
     /// <summary>
     /// Whether a week has a story morning (its first day): the welcome, Bram's secret and the Hooded Woman, Mara's
-    /// truth, and the Guild's interest after the debt. Those weeks Nim comes once; the rest, twice.
+    /// truth, and the Guild's interest after the debt.
     /// </summary>
     public static bool TellsOn(int week) => week is 1 or 2 or 4 || week == Guild.Weeks + 1;
 

@@ -36,7 +36,7 @@ A choice moves it by one to three. Effects at +2 and over, and at -2 and under:
 | **The commons** | they send their neighbours: one more customer a day | they stay away: one customer fewer a day |
 | **The Wardens** | Hollis warns you before a search (nothing's found), and returns pay a third more | they search your back room every Guild night: anything stolen in it is taken, and you're fined a tenth of the due |
 | **The Lockless** | Nim's friends pay half (not a quarter) of what a back-room chest cost you | they rob you on the third night of every week: a tenth of your purse |
-| **The Guild** | it overlooks a tenth of every due | it audits you: a tenth more on every due |
+| **The Guild** | it overlooks a twentieth of every due | it audits you: a twentieth more on every due |
 
 The abbey, the Old Wood, the Arcanum, Ironroot and the Crown keep accounts too: their tales read them, and a person
 whose people you're at +2 with offers their tools a quarter cheaper (at -2, half as much again).
@@ -141,7 +141,7 @@ Magpie.
 
 1. **The itch** (Pip, from day 3): his palm itches since he touched one of your chests, and there's a mark on it, like
    yours. *Tell him what it means* or *tell him to keep it hidden* (Pip remembers either way).
-2. **The Mark-Finder** (Mistress Aubel, two days on): the Guild tests hands at the fair; a name pays well (a purse).
+2. **The Mark-Finder** (Mistress Aubel, two days on): the Guild tests hands at the fair; a name pays well (three-quarters of a purse).
    *Pip Hollow* (the gold, Guild +2, commons -2; Pip goes into the Guild's care) or *none I know of*.
 3. **His mother** (Wynn Hollow, the next day): they're searching houses; will you hide him? *As my apprentice*
    (commons +1) or *I can't risk it* (the Guild finds him anyway; commons -1).
@@ -156,10 +156,11 @@ Magpie.
    his father's sword, KETTLE on the blade... A notice: Ada Kettle seeks her husband's sword.
 2. **The pledge** (Silas Brass, at Crownhold): a soldier's pledge, never redeemed: "Kettle" on the ticket. A chest with
    the sword in it (and whatever else). Bought, the sword is set aside for Ada when it opens.
-3. **The sword** (Ada, after): *give it to her* (commons +2), *sell it to her for what she has* (a few coins), or
+3. **The sword** (Ada, after): *give it to her* (commons +1), *sell it to her for what she has* (a few coins), or
    *keep it and sell it on* (its price; commons -1).
 4. **The debt-house** (Ada, three days on): the Guild wants a purse for Jory; she has half. *Pay the rest* (half a
-   purse: Jory comes to work for you as your porter, one more customer a day; and he knows the Guild's debt-house) or
+   purse: Jory works a week for you as your porter to pay you back, one more customer a day; and he knows the Guild's
+   debt-house) or
    *I can't* (Ada's last visit).
 
 ### The Deep Door (Brindle)
@@ -201,11 +202,11 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    given freely; his grandfather's sword is his.
 3. **The Roll** (Master Quire): the Chest Roll agrees: everything the Guild seized is still in the families' names.
    The Guild's been selling stolen chests for a century, and sending the ones that won't open down through the Gate.
-   *Take it to the King* (when you're at the Emporium), *sell your copy to the Guild* (a purse, Guild +2; Tobias
+   *Take it to the King* (when you're at the Emporium), *sell your copy to the Guild* (half a purse, Guild +2; Tobias
    vanishes), or *keep it*.
 4. **The ledger page** (Tobias, night): they know he talked. A page from the Guild's ledgers: where the tithe goes.
 5. **The decree** (Old Aldo, at the Emporium, if you're taking it to him): the Crown's decree cuts the Guild's tithe
-   by a quarter for the rest of the season. Crown +2, Guild -3.
+   by a fifth for the rest of the season. Crown +2, Guild -3.
 
 ### The Unlocking (Crownhold)
 
@@ -213,9 +214,10 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    a purse. *Give it* (Arcanum +1) or *refuse* (Arcanum -1).
 2. **The engine** (Ilse, three days on): Orme has built an engine to copy the mark: any chest would open for anyone,
    and Mara says that's the end of the Locking. *Help her break it* (Arcanum -2; her witchlight at half price, or a
-   curio), *tell the Guild* (a purse, Guild +2, Arcanum -3: Orme's taken away), or *stay out of it*.
+   curio), *tell the Guild* (half a purse, Guild +2, Arcanum -3: Orme's taken away), or *stay out of it*.
 3. **It works** (Orme, at the Emporium, if you stayed out): it opens one chest in three for anyone, and the Gate's
-   cracking: the Maw comes to your counter twice as often from now on. A purse for your part.
+   cracking: the Maw's gilded iron leaks into every purse, and any coin anyone brings may be demon gold from now on (as in
+   a season of forgers). A purse for your part.
 
 ### Ironroot's Crown (Crownhold)
 
@@ -239,7 +241,7 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 1. **Bat's ears** (Skrae): it's heard enough of the Maw. Hide it in your back room three nights, and it'll tell you
    what the Guild tells him. *Hide it* or *no*.
 2. **The courier** (Tick, the next day): seen a demon with bat's ears? The Maw pays for runaways. *No* or *in my back
-   room* (a purse; Skrae's taken back).
+   room* (half a purse; Skrae's taken back).
 3. **Free** (Skrae, night, three days on): it tells you what it heard, and the Maw's gaze never touches your counter
    again (his visits don't raise anyone's price), and a curio.
 

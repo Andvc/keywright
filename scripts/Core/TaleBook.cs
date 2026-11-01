@@ -452,10 +452,10 @@ public static class TaleBook
                     {
                         C(Loc.T("It's yours"), () =>
                         {
-                            s.Sway(Faction.Commons, 2);
+                            s.Sway(Faction.Commons, 1);
                             s.Log("kettle", Loc.T("You gave Ada her husband's sword."));
                             return Loc.T("Rafe's sword. Oh, Rafe. Thank you, dear. Thank you.");
-                        }, W(s, 0, (Faction.Commons, 2)), kind: true),
+                        }, W(s, 0, (Faction.Commons, 1)), kind: true),
                         C(Loc.T($"Sell it to her for what she has ({ShopTiers.Scale(s.Tier) * 5}g)"), () =>
                         {
                             s.TaleGold(ShopTiers.Scale(s.Tier) * 5);
@@ -482,10 +482,11 @@ public static class TaleBook
                         C(Loc.T($"Pay the rest ({s.Purses(0.5f)}g)"), () =>
                         {
                             s.Flags.Add(Porter);
+                            s.PorterUntil = s.Day + Guild.DaysPerWeek;
                             s.Sway(Faction.Commons, 1);
-                            s.Log("kettle", Loc.T("You paid the rest of Jory's debt. He carries chests for you now: one more customer a day."));
-                            return Loc.T("Jory's free! He'll be at your door tomorrow, dear. He'll carry anything.");
-                        }, W(s, s.Purses(0.12f) * Math.Max(0, Guild.Weeks * Guild.DaysPerWeek - s.Day), (Faction.Commons, 1)), cost: s.Purses(0.5f), kind: true),
+                            s.Log("kettle", Loc.T("You paid the rest of Jory's debt. He'll carry chests in for you for a week, to pay you back: one more customer a day."));
+                            return Loc.T("Jory's free! He'll work a week for you to pay you back, dear. He'll carry anything.");
+                        }, W(s, s.Purses(0.3f) * Guild.DaysPerWeek, (Faction.Commons, 1)), cost: s.Purses(0.5f), kind: true),
                         C(Loc.T("I can't"), () =>
                         {
                             s.Log("kettle", Loc.T("You couldn't pay Jory's debt."));
@@ -516,6 +517,7 @@ public static class TaleBook
                         {
                             s.Flags.Add("door.staked");
                             s.Flags.Add($"away:{Tobin}");
+                            s.Promise(s.Day + 4, Tobin, Loc.T("Tobin, back from the Barrow"));
                             s.Log("door", Loc.T("You staked Tobin to go through the Barrow's deep door."));
                             return Loc.T("You won't regret it. Four days, and I'll be back.");
                         }, s.Purses(0.1f), cost: s.Purses(1)),
@@ -524,11 +526,12 @@ public static class TaleBook
                 },
                 new()
                 {
-                    Key = "door.hoard", Who = Tobin, After = "door.ask", Gap = 4, Expect = Loc.T("Tobin, back from the Barrow"),
+                    Key = "door.hoard", Who = Tobin, After = "door.ask", Gap = 4,
                     If = s => s.Flagged("door.staked") && s.Secret("door") == "hoard",
                     Brings = (s, rng) =>
                     {
                         s.Flags.Remove($"away:{Tobin}");
+                        s.Kept(Tobin);
                         return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, 3),
                             Loc.T("Behind the door: a vault nobody had touched since the Locking. Half's yours, like I said: this one, freely given. " +
                                   "One coin, for luck."), "barrow");
@@ -538,7 +541,7 @@ public static class TaleBook
                 },
                 new()
                 {
-                    Key = "door.fall", Who = Bettany, After = "door.ask", Gap = 3, Expect = Loc.T("Tobin, back from the Barrow"),
+                    Key = "door.fall", Who = Bettany, After = "door.ask", Gap = 3,
                     If = s => s.Flagged("door.staked") && s.Secret("door") == "fall",
                     Says = s => Say(Bettany,
                         Loc.T("Tobin's men came back to the Crossed Keys without him. He's alive: they heard him calling, under a fallen arch past " +
@@ -549,12 +552,14 @@ public static class TaleBook
                         C(Loc.T($"Pay for the rescue ({s.Purses(1)}g)"), () =>
                         {
                             s.Flags.Add("door.rescued");
+                            s.Promise(s.Day + 2, Tobin, Loc.T("Tobin, rescued"));
                             s.Log("door", Loc.T("Tobin was trapped past the deep door. You paid for his rescue."));
                             return Loc.T("I'll send for the crew tonight. Bless you, love.");
                         }, W(s, s.Purses(1.6f) - s.Purses(1), (Faction.Commons, 1)), cost: s.Purses(1), kind: true),
                         C(Loc.T("I can't"), () =>
                         {
                             s.Goes(Tobin);
+                            s.Kept(Tobin);
                             s.Sway(Faction.Commons, -1);
                             s.Log("door", Loc.T("Tobin was trapped past the deep door, and there was no rescue."));
                             return Loc.T("Then I'll light a candle for him at the Crossed Keys.");
@@ -563,10 +568,11 @@ public static class TaleBook
                 },
                 new()
                 {
-                    Key = "door.saved", Who = Tobin, After = "door.fall", Gap = 2, If = s => s.Flagged("door.rescued"), Expect = Loc.T("Tobin, rescued"),
+                    Key = "door.saved", Who = Tobin, After = "door.fall", Gap = 2, If = s => s.Flagged("door.rescued"),
                     Brings = (s, rng) =>
                     {
                         s.Flags.Remove($"away:{Tobin}");
+                        s.Kept(Tobin);
                         return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, 3),
                             Loc.T("You came for me. Half of what's behind that door is yours, freely given, and I'm never going down again. One coin, for luck."),
                             "barrow");
@@ -683,7 +689,7 @@ public static class TaleBook
                                                     "Something is left on the counter.")),
                     Then = s =>
                     {
-                        string gift = GiftCurio(s, new Random(unchecked(s.Seed * 41 + s.Day)), CurioRarity.Rare);
+                        string gift = GiftCurio(s, new Random(unchecked(s.Seed * 41 + s.Day)), CurioRarity.Uncommon);
                         s.Log("wood", Loc.T($"The Hawthorn Lady thanked you with {gift}."));
                     },
                 },
@@ -818,15 +824,15 @@ public static class TaleBook
                             s.Log("fore", Loc.T("Master Quire gave you a copy of the Chest Roll. You'll take it to the King."));
                             return Loc.T("The King. Yes. If anyone can make the Guild answer for it, he can.");
                         }, W(s, s.Purses(1.5f), (Faction.Crown, 1)), kind: true),
-                        C(Loc.T($"Sell the copy to the Guild ({s.Purses(1)}g)"), () =>
+                        C(Loc.T($"Sell the copy to the Guild ({s.Purses(0.5f)}g)"), () =>
                         {
-                            s.TaleGold(s.Purses(1));
+                            s.TaleGold(s.Purses(0.5f));
                             s.Sway(Faction.Guild, 2);
                             s.Goes(Tobias);
                             s.Flags.Add("fore.sold");
                             s.Log("fore", Loc.T("You sold the copy of the Chest Roll to the Guild. Tobias Fenn hasn't been seen since."));
                             return Loc.T("You'd... very well. It's yours to sell.");
-                        }, W(s, s.Purses(1), (Faction.Guild, 2))),
+                        }, W(s, s.Purses(0.5f), (Faction.Guild, 2))),
                     },
                 },
                 new()
@@ -849,14 +855,14 @@ public static class TaleBook
                     Says = s => Say(Aldo,
                         Loc.T("You've something for the Crown, I hear. The Roll, and a page of the Guild's own ledgers. Let me see."),
                         Loc.T("The Guild's been robbing my subjects in my name, and sending it to the Maw. My decree: the Guild's tithe on " +
-                              "Keywrights is cut by a quarter, from tonight. Vane will be... displeased.")),
+                              "Keywrights is cut by a fifth, from tonight. Vane will be... displeased.")),
                     Then = s =>
                     {
                         s.Flags.Add(Decree);
                         s.Sway(Faction.Crown, 2);
                         s.Sway(Faction.Guild, -3);
-                        s.Post("decree", Loc.T("By the King's decree"), Loc.T("The Gilded Guild's tithe on Keywrights is cut by a quarter. Aldric IX, Rex."));
-                        s.Log("fore", Loc.T("The King cut the Guild's tithe by a quarter. The Guild will remember who brought him the Roll."));
+                        s.Post("decree", Loc.T("By the King's decree"), Loc.T("The Gilded Guild's tithe on Keywrights is cut by a fifth. Aldric IX, Rex."));
+                        s.Log("fore", Loc.T("The King cut the Guild's tithe by a fifth. The Guild will remember who brought him the Roll."));
                     },
                 },
             },
@@ -913,19 +919,19 @@ public static class TaleBook
                         }, W(s, s.Purses(0.4f), (Faction.Arcanum, -2)), kind: true),
                         C(Loc.T("Tell the Guild"), () =>
                         {
-                            s.TaleGold(s.Purses(1));
+                            s.TaleGold(s.Purses(0.5f));
                             s.Sway(Faction.Guild, 2);
                             s.Sway(Faction.Arcanum, -3);
                             s.Goes(Orme);
                             s.Log("unlock", Loc.T("You told the Guild about Orme's engine. They took her away, and paid you."));
                             return Loc.T("The Guild? Oh no. Oh, no.");
-                        }, W(s, s.Purses(1), (Faction.Guild, 2), (Faction.Arcanum, -3))),
+                        }, W(s, s.Purses(0.5f), (Faction.Guild, 2), (Faction.Arcanum, -3))),
                         C(Loc.T("Stay out of it"), () =>
                         {
                             s.Flags.Add("unlock.left");
                             s.Log("unlock", Loc.T("You stayed out of Orme's engine."));
                             return Loc.T("I... all right. I'll stay out of it too.");
-                        }, W(s, s.Purses(1) - s.Purses(0.8f))),
+                        }, W(s, s.Purses(1) - s.Purses(1.5f))),
                     },
                 },
                 new()
@@ -933,12 +939,12 @@ public static class TaleBook
                     Key = "unlock.works", Who = Orme, After = "unlock.engine", Gap = 3, Tier = 4, If = s => s.Flagged("unlock.left"),
                     Says = s => Say(Orme,
                         Loc.T("It works, Keywright. Partly: one chest in three opens for anyone at all. The Guild has offered me the moon for it."),
-                        Loc.T($"And the Gate is cracking. Can you hear it? Here: {Money.Say(s.Purses(1))}, your share, for the blood.")),
+                        Loc.T($"And the Gate is cracking: the Maw's gilded iron is leaking into every purse in the realm. Here: {Money.Say(s.Purses(1))}, your share, for the blood.")),
                     Then = s =>
                     {
                         s.TaleGold(s.Purses(1));
                         s.Flags.Add(GateCracked);
-                        s.Log("unlock", Loc.T("Orme's engine works, partly, and the Gate is cracking: the Maw comes to your counter twice as often."));
+                        s.Log("unlock", Loc.T("Orme's engine works, partly, and the Gate is cracking: demon gold is everywhere now, in any purse of coin."));
                     },
                 },
             },
@@ -998,7 +1004,7 @@ public static class TaleBook
                     Then = s =>
                     {
                         s.Sway(Faction.Ironroot, 3);
-                        var gift = new[] { "workshop", "magnet", "master" }.Select(Upgrades.Get).FirstOrDefault(u => !s.Has(u.Key) && (u.Requires == null || s.Has(u.Requires)));
+                        var gift = new[] { "workshop", "magnet" }.Select(Upgrades.Get).FirstOrDefault(u => !s.Has(u.Key) && (u.Requires == null || s.Has(u.Requires)));
                         if (gift != null) s.Grant(gift.Key);
                         else s.TaleGold(s.Purses(1.5f));
                         s.Log("crown", gift != null ? Loc.T($"Ironroot's smiths built you a {gift.Name}, for nothing.") : Loc.T("Ironroot paid you for the crown in dwarf-gold."));
@@ -1123,7 +1129,7 @@ public static class TaleBook
                 new()
                 {
                     Key = "skrae.tick", Who = Tick, After = "skrae.ask", Gap = 1, Tier = 4, If = s => s.Flagged("skrae.hidden"),
-                    Says = s => Say(Tick, Loc.T($"Seen a demon with bat's ears? Ran off from the Gate. The Maw pays {Money.Say(s.Purses(1))} for runaways. Tick, tock.")),
+                    Says = s => Say(Tick, Loc.T($"Seen a demon with bat's ears? Ran off from the Gate. The Maw pays {Money.Say(s.Purses(0.5f))} for runaways. Tick, tock.")),
                     Asks = s => new()
                     {
                         C(Loc.T("No"), () =>
@@ -1131,14 +1137,14 @@ public static class TaleBook
                             s.Log("defector", Loc.T("Tick came looking for Skrae. You said nothing."));
                             return Loc.T("Tick, tock. We'll find it.");
                         }, W(s, s.Purses(1.2f)), kind: true),
-                        C(Loc.T($"In my back room ({s.Purses(1)}g)"), () =>
+                        C(Loc.T($"In my back room ({s.Purses(0.5f)}g)"), () =>
                         {
-                            s.TaleGold(s.Purses(1));
+                            s.TaleGold(s.Purses(0.5f));
                             s.Goes(Skrae);
                             s.Flags.Add("skrae.sold");
                             s.Log("defector", Loc.T("You gave Skrae up to Tick, for the Maw's reward."));
                             return Loc.T("Delicious. The Maw thanks you, mortal.");
-                        }, s.Purses(1)),
+                        }, s.Purses(0.5f)),
                     },
                 },
                 new()
@@ -1153,7 +1159,7 @@ public static class TaleBook
                     {
                         s.Flags.Add(GazeKnown);
                         s.Flags.Remove($"away:{Skrae}");
-                        string gift = GiftCurio(s, new Random(unchecked(s.Seed * 53 + s.Day)), CurioRarity.Rare);
+                        string gift = GiftCurio(s, new Random(unchecked(s.Seed * 53 + s.Day)), CurioRarity.Uncommon);
                         s.Log("defector", Loc.T($"Skrae went free. The Maw's gaze won't touch your counter again, and it left you {gift}."));
                     },
                 },

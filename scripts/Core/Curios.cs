@@ -297,7 +297,7 @@ public static class Curios
     /// <summary>How many curios Nim lays out a night, before his upgrades (0.28: every night, one; 0.22-0.27: four, twice a week).</summary>
     public const int Laid = 1;
 
-    /// <summary>Nim comes every week, from the first.</summary>
+    /// <summary>Nim's first week (his first night always has something cheap).</summary>
     public const int FirstWeek = 1;
 
     /// <summary>
@@ -313,12 +313,16 @@ public static class Curios
         _ => 250,
     };
 
+    /// <remarks>
+    /// 0.28: a quarter less than 0.27's 6/10/15/20%, now that Nim comes every night: more nights to buy on, so each
+    /// purchase takes a smaller share (the careful collector's spending on curios was half as much again otherwise).
+    /// </remarks>
     public static float Share(CurioRarity rarity) => rarity switch
     {
-        CurioRarity.Common => 0.06f,
-        CurioRarity.Uncommon => 0.1f,
-        CurioRarity.Rare => 0.15f,
-        _ => 0.2f,
+        CurioRarity.Common => 0.045f,
+        CurioRarity.Uncommon => 0.075f,
+        CurioRarity.Rare => 0.11f,
+        _ => 0.15f,
     };
 
     /// <summary>What Nim asks for a curio, from what was in your purse when he arrived.</summary>

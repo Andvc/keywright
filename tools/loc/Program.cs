@@ -355,6 +355,8 @@ static class Rules
         if (Regex.IsMatch(s, @"^[\w./{}-]*\.(png|jpg|webp|json|wav|ogg|mp3|tscn|tres|cfg|po|pot|txt|ttf|import|uid|bak|tmp|exe|zip)$", RegexOptions.IgnoreCase)) return false;
         if (!s.Contains(' ') && s.Contains('/')) return false;
         if (Regex.IsMatch(bare, @"^[a-z_]+(:[a-z_]+)+$")) return false;
+        // A tale's beat or flag ("magpie.notice", "pip.apprentice"), or a prefix for one ("away:", "offer:").
+        if (Regex.IsMatch(bare, @"^[a-z_]+(\.[a-z_]+)+$") || Regex.IsMatch(bare, @"^[a-z_]+:$")) return false;
         if (Regex.IsMatch(bare, @"^-{1,2}[a-z]")) return false;
         if (Regex.IsMatch(bare, @"^[NnFfPpCcDdEeXxGgRr]\d*$")) return false;
         if (Regex.IsMatch(bare, @"^[a-z][a-zA-Z0-9]*$") && bare.Any(char.IsUpper)) return false;

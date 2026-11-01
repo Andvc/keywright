@@ -28,7 +28,8 @@ public sealed partial class GameState
     public List<string> Boons { get; } = new();
 
     /// <summary>One of the season's banes is against you this run.</summary>
-    public bool Under(string bane) => Banes.Contains(bane);
+    /// <remarks>Once the Unlocking has cracked the Gate (a tale), the Maw's gilded iron is about as in a season of forgers.</remarks>
+    public bool Under(string bane) => Banes.Contains(bane) || (bane == Challenges.Forgers && Flagged(TaleBook.GateCracked));
 
     /// <summary>One of the boons is with you this run.</summary>
     public bool Favoured(string boon) => Boons.Contains(boon);
