@@ -98,7 +98,7 @@ public partial class Main : Node2D
                         Simulation.LessonTest();
                         break;
                     case "seller":
-                        Simulation.ShowSeller(Arg(args, "--who") ?? "tam");
+                        Simulation.ShowSeller(Arg(args, "--who") ?? "pip");
                         break;
                     case "kin":
                         Simulation.Meta(N(100), Arg(args, "--who"));
@@ -604,7 +604,8 @@ public partial class Main : Node2D
     }
 
     /// <summary>Why the day can't be skipped now, or null: only from Nim's counter, the shop's counter or the day's end.</summary>
-    public string CanSkipDay => _phase is CounterPhase or PeddlerPhase or DayEndPhase ? null : Loc.T("Not now: finish what's in hand first.");
+    public string CanSkipDay => _phase is CounterPhase or PeddlerPhase or DayEndPhase or TalkPhase { Answered: false, Talk.Night: false } ? null
+        : Loc.T("Not now: finish what's in hand first.");
 
     /// <summary>
     /// GM: the rest of today skipped. Everyone still waiting goes home and it's the evening (from the day's end: the next
@@ -616,6 +617,12 @@ public partial class Main : Node2D
         if (_phase is DayEndPhase)
         {
             CloseDay();
+            return;
+        }
+        // Nim's table is the night's: skipping it is the next morning.
+        if (_phase is PeddlerPhase)
+        {
+            StartDay();
             return;
         }
         State.SkipRestOfDay();
@@ -682,7 +689,7 @@ public partial class Main : Node2D
             new Item(Category.Coins, Rarity.Epic), new Item(Category.Gems, Rarity.Legendary),
             Heartsongs.Make(Heartsongs.Get(Heartsongs.Egg), Rarity.Rare),
         }, Rarity.Rare, new Item(Category.Scrolls, Rarity.Rare, Magic: true));
-        var visit = Market.Price(State.Rng, Sellers.Get("vexis"), chest, ShopTiers.Max, ask: 300);
+        var visit = Market.Price(State.Rng, Sellers.Get("tick"), chest, ShopTiers.Max, ask: 300);
         visit.Buy(State.Rng);
         State.Opening = State.Buy(visit, new Appraisal(chest.Quality, ShopTiers.Max, chest.Items.Select(i => i.Category)));
         var opening = new Phases.OpeningPhase();
@@ -743,18 +750,11 @@ public partial class Main : Node2D
             var lines = Story.WeekStart(State);
             if (lines.Count > 0)
             {
-                SwitchTo(new ScenePhase(lines, Peddler, State.Week == 1 ? Loc.T("BRAM'S STALL") : Loc.T($"WEEK {State.Week}"), Story.Setting(State.Week)));
+                SwitchTo(new ScenePhase(lines, OpenShop, State.Week == 1 ? Loc.T("BRAM'S STALL") : Loc.T($"WEEK {State.Week}"), Story.Setting(State.Week)));
                 return;
             }
         }
-        Peddler();
-    }
-
-    /// <summary>Nim comes by before opening, on his day.</summary>
-    void Peddler()
-    {
-        if (State.PeddlerToday && State.PeddlerStock.Count > 0) SwitchTo(new PeddlerPhase());
-        else OpenShop();
+        OpenShop();
     }
 
     /// <summary>Opens the shop: the day's card, and the first customer.</summary>
@@ -764,14 +764,35 @@ public partial class Main : Node2D
         NextCustomer();
     }
 
-    /// <summary>After the day's end: the Guild's introduction (the first evening), its due (the fifth), or the next morning.</summary>
+    /// <summary>After the day's end: the Guild's introduction (the second evening), its due (the fifth), or the night.</summary>
     public void CloseDay()
     {
-        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), StartDay, Loc.T("THE GILDED GUILD"), "guild"));
+        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), Night, Loc.T("THE GILDED GUILD"), "guild"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
         // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
         else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, Loc.T("THE ALDRIC KEY"), "vault"));
-        else StartDay();
+        else Night();
+    }
+
+    /// <summary>
+    /// The night (docs/stories.md): a tale's knock at the back door or a letter, the Wardens or the Lockless if they've
+    /// a quarrel with you, then Nim's table, and the next morning.
+    /// </summary>
+    void Night()
+    {
+        State.StartNight();
+        NextNight();
+    }
+
+    /// <summary>The night's next talk, or Nim's table once they're done.</summary>
+    public void NextNight()
+    {
+        if (State.Tonight.FirstOrDefault(t => !t.Done) is Talk talk)
+        {
+            SwitchTo(new TalkPhase(talk));
+            return;
+        }
+        SwitchTo(new PeddlerPhase());
     }
 
     /// <summary>After the Guild's visit: the shop lost, Bram's debt cleared (and maybe the vault), or the next morning.</summary>
@@ -787,7 +808,7 @@ public partial class Main : Node2D
             Cleared();
             return;
         }
-        StartDay();
+        Night();
     }
 
     /// <summary>
@@ -908,7 +929,7 @@ public partial class Main : Node2D
         Hud.SetDay(State.Day, State.Tier);
         Hud.SetDue(State);
         Hud.SetEvent(State);
-        if (State.NextCustomer()) SwitchTo(new CounterPhase());
+        if (State.NextCustomer()) SwitchTo(State.Current.Talk is Talk talk ? new TalkPhase(talk) : new CounterPhase());
         else SwitchTo(new DayEndPhase());
     }
 

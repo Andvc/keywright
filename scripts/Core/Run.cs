@@ -50,7 +50,17 @@ public sealed partial class GameState
     public int DueNow => Money.Round(DueFor(Week) * (_halfDue ? 0.5f : 1)) + Arrears;
 
     /// <summary>A week's due: the Guild's, a step higher for each challenge level.</summary>
-    public int DueFor(int week) => Challenge > 0 ? Money.Round(Guild.Due(week) * Challenges.DebtFactor(Challenge)) : Guild.Due(week);
+    public int DueFor(int week)
+    {
+        float due = Guild.Due(week) * (Challenge > 0 ? Challenges.DebtFactor(Challenge) : 1) * TaleDues;
+        return Challenge > 0 || TaleDues != 1 ? Money.Round(due) : Guild.Due(week);
+    }
+
+    /// <summary>
+    /// What the tales do to the Guild's dues (docs/stories.md): a friend of the Guild has a tenth overlooked, a foe is
+    /// audited a tenth more, and the King's decree cuts the tithe by a quarter.
+    /// </summary>
+    float TaleDues => (Friend(Faction.Guild) ? 0.9f : Foe(Faction.Guild) ? 1.1f : 1f) * (Flagged(TaleBook.Decree) ? 0.75f : 1f);
 
     bool _halfDue;
 
@@ -335,6 +345,19 @@ public sealed partial class GameState
         if (!HasCurio(key)) _curios.Add(key);
         CuriosSeen.Add(key);
     }
+
+    /// <summary>A curio taken back by whoever gave it (a promise broken): gone, for nothing.</summary>
+    public void TakeCurio(string key)
+    {
+        _curios.Remove(key);
+        _curioPaid.Remove(key);
+    }
+
+    /// <summary>Bram gives his word for you to the Guild (a tale's, not a short night's): it's spent for the run.</summary>
+    public void SpendWord()
+    {
+        if (GraceLeft) GraceUsed++;
+    }
     public IEnumerable<CurioDef> OwnedCurios => _curios.Select(Curios.Get);
     public bool HasCurio(string key) => _curios.Contains(key);
     public int CurioSlots => Curios.Slots + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.CurioSlots) + (Favoured(Challenges.Drawer) ? 1 : 0);
@@ -352,7 +375,8 @@ public sealed partial class GameState
     }
 
     /// <summary>Nim comes by this morning.</summary>
-    public bool PeddlerToday => Plan != null && Plan.Week == Week && Plan.NimOn(DayOfWeek);
+    /// <summary>Nim comes by every night (0.28), after the day's end and the Guild.</summary>
+    public bool PeddlerToday => Day > 0;
 
     /// <summary>The week's story is told this morning.</summary>
     public bool StoryToday => Plan != null && Plan.Week == Week && Plan.StoryDay > 0 && Plan.StoryDay == DayOfWeek;
@@ -447,20 +471,6 @@ public sealed partial class GameState
     /// <summary>A day's number, from its week and its day of the week.</summary>
     public static int DayNumber(int week, int dayOfWeek) => (week - 1) * Guild.DaysPerWeek + dayOfWeek;
 
-    /// <summary>The next day Nim comes by after today, or 0 if that isn't planned yet.</summary>
-    public int NextPeddler
-    {
-        get
-        {
-            foreach (var plan in new[] { Plan, NextPlan })
-            {
-                if (plan == null || plan.Week < Week) continue;
-                for (int d = 1; d < Guild.DaysPerWeek; d++)
-                    if (plan.NimOn(d) && DayNumber(plan.Week, d) > Day) return DayNumber(plan.Week, d);
-            }
-            return 0;
-        }
-    }
 
     public EventDef TodayEvent => Day <= 0 ? null : ForcedEvent != null ? Events.Find(ForcedEvent)
         : Plan?.On(DayOfWeek) is string key ? Events.Find(key) : null;

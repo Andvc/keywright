@@ -15,7 +15,7 @@ public static class Strategy
     /// <summary>
     /// Which strengths to shake at: all three, except gently and hard when there's no time or every strength after the
     /// first costs (hard hears everything firm does), or gently and firmly when the seller won't have it shaken hard (or
-    /// Hesk's back, or Wenna's mare, won't). A rotten chest stands one strength: hard, unless what's in their chests is
+    /// Hesk's back, or Rook's mare, won't). A rotten chest stands one strength: hard, unless what's in their chests is
     /// mostly delicate (a clank would drown it out). Through straw a gentle shake stirs nothing: firmly, then hard. Kid
     /// gloves and a pocket watch lift the sellers' limits.
     /// </summary>
@@ -96,7 +96,7 @@ public static class Strategy
 
     /// <summary>
     /// What a careful player ticks when they couldn't shake hard enough to hear it: on faith, a soft kind the seller
-    /// usually brings or the place holds (Brother Ansel's crypt vestments). Their habit is in the ledger.
+    /// usually brings or the place holds (Brother Cadoc's crypt vestments). Their habit is in the ledger.
     /// </summary>
     public static void OnFaith(Visit visit, Appraisal slip, Hearing hearing, GameState state = null)
     {
@@ -110,15 +110,15 @@ public static class Strategy
     /// <summary>The Bookkeeping Engine read this chest (it can't through chains).</summary>
     public static bool Recorded(Visit visit, GameState state) => (state?.Has(Upgrades.Engine) ?? false) && !visit.Chest.Sealed;
 
-    /// <summary>Someone counted what's inside, false bottom and all: Pell's ticket, or the Drowned Bell.</summary>
+    /// <summary>Someone counted what's inside, false bottom and all: Brass's ticket, or the Drowned Bell.</summary>
     static bool Counted(Visit visit, GameState state) => visit.Says is Clue.Articles or Clue.Tally || (state?.Shows(Heartsongs.Bell) ?? false);
 
-    /// <summary>A scale has accounted for what couldn't be heard: Hesk's, or Wenna's (she says what hers read).</summary>
+    /// <summary>A scale has accounted for what couldn't be heard: Hesk's, or Rook's (she says what hers read).</summary>
     static bool Weighed(Visit visit, GameState state) => (state?.Weighs ?? false) || visit.Says == Clue.Pounds;
 
     /// <summary>
-    /// A careful read of what the seller said besides what they heard. A weight (Wenna's game scale, or Hesk's) accounts
-    /// for what couldn't be heard; Pell's ticket counts every article, so once everything has been heard, one more is
+    /// A careful read of what the seller said besides what they heard. A weight (Rook's game scale, or Hesk's) accounts
+    /// for what couldn't be heard; Brass's ticket counts every article, so once everything has been heard, one more is
     /// under a false bottom; a clue that points at a warded thing (<see cref="WardedKind"/>) gets it named: one more of
     /// its kind on the slip.
     /// </summary>
@@ -136,8 +136,8 @@ public static class Strategy
 
     /// <summary>
     /// What a careful player works out is warded, from the seller's clue and what they heard, or null:
-    /// Mother Bramble's sign, or grandmother's riddle, names a kind there's nothing of to hear; a kind on the Arcanum's
-    /// tag, or in a Thornwick dowry, never sounded; the faded ward-roll names it; a suit came up twice in Madame Oriel's
+    /// Mother Sorrel's sign, or grandmother's riddle, names a kind there's nothing of to hear; a kind on the Arcanum's
+    /// tag, or in a Thornwick dowry, never sounded; the faded ward-roll names it; a suit came up twice in Madame Zell's
     /// cards; Skrae's echoes come back off one more of a kind than sounded. The ones that turn on hearing wait until
     /// that kind has had a fair chance to sound.
     /// </summary>
@@ -264,7 +264,7 @@ public static class Strategy
         var seller = visit.Seller;
         if (state != null) slip.Model ??= state;
         float worth = slip.LikelyWorth() + (state == null ? 0 : CommissionWorth(state, slip));
-        // A scale (Hesk's, or Wenna's word for hers) has already accounted for what couldn't be heard, and the Bookkeeping
+        // A scale (Hesk's, or Rook's word for hers) has already accounted for what couldn't be heard, and the Bookkeeping
         // Engine for everything.
         bool weighed = Weighed(visit, state) || Recorded(visit, state);
         var likely = Likely(visit);
@@ -275,7 +275,7 @@ public static class Strategy
         foreach (var kind in Categories.UpTo(slip.Tier).Where(k => slip.Count(k.Category) == 0))
             if ((!CouldStir(visit, hearing, kind.Category) && !weighed) || (kind.Delicate && drowned))
                 worth += likely[(int)kind.Category] / total * 2.5f * (state?.Expected(kind.Category, slip.Chest) ?? Categories.Expected(kind.Category, slip.Chest)) * 0.8f;
-        // Pell's ticket settles a false bottom once everything has been heard; so does a scale.
+        // Brass's ticket settles a false bottom once everything has been heard; so does a scale.
         bool counted = Counted(visit, state) && HeardAll(visit, hearing, slip.Tier);
         if (!hearing.Dropped && !slip.Hidden && slip.Tier >= 2 && !weighed && !counted)
             worth += (state?.HiddenChance(seller) ?? seller.HiddenChance) * slip.HiddenValue;
@@ -305,6 +305,8 @@ public static class Strategy
     public static bool WorthBuying(Visit visit, int worth, GameState state = null, Hearing hearing = null)
     {
         var seller = visit.Seller;
+        // The mark went cold: it isn't the seller's to sell, and it won't open for whoever buys it.
+        if (visit.Chest.Stolen && visit.Handled) return false;
         if (seller.SlipPrice) return hearing == null || Recorded(visit, state) || (hearing.HasTried(Shake.Hard, false) && hearing.Dropped);
         if (seller.Gaze > 0) return worth - visit.Ask > (state?.Queue.Sum(v => v.Price) ?? 0) * (seller.Gaze - 1) * GazeBuys;
         return worth > visit.Ask * (1 - seller.Wager * PerfectOdds);
@@ -312,6 +314,81 @@ public static class Strategy
 
     /// <summary>For the Maw's gaze: how much of what's still waiting a careful player would have bought anyway.</summary>
     const float GazeBuys = 0.4f;
+
+    // ---- The tales (docs/stories.md) ----
+
+    /// <summary>
+    /// What a careful player says to someone at the counter: a tool offered, if they'd have bought it at the day's end
+    /// (and it's a tool their style uses); otherwise the choice worth most over the rest of the run that they can pay
+    /// for and still keep half a working purse, the kinder one when two are close.
+    /// </summary>
+    public static Choice Choose(GameState state, Talk talk, bool tools = true)
+    {
+        var options = talk.Options;
+        if (talk.Offer != null)
+        {
+            var upgrade = Upgrades.Get(talk.Offer);
+            bool want = (tools || upgrade.Key is not ("lamp" or "magnet")) && WantsOffer(state, upgrade, state.OfferPrice(upgrade));
+            return want ? options[0] : options[^1];
+        }
+        var open = options.Where(c => c.Cost == 0 || state.Gold - c.Cost >= state.WorkingPurse / 2).ToList();
+        if (open.Count == 0) return options.FirstOrDefault(c => c.Cost == 0) ?? options[^1];
+        float best = open.Max(c => c.Worth);
+        float close = Math.Max(1, Math.Abs(best) * 0.05f);
+        return open.Where(c => c.Worth >= best - close).OrderByDescending(c => c.Kind).ThenByDescending(c => c.Worth).First();
+    }
+
+    /// <summary>Whether to buy a tool someone's brought to the counter, at their price: as the day's end would decide it.</summary>
+    public static bool WantsOffer(GameState state, Upgrade upgrade, int price)
+    {
+        int reserve = Reserve(state, upgrade) + Saving(state);
+        if (price >= 1000) reserve += state.DueFor(state.Week + (state.PaidThisWeek ? 2 : 1));
+        return state.Gold - price >= reserve;
+    }
+
+    /// <summary>What Nim offers at his table that a careful player would take tonight: his lantern first (more curios a night is a better build).</summary>
+    public static Upgrade NimUpgrade(GameState state) =>
+        Upgrades.AtNim(state).OrderBy(u => u.NimCards > 0 ? 0 : 1).FirstOrDefault(u => WantsOffer(state, u, state.Cost(u)));
+
+    /// <summary>
+    /// Whether to send for the Wardens over a cold chest: for the finder's share, unless the Lockless would turn on you
+    /// for it (a foe of theirs is robbed every week).
+    /// </summary>
+    public static bool CallWardens(GameState state) => state.Standing(Faction.Lockless) > -Factions.Strong + 1;
+
+    /// <summary>
+    /// What changes in standing are worth to the careful player over the rest of the run, in gold: crossing into friend or
+    /// foe with the four that change the trade is worth what that does (a customer a day, a tenth of the dues, a tenth of
+    /// the purse a week, a fine a Guild night); a point anywhere else, a little (it prices their people's tools).
+    /// </summary>
+    public static float SwayWorth(GameState state, params (Faction Faction, int By)[] sways)
+    {
+        int days = Math.Max(0, Guild.Weeks * Guild.DaysPerWeek - state.Day), weeks = Math.Max(0, Guild.Weeks - state.Week + 1);
+        float dues = Enumerable.Range(state.Week, weeks).Sum(w => (float)state.DueFor(w));
+        float total = 0;
+        foreach (var group in sways.GroupBy(s => s.Faction))
+        {
+            var faction = group.Key;
+            int now = state.Standing(faction), then = Math.Clamp(now + group.Sum(s => s.By), Factions.Min, Factions.Max);
+            float Level(int standing) => standing >= Factions.Strong ? 1 : standing <= -Factions.Strong ? -1 : 0;
+            float change = Level(then) - Level(now);
+            total += faction switch
+            {
+                Faction.Commons => change * days * state.Purses(0.25f),
+                Faction.Guild => change * dues * 0.1f,
+                Faction.Wardens => change * weeks * Math.Min(state.Purses(0.5f), state.DueFor(state.Week) * Wardens.Fine),
+                Faction.Lockless => change * weeks * Math.Max(state.Gold, state.WorkingPurse) * Wardens.Robbed,
+                _ => 0,
+            } + (then - now) * state.Purses(0.03f);
+        }
+        return total;
+    }
+
+    /// <summary>
+    /// What to do with a chest in the back room tonight: return it to its owner (the Wardens' finder's share), or sell it
+    /// to Nim's friends (a share of what it cost) if that pays more. Kept parcels stay.
+    /// </summary>
+    public static bool ReturnHeld(GameState state, Held held) => state.FinderShare >= state.FencePay(held) || state.Foe(Faction.Lockless);
 
     /// <summary>When they want more than your first offer: most of what it's worth to you.</summary>
     public static int SecondOffer(int worth, float floor = 1) => Money.Round(Math.Max(1, worth * 0.85f * floor));

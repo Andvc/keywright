@@ -81,7 +81,7 @@ public static class Events
         new("mourning", Loc.T("A Day of Mourning"), Loc.T("The old Duke is being buried, and the whole town's in black. Nobody will stand for a hard shake today.")),
         new("crier", Loc.T("The Town Crier"), Loc.T("Old Lord Harrow lost his family's {kind} to the Locking. His crier offers a reward for one today: three times its price.")),
         new("minstrel", Loc.T("The Minstrels' Fair"), Loc.T("Minstrels are trading songs in the square, and anyone with a box that hums has brought it: a Heartsong is three times as likely today.")),
-        new("dreaming", Loc.T("The Sleepers' Moon"), Loc.T("The Old Wood's moon was full, and all who slept under it dreamt true, like Mother Bramble: every seller tells you their dream. Some warded something."), MinTier: 2),
+        new("dreaming", Loc.T("The Sleepers' Moon"), Loc.T("The Old Wood's moon was full, and all who slept under it dreamt true, like Mother Sorrel: every seller tells you their dream. Some warded something."), MinTier: 2),
         new("wardens", Loc.T("Wardens' Day"), Loc.T("The old custom: ward a keepsake into a chest before you sell it, and leave a riddle for it. Name the answer, and the ward gives it up."), MinTier: 2),
         new("census", Loc.T("The Guild's Count"), Loc.T("The Gilded Guild is counting everything that changes hands: a clerk tallies every article in every chest today, false bottoms and all."), MinTier: 2),
         new("assessor", Loc.T("The Guild's Assessor"), Loc.T("A Guild assessor sits in the corner all day, and takes a tenth of every sale for the Guild."), MinTier: 2),
@@ -122,10 +122,8 @@ public static class Events
 
     /// <summary>
     /// The plan for a week. The fifth day is the Guild's. A week with a story morning (<see cref="Story.TellsOn"/>) has
-    /// it on the first day and Nim on one of the other three; any other week has Nim on two mornings that aren't next
-    /// to each other. The days left have something on in town (gentle ones in the first week), that haven't come lately
-    /// (they all come round before any comes twice). The first week is fixed: the welcome, a gentle day, Nim's first
-    /// visit, another gentle day, the first due.
+    /// it on the first day. Two of the days left have something on in town (gentle ones in the first week), that haven't
+    /// come lately (they all come round before any comes twice). Nim comes every night (0.28), so no day is his.
     /// </summary>
     /// <param name="fair">Fair days (a challenge's boon): no days of mourning, and no Guild assessors.</param>
     public static WeekPlan Plan(int seed, int week, int tier, ICollection<string> seen, bool fair = false)
@@ -139,17 +137,13 @@ public static class Events
             plan.StoryDay = 1;
             open.Remove(1);
         }
-        if (week == 1) plan.Peddlers.Add(FirstPeddlerDay);
-        else if (plan.StoryDay > 0) plan.Peddlers.Add(rng.PickOne(open.ToArray()));
-        else plan.Peddlers.AddRange(rng.PickOne(Apart));
-        foreach (int day in plan.Peddlers) open.Remove(day);
-        foreach (int day in open.Take(PerWeek))
+        // (Nim comes every night since 0.28, so no morning is his: the days that were are free for the town.)
+        open = open.OrderBy(_ => rng.Next()).ToList();
+        foreach (int day in open.Take(PerWeek).OrderBy(d => d))
             plan.Days[day - 1] = Pick(rng, tier, seen, plan.Days, gentle: week == 1, fair).Key;
         return plan;
     }
 
-    /// <summary>Two of the first four mornings that aren't next to each other: Nim's, in a week without a story.</summary>
-    static readonly int[][] Apart = { new[] { 1, 3 }, new[] { 1, 4 }, new[] { 2, 4 } };
 
     /// <summary>The days a fair season never brings.</summary>
     static readonly string[] Unfair = { "mourning", "assessor" };

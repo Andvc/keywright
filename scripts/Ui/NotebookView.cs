@@ -23,7 +23,7 @@ public partial class NotebookView : Node2D
     const float PanelX = 40, PanelY = 66, PanelW = 1200, PanelH = 518;
     const float TableX = 64, RowH = 40;
 
-    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3;
+    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4;
 
     readonly GameState _state;
     readonly int _firstPage;
@@ -68,8 +68,9 @@ public partial class NotebookView : Node2D
         Tab(SoundsPage, Loc.T("Sounds"), PanelX + 236, 96);
         Tab(RegularsPage, Loc.T("Regulars"), PanelX + 338, 112);
         Tab(CalendarPage, Loc.T("Calendar"), PanelX + 456, 112);
+        Tab(TownPage, Loc.T("Town"), PanelX + 574, 88);
         // Synergies come with Crownhold: before that, the notebook just keeps its tally.
-        if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 574, 120);
+        if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 668, 120);
         AddChild(UiKit.MakeButton(Loc.T($"Close {Controls.Tag(Controls.Notebook)}"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
         _page = new Node2D();
         AddChild(_page);
@@ -97,6 +98,7 @@ public partial class NotebookView : Node2D
         foreach (var (key, tab) in _tabs) tab.Modulate = key == page ? Colors.White : new Color(1, 1, 1, 0.6f);
         if (page == RegularsPage) BuildRegulars(CurrentSpread);
         else if (page == CalendarPage) BuildCalendar();
+        else if (page == TownPage) BuildTown();
         else if (page == SynergiesPage) BuildSynergies();
         else BuildSounds();
     }
@@ -251,7 +253,7 @@ public partial class NotebookView : Node2D
             .Place(TableX + (Spread(tier) + 1) * step, PanelY + PanelH - 44, buttonW, 34));
 
         var people = spread == FriendsSpread ? Friends() : Sellers.All.Where(s => s.Tier <= tier && Spread(s.Tier) == spread && _state.Met.Contains(s.Key))
-            .Select(s => (s.Key, s.Name, Role: $"{s.JudgeWord}; {Trade(s)}", About: s.Habit)).ToList();
+            .Select(s => (s.Key, s.Name, Role: $"{s.JudgeWord}; {Trade(s)}", About: About(s))).ToList();
         if (people.Count == 0)
         {
             _page.AddChild(UiKit.MakeLabel(Loc.T("You haven't met anyone here yet."), 24, Palette.Muted, HorizontalAlignment.Center).Place(PanelX, 300, PanelW, 30));
@@ -261,6 +263,15 @@ public partial class NotebookView : Node2D
         for (int i = 0; i < people.Count; i++) Entry(i, people[i].Key, people[i].Name, people[i].Role, spread);
         var chosen = people.First(p => p.Key == _selected);
         Page(chosen.Key, chosen.Name, chosen.Role, chosen.About);
+    }
+
+    /// <summary>Their page: how they trade, what they want, and what you've noticed about them.</summary>
+    static string About(SellerDef seller)
+    {
+        string about = seller.Habit ?? "";
+        if (seller.Wants != null) about += Loc.T($"\nWants: {seller.Wants}");
+        if (seller.Facts.Length > 0) about += Loc.T($"\nYou've noticed: {string.Join(" ", seller.Facts)}");
+        return about;
     }
 
     static string Trade(SellerDef seller) => seller.Trade switch { Core.Trade.Haggle => Loc.T("haggles"), Core.Trade.Offer => Loc.T("you name the price"), _ => Loc.T("fixed price") };
@@ -274,8 +285,8 @@ public partial class NotebookView : Node2D
                                                   "your hand. Keeps a stash for bad days and a tip for everything. Never paid the Guild a penny.")),
         };
         if (_state.HasMet(Story.Nim))
-            people.Add((Story.Nim, Peddler.Name, Loc.T("sells curios"), Loc.T("Comes by twice a week with oddments from the Locking, each bending one rule of the trade. " +
-                                                             "Notices what you buy and brings more like it. Don't ask what Nim is.")));
+            people.Add((Story.Nim, Peddler.Name, Loc.T("sells curios"), Loc.T("Comes by every night after the shutters are down, with oddments from the Locking, each " +
+                                                             "bending one rule of the trade. Notices what you buy and brings more like it. Don't ask what Nim is.")));
         if (_state.HasMet(Story.Vane))
             people.Add((Story.Vane, Guild.Collector, Loc.T("the Gilded Guild"), Loc.T("Collector for the Guild that keeps the Gate. Comes at the end of every week for " +
                                                                     "the tithe Bram never paid. Miss one, and the Guild seals the shop.")));
@@ -284,6 +295,9 @@ public partial class NotebookView : Node2D
         else if (_state.HasMet(Story.Hood))
             people.Add((Story.Hood, Story.HoodName, Loc.T("trades shards"), Loc.T("Knows Bram, and the Key-mark on your hand. Trades shards of the Aldric Key for " +
                                                                  "things she asks for, and won't say who she is.")));
+        // The people the tales have brought to the counter: a Warden, a clerk, a Mark-Finder, a mother.
+        foreach (var person in Sellers.People.Where(p => _state.Met.Contains(p.Key)))
+            people.Add((person.Key, person.Name, person.Of is Faction f ? Factions.Name(f) : "", About(person)));
         return people;
     }
 
@@ -314,7 +328,7 @@ public partial class NotebookView : Node2D
             pulse.TweenProperty(row, "self_modulate", new Color(1.35f, 1.3f, 1f), 0.7f);
             pulse.TweenProperty(row, "self_modulate", Colors.White, 0.7f);
         }
-        row.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{key}.png", new Vector2(26, h / 2), 1, outlined: true));
+        row.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{Sellers.LookOf(key)}.png", new Vector2(26, h / 2), 1, outlined: true));
         row.AddChild(UiKit.MakeLabel(name, 16, current ? Palette.Gold : Palette.Text).Place(52, 4, 300, 20));
         row.AddChild(UiKit.MakeLabel(current ? Loc.T("at your counter") : role, 16, current ? Palette.Gold : Palette.Muted).Place(52, 24, 500, 20));
     }
@@ -326,10 +340,10 @@ public partial class NotebookView : Node2D
         var page = UiKit.MakePanel(key == _current ? Palette.Gold.Darkened(0.2f) : Palette.PanelBorder).Place(TableX - 8, y, PanelW - 32, PanelY + PanelH - 52 - y);
         page.MouseFilter = Control.MouseFilterEnum.Ignore;
         _page.AddChild(page);
-        page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{key}.png", new Vector2(56, 58), 1, outlined: true));
+        page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{Sellers.LookOf(key)}.png", new Vector2(56, 58), 1, outlined: true));
         page.AddChild(UiKit.MakeLabel(name, 24, Palette.Gold, outline: 4).Place(112, 10, 600, 30));
         page.AddChild(UiKit.MakeLabel(role, 16, Palette.Muted, HorizontalAlignment.Right).Place(600, 16, PanelW - 660, 20));
-        page.AddChild(UiKit.MakeLabel(about, 16, Palette.Text).Wrapped().Place(112, 44, PanelW - 168, 96));
+        page.AddChild(UiKit.MakeLabel(about, 16, Palette.Text).Wrapped().Place(112, 44, PanelW - 168, 144));
     }
 
     /// <summary>
@@ -379,17 +393,20 @@ public partial class NotebookView : Node2D
                 if (role == DayRole.Story)
                 {
                     cell.AddChild(UiKit.MakeLabel(Story.Teaser(week), 16, Palette.Gold).Wrapped().Place(10, ly, cellW - 20, 40));
-                    lines.Add(Loc.T($"A story morning: {Story.Teaser(week).ToLowerInvariant()}, before you open. Nim doesn't come this week but once."));
+                    lines.Add(Loc.T($"A story morning: {Story.Teaser(week).ToLowerInvariant()}, before you open."));
                 }
                 else if (role == DayRole.Event && Events.Find(plan.On(d)) is EventDef e)
                 {
                     cell.AddChild(UiKit.MakeLabel(Events.Tag(e, plan.Wanted), 16, Palette.Magic).Wrapped().Place(10, ly, cellW - 20, 40));
                     lines.Add($"{e.Name}: {Events.Describe(e, plan.Wanted)}");
                 }
-                else if (role == DayRole.Curio)
+                // Whoever said they'd come back, on the day they said.
+                var expected = _state.Expected().Where(x => x.Day == day).ToList();
+                if (expected.Count > 0)
                 {
-                    cell.AddChild(UiKit.MakeLabel(Loc.T("Nim: curios"), 16, Palette.Good).Place(10, ly, cellW - 20, 20));
-                    lines.Add(Loc.T("Nim the peddler comes by in the morning with curios."));
+                    float ey = role is DayRole.Story or DayRole.Event ? ly + 20 : ly;
+                    cell.AddChild(UiKit.MakeLabel(expected[0].Note, 16, Palette.Good).Place(10, ey + (role == DayRole.Tax ? 20 : 0), cellW - 20, 20));
+                    lines.AddRange(expected.Select(x => Loc.T($"{x.Note}: {Sellers.Person(x.Who).Name} said they'd come by.")));
                 }
                 if (role == DayRole.Tax && guild)
                 {
@@ -403,7 +420,7 @@ public partial class NotebookView : Node2D
                 else if (role == DayRole.Tax)
                     cell.AddChild(UiKit.MakeLabel(Loc.T("The week's end"), 16, Palette.Muted).Place(10, ly, cellW - 20, 20));
                 if (plan == null && d == 1)
-                    lines.Add(Loc.T("Next week's plan is made at the start of this one: its story, its days in town, and Nim's."));
+                    lines.Add(Loc.T("Next week's plan is made at the start of this one: its story and its days in town."));
                 string story = Loc.T($"Day {day}{(isToday ? Loc.T(" (today)") : "")}: {((lines.Count == 0 ? Loc.T("nothing special planned.") : string.Join(" ", lines)))}");
                 if (!past && !isToday && upcoming == null && lines.Count > 0) upcoming = Loc.T($"Next: {story}");
                 cell.MouseEntered += () => detail.Text = story;
@@ -413,6 +430,82 @@ public partial class NotebookView : Node2D
         }
         detail.Text = upcoming ?? "";
         _page.AddChild(detail);
+    }
+
+    /// <summary>
+    /// The town (docs/stories.md): where you stand with each power (the four that change the trade always, the rest once
+    /// they've an opinion), with what a friend gets and what a foe; the notices on the board; every tale begun, and where
+    /// it's got to; and what's in the back room.
+    /// </summary>
+    void BuildTown()
+    {
+        float y = PanelY + 60;
+        _page.AddChild(UiKit.MakeLabel(Loc.T("WHERE YOU STAND"), 16, Palette.Gold).Place(TableX, y, 400, 20));
+        var factions = Factions.All.Where(f => Factions.Ruling.Contains(f) || _state.Standing(f) != 0).ToList();
+        for (int i = 0; i < factions.Count; i++)
+        {
+            var f = factions[i];
+            int standing = _state.Standing(f);
+            float ry = y + 26 + i * 34;
+            var row = UiKit.MakePanel(standing >= Factions.Strong ? Palette.Good.Darkened(0.3f) : standing <= -Factions.Strong ? Palette.Bad.Darkened(0.3f) : Palette.PanelBorder)
+                .Place(TableX - 8, ry, 540, 30);
+            row.MouseFilter = Control.MouseFilterEnum.Stop;
+            var (friend, foe) = Factions.Effects(f);
+            row.TooltipText = Loc.T($"{Factions.Who(f)}\nAt +2: {friend}\nAt -2: {foe}");
+            row.AddChild(UiKit.MakeLabel(Factions.Name(f), 16, Palette.Text).Place(10, 5, 200, 20));
+            // Seven pips, -3 to +3: filled out from the middle.
+            row.AddChild(new Painter(p =>
+            {
+                for (int v = Factions.Min; v <= Factions.Max; v++)
+                {
+                    var c = new Vector2(230 + (v - Factions.Min) * 18, 15);
+                    bool lit = v != 0 && (standing > 0 ? v > 0 && v <= standing : v < 0 && v >= standing);
+                    p.DrawCircle(c, v == 0 ? 3 : 6, lit ? (v > 0 ? Palette.Good : Palette.Bad) : Palette.Muted.Darkened(0.4f));
+                }
+            }));
+            string now = standing >= Factions.Strong ? friend : standing <= -Factions.Strong ? foe : Factions.Word(standing);
+            row.AddChild(UiKit.MakeLabel(Factions.Word(standing), 16, standing > 0 ? Palette.Good : standing < 0 ? Palette.Warn : Palette.Muted).Place(368, 5, 164, 20));
+            if (Math.Abs(standing) >= Factions.Strong && Factions.Ruling.Contains(f))
+                row.TooltipText = Loc.T($"{Factions.Who(f)}\nNow: {now}");
+        }
+        float by = y + 32 + factions.Count * 34;
+        int held = _state.BackRoom.Count;
+        if (held > 0)
+            _page.AddChild(UiKit.MakeLabel(Loc.Plural(held, $"The back room: {held} chest that won't open for you.", $"The back room: {held} chests that won't open for you."),
+                16, Palette.Warn).Place(TableX, by, 540, 20));
+
+        // The board, and the tales.
+        const float rx = 640, rw = 560;
+        _page.AddChild(UiKit.MakeLabel(Loc.T("ON THE BOARD"), 16, Palette.Gold).Place(rx, y, rw, 20));
+        var notices = _state.Notices.AsEnumerable().Reverse().Take(3).ToList();
+        if (notices.Count == 0)
+            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing posted."), 16, Palette.Muted).Place(rx, y + 26, rw, 20));
+        float ny = y + 26;
+        foreach (var notice in notices)
+        {
+            var card = UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(rx - 8, ny, rw, 64);
+            card.MouseFilter = Control.MouseFilterEnum.Stop;
+            card.TooltipText = notice.Text;
+            card.AddChild(UiKit.MakeLabel(notice.Title, 16, Palette.Gold).Place(10, 6, rw - 20, 20));
+            card.AddChild(UiKit.MakeLabel(notice.Text, 16, Palette.Text).Place(10, 28, rw - 20, 20));
+            _page.AddChild(card);
+            ny += 70;
+        }
+        float ty = Math.Max(ny + 8, y + 26 + 3 * 70 + 8);
+        _page.AddChild(UiKit.MakeLabel(Loc.T("STORIES"), 16, Palette.Gold).Place(rx, ty, rw, 20));
+        var begun = TaleBook.All.Where(t => _state.TaleLog.ContainsKey(t.Key)).ToList();
+        if (begun.Count == 0)
+            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing's begun yet. People will come with their troubles."), 16, Palette.Muted).Wrapped().Place(rx, ty + 24, rw, 40));
+        for (int i = 0; i < Math.Min(5, begun.Count); i++)
+        {
+            var tale = begun[i];
+            var log = _state.TaleLog[tale.Key];
+            var line = UiKit.MakeLabel(Loc.T($"{tale.Title}: {log[^1]}"), 16, Palette.Text).Place(rx, ty + 24 + i * 24, rw, 20);
+            line.MouseFilter = Control.MouseFilterEnum.Stop;
+            line.ClipText = true;
+            line.TooltipText = $"{tale.Title}\n{tale.Blurb}\n\n{string.Join("\n", log)}";
+            _page.AddChild(line);
+        }
     }
 
     /// <summary>

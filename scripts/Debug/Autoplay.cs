@@ -73,6 +73,9 @@ public partial class Autoplay : Node
             case PeddlerPhase peddler:
                 await DrivePeddler(peddler);
                 break;
+            case TalkPhase talk:
+                await DriveTalk(talk);
+                break;
             case DuesPhase dues:
                 await DriveDues(dues);
                 break;
@@ -97,10 +100,52 @@ public partial class Autoplay : Node
         }
     }
 
-    /// <summary>Buys what a careful player would from Nim (selling back a weaker curio to make room), then opens the shop.</summary>
+    /// <summary>Someone come to talk: reads their piece, answers as a careful player would, reads the answer, and lets them go.</summary>
+    async Task DriveTalk(TalkPhase talk)
+    {
+        while (IsInstanceValid(talk) && !talk.Asking && !talk.Answered)
+        {
+            await Wait(1.4);
+            if (IsInstanceValid(talk) && !talk.Asking) talk.Next();
+        }
+        if (!IsInstanceValid(talk) || talk.Answered) return;
+        await Wait(1.2);
+        if (!IsInstanceValid(talk)) return;
+        var choice = Strategy.Choose(State, talk.Talk);
+        GD.Print($"Autoplay: {Sellers.Person(talk.Talk.Who).Name} ({talk.Talk.Key}): \"{choice.Label}\"");
+        talk.Pick(choice);
+        await Wait(2.4);
+        if (IsInstanceValid(talk)) talk.Leave();
+    }
+
+    /// <summary>
+    /// Nim's table, at night: his upgrades a careful player would take, the back room seen to (returned or sold, whichever
+    /// pays), what a careful player would buy from his pack (selling back a weaker curio to make room), then bed.
+    /// </summary>
     async Task DrivePeddler(PeddlerPhase peddler)
     {
         await ReadTips(peddler.Mentor);
+        while (IsInstanceValid(peddler) && Strategy.NimUpgrade(State) is Upgrade upgrade)
+        {
+            GD.Print($"Autoplay: bought {upgrade.Name} from Nim for {State.Cost(upgrade)}g");
+            if (!peddler.BuyUpgrade(upgrade)) break;
+            await Wait(1.0);
+        }
+        if (!IsInstanceValid(peddler)) return;
+        if (State.BackRoom.Any(h => !h.Kept))
+        {
+            peddler.OpenBackRoom();
+            await Wait(1.6);
+            foreach (var held in State.BackRoom.Where(h => !h.Kept).ToList())
+            {
+                if (!IsInstanceValid(peddler)) return;
+                bool home = Strategy.ReturnHeld(State, held);
+                GD.Print($"Autoplay: the back room's {held.Owner} chest {(home ? "returned" : "sold to Nim's friends")}");
+                if (home) peddler.ReturnHeld(held);
+                else peddler.FenceHeld(held);
+                await Wait(1.0);
+            }
+        }
         // Once a run, a look at the warning a curio that would leave you short gets (and "Not now").
         if (!_shortShown && peddler.Stock.FirstOrDefault(c => State.CuriosPrice(c) > 0 && State.CuriosPrice(c) <= State.Gold && !State.CuriosFull &&
                                                             State.ShortNote(State.CuriosPrice(c), curio: c) != null) is CurioDef dear)
@@ -116,15 +161,6 @@ public partial class Autoplay : Node
         for (int i = 0; i < 2 && IsInstanceValid(peddler); i++)
         {
             var (curio, sell) = Strategy.ChooseCurio(State, peddler.Stock.ToList());
-            // Nothing worth it: another look, as often as Nim will give one.
-            while (curio == null && State.CanRerollPeddler && IsInstanceValid(peddler))
-            {
-                peddler.Reroll();
-                Main.Instance.Moment("22_reroll", 0.4);
-                await Wait(1.2);
-                if (!IsInstanceValid(peddler)) return;
-                (curio, sell) = Strategy.ChooseCurio(State, peddler.Stock.ToList());
-            }
             if (curio == null) break;
             if (sell != null)
             {
@@ -213,7 +249,7 @@ public partial class Autoplay : Node
             await Wait(0.3);
             if (!IsInstanceValid(counter)) return;
         }
-        // A newcomer: click them for their page in the notebook, framed (Mother Bramble's lesson asks for it).
+        // A newcomer: click them for their page in the notebook, framed (Mother Sorrel's lesson asks for it).
         if (visit.Lesson != null && !visit.LookedUp)
         {
             counter.OpenNotebook();
@@ -330,6 +366,18 @@ public partial class Autoplay : Node
         if (!IsInstanceValid(counter) || counter.Concluded) return;
 
         Main.Instance.Moment($"06_decide_d{State.Day}_{visit.Seller.Key}");
+        // The mark went cold: send for the Wardens (unless the Lockless would turn on us for it), or pass.
+        if (visit.Chest.Stolen && visit.Handled)
+        {
+            if (counter.CanSendForWardens && Strategy.CallWardens(State))
+            {
+                GD.Print($"Autoplay: {visit.Seller.Name}'s chest was cold to the mark; sent for the Wardens");
+                counter.SendForWardens();
+                await Wait(3.0);
+                if (IsInstanceValid(counter)) counter.Continue();
+                return;
+            }
+        }
         int worth = Strategy.Worth(visit, counter.Slip, counter.Hearing, State);
         switch (visit.Trade)
         {

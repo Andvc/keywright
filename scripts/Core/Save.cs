@@ -11,8 +11,11 @@ namespace Keywright.Core;
 /// </summary>
 public sealed class SaveData
 {
-    /// <summary>4: 0.21's five weeks of five days (older saves are moved onto them: <see cref="FromJson"/>).</summary>
-    public const int CurrentVersion = 4;
+    /// <summary>
+    /// 5: 0.28's new cast and its tales (a version 4 save's regulars are renamed, and its tales start fresh); 4: 0.21's five
+    /// weeks of five days (older saves are moved onto them: <see cref="FromJson"/>).
+    /// </summary>
+    public const int CurrentVersion = 5;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -118,9 +121,35 @@ public sealed class SaveData
     public int PeddlerDay { get; set; }
     public List<SavedCommission> Commissions { get; set; } = new();
 
+    // The tales (0.28, docs/stories.md): null in an older save, which starts them fresh.
+    public List<string> Tales { get; set; }
+    public Dictionary<string, int> BeatsDone { get; set; }
+    public List<string> Flags { get; set; }
+    public List<string> Gone { get; set; }
+    public Dictionary<string, int> Standing { get; set; }
+    public List<Notice> Notices { get; set; }
+    public List<Held> BackRoom { get; set; }
+    public Dictionary<string, List<string>> TaleLog { get; set; }
+    public Dictionary<string, int> OffersDeclined { get; set; }
+    public Dictionary<string, int> Keepsakes { get; set; }
+
     static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
 
     public string ToJson() => JsonSerializer.Serialize(this, Options);
+
+    /// <summary>
+    /// A key an older version kept for one of the old cast ("penn", "lesson:penn", "first_penn"), as it is now: 0.28 gave
+    /// every regular a new name and story (<see cref="Sellers.Renamed"/>). Anything else is left as it was.
+    /// </summary>
+    public static string Renamed(string key)
+    {
+        if (key == null) return null;
+        foreach (string prefix in Prefixes)
+            if (key.StartsWith(prefix) && Sellers.Renamed.TryGetValue(key[prefix.Length..], out var now)) return prefix + now;
+        return Sellers.Current(key);
+    }
+
+    static readonly string[] Prefixes = { GameState.LessonKey, "first_", "seller_", "kin_" }; // loc: keys
 
     /// <summary>
     /// The save in this text, or null if it isn't one this version can read. A shop saved before the Guild came calling
@@ -161,11 +190,21 @@ public sealed class SaveData
                 data.Day = Weeks(week) * Guild.DaysPerWeek + Math.Min(into, Guild.DaysPerWeek - 1);
                 data.WeeksPaid = Math.Min(data.Day / Guild.DaysPerWeek, Weeks(data.WeeksPaid));
                 if (data.ClearedDay > 0) data.ClearedDay = Math.Max(1, data.Day);
-                data.Version = CurrentVersion;
+                data.Version = 4;
                 data.Plan = null;
                 data.NextPlan = null;
                 data.EventDay = 0;
                 data.PeddlerDay = 0;
+            }
+            // 0.28's new cast: the regulars met, taught, snubbed and posting commissions, under their new names.
+            if (data.Version == 4)
+            {
+                data.Met = data.Met.Select(Renamed).Distinct().ToList();
+                data.Tutored = data.Tutored.Select(Renamed).Distinct().ToList();
+                data.HintsSeen = data.HintsSeen.Select(Renamed).Distinct().ToList();
+                data.Snubbed = (data.Snubbed ?? new List<string>()).Select(Renamed).Distinct().ToList();
+                foreach (var commission in data.Commissions) commission.Patron = Renamed(commission.Patron);
+                data.Version = CurrentVersion;
             }
             return data;
         }
@@ -205,10 +244,14 @@ public sealed class SavedCommission
 /// </summary>
 public sealed class Profile
 {
-    /// <summary>1: 0.27's, the first with a version (every profile before it reads as 1). A newer one isn't read.</summary>
-    public const int CurrentVersion = 1;
+    /// <summary>
+    /// 2: 0.28's new cast (an older profile's regulars and lessons are renamed); 1: 0.27's, the first with a version (every
+    /// profile before it reads as 1). A newer one isn't read.
+    /// </summary>
+    public const int CurrentVersion = 2;
 
-    public int Version { get; set; } = CurrentVersion;
+    /// <summary>As read: a profile from before versions (0.26 and older) has none, and reads as 1. Written as <see cref="CurrentVersion"/>.</summary>
+    public int Version { get; set; } = 1;
 
     public int Runs { get; set; }
 
@@ -318,7 +361,11 @@ public sealed class Profile
 
     static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
 
-    public string ToJson() => JsonSerializer.Serialize(this, Options);
+    public string ToJson()
+    {
+        Version = CurrentVersion;
+        return JsonSerializer.Serialize(this, Options);
+    }
 
     /// <summary>
     /// The profile in this text, or null if it isn't one this version can read (damaged, or from a newer version): the
@@ -333,6 +380,12 @@ public sealed class Profile
             if (profile == null || profile.Version > CurrentVersion || profile.Version < 1) return null;
             profile.Songs ??= new();
             profile.Songs.RemoveAll(s => !Heartsongs.Exists(s));
+            if (profile.Version == 1)
+            {
+                profile.Met = profile.Met.Select(SaveData.Renamed).Distinct().ToList();
+                profile.Taught = profile.Taught.Select(SaveData.Renamed).Distinct().ToList();
+                profile.Version = CurrentVersion;
+            }
             return profile;
         }
         catch (Exception e) when (e is JsonException or NotSupportedException or InvalidOperationException)
@@ -365,7 +418,7 @@ public sealed class Profile
     /// <summary>For the GM: every page of the journal filled, and every Heartsong known.</summary>
     public void KnowAll()
     {
-        Remember(Met, Sellers.All.Select(s => s.Key));
+        Remember(Met, Sellers.All.Concat(Sellers.People).Select(s => s.Key));
         Remember(Found, Collection.Entries.Select(e => e.Entry));
         Remember(FoundEnchanted, Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
         Remember(CuriosSeen, Curios.All.Select(c => c.Key));

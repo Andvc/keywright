@@ -50,13 +50,13 @@ public partial class Main
                 Hud.SetEvent(State);
                 SwitchTo(new CounterPhase());
             }
-            Shop(1, "tam", 0);
+            Shop(1, "pip", 0);
             await Shot("art_01_stall_morning_short");
-            Shop(2, "hob", 2);
+            Shop(2, "garrick", 2);
             await Shot("art_02_thornwick_midday");
-            Shop(3, "orrin", 4);
+            Shop(3, "orme", 4);
             await Shot("art_03_crownhold_evening_tall");
-            Shop(4, "vexis", 4);
+            Shop(4, "tick", 4);
             await Wait(0.6);
             var counter = (CounterPhase)_phase;
             counter.SetMark(Category.Coins, 2, false);
@@ -82,17 +82,17 @@ public partial class Main
                 new(Story.Hood, "Some things are worth more than the Guild can count."),
                 new(Story.Bram, "Then we had better keep them safe.") }, () => { }, "THE ALDRIC KEY", "keyhold"));
             await Shot("art_07_story_figures");
-            var notebook = new NotebookView(State, NotebookView.RegularsPage, current: "orrin") { ZIndex = 30 };
+            var notebook = new NotebookView(State, NotebookView.RegularsPage, current: "orme") { ZIndex = 30 };
             AddChild(notebook);
             await Shot("art_08_notebook_heads");
             notebook.Close();
             await Wait(0.4);
-            Shop(2, "hob", 2);
+            Shop(2, "garrick", 2);
             await Wait(0.4);
             for (int i = 0; i < 3; i++)
             {
                 var chest = new Chest(new[] { new Item(Category.Coins, Rarity.Rare) }, Rarity.Rare, lockTier: LockTiers.All[i + 1]);
-                var visit = Market.Price(new Random(160 + i), Sellers.Get("hob"), chest, State.Tier, 40, Trade.Fixed, "A lock for the art review.");
+                var visit = Market.Price(new Random(160 + i), Sellers.Get("garrick"), chest, State.Tier, 40, Trade.Fixed, "A lock for the art review.");
                 State.Opening = new Purchase(visit, new Appraisal(Rarity.Rare, 1, new[] { Category.Coins }));
                 SwitchTo(new LockpickPhase());
                 await Wait(0.4);

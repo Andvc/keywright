@@ -90,6 +90,18 @@ public static partial class Simulation
 
         public int Commissions, CommissionGold, CurioGold, CurioSpent, Pawned, Short, Grace, Stash, Note;
 
+        /// <summary>The tales: talks had, tools bought at the counter and from Nim, what the tales paid or cost, the beats played.</summary>
+        public int Talks, Offers, NimUpgrades, TaleGold;
+        public readonly List<string> Beats = new();
+
+        /// <summary>Stolen chests: the Wardens sent for, bought by mistake, and what the back room brought back.</summary>
+        public int Reported, StolenBought, StolenBack;
+
+        /// <summary>The tales drawn, what came of them, and where each power stood at the end.</summary>
+        public List<string> Tales = new();
+        public HashSet<string> Flags = new();
+        public Dictionary<Faction, int> Standing = new();
+
         /// <summary>The weeks a night was short and things were pawned.</summary>
         public readonly List<int> ShortWeeks = new();
 
@@ -178,6 +190,7 @@ public static partial class Simulation
         }
 
         PrintMargins(all[Styles[0]], all[Styles[^1]], campaigns);
+        PrintTales(all[Styles[^1]]);
 
         if (quick)
         {
@@ -191,6 +204,12 @@ public static partial class Simulation
             Heartsongs.Chance = chance;
             // Ordinary progression alone (no curios) shouldn't carry the late debt: that takes a build.
             GD.Print($"(no curios)     1.00 {Trial(Characters.Kit, 0, campaigns, curios: false)}");
+            // What the tales are worth: the same without any.
+            TaleBook.Enabled = false;
+            GD.Print($"(no tales)      1.00 {Trial(Characters.Kit, 0, campaigns)}");
+            GD.Print($"(no tales)      0.15 {Trial(Characters.Kit, 0, campaigns, 0.15f)}");
+            GD.Print($"(no tales, no curios) {Trial(Characters.Kit, 0, campaigns, curios: false)}");
+            TaleBook.Enabled = true;
             Diagnose(1, campaigns);
             Diagnose(0.15f, campaigns);
             return;
@@ -233,6 +252,31 @@ public static partial class Simulation
         Learners(Math.Max(50, campaigns / 2));
         Careers(40, 30);
         LessonTest();
+    }
+
+    /// <summary>
+    /// The tales (docs/stories.md), for the careful collector: what a run holds (talks, tools bought at the counter and
+    /// from Nim, what the tales paid, stolen chests reported and bought), each tale's beats played and what came of it,
+    /// and where each power stood at the end.
+    /// </summary>
+    static void PrintTales(List<Log> logs)
+    {
+        GD.Print($"\nTales ({Styles[^1].Name}): per run, {logs.Average(l => l.Talks):0.0} talks, {logs.Average(l => l.Beats.Count):0.0} beats, " +
+                 $"{logs.Average(l => l.Offers):0.0} tools bought at the counter, {logs.Average(l => l.NimUpgrades):0.0} of Nim's upgrades, " +
+                 $"the town's gold {logs.Average(l => l.TaleGold):0}, Wardens sent for {logs.Average(l => l.Reported):0.0}, stolen chests bought " +
+                 $"{logs.Average(l => l.StolenBought):0.0} (back room brought {logs.Average(l => l.StolenBack):0})");
+        foreach (var tale in TaleBook.All)
+        {
+            var drawn = logs.Where(l => l.Tales.Contains(tale.Key)).ToList();
+            if (drawn.Count == 0) continue;
+            double beats = drawn.Average(l => l.Beats.Count(b => b.StartsWith(tale.Key == "defector" ? "skrae." : tale.Key == "fore" ? "fore." : tale.Key + ".")));
+            var outcomes = drawn.SelectMany(l => l.Flags.Where(f => f.StartsWith(tale.Key + ".") || (tale.Key == "defector" && f.StartsWith("skrae."))))
+                .GroupBy(f => f).OrderByDescending(g => g.Count()).Take(6).Select(g => $"{g.Key} {100f * g.Count() / drawn.Count:0}%");
+            GD.Print($"  {tale.Title,-22} drawn {100f * drawn.Count / logs.Count,3:0}%  beats {beats:0.0}/{tale.Beats.Length}  {string.Join(", ", outcomes)}");
+        }
+        GD.Print("  standing at the end (mean; friend / foe):  " + string.Join("  ", Factions.All.Select(f =>
+            $"{f} {logs.Average(l => l.Standing.GetValueOrDefault(f)):+0.0;-0.0} ({100f * logs.Count(l => l.Standing.GetValueOrDefault(f) >= Factions.Strong) / logs.Count:0}/" +
+            $"{100f * logs.Count(l => l.Standing.GetValueOrDefault(f) <= -Factions.Strong) / logs.Count:0})")));
     }
 
     /// <summary>Just how often Heartsongs turn up and are kept (`--sim=songcount`, with `--heartsongs=P` to try a chance).</summary>
@@ -391,8 +435,8 @@ public static partial class Simulation
         {
             var state = new GameState(1) { Guided = false };
             state.SkipTo(seller.Tier, 100000);
-            if (seller.Tier >= 3) state.BuyUpgrade(Upgrades.Get("lamp"));
-            if (seller.Tier >= 4) state.BuyUpgrade(Upgrades.Get("magnet"));
+            if (seller.Tier >= 3) state.Grant("lamp");
+            if (seller.Tier >= 4) state.Grant("magnet");
             int buys = 0, n = 2000;
             float profit = 0, blind = 0;
             for (int i = 0; i < n; i++)
@@ -402,6 +446,8 @@ public static partial class Simulation
                 blind += BlindValue(visit, state, rng);
                 visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
                 int? paid = Deal(visit, state, rng, Care.Tools, out var slip);
+                // A cold chest: the careful player sends for the Wardens, for the finder's share.
+                if (paid is null && state.CanCallWardens(visit)) profit += state.FinderShare;
                 if (paid is not int price) continue;
                 buys++;
                 profit += Open(visit, state, rng, Care.Tools, slip) - price;
@@ -438,6 +484,8 @@ public static partial class Simulation
             var response = visit.Offer(price, rng);
             if (response.Kind != ResponseKind.Accept) return 0;
         }
+        // Bought from someone it wasn't theirs to sell, it won't open: the back room, and the better of a return or the fence.
+        if (visit.Chest.Stolen) return Math.Max(state.FinderShare, price * Wardens.Fence) - price;
         return Open(visit, state, rng, Care.Blind) - price;
     }
 
@@ -664,6 +712,9 @@ public static partial class Simulation
         log.Pieces = state.MapPieces;
         log.MapGiven = state.MapGiven ? 1 : 0;
         log.Curios.UnionWith(state.CurioKeys);
+        log.Tales = state.TalesDrawn.ToList();
+        log.Flags = state.Flags.ToHashSet();
+        foreach (var faction in Factions.All) log.Standing[faction] = state.Standing(faction);
         return (log, state);
     }
 
@@ -799,13 +850,15 @@ public static partial class Simulation
             if (state.StoryToday && state.Week >= 2) rec.Scene(state, Story.WeekStart(state).Count);
             rec.Morning(state);
         }
-        if (state.PeddlerToday && style.Arrives)
-            foreach (var key in style.Given ?? Array.Empty<string>())
-                if (!state.HasCurio(key) && Curios.Reachable(state, Curios.Get(key))) state.GiveCurio(key);
-        if (state.PeddlerToday && style.Curios) VisitPeddler(state, log, rng, style.Skill, style.Focus);
         while (state.NextCustomer())
         {
             var visit = state.Current;
+            // Someone come to talk (a tale's beat, a tool offered): the careful player's answer.
+            if (visit.Talk != null)
+            {
+                Talked(state, log, visit.Talk, style);
+                continue;
+            }
             int tier = state.Tier;
             bool lesson = visit.Lesson != null;
             log.CustomersByTier[tier]++;
@@ -817,6 +870,12 @@ public static partial class Simulation
             int? paid = Deal(visit, state, rng, care, out var slip, out var heard, out int worth, style.Skill);
             if (paid is not int price)
             {
+                // The mark went cold: send for the Wardens (a finder's share), unless the Lockless would turn on you for it.
+                if (state.CanCallWardens(visit) && Strategy.CallWardens(state))
+                {
+                    state.CallWardens(visit);
+                    log.Reported++;
+                }
                 if (visit.Deciding) visit.Pass(rng);
                 // A Heartsong in a chest you can't afford bursts free as you pass on it (not when its seller storms off): always kept.
                 if (visit.Outcome == VisitOutcome.Passed && state.Bursts(visit) is Item burst)
@@ -834,6 +893,16 @@ public static partial class Simulation
                 continue;
             }
             var purchase = state.Buy(visit, slip);
+            // It wasn't theirs to sell: it won't open, and waits in the back room (tonight: returned, or sold to Nim's friends).
+            if (visit.Chest.Stolen)
+            {
+                log.Bought++;
+                log.StolenBought++;
+                log.ProfitByTier[tier] -= price;
+                if (home) log.BySeller[visit.Seller.Key] = (log.BySeller[visit.Seller.Key].Visits, log.BySeller[visit.Seller.Key].Profit - price);
+                rec?.Customer(state, visit, heard, worth, price, null, lesson);
+                continue;
+            }
             var report = slip.Check(visit.Chest);
             bool perfect = report.Perfect;
             var grade = Pick(visit, state, rng, style.Care == Care.Unseen ? Care.Tools : care, style.Skill);
@@ -975,7 +1044,46 @@ public static partial class Simulation
             bool synergyChoice = choosing && state.SynergiesOpen && Synergies.All.Count(s => s.Level(state) > 0) > state.SynergySlots;
             rec.Evening(state, bought.Count, bought, synergyChoice || !before.SetEquals(state.ActiveSynergies), affordable);
         }
+        Night(state, log, rng, style);
         return true;
+    }
+
+    /// <summary>
+    /// The night: a tale's beat at the back door (or the Wardens, or the Lockless), the back room, and Nim's table, every
+    /// night: his upgrades first, then what's laid out.
+    /// </summary>
+    static void Night(GameState state, Log log, Random rng, Style style)
+    {
+        state.StartNight();
+        foreach (var talk in state.Tonight.ToList()) Talked(state, log, talk, style);
+        foreach (var held in state.BackRoom.Where(h => !h.Kept).ToList())
+        {
+            int got = Strategy.ReturnHeld(state, held) ? state.ReturnHeld(held) : state.FenceHeld(held);
+            log.StolenBack += got;
+            log.ProfitByTier[state.Tier] += got;
+        }
+        if (style.Arrives)
+            foreach (var key in style.Given ?? Array.Empty<string>())
+                if (!state.HasCurio(key) && Curios.Reachable(state, Curios.Get(key))) state.GiveCurio(key);
+        if (!style.Curios) return;
+        int spent = state.Today.CurioSpent;
+        while (Strategy.NimUpgrade(state) is Upgrade upgrade && state.BuyOffered(upgrade))
+            log.NimUpgrades++;
+        VisitPeddler(state, log, rng, style.Skill, style.Focus);
+        log.CurioSpent += state.Today.CurioSpent - spent;
+    }
+
+    /// <summary>What the careful player says to someone (a beat, an offer, the night's news), and what the sim notes of it.</summary>
+    static void Talked(GameState state, Log log, Talk talk, Style style)
+    {
+        var choice = Strategy.Choose(state, talk, style.Care >= Care.Tools);
+        int gold = state.Gold;
+        bool owned = talk.Offer != null && state.Has(talk.Offer);
+        state.Choose(talk, choice);
+        log.Talks++;
+        log.TaleGold += state.Gold - gold;
+        if (talk.Offer != null && !owned && state.Has(talk.Offer)) log.Offers++;
+        if (TaleBook.Find(talk.Key) is Core.Beat beat) log.Beats.Add(beat.Key);
     }
 
     /// <summary>Nim's morning: buy what a careful player would, keeping enough back for the Guild.</summary>
@@ -1011,12 +1119,6 @@ public static partial class Simulation
                 var whim = state.PeddlerStock.Where(c => !state.HasCurio(c.Key) && state.Gold - state.CuriosPrice(c) >= state.WorkingPurse).ToArray();
                 curio = whim.Length > 0 && !state.CuriosFull ? rng.PickOne(whim) : null;
                 sell = null;
-            }
-            // Nothing worth it on the counter: ask Nim for another look, as often as he'll give one.
-            while (curio == null && state.CanRerollPeddler)
-            {
-                state.RerollPeddler();
-                (curio, sell) = Strategy.ChooseCurio(state, state.PeddlerStock, focus);
             }
             if (curio == null) return;
             if (sell != null) state.SellCurio(sell);
@@ -1102,7 +1204,7 @@ public static partial class Simulation
             state.SkipTo(seller.Tier, 5000);
             if (tools)
                 foreach (var key in new[] { "lamp", "magnet" })
-                    if (Upgrades.Get(key).MinTier <= seller.Tier) state.BuyUpgrade(Upgrades.Get(key));
+                    if (Upgrades.Get(key).MinTier <= seller.Tier) state.Grant(key);
             var rng = new Random(7);
             var visit = lesson.Make(rng, state.Tier);
             visit.Lesson = lesson;

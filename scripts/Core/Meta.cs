@@ -179,7 +179,7 @@ public static class Challenges
             Loc.T("A wet winter has rusted every old lock in the realm stiff.")),
         new(Wary, false, Loc.T("Wary regulars"), Loc.T("The regulars post one commission fewer each week."),
             Loc.T("Folk aren't sure your stall will last, and won't set you errands.")),
-        new(Sparse, false, Loc.T("Nim's lean month"), Loc.T("Nim lays out three curios, not four."),
+        new(Sparse, false, Loc.T("Nim's lean month"), Loc.T("Nim's lantern lays out no extra curio: he brings one fewer a night once he brings more than one."),
             Loc.T("Pickings have been slim among the Locking's oddments.")),
     };
 
@@ -187,7 +187,7 @@ public static class Challenges
     {
         new(Gifts, true, Loc.T("Welcome gifts"), Loc.T($"Your first {Sellers.Number(Gifted)} customers hand you their chests for a coin each."),
             Loc.T("The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny.")),
-        new(NimsFavour, true, Loc.T("Nim's soft spot"), Loc.T("Nim will show you something else twice a visit, not once."),
+        new(NimsFavour, true, Loc.T("Nim's soft spot"), Loc.T("Nim lays out one more curio every night."),
             Loc.T("Nim owes Bram a favour, and has decided you're it.")),
         new(Savings, true, Loc.T("Bram's savings"), Loc.T("You start with half as much gold again."),
             Loc.T("Bram sold his old cart, and the money's yours."), LeanStart),

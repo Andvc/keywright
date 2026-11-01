@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Keywright.Core;
 
-public enum VisitOutcome { Deciding, Bought, Passed, Left }
+public enum VisitOutcome { Deciding, Bought, Passed, Left, Reported }
 
 public enum ResponseKind { Accept, Counter, TryAgain, Leave }
 
@@ -60,6 +60,19 @@ public sealed class Visit
 
     /// <summary>The lesson this visit teaches, if it's a seller's first visit.</summary>
     public Lesson Lesson { get; set; }
+
+    /// <summary>The tale's beat this visit plays, if it's one (a trading beat: its chest is the tale's).</summary>
+    public string Beat { get; set; }
+
+    /// <summary>A chest given freely, for a lucky coin (a tale's): it's rightfully yours, and nobody's terms apply to it.</summary>
+    public bool Gift { get; set; }
+
+    /// <summary>Someone come to talk, not to sell (a tale's beat, a tool offered): no chest on the counter.</summary>
+    public Talk Talk { get; private init; }
+
+    /// <summary>Someone at the counter to talk: their talk, and an empty chest nobody shows.</summary>
+    public static Visit Talking(SellerDef person, Talk talk) =>
+        new(person, new Chest(Array.Empty<Item>()), Array.Empty<Category>(), Trade.Fixed, 0, 1, talk.Lines.FirstOrDefault()?.Text ?? "") { Talk = talk };
 
     /// <summary>You've read the seller's page in your ledger (clicked them, or opened it) while they waited.</summary>
     public bool LookedUp { get; private set; }
@@ -221,6 +234,15 @@ public sealed class Visit
 
     /// <summary>They ran out of patience and took their chest home.</summary>
     public string TimeUp(Random rng) => Leave(rng).Line;
+
+    /// <summary>The Wardens have been sent for over a chest that isn't the seller's: they run, and it goes home.</summary>
+    public string Report(Random rng)
+    {
+        Outcome = VisitOutcome.Reported;
+        return rng.PickOne(Fled);
+    }
+
+    static readonly string[] Fled = { Loc.T("Wardens? I'm off!"), Loc.T("You'd shop me? Keep it, then!"), Loc.T("Not today, Wardens. Not today.") };
 
     readonly HashSet<Shake> _shook = new();
 

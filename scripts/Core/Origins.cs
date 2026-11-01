@@ -23,7 +23,7 @@ public static class Origins
         new("field", Loc.T("the old battlefield"), Loc.T("weapons, and the coin the dead carried"), new[] { 3f, 5, 1, 1, 0.5f, 0.3f }),
         new("tab", Loc.T("an unpaid tab"), Loc.T("a bit of everything"), new[] { 3f, 3, 2, 3, 1, 0.5f }),
         new("barrow", Loc.T("the Barrow"), Loc.T("grave goods: coin, weapons and gems"), new[] { 3f, 3, 2, 1, 1, 2 }),
-        new("warren", Loc.T("a goblin warren"), Loc.T("stolen shinies: coin, mostly"), new[] { 6f, 2, 1, 1, 0.5f, 2 }),
+        new("warren", Loc.T("a goblin burrow"), Loc.T("shinies a clan has dug up: coin, mostly"), new[] { 6f, 2, 1, 1, 0.5f, 2 }),
         new("camp", Loc.T("an outlaws' camp"), Loc.T("weapons, purses and potions"), new[] { 3f, 4, 1, 3, 1, 0.5f }),
         new("den", Loc.T("a wolf's den"), Loc.T("what the wolves' dinner wore"), new[] { 1f, 2, 5, 0.5f, 0.5f, 0.5f }),
         new("wood", Loc.T("the Old Wood"), Loc.T("brews, elven cloaks and spells on birch bark"), new[] { 0.5f, 0.5f, 4, 4, 3, 0.5f }),
@@ -40,6 +40,7 @@ public static class Origins
         new("dowry", Loc.T("a bride's dowry"), Loc.T("coin for luck, a cloak for warmth, a potion for health"), new[] { 3f, 0.3f, 3, 3, 0.5f, 1 }),
         new("archive", Loc.T("the Archive vaults"), Loc.T("deeds, spellbooks, coin and seals"), new[] { 2f, 1, 1, 1, 4, 2 }),
         new("court", Loc.T("a courtier's chest"), Loc.T("jewels, fine clothes and purses"), new[] { 3f, 1, 3, 2, 1, 4 }),
+        new("pocket", Loc.T("a stranger's pocket"), Loc.T("whatever someone was carrying: purses and trinkets"), new[] { 5f, 1, 1, 2, 1, 3 }),
     };
 
     public static OriginDef Get(string key) => All.First(o => o.Key == key);

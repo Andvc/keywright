@@ -71,7 +71,7 @@ public sealed partial class GameState
     /// <summary>Hesk's back won't let him shake a chest hard.</summary>
     public bool CanShakeHard => !Is(Characters.Hesk);
 
-    /// <summary>Nor will Wenna's mare, for anyone.</summary>
+    /// <summary>Nor will Rook's mare, for anyone.</summary>
     public bool CanShakeHardAt(SellerDef seller) => CanShakeHard && !seller.Packhorse && !EventIs("mourning");
 
     /// <summary>Nor lift it to drop it.</summary>
@@ -213,26 +213,10 @@ public sealed partial class GameState
         return paid;
     }
 
-    /// <summary>How many times Nim has shown you something else on this visit.</summary>
-    public int PeddlerRerolls { get; private set; }
-
-    /// <summary>How many times a visit Nim will show you something else: once, or twice when he has a soft spot for you.</summary>
-    public int RerollsPerVisit => Favoured(Challenges.NimsFavour) ? 2 : 1;
-
-    /// <summary>Nim will pack up what's on the counter and show you something else.</summary>
-    public bool CanRerollPeddler => PeddlerToday && PeddlerRerolls < RerollsPerVisit;
-
-    /// <summary>Nim packs up what's on the counter and lays out something else.</summary>
-    public void RerollPeddler()
-    {
-        if (!CanRerollPeddler) return;
-        PeddlerRerolls++;
-        var shown = PeddlerStock.Select(c => c.Key).ToHashSet();
-        PeddlerStock.Clear();
-        PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day * 31 + 7 * PeddlerRerolls)), this, PeddlerCount, shown));
-        CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
-    }
-
-    /// <summary>How many curios Nim lays out (one fewer in a lean month).</summary>
-    public int PeddlerCount => Curios.Laid - (Under(Challenges.Sparse) ? 1 : 0);
+    /// <summary>
+    /// How many curios Nim lays out tonight: one, and one more for each of his upgrades (his lantern, his stool, his
+    /// standing order) and for a soft spot; one fewer in a lean month, but never none.
+    /// </summary>
+    public int PeddlerCount => Math.Max(1, Curios.Laid + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.NimCards) + (Favoured(Challenges.NimsFavour) ? 1 : 0) -
+                                           (Under(Challenges.Sparse) ? 1 : 0));
 }

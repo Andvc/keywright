@@ -51,9 +51,9 @@ public static class LocTest
             Check(Loc.T("Pass") == "Passen", "German: a text", Loc.T("Pass"));
             string filled = Loc.T($"Day {day} of {days}");
             Check(filled == "Tag 3 von 5", "German: holes filled", filled);
-            string who = "Hob";
+            string who = "Garrick";
             string moved = Loc.T($"{who} asks {13}g");
-            Check(moved == "13g verlangt Hob", "German: holes in another order", moved);
+            Check(moved == "13g verlangt Garrick", "German: holes in another order", moved);
             string one = Loc.Plural(1, $"{1} thing", $"{1} things"), many = Loc.Plural(3, $"{3} thing", $"{3} things");
             Check(one == "1 Ding" && many == "3 Dinge", "German: plural forms", $"{one} / {many}");
             Check(Loc.T("Not in the catalogue") == "Not in the catalogue", "German: a text with no translation shows in English");

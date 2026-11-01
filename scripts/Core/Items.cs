@@ -281,7 +281,7 @@ public static class Categories
     };
 
     /// <summary>
-    /// What a kind of thing looks like in Mother Bramble's dreams: a magpie for coin (they steal it), a thorn for a
+    /// What a kind of thing looks like in Mother Sorrel's dreams: a magpie for coin (they steal it), a thorn for a
     /// weapon, a raven's wing for a cloak, a river for a potion, an owl for a spell, a star for a gem.
     /// </summary>
     public static string Sign(Category kind) => kind switch
@@ -319,7 +319,7 @@ public static class Categories
         _ => Loc.T("singing"),
     };
 
-    /// <summary>A kind's suit in the Locking's deck (Madame Oriel's cards).</summary>
+    /// <summary>A kind's suit in the Locking's deck (Madame Zell's cards).</summary>
     public static string Suit(Category kind) => kind switch
     {
         Category.Coins => Loc.T("Coins"),

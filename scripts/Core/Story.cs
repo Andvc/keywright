@@ -61,7 +61,8 @@ public static class Story
         King => Loc.T("King Aldric"),
         Nim => Peddler.Name,
         StrangerKey => Events.Stranger.Name,
-        _ => speaker,
+        TaleBook.Magpie => Loc.T("The Magpie"),
+        _ => Sellers.Find(speaker)?.Name ?? speaker,
     };
 
     /// <summary>The second evening: the Guild introduces itself, and what Bram owes (on this run's terms).</summary>

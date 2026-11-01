@@ -294,8 +294,8 @@ public static class Curios
     /// <summary>Room for this many curios, more with a curio case.</summary>
     public const int Slots = 3;
 
-    /// <summary>How many curios Nim lays out on a visit (0.22: four for everyone, as Familiar Face, a talent, gave).</summary>
-    public const int Laid = 4;
+    /// <summary>How many curios Nim lays out a night, before his upgrades (0.28: every night, one; 0.22-0.27: four, twice a week).</summary>
+    public const int Laid = 1;
 
     /// <summary>Nim comes every week, from the first.</summary>
     public const int FirstWeek = 1;
@@ -417,17 +417,18 @@ public static class Curios
             pool.Remove(pick);
             fixedCards.Add(pick);
         }
-        if (Leaning(state) is CurioTag leaning)
+        // (With a single card, the night's is left to chance and the leaning odds: one for the leaning every night would be the same card.)
+        if (count >= 2 && Leaning(state) is CurioTag leaning)
         {
             Lay(c => c.Has(leaning));
             // A collector who's building it gets a second.
             if (building.Contains(leaning) && count > 2) Lay(c => c.Has(leaning));
         }
         if (state.Tier > state.PeddlerTier && state.PeddlerTier > 0) Lay(c => c.MinTier == state.Tier && c.Tags.Any(Main.Contains));
-        // Nim's first visit always has something cheap (in place of a card he didn't mean to lay out).
+        // Nim's first night always has something cheap (in place of a card he didn't mean to lay out).
         var commons = pool.Where(c => c.Rarity == CurioRarity.Common).ToArray();
         int loose = stock.FindLastIndex(c => !fixedCards.Contains(c));
-        if (state.Week <= FirstWeek && loose >= 0 && stock.All(c => c.Rarity != CurioRarity.Common) && commons.Length > 0)
+        if (state.Day <= 1 && loose >= 0 && stock.All(c => c.Rarity != CurioRarity.Common) && commons.Length > 0)
             stock[loose] = rng.PickOne(commons);
         return stock;
     }
@@ -492,10 +493,11 @@ public static class Peddler
     // Nim talks about Nim the way other people talk about the weather: cheerfully, and as if it couldn't be helped.
     public static readonly string[] Greetings =
     {
-        Loc.T("Psst! Keywright! Nim's pack is full of things that came out of chests and never went back in. Have a look."),
-        Loc.T("Back again! Nim kept the good ones for you. Well. Nim kept some ones for you."),
-        Loc.T("Quick, before the Guild's men come round the corner. Look, look, but don't point."),
-        Loc.T("Out of a wizard's strongroom, these. The wizard won't miss them. Nim checked."),
+        Loc.T("Psst! Keywright! Shutters down? Good. Nim's pack is full of things that came out of chests and never went back in."),
+        Loc.T("Evening! Nim kept the good ones for you. Well. Nim kept some ones for you."),
+        Loc.T("Quick, before the Guild's night watch comes round the corner. Look, look, but don't point."),
+        Loc.T("Out of a wizard's strongroom, these, this very night. The wizard won't miss them. Nim checked."),
+        Loc.T("A good day? Nim heard. Nim hears everything after dark."),
     };
 
     public static readonly string[] Thanks =
@@ -505,7 +507,15 @@ public static class Peddler
         Loc.T("It likes you. Nim can always tell when they like someone."),
     };
 
-    public static readonly string[] Bye = { Loc.T("Nim's off. Two days, three. Nim comes when Nim comes."), Loc.T("Mind the Guild, Keywright. Nim always does.") };
+    public static readonly string[] Bye = { Loc.T("Nim's off. Tomorrow night, same back door."), Loc.T("Mind the Guild, Keywright. Nim always does."),
+        Loc.T("Sleep well. Nim never does.") };
+
+    /// <summary>When you buy one of his upgrades: more on his table every night.</summary>
+    public static string MoreCards => Loc.T("Oh, Nim likes it here. Nim will bring more. Every night, more!");
+
+    /// <summary>When a back-room chest goes home, or to his friends.</summary>
+    public static string Returned => Loc.T("Back to its owner? How honest. Nim won't tell his friends.");
+    public static string Fenced => Loc.T("Nim's friends will see it gets back to whoever wants it most. For a price. Always a price.");
 
     /// <summary>When a curio would leave you short of Bram's working purse.</summary>
     public static string Stretch => Loc.T("That would leave your purse thin, that would. Still want it?");

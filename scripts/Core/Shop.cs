@@ -107,6 +107,12 @@ public sealed class DayStats
     /// <summary>What Isolde's visitors paid at the door tonight.</summary>
     public int Admission;
 
+    /// <summary>What the day's tales brought in or cost (rewards, fees, fines, the finder's shares).</summary>
+    public int Tales;
+
+    /// <summary>Stolen chests the Wardens were sent for today, and stolen chests bought (now in the back room).</summary>
+    public int Reported, Held;
+
     public int Profit => Earned - Spent;
 }
 
@@ -215,7 +221,7 @@ public sealed partial class GameState
     /// <summary>For the GM: every page of the journal filled (regulars, things, curios), and every Heartsong known.</summary>
     public void KnowAll()
     {
-        Met.UnionWith(Sellers.All.Select(s => s.Key));
+        Met.UnionWith(Sellers.All.Concat(Sellers.People).Select(s => s.Key));
         Known.Found.UnionWith(Collection.Entries.Select(e => e.Entry));
         Known.Enchanted.UnionWith(Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
         Known.Curios.UnionWith(Curios.All.Select(c => c.Key));
@@ -283,7 +289,7 @@ public sealed partial class GameState
     /// <summary>The scripted first day was taught in an earlier run: this one starts with the usual crowd.</summary>
     public bool FirstDayTaught { get; private set; }
 
-    /// <summary>This run teaches the scripted first day (and Mags opens the second): the first run with tips on.</summary>
+    /// <summary>This run teaches the scripted first day (and Bettany opens the second): the first run with tips on.</summary>
     public bool FirstDayScripted => GivesLessons && Tier == 1 && !FirstDayTaught;
 
     public const string FirstDayKey = "firstday", LessonKey = "lesson:";
@@ -471,7 +477,8 @@ public sealed partial class GameState
     public int CustomersPerDay => Math.Max(2, ShopTiers.Customers(Tier) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Customers) + ExhibitionCustomers +
                                             (Shows(Heartsongs.Pipe) ? Heartsongs.PipeCustomers : 0) +
                                             (HasCurio("lantern") ? Curios.LanternCustomers : 0) + (HasCurio("horn") ? Curios.HornCustomers : 0) +
-                                            EventCustomers - (Under(Challenges.ThinCrowds) && DayOfWeek > Guild.DaysPerWeek - Challenges.ThinDays ? 1 : 0) - (QuietOpening ? 1 : 0));
+                                            EventCustomers - (Under(Challenges.ThinCrowds) && DayOfWeek > Guild.DaysPerWeek - Challenges.ThinDays ? 1 : 0) - (QuietOpening ? 1 : 0) +
+                                            (Friend(Faction.Commons) ? 1 : 0) - (Foe(Faction.Commons) ? 1 : 0) + (Flagged(TaleBook.Porter) ? 1 : 0));
 
     /// <summary>The first day the shop's had at this tier (a move inward is bought the evening before).</summary>
     public int TierSince { get; private set; }
@@ -528,6 +535,7 @@ public sealed partial class GameState
             }).ToList(),
         };
         foreach (int count in _acquired) data.Acquired.Add(count);
+        SaveTales(data);
         return data;
     }
 
@@ -593,6 +601,7 @@ public sealed partial class GameState
         state.ActiveSynergies.UnionWith(data.ActiveSynergies.Where(key => Synergies.All.Any(s => s.Key == key)));
         state.Display.AddRange(data.Display.Where(i => i.Category != Category.Heartsong || Heartsongs.Exists(i.Song))
             .Select(i => new Item(i.Category, i.Quality, i.Magic, Song: i.Song)));
+        state.LoadTales(data);
         int kinds = state._acquired.GetLength(0), qualities = state._acquired.GetLength(1);
         for (int i = 0; i < Math.Min(data.Acquired.Count, kinds * qualities); i++)
             state._acquired[i / qualities, i % qualities] = data.Acquired[i];
@@ -620,22 +629,16 @@ public sealed partial class GameState
         Current = null;
         Today = new DayStats();
         _songRng = new Random(unchecked(Seed * 3571 + Day));
-        PeddlerRerolls = 0;
+        Swayed.Clear();
         DipIntoStash();
         if (DayOfWeek == 1) StartWeek();
-        PeddlerStock.Clear();
-        PeddlerPurse = Gold;
-        if (PeddlerToday)
-        {
-            PeddlerStock.AddRange(Curios.Stock(new Random(unchecked(Seed * 6151 + Day)), this, PeddlerCount));
-            PeddlerTier = Tier;
-        }
-        CuriosSeen.UnionWith(PeddlerStock.Select(c => c.Key));
+        DrawTales();
         MeetPeople();
 
         if (Day == 1 && FirstDayScripted)
         {
             Queue.AddRange(FirstDay(Rng));
+            StageTales();
             return;
         }
 
@@ -644,7 +647,8 @@ public sealed partial class GameState
         // a few newcomers (each a lesson) a day: the rest of a new shop's crowd comes in over the next days. Anyone who
         // walked out on Rosa this week stays away, while there's anyone else.
         // Some come in only some days (a delver between barrows, the King, the Maw).
-        var sellers = Sellers.All.Where(s => s.Tier <= Tier && (s.Visits >= 1 || Rng.NextFloat() < s.Visits)).ToArray();
+        // Anyone a tale has taken away (jailed, gone north) stays away; once the Gate's cracking, the Maw comes twice as often.
+        var sellers = Sellers.All.Where(s => s.Tier <= Tier && !Gone.Contains(s.Key) && !Flagged($"away:{s.Key}") && (s.Visits >= 1 || Rng.NextFloat() < Visits(s))).ToArray();
         if (sellers.Count(s => !_snubbed.Contains(s.Key)) >= 2) sellers = sellers.Where(s => !_snubbed.Contains(s.Key)).ToArray();
         float smiths = Synergies.SmithVisits(Active("smith"));
         while (Queue.Count < CustomersPerDay)
@@ -666,11 +670,11 @@ public sealed partial class GameState
         // and Vane's debt besides was too much at once).
         if (Day == 2 && FirstDayScripted)
         {
-            // Instead of the day's last customer, or of Mags herself if she was coming anyway (her own lesson waits).
-            int mags = Queue.FindIndex(v => v.Seller.Key == "mags");
-            if (mags >= 0 && Queue[mags].Lesson != null) Tutored.Remove("mags");
-            Queue.RemoveAt(mags >= 0 ? mags : Queue.Count - 1);
-            Queue.Insert(0, Mags(Rng));
+            // Instead of the day's last customer, or of Bettany herself if she was coming anyway (her own lesson waits).
+            int bettany = Queue.FindIndex(v => v.Seller.Key == TaleBook.Bettany);
+            if (bettany >= 0 && Queue[bettany].Lesson != null) Tutored.Remove(TaleBook.Bettany);
+            Queue.RemoveAt(bettany >= 0 ? bettany : Queue.Count - 1);
+            Queue.Insert(0, Bettany(Rng));
         }
         StageEvent();
         Curiosities();
@@ -682,7 +686,11 @@ public sealed partial class GameState
                     Queue[i] = Queue[i].Given(Rng);
                     given++;
                 }
+        StageTales();
     }
+
+    /// <summary>How often someone comes in: their own habit, and the Maw twice as often once the Unlocking has cracked the Gate.</summary>
+    float Visits(SellerDef seller) => seller.Visits * (seller.Gaze > 0 && Flagged(TaleBook.GateCracked) ? 2 : 1);
 
     /// <summary>
     /// With tips on, at most this many sellers' lessons in one day (the playtest: three, on a day of four or five customers,
@@ -696,7 +704,6 @@ public sealed partial class GameState
     /// </summary>
     void MeetPeople()
     {
-        if (PeddlerToday) People.Add(Story.Nim);
         if (GuildIntroduced) People.Add(Story.Vane);
         if (Week >= 2) People.Add(Story.Hood);
         if (Week >= Story.OfferWeek) People.Add(Story.Mara);
@@ -741,21 +748,21 @@ public sealed partial class GameState
     }
 
     /// <summary>
-    /// The first day teaches one thing per customer: a gentle shake and the slip (Tam never shook his chest), a hard
-    /// shake (Penn shook hers too gently to hear the cloak), and a gentle shake under a clank (Hob shook hard and the
-    /// knife drowned out the coins). The second opens with passing (<see cref="Mags"/>).
+    /// The first day teaches one thing per customer: a gentle shake and the slip (Pip never shook his chest), a hard
+    /// shake (Ada shook hers too gently to hear the cloak), and a gentle shake under a clank (Garrick shook hard and the
+    /// knife drowned out the coins). The second opens with passing (<see cref="Bettany"/>).
     /// </summary>
     static IEnumerable<Visit> FirstDay(Random rng)
     {
-        // Tam names a price today, so the first lesson is only about listening; from tomorrow he asks you to name one.
-        yield return Market.Price(rng, Sellers.Get("tam"), new Chest(new[] { new Item(Category.Coins, Rarity.Common) }), 1, 4, Trade.Fixed,
+        // Pip names a price today, so the first lesson is only about listening; from tomorrow he asks you to name one.
+        yield return Market.Price(rng, Sellers.Get(TaleBook.Pip), new Chest(new[] { new Item(Category.Coins, Rarity.Common) }), 1, 4, Trade.Fixed,
             Loc.T("Fished it out of the millpond this morning. I didn't shake it, it might break! Is {price} okay?"));
-        yield return Scripted(rng, "penn", 3, Category.Garb);
-        yield return Scripted(rng, "hob", 7, Category.Coins, Category.Arms);
+        yield return Scripted(rng, "ada", 3, Category.Garb);
+        yield return Scripted(rng, "garrick", 7, Category.Coins, Category.Arms);
     }
 
-    /// <summary>The second morning's first customer: Mags heard everything there was, and asks what it's worth. Pass.</summary>
-    static Visit Mags(Random rng) => Scripted(rng, "mags", 7, Category.Arms);
+    /// <summary>The second morning's first customer: Bettany heard everything there was, and asks what it's worth. Pass.</summary>
+    static Visit Bettany(Random rng) => Scripted(rng, TaleBook.Bettany, 7, Category.Arms);
 
     static Visit Scripted(Random rng, string seller, int ask, params Category[] kinds) =>
         Market.Price(rng, Sellers.Get(seller), new Chest(kinds.Select(k => new Item(k, Rarity.Common))), 1, ask, Trade.Fixed);
@@ -780,6 +787,14 @@ public sealed partial class GameState
         Gold -= visit.PricePaid;
         Today.Bought++;
         Today.Spent += visit.PricePaid;
+        // It wasn't theirs to sell: the ward won't let go, and it goes to the back room for its owner (or Nim's friends).
+        if (visit.Chest.Stolen)
+        {
+            Hold(visit);
+            HeardStory(visit);
+            BeatBought(visit);
+            return new Purchase(visit, slip);
+        }
         int rebate = Rebate(visit);
         Gold += rebate;
         Today.Spent -= rebate;
@@ -791,8 +806,10 @@ public sealed partial class GameState
         var (claimed, pays) = Claim(visit);
         HeardStory(visit);
         // The Maw's gaze: everyone still waiting today wants a little more.
-        if (visit.Seller.Gaze > 0)
+        // (Not once Skrae's told you how to stand it: the Defector.)
+        if (visit.Seller.Gaze > 0 && !Flagged(TaleBook.GazeKnown))
             foreach (var waiting in Queue) waiting.Raise(visit.Seller.Gaze);
+        BeatBought(visit);
         return new Purchase(visit, slip) { Luck = luck, Claimed = claimed, ClaimPays = pays, Rebate = rebate };
     }
 
@@ -822,6 +839,7 @@ public sealed partial class GameState
     public int Settle(Purchase purchase, bool perfect, int held)
     {
         var seller = purchase.Visit.Seller;
+        if (purchase.Visit.Gift) return 0;
         if (seller.Wager > 0) return perfect ? Money.Round(purchase.Paid * seller.Wager) : 0;
         if (seller.SlipPrice)
             return perfect ? Money.Round(purchase.Paid * Market.SlipRefund)
@@ -889,6 +907,7 @@ public sealed partial class GameState
     {
         Today.Passed++;
         Passed(Current);
+        if (Current?.Beat != null) BeatPassed(Current);
     }
 
     public void Earn(int amount)

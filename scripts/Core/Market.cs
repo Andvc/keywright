@@ -79,7 +79,10 @@ public static class Market
             for (int attempt = 0; attempt < 40 && Misses(seller, chest) != missing; attempt++)
                 chest = Roll(rng, seller, shopTier, colour, boosts, origin);
         }
-        return Price(rng, seller, chest, shopTier, boosts: boosts, origin: origin);
+        var visit = Price(rng, seller, chest, shopTier, boosts: boosts, origin: origin);
+        // Some chests aren't the seller's to sell (Flick's, mostly): whose they are, as the Wardens will post it.
+        if (seller.Steals > 0 && rng.NextFloat() < seller.Steals) chest.Owner = Sellers.StolenFrom(rng, shopTier);
+        return visit;
     }
 
     /// <summary>Where this seller's chest came from this time.</summary>
@@ -501,7 +504,7 @@ public static class Market
                         cards.Add(rng.PickOne(suits.Except(cards).ToArray()));
                 cards = cards.OrderBy(_ => rng.Next()).ToList();
                 string spread = string.Join(", ", cards.Select(Categories.Suit));
-                return new(Loc.T($"the {Sellers.Join(cards.Select(Categories.Suit).ToList())}"), Loc.T($"Madame Oriel's cards: {spread}."), cards.ToArray());
+                return new(Loc.T($"the {Sellers.Join(cards.Select(Categories.Suit).ToList())}"), Loc.T($"Madame Zell's cards: {spread}."), cards.ToArray());
             }
             default:
                 return null;
@@ -528,7 +531,7 @@ public static class Market
 
     static string Articles(Chest chest) => ArticleCount(chest) is var n && n == 1 ? Loc.T("one article") : Loc.T($"{Sellers.Number(n)} articles");
 
-    /// <summary>The sign in Mother Bramble's dream: of what the Wood warded, or else the dearest thing ("nothing at all" for an empty chest).</summary>
+    /// <summary>The sign in Mother Sorrel's dream: of what the Wood warded, or else the dearest thing ("nothing at all" for an empty chest).</summary>
     public static string Dream(Chest chest) => DreamtOf(chest) is Item dreamt ? Categories.Sign(dreamt.Category) : Loc.T("nothing at all");
 
     /// <summary>

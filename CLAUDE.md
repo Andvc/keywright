@@ -93,8 +93,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   is to beat the price (`Appraisal.ChanceAbove`); each item's real quality is rolled around the chest's colour
   (`Categories.Odds`) so openings still surprise. Clues are
   perceptual (which sounds come at which strength, what glows, what the lodestone silences, a hollow drop, what straw
-  muffles) or stated, and always true (where it came from, and what some tell you besides: `SellerDef.States`, Pell's
-  ticket counting every article, Wenna's scale, and the signs that point at a warded thing). Nobody says what they
+  muffles) or stated, and always true (where it came from, and what some tell you besides: `SellerDef.States`, Brass's
+  ticket counting every article, Rook's scale, and the signs that point at a warded thing). Nobody says what they
   heard (v22 retired the claims): a seller prices what they noticed (`Visit.Noticed`, never shown), and the slip
   starts empty, its header saying how they came to their price (`SellerDef.Priced`), so working out what they priced
   is the player's deduction, from how they judge.
@@ -125,9 +125,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   taught, so it comes up the next time it applies; call tips in order of what matters most. What Bram has taught is
   kept in the profile (`Profile.Taught`, `GameState.Taught`) the moment he says it (`Main.NoteTaught`; a lesson once
   its seller is at the counter), and merged into a continued run (`GameState.Remember`), so nothing is taught twice on
-  a profile; the scripted first day (`GameState.FirstDayScripted`) teaches three customers, and Mags (passing) opens
+  a profile; the scripted first day (`GameState.FirstDayScripted`) teaches three customers, and Bettany (passing) opens
   the second. Clicking whoever's at the counter (or the notebook button, or N) opens the notebook on their page, framed
-  (`Visit.LookedUp`); Mother Bramble's lesson teaches it (the `lookup` tip for the others).
+  (`Visit.LookedUp`); Mother Sorrel's lesson teaches it (the `lookup` tip for the others).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
   run (v22), in any seller's chest (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
   it: no seller ever hears one, `SellerDef.Notices`); each one kept makes the next a quarter as likely (`Heartsongs.Fade`,
@@ -165,9 +165,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   legendary capstone. Rarities (`CurioRarity`: common, uncommon, rare, legendary) are rolled per card by week
   (`Curios.Rates`: rares from week 2, legendaries from week 3) and gated by shop (`RarityTier`); a legendary opens for good
   by a feat across runs (`Feat`, `Curios.Feats`, `Profile.Feats`, banked in `Profile.Bank`). Price: a fixed sum by
-  rarity plus a share of the purse Nim found you with (`Curios.Price`, `GameState.PeddlerPurse`). Nim builds with you
-  (`Curios.Stock`): curios sharing a tag four times as likely, always one for the way of trading of the curio you got
-  last (`Leaning`; two once you keep two of it, `Building`), one that opens at a grander shop on his first visit there
+  rarity plus a share of the purse Nim found you with (`Curios.Price`, `GameState.PeddlerPurse`). Nim comes every night
+  (0.28: after the day's end and the Guild, `GameState.StartNight`, `PeddlerPhase`) with one curio (`Curios.Laid`), one
+  more for each of his own upgrades, which he offers at his table (`Upgrade.NimCards`: his lantern, stool and standing
+  order; `GameState.PeddlerCount`), with the curio cases; there's no "show me something else". Nim builds with you
+  (`Curios.Stock`): curios sharing a tag four times as likely, one for the way of trading of the curio you got
+  last once he lays out two or more (`Leaning`; two once you keep two of it, `Building`), one that opens at a grander shop on his first visit there
   (`PeddlerTier`), legendaries only for a way of trading you're building. There's no named rule since v21: a curio
   reaches everything in a chest, and the power index keeps the balance; wards still need naming (that's their puzzle).
   A sight-unseen chest is one bought without a shake, a drop or the lodestone (`Visit.Handled`, set by
@@ -197,8 +200,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   sounds, weighs nothing, isn't counted by a ticket or a bell, and is never priced; it comes out on opening only if the
   slip named it (`Chest.Names`: one more of its kind marked than the chest holds, no kind over-marked, no false false
   bottom), with the reveal the false bottoms used to have (`OpeningPhase.Unward`), and the gut counts it. Each is
-  pointed at by a stated clue (`Clue`, carried by the visit as `Visit.Says`, made by `Market.MakeClue`): Bramble's
-  dream sign, Gerda's dowry custom, Wren's tag, Corisande's riddle, Quill's faded roll, Skrae's echoes, Oriel's cards,
+  pointed at by a stated clue (`Clue`, carried by the visit as `Visit.Says`, made by `Market.MakeClue`): Sorrel's
+  dream sign, Hesper's dowry custom, Ilse's tag, Isaura's riddle, Quire's faded roll, Skrae's echoes, Zell's cards,
   and the Sleepers' Moon's dreams and Wardens' Day's riddles for everyone. `Strategy.WardedKind` is the careful
   player's solution: each is a deduction (a kind named that you can't hear), never a guess. A new puzzle seller needs
   its clue there, a `Visit.WardHint` line, a lesson and a portrait.
@@ -206,9 +209,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   role (`DayRole`, `WeekPlan.Role`), planned a week ahead (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the notebook's
   calendar (`NotebookView.BuildCalendar`, with the Guild's debt across its top): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 300, 4,000 and
   45,000g, then endless x2; Vane introduces it on the second evening, `GameState.IntroDay`); a story week's first day
-  is the story's (`Story.TellsOn`: weeks 1, 2 and 4, and the week after the debt; `GameState.StoryToday`); Nim comes on
-  two days that aren't next to each other (once on a story week; the third day in the first; `GameState.PeddlerToday`);
-  and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
+  is the story's (`Story.TellsOn`: weeks 1, 2 and 4, and the week after the debt; `GameState.StoryToday`); Nim comes
+  every night (0.28); and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
   foreclosure; commissions (`Commissions.cs`) pay for each find as it's handed over, always at least a quarter over
   what it would sell for (`GameState.CommissionPay`, `Patrons.Premium`), so delivering always beats selling; the story's scenes and the shards of the Aldric Key that open the Crown Chest
   (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
@@ -323,6 +325,33 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   binding, and a controller drives the pointer the mouse uses (`GamepadCursor`: the left stick moves it, faster
   while A is held so a flick shakes hard; A is the left button, by `Input.ParseInputEvent`; the D-pad nudges, the
   right stick scrolls), so anything the mouse does, a controller does.
+- The people and their tales (0.28; `docs/world.md` has the order of things and the cast, `docs/stories.md` every tale
+  beat by beat). The cast was replaced: every regular is someone with a place, a faction (`SellerDef.Of`), a want
+  (`Wants`) and things you notice about them (`Facts`, the Magpie's suspects' clues), keeping an old regular's trading
+  rule and, until drawn, their figure (`Look`; `Sellers.LookOf` everywhere a picture is loaded); old keys are mapped
+  (`Sellers.Renamed`, read through by `SaveData.Renamed` for saves (version 5) and the profile (version 2)). People a
+  tale brings who don't trade are `Sellers.People` (Hollis, Tobias, Aubel...). A tale (`TaleDef`, `TaleBook.cs`) is
+  beats (`Beat`): who comes, after which beat and how many days, at what shop, if what (`If`), and either a talk
+  (`Says`, `Asks`: `Choice`s with a cost, a doing that returns the reply, and a `Worth` for the careful player) or a
+  chest (`Brings`, with `Bought`/`Passed` hooks). The engine (`Tales.cs`, a partial of `GameState`) draws a season's
+  tales from the seed (`TaleBook.Draw`: the Shut Chests always, two Brindle, one Thornwick, two Crownhold, the
+  Emporium's), stages at most two beats a day (`StageTales`: a talk joins the queue as a `Visit.Talking`, a chest
+  replaces a regular) and one a night (`StartNight`), and keeps what came of them: `Flags`, `Gone` (who never comes
+  again), `Notices`, `TaleLog`, `Keepsakes`, all in `SaveData`. A tale's secret (who the Magpie is) is drawn from the
+  seed (`TaleBook.Secret`) and never changes; nothing in a tale is a hidden roll. Standing (`Faction`, -3..+3,
+  `GameState.Sway`): at +2 and -2 the commons add or take a customer a day, the Guild takes a tenth off or on every due
+  (`DueFor`, with the King's decree), the Wardens warn or search (`Wardens.Search`), the Lockless pay the fence double
+  or rob (`Wardens.Robbery`); the rest price their people's tools (`StandingPrice`). Talks play in `TalkPhase` (counter or
+  night), answered in the sim by `Strategy.Choose` (the most `Worth`, kinder on a tie). Tools are offered at the counter
+  by the people who make them (`Upgrade.By`, `Offers.cs`; turned down, back in `GameState.OfferAgain` days;
+  `Strategy.WantsOffer` decides as the day's end would); the day's end keeps the building. Stolen chests
+  (`Chest.Owner`, `SellerDef.Steals`: Flick mostly, Corvin now and then, tale chests): the mark goes cold at the first
+  touch (`CounterPhase.MarkAnswers`); from Thornwick you can send for the Wardens (`GameState.CallWardens`: the seller
+  runs, `VisitOutcome.Reported`, a finder's share); bought, it won't open and waits in the back room (`BackRoom`,
+  `Held`) to be returned (`ReturnHeld`) or sold to Nim's friends (`FenceHeld`), at Nim's table. A gift (`Visit.Gift`,
+  a tale's chest given freely for a lucky coin) opens, and no seller's terms apply to it. The sim's "Tales" section
+  reports what a run holds and what came of each tale. A new tale needs its beats in `TaleBook.cs`, its people (and
+  their `Look`), its choices' `Worth`, its flags read wherever their effect lives, and its page in docs/stories.md.
 - Every seller has one way of judging a chest (`Judgment`: listening, counting rattles, weight, colour, a dream, a
   trade they know, no idea) with a blind spot a careful player can see through, one way to trade,
   places their chests come from (`From`, `Origins.cs`: the place decides what a chest tends to hold) with a story for
@@ -330,14 +359,14 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the deal is (`Patience`, `HatesDrop`, `HatesMagnet`, `HatesHardShake`, `ShakeLimit`, `ShakeFee`, `Packs`, `Packhorse`,
   `States`, `Wards`, `Wager`, `Heirloom`, `TakesDearest`, `SlipPrice`, `Gaze`), worded under the chest by `GameState.Terms` (and
   `Visit.Clue` for what they state). `Strategy.Reckon` is the careful player's read of a stated clue. A rule must
-  change what a careful player can work out or do, every visit: one a tool makes moot goes (v19 replaced Wren's and
-  Corisande's sense for magic, which the witchlight made pointless, and Skrae's "hears all but magic", with puzzles).
+  change what a careful player can work out or do, every visit: one a tool makes moot goes (v19 replaced the apprentice's and
+  the noblewoman's sense for magic, which the witchlight made pointless, and Skrae's "hears all but magic", with puzzles).
   `Visits` sets how often they come (the Maw rarely). `Market` rolls and prices their chests; `Visit` trades, and its
   `Explain` says on the results and pass screens why a deal went the way it did;
   `Shop.Buy` takes a seller's due (an heirloom bought back, the devil's dearest thing) and `Shop.Settle` a wager or the King's game. A new rule needs the sim, the bot
   (`Strategy.Levels`, `Worth`, `WorthBuying`) and a lesson. The sim's per-seller table must show a careful player
-  profits from each, and buying blind shouldn't (Tam, who takes a few coins, and the Maw, whose coin costs the rest of
-  the day, are the exceptions). Stories say how they shook it and what they state, never what they heard (`{heft}`,
+  profits from each, and buying blind shouldn't (Pip, who takes a few coins, and the Maw, whose coin costs the rest of
+  the day, are the exceptions; Flick's profit is the Wardens' finder's shares). Stories say how they shook it and what they state, never what they heard (`{heft}`,
   `{colour}`, `{magic}`, `{articles}`, `{pounds}`, `{dream}`, `{clue}`, `{price}`, `{fee}`), and must fit the speech
   bubble (about 170 characters with the price filled in).
 - `ShakeBox` gates sounds with the same rules as `Chest.Audible`: change both together (the shake test checks them).

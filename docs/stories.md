@@ -168,7 +168,7 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 
 1. **The door** (Tobin, from day 5): a door at the bottom of the Barrow, sealed with the Key-mark. *Stake him* (a
    purse) for rope, lamps and two men, for half of what's behind it, or *not this time*.
-2. **The hoard** (Tobin, four days on): half of it's yours: a chest given freely, two colours finer than the shop's.
+2. **The hoard** (Tobin, four days on): half of it's yours: a chest given freely, a colour finer than the shop's.
    **Or the fall** (Bettany, three days on): his men came back without him; a rescue costs another purse. *Pay* (he
    comes back with the chest) or *I can't* (he never comes back; commons -1).
 

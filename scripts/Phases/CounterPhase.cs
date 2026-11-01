@@ -181,7 +181,7 @@ public partial class CounterPhase : Phase
     }
 
     /// <summary>
-    /// Hesk's scale (or what Wenna's game scale read), beside the chest: what everything in it weighs, and what the things
+    /// Hesk's scale (or what Rook's game scale read), beside the chest: what everything in it weighs, and what the things
     /// ticked on the slip would. The difference is what couldn't be heard (or a fake that weighs short).
     /// </summary>
     void BuildScale()
@@ -189,7 +189,7 @@ public partial class CounterPhase : Phase
         var scale = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.35f)).Place(318, 360, 128, 92));
         scale.ZIndex = 10;
         scale.TooltipText = State.Weighs ? Loc.T($"Hesk's scale. {State.Kin.Rules[2]}")
-            : Loc.T($"Wenna's game scale. {Characters.PoundsTable} What it weighs, less what you've ticked, is what you couldn't hear.");
+            : Loc.T($"Rook's game scale. {Characters.PoundsTable} What it weighs, less what you've ticked, is what you couldn't hear.");
         scale.MouseFilter = Control.MouseFilterEnum.Pass;
         scale.AddChild(UiKit.MakeLabel(State.Weighs ? Loc.T("ON THE SCALE") : Loc.T("WENNA'S SCALE"), 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center).Place(0, 6, 128, 20));
         _scale = UiKit.MakeLabel(Characters.Weight(_visit.Chest.Pounds), 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 28, 128, 30);
@@ -301,16 +301,16 @@ public partial class CounterPhase : Phase
     {
         bool firstOfDay = State.Today.Bought + State.Today.Passed == 0;
         bool met = State.Meet(_visit.Seller);
-        // The scripted first day, and Mags opening the second (passing).
+        // The scripted first day, and Bettany opening the second (passing).
         if (State.Tier == 1 && State.GivesLessons && (State.Day == 1 || (State.Day == 2 && firstOfDay && State.FirstDayScripted)))
         {
-            Teach(_visit.Seller.Key == "tam" ? "intro" : $"first_{_visit.Seller.Key}");
+            Teach(_visit.Seller.Key == "pip" ? "intro" : $"first_{_visit.Seller.Key}");
             return;
         }
         // Everyone else gets a word about their own way with a chest, the first morning.
         if (!State.Is(Characters.Kit)) Teach($"kin_{State.Character}");
-        // Mother Bramble's first visit: clicking someone opens their page in the notebook (her lesson teaches it to Kit).
-        if (_visit.Seller.Key == "bramble") Teach("lookup");
+        // Mother Sorrel's first visit: clicking someone opens their page in the notebook (her lesson teaches it to Kit).
+        if (_visit.Seller.Key == "sorrel") Teach("lookup");
         if (State.Day == 2) Teach("colours");
         if (!firstOfDay && State.Day >= 2) Teach("ledger");
         // Once Vane's told of it, the due up top opens the notebook at the debt.
@@ -514,7 +514,7 @@ public partial class CounterPhase : Phase
         Add(UiKit.MakeLabel(Loc.T("Waiting"), 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
         for (int i = 0; i < Math.Min(7, State.Queue.Count); i++)
         {
-            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1, outlined: true));
+            var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Look}.png", new Vector2(44 + i * 38, 668), 1, outlined: true));
             face.Modulate = new Color(0.8f, 0.8f, 0.85f);
         }
     }
@@ -988,7 +988,10 @@ public partial class CounterPhase : Phase
     /// <summary>You've laid a hand on the chest: a price for it sight unseen is off, and the seller says so.</summary>
     void Handled()
     {
-        if (_visit.Handle() is not string line || Concluded) return;
+        bool first = !_visit.Handled;
+        string line = _visit.Handle();
+        if (first) MarkAnswers();
+        if (line == null || Concluded) return;
         // The price note under the chest loses its sight-unseen part (and goes, if that was all of it).
         int at = _priceNote == null ? -1 : _noteLines.IndexOf(_priceNote);
         if (at >= 0)
@@ -1083,6 +1086,72 @@ public partial class CounterPhase : Phase
         Refresh();
     }
 
+    Button _wardens;
+
+    /// <summary>
+    /// The Key-mark answers the first time you lay a hand on a chest: cold, if it isn't the seller's to sell (it won't open
+    /// for whoever buys it). From Thornwick in, you can send for the Wardens instead.
+    /// </summary>
+    void MarkAnswers()
+    {
+        if (!_visit.Chest.Stolen || Concluded) return;
+        Note(Loc.T("Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."));
+        Sfx.Play("strain", 1.6f, -10);
+        Game.Flash(new Color(0.55f, 0.75f, 1f), 0.25f, 0.4f);
+        Teach("stolen");
+        if (!State.CanCallWardens(_visit)) return;
+        _wardens = UiKit.MakeButton(Loc.T($"Send for the Wardens (+{State.FinderShare}g)"), Palette.Warn, 16, SendForWardens).Place(PanelX, 648, PanelW, 40);
+        _wardens.TooltipText = Loc.T("The seller runs, the chest goes home to its owner, and the Wardens pay you a finder's share. The Lockless won't thank you.");
+        _footer.Visible = false;
+        _panel.AddChild(_wardens);
+        Game.Moment("02_cold", 0.4);
+    }
+
+    /// <summary>
+    /// Sends for the Wardens over a cold chest: the seller runs, the chest goes home, and the finder's share is yours
+    /// (the bot uses this).
+    /// </summary>
+    public void SendForWardens()
+    {
+        if (Busy || Concluded || !State.CanCallWardens(_visit)) return;
+        int share = State.FinderShare;
+        _seller.Say(State.CallWardens(_visit), Palette.Bad);
+        State.Pass();
+        Game.Hud.SetGold(State.Gold);
+        Sfx.PlayGroup("pay");
+        FloatText($"+{share}g", new Vector2(1036, 560), Palette.Gold, 32);
+        if (_wardens != null) _wardens.Visible = false;
+        ShowOutcome(Loc.T("THE WARDENS"), Loc.T("Hollis's men take the chest home to its owner, and pay you the finder's share."), Palette.Warn, 0.8);
+    }
+
+    /// <summary>Whether the Wardens can be sent for now (the bot checks).</summary>
+    public bool CanSendForWardens => !Busy && !Concluded && State.CanCallWardens(_visit);
+
+    /// <summary>A panel over the counter (the chest gone, one way or another), then on to the next customer.</summary>
+    async void ShowOutcome(string title, string text, Color color, double delay)
+    {
+        _busy = true;
+        EndLesson();
+        Refresh();
+        await Wait(delay);
+        if (!Alive) return;
+        var away = _shake.CreateTween().SetParallel();
+        away.TweenProperty(_shake, "position:x", -360f, 0.5f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
+        away.TweenProperty(_shake, "modulate:a", 0f, 0.5f);
+        Sfx.Play("whoosh", 0.8f, -8);
+        await Wait(0.5);
+        if (!Alive) return;
+        _reveal = Add(UiKit.MakePanel(color.Darkened(0.2f)).Place(312, 96, 492, 150));
+        _reveal.ZIndex = 20;
+        _reveal.AddChild(UiKit.MakeLabel(title, 24, color, HorizontalAlignment.Center, outline: 4).Place(0, 14, 492, 30));
+        _reveal.AddChild(UiKit.MakeLabel(text, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(24, 52, 444, 90));
+        bool last = State.Queue.Count == 0;
+        _buy.Visible = _pass.Visible = _offer.Visible = _slider.Visible = false;
+        var layer = Add(new Node2D { ZIndex = 10 });
+        layer.AddChild(UiKit.MakeButton(last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Continue).Place(PanelX, 590, PanelW, 50));
+        Game.Moment("03_outcome", 0.6);
+    }
+
     public void Buy()
     {
         if (Busy || !TradeOpen || !_visit.CanBuy || State.Gold < _visit.Ask) return;
@@ -1134,6 +1203,16 @@ public partial class CounterPhase : Phase
         Sfx.PlayGroup("pay");
         FloatText($"-{_visit.PricePaid}g", new Vector2(1036, 560), Palette.Gold, 32);
 
+        // It wasn't theirs to sell: the ward won't let go, and it goes to the back room.
+        if (_visit.Chest.Stolen)
+        {
+            _busy = false;
+            Sfx.Play("strain", 0.8f, -4);
+            ShowOutcome(Loc.T("THE WARD WON'T LET GO"),
+                Loc.T($"It wasn't {_visit.Seller.Short}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you " +
+                      "can return it to its owner, or sell it to Nim's friends."), Palette.Bad, 0.6);
+            return;
+        }
         await Wait(1.0);
         if (!Alive) return;
         var exit = _shake.CreateTween();

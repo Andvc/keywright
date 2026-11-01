@@ -14,7 +14,7 @@ public static class Hints
     {
         // The first day: one lesson per customer.
         ["intro"] = Loc.T("Morning! Here's the trick of it: a chest opens for you once you've paid for it, and nobody can see inside, so " +
-                    "everyone shakes it and guesses. Tam never even shook his. Drag the chest slowly from side to side: that's a " +
+                    "everyone shakes it and guesses. Pip never even shook his. Drag the chest slowly from side to side: that's a " +
                     "gentle shake."),
         ["kin_hesk"] = Loc.T("Your back won't take a hard shake or a drop, Hesk, but your scale doesn't lie. Weigh what you heard against " +
                        "what's on the scale: whatever's left over is something you couldn't hear, or something under a false bottom."),
@@ -25,15 +25,21 @@ public static class Hints
         ["heard_Coins"] = Loc.T("Hear that jingle? Coin. Light things rattle at the gentlest shake. Tick Coin on your slip, there on the right."),
         ["slip"] = Loc.T("Your slip adds up what you've ticked, valued as good as the chest's colour promises. The bar underneath is your " +
                    "odds that it's worth more than the price: the greener, the safer."),
-        ["first_penn"] = Loc.T("Penn only shook it gently. Nothing heavy or soft stirs for a gentle shake, so she's priced only what she " +
+        ["first_ada"] = Loc.T("Ada only shook it gently. Nothing heavy or soft stirs for a gentle shake, so she's priced only what she " +
                          "heard. Try every strength yourself: gentle, firm and hard."),
         ["heard_Garb"] = Loc.T("That flump is a cloak. Soft things only make a sound when you shake hard."),
-        ["first_hob"] = Loc.T("Hob shook it hard, and when something clanks, it drowns out anything delicate. Shake it yourself, at every strength."),
+        ["first_garrick"] = Loc.T("Garrick shook it hard, and when something clanks, it drowns out anything delicate. Shake it yourself, at every strength."),
         ["heard_Arms"] = Loc.T("Clank: a weapon, an axe or a blade. It only moves when you shake firmly, and while it's clanking you can't " +
                          "hear anything delicate. Shake gently to hear past it."),
-        ["first_mags"] = Loc.T("Mags counts the rattles at a firm shake and charges the same for each. If you can't hear anything she " +
+        ["first_bettany"] = Loc.T("Bettany counts the rattles at a firm shake and charges the same for each. If you can't hear anything she " +
                          "didn't, pass: a seller always asks a bit more than what they've heard is worth."),
         ["passed"] = Loc.T("When you pass, they take it home unopened, and you'll never know for sure. But your gut usually has an opinion."),
+        ["stolen"] = Loc.T("Your mark went cold: that chest isn't theirs to sell, and it won't open for whoever buys it. Pass on it, or send for " +
+                     "the Wardens: they pay a finder's share."),
+        ["tales"] = Loc.T("Not everyone comes to sell. People have their own troubles, and what you say to them comes back: who comes, what " +
+                    "they bring, and who's on your side. The notebook's Town page keeps track."),
+        ["offer"] = Loc.T("The best tools aren't sold in shops: the people who make them bring them to the counter. Say no, and they'll ask " +
+                    "again in a few days."),
         ["opened"] = Loc.T("A tick is a good read. A cross is something to listen for next time."),
         ["dayend"] = Loc.T($"That's a day's trading. Every coin goes toward the stall: once it's earned {GameState.UpgradesAt}g, all told, we'll talk about Thornwick."),
 
@@ -75,9 +81,9 @@ public static class Hints
         // The run: the Guild's dues, curios, commissions, events.
         ["dues"] = Loc.T("Paid. Next week the Guild wants more, and more again the week after. Whatever you spend on the shop has to " +
                    "earn its keep before Vane comes back."),
-        ["peddler"] = Loc.T("Nim sells curios: oddments from the Locking, each bending one rule of the trade. You've only so much room " +
-                      "for them, so pick ones that work together. Nim notices what you buy and brings more like it, and keeps his " +
-                      "rarest for a real collector. Don't ask what Nim is."),
+        ["peddler"] = Loc.T("Nim comes every night after closing with curios: oddments from the Locking, each bending one rule of the " +
+                      "trade. One a night at first; his lantern brings more. Pick ones that work together: Nim notices what you buy and " +
+                      "brings more like it. Don't ask what Nim is."),
         ["commissions"] = Loc.T("The regulars want things now: see the board on the left. When something they want comes out of a chest, " +
                           "hand it over instead of selling it. A commission always pays more than a sale, and a lot pays piece by piece."),
         ["deliver"] = Loc.T("Someone wants this! Deliver it: a commission always pays more than selling it would."),
@@ -109,7 +115,7 @@ public static class Hints
                    "row to mark one enchanted."),
         ["counted"] = Loc.T("Two of a kind: each one adds its value. Sellers who don't count only price one."),
         ["glow"] = Loc.T("It glowed! That one's enchanted, and worth twice as much. Click the star on its row to mark it."),
-        ["tier4"] = Loc.T("The Royal Emporium. Court folk, the Maw's creatures up through the cracks in the Gate, and Silas, who sells " +
+        ["tier4"] = Loc.T("The Royal Emporium. Court folk, the Maw's creatures up through the cracks in the Gate, and Gilt, who sells " +
                     "demon gold: gilded iron that jingles just like the real thing. A lodestone would catch it."),
         ["magnet"] = Loc.T("The lodestone's on, so iron can't move. Weapons go quiet, and nothing drowns out the delicate things. Demon " +
                      "gold, which is iron under the gilt, goes quiet too."),
@@ -125,31 +131,32 @@ public static class Hints
 
         // A regular with nothing new to teach gets a tip the first time they come in after the first day; the rest have
         // a lesson (Lessons.cs). Bram's kin who come knowing the trade still get his word on each seller's terms.
-        ["seller_penn"] = Loc.T("Penn only shakes gently, so heavy things and soft things make no sound for her."),
-        ["seller_dorrin"] = Loc.T("Dorrin's Barrow chests are rotten: about two seconds of shaking, all told. One strength, then: pick it well."),
-        ["seller_snikkit"] = Loc.T("Snikkit puts his price up a tenth for every strength you try after the first. Pick two: gentle and hard."),
-        ["seller_bramble"] = Loc.T("Mother Bramble always dreams true, in signs. If you can't hear what she dreamt of, it's warded: name it."),
-        ["seller_gerda"] = Loc.T("A Thornwick dowry always holds coin, a cloak and a potion. Whichever of the three you can't hear is warded."),
-        ["seller_wren"] = Loc.T("Wren's tag lists every kind of thing packed. A kind on the tag that never makes a sound is warded: name it."),
-        ["seller_quill"] = Loc.T("Quill's ward-roll names the warded thing, faded. Make out the name, and tick its kind."),
-        ["seller_oriel"] = Loc.T("Madame Oriel's cards: a suit drawn twice is what the ward holds. Three different suits, and nothing's warded."),
+        ["seller_ada"] = Loc.T("Ada only shakes gently, so heavy things and soft things make no sound for her."),
+        ["seller_tobin"] = Loc.T("Tobin's Barrow chests are rotten: about two seconds of shaking, all told. One strength, then: pick it well."),
+        ["seller_nettle"] = Loc.T("Nettle puts her price up a tenth for every strength you try after the first. Pick two: gentle and hard."),
+        ["seller_sorrel"] = Loc.T("Mother Sorrel always dreams true, in signs. If you can't hear what she dreamt of, it's warded: name it."),
+        ["seller_hesper"] = Loc.T("A Thornwick dowry always holds coin, a cloak and a potion. Whichever of the three you can't hear is warded."),
+        ["seller_ilse"] = Loc.T("Ilse's tag lists every kind of thing packed. A kind on the tag that never makes a sound is warded: name it."),
+        ["seller_quire"] = Loc.T("Quire's ward-roll names the warded thing, faded. Make out the name, and tick its kind."),
+        ["seller_zell"] = Loc.T("Madame Zell's cards: a suit drawn twice is what the ward holds. Three different suits, and nothing's warded."),
         ["warded"] = Loc.T("A warded thing makes no sound and weighs nothing. Name it on your slip, and nothing that isn't there, and the " +
                      "ward will give it up."),
         ["engine"] = Loc.T("You could pay off the Guild now. Or buy its Bookkeeping Engine for the same sum: it reads every chest for you, " +
                      "to finish the run quickly."),
-        ["seller_wenna"] = Loc.T("Wenna's scale says what her chest weighs. Take away the weight of what you heard: what's left never " +
+        ["seller_rook"] = Loc.T("Rook's scale says what her chest weighs. Take away the weight of what you heard: what's left never " +
                            "stirred (a cloak is 3 lb, a spell 1)."),
-        ["seller_pell"] = Loc.T("Pell's ticket counts every article, false bottom and all. Count what you hear: one short means one under the floor."),
-        ["seller_ansel"] = Loc.T("Brother Ansel won't have his chests shaken hard: half again if you do. Crypt chests are full of holy cloaks."),
-        ["seller_fennick"] = Loc.T("Fennick packs his chests in straw: everything needs a strength harder to stir, and cloaks and spells won't " +
+        ["seller_brass"] = Loc.T("Brass's ticket counts every article, false bottom and all. Count what you hear: one short means one under the floor."),
+        ["seller_flick"] = Loc.T("Flick's chests are mostly stolen. Lay a hand on each one: if your mark goes cold, send for the Wardens, or pass."),
+        ["seller_cadoc"] = Loc.T("Brother Cadoc won't have his chests shaken hard: half again if you do. Crypt chests are full of holy cloaks."),
+        ["seller_corvin"] = Loc.T("Corvin packs his chests in straw: everything needs a strength harder to stir, and cloaks and spells won't " +
                              "stir at all. Shake firmly, then hard, then drop it."),
-        ["seller_orrin"] = Loc.T("Orrin likes a wager: read his chest exactly, every kind and every count, and he gives back a third of the price."),
-        ["seller_corisande"] = Loc.T("Solve grandmother's riddle. If you can't hear what it's about, it's warded: name it."),
-        ["seller_aldous"] = Loc.T("Sir Aldous takes the best weapon in his chest, for the fee he names. Value what's left."),
-        ["seller_vexis"] = Loc.T("Vexis gives you twelve seconds. Gently, then hard, and decide."),
-        ["seller_malbranche"] = Loc.T("Malbranche is cheap, but the dearest thing inside is his. A chest of many middling things suits his bargain."),
+        ["seller_orme"] = Loc.T("Orme likes a wager: read her chest exactly, every kind and every count, and she gives back a third of the price."),
+        ["seller_isaura"] = Loc.T("Solve grandmother's riddle. If you can't hear what it's about, it's warded: name it."),
+        ["seller_rowan"] = Loc.T("Sir Rowan takes the best weapon in his chest, for the fee he names. Value what's left."),
+        ["seller_tick"] = Loc.T("Tick gives you twelve seconds. Gently, then hard, and decide."),
+        ["seller_sallow"] = Loc.T("Sallow is cheap, but the dearest thing inside is his. A chest of many middling things suits his bargain."),
         ["seller_skrae"] = Loc.T("Skrae's echoes come back off everything, warded or not. An echo with nothing to hear is warded."),
-        ["seller_ermine"] = Loc.T("Lady Ermine prices only her gems; the rest comes free. Some are paste, and she won't have a lodestone near them."),
+        ["seller_vey"] = Loc.T("Countess Vey prices only her gems; the rest comes free. Some are paste, and she won't have a lodestone near them."),
         ["seller_aldo"] = Loc.T("Old Aldo's price is your slip. Get it exactly right and he takes a quarter off; get it wrong and you pay what " +
                           "it holds, and a quarter more."),
         ["seller_maw"] = Loc.T("The Maw sells for one coin, but everyone who comes after him today asks twice as much. Count who's still waiting."),

@@ -36,13 +36,24 @@ public sealed class Chest
     public bool Sealed { get; }
 
     /// <summary>
-    /// Packed in straw, so nothing clinks at the Wardens' toll (Fennick's): everything stirs a strength later than it would,
+    /// Packed in straw, so nothing clinks at the Wardens' toll (Corvin's): everything stirs a strength later than it would,
     /// and what only a hard shake would stir can't be stirred at all.
     /// </summary>
     public bool Packed { get; }
 
     /// <summary>One of the old royal chests, gilded: a colour better than its seller thinks.</summary>
     public bool Gilded { get; }
+
+    /// <summary>
+    /// Whose chest it really is, when it isn't the seller's to sell (stolen, or a sister's sold by her brother), or null.
+    /// The ward knows: a Keywright's mark goes cold on it at the first touch, and it won't open for anyone who buys it.
+    /// </summary>
+    public string Owner { get; set; }
+
+    public bool Stolen => Owner != null;
+
+    /// <summary>A tale's own chest ("reliquary", "vell"), so the tale hears what becomes of it; or null.</summary>
+    public string Tale { get; set; }
 
     public string Skin => Sealed ? "black" : Gilded ? "gold" : Categories.ChestSkin(Quality);
 

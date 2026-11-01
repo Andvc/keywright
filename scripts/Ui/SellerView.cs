@@ -23,8 +23,9 @@ public partial class SellerView : Node2D
 
     public override void _Ready()
     {
-        int height = ShopView.FigureHeight(_seller.Key);
-        bool imp = _seller.Key == "vexis";
+        int height = ShopView.FigureHeight(_seller.Look);
+        // Tick the imp (in Vexis's figure, until the new cast is drawn) stands in front of the counter.
+        bool imp = _seller.Look == "vexis";
         int lift = Math.Max(0, 108 - height);
         var origin = new Vector2(16, imp ? 476 - 159 * 4 : (28 - lift) * 4);
         _body = new Node2D { ZIndex = imp ? -20 : -80 };
@@ -37,7 +38,7 @@ public partial class SellerView : Node2D
             }));
         _body.AddChild(UiKit.Outline(new Sprite2D
         {
-            Texture = GD.Load<Texture2D>($"res://assets/figures/{_seller.Key}.png"),
+            Texture = GD.Load<Texture2D>($"res://assets/figures/{_seller.Look}.png"),
             Centered = false, Position = origin, Scale = Vector2.One * 4,
             TextureFilter = TextureFilterEnum.Nearest,
         }, whole: true));

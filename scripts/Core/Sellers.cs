@@ -81,6 +81,27 @@ public sealed class SellerDef
     public string Key { get; init; }
     public string Name { get; init; }
 
+    string _look;
+
+    /// <summary>The figure they wear (assets/figures/{look}.png): until the new cast is drawn, an old regular's.</summary>
+    public string Look
+    {
+        get => _look ?? Key;
+        init => _look = value;
+    }
+
+    /// <summary>Whose people they are: their standing with you prices the tools they offer (<see cref="GameState.StandingPrice"/>).</summary>
+    public Faction? Of { get; init; }
+
+    /// <summary>What they want, in a sentence, for their page in the notebook.</summary>
+    public string Wants { get; init; }
+
+    /// <summary>What you notice about them, for their page (the Magpie's suspects are known by it).</summary>
+    public string[] Facts { get; init; } = Array.Empty<string>();
+
+    /// <summary>How often their chest isn't theirs to sell (<see cref="Chest.Owner"/>): the mark goes cold on it.</summary>
+    public float Steals { get; init; }
+
     /// <summary>The shop tier at which they start coming in.</summary>
     public int Tier { get; init; }
 
@@ -282,7 +303,7 @@ public sealed class SellerDef
         _ => Loc.T($"{Who} priced everything in it as real."),
     };
 
-    static readonly string[] Titles = { "Little", "Widow", "Old", "Mother", "Brother", "Archmage", "Lady", "Madame", "Sir", "The" }; // loc: keys
+    static readonly string[] Titles = { "Little", "Widow", "Old", "Mother", "Brother", "Archmage", "Lady", "Madame", "Sir", "The", "Aunt", "Master", "Lord", "Countess", "Sergeant", "Mistress" }; // loc: keys
 
     string _short;
 
@@ -316,51 +337,56 @@ public static class Sellers
 
     public static readonly SellerDef[] All =
     {
-        // Brindle Crossroads: villagers, an innkeeper, and a young adventurer back from the Barrow.
+        // Brindle Crossroads: a millpond boy, a soldier's widow, a farmer, the innkeeper, and a delver back from the Barrow.
         new()
         {
-            Key = "tam", Name = Loc.T("Little Tam"), Short = Loc.T("Tam"), Tier = 1, Judge = Judgment.Clueless, Trade = Trade.Offer, EmptyChance = 0.3f, Colours = Stall,
-            From = new[] { ("millpond", 3f), ("attic", 1f) },
+            Key = "pip", Look = "tam", Name = Loc.T("Pip Hollow"), Short = Loc.T("Pip"), Tier = 1, Judge = Judgment.Clueless, Trade = Trade.Offer, EmptyChance = 0.3f, Colours = Stall,
+            Of = Faction.Commons, From = new[] { ("millpond", 3f), ("attic", 1f) },
+            Wants = Loc.T("A coin for his mother, and to be left alone. He has the Key-mark, and doesn't know what it means."),
             Stories = Tell(
-                ("millpond", new[] { Loc.T("I fished it out of the millpond! It's still dripping. Mum says never shake things, so I didn't. What'll you give me?"),
-                                     Loc.T("It was stuck in the mill wheel. Dad says it's full of frogs. How much will you give me for it?") }),
-                ("attic", new[] { Loc.T("It was under Gran's bed. She says I can sell it if I don't tell Mum. What's it worth?"),
-                                  Loc.T("I found it in our hayloft, behind the cat. The cat didn't want it. How much?") })),
-            Habit = Loc.T("A village boy who fishes chests out of the millpond and never shakes them: he has no idea what's in one, and asks you to " +
-                    "name a price. A few coins will do, but a millpond chest is sometimes empty."),
-            Accepts = new[] { Loc.T("Yay! I'm buying sweets!"), Loc.T("Really? Thanks, mister!") },
+                ("millpond", new[] { Loc.T("Fished it out of the millpond! Mum says never shake things, so I didn't. What'll you give me?"),
+                                     Loc.T("It was stuck in the mill wheel. Mum does the mill's washing, and it came up in a sheet! How much will you give me?") }),
+                ("attic", new[] { Loc.T("It was under Gran's bed. She says I can sell it if it buys Mum's soap. What's it worth?"),
+                                  Loc.T("Found it in the hayloft, behind the cat. The cat didn't want it. How much?") })),
+            Habit = Loc.T("A washerwoman's boy of nine who fishes chests out of the millpond and never shakes them: he has no idea what's in one, and " +
+                    "asks you to name a price. A few coins will do, but a millpond chest is sometimes empty."),
+            Accepts = new[] { Loc.T("Yes! Mum can have new soap!"), Loc.T("Really? Thanks, mister!") },
             Refusals = new[] { Loc.T("Is that all? Um... a bit more?"), Loc.T("Mum says don't take the first offer.") },
-            Leaves = new[] { Loc.T("Aww. I'll ask someone else."), Loc.T("Never mind. Gran will have it back.") },
+            Leaves = new[] { Loc.T("Aww. I'll ask at the Crossed Keys."), Loc.T("Never mind. Gran will have it back.") },
             Passes = new[] { Loc.T("Aww. Okay."), Loc.T("I'll throw it back, then.") },
             Startled = new[] { Loc.T("Hey! That's MY chest!"), Loc.T("Whoa! Do it again!") },
-            Fussed = new[] { Loc.T("You broke it! Now it costs more!") },
+            Fussed = new[] { Loc.T("You dropped it! Now it costs more!") },
         },
         new()
         {
-            Key = "penn", Name = Loc.T("Widow Penn"), Short = Loc.T("Penn"), Tier = 1, Shakes = Shake.Gentle, Colours = Stall,
-            From = new[] { ("kitbag", 3f), ("attic", 1f) },
+            Key = "ada", Look = "penn", Name = Loc.T("Ada Kettle"), Short = Loc.T("Ada"), Tier = 1, Shakes = Shake.Gentle, Colours = Stall,
+            Of = Faction.Commons, From = new[] { ("kitbag", 3f), ("attic", 1f) },
+            Wants = Loc.T("To buy her son Jory out of the Guild's debt-house, where he's working off his father's tithe."),
+            Facts = new[] { Loc.T("Right-handed."), Loc.T("Hands red from the washtub, no ink."), Loc.T("Wooden clogs.") },
             Stories = Tell(
-                ("kitbag", new[] { Loc.T("My Tobb's old soldiering chest. I only gave it a gentle shake: I couldn't bear to hear his things rattle about. Would {price} do?"),
-                                   Loc.T("Tobb carried this through two wars, dear. I couldn't bring myself to shake it more than gently. Is {price} fair?") }),
-                ("attic", new[] { Loc.T("It was Tobb's mother's, from the attic. Just a gentle shake, dear: my wrists aren't what they were. {price}?") })),
-            Habit = Loc.T("A soldier's widow selling her husband's things. She only ever shakes a chest gently, so what's heavy (a weapon) or soft " +
-                    "(a cloak) never makes a sound for her, and she doesn't price it. A soldier's kitbag usually holds both."),
-            Accepts = new[] { Loc.T("Thank you, dear. Truly."), Loc.T("Bless you. Tobb would have liked you.") },
+                ("kitbag", new[] { Loc.T("My Rafe's soldiering chest. Only a gentle shake: I couldn't bear to hear his things rattle. {price}, for Jory's debt?"),
+                                   Loc.T("Rafe carried this through two wars. A gentle shake was all I could bear. {price} would help my Jory.") }),
+                ("attic", new[] { Loc.T("From the attic, dear. Just a gentle shake: my wrists aren't what they were. {price}? Every coin's for Jory.") })),
+            Habit = Loc.T("A soldier's widow selling her husband's things to free her son from the Guild's debt-house. She only ever shakes a chest " +
+                    "gently, so what's heavy (a weapon) or soft (a cloak) never makes a sound for her, and she doesn't price it. A soldier's " +
+                    "kitbag usually holds both."),
+            Accepts = new[] { Loc.T("Thank you, dear. That's a week off Jory's debt."), Loc.T("Bless you. Rafe would have liked you.") },
             Leaves = new[] { Loc.T("I'm sorry, dear, I can't stand here all day."), Loc.T("I'll come back when you're less busy.") },
             Passes = new[] { Loc.T("That's all right, dear. I'll keep it a while longer."), Loc.T("Never mind. It was good of you to look.") },
-            Startled = new[] { Loc.T("Oh! Gently, dear, please."), Loc.T("Oh my. Those were Tobb's things.") },
-            Fussed = new[] { Loc.T("Those were Tobb's things! I'm sorry, but I'll want more now.") },
+            Startled = new[] { Loc.T("Oh! Gently, dear, please."), Loc.T("Oh my. Those were Rafe's things.") },
+            Fussed = new[] { Loc.T("Those were Rafe's things! I'm sorry, but I'll want more now.") },
         },
         new()
         {
-            Key = "hob", Name = Loc.T("Hob the Farmer"), Short = Loc.T("Hob"), Tier = 1, Shakes = Shake.Hard, Trade = Trade.Haggle, Colours = Stall,
-            From = new[] { ("field", 1f) },
-            Stories = Tell(("field", new[] { Loc.T("Turned up under the plough on the old battlefield. I gave it a good hard shake, like the hay. {price}, and that's a bargain!"),
-                                             Loc.T("Every spring that field coughs up another one. Shook it like a sack of turnips. Say, {price}?") })),
-            Habit = Loc.T("A farmer who ploughs chests up out of the old battlefield and shakes them hard, so a clanking weapon drowns out any " +
-                    "coin for him. He haggles, and starts at about twice what he'll take."),
-            Accepts = new[] { Loc.T("Deal! Wait till I tell the missus."), Loc.T("Done! Easy money.") },
-            Counters = new[] { Loc.T("Hmm. {price}, and that's my last word."), Loc.T("The wife'd skin me. {price}.") },
+            Key = "garrick", Look = "hob", Name = Loc.T("Garrick Thorne"), Short = Loc.T("Garrick"), Tier = 1, Shakes = Shake.Hard, Trade = Trade.Haggle, Colours = Stall,
+            Of = Faction.Commons, From = new[] { ("field", 1f) },
+            Wants = Loc.T("His rent paid before the Guild's bailiffs come for Brindle Field, which his family's ploughed for two hundred years."),
+            Stories = Tell(("field", new[] { Loc.T("Ploughed it up on Brindle Field, where the last battle was. Shook it hard, like the hay. {price}, and it's the rent!"),
+                                             Loc.T("Every spring that field coughs up another one. Shook it like a sack of turnips. {price}: the bailiffs won't wait.") })),
+            Habit = Loc.T("A farmer who ploughs chests up out of Brindle Field, the old battlefield, and shakes them hard, so a clanking weapon drowns " +
+                    "out any coin for him. He haggles, and starts at about twice what he'll take."),
+            Accepts = new[] { Loc.T("Deal! That's the rent, near enough."), Loc.T("Done! The bailiffs can whistle.") },
+            Counters = new[] { Loc.T("Hmm. {price}, and that's my last word."), Loc.T("The rent won't pay itself. {price}.") },
             Leaves = new[] { Loc.T("Daylight robbery! Forget it."), Loc.T("I've cows to milk. Good day.") },
             Passes = new[] { Loc.T("Your loss. Field's full of them."), Loc.T("Suit yourself. I'll be back after the next ploughing.") },
             Startled = new[] { Loc.T("Steady on! It's not a sack of spuds."), Loc.T("Ha! Mind your toes.") },
@@ -368,13 +394,15 @@ public static class Sellers
         },
         new()
         {
-            Key = "mags", Name = Loc.T("Mags the Innkeeper"), Short = Loc.T("Mags"), Tier = 1, Shakes = Shake.Firm, Judge = Judgment.Counter, Markup = (1.3f, 1.6f), Colours = Stall,
-            From = new[] { ("tab", 1f) },
-            Stories = Tell(("tab", new[] { Loc.T("Some adventurer left this to settle his tab. I gave it a good shake and counted the rattles. So much a rattle, love: {price}."),
-                                           Loc.T("Three nights' ale and a broken bench, and he paid me in chest. I charge by the rattle, love: {price}.") })),
-            Habit = Loc.T("Keeps the Crossed Keys at the crossroads and takes chests for unpaid tabs. She gives one a firm shake, counts the " +
-                    "rattles, and charges the same for each, whatever's rattling: a goblin cleaver costs what a purse of coin does."),
-            Accepts = new[] { Loc.T("Pleasure doing business!"), Loc.T("Done, love. Come by for a pint.") },
+            Key = "bettany", Look = "mags", Name = Loc.T("Bettany Crane"), Short = Loc.T("Bettany"), Tier = 1, Shakes = Shake.Firm, Judge = Judgment.Counter, Markup = (1.3f, 1.6f), Colours = Stall,
+            Of = Faction.Commons, From = new[] { ("tab", 1f) },
+            Wants = Loc.T("To keep the Crossed Keys, and her secrets. Everyone's news passes through her taproom first."),
+            Facts = new[] { Loc.T("Pulls pints left-handed."), Loc.T("Ink on her fingers from the tally."), Loc.T("Wears house slippers; never rides.") },
+            Stories = Tell(("tab", new[] { Loc.T("Some adventurer left this for his tab at the Crossed Keys. Firm shake, and I counted the rattles. So much a rattle: {price}."),
+                                           Loc.T("Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}. And I've news, if you're buying.") })),
+            Habit = Loc.T("Keeps the Crossed Keys at the crossroads, takes chests for unpaid tabs, and hears everything first. She gives one a firm " +
+                    "shake, counts the rattles, and charges the same for each, whatever's rattling: a goblin cleaver costs what a purse of coin does."),
+            Accepts = new[] { Loc.T("Pleasure doing business!"), Loc.T("Done, love. Come by for a pint, and the news.") },
             Leaves = new[] { Loc.T("I've a taproom to run, love. Another time.") },
             Passes = new[] { Loc.T("Suit yourself, love. Someone'll have it."), Loc.T("Fair enough. I'll stick it behind the bar.") },
             Startled = new[] { Loc.T("Oi! I'll want that back in one piece."), Loc.T("Mind my floor, love.") },
@@ -382,51 +410,56 @@ public static class Sellers
         },
         new()
         {
-            Key = "dorrin", Name = Loc.T("Dorrin the Delver"), Short = Loc.T("Dorrin"), Tier = 1, Judge = Judgment.Colour, ShakeLimit = 2f, Markup = (0.9f, 1.15f), Visits = 0.5f, Colours = Stall,
-            From = new[] { ("barrow", 1f) },
+            Key = "tobin", Look = "dorrin", Name = Loc.T("Tobin Reed"), Short = Loc.T("Tobin"), Tier = 1, Judge = Judgment.Colour, ShakeLimit = 2f, Markup = (0.9f, 1.15f), Visits = 0.5f, Colours = Stall,
+            Of = Faction.Commons, From = new[] { ("barrow", 1f) },
+            Wants = Loc.T("One big find, to clear the Guild's claim on his father's tithe and never go down the Barrow again."),
             Stories = Tell(("barrow", new[] { Loc.T("Dragged it up from the Barrow's second vault. The damp's got into the wood: go easy, it won't stand much. {price}."),
-                                              Loc.T("From the Barrow. I lost my torch and my nerve down there, but I kept the chest. It's half rotten. {price}."),
+                                              Loc.T("From the Barrow. Lost my torch and my nerve down there, but I kept the chest. It's half rotten. {price}, for the Guild."),
                                               Loc.T("I ran from a barrow-wight for this, so it's yours for {price}. Careful: it's falling apart.") })),
-            Habit = Loc.T("A young adventurer back from the Barrow. Prices a chest by its colour and never shakes it: Barrow chests are so rotten " +
-                    "they stand about two seconds of shaking before they start to come apart. Grave goods: coin, weapons, gems."),
-            Accepts = new[] { Loc.T("Drinks are on me tonight!"), Loc.T("Right. Back to the Barrow!") },
+            Habit = Loc.T("A young delver who goes down the Barrow to pay what the Guild says his father owed. Prices a chest by its colour and never " +
+                    "shakes it: Barrow chests are so rotten they stand about two seconds of shaking before they start to come apart. Grave " +
+                    "goods: coin, weapons, gems."),
+            Accepts = new[] { Loc.T("That's another week the Guild leaves me be."), Loc.T("Right. Back to the Barrow.") },
             Leaves = new[] { Loc.T("Sorry, I've a barrow to get back to.") },
             Passes = new[] { Loc.T("Fair enough. Someone at the Crossed Keys will want it."), Loc.T("Oh well. More where that came from.") },
             Startled = new[] { Loc.T("Careful, it's rotten!"), Loc.T("Whoa! It'll fall apart!") },
             Fussed = new[] { Loc.T("It's held together with damp and hope! You'll pay more for that.") },
         },
 
-        // Thornwick Market: a goblin, a huntress, a druid, a monk, a smuggler and a matchmaker.
+        // Thornwick Market: a goblin, a bounty-huntress, a druid, the abbey's almoner, a smuggler, the matchmaker, and the Magpie's runner.
         new()
         {
-            Key = "snikkit", Name = Loc.T("Snikkit the Goblin"), Short = Loc.T("Snikkit"), Tier = 2, Shakes = Shake.Gentle, ShakeFee = 0.1f, MissRate = 0.6f, Markup = (1.25f, 1.5f), Visits = 0.5f, Colours = Village,
+            Key = "nettle", Look = "snikkit", Name = Loc.T("Nettle"), Short = Loc.T("Nettle"), Tier = 2, Shakes = Shake.Gentle, ShakeFee = 0.1f, MissRate = 0.6f, Markup = (1.25f, 1.5f), Visits = 0.5f, Colours = Village,
             From = new[] { ("warren", 1f) },
-            Stories = Tell(("warren", new[] { Loc.T("From the warren, yes yes. Very shiny. Snikkit shake it gentle, only gentle. {price}. Looking is free. Looking more, not free!"),
-                                              Loc.T("Snikkit's cousins find it, Snikkit sells it. Gentle shake only. {price}. You want to shake more? You pay more!"),
-                                              Loc.T("Warren chest. Smells of goblin. Is fine. {price}, and more every time you shake it different.") })),
+            Wants = Loc.T("Her clan cleared of every theft in Thornwick, and a burrow with a door: a goblin's worth is the chests she keeps."),
+            Stories = Tell(("warren", new[] { Loc.T("From our burrow. Not stolen! Goblins get the blame for everything. Gentle shake, only gentle. {price}. Looking is free. Looking more, not free!"),
+                                              Loc.T("Nettle's clan dug it up fair and square. Gentle shake only. {price}. You want to shake more? You pay more!"),
+                                              Loc.T("Burrow chest. Smells of goblin. Is fine. {price}, and more every time you shake it different.") })),
             PriceUp = new[] { Loc.T("Ooh, you like! Price go up: {price}."), Loc.T("More shaking, more gold! {price}."), Loc.T("Hehe. {price} now.") },
-            Habit = Loc.T("A goblin selling what his cousins pinch: warren chests, mostly coin. He only shakes gently, so he never prices what " +
-                    "a gentle shake can't stir, and goblins charge for everything, looking included: each strength you try after your " +
-                    "first puts his price up a tenth."),
-            Accepts = new[] { Loc.T("Shiny! Shiny!"), Loc.T("Hehehe. Sucker. I mean, friend.") },
-            Leaves = new[] { Loc.T("Pah! Snikkit has other customers.") },
-            Passes = new[] { Loc.T("Pah! Snikkit sell it to someone with eyes."), Loc.T("Your loss. Snikkit's gain. Snikkit always gains.") },
-            Startled = new[] { Loc.T("Eek! Snikkit's chest!"), Loc.T("Hehe, again! Again!") },
-            Fussed = new[] { Loc.T("You drop Snikkit's chest? Price go up!") },
+            Habit = Loc.T("A goblin of the hills, trading chests out of her clan's burrow (fairly: she'll tell you so). She only shakes gently, so she " +
+                    "never prices what a gentle shake can't stir, and goblins charge for everything, looking included: each strength you try " +
+                    "after your first puts her price up a tenth."),
+            Accepts = new[] { Loc.T("Shiny! Shiny!"), Loc.T("Hehehe. Nettle's burrow gets a door!") },
+            Leaves = new[] { Loc.T("Pah! Nettle has other customers.") },
+            Passes = new[] { Loc.T("Pah! Nettle sell it to someone with eyes."), Loc.T("Your loss. Nettle's gain. Nettle always gains.") },
+            Startled = new[] { Loc.T("Eek! Nettle's chest!"), Loc.T("Hehe, again! Again!") },
+            Fussed = new[] { Loc.T("You drop Nettle's chest? Price go up!") },
         },
         new()
         {
-            Key = "wenna", Name = Loc.T("Wenna the Huntress"), Short = Loc.T("Wenna"), Tier = 2, Judge = Judgment.Weight, States = Clue.Pounds, Packhorse = true,
+            Key = "rook", Look = "wenna", Name = Loc.T("Rook Varga"), Short = Loc.T("Rook"), Tier = 2, Judge = Judgment.Weight, States = Clue.Pounds, Packhorse = true,
             Markup = (0.9f, 1.1f), Colours = Village, LockChance = 0.8f,
-            From = new[] { ("camp", 2f), ("den", 1f) },
+            Of = Faction.Wardens, From = new[] { ("camp", 2f), ("den", 1f) },
+            Wants = Loc.T("The Magpie's bounty, the biggest the Wardens have ever posted."),
+            Facts = new[] { Loc.T("Draws her bow left-handed."), Loc.T("A hunter's clean hands: no ink."), Loc.T("Rides in boots.") },
             Stories = Tell(
-                ("camp", new[] { Loc.T("Took it off an outlaws' camp on the Thornwick road. My game scale says {pounds}. {price}. Go gently: the mare spooks."),
+                ("camp", new[] { Loc.T("Took it off an outlaws' camp on the forest road, for the Wardens' bounty. My scale says {pounds}. {price}. Gently: the mare spooks."),
                                  Loc.T("The outlaws won't be needing it. {pounds} on my scale, and I price by the pound: {price}.") }),
                 ("den", new[] { Loc.T("Found it in a wolf den. The wolves had eaten whoever was carrying it. {pounds} on my scale. {price}."),
                                 Loc.T("Wolves don't hoard, but their dinners did. {pounds}, to the half pound. {price}. Easy with it: the mare.") })),
-            Habit = Loc.T("A huntress who weighs every chest on her game scale and prices it by the pound, so light things (spells, gems) come " +
-                    "cheap. Her chests hang on a mare who bolts at a hard shake, so nobody can shake one hard: take the weight of what you " +
-                    "heard from what the scale says, and what's left is what never stirred."),
+            Habit = Loc.T("A huntress who takes the Wardens' bounties, and sells what the outlaws had. She weighs every chest on her game scale and " +
+                    "prices it by the pound, so light things (spells, gems) come cheap. Her chests hang on a mare who bolts at a hard shake: " +
+                    "take the weight of what you heard from the scale's, and what's left is what never stirred."),
             Accepts = new[] { Loc.T("Done."), Loc.T("Good hunting.") },
             Leaves = new[] { Loc.T("The mare's restless. I'm off.") },
             Passes = new[] { Loc.T("No matter. It'll sell at the next market."), Loc.T("Fair enough.") },
@@ -435,14 +468,16 @@ public static class Sellers
         },
         new()
         {
-            Key = "bramble", Name = Loc.T("Mother Bramble"), Short = Loc.T("Bramble"), Tier = 2, Judge = Judgment.Dreamer, States = Clue.Dream, Wards = 0.5f, Markup = (1.2f, 1.2f),
+            Key = "sorrel", Look = "bramble", Name = Loc.T("Mother Sorrel"), Short = Loc.T("Sorrel"), Tier = 2, Judge = Judgment.Dreamer, States = Clue.Dream, Wards = 0.5f, Markup = (1.2f, 1.2f),
             Colours = Village, HiddenChance = 0f,
-            From = new[] { ("wood", 1f) },
+            Of = Faction.Wood, From = new[] { ("wood", 1f) },
+            Wants = Loc.T("To keep the Guild's axes out of the Old Wood."),
+            Facts = new[] { Loc.T("Right-handed."), Loc.T("Fingers green from her herbs."), Loc.T("Goes barefoot, always.") },
             Stories = Tell(("wood", new[] { Loc.T("The Old Wood let this one go. I slept beside it and dreamt of {dream}. The oaks whispered its price: {price}."),
                                             Loc.T("Moss grew on it for a hundred years. Last night I dreamt of {dream}, and of a price: {price}.") })),
-            Habit = Loc.T("A druid of the Old Wood. Her price comes to her in a dream, and she always dreams true, in signs: of what the Wood warded " +
-                    "in the chest, or else of the dearest thing in it. A magpie is coin, a thorn a weapon, a raven's wing a cloak, a river a " +
-                    "potion, an owl a spell, a star a gem. If you can't hear what she dreamt of, it's warded: name it."),
+            Habit = Loc.T("The Old Wood's druid at Thornwick. Her price comes to her in a dream, and she always dreams true, in signs: of what the Wood " +
+                    "warded in the chest, or else of the dearest thing in it. A magpie is coin, a thorn a weapon, a raven's wing a cloak, a river " +
+                    "a potion, an owl a spell, a star a gem. If you can't hear what she dreamt of, it's warded: name it."),
             Accepts = new[] { Loc.T("As the Wood wills."), Loc.T("The oaks approve.") },
             Leaves = new[] { Loc.T("The Wood is calling me home.") },
             Passes = new[] { Loc.T("The Wood is patient. So am I."), Loc.T("Then it wasn't meant for you. Not yet.") },
@@ -451,29 +486,32 @@ public static class Sellers
         },
         new()
         {
-            Key = "ansel", Name = Loc.T("Brother Ansel"), Short = Loc.T("Ansel"), Tier = 2, Shakes = Shake.Firm, HatesHardShake = true, MissRate = 0.55f, Markup = (1.8f, 2.1f), Colours = Village,
-            From = new[] { ("crypt", 1f) },
-            Stories = Tell(("crypt", new[] { Loc.T("From the abbey crypt, by the Abbot's leave. I shook it firmly, but not hard, please: the saints are resting. {price}."),
-                                             Loc.T("Brother Cuthbert's reliquary. I gave it a firm shake, as is seemly. {price}, for the roof fund.") })),
-            Habit = Loc.T("A young monk selling the crypt's chests to mend the abbey roof. He shakes a chest firmly and won't have it shaken hard " +
-                    "(half again if you do), so the holy cloaks a crypt chest is full of never make a sound for him, and go unpriced."),
-            Accepts = new[] { Loc.T("Bless you."), Loc.T("The roof thanks you.") },
+            Key = "cadoc", Look = "ansel", Name = Loc.T("Brother Cadoc"), Short = Loc.T("Cadoc"), Tier = 2, Shakes = Shake.Firm, HatesHardShake = true, MissRate = 0.55f, Markup = (1.8f, 2.1f), Colours = Village,
+            Of = Faction.Abbey, From = new[] { ("crypt", 1f) },
+            Wants = Loc.T("Bread for the poor at the abbey gate, and the Unopened kept off its steps."),
+            Stories = Tell(("crypt", new[] { Loc.T("From the crypt of Saint Ide, by the Abbot's leave. A firm shake, but not hard, please: the saints are resting. {price}, for the poor."),
+                                             Loc.T("A brother's reliquary, three hundred years asleep. I gave it a firm shake, as is seemly. {price} feeds the gate for a week.") })),
+            Habit = Loc.T("The almoner of the abbey of Saint Ide, selling the crypt's chests to feed the poor at its gate. He shakes a chest firmly and " +
+                    "won't have it shaken hard (half again if you do), so the holy cloaks a crypt chest is full of never make a sound for him, " +
+                    "and go unpriced."),
+            Accepts = new[] { Loc.T("Bless you. The gate eats tonight."), Loc.T("Saint Ide thanks you.") },
             Angry = new[] { Loc.T("Brother! The saints! Half again, for the sacrilege.") },
             Leaves = new[] { Loc.T("Forgive me, I'm due at vespers.") },
-            Passes = new[] { Loc.T("Another day, perhaps. The roof can wait. A little."), Loc.T("Peace be with you.") },
-            Startled = new[] { Loc.T("Brother! Gently!"), Loc.T("Oh! Saint Cuthbert preserve us.") },
+            Passes = new[] { Loc.T("Another day, perhaps. The poor are patient. They have to be."), Loc.T("Peace be with you.") },
+            Startled = new[] { Loc.T("Brother! Gently!"), Loc.T("Oh! Saint Ide preserve us.") },
             Fussed = new[] { Loc.T("Brother! The saints! Half again, for the sacrilege.") },
         },
         new()
         {
-            Key = "fennick", Name = Loc.T("Fennick the Smuggler"), Short = Loc.T("Fennick"), Tier = 2, Shakes = Shake.Firm, Packs = true, Trade = Trade.Haggle, HiddenChance = 0.45f,
-            Bottom = (0.95f, 1.15f), Colours = Village,
-            From = new[] { ("road", 1f) },
+            Key = "corvin", Look = "fennick", Name = Loc.T("Corvin Tallow"), Short = Loc.T("Corvin"), Tier = 2, Shakes = Shake.Firm, Packs = true, Trade = Trade.Haggle, HiddenChance = 0.45f,
+            Bottom = (0.95f, 1.15f), Colours = Village, Steals = 0.15f,
+            Of = Faction.Lockless, From = new[] { ("road", 1f) },
+            Wants = Loc.T("One more good season on the smugglers' road, and then a boat, and the sea."),
             Stories = Tell(("road", new[] { Loc.T("Packed in straw, so nothing clinked at the Wardens' toll. I gave it a firm shake. {price}, and no questions."),
-                                            Loc.T("Came up the smugglers' road. Don't ask. The straw muffles everything, but I gave it a firm shake. {price}.") })),
-            Habit = Loc.T("Runs brandy past the Wardens' toll on the forest road, every chest packed in straw so nothing clinks: everything in it " +
-                    "needs a strength harder to stir, and cloaks and spells won't stir at all. He gives it a firm shake, never drops it, and " +
-                    "smugglers love a false bottom. Haggles."),
+                                            Loc.T("Came up the smugglers' road. Don't ask whose. The straw muffles everything, but I gave it a firm shake. {price}.") })),
+            Habit = Loc.T("Runs brandy and chests past the Wardens' toll on the forest road, every chest packed in straw so nothing clinks: everything " +
+                    "in it needs a strength harder to stir, and cloaks and spells won't stir at all. A firm shake, never a drop, and smugglers love " +
+                    "a false bottom. Haggles. Now and then a chest he carries isn't his to sell."),
             Accepts = new[] { Loc.T("Pleasure. We never met."), Loc.T("Done. Mind the Wardens.") },
             Counters = new[] { Loc.T("{price}, and you're robbing me."), Loc.T("Tch. {price}, final.") },
             Leaves = new[] { Loc.T("Hmph. Plenty of other buyers."), Loc.T("I've a wagon to catch.") },
@@ -483,60 +521,82 @@ public static class Sellers
         },
         new()
         {
-            Key = "gerda", Name = Loc.T("Gerda the Matchmaker"), Short = Loc.T("Gerda"), Tier = 2, Shakes = Shake.Hard, States = Clue.Dowry, Wards = 0.5f, MissRate = 0f,
+            Key = "hesper", Look = "gerda", Name = Loc.T("Aunt Hesper"), Short = Loc.T("Hesper"), Tier = 2, Shakes = Shake.Hard, States = Clue.Dowry, Wards = 0.5f, MissRate = 0f,
             Markup = (1.15f, 1.35f), Colours = Village, HiddenChance = 0f,
-            From = new[] { ("dowry", 1f) },
+            Of = Faction.Commons, From = new[] { ("dowry", 1f) },
+            Wants = Loc.T("To marry off the whole county, and to know whose chests are whose: a matchmaker keeps every family's accounts."),
+            Facts = new[] { Loc.T("Right-handed."), Loc.T("Ink on her fingers from the marriage contracts."), Loc.T("Rides her pony in boots, village to village.") },
             Stories = Tell(("dowry", new[] { Loc.T("A dowry, love, from a wedding that never was: {clue}, as ever. Shaken hard: {price}."),
-                                             Loc.T("The groom ran off to the Barrow. Her dowry: {clue}. Shaken hard: {price}.") })),
-            Habit = Loc.T("Thornwick's matchmaker, selling dowries from weddings that never happened. A Thornwick dowry always holds coin for luck, " +
-                    "a cloak for warmth and a potion for health, and a bride often wards one of the three: whichever you can't hear is the " +
-                    "warded one. Gerda shakes hard and prices what she hears, never what's warded."),
+                                             Loc.T("The groom ran off to the Barrow. Her dowry: {clue}. Shaken hard: {price}. I've another match for her already.") })),
+            Habit = Loc.T("Thornwick's matchmaker, selling dowries from weddings that never happened. A Thornwick dowry always holds coin for luck, a " +
+                    "cloak for warmth and a potion for health, and a bride often wards one of the three: whichever you can't hear is the warded " +
+                    "one. Hesper shakes hard and prices what she hears, never what's warded."),
             Accepts = new[] { Loc.T("May it bring you luck."), Loc.T("Mind you use it well, love.") },
             Leaves = new[] { Loc.T("I've a match to make, love. Toodle-oo.") },
             Passes = new[] { Loc.T("Ah well. There's always another wedding."), Loc.T("Not to your taste? Nor was the groom to hers.") },
             Startled = new[] { Loc.T("Mind the bride's things, love!"), Loc.T("Ooh! Careful.") },
             Fussed = new[] { Loc.T("That's a bride's dowry, love! It'll cost you more now.") },
         },
-
-        // Crownhold: an archmage and his apprentice, a dwarf, a noblewoman, a pawnbroker, an archivist, a mudlark and a knight.
         new()
         {
-            Key = "wren", Name = Loc.T("Wren the Apprentice"), Short = Loc.T("Wren"), Tier = 3, Judge = Judgment.Colour, States = Clue.Tag, Wards = 0.5f, MagicChance = 0.25f,
+            Key = "flick", Look = "stranger", Name = Loc.T("Flick"), Short = Loc.T("Flick"), Tier = 2, Judge = Judgment.Colour, Patience = 20f, Steals = 0.85f, Visits = 0.5f,
+            Markup = (0.55f, 0.7f), Colours = Village,
+            Of = Faction.Lockless, From = new[] { ("pocket", 1f) },
+            Wants = Loc.T("To be paid, to be fed, and never to be caught. Runs chests for the Magpie."),
+            Stories = Tell(("pocket", new[] { Loc.T("It came my way, didn't it. {price}, quick. I can't stand about, mister."),
+                                              Loc.T("Don't ask where it's from and I won't ask what you'll do with it. {price}. Twenty seconds."),
+                                              Loc.T("A {colour} chest for {price}. Cheap, 'cause I'm in a hurry. Yes or no?") })),
+            Habit = Loc.T("A pickpocket of twelve who runs chests for the Magpie: cheap, priced by colour, and in a hurry (twenty seconds). Most of what " +
+                    "Flick sells isn't Flick's to sell: lay a hand on it, and your mark goes cold. From Thornwick in, you can send for the Wardens."),
+            Accepts = new[] { Loc.T("Ta. Never saw you."), Loc.T("Done. I'm off.") },
+            Leaves = new[] { Loc.T("Too slow, mister. I'm gone.") },
+            Passes = new[] { Loc.T("Your loss."), Loc.T("Someone'll have it.") },
+            Startled = new[] { Loc.T("Oi! Quiet!"), Loc.T("Careful! People are looking.") },
+            Fussed = new[] { Loc.T("Drop it again and the price goes up. And the Wardens come running.") },
+        },
+
+        // Crownhold: an archmage and her apprentice, a dwarf, a noblewoman, a pawnbroker, the Archivist, a mudlark and a knight.
+        new()
+        {
+            Key = "ilse", Look = "wren", Name = Loc.T("Ilse Varrow"), Short = Loc.T("Ilse"), Tier = 3, Judge = Judgment.Colour, States = Clue.Tag, Wards = 0.5f, MagicChance = 0.25f,
             HiddenChance = 0f, Markup = (1.3f, 1.5f), Colours = new[] { 0.2f, 0.6f, 0.2f, 0 },
-            From = new[] { ("arcanum", 1f) },
-            Stories = Tell(("arcanum", new[] { Loc.T("Master Orrin's clearing out the Arcanum stores. The tag says: packed, {clue}. Master says {price}."),
-                                               Loc.T("This one's from the third cellar. I can read the tag, at least: {clue}. {price}, Master says.") })),
-            Habit = Loc.T("An archmage's apprentice clearing out the Arcanum stores. Every chest still has its packing tag, listing each kind of " +
-                    "thing packed in it, and the archmages warded the most dangerous: a kind on the tag that you can't hear is warded. " +
-                    "Prices by the chest's colour, as his master tells him."),
-            Accepts = new[] { Loc.T("Oh good! Don't tell Master I was nervous."), Loc.T("Thank you!") },
-            Leaves = new[] { Loc.T("I'm late! Master will turn me into something.") },
-            Passes = new[] { Loc.T("Oh. Master won't be pleased."), Loc.T("That's all right. There's a whole cellar of them.") },
+            Of = Faction.Arcanum, From = new[] { ("arcanum", 1f) },
+            Wants = Loc.T("To be an archmage one day. Lately, to know what her mistress is building in the cellar."),
+            Stories = Tell(("arcanum", new[] { Loc.T("Archmage Orme's clearing out the Arcanum stores. The tag says: packed, {clue}. She says {price}."),
+                                               Loc.T("This one's from the third cellar. I can read the tag, at least: {clue}. {price}, my mistress says.") })),
+            Habit = Loc.T("The Arcanum's apprentice, clearing its stores for her mistress. Every chest still has its packing tag, listing each kind of " +
+                    "thing packed in it, and the archmages warded the most dangerous: a kind on the tag that you can't hear is warded. Prices by " +
+                    "the chest's colour, as she's told."),
+            Accepts = new[] { Loc.T("Oh good! Don't tell my mistress I was nervous."), Loc.T("Thank you!") },
+            Leaves = new[] { Loc.T("I'm late! She'll turn me into something.") },
+            Passes = new[] { Loc.T("Oh. She won't be pleased."), Loc.T("That's all right. There's a whole cellar of them.") },
             Startled = new[] { Loc.T("Careful! Some of those are cursed!"), Loc.T("Eep!") },
-            Fussed = new[] { Loc.T("Master said to keep them in one piece! I'll have to ask more.") },
+            Fussed = new[] { Loc.T("She said to keep them in one piece! I'll have to ask more.") },
         },
         new()
         {
-            Key = "orrin", Name = Loc.T("Archmage Orrin"), Short = Loc.T("Orrin"), Tier = 3, Judge = Judgment.Colour, Wager = 1f / 3, MagicChance = 0.2f, Markup = (1.3f, 1.5f), Colours = Town,
-            From = new[] { ("arcanum", 1f) },
-            Stories = Tell(("arcanum", new[] { Loc.T("I packed this myself, when the Locking was new. {price}. Tell me exactly what's in it, and a third comes back to you."),
-                                               Loc.T("A {colour} chest from my own stores. {price}. Read it true, Keywright, and I'll return a third. I like to see the craft done well.") })),
-            Habit = Loc.T("An archmage old enough to remember the Locking. He prices by the chest's colour, and likes a wager: read his chest " +
-                    "exactly right, every kind and every count, and he gives back a third of what you paid."),
+            Key = "orme", Look = "orrin", Name = Loc.T("Archmage Thessaly Orme"), Short = Loc.T("Orme"), Tier = 3, Judge = Judgment.Colour, Wager = 1f / 3, MagicChance = 0.2f, Markup = (1.3f, 1.5f), Colours = Town,
+            Of = Faction.Arcanum, From = new[] { ("arcanum", 1f) },
+            Wants = Loc.T("To understand the Locking well enough to undo it."),
+            Stories = Tell(("arcanum", new[] { Loc.T("From the Arcanum's oldest stores. {price}. Tell me exactly what's in it, and a third comes back to you."),
+                                               Loc.T("A {colour} chest: {price}. Read it true, Keywright, and I'll return a third. I study how your kind hears.") })),
+            Habit = Loc.T("An archmage of the Arcanum who studies the Locking, and Keywrights. She prices by the chest's colour, and likes a wager: read " +
+                    "her chest exactly right, every kind and every count, and she gives back a third of what you paid."),
             Accepts = new[] { Loc.T("Let us see."), Loc.T("We shall see what you heard.") },
-            Leaves = new[] { Loc.T("I have three hundred years of reading to catch up on. Good day.") },
+            Leaves = new[] { Loc.T("My engine won't build itself. Good day.") },
             Passes = new[] { Loc.T("Prudent. Or timid. We shall never know."), Loc.T("Another time, Keywright.") },
-            Startled = new[] { Loc.T("Hm. Bold."), Loc.T("In my day we were gentler with the Locking's work.") },
+            Startled = new[] { Loc.T("Hm. Bold."), Loc.T("Fascinating. Do that again.") },
             Fussed = new[] { Loc.T("That chest is older than your great-grandmother. A third more, I think.") },
         },
         new()
         {
-            Key = "grit", Name = Loc.T("Grit the Miner"), Short = Loc.T("Grit"), Tier = 3, Shakes = Shake.Hard, Judge = Judgment.Miner, Trade = Trade.Haggle, Bottom = (0.85f, 1f), Colours = Town,
-            From = new[] { ("hold", 1f) },
-            Stories = Tell(("hold", new[] { Loc.T("Dug it out of the deep seam under Ironroot. Gave it a hard shake, with dwarf's hands. {price}."),
+            Key = "durgan", Look = "grit", Name = Loc.T("Durgan Ironhand"), Short = Loc.T("Durgan"), Tier = 3, Shakes = Shake.Hard, Judge = Judgment.Miner, Trade = Trade.Haggle, Bottom = (0.85f, 1f), Colours = Town,
+            Of = Faction.Ironroot, From = new[] { ("hold", 1f) },
+            Wants = Loc.T("Ironroot's crown, locked in the Royal Treasury since the Locking; and a buyer for dwarf-gold the Guild won't let him sell."),
+            Stories = Tell(("hold", new[] { Loc.T("From the deep seam under Ironroot. Hard shake, with dwarf's hands. {price}. Not a coin of it to the Guild, mind."),
                                             Loc.T("From Ironroot hold, sealed since my great-great-grandmother's day. I gave it a proper shake. {price}.") })),
-            Habit = Loc.T("A dwarf of Ironroot who knows a weapon when he hears one. He prices weapons in full, everything else at half, and takes " +
-                    "every tinkle for a diamond. He shakes hard, and haggles."),
+            Habit = Loc.T("A dwarf trader of Ironroot Street, who knows a weapon when he hears one. He prices weapons in full, everything else at half, " +
+                    "and takes every tinkle for a diamond. He shakes hard, and haggles."),
             Accepts = new[] { Loc.T("Done. Back to the deep."), Loc.T("Ha! Done.") },
             Counters = new[] { Loc.T("{price}. Any lower and I'll eat my helmet."), Loc.T("{price}, and that's stone-solid.") },
             Leaves = new[] { Loc.T("You take me for a fool? Good day.") },
@@ -546,29 +606,32 @@ public static class Sellers
         },
         new()
         {
-            Key = "corisande", Name = Loc.T("Lady Corisande"), Short = Loc.T("Corisande"), Tier = 3, Judge = Judgment.Colour, States = Clue.Riddle, Wards = 0.5f, MagicChance = 0.15f,
+            Key = "isaura", Look = "corisande", Name = Loc.T("Lady Isaura Vell"), Short = Loc.T("Isaura"), Tier = 3, Judge = Judgment.Colour, States = Clue.Riddle, Wards = 0.5f, MagicChance = 0.15f,
             HiddenChance = 0f, Markup = (1.05f, 1.3f), Colours = Town,
-            From = new[] { ("strongroom", 1f) },
+            Of = Faction.Crown, From = new[] { ("strongroom", 1f) },
+            Wants = Loc.T("To keep the Vell house standing, despite her brother's debts."),
             Stories = Tell(("strongroom", new[] { Loc.T("Grandmother's trick box. Her riddle's on the lid: \"{clue}\" {price}."),
-                                                  Loc.T("From our strongroom: {price}. Grandmother's riddle: \"{clue}\"") })),
-            Habit = Loc.T("A noblewoman selling her grandmother's trick boxes. Each lid has grandmother's riddle about one thing inside, and if " +
-                    "she warded something, the riddle is about that. Solve it: if you can't hear the answer, it's warded. Prices by colour."),
+                                                  Loc.T("From the Vell strongroom, before my brother finds it: {price}. Grandmother's riddle: \"{clue}\"") })),
+            Habit = Loc.T("A noblewoman of an old house gone poor, selling her grandmother's trick boxes before her brother can. Each lid has " +
+                    "grandmother's riddle about one thing inside, and if she warded something, the riddle is about that. Solve it: if you can't " +
+                    "hear the answer, it's warded. Prices by colour."),
             Accepts = new[] { Loc.T("How delightful."), Loc.T("Grandmother would approve.") },
-            Leaves = new[] { Loc.T("I have a fitting at four. Do excuse me.") },
+            Leaves = new[] { Loc.T("I have creditors at four. Do excuse me.") },
             Passes = new[] { Loc.T("Pity. Grandmother so loved a puzzle."), Loc.T("Another time, perhaps.") },
-            Startled = new[] { Loc.T("Goodness!"), Loc.T("Do be careful, that's a de Vere.") },
-            Fussed = new[] { Loc.T("That is a de Vere heirloom! The price has just gone up.") },
+            Startled = new[] { Loc.T("Goodness!"), Loc.T("Do be careful, that's a Vell.") },
+            Fussed = new[] { Loc.T("That is a Vell heirloom! The price has just gone up.") },
         },
         new()
         {
-            Key = "pell", Name = Loc.T("Pell the Pawnbroker"), Short = Loc.T("Pell"), Tier = 3, Shakes = Shake.Firm, States = Clue.Articles, HatesDrop = true, HiddenChance = 0.35f,
+            Key = "brass", Look = "pell", Name = Loc.T("Silas Brass"), Short = Loc.T("Brass"), Tier = 3, Shakes = Shake.Firm, States = Clue.Articles, HatesDrop = true, HiddenChance = 0.35f,
             PairChance = 0.6f, MissRate = 0.45f, Markup = (2.3f, 2.7f), Colours = Town,
-            From = new[] { ("pawn", 1f) },
-            Stories = Tell(("pawn", new[] { Loc.T("Pledged twenty years ago and never redeemed. The ticket says {articles}. I gave it a firm shake. {price}."),
+            Of = Faction.Commons, From = new[] { ("pawn", 1f) },
+            Wants = Loc.T("His money; and, though he'll never say it, to be thought kind."),
+            Stories = Tell(("pawn", new[] { Loc.T("Pledged twenty years ago on Lantern Lane and never redeemed. The ticket says {articles}. A firm shake. {price}."),
                                             Loc.T("Ticket four thousand and twelve: {articles}, it says. I price a lot kind by kind, at a firm shake. {price}.") })),
-            Habit = Loc.T("Sells pawn lots nobody redeemed, often two or three of a kind. He prices one of each kind he hears and never counts " +
-                    "how many. The pawn ticket counts every article pledged, false bottom and all, and he won't have pledges dropped: " +
-                    "count what you hear against the ticket."),
+            Habit = Loc.T("The pawnbroker of Lantern Lane, selling pledges nobody redeemed, often two or three of a kind. He prices one of each kind he " +
+                    "hears and never counts how many. The pawn ticket counts every article pledged, false bottom and all, and he won't have pledges " +
+                    "dropped: count what you hear against the ticket."),
             Accepts = new[] { Loc.T("Done. No refunds."), Loc.T("Sold, as heard.") },
             Angry = new[] { Loc.T("Not on my pledges! Half again, for the damage.") },
             Leaves = new[] { Loc.T("Time is money, and you're spending mine.") },
@@ -578,15 +641,16 @@ public static class Sellers
         },
         new()
         {
-            Key = "quill", Name = Loc.T("Quill the Archivist"), Short = Loc.T("Quill"), Tier = 3, Shakes = Shake.Firm, Judge = Judgment.Counter, States = Clue.Roll, Wards = 0.5f,
+            Key = "quire", Look = "quill", Name = Loc.T("Master Quire"), Short = Loc.T("Quire"), Tier = 3, Shakes = Shake.Firm, Judge = Judgment.Counter, States = Clue.Roll, Wards = 0.5f,
             HiddenChance = 0f, Markup = (1.85f, 2.15f), Colours = Town,
-            From = new[] { ("archive", 1f) },
-            Stories = Tell(("archive", new[] { Loc.T("From the Royal Archive's vaults, with its ward-roll: {clue}. Three hundred years of damp. So much a rattle: {price}."),
-                                               Loc.T("Unclaimed since the Locking. The ward-roll reads {clue}, as far as I can make it out. I counted the rattles: {price}.") })),
-            Habit = Loc.T("The Royal Archive's clerk, selling unclaimed vault chests with their ward-rolls. A roll names what was warded in its " +
-                    "chest, its letters faded by three hundred years: read the name, and name its kind on your slip. A blank roll means " +
-                    "nothing was warded. He counts the rattles at a firm shake and charges the same for each."),
-            Accepts = new[] { Loc.T("Duly recorded."), Loc.T("I'll file the receipt.") },
+            Of = Faction.Crown, From = new[] { ("archive", 1f) },
+            Wants = Loc.T("The Chest Roll kept true. Lately, to know why it says the Guild's chests aren't the Guild's."),
+            Stories = Tell(("archive", new[] { Loc.T("From the Royal Archive's vaults, with its ward-roll: {clue}. Unclaimed since the Locking. So much a rattle: {price}."),
+                                               Loc.T("The Chest Roll lists no owner for this one. The ward-roll reads {clue}, as far as I can make it out. I counted the rattles: {price}.") })),
+            Habit = Loc.T("The Royal Archivist, keeper of the Chest Roll, selling unclaimed vault chests with their ward-rolls. A roll names what was " +
+                    "warded in its chest, its letters faded by three hundred years: read the name, and name its kind on your slip. A blank roll " +
+                    "means nothing was warded. He counts the rattles at a firm shake and charges the same for each."),
+            Accepts = new[] { Loc.T("Duly recorded."), Loc.T("I'll enter it in the Roll.") },
             Leaves = new[] { Loc.T("The Archive closes at six. Good day.") },
             Passes = new[] { Loc.T("Very well. I'll file it under 'unsold'."), Loc.T("Noted.") },
             Startled = new[] { Loc.T("Careful! That's Crown property."), Loc.T("Oh dear.") },
@@ -594,12 +658,13 @@ public static class Sellers
         },
         new()
         {
-            Key = "shelly", Name = Loc.T("Shelly the Mudlark"), Short = Loc.T("Shelly"), Tier = 3, Shakes = Shake.Hard, Fakes = new[] { Category.Scrolls }, FakeChance = 0.5f,
+            Key = "tilly", Look = "shelly", Name = Loc.T("Tilly Mudge"), Short = Loc.T("Tilly"), Tier = 3, Shakes = Shake.Hard, Fakes = new[] { Category.Scrolls }, FakeChance = 0.5f,
             Colours = new[] { 0.1f, 0.5f, 0.35f, 0.05f },
-            From = new[] { ("river", 1f) },
+            Of = Faction.Commons, From = new[] { ("river", 1f) },
+            Wants = Loc.T("To find the bell she hears tolling under the Aldwater on still nights."),
             Stories = Tell(("river", new[] { Loc.T("Out of the Aldwater mud at low tide! I shook it hard, and I'd bet my boots on what rustles. {price}."),
-                                             Loc.T("The river gives and the river takes. Shook it hard: spellbooks, potions, who knows! {price}.") })),
-            Habit = Loc.T("Combs the Aldwater mud at low tide, shakes hard, and prices every rustle as a drowned wizard's spellbook. Her scroll " +
+                                             Loc.T("The river gives and the river takes. Shook it hard: spellbooks, potions, who knows! {price}. Heard the bell again last night.") })),
+            Habit = Loc.T("A mudlark who combs the Aldwater at low tide, shakes hard, and prices every rustle as a drowned wizard's spellbook. Her scroll " +
                     "cases are often full of river sand, which pours at the gentlest shake. Real parchment only rustles at a hard one."),
             Accepts = new[] { Loc.T("Mud's been good to me!"), Loc.T("The river provides.") },
             Leaves = new[] { Loc.T("Tide's turning. I'm off.") },
@@ -609,28 +674,30 @@ public static class Sellers
         },
         new()
         {
-            Key = "aldous", Name = Loc.T("Sir Aldous"), Short = Loc.T("Aldous"), Tier = 3, Judge = Judgment.Colour, Heirloom = Category.Arms, Markup = (1.1f, 1.3f), Colours = Town,
-            From = new[] { ("warchest", 1f) },
-            Stories = Tell(("warchest", new[] { Loc.T("Grandfather's war chest. If his sword's in it, it's mine, and I'll pay you {fee} for it. The rest is yours for {price}."),
-                                                Loc.T("The de Lacy war chest, from the siege of Harrowgate. Any blade in it is my family's: {fee} for the best. {price} for the chest.") })),
-            Habit = Loc.T("A knight looking for his grandfather's sword. Prices by colour. If there are weapons in his chest, the best of them goes " +
-                    "back to him for the price he names: value what's left."),
-            Accepts = new[] { Loc.T("Honour is satisfied."), Loc.T("For the de Lacys!") },
+            Key = "rowan", Look = "aldous", Name = Loc.T("Sir Rowan Gale"), Short = Loc.T("Rowan"), Tier = 3, Judge = Judgment.Colour, Heirloom = Category.Arms, Markup = (1.1f, 1.3f), Colours = Town,
+            Of = Faction.Crown, From = new[] { ("warchest", 1f) },
+            Wants = Loc.T("His grandfather's sword, and his family's hall back from the Guild, which foreclosed on it."),
+            Stories = Tell(("warchest", new[] { Loc.T("A Gale war chest. If my grandfather's sword's in it, it's mine, and I'll pay you {fee} for it. The rest is yours for {price}."),
+                                                Loc.T("From the siege of Harrowgate. Any blade in it is my family's: {fee} for the best. {price} for the chest.") })),
+            Habit = Loc.T("A knight without a war, whose family's hall the Guild foreclosed on. He's looking for his grandfather's sword. Prices by colour. " +
+                    "If there are weapons in his chest, the best of them goes back to him for the price he names: value what's left."),
+            Accepts = new[] { Loc.T("Honour is satisfied."), Loc.T("For the Gales!") },
             Leaves = new[] { Loc.T("I'm expected at the lists. Good day.") },
             Passes = new[] { Loc.T("Then I shall keep looking."), Loc.T("Another chest, another day.") },
             Startled = new[] { Loc.T("Have a care, sir!"), Loc.T("Steady!") },
             Fussed = new[] { Loc.T("Have a care with my grandfather's things! It'll cost you.") },
         },
 
-        // The Royal Emporium, by the Gilded Gate: demons, a court lady, a cartomancer, a fence, the King, and once in a while the Maw.
+        // The Royal Emporium, by the Gilded Gate: demons, a countess, a cartomancer, the Maw's fence, the King, and once in a while the Maw.
         new()
         {
-            Key = "vexis", Name = Loc.T("Vexis the Imp"), Short = Loc.T("Vexis"), Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.2f, Markup = (1.35f, 1.65f),
+            Key = "tick", Look = "vexis", Name = Loc.T("Tick"), Short = Loc.T("Tick"), Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.2f, Markup = (1.35f, 1.65f),
             Colours = new[] { 0, 0, 0.2f, 0.8f },
             From = new[] { ("gate", 1f) },
+            Wants = Loc.T("Errands run, gold gone down the Gate, and one day off in three hundred years."),
             Stories = Tell(("gate", new[] { Loc.T("Fresh through the Gate, from the Maw's own hoard. {price}. And the sand's already running, mortal."),
-                                            Loc.T("Hot off the Gilded Gate. A {colour} chest: {price}. Tick, tock.") })),
-            Habit = Loc.T("An imp with an hourglass, selling from the Maw's hoard. Prices by colour and never looks inside, and gives you twelve " +
+                                            Loc.T("Errand for the Maw. A {colour} chest: {price}. Tick, tock.") })),
+            Habit = Loc.T("An imp courier with an hourglass, selling from the Maw's hoard. Prices by colour and never looks inside, and gives you twelve " +
                     "seconds to decide. Things from the Maw's hoard are often better than their chest's colour."),
             Accepts = new[] { Loc.T("Delicious."), Loc.T("A pleasure, mortal.") },
             Leaves = new[] { Loc.T("Too slow! Back through the Gate I go.") },
@@ -640,11 +707,12 @@ public static class Sellers
         },
         new()
         {
-            Key = "malbranche", Name = Loc.T("Malbranche"), Short = Loc.T("Malbranche"), Tier = 4, Judge = Judgment.Colour, TakesDearest = true, Markup = (0.5f, 0.65f), Colours = Emporium,
+            Key = "sallow", Look = "malbranche", Name = Loc.T("Lord Sallow"), Short = Loc.T("Sallow"), Tier = 4, Judge = Judgment.Colour, TakesDearest = true, Markup = (0.5f, 0.65f), Colours = Emporium,
             From = new[] { ("gate", 1f) },
+            Wants = Loc.T("To win every bargain he makes. He always has."),
             Stories = Tell(("gate", new[] { Loc.T("From the Maw's hoard. {price}, a pittance. My only condition: the dearest thing inside is mine."),
                                             Loc.T("A bargain, mortal: {price}. When it opens, I take the best of it. Everything else is yours.") })),
-            Habit = Loc.T("A skeletal devil who deals in bargains. His price is low, but the dearest thing inside is his. A chest of many middling " +
+            Habit = Loc.T("A devil of the old law, who deals in bargains. His price is low, but the dearest thing inside is his. A chest of many middling " +
                     "things suits his deal; one grand thing and little else doesn't."),
             Accepts = new[] { Loc.T("Signed and sealed."), Loc.T("A pleasure doing business. It always is.") },
             Leaves = new[] { Loc.T("My time is worth more than yours, mortal.") },
@@ -654,14 +722,15 @@ public static class Sellers
         },
         new()
         {
-            Key = "skrae", Name = Loc.T("Skrae"), Short = Loc.T("Skrae"), Tier = 4, Judge = Judgment.Thorough, States = Clue.Echo, Wards = 0.5f, MissRate = 0f, MagicChance = 0.2f,
+            Key = "skrae", Look = "skrae", Name = Loc.T("Skrae"), Short = Loc.T("Skrae"), Tier = 4, Judge = Judgment.Thorough, States = Clue.Echo, Wards = 0.5f, MissRate = 0f, MagicChance = 0.2f,
             HiddenChance = 0f, Markup = (1.2f, 1.45f), Colours = Emporium,
             From = new[] { ("gate", 1f) },
+            Wants = Loc.T("Out: away from the Gate, and the Maw, for good. It has heard enough."),
             Stories = Tell(("gate", new[] { Loc.T("Shaken gently, then hard: {price}. Then I clicked, like a bat. The echoes: {clue}."),
-                                            Loc.T("I hear every coin in the realm. {price}. My echoes: {clue}. Wards can't stop an echo.") })),
-            Habit = Loc.T("A demon with ears like a bat. It shakes a chest gently, then hard, and prices what it hears, fairly. Then it clicks and " +
-                    "listens to the echoes, which come back off everything inside, warded or not: round is coin, long a weapon, soft a " +
-                    "cloak, hollow a potion, flat a spell, tiny a gem. An echo you can't hear is warded."),
+                                            Loc.T("I hear every coin in the realm, and every word the Maw says. {price}. My echoes: {clue}. Wards can't stop an echo.") })),
+            Habit = Loc.T("A demon with ears like a bat, who has heard enough of the Maw. It shakes a chest gently, then hard, and prices what it hears, " +
+                    "fairly. Then it clicks and listens to the echoes, which come back off everything inside, warded or not: round is coin, long a " +
+                    "weapon, soft a cloak, hollow a potion, flat a spell, tiny a gem. An echo you can't hear is warded."),
             Accepts = new[] { Loc.T("Fair."), Loc.T("You won't regret it. Probably.") },
             Leaves = new[] { Loc.T("I hear someone counting gold elsewhere.") },
             Passes = new[] { Loc.T("I heard that coming."), Loc.T("Hm. Fair enough.") },
@@ -670,14 +739,14 @@ public static class Sellers
         },
         new()
         {
-            Key = "ermine", Name = Loc.T("Lady Ermine"), Short = Loc.T("Ermine"), Tier = 4, Judge = Judgment.Jeweller, Always = Category.Gems, HatesMagnet = true, Fakes = new[] { Category.Gems },
+            Key = "vey", Look = "ermine", Name = Loc.T("Countess Vey"), Nick = Loc.T("the Countess"), Tier = 4, Judge = Judgment.Jeweller, Always = Category.Gems, HatesMagnet = true, Fakes = new[] { Category.Gems },
             FakeChance = 0.25f, Markup = (1.5f, 1.7f), Colours = Emporium,
-            From = new[] { ("strongroom", 1f) },
+            Of = Faction.Crown, From = new[] { ("strongroom", 1f) },
+            Wants = Loc.T("To keep up appearances at court, a jewel at a time. Some of her gems are paste, and she knows which."),
             Stories = Tell(("strongroom", new[] { Loc.T("From my strongroom. My gems, and whatever my maid packed. {price}."),
                                                   Loc.T("The gems alone are worth {price}, I'm told. The rest I couldn't say. My maid packs.") })),
-            Habit = Loc.T("A lady of the court who knows her own jewels and nothing else: she prices her gems at what she paid for them, and " +
-                    "whatever else her maid packed comes free. Some of her gems are paste, and she won't have a lodestone near them (half " +
-                    "again if you try)."),
+            Habit = Loc.T("A countess of the court who knows her own jewels and nothing else: she prices her gems at what she paid for them, and whatever " +
+                    "else her maid packed comes free. Some of her gems are paste, and she won't have a lodestone near them (half again if you try)."),
             Accepts = new[] { Loc.T("Charming."), Loc.T("Do look after them.") },
             Angry = new[] { Loc.T("A lodestone? On MY gems? Half again, for the insult.") },
             Leaves = new[] { Loc.T("I'm expected at court. Good day.") },
@@ -687,14 +756,15 @@ public static class Sellers
         },
         new()
         {
-            Key = "oriel", Name = Loc.T("Madame Oriel"), Short = Loc.T("Oriel"), Tier = 4, Judge = Judgment.Colour, States = Clue.Cards, Wards = 0.5f, MagicChance = 0.15f, HiddenChance = 0f,
+            Key = "zell", Look = "oriel", Name = Loc.T("Madame Zell"), Short = Loc.T("Zell"), Tier = 4, Judge = Judgment.Colour, States = Clue.Cards, Wards = 0.5f, MagicChance = 0.15f, HiddenChance = 0f,
             Markup = (1.3f, 1.5f), Colours = Emporium,
-            From = new[] { ("court", 1f) },
+            Of = Faction.Crown, From = new[] { ("court", 1f) },
+            Wants = Loc.T("To be right, and to be paid for it. The cards don't lie; Madame Zell doesn't either."),
             Stories = Tell(("court", new[] { Loc.T("A courtier's chest, sold for his gambling debts. Three from the Locking's deck: {clue}. {price}."),
                                              Loc.T("The cards chose this one for you, dear. {clue}. A {colour} chest: {price}.") })),
-            Habit = Loc.T("The court's cartomancer. She draws three cards from the Locking's own deck for each chest: a suit drawn twice is what " +
-                    "the ward holds (Coins, Swords for weapons, Mantles for cloaks, Cups for potions, Wands for spells, Stars for gems); " +
-                    "three different suits, and nothing's warded. Prices by colour."),
+            Habit = Loc.T("The court's cartomancer. She draws three cards from the Locking's own deck for each chest: a suit drawn twice is what the ward " +
+                    "holds (Coins, Swords for weapons, Mantles for cloaks, Cups for potions, Wands for spells, Stars for gems); three different " +
+                    "suits, and nothing's warded. Prices by colour."),
             Accepts = new[] { Loc.T("The cards are never wrong."), Loc.T("As it was foretold.") },
             Leaves = new[] { Loc.T("The cards say I'm wanted elsewhere.") },
             Passes = new[] { Loc.T("The cards did say you might."), Loc.T("As you wish, dear.") },
@@ -703,13 +773,14 @@ public static class Sellers
         },
         new()
         {
-            Key = "silas", Name = Loc.T("Silas Gilt"), Short = Loc.T("Silas"), Tier = 4, Judge = Judgment.Crook, MissRate = 0f, Fakes = new[] { Category.Coins, Category.Gems }, FakeChance = 0.65f,
+            Key = "gilt", Look = "silas", Name = Loc.T("Gilt"), Short = Loc.T("Gilt"), Tier = 4, Judge = Judgment.Crook, MissRate = 0f, Fakes = new[] { Category.Coins, Category.Gems }, FakeChance = 0.65f,
             HiddenChance = 0f, Colours = Emporium,
             From = new[] { ("gate", 1f) },
+            Wants = Loc.T("The Maw's gilded iron sold as gold, so the Gate's gold buys more of the realm."),
             Stories = Tell(("gate", new[] { Loc.T("Out of the Maw's hoard, friend, through a crack in the Gate. I'm leaving town tonight, so {price}."),
                                             Loc.T("Hoard goods, very rare. Gold and gems, every one of them. For you, just {price}.") })),
-            Habit = Loc.T("A fence for the Maw's hoard. He knows exactly what's in his chests, because he packed the demon gold himself: gilded " +
-                    "iron sold as gold and gems, cheap. What's real comes cheap; the fakes are worth nothing."),
+            Habit = Loc.T("The Maw's fence. He knows exactly what's in his chests, because he packed the demon gold himself: gilded iron sold as gold and " +
+                    "gems, cheap. What's real comes cheap; the fakes are worth nothing."),
             Accepts = new[] { Loc.T("Wonderful! No refunds."), Loc.T("A pleasure. I really must be going.") },
             Leaves = new[] { Loc.T("Can't stay. People to avoid.") },
             Passes = new[] { Loc.T("Your loss, friend. Your very great loss."), Loc.T("Suit yourself. I was never here.") },
@@ -718,14 +789,14 @@ public static class Sellers
         },
         new()
         {
-            Key = "aldo", Name = Loc.T("Old Aldo"), Short = Loc.T("Aldo"), Tier = 4, Judge = Judgment.Clueless, SlipPrice = true, Visits = 0.25f, PairChance = 0.35f,
+            Key = "aldo", Look = "aldo", Name = Loc.T("Old Aldo"), Short = Loc.T("Aldo"), Tier = 4, Judge = Judgment.Clueless, SlipPrice = true, Visits = 0.25f, PairChance = 0.35f,
             MagicChance = 0.2f, HiddenChance = 0.25f, Colours = new[] { 0, 0, 0.3f, 0.7f },
-            From = new[] { ("treasury", 1f) },
+            Of = Faction.Crown, From = new[] { ("treasury", 1f) },
+            Wants = Loc.T("A Keywright he can trust with the one chest that matters."),
             Stories = Tell(("treasury", new[] { Loc.T("From an old house with a great many cellars. I've no idea what's in it. You tell me, and whatever you say it holds is my price."),
                                                 Loc.T("Old things from an old house. Name what's inside: that's the price. Name it truly and I'll take a quarter off.") })),
-            Habit = Loc.T("A tired old man in a plain cloak, with a very fine ring. He doesn't know what's in his chests: his price is whatever " +
-                    "your slip says. Read it exactly and he takes a quarter off; read it wrong and you pay what it really holds, and a " +
-                    "quarter more."),
+            Habit = Loc.T("A tired old man in a plain cloak, with a very fine ring. He doesn't know what's in his chests: his price is whatever your slip " +
+                    "says. Read it exactly and he takes a quarter off; read it wrong and you pay what it really holds, and a quarter more."),
             Accepts = new[] { Loc.T("Well. We shall see."), Loc.T("Hm. Let's see what you heard.") },
             Leaves = new[] { Loc.T("I'm needed elsewhere. Another day.") },
             Passes = new[] { Loc.T("Another day, then. I'll be back."), Loc.T("Hm. A careful one. Good.") },
@@ -734,13 +805,14 @@ public static class Sellers
         },
         new()
         {
-            Key = "maw", Name = Loc.T("Avarax, the Gilded Maw"), Nick = Loc.T("the Maw"), Tier = 4, Judge = Judgment.Colour, Gaze = 2f, Visits = 0.1f,
+            Key = "maw", Look = "maw", Name = Loc.T("Avarax, the Gilded Maw"), Nick = Loc.T("the Maw"), Tier = 4, Judge = Judgment.Colour, Gaze = 2f, Visits = 0.1f,
             Colours = new[] { 0, 0, 0.5f, 0.5f },
             From = new[] { ("gate", 1f) },
+            Wants = Loc.T("Out."),
             Stories = Tell(("gate", new[] { Loc.T("A trifle from my hoard. One coin. All I ask is that you open it here, where I can see."),
                                             Loc.T("One coin, little Keywright. And then everyone in this city will want twice as much today. Isn't that fun?") })),
-            Habit = Loc.T("The demon of greed himself, in a borrowed body dripping with rings. He sells a chest for one coin, but greed is " +
-                    "catching: buy it, and everyone who comes to your counter after him that day asks twice as much."),
+            Habit = Loc.T("The demon of greed himself, in a borrowed body dripping with rings. He sells a chest for one coin, but greed is catching: buy it, " +
+                    "and everyone who comes to your counter after him that day asks twice as much."),
             Accepts = new[] { Loc.T("Yesss."), Loc.T("Open it. Let me see.") },
             Leaves = new[] { Loc.T("I have all the time in the world. You don't.") },
             Passes = new[] { Loc.T("Clever little thing."), Loc.T("Mm. Another day, then. There are so many days.") },
@@ -749,7 +821,104 @@ public static class Sellers
         },
     };
 
-    public static SellerDef Get(string key) => All.First(s => s.Key == key);
+    /// <summary>
+    /// People who come only when a tale brings them (docs/stories.md): a Warden, a Guild clerk and its Mark-Finder, a
+    /// mother, the Guild's timber factor, one of the fair folk, a gambler, a freed debtor. Never in the day's crowd.
+    /// </summary>
+    public static readonly SellerDef[] People =
+    {
+        new()
+        {
+            Key = "hollis", Look = "aldous", Name = Loc.T("Sergeant Hollis"), Short = Loc.T("Hollis"), Tier = 2, Visits = 0, Of = Faction.Wardens,
+            Wants = Loc.T("Thieves caught and chests home; and to know why the Guild's foreclosed chests won't open for anyone."),
+            Habit = Loc.T("The Wardens' sergeant at the Thornwick toll: posts the wanted notices, searches the market, pays a finder's share for a stolen chest sent home."),
+        },
+        new()
+        {
+            Key = "tobias", Look = "quill", Name = Loc.T("Tobias Fenn"), Short = Loc.T("Tobias"), Tier = 3, Visits = 0, Of = Faction.Guild,
+            Wants = Loc.T("To know where the tithe goes, and not to vanish for asking."),
+            Habit = Loc.T("A clerk in the Gilded Guild's counting-house, with ink to the elbows and doubts he shouldn't have."),
+        },
+        new()
+        {
+            Key = "aubel", Look = "vane", Name = Loc.T("Mistress Aubel"), Short = Loc.T("Aubel"), Tier = 1, Visits = 0, Of = Faction.Guild,
+            Wants = Loc.T("Every marked child in the county, for the Guild's counting-houses."),
+            Habit = Loc.T("A Guild Mark-Finder, who tests children's hands at every fair and takes the marked ones \"into the Guild's care\"."),
+        },
+        new()
+        {
+            Key = "wynn", Look = "penn", Name = Loc.T("Wynn Hollow"), Short = Loc.T("Wynn"), Tier = 1, Visits = 0, Of = Faction.Commons,
+            Wants = Loc.T("Her son kept out of the Guild's counting-houses."),
+            Habit = Loc.T("Pip's mother, the mill's washerwoman."),
+        },
+        new()
+        {
+            Key = "caskett", Look = "hob", Name = Loc.T("Harl Caskett"), Short = Loc.T("Caskett"), Tier = 2, Visits = 0, Of = Faction.Guild,
+            Wants = Loc.T("The Old Wood's oak, felled and sold, on the Guild's account."),
+            Habit = Loc.T("The Gilded Guild's timber factor, with a deed for the Old Wood and a pen for whoever will witness it."),
+        },
+        new()
+        {
+            Key = "hawthorn", Look = "bramble", Name = Loc.T("The Hawthorn Lady"), Short = Loc.T("the Hawthorn Lady"), Tier = 2, Visits = 0, Of = Faction.Wood,
+            Wants = Loc.T("The Wood's oaks left standing; and a promise, kept."),
+            Habit = Loc.T("One of the fair folk of the Old Wood. She never used gold, and trades in promises."),
+        },
+        new()
+        {
+            Key = "cassian", Look = "silas", Name = Loc.T("Lord Cassian Vell"), Short = Loc.T("Cassian"), Tier = 3, Visits = 0, Judge = Judgment.Colour, Steals = 1f,
+            Markup = (0.7f, 0.85f), Colours = Town, Of = Faction.Crown, From = new[] { ("strongroom", 1f) },
+            Wants = Loc.T("Tonight's stake at cards. Tomorrow's, too."),
+            Habit = Loc.T("Lady Isaura's brother, a gambler, selling his sister's chests cheap. They aren't his to sell."),
+            Accepts = new[] { Loc.T("Splendid. The tables await."), Loc.T("Done. Not a word to my sister.") },
+            Passes = new[] { Loc.T("Your loss. Someone will want it before the cards start."), Loc.T("Pity.") },
+        },
+        new()
+        {
+            Key = "jory", Look = "dorrin", Name = Loc.T("Jory Kettle"), Short = Loc.T("Jory"), Tier = 1, Visits = 0, Of = Faction.Commons,
+            Wants = Loc.T("To pay you back for his freedom, and to see the Guild's debt-houses emptied."),
+            Habit = Loc.T("Ada's son, two years in the Guild's debt-house for his father's tithe."),
+        },
+    };
+
+    /// <summary>Anyone who can come to the counter, by key: a seller, or someone a tale brings.</summary>
+    public static SellerDef Find(string key) => All.FirstOrDefault(s => s.Key == key) ?? People.FirstOrDefault(s => s.Key == key);
+
+    /// <summary>Someone a tale brings to the counter (or the story's people, as they'd stand there): never null.</summary>
+    public static SellerDef Person(string key) => Find(key) ?? new SellerDef { Key = key, Look = key, Name = Story.Name(key), Tier = 1, Visits = 0 };
+
+    /// <summary>
+    /// The picture to show for someone (assets/figures/{look}.png): the new cast wear the old cast's figures until they're
+    /// drawn (docs/stories.md lists them), and the story's people their own.
+    /// </summary>
+    public static string LookOf(string key) => Find(key)?.Look ?? key;
+
+    /// <summary>
+    /// 0.28 replaced the cast (docs/world.md): the old regulars' keys, as saves and profiles from before kept them, and
+    /// who trades their way now. Read through by <see cref="Profile"/> and <see cref="SaveData.FromJson"/>.
+    /// </summary>
+    public static readonly Dictionary<string, string> Renamed = new() // loc: keys
+    {
+        ["tam"] = "pip", ["penn"] = "ada", ["hob"] = "garrick", ["mags"] = "bettany", ["dorrin"] = "tobin",
+        ["snikkit"] = "nettle", ["wenna"] = "rook", ["bramble"] = "sorrel", ["ansel"] = "cadoc", ["fennick"] = "corvin", ["gerda"] = "hesper",
+        ["wren"] = "ilse", ["orrin"] = "orme", ["grit"] = "durgan", ["corisande"] = "isaura", ["pell"] = "brass", ["quill"] = "quire",
+        ["shelly"] = "tilly", ["aldous"] = "rowan", ["vexis"] = "tick", ["malbranche"] = "sallow", ["ermine"] = "vey", ["oriel"] = "zell", ["silas"] = "gilt",
+    };
+
+    /// <summary>A key as it is now (an old regular's, renamed in 0.28; anything else as it was).</summary>
+    public static string Current(string key) => key != null && Renamed.TryGetValue(key, out var now) ? now : key;
+
+    /// <summary>Whose chest a stolen one is, as the Wardens' notice names them: someone from around the shop.</summary>
+    public static string StolenFrom(Random rng, int tier) => rng.PickOne(tier switch
+    {
+        1 => new[] { Loc.T("a farmer at Brindle"), Loc.T("the Crossed Keys"), Loc.T("the miller's wife") },
+        2 => new[] { Loc.T("a carter on the forest road"), Loc.T("a weaver in Thornwick"), Loc.T("a Thornwick family"), Loc.T("the abbey's gatehouse") },
+        3 => new[] { Loc.T("a Crownhold merchant"), Loc.T("Lord Harrow's household"), Loc.T("a family on Lantern Lane"), Loc.T("a chapel by the Aldwater") },
+        _ => new[] { Loc.T("a lady of the court"), Loc.T("a palace steward"), Loc.T("a banker of the Emporium"), Loc.T("a courtier's widow") },
+    });
+
+
+    /// <summary>A seller or a tale's person by key (an old regular's key finds who trades their way now).</summary>
+    public static SellerDef Get(string key) => Find(Current(key)) ?? throw new KeyNotFoundException(key);
 
     /// <summary>What a seller says when you pass on their chest.</summary>
     public static string PassLine(Random rng, SellerDef seller = null) => rng.PickOne(seller?.Passes.Length > 0 ? seller.Passes : Shrug);
