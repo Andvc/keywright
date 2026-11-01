@@ -1,0 +1,14 @@
+"lang"
+{
+	"Language"	"english"
+	"Tokens"
+	{
+		"#Status_Title"		"At the title screen"
+		"#Status_Day"		"Day %day% at {#Shop_%tier%}"
+		"#Status_Cleared"	"Bram's debt paid, day %day% at {#Shop_%tier%}"
+		"#Shop_1"		"Bram's Stall"
+		"#Shop_2"		"Thornwick Market"
+		"#Shop_3"		"Crownhold"
+		"#Shop_4"		"the Royal Emporium"
+	}
+}

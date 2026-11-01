@@ -303,6 +303,18 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   Translations are gettext files in locale/ named for their locale (de.po, pt_BR.po) from keywright.pot; drop one in
   and Settings offers it. Kenney Mini covers English and western Europe; Galmuri 9 (OFL) the rest of Latin,
   Cyrillic, Greek, Korean and Japanese; Simplified Chinese needs a font of its own (docs/release.md).
+- Steam (0.27): `Platform` (scripts/Platform.cs, Steamworks.NET 2024.8.0 with SDK 1.60's library in steam/) starts
+  with the game and does nothing without Steam or its library ("Steam: not running" in the log): achievements, rich
+  presence (`Platform.Presence`, worded by steam/rich_presence.vdf), and the overlay opening the pause menu.
+  `Platform.AppId` is 0 until there's a store page. Achievements are Core (`Achievements.cs`: each a condition on
+  the run or the profile), checked whenever `Main.WriteProfile` runs and at each day's start, kept in
+  `Profile.Achievements` (so they're never lost off Steam, and reach it later), and announced over the top bar when
+  Steam isn't there to announce them; `--achievements` prints the table for Steamworks. A new one needs its API
+  name added in Steamworks too (steam/README.md has the rest of the Steamworks side).
+- Releases: the version is project.godot's `application/config/version` (`Main.Version`, shown on the title screen
+  and stamped into the exe); bump it for each release. The title's Credits (`CreditsView`) list the game's credits
+  and the notices Godot, Galmuri and Steamworks.NET ask to travel with it; set `CreditsView.Studio` to the name the
+  game's published under. CI (`.github/workflows/build.yml`) builds Windows and Linux on every push.
 - Input (0.27): the game asks for an action, never a key (`Controls`: `act` sets a pin, hurries an opening, reads the
   next line; `force`, `notebook`, `pause`, `back`). Each has keys and controller buttons, rebound on the Controls page
   (a key another action had moves to the new one, and an action left with none takes the old one; the menu and Back
@@ -405,6 +417,6 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 
 ## Known gaps
 
-- Wine 9 in this container can't run the exported .exe. `.github/workflows/windows-build.yml` exports and smoke-tests on a real Windows runner on every push; download builds from the run's artifacts.
+- Wine 9 in this container can't run the exported .exe. `.github/workflows/build.yml` checks the text and the build, then exports Windows and Linux builds and smoke-tests each on its own runner on every push; download builds from the run's artifacts.
 - The shop saves at the start of each day only (leaving mid-day replays that day), and sellers don't remember you
   (see `docs/design.md`).

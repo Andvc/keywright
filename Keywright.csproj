@@ -9,4 +9,9 @@
     <!-- tools/loc is a console tool of its own. -->
     <Compile Remove="tools/**" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- Steam (achievements, rich presence, the overlay). Its native library is in steam/, matched to this version
+         (SDK 1.60): CI puts it beside the exported game. Without it, or without Steam, the game plays the same. -->
+    <PackageReference Include="Steamworks.NET" Version="2024.8.0" />
+  </ItemGroup>
 </Project>

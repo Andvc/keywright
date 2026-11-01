@@ -6218,79 +6218,84 @@ msgstr ""
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr ""
 
-#: scripts/Main.cs:514
+#: scripts/Main.cs:482
+#, csharp-format
+msgid "Achievement: {0}"
+msgstr ""
+
+#: scripts/Main.cs:587
 #, csharp-format
 msgid "In the purse: {0}g."
 msgstr ""
 
-#: scripts/Main.cs:522
+#: scripts/Main.cs:595
 msgid "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 
-#: scripts/Main.cs:526
+#: scripts/Main.cs:599
 msgid "Not now: finish what's in hand first."
 msgstr ""
 
-#: scripts/Main.cs:634 scripts/Main.cs:756
+#: scripts/Main.cs:707 scripts/Main.cs:831
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr ""
 
-#: scripts/Main.cs:634 scripts/Main.cs:756
+#: scripts/Main.cs:707 scripts/Main.cs:831
 msgid "THE CROWN CHEST"
 msgstr ""
 
-#: scripts/Main.cs:663
+#: scripts/Main.cs:738
 msgid "BRAM'S STALL"
 msgstr ""
 
-#: scripts/Main.cs:663 scripts/Ui/NotebookView.cs:362 scripts/Ui/NotebookView.cs:444
+#: scripts/Main.cs:738 scripts/Ui/NotebookView.cs:362 scripts/Ui/NotebookView.cs:444
 #, csharp-format
 msgid "WEEK {0}"
 msgstr ""
 
-#: scripts/Main.cs:687
+#: scripts/Main.cs:762
 msgid "THE GILDED GUILD"
 msgstr ""
 
-#: scripts/Main.cs:690
+#: scripts/Main.cs:765
 msgid "THE ALDRIC KEY"
 msgstr ""
 
-#: scripts/Main.cs:731
+#: scripts/Main.cs:806
 msgid "FREE AND CLEAR"
 msgstr ""
 
-#: scripts/Main.cs:779 scripts/Ui/NotebookView.cs:373
+#: scripts/Main.cs:854 scripts/Ui/NotebookView.cs:373
 #, csharp-format
 msgid "DAY {0}"
 msgstr ""
 
-#: scripts/Main.cs:782
+#: scripts/Main.cs:857
 #, csharp-format
 msgid ", level {0}"
 msgstr ""
 
-#: scripts/Main.cs:783
+#: scripts/Main.cs:858
 #, csharp-format
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr ""
 
-#: scripts/Main.cs:783
+#: scripts/Main.cs:858
 #, csharp-format
 msgid " of {0}"
 msgstr ""
 
-#: scripts/Main.cs:784
+#: scripts/Main.cs:859
 #, csharp-format
 msgid "The Guild comes tonight for {0}g."
 msgstr ""
 
-#: scripts/Main.cs:785
+#: scripts/Main.cs:860
 #, csharp-format
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr ""
 
-#: scripts/Main.cs:792
+#: scripts/Main.cs:867
 #, csharp-format
 msgid "Uncle Bram slipped you {0}g from his secret stash ({1} left)."
 msgstr ""
@@ -7971,13 +7976,13 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: scripts/Phases/TitlePhase.cs:67
+#: scripts/Phases/TitlePhase.cs:67 scripts/Ui/CreditsView.cs:53
 #, csharp-format
 msgid "Early Access {0}"
 msgstr ""
 
-#: scripts/Phases/TitlePhase.cs:77
-msgid "Sounds and font: Kenney (CC0)."
+#: scripts/Phases/TitlePhase.cs:78
+msgid "Credits"
 msgstr ""
 
 #: scripts/Phases/TitlePhase.cs:112
@@ -8029,7 +8034,7 @@ msgstr ""
 msgid "Finds"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:58 scripts/Ui/Hud.cs:98
+#: scripts/Ui/CollectionView.cs:58 scripts/Ui/CreditsView.cs:34 scripts/Ui/Hud.cs:98
 msgid "Close"
 msgstr ""
 
@@ -8129,6 +8134,55 @@ msgstr ""
 #: scripts/Ui/CollectionView.cs:202
 #, csharp-format
 msgid "{0}, from {1}. {2}"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:33
+msgid "CREDITS"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:52
+#, csharp-format
+msgid "A game by {0}"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:55
+msgid "Pictures"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:56
+msgid "Made for Keywright to the brief in its art folder, generated with OpenAI's image generation and fitted to its pixel grid and palette a picture at a time. The chest is drawn in code."
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:59
+msgid "Sounds and lettering"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:60
+msgid "Kenney (kenney.nl), CC0: the Kenney Mini font, and the Impact Sounds, RPG Audio, Casino Audio and Interface Sounds packs. The Heartsongs and the other music-box sounds are made in code."
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:62
+msgid "Galmuri 9 by Lee Minseo (quiple/galmuri), SIL Open Font License 1.1: the letters for translations."
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:64
+msgid "Steam"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:67
+msgid "Made with Godot Engine"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:70
+msgid "Inside Godot Engine"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:71
+msgid "Godot is built with these libraries, under these licences:"
+msgstr ""
+
+#: scripts/Ui/CreditsView.cs:80
+msgid "Thank you for playing."
 msgstr ""
 
 #: scripts/Ui/Hud.cs:32

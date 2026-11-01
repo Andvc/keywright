@@ -32,8 +32,8 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    /// <summary>The game's version (also project.godot's application/config/version, which the exports are stamped with).</summary>
-    public const string Version = "0.27";
+    /// <summary>The game's version: project.godot's application/config/version, which the exports are stamped with.</summary>
+    public static string Version => ProjectSettings.GetSetting("application/config/version", "0.27").AsString();
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -148,6 +148,14 @@ public partial class Main : Node2D
             GetTree().Quit();
             return;
         }
+        // --achievements: the table to set them up with in Steamworks (API name, name, description, hidden).
+        if (args.Contains("--achievements"))
+        {
+            GD.Print("| API name | Name | Description | Hidden |\n|---|---|---|---|");
+            foreach (var a in Achievements.All) GD.Print($"| {a.Key} | {a.Name} | {a.Text} | {(a.Hidden ? "yes" : "")} |");
+            GetTree().Quit();
+            return;
+        }
         if (args.Contains("--save-test") || args.Contains("--loc-test"))
         {
             bool passed = false;
@@ -180,6 +188,13 @@ public partial class Main : Node2D
         Settings.Load();
         if (args.Contains("--gm")) Settings.Gm = true;
         Profile = ReadProfile();
+        // Steam, if it's there (opening its overlay pauses the game); started outside it, it starts the game itself.
+        if (!Platform.Start(shown => { if (shown) OpenPause(); }))
+        {
+            QuitGame();
+            return;
+        }
+        Platform.Unlock(Profile.Achievements);
         // A controller moves and clicks the pointer (the mouse's own, so everything it can do, a controller can).
         AddChild(new GamepadCursor());
         GetTree().Root.Theme = MakeTheme();
@@ -306,6 +321,20 @@ public partial class Main : Node2D
         await Wait(1.5);
         gathered.Close();
         await Wait(0.5);
+        // The credits, at the top and further down (the engine's notices).
+        var credits = title.OpenCredits();
+        await Wait(0.8);
+        Moment("08_credits");
+        await Wait(0.5);
+        if (credits.GetChildren().OfType<ScrollContainer>().FirstOrDefault() is { } scroll)
+        {
+            scroll.ScrollVertical = 1400;
+            await Wait(0.4);
+            Moment("08_credits_licences");
+            await Wait(0.5);
+        }
+        credits.Close();
+        await Wait(0.5);
         OpenSetup();
         await Wait(1.2);
         var setup = (SetupPhase)_phase;
@@ -389,6 +418,7 @@ public partial class Main : Node2D
         _bot?.QueueFree();
         _bot = null;
         Sfx?.Release();
+        Platform.Stop();
         for (int i = 0; i < 3; i++) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -413,10 +443,52 @@ public partial class Main : Node2D
     /// <summary>Notes the run's progress in the profile (a real game only) and writes it.</summary>
     void WriteProfile(System.Action<Profile> change = null)
     {
-        if (!_saving || _demo) return;
+        if (!_saving || _demo)
+        {
+            NoteAchievements();
+            return;
+        }
         change?.Invoke(Profile);
         Profile.Note(State);
+        NoteAchievements();
         Storage.Write(ProfilePath, Profile.ToJson());
+    }
+
+    /// <summary>
+    /// Achievements done since the last look: marked in the profile (written with it), sent to Steam, and announced
+    /// here when the game isn't on Steam, which announces its own.
+    /// </summary>
+    void NoteAchievements()
+    {
+        if (Profile == null) return;
+        var earned = Achievements.Earned(State, Profile);
+        if (earned.Count == 0) return;
+        foreach (var achievement in earned)
+        {
+            Profile.Achievements.Add(achievement.Key);
+            GD.Print($"[Achievement] {achievement.Key}: {achievement.Name}");
+            if (!Platform.OnSteam) Announce(achievement);
+        }
+        Platform.Unlock(earned.Select(a => a.Key));
+    }
+
+    /// <summary>An achievement's name over the top bar's title for a few seconds (the one place no screen uses).</summary>
+    void Announce(AchievementDef achievement)
+    {
+        var layer = new CanvasLayer { Layer = 90, ProcessMode = ProcessModeEnum.Always };
+        AddChild(layer);
+        var panel = UiKit.MakePanel(Palette.Gold.Darkened(0.55f)).Place(400, 6, 480, 44);
+        layer.AddChild(panel);
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"Achievement: {achievement.Name}"), 16, Palette.Gold, HorizontalAlignment.Center)
+            .Place(0, 12, 480, 20));
+        panel.TooltipText = achievement.Text;
+        panel.Modulate = new Color(1, 1, 1, 0);
+        var tween = layer.CreateTween();
+        tween.TweenProperty(panel, "modulate:a", 1f, 0.3f);
+        tween.TweenCallback(Callable.From(() => Moment("achievement")));
+        tween.TweenInterval(3.0);
+        tween.TweenProperty(panel, "modulate:a", 0f, 0.6f);
+        tween.TweenCallback(Callable.From(layer.QueueFree));
     }
 
     /// <summary>The run is over (foreclosed, or retired): its feats and score are banked, the saved shop goes, and it's back to the title.</summary>
@@ -436,6 +508,7 @@ public partial class Main : Node2D
     /// <summary>Back to the title screen (from the pause menu).</summary>
     public void ToTitle()
     {
+        Platform.Presence(null);
         Hud.Visible = false;
         SwitchTo(new TitlePhase(ReadSave()));
     }
@@ -649,6 +722,8 @@ public partial class Main : Node2D
             WriteSave();
             WriteProfile();
         }
+        else NoteAchievements();
+        Platform.Presence(State);
         State.StartDay();
         Hud.SetDay(State.Day, State.Tier);
         Hud.SetDue(State);
@@ -890,6 +965,7 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
+        Platform.Tick();
         if (_camera == null) return;
         _trauma = Mathf.Max(0f, _trauma - (float)delta * 1.6f);
         float strength = _trauma * _trauma;

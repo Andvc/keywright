@@ -74,8 +74,8 @@ public partial class TitlePhase : Phase
                 .Wrapped().Place(140, 222, 1000, 44));
             Storage.Notices.Clear();
         }
-        Add(UiKit.MakeLabel(Loc.T("Sounds and font: Kenney (CC0)."), 16, Palette.Muted, HorizontalAlignment.Right, outline: 4)
-            .Place(656, 684, 600, 20));
+        // Who made what (and the notices the engine and the fonts ask to come with the game).
+        Add(UiKit.MakeButton(Loc.T("Credits"), Palette.Text, 16, () => OpenCredits()).Place(1120, 670, 140, 36));
         Game.Moment("00_title", 1.0);
     }
 
@@ -121,6 +121,16 @@ public partial class TitlePhase : Phase
     }
 
     /// <summary>Everything Bram's kin have found, the curios they've seen and the Heartsongs they've heard, in every run.</summary>
+    CreditsView _credits;
+
+    public CreditsView OpenCredits()
+    {
+        if (_credits != null) return _credits;
+        _credits = Add(new CreditsView());
+        _credits.Closed += () => _credits = null;
+        return _credits;
+    }
+
     public CollectionView OpenCollection(int page = CollectionView.FindsPage)
     {
         if (_collection != null) return _collection;

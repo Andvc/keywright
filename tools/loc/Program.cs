@@ -224,7 +224,7 @@ static class Rules
         "IsActionPressed", "IsActionJustPressed", "IsActionReleased", "IsActionJustReleased", "IsAction", "ActionPress",
         "ActionRelease", "AddAction", "HasAction", "ActionEraseEvents", "ActionAddEvent",
         "Play", "PlayAt", "Stop", "Sound", "Song", "GetBusIndex", "SetBusName", "AddBus", "Stream", "SetBus", "SetBusSend",
-        "SetBusVolumeDb", "SetBusMute", "Invoke",
+        "SetBusVolumeDb", "SetBusMute", "Invoke", "SetRichPresence",
         "SetValue", "GetValue", "HasSectionKey", "HasSection", "EraseSection", "EraseSectionKey",
         "Split", "Join", "Contains", "StartsWith", "EndsWith", "IndexOf", "LastIndexOf", "Trim", "TrimStart", "TrimEnd",
         "Equals", "Compare", "CompareTo", "Insert", "Remove", "PadLeft", "PadRight", "Parse", "TryParse", "ToString",

@@ -1,0 +1,131 @@
+name: Build
+
+# Every push to main or a prototype branch: the checks, then a Windows and a Linux build, each exported the way a
+# release is, given the Steam library (steam/), smoke-tested by the bot playing two days, and kept as an artifact named
+# for the version in project.godot (application/config/version).
+
+on:
+  push:
+    branches: [main, "prototype/**"]
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Build (no warnings)
+        run: dotnet build Keywright.csproj -warnaserror
+      - name: Every text the player reads goes through Loc (tools/loc)
+        run: dotnet run --project tools/loc -- check
+
+  windows:
+    needs: checks
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install Godot (.NET) and Windows export templates
+        shell: pwsh
+        run: |
+          $base = "https://github.com/godotengine/godot/releases/download/$env:GODOT_VERSION-stable"
+          Invoke-WebRequest "$base/Godot_v$($env:GODOT_VERSION)-stable_mono_win64.zip" -OutFile godot.zip
+          Expand-Archive godot.zip -DestinationPath "$env:RUNNER_TEMP\godot"
+          $exe = Get-ChildItem "$env:RUNNER_TEMP\godot" -Recurse -Filter "*_console.exe" | Select-Object -First 1
+          "GODOT=$($exe.FullName)" | Out-File $env:GITHUB_ENV -Append
+
+          Invoke-WebRequest "$base/Godot_v$($env:GODOT_VERSION)-stable_mono_export_templates.tpz" -OutFile templates.zip
+          Expand-Archive templates.zip -DestinationPath "$env:RUNNER_TEMP\tpl"
+          $dest = "$env:APPDATA\Godot\export_templates\$($env:GODOT_VERSION).stable.mono"
+          New-Item -ItemType Directory -Force $dest | Out-Null
+          Copy-Item "$env:RUNNER_TEMP\tpl\templates\version.txt", "$env:RUNNER_TEMP\tpl\templates\windows_*x86_64*" $dest
+
+          $version = (Select-String -Path project.godot -Pattern '^config/version="(.*)"').Matches[0].Groups[1].Value
+          "KEYWRIGHT_VERSION=$version" | Out-File $env:GITHUB_ENV -Append
+
+      - name: Export
+        shell: pwsh
+        run: |
+          & $env:GODOT --headless --path . --import
+          New-Item -ItemType Directory -Force build/windows | Out-Null
+          & $env:GODOT --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe
+          if (-not (Test-Path build/windows/Keywright.exe)) { throw "Export failed" }
+          # Steam's library beside the exe (where Steam looks) and the .NET assemblies.
+          Copy-Item steam/steam_api64.dll build/windows/
+          Get-ChildItem build/windows -Directory -Filter "data_*" | ForEach-Object { Copy-Item steam/steam_api64.dll $_.FullName }
+
+      - name: Smoke test (bot plays the guided day and a random one)
+        shell: pwsh
+        run: |
+          $log = Join-Path $pwd "smoke.log"
+          $game = Start-Process build/windows/Keywright.exe -PassThru -ArgumentList `
+            "--headless", "--log-file", "`"$log`"", "--", "--autoplay", "--seed=4306", "--days=2"
+          if (-not $game.WaitForExit(840000)) { $game.Kill(); throw "Game did not finish within 14 minutes" }
+          Get-Content $log
+          if (-not (Select-String -Path $log -Pattern "Autoplay finished 2 days" -Quiet)) { throw "Smoke test failed" }
+          if (-not (Select-String -Path $log -Pattern "Steam: " -Quiet)) { throw "The Steam layer didn't start" }
+          # The test leaves a log behind: the build ships without it.
+          Remove-Item build/windows/*.log -ErrorAction SilentlyContinue
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Keywright-${{ env.KEYWRIGHT_VERSION }}-windows-x64
+          path: build/windows/
+          retention-days: 30
+
+  linux:
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install Godot (.NET) and Linux export templates
+        run: |
+          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable"
+          curl -sSL -o godot.zip "$base/Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64.zip"
+          unzip -q godot.zip -d "$RUNNER_TEMP/godot"
+          echo "GODOT=$(find "$RUNNER_TEMP/godot" -name 'Godot_v*_mono_linux.x86_64' | head -1)" >> "$GITHUB_ENV"
+          curl -sSL -o templates.zip "$base/Godot_v${GODOT_VERSION}-stable_mono_export_templates.tpz"
+          dest="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono"
+          mkdir -p "$dest"
+          unzip -q -j templates.zip "templates/version.txt" "templates/linux_*x86_64*" -d "$dest"
+          echo "KEYWRIGHT_VERSION=$(sed -n 's/^config\/version="\(.*\)"/\1/p' project.godot)" >> "$GITHUB_ENV"
+
+      - name: Export
+        run: |
+          "$GODOT" --headless --path . --import
+          mkdir -p build/linux
+          "$GODOT" --headless --path . --export-release "Linux" build/linux/Keywright.x86_64
+          test -f build/linux/Keywright.x86_64
+          cp steam/libsteam_api.so build/linux/
+          for d in build/linux/data_*/; do cp steam/libsteam_api.so "$d"; done
+
+      - name: Smoke test (bot plays the guided day and a random one)
+        run: |
+          cd build/linux
+          timeout 840 ./Keywright.x86_64 --headless -- --autoplay --seed=4306 --days=2 | tee ../../smoke.log
+          grep -q "Autoplay finished 2 days" ../../smoke.log
+          grep -q "Steam: " ../../smoke.log
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Keywright-${{ env.KEYWRIGHT_VERSION }}-linux-x64
+          path: build/linux/
+          retention-days: 30
