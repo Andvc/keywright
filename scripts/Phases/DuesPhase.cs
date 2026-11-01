@@ -33,7 +33,7 @@ public partial class DuesPhase : Phase
     public override void _Ready()
     {
         var shop = Add(UiKit.MakeShop(State.Tier, 1f, ShopHour.Night, State));
-        Add(UiKit.MakeLabel($"THE GUILD'S DUE: WEEK {State.Week}", 32, Palette.Text, HorizontalAlignment.Center, outline: 6).Place(PanelX, 62, PanelW, 40));
+        Add(UiKit.MakeLabel(Loc.T($"THE GUILD'S DUE: WEEK {State.Week}"), 32, Palette.Text, HorizontalAlignment.Center, outline: 6).Place(PanelX, 62, PanelW, 40));
         _vane = Add(new SellerView(new SellerDef { Key = Story.Vane, Name = Guild.Collector }));
         shop.Light(_vane.Figure);
         _vane.Enter();
@@ -67,16 +67,16 @@ public partial class DuesPhase : Phase
             bool tonight = week == State.Week && !paid;
             var color = paid ? Palette.Good : tonight ? Palette.Warn : Palette.PanelBorder;
             var box = UiKit.MakePanel(color).Place(PanelX + i * (w + gap), y, w, 56);
-            box.AddChild(UiKit.MakeLabel($"Week {week}", 16, paid ? Palette.Good : tonight ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center)
+            box.AddChild(UiKit.MakeLabel(Loc.T($"Week {week}"), 16, paid ? Palette.Good : tonight ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center)
                 .Place(0, 6, w, 20));
-            box.AddChild(UiKit.MakeLabel(paid ? "paid" : $"{State.DueFor(week)}g", 16, paid ? Palette.Good : tonight ? Palette.Gold : Palette.Text,
+            box.AddChild(UiKit.MakeLabel(paid ? Loc.T("paid") : $"{State.DueFor(week)}g", 16, paid ? Palette.Good : tonight ? Palette.Gold : Palette.Text,
                 HorizontalAlignment.Center, outline: 4).Place(0, 28, w, 20));
             _track.AddChild(box);
         }
         // The Aldric Key: Bram's shard and the Hooded Woman's three.
         if (State.Week < 2) return;
         float mx = PanelX + Guild.Weeks * (w + gap) + 12;
-        _track.AddChild(UiKit.MakeLabel(State.MapGiven ? "KEY: THE GUILD'S" : $"KEY {State.MapPieces}/{Story.Pieces}", 16, Palette.Magic)
+        _track.AddChild(UiKit.MakeLabel(State.MapGiven ? Loc.T("KEY: THE GUILD'S") : Loc.T($"KEY {State.MapPieces}/{Story.Pieces}"), 16, Palette.Magic)
             .Place(mx, y - 2, 220, 20));
         // Each shard in its place in the whole key: the ones still to find in shadow.
         for (int i = 0; i < Story.Pieces; i++)
@@ -105,14 +105,17 @@ public partial class DuesPhase : Phase
         var lines = Story.Offer(State.MapPieces);
         _vane.Say(lines[0].Text + " " + lines[1].Text, Palette.Warn);
         var panel = Put(UiKit.MakePanel(Palette.Warn.Darkened(0.2f)).Place(PanelX, 180, PanelW, 260));
-        panel.AddChild(UiKit.MakeLabel("THE GUILD'S OFFER", 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(0, 16, PanelW, 30));
-        panel.AddChild(UiKit.MakeLabel($"Hand over your {State.MapPieces} shard{(State.MapPieces == 1 ? "" : "s")} of the Aldric Key and tonight's due is " +
-                                       $"halved, from {State.DueNow}g to {Money.Round(State.DueNow / 2f)}g. Without the Key there's no Crown Chest.",
+        panel.AddChild(UiKit.MakeLabel(Loc.T("THE GUILD'S OFFER"), 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(0, 16, PanelW, 30));
+        panel.AddChild(UiKit.MakeLabel(Loc.Plural(State.MapPieces,
+                $"Hand over your {State.MapPieces} shard of the Aldric Key and tonight's due is halved, from {State.DueNow}g to " +
+                $"{Money.Round(State.DueNow / 2f)}g. Without the Key there's no Crown Chest.",
+                $"Hand over your {State.MapPieces} shards of the Aldric Key and tonight's due is halved, from {State.DueNow}g to " +
+                $"{Money.Round(State.DueNow / 2f)}g. Without the Key there's no Crown Chest."),
             16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 60, PanelW - 80, 60));
-        panel.AddChild(UiKit.MakeLabel($"You have {State.Gold}g.", 16, State.Gold >= State.DueNow ? Palette.Good : Palette.Bad,
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"You have {State.Gold}g."), 16, State.Gold >= State.DueNow ? Palette.Good : Palette.Bad,
             HorizontalAlignment.Center).Place(0, 130, PanelW, 20));
-        panel.AddChild(UiKit.MakeButton("Give him the shards", Palette.Warn, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
-        panel.AddChild(UiKit.MakeButton("Keep the shards", Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Give him the shards"), Palette.Warn, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Keep the shards"), Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
         Game.Moment("21_offer", 0.6);
     }
 
@@ -140,11 +143,11 @@ public partial class DuesPhase : Phase
         var panel = Put(UiKit.MakePanel(enough ? Palette.Gold.Darkened(0.2f) : Palette.Bad.Darkened(0.2f)).Place(PanelX, 180, PanelW, 200));
         panel.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(28, 24, 44, 48));
-        panel.AddChild(UiKit.MakeLabel("DUE TONIGHT", 16, Palette.Muted).Place(96, 20, 300, 20));
+        panel.AddChild(UiKit.MakeLabel(Loc.T("DUE TONIGHT"), 16, Palette.Muted).Place(96, 20, 300, 20));
         panel.AddChild(UiKit.MakeLabel($"{due}g", 48, enough ? Palette.Gold : Palette.Bad, outline: 6).Place(96, 38, 400, 56));
         if (State.Arrears > 0)
-            panel.AddChild(UiKit.MakeLabel($"including {State.Arrears}g left over from last week", 16, Palette.Warn).Place(96, 96, 500, 20));
-        _have = UiKit.MakeLabel($"You have {State.Gold}g", 24, enough ? Palette.Good : Palette.Bad, HorizontalAlignment.Right, outline: 4)
+            panel.AddChild(UiKit.MakeLabel(Loc.T($"including {State.Arrears}g left over from last week"), 16, Palette.Warn).Place(96, 96, 500, 20));
+        _have = UiKit.MakeLabel(Loc.T($"You have {State.Gold}g"), 24, enough ? Palette.Good : Palette.Bad, HorizontalAlignment.Right, outline: 4)
             .Place(PanelW - 360, 50, 330, 30);
         panel.AddChild(_have);
         float fill = Math.Clamp(State.Gold / (float)Math.Max(1, due), 0, 1);
@@ -160,14 +163,14 @@ public partial class DuesPhase : Phase
         if (enough && State.CanPayOff && State.Week < Guild.Weeks)
         {
             // Enough for all of it: pay the week, or the whole debt and be done.
-            Put(UiKit.MakeButton($"Pay {due}g", Palette.Gold, 24, Pay).Place(PanelX + 40, 404, 320, 64));
-            Put(UiKit.MakeButton($"Pay it all: {State.DebtLeft}g", Palette.Good, 24, PayAll).Place(PanelX + PanelW - 360, 404, 320, 64)).TooltipText =
-                "Every week's due that's left of Bram's debt, all at once. The run is won; you can keep trading after.";
+            Put(UiKit.MakeButton(Loc.T($"Pay {due}g"), Palette.Gold, 24, Pay).Place(PanelX + 40, 404, 320, 64));
+            Put(UiKit.MakeButton(Loc.T($"Pay it all: {State.DebtLeft}g"), Palette.Good, 24, PayAll).Place(PanelX + PanelW - 360, 404, 320, 64)).TooltipText =
+                Loc.T("Every week's due that's left of Bram's debt, all at once. The run is won; you can keep trading after.");
             return;
         }
         if (enough)
         {
-            Put(UiKit.MakeButton($"Pay {due}g", Palette.Gold, 24, Pay).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
+            Put(UiKit.MakeButton(Loc.T($"Pay {due}g"), Palette.Gold, 24, Pay).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
             return;
         }
         Teach("pawn");
@@ -175,15 +178,15 @@ public partial class DuesPhase : Phase
     }
 
     string WeekLine() => State.Week < Guild.Weeks
-        ? $"Week {State.Week} of {Guild.Weeks}. Bram's debt still to pay after tonight: {State.DebtLeft - State.DueNow}g."
-        : State.Week == Guild.Weeks ? "The last week of Bram's debt." : $"Week {State.Week}: the Guild's interest, for as long as you last.";
+        ? Loc.T($"Week {State.Week} of {Guild.Weeks}. Bram's debt still to pay after tonight: {State.DebtLeft - State.DueNow}g.")
+        : State.Week == Guild.Weeks ? Loc.T("The last week of Bram's debt.") : Loc.T($"Week {State.Week}: the Guild's interest, for as long as you last.");
 
     /// <summary>Short: what's on display and your curios, at the Guild's price; Bram's word; or the end.</summary>
     void BuildPawn(int due)
     {
-        Put(UiKit.MakeLabel($"SHORT BY {due - State.Gold}g", 24, Palette.Bad, outline: 4).Place(PanelX, 392, 400, 30));
-        Put(UiKit.MakeLabel(State.Is(Characters.Isolde) ? "Isolde's collection is not for pawning. Sell a curio back:"
-            : "Pawn what's on display at the Guild's price, or sell a curio back:", 16, Palette.Muted).Place(PanelX, 426, PanelW, 20));
+        Put(UiKit.MakeLabel(Loc.T($"SHORT BY {due - State.Gold}g"), 24, Palette.Bad, outline: 4).Place(PanelX, 392, 400, 30));
+        Put(UiKit.MakeLabel(State.Is(Characters.Isolde) ? Loc.T("Isolde's collection is not for pawning. Sell a curio back:")
+            : Loc.T("Pawn what's on display at the Guild's price, or sell a curio back:"), 16, Palette.Muted).Place(PanelX, 426, PanelW, 20));
         // The plainest things first: what you'd miss least. Two rows at most.
         var things = State.Display.Where(State.CanPawn).OrderBy(i => i.Prestige).Select(i => (object)i)
             .Concat(State.CurioKeys.Select(k => (object)k)).Take(8).ToList();
@@ -193,40 +196,40 @@ public partial class DuesPhase : Phase
             Button button;
             if (things[i] is Item item)
             {
-                button = Put(UiKit.MakeButton($"+{State.PawnValue(item)}g", Palette.Of(item.Rarity).Darkened(0.3f), 16, () => Pawn(item))
+                button = Put(UiKit.MakeButton(Loc.T($"+{State.PawnValue(item)}g"), Palette.Of(item.Rarity).Darkened(0.3f), 16, () => Pawn(item))
                     .Place(x, y, PawnW, PawnH));
-                button.TooltipText = $"Pawn the {item.Name} ({item.Prestige} exhibition points) for {State.PawnValue(item)}g";
+                button.TooltipText = Loc.T($"Pawn the {item.Name} ({item.Prestige} exhibition points) for {State.PawnValue(item)}g");
                 button.AddChild(UiKit.MakeItemIcon(item, new Vector2(36, PawnH / 2), 48));
             }
             else
             {
                 var curio = Curios.Get((string)things[i]);
-                button = Put(UiKit.MakeButton($"+{State.CurioValue(curio.Key)}g", Palette.Magic.Darkened(0.4f), 16, () => SellCurio(curio.Key))
+                button = Put(UiKit.MakeButton(Loc.T($"+{State.CurioValue(curio.Key)}g"), Palette.Magic.Darkened(0.4f), 16, () => SellCurio(curio.Key))
                     .Place(x, y, PawnW, PawnH));
-                button.TooltipText = $"Sell the {curio.Name} back for {State.CurioValue(curio.Key)}g";
+                button.TooltipText = Loc.T($"Sell the {curio.Name} back for {State.CurioValue(curio.Key)}g");
                 button.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(36, PawnH / 2)));
             }
             button.Alignment = HorizontalAlignment.Right;
         }
         if (things.Count == 0)
-            Put(UiKit.MakeLabel("Nothing to pawn.", 16, Palette.Muted).Place(PanelX, 460, 300, 20));
+            Put(UiKit.MakeLabel(Loc.T("Nothing to pawn."), 16, Palette.Muted).Place(PanelX, 460, 300, 20));
 
         float by = 452 + Math.Max(1, (things.Count + 3) / 4) * (PawnH + 8) + 4;
         if (State.CanAskGrace)
         {
-            var grace = Put(UiKit.MakeButton("Bram vouches for you", Palette.Warn, 16, AskGrace).Place(PanelX, by, 370, 52));
+            var grace = Put(UiKit.MakeButton(Loc.T("Bram vouches for you"), Palette.Warn, 16, AskGrace).Place(PanelX, by, 370, 52));
             int left = State.Graces - State.GraceUsed;
-            string times = left == 1 ? "his last word this run" : $"{left} times left this run";
-            grace.TooltipText = $"Everything you have goes to the Guild; the rest, and half as much again, is added to next week's due. {char.ToUpperInvariant(times[0])}{times[1..]}.";
-            Put(UiKit.MakeLabel($"({times}: you pay {State.Gold}g now, {(int)MathF.Ceiling((due - State.Gold) * GameState.GraceInterest)}g more next week)",
+            string times = left == 1 ? Loc.T("his last word this run") : Loc.T($"{left} times left this run");
+            grace.TooltipText = Loc.T($"Everything you have goes to the Guild; the rest, and half as much again, is added to next week's due. {char.ToUpperInvariant(times[0])}{times[1..]}.");
+            Put(UiKit.MakeLabel(Loc.T($"({times}: you pay {State.Gold}g now, {(int)MathF.Ceiling((due - State.Gold) * GameState.GraceInterest)}g more next week)"),
                 16, Palette.Muted).Place(PanelX, by + 56, PanelW, 20));
         }
         // The Guild Promissory Note (a curio): once a run, it pays what nothing you own can cover.
         if (State.CanCallNote)
-            Put(UiKit.MakeButton("Call in the Guild's note", Palette.Magic, 16, CallNote).Place(PanelX + PanelW - 370, by, 370, 52)).TooltipText =
-                $"Once a run, the Guild's own paper covers a night nothing you own can: {due - State.Gold}g, and nothing owed after.";
+            Put(UiKit.MakeButton(Loc.T("Call in the Guild's note"), Palette.Magic, 16, CallNote).Place(PanelX + PanelW - 370, by, 370, 52)).TooltipText =
+                Loc.T($"Once a run, the Guild's own paper covers a night nothing you own can: {due - State.Gold}g, and nothing owed after.");
         else if (!State.CanCover)
-            Put(UiKit.MakeButton("Let the Guild take the shop", Palette.Bad, 16, Foreclose).Place(PanelX + PanelW - 370, by, 370, 52));
+            Put(UiKit.MakeButton(Loc.T("Let the Guild take the shop"), Palette.Bad, 16, Foreclose).Place(PanelX + PanelW - 370, by, 370, 52));
     }
 
     public void CallNote()
@@ -239,7 +242,7 @@ public partial class DuesPhase : Phase
         Game.Hud.SetDue(State);
         BuildTrack();
         _vane.Say(Guild.NotePaid, Palette.Warn);
-        AfterSettled($"The note paid {paid}g of it. It's spent now.");
+        AfterSettled(Loc.T($"The note paid {paid}g of it. It's spent now."));
     }
 
     public void Pawn(Item item)
@@ -248,7 +251,7 @@ public partial class DuesPhase : Phase
         if (value <= 0) return;
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
-        FloatText($"+{value}g", new Vector2(PanelX + PanelW / 2, 370), Palette.Gold, 24);
+        FloatText(Loc.T($"+{value}g"), new Vector2(PanelX + PanelW / 2, 370), Palette.Gold, 24);
         Build();
     }
 
@@ -258,7 +261,7 @@ public partial class DuesPhase : Phase
         if (value <= 0) return;
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
-        FloatText($"+{value}g", new Vector2(PanelX + PanelW / 2, 370), Palette.Gold, 24);
+        FloatText(Loc.T($"+{value}g"), new Vector2(PanelX + PanelW / 2, 370), Palette.Gold, 24);
         Build();
     }
 
@@ -275,7 +278,7 @@ public partial class DuesPhase : Phase
         _vane.Say(Guild.Paid(State.Week), Palette.Good);
         _vane.Bob();
         // A miser's lockbox: what's left grows a little, once the Guild's been.
-        if (State.Hoarded > 0) FloatText($"Miser's Lockbox +{State.Hoarded}g", new Vector2(PanelX + PanelW / 2, 400), Palette.Magic, 24);
+        if (State.Hoarded > 0) FloatText(Loc.T($"Miser's Lockbox +{State.Hoarded}g"), new Vector2(PanelX + PanelW / 2, 400), Palette.Magic, 24);
         Teach("dues");
         AfterSettled(null);
     }
@@ -306,7 +309,7 @@ public partial class DuesPhase : Phase
         Game.Hud.SetDue(State);
         BuildTrack();
         _vane.Say(Guild.Grace, Palette.Warn);
-        AfterSettled($"{owed}g goes on next week's due.");
+        AfterSettled(Loc.T($"{owed}g goes on next week's due."));
     }
 
     /// <summary>Paid (or vouched for): what's due next week, and on.</summary>
@@ -314,15 +317,15 @@ public partial class DuesPhase : Phase
     {
         Clear();
         var panel = Put(UiKit.MakePanel(Palette.Good.Darkened(0.3f)).Place(PanelX, 180, PanelW, 200));
-        panel.AddChild(UiKit.MakeLabel(State.DebtCleared && State.WeeksPaid == Guild.Weeks ? "BRAM'S DEBT IS PAID!" : "PAID",
+        panel.AddChild(UiKit.MakeLabel(State.DebtCleared && State.WeeksPaid == Guild.Weeks ? Loc.T("BRAM'S DEBT IS PAID!") : Loc.T("PAID"),
             40, Palette.Good, HorizontalAlignment.Center, outline: 6).Place(0, 24, PanelW, 50));
         int next = State.NextDue;
-        string ahead = State.WeeksPaid < Guild.Weeks ? $"Next week the Guild wants {next}g: in {Guild.DaysPerWeek} days."
-            : State.NextDueWeek > State.Week + 1 ? $"The Guild won't be back until week {State.NextDueWeek}."
-            : $"The Guild's interest next week: {next}g.";
+        string ahead = State.WeeksPaid < Guild.Weeks ? Loc.T($"Next week the Guild wants {next}g: in {Guild.DaysPerWeek} days.")
+            : State.NextDueWeek > State.Week + 1 ? Loc.T($"The Guild won't be back until week {State.NextDueWeek}.")
+            : Loc.T($"The Guild's interest next week: {next}g.");
         panel.AddChild(UiKit.MakeLabel(ahead, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 92, PanelW, 30));
         if (note != null) panel.AddChild(UiKit.MakeLabel(note, 16, Palette.Warn, HorizontalAlignment.Center).Place(0, 140, PanelW, 20));
-        Put(UiKit.MakeButton("Good night", Palette.Gold, 24, Next).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
+        Put(UiKit.MakeButton(Loc.T("Good night"), Palette.Gold, 24, Next).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
         if (State.DebtCleared)
         {
             Sfx.Play("fanfare", 1f, -2);

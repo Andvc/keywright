@@ -100,7 +100,7 @@ public sealed class Visit
         // Someone who waits for an offer still waits for one.
         int ask = _firstAsk > 0 ? Money.Round(_firstAsk * factor) : 0;
         return new Visit(Seller, Chest, Noticed, Trade, ask, Money.Round(Floor * factor),
-            ask > 0 ? $"I've come back. {Money.Say(ask)}, and no hard feelings." : "I've come back. Make me an offer, then.")
+            ask > 0 ? Loc.T($"I've come back. {Money.Say(ask)}, and no hard feelings.") : Loc.T("I've come back. Make me an offer, then."))
         {
             Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says, Handled = Handled,
         };
@@ -109,9 +109,9 @@ public sealed class Visit
     /// <summary>What the crossroads say when they hand Bram's kin a chest on the first day (welcome gifts).</summary>
     static readonly string[] GiftLines =
     {
-        "Bram's kin at the stall at last! One coin for it, for luck. Not a penny more, I won't hear of it.",
-        "Bram was good to us for forty years. One coin and it's yours. Welcome to the crossroads.",
-        "A welcome present for the new Keywright. One coin, mind: it's bad luck to give a chest for nothing.",
+        Loc.T("Bram's kin at the stall at last! One coin for it, for luck. Not a penny more, I won't hear of it."),
+        Loc.T("Bram was good to us for forty years. One coin and it's yours. Welcome to the crossroads."),
+        Loc.T("A welcome present for the new Keywright. One coin, mind: it's bad luck to give a chest for nothing."),
     };
 
     /// <summary>The same chest, offered as a welcome gift: for a single coin, take it or leave it.</summary>
@@ -147,7 +147,7 @@ public sealed class Visit
         Raise(1 / _unseen);
         _unseen = 1;
         PriceNote = PriceNote?.Replace(_unseenNote, "").Trim() is { Length: > 0 } rest ? rest : null;
-        return $"Ah, you've had your hands on it. Then it's {Money.Say(Price)}.";
+        return Loc.T($"Ah, you've had your hands on it. Then it's {Money.Say(Price)}.");
     }
 
     /// <summary>A curio's word on the price (the Waiting Game, the Closing Bell), for under the chest; or null.</summary>
@@ -275,62 +275,63 @@ public sealed class Visit
     /// </summary>
     public string Explain()
     {
-        if (Seller == Story.VaultSeller) return "King Aldric's own chest, sealed since the Locking. The Gate's gone quiet. Every bit of it is yours.";
+        if (Seller == Story.VaultSeller) return Loc.T("King Aldric's own chest, sealed since the Locking. The Gate's gone quiet. Every bit of it is yours.");
         string name = Seller.Short;
         var lines = new List<string>();
         if (Chest.Items.All(i => i.IsSong) && Chest.Hidden == null)
         {
             lines.Add(Chest.Song is Item only
-                ? $"Nothing rattled because there was nothing there, but {only.Name}. Only a Keywright hears a Heartsong sing."
-                : "Empty! Nothing rattled because there was nothing there.");
+                ? Loc.T($"Nothing rattled because there was nothing there, but {only.Name}. Only a Keywright hears a Heartsong sing.")
+                : Loc.T("Empty! Nothing rattled because there was nothing there."));
             return string.Join(" ", lines);
         }
         var gilded = Chest.Items.Where(i => i.Fake && i.Def.FakeIron).ToList();
         var sand = Chest.Items.Where(i => i.Fake && !i.Def.FakeIron).ToList();
         if (gilded.Count > 0)
-            lines.Add($"{Join(gilded.Select(i => i.Name))}: gilded iron from the Maw's hoard. A lodestone would have silenced {(gilded.Count == 1 ? "it" : "them")}.");
+            lines.Add(Loc.Plural(gilded.Count, $"{Join(gilded.Select(i => i.Name))}: gilded iron from the Maw's hoard. A lodestone would have silenced it.",
+                $"{Join(gilded.Select(i => i.Name))}: gilded iron from the Maw's hoard. A lodestone would have silenced them."));
         else if (Seller.Judge == Judgment.Crook)
-            lines.Add($"All genuine this time, and {name} sold it cheap.");
+            lines.Add(Loc.T($"All genuine this time, and {name} sold it cheap."));
         if (sand.Count > 0)
-            lines.Add($"The {(sand.Count == 1 ? "rustle was" : "rustles were")} sand: it pours at a gentle shake, where parchment never rustles.");
+            lines.Add(Loc.T($"The {(sand.Count == 1 ? Loc.T("rustle was") : Loc.T("rustles were"))} sand: it pours at a gentle shake, where parchment never rustles."));
         switch (Seller.Judge)
         {
             case Judgment.Counter:
-                lines.Add($"{Capital(name)} charged the same for every rattle she heard: {Noticed.Count} of them, whatever they were.");
+                lines.Add(Loc.T($"{Capital(name)} charged the same for every rattle she heard: {Noticed.Count} of them, whatever they were."));
                 break;
             case Judgment.Weight:
             {
                 var heavy = Chest.Items.Where(i => Categories.Heft(i.Category) >= 2).ToList();
                 var light = Chest.Items.Where(i => Categories.Heft(i.Category) <= 0.5f && !i.IsSong).ToList();
-                if (heavy.Count > 0) lines.Add($"{Capital(name)} went by weight: the {Join(heavy.Select(i => i.Word))} made it heavy.");
-                if (light.Count > 0) lines.Add($"The {Join(light.Select(i => i.Word))} weighed next to nothing to {name}.");
+                if (heavy.Count > 0) lines.Add(Loc.T($"{Capital(name)} went by weight: the {Join(heavy.Select(i => i.Word))} made it heavy."));
+                if (light.Count > 0) lines.Add(Loc.T($"The {Join(light.Select(i => i.Word))} weighed next to nothing to {name}."));
                 break;
             }
             case Judgment.Colour when Seller.Gaze > 0:
-                lines.Add($"One coin for a {Categories.ChestSkin(Chest.Quality)} chest. The price comes later, from everyone after.");
+                lines.Add(Loc.T($"One coin for a {Categories.ColourName(Chest.Quality)} chest. The price comes later, from everyone after."));
                 break;
             case Judgment.Colour:
-                lines.Add($"{Capital(name)} priced it as an ordinary {Categories.ChestSkin(Chest.Quality)} chest, without looking inside.");
+                lines.Add(Loc.T($"{Capital(name)} priced it as an ordinary {Categories.ColourName(Chest.Quality)} chest, without looking inside."));
                 break;
             case Judgment.Dreamer:
-                lines.Add($"{Capital(name)}'s price came from a dream. Only the chest could tell you what it was worth.");
+                lines.Add(Loc.T($"{Capital(name)}'s price came from a dream. Only the chest could tell you what it was worth."));
                 break;
             case Judgment.Jeweller:
-                lines.Add($"{Capital(name)} priced her gems at what she paid for them; everything else came free.");
+                lines.Add(Loc.T($"{Capital(name)} priced her gems at what she paid for them; everything else came free."));
                 break;
             case Judgment.Miner:
             {
                 var gems = Chest.Get(Category.Gems);
-                if (gems != null && Noticed.Contains(Category.Gems)) lines.Add($"{Capital(name)} priced the {gems.Name} like a diamond fit for a crown.");
+                if (gems != null && Noticed.Contains(Category.Gems)) lines.Add(Loc.T($"{Capital(name)} priced the {gems.Name} like a diamond fit for a crown."));
                 var junk = Chest.Items.Where(i => Noticed.Contains(i.Category) && i.Category is not (Category.Arms or Category.Gems)).ToList();
-                if (junk.Count > 0) lines.Add($"He priced the {Join(junk.Select(i => i.Word))} at half.");
+                if (junk.Count > 0) lines.Add(Loc.T($"He priced the {Join(junk.Select(i => i.Word))} at half."));
                 break;
             }
             case Judgment.Clueless when Seller.SlipPrice:
-                lines.Add($"{Capital(name)} let your slip set the price.");
+                lines.Add(Loc.T($"{Capital(name)} let your slip set the price."));
                 break;
             case Judgment.Clueless:
-                lines.Add($"{Capital(name)} had no idea what was inside.");
+                lines.Add(Loc.T($"{Capital(name)} had no idea what was inside."));
                 break;
         }
         // What a listener couldn't hear, and why; and what they heard but never counted.
@@ -341,49 +342,49 @@ public sealed class Visit
             if (unheard.Count > 0)
             {
                 string words = Join(unheard.Select(i => i.Word).Distinct());
-                string why = unheard.All(i => i.Def.Delicate && Chest.Clanks(Seller.Shakes, plain: true)) ? $"The clank drowned out the {words} for {name}"
-                    : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Shake.Hard) ? $"Nothing stirs the {words} through straw"
-                    : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? $"Through the straw, {name}'s shake was too gentle to stir the {words}"
-                    : unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? $"{Capital(name)} didn't shake hard enough to stir the {words}"
-                    : $"{Capital(name)} shook {Categories.Adverb(Seller.Shakes)} and missed the {words}";
-                lines.Add($"{why}: {Join(unheard.Select(i => i.Name))}, unpriced.");
+                string why = unheard.All(i => i.Def.Delicate && Chest.Clanks(Seller.Shakes, plain: true)) ? Loc.T($"The clank drowned out the {words} for {name}")
+                    : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Shake.Hard) ? Loc.T($"Nothing stirs the {words} through straw")
+                    : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? Loc.T($"Through the straw, {name}'s shake was too gentle to stir the {words}")
+                    : unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? Loc.T($"{Capital(name)} didn't shake hard enough to stir the {words}")
+                    : Loc.T($"{Capital(name)} shook {Categories.Adverb(Seller.Shakes)} and missed the {words}");
+                lines.Add(Loc.T($"{why}: {Join(unheard.Select(i => i.Name))}, unpriced."));
             }
             if (!Seller.Counts)
                 foreach (var group in noticed.Where(i => !i.Fake).GroupBy(i => i.Category).Where(g => g.Count() > 1))
-                    lines.Add($"{Capital(name)} heard the {group.First().Word} but never counted: {Sellers.Number(group.Count())} for the price of one.");
+                    lines.Add(Loc.T($"{Capital(name)} heard the {group.First().Word} but never counted: {Sellers.Number(group.Count())} for the price of one."));
         }
         if (Chest.Hidden != null)
-            lines.Add(Says == Core.Clue.Articles ? $"The ticket counted the false bottom, but {name} never reads tickets: {Chest.Hidden.Name}."
-                : Says == Core.Clue.Tally ? $"The Guild's tally counted the false bottom too: {Chest.Hidden.Name}."
-                : $"A false bottom nobody knew about: {Chest.Hidden.Name}.");
+            lines.Add(Says == Core.Clue.Articles ? Loc.T($"The ticket counted the false bottom, but {name} never reads tickets: {Chest.Hidden.Name}.")
+                : Says == Core.Clue.Tally ? Loc.T($"The Guild's tally counted the false bottom too: {Chest.Hidden.Name}.")
+                : Loc.T($"A false bottom nobody knew about: {Chest.Hidden.Name}."));
         // A warded thing: named and given up, or still in the ward, and the clue that said so.
         if (Chest.Unwarded is Item freed)
-            lines.Add($"You named what the ward held, and it gave it up: the {freed.Name}. Nobody had priced it.");
+            lines.Add(Loc.T($"You named what the ward held, and it gave it up: the {freed.Name}. Nobody had priced it."));
         else if (Chest.Warded is Item kept)
-            lines.Add($"Warded, silent and weightless: the {kept.Name}. {WardHint(kept)}");
+            lines.Add(Loc.T($"Warded, silent and weightless: the {kept.Name}. {WardHint(kept)}"));
         if (Chest.Song is Item song)
-            lines.Add($"Only a Keywright hears a Heartsong sing: nobody knew {song.Name} was in it.");
+            lines.Add(Loc.T($"Only a Keywright hears a Heartsong sing: nobody knew {song.Name} was in it."));
         var magic = Chest.Everything.Where(i => i.Magic).ToList();
         if (magic.Count > 0)
-            lines.Add($"Nobody can hear enchantment: the {Join(magic.Select(i => i.Name))} went for the price of plain goods.");
+            lines.Add(Loc.T($"Nobody can hear enchantment: the {Join(magic.Select(i => i.Name))} went for the price of plain goods."));
         if (lines.Count == 0)
             lines.Add(Trade == Trade.Fixed
-                ? $"{Capital(name)} heard everything, and always asks a bit more than it's worth."
-                : $"{Capital(name)} heard everything. The deal was in the price you agreed.");
+                ? Loc.T($"{Capital(name)} heard everything, and always asks a bit more than it's worth.")
+                : Loc.T($"{Capital(name)} heard everything. The deal was in the price you agreed."));
         return string.Join(" ", lines);
     }
 
     /// <summary>How the seller's clue pointed at a warded thing nobody named.</summary>
     string WardHint(Item kept) => Says switch
     {
-        Core.Clue.Dream => $"{Capital(Categories.Sign(kept.Category))} in the dream, and nothing of the kind to hear: that was it.",
-        Core.Clue.Tag => $"{Capital(Categories.One(kept.Category))} on the tag that never made a sound: that was it.",
-        Core.Clue.Riddle => "The riddle was about it, and it never made a sound.",
-        Core.Clue.Dowry => $"The dowry's {Categories.One(kept.Category).Replace("a ", "")} never made a sound: the bride had warded it.",
-        Core.Clue.Roll => $"The roll's '{Market.Faded(kept.Name)}' was the {kept.Name}.",
-        Core.Clue.Echo => $"A {Categories.Shape(kept.Category)} echo that never made a sound: that was it.",
-        Core.Clue.Cards => $"{Categories.Suit(kept.Category)} came up twice.",
-        _ => "Nobody could have known.",
+        Core.Clue.Dream => Loc.T($"{Capital(Categories.Sign(kept.Category))} in the dream, and nothing of the kind to hear: that was it."),
+        Core.Clue.Tag => Loc.T($"{Capital(Categories.One(kept.Category))} on the tag that never made a sound: that was it."),
+        Core.Clue.Riddle => Loc.T("The riddle was about it, and it never made a sound."),
+        Core.Clue.Dowry => Loc.T($"The dowry's {Categories.One(kept.Category).Replace("a ", "")} never made a sound: the bride had warded it."),
+        Core.Clue.Roll => Loc.T($"The roll's '{Market.Faded(kept.Name)}' was the {kept.Name}."),
+        Core.Clue.Echo => Loc.T($"A {Categories.Shape(kept.Category)} echo that never made a sound: that was it."),
+        Core.Clue.Cards => Loc.T($"{Categories.Suit(kept.Category)} came up twice."),
+        _ => Loc.T("Nobody could have known."),
     };
 
     static string Capital(string word) => char.ToUpperInvariant(word[0]) + word[1..];
@@ -400,24 +401,24 @@ public static class Gut
     // From "you were right to walk away" to "you walked away from a fortune": what it held against their price.
     static readonly (float Below, string[] Lines)[] AfterPass =
     {
-        (0.35f, new[] { "You have a feeling you dodged a cart.", "Somewhere, your purse sighs with relief.", "You have a feeling you made the right call." }),
-        (0.8f, new[] { "Nothing to lose sleep over.", "Your gut shrugs. Fair enough.", "It felt overpriced. It probably was." }),
-        (1.25f, new[] { "Could have gone either way.", "Your gut says nothing. It's sulking a little.", "Meh. A wash, probably." }),
-        (2f, new[] { "Maybe that wasn't the best idea.", "A small voice whispers: you should've bought that.", "Your gut grumbles." }),
-        (4f, new[] { "You have a nasty feeling a bargain just walked out the door.", "Your gut is writing you a strongly worded letter.",
-                     "Somewhere, a better shopkeeper is laughing." }),
-        (float.MaxValue, new[] { "Even the heavens pity you.", "Uncle Bram, somewhere, is weeping softly.", "Your gut has stopped speaking to you." }),
+        (0.35f, new[] { Loc.T("You have a feeling you dodged a cart."), Loc.T("Somewhere, your purse sighs with relief."), Loc.T("You have a feeling you made the right call.") }),
+        (0.8f, new[] { Loc.T("Nothing to lose sleep over."), Loc.T("Your gut shrugs. Fair enough."), Loc.T("It felt overpriced. It probably was.") }),
+        (1.25f, new[] { Loc.T("Could have gone either way."), Loc.T("Your gut says nothing. It's sulking a little."), Loc.T("Meh. A wash, probably.") }),
+        (2f, new[] { Loc.T("Maybe that wasn't the best idea."), Loc.T("A small voice whispers: you should've bought that."), Loc.T("Your gut grumbles.") }),
+        (4f, new[] { Loc.T("You have a nasty feeling a bargain just walked out the door."), Loc.T("Your gut is writing you a strongly worded letter."),
+                     Loc.T("Somewhere, a better shopkeeper is laughing.") }),
+        (float.MaxValue, new[] { Loc.T("Even the heavens pity you."), Loc.T("Uncle Bram, somewhere, is weeping softly."), Loc.T("Your gut has stopped speaking to you.") }),
     };
 
     // From "fleeced" to "a steal": what it held against what you paid.
     static readonly (float Below, string[] Lines)[] AfterBuy =
     {
-        (0.3f, new[] { "Even the heavens pity you.", "You feel like you just paid for the privilege of being robbed." }),
-        (0.7f, new[] { "You feel like you just got fleeced.", "Your purse feels lighter. Your heart, heavier." }),
-        (1f, new[] { "Maybe that wasn't the best idea.", "Close, but the house won. You are the house." }),
-        (1.5f, new[] { "Nothing to lose sleep over.", "A fair day's trade." }),
-        (3f, new[] { "You have a feeling you made the right call.", "Your gut does a little dance." }),
-        (float.MaxValue, new[] { "Highway robbery. The legal kind.", "The heavens smile on you. Don't let it go to your head." }),
+        (0.3f, new[] { Loc.T("Even the heavens pity you."), Loc.T("You feel like you just paid for the privilege of being robbed.") }),
+        (0.7f, new[] { Loc.T("You feel like you just got fleeced."), Loc.T("Your purse feels lighter. Your heart, heavier.") }),
+        (1f, new[] { Loc.T("Maybe that wasn't the best idea."), Loc.T("Close, but the house won. You are the house.") }),
+        (1.5f, new[] { Loc.T("Nothing to lose sleep over."), Loc.T("A fair day's trade.") }),
+        (3f, new[] { Loc.T("You have a feeling you made the right call."), Loc.T("Your gut does a little dance.") }),
+        (float.MaxValue, new[] { Loc.T("Highway robbery. The legal kind."), Loc.T("The heavens smile on you. Don't let it go to your head.") }),
     };
 
     public static string Pass(int held, int price, Random rng) => Pick(AfterPass, held / (float)Math.Max(1, price), rng);

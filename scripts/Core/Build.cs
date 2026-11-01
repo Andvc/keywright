@@ -387,20 +387,20 @@ public sealed partial class GameState : ISlipModel
         if (HasCurio("hourglass") && PassStreak > 0)
         {
             float off = Math.Min(Curios.WaitMax, Curios.WaitStep * PassStreak);
-            visit.Reduce(1 - off, $"Waiting Game: {Synergies.Pct(off)} off.");
+            visit.Reduce(1 - off, Loc.T($"Waiting Game: {Synergies.Pct(off)} off."));
         }
         if (HasCurio("wholesale") && Today.Bought > 0)
         {
             float off = Math.Min(Curios.WholesaleMax, Curios.WholesaleStep * Today.Bought);
-            visit.Reduce(1 - off, $"Wholesaler's Tally: {Synergies.Pct(off)} off.");
+            visit.Reduce(1 - off, Loc.T($"Wholesaler's Tally: {Synergies.Pct(off)} off."));
         }
         if (HasCurio("knot") && Bargains > 0)
         {
             float off = Math.Min(Curios.KnotMax, Curios.KnotStep * Bargains);
-            visit.Reduce(1 - off, $"Haggler's Knot: {Synergies.Pct(off)} off.");
+            visit.Reduce(1 - off, Loc.T($"Haggler's Knot: {Synergies.Pct(off)} off."));
         }
-        if (HasCurio("bell") && Queue.Count == 0) visit.Reduce(Curios.BellPrice, $"Closing Bell: the day's last, {Synergies.Pct(1 - Curios.BellPrice)} off.");
-        if (UnseenPrice < 1) visit.Seal(UnseenPrice, $"Sight unseen: {Synergies.Pct(1 - UnseenPrice)} off while you keep your hands off it.");
+        if (HasCurio("bell") && Queue.Count == 0) visit.Reduce(Curios.BellPrice, Loc.T($"Closing Bell: the day's last, {Synergies.Pct(1 - Curios.BellPrice)} off."));
+        if (UnseenPrice < 1) visit.Seal(UnseenPrice, Loc.T($"Sight unseen: {Synergies.Pct(1 - UnseenPrice)} off while you keep your hands off it."));
     }
 
     /// <summary>What a seller takes for a chest you buy without a shake, a drop or the lodestone: a sealed bid's price, and a blindfold's.</summary>
@@ -586,14 +586,13 @@ public sealed partial class GameState : ISlipModel
     public string ShortNote(int price, Upgrade upgrade = null, CurioDef curio = null)
     {
         int left = Gold - price;
-        if (DuesTonight && !PaidThisWeek && left < DueNow) return $"The Guild comes tonight for {DueNow}g, and you'd have {left}g left.";
+        if (DuesTonight && !PaidThisWeek && left < DueNow) return Loc.T($"The Guild comes tonight for {DueNow}g, and you'd have {left}g left.");
         int keep = ReserveIf(upgrade, curio);
         if (left >= keep) return null;
         bool moving = upgrade != null && upgrade.SetsTier > Tier;
         float rise = (float)keep / Math.Max(1, WorkingPurse) - 1;
-        string dearer = moving || rise < 0.05f ? "" : $" (sellers will ask about {Synergies.Pct(rise)} more once they hear of it)";
-        return $"After the {upgrade?.Name ?? curio?.Name}, two typical chests {(moving ? $"at {ShopTiers.Name(upgrade.SetsTier)}" : "here")} would cost " +
-               $"about {keep}g{dearer}, and you'd have {left}g. You may not be able to afford chests for a while.";
+        string dearer = moving || rise < 0.05f ? "" : Loc.T($" (sellers will ask about {Synergies.Pct(rise)} more once they hear of it)");
+        return Loc.T($"After the {upgrade?.Name ?? curio?.Name}, two typical chests {(moving ? Loc.T($"at {ShopTiers.Name(upgrade.SetsTier)}") : Loc.T("here"))} would cost about {keep}g{dearer}, and you'd have {left}g. You may not be able to afford chests for a while.");
     }
 
     /// <summary>Works something out as if this upgrade or curio were owned too.</summary>

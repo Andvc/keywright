@@ -151,21 +151,21 @@ public sealed partial class GameState
     {
         var seller = visit.Seller;
         var terms = new List<string>();
-        if (seller.ShakeLimit > 0) terms.Add($"Rotten: it stands {ShakeLimit(seller):0} seconds of shaking, all told.");
-        if (visit.Chest.Packed) terms.Add("Packed in straw: everything needs a strength harder to stir.");
-        if (seller.Packhorse) terms.Add("On a skittish mare: no hard shake.");
-        else if (EventIs("mourning") && CanShakeHard) terms.Add("A day of mourning: no hard shake.");
-        if (seller.ShakeFee > 0) terms.Add($"Each strength you try after the first puts the price up {Synergies.Pct(seller.ShakeFee)}.");
-        if (seller.Wager > 0) terms.Add("Read it exactly right and he gives back a third of the price.");
-        if (seller.Heirloom is Category heirloom) terms.Add($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g.");
-        if (seller.TakesDearest) terms.Add("The dearest thing inside is his.");
-        if (seller.SlipPrice) terms.Add("His price is your slip: exactly right, a quarter off; wrong, what it holds and a quarter more.");
-        if (seller.Gaze > 0) terms.Add($"Buy, and everyone after him today asks {(seller.Gaze == 2 ? "twice as much" : $"x{seller.Gaze:0.#}")}.");
+        if (seller.ShakeLimit > 0) terms.Add(Loc.T($"Rotten: it stands {ShakeLimit(seller):0} seconds of shaking, all told."));
+        if (visit.Chest.Packed) terms.Add(Loc.T("Packed in straw: everything needs a strength harder to stir."));
+        if (seller.Packhorse) terms.Add(Loc.T("On a skittish mare: no hard shake."));
+        else if (EventIs("mourning") && CanShakeHard) terms.Add(Loc.T("A day of mourning: no hard shake."));
+        if (seller.ShakeFee > 0) terms.Add(Loc.T($"Each strength you try after the first puts the price up {Synergies.Pct(seller.ShakeFee)}."));
+        if (seller.Wager > 0) terms.Add(Loc.T("Read it exactly right and he gives back a third of the price."));
+        if (seller.Heirloom is Category heirloom) terms.Add(Loc.T($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g."));
+        if (seller.TakesDearest) terms.Add(Loc.T("The dearest thing inside is his."));
+        if (seller.SlipPrice) terms.Add(Loc.T("His price is your slip: exactly right, a quarter off; wrong, what it holds and a quarter more."));
+        if (seller.Gaze > 0) terms.Add(Loc.T($"Buy, and everyone after him today asks {(seller.Gaze == 2 ? Loc.T("twice as much") : $"x{seller.Gaze:0.#}")}."));
         var minds = new List<string>();
-        if (MindsHardShake(seller)) minds.Add("a hard shake");
-        if (MindsDrop(seller)) minds.Add("a drop");
-        if (MindsMagnet(seller)) minds.Add("the lodestone");
-        if (minds.Count > 0) terms.Add($"Minds {Sellers.Join(minds)}: half again if you do.");
+        if (MindsHardShake(seller)) minds.Add(Loc.T("a hard shake"));
+        if (MindsDrop(seller)) minds.Add(Loc.T("a drop"));
+        if (MindsMagnet(seller)) minds.Add(Loc.T("the lodestone"));
+        if (minds.Count > 0) terms.Add(Loc.T($"Minds {Sellers.Join(minds)}: half again if you do."));
         return terms.Count == 0 ? null : string.Join(" ", terms);
     }
 

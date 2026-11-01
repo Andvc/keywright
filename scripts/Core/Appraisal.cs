@@ -15,16 +15,16 @@ public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false, boo
 
     public string Note => Kind switch
     {
-        ReadKind.RightMagic => "enchanted!",
-        ReadKind.SpottedFake => "fake, as you thought",
-        ReadKind.SpottedBroken => "broken, as you knew",
-        ReadKind.FoundHidden => "the false bottom!",
-        ReadKind.Missed => "you missed it",
-        ReadKind.MissedMagic => "enchanted: missed the glow",
-        ReadKind.NotMagic => "not enchanted",
-        ReadKind.Fooled => "FAKE",
-        ReadKind.Broken => "broken",
-        ReadKind.MissedHidden => "a false bottom!",
+        ReadKind.RightMagic => Loc.T("enchanted!"),
+        ReadKind.SpottedFake => Loc.T("fake, as you thought"),
+        ReadKind.SpottedBroken => Loc.T("broken, as you knew"),
+        ReadKind.FoundHidden => Loc.T("the false bottom!"),
+        ReadKind.Missed => Loc.T("you missed it"),
+        ReadKind.MissedMagic => Loc.T("enchanted: missed the glow"),
+        ReadKind.NotMagic => Loc.T("not enchanted"),
+        ReadKind.Fooled => Loc.T("FAKE"),
+        ReadKind.Broken => Loc.T("broken"),
+        ReadKind.MissedHidden => Loc.T("a false bottom!"),
         _ => "",
     };
 }

@@ -47,15 +47,15 @@ public partial class CollectionView : Node2D
         };
         AddChild(blocker);
         AddChild(UiKit.MakePanel(Palette.Gold.Darkened(0.3f)).Place(PanelX, PanelY, PanelW, PanelH));
-        AddChild(UiKit.MakeLabel("COLLECTION", 32, Palette.Gold, outline: 4).Place(PanelX + 24, PanelY + 10, 260, 40));
+        AddChild(UiKit.MakeLabel(Loc.T("COLLECTION"), 32, Palette.Gold, outline: 4).Place(PanelX + 24, PanelY + 10, 260, 40));
         _tabs = new[]
         {
-            UiKit.MakeButton("Finds", Palette.Gold, 16, () => ShowPage(FindsPage)).Place(PanelX + 270, PanelY + 14, 96, 36),
-            UiKit.MakeButton("Curios", Palette.Magic, 16, () => ShowPage(CuriosPage)).Place(PanelX + 372, PanelY + 14, 96, 36),
-            UiKit.MakeButton("Heartsongs", Palette.Of(Rarity.Mythic), 16, () => ShowPage(SongsPage)).Place(PanelX + 474, PanelY + 14, 136, 36),
+            UiKit.MakeButton(Loc.T("Finds"), Palette.Gold, 16, () => ShowPage(FindsPage)).Place(PanelX + 270, PanelY + 14, 96, 36),
+            UiKit.MakeButton(Loc.T("Curios"), Palette.Magic, 16, () => ShowPage(CuriosPage)).Place(PanelX + 372, PanelY + 14, 96, 36),
+            UiKit.MakeButton(Loc.T("Heartsongs"), Palette.Of(Rarity.Mythic), 16, () => ShowPage(SongsPage)).Place(PanelX + 474, PanelY + 14, 136, 36),
         };
         foreach (var tab in _tabs) AddChild(tab);
-        AddChild(UiKit.MakeButton("Close", Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
+        AddChild(UiKit.MakeButton(Loc.T("Close"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
         _page = new Node2D();
         AddChild(_page);
         ShowPage(_firstPage);
@@ -82,7 +82,7 @@ public partial class CollectionView : Node2D
     void BuildFinds()
     {
         const float cell = 64, gridX = TableX + 140, gridY = PanelY + 92, step = cell + 76;
-        string[] columns = { "Common", "Uncommon", "Rare", "Epic", "Legendary", "Fake" };
+        string[] columns = { Loc.T("Common"), Loc.T("Uncommon"), Loc.T("Rare"), Loc.T("Epic"), Loc.T("Legendary"), Loc.T("Fake") };
         for (int c = 0; c < columns.Length; c++)
             _page.AddChild(UiKit.MakeLabel(columns[c], 16, c < 5 ? Palette.Of((Rarity)c) : Palette.Muted, HorizontalAlignment.Center)
                 .Place(gridX + c * step - 38, gridY - 26, cell + 66, 20));
@@ -100,8 +100,8 @@ public partial class CollectionView : Node2D
                 bool found = _c.Found(entry.Entry);
                 bool enchanted = _c.FoundEnchanted(entry.Entry);
                 var slot = UiKit.MakePanel(found ? Palette.Of(entry.Rarity) : Palette.PanelBorder).Place(x, y, cell - 10, cell - 10);
-                slot.TooltipText = !found ? "Not found yet"
-                    : $"{entry.Entry}: {entry.Value}g" + (enchanted ? $" (found enchanted too: {entry.Value * Categories.MagicMultiplier}g)" : "");
+                slot.TooltipText = !found ? Loc.T("Not found yet")
+                    : Loc.T($"{Loc.T(entry.Entry)}: {entry.Value}g{((enchanted ? Loc.T($" (found enchanted too: {entry.Value * Categories.MagicMultiplier}g)") : ""))}");
                 slot.MouseFilter = Control.MouseFilterEnum.Pass;
                 _page.AddChild(slot);
                 if (found)
@@ -117,9 +117,8 @@ public partial class CollectionView : Node2D
             }
             row++;
         }
-        string thisRun = _c.InRun ? $" ({_c.FoundThisRun} this run)" : "";
-        _page.AddChild(UiKit.MakeLabel($"Found {_c.FoundCount} of {Collection.Size}, in every run so far{thisRun}. " +
-                                       "A star: found enchanted too. Hover one for its name and price.", 16, Palette.Muted)
+        string thisRun = _c.InRun ? Loc.T($" ({_c.FoundThisRun} this run)") : "";
+        _page.AddChild(UiKit.MakeLabel(Loc.T($"Found {_c.FoundCount} of {Collection.Size}, in every run so far{thisRun}. A star: found enchanted too. Hover one for its name and price."), 16, Palette.Muted)
             .Place(TableX, PanelY + PanelH - 34, PanelW - 48, 20));
     }
 
@@ -136,8 +135,7 @@ public partial class CollectionView : Node2D
         var detail = UiKit.MakeLabel("", 16, Palette.Text).Wrapped();
         detail.Place(TableX, gridY + 6 * (cellH + gap) + 4, PanelW - 48, 44);
         int seen = Curios.All.Count(c => _c.SawCurio(c.Key)), open = Curios.All.Count(c => _c.Carried(c.Key));
-        string summary = $"Seen {seen} of {Curios.All.Length}; Nim carries {open} of them {(_c.InRun ? "this run" : "now")}. " +
-                         "Hover one for what it does, or what opens it.";
+        string summary = Loc.T($"Seen {seen} of {Curios.All.Length}; Nim carries {open} of them {(_c.InRun ? Loc.T("this run") : Loc.T("now"))}. Hover one for what it does, or what opens it.");
         for (int i = 0; i < Curios.All.Length; i++)
         {
             var curio = Curios.All[i];
@@ -151,12 +149,12 @@ public partial class CollectionView : Node2D
             {
                 cell.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(cellW / 2, cellH / 2)));
                 if (yours) cell.AddChild(UiKit.MakeLabel("*", 24, Palette.Gold, outline: 4).Place(cellW - 20, -6, 20, 30));
-                text = $"{curio.Name} ({Curios.RarityName(curio.Rarity)}; {Curios.Tags(curio)}{(yours ? "; yours" : "")}): {curio.Blurb}";
+                text = $"{curio.Name} ({Curios.RarityName(curio.Rarity)}; {Curios.Tags(curio)}{(yours ? Loc.T("; yours") : "")}): {curio.Blurb}";
             }
             else if (carried)
             {
                 cell.AddChild(UiKit.MakeLabel("?", 24, Palette.Muted, HorizontalAlignment.Center).Place(0, 18, cellW, 30));
-                text = $"A {Curios.RarityName(curio.Rarity)} curio Nim carries, for {Curios.Tags(curio)}. You haven't seen it yet.";
+                text = Loc.T($"A {Curios.RarityName(curio.Rarity)} curio Nim carries, for {Curios.Tags(curio)}. You haven't seen it yet.");
             }
             else
             {
@@ -164,9 +162,9 @@ public partial class CollectionView : Node2D
                 icon.Modulate = new Color(0.08f, 0.07f, 0.1f, 0.9f);
                 cell.AddChild(icon);
                 string progress = curio.Unlock == CurioUnlock.Feat && Curios.Feats.TryGetValue(curio.Key, out var feat)
-                    ? $" So far: {_c.FeatDone(feat.Feat)} of {feat.Needed}."
+                    ? Loc.T($" So far: {_c.FeatDone(feat.Feat)} of {feat.Needed}.")
                     : "";
-                text = $"Locked: a {Curios.RarityName(curio.Rarity)} curio for {Curios.Tags(curio)}. Nim brings it {Curios.UnlockText(curio)}.{progress}";
+                text = Loc.T($"Locked: a {Curios.RarityName(curio.Rarity)} curio for {Curios.Tags(curio)}. Nim brings it {Curios.UnlockText(curio)}.{progress}");
             }
             cell.MouseEntered += () => detail.Text = text;
             cell.MouseExited += () => detail.Text = summary;
@@ -182,10 +180,7 @@ public partial class CollectionView : Node2D
     void BuildSongs()
     {
         int known = _c.SongsKnown;
-        _page.AddChild(UiKit.MakeLabel("Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a " +
-                                       "Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. " +
-                                       $"Bram's kin know {known} of the nine" +
-                                       (known == Heartsongs.All.Length ? ": the Crown Chest can be sung whole." : ": with all nine, the Crown Chest's ending changes."),
+        _page.AddChild(UiKit.MakeLabel(Loc.T($"Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. Bram's kin know {known} of the nine{((known == Heartsongs.All.Length ? Loc.T(": the Crown Chest can be sung whole.") : Loc.T(": with all nine, the Crown Chest's ending changes.")))}"),
             16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
         const float cardW = 376, cardH = 128, gap = 8;
         for (int i = 0; i < Heartsongs.All.Length; i++)
@@ -201,15 +196,15 @@ public partial class CollectionView : Node2D
             if (!found)
             {
                 card.AddChild(UiKit.MakeLabel("?", 32, Palette.Muted, HorizontalAlignment.Center).Place(0, 44, cardW, 40));
-                card.TooltipText = "Not heard yet.";
+                card.TooltipText = Loc.T("Not heard yet.");
                 continue;
             }
-            card.TooltipText = $"{song.Name}, from {song.From}. {song.Story}";
+            card.TooltipText = Loc.T($"{Loc.T(song.Name)}, from {song.From}. {song.Story}");
             card.AddChild(UiKit.MakeItemIcon(Heartsongs.Make(song, Rarity.Common), new Vector2(32, 40), 48));
             // Who gave it is in the tooltip with its story: the card has room for what it does.
-            card.AddChild(UiKit.MakeLabel(song.Name, 16, Palette.Of(Rarity.Mythic)).Place(64, 6, cardW - 72, 20));
+            card.AddChild(UiKit.MakeLabel(Loc.T(song.Name), 16, Palette.Of(Rarity.Mythic)).Place(64, 6, cardW - 72, 20));
             card.AddChild(UiKit.MakeLabel(song.Effect, 16, Palette.Text).Wrapped().Place(64, 30, cardW - 72, 92));
-            if (singing) card.AddChild(UiKit.MakeLabel("singing", 16, Palette.Gold, HorizontalAlignment.Right).Place(cardW - 100, 6, 92, 20));
+            if (singing) card.AddChild(UiKit.MakeLabel(Loc.T("singing"), 16, Palette.Gold, HorizontalAlignment.Right).Place(cardW - 100, 6, 92, 20));
         }
     }
 

@@ -417,7 +417,7 @@ public static class Market
         int fee = seller.Heirloom is Category heirloom ? Money.Round(Categories.Nominal(heirloom, chest.Quality) * HeirloomShare) : 0;
         var clue = MakeClue(rng, seller, chest);
         string line = Fill(pitch ?? Story(rng, seller, origin), seller, chest, shopTier).Replace("{clue}", clue?.Said ?? "")
-            .Replace("{price}", seller.SlipPrice ? "your slip's worth" : Money.Say(asking)).Replace("{fee}", Money.Say(fee)).Replace("{origin}", origin?.Name ?? "somewhere");
+            .Replace("{price}", seller.SlipPrice ? Loc.T("your slip's worth") : Money.Say(asking)).Replace("{fee}", Money.Say(fee)).Replace("{origin}", origin?.Name ?? Loc.T("somewhere"));
         return new Visit(seller, chest, noticed, format, format == Trade.Offer ? 0 : asking, Money.Round(floor), line)
         {
             Origin = origin, Fee = fee, Clue = clue?.Note, ClueKinds = clue?.Kinds ?? Array.Empty<Category>(),
@@ -441,49 +441,49 @@ public static class Market
         switch (says ?? seller.States)
         {
             case Core.Clue.Articles:
-                return new(Articles(chest), $"The pawn ticket says {Articles(chest)}.", Array.Empty<Category>());
+                return new(Articles(chest), Loc.T($"The pawn ticket says {Articles(chest)}."), Array.Empty<Category>());
             case Core.Clue.Tally:
-                return new(Articles(chest), $"The Guild clerk's tally: {Articles(chest)}.", Array.Empty<Category>());
+                return new(Articles(chest), Loc.T($"The Guild clerk's tally: {Articles(chest)}."), Array.Empty<Category>());
             case Core.Clue.Pounds:
             {
                 string pounds = Characters.Weight(chest.Pounds);
-                return new(pounds, $"{seller.Short}'s game scale says {pounds}.", Array.Empty<Category>());
+                return new(pounds, Loc.T($"{seller.Short}'s game scale says {pounds}."), Array.Empty<Category>());
             }
             case Core.Clue.Dream:
             {
                 // Of what the Wood warded, or else of the dearest thing in it.
                 var kind = DreamtOf(chest)?.Category;
-                string sign = kind is Category k ? Categories.Sign(k) : "nothing at all";
-                return new(sign, $"{seller.Short} dreamt of {sign}.", kind is Category c ? new[] { c } : Array.Empty<Category>());
+                string sign = kind is Category k ? Categories.Sign(k) : Loc.T("nothing at all");
+                return new(sign, Loc.T($"{seller.Short} dreamt of {sign}."), kind is Category c ? new[] { c } : Array.Empty<Category>());
             }
             case Core.Clue.Tag:
             {
                 var kinds = things.Select(i => (Category?)i.Category).Append(warded?.Category).OfType<Category>().Distinct().OrderBy(k => k).ToArray();
-                string list = kinds.Length == 0 ? "nothing" : Sellers.Join(kinds.Select(Categories.One).ToList());
-                return new(list, $"The Arcanum's tag: packed, {list}.", kinds);
+                string list = kinds.Length == 0 ? Loc.T("nothing") : Sellers.Join(kinds.Select(Categories.One).ToList());
+                return new(list, Loc.T($"The Arcanum's tag: packed, {list}."), kinds);
             }
             case Core.Clue.Riddle:
             {
                 // About the warded thing, if grandmother warded one; else about something else inside.
                 var kind = warded?.Category ?? (things.Count == 0 ? null : rng.PickOne(things.ToArray()).Category);
-                if (kind is not Category k) return new("A riddle with no answer: nothing at all.", "Grandmother left no riddle: the box is empty.", Array.Empty<Category>());
+                if (kind is not Category k) return new(Loc.T("A riddle with no answer: nothing at all."), Loc.T("Grandmother left no riddle: the box is empty."), Array.Empty<Category>());
                 string riddle = rng.PickOne(Riddles[k]);
-                return new(riddle, $"{(own ? "Grandmother" : seller.Short)}'s riddle: \"{riddle}\"", new[] { k });
+                return new(riddle, Loc.T($"{(own ? Loc.T("Grandmother") : seller.Short)}'s riddle: \"{riddle}\""), new[] { k });
             }
             case Core.Clue.Dowry:
-                return new("coin for luck, a cloak for warmth and a potion for health", "A Thornwick dowry always holds coin, a cloak and a potion.",
+                return new(Loc.T("coin for luck, a cloak for warmth and a potion for health"), Loc.T("A Thornwick dowry always holds coin, a cloak and a potion."),
                     Dowry);
             case Core.Clue.Roll:
                 return warded == null
-                    ? new("nothing: it's blank", "The ward-roll is blank: nothing was warded.", Array.Empty<Category>())
-                    : new($"'{Faded(warded.Name)}'", $"The ward-roll, faded: '{Faded(warded.Name)}'.", new[] { warded.Category });
+                    ? new(Loc.T("nothing: it's blank"), Loc.T("The ward-roll is blank: nothing was warded."), Array.Empty<Category>())
+                    : new($"'{Faded(warded.Name)}'", Loc.T($"The ward-roll, faded: '{Faded(warded.Name)}'."), new[] { warded.Category });
             case Core.Clue.Echo:
             {
                 // Every thing inside, warded or not (a false bottom's floor stops the echo).
                 var all = things.Select(i => (Category?)i.Category).Append(warded?.Category).OfType<Category>().OrderBy(k => k).ToArray();
-                string shapes = all.Length == 0 ? "nothing at all"
+                string shapes = all.Length == 0 ? Loc.T("nothing at all")
                     : Sellers.Join(all.GroupBy(k => k).Select(g => $"{Sellers.Number(g.Count())} {Categories.Shape(g.Key)}").ToList());
-                return new(shapes, $"Skrae's echoes: {shapes}.", all);
+                return new(shapes, Loc.T($"Skrae's echoes: {shapes}."), all);
             }
             case Core.Clue.Cards:
             {
@@ -501,7 +501,7 @@ public static class Market
                         cards.Add(rng.PickOne(suits.Except(cards).ToArray()));
                 cards = cards.OrderBy(_ => rng.Next()).ToList();
                 string spread = string.Join(", ", cards.Select(Categories.Suit));
-                return new($"the {Sellers.Join(cards.Select(Categories.Suit).ToList())}", $"Madame Oriel's cards: {spread}.", cards.ToArray());
+                return new(Loc.T($"the {Sellers.Join(cards.Select(Categories.Suit).ToList())}"), Loc.T($"Madame Oriel's cards: {spread}."), cards.ToArray());
             }
             default:
                 return null;
@@ -511,12 +511,12 @@ public static class Market
     /// <summary>Grandmother de Vere's riddles, two for each kind of thing.</summary>
     static readonly Dictionary<Category, string[]> Riddles = new()
     {
-        [Category.Coins] = new[] { "I've a head and a tail, but no body at all.", "Round and bright, I pass from hand to hand, and buy the bread and the land." },
-        [Category.Arms] = new[] { "I've a hilt but no hill, and an edge but no cliff.", "Forged in fire, drawn in anger, sheathed in peace." },
-        [Category.Garb] = new[] { "I've a hood but no head, and I keep the rain off.", "I hang in the hall all day, and keep you warm on the road at night." },
-        [Category.Potions] = new[] { "I'm poured but I'm not rain, drunk but I'm not wine, and I live in glass.", "Uncork me and I heal; drop me and I'm gone." },
-        [Category.Scrolls] = new[] { "Read me once and I'm gone; my words do what they say.", "I'm rolled, but I'm not bread; I'm written, but I'm no letter." },
-        [Category.Gems] = new[] { "Born in the dark, I shine in the light; the more I'm cut, the more I'm worth.", "Hard as ice, but I never melt; I sleep in a ring of gold." },
+        [Category.Coins] = new[] { Loc.T("I've a head and a tail, but no body at all."), Loc.T("Round and bright, I pass from hand to hand, and buy the bread and the land.") },
+        [Category.Arms] = new[] { Loc.T("I've a hilt but no hill, and an edge but no cliff."), Loc.T("Forged in fire, drawn in anger, sheathed in peace.") },
+        [Category.Garb] = new[] { Loc.T("I've a hood but no head, and I keep the rain off."), Loc.T("I hang in the hall all day, and keep you warm on the road at night.") },
+        [Category.Potions] = new[] { Loc.T("I'm poured but I'm not rain, drunk but I'm not wine, and I live in glass."), Loc.T("Uncork me and I heal; drop me and I'm gone.") },
+        [Category.Scrolls] = new[] { Loc.T("Read me once and I'm gone; my words do what they say."), Loc.T("I'm rolled, but I'm not bread; I'm written, but I'm no letter.") },
+        [Category.Gems] = new[] { Loc.T("Born in the dark, I shine in the light; the more I'm cut, the more I'm worth."), Loc.T("Hard as ice, but I never melt; I sleep in a ring of gold.") },
     };
 
     /// <summary>A name three hundred years faded: every other letter of each word gone ("Blood Ruby": "B_o_d R_b_").</summary>
@@ -526,10 +526,10 @@ public static class Market
     /// <summary>How many things the pawn ticket lists: everything that was pledged, false bottom and all (never a Heartsong).</summary>
     public static int ArticleCount(Chest chest) => chest.Everything.Count(i => !i.IsSong);
 
-    static string Articles(Chest chest) => ArticleCount(chest) is var n && n == 1 ? "one article" : $"{Sellers.Number(n)} articles";
+    static string Articles(Chest chest) => ArticleCount(chest) is var n && n == 1 ? Loc.T("one article") : Loc.T($"{Sellers.Number(n)} articles");
 
     /// <summary>The sign in Mother Bramble's dream: of what the Wood warded, or else the dearest thing ("nothing at all" for an empty chest).</summary>
-    public static string Dream(Chest chest) => DreamtOf(chest) is Item dreamt ? Categories.Sign(dreamt.Category) : "nothing at all";
+    public static string Dream(Chest chest) => DreamtOf(chest) is Item dreamt ? Categories.Sign(dreamt.Category) : Loc.T("nothing at all");
 
     /// <summary>
     /// What a true dream is of: the warded thing, or else the dearest thing that could sound (a dream never reaches under
@@ -540,10 +540,10 @@ public static class Market
     static string Fill(string line, SellerDef seller, Chest chest, int shopTier)
     {
         float heft = chest.Items.Sum(i => Categories.Heft(i.Category)) / Math.Max(0.1f, TypicalHeft(seller, shopTier));
-        string heftWord = heft > 1.3f ? "Heavy as a mule" : heft < 0.7f ? "Light, mind" : "A fair weight";
+        string heftWord = heft > 1.3f ? Loc.T("Heavy as a mule") : heft < 0.7f ? Loc.T("Light, mind") : Loc.T("A fair weight");
         return line.Replace("{heft}", heftWord)
-            .Replace("{colour}", Categories.ChestSkin(chest.Quality))
-            .Replace("{magic}", chest.Items.Any(i => i.Magic) ? "there's magic in it" : "there's no magic in it")
+            .Replace("{colour}", Categories.ColourName(chest.Quality))
+            .Replace("{magic}", chest.Items.Any(i => i.Magic) ? Loc.T("there's magic in it") : Loc.T("there's no magic in it"))
             .Replace("{articles}", Articles(chest)).Replace("{pounds}", Characters.Weight(chest.Pounds)).Replace("{dream}", Dream(chest));
     }
 }

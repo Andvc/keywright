@@ -48,22 +48,22 @@ public partial class LockpickPhase : Phase
 
         var metal = Palette.Lock(_lock) ?? Palette.MetalLight;
         Add(UiKit.MakeShop(State.Tier, 0.5f, ShopView.LastHour, State));
-        Add(UiKit.MakeLabel("PICK THE LOCK", 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 64, 1280, 40));
-        Add(UiKit.MakeLabel($"{_lock.Name}: {_lock.Pins} pins", 16, metal, HorizontalAlignment.Center, outline: 4).Place(0, 102, 1280, 24));
+        Add(UiKit.MakeLabel(Loc.T("PICK THE LOCK"), 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 64, 1280, 40));
+        Add(UiKit.MakeLabel(Loc.T($"{_lock.Name}: {_lock.Pins} pins"), 16, metal, HorizontalAlignment.Center, outline: 4).Place(0, 102, 1280, 24));
 
         // The lock's own face, its dark ring track under the dial's zone (art radius 52-68 at 2x: around Radius).
         Add(UiKit.MakeSprite($"res://assets/sprites/lockpick/face_{ChestView.Maker(Math.Clamp(_lock.Index, 1, 3))}.png", Center, 2));
         _dial = Add(new Painter(DrawDial) { Position = Center });
-        _status = Add(UiKit.MakeLabel($"{Controls.Tag(Controls.Act)} or [{(Controls.UsingPad ? "A" : "Left Click")}] when the pick is in the green.", 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
+        _status = Add(UiKit.MakeLabel(Loc.T($"{Controls.Tag(Controls.Act)} or [{(Controls.UsingPad ? Loc.T("A") : Loc.T("Left Click"))}] when the pick is in the green."), 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Place(0, 566, 1280, 24));
-        Add(UiKit.MakeLabel("Clean pick: full value.   No slips, mostly perfect: Masterful, +25%.", 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
+        Add(UiKit.MakeLabel(Loc.T("Clean pick: full value.   No slips, mostly perfect: Masterful, +25%."), 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
             .Place(0, 592, 1280, 20));
 
         // Your own slip says whether there's glass in there.
         bool glass = _purchase.Slip.Count(Category.Potions) > 0;
-        string warning = glass ? "Your slip says there's glass in there. Forcing it will break it." : "Forcing it is quick, but it scratches everything and breaks glass.";
+        string warning = glass ? Loc.T("Your slip says there's glass in there. Forcing it will break it.") : Loc.T("Forcing it is quick, but it scratches everything and breaks glass.");
         Add(UiKit.MakeLabel(warning, 16, glass ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 688, 1280, 20));
-        _crowbar = Add(UiKit.MakeButton($"Force it with a crowbar  {Controls.Tag(Controls.Force)}", Palette.Bad, 16, Force).Place(480, 624, 320, 52));
+        _crowbar = Add(UiKit.MakeButton(Loc.T($"Force it with a crowbar  {Controls.Tag(Controls.Force)}"), Palette.Bad, 16, Force).Place(480, 624, 320, 52));
         _mentor = Add(new MentorView { Position = new Vector2(24, 300), ZIndex = 20 });
         _mentor.Teach(State, "lockpick");
         Game.Moment("06_lockpick", 0.6);
@@ -100,7 +100,7 @@ public partial class LockpickPhase : Phase
             _zoneFlash = 1f;
             Sfx.Play(perfect ? "pin_perfect" : "pin", 1f + _set * 0.08f);
             Game.Shake(perfect ? 0.14f : 0.08f);
-            FloatText(perfect ? "PERFECT!" : "SET", Center + new Vector2(0, 70), perfect ? Palette.Gold : Palette.Good, perfect ? 32 : 24);
+            FloatText(perfect ? Loc.T("PERFECT!") : Loc.T("SET"), Center + new Vector2(0, 70), perfect ? Palette.Gold : Palette.Good, perfect ? 32 : 24);
 
             if (_set >= _lock.Pins)
             {
@@ -118,7 +118,7 @@ public partial class LockpickPhase : Phase
             _slipFlash = 1f;
             Sfx.Play("miss");
             Game.Shake(0.2f);
-            FloatText("SLIP!", Center + new Vector2(0, 70), Palette.Bad, 24);
+            FloatText(Loc.T("SLIP!"), Center + new Vector2(0, 70), Palette.Bad, 24);
             if (_slips >= MaxSlips) Snap();
         }
     }
@@ -136,7 +136,7 @@ public partial class LockpickPhase : Phase
         Sfx.Play("snap");
         Game.Shake(0.5f);
         Game.Flash(Palette.Bad, 0.3f);
-        _status.Text = "The pick snapped! Out comes the crowbar...";
+        _status.Text = Loc.T("The pick snapped! Out comes the crowbar...");
         _status.AddThemeColorOverride("font_color", Palette.Bad);
         await Wait(1.1);
         if (!Alive) return;
@@ -151,14 +151,14 @@ public partial class LockpickPhase : Phase
         if (grade == PickGrade.Forced && _purchase.Chest.Force(State.Rng, State.ForceSturdier).Count > 0)
         {
             Sfx.Play("shatter");
-            FloatText("CRASH", Center + new Vector2(0, -60), Palette.Bad, 32);
+            FloatText(Loc.T("CRASH"), Center + new Vector2(0, -60), Palette.Bad, 32);
         }
 
         var (title, note, color, sound) = grade switch
         {
-            PickGrade.Masterful => ("MASTERFUL!", "Not a scratch. Everything inside is pristine: +25%.", Palette.Gold, "win"),
-            PickGrade.Clean => ("CLICK.", "A clean pick. Everything inside is safe.", Palette.Good, "sting"),
-            _ => ("CRACK.", "Forced open: everything's scratched, and any glass is broken.", Palette.Bad, "crowbar"),
+            PickGrade.Masterful => (Loc.T("MASTERFUL!"), Loc.T("Not a scratch. Everything inside is pristine: +25%."), Palette.Gold, "win"),
+            PickGrade.Clean => (Loc.T("CLICK."), Loc.T("A clean pick. Everything inside is safe."), Palette.Good, "sting"),
+            _ => (Loc.T("CRACK."), Loc.T("Forced open: everything's scratched, and any glass is broken."), Palette.Bad, "crowbar"),
         };
         Sfx.Play(sound);
         if (grade == PickGrade.Forced) Sfx.Play("strain", 0.8f);
@@ -218,7 +218,7 @@ public partial class LockpickPhase : Phase
             p.DrawCircle(pos + new Vector2(-12, 8), 5, color);
             if (i < _slips) p.DrawLine(pos + new Vector2(-4, -8), pos + new Vector2(6, 4), Palette.Bg, 3);
         }
-        p.DrawString(UiKit.Font, new Vector2(-60, Radius + 90), "slips left", HorizontalAlignment.Center, 120, 16, Palette.Muted);
+        p.DrawString(UiKit.Font, new Vector2(-60, Radius + 90), Loc.T("slips left"), HorizontalAlignment.Center, 120, 16, Palette.Muted);
     }
 
     static float Rad(float degrees) => Mathf.DegToRad(degrees);

@@ -176,8 +176,8 @@ public partial class CounterPhase : Phase
                 .Place(-120 + i * 80, 0, 80, 20);
             _strength.AddChild(_strengthWords[i]);
         }
-        if (!State.CanShakeHard) _strengthWords[2].Text = "(back)";
-        else if (_visit.Seller.Packhorse) _strengthWords[2].Text = "(mare)";
+        if (!State.CanShakeHard) _strengthWords[2].Text = Loc.T("(back)");
+        else if (_visit.Seller.Packhorse) _strengthWords[2].Text = Loc.T("(mare)");
     }
 
     /// <summary>
@@ -188,10 +188,10 @@ public partial class CounterPhase : Phase
     {
         var scale = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.35f)).Place(318, 360, 128, 92));
         scale.ZIndex = 10;
-        scale.TooltipText = State.Weighs ? $"Hesk's scale. {State.Kin.Rules[2]}"
-            : $"Wenna's game scale. {Characters.PoundsTable} What it weighs, less what you've ticked, is what you couldn't hear.";
+        scale.TooltipText = State.Weighs ? Loc.T($"Hesk's scale. {State.Kin.Rules[2]}")
+            : Loc.T($"Wenna's game scale. {Characters.PoundsTable} What it weighs, less what you've ticked, is what you couldn't hear.");
         scale.MouseFilter = Control.MouseFilterEnum.Pass;
-        scale.AddChild(UiKit.MakeLabel(State.Weighs ? "ON THE SCALE" : "WENNA'S SCALE", 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center).Place(0, 6, 128, 20));
+        scale.AddChild(UiKit.MakeLabel(State.Weighs ? Loc.T("ON THE SCALE") : Loc.T("WENNA'S SCALE"), 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center).Place(0, 6, 128, 20));
         _scale = UiKit.MakeLabel(Characters.Weight(_visit.Chest.Pounds), 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 28, 128, 30);
         scale.AddChild(_scale);
         _slipWeight = UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Center).Place(0, 62, 128, 20);
@@ -221,10 +221,10 @@ public partial class CounterPhase : Phase
         // Not a nudge to shake a chest hard when its seller won't have it.
         var untried = Levels.Where(level => !tried.Contains(level) && !(level == Core.Shake.Hard && (State.MindsHardShake(_visit.Seller) || !State.CanShakeHardAt(_visit.Seller))))
             .ToList();
-        string done = $"Shaken {string.Join(" and ", tried.Select(Categories.Adverb))}.";
+        string done = Loc.T($"Shaken {string.Join(Loc.T(" and "), tried.Select(Categories.Adverb))}.");
         // A rotten chest that's had all the shaking it stands won't be shaken again.
         bool spent = State.ShakeLimit(_visit.Seller) > 0 && _rotten >= State.ShakeLimit(_visit.Seller);
-        return untried.Count == 0 || spent ? done : $"{done} Not {string.Join(" or ", untried.Select(Categories.Adverb))} yet.";
+        return untried.Count == 0 || spent ? done : Loc.T($"{done} Not {string.Join(Loc.T(" or "), untried.Select(Categories.Adverb))} yet.");
     }
 
     void StartLesson()
@@ -267,7 +267,7 @@ public partial class CounterPhase : Phase
         if (learned)
         {
             Sfx.Play("win", 1.2f, -8);
-            FloatText("Lesson learned!", new Vector2(558, 300), Palette.Good, 24);
+            FloatText(Loc.T("Lesson learned!"), new Vector2(558, 300), Palette.Good, 24);
         }
         Refresh();
     }
@@ -289,11 +289,11 @@ public partial class CounterPhase : Phase
     string ChestNote()
     {
         var chest = _visit.Chest;
-        if (chest.Sealed) return "A black chest wrapped in iron chains: nothing inside can move. Drop it to feel how heavy it is.";
+        if (chest.Sealed) return Loc.T("A black chest wrapped in iron chains: nothing inside can move. Drop it to feel how heavy it is.");
         string colour = chest.Gilded
-            ? $"Gilded, with the royal seal! A colour better than its seller thinks: expect {Categories.QualityName(chest.Quality)} things."
-            : $"A {Categories.ChestSkin(chest.Quality)} chest: expect {Categories.QualityName(chest.Quality)} things.";
-        return chest.Lock.Locked ? $"{colour} Locked: {chest.Lock.Name}, {State.Oiled(chest.Lock).Pins} pins." : colour;
+            ? Loc.T($"Gilded, with the royal seal! A colour better than its seller thinks: expect {Categories.QualityName(chest.Quality)} things.")
+            : Loc.T($"A {Categories.ColourName(chest.Quality)} chest: expect {Categories.QualityName(chest.Quality)} things.");
+        return chest.Lock.Locked ? Loc.T($"{colour} Locked: {chest.Lock.Name}, {State.Oiled(chest.Lock).Pins} pins.") : colour;
     }
 
     /// <summary>Bram's tips for whatever is new about this customer.</summary>
@@ -355,7 +355,7 @@ public partial class CounterPhase : Phase
                 if (_visit.Shook(level, _rng) is string up && !Concluded)
                 {
                     _seller.Say(up, Palette.Warn);
-                    FloatText($"Price +{Synergies.Pct(_visit.Seller.ShakeFee)}", new Vector2(1036, 520), Palette.Warn, 24);
+                    FloatText(Loc.T($"Price +{Synergies.Pct(_visit.Seller.ShakeFee)}"), new Vector2(1036, 520), Palette.Warn, 24);
                     Sfx.Play("bid", 1.3f, -4);
                     Refresh();
                 }
@@ -374,14 +374,14 @@ public partial class CounterPhase : Phase
         CheckLesson();
         UpdateStrength();
         if (_rot != null)
-            _rot.Text = Concluded ? "" : _rotten >= State.ShakeLimit(_visit.Seller) ? "Coming apart: no more shaking"
-                : $"Rotten: {State.ShakeLimit(_visit.Seller) - _rotten:0.0}s of shaking left";
+            _rot.Text = Concluded ? "" : _rotten >= State.ShakeLimit(_visit.Seller) ? Loc.T("Coming apart: no more shaking")
+                : Loc.T($"Rotten: {State.ShakeLimit(_visit.Seller) - _rotten:0.0}s of shaking left");
         string tried = TriedSoFar();
         _hint.Text = Busy || Concluded || _shake.Dragging ? ""
-            : _shake.Hover && tried == "" ? State.CanDrop ? "Drag to shake it. Lift it high and let go to drop it." : "Drag to shake it, gently or firmly: mind your back."
-            : _magnet ? "Lodestone on: iron can't move"
+            : _shake.Hover && tried == "" ? State.CanDrop ? Loc.T("Drag to shake it. Lift it high and let go to drop it.") : Loc.T("Drag to shake it, gently or firmly: mind your back.")
+            : _magnet ? Loc.T("Lodestone on: iron can't move")
             : tried != "" ? tried
-            : _lamp ? "Drag the chest to shake it. The witchlight's lit." : "Drag the chest to shake it";
+            : _lamp ? Loc.T("Drag the chest to shake it. The witchlight's lit.") : Loc.T("Drag the chest to shake it");
 
         // An impatient seller's clock runs while you're deciding (not while Bram is talking, but while he waits for you).
         if (State.Impatient(_visit.Seller) && !Concluded && !_busy && (!_mentor.Showing || _mentor.WaitingForAction))
@@ -438,7 +438,7 @@ public partial class CounterPhase : Phase
             var hanging = UiKit.MakeItemIcon(song, at, songBox);
             hanging.ZIndex = 10;
             _shelf.AddChild(hanging);
-            ShelfButton(song, new Rect2(at.X - songBox / 2, at.Y - songBox / 2, songBox, songBox), $"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing).");
+            ShelfButton(song, new Rect2(at.X - songBox / 2, at.Y - songBox / 2, songBox, songBox), Loc.T($"{song.Name}, singing: {song.SongDef.Effect} Click to let it go (it fetches nothing)."));
         }
         if (!State.DisplayOpen) return;
         const float y = 196, x0 = 300, w = 504;
@@ -451,7 +451,7 @@ public partial class CounterPhase : Phase
             var icon = UiKit.MakeItemIcon(item, new Vector2(x, y), Math.Min(64, slot), standing: true);
             _shelf.AddChild(icon);
             ShelfButton(item, new Rect2(x - Math.Min(32, slot / 2), y - 62, Math.Min(64, slot), 64),
-                $"{item.Name}: {item.Prestige} exhibition points{(item.Magic ? " (double: enchanted)" : "")}. Click to sell it for {State.SaleValue(item)}g.");
+                Loc.T($"{item.Name}: {item.Prestige} exhibition points{(item.Magic ? Loc.T(" (double: enchanted)") : "")}. Click to sell it for {State.SaleValue(item)}g."));
         }
     }
 
@@ -469,10 +469,10 @@ public partial class CounterPhase : Phase
         if (_sellConfirm != null || _busy || !State.Display.Contains(item)) return;
         int value = State.SaleValue(item);
         string text = item.IsSong
-            ? $"{item.Name} goes back to the Locking, and takes this with it: {item.SongDef.Effect} It fetches nothing."
-            : $"Sell the {item.Name} for {value}g? It comes off display: {item.Prestige} exhibition points fewer.";
-        _sellConfirm = Add(UiKit.MakeConfirm(item.IsSong ? "LET IT GO?" : "SELL IT?", text, item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold,
-            item.IsSong ? "Let it go" : $"Sell: +{value}g", () => SellFromDisplay(item), "Keep it", CloseSell));
+            ? Loc.T($"{item.Name} goes back to the Locking, and takes this with it: {item.SongDef.Effect} It fetches nothing.")
+            : Loc.T($"Sell the {item.Name} for {value}g? It comes off display: {item.Prestige} exhibition points fewer.");
+        _sellConfirm = Add(UiKit.MakeConfirm(item.IsSong ? Loc.T("LET IT GO?") : Loc.T("SELL IT?"), text, item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold,
+            item.IsSong ? Loc.T("Let it go") : Loc.T($"Sell: +{value}g"), () => SellFromDisplay(item), Loc.T("Keep it"), CloseSell));
         Game.Moment("01_sell_confirm", 0.3);
     }
 
@@ -496,12 +496,12 @@ public partial class CounterPhase : Phase
         if (item.IsSong)
         {
             Sfx.Play("deflate", 0.8f, -4);
-            FloatText($"{item.Name} goes back to the Locking.", new Vector2(560, 120), Palette.Of(Rarity.Mythic), 16);
+            FloatText(Loc.T($"{item.Name} goes back to the Locking."), new Vector2(560, 120), Palette.Of(Rarity.Mythic), 16);
         }
         else
         {
             Sfx.PlayGroup("pay");
-            FloatText($"+{value}g", new Vector2(560, 150), Palette.Gold, 24);
+            FloatText(Loc.T($"+{value}g"), new Vector2(560, 150), Palette.Gold, 24);
         }
         BuildShelf();
         Refresh();
@@ -511,7 +511,7 @@ public partial class CounterPhase : Phase
     {
         BuildCurios();
         if (State.Queue.Count == 0) return;
-        Add(UiKit.MakeLabel("Waiting", 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
+        Add(UiKit.MakeLabel(Loc.T("Waiting"), 16, Palette.Muted, outline: 4).Place(24, 616, 120, 20));
         for (int i = 0; i < Math.Min(7, State.Queue.Count); i++)
         {
             var face = Add(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{State.Queue[i].Seller.Key}.png", new Vector2(44 + i * 38, 668), 1, outlined: true));
@@ -525,7 +525,7 @@ public partial class CounterPhase : Phase
         var curios = State.OwnedCurios.ToList();
         if (curios.Count == 0) return;
         const float x0 = 330;
-        Add(UiKit.MakeLabel("Curios", 16, Palette.Magic, outline: 4).Place(x0, 616, 120, 20));
+        Add(UiKit.MakeLabel(Loc.T("Curios"), 16, Palette.Magic, outline: 4).Place(x0, 616, 120, 20));
         for (int i = 0; i < curios.Count; i++)
         {
             var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = $"{curios[i].Name}: {curios[i].Blurb}" }
@@ -540,20 +540,19 @@ public partial class CounterPhase : Phase
         var open = State.Commissions.Where(c => !c.Done).Take(3).ToList();
         if (open.Count == 0) return;
         var board = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.4f)).Place(12, 492, 292, 30 + open.Count * 24));
-        board.AddChild(UiKit.MakeLabel("WANTED THIS WEEK", 16, Palette.Gold.Darkened(0.1f)).Place(12, 6, 268, 20));
+        board.AddChild(UiKit.MakeLabel(Loc.T("WANTED THIS WEEK"), 16, Palette.Gold.Darkened(0.1f)).Place(12, 6, 268, 20));
         for (int i = 0; i < open.Count; i++)
         {
             var c = open[i];
-            string what = c.Kind == CommissionKind.Enchanted ? "Anything enchanted"
+            string what = c.Kind == CommissionKind.Enchanted ? Loc.T("Anything enchanted")
                 : $"{Categories.Get(c.Category).Name} {Categories.QualityName(c.Quality)}{(c.Quality < Rarity.Legendary ? "+" : "")}" +
                   (c.Needed > 1 ? $" {c.Delivered}/{c.Needed}" : "");
             var color = c.Story ? Palette.Magic : Palette.Text;
             var line = UiKit.MakeLabel(what, 16, color).Place(12, 28 + i * 24, 180, 20);
             line.MouseFilter = Control.MouseFilterEnum.Pass;
-            line.TooltipText = $"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? " each" : "")}" +
-                               $"{(c.Story ? " and a shard of the Aldric Key" : "")}, or a quarter over what it would sell for, if that's more.";
+            line.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? Loc.T(" each") : "")}{(c.Story ? Loc.T(" and a shard of the Aldric Key") : "")}, or a quarter over what it would sell for, if that's more.");
             board.AddChild(line);
-            board.AddChild(UiKit.MakeLabel(c.Story ? "shard" : c.Needed > 1 ? $"{State.CommissionEach(c)}g ea" : $"{State.CommissionEach(c)}g", 16, c.Story ? Palette.Magic : Palette.Gold,
+            board.AddChild(UiKit.MakeLabel(c.Story ? Loc.T("shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : $"{State.CommissionEach(c)}g", 16, c.Story ? Palette.Magic : Palette.Gold,
                 HorizontalAlignment.Right).Place(180, 28 + i * 24, 100, 20));
         }
     }
@@ -565,14 +564,14 @@ public partial class CounterPhase : Phase
     {
         var panel = Add(new Node2D { ZIndex = 10 });
         panel.AddChild(new Sprite2D { Texture = GD.Load<Texture2D>($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
-        panel.AddChild(UiKit.MakeLabel("YOUR APPRAISAL", 16, Palette.InkGold).Place(PanelX, 80, 220, 20));
-        _notebookButton = UiKit.MakeButton($"Notebook {Controls.Tag(Controls.Notebook)}", Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
+        panel.AddChild(UiKit.MakeLabel(Loc.T("YOUR APPRAISAL"), 16, Palette.InkGold).Place(PanelX, 80, 220, 20));
+        _notebookButton = UiKit.MakeButton(Loc.T($"Notebook {Controls.Tag(Controls.Notebook)}"), Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
         panel.AddChild(_notebookButton);
         var seller = _visit.Seller;
         // Nobody says what's inside: the slip is yours to fill (or the Engine's), and how the seller priced it is the reminder.
-        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? "Ticked: what the Bookkeeping Engine read." : seller.Priced;
-        string values = _visit.Chest.Sealed ? "Sealed: nothing to hear. Go by its weight."
-            : $"Values: as good as a {(_visit.Chest.Gilded ? "gilded" : Categories.ChestSkin(_visit.Chest.Quality))} chest promises.";
+        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? Loc.T("Ticked: what the Bookkeeping Engine read.") : seller.Priced;
+        string values = _visit.Chest.Sealed ? Loc.T("Sealed: nothing to hear. Go by its weight.")
+            : Loc.T($"Values: as good as a {(_visit.Chest.Gilded ? Loc.T("gilded") : Categories.ColourName(_visit.Chest.Quality))} chest promises.");
         // A line each; how they priced it takes both when it's long (the chest's colour is under it anyway).
         bool longWho = UiKit.Font.GetStringSize(who, HorizontalAlignment.Left, -1, 16).X > PanelW;
         _ticked = UiKit.MakeLabel(longWho ? who : $"{who}\n{values}", 16, Palette.InkMuted).Wrapped().Place(PanelX, 106, PanelW, 40);
@@ -588,14 +587,14 @@ public partial class CounterPhase : Phase
         }
         if (State.Tier >= 2)
         {
-            panel.AddChild(MakeRow(null, "False bottom", "boom", y));
+            panel.AddChild(MakeRow(null, Loc.T("False bottom"), "boom", y));
             y += RowStep;
         }
 
         // The tools: the witchlight is always on (a sign), the magnet is a switch.
         var signs = new List<(string Icon, string Short, string Long)>();
         if (State.Witchlight)
-            signs.Add(("lamp", State.Has("lamp") ? "Witchlight" : "Starlight", "Witchlight lit: enchanted things glow"));
+            signs.Add(("lamp", State.Has("lamp") ? Loc.T("Witchlight") : Loc.T("Starlight"), Loc.T("Witchlight lit: enchanted things glow")));
         bool magnet = State.Has("magnet");
         int tools = signs.Count + (magnet ? 1 : 0);
         if (tools > 0)
@@ -620,7 +619,7 @@ public partial class CounterPhase : Phase
             }
         }
 
-        panel.AddChild(UiKit.MakeLabel("As good as promised, it's worth", 16, Palette.InkMuted).Place(PanelX, 482, 280, 20));
+        panel.AddChild(UiKit.MakeLabel(Loc.T("As good as promised, it's worth"), 16, Palette.InkMuted).Place(PanelX, 482, 280, 20));
         _worth = UiKit.MakeLabel("", 24, Palette.Ink, HorizontalAlignment.Right).Place(PanelX + 260, 476, 124, 30);
         panel.AddChild(_worth);
         _askLabel = UiKit.MakeLabel("", 16, Palette.InkMuted).Place(PanelX, 510, 280, 20);
@@ -641,7 +640,7 @@ public partial class CounterPhase : Phase
 
         _offer = UiKit.MakeButton("", Palette.Good, 16, () => MakeOffer((int)_slider.Value)).Place(PanelX, 590, 188, 50);
         _buy = UiKit.MakeButton("", Palette.Gold, 16, Buy).Place(PanelX, 590, 188, 50);
-        _pass = UiKit.MakeButton("Pass", Palette.Bad, 24, Pass).Place(PanelX + 196, 590, 188, 50);
+        _pass = UiKit.MakeButton(Loc.T("Pass"), Palette.Bad, 24, Pass).Place(PanelX + 196, 590, 188, 50);
         panel.AddChild(_offer);
         panel.AddChild(_buy);
         panel.AddChild(_pass);
@@ -676,7 +675,7 @@ public partial class CounterPhase : Phase
                 p.DrawColoredPolygon(new[] { new Vector2(64, 0), new Vector2(76, 0), new Vector2(76, 12) }, Palette.Gold);
                 p.DrawPolyline(new[] { new Vector2(64, 0), new Vector2(76, 0), new Vector2(76, 12), new Vector2(64, 0) }, Palette.Bg, 2);
             }));
-            button.TooltipText = "A commission wants this kind of thing (see the board on the left).";
+            button.TooltipText = Loc.T("A commission wants this kind of thing (see the board on the left).");
         }
         button.AddChild(UiKit.MakeLabel(name, 16, category == Category.Heartsong ? Palette.OnPaper(Rarity.Mythic) : Palette.Ink).Place(80, 8, 120, 20));
         // Just a reminder of each kind's sound: the slip doesn't keep track of what you've heard.
@@ -685,7 +684,7 @@ public partial class CounterPhase : Phase
         {
             row.Star = UiKit.MakeLabel("*", 32, Palette.InkMuted, HorizontalAlignment.Center).Place(288, -3, 28, 40);
             row.Star.MouseFilter = Control.MouseFilterEnum.Stop;
-            row.Star.TooltipText = "Mark one of them enchanted";
+            row.Star.TooltipText = Loc.T("Mark one of them enchanted");
             row.Star.GuiInput += e =>
             {
                 if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) ToggleMagic(magicKind);
@@ -723,7 +722,7 @@ public partial class CounterPhase : Phase
     void Refresh()
     {
         bool open = !Concluded && !Busy;
-        if (_slipWeight != null) _slipWeight.Text = $"slip: {Characters.Weight(SlipPounds)}";
+        if (_slipWeight != null) _slipWeight.Text = Loc.T($"slip: {Characters.Weight(SlipPounds)}");
         foreach (var row in _rows)
         {
             int count = CountOf(row.Category);
@@ -747,13 +746,13 @@ public partial class CounterPhase : Phase
         bool bought = _visit.Outcome == VisitOutcome.Bought;
         _askLabel.Text = _visit.Trade switch
         {
-            _ when bought => "You paid",
-            _ when _visit.Seller.SlipPrice => $"{who} asks what your slip says",
-            Trade.Offer when _visit.Ask == 0 => $"{who} wants you to name a price",
+            _ when bought => Loc.T("You paid"),
+            _ when _visit.Seller.SlipPrice => Loc.T($"{who} asks what your slip says"),
+            Trade.Offer when _visit.Ask == 0 => Loc.T($"{who} wants you to name a price"),
             // A haggler who heard you out (another try) hasn't named a final price yet.
-            Trade.Haggle when _visit.OffersMade > 0 && !offering => $"{who}'s final price",
-            Trade.Haggle => $"{who} asks (make an offer?)",
-            _ => $"{who} asks",
+            Trade.Haggle when _visit.OffersMade > 0 && !offering => Loc.T($"{who}'s final price"),
+            Trade.Haggle => Loc.T($"{who} asks (make an offer?)"),
+            _ => Loc.T($"{who} asks"),
         };
         _ask.Text = bought ? $"{_visit.PricePaid}g" : _visit.Ask > 0 ? $"{_visit.Ask}g" : "?";
 
@@ -761,11 +760,11 @@ public partial class CounterPhase : Phase
         _offer.Visible = offering;
         int offer = (int)_slider.Value;
         _slider.MaxValue = OfferCeiling(worth);
-        _offer.Text = $"Offer {offer}g";
+        _offer.Text = Loc.T($"Offer {offer}g");
         _offer.Disabled = !open || !TradeOpen || offer > State.Gold;
         // With an offer to make, the buy button moves aside (hagglers) or isn't there (name-a-price).
         _buy.Visible = !bought && _visit.Ask > 0 && !(offering && _visit.Trade == Trade.Offer);
-        _buy.Text = $"Buy {_visit.Ask}g";
+        _buy.Text = Loc.T($"Buy {_visit.Ask}g");
         _buy.Disabled = !open || !TradeOpen || State.Gold < _visit.Ask;
         if (offering && _visit.Trade == Trade.Haggle)
         {
@@ -789,24 +788,24 @@ public partial class CounterPhase : Phase
         bool odds = priced && !_visit.Seller.SlipPrice && _visit.Seller.Gaze <= 0;
         _chanceShown = odds ? _slip.ChanceAbove(price) : -1;
         int waiting = State.Queue.Count;
-        _chanceText.Text = _visit.Seller.SlipPrice && !bought ? "Exactly right: a quarter off. Wrong: a quarter more."
-            : _visit.Seller.Gaze > 0 && !bought ? waiting == 0 ? "One coin, and nobody's waiting." : $"One coin. And {waiting} still waiting, at x{_visit.Seller.Gaze:0.#}."
+        _chanceText.Text = _visit.Seller.SlipPrice && !bought ? Loc.T("Exactly right: a quarter off. Wrong: a quarter more.")
+            : _visit.Seller.Gaze > 0 && !bought ? waiting == 0 ? Loc.T("One coin, and nobody's waiting.") : Loc.T($"One coin. And {waiting} still waiting, at x{_visit.Seller.Gaze:0.#}.")
             : worth == 0 && !_shake.HeardAnything && _hearing.HasTried(Core.Shake.Hard, false) && _hearing.HasTried(Core.Shake.Gentle, false)
-                ? "Not a sound: empty, as far as you can tell."
-            : worth == 0 ? "Tick what you think is inside."
-            : !priced ? "Name a price: the bar shows your odds."
-            : $"Worth more than {price}g? {ChanceWords(_chanceShown)}";
+                ? Loc.T("Not a sound: empty, as far as you can tell.")
+            : worth == 0 ? Loc.T("Tick what you think is inside.")
+            : !priced ? Loc.T("Name a price: the bar shows your odds.")
+            : Loc.T($"Worth more than {price}g? {ChanceWords(_chanceShown)}");
         _chance.QueueRedraw();
         _notebookButton.Disabled = Busy;
         if (_magnetButton != null)
         {
             // Short, so it fits beside the witchlight's sign; the hint under the chest says what it does.
-            _magnetButton.Text = _magnet ? "On" : "Lodestone";
+            _magnetButton.Text = _magnet ? Loc.T("On") : Loc.T("Lodestone");
             _magnetButton.Disabled = !open;
         }
 
         int left = State.Queue.Count;
-        _footer.Text = left == 0 ? "Last customer today." : $"{left} more waiting today.";
+        _footer.Text = left == 0 ? Loc.T("Last customer today.") : Loc.T($"{left} more waiting today.");
     }
 
     /// <summary>
@@ -817,7 +816,7 @@ public partial class CounterPhase : Phase
 
     /// <summary>A chance as the bar says it: "62%", with "under 1%" and "over 99%" rather than a promise.</summary>
     static string ChanceWords(float chance) =>
-        chance < 0.01f ? "under 1%" : chance > 0.99f ? "over 99%" : $"{MathF.Round(chance * 100)}%";
+        chance < 0.01f ? Loc.T("under 1%") : chance > 0.99f ? Loc.T("over 99%") : $"{MathF.Round(chance * 100)}%";
 
     /// <summary>The odds bar: filled as far as the chance, from red (a long shot) through gold to green (a safe bet).</summary>
     void DrawChance(Painter p)
@@ -863,10 +862,10 @@ public partial class CounterPhase : Phase
     {
         if (_songRow != null) return;
         _ticked.Visible = false;
-        _songRow = MakeRow(Category.Heartsong, "Heartsong", song.Word, 106);
+        _songRow = MakeRow(Category.Heartsong, Loc.T("Heartsong"), song.Word, 106);
         _panel.AddChild(_songRow);
         bool known = State.Songbook.Contains(song.Song);
-        Note(known ? $"That song... you know it. {song.Name}!" : "A sound like nothing in any chest. A Heartsong!");
+        Note(known ? Loc.T($"That song... you know it. {song.Name}!") : Loc.T("A sound like nothing in any chest. A Heartsong!"));
         Game.Flash(Palette.Of(Rarity.Mythic), 0.25f, 0.6f);
         Game.Shake(0.1f);
         Refresh();
@@ -886,8 +885,7 @@ public partial class CounterPhase : Phase
             Sfx.Play("thud", 0.8f, 2);
             string weight = _visit.Chest.Weight;
             _shake.Say(weight.ToUpperInvariant(), Palette.Word, 32);
-            Note($"Dropped it: it lands {(weight == "heavy" ? "with a heavy thump" : weight == "light" ? "light as a feather" : "with a middling thud")}. " +
-                 "Heavy ones hold more.");
+            Note(Loc.T($"Dropped it: it lands {(weight == "heavy" ? Loc.T("with a heavy thump") : weight == "light" ? Loc.T("light as a feather") : Loc.T("with a middling thud"))}. Heavy ones hold more."));
             _seller.Say(Sellers.StartleLine(_rng, _visit.Seller));
             Refresh();
             Game.Moment("05_drop_sealed", 0.3);
@@ -899,21 +897,21 @@ public partial class CounterPhase : Phase
         if (hollow)
         {
             Sfx.Play("hollow", 1f, 2);
-            _shake.Say("BOOM...", Palette.Gold, 40);
-            Note("Dropped it: a hollow BOOM. Something's under the floor!");
+            _shake.Say(Loc.T("BOOM..."), Palette.Gold, 40);
+            Note(Loc.T("Dropped it: a hollow BOOM. Something's under the floor!"));
             Teach("hollow");
         }
         else
         {
             Sfx.Play("thud", 1f, 2);
-            _shake.Say("THUD", Palette.Word, 32);
-            Note("Dropped it: a solid thud. No false bottom.");
+            _shake.Say(Loc.T("THUD"), Palette.Word, 32);
+            Note(Loc.T("Dropped it: a solid thud. No false bottom."));
         }
         if (broke.Count > 0)
         {
             Sfx.Play("shatter", 1f, 0);
-            _shake.Say("CRASH!", Palette.Bad, 32, 110);
-            Note($"Something made of glass broke: the {Categories.Get(broke[0].Category).Name.ToLowerInvariant()}.");
+            _shake.Say(Loc.T("CRASH!"), Palette.Bad, 32, 110);
+            Note(Loc.T($"Something made of glass broke: the {Categories.Get(broke[0].Category).Name.ToLowerInvariant()}."));
             Teach("broke");
         }
         Teach("dropped");
@@ -927,10 +925,10 @@ public partial class CounterPhase : Phase
     void Rot()
     {
         _shake.MaxLevel = Core.Shake.Still;
-        _shake.Say("CREAK", Palette.Warn, 32);
+        _shake.Say(Loc.T("CREAK"), Palette.Warn, 32);
         Sfx.Play("thud", 0.6f, -6);
         _shake.View.Wobble(0.6f);
-        Note("It's coming apart in your hands: no more shaking. Go by what you heard.");
+        Note(Loc.T("It's coming apart in your hands: no more shaking. Go by what you heard."));
         Teach("shake_limit");
         Game.Moment("05_rotten", 0.3);
     }
@@ -941,7 +939,7 @@ public partial class CounterPhase : Phase
         _seller.Say(line, Palette.Bad);
         _seller.Bob(8);
         Sfx.Play("lose", 0.9f, -4);
-        FloatText($"Price +{(int)((Market.AngerMarkup - 1) * 100)}%", new Vector2(1036, 520), Palette.Bad, 24);
+        FloatText(Loc.T($"Price +{(int)((Market.AngerMarkup - 1) * 100)}%"), new Vector2(1036, 520), Palette.Bad, 24);
         Game.Moment($"05_angry_{_visit.Seller.Key}", 0.3);
     }
 
@@ -1001,7 +999,7 @@ public partial class CounterPhase : Phase
         }
         _priceNote = _visit.PriceNote;
         _seller.Say(line, Palette.Warn);
-        FloatText("Full price now", new Vector2(1036, 520), Palette.Warn, 24);
+        FloatText(Loc.T("Full price now"), new Vector2(1036, 520), Palette.Warn, 24);
         Sfx.Play("bid", 1.1f, -4);
         Refresh();
     }
@@ -1098,7 +1096,7 @@ public partial class CounterPhase : Phase
     {
         if (_visit.Chest.Sealed)
         {
-            Note("The Bookkeeping Engine can't read through chains.");
+            Note(Loc.T("The Bookkeeping Engine can't read through chains."));
             return;
         }
         var record = Appraisal.Recorded(_visit.Chest, State.Tier);
@@ -1109,15 +1107,16 @@ public partial class CounterPhase : Phase
             _slip.Set(Category.Heartsong, 1);
             SongHeard(song);
         }
-        Note("The Bookkeeping Engine whirs and clicks: everything inside is on the slip.");
+        Note(Loc.T("The Bookkeeping Engine whirs and clicks: everything inside is on the slip."));
         Sfx.Play("tick", 1.4f, -4);
     }
 
     /// <summary>The Drowned Bell counts what's inside as the chest comes to the counter: one toll a thing, false bottom and all.</summary>
     async void TollBell(int things)
     {
-        Note(things == 0 ? "The Drowned Bell is silent: nothing inside."
-            : $"The Drowned Bell tolls {things} time{(things == 1 ? "" : "s")}: {things} thing{(things == 1 ? "" : "s")} inside, false bottom and all.");
+        Note(things == 0 ? Loc.T("The Drowned Bell is silent: nothing inside.")
+            : Loc.Plural(things, $"The Drowned Bell tolls {things} time: {things} thing inside, false bottom and all.",
+                $"The Drowned Bell tolls {things} times: {things} things inside, false bottom and all."));
         for (int i = 0; i < things; i++)
         {
             await Wait(i == 0 ? 0.6 : 0.8);
@@ -1157,7 +1156,7 @@ public partial class CounterPhase : Phase
     {
         State.Pass();
         // Word gets round the market: whoever walks out on Rosa stays away for the rest of the week.
-        if (State.HagglesAll && _visit.OffersMade > 0) Note($"{_visit.Seller.Who} won't be back this week. Word gets round.");
+        if (State.HagglesAll && _visit.OffersMade > 0) Note(Loc.T($"{_visit.Seller.Who} won't be back this week. Word gets round."));
         ShowGut(1.6);
     }
 
@@ -1203,7 +1202,7 @@ public partial class CounterPhase : Phase
         Fx.Burst(this, seam, red, 120, 460f);
         _seller.Say(Sellers.BurstLine, Palette.Warn);
         Game.Moment("03_burst", 0.2);
-        var reveal = Add(new SongReveal(song, seam, "The chest bursts open!"));
+        var reveal = Add(new SongReveal(song, seam, Loc.T("The chest bursts open!")));
         _songReveal = reveal;
         bool keep = await reveal.Chosen;
         _songReveal = null;
@@ -1243,12 +1242,12 @@ public partial class CounterPhase : Phase
         var color = Palette.Gradient(Gut.PassScore(held, price));
         _reveal = Add(UiKit.MakePanel(color.Darkened(0.2f)).Place(312, 96, 492, 180));
         _reveal.ZIndex = 20;
-        _reveal.AddChild(UiKit.MakeLabel("YOUR GUT SAYS", 16, Palette.Muted, HorizontalAlignment.Center).Place(0, 14, 492, 20));
+        _reveal.AddChild(UiKit.MakeLabel(Loc.T("YOUR GUT SAYS"), 16, Palette.Muted, HorizontalAlignment.Center).Place(0, 14, 492, 20));
         var words = UiKit.MakeLabel(line, 24, color, HorizontalAlignment.Center, outline: 4).Wrapped().Place(20, 40, 452, 70);
         words.VerticalAlignment = VerticalAlignment.Center;
         _reveal.AddChild(words);
-        _reveal.AddChild(UiKit.MakeGutMeter(Gut.PassScore(held, price), 212, "missed out", "right call").Place(20, 116, 452, 30));
-        _reveal.AddChild(UiKit.MakeLabel("You'll never know for sure.", 16, Palette.Muted.Darkened(0.2f), HorizontalAlignment.Center).Place(0, 148, 492, 20));
+        _reveal.AddChild(UiKit.MakeGutMeter(Gut.PassScore(held, price), 212, Loc.T("missed out"), Loc.T("right call")).Place(20, 116, 452, 30));
+        _reveal.AddChild(UiKit.MakeLabel(Loc.T("You'll never know for sure."), 16, Palette.Muted.Darkened(0.2f), HorizontalAlignment.Center).Place(0, 148, 492, 20));
         _reveal.PivotOffset = new Vector2(246, 90);
         _reveal.Scale = Vector2.One * 0.6f;
         _reveal.CreateTween().TweenProperty(_reveal, "scale", Vector2.One, 0.25f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
@@ -1259,7 +1258,7 @@ public partial class CounterPhase : Phase
 
         bool last = State.Queue.Count == 0;
         _buy.Visible = _pass.Visible = _offer.Visible = _slider.Visible = false;
-        var next = UiKit.MakeButton(last ? "Close up for the day" : "Next customer", Palette.Gold, 24, Continue).Place(PanelX, 590, PanelW, 50);
+        var next = UiKit.MakeButton(last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Continue).Place(PanelX, 590, PanelW, 50);
         var layer = Add(new Node2D { ZIndex = 10 });
         layer.AddChild(next);
         Teach("passed");

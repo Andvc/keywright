@@ -76,9 +76,9 @@ public partial class OpeningPhase : Phase
         // The tally stays put while the camera leans in.
         var tally = Add(new CanvasLayer { Layer = 1 });
         bool vault = _purchase.Visit.Seller == Story.VaultSeller;
-        tally.AddChild(UiKit.MakeLabel(vault ? "The Crown Chest" : $"Paid {_purchase.Visit.Seller.Short}", 16, Palette.Muted).Place(40, 80, 200, 20));
+        tally.AddChild(UiKit.MakeLabel(vault ? Loc.T("The Crown Chest") : Loc.T($"Paid {_purchase.Visit.Seller.Short}"), 16, Palette.Muted).Place(40, 80, 200, 20));
         tally.AddChild(UiKit.MakeLabel($"{_purchase.Paid}g", 24, Palette.Text, HorizontalAlignment.Right, outline: 4).Place(200, 74, 120, 30));
-        tally.AddChild(UiKit.MakeLabel("Worth", 16, Palette.Muted).Place(40, 114, 200, 20));
+        tally.AddChild(UiKit.MakeLabel(Loc.T("Worth"), 16, Palette.Muted).Place(40, 114, 200, 20));
         _worthLabel = UiKit.MakeLabel("0g", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 108, 120, 30);
         tally.AddChild(_worthLabel);
         _tally = tally;
@@ -94,10 +94,10 @@ public partial class OpeningPhase : Phase
     {
         var tally = _tally;
         var bonuses = new List<string>();
-        if (State.EventIs("festival")) bonuses.Add("Locking Day +25%");
-        if (State.EventIs("buyer")) bonuses.Add($"Crown's Buyer: {Categories.Get(State.BuyerKind).Name.ToLowerInvariant()} x2");
-        if (State.EventIs("tourney")) bonuses.Add("Tourney: weapons, cloaks +50%");
-        if (State.EventIs("assessor")) bonuses.Add("The Guild's assessor -10%");
+        if (State.EventIs("festival")) bonuses.Add(Loc.T("Locking Day +25%"));
+        if (State.EventIs("buyer")) bonuses.Add(Loc.T($"Crown's Buyer: {Categories.Get(State.BuyerKind).Name.ToLowerInvariant()} x2"));
+        if (State.EventIs("tourney")) bonuses.Add(Loc.T("Tourney: weapons, cloaks +50%"));
+        if (State.EventIs("assessor")) bonuses.Add(Loc.T("The Guild's assessor -10%"));
         float y = 140;
         var lines = bonuses.Select(b => (Text: b, Color: Palette.Magic, Height: 22f))
             .Concat(_purchase.Luck.Take(3).Select(l => (Text: Curios.LuckLine(l.Curio, l.Changed), Color: Palette.Good, Height: 46f)));
@@ -239,18 +239,18 @@ public partial class OpeningPhase : Phase
             _chest.Wobble(0.6f);
             Sfx.Play("thud", 0.8f, 0);
             Sfx.Play("lose", 0.8f, -6);
-            FloatText("...EMPTY!", SeamPos + new Vector2(0, -150), Palette.Bad, 40);
+            FloatText(Loc.T("...EMPTY!"), SeamPos + new Vector2(0, -150), Palette.Bad, 40);
             Game.Moment("08_empty", 0.3);
             await Wait(1.0);
             if (!Alive) return;
         }
-        var ghosts = _report.Ghosts.GroupBy(c => c).Select(g => g.Count() == 1 ? $"no {Categories.Get(g.Key).Name.ToLowerInvariant()}?"
-            : $"{g.Count()} fewer {Categories.Get(g.Key).Name.ToLowerInvariant()}?").ToList();
-        if (_report.GhostHidden) ghosts.Add("no false bottom?");
+        var ghosts = _report.Ghosts.GroupBy(c => c).Select(g => g.Count() == 1 ? Loc.T($"no {Categories.Get(g.Key).Name.ToLowerInvariant()}?")
+            : Loc.T($"{g.Count()} fewer {Categories.Get(g.Key).Name.ToLowerInvariant()}?")).ToList();
+        if (_report.GhostHidden) ghosts.Add(Loc.T("no false bottom?"));
         // A warded thing you never named truly stays in the ward: you only learn what it was.
         if (_report.KeptWarded is Item kept)
-            ghosts.Add(_report.Ghosts.Count > 0 || _report.GhostHidden ? $"warded {kept.Name}: you named something that wasn't there"
-                : $"warded, never named: {kept.Name}");
+            ghosts.Add(_report.Ghosts.Count > 0 || _report.GhostHidden ? Loc.T($"warded {kept.Name}: you named something that wasn't there")
+                : Loc.T($"warded, never named: {kept.Name}"));
         for (int g = 0; g < ghosts.Count; g++)
         {
             var ghost = UiKit.MakeLabel(ghosts[g], 16, Palette.Bad, HorizontalAlignment.Center, outline: 4)
@@ -279,7 +279,7 @@ public partial class OpeningPhase : Phase
         Fx.Ring(this, SeamPos + new Vector2(0, -60), violet, 220f, 0.7f, 6f);
         Fx.Burst(this, SeamPos + new Vector2(0, -60), violet, 60, 200f);
         Game.Flash(violet, 0.25f, 0.5f);
-        FloatText("...wait. The ward lets go of what you named!", SeamPos + new Vector2(0, -150), violet, 24);
+        FloatText(Loc.T("...wait. The ward lets go of what you named!"), SeamPos + new Vector2(0, -150), violet, 24);
         Game.Moment("07_warded", 0.3);
         await Wait(1.1);
     }
@@ -339,7 +339,7 @@ public partial class OpeningPhase : Phase
 
         var color = Palette.Of(item.Quality);
         Sfx.Play("deflate", 1f, -4);
-        FloatText("WORSE...", peak + new Vector2(0, -70), Palette.Bad, 24);
+        FloatText(Loc.T("WORSE..."), peak + new Vector2(0, -70), Palette.Bad, 24);
         var sag = sprite.CreateTween().SetParallel();
         sag.TweenProperty(sprite, "modulate", color.Lightened(0.2f), 0.35f);
         sag.TweenProperty(sprite, "scale", new Vector2(scale * 1.2f, scale * 0.95f), 0.35f).SetTrans(Tween.TransitionType.Sine);
@@ -392,7 +392,7 @@ public partial class OpeningPhase : Phase
         await Wait(0.45);
         if (!Alive) return;
 
-        string[] calls = { "BETTER!", "EVEN BETTER!!", "INCREDIBLE!!!" };
+        string[] calls = { Loc.T("BETTER!"), Loc.T("EVEN BETTER!!"), Loc.T("INCREDIBLE!!!") };
         for (int s = 1; s <= steps; s++)
         {
             var quality = _colour + s;
@@ -485,7 +485,7 @@ public partial class OpeningPhase : Phase
     static string Title(Item item, float spacing)
     {
         bool tight = spacing < 170 || NameWidth(item.Name) > Math.Min(220f, spacing - 6f);
-        return tight && item.Magic && !item.Broken && !item.Fake ? item.Entry : item.Name;
+        return tight && item.Magic && !item.Broken && !item.Fake ? Loc.T(item.Entry) : item.Name;
     }
 
     /// <summary>
@@ -539,12 +539,12 @@ public partial class OpeningPhase : Phase
             Fx.Burst(this, at, Palette.Magic, 60, 320f);
             Fx.Aura(this, at, Palette.Magic, 56f);
             Sfx.Play("sting", 1.3f, -2);
-            FloatText("ENCHANTED! x2", at + new Vector2(0, -70), Palette.Magic, 24);
+            FloatText(Loc.T("ENCHANTED! x2"), at + new Vector2(0, -70), Palette.Magic, 24);
         }
         if (item.Fake)
         {
             Sfx.Play("lose", 1.2f, -6);
-            FloatText("FAKE!", at + new Vector2(0, -70), Palette.Bad, 24);
+            FloatText(Loc.T("FAKE!"), at + new Vector2(0, -70), Palette.Bad, 24);
         }
         if (item.Broken)
         {
@@ -559,7 +559,7 @@ public partial class OpeningPhase : Phase
         _landed.Add((item, at, worth));
         if (claimed)
         {
-            FloatText($"{_purchase.Visit.Seller.Short.ToUpperInvariant()}'S!", at + new Vector2(0, -96), Palette.Warn, 24);
+            FloatText(Loc.T($"{_purchase.Visit.Seller.Short.ToUpperInvariant()}'S!"), at + new Vector2(0, -96), Palette.Warn, 24);
             sprite.CreateTween().TweenProperty(sprite, "modulate", new Color(0.7f, 0.6f, 0.6f), 0.6f).SetDelay(0.6f);
         }
 
@@ -570,11 +570,11 @@ public partial class OpeningPhase : Phase
         name.ZIndex = 8;
         if (isNew)
         {
-            var badge = Add(UiKit.MakeLabel("NEW!", 16, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(at.X - 40, 548, 80, 20));
+            var badge = Add(UiKit.MakeLabel(Loc.T("NEW!"), 16, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(at.X - 40, 548, 80, 20));
             badge.ZIndex = 8;
         }
         // A Heartsong is worth nothing in gold: what became of it instead.
-        string price = item.IsSong ? State.Display.Contains(item) ? "singing" : "let go" : $"{worth}g";
+        string price = item.IsSong ? State.Display.Contains(item) ? Loc.T("singing") : Loc.T("let go") : $"{worth}g";
         var value = Add(UiKit.MakeLabel(price, 24, Palette.Of(item.Rarity), HorizontalAlignment.Center, outline: 4)
             .Place(at.X - 70, 588, 140, 30));
         value.ZIndex = 8;
@@ -668,7 +668,7 @@ public partial class OpeningPhase : Phase
     /// <summary>The payoff for a find better than its chest: a banner, and for two steps or more, the works.</summary>
     void Surprise(Vector2 at, int stepsUp)
     {
-        string banner = stepsUp switch { 1 => "BETTER THAN EXPECTED!", 2 => "TWO QUALITIES UP!!", _ => "THREE QUALITIES UP!!!" };
+        string banner = stepsUp switch { 1 => Loc.T("BETTER THAN EXPECTED!"), 2 => Loc.T("TWO QUALITIES UP!!"), _ => Loc.T("THREE QUALITIES UP!!!") };
         var color = stepsUp == 1 ? Palette.Gold : Palette.Of(Rarity.Legendary);
         FloatText(banner, at + new Vector2(0, -110), color, stepsUp == 1 ? 24 : 32);
         Sfx.Play("reveal_big", 1f + 0.1f * stepsUp, -3);
@@ -705,7 +705,7 @@ public partial class OpeningPhase : Phase
         if (perfect) State.Today.PerfectReads++;
 
         var color = profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
-        string text = profit > 0 ? $"PROFIT +{profit}g" : profit < 0 ? $"LOSS {profit}g" : "BROKE EVEN";
+        string text = profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
         var stamp = Add(UiKit.MakePanel(color).Place(320, 104, 480, 76));
         stamp.ZIndex = 10;
         stamp.AddChild(UiKit.MakeLabel(text, 40, color, HorizontalAlignment.Center, outline: 6).Place(0, 14, 480, 50));
@@ -727,7 +727,7 @@ public partial class OpeningPhase : Phase
         var gut = Add(UiKit.MakeLabel(Gut.Bought(held, _purchase.Paid, _rng), 16, Palette.Gradient(score), HorizontalAlignment.Center, outline: 4)
             .Place(240, 188, 640, 20));
         gut.ZIndex = 10;
-        var meter = Add(UiKit.MakeGutMeter(score, 212, "fleeced", "a steal").Place(334, 212, 452, 30));
+        var meter = Add(UiKit.MakeGutMeter(score, 212, Loc.T("fleeced"), Loc.T("a steal")).Place(334, 212, 452, 30));
         meter.ZIndex = 10;
         Game.Moment("08_results", 0.3);
 
@@ -741,7 +741,7 @@ public partial class OpeningPhase : Phase
             var banner = Add(UiKit.MakePanel(Palette.Gold).Place(-400, 56, 360, 44));
             banner.PivotOffset = Vector2.Zero;
             banner.ZIndex = 10;
-            banner.AddChild(UiKit.MakeLabel("PERFECT READ", 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 8, 360, 30));
+            banner.AddChild(UiKit.MakeLabel(Loc.T("PERFECT READ"), 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 8, 360, 30));
             banner.CreateTween().TweenProperty(banner, "position:x", 380f, 0.35f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
             Sfx.Play("fanfare", 1.1f, -4);
             Fx.Burst(this, new Vector2(560, 210), Palette.Gold, 70, 360f);
@@ -749,17 +749,17 @@ public partial class OpeningPhase : Phase
 
         string grade = _purchase.Grade switch
         {
-            PickGrade.Masterful => " Masterful pick: everything +25%.",
-            PickGrade.Forced => " Forced open: everything -10%.",
+            PickGrade.Masterful => Loc.T(" Masterful pick: everything +25%."),
+            PickGrade.Forced => Loc.T(" Forced open: everything -10%."),
             _ => "",
         };
         grade += Terms(visit, perfect, settle);
-        if (fee > 0) grade += $" A perfect read: a valuer's fee of {fee}g.";
-        if (_purchase.Rebate > 0) grade += $" Haggler's Purse: {_purchase.Rebate}g back.";
-        if (insured > 0) grade += $" Underwriter's Bond: {insured}g back.";
+        if (fee > 0) grade += Loc.T($" A perfect read: a valuer's fee of {fee}g.");
+        if (_purchase.Rebate > 0) grade += Loc.T($" Haggler's Purse: {_purchase.Rebate}g back.");
+        if (insured > 0) grade += Loc.T($" Underwriter's Bond: {insured}g back.");
         Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 64));
         bool last = State.Queue.Count == 0;
-        Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? "Go on" : last ? "Close up for the day" : "Next customer", Palette.Gold, 24, Next)
+        Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
             .Place(1000, 300, 260, 52));
         foreach (var (item, at, worth) in _landed)
             if (State.DisplayOpen && !item.IsSong) AddKeepButton(item, at, worth);
@@ -788,14 +788,14 @@ public partial class OpeningPhase : Phase
         string name = visit.Seller.Short, text = "";
         var claimed = _landed.Select(l => l.Item).FirstOrDefault(_purchase.IsClaimed);
         if (claimed != null)
-            text += _purchase.ClaimPays > 0 ? $" {Capital(name)} took the {claimed.Name}, and paid {_purchase.ClaimPays}g for it."
-                : $" {Capital(name)} took the {claimed.Name}, as agreed.";
+            text += _purchase.ClaimPays > 0 ? Loc.T($" {Capital(name)} took the {claimed.Name}, and paid {_purchase.ClaimPays}g for it.")
+                : Loc.T($" {Capital(name)} took the {claimed.Name}, as agreed.");
         if (visit.Seller.Wager > 0)
-            text += perfect ? $" Read exactly: {name} hands back {settle}g, as wagered." : $" Not quite right: {name} keeps the whole price.";
+            text += perfect ? Loc.T($" Read exactly: {name} hands back {settle}g, as wagered.") : Loc.T($" Not quite right: {name} keeps the whole price.");
         if (visit.Seller.SlipPrice)
-            text += perfect ? $" Read exactly: {name} takes a quarter off, {settle}g back."
-                : settle < 0 ? $" A wrong read: you pay {name} what it truly held, and a quarter more: {-settle}g."
-                : " A wrong read, but you'd already paid more than it held.";
+            text += perfect ? Loc.T($" Read exactly: {name} takes a quarter off, {settle}g back.")
+                : settle < 0 ? Loc.T($" A wrong read: you pay {name} what it truly held, and a quarter more: {-settle}g.")
+                : Loc.T(" A wrong read, but you'd already paid more than it held.");
         return text;
     }
 
@@ -852,7 +852,7 @@ public partial class OpeningPhase : Phase
         {
             if (_delivered.Contains(item))
             {
-                button.Text = "Delivered";
+                button.Text = Loc.T("Delivered");
                 button.Disabled = true;
                 continue;
             }
@@ -860,13 +860,12 @@ public partial class OpeningPhase : Phase
             button.Disabled = c == null || State.Display.Contains(item);
             if (c == null)
             {
-                button.Text = "Filled";
+                button.Text = Loc.T("Filled");
                 continue;
             }
             int pay = State.CommissionPay(c, worth);
-            button.Text = Narrow ? $"+{pay}g" : c.Story ? $"Shard +{pay}g" : c.Needed > 1 ? $"{c.Delivered + 1}/{c.Needed}: +{pay}g" : $"Deliver +{pay}g";
-            button.TooltipText = $"{c.PatronName} wants {c.Phrase}: {pay}g{(c.Story ? " and a shard of the Aldric Key" : "")}, " +
-                                 $"instead of {worth}g for selling it. A commission always pays more than selling.";
+            button.Text = Narrow ? Loc.T($"+{pay}g") : c.Story ? Loc.T($"Shard +{pay}g") : c.Needed > 1 ? Loc.T($"{c.Delivered + 1}/{c.Needed}: +{pay}g") : Loc.T($"Deliver +{pay}g");
+            button.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {pay}g{(c.Story ? Loc.T(" and a shard of the Aldric Key") : "")}, instead of {worth}g for selling it. A commission always pays more than selling.");
         }
     }
 
@@ -886,11 +885,11 @@ public partial class OpeningPhase : Phase
             Sfx.Play("fanfare", 1.1f, -4);
             Sfx.PlayGroup("pay");
             Fx.Burst(this, at, Palette.Good, 60, 320f);
-            FloatText($"Commission! +{reward}g", at + new Vector2(0, -100), Palette.Good, 24);
+            FloatText(Loc.T($"Commission! +{reward}g"), at + new Vector2(0, -100), Palette.Good, 24);
             if (State.MapPieces > pieces)
             {
                 Fx.Confetti(this, new Vector2(640, 200), 100);
-                FloatText($"KEY SHARD {State.MapPieces} OF {Story.Pieces}!", new Vector2(640, 200), Palette.Magic, 40);
+                FloatText(Loc.T($"KEY SHARD {State.MapPieces} OF {Story.Pieces}!"), new Vector2(640, 200), Palette.Magic, 40);
                 _mentor?.Say(Story.HoodThanks(State.HoodPieces));
                 Game.Moment("08_map", 0.4);
             }
@@ -899,7 +898,7 @@ public partial class OpeningPhase : Phase
         {
             Sfx.Play("sting", 1.3f, -6);
             Sfx.PlayGroup("pay");
-            FloatText($"{c.Delivered}/{c.Needed}: +{reward}g", at + new Vector2(0, -100), Palette.Good, 24);
+            FloatText(Loc.T($"{c.Delivered}/{c.Needed}: +{reward}g"), at + new Vector2(0, -100), Palette.Good, 24);
         }
         foreach (var (button, kept, _) in _keepButtons)
             if (kept == item) button.Disabled = true;
@@ -918,7 +917,7 @@ public partial class OpeningPhase : Phase
         RefreshDeliver();
         Sfx.Play("sting", 1.4f, -4);
         Game.Hud.SetGold(State.Gold);
-        FloatText(item.Magic ? $"+{item.Prestige} exhibition (x2: enchanted!)" : $"+{item.Prestige} exhibition", at + new Vector2(0, -80),
+        FloatText(item.Magic ? Loc.T($"+{item.Prestige} exhibition (x2: enchanted!)") : Loc.T($"+{item.Prestige} exhibition"), at + new Vector2(0, -80),
             Palette.Magic, 16);
         Teach("kept");
         RefreshKeep();
@@ -930,7 +929,7 @@ public partial class OpeningPhase : Phase
         {
             if (State.Display.Contains(item))
             {
-                button.Text = "On display";
+                button.Text = Loc.T("On display");
                 button.Disabled = true;
                 continue;
             }
@@ -942,9 +941,8 @@ public partial class OpeningPhase : Phase
             // The points it would add, so an enchanted thing's double shows before you choose.
             string points = item.Magic ? $"+{item.Prestige}*" : $"+{item.Prestige}";
             button.Disabled = _swap != null || State.Gold + (State.DisplayFull ? State.Display.Max(i => i.Value) : 0) < worth;
-            button.Text = Narrow ? $"{(State.DisplayFull ? "Swap" : "Keep")} {points}" : State.DisplayFull ? $"Swap {points} (-{worth}g)" : $"Keep {points} (-{worth}g)";
-            button.TooltipText = $"{item.Prestige} exhibition points for {worth}g" + (item.Magic ? " (double: it's enchanted)" : "") +
-                                 (State.DisplayFull ? ". Your display is full: sell something on it to make room." : ".");
+            button.Text = Narrow ? $"{(State.DisplayFull ? Loc.T("Swap") : Loc.T("Keep"))} {points}" : State.DisplayFull ? Loc.T($"Swap {points} (-{worth}g)") : Loc.T($"Keep {points} (-{worth}g)");
+            button.TooltipText = Loc.T($"{item.Prestige} exhibition points for {worth}g{((item.Magic ? Loc.T(" (double: it's enchanted)") : ""))}{((State.DisplayFull ? Loc.T(". Your display is full: sell something on it to make room.") : "."))}");
         }
     }
 
@@ -964,19 +962,19 @@ public partial class OpeningPhase : Phase
         };
         var panel = UiKit.MakePanel(Palette.Magic).Place(248, 296, w, h);
         _swap.AddChild(panel);
-        panel.AddChild(UiKit.MakeLabel($"Your display is full. Sell something to make room for the {item.Name} (+{item.Prestige} points):",
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"Your display is full. Sell something to make room for the {item.Name} (+{item.Prestige} points):"),
             16, Palette.Text, HorizontalAlignment.Center).Place(0, 14, w, 20));
         for (int i = 0; i < shown.Count; i++)
         {
             var old = shown[i];
             bool affordable = State.Gold + old.Value >= worth;
-            var choice = UiKit.MakeButton($"{old.Name}: +{old.Value}g, -{old.Prestige} pts", Palette.Of(old.Rarity).Darkened(0.4f), 16,
+            var choice = UiKit.MakeButton(Loc.T($"{old.Name}: +{old.Value}g, -{old.Prestige} pts"), Palette.Of(old.Rarity).Darkened(0.4f), 16,
                 () => Swap(item, worth, at, old)).Place(16 + i % columns * 320, 44 + i / columns * 48, 312, 40);
             choice.Disabled = !affordable;
             choice.AddChild(UiKit.MakeItemIcon(old, new Vector2(20, 20), 32));
             panel.AddChild(choice);
         }
-        panel.AddChild(UiKit.MakeButton("Never mind", Palette.Text, 16, CloseSwap).Place(w / 2 - 90, h - 52, 180, 40));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Never mind"), Palette.Text, 16, CloseSwap).Place(w / 2 - 90, h - 52, 180, 40));
         Sfx.PlayGroup("book", 1.2f, -6);
         RefreshKeep();
         Game.Moment("09_swap", 0.3);
@@ -988,7 +986,7 @@ public partial class OpeningPhase : Phase
         State.SellFromDisplay(old);
         CloseSwap();
         Sfx.PlayGroup("pay");
-        FloatText($"Sold the {old.Name}: +{old.Value}g", new Vector2(640, 196), Palette.Gold, 16);
+        FloatText(Loc.T($"Sold the {old.Name}: +{old.Value}g"), new Vector2(640, 196), Palette.Gold, 16);
         if (State.Keep(item, worth)) Kept(item, at);
         else Game.Hud.SetGold(State.Gold);
     }

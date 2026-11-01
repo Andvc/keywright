@@ -11,10 +11,10 @@ public static class ShopTiers
 
     public static string Name(int tier) => tier switch
     {
-        1 => "Bram's Stall",
-        2 => "Thornwick Market",
-        3 => "Crownhold",
-        _ => "The Royal Emporium",
+        1 => Loc.T("Bram's Stall"),
+        2 => Loc.T("Thornwick Market"),
+        3 => Loc.T("Crownhold"),
+        _ => Loc.T("The Royal Emporium"),
     };
 
     /// <summary>
@@ -749,7 +749,7 @@ public sealed partial class GameState
     {
         // Tam names a price today, so the first lesson is only about listening; from tomorrow he asks you to name one.
         yield return Market.Price(rng, Sellers.Get("tam"), new Chest(new[] { new Item(Category.Coins, Rarity.Common) }), 1, 4, Trade.Fixed,
-            "Fished it out of the millpond this morning. I didn't shake it, it might break! Is {price} okay?");
+            Loc.T("Fished it out of the millpond this morning. I didn't shake it, it might break! Is {price} okay?"));
         yield return Scripted(rng, "penn", 3, Category.Garb);
         yield return Scripted(rng, "hob", 7, Category.Coins, Category.Arms);
     }

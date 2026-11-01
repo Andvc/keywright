@@ -30,5 +30,5 @@ public static class Money
     public static int Round(float value) => value <= 30 ? Math.Max(1, (int)MathF.Round(value)) : (int)MathF.Round(value / 5f) * 5;
 
     /// <summary>A sum as people say it ("12 gold", "45,000 gold"): the interface writes "45000g", but nobody talks like that.</summary>
-    public static string Say(int amount) => amount == 1 ? "one coin" : $"{amount.ToString("N0", System.Globalization.CultureInfo.InvariantCulture)} gold";
+    public static string Say(int amount) => amount == 1 ? Loc.T("one coin") : Loc.T($"{amount.ToString("N0", System.Globalization.CultureInfo.InvariantCulture)} gold");
 }

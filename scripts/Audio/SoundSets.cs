@@ -17,32 +17,32 @@ public static class SoundSets
     {
         [Category.Coins] = new Option[]
         {
-            new("A: a purse of coins", "jingle"), new("B: clinking chips", "jingle_chips"), new("C: a handful of chips", "jingle_handle"),
-            new("D: bright coins (synth)", "jingle_bright"),
+            new(Loc.T("A: a purse of coins"), "jingle"), new(Loc.T("B: clinking chips"), "jingle_chips"), new(Loc.T("C: a handful of chips"), "jingle_handle"),
+            new(Loc.T("D: bright coins (synth)"), "jingle_bright"),
         },
         [Category.Arms] = new Option[]
         {
-            new("A: tin", "clank"), new("B: light metal", "clank_light"), new("C: pots and pans", "clank_pot"),
-            new("D: metal plate", "clank_plate"),
+            new(Loc.T("A: tin"), "clank"), new(Loc.T("B: light metal"), "clank_light"), new(Loc.T("C: pots and pans"), "clank_pot"),
+            new(Loc.T("D: metal plate"), "clank_plate"),
         },
         [Category.Garb] = new Option[]
         {
-            new("A: cloth", "flump"), new("B: soft thump", "flump_soft"), new("C: heavy thump", "flump_heavy"),
-            new("D: leather", "flump_leather"),
+            new(Loc.T("A: cloth"), "flump"), new(Loc.T("B: soft thump"), "flump_soft"), new(Loc.T("C: heavy thump"), "flump_heavy"),
+            new(Loc.T("D: leather"), "flump_leather"),
         },
         [Category.Potions] = new Option[]
         {
-            new("A: slosh (synth)", "slosh"), new("B: glug (synth)", "slosh_glug"), new("C: glass clink", "slosh_clink"),
+            new(Loc.T("A: slosh (synth)"), "slosh"), new(Loc.T("B: glug (synth)"), "slosh_glug"), new(Loc.T("C: glass clink"), "slosh_clink"),
         },
         [Category.Scrolls] = new Option[]
         {
-            new("A: shoved cards", "rustle"), new("B: book pages", "rustle_book"), new("C: sliding cards", "rustle_slide"),
-            new("D: shuffled cards", "rustle_shuffle"),
+            new(Loc.T("A: shoved cards"), "rustle"), new(Loc.T("B: book pages"), "rustle_book"), new(Loc.T("C: sliding cards"), "rustle_slide"),
+            new(Loc.T("D: shuffled cards"), "rustle_shuffle"),
         },
         [Category.Gems] = new Option[]
         {
-            new("A: glass tinkle", "tinkle"), new("B: other glass", "tinkle_glass"), new("C: little bells (synth)", "tinkle_bell"),
-            new("D: light plate", "tinkle_plate"),
+            new(Loc.T("A: glass tinkle"), "tinkle"), new(Loc.T("B: other glass"), "tinkle_glass"), new(Loc.T("C: little bells (synth)"), "tinkle_bell"),
+            new(Loc.T("D: light plate"), "tinkle_plate"),
         },
     };
 

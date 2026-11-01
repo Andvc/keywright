@@ -1,4 +1,5 @@
 using Godot;
+using Keywright.Core;
 
 namespace Keywright.Ui;
 
@@ -28,20 +29,20 @@ public partial class Hud : CanvasLayer
             p.DrawRect(new Rect2(0, 57, 1280, 3), new Color(0, 0, 0, 0.6f));
         }));
         AddChild(UiKit.MakeSprite("res://assets/sprites/items/dwarf_gold_crowns.png", Purse, 2));
-        AddChild(UiKit.MakeLabel("KEYWRIGHT", 32, Palette.Gold, outline: 4).Place(24, 8, 300, 40));
-        _earlyAccess = UiKit.MakeLabel("early access", 16, Palette.Muted).Place(196, 20, 160, 20);
+        AddChild(UiKit.MakeLabel(Loc.T("KEYWRIGHT"), 32, Palette.Gold, outline: 4).Place(24, 8, 300, 40));
+        _earlyAccess = UiKit.MakeLabel(Loc.T("early access"), 16, Palette.Muted).Place(196, 20, 160, 20);
         AddChild(_earlyAccess);
         _event = UiKit.MakeButton("", Palette.Magic.Darkened(0.3f), 16, ToggleEvent).Place(188, 9, 222, 38);
         _event.ClipText = true;
-        _event.TooltipText = "Today's event: click to read it again.";
+        _event.TooltipText = Loc.T("Today's event: click to read it again.");
         _event.Visible = false;
         AddChild(_event);
         _lot = UiKit.MakeLabel("", 24, Palette.Text, HorizontalAlignment.Center).Place(330, 12, 420, 30);
         AddChild(_lot);
         // The Guild's next due, and when: it turns orange when you haven't got it yet.
         _dueChip = UiKit.MakePanel(Palette.PanelBorder).Place(760, 5, 200, 46);
-        _dueChip.TooltipText = "The Gilded Guild's next tithe. Pay it when Mister Vane comes, or the Guild seals the shop. " +
-                               "Click for the whole debt in your notebook.";
+        _dueChip.TooltipText = Loc.T("The Gilded Guild's next tithe. Pay it when Mister Vane comes, or the Guild seals the shop. " +
+                               "Click for the whole debt in your notebook.");
         _dueChip.MouseFilter = Control.MouseFilterEnum.Stop;
         _dueChip.MouseDefaultCursorShape = Control.CursorShape.PointingHand;
         _dueChip.GuiInput += e =>
@@ -63,7 +64,7 @@ public partial class Hud : CanvasLayer
         _gold = UiKit.MakeLabel("", 24, Palette.Gold, outline: 4).Place(1014, 12, 140, 30);
         _gold.PivotOffset = new Vector2(30, 15);
         AddChild(_gold);
-        AddChild(UiKit.MakeButton("Menu", Palette.PanelBorder.Lightened(0.15f), 16, () => Main.Instance.OpenPause()).Place(1164, 10, 100, 34));
+        AddChild(UiKit.MakeButton(Loc.T("Menu"), Palette.PanelBorder.Lightened(0.15f), 16, () => Main.Instance.OpenPause()).Place(1164, 10, 100, 34));
     }
 
     /// <summary>Today's event, if there is one: a button that opens what it's about.</summary>
@@ -94,7 +95,7 @@ public partial class Hud : CanvasLayer
         _eventPopup = UiKit.MakePanel(Palette.Magic.Darkened(0.2f)).Place(188, 60, 460, 178);
         _eventPopup.AddChild(UiKit.MakeLabel(_eventTitle.ToUpperInvariant(), 24, Palette.Magic, outline: 4).Place(20, 14, 420, 30));
         _eventPopup.AddChild(UiKit.MakeLabel(_eventText, 16, Palette.Text).Wrapped().Place(20, 50, 420, 84));
-        _eventPopup.AddChild(UiKit.MakeButton("Close", Palette.PanelBorder.Lightened(0.15f), 16, CloseEvent).Place(170, 132, 120, 34));
+        _eventPopup.AddChild(UiKit.MakeButton(Loc.T("Close"), Palette.PanelBorder.Lightened(0.15f), 16, CloseEvent).Place(170, 132, 120, 34));
         AddChild(_eventPopup);
         Main.Instance?.Moment("30_event_popup", 0.3);
     }
@@ -106,20 +107,20 @@ public partial class Hud : CanvasLayer
     }
 
     public void SetDay(int day, int tier) =>
-        _lot.Text = day <= 0 ? Core.ShopTiers.Name(tier) : $"Day {day}  -  {Core.ShopTiers.Name(tier)}";
+        _lot.Text = day <= 0 ? Core.ShopTiers.Name(tier) : Loc.T($"Day {day}  -  {Core.ShopTiers.Name(tier)}");
 
     /// <summary>Shows the Guild's next due: how much, and how soon.</summary>
     public void SetDue(Core.GameState state)
     {
         _dueChip.Visible = state.GuildIntroduced;
         int due = state.NextDue, days = state.DaysToNextDue;
-        _due.Text = state.DebtCleared ? $"Interest {due}g" : $"Due {due}g";
+        _due.Text = state.DebtCleared ? Loc.T($"Interest {due}g") : Loc.T($"Due {due}g");
         _due.AddThemeColorOverride("font_color", state.Gold >= due ? Palette.Gold : Palette.Warn);
         // After paying off early, the Guild doesn't come again until its interest starts.
-        _when.Text = !state.PaidThisWeek && days == 0 ? "tonight!"
-            : state.NextDueWeek > state.Week + 1 ? $"in week {state.NextDueWeek}"
-            : state.PaidThisWeek ? "next week"
-            : days == 1 ? "tomorrow night" : $"in {days + 1} days";
+        _when.Text = !state.PaidThisWeek && days == 0 ? Loc.T("tonight!")
+            : state.NextDueWeek > state.Week + 1 ? Loc.T($"in week {state.NextDueWeek}")
+            : state.PaidThisWeek ? Loc.T("next week")
+            : days == 1 ? Loc.T("tomorrow night") : Loc.T($"in {days + 1} days");
         _when.AddThemeColorOverride("font_color", state.DuesTonight && !state.PaidThisWeek ? Palette.Warn : Palette.Muted);
     }
 

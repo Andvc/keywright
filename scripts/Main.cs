@@ -15,7 +15,7 @@ namespace Keywright;
 /// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the week's scene
 /// (from the second week), Nim's curios on his day, the counter, the day's end, and on the third day the Guild's due.
 /// What you've done across runs is kept in user://profile.json.
-/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --export-sounds=DIR, --autoplay,
+/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --loc-test, --pseudo, --font-sheet, --export-sounds=DIR, --autoplay,
 /// --shots=DIR, --quit-at-end, --days=N, --no-tutorial (no tips, no scripted first day),
 /// --start-tier=N and --gold=N (jump ahead with the tools you'd have by then), --opening-demo (opens a blue chest
 /// holding one thing of each quality, two of them better than the chest, and a Heartsong, to preview the opening's
@@ -32,7 +32,8 @@ public partial class Main : Node2D
 {
     public static Main Instance { get; private set; }
 
-    public const string Version = "Early Access 0.26";
+    /// <summary>The game's version (also project.godot's application/config/version, which the exports are stamped with).</summary>
+    public const string Version = "0.27";
     const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
 
     public GameState State { get; private set; }
@@ -68,6 +69,8 @@ public partial class Main : Node2D
     {
         Instance = this;
         var args = OS.GetCmdlineUserArgs();
+        // --pseudo: every translated text pseudo-translated, the sim's too (its numbers must come out the same).
+        Loc.Pseudo = args.Contains("--pseudo");
         if (args.Contains("--sim") || Arg(args, "--sim") != null)
         {
             // A report that throws still quits (a headless run would otherwise wait forever).
@@ -145,12 +148,12 @@ public partial class Main : Node2D
             GetTree().Quit();
             return;
         }
-        if (args.Contains("--save-test"))
+        if (args.Contains("--save-test") || args.Contains("--loc-test"))
         {
             bool passed = false;
             try
             {
-                passed = SaveTest.Run();
+                passed = args.Contains("--loc-test") ? LocTest.Run() : SaveTest.Run();
             }
             catch (System.Exception e)
             {
@@ -167,12 +170,14 @@ public partial class Main : Node2D
             return;
         }
 
-        CarryOverOldFiles();
-        Settings.Load();
         // The language first, before anything with words in it is built; Godot's own translation of what controls
         // show is off, since everything shown is translated already (Loc).
+        Settings.Load();
         Localization.Apply(pseudo: args.Contains("--pseudo"));
         GetTree().Root.AutoTranslateMode = AutoTranslateModeEnum.Disabled;
+        // Files from an older folder, then the settings again in case they came with them.
+        CarryOverOldFiles();
+        Settings.Load();
         if (args.Contains("--gm")) Settings.Gm = true;
         Profile = ReadProfile();
         // A controller moves and clicks the pointer (the mouse's own, so everything it can do, a controller can).
@@ -506,7 +511,7 @@ public partial class Main : Node2D
         // The game's paused under the GM panel: no counting up, the purse shows it at once.
         Hud.SetGold(State.Gold, animate: false);
         Hud.SetDue(State);
-        return $"In the purse: {State.Gold}g.";
+        return Loc.T($"In the purse: {State.Gold}g.");
     }
 
     /// <summary>GM: every page of the notebook and the collection filled, this run's and the profile's.</summary>
@@ -514,11 +519,11 @@ public partial class Main : Node2D
     {
         State.KnowAll();
         WriteProfile(p => p.KnowAll());
-        return "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs.";
+        return Loc.T("The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs.");
     }
 
     /// <summary>Why the day can't be skipped now, or null: only from Nim's counter, the shop's counter or the day's end.</summary>
-    public string CanSkipDay => _phase is CounterPhase or PeddlerPhase or DayEndPhase ? null : "Not now: finish what's in hand first.";
+    public string CanSkipDay => _phase is CounterPhase or PeddlerPhase or DayEndPhase ? null : Loc.T("Not now: finish what's in hand first.");
 
     /// <summary>
     /// GM: the rest of today skipped. Everyone still waiting goes home and it's the evening (from the day's end: the next
@@ -626,7 +631,7 @@ public partial class Main : Node2D
         while (IsInstanceValid(opening) && !opening.Finished) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         await ToSignal(GetTree().CreateTimer(3.0), SceneTreeTimer.SignalName.Timeout);
         // Then the epilogue (sung whole with --songs=all), a line every two seconds.
-        var scene = new ScenePhase(Story.VaultEpilogue(State), () => { }, State.SongWhole ? "THE LOCKING, SUNG WHOLE" : "THE CROWN CHEST", "vault");
+        var scene = new ScenePhase(Story.VaultEpilogue(State), () => { }, State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE CROWN CHEST"), "vault");
         SwitchTo(scene);
         while (IsInstanceValid(scene) && !scene.Done)
         {
@@ -655,7 +660,7 @@ public partial class Main : Node2D
             var lines = Story.WeekStart(State);
             if (lines.Count > 0)
             {
-                SwitchTo(new ScenePhase(lines, Peddler, State.Week == 1 ? "BRAM'S STALL" : $"WEEK {State.Week}", Story.Setting(State.Week)));
+                SwitchTo(new ScenePhase(lines, Peddler, State.Week == 1 ? Loc.T("BRAM'S STALL") : Loc.T($"WEEK {State.Week}"), Story.Setting(State.Week)));
                 return;
             }
         }
@@ -679,10 +684,10 @@ public partial class Main : Node2D
     /// <summary>After the day's end: the Guild's introduction (the first evening), its due (the fifth), or the next morning.</summary>
     public void CloseDay()
     {
-        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), StartDay, "THE GILDED GUILD", "guild"));
+        if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), StartDay, Loc.T("THE GILDED GUILD"), "guild"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
         // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
-        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, "THE ALDRIC KEY", "vault"));
+        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, Loc.T("THE ALDRIC KEY"), "vault"));
         else StartDay();
     }
 
@@ -723,7 +728,7 @@ public partial class Main : Node2D
             p.Cleared++;
             p.ClearedAt(State);
         });
-        SwitchTo(new ScenePhase(Story.Cleared(State), Vault, "FREE AND CLEAR", "bram"));
+        SwitchTo(new ScenePhase(Story.Cleared(State), Vault, Loc.T("FREE AND CLEAR"), "bram"));
     }
 
     /// <summary>With the whole map, Mara and Bram bring King Aldric's vault to the counter: pick its lock and open it.</summary>
@@ -748,7 +753,7 @@ public partial class Main : Node2D
         {
             if (State.SongWhole) WriteProfile(p => p.SungWhole++);
             SwitchTo(new ScenePhase(Story.VaultEpilogue(State), () => SwitchTo(new RunEndPhase(cleared: true)),
-                State.SongWhole ? "THE LOCKING, SUNG WHOLE" : "THE CROWN CHEST", "vault"));
+                State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE CROWN CHEST"), "vault"));
             return;
         }
         NextCustomer();
@@ -771,21 +776,20 @@ public partial class Main : Node2D
         float h = (e == null ? 136 : 238) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28) + (note == null ? 0 : 76);
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(306, 130, 500, h);
         card.MouseFilter = Control.MouseFilterEnum.Ignore;
-        card.AddChild(UiKit.MakeLabel($"DAY {State.Day}", 48, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 12, 500, 56));
+        card.AddChild(UiKit.MakeLabel(Loc.T($"DAY {State.Day}"), 48, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 12, 500, 56));
         // Who's minding the stall, and at what level, unless it's Kit on the usual terms.
         string who = State.Is(Characters.Kit) && State.Challenge == 0 ? ""
-            : $"{State.Kin.Name}{(State.Challenge > 0 ? $", level {State.Challenge}" : "")}  -  ";
-        card.AddChild(UiKit.MakeLabel($"{who}Week {State.Week}, day {State.DayOfWeek}{(who == "" ? $" of {Guild.DaysPerWeek}" : "")}  -  " +
-                                      ShopTiers.Name(State.Tier), 16, Palette.Text, HorizontalAlignment.Center).Place(0, 72, 500, 20));
-        string due = State.DuesTonight ? $"The Guild comes tonight for {State.DueNow}g."
-            : $"The Guild comes for {State.DueNow}g at the end of day {State.Day + State.DaysToDue}.";
+            : $"{State.Kin.Name}{(State.Challenge > 0 ? Loc.T($", level {State.Challenge}") : "")}  -  ";
+        card.AddChild(UiKit.MakeLabel(Loc.T($"{who}Week {State.Week}, day {State.DayOfWeek}{(who == "" ? Loc.T($" of {Guild.DaysPerWeek}") : "")}  -  {ShopTiers.Name(State.Tier)}"), 16, Palette.Text, HorizontalAlignment.Center).Place(0, 72, 500, 20));
+        string due = State.DuesTonight ? Loc.T($"The Guild comes tonight for {State.DueNow}g.")
+            : Loc.T($"The Guild comes for {State.DueNow}g at the end of day {State.Day + State.DaysToDue}.");
         if (guild)
             card.AddChild(UiKit.MakeLabel(due, 16, State.Gold >= State.DueNow ? Palette.Muted : Palette.Warn, HorizontalAlignment.Center)
                 .Place(0, 100, 500, 20));
         float y = guild ? 132 : 104;
         if (stash > 0)
         {
-            card.AddChild(UiKit.MakeLabel($"Uncle Bram slipped you {stash}g from his secret stash ({State.StashLeft} left).", 16, Palette.Good,
+            card.AddChild(UiKit.MakeLabel(Loc.T($"Uncle Bram slipped you {stash}g from his secret stash ({State.StashLeft} left)."), 16, Palette.Good,
                 HorizontalAlignment.Center).Place(0, y - 4, 500, 20));
             Hud.SetGold(State.Gold);
             y += 28;

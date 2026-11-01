@@ -48,44 +48,44 @@ public static class Guild
     /// <summary>Pawned things fetch this much of what they'd sell for: the Guild drives a hard bargain.</summary>
     public const float PawnRate = 0.6f;
 
-    public const string Collector = "Mister Vane";
+    public static string Collector => Loc.T("Mister Vane");
 
     /// <summary>What Vane says when he comes for a week's due, week by week (the last line repeats).</summary>
     static readonly string[] Arrivals =
     {
-        "Good evening. The Guild's tithe, if you please. In gold: the Guild has no use for promises.",
-        "Still here, I see. Good. The Guild hates to see a Keywright go to waste.",
-        "I hear you've opened a great many chests this week. The Guild approves. Do keep opening them.",
-        "My masters have begun to ask about you. That is rarely good news. One more week after this one.",
-        "The last of Bram's debt. Every coin of it, mind. Gold you can see.",
+        Loc.T("Good evening. The Guild's tithe, if you please. In gold: the Guild has no use for promises."),
+        Loc.T("Still here, I see. Good. The Guild hates to see a Keywright go to waste."),
+        Loc.T("I hear you've opened a great many chests this week. The Guild approves. Do keep opening them."),
+        Loc.T("My masters have begun to ask about you. That is rarely good news. One more week after this one."),
+        Loc.T("The last of Bram's debt. Every coin of it, mind. Gold you can see."),
     };
 
     static readonly string[] Endless =
     {
-        "Debts are curious things, Keywright. They grow while nobody's watching them.",
-        "The Gate is hungry this week, and the Guild has decided you owe it something for its patience.",
-        "Interest, you understand. Nothing personal. My master is very fond of interest.",
+        Loc.T("Debts are curious things, Keywright. They grow while nobody's watching them."),
+        Loc.T("The Gate is hungry this week, and the Guild has decided you owe it something for its patience."),
+        Loc.T("Interest, you understand. Nothing personal. My master is very fond of interest."),
     };
 
     public static string Arrival(int week) => week <= Weeks ? Arrivals[Math.Min(week, Arrivals.Length) - 1] : Endless[(week - Weeks - 1) % Endless.Length];
 
     public static string Paid(int week) => week switch
     {
-        Weeks => "Paid in full. The Guild has no further claim on Bram's stall. For now.",
-        > Weeks => "Paid. Until next week, Keywright.",
-        _ => "Paid, and promptly. Until next week, then.",
+        Weeks => Loc.T("Paid in full. The Guild has no further claim on Bram's stall. For now."),
+        > Weeks => Loc.T("Paid. Until next week, Keywright."),
+        _ => Loc.T("Paid, and promptly. Until next week, then."),
     };
 
-    public const string Short = "Short? Then the Guild will take what's on your shelf instead. At the Guild's price, naturally.";
+    public static string Short => Loc.T("Short? Then the Guild will take what's on your shelf instead. At the Guild's price, naturally.");
 
-    public const string Foreclosed = "Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed.";
+    public static string Foreclosed => Loc.T("Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed.");
 
     /// <summary>When the Guild Promissory Note pays a night.</summary>
-    public const string NotePaid = "A Guild note, older than the Locking? ...However did you come by that? The Guild honours its own paper. Paid.";
+    public static string NotePaid => Loc.T("A Guild note, older than the Locking? ...However did you come by that? The Guild honours its own paper. Paid.");
 
     /// <summary>When the whole debt is paid off at once.</summary>
-    public const string PaidOff = "All of it, tonight? ...How very thorough of you. The Guild has no further claim on Bram's stall.";
+    public static string PaidOff => Loc.T("All of it, tonight? ...How very thorough of you. The Guild has no further claim on Bram's stall.");
 
     /// <summary>When Bram's word buys a week.</summary>
-    public const string Grace = "Bram's word? How touching. One week, then. The rest comes due next week, and half as much again.";
+    public static string Grace => Loc.T("Bram's word? How touching. One week, then. The rest comes due next week, and half as much again.");
 }

@@ -69,23 +69,23 @@ public static class Events
 
     public static readonly EventDef[] All =
     {
-        new("market", "Fair Day", "The whole county's in town for the fair: three more customers today.", Gentle: true),
-        new("festival", "Locking Day", "Three hundred years since the Locking, and everyone's celebrating: everything sells for a quarter more today.", Gentle: true),
-        new("buyer", "The Crown's Buyer", "The Crown's buyer is in town, paying double for {kind} today.", Gentle: true),
-        new("gilded", "A Royal Chest", "Someone's bringing in one of King Aldric's own chests, gilded, with the royal seal. They think the gold is paint."),
-        new("stranger", "The Stranger", "A stranger in black is coming by with a chest wrapped in iron chains. Nothing in it can rattle."),
-        new("storm", "A Storm", "Few will brave the rain, but those who do bring their best: chests come in a colour better.", Gentle: true),
-        new("wreck", "A Barge Aground", "A treasure barge ran aground on the Aldwater: today's lots come in twos and threes.", MinTier: 3),
-        new("estate", "A Foreclosure Sale", "The Guild has foreclosed on a manor, and its chests are being sold off quick: everyone asks a fifth less today.", Gentle: true),
-        new("tourney", "The Tourney", "Knights from four counties are in town for the tourney: weapons and cloaks sell for half again as much today.", Gentle: true),
-        new("mourning", "A Day of Mourning", "The old Duke is being buried, and the whole town's in black. Nobody will stand for a hard shake today."),
-        new("crier", "The Town Crier", "Old Lord Harrow lost his family's {kind} to the Locking. His crier offers a reward for one today: three times its price."),
-        new("minstrel", "The Minstrels' Fair", "Minstrels are trading songs in the square, and anyone with a box that hums has brought it: a Heartsong is three times as likely today."),
-        new("dreaming", "The Sleepers' Moon", "The Old Wood's moon was full, and all who slept under it dreamt true, like Mother Bramble: every seller tells you their dream. Some warded something.", MinTier: 2),
-        new("wardens", "Wardens' Day", "The old custom: ward a keepsake into a chest before you sell it, and leave a riddle for it. Name the answer, and the ward gives it up.", MinTier: 2),
-        new("census", "The Guild's Count", "The Gilded Guild is counting everything that changes hands: a clerk tallies every article in every chest today, false bottoms and all.", MinTier: 2),
-        new("assessor", "The Guild's Assessor", "A Guild assessor sits in the corner all day, and takes a tenth of every sale for the Guild.", MinTier: 2),
-        new("moon", "A Witchlight Moon", "Under a witchlight moon the old enchantments wake: things in today's chests are far likelier to be enchanted.", MinTier: 3),
+        new("market", Loc.T("Fair Day"), Loc.T("The whole county's in town for the fair: three more customers today."), Gentle: true),
+        new("festival", Loc.T("Locking Day"), Loc.T("Three hundred years since the Locking, and everyone's celebrating: everything sells for a quarter more today."), Gentle: true),
+        new("buyer", Loc.T("The Crown's Buyer"), Loc.T("The Crown's buyer is in town, paying double for {kind} today."), Gentle: true),
+        new("gilded", Loc.T("A Royal Chest"), Loc.T("Someone's bringing in one of King Aldric's own chests, gilded, with the royal seal. They think the gold is paint.")),
+        new("stranger", Loc.T("The Stranger"), Loc.T("A stranger in black is coming by with a chest wrapped in iron chains. Nothing in it can rattle.")),
+        new("storm", Loc.T("A Storm"), Loc.T("Few will brave the rain, but those who do bring their best: chests come in a colour better."), Gentle: true),
+        new("wreck", Loc.T("A Barge Aground"), Loc.T("A treasure barge ran aground on the Aldwater: today's lots come in twos and threes."), MinTier: 3),
+        new("estate", Loc.T("A Foreclosure Sale"), Loc.T("The Guild has foreclosed on a manor, and its chests are being sold off quick: everyone asks a fifth less today."), Gentle: true),
+        new("tourney", Loc.T("The Tourney"), Loc.T("Knights from four counties are in town for the tourney: weapons and cloaks sell for half again as much today."), Gentle: true),
+        new("mourning", Loc.T("A Day of Mourning"), Loc.T("The old Duke is being buried, and the whole town's in black. Nobody will stand for a hard shake today.")),
+        new("crier", Loc.T("The Town Crier"), Loc.T("Old Lord Harrow lost his family's {kind} to the Locking. His crier offers a reward for one today: three times its price.")),
+        new("minstrel", Loc.T("The Minstrels' Fair"), Loc.T("Minstrels are trading songs in the square, and anyone with a box that hums has brought it: a Heartsong is three times as likely today.")),
+        new("dreaming", Loc.T("The Sleepers' Moon"), Loc.T("The Old Wood's moon was full, and all who slept under it dreamt true, like Mother Bramble: every seller tells you their dream. Some warded something."), MinTier: 2),
+        new("wardens", Loc.T("Wardens' Day"), Loc.T("The old custom: ward a keepsake into a chest before you sell it, and leave a riddle for it. Name the answer, and the ward gives it up."), MinTier: 2),
+        new("census", Loc.T("The Guild's Count"), Loc.T("The Gilded Guild is counting everything that changes hands: a clerk tallies every article in every chest today, false bottoms and all."), MinTier: 2),
+        new("assessor", Loc.T("The Guild's Assessor"), Loc.T("A Guild assessor sits in the corner all day, and takes a tenth of every sale for the Guild."), MinTier: 2),
+        new("moon", Loc.T("A Witchlight Moon"), Loc.T("Under a witchlight moon the old enchantments wake: things in today's chests are far likelier to be enchanted."), MinTier: 3),
     };
 
     public static EventDef Get(string key) => All.First(e => e.Key == key);
@@ -97,23 +97,23 @@ public static class Events
     /// <summary>The event in a few words (23 letters at most: the top bar's chip), for the top bar and the calendar.</summary>
     public static string Tag(EventDef e, Category kind) => e.Key switch
     {
-        "market" => "Fair Day: +3 customers",
-        "festival" => "Locking Day: sales +25%",
-        "buyer" => $"Crown buys {Kind(kind)} x2",
-        "gilded" => "A royal chest today",
-        "stranger" => "The Stranger's in town",
-        "storm" => "Storm: better chests",
-        "wreck" => "Barge aground: pairs",
-        "estate" => "Foreclosure sale: -20%",
-        "tourney" => "Tourney: arms, cloaks",
-        "mourning" => "Mourning: no hard shake",
-        "crier" => $"Crier wants {Kind(kind)}",
-        "minstrel" => "Minstrels: songs x3",
-        "dreaming" => "Sleepers' Moon: dreams",
-        "wardens" => "Wardens' Day: riddles",
-        "census" => "The Guild's Count",
-        "assessor" => "Assessor: sales -10%",
-        "moon" => "Witchlight: more magic",
+        "market" => Loc.T("Fair Day: +3 customers"),
+        "festival" => Loc.T("Locking Day: sales +25%"),
+        "buyer" => Loc.T($"Crown buys {Kind(kind)} x2"),
+        "gilded" => Loc.T("A royal chest today"),
+        "stranger" => Loc.T("The Stranger's in town"),
+        "storm" => Loc.T("Storm: better chests"),
+        "wreck" => Loc.T("Barge aground: pairs"),
+        "estate" => Loc.T("Foreclosure sale: -20%"),
+        "tourney" => Loc.T("Tourney: arms, cloaks"),
+        "mourning" => Loc.T("Mourning: no hard shake"),
+        "crier" => Loc.T($"Crier wants {Kind(kind)}"),
+        "minstrel" => Loc.T("Minstrels: songs x3"),
+        "dreaming" => Loc.T("Sleepers' Moon: dreams"),
+        "wardens" => Loc.T("Wardens' Day: riddles"),
+        "census" => Loc.T("The Guild's Count"),
+        "assessor" => Loc.T("Assessor: sales -10%"),
+        "moon" => Loc.T("Witchlight: more magic"),
         _ => e.Name,
     };
 
@@ -202,17 +202,17 @@ public static class Events
     /// </summary>
     public static readonly SellerDef Stranger = new()
     {
-        Key = "stranger", Name = "The Stranger", Tier = 1, Judge = Judgment.Clueless,
+        Key = "stranger", Name = Loc.T("The Stranger"), Short = Loc.T("Stranger"), Tier = 1, Judge = Judgment.Clueless,
         Kinds = new[] { 1f, 1, 1, 1, 1, 1 }, Colours = new[] { 1f, 0, 0, 0 },
-        Habit = "A stranger in black who sells chests wrapped tight in iron chains, and never says where they're from. Nothing inside " +
-                "can move, so nothing rattles: all you can learn is how heavy it is, and heavy ones hold more.",
-        Pitches = new[] { "Chained tight. No rattles, and no questions. {price}.", "Where's it from? Somewhere that wanted it kept shut. {price}.",
-                          "Some chests are better left shut. Not this one. {price}." },
-        Accepts = new[] { "Wise.", "We'll meet again." },
-        Leaves = new[] { "Another time." },
-        Passes = new[] { "As you like.", "Someone else, then." },
-        Startled = new[] { "Careful.", "It won't open for that." },
-        Fussed = new[] { "Careful. That will cost you." },
+        Habit = Loc.T("A stranger in black who sells chests wrapped tight in iron chains, and never says where they're from. Nothing inside " +
+                "can move, so nothing rattles: all you can learn is how heavy it is, and heavy ones hold more."),
+        Pitches = new[] { Loc.T("Chained tight. No rattles, and no questions. {price}."), Loc.T("Where's it from? Somewhere that wanted it kept shut. {price}."),
+                          Loc.T("Some chests are better left shut. Not this one. {price}.") },
+        Accepts = new[] { Loc.T("Wise."), Loc.T("We'll meet again.") },
+        Leaves = new[] { Loc.T("Another time.") },
+        Passes = new[] { Loc.T("As you like."), Loc.T("Someone else, then.") },
+        Startled = new[] { Loc.T("Careful."), Loc.T("It won't open for that.") },
+        Fussed = new[] { Loc.T("Careful. That will cost you.") },
     };
 
     public const float StrangerJunk = 0.45f, StrangerTreasure = 0.2f;

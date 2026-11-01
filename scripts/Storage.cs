@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Godot;
+using Keywright.Core;
 
 namespace Keywright;
 
@@ -126,7 +127,7 @@ public static class Storage
             File.Move(full, aside);
             GD.PushWarning($"{path} couldn't be read by this version: set aside as {Path.GetFileName(aside)}");
             if (!name.EndsWith(".bak"))
-                Notices.Add($"{stem} couldn't be read (damaged, or from a newer version), so it was set aside as {Path.GetFileName(aside)}.");
+                Notices.Add(Loc.T($"{stem} couldn't be read (damaged, or from a newer version), so it was set aside as {Path.GetFileName(aside)}."));
         }
         catch (Exception e)
         {

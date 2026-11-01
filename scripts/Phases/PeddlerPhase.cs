@@ -42,7 +42,7 @@ public partial class PeddlerPhase : Phase
         _nim.Enter();
         _nim.Say(Peddler.Greetings[(State.Week - 2 + Peddler.Greetings.Length) % Peddler.Greetings.Length]);
         Sfx.PlayGroup("door_open", 1.2f, -6);
-        Add(UiKit.MakeLabel("NIM'S CURIOS", 32, Palette.Magic, HorizontalAlignment.Center, outline: 6).Place(CardsX, 58, CardsRight - CardsX, 40));
+        Add(UiKit.MakeLabel(Loc.T("NIM'S CURIOS"), 32, Palette.Magic, HorizontalAlignment.Center, outline: 6).Place(CardsX, 58, CardsRight - CardsX, 40));
         _board = Add(new Node2D());
         _mentor = Add(new MentorView { Position = new Vector2(24, 560), ZIndex = 20 });
         Build();
@@ -66,20 +66,20 @@ public partial class PeddlerPhase : Phase
         var stock = State.PeddlerStock;
         for (int i = 0; i < stock.Count; i++) _board.AddChild(MakeCard(stock[i], CardsX + i * (CardW + CardGap), CardsY));
         if (stock.Count == 0)
-            _board.AddChild(UiKit.MakeLabel("Nim's sold out: you own every curio Nim carries!", 24, Palette.Muted, HorizontalAlignment.Center)
+            _board.AddChild(UiKit.MakeLabel(Loc.T("Nim's sold out: you own every curio Nim carries!"), 24, Palette.Muted, HorizontalAlignment.Center)
                 .Place(CardsX, 220, CardsRight - CardsX, 30));
-        string note = $"Each curio costs a set sum for its rarity, plus a share of the gold you had this morning ({State.PeddlerPurse}g).";
+        string note = Loc.T($"Each curio costs a set sum for its rarity, plus a share of the gold you had this morning ({State.PeddlerPurse}g).");
         if (stock.Count > 0)
             _board.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4)
                 .Place(CardsX, CardsY + CardH + 4, CardsRight - CardsX, 20));
         // Once a visit, Nim packs these away and lays out something else.
         if (State.CanRerollPeddler)
-            _board.AddChild(UiKit.MakeButton("Show me something else", Palette.Magic, 16, Reroll).Place(660, 610, 300, 64));
+            _board.AddChild(UiKit.MakeButton(Loc.T("Show me something else"), Palette.Magic, 16, Reroll).Place(660, 610, 300, 64));
 
         // Your curios: click one to sell it back for half.
         const float y = CardsY + CardH + 32;
-        _board.AddChild(UiKit.MakeLabel($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}", 16, Palette.Magic).Place(CardsX, y, 300, 20));
-        _board.AddChild(UiKit.MakeLabel("Click one to sell it back to Nim for half what you paid.", 16, Palette.Muted).Place(CardsX + 220, y, 600, 20));
+        _board.AddChild(UiKit.MakeLabel(Loc.T($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(CardsX, y, 300, 20));
+        _board.AddChild(UiKit.MakeLabel(Loc.T("Click one to sell it back to Nim for half what you paid."), 16, Palette.Muted).Place(CardsX + 220, y, 600, 20));
         for (int i = 0; i < State.CurioSlots; i++)
         {
             float x = CardsX + i * 76;
@@ -91,12 +91,12 @@ public partial class PeddlerPhase : Phase
             var sell = new Button
             {
                 Flat = true, FocusMode = Control.FocusModeEnum.None,
-                TooltipText = $"{curio.Name}: {curio.Blurb}\nClick to sell it back for {State.CurioValue(curio.Key)}g.",
+                TooltipText = Loc.T($"{curio.Name}: {curio.Blurb}\nClick to sell it back for {State.CurioValue(curio.Key)}g."),
             };
             sell.Pressed += () => SellBack(curio.Key);
             slot.AddChild(sell.Place(0, 0, 68, 68));
         }
-        _board.AddChild(UiKit.MakeButton("Open the shop", Palette.Gold, 24, Leave).Place(980, 610, 280, 64));
+        _board.AddChild(UiKit.MakeButton(Loc.T("Open the shop"), Palette.Gold, 24, Leave).Place(980, 610, 280, 64));
     }
 
     Control MakeCard(CurioDef curio, float x, float y)
@@ -127,25 +127,24 @@ public partial class PeddlerPhase : Phase
         {
             // As much of it as fits: the curio it goes with, or the way of trading they share.
             const int perLetter = 9;
-            string with = $"Goes with your {kin.Name}";
-            if (with.Length * perLetter > CardW - 8) with = $"With your {kin.Name}";
-            if (with.Length * perLetter > CardW - 8) with = $"Goes with your {Curios.TagName(kin.Tags.Intersect(curio.Tags).First(), kin)}";
+            string with = Loc.T($"Goes with your {kin.Name}");
+            if (with.Length * perLetter > CardW - 8) with = Loc.T($"With your {kin.Name}");
+            if (with.Length * perLetter > CardW - 8) with = Loc.T($"Goes with your {Curios.TagName(kin.Tags.Intersect(curio.Tags).First(), kin)}");
             card.AddChild(UiKit.MakeLabel(with, 16, Palette.Good, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
         }
         else if (!owned && curio.MinTier == State.Tier && curio.MinTier > 1 && curio.Tags.Any(Curios.Main.Contains))
-            card.AddChild(UiKit.MakeLabel($"New at {ShopTiers.Name(State.Tier)}", 16, Palette.Magic, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
+            card.AddChild(UiKit.MakeLabel(Loc.T($"New at {ShopTiers.Name(State.Tier)}"), 16, Palette.Magic, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
         if (owned)
         {
-            card.AddChild(UiKit.MakeLabel("Yours", 24, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, CardH - 50, CardW, 30));
+            card.AddChild(UiKit.MakeLabel(Loc.T("Yours"), 24, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, CardH - 50, CardW, 30));
             return card;
         }
         string warning = price == 0 ? null : State.ShortNote(price, curio: curio);
-        var buy = UiKit.MakeButton(State.CuriosFull ? "No room" : price == 0 ? "Take it, free" : $"Buy {price}g",
+        var buy = UiKit.MakeButton(State.CuriosFull ? Loc.T("No room") : price == 0 ? Loc.T("Take it, free") : Loc.T($"Buy {price}g"),
             price == 0 ? Palette.Good : warning != null ? Palette.Bad : Palette.Gold, 16, () => AskBuy(curio)).Place(30, CardH - 56, CardW - 60, 44);
         buy.Disabled = State.CuriosFull || State.Gold < price;
-        buy.TooltipText = State.CuriosFull ? "Sell a curio back to Nim first to make room."
-            : $"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse this morning." +
-              (warning != null ? $" {warning}" : "");
+        buy.TooltipText = State.CuriosFull ? Loc.T("Sell a curio back to Nim first to make room.")
+            : Loc.T($"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse this morning.{((warning != null ? $" {warning}" : ""))}");
         card.AddChild(buy);
         return card;
     }
@@ -162,11 +161,11 @@ public partial class PeddlerPhase : Phase
             return;
         }
         _nim.Say(Peddler.Stretch);
-        _confirm = Add(UiKit.MakeConfirm("ARE YOU SURE?", warning, Palette.Bad, "Buy anyway", () =>
+        _confirm = Add(UiKit.MakeConfirm(Loc.T("ARE YOU SURE?"), warning, Palette.Bad, Loc.T("Buy anyway"), () =>
         {
             CloseConfirm();
             Buy(curio);
-        }, "Not now", CloseConfirm));
+        }, Loc.T("Not now"), CloseConfirm));
         Game.Moment("22_short", 0.4);
     }
 
@@ -208,7 +207,7 @@ public partial class PeddlerPhase : Phase
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
         _nim.Say(Peddler.Back);
-        FloatText($"+{value}g", new Vector2(CardsX + 120, 420), Palette.Gold, 24);
+        FloatText(Loc.T($"+{value}g"), new Vector2(CardsX + 120, 420), Palette.Gold, 24);
         Build();
     }
 

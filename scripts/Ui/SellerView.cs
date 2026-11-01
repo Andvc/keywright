@@ -47,7 +47,7 @@ public partial class SellerView : Node2D
             {
                 Flat = true, FocusMode = Control.FocusModeEnum.None,
                 MouseDefaultCursorShape = Control.CursorShape.PointingHand,
-                TooltipText = $"{_seller.Name}: click to read their page in your notebook.",
+                TooltipText = Loc.T($"{_seller.Name}: click to read their page in your notebook."),
             };
             face.Pressed += () => Clicked?.Invoke();
             float top = Math.Max(216, origin.Y + (159 - height) * 4);

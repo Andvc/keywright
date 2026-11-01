@@ -5,4 +5,8 @@
     <RootNamespace>Keywright</RootNamespace>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- tools/loc is a console tool of its own. -->
+    <Compile Remove="tools/**" />
+  </ItemGroup>
 </Project>

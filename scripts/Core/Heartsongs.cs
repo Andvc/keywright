@@ -77,33 +77,33 @@ public static class Heartsongs
 
     public static readonly HeartsongDef[] All =
     {
-        new(Lullaby, "The Lullaby Box", "plink", "a farmer's wife at Brindle",
-            "She gave the music box that sang her children to sleep. It still plays her lullaby, for a Keywright.",
-            "Calms every seller: nobody hurries you or minds what you do with their chest, and all ask a fifth less.", "lullaby_box"),
-        new(Pipe, "The Shepherd's Pipe", "toodle", "a shepherd of the Brindle hills",
-            "He gave the pipe whose tune could call any flock home. It still calls.",
-            "Calls folk to your door: two more customers a day, and anyone who walks out comes back at their first price.", "shepherds_pipe"),
-        new(Chimes, "The Fey Chimes", "ting", "the fair folk of the Old Wood",
-            "They gave the chimes from over their door between the worlds. Where they ring, luck turns.",
-            "Fey luck: a third of what comes out as its chest promised comes out a step better.", "fey_chimes"),
-        new(Egg, "The Dragon's Egg", "thump", "Ysolt, the last dragon of the Ember Peaks",
-            "She gave her egg, still warm. Three hundred years on, its heart still beats.",
-            "Dragon-gold: coin and gems you sell fetch twice their worth.", "dragons_egg"),
-        new(Lark, "The Clockwork Lark", "tweet", "a tinker of Crownhold",
-            "He gave the bird he built for a princess who never woke. It sings at dawn, and carries word.",
-            "Carries word across Aldmark: two more commissions a week, and every commission pays half as much again.", "clockwork_lark"),
-        new(Hearth, "The Hearthstone", "hummm", "the dwarves of Ironroot",
-            "They gave a stone from their first hearth. It hums with three thousand years of warm evenings.",
-            $"Folk come for miles to sit by it: {HearthPerPoint}g a night for each point of exhibition (more in a grander shop).", "hearthstone"),
-        new(Bell, "The Drowned Bell", "dong", "old Aldwater, before the river took it",
-            "The town gave its chapel bell, which rang the hours for every soul in Aldwater. It still counts, under the water.",
-            "It counts for you: as a chest comes to the counter, it tolls once for each thing inside, false bottom and all.", "drowned_bell"),
-        new(Star, "The Bottled Star", "twinkle", "the archmages of the Keyhold",
-            "They gave a star they caught as students and kept in a bottle all their lives. Things from the Locking gather round it.",
-            "Starlight: enchanted things glow whenever they sound, witchlight or not, and turn up far more often.", "bottled_star"),
-        new(Ember, "The Imp's Ember", "crackle", "Pib, an imp who loved a miller's daughter",
-            "He gave his own heart, a coal that never goes out, so the Maw could never have her.",
-            "Tempers all it warms: glass never breaks, nothing comes out worse than promised, and fakes you open burn true.", "imps_ember"),
+        new(Lullaby, Loc.Key("The Lullaby Box"), Loc.T("plink"), Loc.T("a farmer's wife at Brindle"),
+            Loc.T("She gave the music box that sang her children to sleep. It still plays her lullaby, for a Keywright."),
+            Loc.T("Calms every seller: nobody hurries you or minds what you do with their chest, and all ask a fifth less."), "lullaby_box"),
+        new(Pipe, Loc.Key("The Shepherd's Pipe"), Loc.T("toodle"), Loc.T("a shepherd of the Brindle hills"),
+            Loc.T("He gave the pipe whose tune could call any flock home. It still calls."),
+            Loc.T("Calls folk to your door: two more customers a day, and anyone who walks out comes back at their first price."), "shepherds_pipe"),
+        new(Chimes, Loc.Key("The Fey Chimes"), Loc.T("ting"), Loc.T("the fair folk of the Old Wood"),
+            Loc.T("They gave the chimes from over their door between the worlds. Where they ring, luck turns."),
+            Loc.T("Fey luck: a third of what comes out as its chest promised comes out a step better."), "fey_chimes"),
+        new(Egg, Loc.Key("The Dragon's Egg"), Loc.T("thump"), Loc.T("Ysolt, the last dragon of the Ember Peaks"),
+            Loc.T("She gave her egg, still warm. Three hundred years on, its heart still beats."),
+            Loc.T("Dragon-gold: coin and gems you sell fetch twice their worth."), "dragons_egg"),
+        new(Lark, Loc.Key("The Clockwork Lark"), Loc.T("tweet"), Loc.T("a tinker of Crownhold"),
+            Loc.T("He gave the bird he built for a princess who never woke. It sings at dawn, and carries word."),
+            Loc.T("Carries word across Aldmark: two more commissions a week, and every commission pays half as much again."), "clockwork_lark"),
+        new(Hearth, Loc.Key("The Hearthstone"), Loc.T("hummm"), Loc.T("the dwarves of Ironroot"),
+            Loc.T("They gave a stone from their first hearth. It hums with three thousand years of warm evenings."),
+            Loc.T($"Folk come for miles to sit by it: {HearthPerPoint}g a night for each point of exhibition (more in a grander shop)."), "hearthstone"),
+        new(Bell, Loc.Key("The Drowned Bell"), Loc.T("dong"), Loc.T("old Aldwater, before the river took it"),
+            Loc.T("The town gave its chapel bell, which rang the hours for every soul in Aldwater. It still counts, under the water."),
+            Loc.T("It counts for you: as a chest comes to the counter, it tolls once for each thing inside, false bottom and all."), "drowned_bell"),
+        new(Star, Loc.Key("The Bottled Star"), Loc.T("twinkle"), Loc.T("the archmages of the Keyhold"),
+            Loc.T("They gave a star they caught as students and kept in a bottle all their lives. Things from the Locking gather round it."),
+            Loc.T("Starlight: enchanted things glow whenever they sound, witchlight or not, and turn up far more often."), "bottled_star"),
+        new(Ember, Loc.Key("The Imp's Ember"), Loc.T("crackle"), Loc.T("Pib, an imp who loved a miller's daughter"),
+            Loc.T("He gave his own heart, a coal that never goes out, so the Maw could never have her."),
+            Loc.T("Tempers all it warms: glass never breaks, nothing comes out worse than promised, and fakes you open burn true."), "imps_ember"),
     };
 
     public static HeartsongDef Get(string key) => All.FirstOrDefault(h => h.Key == key) ?? All[0];
@@ -111,11 +111,10 @@ public static class Heartsongs
     public static bool Exists(string key) => All.Any(h => h.Key == key);
 
     /// <summary>What a Heartsong is, for the ledger and the first one you open.</summary>
-    public const string Lore =
-        "A lock of gold could never hold the demon of greed. So at the Locking the archmages asked the peoples of Aldmark " +
+    public static string Lore => Loc.T("A lock of gold could never hold the demon of greed. So at the Locking the archmages asked the peoples of Aldmark " +
         "for things they loved more than gold, and sang the Locking into nine of them: the Heartsongs. Then they hid each in " +
         "an ordinary chest, among millions. Only a Keywright hears one sing. To anyone else it's worth nothing, and the " +
-        "Guild won't touch one: greed can't put a price on it.";
+        "Guild won't touch one: greed can't put a price on it.");
 
     /// <summary>
     /// Whether this chest holds a Heartsong, and which: one you've never found is likelier (<see cref="NewWeight"/>), and

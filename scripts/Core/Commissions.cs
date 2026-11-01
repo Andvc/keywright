@@ -45,11 +45,11 @@ public sealed class Commission
 
     public bool Done => Delivered >= Needed;
 
-    public string PatronName => Story ? Core.Story.HoodName : Patron == Events.Crier ? "Lord Harrow's crier"
+    public string PatronName => Story ? Core.Story.HoodName : Patron == Events.Crier ? Loc.T("Lord Harrow's crier")
         : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Name ?? Patron;
 
     /// <summary>Who wants it, as the commission board lists them.</summary>
-    public string Who => Story ? "The Hooded Woman" : Patron == Events.Crier ? "Lord Harrow (today)"
+    public string Who => Story ? Loc.T("The Hooded Woman") : Patron == Events.Crier ? Loc.T("Lord Harrow (today)")
         : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Who ?? Patron;
 
     /// <summary>Whether this thing would do. Fakes and broken things never do.</summary>
@@ -61,30 +61,30 @@ public sealed class Commission
     /// <summary>What's wanted, in a few words: "weapons, rare or better", "3 cloaks, uncommon or better".</summary>
     public string What => Kind switch
     {
-        CommissionKind.Enchanted => "anything enchanted",
+        CommissionKind.Enchanted => Loc.T("anything enchanted"),
         CommissionKind.Lot => $"{Needed} {Categories.Get(Category).Name.ToLowerInvariant()}, {Better}",
         _ => $"{Categories.Get(Category).Name.ToLowerInvariant()}, {Better}",
     };
 
     /// <summary>What's wanted, as someone would say it: "a gem (epic or better)".</summary>
-    public string Phrase => Kind == CommissionKind.Enchanted ? "something enchanted" : $"{Noun(Category, Needed)} ({Better})";
+    public string Phrase => Kind == CommissionKind.Enchanted ? Loc.T("something enchanted") : $"{Noun(Category, Needed)} ({Better})";
 
     static string Noun(Category kind, int n) => (kind, n > 1) switch
     {
-        (Category.Coins, _) => n > 1 ? $"{Sellers.Number(n)} purses of coin" : "a purse of coin",
-        (Category.Arms, false) => "a weapon",
-        (Category.Garb, false) => "a cloak",
-        (Category.Potions, false) => "a potion",
-        (Category.Scrolls, false) => "a spell",
-        (Category.Gems, false) => "a gem",
-        (Category.Arms, true) => $"{Sellers.Number(n)} weapons",
-        (Category.Garb, true) => $"{Sellers.Number(n)} cloaks",
-        (Category.Potions, true) => $"{Sellers.Number(n)} potions",
-        (Category.Scrolls, true) => $"{Sellers.Number(n)} spells",
-        _ => $"{Sellers.Number(n)} gems",
+        (Category.Coins, _) => n > 1 ? Loc.T($"{Sellers.Number(n)} purses of coin") : Loc.T("a purse of coin"),
+        (Category.Arms, false) => Loc.T("a weapon"),
+        (Category.Garb, false) => Loc.T("a cloak"),
+        (Category.Potions, false) => Loc.T("a potion"),
+        (Category.Scrolls, false) => Loc.T("a spell"),
+        (Category.Gems, false) => Loc.T("a gem"),
+        (Category.Arms, true) => Loc.T($"{Sellers.Number(n)} weapons"),
+        (Category.Garb, true) => Loc.T($"{Sellers.Number(n)} cloaks"),
+        (Category.Potions, true) => Loc.T($"{Sellers.Number(n)} potions"),
+        (Category.Scrolls, true) => Loc.T($"{Sellers.Number(n)} spells"),
+        _ => Loc.T($"{Sellers.Number(n)} gems"),
     };
 
-    string Better => Quality == Rarity.Common ? "any quality" : Quality == Rarity.Legendary ? "legendary" : $"{Categories.QualityName(Quality)} or better";
+    string Better => Quality == Rarity.Common ? Loc.T("any quality") : Quality == Rarity.Legendary ? Loc.T("legendary") : Loc.T($"{Categories.QualityName(Quality)} or better");
 
     /// <summary>How far along it is, for a lot: "1/3".</summary>
     public string Progress => Needed > 1 ? $"{Delivered}/{Needed}" : "";

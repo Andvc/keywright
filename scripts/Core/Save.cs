@@ -179,7 +179,7 @@ public sealed class SaveData
     const int OldDaysPerWeek = 5, ShortDaysPerWeek = 3, OldWeeks = 8;
 
     /// <summary>A line for the title screen: "Week 3, day 2, Town Shop, 840g".</summary>
-    public string Summary => $"Week {Day / Guild.DaysPerWeek + 1}, day {Day % Guild.DaysPerWeek + 1}, {ShopTiers.Name(Tier)}, {Gold}g";
+    public string Summary => Loc.T($"Week {Day / Guild.DaysPerWeek + 1}, day {Day % Guild.DaysPerWeek + 1}, {ShopTiers.Name(Tier)}, {Gold}g");
 }
 
 /// <summary>A commission, as it's saved.</summary>
@@ -280,6 +280,9 @@ public sealed class Profile
     /// <summary>The fewest days it's taken to clear Bram's debt (0 until it's been cleared).</summary>
     public int FastestClear { get; set; }
 
+    /// <summary>The achievements earned (<see cref="Core.Achievements"/>), on Steam or off it.</summary>
+    public List<string> Achievements { get; set; } = new();
+
     /// <summary>
     /// What Bram has taught, across runs: his tips by key, each seller's lesson ("lesson:" and their key), and the scripted
     /// first day ("firstday"). A new run with tips on doesn't teach them again (Settings can start the lessons over).
@@ -372,8 +375,7 @@ public sealed class Profile
 
     /// <summary>A line for the title screen, or null before the first run.</summary>
     public string Summary => Runs == 0 ? null
-        : $"Best: week {BestWeek}   Debts cleared: {Cleared}{(FastestClear > 0 ? $" (fastest: day {FastestClear})" : "")}   Crown Chests opened: {Vaults}" +
-          (Songs.Count > 0 ? $"   Heartsongs: {Songs.Count}/{Heartsongs.All.Length}" : "");
+        : Loc.T($"Best: week {BestWeek}   Debts cleared: {Cleared}{(FastestClear > 0 ? Loc.T($" (fastest: day {FastestClear})") : "")}   Crown Chests opened: {Vaults}{((Songs.Count > 0 ? Loc.T($"   Heartsongs: {Songs.Count}/{Heartsongs.All.Length}") : ""))}");
 }
 
 /// <summary>Something on display, as it's saved.</summary>

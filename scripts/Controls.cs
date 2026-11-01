@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Keywright.Core;
 
 namespace Keywright;
 
@@ -26,11 +27,11 @@ public static class Controls
     /// <summary>The actions a player can bind, in the order the Controls page lists them, and what it calls each.</summary>
     public static readonly (string Action, string Name)[] Bindable =
     {
-        (Act, "Set a pin, hurry, next line"),
-        (Force, "Force a lock"),
-        (Notebook, "Notebook"),
-        (Pause, "Menu"),
-        (Back, "Back, close"),
+        (Act, Loc.T("Set a pin, hurry, next line")),
+        (Force, Loc.T("Force a lock")),
+        (Notebook, Loc.T("Notebook")),
+        (Pause, Loc.T("Menu")),
+        (Back, Loc.T("Back, close")),
     };
 
     static readonly Dictionary<string, (Key[] Keys, JoyButton[] Buttons)> Defaults = new()
@@ -148,9 +149,9 @@ public static class Controls
     /// <summary>What a key is called on its cap ("Space", "N", "Esc").</summary>
     public static string KeyName(Key key) => key switch
     {
-        Key.Escape => "Esc",
-        Key.Enter => "Enter",
-        Key.Space => "Space",
+        Key.Escape => Loc.T("Esc"),
+        Key.Enter => Loc.T("Enter"),
+        Key.Space => Loc.T("Space"),
         _ => OS.GetKeycodeString(key),
     };
 
@@ -163,22 +164,22 @@ public static class Controls
         bool nintendo = pad.Contains("nintendo") || pad.Contains("switch") || pad.Contains("joy-con");
         return button switch
         {
-            JoyButton.A => playstation ? "Cross" : nintendo ? "B" : "A",
-            JoyButton.B => playstation ? "Circle" : nintendo ? "A" : "B",
-            JoyButton.X => playstation ? "Square" : nintendo ? "Y" : "X",
-            JoyButton.Y => playstation ? "Triangle" : nintendo ? "X" : "Y",
-            JoyButton.LeftShoulder => playstation ? "L1" : "LB",
-            JoyButton.RightShoulder => playstation ? "R1" : "RB",
-            JoyButton.LeftStick => playstation ? "L3" : "LS",
-            JoyButton.RightStick => playstation ? "R3" : "RS",
-            JoyButton.Back => playstation ? "Share" : "Back",
-            JoyButton.Start => playstation ? "Options" : "Start",
-            JoyButton.Guide => "Home",
-            JoyButton.DpadUp => "D-pad up",
-            JoyButton.DpadDown => "D-pad down",
-            JoyButton.DpadLeft => "D-pad left",
-            JoyButton.DpadRight => "D-pad right",
-            _ => $"Button {(int)button}",
+            JoyButton.A => playstation ? Loc.T("Cross") : nintendo ? Loc.T("B") : Loc.T("A"),
+            JoyButton.B => playstation ? Loc.T("Circle") : nintendo ? Loc.T("A") : Loc.T("B"),
+            JoyButton.X => playstation ? Loc.T("Square") : nintendo ? Loc.T("Y") : "X",
+            JoyButton.Y => playstation ? Loc.T("Triangle") : nintendo ? "X" : Loc.T("Y"),
+            JoyButton.LeftShoulder => playstation ? Loc.T("L1") : Loc.T("LB"),
+            JoyButton.RightShoulder => playstation ? "R1" : Loc.T("RB"),
+            JoyButton.LeftStick => playstation ? Loc.T("L3") : Loc.T("LS"),
+            JoyButton.RightStick => playstation ? "R3" : Loc.T("RS"),
+            JoyButton.Back => playstation ? Loc.T("Share") : Loc.T("Back"),
+            JoyButton.Start => playstation ? Loc.T("Options") : Loc.T("Start"),
+            JoyButton.Guide => Loc.T("Home"),
+            JoyButton.DpadUp => Loc.T("D-pad up"),
+            JoyButton.DpadDown => Loc.T("D-pad down"),
+            JoyButton.DpadLeft => Loc.T("D-pad left"),
+            JoyButton.DpadRight => Loc.T("D-pad right"),
+            _ => Loc.T($"Button {(int)button}"),
         };
     }
 

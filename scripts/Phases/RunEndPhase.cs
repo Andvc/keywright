@@ -27,33 +27,34 @@ public partial class RunEndPhase : Phase
     {
         Add(UiKit.MakeShop(State.Tier, _cleared ? 0.65f : 0.4f, ShopHour.Evening, State));
         var color = _cleared ? Palette.Gold : Palette.Bad;
-        string title = _cleared ? (State.VaultOpened ? "THE LOCKING HOLDS" : "DEBT CLEARED") : "FORECLOSED";
+        string title = _cleared ? (State.VaultOpened ? Loc.T("THE LOCKING HOLDS") : Loc.T("DEBT CLEARED")) : Loc.T("FORECLOSED");
         var logo = Add(UiKit.MakeLabel(title, 64, color, HorizontalAlignment.Center, outline: 8).Place(0, 80, 1280, 80));
         logo.PivotOffset = new Vector2(640, 40);
         logo.Scale = Vector2.One * 1.3f;
         logo.CreateTween().TweenProperty(logo, "scale", Vector2.One, 0.4f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
         int early = State.ClearedWeek > 0 ? Guild.Weeks - State.ClearedWeek : 0;
-        string paid = early > 0 ? $"Bram's debt is paid, {early} week{(early == 1 ? "" : "s")} early" : "Bram's debt is paid";
+        string paid = early > 0 ? Loc.Plural(early, $"Bram's debt is paid, {early} week early", $"Bram's debt is paid, {early} weeks early")
+            : Loc.T("Bram's debt is paid");
         string sub = _cleared
-            ? State.VaultOpened ? $"{paid}, the Crown Chest opened, and the Gate gone quiet."
-            : State.MapGiven ? $"{paid}. The Guild has the Key's shards; let them look for the Chest."
-            : State.Week < Guild.Weeks && State.MapPieces > 0 ? $"{paid}. Keep trading, and the Key may yet be whole."
-            : $"{paid}. The Crown Chest will have to wait."
-            : State.DebtCleared ? $"Bram's debt was paid, but the Guild's interest caught up with you in week {State.Week}."
-            : $"The Guild took the shop in week {State.Week}.";
+            ? State.VaultOpened ? Loc.T($"{paid}, the Crown Chest opened, and the Gate gone quiet.")
+            : State.MapGiven ? Loc.T($"{paid}. The Guild has the Key's shards; let them look for the Chest.")
+            : State.Week < Guild.Weeks && State.MapPieces > 0 ? Loc.T($"{paid}. Keep trading, and the Key may yet be whole.")
+            : Loc.T($"{paid}. The Crown Chest will have to wait.")
+            : State.DebtCleared ? Loc.T($"Bram's debt was paid, but the Guild's interest caught up with you in week {State.Week}.")
+            : Loc.T($"The Guild took the shop in week {State.Week}.");
         Add(UiKit.MakeLabel(sub, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 168, 1280, 30));
 
         var panel = Add(UiKit.MakePanel(color.Darkened(0.3f)).Place(90, 220, 540, 300));
         var rows = new List<(string, string)>
         {
-            ("Debt cleared", State.ClearedDay > 0 ? $"day {State.ClearedDay}, week {State.ClearedWeek}" : "no"),
-            ("Days of trading", $"{State.Day}"),
-            ("The shop", ShopTiers.Name(State.Tier)),
-            ("The chests brought in", $"{State.TotalEarned}g"),
-            ("Gold in hand", $"{State.Gold}g"),
-            ("Collection", $"{State.Found.Count} of {Collection.Size}"),
-            ("Key shards", State.MapGiven ? "given to the Guild" : $"{State.MapPieces} of {Story.Pieces}"),
-            ("Curios", $"{State.CurioKeys.Count}"),
+            (Loc.T("Debt cleared"), State.ClearedDay > 0 ? Loc.T($"day {State.ClearedDay}, week {State.ClearedWeek}") : "no"),
+            (Loc.T("Days of trading"), $"{State.Day}"),
+            (Loc.T("The shop"), ShopTiers.Name(State.Tier)),
+            (Loc.T("The chests brought in"), $"{State.TotalEarned}g"),
+            (Loc.T("Gold in hand"), $"{State.Gold}g"),
+            (Loc.T("Collection"), Loc.T($"{State.Found.Count} of {Collection.Size}")),
+            (Loc.T("Key shards"), State.MapGiven ? Loc.T("given to the Guild") : Loc.T($"{State.MapPieces} of {Story.Pieces}")),
+            (Loc.T("Curios"), $"{State.CurioKeys.Count}"),
         };
         for (int i = 0; i < rows.Count; i++)
         {
@@ -66,17 +67,17 @@ public partial class RunEndPhase : Phase
 
         if (_cleared)
         {
-            Add(UiKit.MakeButton("Keep trading", Palette.Gold, 24, KeepTrading).Place(340, 580, 290, 64)).TooltipText =
+            Add(UiKit.MakeButton(Loc.T("Keep trading"), Palette.Gold, 24, KeepTrading).Place(340, 580, 290, 64)).TooltipText =
                 State.Week < Guild.Weeks
-                    ? $"Nobody's coming for anything until week {Guild.Weeks + 1}: then the Guild wants interest, twice as much each week."
-                    : "The Guild keeps coming, for twice as much each week. How long can you last?";
-            Add(UiKit.MakeButton("Retire", Palette.Text, 24, Retire).Place(650, 580, 290, 64)).TooltipText = "Hang up your apron: back to the title.";
+                    ? Loc.T($"Nobody's coming for anything until week {Guild.Weeks + 1}: then the Guild wants interest, twice as much each week.")
+                    : Loc.T("The Guild keeps coming, for twice as much each week. How long can you last?");
+            Add(UiKit.MakeButton(Loc.T("Retire"), Palette.Text, 24, Retire).Place(650, 580, 290, 64)).TooltipText = Loc.T("Hang up your apron: back to the title.");
             Sfx.Play("fanfare", 1f, -2);
             Fx.Confetti(this, new Vector2(640, 120), 160);
         }
         else
         {
-            Add(UiKit.MakeButton("Back to the title", Palette.Gold, 24, Retire).Place(495, 580, 290, 64));
+            Add(UiKit.MakeButton(Loc.T("Back to the title"), Palette.Gold, 24, Retire).Place(495, 580, 290, 64));
             Sfx.Play("lose", 0.8f, -2);
         }
         Game.Moment(_cleared ? "23_cleared" : "23_foreclosed", 0.8);
@@ -89,7 +90,7 @@ public partial class RunEndPhase : Phase
     void BuildScore(Color color)
     {
         var panel = Add(UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(650, 220, 540, 300));
-        panel.AddChild(UiKit.MakeLabel($"{State.Kin.Name.ToUpperInvariant()}'S SCORE{(State.Challenge > 0 ? $", LEVEL {State.Challenge}" : "")}", 16,
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"{State.Kin.Name.ToUpperInvariant()}'S SCORE{(State.Challenge > 0 ? Loc.T($", LEVEL {State.Challenge}") : "")}"), 16,
             Palette.Magic).Place(32, 20, 480, 20));
         var lines = Score.Lines(State);
         for (int i = 0; i < lines.Count; i++)
@@ -99,9 +100,9 @@ public partial class RunEndPhase : Phase
             panel.AddChild(UiKit.MakeLabel($"{points}", 16, Palette.Text, HorizontalAlignment.Right).Place(400, 50 + i * 26, 108, 20));
         }
         int total = Score.Total(State), final = Score.Final(State);
-        string times = State.Challenge > 0 ? $"{total} x{Challenges.Multiplier(State.Challenge):0.##} = " : "";
+        string times = State.Challenge > 0 ? Loc.T($"{total} x{Challenges.Multiplier(State.Challenge):0.##} = ") : "";
         int best = Game.Profile?.BestScore.GetValueOrDefault(State.Character) ?? 0;
-        panel.AddChild(UiKit.MakeLabel(final > best ? "Score: a new best!" : "Score", 24, Palette.Gold, outline: 4).Place(32, 254, 260, 30));
+        panel.AddChild(UiKit.MakeLabel(final > best ? Loc.T("Score: a new best!") : Loc.T("Score"), 24, Palette.Gold, outline: 4).Place(32, 254, 260, 30));
         panel.AddChild(UiKit.MakeLabel($"{times}{final}", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 254, 308, 30));
     }
 
@@ -111,18 +112,18 @@ public partial class RunEndPhase : Phase
         var profile = Game.Profile;
         var news = new List<string>();
         foreach (var kin in Characters.All.Where(c => profile.Unlocked(c) && !Game.KinAtStart.Contains(c.Key)))
-            news.Add($"{kin.Name} can mind the stall now!");
+            news.Add(Loc.T($"{kin.Name} can mind the stall now!"));
         int levels = profile.MaxChallenge(State.Character);
-        if (levels > Game.LevelsAtStart) news.Add($"Challenge level {levels} is open for {State.Kin.Name}.");
+        if (levels > Game.LevelsAtStart) news.Add(Loc.T($"Challenge level {levels} is open for {State.Kin.Name}."));
         // Nim's stock grows as Bram's kin get further: what he'll bring from the next run on.
         var curios = Curios.All.Where(c => profile.OpensAfter(c, State) && !Game.CuriosAtStart.Contains(c.Key)).ToList();
         if (curios.Count > 0)
-            news.Add(curios.Count <= 3 ? $"Nim has new curios for your next run: {string.Join(", ", curios.Select(c => c.Name))}."
-                : $"Nim has {curios.Count} new curios for your next run, the {curios[0].Name} among them.");
-        if (_cleared && State.Week <= Guild.Weeks) news.Add("Keep trading and every week you keep the Guild paid adds to the score.");
+            news.Add(curios.Count <= 3 ? Loc.T($"Nim has new curios for your next run: {string.Join(", ", curios.Select(c => c.Name))}.")
+                : Loc.T($"Nim has {curios.Count} new curios for your next run, the {curios[0].Name} among them."));
+        if (_cleared && State.Week <= Guild.Weeks) news.Add(Loc.T("Keep trading and every week you keep the Guild paid adds to the score."));
         if (news.Count > 0) return string.Join("  ", news);
         return profile is { Runs: > 0 }
-            ? $"All runs: {profile.Runs} started, {profile.Cleared} debts cleared, {profile.Vaults} Crown Chests opened, best week {profile.BestWeek}."
+            ? Loc.T($"All runs: {profile.Runs} started, {profile.Cleared} debts cleared, {profile.Vaults} Crown Chests opened, best week {profile.BestWeek}.")
             : "";
     }
 

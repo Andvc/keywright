@@ -59,7 +59,7 @@ public sealed class SynergyDef
             var quality = (Rarity)(next - 1);
             foreach (var kind in Kinds)
                 yield return $"{Math.Min(PerKind, state.Acquired(kind, quality))}/{PerKind} {Categories.Get(kind).Name.ToLowerInvariant()}" +
-                             (quality == Rarity.Common ? "" : $", {Categories.QualityName(quality)} or better");
+                             (quality == Rarity.Common ? "" : Loc.T($", {Categories.QualityName(quality)} or better"));
         }
         else yield return $"{Achieved(state)}/{Steps[next - 1]} {StepWord}";
     }
@@ -78,59 +78,58 @@ public static class Synergies
     {
         new()
         {
-            Key = "jewelry", Name = "Goldsmith", Blurb = "Coin and gems", Kinds = new[] { Category.Coins, Category.Gems }, Tier = 3,
-            Effect = l => $"Moneychangers and jewellers come your way: coin and gems turn up {Pct(MoneyKinds(l))} more often, and they sell for {Pct(KindSales(l))} more.",
+            Key = "jewelry", Name = Loc.T("Goldsmith"), Blurb = Loc.T("Coin and gems"), Kinds = new[] { Category.Coins, Category.Gems }, Tier = 3,
+            Effect = l => Loc.T($"Moneychangers and jewellers come your way: coin and gems turn up {Pct(MoneyKinds(l))} more often, and they sell for {Pct(KindSales(l))} more."),
         },
         new()
         {
-            Key = "smith", Name = "Armourer", Blurb = "Weapons", Kinds = new[] { Category.Arms },
-            Effect = l => $"Soldiers, knights and dwarves come {Pct(SmithVisits(l) - 1)} more often, and weapons sell for {Pct(KindSales(l))} more.",
+            Key = "smith", Name = Loc.T("Armourer"), Blurb = Loc.T("Weapons"), Kinds = new[] { Category.Arms },
+            Effect = l => Loc.T($"Soldiers, knights and dwarves come {Pct(SmithVisits(l) - 1)} more often, and weapons sell for {Pct(KindSales(l))} more."),
         },
         new()
         {
-            Key = "vintner", Name = "Apothecary", Blurb = "Potions", Kinds = new[] { Category.Potions }, Tier = 2,
-            Effect = l => (l >= SynergyDef.MaxLevel ? "Glass never breaks, dropped or forced" : $"Glass is {Pct(Sturdier(l))} less likely to break") +
-                          $", and potions sell for {Pct(KindSales(l))} more.",
+            Key = "vintner", Name = Loc.T("Apothecary"), Blurb = Loc.T("Potions"), Kinds = new[] { Category.Potions }, Tier = 2,
+            Effect = l => Loc.T($"{((l >= SynergyDef.MaxLevel ? Loc.T("Glass never breaks, dropped or forced") : Loc.T($"Glass is {Pct(Sturdier(l))} less likely to break")))}, and potions sell for {Pct(KindSales(l))} more."),
         },
         new()
         {
-            Key = "archivist", Name = "Spellkeeper", Blurb = "Spells", Kinds = new[] { Category.Scrolls }, Tier = 2,
-            Effect = l => $"People trust you with secrets: chests are {Pct(HiddenBonus(l))} likelier to have a false bottom, and spells sell for {Pct(KindSales(l))} more.",
+            Key = "archivist", Name = Loc.T("Spellkeeper"), Blurb = Loc.T("Spells"), Kinds = new[] { Category.Scrolls }, Tier = 2,
+            Effect = l => Loc.T($"People trust you with secrets: chests are {Pct(HiddenBonus(l))} likelier to have a false bottom, and spells sell for {Pct(KindSales(l))} more."),
         },
         new()
         {
-            Key = "tailor", Name = "Cloakmaker", Blurb = "Cloaks", Kinds = new[] { Category.Garb },
-            Effect = l => $"Fine drapery: your exhibition counts +{Pct(ShowBonus(l))}, and cloaks sell for {Pct(KindSales(l))} more.",
+            Key = "tailor", Name = Loc.T("Cloakmaker"), Blurb = Loc.T("Cloaks"), Kinds = new[] { Category.Garb },
+            Effect = l => Loc.T($"Fine drapery: your exhibition counts +{Pct(ShowBonus(l))}, and cloaks sell for {Pct(KindSales(l))} more."),
         },
         new()
         {
-            Key = "keen", Name = "Keen Eye", Blurb = "Perfect reads in a row", Steps = new[] { 3, 5, 8, 12, 18 }, StepWord = "perfect reads in a row",
+            Key = "keen", Name = Loc.T("Keen Eye"), Blurb = Loc.T("Perfect reads in a row"), Steps = new[] { 3, 5, 8, 12, 18 }, StepWord = Loc.T("perfect reads in a row"),
             Achieved = s => s.BestStreak,
-            Effect = l => $"A perfect read earns you a valuer's fee: {Pct(KeenFee(l))} of what the chest held.",
+            Effect = l => Loc.T($"A perfect read earns you a valuer's fee: {Pct(KeenFee(l))} of what the chest held."),
         },
         new()
         {
-            Key = "fortune", Name = "Lucky Shop", Blurb = "Surprises", Steps = new[] { 3, 6, 10, 15, 22 }, StepWord = "things better than their chest",
+            Key = "fortune", Name = Loc.T("Lucky Shop"), Blurb = Loc.T("Surprises"), Steps = new[] { 3, 6, 10, 15, 22 }, StepWord = Loc.T("things better than their chest"),
             Achieved = s => s.Surprises,
-            Effect = l => $"Luck follows a lucky shop: everything you open is {Pct(LuckBonus(l))} likelier to come out a step better.",
+            Effect = l => Loc.T($"Luck follows a lucky shop: everything you open is {Pct(LuckBonus(l))} likelier to come out a step better."),
         },
         new()
         {
-            Key = "finder", Name = "Finder", Blurb = "False bottoms and wards", Steps = new[] { 2, 4, 7, 11, 16 }, StepWord = "hidden or warded things found", Tier = 2,
+            Key = "finder", Name = Loc.T("Finder"), Blurb = Loc.T("False bottoms and wards"), Steps = new[] { 2, 4, 7, 11, 16 }, StepWord = Loc.T("hidden or warded things found"), Tier = 2,
             Achieved = s => s.HiddenFound,
-            Effect = l => $"Chests are {Pct(FinderHidden(l))} likelier to have a false bottom, and what you find under one or name in a ward sells for {Pct(FinderSales(l))} more.",
+            Effect = l => Loc.T($"Chests are {Pct(FinderHidden(l))} likelier to have a false bottom, and what you find under one or name in a ward sells for {Pct(FinderSales(l))} more."),
         },
         new()
         {
-            Key = "haggler", Name = "Haggler", Blurb = "Chests talked down", Steps = new[] { 3, 6, 10, 15, 22 }, StepWord = "chests talked down or named a price for",
+            Key = "haggler", Name = Loc.T("Haggler"), Blurb = Loc.T("Chests talked down"), Steps = new[] { 3, 6, 10, 15, 22 }, StepWord = Loc.T("chests talked down or named a price for"),
             Achieved = s => s.Bargains,
-            Effect = l => $"Word of a hard bargainer: hagglers and sellers who wait for an offer settle for {Pct(HagglerFloor(l))} less.",
+            Effect = l => Loc.T($"Word of a hard bargainer: hagglers and sellers who wait for an offer settle for {Pct(HagglerFloor(l))} less."),
         },
         new()
         {
-            Key = "arcane", Name = "Arcanist", Blurb = "Enchanted things found", Steps = new[] { 2, 5, 9, 14, 20 }, StepWord = "enchanted things", Tier = 3,
+            Key = "arcane", Name = Loc.T("Arcanist"), Blurb = Loc.T("Enchanted things found"), Steps = new[] { 2, 5, 9, 14, 20 }, StepWord = Loc.T("enchanted things"), Tier = 3,
             Achieved = s => s.MagicFound,
-            Effect = l => $"Mages seek you out: each thing is {Pct(MagicBonus(l))} likelier to be enchanted, and enchanted things sell for {Pct(KindSales(l))} more.",
+            Effect = l => Loc.T($"Mages seek you out: each thing is {Pct(MagicBonus(l))} likelier to be enchanted, and enchanted things sell for {Pct(KindSales(l))} more."),
         },
     };
 

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Godot;
+using Keywright.Core;
 
 namespace Keywright;
 
@@ -230,13 +231,13 @@ public static class Settings
         Apply();
     }
 
-    public static string ShakeWord => Shake >= 1f ? "Full" : Shake > 0f ? "Reduced" : "Off";
+    public static string ShakeWord => Shake >= 1f ? Loc.T("Full") : Shake > 0f ? Loc.T("Reduced") : Loc.T("Off");
 
     public static string ScreenWord => Screen switch
     {
-        ScreenMode.Exclusive => "Exclusive fullscreen",
-        ScreenMode.Fullscreen => "Fullscreen",
-        _ => "Windowed",
+        ScreenMode.Exclusive => Loc.T("Exclusive fullscreen"),
+        ScreenMode.Fullscreen => Loc.T("Fullscreen"),
+        _ => Loc.T("Windowed"),
     };
 
     static T Get<T>(ConfigFile file, string section, string key, T fallback)

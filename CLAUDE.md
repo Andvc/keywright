@@ -73,7 +73,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    controller (the stick to the chest, A and flicks to a hard shake, Y, B, Start, then rebinding); run it in a scaled
    window too (a `[video]` `screen=0`, `window_width=1600`, `window_height=900` settings.cfg in the user folder,
    removed afterwards, under `-screen 0 1920x1080x24`), since the pointer's sums only show there. Both exit 1 on a
-   failure.
+   failure. The full shake test takes about eleven minutes (`--n=4` for a quick look).
+7. Text: `dotnet run --project tools/loc -- check` must say every text is wrapped (it lists any new one that isn't),
+   and `-- extract` rewrites locale/keywright.pot (commit it). `godot --headless --path . -- --loc-test` runs the
+   language layer through Godot with a made-up German translation. `-- --sim=quick --pseudo` must print the same
+   numbers as without (only the words change: a key that got translated shows up as a different number), and a bot
+   or shell-demo run with `--pseudo` shows every translated text in brackets, so anything plain is untranslated, and
+   a third longer, so a layout too tight for German shows.
 
 ## Conventions
 
@@ -285,6 +291,18 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the window loses focus, tips, language and the controls. `Settings.ApplyDisplay` changes the window through the
   root `Window` node (its `Mode`, `Size`, `Position`), never the display server alone: the node works out the
   stretch and the mouse from its own size.
+- Languages (0.27): everything the player reads goes through `Loc` (Core) where it's written: `Loc.T("Pass")`, and
+  `Loc.T($"Day {day} of {days}")`, which is looked up as one sentence with numbered holes ("Day {0} of {1}") so a
+  translation can move them; `Loc.Plural(n, $"{n} week early", $"{n} weeks early")` for a count. Data tables are
+  translated where they're written, so the language is set once, at start-up (`Localization.Apply`; a change in
+  Settings takes a restart). A name that's also a key, kept in saves (a thing's `Names`, `FakeName`, a Heartsong's
+  `Name`), is `Loc.Key` in the data and `Loc.T(name)` where it's shown (`Item.Name` does; `Entry` is the key);
+  `Categories.ChestSkin` is the art's name for a colour and `ColourName` the player's. Never compare or look up by
+  a text the player reads (compare keys, or `Loc.T` both sides), and mark English that must stay English (keys in
+  a list) with `// loc: keys`. `tools/loc` (Roslyn) wrapped the strings once and now checks and extracts them.
+  Translations are gettext files in locale/ named for their locale (de.po, pt_BR.po) from keywright.pot; drop one in
+  and Settings offers it. Kenney Mini covers English and western Europe; Galmuri 9 (OFL) the rest of Latin,
+  Cyrillic, Greek, Korean and Japanese; Simplified Chinese needs a font of its own (docs/release.md).
 - Input (0.27): the game asks for an action, never a key (`Controls`: `act` sets a pin, hurries an opening, reads the
   next line; `force`, `notebook`, `pause`, `back`). Each has keys and controller buttons, rebound on the Controls page
   (a key another action had moves to the new one, and an action left with none takes the old one; the menu and Back

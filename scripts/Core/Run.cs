@@ -312,7 +312,7 @@ public sealed partial class GameState
             new Item(Category.Scrolls, Rarity.Legendary), new Item(Category.Gems, Rarity.Epic), new Item(Category.Coins, Rarity.Epic),
         };
         var chest = new Chest(items, Rarity.Legendary, new Item(Category.Gems, Rarity.Legendary), LockTiers.All[3], gilded: true);
-        return new Visit(Story.VaultSeller, chest, Array.Empty<Category>(), Trade.Fixed, 0, 1, "The Crown Chest.");
+        return new Visit(Story.VaultSeller, chest, Array.Empty<Category>(), Trade.Fixed, 0, 1, Loc.T("The Crown Chest."));
     }
 
     // ---- Curios ----

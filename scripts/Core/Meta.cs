@@ -20,34 +20,33 @@ public static class Characters
 
     public static readonly CharacterDef[] All =
     {
-        new(Kit, "Kit", "The Ear", "Bram's niece, who grew up behind his counter, with the Key-mark and his ear for a chest.",
+        new(Kit, Loc.T("Kit"), Loc.T("The Ear"), Loc.T("Bram's niece, who grew up behind his counter, with the Key-mark and his ear for a chest."),
             new[]
             {
-                "Shakes at every strength and drops a chest to hear what's under the floor.",
-                "With tips on, Uncle Bram teaches the trade as each new seller arrives.",
+                Loc.T("Shakes at every strength and drops a chest to hear what's under the floor."),
+                Loc.T("With tips on, Uncle Bram teaches the trade as each new seller arrives."),
             }, null, _ => true),
-        new(Hesk, "Hesk", "The Scale", "Bram's nephew, a grocer from the river towns, with the Key-mark, a bad back and an honest scale.",
+        new(Hesk, Loc.T("Hesk"), Loc.T("The Scale"), Loc.T("Bram's nephew, a grocer from the river towns, with the Key-mark, a bad back and an honest scale."),
             new[]
             {
-                "A bad back: he can't shake a chest hard, or lift it to drop it.",
-                "Every chest sits on his scale: he knows what everything in it weighs, to the half pound.",
-                $"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloaks {Pounds(Category.Garb)}, potions {Pounds(Category.Potions)}, " +
-                $"spells {Pounds(Category.Scrolls)}, gems {Pounds(Category.Gems)}. Demon gold weighs half what gold does; sand is heavier than a scroll.",
-            }, "Pay the Guild's third due to unlock.", p => p.BestWeek >= 4),
-        new(Rosa, "Rosa", "The Tongue", "Bram's niece from the Crownhold markets. She'd haggle with a statue, and win.",
+                Loc.T("A bad back: he can't shake a chest hard, or lift it to drop it."),
+                Loc.T("Every chest sits on his scale: he knows what everything in it weighs, to the half pound."),
+Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloaks {Pounds(Category.Garb)}, potions {Pounds(Category.Potions)}, spells {Pounds(Category.Scrolls)}, gems {Pounds(Category.Gems)}. Demon gold weighs half what gold does; sand is heavier than a scroll."),
+            }, Loc.T("Pay the Guild's third due to unlock."), p => p.BestWeek >= 4),
+        new(Rosa, Loc.T("Rosa"), Loc.T("The Tongue"), Loc.T("Bram's niece from the Crownhold markets. She'd haggle with a statue, and win."),
             new[]
             {
-                "Everybody haggles with Rosa: sellers who'd name a fixed price ask high and hear an offer instead.",
-                "They know her: they open a little higher and come down a little less. An offer too low gets a second try.",
-                "But word gets round: a seller who walks out on her won't come back that week.",
-            }, "Clear Bram's debt to unlock.", p => p.Cleared >= 1),
-        new(Isolde, "Isolde", "The Collection", "Bram's niece by marriage, a lady who has never sold a thing she liked.",
+                Loc.T("Everybody haggles with Rosa: sellers who'd name a fixed price ask high and hear an offer instead."),
+                Loc.T("They know her: they open a little higher and come down a little less. An offer too low gets a second try."),
+                Loc.T("But word gets round: a seller who walks out on her won't come back that week."),
+            }, Loc.T("Clear Bram's debt to unlock."), p => p.Cleared >= 1),
+        new(Isolde, Loc.T("Isolde"), Loc.T("The Collection"), Loc.T("Bram's niece by marriage, a lady who has never sold a thing she liked."),
             new[]
             {
-                $"A shelf from the start: she can display {IsoldeShelf} things at Bram's stall.",
-                $"Visitors pay to see her collection: every night, {AdmissionPerPoint}g per point of exhibition (more in a grander shop).",
-                "Her collection is not for pawning: on a short night, the Guild can only take her curios.",
-            }, "Open the Crown Chest to unlock.", p => p.Vaults >= 1),
+                Loc.T($"A shelf from the start: she can display {IsoldeShelf} things at Bram's stall."),
+                Loc.T($"Visitors pay to see her collection: every night, {AdmissionPerPoint}g per point of exhibition (more in a grander shop)."),
+                Loc.T("Her collection is not for pawning: on a short night, the Guild can only take her curios."),
+            }, Loc.T("Open the Crown Chest to unlock."), p => p.Vaults >= 1),
     };
 
     public static CharacterDef Get(string key) => All.FirstOrDefault(c => c.Key == key) ?? All[0];
@@ -70,8 +69,7 @@ public static class Characters
 
     /// <summary>What everything weighs, for the ledger and a scale's tooltip.</summary>
     public static string PoundsTable =>
-        $"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloaks {Pounds(Category.Garb)}, potions {Pounds(Category.Potions)}, " +
-        $"spells {Pounds(Category.Scrolls)}, gems {Pounds(Category.Gems)}, a Heartsong {Pounds(Category.Heartsong)}.";
+Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloaks {Pounds(Category.Garb)}, potions {Pounds(Category.Potions)}, spells {Pounds(Category.Scrolls)}, gems {Pounds(Category.Gems)}, a Heartsong {Pounds(Category.Heartsong)}.");
 
     /// <summary>What one thing of this kind weighs on Hesk's scale, in pounds.</summary>
     public static float Pounds(Category kind) => kind switch
@@ -92,7 +90,7 @@ public static class Characters
     public static float Pounds(Item item) => item.Fake ? FakePounds(item.Category) : Pounds(item.Category);
 
     /// <summary>"13.5 lb", "4 lb".</summary>
-    public static string Weight(float pounds) => $"{(pounds % 1 == 0 ? $"{pounds:0}" : $"{pounds:0.0}")} lb";
+    public static string Weight(float pounds) => Loc.T($"{(pounds % 1 == 0 ? $"{pounds:0}" : $"{pounds:0.0}")} lb");
 }
 
 /// <summary>
@@ -159,58 +157,58 @@ public static class Challenges
 
     public static readonly TermDef[] Banes =
     {
-        new(ThinCrowds, false, "Thin crowds", "On the last two days of every week, one customer fewer.",
-            "The Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door while they're about."),
-        new(SharpSellers, false, "Sharp sellers", $"Sellers who haggle hold out for more: the least they'll take is {Synergies.Pct(SharpFloor - 1)} higher.",
-            "Word's out that the Guild has you by the purse, and sellers think you'll pay what they ask."),
-        new(Forgers, false, "Demon gold about", "One coin in ten is demon gold, whoever brings it.",
-            "The Gate's cracking wider, and the Maw's gilded iron has spread all over the realm."),
-        new(Hurried, false, "A hurried season", $"Every seller gives you {HurriedPatience:0} seconds to decide.",
-            "It's harvest time, and nobody can spare more than a moment at your counter."),
-        new(FussySellers, false, "Fussy sellers", "Every seller minds a drop: drop their chest and they ask half again.",
-            "Old chests are the fashion this year, and everyone's precious about theirs."),
-        new(Stretched, false, "Bram's stretched thin", "Bram's stash has one dip fewer, and his word is good one time fewer.",
-            "Bram spent his savings mending the roof, and the Guild has stopped taking his word."),
-        new(LeanStart, false, "A lean start", "You start with half the gold.",
-            "The stall's licence cost more than Bram thought."),
-        new(DearCurios, false, "Nim's raised his prices", "Nim asks a quarter more for every curio.",
-            "The Guild is hunting Nim this season, and he charges for the risk."),
-        new(Builders, false, "The Guild's builders", "Every upgrade and move costs a quarter more.",
-            "The Guild says only its own builders may work on a licensed shop, at its own rates."),
-        new(Rust, false, "A wet year", "Every lock has one more pin to pick.",
-            "A wet winter has rusted every old lock in the realm stiff."),
-        new(Wary, false, "Wary regulars", "The regulars post one commission fewer each week.",
-            "Folk aren't sure your stall will last, and won't set you errands."),
-        new(Sparse, false, "Nim's lean month", "Nim lays out three curios, not four.",
-            "Pickings have been slim among the Locking's oddments."),
+        new(ThinCrowds, false, Loc.T("Thin crowds"), Loc.T("On the last two days of every week, one customer fewer."),
+            Loc.T("The Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door while they're about.")),
+        new(SharpSellers, false, Loc.T("Sharp sellers"), Loc.T($"Sellers who haggle hold out for more: the least they'll take is {Synergies.Pct(SharpFloor - 1)} higher."),
+            Loc.T("Word's out that the Guild has you by the purse, and sellers think you'll pay what they ask.")),
+        new(Forgers, false, Loc.T("Demon gold about"), Loc.T("One coin in ten is demon gold, whoever brings it."),
+            Loc.T("The Gate's cracking wider, and the Maw's gilded iron has spread all over the realm.")),
+        new(Hurried, false, Loc.T("A hurried season"), Loc.T($"Every seller gives you {HurriedPatience:0} seconds to decide."),
+            Loc.T("It's harvest time, and nobody can spare more than a moment at your counter.")),
+        new(FussySellers, false, Loc.T("Fussy sellers"), Loc.T("Every seller minds a drop: drop their chest and they ask half again."),
+            Loc.T("Old chests are the fashion this year, and everyone's precious about theirs.")),
+        new(Stretched, false, Loc.T("Bram's stretched thin"), Loc.T("Bram's stash has one dip fewer, and his word is good one time fewer."),
+            Loc.T("Bram spent his savings mending the roof, and the Guild has stopped taking his word.")),
+        new(LeanStart, false, Loc.T("A lean start"), Loc.T("You start with half the gold."),
+            Loc.T("The stall's licence cost more than Bram thought.")),
+        new(DearCurios, false, Loc.T("Nim's raised his prices"), Loc.T("Nim asks a quarter more for every curio."),
+            Loc.T("The Guild is hunting Nim this season, and he charges for the risk.")),
+        new(Builders, false, Loc.T("The Guild's builders"), Loc.T("Every upgrade and move costs a quarter more."),
+            Loc.T("The Guild says only its own builders may work on a licensed shop, at its own rates.")),
+        new(Rust, false, Loc.T("A wet year"), Loc.T("Every lock has one more pin to pick."),
+            Loc.T("A wet winter has rusted every old lock in the realm stiff.")),
+        new(Wary, false, Loc.T("Wary regulars"), Loc.T("The regulars post one commission fewer each week."),
+            Loc.T("Folk aren't sure your stall will last, and won't set you errands.")),
+        new(Sparse, false, Loc.T("Nim's lean month"), Loc.T("Nim lays out three curios, not four."),
+            Loc.T("Pickings have been slim among the Locking's oddments.")),
     };
 
     public static readonly TermDef[] Boons =
     {
-        new(Gifts, true, "Welcome gifts", $"Your first {Sellers.Number(Gifted)} customers hand you their chests for a coin each.",
-            "The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny."),
-        new(NimsFavour, true, "Nim's soft spot", "Nim will show you something else twice a visit, not once.",
-            "Nim owes Bram a favour, and has decided you're it."),
-        new(Savings, true, "Bram's savings", "You start with half as much gold again.",
-            "Bram sold his old cart, and the money's yours.", LeanStart),
-        new(OldPicks, true, "Bram's old picks", "You start with the Fine Lockpicks: a wider sweet spot on every lock.",
-            "Bram found his old picks at the bottom of a drawer."),
-        new(Invited, true, "Thornwick wants you", "The move to Thornwick Market costs half.",
-            "Thornwick's council wants a Keywright in the market, and pays half the rent.", Builders),
-        new(Patient, true, "A slow season", "Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking.",
-            "Nobody's in a hurry this year.", Hurried),
-        new(Prepared, true, "Bram's prepared", "Bram's stash has one more dip in it, and his word is good once more.",
-            "Bram's been putting a little by, and the Guild still owes him a favour.", Stretched),
-        new(HonestClerk, true, "An honest clerk", "On a short night, what you pawn fetches its full price.",
-            "The Guild's pawn clerk was at school with your mother."),
-        new(GoodName, true, "A good name", "Hagglers hear you out: an offer that's too low gets a second try, not a slammed door.",
-            "Bram's kin have a name for fair dealing."),
-        new(Charm, true, "A lucky charm", "After a run of plain finds, your luck turns twice as soon.",
-            "Bram tied his mother's old lucky charm to your apron."),
-        new(FairDays, true, "Fair days", "No days of mourning and no Guild assessors in town.",
-            "The old Duke's in good health, and the Guild's assessors have their hands full in the capital."),
-        new(Drawer, true, "Room for more", "Room for one more curio, from the start.",
-            "Bram cleared out a drawer for your curios."),
+        new(Gifts, true, Loc.T("Welcome gifts"), Loc.T($"Your first {Sellers.Number(Gifted)} customers hand you their chests for a coin each."),
+            Loc.T("The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny.")),
+        new(NimsFavour, true, Loc.T("Nim's soft spot"), Loc.T("Nim will show you something else twice a visit, not once."),
+            Loc.T("Nim owes Bram a favour, and has decided you're it.")),
+        new(Savings, true, Loc.T("Bram's savings"), Loc.T("You start with half as much gold again."),
+            Loc.T("Bram sold his old cart, and the money's yours."), LeanStart),
+        new(OldPicks, true, Loc.T("Bram's old picks"), Loc.T("You start with the Fine Lockpicks: a wider sweet spot on every lock."),
+            Loc.T("Bram found his old picks at the bottom of a drawer.")),
+        new(Invited, true, Loc.T("Thornwick wants you"), Loc.T("The move to Thornwick Market costs half."),
+            Loc.T("Thornwick's council wants a Keywright in the market, and pays half the rent."), Builders),
+        new(Patient, true, Loc.T("A slow season"), Loc.T("Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking."),
+            Loc.T("Nobody's in a hurry this year."), Hurried),
+        new(Prepared, true, Loc.T("Bram's prepared"), Loc.T("Bram's stash has one more dip in it, and his word is good once more."),
+            Loc.T("Bram's been putting a little by, and the Guild still owes him a favour."), Stretched),
+        new(HonestClerk, true, Loc.T("An honest clerk"), Loc.T("On a short night, what you pawn fetches its full price."),
+            Loc.T("The Guild's pawn clerk was at school with your mother.")),
+        new(GoodName, true, Loc.T("A good name"), Loc.T("Hagglers hear you out: an offer that's too low gets a second try, not a slammed door."),
+            Loc.T("Bram's kin have a name for fair dealing.")),
+        new(Charm, true, Loc.T("A lucky charm"), Loc.T("After a run of plain finds, your luck turns twice as soon."),
+            Loc.T("Bram tied his mother's old lucky charm to your apron.")),
+        new(FairDays, true, Loc.T("Fair days"), Loc.T("No days of mourning and no Guild assessors in town."),
+            Loc.T("The old Duke's in good health, and the Guild's assessors have their hands full in the capital.")),
+        new(Drawer, true, Loc.T("Room for more"), Loc.T("Room for one more curio, from the start."),
+            Loc.T("Bram cleared out a drawer for your curios.")),
     };
 
     public static TermDef Get(string key) => Banes.FirstOrDefault(t => t.Key == key) ?? Boons.FirstOrDefault(t => t.Key == key);
@@ -267,21 +265,21 @@ public static class Score
             if (points > 0) lines.Add((label, points));
         }
         int dues = Math.Min(state.WeeksPaid, Guild.Weeks);
-        Add($"Guild dues paid ({dues} of {Guild.Weeks})", dues * PerDue);
+        Add(Loc.T($"Guild dues paid ({dues} of {Guild.Weeks})"), dues * PerDue);
         if (state.DebtCleared)
         {
-            Add("Bram's debt cleared", Cleared);
+            Add(Loc.T("Bram's debt cleared"), Cleared);
             int spare = Math.Max(0, Guild.Weeks * Guild.DaysPerWeek - state.ClearedDay);
-            Add($"Days to spare ({spare})", spare * PerDaySpare);
+            Add(Loc.T($"Days to spare ({spare})"), spare * PerDaySpare);
         }
-        if (state.VaultOpened) Add("The Crown Chest", Vault);
-        else Add($"Key shards ({state.MapPieces})", state.MapPieces * PerPiece);
-        if (state.VaultOpened && state.SongWhole) Add("The Locking, sung whole", SungWhole);
-        Add($"Heartsongs ({state.SongsFound.Count})", state.SongsFound.Count * PerSong);
-        Add($"Moves ({state.Tier - 1})", (state.Tier - 1) * PerRenovation);
-        Add($"Collection ({state.Found.Count} of {Collection.Size})", state.Found.Count * PerFind);
+        if (state.VaultOpened) Add(Loc.T("The Crown Chest"), Vault);
+        else Add(Loc.T($"Key shards ({state.MapPieces})"), state.MapPieces * PerPiece);
+        if (state.VaultOpened && state.SongWhole) Add(Loc.T("The Locking, sung whole"), SungWhole);
+        Add(Loc.T($"Heartsongs ({state.SongsFound.Count})"), state.SongsFound.Count * PerSong);
+        Add(Loc.T($"Moves ({state.Tier - 1})"), (state.Tier - 1) * PerRenovation);
+        Add(Loc.T($"Collection ({state.Found.Count} of {Collection.Size})"), state.Found.Count * PerFind);
         int endless = Math.Max(0, state.WeeksPaid - Guild.Weeks);
-        Add($"Weeks after the debt ({endless})", endless * PerEndlessWeek);
+        Add(Loc.T($"Weeks after the debt ({endless})"), endless * PerEndlessWeek);
         return lines;
     }
 

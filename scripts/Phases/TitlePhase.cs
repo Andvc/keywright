@@ -43,7 +43,7 @@ public partial class TitlePhase : Phase
         }));
 
         Add(UiKit.MakeSprite("res://assets/ui/logo.png", new Vector2(640, 92), 2));
-        Add(UiKit.MakeLabel("Every treasure in Aldmark is locked in a chest. Only a Keywright can open one.", 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
+        Add(UiKit.MakeLabel(Loc.T("Every treasure in Aldmark is locked in a chest. Only a Keywright can open one."), 16, Palette.Text, HorizontalAlignment.Center, outline: 4)
             .Place(0, 164, 1280, 24));
 
         _chest = Add(new ChestView { Position = new Vector2(640, 300), Skin = "purple", Lock = 2, GlowColor = Palette.Of(Rarity.Legendary) });
@@ -51,20 +51,20 @@ public partial class TitlePhase : Phase
         float y = 380;
         if (_save != null)
         {
-            Add(UiKit.MakeButton("Continue", Palette.Gold, 24, () => Game.ContinueGame(_save)).Place(ButtonsX, y, ButtonW, 56));
+            Add(UiKit.MakeButton(Loc.T("Continue"), Palette.Gold, 24, () => Game.ContinueGame(_save)).Place(ButtonsX, y, ButtonW, 56));
             Add(UiKit.MakeLabel(_save.Summary, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(ButtonsX, y + 60, ButtonW, 20));
             y += 92;
         }
-        Add(UiKit.MakeButton("New game", _save == null ? Palette.Gold : Palette.Text, _save == null ? 24 : 16, NewGame)
+        Add(UiKit.MakeButton(Loc.T("New game"), _save == null ? Palette.Gold : Palette.Text, _save == null ? 24 : 16, NewGame)
             .Place(ButtonsX, y, ButtonW, _save == null ? 56 : 44));
         y += _save == null ? 70 : 56;
-        Add(UiKit.MakeButton("Collection", Palette.Text, 16, () => OpenCollection()).Place(ButtonsX, y, ButtonW, 44));
+        Add(UiKit.MakeButton(Loc.T("Collection"), Palette.Text, 16, () => OpenCollection()).Place(ButtonsX, y, ButtonW, 44));
         y += 56;
-        Add(UiKit.MakeButton("Settings", Palette.Text, 16, OpenSettings).Place(ButtonsX, y, ButtonW, 44));
+        Add(UiKit.MakeButton(Loc.T("Settings"), Palette.Text, 16, OpenSettings).Place(ButtonsX, y, ButtonW, 44));
         y += 56;
-        Add(UiKit.MakeButton("Quit", Palette.Text, 16, () => Game.QuitGame()).Place(ButtonsX, y, ButtonW, 44));
+        Add(UiKit.MakeButton(Loc.T("Quit"), Palette.Text, 16, () => Game.QuitGame()).Place(ButtonsX, y, ButtonW, 44));
 
-        Add(UiKit.MakeLabel(Main.Version, 16, Palette.Muted, outline: 4).Place(24, 684, 400, 20));
+        Add(UiKit.MakeLabel(Loc.T($"Early Access {Main.Version}"), 16, Palette.Muted, outline: 4).Place(24, 684, 400, 20));
         if (Game.Profile?.Summary is string record)
             Add(UiKit.MakeLabel(record, 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center, outline: 4).Place(0, 196, 1280, 20));
         // A file this version couldn't read was set aside (Storage): say so, once.
@@ -74,7 +74,7 @@ public partial class TitlePhase : Phase
                 .Wrapped().Place(140, 222, 1000, 44));
             Storage.Notices.Clear();
         }
-        Add(UiKit.MakeLabel("Sounds and font: Kenney (CC0).", 16, Palette.Muted, HorizontalAlignment.Right, outline: 4)
+        Add(UiKit.MakeLabel(Loc.T("Sounds and font: Kenney (CC0)."), 16, Palette.Muted, HorizontalAlignment.Right, outline: 4)
             .Place(656, 684, 600, 20));
         Game.Moment("00_title", 1.0);
     }
@@ -109,11 +109,11 @@ public partial class TitlePhase : Phase
         _confirm.ZIndex = 20;
         _confirm.AddChild(new ColorRect { Color = new Color(0, 0, 0, 0.6f), MouseFilter = Control.MouseFilterEnum.Stop }.Place(-100, -100, 1480, 920));
         _confirm.AddChild(UiKit.MakePanel(Palette.Bad).Place(390, 250, 500, 220));
-        _confirm.AddChild(UiKit.MakeLabel("Start over?", 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(390, 272, 500, 40));
-        _confirm.AddChild(UiKit.MakeLabel($"Your shop ({_save.Summary}) will be gone for good. Its score so far is noted when the new run starts.",
+        _confirm.AddChild(UiKit.MakeLabel(Loc.T("Start over?"), 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(390, 272, 500, 40));
+        _confirm.AddChild(UiKit.MakeLabel(Loc.T($"Your shop ({_save.Summary}) will be gone for good. Its score so far is noted when the new run starts."),
             16, Palette.Muted, HorizontalAlignment.Center).Wrapped().Place(420, 320, 440, 64));
-        _confirm.AddChild(UiKit.MakeButton("Start over", Palette.Bad, 16, Game.OpenSetup).Place(420, 392, 200, 48));
-        _confirm.AddChild(UiKit.MakeButton("Keep my shop", Palette.Gold, 16, () =>
+        _confirm.AddChild(UiKit.MakeButton(Loc.T("Start over"), Palette.Bad, 16, Game.OpenSetup).Place(420, 392, 200, 48));
+        _confirm.AddChild(UiKit.MakeButton(Loc.T("Keep my shop"), Palette.Gold, 16, () =>
         {
             _confirm.QueueFree();
             _confirm = null;

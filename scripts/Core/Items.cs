@@ -87,7 +87,9 @@ public sealed record Item(Category Category, Rarity Quality, bool Magic = false,
 
     public HeartsongDef SongDef => IsSong ? Heartsongs.Get(Song) : null;
 
-    public string Name => IsSong ? SongDef.Name : Broken ? $"Broken {Def.Names[(int)Quality]}" : Fake ? Def.FakeName : Magic ? $"Enchanted {Entry}" : Entry;
+    /// <summary>What it's called where it's shown (in the player's language; <see cref="Entry"/> is the key).</summary>
+    public string Name => IsSong ? Loc.T(SongDef.Name) : Broken ? Loc.T($"Broken {Loc.T(Def.Names[(int)Quality])}") : Fake ? Loc.T(Def.FakeName)
+        : Magic ? Loc.T($"Enchanted {Loc.T(Entry)}") : Loc.T(Entry);
 
     /// <summary>
     /// The name in the collection: broken things count as what they were, and an enchanted one fills the same entry
@@ -130,30 +132,30 @@ public static class Categories
 
     public static readonly CategoryDef[] All =
     {
-        new(Category.Coins, "Coin", "jingle", "jingle", 1f, Shake.Gentle, Delicate: true, Loud: false, Iron: false, Fragile: false, 12, 1,
-            new[] { "Barrow Silver", "Moonsilver Marks", "Dwarf-Gold Crowns", "Sunken Sovereigns", "Dragon Gold" },
+        new(Category.Coins, Loc.T("Coin"), Loc.T("jingle"), "jingle", 1f, Shake.Gentle, Delicate: true, Loud: false, Iron: false, Fragile: false, 12, 1,
+            new[] { Loc.Key("Barrow Silver"), Loc.Key("Moonsilver Marks"), Loc.Key("Dwarf-Gold Crowns"), Loc.Key("Sunken Sovereigns"), Loc.Key("Dragon Gold") },
             new[] { "barrow_silver", "moonsilver_marks", "dwarf_gold_crowns", "sunken_sovereigns", "dragon_gold" },
-            "Demon Gold", "demon_gold"),
-        new(Category.Arms, "Weapons", "clank", "clank", 1f, Shake.Firm, Delicate: false, Loud: true, Iron: true, Fragile: false, 5, 1,
-            new[] { "Goblin Cleaver", "Dwarven Axe", "Warden's Blade", "Flamebrand", "Dragonslayer" },
+            Loc.Key("Demon Gold"), "demon_gold"),
+        new(Category.Arms, Loc.T("Weapons"), Loc.T("clank"), "clank", 1f, Shake.Firm, Delicate: false, Loud: true, Iron: true, Fragile: false, 5, 1,
+            new[] { Loc.Key("Goblin Cleaver"), Loc.Key("Dwarven Axe"), Loc.Key("Warden's Blade"), Loc.Key("Flamebrand"), Loc.Key("Dragonslayer") },
             new[] { "goblin_cleaver", "dwarven_axe", "wardens_blade", "flamebrand", "dragonslayer" }),
-        new(Category.Garb, "Cloaks", "flump", "flump", 1f, Shake.Hard, Delicate: false, Loud: false, Iron: false, Fragile: false, 6, 1,
-            new[] { "Wolfskin Cloak", "Elven Cloak", "Cloak of Shadows", "Archmage's Mantle", "Phoenix Mantle" },
+        new(Category.Garb, Loc.T("Cloaks"), Loc.T("flump"), "flump", 1f, Shake.Hard, Delicate: false, Loud: false, Iron: false, Fragile: false, 6, 1,
+            new[] { Loc.Key("Wolfskin Cloak"), Loc.Key("Elven Cloak"), Loc.Key("Cloak of Shadows"), Loc.Key("Archmage's Mantle"), Loc.Key("Phoenix Mantle") },
             new[] { "wolfskin_cloak", "elven_cloak", "cloak_of_shadows", "archmages_mantle", "phoenix_mantle" }),
-        new(Category.Potions, "Potions", "slosh", "slosh", 1f, Shake.Gentle, Delicate: true, Loud: false, Iron: false, Fragile: true, 8, 2,
-            new[] { "Healing Draught", "Elixir of Vigour", "Invisibility Draught", "Mermaid's Breath", "Ambrosia" },
+        new(Category.Potions, Loc.T("Potions"), Loc.T("slosh"), "slosh", 1f, Shake.Gentle, Delicate: true, Loud: false, Iron: false, Fragile: true, 8, 2,
+            new[] { Loc.Key("Healing Draught"), Loc.Key("Elixir of Vigour"), Loc.Key("Invisibility Draught"), Loc.Key("Mermaid's Breath"), Loc.Key("Ambrosia") },
             new[] { "healing_draught", "elixir_of_vigour", "invisibility_draught", "mermaids_breath", "ambrosia" }),
-        new(Category.Scrolls, "Spells", "rustle", "rustle", 1f, Shake.Hard, Delicate: false, Loud: false, Iron: false, Fragile: false, 5, 2,
-            new[] { "Scroll of Sparks", "Scroll of Fireball", "Summoner's Grimoire", "Lich's Tome", "Keyhold Codex" },
+        new(Category.Scrolls, Loc.T("Spells"), Loc.T("rustle"), "rustle", 1f, Shake.Hard, Delicate: false, Loud: false, Iron: false, Fragile: false, 5, 2,
+            new[] { Loc.Key("Scroll of Sparks"), Loc.Key("Scroll of Fireball"), Loc.Key("Summoner's Grimoire"), Loc.Key("Lich's Tome"), Loc.Key("Keyhold Codex") },
             new[] { "scroll_of_sparks", "scroll_of_fireball", "summoners_grimoire", "lichs_tome", "keyhold_codex" },
-            "Scroll Case of Sand", "sand_case", FakeIron: false, FakeStirsAt: Shake.Gentle),
-        new(Category.Gems, "Gems", "tinkle", "tinkle", 1.1f, Shake.Gentle, Delicate: true, Loud: false, Iron: false, Fragile: false, 20, 3,
-            new[] { "Moonstone", "Elfstone", "Blood Ruby", "Starstone", "Dragon's Eye" },
+            Loc.Key("Scroll Case of Sand"), "sand_case", FakeIron: false, FakeStirsAt: Shake.Gentle),
+        new(Category.Gems, Loc.T("Gems"), Loc.T("tinkle"), "tinkle", 1.1f, Shake.Gentle, Delicate: true, Loud: false, Iron: false, Fragile: false, 20, 3,
+            new[] { Loc.Key("Moonstone"), Loc.Key("Elfstone"), Loc.Key("Blood Ruby"), Loc.Key("Starstone"), Loc.Key("Dragon's Eye") },
             new[] { "moonstone", "elfstone", "blood_ruby", "starstone", "dragons_eye" },
-            "Paste Gem", "paste_gem"),
+            Loc.Key("Paste Gem"), "paste_gem"),
         // Heartsongs sing at the gentlest shake, and nothing drowns them out or stills them: the song isn't in the box,
         // it's in a Keywright's ear. Never rolled with the six (see Heartsongs.Sing); each has its own name and song.
-        new(Category.Heartsong, "Heartsong", "song", "song", 1f, Shake.Gentle, Delicate: false, Loud: false, Iron: false, Fragile: false,
+        new(Category.Heartsong, Loc.T("Heartsong"), Loc.T("song"), "song", 1f, Shake.Gentle, Delicate: false, Loud: false, Iron: false, Fragile: false,
             Heartsongs.BaseValue, int.MaxValue, Array.Empty<string>(), Array.Empty<string>()),
     };
 
@@ -224,25 +226,25 @@ public static class Categories
 
     public static string HeftWord(Category category) => Heft(category) switch
     {
-        >= 2 => "heavy",
-        >= 1 => "middling",
-        _ => "light",
+        >= 2 => Loc.T("heavy"),
+        >= 1 => Loc.T("middling"),
+        _ => Loc.T("light"),
     };
 
     public static string LevelName(Shake level) => level switch
     {
-        Shake.Gentle => "gentle",
-        Shake.Firm => "firm",
-        Shake.Hard => "hard",
-        _ => "still",
+        Shake.Gentle => Loc.T("gentle"),
+        Shake.Firm => Loc.T("firm"),
+        Shake.Hard => Loc.T("hard"),
+        _ => Loc.T("still"),
     };
 
     public static string Adverb(Shake level) => level switch
     {
-        Shake.Gentle => "gently",
-        Shake.Firm => "firmly",
-        Shake.Hard => "hard",
-        _ => "not at all",
+        Shake.Gentle => Loc.T("gently"),
+        Shake.Firm => Loc.T("firmly"),
+        Shake.Hard => Loc.T("hard"),
+        _ => Loc.T("not at all"),
     };
 
     /// <summary>
@@ -258,7 +260,25 @@ public static class Categories
         _ => "gold",
     };
 
-    public static string QualityName(Rarity quality) => quality.ToString().ToLowerInvariant();
+    /// <summary>The same as the player reads it, in their language (<see cref="ChestSkin"/> names the art).</summary>
+    public static string ColourName(Rarity chest) => chest switch
+    {
+        Rarity.Common => Loc.T("wood"),
+        Rarity.Uncommon => Loc.T("green"),
+        Rarity.Rare => Loc.T("blue"),
+        Rarity.Epic => Loc.T("purple"),
+        _ => Loc.T("gold"),
+    };
+
+    public static string QualityName(Rarity quality) => quality switch
+    {
+        Rarity.Common => Loc.T("common"),
+        Rarity.Uncommon => Loc.T("uncommon"),
+        Rarity.Rare => Loc.T("rare"),
+        Rarity.Epic => Loc.T("epic"),
+        Rarity.Legendary => Loc.T("legendary"),
+        _ => Loc.T("mythic"),
+    };
 
     /// <summary>
     /// What a kind of thing looks like in Mother Bramble's dreams: a magpie for coin (they steal it), a thorn for a
@@ -266,49 +286,49 @@ public static class Categories
     /// </summary>
     public static string Sign(Category kind) => kind switch
     {
-        Category.Coins => "a magpie",
-        Category.Arms => "a thorn",
-        Category.Garb => "a raven's wing",
-        Category.Potions => "a river",
-        Category.Scrolls => "an owl",
-        Category.Gems => "a star",
-        _ => "a song",
+        Category.Coins => Loc.T("a magpie"),
+        Category.Arms => Loc.T("a thorn"),
+        Category.Garb => Loc.T("a raven's wing"),
+        Category.Potions => Loc.T("a river"),
+        Category.Scrolls => Loc.T("an owl"),
+        Category.Gems => Loc.T("a star"),
+        _ => Loc.T("a song"),
     };
 
     /// <summary>One of a kind, in a list: "coin", "a weapon", "a cloak" (the Arcanum's packing tags).</summary>
     public static string One(Category kind) => kind switch
     {
-        Category.Coins => "coin",
-        Category.Arms => "a weapon",
-        Category.Garb => "a cloak",
-        Category.Potions => "a potion",
-        Category.Scrolls => "a spell",
-        Category.Gems => "a gem",
-        _ => "a song",
+        Category.Coins => Loc.T("coin"),
+        Category.Arms => Loc.T("a weapon"),
+        Category.Garb => Loc.T("a cloak"),
+        Category.Potions => Loc.T("a potion"),
+        Category.Scrolls => Loc.T("a spell"),
+        Category.Gems => Loc.T("a gem"),
+        _ => Loc.T("a song"),
     };
 
     /// <summary>What a kind of thing echoes like, to a bat's ears (Skrae's): round coin, long weapons, soft cloaks...</summary>
     public static string Shape(Category kind) => kind switch
     {
-        Category.Coins => "round",
-        Category.Arms => "long",
-        Category.Garb => "soft",
-        Category.Potions => "hollow",
-        Category.Scrolls => "flat",
-        Category.Gems => "tiny",
-        _ => "singing",
+        Category.Coins => Loc.T("round"),
+        Category.Arms => Loc.T("long"),
+        Category.Garb => Loc.T("soft"),
+        Category.Potions => Loc.T("hollow"),
+        Category.Scrolls => Loc.T("flat"),
+        Category.Gems => Loc.T("tiny"),
+        _ => Loc.T("singing"),
     };
 
     /// <summary>A kind's suit in the Locking's deck (Madame Oriel's cards).</summary>
     public static string Suit(Category kind) => kind switch
     {
-        Category.Coins => "Coins",
-        Category.Arms => "Swords",
-        Category.Garb => "Mantles",
-        Category.Potions => "Cups",
-        Category.Scrolls => "Wands",
-        Category.Gems => "Stars",
-        _ => "Songs",
+        Category.Coins => Loc.T("Coins"),
+        Category.Arms => Loc.T("Swords"),
+        Category.Garb => Loc.T("Mantles"),
+        Category.Potions => Loc.T("Cups"),
+        Category.Scrolls => Loc.T("Wands"),
+        Category.Gems => Loc.T("Stars"),
+        _ => Loc.T("Songs"),
     };
 
     /// <summary>Every item sprite the game can show, for the importer and the collection.</summary>

@@ -27,7 +27,7 @@ public partial class SetupPhase : Phase
     public override void _Ready()
     {
         Add(UiKit.MakeShop(1, 0.35f));
-        Add(UiKit.MakeLabel("WHO MINDS THE STALL?", 32, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 24, 1280, 40));
+        Add(UiKit.MakeLabel(Loc.T("WHO MINDS THE STALL?"), 32, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 24, 1280, 40));
         var last = Characters.Get(Profile.LastCharacter);
         _character = Profile.Unlocked(last) ? last.Key : Characters.Kit;
         _level = System.Math.Clamp(Profile.LastChallenge, 0, Profile.MaxChallenge(_character));
@@ -40,13 +40,13 @@ public partial class SetupPhase : Phase
     {
         foreach (var child in _board.GetChildren()) child.QueueFree();
         if (Profile.BestScore.GetValueOrDefault(_character) is int best and > 0)
-            _board.AddChild(UiKit.MakeLabel($"{Characters.Get(_character).Name}'s best score: {best}", 16, Palette.Gold, HorizontalAlignment.Right, outline: 4)
+            _board.AddChild(UiKit.MakeLabel(Loc.T($"{Characters.Get(_character).Name}'s best score: {best}"), 16, Palette.Gold, HorizontalAlignment.Right, outline: 4)
                 .Place(800, 34, 410, 20));
         for (int i = 0; i < Characters.All.Length; i++)
             _board.AddChild(MakeCard(Characters.All[i], CardsX + i * (CardW + CardGap), CardsY));
         BuildDetails();
-        _board.AddChild(UiKit.MakeButton("Back", Palette.Text, 16, Back).Place(CardsX, 652, 200, 52));
-        _board.AddChild(UiKit.MakeButton("Open the stall", Palette.Gold, 24, Start).Place(1210 - 300, 652, 300, 52));
+        _board.AddChild(UiKit.MakeButton(Loc.T("Back"), Palette.Text, 16, Back).Place(CardsX, 652, 200, 52));
+        _board.AddChild(UiKit.MakeButton(Loc.T("Open the stall"), Palette.Gold, 24, Start).Place(1210 - 300, 652, 300, 52));
     }
 
     Control MakeCard(CharacterDef kin, float x, float y)
@@ -68,7 +68,7 @@ public partial class SetupPhase : Phase
         if (open)
         {
             int best = Profile.BestScore.GetValueOrDefault(kin.Key), max = Profile.MaxChallenge(kin.Key);
-            string record = best > 0 ? $"Best {best}, level {max} open" : max > 0 ? $"Level {max} open" : "";
+            string record = best > 0 ? Loc.T($"Best {best}, level {max} open") : max > 0 ? Loc.T($"Level {max} open") : "";
             card.AddChild(UiKit.MakeLabel(record, 16, Palette.Gold.Darkened(0.2f), HorizontalAlignment.Center).Place(0, CardH - 26, CardW, 20));
             var pick = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = $"{kin.Name}, {kin.Title}" };
             pick.Pressed += () => Choose(kin.Key);
@@ -88,7 +88,7 @@ public partial class SetupPhase : Phase
         var kin = Characters.Get(_character);
         var panel = UiKit.MakePanel().Place(CardsX, DetailsY, 1140, DetailsH);
         _board.AddChild(panel);
-        panel.AddChild(Header($"HOW {kin.Name.ToUpperInvariant()} PLAYS", 24, 16));
+        panel.AddChild(Header(Loc.T($"HOW {kin.Name.ToUpperInvariant()} PLAYS"), 24, 16));
         float y = 44;
         foreach (string rule in kin.Rules)
         {
@@ -98,9 +98,9 @@ public partial class SetupPhase : Phase
         }
 
         const float cx = 660;
-        panel.AddChild(Header("CHALLENGE LEVEL", cx, 14));
+        panel.AddChild(Header(Loc.T("CHALLENGE LEVEL"), cx, 14));
         int max = Profile.MaxChallenge(_character);
-        panel.AddChild(UiKit.MakeLabel(max >= Challenges.Max ? "Every level open" : $"Levels open: 0 to {max}", 16, Palette.Muted, HorizontalAlignment.Right)
+        panel.AddChild(UiKit.MakeLabel(max >= Challenges.Max ? Loc.T("Every level open") : Loc.T($"Levels open: 0 to {max}"), 16, Palette.Muted, HorizontalAlignment.Right)
             .Place(cx + 200, 14, 256, 20));
         var down = UiKit.MakeButton("-", Palette.Text, 24, () => SetLevel(_level - 1)).Place(cx, 40, 52, 52);
         down.Disabled = _level <= 0;
@@ -109,23 +109,23 @@ public partial class SetupPhase : Phase
             .Place(cx + 56, 38, 80, 56));
         var up = UiKit.MakeButton("+", Palette.Text, 24, () => SetLevel(_level + 1)).Place(cx + 140, 40, 52, 52);
         up.Disabled = _level >= max;
-        up.TooltipText = max >= Challenges.Max ? "The top level." : $"Clear Bram's debt at level {max} with {kin.Name} to open level {max + 1}.";
+        up.TooltipText = max >= Challenges.Max ? Loc.T("The top level.") : Loc.T($"Clear Bram's debt at level {max} with {kin.Name} to open level {max + 1}.");
         panel.AddChild(up);
-        panel.AddChild(UiKit.MakeLabel($"Score x{Challenges.Multiplier(_level):0.##}", 24, Palette.Gold, outline: 4).Place(cx + 210, 40, 246, 30));
-        panel.AddChild(UiKit.MakeLabel(_level == 0 ? "The Guild's usual dues" : $"The Guild's dues +{Synergies.Pct(Challenges.DebtFactor(_level) - 1)}",
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"Score x{Challenges.Multiplier(_level):0.##}"), 24, Palette.Gold, outline: 4).Place(cx + 210, 40, 246, 30));
+        panel.AddChild(UiKit.MakeLabel(_level == 0 ? Loc.T("The Guild's usual dues") : Loc.T($"The Guild's dues +{Synergies.Pct(Challenges.DebtFactor(_level) - 1)}"),
             16, _level > 0 ? Palette.Warn : Palette.Muted).Place(cx + 210, 72, 246, 20));
         if (_level == 0)
         {
-            panel.AddChild(UiKit.MakeLabel("Each level raises the Guild's dues and deals the run one more boon and one more bane, drawn fresh for " +
+            panel.AddChild(UiKit.MakeLabel(Loc.T("Each level raises the Guild's dues and deals the run one more boon and one more bane, drawn fresh for " +
                                            "every run (hover over one to read it). Clear Bram's debt to open the next level: each is worth a " +
-                                           "quarter more to the score.", 16, Palette.Muted)
+                                           "quarter more to the score."), 16, Palette.Muted)
                 .Wrapped().Place(cx, 104, 456, 120));
             return;
         }
         // This run's draw: the same as the next run will get, so what's shown is what's played.
         var (boons, banes) = Challenges.Draw(Profile.TermsSeed, _level);
-        UiKit.MakeTermList(panel, "FOR YOU", boons, Palette.Good, cx, 98, 224, boons.Count);
-        UiKit.MakeTermList(panel, "AGAINST YOU", banes, Palette.Warn, cx + 232, 98, 224, banes.Count);
+        UiKit.MakeTermList(panel, Loc.T("FOR YOU"), boons, Palette.Good, cx, 98, 224, boons.Count);
+        UiKit.MakeTermList(panel, Loc.T("AGAINST YOU"), banes, Palette.Warn, cx + 232, 98, 224, banes.Count);
     }
 
     /// <summary>About how many lines a sentence wraps to, at so many characters a line.</summary>

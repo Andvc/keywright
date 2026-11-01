@@ -226,10 +226,10 @@ public static class LockTiers
 {
     public static readonly LockTier[] All =
     {
-        new(0, "No lock", 0, 0f, 0f),
-        new(1, "Rusty Padlock", 2, 56f, 120f),
-        new(2, "Guild Lock", 3, 44f, 145f),
-        new(3, "Dwarven Tumbler", 4, 34f, 175f),
+        new(0, Loc.T("No lock"), 0, 0f, 0f),
+        new(1, Loc.T("Rusty Padlock"), 2, 56f, 120f),
+        new(2, Loc.T("Guild Lock"), 3, 44f, 145f),
+        new(3, Loc.T("Dwarven Tumbler"), 4, 34f, 175f),
     };
 
     /// <summary>Better chests have better locks.</summary>

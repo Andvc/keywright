@@ -33,11 +33,11 @@ public partial class SongReveal : Node2D
 
     /// <param name="from">Where it comes out (the chest's seam).</param>
     /// <param name="intro">What's said as it starts ("...listen.", "The chest bursts open!").</param>
-    public SongReveal(Item song, Vector2 from, string intro = "...listen.")
+    public SongReveal(Item song, Vector2 from, string intro = null)
     {
         _song = song;
         _from = from;
-        _intro = intro;
+        _intro = intro ?? Loc.T("...listen.");
     }
 
     static Audio.Sfx Sfx => Main.Instance.Sfx;
@@ -138,7 +138,7 @@ public partial class SongReveal : Node2D
         Fx.Burst(this, Hover, gold, 90, 380f);
         Fx.Lightning(this, Hover, gold, 8, 260f, 0.7f);
         Fx.Confetti(this, Hover + new Vector2(0, 40), 140);
-        var banner = UiKit.MakeLabel("A HEARTSONG!", 64, red, HorizontalAlignment.Center, outline: 8).Place(140, 40, 1000, 80);
+        var banner = UiKit.MakeLabel(Loc.T("A HEARTSONG!"), 64, red, HorizontalAlignment.Center, outline: 8).Place(140, 40, 1000, 80);
         banner.PivotOffset = new Vector2(500, 40);
         banner.Scale = Vector2.One * 2.6f;
         banner.Modulate = Colors.Transparent;
@@ -161,19 +161,19 @@ public partial class SongReveal : Node2D
         panel.Modulate = Colors.Transparent;
         panel.ZIndex = 8;
         AddChild(panel);
-        panel.AddChild(UiKit.MakeLabel(def.Name, 32, red.Lightened(0.15f), HorizontalAlignment.Center, outline: 6).Place(0, 12, PanelW, 40));
+        panel.AddChild(UiKit.MakeLabel(Loc.T(def.Name), 32, red.Lightened(0.15f), HorizontalAlignment.Center, outline: 6).Place(0, 12, PanelW, 40));
         bool known = Game.State?.Songbook.Contains(_song.Song) ?? false;
-        panel.AddChild(UiKit.MakeLabel($"One of the nine, from {def.From}.{(known ? "" : " New to Bram's kin!")}", 16, known ? Palette.Muted : gold,
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"One of the nine, from {def.From}.{(known ? "" : Loc.T(" New to Bram's kin!"))}"), 16, known ? Palette.Muted : gold,
             HorizontalAlignment.Center).Wrapped().Place(40, 54, PanelW - 80, 44));
         panel.AddChild(UiKit.MakeLabel(def.Story, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 98, PanelW - 80, 44));
-        panel.AddChild(UiKit.MakeLabel("ON DISPLAY", 16, gold.Darkened(0.1f), HorizontalAlignment.Center).Place(0, 146, PanelW, 20));
+        panel.AddChild(UiKit.MakeLabel(Loc.T("ON DISPLAY"), 16, gold.Darkened(0.1f), HorizontalAlignment.Center).Place(0, 146, PanelW, 20));
         panel.AddChild(UiKit.MakeLabel(def.Effect, 16, gold, HorizontalAlignment.Center, outline: 4).Wrapped().Place(40, 166, PanelW - 80, 44));
-        panel.AddChild(UiKit.MakeLabel("Free to keep, and it needs no shelf. Each one kept makes the next rarer.",
+        panel.AddChild(UiKit.MakeLabel(Loc.T("Free to keep, and it needs no shelf. Each one kept makes the next rarer."),
             16, Palette.Muted, HorizontalAlignment.Center).Place(20, 216, PanelW - 40, 20));
-        _keep = UiKit.MakeButton("Keep it", gold, 24, Keep).Place(PanelW / 2 - 330, 254, 320, 56);
-        _keep.TooltipText = $"It sings in your shop from now on: {def.Effect}";
-        _decline = UiKit.MakeButton("Decline", Palette.PanelBorder.Lightened(0.25f), 24, Decline).Place(PanelW / 2 + 10, 254, 320, 56);
-        _decline.TooltipText = "It goes back to the Locking, to turn up in some other chest some day. It stays in your songbook.";
+        _keep = UiKit.MakeButton(Loc.T("Keep it"), gold, 24, Keep).Place(PanelW / 2 - 330, 254, 320, 56);
+        _keep.TooltipText = Loc.T($"It sings in your shop from now on: {def.Effect}");
+        _decline = UiKit.MakeButton(Loc.T("Decline"), Palette.PanelBorder.Lightened(0.25f), 24, Decline).Place(PanelW / 2 + 10, 254, 320, 56);
+        _decline.TooltipText = Loc.T("It goes back to the Locking, to turn up in some other chest some day. It stays in your songbook.");
         panel.AddChild(_keep);
         panel.AddChild(_decline);
         var up = panel.CreateTween().SetParallel();
@@ -202,7 +202,7 @@ public partial class SongReveal : Node2D
         var red = Palette.Of(Rarity.Mythic);
         Sfx.Play($"song_{_song.Song}", 1f, -2);
         Sfx.Play("upgrade", 1.1f, -4);
-        Say("It sings for your shop now!", Hover + new Vector2(0, -120), Palette.Gold, 32);
+        Say(Loc.T("It sings for your shop now!"), Hover + new Vector2(0, -120), Palette.Gold, 32);
         Fx.Ring(this, _sprite.Position, Palette.Gold, 300f, 0.6f, 8f);
         Fx.Burst(this, _sprite.Position, Palette.Gold, 80, 360f);
         var fly = _sprite.CreateTween().SetParallel();
@@ -223,7 +223,7 @@ public partial class SongReveal : Node2D
         _keep.Disabled = _decline.Disabled = true;
         var red = Palette.Of(Rarity.Mythic);
         Sfx.Play("deflate", 0.7f, -4);
-        Say("It goes back to the Locking...", Hover + new Vector2(0, -120), Palette.Muted, 24);
+        Say(Loc.T("It goes back to the Locking..."), Hover + new Vector2(0, -120), Palette.Muted, 24);
         var motes = Fx.Sparks(red, 120, 60f, 220f, spread: 180f, lifetime: 1.6f, gravity: -160f);
         motes.Position = _sprite.Position;
         AddChild(motes);

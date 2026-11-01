@@ -23,8 +23,8 @@ public partial class SoundSetsView : Control
         ProcessMode = ProcessModeEnum.Always;
         AddChild(new ColorRect { Color = new Color(0, 0, 0, 0.6f), MouseFilter = MouseFilterEnum.Stop }.Place(-100, -100, 1480, 920));
         AddChild(UiKit.MakePanel(Palette.Gold.Darkened(0.3f)).Place(X, Y, W, H));
-        AddChild(UiKit.MakeLabel("ITEM SOUNDS", 32, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(X, Y + 16, W, 40));
-        AddChild(UiKit.MakeLabel("What each kind of thing sounds like in a shaken chest. Click a choice to try the next one.", 16, Palette.Muted,
+        AddChild(UiKit.MakeLabel(Loc.T("ITEM SOUNDS"), 32, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(X, Y + 16, W, 40));
+        AddChild(UiKit.MakeLabel(Loc.T("What each kind of thing sounds like in a shaken chest. Click a choice to try the next one."), 16, Palette.Muted,
             HorizontalAlignment.Center).Place(X, Y + 60, W, 20));
 
         float row = Y + 96;
@@ -36,10 +36,10 @@ public partial class SoundSetsView : Control
             var choice = UiKit.MakeButton("", Palette.PanelBorder.Lightened(0.2f), 16, () => Cycle(kind)).Place(X + 300, row, 300, 36);
             AddChild(choice);
             _choices[kind] = choice;
-            AddChild(UiKit.MakeButton("Play", Palette.Gold, 16, () => Play(kind)).Place(X + 616, row, 104, 36));
+            AddChild(UiKit.MakeButton(Loc.T("Play"), Palette.Gold, 16, () => Play(kind)).Place(X + 616, row, 104, 36));
             row += 52;
         }
-        AddChild(UiKit.MakeButton("Done", Palette.Gold, 24, Close).Place(X + W / 2 - 100, Y + H - 68, 200, 48));
+        AddChild(UiKit.MakeButton(Loc.T("Done"), Palette.Gold, 24, Close).Place(X + W / 2 - 100, Y + H - 68, 200, 48));
         Refresh();
         Modulate = Colors.Transparent;
         CreateTween().TweenProperty(this, "modulate", Colors.White, 0.12f);

@@ -80,7 +80,7 @@ public partial class ScenePhase : Phase
         var click = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None };
         click.Pressed += Advance;
         box.AddChild(click.Place(0, 0, 1000, 160));
-        Add(UiKit.MakeButton("Skip", Palette.PanelBorder.Lightened(0.15f), 16, Finish).Place(1160, 670, 100, 34));
+        Add(UiKit.MakeButton(Loc.T("Skip"), Palette.PanelBorder.Lightened(0.15f), 16, Finish).Place(1160, 670, 100, 34));
         Advance();
     }
 
@@ -125,7 +125,7 @@ public partial class ScenePhase : Phase
         Trace?.Invoke($"{Story.Name(line.Speaker)}: {line.Text}");
         _name.Text = Story.Name(line.Speaker);
         _text.Text = line.Text;
-        _more.Text = _index < _lines.Count - 1 ? "click for more" : "click to go on";
+        _more.Text = _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
         foreach (var (place, face) in _faces)
         {
             bool speaking = place == Place(line.Speaker);

@@ -60,7 +60,7 @@ public partial class MentorView : Control
         AddChild(_text);
         _more = UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(104, H - 26, W - 116, 20);
         AddChild(_more);
-        _skip = UiKit.MakeButton("Skip lesson", Palette.Muted, 16, () => LessonSkipped?.Invoke()).Place(W - 132, -30, 132, 30);
+        _skip = UiKit.MakeButton(Loc.T("Skip lesson"), Palette.Muted, 16, () => LessonSkipped?.Invoke()).Place(W - 132, -30, 132, 30);
         _skip.Visible = false;
         AddChild(_skip);
         GuiInput += e =>
@@ -161,7 +161,7 @@ public partial class MentorView : Control
     {
         // A tip still up and unread when something else replaces it would never be seen: say so in the trace.
         if (Visible && _showingTip && !afterClick) Trace?.Invoke($"(replaced unread: {_text.Text})");
-        Trace?.Invoke((_lesson ? (_waiting ? "[do] " : "[read] ") : "") + text);
+        Trace?.Invoke((_lesson ? (_waiting ? Loc.T("[do] ") : Loc.T("[read] ")) : "") + text);
         _showingTip = !_lesson;
         Visible = true;
         _text.Text = text;
@@ -188,6 +188,6 @@ public partial class MentorView : Control
     void UpdateMore()
     {
         int more = _queue.Count + (_held != null ? 1 : 0);
-        _more.Text = _lesson ? (_waiting ? "do it to go on" : "click to go on") : more > 0 ? $"click for more ({more})" : "click to close";
+        _more.Text = _lesson ? (_waiting ? Loc.T("do it to go on") : Loc.T("click to go on")) : more > 0 ? Loc.T($"click for more ({more})") : Loc.T("click to close");
     }
 }
