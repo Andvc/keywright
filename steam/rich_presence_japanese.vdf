@@ -1,0 +1,14 @@
+"lang"
+{
+	"Language"	"japanese"
+	"Tokens"
+	{
+		"#Status_Title"		"タイトル画面"
+		"#Status_Day"		"{#Shop_%tier%}で%day%日目"
+		"#Status_Cleared"	"ブラムの借金を完済、{#Shop_%tier%}で%day%日目"
+		"#Shop_1"		"ブラムの露店"
+		"#Shop_2"		"ソーンウィック市場"
+		"#Shop_3"		"クラウンホールド"
+		"#Shop_4"		"王立商館"
+	}
+}

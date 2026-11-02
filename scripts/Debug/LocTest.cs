@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Keywright.Core;
@@ -91,8 +92,78 @@ public static class LocTest
                 return holes.Count > 0 && holes.Max() != holes.Count - 1;
             }).ToList();
             Check(ids.Count > 1000 && gaps.Count == 0, $"the catalogue: {ids.Count} texts, holes numbered in order", gaps.FirstOrDefault());
+            CheckTranslations(pot, Check);
         }
         GD.Print(failures == 0 ? "Language test: every check passed." : $"Language test: {failures} FAILED");
         return failures == 0;
+    }
+
+    /// <summary>
+    /// Each translation in locale/: it loads through Godot, translates every text of the catalogue, its plurals come
+    /// out in its own forms, and every letter it uses is in one of the fonts the game gives that language.
+    /// </summary>
+    static void CheckTranslations(string pot, System.Action<bool, string, string> check)
+    {
+        var catalogue = Entries(pot);
+        foreach (string code in Localization.Available.Where(c => c != "en"))
+        {
+            string path = $"res://locale/{code}.po";
+            if (!FileAccess.FileExists(path)) continue;
+            var entries = Entries(FileAccess.GetFileAsString(path));
+            TranslationServer.SetLocale(code);
+            int missing = catalogue.Count(e => e.Plural == null && TranslationServer.Translate(e.Id).ToString() == e.Id &&
+                                                !entries.Any(t => t.Id == e.Id && t.Strings.Count > 0 && t.Strings[0] == e.Id));
+            check(missing == 0, $"{code}: every text translated", $"{missing} not");
+            var plural = catalogue.Where(e => e.Plural != null).ToList();
+            // A form the same as the English counts when the file says so ("{0} long" is French too).
+            bool Own(Entry e, string form, string english) => form.Length > 0 &&
+                (form != english || entries.Any(t => t.Id == e.Id && t.Strings.Contains(form)));
+            var notOwn = plural.Where(e => !Own(e, TranslationServer.TranslatePlural(e.Id, e.Plural, 1).ToString(), e.Id) ||
+                                           !Own(e, TranslationServer.TranslatePlural(e.Id, e.Plural, 5).ToString(), e.Plural)).ToList();
+            check(notOwn.Count == 0, $"{code}: {plural.Count} plurals in its own forms", notOwn.FirstOrDefault()?.Id);
+            var fonts = Localization.FontsFor(code);
+            var unknown = entries.SelectMany(e => e.Strings).SelectMany(s => s).Where(c => !char.IsWhiteSpace(c) && !char.IsControl(c))
+                .Distinct().Where(c => !fonts.Any(f => f.HasChar(c))).ToList();
+            check(unknown.Count == 0, $"{code}: its fonts have every letter it uses", new string(unknown.Take(20).ToArray()));
+        }
+        TranslationServer.SetLocale("en");
+    }
+
+    sealed record Entry(string Id, string Plural, List<string> Strings);
+
+    /// <summary>A gettext file's entries (msgid, msgid_plural, each msgstr), continuation lines and escapes read.</summary>
+    static List<Entry> Entries(string text)
+    {
+        var entries = new List<Entry>();
+        string id = null, plural = null, field = null;
+        var strings = new List<string>();
+        void Finish()
+        {
+            if (!string.IsNullOrEmpty(id)) entries.Add(new Entry(id, plural, strings.Where(s => s.Length > 0).ToList()));
+            id = plural = field = null;
+            strings = new List<string>();
+        }
+        foreach (string raw in text.Split('\n'))
+        {
+            string line = raw.Trim();
+            if (line.Length == 0) { Finish(); continue; }
+            if (line.StartsWith('#')) continue;
+            int quote = line.IndexOf('"');
+            if (quote < 0 || !line.EndsWith('"')) continue;
+            string value = line[(quote + 1)..^1].Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\\\", "\\");
+            if (quote == 0)
+            {
+                if (field == "msgid") id += value;
+                else if (field == "msgid_plural") plural += value;
+                else if (field == "msgstr" && strings.Count > 0) strings[^1] += value;
+                continue;
+            }
+            string key = line[..quote].Trim();
+            if (key == "msgid") { if (id != null) Finish(); id = value; field = "msgid"; }
+            else if (key == "msgid_plural") { plural = value; field = "msgid_plural"; }
+            else if (key.StartsWith("msgstr")) { strings.Add(value); field = "msgstr"; }
+        }
+        Finish();
+        return entries;
     }
 }

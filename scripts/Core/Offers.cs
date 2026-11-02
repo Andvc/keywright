@@ -66,7 +66,7 @@ public static class Offers
         return new Talk
         {
             Who = offer.Who, Key = Key(upgrade.Key), Offer = upgrade.Key,
-            Lines = { new Line(offer.Who, offer.Pitch.Replace("{price}", Money.Say(price))), new Line(Story.Bram, $"{upgrade.Name}: {upgrade.Blurb}") },
+            Lines = { new Line(offer.Who, offer.Pitch.Replace("{price}", Money.Say(price))), new Line(Story.Bram, Loc.T($"{upgrade.Name}: {upgrade.Blurb}")) },
             Choices =
             {
                 new Choice

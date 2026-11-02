@@ -1,0 +1,14 @@
+"lang"
+{
+	"Language"	"french"
+	"Tokens"
+	{
+		"#Status_Title"		"À l'écran titre"
+		"#Status_Day"		"Jour %day% {#Shop_%tier%}"
+		"#Status_Cleared"	"Dette de Bram remboursée, jour %day% {#Shop_%tier%}"
+		"#Shop_1"		"à l'Étal de Bram"
+		"#Shop_2"		"au marché de Thornwick"
+		"#Shop_3"		"à Crownhold"
+		"#Shop_4"		"à l'Emporium royal"
+	}
+}

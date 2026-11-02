@@ -24,8 +24,11 @@ public static class Controls
     /// <summary>Close whatever's open on top (Esc).</summary>
     public const string Back = "back";
 
-    /// <summary>The actions a player can bind, in the order the Controls page lists them, and what it calls each.</summary>
-    public static readonly (string Action, string Name)[] Bindable =
+    /// <summary>
+    /// The actions a player can bind, in the order the Controls page lists them, and what it calls each: worded when
+    /// asked for, since the settings (and so this class) are loaded before the language is.
+    /// </summary>
+    public static (string Action, string Name)[] Bindable => new[]
     {
         (Act, Loc.T("Set a pin, hurry, next line")),
         (Force, Loc.T("Force a lock")),

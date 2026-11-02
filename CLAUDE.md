@@ -75,11 +75,17 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    removed afterwards, under `-screen 0 1920x1080x24`), since the pointer's sums only show there. Both exit 1 on a
    failure. The full shake test takes about eleven minutes (`--n=4` for a quick look).
 7. Text: `dotnet run --project tools/loc -- check` must say every text is wrapped (it lists any new one that isn't),
-   and `-- extract` rewrites locale/keywright.pot (commit it). `godot --headless --path . -- --loc-test` runs the
-   language layer through Godot with a made-up German translation. `-- --sim=quick --pseudo` must print the same
-   numbers as without (only the words change: a key that got translated shows up as a different number), and a bot
-   or shell-demo run with `--pseudo` shows every translated text in brackets, so anything plain is untranslated, and
-   a third longer, so a layout too tight for German shows.
+   and `-- extract` rewrites locale/keywright.pot (commit it). `-- verify` checks each translation in locale/ against
+   it (untranslated texts, holes and `{price}`-style names kept, plural forms, letters the language's fonts have;
+   `--strict` fails on any of it): a text added or changed in English comes up untranslated in all four until it's
+   translated (`locale/GLOSSARY.md` has each language's words and voice). `godot --headless --path . -- --loc-test`
+   runs the language layer through Godot with a made-up German translation, then loads each translation and checks
+   it. `-- --sim=quick --pseudo` must print the same numbers as without (only the words change: a key that got
+   translated shows up as a different number), and a bot or shell-demo run with `--pseudo` shows every translated
+   text in brackets, so anything plain is untranslated, and a third longer, so a layout too tight shows. Any run
+   with `--shots` also prints `[overflow]` for each label or button whose text outgrew the box it was placed in
+   (`Debug.Overflow`): after changing a screen or its words, run the shell demo and a bot run with `--lang=fr` and
+   `--lang=ja` (French runs longest, Japanese and Chinese are drawn on a 12px grid) and read those lines.
 
 ## Conventions
 
@@ -296,18 +302,32 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the window loses focus, tips, language and the controls. `Settings.ApplyDisplay` changes the window through the
   root `Window` node (its `Mode`, `Size`, `Position`), never the display server alone: the node works out the
   stretch and the mouse from its own size.
-- Languages (0.27): everything the player reads goes through `Loc` (Core) where it's written: `Loc.T("Pass")`, and
-  `Loc.T($"Day {day} of {days}")`, which is looked up as one sentence with numbered holes ("Day {0} of {1}") so a
-  translation can move them; `Loc.Plural(n, $"{n} week early", $"{n} weeks early")` for a count. Data tables are
-  translated where they're written, so the language is set once, at start-up (`Localization.Apply`; a change in
-  Settings takes a restart). A name that's also a key, kept in saves (a thing's `Names`, `FakeName`, a Heartsong's
-  `Name`), is `Loc.Key` in the data and `Loc.T(name)` where it's shown (`Item.Name` does; `Entry` is the key);
-  `Categories.ChestSkin` is the art's name for a colour and `ColourName` the player's. Never compare or look up by
-  a text the player reads (compare keys, or `Loc.T` both sides), and mark English that must stay English (keys in
-  a list) with `// loc: keys`. `tools/loc` (Roslyn) wrapped the strings once and now checks and extracts them.
-  Translations are gettext files in locale/ named for their locale (de.po, pt_BR.po) from keywright.pot; drop one in
-  and Settings offers it. Kenney Mini covers English and western Europe; Galmuri 9 (OFL) the rest of Latin,
-  Cyrillic, Greek, Korean and Japanese; Simplified Chinese needs a font of its own (docs/release.md).
+- Languages (0.27; translated in 0.29 into French, Japanese, Simplified and Traditional Chinese): everything the
+  player reads goes through `Loc` (Core) where it's written: `Loc.T("Pass")`, and `Loc.T($"Day {day} of {days}")`,
+  which is looked up as one sentence with numbered holes ("Day {0} of {1}") so a translation can move them;
+  `Loc.Plural(n, $"{n} week early", $"{n} weeks early")` for a count. Data tables are translated where they're
+  written, so the language is set once, at start-up (`Localization.Apply`; a change in Settings takes a restart;
+  `--lang=fr` plays one run in a language). A name that's also a key, kept in saves (a thing's `Names`, `FakeName`, a
+  Heartsong's `Name`), is `Loc.Key` in the data and `Loc.T(name)` where it's shown (`Item.Name` does; `Entry` is the
+  key); `Categories.ChestSkin` is the art's name for a colour and `ColourName` the player's. Never compare or look up
+  by a text the player reads (compare keys, or `Loc.T` both sides), never cut or patch a translated text (no
+  `.Replace("a ", "")` on it), never join an interpolated piece to a plain one (`Loc.T($"... {x} " + "...")` is a
+  finished string by the time it's looked up, so it's never found: make every piece `$"..."`; `tools/loc check` says
+  so), and mark English that must stay English (keys in a list) with `// loc: keys`. Words the
+  code joins are joined by a text too, so each language punctuates its own way: sums as the interface writes them
+  `Money.Short` ("{0}g"), as people say them `Money.Say`; lists `Words.List`, `Sellers.Join`; a name and what it does
+  `Loc.T($"{name}: {blurb}")`. A word slotted into a sentence must read right in every language (French adjectives
+  agree in gender and number, Japanese counts differently), so where the count or the case changes the words, write
+  a text for each (`Categories.Echoes`, the dowry's line in `Visit.WardHint`) rather than "{0} {1}". `tools/loc`
+  (Roslyn) wrapped the strings once and now checks, extracts and verifies them. Translations are gettext files in
+  locale/ named for their locale (fr.po, zh_TW.po) from keywright.pot; drop one in and Settings offers it
+  (`locale/README.md`); `locale/GLOSSARY.md` has each language's words of the world and voice, so a new text uses
+  them. Kenney Mini covers English and western Europe (with oe, the en dash and French's no-break spaces added by
+  `tools/fonts.py kenney`); Galmuri 9 (OFL) the rest of Latin, Cyrillic, Greek and Korean; Japanese and Chinese are
+  drawn in Fusion Pixel 12px (OFL), cut to each language's character set and every character its translation uses
+  (`tools/fonts.py fusion DIR`, from the font's release: run it again when a translation changes, `verify` names
+  what's missing), on a 12px grid (`UiKit.SnapFont` rounds down to it: 16 is drawn at 12, 32 at 24), so a layout that fits
+  English can still need a size chosen by measuring (`UiKit.TextWidth`), not by counting letters.
 - Steam (0.27): `Platform` (scripts/Platform.cs, Steamworks.NET 2024.8.0 with SDK 1.60's library in steam/) starts
   with the game and does nothing without Steam or its library ("Steam: not running" in the log): achievements, rich
   presence (`Platform.Presence`, worded by steam/rich_presence.vdf), and the overlay opening the pause menu.

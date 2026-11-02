@@ -101,14 +101,19 @@ public partial class PeddlerPhase : Phase
 
         // What Nim offers besides: one more curio a night (his lantern, his stool, his order), and a case for yours.
         var offers = Upgrades.AtNim(State).OrderBy(u => u.NimCards > 0 ? 0 : 1).Take(2).ToList();
+        // Each 232 wide, or as wide as its words in a longer language, ending where "Good night" begins.
+        var labels = offers.Select(u => Loc.T($"{u.Name} {State.Cost(u)}g")).ToList();
+        var widths = labels.Select(l => Mathf.Max(232, UiKit.TextWidth(l) + 28)).ToList();
+        float offerX = RowX + 2 * 240 - 8 - widths.Sum() - 8 * (offers.Count - 1);
         for (int i = 0; i < offers.Count; i++)
         {
             var upgrade = offers[i];
             int price = State.Cost(upgrade);
-            var button = UiKit.MakeButton(Loc.T($"{upgrade.Name} {price}g"), Palette.Magic, 16, () => BuyUpgrade(upgrade));
+            var button = UiKit.MakeButton(labels[i], Palette.Magic, 16, () => BuyUpgrade(upgrade));
             button.Disabled = State.Gold < price;
             button.TooltipText = upgrade.Blurb;
-            _board.AddChild(button.Place(RowX + i * 240, 614, 232, 32));
+            _board.AddChild(button.Place(offerX, 614, widths[i], 32));
+            offerX += widths[i] + 8;
         }
 
         // The back room: chests that won't open for you, and what can be done with them tonight.
@@ -235,7 +240,7 @@ public partial class PeddlerPhase : Phase
             price == 0 ? Palette.Good : warning != null ? Palette.Bad : Palette.Gold, 16, () => AskBuy(curio)).Place(30, CardH - 56, CardW - 60, 44);
         buy.Disabled = State.CuriosFull || State.Gold < price;
         buy.TooltipText = State.CuriosFull ? Loc.T("Sell a curio back to Nim first to make room.")
-            : Loc.T($"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse this morning.{((warning != null ? $" {warning}" : ""))}");
+            : Loc.T($"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse tonight.{((warning != null ? $" {warning}" : ""))}");
         card.AddChild(buy);
         return card;
     }

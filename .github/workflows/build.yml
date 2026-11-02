@@ -123,6 +123,11 @@ jobs:
           timeout 840 ./Keywright.x86_64 --headless -- --autoplay --seed=4306 --days=2 | tee ../../smoke.log
           grep -q "Autoplay finished 2 days" ../../smoke.log
           grep -q "Steam: " ../../smoke.log
+          # The translations travel with the game, and one plays: a day in Japanese, its font and all.
+          for code in fr ja zh_CN zh_TW; do grep -q "Languages: .*\b$code\b" ../../smoke.log; done
+          timeout 600 ./Keywright.x86_64 --headless -- --lang=ja --autoplay --seed=4306 --days=1 --no-tutorial | tee ../../smoke_ja.log
+          grep -q "playing in ja" ../../smoke_ja.log
+          grep -q "Autoplay finished 1 days" ../../smoke_ja.log
 
       - uses: actions/upload-artifact@v4
         with:

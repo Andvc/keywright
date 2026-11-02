@@ -42,7 +42,7 @@ public partial class DayEndPhase : Phase
         BuildSummary(today);
 
         _header = Add(Header("", CardsX, 182));
-        _goldLabel = Add(UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(256, 182, 600, 20));
+        _goldLabel = Add(UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(156, 182, 700, 20)); // right-aligned: room to the left for longer words
         _cards = Add(new Node2D());
         _side = Add(new Node2D());
         // Bram first: building the cards can already call for a tip (the Bookkeeping Engine's, the first time it's offered).
@@ -73,9 +73,9 @@ public partial class DayEndPhase : Phase
         {
             (Loc.T("Bought"), today.Bought.ToString(), Palette.Text),
             (Loc.T("Passed"), today.Passed.ToString(), Palette.Text),
-            (Loc.T("Spent"), $"{today.Spent}g", Palette.Text),
-            (Loc.T("The chests held"), $"{today.Earned}g", Palette.Gold),
-            (Loc.T("Profit"), $"{(today.Profit > 0 ? "+" : "")}{today.Profit}g", today.Profit > 0 ? Palette.Good : today.Profit < 0 ? Palette.Bad : Palette.Text),
+            (Loc.T("Spent"), Money.Short(today.Spent), Palette.Text),
+            (Loc.T("The chests held"), Money.Short(today.Earned), Palette.Gold),
+            (Loc.T("Profit"), (today.Profit > 0 ? "+" : "") + Money.Short(today.Profit), today.Profit > 0 ? Palette.Good : today.Profit < 0 ? Palette.Bad : Palette.Text),
         };
         if (today.Commissions > 0) figures.Add((Loc.T("Commissions"), Loc.T($"+{today.Commissions}g"), Palette.Good));
         if (today.Curios > 0) figures.Add((Loc.T("Curios"), Loc.T($"+{today.Curios}g"), Palette.Magic));
@@ -189,26 +189,26 @@ public partial class DayEndPhase : Phase
             float y = 36 + i * 39;
             var color = c.Done ? Palette.Good : c.Story ? Palette.Magic : Palette.Text;
             string patron = c.Who;
-            string reward = c.Done ? Loc.T("DONE") : c.Story ? Loc.T($"{State.CommissionEach(c)}g + shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g each") : $"{State.CommissionEach(c)}g";
+            string reward = c.Done ? Loc.T("DONE") : c.Story ? Loc.T($"{State.CommissionEach(c)}g + shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g each") : Money.Short(State.CommissionEach(c));
             board.AddChild(UiKit.MakeLabel(patron, 16, color).Place(14, y, 220, 20));
             board.AddChild(UiKit.MakeLabel(reward, 16, c.Done ? Palette.Good : Palette.Gold, HorizontalAlignment.Right).Place(180, y, 174, 20));
             board.AddChild(UiKit.MakeLabel($"{c.What} {c.Progress}", 16, Palette.Muted).Place(14, y + 18, SideW - 28, 20));
         }
 
         // Curios.
-        var curios = UiKit.MakePanel(Palette.PanelBorder).Place(SideX, 506, SideW, 74);
+        var curios = UiKit.MakePanel(Palette.PanelBorder).Place(SideX, 504, SideW, 78); // two lines of note under the title
         _side.AddChild(curios);
         curios.AddChild(UiKit.MakeLabel(Loc.T($"CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(14, 8, 120, 20));
         if (State.CurioKeys.Count == 0)
             curios.AddChild(UiKit.MakeLabel(State.PeddlerToday ? Loc.T("Nim the peddler comes by tonight, after closing, with a curio.")
                 : Loc.T("Nim the peddler comes by every night after closing, from the third."), 16, Palette.Muted)
-                .Wrapped().Place(14, 30, SideW - 28, 40));
+                .Wrapped().Place(14, 28, SideW - 28, 44));
         // Up to six (with curio cases): closer together when there are more than four.
         float step = Math.Min(60, (SideW - 124) / Math.Max(1, State.CurioKeys.Count));
         for (int i = 0; i < State.CurioKeys.Count; i++)
         {
             var curio = Curios.Get(State.CurioKeys[i]);
-            var spot = new Control { TooltipText = $"{curio.Name}: {curio.Blurb}", MouseFilter = Control.MouseFilterEnum.Pass }
+            var spot = new Control { TooltipText = Loc.T($"{curio.Name}: {curio.Blurb}"), MouseFilter = Control.MouseFilterEnum.Pass }
                 .Place(120 + i * step, 6, step - 4, 62);
             spot.AddChild(UiKit.MakeCurioIcon(curio, new Vector2((step - 4) / 2, 31)));
             curios.AddChild(spot);
@@ -230,7 +230,7 @@ public partial class DayEndPhase : Phase
             .Place(14, 14, 44, 48));
         string title = tonight ? Loc.T("VANE COMES TONIGHT") : State.DebtCleared ? Loc.T("THE GUILD'S INTEREST") : Loc.T("THE GUILD'S DUE");
         guild.AddChild(UiKit.MakeLabel(title, 16, tonight ? Palette.Warn : Palette.Muted).Place(70, 10, 290, 20));
-        guild.AddChild(UiKit.MakeLabel($"{due}g", 32, enough ? Palette.Gold : Palette.Bad, outline: 4).Place(70, 28, 200, 40));
+        guild.AddChild(UiKit.MakeLabel(Money.Short(due), 32, enough ? Palette.Gold : Palette.Bad, outline: 4).Place(70, 28, 200, 40));
         string when = tonight ? Loc.T("tonight") : Loc.T($"end of day {State.Day + State.DaysToNextDue}");
         guild.AddChild(UiKit.MakeLabel(when, 16, Palette.Muted, HorizontalAlignment.Right).Place(180, 32, 176, 20));
         if (!State.DebtCleared)
@@ -415,19 +415,20 @@ public partial class DayEndPhase : Phase
             MouseFilter = Control.MouseFilterEnum.Ignore,
         }.Place(12, 12, 48, 48));
         // A long name steps down a size, so the price beside it never covers it.
-        card.AddChild(UiKit.MakeLabel(upgrade.Name, upgrade.Name.Length > 16 ? 16 : 24, upgrade.IsRenovation || engine ? Palette.Gold : Palette.Text)
-            .Place(70, upgrade.Name.Length > 16 ? 12 : 8, 216, 30));
+        bool small = upgrade.Name.Length > 16 || UiKit.TextWidth(upgrade.Name, 24) > 216;
+        card.AddChild(UiKit.MakeLabel(upgrade.Name, small ? 16 : 24, upgrade.IsRenovation || engine ? Palette.Gold : Palette.Text)
+            .Place(70, small ? 12 : 8, 216, 30));
         card.AddChild(UiKit.MakeLabel(upgrade.Blurb, 16, Palette.Muted).Wrapped().Place(70, 40, CardW - 82, 66));
         if (affordable)
         {
-            var buy = UiKit.MakeButton($"{cost}g", warning != null ? Palette.Bad : Palette.Good, 16, () => AskBuy(upgrade)).Place(CardW - 112, 8, 100, 30);
+            var buy = UiKit.MakeButton(Money.Short(cost), warning != null ? Palette.Bad : Palette.Good, 16, () => AskBuy(upgrade)).Place(CardW - 112, 8, 100, 30);
             buy.TooltipText = engine ? Loc.T($"Every chest read for you, for good. You'd still owe the Guild {State.DebtLeft}g, and have {left}g to earn it with.")
                 : warning ?? Loc.T($"Buy the {upgrade.Name}. Leaves you {left}g.");
             card.AddChild(buy);
         }
         else
         {
-            var price = UiKit.MakeLabel($"{cost}g", 24, Palette.Muted, HorizontalAlignment.Right).Place(CardW - 132, 6, 120, 30);
+            var price = UiKit.MakeLabel(Money.Short(cost), 24, Palette.Muted, HorizontalAlignment.Right).Place(CardW - 132, 6, 120, 30);
             price.TooltipText = Loc.T($"{cost - State.Gold}g more to go");
             price.MouseFilter = Control.MouseFilterEnum.Pass;
             card.AddChild(price);
@@ -483,7 +484,7 @@ public partial class DayEndPhase : Phase
         else
         {
             Sfx.Play("sting", 1.2f, -4);
-            FloatText($"-{cost}g", new Vector2(640, 150), Palette.Gold, 32);
+            FloatText("-" + Money.Short(cost), new Vector2(640, 150), Palette.Gold, 32);
         }
         BuildCards();
     }

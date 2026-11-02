@@ -74,7 +74,9 @@ public partial class Hud : CanvasLayer
         _event.Visible = e != null;
         _earlyAccess.Visible = e == null;
         // With the event's chip beside it, the day's title moves right to make room ("Day 13 - Roadside Stall" is long).
-        _lot.Place(e == null ? 330 : 418, 12, e == null ? 420 : 336, 30);
+        _lotX = e == null ? 330 : 418;
+        _lotW = e == null ? 420 : 336;
+        FitLot();
         if (e == null)
         {
             CloseEvent();
@@ -106,8 +108,21 @@ public partial class Hud : CanvasLayer
         _eventPopup = null;
     }
 
-    public void SetDay(int day, int tier) =>
+    public void SetDay(int day, int tier)
+    {
         _lot.Text = day <= 0 ? Core.ShopTiers.Name(tier) : Loc.T($"Day {day}  -  {Core.ShopTiers.Name(tier)}");
+        FitLot();
+    }
+
+    /// <summary>The day's title a size down when it won't fit beside the event (a longer language, a longer shop name).</summary>
+    void FitLot()
+    {
+        int size = UiKit.TextWidth(_lot.Text, 24) > _lotW - 8 ? 16 : 24;
+        _lot.AddThemeFontSizeOverride("font_size", UiKit.SnapFont(size));
+        _lot.Place(_lotX, size == 24 ? 12 : 17, _lotW, size == 24 ? 30 : 20);
+    }
+
+    float _lotX = 330, _lotW = 420;
 
     /// <summary>Shows the Guild's next due: how much, and how soon.</summary>
     public void SetDue(Core.GameState state)
@@ -136,14 +151,14 @@ public partial class Hud : CanvasLayer
         if (!animate)
         {
             _shownGold = gold;
-            _gold.Text = $"{gold}g";
+            _gold.Text = Money.Short(gold);
             return;
         }
         _goldTween = CreateTween();
         var count = _goldTween.TweenMethod(Callable.From<float>(v =>
         {
             _shownGold = v;
-            _gold.Text = $"{Mathf.RoundToInt(v)}g";
+            _gold.Text = Money.Short(Mathf.RoundToInt(v));
         }), _shownGold, (float)gold, seconds);
         if (steady) count.SetTrans(Tween.TransitionType.Linear);
         else count.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);

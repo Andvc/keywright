@@ -191,7 +191,7 @@ public partial class CounterPhase : Phase
         scale.TooltipText = State.Weighs ? Loc.T($"Hesk's scale. {State.Kin.Rules[2]}")
             : Loc.T($"Rook's game scale. {Characters.PoundsTable} What it weighs, less what you've ticked, is what you couldn't hear.");
         scale.MouseFilter = Control.MouseFilterEnum.Pass;
-        scale.AddChild(UiKit.MakeLabel(State.Weighs ? Loc.T("ON THE SCALE") : Loc.T("WENNA'S SCALE"), 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center).Place(0, 6, 128, 20));
+        scale.AddChild(UiKit.MakeLabel(State.Weighs ? Loc.T("ON THE SCALE") : Loc.T("ROOK'S SCALE"), 16, Palette.Gold.Darkened(0.15f), HorizontalAlignment.Center).Place(0, 6, 128, 20));
         _scale = UiKit.MakeLabel(Characters.Weight(_visit.Chest.Pounds), 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 28, 128, 30);
         scale.AddChild(_scale);
         _slipWeight = UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Center).Place(0, 62, 128, 20);
@@ -528,7 +528,7 @@ public partial class CounterPhase : Phase
         Add(UiKit.MakeLabel(Loc.T("Curios"), 16, Palette.Magic, outline: 4).Place(x0, 616, 120, 20));
         for (int i = 0; i < curios.Count; i++)
         {
-            var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = $"{curios[i].Name}: {curios[i].Blurb}" }
+            var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = Loc.T($"{curios[i].Name}: {curios[i].Blurb}") }
                 .Place(x0 + i * 40, 642, 36, 36));
             spot.AddChild(UiKit.MakeCurioIcon(curios[i], new Vector2(18, 18)));
         }
@@ -552,7 +552,7 @@ public partial class CounterPhase : Phase
             line.MouseFilter = Control.MouseFilterEnum.Pass;
             line.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? Loc.T(" each") : "")}{(c.Story ? Loc.T(" and a shard of the Aldric Key") : "")}, or a quarter over what it would sell for, if that's more.");
             board.AddChild(line);
-            board.AddChild(UiKit.MakeLabel(c.Story ? Loc.T("shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : $"{State.CommissionEach(c)}g", 16, c.Story ? Palette.Magic : Palette.Gold,
+            board.AddChild(UiKit.MakeLabel(c.Story ? Loc.T("shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : Money.Short(State.CommissionEach(c)), 16, c.Story ? Palette.Magic : Palette.Gold,
                 HorizontalAlignment.Right).Place(180, 28 + i * 24, 100, 20));
         }
     }
@@ -564,7 +564,8 @@ public partial class CounterPhase : Phase
     {
         var panel = Add(new Node2D { ZIndex = 10 });
         panel.AddChild(new Sprite2D { Texture = GD.Load<Texture2D>($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
-        panel.AddChild(UiKit.MakeLabel(Loc.T("YOUR APPRAISAL"), 16, Palette.InkGold).Place(PanelX, 80, 220, 20));
+        // Clear of the sheet's pin, top left.
+        panel.AddChild(UiKit.MakeLabel(Loc.T("YOUR APPRAISAL"), 16, Palette.InkGold).Place(PanelX + 20, 80, 200, 20));
         _notebookButton = UiKit.MakeButton(Loc.T($"Notebook {Controls.Tag(Controls.Notebook)}"), Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
         panel.AddChild(_notebookButton);
         var seller = _visit.Seller;
@@ -573,7 +574,7 @@ public partial class CounterPhase : Phase
         string values = _visit.Chest.Sealed ? Loc.T("Sealed: nothing to hear. Go by its weight.")
             : Loc.T($"Values: as good as a {(_visit.Chest.Gilded ? Loc.T("gilded") : Categories.ColourName(_visit.Chest.Quality))} chest promises.");
         // A line each; how they priced it takes both when it's long (the chest's colour is under it anyway).
-        bool longWho = UiKit.Font.GetStringSize(who, HorizontalAlignment.Left, -1, 16).X > PanelW;
+        bool longWho = UiKit.TextWidth(who) > PanelW - 8; // a label wraps a few pixels short of its width
         _ticked = UiKit.MakeLabel(longWho ? who : $"{who}\n{values}", 16, Palette.InkMuted).Wrapped().Place(PanelX, 106, PanelW, 40);
         panel.AddChild(_ticked);
         _panel = panel;
@@ -587,7 +588,7 @@ public partial class CounterPhase : Phase
         }
         if (State.Tier >= 2)
         {
-            panel.AddChild(MakeRow(null, Loc.T("False bottom"), "boom", y));
+            panel.AddChild(MakeRow(null, Loc.T("False bottom"), Loc.T("boom"), y));
             y += RowStep;
         }
 
@@ -679,7 +680,7 @@ public partial class CounterPhase : Phase
         }
         button.AddChild(UiKit.MakeLabel(name, 16, category == Category.Heartsong ? Palette.OnPaper(Rarity.Mythic) : Palette.Ink).Place(80, 8, 120, 20));
         // Just a reminder of each kind's sound: the slip doesn't keep track of what you've heard.
-        button.AddChild(UiKit.MakeLabel(word, 16, Palette.InkMuted).Place(212, 8, 68, 20));
+        button.AddChild(UiKit.MakeLabel(word, 16, Palette.InkMuted).Place(212, 8, 84, 20));
         if (category is Category magicKind && magicKind != Category.Heartsong && _lamp)
         {
             row.Star = UiKit.MakeLabel("*", 32, Palette.InkMuted, HorizontalAlignment.Center).Place(288, -3, 28, 40);
@@ -728,7 +729,7 @@ public partial class CounterPhase : Phase
             int count = CountOf(row.Category);
             bool magic = row.Category is Category k && _slip.Magic(k);
             // Marked: what the slip adds up for this kind. Unmarked: what one would be worth. Both as good as promised.
-            row.Value.Text = row.Category is Category kind ? $"{(count > 0 ? _slip.ValueOf(kind) : _slip.OneValue(kind))}g" : $"{_slip.HiddenValue}g";
+            row.Value.Text = row.Category is Category kind ? Money.Short(count > 0 ? _slip.ValueOf(kind) : _slip.OneValue(kind)) : Money.Short(_slip.HiddenValue);
             row.Value.AddThemeColorOverride("font_color", count == 0 ? Palette.InkMuted : magic ? Palette.InkMagic : Palette.InkGold);
             row.Count.Text = count >= 2 ? count.ToString() : "";
             if (row.Star != null) row.Star.AddThemeColorOverride("font_color", magic ? Palette.InkMagic : Palette.InkMuted);
@@ -740,7 +741,7 @@ public partial class CounterPhase : Phase
         int worth = _slip.Worth;
         // The King's game: whatever the slip says, that's the price.
         if (!Concluded) _visit.SetSlipPrice(worth);
-        _worth.Text = $"{worth}g";
+        _worth.Text = Money.Short(worth);
         string who = _visit.Seller.Who;
         bool offering = _visit.CanOffer;
         bool bought = _visit.Outcome == VisitOutcome.Bought;
@@ -754,7 +755,7 @@ public partial class CounterPhase : Phase
             Trade.Haggle => Loc.T($"{who} asks (make an offer?)"),
             _ => Loc.T($"{who} asks"),
         };
-        _ask.Text = bought ? $"{_visit.PricePaid}g" : _visit.Ask > 0 ? $"{_visit.Ask}g" : "?";
+        _ask.Text = bought ? Money.Short(_visit.PricePaid) : _visit.Ask > 0 ? Money.Short(_visit.Ask) : "?";
 
         _slider.Visible = offering && open;
         _offer.Visible = offering;
@@ -768,9 +769,16 @@ public partial class CounterPhase : Phase
         _buy.Disabled = !open || !TradeOpen || State.Gold < _visit.Ask;
         if (offering && _visit.Trade == Trade.Haggle)
         {
-            _offer.Place(PanelX, 590, 124, 50);
-            _buy.Place(PanelX + 130, 590, 124, 50);
-            _pass.Place(PanelX + 260, 590, 124, 50);
+            // Three to a row: the offer and the price as wide as their words need (a big sum, a longer language), up
+            // to what leaves Pass room for its own word.
+            float passMin = UiKit.TextWidth(_pass.Text, 24) + 24;
+            float offerW = Mathf.Max(124, UiKit.TextWidth(_offer.Text) + 22), buyW = Mathf.Max(124, UiKit.TextWidth(_buy.Text) + 22);
+            float spare = PanelW - 12 - passMin;
+            if (offerW + buyW > spare) offerW = buyW = Mathf.Max(124, spare / 2);
+            float passW = PanelW - 12 - offerW - buyW;
+            _offer.Place(PanelX, 590, offerW, 50);
+            _buy.Place(PanelX + offerW + 6, 590, buyW, 50);
+            _pass.Place(PanelX + offerW + buyW + 12, 590, passW, 50);
         }
         else
         {
@@ -1201,7 +1209,7 @@ public partial class CounterPhase : Phase
         State.Opening = State.Buy(_visit, _slip);
         Game.Hud.SetGold(State.Gold);
         Sfx.PlayGroup("pay");
-        FloatText($"-{_visit.PricePaid}g", new Vector2(1036, 560), Palette.Gold, 32);
+        FloatText("-" + Money.Short(_visit.PricePaid), new Vector2(1036, 560), Palette.Gold, 32);
 
         // It wasn't theirs to sell: the ward won't let go, and it goes to the back room.
         if (_visit.Chest.Stolen)
@@ -1210,7 +1218,7 @@ public partial class CounterPhase : Phase
             Sfx.Play("strain", 0.8f, -4);
             ShowOutcome(Loc.T("THE WARD WON'T LET GO"),
                 Loc.T($"It wasn't {_visit.Seller.Short}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you " +
-                      "can return it to its owner, or sell it to Nim's friends."), Palette.Bad, 0.6);
+                      $"can return it to its owner, or sell it to Nim's friends."), Palette.Bad, 0.6);
             return;
         }
         await Wait(1.0);

@@ -14,7 +14,8 @@ build is the same build without the library.
    live, put a `steam_appid.txt` holding the app ID beside the exe (never ship it).
 2. **Achievements** (Stats & Achievements): one for each of these, API name exactly as written. Each needs two 256x256
    JPG icons (achieved, and the greyed one). `godot --headless --path . -- --achievements` prints this table from the
-   code (`scripts/Core/Achievements.cs`); names and descriptions go into Steamworks in each language too.
+   code (`scripts/Core/Achievements.cs`); names and descriptions go into Steamworks in each language too:
+   `-- --achievements --lang=fr` (and `ja`, `zh_CN`, `zh_TW`) prints them in that language.
 
 | API name | Name | Description | Hidden |
 |---|---|---|---|
@@ -44,8 +45,9 @@ build is the same build without the library.
 
    They're checked whenever the game saves, ends a day or a run, and kept in the profile as well, so one earned
    offline reaches Steam the next time the game runs on it.
-3. **Rich presence** (Community > Rich Presence): upload `rich_presence.vdf`. Friends see "Day 3 at Thornwick Market"
-   or "At the title screen". Add a "Language" block to it for each language the game's in.
+3. **Rich presence** (Community > Rich Presence): upload `rich_presence.vdf` (English) and one file per language:
+   `rich_presence_french.vdf`, `_japanese`, `_schinese` and `_tchinese`, the same tokens in Steam's language names.
+   Friends see "Day 3 at Thornwick Market" or "At the title screen" in their own language.
 4. **Steam Cloud** (Auto-Cloud): on Windows, root `WinAppDataRoaming`, subdirectory `Keywright`, patterns `save.json`,
    `profile.json` and their `.bak` (not `settings.cfg`: screens and keys differ between computers). On Linux, root
    `LinuxXdgDataHome`, same subdirectory and patterns. A quota of 10 files and 10 MB is plenty.

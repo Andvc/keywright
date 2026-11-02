@@ -485,7 +485,7 @@ public static class Market
                 // Every thing inside, warded or not (a false bottom's floor stops the echo).
                 var all = things.Select(i => (Category?)i.Category).Append(warded?.Category).OfType<Category>().OrderBy(k => k).ToArray();
                 string shapes = all.Length == 0 ? Loc.T("nothing at all")
-                    : Sellers.Join(all.GroupBy(k => k).Select(g => $"{Sellers.Number(g.Count())} {Categories.Shape(g.Key)}").ToList());
+                    : Sellers.Join(all.GroupBy(k => k).Select(g => Categories.Echoes(g.Key, g.Count())).ToList());
                 return new(shapes, Loc.T($"Skrae's echoes: {shapes}."), all);
             }
             case Core.Clue.Cards:
@@ -503,7 +503,7 @@ public static class Market
                     while (cards.Count < 3)
                         cards.Add(rng.PickOne(suits.Except(cards).ToArray()));
                 cards = cards.OrderBy(_ => rng.Next()).ToList();
-                string spread = string.Join(", ", cards.Select(Categories.Suit));
+                string spread = Words.List(cards.Select(Categories.Suit));
                 return new(Loc.T($"the {Sellers.Join(cards.Select(Categories.Suit).ToList())}"), Loc.T($"Madame Zell's cards: {spread}."), cards.ToArray());
             }
             default:
@@ -511,7 +511,7 @@ public static class Market
         }
     }
 
-    /// <summary>Grandmother de Vere's riddles, two for each kind of thing.</summary>
+    /// <summary>Grandmother Vell's riddles, two for each kind of thing.</summary>
     static readonly Dictionary<Category, string[]> Riddles = new()
     {
         [Category.Coins] = new[] { Loc.T("I've a head and a tail, but no body at all."), Loc.T("Round and bright, I pass from hand to hand, and buy the bread and the land.") },

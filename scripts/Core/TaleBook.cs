@@ -244,7 +244,7 @@ public static class TaleBook
                     Key = "magpie.bounty", Who = Hollis, After = "magpie.goblins", Gap = 2, Tier = 2,
                     Says = s => Say(Hollis,
                         Loc.T($"The Magpie's bounty is up to {Money.Say(s.Purses(0.5f))}. We've three names: Bettany Crane at the Crossed Keys, Aunt " +
-                              "Hesper the matchmaker, and Rook Varga, who's hunting the bounty herself."),
+                              $"Hesper the matchmaker, and Rook Varga, who's hunting the bounty herself."),
                         Loc.T("You've heard what the carter saw, and the goblin. You've met all three. Who is it?")),
                     Asks = s => Suspects.Select(who => C(Name(who), () => Accuse(s, who),
                             who == s.Secret("magpie") ? W(s, s.Purses(0.5f), (Faction.Wardens, 2), (Faction.Commons, 1), (Faction.Lockless, -3))
@@ -476,7 +476,7 @@ public static class TaleBook
                 {
                     Key = "kettle.debt", Who = Ada, After = "kettle.pledge", Gap = 3, Tier = 3, Expect = Loc.T("Ada, about Jory"),
                     Says = s => Say(Ada, Loc.T($"The debt-house wants {Money.Say(s.Purses(1))} for Jory, and I've saved half of it. If you could find the " +
-                                               "rest... he's a strong lad, and he'd work for you till it was paid.")),
+                                               $"rest... he's a strong lad, and he'd work for you till it was paid.")),
                     Asks = s => new()
                     {
                         C(Loc.T($"Pay the rest ({s.Purses(0.5f)}g)"), () =>
@@ -710,7 +710,7 @@ public static class TaleBook
                                                   $"so it wouldn't anyway. {Money.Say(s.Purses(0.5f))} when I collect.")),
                     Asks = s => new()
                     {
-                        C(Loc.T("Done"), () =>
+                        C(Loc.T("Deal"), () =>
                         {
                             s.BackRoom.Add(new Held { Owner = Name(Corvin), Key = "parcel", Colour = Rarity.Uncommon, Day = s.Day });
                             s.Flags.Add("parcel.kept");
@@ -757,7 +757,7 @@ public static class TaleBook
                     Key = "parcel.collect", Who = Corvin, After = "parcel.search", Gap = 1, Tier = 2, Expect = Loc.T("Corvin, for his parcel"),
                     If = s => s.BackRoom.Any(h => h.Key == "parcel"),
                     Says = s => Say(Corvin, Loc.T($"My parcel, safe and sound. You're a friend, Keywright. Here's {Money.Say(s.Purses(0.5f))}, and " +
-                                                  "something from my own pocket.")),
+                                                  $"something from my own pocket.")),
                     Then = s =>
                     {
                         s.BackRoom.RemoveAll(h => h.Key == "parcel");

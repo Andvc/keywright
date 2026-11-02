@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Loc = Keywright.Core.Loc;
 
 namespace Keywright.Ui;
 
@@ -16,14 +17,23 @@ public static class UiKit
     static Font _font;
     static Texture2D _panel, _frame, _button, _buttonPressed;
 
-    public static Font Font => _font ??= GD.Load<Font>("res://assets/fonts/kenney_mini.ttf");
+    /// <summary>The language's font (<see cref="Localization.MainFont"/>), once the language is set.</summary>
+    public static Font Font => _font ??= Localization.MainFont ?? GD.Load<Font>("res://assets/fonts/kenney_mini.ttf");
     static Texture2D PanelTex => _panel ??= GD.Load<Texture2D>("res://assets/ui/panel.png");
     static Texture2D FrameTex => _frame ??= GD.Load<Texture2D>("res://assets/ui/frame.png");
     static Texture2D ButtonTex => _button ??= GD.Load<Texture2D>("res://assets/ui/button.png");
     static Texture2D ButtonPressedTex => _buttonPressed ??= GD.Load<Texture2D>("res://assets/ui/button_pressed.png");
 
-    /// <summary>Kenney Mini is drawn on an 8px grid; other sizes render with uneven pixels.</summary>
-    public static int SnapFont(int size) => Math.Max(16, (int)MathF.Round(size / 8f) * 8);
+    /// <summary>
+    /// Kenney Mini is drawn on an 8px grid, so it's shown at 16, 24, 32...; other sizes render with uneven pixels. In
+    /// Japanese and Chinese, Fusion Pixel's grid is 12px: a size comes down to the multiple of 12 at or under it (16 is
+    /// 12, 24 and 32 are 24, 48 is 48), so it never takes more room than the English did.
+    /// </summary>
+    public static int SnapFont(int size)
+    {
+        int snapped = Math.Max(16, (int)MathF.Round(size / 8f) * 8);
+        return Localization.Grid == 12 ? Math.Max(12, snapped / 12 * 12) : snapped;
+    }
 
     /// <summary>Low-contrast row backgrounds let the appraisal's dark ink read as printing on paper.</summary>
     public static void StylePaperButton(Button button)
@@ -41,6 +51,9 @@ public static class UiKit
         }
         button.AddThemeColorOverride("font_color", Palette.Ink);
     }
+
+    /// <summary>How wide a text is at this size, in the game's font (a translation's letters can be twice as wide).</summary>
+    public static float TextWidth(string text, int size = 16) => Font.GetStringSize(text, HorizontalAlignment.Left, -1, SnapFont(size)).X;
 
     /// <summary>The text, or as much of it as fits in this width with "..." after it (Kenney Mini has no ellipsis).</summary>
     public static string Fit(string text, float width, int size = 16)
@@ -70,7 +83,7 @@ public static class UiKit
             var term = Core.Challenges.Get(key);
             var line = MakeLabel(Fit(term.Name, width), 16, color).Place(x, y, width, 20);
             line.MouseFilter = Control.MouseFilterEnum.Pass;
-            line.TooltipText = $"{term.Name}: {term.Rule}\n{term.Why}";
+            line.TooltipText = Loc.T($"{term.Name}: {term.Rule}\n{term.Why}");
             parent.AddChild(line);
             y += pitch;
         }
@@ -162,7 +175,22 @@ public static class UiKit
     {
         control.Position = new Vector2(x, y);
         control.Size = new Vector2(width, height);
+        if (TrackPlacement) control.SetMeta(PlacedMeta, new Vector2(width, height));
         return control;
+    }
+
+    /// <summary>
+    /// Remember the size each control was placed at, so <see cref="Debug.Overflow"/> can tell which texts outgrew
+    /// theirs (on while screenshots are taken, --shots).
+    /// </summary>
+    public static bool TrackPlacement;
+
+    public const string PlacedMeta = "placed_size";
+
+    /// <summary>A control given a new size on purpose (a box grown to fit its text): the overflow check measures from it.</summary>
+    public static void Resized(Control control)
+    {
+        if (TrackPlacement) control.SetMeta(PlacedMeta, control.Size);
     }
 
     /// <summary>A pixel sprite at an integer scale, centered on <paramref name="center"/> (outlined: see

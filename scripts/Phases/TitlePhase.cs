@@ -52,7 +52,8 @@ public partial class TitlePhase : Phase
         if (_save != null)
         {
             Add(UiKit.MakeButton(Loc.T("Continue"), Palette.Gold, 24, () => Game.ContinueGame(_save)).Place(ButtonsX, y, ButtonW, 56));
-            Add(UiKit.MakeLabel(_save.Summary, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(ButtonsX, y + 60, ButtonW, 20));
+            // Centred under the button, with room either side for a longer language's shop names.
+            Add(UiKit.MakeLabel(_save.Summary, 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(ButtonsX - 100, y + 60, ButtonW + 200, 20));
             y += 92;
         }
         Add(UiKit.MakeButton(Loc.T("New game"), _save == null ? Palette.Gold : Palette.Text, _save == null ? 24 : 16, NewGame)

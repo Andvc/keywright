@@ -48,12 +48,21 @@ public partial class CollectionView : Node2D
         AddChild(blocker);
         AddChild(UiKit.MakePanel(Palette.Gold.Darkened(0.3f)).Place(PanelX, PanelY, PanelW, PanelH));
         AddChild(UiKit.MakeLabel(Loc.T("COLLECTION"), 32, Palette.Gold, outline: 4).Place(PanelX + 24, PanelY + 10, 260, 40));
+        // Each tab as wide as its English one, or wider where a translation needs it.
+        float tabX = PanelX + 270;
+        Button Tab(string text, Color color, float width, Action open)
+        {
+            width = Mathf.Max(width, UiKit.TextWidth(text) + 28);
+            var tab = UiKit.MakeButton(text, color, 16, open).Place(tabX, PanelY + 14, width, 36);
+            tabX += width + 6;
+            return tab;
+        }
         _tabs = new[]
         {
-            UiKit.MakeButton(Loc.T("Finds"), Palette.Gold, 16, () => ShowPage(FindsPage)).Place(PanelX + 270, PanelY + 14, 96, 36),
-            UiKit.MakeButton(Loc.T("Curios"), Palette.Magic, 16, () => ShowPage(CuriosPage)).Place(PanelX + 372, PanelY + 14, 96, 36),
-            UiKit.MakeButton(Loc.T("Heartsongs"), Palette.Of(Rarity.Mythic), 16, () => ShowPage(SongsPage)).Place(PanelX + 474, PanelY + 14, 136, 36),
-            UiKit.MakeButton(Loc.T("Achievements"), Palette.Good, 16, () => ShowPage(AchievementsPage)).Place(PanelX + 616, PanelY + 14, 160, 36),
+            Tab(Loc.T("Finds"), Palette.Gold, 96, () => ShowPage(FindsPage)),
+            Tab(Loc.T("Curios"), Palette.Magic, 96, () => ShowPage(CuriosPage)),
+            Tab(Loc.T("Heartsongs"), Palette.Of(Rarity.Mythic), 136, () => ShowPage(SongsPage)),
+            Tab(Loc.T("Achievements"), Palette.Good, 160, () => ShowPage(AchievementsPage)),
         };
         foreach (var tab in _tabs) AddChild(tab);
         AddChild(UiKit.MakeButton(Loc.T("Close"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));

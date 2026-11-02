@@ -477,7 +477,7 @@ public static class Curios
         { CurioTag.Enchantment, CurioTag.Blind, CurioTag.Haggling, CurioTag.Appraisal, CurioTag.Compartments, CurioTag.Wards };
 
     /// <summary>"luck, the perfect read": the tags a card shows.</summary>
-    public static string Tags(CurioDef curio) => string.Join(", ", curio.Tags.Select(t => TagName(t, curio)));
+    public static string Tags(CurioDef curio) => Words.List(curio.Tags.Select(t => TagName(t, curio)));
 
     /// <summary>What the opening says a curio (or a Heartsong on display) did to a chest: "Lucky Coin: 2 things came out better!"</summary>
     public static string LuckLine(string key, int things)

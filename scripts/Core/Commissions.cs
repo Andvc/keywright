@@ -62,12 +62,12 @@ public sealed class Commission
     public string What => Kind switch
     {
         CommissionKind.Enchanted => Loc.T("anything enchanted"),
-        CommissionKind.Lot => $"{Needed} {Categories.Get(Category).Name.ToLowerInvariant()}, {Better}",
-        _ => $"{Categories.Get(Category).Name.ToLowerInvariant()}, {Better}",
+        CommissionKind.Lot => Loc.T($"{Needed} {Categories.Get(Category).Name.ToLowerInvariant()}, {Better}"),
+        _ => Loc.T($"{Categories.Get(Category).Name.ToLowerInvariant()}, {Better}"),
     };
 
     /// <summary>What's wanted, as someone would say it: "a gem (epic or better)".</summary>
-    public string Phrase => Kind == CommissionKind.Enchanted ? Loc.T("something enchanted") : $"{Noun(Category, Needed)} ({Better})";
+    public string Phrase => Kind == CommissionKind.Enchanted ? Loc.T("something enchanted") : Loc.T($"{Noun(Category, Needed)} ({Better})");
 
     static string Noun(Category kind, int n) => (kind, n > 1) switch
     {

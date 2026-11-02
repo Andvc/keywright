@@ -932,5 +932,5 @@ public static class Sellers
     public static string Number(int n) => n switch { 1 => Loc.T("one"), 2 => Loc.T("two"), 3 => Loc.T("three"), 4 => Loc.T("four"), 5 => Loc.T("five"), 6 => Loc.T("six"), _ => n.ToString() };
 
     public static string Join(IReadOnlyList<string> words) =>
-        words.Count <= 1 ? words.FirstOrDefault() ?? "" : Loc.T($"{string.Join(", ", words.Take(words.Count - 1))} and {words[^1]}");
+        words.Count <= 1 ? words.FirstOrDefault() ?? "" : Loc.T($"{Words.List(words.Take(words.Count - 1))} and {words[^1]}");
 }

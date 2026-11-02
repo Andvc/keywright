@@ -220,10 +220,10 @@ public partial class SettingsView : Control
             25, 100, v => $"{v / 50:0.0}x");
         _page.AddChild(UiKit.MakeLabel(Loc.T("Mouse: click and drag everything. Controller: the left stick moves the pointer, A clicks and drags " +
             "(grab a chest and shake it with the stick), the D-pad nudges and the right stick scrolls."), 16, Palette.Muted)
-            .Wrapped().Place(LabelX, Row(6) + 4, 720, 48));
+            .Wrapped().Place(LabelX, Row(6) + 4, 720, 72)); // three lines in a longer language, above the buttons
     }
 
-    static string Names(IEnumerable<string> names) => names.Any() ? string.Join(", ", names) : Loc.T("(none)");
+    static string Names(IEnumerable<string> names) => names.Any() ? Words.List(names) : Loc.T("(none)");
 
     void StartBinding(string action, bool key, Button button)
     {
@@ -270,7 +270,8 @@ public partial class SettingsView : Control
     {
         var languages = Localization.Languages.ToArray();
         Label restart = null;
-        Choice(Loc.T("Language"), 0, () => Localization.Name(Settings.Language), () =>
+        // "System" in the player's language; every other language by its own name.
+        Choice(Loc.T("Language"), 0, () => Settings.Language is { Length: > 0 } code ? Localization.Name(code) : Loc.T("System"), () =>
         {
             int at = Array.FindIndex(languages, l => l.Code == Settings.Language);
             Settings.Language = languages[(at + 1) % languages.Length].Code;

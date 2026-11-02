@@ -47,17 +47,17 @@ public partial class RunEndPhase : Phase
         var panel = Add(UiKit.MakePanel(color.Darkened(0.3f)).Place(90, 220, 540, 300));
         var rows = new List<(string, string)>
         {
-            (Loc.T("Debt cleared"), State.ClearedDay > 0 ? Loc.T($"day {State.ClearedDay}, week {State.ClearedWeek}") : "no"),
+            (Loc.T("Debt cleared"), State.ClearedDay > 0 ? Loc.T($"day {State.ClearedDay}, week {State.ClearedWeek}") : Loc.T("no")),
             (Loc.T("Days of trading"), $"{State.Day}"),
             (Loc.T("The shop"), ShopTiers.Name(State.Tier)),
-            (Loc.T("The chests brought in"), $"{State.TotalEarned}g"),
-            (Loc.T("Gold in hand"), $"{State.Gold}g"),
+            (Loc.T("The chests brought in"), Money.Short(State.TotalEarned)),
+            (Loc.T("Gold in hand"), Money.Short(State.Gold)),
             (Loc.T("Collection"), Loc.T($"{State.Found.Count} of {Collection.Size}")),
             (Loc.T("Key shards"), State.MapGiven ? Loc.T("given to the Guild") : Loc.T($"{State.MapPieces} of {Story.Pieces}")),
             (Loc.T("Curios"), $"{State.CurioKeys.Count}"),
             // The season's people: how many of its tales got going, and who counts you a friend.
             (Loc.T("Tales begun"), Loc.T($"{State.TaleLog.Count} of {State.TalesDrawn.Count}")),
-            (Loc.T("Friends"), string.Join(", ", Factions.All.Where(State.Friend).Select(Factions.Name).DefaultIfEmpty(Loc.T("none")))),
+            (Loc.T("Friends"), Words.List(Factions.All.Where(State.Friend).Select(Factions.Name).DefaultIfEmpty(Loc.T("none")))),
         };
         for (int i = 0; i < rows.Count; i++)
         {
@@ -125,7 +125,7 @@ public partial class RunEndPhase : Phase
         // Nim's stock grows as Bram's kin get further: what he'll bring from the next run on.
         var curios = Curios.All.Where(c => profile.OpensAfter(c, State) && !Game.CuriosAtStart.Contains(c.Key)).ToList();
         if (curios.Count > 0)
-            news.Add(curios.Count <= 3 ? Loc.T($"Nim has new curios for your next run: {string.Join(", ", curios.Select(c => c.Name))}.")
+            news.Add(curios.Count <= 3 ? Loc.T($"Nim has new curios for your next run: {Words.List(curios.Select(c => c.Name))}.")
                 : Loc.T($"Nim has {curios.Count} new curios for your next run, the {curios[0].Name} among them."));
         if (_cleared && State.Week <= Guild.Weeks) news.Add(Loc.T("Keep trading and every week you keep the Guild paid adds to the score."));
         if (news.Count > 0) return string.Join("  ", news);

@@ -27,9 +27,11 @@ public partial class Phase : Node2D
     /// <summary>Text that pops up, drifts upward and fades.</summary>
     protected void FloatText(string text, Vector2 center, Color color, int size = 30)
     {
+        // Wide enough for the words (a translation can run longer), and still centred on the spot.
+        float width = Mathf.Max(400, UiKit.TextWidth(text, size) + 24);
         var label = Add(UiKit.MakeLabel(text, size, color, HorizontalAlignment.Center, outline: 6)
-            .Place(center.X - 200, center.Y - 20, 400, 44));
-        label.PivotOffset = new Vector2(200, 22);
+            .Place(center.X - width / 2, center.Y - 20, width, 44));
+        label.PivotOffset = new Vector2(width / 2, 22);
         label.Scale = Vector2.One * 0.6f;
         var tween = label.CreateTween().SetParallel();
         tween.TweenProperty(label, "scale", Vector2.One, 0.18f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);

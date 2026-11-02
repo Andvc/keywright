@@ -218,7 +218,7 @@ public partial class LockpickPhase : Phase
             p.DrawCircle(pos + new Vector2(-12, 8), 5, color);
             if (i < _slips) p.DrawLine(pos + new Vector2(-4, -8), pos + new Vector2(6, 4), Palette.Bg, 3);
         }
-        p.DrawString(UiKit.Font, new Vector2(-60, Radius + 90), Loc.T("slips left"), HorizontalAlignment.Center, 120, 16, Palette.Muted);
+        p.DrawString(UiKit.Font, new Vector2(-60, Radius + 90), Loc.T("slips left"), HorizontalAlignment.Center, 120, UiKit.SnapFont(16), Palette.Muted);
     }
 
     static float Rad(float degrees) => Mathf.DegToRad(degrees);

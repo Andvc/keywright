@@ -205,7 +205,7 @@ public partial class NotebookView : Node2D
         else if (kind.FakeName != null && !kind.FakeIron && tier >= 3) note = Loc.T("soft; sand sounds alike");
         row.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted).Place(528, 8, 236, 20));
         for (int c = 0; c < 4; c++)
-            row.AddChild(UiKit.MakeLabel($"{Categories.Nominal(kind.Category, (Rarity)c)}g", 16, Palette.Of((Rarity)c)).Place(768 + c * 104, 8, 96, 20));
+            row.AddChild(UiKit.MakeLabel(Money.Short(Categories.Nominal(kind.Category, (Rarity)c)), 16, Palette.Of((Rarity)c)).Place(768 + c * 104, 8, 96, 20));
         row.GuiInput += e =>
         {
             if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) return;
@@ -242,18 +242,23 @@ public partial class NotebookView : Node2D
         int metCount = Sellers.All.Count(s => s.Tier <= tier && _state.Met.Contains(s.Key));
         _page.AddChild(UiKit.MakeLabel(Loc.T($"{metCount} of {total} met"), 16, Palette.Muted, HorizontalAlignment.Right)
             .Place(PanelX + PanelW - 224, PanelY + PanelH - 32, 200, 20));
-        const float buttonW = 180, step = 188;
+        // A button a shop, each 180 wide or as wide as its name needs in a longer language.
+        float buttonX = TableX;
+        void SpreadButton(string name, Color color, Action open)
+        {
+            float width = Mathf.Max(180, UiKit.TextWidth(name) + 28);
+            _page.AddChild(UiKit.MakeButton(name, color, 16, open).Place(buttonX, PanelY + PanelH - 44, width, 34));
+            buttonX += width + 8;
+        }
         for (int i = 0; i <= Spread(tier); i++)
         {
             int which = i;
-            _page.AddChild(UiKit.MakeButton(ShopTiers.Name(i + 1), spread == i ? Palette.Gold : Palette.Text, 16, () => ShowRegulars(which))
-                .Place(TableX + i * step, PanelY + PanelH - 44, buttonW, 34));
+            SpreadButton(ShopTiers.Name(i + 1), spread == i ? Palette.Gold : Palette.Text, () => ShowRegulars(which));
         }
-        _page.AddChild(UiKit.MakeButton(Loc.T("Friends & foes"), spread == FriendsSpread ? Palette.Gold : Palette.Magic, 16, () => ShowRegulars(FriendsSpread))
-            .Place(TableX + (Spread(tier) + 1) * step, PanelY + PanelH - 44, buttonW, 34));
+        SpreadButton(Loc.T("Friends & foes"), spread == FriendsSpread ? Palette.Gold : Palette.Magic, () => ShowRegulars(FriendsSpread));
 
         var people = spread == FriendsSpread ? Friends() : Sellers.All.Where(s => s.Tier <= tier && Spread(s.Tier) == spread && _state.Met.Contains(s.Key))
-            .Select(s => (s.Key, s.Name, Role: $"{s.JudgeWord}; {Trade(s)}", About: About(s))).ToList();
+            .Select(s => (s.Key, s.Name, Role: Loc.T($"{s.JudgeWord}; {Trade(s)}"), About: About(s))).ToList();
         if (people.Count == 0)
         {
             _page.AddChild(UiKit.MakeLabel(Loc.T("You haven't met anyone here yet."), 24, Palette.Muted, HorizontalAlignment.Center).Place(PanelX, 300, PanelW, 30));
@@ -373,10 +378,11 @@ public partial class NotebookView : Node2D
             int week = _state.Week + row;
             var plan = _state.PlanFor(week);
             float y = gridY + row * rowH;
-            _page.AddChild(UiKit.MakeLabel(Loc.T($"WEEK {week}"), 16, Palette.Gold).Place(TableX, y + 8, 110, 20));
-            _page.AddChild(UiKit.MakeLabel(row == 0 ? Loc.T("this week") : row == 1 ? Loc.T("next week") : Loc.T("not planned"), 16, Palette.Muted).Place(TableX, y + 28, 110, 20));
+            // The column starts a little into the margin, so "this week" fits in a longer language too.
+            _page.AddChild(UiKit.MakeLabel(Loc.T($"WEEK {week}"), 16, Palette.Gold).Place(TableX - 6, y + 8, 116, 20));
+            _page.AddChild(UiKit.MakeLabel(row == 0 ? Loc.T("this week") : row == 1 ? Loc.T("next week") : Loc.T("not planned"), 16, Palette.Muted).Place(TableX - 6, y + 28, 116, 20));
             if (week > Guild.Weeks)
-                _page.AddChild(UiKit.MakeLabel(Loc.T("after the debt"), 16, Palette.Muted).Place(TableX, y + 48, 116, 20));
+                _page.AddChild(UiKit.MakeLabel(Loc.T("after the debt"), 16, Palette.Muted).Place(TableX - 6, y + 48, 116, 20));
             for (int d = 1; d <= Guild.DaysPerWeek; d++)
             {
                 int day = GameState.DayNumber(week, d);
@@ -385,7 +391,7 @@ public partial class NotebookView : Node2D
                 cell.MouseFilter = Control.MouseFilterEnum.Stop;
                 if (past) cell.Modulate = new Color(1, 1, 1, 0.45f);
                 cell.AddChild(UiKit.MakeLabel(Loc.T($"DAY {day}"), 16, isToday ? Palette.Gold : Palette.Muted).Place(10, 6, 100, 20));
-                if (isToday) cell.AddChild(UiKit.MakeLabel(Loc.T("today"), 16, Palette.Gold, HorizontalAlignment.Right).Place(cellW - 90, 6, 80, 20));
+                if (isToday) cell.AddChild(UiKit.MakeLabel(Loc.T("today"), 16, Palette.Gold, HorizontalAlignment.Right).Place(cellW - 110, 6, 100, 20));
 
                 var lines = new System.Collections.Generic.List<string>();
                 const float ly = 30;
@@ -398,7 +404,7 @@ public partial class NotebookView : Node2D
                 else if (role == DayRole.Event && Events.Find(plan.On(d)) is EventDef e)
                 {
                     cell.AddChild(UiKit.MakeLabel(Events.Tag(e, plan.Wanted), 16, Palette.Magic).Wrapped().Place(10, ly, cellW - 20, 40));
-                    lines.Add($"{e.Name}: {Events.Describe(e, plan.Wanted)}");
+                    lines.Add(Loc.T($"{e.Name}: {Events.Describe(e, plan.Wanted)}"));
                 }
                 // Whoever said they'd come back, on the day they said.
                 var expected = _state.Expected().Where(x => x.Day == day).ToList();
@@ -537,7 +543,7 @@ public partial class NotebookView : Node2D
         string when = When(_state.DaysToNextDue, _state.NextDueWeek);
         string line = _state.DebtCleared
             ? Loc.T($"Bram's debt is cleared{(_state.ClearedDay > 0 ? Loc.T($" (day {_state.ClearedDay})") : "")}. The Guild still comes, for its interest: {_state.NextDue}g {when}.")
-            : Loc.T($"{_state.DebtLeft}g of Bram's debt left. Next: {_state.NextDue}g {when}{((_state.Arrears > 0 ? Loc.T($" ({_state.Arrears}g rolled over).") : "."))}{((_state.CanPayOff ? Loc.T(" You could pay it all off at the day's end.") : Loc.T(" Pay it all off early from a day's end.")))}");
+            : Loc.T($"{_state.DebtLeft}g of Bram's debt left. Next: {_state.NextDue}g {when}{(_state.Arrears > 0 ? Loc.T($" ({_state.Arrears}g rolled over)") : "")}.{((_state.CanPayOff ? Loc.T(" You could pay it all off at the day's end.") : Loc.T(" Pay it all off early from a day's end.")))}");
         var block = new Control { MouseFilter = Control.MouseFilterEnum.Ignore }.Place(TableX - 8, y, PanelW - 32, 76);
         _page.AddChild(block);
         block.AddChild(UiKit.MakeLabel(Loc.T("THE GUILD'S DEBT"), 16, Palette.Gold).Place(8, 0, 200, 20));
@@ -553,7 +559,7 @@ public partial class NotebookView : Node2D
             box.MouseFilter = Control.MouseFilterEnum.Pass;
             block.AddChild(box);
             string title = after ? Loc.T("THEN") : Loc.T($"WEEK {week}");
-            string amount = after ? Loc.T("x2 a week") : paid ? Loc.T($"{_state.DueFor(week)}g  paid") : $"{(now ? _state.NextDue : _state.DueFor(week))}g";
+            string amount = after ? Loc.T("x2 a week") : paid ? Loc.T($"{_state.DueFor(week)}g  paid") : Money.Short(now ? _state.NextDue : _state.DueFor(week));
             box.AddChild(UiKit.MakeLabel(title, 16, now ? colour : Palette.Muted).Place(10, 4, 80, 20));
             box.AddChild(UiKit.MakeLabel(amount, 16, paid ? Palette.Good : now ? colour : after ? Palette.Muted : Palette.Text, HorizontalAlignment.Right)
                 .Place(64, 4, boxW - 74, 20));

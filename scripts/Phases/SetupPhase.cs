@@ -64,13 +64,13 @@ public partial class SetupPhase : Phase
         card.AddChild(UiKit.MakeLabel(kin.Name, 24, open ? Palette.Text : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 122, CardW, 30));
         card.AddChild(UiKit.MakeLabel(kin.Title, 16, open ? Palette.Gold : Palette.Muted, HorizontalAlignment.Center).Place(0, 152, CardW, 20));
         card.AddChild(UiKit.MakeLabel(open ? kin.Blurb : kin.Unlock, 16, open ? Palette.Muted : Palette.Warn, HorizontalAlignment.Center).Wrapped()
-            .Place(14, 176, CardW - 28, 84));
+            .Place(14, 176, CardW - 28, 94)); // four lines, down to the record under it
         if (open)
         {
             int best = Profile.BestScore.GetValueOrDefault(kin.Key), max = Profile.MaxChallenge(kin.Key);
             string record = best > 0 ? Loc.T($"Best {best}, level {max} open") : max > 0 ? Loc.T($"Level {max} open") : "";
             card.AddChild(UiKit.MakeLabel(record, 16, Palette.Gold.Darkened(0.2f), HorizontalAlignment.Center).Place(0, CardH - 26, CardW, 20));
-            var pick = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = $"{kin.Name}, {kin.Title}" };
+            var pick = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = Loc.T($"{kin.Name}, {kin.Title}") };
             pick.Pressed += () => Choose(kin.Key);
             card.AddChild(pick.Place(0, 0, CardW, CardH));
         }
@@ -106,7 +106,7 @@ public partial class SetupPhase : Phase
         down.Disabled = _level <= 0;
         panel.AddChild(down);
         panel.AddChild(UiKit.MakeLabel($"{_level}", 48, _level > 0 ? Palette.Warn : Palette.Text, HorizontalAlignment.Center, outline: 6)
-            .Place(cx + 56, 38, 80, 56));
+            .Place(cx + 56, 38, 80, 64)); // tall enough for the line of the 12px-grid fonts at 48
         var up = UiKit.MakeButton("+", Palette.Text, 24, () => SetLevel(_level + 1)).Place(cx + 140, 40, 52, 52);
         up.Disabled = _level >= max;
         up.TooltipText = max >= Challenges.Max ? Loc.T("The top level.") : Loc.T($"Clear Bram's debt at level {max} with {kin.Name} to open level {max + 1}.");

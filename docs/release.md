@@ -1,7 +1,7 @@
 # From early access to a Steam release
 
 Where Keywright stands against what a released PC game on Steam is expected to have, what 0.27 built for it, and what
-only the owner can do. Written for 0.27 (November 2026).
+only the owner can do. Written for 0.27 and brought up to date for 0.29 (November 2026).
 
 ## Where it stands
 
@@ -12,8 +12,8 @@ only the owner can do. Written for 0.27 (November 2026).
 | Sound settings | Ready | Master, effects, the Heartsongs' songs; muting when the window loses focus. |
 | Keyboard and mouse | Ready | Every key rebindable; the mouse needs none. |
 | Controllers | Ready | Xbox, PlayStation and Switch layouts; the stick drives the pointer, so a controller does all a mouse does. |
-| Languages | Foundation ready | Every text translatable (2,647 texts in 0.28, about 131,000 characters); no translation yet. |
-| Fonts | Ready but Chinese | Western European in the house font, the rest of Latin, Cyrillic, Greek, Korean and Japanese in Galmuri. |
+| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all 2,743 texts (0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
+| Fonts | Ready | Western European in the house font; Japanese and Chinese in Fusion Pixel 12px; the rest of Latin, Cyrillic, Greek and Korean in Galmuri. |
 | Steam | Ready to switch on | Achievements, rich presence, overlay pause, launch through Steam: needs the app ID and Steamworks set-up. |
 | Builds | Ready | CI exports Windows and Linux, smoke-tests both and keeps them as artifacts, on every push. |
 | Credits and licences | Ready | In game (title > Credits) and in CREDITS.md; the studio's name to add. |
@@ -47,6 +47,22 @@ it) and writes the template, `locale/keywright.pot`. Drop a translated `<locale>
 it. `--pseudo` shows every text bracketed and a third longer; the sim gives identical numbers that way, proof that
 no translated text is used as a key. `--loc-test` runs a made-up German translation through Godot.
 `locale/README.md` is for translators.
+
+## What 0.29 added
+
+**Translations.** French, Japanese, Simplified Chinese and Traditional Chinese, every text, made by Claude agents
+from a glossary written first (`locale/GLOSSARY.md`: the world's names, each person's voice, each language's
+typography), names and labels before sentences so every sentence uses the names the buttons show. Traditional Chinese
+is the Simplified made with OpenCC's Taiwan phrases, then checked by hand. `tools/loc -- verify` checks every file
+against the template (holes, `{price}`-style names, plural forms, a letter the fonts haven't got); `--loc-test` loads
+each through Godot; and each language was played on every screen, with `[overflow]` lines (`Debug.Overflow`) naming
+any text that outgrew its box. Making the game translatable showed places where English words were glued together
+in code; those are sentences now (a list's commas, a sum's "g", Skrae's echoes counted one kind at a time).
+
+**Fonts.** Japanese and Chinese are drawn in Fusion Pixel 12px (OFL), a pixel font on a 12px grid, cut to each
+language's standard set plus every character its translation uses (`tools/fonts.py fusion`): 1.4 MB for Japanese and
+Simplified, 2.6 MB for Traditional. Line breaking in Chinese and Japanese needs ICU's data, which the export now
+includes. Kenney Mini gained French's oe, the en dash and its no-break spaces.
 
 **Steam.** `Platform` connects when Steam is there and does nothing when it isn't, so the same build is DRM-free
 without the library. On Steam: 23 achievements (kept in the profile too, so none are lost off Steam, and listed in the
@@ -84,20 +100,18 @@ collects nothing and sends nothing but what Steam does).
 
 **Credits:** set `CreditsView.Studio` to the name the game is published under.
 
-**Translations:** about 23,000 words per language (0.28's tales added a third). Professional translation runs roughly $2,000-3,500 per
-language, then a pass of play in that language. Run the game with `--pseudo` first and fix the screens that
-overflow. For Chinese, add a pixel font with the full Simplified set: Fusion Pixel 12px (OFL), from its GitHub
-releases, as a second fallback in `Localization.SetUpFont`.
+**Translations:** the four languages are complete and consistent, but no native speaker has read them. Before
+release, pay one for a pass of play in each (a review, not a translation: a few days each, well under the $2,000-3,500
+a translation from scratch costs), and list the languages on the store page. A new language is a `.po` file from
+`locale/keywright.pot` and the glossary; Korean and Russian would need only the text (Galmuri has their letters).
 
 **Steam Deck:** request a compatibility review once a release candidate is on Steam. The game already meets the
 usual points: full controller support, fullscreen by default, text at least 10px at 1280x800, no launcher.
 
 ## Known gaps
 
-- **Layouts for longer languages.** Under `--pseudo`, a few labels overflow: the top bar's title runs over "early
-  access", the character cards' descriptions, the collection's heading. Fix these when a translation shows which
-  ones matter.
-- **Chinese** needs its font (above). Japanese uses Galmuri's 6,400 kanji, which covers everyday text.
+- **Translations by machine.** Every text has been checked by tools and seen on screen, but a native reader will
+  still find lines that read stiffly; see above.
 - **Saving** happens at the start of each day only: quitting mid-day replays that day (by design so far; see
   docs/design.md).
 - **No crash reporter.** Godot writes logs to the user folder's `logs/` (Settings > Game > Open the folder), which is

@@ -1,0 +1,14 @@
+"lang"
+{
+	"Language"	"schinese"
+	"Tokens"
+	{
+		"#Status_Title"		"标题画面"
+		"#Status_Day"		"在{#Shop_%tier%}的第%day%天"
+		"#Status_Cleared"	"已还清布拉姆的债务，在{#Shop_%tier%}的第%day%天"
+		"#Shop_1"		"布拉姆的摊位"
+		"#Shop_2"		"荆棘镇集市"
+		"#Shop_3"		"王冠堡"
+		"#Shop_4"		"皇家商行"
+	}
+}

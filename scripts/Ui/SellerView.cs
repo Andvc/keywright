@@ -61,7 +61,9 @@ public partial class SellerView : Node2D
         _bubble.Place(BubbleAt.X, BubbleAt.Y, BubbleW, BubbleH);
         _bubble.ZIndex = 20;
         AddChild(_bubble);
-        _bubble.AddChild(UiKit.MakeLabel(_seller.Name, 24, Palette.Gold).Place(14, 8, BubbleW - 28, 28));
+        // A long name (Archmage Thessaly Orme, or anyone in a language that writes names longer) widens the bubble.
+        _nameW = UiKit.TextWidth(_seller.Name, 24);
+        _bubble.AddChild(UiKit.MakeLabel(_seller.Name, 24, Palette.Gold).Place(14, 8, Math.Max(BubbleW - 28, _nameW + 4), 28));
         _text = UiKit.MakeLabel("", 16, Palette.Text).Wrapped().Place(14, 40, BubbleW - 28, BubbleH - 48);
         _text.VerticalAlignment = VerticalAlignment.Center;
         _bubble.AddChild(_text);
@@ -70,15 +72,18 @@ public partial class SellerView : Node2D
         _bubble.AddChild(_tail);
     }
 
+    float _nameW;
+
     public void Say(string line, Color? color = null)
     {
         _text.Text = line;
         // Short replies leave the hats and faces of taller visitors visible below the bubble. Measured at full height,
         // lines and the spacing between them, with room for the frame under the last. A speech too long for the
         // bubble widens it first (keeping the speaker's face in view), and only then grows it: it never spills out.
-        float width = BubbleW, height = Fit(width);
-        if (height > BubbleH) height = Fit(width = WideW);
+        float width = Math.Max(BubbleW, _nameW + 32), height = Fit(width);
+        if (height > BubbleH) height = Fit(width = Math.Max(WideW, width));
         _text.Size = new Vector2(width - 28, height - 48);
+        UiKit.Resized(_text);
         _bubble.Size = new Vector2(width, height);
         _tail.QueueRedraw();
         _text.AddThemeColorOverride("font_color", color ?? Palette.Text);

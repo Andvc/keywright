@@ -12,6 +12,7 @@ namespace LocTool;
 ///   dotnet run --project tools/loc -- check       lists texts the player reads that aren't wrapped yet (exit 1 if any)
 ///   dotnet run --project tools/loc -- survey      every unwrapped string by where it's used, to decide the rules
 ///   dotnet run --project tools/loc -- wrap [file]  wraps them in Loc.T (once, in 0.27; check finds stragglers)
+///   dotnet run --project tools/loc -- verify       checks each translation in locale/ against the template (Verify.cs)
 /// A text's msgid is what Loc.T looks up: the literal, or an interpolated string with its holes numbered ("Day {0}").
 /// </summary>
 static class Program
@@ -20,6 +21,8 @@ static class Program
     {
         string root = FindRoot();
         string command = args.FirstOrDefault() ?? "help";
+        // The translations against the template: no need to parse the game for that.
+        if (command == "verify") return Verify.Run(root, strict: args.Contains("--strict"));
         var only = args.Skip(1).Where(a => !a.StartsWith("--")).Select(a => Path.GetFullPath(a)).ToHashSet();
         var game = Game.Load(root);
         switch (command)
@@ -33,7 +36,7 @@ static class Program
             case "wrap":
                 return Wrapper.Run(game, only);
             default:
-                Console.WriteLine("usage: dotnet run --project tools/loc -- extract | check | survey [--all] | wrap [files]");
+                Console.WriteLine("usage: dotnet run --project tools/loc -- extract | check | verify [--strict] | survey [--all] | wrap [files]");
                 return 2;
         }
     }
@@ -455,8 +458,36 @@ static class Survey
             }
         }
         if (enums > 0) Console.WriteLine($"{enums} enums shown by their English names.");
+        // An interpolated text joined to a plain one ($"... {x} ..." + "...") is a finished string by the time Loc.T sees
+        // it, so it's looked up with its holes filled in and never found: every piece of a joined text must be $"...".
+        int joins = 0;
+        foreach (var tree in game.Trees.Where(game.Translated))
+            foreach (var join in tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>()
+                         .Where(b => b.IsKind(SyntaxKind.AddExpression) && b.Parent is not BinaryExpressionSyntax))
+            {
+                var parts = Pieces(join).ToList();
+                if (!parts.Any(p => p is InterpolatedStringExpressionSyntax) || !parts.Any(p => p is LiteralExpressionSyntax)) continue;
+                if (!parts.All(p => p is InterpolatedStringExpressionSyntax or LiteralExpressionSyntax)) continue;
+                if (join.Parent is not ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax call } } || !Strings.IsLoc(call)) continue;
+                int line = tree.GetLineSpan(join.Span).StartLinePosition.Line + 1;
+                Console.WriteLine($"{game.Rel(tree.FilePath)}:{line}  an interpolated text joined to a plain one: make every piece $\"...\"");
+                joins++;
+            }
+        if (joins > 0) Console.WriteLine($"{joins} joined texts Loc.T would never find.");
         Console.WriteLine(count == 0 ? "Every text is wrapped." : $"{count} texts aren't wrapped in Loc.T (or marked as left alone).");
-        return count + enums == 0 ? 0 : 1;
+        return count + enums + joins == 0 ? 0 : 1;
+    }
+
+    /// <summary>The pieces of a + chain, left to right.</summary>
+    static IEnumerable<ExpressionSyntax> Pieces(ExpressionSyntax e)
+    {
+        if (e is BinaryExpressionSyntax b && b.IsKind(SyntaxKind.AddExpression))
+        {
+            foreach (var p in Pieces(b.Left)) yield return p;
+            foreach (var p in Pieces(b.Right)) yield return p;
+        }
+        else if (e is ParenthesizedExpressionSyntax paren) foreach (var p in Pieces(paren.Expression)) yield return p;
+        else yield return e;
     }
 
     /// <summary>A line that says its strings are keys on purpose ("// loc: keys").</summary>
@@ -583,7 +614,13 @@ static class Extractor
                 if (name is "T" or "Key" && args.Count == 1)
                 {
                     string id = Strings.Template(args[0].Expression, model, out bool literal);
-                    if (!literal || !Rules.LooksLikeText(id)) continue;
+                    // Wrapped is wrapped: a single word ("gently", "jingle", "two") is the player's as much as a
+                    // sentence (until 0.29 these were dropped by the filter that finds unwrapped text).
+                    // A template of holes and punctuation ("{0}, {1}", "({0})") is a translator's too: Japanese and
+                    // Chinese write their own commas and brackets.
+                    string bare = Regex.Replace(id, @"\{\d+\}", "");
+                    // So is one of two holes or more ("{0} {1}": a count and a word, which Chinese writes 两个圆的).
+                    if (!literal || !(Regex.IsMatch(bare, "[A-Za-z]") || bare != id && (bare.Trim().Length > 0 || Regex.Matches(id, @"\{\d+\}").Count > 1))) continue;
                     key = (id, null);
                 }
                 else if (name == "Plural" && args.Count == 3)

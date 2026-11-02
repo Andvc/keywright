@@ -1,0 +1,14 @@
+"lang"
+{
+	"Language"	"tchinese"
+	"Tokens"
+	{
+		"#Status_Title"		"標題畫面"
+		"#Status_Day"		"在{#Shop_%tier%}的第%day%天"
+		"#Status_Cleared"	"已還清布拉姆的債務，在{#Shop_%tier%}的第%day%天"
+		"#Shop_1"		"布拉姆的攤位"
+		"#Shop_2"		"荊棘鎮市集"
+		"#Shop_3"		"王冠堡"
+		"#Shop_4"		"皇家商行"
+	}
+}

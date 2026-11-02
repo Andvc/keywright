@@ -402,7 +402,13 @@ public sealed class Visit
         Core.Clue.Dream => Loc.T($"{Capital(Categories.Sign(kept.Category))} in the dream, and nothing of the kind to hear: that was it."),
         Core.Clue.Tag => Loc.T($"{Capital(Categories.One(kept.Category))} on the tag that never made a sound: that was it."),
         Core.Clue.Riddle => Loc.T("The riddle was about it, and it never made a sound."),
-        Core.Clue.Dowry => Loc.T($"The dowry's {Categories.One(kept.Category).Replace("a ", "")} never made a sound: the bride had warded it."),
+        // A dowry's warded thing is always one of its three (Market.Dowry).
+        Core.Clue.Dowry => kept.Category switch
+        {
+            Category.Coins => Loc.T("The dowry's coin never made a sound: the bride had warded it."),
+            Category.Garb => Loc.T("The dowry's cloak never made a sound: the bride had warded it."),
+            _ => Loc.T("The dowry's potion never made a sound: the bride had warded it."),
+        },
         Core.Clue.Roll => Loc.T($"The roll's '{Market.Faded(kept.Name)}' was the {kept.Name}."),
         Core.Clue.Echo => Loc.T($"A {Categories.Shape(kept.Category)} echo that never made a sound: that was it."),
         Core.Clue.Cards => Loc.T($"{Categories.Suit(kept.Category)} came up twice."),

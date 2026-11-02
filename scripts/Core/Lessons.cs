@@ -278,7 +278,7 @@ public static class Lessons
                 Rarity.Rare), I(Category.Arms, Rarity.Rare)), tier),
             Steps = new LessonStep[]
             {
-                new(Loc.T("Grandmother de Vere left a riddle on each lid about one thing inside, and if she warded something, it's about " +
+                new(Loc.T("Grandmother Vell left a riddle on each lid about one thing inside, and if she warded something, it's about " +
                     "that. Read it, then shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
                 new(Loc.T("A hilt and an edge, or forged and sheathed: a weapon. And nothing clanked: grandmother warded it. Name it: tick " +
                     "Weapons."), c => c.Slip.Count(Category.Arms) > 0),

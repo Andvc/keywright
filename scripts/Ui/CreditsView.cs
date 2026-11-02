@@ -60,6 +60,8 @@ public partial class CreditsView : Node2D
         Line(Loc.T("Kenney (kenney.nl), CC0: the Kenney Mini font, and the Impact Sounds, RPG Audio, Casino Audio and Interface " +
                    "Sounds packs. The Heartsongs and the other music-box sounds are made in code."));
         Line(Loc.T("Galmuri 9 by Lee Minseo (quiple/galmuri), SIL Open Font License 1.1: the letters for translations."));
+        Line(Loc.T("Fusion Pixel 12px by TakWolf (TakWolf/fusion-pixel-font), SIL Open Font License 1.1, with glyphs from Ark " +
+                   "Pixel, Cubic 11 and Galmuri: the letters for Japanese and Chinese."));
         Gap();
         Heading(Loc.T("Steam"));
         Line("Steamworks.NET (c) 2013-2022 Riley Labrecque, MIT License. Steamworks SDK (c) Valve Corporation."); // loc: keys (a notice)

@@ -69,7 +69,7 @@ public partial class DuesPhase : Phase
             var box = UiKit.MakePanel(color).Place(PanelX + i * (w + gap), y, w, 56);
             box.AddChild(UiKit.MakeLabel(Loc.T($"Week {week}"), 16, paid ? Palette.Good : tonight ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center)
                 .Place(0, 6, w, 20));
-            box.AddChild(UiKit.MakeLabel(paid ? Loc.T("paid") : $"{State.DueFor(week)}g", 16, paid ? Palette.Good : tonight ? Palette.Gold : Palette.Text,
+            box.AddChild(UiKit.MakeLabel(paid ? Loc.T("paid") : Money.Short(State.DueFor(week)), 16, paid ? Palette.Good : tonight ? Palette.Gold : Palette.Text,
                 HorizontalAlignment.Center, outline: 4).Place(0, 28, w, 20));
             _track.AddChild(box);
         }
@@ -144,7 +144,7 @@ public partial class DuesPhase : Phase
         panel.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(28, 24, 44, 48));
         panel.AddChild(UiKit.MakeLabel(Loc.T("DUE TONIGHT"), 16, Palette.Muted).Place(96, 20, 300, 20));
-        panel.AddChild(UiKit.MakeLabel($"{due}g", 48, enough ? Palette.Gold : Palette.Bad, outline: 6).Place(96, 38, 400, 56));
+        panel.AddChild(UiKit.MakeLabel(Money.Short(due), 48, enough ? Palette.Gold : Palette.Bad, outline: 6).Place(96, 38, 400, 56));
         if (State.Arrears > 0)
             panel.AddChild(UiKit.MakeLabel(Loc.T($"including {State.Arrears}g left over from last week"), 16, Palette.Warn).Place(96, 96, 500, 20));
         _have = UiKit.MakeLabel(Loc.T($"You have {State.Gold}g"), 24, enough ? Palette.Good : Palette.Bad, HorizontalAlignment.Right, outline: 4)

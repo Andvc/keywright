@@ -77,9 +77,9 @@ public partial class OpeningPhase : Phase
         var tally = Add(new CanvasLayer { Layer = 1 });
         bool vault = _purchase.Visit.Seller == Story.VaultSeller;
         tally.AddChild(UiKit.MakeLabel(vault ? Loc.T("The Crown Chest") : Loc.T($"Paid {_purchase.Visit.Seller.Short}"), 16, Palette.Muted).Place(40, 80, 200, 20));
-        tally.AddChild(UiKit.MakeLabel($"{_purchase.Paid}g", 24, Palette.Text, HorizontalAlignment.Right, outline: 4).Place(200, 74, 120, 30));
+        tally.AddChild(UiKit.MakeLabel(Money.Short(_purchase.Paid), 24, Palette.Text, HorizontalAlignment.Right, outline: 4).Place(200, 74, 120, 30));
         tally.AddChild(UiKit.MakeLabel(Loc.T("Worth"), 16, Palette.Muted).Place(40, 114, 200, 20));
-        _worthLabel = UiKit.MakeLabel("0g", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 108, 120, 30);
+        _worthLabel = UiKit.MakeLabel(Money.Short(0), 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 108, 120, 30);
         tally.AddChild(_worthLabel);
         _tally = tally;
     }
@@ -476,7 +476,7 @@ public partial class OpeningPhase : Phase
     /// <summary>What each thing's name says on the table, how far it sits off-centre, and how wide it is (<see cref="LayOutNames"/>).</summary>
     readonly Dictionary<ItemRead, (string Title, float Shift, float Width)> _names = new(ReferenceEqualityComparer.Instance);
 
-    static float NameWidth(string text) => UiKit.Font.GetStringSize(text, HorizontalAlignment.Left, -1, 16).X;
+    static float NameWidth(string text) => UiKit.Font.GetStringSize(text, HorizontalAlignment.Left, -1, UiKit.SnapFont(16)).X;
 
     /// <summary>
     /// A thing's name on the table. Tight for room (a big lot, the vault, a long name), an enchanted thing's aura and note
@@ -574,7 +574,7 @@ public partial class OpeningPhase : Phase
             badge.ZIndex = 8;
         }
         // A Heartsong is worth nothing in gold: what became of it instead.
-        string price = item.IsSong ? State.Display.Contains(item) ? Loc.T("singing") : Loc.T("let go") : $"{worth}g";
+        string price = item.IsSong ? State.Display.Contains(item) ? Loc.T("singing") : Loc.T("let go") : Money.Short(worth);
         var value = Add(UiKit.MakeLabel(price, 24, Palette.Of(item.Rarity), HorizontalAlignment.Center, outline: 4)
             .Place(at.X - 70, 588, 140, 30));
         value.ZIndex = 8;
@@ -599,7 +599,7 @@ public partial class OpeningPhase : Phase
         stamp.TweenProperty(mark, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
         string quality = item.Fake || item.Broken ? "" : Categories.QualityName(item.Rarity);
         // With many things on the table, just the read (the colour already says the quality).
-        string note = Narrow && read.Note.Length > 0 ? read.Note : string.Join(", ", new[] { read.Note, quality }.Where(s => s.Length > 0));
+        string note = Narrow && read.Note.Length > 0 ? read.Note : Words.List(new[] { read.Note, quality }.Where(s => s.Length > 0));
         var noteLabel = Add(UiKit.MakeLabel(note, 16, read.Right ? Palette.Good : Palette.Warn, HorizontalAlignment.Center, outline: 4)
             .Place(at.X - w / 2, 618, w, 20));
         noteLabel.ZIndex = 8;
@@ -607,7 +607,7 @@ public partial class OpeningPhase : Phase
         int from = _worth;
         _worth += worth;
         var count = CreateTween();
-        count.TweenMethod(Callable.From<float>(v => _worthLabel.Text = $"{Mathf.RoundToInt(v)}g"), (float)from, (float)_worth, 0.4f)
+        count.TweenMethod(Callable.From<float>(v => _worthLabel.Text = Money.Short(Mathf.RoundToInt(v))), (float)from, (float)_worth, 0.4f)
             .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         _worthLabel.PivotOffset = new Vector2(120, 15);
         _worthLabel.Scale = Vector2.One * 1.3f;
@@ -757,7 +757,7 @@ public partial class OpeningPhase : Phase
         if (fee > 0) grade += Loc.T($" A perfect read: a valuer's fee of {fee}g.");
         if (_purchase.Rebate > 0) grade += Loc.T($" Haggler's Purse: {_purchase.Rebate}g back.");
         if (insured > 0) grade += Loc.T($" Underwriter's Bond: {insured}g back.");
-        Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 64));
+        Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 96)); // up to four lines, above the chest
         bool last = State.Queue.Count == 0;
         Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
             .Place(1000, 300, 260, 52));
@@ -942,7 +942,7 @@ public partial class OpeningPhase : Phase
             string points = item.Magic ? $"+{item.Prestige}*" : $"+{item.Prestige}";
             button.Disabled = _swap != null || State.Gold + (State.DisplayFull ? State.Display.Max(i => i.Value) : 0) < worth;
             button.Text = Narrow ? $"{(State.DisplayFull ? Loc.T("Swap") : Loc.T("Keep"))} {points}" : State.DisplayFull ? Loc.T($"Swap {points} (-{worth}g)") : Loc.T($"Keep {points} (-{worth}g)");
-            button.TooltipText = Loc.T($"{item.Prestige} exhibition points for {worth}g{((item.Magic ? Loc.T(" (double: it's enchanted)") : ""))}{((State.DisplayFull ? Loc.T(". Your display is full: sell something on it to make room.") : "."))}");
+            button.TooltipText = Loc.T($"{item.Prestige} exhibition points for {worth}g{((item.Magic ? Loc.T(" (double: it's enchanted)") : ""))}.{((State.DisplayFull ? Loc.T(" Your display is full: sell something on it to make room.") : ""))}");
         }
     }
 

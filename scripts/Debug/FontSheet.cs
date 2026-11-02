@@ -22,12 +22,13 @@ public partial class Main
         {
             "English: Buy 12g, Pass. A jingle: coin.",
             "Deutsch: Kaufen für 12g. Münze, Größe, Ärger",
-            "Français: Acheter 12g. Épée, maître, ça",
+            "Français : Acheter 12 po. Épée, maître, cœur, sœur, ça !",
             "Polski: Kup za 12g. Złota moneta, ąęńśźż",
             "Русский: Купить за 12g. Монета",
             "日本語: 12gで買う。金貨、剣、宝石",
             "한국어: 12g에 사기. 동전, 검, 보석",
-            "简体中文: 用 12g 买下。金币、剑、宝石",
+            "简体中文：用 12 金币买下。金币、剑、宝石、钥匙",
+            "繁體中文：用 12 金幣買下。金幣、劍、寶石、鑰匙",
         };
         float y = 8;
         foreach (int size in new[] { 16, 24 })

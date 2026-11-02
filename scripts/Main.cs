@@ -15,7 +15,7 @@ namespace Keywright;
 /// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the week's scene
 /// (from the second week), Nim's curios on his day, the counter, the day's end, and on the third day the Guild's due.
 /// What you've done across runs is kept in user://profile.json.
-/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --loc-test, --pseudo, --font-sheet, --export-sounds=DIR, --autoplay,
+/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --loc-test, --pseudo, --lang=CODE, --font-sheet, --export-sounds=DIR, --autoplay,
 /// --shots=DIR, --quit-at-end, --days=N, --no-tutorial (no tips, no scripted first day),
 /// --start-tier=N and --gold=N (jump ahead with the tools you'd have by then), --opening-demo (opens a blue chest
 /// holding one thing of each quality, two of them better than the chest, and a Heartsong, to preview the opening's
@@ -148,9 +148,11 @@ public partial class Main : Node2D
             GetTree().Quit();
             return;
         }
-        // --achievements: the table to set them up with in Steamworks (API name, name, description, hidden).
+        // --achievements: the table to set them up with in Steamworks (API name, name, description, hidden); with
+        // --lang=CODE, in that language, for Steamworks' translations of them.
         if (args.Contains("--achievements"))
         {
+            Localization.Apply(lang: Arg(args, "--lang"));
             GD.Print("| API name | Name | Description | Hidden |\n|---|---|---|---|");
             foreach (var a in Achievements.All) GD.Print($"| {a.Key} | {a.Name} | {a.Text} | {(a.Hidden ? "yes" : "")} |");
             GetTree().Quit();
@@ -181,7 +183,7 @@ public partial class Main : Node2D
         // The language first, before anything with words in it is built; Godot's own translation of what controls
         // show is off, since everything shown is translated already (Loc).
         Settings.Load();
-        Localization.Apply(pseudo: args.Contains("--pseudo"));
+        Localization.Apply(pseudo: args.Contains("--pseudo"), lang: Arg(args, "--lang"));
         GetTree().Root.AutoTranslateMode = AutoTranslateModeEnum.Disabled;
         // Files from an older folder, then the settings again in case they came with them.
         CarryOverOldFiles();
@@ -278,6 +280,7 @@ public partial class Main : Node2D
         }
         _shotsDir = Arg(args, "--shots");
         if (_shotsDir != null) DirAccess.MakeDirRecursiveAbsolute(_shotsDir);
+        UiKit.TrackPlacement = _shotsDir != null;
 
         if (args.Contains("--font-sheet")) FontSheet();
         else if (args.Contains("--art-review")) ArtReview();
@@ -669,7 +672,7 @@ public partial class Main : Node2D
     /// <summary>The look of things Godot draws itself, like tooltips: a framed panel and the pixel font.</summary>
     static Theme MakeTheme()
     {
-        var theme = new Theme { DefaultFont = UiKit.Font, DefaultFontSize = 16 };
+        var theme = new Theme { DefaultFont = UiKit.Font, DefaultFontSize = UiKit.SnapFont(16) };
         theme.SetStylebox("panel", "TooltipPanel", UiKit.PanelBox(10));
         theme.SetColor("font_color", "TooltipLabel", Palette.Text);
         return theme;
@@ -989,6 +992,7 @@ public partial class Main : Node2D
         if (_shotsDir == null) return;
         if (delay > 0) await ToSignal(GetTree().CreateTimer(delay, true, false, true), SceneTreeTimer.SignalName.Timeout);
         await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+        Debug.Overflow.Scan(GetTree().Root, name);
         string path = $"{_shotsDir}/{name}.png";
         if (FileAccess.FileExists(path)) return; // keep the first occurrence of each moment
         GetViewport().GetTexture().GetImage().SavePng(path);

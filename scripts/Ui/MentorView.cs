@@ -60,7 +60,9 @@ public partial class MentorView : Control
         AddChild(_text);
         _more = UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(104, H - 26, W - 116, 20);
         AddChild(_more);
-        _skip = UiKit.MakeButton(Loc.T("Skip lesson"), Palette.Muted, 16, () => LessonSkipped?.Invoke()).Place(W - 132, -30, 132, 30);
+        string skip = Loc.T("Skip lesson");
+        float skipW = Mathf.Max(132, UiKit.TextWidth(skip) + 24);
+        _skip = UiKit.MakeButton(skip, Palette.Muted, 16, () => LessonSkipped?.Invoke()).Place(W - skipW, -30, skipW, 30);
         _skip.Visible = false;
         AddChild(_skip);
         GuiInput += e =>
@@ -165,23 +167,36 @@ public partial class MentorView : Control
         _showingTip = !_lesson;
         Visible = true;
         _text.Text = text;
-        Fit(text);
+        Fit();
         UpdateMore();
         Scale = new Vector2(0.96f, 0.9f);
         CreateTween().TweenProperty(this, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back);
         Main.Instance.Sfx.Play("blip", 0.8f, -10);
     }
 
-    /// <summary>Grows the box upward (its bottom edge stays put) when the text needs more than four lines.</summary>
-    void Fit(string text)
+    /// <summary>
+    /// Grows the box upward (its bottom edge stays put) when the text needs more than four lines: as many lines as the
+    /// label itself breaks it into (a font's own measure breaks a little later, and a longer language shows it).
+    /// </summary>
+    void Fit()
     {
-        float textHeight = UiKit.Font.GetMultilineStringSize(text, HorizontalAlignment.Left, W - 116, 16).Y;
+        // Broken into lines the way the label breaks them (at words, a few pixels inside its width), then measured.
+        var paragraph = new TextParagraph
+        {
+            Width = W - 116 - 6,
+            BreakFlags = TextServer.LineBreakFlag.Mandatory | TextServer.LineBreakFlag.WordBound | TextServer.LineBreakFlag.Adaptive,
+        };
+        int size = UiKit.SnapFont(16);
+        paragraph.AddString(_text.Text, UiKit.Font, size);
+        int lines = Mathf.Max(1, paragraph.GetLineCount());
+        float textHeight = lines * (UiKit.Font.GetHeight(size) + _text.GetThemeConstant("line_spacing"));
         float h = Mathf.Max(H, Mathf.Ceil(textHeight) + 48);
         Size = new Vector2(W, h);
         Position = new Vector2(Position.X, _bottom - h);
         PivotOffset = new Vector2(0, h);
         _panel.Size = new Vector2(W, h);
         _text.Size = new Vector2(W - 116, h - 30);
+        UiKit.Resized(_text);
         _more.Position = new Vector2(104, h - 26);
     }
 

@@ -157,7 +157,7 @@ public sealed partial class GameState
         if (seller.Packhorse) terms.Add(Loc.T("On a skittish mare: no hard shake."));
         else if (EventIs("mourning") && CanShakeHard) terms.Add(Loc.T("A day of mourning: no hard shake."));
         if (seller.ShakeFee > 0) terms.Add(Loc.T($"Each strength you try after the first puts the price up {Synergies.Pct(seller.ShakeFee)}."));
-        if (seller.Wager > 0) terms.Add(Loc.T("Read it exactly right and he gives back a third of the price."));
+        if (seller.Wager > 0) terms.Add(Loc.T("Read it exactly right and she gives back a third of the price."));
         if (seller.Heirloom is Category heirloom) terms.Add(Loc.T($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g."));
         if (seller.TakesDearest) terms.Add(Loc.T("The dearest thing inside is his."));
         if (seller.SlipPrice) terms.Add(Loc.T("His price is your slip: exactly right, a quarter off; wrong, what it holds and a quarter more."));

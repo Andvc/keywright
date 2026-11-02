@@ -308,6 +308,25 @@ public static class Categories
     };
 
     /// <summary>What a kind of thing echoes like, to a bat's ears (Skrae's): round coin, long weapons, soft cloaks...</summary>
+    /// <summary>
+    /// Skrae's echoes of so many of a kind ("two round"), counted as the player's language counts them: one text a
+    /// kind, with its plural, so a translation can make the word agree with the number.
+    /// </summary>
+    public static string Echoes(Category kind, int n)
+    {
+        string count = Sellers.Number(n);
+        return kind switch
+        {
+            Category.Coins => Loc.Plural(n, $"{count} round", $"{count} round"),
+            Category.Arms => Loc.Plural(n, $"{count} long", $"{count} long"),
+            Category.Garb => Loc.Plural(n, $"{count} soft", $"{count} soft"),
+            Category.Potions => Loc.Plural(n, $"{count} hollow", $"{count} hollow"),
+            Category.Scrolls => Loc.Plural(n, $"{count} flat", $"{count} flat"),
+            Category.Gems => Loc.Plural(n, $"{count} tiny", $"{count} tiny"),
+            _ => $"{count} {Shape(kind)}", // Heartsongs make no echo (Market.MakeClue leaves them out)
+        };
+    }
+
     public static string Shape(Category kind) => kind switch
     {
         Category.Coins => Loc.T("round"),

@@ -98,17 +98,22 @@ public static class Localization
         }
     }
 
-    /// <summary>Sets the game in the chosen language: called once, at start-up, before anything's built.</summary>
-    public static void Apply(bool pseudo = false)
+    /// <summary>
+    /// Sets the game in the chosen language: called once, at start-up, before anything's built. <paramref name="lang"/>
+    /// (--lang=CODE) plays in a language for this run only, for testing: its fonts even without a translation yet.
+    /// </summary>
+    public static void Apply(bool pseudo = false, string lang = null)
     {
         Load();
-        string code = pseudo ? PseudoCode : Chosen;
+        string code = pseudo ? PseudoCode : !string.IsNullOrEmpty(lang) ? lang : Chosen;
         Current = code;
-        bool translated = code != "en" && code != PseudoCode;
+        bool translated = code != "en" && code != PseudoCode && Available.Contains(code);
         TranslationServer.SetLocale(translated ? code : "en");
         Loc.Lookup = translated ? text => TranslationServer.Translate(text).ToString() : null;
         Loc.PluralLookup = translated ? (one, many, n) => TranslationServer.TranslatePlural(one, many, n).ToString() : null;
         Loc.Pseudo = code == PseudoCode;
+        // In the log, for a bug report (and CI's check that an exported game carries its translations).
+        GD.Print($"Languages: {string.Join(", ", Available)}; playing in {(translated ? code : Loc.Pseudo ? "pseudo" : "en")}");
         var culture = Culture(translated ? code : "en");
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
@@ -130,20 +135,64 @@ public static class Localization
         }
     }
 
+    /// <summary>The languages written in Fusion Pixel 12px (OFL), cut down for each by tools/fonts.py.</summary>
+    static readonly HashSet<string> Cjk = new() { "ja", "zh_CN", "zh_TW" };
+
+    /// <summary>
+    /// The font everything's written in: Kenney Mini, on an 8px grid, for English and the languages of western Europe
+    /// (with oe, the en dash and French's no-break spaces added by tools/fonts.py), and Fusion Pixel, on a 12px grid,
+    /// for Japanese and Chinese (Latin letters and digits too, so a line keeps one look).
+    /// </summary>
+    public static Font MainFont { get; private set; }
+
+    /// <summary>The main font's pixel grid: it's shown at whole multiples of it (<see cref="UiKit.SnapFont"/>).</summary>
+    public static int Grid { get; private set; } = 8;
+
     /// <summary>
     /// Kenney Mini has ASCII and Latin-1 (enough for English and western Europe); Galmuri 9 (OFL) has the rest of Latin,
-    /// Cyrillic, Greek, Hangul, kana and the Japanese kanji, without smoothing so it stays pixel art beside it; and the
-    /// computer's own fonts anything else (Simplified Chinese wants a font of its own: see docs/release.md).
+    /// Cyrillic, Greek, Hangul, kana and the Japanese kanji, without smoothing so it stays pixel art beside it; Fusion
+    /// Pixel (OFL) Japanese and Chinese, as the main font in those languages and the last fallback in the others (the
+    /// language list names Simplified Chinese in it); and the computer's own fonts anything else.
     /// </summary>
     static void SetUpFont()
     {
-        const string fallback = "res://assets/fonts/galmuri9.ttf";
-        if (UiKit.Font is not FontFile kenney || !ResourceLoader.Exists(fallback)) return;
-        var galmuri = GD.Load<FontFile>(fallback);
-        galmuri.Antialiasing = TextServer.FontAntialiasing.None;
-        galmuri.Hinting = TextServer.Hinting.None;
-        galmuri.SubpixelPositioning = TextServer.SubpixelPositioning.Disabled;
-        galmuri.AllowSystemFallback = true;
-        kenney.Fallbacks = new Godot.Collections.Array<Font> { galmuri };
+        var fonts = FontsFor(Current);
+        if (fonts.Count == 0) return;
+        fonts[0].Fallbacks = new Godot.Collections.Array<Font>(fonts.Skip(1));
+        MainFont = fonts[0];
+        Grid = Cjk.Contains(Current) && fonts[0].ResourcePath.Contains("fusion") ? 12 : 8;
+        // The game's controls hang under Node2Ds and canvas layers, which don't pass a window's theme on: they take
+        // their font from Godot's default theme, which the project setting fills with Kenney Mini.
+        ThemeDB.FallbackFont = MainFont;
+        ThemeDB.FallbackFontSize = UiKit.SnapFont(16);
+        var theme = ThemeDB.GetDefaultTheme();
+        theme.DefaultFont = MainFont;
+        theme.DefaultFontSize = UiKit.SnapFont(16);
+    }
+
+    /// <summary>
+    /// A language's fonts, main font first and then what it falls back to: Fusion Pixel's cut for the language, Kenney
+    /// Mini and Galmuri in Japanese and Chinese; Kenney Mini, Galmuri and Fusion Pixel's Simplified Chinese in the rest.
+    /// </summary>
+    public static List<FontFile> FontsFor(string code)
+    {
+        var kenney = PixelFont("res://assets/fonts/kenney_mini.ttf");
+        var galmuri = PixelFont("res://assets/fonts/galmuri9.ttf");
+        var fusion = PixelFont($"res://assets/fonts/fusion_pixel_12_{(Cjk.Contains(code) ? code : "zh_CN")}.ttf");
+        var order = Cjk.Contains(code) && fusion != null ? new[] { fusion, kenney, galmuri } : new[] { kenney, galmuri, fusion };
+        return order.Where(f => f != null).ToList();
+    }
+
+    /// <summary>A pixel font, drawn without smoothing so its pixels stay square (null if it isn't there).</summary>
+    static FontFile PixelFont(string path)
+    {
+        if (!ResourceLoader.Exists(path)) return null;
+        var font = GD.Load<FontFile>(path);
+        font.Antialiasing = TextServer.FontAntialiasing.None;
+        font.Hinting = TextServer.Hinting.None;
+        font.SubpixelPositioning = TextServer.SubpixelPositioning.Disabled;
+        font.GenerateMipmaps = false;
+        font.AllowSystemFallback = true;
+        return font;
     }
 }

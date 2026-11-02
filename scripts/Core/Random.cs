@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Keywright.Core;
@@ -30,5 +31,24 @@ public static class Money
     public static int Round(float value) => value <= 30 ? Math.Max(1, (int)MathF.Round(value)) : (int)MathF.Round(value / 5f) * 5;
 
     /// <summary>A sum as people say it ("12 gold", "45,000 gold"): the interface writes "45000g", but nobody talks like that.</summary>
-    public static string Say(int amount) => amount == 1 ? Loc.T("one coin") : Loc.T($"{amount.ToString("N0", System.Globalization.CultureInfo.InvariantCulture)} gold");
+    /// <summary>A sum as the interface writes it: "45000g" in English, "45000 po", "45000G", "45000金".</summary>
+    public static string Short(int amount) => Loc.T($"{amount}g");
+
+    public static string Say(int amount) => amount == 1 ? Loc.T("one coin") : Loc.T($"{amount.ToString("N0", System.Globalization.CultureInfo.CurrentCulture)} gold");
+}
+
+/// <summary>Words joined the way the player's language joins them.</summary>
+public static class Words
+{
+    /// <summary>
+    /// A list as the language writes one: "coin, gems, spells" in English, "硬貨、宝石、呪文" in Japanese (the
+    /// translators' "{0}, {1}").
+    /// </summary>
+    public static string List(IEnumerable<string> items)
+    {
+        string result = null;
+        foreach (string item in items)
+            result = result == null ? item : Loc.T($"{result}, {item}");
+        return result ?? "";
+    }
 }

@@ -36,6 +36,12 @@ The license doesn't require attribution; it's given here because Kenney made the
 **Galmuri 9** by Lee Minseo ([quiple/galmuri](https://github.com/quiple/galmuri)), under the
 [SIL Open Font License 1.1](assets/fonts/galmuri-OFL.txt): the letters Kenney Mini hasn't got (the rest of Latin,
 Cyrillic, Greek, Hangul, kana and the Japanese kanji), for translations.
+
+**Fusion Pixel 12px** by TakWolf ([TakWolf/fusion-pixel-font](https://github.com/TakWolf/fusion-pixel-font), release
+2026.10.25), under the [SIL Open Font License 1.1](assets/fonts/fusion-pixel-OFL.txt), with glyphs from Ark Pixel,
+Cubic 11 and Galmuri (their licences are in the same file): the font for Japanese, Simplified and Traditional Chinese,
+cut down to each language's standard character set by `tools/fonts.py`. Kenney Mini has oe, the en dash and the
+no-break spaces French needs added by the same script.
 `tools/import_art.py` records exactly which source file each sound in `assets/audio/` came from.
 
 Earlier versions (up to 0.15) used pixel art from Pixel-boy's CC0
