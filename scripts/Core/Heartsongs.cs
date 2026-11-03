@@ -37,9 +37,10 @@ public static class Heartsongs
 {
     /// <summary>
     /// The chance any chest a seller brings holds one (--heartsongs=N sets it, for screenshots): about a third of a
-    /// Heartsong a run, careful or not (0.22; 0.21's 0.7% was nearly one a run).
+    /// Heartsong a run while the debt lasts, careful or not (0.22; 0.21's 0.7% was nearly one a run). 0.30's longer
+    /// season brings more chests, and 0.22's 0.24% found half a Heartsong a run in it.
     /// </summary>
-    public static float Chance { get; set; } = 0.0024f;
+    public static float Chance { get; set; } = 0.0016f;
 
     /// <summary>Each Heartsong taken in this run makes the next this much as likely (a quarter: three-quarters less).</summary>
     public const float Fade = 0.25f;

@@ -583,7 +583,7 @@ public static class Sellers
         new()
         {
             Key = "brandt", Look = "aldous", Name = Loc.T("Quartermaster Brandt"), Short = Loc.T("Brandt"), Tier = 2, Judge = Judgment.Weight, States = Clue.Pounds,
-            Visits = 0.6f, Markup = (0.95f, 1.1f), Colours = Village, Of = Faction.Wardens, From = new[] { ("unclaimed", 1f) }, Comes = s => s.Friend(Faction.Wardens),
+            Visits = 0.6f, Markup = (1.0f, 1.15f), Colours = Village, Of = Faction.Wardens, From = new[] { ("unclaimed", 1f) }, Comes = s => s.Friend(Faction.Wardens),
             Wants = Loc.T("The Wardens' store emptied, and the money in the widows' fund."),
             Stories = Tell(("unclaimed", new[] { Loc.T("Taken off a thief a year and a day ago, and nobody's claimed it. The Wardens' tariff is by the pound: {pounds}, so {price}."),
                                                  Loc.T("Unclaimed, a year and a day: it's the Crown's to sell now. {pounds} on the toll scale, at the tariff: {price}.") })),
@@ -734,7 +734,7 @@ public static class Sellers
         {
             // 0.30: luck and hoards stop at purple (gold is rare), so Tick's purple chests can't come out better: more of
             // them are blue, which can, and he asks less over the colour (1.35-1.65 when a step better from purple was gold).
-            Key = "tick", Look = "vexis", Name = Loc.T("Tick"), Short = Loc.T("Tick"), Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.3f, Markup = (1.0f, 1.2f),
+            Key = "tick", Look = "vexis", Name = Loc.T("Tick"), Short = Loc.T("Tick"), Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.3f, Markup = (1.05f, 1.25f),
             Colours = new[] { 0, 0, 0.6f, 0.4f },
             From = new[] { ("gate", 1f) },
             Wants = Loc.T("Errands run, gold gone down the Gate, and one day off in three hundred years."),

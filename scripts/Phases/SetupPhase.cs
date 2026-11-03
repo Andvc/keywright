@@ -13,7 +13,7 @@ namespace Keywright.Phases;
 /// </summary>
 public partial class SetupPhase : Phase
 {
-    const float CardW = 270, CardH = 288, CardGap = 20, CardsX = 70, CardsY = 70, DetailsY = CardsY + CardH + 12, DetailsH = 644 - DetailsY;
+    const float CardW = 270, CardH = 298, CardGap = 20, CardsX = 70, CardsY = 70, DetailsY = CardsY + CardH + 12, DetailsH = 644 - DetailsY;
 
     Node2D _board;
     string _character;

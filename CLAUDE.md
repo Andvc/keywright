@@ -135,7 +135,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the second. Clicking whoever's at the counter (or the notebook button, or N) opens the notebook on their page, framed
   (`Visit.LookedUp`); Mother Sorrel's lesson teaches it (the `lookup` tip for the others).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
-  run (v22), in any seller's chest (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
+  run while the debt lasts (v22; 0.30's longer season at 0.16% a chest, `--sim=songcount`), in any seller's chest
+  (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
   it: no seller ever hears one, `SellerDef.Notices`); each one kept makes the next a quarter as likely (`Heartsongs.Fade`,
   `GameState.SongsKept`). Each sings its own synth song (`Sfx` "song_{key}"), at the gentlest shake, never drowned or
   stilled; worth nothing in gold (`Heartsongs.BaseValue` 0: never sold, never priced, never pawned). Its reveal

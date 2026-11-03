@@ -2150,9 +2150,9 @@ msgstr ""
 
 #: scripts/Core/Hints.cs:23
 msgid ""
-"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, a coin for every point of exhibition. Just remember the Guild won't take your collection in pawn on a short night."
+"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, {0}g for every {1} points of exhibition. Just remember the Guild won't take your collection in pawn on a short night."
 msgstr ""
-"イゾルデ、お前の陳列棚は初日からあるぞ。気に入った物は手元に残せ。見物客が毎晩入口で、展示点1につき硬貨一枚払ってくれる。ただし上納金が足りない夜でも、ギルドはお前のコレクションを質に取ってくれんからな。"
+"イゾルデ、お前の陳列棚は初日からあるぞ。気に入った物は手元に残せ。見物客が毎晩入口で、展示点{1}につき{0}G払ってくれる。ただし上納金が足りない夜でも、ギルドはお前のコレクションを質に取ってくれんからな。"
 
 #: scripts/Core/Hints.cs:25
 msgid ""
@@ -3645,8 +3645,8 @@ msgstr "最初から陳列棚がある：ブラムの露店で品を{0}点陳列
 
 #: scripts/Core/Meta.cs:47
 msgid ""
-"Visitors pay to see her collection: every night, {0}g per point of exhibition (more in a grander shop)."
-msgstr "見物客がコレクションを見に料金を払う：毎晩、展示点1点につき{0}G（大きな店ほど増える）。"
+"Visitors pay to see her collection: every night, {0}g for every {1} points of exhibition."
+msgstr "見物客がコレクションを見に料金を払う：毎晩、展示点{1}点につき{0}G。"
 
 #: scripts/Core/Meta.cs:48
 msgid ""
@@ -12049,7 +12049,7 @@ msgid "Buy {0}g"
 msgstr "{0}Gで買う"
 
 #: scripts/Phases/CounterPhase.cs:800
-msgid "Exactly right: a quarter off. Wrong: a quarter more."
+msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr "ぴたり的中なら25%引き。外れたら25%増し。"
 
 #: scripts/Phases/CounterPhase.cs:801

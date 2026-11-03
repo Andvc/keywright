@@ -260,7 +260,8 @@ public static partial class TaleBook
             {
                 new()
                 {
-                    Key = "fair.prize", Who = Garrick, Gap = 6,
+                    // Only while the shop's at the crossroads: the county's crowd comes past Brindle's stall, not a shop in Thornwick.
+                    Key = "fair.prize", Who = Garrick, Gap = 6, If = s => s.Tier == 1,
                     Says = s => Say(Garrick,
                         Loc.T("Harvest fair's the day after tomorrow, and the whole county comes. There's a reading contest: a chest nobody's opened, " +
                               "and a prize for whoever reads it right."),

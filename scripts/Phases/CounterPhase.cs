@@ -797,7 +797,7 @@ public partial class CounterPhase : Phase
         bool odds = priced && !_visit.Seller.SlipPrice && _visit.Seller.Gaze <= 0;
         _chanceShown = odds ? _slip.ChanceAbove(price) : -1;
         int waiting = State.Queue.Count;
-        _chanceText.Text = _visit.Seller.SlipPrice && !bought ? Loc.T("Exactly right: a quarter off. Wrong: a quarter more.")
+        _chanceText.Text = _visit.Seller.SlipPrice && !bought ? Loc.T("Exact: a quarter off. Wrong: a quarter more.")
             : _visit.Seller.Gaze > 0 && !bought ? waiting == 0 ? Loc.T("One coin, and nobody's waiting.") : Loc.T($"One coin. And {waiting} still waiting, at x{_visit.Seller.Gaze:0.#}.")
             : worth == 0 && !_shake.HeardAnything && _hearing.HasTried(Core.Shake.Hard, false) && _hearing.HasTried(Core.Shake.Gentle, false)
                 ? Loc.T("Not a sound: empty, as far as you can tell.")
@@ -846,7 +846,21 @@ public partial class CounterPhase : Phase
     void Note(string line)
     {
         _noteLines.Add(line);
-        _notes.Text = string.Join("\n", _noteLines.TakeLast(3));
+        ShowNotes();
+    }
+
+    /// <summary>
+    /// The last three notes under the chest, or as many of them as fit its box: a long riddle, in French, takes two lines
+    /// of its own.
+    /// </summary>
+    void ShowNotes()
+    {
+        for (int n = Math.Min(3, _noteLines.Count); n >= 0; n--)
+        {
+            _notes.Text = string.Join("\n", _noteLines.TakeLast(n));
+            int lines = _notes.GetLineCount();
+            if (n <= 1 || lines * _notes.GetLineHeight() + (lines - 1) * _notes.GetThemeConstant("line_spacing") <= _notes.Size.Y + 8) return;
+        }
     }
 
     void OnHeard(Item item, Shake level)
@@ -1007,7 +1021,7 @@ public partial class CounterPhase : Phase
         {
             if (_visit.PriceNote != null) _noteLines[at] = _visit.PriceNote;
             else _noteLines.RemoveAt(at);
-            _notes.Text = string.Join("\n", _noteLines.TakeLast(3));
+            ShowNotes();
         }
         _priceNote = _visit.PriceNote;
         _seller.Say(line, Palette.Warn);

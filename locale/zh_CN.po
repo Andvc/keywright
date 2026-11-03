@@ -2149,9 +2149,9 @@ msgstr ""
 
 #: scripts/Core/Hints.cs:23
 msgid ""
-"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, a coin for every point of exhibition. Just remember the Guild won't take your collection in pawn on a short night."
+"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, {0}g for every {1} points of exhibition. Just remember the Guild won't take your collection in pawn on a short night."
 msgstr ""
-"伊索尔德，你的展架从第一天起就摆好了。把喜欢的东西留下陈列：每天晚上访客都会在门口付钱，每一展览分一枚金币。只是记住，缴不齐贡金的夜里，公会可不收你的藏品作典当。"
+"伊索尔德，你的展架从第一天起就摆好了。把喜欢的东西留下陈列：每天晚上访客都会在门口付钱，每{1}展览分{0}金。只是记住，缴不齐贡金的夜里，公会可不收你的藏品作典当。"
 
 #: scripts/Core/Hints.cs:25
 msgid ""
@@ -3601,8 +3601,8 @@ msgstr "开局就有展架：在布拉姆的摊位就能陈列{0}件物品。"
 
 #: scripts/Core/Meta.cs:47
 msgid ""
-"Visitors pay to see her collection: every night, {0}g per point of exhibition (more in a grander shop)."
-msgstr "访客付钱参观她的收藏：每晚每点展览分{0}金（店铺越气派，收得越多）。"
+"Visitors pay to see her collection: every night, {0}g for every {1} points of exhibition."
+msgstr "访客付钱参观她的收藏：每晚每{1}点展览分付{0}金。"
 
 #: scripts/Core/Meta.cs:48
 msgid ""
@@ -11900,7 +11900,7 @@ msgid "Buy {0}g"
 msgstr "{0}金买下"
 
 #: scripts/Phases/CounterPhase.cs:800
-msgid "Exactly right: a quarter off. Wrong: a quarter more."
+msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr "全对：减价四分之一。有误：加价四分之一。"
 
 #: scripts/Phases/CounterPhase.cs:801

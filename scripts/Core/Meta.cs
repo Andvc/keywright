@@ -44,7 +44,7 @@ Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloak
             new[]
             {
                 Loc.T($"A shelf from the start: she can display {IsoldeShelf} things at Bram's stall."),
-                Loc.T($"Visitors pay to see her collection: every night, {AdmissionPerPoint}g per point of exhibition (more in a grander shop)."),
+                Loc.T($"Visitors pay to see her collection: every night, {DoorCoins}g for every {DoorPoints} points of exhibition."),
                 Loc.T("Her collection is not for pawning: on a short night, the Guild can only take her curios."),
             }, Loc.T("Open the Crown Chest to unlock."), p => p.Vaults >= 1),
     };
@@ -57,15 +57,16 @@ Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloak
     public const int IsoldeShelf = 2;
 
     /// <summary>
-    /// What Isolde's visitors pay, per exhibition point, every night at the stall; more in a grander shop, but only a
-    /// quarter as fast as the shop grows (<see cref="IsoldeScale"/>). Door money that grew as fast as the shop made her the
-    /// strongest of the kin by far (v18's sim: 62% of runs cleared with no talents, against Kit's 42%; half as fast, 54%);
-    /// flat, the weakest (26%).
+    /// What Isolde's visitors pay, every night: so many coins for every so many points of exhibition, at any shop. Door
+    /// money that grew as fast as the shop made her the strongest of the kin by far (v18's sim: 62% of runs cleared with
+    /// no talents, against Kit's 42%; half as fast, 54%; flat, 26%), so until 0.30 it grew a quarter as fast (a coin a
+    /// point at the stall, five at the Emporium). 0.30's gentler economy left that a coin a point everywhere, and a coin a
+    /// point was worth so much more against its smaller dues that she cleared 81% of runs to Kit's 63%. With Heartsongs
+    /// rarer (Kit 56%): a coin for every two points, 71%; for every three, 49%; two for every five, 51%, a few points
+    /// behind the others at every level. The rate turns how much a careful collector keeps on show, and so the customers
+    /// and finer chests an exhibition brings, which is why a little more is so much more.
     /// </summary>
-    public const int AdmissionPerPoint = 1;
-
-    /// <summary>A quarter of <see cref="ShopTiers.Scale"/>: x1, x1, x2, x5.</summary>
-    public static int IsoldeScale(int tier) => Math.Max(1, ShopTiers.Scale(tier) / 4);
+    public const int DoorCoins = 2, DoorPoints = 5;
 
     /// <summary>What everything weighs, for the ledger and a scale's tooltip.</summary>
     public static string PoundsTable =>

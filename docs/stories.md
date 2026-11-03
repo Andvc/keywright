@@ -342,8 +342,8 @@ paper for the case against the Guild.
 
 ### The Harvest Fair (Brindle, 0.30)
 
-1. **The prize** (Garrick, from day 6): put up the reading contest's prize (half a purse, and two more customers on the
-   fair's day) or not.
+1. **The prize** (Garrick, from day 6, while the shop's still at the stall): put up the reading contest's prize (half a
+   purse, and two more customers on the fair's day) or not.
 2. **The contest** (Garrick, the fair's day): the fair's chest, given for a coin; read it exactly right and the prize is
    yours (a purse if you put it up, half otherwise), commons +1, and Garrick owes you a favour.
 

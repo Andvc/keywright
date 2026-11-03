@@ -105,8 +105,8 @@ public sealed partial class GameState
     // ---- Isolde: a collection that pays its way ----
 
     /// <summary>What Isolde's visitors pay tonight: so much a point of exhibition.</summary>
-    public int Admission => Exhibition * ((Is(Characters.Isolde) ? Characters.AdmissionPerPoint * Characters.IsoldeScale(Tier) : 0) +
-                                          (Shows(Heartsongs.Hearth) ? Heartsongs.HearthPerPoint * ShopTiers.Scale(Tier) : 0));
+    public int Admission => (Is(Characters.Isolde) ? Exhibition * Characters.DoorCoins / Characters.DoorPoints : 0) +
+                            (Shows(Heartsongs.Hearth) ? Exhibition * Heartsongs.HearthPerPoint * ShopTiers.Scale(Tier) : 0);
 
     /// <summary>
     /// Whether this displayed thing can go to the Guild on a short night (never Isolde's, and never a Heartsong: greed

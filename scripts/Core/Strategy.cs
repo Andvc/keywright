@@ -665,7 +665,7 @@ public static class Strategy
     /// </summary>
     static (bool Keep, Item Replace) Collects(GameState state, Item item, int value)
     {
-        if (!item.Displayable || state.DisplaySlots == 0 || value > item.Prestige * Characters.AdmissionPerPoint * Characters.IsoldeScale(state.Tier) * PaybackNights) return (false, null);
+        if (!item.Displayable || state.DisplaySlots == 0 || value > item.Prestige * PaybackNights * Characters.DoorCoins / Characters.DoorPoints) return (false, null);
         Item replace = null;
         if (state.DisplayFull)
         {

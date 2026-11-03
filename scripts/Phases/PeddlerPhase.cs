@@ -220,6 +220,7 @@ public partial class PeddlerPhase : Phase
         // Its rarity in the corner, and what it's for under its name (just the first way of trading on a narrow card).
         card.AddChild(UiKit.MakeLabel(Curios.RarityName(curio.Rarity), 16, color, HorizontalAlignment.Right).Place(CardW - 110, 8, 100, 20));
         string tags = narrow ? Curios.TagName(curio.Tags[0], curio) : Curios.Tags(curio);
+        if (UiKit.TextWidth(tags) > CardW - 8) tags = Curios.TagName(curio.Tags[0], curio);
         card.AddChild(UiKit.MakeLabel(tags, 16, color, HorizontalAlignment.Center).Place(0, 100 + nameH, CardW, 20));
         card.AddChild(UiKit.MakeLabel(curio.Blurb, 16, Palette.Muted, HorizontalAlignment.Center).Wrapped()
             .Place(14, 124 + nameH, CardW - 28, CardH - 84 - 124 - nameH));

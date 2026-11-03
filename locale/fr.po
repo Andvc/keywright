@@ -2278,9 +2278,9 @@ msgstr ""
 
 #: scripts/Core/Hints.cs:23
 msgid ""
-"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, a coin for every point of exhibition. Just remember the Guild won't take your collection in pawn on a short night."
+"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, {0}g for every {1} points of exhibition. Just remember the Guild won't take your collection in pawn on a short night."
 msgstr ""
-"Ton étagère est en place dès le premier jour, Isolde. Garde ce que tu aimes : chaque soir, les visiteurs paient à l'entrée, une pièce par point d'exposition. Souviens-toi seulement que la Guilde ne prendra pas ta collection en gage, même une nuit où l'or manque."
+"Ton étagère est en place dès le premier jour, Isolde. Garde ce que tu aimes : chaque soir, les visiteurs paient à l'entrée, {0} po tous les {1} points d'exposition. Souviens-toi seulement que la Guilde ne prendra pas ta collection en gage, même une nuit où l'or manque."
 
 #: scripts/Core/Hints.cs:25
 msgid ""
@@ -3880,9 +3880,8 @@ msgstr ""
 
 #: scripts/Core/Meta.cs:47
 msgid ""
-"Visitors pay to see her collection: every night, {0}g per point of exhibition (more in a grander shop)."
-msgstr ""
-"Des visiteurs paient pour voir sa collection : chaque soir, {0} po par point d'exposition (davantage dans une boutique plus prestigieuse)."
+"Visitors pay to see her collection: every night, {0}g for every {1} points of exhibition."
+msgstr "Des visiteurs paient pour voir sa collection : chaque soir, {0} po tous les {1} points d'exposition."
 
 #: scripts/Core/Meta.cs:48
 msgid ""
@@ -12939,8 +12938,8 @@ msgid "Buy {0}g"
 msgstr "Payer {0}"
 
 #: scripts/Phases/CounterPhase.cs:800
-msgid "Exactly right: a quarter off. Wrong: a quarter more."
-msgstr "Exact : un quart de remise. Faux : un quart de plus."
+msgid "Exact: a quarter off. Wrong: a quarter more."
+msgstr "Exact : 25 % de remise. Faux : 25 % de plus."
 
 #: scripts/Phases/CounterPhase.cs:801
 msgid "One coin, and nobody's waiting."

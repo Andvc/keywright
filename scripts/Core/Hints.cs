@@ -20,8 +20,8 @@ public static class Hints
                        "what's on the scale: whatever's left over is something you couldn't hear, or something under a false bottom."),
         ["kin_rosa"] = Loc.T("Everybody haggles with you, Rosa, though they open a bit higher, knowing you. Make your offer with the slider. " +
                        "Too low and they'll let you try again, but walk one out of the door and they won't be back this week."),
-        ["kin_isolde"] = Loc.T("Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, a coin " +
-                         "for every point of exhibition. Just remember the Guild won't take your collection in pawn on a short night."),
+        ["kin_isolde"] = Loc.T($"Your shelf's up from the first day, Isolde. Keep what you love: visitors pay at the door every night, " +
+                         $"{Characters.DoorCoins}g for every {Characters.DoorPoints} points of exhibition. Just remember the Guild won't take your collection in pawn on a short night."),
         ["heard_Coins"] = Loc.T("Hear that jingle? Coin. Light things rattle at the gentlest shake. Tick Coin on your slip, there on the right."),
         ["slip"] = Loc.T("Your slip adds up what you've ticked, valued as good as the chest's colour promises. The bar underneath is your " +
                    "odds that it's worth more than the price: the greener, the safer."),
