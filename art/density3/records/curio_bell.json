@@ -1,0 +1,51 @@
+{
+  "id": "curio.bell",
+  "category": "curio",
+  "title": "Closing Bell",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/bell.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_bell_A.png",
+  "original_source_sha256": "a7a528b5aa038ee68176b44739039c77e83416a5ef6d183e507be8c0dbef07fb",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "158faaa33e00df58c863d30f7a149bd9aa67eb47431a8b5637d6d18e6f03eb8c",
+  "colours": 8,
+  "crop": [
+    133,
+    54,
+    1182,
+    1168
+  ],
+  "source_transform": {
+    "scale_x": 0.09342230695900858,
+    "scale_y": 0.0933572710951526,
+    "translate_x": -5.425166825548141,
+    "translate_y": -1.0412926391382404
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "a7a528b5aa038ee68176b44739039c77e83416a5ef6d183e507be8c0dbef07fb",
+  "spec_sha256": "b0d902a776f3ada94e3342aa100dd62bcd0cac7636d76751427445554f9e7834",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

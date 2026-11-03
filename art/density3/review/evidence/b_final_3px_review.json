@@ -1,0 +1,666 @@
+{
+  "reviewer": "face_audit_b",
+  "date": "2026-11-04",
+  "stage": "production 3px facial review, first inspected production version",
+  "scope": "19 assigned figures; face anatomy and expression only",
+  "reviewed_size": "Native physical face crop at the production 1440p display size, plus nearest-neighbour 3x enlargement",
+  "definition": {
+    "pass": "No missing/deformed facial feature or newly leering expression observed at inspected size, considering intentional anatomy/occlusion.",
+    "watch": "A specific weakness remains for revision or user review; not an unconditional approval.",
+    "fix": "A concrete facial feature loss or distortion should be corrected before presenting as a finished candidate."
+  },
+  "counts": {
+    "fix": 2,
+    "watch": 3,
+    "pass": 14
+  },
+  "user_approval": "Pending full user review. This agent report does not authorize upload.",
+  "items": [
+    {
+      "id": "figure.vexis",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\vexis.png",
+      "output_sha256": "166df15f29095d42961e017666dbc03d7adf6c1e91bb55e9b4b396d9d64875eb",
+      "face_bbox_source_pixels": [
+        477,
+        221,
+        771,
+        489
+      ],
+      "face_bbox_output_pixels": [
+        375,
+        821,
+        488,
+        924
+      ],
+      "face_crop_size": [
+        113,
+        103
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_vexis.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_vexis_C.png",
+      "has_face_override": false,
+      "review_verdict": "fix",
+      "review_note_zh": "双眼与鼻部仍可识别，原图小恶魔的调皮神态没有变成露齿奸笑。但原本连续的闭合笑线在采样后大段消失，只剩左侧短点、小白牙和右侧孤点；实际大小下嘴形不完整。",
+      "issue_kind": "sampling",
+      "followup_zh": "保留嘴部一条细而克制的连续弧线和原有小牙，不加粗成大黑咧嘴。",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "vexis_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "166df15f29095d42961e017666dbc03d7adf6c1e91bb55e9b4b396d9d64875eb",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.malbranche",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\malbranche.png",
+      "output_sha256": "2ec039b1397d2ded165df9a3a35cca58418d7a0247da0794e4ed75a583e3c4b1",
+      "face_bbox_source_pixels": [
+        471,
+        93,
+        615,
+        272
+      ],
+      "face_bbox_output_pixels": [
+        349,
+        212,
+        465,
+        354
+      ],
+      "face_crop_size": [
+        116,
+        142
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_malbranche.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_malbranche_B.png",
+      "has_face_override": false,
+      "review_verdict": "watch",
+      "review_note_zh": "双眼窝、鼻腔和颅骨轮廓完整；细牙缝采样后变成碎斑，牙弓尚能识别。骷髅没有人类嘴唇属于设计。",
+      "issue_kind": "sampling",
+      "followup_zh": "用户重点复查牙列是否太碎；如修整，保持单一清楚牙弓，不补人类嘴唇。",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "malbranche_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "2ec039b1397d2ded165df9a3a35cca58418d7a0247da0794e4ed75a583e3c4b1",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.skrae",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\skrae.png",
+      "output_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "face_bbox_source_pixels": [
+        443,
+        202,
+        643,
+        422
+      ],
+      "face_bbox_output_pixels": [
+        315,
+        474,
+        447,
+        619
+      ],
+      "face_crop_size": [
+        132,
+        145
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_skrae.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_skrae_B.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "两只眼睛均有深瞳与浅色眼区，倾斜头部的高低眼关系保留；鼻口和两枚小牙仍可读。未见新畸形或猥琐表情。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "skrae_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.ermine",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\ermine.png",
+      "output_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "face_bbox_source_pixels": [
+        455,
+        138,
+        617,
+        310
+      ],
+      "face_bbox_output_pixels": [
+        336,
+        214,
+        468,
+        355
+      ],
+      "face_crop_size": [
+        132,
+        141
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_ermine.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_ermine_B.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "半垂眼睑、深瞳、鼻和收敛双唇都保留，远侧小眼仍在；矜持神情稳定，没有夸张露齿或异常歪嘴。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "ermine_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.oriel",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\oriel.png",
+      "output_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "face_bbox_source_pixels": [
+        445,
+        127,
+        590,
+        289
+      ],
+      "face_bbox_output_pixels": [
+        344,
+        323,
+        451,
+        442
+      ],
+      "face_crop_size": [
+        107,
+        119
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_oriel.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_oriel_B.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "两眼、鼻、唇位置完整，眼白与深眼区可区分；微笑变简洁但仍自然。鼻部反差较弱，尚不构成五官缺失。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "oriel_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.silas",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\silas.png",
+      "output_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "face_bbox_source_pixels": [
+        420,
+        72,
+        618,
+        275
+      ],
+      "face_bbox_output_pixels": [
+        318,
+        316,
+        459,
+        460
+      ],
+      "face_crop_size": [
+        141,
+        144
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_silas.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\source_overrides\\figure_silas.png",
+      "has_face_override": true,
+      "review_verdict": "pass",
+      "review_note_zh": "已使用修正版源图。较完整的双眼、放松眉形和收敛小笑在 3px 中存活，卷胡子下只露很少金色，没有恢复原来的宽齿笑或油滑半眯眼。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "silas_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.aldo",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\aldo.png",
+      "output_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "face_bbox_source_pixels": [
+        410,
+        63,
+        611,
+        292
+      ],
+      "face_bbox_output_pixels": [
+        320,
+        358,
+        454,
+        510
+      ],
+      "face_crop_size": [
+        134,
+        152
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_aldo.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_aldo_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "双眼、鼻尖及胡须下的收敛嘴线仍可辨；胡须和白色下巴有分层，神情温和，没有新露齿咧嘴。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "aldo_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.maw",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\maw.png",
+      "output_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "face_bbox_source_pixels": [
+        420,
+        101,
+        601,
+        301
+      ],
+      "face_bbox_output_pixels": [
+        305,
+        185,
+        452,
+        347
+      ],
+      "face_crop_size": [
+        147,
+        162
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_maw.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_maw_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "红色双眼、金色面具鼻部和连续牙弓可辨，强烈笑容来自既有恶魔面具造型。细牙有像素简化，但未产生额外眼睛或错位牙弓。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "maw_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.bram",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\bram.png",
+      "output_sha256": "78a3a4f316433dc9c4c6b34a5d21d29a8de423503e51d7a7cdd1d25ea1d4a9bb",
+      "face_bbox_source_pixels": [
+        411,
+        109,
+        622,
+        309
+      ],
+      "face_bbox_output_pixels": [
+        313,
+        371,
+        456,
+        507
+      ],
+      "face_crop_size": [
+        143,
+        136
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_bram.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_bram_B.png",
+      "has_face_override": false,
+      "review_verdict": "watch",
+      "review_note_zh": "双眼和鼻部完整，整体仍温和；胡须下原本很细的嘴线与棕色胡子近乎合并，嘴部清晰度降低，不能直接当作细节完全保住。",
+      "issue_kind": "sampling",
+      "followup_zh": "复查胡须下的嘴缝；需要时仅恢复克制的嘴线，不画大牙口。",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "bram_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "78a3a4f316433dc9c4c6b34a5d21d29a8de423503e51d7a7cdd1d25ea1d4a9bb",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.vane",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\vane.png",
+      "output_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "face_bbox_source_pixels": [
+        429,
+        63,
+        596,
+        246
+      ],
+      "face_bbox_output_pixels": [
+        325,
+        214,
+        455,
+        356
+      ],
+      "face_crop_size": [
+        130,
+        142
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_vane.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_vane_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "两眼仍有独立眼白和深色眼区，鼻和短嘴线完整。脸部阴影变硬但没有无眼脸、扭曲嘴角或猥琐笑。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "vane_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.hood",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hood.png",
+      "output_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "face_bbox_source_pixels": [
+        441,
+        119,
+        604,
+        286
+      ],
+      "face_bbox_output_pixels": [
+        336,
+        344,
+        453,
+        464
+      ],
+      "face_crop_size": [
+        117,
+        120
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_hood.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_hood_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "两处紫色眼光清晰且彼此独立。鼻嘴在兜帽阴影中有意隐藏；没有凭空补造人脸。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "hood_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.nim",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\nim.png",
+      "output_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "face_bbox_source_pixels": [
+        460,
+        104,
+        624,
+        291
+      ],
+      "face_bbox_output_pixels": [
+        363,
+        396,
+        472,
+        520
+      ],
+      "face_crop_size": [
+        109,
+        124
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_nim.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_nim_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "双眼、鼻尖和闭合笑线均保留，嘴角虽有像素阶梯仍读成自然小笑，没有扩大为露齿奸笑。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "nim_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.stranger",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\stranger.png",
+      "output_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "face_bbox_source_pixels": [
+        475,
+        76,
+        640,
+        269
+      ],
+      "face_bbox_output_pixels": [
+        353,
+        211,
+        483,
+        362
+      ],
+      "face_crop_size": [
+        130,
+        151
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_stranger.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_stranger_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "两个浅色眼光仍独立存在，脸部继续藏在兜帽里。没有可见鼻嘴是原有遮挡设计，不能当作生成缺失。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "stranger_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.kit",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\kit.png",
+      "output_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "face_bbox_source_pixels": [
+        456,
+        101,
+        647,
+        284
+      ],
+      "face_bbox_output_pixels": [
+        323,
+        391,
+        450,
+        514
+      ],
+      "face_crop_size": [
+        127,
+        123
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_kit.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_kit_B.png",
+      "has_face_override": false,
+      "review_verdict": "watch",
+      "review_note_zh": "双眼位置及歪头关系正确，鼻口完整，微笑自然；画面左眼的眼白与浅色面部高光混在一起，深眼区几乎成整块，眼白/深瞳分离比原图弱。",
+      "issue_kind": "palette_and_sampling",
+      "followup_zh": "优先保持画面左眼的小片浅眼白与深瞳分离，避免黑眼块；不要强行把倾斜双眼改成等高。",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "kit_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.hesk",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hesk.png",
+      "output_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "face_bbox_source_pixels": [
+        419,
+        96,
+        629,
+        324
+      ],
+      "face_bbox_output_pixels": [
+        336,
+        359,
+        480,
+        514
+      ],
+      "face_crop_size": [
+        144,
+        155
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_hesk.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_hesk_B.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "双眼、鼻及胡须内的嘴部位置均可读，胡须与嘴周皮肤分开。表情温和，没有扭曲成大洞或怪笑。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "hesk_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.rosa",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\rosa.png",
+      "output_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "face_bbox_source_pixels": [
+        431,
+        98,
+        620,
+        290
+      ],
+      "face_bbox_output_pixels": [
+        332,
+        372,
+        460,
+        501
+      ],
+      "face_crop_size": [
+        128,
+        129
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_rosa.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_rosa_A.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "两眼和唇线保留，鼻部简化为低反差色块但仍有明确位置；微笑收敛，没有新增不自然的嘴角或多余五官点。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "rosa_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.isolde",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\isolde.png",
+      "output_sha256": "fbf331c7cb6ea122cd52894c536f30c66dec7658720d8ed03f4d4d8146cd88fe",
+      "face_bbox_source_pixels": [
+        427,
+        89,
+        613,
+        270
+      ],
+      "face_bbox_output_pixels": [
+        328,
+        332,
+        458,
+        459
+      ],
+      "face_crop_size": [
+        130,
+        127
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_isolde.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_isolde_B.png",
+      "has_face_override": false,
+      "review_verdict": "fix",
+      "review_note_zh": "原图人类棕色眼区在成图变成鲜黄色眼块和酒红眼睑，眼白/虹膜/深瞳分离消失，容易读成无瞳黄眼。嘴周高光另形成突兀浅色环，使下半脸比原图变形感更强。",
+      "issue_kind": "palette",
+      "followup_zh": "先恢复自然的人类眼白与深瞳分离，并避免将面部深棕映射为酒红、浅眼区映射为金黄；同时收敛嘴周突兀浅色环。保持原来的小笑与脸型。",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "isolde_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "fbf331c7cb6ea122cd52894c536f30c66dec7658720d8ed03f4d4d8146cd88fe",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.mara",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\mara.png",
+      "output_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "face_bbox_source_pixels": [
+        435,
+        94,
+        618,
+        258
+      ],
+      "face_bbox_output_pixels": [
+        327,
+        345,
+        455,
+        460
+      ],
+      "face_crop_size": [
+        128,
+        115
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_mara.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_mara_B.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "紫色双眼、鼻、嘴均完整，年龄感和克制微笑保留。嘴角少量深点未造成明显扭曲或露齿怪笑。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "mara_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "review_matches_current_file": true
+    },
+    {
+      "id": "figure.king",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\king.png",
+      "output_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "face_bbox_source_pixels": [
+        407,
+        91,
+        608,
+        285
+      ],
+      "face_bbox_output_pixels": [
+        321,
+        334,
+        461,
+        470
+      ],
+      "face_crop_size": [
+        140,
+        136
+      ],
+      "record_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\records\\figure_king.json",
+      "selected_source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_king_B.png",
+      "has_face_override": false,
+      "review_verdict": "pass",
+      "review_note_zh": "眼鼻口与胡须分层完整，神情温和；与 Aldo 的年长男性身份一致，王冠未干扰五官。",
+      "issue_kind": "none",
+      "followup_zh": "",
+      "expression_review": "No newly leering or sleazy expression observed in this inspected version; intentional monster expressions kept contextual.",
+      "inspection_evidence": "king_final_comparison.png",
+      "actual_size_inspected": true,
+      "nearest_3x_detail_inspected": true,
+      "current_file_sha256_at_report_write": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "review_matches_current_file": true
+    }
+  ]
+}

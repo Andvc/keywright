@@ -1,0 +1,51 @@
+{
+  "id": "icon.kind.garb",
+  "category": "icon_kind",
+  "title": "Cloaks",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    16
+  ],
+  "physical_size": [
+    64,
+    64
+  ],
+  "file": "art/density3/assets/kinds/kind_garb.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_kind_garb_A.png",
+  "original_source_sha256": "5c7bfcce732b2d4870e40c69acc3c6348fbb63725aabe106f4dcbc662c9fb0ac",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "52f434ed03903b389676f109d6bf7a0846f62a968765b17fec4607158aefa68c",
+  "colours": 6,
+  "crop": [
+    121,
+    77,
+    1126,
+    1149
+  ],
+  "source_transform": {
+    "scale_x": 0.051741293532338306,
+    "scale_y": 0.05223880597014925,
+    "translate_x": -0.260696517412935,
+    "translate_y": -0.022388059701492935
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "5c7bfcce732b2d4870e40c69acc3c6348fbb63725aabe106f4dcbc662c9fb0ac",
+  "spec_sha256": "6684f5269d0ba1e3e8d48090ef8c999859042d7710d98fd93cba10a65a52955d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "place.stall",
+  "category": "place",
+  "title": "The Brindle crossroads, from Bram's Stall",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/place/stall.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "B",
+  "original_source": "batch9s_c2_4x_no_outline/sources/place_stall_B.png",
+  "original_source_sha256": "18ab57491aa38339d964b2edc932318022ec9cd386133a300178ff8788b92dd7",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c0cb28819a1f929b8ca5650b484ad4a8b9da66e1da68f3a9ea06053dcefc66dc",
+  "colours": 26,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "18ab57491aa38339d964b2edc932318022ec9cd386133a300178ff8788b92dd7",
+  "spec_sha256": "aad75f308bc57928cf795b95aeb135add8a194842e389c34578ae6fae9ef2441",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

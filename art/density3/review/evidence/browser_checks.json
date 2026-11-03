@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "Entry opens complete38-figure gallery",
+      "pass": true
+    },
+    {
+      "check": "Every asset, face, derivative, contact and game image resolves",
+      "pass": true,
+      "data": {
+        "checked": 858,
+        "bad": []
+      }
+    },
+    {
+      "check": "Final, source, pre-fix and UI face comparisons open",
+      "pass": true,
+      "data": {
+        "title": "Isolde",
+        "panels": 5,
+        "open": true
+      }
+    },
+    {
+      "check": "Review status and notes persist with image hash",
+      "pass": true
+    },
+    {
+      "check": "All267 assets are reviewable",
+      "pass": true
+    },
+    {
+      "check": "100% image has true physical dimensions at DPR1",
+      "pass": true,
+      "data": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "check": "100% image compensates DPR2 without inflating grain",
+      "pass": true,
+      "data": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "check": "Ultrawide fullscreen displays centered exact3px game-size image",
+      "pass": true,
+      "data": {
+        "active": true,
+        "width": 2560,
+        "height": 1440,
+        "x": 440,
+        "y": 0
+      }
+    },
+    {
+      "check": "All game captures appear",
+      "pass": true,
+      "data": 66
+    },
+    {
+      "check": "User can open complete copyable review report",
+      "pass": true
+    },
+    {
+      "check": "Export has all IDs/hashes and does not authorize upload",
+      "pass": true
+    },
+    {
+      "check": "No JavaScript runtime errors",
+      "pass": true,
+      "data": []
+    }
+  ],
+  "errors": []
+}

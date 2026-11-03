@@ -1,0 +1,51 @@
+{
+  "id": "emblem.guild",
+  "category": "emblem",
+  "title": "The Gilded Guild's emblem",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/emblems/guild.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/emblem_guild_A.png",
+  "original_source_sha256": "97592f7f84f90e8909ad4058c056193a457bc24a980b226f411d3aa85b73a7ad",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5add0b4486a23de7844a2d7ce5870c2831d05be827e577b80f06514c8ab46d64",
+  "colours": 7,
+  "crop": [
+    102,
+    95,
+    1142,
+    1142
+  ],
+  "source_transform": {
+    "scale_x": 0.08365384615384615,
+    "scale_y": 0.08404966571155682,
+    "translate_x": -4.532692307692308,
+    "translate_y": -3.984718242597899
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "97592f7f84f90e8909ad4058c056193a457bc24a980b226f411d3aa85b73a7ad",
+  "spec_sha256": "cca13b441ff1f0b3a585b9418065b2a8580ae99bf35d3c3ea8828d1320a64b2c",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

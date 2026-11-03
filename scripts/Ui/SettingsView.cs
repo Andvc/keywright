@@ -154,8 +154,11 @@ public partial class SettingsView : Control
         });
         Choice(Loc.T("Screen shake and flashes"), 5, () => Settings.ShakeWord,
             () => Settings.Shake = Settings.Shake >= 1f ? 0.5f : Settings.Shake > 0f ? 0f : 1f);
-        Choice(Loc.T("Outlines"), 6, () => OnOff(Settings.Outlines), ToggleOutlines,
-            Loc.T("A dark outline round everyone and along the counter's edge, so they stand out from the scene."));
+        // The art says whether it's drawn to be outlined (0.31's 3px art isn't: its shapes are colour against colour).
+        bool outlines = ArtTexture.OutlinesAllowed;
+        Choice(Loc.T("Outlines"), 6, () => OnOff(Settings.Outlines && outlines), ToggleOutlines,
+            outlines ? Loc.T("A dark outline round everyone and along the counter's edge, so they stand out from the scene.")
+                : Loc.T("This art style uses colour shapes without outlines."), enabled: outlines);
     }
 
     static Vector2I CurrentSize(Vector2I[] sizes)
@@ -169,6 +172,7 @@ public partial class SettingsView : Control
     /// <summary>Outlines on or off, everywhere on screen at once (the bot's shell demo uses this too).</summary>
     public void ToggleOutlines()
     {
+        if (!ArtTexture.OutlinesAllowed) return;
         Settings.Outlines = !Settings.Outlines;
         UiKit.ShowOutlines(GetTree(), Settings.Outlines);
     }
@@ -309,7 +313,7 @@ public partial class SettingsView : Control
                 Settings.VSync = true;
                 Settings.MaxFps = 0;
                 Settings.Shake = 1f;
-                if (!Settings.Outlines) ToggleOutlines();
+                if (Settings.Outlines) ToggleOutlines();
                 Settings.ApplyDisplay();
                 break;
             case SoundPage:

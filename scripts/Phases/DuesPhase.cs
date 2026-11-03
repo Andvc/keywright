@@ -141,7 +141,7 @@ public partial class DuesPhase : Phase
         int due = State.DueNow;
         bool enough = State.Gold >= due;
         var panel = Put(UiKit.MakePanel(enough ? Palette.Gold.Darkened(0.2f) : Palette.Bad.Darkened(0.2f)).Place(PanelX, 180, PanelW, 200));
-        panel.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
+        panel.AddChild(new TextureRect { Texture = ArtTexture.Load("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(28, 24, 44, 48));
         panel.AddChild(UiKit.MakeLabel(Loc.T("DUE TONIGHT"), 16, Palette.Muted).Place(96, 20, 300, 20));
         panel.AddChild(UiKit.MakeLabel(Money.Short(due), 48, enough ? Palette.Gold : Palette.Bad, outline: 6).Place(96, 38, 400, 56));

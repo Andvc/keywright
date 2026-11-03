@@ -1,0 +1,75 @@
+{
+  "id": "figure.aldous",
+  "category": "figure",
+  "title": "Sir Aldous",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/aldous.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_aldous_B.png",
+  "original_source_sha256": "96d5888abb7e3d6599fef2f6d8650aea5ca5d213152f050c951f5d9a01ea5c31",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466",
+  "colours": 29,
+  "crop": [
+    182,
+    19,
+    826,
+    1514
+  ],
+  "source_transform": {
+    "scale_x": 0.7593167701863354,
+    "scale_y": 0.7598662207357859,
+    "translate_x": 0.8043478260869676,
+    "translate_y": 129.56254180602008
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "96d5888abb7e3d6599fef2f6d8650aea5ca5d213152f050c951f5d9a01ea5c31",
+  "spec_sha256": "37e1f9973d40de2c40bf3a6de260271d36b772ddb956bd76af9f90cd8c91aef8",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          432,
+          314,
+          447,
+          322
+        ],
+        "match_anchor": [
+          420,
+          306,
+          426,
+          312
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "只将鼻孔处衣服红色误映射改为原图支持的暗鼻孔色，避免红斑；嘴部与胡须不动。",
+    "selected_candidate_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 1,
+  "user_approval": "approved"
+}

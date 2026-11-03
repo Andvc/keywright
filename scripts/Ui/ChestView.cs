@@ -101,7 +101,7 @@ public partial class ChestView : Node2D
         PlaceLid();
     }
 
-    Texture2D Load(string part, string skin = null) => GD.Load<Texture2D>($"res://assets/sprites/chest/{skin ?? Skin}_{part}.png");
+    Texture2D Load(string part, string skin = null) => ArtTexture.Load($"res://assets/sprites/chest/{skin ?? Skin}_{part}.png");
 
     void FitLock()
     {

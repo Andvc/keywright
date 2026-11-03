@@ -1,0 +1,51 @@
+{
+  "id": "item.moonstone",
+  "category": "item",
+  "title": "Moonstone",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/moonstone.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "B",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_moonstone_B.png",
+  "original_source_sha256": "a20ca29e9d11c905440c4dedcc1b0a882b7354cb7c7cfae31b1e454733ef4617",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9dbe00ac29c085f4dcc88238362b2c34f31c296182dc497dae40e62c56a28361",
+  "colours": 7,
+  "crop": [
+    112,
+    109,
+    1136,
+    1146
+  ],
+  "source_transform": {
+    "scale_x": 0.115234375,
+    "scale_y": 0.11571841851494696,
+    "translate_x": -7.90625,
+    "translate_y": -8.61330761812922
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "a20ca29e9d11c905440c4dedcc1b0a882b7354cb7c7cfae31b1e454733ef4617",
+  "spec_sha256": "ae68d041f69318d7db375288427d082e8589f0668a5bd65b43399e80e0e512fc",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

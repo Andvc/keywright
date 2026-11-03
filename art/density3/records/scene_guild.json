@@ -1,0 +1,51 @@
+{
+  "id": "scene.guild",
+  "category": "scene",
+  "title": "The Gilded Guild's counting-house",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/scenes/guild.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/scene_guild_C.png",
+  "original_source_sha256": "7958d980e810c1c2c5b2081573cee55a844bd925804f0e9e3c9cc7f76c232861",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "a0a606680eaf28c59b57054de3d46aee1bf2fee71a5c43091a66173a15c0b211",
+  "colours": 14,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "7958d980e810c1c2c5b2081573cee55a844bd925804f0e9e3c9cc7f76c232861",
+  "spec_sha256": "1a10b47849593db62397f5d73d04e92e945fd7b8287b0b9673db10cb375d3f90",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

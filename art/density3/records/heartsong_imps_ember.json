@@ -1,0 +1,51 @@
+{
+  "id": "heartsong.imps_ember",
+  "category": "heartsong",
+  "title": "The Imp's Ember",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/heartsongs/imps_ember.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/heartsong_imps_ember_C.png",
+  "original_source_sha256": "ca2a5e8c03879c65fad5fc1378131c665d7d87d6639a083139aba602a3ee4198",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "15d1920af3c9a8e48b91cf874e476a196a46b5fcd40b2ba304f74d9ea0270f1d",
+  "colours": 15,
+  "crop": [
+    101,
+    66,
+    1158,
+    1194
+  ],
+  "source_transform": {
+    "scale_x": 0.10596026490066225,
+    "scale_y": 0.10638297872340426,
+    "translate_x": -2.701986754966887,
+    "translate_y": -3.0212765957446805
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "ca2a5e8c03879c65fad5fc1378131c665d7d87d6639a083139aba602a3ee4198",
+  "spec_sha256": "b650dc0b3dd0579342fa87cab1526a885f44feedc90fd8611c3836520204b264",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

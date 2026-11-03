@@ -1,0 +1,51 @@
+{
+  "id": "curio.ticket",
+  "category": "curio",
+  "title": "Pawn Ticket",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/ticket.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_ticket_B.png",
+  "original_source_sha256": "16b038b6365cd7dda772781bc6638c3341e3181d1e330b7de86a0b1e8189dd8a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7ae64e33fd8c6f1e98f931f4378f8cc1cbe5f207949f51b6b46d662c6f458c90",
+  "colours": 12,
+  "crop": [
+    107,
+    79,
+    1198,
+    1176
+  ],
+  "source_transform": {
+    "scale_x": 0.09440879926672777,
+    "scale_y": 0.09480401093892434,
+    "translate_x": -6.101741521539871,
+    "translate_y": -3.489516864175023
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "16b038b6365cd7dda772781bc6638c3341e3181d1e330b7de86a0b1e8189dd8a",
+  "spec_sha256": "f93ee9f2045149cffd76abe95d4c2ebddab7e08ad2224b46c3f1d2c78ae933a4",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

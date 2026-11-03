@@ -9,7 +9,7 @@ Sources:
   - Kenney Font Package, Impact Sounds, RPG Audio, Casino Audio, Interface Sounds (CC0, see CREDITS.md)
     https://kenney.nl (mirror: github.com/ETdoFresh/kenney.nl)
 
-Usage: python3 tools/import_art.py [--cache DIR]
+Usage: python3 tools/import_art.py [--cache DIR] [--density-only] [--density-check]
 Requires Pillow. Kenney's packs are cloned (partially) into the cache on first run.
 """
 import argparse
@@ -1043,7 +1043,13 @@ def pixel_icon(rows, name):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--cache", default=os.path.expanduser("~/.cache/keywright-art"))
+    parser.add_argument("--density-only", action="store_true", help="overlay art/density3 without rebuilding Kenney or legacy assets")
+    parser.add_argument("--density-check", action="store_true", help="validate the density overlay and report crops without writing files")
     args = parser.parse_args()
+    from import_density import apply_density
+    if args.density_only or args.density_check:
+        apply_density(ROOT, preserve_existing=True, check_only=args.density_check)
+        return
     os.makedirs(args.cache, exist_ok=True)
 
     kenney = fetch(*KENNEY, args.cache)
@@ -1069,6 +1075,7 @@ def main():
     build_scenes()
     build_ui()
     build_icons()
+    apply_density(ROOT)
 
     for group, files in SOUNDS.items():
         out = os.path.join(ASSETS, "audio", group)

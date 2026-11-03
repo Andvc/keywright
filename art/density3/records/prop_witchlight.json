@@ -1,0 +1,51 @@
+{
+  "id": "prop.witchlight",
+  "category": "prop",
+  "title": "The Witchlight",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    24
+  ],
+  "physical_size": [
+    128,
+    192
+  ],
+  "file": "art/density3/assets/props/witchlight.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_witchlight_B.png",
+  "original_source_sha256": "13770f184265a26b6be6a9c20ba519745c62d496f57efcb20db1e9269be3a985",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "63b16c9f2b16d157ad4a1fd7d3c91fa18727256c08080a6241d433931934b5ea",
+  "colours": 12,
+  "crop": [
+    296,
+    0,
+    954,
+    1212
+  ],
+  "source_transform": {
+    "scale_x": 0.1580547112462006,
+    "scale_y": 0.15841584158415842,
+    "translate_x": -34.78419452887538,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "13770f184265a26b6be6a9c20ba519745c62d496f57efcb20db1e9269be3a985",
+  "spec_sha256": "5523b84aa87462ab8698533487f3b597a89b999b59fdce27a5b47cae68310e64",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

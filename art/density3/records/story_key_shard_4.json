@@ -1,0 +1,53 @@
+{
+  "id": "story.key_shard_4",
+  "category": "story",
+  "title": "Aldric Key shard 4",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    24
+  ],
+  "physical_size": [
+    384,
+    96
+  ],
+  "file": "art/density3/assets/story/key_shard_4.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "derived",
+  "original_source": "batch14_c2_4x_no_outline/sources/story_key_whole_B.png",
+  "original_source_sha256": "61fbb7851510f38ba1c5c734fdb861aa28b3383fbde412aa1ea930923a1b15e9",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "4c74136b79fdd5ad383e85eaca5990afc62015d3db12f047452bf5d74838fe45",
+  "colours": 5,
+  "crop": [
+    57,
+    128,
+    1990,
+    610
+  ],
+  "source_transform": {
+    "scale_x": 0.1826176927056389,
+    "scale_y": 0.1825726141078838,
+    "translate_x": 4.590791515778582,
+    "translate_y": -19.369294605809127
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "61fbb7851510f38ba1c5c734fdb861aa28b3383fbde412aa1ea930923a1b15e9",
+  "spec_sha256": "c0666d197463b06d0a71626ea09beab102a1bf9d9d91c93408c2f3456a11109a",
+  "original_size": [
+    2048,
+    768
+  ],
+  "derived_from": "story.key_whole",
+  "derivation": "Disjoint jagged cuts aligned to complete3px cells; four pieces reconstruct exact RGBA whole.",
+  "user_approval": "approved"
+}

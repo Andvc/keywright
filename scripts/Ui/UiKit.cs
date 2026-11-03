@@ -19,10 +19,10 @@ public static class UiKit
 
     /// <summary>The language's font (<see cref="Localization.MainFont"/>), once the language is set.</summary>
     public static Font Font => _font ??= Localization.MainFont ?? GD.Load<Font>("res://assets/fonts/kenney_mini.ttf");
-    static Texture2D PanelTex => _panel ??= GD.Load<Texture2D>("res://assets/ui/panel.png");
-    static Texture2D FrameTex => _frame ??= GD.Load<Texture2D>("res://assets/ui/frame.png");
-    static Texture2D ButtonTex => _button ??= GD.Load<Texture2D>("res://assets/ui/button.png");
-    static Texture2D ButtonPressedTex => _buttonPressed ??= GD.Load<Texture2D>("res://assets/ui/button_pressed.png");
+    static Texture2D PanelTex => _panel ??= ArtTexture.Load("res://assets/ui/panel.png");
+    static Texture2D FrameTex => _frame ??= ArtTexture.Load("res://assets/ui/frame.png");
+    static Texture2D ButtonTex => _button ??= ArtTexture.Load("res://assets/ui/button.png");
+    static Texture2D ButtonPressedTex => _buttonPressed ??= ArtTexture.Load("res://assets/ui/button_pressed.png");
 
     /// <summary>
     /// Kenney Mini is drawn on an 8px grid, so it's shown at 16, 24, 32...; other sizes render with uneven pixels. In
@@ -199,7 +199,7 @@ public static class UiKit
     {
         var sprite = new Sprite2D
         {
-            Texture = GD.Load<Texture2D>(path),
+            Texture = ArtTexture.Load(path),
             Position = center,
             Scale = Vector2.One * scale,
         };
@@ -223,6 +223,7 @@ public static class UiKit
     {
         foreach (var old in sprite.GetChildren())
             if (old.IsInGroup(Outlines)) old.QueueFree();
+        if (!ArtTexture.OutlinesAllowed) return sprite;
         var ring = new Sprite2D
         {
             Texture = Ring(sprite.Texture, whole),
@@ -240,6 +241,7 @@ public static class UiKit
     /// <summary>Shows or hides every outline on screen, for the Outlines setting.</summary>
     public static void ShowOutlines(SceneTree tree, bool on)
     {
+        on &= ArtTexture.OutlinesAllowed;
         foreach (var node in tree.GetNodesInGroup(Outlines))
             if (node is CanvasItem item) item.Visible = on;
     }
@@ -274,7 +276,7 @@ public static class UiKit
     /// </summary>
     public static Node2D MakeItemIcon(Core.Item item, Vector2 center, float box, bool standing = false)
     {
-        var texture = GD.Load<Texture2D>($"res://assets/sprites/items/icons/{item.Sprite}.png");
+        var texture = ArtTexture.Load($"res://assets/sprites/items/icons/{item.Sprite}.png");
         int scale = Math.Max(1, (int)(box / ThingArt));
         var middle = standing ? new Vector2(0, -texture.GetHeight() * scale / 2f) : Vector2.Zero;
         var icon = new Node2D { Position = center };
@@ -370,7 +372,7 @@ public static class UiKit
     /// <summary>A pixel-framed slider with a gold coin for a grabber (the offer slider, the volume).</summary>
     public static void StyleSlider(HSlider slider)
     {
-        var coin = GD.Load<Texture2D>("res://assets/sprites/items/dwarf_gold_crowns.png");
+        var coin = ArtTexture.Load("res://assets/sprites/items/dwarf_gold_crowns.png");
         var track = new StyleBoxFlat { BgColor = new Color("#120e1a"), BorderColor = Palette.PanelBorder, AntiAliasing = false };
         track.SetBorderWidthAll(3);
         track.SetContentMarginAll(6);
@@ -398,7 +400,7 @@ public static class UiKit
         root.AddChild(new ColorRect { Color = Palette.Bg, MouseFilter = Control.MouseFilterEnum.Ignore }.Place(-120, -120, 1520, 960));
         root.AddChild(new Sprite2D
         {
-            Texture = GD.Load<Texture2D>(path),
+            Texture = ArtTexture.Load(path),
             Centered = false,
             Scale = Vector2.One * 2,
             Modulate = new Color(brightness, brightness, brightness * 1.03f),

@@ -1,0 +1,51 @@
+{
+  "id": "lock.face.rusty",
+  "category": "lock_face",
+  "title": "Lock face: a rusty iron padlock",
+  "status": "produced_approved",
+  "source_size": [
+    160,
+    160
+  ],
+  "physical_size": [
+    640,
+    640
+  ],
+  "file": "art/density3/assets/lockpick/face_rusty.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "15",
+  "candidate": "C",
+  "original_source": "batch15_c2_4x_no_outline/sources/lock_face_rusty_C.png",
+  "original_source_sha256": "05d470c99f83b6faf038205e4bf21c70840a3d10102df48ae398805dee99a5bd",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "189fbdfdb63a7409ac2f579df13672bdd5071e7ed2b9884c5bc5cddd5d4e4303",
+  "colours": 14,
+  "crop": [
+    40,
+    25,
+    1212,
+    1197
+  ],
+  "source_transform": {
+    "scale_x": 0.5460750853242321,
+    "scale_y": 0.5460750853242321,
+    "translate_x": -21.843003412969285,
+    "translate_y": -13.651877133105803
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "05d470c99f83b6faf038205e4bf21c70840a3d10102df48ae398805dee99a5bd",
+  "spec_sha256": "64615db5d8f751fb5cc4b5f93ed231353da7d85eebb26511b8cab7ef826756fe",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

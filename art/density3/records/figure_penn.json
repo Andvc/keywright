@@ -1,0 +1,75 @@
+{
+  "id": "figure.penn",
+  "category": "figure",
+  "title": "Widow Penn",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/penn.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_penn_A.png",
+  "original_source_sha256": "cee1f746260aaa279b38cb99eb68c57e1c26566c203371c7670a112f192e57f4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8",
+  "colours": 26,
+  "crop": [
+    206,
+    36,
+    819,
+    1509
+  ],
+  "source_transform": {
+    "scale_x": 0.6084828711256117,
+    "scale_y": 0.6082824168363883,
+    "translate_x": 71.65252854812398,
+    "translate_y": 362.10183299389
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "cee1f746260aaa279b38cb99eb68c57e1c26566c203371c7670a112f192e57f4",
+  "spec_sha256": "6d3db02c1f571f3fdde57dc5ac2f6abc79d979c154f76a3485217b98d54d6273",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          387,
+          498,
+          430,
+          513
+        ],
+        "match_anchor": [
+          375,
+          485,
+          381,
+          491
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "恢复老人原有闭口微笑的连续弧度；固定调色候选有黄色嘴圈。局部肤色匹配后只保留深于脸颊的原图嘴线，避免亮色矩形底。",
+    "selected_candidate_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 10,
+  "user_approval": "approved"
+}

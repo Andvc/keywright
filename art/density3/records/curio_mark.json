@@ -1,0 +1,51 @@
+{
+  "id": "curio.mark",
+  "category": "curio",
+  "title": "Fence's Mark",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/mark.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_mark_C.png",
+  "original_source_sha256": "b1535b9ed58ff55a133672936958735ba2222e945bb4b7dc964c288a017e24b6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f8621178370e5ff44fa9e71b1e4663eb2a25d31c030755f4bef6ba67da34738d",
+  "colours": 14,
+  "crop": [
+    108,
+    83,
+    1170,
+    1164
+  ],
+  "source_transform": {
+    "scale_x": 0.096045197740113,
+    "scale_y": 0.09620721554116558,
+    "translate_x": -5.372881355932204,
+    "translate_y": -3.9851988899167434
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "b1535b9ed58ff55a133672936958735ba2222e945bb4b7dc964c288a017e24b6",
+  "spec_sha256": "34de828a88f8509f681983c2da1f6079e2a1cc652a700378de31fe161d47e1f2",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "shelf.thornwick",
+  "category": "shelf",
+  "title": "Display shelf at Thornwick Market",
+  "status": "produced_approved",
+  "source_size": [
+    136,
+    40
+  ],
+  "physical_size": [
+    1088,
+    320
+  ],
+  "file": "art/density3/assets/shelf/thornwick.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/shelf_thornwick_B.png",
+  "original_source_sha256": "d5e6c59905a56b2c0fd462aebaa003227ed9477de711e71efb00f9092efd82d8",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "b64881bcf224cca59982bae802ba37e628db3d13c4f6adc18100b4fc7b571121",
+  "colours": 16,
+  "crop": [
+    32,
+    0,
+    1506,
+    578
+  ],
+  "source_transform": {
+    "scale_x": 0.7381275440976933,
+    "scale_y": 0.7387543252595156,
+    "translate_x": -23.620081411126186,
+    "translate_y": -97.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "d5e6c59905a56b2c0fd462aebaa003227ed9477de711e71efb00f9092efd82d8",
+  "spec_sha256": "8e20e869bf2b3351abb44b649e2ea7be4e5774efb2d75f2b07585c372f1a782e",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

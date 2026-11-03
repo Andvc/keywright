@@ -1,0 +1,51 @@
+{
+  "id": "item.summoners_grimoire",
+  "category": "item",
+  "title": "Summoner's Grimoire",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/summoners_grimoire.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_summoners_grimoire_C.png",
+  "original_source_sha256": "58d8db6096f16f4dfbb869baae7d2f0314d3553912a25b43240aa128bd6b42b5",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "699a02a3515961411ac32020bc1b0f3000a3740ba48d3cb43011d3c82972005b",
+  "colours": 9,
+  "crop": [
+    127,
+    24,
+    1159,
+    1206
+  ],
+  "source_transform": {
+    "scale_x": 0.10174418604651163,
+    "scale_y": 0.10152284263959391,
+    "translate_x": -1.9215116279069768,
+    "translate_y": 1.563451776649746
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "58d8db6096f16f4dfbb869baae7d2f0314d3553912a25b43240aa128bd6b42b5",
+  "spec_sha256": "a83ba8c8f6cb340cf74d8b1a6535a662ecebeac80cee024a28dd4bc724005af9",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "curio.horseshoe",
+  "category": "curio",
+  "title": "Horseshoe",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/horseshoe.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_horseshoe_B.png",
+  "original_source_sha256": "b61b4422d302f68ea67842f0ac6d462359b18fc254f52f0bc8f220e2e1acd93a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "63b1b1879cfbd574cc57ee525affec83f2d63fd2fd83f588eb6d9c099f54aa10",
+  "colours": 8,
+  "crop": [
+    100,
+    111,
+    1156,
+    1115
+  ],
+  "source_transform": {
+    "scale_x": 0.09848484848484848,
+    "scale_y": 0.09860557768924302,
+    "translate_x": -5.848484848484848,
+    "translate_y": -4.945219123505977
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "b61b4422d302f68ea67842f0ac6d462359b18fc254f52f0bc8f220e2e1acd93a",
+  "spec_sha256": "a276c22f2c2414f820efaee071682e6d56889ddb3df5467a902d75cab47d386d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

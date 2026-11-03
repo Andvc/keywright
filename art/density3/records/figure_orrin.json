@@ -1,0 +1,51 @@
+{
+  "id": "figure.orrin",
+  "category": "figure",
+  "title": "Archmage Orrin",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/orrin.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_orrin_B.png",
+  "original_source_sha256": "7fc86e91fd58077ab3fbdb8c5af006598108470527d5c5685edb19cfdccc4bc5",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+  "colours": 16,
+  "crop": [
+    182,
+    14,
+    845,
+    1524
+  ],
+  "source_transform": {
+    "scale_x": 0.7737556561085973,
+    "scale_y": 0.7735099337748345,
+    "translate_x": -13.823529411764696,
+    "translate_y": 101.17086092715232
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "7fc86e91fd58077ab3fbdb8c5af006598108470527d5c5685edb19cfdccc4bc5",
+  "spec_sha256": "0e6f6aeb075b4e5ffe93f389abc020cc9165400bbedb9d9cabe88d3d6cbcab65",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

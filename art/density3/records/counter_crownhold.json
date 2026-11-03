@@ -1,0 +1,51 @@
+{
+  "id": "counter.crownhold",
+  "category": "counter",
+  "title": "Counter at Crownhold",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    61
+  ],
+  "physical_size": [
+    2560,
+    488
+  ],
+  "file": "art/density3/assets/counter/crownhold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    1
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/counter_crownhold_B.png",
+  "original_source_sha256": "aee75d6ca4d0a2ebdde666dea24e56f52e6ab86b7c950021e14625081d9519a5",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "324c6f18b6281c1c162201e6115d612adc8760dec04aed37fde0923fb4bea3cc",
+  "colours": 9,
+  "crop": [
+    0,
+    567,
+    1536,
+    1024
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.0678336980306347,
+    "translate_x": 0.0,
+    "translate_y": -605.4617067833698
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 1565,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "aee75d6ca4d0a2ebdde666dea24e56f52e6ab86b7c950021e14625081d9519a5",
+  "spec_sha256": "ab346545b506dd49ad3753db2a3da6299c4fd3b56514dee89bfcb9acee6561b0",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

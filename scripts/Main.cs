@@ -283,6 +283,7 @@ public partial class Main : Node2D
         UiKit.TrackPlacement = _shotsDir != null;
 
         if (args.Contains("--font-sheet")) FontSheet();
+        else if (args.Contains("--density-review") || Arg(args, "--density-review") != null) DensityReview();
         else if (args.Contains("--art-review")) ArtReview();
         else if (args.Contains("--shell-demo")) ShellDemo();
         else if (!direct) ToTitle();
@@ -384,14 +385,18 @@ public partial class Main : Node2D
         await Wait(0.6);
         Moment("13_item_sounds");
         await Wait(0.8);
-        // The Outlines setting at work: off, a look at the scene with the pause menu out of the way, and back on.
-        settings.ToggleOutlines();
-        pause.Visible = false;
-        await Wait(0.4);
-        Moment("13_outlines_off");
-        await Wait(0.5);
-        pause.Visible = true;
-        settings.ToggleOutlines();
+        // The Outlines setting at work, when the art is drawn to be outlined: off, a look at the scene with the pause
+        // menu out of the way, and back on.
+        if (ArtTexture.OutlinesAllowed)
+        {
+            settings.ToggleOutlines();
+            pause.Visible = false;
+            await Wait(0.4);
+            Moment("13_outlines_off");
+            await Wait(0.5);
+            pause.Visible = true;
+            settings.ToggleOutlines();
+        }
         // With GM mode on: its buttons at work (the day can't be skipped during a scene), and the journal it filled.
         if (Settings.Gm)
         {

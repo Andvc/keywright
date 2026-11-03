@@ -1,0 +1,51 @@
+{
+  "id": "item.barrow_silver",
+  "category": "item",
+  "title": "Barrow Silver",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/barrow_silver.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "E",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_barrow_silver_E.png",
+  "original_source_sha256": "9cc25024035b53d3d35106e4d50a6a9f30ef9535bb4336afc7f38455a9c06674",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "4b4b0a85f22e1e5a9073ad27f27d714b9e5a95f9999ccf7e476b0f0bc6423eda",
+  "colours": 6,
+  "crop": [
+    46,
+    159,
+    1216,
+    1152
+  ],
+  "source_transform": {
+    "scale_x": 0.10256410256410256,
+    "scale_y": 0.1027190332326284,
+    "translate_x": -0.7179487179487181,
+    "translate_y": 5.667673716012086
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "9cc25024035b53d3d35106e4d50a6a9f30ef9535bb4336afc7f38455a9c06674",
+  "spec_sha256": "75c71b2a0e4b9f9c64b870d5e56f70c42d322b291adfa8b81d2bdb1b0a9ff51c",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

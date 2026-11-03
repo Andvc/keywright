@@ -1,0 +1,51 @@
+{
+  "id": "item.lichs_tome",
+  "category": "item",
+  "title": "Lich's Tome",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/lichs_tome.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_lichs_tome_C.png",
+  "original_source_sha256": "12683c96a784e574323fe1fd4e110cf9a7f344dab4cb70a352cf9f88cd6b0031",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "aa0339579161907515abf9951d09e8693f72e14527ede838f99cc20d5a7116da",
+  "colours": 16,
+  "crop": [
+    118,
+    38,
+    1147,
+    1220
+  ],
+  "source_transform": {
+    "scale_x": 0.1010689990281827,
+    "scale_y": 0.10152284263959391,
+    "translate_x": 0.07385811467444192,
+    "translate_y": 0.14213197969543145
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "12683c96a784e574323fe1fd4e110cf9a7f344dab4cb70a352cf9f88cd6b0031",
+  "spec_sha256": "a294fee52321cd4718b0ae1483697cba02cb9d1cb8ddf7a79a5ba3579b543084",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

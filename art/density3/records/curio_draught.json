@@ -1,0 +1,51 @@
+{
+  "id": "curio.draught",
+  "category": "curio",
+  "title": "Witch's Draught",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/draught.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_draught_B.png",
+  "original_source_sha256": "67a4c75cbf420307301c40b9861adbc8be7dbaafea4644aca116059da130a2cf",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1c7f063e27d74e3fda61f0f8828c2039f23c463e7b15886e38efc69c4da38675",
+  "colours": 16,
+  "crop": [
+    167,
+    49,
+    1153,
+    1175
+  ],
+  "source_transform": {
+    "scale_x": 0.0922920892494929,
+    "scale_y": 0.09236234458259325,
+    "translate_x": -5.4127789046653145,
+    "translate_y": -0.5257548845470694
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "67a4c75cbf420307301c40b9861adbc8be7dbaafea4644aca116059da130a2cf",
+  "spec_sha256": "451e5ea42d2be696f8c6d9f647d678044dd81f4e5ee57045e755bf66a88fdb63",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

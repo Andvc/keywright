@@ -1,0 +1,1016 @@
+{
+  "written": 364,
+  "skipped": {
+    "retained": 25
+  },
+  "item_crop_adjustments": [
+    {
+      "id": "item.barrow_silver",
+      "preserved_extra_pixels": 42,
+      "legacy_crop": [
+        1,
+        6,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        5,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        25
+      ],
+      "logical_size_after": [
+        31,
+        26
+      ]
+    },
+    {
+      "id": "item.moonsilver_marks",
+      "preserved_extra_pixels": 12,
+      "legacy_crop": [
+        1,
+        6,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        6,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        25
+      ],
+      "logical_size_after": [
+        31,
+        25
+      ]
+    },
+    {
+      "id": "item.dwarf_gold_crowns",
+      "preserved_extra_pixels": 36,
+      "legacy_crop": [
+        1,
+        7,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        6,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        24
+      ],
+      "logical_size_after": [
+        31,
+        25
+      ]
+    },
+    {
+      "id": "item.sunken_sovereigns",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        5,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        5,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        26
+      ],
+      "logical_size_after": [
+        31,
+        26
+      ]
+    },
+    {
+      "id": "item.dragon_gold",
+      "preserved_extra_pixels": 21,
+      "legacy_crop": [
+        3,
+        1,
+        28,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        29,
+        31
+      ],
+      "logical_size_before": [
+        25,
+        30
+      ],
+      "logical_size_after": [
+        26,
+        31
+      ]
+    },
+    {
+      "id": "item.demon_gold",
+      "preserved_extra_pixels": 12,
+      "legacy_crop": [
+        1,
+        11,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        11,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        20
+      ],
+      "logical_size_after": [
+        31,
+        20
+      ]
+    },
+    {
+      "id": "item.goblin_cleaver",
+      "preserved_extra_pixels": 6,
+      "legacy_crop": [
+        1,
+        2,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        2,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        29
+      ],
+      "logical_size_after": [
+        31,
+        29
+      ]
+    },
+    {
+      "id": "item.dwarven_axe",
+      "preserved_extra_pixels": 6,
+      "legacy_crop": [
+        1,
+        2,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        2,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        29
+      ],
+      "logical_size_after": [
+        31,
+        29
+      ]
+    },
+    {
+      "id": "item.wardens_blade",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        1,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        1,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        30
+      ],
+      "logical_size_after": [
+        31,
+        30
+      ]
+    },
+    {
+      "id": "item.flamebrand",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        1,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        30
+      ],
+      "logical_size_after": [
+        31,
+        31
+      ]
+    },
+    {
+      "id": "item.dragonslayer",
+      "preserved_extra_pixels": 12,
+      "legacy_crop": [
+        1,
+        1,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        30
+      ],
+      "logical_size_after": [
+        31,
+        31
+      ]
+    },
+    {
+      "id": "item.wolfskin_cloak",
+      "preserved_extra_pixels": 27,
+      "legacy_crop": [
+        4,
+        1,
+        28,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        29,
+        31
+      ],
+      "logical_size_before": [
+        24,
+        30
+      ],
+      "logical_size_after": [
+        26,
+        31
+      ]
+    },
+    {
+      "id": "item.elven_cloak",
+      "preserved_extra_pixels": 15,
+      "legacy_crop": [
+        2,
+        1,
+        29,
+        31
+      ],
+      "native_crop": [
+        2,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        27,
+        30
+      ],
+      "logical_size_after": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": "item.cloak_of_shadows",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        1,
+        30,
+        31
+      ],
+      "native_crop": [
+        1,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        29,
+        30
+      ],
+      "logical_size_after": [
+        29,
+        31
+      ]
+    },
+    {
+      "id": "item.archmages_mantle",
+      "preserved_extra_pixels": 24,
+      "legacy_crop": [
+        1,
+        1,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        30
+      ],
+      "logical_size_after": [
+        31,
+        31
+      ]
+    },
+    {
+      "id": "item.phoenix_mantle",
+      "preserved_extra_pixels": 18,
+      "legacy_crop": [
+        1,
+        1,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        30
+      ],
+      "logical_size_after": [
+        31,
+        31
+      ]
+    },
+    {
+      "id": "item.healing_draught",
+      "preserved_extra_pixels": 27,
+      "legacy_crop": [
+        4,
+        1,
+        28,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        28,
+        31
+      ],
+      "logical_size_before": [
+        24,
+        30
+      ],
+      "logical_size_after": [
+        25,
+        31
+      ]
+    },
+    {
+      "id": "item.elixir_of_vigour",
+      "preserved_extra_pixels": 132,
+      "legacy_crop": [
+        6,
+        1,
+        25,
+        31
+      ],
+      "native_crop": [
+        6,
+        0,
+        26,
+        31
+      ],
+      "logical_size_before": [
+        19,
+        30
+      ],
+      "logical_size_after": [
+        20,
+        31
+      ]
+    },
+    {
+      "id": "item.invisibility_draught",
+      "preserved_extra_pixels": 21,
+      "legacy_crop": [
+        6,
+        1,
+        26,
+        31
+      ],
+      "native_crop": [
+        6,
+        0,
+        27,
+        31
+      ],
+      "logical_size_before": [
+        20,
+        30
+      ],
+      "logical_size_after": [
+        21,
+        31
+      ]
+    },
+    {
+      "id": "item.mermaids_breath",
+      "preserved_extra_pixels": 27,
+      "legacy_crop": [
+        3,
+        1,
+        28,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        29,
+        31
+      ],
+      "logical_size_before": [
+        25,
+        30
+      ],
+      "logical_size_after": [
+        26,
+        31
+      ]
+    },
+    {
+      "id": "item.ambrosia",
+      "preserved_extra_pixels": 21,
+      "legacy_crop": [
+        5,
+        1,
+        26,
+        31
+      ],
+      "native_crop": [
+        5,
+        0,
+        27,
+        31
+      ],
+      "logical_size_before": [
+        21,
+        30
+      ],
+      "logical_size_after": [
+        22,
+        31
+      ]
+    },
+    {
+      "id": "item.scroll_of_sparks",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        5,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        5,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        26
+      ],
+      "logical_size_after": [
+        31,
+        26
+      ]
+    },
+    {
+      "id": "item.scroll_of_fireball",
+      "preserved_extra_pixels": 30,
+      "legacy_crop": [
+        1,
+        2,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        1,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        29
+      ],
+      "logical_size_after": [
+        31,
+        30
+      ]
+    },
+    {
+      "id": "item.summoners_grimoire",
+      "preserved_extra_pixels": 30,
+      "legacy_crop": [
+        3,
+        1,
+        29,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        26,
+        30
+      ],
+      "logical_size_after": [
+        27,
+        31
+      ]
+    },
+    {
+      "id": "item.lichs_tome",
+      "preserved_extra_pixels": 24,
+      "legacy_crop": [
+        3,
+        1,
+        29,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        26,
+        30
+      ],
+      "logical_size_after": [
+        27,
+        31
+      ]
+    },
+    {
+      "id": "item.keyhold_codex",
+      "preserved_extra_pixels": 114,
+      "legacy_crop": [
+        3,
+        1,
+        28,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        29,
+        31
+      ],
+      "logical_size_before": [
+        25,
+        30
+      ],
+      "logical_size_after": [
+        26,
+        31
+      ]
+    },
+    {
+      "id": "item.sand_case",
+      "preserved_extra_pixels": 24,
+      "legacy_crop": [
+        1,
+        7,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        6,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        24
+      ],
+      "logical_size_after": [
+        31,
+        25
+      ]
+    },
+    {
+      "id": "item.moonstone",
+      "preserved_extra_pixels": 15,
+      "legacy_crop": [
+        1,
+        1,
+        31,
+        31
+      ],
+      "native_crop": [
+        1,
+        0,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        30
+      ],
+      "logical_size_after": [
+        30,
+        31
+      ]
+    },
+    {
+      "id": "item.elfstone",
+      "preserved_extra_pixels": 15,
+      "legacy_crop": [
+        4,
+        1,
+        28,
+        31
+      ],
+      "native_crop": [
+        3,
+        0,
+        28,
+        31
+      ],
+      "logical_size_before": [
+        24,
+        30
+      ],
+      "logical_size_after": [
+        25,
+        31
+      ]
+    },
+    {
+      "id": "item.blood_ruby",
+      "preserved_extra_pixels": 3,
+      "legacy_crop": [
+        1,
+        5,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        5,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        26
+      ],
+      "logical_size_after": [
+        31,
+        26
+      ]
+    },
+    {
+      "id": "item.starstone",
+      "preserved_extra_pixels": 48,
+      "legacy_crop": [
+        1,
+        1,
+        30,
+        31
+      ],
+      "native_crop": [
+        1,
+        0,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        29,
+        30
+      ],
+      "logical_size_after": [
+        30,
+        31
+      ]
+    },
+    {
+      "id": "item.dragons_eye",
+      "preserved_extra_pixels": 15,
+      "legacy_crop": [
+        2,
+        1,
+        29,
+        31
+      ],
+      "native_crop": [
+        2,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        27,
+        30
+      ],
+      "logical_size_after": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": "item.paste_gem",
+      "preserved_extra_pixels": 6,
+      "legacy_crop": [
+        1,
+        6,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        6,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        25
+      ],
+      "logical_size_after": [
+        31,
+        25
+      ]
+    },
+    {
+      "id": "heartsong.lullaby_box",
+      "preserved_extra_pixels": 12,
+      "legacy_crop": [
+        1,
+        3,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        3,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        28
+      ],
+      "logical_size_after": [
+        31,
+        28
+      ]
+    },
+    {
+      "id": "heartsong.shepherds_pipe",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        2,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        2,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        29
+      ],
+      "logical_size_after": [
+        31,
+        29
+      ]
+    },
+    {
+      "id": "heartsong.fey_chimes",
+      "preserved_extra_pixels": 3,
+      "legacy_crop": [
+        2,
+        1,
+        30,
+        31
+      ],
+      "native_crop": [
+        2,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        28,
+        30
+      ],
+      "logical_size_after": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": "heartsong.dragons_egg",
+      "preserved_extra_pixels": 6,
+      "legacy_crop": [
+        1,
+        1,
+        30,
+        31
+      ],
+      "native_crop": [
+        1,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        29,
+        30
+      ],
+      "logical_size_after": [
+        29,
+        31
+      ]
+    },
+    {
+      "id": "heartsong.clockwork_lark",
+      "preserved_extra_pixels": 9,
+      "legacy_crop": [
+        1,
+        1,
+        30,
+        31
+      ],
+      "native_crop": [
+        1,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        29,
+        30
+      ],
+      "logical_size_after": [
+        29,
+        31
+      ]
+    },
+    {
+      "id": "heartsong.hearthstone",
+      "preserved_extra_pixels": 15,
+      "legacy_crop": [
+        1,
+        2,
+        31,
+        31
+      ],
+      "native_crop": [
+        0,
+        2,
+        31,
+        31
+      ],
+      "logical_size_before": [
+        30,
+        29
+      ],
+      "logical_size_after": [
+        31,
+        29
+      ]
+    },
+    {
+      "id": "heartsong.drowned_bell",
+      "preserved_extra_pixels": 6,
+      "legacy_crop": [
+        2,
+        1,
+        30,
+        31
+      ],
+      "native_crop": [
+        2,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        28,
+        30
+      ],
+      "logical_size_after": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": "heartsong.bottled_star",
+      "preserved_extra_pixels": 15,
+      "legacy_crop": [
+        2,
+        1,
+        29,
+        31
+      ],
+      "native_crop": [
+        2,
+        0,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        27,
+        30
+      ],
+      "logical_size_after": [
+        28,
+        31
+      ]
+    },
+    {
+      "id": "heartsong.imps_ember",
+      "preserved_extra_pixels": 6,
+      "legacy_crop": [
+        2,
+        2,
+        30,
+        31
+      ],
+      "native_crop": [
+        2,
+        1,
+        30,
+        31
+      ],
+      "logical_size_before": [
+        28,
+        29
+      ],
+      "logical_size_after": [
+        28,
+        30
+      ]
+    }
+  ]
+}

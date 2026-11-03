@@ -1,0 +1,51 @@
+{
+  "id": "prop.lantern_stall",
+  "category": "prop",
+  "title": "Lantern at the Brindle crossroads (Bram's Stall)",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    24
+  ],
+  "physical_size": [
+    128,
+    192
+  ],
+  "file": "art/density3/assets/props/lantern_stall.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "B",
+  "original_source": "batch9s_c2_4x_no_outline/sources/prop_lantern_stall_B.png",
+  "original_source_sha256": "9aa9946d30ba1210fcee1864e75a44f54777a48b35653efd067835de21ac3b98",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "fcc66b3372e843c24f49a50792d3c7ffa389026fc4af0936b4ef9b2502fa24bd",
+  "colours": 12,
+  "crop": [
+    326,
+    0,
+    931,
+    1192
+  ],
+  "source_transform": {
+    "scale_x": 0.16033057851239668,
+    "scale_y": 0.1610738255033557,
+    "translate_x": -37.267768595041325,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "9aa9946d30ba1210fcee1864e75a44f54777a48b35653efd067835de21ac3b98",
+  "spec_sha256": "698eeb7c8e2c9c856670d3798b9e9f9f125be995473b50b050f3e2f512056c69",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

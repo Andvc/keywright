@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.sign",
+  "category": "icon_upgrade",
+  "title": "Painted Sign",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_sign.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_sign_A.png",
+  "original_source_sha256": "7f76934f9eea9b24fece441071695186a850585475b180d4ee3500aa51b29dd2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6211b896c7c5691b1af52e226c69ab0c1c7a983238bb4fef83a136a9ceb0d96a",
+  "colours": 12,
+  "crop": [
+    122,
+    34,
+    1204,
+    1173
+  ],
+  "source_transform": {
+    "scale_x": 0.07763401109057301,
+    "scale_y": 0.07726075504828797,
+    "translate_x": -3.4713493530499075,
+    "translate_y": 1.373134328358209
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "7f76934f9eea9b24fece441071695186a850585475b180d4ee3500aa51b29dd2",
+  "spec_sha256": "eb93f2d0e854e0b663dbd8dfe83e449ddf853eb15d4da60cbbbfc73236d91556",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

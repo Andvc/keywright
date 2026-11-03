@@ -1,0 +1,88 @@
+{
+  "id": "figure.isolde",
+  "category": "figure",
+  "title": "Isolde",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/isolde.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_isolde_B.png",
+  "original_source_sha256": "3a802faa6a91d70ddc6e5059295a7ccede1dd1a7ae861e118d061334d44b05c4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
+  "colours": 59,
+  "crop": [
+    160,
+    17,
+    852,
+    1518
+  ],
+  "source_transform": {
+    "scale_x": 0.6604046242774566,
+    "scale_y": 0.6608927381745503,
+    "translate_x": 49.33526011560694,
+    "translate_y": 276.76482345103267
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "3a802faa6a91d70ddc6e5059295a7ccede1dd1a7ae861e118d061334d44b05c4",
+  "spec_sha256": "402e492591d2329c8a1422af3facfc8d8a7fe7d559d1c42564a9b1fe15032bd2",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched",
+    "regions": [
+      {
+        "box": [
+          380,
+          360,
+          449,
+          397
+        ],
+        "match_anchor": [
+          370,
+          393,
+          387,
+          408
+        ]
+      },
+      {
+        "box": [
+          390,
+          393,
+          447,
+          437
+        ],
+        "match_anchor": [
+          370,
+          393,
+          387,
+          408
+        ]
+      }
+    ],
+    "reason_zh": "先尝试 palette，但暖肤色映成黄圈；使用源图局部 24 色并以明确脸颊锚点匹配现有肤色，恢复双眼深瞳/浅眼白和收敛双唇。不用 detail，避免加粗眼线或嘴。",
+    "selected_candidate_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 0,
+  "user_approval": "approved"
+}

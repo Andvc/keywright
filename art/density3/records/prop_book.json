@@ -1,0 +1,51 @@
+{
+  "id": "prop.book",
+  "category": "prop",
+  "title": "The Patrons' Book",
+  "status": "produced_approved",
+  "source_size": [
+    22,
+    14
+  ],
+  "physical_size": [
+    176,
+    112
+  ],
+  "file": "art/density3/assets/props/book.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_book_B.png",
+  "original_source_sha256": "3f3a83a70b45100fd454f0bfe4fbffa1f682470842e3c2c6e74ff8b39616e617",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "83357c0844e6618e6a28198c376ec02ed83449a1972f72b306c0a7167204d867",
+  "colours": 12,
+  "crop": [
+    50,
+    46,
+    1734,
+    850
+  ],
+  "source_transform": {
+    "scale_x": 0.10451306413301663,
+    "scale_y": 0.1044776119402985,
+    "translate_x": -5.225653206650831,
+    "translate_y": 23.19402985074627
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "3f3a83a70b45100fd454f0bfe4fbffa1f682470842e3c2c6e74ff8b39616e617",
+  "spec_sha256": "da1b72eba0b58e8fefd7dd21422e718c5edc1ac638f3e1a512e6ca997ff8931c",
+  "original_size": [
+    1782,
+    883
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "figure.fennick",
+  "category": "figure",
+  "title": "Fennick the Smuggler",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/fennick.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_fennick_A.png",
+  "original_source_sha256": "3a34805ce9b5cf5140cc8739cc5dc7e4377846ae86d1bdfac2612af07e3e4de2",
+  "has_face_override": true,
+  "override_name": "figure_fennick.png",
+  "output_sha256": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+  "colours": 15,
+  "crop": [
+    203,
+    21,
+    818,
+    1506
+  ],
+  "source_transform": {
+    "scale_x": 0.7105691056910569,
+    "scale_y": 0.7111111111111111,
+    "translate_x": 20.754471544715443,
+    "translate_y": 209.06666666666666
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "8a49d92accc3bc2d27681051266b92b14e4557d61432c47c617088c218115a76",
+  "spec_sha256": "083898a8276beb520a168809a314b37ec010f4e8f5ee776f4b367353d5143099",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

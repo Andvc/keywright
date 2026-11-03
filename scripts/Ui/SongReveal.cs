@@ -93,7 +93,7 @@ public partial class SongReveal : Node2D
         Game.Flash(red, 0.3f, 0.4f);
         Sfx.Play("rise", 0.7f, -2);
         gather.QueueFree();
-        var texture = GD.Load<Texture2D>($"res://assets/sprites/items/{_song.Sprite}.png");
+        var texture = ArtTexture.Load($"res://assets/sprites/items/{_song.Sprite}.png");
         int scale = Math.Max(1, (int)MathF.Min(110f / texture.GetHeight(), 120f / texture.GetWidth()));
         var raysBack = Fx.Rays(this, Hover, red, 520f, 18, 0.32f);
         var raysFront = Fx.Rays(this, Hover, gold, 380f, 10, 0.22f);

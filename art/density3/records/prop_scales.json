@@ -1,0 +1,51 @@
+{
+  "id": "prop.scales",
+  "category": "prop",
+  "title": "Brass Scales",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    192,
+    192
+  ],
+  "file": "art/density3/assets/props/scales.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_scales_C.png",
+  "original_source_sha256": "cdab39514b5524746b2d2d1f0f52e6686ac5ccb91f8f2854111120b4d962980a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "575f3808939a570c4a23201f60af8c22c74ca143fb6e206f262ce40cb3068d08",
+  "colours": 9,
+  "crop": [
+    28,
+    236,
+    1227,
+    1074
+  ],
+  "source_transform": {
+    "scale_x": 0.16013344453711426,
+    "scale_y": 0.15990453460620524,
+    "translate_x": -4.483736447039199,
+    "translate_y": 20.262529832935563
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "cdab39514b5524746b2d2d1f0f52e6686ac5ccb91f8f2854111120b4d962980a",
+  "spec_sha256": "f8637b857a66c0dedb3ad3dc94da5d4c7ea754a41a6315cb7d6a5cdb1b6ffb23",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

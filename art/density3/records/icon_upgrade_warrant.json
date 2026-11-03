@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.warrant",
+  "category": "icon_upgrade",
+  "title": "Royal Warrant",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_warrant.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_warrant_C.png",
+  "original_source_sha256": "1862ccc04e7b02cb8f3e81ad08925f7bcf5d4f6a3c842f38ccd5aa4474eb8ca0",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "189efbd530a891d6a4a333a60bd5645e6a0729bceb25fa6a7010a6c30e9aef59",
+  "colours": 7,
+  "crop": [
+    106,
+    67,
+    1174,
+    1191
+  ],
+  "source_transform": {
+    "scale_x": 0.07865168539325842,
+    "scale_y": 0.07829181494661921,
+    "translate_x": -2.3370786516853936,
+    "translate_y": -1.2455516014234878
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "1862ccc04e7b02cb8f3e81ad08925f7bcf5d4f6a3c842f38ccd5aa4474eb8ca0",
+  "spec_sha256": "8ac1edfc0ba7645c5876e017149a9a0f8645b20c7fa5d12dace0509bbf970e84",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

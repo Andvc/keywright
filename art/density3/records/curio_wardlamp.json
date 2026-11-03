@@ -1,0 +1,51 @@
+{
+  "id": "curio.wardlamp",
+  "category": "curio",
+  "title": "Warden's Lantern",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/wardlamp.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_wardlamp_A.png",
+  "original_source_sha256": "96d11a1ec7c3863d87dedf30ebbbe112b046d2d7e287cf5b052f1290058f248e",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "2f20100e8b2ff66452a25b89b033734070556ae90cd6f6ade1ef7782e1e59c67",
+  "colours": 12,
+  "crop": [
+    251,
+    54,
+    974,
+    1191
+  ],
+  "source_transform": {
+    "scale_x": 0.0912863070539419,
+    "scale_y": 0.09146877748460862,
+    "translate_x": 0.0871369294605806,
+    "translate_y": -0.9393139841688658
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "96d11a1ec7c3863d87dedf30ebbbe112b046d2d7e287cf5b052f1290058f248e",
+  "spec_sha256": "1e92c44251effe2d803e1635dc009e3a1185c198f8d304d599663386345d1a9e",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

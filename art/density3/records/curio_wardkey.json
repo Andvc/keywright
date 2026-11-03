@@ -1,0 +1,51 @@
+{
+  "id": "curio.wardkey",
+  "category": "curio",
+  "title": "Ward-Key",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/wardkey.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_wardkey_C.png",
+  "original_source_sha256": "efd4d8749e0d6850fafac1d2f656f451597cc99b8ce2a5ed81af224381dcd149",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8732281735685abbadc02b15170d62013f4f03a2231788462a1180ba342c557d",
+  "colours": 5,
+  "crop": [
+    104,
+    59,
+    1168,
+    1196
+  ],
+  "source_transform": {
+    "scale_x": 0.09116541353383459,
+    "scale_y": 0.09146877748460862,
+    "translate_x": -2.481203007518797,
+    "translate_y": -1.3966578715919082
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "efd4d8749e0d6850fafac1d2f656f451597cc99b8ce2a5ed81af224381dcd149",
+  "spec_sha256": "831ecc3a3d7202e3a41bfb37760a7e91a1d29b69d92e38a956f0e16905f9d2ae",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

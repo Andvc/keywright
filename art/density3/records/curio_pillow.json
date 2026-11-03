@@ -1,0 +1,51 @@
+{
+  "id": "curio.pillow",
+  "category": "curio",
+  "title": "Sleeper's Pillow",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/pillow.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_pillow_B.png",
+  "original_source_sha256": "77baff4f21d7895df894f28b76e7677f78b85850f4fe1be5cc161768d10b838e",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1b75acd40a65be6f940e94e502c720dc16669f5061ec5bc3edd7a9ea603c8a61",
+  "colours": 10,
+  "crop": [
+    48,
+    114,
+    1221,
+    1139
+  ],
+  "source_transform": {
+    "scale_x": 0.0886615515771526,
+    "scale_y": 0.08878048780487804,
+    "translate_x": -0.2557544757033252,
+    "translate_y": -0.12097560975609767
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "77baff4f21d7895df894f28b76e7677f78b85850f4fe1be5cc161768d10b838e",
+  "spec_sha256": "c95bf7d399b1c1f621bc1728c739329b3afc4d2c1ae156a3e58d9ddec2a62ee3",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

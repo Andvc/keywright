@@ -1,0 +1,51 @@
+{
+  "id": "scene.bram",
+  "category": "scene",
+  "title": "Bram's back room",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/scenes/bram.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/scene_bram_A.png",
+  "original_source_sha256": "57c43df7a6603553caba92f036e273cc42d0b313efd3c4ccf989e25b899cec98",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9cb056c725d4de3ecce86c18ddfa4d65d69b12d0529b4b94e56a9cfbbb67328a",
+  "colours": 15,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "57c43df7a6603553caba92f036e273cc42d0b313efd3c4ccf989e25b899cec98",
+  "spec_sha256": "03c42c1f96cb2749bc68c76e0ed4c9ef683c06cd06a014997e49cf023f93398f",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

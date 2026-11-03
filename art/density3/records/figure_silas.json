@@ -1,0 +1,51 @@
+{
+  "id": "figure.silas",
+  "category": "figure",
+  "title": "Silas Gilt",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/silas.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_silas_B.png",
+  "original_source_sha256": "acc17bfb18bbe4ffa5cfbbc8cf519a6282c3a1844de9c496e977757575797a14",
+  "has_face_override": true,
+  "override_name": "figure_silas.png",
+  "output_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+  "colours": 19,
+  "crop": [
+    188,
+    25,
+    835,
+    1501
+  ],
+  "source_transform": {
+    "scale_x": 0.6723338485316847,
+    "scale_y": 0.6720867208672087,
+    "translate_x": 39.60123647604328,
+    "translate_y": 271.19783197831975
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "5f311d1a0185009d02471a93e30af46e560f14aff3b694ecf19164545502f0f9",
+  "spec_sha256": "6ad397c881a06bec3201e6b4b41b4c543b0c4328e8417d8ffc3eb59a346bb776",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "curio.lockbox",
+  "category": "curio",
+  "title": "Miser's Lockbox",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/lockbox.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_lockbox_C.png",
+  "original_source_sha256": "4a8469fbf85d8fb37b59996bc7bb17e56bccac56b4607b02ce113e69b862295c",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f4454408398565990918baeef6c08b0443294eb80a9b49891daa6afd21812580",
+  "colours": 11,
+  "crop": [
+    97,
+    110,
+    1182,
+    1166
+  ],
+  "source_transform": {
+    "scale_x": 0.09585253456221199,
+    "scale_y": 0.09564393939393939,
+    "translate_x": -5.297695852534563,
+    "translate_y": -5.520833333333334
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "4a8469fbf85d8fb37b59996bc7bb17e56bccac56b4607b02ce113e69b862295c",
+  "spec_sha256": "162618062c4906e9076d6c691e31a7c3fb772aaa850a6a63c34560f8489edfa0",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

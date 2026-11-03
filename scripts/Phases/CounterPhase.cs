@@ -564,7 +564,7 @@ public partial class CounterPhase : Phase
     void BuildPanel()
     {
         var panel = Add(new Node2D { ZIndex = 10 });
-        panel.AddChild(new Sprite2D { Texture = GD.Load<Texture2D>($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
+        panel.AddChild(new Sprite2D { Texture = ArtTexture.Load($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
         // Clear of the sheet's pin, top left.
         panel.AddChild(UiKit.MakeLabel(Loc.T("YOUR APPRAISAL"), 16, Palette.InkGold).Place(PanelX + 20, 80, 200, 20));
         _notebookButton = UiKit.MakeButton(Loc.T($"Notebook {Controls.Tag(Controls.Notebook)}"), Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);

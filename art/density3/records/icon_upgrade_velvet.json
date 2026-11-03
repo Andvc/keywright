@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.velvet",
+  "category": "icon_upgrade",
+  "title": "Velvet Case",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_velvet.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_velvet_B.png",
+  "original_source_sha256": "48d2f4d8bb2c1c2ff19d2df279128f01d30dd8325b01a4d23deaedfda35c7856",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "80674418d5255330f9af2ca638cb615dc8ec466e259f596adbe29d4c322675d8",
+  "colours": 11,
+  "crop": [
+    156,
+    64,
+    1129,
+    1183
+  ],
+  "source_transform": {
+    "scale_x": 0.07913669064748201,
+    "scale_y": 0.07864164432529044,
+    "translate_x": -3.345323741007194,
+    "translate_y": -1.0330652368185884
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "48d2f4d8bb2c1c2ff19d2df279128f01d30dd8325b01a4d23deaedfda35c7856",
+  "spec_sha256": "50ef5a0c5724d34ffcc3e1ca9ccd1bad96ccaae4ae89a3eea94c5b1ff269dd01",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

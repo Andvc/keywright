@@ -1,0 +1,51 @@
+{
+  "id": "figure.oriel",
+  "category": "figure",
+  "title": "Madame Oriel",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/oriel.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_oriel_B.png",
+  "original_source_sha256": "ffdd1619040272e869ded0c6fae91e2aef6d1d90f6075121625e4635a1026265",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+  "colours": 18,
+  "crop": [
+    184,
+    25,
+    812,
+    1507
+  ],
+  "source_transform": {
+    "scale_x": 0.6910828025477707,
+    "scale_y": 0.6909581646423751,
+    "translate_x": 39.840764331210195,
+    "translate_y": 238.72604588394063
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "ffdd1619040272e869ded0c6fae91e2aef6d1d90f6075121625e4635a1026265",
+  "spec_sha256": "79274e902e8437d2e138e0d664792d717eb972cc5aab97c953280f5ac861904e",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

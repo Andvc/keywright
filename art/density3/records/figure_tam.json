@@ -1,0 +1,55 @@
+{
+  "id": "figure.tam",
+  "category": "figure",
+  "title": "Little Tam",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/tam.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_tam_A.png",
+  "original_source_sha256": "199ede17a45dd1ae68fa42046c913591ee650daf9bf04efe93b8733c0b71bd58",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+  "colours": 14,
+  "crop": [
+    230,
+    26,
+    809,
+    1499
+  ],
+  "source_transform": {
+    "scale_x": 0.45595854922279794,
+    "scale_y": 0.45621181262729127,
+    "translate_x": 147.12953367875647,
+    "translate_y": 596.1384928716905
+  },
+  "recolours": [
+    "#ffb52e=#e1a882",
+    "#e1a882=#bd7e5f",
+    "#f2c14e=#fed5b3"
+  ],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "199ede17a45dd1ae68fa42046c913591ee650daf9bf04efe93b8733c0b71bd58",
+  "spec_sha256": "8c83ef08ea7dd29a5db3208627ac7d95607d6f4ad950392ac07a2f517885945d",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

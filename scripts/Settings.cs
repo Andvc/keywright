@@ -43,7 +43,7 @@ public static class Settings
     public static float Shake { get; set; } = 1f;
 
     /// <summary>The outline round everyone and along the counter's edge (<see cref="Ui.UiKit.Outline"/>).</summary>
-    public static bool Outlines { get; set; } = true;
+    public static bool Outlines { get; set; }
 
     /// <summary>0 to 1: everything, the sound effects, and the Heartsongs' songs.</summary>
     public static float Volume { get; set; } = 0.8f;
@@ -218,7 +218,7 @@ public static class Settings
         VSync = true;
         MaxFps = 0;
         Shake = 1f;
-        Outlines = true;
+        Outlines = false;
         Volume = 0.8f;
         Effects = 1f;
         Songs = 1f;

@@ -10837,88 +10837,88 @@ msgstr ""
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr ""
 
-#: scripts/Main.cs:493
+#: scripts/Main.cs:498
 #, csharp-format
 msgid "Achievement: {0}"
 msgstr ""
 
-#: scripts/Main.cs:598
+#: scripts/Main.cs:603
 #, csharp-format
 msgid "In the purse: {0}g."
 msgstr ""
 
-#: scripts/Main.cs:606
+#: scripts/Main.cs:611
 msgid "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 
-#: scripts/Main.cs:611
+#: scripts/Main.cs:616
 msgid "Not now: finish what's in hand first."
 msgstr ""
 
-#: scripts/Main.cs:725 scripts/Main.cs:888
+#: scripts/Main.cs:730 scripts/Main.cs:893
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr ""
 
-#: scripts/Main.cs:725 scripts/Main.cs:888
+#: scripts/Main.cs:730 scripts/Main.cs:893
 msgid "THE CROWN CHEST"
 msgstr ""
 
-#: scripts/Main.cs:756
+#: scripts/Main.cs:761
 msgid "BRAM'S STALL"
 msgstr ""
 
-#: scripts/Main.cs:756 scripts/Ui/NotebookView.cs:383 scripts/Ui/NotebookView.cs:587
+#: scripts/Main.cs:761 scripts/Ui/NotebookView.cs:383 scripts/Ui/NotebookView.cs:587
 #, csharp-format
 msgid "WEEK {0}"
 msgstr ""
 
-#: scripts/Main.cs:779
+#: scripts/Main.cs:784
 msgid "THE SEASON'S END"
 msgstr ""
 
-#: scripts/Main.cs:794
+#: scripts/Main.cs:799
 msgid "THE GILDED GUILD"
 msgstr ""
 
-#: scripts/Main.cs:797
+#: scripts/Main.cs:802
 msgid "THE ALDRIC KEY"
 msgstr ""
 
-#: scripts/Main.cs:863
+#: scripts/Main.cs:868
 msgid "FREE AND CLEAR"
 msgstr ""
 
-#: scripts/Main.cs:911 scripts/Ui/NotebookView.cs:394
+#: scripts/Main.cs:916 scripts/Ui/NotebookView.cs:394
 #, csharp-format
 msgid "DAY {0}"
 msgstr ""
 
-#: scripts/Main.cs:914
+#: scripts/Main.cs:919
 #, csharp-format
 msgid ", level {0}"
 msgstr ""
 
-#: scripts/Main.cs:915
+#: scripts/Main.cs:920
 #, csharp-format
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr ""
 
-#: scripts/Main.cs:915
+#: scripts/Main.cs:920
 #, csharp-format
 msgid " of {0}"
 msgstr ""
 
-#: scripts/Main.cs:916
+#: scripts/Main.cs:921
 #, csharp-format
 msgid "The Guild comes tonight for {0}g."
 msgstr ""
 
-#: scripts/Main.cs:917
+#: scripts/Main.cs:922
 #, csharp-format
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr ""
 
-#: scripts/Main.cs:924
+#: scripts/Main.cs:929
 #, csharp-format
 msgid "Uncle Bram slipped you {0}g from his secret stash ({1} left)."
 msgstr ""
@@ -13615,142 +13615,146 @@ msgstr ""
 msgid "Screen shake and flashes"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:157
+#: scripts/Ui/SettingsView.cs:159
 msgid "Outlines"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:158
+#: scripts/Ui/SettingsView.cs:160
 msgid "A dark outline round everyone and along the counter's edge, so they stand out from the scene."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:167
+#: scripts/Ui/SettingsView.cs:161
+msgid "This art style uses colour shapes without outlines."
+msgstr ""
+
+#: scripts/Ui/SettingsView.cs:170
 #, csharp-format
 msgid "{0} x {1}"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:178
+#: scripts/Ui/SettingsView.cs:182
 msgid "Volume"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:183
+#: scripts/Ui/SettingsView.cs:187
 msgid "Sound effects"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:188
+#: scripts/Ui/SettingsView.cs:192
 msgid "Heartsongs' songs"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:193
+#: scripts/Ui/SettingsView.cs:197
 msgid "Mute in the background"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:194
+#: scripts/Ui/SettingsView.cs:198
 msgid "Silence while another window has the focus."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:195
+#: scripts/Ui/SettingsView.cs:199
 msgid "Item sounds"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:195
+#: scripts/Ui/SettingsView.cs:199
 msgid "Which sound each kind of thing makes: every one is the sound you'd expect."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:196
+#: scripts/Ui/SettingsView.cs:200
 msgid "Choose..."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:202
+#: scripts/Ui/SettingsView.cs:206
 msgid "Keyboard"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:203
+#: scripts/Ui/SettingsView.cs:207
 msgid "Controller"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:217
+#: scripts/Ui/SettingsView.cs:221
 msgid "Click one, then press the key or button it should be."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:219
+#: scripts/Ui/SettingsView.cs:223
 msgid "Controller pointer speed"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:221
+#: scripts/Ui/SettingsView.cs:225
 msgid "Mouse: click and drag everything. Controller: the left stick moves the pointer, A clicks and drags (grab a chest and shake it with the stick), the D-pad nudges and the right stick scrolls."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:226
+#: scripts/Ui/SettingsView.cs:230
 msgid "(none)"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:232
+#: scripts/Ui/SettingsView.cs:236
 msgid "Press a key..."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:232
+#: scripts/Ui/SettingsView.cs:236
 msgid "Press a button..."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:233
+#: scripts/Ui/SettingsView.cs:237
 msgid "Press the key (Esc to keep the old one)."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:233
+#: scripts/Ui/SettingsView.cs:237
 msgid "Press the button (A and the D-pad are the pointer's)."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:252 scripts/Ui/SettingsView.cs:265
+#: scripts/Ui/SettingsView.cs:256 scripts/Ui/SettingsView.cs:269
 #, csharp-format
 msgid "{0} was for \"{1}\": that has {2} now."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:259
+#: scripts/Ui/SettingsView.cs:263
 msgid "A and the D-pad move and click the pointer: pick another button."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:274
+#: scripts/Ui/SettingsView.cs:278
 msgid "Language"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:274
+#: scripts/Ui/SettingsView.cs:278
 msgid "System"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:279
+#: scripts/Ui/SettingsView.cs:283
 msgid "The language the game is in (System: the computer's own, when the game has it)."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:281
+#: scripts/Ui/SettingsView.cs:285
 #, csharp-format
 msgid "In {0} from the next time the game starts."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:285
+#: scripts/Ui/SettingsView.cs:289
 msgid "Uncle Bram's tips"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:290
+#: scripts/Ui/SettingsView.cs:294
 msgid "Pause in the background"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:291
+#: scripts/Ui/SettingsView.cs:295
 msgid "Opens the menu when another window takes the focus, so a waiting seller's patience doesn't run out."
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:292
+#: scripts/Ui/SettingsView.cs:296
 msgid "Your saves and settings"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:293
+#: scripts/Ui/SettingsView.cs:297
 msgid "Open the folder"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:296
+#: scripts/Ui/SettingsView.cs:300
 msgid "GM mode (for testing)"
 msgstr ""
 
-#: scripts/Ui/SettingsView.cs:297
+#: scripts/Ui/SettingsView.cs:301
 msgid "Puts gold, a skipped day and the whole journal in the pause menu."
 msgstr ""
 

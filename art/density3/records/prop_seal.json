@@ -1,0 +1,51 @@
+{
+  "id": "prop.seal",
+  "category": "prop",
+  "title": "The Royal Seal",
+  "status": "produced_approved",
+  "source_size": [
+    12,
+    20
+  ],
+  "physical_size": [
+    96,
+    160
+  ],
+  "file": "art/density3/assets/props/seal.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_seal_A.png",
+  "original_source_sha256": "77ddc4aff87fbf112e930fb153f34d4e3c6bdfcf48447d004f37d30e060c5cca",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "57a7b6dcb77d79dc6bf5f16bbe07b994b15fe93347110946efa9dd3e044ebccb",
+  "colours": 12,
+  "crop": [
+    304,
+    37,
+    942,
+    1212
+  ],
+  "source_transform": {
+    "scale_x": 0.13636363636363635,
+    "scale_y": 0.13617021276595745,
+    "translate_x": -37.45454545454545,
+    "translate_y": -5.038297872340426
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "77ddc4aff87fbf112e930fb153f34d4e3c6bdfcf48447d004f37d30e060c5cca",
+  "spec_sha256": "c4d86348c9b07665a874dc98b1b62dbcf7e0fba4de0adcb7ecc1b01573c474f1",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

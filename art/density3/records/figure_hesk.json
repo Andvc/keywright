@@ -1,0 +1,51 @@
+{
+  "id": "figure.hesk",
+  "category": "figure",
+  "title": "Hesk",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/hesk.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_hesk_B.png",
+  "original_source_sha256": "ee072e8835b745bea45f6e112eca115ca885f76de87189f48b07b1e3e88528b6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+  "colours": 17,
+  "crop": [
+    106,
+    31,
+    868,
+    1507
+  ],
+  "source_transform": {
+    "scale_x": 0.6509186351706037,
+    "scale_y": 0.6504065040650406,
+    "translate_x": 67.00262467191601,
+    "translate_y": 299.8373983739837
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "ee072e8835b745bea45f6e112eca115ca885f76de87189f48b07b1e3e88528b6",
+  "spec_sha256": "a1e55fae95a9910c01e71ab88bc3bb3696e22cc160d2062e73d12bdf276f6f4b",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

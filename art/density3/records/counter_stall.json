@@ -1,0 +1,51 @@
+{
+  "id": "counter.stall",
+  "category": "counter",
+  "title": "Counter at the Brindle crossroads (Bram's Stall)",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    61
+  ],
+  "physical_size": [
+    2560,
+    488
+  ],
+  "file": "art/density3/assets/counter/stall.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    1
+  ],
+  "batch": "9s",
+  "candidate": "A",
+  "original_source": "batch9s_c2_4x_no_outline/sources/counter_stall_A.png",
+  "original_source_sha256": "be6e020c1290e20ce41606cde5cef8ab99d004e93b31167083ece882e9ece498",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "730c2b89b71ea7c833caf5c2c336637170e9abe9c015c395674e743622175cc5",
+  "colours": 9,
+  "crop": [
+    0,
+    577,
+    1536,
+    1024
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.0917225950782998,
+    "translate_x": 0.0,
+    "translate_y": -629.923937360179
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 1559,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "be6e020c1290e20ce41606cde5cef8ab99d004e93b31167083ece882e9ece498",
+  "spec_sha256": "e74d38b2023aac4e3afd754d275ba70cf1f9a3c0a9027803df8f1ea022466f0c",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

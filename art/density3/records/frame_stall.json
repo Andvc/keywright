@@ -1,0 +1,51 @@
+{
+  "id": "frame.stall",
+  "category": "frame",
+  "title": "The shop's frame at the Brindle crossroads (Bram's Stall)",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/frame/stall.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "B",
+  "original_source": "batch9s_c2_4x_no_outline/sources/frame_stall_B.png",
+  "original_source_sha256": "005cb38b5ca28a5bee2971c6eab8954c4c9858232b633a0826a7873c35678dc3",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d5910fad23caf075f9ccfbbabc75e6ee1b28542325f04c9184aee6dec7b22428",
+  "colours": 15,
+  "crop": [
+    0,
+    0,
+    1536,
+    864
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.6666666666666667,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "005cb38b5ca28a5bee2971c6eab8954c4c9858232b633a0826a7873c35678dc3",
+  "spec_sha256": "fdb7086f6df2ba82ac0b13b10547607c777952ae2503ba951ff7a716b5afa9de",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

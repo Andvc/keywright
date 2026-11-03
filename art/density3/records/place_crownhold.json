@@ -1,0 +1,51 @@
+{
+  "id": "place.crownhold",
+  "category": "place",
+  "title": "Crownhold, from the shop",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/place/crownhold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/place_crownhold_B.png",
+  "original_source_sha256": "7b5e53d8100fe648e178ef5f9f9b26fb7db882a5dbfff45c82ce152e3f8e74b0",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c7f2fb805eb1a0c548761e7121d30ca76143f793c90dea4457f4e59bdfefbb0c",
+  "colours": 20,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "7b5e53d8100fe648e178ef5f9f9b26fb7db882a5dbfff45c82ce152e3f8e74b0",
+  "spec_sha256": "e2915d34f2ca103b7dec6fcc65df1a70feb400377a96e36c5c4da17bc25e9824",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

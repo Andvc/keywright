@@ -1,0 +1,51 @@
+{
+  "id": "sheet.crownhold",
+  "category": "sheet",
+  "title": "Appraisal sheet at Crownhold",
+  "status": "produced_approved",
+  "source_size": [
+    216,
+    320
+  ],
+  "physical_size": [
+    864,
+    1280
+  ],
+  "file": "art/density3/assets/sheet/crownhold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/sheet_crownhold_A.png",
+  "original_source_sha256": "6d86999d0db084e97794dc4260106d7ee4cd5185879af17e3fe4c59c7741e1d4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5f107b064339a1c9002a73df174418c3ff0c338df21653ac60cdf394367bcf7a",
+  "colours": 10,
+  "crop": [
+    0,
+    9,
+    1024,
+    1526
+  ],
+  "source_transform": {
+    "scale_x": 0.84375,
+    "scale_y": 0.8437705998681608,
+    "translate_x": 0.0,
+    "translate_y": -7.593935398813447
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "6d86999d0db084e97794dc4260106d7ee4cd5185879af17e3fe4c59c7741e1d4",
+  "spec_sha256": "806c7d0c8f9324a718e0146766ff502be6bdc8168e25b9d9f27628fbe37bbbc2",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

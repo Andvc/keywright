@@ -1,0 +1,51 @@
+{
+  "id": "icon.kind.hidden",
+  "category": "icon_kind",
+  "title": "False bottom",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    16
+  ],
+  "physical_size": [
+    64,
+    64
+  ],
+  "file": "art/density3/assets/kinds/kind_hidden.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_kind_hidden_A.png",
+  "original_source_sha256": "4ed55ed428803cb92753a621e329adb4f22d6f7e248848a3ff06e6a01110266e",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "23bb43155105cc59d8ee124fecd157045e760e90f6e1719fb827478c583d92bc",
+  "colours": 8,
+  "crop": [
+    137,
+    188,
+    1123,
+    1025
+  ],
+  "source_transform": {
+    "scale_x": 0.056795131845841784,
+    "scale_y": 0.05734767025089606,
+    "translate_x": -3.780933062880324,
+    "translate_y": -2.7813620071684593
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "4ed55ed428803cb92753a621e329adb4f22d6f7e248848a3ff06e6a01110266e",
+  "spec_sha256": "ced16e855be049b4c97b12d3b2b5857399f6d323b0ad81779596ad894e81055d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

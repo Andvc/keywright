@@ -1,0 +1,51 @@
+{
+  "id": "item.wolfskin_cloak",
+  "category": "item",
+  "title": "Wolfskin Cloak",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/wolfskin_cloak.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_wolfskin_cloak_C.png",
+  "original_source_sha256": "c479afc1b9bb47ee9d73bc66fc0fe6134d82286e8a4022dde8d5940af8937dd6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1e1d0380e2bc420afa26d49406d998c526999863f29a1e6eb90d191460f4d08d",
+  "colours": 10,
+  "crop": [
+    143,
+    23,
+    1126,
+    1230
+  ],
+  "source_transform": {
+    "scale_x": 0.09969481180061038,
+    "scale_y": 0.09942004971002485,
+    "translate_x": 0.7436419125127163,
+    "translate_y": 1.7133388566694285
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "c479afc1b9bb47ee9d73bc66fc0fe6134d82286e8a4022dde8d5940af8937dd6",
+  "spec_sha256": "31596a3167e21f4982d28135c94b70a4b4a7d2c2daf58dd1a083ea728d8c10b2",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.crier",
+  "category": "icon_upgrade",
+  "title": "Town Crier",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_crier.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_crier_C.png",
+  "original_source_sha256": "c30573e809233ef97b6446153783d61bd6c4dd97d01123a2a97a090710e3baf9",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "72a2e4a756b6799e8f6e88282eb9fdb2d418785b16a3bb8d7128ef6e221e7d88",
+  "colours": 10,
+  "crop": [
+    101,
+    59,
+    1185,
+    1194
+  ],
+  "source_transform": {
+    "scale_x": 0.07749077490774908,
+    "scale_y": 0.07753303964757709,
+    "translate_x": -1.8265682656826572,
+    "translate_y": -0.5744493392070487
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "c30573e809233ef97b6446153783d61bd6c4dd97d01123a2a97a090710e3baf9",
+  "spec_sha256": "2cb718f00c50e8c05a1110dd10f7c0d3b542ca61530ca1bc2dfc4ac4e3d38a41",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

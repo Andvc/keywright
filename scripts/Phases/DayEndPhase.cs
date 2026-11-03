@@ -167,7 +167,7 @@ public partial class DayEndPhase : Phase
         {
             var watcher = UiKit.MakePanel(Palette.PanelBorder).Place(SideX, 182, SideW, 112);
             _side.AddChild(watcher);
-            watcher.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
+            watcher.AddChild(new TextureRect { Texture = ArtTexture.Load("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
                 .Place(14, 14, 44, 48));
             watcher.AddChild(UiKit.MakeLabel(Loc.T("A pale man with a gilded chain has been watching the stall all day. He's still outside."), 16, Palette.Muted)
                 .Wrapped().Place(70, 12, SideW - 84, 88));
@@ -226,7 +226,7 @@ public partial class DayEndPhase : Phase
         bool enough = State.Gold >= due;
         var guild = UiKit.MakePanel(tonight ? Palette.Warn.Darkened(0.2f) : Palette.PanelBorder).Place(SideX, 182, SideW, 112);
         _side.AddChild(guild);
-        guild.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
+        guild.AddChild(new TextureRect { Texture = ArtTexture.Load("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(14, 14, 44, 48));
         string title = tonight ? Loc.T("VANE COMES TONIGHT") : State.DebtCleared ? Loc.T("THE GUILD'S INTEREST") : Loc.T("THE GUILD'S DUE");
         guild.AddChild(UiKit.MakeLabel(title, 16, tonight ? Palette.Warn : Palette.Muted).Place(70, 10, 290, 20));
@@ -379,7 +379,7 @@ public partial class DayEndPhase : Phase
     {
         const float w = 2 * CardW + CardGapX, h = 168;
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(CardsX, CardsY, w, h);
-        card.AddChild(new TextureRect { Texture = GD.Load<Texture2D>("res://assets/ui/icons/shop2.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
+        card.AddChild(new TextureRect { Texture = ArtTexture.Load("res://assets/ui/icons/shop2.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(20, 20, 48, 48));
         card.AddChild(UiKit.MakeLabel(Loc.T("Earn your keep"), 24, Palette.Gold).Place(84, 16, 600, 30));
         card.AddChild(UiKit.MakeLabel(Loc.T($"Once the stall has earned {GameState.UpgradesAt}g, all told, you can move on to Thornwick Market: more customers, richer chests and a shelf for your best finds."), 16, Palette.Muted)
@@ -411,7 +411,7 @@ public partial class DayEndPhase : Phase
         var card = UiKit.MakePanel(upgrade.IsRenovation || engine ? Palette.Gold : Palette.PanelBorder).Place(x, y, CardW, CardH);
         card.AddChild(new TextureRect
         {
-            Texture = GD.Load<Texture2D>($"res://assets/ui/icons/{upgrade.Key}.png"),
+            Texture = ArtTexture.Load($"res://assets/ui/icons/{upgrade.Key}.png"),
             MouseFilter = Control.MouseFilterEnum.Ignore,
         }.Place(12, 12, 48, 48));
         // A long name steps down a size, so the price beside it never covers it.

@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.shop4",
+  "category": "icon_upgrade",
+  "title": "The Royal Emporium",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_shop4.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_shop4_C.png",
+  "original_source_sha256": "612da266a98a153199c57d632fa46301b31bc40aa6d2ae6e175973a62f6d4413",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1bda57f90c215397d4101303f51426f6e89a5126307e09971ec86807109bd121",
+  "colours": 12,
+  "crop": [
+    77,
+    66,
+    1177,
+    1178
+  ],
+  "source_transform": {
+    "scale_x": 0.07909090909090909,
+    "scale_y": 0.07913669064748201,
+    "translate_x": -2.09,
+    "translate_y": -1.2230215827338133
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "612da266a98a153199c57d632fa46301b31bc40aa6d2ae6e175973a62f6d4413",
+  "spec_sha256": "2e6178d1fde92908592b1f1ac939e1f943aa016550518eb947131206bea2e6f0",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

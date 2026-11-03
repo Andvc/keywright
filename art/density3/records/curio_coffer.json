@@ -1,0 +1,51 @@
+{
+  "id": "curio.coffer",
+  "category": "curio",
+  "title": "Haggler's Purse",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/coffer.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_coffer_C.png",
+  "original_source_sha256": "d887af803abecd66b66b01274a0ce3518a5fca36b42331a82bffa1f50bc96d90",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "0b3a64db5be963e9ed2d30a528be6fa0cd74ab6c4172a1a75bd4a63d4340dfe1",
+  "colours": 9,
+  "crop": [
+    80,
+    120,
+    1190,
+    1109
+  ],
+  "source_transform": {
+    "scale_x": 0.0936936936936937,
+    "scale_y": 0.09403437815975733,
+    "translate_x": -3.4954954954954953,
+    "translate_y": -2.284125379170879
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "d887af803abecd66b66b01274a0ce3518a5fca36b42331a82bffa1f50bc96d90",
+  "spec_sha256": "012222bdfdcd8cac54d9b87a888216b0201561416e88fdaa8285f4d8d4b73315",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

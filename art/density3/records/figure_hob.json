@@ -1,0 +1,51 @@
+{
+  "id": "figure.hob",
+  "category": "figure",
+  "title": "Hob the Farmer",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/hob.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "9s",
+  "candidate": "A",
+  "original_source": "batch9s_c2_4x_no_outline/sources/figure_hob_A.png",
+  "original_source_sha256": "84137a70b262bd2f405858cdcbd1416bb5a4c3501af77f60b5869f7cc5a0bb85",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+  "colours": 14,
+  "crop": [
+    199,
+    15,
+    831,
+    1509
+  ],
+  "source_transform": {
+    "scale_x": 0.685126582278481,
+    "scale_y": 0.6854082998661312,
+    "translate_x": 30.659810126582272,
+    "translate_y": 245.71887550200802
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "84137a70b262bd2f405858cdcbd1416bb5a4c3501af77f60b5869f7cc5a0bb85",
+  "spec_sha256": "e9bca6255b7cfa27432de09a9353d09c8b87f4fad3b5b8e5b004fc0cb9049da5",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

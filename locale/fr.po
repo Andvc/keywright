@@ -15291,6 +15291,10 @@ msgid ""
 msgstr ""
 "Un contour sombre autour de chaque personnage et le long du bord du comptoir, pour qu'ils se détachent de la scène."
 
+#: scripts/Ui/SettingsView.cs:161
+msgid "This art style uses colour shapes without outlines."
+msgstr "Ce style graphique dessine par aplats de couleur, sans contours."
+
 #: scripts/Ui/SettingsView.cs:167
 msgid "{0} x {1}"
 msgstr "{0} x {1}"

@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.magnet",
+  "category": "icon_upgrade",
+  "title": "Lodestone",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_magnet.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_magnet_B.png",
+  "original_source_sha256": "74cd48e7df398e0911449fbb7dca35cfd04d9fe40c955e2ffc2216409a8c6c1b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c66d15beba049c0b268815bf70cb4d6e654c09f7b5624a3f1abbd1fb1fdf788c",
+  "colours": 12,
+  "crop": [
+    86,
+    105,
+    1181,
+    1169
+  ],
+  "source_transform": {
+    "scale_x": 0.08036529680365297,
+    "scale_y": 0.08082706766917293,
+    "translate_x": -2.9114155251141556,
+    "translate_y": -3.4868421052631575
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "74cd48e7df398e0911449fbb7dca35cfd04d9fe40c955e2ffc2216409a8c6c1b",
+  "spec_sha256": "2a9cbbfbe0aa18894ebf91f90429fd26ce4680949b164f1f4b5d5388c9c370d4",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

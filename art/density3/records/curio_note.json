@@ -1,0 +1,51 @@
+{
+  "id": "curio.note",
+  "category": "curio",
+  "title": "Guild Promissory Note",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/note.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_note_C.png",
+  "original_source_sha256": "a016f45dc4a60550d9aac13cca7abc27e390d290739d8fa521bbf5d96d223437",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "e4c48f9596ec9ac5fdc480a3c2df4ebc250a367485018ee6d272d111676a6609",
+  "colours": 12,
+  "crop": [
+    84,
+    66,
+    1172,
+    1198
+  ],
+  "source_transform": {
+    "scale_x": 0.09191176470588236,
+    "scale_y": 0.09187279151943463,
+    "translate_x": -1.7205882352941178,
+    "translate_y": -2.063604240282685
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "a016f45dc4a60550d9aac13cca7abc27e390d290739d8fa521bbf5d96d223437",
+  "spec_sha256": "0934388d19d82b6638304159719b5fb2e78ad644ca41f6896375375230fce231",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

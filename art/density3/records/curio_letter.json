@@ -1,0 +1,51 @@
+{
+  "id": "curio.letter",
+  "category": "curio",
+  "title": "Letter of Introduction",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/letter.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_letter_A.png",
+  "original_source_sha256": "8ebdb552ee645c35b834926ccfbb2c3c36685158bceda46bc8ce575366b190e1",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6165359fa1dedb0e8f2f8ea8e22a7ea7646f8593e02415acd07ac427c731c407",
+  "colours": 9,
+  "crop": [
+    57,
+    169,
+    1209,
+    1085
+  ],
+  "source_transform": {
+    "scale_x": 0.09027777777777778,
+    "scale_y": 0.0906113537117904,
+    "translate_x": -1.145833333333333,
+    "translate_y": -1.3133187772925758
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "8ebdb552ee645c35b834926ccfbb2c3c36685158bceda46bc8ce575366b190e1",
+  "spec_sha256": "5cc878275c414fbe7ccdc17f95b893454368d7839aea02a7aca3294a827805ca",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

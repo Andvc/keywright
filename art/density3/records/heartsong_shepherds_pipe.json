@@ -1,0 +1,51 @@
+{
+  "id": "heartsong.shepherds_pipe",
+  "category": "heartsong",
+  "title": "The Shepherd's Pipe",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/heartsongs/shepherds_pipe.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "D",
+  "original_source": "batch12_c2_4x_no_outline/sources/heartsong_shepherds_pipe_D.png",
+  "original_source_sha256": "d75f63ea4c0635879ee749a304784364be4fb84da535a99f61339a01dd9d8c0d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c926cd3620dd6acff9249dc7fe374fcabfe5107f589ce5b93ef6d4666a1d4cd5",
+  "colours": 15,
+  "crop": [
+    87,
+    71,
+    1230,
+    1162
+  ],
+  "source_transform": {
+    "scale_x": 0.10498687664041995,
+    "scale_y": 0.10540788267644363,
+    "translate_x": -5.133858267716535,
+    "translate_y": 1.516040329972502
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "d75f63ea4c0635879ee749a304784364be4fb84da535a99f61339a01dd9d8c0d",
+  "spec_sha256": "27bfe1ef5a1397f70bdb6f2198edda160b4532ca59d59eeab455e7b1d171d7d3",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

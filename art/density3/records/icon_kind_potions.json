@@ -1,0 +1,51 @@
+{
+  "id": "icon.kind.potions",
+  "category": "icon_kind",
+  "title": "Potions",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    16
+  ],
+  "physical_size": [
+    64,
+    64
+  ],
+  "file": "art/density3/assets/kinds/kind_potions.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_kind_potions_B.png",
+  "original_source_sha256": "692f56daeb05cca2ef747cd2b961482094b0bd5e99759cdf26e743759a0ac3ca",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "b7b39304d204b9519f84b8e8ca19f1aea84a33a1a3bbf70fcce31f1512dc48ff",
+  "colours": 8,
+  "crop": [
+    241,
+    128,
+    1013,
+    1101
+  ],
+  "source_transform": {
+    "scale_x": 0.05699481865284974,
+    "scale_y": 0.05755395683453238,
+    "translate_x": -3.7357512953367884,
+    "translate_y": -3.3669064748201443
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "692f56daeb05cca2ef747cd2b961482094b0bd5e99759cdf26e743759a0ac3ca",
+  "spec_sha256": "fd3c9bb0291aea38e2737de6b424ac67d7a5fdd10f3103b8229555528a3f3f32",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

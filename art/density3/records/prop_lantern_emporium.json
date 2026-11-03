@@ -1,0 +1,51 @@
+{
+  "id": "prop.lantern_emporium",
+  "category": "prop",
+  "title": "Lantern at the Royal Emporium",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    24
+  ],
+  "physical_size": [
+    128,
+    192
+  ],
+  "file": "art/density3/assets/props/lantern_emporium.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_lantern_emporium_C.png",
+  "original_source_sha256": "3f77bf96b9686fe1c6cb59fef50ecc713d266f2c56a1c54e05861988348e1d30",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "80ccb39ecd4724c24d364bd38c1b6c66a5eff99c16b5d81c08b0c6b5ae03e0ec",
+  "colours": 9,
+  "crop": [
+    282,
+    0,
+    967,
+    1180
+  ],
+  "source_transform": {
+    "scale_x": 0.16204379562043797,
+    "scale_y": 0.16271186440677965,
+    "translate_x": -37.6963503649635,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "3f77bf96b9686fe1c6cb59fef50ecc713d266f2c56a1c54e05861988348e1d30",
+  "spec_sha256": "031c3bd6ee7035c740352386dc797d227bfd644cd9fa3a35355619d38ceb39bd",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

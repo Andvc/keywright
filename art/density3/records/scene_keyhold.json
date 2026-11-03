@@ -1,0 +1,51 @@
+{
+  "id": "scene.keyhold",
+  "category": "scene",
+  "title": "The ruins of the Keyhold",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/scenes/keyhold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/scene_keyhold_B.png",
+  "original_source_sha256": "33350de28d4cbb427a89fae9bf14f961caaa7defeefdb30ddb290714423b6d20",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d0e71669867639beec54d71e8bff594303e96e10dd70852549ceb7188cf23bb3",
+  "colours": 11,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "33350de28d4cbb427a89fae9bf14f961caaa7defeefdb30ddb290714423b6d20",
+  "spec_sha256": "a1316e420888d0d6826c584d26e3d3227648b4d505e217060fae2d662c66d2e6",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

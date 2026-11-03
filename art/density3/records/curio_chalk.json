@@ -1,0 +1,51 @@
+{
+  "id": "curio.chalk",
+  "category": "curio",
+  "title": "Enchanter's Chalk",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/chalk.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_chalk_A.png",
+  "original_source_sha256": "77595e4d720440e196c3a65ce6f2cac2cda92e79e510d82710c69af98ccea41b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3835e7643fe605edc98521d0f19ef6038b8fc25f559401022151371d2cb326d9",
+  "colours": 8,
+  "crop": [
+    89,
+    137,
+    1165,
+    1133
+  ],
+  "source_transform": {
+    "scale_x": 0.09665427509293681,
+    "scale_y": 0.0963855421686747,
+    "translate_x": -4.602230483271375,
+    "translate_y": -5.2048192771084345
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "77595e4d720440e196c3a65ce6f2cac2cda92e79e510d82710c69af98ccea41b",
+  "spec_sha256": "d24ade09204e4a9649a6bae5bc8f619c22b71daf09db35ee036ec6b8128ba6af",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

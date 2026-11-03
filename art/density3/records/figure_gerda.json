@@ -1,0 +1,51 @@
+{
+  "id": "figure.gerda",
+  "category": "figure",
+  "title": "Gerda the Matchmaker",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/gerda.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_gerda_B.png",
+  "original_source_sha256": "90c71149893abf1040a6491fbdfb93831be54a24dbf0fe438cf95f473bf4f14d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+  "colours": 18,
+  "crop": [
+    127,
+    32,
+    899,
+    1499
+  ],
+  "source_transform": {
+    "scale_x": 0.5997409326424871,
+    "scale_y": 0.59986366734833,
+    "translate_x": 75.83290155440415,
+    "translate_y": 380.8043626448534
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "90c71149893abf1040a6491fbdfb93831be54a24dbf0fe438cf95f473bf4f14d",
+  "spec_sha256": "9e008108a7c35b9cc1b461b92e202405743ce0bc9e922f980c641a54b6925d8c",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "item.healing_draught",
+  "category": "item",
+  "title": "Healing Draught",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/healing_draught.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "B",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_healing_draught_B.png",
+  "original_source_sha256": "4b71209a52b52c99a48b99bbe3a22bad1b3a53fdcdc4d541d8c5e97c5886675c",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "96f1ebbf64b213e1926554fd93b0ed2e2d4d7b38f2a734733ca49638b15d69d2",
+  "colours": 16,
+  "crop": [
+    199,
+    72,
+    1050,
+    1152
+  ],
+  "source_transform": {
+    "scale_x": 0.11163337250293771,
+    "scale_y": 0.1111111111111111,
+    "translate_x": -6.215041128084607,
+    "translate_y": -4.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "4b71209a52b52c99a48b99bbe3a22bad1b3a53fdcdc4d541d8c5e97c5886675c",
+  "spec_sha256": "0634210dbcedcf5e8972d93e9dbd47778c2156c448e14dd68d4a428cea67fd3d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

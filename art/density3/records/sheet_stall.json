@@ -1,0 +1,51 @@
+{
+  "id": "sheet.stall",
+  "category": "sheet",
+  "title": "Appraisal sheet at the Brindle crossroads (Bram's Stall)",
+  "status": "produced_approved",
+  "source_size": [
+    216,
+    320
+  ],
+  "physical_size": [
+    864,
+    1280
+  ],
+  "file": "art/density3/assets/sheet/stall.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "B",
+  "original_source": "batch9s_c2_4x_no_outline/sources/sheet_stall_B.png",
+  "original_source_sha256": "eb93255c8fa2ebc5617f7dde6b952c384c3e737e6e5ede645ebb905aa776b96b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "2019c7271c8e10180eea4df0af7c78bb62d947af38e4f34c2e4a6232e199b487",
+  "colours": 8,
+  "crop": [
+    0,
+    9,
+    1024,
+    1526
+  ],
+  "source_transform": {
+    "scale_x": 0.84375,
+    "scale_y": 0.8437705998681608,
+    "translate_x": 0.0,
+    "translate_y": -7.593935398813447
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "eb93255c8fa2ebc5617f7dde6b952c384c3e737e6e5ede645ebb905aa776b96b",
+  "spec_sha256": "d53239382a342e98d9d4788449b61c93b7ebcbc673f81101451fa8c684810a41",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "figure.aldo",
+  "category": "figure",
+  "title": "Old Aldo",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/aldo.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_aldo_A.png",
+  "original_source_sha256": "6b9bcacceeaecbe77b3fc00f777389b89480ef05611dc7a229b45bac24e02044",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+  "colours": 15,
+  "crop": [
+    196,
+    22,
+    814,
+    1514
+  ],
+  "source_transform": {
+    "scale_x": 0.6326860841423948,
+    "scale_y": 0.6327077747989276,
+    "translate_x": 63.99352750809061,
+    "translate_y": 322.0804289544236
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "6b9bcacceeaecbe77b3fc00f777389b89480ef05611dc7a229b45bac24e02044",
+  "spec_sha256": "ea9ad03cc30ba8577315b17296673fa15614a13493995183d43f294e3ac6493b",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

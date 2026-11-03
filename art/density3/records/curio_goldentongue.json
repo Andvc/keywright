@@ -1,0 +1,51 @@
+{
+  "id": "curio.goldentongue",
+  "category": "curio",
+  "title": "Golden Tongue",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/goldentongue.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_goldentongue_C.png",
+  "original_source_sha256": "625ef8bcb12fa548e65652d1742d83278393fee58729d566cfa4c1d7fd8a1657",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "eee550a54bba7485c92a739eac36c729dc66fd4c80ab4e5f79a9af46a01d04b1",
+  "colours": 9,
+  "crop": [
+    144,
+    48,
+    1209,
+    1152
+  ],
+  "source_transform": {
+    "scale_x": 0.09389671361502347,
+    "scale_y": 0.09420289855072464,
+    "translate_x": -7.52112676056338,
+    "translate_y": -0.5217391304347823
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "625ef8bcb12fa548e65652d1742d83278393fee58729d566cfa4c1d7fd8a1657",
+  "spec_sha256": "189da36d0ae18d239ad7d809f056890392750b16492ebc63c39125c97e022514",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

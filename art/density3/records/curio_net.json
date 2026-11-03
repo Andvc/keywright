@@ -1,0 +1,51 @@
+{
+  "id": "curio.net",
+  "category": "curio",
+  "title": "Songcatcher's Net",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/net.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_net_D.png",
+  "original_source_sha256": "11284a095d687633a85af942c55b121bbe2b11fdb219934d1600405f05ee221b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8e584d9865ff6084349c13d43f97436803ae46cd72ffda3e6ff1a9fe9b76b3f1",
+  "colours": 3,
+  "crop": [
+    90,
+    81,
+    1174,
+    1172
+  ],
+  "source_transform": {
+    "scale_x": 0.09501845018450185,
+    "scale_y": 0.09532538955087076,
+    "translate_x": -4.551660516605166,
+    "translate_y": -3.7213565536205317
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "11284a095d687633a85af942c55b121bbe2b11fdb219934d1600405f05ee221b",
+  "spec_sha256": "4ab6e67a1c88f26af7d69c4a6e02fe76aa258cc455d428de545dba196d9fb472",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

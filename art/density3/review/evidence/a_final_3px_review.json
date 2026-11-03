@@ -1,0 +1,793 @@
+{
+  "reviewer": "face_audit_a",
+  "date": "2026-11-04",
+  "revision": 1,
+  "stage": "actual_production_3px_before_local_repair",
+  "overall_status": "local_repairs_requested_user_review_pending",
+  "user_approval": "pending",
+  "scope": "19 selected NPC figures; original-vs-production actual-size comparisons and nearest4x face inspection for every ID",
+  "physical_canvas": [
+    768,
+    1280
+  ],
+  "pixel_pitch": 3,
+  "coordinate_system": "Actual production physical-pixel xyxy; right and bottom exclusive; ROI boxes are padded review bounds, not automatic paint masks.",
+  "criteria": [
+    "Visible eyes/nose/mouth must not be missing or deformed; legitimate perspective, glasses, beard, and moustache occlusion remain valid.",
+    "Expressions should remain natural with no leering/sleazy grin."
+  ],
+  "counts": {
+    "pass": 10,
+    "watch": 7,
+    "fix": 2
+  },
+  "summary_zh": "19张均实看；2张需修补、7张保留观察、10张通过本次面部QA。主要问题是调色压掉浅色嘴线，非3px格距不足。19张未见新增猥琐表情。Fennick以修正原图为参考并通过。任何pass都不是用户最终批准。",
+  "no_asset_mutations_by_this_review": true,
+  "items": [
+    {
+      "id": "tam",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼瞳孔、鼻部和带缺牙的开口笑均可辨；缺牙来自原图，不是缩减损坏。表情天真、自然。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_tam_A.png",
+      "source_sha256": "199ede17a45dd1ae68fa42046c913591ee650daf9bf04efe93b8733c0b71bd58",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\tam.png",
+      "production_sha256_at_visual_review": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        306,
+        637,
+        494,
+        788
+      ],
+      "actual_size_comparison": "tam_final_compare.png",
+      "nearest_4x_inspection": "tam_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "penn",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "watch"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼、鼻子和嘴部都存在；温和闭口笑被压成中央短线及分离嘴角，较原图少了亲切感，未形成畸形或猥琐表情。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_penn_A.png",
+      "source_sha256": "cee1f746260aaa279b38cb99eb68c57e1c26566c203371c7670a112f192e57f4",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\penn.png",
+      "production_sha256_at_visual_review": "b728dd295c32140b13dbaf3edf8fdfc14756c89b70505f61e30a54adc2253a94",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        284,
+        416,
+        535,
+        618
+      ],
+      "actual_size_comparison": "penn_final_compare.png",
+      "nearest_4x_inspection": "penn_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "mouth",
+          "physical_xyxy": [
+            387,
+            498,
+            430,
+            516
+          ],
+          "recommendation_zh": "建议局部保留原图嘴线的中间色，连贯原有微笑弧度，不加深整个面部轮廓。"
+        }
+      ]
+    },
+    {
+      "id": "hob",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "半闭眼是原有成熟神态，近远两眼均保留瞳孔与亮部；鼻子、胡须和下唇位置一致，嘴被胡须遮挡是自然遮挡。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch9s_c2_4x_no_outline\\sources\\figure_hob_A.png",
+      "source_sha256": "84137a70b262bd2f405858cdcbd1416bb5a4c3501af77f60b5869f7cc5a0bb85",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hob.png",
+      "production_sha256_at_visual_review": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        270,
+        307,
+        552,
+        534
+      ],
+      "actual_size_comparison": "hob_final_compare.png",
+      "nearest_4x_inspection": "hob_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "mags",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼、鼻部与完整笑口均能识别；笑容开放友好，未出现错位五官或歪斜嘴角。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_mags_A.png",
+      "source_sha256": "63bd3e7f5db4639220c1858049ebdfa9d2b9042f5966d1c96e5807d6c6ee78d4",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\mags.png",
+      "production_sha256_at_visual_review": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        285,
+        375,
+        547,
+        586
+      ],
+      "actual_size_comparison": "mags_final_compare.png",
+      "nearest_4x_inspection": "mags_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "dorrin",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "watch"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼朝向一致，鼻部清楚；原有自信闭口笑的左段分离成点，仍可读为轻微笑意，没有半眯眼加夸张邪笑。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_dorrin_A.png",
+      "source_sha256": "e5050a422df1972f395b5dd0a880a092d7402d70e4f5d68caef4fc8a0a8c69b5",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\dorrin.png",
+      "production_sha256_at_visual_review": "d8d37be4edb65d6538141b82e875d67cd970fdd46c815c3d69ca9c94eadb424c",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        280,
+        337,
+        553,
+        557
+      ],
+      "actual_size_comparison": "dorrin_final_compare.png",
+      "nearest_4x_inspection": "dorrin_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "mouth",
+          "physical_xyxy": [
+            384,
+            413,
+            436,
+            434
+          ],
+          "recommendation_zh": "局部保留柔和嘴线；保持原来的浅笑，不把嘴角强化成钩状。"
+        }
+      ]
+    },
+    {
+      "id": "snikkit",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "近眼琥珀色与深色瞳孔、远眼深色上部与浅色眼部仍分离；鼻、牙齿、笑口完整，顽皮表情符合原图。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_snikkit_D.png",
+      "source_sha256": "3d3c17764d424e39127892a43479771512f16b75e340a04ee913c84dbe938f14",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\snikkit.png",
+      "production_sha256_at_visual_review": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        320,
+        696,
+        490,
+        833
+      ],
+      "actual_size_comparison": "snikkit_final_compare.png",
+      "nearest_4x_inspection": "snikkit_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "wenna",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "两眼与瞳孔朝向一致，鼻尖与嘴唇保持区分；闭口表情平静自然。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_wenna_C.png",
+      "source_sha256": "2dcdba19da158aff6abf17dc0b117b821f4c040ec09651c1d4cb6724ac90235f",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\wenna.png",
+      "production_sha256_at_visual_review": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        255,
+        289,
+        545,
+        523
+      ],
+      "actual_size_comparison": "wenna_final_compare.png",
+      "nearest_4x_inspection": "wenna_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "bramble",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "watch"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "眼部完整，老年半眯眼与面部皱纹自然；鼻子和嘴仍存在，但下鼻与唇部对比偏低，原来的闭口笑分成小段。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_bramble_B.png",
+      "source_sha256": "def5a140d843c1a0f8ecfacf5408bc3f913b6898552bdb9fe8c690fe2fc810f2",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\bramble.png",
+      "production_sha256_at_visual_review": "385cdbe068d53d7a74eb6656ca9aa73404c14871446ba8539b3a147c2d6f59d8",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        283,
+        419,
+        535,
+        622
+      ],
+      "actual_size_comparison": "bramble_final_compare.png",
+      "nearest_4x_inspection": "bramble_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "nose_mouth",
+          "physical_xyxy": [
+            410,
+            490,
+            444,
+            513
+          ],
+          "recommendation_zh": "可保留一档温和唇色与鼻底色，避免将笑纹加粗成怪笑。"
+        }
+      ]
+    },
+    {
+      "id": "ansel",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "watch"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼和鼻部完整，目光一致；嘴线呈低对比点线，仍有闭口笑的轨迹，没有表情恶化。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_ansel_A.png",
+      "source_sha256": "ede519c1f749a61147d30c0b69e7f2d333f68c8401277223ce3818ba448b91ea",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\ansel.png",
+      "production_sha256_at_visual_review": "3214346e7dce94a8e7b43676c81a82520c9f038de3ca443d28b90e7e6deb9fa9",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        277,
+        360,
+        545,
+        575
+      ],
+      "actual_size_comparison": "ansel_final_compare.png",
+      "nearest_4x_inspection": "ansel_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "mouth",
+          "physical_xyxy": [
+            394,
+            431,
+            439,
+            449
+          ],
+          "recommendation_zh": "建议保留原嘴线中间色，让浅笑连续，不增加牙齿或夸大嘴角。"
+        }
+      ]
+    },
+    {
+      "id": "fennick",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "使用修正后的原分辨率参考：双眼自然睁开、瞳孔一致，眉毛放松；鼻子、细胡须与闭口表情完整，旧稿的半眯眼侧睨与上挑坏笑未回归。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\source_overrides\\figure_fennick.png",
+      "source_sha256": "8a49d92accc3bc2d27681051266b92b14e4557d61432c47c617088c218115a76",
+      "reference_is_corrected_source": true,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\fennick.png",
+      "production_sha256_at_visual_review": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        269,
+        273,
+        561,
+        508
+      ],
+      "actual_size_comparison": "fennick_final_compare.png",
+      "nearest_4x_inspection": "fennick_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "gerda",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "近远双眼、鼻子及唇形完整；老人笑纹与温暖微笑保留，没有把鼻底或唇色合成畸形表情。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_gerda_B.png",
+      "source_sha256": "90c71149893abf1040a6491fbdfb93831be54a24dbf0fe438cf95f473bf4f14d",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\gerda.png",
+      "production_sha256_at_visual_review": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        285,
+        434,
+        532,
+        633
+      ],
+      "actual_size_comparison": "gerda_final_compare.png",
+      "nearest_4x_inspection": "gerda_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "wren",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "watch"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "镜框与双眼瞳孔能够分辨，鼻部存在；嘴仅余短横线和分离嘴角，原来的温和笑意偏弱，但仍可读为正常闭口。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_wren_B.png",
+      "source_sha256": "4f0d97c592f0c71eb575010e762862270a192fdfc74657b146f9d00030c39048",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\wren.png",
+      "production_sha256_at_visual_review": "8997e6c9edaa6240adef33623038683d636c335a5a875104e4cd05abdcdeca17",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        287,
+        392,
+        545,
+        599
+      ],
+      "actual_size_comparison": "wren_final_compare.png",
+      "nearest_4x_inspection": "wren_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "mouth",
+          "physical_xyxy": [
+            394,
+            470,
+            427,
+            484
+          ],
+          "recommendation_zh": "可恢复原有浅笑的几格中间色，保持眼镜与眼睛不动。"
+        }
+      ]
+    },
+    {
+      "id": "orrin",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼瞳孔与白眉分离，鼻子清楚；唇线保留在胡须之间，牙白没有与胡须合成巨大的诡异笑口，成熟温和。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_orrin_B.png",
+      "source_sha256": "7fc86e91fd58077ab3fbdb8c5af006598108470527d5c5685edb19cfdccc4bc5",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\orrin.png",
+      "production_sha256_at_visual_review": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        256,
+        170,
+        575,
+        427
+      ],
+      "actual_size_comparison": "orrin_final_compare.png",
+      "nearest_4x_inspection": "orrin_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "grit",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "两眼、鼻子和胡须下的唇部位置可辨；严肃眉形来自原图，嘴被浓胡须遮挡并非缺失，不需额外添加牙齿。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_grit_A.png",
+      "source_sha256": "fd9e5929592003c587af558a101ae3ab5e89b9277f7cd22bfaa294713fc81cb6",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\grit.png",
+      "production_sha256_at_visual_review": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        301,
+        582,
+        504,
+        745
+      ],
+      "actual_size_comparison": "grit_final_compare.png",
+      "nearest_4x_inspection": "grit_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "corisande",
+      "qa_verdict": "fix",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "fix",
+        "mouth": "fix"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "眼睛与瞳孔仍正常；鼻底/鼻翼的色阶完全并入肤色，中央面部看起来没有鼻子；嘴只剩分离橙点和短橙色台阶，原唇形及自然浅笑丢失。属于成品量化损失，原图完整。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_corisande_A.png",
+      "source_sha256": "0e619db7135a157ff774a1f164261cb4ce8ef96b010415ad8927f8de1cfdffd9",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\corisande.png",
+      "production_sha256_at_visual_review": "6f32a8c23704a82e0802bd9520d52d14b8196c75c9be8d977b9eb2bffddf8249",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        271,
+        295,
+        557,
+        526
+      ],
+      "actual_size_comparison": "corisande_final_compare.png",
+      "nearest_4x_inspection": "corisande_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "nose",
+          "physical_xyxy": [
+            407,
+            357,
+            438,
+            382
+          ],
+          "recommendation_zh": "按原图恢复鼻底和鼻翼的柔和肤色层次，必须仍为3px格，不画黑描边。"
+        },
+        {
+          "feature": "mouth",
+          "physical_xyxy": [
+            392,
+            380,
+            433,
+            399
+          ],
+          "recommendation_zh": "按原图保留连续的自然唇线与一档唇色；清除非原意的孤立橙点，不夸大嘴角。"
+        }
+      ]
+    },
+    {
+      "id": "pell",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "watch"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "单片眼镜、两眼与大鼻子的结构仍可辨；鼻底和唇线被映射为较强橙色，嘴角与中央短线断开，表情趋于平直但未见明显邪笑。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_pell_A.png",
+      "source_sha256": "c670e5b6140492b6f9f39e48431eeb5f4d860bbe5b81e0469e888cc0bc8480be",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\pell.png",
+      "production_sha256_at_visual_review": "75abdc94190cc964c09768bfd5adb263f2530a11cf6772a55c662a9905763145",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        281,
+        391,
+        538,
+        598
+      ],
+      "actual_size_comparison": "pell_final_compare.png",
+      "nearest_4x_inspection": "pell_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "nose_mouth",
+          "physical_xyxy": [
+            391,
+            451,
+            437,
+            478
+          ],
+          "recommendation_zh": "优先保留面部暖棕/唇色，减弱金属橙色替代肤色造成的硬块，保持大鼻子身份特征。"
+        }
+      ]
+    },
+    {
+      "id": "quill",
+      "qa_verdict": "fix",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "fix"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "眼镜、双眼与鼻部均保留；完整的闭口微笑被压没，只余左侧孤点和右侧零碎浅色，没有可识别的连续嘴线。属于成品量化损失，原图没有此问题。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_quill_B.png",
+      "source_sha256": "ff16bc0154a8c0a625bc8ae05034f54fa750ce092f52317ed7f98c871ba9d960",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\quill.png",
+      "production_sha256_at_visual_review": "4fdf5c1e3f94c4de604f284bfe61e0f0808f8f46f24cbf52dc40661b037ba167",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        279,
+        329,
+        554,
+        550
+      ],
+      "actual_size_comparison": "quill_final_compare.png",
+      "nearest_4x_inspection": "quill_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "mouth",
+          "physical_xyxy": [
+            395,
+            412,
+            442,
+            430
+          ],
+          "recommendation_zh": "从原图恢复浅棕色闭口嘴线与自然小幅嘴角，维持3px格，避免添加大笑或牙齿。"
+        }
+      ]
+    },
+    {
+      "id": "shelly",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "双眼瞳孔、鼻底和唇形完整；自然开朗的闭口笑保留，未出现五官错位或挑逗式斜笑。",
+      "concern_origin": "none_found",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_shelly_B.png",
+      "source_sha256": "e8283b3c662abc2424a1163cfe3ee85500e821967bc09065d89ef148dedde2de",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\shelly.png",
+      "production_sha256_at_visual_review": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        270,
+        423,
+        519,
+        624
+      ],
+      "actual_size_comparison": "shelly_final_compare.png",
+      "nearest_4x_inspection": "shelly_3px_face_4x.png",
+      "repair_or_watch_regions": []
+    },
+    {
+      "id": "aldous",
+      "qa_verdict": "watch",
+      "user_approval": "pending",
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass"
+      },
+      "expression": "pass_no_leering_identified",
+      "observation_zh": "两眼与瞳孔位置正常，鼻、灰胡须和下唇完整；鼻孔及唇部少数像素映射为衣服的高饱和红色，鼻孔像红斑，属于颜色观感问题。",
+      "concern_origin": "production_color_quantization",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_aldous_B.png",
+      "source_sha256": "96d5888abb7e3d6599fef2f6d8650aea5ca5d213152f050c951f5d9a01ea5c31",
+      "reference_is_corrected_source": false,
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\aldous.png",
+      "production_sha256_at_visual_review": "b604f3715e35d25202f3d52988c706be9030f0b144ae0a8d933d92b547d8ce9b",
+      "production_unchanged_at_report_write": true,
+      "inspected_source_crop_xyxy": [
+        350,
+        90,
+        760,
+        420
+      ],
+      "inspected_physical_crop_xyxy": [
+        266,
+        197,
+        578,
+        449
+      ],
+      "actual_size_comparison": "aldous_final_compare.png",
+      "nearest_4x_inspection": "aldous_3px_face_4x.png",
+      "repair_or_watch_regions": [
+        {
+          "feature": "nostril",
+          "physical_xyxy": [
+            432,
+            314,
+            447,
+            322
+          ],
+          "recommendation_zh": "建议仅将鼻孔高饱和红格调整为原图相近的暗暖棕；保留正常唇色，不改变几何。"
+        },
+        {
+          "feature": "upper_lip",
+          "physical_xyxy": [
+            447,
+            335,
+            456,
+            343
+          ],
+          "recommendation_zh": "检查该处红色是否过艳，可随局部面部调色降低饱和度，勿抹掉嘴线。"
+        }
+      ]
+    }
+  ]
+}

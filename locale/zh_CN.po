@@ -14178,6 +14178,10 @@ msgid ""
 "A dark outline round everyone and along the counter's edge, so they stand out from the scene."
 msgstr "在每个人物周围和柜台边缘加一圈深色描边，让他们从场景中凸显出来。"
 
+#: scripts/Ui/SettingsView.cs:161
+msgid "This art style uses colour shapes without outlines."
+msgstr "这种画风以色块塑形，不使用轮廓线。"
+
 #: scripts/Ui/SettingsView.cs:167
 msgid "{0} x {1}"
 msgstr "{0}×{1}"

@@ -1,0 +1,51 @@
+{
+  "id": "curio.aether",
+  "category": "curio",
+  "title": "Aether Jar",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/aether.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_aether_C.png",
+  "original_source_sha256": "118fad27ec3071499115bdf4260d08880fa585d80311f63dc8a98c944a34d388",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3998487dccc806500807381886176f5c48feb59af04e4a1f054454350b9e2792",
+  "colours": 11,
+  "crop": [
+    170,
+    70,
+    1059,
+    1198
+  ],
+  "source_transform": {
+    "scale_x": 0.0922384701912261,
+    "scale_y": 0.09219858156028368,
+    "translate_x": -0.6805399325084363,
+    "translate_y": -2.453900709219858
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "118fad27ec3071499115bdf4260d08880fa585d80311f63dc8a98c944a34d388",
+  "spec_sha256": "363caa69b1a1c27ba96a49b0892af5e91df909b318b42f4c99f8a69c91c11a84",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

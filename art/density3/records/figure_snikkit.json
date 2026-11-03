@@ -1,0 +1,51 @@
+{
+  "id": "figure.snikkit",
+  "category": "figure",
+  "title": "Snikkit the Goblin",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/snikkit.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    1
+  ],
+  "batch": "11",
+  "candidate": "D",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_snikkit_D.png",
+  "original_source_sha256": "3d3c17764d424e39127892a43479771512f16b75e340a04ee913c84dbe938f14",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+  "colours": 13,
+  "crop": [
+    93,
+    31,
+    911,
+    1508
+  ],
+  "source_transform": {
+    "scale_x": 0.4119804400977995,
+    "scale_y": 0.4116452268111036,
+    "translate_x": 176.68581907090464,
+    "translate_y": 659.2389979688558
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "3d3c17764d424e39127892a43479771512f16b75e340a04ee913c84dbe938f14",
+  "spec_sha256": "4b23b5f03a8d5d26f35d6f59de8425722956424488a073a36554a1e36ee6d723",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

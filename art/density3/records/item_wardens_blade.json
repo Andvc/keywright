@@ -1,0 +1,51 @@
+{
+  "id": "item.wardens_blade",
+  "category": "item",
+  "title": "Warden's Blade",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/wardens_blade.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "D",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_wardens_blade_D.png",
+  "original_source_sha256": "eeba1c3e50cb323e7fba02413ed86dba527eb34b5613062278e932afe0b72289",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6593efb5a26038be4459fc796e8d55f8f0931f8dd466ad1ac67f8873d5a0f8cc",
+  "colours": 9,
+  "crop": [
+    52,
+    44,
+    1210,
+    1195
+  ],
+  "source_transform": {
+    "scale_x": 0.10362694300518134,
+    "scale_y": 0.10338835794960903,
+    "translate_x": -1.3886010362694297,
+    "translate_y": 0.45091225021720227
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "eeba1c3e50cb323e7fba02413ed86dba527eb34b5613062278e932afe0b72289",
+  "spec_sha256": "50fd1fa6d57b99a9a85547e6f8ab35131d27a27e25e726c027d4a2c0dceae2fd",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

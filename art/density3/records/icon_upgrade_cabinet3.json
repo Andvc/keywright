@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.cabinet3",
+  "category": "icon_upgrade",
+  "title": "Glass Cabinet",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_cabinet3.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_cabinet3_C.png",
+  "original_source_sha256": "226cdbb3fc6a53a663785c6d372e2c6e3cc2c8c140920833047ace573def7411",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "fad651bad98bb3c911ee56c3692a5bc50cdd4a3967f15d64a60d6e807ce41640",
+  "colours": 10,
+  "crop": [
+    227,
+    28,
+    1027,
+    1226
+  ],
+  "source_transform": {
+    "scale_x": 0.07375,
+    "scale_y": 0.07345575959933222,
+    "translate_x": 1.2587499999999991,
+    "translate_y": 1.9432387312186976
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "226cdbb3fc6a53a663785c6d372e2c6e3cc2c8c140920833047ace573def7411",
+  "spec_sha256": "7a5845a55e540a7e017f4199b2d4febd0eec64fd2ce48aba12fcf3449f308349",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

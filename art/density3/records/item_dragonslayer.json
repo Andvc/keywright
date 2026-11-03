@@ -1,0 +1,51 @@
+{
+  "id": "item.dragonslayer",
+  "category": "item",
+  "title": "Dragonslayer",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/dragonslayer.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "D",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_dragonslayer_D.png",
+  "original_source_sha256": "f0235843b6b13c3b63f26e2e53645a6abff07b8736e02770ac523aaed9c6ad5f",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "74d63244d3131db0fa0a1189e6ba54f78b3e01f5b168e729d6c6f394ddcc51de",
+  "colours": 15,
+  "crop": [
+    64,
+    36,
+    1205,
+    1190
+  ],
+  "source_transform": {
+    "scale_x": 0.10429447852760736,
+    "scale_y": 0.10398613518197573,
+    "translate_x": -2.674846625766871,
+    "translate_y": 0.25649913344887354
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "f0235843b6b13c3b63f26e2e53645a6abff07b8736e02770ac523aaed9c6ad5f",
+  "spec_sha256": "40429bb11879ea24f4a8c98ef02fca01f05d352fb765f7719a7e4bed235c1278",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

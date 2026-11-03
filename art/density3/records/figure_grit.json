@@ -1,0 +1,51 @@
+{
+  "id": "figure.grit",
+  "category": "figure",
+  "title": "Grit the Miner",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/grit.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_grit_A.png",
+  "original_source_sha256": "fd9e5929592003c587af558a101ae3ab5e89b9277f7cd22bfaa294713fc81cb6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+  "colours": 17,
+  "crop": [
+    142,
+    12,
+    894,
+    1508
+  ],
+  "source_transform": {
+    "scale_x": 0.4920212765957447,
+    "scale_y": 0.4919786096256685,
+    "translate_x": 129.13297872340425,
+    "translate_y": 538.096256684492
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "fd9e5929592003c587af558a101ae3ab5e89b9277f7cd22bfaa294713fc81cb6",
+  "spec_sha256": "59dec2c16dbf52143f41a2cbdd9a8cfd085fa4e82b90527bbd8db5b8fa74c875",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "sky.evening",
+  "category": "sky",
+  "title": "Evening sky",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/sky/evening.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/sky_evening_C.png",
+  "original_source_sha256": "2f4e83d4f70f043d0f5b018616ee5eaa865cdd35c477685652546a9c765510cb",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "b5c984efa105cc64d896edd9072c49d3dc3ee4048430b4197f9aaade247771ae",
+  "colours": 8,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "2f4e83d4f70f043d0f5b018616ee5eaa865cdd35c477685652546a9c765510cb",
+  "spec_sha256": "f23d0c6cc8f32550614fe4b1ce2b597e011fdacb9b98e15684ee4afc9817bcd8",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

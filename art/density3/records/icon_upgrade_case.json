@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.case",
+  "category": "icon_upgrade",
+  "title": "Curio Case",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_case.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "D",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_case_D.png",
+  "original_source_sha256": "257ffa9eefcd315ee44de6f158d7c32487c4d92c17dd03ac7ca3a1c78c4896e9",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9d1ae689a30392943440d062410f914b00bfc1065ef13fb3476e0ec692e50a96",
+  "colours": 12,
+  "crop": [
+    100,
+    41,
+    1177,
+    1213
+  ],
+  "source_transform": {
+    "scale_x": 0.07520891364902507,
+    "scale_y": 0.07508532423208192,
+    "translate_x": -0.5208913649025071,
+    "translate_y": 0.9215017064846416
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "257ffa9eefcd315ee44de6f158d7c32487c4d92c17dd03ac7ca3a1c78c4896e9",
+  "spec_sha256": "7e8848b5388a9892df005519c5546f846f0c9f917ff207704f3e88d1b379a559",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

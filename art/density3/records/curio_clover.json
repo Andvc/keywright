@@ -1,0 +1,51 @@
+{
+  "id": "curio.clover",
+  "category": "curio",
+  "title": "Four-Leaf Clover",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/clover.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_clover_C.png",
+  "original_source_sha256": "885fc5d703292b5f6eafc8bf61c8e5090d28efaa6fc73cf6df6889b4e2584f62",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d1a0295c390a3c12eab1579a5d9de0bab8331bca395dc2fa2cb43665421a48ad",
+  "colours": 5,
+  "crop": [
+    139,
+    87,
+    1120,
+    1183
+  ],
+  "source_transform": {
+    "scale_x": 0.09480122324159021,
+    "scale_y": 0.0948905109489051,
+    "translate_x": -4.17737003058104,
+    "translate_y": -4.255474452554745
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "885fc5d703292b5f6eafc8bf61c8e5090d28efaa6fc73cf6df6889b4e2584f62",
+  "spec_sha256": "54a803e145a4757de688c2d4eff3d20d2c86b89a5cbf9a63d88fa57ef28be71d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

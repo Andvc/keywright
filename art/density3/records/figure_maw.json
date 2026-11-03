@@ -1,0 +1,51 @@
+{
+  "id": "figure.maw",
+  "category": "figure",
+  "title": "Avarax, the Gilded Maw",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/maw.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_maw_A.png",
+  "original_source_sha256": "7e66c9f9cd3a6a37b21a27c87844d432d2a6b1d766634cff0ab4fe6d61b9e0e0",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+  "colours": 17,
+  "crop": [
+    94,
+    2,
+    939,
+    1513
+  ],
+  "source_transform": {
+    "scale_x": 0.7727810650887574,
+    "scale_y": 0.7729980145598941,
+    "translate_x": -15.641420118343191,
+    "translate_y": 110.45400397088021
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "7e66c9f9cd3a6a37b21a27c87844d432d2a6b1d766634cff0ab4fe6d61b9e0e0",
+  "spec_sha256": "c29cd22ad0047b0fa14d8f8b8ca12dfa081148166667781ccf61188ef146c604",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

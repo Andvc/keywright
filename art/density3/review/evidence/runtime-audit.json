@@ -1,0 +1,932 @@
+{
+  "runtime_textures": 364,
+  "source_assets": 242,
+  "pending_catalog_entries": [],
+  "geometry_changes": [
+    {
+      "path": "assets/sprites/items/ambrosia.png",
+      "before": [
+        21,
+        30
+      ],
+      "after": [
+        22,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/archmages_mantle.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/barrow_silver.png",
+      "before": [
+        30,
+        25
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/blood_ruby.png",
+      "before": [
+        30,
+        26
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/bottled_star.png",
+      "before": [
+        27,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/cloak_of_shadows.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        29,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/clockwork_lark.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        29,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/demon_gold.png",
+      "before": [
+        30,
+        20
+      ],
+      "after": [
+        31,
+        20
+      ]
+    },
+    {
+      "path": "assets/sprites/items/dragon_gold.png",
+      "before": [
+        25,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/dragons_egg.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        29,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/dragons_eye.png",
+      "before": [
+        27,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/dragonslayer.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/drowned_bell.png",
+      "before": [
+        28,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/dwarf_gold_crowns.png",
+      "before": [
+        30,
+        24
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/dwarven_axe.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/elfstone.png",
+      "before": [
+        24,
+        30
+      ],
+      "after": [
+        25,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/elixir_of_vigour.png",
+      "before": [
+        19,
+        30
+      ],
+      "after": [
+        20,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/elven_cloak.png",
+      "before": [
+        27,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/fey_chimes.png",
+      "before": [
+        28,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/flamebrand.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/goblin_cleaver.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/healing_draught.png",
+      "before": [
+        24,
+        30
+      ],
+      "after": [
+        25,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/hearthstone.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/ambrosia.png",
+      "before": [
+        21,
+        30
+      ],
+      "after": [
+        22,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/archmages_mantle.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/barrow_silver.png",
+      "before": [
+        30,
+        25
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/blood_ruby.png",
+      "before": [
+        30,
+        26
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/bottled_star.png",
+      "before": [
+        27,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/cloak_of_shadows.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        29,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/clockwork_lark.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        29,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/demon_gold.png",
+      "before": [
+        30,
+        20
+      ],
+      "after": [
+        31,
+        20
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/dragon_gold.png",
+      "before": [
+        25,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/dragons_egg.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        29,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/dragons_eye.png",
+      "before": [
+        27,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/dragonslayer.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/drowned_bell.png",
+      "before": [
+        28,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/dwarf_gold_crowns.png",
+      "before": [
+        30,
+        24
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/dwarven_axe.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/elfstone.png",
+      "before": [
+        24,
+        30
+      ],
+      "after": [
+        25,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/elixir_of_vigour.png",
+      "before": [
+        19,
+        30
+      ],
+      "after": [
+        20,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/elven_cloak.png",
+      "before": [
+        27,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/fey_chimes.png",
+      "before": [
+        28,
+        30
+      ],
+      "after": [
+        28,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/flamebrand.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/goblin_cleaver.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/healing_draught.png",
+      "before": [
+        24,
+        30
+      ],
+      "after": [
+        25,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/hearthstone.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/imps_ember.png",
+      "before": [
+        28,
+        29
+      ],
+      "after": [
+        28,
+        30
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/invisibility_draught.png",
+      "before": [
+        20,
+        30
+      ],
+      "after": [
+        21,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/keyhold_codex.png",
+      "before": [
+        25,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/lichs_tome.png",
+      "before": [
+        26,
+        30
+      ],
+      "after": [
+        27,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/lullaby_box.png",
+      "before": [
+        30,
+        28
+      ],
+      "after": [
+        31,
+        28
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/mermaids_breath.png",
+      "before": [
+        25,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/moonsilver_marks.png",
+      "before": [
+        30,
+        25
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/moonstone.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        30,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/paste_gem.png",
+      "before": [
+        30,
+        25
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/phoenix_mantle.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/sand_case.png",
+      "before": [
+        30,
+        24
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/scroll_of_fireball.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        30
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/scroll_of_sparks.png",
+      "before": [
+        30,
+        26
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/shepherds_pipe.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/starstone.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        30,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/summoners_grimoire.png",
+      "before": [
+        26,
+        30
+      ],
+      "after": [
+        27,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/sunken_sovereigns.png",
+      "before": [
+        30,
+        26
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/wardens_blade.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        30
+      ]
+    },
+    {
+      "path": "assets/sprites/items/icons/wolfskin_cloak.png",
+      "before": [
+        24,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/imps_ember.png",
+      "before": [
+        28,
+        29
+      ],
+      "after": [
+        28,
+        30
+      ]
+    },
+    {
+      "path": "assets/sprites/items/invisibility_draught.png",
+      "before": [
+        20,
+        30
+      ],
+      "after": [
+        21,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/keyhold_codex.png",
+      "before": [
+        25,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/lichs_tome.png",
+      "before": [
+        26,
+        30
+      ],
+      "after": [
+        27,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/lullaby_box.png",
+      "before": [
+        30,
+        28
+      ],
+      "after": [
+        31,
+        28
+      ]
+    },
+    {
+      "path": "assets/sprites/items/mermaids_breath.png",
+      "before": [
+        25,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/moonsilver_marks.png",
+      "before": [
+        30,
+        25
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/moonstone.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        30,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/paste_gem.png",
+      "before": [
+        30,
+        25
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/phoenix_mantle.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/sand_case.png",
+      "before": [
+        30,
+        24
+      ],
+      "after": [
+        31,
+        25
+      ]
+    },
+    {
+      "path": "assets/sprites/items/scroll_of_fireball.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        30
+      ]
+    },
+    {
+      "path": "assets/sprites/items/scroll_of_sparks.png",
+      "before": [
+        30,
+        26
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/shepherds_pipe.png",
+      "before": [
+        30,
+        29
+      ],
+      "after": [
+        31,
+        29
+      ]
+    },
+    {
+      "path": "assets/sprites/items/starstone.png",
+      "before": [
+        29,
+        30
+      ],
+      "after": [
+        30,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/summoners_grimoire.png",
+      "before": [
+        26,
+        30
+      ],
+      "after": [
+        27,
+        31
+      ]
+    },
+    {
+      "path": "assets/sprites/items/sunken_sovereigns.png",
+      "before": [
+        30,
+        26
+      ],
+      "after": [
+        31,
+        26
+      ]
+    },
+    {
+      "path": "assets/sprites/items/wardens_blade.png",
+      "before": [
+        30,
+        30
+      ],
+      "after": [
+        31,
+        30
+      ]
+    },
+    {
+      "path": "assets/sprites/items/wolfskin_cloak.png",
+      "before": [
+        24,
+        30
+      ],
+      "after": [
+        26,
+        31
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,51 @@
+{
+  "id": "lock.face.guild",
+  "category": "lock_face",
+  "title": "Lock face: a Gilded Guild lock",
+  "status": "produced_approved",
+  "source_size": [
+    160,
+    160
+  ],
+  "physical_size": [
+    640,
+    640
+  ],
+  "file": "art/density3/assets/lockpick/face_guild.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "15",
+  "candidate": "C",
+  "original_source": "batch15_c2_4x_no_outline/sources/lock_face_guild_C.png",
+  "original_source_sha256": "8958984edc65757fa4ae2538291004cea3e812ede07881215308da862e345c7d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f44db22839b71a4b34ec3d88b84f3ad1f21e2a917fe375579d385bccd5eef5cc",
+  "colours": 16,
+  "crop": [
+    28,
+    19,
+    1223,
+    1215
+  ],
+  "source_transform": {
+    "scale_x": 0.5347280334728034,
+    "scale_y": 0.5351170568561873,
+    "translate_x": -14.972384937238493,
+    "translate_y": -10.167224080267559
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "8958984edc65757fa4ae2538291004cea3e812ede07881215308da862e345c7d",
+  "spec_sha256": "cb9565cac3b09d2d996819472dcbd0d150ae53ef5212a24cde371101a0b7498c",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

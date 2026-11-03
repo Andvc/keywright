@@ -1,0 +1,19 @@
+{
+  "backing_image": [
+    2560,
+    1440
+  ],
+  "logical_texture": [
+    320,
+    180
+  ],
+  "sprite_scale": [
+    4.0,
+    4.0
+  ],
+  "window": [
+    2560,
+    1440
+  ],
+  "render_matches_source_exactly": true
+}

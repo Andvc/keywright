@@ -1,0 +1,51 @@
+{
+  "id": "curio.blindfold",
+  "category": "curio",
+  "title": "Fortune's Blindfold",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/blindfold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_blindfold_C.png",
+  "original_source_sha256": "c497eca4d801f915cfa0fac6876c9db047082cc42de070efa867c34ff90ccb5b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "46787941baade9a129397b745ede0e26f118609980d988573275f5d058fbfafe",
+  "colours": 7,
+  "crop": [
+    69,
+    184,
+    1192,
+    1150
+  ],
+  "source_transform": {
+    "scale_x": 0.09260908281389137,
+    "scale_y": 0.09213250517598344,
+    "translate_x": -2.3900267141585037,
+    "translate_y": -5.9523809523809526
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "c497eca4d801f915cfa0fac6876c9db047082cc42de070efa867c34ff90ccb5b",
+  "spec_sha256": "b072383dc8ff4e714467bca8225d479456a4494d41a7ecdc1cd9df553bfa0e22",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

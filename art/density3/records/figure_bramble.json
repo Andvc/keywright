@@ -1,0 +1,75 @@
+{
+  "id": "figure.bramble",
+  "category": "figure",
+  "title": "Mother Bramble",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/bramble.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_bramble_B.png",
+  "original_source_sha256": "def5a140d843c1a0f8ecfacf5408bc3f913b6898552bdb9fe8c690fe2fc810f2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0",
+  "colours": 25,
+  "crop": [
+    95,
+    32,
+    933,
+    1497
+  ],
+  "source_transform": {
+    "scale_x": 0.6121718377088305,
+    "scale_y": 0.6116040955631399,
+    "translate_x": 68.8436754176611,
+    "translate_y": 364.42866894197954
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "def5a140d843c1a0f8ecfacf5408bc3f913b6898552bdb9fe8c690fe2fc810f2",
+  "spec_sha256": "c0b2c8e1ce43d0f3ffb1b6d91447965b1c0ec62d4dec82b92c9d7160548aa9c3",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          409,
+          488,
+          445,
+          513
+        ],
+        "match_anchor": [
+          391,
+          479,
+          397,
+          485
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "鼻下与浅笑原先低对比断开；固定调色生成黄色/红色团块。保留原图鼻唇阴影及自然皱纹，用脸颊色匹配，去掉周围亮色修补底。",
+    "selected_candidate_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 8,
+  "user_approval": "approved"
+}

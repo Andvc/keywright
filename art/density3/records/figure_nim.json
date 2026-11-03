@@ -1,0 +1,51 @@
+{
+  "id": "figure.nim",
+  "category": "figure",
+  "title": "Nim the Peddler",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/nim.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_nim_A.png",
+  "original_source_sha256": "a017054477c2b054017b28e6e5dff4e512e0a5e60c5f75d0be623cbc650b1d43",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+  "colours": 18,
+  "crop": [
+    133,
+    29,
+    844,
+    1507
+  ],
+  "source_transform": {
+    "scale_x": 0.6272855133614628,
+    "scale_y": 0.6278755074424899,
+    "translate_x": 77.57102672292545,
+    "translate_y": 333.7916102841678
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "a017054477c2b054017b28e6e5dff4e512e0a5e60c5f75d0be623cbc650b1d43",
+  "spec_sha256": "c40769c405a975ea79a704399094fff43bc04480bdea3c6150feb9ac0ea596ee",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

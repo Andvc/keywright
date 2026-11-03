@@ -1,0 +1,51 @@
+{
+  "id": "shelf.emporium",
+  "category": "shelf",
+  "title": "Display shelf at the Royal Emporium",
+  "status": "produced_approved",
+  "source_size": [
+    136,
+    40
+  ],
+  "physical_size": [
+    1088,
+    320
+  ],
+  "file": "art/density3/assets/shelf/emporium.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/shelf_emporium_A.png",
+  "original_source_sha256": "d89f3760bd640997b1e71eb5a33d8aa08cde559a250b8da9001055e60089379d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "408578c86cbe1ef39c91d22abea805c668adc5a00935dc5c75b9d7bc70204435",
+  "colours": 16,
+  "crop": [
+    25,
+    0,
+    1513,
+    584
+  ],
+  "source_transform": {
+    "scale_x": 0.7311827956989247,
+    "scale_y": 0.7311643835616438,
+    "translate_x": -18.27956989247312,
+    "translate_y": -91.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "d89f3760bd640997b1e71eb5a33d8aa08cde559a250b8da9001055e60089379d",
+  "spec_sha256": "0294aea6559e30c6eaf50c502e49b45c963a4a4cc3556541901baf02b816103b",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

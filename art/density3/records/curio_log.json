@@ -1,0 +1,51 @@
+{
+  "id": "curio.log",
+  "category": "curio",
+  "title": "Smuggler's Log",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/log.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_log_D.png",
+  "original_source_sha256": "bbdd266db947e23a604bee43f1612326bfa7dfb41e76d9895ce43ea405eb39c5",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "54f0a01f45ed6c990d2d90deced3bbfce4cb9f97d0fd2f03f7fa41bc21b6f72e",
+  "colours": 12,
+  "crop": [
+    126,
+    105,
+    1132,
+    1143
+  ],
+  "source_transform": {
+    "scale_x": 0.10039761431411531,
+    "scale_y": 0.1001926782273603,
+    "translate_x": -7.65009940357853,
+    "translate_y": -6.520231213872833
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "bbdd266db947e23a604bee43f1612326bfa7dfb41e76d9895ce43ea405eb39c5",
+  "spec_sha256": "c4309a7c5dd7bb98236edabe0103dd02c4695e471e326ee27b63b071da4c8078",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

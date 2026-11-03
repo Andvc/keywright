@@ -1,0 +1,51 @@
+{
+  "id": "curio.token",
+  "category": "curio",
+  "title": "Gambler's Token",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/token.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_token_C.png",
+  "original_source_sha256": "468dcd347daf0b6b7fcde9d021cf077baa5e4119b6f635c2ac191c7c0d522a86",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7c5d671cde768963b131d5a98792de2332663cb31a4a1ab69d624b67ec14fbe3",
+  "colours": 5,
+  "crop": [
+    96,
+    96,
+    1159,
+    1137
+  ],
+  "source_transform": {
+    "scale_x": 0.09783631232361242,
+    "scale_y": 0.09798270893371758,
+    "translate_x": -5.392285983066792,
+    "translate_y": -4.406340057636887
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "468dcd347daf0b6b7fcde9d021cf077baa5e4119b6f635c2ac191c7c0d522a86",
+  "spec_sha256": "fd2033fcef90fb5d1a1ebd2d0bacda7bc024dc63960323bef3c5dbfa0ace85fe",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

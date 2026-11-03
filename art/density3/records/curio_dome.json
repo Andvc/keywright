@@ -1,0 +1,51 @@
+{
+  "id": "curio.dome",
+  "category": "curio",
+  "title": "Bell Jar",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/dome.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_dome_A.png",
+  "original_source_sha256": "5b6e407e1564ad4d13e652759bb8027fd29373b5e570add3aaced625fcbfabf7",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6927b196ad67520d683d981c2c600aadb1b71134462a90718b38da506c756395",
+  "colours": 16,
+  "crop": [
+    210,
+    81,
+    1040,
+    1130
+  ],
+  "source_transform": {
+    "scale_x": 0.09879518072289156,
+    "scale_y": 0.09914204003813155,
+    "translate_x": -5.7469879518072275,
+    "translate_y": -4.0305052430886565
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "5b6e407e1564ad4d13e652759bb8027fd29373b5e570add3aaced625fcbfabf7",
+  "spec_sha256": "6fb7a35b4c8c510393d1d1fc63589d9c3282c459f6c34acde52728d1a154d8b8",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "item.invisibility_draught",
+  "category": "item",
+  "title": "Invisibility Draught",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/invisibility_draught.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "B",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_invisibility_draught_B.png",
+  "original_source_sha256": "fc687ea10ed504d7b6c7b1d6412c981da89d9c074d6ef7aac4251c026fc546ef",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "06bdb88a9d61bed1f67387bfa2178dfdb62de941dc1148ec9aac0e1216d4a801",
+  "colours": 11,
+  "crop": [
+    213,
+    18,
+    1030,
+    1226
+  ],
+  "source_transform": {
+    "scale_x": 0.09914320685434516,
+    "scale_y": 0.09933774834437085,
+    "translate_x": 1.882496940024481,
+    "translate_y": 2.2119205298013247
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "fc687ea10ed504d7b6c7b1d6412c981da89d9c074d6ef7aac4251c026fc546ef",
+  "spec_sha256": "d54800fb05803d91f789e478cd23a2bf825df0198b22b118eb9c5cb89d72817e",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

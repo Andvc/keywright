@@ -1,0 +1,51 @@
+{
+  "id": "item.phoenix_mantle",
+  "category": "item",
+  "title": "Phoenix Mantle",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/phoenix_mantle.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_phoenix_mantle_C.png",
+  "original_source_sha256": "941b1d8e3140fea3e445c9033609a70ff12e6368122a19ff40db24473a900c18",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "60c716e64548c22351f7c9b60652896b87620b544109719aa2be086709ee6296",
+  "colours": 8,
+  "crop": [
+    55,
+    54,
+    1204,
+    1200
+  ],
+  "source_transform": {
+    "scale_x": 0.10443864229765012,
+    "scale_y": 0.10471204188481675,
+    "translate_x": -1.7441253263707575,
+    "translate_y": -1.654450261780105
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "941b1d8e3140fea3e445c9033609a70ff12e6368122a19ff40db24473a900c18",
+  "spec_sha256": "495df3b79db0bb0d609b6faf6c0c3b472e9aa4a0f269f08ee02c568e170f7f92",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

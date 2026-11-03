@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.workshop",
+  "category": "icon_upgrade",
+  "title": "Restorer's Workshop",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_workshop.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "D",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_workshop_D.png",
+  "original_source_sha256": "38bf36b3c3e883f6d30e496080f4ed5e42d16d7e004ba4ad422d34cb7d339eac",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8896d511de557c45ad70f682508cf3d2111a430585f340613c8423da6a20cbe8",
+  "colours": 10,
+  "crop": [
+    42,
+    42,
+    1229,
+    1212
+  ],
+  "source_transform": {
+    "scale_x": 0.07413647851727043,
+    "scale_y": 0.07435897435897436,
+    "translate_x": 0.8862679022746418,
+    "translate_y": 0.8769230769230769
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "38bf36b3c3e883f6d30e496080f4ed5e42d16d7e004ba4ad422d34cb7d339eac",
+  "spec_sha256": "befe997fc7ea787739b3ab9a0e38c2523a3a760d846df83a0912ec8862808e41",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

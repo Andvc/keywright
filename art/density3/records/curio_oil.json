@@ -1,0 +1,51 @@
+{
+  "id": "curio.oil",
+  "category": "curio",
+  "title": "Locksmith's Oil",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/oil.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_oil_C.png",
+  "original_source_sha256": "6284109c12522befdd42e06d5560e109cfb729da4d1e353cfe78c4e4d7c41f20",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3c8296e774454732df9efa040192ac53ff5cb429696b2acfa1ce79b6dc855869",
+  "colours": 4,
+  "crop": [
+    75,
+    182,
+    1195,
+    1063
+  ],
+  "source_transform": {
+    "scale_x": 0.09285714285714286,
+    "scale_y": 0.09307604994324631,
+    "translate_x": -2.9642857142857144,
+    "translate_y": -1.9398410896708285
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "6284109c12522befdd42e06d5560e109cfb729da4d1e353cfe78c4e4d7c41f20",
+  "spec_sha256": "2a237bbd72b0909a5b62229268a92ac2b4e83da8e9c2758d8ed1888231789e06",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

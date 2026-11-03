@@ -1,0 +1,51 @@
+{
+  "id": "place.thornwick",
+  "category": "place",
+  "title": "Thornwick Market, from the shop",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/place/thornwick.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/place_thornwick_B.png",
+  "original_source_sha256": "57e629062d43b8fe19001f1810fc04fcae60ae131272b32b07d21536ebef0c8f",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "608d7cb6845c6ecdb74fe514439093fe1fe1e89342f2f4a2ef728156f093db62",
+  "colours": 18,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "57e629062d43b8fe19001f1810fc04fcae60ae131272b32b07d21536ebef0c8f",
+  "spec_sha256": "7cc0a7ae5e00109deb279601f5fe41f5948c3402bbc59974eb5e458f6ddb2ffc",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

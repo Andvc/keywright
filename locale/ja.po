@@ -14333,6 +14333,10 @@ msgid ""
 "A dark outline round everyone and along the counter's edge, so they stand out from the scene."
 msgstr "人物の周りとカウンターの縁に暗い輪郭線を引き、背景から際立たせます。"
 
+#: scripts/Ui/SettingsView.cs:161
+msgid "This art style uses colour shapes without outlines."
+msgstr "この画風は輪郭線を使わず、色の面で形を描いています。"
+
 #: scripts/Ui/SettingsView.cs:167
 msgid "{0} x {1}"
 msgstr "{0}×{1}"

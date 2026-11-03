@@ -1,0 +1,51 @@
+{
+  "id": "curio.still",
+  "category": "curio",
+  "title": "Alchemist's Still",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/still.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_still_A.png",
+  "original_source_sha256": "29b4751866fa36655470ea1692999550aee0ee539ab996c025a0c7c0e65e3f86",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9b4d1da28205825a1e82f4aaa06cb7e1d96374f135fbec2bdeb06a0598da0eed",
+  "colours": 16,
+  "crop": [
+    93,
+    64,
+    1178,
+    1158
+  ],
+  "source_transform": {
+    "scale_x": 0.09493087557603687,
+    "scale_y": 0.09506398537477148,
+    "translate_x": -4.828571428571429,
+    "translate_y": -2.084095063985375
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "29b4751866fa36655470ea1692999550aee0ee539ab996c025a0c7c0e65e3f86",
+  "spec_sha256": "f98109836607a1e98890e759973194bfb016acbe2df49929b798348438603004",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

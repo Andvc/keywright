@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.seal",
+  "category": "icon_upgrade",
+  "title": "Royal Seal",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_seal.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_seal_B.png",
+  "original_source_sha256": "29c12c8a50e023d510a132a5ccc9d1f772362da57f46aeac945a116a79066e78",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "a4c36f0cdf804b0d54c482350e65c55a3421105230531abe5938f7735ccec763",
+  "colours": 7,
+  "crop": [
+    215,
+    41,
+    1040,
+    1202
+  ],
+  "source_transform": {
+    "scale_x": 0.07636363636363637,
+    "scale_y": 0.07579672695951765,
+    "translate_x": -0.418181818181818,
+    "translate_y": 0.8923341946597763
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "29c12c8a50e023d510a132a5ccc9d1f772362da57f46aeac945a116a79066e78",
+  "spec_sha256": "606a1955d3b6f8fa550c4b9e874a558d793b972d4fbe222781f747abff98d0dc",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

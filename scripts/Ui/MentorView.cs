@@ -51,7 +51,7 @@ public partial class MentorView : Control
         AddChild(_panel);
         AddChild(UiKit.Outline(new Sprite2D
         {
-            Texture = GD.Load<Texture2D>("res://assets/sprites/sellers/bram.png"),
+            Texture = ArtTexture.Load("res://assets/sprites/sellers/bram.png"),
             Position = new Vector2(52, 58),
         }));
         AddChild(UiKit.MakeLabel(Hints.Mentor.ToUpperInvariant(), 16, Palette.Gold, HorizontalAlignment.Center).Place(4, 98, 96, 20));

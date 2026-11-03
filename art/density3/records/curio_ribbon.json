@@ -1,0 +1,51 @@
+{
+  "id": "curio.ribbon",
+  "category": "curio",
+  "title": "Patron's Ribbon",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/ribbon.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_ribbon_A.png",
+  "original_source_sha256": "447a80545f81b9545648fc075121e2fc1242a2aa551c8e22e72adc16b3b7cf8a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "db30ab628d3e74e5f27a20a57c15f4997e0b9f4389bf521aa2da8b1d3ded85d4",
+  "colours": 8,
+  "crop": [
+    170,
+    67,
+    1100,
+    1188
+  ],
+  "source_transform": {
+    "scale_x": 0.09247311827956989,
+    "scale_y": 0.0927743086529884,
+    "translate_x": -2.720430107526882,
+    "translate_y": -2.2158786797502232
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "447a80545f81b9545648fc075121e2fc1242a2aa551c8e22e72adc16b3b7cf8a",
+  "spec_sha256": "e1749c784ea6b82706f0fbaf600e4804598d92f903ba19d23db300e893d64c8c",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

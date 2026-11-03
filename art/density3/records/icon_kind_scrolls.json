@@ -1,0 +1,51 @@
+{
+  "id": "icon.kind.scrolls",
+  "category": "icon_kind",
+  "title": "Spells",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    16
+  ],
+  "physical_size": [
+    64,
+    64
+  ],
+  "file": "art/density3/assets/kinds/kind_scrolls.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_kind_scrolls_B.png",
+  "original_source_sha256": "952d40e0a1c13223b0428a592c067be3fc63b14dd24ddab5547a3079ffca355d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f89812ac9561523647977bdb955c30d8149c10aebebcc58a4d7741e6da4c1cee",
+  "colours": 8,
+  "crop": [
+    113,
+    185,
+    1146,
+    1046
+  ],
+  "source_transform": {
+    "scale_x": 0.05421103581800581,
+    "scale_y": 0.0545876887340302,
+    "translate_x": -2.1258470474346565,
+    "translate_y": -2.098722415795587
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "952d40e0a1c13223b0428a592c067be3fc63b14dd24ddab5547a3079ffca355d",
+  "spec_sha256": "a10c348b32fb6fb1045aa6b8472c873b5e7ae91191a75dacde98bbdf754c01d4",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

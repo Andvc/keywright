@@ -1,0 +1,51 @@
+{
+  "id": "sheet.emporium",
+  "category": "sheet",
+  "title": "Appraisal sheet at the Royal Emporium",
+  "status": "produced_approved",
+  "source_size": [
+    216,
+    320
+  ],
+  "physical_size": [
+    864,
+    1280
+  ],
+  "file": "art/density3/assets/sheet/emporium.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/sheet_emporium_A.png",
+  "original_source_sha256": "d994e410987f219db2a757fe33c0c301d8285876a08658c571a6cd0e725c261a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "318e3a8a2512302839deeed38c2d5db7c94a402083bc5f401a5e3888cf5a073f",
+  "colours": 10,
+  "crop": [
+    0,
+    9,
+    1024,
+    1526
+  ],
+  "source_transform": {
+    "scale_x": 0.84375,
+    "scale_y": 0.8437705998681608,
+    "translate_x": 0.0,
+    "translate_y": -7.593935398813447
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "d994e410987f219db2a757fe33c0c301d8285876a08658c571a6cd0e725c261a",
+  "spec_sha256": "fb6a594de26d46aee5724cd7ea1b3469a4ed30fdeeaac3853b76be799f2c6b05",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

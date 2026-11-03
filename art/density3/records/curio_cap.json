@@ -1,0 +1,51 @@
+{
+  "id": "curio.cap",
+  "category": "curio",
+  "title": "Hatter's Cap",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/cap.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_cap_A.png",
+  "original_source_sha256": "bd42ab89ab3d71416131a50ac9ba4bcb9edf4bc38eb220825388ab2799ef50c7",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "25f0c09d12bca19e843acc00a3ec10a2849477c8bdd8763ced927d6479be140f",
+  "colours": 9,
+  "crop": [
+    78,
+    132,
+    1192,
+    1100
+  ],
+  "source_transform": {
+    "scale_x": 0.0933572710951526,
+    "scale_y": 0.09297520661157024,
+    "translate_x": -3.281867145421903,
+    "translate_y": -1.2727272727272734
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "bd42ab89ab3d71416131a50ac9ba4bcb9edf4bc38eb220825388ab2799ef50c7",
+  "spec_sha256": "d22a677d4c7f0be5d70c896f0ec1fd0e50a1f46672bd9f0773bafe25429bc3f5",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

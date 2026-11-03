@@ -1,0 +1,51 @@
+{
+  "id": "figure.mara",
+  "category": "figure",
+  "title": "Mara, unhooded",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/mara.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_mara_B.png",
+  "original_source_sha256": "5bac21f3f30a1deb0396c6c5ff431dfdc7d9b577084e5bfac47916e354537f08",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+  "colours": 13,
+  "crop": [
+    127,
+    27,
+    904,
+    1501
+  ],
+  "source_transform": {
+    "scale_x": 0.6615186615186616,
+    "scale_y": 0.6621438263229308,
+    "translate_x": 42.98712998712999,
+    "translate_y": 286.12211668928086
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "5bac21f3f30a1deb0396c6c5ff431dfdc7d9b577084e5bfac47916e354537f08",
+  "spec_sha256": "ed868ec4441ebca8feebd42180d8c354ea0ca121bf47e8f64a6d0ecb4d959254",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

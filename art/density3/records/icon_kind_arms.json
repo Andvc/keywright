@@ -1,0 +1,51 @@
+{
+  "id": "icon.kind.arms",
+  "category": "icon_kind",
+  "title": "Weapons",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    16
+  ],
+  "physical_size": [
+    64,
+    64
+  ],
+  "file": "art/density3/assets/kinds/kind_arms.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_kind_arms_B.png",
+  "original_source_sha256": "0d036ef5e963a69a545124c156dc43c8431074e18a4abfbe69e6be74d8fc3f28",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8d5a2ea80f097e3ea95c853f2f045cc972c2953da53cf75853f6ad70e8058a78",
+  "colours": 7,
+  "crop": [
+    111,
+    110,
+    1143,
+    1120
+  ],
+  "source_transform": {
+    "scale_x": 0.05426356589147287,
+    "scale_y": 0.054455445544554455,
+    "translate_x": -2.0232558139534884,
+    "translate_y": -1.99009900990099
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "0d036ef5e963a69a545124c156dc43c8431074e18a4abfbe69e6be74d8fc3f28",
+  "spec_sha256": "9a5adb2d89ae2f1fece637b421b6acd5a5c374cff095b41f7b9f847fa34eda62",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

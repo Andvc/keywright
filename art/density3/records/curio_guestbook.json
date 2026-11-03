@@ -1,0 +1,51 @@
+{
+  "id": "curio.guestbook",
+  "category": "curio",
+  "title": "Guest Book",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/guestbook.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_guestbook_C.png",
+  "original_source_sha256": "de7b280eeeefecaac83c737f2b0e4c90f95c94fd4c4c321d9f4e2c0e970bb4a8",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "bbf6921adcfc657e6217342f892fd31003b6f225c0fc22070550f2b2baf88a79",
+  "colours": 11,
+  "crop": [
+    64,
+    97,
+    1201,
+    1186
+  ],
+  "source_transform": {
+    "scale_x": 0.09146877748460862,
+    "scale_y": 0.09182736455463728,
+    "translate_x": -1.8540017590149516,
+    "translate_y": -2.9072543617998168
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "de7b280eeeefecaac83c737f2b0e4c90f95c94fd4c4c321d9f4e2c0e970bb4a8",
+  "spec_sha256": "308ca28f393bb252be52b3642c7ddac17395d7199e3b113133f5c754e90b3170",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

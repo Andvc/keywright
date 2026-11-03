@@ -1,0 +1,58 @@
+{
+  "id": "icon.upgrade.picks",
+  "category": "icon_upgrade",
+  "title": "Fine Lockpicks",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_picks.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "F",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_picks_F.png",
+  "original_source_sha256": "56e8f2d6e75a948817e7c956f885997df7135f1844b2a3e49365040a95c40c5b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "4012ba08f66099197d8ad949fdeb01a31bb6470fbda888497da5ef68954013f6",
+  "colours": 8,
+  "crop": [
+    74,
+    129,
+    1703,
+    789
+  ],
+  "source_transform": {
+    "scale_x": 0.05402087170042971,
+    "scale_y": 0.05454545454545454,
+    "translate_x": 0.0024554941682013443,
+    "translate_y": 22.963636363636365
+  },
+  "recolours": [
+    "#773f00=#6e3d22",
+    "#a06500=#8e5b37",
+    "#c29026=#ad7d52",
+    "#ce5e00=#8e5b37",
+    "#bd7e5f=#ad7d52",
+    "#e1a882=#c9a075"
+  ],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "56e8f2d6e75a948817e7c956f885997df7135f1844b2a3e49365040a95c40c5b",
+  "spec_sha256": "2171a730c37ef2cdd13dad2055f7b3b414b861157b489d2d78cd53a61d223aa9",
+  "original_size": [
+    1774,
+    887
+  ],
+  "user_approval": "approved"
+}
