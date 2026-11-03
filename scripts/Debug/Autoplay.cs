@@ -192,6 +192,13 @@ public partial class Autoplay : Node
             await Wait(1.5);
             if (!IsInstanceValid(dues)) return;
         }
+        // Friends who owe you first (0.30), then the shelf.
+        while (State.Gold < State.DueNow && State.Callable.FirstOrDefault() is string friend)
+        {
+            dues.CallIn(friend);
+            await Wait(0.8);
+            if (!IsInstanceValid(dues)) return;
+        }
         if (State.Gold < State.DueNow)
         {
             var order = Strategy.PawnOrder(State);

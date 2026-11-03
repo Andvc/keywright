@@ -102,6 +102,15 @@ public sealed class SellerDef
     /// <summary>How often their chest isn't theirs to sell (<see cref="Chest.Owner"/>): the mark goes cold on it.</summary>
     public float Steals { get; init; }
 
+    /// <summary>A ghost: drawn pale and half there (Sir Aldwin).</summary>
+    public bool Ghost { get; init; }
+
+    /// <summary>
+    /// Someone who comes only while this holds (0.30: the officials, while their masters count you a friend): null, as
+    /// any regular. Read every morning, so they stop coming the day it doesn't.
+    /// </summary>
+    public Func<GameState, bool> Comes { get; init; }
+
     /// <summary>The shop tier at which they start coming in.</summary>
     public int Tier { get; init; }
 
@@ -555,6 +564,38 @@ public static class Sellers
             Fussed = new[] { Loc.T("Drop it again and the price goes up. And the Wardens come running.") },
         },
 
+        // 0.30's officials: they come only while their masters count you a friend (docs/stories.md).
+        new()
+        {
+            Key = "marrow", Look = "vane", Name = Loc.T("Bailiff Marrow"), Short = Loc.T("Marrow"), Tier = 2, Judge = Judgment.Colour, Steals = 0.35f, Visits = 0.6f,
+            Markup = (0.7f, 0.85f), Colours = Village, Of = Faction.Guild, From = new[] { ("seized", 1f) }, Comes = s => s.Friend(Faction.Guild),
+            Wants = Loc.T("The Guild's books balanced, and its friends served first."),
+            Stories = Tell(("seized", new[] { Loc.T("From a house the Guild sealed for tithe. A {colour} chest at the Guild's book price: {price}. The Guild doesn't haggle."),
+                                              Loc.T("Taken for tithe, and sold to the Guild's friends first. The book says a {colour} chest is {price}, whatever's in it.") })),
+            Habit = Loc.T("The Gilded Guild's bailiff, who sells what it took for tithe to the Guild's friends first, at its book price: the chest's colour, " +
+                    "nothing more. A third of it was seized, not sold, and won't open for anyone: lay a hand on it. He comes while the Guild counts you a friend."),
+            Accepts = new[] { Loc.T("Entered in the book. Good day."), Loc.T("The Guild thanks its friends.") },
+            Leaves = new[] { Loc.T("I've three more houses to see to today.") },
+            Passes = new[] { Loc.T("As you like. Someone else is a friend of the Guild."), Loc.T("Noted.") },
+            Startled = new[] { Loc.T("That's Guild property until it's paid for."), Loc.T("Careful.") },
+            Fussed = new[] { Loc.T("Damage to Guild property is added to the price.") },
+        },
+        new()
+        {
+            Key = "brandt", Look = "aldous", Name = Loc.T("Quartermaster Brandt"), Short = Loc.T("Brandt"), Tier = 2, Judge = Judgment.Weight, States = Clue.Pounds,
+            Visits = 0.6f, Markup = (0.95f, 1.1f), Colours = Village, Of = Faction.Wardens, From = new[] { ("unclaimed", 1f) }, Comes = s => s.Friend(Faction.Wardens),
+            Wants = Loc.T("The Wardens' store emptied, and the money in the widows' fund."),
+            Stories = Tell(("unclaimed", new[] { Loc.T("Taken off a thief a year and a day ago, and nobody's claimed it. The Wardens' tariff is by the pound: {pounds}, so {price}."),
+                                                 Loc.T("Unclaimed, a year and a day: it's the Crown's to sell now. {pounds} on the toll scale, at the tariff: {price}.") })),
+            Habit = Loc.T("The Wardens' quartermaster at the Thornwick toll, selling what they took off thieves and nobody claimed in a year and a day. The " +
+                    "Wardens' tariff is so much a pound, so heavy things come dear and light ones cheap. He comes while the Wardens count you a friend."),
+            Accepts = new[] { Loc.T("For the widows' fund. Much obliged."), Loc.T("Sold, by the tariff.") },
+            Leaves = new[] { Loc.T("The toll won't keep itself.") },
+            Passes = new[] { Loc.T("It'll keep. It's kept a year already."), Loc.T("Fair enough.") },
+            Startled = new[] { Loc.T("Easy with the Crown's property."), Loc.T("Steady.") },
+            Fussed = new[] { Loc.T("That's breakage. Breakage goes on the price.") },
+        },
+
         // Crownhold: an archmage and her apprentice, a dwarf, a noblewoman, a pawnbroker, the Archivist, a mudlark and a knight.
         new()
         {
@@ -691,8 +732,10 @@ public static class Sellers
         // The Royal Emporium, by the Gilded Gate: demons, a countess, a cartomancer, the Maw's fence, the King, and once in a while the Maw.
         new()
         {
-            Key = "tick", Look = "vexis", Name = Loc.T("Tick"), Short = Loc.T("Tick"), Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.2f, Markup = (1.35f, 1.65f),
-            Colours = new[] { 0, 0, 0.2f, 0.8f },
+            // 0.30: luck and hoards stop at purple (gold is rare), so Tick's purple chests can't come out better: more of
+            // them are blue, which can, and he asks less over the colour (1.35-1.65 when a step better from purple was gold).
+            Key = "tick", Look = "vexis", Name = Loc.T("Tick"), Short = Loc.T("Tick"), Tier = 4, Judge = Judgment.Colour, Patience = 12f, QualityBoost = 0.3f, Markup = (1.0f, 1.2f),
+            Colours = new[] { 0, 0, 0.6f, 0.4f },
             From = new[] { ("gate", 1f) },
             Wants = Loc.T("Errands run, gold gone down the Gate, and one day off in three hundred years."),
             Stories = Tell(("gate", new[] { Loc.T("Fresh through the Gate, from the Maw's own hoard. {price}. And the sand's already running, mortal."),
@@ -872,6 +915,55 @@ public static class Sellers
             Accepts = new[] { Loc.T("Splendid. The tables await."), Loc.T("Done. Not a word to my sister.") },
             Passes = new[] { Loc.T("Your loss. Someone will want it before the cards start."), Loc.T("Pity.") },
         },
+        // 0.30's people.
+        new()
+        {
+            Key = "jasper", Look = "fennick", Name = Loc.T("Jasper Wick"), Short = Loc.T("Jasper"), Tier = 1, Visits = 0, Of = Faction.Lockless,
+            Wants = Loc.T("A good ear, a low price, and no licence: and never to see the inside of a Guild counting-house."),
+            Habit = Loc.T("A hedge-wright: a Keywright without the Guild's licence, as Bram was for twenty years, trading from a cart."),
+        },
+        new()
+        {
+            Key = "aldwin", Look = "aldous", Name = Loc.T("Sir Aldwin Gale"), Short = Loc.T("Sir Aldwin"), Tier = 1, Visits = 0, Ghost = true,
+            Wants = Loc.T("His blade in his family's hands, and then to rest."),
+            Habit = Loc.T("A knight who fell on Brindle Field the year before the Locking, and has walked it since."),
+        },
+        new()
+        {
+            Key = "dunning", Look = "gerda", Name = Loc.T("Martha Dunning"), Short = Loc.T("Martha"), Tier = 2, Visits = 0, Of = Faction.Commons,
+            Wants = Loc.T("Thornwick's roads free and its market open, and the Old Wood left standing."),
+            Habit = Loc.T("A Thornwick weaver, standing for reeve against the Guild's money with nothing but a loom and a loud voice."),
+        },
+        new()
+        {
+            Key = "agathe", Look = "ansel", Name = Loc.T("Sister Agathe"), Short = Loc.T("Agathe"), Tier = 2, Visits = 0, Of = Faction.Abbey,
+            Wants = Loc.T("Every chest left shut, as Saint Ide meant them; and to know who pays for the Unopened's bread."),
+            Habit = Loc.T("A preacher of the Unopened, the abbey's zealots, who say every chest opened feeds the Maw."),
+        },
+        new()
+        {
+            Key = "tansy", Look = "mags", Name = Loc.T("Mother Tansy"), Short = Loc.T("Tansy"), Tier = 3, Visits = 0, Of = Faction.Lockless,
+            Wants = Loc.T("Her money back, with a third on top, on the morning she said."),
+            Habit = Loc.T("A moneylender of Lantern Lane, who lends to anyone short for the Guild and collects from everyone."),
+        },
+        new()
+        {
+            Key = "ashby", Look = "penn", Name = Loc.T("Mistress Ashby"), Short = Loc.T("Ashby"), Tier = 2, Visits = 0, Judge = Judgment.Colour, Markup = (1f, 1.1f),
+            Colours = Village, Of = Faction.Commons, From = new[] { ("dowry", 1f) },
+            Wants = Loc.T("Her daughter's dowry, which the Corlews say is theirs."),
+            Habit = Loc.T("A Thornwick widow whose daughter was to marry a Corlew, until the wedding wasn't."),
+            Accepts = new[] { Loc.T("There. The ward agrees with me.") },
+            Passes = new[] { Loc.T("Then the court will hear it again.") },
+        },
+        new()
+        {
+            Key = "corlew", Look = "hob", Name = Loc.T("Hal Corlew"), Short = Loc.T("Corlew"), Tier = 2, Visits = 0, Judge = Judgment.Colour, Markup = (1f, 1.1f),
+            Colours = Village, Of = Faction.Commons, From = new[] { ("dowry", 1f) },
+            Wants = Loc.T("His sister's dowry, which the Ashbys say is theirs."),
+            Habit = Loc.T("A Thornwick carter whose sister was to marry into the Ashbys, until the wedding wasn't."),
+            Accepts = new[] { Loc.T("Knew it. Told them.") },
+            Passes = new[] { Loc.T("Then the court will hear it again.") },
+        },
         new()
         {
             Key = "jory", Look = "dorrin", Name = Loc.T("Jory Kettle"), Short = Loc.T("Jory"), Tier = 1, Visits = 0, Of = Faction.Commons,
@@ -929,7 +1021,11 @@ public static class Sellers
     /// <summary>What a seller says when you pass on their chest and a Heartsong bursts out of it to you.</summary>
     public static string BurstLine => Loc.T("Gods! It just... burst open! Keep the singing thing, then. The rest is going home with me.");
 
-    public static string Number(int n) => n switch { 1 => Loc.T("one"), 2 => Loc.T("two"), 3 => Loc.T("three"), 4 => Loc.T("four"), 5 => Loc.T("five"), 6 => Loc.T("six"), _ => n.ToString() };
+    public static string Number(int n) => n switch
+    {
+        1 => Loc.T("one"), 2 => Loc.T("two"), 3 => Loc.T("three"), 4 => Loc.T("four"), 5 => Loc.T("five"), 6 => Loc.T("six"),
+        7 => Loc.T("seven"), 8 => Loc.T("eight"), _ => n.ToString(),
+    };
 
     public static string Join(IReadOnlyList<string> words) =>
         words.Count <= 1 ? words.FirstOrDefault() ?? "" : Loc.T($"{Words.List(words.Take(words.Count - 1))} and {words[^1]}");

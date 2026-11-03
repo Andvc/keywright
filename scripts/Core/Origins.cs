@@ -41,6 +41,9 @@ public static class Origins
         new("archive", Loc.T("the Archive vaults"), Loc.T("deeds, spellbooks, coin and seals"), new[] { 2f, 1, 1, 1, 4, 2 }),
         new("court", Loc.T("a courtier's chest"), Loc.T("jewels, fine clothes and purses"), new[] { 3f, 1, 3, 2, 1, 4 }),
         new("pocket", Loc.T("a stranger's pocket"), Loc.T("whatever someone was carrying: purses and trinkets"), new[] { 5f, 1, 1, 2, 1, 3 }),
+        // 0.30's officials: what the Guild took for tithe, and what the Wardens recovered and nobody claimed.
+        new("seized", Loc.T("a house taken for tithe"), Loc.T("a family's savings: coin, cloaks and the good silver"), new[] { 4f, 1, 3, 2, 1, 2 }),
+        new("unclaimed", Loc.T("the Wardens' store"), Loc.T("whatever thieves took and nobody came back for"), new[] { 3f, 3, 2, 2, 1, 2 }),
     };
 
     public static OriginDef Get(string key) => All.First(o => o.Key == key);

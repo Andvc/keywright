@@ -9,7 +9,7 @@ namespace Keywright.Core;
 /// answer does. The engine (<see cref="GameState"/>'s tale half, Tales.cs) stages them; the sim's careful player answers
 /// them by <see cref="Choice.Worth"/>.
 /// </summary>
-public static class TaleBook
+public static partial class TaleBook
 {
     // The people tales bring (and the regulars they're about).
     public const string Pip = "pip", Ada = "ada", Bettany = "bettany", Tobin = "tobin", Nettle = "nettle", Rook = "rook", Sorrel = "sorrel",
@@ -20,6 +20,35 @@ public static class TaleBook
     // What tales leave behind that the rest of the game reads.
     public const string Apprentice = "pip.apprentice", Porter = "kettle.porter", GateCracked = "unlock.cracked", GazeKnown = "skrae.free",
         Decree = "fore.decree";
+
+    // 0.30: what tales leave behind (Consequences.cs): goodwill, rules, the court, the loan, and effects that last a while.
+    public const string Neighbours = "pip.neighbours", CrownHome = "crown.home", GoblinFriend = "goblins.friend", AldwinHome = "field.home",
+        Tolls = "reeve.tolls", MarketDays = "reeve.market", Verdict = "court.verdict", Bargain = "bargain.taken", LoanPaid = "tansy.paid",
+        LoanDefaulted = "tansy.defaulted";
+
+    // Effects that last a while (GameState.Until): to the last day each holds.
+    public const string Rival = "hedge.trading", Picket = "unopened.picket", TansyMen = "tansy.men", Crowd = "hedge.crowd", Away = "away",
+        Haunt = "field.haunt", FairDay = "fair.day";
+
+    // 0.30's people (and Bram, who tells what became of everyone).
+    public const string Bram = Story.Bram, Jasper = "jasper", Aldwin = "aldwin", Dunning = "dunning", Agathe = "agathe", Tansy = "tansy", Marrow = "marrow",
+        Brandt = "brandt", Garrick = "garrick", Tilly = "tilly", Vey = "vey", Zell = "zell", Maw = "maw", Ashby = "ashby", Corlew = "corlew",
+        Jory = "jory";
+
+    /// <summary>A paper for the case against the Guild (<see cref="GameState.Evidence"/>), as the Town page and the court name it.</summary>
+    public static string Paper(string key) => key switch
+    {
+        "roll" => Loc.T("the Chest Roll's copy"),
+        "ledger" => Loc.T("a page of the Guild's ledger"),
+        "tallies" => Loc.T("the debt-house tallies"),
+        "register" => Loc.T("the Mark-Finder's register"),
+        "deed" => Loc.T("the witness copy of the Wood's deed"),
+        "purse" => Loc.T("the Guild's purse from the Unopened's alms box"),
+        "books" => Loc.T("the Archive's ledgers, saved from the fire"),
+        "notes" => Loc.T("Archmage Orme's notes"),
+        "word" => Loc.T("Skrae's word"),
+        _ => key,
+    };
 
     /// <summary>The Magpie's suspects: who she might be (drawn per season), and the two things a witness could see of each.</summary>
     static readonly string[] Suspects = { Bettany, Hesper, Rook };
@@ -61,6 +90,25 @@ public static class TaleBook
         return visit;
     }
 
+    /// <summary>A chest put up to be read in front of people (<see cref="Visit.Contest"/>): given for a lucky coin, and a perfect read wins the prize.</summary>
+    static Visit Contested(GameState s, Random rng, string who, Chest chest, string pitch, string origin, int prize)
+    {
+        var visit = Given(s, rng, who, chest, pitch, origin);
+        visit.Contest = true;
+        visit.Prize = prize;
+        return visit;
+    }
+
+    /// <summary>The best weapon in a chest, taken out and kept for someone (a dead knight's blade), with what it would have sold for.</summary>
+    static void SetAside(GameState s, Visit v, string keepsake)
+    {
+        if (v.Chest.Everything.Where(i => i.Category == Category.Arms && !i.Fake).OrderByDescending(i => i.Value).FirstOrDefault() is Item blade)
+        {
+            v.Chest.Remove(blade);
+            s.Keepsakes[keepsake] = s.SaleValue(blade);
+        }
+    }
+
     /// <summary>Pip's weekly chest, once he's your apprentice: something he's fished out, at the shop's colour, given freely.</summary>
     public static Visit ApprenticeChest(GameState s, Random rng) =>
         Given(s, rng, Pip, Fill(rng, "millpond", ShopTiers.Typical(s.Tier), s.Tier, rng.Next(1, 4)),
@@ -91,13 +139,14 @@ public static class TaleBook
 
     // ---- The tales ----
 
-    public static readonly TaleDef[] All =
+    static readonly TaleDef[] Season28 =
     {
         // The Shut Chests: stolen chests, the Wardens, and who the Magpie is. Every season, from Thornwick.
         new()
         {
             Key = "magpie", Title = Loc.T("The Shut Chests"), Place = TalePlace.Always, Secrets = Suspects,
             Blurb = Loc.T("Someone's stealing chests around Thornwick: the Magpie, whom nobody's seen. The Wardens want a name."),
+            Ending = MagpieEnding,
             Beats = new Beat[]
             {
                 new()
@@ -289,6 +338,7 @@ public static class TaleBook
         {
             Key = "pip", Title = Loc.T("The Marked Child"), Place = TalePlace.Brindle,
             Blurb = Loc.T("Pip Hollow has the Key-mark. The Guild's Mark-Finders take marked children into its counting-houses."),
+            Ending = PipEnding,
             Beats = new Beat[]
             {
                 new()
@@ -327,8 +377,9 @@ public static class TaleBook
                             s.Sway(Faction.Commons, -2);
                             s.Goes(Pip);
                             s.Flags.Add("pip.named");
-                            s.Log("pip", Loc.T("You gave the Mark-Finder Pip's name. The Guild took him into its care."));
-                            return Loc.T("The Guild thanks you. He'll be well looked after.");
+                            s.Goes(Wynn);
+                            s.Log("pip", Loc.T("You gave the Mark-Finder Pip's name. The Guild took him into its care, and Wynn left Brindle."));
+                            return Loc.T("The Guild thanks you. He'll be well looked after. And the Guild remembers its friends: its bailiff calls on them first.");
                         }, W(s, s.Purses(0.75f), (Faction.Guild, 2), (Faction.Commons, -2)) - s.Purses(0.3f)),
                         C(Loc.T("None that I know of"), () =>
                         {
@@ -355,6 +406,7 @@ public static class TaleBook
                         C(Loc.T("I can't risk it"), () =>
                         {
                             s.Goes(Pip);
+                            s.Goes(Wynn);
                             s.Sway(Faction.Commons, -1);
                             s.Log("pip", Loc.T("You wouldn't hide Pip. The Guild found him at the fair."));
                             return Loc.T("Then they'll find him. They always do.");
@@ -381,6 +433,7 @@ public static class TaleBook
                                 s.Sway(Faction.Guild, 1);
                                 s.Sway(Faction.Commons, -2);
                                 s.Goes(Pip);
+                                s.Goes(Wynn);
                                 s.Log("pip", Loc.T("You let the Mark-Finder take Pip."));
                                 return Loc.T("A wise choice.");
                             }, W(s, 0, (Faction.Guild, 1), (Faction.Commons, -2))),
@@ -396,6 +449,55 @@ public static class TaleBook
                         return asks;
                     },
                 },
+                // 0.30: Wynn's thanks (a neighbour's price, and a favour), and the Mark-Finder's register.
+                new()
+                {
+                    Key = "pip.thanks", Who = Wynn, After = "pip.search", Gap = 2, If = s => s.Flagged(Apprentice),
+                    Says = s => Say(Wynn,
+                        Loc.T("Pip says you stood in the door and told the Guild there was no child here. The whole mill knows it, and half of Brindle."),
+                        Loc.T("We haven't the coin to thank you. But we've neighbours, and every one of them will sell to you at a neighbour's price " +
+                              "while my boy's safe with you: a sixth off.")),
+                    Asks = s => new()
+                    {
+                        C(Loc.T("Thank your neighbours for me"), () =>
+                        {
+                            s.Flags.Add(Neighbours);
+                            s.Owe(Wynn, "pip");
+                            s.Log("pip", Loc.T("Brindle's regulars sell to you at a neighbour's price now, a sixth off, while Pip's safe with you. Wynn owes you a favour."));
+                            return Loc.T("And if the Guild ever comes for more than its due, send for me. The whole mill will come.");
+                        }, W(s, s.Purses(0.4f) + Strategy.FavourWorth(s))),
+                        C(Loc.T("Keep your neighbours' coin"), () =>
+                        {
+                            s.Sway(Faction.Commons, 1);
+                            s.Owe(Wynn, "pip");
+                            s.Log("pip", Loc.T("You wouldn't take a neighbour's price for hiding Pip. Brindle hasn't stopped talking about it. Wynn owes you a favour."));
+                            return Loc.T("Then I'll tell everyone that too. And if the Guild comes for more than its due, send for me.");
+                        }, W(s, Strategy.FavourWorth(s), (Faction.Commons, 1)), kind: true),
+                    },
+                },
+                new()
+                {
+                    Key = "pip.register", Who = Pip, After = "pip.thanks", Gap = 6, Tier = 2, If = s => s.Flagged(Apprentice),
+                    Says = s => Say(Pip,
+                        Loc.T("Master, the Mark-Finder was at the Thornwick fair. She keeps a book: every marked child's name, and where the Guild " +
+                              "sent them. Some of them were six."),
+                        Loc.T("She leaves it on her table while she eats her pie. I could copy a page. I'm quick, and I'm small.")),
+                    Asks = s => new()
+                    {
+                        C(Loc.T("Copy one page, and run"), () =>
+                        {
+                            s.Gather("register");
+                            s.Sway(Faction.Guild, -1);
+                            s.Log("pip", Loc.T("Pip copied a page of the Mark-Finder's register: children the Guild took, and where it sent them. A paper for the case against the Guild."));
+                            return Loc.T("Done before she'd finished her crust! Forty names. I knew two of them.");
+                        }, W(s, Strategy.PaperWorth(s), (Faction.Guild, -1))),
+                        C(Loc.T("Too dangerous. Stay here"), () =>
+                        {
+                            s.Log("pip", Loc.T("You wouldn't let Pip near the Mark-Finder's register."));
+                            return Loc.T("Yes, master. I'll sweep, then.");
+                        }, kind: true),
+                    },
+                },
             },
         },
 
@@ -404,6 +506,7 @@ public static class TaleBook
         {
             Key = "kettle", Title = Loc.T("The Widow's Debt"), Place = TalePlace.Brindle,
             Blurb = Loc.T("Ada Kettle's son Jory is in the Guild's debt-house, and her husband's sword was pawned in Crownhold."),
+            Ending = KettleEnding,
             Beats = new Beat[]
             {
                 new()
@@ -453,7 +556,8 @@ public static class TaleBook
                         C(Loc.T("It's yours"), () =>
                         {
                             s.Sway(Faction.Commons, 1);
-                            s.Log("kettle", Loc.T("You gave Ada her husband's sword."));
+                            s.Owe(Ada, "kettle");
+                            s.Log("kettle", Loc.T("You gave Ada her husband's sword. She owes you a favour, she says, and she means it."));
                             return Loc.T("Rafe's sword. Oh, Rafe. Thank you, dear. Thank you.");
                         }, W(s, 0, (Faction.Commons, 1)), kind: true),
                         C(Loc.T($"Sell it to her for what she has ({ShopTiers.Scale(s.Tier) * 5}g)"), () =>
@@ -494,6 +598,31 @@ public static class TaleBook
                         }),
                     },
                 },
+                // 0.30: what Jory saw in the debt-house's books.
+                new()
+                {
+                    Key = "kettle.tallies", Who = Jory, After = "kettle.debt", Gap = 3, Tier = 3, If = s => s.Flagged(Porter),
+                    Says = s => Say(Jory,
+                        Loc.T("Two years I scrubbed the debt-house floors, and the clerks never minded me reading over their shoulders. Half the " +
+                              "debts in there were never owed: the Guild adds a tithe to a dead man's name and sends for his son."),
+                        Loc.T("I can write down what I saw, names and sums. Would it help anyone?")),
+                    Asks = s => new()
+                    {
+                        C(Loc.T("Write it all down"), () =>
+                        {
+                            s.Gather("tallies");
+                            s.Owe(Jory, "kettle");
+                            s.Log("kettle", Loc.T("Jory wrote down the debt-house's tallies: debts the Guild made up. A paper for the case against the Guild. He owes you a favour."));
+                            return Loc.T("Every name I can remember. And I don't forget a sum.");
+                        }, W(s, Strategy.PaperWorth(s) + Strategy.FavourWorth(s)), kind: true),
+                        C(Loc.T("Put it behind you, Jory"), () =>
+                        {
+                            s.Owe(Jory, "kettle");
+                            s.Log("kettle", Loc.T("Jory put the debt-house behind him. He owes you a favour."));
+                            return Loc.T("Maybe you're right. I'll carry chests and forget it.");
+                        }, W(s, Strategy.FavourWorth(s))),
+                    },
+                },
             },
         },
 
@@ -502,6 +631,7 @@ public static class TaleBook
         {
             Key = "door", Title = Loc.T("The Deep Door"), Place = TalePlace.Brindle, Secrets = new[] { "hoard", "fall" }, // loc: keys
             Blurb = Loc.T("Tobin has found a door at the bottom of the Barrow, sealed with the Key-mark."),
+            Ending = DoorEnding,
             Beats = new Beat[]
             {
                 new()
@@ -552,6 +682,7 @@ public static class TaleBook
                         C(Loc.T($"Pay for the rescue ({s.Purses(1)}g)"), () =>
                         {
                             s.Flags.Add("door.rescued");
+                            s.Owe(Tobin, "door");
                             s.Promise(s.Day + 2, Tobin, Loc.T("Tobin, rescued"));
                             s.Log("door", Loc.T("Tobin was trapped past the deep door. You paid for his rescue."));
                             return Loc.T("I'll send for the crew tonight. Bless you, love.");
@@ -580,7 +711,8 @@ public static class TaleBook
                     Bought = (s, v) =>
                     {
                         s.Sway(Faction.Commons, 1);
-                        s.Log("door", Loc.T("Tobin came back alive, and gave you half of what was behind the door."));
+                        s.Owe(Tobin, "door");
+                        s.Log("door", Loc.T("Tobin came back alive, and gave you half of what was behind the door. He owes you his life, he says."));
                     },
                 },
             },
@@ -591,6 +723,7 @@ public static class TaleBook
         {
             Key = "wood", Title = Loc.T("The Woodcutters"), Place = TalePlace.Thornwick,
             Blurb = Loc.T("The Guild's buying the felling rights on the Old Wood, and wants a Keywright's mark on the deed."),
+            Ending = WoodEnding,
             Beats = new Beat[]
             {
                 new()
@@ -608,7 +741,8 @@ public static class TaleBook
                             s.Sway(Faction.Guild, 1);
                             s.Sway(Faction.Wood, -2);
                             s.Flags.Add("wood.sealed");
-                            s.Log("wood", Loc.T("You put your mark to the Guild's deed for the Old Wood."));
+                            s.Gather("deed");
+                            s.Log("wood", Loc.T("You put your mark to the Guild's deed for the Old Wood. The witness copy names the coin it was paid in: seized from families."));
                             return Loc.T("A pleasure. The axes go in at the full moon.");
                         }, W(s, WitnessFee(s, 0.1f), (Faction.Guild, 1), (Faction.Wood, -2))),
                         C(Loc.T("Refuse"), () =>
@@ -669,7 +803,10 @@ public static class TaleBook
                                 s.TakeCurio(charm[6..]);
                                 broken = Loc.T($" A promise broken: the Hawthorn Lady's charm is gone from your case.");
                             }
-                            s.Log("wood", Loc.T("You sealed the Guild's deed for the Old Wood after all.") + broken);
+                            s.Gather("deed");
+                            s.Goes(Sorrel);
+                            s.Flags.Add("wood.felled");
+                            s.Log("wood", Loc.T("You sealed the Guild's deed for the Old Wood after all. Mother Sorrel won't trade with you again.") + broken);
                             return Loc.T("Sensible. The axes go in tomorrow.") + broken;
                         }, W(s, WitnessFee(s, 0.2f), (Faction.Guild, 1), (Faction.Wood, -3)) - (s.Flagged("wood.promised") ? s.Purses(0.6f) : 0)),
                         C(Loc.T("Refuse"), () =>
@@ -701,6 +838,7 @@ public static class TaleBook
         {
             Key = "parcel", Title = Loc.T("The Parcel"), Place = TalePlace.Thornwick,
             Blurb = Loc.T("Corvin Tallow needs somewhere to keep a parcel for two nights, and the Wardens are searching the market."),
+            Ending = ParcelEnding,
             Beats = new Beat[]
             {
                 new()
@@ -775,6 +913,7 @@ public static class TaleBook
         {
             Key = "fore", Title = Loc.T("The Foreclosures"), Place = TalePlace.Crownhold,
             Blurb = Loc.T("Half the chests the Guild forecloses on won't open for any Keywright it sells them to."),
+            Ending = ForeEnding,
             Beats = new Beat[]
             {
                 new()
@@ -820,6 +959,7 @@ public static class TaleBook
                         C(Loc.T("I'll take it to the King"), () =>
                         {
                             s.Flags.Add("fore.king");
+                            s.Gather("roll");
                             s.Sway(Faction.Crown, 1);
                             s.Log("fore", Loc.T("Master Quire gave you a copy of the Chest Roll. You'll take it to the King."));
                             return Loc.T("The King. Yes. If anyone can make the Guild answer for it, he can.");
@@ -845,6 +985,7 @@ public static class TaleBook
                     Then = s =>
                     {
                         s.Flags.Add("fore.ledger");
+                        s.Gather("ledger");
                         s.Goes(Tobias);
                         s.Log("fore", Loc.T("Tobias Fenn left Crownhold, and left you a page of the Guild's ledgers: where the tithe goes."));
                     },
@@ -873,6 +1014,7 @@ public static class TaleBook
         {
             Key = "unlock", Title = Loc.T("The Unlocking"), Place = TalePlace.Crownhold,
             Blurb = Loc.T("Archmage Orme is building an engine to copy the Key-mark: any chest would open for anyone."),
+            Ending = UnlockEnding,
             Beats = new Beat[]
             {
                 new()
@@ -913,10 +1055,12 @@ public static class TaleBook
                         {
                             s.Sway(Faction.Arcanum, -2);
                             s.Flags.Add("unlock.broken");
+                            s.Gather("notes");
+                            s.Owe(Ilse, "unlock");
                             string gift = GiftCurio(s, new Random(unchecked(s.Seed * 47 + s.Day)), CurioRarity.Uncommon, CurioTag.Enchantment);
                             s.Log("unlock", Loc.T($"You helped Ilse break Orme's engine. She gave you {gift} from the Arcanum's stores."));
                             return Loc.T($"Then I'll do it tonight. Take this, from the stores: {gift}. She'll never miss it.");
-                        }, W(s, s.Purses(0.4f), (Faction.Arcanum, -2)), kind: true),
+                        }, W(s, s.Purses(0.4f) + Strategy.PaperWorth(s) + Strategy.FavourWorth(s), (Faction.Arcanum, -2)), kind: true),
                         C(Loc.T("Tell the Guild"), () =>
                         {
                             s.TaleGold(s.Purses(0.5f));
@@ -955,6 +1099,7 @@ public static class TaleBook
         {
             Key = "crown", Title = Loc.T("Ironroot's Crown"), Place = TalePlace.Crownhold,
             Blurb = Loc.T("Ironroot's crown was locked in the Royal Treasury at the Locking, and the Guild bans dwarf-gold."),
+            Ending = CrownEnding,
             Beats = new Beat[]
             {
                 new()
@@ -1004,6 +1149,8 @@ public static class TaleBook
                     Then = s =>
                     {
                         s.Sway(Faction.Ironroot, 3);
+                        s.Flags.Add(CrownHome);
+                        s.Owe(Durgan, "crown");
                         var gift = new[] { "workshop", "magnet" }.Select(Upgrades.Get).FirstOrDefault(u => !s.Has(u.Key) && (u.Requires == null || s.Has(u.Requires)));
                         if (gift != null) s.Grant(gift.Key);
                         else s.TaleGold(s.Purses(1.5f));
@@ -1018,6 +1165,7 @@ public static class TaleBook
         {
             Key = "vell", Title = Loc.T("The Vell Inheritance"), Place = TalePlace.Crownhold,
             Blurb = Loc.T("Lord Cassian Vell is selling his sister's chests, and they aren't his to sell."),
+            Ending = VellEnding,
             Beats = new Beat[]
             {
                 new()
@@ -1056,6 +1204,7 @@ public static class TaleBook
                             {
                                 s.BackRoom.Remove(held);
                                 s.Flags.Add("vell.given");
+                                s.Owe(Isaura, "vell");
                                 s.Sway(Faction.Crown, 1);
                                 s.Log("vell", Loc.T("You gave Lady Isaura her grandmother's box back."));
                                 return Loc.T("Thank you. I'll bring it back tomorrow: freely given, it'll open for you.");
@@ -1106,6 +1255,7 @@ public static class TaleBook
         {
             Key = "defector", Title = Loc.T("The Defector"), Place = TalePlace.Emporium,
             Blurb = Loc.T("Skrae has heard enough of the Maw, and wants out."),
+            Ending = DefectorEnding,
             Beats = new Beat[]
             {
                 new()
@@ -1158,6 +1308,7 @@ public static class TaleBook
                     Then = s =>
                     {
                         s.Flags.Add(GazeKnown);
+                        s.Gather("word");
                         s.Flags.Remove($"away:{Skrae}");
                         string gift = GiftCurio(s, new Random(unchecked(s.Seed * 53 + s.Day)), CurioRarity.Uncommon);
                         s.Log("defector", Loc.T($"Skrae went free. The Maw's gaze won't touch your counter again, and it left you {gift}."));
@@ -1166,6 +1317,9 @@ public static class TaleBook
             },
         },
     };
+
+    /// <summary>Every tale a season can draw: 0.28's, and 0.30's from Brindle, Thornwick, Crownhold and the Emporium (TaleBook.*.cs).</summary>
+    public static readonly TaleDef[] All = Season28.Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales()).ToArray();
 
     static readonly Dictionary<string, Beat> Beats = All.SelectMany(t => t.Beats).ToDictionary(b => b.Key);
 
@@ -1187,7 +1341,8 @@ public static class TaleBook
         if (!Enabled) return new List<string>();
         var rng = new Random(unchecked(seed * 31337 + 7));
         var drawn = All.Where(t => t.Place == TalePlace.Always).Select(t => t.Key).ToList();
-        foreach (var (place, count) in new[] { (TalePlace.Brindle, 2), (TalePlace.Thornwick, 1), (TalePlace.Crownhold, 2), (TalePlace.Emporium, 1) })
+        // 0.30: three of each place's tales (of seven or eight) and both of the Emporium's, over the longer season.
+        foreach (var (place, count) in new[] { (TalePlace.Brindle, 3), (TalePlace.Thornwick, 3), (TalePlace.Crownhold, 3), (TalePlace.Emporium, 2) })
             drawn.AddRange(All.Where(t => t.Place == place).OrderBy(_ => rng.Next()).Take(count).Select(t => t.Key));
         return drawn;
     }

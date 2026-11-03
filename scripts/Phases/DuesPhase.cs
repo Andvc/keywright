@@ -57,8 +57,8 @@ public partial class DuesPhase : Phase
     void BuildTrack()
     {
         foreach (var child in _track.GetChildren()) child.QueueFree();
-        // One box for each week of the debt (the last five weeks, after it).
-        const float y = 108, w = 100, gap = 8;
+        // One box for each week of the debt (the last seven weeks, after it), narrow enough for seven and the Key.
+        const float y = 108, w = 82, gap = 4;
         int first = State.Week > Guild.Weeks ? State.Week - (Guild.Weeks - 1) : 1;
         for (int i = 0; i < Guild.Weeks; i++)
         {
@@ -173,7 +173,7 @@ public partial class DuesPhase : Phase
             Put(UiKit.MakeButton(Loc.T($"Pay {due}g"), Palette.Gold, 24, Pay).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
             return;
         }
-        Teach("pawn");
+        Teach(State.Callable.Any() ? "favour" : "pawn");
         BuildPawn(due);
     }
 
@@ -185,16 +185,27 @@ public partial class DuesPhase : Phase
     void BuildPawn(int due)
     {
         Put(UiKit.MakeLabel(Loc.T($"SHORT BY {due - State.Gold}g"), 24, Palette.Bad, outline: 4).Place(PanelX, 392, 400, 30));
-        Put(UiKit.MakeLabel(State.Is(Characters.Isolde) ? Loc.T("Isolde's collection is not for pawning. Sell a curio back:")
+        Put(UiKit.MakeLabel(State.Callable.Any() ? Loc.T("Call on a friend who owes you, pawn what's on display, or sell a curio back:")
+            : State.Is(Characters.Isolde) ? Loc.T("Isolde's collection is not for pawning. Sell a curio back:")
             : Loc.T("Pawn what's on display at the Guild's price, or sell a curio back:"), 16, Palette.Muted).Place(PanelX, 426, PanelW, 20));
-        // The plainest things first: what you'd miss least. Two rows at most.
-        var things = State.Display.Where(State.CanPawn).OrderBy(i => i.Prestige).Select(i => (object)i)
+        // Friends who owe you first (0.30: an eighth of the night's due each, once a season), then the plainest things: what
+        // you'd miss least. Two rows at most.
+        var things = State.Callable.Select(p => (object)new Friend(p))
+            .Concat(State.Display.Where(State.CanPawn).OrderBy(i => i.Prestige).Select(i => (object)i))
             .Concat(State.CurioKeys.Select(k => (object)k)).Take(8).ToList();
         for (int i = 0; i < things.Count; i++)
         {
             float x = PanelX + i % 4 * (PawnW + 12), y = 452 + i / 4 * (PawnH + 8);
             Button button;
-            if (things[i] is Item item)
+            if (things[i] is Friend friend)
+            {
+                string name = Sellers.Person(friend.Key).Name;
+                button = Put(UiKit.MakeButton(Loc.T($"+{State.FavourPays}g"), Palette.Good.Darkened(0.4f), 16, () => CallIn(friend.Key))
+                    .Place(x, y, PawnW, PawnH));
+                button.TooltipText = Loc.T($"Call on {name}: they owe you a favour, and bring {State.FavourPays}g. Once a season.");
+                button.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{Sellers.LookOf(friend.Key)}.png", new Vector2(30, PawnH / 2), 1, outlined: true));
+            }
+            else if (things[i] is Item item)
             {
                 button = Put(UiKit.MakeButton(Loc.T($"+{State.PawnValue(item)}g"), Palette.Of(item.Rarity).Darkened(0.3f), 16, () => Pawn(item))
                     .Place(x, y, PawnW, PawnH));
@@ -252,6 +263,20 @@ public partial class DuesPhase : Phase
         Sfx.PlayGroup("pay");
         Game.Hud.SetGold(State.Gold);
         FloatText(Loc.T($"+{value}g"), new Vector2(PanelX + PanelW / 2, 370), Palette.Gold, 24);
+        Build();
+    }
+
+    /// <summary>Someone who owes you, called on tonight.</summary>
+    sealed record Friend(string Key);
+
+    /// <summary>Calls in a favour: a friend brings an eighth of the night's due.</summary>
+    public void CallIn(string person)
+    {
+        int value = State.CallIn(person);
+        if (value <= 0) return;
+        Sfx.PlayGroup("pay");
+        Game.Hud.SetGold(State.Gold);
+        FloatText(Loc.T($"+{value}g"), new Vector2(PanelX + PanelW / 2, 370), Palette.Good, 24);
         Build();
     }
 

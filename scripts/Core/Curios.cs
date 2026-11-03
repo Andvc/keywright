@@ -49,13 +49,13 @@ public static class Curios
 {
     // What each effect does, for the rules (GameState, Build.cs) and the blurbs.
     public const float InterestRate = 0.03f, TicketRate = 0.8f, LoupeFakes = 0.25f, InkFakes = 1f / 3, WatchPatience = 2f, TokenSwing = 0.25f,
-        FootLuck = 0.05f, WheelLuck = 0.33f, HorseshoeStep = 0.06f, HorseshoeMax = 0.3f, WishboneBonus = 1.5f, SealFee = 0.08f, ForkStep = 0.03f,
+        FootLuck = 0.1f, WheelLuck = 0.5f, HorseshoeStep = 0.1f, HorseshoeMax = 0.5f, WishboneBonus = 1.5f, SealFee = 0.08f, ForkStep = 0.03f,
         ForkMax = 0.3f, LedgerRight = 1.15f, LedgerWrong = 0.85f, TongueFloor = 0.8f, WaitStep = 0.05f, WaitMax = 0.2f, BellPrice = 0.75f,
         CofferShare = 0.4f, QueuePrice = 0.8f, HornDearer = 1.05f, WhetstoneBonus = 1.75f, TradeBonus = 1.5f, ScalesStep = 0.2f, StillBroken = 0.5f,
-        LockboxShare = 0.25f, PillowShare = 0.2f, NetSongs = 3f, RibbonPay = 1.5f, CrescentPrices = 0.95f, TradeLuck = 0.15f, LampsPerPoint = 0.015f,
+        LockboxShare = 0.25f, PillowShare = 0.2f, NetSongs = 3f, RibbonPay = 1.5f, CrescentPrices = 0.95f, TradeLuck = 0.25f, LampsPerPoint = 0.015f,
         RingMagic = 4f, SignetFloor = 0.9f, MarkCrooks = 2f,
         // 0.21's engines, the sight-unseen buyer's, the haggler's and the reader's.
-        AetherStep = 0.02f, AetherMax = 0.2f, SpindleStep = 0.01f, SpindleMax = 0.3f, DipLuck = 0.08f, SealedPrice = 0.85f, BlindfoldPrice = 0.7f,
+        AetherStep = 0.02f, AetherMax = 0.2f, SpindleStep = 0.02f, SpindleMax = 0.5f, DipLuck = 0.15f, SealedPrice = 0.85f, BlindfoldPrice = 0.7f,
         BondShare = 0.4f, WholesaleStep = 0.04f, WholesaleMax = 0.2f, KnotStep = 0.01f, KnotMax = 0.08f, GoldenFloor = 0.9f, TruthglassBonus = 1.5f,
         RegisterStep = 0.005f, RegisterMax = 0.12f, LogStep = 0.02f, LogMax = 0.2f, PassBonus = 2f, WardTallyStep = 0.1f;
 
@@ -314,9 +314,9 @@ public static class Curios
     public static int Base(CurioRarity rarity) => rarity switch
     {
         CurioRarity.Common => 10,
-        CurioRarity.Uncommon => 25,
-        CurioRarity.Rare => 75,
-        _ => 250,
+        CurioRarity.Uncommon => 20,
+        CurioRarity.Rare => 50,
+        _ => 150,
     };
 
     /// <remarks>

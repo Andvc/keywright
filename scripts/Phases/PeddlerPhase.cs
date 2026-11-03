@@ -80,14 +80,18 @@ public partial class PeddlerPhase : Phase
         // Your curios: click one to sell it back for half.
         const float y = CardsY + CardH + 32;
         _board.AddChild(UiKit.MakeLabel(Loc.T($"YOUR CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(RowX, y, 200, 20));
-        _board.AddChild(UiKit.MakeLabel(Loc.T("Click one to sell it back for half."), 16, Palette.Muted).Place(RowX + 200, y, 500, 20));
+        // Full: Nim's prices still show, greyed out, and this says how to make room.
+        _board.AddChild(State.CuriosFull
+            ? UiKit.MakeLabel(Loc.T("No room for more: click one to sell it back for half."), 16, Palette.Warn).Place(RowX + 200, y, 560, 20)
+            : UiKit.MakeLabel(Loc.T("Click one to sell it back for half."), 16, Palette.Muted).Place(RowX + 200, y, 560, 20));
         for (int i = 0; i < State.CurioSlots; i++)
         {
             float x = RowX + i * 76;
-            var slot = UiKit.MakePanel(i < State.CurioKeys.Count ? Palette.Magic.Darkened(0.2f) : Palette.PanelBorder).Place(x, y + 26, 68, 68);
+            // Each curio framed in its own rarity's colour, as Nim's cards are.
+            var curio = i < State.CurioKeys.Count ? Curios.Get(State.CurioKeys[i]) : null;
+            var slot = UiKit.MakePanel(curio != null ? Palette.Of(curio.Rarity).Darkened(0.2f) : Palette.PanelBorder).Place(x, y + 26, 68, 68);
             _board.AddChild(slot);
-            if (i >= State.CurioKeys.Count) continue;
-            var curio = Curios.Get(State.CurioKeys[i]);
+            if (curio == null) continue;
             slot.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(34, 34)));
             var sell = new Button
             {
@@ -155,7 +159,8 @@ public partial class PeddlerPhase : Phase
         {
             var chest = held[i];
             float y = 52 + i * 56;
-            string what = chest.Kept ? Loc.T($"{chest.Owner}'s parcel, kept for collection") : Loc.T($"A {Categories.ColourName(chest.Colour)} chest: {chest.Owner}'s");
+            string what = chest.Key == "duel" ? Loc.T("The duel's stakes, held for the winner")
+                : chest.Kept ? Loc.T($"{chest.Owner}'s parcel, kept for collection") : Loc.T($"A {Categories.ColourName(chest.Colour)} chest: {chest.Owner}'s");
             panel.AddChild(UiKit.MakeLabel(what, 16, Palette.Text).Place(20, y + 12, 300, 20));
             if (chest.Kept) continue;
             panel.AddChild(UiKit.MakeButton(Loc.T($"Return it +{State.FinderShare}g"), Palette.Good, 16, () => ReturnHeld(chest)).Place(330, y, 166, 44));
@@ -236,11 +241,13 @@ public partial class PeddlerPhase : Phase
             return card;
         }
         string warning = price == 0 ? null : State.ShortNote(price, curio: curio);
-        var buy = UiKit.MakeButton(State.CuriosFull ? Loc.T("No room") : price == 0 ? Loc.T("Take it, free") : Loc.T($"Buy {price}g"),
+        // The price shows whether or not there's room for it: with no room, the button's greyed out, and says why.
+        var buy = UiKit.MakeButton(price == 0 ? Loc.T("Take it, free") : Loc.T($"Buy {price}g"),
             price == 0 ? Palette.Good : warning != null ? Palette.Bad : Palette.Gold, 16, () => AskBuy(curio)).Place(30, CardH - 56, CardW - 60, 44);
         buy.Disabled = State.CuriosFull || State.Gold < price;
-        buy.TooltipText = State.CuriosFull ? Loc.T("Sell a curio back to Nim first to make room.")
-            : Loc.T($"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse tonight.{((warning != null ? $" {warning}" : ""))}");
+        string why = Loc.T($"{Curios.Base(curio.Rarity)}g for a {Curios.RarityName(curio.Rarity)} curio, and {Synergies.Pct(Curios.Share(curio.Rarity))} of your purse tonight.");
+        buy.TooltipText = State.CuriosFull ? Loc.T($"No room: sell a curio back to Nim first. {why}")
+            : warning != null ? Loc.T($"{why} {warning}") : why;
         card.AddChild(buy);
         return card;
     }

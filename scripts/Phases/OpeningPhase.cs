@@ -776,7 +776,8 @@ public partial class OpeningPhase : Phase
         Teach("opened");
         if (visit.Seller == Story.VaultSeller) Game.Moment("24_vault", 1.5);
         if (_landed.Any(l => l.Item.IsSong)) Teach("song_found");
-        if (_landed.Any(l => l.Item.Quality != _purchase.Chest.Quality && l.Item.Displayable && !l.Item.IsSong)) Teach("quality");
+        if (_landed.Any(l => l.Item.Quality == Rarity.Legendary && !l.Item.IsSong)) Teach("gold");
+        else if (_landed.Any(l => l.Item.Quality != _purchase.Chest.Quality && l.Item.Displayable && !l.Item.IsSong)) Teach("quality");
         if (State.DisplayOpen && _landed.Any(l => l.Item.Displayable && l.Item.Prestige >= 4)) Teach("keep");
         if (_deliverButtons.Count > 0) Teach("deliver");
         Game.Moment("08_verdict", 1.2);

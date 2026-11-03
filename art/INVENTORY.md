@@ -13,7 +13,7 @@ Round 2 (0.25) redraws every category marked *redraw*, flat and quiet, in batche
 | frame | 4 | 320x180 | 9, 10 | P1 | redraw |
 | shelf | 4 | 136x40 | 9, 10 | P1 | redraw |
 | counter | 4 | 320x61 | 9, 10 | P1 | redraw |
-| figure | 38 | 96x160 | 9, 11 | P1, P3 | redraw |
+| figure | 47 | 96x160 | 9, 11 | P1, P2, P3 | redraw |
 | sheet | 4 | 216x320 | 9, 10 | P1 | redraw |
 | prop | 11 | 12x20, 16x24, 20x16, 22x10... | 9, 10 | P1, P2 | redraw |
 | item | 33 | 32x32 | 9, 12 | P1 | redraw |
@@ -29,7 +29,7 @@ Round 2 (0.25) redraws every category marked *redraw*, flat and quiet, in batche
 | brand | 5 | 16x16, 320x72, 32x32, 48x48... | 7 | P2 | keep |
 | scene | 4 | 320x180 | 10 | P1 | redraw |
 | store | 9 | 231x87, 300x450, 374x448, 460x215... | 8 | P3 | keep |
-| **all** | **267** | | | | |
+| **all** | **276** | | | | |
 
 Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place.stall`, `frame.stall`, `shelf.stall`, `counter.stall`, `sheet.stall`, `prop.lantern_stall`, `figure.hob`, `icon.upgrade.lamp`, `icon.kind.coins`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`.
 
@@ -120,6 +120,15 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 | `figure.isolde` | Isolde | 96x160 | P1 | `art/generated/figures/isolde.png` | `assets/sprites/sellers/isolde.png` | Bram's niece by marriage, a lady who has never sold a thing she liked: the Collection. Blonde hair in a braided crown, a calm proud gaze, a long wine-red gown with a gold embroidered collar. |
 | `figure.mara` | Mara, unhooded | 96x160 | P3 | `art/generated/figures/mara.png` | `assets/sprites/sellers/mara.png` | The last archmage of the Keyhold, around sixty, after she tells you her name: cropped silver hair, sharp violet eyes, a weathered face, the violet hooded cloak with its hood down, a silver key-shaped clasp at the throat. |
 | `figure.king` | King Aldric IX | 96x160 | P3 | `art/generated/figures/king.png` | `assets/sprites/sellers/king.png` | The same tired old man as Old Aldo, now as the King: a slim gold crown, the white beard, the kind weary eyes, a long royal crimson mantle with an ermine collar, the ruby ring. |
+| `figure.marrow` | Bailiff Marrow | 96x160 | P2 | `art/generated/figures/marrow.png` | `assets/sprites/sellers/marrow.png` | The Gilded Guild's bailiff, in his fifties: thin and precise, a long grey face with half-moon spectacles, a black coat with gilded Guild buttons, a ledger under one arm and a brass seal on a chain. |
+| `figure.brandt` | Quartermaster Brandt | 96x160 | P2 | `art/generated/figures/brandt.png` | `assets/sprites/sellers/brandt.png` | The Wardens' quartermaster at the Thornwick toll, in his forties: broad and weathered, a close-cropped grey beard, the Wardens' green-and-cream tabard over a leather jerkin, a toll scale hanging from his belt. |
+| `figure.jasper` | Jasper Wick | 96x160 | P2 | `art/generated/figures/jasper.png` | `assets/sprites/sellers/jasper.png` | A hedge-wright in his twenties, cheerful and reckless: a mop of black curls, a crooked grin, a patched blue coat with too many pockets, fingerless gloves, a Key-mark on his palm he doesn't bother hiding. |
+| `figure.aldwin` | Sir Aldwin Gale | 96x160 | P2 | `art/generated/figures/aldwin.png` | `assets/sprites/sellers/aldwin.png` | The ghost of a knight who fell before the Locking: tall, gaunt, in rusted mail and a torn surcoat with the Gales' device, an old helm under his arm, a long grey face. The game draws him pale and half transparent. |
+| `figure.dunning` | Martha Dunning | 96x160 | P2 | `art/generated/figures/dunning.png` | `assets/sprites/sellers/dunning.png` | A Thornwick weaver standing for reeve, in her forties: strong forearms, a no-nonsense face, auburn hair under a headscarf, a homespun dress with a weaver's apron full of bobbins. |
+| `figure.agathe` | Sister Agathe | 96x160 | P2 | `art/generated/figures/agathe.png` | `assets/sprites/sellers/agathe.png` | A preacher of the Unopened, the abbey's zealots, in her thirties: severe and sincere, a plain grey habit with a rope belt, an iron padlock hanging from it as a pendant, a wooden placard under her arm. |
+| `figure.tansy` | Mother Tansy | 96x160 | P2 | `art/generated/figures/tansy.png` | `assets/sprites/sellers/tansy.png` | A moneylender of Lantern Lane, in her sixties: small and round and smiling, sharp little eyes, a lace cap, a plum velvet dress, an abacus on a cord and a fat purse at her belt. |
+| `figure.ashby` | Mistress Ashby | 96x160 | P3 | `art/generated/figures/ashby.png` | `assets/sprites/sellers/ashby.png` | A Thornwick widow in her fifties, very upright, in her best black dress and a white collar, holding a small dowry chest against her chest, mouth set tight. |
+| `figure.corlew` | Hal Corlew | 96x160 | P3 | `art/generated/figures/corlew.png` | `assets/sprites/sellers/corlew.png` | A Thornwick carter in his thirties, big and blunt: a red neckerchief, a leather waistcoat, rolled sleeves, the same small dowry chest under one arm. |
 
 ## sheet
 

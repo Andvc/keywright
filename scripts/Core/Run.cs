@@ -60,10 +60,14 @@ public sealed partial class GameState
     /// What the tales do to the Guild's dues (docs/stories.md): a friend of the Guild has a twentieth overlooked, a foe is
     /// audited a twentieth more, and the King's decree cuts the tithe by a fifth.
     /// </summary>
-    float TaleDues => (Friend(Faction.Guild) ? 1 - GuildFavour : Foe(Faction.Guild) ? 1 + GuildFavour : 1f) * (Flagged(TaleBook.Decree) ? Decreed : 1f);
+    float TaleDues => (Friend(Faction.Guild) ? 1 - GuildFavour : Foe(Faction.Guild) ? 1 + GuildFavour : 1f) * (Flagged(TaleBook.Decree) ? Decreed : 1f) *
+                      (OnTrial ? Tried : 1f);
 
     /// <summary>What the Guild overlooks for a friend (and adds for a foe), and what's left of a due after the King's decree.</summary>
     public const float GuildFavour = 0.05f, Decreed = 0.8f;
+
+    /// <summary>What's left of a due while the Guild's on trial (the King's court).</summary>
+    public const float Tried = 0.5f;
 
     bool _halfDue;
 
@@ -219,9 +223,9 @@ public sealed partial class GameState
     public static (int Below, int Gift) Stash(int tier) => tier switch
     {
         1 => (20, 30),
-        2 => (40, 60),
-        3 => (120, 200),
-        _ => (1000, 1500),
+        2 => (30, 40),
+        3 => (50, 80),
+        _ => (270, 400),
     };
 
     /// <summary>Nearly broke at the start of a day: Bram helps out, if he still can.</summary>
@@ -258,11 +262,11 @@ public sealed partial class GameState
     void Pity(Chest chest)
     {
         var eligible = chest.Everything.Where(i => !i.Fake && !i.Broken && !i.IsSong).ToList();
-        var lift = eligible.Where(i => i.Quality < Rarity.Legendary).ToArray();
+        var lift = eligible.Where(i => i.Quality < Rarity.Epic).ToArray();
         if (lift.Length > 0 && Rng.NextFloat() < PityChance)
         {
             var pick = Rng.PickOne(lift);
-            chest.Improve(i => i.Id == pick.Id ? i with { Quality = i.Quality + 1 } : i);
+            chest.Improve(i => i.Id == pick.Id ? i with { Quality = Categories.Lift(i.Quality) } : i);
         }
         if (chest.Everything.Any(i => !i.Fake && !i.Broken && i.Quality > chest.Quality)) DrySpell = 0;
         else DrySpell += eligible.Count;
@@ -378,7 +382,7 @@ public sealed partial class GameState
     }
 
     /// <summary>Nim comes by every night (0.28), after the day's end and the Guild, from the third.</summary>
-    public bool PeddlerToday => Day >= Curios.FirstNight;
+    public bool PeddlerToday => Day >= Curios.FirstNight && !AwayTonight;
 
     /// <summary>The week's story is told this morning.</summary>
     public bool StoryToday => Plan != null && Plan.Week == Week && Plan.StoryDay > 0 && Plan.StoryDay == DayOfWeek;
@@ -454,7 +458,8 @@ public sealed partial class GameState
     /// When the Hooded Woman wants her next piece's price: weeks 2, 3 and 4 (or the week after, if you missed one),
     /// until the debt's last week. After that she's gone looking on her own.
     /// </summary>
-    static int HoodScheduled(int week) => week >= 4 ? 3 : week >= 3 ? 2 : week >= 2 ? 1 : 0;
+    /// <summary>How many shards the Hooded Woman has asked for by a week: one from the second, two from the fourth, three from the sixth.</summary>
+    static int HoodScheduled(int week) => week >= 6 ? 3 : week >= 4 ? 2 : week >= 2 ? 1 : 0;
 
     // ---- Events ----
 

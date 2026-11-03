@@ -80,6 +80,12 @@ public sealed record Item(Category Category, Rarity Quality, bool Magic = false,
     /// <summary>Which one this is: two purses alike are still two things. Kept when it breaks.</summary>
     public int Id { get; init; } = Interlocked.Increment(ref _lastId);
 
+    /// <summary>
+    /// Enchanted by luck once it was bought (a lucky purple thing shines, 0.30): nobody could have seen it glow before,
+    /// so the slip is read as if it were plain, and the opening thanks luck.
+    /// </summary>
+    public bool Shone { get; init; }
+
     public CategoryDef Def => Categories.Get(Category);
 
     /// <summary>One of the nine Heartsongs.</summary>
@@ -119,8 +125,24 @@ public sealed record Item(Category Category, Rarity Quality, bool Magic = false,
 
 public static class Categories
 {
-    /// <summary>How much more a better thing of the same kind is worth: common, uncommon, rare, epic, legendary.</summary>
-    public static readonly int[] QualityMultiplier = { 1, 3, 10, 30, 100, 100 };
+    /// <summary>
+    /// How much more a better thing of the same kind is worth: common, uncommon, rare, epic, legendary. Each colour is worth
+    /// twice the one below (0.30: three times and more until then, so a shop a step inward was worth three to ten times
+    /// the last, and the numbers ran away by the Emporium); gold is the exception, three times purple, because it's rare
+    /// (<see cref="GoldShare"/>): finding one is meant to feel like it.
+    /// </summary>
+    public static readonly int[] QualityMultiplier = { 1, 2, 4, 8, 24, 24 };
+
+    /// <summary>
+    /// Gold is rare (0.30): when a chest's own roll would make a thing gold, it does so this share of the time (the rest
+    /// stays at the chest's colour). And luck never makes gold at all: restorers, curios and a dry spell lift things as far as
+    /// purple (<see cref="Lift"/>). A thing is gold when it went into the chest gold. No restorer can make a legend.
+    /// </summary>
+    public const float GoldShare = 0.06f;
+
+    /// <summary>A quality lifted by luck: a step (or more) better, but never into gold; a gold thing stays gold.</summary>
+    public static Rarity Lift(Rarity quality, int steps = 1) =>
+        quality >= Rarity.Legendary ? quality : (Rarity)Math.Min((int)Rarity.Epic, Math.Max((int)quality, (int)quality + steps));
 
     public const int MagicMultiplier = 2;
 
@@ -178,24 +200,38 @@ public static class Categories
     /// once in a long while two or three steps better. Nothing is worse than common or better than legendary: those chances
     /// stay at the end they'd fall off.
     /// </summary>
-    public static (Rarity Quality, float Chance)[] Odds(Rarity chest) =>
-        Spread.GroupBy(s => (Rarity)Math.Clamp((int)chest + s.Steps, 0, 4))
-            .Select(g => (g.Key, g.Sum(s => s.Chance))).OrderBy(o => o.Key).ToArray();
+    public static (Rarity Quality, float Chance)[] Odds(Rarity chest)
+    {
+        var odds = Spread.GroupBy(s => (Rarity)Math.Clamp((int)chest + s.Steps, 0, 4))
+            .ToDictionary(g => g.Key, g => g.Sum(s => s.Chance));
+        // Gold, rare: most of what the spread would have made gold stays at the chest's colour.
+        if (chest < Rarity.Legendary && odds.TryGetValue(Rarity.Legendary, out float gold))
+        {
+            odds[Rarity.Legendary] = gold * GoldShare;
+            odds[chest] = odds.GetValueOrDefault(chest) + gold * (1 - GoldShare);
+        }
+        return odds.Select(o => (o.Key, o.Value)).OrderBy(o => o.Item1).ToArray();
+    }
 
     public static Rarity RollQuality(Random rng, Rarity chest) => rng.PickWeighted(Odds(chest), o => o.Chance).Quality;
 
-    /// <summary>A swing away from a quality, as the spread swings: a step worse most often, sometimes better.</summary>
+    /// <summary>
+    /// A swing away from a quality, as the spread swings: a step worse most often, sometimes better. It's luck, so it never
+    /// lands on gold (<see cref="Lift"/>).
+    /// </summary>
     public static Rarity Swing(Random rng, Rarity quality)
     {
         var steps = rng.PickWeighted(Spread.Where(s => s.Steps != 0).ToArray(), s => s.Chance).Steps;
-        return (Rarity)Math.Clamp((int)quality + steps, 0, 4);
+        return Swung(quality, steps);
     }
+
+    static Rarity Swung(Rarity quality, int steps) => steps > 0 ? Lift(quality, steps) : (Rarity)Math.Clamp((int)quality + steps, 0, 4);
 
     /// <summary>Where a <see cref="Swing"/> lands, and how often: the same spread without staying put.</summary>
     public static (Rarity Quality, float Chance)[] SwingOdds(Rarity quality)
     {
         float moved = Spread.Where(s => s.Steps != 0).Sum(s => s.Chance);
-        return Spread.Where(s => s.Steps != 0).GroupBy(s => (Rarity)Math.Clamp((int)quality + s.Steps, 0, 4))
+        return Spread.Where(s => s.Steps != 0).GroupBy(s => Swung(quality, s.Steps))
             .Select(g => (g.Key, g.Sum(s => s.Chance) / moved)).OrderBy(o => o.Key).ToArray();
     }
 

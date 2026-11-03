@@ -139,7 +139,7 @@ public static class Market
             bool fake = (seller.Fakes.Contains(c) && rng.NextFloat() < seller.FakeChance) || (c == Category.Coins && boosts.Slugs > 0 && rng.NextFloat() < boosts.Slugs);
             bool magic = !fake && rng.NextFloat() < magicChance;
             var quality = Categories.RollQuality(rng, colour);
-            if (quality < Rarity.Legendary && rng.NextFloat() < seller.QualityBoost) quality++;
+            if (quality < Rarity.Epic && rng.NextFloat() < seller.QualityBoost) quality++;
             return new Item(c, quality, magic, fake);
         }).ToList();
         // An enchantment spreads (enchanter's chalk: one more thing; the archmage's staff: everything real in the chest).
@@ -179,7 +179,7 @@ public static class Market
     static Item Warding(Random rng, SellerDef seller, Chest chest, List<Category> kinds, float[] likely)
     {
         var quality = Categories.RollQuality(rng, chest.Quality);
-        if (quality < Rarity.Legendary && rng.NextFloat() < seller.QualityBoost) quality++;
+        if (quality < Rarity.Epic && rng.NextFloat() < seller.QualityBoost) quality++;
         if (seller.States == Core.Clue.Dowry)
         {
             var dowry = chest.Items.Where(i => Dowry.Contains(i.Category) && !i.IsSong).ToList();

@@ -35,7 +35,10 @@ public static class Story
     /// Whether a week has a story morning (its first day): the welcome, Bram's secret and the Hooded Woman, Mara's
     /// truth, and the Guild's interest after the debt.
     /// </summary>
-    public static bool TellsOn(int week) => week is 1 or 2 or 4 || week == Guild.Weeks + 1;
+    public static bool TellsOn(int week) => week is 1 or 2 or 4 or GatheringWeek || week == Guild.Weeks + 1;
+
+    /// <summary>The week Mara asks who'll stand with you (0.30's longer season): the Key's last stretch, before the debt's last week.</summary>
+    public const int GatheringWeek = 6;
 
     /// <summary>
     /// The picture behind a story morning (assets/backgrounds/scene_*.png): Bram's back room for his welcome and his secret,
@@ -120,9 +123,12 @@ public static class Story
                 if (state.MapPieces > 0)
                     lines.Add(new(Bram, Loc.T("Vane's been asking about the shards. Whatever he offers you tonight, think hard.")));
                 break;
+            case GatheringWeek:
+                lines.AddRange(Gathering(state));
+                break;
             case Guild.Weeks + 1:
                 lines.Add(new(Vane, Loc.T("The tithe is paid. But the Gate is hungry, and the Guild has decided you owe it something for its patience.")));
-                lines.Add(new(Bram, Loc.T("They'll keep coming, and every week they'll want twice as much. Let's see how long we can make them wait.")));
+                lines.Add(new(Bram, Loc.T("They'll keep coming, and every week they'll want half as much again. Let's see how long we can make them wait.")));
                 break;
         }
         var ask = state.Commissions.FirstOrDefault(c => c.Story);
@@ -136,6 +142,7 @@ public static class Story
         1 => Loc.T("Bram's welcome"),
         2 => Loc.T("Bram's secret"),
         4 => Loc.T("The Hooded Woman"),
+        GatheringWeek => Loc.T("Who stands with you"),
         _ => Loc.T("The Guild's terms"),
     };
 
@@ -195,6 +202,13 @@ public static class Story
     /// <summary>The debt is paid: the last due, or all that's left of it at once, ahead of time.</summary>
     public static List<Line> Cleared(GameState state)
     {
+        if (state.GateOpens)
+            return new List<Line>
+            {
+                new(Vane, Loc.T("The Guild's tithe is paid, Keywright. Every coin. By a friend of the Guild. You know which one.")),
+                new(Bram, Loc.T("What did you do? The Key... where's the Key? What did you DO?")),
+                new(Mara, Loc.T("The Gate's open, Bram. I can feel it from here. The Maw has the Key, and the Locking won't hold the year.")),
+            };
         int early = Guild.Weeks - state.Week;
         string when = early > 0
             ? Loc.Plural(early, $"{Capital(Sellers.Number(early))} week early", $"{Capital(Sellers.Number(early))} weeks early")
@@ -210,7 +224,7 @@ public static class Story
                 new(Vane, Guild.Paid(Guild.Weeks)),
                 new(Bram, Loc.T("Free and clear! Twenty years, and the stall is ours.")),
             };
-        if (state.MapPieces >= Pieces) lines.AddRange(MapWhole());
+        if (state.MapPieces >= Pieces) lines.AddRange(MapWhole(state));
         else if (state.MapGiven)
             lines.Add(new(Bram, Loc.T("And the Guild has the shards. Somewhere under the palace, they're looking for the Crown Chest. Let them look.")));
         else if (state.Week < Guild.Weeks)
@@ -220,15 +234,115 @@ public static class Story
         return lines;
     }
 
-    /// <summary>The Key is whole and the debt is paid: Mara comes for Bram, and the King brings the Crown Chest.</summary>
-    public static List<Line> MapWhole() => new()
+    /// <summary>
+    /// The Key is whole and the debt is paid: Mara comes for Bram, the King brings the Crown Chest, and whoever stands with
+    /// you holds the Guild back while it's opened (<see cref="Allies"/>).
+    /// </summary>
+    public static List<Line> MapWhole(GameState state = null)
     {
-        new(Mara, Loc.T("Bram. It's been a long time.")),
-        new(Bram, Loc.T("Mara. The Key. You found all of it.")),
-        new(Mara, Loc.T("Your kin did the finding. And the King has come himself, with the Crown Chest. Quickly: the Guild is a day behind us.")),
-        new(King, Loc.T("Three hundred years it's waited in my family, and not one of us could open it. It's yours by right now, Keywright. " +
-                  "It opens for nobody else.")),
+        var lines = new List<Line>
+        {
+            new(Mara, Loc.T("Bram. It's been a long time.")),
+            new(Bram, Loc.T("Mara. The Key. You found all of it.")),
+            new(Mara, Loc.T("Your kin did the finding. And the King has come himself, with the Crown Chest. Quickly: the Guild is a day behind us.")),
+        };
+        var allies = state == null ? new List<Line>() : Allies(state, tonight: true);
+        if (state != null && allies.Count == 0) lines.Add(new(Mara, Loc.T("There's nobody to hold them back. We'll have to be quick.")));
+        lines.AddRange(allies.Take(4));
+        lines.Add(new(King, Loc.T("Three hundred years it's waited in my family, and not one of us could open it. It's yours by right now, Keywright. " +
+                            "It opens for nobody else.")));
+        return lines;
+    }
+
+    /// <summary>
+    /// Week 6's story morning: the Guild knows about the Key, and Mara asks who'll stand with you when it's whole. Each
+    /// friend you've made says so (<see cref="Allies"/>).
+    /// </summary>
+    static List<Line> Gathering(GameState state)
+    {
+        var lines = new List<Line>
+        {
+            new(Bram, Loc.T("Vane was at the Crossed Keys last night, asking about the Key. Asking who your friends are.")),
+            new(state.MapPieces > 0 && !state.MapGiven ? Mara : Bram, state.MapGiven
+                ? Loc.T("The Guild has the shards, and it's digging under the palace for the Crown Chest. When it finds it, we'll need every friend we've got.")
+                : Loc.T("When the Key is whole, the Guild will come for it with everything it has. Who'll stand with you when it does?")),
+        };
+        var allies = Allies(state, tonight: false);
+        lines.AddRange(allies.Take(4));
+        lines.Add(allies.Count == 0
+            ? new(Bram, Loc.T("Nobody, it seems. Well. We've the stall, and each other. That's more than I had at your age."))
+            : new(Bram, allies.Count >= 3 ? Loc.T("That's a crowd, that is. Twenty years I traded alone, and look at you.")
+                : Loc.T("It's a start. Make a few more friends before the end, if you can.")));
+        return lines;
+    }
+
+    /// <summary>
+    /// Who stands with you, by what the season's tales made of them: the powers who count you a friend, and people who
+    /// owe you (or called a favour in already). Each says what they'll do; on the Crown Chest night, what they're doing.
+    /// </summary>
+    public static List<Line> Allies(GameState state, bool tonight)
+    {
+        var lines = new List<Line>();
+        if (state.Friend(Faction.Wardens))
+            lines.Add(new(TaleBook.Hollis, tonight ? Loc.T("The Wardens have the palace road. No Guild carriage gets past my toll tonight.")
+                : Loc.T("The Wardens will hold the palace road, when it comes to it. You've sent enough chests home.")));
+        if (state.Friend(Faction.Commons))
+            lines.Add(new(Bram, tonight ? Loc.T("Half of Brindle walked to the palace to see it opened. The Guild's men can't get through the crowd.")
+                : Loc.T("Brindle's with you: half the crossroads would walk to the palace if you asked them.")));
+        if (state.Friend(Faction.Lockless))
+            lines.Add(new(Bram, tonight ? Loc.T("A black feather on the counter: the Guild's carriages have lost their wheels in Lantern Lane. All of them.")
+                : Loc.T("A black feather on the counter, and a note: \"When the Guild comes for you, the Lockless will be in its way.\"")));
+        if (state.Friend(Faction.Crown) || state.OnTrial)
+            lines.Add(new(TaleBook.Aldo, tonight ? Loc.T("The palace guard is at the Emporium's door. My Guild has no business here tonight.")
+                : Loc.T("The Crown's with you, Keywright. I've a palace guard with very little to do.")));
+        if (state.Friend(Faction.Wood))
+            lines.Add(new(TaleBook.Hawthorn, tonight ? Loc.T("Hawthorn has grown across the Guild's road. They'll be all night cutting through it.")
+                : Loc.T("The Wood keeps its own. When they come for you, they'll find thorns.")));
+        if (state.Friend(Faction.Ironroot))
+            lines.Add(new(TaleBook.Durgan, tonight ? Loc.T("Ironroot's smiths have barred the Gate road with iron. Let the Guild try lifting it.")
+                : Loc.T("Ironroot owes you a crown. Ask, and you'll have a hundred dwarves at your door.")));
+        // People who owe you, or came when you called: the season's friends by name (the factions say the rest).
+        foreach (string person in state.Owed.Keys.Concat(state.CalledIn).Distinct().Where(p => !state.Gone.Contains(p)))
+            if (FriendLine(person, tonight) is string line) lines.Add(new(person, line));
+        if (state.Flagged(TaleBook.Apprentice) && !state.Gone.Contains(TaleBook.Pip))
+            lines.Add(new(TaleBook.Pip, tonight ? Loc.T("I'll hold the lamp, master! I'm not scared. Much.") : Loc.T("I'll stand with you, master. I'm small, but I'm quick.")));
+        return lines;
+    }
+
+    /// <summary>A friend by name, standing with you (a favour owed, or one already called in).</summary>
+    static string FriendLine(string person, bool tonight) => person switch
+    {
+        TaleBook.Wynn => tonight ? Loc.T("The whole mill's here, and every one of us has a washing paddle.") : Loc.T("Send for me, and the whole mill comes."),
+        TaleBook.Ada => tonight ? Loc.T("Rafe's sword's at the door, dear, and Jory's holding it.") : Loc.T("Rafe would have stood with you. So will we, dear."),
+        TaleBook.Tobin => tonight ? Loc.T("I've brought two delvers and a lot of rope. Nobody's getting through that door.") : Loc.T("You dug me out of the Barrow. I'll dig you out of anything."),
+        TaleBook.Bettany => tonight ? Loc.T("The Crossed Keys is closed tonight. Everyone's here instead.") : Loc.T("The Crossed Keys stands with you, love. Every last drunk in it."),
+        TaleBook.Rowan => tonight ? Loc.T("A Gale at the door, with a Gale's blade. Let them come.") : Loc.T("The Gales pay their debts. Call, and I'll be there."),
+        TaleBook.Nettle => tonight ? Loc.T("Goblins in the Guild's cellar. Lots of goblins. Very busy.") : Loc.T("The clan comes when you call. All of it. Even the uncles."),
+        TaleBook.Isaura => tonight ? Loc.T("House Vell is at the palace, and so, for once, is my brother.") : Loc.T("House Vell owes you. We pay our debts, Keywright."),
+        TaleBook.Durgan => tonight ? Loc.T("Ironroot's here, Keywright, with hammers.") : Loc.T("A hundred dwarves, when you need them."),
+        TaleBook.Jasper => tonight ? Loc.T("A hedge-wright at your back. Two Keywrights are harder to stop than one.") : Loc.T("When the Guild comes, send for the hedge-wright."),
+        TaleBook.Quire => tonight ? Loc.T("I have the Roll, and the Roll says whose the Crown Chest is. Yours.") : Loc.T("The Roll will say whose the Key is, when it matters."),
+        TaleBook.Ilse => tonight ? Loc.T("Every lamp in the Arcanum is lit tonight. The Guild won't find a shadow to hide in.") : Loc.T("The Arcanum's apprentices will stand with you. Some of the archmages, too."),
+        TaleBook.Hesper => tonight ? Loc.T("Two whole families are here, dear: the ones you married off. They'd like a word with the Guild.") : Loc.T("Two families owe you their wedding, dear. They'll come."),
+        TaleBook.Garrick => tonight ? Loc.T("Brought the plough horses. The Guild's carriages can go round.") : Loc.T("Call, and the whole fair comes, horses and all."),
+        TaleBook.Jory => tonight ? Loc.T("I carried chests for you. Tonight I'll carry anything that tries to get past this door.") : Loc.T("I owe you my freedom. Call, and I'll come."),
+        TaleBook.Corvin => tonight ? Loc.T("The Wet Hen's at the river stairs, if anyone needs to leave in a hurry.") : Loc.T("Need anything carried away from the Guild quietly? Ask for the Wet Hen."),
+        _ => null,
     };
+
+    /// <summary>
+    /// The season's end (0.30): what became of everyone whose tale began, a line each, by what you chose (each tale's
+    /// <see cref="TaleDef.Ending"/>), after the run's last scene, won or lost.
+    /// </summary>
+    public static List<Line> SeasonEnd(GameState state)
+    {
+        var lines = new List<Line> { new(Bram, Loc.T("So. Let me tell you what became of everyone, this season.")) };
+        foreach (var tale in TaleBook.All.Where(t => state.Drew(t.Key) && t.Ending != null))
+            if (tale.Ending(state) is Line line) lines.Add(line);
+        if (lines.Count == 1) return new List<Line>();
+        lines.Add(new(Bram, Loc.T("And you. Bram's kin, with the mark on your hand. What becomes of you is up to you.")));
+        return lines;
+    }
 
     /// <summary>
     /// After the Crown Chest's been opened. It holds the Locking's tune; the Heartsongs hold its nine verses. With fewer

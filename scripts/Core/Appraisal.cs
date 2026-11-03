@@ -5,17 +5,18 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <summary>How one thing in an opened chest compares with what the slip said.</summary>
-public enum ReadKind { Right, RightMagic, SpottedFake, SpottedBroken, FoundHidden, Missed, MissedMagic, NotMagic, Fooled, Broken, MissedHidden }
+public enum ReadKind { Right, RightMagic, SpottedFake, SpottedBroken, FoundHidden, Missed, MissedMagic, NotMagic, Fooled, Broken, MissedHidden, Lucky }
 
 /// <param name="Hidden">It was under a false bottom.</param>
 /// <param name="Warded">The ward gave it up: you named it.</param>
 public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false, bool Warded = false)
 {
-    public bool Right => Kind is ReadKind.Right or ReadKind.RightMagic or ReadKind.SpottedFake or ReadKind.SpottedBroken or ReadKind.FoundHidden;
+    public bool Right => Kind is ReadKind.Right or ReadKind.RightMagic or ReadKind.SpottedFake or ReadKind.SpottedBroken or ReadKind.FoundHidden or ReadKind.Lucky;
 
     public string Note => Kind switch
     {
         ReadKind.RightMagic => Loc.T("enchanted!"),
+        ReadKind.Lucky => Loc.T("luck made it shine!"),
         ReadKind.SpottedFake => Loc.T("fake, as you thought"),
         ReadKind.SpottedBroken => Loc.T("broken, as you knew"),
         ReadKind.FoundHidden => Loc.T("the false bottom!"),
@@ -234,8 +235,9 @@ public sealed class Appraisal
         var ghosts = new List<Category>();
         foreach (var kind in Categories.All.Select(c => c.Category))
         {
+            // A thing luck made shine after it was bought reads as the plain thing it was (nobody could have seen it glow).
             var items = chest.Items.Where(i => i.Category == kind)
-                .OrderBy(i => i.Fake ? 2 : i.Broken ? 1 : 0).ThenBy(i => Magic(kind) && i.Magic ? 0 : 1).ToList();
+                .OrderBy(i => i.Fake ? 2 : i.Broken ? 1 : 0).ThenBy(i => Magic(kind) && i.Magic && !i.Shone ? 0 : 1).ToList();
             int marked = Count(kind);
             bool magicLeft = Magic(kind);
             for (int i = 0; i < items.Count; i++)
@@ -245,14 +247,15 @@ public sealed class Appraisal
                 ReadKind read;
                 if (item.Fake) read = counted ? ReadKind.Fooled : ReadKind.SpottedFake;
                 else if (item.Broken) read = counted ? ReadKind.Broken : ReadKind.SpottedBroken;
-                else if (!counted) read = item.Magic ? ReadKind.MissedMagic : ReadKind.Missed;
+                else if (!counted) read = item.Magic && !item.Shone ? ReadKind.MissedMagic : ReadKind.Missed;
+                else if (item.Shone) read = ReadKind.Lucky;
                 else if (item.Magic) read = magicLeft ? ReadKind.RightMagic : ReadKind.MissedMagic;
                 else read = ReadKind.Right;
                 if (read == ReadKind.RightMagic) magicLeft = false;
                 reads.Add(new ItemRead(item, read, Warded: chest.Unwarded != null && item.Id == chest.Unwarded.Id));
             }
             // Marked magic but nothing magic was there: the first one counted wasn't.
-            if (magicLeft && !items.Any(i => i.Magic && !i.Fake))
+            if (magicLeft && !items.Any(i => i.Magic && !i.Shone && !i.Fake))
             {
                 int first = reads.FindIndex(r => r.Item.Category == kind && r.Kind == ReadKind.Right);
                 if (first >= 0) reads[first] = reads[first] with { Kind = ReadKind.NotMagic };

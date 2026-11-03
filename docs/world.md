@@ -193,6 +193,8 @@ life that you'll hear about. What they say is always true. Some sell what isn't 
 | **Corvin Tallow** | a smuggler running brandy and chests past the Wardens' toll | to keep running; one more good season and he'll buy a boat | a firm shake | haggles; **packs in straw**: everything stirs a strength later, and cloaks and spells never; often a false bottom; sometimes a chest that isn't his |
 | **Flick** | a pickpocket of twelve who runs chests for the Magpie | to be paid, to be fed, and never to be caught | the chest's colour | in a hurry: **twenty seconds** to make up your mind; most of what Flick sells isn't Flick's |
 | **Sergeant Hollis** | the Wardens' sergeant at the Thornwick toll | thieves caught and chests home; and to know why the Guild's chests won't open | doesn't trade | posts the wanted notices; searches shops |
+| **Bailiff Marrow** | the Gilded Guild's bailiff (0.30), selling what the Guild took for tithe to its friends first | the Guild's books balanced | the chest's colour (the Guild's book price) | comes only while the Guild counts you a friend; **a third of his chests were seized, not sold**, and are cold to the mark |
+| **Quartermaster Brandt** | the Wardens' quartermaster (0.30), selling what thieves took and nobody claimed in a year and a day | the Wardens' store emptied, for the widows' fund | weight (the Wardens' tariff, by the pound) | comes only while the Wardens count you a friend; **the toll scale** says what it weighs |
 
 ### Crownhold
 
@@ -223,7 +225,17 @@ life that you'll hear about. What they say is always true. Some sell what isn't 
 
 Some people come only when their story brings them: **Wynn Hollow** (Pip's mother), **Mistress Aubel** (a Guild
 Mark-Finder), **Harl Caskett** (the Guild's timber factor), **the Hawthorn Lady** (of the fair folk), **Lord Cassian
-Vell** (Isaura's brother, a gambler) and **Jory Kettle** (Ada's son).
+Vell** (Isaura's brother, a gambler) and **Jory Kettle** (Ada's son). 0.30's tales bring more: **Jasper Wick** (a
+hedge-wright at the crossroads, as Bram was), **Sir Aldwin Gale** (a knight who fell on Brindle Field before the Locking,
+and walks it still: Sir Rowan's ancestor), **Martha Dunning** (a Thornwick weaver standing for reeve against the Guild's
+money), **Sister Agathe** (a preacher of the Unopened, who finds out who pays for their bread), **Mistress Ashby** and
+**Hal Corlew** (two Thornwick families claiming one dowry chest: let the ward decide), and **Mother Tansy** (a
+moneylender of Lantern Lane).
+
+**Officials** (0.30). The authorities have things to sell too, and sell to their friends first: the Guild what it takes
+for tithe (its bailiff, at its book price: some of it seized, not sold, and so still the family's), the Wardens what they
+recover and nobody claims in a year and a day (their quartermaster, by the toll's tariff). Each comes to your counter only
+while their masters count you a friend, and stops the day they don't.
 
 ## The tales
 
@@ -245,6 +257,25 @@ things of you, and remember what you did. `docs/stories.md` has each one beat by
 | **Ironroot's Crown** | Crownhold | Durgan, the King | the dwarves' crown, the Guild's ban on their gold |
 | **The Vell Inheritance** | Crownhold | Isaura, Cassian, Silas Brass | a brother selling his sister's chests, and a chest two heirs claim |
 | **The Defector** | the Emporium | Skrae, Tick, Gilt, the Maw | a demon who wants out, and what the Maw does to those who help |
+| **The Hedge-wright** | Brindle (0.30) | Jasper, Aubel | an unlicensed Keywright across the road: shelter him, name him, or out-read him |
+| **The Field's Dead** | Brindle (0.30) | Garrick, Sir Aldwin, Sir Rowan | a knight's blade ploughed up, and his ghost, who wants it home |
+| **The Crossed Keys** | Brindle (0.30) | Bettany, Bailiff Marrow | the Guild doubles the inn's tithe |
+| **The Harvest Fair** | Brindle (0.30) | Garrick | the county comes to Brindle, and a reading contest |
+| **The Reeve's Election** | Thornwick (0.30) | Caskett, Martha Dunning, Hollis | the Guild's money against a weaver, and Thornwick's tolls |
+| **The Goblin Bounty** | Thornwick (0.30) | Rook, Nettle, Brother Cadoc | the abbey blames the goblins; where does Nettle's clan burrow? |
+| **The Unopened** | Thornwick (0.30) | Sister Agathe, Brother Cadoc | zealots at your door, and who pays them |
+| **The Disputed Dowry** | Thornwick (0.30) | Aunt Hesper, the Ashbys, the Corlews | two families, one chest: let the ward decide |
+| **The Night Toll** | Thornwick (0.30) | Hollis, Corvin | a Keywright's hand on every cart at the forest toll |
+| **The Drowned Bell** | Crownhold (0.30) | Tilly, the Hooded Woman | a bell under the Aldwater, and a shard of the Key in it |
+| **The Moneylender** | Crownhold (0.30) | Mother Tansy | a purse now, a third on top next week |
+| **The Duel** | Crownhold (0.30) | Sir Rowan, Lord Cassian | an honest pair of hands for the stakes |
+| **The Archive Fire** | Crownhold (0.30) | Master Quire | the Royal Archive burns, and the Roll with it |
+| **The King's Court** | the Emporium, every season (0.30) | Old Aldo, Mister Vane | the season's papers against the Guild |
+| **The Maw's Bargain** | the Emporium (0.30) | the Maw, Mara | the whole debt paid, for the Key |
+
+**What the tales leave behind** (0.30): who comes to the counter (and who never does again), better terms from friends,
+favours to call in on a short Guild night, papers for the King's court, and the season's end: what became of everyone,
+and who stood with you when the Key was whole (`docs/stories.md`).
 
 ## Things (the kinds)
 

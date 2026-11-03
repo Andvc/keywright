@@ -96,6 +96,8 @@ public static class Hints
         ["payoff"] = Loc.T("Look at that purse: enough to pay off the whole back-tithe, every week of it, right now! Do it, and the stall " +
                      "is ours early. Or keep trading first: the Guild only ever asks for this week's."),
         ["pawn"] = Loc.T("Short? Pawn what's on display, or your curios, at the Guild's price. If even that isn't enough, the Guild seals the shop."),
+        ["favour"] = Loc.T("Short, and folk owe you a favour? Call on them first: each brings an eighth of the due, once a season. That's what friends are for."),
+        ["gold"] = Loc.T("Gold! A legend, that. They're made, not mended: no restorer or lucky charm will ever turn a thing gold. It went into that chest gold."),
         ["hood"] = Loc.T("The Hooded Woman pays in shards of the Aldric Key. If you can't find what she wants this week, she'll ask again next week."),
 
         // Each move brings one new thing.
@@ -147,6 +149,11 @@ public static class Hints
                            "stirred (a cloak is 3 lb, a spell 1)."),
         ["seller_brass"] = Loc.T("Brass's ticket counts every article, false bottom and all. Count what you hear: one short means one under the floor."),
         ["seller_flick"] = Loc.T("Flick's chests are mostly stolen. Lay a hand on each one: if your mark goes cold, send for the Wardens, or pass."),
+        // 0.30's officials, who come while their masters count you a friend.
+        ["seller_marrow"] = Loc.T("The Guild's bailiff, selling what it took for tithe to its friends: cheap, by the colour alone. But a lot of what the " +
+                             "Guild takes was never the Guild's to sell. Lay a hand on every one."),
+        ["seller_brandt"] = Loc.T("The Wardens' quartermaster sells what nobody claimed, by the pound. A heavy chest comes dear and a light one cheap: " +
+                             "take the weight of what you hear from his scale's."),
         ["seller_cadoc"] = Loc.T("Brother Cadoc won't have his chests shaken hard: half again if you do. Crypt chests are full of holy cloaks."),
         ["seller_corvin"] = Loc.T("Corvin packs his chests in straw: everything needs a strength harder to stir, and cloaks and spells won't " +
                              "stir at all. Shake firmly, then hard, then drop it."),

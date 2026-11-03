@@ -478,8 +478,31 @@ public partial class NotebookView : Node2D
         float by = y + 32 + factions.Count * 34;
         int held = _state.BackRoom.Count;
         if (held > 0)
+        {
             _page.AddChild(UiKit.MakeLabel(Loc.Plural(held, $"The back room: {held} chest that won't open for you.", $"The back room: {held} chests that won't open for you."),
                 16, Palette.Warn).Place(TableX, by, 540, 20));
+            by += 26;
+        }
+        // What the season's tales have left you (0.30): friends who owe you, and papers for the King.
+        if (_state.Owed.Count > 0)
+        {
+            var owed = UiKit.MakeLabel(Loc.T($"Who owes you a favour: {Words.List(_state.Owed.Keys.Select(p => Sellers.Person(p).Name))}."), 16, Palette.Good)
+                .Wrapped().Place(TableX, by, 540, 44);
+            owed.MaxLinesVisible = 2;
+            owed.ClipText = true;
+            owed.MouseFilter = Control.MouseFilterEnum.Stop;
+            owed.TooltipText = Loc.T("On a Guild night you're short, call on one of them: they bring an eighth of the night's due. Once a season each.");
+            _page.AddChild(owed);
+            by += 48;
+        }
+        if (_state.Evidence.Count > 0)
+        {
+            var papers = UiKit.MakeLabel(Loc.T($"Papers against the Guild: {_state.Evidence.Count} (the King's court tries it with {TaleBook.PapersForTrial})."),
+                16, Palette.Magic).Wrapped().Place(TableX, by, 540, 44);
+            papers.MouseFilter = Control.MouseFilterEnum.Stop;
+            papers.TooltipText = Words.List(_state.Evidence.Select(TaleBook.Paper));
+            _page.AddChild(papers);
+        }
 
         // The board, and the tales.
         const float rx = 640, rw = 560;
@@ -539,7 +562,9 @@ public partial class NotebookView : Node2D
     /// </summary>
     void BuildDebt(float y)
     {
-        const float boxW = 184, boxH = 44, gap = 8;
+        // A box a week, and one for what comes after: seven weeks and "then" across the page (0.30's longer season).
+        const float boxH = 44, gap = 8;
+        float boxW = (PanelW - 32 - gap * Guild.Weeks) / (Guild.Weeks + 1);
         string when = When(_state.DaysToNextDue, _state.NextDueWeek);
         string line = _state.DebtCleared
             ? Loc.T($"Bram's debt is cleared{(_state.ClearedDay > 0 ? Loc.T($" (day {_state.ClearedDay})") : "")}. The Guild still comes, for its interest: {_state.NextDue}g {when}.")
@@ -559,12 +584,12 @@ public partial class NotebookView : Node2D
             box.MouseFilter = Control.MouseFilterEnum.Pass;
             block.AddChild(box);
             string title = after ? Loc.T("THEN") : Loc.T($"WEEK {week}");
-            string amount = after ? Loc.T("x2 a week") : paid ? Loc.T($"{_state.DueFor(week)}g  paid") : Money.Short(now ? _state.NextDue : _state.DueFor(week));
-            box.AddChild(UiKit.MakeLabel(title, 16, now ? colour : Palette.Muted).Place(10, 4, 80, 20));
+            string amount = after ? Loc.T("x1.5 a week") : paid ? Loc.T($"{_state.DueFor(week)}g  paid") : Money.Short(now ? _state.NextDue : _state.DueFor(week));
+            // The week on the first line, what it costs on the second (when it's due is in the line above, and the tooltip).
+            box.AddChild(UiKit.MakeLabel(title, 16, now ? colour : Palette.Muted).Place(8, 2, boxW - 16, 20));
             box.AddChild(UiKit.MakeLabel(amount, 16, paid ? Palette.Good : now ? colour : after ? Palette.Muted : Palette.Text, HorizontalAlignment.Right)
-                .Place(64, 4, boxW - 74, 20));
-            if (now) box.AddChild(UiKit.MakeLabel(when, 16, colour, HorizontalAlignment.Right).Place(10, 22, boxW - 20, 20));
-            box.TooltipText = after ? Loc.T("Once Bram's debt is paid, the Guild keeps coming for interest: each week twice the last.")
+                .Place(8, 22, boxW - 16, 20));
+            box.TooltipText = after ? Loc.T("Once Bram's debt is paid, the Guild keeps coming for interest: each week half as much again as the last.")
                 : paid ? Loc.T($"Week {week}: paid.") : Loc.T($"Week {week}: Mister Vane comes for {(now ? _state.NextDue : _state.DueFor(week))}g on the fifth evening.");
             if (now && _focusDebt)
             {

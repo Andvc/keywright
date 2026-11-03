@@ -13,10 +13,11 @@ its conditions hold (what you chose before, where you stand with someone). Some 
 what they've come to say and asks something of you, and you choose. Some bring a chest, and what you do with it (buy
 it, pass, send for the Wardens) is the choice. Some come at night, between the day's end and Nim's table.
 
-- **Which tales.** Every season has the main story (**The Key**) and **The Shut Chests** (from Thornwick: it teaches
-  stolen chests). Six more are drawn from the seed at the start: two of Brindle's three, one of Thornwick's two, two of
-  Crownhold's four, and the Emporium's. No two seasons hold the same tales, and some tales draw their own secrets (who
-  the Magpie is, what's behind the Barrow door).
+- **Which tales.** Every season has the main story (**The Key**), **The Shut Chests** (from Thornwick: it teaches
+  stolen chests) and **The King's Court** (at the Emporium, if you've anything to bring it). Eleven more are drawn from
+  the seed at the start (0.30; six until then): three of Brindle's seven, three of Thornwick's seven, three of
+  Crownhold's eight, and both of the Emporium's. No two seasons hold the same tales, and some tales draw their own
+  secrets (who the Magpie is, what's behind the Barrow door, whose the dowry is, who wins the duel).
 - **How many at once.** At most two beats at the counter a day and one at night. A beat that brings a chest takes a
   regular's place in the queue; a talk beat comes on top (it's short). The first days are left to learning the trade.
 - **What you're told.** A person who means to come back says when, and the notebook's calendar marks it. Notices
@@ -92,6 +93,50 @@ standing order (Nim's Order) each lay out one more, four at most; Nim offers the
 offers too. His stock builds with you as before (curios for the way you trade are likelier, a legendary only for a
 way you're building); with one card a night, every night's is the one most likely to fit.
 
+## What a tale leaves behind (0.30)
+
+A tale's ending isn't a line on the Town page: it changes the shop for the rest of the season, and the season's end.
+Every one of these is stated when it happens (a line, a note under the chest, the Town page), holds every time, and
+is in the save.
+
+- **Who comes, and who doesn't.** Someone a tale takes away (into the Guild's care, the cells, north, down the Barrow)
+  never comes to the counter again, and nor do their tools: lose Nettle and nobody offers you goblin picks. Some come
+  only because of what you did: a freed debtor carries your chests, a rival takes one of your customers a day while he
+  trades across the road, pickets stand at your door until someone calls them off.
+- **Officials** (`SellerDef.Comes`). Be a friend of the authorities and their officials come to sell: **Bailiff
+  Marrow** brings the chests the Guild took for tithe while the Guild counts you a friend (+2), at its book price (the
+  colour alone, and cheap), but a third of them were seized, not sold, and are cold to the mark; send for the Wardens
+  on one and the Guild hears of it. **Quartermaster Brandt** sells what the Wardens recovered and nobody claimed in a
+  year and a day while the Wardens count you a friend, by their tariff (so much a pound, so heavy things are dear and
+  light things cheap). Fall out with them and they stop coming.
+- **Goodwill** (`GameState.Goodwill`). People you've helped trade with you on better terms, said under their chest: a
+  neighbour's price at Brindle while Pip is safe with you (Wynn's word: a sixth off every Brindle regular); no fee for
+  shaking from Nettle when you've spoken for her clan; Sir Rowan's grandfather's blade, so the best weapon in his
+  chests stays yours; dwarf prices from Durgan once the crown's home (a fifth off).
+- **Favours** (`GameState.Owed`). Some people owe you one after what you did for them (the Friends & foes page lists
+  them). On a Guild night you're short, call on one: they bring what they can, an eighth of the night's due, once a
+  season each. And everyone who owes you is there at the end.
+- **The case against the Guild** (`GameState.Evidence`). Papers turn up in tales: the Chest Roll's copy and the
+  ledger page (the Foreclosures), the debt-house tallies (Jory), the Mark-Finder's register (Pip), the witness copy of
+  the Wood's deed, the Guild's purse in the Unopened's alms box, the Archive's ledgers saved from the fire, Orme's notes
+  (the Unlocking) and Skrae's word (the Defector). At the Emporium, with two or more, the King asks for them (**The
+  King's Court**): the Guild offers to buy them first; with four or more the court tries the Guild (the rest of the
+  debt halved, and no interest after it), with fewer it decrees a fifth off. The run ends **THE GUILD ON TRIAL**.
+- **Contests** (`Visit.Contest`). A chest put up to be read in front of people: it's given for a lucky coin (it opens
+  for you), and a perfect read wins what was staked on it. A rival hedge-wright and the harvest fair are settled that
+  way.
+- **Loans** (`GameState.Loan`). Mother Tansy lends a purse against next week's first morning, a third on top. Pay it
+  and she lends again on better terms; don't, and she takes the best thing on your shelf, and her men stand at your
+  door a week.
+- **The Key, by another road.** The Keyhold hid one shard in its bell: dredge the Aldwater for Tilly's bell and Mara
+  has it for nothing. And the Maw will buy your shards for your whole debt (**The Maw's Bargain**): take it and the run
+  is won, the Crown Chest is gone for good, and the run ends **THE GATE OPENS** (half the score).
+- **The gathering** (week 6's story morning): Mara asks who'll stand with you when the Key is whole, and each friend
+  says so: the factions at +2, and everyone who owes you. They're there on the Crown Chest night too, holding the Guild
+  back.
+- **The season's end** (`TaleDef.Ending`): after the last scene of a run, won or lost, Bram tells what became of
+  everyone whose tale began: one line each, by what you chose.
+
 ## The tales
 
 Each beat: who, when, what happens, and the choices (with what each does). "Purse" is Bram's working purse at the shop
@@ -151,6 +196,14 @@ Magpie.
    *take him* (Guild +1, commons -2), or *the Guild still takes Bram's word* (spends his word for the run).
 5. **The apprentice** (every week after, while he's yours): on each week's first morning Pip brings you a chest he's
    fished out, given freely (it opens), at the shop's colour. And he's in the last scene.
+6. **Wynn's thanks** (0.30, two days after the search, if he's yours): the mill and half of Brindle know what you did.
+   *Thank your neighbours* (a neighbour's price: every Brindle regular asks a sixth less while Pip's safe with you) or
+   *keep your neighbours' coin* (commons +1). Either way Wynn owes you a favour.
+7. **The register** (0.30, Pip, from Thornwick): the Mark-Finder keeps a book of every marked child and where the Guild
+   sent them. *Copy one page* (a paper for the case against the Guild; Guild -1) or *too dangerous*.
+
+Named or taken, Pip never comes to the counter again, nor does Wynn; the Guild's +2 for a name is usually enough to make
+it count you a friend, and then its bailiff comes to sell (the officials, above).
 
 ### The Widow's Debt (Brindle, ends in Crownhold)
 
@@ -164,6 +217,9 @@ Magpie.
    purse: Jory works a week for you as your porter to pay you back, one more customer a day; and he knows the Guild's
    debt-house) or
    *I can't* (Ada's last visit).
+5. **The tallies** (0.30, Jory, three days on, if he's free): half the debts in the debt-house were never owed. *Write it
+   all down* (a paper for the case) or *put it behind you*. Jory owes you a favour either way; Ada does too if you gave
+   her the sword.
 
 ### The Deep Door (Brindle)
 
@@ -173,7 +229,7 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    purse) for rope, lamps and two men, for half of what's behind it, or *not this time*.
 2. **The hoard** (Tobin, four days on): half of it's yours: a chest given freely, a colour finer than the shop's.
    **Or the fall** (Bettany, three days on): his men came back without him; a rescue costs another purse. *Pay* (he
-   comes back with the chest) or *I can't* (he never comes back; commons -1).
+   comes back with the chest, and owes you his life: a favour) or *I can't* (he never comes back; commons -1).
 
 ### The Woodcutters (Thornwick)
 
@@ -185,7 +241,11 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 3. **The Hawthorn Lady** (night): promise to keep the Wood's oaks standing, and have a fey charm (a curio). *I promise*
    or *I can't promise that*.
 4. **The last offer** (Caskett, at Crownhold): a fifth off the next due, this time. *Seal it* (Guild +1, the Wood -3;
-   a promise broken: the fey take their charm back) or *refuse* (the Wood +2; the Hawthorn Lady's thanks).
+   a promise broken: the fey take their charm back; Mother Sorrel never trades with you again) or *refuse* (the Wood
+   +2; the Hawthorn Lady's thanks).
+
+Sealing either time keeps the witness copy of the deed, which names the coin it was paid in (seized from families): a
+paper for the case against the Guild.
 
 ### The Parcel (Thornwick)
 
@@ -207,7 +267,8 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    The Guild's been selling stolen chests for a century, and sending the ones that won't open down through the Gate.
    *Take it to the King* (when you're at the Emporium), *sell your copy to the Guild* (half a purse, Guild +2; Tobias
    vanishes), or *keep it*.
-4. **The ledger page** (Tobias, night): they know he talked. A page from the Guild's ledgers: where the tithe goes.
+4. **The ledger page** (Tobias, night): they know he talked. A page from the Guild's ledgers: where the tithe goes. (The
+   Roll's copy and the ledger page are both papers for the case against the Guild.)
 5. **The decree** (Old Aldo, at the Emporium, if you're taking it to him): the Crown's decree cuts the Guild's tithe
    by a fifth for the rest of the season. Crown +2, Guild -3.
 
@@ -216,8 +277,9 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 1. **The brass plate** (Ilse Varrow): Archmage Orme asks a drop of a Keywright's blood on a brass plate, and pays a
    quarter of a purse. *Give it* (Arcanum +1) or *refuse* (Arcanum -1).
 2. **The engine** (Ilse, three days on): Orme has built an engine to copy the mark: any chest would open for anyone,
-   and Mara says that's the end of the Locking. *Help her break it* (Arcanum -2; her witchlight at half price, or a
-   curio), *tell the Guild* (half a purse, Guild +2, Arcanum -3: Orme's taken away), or *stay out of it*.
+   and Mara says that's the end of the Locking. *Help her break it* (Arcanum -2; a curio from the stores, Orme's notes
+   for the case against the Guild, and Ilse's favour), *tell the Guild* (half a purse, Guild +2, Arcanum -3: Orme's
+   taken away), or *stay out of it*.
 3. **It works** (Orme, at the Emporium, if you stayed out): it opens one chest in three for anyone, and the Gate's
    cracking: the Maw's gilded iron leaks into every purse, and any coin anyone brings may be demon gold from now on (as in
    a season of forgers). A purse for your part.
@@ -228,14 +290,15 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    dwarf-gold. *I'll ask the King* or *nothing I can do*.
 2. **The King's chest** (Old Aldo, at the Emporium): he gives you the chest the crown's in (it opens: it's yours by his
    gift), the crown set aside for the dwarves.
-3. **Ironroot's thanks** (Durgan): his smiths build you a workshop for nothing (or the lodestone, or gold).
+3. **Ironroot's thanks** (Durgan): his smiths build you a workshop for nothing (or the lodestone, or gold), Durgan asks a
+   fifth less for his chests from then on (a dwarf's price), and he owes you a favour.
 
 ### The Vell Inheritance (Crownhold)
 
 1. **The trick box** (Lord Cassian, a trading beat): grandmother's box, his sister's by her will: cold to the mark.
 2. **The sister** (Lady Isaura, the next day): if it's in your back room, *give it back* and she gives it to you
-   properly (it opens for you: a chest given freely) or *keep it*; if you sent for the Wardens, Cassian spent a night
-   in the cells and it did him good.
+   properly (it opens for you: a chest given freely, and House Vell owes you a favour) or *keep it*; if you sent for the
+   Wardens, Cassian spent a night in the cells and it did him good.
 3. **The last box** (Isaura): grandmother's last trick box, with a riddle about what she warded in it: priced fairly, or
    given if you gave the first one back.
 
@@ -246,12 +309,143 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
 2. **The courier** (Tick, the next day): seen a demon with bat's ears? The Maw pays for runaways. *No* or *in my back
    room* (half a purse; Skrae's taken back).
 3. **Free** (Skrae, night, three days on): it tells you what it heard, and the Maw's gaze never touches your counter
-   again (his visits don't raise anyone's price), and a curio.
+   again (his visits don't raise anyone's price), and a curio. What it heard is a paper for the case against the Guild.
+
+### The Hedge-wright (Brindle, 0.30)
+
+1. **The cart** (Jasper Wick, from day 4, at the stall): a hedge-wright (the mark, no licence, as Bram was) sets up across
+   the road and takes one of your customers a day for two weeks.
+2. **The Mark-Finder** (Mistress Aubel, two days on): the Guild takes hedge-wrights as it takes marked children. *Jasper
+   Wick* (half a purse, Guild +2, commons -1; Jasper's taken, and your customer comes back) or *I've seen no hedge-wright*.
+3. **The contest** (Jasper, the next day, if you shielded him): a chest read in front of the Crossed Keys, given for a
+   lucky coin. Read it exactly right and he takes his cart to Thornwick: the stake, commons +1, and his regulars come to
+   you for a week (one more customer a day). Wrong, or not at all, and his cart stays.
+4. **The farewell** (Jasper, that night, if you won): he owes you a favour.
+
+### The Field's Dead (Brindle, 0.30; ends in Crownhold)
+
+1. **The plough** (Garrick, from day 5): a knight's chest ploughed up on Brindle Field, his to sell by the finder's right.
+   Bought, the best blade in it is set aside: it has a name on it.
+2. **The knock** (Sir Aldwin Gale's ghost, that night): give the blade to his blood, the Gales of Crownhold. *I'll find
+   your family*, or *finder's right* (its price; the Field's dead walk the crossroads at dusk for a week: one customer
+   fewer a day).
+3. **The Gales** (Sir Rowan, at Crownhold): his ancestor's blade. From then on the best weapon in Sir Rowan's chests is
+   yours, not his (his heirloom rule is waived for you), and the Gales owe you a favour. Crown +1.
+4. **The rest** (Sir Aldwin, that night): he lies down at last, and leaves a lucky coin (a curio).
+
+### The Crossed Keys (Brindle, 0.30)
+
+1. **The tab** (Bettany, from day 3): the Guild's doubled the inn's tithe and she's a purse short. *Lend it* or *I can't*.
+2. **Repaid** (Bettany, four days on): the purse and half again, commons +1, and she owes you a favour.
+   **Or sealed** (a Guild notice, two nights on): the Guild seals the Crossed Keys; Bettany goes north for the season and
+   never comes to the counter (nor to anyone else's tale).
+
+### The Harvest Fair (Brindle, 0.30)
+
+1. **The prize** (Garrick, from day 6): put up the reading contest's prize (half a purse, and two more customers on the
+   fair's day) or not.
+2. **The contest** (Garrick, the fair's day): the fair's chest, given for a coin; read it exactly right and the prize is
+   yours (a purse if you put it up, half otherwise), commons +1, and Garrick owes you a favour.
+
+### The Reeve's Election (Thornwick, 0.30)
+
+1. **Caskett** (the Guild's timber factor): speak for him (Guild +1) or keep out of it.
+2. **Martha Dunning** (a weaver, the next day): pay for her crier (half a purse; Guild -2 if you'd spoken for Caskett) or
+   keep out of it.
+3. **The result** (Hollis, two days on): Dunning wins only with your crier: market days, one more customer a day while
+   you trade at Thornwick, the Wood +1. Otherwise Caskett wins: his tolls put a tenth on everything Thornwick's regulars
+   sell you, for the rest of the season.
+
+### The Goblin Bounty (Thornwick, 0.30)
+
+1. **The bounty** (Rook): where does Nettle's clan burrow? *Tell her* or *goblins don't tell me*.
+2. **The raid** (Rook, if told): half a purse, abbey +1, Wardens +1, and Nettle's clan goes over the hills: she never comes
+   again, and nobody offers you goblin picks. **Or the plea** (Nettle, if not): *speak for her clan* (abbey -1; the
+   abbey withdraws the bounty, Nettle charges you nothing for shaking from then on, and owes you a favour) or *stay out
+   of it* (her clan goes to ground for a week).
+
+### The Unopened (Thornwick, 0.30)
+
+1. **The picket** (Sister Agathe): the abbey's zealots stand at your door: one customer fewer a day for ten days.
+2. **The almoner** (Brother Cadoc): *alms for the abbey* (half a purse, abbey +1), *send for the Wardens* (Wardens +1,
+   abbey -1), either ending the picket, or *let them stand*.
+3. **The purse** (Agathe, night, if the picket's over): there was Guild silver in their alms box every week. *Keep it as
+   proof* (a paper for the case; Guild -1) or *the poor box* (abbey +1).
+
+### The Disputed Dowry (Thornwick, 0.30)
+
+Whose the dowry is (the Ashbys' or the Corlews') is drawn when the tale begins.
+
+1. **The court** (Aunt Hesper): let the ward decide. Each family will bring the dowry chest and offer to sell it.
+2. **Mistress Ashby**, then **Hal Corlew** (a day apart): the same chest, offered by each. It's warm only in the hands of
+   the family it belongs to; bought from the other, it won't open (the back room). (Nobody sends for the Wardens over a
+   claim the court already has in hand.)
+3. **The verdict** (Hesper): name the family. Right: the court's fee, commons +1, Hesper owes you a favour. Wrong: commons
+   -1. Or *I couldn't say*.
+
+### The Night Toll (Thornwick, 0.30)
+
+1. **The ask** (Hollis): half his Wardens have the sweats; lend him your mark at the toll tonight (Wardens +1; Nim finds
+   the back door shut) or *I've a shop to run* (Wardens -1).
+2. **Midnight** (the toll): three of a cart's chests are cold (Corvin's, if he's still about). *Tell Hollis* (a finder's
+   share, Wardens +2, Lockless -2, and Corvin's in the cells) or *say they're all warm* (Lockless +1, Corvin owes you).
+
+### The Drowned Bell (Crownhold, 0.30; the Key)
+
+1. **The bell** (Tilly): a bell under the Aldwater, ringing at night. *I believe you* or *the river's full of noises*.
+2. **The dredge** (Tilly, two days on): a barge for a day, a purse. Finder's right: half each.
+3. **Raised** (Tilly, two days on): the Keyhold's bell, and a chest chained to its clapper: yours, given freely, a colour
+   finer than the shop's.
+4. **The shard** (the Hooded Woman, that night): the Keyhold hid a shard of the Aldric Key in its bell: it's yours (or,
+   with no shard left to find, Keyhold silver: a purse).
+
+### The Moneylender (Crownhold, 0.30)
+
+1. **The loan** (Mother Tansy): a purse now, a purse and a third on next week's first morning. On that morning her man
+   takes it out of your purse; if it's not there, he takes the best thing on your shelf (or a curio) and her men stand at
+   your door all week (one customer fewer a day).
+2. **Better terms** (Tansy, six days on, if you paid): two purses at a quarter.
+
+### The Duel (Crownhold, 0.30)
+
+Who wins is drawn when the tale begins, unless Sir Rowan has his ancestor's blade (the Field's Dead): then he wins.
+
+1. **The stakes** (Sir Rowan): hold both duellists' stakes in your back room.
+2. **The bribe** (Lord Cassian, night): a purse for the stakes before dawn (Rowan leaves Crownhold in disgrace and never
+   comes again; Crown -1), or *the stakes stay where they are*.
+3. **Dawn** (Rowan): the winner takes the stakes and leaves you a tenth (half a purse); Rowan owes you a favour.
+
+### The Archive Fire (Crownhold, 0.30)
+
+1. **The fire** (night): someone's set the Royal Archive alight. *Run to help* (Crown +1; no Nim tonight) or *it's not
+   my fire* (half the Roll burns: Master Quire is ruined and never trades with you again; Crown -1).
+2. **The ledgers** (Quire, the next day): the fire began in a Guild lamp-oil cask; a fair copy of the Archive's ledgers of
+   the Guild's seizures (a paper for the case), and Quire owes you a favour.
+
+### The King's Court (every season, at the Emporium, 0.30)
+
+1. **The summons** (Old Aldo, once you've two papers or more): bring them to his court in three days.
+2. **The Guild's offer** (Mister Vane, night): two purses for the papers, and the Guild's friendship (Guild +3; he burns
+   them in your grate), or *they're for the King* (Guild -2).
+3. **The court** (Old Aldo): with four papers or more, the Guild is on trial and takes half its tithe while it's tried
+   (Crown +3, Guild -3; the run ends THE GUILD ON TRIAL, and scores for it); with two or three, a decree takes a fifth
+   off its tithe (if the Roll hasn't already).
+
+### The Maw's Bargain (the Emporium, 0.30)
+
+1. **The offer** (the Maw himself, in the debt's last week, if you hold a shard): he'll pay every coin of the debt
+   tonight, for the Key. *Take his bargain*: the debt is paid and the run won, the shards are his, the Crown Chest is gone
+   for good, and the run ends THE GATE OPENS (the debt's points go to the Maw, not you). *Never*: Crown +1.
+2. **Mara** (that night, if you refused): a rare curio from the Keyhold, for saying no to him.
 
 ## For the simulation and the bot
 
 `Strategy.Choose` picks a beat's choice the way a careful player would: by what each is worth in gold over the rest of
-the run (`ChoiceDef.Worth`), and when two are close, the kinder one. It sends for the Wardens on a cold chest, returns
+the run (`ChoiceDef.Worth`), and when two are close, the kinder one. 0.30's worths: a favour is an eighth of a coming
+due if a short night comes (`Strategy.FavourWorth`), a paper a quarter of what the court would take off
+(`PaperWorth`), a customer a day what the shop would make of it (`CustomerDays`), a loan its share unless it saves the
+night (`LoanWorth`); the careful player never sells the Key to the Maw (a learner guessing might). On a short Guild
+night the sim and the bot call in favours before pawning anything. It sends for the Wardens on a cold chest, returns
 what it bought by mistake, accepts a tool offered at the counter when it would have bought it at the day's end, and
 buys at Nim's table every night. A blind buyer pays for stolen chests and can't open them. The sim's "Tales" section
 reports how often each tale is drawn, finished and how it ended, and what it was worth.

@@ -125,7 +125,8 @@ public partial class CounterPhase : Phase
         _hint.ZIndex = 10;
         BuildStrength();
         if (State.Weighs || _visit.Says == Clue.Pounds) BuildScale();
-        _notes = Add(UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(316, 500, 484, 84));
+        // Four lines (a colour, a lock, a seller's rule, what the drop said) and room for a fifth before the waiting queue.
+        _notes = Add(UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(316, 500, 484, 104));
         _notes.ZIndex = 10;
         _timer = Add(UiKit.MakeLabel("", 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(230, 222, 64, 32));
         _timer.ZIndex = 10;
@@ -355,7 +356,7 @@ public partial class CounterPhase : Phase
                 if (_visit.Shook(level, _rng) is string up && !Concluded)
                 {
                     _seller.Say(up, Palette.Warn);
-                    FloatText(Loc.T($"Price +{Synergies.Pct(_visit.Seller.ShakeFee)}"), new Vector2(1036, 520), Palette.Warn, 24);
+                    FloatText(Loc.T($"Price +{Synergies.Pct(_visit.ShakeFee)}"), new Vector2(1036, 520), Palette.Warn, 24);
                     Sfx.Play("bid", 1.3f, -4);
                     Refresh();
                 }

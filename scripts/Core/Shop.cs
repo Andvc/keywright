@@ -24,9 +24,9 @@ public static class ShopTiers
     public static int Scale(int tier) => tier switch
     {
         1 => 1,
-        2 => 3,
-        3 => 8,
-        _ => 20,
+        2 => 2,
+        3 => 4,
+        _ => 7,
     };
 
     /// <summary>
@@ -100,6 +100,9 @@ public sealed class DayStats
 
     /// <summary>What Bram slipped you from his secret stash this morning.</summary>
     public int Stash;
+
+    /// <summary>What happened first thing this morning (Mother Tansy's man), for the day's card; or null.</summary>
+    public string Morning;
 
     /// <summary>What curios brought in (a catalogue's fees, interest, visitors' coins) and what curios cost.</summary>
     public int Curios, CurioSpent;
@@ -478,7 +481,7 @@ public sealed partial class GameState
                                             (Shows(Heartsongs.Pipe) ? Heartsongs.PipeCustomers : 0) +
                                             (HasCurio("lantern") ? Curios.LanternCustomers : 0) + (HasCurio("horn") ? Curios.HornCustomers : 0) +
                                             EventCustomers - (Under(Challenges.ThinCrowds) && DayOfWeek > Guild.DaysPerWeek - Challenges.ThinDays ? 1 : 0) - (QuietOpening ? 1 : 0) +
-                                            (Friend(Faction.Commons) ? 1 : 0) - (Foe(Faction.Commons) ? 1 : 0) + (Day <= PorterUntil ? 1 : 0));
+                                            (Friend(Faction.Commons) ? 1 : 0) - (Foe(Faction.Commons) ? 1 : 0) + (Day <= PorterUntil ? 1 : 0) + TaleCustomers);
 
     /// <summary>The first day the shop's had at this tier (a move inward is bought the evening before).</summary>
     public int TierSince { get; private set; }
@@ -631,6 +634,7 @@ public sealed partial class GameState
         _songRng = new Random(unchecked(Seed * 3571 + Day));
         Swayed.Clear();
         DipIntoStash();
+        Today.Morning = CollectLoan();
         if (DayOfWeek == 1) StartWeek();
         DrawTales();
         MeetPeople();
@@ -648,7 +652,9 @@ public sealed partial class GameState
         // walked out on Rosa this week stays away, while there's anyone else.
         // Some come in only some days (a delver between barrows, the King, the Maw).
         // Anyone a tale has taken away (jailed, gone north, down the Barrow) stays away.
-        var sellers = Sellers.All.Where(s => s.Tier <= Tier && !Gone.Contains(s.Key) && !Flagged($"away:{s.Key}") && (s.Visits >= 1 || Rng.NextFloat() < Visits(s))).ToArray();
+        var sellers = Sellers.All.Where(s => s.Tier <= Tier && !Gone.Contains(s.Key) && !Flagged($"away:{s.Key}") && !While($"away:{s.Key}") &&
+                                             (s.Comes == null || s.Comes(this)) &&
+                                             (s.Visits >= 1 || Rng.NextFloat() < Visits(s))).ToArray();
         if (sellers.Count(s => !_snubbed.Contains(s.Key)) >= 2) sellers = sellers.Where(s => !_snubbed.Contains(s.Key)).ToArray();
         float smiths = Synergies.SmithVisits(Active("smith"));
         while (Queue.Count < CustomersPerDay)
@@ -728,6 +734,7 @@ public sealed partial class GameState
         // storming off. A golden tongue: nobody storms off at all.
         fresh.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll || HasCurio("goldentongue") || Favoured(Challenges.GoodName);
         fresh.Unruffled = HasCurio("goldentongue");
+        ApplyGoodwill(fresh);
         Sing(fresh);
         return fresh;
     }
@@ -809,6 +816,12 @@ public sealed partial class GameState
         // (Not once Skrae's told you how to stand it: the Defector.)
         if (visit.Seller.Gaze > 0 && !Flagged(TaleBook.GazeKnown))
             foreach (var waiting in Queue) waiting.Raise(visit.Seller.Gaze);
+        // A contest (a rival's challenge, the harvest fair): read it exactly right in front of everyone, and the stake is yours.
+        if (visit.Contest)
+        {
+            visit.ReadRight = slip.Check(visit.Chest).Perfect;
+            if (visit.ReadRight && visit.Prize > 0) TaleGold(visit.Prize);
+        }
         BeatBought(visit);
         return new Purchase(visit, slip) { Luck = luck, Claimed = claimed, ClaimPays = pays, Rebate = rebate };
     }
@@ -820,7 +833,7 @@ public sealed partial class GameState
     static (Item Item, int Pays) Claim(Visit visit)
     {
         var seller = visit.Seller;
-        if (seller.Heirloom is Category kind)
+        if (visit.Heirloom is Category kind)
         {
             var best = visit.Chest.Everything.Where(i => i.Category == kind && !i.Fake).OrderByDescending(i => i.Value).FirstOrDefault();
             return best == null ? (null, 0) : (best, visit.Fee);

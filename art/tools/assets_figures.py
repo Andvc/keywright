@@ -244,3 +244,51 @@ figure("king", "King Aldric IX", "emporium", 124,
        "royal crimson mantle with an ermine collar, the ruby ring.",
        ["the same face as Old Aldo", "a slim gold crown and crimson mantle"], ["skin:3-5", "crimson:2-4", "gold:4-5", "night:9-10"],
        "For the Crown Chest's scenes. Draw it after Old Aldo and pass that figure as a reference.", priority="P3")
+
+# ---- 0.30's people (docs/stories.md): until drawn, each wears an older figure (SellerDef.Look). ----
+figure("marrow", "Bailiff Marrow", "village", 124,
+       "The Gilded Guild's bailiff, in his fifties: thin and precise, a long grey face with half-moon spectacles, a black "
+       "coat with gilded Guild buttons, a ledger under one arm and a brass seal on a chain.",
+       ["half-moon spectacles", "the ledger under his arm"], ["skin:3-4", "night:9-10", "gold:4-5"],
+       "Thornwick on, only while the Guild counts you a friend. Sells what the Guild took for tithe: a third of it is cold.",
+       priority="P2", held="a ledger")
+figure("brandt", "Quartermaster Brandt", "village", 126,
+       "The Wardens' quartermaster at the Thornwick toll, in his forties: broad and weathered, a close-cropped grey beard, "
+       "the Wardens' green-and-cream tabard over a leather jerkin, a toll scale hanging from his belt.",
+       ["the Wardens' tabard", "a toll scale on his belt"], ["skin:2-4", "leaf:2-3", "parchment:2-3", "steel:3"],
+       "Thornwick on, only while the Wardens count you a friend. Sells unclaimed goods by the pound.", priority="P2")
+figure("jasper", "Jasper Wick", "stall", 118,
+       "A hedge-wright in his twenties, cheerful and reckless: a mop of black curls, a crooked grin, a patched blue coat "
+       "with too many pockets, fingerless gloves, a Key-mark on his palm he doesn't bother hiding.",
+       ["the patched blue coat with many pockets", "a crooked grin"], ["skin:3-5", "azure:2-3", "umber:2-4"],
+       "Brindle. Trades from a cart across the road, unlicensed, as Bram did for twenty years.", priority="P2")
+figure("aldwin", "Sir Aldwin Gale", "story", 128,
+       "The ghost of a knight who fell before the Locking: tall, gaunt, in rusted mail and a torn surcoat with the Gales' "
+       "device, an old helm under his arm, a long grey face. The game draws him pale and half transparent.",
+       ["rusted mail and a torn surcoat", "the helm under his arm"], ["steel:2-4", "night:7-9", "azure:5-6"],
+       "Brindle, at night. Sir Rowan's ancestor: pass Sir Rowan's figure as a reference for the family face.", priority="P2")
+figure("dunning", "Martha Dunning", "village", 114,
+       "A Thornwick weaver standing for reeve, in her forties: strong forearms, a no-nonsense face, auburn hair under a "
+       "headscarf, a homespun dress with a weaver's apron full of bobbins.",
+       ["the weaver's apron full of bobbins", "auburn hair under a headscarf"], ["skin:3-5", "flame:2-3", "parchment:1-3"],
+       "Thornwick. The Guild's money against her loom.", priority="P2")
+figure("agathe", "Sister Agathe", "village", 120,
+       "A preacher of the Unopened, the abbey's zealots, in her thirties: severe and sincere, a plain grey habit with a "
+       "rope belt, an iron padlock hanging from it as a pendant, a wooden placard under her arm.",
+       ["the grey habit with an iron padlock pendant", "a wooden placard"], ["skin:3-4", "steel:2-4", "umber:2-3"],
+       "Thornwick. Stands at your door until someone calls her off.", priority="P2")
+figure("tansy", "Mother Tansy", "town", 110,
+       "A moneylender of Lantern Lane, in her sixties: small and round and smiling, sharp little eyes, a lace cap, a plum "
+       "velvet dress, an abacus on a cord and a fat purse at her belt.",
+       ["the abacus on a cord", "a lace cap and plum velvet"], ["skin:3-5", "rose:2-3", "night:7-8", "gold:4"],
+       "Crownhold. Lends a purse against next week's first morning.", priority="P2")
+figure("ashby", "Mistress Ashby", "village", 114,
+       "A Thornwick widow in her fifties, very upright, in her best black dress and a white collar, holding a small dowry "
+       "chest against her chest, mouth set tight.",
+       ["her best black dress", "a dowry chest held close"], ["skin:3-5", "night:9-10", "parchment:2"],
+       "Thornwick. Claims the dowry the Corlews claim: let the ward decide.", priority="P3", held="a dowry chest")
+figure("corlew", "Hal Corlew", "village", 124,
+       "A Thornwick carter in his thirties, big and blunt: a red neckerchief, a leather waistcoat, rolled sleeves, the same "
+       "small dowry chest under one arm.",
+       ["a red neckerchief and leather waistcoat", "a dowry chest under his arm"], ["skin:2-4", "crimson:3", "umber:2-4"],
+       "Thornwick. Claims the dowry the Ashbys claim.", priority="P3", held="a dowry chest")

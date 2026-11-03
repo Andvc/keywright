@@ -166,6 +166,37 @@ public sealed class Visit
     /// <summary>A curio's word on the price (the Waiting Game, the Closing Bell), for under the chest; or null.</summary>
     public string PriceNote { get; private set; }
 
+    /// <summary>
+    /// A friend's terms (<see cref="GameState.Goodwill"/>): their own rule is waived for you (Nettle charges a friend
+    /// nothing for shaking; Sir Rowan leaves the best blade to whoever brought Aldwin's home).
+    /// </summary>
+    public bool Waived { get; set; }
+
+    /// <summary>What each strength after the first puts their price up by (nothing for a friend).</summary>
+    public float ShakeFee => Waived ? 0 : Seller.ShakeFee;
+
+    /// <summary>The kind of thing whose best one is theirs (nothing for a friend).</summary>
+    public Category? Heirloom => Waived ? null : Seller.Heirloom;
+
+    /// <summary>
+    /// A chest put up to be read in front of people (0.30: a rival's challenge, the harvest fair): given for a lucky
+    /// coin, and a perfect read wins <see cref="Prize"/>.
+    /// </summary>
+    public bool Contest { get; set; }
+
+    public int Prize { get; set; }
+
+    /// <summary>Whether the slip it was bought on was exactly right (set when it's bought, for a contest).</summary>
+    public bool ReadRight { get; set; }
+
+    /// <summary>Puts the price up and says why (a reeve's toll).</summary>
+    public void Increase(float factor, string why)
+    {
+        if (!Deciding || factor <= 1) return;
+        Raise(factor);
+        PriceNote = PriceNote == null ? why : $"{PriceNote} {why}";
+    }
+
     /// <summary>Brings the price down (a curio's doing), and says why.</summary>
     public void Reduce(float factor, string why)
     {
@@ -252,8 +283,8 @@ public sealed class Visit
     /// </summary>
     public string Shook(Shake level, Random rng)
     {
-        if (Seller.ShakeFee <= 0 || !Deciding || level == Shake.Still || !_shook.Add(level) || _shook.Count < 2) return null;
-        Raise(1 + Seller.ShakeFee);
+        if (ShakeFee <= 0 || !Deciding || level == Shake.Still || !_shook.Add(level) || _shook.Count < 2) return null;
+        Raise(1 + ShakeFee);
         return rng.PickOne(Seller.PriceUp).Replace("{price}", Money.Say(Price));
     }
 

@@ -39,12 +39,15 @@ public partial class SellerView : Node2D
                 p.DrawRect(new Rect2(96, 748 - lift * 4, 208, lift * 4), Palette.Wood);
                 p.DrawRect(new Rect2(96, 748 - lift * 4, 208, 12), Palette.WoodLight);
             }));
-        _body.AddChild(UiKit.Outline(new Sprite2D
+        var figure = UiKit.Outline(new Sprite2D
         {
             Texture = GD.Load<Texture2D>($"res://assets/figures/{_seller.Look}.png"),
             Centered = false, Position = origin, Scale = Vector2.One * 4,
             TextureFilter = TextureFilterEnum.Nearest,
-        }, whole: true));
+        }, whole: true);
+        // A ghost (Sir Aldwin): pale, cold and half there.
+        if (_seller.Ghost) figure.Modulate = new Color(0.72f, 0.86f, 1f, 0.55f);
+        _body.AddChild(figure);
         if (Clickable)
         {
             var face = new Button

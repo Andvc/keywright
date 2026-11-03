@@ -15,7 +15,7 @@ public sealed class SaveData
     /// 5: 0.28's new cast and its tales (a version 4 save's regulars are renamed, and its tales start fresh); 4: 0.21's five
     /// weeks of five days (older saves are moved onto them: <see cref="FromJson"/>).
     /// </summary>
-    public const int CurrentVersion = 5;
+    public const int CurrentVersion = 6;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -126,6 +126,15 @@ public sealed class SaveData
     public Dictionary<string, int> BeatsDone { get; set; }
     public List<string> Flags { get; set; }
     public List<string> Gone { get; set; }
+
+    // 0.30: what tales leave behind (Consequences.cs).
+    public Dictionary<string, string> Owed { get; set; }
+    public List<string> CalledIn { get; set; }
+    public List<string> Evidence { get; set; }
+    public int LoanOwed { get; set; }
+    public int LoanDue { get; set; }
+    public Dictionary<string, int> Until { get; set; }
+    public int PaidBeforeMaw { get; set; }
     public Dictionary<string, int> Standing { get; set; }
     public List<Notice> Notices { get; set; }
     public List<Held> BackRoom { get; set; }
@@ -206,6 +215,18 @@ public sealed class SaveData
                 data.HintsSeen = data.HintsSeen.Select(Renamed).Distinct().ToList();
                 data.Snubbed = (data.Snubbed ?? new List<string>()).Select(Renamed).Distinct().ToList();
                 foreach (var commission in data.Commissions) commission.Patron = Renamed(commission.Patron);
+                data.Version = 5;
+            }
+            // 0.30's gentler economy: colours are worth twice the one below, not three to ten times, so a run saved at a
+            // grander shop carries its purse over at what it would buy now (what a chest there is worth, against then).
+            if (data.Version == 5)
+            {
+                float f = Rescaled(data.Tier);
+                int Scale(int gold) => (int)MathF.Round(gold * f);
+                data.Gold = Scale(data.Gold);
+                data.Arrears = Scale(data.Arrears);
+                data.CurioPaid = (data.CurioPaid ?? new List<int>()).Select(Scale).ToList();
+                if (data.Keepsakes != null) data.Keepsakes = data.Keepsakes.ToDictionary(k => k.Key, k => Scale(k.Value));
                 data.Version = CurrentVersion;
             }
             return data;
@@ -215,6 +236,9 @@ public sealed class SaveData
             return null;
         }
     }
+
+    /// <summary>What a shop's sums are worth in 0.30's economy against 0.29's: a typical chest there, now against then.</summary>
+    static float Rescaled(int tier) => tier switch { 1 => 1f, 2 => 2f / 3, 3 => 0.4f, _ => 0.27f };
 
     /// <summary>Days in a week before 0.20, and in 0.20's; weeks of Bram's debt before 0.21.</summary>
     const int OldDaysPerWeek = 5, ShortDaysPerWeek = 3, OldWeeks = 8;

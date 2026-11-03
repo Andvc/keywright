@@ -27,7 +27,9 @@ public partial class RunEndPhase : Phase
     {
         Add(UiKit.MakeShop(State.Tier, _cleared ? 0.65f : 0.4f, ShopHour.Evening, State));
         var color = _cleared ? Palette.Gold : Palette.Bad;
-        string title = _cleared ? (State.VaultOpened ? Loc.T("THE LOCKING HOLDS") : Loc.T("DEBT CLEARED")) : Loc.T("FORECLOSED");
+        string title = _cleared
+            ? State.GateOpens ? Loc.T("THE GATE OPENS") : State.VaultOpened ? Loc.T("THE LOCKING HOLDS") : State.OnTrial ? Loc.T("THE GUILD ON TRIAL") : Loc.T("DEBT CLEARED")
+            : Loc.T("FORECLOSED");
         var logo = Add(UiKit.MakeLabel(title, 64, color, HorizontalAlignment.Center, outline: 8).Place(0, 80, 1280, 80));
         logo.PivotOffset = new Vector2(640, 40);
         logo.Scale = Vector2.One * 1.3f;
@@ -36,7 +38,9 @@ public partial class RunEndPhase : Phase
         string paid = early > 0 ? Loc.Plural(early, $"Bram's debt is paid, {early} week early", $"Bram's debt is paid, {early} weeks early")
             : Loc.T("Bram's debt is paid");
         string sub = _cleared
-            ? State.VaultOpened ? Loc.T($"{paid}, the Crown Chest opened, and the Gate gone quiet.")
+            ? State.GateOpens ? Loc.T("Bram's debt is paid, by the Maw. He has the Key, and the Gilded Gate stands open.")
+            : State.VaultOpened ? Loc.T($"{paid}, the Crown Chest opened, and the Gate gone quiet.")
+            : State.OnTrial ? Loc.T($"{paid}, and the Guild on trial in the King's court.")
             : State.MapGiven ? Loc.T($"{paid}. The Guild has the Key's shards; let them look for the Chest.")
             : State.Week < Guild.Weeks && State.MapPieces > 0 ? Loc.T($"{paid}. Keep trading, and the Key may yet be whole.")
             : Loc.T($"{paid}. The Crown Chest will have to wait.")
@@ -76,8 +80,8 @@ public partial class RunEndPhase : Phase
         {
             Add(UiKit.MakeButton(Loc.T("Keep trading"), Palette.Gold, 24, KeepTrading).Place(340, 580, 290, 64)).TooltipText =
                 State.Week < Guild.Weeks
-                    ? Loc.T($"Nobody's coming for anything until week {Guild.Weeks + 1}: then the Guild wants interest, twice as much each week.")
-                    : Loc.T("The Guild keeps coming, for twice as much each week. How long can you last?");
+                    ? Loc.T($"Nobody's coming for anything until week {Guild.Weeks + 1}: then the Guild wants interest, half as much again each week.")
+                    : Loc.T("The Guild keeps coming, for half as much again each week. How long can you last?");
             Add(UiKit.MakeButton(Loc.T("Retire"), Palette.Text, 24, Retire).Place(650, 580, 290, 64)).TooltipText = Loc.T("Hang up your apron: back to the title.");
             Sfx.Play("fanfare", 1f, -2);
             Fx.Confetti(this, new Vector2(640, 120), 160);

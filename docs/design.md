@@ -96,7 +96,22 @@ agree, thing by thing, with and without the lodestone (`Magnet` in code).
 A chest's **colour** says what to expect: wood (common), green (uncommon), blue (rare), purple (epic). Each thing
 inside rolls its own quality around that: 77% as promised, 16% one worse, 6% one better, 0.8% two better, 0.2%
 three better (what would fall below common or above legendary stays at the end). Value is the kind's base times
-1, 3, 10, 30 or 100 by quality (v18; v12 to v17: 1, 3, 8, 20, 50).
+1, 2, 4, 8 or 24 by quality (0.30; v18 to 0.29: 1, 3, 10, 30, 100; v12 to v17: 1, 3, 8, 20, 50).
+
+**Gold is rare** (0.30). The owner found gold things too common late in a run, and every step inward three to ten times
+the last. So each colour is now worth twice the one below, and gold three times purple, but:
+
+- a chest's own roll makes a thing gold only 8% as often as the spread above says (`Categories.GoldShare`): about one
+  purple thing in two hundred, and the rest stay purple;
+- **luck never makes gold** (`Categories.Lift`): restorers, luck curios, a dry spell, a hoard's better things and the
+  Chimes lift things as far as purple. A thing is gold when it went into the chest gold: no restorer can make a legend.
+- Instead, luck that would have lifted a purple thing past purple makes it **shine**: it comes out enchanted (worth
+  double, `Build.PastPurple`), priced into the index (at half, as all luck is) and into the slip's value of a purple
+  thing (`ShineShare`), so a luck build still pays at the Emporium. The Master Restorer mends instead of lifting
+  (nothing comes out worse than its chest), and Tick's hoard is more often blue, which can come out better.
+
+A careful run finds a gold thing or two (the sim's count is on the main table's "gold things a run" line), Bram's tip
+says so the first time, and the Crown Chest still holds five.
 
 Surprises: in v10 one thing in five came out better (two steps in 2%), a third of a careful player's income came from
 them, and one lucky chest could pay for a renovation; v12 to v17 cut that to one in twelve and a seventh of the income,
@@ -545,6 +560,29 @@ fifth of careful runs, still at Thornwick or new to Crownhold, need Bram's word 
 the Royal Emporium makes on ordinary trade with every upgrade bought (*The shop's power index*, below), so a run that
 clears has a build that came together, or a Heartsong's luck.
 
+**0.30: a longer season, and a gentler climb.** The owner: with the tales doubled, the season can be longer; but tenfold
+jumps week on week (300, 4,000, 45,000) felt unreasonable, and gold things came too often late on. So the debt is seven
+weeks (35 days), the qualities are worth 1, 2, 4, 8 and 24 times a common (each colour twice the one below, gold rare:
+*What a chest holds*, above), the buyers' trades are smaller (the auction block a quarter, the royal warrant a third,
+so the index tops out about 2.1 at the Emporium, not 2.7), the upgrades are priced for the new sums (a tier's tools at
+two thirds, two fifths and a quarter of what they were: what its chests are worth now against then), and the dues
+climb about three times a week, with nothing like a tenfold jump:
+
+| Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | then |
+|---|---|---|---|---|---|---|---|---|
+| Day | 5 | 10 | 15 | 20 | 25 | 30 | 35 | |
+| Due | 20g | 60g | 160g | 450g | 1,300g | 4,000g | 12,000g | x1.5 a week |
+
+The moves cost 80g, 300g and 3,000g, and a careful run makes them about days 7, 17 and 25 (so about two weeks at each
+shop, and the Emporium for the last two); profit per customer runs about 7, 12, 65 and 350g by shop (0.29: 10, 30,
+190 and 4,500). Week 5 asks for a good week in Crownhold, week 6 for a start at the Emporium, and week 7 is the wall. A
+strong run pays it all off in week 6. The tales carry a run further than before (the officials, favours on a short
+night, market days, the court and the decree), so the careful player clears more often with them than without; the
+figures are in *Evidence*, below. The interest after the debt grows half as much again a week (twice, until 0.30), and
+Bram's stash is 20g/30g at the stall, 30g/40g at Thornwick, 50g/80g in Crownhold and 270g/400g at the Emporium. A run
+saved in 0.29 carries its purse into the new economy at what its shop's chests are worth now against then
+(`SaveData` version 6).
+
 **Paying it off early.** Whenever you have all that's left of the debt (`GameState.DebtLeft`: this week's due if it's
 unpaid, and every week's after it to the last), you can pay it at once: from the day-end screen's Guild panel, which
 shows what's left and turns into a "Pay it all off" button (with a confirmation), or on the Guild's night beside the
@@ -914,6 +952,21 @@ whole story; until then, the next thing coming is told under the grid. Nim comes
 morning), on a day without an event when he can.
 
 ## The people and their tales (0.28)
+
+**0.30: what tales leave behind.** The owner: side stories should change the game, not just the Town page (if the
+Guild takes the child, he stops coming, and a friend of the authorities might find their officials selling to them; if
+he stays, his mother might come back with a discount), interconnect, and reach the ending; and there should be many
+more of them. So 0.30 adds fifteen tales (four at Brindle, five at Thornwick, four in Crownhold, two at the Emporium; with 0.28's, a
+season draws three of each place's seven or eight, both of the Emporium's, the Shut Chests and the King's Court) and
+gives every tale, old and new, consequences in
+play: officials who sell only to the authorities' friends (`SellerDef.Comes`), better terms from people you've helped
+(`Goodwill`), favours called in on a short Guild night (`Owed`), papers for a King's court that can put the Guild on
+trial (`Evidence`), reading contests (`Visit.Contest`), a moneylender (`Borrow`), effects that last a while (a rival
+across the road, pickets at the door, the Field's dead: `Until`), nights away from Nim, a shard of the Key by another
+road, and the Maw's bargain, the debt paid for the Key. The ending reads all of it: the gathering in week 6 and the
+Crown Chest night name who stands with you, the run-end title changes (THE GUILD ON TRIAL, THE GATE OPENS), the score
+counts friends made and the trial, and after the last scene the season's end tells what became of everyone whose tale
+began (`TaleDef.Ending`). `docs/stories.md` has every beat; the sim's "Tales" section reports how each tale went.
 
 The owner, after playing a shopkeeper game whose customers had lives (revolutionaries and police, thieves and wanted
 notices): the people at the counter were flat, the only progression across encounters was the Key's shards, and the

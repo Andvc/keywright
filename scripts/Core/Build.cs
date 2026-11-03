@@ -104,33 +104,60 @@ public sealed partial class GameState : ISlipModel
         ((kind == Category.Arms && HasCurio("gauntlet")) || (kind == Category.Garb && HasCurio("cap")) ? Curios.TradeLuck : 0) +
         Synergies.LuckBonus(Active("fortune")) + (HasCurio("spindle") ? Math.Min(Curios.SpindleMax, Curios.SpindleStep * Surprises) : 0);
 
-    /// <summary>Never worse than its chest promised: a smith's glove for weapons, a hatter's cap for cloaks, the Imp's Ember for all.</summary>
-    bool Mends(Category kind) => (kind == Category.Arms && HasCurio("gauntlet")) || (kind == Category.Garb && HasCurio("cap")) || Shows(Heartsongs.Ember);
+    /// <summary>
+    /// Never worse than its chest promised: a smith's glove for weapons, a hatter's cap for cloaks, the Imp's Ember and the
+    /// Master Restorer for all (0.30: a step better was the master's, but luck stops at purple, and the Emporium's chests
+    /// are purple).
+    /// </summary>
+    bool Mends(Category kind) => (kind == Category.Arms && HasCurio("gauntlet")) || (kind == Category.Garb && HasCurio("cap")) || Shows(Heartsongs.Ember) ||
+                                 Has("master");
 
-    static Rarity Up(Rarity q, int steps = 1) => (Rarity)Math.Min((int)Rarity.Legendary, (int)q + steps);
+    /// <summary>Luck's step: as far as purple, never into gold (<see cref="Categories.Lift"/>).</summary>
+    static Rarity Up(Rarity q, int steps = 1) => Categories.Lift(q, steps);
 
-    /// <summary>A thing's quality, turned by the rules (the base roll is the chest's own, made when it was packed).</summary>
-    Rarity Turn(Rarity q, Rarity chest, LuckRules r)
+    /// <summary>
+    /// Whether luck's step would have taken a thing past purple: it can't make gold (no restorer makes a legend), so the
+    /// thing comes out enchanted instead (0.30: a lucky purple thing shines). Without it, luck did nothing at the Emporium.
+    /// </summary>
+    static bool PastPurple(Rarity q, int steps) => steps > 0 && q < Rarity.Legendary && (int)q + steps > (int)Rarity.Epic;
+
+    /// <summary>
+    /// A thing's quality, turned by the rules (the base roll is the chest's own, made when it was packed), and whether
+    /// luck lifted it past purple (<see cref="PastPurple"/>): then it comes out enchanted.
+    /// </summary>
+    (Rarity Quality, bool Shine) Turn(Rarity q, Rarity chest, LuckRules r)
     {
+        bool shine = false;
+        Rarity Lucky(Rarity x, int steps = 1)
+        {
+            shine |= PastPurple(x, steps);
+            return Up(x, steps);
+        }
         if (r.TwoTries && Categories.RollQuality(Rng, chest) is var again && again > q) q = again;
-        q = Up(q, r.Shift);
-        if (r.Step > 0 && Rng.NextFloat() < r.Step) q = Up(q);
+        q = Lucky(q, r.Shift);
+        if (r.Step > 0 && Rng.NextFloat() < r.Step) q = Lucky(q);
         if (r.Swing && q == chest && Rng.NextFloat() < Curios.TokenSwing) q = Categories.Swing(Rng, q);
         if (r.Mend && q < chest) q = chest;
-        if (r.Chimes && q == chest && q < Rarity.Legendary && Rng.NextFloat() < Heartsongs.ChimesLuck) q = Up(q);
-        return r.Steady ? chest : q;
+        if (r.Chimes && q == chest && q < Rarity.Epic && Rng.NextFloat() < Heartsongs.ChimesLuck) q = Up(q);
+        return r.Steady ? (chest, false) : (q, shine);
     }
 
     /// <summary>The same turning, on the odds of each quality, for the slip and the power index.</summary>
-    static float[] Turn(float[] d, Rarity chest, LuckRules r)
+    static float[] Turn(float[] d, Rarity chest, LuckRules r) => Turn(d, chest, r, out _);
+
+    /// <param name="shine">How much of it luck lifted past purple: the chance a thing comes out a purple that shines (enchanted).</param>
+    static float[] Turn(float[] d, Rarity chest, LuckRules r, out float shine)
     {
         int c = (int)chest;
+        float shone = 0;
+        // Luck's shift: as far as purple, never into gold; what's gold stays gold, and what would have gone past purple shines.
         float[] Shifted(float[] x, int steps)
         {
             var y = new float[5];
-            for (int q = 0; q < 5; q++) y[Math.Min(4, q + steps)] += x[q];
+            for (int q = 0; q < 5; q++) y[(int)Categories.Lift((Rarity)q, steps)] += x[q];
             return y;
         }
+        float PastPurpleShare(float[] x, int steps) => Enumerable.Range(0, 5).Where(q => PastPurple((Rarity)q, steps)).Sum(q => x[q]);
         if (r.TwoTries)
         {
             // The better of two tries: the chance it's at most q is the base chance, squared.
@@ -145,9 +172,15 @@ public sealed partial class GameState : ISlipModel
             d = new float[5];
             for (int q = 0; q < 5; q++) d[q] = cdf[q] - (q > 0 ? cdf[q - 1] : 0);
         }
-        if (r.Shift > 0) d = Shifted(d, r.Shift);
+        if (r.Shift > 0)
+        {
+            shone += PastPurpleShare(d, r.Shift);
+            d = Shifted(d, r.Shift);
+        }
         if (r.Step > 0)
         {
+            // What's already shining stays so; of the rest at purple, a step's worth shines now.
+            shone += (d[(int)Rarity.Epic] - shone) * r.Step;
             var up = Shifted(d, 1);
             d = d.Select((p, q) => p * (1 - r.Step) + up[q] * r.Step).ToArray();
         }
@@ -166,7 +199,7 @@ public sealed partial class GameState : ISlipModel
                 d[q] = 0;
             }
         }
-        if (r.Chimes && c < 4)
+        if (r.Chimes && c < (int)Rarity.Epic)
         {
             float moved = d[c] * Heartsongs.ChimesLuck;
             d[c] -= moved;
@@ -176,8 +209,21 @@ public sealed partial class GameState : ISlipModel
         {
             d = new float[5];
             d[c] = 1;
+            shone = 0;
         }
+        shine = Math.Clamp(shone, 0, d[(int)Rarity.Epic]);
         return d;
+    }
+
+    /// <summary>
+    /// Of the things here that come out purple in a chest of this colour, the share luck made shine (enchanted, worth
+    /// double): for what a purple thing is worth on the slip and to the careful player.
+    /// </summary>
+    float ShineShare(Category kind, Rarity chest, bool hidden)
+    {
+        if (hidden) return 0;
+        var d = Turn(Spread(chest), chest, Rules(kind, false, false, CoinPending, CloverPending, false), out float shine);
+        return d[(int)Rarity.Epic] > 0 ? shine / d[(int)Rarity.Epic] : 0;
     }
 
     static float[] Spread(Rarity chest)
@@ -194,6 +240,9 @@ public sealed partial class GameState : ISlipModel
     /// <summary>The day a shooting star last fell: once a day.</summary>
     int _starDay;
 
+    /// <summary>Things in the chest just bought that luck made shine (purple, enchanted): surprises, as much as a step better.</summary>
+    readonly HashSet<int> _shone = new();
+
     /// <summary>
     /// What luck did to a chest you've just bought, with the curios that did it and how many things each changed (the
     /// opening says so).
@@ -205,14 +254,22 @@ public sealed partial class GameState : ISlipModel
         bool firstToday = Today.Bought == 1, firstThisWeek = CloverPending;
         if (firstThisWeek) CloverWeek = Week;
         var before = chest.Everything.ToDictionary(i => i.Id, i => i.Quality);
+        var magicBefore = chest.Everything.ToDictionary(i => i.Id, i => i.Magic);
         var unwarded = chest.Unwarded?.Id;
         chest.Improve(i =>
         {
             if (i.Fake || i.Broken) return i;
+            bool hidden = i == chest.Hidden || i.Id == unwarded;
             var r = Rules(i.Category, i == chest.Hidden, i.Id == unwarded, firstToday, firstThisWeek, unseen);
-            return i with { Quality = Turn(i.Quality, chest.Quality, r) };
+            var (quality, shine) = Turn(i.Quality, chest.Quality, r);
+            bool shone = shine && !hidden && !i.IsSong && !i.Magic;
+            return i with { Quality = quality, Magic = i.Magic || shone, Shone = i.Shone || shone };
         });
-        int Count(Func<Item, bool> which) => chest.Everything.Count(i => !i.Fake && !i.Broken && which(i) && i.Quality != before[i.Id]);
+        _shone.Clear();
+        _shone.UnionWith(chest.Everything.Where(i => i.Magic && !magicBefore[i.Id]).Select(i => i.Id));
+        // A thing luck changed: a better (or worse) quality, or a purple one it made shine.
+        int Count(Func<Item, bool> which) => chest.Everything.Count(i => !i.Fake && !i.Broken && which(i) &&
+                                                                         (i.Quality != before[i.Id] || i.Magic != magicBefore[i.Id]));
         // Which curio to thank: the first that could have done it (the opening names one, with how many things).
         if (HasCurio("crescent")) changes.Add(("crescent", Count(_ => true)));
         else
@@ -221,17 +278,19 @@ public sealed partial class GameState : ISlipModel
             if (unseen) lucky.Add("dip");
             lucky.AddRange(new[] { "spindle", "foot", "horseshoe", "wheel", "rod", "wardkey" });
             string thanked = lucky.FirstOrDefault(HasCurio);
-            int better = Count(i => i.Quality > before[i.Id]);
+            int better = Count(i => i.Quality > before[i.Id] || (i.Magic && !magicBefore[i.Id]));
             if (thanked != null && better > 0) changes.Add((thanked, better));
             else if (RestorerLuck > 0 && better > 0) changes.Add(("restorer", better));
             if (HasCurio("token") && Count(i => i.Quality < before[i.Id]) is var swung and > 0) changes.Add(("token", swung));
             foreach (var key in unseen ? new[] { "gauntlet", "cap", "blindfold" } : new[] { "gauntlet", "cap" })
                 if (HasCurio(key) && Count(i => i.Quality == chest.Quality && before[i.Id] < chest.Quality) is var mended and > 0) changes.Add((key, mended));
+            // The Master Restorer's hands: nothing comes out worse than its chest.
+            if (Has("master") && Count(i => i.Quality == chest.Quality && before[i.Id] < chest.Quality) is var restored and > 0) changes.Add(("restorer", restored));
         }
         // A shooting star, once a day: the first thing to come out better than its chest climbs a step further (no seller
         // prices a star: it's once a day, and nobody knows which day it'll be).
         if (HasCurio("star") && !HasCurio("crescent") && _starDay != Day &&
-            chest.Everything.FirstOrDefault(i => !i.Fake && !i.Broken && !i.IsSong && i.Quality > chest.Quality && i.Quality < Rarity.Legendary) is Item fallen)
+            chest.Everything.FirstOrDefault(i => !i.Fake && !i.Broken && !i.IsSong && i.Quality > chest.Quality && i.Quality < Rarity.Epic) is Item fallen)
         {
             _starDay = Day;
             chest.Improve(i => i.Id == fallen.Id ? i with { Quality = Up(i.Quality) } : i);
@@ -300,15 +359,19 @@ public sealed partial class GameState : ISlipModel
 
     public float Value(Category kind, Rarity quality, bool magic, Rarity chest, int count, bool hidden = false) =>
         Categories.Value(kind, quality, magic) * SaleMultiplier(kind) * Read(true) *
-        (kind == Category.Heartsong ? 1 : General(kind, quality, chest, count) * Special(magic, hidden, false));
+        (kind == Category.Heartsong ? 1 : General(kind, quality, chest, count) * Special(magic, hidden, false)) *
+        (quality == Rarity.Epic && !magic && kind != Category.Heartsong ? 1 + ShineShare(kind, chest, hidden) : 1);
 
     /// <summary>
     /// What a thing of this kind usually fetches here in a chest of this colour, luck and the shop's name and all: for a
     /// careful player's guess at what they couldn't hear.
     /// </summary>
-    public float Expected(Category kind, Rarity chest) =>
-        Turn(Spread(chest), chest, Rules(kind, false, false, false, false, false))
-            .Select((p, q) => p * Categories.Value(kind, (Rarity)q, false) * General(kind, (Rarity)q, chest, 1)).Sum() * SaleMultiplier(kind);
+    public float Expected(Category kind, Rarity chest)
+    {
+        var turned = Turn(Spread(chest), chest, Rules(kind, false, false, false, false, false), out float shine);
+        return (turned.Select((p, q) => p * Categories.Value(kind, (Rarity)q, false) * General(kind, (Rarity)q, chest, 1)).Sum() +
+                shine * Categories.Value(kind, Rarity.Epic, false) * General(kind, Rarity.Epic, chest, 1)) * SaleMultiplier(kind);
+    }
 
     /// <summary>What a broken thing still fetches: nothing, but an alchemist's still makes half of a broken potion good.</summary>
     float BrokenValue(Item item) => item.Category == Category.Potions && HasCurio("still") ? Categories.Value(item.Category, item.Quality, item.Magic) * Curios.StillBroken : 0;
@@ -427,7 +490,7 @@ public sealed partial class GameState : ISlipModel
     void Counted(Visit visit, Chest chest, Appraisal slip)
     {
         PassStreak = 0;
-        int surprised = chest.Everything.Count(i => !i.Fake && !i.Broken && !i.IsSong && i.Quality > chest.Quality);
+        int surprised = chest.Everything.Count(i => !i.Fake && !i.Broken && !i.IsSong && (i.Quality > chest.Quality || _shone.Contains(i.Id)));
         Surprises += surprised;
         LuckStreak = surprised > 0 ? LuckStreak + 1 : 0;
         if (chest.Hidden != null)
@@ -524,7 +587,12 @@ public sealed partial class GameState : ISlipModel
     float KindPower(Category kind, Rarity colour)
     {
         var spread = Spread(colour);
-        float Worth(LuckRules r) => Turn(spread, colour, r).Select((p, q) => p * Categories.Value(kind, (Rarity)q, false) * General(kind, (Rarity)q, colour, 1)).Sum();
+        float Worth(LuckRules r)
+        {
+            var turned = Turn(spread, colour, r, out float shine);
+            return turned.Select((p, q) => p * Categories.Value(kind, (Rarity)q, false) * General(kind, (Rarity)q, colour, 1)).Sum() +
+                   shine * Categories.Value(kind, Rarity.Epic, false) * General(kind, Rarity.Epic, colour, 1);
+        }
         float plain = spread.Select((p, q) => p * Categories.Value(kind, (Rarity)q, false)).Sum();
         float sure = plain * Certain(kind, 1);
         var always = Rules(kind, false, false, false, false, false);

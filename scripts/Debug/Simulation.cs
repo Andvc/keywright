@@ -88,7 +88,11 @@ public static partial class Simulation
         public readonly int[] GoldAtDues = new int[MaxWeeks + 1], Due = new int[MaxWeeks + 1], TierAtDues = new int[MaxWeeks + 1];
         public readonly bool[] Paid = new bool[MaxWeeks + 1];
 
-        public int Commissions, CommissionGold, CurioGold, CurioSpent, Pawned, Short, Grace, Stash, Note;
+        public int Commissions, CommissionGold, CurioGold, CurioSpent, Pawned, Short, Grace, Stash, Note, Favours;
+
+        /// <summary>0.30: gold things opened (not the Crown Chest's), papers for the court, the Guild tried, the Maw's bargain.</summary>
+        public int GoldThings, Papers, Owed;
+        public bool Trial, Bargain;
 
         /// <summary>The tales: talks had, tools bought at the counter and from Nim, what the tales paid or cost, the beats played.</summary>
         public int Talks, Offers, NimUpgrades, TaleGold;
@@ -187,6 +191,10 @@ public static partial class Simulation
                      $"Bram's stash opened {logs.Average(l => l.Stash):0.0} times, " +
                      $"Bram vouched in {100f * logs.Count(l => l.Grace > 0) / logs.Count:0}% (median week " +
                      $"{logs.Where(l => l.Grace > 0).Select(l => l.Grace).DefaultIfEmpty(0).OrderBy(w => w).ElementAt(logs.Count(l => l.Grace > 0) / 2)})");
+            // 0.30: how rare gold is, and what the tales left behind.
+            GD.Print($"gold things a run {logs.Average(l => l.GoldThings):0.0} (none in {100f * logs.Count(l => l.GoldThings == 0) / logs.Count:0}% of runs), " +
+                     $"favours called {logs.Average(l => l.Favours):0.0}, friends made {logs.Average(l => l.Owed):0.0}, papers {logs.Average(l => l.Papers):0.0}, " +
+                     $"the Guild on trial {100f * logs.Count(l => l.Trial) / logs.Count:0}%, the Maw's bargain {100f * logs.Count(l => l.Bargain) / logs.Count:0}%");
         }
 
         PrintMargins(all[Styles[0]], all[Styles[^1]], campaigns);
@@ -710,6 +718,10 @@ public static partial class Simulation
         log.WeeksPaid = state.WeeksPaid;
         log.Stash = state.StashUsed;
         log.Pieces = state.MapPieces;
+        log.Papers = state.Evidence.Count;
+        log.Owed = state.Owed.Count + state.CalledIn.Count;
+        log.Trial = state.OnTrial;
+        log.Bargain = state.GateOpens;
         log.MapGiven = state.MapGiven ? 1 : 0;
         log.Curios.UnionWith(state.CurioKeys);
         log.Tales = state.TalesDrawn.ToList();
@@ -781,7 +793,7 @@ public static partial class Simulation
                 bool knewAll = profile.Songs.Count >= Heartsongs.All.Length;
                 profile.Note(state);
                 if (!knewAll && profile.Songs.Count >= Heartsongs.All.Length) allNine.Add(r + 1);
-                if (state.DebtCleared)
+                if (state.DebtCleared && !state.GateOpens)
                 {
                     profile.Cleared++;
                     profile.ClearedAt(state);
@@ -930,6 +942,7 @@ public static partial class Simulation
                 else if (!item.Fake && !item.Broken)
                 {
                     log.Opened++;
+                    if (item.Quality == Rarity.Legendary && visit.Chest.Quality < Rarity.Legendary) log.GoldThings++;
                     int steps = item.Quality - visit.Chest.Quality;
                     if (steps == 1) log.BetterOne++;
                     if (steps >= 2) log.BetterTwo++;
@@ -1021,7 +1034,7 @@ public static partial class Simulation
             state.PayOff();
             log.PaidOffWeek = state.Week;
         }
-        if (state.DebtCleared && log.ClearedDay == 0) log.ClearedDay = state.Day;
+        if (state.DebtCleared && !state.GateOpens && log.ClearedDay == 0) log.ClearedDay = state.Day;
         if (!wasCleared && state.DebtCleared) rec?.Cleared(state, state.Week < Guild.Weeks || !state.DuesTonight);
         if (state.VaultDue)
         {
@@ -1141,6 +1154,12 @@ public static partial class Simulation
             log.GoldAtDues[week] = state.Gold;
             log.Due[week] = state.DueNow;
             log.TierAtDues[week] = state.Tier;
+        }
+        // Friends who owe you first: an eighth of the due each, and nothing on the shelf lost (0.30).
+        while (state.Gold < state.DueNow && state.Callable.FirstOrDefault() is string friend)
+        {
+            log.Favours++;
+            state.CallIn(friend);
         }
         if (state.Gold < state.DueNow)
         {

@@ -767,13 +767,34 @@ public partial class Main : Node2D
         NextCustomer();
     }
 
+    /// <summary>
+    /// The run's over, won or lost: the season's end first (what became of everyone whose tale began, once a run: not
+    /// again if you keep trading and the Guild's interest catches up), then the score.
+    /// </summary>
+    void EndRun(bool cleared)
+    {
+        var lines = State.Flagged(SeasonEnded) ? new List<Line>() : Story.SeasonEnd(State);
+        State.Flags.Add(SeasonEnded);
+        if (lines.Count == 0) SwitchTo(new RunEndPhase(cleared));
+        else SwitchTo(new ScenePhase(lines, () => SwitchTo(new RunEndPhase(cleared)), Loc.T("THE SEASON'S END"), "bram"));
+    }
+
+    const string SeasonEnded = "season.ended";
+
     /// <summary>After the day's end: the Guild's introduction (the second evening), its due (the fifth), or the night.</summary>
     public void CloseDay()
     {
+        // The Maw paid the debt at the counter today: Vane's last visit, and the end of the run.
+        if (State.GateOpens && State.ClearedDay == State.Day && !State.Flagged("bargain.told"))
+        {
+            State.Flags.Add("bargain.told");
+            Cleared();
+            return;
+        }
         if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), Night, Loc.T("THE GILDED GUILD"), "guild"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
         // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
-        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(), Vault, Loc.T("THE ALDRIC KEY"), "vault"));
+        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(State), Vault, Loc.T("THE ALDRIC KEY"), "vault"));
         else Night();
     }
 
@@ -805,7 +826,7 @@ public partial class Main : Node2D
     {
         if (State.Foreclosed)
         {
-            SwitchTo(new ScenePhase(Story.Foreclosed(State), () => SwitchTo(new RunEndPhase(cleared: false)), backdrop: "guild"));
+            SwitchTo(new ScenePhase(Story.Foreclosed(State), () => EndRun(cleared: false), backdrop: "guild"));
             return;
         }
         if (State.DebtCleared && State.ClearedDay == State.Day)
@@ -832,11 +853,13 @@ public partial class Main : Node2D
     /// <summary>The debt's just been cleared: Vane's last visit and Bram's joy, then the vault or the end of the run.</summary>
     void Cleared()
     {
-        WriteProfile(p =>
-        {
-            p.Cleared++;
-            p.ClearedAt(State);
-        });
+        // A debt the Maw paid isn't a clear: no harder level opens for it.
+        if (!State.GateOpens)
+            WriteProfile(p =>
+            {
+                p.Cleared++;
+                p.ClearedAt(State);
+            });
         SwitchTo(new ScenePhase(Story.Cleared(State), Vault, Loc.T("FREE AND CLEAR"), "bram"));
     }
 
@@ -845,7 +868,7 @@ public partial class Main : Node2D
     {
         if (!State.VaultDue)
         {
-            SwitchTo(new RunEndPhase(cleared: true));
+            EndRun(cleared: true);
             return;
         }
         State.VaultOpened = true;
@@ -861,7 +884,7 @@ public partial class Main : Node2D
         if (State.Opening?.Visit.Seller == Story.VaultSeller)
         {
             if (State.SongWhole) WriteProfile(p => p.SungWhole++);
-            SwitchTo(new ScenePhase(Story.VaultEpilogue(State), () => SwitchTo(new RunEndPhase(cleared: true)),
+            SwitchTo(new ScenePhase(Story.VaultEpilogue(State), () => EndRun(cleared: true),
                 State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE CROWN CHEST"), "vault"));
             return;
         }

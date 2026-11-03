@@ -258,7 +258,7 @@ public static class Challenges
 public static class Score
 {
     public const int PerDue = 10, Cleared = 100, PerDaySpare = 5, Vault = 100, PerPiece = 10, PerRenovation = 25, PerFind = 2, PerEndlessWeek = 25,
-        PerSong = 20, SungWhole = 200;
+        PerSong = 20, SungWhole = 200, Trial = 75, PerFriend = 5;
 
     /// <summary>The run's points, line by line (lines worth nothing are left out).</summary>
     public static List<(string Label, int Points)> Lines(GameState state)
@@ -268,9 +268,10 @@ public static class Score
         {
             if (points > 0) lines.Add((label, points));
         }
-        int dues = Math.Min(state.WeeksPaid, Guild.Weeks);
+        int dues = state.GateOpens ? state.PaidBeforeMaw : Math.Min(state.WeeksPaid, Guild.Weeks);
         Add(Loc.T($"Guild dues paid ({dues} of {Guild.Weeks})"), dues * PerDue);
-        if (state.DebtCleared)
+        // The Maw paid the debt, not you: it scores nothing (0.30).
+        if (state.DebtCleared && !state.GateOpens)
         {
             Add(Loc.T("Bram's debt cleared"), Cleared);
             int spare = Math.Max(0, Guild.Weeks * Guild.DaysPerWeek - state.ClearedDay);
@@ -284,6 +285,10 @@ public static class Score
         Add(Loc.T($"Collection ({state.Found.Count} of {Collection.Size})"), state.Found.Count * PerFind);
         int endless = Math.Max(0, state.WeeksPaid - Guild.Weeks);
         Add(Loc.T($"Weeks after the debt ({endless})"), endless * PerEndlessWeek);
+        // The season's tales: the Guild put on trial, and everyone who owes you (or came when you called).
+        if (state.OnTrial) Add(Loc.T("The Guild on trial"), Trial);
+        int friends = state.Owed.Count + state.CalledIn.Count;
+        Add(Loc.T($"Friends made ({friends})"), friends * PerFriend);
         return lines;
     }
 

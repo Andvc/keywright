@@ -144,7 +144,8 @@ public static class Synergies
     public static float ShowBonus(int level) => 0.25f * level;
     public static float KeenFee(int level) => 0.08f * level;
     public static float MagicBonus(int level) => 0.04f * level;
-    public static float LuckBonus(int level) => 0.04f * level;
+    /// <summary>A step better is worth twice its chest in 0.30, not three times: luck comes half again as often to make up (0.04 a level until then).</summary>
+    public static float LuckBonus(int level) => 0.06f * level;
     public static float FinderHidden(int level) => 0.04f * level;
     public static float FinderSales(int level) => 0.25f * level;
     public static float HagglerFloor(int level) => 0.04f * level;

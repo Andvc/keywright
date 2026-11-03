@@ -158,8 +158,8 @@ public sealed class Held
 
     public int Day { get; set; }
 
-    /// <summary>It's someone's to collect (a smuggler's parcel): it can't be returned or sold.</summary>
-    public bool Kept => Key == "parcel";
+    /// <summary>It's someone's to collect (a smuggler's parcel, a duel's stakes): it can't be returned or sold.</summary>
+    public bool Kept => Key is "parcel" or "duel";
 }
 
 /// <summary>
@@ -227,6 +227,12 @@ public sealed class TaleDef
 
     /// <summary>What the tale can hold secret, one drawn per run (who the Magpie is; what's behind the door).</summary>
     public string[] Secrets { get; init; } = Array.Empty<string>();
+
+    /// <summary>
+    /// What became of them, for the season's end (<see cref="Story.SeasonEnd"/>): a line by what you chose, or null if
+    /// the tale never got far enough to end anywhere.
+    /// </summary>
+    public Func<GameState, Line> Ending { get; init; }
 
     Beat[] _beats = Array.Empty<Beat>();
 
@@ -528,7 +534,9 @@ public sealed partial class GameState
     public int FencePay(Held held) => held.Paid <= 0 ? 0 : Money.Round(held.Paid * (Friend(Faction.Lockless) ? Wardens.FriendFence : Wardens.Fence));
 
     /// <summary>The Wardens keep a post at Thornwick and inward: from there you can send for them.</summary>
-    public bool CanCallWardens(Visit visit) => Tier >= Wardens.FromTier && visit is { Deciding: true, Talk: null } && visit.Chest.Stolen && visit.Handled;
+    public bool CanCallWardens(Visit visit) => Tier >= Wardens.FromTier && visit is { Deciding: true, Talk: null } && visit.Chest.Stolen && visit.Handled &&
+                                               visit.Chest.Tale != "dowry"; // the court has the dowry in hand already: it's a claim, not a theft
+
 
     /// <summary>
     /// Sends for the Wardens over a stolen chest: the seller runs, the chest goes home, and you get the finder's share.
@@ -543,6 +551,12 @@ public sealed partial class GameState
         Today.Tales += share;
         Today.Reported++;
         Sway(Faction.Wardens, 1);
+        // The Guild's own bailiff doesn't run: he complains to the Guild. The Lockless don't mind a seizure undone.
+        if (visit.Seller.Key == TaleBook.Marrow)
+        {
+            Sway(Faction.Guild, -1);
+            return Loc.T("Send for the Wardens over a Guild sale? The Guild will hear of this, Keywright.");
+        }
         Sway(Faction.Lockless, -1);
         return line;
     }
@@ -615,6 +629,7 @@ public sealed partial class GameState
         data.BeatsDone = new Dictionary<string, int>(_beatsDone);
         data.Flags = Flags.ToList();
         data.Gone = Gone.ToList();
+        SaveConsequences(data);
         data.Standing = _standing.ToDictionary(p => p.Key.ToString(), p => p.Value);
         data.Notices = Notices.ToList();
         data.BackRoom = BackRoom.ToList();
@@ -632,6 +647,7 @@ public sealed partial class GameState
         foreach (var (beat, day) in data.BeatsDone ?? new Dictionary<string, int>()) _beatsDone[beat] = day;
         Flags.UnionWith(data.Flags ?? new List<string>());
         Gone.UnionWith(data.Gone ?? new List<string>());
+        LoadConsequences(data);
         foreach (var (key, value) in data.Standing ?? new Dictionary<string, int>())
             if (Enum.TryParse<Faction>(key, out var faction)) _standing[faction] = Math.Clamp(value, Factions.Min, Factions.Max);
         Notices.AddRange(data.Notices ?? new List<Notice>());

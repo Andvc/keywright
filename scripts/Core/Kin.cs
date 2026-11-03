@@ -156,9 +156,10 @@ public sealed partial class GameState
         if (visit.Chest.Packed) terms.Add(Loc.T("Packed in straw: everything needs a strength harder to stir."));
         if (seller.Packhorse) terms.Add(Loc.T("On a skittish mare: no hard shake."));
         else if (EventIs("mourning") && CanShakeHard) terms.Add(Loc.T("A day of mourning: no hard shake."));
-        if (seller.ShakeFee > 0) terms.Add(Loc.T($"Each strength you try after the first puts the price up {Synergies.Pct(seller.ShakeFee)}."));
+        if (visit.ShakeFee > 0) terms.Add(Loc.T($"Each strength you try after the first puts the price up {Synergies.Pct(visit.ShakeFee)}."));
         if (seller.Wager > 0) terms.Add(Loc.T("Read it exactly right and she gives back a third of the price."));
-        if (seller.Heirloom is Category heirloom) terms.Add(Loc.T($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g."));
+        if (visit.Contest) terms.Add(Loc.T($"A contest: read it exactly right, and you win {visit.Prize}g."));
+        if (visit.Heirloom is Category heirloom) terms.Add(Loc.T($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g."));
         if (seller.TakesDearest) terms.Add(Loc.T("The dearest thing inside is his."));
         if (seller.SlipPrice) terms.Add(Loc.T("His price is your slip: exactly right, a quarter off; wrong, what it holds and a quarter more."));
         if (seller.Gaze > 0) terms.Add(Loc.T($"Buy, and everyone after him today asks {(seller.Gaze == 2 ? Loc.T("twice as much") : $"x{seller.Gaze:0.#}")}."));
@@ -167,6 +168,8 @@ public sealed partial class GameState
         if (MindsDrop(seller)) minds.Add(Loc.T("a drop"));
         if (MindsMagnet(seller)) minds.Add(Loc.T("the lodestone"));
         if (minds.Count > 0) terms.Add(Loc.T($"Minds {Sellers.Join(minds)}: half again if you do."));
+        // A friend's terms: the rule they'd have kept, waived (Nettle's fee, Sir Rowan's claim).
+        if (visit.Waived && Goodwill(seller).Note is string waived) terms.Add(waived);
         return terms.Count == 0 ? null : string.Join(" ", terms);
     }
 

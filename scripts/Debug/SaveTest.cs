@@ -74,11 +74,19 @@ public static class SaveTest
     {
         var state = GameState.NewRun(4242, Characters.Kit, 2, false);
         Simulation.FastForward(state, 12);
+        // What 0.30's tales leave behind, so the round trip carries it: a favour, a paper, a loan, an effect that lasts.
+        state.Owe(Core.TaleBook.Wynn, "pip");
+        state.Gather("register");
+        state.Borrow(30, 1f / 3, state.Day + 3);
+        state.Until[Core.TaleBook.Picket] = state.Day + 4;
         string json = state.Save().ToJson();
         var data = SaveData.FromJson(json);
         Check(data != null, $"a run in week {state.Week} with {state.Gold}g, {state.OwnedCurios.Count()} curios saves");
         if (data == null) return;
-        string again = GameState.Load(data).Save().ToJson();
+        var loaded = GameState.Load(data);
+        Check(loaded.Owed.ContainsKey(Core.TaleBook.Wynn) && loaded.Evidence.Contains("register") && loaded.LoanOwed == 40 &&
+              loaded.While(Core.TaleBook.Picket), "a favour owed, a paper, a loan and a picket at the door come back");
+        string again = loaded.Save().ToJson();
         bool same = Without(json, "SavedAt") == Without(again, "SavedAt");
         Check(same, "it loads and saves again the same");
         if (!same)

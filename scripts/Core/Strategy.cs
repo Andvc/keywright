@@ -30,7 +30,7 @@ public static class Strategy
         if (limit > 0) return hard ? new[] { Shake.Gentle, Shake.Hard } : new[] { Shake.Gentle, Shake.Firm };
         if (visit.Chest.Packed && !visit.Chest.Unmasked) return hard ? new[] { Shake.Firm, Shake.Hard } : new[] { Shake.Firm };
         if (!hard) return new[] { Shake.Gentle, Shake.Firm };
-        return Rushed(visit, state) || visit.Seller.ShakeFee > 0 ? new[] { Shake.Gentle, Shake.Hard } : Every;
+        return Rushed(visit, state) || visit.ShakeFee > 0 ? new[] { Shake.Gentle, Shake.Hard } : Every;
     }
 
     /// <summary>The gentlest shake that stirs this kind in this chest (straw muffles a strength; 4: never).</summary>
@@ -283,7 +283,7 @@ public static class Strategy
         if (state?.HasCurio("mark") ?? false) worth += hearing.Spotted().Sum(k => Categories.Expected(k, slip.Chest) * state.SaleMultiplier(k));
         worth *= 1 + seller.QualityBoost * 1.2f;
         // A knight's claim on the family arms: the best of them goes for his fee. A devil's: the dearest thing, for nothing.
-        if (seller.Heirloom is Category heirloom && slip.Count(heirloom) > 0)
+        if (visit.Heirloom is Category heirloom && slip.Count(heirloom) > 0)
             worth -= Math.Max(0, slip.OneValue(heirloom, slip.Magic(heirloom)) - visit.Fee);
         if (seller.TakesDearest)
             worth -= slip.Marked.Select(k => (float)slip.OneValue(k, slip.Magic(k))).Append(slip.Hidden ? slip.HiddenValue : 0).DefaultIfEmpty(0).Max();
@@ -397,8 +397,33 @@ public static class Strategy
         return total;
     }
 
-    /// <summary>The shop a careful player would have on a day (the sim's medians: Thornwick by day 9, Crownhold 13, the Emporium 18).</summary>
-    static int ExpectedTier(GameState state, int day) => Math.Max(state.Tier, day >= 18 ? 4 : day >= 13 ? 3 : day >= 9 ? 2 : 1);
+    /// <summary>What one more customer a day is worth to the careful player, for this many days from tomorrow (a third of a working purse each).</summary>
+    public static float CustomerDays(GameState state, int days) =>
+        Enumerable.Range(state.Day + 1, Math.Max(0, days)).Sum(d => 0.3f * state.WorkingPurseAt(ExpectedTier(state, d)));
+
+    /// <summary>
+    /// What a favour owed is worth to the careful player: a fifth of a Guild night's due, if a short night comes before the
+    /// season's out (about one in three do, for a careful player).
+    /// </summary>
+    public static float FavourWorth(GameState state) =>
+        GameState.FavourShare * state.DueFor(Math.Min(Guild.Weeks, state.Week + 1)) * 0.35f;
+
+    /// <summary>
+    /// What a paper for the case against the Guild is worth: the court halves what's left of the debt when it sits (at the
+    /// Emporium, with four papers), and a season holds four in about one run in three; one paper is a quarter of that.
+    /// </summary>
+    public static float PaperWorth(GameState state)
+    {
+        float last = Enumerable.Range(Math.Max(state.Week, Guild.Weeks - 1), Math.Max(0, Guild.Weeks - Math.Max(state.Week, Guild.Weeks - 1) + 1))
+            .Sum(w => (float)state.DueFor(w));
+        return last * GameState.Tried * 0.33f / 4;
+    }
+
+    /// <summary>The last day a careful player would still be trading at Thornwick (the move to Crownhold, about day 17).</summary>
+    public static int ThornwickUntil(GameState state) => state.Tier > 2 ? state.Day : Math.Max(state.Day, 16);
+
+    /// <summary>The shop a careful player would have on a day (the sim's medians, 0.30: Thornwick by day 8, Crownhold 17, the Emporium 26).</summary>
+    static int ExpectedTier(GameState state, int day) => Math.Max(state.Tier, day >= 26 ? 4 : day >= 17 ? 3 : day >= 8 ? 2 : 1);
 
     /// <summary>
     /// What to do with a chest in the back room tonight: return it to its owner (the Wardens' finder's share), or sell it

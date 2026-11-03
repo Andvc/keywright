@@ -19,8 +19,11 @@ public static class Guild
     /// </summary>
     public const int DaysPerWeek = 5;
 
-    /// <summary>The weeks of Bram's debt (eight until 0.20's shorter runs). After the last, the dues keep coming (endless).</summary>
-    public const int Weeks = 5;
+    /// <summary>
+    /// The weeks of Bram's debt (eight until 0.20's shorter runs, five until 0.30's tales). After the last, the dues keep
+    /// coming (endless).
+    /// </summary>
+    public const int Weeks = 7;
 
     /// <summary>
     /// Each week's due: small for the first three weeks, while you learn the stall and a growing purse is all you need,
@@ -30,17 +33,17 @@ public static class Guild
     /// word in the fourth week and falls in the fifth; a strong run can have all of it early, and pay it off. (0.28 tried
     /// 55,000 for the tales' gold and tools; once their payouts were halved, 45,000 kept the careful player at about half.)
     /// </summary>
-    static readonly int[] Dues = { 20, 60, 300, 4000, 45000 };
+    static readonly int[] Dues = { 20, 60, 160, 450, 1300, 4000, 12000 };
 
-    /// <summary>After the debt: each week twice as much, for as long as you last.</summary>
-    const float EndlessGrowth = 2f;
+    /// <summary>After the debt: each week half as much again, for as long as you last (twice as much until 0.30).</summary>
+    const float EndlessGrowth = 1.5f;
 
     /// <summary>What the Guild wants at the end of this week.</summary>
     public static int Due(int week)
     {
         if (week <= Weeks) return Dues[Math.Max(0, week - 1)];
         double due = Dues[^1] * Math.Pow(EndlessGrowth, week - Weeks);
-        return (int)(Math.Round(due / 1000) * 1000);
+        return (int)(Math.Round(due / 100) * 100);
     }
 
     /// <summary>All of Bram's debt, as Vane tells it the first evening.</summary>
@@ -57,6 +60,8 @@ public static class Guild
         Loc.T("Good evening. The Guild's tithe, if you please. In gold: the Guild has no use for promises."),
         Loc.T("Still here, I see. Good. The Guild hates to see a Keywright go to waste."),
         Loc.T("I hear you've opened a great many chests this week. The Guild approves. Do keep opening them."),
+        Loc.T("Halfway, Keywright. The Guild has been very patient with Bram's stall. It would hate to stop."),
+        Loc.T("The Guild hears you've been making friends this season. How touching. Friends don't pay tithes."),
         Loc.T("My masters have begun to ask about you. That is rarely good news. One more week after this one."),
         Loc.T("The last of Bram's debt. Every coin of it, mind. Gold you can see."),
     };
