@@ -69,7 +69,7 @@ public static class UiKit
         };
         paragraph.AddString(text, Font, size);
         int lines = Math.Max(1, paragraph.GetLineCount());
-        int spacing = ThemeDB.GetDefaultTheme().GetConstant("line_spacing", "Label");
+        int spacing = ThemeDB.GetDefaultTheme().GetConstant("line_spacing", "Label"); // loc: keys (a theme type)
         return lines * Font.GetHeight(size) + (lines - 1) * spacing;
     }
 

@@ -3925,7 +3925,7 @@ msgid "How disappointing. I may ask again."
 msgstr ""
 
 #: scripts/Core/Offers.cs:69 scripts/Phases/CounterPhase.cs:532 scripts/Phases/DayEndPhase.cs:211
-#: scripts/Ui/NotebookView.cs:408 scripts/Ui/NotebookView.cs:545
+#: scripts/Ui/NotebookView.cs:419 scripts/Ui/NotebookView.cs:556
 #, csharp-format
 msgid "{0}: {1}"
 msgstr ""
@@ -6490,7 +6490,7 @@ msgstr ""
 msgid "The Crown Chest. The King gives it to you: it's yours by right. Open it, Keywright."
 msgstr ""
 
-#: scripts/Core/Story.cs:63 scripts/Ui/NotebookView.cs:300
+#: scripts/Core/Story.cs:63 scripts/Ui/NotebookView.cs:311
 msgid "Mara"
 msgstr ""
 
@@ -6616,7 +6616,7 @@ msgstr ""
 msgid "{0} Bring me {1} {2}, and the next shard is yours."
 msgstr ""
 
-#: scripts/Core/Story.cs:151 scripts/Ui/NotebookView.cs:384
+#: scripts/Core/Story.cs:151 scripts/Ui/NotebookView.cs:395
 msgid "this week"
 msgstr ""
 
@@ -10225,7 +10225,7 @@ msgstr ""
 msgid "Their people ask half as much again for their tools."
 msgstr ""
 
-#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:764 scripts/Phases/TalkPhase.cs:79
+#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:767 scripts/Phases/TalkPhase.cs:79
 #: scripts/Phases/TalkPhase.cs:174
 msgid "Go on"
 msgstr ""
@@ -10867,7 +10867,7 @@ msgstr ""
 msgid "BRAM'S STALL"
 msgstr ""
 
-#: scripts/Main.cs:761 scripts/Ui/NotebookView.cs:383 scripts/Ui/NotebookView.cs:587
+#: scripts/Main.cs:761 scripts/Ui/NotebookView.cs:394 scripts/Ui/NotebookView.cs:598
 #, csharp-format
 msgid "WEEK {0}"
 msgstr ""
@@ -10888,7 +10888,7 @@ msgstr ""
 msgid "FREE AND CLEAR"
 msgstr ""
 
-#: scripts/Main.cs:916 scripts/Ui/NotebookView.cs:394
+#: scripts/Main.cs:916 scripts/Ui/NotebookView.cs:405
 #, csharp-format
 msgid "DAY {0}"
 msgstr ""
@@ -11074,7 +11074,7 @@ msgstr ""
 #: scripts/Phases/DayEndPhase.cs:80 scripts/Phases/DayEndPhase.cs:81 scripts/Phases/DayEndPhase.cs:82
 #: scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:373 scripts/Phases/DuesPhase.cs:203
 #: scripts/Phases/DuesPhase.cs:210 scripts/Phases/DuesPhase.cs:218 scripts/Phases/DuesPhase.cs:265
-#: scripts/Phases/DuesPhase.cs:279 scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:870
+#: scripts/Phases/DuesPhase.cs:279 scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:873
 #: scripts/Phases/PeddlerPhase.cs:305 scripts/Phases/TalkPhase.cs:187 scripts/Phases/TalkPhase.cs:194
 #, csharp-format
 msgid "+{0}g"
@@ -11106,7 +11106,7 @@ msgstr ""
 msgid " each"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:554 scripts/Phases/OpeningPhase.cs:871
+#: scripts/Phases/CounterPhase.cs:554 scripts/Phases/OpeningPhase.cs:874
 msgid " and a shard of the Aldric Key"
 msgstr ""
 
@@ -11362,12 +11362,12 @@ msgid "Hollis's men take the chest home to its owner, and pay you the finder's s
 msgstr ""
 
 #: scripts/Phases/CounterPhase.cs:1174 scripts/Phases/CounterPhase.cs:1363
-#: scripts/Phases/OpeningPhase.cs:764
+#: scripts/Phases/OpeningPhase.cs:767
 msgid "Close up for the day"
 msgstr ""
 
 #: scripts/Phases/CounterPhase.cs:1174 scripts/Phases/CounterPhase.cs:1363
-#: scripts/Phases/OpeningPhase.cs:764
+#: scripts/Phases/OpeningPhase.cs:767
 msgid "Next customer"
 msgstr ""
 
@@ -12113,199 +12113,199 @@ msgstr ""
 msgid "let go"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:673
+#: scripts/Phases/OpeningPhase.cs:676
 msgid "BETTER THAN EXPECTED!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:673
+#: scripts/Phases/OpeningPhase.cs:676
 msgid "TWO QUALITIES UP!!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:673
+#: scripts/Phases/OpeningPhase.cs:676
 msgid "THREE QUALITIES UP!!!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:710
+#: scripts/Phases/OpeningPhase.cs:713
 #, csharp-format
 msgid "PROFIT +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:710
+#: scripts/Phases/OpeningPhase.cs:713
 #, csharp-format
 msgid "LOSS {0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:710
+#: scripts/Phases/OpeningPhase.cs:713
 msgid "BROKE EVEN"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:732
+#: scripts/Phases/OpeningPhase.cs:735
 msgid "fleeced"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:732
+#: scripts/Phases/OpeningPhase.cs:735
 msgid "a steal"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:746
+#: scripts/Phases/OpeningPhase.cs:749
 msgid "PERFECT READ"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:754
+#: scripts/Phases/OpeningPhase.cs:757
 msgid " Masterful pick: everything +25%."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:755
+#: scripts/Phases/OpeningPhase.cs:758
 msgid " Forced open: everything -10%."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:759
+#: scripts/Phases/OpeningPhase.cs:762
 #, csharp-format
 msgid " A perfect read: a valuer's fee of {0}g."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:760
+#: scripts/Phases/OpeningPhase.cs:763
 #, csharp-format
 msgid " Haggler's Purse: {0}g back."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:761
+#: scripts/Phases/OpeningPhase.cs:764
 #, csharp-format
 msgid " Underwriter's Bond: {0}g back."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:794
+#: scripts/Phases/OpeningPhase.cs:797
 #, csharp-format
 msgid " {0} took the {1}, and paid {2}g for it."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:795
+#: scripts/Phases/OpeningPhase.cs:798
 #, csharp-format
 msgid " {0} took the {1}, as agreed."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:797
+#: scripts/Phases/OpeningPhase.cs:800
 #, csharp-format
 msgid " Read exactly: {0} hands back {1}g, as wagered."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:797
+#: scripts/Phases/OpeningPhase.cs:800
 #, csharp-format
 msgid " Not quite right: {0} keeps the whole price."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:799
+#: scripts/Phases/OpeningPhase.cs:802
 #, csharp-format
 msgid " Read exactly: {0} takes a quarter off, {1}g back."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:800
+#: scripts/Phases/OpeningPhase.cs:803
 #, csharp-format
 msgid " A wrong read: you pay {0} what it truly held, and a quarter more: {1}g."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:801
+#: scripts/Phases/OpeningPhase.cs:804
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:858
+#: scripts/Phases/OpeningPhase.cs:861
 msgid "Delivered"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:866
+#: scripts/Phases/OpeningPhase.cs:869
 msgid "Filled"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:870
+#: scripts/Phases/OpeningPhase.cs:873
 #, csharp-format
 msgid "Shard +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:870 scripts/Phases/OpeningPhase.cs:904
+#: scripts/Phases/OpeningPhase.cs:873 scripts/Phases/OpeningPhase.cs:907
 #, csharp-format
 msgid "{0}/{1}: +{2}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:870
+#: scripts/Phases/OpeningPhase.cs:873
 #, csharp-format
 msgid "Deliver +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:871
+#: scripts/Phases/OpeningPhase.cs:874
 #, csharp-format
 msgid "{0} wants {1}: {2}g{3}, instead of {4}g for selling it. A commission always pays more than selling."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:891
+#: scripts/Phases/OpeningPhase.cs:894
 #, csharp-format
 msgid "Commission! +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:895
+#: scripts/Phases/OpeningPhase.cs:898
 #, csharp-format
 msgid "KEY SHARD {0} OF {1}!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:923
+#: scripts/Phases/OpeningPhase.cs:926
 #, csharp-format
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:923
+#: scripts/Phases/OpeningPhase.cs:926
 #, csharp-format
 msgid "+{0} exhibition"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:935
+#: scripts/Phases/OpeningPhase.cs:938
 msgid "On display"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:947
+#: scripts/Phases/OpeningPhase.cs:950
 msgid "Swap"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:947
+#: scripts/Phases/OpeningPhase.cs:950
 msgid "Keep"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:947
+#: scripts/Phases/OpeningPhase.cs:950
 #, csharp-format
 msgid "Swap {0} (-{1}g)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:947
+#: scripts/Phases/OpeningPhase.cs:950
 #, csharp-format
 msgid "Keep {0} (-{1}g)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:948
+#: scripts/Phases/OpeningPhase.cs:951
 #, csharp-format
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:948
+#: scripts/Phases/OpeningPhase.cs:951
 msgid " (double: it's enchanted)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:948
+#: scripts/Phases/OpeningPhase.cs:951
 msgid " Your display is full: sell something on it to make room."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:968
+#: scripts/Phases/OpeningPhase.cs:971
 #, csharp-format
 msgid "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:974
+#: scripts/Phases/OpeningPhase.cs:977
 #, csharp-format
 msgid "{0}: +{1}g, -{2} pts"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:980
+#: scripts/Phases/OpeningPhase.cs:983
 msgid "Never mind"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:992
+#: scripts/Phases/OpeningPhase.cs:995
 #, csharp-format
 msgid "Sold the {0}: +{1}g"
 msgstr ""
@@ -13032,24 +13032,24 @@ msgstr ""
 msgid "Due {0}g"
 msgstr ""
 
-#: scripts/Ui/Hud.cs:135 scripts/Ui/NotebookView.cs:606
+#: scripts/Ui/Hud.cs:135 scripts/Ui/NotebookView.cs:617
 msgid "tonight!"
 msgstr ""
 
-#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:607
+#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:618
 #, csharp-format
 msgid "in week {0}"
 msgstr ""
 
-#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:384 scripts/Ui/NotebookView.cs:608
+#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:395 scripts/Ui/NotebookView.cs:619
 msgid "next week"
 msgstr ""
 
-#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:609
+#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:620
 msgid "tomorrow night"
 msgstr ""
 
-#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:609
+#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:620
 #, csharp-format
 msgid "in {0} days"
 msgstr ""
@@ -13114,368 +13114,368 @@ msgstr ""
 msgid "Active: {0} of {1}. You choose at the end of a day."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:131
-#, csharp-format
-msgid "{0} (later)"
-msgstr ""
-
-#: scripts/Ui/NotebookView.cs:143
+#: scripts/Ui/NotebookView.cs:132
 #, csharp-format
 msgid "Level 1: {0}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:146
+#: scripts/Ui/NotebookView.cs:134
 msgid "Highest level!"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:146 scripts/Ui/NotebookView.cs:432
+#: scripts/Ui/NotebookView.cs:134 scripts/Ui/NotebookView.cs:443
 #, csharp-format
 msgid "Next: {0}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:151 scripts/Ui/NotebookView.cs:161
+#: scripts/Ui/NotebookView.cs:144
+#, csharp-format
+msgid "{0} (later)"
+msgstr ""
+
+#: scripts/Ui/NotebookView.cs:161 scripts/Ui/NotebookView.cs:171
 msgid "Active"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:151
+#: scripts/Ui/NotebookView.cs:161
 msgid "Use"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:158
+#: scripts/Ui/NotebookView.cs:168
 msgid "No free slot: switch another one off first."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:169
+#: scripts/Ui/NotebookView.cs:180
 msgid "Kind"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:170 scripts/Ui/SettingsView.cs:26
+#: scripts/Ui/NotebookView.cs:181 scripts/Ui/SettingsView.cs:26
 msgid "Sound"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:171
+#: scripts/Ui/NotebookView.cs:182
 msgid "Shake"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:172
+#: scripts/Ui/NotebookView.cs:183
 msgid "Weight"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:173
+#: scripts/Ui/NotebookView.cs:184
 msgid "Note"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:174
+#: scripts/Ui/NotebookView.cs:185
 msgid "If it's as good as the chest:"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:182
+#: scripts/Ui/NotebookView.cs:193
 msgid "Light things rattle at a gentle shake, weapons at a firm one, soft things only at a hard one. Click a row to hear it."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:183
+#: scripts/Ui/NotebookView.cs:194
 msgid "While weapons clank, delicate things go unheard: shake gently to hear past it."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:184
+#: scripts/Ui/NotebookView.cs:195
 msgid "Dropped, a chest with a false bottom booms hollow. Glass may break."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:185
+#: scripts/Ui/NotebookView.cs:196
 msgid "Two or three of a kind each sound from their own spot: count them. Sand rustles like a scroll, but pours at a gentle shake."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:186
+#: scripts/Ui/NotebookView.cs:197
 #, csharp-format
 msgid "Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{0}.{1}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:186
+#: scripts/Ui/NotebookView.cs:197
 msgid " Demon gold is iron under the gilt: a lodestone silences it."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:204
+#: scripts/Ui/NotebookView.cs:215
 msgid "loud: drowns delicate"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:204
+#: scripts/Ui/NotebookView.cs:215
 msgid "delicate: clanks drown it"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:204
+#: scripts/Ui/NotebookView.cs:215
 msgid "soft: hard shake only"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:205
+#: scripts/Ui/NotebookView.cs:216
 msgid "delicate; demon gold apes it"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:206
+#: scripts/Ui/NotebookView.cs:217
 msgid "soft; sand sounds alike"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:244
+#: scripts/Ui/NotebookView.cs:255
 #, csharp-format
 msgid "{0} of {1} met"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:259
+#: scripts/Ui/NotebookView.cs:270
 msgid "Friends & foes"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:262
+#: scripts/Ui/NotebookView.cs:273
 #, csharp-format
 msgid "{0}; {1}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:265
+#: scripts/Ui/NotebookView.cs:276
 msgid "You haven't met anyone here yet."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:278
+#: scripts/Ui/NotebookView.cs:289
 #, csharp-format
 msgid "\nWants: {0}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:279
+#: scripts/Ui/NotebookView.cs:290
 #, csharp-format
 msgid "\nYou've noticed: {0}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:283
+#: scripts/Ui/NotebookView.cs:294
 msgid "haggles"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:283
+#: scripts/Ui/NotebookView.cs:294
 msgid "you name the price"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:283
+#: scripts/Ui/NotebookView.cs:294
 msgid "fixed price"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:290
+#: scripts/Ui/NotebookView.cs:301
 msgid "your mentor"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:290
+#: scripts/Ui/NotebookView.cs:301
 msgid "Keywright at the Brindle crossroads for forty years, until his Key-mark faded and showed on your hand. Keeps a stash for bad days and a tip for everything. Never paid the Guild a penny."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:294
+#: scripts/Ui/NotebookView.cs:305
 msgid "sells curios"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:294
+#: scripts/Ui/NotebookView.cs:305
 msgid "Comes by every night after the shutters are down, with oddments from the Locking, each bending one rule of the trade. Notices what you buy and brings more like it. Don't ask what Nim is."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:297
+#: scripts/Ui/NotebookView.cs:308
 msgid "the Gilded Guild"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:297
+#: scripts/Ui/NotebookView.cs:308
 msgid "Collector for the Guild that keeps the Gate. Comes at the end of every week for the tithe Bram never paid. Miss one, and the Guild seals the shop."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:311
 msgid "the Hooded Woman"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:311
 #, csharp-format
 msgid "{0} She trades the Key's shards for what she asks."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:302
+#: scripts/Ui/NotebookView.cs:313
 msgid "trades shards"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:302
+#: scripts/Ui/NotebookView.cs:313
 msgid "Knows Bram, and the Key-mark on your hand. Trades shards of the Aldric Key for things she asks for, and won't say who she is."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:322
+#: scripts/Ui/NotebookView.cs:333
 #, csharp-format
 msgid "{0}: {1}. Click for their page."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:339
+#: scripts/Ui/NotebookView.cs:350
 msgid "at your counter"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:367
+#: scripts/Ui/NotebookView.cs:378
 #, csharp-format
 msgid "Today is day {0}: week {1}, day {2} of {3}."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:384
+#: scripts/Ui/NotebookView.cs:395
 msgid "not planned"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:386
+#: scripts/Ui/NotebookView.cs:397
 msgid "after the debt"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:395
+#: scripts/Ui/NotebookView.cs:406
 msgid "today"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:403
+#: scripts/Ui/NotebookView.cs:414
 #, csharp-format
 msgid "A story morning: {0}, before you open."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:416
+#: scripts/Ui/NotebookView.cs:427
 #, csharp-format
 msgid "{0}: {1} said they'd come by."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:422
+#: scripts/Ui/NotebookView.cs:433
 msgid "Guild: paid"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:422
+#: scripts/Ui/NotebookView.cs:433
 #, csharp-format
 msgid "Guild: {0}g"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:425
+#: scripts/Ui/NotebookView.cs:436
 msgid "The Guild's night: this week's tithe is already paid."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:425
+#: scripts/Ui/NotebookView.cs:436
 #, csharp-format
 msgid "The Guild's night: Mister Vane comes for {0}g after closing."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:428
+#: scripts/Ui/NotebookView.cs:439
 msgid "The week's end"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:430
+#: scripts/Ui/NotebookView.cs:441
 msgid "Next week's plan is made at the start of this one: its story and its days in town."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:431
+#: scripts/Ui/NotebookView.cs:442
 #, csharp-format
 msgid "Day {0}{1}: {2}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:431
+#: scripts/Ui/NotebookView.cs:442
 msgid " (today)"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:431
+#: scripts/Ui/NotebookView.cs:442
 msgid "nothing special planned."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:450
+#: scripts/Ui/NotebookView.cs:461
 msgid "WHERE YOU STAND"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:461
+#: scripts/Ui/NotebookView.cs:472
 #, csharp-format
 msgid "{0}\nAt +2: {1}\nAt -2: {2}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:476
+#: scripts/Ui/NotebookView.cs:487
 #, csharp-format
 msgid "{0}\nNow: {1}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:483
+#: scripts/Ui/NotebookView.cs:494
 #, csharp-format
 msgid "The back room: {0} chest that won't open for you."
 msgid_plural "The back room: {0} chests that won't open for you."
 msgstr[0] ""
 msgstr[1] ""
 
-#: scripts/Ui/NotebookView.cs:490
+#: scripts/Ui/NotebookView.cs:501
 #, csharp-format
 msgid "Who owes you a favour: {0}."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:495
+#: scripts/Ui/NotebookView.cs:506
 msgid "On a Guild night you're short, call on one of them: they bring an eighth of the night's due. Once a season each."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:501
+#: scripts/Ui/NotebookView.cs:512
 #, csharp-format
 msgid "Papers against the Guild: {0} (the King's court tries it with {1})."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:510
+#: scripts/Ui/NotebookView.cs:521
 msgid "ON THE BOARD"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:517
+#: scripts/Ui/NotebookView.cs:528
 msgid "Nothing posted."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:534
+#: scripts/Ui/NotebookView.cs:545
 msgid "STORIES"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:536
+#: scripts/Ui/NotebookView.cs:547
 msgid "Nothing's begun yet. People will come with their troubles."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:571
+#: scripts/Ui/NotebookView.cs:582
 #, csharp-format
 msgid "Bram's debt is cleared{0}. The Guild still comes, for its interest: {1}g {2}."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:571
+#: scripts/Ui/NotebookView.cs:582
 #, csharp-format
 msgid " (day {0})"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:572
+#: scripts/Ui/NotebookView.cs:583
 #, csharp-format
 msgid "{0}g of Bram's debt left. Next: {1}g {2}{3}.{4}"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:572
+#: scripts/Ui/NotebookView.cs:583
 #, csharp-format
 msgid " ({0}g rolled over)"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:572
+#: scripts/Ui/NotebookView.cs:583
 msgid " You could pay it all off at the day's end."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:572
+#: scripts/Ui/NotebookView.cs:583
 msgid " Pay it all off early from a day's end."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:575
+#: scripts/Ui/NotebookView.cs:586
 msgid "THE GUILD'S DEBT"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:587
+#: scripts/Ui/NotebookView.cs:598
 msgid "THEN"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:588
+#: scripts/Ui/NotebookView.cs:599
 msgid "x1.5 a week"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:588
+#: scripts/Ui/NotebookView.cs:599
 #, csharp-format
 msgid "{0}g  paid"
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:593
+#: scripts/Ui/NotebookView.cs:604
 msgid "Once Bram's debt is paid, the Guild keeps coming for interest: each week half as much again as the last."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:594
+#: scripts/Ui/NotebookView.cs:605
 #, csharp-format
 msgid "Week {0}: paid."
 msgstr ""
 
-#: scripts/Ui/NotebookView.cs:594
+#: scripts/Ui/NotebookView.cs:605
 #, csharp-format
 msgid "Week {0}: Mister Vane comes for {1}g on the fifth evening."
 msgstr ""
@@ -13816,7 +13816,7 @@ msgstr ""
 msgid "Play"
 msgstr ""
 
-#: scripts/Ui/UiKit.cs:86
+#: scripts/Ui/UiKit.cs:104
 #, csharp-format
 msgid "{0}: {1}\n{2}"
 msgstr ""
