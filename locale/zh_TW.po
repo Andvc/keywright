@@ -10993,7 +10993,7 @@ msgstr "遷往荊棘鎮"
 
 #: scripts/Core/Upgrades.cs:40
 msgid ""
-"A shop at Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."
+"Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."
 msgstr "在荊棘鎮集市開店：每天6位顧客，寶箱更好，開始出現鎖，還有兩種新聲音：藥水和法術。"
 
 #: scripts/Core/Upgrades.cs:43

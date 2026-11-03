@@ -762,7 +762,7 @@ public partial class OpeningPhase : Phase
         Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 96)); // up to four lines, above the chest
         bool last = State.Queue.Count == 0;
         Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
-            .Place(1000, 300, 260, 52));
+            .Place(980, 300, 280, 52));
         foreach (var (item, at, worth) in _landed)
             if (State.DisplayOpen && !item.IsSong) AddKeepButton(item, at, worth);
         foreach (var (item, at, worth) in _landed) AddDeliverButton(item, at, worth);

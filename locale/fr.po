@@ -11983,7 +11983,7 @@ msgstr "Déménager à Thornwick"
 
 #: scripts/Core/Upgrades.cs:40
 msgid ""
-"A shop at Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."
+"Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."
 msgstr ""
 "Thornwick : 6 clients par jour, de beaux coffres, des serrures ; potions et sorts sonnent aussi."
 

@@ -37,7 +37,7 @@ public static class Upgrades
 {
     public static readonly Upgrade[] All =
     {
-        new("shop2", Loc.T("Move to Thornwick"), Loc.T("A shop at Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."),
+        new("shop2", Loc.T("Move to Thornwick"), Loc.T("Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."),
             80, 1, SetsTier: 2),
 
         new("sign", Loc.T("Painted Sign"), Loc.T("One more customer every day."), 40, 2, Customers: 1),

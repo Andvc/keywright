@@ -11142,7 +11142,7 @@ msgstr "ソーンウィックへ移転"
 
 #: scripts/Core/Upgrades.cs:40
 msgid ""
-"A shop at Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."
+"Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."
 msgstr "ソーンウィック市場に店を構える：1日の客6人、より良い宝箱、錠前、そして新しい2つの音：薬と呪文。"
 
 #: scripts/Core/Upgrades.cs:43
