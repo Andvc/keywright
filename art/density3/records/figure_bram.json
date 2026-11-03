@@ -1,0 +1,74 @@
+{
+  "id": "figure.bram",
+  "category": "figure",
+  "title": "Uncle Bram",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/bram.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_bram_B.png",
+  "original_source_sha256": "19511fc1d1171e8657c60b32059e075e5b7ce218a6e6c7d00eff095cc5eb7d92",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4",
+  "colours": 37,
+  "crop": [
+    192,
+    25,
+    837,
+    1509
+  ],
+  "source_transform": {
+    "scale_x": 0.6465116279069767,
+    "scale_y": 0.6469002695417789,
+    "translate_x": 50.86976744186046,
+    "translate_y": 303.8274932614555
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "19511fc1d1171e8657c60b32059e075e5b7ce218a6e6c7d00eff095cc5eb7d92",
+  "spec_sha256": "8c1c64dece9edd5bfd096c9d69b56aaca043aa587959939a10ea78959e80a685",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched",
+    "regions": [
+      {
+        "box": [
+          378,
+          439,
+          442,
+          463
+        ],
+        "match_anchor": [
+          407,
+          457,
+          424,
+          465
+        ]
+      }
+    ],
+    "reason_zh": "仅保留原灰色胡须及其下克制嘴线的局部颜色，以胡须下皮肤锚点匹配现有肤色；不用 detail，避免扩大暗嘴。右界已收回轮廓内，去掉试验候选中的洋红污染。",
+    "selected_candidate_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 0,
+  "user_approval": "approved"
+}

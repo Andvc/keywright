@@ -1,0 +1,51 @@
+{
+  "id": "curio.shell",
+  "category": "curio",
+  "title": "Lucky Shell",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/shell.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_shell_A.png",
+  "original_source_sha256": "1c7b9e46b56d3b66330c2f98e3b0e829664ddab73c17510d26492a47da70d515",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ac3a38f59db97efb498bff17e3eaf3d45cbe7de1ed35451b2049ca635d30cd4c",
+  "colours": 6,
+  "crop": [
+    79,
+    119,
+    1181,
+    1075
+  ],
+  "source_transform": {
+    "scale_x": 0.09437386569872959,
+    "scale_y": 0.09414225941422594,
+    "translate_x": -3.4555353901996373,
+    "translate_y": -0.20292887029288664
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "1c7b9e46b56d3b66330c2f98e3b0e829664ddab73c17510d26492a47da70d515",
+  "spec_sha256": "9f7bf0f3404bc5d7a65af629be7ca20b901daf4358eee0124a820b919483070e",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

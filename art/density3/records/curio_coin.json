@@ -1,0 +1,51 @@
+{
+  "id": "curio.coin",
+  "category": "curio",
+  "title": "Lucky Coin",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/coin.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_coin_B.png",
+  "original_source_sha256": "e7e8410b9469fbc79c44899cd86960095ba6c16b5d11f27fc4f293c1d5763e72",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3cb6b5a521d5d7811fbc90f6cf64bd9daf1dedf22dae86f1fc03580a077bf7d8",
+  "colours": 9,
+  "crop": [
+    152,
+    81,
+    1220,
+    1122
+  ],
+  "source_transform": {
+    "scale_x": 0.09737827715355805,
+    "scale_y": 0.09702209414024976,
+    "translate_x": -10.801498127340825,
+    "translate_y": -2.858789625360231
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "e7e8410b9469fbc79c44899cd86960095ba6c16b5d11f27fc4f293c1d5763e72",
+  "spec_sha256": "6706855b1d68b5ecaac74bf30e542a0262acb69f80af2c53fe8aac2e03af1aa7",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "curio.compass",
+  "category": "curio",
+  "title": "Smugglers' Compass",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/compass.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_compass_D.png",
+  "original_source_sha256": "6c22f5796bc531a63e0f7175598dd3678c77b6002ad64811e98c9c9899de6a32",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3828f80fe0208ff9fd18f999bf5827372892c1669399280d7f6e0a3320b3addc",
+  "colours": 11,
+  "crop": [
+    92,
+    41,
+    1201,
+    1155
+  ],
+  "source_transform": {
+    "scale_x": 0.09377817853922453,
+    "scale_y": 0.0933572710951526,
+    "translate_x": -4.627592425608656,
+    "translate_y": 0.1723518850987431
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "6c22f5796bc531a63e0f7175598dd3678c77b6002ad64811e98c9c9899de6a32",
+  "spec_sha256": "82e92cf406b79cd453f2de1b485c110675fd6c1975e43941a420f2e5daa16a95",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

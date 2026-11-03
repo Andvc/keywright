@@ -1,0 +1,75 @@
+{
+  "id": "figure.ansel",
+  "category": "figure",
+  "title": "Brother Ansel",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/ansel.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_ansel_A.png",
+  "original_source_sha256": "ede519c1f749a61147d30c0b69e7f2d333f68c8401277223ce3818ba448b91ea",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d",
+  "colours": 11,
+  "crop": [
+    213,
+    28,
+    812,
+    1508
+  ],
+  "source_transform": {
+    "scale_x": 0.6494156928213689,
+    "scale_y": 0.6486486486486487,
+    "translate_x": 50.6744574290484,
+    "translate_y": 301.8378378378378
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "ede519c1f749a61147d30c0b69e7f2d333f68c8401277223ce3818ba448b91ea",
+  "spec_sha256": "001287b890a6b4bb0e115b5f4c4c3e8ba496d2fb35ab65ddd25dbb06380e78f7",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          394,
+          431,
+          439,
+          448
+        ],
+        "match_anchor": [
+          385,
+          421,
+          391,
+          427
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "把低对比点状嘴线恢复成原有温和浅笑；暗笔画限定消除修复区域的浅色底，不添加牙齿、不夸张嘴角。",
+    "selected_candidate_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 13,
+  "user_approval": "approved"
+}

@@ -54,7 +54,10 @@ public partial class SettingsView : Control
         row += 56;
         Row("Outlines", row);
         _outlines = Put(Toggle(row, ToggleOutlines));
-        _outlines.TooltipText = "A dark outline round everyone and along the counter's edge, so they stand out from the scene.";
+        _outlines.Disabled = !ArtTexture.OutlinesAllowed;
+        _outlines.TooltipText = ArtTexture.OutlinesAllowed
+            ? "A dark outline round everyone and along the counter's edge, so they stand out from the scene."
+            : "This art style uses colour shapes without outlines.";
 
         row += 56;
         Row("Uncle Bram's tips", row);
@@ -82,6 +85,7 @@ public partial class SettingsView : Control
     /// <summary>Outlines on or off, everywhere on screen at once (the bot's shell demo uses this too).</summary>
     public void ToggleOutlines()
     {
+        if (!ArtTexture.OutlinesAllowed) return;
         Settings.Outlines = !Settings.Outlines;
         UiKit.ShowOutlines(GetTree(), Settings.Outlines);
         if (_outlines != null) _outlines.Text = Settings.Outlines ? "On" : "Off";
@@ -117,7 +121,7 @@ public partial class SettingsView : Control
         _volume.Text = $"{Mathf.RoundToInt(Settings.Volume * 100)}%";
         _fullscreen.Text = Settings.Fullscreen ? "On" : "Off";
         _shake.Text = Settings.ShakeWord;
-        _outlines.Text = Settings.Outlines ? "On" : "Off";
+        _outlines.Text = Settings.Outlines && ArtTexture.OutlinesAllowed ? "On" : "Off";
         _tips.Text = Settings.Tips ? "On" : "Off";
         _gm.Text = Settings.Gm ? "On" : "Off";
     }

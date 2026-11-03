@@ -1,0 +1,51 @@
+{
+  "id": "curio.jar",
+  "category": "curio",
+  "title": "Savings Jar",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/jar.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_jar_B.png",
+  "original_source_sha256": "f863ac735f5e477e6a3573161269da8943dc97387daff3f9a5dae97455d2b6a3",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "2ba4d5d9e86116086b62115430515dca2ca53f1ec91d2717fd2c1930a94fa8a8",
+  "colours": 16,
+  "crop": [
+    201,
+    86,
+    1053,
+    1152
+  ],
+  "source_transform": {
+    "scale_x": 0.09741784037558686,
+    "scale_y": 0.0975609756097561,
+    "translate_x": -5.580985915492956,
+    "translate_y": -4.390243902439025
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "f863ac735f5e477e6a3573161269da8943dc97387daff3f9a5dae97455d2b6a3",
+  "spec_sha256": "d915ba7611044bc1e9df22776431e66c8fda17122d65a477bfecc9c2eaad8e49",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

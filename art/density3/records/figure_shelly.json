@@ -1,0 +1,51 @@
+{
+  "id": "figure.shelly",
+  "category": "figure",
+  "title": "Shelly the Mudlark",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/shelly.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_shelly_B.png",
+  "original_source_sha256": "e8283b3c662abc2424a1163cfe3ee85500e821967bc09065d89ef148dedde2de",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+  "colours": 21,
+  "crop": [
+    264,
+    25,
+    810,
+    1502
+  ],
+  "source_transform": {
+    "scale_x": 0.6062271062271062,
+    "scale_y": 0.6066350710900474,
+    "translate_x": 57.95604395604394,
+    "translate_y": 368.8341232227488
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "e8283b3c662abc2424a1163cfe3ee85500e821967bc09065d89ef148dedde2de",
+  "spec_sha256": "61902114a2f43697e4dd6b4e1d72f7687a21ae058ba681ebc903a1a8b33b180f",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

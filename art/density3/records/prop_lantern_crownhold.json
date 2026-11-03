@@ -1,0 +1,51 @@
+{
+  "id": "prop.lantern_crownhold",
+  "category": "prop",
+  "title": "Lantern at Crownhold",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    24
+  ],
+  "physical_size": [
+    128,
+    192
+  ],
+  "file": "art/density3/assets/props/lantern_crownhold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_lantern_crownhold_C.png",
+  "original_source_sha256": "8bbf15bf14d80a9490607296031579d5d684c3fa14a6733c659a304d7791ad98",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d202cab412d396852ce64d40841bf8015ad505bc3d7b8e8afbe1101eb89ff037",
+  "colours": 10,
+  "crop": [
+    238,
+    0,
+    1002,
+    1194
+  ],
+  "source_transform": {
+    "scale_x": 0.16099476439790575,
+    "scale_y": 0.16080402010050251,
+    "translate_x": -36.31675392670157,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "8bbf15bf14d80a9490607296031579d5d684c3fa14a6733c659a304d7791ad98",
+  "spec_sha256": "6b901fe5f034754de0649086113f95331db62e7e035d06ff36f9e65ca36d5f44",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

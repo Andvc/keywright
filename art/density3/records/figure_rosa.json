@@ -1,0 +1,51 @@
+{
+  "id": "figure.rosa",
+  "category": "figure",
+  "title": "Rosa",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/rosa.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_rosa_A.png",
+  "original_source_sha256": "a178292b0a8a21eef2697d38ff265ab6ca918cf56af62e193bb7400454b96a51",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+  "colours": 19,
+  "crop": [
+    171,
+    37,
+    843,
+    1512
+  ],
+  "source_transform": {
+    "scale_x": 0.6398809523809523,
+    "scale_y": 0.64,
+    "translate_x": 59.58035714285714,
+    "translate_y": 312.32
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "a178292b0a8a21eef2697d38ff265ab6ca918cf56af62e193bb7400454b96a51",
+  "spec_sha256": "a48efb31bbed6a373bd8cedb37c1b57e1db19d4e2acf96e1f77c1fd327fa210d",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

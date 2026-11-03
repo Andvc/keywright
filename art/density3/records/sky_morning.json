@@ -1,0 +1,51 @@
+{
+  "id": "sky.morning",
+  "category": "sky",
+  "title": "Early morning sky",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/sky/morning.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/sky_morning_C.png",
+  "original_source_sha256": "5ccf8059e09fcbc57cb1790840e8a6218aa3ac26070eecc0401b479a1f482384",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "771abd80f593cfeade67b9c07e2348d9b6b9615104bbf098cf10611537512c27",
+  "colours": 6,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "5ccf8059e09fcbc57cb1790840e8a6218aa3ac26070eecc0401b479a1f482384",
+  "spec_sha256": "c4e238e0e7c57ec64eb7e43aab942654697d577e33bcade4be154eee84a8628c",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

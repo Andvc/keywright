@@ -1,0 +1,51 @@
+{
+  "id": "icon.kind.heartsong",
+  "category": "icon_kind",
+  "title": "Heartsong",
+  "status": "produced_approved",
+  "source_size": [
+    16,
+    16
+  ],
+  "physical_size": [
+    64,
+    64
+  ],
+  "file": "art/density3/assets/kinds/kind_heartsong.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_kind_heartsong_B.png",
+  "original_source_sha256": "5763dc62d0ad1e445bc62a6d174062b098c839be1d3cf006b0d13ef8e066559d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "eae4f36de7fbc44d0ed367eafe913ceb628c82144dc561d78fde6ee9089d5ed4",
+  "colours": 5,
+  "crop": [
+    215,
+    83,
+    1077,
+    1068
+  ],
+  "source_transform": {
+    "scale_x": 0.0568445475638051,
+    "scale_y": 0.05685279187817259,
+    "translate_x": -5.221577726218097,
+    "translate_y": -0.7187817258883245
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "5763dc62d0ad1e445bc62a6d174062b098c839be1d3cf006b0d13ef8e066559d",
+  "spec_sha256": "aa8180949e750b54490f5caa07319ee594c5f19d1f3eacbd19ba07b96ff3d259",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

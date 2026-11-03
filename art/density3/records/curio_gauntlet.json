@@ -1,0 +1,51 @@
+{
+  "id": "curio.gauntlet",
+  "category": "curio",
+  "title": "Smith's Glove",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/gauntlet.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_gauntlet_C.png",
+  "original_source_sha256": "1b31b0e2e35a25ba47e65b79666f49740bb7e9e9e04a41b6486efa3cd9b724b2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "e797d35dabf63b756a209f8a7c011700a05993d9a76ba12aa6d351bce759dfa2",
+  "colours": 7,
+  "crop": [
+    74,
+    93,
+    1196,
+    1162
+  ],
+  "source_transform": {
+    "scale_x": 0.09269162210338681,
+    "scale_y": 0.09260991580916744,
+    "translate_x": -2.859180035650624,
+    "translate_y": -2.6127221702525727
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "1b31b0e2e35a25ba47e65b79666f49740bb7e9e9e04a41b6486efa3cd9b724b2",
+  "spec_sha256": "fc8a09d24425744351c47801fadbd2b8fea259f5c28091839145676ea20f87b1",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "figure.mags",
+  "category": "figure",
+  "title": "Mags the Innkeeper",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/mags.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_mags_A.png",
+  "original_source_sha256": "63bd3e7f5db4639220c1858049ebdfa9d2b9042f5966d1c96e5807d6c6ee78d4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+  "colours": 20,
+  "crop": [
+    155,
+    28,
+    854,
+    1510
+  ],
+  "source_transform": {
+    "scale_x": 0.6366237482117311,
+    "scale_y": 0.6369770580296896,
+    "translate_x": 62.32331902718168,
+    "translate_y": 318.1646423751687
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "63bd3e7f5db4639220c1858049ebdfa9d2b9042f5966d1c96e5807d6c6ee78d4",
+  "spec_sha256": "58a0427adef8e64fc7ad1da3b526b38bed53ffce2711bc4875994c1cbbe1db46",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

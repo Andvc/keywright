@@ -1,0 +1,51 @@
+{
+  "id": "curio.rope",
+  "category": "curio",
+  "title": "Velvet Rope",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/rope.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_rope_D.png",
+  "original_source_sha256": "2707c61475ce0dd6327d75d9e0cbd11cbe014acc4458943c7a70cc93156384e4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "52c89a84e6b341a128200a960f870f3a8055b0fe93e77109ee4dbdfae70905b7",
+  "colours": 4,
+  "crop": [
+    24,
+    197,
+    1229,
+    983
+  ],
+  "source_transform": {
+    "scale_x": 0.08630705394190871,
+    "scale_y": 0.08651399491094147,
+    "translate_x": 1.9286307053941907,
+    "translate_y": 4.956743002544528
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "2707c61475ce0dd6327d75d9e0cbd11cbe014acc4458943c7a70cc93156384e4",
+  "spec_sha256": "eb3a2076b806b13a5a6b0d4458fe1aaf50bb7216203942571319ed4d7e2353f2",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

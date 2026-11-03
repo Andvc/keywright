@@ -1,0 +1,51 @@
+{
+  "id": "item.archmages_mantle",
+  "category": "item",
+  "title": "Archmage's Mantle",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/archmages_mantle.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "B",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_archmages_mantle_B.png",
+  "original_source_sha256": "0c9db1c18f9f1ef98789b2442c149e3ec306b2f7574ea2d136abc1b6eacfb2fe",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "efb9a0ffa12b0352ff8f0b49a47c6888fccfb47b87e0c6ac4822afd88c6e1db5",
+  "colours": 14,
+  "crop": [
+    65,
+    61,
+    1194,
+    1193
+  ],
+  "source_transform": {
+    "scale_x": 0.10628875110717449,
+    "scale_y": 0.10600706713780919,
+    "translate_x": -2.9087688219663415,
+    "translate_y": -2.46643109540636
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "0c9db1c18f9f1ef98789b2442c149e3ec306b2f7574ea2d136abc1b6eacfb2fe",
+  "spec_sha256": "e71cccd52f9197a2fa77ee31b63884841dc6513f2ae0b110eedea032710e75e3",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

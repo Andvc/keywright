@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Keywright · 3px 完整美术审核</title>
+<link rel="stylesheet" href="review.css">
+</head>
+<body>
+<header>
+  <div class="eyebrow">KEYWRIGHT / ART ROUND 2</div>
+  <h1>3px 美术审核</h1>
+  <p>以 2560 × 1440 游戏画面为基准，每个美术像素为 3 × 3 屏幕像素。人物无描边。</p>
+  <div class="summary"><strong id="summary">正在读取本地清单…</strong><span class="pending">等待你审核 · 尚未上传</span></div>
+  <p class="muted">先看人物的眼、鼻、嘴和表情，再看实际游戏画面。缩略图只用于找图；判断颗粒度请进入大图，选择「100% 真实像素」。</p>
+</header>
+<nav id="tabs" aria-label="审核范围">
+  <button data-tab="figures" class="active">人物 38</button><button data-tab="screens">游戏实拍</button>
+  <button data-tab="assets">全部资产</button><button data-tab="contacts">分类总览</button>
+</nav>
+<section class="filters">
+  <label>类别 <select id="category"><option value="">全部类别</option></select></label>
+  <label>状态 <select id="status"><option value="">全部</option><option value="pending">未审</option><option value="pass">通过</option><option value="fix">需修改</option></select></label>
+  <input id="search" type="search" placeholder="搜索人物名、资产名或编号" aria-label="搜索">
+  <button id="export">生成我的审核记录</button><span id="progress" aria-live="polite"></span>
+</section>
+<div id="notice" class="notice"></div>
+<main id="grid" class="grid"></main>
+<footer>审核标记只保存在此浏览器；结束时可生成记录并复制保存。标记不会触发上传。完整原图保存在本地生产档案，页面中的原图脸部为对应裁切。</footer>
+
+<dialog id="exportdialog"><div class="dialoghead"><h2>我的审核记录</h2><button id="exportclose">关闭 ×</button></div><p>记录包含每张图的编号、版本、审核结果及意见。复制后可保存为文本，或发回对话。</p><textarea id="exporttext" rows="14" readonly aria-label="完整审核记录"></textarea><div class="actions"><button id="copyreport" class="primary">复制全部记录</button><span id="copystatus" class="muted">也可以在文本框中按 Ctrl+A、Ctrl+C。</span></div></dialog>
+
+<dialog id="inspector">
+ <div class="dialoghead"><div><div id="detailid" class="eyebrow"></div><h2 id="detailtitle"></h2></div><button id="close">关闭 ×</button></div>
+ <div id="detailmeta" class="muted"></div><p id="detailnote"></p>
+ <div class="viewtools"><button data-zoom="fit">适应窗口</button><button data-zoom="1">100% 真实像素</button><button data-zoom="2">200%</button><button data-zoom="4">400%</button><button id="fullscreen">全屏 F</button><a id="original" target="_blank">单独打开图片 ↗</a><span id="zoomlabel"></span></div>
+ <div id="stage" class="stage"><img id="mainimage" alt=""><div class="fslabel">100% 真实像素 · Esc 退出全屏</div></div>
+ <section id="faces"><h3>脸部逐项检查</h3><p class="muted">下列对照默认放大 2 倍，便于检查五官；每张图下方可切到真实显示尺寸。保留角色原有的遮挡、胡须和非人类特征。</p><div id="facegrid"></div></section>
+ <section class="reviewbox"><label for="note">这张图的修改意见</label><textarea id="note" rows="2" placeholder="例如：左眼不清楚、嘴角不自然、桌台细节太碎…"></textarea>
+   <div class="actions"><button id="prev">← 上一张</button><button id="markfix">需修改</button><button id="markpass">通过</button><button id="passnext" class="primary">通过并下一张 →</button><button id="next">下一张 →</button><span id="position"></span></div>
+ </section>
+</dialog>
+<script src="data.js"></script><script src="review.js"></script>
+</body></html>

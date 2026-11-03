@@ -1,0 +1,51 @@
+{
+  "id": "item.dragons_eye",
+  "category": "item",
+  "title": "Dragon's Eye",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/dragons_eye.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_dragons_eye_C.png",
+  "original_source_sha256": "256a36183c0340472483d348f832d5e6628be86c65b32e837cb8712cec7060f3",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9225b4a232fdfee453e5d55ad80c268a164df5c063cf54fc5e94601758c73194",
+  "colours": 10,
+  "crop": [
+    91,
+    19,
+    1163,
+    1225
+  ],
+  "source_transform": {
+    "scale_x": 0.09981343283582089,
+    "scale_y": 0.09950248756218906,
+    "translate_x": 0.9169776119402986,
+    "translate_y": 2.109452736318408
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "256a36183c0340472483d348f832d5e6628be86c65b32e837cb8712cec7060f3",
+  "spec_sha256": "1a3e7edfdcb8b9d1afa97e4854cc44be692a3268e7d353ebaf7c21274de75ff0",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

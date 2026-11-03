@@ -17,9 +17,9 @@ public static class Fx
     public static Texture2D Pixel => _pixel ??= MakeSquare(2);
 
     /// <summary>A gold coin spinning: <see cref="CoinFrames"/> frames in a row (a sprite's Hframes, or particles').</summary>
-    public static Texture2D Coin => _coin ??= GD.Load<Texture2D>("res://assets/sprites/fx/coin_spin.png");
+    public static Texture2D Coin => _coin ??= ArtTexture.Load("res://assets/sprites/fx/coin_spin.png");
 
-    static Texture2D Sparkle => _sparkle ??= GD.Load<Texture2D>("res://assets/sprites/fx/sparkle.png");
+    static Texture2D Sparkle => _sparkle ??= ArtTexture.Load("res://assets/sprites/fx/sparkle.png");
 
     /// <summary>Particles that play a row of frames (the coin's spin, a sparkle's twinkle) over their life.</summary>
     static CanvasItemMaterial Animated(int frames, bool additive) => new()
@@ -175,7 +175,7 @@ public static class Fx
     /// <summary>A row of equal frames as a one-shot animation.</summary>
     static SpriteFrames Frames(string path, int count, string name, int fps)
     {
-        var sheet = GD.Load<Texture2D>(path);
+        var sheet = ArtTexture.Load(path);
         int w = sheet.GetWidth() / count, h = sheet.GetHeight();
         var frames = new SpriteFrames();
         frames.RemoveAnimation("default");

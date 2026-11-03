@@ -1,0 +1,51 @@
+{
+  "id": "frame.thornwick",
+  "category": "frame",
+  "title": "The shop's frame at Thornwick Market",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/frame/thornwick.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/frame_thornwick_A.png",
+  "original_source_sha256": "d110c56af73f7e4032eee64a4005fa26a115f1eb21f0dc3d283588b50689d9de",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "41dafdc283a50982a68717a541ab92f1da2597cd6575611194d1519c5c05b604",
+  "colours": 12,
+  "crop": [
+    0,
+    0,
+    1536,
+    864
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.6666666666666667,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "d110c56af73f7e4032eee64a4005fa26a115f1eb21f0dc3d283588b50689d9de",
+  "spec_sha256": "92c6c57bf7cb3945d9fcbcf7a294b99edfd7e6ae17cc11e7b9b01436f0a5c600",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

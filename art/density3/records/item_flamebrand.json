@@ -1,0 +1,51 @@
+{
+  "id": "item.flamebrand",
+  "category": "item",
+  "title": "Flamebrand",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/flamebrand.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "E",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_flamebrand_E.png",
+  "original_source_sha256": "b0b64e356ddc268846f6e41b3e6791981e71b4452d90ae3d01428d62ffb1cb88",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "fcbf1028aa16741bf09f48cef091489691ab33ba390dab316c0612faeb7ea64c",
+  "colours": 14,
+  "crop": [
+    62,
+    34,
+    1238,
+    1216
+  ],
+  "source_transform": {
+    "scale_x": 0.10119047619047619,
+    "scale_y": 0.10152284263959391,
+    "translate_x": -2.2738095238095237,
+    "translate_y": 0.548223350253807
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "b0b64e356ddc268846f6e41b3e6791981e71b4452d90ae3d01428d62ffb1cb88",
+  "spec_sha256": "1fa36dbaee7f2719c05bad775a116e9e27b38aec6c4d81b9ac479c928badebce",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

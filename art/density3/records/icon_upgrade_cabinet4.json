@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.cabinet4",
+  "category": "icon_upgrade",
+  "title": "Glass Case",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_cabinet4.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_cabinet4_B.png",
+  "original_source_sha256": "de488f2c073d4989e83818b20846afae36025cf64feda2197e6e4dbf529bbb4a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f016a53aaffa47f57660efe25e43f0b441217fbde7383b08db83ddb0c3d667c9",
+  "colours": 12,
+  "crop": [
+    111,
+    109,
+    1144,
+    1162
+  ],
+  "source_transform": {
+    "scale_x": 0.08325266214908035,
+    "scale_y": 0.0835707502374169,
+    "translate_x": -4.241045498547919,
+    "translate_y": -5.1092117758784426
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "de488f2c073d4989e83818b20846afae36025cf64feda2197e6e4dbf529bbb4a",
+  "spec_sha256": "c852a883115336784db78b5e2b70c379850cf16cc467753a9e740eae01e1f2ee",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

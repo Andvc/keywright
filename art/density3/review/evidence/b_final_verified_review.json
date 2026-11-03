@@ -1,0 +1,574 @@
+{
+  "reviewer": "face_audit_b",
+  "date": "2026-11-04",
+  "stage": "Formal production 3px face verification after selected local repairs",
+  "counts": {
+    "pass": 18,
+    "watch": 1
+  },
+  "hash_verification": "All 19 formal output file hashes match either selected visually inspected repaired candidate or the prior directly inspected unchanged output. Production record hashes were also checked.",
+  "scope": "Face anatomy and expression at native physical 1440p face size; five faces additionally reinspected at 4x nearest-neighbour enlargement in this pass.",
+  "inspection_summary": {
+    "production_faces_reinspected": 5,
+    "unchanged_faces_retained_by_prior_visual_review_and_equal_hash": 14
+  },
+  "remaining_watch": [
+    "figure.kit"
+  ],
+  "derivative_review": {
+    "reviewer": "face_audit_b",
+    "date": "2026-11-04",
+    "status": "reviewed_final_derivatives_no_new_face_or_framing_regression",
+    "physical_ui_sizes": [
+      152,
+      76
+    ],
+    "reviewed_ids": [
+      "figure.vexis",
+      "figure.malbranche",
+      "figure.skrae",
+      "figure.ermine",
+      "figure.oriel",
+      "figure.silas",
+      "figure.aldo",
+      "figure.maw",
+      "figure.bram",
+      "figure.vane",
+      "figure.hood",
+      "figure.nim",
+      "figure.stranger",
+      "figure.kit",
+      "figure.hesk",
+      "figure.rosa",
+      "figure.isolde",
+      "figure.mara",
+      "figure.king"
+    ],
+    "inspected_contact_sheets": [
+      {
+        "path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_01.png",
+        "sha256": "ffa85c47afb28b672f0c15a3ea36c4bf374811df883bc134016d0b82e1e442c5",
+        "visually_inspected": true
+      },
+      {
+        "path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_02.png",
+        "sha256": "295237b88ddeba68df6bb8fea932ae54d69cdee9f03b0c54a17a40ab8e6a34a9",
+        "visually_inspected": true
+      },
+      {
+        "path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_03.png",
+        "sha256": "5ae45ad0ab51768eb9036812b1fc10d73c092c494482380145234173c78dc840",
+        "visually_inspected": true
+      },
+      {
+        "path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_04.png",
+        "sha256": "64fc1dae3da4f049529e25698dbe7e324ae5a7b5fcd01b4ec4c553bcb2c94a69",
+        "visually_inspected": true
+      }
+    ],
+    "finding_zh": "已逐项查看本组 19 人在最终 152px 肖像与 76px 队列头像中的显示。未见新增缺眼、错位五官、切掉眼鼻口或不自然猥琐表情；源图怪物/兜帽遮面仍按角色意图理解。",
+    "kit_zh": "小头像中的双眼、歪头关系和自然小笑仍可读。全身大脸图眼白分离度弱的 watch 结论保留，不因小头像可读就自动升 pass。",
+    "known_limitations": [
+      {
+        "id": "figure.skrae",
+        "kind": "existing_portrait_framing",
+        "finding_zh": "宽大双耳的尖端在头像窗口左右边缘平截。已同时看过旧版/3px 对照，裁框确实相同；全身图双耳完整。这是既有头像取景限制，不是本次新增裁切，也不声称已解决。",
+        "legacy_crop_native": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "new_crop_native": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "same_crop": true,
+        "comparison_path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\skrae_legacy_crop_comparison.png",
+        "comparison_sha256": "4b85f907af6af1a62d6637846d696f5b42ec80ec1073de882ff8e991a1e0cba7",
+        "disposition": "Parent retained legacy framing and will disclose the limit in the user review gallery."
+      }
+    ],
+    "approval": "This is a local visual verification only. Complete user review remains pending; no upload approval implied."
+  },
+  "approval": "Complete user review remains pending. No upload approval is implied by this local agent inspection.",
+  "items": [
+    {
+      "id": "figure.vexis",
+      "output_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336",
+      "review_verdict": "pass",
+      "review_note_zh": "正式 3px 成图的嘴弧和小牙已恢复可读，双眼与鼻部完整；仍为源图小恶魔的调皮小笑，没有加宽成大黑嘴或露齿奸笑。像素阶梯保留，不等同于另画新嘴型。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\vexis.png",
+      "face_bbox_source_pixels": [
+        477,
+        221,
+        771,
+        489
+      ],
+      "face_bbox_output_pixels": [
+        375,
+        821,
+        488,
+        924
+      ],
+      "inspection_basis": "formal_production_reinspected_at_native_face_size_and_4x",
+      "reinspected_this_pass": true,
+      "prior_output_sha256": "166df15f29095d42961e017666dbc03d7adf6c1e91bb55e9b4b396d9d64875eb",
+      "prior_hash_unchanged": false,
+      "selected_candidate_hash_matches": true,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_verified\\vexis_final_comparison.png"
+    },
+    {
+      "id": "figure.malbranche",
+      "output_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
+      "review_verdict": "pass",
+      "review_note_zh": "正式成图中双眼窝、鼻腔与单一牙弓完整；原碎牙点改善为可读牙列。最终进一步收窄牙弓 ROI 右边界，鼻缘紫粉残格消失。骷髅无嘴唇与威胁表情属于源图设计。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\malbranche.png",
+      "face_bbox_source_pixels": [
+        471,
+        93,
+        615,
+        272
+      ],
+      "face_bbox_output_pixels": [
+        349,
+        212,
+        465,
+        354
+      ],
+      "inspection_basis": "formal_production_reinspected_at_native_face_size_and_4x",
+      "reinspected_this_pass": true,
+      "prior_output_sha256": "2ec039b1397d2ded165df9a3a35cca58418d7a0247da0794e4ed75a583e3c4b1",
+      "prior_hash_unchanged": false,
+      "selected_candidate_hash_matches": true,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_verified\\malbranche_final_comparison.png"
+    },
+    {
+      "id": "figure.skrae",
+      "output_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "review_verdict": "pass",
+      "review_note_zh": "双眼深瞳、倾斜头部关系、鼻口和小牙均完整，未见新增畸形或猥琐表情。全身图双耳完整；仅 UI 肖像沿用旧裁框，宽大耳尖在窗口左右被裁掉，属于既有取景限制。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\skrae.png",
+      "face_bbox_source_pixels": [
+        443,
+        202,
+        643,
+        422
+      ],
+      "face_bbox_output_pixels": [
+        315,
+        474,
+        447,
+        619
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\skrae_final_comparison.png"
+    },
+    {
+      "id": "figure.ermine",
+      "output_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "review_verdict": "pass",
+      "review_note_zh": "半垂眼睑、深瞳、鼻和收敛双唇都保留，远侧小眼仍在；矜持神情稳定，没有夸张露齿或异常歪嘴。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\ermine.png",
+      "face_bbox_source_pixels": [
+        455,
+        138,
+        617,
+        310
+      ],
+      "face_bbox_output_pixels": [
+        336,
+        214,
+        468,
+        355
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\ermine_final_comparison.png"
+    },
+    {
+      "id": "figure.oriel",
+      "output_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "review_verdict": "pass",
+      "review_note_zh": "两眼、鼻、唇位置完整，眼白与深眼区可区分；微笑变简洁但仍自然。鼻部反差较弱，尚不构成五官缺失。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\oriel.png",
+      "face_bbox_source_pixels": [
+        445,
+        127,
+        590,
+        289
+      ],
+      "face_bbox_output_pixels": [
+        344,
+        323,
+        451,
+        442
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\oriel_final_comparison.png"
+    },
+    {
+      "id": "figure.silas",
+      "output_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "review_verdict": "pass",
+      "review_note_zh": "已使用修正版源图。较完整的双眼、放松眉形和收敛小笑在 3px 中存活，卷胡子下只露很少金色，没有恢复原来的宽齿笑或油滑半眯眼。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\silas.png",
+      "face_bbox_source_pixels": [
+        420,
+        72,
+        618,
+        275
+      ],
+      "face_bbox_output_pixels": [
+        318,
+        316,
+        459,
+        460
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\silas_final_comparison.png"
+    },
+    {
+      "id": "figure.aldo",
+      "output_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "review_verdict": "pass",
+      "review_note_zh": "双眼、鼻尖及胡须下的收敛嘴线仍可辨；胡须和白色下巴有分层，神情温和，没有新露齿咧嘴。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\aldo.png",
+      "face_bbox_source_pixels": [
+        410,
+        63,
+        611,
+        292
+      ],
+      "face_bbox_output_pixels": [
+        320,
+        358,
+        454,
+        510
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\aldo_final_comparison.png"
+    },
+    {
+      "id": "figure.maw",
+      "output_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "review_verdict": "pass",
+      "review_note_zh": "红色双眼、金色面具鼻部和连续牙弓可辨，强烈笑容来自既有恶魔面具造型。细牙有像素简化，但未产生额外眼睛或错位牙弓。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\maw.png",
+      "face_bbox_source_pixels": [
+        420,
+        101,
+        601,
+        301
+      ],
+      "face_bbox_output_pixels": [
+        305,
+        185,
+        452,
+        347
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\maw_final_comparison.png"
+    },
+    {
+      "id": "figure.bram",
+      "output_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4",
+      "review_verdict": "pass",
+      "review_note_zh": "正式成图保住原灰色胡须及其下的克制嘴线，双眼、鼻和嘴部关系自然。未扩大暗嘴，没有新色圈或轮廓洋红边；温和表情保留。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\bram.png",
+      "face_bbox_source_pixels": [
+        411,
+        109,
+        622,
+        309
+      ],
+      "face_bbox_output_pixels": [
+        313,
+        371,
+        456,
+        507
+      ],
+      "inspection_basis": "formal_production_reinspected_at_native_face_size_and_4x",
+      "reinspected_this_pass": true,
+      "prior_output_sha256": "78a3a4f316433dc9c4c6b34a5d21d29a8de423503e51d7a7cdd1d25ea1d4a9bb",
+      "prior_hash_unchanged": false,
+      "selected_candidate_hash_matches": true,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_verified\\bram_final_comparison.png"
+    },
+    {
+      "id": "figure.vane",
+      "output_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "review_verdict": "pass",
+      "review_note_zh": "两眼仍有独立眼白和深色眼区，鼻和短嘴线完整。脸部阴影变硬但没有无眼脸、扭曲嘴角或猥琐笑。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\vane.png",
+      "face_bbox_source_pixels": [
+        429,
+        63,
+        596,
+        246
+      ],
+      "face_bbox_output_pixels": [
+        325,
+        214,
+        455,
+        356
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\vane_final_comparison.png"
+    },
+    {
+      "id": "figure.hood",
+      "output_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "review_verdict": "pass",
+      "review_note_zh": "两处紫色眼光清晰且彼此独立。鼻嘴在兜帽阴影中有意隐藏；没有凭空补造人脸。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hood.png",
+      "face_bbox_source_pixels": [
+        441,
+        119,
+        604,
+        286
+      ],
+      "face_bbox_output_pixels": [
+        336,
+        344,
+        453,
+        464
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\hood_final_comparison.png"
+    },
+    {
+      "id": "figure.nim",
+      "output_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "review_verdict": "pass",
+      "review_note_zh": "双眼、鼻尖和闭合笑线均保留，嘴角虽有像素阶梯仍读成自然小笑，没有扩大为露齿奸笑。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\nim.png",
+      "face_bbox_source_pixels": [
+        460,
+        104,
+        624,
+        291
+      ],
+      "face_bbox_output_pixels": [
+        363,
+        396,
+        472,
+        520
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\nim_final_comparison.png"
+    },
+    {
+      "id": "figure.stranger",
+      "output_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "review_verdict": "pass",
+      "review_note_zh": "两个浅色眼光仍独立存在，脸部继续藏在兜帽里。没有可见鼻嘴是原有遮挡设计，不能当作生成缺失。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\stranger.png",
+      "face_bbox_source_pixels": [
+        475,
+        76,
+        640,
+        269
+      ],
+      "face_bbox_output_pixels": [
+        353,
+        211,
+        483,
+        362
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\stranger_final_comparison.png"
+    },
+    {
+      "id": "figure.kit",
+      "output_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "review_verdict": "watch",
+      "review_note_zh": "正式文件与首版哈希完全相同，本轮又看了真实脸部大小与 4 倍放大。双眼、鼻口及自然微笑均在，但画面左眼眼白与面部浅色相融，分离度偏弱；多个局部修复会新增眼周色圈，均未采用。此项继续交用户重点复查，不自动升 pass。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\kit.png",
+      "face_bbox_source_pixels": [
+        456,
+        101,
+        647,
+        284
+      ],
+      "face_bbox_output_pixels": [
+        323,
+        391,
+        450,
+        514
+      ],
+      "inspection_basis": "formal_production_reinspected_at_native_face_size_and_4x",
+      "reinspected_this_pass": true,
+      "prior_output_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_verified\\kit_final_comparison.png"
+    },
+    {
+      "id": "figure.hesk",
+      "output_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "review_verdict": "pass",
+      "review_note_zh": "双眼、鼻及胡须内的嘴部位置均可读，胡须与嘴周皮肤分开。表情温和，没有扭曲成大洞或怪笑。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hesk.png",
+      "face_bbox_source_pixels": [
+        419,
+        96,
+        629,
+        324
+      ],
+      "face_bbox_output_pixels": [
+        336,
+        359,
+        480,
+        514
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\hesk_final_comparison.png"
+    },
+    {
+      "id": "figure.rosa",
+      "output_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "review_verdict": "pass",
+      "review_note_zh": "两眼和唇线保留，鼻部简化为低反差色块但仍有明确位置；微笑收敛，没有新增不自然的嘴角或多余五官点。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\rosa.png",
+      "face_bbox_source_pixels": [
+        431,
+        98,
+        620,
+        290
+      ],
+      "face_bbox_output_pixels": [
+        332,
+        372,
+        460,
+        501
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\rosa_final_comparison.png"
+    },
+    {
+      "id": "figure.isolde",
+      "output_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
+      "review_verdict": "pass",
+      "review_note_zh": "正式成图恢复双眼深色眼区与浅眼白分离，排除首版无深瞳黄眼；鼻和收敛双唇清楚，嘴周突兀浅色环明显改善。未采用会加粗眼线/嘴形的 detail 候选。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\isolde.png",
+      "face_bbox_source_pixels": [
+        427,
+        89,
+        613,
+        270
+      ],
+      "face_bbox_output_pixels": [
+        328,
+        332,
+        458,
+        459
+      ],
+      "inspection_basis": "formal_production_reinspected_at_native_face_size_and_4x",
+      "reinspected_this_pass": true,
+      "prior_output_sha256": "fbf331c7cb6ea122cd52894c536f30c66dec7658720d8ed03f4d4d8146cd88fe",
+      "prior_hash_unchanged": false,
+      "selected_candidate_hash_matches": true,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_verified\\isolde_final_comparison.png"
+    },
+    {
+      "id": "figure.mara",
+      "output_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "review_verdict": "pass",
+      "review_note_zh": "紫色双眼、鼻、嘴均完整，年龄感和克制微笑保留。嘴角少量深点未造成明显扭曲或露齿怪笑。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\mara.png",
+      "face_bbox_source_pixels": [
+        435,
+        94,
+        618,
+        258
+      ],
+      "face_bbox_output_pixels": [
+        327,
+        345,
+        455,
+        460
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\mara_final_comparison.png"
+    },
+    {
+      "id": "figure.king",
+      "output_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "review_verdict": "pass",
+      "review_note_zh": "眼鼻口与胡须分层完整，神情温和；与 Aldo 的年长男性身份一致，王冠未干扰五官。",
+      "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\king.png",
+      "face_bbox_source_pixels": [
+        407,
+        91,
+        608,
+        285
+      ],
+      "face_bbox_output_pixels": [
+        321,
+        334,
+        461,
+        470
+      ],
+      "inspection_basis": "prior_direct_visual_inspection_plus_exact_output_sha256_equality",
+      "reinspected_this_pass": false,
+      "prior_output_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "prior_hash_unchanged": true,
+      "selected_candidate_hash_matches": null,
+      "evidence_image": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\king_final_comparison.png"
+    }
+  ]
+}

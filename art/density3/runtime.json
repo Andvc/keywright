@@ -1,0 +1,7128 @@
+{
+  "version": 1,
+  "reference_height": 1440,
+  "pixel_pitch": 3,
+  "outlines": false,
+  "textures": {
+    "res://assets/backgrounds/scene_bram.png": {
+      "asset_id": "scene.bram",
+      "source": "art/density3/assets/scenes/bram.png",
+      "logical_size": [
+        640,
+        360
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9cb056c725d4de3ecce86c18ddfa4d65d69b12d0529b4b94e56a9cfbbb67328a"
+    },
+    "res://assets/backgrounds/scene_guild.png": {
+      "asset_id": "scene.guild",
+      "source": "art/density3/assets/scenes/guild.png",
+      "logical_size": [
+        640,
+        360
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 2,
+      "source_sha256": "a0a606680eaf28c59b57054de3d46aee1bf2fee71a5c43091a66173a15c0b211"
+    },
+    "res://assets/backgrounds/scene_keyhold.png": {
+      "asset_id": "scene.keyhold",
+      "source": "art/density3/assets/scenes/keyhold.png",
+      "logical_size": [
+        640,
+        360
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 2,
+      "source_sha256": "d0e71669867639beec54d71e8bff594303e96e10dd70852549ceb7188cf23bb3"
+    },
+    "res://assets/backgrounds/scene_vault.png": {
+      "asset_id": "scene.vault",
+      "source": "art/density3/assets/scenes/vault.png",
+      "logical_size": [
+        640,
+        360
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 2,
+      "source_sha256": "c4b0a661c63410096c1fbd819e869fcabec19df8817bab691a7a5ffaac7f2bdc"
+    },
+    "res://assets/counter/crownhold.png": {
+      "asset_id": "counter.crownhold",
+      "source": "art/density3/assets/counter/crownhold.png",
+      "logical_size": [
+        320,
+        61
+      ],
+      "physical_size": [
+        2560,
+        488
+      ],
+      "reference_scale": 4,
+      "source_sha256": "324c6f18b6281c1c162201e6115d612adc8760dec04aed37fde0923fb4bea3cc"
+    },
+    "res://assets/counter/emporium.png": {
+      "asset_id": "counter.emporium",
+      "source": "art/density3/assets/counter/emporium.png",
+      "logical_size": [
+        320,
+        61
+      ],
+      "physical_size": [
+        2560,
+        488
+      ],
+      "reference_scale": 4,
+      "source_sha256": "2ba236786bb6b19cf5fb50bc82fd85d24b656a60075608ca16de9cb8f9bb13b8"
+    },
+    "res://assets/counter/stall.png": {
+      "asset_id": "counter.stall",
+      "source": "art/density3/assets/counter/stall.png",
+      "logical_size": [
+        320,
+        61
+      ],
+      "physical_size": [
+        2560,
+        488
+      ],
+      "reference_scale": 4,
+      "source_sha256": "730c2b89b71ea7c833caf5c2c336637170e9abe9c015c395674e743622175cc5"
+    },
+    "res://assets/counter/thornwick.png": {
+      "asset_id": "counter.thornwick",
+      "source": "art/density3/assets/counter/thornwick.png",
+      "logical_size": [
+        320,
+        61
+      ],
+      "physical_size": [
+        2560,
+        488
+      ],
+      "reference_scale": 4,
+      "source_sha256": "e55faacb676bb5dbe8b2bcb85aab8c0232799c341b3465607dc5be0f3ae513cf"
+    },
+    "res://assets/figures/aldo.png": {
+      "asset_id": "figure.aldo",
+      "source": "art/density3/assets/figures/aldo.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010"
+    },
+    "res://assets/figures/aldous.png": {
+      "asset_id": "figure.aldous",
+      "source": "art/density3/assets/figures/aldous.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466"
+    },
+    "res://assets/figures/ansel.png": {
+      "asset_id": "figure.ansel",
+      "source": "art/density3/assets/figures/ansel.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d"
+    },
+    "res://assets/figures/bram.png": {
+      "asset_id": "figure.bram",
+      "source": "art/density3/assets/figures/bram.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4"
+    },
+    "res://assets/figures/bramble.png": {
+      "asset_id": "figure.bramble",
+      "source": "art/density3/assets/figures/bramble.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0"
+    },
+    "res://assets/figures/corisande.png": {
+      "asset_id": "figure.corisande",
+      "source": "art/density3/assets/figures/corisande.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268"
+    },
+    "res://assets/figures/dorrin.png": {
+      "asset_id": "figure.dorrin",
+      "source": "art/density3/assets/figures/dorrin.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0"
+    },
+    "res://assets/figures/ermine.png": {
+      "asset_id": "figure.ermine",
+      "source": "art/density3/assets/figures/ermine.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586"
+    },
+    "res://assets/figures/fennick.png": {
+      "asset_id": "figure.fennick",
+      "source": "art/density3/assets/figures/fennick.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa"
+    },
+    "res://assets/figures/gerda.png": {
+      "asset_id": "figure.gerda",
+      "source": "art/density3/assets/figures/gerda.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe"
+    },
+    "res://assets/figures/grit.png": {
+      "asset_id": "figure.grit",
+      "source": "art/density3/assets/figures/grit.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d"
+    },
+    "res://assets/figures/hesk.png": {
+      "asset_id": "figure.hesk",
+      "source": "art/density3/assets/figures/hesk.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f"
+    },
+    "res://assets/figures/hob.png": {
+      "asset_id": "figure.hob",
+      "source": "art/density3/assets/figures/hob.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9"
+    },
+    "res://assets/figures/hood.png": {
+      "asset_id": "figure.hood",
+      "source": "art/density3/assets/figures/hood.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866"
+    },
+    "res://assets/figures/isolde.png": {
+      "asset_id": "figure.isolde",
+      "source": "art/density3/assets/figures/isolde.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0"
+    },
+    "res://assets/figures/king.png": {
+      "asset_id": "figure.king",
+      "source": "art/density3/assets/figures/king.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2"
+    },
+    "res://assets/figures/kit.png": {
+      "asset_id": "figure.kit",
+      "source": "art/density3/assets/figures/kit.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2"
+    },
+    "res://assets/figures/mags.png": {
+      "asset_id": "figure.mags",
+      "source": "art/density3/assets/figures/mags.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a"
+    },
+    "res://assets/figures/malbranche.png": {
+      "asset_id": "figure.malbranche",
+      "source": "art/density3/assets/figures/malbranche.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983"
+    },
+    "res://assets/figures/mara.png": {
+      "asset_id": "figure.mara",
+      "source": "art/density3/assets/figures/mara.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155"
+    },
+    "res://assets/figures/maw.png": {
+      "asset_id": "figure.maw",
+      "source": "art/density3/assets/figures/maw.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5"
+    },
+    "res://assets/figures/nim.png": {
+      "asset_id": "figure.nim",
+      "source": "art/density3/assets/figures/nim.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952"
+    },
+    "res://assets/figures/oriel.png": {
+      "asset_id": "figure.oriel",
+      "source": "art/density3/assets/figures/oriel.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07"
+    },
+    "res://assets/figures/orrin.png": {
+      "asset_id": "figure.orrin",
+      "source": "art/density3/assets/figures/orrin.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23"
+    },
+    "res://assets/figures/pell.png": {
+      "asset_id": "figure.pell",
+      "source": "art/density3/assets/figures/pell.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1"
+    },
+    "res://assets/figures/penn.png": {
+      "asset_id": "figure.penn",
+      "source": "art/density3/assets/figures/penn.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8"
+    },
+    "res://assets/figures/quill.png": {
+      "asset_id": "figure.quill",
+      "source": "art/density3/assets/figures/quill.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "1e41923e6cb049ff5cb6782ef1495875e7bb3276e0350bfed60d05a219f7274b"
+    },
+    "res://assets/figures/rosa.png": {
+      "asset_id": "figure.rosa",
+      "source": "art/density3/assets/figures/rosa.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133"
+    },
+    "res://assets/figures/shelly.png": {
+      "asset_id": "figure.shelly",
+      "source": "art/density3/assets/figures/shelly.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4"
+    },
+    "res://assets/figures/silas.png": {
+      "asset_id": "figure.silas",
+      "source": "art/density3/assets/figures/silas.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61"
+    },
+    "res://assets/figures/skrae.png": {
+      "asset_id": "figure.skrae",
+      "source": "art/density3/assets/figures/skrae.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2"
+    },
+    "res://assets/figures/snikkit.png": {
+      "asset_id": "figure.snikkit",
+      "source": "art/density3/assets/figures/snikkit.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6"
+    },
+    "res://assets/figures/stranger.png": {
+      "asset_id": "figure.stranger",
+      "source": "art/density3/assets/figures/stranger.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0"
+    },
+    "res://assets/figures/tam.png": {
+      "asset_id": "figure.tam",
+      "source": "art/density3/assets/figures/tam.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec"
+    },
+    "res://assets/figures/vane.png": {
+      "asset_id": "figure.vane",
+      "source": "art/density3/assets/figures/vane.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9"
+    },
+    "res://assets/figures/vexis.png": {
+      "asset_id": "figure.vexis",
+      "source": "art/density3/assets/figures/vexis.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336"
+    },
+    "res://assets/figures/wenna.png": {
+      "asset_id": "figure.wenna",
+      "source": "art/density3/assets/figures/wenna.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861"
+    },
+    "res://assets/figures/wren.png": {
+      "asset_id": "figure.wren",
+      "source": "art/density3/assets/figures/wren.png",
+      "logical_size": [
+        96,
+        160
+      ],
+      "physical_size": [
+        768,
+        1280
+      ],
+      "reference_scale": 4,
+      "source_sha256": "47ae8eafcb7ca8a2ab105d35aec33ef116e168ea56e512edb3bfb0aa2daaf4e6"
+    },
+    "res://assets/frame/crownhold.png": {
+      "asset_id": "frame.crownhold",
+      "source": "art/density3/assets/frame/crownhold.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "465454ef9d74628c5ea35230f7dce005c43ee3d9428b5d28a8bc25eaa0fd2959"
+    },
+    "res://assets/frame/emporium.png": {
+      "asset_id": "frame.emporium",
+      "source": "art/density3/assets/frame/emporium.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "56e573eb550adc6c69c1548f705edd19705be431bbca715c6c263e62c73bce8b"
+    },
+    "res://assets/frame/stall.png": {
+      "asset_id": "frame.stall",
+      "source": "art/density3/assets/frame/stall.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "d5910fad23caf075f9ccfbbabc75e6ee1b28542325f04c9184aee6dec7b22428"
+    },
+    "res://assets/frame/thornwick.png": {
+      "asset_id": "frame.thornwick",
+      "source": "art/density3/assets/frame/thornwick.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "41dafdc283a50982a68717a541ab92f1da2597cd6575611194d1519c5c05b604"
+    },
+    "res://assets/place/crownhold.png": {
+      "asset_id": "place.crownhold",
+      "source": "art/density3/assets/place/crownhold.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "c7f2fb805eb1a0c548761e7121d30ca76143f793c90dea4457f4e59bdfefbb0c"
+    },
+    "res://assets/place/emporium.png": {
+      "asset_id": "place.emporium",
+      "source": "art/density3/assets/place/emporium.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "5ddefe27edcf585c3a2aa616e1d2bd5cb3d2060a815d670ab4281d28e523f54b"
+    },
+    "res://assets/place/stall.png": {
+      "asset_id": "place.stall",
+      "source": "art/density3/assets/place/stall.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "c0cb28819a1f929b8ca5650b484ad4a8b9da66e1da68f3a9ea06053dcefc66dc"
+    },
+    "res://assets/place/thornwick.png": {
+      "asset_id": "place.thornwick",
+      "source": "art/density3/assets/place/thornwick.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "608d7cb6845c6ecdb74fe514439093fe1fe1e89342f2f4a2ef728156f093db62"
+    },
+    "res://assets/props/book.png": {
+      "asset_id": "prop.book",
+      "source": "art/density3/assets/props/book.png",
+      "logical_size": [
+        22,
+        14
+      ],
+      "physical_size": [
+        176,
+        112
+      ],
+      "reference_scale": 4,
+      "source_sha256": "83357c0844e6618e6a28198c376ec02ed83449a1972f72b306c0a7167204d867"
+    },
+    "res://assets/props/gavel.png": {
+      "asset_id": "prop.gavel",
+      "source": "art/density3/assets/props/gavel.png",
+      "logical_size": [
+        22,
+        12
+      ],
+      "physical_size": [
+        176,
+        96
+      ],
+      "reference_scale": 4,
+      "source_sha256": "d9167d1ea440991b42a18d464ba64e0bc87aca6ebefef5d54c4b5b15e3ad5990"
+    },
+    "res://assets/props/lantern_crownhold.png": {
+      "asset_id": "prop.lantern_crownhold",
+      "source": "art/density3/assets/props/lantern_crownhold.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "d202cab412d396852ce64d40841bf8015ad505bc3d7b8e8afbe1101eb89ff037"
+    },
+    "res://assets/props/lantern_crownhold_unlit.png": {
+      "asset_id": "prop.lantern_crownhold",
+      "source": "art/density3/assets/props/lantern_crownhold.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "d202cab412d396852ce64d40841bf8015ad505bc3d7b8e8afbe1101eb89ff037",
+      "derivation": "unlit"
+    },
+    "res://assets/props/lantern_emporium.png": {
+      "asset_id": "prop.lantern_emporium",
+      "source": "art/density3/assets/props/lantern_emporium.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "80ccb39ecd4724c24d364bd38c1b6c66a5eff99c16b5d81c08b0c6b5ae03e0ec"
+    },
+    "res://assets/props/lantern_emporium_unlit.png": {
+      "asset_id": "prop.lantern_emporium",
+      "source": "art/density3/assets/props/lantern_emporium.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "80ccb39ecd4724c24d364bd38c1b6c66a5eff99c16b5d81c08b0c6b5ae03e0ec",
+      "derivation": "unlit"
+    },
+    "res://assets/props/lantern_stall.png": {
+      "asset_id": "prop.lantern_stall",
+      "source": "art/density3/assets/props/lantern_stall.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "fcc66b3372e843c24f49a50792d3c7ffa389026fc4af0936b4ef9b2502fa24bd"
+    },
+    "res://assets/props/lantern_stall_unlit.png": {
+      "asset_id": "prop.lantern_stall",
+      "source": "art/density3/assets/props/lantern_stall.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "fcc66b3372e843c24f49a50792d3c7ffa389026fc4af0936b4ef9b2502fa24bd",
+      "derivation": "unlit"
+    },
+    "res://assets/props/lantern_thornwick.png": {
+      "asset_id": "prop.lantern_thornwick",
+      "source": "art/density3/assets/props/lantern_thornwick.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "5c714df0a2660286e0a308274c2acbea2e02ac8cbcdb67d31657f4299bffc466"
+    },
+    "res://assets/props/lantern_thornwick_unlit.png": {
+      "asset_id": "prop.lantern_thornwick",
+      "source": "art/density3/assets/props/lantern_thornwick.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "5c714df0a2660286e0a308274c2acbea2e02ac8cbcdb67d31657f4299bffc466",
+      "derivation": "unlit"
+    },
+    "res://assets/props/lodestone.png": {
+      "asset_id": "prop.lodestone",
+      "source": "art/density3/assets/props/lodestone.png",
+      "logical_size": [
+        20,
+        16
+      ],
+      "physical_size": [
+        160,
+        128
+      ],
+      "reference_scale": 4,
+      "source_sha256": "ff1ae39a3f893e76b6a3212fab795e03af3634253e40e40fee3b505c1dec61f4"
+    },
+    "res://assets/props/picks.png": {
+      "asset_id": "prop.picks",
+      "source": "art/density3/assets/props/picks.png",
+      "logical_size": [
+        22,
+        10
+      ],
+      "physical_size": [
+        176,
+        80
+      ],
+      "reference_scale": 4,
+      "source_sha256": "5c3fa28d07ba577a9c49a12295f80f7023d63ec47ff25293ccbab58c34f908b6"
+    },
+    "res://assets/props/scales.png": {
+      "asset_id": "prop.scales",
+      "source": "art/density3/assets/props/scales.png",
+      "logical_size": [
+        24,
+        24
+      ],
+      "physical_size": [
+        192,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "575f3808939a570c4a23201f60af8c22c74ca143fb6e206f262ce40cb3068d08"
+    },
+    "res://assets/props/seal.png": {
+      "asset_id": "prop.seal",
+      "source": "art/density3/assets/props/seal.png",
+      "logical_size": [
+        12,
+        20
+      ],
+      "physical_size": [
+        96,
+        160
+      ],
+      "reference_scale": 4,
+      "source_sha256": "57a7b6dcb77d79dc6bf5f16bbe07b994b15fe93347110946efa9dd3e044ebccb"
+    },
+    "res://assets/props/witchlight.png": {
+      "asset_id": "prop.witchlight",
+      "source": "art/density3/assets/props/witchlight.png",
+      "logical_size": [
+        16,
+        24
+      ],
+      "physical_size": [
+        128,
+        192
+      ],
+      "reference_scale": 4,
+      "source_sha256": "63b16c9f2b16d157ad4a1fd7d3c91fa18727256c08080a6241d433931934b5ea"
+    },
+    "res://assets/sheet/crownhold.png": {
+      "asset_id": "sheet.crownhold",
+      "source": "art/density3/assets/sheet/crownhold.png",
+      "logical_size": [
+        216,
+        320
+      ],
+      "physical_size": [
+        864,
+        1280
+      ],
+      "reference_scale": 2,
+      "source_sha256": "5f107b064339a1c9002a73df174418c3ff0c338df21653ac60cdf394367bcf7a"
+    },
+    "res://assets/sheet/emporium.png": {
+      "asset_id": "sheet.emporium",
+      "source": "art/density3/assets/sheet/emporium.png",
+      "logical_size": [
+        216,
+        320
+      ],
+      "physical_size": [
+        864,
+        1280
+      ],
+      "reference_scale": 2,
+      "source_sha256": "318e3a8a2512302839deeed38c2d5db7c94a402083bc5f401a5e3888cf5a073f"
+    },
+    "res://assets/sheet/stall.png": {
+      "asset_id": "sheet.stall",
+      "source": "art/density3/assets/sheet/stall.png",
+      "logical_size": [
+        216,
+        320
+      ],
+      "physical_size": [
+        864,
+        1280
+      ],
+      "reference_scale": 2,
+      "source_sha256": "2019c7271c8e10180eea4df0af7c78bb62d947af38e4f34c2e4a6232e199b487"
+    },
+    "res://assets/sheet/thornwick.png": {
+      "asset_id": "sheet.thornwick",
+      "source": "art/density3/assets/sheet/thornwick.png",
+      "logical_size": [
+        216,
+        320
+      ],
+      "physical_size": [
+        864,
+        1280
+      ],
+      "reference_scale": 2,
+      "source_sha256": "6f92cb656dbef5803727a29b6cfc7c581403dd1807334c6b266bf85c955fa7f6"
+    },
+    "res://assets/shelf/crownhold.png": {
+      "asset_id": "shelf.crownhold",
+      "source": "art/density3/assets/shelf/crownhold.png",
+      "logical_size": [
+        136,
+        40
+      ],
+      "physical_size": [
+        1088,
+        320
+      ],
+      "reference_scale": 4,
+      "source_sha256": "07b6cfaf303de3b6b61fb57ed60a409afc81625269e4e46b4aa413ef583a7160"
+    },
+    "res://assets/shelf/emporium.png": {
+      "asset_id": "shelf.emporium",
+      "source": "art/density3/assets/shelf/emporium.png",
+      "logical_size": [
+        136,
+        40
+      ],
+      "physical_size": [
+        1088,
+        320
+      ],
+      "reference_scale": 4,
+      "source_sha256": "408578c86cbe1ef39c91d22abea805c668adc5a00935dc5c75b9d7bc70204435"
+    },
+    "res://assets/shelf/stall.png": {
+      "asset_id": "shelf.stall",
+      "source": "art/density3/assets/shelf/stall.png",
+      "logical_size": [
+        136,
+        40
+      ],
+      "physical_size": [
+        1088,
+        320
+      ],
+      "reference_scale": 4,
+      "source_sha256": "51c87c64c5459def4ad3a29e05196d98715a6b41283d2bca8a7f28ddb5f9aed0"
+    },
+    "res://assets/shelf/thornwick.png": {
+      "asset_id": "shelf.thornwick",
+      "source": "art/density3/assets/shelf/thornwick.png",
+      "logical_size": [
+        136,
+        40
+      ],
+      "physical_size": [
+        1088,
+        320
+      ],
+      "reference_scale": 4,
+      "source_sha256": "b64881bcf224cca59982bae802ba37e628db3d13c4f6adc18100b4fc7b571121"
+    },
+    "res://assets/sky/evening.png": {
+      "asset_id": "sky.evening",
+      "source": "art/density3/assets/sky/evening.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "b5c984efa105cc64d896edd9072c49d3dc3ee4048430b4197f9aaade247771ae"
+    },
+    "res://assets/sky/midday.png": {
+      "asset_id": "sky.midday",
+      "source": "art/density3/assets/sky/midday.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "f46a5cd1e9118ffc3b6895f1f08ab12c4eb50fb264332d7f71acf332e1c9e282"
+    },
+    "res://assets/sky/morning.png": {
+      "asset_id": "sky.morning",
+      "source": "art/density3/assets/sky/morning.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "771abd80f593cfeade67b9c07e2348d9b6b9615104bbf098cf10611537512c27"
+    },
+    "res://assets/sky/night.png": {
+      "asset_id": "sky.night",
+      "source": "art/density3/assets/sky/night.png",
+      "logical_size": [
+        320,
+        180
+      ],
+      "physical_size": [
+        2560,
+        1440
+      ],
+      "reference_scale": 4,
+      "source_sha256": "28c24c1dddff6d8fc48cb961654b57244b8b953d90f7193c84df01163b62c776"
+    },
+    "res://assets/sprites/items/ambrosia.png": {
+      "asset_id": "item.ambrosia",
+      "source": "art/density3/assets/items/ambrosia.png",
+      "logical_size": [
+        22,
+        31
+      ],
+      "physical_size": [
+        88,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "431ac0799ae3969d87c36c8fbe10c2dd6d00fbed78a4824b6b20e4992cc4b851",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          5,
+          1,
+          26,
+          31
+        ],
+        "native_crop": [
+          5,
+          0,
+          27,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/archmages_mantle.png": {
+      "asset_id": "item.archmages_mantle",
+      "source": "art/density3/assets/items/archmages_mantle.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "efb9a0ffa12b0352ff8f0b49a47c6888fccfb47b87e0c6ac4822afd88c6e1db5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/barrow_silver.png": {
+      "asset_id": "item.barrow_silver",
+      "source": "art/density3/assets/items/barrow_silver.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "4b4b0a85f22e1e5a9073ad27f27d714b9e5a95f9999ccf7e476b0f0bc6423eda",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          6,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/blood_ruby.png": {
+      "asset_id": "item.blood_ruby",
+      "source": "art/density3/assets/items/blood_ruby.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "e46fd4f101d2f755fd168d54e2c0ab4069665304b9c88faf84f79253b8aa5a7a",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          5,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/bottled_star.png": {
+      "asset_id": "heartsong.bottled_star",
+      "source": "art/density3/assets/heartsongs/bottled_star.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "738ccaf1dceae899383c1cab0298416126537653519b46a5541c0cfe498a743f",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/cloak_of_shadows.png": {
+      "asset_id": "item.cloak_of_shadows",
+      "source": "art/density3/assets/items/cloak_of_shadows.png",
+      "logical_size": [
+        29,
+        31
+      ],
+      "physical_size": [
+        116,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "008a82dbc74278c3b49d64a81644ba75db1771d17e2e29ec069df8bb8191f4b5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/clockwork_lark.png": {
+      "asset_id": "heartsong.clockwork_lark",
+      "source": "art/density3/assets/heartsongs/clockwork_lark.png",
+      "logical_size": [
+        29,
+        31
+      ],
+      "physical_size": [
+        116,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "66ead5f5f200d660b77ce79156d2ff0c0afaf064a513417dd4b14be0361d68f9",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/demon_gold.png": {
+      "asset_id": "item.demon_gold",
+      "source": "art/density3/assets/items/demon_gold.png",
+      "logical_size": [
+        31,
+        20
+      ],
+      "physical_size": [
+        124,
+        80
+      ],
+      "reference_scale": 2,
+      "source_sha256": "0e700314c98ac1c842529f4055ef81e68fc8e759e4557725bf01253e9a9d5aee",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          11,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          11,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/dragon_gold.png": {
+      "asset_id": "item.dragon_gold",
+      "source": "art/density3/assets/items/dragon_gold.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "1f2914ddbe7e4d6693e7a2d6bf97a1b4a2f885bc3f74d18d06f1ff0f27a70cfe",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/dragons_egg.png": {
+      "asset_id": "heartsong.dragons_egg",
+      "source": "art/density3/assets/heartsongs/dragons_egg.png",
+      "logical_size": [
+        29,
+        31
+      ],
+      "physical_size": [
+        116,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9c916f5aed5aca4a6eecb8473d4d721c4f6020f43036689c70d904df953cced6",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/dragons_eye.png": {
+      "asset_id": "item.dragons_eye",
+      "source": "art/density3/assets/items/dragons_eye.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9225b4a232fdfee453e5d55ad80c268a164df5c063cf54fc5e94601758c73194",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/dragonslayer.png": {
+      "asset_id": "item.dragonslayer",
+      "source": "art/density3/assets/items/dragonslayer.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "74d63244d3131db0fa0a1189e6ba54f78b3e01f5b168e729d6c6f394ddcc51de",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/drowned_bell.png": {
+      "asset_id": "heartsong.drowned_bell",
+      "source": "art/density3/assets/heartsongs/drowned_bell.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "1bc193526548c4238e2ca07be071b164795ef6aeebf2149084bc943ec0086850",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/dwarf_gold_crowns.png": {
+      "asset_id": "item.dwarf_gold_crowns",
+      "source": "art/density3/assets/items/dwarf_gold_crowns.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "5666e9ec6bfae754892c4f1743d4412cea686e86fcc015152d167882b6e26023",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          7,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/dwarven_axe.png": {
+      "asset_id": "item.dwarven_axe",
+      "source": "art/density3/assets/items/dwarven_axe.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "bd5825b09eca1e47f2e75c635dd34e7ae2dbc6ea5b31848ea8a4146fd430daca",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/elfstone.png": {
+      "asset_id": "item.elfstone",
+      "source": "art/density3/assets/items/elfstone.png",
+      "logical_size": [
+        25,
+        31
+      ],
+      "physical_size": [
+        100,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "e5a7383f9b2e84fed132fbcd79ab591e005bc9b68a3d6bfc2ad58dc80aed8d0b",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          4,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          28,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/elixir_of_vigour.png": {
+      "asset_id": "item.elixir_of_vigour",
+      "source": "art/density3/assets/items/elixir_of_vigour.png",
+      "logical_size": [
+        20,
+        31
+      ],
+      "physical_size": [
+        80,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "f96fc400923a51db48fd59a60d10cf1ed61aa8be333b3b5ccd9d435353b02b63",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          6,
+          1,
+          25,
+          31
+        ],
+        "native_crop": [
+          6,
+          0,
+          26,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/elven_cloak.png": {
+      "asset_id": "item.elven_cloak",
+      "source": "art/density3/assets/items/elven_cloak.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "e9ebae309d33624369763c17afadd6b1b8cf8e77ff8feabcfb4b8c17716c6521",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/fey_chimes.png": {
+      "asset_id": "heartsong.fey_chimes",
+      "source": "art/density3/assets/heartsongs/fey_chimes.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "0eb0081e01b9b154649c0178f658c330bb467481c735530454ddf7840fb4de73",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/flamebrand.png": {
+      "asset_id": "item.flamebrand",
+      "source": "art/density3/assets/items/flamebrand.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "fcbf1028aa16741bf09f48cef091489691ab33ba390dab316c0612faeb7ea64c",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/goblin_cleaver.png": {
+      "asset_id": "item.goblin_cleaver",
+      "source": "art/density3/assets/items/goblin_cleaver.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "c73f0f021355f04ad2929829dfe5b3cdf7e6f51dc5290fdc71dfd1b0d555473b",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/healing_draught.png": {
+      "asset_id": "item.healing_draught",
+      "source": "art/density3/assets/items/healing_draught.png",
+      "logical_size": [
+        25,
+        31
+      ],
+      "physical_size": [
+        100,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "96f1ebbf64b213e1926554fd93b0ed2e2d4d7b38f2a734733ca49638b15d69d2",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          4,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          28,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/hearthstone.png": {
+      "asset_id": "heartsong.hearthstone",
+      "source": "art/density3/assets/heartsongs/hearthstone.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "858d07d0ab210a61f46659a71b5e413912401d247b2cc13628c94208ade6955a",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/ambrosia.png": {
+      "asset_id": "item.ambrosia",
+      "source": "art/density3/assets/items/ambrosia.png",
+      "logical_size": [
+        22,
+        31
+      ],
+      "physical_size": [
+        88,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "431ac0799ae3969d87c36c8fbe10c2dd6d00fbed78a4824b6b20e4992cc4b851",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          5,
+          1,
+          26,
+          31
+        ],
+        "native_crop": [
+          5,
+          0,
+          27,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/archmages_mantle.png": {
+      "asset_id": "item.archmages_mantle",
+      "source": "art/density3/assets/items/archmages_mantle.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "efb9a0ffa12b0352ff8f0b49a47c6888fccfb47b87e0c6ac4822afd88c6e1db5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/barrow_silver.png": {
+      "asset_id": "item.barrow_silver",
+      "source": "art/density3/assets/items/barrow_silver.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "4b4b0a85f22e1e5a9073ad27f27d714b9e5a95f9999ccf7e476b0f0bc6423eda",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          6,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/blood_ruby.png": {
+      "asset_id": "item.blood_ruby",
+      "source": "art/density3/assets/items/blood_ruby.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "e46fd4f101d2f755fd168d54e2c0ab4069665304b9c88faf84f79253b8aa5a7a",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          5,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/bottled_star.png": {
+      "asset_id": "heartsong.bottled_star",
+      "source": "art/density3/assets/heartsongs/bottled_star.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "738ccaf1dceae899383c1cab0298416126537653519b46a5541c0cfe498a743f",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/cloak_of_shadows.png": {
+      "asset_id": "item.cloak_of_shadows",
+      "source": "art/density3/assets/items/cloak_of_shadows.png",
+      "logical_size": [
+        29,
+        31
+      ],
+      "physical_size": [
+        116,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "008a82dbc74278c3b49d64a81644ba75db1771d17e2e29ec069df8bb8191f4b5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/clockwork_lark.png": {
+      "asset_id": "heartsong.clockwork_lark",
+      "source": "art/density3/assets/heartsongs/clockwork_lark.png",
+      "logical_size": [
+        29,
+        31
+      ],
+      "physical_size": [
+        116,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "66ead5f5f200d660b77ce79156d2ff0c0afaf064a513417dd4b14be0361d68f9",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/demon_gold.png": {
+      "asset_id": "item.demon_gold",
+      "source": "art/density3/assets/items/demon_gold.png",
+      "logical_size": [
+        31,
+        20
+      ],
+      "physical_size": [
+        124,
+        80
+      ],
+      "reference_scale": 2,
+      "source_sha256": "0e700314c98ac1c842529f4055ef81e68fc8e759e4557725bf01253e9a9d5aee",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          11,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          11,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/dragon_gold.png": {
+      "asset_id": "item.dragon_gold",
+      "source": "art/density3/assets/items/dragon_gold.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "1f2914ddbe7e4d6693e7a2d6bf97a1b4a2f885bc3f74d18d06f1ff0f27a70cfe",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/dragons_egg.png": {
+      "asset_id": "heartsong.dragons_egg",
+      "source": "art/density3/assets/heartsongs/dragons_egg.png",
+      "logical_size": [
+        29,
+        31
+      ],
+      "physical_size": [
+        116,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9c916f5aed5aca4a6eecb8473d4d721c4f6020f43036689c70d904df953cced6",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/dragons_eye.png": {
+      "asset_id": "item.dragons_eye",
+      "source": "art/density3/assets/items/dragons_eye.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9225b4a232fdfee453e5d55ad80c268a164df5c063cf54fc5e94601758c73194",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/dragonslayer.png": {
+      "asset_id": "item.dragonslayer",
+      "source": "art/density3/assets/items/dragonslayer.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "74d63244d3131db0fa0a1189e6ba54f78b3e01f5b168e729d6c6f394ddcc51de",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/drowned_bell.png": {
+      "asset_id": "heartsong.drowned_bell",
+      "source": "art/density3/assets/heartsongs/drowned_bell.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "1bc193526548c4238e2ca07be071b164795ef6aeebf2149084bc943ec0086850",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/dwarf_gold_crowns.png": {
+      "asset_id": "item.dwarf_gold_crowns",
+      "source": "art/density3/assets/items/dwarf_gold_crowns.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "5666e9ec6bfae754892c4f1743d4412cea686e86fcc015152d167882b6e26023",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          7,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/dwarven_axe.png": {
+      "asset_id": "item.dwarven_axe",
+      "source": "art/density3/assets/items/dwarven_axe.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "bd5825b09eca1e47f2e75c635dd34e7ae2dbc6ea5b31848ea8a4146fd430daca",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/elfstone.png": {
+      "asset_id": "item.elfstone",
+      "source": "art/density3/assets/items/elfstone.png",
+      "logical_size": [
+        25,
+        31
+      ],
+      "physical_size": [
+        100,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "e5a7383f9b2e84fed132fbcd79ab591e005bc9b68a3d6bfc2ad58dc80aed8d0b",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          4,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          28,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/elixir_of_vigour.png": {
+      "asset_id": "item.elixir_of_vigour",
+      "source": "art/density3/assets/items/elixir_of_vigour.png",
+      "logical_size": [
+        20,
+        31
+      ],
+      "physical_size": [
+        80,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "f96fc400923a51db48fd59a60d10cf1ed61aa8be333b3b5ccd9d435353b02b63",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          6,
+          1,
+          25,
+          31
+        ],
+        "native_crop": [
+          6,
+          0,
+          26,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/elven_cloak.png": {
+      "asset_id": "item.elven_cloak",
+      "source": "art/density3/assets/items/elven_cloak.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "e9ebae309d33624369763c17afadd6b1b8cf8e77ff8feabcfb4b8c17716c6521",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/fey_chimes.png": {
+      "asset_id": "heartsong.fey_chimes",
+      "source": "art/density3/assets/heartsongs/fey_chimes.png",
+      "logical_size": [
+        28,
+        31
+      ],
+      "physical_size": [
+        112,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "0eb0081e01b9b154649c0178f658c330bb467481c735530454ddf7840fb4de73",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          2,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/flamebrand.png": {
+      "asset_id": "item.flamebrand",
+      "source": "art/density3/assets/items/flamebrand.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "fcbf1028aa16741bf09f48cef091489691ab33ba390dab316c0612faeb7ea64c",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/goblin_cleaver.png": {
+      "asset_id": "item.goblin_cleaver",
+      "source": "art/density3/assets/items/goblin_cleaver.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "c73f0f021355f04ad2929829dfe5b3cdf7e6f51dc5290fdc71dfd1b0d555473b",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/healing_draught.png": {
+      "asset_id": "item.healing_draught",
+      "source": "art/density3/assets/items/healing_draught.png",
+      "logical_size": [
+        25,
+        31
+      ],
+      "physical_size": [
+        100,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "96f1ebbf64b213e1926554fd93b0ed2e2d4d7b38f2a734733ca49638b15d69d2",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          4,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          28,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/hearthstone.png": {
+      "asset_id": "heartsong.hearthstone",
+      "source": "art/density3/assets/heartsongs/hearthstone.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "858d07d0ab210a61f46659a71b5e413912401d247b2cc13628c94208ade6955a",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/imps_ember.png": {
+      "asset_id": "heartsong.imps_ember",
+      "source": "art/density3/assets/heartsongs/imps_ember.png",
+      "logical_size": [
+        28,
+        30
+      ],
+      "physical_size": [
+        112,
+        120
+      ],
+      "reference_scale": 2,
+      "source_sha256": "15d1920af3c9a8e48b91cf874e476a196a46b5fcd40b2ba304f74d9ea0270f1d",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          2,
+          30,
+          31
+        ],
+        "native_crop": [
+          2,
+          1,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/invisibility_draught.png": {
+      "asset_id": "item.invisibility_draught",
+      "source": "art/density3/assets/items/invisibility_draught.png",
+      "logical_size": [
+        21,
+        31
+      ],
+      "physical_size": [
+        84,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "06bdb88a9d61bed1f67387bfa2178dfdb62de941dc1148ec9aac0e1216d4a801",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          6,
+          1,
+          26,
+          31
+        ],
+        "native_crop": [
+          6,
+          0,
+          27,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/keyhold_codex.png": {
+      "asset_id": "item.keyhold_codex",
+      "source": "art/density3/assets/items/keyhold_codex.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "24bdc88250e86d87eadf636f3f0bca3fd85995829ff80ee03e15f6064c20d425",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/lichs_tome.png": {
+      "asset_id": "item.lichs_tome",
+      "source": "art/density3/assets/items/lichs_tome.png",
+      "logical_size": [
+        27,
+        31
+      ],
+      "physical_size": [
+        108,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "aa0339579161907515abf9951d09e8693f72e14527ede838f99cc20d5a7116da",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/lullaby_box.png": {
+      "asset_id": "heartsong.lullaby_box",
+      "source": "art/density3/assets/heartsongs/lullaby_box.png",
+      "logical_size": [
+        31,
+        28
+      ],
+      "physical_size": [
+        124,
+        112
+      ],
+      "reference_scale": 2,
+      "source_sha256": "a2d033f1afbb9c10eb59c04ecb22c849e3e8c2e928fe6c36fbd58681a5d7b7e2",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          3,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          3,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/mermaids_breath.png": {
+      "asset_id": "item.mermaids_breath",
+      "source": "art/density3/assets/items/mermaids_breath.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "033aa947f47b3eb8c0bc69c41ed4ed8ec7ee1fc7d334c63cfef1e6aec6d881b5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/moonsilver_marks.png": {
+      "asset_id": "item.moonsilver_marks",
+      "source": "art/density3/assets/items/moonsilver_marks.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "6a1f4bbcef42c20c150027d8984f49d107a5d55f1ff7da5910e5ae37433f975d",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          6,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/moonstone.png": {
+      "asset_id": "item.moonstone",
+      "source": "art/density3/assets/items/moonstone.png",
+      "logical_size": [
+        30,
+        31
+      ],
+      "physical_size": [
+        120,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9dbe00ac29c085f4dcc88238362b2c34f31c296182dc497dae40e62c56a28361",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/paste_gem.png": {
+      "asset_id": "item.paste_gem",
+      "source": "art/density3/assets/items/paste_gem.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "3fff87d6ab7249bfab50f5015485dd86267dde476db4348e18404ea6a6f4a93f",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          6,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/phoenix_mantle.png": {
+      "asset_id": "item.phoenix_mantle",
+      "source": "art/density3/assets/items/phoenix_mantle.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "60c716e64548c22351f7c9b60652896b87620b544109719aa2be086709ee6296",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/sand_case.png": {
+      "asset_id": "item.sand_case",
+      "source": "art/density3/assets/items/sand_case.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "375b71d3d48e86a8afdebffc17d1839cc9adf320e91b094295a04351a59c6531",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          7,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/scroll_of_fireball.png": {
+      "asset_id": "item.scroll_of_fireball",
+      "source": "art/density3/assets/items/scroll_of_fireball.png",
+      "logical_size": [
+        31,
+        30
+      ],
+      "physical_size": [
+        124,
+        120
+      ],
+      "reference_scale": 2,
+      "source_sha256": "8ad0eb703864f538f70c52d3c69a27860bb9449edbeff0373d8e7801295bb8d2",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          1,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/scroll_of_sparks.png": {
+      "asset_id": "item.scroll_of_sparks",
+      "source": "art/density3/assets/items/scroll_of_sparks.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "34774f675c46bcfea71f6b369f37ceb9296328e03d2b05efed4da3b39b9cca9e",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          5,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/shepherds_pipe.png": {
+      "asset_id": "heartsong.shepherds_pipe",
+      "source": "art/density3/assets/heartsongs/shepherds_pipe.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "c926cd3620dd6acff9249dc7fe374fcabfe5107f589ce5b93ef6d4666a1d4cd5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/starstone.png": {
+      "asset_id": "item.starstone",
+      "source": "art/density3/assets/items/starstone.png",
+      "logical_size": [
+        30,
+        31
+      ],
+      "physical_size": [
+        120,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "10255993751dcfa7fe143c3bc9b61c16c4dfb5afa64515895add54de210b0ff9",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/summoners_grimoire.png": {
+      "asset_id": "item.summoners_grimoire",
+      "source": "art/density3/assets/items/summoners_grimoire.png",
+      "logical_size": [
+        27,
+        31
+      ],
+      "physical_size": [
+        108,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "699a02a3515961411ac32020bc1b0f3000a3740ba48d3cb43011d3c82972005b",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/sunken_sovereigns.png": {
+      "asset_id": "item.sunken_sovereigns",
+      "source": "art/density3/assets/items/sunken_sovereigns.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "dac5a7ca53b81c91ef7330f108b67dca786723261022026672f0a9cca2ec218e",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          5,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/wardens_blade.png": {
+      "asset_id": "item.wardens_blade",
+      "source": "art/density3/assets/items/wardens_blade.png",
+      "logical_size": [
+        31,
+        30
+      ],
+      "physical_size": [
+        124,
+        120
+      ],
+      "reference_scale": 2,
+      "source_sha256": "6593efb5a26038be4459fc796e8d55f8f0931f8dd466ad1ac67f8873d5a0f8cc",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          1,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/icons/wolfskin_cloak.png": {
+      "asset_id": "item.wolfskin_cloak",
+      "source": "art/density3/assets/items/wolfskin_cloak.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "1e1d0380e2bc420afa26d49406d998c526999863f29a1e6eb90d191460f4d08d",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          4,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/imps_ember.png": {
+      "asset_id": "heartsong.imps_ember",
+      "source": "art/density3/assets/heartsongs/imps_ember.png",
+      "logical_size": [
+        28,
+        30
+      ],
+      "physical_size": [
+        112,
+        120
+      ],
+      "reference_scale": 2,
+      "source_sha256": "15d1920af3c9a8e48b91cf874e476a196a46b5fcd40b2ba304f74d9ea0270f1d",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          2,
+          2,
+          30,
+          31
+        ],
+        "native_crop": [
+          2,
+          1,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/invisibility_draught.png": {
+      "asset_id": "item.invisibility_draught",
+      "source": "art/density3/assets/items/invisibility_draught.png",
+      "logical_size": [
+        21,
+        31
+      ],
+      "physical_size": [
+        84,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "06bdb88a9d61bed1f67387bfa2178dfdb62de941dc1148ec9aac0e1216d4a801",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          6,
+          1,
+          26,
+          31
+        ],
+        "native_crop": [
+          6,
+          0,
+          27,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/keyhold_codex.png": {
+      "asset_id": "item.keyhold_codex",
+      "source": "art/density3/assets/items/keyhold_codex.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "24bdc88250e86d87eadf636f3f0bca3fd85995829ff80ee03e15f6064c20d425",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/lichs_tome.png": {
+      "asset_id": "item.lichs_tome",
+      "source": "art/density3/assets/items/lichs_tome.png",
+      "logical_size": [
+        27,
+        31
+      ],
+      "physical_size": [
+        108,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "aa0339579161907515abf9951d09e8693f72e14527ede838f99cc20d5a7116da",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/lullaby_box.png": {
+      "asset_id": "heartsong.lullaby_box",
+      "source": "art/density3/assets/heartsongs/lullaby_box.png",
+      "logical_size": [
+        31,
+        28
+      ],
+      "physical_size": [
+        124,
+        112
+      ],
+      "reference_scale": 2,
+      "source_sha256": "a2d033f1afbb9c10eb59c04ecb22c849e3e8c2e928fe6c36fbd58681a5d7b7e2",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          3,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          3,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/mermaids_breath.png": {
+      "asset_id": "item.mermaids_breath",
+      "source": "art/density3/assets/items/mermaids_breath.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "033aa947f47b3eb8c0bc69c41ed4ed8ec7ee1fc7d334c63cfef1e6aec6d881b5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/moonsilver_marks.png": {
+      "asset_id": "item.moonsilver_marks",
+      "source": "art/density3/assets/items/moonsilver_marks.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "6a1f4bbcef42c20c150027d8984f49d107a5d55f1ff7da5910e5ae37433f975d",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          6,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/moonstone.png": {
+      "asset_id": "item.moonstone",
+      "source": "art/density3/assets/items/moonstone.png",
+      "logical_size": [
+        30,
+        31
+      ],
+      "physical_size": [
+        120,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "9dbe00ac29c085f4dcc88238362b2c34f31c296182dc497dae40e62c56a28361",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/paste_gem.png": {
+      "asset_id": "item.paste_gem",
+      "source": "art/density3/assets/items/paste_gem.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "3fff87d6ab7249bfab50f5015485dd86267dde476db4348e18404ea6a6f4a93f",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          6,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/phoenix_mantle.png": {
+      "asset_id": "item.phoenix_mantle",
+      "source": "art/density3/assets/items/phoenix_mantle.png",
+      "logical_size": [
+        31,
+        31
+      ],
+      "physical_size": [
+        124,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "60c716e64548c22351f7c9b60652896b87620b544109719aa2be086709ee6296",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/sand_case.png": {
+      "asset_id": "item.sand_case",
+      "source": "art/density3/assets/items/sand_case.png",
+      "logical_size": [
+        31,
+        25
+      ],
+      "physical_size": [
+        124,
+        100
+      ],
+      "reference_scale": 2,
+      "source_sha256": "375b71d3d48e86a8afdebffc17d1839cc9adf320e91b094295a04351a59c6531",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          7,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          6,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/scroll_of_fireball.png": {
+      "asset_id": "item.scroll_of_fireball",
+      "source": "art/density3/assets/items/scroll_of_fireball.png",
+      "logical_size": [
+        31,
+        30
+      ],
+      "physical_size": [
+        124,
+        120
+      ],
+      "reference_scale": 2,
+      "source_sha256": "8ad0eb703864f538f70c52d3c69a27860bb9449edbeff0373d8e7801295bb8d2",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          1,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/scroll_of_sparks.png": {
+      "asset_id": "item.scroll_of_sparks",
+      "source": "art/density3/assets/items/scroll_of_sparks.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "34774f675c46bcfea71f6b369f37ceb9296328e03d2b05efed4da3b39b9cca9e",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          5,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/shepherds_pipe.png": {
+      "asset_id": "heartsong.shepherds_pipe",
+      "source": "art/density3/assets/heartsongs/shepherds_pipe.png",
+      "logical_size": [
+        31,
+        29
+      ],
+      "physical_size": [
+        124,
+        116
+      ],
+      "reference_scale": 2,
+      "source_sha256": "c926cd3620dd6acff9249dc7fe374fcabfe5107f589ce5b93ef6d4666a1d4cd5",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          2,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          2,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/starstone.png": {
+      "asset_id": "item.starstone",
+      "source": "art/density3/assets/items/starstone.png",
+      "logical_size": [
+        30,
+        31
+      ],
+      "physical_size": [
+        120,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "10255993751dcfa7fe143c3bc9b61c16c4dfb5afa64515895add54de210b0ff9",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          30,
+          31
+        ],
+        "native_crop": [
+          1,
+          0,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/summoners_grimoire.png": {
+      "asset_id": "item.summoners_grimoire",
+      "source": "art/density3/assets/items/summoners_grimoire.png",
+      "logical_size": [
+        27,
+        31
+      ],
+      "physical_size": [
+        108,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "699a02a3515961411ac32020bc1b0f3000a3740ba48d3cb43011d3c82972005b",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          3,
+          1,
+          29,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          30,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/sunken_sovereigns.png": {
+      "asset_id": "item.sunken_sovereigns",
+      "source": "art/density3/assets/items/sunken_sovereigns.png",
+      "logical_size": [
+        31,
+        26
+      ],
+      "physical_size": [
+        124,
+        104
+      ],
+      "reference_scale": 2,
+      "source_sha256": "dac5a7ca53b81c91ef7330f108b67dca786723261022026672f0a9cca2ec218e",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          5,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          5,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/wardens_blade.png": {
+      "asset_id": "item.wardens_blade",
+      "source": "art/density3/assets/items/wardens_blade.png",
+      "logical_size": [
+        31,
+        30
+      ],
+      "physical_size": [
+        124,
+        120
+      ],
+      "reference_scale": 2,
+      "source_sha256": "6593efb5a26038be4459fc796e8d55f8f0931f8dd466ad1ac67f8873d5a0f8cc",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          1,
+          1,
+          31,
+          31
+        ],
+        "native_crop": [
+          0,
+          1,
+          31,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/items/wolfskin_cloak.png": {
+      "asset_id": "item.wolfskin_cloak",
+      "source": "art/density3/assets/items/wolfskin_cloak.png",
+      "logical_size": [
+        26,
+        31
+      ],
+      "physical_size": [
+        104,
+        124
+      ],
+      "reference_scale": 2,
+      "source_sha256": "1e1d0380e2bc420afa26d49406d998c526999863f29a1e6eb90d191460f4d08d",
+      "derivation": {
+        "kind": "item_crop",
+        "legacy_crop": [
+          4,
+          1,
+          28,
+          31
+        ],
+        "native_crop": [
+          3,
+          0,
+          29,
+          31
+        ]
+      }
+    },
+    "res://assets/sprites/lockpick/face_dwarven.png": {
+      "asset_id": "lock.face.dwarven",
+      "source": "art/density3/assets/lockpick/face_dwarven.png",
+      "logical_size": [
+        160,
+        160
+      ],
+      "physical_size": [
+        640,
+        640
+      ],
+      "reference_scale": 2,
+      "source_sha256": "2f5e92eb8313f357aa8d95f5468b087da5ddbe98695f55048287d9054e361219"
+    },
+    "res://assets/sprites/lockpick/face_guild.png": {
+      "asset_id": "lock.face.guild",
+      "source": "art/density3/assets/lockpick/face_guild.png",
+      "logical_size": [
+        160,
+        160
+      ],
+      "physical_size": [
+        640,
+        640
+      ],
+      "reference_scale": 2,
+      "source_sha256": "f44db22839b71a4b34ec3d88b84f3ad1f21e2a917fe375579d385bccd5eef5cc"
+    },
+    "res://assets/sprites/lockpick/face_rusty.png": {
+      "asset_id": "lock.face.rusty",
+      "source": "art/density3/assets/lockpick/face_rusty.png",
+      "logical_size": [
+        160,
+        160
+      ],
+      "physical_size": [
+        640,
+        640
+      ],
+      "reference_scale": 2,
+      "source_sha256": "189fbdfdb63a7409ac2f579df13672bdd5071e7ed2b9884c5bc5cddd5d4e4303"
+    },
+    "res://assets/sprites/sellers/aldo.png": {
+      "asset_id": "figure.aldo",
+      "source": "art/density3/assets/figures/aldo.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          42,
+          68,
+          82
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/aldous.png": {
+      "asset_id": "figure.aldous",
+      "source": "art/density3/assets/figures/aldous.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          18,
+          72,
+          66
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/ansel.png": {
+      "asset_id": "figure.ansel",
+      "source": "art/density3/assets/figures/ansel.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          40,
+          69,
+          81
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/bram.png": {
+      "asset_id": "figure.bram",
+      "source": "art/density3/assets/figures/bram.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          40,
+          69,
+          81
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/bramble.png": {
+      "asset_id": "figure.bramble",
+      "source": "art/density3/assets/figures/bramble.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/corisande.png": {
+      "asset_id": "figure.corisande",
+      "source": "art/density3/assets/figures/corisande.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/dorrin.png": {
+      "asset_id": "figure.dorrin",
+      "source": "art/density3/assets/figures/dorrin.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/ermine.png": {
+      "asset_id": "figure.ermine",
+      "source": "art/density3/assets/figures/ermine.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          16,
+          72,
+          64
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/aldo.png": {
+      "asset_id": "figure.aldo",
+      "source": "art/density3/assets/figures/aldo.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          42,
+          68,
+          82
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/aldous.png": {
+      "asset_id": "figure.aldous",
+      "source": "art/density3/assets/figures/aldous.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          18,
+          72,
+          66
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/ansel.png": {
+      "asset_id": "figure.ansel",
+      "source": "art/density3/assets/figures/ansel.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          40,
+          69,
+          81
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/bram.png": {
+      "asset_id": "figure.bram",
+      "source": "art/density3/assets/figures/bram.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          40,
+          69,
+          81
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/bramble.png": {
+      "asset_id": "figure.bramble",
+      "source": "art/density3/assets/figures/bramble.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/corisande.png": {
+      "asset_id": "figure.corisande",
+      "source": "art/density3/assets/figures/corisande.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/dorrin.png": {
+      "asset_id": "figure.dorrin",
+      "source": "art/density3/assets/figures/dorrin.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/ermine.png": {
+      "asset_id": "figure.ermine",
+      "source": "art/density3/assets/figures/ermine.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          16,
+          72,
+          64
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/fennick.png": {
+      "asset_id": "figure.fennick",
+      "source": "art/density3/assets/figures/fennick.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          28,
+          71,
+          73
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/gerda.png": {
+      "asset_id": "figure.gerda",
+      "source": "art/density3/assets/figures/gerda.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          30,
+          50,
+          67,
+          87
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/grit.png": {
+      "asset_id": "figure.grit",
+      "source": "art/density3/assets/figures/grit.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          69,
+          64,
+          101
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/hesk.png": {
+      "asset_id": "figure.hesk",
+      "source": "art/density3/assets/figures/hesk.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          40,
+          69,
+          81
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/hob.png": {
+      "asset_id": "figure.hob",
+      "source": "art/density3/assets/figures/hob.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/hood.png": {
+      "asset_id": "figure.hood",
+      "source": "art/density3/assets/figures/hood.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/isolde.png": {
+      "asset_id": "figure.isolde",
+      "source": "art/density3/assets/figures/isolde.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/king.png": {
+      "asset_id": "figure.king",
+      "source": "art/density3/assets/figures/king.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/kit.png": {
+      "asset_id": "figure.kit",
+      "source": "art/density3/assets/figures/kit.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/mags.png": {
+      "asset_id": "figure.mags",
+      "source": "art/density3/assets/figures/mags.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          42,
+          68,
+          82
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/malbranche.png": {
+      "asset_id": "figure.malbranche",
+      "source": "art/density3/assets/figures/malbranche.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          20,
+          72,
+          68
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/mara.png": {
+      "asset_id": "figure.mara",
+      "source": "art/density3/assets/figures/mara.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          38,
+          69,
+          79
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/maw.png": {
+      "asset_id": "figure.maw",
+      "source": "art/density3/assets/figures/maw.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          15,
+          72,
+          63
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/nim.png": {
+      "asset_id": "figure.nim",
+      "source": "art/density3/assets/figures/nim.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/oriel.png": {
+      "asset_id": "figure.oriel",
+      "source": "art/density3/assets/figures/oriel.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/orrin.png": {
+      "asset_id": "figure.orrin",
+      "source": "art/density3/assets/figures/orrin.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          14,
+          72,
+          62
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/pell.png": {
+      "asset_id": "figure.pell",
+      "source": "art/density3/assets/figures/pell.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/penn.png": {
+      "asset_id": "figure.penn",
+      "source": "art/density3/assets/figures/penn.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/quill.png": {
+      "asset_id": "figure.quill",
+      "source": "art/density3/assets/figures/quill.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1e41923e6cb049ff5cb6782ef1495875e7bb3276e0350bfed60d05a219f7274b",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/rosa.png": {
+      "asset_id": "figure.rosa",
+      "source": "art/density3/assets/figures/rosa.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          42,
+          68,
+          82
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/shelly.png": {
+      "asset_id": "figure.shelly",
+      "source": "art/density3/assets/figures/shelly.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/silas.png": {
+      "asset_id": "figure.silas",
+      "source": "art/density3/assets/figures/silas.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/skrae.png": {
+      "asset_id": "figure.skrae",
+      "source": "art/density3/assets/figures/skrae.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/snikkit.png": {
+      "asset_id": "figure.snikkit",
+      "source": "art/density3/assets/figures/snikkit.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          84,
+          64,
+          116
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/stranger.png": {
+      "asset_id": "figure.stranger",
+      "source": "art/density3/assets/figures/stranger.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          25,
+          22,
+          72,
+          69
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/tam.png": {
+      "asset_id": "figure.tam",
+      "source": "art/density3/assets/figures/tam.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          76,
+          64,
+          108
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/vane.png": {
+      "asset_id": "figure.vane",
+      "source": "art/density3/assets/figures/vane.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          25,
+          24,
+          71,
+          70
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/vexis.png": {
+      "asset_id": "figure.vexis",
+      "source": "art/density3/assets/figures/vexis.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          96,
+          64,
+          128
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/wenna.png": {
+      "asset_id": "figure.wenna",
+      "source": "art/density3/assets/figures/wenna.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/faces/wren.png": {
+      "asset_id": "figure.wren",
+      "source": "art/density3/assets/figures/wren.png",
+      "logical_size": [
+        38,
+        38
+      ],
+      "physical_size": [
+        76,
+        76
+      ],
+      "reference_scale": 1,
+      "source_sha256": "47ae8eafcb7ca8a2ab105d35aec33ef116e168ea56e512edb3bfb0aa2daaf4e6",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/fennick.png": {
+      "asset_id": "figure.fennick",
+      "source": "art/density3/assets/figures/fennick.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          28,
+          71,
+          73
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/gerda.png": {
+      "asset_id": "figure.gerda",
+      "source": "art/density3/assets/figures/gerda.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          30,
+          50,
+          67,
+          87
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/grit.png": {
+      "asset_id": "figure.grit",
+      "source": "art/density3/assets/figures/grit.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          69,
+          64,
+          101
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/hesk.png": {
+      "asset_id": "figure.hesk",
+      "source": "art/density3/assets/figures/hesk.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          40,
+          69,
+          81
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/hob.png": {
+      "asset_id": "figure.hob",
+      "source": "art/density3/assets/figures/hob.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/hood.png": {
+      "asset_id": "figure.hood",
+      "source": "art/density3/assets/figures/hood.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/isolde.png": {
+      "asset_id": "figure.isolde",
+      "source": "art/density3/assets/figures/isolde.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/king.png": {
+      "asset_id": "figure.king",
+      "source": "art/density3/assets/figures/king.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/kit.png": {
+      "asset_id": "figure.kit",
+      "source": "art/density3/assets/figures/kit.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/mags.png": {
+      "asset_id": "figure.mags",
+      "source": "art/density3/assets/figures/mags.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          42,
+          68,
+          82
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/malbranche.png": {
+      "asset_id": "figure.malbranche",
+      "source": "art/density3/assets/figures/malbranche.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          20,
+          72,
+          68
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/mara.png": {
+      "asset_id": "figure.mara",
+      "source": "art/density3/assets/figures/mara.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          38,
+          69,
+          79
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/maw.png": {
+      "asset_id": "figure.maw",
+      "source": "art/density3/assets/figures/maw.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          15,
+          72,
+          63
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/nim.png": {
+      "asset_id": "figure.nim",
+      "source": "art/density3/assets/figures/nim.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/oriel.png": {
+      "asset_id": "figure.oriel",
+      "source": "art/density3/assets/figures/oriel.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/orrin.png": {
+      "asset_id": "figure.orrin",
+      "source": "art/density3/assets/figures/orrin.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          24,
+          14,
+          72,
+          62
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/pell.png": {
+      "asset_id": "figure.pell",
+      "source": "art/density3/assets/figures/pell.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/penn.png": {
+      "asset_id": "figure.penn",
+      "source": "art/density3/assets/figures/penn.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/quill.png": {
+      "asset_id": "figure.quill",
+      "source": "art/density3/assets/figures/quill.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1e41923e6cb049ff5cb6782ef1495875e7bb3276e0350bfed60d05a219f7274b",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/rosa.png": {
+      "asset_id": "figure.rosa",
+      "source": "art/density3/assets/figures/rosa.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          28,
+          42,
+          68,
+          82
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/shelly.png": {
+      "asset_id": "figure.shelly",
+      "source": "art/density3/assets/figures/shelly.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/silas.png": {
+      "asset_id": "figure.silas",
+      "source": "art/density3/assets/figures/silas.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          27,
+          36,
+          69,
+          78
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/skrae.png": {
+      "asset_id": "figure.skrae",
+      "source": "art/density3/assets/figures/skrae.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          48,
+          67,
+          86
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/snikkit.png": {
+      "asset_id": "figure.snikkit",
+      "source": "art/density3/assets/figures/snikkit.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          84,
+          64,
+          116
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/stranger.png": {
+      "asset_id": "figure.stranger",
+      "source": "art/density3/assets/figures/stranger.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          25,
+          22,
+          72,
+          69
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/tam.png": {
+      "asset_id": "figure.tam",
+      "source": "art/density3/assets/figures/tam.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          76,
+          64,
+          108
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/vane.png": {
+      "asset_id": "figure.vane",
+      "source": "art/density3/assets/figures/vane.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          25,
+          24,
+          71,
+          70
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/vexis.png": {
+      "asset_id": "figure.vexis",
+      "source": "art/density3/assets/figures/vexis.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          32,
+          96,
+          64,
+          128
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/wenna.png": {
+      "asset_id": "figure.wenna",
+      "source": "art/density3/assets/figures/wenna.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          26,
+          32,
+          70,
+          76
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/sprites/sellers/wren.png": {
+      "asset_id": "figure.wren",
+      "source": "art/density3/assets/figures/wren.png",
+      "logical_size": [
+        76,
+        76
+      ],
+      "physical_size": [
+        152,
+        152
+      ],
+      "reference_scale": 1,
+      "source_sha256": "47ae8eafcb7ca8a2ab105d35aec33ef116e168ea56e512edb3bfb0aa2daaf4e6",
+      "derivation": {
+        "kind": "head_crop",
+        "native_crop": [
+          29,
+          44,
+          68,
+          83
+        ],
+        "density": "fine detail retained for smaller UI slots"
+      }
+    },
+    "res://assets/ui/curios/aether.png": {
+      "asset_id": "curio.aether",
+      "source": "art/density3/assets/curios/aether.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3998487dccc806500807381886176f5c48feb59af04e4a1f054454350b9e2792"
+    },
+    "res://assets/ui/curios/aldricseal.png": {
+      "asset_id": "curio.aldricseal",
+      "source": "art/density3/assets/curios/aldricseal.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "12d5d7c649944c9a566400fc7c2eb8999613de1c8d4dfffee8d2952f0bbcdd80"
+    },
+    "res://assets/ui/curios/beads.png": {
+      "asset_id": "curio.beads",
+      "source": "art/density3/assets/curios/beads.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c4a94b7bdc1de8bb9dfc84531ab10e22cf14e0442d59fd614d95d2b01e94ec66"
+    },
+    "res://assets/ui/curios/bell.png": {
+      "asset_id": "curio.bell",
+      "source": "art/density3/assets/curios/bell.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "158faaa33e00df58c863d30f7a149bd9aa67eb47431a8b5637d6d18e6f03eb8c"
+    },
+    "res://assets/ui/curios/blindfold.png": {
+      "asset_id": "curio.blindfold",
+      "source": "art/density3/assets/curios/blindfold.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "46787941baade9a129397b745ede0e26f118609980d988573275f5d058fbfafe"
+    },
+    "res://assets/ui/curios/bond.png": {
+      "asset_id": "curio.bond",
+      "source": "art/density3/assets/curios/bond.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a0334fd6e8e40fdc9cd48fae6b8bb8435638e055e36a301c4f55e328a7ea40e5"
+    },
+    "res://assets/ui/curios/book.png": {
+      "asset_id": "curio.book",
+      "source": "art/density3/assets/curios/book.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8d31fb55f50e5b762d62eb687f36ad5f6f8a9546298745dbca9f9d82ace387e5"
+    },
+    "res://assets/ui/curios/cap.png": {
+      "asset_id": "curio.cap",
+      "source": "art/density3/assets/curios/cap.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "25f0c09d12bca19e843acc00a3ec10a2849477c8bdd8763ced927d6479be140f"
+    },
+    "res://assets/ui/curios/catalogue.png": {
+      "asset_id": "curio.catalogue",
+      "source": "art/density3/assets/curios/catalogue.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ceb1d6787e0080f706813c2f05ba2849e3d629a05d63063fe95eb25cdb423752"
+    },
+    "res://assets/ui/curios/chalk.png": {
+      "asset_id": "curio.chalk",
+      "source": "art/density3/assets/curios/chalk.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3835e7643fe605edc98521d0f19ef6038b8fc25f559401022151371d2cb326d9"
+    },
+    "res://assets/ui/curios/clover.png": {
+      "asset_id": "curio.clover",
+      "source": "art/density3/assets/curios/clover.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "d1a0295c390a3c12eab1579a5d9de0bab8331bca395dc2fa2cb43665421a48ad"
+    },
+    "res://assets/ui/curios/coffer.png": {
+      "asset_id": "curio.coffer",
+      "source": "art/density3/assets/curios/coffer.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "0b3a64db5be963e9ed2d30a528be6fa0cd74ab6c4172a1a75bd4a63d4340dfe1"
+    },
+    "res://assets/ui/curios/coin.png": {
+      "asset_id": "curio.coin",
+      "source": "art/density3/assets/curios/coin.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3cb6b5a521d5d7811fbc90f6cf64bd9daf1dedf22dae86f1fc03580a077bf7d8"
+    },
+    "res://assets/ui/curios/compass.png": {
+      "asset_id": "curio.compass",
+      "source": "art/density3/assets/curios/compass.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3828f80fe0208ff9fd18f999bf5827372892c1669399280d7f6e0a3320b3addc"
+    },
+    "res://assets/ui/curios/crate.png": {
+      "asset_id": "curio.crate",
+      "source": "art/density3/assets/curios/crate.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7a71666e68ca88e1b971f18667a1821e3770f49eb8bf8cd6221fb3ccfdae995e"
+    },
+    "res://assets/ui/curios/crescent.png": {
+      "asset_id": "curio.crescent",
+      "source": "art/density3/assets/curios/crescent.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7ed4485506a082011e38d552c0a75af9c4df7830bbfd7084aa105de342481e3f"
+    },
+    "res://assets/ui/curios/desk.png": {
+      "asset_id": "curio.desk",
+      "source": "art/density3/assets/curios/desk.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "92b0c2f738aa09eefa244eaa449d235db0ed3deb6fab14cc421d138a10932c52"
+    },
+    "res://assets/ui/curios/dip.png": {
+      "asset_id": "curio.dip",
+      "source": "art/density3/assets/curios/dip.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4d09c3c706d8ffd714091f1e408a0bdb64ca1ec375b8504814093f4314a23944"
+    },
+    "res://assets/ui/curios/dome.png": {
+      "asset_id": "curio.dome",
+      "source": "art/density3/assets/curios/dome.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "6927b196ad67520d683d981c2c600aadb1b71134462a90718b38da506c756395"
+    },
+    "res://assets/ui/curios/draught.png": {
+      "asset_id": "curio.draught",
+      "source": "art/density3/assets/curios/draught.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1c7f063e27d74e3fda61f0f8828c2039f23c463e7b15886e38efc69c4da38675"
+    },
+    "res://assets/ui/curios/dummy.png": {
+      "asset_id": "curio.dummy",
+      "source": "art/density3/assets/curios/dummy.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8c7af45991e6cd27220f778cf422b5c698f750592d0a3f86afdbacb76f77e23b"
+    },
+    "res://assets/ui/curios/errand.png": {
+      "asset_id": "curio.errand",
+      "source": "art/density3/assets/curios/errand.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "440182962cd0ba179920a84a08aa755c16de48d90c70316f7a546e041cdb2e87"
+    },
+    "res://assets/ui/curios/foot.png": {
+      "asset_id": "curio.foot",
+      "source": "art/density3/assets/curios/foot.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5a6aab84bf8f7896df0898c00b693d621a8252fbea06ba2fc6373a76674f56aa"
+    },
+    "res://assets/ui/curios/fork.png": {
+      "asset_id": "curio.fork",
+      "source": "art/density3/assets/curios/fork.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "2029f79c6eff2cccc8c92ff5de2990f0f0a8b22919d5d44fd91cc5f82976ed69"
+    },
+    "res://assets/ui/curios/gauntlet.png": {
+      "asset_id": "curio.gauntlet",
+      "source": "art/density3/assets/curios/gauntlet.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "e797d35dabf63b756a209f8a7c011700a05993d9a76ba12aa6d351bce759dfa2"
+    },
+    "res://assets/ui/curios/gloves.png": {
+      "asset_id": "curio.gloves",
+      "source": "art/density3/assets/curios/gloves.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7290ec1bd307eaa4ecc5594c0ce85c85ac61f7b441756d3fc96fc7fb182a3b98"
+    },
+    "res://assets/ui/curios/goldentongue.png": {
+      "asset_id": "curio.goldentongue",
+      "source": "art/density3/assets/curios/goldentongue.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "eee550a54bba7485c92a739eac36c729dc66fd4c80ab4e5f79a9af46a01d04b1"
+    },
+    "res://assets/ui/curios/guestbook.png": {
+      "asset_id": "curio.guestbook",
+      "source": "art/density3/assets/curios/guestbook.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "bbf6921adcfc657e6217342f892fd31003b6f225c0fc22070550f2b2baf88a79"
+    },
+    "res://assets/ui/curios/hook.png": {
+      "asset_id": "curio.hook",
+      "source": "art/density3/assets/curios/hook.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5b0f5da296611e7361d7b7e0d8f2ddb90b3e37355d551a1c1bfa1c086111bb5c"
+    },
+    "res://assets/ui/curios/horn.png": {
+      "asset_id": "curio.horn",
+      "source": "art/density3/assets/curios/horn.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "32947e77b9474d17087958c02ec9caafc46ee446fde39a87d9af78dcd0aac57f"
+    },
+    "res://assets/ui/curios/horseshoe.png": {
+      "asset_id": "curio.horseshoe",
+      "source": "art/density3/assets/curios/horseshoe.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "63b1b1879cfbd574cc57ee525affec83f2d63fd2fd83f588eb6d9c099f54aa10"
+    },
+    "res://assets/ui/curios/hourglass.png": {
+      "asset_id": "curio.hourglass",
+      "source": "art/density3/assets/curios/hourglass.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "d73b5ca2b14e8f1dacee8b69c0aaa164653663382c97e758fe3ddde06be4e613"
+    },
+    "res://assets/ui/curios/jar.png": {
+      "asset_id": "curio.jar",
+      "source": "art/density3/assets/curios/jar.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "2ba4d5d9e86116086b62115430515dca2ca53f1ec91d2717fd2c1930a94fa8a8"
+    },
+    "res://assets/ui/curios/knife.png": {
+      "asset_id": "curio.knife",
+      "source": "art/density3/assets/curios/knife.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "9b3d6e63f937466f2fa074705a3254cb381f26420fbc407e769f57c2041fc63d"
+    },
+    "res://assets/ui/curios/knot.png": {
+      "asset_id": "curio.knot",
+      "source": "art/density3/assets/curios/knot.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "488d68801c5d227a381f565c55a54543002d1f604f09dfd598041ac1ba79aaa8"
+    },
+    "res://assets/ui/curios/lamps.png": {
+      "asset_id": "curio.lamps",
+      "source": "art/density3/assets/curios/lamps.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "95c91b0236a8b1829d5a7b44a95896e77a0d1c897ce0da6660c72e4816fea478"
+    },
+    "res://assets/ui/curios/lantern.png": {
+      "asset_id": "curio.lantern",
+      "source": "art/density3/assets/curios/lantern.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3180dbf3257685f0775f9f16e9eb6cae44656d7fd56a7a23be497af1301749d3"
+    },
+    "res://assets/ui/curios/ledger.png": {
+      "asset_id": "curio.ledger",
+      "source": "art/density3/assets/curios/ledger.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "9251f65c03dfb3eadb828f9fc76e3a8270b84c90d89600b7f6a1aaf705aac45f"
+    },
+    "res://assets/ui/curios/letter.png": {
+      "asset_id": "curio.letter",
+      "source": "art/density3/assets/curios/letter.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "6165359fa1dedb0e8f2f8ea8e22a7ea7646f8593e02415acd07ac427c731c407"
+    },
+    "res://assets/ui/curios/lockbox.png": {
+      "asset_id": "curio.lockbox",
+      "source": "art/density3/assets/curios/lockbox.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f4454408398565990918baeef6c08b0443294eb80a9b49891daa6afd21812580"
+    },
+    "res://assets/ui/curios/log.png": {
+      "asset_id": "curio.log",
+      "source": "art/density3/assets/curios/log.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "54f0a01f45ed6c990d2d90deced3bbfce4cb9f97d0fd2f03f7fa41bc21b6f72e"
+    },
+    "res://assets/ui/curios/loupe.png": {
+      "asset_id": "curio.loupe",
+      "source": "art/density3/assets/curios/loupe.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "62d64d8555f5bdf549400e064b8c427642bf847416a7873f5e75067da4fbccd3"
+    },
+    "res://assets/ui/curios/mark.png": {
+      "asset_id": "curio.mark",
+      "source": "art/density3/assets/curios/mark.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f8621178370e5ff44fa9e71b1e4663eb2a25d31c030755f4bef6ba67da34738d"
+    },
+    "res://assets/ui/curios/marker.png": {
+      "asset_id": "curio.marker",
+      "source": "art/density3/assets/curios/marker.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "02eb512c424c614172afb0243342c44c29a0250fd0c99549420acc3622e9c1c4"
+    },
+    "res://assets/ui/curios/monocle.png": {
+      "asset_id": "curio.monocle",
+      "source": "art/density3/assets/curios/monocle.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "84ae6a290941ce16661c571371161317ff9c04d38d0fd0a2b5de66e8d817a309"
+    },
+    "res://assets/ui/curios/net.png": {
+      "asset_id": "curio.net",
+      "source": "art/density3/assets/curios/net.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8e584d9865ff6084349c13d43f97436803ae46cd72ffda3e6ff1a9fe9b76b3f1"
+    },
+    "res://assets/ui/curios/note.png": {
+      "asset_id": "curio.note",
+      "source": "art/density3/assets/curios/note.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "e4c48f9596ec9ac5fdc480a3c2df4ebc250a367485018ee6d272d111676a6609"
+    },
+    "res://assets/ui/curios/oil.png": {
+      "asset_id": "curio.oil",
+      "source": "art/density3/assets/curios/oil.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3c8296e774454732df9efa040192ac53ff5cb429696b2acfa1ce79b6dc855869"
+    },
+    "res://assets/ui/curios/pass.png": {
+      "asset_id": "curio.pass",
+      "source": "art/density3/assets/curios/pass.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a90ba4a7d8e961b4e0a698bbd9a1949e50e5c7bca0cf4af3917baea1ee88e5d3"
+    },
+    "res://assets/ui/curios/pillow.png": {
+      "asset_id": "curio.pillow",
+      "source": "art/density3/assets/curios/pillow.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1b75acd40a65be6f940e94e502c720dc16669f5061ec5bc3edd7a9ea603c8a61"
+    },
+    "res://assets/ui/curios/purse.png": {
+      "asset_id": "curio.purse",
+      "source": "art/density3/assets/curios/purse.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "2f4669f406f923729354a10a805964d75e4c10fbd8d0e1fc7f1c799900108db0"
+    },
+    "res://assets/ui/curios/queue.png": {
+      "asset_id": "curio.queue",
+      "source": "art/density3/assets/curios/queue.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "93bd27b6fa1efc07f222271ccc05b4198bceb38ba9fcb86bd6ef51b91cc596ff"
+    },
+    "res://assets/ui/curios/register.png": {
+      "asset_id": "curio.register",
+      "source": "art/density3/assets/curios/register.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "b16816ba8516893f67efb16e5054f5710d9ae3891973624ba8639616a0636698"
+    },
+    "res://assets/ui/curios/ribbon.png": {
+      "asset_id": "curio.ribbon",
+      "source": "art/density3/assets/curios/ribbon.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "db30ab628d3e74e5f27a20a57c15f4997e0b9f4389bf521aa2da8b1d3ded85d4"
+    },
+    "res://assets/ui/curios/ring.png": {
+      "asset_id": "curio.ring",
+      "source": "art/density3/assets/curios/ring.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "54c40a1c5686116efbcb51931e467336cb586276c0a59506636a67a00200e679"
+    },
+    "res://assets/ui/curios/rod.png": {
+      "asset_id": "curio.rod",
+      "source": "art/density3/assets/curios/rod.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7ca649081bf67583220b8af8cbacc56dd6dc083caf7dc97330fff314769cd2b6"
+    },
+    "res://assets/ui/curios/rope.png": {
+      "asset_id": "curio.rope",
+      "source": "art/density3/assets/curios/rope.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "52c89a84e6b341a128200a960f870f3a8055b0fe93e77109ee4dbdfae70905b7"
+    },
+    "res://assets/ui/curios/scales.png": {
+      "asset_id": "curio.scales",
+      "source": "art/density3/assets/curios/scales.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "28f4673f97bddcfd9f1f5ca54a5daafa5d39e9025946442bb456391f3153af8c"
+    },
+    "res://assets/ui/curios/seal.png": {
+      "asset_id": "curio.seal",
+      "source": "art/density3/assets/curios/seal.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "b242654ac2e66caa7c166fbb84467f64f327a21e140c8e6e67bc581f8b028b11"
+    },
+    "res://assets/ui/curios/sealed.png": {
+      "asset_id": "curio.sealed",
+      "source": "art/density3/assets/curios/sealed.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "87ce591038cfdc7994f74e86ec99638e4dd09766545b953acfe9f8db4c478986"
+    },
+    "res://assets/ui/curios/shell.png": {
+      "asset_id": "curio.shell",
+      "source": "art/density3/assets/curios/shell.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ac3a38f59db97efb498bff17e3eaf3d45cbe7de1ed35451b2049ca635d30cd4c"
+    },
+    "res://assets/ui/curios/signet.png": {
+      "asset_id": "curio.signet",
+      "source": "art/density3/assets/curios/signet.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "743c59a31f5f3b80d7dbab27973a910a66ce2a3629c3e7a1248a4e12287edbb7"
+    },
+    "res://assets/ui/curios/spindle.png": {
+      "asset_id": "curio.spindle",
+      "source": "art/density3/assets/curios/spindle.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "cd5bc4259ff9ad7f94f705650abcb2c0c2d6a883dc20c96ae9f244c713ce1449"
+    },
+    "res://assets/ui/curios/staff.png": {
+      "asset_id": "curio.staff",
+      "source": "art/density3/assets/curios/staff.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "914e55d0c0b6284fd5bbbc32e357ca07677d5fe1d5bd589636c434af38fccc3d"
+    },
+    "res://assets/ui/curios/star.png": {
+      "asset_id": "curio.star",
+      "source": "art/density3/assets/curios/star.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4deddf5c1fca0b4926c739d9ae2b2e154f1bb7a7502f186eaec2239ff4beebcc"
+    },
+    "res://assets/ui/curios/still.png": {
+      "asset_id": "curio.still",
+      "source": "art/density3/assets/curios/still.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "9b4d1da28205825a1e82f4aaa06cb7e1d96374f135fbec2bdeb06a0598da0eed"
+    },
+    "res://assets/ui/curios/ticket.png": {
+      "asset_id": "curio.ticket",
+      "source": "art/density3/assets/curios/ticket.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7ae64e33fd8c6f1e98f931f4378f8cc1cbe5f207949f51b6b46d662c6f458c90"
+    },
+    "res://assets/ui/curios/token.png": {
+      "asset_id": "curio.token",
+      "source": "art/density3/assets/curios/token.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7c5d671cde768963b131d5a98792de2332663cb31a4a1ab69d624b67ec14fbe3"
+    },
+    "res://assets/ui/curios/tongue.png": {
+      "asset_id": "curio.tongue",
+      "source": "art/density3/assets/curios/tongue.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "95d0dd09bd28455f2c877ff9ab19c4fefa29b2206be282b57ba8aa66d67729f2"
+    },
+    "res://assets/ui/curios/trumpet.png": {
+      "asset_id": "curio.trumpet",
+      "source": "art/density3/assets/curios/trumpet.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c7d7197afc66e109ad967334aba9ca10a12e2304578372d91cdcb4bf303a39cf"
+    },
+    "res://assets/ui/curios/truthglass.png": {
+      "asset_id": "curio.truthglass",
+      "source": "art/density3/assets/curios/truthglass.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "578605e8f2cb8161aa59f142d2d3d8f3992554fdaf2ca18fcb73c103b888164a"
+    },
+    "res://assets/ui/curios/wardkey.png": {
+      "asset_id": "curio.wardkey",
+      "source": "art/density3/assets/curios/wardkey.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8732281735685abbadc02b15170d62013f4f03a2231788462a1180ba342c557d"
+    },
+    "res://assets/ui/curios/wardlamp.png": {
+      "asset_id": "curio.wardlamp",
+      "source": "art/density3/assets/curios/wardlamp.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "2f20100e8b2ff66452a25b89b033734070556ae90cd6f6ade1ef7782e1e59c67"
+    },
+    "res://assets/ui/curios/wardtally.png": {
+      "asset_id": "curio.wardtally",
+      "source": "art/density3/assets/curios/wardtally.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "653d16c02598c4bbaea700e3362f370ed6009e65df0d502449c2f2541fefdfef"
+    },
+    "res://assets/ui/curios/watch.png": {
+      "asset_id": "curio.watch",
+      "source": "art/density3/assets/curios/watch.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "b62f130861a50ae17854d2bec5831e299e925edf0963ecc2d547eb352d5a40b3"
+    },
+    "res://assets/ui/curios/wheel.png": {
+      "asset_id": "curio.wheel",
+      "source": "art/density3/assets/curios/wheel.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "3d8ba4201dd58b79eaa4fdb34c105bc9f5986c00dd10ca0ec75bcf0d9c2895d6"
+    },
+    "res://assets/ui/curios/whetstone.png": {
+      "asset_id": "curio.whetstone",
+      "source": "art/density3/assets/curios/whetstone.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "450426440566198a3758b67ad0ba461140cfbcfebde7dfd985bd17e60dbb5629"
+    },
+    "res://assets/ui/curios/wholesale.png": {
+      "asset_id": "curio.wholesale",
+      "source": "art/density3/assets/curios/wholesale.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4b3222e9510e09e0d1d9da47402d9777fd7617b908bf22eb4b9de5e0a99cf019"
+    },
+    "res://assets/ui/curios/wishbone.png": {
+      "asset_id": "curio.wishbone",
+      "source": "art/density3/assets/curios/wishbone.png",
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "source_sha256": "259aa5b85604af341474098d88d052c1787754d3cc1a79a6efeabd339653e1ae"
+    },
+    "res://assets/ui/guild.png": {
+      "asset_id": "emblem.guild",
+      "source": "art/density3/assets/emblems/guild.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5add0b4486a23de7844a2d7ce5870c2831d05be827e577b80f06514c8ab46d64"
+    },
+    "res://assets/ui/icons/bench.png": {
+      "asset_id": "icon.upgrade.bench",
+      "source": "art/density3/assets/icons/upgrade_bench.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c3d515781d2a89fecccd1eab367fc7cd655cf3fae1e1116f58a427599f528c0f"
+    },
+    "res://assets/ui/icons/block.png": {
+      "asset_id": "icon.upgrade.block",
+      "source": "art/density3/assets/icons/upgrade_block.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "6eab998569a02410c51d44ceb9ec81629f26d0d9d83306567c4b9b2db8225756"
+    },
+    "res://assets/ui/icons/cabinet1.png": {
+      "asset_id": "icon.upgrade.cabinet1",
+      "source": "art/density3/assets/icons/upgrade_cabinet1.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "7502de6adf97b1f6c3958c935d396da10064078d7eb49a57cdab58041ce158ce"
+    },
+    "res://assets/ui/icons/cabinet2.png": {
+      "asset_id": "icon.upgrade.cabinet2",
+      "source": "art/density3/assets/icons/upgrade_cabinet2.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ba70f98de57d23b7433e17ba6a52b1c8427b17c5fb9eb27a85ed5cb1efc3998f"
+    },
+    "res://assets/ui/icons/cabinet3.png": {
+      "asset_id": "icon.upgrade.cabinet3",
+      "source": "art/density3/assets/icons/upgrade_cabinet3.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "fad651bad98bb3c911ee56c3692a5bc50cdd4a3967f15d64a60d6e807ce41640"
+    },
+    "res://assets/ui/icons/cabinet4.png": {
+      "asset_id": "icon.upgrade.cabinet4",
+      "source": "art/density3/assets/icons/upgrade_cabinet4.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f016a53aaffa47f57660efe25e43f0b441217fbde7383b08db83ddb0c3d667c9"
+    },
+    "res://assets/ui/icons/cabinet5.png": {
+      "asset_id": "icon.upgrade.cabinet5",
+      "source": "art/density3/assets/icons/upgrade_cabinet5.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5c524695e7b836a10071d7ea278073b03f36515c8485e7ac236cd8f712d8a4b7"
+    },
+    "res://assets/ui/icons/cabinet6.png": {
+      "asset_id": "icon.upgrade.cabinet6",
+      "source": "art/density3/assets/icons/upgrade_cabinet6.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "dea5900858fa295a6e89f40697160e4a5d37242b012398a28c898f838933caf1"
+    },
+    "res://assets/ui/icons/case.png": {
+      "asset_id": "icon.upgrade.case",
+      "source": "art/density3/assets/icons/upgrade_case.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "9d1ae689a30392943440d062410f914b00bfc1065ef13fb3476e0ec692e50a96"
+    },
+    "res://assets/ui/icons/charter.png": {
+      "asset_id": "icon.upgrade.charter",
+      "source": "art/density3/assets/icons/upgrade_charter.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8dfcdac50d02be42cf28a777c49547bfcc8d06c29930b9dbe18fece68b535a72"
+    },
+    "res://assets/ui/icons/crier.png": {
+      "asset_id": "icon.upgrade.crier",
+      "source": "art/density3/assets/icons/upgrade_crier.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "72a2e4a756b6799e8f6e88282eb9fdb2d418785b16a3bb8d7128ef6e221e7d88"
+    },
+    "res://assets/ui/icons/engine.png": {
+      "asset_id": "icon.upgrade.engine",
+      "source": "art/density3/assets/icons/upgrade_engine.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "b52047b1b3c6177939aa36b04ce119053ff146cd02423e3d0f47b9c4032e1f46"
+    },
+    "res://assets/ui/icons/lamp.png": {
+      "asset_id": "icon.upgrade.lamp",
+      "source": "art/density3/assets/icons/upgrade_lamp.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ebb7957eebdf7095c2c6079428cf66669c65691d1df1d95682dcfdee787d774b"
+    },
+    "res://assets/ui/icons/magnet.png": {
+      "asset_id": "icon.upgrade.magnet",
+      "source": "art/density3/assets/icons/upgrade_magnet.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c66d15beba049c0b268815bf70cb4d6e654c09f7b5624a3f1abbd1fb1fdf788c"
+    },
+    "res://assets/ui/icons/master.png": {
+      "asset_id": "icon.upgrade.master",
+      "source": "art/density3/assets/icons/upgrade_master.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "d7d8a6494b1eabcfe6fd22a7910fe58e11a0fb41a07d0da539784570cdd3850e"
+    },
+    "res://assets/ui/icons/night.png": {
+      "asset_id": "icon.upgrade.night",
+      "source": "art/density3/assets/icons/upgrade_night.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "62c33091f7f3577073c1a71766bdd8d393ce3ccfd76c9b29099675dcb6977c54"
+    },
+    "res://assets/ui/icons/patrons.png": {
+      "asset_id": "icon.upgrade.patrons",
+      "source": "art/density3/assets/icons/upgrade_patrons.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "40605f4e66ad6ef996a55978691352dc5d23ba41c289c5501079ee4bab91b4da"
+    },
+    "res://assets/ui/icons/picks.png": {
+      "asset_id": "icon.upgrade.picks",
+      "source": "art/density3/assets/icons/upgrade_picks.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4012ba08f66099197d8ad949fdeb01a31bb6470fbda888497da5ef68954013f6"
+    },
+    "res://assets/ui/icons/scales.png": {
+      "asset_id": "icon.upgrade.scales",
+      "source": "art/density3/assets/icons/upgrade_scales.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "13109aa815e7dba1749c5c45a467b3d05bf2082cb55670823b083666757ddba0"
+    },
+    "res://assets/ui/icons/seal.png": {
+      "asset_id": "icon.upgrade.seal",
+      "source": "art/density3/assets/icons/upgrade_seal.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a4c36f0cdf804b0d54c482350e65c55a3421105230531abe5938f7735ccec763"
+    },
+    "res://assets/ui/icons/shop2.png": {
+      "asset_id": "icon.upgrade.shop2",
+      "source": "art/density3/assets/icons/upgrade_shop2.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "020ce306d36f60faf70338d9f0b428b139c85eabf121e82c6cfd0e567de07a86"
+    },
+    "res://assets/ui/icons/shop3.png": {
+      "asset_id": "icon.upgrade.shop3",
+      "source": "art/density3/assets/icons/upgrade_shop3.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "a79c1168da126049fbf8605b8a112077a49886e9da33fd920cf729eab5aa14aa"
+    },
+    "res://assets/ui/icons/shop4.png": {
+      "asset_id": "icon.upgrade.shop4",
+      "source": "art/density3/assets/icons/upgrade_shop4.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "1bda57f90c215397d4101303f51426f6e89a5126307e09971ec86807109bd121"
+    },
+    "res://assets/ui/icons/sign.png": {
+      "asset_id": "icon.upgrade.sign",
+      "source": "art/density3/assets/icons/upgrade_sign.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "6211b896c7c5691b1af52e226c69ab0c1c7a983238bb4fef83a136a9ceb0d96a"
+    },
+    "res://assets/ui/icons/velvet.png": {
+      "asset_id": "icon.upgrade.velvet",
+      "source": "art/density3/assets/icons/upgrade_velvet.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "80674418d5255330f9af2ca638cb615dc8ec466e259f596adbe29d4c322675d8"
+    },
+    "res://assets/ui/icons/warrant.png": {
+      "asset_id": "icon.upgrade.warrant",
+      "source": "art/density3/assets/icons/upgrade_warrant.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "189efbd530a891d6a4a333a60bd5645e6a0729bceb25fa6a7010a6c30e9aef59"
+    },
+    "res://assets/ui/icons/workshop.png": {
+      "asset_id": "icon.upgrade.workshop",
+      "source": "art/density3/assets/icons/upgrade_workshop.png",
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8896d511de557c45ad70f682508cf3d2111a430585f340613c8423da6a20cbe8"
+    },
+    "res://assets/ui/key_1.png": {
+      "asset_id": "story.key_shard_1",
+      "source": "art/density3/assets/story/key_shard_1.png",
+      "logical_size": [
+        192,
+        48
+      ],
+      "physical_size": [
+        384,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f0762b8cc10a3ec4507d8e9a62a3a12710672d9a8591608b0dbe380dbdcd549b"
+    },
+    "res://assets/ui/key_2.png": {
+      "asset_id": "story.key_shard_2",
+      "source": "art/density3/assets/story/key_shard_2.png",
+      "logical_size": [
+        192,
+        48
+      ],
+      "physical_size": [
+        384,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "ca2cec775409d52a29f90189024f22a3117508f9fdc507c2760db62b710b9d0e"
+    },
+    "res://assets/ui/key_3.png": {
+      "asset_id": "story.key_shard_3",
+      "source": "art/density3/assets/story/key_shard_3.png",
+      "logical_size": [
+        192,
+        48
+      ],
+      "physical_size": [
+        384,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "c01aa0e669502745db12820f7b0b3dafb9143f5a63e2d52e4523fddc87a139a0"
+    },
+    "res://assets/ui/key_4.png": {
+      "asset_id": "story.key_shard_4",
+      "source": "art/density3/assets/story/key_shard_4.png",
+      "logical_size": [
+        192,
+        48
+      ],
+      "physical_size": [
+        384,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "4c74136b79fdd5ad383e85eaca5990afc62015d3db12f047452bf5d74838fe45"
+    },
+    "res://assets/ui/key_whole.png": {
+      "asset_id": "story.key_whole",
+      "source": "art/density3/assets/story/key_whole.png",
+      "logical_size": [
+        192,
+        48
+      ],
+      "physical_size": [
+        384,
+        96
+      ],
+      "reference_scale": 1,
+      "source_sha256": "de99d3bef92a4c2b6a8cc7e68c82f9e9fb3273fef2a1378c82e800d4d8e32fae"
+    },
+    "res://assets/ui/kinds/arms.png": {
+      "asset_id": "icon.kind.arms",
+      "source": "art/density3/assets/kinds/kind_arms.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "8d5a2ea80f097e3ea95c853f2f045cc972c2953da53cf75853f6ad70e8058a78"
+    },
+    "res://assets/ui/kinds/coins.png": {
+      "asset_id": "icon.kind.coins",
+      "source": "art/density3/assets/kinds/kind_coins.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "5552e0b81739fb51c31c34d3a2af533430b3c731f5933f8b463b90eb1fb243bb"
+    },
+    "res://assets/ui/kinds/garb.png": {
+      "asset_id": "icon.kind.garb",
+      "source": "art/density3/assets/kinds/kind_garb.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "52f434ed03903b389676f109d6bf7a0846f62a968765b17fec4607158aefa68c"
+    },
+    "res://assets/ui/kinds/gems.png": {
+      "asset_id": "icon.kind.gems",
+      "source": "art/density3/assets/kinds/kind_gems.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "320d405e6f5cdab3ee08a1a7669f783cf0a2e45c837c72327c086a23596974fb"
+    },
+    "res://assets/ui/kinds/heartsong.png": {
+      "asset_id": "icon.kind.heartsong",
+      "source": "art/density3/assets/kinds/kind_heartsong.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "eae4f36de7fbc44d0ed367eafe913ceb628c82144dc561d78fde6ee9089d5ed4"
+    },
+    "res://assets/ui/kinds/hidden.png": {
+      "asset_id": "icon.kind.hidden",
+      "source": "art/density3/assets/kinds/kind_hidden.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "23bb43155105cc59d8ee124fecd157045e760e90f6e1719fb827478c583d92bc"
+    },
+    "res://assets/ui/kinds/potions.png": {
+      "asset_id": "icon.kind.potions",
+      "source": "art/density3/assets/kinds/kind_potions.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "b7b39304d204b9519f84b8e8ca19f1aea84a33a1a3bbf70fcce31f1512dc48ff"
+    },
+    "res://assets/ui/kinds/scrolls.png": {
+      "asset_id": "icon.kind.scrolls",
+      "source": "art/density3/assets/kinds/kind_scrolls.png",
+      "logical_size": [
+        32,
+        32
+      ],
+      "physical_size": [
+        64,
+        64
+      ],
+      "reference_scale": 1,
+      "source_sha256": "f89812ac9561523647977bdb955c30d8149c10aebebcc58a4d7741e6da4c1cee"
+    }
+  }
+}

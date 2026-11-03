@@ -1,0 +1,950 @@
+{
+  "reviewer": "face_audit_a",
+  "date": "2026-11-04",
+  "stage": "final_rebuilt_production_figures",
+  "overall_qa_verdict": "pass",
+  "user_approval": "pending",
+  "counts": {
+    "pass": 19,
+    "watch": 0,
+    "fix": 0
+  },
+  "production_hashes_verified": 19,
+  "selected_repairs_verified": 9,
+  "unchanged_prior_direct_audits_verified": 10,
+  "unresolved_true_errors": [],
+  "remaining_limitations_zh": [
+    "较浅的闭口嘴线、老年笑纹仍简化为少量像素；这不是逐笔重绘或原图细节完全保留。",
+    "透视、眼镜及胡须造成的正常遮挡未被强行改为两只等大的眼睛或完整露出的嘴。",
+    "少量既有面部高光偏暖金；该风格颜色未造成五官缺失，最终审美仍交用户确认。",
+    "76px队列图仅保留人物与大表情，嘴线、镜框和胡须细节简化为少数像素；完整表情应结合生产立绘与152px卡片审阅。"
+  ],
+  "derived_portrait_and_queue_review": "complete_19_portraits_19_queue_heads_at_native_sizes",
+  "evidence": [
+    "final_verified/production_vs_selected_1.png",
+    "final_verified/production_vs_selected_2.png",
+    "final_verified/production_vs_selected_3.png",
+    "final_production_hash_check.json",
+    "candidate_selection_review.json"
+  ],
+  "items": [
+    {
+      "id": "tam",
+      "asset_id": "figure.tam",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "双眼瞳孔、鼻部与开口笑完整；原图的缺牙特征保留，表情天真自然。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\tam.png",
+      "production_sha256_at_visual_review": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_tam_A.png",
+      "source_sha256": "199ede17a45dd1ae68fa42046c913591ee650daf9bf04efe93b8733c0b71bd58",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        306,
+        637,
+        494,
+        788
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\tam_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\tam.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "c6572c5d574edd65d0d599ec9bb8af052115ed3d3fe38ed28b7e2e5becf69027",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\tam.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "173d11010d7289ddfecb6d928184bef81ae7484b6f79ddef4db16d051b063ec9",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "penn",
+      "asset_id": "figure.penn",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "原先断开的嘴线已恢复为自然闭口微笑；双眼、鼻子、嘴部均完整。老人笑纹仍有像素化简化。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\penn.png",
+      "production_sha256_at_visual_review": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_penn_A.png",
+      "source_sha256": "cee1f746260aaa279b38cb99eb68c57e1c26566c203371c7670a112f192e57f4",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        284,
+        416,
+        535,
+        618
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\penn_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\penn.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "56a54bb6f0633ba970671cf7dac7ef6fdf83ad8916e0150ae9c3cbaad1787d2a",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\penn.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "7398fe307d4169c493cea09fc0308f81622b46930199895c3518ff0b5341c78e",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "hob",
+      "asset_id": "figure.hob",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "双眼瞳孔与亮部可辨，成熟半闭眼来自原图；鼻子、胡须、下唇位置正常，遮住上唇是自然胡须遮挡。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hob.png",
+      "production_sha256_at_visual_review": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch9s_c2_4x_no_outline\\sources\\figure_hob_A.png",
+      "source_sha256": "84137a70b262bd2f405858cdcbd1416bb5a4c3501af77f60b5869f7cc5a0bb85",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        270,
+        307,
+        552,
+        534
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\hob_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\hob.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "a63d8dae617f817c6f5ca6c881bbb4b017496806c7141ebe41394dff1090414a",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\hob.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "e93bd9308de909f2fdf5cc24110553aa6d3abcd7c5eed06b53812f8998d2436b",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "mags",
+      "asset_id": "figure.mags",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "双眼、鼻部与完整笑口可辨，表情开放友好。局部高光偏暖金，属于现有调色风格，未造成五官缺失。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\mags.png",
+      "production_sha256_at_visual_review": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_mags_A.png",
+      "source_sha256": "63bd3e7f5db4639220c1858049ebdfa9d2b9042f5966d1c96e5807d6c6ee78d4",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        285,
+        375,
+        547,
+        586
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\mags_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\mags.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "cd7fe7d454bb2923f8644994837547ce949824c321e8bc2db2aec63fa573249f",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\mags.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "17e61a3bc17a83e5e9dd146daf2aac68ee271bc83233aeacf3448d6009f4b6a3",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "dorrin",
+      "asset_id": "figure.dorrin",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "浅笑左段已恢复原图走向；双眼朝向一致，鼻部清楚，神态保持温和自信。嘴线仍是较浅的少量像素，未形成钩状邪笑。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\dorrin.png",
+      "production_sha256_at_visual_review": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_dorrin_A.png",
+      "source_sha256": "e5050a422df1972f395b5dd0a880a092d7402d70e4f5d68caef4fc8a0a8c69b5",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        280,
+        337,
+        553,
+        557
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\dorrin_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\dorrin.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "7f867f154aa37d07505becd138d070400e9e2b4df5c063e20517cd3a57dcaaca",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\dorrin.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "cc90f8a4847e215cb68f1d287e2c2cd757d9b8672433d9488427bff54131c39e",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "snikkit",
+      "asset_id": "figure.snikkit",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "近远双眼的深色瞳孔与浅色眼部仍分离，鼻子和露齿笑完整；顽皮神态符合原图。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\snikkit.png",
+      "production_sha256_at_visual_review": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_snikkit_D.png",
+      "source_sha256": "3d3c17764d424e39127892a43479771512f16b75e340a04ee913c84dbe938f14",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        320,
+        696,
+        490,
+        833
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\snikkit_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\snikkit.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "f5eb1109cfeb265d91614fd8c9fb12434dcb66261de23347a74ccad860ac00cc",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\snikkit.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "4ccb91f6f3dd01b8402ce1f80eb289ddc1943306a08d478506cf067e37b33af3",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "wenna",
+      "asset_id": "figure.wenna",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "双眼与瞳孔朝向一致，鼻尖、嘴唇保持区分，闭口表情平静自然。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\wenna.png",
+      "production_sha256_at_visual_review": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_wenna_C.png",
+      "source_sha256": "2dcdba19da158aff6abf17dc0b117b821f4c040ec09651c1d4cb6724ac90235f",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        255,
+        289,
+        545,
+        523
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\wenna_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\wenna.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "e6774bc0bd67591f779425f7c053de6a3c55fcff049e20cbabcbd882f29c1a04",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\wenna.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "e2590d8218babc0a4e0ff1103c19e6e6b74e063a9aafb48693085b93a9db8942",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "bramble",
+      "asset_id": "figure.bramble",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "鼻下与浅笑阴影已恢复，双眼和自然老年笑纹完整；皱纹与唇线保留为柔和简化，没有夸张坏笑。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\bramble.png",
+      "production_sha256_at_visual_review": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_bramble_B.png",
+      "source_sha256": "def5a140d843c1a0f8ecfacf5408bc3f913b6898552bdb9fe8c690fe2fc810f2",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        283,
+        419,
+        535,
+        622
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\bramble_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\bramble.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "376007545e4ed3d79fcd5ce16fd08d2e824b5ffc8055e08e62e2f3cba5a741a2",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\bramble.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "6be722fbc9814f337dfbf77f969b6d8971b87dfcfdfa37411ab6e2d0637eb546",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "ansel",
+      "asset_id": "figure.ansel",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "点状嘴线已恢复成原图的温和浅笑，双眼、鼻部和嘴部可辨；没有增加牙齿或夸大嘴角。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\ansel.png",
+      "production_sha256_at_visual_review": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_ansel_A.png",
+      "source_sha256": "ede519c1f749a61147d30c0b69e7f2d333f68c8401277223ce3818ba448b91ea",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        277,
+        360,
+        545,
+        575
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\ansel_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\ansel.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "24128f4984bef71556c1bd7f8e180f096a8764454ec3b85cee8160f6f262eed3",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\ansel.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "4d2406da014127208dc4fa96d1999bfa8423af4deab3d72b3095419cd9f042ec",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "fennick",
+      "asset_id": "figure.fennick",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "对照修正后的原分辨率参考：双眼自然睁开、瞳孔一致，眉毛放松；鼻子、细胡须和自然闭口表情完整，旧稿半眯眼侧睨未回归。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\fennick.png",
+      "production_sha256_at_visual_review": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\source_overrides\\figure_fennick.png",
+      "source_sha256": "8a49d92accc3bc2d27681051266b92b14e4557d61432c47c617088c218115a76",
+      "reference_is_corrected_source": true,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        269,
+        273,
+        561,
+        508
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\fennick_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\fennick.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "7e1b8495a45a43a6169d3c1d7dba4bede53f463874ce50084b2e4c92f1eaf509",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\fennick.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "a463c0adf6c282fd6dcb87b1f156ae25015953e5cdd16fdfa74c19772142341c",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "gerda",
+      "asset_id": "figure.gerda",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "近远双眼、鼻子和唇形完整，温暖老人微笑及自然笑纹保留。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\gerda.png",
+      "production_sha256_at_visual_review": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_gerda_B.png",
+      "source_sha256": "90c71149893abf1040a6491fbdfb93831be54a24dbf0fe438cf95f473bf4f14d",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        285,
+        434,
+        532,
+        633
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\gerda_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\gerda.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "fc2b186d5128469b3283793e1fcf9af2af852219f3b17974d7f126f012c2e094",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\gerda.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "a6106abfe0a78af47e6378e29ffbf2fff37b7b2fd2e8a337a980c29bac86d994",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "wren",
+      "asset_id": "figure.wren",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "原先过淡的闭口嘴线已恢复；镜框与两眼瞳孔仍分离，鼻部正常，表情自然。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\wren.png",
+      "production_sha256_at_visual_review": "47ae8eafcb7ca8a2ab105d35aec33ef116e168ea56e512edb3bfb0aa2daaf4e6",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_wren_B.png",
+      "source_sha256": "4f0d97c592f0c71eb575010e762862270a192fdfc74657b146f9d00030c39048",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        287,
+        392,
+        545,
+        599
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\wren_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\wren.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "58030044e1d76cd54cc6bfa203366ea67c256ae0521c761c9db93b0ea4941bdf",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\wren.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "755d99ee73d2c0a2181c86ae68b2961ca4eac5e24d1d1cbd734428fcc37fc299",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "orrin",
+      "asset_id": "figure.orrin",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "双眼瞳孔与白眉分离，鼻子清楚；胡须间唇线完整，牙白没有与胡须合成夸大的诡异笑口。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\orrin.png",
+      "production_sha256_at_visual_review": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_orrin_B.png",
+      "source_sha256": "7fc86e91fd58077ab3fbdb8c5af006598108470527d5c5685edb19cfdccc4bc5",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        256,
+        170,
+        575,
+        427
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\orrin_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\orrin.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "ec14c942f70ff9f92895c4c0e7d099ad395451fa1c19cb107073b4e0cc6a4bf0",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\orrin.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "fa39b92eee2abca8a63b128cee6eade1b66600110ed7a52491da11e1b21e8873",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "grit",
+      "asset_id": "figure.grit",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "两眼、鼻子和胡须下的唇部位置可辨；严肃眉形及浓胡须遮嘴来自原图，不是缺失五官。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\grit.png",
+      "production_sha256_at_visual_review": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_grit_A.png",
+      "source_sha256": "fd9e5929592003c587af558a101ae3ab5e89b9277f7cd22bfaa294713fc81cb6",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        301,
+        582,
+        504,
+        745
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\grit_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\grit.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "1be16c9927c19bceb613a52488824d6a1b8998e320304f251c5062ee0c7c690e",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\grit.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "8d1ea9cecdb70cfef5fa171da26b97a6bd1a3c07390a0309cd33eb577ba12504",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "corisande",
+      "asset_id": "figure.corisande",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "被量化吞并的鼻翼/鼻底与自然唇形已恢复；双眼仍正常，浅笑自然，无粉红光圈或额外描边。唇鼻采用经过肤色匹配的局部原图色。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\corisande.png",
+      "production_sha256_at_visual_review": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_corisande_A.png",
+      "source_sha256": "0e619db7135a157ff774a1f164261cb4ce8ef96b010415ad8927f8de1cfdffd9",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        271,
+        295,
+        557,
+        526
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\corisande_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\corisande.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "fb3249c069d8596a435b1bf39bde7a779ae25e7b0d75516d7dd6a2e864fea43c",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\corisande.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "b0a722ac43de349b4cdc0f8697b7e925684f00181e6a1a9b1bea3a25c1d28b0a",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "pell",
+      "asset_id": "figure.pell",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "鼻底与嘴部的橙色块已恢复为原图暖棕阴影和浅笑轮廓；大鼻子、两眼及单片眼镜保持身份特征，未出现新增畸形。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\pell.png",
+      "production_sha256_at_visual_review": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_pell_A.png",
+      "source_sha256": "c670e5b6140492b6f9f39e48431eeb5f4d860bbe5b81e0469e888cc0bc8480be",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        281,
+        391,
+        538,
+        598
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\pell_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\pell.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "441bbaab5f9abf54476b31116a69676160150332972991c789fb41806750e6bb",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\pell.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "6d8696e7dfedddf9a3048f3178854368f3a0a6ced3e8faa64ff189585798a6d4",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "quill",
+      "asset_id": "figure.quill",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "几乎消失的闭口嘴线已恢复，双眼、眼镜与鼻部保留原样；微笑自然，无红色嘴角斑或亮色矩形修补底。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\quill.png",
+      "production_sha256_at_visual_review": "1e41923e6cb049ff5cb6782ef1495875e7bb3276e0350bfed60d05a219f7274b",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_quill_B.png",
+      "source_sha256": "ff16bc0154a8c0a625bc8ae05034f54fa750ce092f52317ed7f98c871ba9d960",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        279,
+        329,
+        554,
+        550
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\quill_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\quill.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "633dc1a355805181a625951e143c59a6ec4310c4712c29de1548304a76f38883",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\quill.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "021c313da1ca6ad6816ce889274862ab5a6b3b861347bb18e2de1900178f4b2a",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "shelly",
+      "asset_id": "figure.shelly",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "两眼瞳孔、鼻底和唇形完整；开朗闭口笑自然，未见五官错位或挑逗式斜笑。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\shelly.png",
+      "production_sha256_at_visual_review": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_shelly_B.png",
+      "source_sha256": "e8283b3c662abc2424a1163cfe3ee85500e821967bc09065d89ef148dedde2de",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals unchanged PNG directly inspected at actual size and nearest4x in previous pass.",
+      "repaired_in_final": false,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        270,
+        423,
+        519,
+        624
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\shelly_3px_face_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\shelly.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "5603ca8685a0c57edacd8db6447078fecac46097f1c7cbae2c317c4c26288fda",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\shelly.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "3d2f1b137d2ba7d478db3210fe7847cc367b2e4e37c287de205cc1390a14c7ce",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "aldous",
+      "asset_id": "figure.aldous",
+      "qa_verdict": "pass",
+      "user_approval": "pending",
+      "observation_zh": "鼻孔的衣服红色误映射已换回原图支持的暗色；两眼、鼻子、灰胡须和下唇完整，成熟表情自然。",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\aldous.png",
+      "production_sha256_at_visual_review": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466",
+      "source_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_aldous_B.png",
+      "source_sha256": "96d5888abb7e3d6599fef2f6d8650aea5ca5d213152f050c951f5d9a01ea5c31",
+      "reference_is_corrected_source": false,
+      "verification_method": "Production hash equals chosen candidate; rebuilt actual-size face visually rechecked against candidate.",
+      "repaired_in_final": true,
+      "geometry": {
+        "eyes": "pass",
+        "nose": "pass",
+        "mouth": "pass_or_natural_occlusion"
+      },
+      "expression": "pass_no_leering_identified",
+      "inspected_physical_crop_xyxy": [
+        266,
+        197,
+        578,
+        449
+      ],
+      "nearest4x_evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\candidates\\v4\\aldous_feature_context_4x.png",
+      "derived_runtime": {
+        "portrait": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\aldous.png",
+          "size": [
+            152,
+            152
+          ],
+          "sha256": "c979ca099c8182149878519aeff93b70385c0fbe4f67e9fd8c0c0404a08182af",
+          "qa_verdict": "pass_framing_and_expression"
+        },
+        "queue_head": {
+          "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\aldous.png",
+          "size": [
+            76,
+            76
+          ],
+          "sha256": "b70f3c32ed3ca1a28b72abada13c2faf55942026b22ee9336c0d3c7ff1c49f9f",
+          "qa_verdict": "pass_framing_and_expression"
+        }
+      },
+      "derived_runtime_observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    }
+  ],
+  "derived_review_evidence": [
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_01.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_02.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_03.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_04.png"
+  ]
+}

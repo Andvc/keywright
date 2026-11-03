@@ -1,0 +1,51 @@
+{
+  "id": "item.keyhold_codex",
+  "category": "item",
+  "title": "Keyhold Codex",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/keyhold_codex.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "A",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_keyhold_codex_A.png",
+  "original_source_sha256": "4e0a78f348afbd2fcf1bf8b30243177ae118deb6f9cf0446f2c3e3f658086eee",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "24bdc88250e86d87eadf636f3f0bca3fd85995829ff80ee03e15f6064c20d425",
+  "colours": 14,
+  "crop": [
+    138,
+    32,
+    1132,
+    1214
+  ],
+  "source_transform": {
+    "scale_x": 0.10160965794768612,
+    "scale_y": 0.10152284263959391,
+    "translate_x": -1.0221327967806833,
+    "translate_y": 0.751269035532995
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "4e0a78f348afbd2fcf1bf8b30243177ae118deb6f9cf0446f2c3e3f658086eee",
+  "spec_sha256": "42b67250160a9111aff50193cbb5723de81f9b6f8f6f3222aeab417cff0376e8",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

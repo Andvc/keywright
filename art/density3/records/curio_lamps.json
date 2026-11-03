@@ -1,0 +1,51 @@
+{
+  "id": "curio.lamps",
+  "category": "curio",
+  "title": "Gallery Lamps",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/lamps.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_lamps_C.png",
+  "original_source_sha256": "8296397895304244e7b9b8db375a80eef1464fd92a0658fae2359f769f18ac36",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "95c91b0236a8b1829d5a7b44a95896e77a0d1c897ce0da6660c72e4816fea478",
+  "colours": 9,
+  "crop": [
+    90,
+    48,
+    1164,
+    1185
+  ],
+  "source_transform": {
+    "scale_x": 0.09124767225325885,
+    "scale_y": 0.09146877748460862,
+    "translate_x": -1.2122905027932962,
+    "translate_y": -0.39050131926121345
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "8296397895304244e7b9b8db375a80eef1464fd92a0658fae2359f769f18ac36",
+  "spec_sha256": "70086b3d71874332c95ed09304be863f4cafb989dc84e1c9d11a17ae4c58fa9a",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

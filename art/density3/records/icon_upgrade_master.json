@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.master",
+  "category": "icon_upgrade",
+  "title": "Master Restorer",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_master.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "D",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_master_D.png",
+  "original_source_sha256": "1bc866c7839aa2d073455b8025310f4c3fbbf1f277376699f50701db0bf418ce",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d7d8a6494b1eabcfe6fd22a7910fe58e11a0fb41a07d0da539784570cdd3850e",
+  "colours": 7,
+  "crop": [
+    43,
+    200,
+    1212,
+    1136
+  ],
+  "source_transform": {
+    "scale_x": 0.07527801539777587,
+    "scale_y": 0.07478632478632478,
+    "translate_x": 0.7630453378956372,
+    "translate_y": -1.9572649572649574
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "1bc866c7839aa2d073455b8025310f4c3fbbf1f277376699f50701db0bf418ce",
+  "spec_sha256": "2c3ea86ef7a0ccd3dacc6c27e5677cba75dc5aa29c9b2c04e09b49dca02cea01",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

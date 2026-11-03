@@ -1,0 +1,51 @@
+{
+  "id": "sky.night",
+  "category": "sky",
+  "title": "Night sky",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/sky/night.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/sky_night_C.png",
+  "original_source_sha256": "13f69c5c72d98571333a580cbe7908a3b8482e0bc5f35f1e5683b9cf652cd206",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "28c24c1dddff6d8fc48cb961654b57244b8b953d90f7193c84df01163b62c776",
+  "colours": 5,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "13f69c5c72d98571333a580cbe7908a3b8482e0bc5f35f1e5683b9cf652cd206",
+  "spec_sha256": "5e3f65aba79b146569c184b333ad9b66b0e28eec20acd70dbeb237fd01df5498",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

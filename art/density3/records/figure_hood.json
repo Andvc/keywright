@@ -1,0 +1,51 @@
+{
+  "id": "figure.hood",
+  "category": "figure",
+  "title": "The Hooded Woman",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/hood.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_hood_A.png",
+  "original_source_sha256": "76a630b8c418c986b1eed9c4949dc531cd836b299ce37fb1b65a7a226d172e79",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+  "colours": 7,
+  "crop": [
+    134,
+    31,
+    881,
+    1501
+  ],
+  "source_transform": {
+    "scale_x": 0.6746987951807228,
+    "scale_y": 0.6748299319727891,
+    "translate_x": 41.59036144578313,
+    "translate_y": 267.08027210884353
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "76a630b8c418c986b1eed9c4949dc531cd836b299ce37fb1b65a7a226d172e79",
+  "spec_sha256": "eeaad0c80d92704d30b69bd79c4ced8b6e5a697c94de234426c4e03cede06271",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

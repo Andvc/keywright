@@ -1,0 +1,1012 @@
+{
+  "reviewer": "face_audit_b",
+  "date": "2026-11-04",
+  "stage": "Final rendered game screenshot face/UI correspondence review",
+  "reviewed_screenshot_count": 19,
+  "screenshot_dimensions": [
+    2560,
+    1440
+  ],
+  "counts": {
+    "pass": 18,
+    "watch": 1
+  },
+  "new_rendering_regressions": 0,
+  "visual_inspection": "All five legible contact sheets were actually viewed, covering every assigned figure; original Isolde full screenshot also viewed.",
+  "pixel_correspondence": "For each of 19 captures, all fully opaque pixels of the main face crop, portrait, and queue head match the corresponding current asset RGB exactly (57/57 comparisons). This supplements, not replaces, the actual visual inspection.",
+  "remaining_watch": [
+    "figure.kit"
+  ],
+  "known_legacy_limit": "Skrae wide ear tips are cropped in UI portraits by the unchanged legacy head box; full figure ears remain intact.",
+  "approval": "No user approval or upload permission is implied. Full user art review is still pending.",
+  "items": [
+    {
+      "id": "figure.vexis",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_vexis.png",
+      "screenshot_sha256": "d327cbdca140cf5535ac9e397c6fa05164a0cb6e2f0d85a5a3f1408c77a2a924",
+      "output_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        407,
+        501,
+        520,
+        604
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 10439,
+          "equal_opaque_pixels": 10439,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 15433,
+          "equal_opaque_pixels": 15433,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3873,
+          "equal_opaque_pixels": 3873,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\vexis_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。恢复的笑弧和小牙在真实游戏中可读，没有扩大为大黑咧嘴。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_01.png"
+    },
+    {
+      "id": "figure.malbranche",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_malbranche.png",
+      "screenshot_sha256": "77979b8594a8379ce05457f3858a67e1173383fe30880df63fad2104d5c45e6f",
+      "output_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        381,
+        436,
+        497,
+        578
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 15689,
+          "equal_opaque_pixels": 15689,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 12910,
+          "equal_opaque_pixels": 12910,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3233,
+          "equal_opaque_pixels": 3233,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\malbranche_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。牙弓修复及鼻缘紫粉格清理均在截图中保留，骷髅解剖仍为原意图。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_01.png"
+    },
+    {
+      "id": "figure.skrae",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_skrae.png",
+      "screenshot_sha256": "12f342761ebc2869f45c0126cd7841af4e2b6a99308c08b04b5a5e58ad78c332",
+      "output_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        347,
+        698,
+        479,
+        843
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 17737,
+          "equal_opaque_pixels": 17737,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 14230,
+          "equal_opaque_pixels": 14230,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3562,
+          "equal_opaque_pixels": 3562,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\skrae_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。全身图双耳完整；UI 头像仍有已确认与旧版一致的耳尖裁切，属于既有取景限制。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_01.png"
+    },
+    {
+      "id": "figure.ermine",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_ermine.png",
+      "screenshot_sha256": "86073b0d89efa0ed2fcd7266fa1d414ec15a2231cf1c6c822f12cf951f42e94e",
+      "output_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        368,
+        438,
+        500,
+        579
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 17811,
+          "equal_opaque_pixels": 17811,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 13245,
+          "equal_opaque_pixels": 13245,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3312,
+          "equal_opaque_pixels": 3312,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\ermine_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_01.png"
+    },
+    {
+      "id": "figure.oriel",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_oriel.png",
+      "screenshot_sha256": "fc15a93f98e2000184a7dce962c2ba70a4da1901debc05dcba9bf43d7b9d47c2",
+      "output_sha256": "f0fcdd62f9f452f34a84e1d2696df98f64c26060361c292709dfa0bb84d93b07",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        376,
+        547,
+        483,
+        666
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 12733,
+          "equal_opaque_pixels": 12733,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 15567,
+          "equal_opaque_pixels": 15567,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3883,
+          "equal_opaque_pixels": 3883,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\oriel_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_02.png"
+    },
+    {
+      "id": "figure.silas",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_silas.png",
+      "screenshot_sha256": "9ca6ad8465d58dde2747ea73a7542bfe9af495a2e72cb045906653e0002e16d5",
+      "output_sha256": "4afc2aa68b015a416466671734eb95d2e86012041ccc2a3efdcc3a7d09840f61",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        350,
+        540,
+        491,
+        684
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 17652,
+          "equal_opaque_pixels": 17652,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 14045,
+          "equal_opaque_pixels": 14045,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3499,
+          "equal_opaque_pixels": 3499,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\silas_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。源图修正后的收敛小笑与较完整双眼在真实游戏及两种头像尺寸中保留。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_02.png"
+    },
+    {
+      "id": "figure.aldo",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_aldo.png",
+      "screenshot_sha256": "3488fa66c25466af7249ccb2653d8753fc7f00dca3626554620c082ecc0ba097",
+      "output_sha256": "38b7f6ce5b7568f1ff8e8c5ae8bb637f86f7cc14f6249241a33e1f00b8259010",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        352,
+        582,
+        486,
+        734
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 18739,
+          "equal_opaque_pixels": 18739,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 14724,
+          "equal_opaque_pixels": 14724,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3678,
+          "equal_opaque_pixels": 3678,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\aldo_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_02.png"
+    },
+    {
+      "id": "figure.maw",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_maw.png",
+      "screenshot_sha256": "85e774330c15450c755f8f530b7315994e5aa1a1737536edc59af74d12639b52",
+      "output_sha256": "161a50e1b6ed07296687f3f11d570ed2547abb961fae727c9a06a9e8037529c5",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        337,
+        409,
+        484,
+        571
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 23244,
+          "equal_opaque_pixels": 23244,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 15628,
+          "equal_opaque_pixels": 15628,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3910,
+          "equal_opaque_pixels": 3910,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\maw_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_02.png"
+    },
+    {
+      "id": "figure.bram",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_bram.png",
+      "screenshot_sha256": "1d2773aaa203e958e2fcd39b62e5958554c551ff9200325be1fec5f80d8df409",
+      "output_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        345,
+        595,
+        488,
+        731
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 18402,
+          "equal_opaque_pixels": 18402,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 14124,
+          "equal_opaque_pixels": 14124,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3535,
+          "equal_opaque_pixels": 3535,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\bram_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_03.png"
+    },
+    {
+      "id": "figure.vane",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_vane.png",
+      "screenshot_sha256": "dc366e253292860e11893714def5998b80d677095cc485082a8be5113849f130",
+      "output_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        357,
+        438,
+        487,
+        580
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 15621,
+          "equal_opaque_pixels": 15621,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 10787,
+          "equal_opaque_pixels": 10787,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 2704,
+          "equal_opaque_pixels": 2704,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\vane_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_03.png"
+    },
+    {
+      "id": "figure.hood",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_hood.png",
+      "screenshot_sha256": "79cec095af1834f50e071ab04acf472c5d7415107556a043153366844e5cb2f5",
+      "output_sha256": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        368,
+        568,
+        485,
+        688
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 14040,
+          "equal_opaque_pixels": 14040,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 14698,
+          "equal_opaque_pixels": 14698,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3677,
+          "equal_opaque_pixels": 3677,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\hood_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_03.png"
+    },
+    {
+      "id": "figure.nim",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_nim.png",
+      "screenshot_sha256": "4b01a795cd4e5bd8a114280b0f563eb511026b10face226ce9e4ff107bc80595",
+      "output_sha256": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        395,
+        620,
+        504,
+        744
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 13030,
+          "equal_opaque_pixels": 13030,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 15453,
+          "equal_opaque_pixels": 15453,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3861,
+          "equal_opaque_pixels": 3861,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\nim_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_03.png"
+    },
+    {
+      "id": "figure.stranger",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_stranger.png",
+      "screenshot_sha256": "c02bf9b9b8dbd8fd848eab37eaa55535ae788082190f770596e239261e46a028",
+      "output_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        385,
+        435,
+        515,
+        586
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 18259,
+          "equal_opaque_pixels": 18259,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 16297,
+          "equal_opaque_pixels": 16297,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 4079,
+          "equal_opaque_pixels": 4079,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\stranger_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_04.png"
+    },
+    {
+      "id": "figure.kit",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_kit.png",
+      "screenshot_sha256": "8b699219be71a01f5cc0212e96243a32d8524b548b2def82dce5c3fe5a90b28d",
+      "output_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        355,
+        615,
+        482,
+        738
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 13941,
+          "equal_opaque_pixels": 13941,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 13597,
+          "equal_opaque_pixels": 13597,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3396,
+          "equal_opaque_pixels": 3396,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\kit_game_face.png",
+      "review_verdict": "watch",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。画面左眼眼白分离度弱的既有 watch 保留；这不是运行时丢眼，小头像的双眼和自然小笑仍可读。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_04.png"
+    },
+    {
+      "id": "figure.hesk",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_hesk.png",
+      "screenshot_sha256": "f0e8b76bbcab8fd0dfc3f5be6ac574ae4e02808a798a6aa6962616067d012508",
+      "output_sha256": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        368,
+        583,
+        512,
+        738
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 21546,
+          "equal_opaque_pixels": 21546,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 15510,
+          "equal_opaque_pixels": 15510,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3877,
+          "equal_opaque_pixels": 3877,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\hesk_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_04.png"
+    },
+    {
+      "id": "figure.rosa",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_rosa.png",
+      "screenshot_sha256": "9ea036af14744d77e675a2b209fa74a2f8bf1a18b0030b1fed43b16bc733840d",
+      "output_sha256": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        364,
+        596,
+        492,
+        725
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 14718,
+          "equal_opaque_pixels": 14718,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 15681,
+          "equal_opaque_pixels": 15681,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3911,
+          "equal_opaque_pixels": 3911,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\rosa_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_04.png"
+    },
+    {
+      "id": "figure.isolde",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_isolde.png",
+      "screenshot_sha256": "558f8797fd154d83506d08b005ad3b430cfff2a6d654a40ab0011f3f44333465",
+      "output_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        360,
+        556,
+        490,
+        683
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 14771,
+          "equal_opaque_pixels": 14771,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 12005,
+          "equal_opaque_pixels": 12005,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 2993,
+          "equal_opaque_pixels": 2993,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\isolde_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。修复后的深眼区/浅眼白与自然嘴型在游戏中保留，未恢复成首版无深瞳黄眼。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_05.png"
+    },
+    {
+      "id": "figure.mara",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_mara.png",
+      "screenshot_sha256": "645a0bf15401884416e368a05cf028390c520f43b5e7a3962a5370673544593d",
+      "output_sha256": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        359,
+        569,
+        487,
+        684
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 13063,
+          "equal_opaque_pixels": 13063,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 13515,
+          "equal_opaque_pixels": 13515,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3378,
+          "equal_opaque_pixels": 3378,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\mara_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_05.png"
+    },
+    {
+      "id": "figure.king",
+      "screenshot": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_king.png",
+      "screenshot_sha256": "2b772a521c85c9f7efcef88580a3ab36a6ea993323967c35bd2843790063f390",
+      "output_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+      "screenshot_size": [
+        2560,
+        1440
+      ],
+      "main_face_screen_bbox": [
+        353,
+        558,
+        493,
+        694
+      ],
+      "portrait_screen_bbox": [
+        1164,
+        456,
+        1316,
+        608
+      ],
+      "queue_screen_bbox": [
+        1562,
+        494,
+        1638,
+        570
+      ],
+      "pixel_comparison": {
+        "main_face": {
+          "opaque_pixels": 17849,
+          "equal_opaque_pixels": 17849,
+          "exact_opaque_rgb_match": true
+        },
+        "portrait": {
+          "opaque_pixels": 14497,
+          "equal_opaque_pixels": 14497,
+          "exact_opaque_rgb_match": true
+        },
+        "queue": {
+          "opaque_pixels": 3623,
+          "equal_opaque_pixels": 3623,
+          "exact_opaque_rgb_match": true
+        }
+      },
+      "inspection_panel": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\king_game_face.png",
+      "review_verdict": "pass",
+      "rendering_verdict": "pass_no_new_regression",
+      "review_note_zh": "实际游戏截图中的主脸、152px 肖像与 76px 队列头像均对应正确角色；五官与已审正式资产一致，未见运行时新增缺失、畸形或表情变坏。",
+      "visually_inspected": true,
+      "inspection_method": "Actual screenshot native-size main face + native 152px/76px UI crops, with full 2560x1440 capture shown at 25% for scene/identity context.",
+      "inspection_contact_sheet": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\final_game_faces\\game_faces_05.png"
+    }
+  ]
+}

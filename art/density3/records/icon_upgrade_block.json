@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.block",
+  "category": "icon_upgrade",
+  "title": "Auction Block",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_block.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_block_A.png",
+  "original_source_sha256": "7338488b9686b61d50c2e19b026533a3ddb7b3800e5d923c4d5c759a15d80708",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6eab998569a02410c51d44ceb9ec81629f26d0d9d83306567c4b9b2db8225756",
+  "colours": 12,
+  "crop": [
+    60,
+    110,
+    1214,
+    1153
+  ],
+  "source_transform": {
+    "scale_x": 0.07625649913344887,
+    "scale_y": 0.07670182166826463,
+    "translate_x": -0.575389948006932,
+    "translate_y": -0.43720038350910784
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "7338488b9686b61d50c2e19b026533a3ddb7b3800e5d923c4d5c759a15d80708",
+  "spec_sha256": "d3462d63c5acd0af35c375e8c43ba1bea5fa058e49e21905727beb3b15ae010d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

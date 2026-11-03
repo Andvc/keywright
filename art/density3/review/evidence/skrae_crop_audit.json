@@ -1,0 +1,28 @@
+{
+  "legacy_crop_native": [
+    29,
+    48,
+    67,
+    86
+  ],
+  "new_crop_native": [
+    29,
+    48,
+    67,
+    86
+  ],
+  "same_crop": true,
+  "legacy_figure_bounds": [
+    17,
+    48,
+    79,
+    160
+  ],
+  "new_figure_physical_bounds": [
+    136,
+    385,
+    631,
+    1279
+  ],
+  "finding": "Both existing and new UI head slots crop the wide ear tips; full figure ears remain intact. This is legacy portrait framing, not a new density regression."
+}

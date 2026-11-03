@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.night",
+  "category": "icon_upgrade",
+  "title": "Night Market",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_night.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_night_C.png",
+  "original_source_sha256": "7c17ceb7a0151525768da118fde8aa9a08dbfcd8aacdd7756b9df67375660a18",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "62c33091f7f3577073c1a71766bdd8d393ce3ccfd76c9b29099675dcb6977c54",
+  "colours": 11,
+  "crop": [
+    67,
+    24,
+    1188,
+    1190
+  ],
+  "source_transform": {
+    "scale_x": 0.07582515611061552,
+    "scale_y": 0.07547169811320754,
+    "translate_x": -0.08028545941123966,
+    "translate_y": 2.188679245283019
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "7c17ceb7a0151525768da118fde8aa9a08dbfcd8aacdd7756b9df67375660a18",
+  "spec_sha256": "6c956c65ad6b802c41f83c23bf1538e2600b86fe6653ec11c2f3f1bb5ed0a780",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

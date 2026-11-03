@@ -1,0 +1,51 @@
+{
+  "id": "item.ambrosia",
+  "category": "item",
+  "title": "Ambrosia",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/ambrosia.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_ambrosia_C.png",
+  "original_source_sha256": "b4c5a3e1ee15bf225b33e65ef625a4886871c05cd03f872390a936c54f8651fe",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "431ac0799ae3969d87c36c8fbe10c2dd6d00fbed78a4824b6b20e4992cc4b851",
+  "colours": 6,
+  "crop": [
+    218,
+    26,
+    1053,
+    1228
+  ],
+  "source_transform": {
+    "scale_x": 0.09940119760479042,
+    "scale_y": 0.09983361064891846,
+    "translate_x": 0.33053892215568936,
+    "translate_y": 1.4043261231281199
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "b4c5a3e1ee15bf225b33e65ef625a4886871c05cd03f872390a936c54f8651fe",
+  "spec_sha256": "065f112e05a2af417a6b8329498b6adc7d7c9c85221ab016f44e84af61f5af9f",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

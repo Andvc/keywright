@@ -1,0 +1,1011 @@
+{
+  "reviewer": "face_audit_a",
+  "date": "2026-11-04",
+  "stage": "final_game_rendered_figure_fixtures",
+  "scope": "19 final 2560x1440 figure_<id>.png captures; native rendered face,152px portrait,76px queue head, full screenshot context and character-name correspondence.",
+  "face_qa_verdict": "pass",
+  "user_approval": "pending",
+  "counts": {
+    "captures_checked": 19,
+    "face_pass": 19,
+    "ui_identity_pass": 19,
+    "baseline_ui_limitations": 1,
+    "new_art_fixes_required": 0
+  },
+  "summary_zh": "19张实际游戏立绘均保留最终五官与自然表情，38个实际UI头像的不透明像素全部与最终PNG一致。Orrin仅帽子右上沿被场景悬挂物遮挡，眼鼻口完全一致。Gerda长姓名超出对白框右缘，是确认的既有UI限制，无新增美术缺陷。",
+  "remaining_issues": [
+    {
+      "id": "gerda",
+      "kind": "ui_caption_overflow",
+      "severity": "minor",
+      "baseline": true,
+      "introduced_by_density_change": false,
+      "baseline_confirmation": "Root confirmed unchanged SellerView BubbleW=288 and name size24; only texture loading changed.",
+      "evidence": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\gerda_name_context.png",
+      "observation_zh": "Gerda the Matchmaker 的最后部分越过对白面板右边框，脸部和头像正常；作为原有UI基线限制保留说明。"
+    }
+  ],
+  "known_render_occlusion": [
+    {
+      "id": "orrin",
+      "screen_xyxy": [
+        561,
+        399,
+        594,
+        440
+      ],
+      "pixels": 834,
+      "part": "upper-right hat brim",
+      "facial_features_obscured": false
+    }
+  ],
+  "limitations_zh": [
+    "76px队列头像中的嘴线、镜框和胡须会自然简化为少数像素，完整表情以立绘和152px卡片为准。"
+  ],
+  "source_and_runtime_assets_modified": false,
+  "visual_proof_pages": [
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_01.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_02.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_03.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_04.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_05.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_06.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\game_faces_07.png"
+  ],
+  "items": [
+    {
+      "id": "tam",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_tam.png",
+      "screenshot_sha256": "45e08d7de1655045417324458bff72cebb550c341ea9a1d743ca728faa78caad",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\tam.png",
+      "production_sha256": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+      "figure_canvas_origin_in_capture": [
+        32,
+        32
+      ],
+      "screen_face_crop_xyxy": [
+        338,
+        669,
+        526,
+        820
+      ],
+      "source_face_crop_xyxy": [
+        306,
+        637,
+        494,
+        788
+      ],
+      "opaque_face_pixels_compared": 18847,
+      "opaque_face_rgb_exact_matches": 18847,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\tam_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 12487,
+          "exact_matches": 12487,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3127,
+          "exact_matches": 3127,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Little Tam",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Little Tam 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "penn",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_penn.png",
+      "screenshot_sha256": "c8986a066987eff69607dbf94f7a5b2998c250b3d51ec63f76b254e96f5ed65b",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\penn.png",
+      "production_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        316,
+        640,
+        567,
+        842
+      ],
+      "source_face_crop_xyxy": [
+        284,
+        416,
+        535,
+        618
+      ],
+      "opaque_face_pixels_compared": 32110,
+      "opaque_face_rgb_exact_matches": 32110,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\penn_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 14322,
+          "exact_matches": 14322,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3589,
+          "exact_matches": 3589,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Widow Penn",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Widow Penn 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "hob",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_hob.png",
+      "screenshot_sha256": "9be3fc8b220797f6780b58af2b4d69e5b3589dce86faa09da70c176395a56525",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\hob.png",
+      "production_sha256": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        302,
+        531,
+        584,
+        758
+      ],
+      "source_face_crop_xyxy": [
+        270,
+        307,
+        552,
+        534
+      ],
+      "opaque_face_pixels_compared": 49106,
+      "opaque_face_rgb_exact_matches": 49106,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\hob_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 16063,
+          "exact_matches": 16063,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 4019,
+          "exact_matches": 4019,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Hob the Farmer",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Hob the Farmer 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "mags",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_mags.png",
+      "screenshot_sha256": "05257000e21fffa68eb48efe3699d21ac2791de0f6e681ef3d091e415f27ce03",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\mags.png",
+      "production_sha256": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        317,
+        599,
+        579,
+        810
+      ],
+      "source_face_crop_xyxy": [
+        285,
+        375,
+        547,
+        586
+      ],
+      "opaque_face_pixels_compared": 37299,
+      "opaque_face_rgb_exact_matches": 37299,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\mags_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 14967,
+          "exact_matches": 14967,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3748,
+          "exact_matches": 3748,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Mags the Innkeeper",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Mags the Innkeeper 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "dorrin",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_dorrin.png",
+      "screenshot_sha256": "e027b5b79696c5f950f26387870d15fd63821c012ed286bad53aeaf7d647cfbe",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\dorrin.png",
+      "production_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        312,
+        561,
+        585,
+        781
+      ],
+      "source_face_crop_xyxy": [
+        280,
+        337,
+        553,
+        557
+      ],
+      "opaque_face_pixels_compared": 37386,
+      "opaque_face_rgb_exact_matches": 37386,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\dorrin_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 13759,
+          "exact_matches": 13759,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3437,
+          "exact_matches": 3437,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Dorrin the Delver",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Dorrin the Delver 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "snikkit",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_snikkit.png",
+      "screenshot_sha256": "86c15fac1ca40da2650fd28d09345de0ef270f9e465134e1c920bc9a56abcd5a",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\snikkit.png",
+      "production_sha256": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+      "figure_canvas_origin_in_capture": [
+        32,
+        -32
+      ],
+      "screen_face_crop_xyxy": [
+        352,
+        664,
+        522,
+        801
+      ],
+      "source_face_crop_xyxy": [
+        320,
+        696,
+        490,
+        833
+      ],
+      "opaque_face_pixels_compared": 19854,
+      "opaque_face_rgb_exact_matches": 19854,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\snikkit_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 16459,
+          "exact_matches": 16459,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 4107,
+          "exact_matches": 4107,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Snikkit the Goblin",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Snikkit the Goblin 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "wenna",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_wenna.png",
+      "screenshot_sha256": "b1f5e38a3fca7444f530be3b583326ceac5ad8c9f329b0941b95abb8d83f392d",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\wenna.png",
+      "production_sha256": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        287,
+        513,
+        577,
+        747
+      ],
+      "source_face_crop_xyxy": [
+        255,
+        289,
+        545,
+        523
+      ],
+      "opaque_face_pixels_compared": 48546,
+      "opaque_face_rgb_exact_matches": 48546,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\wenna_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 15462,
+          "exact_matches": 15462,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3865,
+          "exact_matches": 3865,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Wenna the Huntress",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Wenna the Huntress 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "bramble",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_bramble.png",
+      "screenshot_sha256": "78d1b05c78a03c512bf95fc26a97a8fe4a3f0620024616f52913f6582d4470d7",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\bramble.png",
+      "production_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        315,
+        643,
+        567,
+        846
+      ],
+      "source_face_crop_xyxy": [
+        283,
+        419,
+        535,
+        622
+      ],
+      "opaque_face_pixels_compared": 37866,
+      "opaque_face_rgb_exact_matches": 37866,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\bramble_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 16451,
+          "exact_matches": 16451,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 4115,
+          "exact_matches": 4115,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Mother Bramble",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Mother Bramble 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "ansel",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_ansel.png",
+      "screenshot_sha256": "e4408fc415f614a2d4c3cb1956fd3a17626a5b7b89d21e64cc4ba4ad5372f7c2",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\ansel.png",
+      "production_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        309,
+        584,
+        577,
+        799
+      ],
+      "source_face_crop_xyxy": [
+        277,
+        360,
+        545,
+        575
+      ],
+      "opaque_face_pixels_compared": 35604,
+      "opaque_face_rgb_exact_matches": 35604,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\ansel_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 13664,
+          "exact_matches": 13664,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3423,
+          "exact_matches": 3423,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Brother Ansel",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Brother Ansel 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "fennick",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_fennick.png",
+      "screenshot_sha256": "3193b90b37f26cc2bb33f9ef5d5f1c40b7c6607d07fb90e2c55da389090fb8c5",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\fennick.png",
+      "production_sha256": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        301,
+        497,
+        593,
+        732
+      ],
+      "source_face_crop_xyxy": [
+        269,
+        273,
+        561,
+        508
+      ],
+      "opaque_face_pixels_compared": 49221,
+      "opaque_face_rgb_exact_matches": 49221,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\fennick_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 14675,
+          "exact_matches": 14675,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3668,
+          "exact_matches": 3668,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Fennick the Smuggler",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Fennick the Smuggler 对应；已审五官和自然表情在实际渲染中保留。 使用修正后的自然表情，没有恢复旧稿的侧睨坏笑。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "gerda",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_gerda.png",
+      "screenshot_sha256": "684bf92fd1b2cafba926022e7eb27e467106bc4725029e7cd376d6fff947259f",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\gerda.png",
+      "production_sha256": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        317,
+        658,
+        564,
+        857
+      ],
+      "source_face_crop_xyxy": [
+        285,
+        434,
+        532,
+        633
+      ],
+      "opaque_face_pixels_compared": 34175,
+      "opaque_face_rgb_exact_matches": 34175,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\gerda_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 15150,
+          "exact_matches": 15150,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3793,
+          "exact_matches": 3793,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass_with_baseline_ui_limitation",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "baseline_name_overflow",
+      "visible_caption_name": "Gerda the Matchmaker",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Gerda the Matchmaker 对应；已审五官和自然表情在实际渲染中保留。 姓名身份正确，但长标题超出对白框右边缘；主代理确认这是原有SellerView固定对白宽度/姓名字号造成的基线UI限制，本次3px处理未引入，也未遮住脸部。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "wren",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_wren.png",
+      "screenshot_sha256": "f89587d559add6c558b9b0b5aed2713c28b7935ae8f385975663e45234a18f21",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\wren.png",
+      "production_sha256": "47ae8eafcb7ca8a2ab105d35aec33ef116e168ea56e512edb3bfb0aa2daaf4e6",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        319,
+        616,
+        577,
+        823
+      ],
+      "source_face_crop_xyxy": [
+        287,
+        392,
+        545,
+        599
+      ],
+      "opaque_face_pixels_compared": 35933,
+      "opaque_face_rgb_exact_matches": 35933,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\wren_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 13271,
+          "exact_matches": 13271,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3315,
+          "exact_matches": 3315,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Wren the Apprentice",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Wren the Apprentice 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "orrin",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_orrin.png",
+      "screenshot_sha256": "b380c84272741e3ce416ee075e65fe90bb5283d460759a27c74952df872c643c",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\orrin.png",
+      "production_sha256": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        288,
+        394,
+        607,
+        651
+      ],
+      "source_face_crop_xyxy": [
+        256,
+        170,
+        575,
+        427
+      ],
+      "opaque_face_pixels_compared": 65682,
+      "opaque_face_rgb_exact_matches": 64848,
+      "exact_match_fraction": 0.9873024572942358,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\orrin_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 16395,
+          "exact_matches": 16395,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 4096,
+          "exact_matches": 4096,
+          "fraction": 1.0
+        }
+      },
+      "broad_crop_mismatch_bounds_xyxy": [
+        561,
+        399,
+        594,
+        440
+      ],
+      "tight_facial_features_check": {
+        "screen_xyxy": [
+          410,
+          445,
+          505,
+          557
+        ],
+        "source_xyxy": [
+          378,
+          221,
+          473,
+          333
+        ],
+        "opaque_pixels_compared": 10329,
+        "exact_matches": 10329,
+        "fraction": 1.0
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Archmage Orrin",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Archmage Orrin 对应；已审五官和自然表情在实际渲染中保留。 宽头部检查框内834个像素是悬挂金色架/链遮到帽子右上沿；脸部10329个不透明像素完全一致，没有遮住眼鼻口。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "grit",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_grit.png",
+      "screenshot_sha256": "9906a36f474344d0674f0cf16ce18552401fdd83c48b79ae6aed1669ebddb86b",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\grit.png",
+      "production_sha256": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+      "figure_canvas_origin_in_capture": [
+        32,
+        96
+      ],
+      "screen_face_crop_xyxy": [
+        333,
+        678,
+        536,
+        841
+      ],
+      "source_face_crop_xyxy": [
+        301,
+        582,
+        504,
+        745
+      ],
+      "opaque_face_pixels_compared": 23487,
+      "opaque_face_rgb_exact_matches": 23487,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\grit_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 14795,
+          "exact_matches": 14795,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3702,
+          "exact_matches": 3702,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Grit the Miner",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Grit the Miner 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "corisande",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_corisande.png",
+      "screenshot_sha256": "35f0e229c79ddbc12d91a010b95f559f49ca93fcf7b4da7ae4d683743ceb2151",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\corisande.png",
+      "production_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        303,
+        519,
+        589,
+        750
+      ],
+      "source_face_crop_xyxy": [
+        271,
+        295,
+        557,
+        526
+      ],
+      "opaque_face_pixels_compared": 36144,
+      "opaque_face_rgb_exact_matches": 36144,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\corisande_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 12361,
+          "exact_matches": 12361,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3092,
+          "exact_matches": 3092,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Lady Corisande",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Lady Corisande 对应；已审五官和自然表情在实际渲染中保留。 鼻翼/鼻底和唇形修复可见，没有再次被缩减吞掉。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "pell",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_pell.png",
+      "screenshot_sha256": "28f1e97ebd68e430eeb59bab853a108c4df5411db3a601a1c4dab00c8fdc8687",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\pell.png",
+      "production_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        313,
+        615,
+        570,
+        822
+      ],
+      "source_face_crop_xyxy": [
+        281,
+        391,
+        538,
+        598
+      ],
+      "opaque_face_pixels_compared": 29163,
+      "opaque_face_rgb_exact_matches": 29163,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\pell_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 12462,
+          "exact_matches": 12462,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3106,
+          "exact_matches": 3106,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Pell the Pawnbroker",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Pell the Pawnbroker 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "quill",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_quill.png",
+      "screenshot_sha256": "19203269d76d7267328b1e5e90f4678b5b12677c9ce0c1aa68e0a70b69be952d",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\quill.png",
+      "production_sha256": "1e41923e6cb049ff5cb6782ef1495875e7bb3276e0350bfed60d05a219f7274b",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        311,
+        553,
+        586,
+        774
+      ],
+      "source_face_crop_xyxy": [
+        279,
+        329,
+        554,
+        550
+      ],
+      "opaque_face_pixels_compared": 33897,
+      "opaque_face_rgb_exact_matches": 33897,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\quill_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 12796,
+          "exact_matches": 12796,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3199,
+          "exact_matches": 3199,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Quill the Archivist",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Quill the Archivist 对应；已审五官和自然表情在实际渲染中保留。 修复的闭口嘴线可见，眼镜与眼睛仍正常。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "shelly",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_shelly.png",
+      "screenshot_sha256": "0b840ecd3ec2c883ebe095e6bd3480798d6a8701854253e7b4525d53c5aafe62",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\shelly.png",
+      "production_sha256": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        302,
+        647,
+        551,
+        848
+      ],
+      "source_face_crop_xyxy": [
+        270,
+        423,
+        519,
+        624
+      ],
+      "opaque_face_pixels_compared": 34397,
+      "opaque_face_rgb_exact_matches": 34397,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\shelly_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 14075,
+          "exact_matches": 14075,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3508,
+          "exact_matches": 3508,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Shelly the Mudlark",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Shelly the Mudlark 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    },
+    {
+      "id": "aldous",
+      "screenshot_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_game\\figure_aldous.png",
+      "screenshot_sha256": "f1d3adec616d108a99d7c91960cfd93b7eed245752bdb91d0127a8a57a1eeaae",
+      "production_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\art\\density3\\assets\\figures\\aldous.png",
+      "production_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466",
+      "figure_canvas_origin_in_capture": [
+        32,
+        224
+      ],
+      "screen_face_crop_xyxy": [
+        298,
+        421,
+        610,
+        673
+      ],
+      "source_face_crop_xyxy": [
+        266,
+        197,
+        578,
+        449
+      ],
+      "opaque_face_pixels_compared": 51957,
+      "opaque_face_rgb_exact_matches": 51957,
+      "exact_match_fraction": 1.0,
+      "proof_file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\final_game_proofs\\aldous_game_proof.png",
+      "rendered_ui_exact_checks": {
+        "portrait": {
+          "opaque_pixels_compared": 15896,
+          "exact_matches": 15896,
+          "fraction": 1.0
+        },
+        "queue": {
+          "opaque_pixels_compared": 3972,
+          "exact_matches": 3972,
+          "fraction": 1.0
+        }
+      },
+      "qa_verdict": "pass",
+      "face_qa_verdict": "pass",
+      "ui_identity_correspondence": "pass",
+      "ui_layout": "no_issue_seen_in_fixture",
+      "visible_caption_name": "Sir Aldous",
+      "observation_zh": "游戏立绘、152px卡片、76px队列头像与角色 Sir Aldous 对应；已审五官和自然表情在实际渲染中保留。",
+      "user_approval": "pending",
+      "full_screenshot_context_inspected": true,
+      "actual_rendered_face_crop_inspected": true,
+      "actual_rendered_portrait_and_queue_inspected": true
+    }
+  ]
+}

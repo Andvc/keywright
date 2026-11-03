@@ -1,0 +1,51 @@
+{
+  "id": "item.elixir_of_vigour",
+  "category": "item",
+  "title": "Elixir of Vigour",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/elixir_of_vigour.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_elixir_of_vigour_C.png",
+  "original_source_sha256": "408828308dc843c995aea962535068446ca32ef1096d19056fcb426e9e96ece4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "f96fc400923a51db48fd59a60d10cf1ed61aa8be333b3b5ccd9d435353b02b63",
+  "colours": 12,
+  "crop": [
+    243,
+    32,
+    1010,
+    1230
+  ],
+  "source_transform": {
+    "scale_x": 0.10039113428943937,
+    "scale_y": 0.1001669449081803,
+    "translate_x": 0.604954367666231,
+    "translate_y": 0.7946577629382303
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "408828308dc843c995aea962535068446ca32ef1096d19056fcb426e9e96ece4",
+  "spec_sha256": "0b3c5250c4947dfa3b14fea5e98ee9e4abbc17027a16ecfc90041ecc3d4e0e43",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

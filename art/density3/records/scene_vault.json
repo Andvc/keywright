@@ -1,0 +1,51 @@
+{
+  "id": "scene.vault",
+  "category": "scene",
+  "title": "Beneath the Gilded Gate",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/scenes/vault.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/scene_vault_C.png",
+  "original_source_sha256": "a2fd813d32491f2b3e16a14f83afb081c5ab88996949b8d2724abea90d845c3a",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c4b0a661c63410096c1fbd819e869fcabec19df8817bab691a7a5ffaac7f2bdc",
+  "colours": 18,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "a2fd813d32491f2b3e16a14f83afb081c5ab88996949b8d2724abea90d845c3a",
+  "spec_sha256": "d4c432522206e64e6cc25dc9e76527a45cec700f3546a302d8a81cd10ee8ed50",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

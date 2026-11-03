@@ -1,0 +1,51 @@
+{
+  "id": "heartsong.bottled_star",
+  "category": "heartsong",
+  "title": "The Bottled Star",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/heartsongs/bottled_star.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/heartsong_bottled_star_C.png",
+  "original_source_sha256": "d4db3e56754cf12337fa0a9119a95a61099e438df8ddb018eead44eac2bdd686",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "738ccaf1dceae899383c1cab0298416126537653519b46a5541c0cfe498a743f",
+  "colours": 16,
+  "crop": [
+    133,
+    33,
+    1166,
+    1193
+  ],
+  "source_transform": {
+    "scale_x": 0.10358180058083252,
+    "scale_y": 0.10344827586206896,
+    "translate_x": -3.7763794772507264,
+    "translate_y": 0.5862068965517242
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "d4db3e56754cf12337fa0a9119a95a61099e438df8ddb018eead44eac2bdd686",
+  "spec_sha256": "0e2fc700563d92d675b31739861e5320dc07f6b045c2ff6c67b5673d4cad9557",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

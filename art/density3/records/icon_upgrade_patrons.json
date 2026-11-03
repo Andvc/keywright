@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.patrons",
+  "category": "icon_upgrade",
+  "title": "Patrons' Book",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_patrons.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_patrons_C.png",
+  "original_source_sha256": "85b36b2fa071274df2cd9d78a16dfc5ce476d2505f3904adcf8e7609fa59735d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "40605f4e66ad6ef996a55978691352dc5d23ba41c289c5501079ee4bab91b4da",
+  "colours": 10,
+  "crop": [
+    60,
+    105,
+    1173,
+    1196
+  ],
+  "source_transform": {
+    "scale_x": 0.07906558849955077,
+    "scale_y": 0.07882676443629698,
+    "translate_x": -0.7439353099730459,
+    "translate_y": -3.276810265811182
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "85b36b2fa071274df2cd9d78a16dfc5ce476d2505f3904adcf8e7609fa59735d",
+  "spec_sha256": "82229506bb29a2a2d3e5b2e7dd046fb53912b3212b99cdeb7e7e4c85d7ae458f",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

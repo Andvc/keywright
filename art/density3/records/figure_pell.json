@@ -1,0 +1,75 @@
+{
+  "id": "figure.pell",
+  "category": "figure",
+  "title": "Pell the Pawnbroker",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/pell.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_pell_A.png",
+  "original_source_sha256": "c670e5b6140492b6f9f39e48431eeb5f4d860bbe5b81e0469e888cc0bc8480be",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1",
+  "colours": 25,
+  "crop": [
+    208,
+    27,
+    818,
+    1511
+  ],
+  "source_transform": {
+    "scale_x": 0.6245901639344262,
+    "scale_y": 0.6253369272237197,
+    "translate_x": 63.085245901639354,
+    "translate_y": 335.11590296495956
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "c670e5b6140492b6f9f39e48431eeb5f4d860bbe5b81e0469e888cc0bc8480be",
+  "spec_sha256": "38ed66e15f209ccd6b165c72675a8864ad3876130bbf529dac6d71c9db0283fe",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          391,
+          451,
+          437,
+          478
+        ],
+        "match_anchor": [
+          384,
+          448,
+          390,
+          454
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "将鼻底/嘴部的金属橙色块恢复为原图暖棕阴影与浅笑轮廓，保留大鼻子身份特征和单片眼镜。局部匹配避免额外粉色光圈。",
+    "selected_candidate_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 17,
+  "user_approval": "approved"
+}

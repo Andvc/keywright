@@ -37,7 +37,7 @@ public partial class SellerView : Node2D
             }));
         _body.AddChild(UiKit.Outline(new Sprite2D
         {
-            Texture = GD.Load<Texture2D>($"res://assets/figures/{_seller.Key}.png"),
+            Texture = ArtTexture.Load($"res://assets/figures/{_seller.Key}.png"),
             Centered = false, Position = origin, Scale = Vector2.One * 4,
             TextureFilter = TextureFilterEnum.Nearest,
         }, whole: true));

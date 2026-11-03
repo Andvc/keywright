@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.shop3",
+  "category": "icon_upgrade",
+  "title": "Move to Crownhold",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_shop3.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_shop3_C.png",
+  "original_source_sha256": "88804698f8c1c44e1a0cd3684f10732cd056e90c8e6b5e08bddf32d31a696619",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "a79c1168da126049fbf8605b8a112077a49886e9da33fd920cf729eab5aa14aa",
+  "colours": 12,
+  "crop": [
+    121,
+    45,
+    1193,
+    1190
+  ],
+  "source_transform": {
+    "scale_x": 0.07649253731343283,
+    "scale_y": 0.07685589519650655,
+    "translate_x": -2.255597014925373,
+    "translate_y": 0.5414847161572052
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "88804698f8c1c44e1a0cd3684f10732cd056e90c8e6b5e08bddf32d31a696619",
+  "spec_sha256": "7e1dc7362831df8e9ed7754a53f789996037adee53fc28f42db990054308002a",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "prop.gavel",
+  "category": "prop",
+  "title": "The auctioneer's gavel",
+  "status": "produced_approved",
+  "source_size": [
+    22,
+    12
+  ],
+  "physical_size": [
+    176,
+    96
+  ],
+  "file": "art/density3/assets/props/gavel.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "D",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_gavel_D.png",
+  "original_source_sha256": "8a6e340b09c48891e7e78004945c19b5180845160bca13e0b682de44e418f67d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d9167d1ea440991b42a18d464ba64e0bc87aca6ebefef5d54c4b5b15e3ad5990",
+  "colours": 5,
+  "crop": [
+    81,
+    192,
+    1695,
+    743
+  ],
+  "source_transform": {
+    "scale_x": 0.1090458488228005,
+    "scale_y": 0.1088929219600726,
+    "translate_x": -8.83271375464684,
+    "translate_y": 15.092558983666063
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "8a6e340b09c48891e7e78004945c19b5180845160bca13e0b682de44e418f67d",
+  "spec_sha256": "f9f1cd53784173d4c0915374bafabd90822ec431e4ff741295d69409f5972197",
+  "original_size": [
+    1774,
+    887
+  ],
+  "user_approval": "approved"
+}

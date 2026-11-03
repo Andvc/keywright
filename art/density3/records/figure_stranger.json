@@ -1,0 +1,51 @@
+{
+  "id": "figure.stranger",
+  "category": "figure",
+  "title": "The Stranger",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/stranger.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_stranger_A.png",
+  "original_source_sha256": "7cc33190a0d5a1002ba55c8f1b5d9a797d3691d0069f8ad338e24b5fe4067805",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
+  "colours": 7,
+  "crop": [
+    140,
+    24,
+    882,
+    1505
+  ],
+  "source_transform": {
+    "scale_x": 0.7452830188679245,
+    "scale_y": 0.7454422687373397,
+    "translate_x": 2.660377358490564,
+    "translate_y": 158.10938555030384
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "7cc33190a0d5a1002ba55c8f1b5d9a797d3691d0069f8ad338e24b5fe4067805",
+  "spec_sha256": "36c467937b36c1253313386b061c9ce0b57449ec21d3ca83a4e425986c0750af",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

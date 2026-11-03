@@ -292,7 +292,7 @@ public partial class OpeningPhase : Phase
 
     Sprite2D MakeSprite(Item item, out int scale)
     {
-        var texture = GD.Load<Texture2D>($"res://assets/sprites/items/{item.Sprite}.png");
+        var texture = ArtTexture.Load($"res://assets/sprites/items/{item.Sprite}.png");
         scale = ThingScale;
         var sprite = Add(new Sprite2D { Texture = texture, Scale = Vector2.One * scale, ZIndex = 7 });
         if (item.Fake) sprite.Modulate = new Color(0.75f, 0.75f, 0.8f);

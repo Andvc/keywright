@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.lamp",
+  "category": "icon_upgrade",
+  "title": "Witchlight",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_lamp.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "C",
+  "original_source": "batch9s_c2_4x_no_outline/sources/icon_upgrade_lamp_C.png",
+  "original_source_sha256": "45d62e00ae5827c8104bdf772aec9d2f6ed5214650cd31698cb5f067886dab66",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ebb7957eebdf7095c2c6079428cf66669c65691d1df1d95682dcfdee787d774b",
+  "colours": 12,
+  "crop": [
+    142,
+    54,
+    1114,
+    1211
+  ],
+  "source_transform": {
+    "scale_x": 0.07613168724279835,
+    "scale_y": 0.07605877268798616,
+    "translate_x": 0.189300411522634,
+    "translate_y": -0.10717372515125323
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "45d62e00ae5827c8104bdf772aec9d2f6ed5214650cd31698cb5f067886dab66",
+  "spec_sha256": "e9ff03b9d44e0ce22d9a1f472009a72ccf446bf1eaf09b0911e66bd0b6acea44",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.cabinet1",
+  "category": "icon_upgrade",
+  "title": "Oak Cabinet",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_cabinet1.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_cabinet1_A.png",
+  "original_source_sha256": "5acdc8755e0c47de48e240b4e9cc071ec5d3c3ca5f6bb6dfccd9d00837829cfa",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7502de6adf97b1f6c3958c935d396da10064078d7eb49a57cdab58041ce158ce",
+  "colours": 12,
+  "crop": [
+    95,
+    89,
+    1162,
+    1162
+  ],
+  "source_transform": {
+    "scale_x": 0.08247422680412371,
+    "scale_y": 0.08201304753028892,
+    "translate_x": -3.8350515463917523,
+    "translate_y": -3.299161230195713
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "5acdc8755e0c47de48e240b4e9cc071ec5d3c3ca5f6bb6dfccd9d00837829cfa",
+  "spec_sha256": "81e18c1d23f2201d907232f22a84b658c8d4c90599be9ca64f2324bda4e0a9fc",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

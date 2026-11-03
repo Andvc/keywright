@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.shop2",
+  "category": "icon_upgrade",
+  "title": "Move to Thornwick",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_shop2.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_shop2_C.png",
+  "original_source_sha256": "cf1c80e0b1daea46d30c6d9240398c8a1a322b06dab1f0ef101fff2c91c5b3cb",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "020ce306d36f60faf70338d9f0b428b139c85eabf121e82c6cfd0e567de07a86",
+  "colours": 12,
+  "crop": [
+    43,
+    141,
+    1221,
+    1131
+  ],
+  "source_transform": {
+    "scale_x": 0.07470288624787776,
+    "scale_y": 0.07474747474747474,
+    "translate_x": 0.7877758913412563,
+    "translate_y": 0.4606060606060609
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "cf1c80e0b1daea46d30c6d9240398c8a1a322b06dab1f0ef101fff2c91c5b3cb",
+  "spec_sha256": "ddc33b6d114ae04c3bd1a36e8d17451be1e5a8fc76cef538da2a0b66d576e8d0",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

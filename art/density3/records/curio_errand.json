@@ -1,0 +1,51 @@
+{
+  "id": "curio.errand",
+  "category": "curio",
+  "title": "Errand Book",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/errand.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_errand_A.png",
+  "original_source_sha256": "a2275956e14cc17afaa6cc4ab1d22111488fc1cac1a11d666a6a412924228855",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "440182962cd0ba179920a84a08aa755c16de48d90c70316f7a546e041cdb2e87",
+  "colours": 16,
+  "crop": [
+    52,
+    153,
+    1228,
+    1119
+  ],
+  "source_transform": {
+    "scale_x": 0.08843537414965986,
+    "scale_y": 0.08799171842650104,
+    "translate_x": -0.5986394557823127,
+    "translate_y": -0.462732919254659
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "a2275956e14cc17afaa6cc4ab1d22111488fc1cac1a11d666a6a412924228855",
+  "spec_sha256": "02c8ca4ffa9f5f57b5ef6799b4d295e1f7893a3b1f55d30dec5b3c0b48224f4d",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

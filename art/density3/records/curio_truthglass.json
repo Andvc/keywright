@@ -1,0 +1,51 @@
+{
+  "id": "curio.truthglass",
+  "category": "curio",
+  "title": "Truthglass",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/truthglass.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_truthglass_D.png",
+  "original_source_sha256": "6aae0e0847618e64f33927ac947e9a96f710bba5cd1a55fece2cff22df82acb0",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "578605e8f2cb8161aa59f142d2d3d8f3992554fdaf2ca18fcb73c103b888164a",
+  "colours": 6,
+  "crop": [
+    91,
+    34,
+    1178,
+    1177
+  ],
+  "source_transform": {
+    "scale_x": 0.09107635694572216,
+    "scale_y": 0.09098862642169729,
+    "translate_x": -2.2879484820607168,
+    "translate_y": 0.9063867016622922
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "6aae0e0847618e64f33927ac947e9a96f710bba5cd1a55fece2cff22df82acb0",
+  "spec_sha256": "5d0be41b8f4f6efbcbc4bca36f02461ccc93a0adda84eda585184889731e51a7",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

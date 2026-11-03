@@ -1,0 +1,51 @@
+{
+  "id": "item.dwarf_gold_crowns",
+  "category": "item",
+  "title": "Dwarf-Gold Crowns",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/dwarf_gold_crowns.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "B",
+  "original_source": "batch9s_c2_4x_no_outline/sources/item_dwarf_gold_crowns_B.png",
+  "original_source_sha256": "14afa6247fb182dbedccd34aedb28eecc28b78b077d36d9ef036ead0f1876452",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5666e9ec6bfae754892c4f1743d4412cea686e86fcc015152d167882b6e26023",
+  "colours": 7,
+  "crop": [
+    35,
+    160,
+    1218,
+    1113
+  ],
+  "source_transform": {
+    "scale_x": 0.1014370245139476,
+    "scale_y": 0.10178384050367262,
+    "translate_x": 0.4497041420118344,
+    "translate_y": 10.714585519412381
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "14afa6247fb182dbedccd34aedb28eecc28b78b077d36d9ef036ead0f1876452",
+  "spec_sha256": "ffcc7a38739a7f5a84426595f0f6fcd488d510499450c37bd8010832556c1374",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

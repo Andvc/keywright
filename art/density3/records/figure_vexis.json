@@ -1,0 +1,66 @@
+{
+  "id": "figure.vexis",
+  "category": "figure",
+  "title": "Vexis the Imp",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/vexis.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    1
+  ],
+  "batch": "11",
+  "candidate": "C",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_vexis_C.png",
+  "original_source_sha256": "7aa2788cca0818318b6024f243a1a53ed570db97e5ac075d81a25a6ef8c7e84b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336",
+  "colours": 20,
+  "crop": [
+    90,
+    63,
+    893,
+    1492
+  ],
+  "source_transform": {
+    "scale_x": 0.3586550435865504,
+    "scale_y": 0.3582925122463261,
+    "translate_x": 207.72104607721047,
+    "translate_y": 745.4275717284814
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "7aa2788cca0818318b6024f243a1a53ed570db97e5ac075d81a25a6ef8c7e84b",
+  "spec_sha256": "62b40a2fc8b84d6381bbfe8d87251463e68c8218035e93e2da46399428afca36",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "palette_detail",
+    "regions": [
+      [
+        407,
+        875,
+        459,
+        902
+      ]
+    ],
+    "reason_zh": "仅在原笑线区域保留源图中至少 2/9 支持的深色细线，恢复小恶魔的闭合笑弧和小牙，不增加新嘴型、宽齿笑或描边。",
+    "selected_candidate_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 10,
+  "user_approval": "approved"
+}

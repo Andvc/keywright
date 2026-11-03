@@ -1,0 +1,51 @@
+{
+  "id": "curio.purse",
+  "category": "curio",
+  "title": "Rainy-Day Purse",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/purse.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_purse_B.png",
+  "original_source_sha256": "77016a6d12aca27341b92d9b09e658ebfebaf5717b73494b3eedb1adf523366c",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "2f4669f406f923729354a10a805964d75e4c10fbd8d0e1fc7f1c799900108db0",
+  "colours": 9,
+  "crop": [
+    108,
+    92,
+    1168,
+    1131
+  ],
+  "source_transform": {
+    "scale_x": 0.09811320754716982,
+    "scale_y": 0.09817131857555342,
+    "translate_x": -6.596226415094339,
+    "translate_y": -4.031761308950914
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "77016a6d12aca27341b92d9b09e658ebfebaf5717b73494b3eedb1adf523366c",
+  "spec_sha256": "14a9da5f4f66d01e2fb21016876f49373399a006c750c8969063e34c38c1ad36",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "curio.ring",
+  "category": "curio",
+  "title": "Spellbinder's Ring",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/ring.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_ring_B.png",
+  "original_source_sha256": "78dfe1db855235b2fedffecb954756438aed7c5d18af59aa690d38239102431f",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "54c40a1c5686116efbcb51931e467336cb586276c0a59506636a67a00200e679",
+  "colours": 10,
+  "crop": [
+    139,
+    109,
+    1129,
+    1127
+  ],
+  "source_transform": {
+    "scale_x": 0.10202020202020202,
+    "scale_y": 0.10216110019646366,
+    "translate_x": -9.180808080808081,
+    "translate_y": -7.135559921414538
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "78dfe1db855235b2fedffecb954756438aed7c5d18af59aa690d38239102431f",
+  "spec_sha256": "3e3883ac96ea65bc35139c14ba1024cbe70bf07e5fdb22d013772522edf799ae",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

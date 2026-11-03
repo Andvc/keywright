@@ -1,0 +1,51 @@
+{
+  "id": "prop.lodestone",
+  "category": "prop",
+  "title": "The Lodestone",
+  "status": "produced_approved",
+  "source_size": [
+    20,
+    16
+  ],
+  "physical_size": [
+    160,
+    128
+  ],
+  "file": "art/density3/assets/props/lodestone.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_lodestone_C.png",
+  "original_source_sha256": "9fae57766d03e391c5ef3840919700d677c314bef0b73bffae019915f64bcda7",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ff1ae39a3f893e76b6a3212fab795e03af3634253e40e40fee3b505c1dec61f4",
+  "colours": 11,
+  "crop": [
+    29,
+    282,
+    1225,
+    1015
+  ],
+  "source_transform": {
+    "scale_x": 0.13377926421404682,
+    "scale_y": 0.13369713506139155,
+    "translate_x": -3.879598662207358,
+    "translate_y": -7.702592087312418
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "9fae57766d03e391c5ef3840919700d677c314bef0b73bffae019915f64bcda7",
+  "spec_sha256": "c3ffee826a6929291c2aca8c909f50486cde71cc1ff353d59e674bb13e1594c6",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

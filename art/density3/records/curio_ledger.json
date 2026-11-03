@@ -1,0 +1,51 @@
+{
+  "id": "curio.ledger",
+  "category": "curio",
+  "title": "Ledger of Certainty",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/ledger.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_ledger_B.png",
+  "original_source_sha256": "b2edef6ae716cfce96937368527d3c1926b03b860057660bf8e96f3ad82bf5a2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9251f65c03dfb3eadb828f9fc76e3a8270b84c90d89600b7f6a1aaf705aac45f",
+  "colours": 10,
+  "crop": [
+    99,
+    77,
+    1139,
+    1163
+  ],
+  "source_transform": {
+    "scale_x": 0.09615384615384616,
+    "scale_y": 0.09576427255985268,
+    "translate_x": -3.51923076923077,
+    "translate_y": -3.373848987108656
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "b2edef6ae716cfce96937368527d3c1926b03b860057660bf8e96f3ad82bf5a2",
+  "spec_sha256": "55512dd03e76a32fd986b1ab57baa810be2c552b6b3bd8692868a31561b7a47f",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

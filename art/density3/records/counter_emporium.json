@@ -1,0 +1,51 @@
+{
+  "id": "counter.emporium",
+  "category": "counter",
+  "title": "Counter at the Royal Emporium",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    61
+  ],
+  "physical_size": [
+    2560,
+    488
+  ],
+  "file": "art/density3/assets/counter/emporium.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    1
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/counter_emporium_B.png",
+  "original_source_sha256": "d0dbe3c1252d93d2bc35ceb7ff77c5ee43ac8f37255920df3d85f915d7733fd2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "2ba236786bb6b19cf5fb50bc82fd85d24b656a60075608ca16de9cb8f9bb13b8",
+  "colours": 9,
+  "crop": [
+    0,
+    571,
+    1536,
+    1024
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.0772626931567328,
+    "translate_x": 0.0,
+    "translate_y": -615.1169977924944
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 1535,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "d0dbe3c1252d93d2bc35ceb7ff77c5ee43ac8f37255920df3d85f915d7733fd2",
+  "spec_sha256": "d28446bcc44aabbc62a5a196c4521a63026e5a9fd8876cf871f1e16bfb5632ee",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

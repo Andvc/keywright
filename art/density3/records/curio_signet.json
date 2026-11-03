@@ -1,0 +1,51 @@
+{
+  "id": "curio.signet",
+  "category": "curio",
+  "title": "Merchant's Signet",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/signet.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_signet_A.png",
+  "original_source_sha256": "07b9513c5cbaab2c66d5696568849d243478e22f465b9e3eb4b9db877c5d7bf6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "743c59a31f5f3b80d7dbab27973a910a66ce2a3629c3e7a1248a4e12287edbb7",
+  "colours": 7,
+  "crop": [
+    120,
+    101,
+    1134,
+    1115
+  ],
+  "source_transform": {
+    "scale_x": 0.10256410256410256,
+    "scale_y": 0.10256410256410256,
+    "translate_x": -8.307692307692308,
+    "translate_y": -6.3589743589743595
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "07b9513c5cbaab2c66d5696568849d243478e22f465b9e3eb4b9db877c5d7bf6",
+  "spec_sha256": "7ee195ea139b6987ede33ca5bead22e690d52f944b3d1ad3cb5c68e752c4427e",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

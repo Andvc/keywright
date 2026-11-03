@@ -1,0 +1,51 @@
+{
+  "id": "curio.crescent",
+  "category": "curio",
+  "title": "Cursed Crescent",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/crescent.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_crescent_B.png",
+  "original_source_sha256": "9ad971b4cd3d7326bc8fd261cc5064f2dc7734547d812dc9f070d69df4ad87c8",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7ed4485506a082011e38d552c0a75af9c4df7830bbfd7084aa105de342481e3f",
+  "colours": 16,
+  "crop": [
+    163,
+    94,
+    1188,
+    1104
+  ],
+  "source_transform": {
+    "scale_x": 0.10146341463414635,
+    "scale_y": 0.100990099009901,
+    "translate_x": -12.538536585365854,
+    "translate_y": -4.493069306930693
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "9ad971b4cd3d7326bc8fd261cc5064f2dc7734547d812dc9f070d69df4ad87c8",
+  "spec_sha256": "883257780c594b4fe875a75c7720c1fbed7fb7805d56f1c726725f98632d6182",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

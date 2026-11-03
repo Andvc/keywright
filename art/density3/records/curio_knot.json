@@ -1,0 +1,51 @@
+{
+  "id": "curio.knot",
+  "category": "curio",
+  "title": "Haggler's Knot",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/knot.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_knot_C.png",
+  "original_source_sha256": "0498046b1be65bc4f65f908eb12fafad8ed8ecb5da8053d0d0fa3cfb8b7093c2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "488d68801c5d227a381f565c55a54543002d1f604f09dfd598041ac1ba79aaa8",
+  "colours": 6,
+  "crop": [
+    108,
+    79,
+    1184,
+    1191
+  ],
+  "source_transform": {
+    "scale_x": 0.09386617100371747,
+    "scale_y": 0.09352517985611511,
+    "translate_x": -5.137546468401487,
+    "translate_y": -3.3884892086330938
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "0498046b1be65bc4f65f908eb12fafad8ed8ecb5da8053d0d0fa3cfb8b7093c2",
+  "spec_sha256": "8955fb4f6d37d9559127fe0deb4a71e112a1d3ff6049947b778353cb2b78f30c",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

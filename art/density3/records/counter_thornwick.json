@@ -1,0 +1,51 @@
+{
+  "id": "counter.thornwick",
+  "category": "counter",
+  "title": "Counter at Thornwick Market",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    61
+  ],
+  "physical_size": [
+    2560,
+    488
+  ],
+  "file": "art/density3/assets/counter/thornwick.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    1
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/counter_thornwick_B.png",
+  "original_source_sha256": "bec608d86e78dd137328cd93ac28e405c3583303725ffdaf61d3ca35c519304b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "e55faacb676bb5dbe8b2bcb85aab8c0232799c341b3465607dc5be0f3ae513cf",
+  "colours": 10,
+  "crop": [
+    0,
+    573,
+    1536,
+    1024
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.082039911308204,
+    "translate_x": 0.0,
+    "translate_y": -620.0088691796009
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 14,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "bec608d86e78dd137328cd93ac28e405c3583303725ffdaf61d3ca35c519304b",
+  "spec_sha256": "f4961bafc475872e61aaa115e367b03086bafd0cdc4ac61aa5f3f4bca23ecb49",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

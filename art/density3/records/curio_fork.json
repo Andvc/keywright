@@ -1,0 +1,51 @@
+{
+  "id": "curio.fork",
+  "category": "curio",
+  "title": "Tuning Fork",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/fork.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_fork_A.png",
+  "original_source_sha256": "5f47a352816ac81cb0b5aa37ea349a3f3a046f6d5f63f185faa838af8ba4c416",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "2029f79c6eff2cccc8c92ff5de2990f0f0a8b22919d5d44fd91cc5f82976ed69",
+  "colours": 8,
+  "crop": [
+    181,
+    62,
+    1093,
+    1198
+  ],
+  "source_transform": {
+    "scale_x": 0.09100877192982457,
+    "scale_y": 0.09154929577464789,
+    "translate_x": -2.4725877192982466,
+    "translate_y": -1.676056338028169
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "5f47a352816ac81cb0b5aa37ea349a3f3a046f6d5f63f185faa838af8ba4c416",
+  "spec_sha256": "2dc5ba60764f6dafd87d9f7af1a1ef6f2d5ebdce61e697ecd3920a00b4be02b9",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

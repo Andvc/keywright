@@ -1,0 +1,51 @@
+{
+  "id": "curio.knife",
+  "category": "curio",
+  "title": "Burglar's Knife",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/knife.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_knife_B.png",
+  "original_source_sha256": "7a6abe9d6352d3591e692d3a0a8055959de46528647888b8fa8b127ed51614af",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "9b3d6e63f937466f2fa074705a3254cb381f26420fbc407e769f57c2041fc63d",
+  "colours": 14,
+  "crop": [
+    74,
+    79,
+    1180,
+    1163
+  ],
+  "source_transform": {
+    "scale_x": 0.09403254972875226,
+    "scale_y": 0.0940959409594096,
+    "translate_x": -2.9584086799276674,
+    "translate_y": -2.4335793357933575
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "7a6abe9d6352d3591e692d3a0a8055959de46528647888b8fa8b127ed51614af",
+  "spec_sha256": "c7a5ba6f0a25f8ff7aab881faa9c024018479c186f2fa373f0b3dfad7970b1d3",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

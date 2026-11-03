@@ -1,0 +1,51 @@
+{
+  "id": "shelf.crownhold",
+  "category": "shelf",
+  "title": "Display shelf at Crownhold",
+  "status": "produced_approved",
+  "source_size": [
+    136,
+    40
+  ],
+  "physical_size": [
+    1088,
+    320
+  ],
+  "file": "art/density3/assets/shelf/crownhold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "10",
+  "candidate": "A",
+  "original_source": "batch10_c2_4x_no_outline/sources/shelf_crownhold_A.png",
+  "original_source_sha256": "ee8c49a0c9d2f19b057eaf840815878c5b0be26c36e096155c050642449c5e41",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "07b6cfaf303de3b6b61fb57ed60a409afc81625269e4e46b4aa413ef583a7160",
+  "colours": 12,
+  "crop": [
+    25,
+    0,
+    1512,
+    578
+  ],
+  "source_transform": {
+    "scale_x": 0.7316745124411567,
+    "scale_y": 0.7318339100346021,
+    "translate_x": -18.291862811028917,
+    "translate_y": -92.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "ee8c49a0c9d2f19b057eaf840815878c5b0be26c36e096155c050642449c5e41",
+  "spec_sha256": "dd5062a356ae8977c6a2650c650920104fad1d2a62f9b98afd428b60bb8ad9bf",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

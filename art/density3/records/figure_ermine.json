@@ -1,0 +1,51 @@
+{
+  "id": "figure.ermine",
+  "category": "figure",
+  "title": "Lady Ermine",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/ermine.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_ermine_B.png",
+  "original_source_sha256": "96cf0cf25c4b01d7f4b666862942109e0f4d297b97157d0fe257e8495c8a0bf6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "17a2ea6a3376587306fe44dbe16bc2be426da7778a76ebb2e70762cdb020c586",
+  "colours": 13,
+  "crop": [
+    118,
+    22,
+    906,
+    1508
+  ],
+  "source_transform": {
+    "scale_x": 0.7753807106598984,
+    "scale_y": 0.775235531628533,
+    "translate_x": -13.494923857868017,
+    "translate_y": 110.94481830417227
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "96cf0cf25c4b01d7f4b666862942109e0f4d297b97157d0fe257e8495c8a0bf6",
+  "spec_sha256": "4d5cc57db4e4be7928365c0c561f17b9989097b248c77041d58b1c14e9024311",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

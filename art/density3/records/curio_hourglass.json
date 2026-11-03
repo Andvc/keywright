@@ -1,0 +1,51 @@
+{
+  "id": "curio.hourglass",
+  "category": "curio",
+  "title": "Waiting Game",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/hourglass.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_hourglass_C.png",
+  "original_source_sha256": "cb548a738b8e7c28bc54bff3ffdb9296f584097fbee9adbe36fba9969d47a9d1",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d73b5ca2b14e8f1dacee8b69c0aaa164653663382c97e758fe3ddde06be4e613",
+  "colours": 9,
+  "crop": [
+    260,
+    68,
+    994,
+    1180
+  ],
+  "source_transform": {
+    "scale_x": 0.09400544959128065,
+    "scale_y": 0.09352517985611511,
+    "translate_x": -3.4414168937329705,
+    "translate_y": -2.3597122302158278
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "cb548a738b8e7c28bc54bff3ffdb9296f584097fbee9adbe36fba9969d47a9d1",
+  "spec_sha256": "c95484bce53afd59db5164341e778d45468bb4c443a79d0075b0f5dc6c7c3c53",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

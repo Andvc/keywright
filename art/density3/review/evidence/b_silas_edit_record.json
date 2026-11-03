@@ -1,0 +1,24 @@
+{
+  "id": "figure.silas",
+  "method": "built-in image_gen edit; generated head rectangle composited into unchanged original full source",
+  "source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_silas_B.png",
+  "source_sha256": "acc17bfb18bbe4ffa5cfbbc8cf519a6282c3a1844de9c496e977757575797a14",
+  "generated": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\silas_imagegen_full.png",
+  "generated_sha256": "bfbf74f3641c96bfee3261f69a3b8f8f907137965bae27fc9cf6cfa794e50148",
+  "selected_override": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\source_overrides\\figure_silas.png",
+  "override_sha256": "5f311d1a0185009d02471a93e30af46e560f14aff3b694ecf19164545502f0f9",
+  "source_size": [
+    1024,
+    1536
+  ],
+  "edit_region_source_pixels": [
+    380,
+    16,
+    640,
+    284
+  ],
+  "outside_edit_region_byte_identical": true,
+  "prompt_file": "silas_edit_prompt.txt",
+  "facial_change": "Relaxed brows, more open aligned eyes, modest small smile replacing the exaggerated toothy leer; original dark curled moustache and small gold tooth remain recognizable.",
+  "unselected_generation_body_drift": "The generated full image changes colours outside the head. Those pixels were discarded; all source pixels outside the recorded rectangle are copied unchanged."
+}

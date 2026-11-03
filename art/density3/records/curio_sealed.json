@@ -1,0 +1,51 @@
+{
+  "id": "curio.sealed",
+  "category": "curio",
+  "title": "Sealed Bid",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/sealed.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_sealed_B.png",
+  "original_source_sha256": "f2dfd8b3f12ab6fcdfb485ef3c66ec115aff157c3f073e35bbb1d6e1eb42569b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "87ce591038cfdc7994f74e86ec99638e4dd09766545b953acfe9f8db4c478986",
+  "colours": 11,
+  "crop": [
+    66,
+    152,
+    1205,
+    1102
+  ],
+  "source_transform": {
+    "scale_x": 0.0913081650570676,
+    "scale_y": 0.09157894736842105,
+    "translate_x": -2.0263388937664617,
+    "translate_y": -1.92
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "f2dfd8b3f12ab6fcdfb485ef3c66ec115aff157c3f073e35bbb1d6e1eb42569b",
+  "spec_sha256": "9e8264669a3db2e36b0ce3921330bcdbef7c32bf77d5907db2a710119badcd07",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

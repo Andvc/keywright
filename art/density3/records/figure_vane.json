@@ -1,0 +1,51 @@
+{
+  "id": "figure.vane",
+  "category": "figure",
+  "title": "Mister Vane",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/vane.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_vane_A.png",
+  "original_source_sha256": "3849ec3d9d40a4e2b22dea446a1203756bb9804737106f1dd0f5a8ca1eca426d",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "125cadad1a18818b393ee5caea3e45018d346e6cfc6637fb66f14f6c86046ec9",
+  "colours": 11,
+  "crop": [
+    262,
+    28,
+    748,
+    1507
+  ],
+  "source_transform": {
+    "scale_x": 0.7366255144032922,
+    "scale_y": 0.735632183908046,
+    "translate_x": 12.004115226337461,
+    "translate_y": 171.4022988505747
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "3849ec3d9d40a4e2b22dea446a1203756bb9804737106f1dd0f5a8ca1eca426d",
+  "spec_sha256": "fe9f5cb916996f5eab206a1cd5bfc5896c1043fb3a8cbc03bccc1e60936fa2f4",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

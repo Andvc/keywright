@@ -1,0 +1,51 @@
+{
+  "id": "heartsong.hearthstone",
+  "category": "heartsong",
+  "title": "The Hearthstone",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/heartsongs/hearthstone.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "D",
+  "original_source": "batch12_c2_4x_no_outline/sources/heartsong_hearthstone_D.png",
+  "original_source_sha256": "501e1e5c184a910edce09da7d8b7306d0cee81f22bce3375f019c7073f5737a3",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "858d07d0ab210a61f46659a71b5e413912401d247b2cc13628c94208ade6955a",
+  "colours": 8,
+  "crop": [
+    64,
+    78,
+    1200,
+    1180
+  ],
+  "source_transform": {
+    "scale_x": 0.1056338028169014,
+    "scale_y": 0.10526315789473684,
+    "translate_x": -2.76056338028169,
+    "translate_y": -0.21052631578947434
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "501e1e5c184a910edce09da7d8b7306d0cee81f22bce3375f019c7073f5737a3",
+  "spec_sha256": "0960cca91f2bdbdb578b7661e27c9c5581b9cf1df268cfc71b8a72225eff03c8",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

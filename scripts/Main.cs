@@ -237,7 +237,8 @@ public partial class Main : Node2D
         _shotsDir = Arg(args, "--shots");
         if (_shotsDir != null) DirAccess.MakeDirRecursiveAbsolute(_shotsDir);
 
-        if (args.Contains("--art-review")) ArtReview();
+        if (args.Contains("--density-review") || Arg(args, "--density-review") != null) DensityReview();
+        else if (args.Contains("--art-review")) ArtReview();
         else if (args.Contains("--shell-demo")) ShellDemo();
         else if (!direct) ToTitle();
         else if (args.Contains("--opening-demo")) OpeningDemo(args.Contains("--quit-at-end"));

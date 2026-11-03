@@ -1,0 +1,51 @@
+{
+  "id": "curio.staff",
+  "category": "curio",
+  "title": "Archmage's Staff",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/staff.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_staff_C.png",
+  "original_source_sha256": "29e61286f76b6aac95e1f5e77bc6b4a293224ea14b3365e6d5adb8a22bcaf8b1",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "914e55d0c0b6284fd5bbbc32e357ca07677d5fe1d5bd589636c434af38fccc3d",
+  "colours": 9,
+  "crop": [
+    149,
+    57,
+    1131,
+    1193
+  ],
+  "source_transform": {
+    "scale_x": 0.09164969450101833,
+    "scale_y": 0.09154929577464789,
+    "translate_x": -2.6558044806517316,
+    "translate_y": -1.21830985915493
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "29e61286f76b6aac95e1f5e77bc6b4a293224ea14b3365e6d5adb8a22bcaf8b1",
+  "spec_sha256": "585acf41075334cd456d4d2aaea278eaf4df5d4f64b5ab9e0dbe2f84c78c6197",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

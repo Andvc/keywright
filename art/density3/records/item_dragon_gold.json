@@ -1,0 +1,51 @@
+{
+  "id": "item.dragon_gold",
+  "category": "item",
+  "title": "Dragon Gold",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/dragon_gold.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_dragon_gold_C.png",
+  "original_source_sha256": "78fe49ceb1ba47c44b5677a76f2d46522226a94277c22d65f3d4f5e9633103b9",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "1f2914ddbe7e4d6693e7a2d6bf97a1b4a2f885bc3f74d18d06f1ff0f27a70cfe",
+  "colours": 12,
+  "crop": [
+    181,
+    37,
+    1177,
+    1222
+  ],
+  "source_transform": {
+    "scale_x": 0.10140562248995984,
+    "scale_y": 0.10126582278481013,
+    "translate_x": -5.354417670682732,
+    "translate_y": 0.25316455696202533
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "78fe49ceb1ba47c44b5677a76f2d46522226a94277c22d65f3d4f5e9633103b9",
+  "spec_sha256": "04bfd5a54fc12295c77836ee661ced28d436a41da4e8e7e3ed8c1ca705013a1e",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

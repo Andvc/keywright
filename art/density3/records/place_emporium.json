@@ -1,0 +1,51 @@
+{
+  "id": "place.emporium",
+  "category": "place",
+  "title": "The Royal Emporium, from the counter",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/place/emporium.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/place_emporium_C.png",
+  "original_source_sha256": "a55e17c7008840f834a8f20d537a804e25af8298905a31cbd2c92958318b2791",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5ddefe27edcf585c3a2aa616e1d2bd5cb3d2060a815d670ab4281d28e523f54b",
+  "colours": 17,
+  "crop": [
+    0,
+    0,
+    1672,
+    940
+  ],
+  "source_transform": {
+    "scale_x": 1.5311004784688995,
+    "scale_y": 1.5319148936170213,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "a55e17c7008840f834a8f20d537a804e25af8298905a31cbd2c92958318b2791",
+  "spec_sha256": "78d435b7f2eabc9566d621c4bfbc610c999cc9de46428ff412cf4ba8129af689",
+  "original_size": [
+    1672,
+    941
+  ],
+  "user_approval": "approved"
+}

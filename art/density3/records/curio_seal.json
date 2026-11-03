@@ -1,0 +1,51 @@
+{
+  "id": "curio.seal",
+  "category": "curio",
+  "title": "Appraiser's Seal",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/seal.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_seal_A.png",
+  "original_source_sha256": "586e3bfa0550a74cbe3941d24b76d94db26312eec946e4f7764bc4603d2f9133",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "b242654ac2e66caa7c166fbb84467f64f327a21e140c8e6e67bc581f8b028b11",
+  "colours": 13,
+  "crop": [
+    143,
+    55,
+    1140,
+    1175
+  ],
+  "source_transform": {
+    "scale_x": 0.09327983951855567,
+    "scale_y": 0.09285714285714286,
+    "translate_x": -4.33901705115346,
+    "translate_y": -1.1071428571428568
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "586e3bfa0550a74cbe3941d24b76d94db26312eec946e4f7764bc4603d2f9133",
+  "spec_sha256": "117fdaf72f8cb0396606fc0f70e47d962a4c89d3ab45b6392f8f1459f218297a",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

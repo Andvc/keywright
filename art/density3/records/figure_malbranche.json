@@ -1,0 +1,66 @@
+{
+  "id": "figure.malbranche",
+  "category": "figure",
+  "title": "Malbranche",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/malbranche.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_malbranche_B.png",
+  "original_source_sha256": "124b78440ddd88cde21d6e6f993e33d7b1f95b39dfe19e2de07b93a58a868ca8",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
+  "colours": 23,
+  "crop": [
+    191,
+    19,
+    832,
+    1504
+  ],
+  "source_transform": {
+    "scale_x": 0.7535101404056163,
+    "scale_y": 0.7542087542087542,
+    "translate_x": -1.9204368174727051,
+    "translate_y": 145.67003367003366
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "124b78440ddd88cde21d6e6f993e33d7b1f95b39dfe19e2de07b93a58a868ca8",
+  "spec_sha256": "9112c159288f45751dc2a67a2d807277b397200a30a0cf9784d6eb5de5bc1640",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "palette_detail",
+    "regions": [
+      [
+        383,
+        291,
+        439,
+        330
+      ]
+    ],
+    "reason_zh": "在原牙弓小区域保留细牙缝，让碎点重新读成单一骷髅牙弓；保留原有非人类解剖与威胁感，不补人类嘴唇。正式复审将 ROI 右界 442 收到 439，去除源图鼻缘 chroma 造成的一格紫粉色。",
+    "selected_candidate_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 67,
+  "user_approval": "approved"
+}

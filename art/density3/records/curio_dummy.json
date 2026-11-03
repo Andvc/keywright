@@ -1,0 +1,51 @@
+{
+  "id": "curio.dummy",
+  "category": "curio",
+  "title": "Tailor's Dummy",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/dummy.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_dummy_C.png",
+  "original_source_sha256": "b3245e97c7d554e6dad654989dbb770822d9bf5e1afe06dd013bc718942e1553",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8c7af45991e6cd27220f778cf422b5c698f750592d0a3f86afdbacb76f77e23b",
+  "colours": 11,
+  "crop": [
+    200,
+    54,
+    1054,
+    1182
+  ],
+  "source_transform": {
+    "scale_x": 0.09250585480093677,
+    "scale_y": 0.09219858156028368,
+    "translate_x": -2.501170960187352,
+    "translate_y": -0.9787234042553195
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "b3245e97c7d554e6dad654989dbb770822d9bf5e1afe06dd013bc718942e1553",
+  "spec_sha256": "996b12fc16c69a4915d94bbf88ab27a9a9f5363c2a8ba99d6251825314575b42",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

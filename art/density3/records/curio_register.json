@@ -1,0 +1,51 @@
+{
+  "id": "curio.register",
+  "category": "curio",
+  "title": "Valuer's Register",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/register.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_register_D.png",
+  "original_source_sha256": "ce4d3bb8b2cd0620946ba450b198de182c28826a3a00f7b6191302c222fdcec0",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "b16816ba8516893f67efb16e5054f5710d9ae3891973624ba8639616a0636698",
+  "colours": 8,
+  "crop": [
+    54,
+    214,
+    1200,
+    1064
+  ],
+  "source_transform": {
+    "scale_x": 0.09075043630017451,
+    "scale_y": 0.09058823529411765,
+    "translate_x": -0.9005235602094244,
+    "translate_y": -2.3858823529411772
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "ce4d3bb8b2cd0620946ba450b198de182c28826a3a00f7b6191302c222fdcec0",
+  "spec_sha256": "d9b6d3889d3fe8038c0397920742ac10bca83fbe07dd5b8bb5b6780388043933",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -65,7 +65,7 @@ public partial class ShopView : Node2D
     {
         var sprite = new Sprite2D
         {
-            Texture = GD.Load<Texture2D>($"res://assets/{path}.png"),
+            Texture = ArtTexture.Load($"res://assets/{path}.png"),
             Centered = false, Position = at * ScaleFactor, Scale = Vector2.One * ScaleFactor,
             ZIndex = z, TextureFilter = TextureFilterEnum.Nearest,
         };
@@ -93,7 +93,8 @@ public partial class ShopView : Node2D
         Layer(_world, $"counter/{place}", new Vector2(0, 119), -40);
         // The counter's far edge gets the figures' outline, a row above it, so the counter reads against the place beyond
         // (the chest, the props and whoever stands in front of it cover it).
-        var edge = new ColorRect { Color = Palette.Outline, ZIndex = -40, MouseFilter = Control.MouseFilterEnum.Ignore, Visible = Settings.Outlines };
+        var edge = new ColorRect { Color = Palette.Outline, ZIndex = -40, MouseFilter = Control.MouseFilterEnum.Ignore,
+            Visible = Settings.Outlines && ArtTexture.OutlinesAllowed };
         edge.AddToGroup(UiKit.Outlines);
         _world.AddChild(edge.Place(0, 118 * ScaleFactor, 320 * ScaleFactor, ScaleFactor));
         BuildProps();

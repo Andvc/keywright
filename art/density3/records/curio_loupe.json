@@ -1,0 +1,51 @@
+{
+  "id": "curio.loupe",
+  "category": "curio",
+  "title": "Jeweller's Loupe",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/loupe.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_loupe_A.png",
+  "original_source_sha256": "ebfa2b2258c0e93130c3f6286543dba3e55461997a093499ae0dd9a73ba081bd",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "62d64d8555f5bdf549400e064b8c427642bf847416a7873f5e75067da4fbccd3",
+  "colours": 12,
+  "crop": [
+    134,
+    89,
+    1148,
+    1152
+  ],
+  "source_transform": {
+    "scale_x": 0.09763313609467456,
+    "scale_y": 0.09783631232361242,
+    "translate_x": -7.0828402366863905,
+    "translate_y": -4.7074317968015045
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "ebfa2b2258c0e93130c3f6286543dba3e55461997a093499ae0dd9a73ba081bd",
+  "spec_sha256": "50e562e8d565ea9f1ae546b62065d8d72d8fa1353e838520bb7bc2971ac967cb",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

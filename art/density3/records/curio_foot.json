@@ -1,0 +1,51 @@
+{
+  "id": "curio.foot",
+  "category": "curio",
+  "title": "Rabbit's Foot",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/foot.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_foot_A.png",
+  "original_source_sha256": "bada9e37c6bfc2d0a180e6995d9c72352fc7ce2e8d9750a757f6ff9158d2c0bc",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5a6aab84bf8f7896df0898c00b693d621a8252fbea06ba2fc6373a76674f56aa",
+  "colours": 10,
+  "crop": [
+    86,
+    76,
+    1188,
+    1174
+  ],
+  "source_transform": {
+    "scale_x": 0.09437386569872959,
+    "scale_y": 0.0947176684881603,
+    "translate_x": -4.116152450090745,
+    "translate_y": -3.198542805100182
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "bada9e37c6bfc2d0a180e6995d9c72352fc7ce2e8d9750a757f6ff9158d2c0bc",
+  "spec_sha256": "17633580aa676224385cde493b9092b74ca7e141cbfdb9154676d9148b3b957e",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

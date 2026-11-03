@@ -1,0 +1,51 @@
+{
+  "id": "curio.bond",
+  "category": "curio",
+  "title": "Underwriter's Bond",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/bond.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_bond_B.png",
+  "original_source_sha256": "46de00a12334bb9d715781a479bce39ac50e478f7b020c239a96f029008c103b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "a0334fd6e8e40fdc9cd48fae6b8bb8435638e055e36a301c4f55e328a7ea40e5",
+  "colours": 14,
+  "crop": [
+    61,
+    145,
+    1193,
+    1098
+  ],
+  "source_transform": {
+    "scale_x": 0.09187279151943463,
+    "scale_y": 0.09233997901364113,
+    "translate_x": -1.6042402826855122,
+    "translate_y": -1.3892969569779652
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "46de00a12334bb9d715781a479bce39ac50e478f7b020c239a96f029008c103b",
+  "spec_sha256": "d95c08d9e98410bf829f5bb0194ee57551b2a6bce17c7b3575ef0fb9b65ffc0f",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

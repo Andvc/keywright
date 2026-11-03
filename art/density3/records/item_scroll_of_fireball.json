@@ -1,0 +1,51 @@
+{
+  "id": "item.scroll_of_fireball",
+  "category": "item",
+  "title": "Scroll of Fireball",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/scroll_of_fireball.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "C",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_scroll_of_fireball_C.png",
+  "original_source_sha256": "33d58d120a712952f53fa585816d6360afa6f6351c3e47cb6dc079a0f60bd929",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8ad0eb703864f538f70c52d3c69a27860bb9449edbeff0373d8e7801295bb8d2",
+  "colours": 14,
+  "crop": [
+    41,
+    45,
+    1229,
+    1212
+  ],
+  "source_transform": {
+    "scale_x": 0.10101010101010101,
+    "scale_y": 0.10111396743787489,
+    "translate_x": -0.141414141414141,
+    "translate_y": 1.4498714652956295
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "33d58d120a712952f53fa585816d6360afa6f6351c3e47cb6dc079a0f60bd929",
+  "spec_sha256": "1d1aca4abdfe3b66a0408110a52caf54815a639806fd4e83b03a8f5d12b01945",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

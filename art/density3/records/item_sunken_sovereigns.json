@@ -1,0 +1,51 @@
+{
+  "id": "item.sunken_sovereigns",
+  "category": "item",
+  "title": "Sunken Sovereigns",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/sunken_sovereigns.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "D",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_sunken_sovereigns_D.png",
+  "original_source_sha256": "ff4559da27555f3fe0fac1c4745e21b691c0bf504dcc5405f36eece161422e6b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "dac5a7ca53b81c91ef7330f108b67dca786723261022026672f0a9cca2ec218e",
+  "colours": 16,
+  "crop": [
+    49,
+    143,
+    1199,
+    1136
+  ],
+  "source_transform": {
+    "scale_x": 0.10434782608695652,
+    "scale_y": 0.10473313192346426,
+    "translate_x": -1.1130434782608694,
+    "translate_y": 5.023162134944613
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "ff4559da27555f3fe0fac1c4745e21b691c0bf504dcc5405f36eece161422e6b",
+  "spec_sha256": "8b0113fbad00cce62590f42723671198311413e40168c985c98e6b5d1bd1df58",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

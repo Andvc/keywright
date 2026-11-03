@@ -1,0 +1,51 @@
+{
+  "id": "curio.watch",
+  "category": "curio",
+  "title": "Pocket Watch",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/watch.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "D",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_watch_D.png",
+  "original_source_sha256": "778451ac0495531645a7ac2860cb8c57fdfc8584a80db50df8f53bea80d25bb3",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "b62f130861a50ae17854d2bec5831e299e925edf0963ecc2d547eb352d5a40b3",
+  "colours": 5,
+  "crop": [
+    84,
+    81,
+    1224,
+    1190
+  ],
+  "source_transform": {
+    "scale_x": 0.0912280701754386,
+    "scale_y": 0.09107303877366997,
+    "translate_x": -3.663157894736842,
+    "translate_y": -2.3769161406672676
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "778451ac0495531645a7ac2860cb8c57fdfc8584a80db50df8f53bea80d25bb3",
+  "spec_sha256": "d69378bb74342bf37ef72dccfb95c11d1285b262da98a2afeb916f0e70c9cf98",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

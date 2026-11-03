@@ -1,0 +1,51 @@
+{
+  "id": "figure.king",
+  "category": "figure",
+  "title": "King Aldric IX",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/king.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_king_B.png",
+  "original_source_sha256": "c4868680892b9ce39d3eea57269b4ee29279fbcb845563eeb34f946d1ea4df16",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
+  "colours": 19,
+  "crop": [
+    100,
+    16,
+    895,
+    1514
+  ],
+  "source_transform": {
+    "scale_x": 0.6616352201257861,
+    "scale_y": 0.6622162883845126,
+    "translate_x": 54.83647798742139,
+    "translate_y": 277.4045393858478
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "c4868680892b9ce39d3eea57269b4ee29279fbcb845563eeb34f946d1ea4df16",
+  "spec_sha256": "23e383c5c289a2511a8e0565005fcf0064531af2a7a8ce4a3d474fba2b2154ef",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

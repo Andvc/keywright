@@ -1,0 +1,51 @@
+{
+  "id": "prop.picks",
+  "category": "prop",
+  "title": "Fine Lockpicks",
+  "status": "produced_approved",
+  "source_size": [
+    22,
+    10
+  ],
+  "physical_size": [
+    176,
+    80
+  ],
+  "file": "art/density3/assets/props/picks.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/prop_picks_B.png",
+  "original_source_sha256": "56e8f2d6e75a948817e7c956f885997df7135f1844b2a3e49365040a95c40c5b",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5c3fa28d07ba577a9c49a12295f80f7023d63ec47ff25293ccbab58c34f908b6",
+  "colours": 12,
+  "crop": [
+    74,
+    129,
+    1703,
+    789
+  ],
+  "source_transform": {
+    "scale_x": 0.10804174340085942,
+    "scale_y": 0.10757575757575757,
+    "translate_x": -7.995089011663597,
+    "translate_y": -4.877272727272727
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "56e8f2d6e75a948817e7c956f885997df7135f1844b2a3e49365040a95c40c5b",
+  "spec_sha256": "389c8e6f23f2d6272960c56955174801dc7a78aca31e87bf97ca2c10e3b1e350",
+  "original_size": [
+    1774,
+    887
+  ],
+  "user_approval": "approved"
+}

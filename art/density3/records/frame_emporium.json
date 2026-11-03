@@ -1,0 +1,51 @@
+{
+  "id": "frame.emporium",
+  "category": "frame",
+  "title": "The shop's frame at the Royal Emporium",
+  "status": "produced_approved",
+  "source_size": [
+    320,
+    180
+  ],
+  "physical_size": [
+    2560,
+    1440
+  ],
+  "file": "art/density3/assets/frame/emporium.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "10",
+  "candidate": "C",
+  "original_source": "batch10_c2_4x_no_outline/sources/frame_emporium_C.png",
+  "original_source_sha256": "4e94e363004dd900ae949af8c4b18984b25ca92a0926a0332c3acbb03ba853ad",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "56e573eb550adc6c69c1548f705edd19705be431bbca715c6c263e62c73bce8b",
+  "colours": 17,
+  "crop": [
+    0,
+    0,
+    1536,
+    864
+  ],
+  "source_transform": {
+    "scale_x": 1.6666666666666667,
+    "scale_y": 1.6666666666666667,
+    "translate_x": 0.0,
+    "translate_y": 0.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "4e94e363004dd900ae949af8c4b18984b25ca92a0926a0332c3acbb03ba853ad",
+  "spec_sha256": "31e3a2083ebd9b077b435ddb2060560f09d71fd9f415c8e3605c39895669e5c6",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

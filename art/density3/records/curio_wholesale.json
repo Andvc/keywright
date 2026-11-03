@@ -1,0 +1,51 @@
+{
+  "id": "curio.wholesale",
+  "category": "curio",
+  "title": "Wholesaler's Tally",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/wholesale.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_wholesale_C.png",
+  "original_source_sha256": "20242bcfc34a188bd8d54ab96510e232c44b5b88a9f3c62be05e192f37b18ff9",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "4b3222e9510e09e0d1d9da47402d9777fd7617b908bf22eb4b9de5e0a99cf019",
+  "colours": 7,
+  "crop": [
+    185,
+    120,
+    1085,
+    1134
+  ],
+  "source_transform": {
+    "scale_x": 0.10222222222222223,
+    "scale_y": 0.10256410256410256,
+    "translate_x": -8.911111111111111,
+    "translate_y": -8.307692307692308
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "20242bcfc34a188bd8d54ab96510e232c44b5b88a9f3c62be05e192f37b18ff9",
+  "spec_sha256": "e113d924715985361c905c5912c2ee61d44e6827687f0f9a9be68e8441af61a7",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "figure.corisande",
+  "category": "figure",
+  "title": "Lady Corisande",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/corisande.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_corisande_A.png",
+  "original_source_sha256": "0e619db7135a157ff774a1f164261cb4ce8ef96b010415ad8927f8de1cfdffd9",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268",
+  "colours": 30,
+  "crop": [
+    123,
+    33,
+    901,
+    1503
+  ],
+  "source_transform": {
+    "scale_x": 0.6966580976863753,
+    "scale_y": 0.6965986394557823,
+    "translate_x": 27.311053984575835,
+    "translate_y": 233.0122448979592
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "0e619db7135a157ff774a1f164261cb4ce8ef96b010415ad8927f8de1cfdffd9",
+  "spec_sha256": "8a415d5cfd007c5b677052d100f44b2a88b4dab0999ca720adfbe95c2e430d85",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          409,
+          364,
+          436,
+          382
+        ],
+        "match_anchor": [
+          400,
+          367,
+          406,
+          373
+        ],
+        "dark_features_only": 8
+      },
+      {
+        "box": [
+          391,
+          380,
+          433,
+          400
+        ],
+        "match_anchor": [
+          400,
+          367,
+          406,
+          373
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "原调色吞掉鼻底与唇形；固定74色直接保护会产生粉红色光圈。用脸颊肤色匹配原图局部24色，仅保留原图更暗的鼻翼/鼻底和唇部，恢复自然小幅浅笑，无描边。",
+    "selected_candidate_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 12,
+  "user_approval": "approved"
+}

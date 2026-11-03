@@ -1,0 +1,51 @@
+{
+  "id": "curio.gloves",
+  "category": "curio",
+  "title": "Kid Gloves",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/gloves.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_gloves_B.png",
+  "original_source_sha256": "2aa1b1dbc0c9dda4b03d13d74309519c0768f7f508d3aa8393e87f3510b1fc19",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7290ec1bd307eaa4ecc5594c0ce85c85ac61f7b441756d3fc96fc7fb182a3b98",
+  "colours": 6,
+  "crop": [
+    119,
+    101,
+    1151,
+    1138
+  ],
+  "source_transform": {
+    "scale_x": 0.0998062015503876,
+    "scale_y": 0.10028929604628736,
+    "translate_x": -7.876937984496124,
+    "translate_y": -6.129218900675024
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "2aa1b1dbc0c9dda4b03d13d74309519c0768f7f508d3aa8393e87f3510b1fc19",
+  "spec_sha256": "ea595bb97f6b50d247a72814853d8fa02f144e6a118360389967885654339974",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

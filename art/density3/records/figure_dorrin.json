@@ -1,0 +1,75 @@
+{
+  "id": "figure.dorrin",
+  "category": "figure",
+  "title": "Dorrin the Delver",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/dorrin.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "A",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_dorrin_A.png",
+  "original_source_sha256": "e5050a422df1972f395b5dd0a880a092d7402d70e4f5d68caef4fc8a0a8c69b5",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0",
+  "colours": 18,
+  "crop": [
+    189,
+    16,
+    822,
+    1511
+  ],
+  "source_transform": {
+    "scale_x": 0.6635071090047393,
+    "scale_y": 0.6635451505016723,
+    "translate_x": 48.59715639810426,
+    "translate_y": 277.38327759197324
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "e5050a422df1972f395b5dd0a880a092d7402d70e4f5d68caef4fc8a0a8c69b5",
+  "spec_sha256": "7860601a8f0e0f1ccb8e055efa705d52b9be5a7a67af7add9a8c2286078ec42b",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "face_protection": {
+    "mode": "source24_matched_detail",
+    "regions": [
+      {
+        "box": [
+          384,
+          413,
+          436,
+          433
+        ],
+        "match_anchor": [
+          375,
+          402,
+          381,
+          408
+        ],
+        "dark_features_only": 8
+      }
+    ],
+    "reason_zh": "补回浅笑左段的原图连续走向，保留原来的自信神态；仅保护较暗笔画，避免普通局部重采样出现浅黄色矩形肤色带。",
+    "selected_candidate_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0"
+  },
+  "face_protection_version": 1,
+  "protected_detail_cells": 6,
+  "user_approval": "approved"
+}

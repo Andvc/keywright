@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.charter",
+  "category": "icon_upgrade",
+  "title": "Crownhold Charter",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_charter.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "A",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_charter_A.png",
+  "original_source_sha256": "9a4df14994a2df94e6e8771e6b654d442dfc9a7e94f0fa40b5bc788386d9cf2c",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8dfcdac50d02be42cf28a777c49547bfcc8d06c29930b9dbe18fece68b535a72",
+  "colours": 10,
+  "crop": [
+    100,
+    88,
+    1173,
+    1172
+  ],
+  "source_transform": {
+    "scale_x": 0.08108108108108109,
+    "scale_y": 0.08118081180811808,
+    "translate_x": -4.108108108108109,
+    "translate_y": -3.143911439114391
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "9a4df14994a2df94e6e8771e6b654d442dfc9a7e94f0fa40b5bc788386d9cf2c",
+  "spec_sha256": "a9c27df9b9d85b55de042c8c211e9ad7942761784983e5265daf86962ad27a69",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

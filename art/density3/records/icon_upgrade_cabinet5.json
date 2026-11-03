@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.cabinet5",
+  "category": "icon_upgrade",
+  "title": "Gilded Cabinet",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_cabinet5.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_cabinet5_C.png",
+  "original_source_sha256": "d49f4d3e6cf251d1db8d26a33452e4ee1d34372b87d9e599d85709c46b0f6dc2",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "5c524695e7b836a10071d7ea278073b03f36515c8485e7ac236cd8f712d8a4b7",
+  "colours": 12,
+  "crop": [
+    111,
+    46,
+    1150,
+    1189
+  ],
+  "source_transform": {
+    "scale_x": 0.07699711260827719,
+    "scale_y": 0.07699037620297462,
+    "translate_x": -0.5466794995187687,
+    "translate_y": 0.4584426946631672
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "d49f4d3e6cf251d1db8d26a33452e4ee1d34372b87d9e599d85709c46b0f6dc2",
+  "spec_sha256": "d64f0190673e09546deb335b619c28c695bd9562201fb4806b47b0a8b547cb77",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

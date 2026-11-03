@@ -1,0 +1,51 @@
+{
+  "id": "item.sand_case",
+  "category": "item",
+  "title": "Scroll Case of Sand",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/sand_case.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "A",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_sand_case_A.png",
+  "original_source_sha256": "e7109967fcbebf26dcc2f5d8b9568826ced6fd5e02a29759dedd24703edbe6e3",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "375b71d3d48e86a8afdebffc17d1839cc9adf320e91b094295a04351a59c6531",
+  "colours": 16,
+  "crop": [
+    40,
+    161,
+    1204,
+    1100
+  ],
+  "source_transform": {
+    "scale_x": 0.10309278350515463,
+    "scale_y": 0.1033013844515442,
+    "translate_x": -0.12371134020618513,
+    "translate_y": 10.368477103301384
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "e7109967fcbebf26dcc2f5d8b9568826ced6fd5e02a29759dedd24703edbe6e3",
+  "spec_sha256": "052170dfee44b2fb4791a48c387439c7033eacc922ec45a74d34b8441ae312cb",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

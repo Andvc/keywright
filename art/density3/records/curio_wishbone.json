@@ -1,0 +1,51 @@
+{
+  "id": "curio.wishbone",
+  "category": "curio",
+  "title": "Wishbone",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/wishbone.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "B",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_wishbone_B.png",
+  "original_source_sha256": "cca8cd27b0bac753f2d0a4957b01ad47cc2361087bcee2a0eca566060629d5ed",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "259aa5b85604af341474098d88d052c1787754d3cc1a79a6efeabd339653e1ae",
+  "colours": 5,
+  "crop": [
+    146,
+    66,
+    1115,
+    1192
+  ],
+  "source_transform": {
+    "scale_x": 0.09184726522187822,
+    "scale_y": 0.09236234458259325,
+    "translate_x": -2.4097007223942217,
+    "translate_y": -2.0959147424511544
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "cca8cd27b0bac753f2d0a4957b01ad47cc2361087bcee2a0eca566060629d5ed",
+  "spec_sha256": "393c804082e9bc2cc1357afe67104752249054ebdf56dd9cfa9c9d4f994fc3be",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

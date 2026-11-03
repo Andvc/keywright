@@ -1,0 +1,51 @@
+{
+  "id": "sheet.thornwick",
+  "category": "sheet",
+  "title": "Appraisal sheet at Thornwick Market",
+  "status": "produced_approved",
+  "source_size": [
+    216,
+    320
+  ],
+  "physical_size": [
+    864,
+    1280
+  ],
+  "file": "art/density3/assets/sheet/thornwick.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "10",
+  "candidate": "B",
+  "original_source": "batch10_c2_4x_no_outline/sources/sheet_thornwick_B.png",
+  "original_source_sha256": "e95d382d4b710ec09b87d976a15fb9018e051471fbf95740a9786ee8596b13fa",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "6f92cb656dbef5803727a29b6cfc7c581403dd1807334c6b266bf85c955fa7f6",
+  "colours": 11,
+  "crop": [
+    0,
+    9,
+    1024,
+    1526
+  ],
+  "source_transform": {
+    "scale_x": 0.84375,
+    "scale_y": 0.8437705998681608,
+    "translate_x": 0.0,
+    "translate_y": -7.593935398813447
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "e95d382d4b710ec09b87d976a15fb9018e051471fbf95740a9786ee8596b13fa",
+  "spec_sha256": "57cdb68af8fee8476613b9f706851a0cbf368035ab66beb4ac0edafdddb216ed",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

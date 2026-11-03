@@ -1,0 +1,51 @@
+{
+  "id": "curio.crate",
+  "category": "curio",
+  "title": "Padded Crate",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/crate.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "C",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_crate_C.png",
+  "original_source_sha256": "5a2174e508a44b64534f8872deb76026ab21d3b5116043e6d1b392eb6ee062f7",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "7a71666e68ca88e1b971f18667a1821e3770f49eb8bf8cd6221fb3ccfdae995e",
+  "colours": 9,
+  "crop": [
+    77,
+    116,
+    1178,
+    1171
+  ],
+  "source_transform": {
+    "scale_x": 0.09445958219800181,
+    "scale_y": 0.0947867298578199,
+    "translate_x": -3.27338782924614,
+    "translate_y": -4.995260663507109
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "5a2174e508a44b64534f8872deb76026ab21d3b5116043e6d1b392eb6ee062f7",
+  "spec_sha256": "78b2d7534f068b0058da7a372a933a834110381b0f224040b8735a70fbebceff",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

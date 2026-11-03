@@ -1,0 +1,51 @@
+{
+  "id": "figure.skrae",
+  "category": "figure",
+  "title": "Skrae",
+  "status": "produced_approved",
+  "source_size": [
+    96,
+    160
+  ],
+  "physical_size": [
+    768,
+    1280
+  ],
+  "file": "art/density3/assets/figures/skrae.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    2
+  ],
+  "batch": "11",
+  "candidate": "B",
+  "original_source": "batch11_c2_4x_no_outline/sources/figure_skrae_B.png",
+  "original_source_sha256": "856f51ae879f6a0bcd73f07f0f4655f70c335640023f75d338f06e20887edd91",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "515319ff94d3b8ee7d47bc58e13744acb7e6f8bc8a753c923a2f5986a2f2b0c2",
+  "colours": 15,
+  "crop": [
+    150,
+    52,
+    947,
+    1487
+  ],
+  "source_transform": {
+    "scale_x": 0.6248431618569636,
+    "scale_y": 0.624390243902439,
+    "translate_x": 41.27352572145546,
+    "translate_y": 351.53170731707314
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "856f51ae879f6a0bcd73f07f0f4655f70c335640023f75d338f06e20887edd91",
+  "spec_sha256": "a95629c3f1d52d50c64ef75a33c6eef812221592fad463b1181a3d667396c82d",
+  "original_size": [
+    1024,
+    1536
+  ],
+  "user_approval": "approved"
+}

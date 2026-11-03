@@ -1,0 +1,51 @@
+{
+  "id": "curio.book",
+  "category": "curio",
+  "title": "Visitors' Book",
+  "status": "produced_approved",
+  "source_size": [
+    28,
+    28
+  ],
+  "physical_size": [
+    112,
+    112
+  ],
+  "file": "art/density3/assets/curios/book.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "13",
+  "candidate": "A",
+  "original_source": "batch13_c2_4x_no_outline/sources/curio_book_A.png",
+  "original_source_sha256": "ab69c38a6bf57a55d5ad4998ebde8b37a0204de71b90c57b4e9cbbf34399c97f",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "8d31fb55f50e5b762d62eb687f36ad5f6f8a9546298745dbca9f9d82ace387e5",
+  "colours": 15,
+  "crop": [
+    40,
+    129,
+    1221,
+    1133
+  ],
+  "source_transform": {
+    "scale_x": 0.08806096528365792,
+    "scale_y": 0.08764940239043825,
+    "translate_x": 0.47756138865368314,
+    "translate_y": 0.6932270916334655
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "ab69c38a6bf57a55d5ad4998ebde8b37a0204de71b90c57b4e9cbbf34399c97f",
+  "spec_sha256": "e7558db8948ed4830cb266b582ebe89fb4aca3967e0ecbc94ce2eaadf3af6ae0",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

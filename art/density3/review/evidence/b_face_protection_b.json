@@ -1,0 +1,88 @@
+{
+  "figure.isolde": {
+    "mode": "source24_matched",
+    "regions": [
+      {
+        "box": [
+          380,
+          360,
+          449,
+          397
+        ],
+        "match_anchor": [
+          370,
+          393,
+          387,
+          408
+        ]
+      },
+      {
+        "box": [
+          390,
+          393,
+          447,
+          437
+        ],
+        "match_anchor": [
+          370,
+          393,
+          387,
+          408
+        ]
+      }
+    ],
+    "reason_zh": "先尝试 palette，但暖肤色映成黄圈；使用源图局部 24 色并以明确脸颊锚点匹配现有肤色，恢复双眼深瞳/浅眼白和收敛双唇。不用 detail，避免加粗眼线或嘴。",
+    "selected_candidate_sha256": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
+    "candidate_path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\candidates\\local4\\figure_isolde_source24_matched.png"
+  },
+  "figure.vexis": {
+    "mode": "palette_detail",
+    "regions": [
+      [
+        407,
+        875,
+        459,
+        902
+      ]
+    ],
+    "reason_zh": "仅在原笑线区域保留源图中至少 2/9 支持的深色细线，恢复小恶魔的闭合笑弧和小牙，不增加新嘴型、宽齿笑或描边。",
+    "selected_candidate_sha256": "099dce1dbbdf76a3aa8fba5cca48c25dfa364542894a29bfb8a2b7a8ca56c336",
+    "candidate_path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\candidates\\local1\\figure_vexis_palette_detail.png"
+  },
+  "figure.malbranche": {
+    "mode": "palette_detail",
+    "regions": [
+      [
+        383,
+        291,
+        439,
+        330
+      ]
+    ],
+    "reason_zh": "在原牙弓小区域保留细牙缝，让碎点重新读成单一骷髅牙弓；保留原有非人类解剖与威胁感，不补人类嘴唇。正式复审将 ROI 右界 442 收到 439，去除源图鼻缘 chroma 造成的一格紫粉色。",
+    "selected_candidate_sha256": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
+    "candidate_path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\candidates\\final_edge\\figure_malbranche_palette_detail.png"
+  },
+  "figure.bram": {
+    "mode": "source24_matched",
+    "regions": [
+      {
+        "box": [
+          378,
+          439,
+          442,
+          463
+        ],
+        "match_anchor": [
+          407,
+          457,
+          424,
+          465
+        ]
+      }
+    ],
+    "reason_zh": "仅保留原灰色胡须及其下克制嘴线的局部颜色，以胡须下皮肤锚点匹配现有肤色；不用 detail，避免扩大暗嘴。右界已收回轮廓内，去掉试验候选中的洋红污染。",
+    "selected_candidate_sha256": "5d8c23ea920275c7b3da0a0c0a13b983a38a655f529191703ad01cc5d8ea92c4",
+    "candidate_path": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\b\\candidates\\local5_bram\\figure_bram_source24_matched.png"
+  }
+}

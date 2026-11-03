@@ -21,7 +21,7 @@ public static class Settings
     public static float Shake { get; set; } = 1f;
 
     /// <summary>The outline round everyone and along the counter's edge (<see cref="Ui.UiKit.Outline"/>).</summary>
-    public static bool Outlines { get; set; } = true;
+    public static bool Outlines { get; set; }
 
     public static bool Tips { get; set; } = true;
 

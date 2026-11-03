@@ -1,0 +1,51 @@
+{
+  "id": "shelf.stall",
+  "category": "shelf",
+  "title": "Display shelf at the Brindle crossroads (Bram's Stall)",
+  "status": "produced_approved",
+  "source_size": [
+    136,
+    40
+  ],
+  "physical_size": [
+    1088,
+    320
+  ],
+  "file": "art/density3/assets/shelf/stall.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    2,
+    0
+  ],
+  "batch": "9s",
+  "candidate": "B",
+  "original_source": "batch9s_c2_4x_no_outline/sources/shelf_stall_B.png",
+  "original_source_sha256": "6c51edc8ba7c26c48d50e5d98650050702ec77fd686ead2dc305816927609aa4",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "51c87c64c5459def4ad3a29e05196d98715a6b41283d2bca8a7f28ddb5f9aed0",
+  "colours": 13,
+  "crop": [
+    25,
+    0,
+    1520,
+    573
+  ],
+  "source_transform": {
+    "scale_x": 0.7277591973244147,
+    "scale_y": 0.7277486910994765,
+    "translate_x": -18.193979933110366,
+    "translate_y": -97.0
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 8,
+  "pipeline_version": 1,
+  "source_sha256": "6c51edc8ba7c26c48d50e5d98650050702ec77fd686ead2dc305816927609aa4",
+  "spec_sha256": "81ab423ea40ab837eb276085a1ab21df71eb187e9c5de45ecda46ec7b3c65ed9",
+  "original_size": [
+    1536,
+    1024
+  ],
+  "user_approval": "approved"
+}

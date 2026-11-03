@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.bench",
+  "category": "icon_upgrade",
+  "title": "Restorer's Bench",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_bench.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "C",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_bench_C.png",
+  "original_source_sha256": "d5bd0b475e871ce123990609fe186fce454b0a708e43e1f197e6e7421463f2c6",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "c3d515781d2a89fecccd1eab367fc7cd655cf3fae1e1116f58a427599f528c0f",
+  "colours": 12,
+  "crop": [
+    49,
+    148,
+    1213,
+    1165
+  ],
+  "source_transform": {
+    "scale_x": 0.07560137457044673,
+    "scale_y": 0.07571288102261553,
+    "translate_x": 0.2955326460481098,
+    "translate_y": -2.2055063913470985
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "d5bd0b475e871ce123990609fe186fce454b0a708e43e1f197e6e7421463f2c6",
+  "spec_sha256": "c1094c37d31f59e571ac5a68ad5689ffc84cb1ba06d0b704a5f0e7c9bf0bf54a",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

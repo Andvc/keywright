@@ -1,0 +1,51 @@
+{
+  "id": "icon.upgrade.scales",
+  "category": "icon_upgrade",
+  "title": "Brass Scales",
+  "status": "produced_approved",
+  "source_size": [
+    24,
+    24
+  ],
+  "physical_size": [
+    96,
+    96
+  ],
+  "file": "art/density3/assets/icons/upgrade_scales.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "14",
+  "candidate": "B",
+  "original_source": "batch14_c2_4x_no_outline/sources/icon_upgrade_scales_B.png",
+  "original_source_sha256": "252c89cfcc4e34354c359084a9d6c049e269f34caf8443879c0e62bd7430a362",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "13109aa815e7dba1749c5c45a467b3d05bf2082cb55670823b083666757ddba0",
+  "colours": 5,
+  "crop": [
+    59,
+    78,
+    1195,
+    1160
+  ],
+  "source_transform": {
+    "scale_x": 0.07746478873239436,
+    "scale_y": 0.07763401109057301,
+    "translate_x": -0.570422535211268,
+    "translate_y": -0.05545286506469527
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "252c89cfcc4e34354c359084a9d6c049e269f34caf8443879c0e62bd7430a362",
+  "spec_sha256": "3abb0cbdecfcbd25cc9b51ef8f2b6506c875f6511f26f4c75b9e6e7da37b34cc",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

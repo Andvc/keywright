@@ -1,0 +1,455 @@
+{
+  "reviewer": "face_audit_a",
+  "date": "2026-11-04",
+  "user_approval": "pending",
+  "counts": {
+    "portraits": 19,
+    "queue_heads": 19
+  },
+  "qa_verdict": "pass_framing_and_expression",
+  "evidence": [
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_01.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_02.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_03.png",
+    "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\integration\\final_heads\\heads_04.png"
+  ],
+  "items": [
+    {
+      "id": "tam",
+      "source_production_sha256": "bb2107a47bdbfa66e0adc11f4c7fbd63ec0a3839f975c53292bc2e439d5d2bec",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\tam.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "c6572c5d574edd65d0d599ec9bb8af052115ed3d3fe38ed28b7e2e5becf69027",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\tam.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "173d11010d7289ddfecb6d928184bef81ae7484b6f79ddef4db16d051b063ec9",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "penn",
+      "source_production_sha256": "35d1d3bc72ae2a115eb366a708e532a48c5a4129a97e976d1300cdf6d3f226e8",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\penn.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "56a54bb6f0633ba970671cf7dac7ef6fdf83ad8916e0150ae9c3cbaad1787d2a",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\penn.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "7398fe307d4169c493cea09fc0308f81622b46930199895c3518ff0b5341c78e",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "hob",
+      "source_production_sha256": "70e760ff7f4fade58560c98fdf5f8f53c3cdf75c169243357e90a61985f6ecc9",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\hob.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "a63d8dae617f817c6f5ca6c881bbb4b017496806c7141ebe41394dff1090414a",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\hob.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "e93bd9308de909f2fdf5cc24110553aa6d3abcd7c5eed06b53812f8998d2436b",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "mags",
+      "source_production_sha256": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\mags.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "cd7fe7d454bb2923f8644994837547ce949824c321e8bc2db2aec63fa573249f",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\mags.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "17e61a3bc17a83e5e9dd146daf2aac68ee271bc83233aeacf3448d6009f4b6a3",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "dorrin",
+      "source_production_sha256": "ff901ef81fb12a28b08b478178eb68edb685e1414213e3b966839ec17e087ca0",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\dorrin.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "7f867f154aa37d07505becd138d070400e9e2b4df5c063e20517cd3a57dcaaca",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\dorrin.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "cc90f8a4847e215cb68f1d287e2c2cd757d9b8672433d9488427bff54131c39e",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "snikkit",
+      "source_production_sha256": "fbfee45d4480442571cd2c731c79633a56fa341a171995842db5e2db404003b6",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\snikkit.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "f5eb1109cfeb265d91614fd8c9fb12434dcb66261de23347a74ccad860ac00cc",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\snikkit.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "4ccb91f6f3dd01b8402ce1f80eb289ddc1943306a08d478506cf067e37b33af3",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "wenna",
+      "source_production_sha256": "2bb81ab0cdb4adab00e3aa3992455b6e622bc46b629329cfe3d2aa4760bf4861",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\wenna.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "e6774bc0bd67591f779425f7c053de6a3c55fcff049e20cbabcbd882f29c1a04",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\wenna.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "e2590d8218babc0a4e0ff1103c19e6e6b74e063a9aafb48693085b93a9db8942",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "bramble",
+      "source_production_sha256": "48a7b8daf087757e1b6839e68e5d0671b3826ed10214b140cb6d0382c660e6a0",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\bramble.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "376007545e4ed3d79fcd5ce16fd08d2e824b5ffc8055e08e62e2f3cba5a741a2",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\bramble.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "6be722fbc9814f337dfbf77f969b6d8971b87dfcfdfa37411ab6e2d0637eb546",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "ansel",
+      "source_production_sha256": "a88f38ccda7788d026680231e5ef7754e3f16b16d0d87f28c1dc16a48818831d",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\ansel.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "24128f4984bef71556c1bd7f8e180f096a8764454ec3b85cee8160f6f262eed3",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\ansel.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "4d2406da014127208dc4fa96d1999bfa8423af4deab3d72b3095419cd9f042ec",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "fennick",
+      "source_production_sha256": "1f378979dd429d8a05cf9eccaaa22d50e3e006b4ff15683f2411f62801d059aa",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\fennick.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "7e1b8495a45a43a6169d3c1d7dba4bede53f463874ce50084b2e4c92f1eaf509",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\fennick.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "a463c0adf6c282fd6dcb87b1f156ae25015953e5cdd16fdfa74c19772142341c",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "gerda",
+      "source_production_sha256": "3e7b92691195fdbaf3fa9fb3306098a938b1d9c0313dcf8b80e46ce4d9b08ebe",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\gerda.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "fc2b186d5128469b3283793e1fcf9af2af852219f3b17974d7f126f012c2e094",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\gerda.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "a6106abfe0a78af47e6378e29ffbf2fff37b7b2fd2e8a337a980c29bac86d994",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "wren",
+      "source_production_sha256": "47ae8eafcb7ca8a2ab105d35aec33ef116e168ea56e512edb3bfb0aa2daaf4e6",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\wren.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "58030044e1d76cd54cc6bfa203366ea67c256ae0521c761c9db93b0ea4941bdf",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\wren.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "755d99ee73d2c0a2181c86ae68b2961ca4eac5e24d1d1cbd734428fcc37fc299",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "orrin",
+      "source_production_sha256": "1dd35dc054dec245e25c8956226f704058223804c04e70f3daccdc3c77e68a23",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\orrin.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "ec14c942f70ff9f92895c4c0e7d099ad395451fa1c19cb107073b4e0cc6a4bf0",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\orrin.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "fa39b92eee2abca8a63b128cee6eade1b66600110ed7a52491da11e1b21e8873",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "grit",
+      "source_production_sha256": "edbe4b91feec8070f18ce2564af69a003d80a7c0b7ca6fa432674c37fc5f2d4d",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\grit.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "1be16c9927c19bceb613a52488824d6a1b8998e320304f251c5062ee0c7c690e",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\grit.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "8d1ea9cecdb70cfef5fa171da26b97a6bd1a3c07390a0309cd33eb577ba12504",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "corisande",
+      "source_production_sha256": "501fabc2b6912074c7dff1db92d2753f1413ec3b761b59425cd2341da69cd268",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\corisande.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "fb3249c069d8596a435b1bf39bde7a779ae25e7b0d75516d7dd6a2e864fea43c",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\corisande.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "b0a722ac43de349b4cdc0f8697b7e925684f00181e6a1a9b1bea3a25c1d28b0a",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "pell",
+      "source_production_sha256": "28a1247a64d7f4b30a9b321371d7ee2e9f4138a8459d02fb56d1b16d87d24ba1",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\pell.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "441bbaab5f9abf54476b31116a69676160150332972991c789fb41806750e6bb",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\pell.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "6d8696e7dfedddf9a3048f3178854368f3a0a6ced3e8faa64ff189585798a6d4",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "quill",
+      "source_production_sha256": "1e41923e6cb049ff5cb6782ef1495875e7bb3276e0350bfed60d05a219f7274b",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\quill.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "633dc1a355805181a625951e143c59a6ec4310c4712c29de1548304a76f38883",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\quill.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "021c313da1ca6ad6816ce889274862ab5a6b3b861347bb18e2de1900178f4b2a",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "shelly",
+      "source_production_sha256": "ca59543b6077a747f4d1f803542cd43acf03eabb51b034074021f832e926e2b4",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\shelly.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "5603ca8685a0c57edacd8db6447078fecac46097f1c7cbae2c317c4c26288fda",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\shelly.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "3d2f1b137d2ba7d478db3210fe7847cc367b2e4e37c287de205cc1390a14c7ce",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    },
+    {
+      "id": "aldous",
+      "source_production_sha256": "293a894ba43a7657438de033f9595d03bdea0baaa1fe369f9128a23150808466",
+      "portrait": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\aldous.png",
+        "size": [
+          152,
+          152
+        ],
+        "sha256": "c979ca099c8182149878519aeff93b70385c0fbe4f67e9fd8c0c0404a08182af",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "queue_head": {
+        "file": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\density-3px-review\\assets\\sprites\\sellers\\faces\\aldous.png",
+        "size": [
+          76,
+          76
+        ],
+        "sha256": "b70f3c32ed3ca1a28b72abada13c2faf55942026b22ee9336c0d3c7ff1c49f9f",
+        "qa_verdict": "pass_framing_and_expression"
+      },
+      "observation_zh": "152px卡片与76px队列图均未见头部/五官裁切或新增不自然表情；76px图中的嘴线、镜框或胡须细节会简化为少数像素。"
+    }
+  ]
+}

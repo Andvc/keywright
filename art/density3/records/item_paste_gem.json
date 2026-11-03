@@ -1,0 +1,51 @@
+{
+  "id": "item.paste_gem",
+  "category": "item",
+  "title": "Paste Gem",
+  "status": "produced_approved",
+  "source_size": [
+    32,
+    32
+  ],
+  "physical_size": [
+    128,
+    128
+  ],
+  "file": "art/density3/assets/items/paste_gem.png",
+  "pixel_pitch": 3,
+  "grid_phase": [
+    0,
+    0
+  ],
+  "batch": "12",
+  "candidate": "B",
+  "original_source": "batch12_c2_4x_no_outline/sources/item_paste_gem_B.png",
+  "original_source_sha256": "480ead1e0edede0708dd93becb744cb671b0068f7d2ded80b4b3f0707d483ed0",
+  "has_face_override": false,
+  "override_name": null,
+  "output_sha256": "3fff87d6ab7249bfab50f5015485dd86267dde476db4348e18404ea6a6f4a93f",
+  "colours": 9,
+  "crop": [
+    52,
+    152,
+    1203,
+    1108
+  ],
+  "source_transform": {
+    "scale_x": 0.10425716768027801,
+    "scale_y": 0.10460251046025104,
+    "translate_x": -1.4213727193744568,
+    "translate_y": 8.100418410041842
+  },
+  "recolours": [],
+  "filled_strip_edge_pixels": 0,
+  "physical_scale_from_manifest": 4,
+  "pipeline_version": 1,
+  "source_sha256": "480ead1e0edede0708dd93becb744cb671b0068f7d2ded80b4b3f0707d483ed0",
+  "spec_sha256": "04e95606196af7975045f3a7d064dac2c025b579289395bf29157963e1b2748f",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "user_approval": "approved"
+}

@@ -1,0 +1,93 @@
+{
+  "id": "figure.fennick",
+  "source": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\batch11_c2_4x_no_outline\\sources\\figure_fennick_A.png",
+  "source_sha256": "3a34805ce9b5cf5140cc8739cc5dc7e4377846ae86d1bdfac2612af07e3e4de2",
+  "generated_candidate": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\agent_reviews\\a\\fennick_generated_candidate.png",
+  "generated_candidate_sha256": "bbd583abf28690aa70058a1abf88cef2475f50a69d37f908a34bbe70eceb4d43",
+  "output": "C:\\Users\\Administrator\\Desktop\\Project\\Keywright\\.本地化\\art-round2\\records\\density3_review_20261104\\source_overrides\\figure_fennick.png",
+  "output_sha256": "8a49d92accc3bc2d27681051266b92b14e4557d61432c47c617088c218115a76",
+  "tool": "built-in image_gen.imagegen",
+  "generation_calls": 1,
+  "prompt_file": "fennick_edit_prompt.txt",
+  "size": [
+    1024,
+    1536
+  ],
+  "transparent_background": false,
+  "recomposition": "Face-only polygon paste. A 2-source-pixel inward compositing-alpha feather hides the crop seam; no image blur, no rescaling or sharpening. Entire body, costume, hat, earring and background outside the polygon are pixel-identical to the original.",
+  "polygons_xy": [
+    [
+      [
+        479,
+        121
+      ],
+      [
+        531,
+        110
+      ],
+      [
+        577,
+        113
+      ],
+      [
+        601,
+        129
+      ],
+      [
+        609,
+        159
+      ],
+      [
+        609,
+        190
+      ],
+      [
+        615,
+        210
+      ],
+      [
+        601,
+        235
+      ],
+      [
+        594,
+        270
+      ],
+      [
+        576,
+        285
+      ],
+      [
+        525,
+        275
+      ],
+      [
+        481,
+        250
+      ],
+      [
+        463,
+        220
+      ],
+      [
+        455,
+        190
+      ],
+      [
+        460,
+        151
+      ]
+    ]
+  ],
+  "mask_bbox_xyxy": [
+    455,
+    110,
+    616,
+    286
+  ],
+  "mask_file": "fennick_edit_mask.png",
+  "pixels_changed_inside_mask": 21918,
+  "pixels_changed_outside_mask": 0,
+  "body_wardrobe_hat_earring_background": "pixel-identical to original outside the recorded facial masks",
+  "visual_verdict": "Eyes are more open and aligned, brows relaxed, mouth corners less upturned; mature long face and thin moustache retained. Final 3px output still requires second-pass inspection."
+}
