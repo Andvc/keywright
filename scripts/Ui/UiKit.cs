@@ -55,6 +55,24 @@ public static class UiKit
     /// <summary>How wide a text is at this size, in the game's font (a translation's letters can be twice as wide).</summary>
     public static float TextWidth(string text, int size = 16) => Font.GetStringSize(text, HorizontalAlignment.Left, -1, SnapFont(size)).X;
 
+    /// <summary>
+    /// How tall a wrapped label this wide needs to be for the text: broken into lines the way a label breaks them (at
+    /// words), each a line of the font and the theme's spacing between them.
+    /// </summary>
+    public static float TextHeight(string text, float width, int size = 16)
+    {
+        size = SnapFont(size);
+        var paragraph = new TextParagraph
+        {
+            Width = width,
+            BreakFlags = TextServer.LineBreakFlag.Mandatory | TextServer.LineBreakFlag.WordBound | TextServer.LineBreakFlag.Adaptive,
+        };
+        paragraph.AddString(text, Font, size);
+        int lines = Math.Max(1, paragraph.GetLineCount());
+        int spacing = ThemeDB.GetDefaultTheme().GetConstant("line_spacing", "Label");
+        return lines * Font.GetHeight(size) + (lines - 1) * spacing;
+    }
+
     /// <summary>The text, or as much of it as fits in this width with "..." after it (Kenney Mini has no ellipsis).</summary>
     public static string Fit(string text, float width, int size = 16)
     {

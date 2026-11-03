@@ -114,18 +114,31 @@ public partial class NotebookView : Node2D
             ? Loc.T($"Active: {active} of {slots}. Switch one on to put it to work; more slots come with a Crownhold Charter and a Royal Seal.")
             : Loc.T($"Active: {active} of {slots}. You choose at the end of a day.");
         _page.AddChild(UiKit.MakeLabel(intro, 16, Palette.Muted).Place(TableX, PanelY + 60, PanelW - 48, 20));
-        const float rowH = 58;
+        // Ten synergies are more than the page holds: the rows scroll (the wheel, or the right stick), each as tall as
+        // its words (a long effect takes three lines).
+        float top = PanelY + 88, rowW = PanelW - 48;
+        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }
+            .Place(TableX - 8, top, PanelW - 32, PanelY + PanelH - 12 - top);
+        _page.AddChild(scroll);
+        var list = new Control { MouseFilter = Control.MouseFilterEnum.Pass };
+        scroll.AddChild(list);
+        float y = 0;
         for (int i = 0; i < Synergies.All.Length; i++)
         {
             var synergy = Synergies.All[i];
-            float y = PanelY + 88 + i * rowH;
             int level = synergy.Level(_state);
             bool on = _state.ActiveSynergies.Contains(synergy.Key);
             bool later = synergy.Tier > _state.Tier && level == 0;
-            var row = new Panel { MouseFilter = Control.MouseFilterEnum.Ignore }.Place(TableX - 8, y, PanelW - 32, rowH - 4);
+            string effect = level > 0 ? synergy.Effect(level) : Loc.T($"Level 1: {synergy.Effect(1)}");
+            var progress = synergy.Progress(_state).ToList();
+            string next = progress.Count == 0 ? Loc.T("Highest level!") : Loc.T($"Next: {string.Join("\n", progress)}");
+            float textH = Math.Max(UiKit.TextHeight(effect, 480), UiKit.TextHeight(next, 196));
+            float rowH = Math.Max(54, textH + 12);
+            var row = new Panel { MouseFilter = Control.MouseFilterEnum.Ignore }.Place(0, y, rowW, rowH);
+            y += rowH + 4;
             row.AddThemeStyleboxOverride("panel", UiKit.PanelBox(4));
             if (on) row.AddChild(UiKit.MakeFrame(Palette.Magic));
-            _page.AddChild(row);
+            list.AddChild(row);
             var nameColor = later ? Palette.Muted.Darkened(0.2f) : on ? Palette.Magic : level > 0 ? Palette.Gold : Palette.Text;
             row.AddChild(UiKit.MakeLabel(synergy.Name, 16, nameColor).Place(12, 6, 220, 20));
             row.AddChild(UiKit.MakeLabel(later ? Loc.T($"{synergy.Blurb} (later)") : synergy.Blurb, 16, Palette.Muted).Place(12, 28, 220, 20));
@@ -140,11 +153,8 @@ public partial class NotebookView : Node2D
                 }
             }) { Position = new Vector2(240, 18) };
             row.AddChild(pips);
-            string effect = level > 0 ? synergy.Effect(level) : Loc.T($"Level 1: {synergy.Effect(1)}");
-            row.AddChild(UiKit.MakeLabel(effect, 16, level > 0 ? Palette.Text : Palette.Muted).Wrapped().Place(360, 6, 480, 46));
-            var progress = synergy.Progress(_state).ToList();
-            string next = progress.Count == 0 ? Loc.T("Highest level!") : Loc.T($"Next: {string.Join("\n", progress)}");
-            row.AddChild(UiKit.MakeLabel(next, 16, Palette.Muted).Wrapped().Place(852, 6, 196, 46));
+            row.AddChild(UiKit.MakeLabel(effect, 16, level > 0 ? Palette.Text : Palette.Muted).Wrapped().Place(360, 6, 480, rowH - 8));
+            row.AddChild(UiKit.MakeLabel(next, 16, Palette.Muted).Wrapped().Place(852, 6, 196, rowH - 8));
             if (_choosing && level > 0)
             {
                 bool canTurnOn = on || active < slots;
@@ -160,6 +170,7 @@ public partial class NotebookView : Node2D
             }
             else if (on) row.AddChild(UiKit.MakeLabel(Loc.T("Active"), 16, Palette.Magic, HorizontalAlignment.Center).Place(1060, 18, 100, 20));
         }
+        list.CustomMinimumSize = new Vector2(rowW, y - 4);
     }
 
     void BuildSounds()

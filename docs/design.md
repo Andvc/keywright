@@ -1201,6 +1201,16 @@ chest stands on. So the game draws those itself, one dark pixel outside every ch
 the faces cut from them) and a line along the counter's far edge, and a setting turns them off for anyone who'd rather
 have the art as drawn.
 
+**0.31: the 3px art.** After comparing grain sizes the owner chose 3px: every picture remade from its full-size
+original so that one cell of the art is 3x3 screen pixels at 2560x1440 (twice as fine as round 2's 4x grid, which
+was 8 pixels a cell there), with the faces kept whole and natural (two expressions corrected, thirteen faces' details
+protected) and no outlines: the shapes stand out by colour against colour, so the game's own outlines are off and
+the setting is greyed out with a note. All 267 pictures were reviewed and approved on 2026-11-04 (`art/density3/`).
+Nothing moves: each texture is stored at its 1440p size and tells the layout the size it had before
+(`ArtTexture`, `assets/art_density.json`), so every position, scale and click area is round 2's. A cell is exactly 3
+pixels at 1440p, and a little more or less at other sizes (2.25 at 1080p, 1.5 at 720p); the chest, the effects and
+the UI frames keep round 2's grain.
+
 ## Title, saves and settings
 
 The game opens on a title screen (Continue, New game, Settings, Quit) over
@@ -1209,7 +1219,7 @@ what unlocks them), the chosen one's rules, and the challenge level with its ter
 saved to `user://save.json` at the start of each day (`GameState.Save` and `Load`, plain JSON from Core), so leaving
 mid-day starts that day over; the pause menu (Esc, or Menu in the top bar) says so. Settings (`user://settings.cfg`):
 volume, fullscreen, screen shake and flashes (full, reduced or off), outlines (round everyone and along the counter's
-edge, on whatever screen is showing: see the art, above), Uncle Bram's tips, and **item sounds**: for each
+edge, on whatever screen is showing, for art drawn to be outlined: see the art, above; 0.31's isn't), Uncle Bram's tips, and **item sounds**: for each
 kind of thing, which of three or four sounds it makes (`Audio.SoundSets`; recorded ones from Kenney's CC0 packs via
 `tools/import_art.py`, a few synthesized in `Sfx`). Each kind's sound stays the one you'd expect in real life (a
 purse, a pot, a thump of cloth, a bottle, pages, glass), so any set keeps the rules readable; the choice is taste.

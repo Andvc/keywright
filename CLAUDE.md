@@ -60,10 +60,14 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine.
    `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the
    character screen, a new game (Hesk, at challenge level 8: the most boons and banes the character screen and the
-   pause menu ever list), the pause menu and its collection, and the settings (with a look at the scene with the outlines turned off; with `--gm`, the GM panel too: gold, the
+   pause menu ever list), the pause menu and its collection, and the settings (with a look at the scene with the outlines turned off, when the art has them; with `--gm`, the GM panel too: gold, the
    notebook and the collection filled, a skip refused mid-scene). A bot run shows the notebook's pages, clicks the
    Guild's due in the top bar once it's up (the notebook at the debt), and opens the collection over the counter.
-   Keep screenshot folders named `shots*` (git- and export-ignored).
+   Keep screenshot folders named `shots*` (git- and export-ignored). Under Xvfb there's no window manager, so
+   fullscreen stays at 1280x720 (the 3px art at 1.5 pixels a cell): for another size, a windowed settings.cfg in the
+   user folder (below) and a screen that size. After changing art or how a picture is loaded:
+   `python3 art/tools/density3_check.py`, `python3 tools/import_art.py --density-check`, `godot --headless --path .
+   --import`, then `--density-review` at 1440p and a bot run.
 4. Shaking or physics changes: `godot --headless --path . -- --shake-test` should hear everything the rules say is
    audible at each strength (and with the magnet, the lodestone in game), with no leaks.
 5. For feel/timing, record with `--write-movie movies/lot.avi --fixed-fps 60` and convert with ffmpeg.
@@ -437,7 +441,29 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 
 ## Art direction (pixel art)
 
-- The art is in `art/generated/`, made to the brief in `art/` (`README.md` first). Round 1 (0.23) came out too busy to
+- **The 3px art (0.31).** The game's pictures are `art/density3/assets/` (`README.md` there, in Chinese;
+  `approval.json` ties the owner's approval, 2026-11-04, to every file's SHA-256): round 2's pictures remade from their
+  full-size originals so a cell of the art is 3x3 screen pixels at 2560x1440 (round 2's 4x grid was 8 there), faces
+  kept whole and natural (`face_protection.json`), no outlines. `tools/import_art.py` lays them over `assets/` after
+  building the rest (`--density-only` just that, `--density-check` checks without writing; `art/tools/density3_check.py`
+  checks the grid, sizes and hashes), each texture at its 1440p size (the world's layers 2560x1440, figures 768x1280,
+  things, curios and icons at 4x their art, head crops at 2x), and writes `assets/art_density.json` with each one's
+  logical size (the art size the layout below was made for) and physical size. **Load every picture through
+  `ArtTexture.Load`** (`UiKit.MakeSprite`, `MakeBackdrop`, `MakeItemIcon` and the rest do): it returns the dense texture
+  reporting its logical size, so every position, scale and click area stays round 2's; a plain `GD.Load` of one draws it
+  two to eight times too big. Anything not in `art_density.json` (the chest, effects, the UI frames, a placeholder)
+  loads as it is. The game draws at the window's resolution (`canvas_items`), so a cell is exactly 3 pixels at 1440p and
+  a fraction more or less elsewhere (2.25 at 1080p, 1.5 at 720p), the exception to square pixels the owner chose; a run
+  holds a few hundred MB of these textures (`ArtTexture` keeps what it has loaded). The full-size originals live
+  outside the repository, in the art pipeline's archive (`art/density3/README.md`), so a new picture at this density
+  comes from there (`art/tools/density3.py`); until then a new figure or thing shows its round-2 picture or placeholder
+  at the same size. `--density-review --shots=DIR` (under `xvfb-run -s "-screen 0 2560x1440x24"`, a new folder each
+  time) captures every figure, each shop at each hour, the story scenes, the notebook, the locks and the upgrade cards
+  at 1440p, for an art review. Whether the art is outlined is the art's to say (`art_density.json`'s `outlines`,
+  `ArtTexture.OutlinesAllowed`): the 3px art isn't, so `UiKit.Outline` adds none, the counter's edge line stays hidden
+  and the Outlines setting is greyed out with a note (off by default).
+- Round 2 (0.25-0.30, `art/generated/`, still the layout's baseline and what the 3px art was remade from) was made to
+  the brief in `art/` (`README.md` first). Round 1 (0.23) came out too busy to
   look at for hours; round 2 (0.25) redraws it and builds the shop scene from layers (Codex, on the branch
   `art/round2`; `ART_DIRECTION.md`'s "Why round 2" has the measurements and the causes). Its first anchors came out
   calm but a little too plain; after the style study (`art/study/`, `art/tools/study.py`: four styles at three levels
@@ -445,8 +471,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   and everything was made that way. The generator never draws pixel art: it draws cartoon illustrations on magenta,
   and `art/tools/pixelize.py --mode flat --no-outline` makes the pixel art an area at a time, so a model's texture
   never gets in. The style: warm storybook cartoons in chunky pixels, cel-shaded, three or four readable features on a
-  figure or thing, no outlines in the art, the 74-colour palette in `art/palette/`, lit from the upper left. The game
-  outlines what has to stand out itself (the owner's request, 2026-11-01): one pixel of `Palette.Outline` (`#1a1420`,
+  figure or thing, no outlines in the art, the 74-colour palette in `art/palette/`, lit from the upper left. Until 0.31 the game
+  outlined what has to stand out itself (the owner's request, 2026-11-01; the 3px art turns it off, above): one pixel of `Palette.Outline` (`#1a1420`,
   the chest's own) outside every character's silhouette, full figures and the head crops cut from them
   (`UiKit.Outline`: a sprite of its own behind the picture), and a row of it along the counter's far edge
   (`ShopView`); things, props and the other layers have none, and nobody draws outlines into the art. Settings >
@@ -475,7 +501,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   from `art/generated/`). `art/.gdignore` keeps Godot from importing the folder. Sounds and the font are Kenney's CC0
   packs (only GitHub is reachable from cloud sessions, so new sources must be GitHub-hosted); credit them in
   `CREDITS.md`.
-- Keep pixels square: integer scales only, nearest filtering (project default). Art sizes and how they're shown: the
+- Keep pixels square: integer scales only, nearest filtering (project default); the 3px art's textures are the one
+  exception (above), drawn at their logical size. Art sizes and how they're shown: the
   world (round 2's scene layers, figures 96x160, props) on a 320x180 grid at 4x, the appraisal sheet 216x320 at 2x;
   story scenes 320x180, which the importer doubles to 640x360, shown at 2x; the chest 48 wide (lid 21, body 15, open
   30), built at 2x and shown at 2x (`ChestView`), with its lock maker's hasp and plate

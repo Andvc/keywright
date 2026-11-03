@@ -601,9 +601,12 @@ public partial class OpeningPhase : Phase
         // With many things on the table, just the read (the colour already says the quality).
         string note = Narrow && read.Note.Length > 0 ? read.Note : Words.List(new[] { read.Note, quality }.Where(s => s.Length > 0));
         // And just the read when the two don't fit under the thing ("enchanted: missed the glow" is long enough alone).
-        if (read.Note.Length > 0 && UiKit.TextWidth(note) > w) note = read.Note;
+        // A note may take the room up to its neighbours' (outlines and all), where a name keeps to its 220.
+        float room = Math.Max(w, spacing - 6f);
+        if (read.Note.Length > 0 && UiKit.TextWidth(note) + 8 > room) note = read.Note;
+        float noteW = Math.Min(room, Math.Max(w, UiKit.TextWidth(note) + 8));
         var noteLabel = Add(UiKit.MakeLabel(note, 16, read.Right ? Palette.Good : Palette.Warn, HorizontalAlignment.Center, outline: 4)
-            .Place(at.X - w / 2, 618, w, 20));
+            .Place(at.X - noteW / 2, 618, noteW, 20));
         noteLabel.ZIndex = 8;
 
         int from = _worth;
