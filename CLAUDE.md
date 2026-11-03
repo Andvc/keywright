@@ -198,12 +198,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The economy grows fast and the Guild's dues grow faster (v18: the old tight constraints made upgrades feel optional).
   Qualities are worth 1/2/4/8/24 times a common (`Categories.QualityMultiplier`; 1/3/10/30/100 until 0.30, when each
   step inward was three to ten times the last and the owner found the numbers ran away); each move inward multiplies what
-  a customer is worth a few times over (the sim's "profit per customer at each shop": about 7, 12, 65 and 350g).
+  a customer is worth a few times over (the sim's "profit per customer at each shop": about 7, 12, 70 and 490g).
   **Gold is rare** (0.30): a chest's own roll makes a thing gold only `Categories.GoldShare` (6%) as often as the spread
   says, and luck never makes gold (`Categories.Lift`: restorers, curios, a dry spell, a hoard's better things stop at
   purple); luck that would have lifted a purple thing past purple makes it shine instead (enchanted, `Build.PastPurple`,
   `Item.Shone`: read as the plain thing it was, "luck made it shine!"), priced into the index and the slip
-  (`ShineShare`). A careful run finds about two gold things, a quarter of runs none (the sim's "gold things a run").
+  (`ShineShare`). A careful run finds about two gold things, a third of runs none (the sim's "gold things a run").
   The luck curios and restorers were made about twice as likely to step (a step is worth twice, not three times), and
   the Master Restorer mends (nothing worse than its chest) rather than lifting. buyers' trades (`Upgrade.Sales`:
   scales, auction block, royal warrant) multiply what everything sells for, and restorers (`Upgrade.Luck`: the bench,
@@ -227,8 +227,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   calendar (`NotebookView.BuildCalendar`, with the Guild's debt across its top): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 160, 450, 1,300,
   4,000 and 12,000g, about three times a week with no tenfold jumps, then endless x1.5; Vane introduces it on the second
   evening, `GameState.IntroDay`); a story week's first day is the story's (`Story.TellsOn`: weeks 1, 2, 4 and 6 (the
-  gathering: who stands with you), and the week after the debt; `GameState.StoryToday`); the moves come about days 7,
-  17 and 25 (`Upgrades`: 80, 300 and 3,000g); Nim comes
+  gathering: who stands with you), and the week after the debt; `GameState.StoryToday`); the moves come about days 8,
+  16 and 25 (`Upgrades`: 80, 300 and 3,000g); Nim comes
   every night from the third (0.28); and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
   foreclosure; commissions (`Commissions.cs`) pay for each find as it's handed over, always at least a quarter over
   what it would sell for (`GameState.CommissionPay`, `Patrons.Premium`), so delivering always beats selling; the story's scenes and the shards of the Aldric Key that open the Crown Chest
@@ -236,10 +236,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
   judgment pushes that later, and the run's build and its tales decide the rest (0.30, 300 runs: the careful player
-  buying curios as they come clears about three times in five, 63%, the tales' consequences carrying it further than
-  0.28's 47%; with no tales a third, 33%, with no Heartsongs about half; a learner at 0.75 two in five; a first run
-  about one in thirty); careers first clear around the fifth run (0.28's tales carry a
-  learner further than 0.27's seventh), clear level 4 in the twenties, and each level after costs a few points more
+  buying curios as they come clears a little under three times in five, 59%, the tales' consequences carrying it
+  further than 0.28's 47%; with no curios about half, 51%; with no tales a third, 32%; with no Heartsongs about half; a
+  learner at 0.75 a third; a first run about one in a hundred); careers first clear around the sixth run (a quarter of
+  players by the fifth), clear level 4 in the late twenties, and each level after costs a few points more
   (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6 by run 30, level 8 is a wall). A run's length is part of the
   balance: `--sim=experience` should keep a first run under two and a half hours (0.30: 146 minutes over 30 days, the
   longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to Thornwick still is, for

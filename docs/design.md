@@ -214,6 +214,12 @@ Four-Leaf Clover 51%). The Drowned Bell is the exception in the sim (46%), becau
 counts perfectly; for a person it's a Brass's ticket on every chest. As they really turn up (in about a third of runs,
 the first around day 15), the careful player clears 48%, against 43% with no Heartsongs at all.
 
+0.30 (seven weeks; against 56% cleared with none): the Lullaby Box 99%, the Shepherd's Pipe, the Fey Chimes and the
+Dragon's Egg 97%, the Clockwork Lark 93%, the Imp's Ember 86%, the Hearthstone 85%, the Bottled Star 75% and the
+Drowned Bell 62% (a curio from day 1: a Lucky Coin 68%, a Letter of Introduction 71%, a Four-Leaf Clover 67%). The
+longer season brought more chests, and at 0.22's chance a chest (0.24%) half a Heartsong a run while the debt lasted;
+at 0.16% it's a third again (`--sim=songcount`: 0.33 a run, a first run 0.21), the first found around day 25.
+
 **The ending.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the collection's Heartsongs
 page). The Crown Chest holds the Locking's tune; the Heartsongs are its verses. With all nine known when it's opened,
 Mara sings the Locking whole: the Maw starves, the Gate is only a gate, every chest in Aldmark opens
@@ -573,8 +579,8 @@ climb about three times a week, with nothing like a tenfold jump:
 | Day | 5 | 10 | 15 | 20 | 25 | 30 | 35 | |
 | Due | 20g | 60g | 160g | 450g | 1,300g | 4,000g | 12,000g | x1.5 a week |
 
-The moves cost 80g, 300g and 3,000g, and a careful run makes them about days 7, 17 and 25 (so about two weeks at each
-shop, and the Emporium for the last two); profit per customer runs about 7, 12, 65 and 350g by shop (0.29: 10, 30,
+The moves cost 80g, 300g and 3,000g, and a careful run makes them about days 8, 16 and 25 (so about two weeks at each
+shop, and the Emporium for the last two); profit per customer runs about 7, 12, 70 and 490g by shop (0.29: 10, 30,
 190 and 4,500). Week 5 asks for a good week in Crownhold, week 6 for a start at the Emporium, and week 7 is the wall. A
 strong run pays it all off in week 6. The tales carry a run further than before (the officials, favours on a short
 night, market days, the court and the decree), so the careful player clears more often with them than without; the
@@ -1322,11 +1328,11 @@ five-day weeks; 0.28's, with five, are in brackets where they're quoted; earlier
 
 | Style | Still trading after each due, weeks 1-7 | Debt cleared | Crown Chest | Foreclosed (median week) | Thornwick | Crownhold | Royal Emporium |
 |---|---|---|---|---|---|---|---|
-| Pays their price, every chest | 100 100 93 54 9 1 0% | 0% | 0% | all (week 5) | day 11 | never | never |
-| One hard shake, ticks what it hears | 100 100 100 100 88 30 1% | 1% | 1% | all (week 6) | day 8 | never | never |
-| Every strength, drops when safe | 100 100 100 100 97 87 60% | 60% | 60% | 77% (week 7) | day 8 | day 16 | day 26 |
-| + Witchlight and Lodestone | 100 100 100 100 97 87 61% | 61% | 61% | 72% (week 7) | day 8 | day 16 | day 26 |
-| + keeps grand things | 100 100 100 100 97 87 63% | 63% | 63% | 67% (week 7) | day 8 | day 16 | day 25 |
+| Pays their price, every chest | 100 100 93 53 8 1 0% | 0% | 0% | all (week 5) | day 11 | never | never |
+| One hard shake, ticks what it hears | 100 100 100 100 88 29 1% | 1% | 1% | all (week 6) | day 8 | never | never |
+| Every strength, drops when safe | 100 100 100 100 97 86 58% | 58% | 58% | 81% (week 7) | day 8 | day 16 | day 26 |
+| + Witchlight and Lodestone | 100 100 100 100 97 86 59% | 59% | 59% | 72% (week 7) | day 8 | day 16 | day 26 |
+| + keeps grand things | 100 100 100 100 97 87 59% | 59% | 59% | 68% (week 7) | day 8 | day 16 | day 25 |
 
 ("Foreclosed" counts the Guild's endless interest after the debt, half as much again each week, over the four weeks
 the sim plays on.)
@@ -1336,45 +1342,45 @@ Week by week for the careful collector (gold on the Guild's night, before paying
 | Week (day) | 1 (5) | 2 (10) | 3 (15) | 4 (20) | 5 (25) | 6 (30) | 7 (35) |
 |---|---|---|---|---|---|---|---|
 | Due | 20 | 60 | 160 | 450 | 1,300 | 4,000 | 12,000 |
-| Gold, 10th percentile | 70 | 178 | 293 | 503 | 609 | 1,344 | 3,202 |
-| Gold, median | 117 | 335 | 598 | 1,978 | 3,651 | 6,281 | 13,313 |
-| Paid on the night | 100% | 100% | 100% | 100% | 97% | 90% | 69% |
-| At the Royal Emporium | 0% | 0% | 2% | 13% | 48% | 75% | 86% |
+| Gold, 10th percentile | 70 | 178 | 293 | 499 | 585 | 1,333 | 2,951 |
+| Gold, median | 117 | 330 | 591 | 1,833 | 3,566 | 5,664 | 11,282 |
+| Paid on the night | 100% | 100% | 100% | 100% | 97% | 90% | 65% |
+| At the Royal Emporium | 0% | 0% | 1% | 11% | 47% | 73% | 84% |
 
 (What the Guild asks on the night is a little less on average from week 6: a friend of the Guild pays a tenth less,
 the King's decree takes a fifth off and a trial half, so about 3,800g and 10,100g.) The first four weeks are for
 growing and moving inward, and the careful collector pays every one of them; the fifth asks for a good week in
 Crownhold and the sixth for a start at the Emporium (one careful run in five needs Bram's word once, mostly in those
-two weeks), and the seventh is the wall. The careful collector pays the debt off early in 53% of runs (cleared in week
-4: 1%, week 5: 12%, week 6: 21%, week 7: 30%; 0.28: 44%, from week 3), fills about 22 commissions a run (8,000g: each
-piece pays at least a quarter over what it would sell for), opens Bram's stash once in two or three runs, calls in two
-favours and makes three or four friends a run, and finds about two gold things (none in three runs in ten; the
-careful players who don't keep grand things, about one, and none in more than four runs in ten). Profit per customer:
-about 7g at the stall, 12g at Thornwick, 65g in Crownhold and 350g at the Royal Emporium (0.28: 10, 31, 180 and
+two weeks), and the seventh is the wall. The careful collector pays the debt off early in 49% of runs (cleared in week
+5: 11%, week 6: 20%, week 7: 28%; 0.28: 44%, from week 3), fills about 21 commissions a run (7,600g: each piece pays
+at least a quarter over what it would sell for), opens Bram's stash once in two or three runs, calls in two favours
+and makes three or four friends a run, and finds about two gold things (none in a third of runs; the careful players
+who don't keep grand things, about one, and none in more than four runs in ten). Profit per customer:
+about 7g at the stall, 12g at Thornwick, 70g in Crownhold and 490g at the Royal Emporium (0.28: 10, 31, 180 and
 3,800). Surprises: one thing in four or five comes out a step better than its chest (two steps or more, one in
-seventy), worth a sixth of what the chests held (0.28: three in ten, worth half, when a step was worth three times).
+seventy-five), worth a sixth of what the chests held (0.28: three in ten, worth half, when a step was worth three times).
 
 What curios and synergies are worth, to the careful player with both tools who sells everything:
 
 | | Debt cleared | Median day cleared | Median gold on the night, week 2 / 4 / 5 |
 |---|---|---|---|
-| With both | 61% | 30 | 335 / 2,148 / 3,728 |
-| No curios | 56% | 30 | 440 / 2,428 / 3,332 |
-| No synergies | 19% | 35 | 335 / 1,565 / 2,353 |
-| Neither | 1% | 35 | 440 / 1,914 / 2,272 |
+| With both | 59% | 31 | 330 / 2,004 / 3,625 |
+| No curios | 51% | 31 | 440 / 2,208 / 3,310 |
+| No synergies | 18% | 35 | 330 / 1,531 / 2,223 |
+| Neither | 1% | 35 | 437 / 1,804 / 2,202 |
 
-Ordinary progression alone (every upgrade, the tales, no curio) clears a little over half of runs (0.28: three in
+Ordinary progression alone (every upgrade, the tales, no curio) clears about half of runs (0.28: three in
 ten; the tales' consequences, the longer season and dues that climb about three times a week make the difference);
-curios add a few points (they pay over the run: what they cost shows in the gold until week 4), and a build that comes
+curios add eight points (they pay over the run: what they cost shows in the gold until week 4), and a build that comes
 together (three or more curios of one way of trading) clears more often still (*Curios: builds*). Without synergies,
 few runs clear: the shop's name for a kind (priced in) and the Keen Eye's fee for a perfect read (not) are most of a
-careful shop's late growth. The margins (*The shop's power index*): the careful player's held 1.75-1.83 per gold
-spent at every index, the blind buyer's 1.12-1.20, the careful collector's climbing from 1.85 to 2.5 as its build
+careful shop's late growth. The margins (*The shop's power index*): the careful player's held 1.72-1.83 per gold
+spent at every index, the blind buyer's 1.12-1.19, the careful collector's climbing from 1.84 to 2.6 as its build
 comes together.
 
 Per seller, at their own place (with the shop's tools, buyers' trades and restorers), profit per visit for a careful
 player, against paying their price blind. Every habit and every rule pays for putting up with it; only Pip (a few
-coins for anything) pays blind, Bettany by two coins and Garrick by one at the stall (as in v19), and the Maw's coin
+coins for anything) pays blind, Bettany by two coins and Garrick by a coin or none at the stall (as in v19), and the Maw's coin
 pays anyone (its price is the rest of the day, which the table doesn't count). Cadoc's markup went up a tenth (1.8-2.1)
 when Thornwick's chests got finer, and in v21 Quire's (1.85-2.15) and Gilt's demon gold (two coins in three of the gold
 and gems he sells): without the named rule, a restorer's luck reaches what a blind buyer bought, and both had tipped
@@ -1389,17 +1395,17 @@ Marrow sells what the Guild seized (a third of his chests cold), Brandt what the
 | | Pip | Ada | Garrick | Bettany | Tobin | Nettle | Rook | Sorrel | Cadoc | Corvin |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Careful | +8 | +4 | +8 | +4 | +2 | +5 | +9 | +10 | +9 | +14 |
-| Blind | +7 | 0 | +1 | +2 | 0 | -2 | 0 | -10 | -5 | -27 |
+| Blind | +7 | 0 | 0 | +2 | 0 | -2 | 0 | -10 | -5 | -27 |
 
 | | Hesper | Flick | Marrow | Brandt | Ilse | Orme | Durgan | Isaura | Brass | Quire |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Careful | +6 | +10 | +13 | +4 | +23 | +61 | +90 | +41 | +86 | +34 |
-| Blind | -15 | -21 | -2 | -2 | -6 | -11 | -235 | -11 | -20 | -17 |
+| Careful | +6 | +10 | +13 | +4 | +23 | +61 | +89 | +41 | +84 | +36 |
+| Blind | -16 | -21 | -2 | -2 | -6 | -11 | -234 | -10 | -20 | -19 |
 
 | | Tilly | Rowan | Tick | Sallow | Skrae | the Countess | Zell | Gilt | Aldo | the Maw |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Careful | +16 | +23 | +30 | +23 | +47 | +22 | +30 | +47 | +72 | +449 |
-| Blind | -12 | -11 | -12 | -33 | -33 | -29 | -116 | -18 | -153 | +432 |
+| Careful | +17 | +22 | +31 | +22 | +48 | +20 | +33 | +48 | +68 | +448 |
+| Blind | -12 | -11 | -13 | -33 | -34 | -29 | -117 | -18 | -153 | +431 |
 
 The careful player plays the King's game only on a read it could check every way (every strength and the drop): a
 wrong read costs a quarter more than the chest held, and Hesk, who can't shake hard or drop, never plays it. It buys
@@ -1411,7 +1417,7 @@ Every seller's lesson completes, played the careful way, with and without the to
 ## Balance across a career
 
 v13 gave runs a meta-progression; v14 sets the balance for a career, not a run, and v15 keeps that curve through the
-new world (the numbers below are 0.28's unless marked: runs of 25 days, about two hours each). The goal, in the owner's words: no
+new world (the numbers below are 0.30's unless marked: runs of 35 days, about two and a half hours each). The goal, in the owner's words: no
 pressure before players have learned the puzzles, no easy win in the first few runs, a purse that keeps growing but not
 steeply enough for the middle and late dues, and judgment pushing the curve up until a run clears; then the challenge
 levels. Since v22 only judgment, and what's known (the journal, Nim's stock, the legendaries' feats), carries from run
@@ -1425,19 +1431,20 @@ glass a quarter of the time), forget the lodestone, miss a glow or a boom on the
 spread either way, pick locks worse, and buy curios on a whim. Skill 0 is a first-timer who has had Bram's lessons:
 they know the rules but don't yet apply them every time.
 
-| Skill (Kit, level 0) | Cleared | Still trading after week 4 |
+| Skill (Kit, level 0) | Cleared | Still trading after week 5 |
 |---|---|---|
-| 0.15 (a first run) | 5% | 79% |
-| 0.3 | 10% | 87% |
-| 0.5 | 17% | 87% |
-| 0.75 | 29% | 94% |
-| 0.9 | 42% | 96% |
-| 1 (the careful collector) | 53% | 98% |
+| 0.15 (a first run) | 1% | 73% |
+| 0.3 | 4% | 90% |
+| 0.5 | 11% | 90% |
+| 0.75 | 32% | 97% |
+| 0.9 | 53% | 97% |
+| 1 (the careful collector) | 56% | 96% |
 
-(150 runs a skill; the main table's 300 put the careful collector at 47%. A first run gets through the first three
-weeks, needs Bram's word in the fourth about half the time, and falls in the fifth; it clears about one time in twenty,
-Heartsong or not. The careful player clears 43% with no Heartsongs at all, 36% buying no curios and 41% with no tales.
-v22's were 4%, 7%, 11%, 28%, 37% and 48%, before the tales; v21's 5%, 13%, 21% and 40% with no talents, 11% to 79%
+(150 runs a skill; the main table's 300 put the careful collector at 59%. A first run gets through the first four
+weeks, leans on Bram's word in the fifth, and falls in the sixth (one in six still trades after it); it clears about
+one time in a hundred. The careful player clears 52% with no Heartsongs at all and 32% with no tales (the quick sim's
+120 runs), 51% buying no curios (the main table's 300). 0.28's were 5%, 10%, 17%, 29%, 42% and 53%, in a five-week
+season; v22's 4%, 7%, 11%, 28%, 37% and 48%, before the tales; v21's 5%, 13%, 21% and 40% with no talents, 11% to 79%
 with all; v20's 5% to 48% with none, 27% to 85% with all.)
 
 **Careers.** Each simulated player starts at skill 0 to 0.3 and improves toward their own best (0.75 to 1) at their
@@ -1448,10 +1455,17 @@ end of the debt's last week or when the shop is lost. The pace of learning is a 
 | Run | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 12 | 16 | 20 | 24 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Skill | 0.15 | 0.29 | 0.41 | 0.50 | 0.57 | 0.63 | 0.68 | 0.71 | 0.74 | 0.77 | 0.80 | 0.84 | 0.86 | 0.87 |
-| Cleared | 10% | 8% | 8% | 20% | 28% | 20% | 35% | 30% | 18% | 25% | 23% | 20% | 20% | 18% |
-| Lost in week (median) | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
-| Challenge level | 0 | 0.1 | 0.2 | 0.3 | 0.5 | 0.7 | 0.9 | 1.3 | 1.6 | 1.8 | 2.1 | 2.9 | 3.7 | 4.5 |
-| Score | 173 | 172 | 184 | 222 | 255 | 262 | 300 | 324 | 284 | 320 | 316 | 356 | 397 | 437 |
+| Cleared | 3% | 0% | 8% | 10% | 20% | 15% | 25% | 33% | 15% | 33% | 28% | 23% | 23% | 15% |
+| Lost in week (median) | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+| Challenge level | 0 | 0 | 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.6 | 0.9 | 1.0 | 1.4 | 2.5 | 3.3 | 4.0 |
+| Score | 161 | 162 | 192 | 187 | 219 | 227 | 250 | 283 | 278 | 341 | 328 | 368 | 428 | 443 |
+
+0.30 (seven weeks, the dues 15% higher a level): a run that's lost is lost in the sixth week, a shop or two behind
+(the fifth sends most first runs to Bram's word, the sixth is the wall for them, the seventh for everyone else); the
+debt is first cleared around the sixth run (a quarter of players by run 5, half by 6, three quarters by 9). Then the
+levels, each a little harder than the last: level 1 around run 12, 2 around 16, 4 around 27 (two players in three by
+run 30); level 6 is cleared by one player in five by run 30 and level 8 by nobody. With a Heartsong in about one run
+in three, all nine are known by one player in eight by run 30, and the Crown Chest sung whole by one in ten.
 
 0.28 (the dues 15% higher a level): a run that's lost is lost in the last week (the fourth sends half of the first runs
 to Bram's word, the fifth is the wall); the debt is first cleared around the fifth run (a quarter of players by run 4,
@@ -1478,18 +1492,19 @@ Bram stretched thin 81%, demon gold about 73%, fussy sellers 72%, thin crowds 69
 interest 67%, sharp sellers 61%, a hurried town 59%); with the talents gone (v22) the top levels were a wall and the
 first two were free. Now each level costs a few points, all the way up.
 
-**Bram's kin** on the new curve (the careful collector, 100 runs each; cleared %; 0.28, the dues 15% higher a level,
-with v24's, a tenth a level and no tales, after the slash):
+**Bram's kin** on the new curve (the careful collector, 150 runs each; cleared %; 0.30, the season seven weeks and the
+dues 15% higher a level, with 0.28's, five weeks, after the slash):
 
 | | Level 0 | Level 1 | Level 2 | Level 4 | Level 6 | Level 8 |
 |---|---|---|---|---|---|---|
-| Kit | 51 / 49% | 48 / 41% | 40 / 31% | 26 / 23% | 17 / 19% | 17 / 13% |
-| Hesk | 50 / 43% | 46 / 41% | 31 / 32% | 27 / 22% | 16 / 19% | 15 / 13% |
-| Rosa | 50 / 59% | 45 / 55% | 38 / 48% | 34 / 35% | 25 / 24% | 13 / 21% |
-| Isolde | 54 / 51% | 49 / 42% | 38 / 37% | 30 / 25% | 22 / 25% | 19 / 19% |
+| Kit | 56 / 51% | 51 / 48% | 42 / 40% | 26 / 26% | 17 / 17% | 12 / 17% |
+| Hesk | 58 / 50% | 49 / 46% | 41 / 31% | 29 / 27% | 17 / 16% | 7 / 15% |
+| Rosa | 59 / 50% | 54 / 45% | 42 / 38% | 28 / 34% | 16 / 25% | 7 / 13% |
+| Isolde | 51 / 54% | 45 / 49% | 35 / 38% | 24 / 30% | 17 / 22% | 10 / 19% |
 
-The median clear day is 20 to 22 at every level, and the four of Bram's kin are within a few points of each other
-(v24's Rosa, whose haggling and the Golden Tongue suit each other, was a little ahead; the tales favour nobody). At a
+The median clear day is 29 to 32 at every level (0.28: 20 to 22, in a 25-day season), and the four of Bram's kin are
+within a few points of each other (Isolde a few behind below level 3, on 0.30's door money, below;
+v24's Rosa, whose haggling and the Golden Tongue suit each other, was a little ahead; the tales favour nobody). At a
 tenth a level the tales made the top levels gentler (Kit: level 4 35%, level 6 27%, level 8 23%, on 150 runs), so 0.28
 puts the dues up 15% a level. (v21, no talents and then
 every talent at levels 0, 2, 4, 6 and 8: Kit 40 / 79 / 77 / 55 / 25 / 7%; v20: Kit 48 / 85 / 76 / 66 / 24 / 16%;
