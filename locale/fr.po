@@ -14887,7 +14887,7 @@ msgstr "Une pièce. Et {0} encore en attente, à prix x{1}."
 
 #: scripts/Phases/CounterPhase.cs:813
 msgid "Not a sound: empty, as far as you can tell."
-msgstr "Pas un bruit : vide, pour autant que vous sachiez."
+msgstr "Pas un bruit : vide, semble-t-il."
 
 #: scripts/Phases/CounterPhase.cs:814
 msgid "Tick what you think is inside."

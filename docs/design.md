@@ -1651,6 +1651,12 @@ its longest stretch with nothing new is six days): a learner who hasn't reached 
 again. The next lever is content only later runs meet (Bram's kin, challenge terms,
 the unlocked curios), and more ways for a familiar shop to play differently.
 
+0.30's longer season made a first run 146 minutes over 30 days; 0.32's is 143 (177 customers), the same shape. The
+move to Thornwick (day 8) and the few days after it are still the busiest stretch: three first-timers in four have one
+day just over capacity there (0.31: a little over half; the heaviest day's load 6.3, 0.31's 6.2), and what arrives on
+those days is the same (warded things, lockpicking, the drop, Mother Sorrel). A second and third run have no day over
+capacity.
+
 ## What was cut, and why
 
 1. **Auction (v1).** The game did the judging, and bidding against one bot had a dominant strategy.

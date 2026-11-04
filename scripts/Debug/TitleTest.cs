@@ -53,7 +53,8 @@ public partial class Main
             for (int i = 0; i < 600 && !title.HasLanded(collection); i++) await Frame();
             await Click(title.HomeOf(collection));
             Check(title.CollectionOpen, "a click on a button that has landed presses it");
-            Check(!title.Finished, "...and doesn't cut the rest short");
+            // (Hurried, not Finished: on a slow machine the last button can land by the clock during the click's frames.)
+            Check(!title.Hurried, "...and doesn't cut the rest short");
             // Esc with the collection open over the rest still coming out: it all lands, and the collection still closes.
             Input.ParseInputEvent(new InputEventKey { Keycode = Key.Escape, PhysicalKeycode = Key.Escape, Pressed = true });
             await Frame();

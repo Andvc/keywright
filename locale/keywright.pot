@@ -14312,20 +14312,20 @@ msgstr ""
 msgid "Early Access {0}"
 msgstr ""
 
-#: scripts/Phases/TitlePhase.cs:515
+#: scripts/Phases/TitlePhase.cs:519
 msgid "Start over?"
 msgstr ""
 
-#: scripts/Phases/TitlePhase.cs:516
+#: scripts/Phases/TitlePhase.cs:520
 #, csharp-format
 msgid "Your shop ({0}) will be gone for good. Its score so far is noted when the new run starts."
 msgstr ""
 
-#: scripts/Phases/TitlePhase.cs:518
+#: scripts/Phases/TitlePhase.cs:522
 msgid "Start over"
 msgstr ""
 
-#: scripts/Phases/TitlePhase.cs:519
+#: scripts/Phases/TitlePhase.cs:523
 msgid "Keep my shop"
 msgstr ""
 

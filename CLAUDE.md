@@ -262,9 +262,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 25), and each level
   after costs a few points more (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6
   by run 30, level 8 is a wall, 3%). The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
-  balance: `--sim=experience` should keep a first run under two and a half hours (0.30: 146 minutes over 30 days, the
-  longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to Thornwick still is, for
-  about half of first runs, as since 0.27). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
+  balance: `--sim=experience` should keep a first run under two and a half hours (0.32: 143 minutes over 30 days; 0.30:
+  146, the longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to Thornwick and the
+  days after it still are, just over, for about half to three in four of first runs: 0.31 57%, 0.32 73% of the 30). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
   are foreclosed within a few weeks, and no early week sends careful players to Bram's word (0.30: the fourth does for
   about one in twenty-five, the fifth and sixth for about one in twelve: the ones still a shop behind). Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts

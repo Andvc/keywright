@@ -426,6 +426,7 @@ public partial class TitlePhase : Phase
     {
         if (_done) return;
         _quiet = true;
+        _hurried = true;
         if (!_burst) Burst();
         if (_lid != null) _lid.Visible = false;
         // Past every landing and its squash: all of it settled.
@@ -489,6 +490,9 @@ public partial class TitlePhase : Phase
 
     // For the title test (--title-test): whether it's all out, and two of the buttons to aim at.
     public bool Finished => _done;
+    /// <summary>Whether something put it all in place before it had finished coming out (not just the clock).</summary>
+    public bool Hurried => _hurried;
+    bool _hurried;
     public bool Settled => _flyers.All(f => f.Landed && f.Node.Visible && f.Node is not Control { MouseFilter: Control.MouseFilterEnum.Ignore });
     public Control CollectionButton => _collectionButton;
     public Control SettingsButton => _settingsButton;
