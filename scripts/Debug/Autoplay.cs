@@ -54,6 +54,13 @@ public partial class Autoplay : Node
         {
             case CounterPhase counter:
                 await DriveCounter(counter);
+                // Bought, but cold to the mark (taken sight unseen): the ward won't let go, and the counter waits for "Next customer".
+                if (IsInstanceValid(counter) && counter.Visit.Outcome == VisitOutcome.Bought && counter.Visit.Chest.Stolen)
+                {
+                    await Wait(2.5);
+                    if (IsInstanceValid(counter)) counter.Continue();
+                    break;
+                }
                 // A seller who stormed off (or ran out of patience) leaves your gut's opinion on screen: read it, move on.
                 if (IsInstanceValid(counter) && counter.Visit.Outcome == VisitOutcome.Left)
                 {
@@ -425,6 +432,9 @@ public partial class Autoplay : Node
             }
         }
         int worth = Strategy.Worth(visit, counter.Slip, counter.Hearing, State);
+        // Cold to the mark and not reported: it isn't theirs to sell, so it isn't worth any offer (WorthBuying says so for a
+        // fixed price; a haggler or a named price would otherwise get one).
+        if (visit.Chest.Stolen && visit.Handled) worth = 0;
         switch (visit.Trade)
         {
             case Trade.Fixed:

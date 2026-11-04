@@ -17,7 +17,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "reeve", Title = Loc.T("The Reeve's Election"), Place = TalePlace.Thornwick,
-            Blurb = Loc.T("Thornwick elects a reeve: the Guild's timber factor, or Martha Dunning the weaver. The winner sets the market's tolls."),
+            Blurb = Loc.T("Thornwick elects a reeve: Harl Caskett, the Guild's timber factor, or Martha Dunning the weaver. The winner sets the " +
+                          "market's tolls, and Caskett's tolls would come out of your purse."),
             Ending = ReeveEnding,
             Beats = new Beat[]
             {
@@ -99,7 +100,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "goblins", Title = Loc.T("The Goblin Bounty"), Place = TalePlace.Thornwick,
-            Blurb = Loc.T("The abbey has put a bounty on the hill goblins, and Rook wants to know where Nettle's clan burrows."),
+            Blurb = Loc.T("The abbey has put a bounty on the hill goblins, blaming them for the crypt thefts. Rook the huntress wants to know " +
+                          "where Nettle's clan burrows, and Nettle swears they never stole a thing."),
             Ending = GoblinsEnding,
             Beats = new Beat[]
             {
@@ -172,7 +174,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "unopened", Title = Loc.T("The Unopened"), Place = TalePlace.Thornwick,
-            Blurb = Loc.T("The Unopened stand at your door and tell your customers that every chest you open feeds the Maw."),
+            Blurb = Loc.T("The Unopened, the abbey's zealots, stand at your door telling your customers that every chest you open feeds the Maw. " +
+                          "While they stand there, fewer people come in."),
             Ending = UnopenedEnding,
             Beats = new Beat[]
             {
@@ -255,7 +258,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "dowry", Title = Loc.T("The Disputed Dowry"), Place = TalePlace.Thornwick, Secrets = new[] { Ashby, Corlew },
-            Blurb = Loc.T("Two families claim one dowry chest, and the court says: let the ward decide."),
+            Blurb = Loc.T("Two families, the Ashbys and the Corlews, claim the same dowry chest, and Aunt Hesper's court says: let the ward " +
+                          "decide. A chest is warm only in the hands of the family it belongs to."),
             Ending = DowryEnding,
             Beats = new Beat[]
             {
@@ -310,7 +314,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "toll", Title = Loc.T("The Night Toll"), Place = TalePlace.Thornwick,
-            Blurb = Loc.T("Half the Wardens are down with the sweats, and Hollis wants a Keywright's hand on the carts at the forest toll."),
+            Blurb = Loc.T("Half the Wardens are down with the sweats, and Sergeant Hollis needs a Keywright's hand on the carts at the forest " +
+                          "toll tonight: a stolen chest goes cold under the mark."),
             Ending = TollEnding,
             Beats = new Beat[]
             {

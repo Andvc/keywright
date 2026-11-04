@@ -17,7 +17,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "hedge", Title = Loc.T("The Hedge-wright"), Place = TalePlace.Brindle,
-            Blurb = Loc.T("Jasper Wick has the mark and no licence, and he's set up his cart across the road from the stall."),
+            Blurb = Loc.T("Jasper Wick has the Key-mark and no Guild licence, as Bram once had, and he's parked his cart across the road from " +
+                          "your stall. He takes a customer a day off you, and the Guild's Mark-Finder is asking after hedge-wrights."),
             Ending = HedgeEnding,
             Beats = new Beat[]
             {
@@ -111,7 +112,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "field", Title = Loc.T("The Field's Dead"), Place = TalePlace.Brindle,
-            Blurb = Loc.T("Garrick's plough turned up a knight's chest on Brindle Field, and the knight wants his blade back."),
+            Blurb = Loc.T("Garrick's plough turned up a knight's chest on Brindle Field, where the last battle was fought. The blade inside has a " +
+                          "name on it, and that night the knight's ghost comes knocking: he wants it home, to his blood."),
             Ending = FieldEnding,
             Beats = new Beat[]
             {
@@ -194,7 +196,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "inn", Title = Loc.T("The Crossed Keys"), Place = TalePlace.Brindle,
-            Blurb = Loc.T("The Guild has doubled the Crossed Keys' tithe, and Bettany Crane is a purse short."),
+            Blurb = Loc.T("The Guild has doubled the Crossed Keys' tithe, and Bettany Crane is a purse short. If she can't pay, the Guild seals " +
+                          "the inn, and the crossroads loses its taproom and its news."),
             Ending = InnEnding,
             Beats = new Beat[]
             {
@@ -255,7 +258,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "fair", Title = Loc.T("The Harvest Fair"), Place = TalePlace.Brindle,
-            Blurb = Loc.T("The harvest fair comes to Brindle, and Garrick wants the new Keywright to put up the reading contest's prize."),
+            Blurb = Loc.T("The harvest fair comes to Brindle, with a chest to be read in front of the whole county. Garrick wants the new " +
+                          "Keywright to put up the prize, and then to read it exactly."),
             Ending = FairEnding,
             Beats = new Beat[]
             {

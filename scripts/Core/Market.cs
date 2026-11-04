@@ -529,7 +529,7 @@ public static class Market
     /// <summary>How many things the pawn ticket lists: everything that was pledged, false bottom and all (never a Heartsong).</summary>
     public static int ArticleCount(Chest chest) => chest.Everything.Count(i => !i.IsSong);
 
-    static string Articles(Chest chest) => ArticleCount(chest) is var n && n == 1 ? Loc.T("one article") : Loc.T($"{Sellers.Number(n)} articles");
+    public static string Articles(Chest chest) => ArticleCount(chest) is var n && n == 1 ? Loc.T("one article") : Loc.T($"{Sellers.Number(n)} articles");
 
     /// <summary>The sign in Mother Sorrel's dream: of what the Wood warded, or else the dearest thing ("nothing at all" for an empty chest).</summary>
     public static string Dream(Chest chest) => DreamtOf(chest) is Item dreamt ? Categories.Sign(dreamt.Category) : Loc.T("nothing at all");

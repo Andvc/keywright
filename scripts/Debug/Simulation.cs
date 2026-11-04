@@ -554,6 +554,8 @@ public static partial class Simulation
         visit.SetSlipPrice(slip.Worth);
 
         int worth = Strategy.Worth(visit, slip, hearing, state);
+        // Cold to the mark: it isn't the seller's to sell, so no offer either (a fixed price is refused by WorthBuying).
+        if (visit.Chest.Stolen && visit.Handled) worth = 0;
         // A learner's sense of what it's worth wanders, more the less they know.
         if (skill < 1) worth = (int)(worth * MathF.Exp(Normal(rng) * JudgmentNoise * (1 - skill)));
         heard = hearing;

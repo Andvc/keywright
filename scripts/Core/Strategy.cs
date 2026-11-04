@@ -149,7 +149,7 @@ public static class Strategy
         {
             Clue.Dream or Clue.Riddle when kinds.Length == 1 && Silent(kinds[0]) => kinds[0],
             Clue.Tag or Clue.Dowry => kinds.Where(Silent).Select(k => (Category?)k).FirstOrDefault(),
-            Clue.Roll when kinds.Length == 1 => kinds[0],
+            Clue.Roll or Clue.Choir when kinds.Length == 1 => kinds[0],
             Clue.Cards => kinds.GroupBy(k => k).Where(g => g.Count() > 1).Select(g => (Category?)g.Key).FirstOrDefault(),
             Clue.Echo => kinds.GroupBy(k => k).Where(g => g.Count() > slip.Count(g.Key) && FairChance(visit, hearing, g.Key))
                 .Select(g => (Category?)g.Key).FirstOrDefault(),

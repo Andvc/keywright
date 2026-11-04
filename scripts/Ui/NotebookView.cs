@@ -427,7 +427,11 @@ public partial class NotebookView : Node2D
                 if (expected.Count > 0)
                 {
                     float ey = role is DayRole.Story or DayRole.Event ? ly + 20 : ly;
-                    cell.AddChild(UiKit.MakeLabel(expected[0].Note, 16, Palette.Good).Place(10, ey + (role == DayRole.Tax ? 20 : 0), cellW - 20, 20));
+                    // One line in the cell (a longer note, or a longer language, ends in "..."): the whole of it on hover, below.
+                    var who = UiKit.MakeLabel(expected[0].Note, 16, Palette.Good).Place(10, ey + (role == DayRole.Tax ? 20 : 0), cellW - 20, 20);
+                    who.ClipText = true;
+                    who.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+                    cell.AddChild(who);
                     lines.AddRange(expected.Select(x => Loc.T($"{x.Note}: {Sellers.Person(x.Who).Name} said they'd come by.")));
                 }
                 if (role == DayRole.Tax && guild)

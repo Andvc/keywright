@@ -21,9 +21,12 @@ once the chest is rightfully theirs: bought fairly or freely given by someone it
 So everyone else sells. The ward lets one thing through: sound. Everybody shakes a chest before they sell it, and
 everybody guesses.
 
-**Why can you open them?** You're one of Bram's kin, and the Key-mark runs in the family. Uncle Bram opened chests at
-the Brindle crossroads for forty years until his mark faded with age; now it shows on your hand, and he hands you his
-stall. You buy a chest, it's yours, the ward lets go, and you pick the old lock underneath.
+**Why can you open them?** You were born with the Key-mark. Bram opened chests at the Brindle crossroads for forty
+years until his mark faded with age, and now someone with a mark of their own minds his stall: Kit, his niece, in whom
+the mark runs in the family, or a partner who came to him from somewhere else (0.32: Hesk, a grocer from the drowned
+river town of Fallowford; Rosa Brightwater of Crownhold's Lantern Lane; Lady Isolde Marchmont, the last of a house the
+Guild foreclosed on). The mark isn't only Bram's family's: it turns up anywhere, as Pip Hollow and Jasper Wick know. You
+buy a chest, it's yours, the ward lets go, and you pick the old lock underneath.
 
 **What does opening them accomplish?** For the folk who sell to you: coin in a world that's short of it. For the realm:
 treasure back in the light, three hundred years late. For the Maw: every chest opened loosens the Locking a little.
@@ -159,8 +162,8 @@ life that you'll hear about. What they say is always true. Some sell what isn't 
 
 ### The story's people
 
-- **Uncle Bram**: an old Keywright whose mark has faded. Warm, proud, a little ashamed of the debt. Your mentor, and
-  a hedge-wright for twenty years.
+- **Bram** ("Uncle Bram" to Kit): an old Keywright whose mark has faded. Warm, proud, a little ashamed of the debt.
+  Your mentor, and a hedge-wright for twenty years.
 - **Mister Vane**: Collector of the Gilded Guild. Polite, pale, patient, and the Maw's.
 - **Mara, the Hooded Woman**: the last archmage of the Keyhold. She's hunted the Aldric Key's shards for twenty years,
   and Bram was her partner once.
@@ -170,6 +173,25 @@ life that you'll hear about. What they say is always true. Some sell what isn't 
   the Royal Treasury to see if you're the Keywright the realm needs.
 - **Avarax, the Gilded Maw**: the demon of greed. Weak enough to need the Guild, strong enough to visit the Emporium in
   a borrowed body dripping with rings.
+
+**Who minds the stall** (0.32), and the people of their own tales:
+
+- **Kit**: Bram's niece, who grew up behind his counter. The mark runs in their family; her story is the Key's.
+- **Hesk**: a grocer from **Fallowford**, a river town the Guild drowned when it opened the Aldwater weir to flood out a
+  smugglers' road. He hid his mark all his life (the Guild takes marked children) and came to Bram as a partner, with
+  his savings, his bad back and his father's honest scale. His sister **Mabry** writes from the refugees' camp.
+- **Rosa Brightwater**: a trader's daughter from Crownhold's **Lantern Lane**, where her mother **Marta** kept the best
+  stall for thirty years until the Guild took it for tithe and gave it to its own man, **Orrin Vash**. Born with the
+  mark into a family that never had it; she came to Brindle to beat the Guild at its own trade.
+- **Lady Isolde Marchmont**: the last of **House Marchmont**, which the Guild foreclosed on and sold off chest by chest.
+  She kept her collection and her old steward **Pemberton**, and found a mark on her hand nobody in the family had seen in
+  a century. Her grandfather opened chests with Bram once, before the house was grand.
+
+**The late tales' people** (0.32): **Sister Wren**, the blind last singer of the Keyhold's choir, who sang a Heartsong
+into three bell-locked chests when the Guild burned her chapel; **Tock**, Archmage Orme's brass automaton, which opens
+chests with a Keywright's mark on a brass plate and would rather be an apprentice; and **Sir Edric Ashcombe**, a knight of
+King Aldric's guard who locked himself into a chest at the Locking to keep the Crown's oath-book, and whose heir turns
+out to be Tilly Mudge the mudlark.
 
 ### Brindle Crossroads
 
@@ -272,6 +294,15 @@ things of you, and remember what you did. `docs/stories.md` has each one beat by
 | **The Archive Fire** | Crownhold (0.30) | Master Quire | the Royal Archive burns, and the Roll with it |
 | **The King's Court** | the Emporium, every season (0.30) | Old Aldo, Mister Vane | the season's papers against the Guild |
 | **The Maw's Bargain** | the Emporium (0.30) | the Maw, Mara | the whole debt paid, for the Key |
+| **The Drowned Town** | Hesk's seasons (0.32) | Mabry, Bailiff Marrow | Fallowford's common chest, salvaged by the Guild |
+| **Lantern Lane** | Rosa's seasons (0.32) | Marta Brightwater, Orrin Vash | the Brightwaters' stall, and the Lane's old custom of a reading |
+| **The Marchmont Pieces** | Isolde's seasons (0.32) | Pemberton, Aunt Hesper, Master Quire, Vane | three chests of a foreclosed house, warm to its last lady's hand |
+| **The Silent Choir** | Brindle (0.32) | Sister Wren, Vane | three echoes of a Keyhold Heartsong, each freed by an exact read |
+| **The Brass Apprentice** | Crownhold (0.32) | Hollis, Tock, Vane | an automaton opening chests at night with a borrowed mark |
+| **The Sleeper** | the Emporium (0.32) | Countess Vey, Tilly, Sir Edric | a knight locked in a chest since the Locking, and his heir |
+
+**Keepsakes** (0.32): what people give you to keep at the end of their tale (Fallowford's weights, a dead soldier's
+medal, a knight's oath, a choir's tuning fork). Each does one thing, like a curio, and takes no room in the case.
 
 **What the tales leave behind** (0.30): who comes to the counter (and who never does again), better terms from friends,
 favours to call in on a short Guild night, papers for the King's court, and the season's end: what became of everyone,
@@ -471,7 +502,7 @@ when, and the Guild's nights). Each has a reason anyone in town would give you:
 
 ## A harder season (challenge levels)
 
-Bram's kin who've cleared his debt once can mind the stall in a harder season: the Guild, having been paid, wants more
+Whoever has cleared Bram's debt once can mind the stall in a harder season: the Guild, having been paid, wants more
 (its dues go up at every level), and the year brings its own troubles. But no year is all bad, and Bram has a few
 things put by. Every level deals the run as many of each as its number, drawn fresh for every run; none of them is a
 hidden roll, and each has a reason anyone at the crossroads would give you.

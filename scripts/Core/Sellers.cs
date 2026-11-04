@@ -56,6 +56,8 @@ public enum Clue
     Cards,
     /// <summary>A Guild clerk's tally of every article in it, false bottom and all (the Guild's Count).</summary>
     Tally,
+    /// <summary>Sister Wren's word: the kind of thing her echo sleeps in, warded (the Silent Choir, 0.32).</summary>
+    Choir,
 }
 
 /// <summary>How a seller trades.</summary>

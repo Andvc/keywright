@@ -84,7 +84,9 @@ public static class Guild
 
     public static string Short => Loc.T("Short? Then the Guild will take what's on your shelf instead. At the Guild's price, naturally.");
 
-    public static string Foreclosed => Loc.T("Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed.");
+    public static string Foreclosed => Hints.Kin == Characters.Kit
+        ? Loc.T("Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed.")
+        : Loc.T("Not enough. The Guild seals this shop tonight, and your licence with it. Bram will be so disappointed.");
 
     /// <summary>When the Guild Promissory Note pays a night.</summary>
     public static string NotePaid => Loc.T("A Guild note, older than the Locking? ...However did you come by that? The Guild honours its own paper. Paid.");

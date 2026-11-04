@@ -256,8 +256,16 @@ cart" through "Could have gone either way" to "Even the heavens pity you", each 
 hard to rank, so the feeling also has a colour and a meter: a strip from red ("missed out") to green ("right call"),
 with a marker that slides to where this call landed (`Gut.PassScore`: even at one half, a third of the price or
 less at the green end, four times it or more at the red). A seller who storms off leaves the same feeling. After an
-opening, the verdict gets a gut line and meter too, from what it held against what you paid, from "fleeced" to "a
-steal" (`Gut.BuyScore`).
+opening, the verdict gets a gut line and meter too, from "fleeced" to "a steal" (`Gut.BuyScore`). 0.32: it judges what
+the profit stamp judges, everything the chest brought back (what's inside as it sells here, a perfect read's valuer's
+fee, a haggler's rebate, the Underwriters' bond) against what you paid. Until then the gut saw only what was inside,
+so a chest that lost on its contents but won on its fee could stamp PROFIT over a gut that said you'd been had.
+
+**Sight unseen at the opening (0.32).** A chest bought without a shake, a drop or the lodestone is a blind buy, and
+nothing on its slip was a read, so the opening doesn't mark it as one: a "Bought sight unseen" tag sits under the
+tally (its tooltip says exactly what counts as sight unseen), and each thing the slip never marked gets a closed eye
+in a neutral colour, with only its quality under it, never a red cross and "you missed it". What you did mark is still
+checked, and a wrong mark is still a cross. Bram explains the closed eyes the first time.
 
 ## Opening a chest
 
@@ -1059,7 +1067,7 @@ Internally the shards are still `MapPieces` and the Crown Chest is the vault (`V
 saves and profiles carry over. Every run is recorded in `user://profile.json` (runs, debts cleared, Crown Chests
 opened, the furthest week), shown on the title screen and at the end of a run.
 
-## Across runs: Bram's kin and challenge levels
+## Across runs: who minds the stall, and challenge levels
 
 A run's own loop (a chest, a day, a week, five weeks) needed a reason to play another run that isn't the same run
 again. Since v22 nothing carries over that makes a run stronger: every run starts the same, and what grows is the
@@ -1068,8 +1076,13 @@ run, both in `scripts/Core/Meta.cs` (definitions, the score) and `Kin.cs` (what 
 `GameState`); the profile (`Profile` in `Save.cs`, user://profile.json) keeps each character's open levels and best
 score.
 
-**Bram's kin** (`Characters`). Each changes one part of how you judge a chest or run the shop, and pays for it; the rest
-of the game is the same. They're all Bram's family, so the story's lines ("your uncle") hold for each.
+**Who minds the stall** (`Characters`). Each changes one part of how you judge a chest or run the shop, and pays for
+it; the rest of the game is the same. Until 0.31 they were all Bram's family, so the story's lines ("your uncle") held
+for each; 0.32 gave them lives of their own (the owner: not everyone needs a connection to Bram). Kit is still his niece;
+Hesk (a grocer from the drowned river town of Fallowford), Rosa Brightwater (of Crownhold's Lantern Lane) and Lady Isolde
+Marchmont (the last of a foreclosed house) are his partners, each born with the mark elsewhere, each with a welcome,
+a season's-end line and a tale of their own every season they play, ending in a keepsake (`docs/stories.md`, "Their
+own tales"). Lines that call the player Bram's kin are Kit's alone.
 
 | Who | Unlocked by | What's different |
 |---|---|---|
@@ -1213,8 +1226,13 @@ the UI frames keep round 2's grain.
 
 ## Title, saves and settings
 
-The game opens on a title screen (Continue, New game, Settings, Quit) over
-your shop as you left it. New game opens the character screen (`SetupPhase`): the four of Bram's kin (locked ones say
+The game opens on a title screen (Continue, New game, Collection, Settings, Quit, Credits) over your shop as you left
+it. 0.32: the menu comes out of the chest. The locked chest strains for a moment (a creak, a knock from inside, a
+widening crack of light), bursts (the lid off the top of the screen, a column of light, a ring, sparks, a chord rather
+than coins), the name rises out of the light, and the buttons fly up out of the chest and swing down into their places
+one after another, each landing with a squash and a note a step higher than the last. About two seconds the first
+time, half that coming back; any key, button or click finishes it at once. Afterwards the chest stays open, glowing
+softly. (Until 0.31 a closed chest sat under the menu with coin sounds, and the owner found it ordinary.) New game opens the character screen (`SetupPhase`): Kit and Bram's three partners (locked ones say
 what unlocks them), the chosen one's rules, and the challenge level with its terms and multiplier. The shop is
 saved to `user://save.json` at the start of each day (`GameState.Save` and `Load`, plain JSON from Core), so leaving
 mid-day starts that day over; the pause menu (Esc, or Menu in the top bar) says so. Settings (`user://settings.cfg`):
@@ -1229,6 +1247,27 @@ Click a kind's option to hear the next one.
 skip the rest of the day (the customers still waiting go home, and the day ends as usual, so the Guild's night still
 comes), and unlock the whole journal (every regular, every find and its enchanted star, every curio Nim could carry,
 in the run and the profile). Nothing in it is fair, and the panel says so.
+
+## The trade's words (0.32)
+
+Players met curios that pay "on a chest bought sight unseen" or lean on "Bram's word" without ever being told exactly
+what those are. `Glossary.cs` defines each of the trade's words once, with the rule's own numbers: sight unseen (no
+shake, no drop, no lodestone; the witchlight and what a seller tells you don't count), Bram's word (once a run, on a
+Guild night you can't pay: the Guild takes all your gold and the rest, half as much again, goes on next week's due;
+not in the last week), Bram's stash, a short night, a perfect read, a step better, a surprise, a dry spell, exhibition
+points, a warded thing, a false bottom, haggling and mended. A curio lists the words it uses; Nim's card shows a "?"
+whose tooltip has their definitions, and so do the curio tooltips at the counter and the day's end and the
+collection's curio page. A curio's own text says exactly what it does (no "10% luckier": "10% likelier to come out a
+step better", and what ends a streak).
+
+## Heartsongs for a first season (0.32)
+
+A first season may never hear a Heartsong (about two in three don't), and then the rarest, most powerful things in the
+game went unexplained. Bram mentions them on a quiet evening of the first week (what to listen for, and to buy the
+chest if you ever hear one), the collection's Heartsongs page says how to hear one, and a season that ends with none
+ever heard gets a short scene with Bram between runs (once a profile): how rare they are, that only a Keywright hears
+one and the seller never knows, what one does on display, and that every one heard stays in the songbook for good.
+The Silent Choir (`docs/stories.md`) is the one tale whose prize is a Heartsong, for a season's hardest reading.
 
 ## Collection, synergies and exhibition
 

@@ -19,7 +19,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "court", Title = Loc.T("The King's Court"), Place = TalePlace.Always,
-            Blurb = Loc.T("The King has heard that the Emporium's Keywright has been collecting papers about his Guild."),
+            Blurb = Loc.T("The King has heard that the Emporium's Keywright has been collecting papers about his Guild. Bring him enough of them, " +
+                          "and his court will try the Guild itself."),
             Ending = CourtEnding,
             Beats = new Beat[]
             {
@@ -108,7 +109,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "bargain", Title = Loc.T("The Maw's Bargain"), Place = TalePlace.Emporium,
-            Blurb = Loc.T("In the debt's last week, the Maw himself comes to the counter with an offer."),
+            Blurb = Loc.T("In the debt's last week, the Maw himself comes to the counter. He'll pay everything you owe the Guild, tonight, for " +
+                          "the shards of the Aldric Key."),
             Ending = BargainEnding,
             Beats = new Beat[]
             {

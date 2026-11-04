@@ -30,13 +30,13 @@ public sealed class Visit
     public OriginDef Origin { get; init; }
 
     /// <summary>What the seller states (a count, a weight, a sign), as Bram notes it (<see cref="Market.MakeClue"/>), or null.</summary>
-    public string Clue { get; init; }
+    public string Clue { get; set; }
 
     /// <summary>The kinds the seller's clue names, for the careful player's read (<see cref="Strategy.Reckon"/>).</summary>
-    public Category[] ClueKinds { get; init; } = Array.Empty<Category>();
+    public Category[] ClueKinds { get; set; } = Array.Empty<Category>();
 
     /// <summary>What kind of clue it is: the seller's own (<see cref="SellerDef.States"/>), or one a day's event gave them.</summary>
-    public Clue Says { get; init; }
+    public Clue Says { get; set; }
 
     /// <summary>The clue points at a warded thing (a dream, a riddle, a tag, cards...), not at a count or a weight.</summary>
     public bool PointsAtWard => Says is not (Core.Clue.None or Core.Clue.Articles or Core.Clue.Pounds or Core.Clue.Tally);
@@ -446,6 +446,7 @@ public sealed class Visit
         Core.Clue.Roll => Loc.T($"The roll's '{Market.Faded(kept.Name)}' was the {kept.Name}."),
         Core.Clue.Echo => Loc.T($"A {Categories.Shape(kept.Category)} echo that never made a sound: that was it."),
         Core.Clue.Cards => Loc.T($"{Categories.Suit(kept.Category)} came up twice."),
+        Core.Clue.Choir => Loc.T("Wren said the echo slept in it, and it never made a sound."),
         _ => Loc.T("Nobody could have known."),
     };
 

@@ -275,13 +275,17 @@ public partial class OpeningPhase : Phase
         if (_report.KeptWarded is Item kept)
             ghosts.Add(_report.Ghosts.Count > 0 || _report.GhostHidden ? (Loc.T($"warded {kept.Name}: you named something that wasn't there"), false)
                 : (Loc.T($"warded, never named: {kept.Name}"), Blind));
+        // Each on as many lines as its words need (a warded thing's name can be long), its mark to its left.
+        float gy = 380;
         for (int g = 0; g < ghosts.Count; g++)
         {
             var (text, unseen) = ghosts[g];
-            var ghost = UiKit.MakeLabel(text, 16, unseen ? Palette.Unseen : Palette.Bad, HorizontalAlignment.Center, outline: 4)
-                .Place(960, 380 + g * 26, 280, 20);
+            float h = Math.Max(20, UiKit.TextHeight(text, 260));
+            var ghost = UiKit.MakeLabel(text, 16, unseen ? Palette.Unseen : Palette.Bad, HorizontalAlignment.Center, outline: 4).Wrapped()
+                .Place(980, gy, 260, h);
             Add(ghost);
-            var at = new Vector2(1000, 390 + g * 26);
+            var at = new Vector2(962, gy + 10);
+            gy += h + 6;
             Add(unseen ? UiKit.MakeUnseenMark(at, 1) : UiKit.MakeCheck(false, at, 1));
             Sfx.Play(unseen ? "blip" : "miss", unseen ? 0.8f : 1f, -6);
             await Wait(0.3);

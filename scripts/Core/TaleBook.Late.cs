@@ -61,15 +61,15 @@ public static partial class TaleBook
                         var chest = Fill(rng, "crypt", ShopTiers.Typical(s.Tier), s.Tier, 3);
                         var kind = EchoKind(rng, chest, s.Tier);
                         chest.Ward(new Item(kind, Categories.RollQuality(rng, chest.Quality)));
-                        return Echo(s, rng, chest, Loc.T("The first of our chests, from the abbey's crypt: see the silver bell? ") + EchoIn(kind) +
-                                                   Loc.T(" One coin, for luck."));
+                        return Warded(Echo(s, rng, chest, Loc.T("The first of our chests, from the abbey's crypt: see the silver bell? ") + EchoIn(kind) +
+                                                            Loc.T(" One coin, for luck.")), kind);
                     },
-                    Bought = (s, v) => Freed(s, v, "choir.echo1", Loc.T("You read the first bell-locked chest exactly, warded echo and all: it sang free.")),
+                    Bought = (s, v) => Freed(s, v, "choir.echo.first", Loc.T("You read the first bell-locked chest exactly, warded echo and all: it sang free.")),
                     Passed = (s, v) => Lost(s, Loc.T("You let the first bell-locked chest go unread. Its echo is lost, and the song with it.")),
                 },
                 new()
                 {
-                    Key = "choir.fork", Who = Wren, After = "choir.first", Gap = 0, Night = true, If = s => s.Flagged("choir.echo1"),
+                    Key = "choir.fork", Who = Wren, After = "choir.first", Gap = 0, Night = true, If = s => s.Flagged("choir.echo.first"),
                     Says = s => Say(Wren,
                         Loc.T("I heard it from the abbey road. One echo free, and the first in three hundred years."),
                         Loc.T("Take the choir's tuning fork. We tuned every verse to it. It'll help your luck along, and you'll need luck for the next one.")),
@@ -82,23 +82,27 @@ public static partial class TaleBook
                 // The second: under a false floor.
                 new()
                 {
-                    Key = "choir.second", Who = Wren, After = "choir.first", Gap = 4, Tier = 3, If = s => s.Flagged("choir.echo1"),
+                    Key = "choir.second", Who = Wren, After = "choir.first", Gap = 4, Tier = 3, If = s => s.Flagged("choir.echo.first"),
                     Brings = (s, rng) =>
                     {
                         var colour = ShopTiers.Typical(s.Tier);
                         var items = Fill(rng, "archive", colour, s.Tier, 3).Items.ToList();
                         var hidden = new Item(rng.PickOne(new[] { Category.Coins, Category.Gems, Category.Scrolls }), Categories.RollQuality(rng, colour));
                         var chest = new Chest(items, colour, hidden);
-                        return Echo(s, rng, chest, Loc.T("The second, from the Archive's vaults. This echo sleeps under a false floor: listen for the hollow " +
-                                                         "when it lands. One coin, for luck."));
+                        var visit = Echo(s, rng, chest, Loc.T("The second, from the Archive's vaults. This echo sleeps under a false floor: listen for the hollow " +
+                                                              "when it lands. One coin, for luck."));
+                        // Wren knows how many things the choir packed, the one under the floor among them: a count to read against.
+                        visit.Says = Core.Clue.Tally;
+                        visit.Clue = Loc.T($"Wren's count: {Market.Articles(chest)}, what's under the floor among them.");
+                        return visit;
                     },
-                    Bought = (s, v) => Freed(s, v, "choir.echo2", Loc.T("You read the second bell-locked chest exactly, false bottom and all: its echo sang free.")),
+                    Bought = (s, v) => Freed(s, v, "choir.echo.second", Loc.T("You read the second bell-locked chest exactly, false bottom and all: its echo sang free.")),
                     Passed = (s, v) => Lost(s, Loc.T("You let the second bell-locked chest go unread. Its echo is lost, and the song with it.")),
                 },
                 // The third: the Guild has it.
                 new()
                 {
-                    Key = "choir.vane", Who = Story.Vane, After = "choir.second", Gap = 2, Tier = 3, If = s => s.Flagged("choir.echo2"),
+                    Key = "choir.vane", Who = Story.Vane, After = "choir.second", Gap = 2, Tier = 3, If = s => s.Flagged("choir.echo.second"),
                     Says = s => Say(Story.Vane,
                         Loc.T("Keywright. The Guild keeps a chest with a silver bell on its lock in the counting-house vault. A nun has been asking after it."),
                         Loc.T($"The Guild doesn't sing, but it does sell. {Money.Say(s.Purses(2))}, and Sister Wren may have it.")),
@@ -125,15 +129,15 @@ public static partial class TaleBook
                         var chest = Fill(rng, "treasury", ShopTiers.Typical(s.Tier), s.Tier, 4);
                         var kind = EchoKind(rng, chest, s.Tier);
                         chest.Ward(new Item(kind, Categories.RollQuality(rng, chest.Quality)));
-                        return Echo(s, rng, chest, Loc.T("The last one, out of the Guild's own vault. ") + EchoIn(kind) + Loc.T(" One coin, for luck, and God help us both."));
+                        return Warded(Echo(s, rng, chest, Loc.T("The last one, out of the Guild's own vault. ") + EchoIn(kind) + Loc.T(" One coin, for luck, and God help us both.")), kind);
                     },
-                    Bought = (s, v) => Freed(s, v, "choir.echo3", Loc.T("You read the last bell-locked chest exactly: the third echo sang free. Wren can sing the song whole.")),
+                    Bought = (s, v) => Freed(s, v, "choir.echo.third", Loc.T("You read the last bell-locked chest exactly: the third echo sang free. Wren can sing the song whole.")),
                     Passed = (s, v) => Lost(s, Loc.T("You let the last bell-locked chest go unread. Its echo is lost, and the song with it.")),
                 },
                 // The song, sung whole: a Heartsong, in a chest Wren gives you.
                 new()
                 {
-                    Key = "choir.song", Who = Wren, After = "choir.third", Gap = 1, Tier = 3, If = s => s.Flagged("choir.echo3"),
+                    Key = "choir.song", Who = Wren, After = "choir.third", Gap = 1, Tier = 3, If = s => s.Flagged("choir.echo.third"),
                     Brings = (s, rng) =>
                     {
                         var chest = Fill(rng, "crypt", Finer(s.Tier, 1), s.Tier, 2);
@@ -405,6 +409,15 @@ public static partial class TaleBook
         chest.Tale = "choir";
         var visit = Contested(s, rng, Wren, chest, pitch, "crypt", 0);
         visit.ContestFor = Loc.T("A bell-locked chest: read it exactly, every last thing in it, and its echo sings free. Wrong, and the echo is lost.");
+        return visit;
+    }
+
+    /// <summary>Wren's word on a warded echo, as a stated clue (the kind it sleeps in), so it's named like any other ward.</summary>
+    static Visit Warded(Visit visit, Category kind)
+    {
+        visit.Says = Core.Clue.Choir;
+        visit.ClueKinds = new[] { kind };
+        visit.Clue = EchoIn(kind);
         return visit;
     }
 

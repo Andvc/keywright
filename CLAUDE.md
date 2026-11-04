@@ -54,10 +54,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    `--start-week` fast-forwards a run with the sim's careful collector (curios, commissions, exhibition and all; `--gold`
    then sets the purse, e.g. 0 to see a short night and foreclosure; `--days` counts from day 1, so add the weeks
    skipped). The bot plays scenes, Nim, the Guild's night and deliveries, opens the short-of-chests warning once (and
-   says "Not now"), keeps every Heartsong (after a look at its reveal), and quits when a run ends. With tips
+   says "Not now"), keeps every Heartsong (after a look at its reveal), and quits once a run has ended (below). With tips
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
-   `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine.
+   `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine;
+   `--sight-unseen` buys every other plain chest it can afford without touching it (the opening's blind-buy screen).
+   At a run's end the bot retires (or goes back to the title) as a player would, so what comes between runs plays too.
+   `--title-test` drives the title's burst with real input (skipping, pressing a landed button) and exits 1 on a failure.
    `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the
    character screen, a new game (Hesk, at challenge level 8: the most boons and banes the character screen and the
    pause menu ever list), the pause menu and its collection, and the settings (with a look at the scene with the outlines turned off, when the art has them; with `--gm`, the GM panel too: gold, the
@@ -138,6 +141,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   a profile; the scripted first day (`GameState.FirstDayScripted`) teaches three customers, and Bettany (passing) opens
   the second. Clicking whoever's at the counter (or the notebook button, or N) opens the notebook on their page, framed
   (`Visit.LookedUp`); Mother Sorrel's lesson teaches it (the `lookup` tip for the others).
+- Heartsongs are introduced on a quiet first-week evening (the `songs_intro` tip), and a season that ends with none ever
+  heard gets Bram's word on them between runs, once a profile (`Story.SongsUnheard`, in `Main.EndRun`).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
   run while the debt lasts (v22; 0.30's longer season at 0.16% a chest, `--sim=songcount`), in any seller's chest
   (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
@@ -170,6 +175,15 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   and DayEndPhase and PeddlerPhase show a red price and a confirmation. Route anything that changes prices through
   `PriceFactor` and anything that changes what ordinary things fetch through the index, deciding whether a seller could
   know of it.
+- The trade's words (0.32, `Glossary.cs`): sight unseen, Bram's word, the stash, a short night, a perfect read, a step
+  better, a surprise, a dry spell, exhibition points, wards, false bottoms, haggling, mended, each defined once and exactly
+  (with the rule's own numbers). A curio lists the words it uses (`Glossary.CurioTerms`): Nim's cards show a "?" with
+  them, and the curio tooltips and the collection add the definitions; Bram explains sight unseen and his word the first
+  time a card uses them. A curio's text says exactly what it does: no "luckier", "their least" or "makes them likelier".
+  At the opening, a chest bought sight unseen (not a gift or the Crown Chest) gets a "Bought sight unseen" tag, and what
+  the slip never marked gets a closed eye (`UiKit.MakeUnseenMark`, `OpeningPhase.Unseen`), not a cross: nothing was read,
+  so nothing was missed. The gut and the profit stamp judge the same sum: everything the chest brought back (what's
+  inside as it sells here, a perfect read's fee, a rebate, the bond) against what was paid.
 - Curios are the run's build (`Curios.cs`, `Build.cs`): 79 of them, each bending one rule, each tagged with the ways of
   trading it rewards (`CurioTag`); six are the main builds, each a different way to play (`Curios.Main`: enchantment,
   sight unseen, haggling, the perfect read, false bottoms, wards), each with a way in, a multiplier, an engine and a
@@ -258,10 +272,14 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   a careful player to one in four) are worth about a sixth of what the chests hold (0.30: a step is worth twice, not
   three times), with a pity counter
   (`GameState.DrySpell`); the sim reports their share of income.
-- Across runs (`Meta.cs` for the definitions and the score, `Kin.cs` for what they do to a run): four of Bram's kin
-  (`Characters`), each changing one part of how chests are judged or the shop is run and paying for it (Hesk: no hard
+- Across runs (`Meta.cs` for the definitions and the score, `Kin.cs` for what they do to a run): four who can mind the
+  stall (`Characters`), each changing one part of how chests are judged or the shop is run and paying for it (Hesk: no hard
   shake or drop, a scale; Rosa: everybody haggles, walkouts stay away a week; Isolde: a shelf and door money from day
-  one, no pawning her collection); and eight challenge levels (`Challenges`, opened per character by clearing at the
+  one, no pawning her collection). Only Kit is Bram's kin (0.32): Hesk, Rosa and Isolde are his partners, each born with
+  the mark somewhere else, with a background, a welcome (`Story.Welcome`), a season's-end line and a tale of their own
+  drawn every season they play (`TalePlace.Kin`, `TaleBook.Own`, `TaleBook.Kin.cs`). Bram is "Uncle Bram" to Kit and
+  "Bram" to the others (`Hints.Mentor`, by `Hints.Kin`, set when a run starts or loads): a line that calls the player his
+  kin, or him their uncle, is Kit's alone (`state.Is(Characters.Kit)`); and eight challenge levels (`Challenges`, opened per character by clearing at the
   level below, a quarter more to the score each). A level raises every due by `Challenges.DebtStep` and deals the run
   that many banes and as many boons (`TermDef`, `Challenges.Draw`: nested, so a level's draw is the one below's and a
   pair more, and never a boon with the bane it contradicts; a real run draws from `Profile.TermsSeed`, so the setup
@@ -303,7 +321,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   The Regulars page is a list with the open page under it; it opens on whoever's at the counter, framed. GM mode
   (`Settings.Gm`, `--gm`) puts a panel beside the pause menu: +99,999 gold (`Main.GmGold`), skip the day
   (`GameState.SkipRestOfDay`), fill the notebook and the collection (`KnowAll` on the run and the profile).
-- The game opens on `TitlePhase`; `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
+- The game opens on `TitlePhase` (0.32): the chest strains and bursts open, the name rises out of the light and the
+  menu's buttons fly out of the chest into place (a timeline in `_Process`; any key, button or click finishes it at
+  once; shorter coming back from a run; shake, flashes and the hit stop through `Main`). `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
   for the bot or debugging flags) and the pause action (Esc, Start) opens `PauseMenu`. A day: `Main.StartDay` (the
   week's scene, Nim), the counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening,
   `DuesPhase` on the fifth). Anything added to `GameState` that should survive a day boundary goes in `SaveData` too.
@@ -367,6 +387,18 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   binding, and a controller drives the pointer the mouse uses (`GamepadCursor`: the left stick moves it, faster
   while A is held so a flick shakes hard; A is the left button, by `Input.ParseInputEvent`; the D-pad nudges, the
   right stick scrolls), so anything the mouse does, a controller does.
+- Following a tale (0.32): a talk is headed by its tale's title ("A NEW TALE BEGINS" on its first); the notebook's
+  Stories page (`NotebookView.StoriesPage`) lists every tale begun and shows one whole: its setup (the tale's `Blurb`,
+  which says who, what's at stake and what you can do), its log, and what comes next (`GameState.TaleNext`: the first
+  beat that could come, by who, where and about when). Keepsakes (`Keepsakes.cs`): what a tale's people give you to
+  keep. Each works like a curio with one effect of its own (`GameState.Keeps`, hooked where its rule lives) but takes no
+  slot, is never sold, bought back or pawned, and isn't in the power index; `GiveKeepsake` in a talk shows it as a card
+  (`TalkPhase.ShowKept`); they sit after the curios at the counter and the day's end, and the collection has a
+  Keepsakes page. Saved in `SaveData.KeepsakesHeld` (`SaveData.Keepsakes` is still what tales set aside,
+  `GameState.SetAside`), remembered in `Profile.KeepsakesSeen`. A new keepsake needs its tale, its effect, a picture
+  (one borrowed until drawn) and a line on the collection page. The Silent Choir (`TaleBook.Late.cs`) is the season-long
+  quest whose prize is a Heartsong: three contest chests (`Visit.ContestFor` says what an exact read wins) and the
+  Guild's price; one wrong read loses it. A season draws three of each place's tales and all three of the Emporium's.
 - What a tale leaves behind (0.30; `docs/stories.md`, "What a tale leaves behind"; `Consequences.cs`): who comes (and
   who never does again: `Goes`, and their tools with them), officials who come only while their masters count you a
   friend (`SellerDef.Comes`: Bailiff Marrow, a third of his seized chests cold; Quartermaster Brandt, by the pound),
@@ -424,7 +456,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `Shop.Buy` takes a seller's due (an heirloom bought back, the devil's dearest thing) and `Shop.Settle` a wager or the King's game. A new rule needs the sim, the bot
   (`Strategy.Levels`, `Worth`, `WorthBuying`) and a lesson. The sim's per-seller table must show a careful player
   profits from each, and buying blind shouldn't (Pip, who takes a few coins, and the Maw, whose coin costs the rest of
-  the day, are the exceptions; Flick's profit is the Wardens' finder's shares). Stories say how they shook it and what they state, never what they heard (`{heft}`,
+  the day, are the exceptions; Flick's profit is the Wardens' finder's shares). Stories say what they state, never what
+  they heard, and how they shook it only where the deal turns on it (0.32: Pip never shakes, Ada can't bear to, Bettany
+  and Quire charge by the rattle, Nettle's fee, Cadoc's rule, Skrae's echoes; the slip's header already says how each
+  priced) (`{heft}`,
   `{colour}`, `{magic}`, `{articles}`, `{pounds}`, `{dream}`, `{clue}`, `{price}`, `{fee}`), and must fit the speech
   bubble (about 170 characters with the price filled in).
 - `ShakeBox` gates sounds with the same rules as `Chest.Audible`: change both together (the shake test checks them).

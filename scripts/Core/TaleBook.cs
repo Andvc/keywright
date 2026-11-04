@@ -154,7 +154,8 @@ public static partial class TaleBook
         new()
         {
             Key = "magpie", Title = Loc.T("The Shut Chests"), Place = TalePlace.Always, Secrets = Suspects,
-            Blurb = Loc.T("Someone's stealing chests around Thornwick: the Magpie, whom nobody's seen. The Wardens want a name."),
+            Blurb = Loc.T("Someone is stealing chests around Thornwick: the Magpie, whom nobody's seen. Every chest she takes is one the Guild " +
+                          "foreclosed on. The Wardens want a name, and witnesses will bring clues."),
             Ending = MagpieEnding,
             Beats = new Beat[]
             {
@@ -346,7 +347,8 @@ public static partial class TaleBook
         new()
         {
             Key = "pip", Title = Loc.T("The Marked Child"), Place = TalePlace.Brindle,
-            Blurb = Loc.T("Pip Hollow has the Key-mark. The Guild's Mark-Finders take marked children into its counting-houses."),
+            Blurb = Loc.T("Pip Hollow, the washerwoman's boy, has the Key-mark on his palm. The Guild's Mark-Finders take marked children into " +
+                          "its counting-houses, and they're testing hands at the fair."),
             Ending = PipEnding,
             Beats = new Beat[]
             {
@@ -514,7 +516,8 @@ public static partial class TaleBook
         new()
         {
             Key = "kettle", Title = Loc.T("The Widow's Debt"), Place = TalePlace.Brindle,
-            Blurb = Loc.T("Ada Kettle's son Jory is in the Guild's debt-house, and her husband's sword was pawned in Crownhold."),
+            Blurb = Loc.T("Ada Kettle's son Jory is in the Guild's debt-house for his dead father's tithe. Her husband Rafe's sword, with KETTLE " +
+                          "on the blade, was pawned years ago in Crownhold."),
             Ending = KettleEnding,
             Beats = new Beat[]
             {
@@ -641,7 +644,8 @@ public static partial class TaleBook
         new()
         {
             Key = "door", Title = Loc.T("The Deep Door"), Place = TalePlace.Brindle, Secrets = new[] { "hoard", "fall" }, // loc: keys
-            Blurb = Loc.T("Tobin has found a door at the bottom of the Barrow, sealed with the Key-mark."),
+            Blurb = Loc.T("Tobin the adventurer has found a door at the bottom of the Barrow, sealed with the Key-mark and untouched since the " +
+                          "Locking. He needs a Keywright's stake to go through it."),
             Ending = DoorEnding,
             Beats = new Beat[]
             {
@@ -737,7 +741,7 @@ public static partial class TaleBook
                                     "light at the bottom of it.")
                             : Loc.T("Behind the vault there's a stair. It goes down further than the Barrow should go, and there's light at the bottom, and water, and bells."),
                         Loc.T($"The old kings' halls, I reckon: the ones the songs say the Barrow was built over. Stake me {Money.Say(s.Purses(2))}, a proper " +
-                              "crew this time, and half of whatever's down there is yours, every week I'm digging.")),
+                              $"crew this time, and half of whatever's down there is yours, every week I'm digging.")),
                     Asks = s => new()
                     {
                         C(Loc.T($"Stake the expedition ({s.Purses(2)}g)"), () =>
@@ -788,7 +792,8 @@ public static partial class TaleBook
         new()
         {
             Key = "wood", Title = Loc.T("The Woodcutters"), Place = TalePlace.Thornwick,
-            Blurb = Loc.T("The Guild's buying the felling rights on the Old Wood, and wants a Keywright's mark on the deed."),
+            Blurb = Loc.T("The Guild is buying the felling rights on the Old Wood, and its deed wants a Keywright's mark as witness. The druids " +
+                          "and the fair folk who live there want a promise instead."),
             Ending = WoodEnding,
             Beats = new Beat[]
             {
@@ -910,7 +915,8 @@ public static partial class TaleBook
         new()
         {
             Key = "parcel", Title = Loc.T("The Parcel"), Place = TalePlace.Thornwick,
-            Blurb = Loc.T("Corvin Tallow needs somewhere to keep a parcel for two nights, and the Wardens are searching the market."),
+            Blurb = Loc.T("Corvin Tallow the smuggler needs somewhere to keep a parcel for two nights, no questions asked, and the Wardens are " +
+                          "searching the market."),
             Ending = ParcelEnding,
             Beats = new Beat[]
             {
@@ -985,7 +991,8 @@ public static partial class TaleBook
         new()
         {
             Key = "fore", Title = Loc.T("The Foreclosures"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Half the chests the Guild forecloses on won't open for any Keywright it sells them to."),
+            Blurb = Loc.T("Half the chests the Guild forecloses on won't open for any Keywright it sells them to. A clerk in its counting-house " +
+                          "wants to know why, and the answer is in the Chest Roll."),
             Ending = ForeEnding,
             Beats = new Beat[]
             {
@@ -1086,7 +1093,8 @@ public static partial class TaleBook
         new()
         {
             Key = "unlock", Title = Loc.T("The Unlocking"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Archmage Orme is building an engine to copy the Key-mark: any chest would open for anyone."),
+            Blurb = Loc.T("Archmage Orme of the Arcanum is building an engine to copy the Key-mark, so that any chest would open for anyone. He " +
+                          "needs a Keywright's blood, and Mara says it would end the Locking."),
             Ending = UnlockEnding,
             Beats = new Beat[]
             {
@@ -1171,7 +1179,8 @@ public static partial class TaleBook
         new()
         {
             Key = "crown", Title = Loc.T("Ironroot's Crown"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Ironroot's crown was locked in the Royal Treasury at the Locking, and the Guild bans dwarf-gold."),
+            Blurb = Loc.T("Ironroot's crown was locked in the Royal Treasury at the Locking, and the Guild bans dwarf-gold. Durgan Ironhand wants " +
+                          "it home under the mountain, and only the King can give it."),
             Ending = CrownEnding,
             Beats = new Beat[]
             {
@@ -1237,7 +1246,8 @@ public static partial class TaleBook
         new()
         {
             Key = "vell", Title = Loc.T("The Vell Inheritance"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Lord Cassian Vell is selling his sister's chests, and they aren't his to sell."),
+            Blurb = Loc.T("Lord Cassian Vell is selling his sister's chests to pay his debts, and they aren't his to sell: their grandmother's " +
+                          "will left them to Lady Isaura. A chest sold by the wrong hands is cold to the mark."),
             Ending = VellEnding,
             Beats = new Beat[]
             {
@@ -1327,7 +1337,8 @@ public static partial class TaleBook
         new()
         {
             Key = "defector", Title = Loc.T("The Defector"), Place = TalePlace.Emporium,
-            Blurb = Loc.T("Skrae has heard enough of the Maw, and wants out."),
+            Blurb = Loc.T("Skrae, a demon with bat's ears, has heard enough of the Maw and wants out. It needs a back room to hide in for three " +
+                          "nights, and the Maw's couriers are looking for it."),
             Ending = DefectorEnding,
             Beats = new Beat[]
             {
@@ -1415,8 +1426,9 @@ public static partial class TaleBook
         if (!Enabled) return new List<string>();
         var rng = new Random(unchecked(seed * 31337 + 7));
         var drawn = All.Where(t => t.Place == TalePlace.Always).Select(t => t.Key).ToList();
-        // 0.30: three of each place's tales (of seven or eight) and both of the Emporium's, over the longer season.
-        foreach (var (place, count) in new[] { (TalePlace.Brindle, 3), (TalePlace.Thornwick, 3), (TalePlace.Crownhold, 3), (TalePlace.Emporium, 2) })
+        // 0.30: three of each place's tales (of seven to nine) over the longer season; 0.32: all three of the Emporium's, so
+        // the late game has its own stories. The tale of whoever minds the stall is added by the run (TaleBook.Own).
+        foreach (var (place, count) in new[] { (TalePlace.Brindle, 3), (TalePlace.Thornwick, 3), (TalePlace.Crownhold, 3), (TalePlace.Emporium, 3) })
             drawn.AddRange(All.Where(t => t.Place == place).OrderBy(_ => rng.Next()).Take(count).Select(t => t.Key));
         return drawn;
     }

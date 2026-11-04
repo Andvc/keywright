@@ -14,15 +14,20 @@ what they've come to say and asks something of you, and you choose. Some bring a
 it, pass, send for the Wardens) is the choice. Some come at night, between the day's end and Nim's table.
 
 - **Which tales.** Every season has the main story (**The Key**), **The Shut Chests** (from Thornwick: it teaches
-  stolen chests) and **The King's Court** (at the Emporium, if you've anything to bring it). Eleven more are drawn from
-  the seed at the start (0.30; six until then): three of Brindle's seven, three of Thornwick's seven, three of
-  Crownhold's eight, and both of the Emporium's. No two seasons hold the same tales, and some tales draw their own
+  stolen chests), **The King's Court** (at the Emporium, if you've anything to bring it) and, for Hesk, Rosa or Isolde,
+  their own tale (0.32, below). Twelve more are drawn from the seed at the start (0.32; eleven in 0.30, six until then):
+  three of Brindle's eight, three of Thornwick's seven, three of Crownhold's nine, and all three of the Emporium's. No two seasons hold the same tales, and some tales draw their own
   secrets (who the Magpie is, what's behind the Barrow door, whose the dowry is, who wins the duel).
 - **How many at once.** At most two beats at the counter a day and one at night. A beat that brings a chest takes a
   regular's place in the queue; a talk beat comes on top (it's short). The first days are left to learning the trade.
 - **What you're told.** A person who means to come back says when, and the notebook's calendar marks it. Notices
   (wanted chests, the Guild's and the Crown's word, witnesses' accounts) stay on the notebook's Town page while they
   stand, with every tale begun and where it's got to, and where you stand with each power.
+- **Following a tale (0.32).** A tale's first talk says "A NEW TALE BEGINS" under its title, and every talk is headed by
+  the tale it belongs to. The notebook's **Stories** page lists every tale begun (those still going in gold) and shows the
+  one picked whole: its setup (who, what's at stake, what you can do), every line of what's happened so far, and what
+  comes next, worked out from the tale's beats (`GameState.TaleNext`): who's due, at the counter, the back door or by
+  letter, and about when, or "once the shop is at Crownhold"; or that nothing more is expected for now.
 - **What a choice costs.** A choice's price is on its button. Every consequence is stated when it happens (a line, a
   note under the person, the Town page), and nothing is a hidden roll: a tale's secret is drawn when the tale begins
   and never changes, and a rule a tale sets (the Wardens search an enemy every Guild night) holds every time.
@@ -137,6 +142,54 @@ is in the save.
 - **The season's end** (`TaleDef.Ending`): after the last scene of a run, won or lost, Bram tells what became of
   everyone whose tale began: one line each, by what you chose.
 
+## Keepsakes (0.32)
+
+Some people give you something to keep at the end of their tale (`Keepsakes.cs`). A keepsake works like a curio, with
+one effect of its own, but it takes no curio slot, Nim never brings one or buys one back, and the Guild won't take one on
+a short night. Sellers can't know of one, so none is in the power index: what it does is your edge. A talk that gives one
+shows it as a card (its picture, on a teal halo, and what it does); keepsakes sit after the curios at the counter and the
+day's end, and the collection has a Keepsakes page (the ones you haven't had say which tale gives them). They borrow a
+curio's, a tool's or a thing's picture until they have their own.
+
+| Keepsake | From | Does |
+|---|---|---|
+| Fallowford's Weights | The Drowned Town (Hesk) | Coin and gems sell for a fifth more |
+| Mother's Stall Key | Lantern Lane (Rosa) | A seller who walks out on Rosa comes back like anyone else |
+| The Marchmont Seal | The Marchmont Pieces (Isolde) | Her visitors pay half as much again at the door |
+| The Brass Apprentice | The Brass Apprentice | One more customer every day |
+| Tobin's Lamp | The Deep Door | Each week's first morning, a Barrow chest from Tobin, freely given, a colour finer than the shop's |
+| The Hawthorn Charm | The Woodcutters | Everything 5% likelier to come out a step better (gone if the promise is broken) |
+| Sir Aldwin's Coin | The Field's Dead | The day's first chest: nothing in it comes out worse than its chest promised |
+| Rafe Kettle's Medal | The Widow's Debt (the sword given back) | Weapons sell for a quarter more |
+| Sir Edric's Oath | The Sleeper | The Wardens never search you and the Lockless never rob you |
+| Wren's Tuning Fork | The Silent Choir (the first echo freed) | Everything 10% likelier to come out a step better |
+
+## Their own tales (0.32)
+
+Kit is Bram's niece, and her story is the Key's. The others aren't family: each was born with the Key-mark somewhere
+else and came to Bram's stall as his partner, for reasons of their own (Bram is "Uncle Bram" to Kit and "Bram" to them,
+`Hints.Mentor`). Each has a tale drawn every season they play (`TalePlace.Kin`, `TaleBook.Own`), ending in a keepsake.
+
+- **Hesk, The Drowned Town.** Hesk is a grocer from Fallowford, the river town the Guild drowned when it opened the
+  Aldwater weir to flood out a smugglers' road. (1) *A letter from Mabry* (night, from day 3): the Guild's salvage barges
+  are dredging Fallowford for its common chest, every family's savings in the town's name; *I'll watch for it* or
+  *Fallowford's gone*. (2) *Mabry* (Thornwick): it goes to the Guild's salvage sale; *stand witness* (Guild -1) or *I
+  can't fight the Guild* (lost). (3) *The sale* (Bailiff Marrow, Crownhold): the chest, cold to the mark (seized, not
+  sold). Send for the Wardens and it goes home; buy it and it waits in the back room to be returned; pass and the Guild's
+  buyer sends it down the Gate. (4) *Home* (Mabry): the town gives it to Hesk to open for them (a gift, so it opens),
+  commons +1; that night, Fallowford's Weights, and Mabry owes you a favour. Or (4') a last letter: it went down the Gate.
+- **Rosa, Lantern Lane.** Rosa Brightwater's mother kept the best stall on Crownhold's Lantern Lane until the Guild took
+  it and gave it to its own man, Orrin Vash. By the Lane's custom a family wins its stall back if one of its blood reads a
+  chest exactly in front of the traders. (1) *Marta's letter* (night, from day 3). (2) *Vash* (Thornwick): a purse and a
+  half to stay away (Guild +1: the stall's lost) or *I'll see you on the Lane*. (3) *The reading* (Crownhold): a contest
+  chest; exactly right wins the stall and half a purse. (4) Wrong: *a second reading*, if your family stands the traders
+  their supper (a purse); (5) the second chest. Won: Marta gives you Mother's Stall Key that night, commons +1, a favour.
+- **Isolde, The Marchmont Pieces.** Lady Isolde Marchmont is the last of a house the Guild foreclosed on. The Guild sold
+  the house's chests; they're still the house's, so they're warm to her hand whoever paid for them. (1) *Pemberton's
+  letter* (night, from day 3): he's traced three. (2) *The jewel case* (Aunt Hesper, Thornwick). (3) *The map chest*
+  (Master Quire, Crownhold). (4) *The seal* (Mister Vane, Crownhold): the Guild kept the long box with the seal for
+  itself, two purses. (5) That night, the Marchmont Seal; with all three pieces home, the Crown has heard of it (+1).
+
 ## The tales
 
 Each beat: who, when, what happens, and the choices (with what each does). "Purse" is Bram's working purse at the shop
@@ -231,6 +284,11 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    **Or the fall** (Bettany, three days on): his men came back without him; a rescue costs another purse. *Pay* (he
    comes back with the chest, and owes you his life: a favour) or *I can't* (he never comes back; commons -1).
 
+**0.32: the old kings' halls.** (5) *The stair* (Tobin, at Crownhold, ten days after the stake, once he's back): past
+the vault a stair goes down to the old kings' halls under the Barrow; *stake the expedition* (two purses) or *once was
+enough*. (6) *Under the Barrow* (Tobin, four days on): a chest a colour finer, freely given. (7) That night he goes back
+down for good and leaves his lamp: Tobin's Lamp, a Barrow chest from him every week.
+
 ### The Woodcutters (Thornwick)
 
 1. **The deed** (Harl Caskett, the Guild's timber factor): the Guild's buying the felling rights on the Old Wood, and
@@ -238,8 +296,8 @@ What's behind the door is drawn when the tale begins: a hoard, or a fall.
    (Guild -1, the Wood +1).
 2. **The druid** (Mother Sorrel, the next day): she knows what you did. If you refused: the Hawthorn Lady would speak
    with you tonight.
-3. **The Hawthorn Lady** (night): promise to keep the Wood's oaks standing, and have a fey charm (a curio). *I promise*
-   or *I can't promise that*.
+3. **The Hawthorn Lady** (night): promise to keep the Wood's oaks standing, and have a fey charm (the Hawthorn Charm, a
+   keepsake since 0.32). *I promise* or *I can't promise that*.
 4. **The last offer** (Caskett, at Crownhold): a fifth off the next due, this time. *Seal it* (Guild +1, the Wood -3;
    a promise broken: the fey take their charm back; Mother Sorrel never trades with you again) or *refuse* (the Wood
    +2; the Hawthorn Lady's thanks).
@@ -437,6 +495,49 @@ Who wins is drawn when the tale begins, unless Sir Rowan has his ancestor's blad
    tonight, for the Key. *Take his bargain*: the debt is paid and the run won, the shards are his, the Crown Chest is gone
    for good, and the run ends THE GATE OPENS (the debt's points go to the Maw, not you). *Never*: Crown +1.
 2. **Mara** (that night, if you refused): a rare curio from the Keyhold, for saying no to him.
+
+### The Silent Choir (Brindle, 0.32; the Heartsong quest)
+
+The season's hardest tale, and the only one whose prize is a Heartsong. Drawn like a Brindle tale (about one season in
+three), while the songbook isn't full.
+
+1. **The hum** (Sister Wren, from day 6): the last singer of the Keyhold's choir. When the Guild burned her chapel, the
+   choir sang a Heartsong into three chests, each with a silver bell on its lock. Each holds an echo, freed only by reading
+   its chest exactly; one wrong read and the song is lost. *I'll listen for them* or *I can't promise that*.
+2. **The first chest** (Wren, Thornwick): a contest chest with a warded thing; Wren says what kind it sleeps in (a stated
+   clue), so it's named the usual way, one more of its kind marked than you hear. That night, freed: Wren's Tuning Fork.
+3. **The second chest** (Wren, Crownhold): its echo is under a false floor: drop it and listen for the hollow (glass may
+   break, and a broken thing you counted is a wrong read).
+4. **The Guild's chest** (Mister Vane, Crownhold): the Guild has the third, for two purses, or *the Guild can keep it*.
+5. **The third chest** (Wren): another ward, another stated kind.
+6. **The song** (Wren): she sings it whole and gives it to you in a chest, freely: a Heartsong, one the songbook doesn't
+   know if there's one left, with the usual reveal (keep it or let it go; it's in the songbook either way).
+
+A chest passed on, misread, or the Guild's price refused loses the song: Wren's farewell letter that night.
+
+### The Brass Apprentice (Crownhold, 0.32)
+
+1. **The marks** (Hollis, from day 16): chests opened and shut again all over Crownhold, each with a Keywright's mark
+   burned into the lock-plate: yours, if you gave Orme your blood in The Unlocking (then refusing costs Wardens 2), or an
+   old Keyhold mark. *I'll keep watch* or *not my business*.
+2. **The yard** (Hollis, that night): a cloaked brass figure opens a lock with a marked palm. *Follow it*, or *raise the
+   alarm* (the Wardens smash it: Wardens +2 and a finder's share).
+3. **Tock** (the next day): Orme's automaton would rather be an apprentice than a burglar. *Take it in* (the Brass
+   Apprentice: one more customer a day), *give it to the Wardens* (smashed: Wardens +2, a finder's share) or *take it
+   home to Orme* (Arcanum +2).
+4. **The Guild** (Mister Vane, night, at the Emporium): a machine that opens chests is the end of the Guild's licences.
+   *Pay the fine* (two purses), *appeal to the King* (keeps Tock only if the Crown counts you a friend; Guild -1), or
+   *hand Tock over* (Guild +2).
+
+### The Sleeper (the Emporium, 0.32)
+
+1. **The cellar** (Countess Vey, from day 22): a chest in the palace cellars breathes. Sir Edric Ashcombe locked
+   himself in at the Locking to guard the Crown's oath-book; only his heir can give it away.
+2. **The Roll** (Vey): the heir is Tilly Mudge, the mudlark.
+3. **The heir** (Tilly): she'll give it, if she can watch him wake (and have his boots).
+4. **The chest** (Tilly): given freely, so it opens.
+5. **The waking** (Sir Edric, that night): the oath-book goes back to the King (Crown +2), and he swears to guard your
+   door: Sir Edric's Oath.
 
 ## For the simulation and the bot
 

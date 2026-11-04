@@ -71,7 +71,9 @@ public static class Story
     /// <summary>The second evening: the Guild introduces itself, and what Bram owes (on this run's terms).</summary>
     public static List<Line> Intro(GameState state) => new()
     {
-        new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Every Keywright in Aldmark pays the Guild a tithe, to keep the Gate. Your uncle never paid a penny.")),
+        state.Is(Characters.Kit)
+            ? new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Every Keywright in Aldmark pays the Guild a tithe, to keep the Gate. Your uncle never paid a penny."))
+            : new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Every Keywright in Aldmark pays the Guild a tithe, to keep the Gate. Your partner never paid a penny.")),
         new(Bram, Loc.T("Twenty years I opened chests for folk who couldn't afford a Guild Keywright! For pennies!")),
         new(Vane, Loc.T($"Twenty years of tithe, Bram: {Money.Say(Enumerable.Range(1, Guild.Weeks).Sum(state.DueFor))}. The Guild will be reasonable. {Capital(Sellers.Number(Guild.Weeks))} payments, one a week, starting small: {Money.Say(state.DueFor(1))}, {Sellers.Number(Guild.DaysPerWeek - GameState.IntroDay)} nights from now.")),
         new(Vane, Loc.T("Miss one, and the Guild seals the stall. Good evening, Keywright.")),
@@ -114,8 +116,11 @@ public static class Story
                     ? new(Bram, Loc.T("That's... a second shard. Where did she get it? Never mind. Never mind!"))
                     : new(Bram, Loc.T("That woman in the hood. I know that voice. Hear her out.")));
                 // She gives her name with her hood up, and lowers it after.
-                lines.Add(new(Hood, Loc.T("My name is Mara. I was the last archmage of the Keyhold. Your uncle and I found the first shard " +
-                                    "together, a long time ago.")));
+                lines.Add(state.Is(Characters.Kit)
+                    ? new(Hood, Loc.T("My name is Mara. I was the last archmage of the Keyhold. Your uncle and I found the first shard " +
+                                      "together, a long time ago."))
+                    : new(Hood, Loc.T("My name is Mara. I was the last archmage of the Keyhold. Bram and I found the first shard " +
+                                      "together, a long time ago.")));
                 lines.Add(new(Mara, Loc.T("The whole Key opens the Crown Chest: King Aldric's own, with the heart of the Locking inside. The " +
                                     "Guild doesn't want your gold. It wants that chest.")));
                 lines.Add(new(Mara, Loc.T("Every tithe the Guild takes goes down through the Gilded Gate. The Maw is buying his way out, a coin " +

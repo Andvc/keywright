@@ -16,7 +16,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "bell", Title = Loc.T("The Drowned Bell"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Tilly Mudge hears a bell ringing under the Aldwater at night, and nobody believes her."),
+            Blurb = Loc.T("Tilly Mudge the mudlark hears a bell ringing under the Aldwater at night, and nobody believes her. If she's right, " +
+                          "something has been chained to it since the Locking."),
             Ending = BellEnding,
             Beats = new Beat[]
             {
@@ -119,7 +120,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "tansy", Title = Loc.T("The Moneylender"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Mother Tansy of Lantern Lane lends to anyone short for the Guild, against next week's first morning."),
+            Blurb = Loc.T("Mother Tansy of Lantern Lane lends to anyone short for the Guild, against next week's first morning, a third on top. " +
+                          "Pay her back and she lends again on better terms; don't, and her men come for your shelf."),
             Ending = TansyEnding,
             Beats = new Beat[]
             {
@@ -173,7 +175,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "duel", Title = Loc.T("The Duel"), Place = TalePlace.Crownhold, Secrets = new[] { Rowan, Cassian },
-            Blurb = Loc.T("Sir Rowan and Lord Cassian will fight on the Aldwater steps, and someone has to hold the stakes."),
+            Blurb = Loc.T("Sir Rowan Gale and Lord Cassian Vell will fight on the Aldwater steps at dawn, and someone honest has to hold both " +
+                          "their stakes overnight. Lord Cassian has never been honest."),
             Ending = DuelEnding,
             Beats = new Beat[]
             {
@@ -254,7 +257,8 @@ public static partial class TaleBook
         new TaleDef
         {
             Key = "fire", Title = Loc.T("The Archive Fire"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Someone has set the Royal Archive alight, and the Chest Roll with it."),
+            Blurb = Loc.T("Someone has set the Royal Archive alight, and the Chest Roll with it: the record of who owns every chest in Aldmark. " +
+                          "It's burning tonight."),
             Ending = FireEnding,
             Beats = new Beat[]
             {

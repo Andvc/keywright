@@ -200,7 +200,7 @@ public static partial class TaleBook
                     Says = s => Say(Vash,
                         Loc.T("You'll be the Brightwater girl. You have your mother's chin. And her habit of haggling over everything."),
                         Loc.T($"The Lane's best pitch is mine now, by the Guild's grant. Here's {Money.Say(s.Purses(1.5f))} to stay in the " +
-                              "country and leave old customs alone.")),
+                              $"country and leave old customs alone.")),
                     Asks = s => new()
                     {
                         C(Loc.T($"Take his purse (+{s.Purses(1.5f)}g)"), () =>
@@ -255,7 +255,7 @@ public static partial class TaleBook
                     Says = s => Say(Vash,
                         Loc.T("A Brightwater, beaten by a box. Your mother wept, I hear."),
                         Loc.T($"The custom allows a second reading, if your family stands the traders their supper: {Money.Say(s.Purses(1))}. " +
-                              "Lose again and the Lane never hears the name Brightwater.")),
+                              $"Lose again and the Lane never hears the name Brightwater.")),
                     Asks = s => new()
                     {
                         C(Loc.T($"Stand them supper ({s.Purses(1)}g)"), () =>
@@ -298,7 +298,7 @@ public static partial class TaleBook
                 },
                 new()
                 {
-                    Key = "rosa.key2", Who = Marta, After = "rosa.second", Gap = 0, Night = true, If = s => s.Flagged("rosa.won") && !s.Did("rosa.key"),
+                    Key = "rosa.keyagain", Who = Marta, After = "rosa.second", Gap = 0, Night = true, If = s => s.Flagged("rosa.won") && !s.Did("rosa.key"),
                     Says = KeySays,
                     Then = KeyThen,
                 },
@@ -312,7 +312,7 @@ public static partial class TaleBook
             Blurb = Loc.T("When the Guild foreclosed on House Marchmont it sold the family's chests to whoever bid. Isolde's old steward has " +
                           "traced the three that matter: her grandmother's jewel case, her father's map chest, and the long box with the seal."),
             Ending = s => !s.Did("isolde.letter") ? null
-                : s.Did("isolde.seal2") ? new(Pemberton, Loc.T("House Marchmont's seal is back on Lady Isolde's hand, and the jewel case and the maps beside it. Her grandmother would have wept."))
+                : s.Did("isolde.whole") ? new(Pemberton, Loc.T("House Marchmont's seal is back on Lady Isolde's hand, and the jewel case and the maps beside it. Her grandmother would have wept."))
                 : s.Did("isolde.seal") ? new(Pemberton, Loc.T("The Marchmont seal is home. The rest of the house's pieces are scattered, but the seal is what matters."))
                 : new(Pemberton, Loc.T("The Marchmont pieces are scattered across Aldmark still. My lady says she has her collection, and that's house enough.")),
             Beats = new Beat[]
@@ -403,7 +403,7 @@ public static partial class TaleBook
                 },
                 new()
                 {
-                    Key = "isolde.seal2", Who = Pemberton, After = "isolde.vane", Gap = 1, Night = true,
+                    Key = "isolde.whole", Who = Pemberton, After = "isolde.vane", Gap = 1, Night = true,
                     If = s => s.Flagged("isolde.sealbox") && s.Flagged("isolde.case") && s.Flagged("isolde.maps"),
                     Says = s => Say(Pemberton,
                         Loc.T("The jewel case, the maps and the seal, all three under one roof. House Marchmont is a house again, my lady."),
