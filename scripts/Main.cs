@@ -287,6 +287,7 @@ public partial class Main : Node2D
         else if (args.Contains("--density-review") || Arg(args, "--density-review") != null) DensityReview();
         else if (args.Contains("--art-review")) ArtReview();
         else if (args.Contains("--shell-demo")) ShellDemo();
+        else if (args.Contains("--title-test")) TitleTest();
         else if (!direct) ToTitle();
         else if (args.Contains("--opening-demo")) OpeningDemo(args.Contains("--quit-at-end"));
         else if (args.Contains("--vault-demo")) VaultDemo(args.Contains("--quit-at-end"));
@@ -312,7 +313,8 @@ public partial class Main : Node2D
         Profile.Songs.AddRange(Heartsongs.All.Take(2).Select(h => h.Key));
         Profile.Achievements.AddRange(new[] { "FIRST_CHEST", "THORNWICK", "FIRST_TITHE", "PERFECT_READ", "ENCHANTED" }); // loc: keys
         ToTitle();
-        await Wait(2.5);
+        // The chest bursts and the menu comes out of it (a little over two seconds), then a look round.
+        await Wait(3.0);
         var title = (TitlePhase)_phase;
         // A page's first frame can take a while (every curio's picture): each picture waits for its own.
         var gathered = title.OpenCollection();
@@ -414,6 +416,14 @@ public partial class Main : Node2D
             Moment("16_gm_collection");
             await Wait(0.3);
         }
+        // Back to the title from the pause menu: the quicker burst.
+        if (IsInstanceValid(pause)) pause.Resume();
+        ToTitle();
+        await Wait(0.75);
+        Moment("17_title_return_flight");
+        await Wait(1.2);
+        Moment("17_title_return");
+        await Wait(0.3);
         QuitGame();
     }
 
