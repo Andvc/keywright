@@ -56,6 +56,9 @@ public sealed class SaveData
     /// <summary>Curios seen this run (0.21: the journal's curio page).</summary>
     public List<string> CuriosSeen { get; set; } = new();
 
+    /// <summary>Keepsakes held this run (0.32), for the collection.</summary>
+    public List<string> KeepsakesSeen { get; set; } = new();
+
     /// <summary>The story's people met this run (0.22: the ledger's Friends page).</summary>
     public List<string> People { get; set; } = new();
 
@@ -141,6 +144,9 @@ public sealed class SaveData
     public Dictionary<string, List<string>> TaleLog { get; set; }
     public Dictionary<string, int> OffersDeclined { get; set; }
     public Dictionary<string, int> Keepsakes { get; set; }
+
+    /// <summary>The keepsakes tales gave this run (0.32; <see cref="Core.Keepsakes"/>). Not to be confused with <see cref="Keepsakes"/>, what tales set aside.</summary>
+    public List<string> KeepsakesHeld { get; set; }
     public List<Promise> Promises { get; set; }
     public int PorterUntil { get; set; }
 
@@ -340,6 +346,9 @@ public sealed class Profile
     public List<string> FoundEnchanted { get; set; } = new();
     public List<string> CuriosSeen { get; set; } = new();
 
+    /// <summary>Every keepsake any run has held (0.32), for the collection.</summary>
+    public List<string> KeepsakesSeen { get; set; } = new();
+
     /// <summary>The story's people Bram's kin have met (Nim, Mister Vane, the Hooded Woman, Mara): the ledger's Friends page.</summary>
     public List<string> People { get; set; } = new();
 
@@ -428,6 +437,7 @@ public sealed class Profile
         Remember(Found, state.Found);
         Remember(FoundEnchanted, state.FoundEnchanted);
         Remember(CuriosSeen, state.CuriosSeen);
+        Remember(KeepsakesSeen, state.KeepsakesSeen);
         Remember(People, state.People);
         foreach (string key in state.Taught.Where(k => !Taught.Contains(k))) Taught.Add(key);
         BestWeek = Math.Max(BestWeek, state.Week);
@@ -448,6 +458,7 @@ public sealed class Profile
         Remember(Found, Collection.Entries.Select(e => e.Entry));
         Remember(FoundEnchanted, Collection.Entries.Where(e => !e.Fake).Select(e => e.Entry));
         Remember(CuriosSeen, Curios.All.Select(c => c.Key));
+        Remember(KeepsakesSeen, Keepsakes.All.Select(k => k.Key));
         Remember(People, Story.People);
         Remember(Songs, Heartsongs.All.Select(h => h.Key));
     }

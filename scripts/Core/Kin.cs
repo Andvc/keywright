@@ -52,6 +52,8 @@ public sealed partial class GameState
             Character = Characters.Exists(character) ? character : Characters.Kit,
             Challenge = Math.Clamp(challenge, 0, Challenges.Max),
         };
+        // How Bram's named in tips and scenes: Kit's uncle, everyone else's partner.
+        Hints.Kin = state.Character;
         var (boons, banes) = terms ?? Challenges.Draw(seed, state.Challenge);
         state.Boons.AddRange(boons);
         state.Banes.AddRange(banes);
@@ -99,13 +101,13 @@ public sealed partial class GameState
     {
         if (visit is not { Outcome: VisitOutcome.Left } || visit.Lesson != null) return;
         if (Shows(Heartsongs.Pipe) && !visit.Returned) Queue.Add(visit.Again());
-        else if (HagglesAll && visit.OffersMade > 0) _snubbed.Add(visit.Seller.Key);
+        else if (HagglesAll && visit.OffersMade > 0 && !Keeps(Core.Keepsakes.StallKey)) _snubbed.Add(visit.Seller.Key);
     }
 
     // ---- Isolde: a collection that pays its way ----
 
     /// <summary>What Isolde's visitors pay tonight: so much a point of exhibition.</summary>
-    public int Admission => (Is(Characters.Isolde) ? Exhibition * Characters.DoorCoins / Characters.DoorPoints : 0) +
+    public int Admission => (Is(Characters.Isolde) ? (int)(Exhibition * Characters.DoorCoins * (Keeps(Core.Keepsakes.Seal) ? Core.Keepsakes.SealDoor : 1f) / Characters.DoorPoints) : 0) +
                             (Shows(Heartsongs.Hearth) ? Exhibition * Heartsongs.HearthPerPoint * ShopTiers.Scale(Tier) : 0);
 
     /// <summary>
@@ -158,7 +160,7 @@ public sealed partial class GameState
         else if (EventIs("mourning") && CanShakeHard) terms.Add(Loc.T("A day of mourning: no hard shake."));
         if (visit.ShakeFee > 0) terms.Add(Loc.T($"Each strength you try after the first puts the price up {Synergies.Pct(visit.ShakeFee)}."));
         if (seller.Wager > 0) terms.Add(Loc.T("Read it exactly right and she gives back a third of the price."));
-        if (visit.Contest) terms.Add(Loc.T($"A contest: read it exactly right, and you win {visit.Prize}g."));
+        if (visit.Contest) terms.Add(visit.ContestFor ?? Loc.T($"A contest: read it exactly right, and you win {visit.Prize}g."));
         if (visit.Heirloom is Category heirloom) terms.Add(Loc.T($"The best {Categories.Get(heirloom).Name.ToLowerInvariant()} inside goes back to him, for {visit.Fee}g."));
         if (seller.TakesDearest) terms.Add(Loc.T("The dearest thing inside is his."));
         if (seller.SlipPrice) terms.Add(Loc.T("His price is your slip: exactly right, a quarter off; wrong, what it holds and a quarter more."));

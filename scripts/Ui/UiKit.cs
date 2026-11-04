@@ -313,6 +313,30 @@ public static class UiKit
     public static Sprite2D MakeCurioIcon(Core.CurioDef curio, Vector2 center) => MakeSprite($"res://assets/ui/curios/{curio.Icon}.png", center, 1);
 
     /// <summary>
+    /// A keepsake (0.32): its picture fitted to a curio's 56px, on a teal halo so it never reads as a curio (it takes no
+    /// slot). Until each has its own art, it borrows a curio's, a tool's or a thing's picture (Core.Keepsakes).
+    /// </summary>
+    public static Node2D MakeKeepsakeIcon(Core.KeepsakeDef keepsake, Vector2 center, float box = 56)
+    {
+        var holder = new Node2D { Position = center };
+        holder.AddChild(new Painter(p =>
+        {
+            p.DrawCircle(Vector2.Zero, box * 0.46f, new Color(Palette.Keepsake, 0.22f));
+            p.DrawArc(Vector2.Zero, box * 0.46f, 0, Mathf.Tau, 40, new Color(Palette.Keepsake, 0.85f), 2f);
+        }));
+        var texture = ArtTexture.Load(keepsake.Icon);
+        float size = Math.Max(texture.GetWidth(), texture.GetHeight());
+        // A whole scale where the picture is small (a thing's 30px at 2x), never larger than the box.
+        float scale = size * 2 <= box ? Mathf.Floor(box / size) : box * 0.86f / size;
+        holder.AddChild(new Sprite2D { Texture = texture, Scale = Vector2.One * Math.Min(scale, 1.5f * box / size) });
+        return holder;
+    }
+
+    /// <summary>A keepsake as a tooltip says it: its name, what it does, and that it takes no slot.</summary>
+    public static string KeepsakeTooltip(Core.KeepsakeDef keepsake) =>
+        Loc.T($"{keepsake.Name}: {keepsake.Blurb}") + "\n\n" + Loc.T("A keepsake, from a tale: it takes no curio slot, and it's never sold.");
+
+    /// <summary>
     /// A question that wants an answer before going on: the screen dimmed, a framed panel with a title and what's at
     /// stake, and two buttons. The caller adds it, and frees it when either is pressed.
     /// </summary>

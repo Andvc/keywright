@@ -105,9 +105,18 @@ public static partial class TaleBook
         if (v.Chest.Everything.Where(i => i.Category == Category.Arms && !i.Fake).OrderByDescending(i => i.Value).FirstOrDefault() is Item blade)
         {
             v.Chest.Remove(blade);
-            s.Keepsakes[keepsake] = s.SaleValue(blade);
+            s.SetAside[keepsake] = s.SaleValue(blade);
         }
     }
+
+    /// <summary>Tobin's weekly chest (Tobin's Lamp, 0.32): what he's found under the Barrow, a colour finer than the shop's, given freely.</summary>
+    public static Visit TobinChest(GameState s, Random rng) =>
+        Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, rng.Next(2, 4)),
+            rng.PickOne(new[]
+            {
+                Loc.T("From the old kings' halls, Keywright, with Tobin's compliments. One coin, for luck."),
+                Loc.T("Tobin sent this up from under the Barrow. Says you're to have the first look. One coin, for luck."),
+            }), "barrow");
 
     /// <summary>Pip's weekly chest, once he's your apprentice: something he's fished out, at the shop's colour, given freely.</summary>
     public static Visit ApprenticeChest(GameState s, Random rng) =>
@@ -540,7 +549,7 @@ public static partial class TaleBook
                         if (v.Chest.Everything.Where(i => i.Category == Category.Arms && !i.Fake).OrderByDescending(i => i.Value).FirstOrDefault() is Item sword)
                         {
                             v.Chest.Remove(sword);
-                            s.Keepsakes["kettle"] = s.SaleValue(sword);
+                            s.SetAside["kettle"] = s.SaleValue(sword);
                         }
                         s.Flags.Add("kettle.bought");
                         s.Log("kettle", Loc.T("You bought Silas Brass's pledge with Rafe Kettle's sword in it. Bram set the sword aside for Ada."));
@@ -557,9 +566,11 @@ public static partial class TaleBook
                         {
                             s.Sway(Faction.Commons, 1);
                             s.Owe(Ada, "kettle");
-                            s.Log("kettle", Loc.T("You gave Ada her husband's sword. She owes you a favour, she says, and she means it."));
-                            return Loc.T("Rafe's sword. Oh, Rafe. Thank you, dear. Thank you.");
-                        }, W(s, 0, (Faction.Commons, 1)), kind: true),
+                            // 0.32: and Rafe's medal, to keep.
+                            s.GiveKeepsake(Keepsakes.Medal);
+                            s.Log("kettle", Loc.T("You gave Ada her husband's sword, and she gave you his medal to keep. She owes you a favour, she says, and she means it."));
+                            return Loc.T("Rafe's sword. Oh, Rafe. Here: his medal, from two wars. He'd want it with someone kind. Thank you, dear.");
+                        }, W(s, Strategy.KeepsakeWorth(s), (Faction.Commons, 1)), kind: true),
                         C(Loc.T($"Sell it to her for what she has ({ShopTiers.Scale(s.Tier) * 5}g)"), () =>
                         {
                             s.TaleGold(ShopTiers.Scale(s.Tier) * 5);
@@ -567,13 +578,13 @@ public static partial class TaleBook
                             s.Log("kettle", Loc.T("You sold Ada her husband's sword for what she had."));
                             return Loc.T("It's all I have, but it's his. Thank you.");
                         }, W(s, ShopTiers.Scale(s.Tier) * 5, (Faction.Commons, 1))),
-                        C(Loc.T($"Sell it on ({s.Keepsakes.GetValueOrDefault("kettle")}g)"), () =>
+                        C(Loc.T($"Sell it on ({s.SetAside.GetValueOrDefault("kettle")}g)"), () =>
                         {
-                            s.TaleGold(s.Keepsakes.GetValueOrDefault("kettle"));
+                            s.TaleGold(s.SetAside.GetValueOrDefault("kettle"));
                             s.Sway(Faction.Commons, -1);
                             s.Log("kettle", Loc.T("You sold Rafe Kettle's sword on."));
                             return Loc.T("Oh. Of course. It's yours to sell, I suppose.");
-                        }, W(s, s.Keepsakes.GetValueOrDefault("kettle"), (Faction.Commons, -1))),
+                        }, W(s, s.SetAside.GetValueOrDefault("kettle"), (Faction.Commons, -1))),
                     },
                 },
                 new()
@@ -715,6 +726,61 @@ public static partial class TaleBook
                         s.Log("door", Loc.T("Tobin came back alive, and gave you half of what was behind the door. He owes you his life, he says."));
                     },
                 },
+                // 0.32: behind the vault, a stair that goes further down than the Barrow should.
+                new()
+                {
+                    Key = "door.stair", Who = Tobin, After = "door.ask", Gap = 10, Tier = 3,
+                    If = s => s.Did("door.hoard") || s.Did("door.saved"),
+                    Says = s => Say(Tobin,
+                        s.Did("door.saved")
+                            ? Loc.T("I swore I'd never go down again. But I keep dreaming of what I saw past the arch that fell on me: a stair, going down, and " +
+                                    "light at the bottom of it.")
+                            : Loc.T("Behind the vault there's a stair. It goes down further than the Barrow should go, and there's light at the bottom, and water, and bells."),
+                        Loc.T($"The old kings' halls, I reckon: the ones the songs say the Barrow was built over. Stake me {Money.Say(s.Purses(2))}, a proper " +
+                              "crew this time, and half of whatever's down there is yours, every week I'm digging.")),
+                    Asks = s => new()
+                    {
+                        C(Loc.T($"Stake the expedition ({s.Purses(2)}g)"), () =>
+                        {
+                            s.Flags.Add("door.deep");
+                            s.Flags.Add($"away:{Tobin}");
+                            s.Promise(s.Day + 4, Tobin, Loc.T("Tobin, back from under the Barrow"));
+                            s.Log("door", Loc.T("Past the deep door there's a stair down to the old kings' halls. You staked Tobin's expedition."));
+                            return Loc.T("Four days. If I'm not back in six, don't send anyone. I mean it.");
+                        }, s.Purses(2f) + Strategy.KeepsakeWorth(s) * 0.5f, cost: s.Purses(2)),
+                        C(Loc.T("Once was enough"), () =>
+                        {
+                            s.Log("door", Loc.T("Tobin found a stair down to the old kings' halls. You told him once was enough."));
+                            return Loc.T("You're right. You're right. I'll stop dreaming about it. Probably.");
+                        }, kind: true),
+                    },
+                },
+                new()
+                {
+                    Key = "door.under", Who = Tobin, After = "door.stair", Gap = 4, Tier = 3, If = s => s.Flagged("door.deep"),
+                    Brings = (s, rng) =>
+                    {
+                        s.Flags.Remove($"away:{Tobin}");
+                        s.Kept(Tobin);
+                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, 4),
+                            Loc.T("Halls, Keywright, halls under halls, and the kings asleep in them with their crowns on. Your half: freely given. One coin, for luck."),
+                            "barrow");
+                    },
+                    Bought = (s, v) => s.Log("door", Loc.T("Tobin came back from the old kings' halls under the Barrow, and gave you your half.")),
+                    Passed = (s, v) => s.Log("door", Loc.T("Tobin came back from the old kings' halls under the Barrow. You wouldn't take your half.")),
+                },
+                new()
+                {
+                    Key = "door.lamp", Who = Tobin, After = "door.under", Gap = 0, Night = true,
+                    Says = s => Say(Tobin,
+                        Loc.T("I'm going back down, and I'm staying: there are years of halls down there. Here, my lamp. Hang it in your window."),
+                        Loc.T("Every week, first thing, I'll send up a chest for you, given freely, the way it should be. The lamp's how my lads will find you.")),
+                    Then = s =>
+                    {
+                        s.GiveKeepsake(Keepsakes.Lamp);
+                        s.Log("door", Loc.T("Tobin is digging under the Barrow for good. He gave you his lamp: a chest from him every week."));
+                    },
+                },
             },
         },
 
@@ -776,12 +842,13 @@ public static partial class TaleBook
                     {
                         C(Loc.T("I promise"), () =>
                         {
-                            string gift = GiftCurio(s, new Random(unchecked(s.Seed * 37 + s.Day)), CurioRarity.Uncommon, CurioTag.Luck, remember: "charm");
+                            // 0.32: the Wood's charm is a keepsake (no slot), and goes if the promise is broken.
+                            s.GiveKeepsake(Keepsakes.Hawthorn);
                             s.Flags.Add("wood.promised");
                             s.Sway(Faction.Wood, 1);
-                            s.Log("wood", Loc.T($"You promised the Hawthorn Lady to keep the Wood's oaks standing. She gave you {gift}."));
-                            return Loc.T($"\"Kept, or paid for.\" She leaves {gift} on the counter, and is gone.");
-                        }, W(s, s.Purses(0.4f), (Faction.Wood, 1)), kind: true),
+                            s.Log("wood", Loc.T("You promised the Hawthorn Lady to keep the Wood's oaks standing. She gave you the Hawthorn Charm."));
+                            return Loc.T("\"Kept, or paid for.\" She leaves a sprig of hawthorn, bound in silver, on the counter, and is gone.");
+                        }, W(s, s.Purses(0.4f) + Strategy.KeepsakeWorth(s), (Faction.Wood, 1)), kind: true),
                         C(Loc.T("I can't promise that"), () => Loc.T("\"Then we'll speak no more of it.\" The hawthorn smell is gone by morning.")),
                     },
                 },
@@ -798,7 +865,13 @@ public static partial class TaleBook
                             s.Sway(Faction.Guild, 1);
                             s.Sway(Faction.Wood, -3);
                             string broken = "";
-                            if (s.Flags.FirstOrDefault(f => f.StartsWith("charm:")) is string charm && s.HasCurio(charm[6..]))
+                            if (s.Keeps(Keepsakes.Hawthorn))
+                            {
+                                s.TakeKeepsake(Keepsakes.Hawthorn);
+                                broken = Loc.T(" A promise broken: the Hawthorn Charm has crumbled to dry leaves.");
+                            }
+                            // A charm given before 0.32 was a curio.
+                            else if (s.Flags.FirstOrDefault(f => f.StartsWith("charm:")) is string charm && s.HasCurio(charm[6..]))
                             {
                                 s.TakeCurio(charm[6..]);
                                 broken = Loc.T($" A promise broken: the Hawthorn Lady's charm is gone from your case.");
@@ -1319,7 +1392,8 @@ public static partial class TaleBook
     };
 
     /// <summary>Every tale a season can draw: 0.28's, and 0.30's from Brindle, Thornwick, Crownhold and the Emporium (TaleBook.*.cs).</summary>
-    public static readonly TaleDef[] All = Season28.Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales()).ToArray();
+    public static readonly TaleDef[] All = Season28.Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales())
+        .Concat(KinTales()).Concat(LateTales()).ToArray();
 
     static readonly Dictionary<string, Beat> Beats = All.SelectMany(t => t.Beats).ToDictionary(b => b.Key);
 

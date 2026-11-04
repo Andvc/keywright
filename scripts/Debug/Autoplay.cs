@@ -345,6 +345,12 @@ public partial class Autoplay : Node
             Main.Instance.Moment("02_town", 0.3);
             await Wait(2.0);
             if (!IsInstanceValid(counter)) return;
+            // And the Stories page: every tale begun, the first one whole.
+            counter.NotebookPage(NotebookView.StoriesPage);
+            await Wait(0.3);
+            Main.Instance.Moment("02_stories", 0.3);
+            await Wait(2.0);
+            if (!IsInstanceValid(counter)) return;
             counter.CloseNotebook();
             await Wait(0.5);
             if (!IsInstanceValid(counter)) return;

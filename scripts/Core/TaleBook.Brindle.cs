@@ -148,14 +148,14 @@ public static partial class TaleBook
                             s.Log("field", Loc.T("Sir Aldwin Gale's ghost asked you to send his blade to his blood, the Gales of Crownhold. You promised."));
                             return Loc.T("\"Then I can rest a while.\" And he's gone, and the night's warm again.");
                         }, W(s, s.Purses(0.5f) + Strategy.FavourWorth(s)), kind: true),
-                        C(Loc.T($"Finder's right: it's mine to sell ({s.Keepsakes.GetValueOrDefault("field")}g)"), () =>
+                        C(Loc.T($"Finder's right: it's mine to sell ({s.SetAside.GetValueOrDefault("field")}g)"), () =>
                         {
-                            s.TaleGold(s.Keepsakes.GetValueOrDefault("field"));
+                            s.TaleGold(s.SetAside.GetValueOrDefault("field"));
                             s.Flags.Add("field.sold");
                             s.Until[Haunt] = s.Day + Guild.DaysPerWeek;
                             s.Log("field", Loc.T("You sold Sir Aldwin's blade. His ghost walks the Crossroads at dusk now, and folk stay home."));
                             return Loc.T("\"Then I'll walk.\" The lamps gutter. Out on the Field, something starts to march.");
-                        }, s.Keepsakes.GetValueOrDefault("field") - Strategy.CustomerDays(s, Guild.DaysPerWeek)),
+                        }, s.SetAside.GetValueOrDefault("field") - Strategy.CustomerDays(s, Guild.DaysPerWeek)),
                     },
                 },
                 new()
@@ -168,7 +168,7 @@ public static partial class TaleBook
                               "not mine. And the Gales owe you.")),
                     Then = s =>
                     {
-                        s.Keepsakes.Remove("field");
+                        s.SetAside.Remove("field");
                         s.Flags.Add(AldwinHome);
                         s.Owe(Rowan, "field");
                         s.Sway(Faction.Crown, 1);
@@ -182,8 +182,9 @@ public static partial class TaleBook
                                                   "fell, and I've no use for it.\" A coin, three hundred years old, warm as a hand.")),
                     Then = s =>
                     {
-                        string gift = GiftCurio(s, new Random(unchecked(s.Seed * 59 + s.Day)), CurioRarity.Uncommon, CurioTag.Luck);
-                        s.Log("field", Loc.T($"Sir Aldwin Gale lay down at last, and left you {gift}."));
+                        // 0.32: his coin is a keepsake, not a curio: it takes no slot.
+                        s.GiveKeepsake(Keepsakes.Aldwin);
+                        s.Log("field", Loc.T("Sir Aldwin Gale lay down at last, and left you his lucky coin."));
                     },
                 },
             },
@@ -273,7 +274,7 @@ public static partial class TaleBook
                             s.Flags.Add("fair.sponsor");
                             s.Until[FairDay] = s.Day + 2;
                             s.Log("fair", Loc.T("You put up the harvest fair's prize. Your name's on the banner, and the county will come past the stall."));
-                            return Loc.T("Bram's kin, on the banner! Half the county'll come past your stall on the day.");
+                            return Loc.T("Bram's stall, on the banner! Half the county'll come past it on the day.");
                         }, W(s, Strategy.CustomerDays(s, 1) * GameState.FairCrowd), cost: s.Purses(0.5f), kind: true),
                         C(Loc.T("Not this year"), () =>
                         {
@@ -350,7 +351,7 @@ public static partial class TaleBook
                 ? Loc.T("Put up the prize and won it back! Folk are still talking about it. Best harvest fair since Bram's day.")
                 : Loc.T("The miller's still sore you won his prize. Best harvest fair since Bram's day, and that's saying something."));
         if (s.Flagged("fair.lost"))
-            return new(Garrick, Loc.T("The miller's boy read the fair's chest better than Bram's kin. He'll never let you forget it, and neither will I."));
+            return new(Garrick, Loc.T("The miller's boy read the fair's chest better than Bram's Keywright. He'll never let you forget it, and neither will I."));
         return s.Flagged("fair.sponsor") ? new(Garrick, Loc.T("Your name was on the banner, and the county came. Next year, enter the contest too.")) : null;
     }
 }

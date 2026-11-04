@@ -37,6 +37,12 @@ public sealed class Collected
     /// <summary>Nim's laid it out, or you've had it, in any run.</summary>
     public bool SawCurio(string key) => _profile.CuriosSeen.Contains(key) || _run?.SawCurio(key) == true;
 
+    /// <summary>A keepsake a tale gave you, in any run (0.32).</summary>
+    public bool HadKeepsake(string key) => _profile.KeepsakesSeen.Contains(key) || _run?.KeepsakesSeen.Contains(key) == true;
+
+    /// <summary>A keepsake you hold this run.</summary>
+    public bool Keeps(string key) => _run?.Keeps(key) == true;
+
     /// <summary>It's yours this run.</summary>
     public bool Owns(string key) => _run?.HasCurio(key) == true;
 

@@ -286,7 +286,7 @@ public partial class SettingsView : Control
             .Place(LabelX, Row(5) + 8, 720, 20);
         restart.Visible = Localization.Chosen != Localization.Current;
         _page.AddChild(restart);
-        Choice(Loc.T("Uncle Bram's tips"), 1, () => OnOff(Settings.Tips), () =>
+        Choice(Loc.T("Bram's tips"), 1, () => OnOff(Settings.Tips), () =>
         {
             Settings.Tips = !Settings.Tips;
             if (Main.Instance.State != null) Main.Instance.State.Guided = Settings.Tips;

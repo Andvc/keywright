@@ -16,7 +16,7 @@ public partial class CollectionView : Node2D
     const float PanelX = 40, PanelY = 100, PanelW = 1200, PanelH = 518;
     const float TableX = 64;
 
-    public const int FindsPage = 0, CuriosPage = 1, SongsPage = 2, AchievementsPage = 3;
+    public const int FindsPage = 0, CuriosPage = 1, SongsPage = 2, AchievementsPage = 3, KeepsakesPage = 4;
 
     readonly Collected _c;
     readonly int _firstPage;
@@ -63,6 +63,7 @@ public partial class CollectionView : Node2D
             Tab(Loc.T("Curios"), Palette.Magic, 96, () => ShowPage(CuriosPage)),
             Tab(Loc.T("Heartsongs"), Palette.Of(Rarity.Mythic), 136, () => ShowPage(SongsPage)),
             Tab(Loc.T("Achievements"), Palette.Good, 160, () => ShowPage(AchievementsPage)),
+            Tab(Loc.T("Keepsakes"), Palette.Keepsake, 120, () => ShowPage(KeepsakesPage)),
         };
         foreach (var tab in _tabs) AddChild(tab);
         AddChild(UiKit.MakeButton(Loc.T("Close"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
@@ -75,12 +76,13 @@ public partial class CollectionView : Node2D
         CreateTween().TweenProperty(this, "modulate", Colors.White, 0.15f);
     }
 
-    /// <summary>0: finds, 1: curios, 2: Heartsongs, 3: achievements.</summary>
+    /// <summary>0: finds, 1: curios, 2: Heartsongs, 3: achievements, 4: keepsakes.</summary>
     public void ShowPage(int page)
     {
         foreach (var child in _page.GetChildren()) child.QueueFree();
         for (int i = 0; i < _tabs.Length; i++) _tabs[i].Modulate = i == page ? Colors.White : new Color(1, 1, 1, 0.6f);
-        if (page == AchievementsPage) BuildAchievements();
+        if (page == KeepsakesPage) BuildKeepsakes();
+        else if (page == AchievementsPage) BuildAchievements();
         else if (page == SongsPage) BuildSongs();
         else if (page == CuriosPage) BuildCurios();
         else BuildFinds();
@@ -213,13 +215,48 @@ public partial class CollectionView : Node2D
     }
 
     /// <summary>
+    /// The keepsakes (0.32): what tales' people gave you to keep, three by three. One you've held shows its picture and
+    /// what it does; the rest say which tale gives it, so you know where to look.
+    /// </summary>
+    void BuildKeepsakes()
+    {
+        int had = Keepsakes.All.Count(k => _c.HadKeepsake(k.Key));
+        _page.AddChild(UiKit.MakeLabel(Loc.T($"What people give you to keep when you see their tale through. A keepsake works like a curio, but takes no slot and is never sold. You've been given {had} of {Keepsakes.All.Length}."),
+            16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
+        const float cardW = 376, cardH = 128, gap = 8;
+        for (int i = 0; i < Keepsakes.All.Length; i++)
+        {
+            var keepsake = Keepsakes.All[i];
+            bool had_ = _c.HadKeepsake(keepsake.Key), yours = _c.Keeps(keepsake.Key);
+            float x = TableX - 8 + i % 3 * (cardW + gap), y = PanelY + 118 + i / 3 * (cardH + 4);
+            var card = new Panel { MouseFilter = Control.MouseFilterEnum.Pass }.Place(x, y, cardW, cardH);
+            card.AddThemeStyleboxOverride("panel", UiKit.PanelBox(4));
+            if (yours) card.AddChild(UiKit.MakeFrame(Palette.Keepsake));
+            _page.AddChild(card);
+            string from = TaleBook.Get(keepsake.Tale)?.Title ?? "";
+            if (!had_)
+            {
+                card.AddChild(UiKit.MakeLabel("?", 32, Palette.Muted, HorizontalAlignment.Center).Place(0, 24, cardW, 40));
+                card.AddChild(UiKit.MakeLabel(Loc.T($"From {from}"), 16, Palette.Muted, HorizontalAlignment.Center).Place(8, 76, cardW - 16, 20));
+                card.TooltipText = Loc.T($"Not given yet: someone gives it at the end of {from}.");
+                continue;
+            }
+            card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(34, 44), 52));
+            card.AddChild(UiKit.MakeLabel(keepsake.Name, 16, Palette.Keepsake).Place(70, 6, cardW - 78, 20));
+            card.AddChild(UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped().Place(70, 30, cardW - 78, 92));
+            card.TooltipText = Loc.T($"{keepsake.Name}, from {from}: {keepsake.Blurb}");
+            if (yours) card.AddChild(UiKit.MakeLabel(Loc.T("yours"), 16, Palette.Gold, HorizontalAlignment.Right).Place(cardW - 100, 6, 92, 20));
+        }
+    }
+
+    /// <summary>
     /// The songbook: the nine Heartsongs, three by three. One the family has heard shows its picture, who loved it and
     /// what it does on display (its story on hover), and whether it's singing in the shop now; the rest are "?".
     /// </summary>
     void BuildSongs()
     {
         int known = _c.SongsKnown;
-        _page.AddChild(UiKit.MakeLabel(Loc.T($"Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. Bram's kin know {known} of the nine{((known == Heartsongs.All.Length ? Loc.T(": the Crown Chest can be sung whole.") : Loc.T(": with all nine, the Crown Chest's ending changes.")))}"),
+        _page.AddChild(UiKit.MakeLabel(Loc.T($"Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. The songbook holds {known} of the nine{((known == Heartsongs.All.Length ? Loc.T(": the Crown Chest can be sung whole.") : Loc.T(": with all nine, the Crown Chest's ending changes.")))}"),
             16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
         const float cardW = 376, cardH = 128, gap = 8;
         for (int i = 0; i < Heartsongs.All.Length; i++)

@@ -92,7 +92,7 @@ public static class Story
             case 1:
                 lines.Add(state.FirstDayTaught
                     ? new(Bram, Loc.T($"Another season at the crossroads, {state.Kin.Name}. The Guild hasn't come sniffing yet. Let's make the most of it."))
-                    : new(Bram, Loc.T($"There you are, {state.Kin.Name}! My mark's faded, but look at your hand: it's yours now. And so is the stall.")));
+                    : Welcome(state));
                 lines.Add(new(Bram, Loc.T("Folk bring us chests nobody else can open. You buy one, it opens for you, and you sell what's inside. " +
                                     "So listen before you buy: that's the whole trade.")));
                 break;
@@ -103,8 +103,11 @@ public static class Story
                                     "Gate. The Locking, they called it. The chests are what's left.")));
                 lines.Add(new(Bram, Loc.T("And this is my one secret: a shard of the Aldric Key, broken in four when the Locking was made. " +
                                     "It's yours now. Don't let the Guild see it.")));
-                lines.Add(new(Hood, Loc.T("So you're Bram's kin. You have the mark, and his ear for a chest, they say. I have something your " +
-                                    "uncle has wanted for twenty years. Find me what I ask for, and it's yours.")));
+                lines.Add(state.Is(Characters.Kit)
+                    ? new(Hood, Loc.T("So you're Bram's kin. You have the mark, and his ear for a chest, they say. I have something your " +
+                                      "uncle has wanted for twenty years. Find me what I ask for, and it's yours."))
+                    : new(Hood, Loc.T("So you're Bram's partner. You have the mark, and a good ear for a chest, they say. I have something Bram " +
+                                      "has wanted for twenty years. Find me what I ask for, and it's yours.")));
                 break;
             case 4:
                 lines.Add(state.MapPieces >= 2
@@ -244,7 +247,7 @@ public static class Story
         {
             new(Mara, Loc.T("Bram. It's been a long time.")),
             new(Bram, Loc.T("Mara. The Key. You found all of it.")),
-            new(Mara, Loc.T("Your kin did the finding. And the King has come himself, with the Crown Chest. Quickly: the Guild is a day behind us.")),
+            new(Mara, Loc.T("Your Keywright did the finding. And the King has come himself, with the Crown Chest. Quickly: the Guild is a day behind us.")),
         };
         var allies = state == null ? new List<Line>() : Allies(state, tonight: true);
         if (state != null && allies.Count == 0) lines.Add(new(Mara, Loc.T("There's nobody to hold them back. We'll have to be quick.")));
@@ -343,7 +346,7 @@ public static class Story
                         "knows it's there: they price the chest as if it weren't.")),
         new(Bram, Loc.T("Nobody would pay a penny for one. But on display, each does one great thing for the shop that no gold can " +
                         "buy, for as long as it sings: the kind of thing a whole season can be built around.")),
-        new(Bram, Loc.T("And once our family has heard one, it's in the songbook for good. Hear all nine, over all your seasons, and " +
+        new(Bram, Loc.T("And once anyone at this stall has heard one, it's in the songbook for good. Hear all nine, over all your seasons, and " +
                         "the Crown Chest ends another way.")),
         new(Bram, Loc.T("So shake every chest gently first, and listen. The collection's Heartsongs page keeps a place for each of the nine.")),
     };
@@ -352,13 +355,34 @@ public static class Story
     /// The season's end (0.30): what became of everyone whose tale began, a line each, by what you chose (each tale's
     /// <see cref="TaleDef.Ending"/>), after the run's last scene, won or lost.
     /// </summary>
+    /// <summary>
+    /// Bram's welcome on the first morning (0.32): Kit's uncle hands her the stall and the mark that's passed to her; the
+    /// others aren't family, and each came to him for reasons of their own (Meta.cs, TaleBook.Kin.cs).
+    /// </summary>
+    static Line Welcome(GameState state) => state.Character switch
+    {
+        Characters.Hesk => new(Bram, Loc.T("So you're Hesk. A partner with the mark and an honest scale: I'll take it. Mind the stall, mind your " +
+                                           "back, and half of it's yours when the Guild's paid.")),
+        Characters.Rosa => new(Bram, Loc.T("Rosa Brightwater, as I live. Your mother sold me my first lock-pick, forty years back. My mark's faded: " +
+                                           "mind the stall, partner, and half of it's yours when the Guild's paid.")),
+        Characters.Isolde => new(Bram, Loc.T("Lady Marchmont. Your grandfather and I opened chests together, before your house was grand. My mark's " +
+                                             "faded: mind my stall, and put your collection on the shelf. The Guild's paid out of the takings.")),
+        _ => new(Bram, Loc.T($"There you are, {state.Kin.Name}! My mark's faded, but look at your hand: it's yours now. And so is the stall.")),
+    };
+
     public static List<Line> SeasonEnd(GameState state)
     {
         var lines = new List<Line> { new(Bram, Loc.T("So. Let me tell you what became of everyone, this season.")) };
         foreach (var tale in TaleBook.All.Where(t => state.Drew(t.Key) && t.Ending != null))
             if (tale.Ending(state) is Line line) lines.Add(line);
         if (lines.Count == 1) return new List<Line>();
-        lines.Add(new(Bram, Loc.T("And you. Bram's kin, with the mark on your hand. What becomes of you is up to you.")));
+        lines.Add(state.Character switch
+        {
+            Characters.Hesk => new(Bram, Loc.T("And you, Hesk. A grocer from a drowned town, with the mark on your hand. What becomes of you is up to you.")),
+            Characters.Rosa => new(Bram, Loc.T("And you, Rosa. A Brightwater of Lantern Lane, with the mark on your hand. What becomes of you is up to you.")),
+            Characters.Isolde => new(Bram, Loc.T("And you, my lady. The last Marchmont, with the mark on your hand. What becomes of you is up to you.")),
+            _ => new(Bram, Loc.T("And you. Bram's kin, with the mark on your hand. What becomes of you is up to you.")),
+        });
         return lines;
     }
 
@@ -373,7 +397,7 @@ public static class Story
         if (state.SongWhole)
             return new()
             {
-                new(Mara, Loc.T("The tune's in here. And your family knows every verse: all nine Heartsongs. Then we don't renew the Locking. We finish it.")),
+                new(Mara, Loc.T("The tune's in here. And your songbook has every verse: all nine Heartsongs. Then we don't renew the Locking. We finish it.")),
                 new(Mara, Loc.T("Listen. That's the Maw. Starving, with nothing left to want. The Gate's just a gate now.")),
                 new(Bram, Loc.T("And the chests, Mara. Every chest in Aldmark. They're opening. All of them, all at once.")),
                 new(Mara, Loc.T("The Guild has nothing to sell, and nothing to keep. Go home, Mister Vane.")),
@@ -386,7 +410,7 @@ public static class Story
         };
         lines.Add(known == 0
             ? new(Mara, Loc.T("The Locking was a song, in nine verses: nine Heartsongs, hidden in chests. If you ever hear one sing, keep it."))
-            : new(Mara, Loc.T($"Your family knows {Sellers.Number(known)} of the nine Heartsongs. Find every verse, and the next Keywright won't renew the Locking. They'll finish it.")));
+            : new(Mara, Loc.T($"Your songbook holds {Sellers.Number(known)} of the nine Heartsongs. Find every verse, and the next Keywright won't renew the Locking. They'll finish it.")));
         lines.Add(new(Bram, Loc.T("The Guild will keep coming, you know. Debts are funny things. But now we can afford to make them wait.")));
         return lines;
     }

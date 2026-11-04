@@ -185,6 +185,7 @@ public sealed partial class GameState
         Known.Found.UnionWith(profile.Found);
         Known.Enchanted.UnionWith(profile.FoundEnchanted);
         Known.Curios.UnionWith(profile.CuriosSeen);
+        KeepsakesSeen.UnionWith(profile.KeepsakesSeen.Where(Core.Keepsakes.Exists));
         Known.People.UnionWith(profile.People);
         Known.Tier = Math.Max(Known.Tier, profile.BestTier);
         Met.UnionWith(profile.Met);
@@ -480,6 +481,7 @@ public sealed partial class GameState
     public int CustomersPerDay => Math.Max(2, ShopTiers.Customers(Tier) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Customers) + ExhibitionCustomers +
                                             (Shows(Heartsongs.Pipe) ? Heartsongs.PipeCustomers : 0) +
                                             (HasCurio("lantern") ? Curios.LanternCustomers : 0) + (HasCurio("horn") ? Curios.HornCustomers : 0) +
+                                            (Keeps(Core.Keepsakes.Apprentice) ? Core.Keepsakes.ApprenticeCustomers : 0) +
                                             EventCustomers - (Under(Challenges.ThinCrowds) && DayOfWeek > Guild.DaysPerWeek - Challenges.ThinDays ? 1 : 0) - (QuietOpening ? 1 : 0) +
                                             (Friend(Faction.Commons) ? 1 : 0) - (Foe(Faction.Commons) ? 1 : 0) + (Day <= PorterUntil ? 1 : 0) + TaleCustomers);
 
@@ -521,7 +523,7 @@ public sealed partial class GameState
             MaraUsed = NoteUsed, FirstDayTaught = FirstDayTaught,
             UpgradesOpen = UpgradesOpen, MagicFound = MagicFound, PerfectStreak = PerfectStreak, BestStreak = BestStreak,
             Owned = _owned.ToList(), HintsSeen = HintsSeen.ToList(), Met = Met.ToList(), Found = Found.ToList(),
-            FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(), People = People.ToList(),
+            FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(), KeepsakesSeen = KeepsakesSeen.ToList(), People = People.ToList(),
             Places = Places.ToList(),
             Display = Display.Select(i => new SavedItem { Category = i.Category, Quality = i.Quality, Magic = i.Magic, Song = i.Song }).ToList(),
             SongsFound = SongsFound.ToList(), SongsKept = SongsKept,
@@ -567,6 +569,7 @@ public sealed partial class GameState
                 Days = Enumerable.Range(1, Guild.DaysPerWeek).Select(d => d == data.EventDay ? data.WeekEvent : null).ToList(),
             },
         };
+        Hints.Kin = state.Character;
         // The level's terms as drawn; a save from before 0.24 (when every level's terms were fixed) draws them now.
         var (boons, banes) = data.Boons != null && data.Banes != null ? (data.Boons, data.Banes) : Challenges.Draw(data.Seed, state.Challenge);
         state.Boons.AddRange(boons.Where(k => Challenges.Get(k) != null).Distinct());
@@ -599,6 +602,7 @@ public sealed partial class GameState
         state.Songbook.UnionWith(state.SongsFound);
         state.Tutored.UnionWith(data.Tutored);
         state.CuriosSeen.UnionWith(data.CuriosSeen.Where(Curios.Exists));
+        state.KeepsakesSeen.UnionWith((data.KeepsakesSeen ?? new List<string>()).Where(Core.Keepsakes.Exists));
         state.People.UnionWith(data.People);
         state.Places.UnionWith(data.Places.Where(key => Origins.All.Any(o => o.Key == key)));
         state.ActiveSynergies.UnionWith(data.ActiveSynergies.Where(key => Synergies.All.Any(s => s.Key == key)));

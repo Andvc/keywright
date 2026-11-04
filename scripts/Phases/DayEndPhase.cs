@@ -201,18 +201,27 @@ public partial class DayEndPhase : Phase
         var curios = UiKit.MakePanel(Palette.PanelBorder).Place(SideX, 504, SideW, 78); // two lines of note under the title
         _side.AddChild(curios);
         curios.AddChild(UiKit.MakeLabel(Loc.T($"CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(14, 8, 120, 20));
-        if (State.CurioKeys.Count == 0)
+        if (State.CurioKeys.Count == 0 && State.Keepsakes.Count == 0)
             curios.AddChild(UiKit.MakeLabel(State.PeddlerToday ? Loc.T("Nim the peddler comes by tonight, after closing, with a curio.")
                 : Loc.T("Nim the peddler comes by every night after closing, from the third."), 16, Palette.Muted)
                 .Wrapped().Place(14, 28, SideW - 28, 44));
-        // Up to six (with curio cases): closer together when there are more than four.
-        float step = Math.Min(60, (SideW - 124) / Math.Max(1, State.CurioKeys.Count));
+        // Up to six (with curio cases), and a tale's keepsakes after them: closer together when there are more than four.
+        int shown = State.CurioKeys.Count + State.Keepsakes.Count;
+        float step = Math.Min(60, (SideW - 124) / Math.Max(1, shown));
         for (int i = 0; i < State.CurioKeys.Count; i++)
         {
             var curio = Curios.Get(State.CurioKeys[i]);
             var spot = new Control { TooltipText = Glossary.Tooltip(curio), MouseFilter = Control.MouseFilterEnum.Pass }
                 .Place(120 + i * step, 6, step - 4, 62);
             spot.AddChild(UiKit.MakeCurioIcon(curio, new Vector2((step - 4) / 2, 31)));
+            curios.AddChild(spot);
+        }
+        for (int i = 0; i < State.Keepsakes.Count; i++)
+        {
+            var keepsake = Keepsakes.Get(State.Keepsakes[i]);
+            var spot = new Control { TooltipText = UiKit.KeepsakeTooltip(keepsake), MouseFilter = Control.MouseFilterEnum.Pass }
+                .Place(120 + (State.CurioKeys.Count + i) * step, 6, step - 4, 62);
+            spot.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2((step - 4) / 2, 31), Math.Min(56, step - 4)));
             curios.AddChild(spot);
         }
     }

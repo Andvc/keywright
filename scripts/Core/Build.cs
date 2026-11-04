@@ -89,7 +89,8 @@ public sealed partial class GameState : ISlipModel
     {
         float step = StepChance(kind) + (unseen && HasCurio("dip") ? Curios.DipLuck : 0);
         int shift = (firstThisWeek && HasCurio("clover") ? 1 : 0) + (hidden && HasCurio("rod") ? 1 : 0) + (warded && HasCurio("wardkey") ? 1 : 0);
-        return new LuckRules(firstToday && HasCurio("coin"), shift, Math.Min(0.9f, step), HasCurio("token"), Mends(kind) || (unseen && HasCurio("blindfold")),
+        return new LuckRules(firstToday && HasCurio("coin"), shift, Math.Min(0.9f, step), HasCurio("token"),
+            Mends(kind) || (unseen && HasCurio("blindfold")) || (firstToday && Keeps(Core.Keepsakes.Aldwin)),
             Shows(Heartsongs.Chimes), HasCurio("crescent"));
     }
 
@@ -102,7 +103,8 @@ public sealed partial class GameState : ISlipModel
         RestorerLuck + (HasCurio("foot") ? Curios.FootLuck : 0) + (kind == Category.Gems && HasCurio("wheel") ? Curios.WheelLuck : 0) +
         (HasCurio("horseshoe") ? Math.Min(Curios.HorseshoeMax, Curios.HorseshoeStep * LuckStreak) : 0) +
         ((kind == Category.Arms && HasCurio("gauntlet")) || (kind == Category.Garb && HasCurio("cap")) ? Curios.TradeLuck : 0) +
-        Synergies.LuckBonus(Active("fortune")) + (HasCurio("spindle") ? Math.Min(Curios.SpindleMax, Curios.SpindleStep * Surprises) : 0);
+        Synergies.LuckBonus(Active("fortune")) + (HasCurio("spindle") ? Math.Min(Curios.SpindleMax, Curios.SpindleStep * Surprises) : 0) +
+        (Keeps(Core.Keepsakes.Hawthorn) ? Core.Keepsakes.HawthornLuck : 0) + (Keeps(Core.Keepsakes.Fork) ? Core.Keepsakes.ForkLuck : 0);
 
     /// <summary>
     /// Never worse than its chest promised: a smith's glove for weapons, a hatter's cap for cloaks, the Imp's Ember and the
@@ -329,6 +331,9 @@ public sealed partial class GameState : ISlipModel
             _ => 1,
         };
         if (HasCurio("lamps")) b *= 1 + Curios.LampsPerPoint * Math.Min(ExhibitionCap, Exhibition);
+        // Keepsakes (0.32): a tale's thanks, which no seller knows of.
+        if (Keeps(Core.Keepsakes.Weights) && kind is Category.Coins or Category.Gems) b *= Core.Keepsakes.WeightsBonus;
+        if (Keeps(Core.Keepsakes.Medal) && kind == Category.Arms) b *= Core.Keepsakes.MedalBonus;
         return b;
     }
 

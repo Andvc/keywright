@@ -524,14 +524,24 @@ public partial class CounterPhase : Phase
     void BuildCurios()
     {
         var curios = State.OwnedCurios.ToList();
-        if (curios.Count == 0) return;
+        var keepsakes = State.Keepsakes.Select(Keepsakes.Get).ToList();
+        if (curios.Count + keepsakes.Count == 0) return;
         const float x0 = 330;
-        Add(UiKit.MakeLabel(Loc.T("Curios"), 16, Palette.Magic, outline: 4).Place(x0, 616, 120, 20));
+        Add(UiKit.MakeLabel(curios.Count > 0 ? Loc.T("Curios") : Loc.T("Keepsakes"), 16, curios.Count > 0 ? Palette.Magic : Palette.Keepsake, outline: 4)
+            .Place(x0, 616, 120, 20));
         for (int i = 0; i < curios.Count; i++)
         {
             var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = Glossary.Tooltip(curios[i]) }
                 .Place(x0 + i * 40, 642, 36, 36));
             spot.AddChild(UiKit.MakeCurioIcon(curios[i], new Vector2(18, 18)));
+        }
+        // A tale's keepsakes after them, a little apart: they take no slot.
+        float kx = x0 + curios.Count * 40 + (curios.Count > 0 ? 8 : 0);
+        for (int i = 0; i < keepsakes.Count; i++)
+        {
+            var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = UiKit.KeepsakeTooltip(keepsakes[i]) }
+                .Place(kx + i * 40, 642, 36, 36));
+            spot.AddChild(UiKit.MakeKeepsakeIcon(keepsakes[i], new Vector2(18, 18), 40));
         }
     }
 

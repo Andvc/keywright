@@ -26,21 +26,21 @@ public static class Characters
                 Loc.T("Shakes at every strength and drops a chest to hear what's under the floor."),
                 Loc.T("With tips on, Uncle Bram teaches the trade as each new seller arrives."),
             }, null, _ => true),
-        new(Hesk, Loc.T("Hesk"), Loc.T("The Scale"), Loc.T("Bram's nephew, a grocer from the river towns, with the Key-mark, a bad back and an honest scale."),
+        new(Hesk, Loc.T("Hesk"), Loc.T("The Scale"), Loc.T("A grocer from Fallowford, the river town the Guild drowned. Born with the Key-mark and hid it all his life; now he's Bram's partner, with a bad back and an honest scale."),
             new[]
             {
                 Loc.T("A bad back: he can't shake a chest hard, or lift it to drop it."),
                 Loc.T("Every chest sits on his scale: he knows what everything in it weighs, to the half pound."),
 Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloaks {Pounds(Category.Garb)}, potions {Pounds(Category.Potions)}, spells {Pounds(Category.Scrolls)}, gems {Pounds(Category.Gems)}. Demon gold weighs half what gold does; sand is heavier than a scroll."),
             }, Loc.T("Pay the Guild's third due to unlock."), p => p.BestWeek >= 4),
-        new(Rosa, Loc.T("Rosa"), Loc.T("The Tongue"), Loc.T("Bram's niece from the Crownhold markets. She'd haggle with a statue, and win."),
+        new(Rosa, Loc.T("Rosa"), Loc.T("The Tongue"), Loc.T("Rosa Brightwater of Lantern Lane, born with the Key-mark into a family of traders. The Guild took her mother's stall; she's Bram's partner now. She'd haggle with a statue, and win."),
             new[]
             {
                 Loc.T("Everybody haggles with Rosa: sellers who'd name a fixed price ask high and hear an offer instead."),
                 Loc.T("They know her: they open a little higher and come down a little less. An offer too low gets a second try."),
                 Loc.T("But word gets round: a seller who walks out on her won't come back that week."),
             }, Loc.T("Clear Bram's debt to unlock."), p => p.Cleared >= 1),
-        new(Isolde, Loc.T("Isolde"), Loc.T("The Collection"), Loc.T("Bram's niece by marriage, a lady who has never sold a thing she liked."),
+        new(Isolde, Loc.T("Isolde"), Loc.T("The Collection"), Loc.T("Lady Isolde Marchmont, last of a house the Guild foreclosed on. All she kept was her collection, and a Key-mark nobody in her family had seen in a century."),
             new[]
             {
                 Loc.T($"A shelf from the start: she can display {IsoldeShelf} things at Bram's stall."),
@@ -207,7 +207,7 @@ public static class Challenges
         new(HonestClerk, true, Loc.T("An honest clerk"), Loc.T("On a short night, what you pawn fetches its full price."),
             Loc.T("The Guild's pawn clerk was at school with your mother.")),
         new(GoodName, true, Loc.T("A good name"), Loc.T("Hagglers hear you out: an offer that's too low gets a second try, not a slammed door."),
-            Loc.T("Bram's kin have a name for fair dealing.")),
+            Loc.T("Bram's stall has a name for fair dealing.")),
         new(Charm, true, Loc.T("A lucky charm"), Loc.T("After a run of plain finds, your luck turns twice as soon."),
             Loc.T("Bram tied his mother's old lucky charm to your apron.")),
         new(FairDays, true, Loc.T("Fair days"), Loc.T("No days of mourning and no Guild assessors in town."),

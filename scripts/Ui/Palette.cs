@@ -16,6 +16,9 @@ public static class Palette
     public static readonly Color Bad = new("#ff6b6b");
     public static readonly Color Warn = new("#ffa94d");
     public static readonly Color Magic = new("#c792ff");
+    /// <summary>A keepsake (a tale's gift, outside the curio slots): its halo and its name.</summary>
+    public static readonly Color Keepsake = new("#62d6c4");
+
     /// <summary>A chest bought sight unseen: what you never marked is neither right nor wrong.</summary>
     public static readonly Color Unseen = new("#e8dcc0");
     public static readonly Color Paper = new("#f7ebc6");

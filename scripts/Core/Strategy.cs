@@ -397,6 +397,9 @@ public static class Strategy
         return total;
     }
 
+    /// <summary>What a keepsake is worth to the careful player (0.32): about a purse and a half, over what's left of a season.</summary>
+    public static float KeepsakeWorth(GameState state) => state.Purses(1.5f);
+
     /// <summary>What one more customer a day is worth to the careful player, for this many days from tomorrow (a third of a working purse each).</summary>
     public static float CustomerDays(GameState state, int days) =>
         Enumerable.Range(state.Day + 1, Math.Max(0, days)).Sum(d => 0.3f * state.WorkingPurseAt(ExpectedTier(state, d)));

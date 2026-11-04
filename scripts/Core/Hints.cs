@@ -8,7 +8,11 @@ namespace Keywright.Core;
 /// </summary>
 public static class Hints
 {
-    public static string Mentor => Loc.T("Uncle Bram");
+    /// <summary>Bram as the one minding the stall knows him: Kit's uncle, everyone else's partner (0.32).</summary>
+    public static string Mentor => Kin == Characters.Kit ? Loc.T("Uncle Bram") : Loc.T("Bram");
+
+    /// <summary>Who's minding the stall (set when a run starts or is continued), for how Bram is named.</summary>
+    public static string Kin { get; set; } = Characters.Kit;
 
     static readonly Dictionary<string, string> Text = new()
     {
@@ -137,7 +141,7 @@ public static class Hints
                          "for as long as it sings here. Keep it or let it go: every one you keep makes the next harder to find."),
         ["song_shown"] = Loc.T("Hear that? The whole stall's different with it singing. It'll sing as long as it's ours."),
         ["songs_intro"] = Loc.T("One more thing. Somewhere among all these chests are nine Heartsongs: things loved so much they sing. Only " +
-                          "our family hears them, at the gentlest shake. Most seasons never hear one. If you ever do, buy that chest."),
+                          "a Keywright hears them, at the gentlest shake. Most seasons never hear one. If you ever do, buy that chest."),
 
         // A regular with nothing new to teach gets a tip the first time they come in after the first day; the rest have
         // a lesson (Lessons.cs). Bram's kin who come knowing the trade still get his word on each seller's terms.

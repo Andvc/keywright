@@ -24,7 +24,7 @@ public partial class TalkPhase : Phase
     Button _next;
     int _line = -1;
     bool _answered, _leaving;
-    int _goldBefore, _swayedBefore, _logBefore;
+    int _goldBefore, _swayedBefore, _logBefore, _keepsakesBefore;
 
     /// <summary>The tale this talk belongs to, if it's a beat.</summary>
     string Tale => TaleBook.Find(_talk.Key)?.Tale;
@@ -75,11 +75,15 @@ public partial class TalkPhase : Phase
             ? tale.Title.ToUpperInvariant() : _talk.Night ? Loc.T("AFTER DARK") : null;
         if (title != null)
             Add(UiKit.MakeLabel(title, 24, _talk.Night ? Palette.Magic : Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(PanelX, 64, PanelW, 32));
+        // A tale's first beat says so: a new story is starting, and the notebook will follow it.
+        if (Tale != null && TaleLines == 0 && _talk.Offer == null)
+            Add(UiKit.MakeLabel(Loc.T("A NEW TALE BEGINS"), 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(PanelX, 96, PanelW, 20));
         _mentor = Add(new MentorView { Position = new Vector2(322, 588), ZIndex = 40 });
         _next = Add(UiKit.MakeButton(Loc.T("Go on"), Palette.Text, 16, Advance).Place(PanelX + PanelW - 180, 620, 180, 48));
         _goldBefore = State.Gold;
         _swayedBefore = State.Swayed.Count;
         _logBefore = TaleLines;
+        _keepsakesBefore = State.Keepsakes.Count;
         if (!_talk.Night) BuildQueue();
         // Bram's word on what these are, the first time: people with troubles, and people with tools.
         if (_talk.Offer != null) _mentor.Teach(State, "offer");
@@ -167,7 +171,7 @@ public partial class TalkPhase : Phase
         if (reply != null) Say(reply, Palette.Good);
         if (_panel != null) Sfx.Play("chime", 1f, -8);
         _panel?.QueueFree();
-        ShowNoted(ShowWhatChanged());
+        ShowKept(ShowNoted(ShowWhatChanged()));
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDue(State);
         _next.Visible = true;
@@ -195,10 +199,10 @@ public partial class TalkPhase : Phase
         return PanelY + h + 12;
     }
 
-    /// <summary>What the notebook's Town page now says of the tale, under what changed: it's written down, and it'll come back.</summary>
-    void ShowNoted(float y)
+    /// <summary>What the notebook's Town page now says of the tale, under what changed: it's written down, and it'll come back. Returns where the next thing can go.</summary>
+    float ShowNoted(float y)
     {
-        if (Tale == null || TaleLines <= _logBefore) return;
+        if (Tale == null || TaleLines <= _logBefore) return y;
         string line = State.TaleLog[Tale][^1];
         var note = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(PanelX, y, PanelW, 124));
         note.AddChild(UiKit.MakeLabel(Loc.T($"IN YOUR NOTEBOOK {Controls.Tag(Controls.Notebook)}"), 16, Palette.Gold).Place(16, 12, PanelW - 32, 20));
@@ -206,6 +210,35 @@ public partial class TalkPhase : Phase
         text.MaxLinesVisible = 4;
         text.ClipText = true;
         note.AddChild(text.Place(16, 36, PanelW - 32, 84));
+        return y + 124 + 12;
+    }
+
+    /// <summary>
+    /// A keepsake given (0.32): its own card, over the scene where the slip would be, with its picture and what it does,
+    /// so the gift lands as a gift, not a line of text.
+    /// </summary>
+    void ShowKept(float y)
+    {
+        var given = State.Keepsakes.Skip(_keepsakesBefore).Select(Keepsakes.Get).ToList();
+        foreach (var keepsake in given)
+        {
+            var card = Add(UiKit.MakePanel(Palette.Keepsake.Darkened(0.35f)).Place(PanelX, Math.Min(y, 560 - 112), PanelW, 112));
+            card.TooltipText = UiKit.KeepsakeTooltip(keepsake);
+            card.MouseFilter = Control.MouseFilterEnum.Stop;
+            card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(48, 56), 64));
+            card.AddChild(UiKit.MakeLabel(Loc.T($"A KEEPSAKE: {keepsake.Name.ToUpperInvariant()}"), 16, Palette.Keepsake).Place(92, 10, PanelW - 104, 20));
+            var blurb = UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped();
+            blurb.MaxLinesVisible = 3;
+            blurb.ClipText = true;
+            card.AddChild(blurb.Place(92, 34, PanelW - 104, 72));
+            card.PivotOffset = new Vector2(PanelW / 2, 56);
+            card.Scale = Vector2.One * 0.6f;
+            card.CreateTween().TweenProperty(card, "scale", Vector2.One, 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+            Fx.Burst(this, new Vector2(PanelX + 48, Math.Min(y, 560 - 112) + 56), Palette.Keepsake, 40, 200f);
+            Sfx.Play("fanfare", 1.2f, -6);
+            y += 124;
+        }
+        if (given.Count > 0) Game.Moment($"32_keepsake_{given[0].Key}", 0.5);
     }
 
     /// <summary>Who's still waiting today, along the counter's edge (as at the counter).</summary>

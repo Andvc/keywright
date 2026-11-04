@@ -122,7 +122,7 @@ public sealed class Visit
     /// <summary>What the crossroads say when they hand Bram's kin a chest on the first day (welcome gifts).</summary>
     static readonly string[] GiftLines =
     {
-        Loc.T("Bram's kin at the stall at last! One coin for it, for luck. Not a penny more, I won't hear of it."),
+        Loc.T("A Keywright at Bram's stall again! One coin for it, for luck. Not a penny more, I won't hear of it."),
         Loc.T("Bram was good to us for forty years. One coin and it's yours. Welcome to the crossroads."),
         Loc.T("A welcome present for the new Keywright. One coin, mind: it's bad luck to give a chest for nothing."),
     };
@@ -183,6 +183,9 @@ public sealed class Visit
     /// coin, and a perfect read wins <see cref="Prize"/>.
     /// </summary>
     public bool Contest { get; set; }
+
+    /// <summary>What reading a contest exactly wins, said under the chest, when it's more than gold (a stall, an echo).</summary>
+    public string ContestFor { get; set; }
 
     public int Prize { get; set; }
 
@@ -466,7 +469,7 @@ public static class Gut
         (2f, new[] { Loc.T("Maybe that wasn't the best idea."), Loc.T("A small voice whispers: you should've bought that."), Loc.T("Your gut grumbles.") }),
         (4f, new[] { Loc.T("You have a nasty feeling a bargain just walked out the door."), Loc.T("Your gut is writing you a strongly worded letter."),
                      Loc.T("Somewhere, a better shopkeeper is laughing.") }),
-        (float.MaxValue, new[] { Loc.T("Even the heavens pity you."), Loc.T("Uncle Bram, somewhere, is weeping softly."), Loc.T("Your gut has stopped speaking to you.") }),
+        (float.MaxValue, new[] { Loc.T("Even the heavens pity you."), Loc.T("Bram, somewhere, is weeping softly."), Loc.T("Your gut has stopped speaking to you.") }),
     };
 
     // From "fleeced" to "a steal": what it held against what you paid.

@@ -213,7 +213,8 @@ public sealed class Beat
 }
 
 /// <summary>Which part of the realm a tale starts in: every season draws some of each (<see cref="TaleBook.Draw"/>).</summary>
-public enum TalePlace { Always, Brindle, Thornwick, Crownhold, Emporium }
+/// <summary>Kin: the tale of whoever minds the stall (TaleBook.Own), drawn every season they play.</summary>
+public enum TalePlace { Always, Brindle, Thornwick, Crownhold, Emporium, Kin }
 
 public sealed class TaleDef
 {
@@ -327,7 +328,7 @@ public sealed partial class GameState
     public void Kept(string who) => Promises.RemoveAll(p => p.Who == who);
 
     /// <summary>What a thing a tale set aside would have sold for (Rafe Kettle's sword), for the choice about it.</summary>
-    public Dictionary<string, int> Keepsakes { get; } = new();
+    public Dictionary<string, int> SetAside { get; } = new();
 
     readonly Dictionary<string, int> _offerDeclined = new();
 
@@ -374,6 +375,8 @@ public sealed partial class GameState
     {
         if (TalesDrawn.Count > 0 || Day > 1 && !TaleBook.Enabled) return;
         TalesDrawn.AddRange(TaleBook.Draw(Seed));
+        // 0.32: whoever minds the stall has a tale of their own, every season.
+        if (TaleBook.Enabled && TaleBook.Own(Character) is string own && !TalesDrawn.Contains(own)) TalesDrawn.Add(own);
     }
 
     /// <summary>Whether a beat could come now: its tale's drawn, it isn't done, what it follows is done long enough ago, and its conditions hold.</summary>
@@ -393,6 +396,31 @@ public sealed partial class GameState
         TaleBook.All.Where(t => Drew(t.Key)).Select(t => t.Beats.FirstOrDefault(b => b.Night == night && Ready(b))).Where(b => b != null)
             .OrderBy(b => ReadySince(b)).ThenBy(b => (unchecked(Seed * 31 + Day * 17 + b.Key.Length * 7) & 0xff));
 
+    /// <summary>
+    /// What comes next in a tale, for the notebook's Stories page (0.32): who's due, where and roughly when, from the
+    /// first beat that could come (its conditions met, its person still around). Null when nothing's expected now.
+    /// </summary>
+    public string TaleNext(TaleDef tale)
+    {
+        foreach (var beat in tale.Beats)
+        {
+            if (Did(beat.Key) || (beat.After != null && !Did(beat.After)) || Gone.Contains(beat.Who)) continue;
+            if (beat.If != null && !beat.If(this)) continue;
+            string who = Story.Name(beat.Who);
+            if (beat.Tier > Tier) return Loc.T($"{who} will come once the shop is at {ShopTiers.Name(beat.Tier)}.");
+            int days = ReadySince(beat) - Day;
+            if (beat.Letter)
+                return days <= 0 ? Loc.T($"A letter from {who} is on its way.")
+                    : Loc.Plural(days, $"A letter from {who} should come in about {days} day.", $"A letter from {who} should come in about {days} days.");
+            if (beat.Night)
+                return days <= 0 ? Loc.T($"{who} will knock at the back door one night soon.")
+                    : Loc.Plural(days, $"{who} will knock at the back door in about {days} day.", $"{who} will knock at the back door in about {days} days.");
+            return days <= 0 ? Loc.T($"{who} should come to the counter soon.")
+                : Loc.Plural(days, $"{who} should come to the counter in about {days} day.", $"{who} should come to the counter in about {days} days.");
+        }
+        return null;
+    }
+
     /// <summary>The day a beat could first have come: the day what it follows was done, and its gap.</summary>
     int ReadySince(Beat beat) => (beat.After == null ? 0 : DoneOn(beat.After)) + beat.Gap;
 
@@ -410,6 +438,9 @@ public sealed partial class GameState
         // Bram's kin's apprentice brings a chest he's fished out, on each week's first morning.
         if (Flagged(TaleBook.Apprentice) && DayOfWeek == 1 && !Gone.Contains(TaleBook.Pip))
             Queue.Insert(0, TaleBook.ApprenticeChest(this, rng));
+        // Tobin's Lamp (0.32): his lads bring a chest up from under the Barrow on each week's first morning.
+        if (Keeps(Core.Keepsakes.Lamp) && DayOfWeek == 1 && !Gone.Contains(TaleBook.Tobin))
+            Queue.Insert(0, TaleBook.TobinChest(this, rng));
         StageOffers(rng);
     }
 
@@ -605,8 +636,9 @@ public sealed partial class GameState
     {
         Tonight.Clear();
         if (ReadyBeats(night: true).FirstOrDefault() is Beat beat) Tonight.Add(MakeTalk(beat));
-        if (DuesTonight && Foe(Faction.Wardens) && !Friend(Faction.Wardens)) Tonight.Add(Wardens.Search(this));
-        if (DayOfWeek == Wardens.RobberyNight && Foe(Faction.Lockless) && Gold > 0) Tonight.Add(Wardens.Robbery(this));
+        // Sir Edric's oath (0.32): a knight of the old Crown stands at your door, and neither the Wardens nor the Lockless cross it.
+        if (DuesTonight && Foe(Faction.Wardens) && !Friend(Faction.Wardens) && !Keeps(Core.Keepsakes.Oath)) Tonight.Add(Wardens.Search(this));
+        if (DayOfWeek == Wardens.RobberyNight && Foe(Faction.Lockless) && Gold > 0 && !Keeps(Core.Keepsakes.Oath)) Tonight.Add(Wardens.Robbery(this));
         PeddlerStock.Clear();
         if (PeddlerToday) StockPeddler();
     }
@@ -635,7 +667,8 @@ public sealed partial class GameState
         data.BackRoom = BackRoom.ToList();
         data.TaleLog = TaleLog.ToDictionary(p => p.Key, p => p.Value.ToList());
         data.OffersDeclined = new Dictionary<string, int>(_offerDeclined);
-        data.Keepsakes = new Dictionary<string, int>(Keepsakes);
+        data.Keepsakes = new Dictionary<string, int>(SetAside);
+        data.KeepsakesHeld = Keepsakes.ToList();
         data.Promises = Promises.ToList();
         data.PorterUntil = PorterUntil;
     }
@@ -654,7 +687,8 @@ public sealed partial class GameState
         BackRoom.AddRange(data.BackRoom ?? new List<Held>());
         foreach (var (tale, lines) in data.TaleLog ?? new Dictionary<string, List<string>>()) TaleLog[tale] = lines.ToList();
         foreach (var (key, day) in data.OffersDeclined ?? new Dictionary<string, int>()) _offerDeclined[key] = day;
-        foreach (var (key, value) in data.Keepsakes ?? new Dictionary<string, int>()) Keepsakes[key] = value;
+        foreach (var (key, value) in data.Keepsakes ?? new Dictionary<string, int>()) SetAside[key] = value;
+        foreach (string key in (data.KeepsakesHeld ?? new List<string>()).Where(Core.Keepsakes.Exists)) GiveKeepsake(key);
         Promises.AddRange(data.Promises ?? new List<Promise>());
         PorterUntil = data.PorterUntil;
     }

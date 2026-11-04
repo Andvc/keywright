@@ -943,7 +943,7 @@ public partial class Main : Node2D
         float y = guild ? 132 : 104;
         if (stash > 0)
         {
-            card.AddChild(UiKit.MakeLabel(Loc.T($"Uncle Bram slipped you {stash}g from his secret stash ({State.StashLeft} left)."), 16, Palette.Good,
+            card.AddChild(UiKit.MakeLabel(Loc.T($"{Hints.Mentor} slipped you {stash}g from his secret stash ({State.StashLeft} left)."), 16, Palette.Good,
                 HorizontalAlignment.Center).Place(0, y - 4, 500, 20));
             Hud.SetGold(State.Gold);
             y += 28;

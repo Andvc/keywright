@@ -163,7 +163,7 @@ public partial class SongReveal : Node2D
         AddChild(panel);
         panel.AddChild(UiKit.MakeLabel(Loc.T(def.Name), 32, red.Lightened(0.15f), HorizontalAlignment.Center, outline: 6).Place(0, 12, PanelW, 40));
         bool known = Game.State?.Songbook.Contains(_song.Song) ?? false;
-        panel.AddChild(UiKit.MakeLabel(Loc.T($"One of the nine, from {def.From}.{(known ? "" : Loc.T(" New to Bram's kin!"))}"), 16, known ? Palette.Muted : gold,
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"One of the nine, from {def.From}.{(known ? "" : Loc.T(" New to the songbook!"))}"), 16, known ? Palette.Muted : gold,
             HorizontalAlignment.Center).Wrapped().Place(40, 54, PanelW - 80, 44));
         panel.AddChild(UiKit.MakeLabel(def.Story, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 98, PanelW - 80, 44));
         panel.AddChild(UiKit.MakeLabel(Loc.T("ON DISPLAY"), 16, gold.Darkened(0.1f), HorizontalAlignment.Center).Place(0, 146, PanelW, 20));

@@ -23,7 +23,7 @@ public partial class NotebookView : Node2D
     const float PanelX = 40, PanelY = 66, PanelW = 1200, PanelH = 518;
     const float TableX = 64, RowH = 40;
 
-    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4;
+    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4, StoriesPage = 5;
 
     readonly GameState _state;
     readonly int _firstPage;
@@ -69,8 +69,9 @@ public partial class NotebookView : Node2D
         Tab(RegularsPage, Loc.T("Regulars"), PanelX + 338, 112);
         Tab(CalendarPage, Loc.T("Calendar"), PanelX + 456, 112);
         Tab(TownPage, Loc.T("Town"), PanelX + 574, 88);
+        Tab(StoriesPage, Loc.T("Stories"), PanelX + 668, 104);
         // Synergies come with Crownhold: before that, the notebook just keeps its tally.
-        if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 668, 120);
+        if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 778, 120);
         AddChild(UiKit.MakeButton(Loc.T($"Close {Controls.Tag(Controls.Notebook)}"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
         _page = new Node2D();
         AddChild(_page);
@@ -99,6 +100,7 @@ public partial class NotebookView : Node2D
         if (page == RegularsPage) BuildRegulars(CurrentSpread);
         else if (page == CalendarPage) BuildCalendar();
         else if (page == TownPage) BuildTown();
+        else if (page == StoriesPage) BuildStories();
         else if (page == SynergiesPage) BuildSynergies();
         else BuildSounds();
     }
@@ -567,6 +569,86 @@ public partial class NotebookView : Node2D
             line.TooltipText = $"{tale.Title}\n{tale.Blurb}\n\n{string.Join("\n", log)}";
             _page.AddChild(line.Place(rx, top + i * step, rw, step - 4));
         }
+    }
+
+    string _story;
+
+    /// <summary>
+    /// The Stories page (0.32): every tale begun, the ones still going first, and the one picked, whole: what it's about,
+    /// everything that's happened in it so far, and what comes next (who, where, about when), or that nothing's expected.
+    /// </summary>
+    void BuildStories()
+    {
+        var begun = TaleBook.All.Where(t => _state.TaleLog.ContainsKey(t.Key))
+            .OrderBy(t => _state.TaleNext(t) == null ? 1 : 0).ThenBy(t => Array.IndexOf(TaleBook.All, t)).ToList();
+        float top = PanelY + 60;
+        if (begun.Count == 0)
+        {
+            _page.AddChild(UiKit.MakeLabel(Loc.T("No stories yet. People will come to the counter with their troubles, and the notebook will follow each one: " +
+                                                 "what it's about, what's happened, and what comes next."), 16, Palette.Muted).Wrapped()
+                .Place(TableX, top, PanelW - 48, 60));
+            return;
+        }
+        var tale = begun.FirstOrDefault(t => t.Key == _story) ?? begun[0];
+        _story = tale.Key;
+
+        // The list: each story's title, gold while it's going, grey once nothing more is expected.
+        const float listW = 340;
+        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }
+            .Place(TableX - 8, top, listW + 8, PanelY + PanelH - 16 - top);
+        _page.AddChild(scroll);
+        var list = new Control { MouseFilter = Control.MouseFilterEnum.Pass };
+        scroll.AddChild(list);
+        for (int i = 0; i < begun.Count; i++)
+        {
+            var t = begun[i];
+            bool going = _state.TaleNext(t) != null, picked = t == tale;
+            var row = UiKit.MakePanel(picked ? Palette.Gold : Palette.PanelBorder).Place(0, i * 38, listW - 12, 34);
+            row.MouseFilter = Control.MouseFilterEnum.Stop;
+            string key = t.Key;
+            row.GuiInput += e =>
+            {
+                if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) return;
+                _story = key;
+                Sfx.Play("tick", 1.1f, -8);
+                ShowPage(StoriesPage);
+            };
+            var title = UiKit.MakeLabel(t.Title, 16, going ? Palette.Gold : Palette.Muted).Place(10, 7, listW - 40, 20);
+            title.ClipText = true;
+            title.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            row.AddChild(title);
+            list.AddChild(row);
+        }
+        list.CustomMinimumSize = new Vector2(listW, begun.Count * 38);
+
+        // The story picked, whole.
+        float x = TableX + listW + 16, w = PanelX + PanelW - 24 - x, y = top;
+        _page.AddChild(UiKit.MakeLabel(tale.Title.ToUpperInvariant(), 24, Palette.Gold, outline: 4).Place(x, y - 4, w, 30));
+        y += 32;
+        var about = UiKit.MakeLabel(tale.Blurb, 16, Palette.Text).Wrapped();
+        float aboutH = UiKit.TextHeight(tale.Blurb, w);
+        _page.AddChild(about.Place(x, y, w, aboutH));
+        y += aboutH + 12;
+
+        string next = _state.TaleNext(tale);
+        float nextH = next == null ? 24 : UiKit.TextHeight(next, w) + 24;
+        float bottom = PanelY + PanelH - 20 - nextH;
+        _page.AddChild(UiKit.MakeLabel(Loc.T("SO FAR"), 16, Palette.Gold.Darkened(0.2f)).Place(x, y, w, 20));
+        y += 24;
+        var sofar = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }.Place(x, y, w, Math.Max(40, bottom - y - 8));
+        _page.AddChild(sofar);
+        var log = _state.TaleLog[tale.Key];
+        string text = string.Join("\n", log.Select(l => "- " + l));
+        var lines = UiKit.MakeLabel(text, 16, Palette.Text).Wrapped();
+        lines.CustomMinimumSize = new Vector2(w - 16, UiKit.TextHeight(text, w - 16));
+        sofar.AddChild(lines);
+        // The latest at the bottom, in view.
+        sofar.Ready += () => sofar.ScrollVertical = int.MaxValue;
+
+        _page.AddChild(UiKit.MakeLabel(next != null ? Loc.T("WHAT COMES NEXT") : Loc.T("NOTHING MORE IS EXPECTED FOR NOW"), 16,
+            next != null ? Palette.Gold.Darkened(0.2f) : Palette.Muted).Place(x, bottom, w, 20));
+        if (next != null)
+            _page.AddChild(UiKit.MakeLabel(next, 16, Palette.Good).Wrapped().Place(x, bottom + 22, w, nextH - 22));
     }
 
     /// <summary>

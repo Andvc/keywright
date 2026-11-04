@@ -374,8 +374,8 @@ public static class Sellers
             Facts = new[] { Loc.T("Right-handed."), Loc.T("Hands red from the washtub, no ink."), Loc.T("Wooden clogs.") },
             Stories = Tell(
                 ("kitbag", new[] { Loc.T("My Rafe's soldiering chest. Only a gentle shake: I couldn't bear to hear his things rattle. {price}, for Jory's debt?"),
-                                   Loc.T("Rafe carried this through two wars. A gentle shake was all I could bear. {price} would help my Jory.") }),
-                ("attic", new[] { Loc.T("From the attic, dear. Just a gentle shake: my wrists aren't what they were. {price}? Every coin's for Jory.") })),
+                                   Loc.T("Rafe carried this through two wars. {price} would help my Jory.") }),
+                ("attic", new[] { Loc.T("From the attic, dear, under Rafe's old saddle. {price}? Every coin's for Jory.") })),
             Habit = Loc.T("A soldier's widow selling her husband's things to free her son from the Guild's debt-house. She only ever shakes a chest " +
                     "gently, so what's heavy (a weapon) or soft (a cloak) never makes a sound for her, and she doesn't price it. A soldier's " +
                     "kitbag usually holds both."),
@@ -390,8 +390,8 @@ public static class Sellers
             Key = "garrick", Look = "hob", Name = Loc.T("Garrick Thorne"), Short = Loc.T("Garrick"), Tier = 1, Shakes = Shake.Hard, Trade = Trade.Haggle, Colours = Stall,
             Of = Faction.Commons, From = new[] { ("field", 1f) },
             Wants = Loc.T("His rent paid before the Guild's bailiffs come for Brindle Field, which his family's ploughed for two hundred years."),
-            Stories = Tell(("field", new[] { Loc.T("Ploughed it up on Brindle Field, where the last battle was. Shook it hard, like the hay. {price}, and it's the rent!"),
-                                             Loc.T("Every spring that field coughs up another one. Shook it like a sack of turnips. {price}: the bailiffs won't wait.") })),
+            Stories = Tell(("field", new[] { Loc.T("Ploughed it up on Brindle Field, where the last battle was. {price}, and it's the rent!"),
+                                             Loc.T("Every spring that field coughs up another one. Turned the plough right round. {price}: the bailiffs won't wait.") })),
             Habit = Loc.T("A farmer who ploughs chests up out of Brindle Field, the old battlefield, and shakes them hard, so a clanking weapon drowns " +
                     "out any coin for him. He haggles, and starts at about twice what he'll take."),
             Accepts = new[] { Loc.T("Deal! That's the rent, near enough."), Loc.T("Done! The bailiffs can whistle.") },
@@ -407,7 +407,7 @@ public static class Sellers
             Of = Faction.Commons, From = new[] { ("tab", 1f) },
             Wants = Loc.T("To keep the Crossed Keys, and her secrets. Everyone's news passes through her taproom first."),
             Facts = new[] { Loc.T("Pulls pints left-handed."), Loc.T("Ink on her fingers from the tally."), Loc.T("Wears house slippers; never rides.") },
-            Stories = Tell(("tab", new[] { Loc.T("Some adventurer left this for his tab at the Crossed Keys. Firm shake, and I counted the rattles. So much a rattle: {price}."),
+            Stories = Tell(("tab", new[] { Loc.T("Some adventurer left this for his tab at the Crossed Keys. So much a rattle, as ever: {price}."),
                                            Loc.T("Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}. And I've news, if you're buying.") })),
             Habit = Loc.T("Keeps the Crossed Keys at the crossroads, takes chests for unpaid tabs, and hears everything first. She gives one a firm " +
                     "shake, counts the rattles, and charges the same for each, whatever's rattling: a goblin cleaver costs what a purse of coin does."),
@@ -441,8 +441,8 @@ public static class Sellers
             Key = "nettle", Look = "snikkit", Name = Loc.T("Nettle"), Short = Loc.T("Nettle"), Tier = 2, Shakes = Shake.Gentle, ShakeFee = 0.1f, MissRate = 0.6f, Markup = (1.25f, 1.5f), Visits = 0.5f, Colours = Village,
             From = new[] { ("warren", 1f) },
             Wants = Loc.T("Her clan cleared of every theft in Thornwick, and a burrow with a door: a goblin's worth is the chests she keeps."),
-            Stories = Tell(("warren", new[] { Loc.T("From our burrow. Not stolen! Goblins get the blame for everything. Gentle shake, only gentle. {price}. Looking is free. Looking more, not free!"),
-                                              Loc.T("Nettle's clan dug it up fair and square. Gentle shake only. {price}. You want to shake more? You pay more!"),
+            Stories = Tell(("warren", new[] { Loc.T("From our burrow. Not stolen! Goblins get the blame for everything. {price}. Looking is free. Looking more, not free!"),
+                                              Loc.T("Nettle's clan dug it up fair and square. {price}. You want to shake more? You pay more!"),
                                               Loc.T("Burrow chest. Smells of goblin. Is fine. {price}, and more every time you shake it different.") })),
             PriceUp = new[] { Loc.T("Ooh, you like! Price go up: {price}."), Loc.T("More shaking, more gold! {price}."), Loc.T("Hehe. {price} now.") },
             Habit = Loc.T("A goblin of the hills, trading chests out of her clan's burrow (fairly: she'll tell you so). She only shakes gently, so she " +
@@ -499,7 +499,7 @@ public static class Sellers
             Of = Faction.Abbey, From = new[] { ("crypt", 1f) },
             Wants = Loc.T("Bread for the poor at the abbey gate, and the Unopened kept off its steps."),
             Stories = Tell(("crypt", new[] { Loc.T("From the crypt of Saint Ide, by the Abbot's leave. A firm shake, but not hard, please: the saints are resting. {price}, for the poor."),
-                                             Loc.T("A brother's reliquary, three hundred years asleep. I gave it a firm shake, as is seemly. {price} feeds the gate for a week.") })),
+                                             Loc.T("A brother's reliquary, three hundred years asleep. {price} feeds the poor at our gate for a week.") })),
             Habit = Loc.T("The almoner of the abbey of Saint Ide, selling the crypt's chests to feed the poor at its gate. He shakes a chest firmly and " +
                     "won't have it shaken hard (half again if you do), so the holy cloaks a crypt chest is full of never make a sound for him, " +
                     "and go unpriced."),
@@ -516,8 +516,8 @@ public static class Sellers
             Bottom = (0.95f, 1.15f), Colours = Village, Steals = 0.15f,
             Of = Faction.Lockless, From = new[] { ("road", 1f) },
             Wants = Loc.T("One more good season on the smugglers' road, and then a boat, and the sea."),
-            Stories = Tell(("road", new[] { Loc.T("Packed in straw, so nothing clinked at the Wardens' toll. I gave it a firm shake. {price}, and no questions."),
-                                            Loc.T("Came up the smugglers' road. Don't ask whose. The straw muffles everything, but I gave it a firm shake. {price}.") })),
+            Stories = Tell(("road", new[] { Loc.T("Packed in straw, so nothing clinked at the Wardens' toll. {price}, and no questions."),
+                                            Loc.T("Came up the smugglers' road. Don't ask whose. The straw stays: it muffles everything. {price}.") })),
             Habit = Loc.T("Runs brandy and chests past the Wardens' toll on the forest road, every chest packed in straw so nothing clinks: everything " +
                     "in it needs a strength harder to stir, and cloaks and spells won't stir at all. A firm shake, never a drop, and smugglers love " +
                     "a false bottom. Haggles. Now and then a chest he carries isn't his to sell."),
@@ -535,8 +535,8 @@ public static class Sellers
             Of = Faction.Commons, From = new[] { ("dowry", 1f) },
             Wants = Loc.T("To marry off the whole county, and to know whose chests are whose: a matchmaker keeps every family's accounts."),
             Facts = new[] { Loc.T("Right-handed."), Loc.T("Ink on her fingers from the marriage contracts."), Loc.T("Rides her pony in boots, village to village.") },
-            Stories = Tell(("dowry", new[] { Loc.T("A dowry, love, from a wedding that never was: {clue}, as ever. Shaken hard: {price}."),
-                                             Loc.T("The groom ran off to the Barrow. Her dowry: {clue}. Shaken hard: {price}. I've another match for her already.") })),
+            Stories = Tell(("dowry", new[] { Loc.T("A dowry, love, from a wedding that never was: {clue}, as ever. {price}."),
+                                             Loc.T("The groom ran off to the Barrow. Her dowry: {clue}. {price}. I've another match for her already.") })),
             Habit = Loc.T("Thornwick's matchmaker, selling dowries from weddings that never happened. A Thornwick dowry always holds coin for luck, a " +
                     "cloak for warmth and a potion for health, and a bride often wards one of the three: whichever you can't hear is the warded " +
                     "one. Hesper shakes hard and prices what she hears, never what's warded."),
@@ -634,8 +634,8 @@ public static class Sellers
             Key = "durgan", Look = "grit", Name = Loc.T("Durgan Ironhand"), Short = Loc.T("Durgan"), Tier = 3, Shakes = Shake.Hard, Judge = Judgment.Miner, Trade = Trade.Haggle, Bottom = (0.85f, 1f), Colours = Town,
             Of = Faction.Ironroot, From = new[] { ("hold", 1f) },
             Wants = Loc.T("Ironroot's crown, locked in the Royal Treasury since the Locking; and a buyer for dwarf-gold the Guild won't let him sell."),
-            Stories = Tell(("hold", new[] { Loc.T("From the deep seam under Ironroot. Hard shake, with dwarf's hands. {price}. Not a coin of it to the Guild, mind."),
-                                            Loc.T("From Ironroot hold, sealed since my great-great-grandmother's day. I gave it a proper shake. {price}.") })),
+            Stories = Tell(("hold", new[] { Loc.T("From the deep seam under Ironroot. {price}. Not a coin of it to the Guild, mind."),
+                                            Loc.T("From Ironroot hold, sealed since my great-great-grandmother's day. {price}.") })),
             Habit = Loc.T("A dwarf trader of Ironroot Street, who knows a weapon when he hears one. He prices weapons in full, everything else at half, " +
                     "and takes every tinkle for a diamond. He shakes hard, and haggles."),
             Accepts = new[] { Loc.T("Done. Back to the deep."), Loc.T("Ha! Done.") },
@@ -668,8 +668,8 @@ public static class Sellers
             PairChance = 0.6f, MissRate = 0.45f, Markup = (2.3f, 2.7f), Colours = Town,
             Of = Faction.Commons, From = new[] { ("pawn", 1f) },
             Wants = Loc.T("His money; and, though he'll never say it, to be thought kind."),
-            Stories = Tell(("pawn", new[] { Loc.T("Pledged twenty years ago on Lantern Lane and never redeemed. The ticket says {articles}. A firm shake. {price}."),
-                                            Loc.T("Ticket four thousand and twelve: {articles}, it says. I price a lot kind by kind, at a firm shake. {price}.") })),
+            Stories = Tell(("pawn", new[] { Loc.T("Pledged twenty years ago on Lantern Lane and never redeemed. The ticket says {articles}. {price}."),
+                                            Loc.T("Ticket four thousand and twelve: {articles}, it says. I price a lot kind by kind. {price}.") })),
             Habit = Loc.T("The pawnbroker of Lantern Lane, selling pledges nobody redeemed, often two or three of a kind. He prices one of each kind he " +
                     "hears and never counts how many. The pawn ticket counts every article pledged, false bottom and all, and he won't have pledges " +
                     "dropped: count what you hear against the ticket."),
@@ -703,8 +703,8 @@ public static class Sellers
             Colours = new[] { 0.1f, 0.5f, 0.35f, 0.05f },
             Of = Faction.Commons, From = new[] { ("river", 1f) },
             Wants = Loc.T("To find the bell she hears tolling under the Aldwater on still nights."),
-            Stories = Tell(("river", new[] { Loc.T("Out of the Aldwater mud at low tide! I shook it hard, and I'd bet my boots on what rustles. {price}."),
-                                             Loc.T("The river gives and the river takes. Shook it hard: spellbooks, potions, who knows! {price}. Heard the bell again last night.") })),
+            Stories = Tell(("river", new[] { Loc.T("Out of the Aldwater mud at low tide! I'd bet my boots on what rustles. {price}."),
+                                             Loc.T("The river gives and the river takes. Spellbooks, potions, who knows! {price}. Heard the bell again last night.") })),
             Habit = Loc.T("A mudlark who combs the Aldwater at low tide, shakes hard, and prices every rustle as a drowned wizard's spellbook. Her scroll " +
                     "cases are often full of river sand, which pours at the gentlest shake. Real parchment only rustles at a hard one."),
             Accepts = new[] { Loc.T("Mud's been good to me!"), Loc.T("The river provides.") },
@@ -769,7 +769,7 @@ public static class Sellers
             HiddenChance = 0f, Markup = (1.2f, 1.45f), Colours = Emporium,
             From = new[] { ("gate", 1f) },
             Wants = Loc.T("Out: away from the Gate, and the Maw, for good. It has heard enough."),
-            Stories = Tell(("gate", new[] { Loc.T("Shaken gently, then hard: {price}. Then I clicked, like a bat. The echoes: {clue}."),
+            Stories = Tell(("gate", new[] { Loc.T("{price}, fairly. Then I clicked, like a bat, and listened. The echoes: {clue}."),
                                             Loc.T("I hear every coin in the realm, and every word the Maw says. {price}. My echoes: {clue}. Wards can't stop an echo.") })),
             Habit = Loc.T("A demon with ears like a bat, who has heard enough of the Maw. It shakes a chest gently, then hard, and prices what it hears, " +
                     "fairly. Then it clicks and listens to the echoes, which come back off everything inside, warded or not: round is coin, long a " +
@@ -887,6 +887,50 @@ public static class Sellers
             Key = "aubel", Look = "vane", Name = Loc.T("Mistress Aubel"), Short = Loc.T("Aubel"), Tier = 1, Visits = 0, Of = Faction.Guild,
             Wants = Loc.T("Every marked child in the county, for the Guild's counting-houses."),
             Habit = Loc.T("A Guild Mark-Finder, who tests children's hands at every fair and takes the marked ones \"into the Guild's care\"."),
+        },
+        // 0.32: the late tales' people.
+        new()
+        {
+            Key = "wren", Look = "bramble", Name = Loc.T("Sister Wren"), Short = Loc.T("Wren"), Tier = 1, Visits = 0, Of = Faction.Abbey,
+            Wants = Loc.T("To sing the Keyhold's song whole, once, before she dies."),
+            Habit = Loc.T("The last singer of the Keyhold's choir, blind since the night the Guild burned her chapel. She hums a song that stops halfway."),
+        },
+        new()
+        {
+            Key = "tock", Look = "stranger", Name = Loc.T("Tock"), Short = Loc.T("Tock"), Tier = 3, Visits = 0, Of = Faction.Arcanum,
+            Wants = Loc.T("To learn what's inside things, and then to be an apprentice."),
+            Habit = Loc.T("Archmage Orme's brass automaton, which opens chests with a Keywright's mark on a brass plate. It wears a cloak."),
+        },
+        new()
+        {
+            Key = "edric", Look = "dorrin", Name = Loc.T("Sir Edric Ashcombe"), Short = Loc.T("Sir Edric"), Tier = 4, Visits = 0, Of = Faction.Crown,
+            Wants = Loc.T("To know that the Gate held, and then to keep his oath somewhere useful."),
+            Habit = Loc.T("A knight of King Aldric's guard, who locked himself into a chest at the Locking to guard the Crown's oath-book."),
+        },
+        // 0.32: the partners' own people.
+        new()
+        {
+            Key = "mabry", Look = "shelly", Name = Loc.T("Mabry"), Short = Loc.T("Mabry"), Tier = 1, Visits = 0, Of = Faction.Commons,
+            Wants = Loc.T("Drowned Fallowford's common chest home to its people, and her brother to write more often."),
+            Habit = Loc.T("Hesk's sister, from the river town the Guild drowned when it opened the Aldwater weir."),
+        },
+        new()
+        {
+            Key = "vash", Look = "silas", Name = Loc.T("Orrin Vash"), Short = Loc.T("Vash"), Tier = 2, Visits = 0, Of = Faction.Guild,
+            Wants = Loc.T("To keep the best stall on Lantern Lane, which the Guild gave him."),
+            Habit = Loc.T("A Guild-licensed trader of Crownhold, who sells from the Brightwaters' old stall."),
+        },
+        new()
+        {
+            Key = "marta", Look = "gerda", Name = Loc.T("Marta Brightwater"), Short = Loc.T("Marta"), Tier = 1, Visits = 0, Of = Faction.Commons,
+            Wants = Loc.T("Her family's stall on Lantern Lane back, before she's too old to stand at it."),
+            Habit = Loc.T("Rosa's mother, who kept the best stall on Lantern Lane for thirty years and taught Rosa to haggle."),
+        },
+        new()
+        {
+            Key = "pemberton", Look = "aldous", Name = Loc.T("Pemberton"), Short = Loc.T("Pemberton"), Tier = 1, Visits = 0, Of = Faction.Crown,
+            Wants = Loc.T("House Marchmont whole again, or as near as he can manage."),
+            Habit = Loc.T("The Marchmonts' old steward, who stayed when the Guild took everything else, and keeps track of what it sold."),
         },
         new()
         {
