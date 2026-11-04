@@ -58,7 +58,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine;
-   `--sight-unseen` buys every other plain chest it can afford without touching it (the opening's blind-buy screen).
+   `--sight-unseen` buys every other plain chest it can afford without touching it (the opening's blind-buy screen);
+   `--tales=a,b` puts those tales in the season whatever it draws (with `--start-week`, to check a late tale's beats).
    At a run's end the bot retires (or goes back to the title) as a player would, so what comes between runs plays too.
    `--title-test` drives the title's burst with real input (skipping, pressing a landed button) and exits 1 on a failure.
    `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the

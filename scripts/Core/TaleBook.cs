@@ -1421,6 +1421,9 @@ public static partial class TaleBook
     /// The tales a season holds: the Shut Chests always, then two of Brindle's three, one of Thornwick's two, two of
     /// Crownhold's four, and the Emporium's.
     /// </summary>
+    /// <summary>For the bot (--tales=a,b): tales every season holds besides what it draws, to check them on demand.</summary>
+    public static List<string> Forced { get; } = new();
+
     public static List<string> Draw(int seed)
     {
         if (!Enabled) return new List<string>();
@@ -1430,6 +1433,7 @@ public static partial class TaleBook
         // the late game has its own stories. The tale of whoever minds the stall is added by the run (TaleBook.Own).
         foreach (var (place, count) in new[] { (TalePlace.Brindle, 3), (TalePlace.Thornwick, 3), (TalePlace.Crownhold, 3), (TalePlace.Emporium, 3) })
             drawn.AddRange(All.Where(t => t.Place == place).OrderBy(_ => rng.Next()).Take(count).Select(t => t.Key));
+        drawn.AddRange(Forced.Where(k => Exists(k) && !drawn.Contains(k)));
         return drawn;
     }
 

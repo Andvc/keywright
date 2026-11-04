@@ -25,6 +25,7 @@ namespace Keywright;
 /// through by the balance simulation; --gold=N then sets its purse). Autoplay sets --days=N to stop after that many days.
 /// --character=KEY and --challenge=N play one of Bram's kin, at a challenge level (--terms=a,b: with just those boons and banes).
 /// --engine starts with the Bookkeeping Engine, to see it read every chest. --curios=a,b,c owns those curios from the start.
+/// --tales=a,b puts those tales in the season, whatever it draws.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
 /// (with --vault-demo, the Crown Chest's other ending).
 /// </summary>
@@ -223,6 +224,8 @@ public partial class Main : Node2D
                 Heartsongs.Chance = Math.Clamp(songChance, 0f, 1f);
             if (int.TryParse(Arg(args, "--start-tier"), out var startTier))
                 State.SkipTo(Math.Clamp(startTier, 1, ShopTiers.Max), int.TryParse(Arg(args, "--gold"), out var g) ? g : 500);
+            // --tales=a,b: those tales are in the season, whatever it draws (to check one on demand).
+            TaleBook.Forced.AddRange((Arg(args, "--tales") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries).Where(TaleBook.Exists));
             // A shop as a careful player would have it by the start of that week (tips are taken as read).
             if (int.TryParse(Arg(args, "--start-week"), out var startWeek) && startWeek > 1)
             {
@@ -312,6 +315,8 @@ public partial class Main : Node2D
         Profile.CuriosSeen.AddRange(Curios.All.Where((c, i) => i % 2 == 0).Select(c => c.Key));
         Profile.Songs.AddRange(Heartsongs.All.Take(2).Select(h => h.Key));
         Profile.Achievements.AddRange(new[] { "FIRST_CHEST", "THORNWICK", "FIRST_TITHE", "PERFECT_READ", "ENCHANTED" }); // loc: keys
+        // Keepsakes held in earlier runs: the longest descriptions, for the cards' room.
+        Profile.KeepsakesSeen.AddRange(new[] { Keepsakes.Weights, Keepsakes.Lamp, Keepsakes.Oath, Keepsakes.StallKey, Keepsakes.Aldwin });
         ToTitle();
         // The chest bursts and the menu comes out of it (a little over two seconds), then a look round.
         await Wait(3.0);
@@ -332,6 +337,10 @@ public partial class Main : Node2D
         gathered.ShowPage(CollectionView.AchievementsPage);
         await Wait(0.5);
         Moment("07_collection_achievements");
+        await Wait(1.0);
+        gathered.ShowPage(CollectionView.KeepsakesPage);
+        await Wait(0.5);
+        Moment("07_collection_keepsakes");
         await Wait(1.0);
         gathered.Close();
         await Wait(0.5);
