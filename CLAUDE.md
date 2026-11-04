@@ -255,12 +255,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
-  judgment pushes that later, and the run's build and its tales decide the rest (0.30, 300 runs: the careful player
-  buying curios as they come clears a little under three times in five, 59%, the tales' consequences carrying it
-  further than 0.28's 47%; with no curios about half, 51%; with no tales a third, 32%; with no Heartsongs about half; a
-  learner at 0.75 a third; a first run about one in a hundred); careers first clear around the sixth run (a quarter of
-  players by the fifth), clear level 4 in the late twenties, and each level after costs a few points more
-  (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6 by run 30, level 8 is a wall). A run's length is part of the
+  judgment pushes that later, and the run's build and its tales decide the rest (0.32, 120 runs: the careful player
+  buying curios as they come clears two times in three, 66%, with keepsakes and the late tales; 0.30's 59% was a
+  little low, its careful player having haggled for chests gone cold in its hands; with no curios 63%; with no tales
+  38%; with no Heartsongs 63%; a learner at 0.75 37%; a first run about one in a hundred); careers first clear around
+  the sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 25), and each level
+  after costs a few points more (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6
+  by run 30, level 8 is a wall, 3%). The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
   balance: `--sim=experience` should keep a first run under two and a half hours (0.30: 146 minutes over 30 days, the
   longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to Thornwick still is, for
   about half of first runs, as since 0.27). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
