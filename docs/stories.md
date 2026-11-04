@@ -164,6 +164,10 @@ curio's, a tool's or a thing's picture until they have their own.
 | Sir Edric's Oath | The Sleeper | The Wardens never search you and the Lockless never rob you |
 | Wren's Tuning Fork | The Silent Choir (the first echo freed) | Everything 10% likelier to come out a step better |
 
+How often the careful collector (Kit) ends a season with each, of the seasons that drew its tale (the sim's Tales
+section, 0.32): the Brass Apprentice 68%, Tobin's Lamp 41%, the Hawthorn Charm 6%, Sir Aldwin's Coin 48%, Rafe Kettle's
+Medal 61%, Sir Edric's Oath 75%, Wren's Tuning Fork 28%. The partners' three are given at the end of their own tales.
+
 ## Their own tales (0.32)
 
 Kit is Bram's niece, and her story is the Key's. The others aren't family: each was born with the Key-mark somewhere

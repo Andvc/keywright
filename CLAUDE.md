@@ -259,9 +259,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
   judgment pushes that later, and the run's build and its tales decide the rest (0.32, 120 runs: the careful player
-  buying curios as they come clears two times in three, 68%, with keepsakes and the late tales; 0.30's 59% was a
-  little low, its careful player having haggled for chests gone cold in its hands; with no curios 64%; with no tales
-  38%; with no Heartsongs 65%; a learner at 0.75 37%; a first run about one in a hundred); careers first clear around
+  buying curios as they come clears two times in three, 69%, with keepsakes and the late tales; 0.30's 59% was a
+  little low, its careful player having haggled for chests gone cold in its hands; with no curios 63%; with no tales
+  38%; with no Heartsongs 66%; a learner at 0.75 40%; a first run about one in a hundred); careers first clear around
   the sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 25), and each level
   after costs a few points more (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6
   by run 30, level 8 is a wall, 3%). The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
@@ -431,9 +431,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   beats (`Beat`): who comes, after which beat and how many days, at what shop, if what (`If`), and either a talk
   (`Says`, `Asks`: `Choice`s with a cost, a doing that returns the reply, and a `Worth` for the careful player) or a
   chest (`Brings`, with `Bought`/`Passed` hooks). The engine (`Tales.cs`, a partial of `GameState`) draws a season's
-  tales from the seed (`TaleBook.Draw`, above), stages at most two beats a day (`StageTales`: a talk joins the queue as a `Visit.Talking`, a chest
-  replaces a regular) and one a night (`StartNight`), and keeps what came of them: `Flags`, `Gone` (who never comes
-  again), `Notices`, `TaleLog`, `Keepsakes`, all in `SaveData`. A tale's secret (who the Magpie is) is drawn from the
+  tales from the seed (`TaleBook.Draw`, above), stages at most two beats a day (`StageTales`: a talk joins the queue as
+  a `Visit.Talking`, a chest replaces a regular) and one a night (`StartNight`), what follows today's beat with no gap
+  ("that night", `Continues`) before what has waited longest, and keeps what came of them: `Flags`, `Gone` (who never
+  comes again), `Notices`, `TaleLog`, `Keepsakes`, all in `SaveData`. A tale's secret (who the Magpie is) is drawn from the
   seed (`TaleBook.Secret`) and never changes; nothing in a tale is a hidden roll. Standing (`Faction`, -3..+3,
   `GameState.Sway`): at +2 and -2 the commons add or take a customer a day, the Guild takes a tenth off or on every due
   (`DueFor`, with the King's decree), the Wardens warn or search (`Wardens.Search`), the Lockless pay the fence double
