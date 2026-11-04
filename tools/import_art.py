@@ -9,10 +9,11 @@ Sources:
   - Kenney Font Package, Impact Sounds, RPG Audio, Casino Audio, Interface Sounds (CC0, see CREDITS.md)
     https://kenney.nl (mirror: github.com/ETdoFresh/kenney.nl)
 
-Usage: python3 tools/import_art.py [--cache DIR] [--density-only] [--density-check]
+Usage: python3 tools/import_art.py [--cache DIR] [--density-only] [--density-check] [--chests-only]
 Requires Pillow. Kenney's packs are cloned (partially) into the cache on first run.
 """
 import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -127,15 +128,55 @@ def save(image, *parts):
 
 
 def build_chests():
-    """The chest's parts (lid, body, open) in each finish, and the lock makers' overlays: drawn in code at 48 art pixels
-    wide (custom_art.chest), scaled 2x to the game's 96 (ChestView shows them at 2x: four screen pixels to a pixel).
-    0.23's generated chests (art/generated/chest) were retired in 0.25: too busy for the thing the player looks at most."""
-    for finish in custom_art.CHEST_FINISHES:
-        for part, img in zip(("lid", "body", "open"), custom_art.chest(finish)):
-            save(scaled(img, 2), "sprites", "chest", f"{finish}_{part}.png")
-    for maker in custom_art.CHEST_LOCKS:
-        for part, img in zip(("lid", "body"), custom_art.chest_lock(maker)):
-            save(scaled(img, 2), "sprites", "chest", f"lock_{maker}_{part}.png")
+    """The chest's parts (lid, body, open) in each finish, and the lock makers' overlays, at the 3px density (0.32):
+    drawn in code a pixel a cell (custom_art.chest3: 128 cells wide), each cell made 3x3 pixels, the 1440p size, and
+    registered with the layout size the game places them at (96 wide, as since 0.25; ChestView shows them at 2x), so
+    nothing moves. 0.23's generated chests (art/generated/chest) were retired in 0.25: too busy for the thing the player
+    looks at most; 0.25's 48-pixel chest (custom_art.chest) is now only the window icon's fallback."""
+    drawn = {}
+    for finish in custom_art.CHEST3_FINISHES:
+        for part, img in zip(("lid", "body", "open"), custom_art.chest3(finish)):
+            drawn.update(save_drawn(img, f"chest.{finish}.{part}", "sprites", "chest", f"{finish}_{part}.png"))
+    for maker in custom_art.CHEST3_LOCKS:
+        for part, img in zip(("lid", "body"), custom_art.chest3_lock(maker)):
+            drawn.update(save_drawn(img, f"chest.lock_{maker}.{part}", "sprites", "chest", f"lock_{maker}_{part}.png"))
+    register_drawn(drawn, prefix="drawn.chest.")
+
+
+# Art drawn in code at the 3px density: a cell is 3x3 pixels at 1440p, where the layout's pixel is 2 (shown at
+# DRAWN_SCALE layout pixels a picture pixel, as the chest is).
+DRAWN_PITCH, DRAWN_SCALE = 3, 2
+
+
+def save_drawn(cells, asset, *parts):
+    """Saves a picture drawn a pixel a cell at its 1440p size, and returns its art_density.json entry: the size the
+    layout places it at (each cell is 3/4 of a layout pixel at 2x), and the size of the texture itself."""
+    physical = cells.resize((cells.width * DRAWN_PITCH, cells.height * DRAWN_PITCH), Image.NEAREST)
+    per = 2 * DRAWN_SCALE
+    if physical.width % per or physical.height % per:
+        raise ValueError(f"{asset}: {cells.size} cells don't make a whole layout size")
+    path = save(physical, *parts)
+    rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
+    with open(path, "rb") as stream:
+        digest = hashlib.sha256(stream.read()).hexdigest()
+    return {f"res://{rel}": {"asset_id": f"drawn.{asset}", "source": "tools/custom_art.py", "drawn": True,
+                             "logical_size": [physical.width // per, physical.height // per],
+                             "physical_size": list(physical.size), "reference_scale": DRAWN_SCALE,
+                             "pixel_pitch": DRAWN_PITCH, "sha256": digest}}
+
+
+def register_drawn(entries, prefix):
+    """Puts drawn pictures' sizes in assets/art_density.json (replacing every earlier entry under the same prefix);
+    the density import keeps them when it rewrites the file."""
+    path = os.path.join(ASSETS, "art_density.json")
+    with open(path, encoding="utf-8") as stream:
+        metadata = json.load(stream)
+    textures = {k: v for k, v in metadata["textures"].items() if not v.get("asset_id", "").startswith(prefix)}
+    textures.update(entries)
+    metadata["textures"] = dict(sorted(textures.items()))
+    with open(path, "w", encoding="utf-8") as stream:
+        stream.write(json.dumps(metadata, indent=2, ensure_ascii=False) + "\n")
+    print(f"Registered {len(entries)} drawn textures under {prefix}")
 
 
 def build_brand():
@@ -1045,10 +1086,16 @@ def main():
     parser.add_argument("--cache", default=os.path.expanduser("~/.cache/keywright-art"))
     parser.add_argument("--density-only", action="store_true", help="overlay art/density3 without rebuilding Kenney or legacy assets")
     parser.add_argument("--density-check", action="store_true", help="validate the density overlay and report crops without writing files")
+    parser.add_argument("--chests-only", action="store_true", help="redraw just the chests and their locks (custom_art.chest3)")
     args = parser.parse_args()
-    from import_density import apply_density
+    from import_density import apply_density, check_drawn
+    if args.chests_only:
+        build_chests()
+        check_drawn(ROOT)
+        return
     if args.density_only or args.density_check:
         apply_density(ROOT, preserve_existing=True, check_only=args.density_check)
+        check_drawn(ROOT)
         return
     os.makedirs(args.cache, exist_ok=True)
 

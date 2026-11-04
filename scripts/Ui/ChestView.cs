@@ -4,9 +4,11 @@ using Godot;
 namespace Keywright.Ui;
 
 /// <summary>
-/// The chest in its finish (lid, body and the open box: drawn 48 pixels wide by tools/custom_art.py and built into
-/// assets/ at 2x by tools/import_art.py, so its pictures are 96 wide), its lock maker's hasp and plate over the seam,
-/// and the light that leaks from it. The node's origin is the centre of the lid seam.
+/// The chest in its finish (lid, body and the open box), its lock maker's hasp and plate over the seam, and the light
+/// that leaks from it. The node's origin is the centre of the lid seam. Since 0.32 the pictures are the 3px art's grain
+/// (tools/custom_art.py's chest3: 128 cells wide, each 3x3 pixels at 1440p), loaded through <see cref="ArtTexture"/>,
+/// which reports the layout size they had at round 2's grain (96 wide, shown at 2x), so nothing that places the chest
+/// moved.
 /// </summary>
 public partial class ChestView : Node2D
 {
@@ -160,12 +162,10 @@ public partial class ChestView : Node2D
     void DrawBackGlow(Painter p)
     {
         if (Glow <= 0.01f) return;
+        // A soft light swelling behind the chest as the lid strains (one smooth glow: stacked discs showed their rings).
         var center = new Vector2(0, -Unit * 2);
-        for (int i = 6; i >= 1; i--)
-        {
-            float r = Unit * (3 + i * 2.6f * (0.6f + Glow * 0.7f));
-            p.DrawCircle(center, r, GlowColor with { A = 0.05f * Glow });
-        }
+        float r = Unit * (6 + 14 * Glow);
+        p.DrawTextureRect(Fx.Glow, new Rect2(center.X - r, center.Y - r, 2 * r, 2 * r), false, GlowColor with { A = 0.55f * Glow });
         // Bright band behind the seam: visible only through the gap as the lid lifts.
         if (!_open)
             p.DrawRect(new Rect2(-Width / 2 + Unit, -LidGap - 1, Width - 2 * Unit, LidGap + 2), GlowColor.Lightened(0.6f) with { A = Glow });

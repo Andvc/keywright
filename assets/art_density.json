@@ -1142,6 +1142,438 @@
       "reference_scale": 4,
       "source_sha256": "28c24c1dddff6d8fc48cb961654b57244b8b953d90f7193c84df01163b62c776"
     },
+    "res://assets/sprites/chest/black_body.png": {
+      "asset_id": "drawn.chest.black.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "052c9d692806d7e9f28a5b6549e025ae85dde90674cd5384ee33421ee65e0d8a"
+    },
+    "res://assets/sprites/chest/black_lid.png": {
+      "asset_id": "drawn.chest.black.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "678eeeb79c4a3c425f7f9eae5068ec16e942d16628b50f4afd8db4b26701b149"
+    },
+    "res://assets/sprites/chest/black_open.png": {
+      "asset_id": "drawn.chest.black.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "04587485da7dc284a3b205db742aa30102ea57dbcfd7b8801f83259a7cf77441"
+    },
+    "res://assets/sprites/chest/blue_body.png": {
+      "asset_id": "drawn.chest.blue.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "3ecd0df21707d575a565a4b71f5117c3f577ac7ac74822e91b5a4dae5dc848b1"
+    },
+    "res://assets/sprites/chest/blue_lid.png": {
+      "asset_id": "drawn.chest.blue.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "df43ea6fedbd22d77d083e3bbd9310af8c8905b1ad48e6d61db382238c9e85db"
+    },
+    "res://assets/sprites/chest/blue_open.png": {
+      "asset_id": "drawn.chest.blue.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "1e62cd891eb676a2e638e76e4a021d52353f6d86ec649d6e8ee0076b14191a31"
+    },
+    "res://assets/sprites/chest/crown_body.png": {
+      "asset_id": "drawn.chest.crown.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "2ef12b287a727fdb142c0fa142e433eaf9a10ec9db95b76d6c8d3e94f88eb57c"
+    },
+    "res://assets/sprites/chest/crown_lid.png": {
+      "asset_id": "drawn.chest.crown.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "06008a5680015ab0104a62fd80ceb3d2427f710646675c5d7369fddc0271a045"
+    },
+    "res://assets/sprites/chest/crown_open.png": {
+      "asset_id": "drawn.chest.crown.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "e353a382f114cd82f1ebbedf0ced803d0971f544e0750df97351fe551a757cc0"
+    },
+    "res://assets/sprites/chest/gold_body.png": {
+      "asset_id": "drawn.chest.gold.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "287d56320994a75e1ad0beefc32043e27f95159bbc88fb0518b75232bfc28343"
+    },
+    "res://assets/sprites/chest/gold_lid.png": {
+      "asset_id": "drawn.chest.gold.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "9c7e5a1a6c52285e96a5bfadef95e69f6da6d7150c6b547a0f8dad6d8880016c"
+    },
+    "res://assets/sprites/chest/gold_open.png": {
+      "asset_id": "drawn.chest.gold.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "95c9cff92867de322b8670795d71d578964f5966cfb96cf52a6930441d81ec71"
+    },
+    "res://assets/sprites/chest/green_body.png": {
+      "asset_id": "drawn.chest.green.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "3dfda44a1b5b51fb17205e2e0eb15a0dd84c709b488430f57c5d83459fd93402"
+    },
+    "res://assets/sprites/chest/green_lid.png": {
+      "asset_id": "drawn.chest.green.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "432619847bc8affacf6294c95ef7e7953194db35f62ad2d76b7a52d299e05d89"
+    },
+    "res://assets/sprites/chest/green_open.png": {
+      "asset_id": "drawn.chest.green.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "86eff67d3e989adf577afda8c793fb77cf7bda5fd158379ebde2c0659dc8b07e"
+    },
+    "res://assets/sprites/chest/lock_dwarven_body.png": {
+      "asset_id": "drawn.chest.lock_dwarven.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "3e0546b56dba42c247fc69b84265efce50dcac514955cd1c6b7043c4e80f64aa"
+    },
+    "res://assets/sprites/chest/lock_dwarven_lid.png": {
+      "asset_id": "drawn.chest.lock_dwarven.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "87728bcd4a3f258052d24ba1a7d417ae82b583104265366a2070b07cf0a3d965"
+    },
+    "res://assets/sprites/chest/lock_guild_body.png": {
+      "asset_id": "drawn.chest.lock_guild.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "f25cebf55768aec2f96a9280f69a90f373029a6e1319fae9f7744bb8650885e8"
+    },
+    "res://assets/sprites/chest/lock_guild_lid.png": {
+      "asset_id": "drawn.chest.lock_guild.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "0b8656ec2f3a15a4b7b0034028e501b9433b1a6b9f45ab7dbc6f3ba9369f6828"
+    },
+    "res://assets/sprites/chest/lock_rusty_body.png": {
+      "asset_id": "drawn.chest.lock_rusty.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "815b1caab90ff8d7a2641eb9c5ef713e01204a290a93c592903101d0967a670e"
+    },
+    "res://assets/sprites/chest/lock_rusty_lid.png": {
+      "asset_id": "drawn.chest.lock_rusty.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "4ee6667950a3fb1dcaa27070bae6771619f12c493db10df192dabe173b4dac0e"
+    },
+    "res://assets/sprites/chest/purple_body.png": {
+      "asset_id": "drawn.chest.purple.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "791291e718d8bb686c0a8b7ad2746f1e40de5a05cbd960806ae96179e9540098"
+    },
+    "res://assets/sprites/chest/purple_lid.png": {
+      "asset_id": "drawn.chest.purple.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "38f13bc0f7555b1389e2d18d26d355090d209947326f21b4621e9f276b1ae9b1"
+    },
+    "res://assets/sprites/chest/purple_open.png": {
+      "asset_id": "drawn.chest.purple.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "35a328be4657cdf9d2485459ae4a781e80e0369ab84e144806daded21be58347"
+    },
+    "res://assets/sprites/chest/wood_body.png": {
+      "asset_id": "drawn.chest.wood.body",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        30
+      ],
+      "physical_size": [
+        384,
+        120
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "8590510829bb97af003f96de59cf3d509f859d72ed339d0ba8008837a6b6bd86"
+    },
+    "res://assets/sprites/chest/wood_lid.png": {
+      "asset_id": "drawn.chest.wood.lid",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        42
+      ],
+      "physical_size": [
+        384,
+        168
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "888e41070d736a07d2038155a7e22f27e1643f1df2c3c3efd9b76962d80c6a13"
+    },
+    "res://assets/sprites/chest/wood_open.png": {
+      "asset_id": "drawn.chest.wood.open",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        96,
+        60
+      ],
+      "physical_size": [
+        384,
+        240
+      ],
+      "reference_scale": 2,
+      "pixel_pitch": 3,
+      "sha256": "885af83e58a1e7b3b63485edd045cf00ab36bf3d5f3b954b5084995d09ed9bd9"
+    },
     "res://assets/sprites/items/ambrosia.png": {
       "asset_id": "item.ambrosia",
       "source": "art/density3/assets/items/ambrosia.png",

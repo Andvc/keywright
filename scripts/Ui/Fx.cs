@@ -3,23 +3,62 @@ using Godot;
 namespace Keywright.Ui;
 
 /// <summary>
-/// Particle presets and pixel effects for the "juice". The sprite sheets (assets/sprites/fx: the burst, the spinning
-/// coin, a sparkle, a puff of dust) are rows of frames at their art size, shown at 2x or more.
+/// Particle presets and pixel effects for the "juice". Since 0.32 they keep to the 3px art's grain and light: particles
+/// are crisp squares one or two cells across (a cell is 1.5 of the layout's pixels), dwindling as they go; light is soft
+/// (an additive radial glow, not stacked discs), and rings and rays are thin. The sprite sheets (assets/sprites/fx: the
+/// spinning coin, a sparkle, a puff of dust) are rows of frames at their art size, shown at 2x or more; the burst is
+/// drawn here (0.31's generated burst sheet read as a splat of blobs over the finer art).
 /// </summary>
 public static class Fx
 {
-    const int BurstFrames = 8, CoinFrames = 6, SparkleFrames = 4, DustFrames = 5;
+    const int CoinFrames = 6, SparkleFrames = 4, DustFrames = 5;
 
-    static Texture2D _pixel, _coin, _sparkle;
-    static SpriteFrames _burst, _dust;
+    /// <summary>One cell of the 3px art, in layout pixels: the grain particles keep to.</summary>
+    public const float Cell = 1.5f;
 
-    /// <summary>A hard 2x2 square: scaled up, particles read as chunky pixels rather than soft dots.</summary>
+    static Texture2D _pixel, _coin, _sparkle, _glow;
+    static SpriteFrames _dust;
+    static Curve _dwindle;
+
+    /// <summary>A hard 2x2 square: at a particle scale of 0.75 it's one cell of the art, at 1.5 two.</summary>
     public static Texture2D Pixel => _pixel ??= MakeSquare(2);
 
     /// <summary>A gold coin spinning: <see cref="CoinFrames"/> frames in a row (a sprite's Hframes, or particles').</summary>
     public static Texture2D Coin => _coin ??= ArtTexture.Load("res://assets/sprites/fx/coin_spin.png");
 
     static Texture2D Sparkle => _sparkle ??= ArtTexture.Load("res://assets/sprites/fx/sparkle.png");
+
+    /// <summary>
+    /// A soft round light, white at the middle and nothing at the edge (64 across): drawn additive and tinted, it's how
+    /// light looks in the scene, with no rings of stacked discs.
+    /// </summary>
+    public static Texture2D Glow => _glow ??= new GradientTexture2D
+    {
+        Width = 64,
+        Height = 64,
+        Fill = GradientTexture2D.FillEnum.Radial,
+        FillFrom = new Vector2(0.5f, 0.5f),
+        FillTo = new Vector2(1f, 0.5f),
+        Gradient = new Gradient
+        {
+            Offsets = new[] { 0f, 0.3f, 0.65f, 1f },
+            Colors = new[] { Colors.White, new Color(1, 1, 1, 0.55f), new Color(1, 1, 1, 0.14f), new Color(1, 1, 1, 0) },
+        },
+    };
+
+    /// <summary>Particles shrink to a quarter of their size over their life, so a burst thins out instead of popping off.</summary>
+    static Curve Dwindle
+    {
+        get
+        {
+            if (_dwindle != null) return _dwindle;
+            _dwindle = new Curve();
+            _dwindle.AddPoint(new Vector2(0, 1));
+            _dwindle.AddPoint(new Vector2(0.6f, 0.75f));
+            _dwindle.AddPoint(new Vector2(1, 0.25f));
+            return _dwindle;
+        }
+    }
 
     /// <summary>Particles that play a row of frames (the coin's spin, a sparkle's twinkle) over their life.</summary>
     static CanvasItemMaterial Animated(int frames, bool additive) => new()
@@ -41,12 +80,15 @@ public static class Fx
 
     public static CanvasItemMaterial Additive() => new() { BlendMode = CanvasItemMaterial.BlendModeEnum.Add };
 
+    /// <summary>
+    /// Sparks: one- and two-cell squares, white-hot at first, then the colour, dwindling and fading as they fall.
+    /// </summary>
     public static CpuParticles2D Sparks(Color color, int amount, float speedMin, float speedMax,
         float spread = 70f, float lifetime = 1.1f, float gravity = 600f)
     {
         var ramp = new Gradient();
-        ramp.Offsets = new[] { 0f, 0.5f, 1f };
-        ramp.Colors = new[] { color.Lightened(0.7f), color, color with { A = 0f } };
+        ramp.Offsets = new[] { 0f, 0.15f, 0.6f, 1f };
+        ramp.Colors = new[] { color.Lightened(0.8f), color.Lightened(0.35f), color, color with { A = 0f } };
         return new CpuParticles2D
         {
             Emitting = false,
@@ -61,10 +103,11 @@ public static class Fx
             InitialVelocityMin = speedMin,
             InitialVelocityMax = speedMax,
             Gravity = new Vector2(0, gravity),
-            DampingMin = 20,
-            DampingMax = 80,
-            ScaleAmountMin = 1.5f,
-            ScaleAmountMax = 3f,
+            DampingMin = 30,
+            DampingMax = 110,
+            ScaleAmountMin = 0.75f,
+            ScaleAmountMax = 1.5f,
+            ScaleAmountCurve = Dwindle,
             ColorRamp = ramp,
         };
     }
@@ -83,9 +126,9 @@ public static class Fx
         AnimSpeedMax = 5,
         AnimOffsetMax = 1,
         Direction = Vector2.Up,
-        Spread = 50,
-        InitialVelocityMin = 450,
-        InitialVelocityMax = 850,
+        Spread = 45,
+        InitialVelocityMin = 420,
+        InitialVelocityMax = 780,
         Gravity = new Vector2(0, 1400),
         ScaleAmountMin = 2f,
         ScaleAmountMax = 2f,
@@ -94,15 +137,16 @@ public static class Fx
     /// <summary>A one-shot burst of sparks, and a few sparkles twinkling among them, that frees itself.</summary>
     public static void Burst(Node parent, Vector2 position, Color color, int amount = 40, float speed = 260f)
     {
-        var particles = Sparks(color, amount, speed * 0.4f, speed, spread: 180f, lifetime: 0.8f, gravity: 200f);
+        var particles = Sparks(color, amount, speed * 0.35f, speed, spread: 180f, lifetime: 0.8f, gravity: 200f);
         particles.Position = position;
         parent.AddChild(particles);
         particles.Emitting = true;
-        var twinkles = Sparks(color, Mathf.Max(4, amount / 6), speed * 0.2f, speed * 0.7f, spread: 180f, lifetime: 0.9f, gravity: 80f);
+        var twinkles = Sparks(color, Mathf.Max(3, amount / 8), speed * 0.2f, speed * 0.6f, spread: 180f, lifetime: 0.9f, gravity: 60f);
         twinkles.Texture = Sparkle;
         twinkles.Material = Animated(SparkleFrames, additive: true);
         twinkles.AnimSpeedMin = twinkles.AnimSpeedMax = 1;
-        twinkles.ScaleAmountMin = twinkles.ScaleAmountMax = 2f;
+        twinkles.ScaleAmountMin = twinkles.ScaleAmountMax = 1.5f;
+        twinkles.ScaleAmountCurve = null;
         twinkles.Position = position;
         parent.AddChild(twinkles);
         twinkles.Emitting = true;
@@ -118,7 +162,7 @@ public static class Fx
             SpriteFrames = DustPuff(),
             Position = position + new Vector2(0, -8 * (strength >= 1.5f ? 3 : 2)),
             Scale = Vector2.One * (strength >= 1.5f ? 3 : 2),
-            Modulate = new Color("#c9b79a") with { A = 0.85f },
+            Modulate = new Color("#c9b79a") with { A = 0.7f },
         };
         parent.AddChild(cloud);
         cloud.AnimationFinished += cloud.QueueFree;
@@ -126,24 +170,24 @@ public static class Fx
 
         var ramp = new Gradient();
         ramp.Offsets = new[] { 0f, 1f };
-        ramp.Colors = new[] { new Color("#c9b79a") with { A = 0.8f }, new Color("#c9b79a") with { A = 0f } };
+        ramp.Colors = new[] { new Color("#d2b688") with { A = 0.85f }, new Color("#9d8872") with { A = 0f } };
         var dust = new CpuParticles2D
         {
             Emitting = false,
             OneShot = true,
-            Amount = (int)(14 * strength) + 4,
+            Amount = (int)(12 * strength) + 4,
             Lifetime = 0.6f,
             Explosiveness = 1f,
             Texture = Pixel,
             Direction = Vector2.Up,
             Spread = 80,
             InitialVelocityMin = 60 * strength,
-            InitialVelocityMax = 200 * strength,
-            Gravity = new Vector2(0, 260),
+            InitialVelocityMax = 190 * strength,
+            Gravity = new Vector2(0, 300),
             DampingMin = 120,
             DampingMax = 240,
-            ScaleAmountMin = 2f,
-            ScaleAmountMax = 4f,
+            ScaleAmountMin = 0.75f,
+            ScaleAmountMax = 1.5f,
             ColorRamp = ramp,
             Position = position,
         };
@@ -152,23 +196,64 @@ public static class Fx
         parent.GetTree().CreateTimer(1.0).Timeout += dust.QueueFree;
     }
 
-    /// <summary>The burst (a star, a ring of light and debris, puffs), tinted, played once and freed.</summary>
+    /// <summary>
+    /// The burst when a lid flies off: a flare of soft light that swells and fades, a thin ring running out from it, a
+    /// star of fine rays and a spray of grains, all in the tint. <paramref name="scale"/> is how big (3: a chest's).
+    /// </summary>
     public static void Explosion(Node parent, Vector2 position, int scale, Color tint)
     {
-        var sprite = new AnimatedSprite2D
-        {
-            SpriteFrames = ExplosionFrames(),
-            Position = position,
-            Scale = Vector2.One * scale,
-            Modulate = tint,
-            Material = Additive(),
-        };
-        parent.AddChild(sprite);
-        sprite.AnimationFinished += sprite.QueueFree;
-        sprite.Play("burst");
+        float size = 40f * scale;
+        Flare(parent, position, tint, size, 0.55f);
+        Ring(parent, position, tint.Lightened(0.3f), size * 1.6f, 0.5f, 3f);
+        Star(parent, position, tint.Lightened(0.5f), 8, size * 1.3f, 0.4f);
+        Burst(parent, position, tint, 18 * scale, 110f * scale);
     }
 
-    static SpriteFrames ExplosionFrames() => _burst ??= Frames("res://assets/sprites/fx/burst.png", BurstFrames, "burst", 20);
+    /// <summary>Soft light swelling at a spot and fading: a lamp turned up and down. Returns it.</summary>
+    public static Sprite2D Flare(Node parent, Vector2 at, Color color, float radius = 80f, float duration = 0.5f, float alpha = 0.9f)
+    {
+        var flare = new Sprite2D
+        {
+            Texture = Glow,
+            Position = at,
+            Material = Additive(),
+            Modulate = color with { A = alpha },
+            Scale = Vector2.One * (radius * 0.6f / 32f),
+        };
+        parent.AddChild(flare);
+        var tween = flare.CreateTween().SetParallel();
+        tween.TweenProperty(flare, "scale", Vector2.One * (radius / 32f), duration * 0.35f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+        tween.TweenProperty(flare, "modulate:a", 0f, duration).SetEase(Tween.EaseType.In);
+        tween.Chain().TweenCallback(Callable.From(flare.QueueFree));
+        return flare;
+    }
+
+    /// <summary>A star of fine rays shooting out from a spot and fading, longer and shorter by turns: a glint.</summary>
+    public static void Star(Node parent, Vector2 at, Color color, int rays = 8, float length = 120f, float duration = 0.4f)
+    {
+        float t = 0;
+        var star = new Painter(p =>
+        {
+            float reach = length * (0.35f + 0.65f * Mathf.Ease(t, 0.4f));
+            for (int i = 0; i < rays; i++)
+            {
+                float a = Mathf.Tau * i / rays + Mathf.Pi / rays * 0.5f;
+                float l = i % 2 == 0 ? reach : reach * 0.55f;
+                var dir = Vector2.FromAngle(a);
+                var side = dir.Orthogonal() * Cell;
+                p.DrawPolygon(new[] { side, dir * l, -side }, new[] { color, color with { A = 0 }, color });
+            }
+        }) { Position = at, Material = Additive(), Rotation = 0.2f };
+        parent.AddChild(star);
+        var tween = star.CreateTween().SetParallel();
+        tween.TweenMethod(Callable.From<float>(v =>
+        {
+            t = v;
+            star.QueueRedraw();
+        }), 0f, 1f, duration);
+        tween.TweenProperty(star, "modulate:a", 0f, duration).SetEase(Tween.EaseType.In);
+        tween.Chain().TweenCallback(Callable.From(star.QueueFree));
+    }
 
     static SpriteFrames DustPuff() => _dust ??= Frames("res://assets/sprites/fx/dust.png", DustFrames, "puff", 12);
 
@@ -187,61 +272,75 @@ public static class Fx
         return frames;
     }
 
-    /// <summary>A beam of light standing on a spot (a rare find), fading out.</summary>
-    public static void Pillar(Node parent, Vector2 at, Color color, float width = 56f, float height = 560f, float duration = 1.1f)
+    /// <summary>
+    /// A beam of light standing on a spot (a rare find), fading out: a bright core a cell or two wide inside a softer
+    /// shaft, both fading to nothing toward the top.
+    /// </summary>
+    public static void Pillar(Node parent, Vector2 at, Color color, float width = 40f, float height = 460f, float duration = 1.0f)
     {
         var beam = new Painter(p =>
         {
-            // Three nested bands, brightest in the middle, each fading to nothing at the top.
-            for (int band = 3; band >= 1; band--)
-            {
-                float w = width * band / 3f;
-                var bottom = color with { A = 0.22f * (4 - band) };
+            void Band(float w, float a, Color c) =>
                 p.DrawPolygon(new[] { new Vector2(-w / 2, 0), new Vector2(w / 2, 0), new Vector2(w / 2, -height), new Vector2(-w / 2, -height) },
-                    new[] { bottom, bottom, color with { A = 0 }, color with { A = 0 } });
-            }
+                    new[] { c with { A = a }, c with { A = a }, c with { A = 0 }, c with { A = 0 } });
+            Band(width, 0.14f, color);
+            Band(width * 0.5f, 0.22f, color);
+            Band(Mathf.Max(2 * Cell, width * 0.12f), 0.55f, color.Lightened(0.6f));
         }) { Position = at, Material = Additive(), Scale = new Vector2(0.2f, 1f) };
         parent.AddChild(beam);
         var tween = beam.CreateTween();
-        tween.TweenProperty(beam, "scale:x", 1f, 0.12f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+        tween.TweenProperty(beam, "scale:x", 1f, 0.14f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
         tween.TweenProperty(beam, "modulate:a", 0f, duration).SetEase(Tween.EaseType.In);
         tween.TweenCallback(Callable.From(beam.QueueFree));
     }
 
-    /// <summary>A shockwave ring expanding from a spot.</summary>
-    public static void Ring(Node parent, Vector2 at, Color color, float radius = 160f, float duration = 0.45f, float width = 6f)
+    /// <summary>A thin ring of light running out from a spot and fading: a bright line in a soft band of its light.</summary>
+    public static void Ring(Node parent, Vector2 at, Color color, float radius = 160f, float duration = 0.45f, float width = 3f)
     {
-        float r = 8f;
-        var ring = new Painter(p => p.DrawArc(Vector2.Zero, r, 0, Mathf.Tau, 48, color, width)) { Position = at, Material = Additive() };
+        float r = 8f, w = width;
+        var ring = new Painter(p =>
+        {
+            p.DrawArc(Vector2.Zero, r, 0, Mathf.Tau, 72, color with { A = color.A * 0.22f }, w * 4);
+            p.DrawArc(Vector2.Zero, r, 0, Mathf.Tau, 72, color, w);
+        }) { Position = at, Material = Additive() };
         parent.AddChild(ring);
         var tween = ring.CreateTween().SetParallel();
         tween.TweenMethod(Callable.From<float>(v =>
         {
             r = v;
+            // It thins as it spreads.
+            w = Mathf.Max(Cell, width * (1f - 0.6f * (v - 8f) / Mathf.Max(1f, radius - 8f)));
             ring.QueueRedraw();
         }), 8f, radius, duration).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         tween.TweenProperty(ring, "modulate:a", 0f, duration).SetEase(Tween.EaseType.In);
         tween.Chain().TweenCallback(Callable.From(ring.QueueFree));
     }
 
-    /// <summary>Jagged bolts crackling out of a spot (an epic find), redrawn every frame for a moment.</summary>
-    public static void Lightning(Node parent, Vector2 at, Color color, int bolts = 5, float reach = 150f, float duration = 0.5f)
+    /// <summary>
+    /// Fine bolts crackling out of a spot (an epic find): thin, jagged on the art's grain, a white core in a coloured
+    /// edge, flickering for a moment; and a soft glow where they start.
+    /// </summary>
+    public static void Lightning(Node parent, Vector2 at, Color color, int bolts = 5, float reach = 110f, float duration = 0.45f)
     {
         var rng = new System.Random();
+        Flare(parent, at, color, reach * 0.8f, duration, 0.6f);
         var bolt = new Painter(p =>
         {
             for (int b = 0; b < bolts; b++)
             {
-                float angle = Mathf.Tau * b / bolts + (float)rng.NextDouble() * 0.8f;
+                float angle = Mathf.Tau * b / bolts + (float)rng.NextDouble() * 0.7f;
                 var dir = Vector2.FromAngle(angle);
-                var points = new Vector2[7];
+                var points = new Vector2[6];
                 for (int i = 0; i < points.Length; i++)
                 {
                     float t = i / (float)(points.Length - 1);
-                    points[i] = dir * reach * t + dir.Orthogonal() * ((float)rng.NextDouble() * 2 - 1) * 18f * t;
+                    var point = dir * reach * t * (0.75f + 0.25f * (float)rng.NextDouble())
+                        + dir.Orthogonal() * ((float)rng.NextDouble() * 2 - 1) * 12f * t;
+                    // On the art's grain, so a bolt steps like the pixels round it.
+                    points[i] = (point / Cell).Round() * Cell;
                 }
-                p.DrawPolyline(points, color.Lightened(0.5f), 4f);
-                p.DrawPolyline(points, Colors.White, 2f);
+                p.DrawPolyline(points, color.Lightened(0.3f) with { A = 0.6f }, 2 * Cell);
+                p.DrawPolyline(points, Colors.White, Cell);
             }
         }) { Position = at, Material = Additive() };
         parent.AddChild(bolt);
@@ -254,40 +353,57 @@ public static class Fx
     /// <summary>A soft glow that stays behind something and breathes. Returns it, so it can be removed.</summary>
     public static Node2D Aura(Node parent, Vector2 at, Color color, float radius = 70f)
     {
-        var aura = new Painter(p =>
+        var aura = new Sprite2D
         {
-            for (int i = 4; i >= 1; i--) p.DrawCircle(Vector2.Zero, radius * i / 4f, color with { A = 0.09f });
-        }) { Position = at, Material = Additive(), ZIndex = 4 };
+            Texture = Glow,
+            Position = at,
+            Material = Additive(),
+            Modulate = color with { A = 0.45f },
+            Scale = Vector2.One * (radius / 32f),
+            ZIndex = 4,
+        };
         parent.AddChild(aura);
         var pulse = aura.CreateTween().SetLoops();
-        pulse.TweenProperty(aura, "scale", Vector2.One * 1.15f, 0.7f).SetTrans(Tween.TransitionType.Sine);
-        pulse.TweenProperty(aura, "scale", Vector2.One * 0.9f, 0.7f).SetTrans(Tween.TransitionType.Sine);
+        pulse.TweenProperty(aura, "scale", Vector2.One * (radius * 1.12f / 32f), 0.8f).SetTrans(Tween.TransitionType.Sine);
+        pulse.TweenProperty(aura, "scale", Vector2.One * (radius * 0.92f / 32f), 0.8f).SetTrans(Tween.TransitionType.Sine);
         return aura;
     }
 
-    /// <summary>Slowly turning rays of light behind something (a legendary find). Returns them.</summary>
+    /// <summary>
+    /// Slowly turning rays of light behind something (a legendary find): fine, long and short by turns, over a soft
+    /// glow. Returns them.
+    /// </summary>
     public static Node2D Rays(Node parent, Vector2 at, Color color, float radius = 150f, int count = 12, float alpha = 0.35f)
     {
         var rays = new Painter(p =>
         {
+            p.DrawTextureRect(Glow, new Rect2(-radius * 0.6f, -radius * 0.6f, radius * 1.2f, radius * 1.2f), false, color with { A = alpha * 0.8f });
             for (int i = 0; i < count; i++)
             {
                 float a = i * Mathf.Tau / count;
-                p.DrawPolygon(new[] { Vector2.Zero, Vector2.FromAngle(a - 0.09f) * radius, Vector2.FromAngle(a + 0.09f) * radius },
+                float l = i % 2 == 0 ? radius : radius * 0.62f;
+                float half = i % 2 == 0 ? 0.05f : 0.035f;
+                p.DrawPolygon(new[] { Vector2.Zero, Vector2.FromAngle(a - half) * l, Vector2.FromAngle(a + half) * l },
                     new[] { color with { A = alpha }, color with { A = 0 }, color with { A = 0 } });
             }
         }) { Position = at, Material = Additive(), ZIndex = 3 };
         parent.AddChild(rays);
-        rays.CreateTween().SetLoops().TweenProperty(rays, "rotation", Mathf.Tau, 9f).AsRelative();
+        rays.CreateTween().SetLoops().TweenProperty(rays, "rotation", Mathf.Tau, 12f).AsRelative();
         return rays;
     }
 
-    /// <summary>A shower of many-coloured confetti (a find two or more qualities better than its chest).</summary>
+    /// <summary>
+    /// A shower of many-coloured confetti (a find two or more qualities better than its chest): small flakes, two cells
+    /// by one, tumbling as they fall.
+    /// </summary>
     public static void Confetti(Node parent, Vector2 at, int amount = 90)
     {
         var colours = new Gradient();
         colours.Offsets = new[] { 0f, 0.25f, 0.5f, 0.75f, 1f };
         colours.Colors = new[] { new Color("#ff6b6b"), new Color("#ffb52e"), new Color("#6fdc8c"), new Color("#4ea3ff"), new Color("#c792ff") };
+        var fade = new Gradient();
+        fade.Offsets = new[] { 0f, 0.8f, 1f };
+        fade.Colors = new[] { Colors.White, Colors.White, new Color(1, 1, 1, 0) };
         var confetti = new CpuParticles2D
         {
             Emitting = false,
@@ -295,19 +411,22 @@ public static class Fx
             Amount = amount,
             Lifetime = 2.2f,
             Explosiveness = 0.9f,
-            Texture = Pixel,
+            Texture = Flake,
             Direction = Vector2.Up,
-            Spread = 75,
-            InitialVelocityMin = 380,
-            InitialVelocityMax = 820,
-            Gravity = new Vector2(0, 700),
-            DampingMin = 60,
-            DampingMax = 140,
-            AngularVelocityMin = -360,
-            AngularVelocityMax = 360,
-            ScaleAmountMin = 2.5f,
-            ScaleAmountMax = 4.5f,
+            Spread = 70,
+            InitialVelocityMin = 340,
+            InitialVelocityMax = 720,
+            Gravity = new Vector2(0, 640),
+            DampingMin = 70,
+            DampingMax = 150,
+            AngularVelocityMin = -300,
+            AngularVelocityMax = 300,
+            AngleMin = 0,
+            AngleMax = 180,
+            ScaleAmountMin = 0.75f,
+            ScaleAmountMax = 1.25f,
             ColorInitialRamp = colours,
+            ColorRamp = fade,
             Position = at,
         };
         parent.AddChild(confetti);
@@ -315,9 +434,16 @@ public static class Fx
         parent.GetTree().CreateTimer(2.6).Timeout += confetti.QueueFree;
     }
 
-    static Texture2D MakeSquare(int size)
+    static Texture2D _flake;
+
+    /// <summary>A confetti flake: two cells by one, at a particle scale of 1.</summary>
+    static Texture2D Flake => _flake ??= MakeRect(3, 2);
+
+    static Texture2D MakeSquare(int size) => MakeRect(size, size);
+
+    static Texture2D MakeRect(int w, int h)
     {
-        var image = Image.CreateEmpty(size, size, false, Image.Format.Rgba8);
+        var image = Image.CreateEmpty(w, h, false, Image.Format.Rgba8);
         image.Fill(Colors.White);
         return ImageTexture.CreateFromImage(image);
     }

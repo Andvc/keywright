@@ -144,10 +144,40 @@ def apply_density(root, *, preserve_existing=False, check_only=False):
     if not check_only:
         encoded = json.dumps(metadata, indent=2, ensure_ascii=False) + "\n"
         metadata_path.write_text(encoded, encoding="utf-8")
-        (root / "assets/art_density.json").write_text(encoded, encoding="utf-8")
+        # The game's copy also lists what's drawn in code at the same density (the chest, 0.32), which this import
+        # doesn't make: those entries are kept as they are.
+        runtime = root / "assets/art_density.json"
+        drawn = {}
+        if runtime.exists():
+            drawn = {k: v for k, v in json.loads(runtime.read_text(encoding="utf-8"))["textures"].items() if v.get("drawn")}
+        game = dict(metadata, textures=dict(sorted({**textures, **drawn}.items())))
+        runtime.write_text(json.dumps(game, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         (metadata_path.parent / "import-report.json").write_text(json.dumps({"written": written, "skipped": skipped,
             "item_crop_adjustments": crop_adjustments}, indent=2) + "\n", encoding="utf-8")
     print(f"Density {'check' if check_only else 'import'}: {len(jobs)} sources, {written} runtime textures; skipped {skipped}.")
     if crop_adjustments:
         print(f"Preserved the complete silhouettes of {len(crop_adjustments)} items by expanding their legacy crop on whole logical units.")
     return metadata
+
+
+def check_drawn(root):
+    """The pictures drawn in code at the 3px density (the chest): each listed in assets/art_density.json is there, at
+    its 1440p size, on a whole 3px grid, and its size is its layout size at its scale (two pixels a layout pixel at
+    1440p). Raises on the first that isn't."""
+    root = Path(root)
+    entries = {k: v for k, v in json.loads((root / "assets/art_density.json").read_text(encoding="utf-8"))["textures"].items()
+               if v.get("drawn")}
+    for key, entry in entries.items():
+        path = root / key.removeprefix("res://")
+        with Image.open(path) as picture:
+            size = picture.size
+            pixels = picture.convert("RGBA")
+            pitch = entry["pixel_pitch"]
+            if size != tuple(entry["physical_size"]):
+                raise ValueError(f"{key}: {size}, expected {entry['physical_size']}")
+            if [n * entry["reference_scale"] * 2 for n in entry["logical_size"]] != list(size):
+                raise ValueError(f"{key}: logical {entry['logical_size']} doesn't make {size} at 1440p")
+            cells = pixels.resize((size[0] // pitch, size[1] // pitch), Image.Resampling.NEAREST)
+            if cells.resize(size, Image.Resampling.NEAREST).tobytes() != pixels.tobytes():
+                raise ValueError(f"{key}: not on a whole {pitch}px grid")
+    print(f"Drawn at density: {len(entries)} textures checked.")

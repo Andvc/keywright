@@ -487,8 +487,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   logical size (the art size the layout below was made for) and physical size. **Load every picture through
   `ArtTexture.Load`** (`UiKit.MakeSprite`, `MakeBackdrop`, `MakeItemIcon` and the rest do): it returns the dense texture
   reporting its logical size, so every position, scale and click area stays round 2's; a plain `GD.Load` of one draws it
-  two to eight times too big. Anything not in `art_density.json` (the chest, effects, the UI frames, a placeholder)
-  loads as it is. The game draws at the window's resolution (`canvas_items`), so a cell is exactly 3 pixels at 1440p and
+  two to eight times too big. The chest is drawn at the same density in code (0.32, `custom_art.chest3`; `python3
+  tools/import_art.py --chests-only` redraws it) and listed in `art_density.json` as `drawn`, which the density import
+  keeps and `--density-check` checks. Anything else not in it (effects, the UI frames, a placeholder) loads as it is. The game draws at the window's resolution (`canvas_items`), so a cell is exactly 3 pixels at 1440p and
   a fraction more or less elsewhere (2.25 at 1080p, 1.5 at 720p), the exception to square pixels the owner chose; a run
   holds a few hundred MB of these textures (`ArtTexture` keeps what it has loaded). The full-size originals live
   outside the repository, in the art pipeline's archive (`art/density3/README.md`), so a new picture at this density
@@ -527,8 +528,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   image into a finished asset and check it (a busy one fails: regenerate it simpler, never filter it; `validate.py
   --sheets` stacks whatever's delivered into counter mock-ups at every hour; `art/generated/DELIVERY.md` says how each
   batch was made). The chest isn't
-  generated: `tools/custom_art.py` draws it (`chest`, `chest_lock`: one silhouette for every finish), the bar for how
-  simple a sprite should be. `tools/import_art.py` builds `assets/` from it (needs Pillow): it copies each picture at
+  generated: `tools/custom_art.py` draws it (`chest3`, `chest3_lock`: one silhouette for every finish, at the 3px
+  density since 0.32: three boards to the dome, two straps, guards, bands and the mark, no grain and no outline), the bar
+  for how calm a picture should be. `tools/import_art.py` builds `assets/` from it (needs Pillow): it copies each picture at
   its art size, scales it by a whole number where a slot wants it pre-scaled (backgrounds and scenes drawn at 320x180,
   UI frames, curios, icons, the emblem and the Key), and cuts each portrait's face. Change the art there and re-run
   rather than hand-editing `assets/`. A new seller, thing, curio or upgrade needs its picture made the same way (its
@@ -540,14 +542,17 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - Keep pixels square: integer scales only, nearest filtering (project default); the 3px art's textures are the one
   exception (above), drawn at their logical size. Art sizes and how they're shown: the
   world (round 2's scene layers, figures 96x160, props) on a 320x180 grid at 4x, the appraisal sheet 216x320 at 2x;
-  story scenes 320x180, which the importer doubles to 640x360, shown at 2x; the chest 48 wide (lid 21, body 15, open
-  30), built at 2x and shown at 2x (`ChestView`), with its lock maker's hasp and plate
+  story scenes 320x180, which the importer doubles to 640x360, shown at 2x; the chest 128 cells wide at the 3px
+  density (lid 56, body 40, open 80; each cell 3x3 pixels at 1440p), reported to the layout as 96 wide and shown at 2x
+  (`ChestView`), with its lock maker's hasp and plate
   laid over it (`ChestView.Lock`) and its own finish for the Crown Chest (`crown`); full figures 96x160 at 4x at the
   counter and in story scenes, and their head crops, 76x76 at 1x in the notebook and Bram's tips and 38x38
   (`sprites/sellers/faces/`) in the queue, the notebook's rows and, at 3x, the character cards; things 32x32 (trimmed) at 2x on the table and the
   shelf, 1x in small slots; curios 28x28 at 2x; upgrade icons 24x24 at 2x (1x on the slip); kind icons 16x16 at 2x;
   UI frames 12x12 at 2x (`UiKit.Px`, 4-pixel margins); the lock faces 160x160 at 2x under the dial (its ring at
-  `LockpickPhase.Radius`); effects at 2-4x (`Fx`); the logo 320x72 at 2x; the window's and the .exe's icons
+  `LockpickPhase.Radius`); effects (`Fx`) keep to the 3px art's grain since 0.32 (particles one or two cells, `Fx.Cell`;
+  light as a soft radial glow, `Fx.Glow`; thin rings and rays; flashes tinted and scaled to the find), the coin, sparkle
+  and dust sheets at 2-3x; the logo 320x72 at 2x; the window's and the .exe's icons
   (`assets/ui/icon.png`, `icon.ico`, which the Windows export writes into the exe) from the app icon drawn for each
   size. Kenney Mini at multiples of 8px (`UiKit.MakeLabel` snaps sizes;
   min 16).

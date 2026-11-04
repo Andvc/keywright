@@ -67,7 +67,7 @@ public partial class OpeningPhase : Phase
         string skin = _purchase.Visit.Seller == Story.VaultSeller ? "crown" : _purchase.Chest.Skin;
         _chest = Add(new ChestView { Position = SeamPos, Skin = skin, GlowColor = Palette.Of(_colour) });
         // The burst is in the chest's own colour: what's better than that is for the things inside to show.
-        _sparks = Add(Fx.Sparks(Palette.Of(_colour), 140, 280, 820, spread: 70f, lifetime: 1.4f));
+        _sparks = Add(Fx.Sparks(Palette.Of(_colour), 60 + 20 * (int)_colour, 240, 720, spread: 60f, lifetime: 1.3f));
         _sparks.Position = SeamPos;
         // Darkens the room while a surprise climbs.
         _dim = Add(new ColorRect { Color = new Color(0, 0, 0, 0), MouseFilter = Control.MouseFilterEnum.Ignore }.Place(-100, -100, 1480, 920));
@@ -173,8 +173,9 @@ public partial class OpeningPhase : Phase
         Sfx.PlayGroup("land", 0.6f, 2);
 
         Game.HitStop(0.08 + 0.02 * tier);
-        Game.Shake(0.45f + 0.08f * tier);
-        Game.Flash(color.Lightened(0.6f), 0.85f, 0.45f);
+        Game.Shake(0.4f + 0.08f * tier);
+        // Light, not a white-out: the room brightens in the chest's colour, more the finer it is.
+        Game.Flash(color.Lightened(0.5f), 0.22f + 0.07f * tier, 0.4f);
         // The camera snaps back past where it started, then settles.
         CreateTween().TweenMethod(Callable.From<float>(z => Game.Zoom(z, SeamPos)), 1.14f, 1f, 0.45f)
             .SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
@@ -186,10 +187,12 @@ public partial class OpeningPhase : Phase
         FlingLid(_chest.DetachLid());
         _chest.ShowOpen();
         Fx.Explosion(this, SeamPos + new Vector2(0, -28), 3, color.Lightened(0.3f));
+        // The inside lights up: a glow out of the open box, fading as things come out of it.
+        Fx.Flare(this, Mouth, color, 160f + 30f * tier, 1.2f, 0.5f + 0.08f * tier);
         Fx.Dust(this, SeamPos + new Vector2(-90, 70), 1.5f);
         Fx.Dust(this, SeamPos + new Vector2(90, 70), 1.5f);
         _sparks.Emitting = true;
-        CreateTween().TweenMethod(Callable.From<float>(v => _raysAlpha = v), 0f, 0.15f + 0.06f * tier, 0.4f);
+        CreateTween().TweenMethod(Callable.From<float>(v => _raysAlpha = v), 0f, 0.1f + 0.05f * tier, 0.5f);
         Game.Moment("07_burst", 0.3);
 
         await Wait(0.45);
@@ -439,7 +442,7 @@ public partial class OpeningPhase : Phase
             sprite.Modulate = color.Lightened(0.5f);
             sprite.CreateTween().TweenProperty(sprite, "modulate", Colors.White, 0.4f);
             aura.Modulate = color;
-            Game.Flash(color.Lightened(0.4f), 0.45f + 0.15f * s, 0.3f);
+            Game.Flash(color.Lightened(0.4f), 0.25f + 0.1f * s, 0.3f);
             Game.Shake(0.25f + 0.15f * s);
             Fx.Ring(this, HoverPos, color, 140f + 60f * s);
             Fx.Burst(this, HoverPos, color, 40 + 30 * s, 300f + 80f * s);
@@ -671,7 +674,7 @@ public partial class OpeningPhase : Phase
         if (item.Fake || item.Broken) return;
         if (rarity >= Rarity.Uncommon)
         {
-            var sparkles = Fx.Sparks(color, (int)(18 * big), 60, 160, spread: 40f, lifetime: 1.2f, gravity: -60f);
+            var sparkles = Fx.Sparks(color, (int)(14 * big), 50, 140, spread: 40f, lifetime: 1.2f, gravity: -60f);
             sparkles.Position = at;
             AddChild(sparkles);
             sparkles.Emitting = true;
@@ -680,27 +683,28 @@ public partial class OpeningPhase : Phase
         }
         if (rarity >= Rarity.Rare)
         {
-            Fx.Pillar(this, new Vector2(at.X, LandY), color, 50f * big, 560f, 0.9f + 0.2f * stepsUp);
-            Fx.Ring(this, at, color, 110f * big);
+            Fx.Pillar(this, new Vector2(at.X, LandY), color, 40f * big, 460f, 0.9f + 0.2f * stepsUp);
+            Fx.Ring(this, at, color, 100f * big);
             Sfx.Play("chime", 1.1f, -6);
         }
         if (rarity >= Rarity.Epic)
         {
-            Fx.Lightning(this, at, color, 5 + 2 * stepsUp, 130f * big);
-            Fx.Aura(this, at, color, 64f);
+            Fx.Lightning(this, at, color, 4 + 2 * stepsUp, 80f * big);
+            Fx.Aura(this, at, color, 56f);
             Sfx.Play("zap", 1f, -6);
             Sfx.Play("boom", 1f, -4);
             Game.Shake(0.25f * big);
         }
         if (rarity >= Rarity.Legendary)
         {
-            Fx.Rays(this, at, color, 150f);
-            var coins = Fx.Coins((int)(18 * big));
+            Fx.Rays(this, at, color, 150f, 12, 0.3f);
+            Fx.Star(this, at, color.Lightened(0.6f), 8, 120f, 0.5f);
+            var coins = Fx.Coins((int)(16 * big));
             coins.Position = at;
             AddChild(coins);
             coins.Emitting = true;
             GetTree().CreateTimer(2.2).Timeout += coins.QueueFree;
-            Game.Flash(color.Lightened(0.5f), 0.6f, 0.4f);
+            Game.Flash(color.Lightened(0.5f), 0.35f, 0.4f);
             Game.HitStop(0.12);
             Sfx.Play("fanfare", 1f, -4);
         }
@@ -714,12 +718,12 @@ public partial class OpeningPhase : Phase
         FloatText(banner, at + new Vector2(0, -110), color, stepsUp == 1 ? 24 : 32);
         Sfx.Play("reveal_big", 1f + 0.1f * stepsUp, -3);
         if (stepsUp < 2) return;
-        // Two or more: time slows, the room flashes white, confetti, a fanfare and a ring that fills the screen.
+        // Two or more: time slows, the room flashes in the find's light, confetti, a fanfare and a ring that fills the screen.
         Game.HitStop(0.2 + 0.1 * stepsUp);
-        Game.Flash(Colors.White, 0.9f, 0.6f);
-        Fx.Confetti(this, at, 70 + 40 * stepsUp);
-        Fx.Ring(this, at, color, 700f, 0.8f, 10f);
-        Fx.Rays(this, at, color, 260f, 16, 0.25f);
+        Game.Flash(color.Lightened(0.6f), 0.25f + 0.05f * stepsUp, 0.6f);
+        Fx.Confetti(this, at, 50 + 25 * stepsUp);
+        Fx.Ring(this, at, color, 640f, 0.8f, 4f);
+        Fx.Rays(this, at, color, 260f, 16, 0.2f);
         Sfx.Play("fanfare", 0.9f + 0.1f * stepsUp, -2);
         Sfx.Play("win", 1f, -4);
         Game.Moment($"07_surprise_{stepsUp}", 0.3);
@@ -1110,14 +1114,15 @@ public partial class OpeningPhase : Phase
     {
         if (_raysAlpha <= 0.01f) return;
         var c = Palette.Of(_colour);
-        const int count = 14;
+        const int count = 16;
         for (int i = 0; i < count; i++)
         {
             float a = _raysAngle + i * Mathf.Tau / count;
-            var points = new[] { Vector2.Zero, Vector2.FromAngle(a - 0.08f) * 720, Vector2.FromAngle(a + 0.08f) * 720 };
+            float length = i % 2 == 0 ? 560 : 340, half = i % 2 == 0 ? 0.035f : 0.025f;
+            var points = new[] { Vector2.Zero, Vector2.FromAngle(a - half) * length, Vector2.FromAngle(a + half) * length };
             var colors = new[] { c with { A = _raysAlpha }, c with { A = 0f }, c with { A = 0f } };
             p.DrawPolygon(points, colors);
         }
-        for (int i = 4; i >= 1; i--) p.DrawCircle(Vector2.Zero, 30 + i * 26, c with { A = _raysAlpha * 0.18f });
+        p.DrawTextureRect(Fx.Glow, new Rect2(-150, -150, 300, 300), false, c with { A = _raysAlpha * 1.4f });
     }
 }

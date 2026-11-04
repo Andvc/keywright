@@ -73,10 +73,11 @@ public partial class SongReveal : Node2D
 
         // The room goes dark, a red glow gathers on the chest, and the song begins.
         _dark.CreateTween().TweenProperty(_dark, "color:a", 0.88f, 0.6f);
-        var vignette = new Painter(p =>
+        var vignette = new Sprite2D
         {
-            for (int i = 6; i >= 1; i--) p.DrawCircle(Vector2.Zero, 120f * i, red with { A = 0.035f });
-        }) { Position = Hover, Material = Fx.Additive(), Modulate = Colors.Transparent };
+            Texture = Fx.Glow, Position = Hover, Material = Fx.Additive(), Scale = Vector2.One * (720f / 32f),
+            SelfModulate = red with { A = 0.3f }, Modulate = Colors.Transparent,
+        };
         AddChild(vignette);
         vignette.CreateTween().TweenProperty(vignette, "modulate", Colors.White, 1.2f);
         Say(_intro, _from + new Vector2(0, -130), red, 32);
@@ -121,7 +122,7 @@ public partial class SongReveal : Node2D
 
         // The hit: white, then red; the room shakes, three shockwaves, sparks and lightning, and the banner slams in.
         Game.HitStop(0.25);
-        Game.Flash(Colors.White, 0.8f, 0.5f);
+        Game.Flash(red.Lightened(0.55f), 0.4f, 0.5f);
         Game.Shake(0.55f);
         Sfx.Play("reveal_big", 0.7f, 0);
         Sfx.Play("fanfare", 0.8f, -2);
@@ -131,7 +132,7 @@ public partial class SongReveal : Node2D
             int ring = i;
             GetTree().CreateTimer(0.12 * i).Timeout += () =>
             {
-                if (Alive) Fx.Ring(this, Hover, ring == 1 ? gold : red, 760f - 140f * ring, 1.0f, 12f - 3f * ring);
+                if (Alive) Fx.Ring(this, Hover, ring == 1 ? gold : red, 760f - 140f * ring, 1.0f, 6f - 1.5f * ring);
             };
         }
         Fx.Burst(this, Hover, red, 160, 520f);

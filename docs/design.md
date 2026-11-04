@@ -1224,6 +1224,23 @@ Nothing moves: each texture is stored at its 1440p size and tells the layout the
 pixels at 1440p, and a little more or less at other sizes (2.25 at 1080p, 1.5 at 720p); the chest, the effects and
 the UI frames keep round 2's grain.
 
+**0.32: the chest, the opening and Kit's face.** The owner asked for a chest with more refined detail at a higher
+resolution, still clean and restrained, and for openings that don't look rough. The chest is drawn again in code at the
+3px art's grain (`custom_art.chest3`: 128 cells wide where round 2's was 48, so it's as fine as everything round it),
+the same silhouette and finishes: three boards to the lid's dome, lit on top and shaded where it curves under, two on
+the box, each with a lit lip and a shaded foot; two straps with a pair of rivets each, guards on the dome's corners,
+brackets at the feet, a band at the seam and one round the base, and the ward mark cut into the middle board (a jewel in
+the finer finishes, the crown on the King's). No grain, no scratches, no outline: 0.23's lesson (six times as busy as
+the calm chest) still holds. The lock makers' hasps and plates were redrawn to match. Nothing that places the chest
+moved: the importer reports each picture's old layout size (`assets/art_density.json`, `drawn`). The opening kept every
+step and changed how it looks: the white-out flashes became light in the find's colour, scaled to its quality; the
+generated burst sheet (a splat of blobs) became a flare, a thin ring, a star of fine rays and a spray of one- and
+two-cell sparks; light is a soft glow rather than stacked discs; rays, rings, lightning and confetti are finer. The
+counter, the Guild's night, the run's end and the Heartsong's reveal use the same effects, so they changed with it.
+Part of Kit's face read as unnaturally dark: the 3px conversion had snapped her freckles and blush to the darkest skin
+tone and let two wood colours into her skin and eye whites. They were corrected cell by cell at the owner's request on
+2026-11-04 (245 cells, no new shapes: `art/density3/README.md`, and the amendment in `approval.json`).
+
 ## Title, saves and settings
 
 The game opens on a title screen (Continue, New game, Collection, Settings, Quit, Credits) over your shop as you left

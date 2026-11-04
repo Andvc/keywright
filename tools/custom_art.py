@@ -1585,8 +1585,9 @@ def portraits():
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-# The chest: a warded strongbox, 48 art pixels wide (the game's 96 is this at 2x: four screen pixels to a pixel),
-# drawn calm on purpose. Big flat areas, one board line, two raised straps with a rivet or two, a band at the seam, a
+# The chest as round 2 drew it (0.25): a warded strongbox, 48 art pixels wide, drawn calm on purpose. Since 0.32 the
+# game shows the same chest at the 3px density (chest3, below); this one only makes the window icon when the drawn
+# app icon is missing (import_art.build_brand). Big flat areas, one board line, two raised straps with a rivet or two, a band at the seam, a
 # mark on the lid, corner brackets at the feet, and nothing else: it's the thing the player looks at most, so it has
 # to be easy to look at (0.25 replaced 0.23's generated chests, whose grain, scratches and rivets made them six times
 # as busy). One design, mirrored from its left half, so every finish shares one silhouette; a finish is a colour swap.
@@ -1760,6 +1761,398 @@ def chest_lock(maker):
     _stamp(lid, CHEST_HASP, c, 20, 17)
     _stamp(body, CHEST_PLATES[maker], c, 20, 0)
     return lid, body
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The chest at the 3px density (0.32): what the game shows. The same strongbox and silhouette as the calm 48-pixel one
+# above, drawn again at the 3px art's grain (0.31): 128 cells wide, each cell 3x3 screen pixels at 2560x1440 (1.5 of the
+# layout's pixels), so it sits in the scene at the same size with the same fineness as everything round it. Finer
+# detail, still calm: three boards to the lid's dome, lit on top and shaded where it curves under; two on the box; each
+# board with a lit lip and a shaded foot; two iron straps with a pair of rivets each; corner guards on the dome, brackets
+# at the feet, a band at the seam and one round the base; the ward mark cut into the middle board. No grain, no
+# scratches, no outline (the 3px art has none: edges are light against shade, lit from the upper left). Parts: the lid
+# (56 rows, the seam at its foot), the box (40) and the open box (80: the rims and the inside over the box). The lock
+# makers' hasp and plate sit on the lock seat in the middle: the lid's x 55-72, rows 43-55; the box's x 52-75, rows 0-21.
+# import_art.build_chests scales each cell to 3x3 pixels and tells the game each picture's layout size
+# (assets/art_density.json), so ChestView and everything that places the chest stay as they were.
+
+CHEST3_W, CHEST3_LID, CHEST3_BODY, CHEST3_OPEN = 128, 56, 40, 80
+CHEST3_STRAPS = ((19, 30), (98, 109))
+
+# Each finish (Chest.Skin: the colour promises the quality inside): its material T L M D S (light to dark), its
+# fittings w l m d (light to dark), its mark r e g (the carving, a jewel and the jewel's glint: none for plain wood) and
+# its inside i j k (lining, shade, depth). All from the master palette (art/palette).
+CHEST3_FINISHES = {
+    "wood": dict(T="#c9a075", L="#ad7d52", M="#8e5b37", D="#6e3d22", S="#4b2212",
+                 w="#93a2b6", l="#626d80", m="#383d48", d="#2b2236",
+                 r="#6e3d22", e=None, g=None, i="#6e3d22", j="#4b2212", k="#280c06", mark="ward"),
+    "green": dict(T="#62d46f", L="#58a04c", M="#0e7734", D="#004e22", S="#002511",
+                  w="#fbeda4", l="#f2c14e", m="#c29026", d="#a06500",
+                  r="#004e22", e="#62d46f", g="#d5f1a7", i="#004e22", j="#002511", k="#0b0810", mark="ward"),
+    "blue": dict(T="#4ea3ff", L="#2164a7", M="#143771", D="#081137", S="#0b0810",
+                 w="#ccd9e8", l="#93a2b6", m="#626d80", d="#383d48",
+                 r="#081137", e="#68c7fd", g="#a7f8ff", i="#143771", j="#081137", k="#0b0810", mark="ward"),
+    "purple": dict(T="#b46bff", L="#6c48a5", M="#3f2671", D="#180939", S="#0b0810",
+                   w="#ffffff", l="#ccd9e8", m="#93a2b6", d="#626d80",
+                   r="#180939", e="#c792ff", g="#fdd0ff", i="#6c48a5", j="#3f2671", k="#0b0810", mark="ward"),
+    "gold": dict(T="#fbeda4", L="#f2c14e", M="#c29026", D="#a06500", S="#773f00",
+                 w="#f2c14e", l="#c29026", m="#a06500", d="#773f00",
+                 r="#773f00", e="#ff4058", g="#ff9e92", i="#c7414e", j="#9c1839", k="#3b0014", mark="ward"),
+    # The Stranger's: black iron, chained shut (no lock: it's sealed).
+    "black": dict(T="#554b69", L="#3b3150", M="#2b2236", D="#1a1420", S="#0b0810",
+                  w="#93a2b6", l="#626d80", m="#383d48", d="#2b2236",
+                  r="#1a1420", e=None, g=None, i="#2b2236", j="#1a1420", k="#0b0810", mark=None),
+    # King Aldric's own: royal crimson and gold, the crown on its lid.
+    "crown": dict(T="#ff4058", L="#c7414e", M="#9c1839", D="#6c0026", S="#3b0014",
+                  w="#fbeda4", l="#f2c14e", m="#c29026", d="#a06500",
+                  r="#6c0026", e="#ff4058", g="#ffbcc0", i="#9c1839", j="#6c0026", k="#3b0014", mark="crown"),
+}
+CHEST3_CHAIN = dict(w="#ccd9e8", l="#93a2b6", m="#626d80", d="#383d48")
+
+# The lock makers' overlays: the hasp's metal (w l m d), the plate (q its lit edge, p, n its shade), the keyhole (k) and
+# a maker's mark (a: the Guild's eye either side of the keyhole, the dwarves' four studs; none on a rusty old lock).
+CHEST3_LOCKS = {
+    "rusty": dict(w="#93a2b6", l="#626d80", m="#383d48", d="#2b2236", q="#ad7d52", p="#8e5b37", n="#4b2212", k="#0b0810", a=None),
+    "guild": dict(w="#ccd9e8", l="#93a2b6", m="#626d80", d="#383d48", q="#2164a7", p="#143771", n="#081137", k="#0b0810", a="#f2c14e"),
+    "dwarven": dict(w="#fbeda4", l="#f2c14e", m="#c29026", d="#773f00", q="#c29026", p="#a06500", n="#492100", k="#0b0810", a="#fbeda4"),
+}
+
+# A chain's link face-on (8 cells: lit on its upper left, shaded on its lower right, its hole showing what's behind),
+# then one edge-on; repeating every 12 cells.
+_LINK = ["..llll..", ".lw..ml.", "lw....md", "l......d", "l......d", "lm....md", ".mm..dd.", "..mddd.."]
+_EDGE = "...ld..."
+
+
+class Cells:
+    """A grid of palette colours (hex strings), one per cell of the 3px art; None is transparent."""
+
+    def __init__(self, w, h):
+        self.w, self.h = w, h
+        self.c = [[None] * w for _ in range(h)]
+
+    def get(self, x, y):
+        return self.c[y][x] if 0 <= x < self.w and 0 <= y < self.h else None
+
+    def set(self, x, y, col):
+        if 0 <= x < self.w and 0 <= y < self.h and col is not None:
+            self.c[y][x] = col
+
+    def fill(self, x0, y0, x1, y1, col):
+        for y in range(max(0, y0), min(self.h, y1)):
+            for x in range(max(0, x0), min(self.w, x1)):
+                self.c[y][x] = col
+
+    def recolour(self, x0, y0, x1, y1, col):
+        """Like fill, but only over what's already drawn: the silhouette stays."""
+        for y in range(max(0, y0), min(self.h, y1)):
+            for x in range(max(0, x0), min(self.w, x1)):
+                if self.c[y][x] is not None:
+                    self.c[y][x] = col
+
+    def poly(self, points, col):
+        mask = Image.new("1", (self.w, self.h), 0)
+        ImageDraw.Draw(mask).polygon(points, fill=1)
+        px = mask.load()
+        for y in range(self.h):
+            for x in range(self.w):
+                if px[x, y]:
+                    self.c[y][x] = col
+
+    def disc(self, cx, cy, r, col):
+        for y in range(int(cy - r - 1), int(cy + r + 2)):
+            for x in range(int(cx - r - 1), int(cx + r + 2)):
+                if (x + 0.5 - cx) ** 2 + (y + 0.5 - cy) ** 2 <= r * r:
+                    self.set(x, y, col)
+
+    def clip(self, keep):
+        for y in range(self.h):
+            for x in range(self.w):
+                if not keep(x, y):
+                    self.c[y][x] = None
+
+    def paste(self, other, ox, oy):
+        for y in range(other.h):
+            for x in range(other.w):
+                if other.c[y][x] is not None:
+                    self.set(ox + x, oy + y, other.c[y][x])
+
+    def image(self):
+        """One pixel a cell (import_art scales each to 3x3)."""
+        img = Image.new("RGBA", (self.w, self.h), (0, 0, 0, 0))
+        px = img.load()
+        for y in range(self.h):
+            for x in range(self.w):
+                if self.c[y][x] is not None:
+                    px[x, y] = _rgba(self.c[y][x])
+        return img
+
+
+def _lid_shape(x, y):
+    """The lid's silhouette: square below, its top corners rounded where the dome turns away."""
+    rx, ry, w = 15, 11, CHEST3_W
+    for cx in (x, w - 1 - x):
+        if cx < rx and y < ry:
+            dx, dy = (rx - cx - 0.5) / rx, (ry - y - 0.5) / ry
+            if dx * dx + dy * dy > 1:
+                return False
+    return True
+
+
+def _board(g, y0, y1, lip, face, foot):
+    """A board across the chest: a lit lip along its top, its face, a shaded foot where it meets the next."""
+    g.recolour(0, y0, g.w, y1, face)
+    g.recolour(0, y0, g.w, y0 + 1, lip)
+    g.recolour(0, y1 - 1, g.w, y1, foot)
+
+
+def _sides(g, y0, y1, f):
+    """Lit from the upper left: the left edge catches the light, the right edge turns into shade."""
+    g.recolour(0, y0, 2, y1, f["L"])
+    g.recolour(0, y0, 1, y1, f["T"])
+    g.recolour(g.w - 2, y0, g.w, y1, f["D"])
+    g.recolour(g.w - 1, y0, g.w, y1, f["S"])
+
+
+def _rivet(g, cx, cy, f, r=2.0):
+    """A domed rivet: its face, a glint at the top left, shade at the bottom right."""
+    x0, y0 = int(round(cx - r)), int(round(cy - r))
+    n = max(3, int(round(2 * r)))
+    for y in range(n):
+        for x in range(n):
+            if n > 3 and x in (0, n - 1) and y in (0, n - 1):
+                continue
+            g.set(x0 + x, y0 + y, f["d"] if x == n - 1 or y == n - 1 else f["w"] if x == 0 or y == 0 else f["l"])
+
+
+def _strap(g, x0, x1, y0, y1, f, rivets=(), lit_to=0):
+    """An iron strap over the boards: a lit left edge, a shaded right one, rivets; brighter where the dome faces up."""
+    for y in range(y0, y1):
+        for x in range(x0, x1):
+            if g.get(x, y) is None:
+                continue
+            top = y < lit_to
+            col = f["l"] if top else f["m"]
+            if x == x0:
+                col = f["w"] if top else f["l"]
+            elif x == x1 - 1:
+                col = f["m"] if top else f["d"]
+            g.c[y][x] = col
+    for ry in rivets:
+        _rivet(g, (x0 + x1) / 2, ry, f)
+
+
+def _band(g, y0, y1, f, rivets=()):
+    """A metal band across the chest: a bright top edge, its face, a dark foot."""
+    w = g.w
+    g.recolour(0, y0, w, y1, f["m"])
+    g.recolour(0, y0, w, y0 + 1, f["w"])
+    g.recolour(0, y0 + 1, w, y0 + 3, f["l"])
+    g.recolour(0, y1 - 2, w, y1, f["d"])
+    g.recolour(0, y0, 1, y1, f["l"])
+    g.recolour(w - 1, y0, w, y1, f["d"])
+    for x in rivets:
+        _rivet(g, x, (y0 + y1) / 2, f, r=1.6)
+
+
+def _corner_guards(g, f):
+    """Triangular iron guards over the lid's top corners, each held by a rivet."""
+    w = g.w
+    for left in (True, False):
+        for y in range(16):
+            for x in range(15):
+                cx = x if left else w - 1 - x
+                t = x / 15 + y / 16
+                if g.get(cx, y) is None or t >= 1:
+                    continue
+                if t >= 0.87:
+                    col = f["d"]                  # the guard's inner edge, standing proud of the board
+                elif left and (x <= 1 or y <= 1):
+                    col = f["w"]
+                elif y <= 1:
+                    col = f["l"]
+                elif not left and x <= 1:
+                    col = f["d"]
+                else:
+                    col = f["l"] if left else f["m"]
+                g.c[y][cx] = col
+        _rivet(g, 5 if left else w - 6, 5, f, r=1.6)
+
+
+def _mark(g, f, cx=64, cy=23):
+    if f["mark"] == "ward":
+        # The ward mark: a diamond cut into the middle board, with a jewel set in it in the finer finishes.
+        g.poly([(cx, cy - 11), (cx + 11, cy), (cx, cy + 11), (cx - 11, cy)], f["r"])
+        g.poly([(cx, cy - 9), (cx + 9, cy), (cx, cy + 9), (cx - 9, cy)], f["L"] if f["e"] else f["T"])
+        g.poly([(cx + 1, cy - 8), (cx + 9, cy), (cx, cy + 9), (cx - 1, cy + 8)], f["M"] if f["e"] else f["L"])
+        if f["e"]:
+            g.poly([(cx, cy - 5), (cx + 5, cy), (cx, cy + 5), (cx - 5, cy)], f["S"])
+            g.poly([(cx, cy - 4), (cx + 4, cy), (cx, cy + 4), (cx - 4, cy)], f["e"])
+            g.poly([(cx, cy - 4), (cx, cy), (cx - 4, cy)], f["g"])
+        else:
+            g.poly([(cx, cy - 4), (cx + 4, cy), (cx, cy + 4), (cx - 4, cy)], f["r"])
+    elif f["mark"] == "crown":
+        # The Aldric crown: three points with a pearl on each, on a band with a ruby.
+        g.poly([(cx - 13, cy + 4), (cx - 13, cy - 7), (cx - 7, cy - 1), (cx, cy - 11), (cx + 7, cy - 1),
+                (cx + 13, cy - 7), (cx + 13, cy + 4)], f["d"])
+        g.poly([(cx - 12, cy + 3), (cx - 12, cy - 5), (cx - 7, cy + 1), (cx, cy - 9), (cx + 7, cy + 1),
+                (cx + 12, cy - 5), (cx + 12, cy + 3)], f["l"])
+        g.fill(cx - 12, cy + 3, cx + 13, cy + 8, f["m"])
+        g.fill(cx - 12, cy + 3, cx + 13, cy + 4, f["w"])
+        g.fill(cx - 12, cy + 7, cx + 13, cy + 8, f["d"])
+        for x, y in ((cx - 12, cy - 6), (cx, cy - 10), (cx + 12, cy - 6)):
+            g.disc(x + 0.5, y + 0.5, 1.6, f["w"])
+        g.fill(cx - 2, cy + 4, cx + 3, cy + 7, f["e"])
+        g.set(cx - 1, cy + 4, f["g"])
+
+
+def _chain_down(g, x0, y0, y1, phase=0):
+    for y in range(y0, y1):
+        k = (y - y0 + phase) % 12
+        row = _LINK[k] if k < 8 else _EDGE
+        for i, ch in enumerate(row):
+            if ch != ".":
+                g.set(x0 + i, y, CHEST3_CHAIN[ch])
+
+
+def _chain_across(g, y0, x0, x1):
+    for x in range(x0, x1):
+        k = (x - x0) % 12
+        for i in range(8):
+            ch = _LINK[i][k] if k < 8 else _EDGE[i]
+            if ch != ".":
+                g.set(x, y0 + i, CHEST3_CHAIN[ch])
+
+
+def _chest3_lid(finish):
+    f = CHEST3_FINISHES[finish]
+    g = Cells(CHEST3_W, CHEST3_LID)
+    g.fill(0, 0, g.w, g.h, f["M"])
+    g.clip(_lid_shape)
+    # The dome's three boards: lightest on top where it faces the sky, darkest where it curves under.
+    _board(g, 0, 15, f["T"], f["T"], f["L"])
+    g.recolour(0, 0, g.w, 1, f["L"])           # the dome's far edge, turning away
+    _board(g, 15, 30, f["T"], f["L"], f["M"])
+    _board(g, 30, 44, f["L"], f["M"], f["D"])
+    g.recolour(0, 41, g.w, 44, f["S"])          # the lid's lip, in its own shadow
+    _sides(g, 1, 41, f)
+    _band(g, 44, CHEST3_LID, f, rivets=(9, 42, 86, 119))
+    for x0, x1 in CHEST3_STRAPS:
+        _strap(g, x0, x1, 0, 44, f, rivets=(8, 36), lit_to=15)
+    _corner_guards(g, f)
+    _mark(g, f)
+    if finish == "black":
+        # Chained shut: round the seam, and down the middle over lid and box.
+        _chain_across(g, 46, 0, g.w)
+        _chain_down(g, 60, 1, g.h)
+    return g
+
+
+def _chest3_body(finish):
+    f = CHEST3_FINISHES[finish]
+    g = Cells(CHEST3_W, CHEST3_BODY)
+    w = g.w
+    g.fill(0, 0, w, g.h, f["M"])
+    g.recolour(0, 0, w, 3, f["S"])              # the band's shadow on the box
+    _board(g, 3, 16, f["L"], f["M"], f["D"])
+    _board(g, 16, 30, f["L"], f["M"], f["D"])
+    _sides(g, 3, 30, f)
+    _band(g, 30, 37, f)
+    g.recolour(0, 37, w, g.h, f["S"])
+    # Feet: the base's corners, a shade darker underneath.
+    g.fill(2, 37, 14, g.h, f["d"])
+    g.fill(w - 14, 37, w - 2, g.h, f["d"])
+    for x0, x1 in CHEST3_STRAPS:
+        _strap(g, x0, x1, 0, 30, f, rivets=(8, 23))
+    # Brackets up from the feet, each with a rivet.
+    for left in (True, False):
+        for y in range(17, 30):
+            for x in range(9):
+                if x >= 6 and y < 22:
+                    continue
+                cx = x if left else w - 1 - x
+                col = f["m"]
+                if (left and x == 0) or y == 17:
+                    col = f["l"] if left else f["m"]
+                if not left and x == 0:
+                    col = f["d"]
+                g.c[y][cx] = col
+        _rivet(g, 4 if left else w - 5, 25, f, r=1.6)
+    if finish == "black":
+        _chain_down(g, 60, 0, g.h - 3, phase=(CHEST3_LID - 1) % 12)
+    return g
+
+
+def _chest3_open(finish):
+    f = CHEST3_FINISHES[finish]
+    g = Cells(CHEST3_W, CHEST3_OPEN)
+    w = g.w
+    # Seen from just above: the far rim (narrower for being farther), the inside's back wall and its depth, the side
+    # walls slanting out to the near rim at the seam; then the box as it always was.
+    g.poly([(5, 8), (w - 6, 8), (w - 1, 37), (0, 37)], f["D"])
+    g.poly([(5, 8), (w - 6, 8), (w - 6, 12), (5, 12)], f["T"])
+    g.fill(5, 8, w - 5, 9, f["L"])
+    g.poly([(8, 12), (w - 9, 12), (w - 6, 36), (5, 36)], f["k"])
+    g.poly([(8, 12), (w - 9, 12), (w - 9, 20), (8, 20)], f["j"])
+    g.poly([(8, 12), (w - 9, 12), (w - 9, 15), (8, 15)], f["i"])
+    # The side walls' inner faces: the right one catches the light coming in over the left rim.
+    g.poly([(w - 9, 12), (w - 6, 12), (w - 3, 36), (w - 6, 36)], f["L"])
+    g.poly([(5, 12), (8, 12), (5, 36), (2, 36)], f["S"])
+    # The near rim's top, and its edge.
+    g.fill(0, 36, w, 39, f["T"])
+    g.fill(0, 39, w, 40, f["L"])
+    g.paste(_chest3_body(finish), 0, 40)
+    return g
+
+
+def chest3(finish):
+    """A finish's parts at the 3px density, a pixel a cell: (lid 128x56, box 128x40, open 128x80)."""
+    return _chest3_lid(finish).image(), _chest3_body(finish).image(), _chest3_open(finish).image()
+
+
+def chest3_lock(maker):
+    """A lock maker's overlays at the 3px density: (the hasp over the lid, 128x56; the plate over the box, 128x40)."""
+    c = CHEST3_LOCKS[maker]
+    lid = Cells(CHEST3_W, CHEST3_LID)
+    # The hasp: its hinge's knuckle on the band, and the tongue hanging over the seam.
+    lid.fill(55, 43, 73, 48, c["m"])
+    lid.fill(55, 43, 73, 44, c["w"])
+    lid.fill(55, 47, 73, 48, c["d"])
+    lid.fill(55, 43, 56, 48, c["l"])
+    lid.fill(72, 43, 73, 48, c["d"])
+    lid.fill(59, 48, 69, CHEST3_LID, c["m"])
+    lid.fill(59, 48, 60, CHEST3_LID, c["l"])
+    lid.fill(68, 48, 69, CHEST3_LID, c["d"])
+    lid.fill(60, 48, 68, 49, c["d"])
+    body = Cells(CHEST3_W, CHEST3_BODY)
+    # The tongue's end, over the seam and through the staple.
+    body.fill(59, 0, 69, 5, c["m"])
+    body.fill(59, 0, 60, 5, c["l"])
+    body.fill(68, 0, 69, 5, c["d"])
+    # The plate: a lit top edge, a shaded foot, its corners rounded.
+    for y in range(4, 22):
+        for x in range(52, 76):
+            if x in (52, 75) and y in (4, 21):
+                continue
+            body.set(x, y, c["q"] if y == 4 or x == 52 else c["n"] if y >= 20 or x >= 74 else c["p"])
+    # The staple the hasp hooks over, standing proud at the plate's top; the keyhole, a round top over a slot.
+    body.fill(60, 3, 68, 7, c["d"])
+    body.fill(61, 4, 67, 6, c["l"])
+    body.fill(62, 4, 66, 5, c["w"])
+    body.disc(64, 12, 2.4, c["k"])
+    body.fill(63, 13, 65, 18, c["k"])
+    if maker == "guild":
+        # The Guild's eye, either side of the keyhole.
+        for ex in (57, 71):
+            body.fill(ex - 2, 12, ex + 2, 14, c["a"])
+            body.set(ex - 3, 13, c["a"])
+            body.set(ex + 2, 12, c["a"])
+            body.fill(ex - 1, 12, ex + 1, 14, c["k"])
+    elif maker == "dwarven":
+        # Four studs at the plate's corners.
+        for sx, sy in ((55, 7), (72, 7), (55, 18), (72, 18)):
+            body.fill(sx - 1, sy - 1, sx + 1, sy + 1, c["a"])
+            body.set(sx, sy, c["n"])
+    return lid.image(), body.image()
 
 
 def key_shard():
