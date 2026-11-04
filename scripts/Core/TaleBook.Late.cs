@@ -270,7 +270,10 @@ public static partial class TaleBook
                 },
                 new()
                 {
-                    Key = "brass.guild", Who = Story.Vane, After = "brass.tock", Gap = 3, Tier = 4, Night = true, If = s => s.Keeps(Keepsakes.Apprentice),
+                    Key = "brass.guild", Who = Story.Vane, After = "brass.tock", Gap = 3, Tier = 4, Night = true,
+                    // Not the night of the move inward, when the move and the due have emptied the purse: after a day's
+                    // trade at the Emporium, the fine is a choice, not a foregone loss.
+                    If = s => s.Keeps(Keepsakes.Apprentice) && s.Day > s.TierSince,
                     Says = s => Say(Story.Vane,
                         Loc.T("A machine that opens chests without a Keywright, minding your door. You do understand what that means for the Guild's licences? And yours?"),
                         Loc.T($"Hand it over, or pay the Guild's fine for keeping it: {Money.Say(s.Purses(2))}. Or appeal to the King, if he likes you that much.")),

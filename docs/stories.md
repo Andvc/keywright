@@ -525,7 +525,8 @@ A chest passed on, misread, or the Guild's price refused loses the song: Wren's 
 3. **Tock** (the next day): Orme's automaton would rather be an apprentice than a burglar. *Take it in* (the Brass
    Apprentice: one more customer a day), *give it to the Wardens* (smashed: Wardens +2, a finder's share) or *take it
    home to Orme* (Arcanum +2).
-4. **The Guild** (Mister Vane, night, at the Emporium): a machine that opens chests is the end of the Guild's licences.
+4. **The Guild** (Mister Vane, night, at the Emporium, after a full day's trade there, so the move and the due haven't
+   just emptied the purse): a machine that opens chests is the end of the Guild's licences.
    *Pay the fine* (two purses), *appeal to the King* (keeps Tock only if the Crown counts you a friend; Guild -1), or
    *hand Tock over* (Guild +2).
 
