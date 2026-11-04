@@ -4133,7 +4133,7 @@ msgstr "Rosa"
 msgid ""
 "A trader's daughter from Lantern Lane, now Bram's partner. She'd haggle with a statue, and win."
 msgstr ""
-"Fille de marchands de la rue des Lanternes, désormais associée de Bram. Elle marchanderait avec une statue, et elle gagnerait."
+"Fille de marchands de la rue des Lanternes, associée de Bram. Elle marchanderait avec une statue, et gagnerait."
 
 #: scripts/Core/Meta.cs:43
 msgid ""

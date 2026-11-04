@@ -79,6 +79,10 @@ public static class SaveTest
         state.Gather("register");
         state.Borrow(30, 1f / 3, state.Day + 3);
         state.Until[Core.TaleBook.Picket] = state.Day + 4;
+        // 0.32: a keepsake, and a Hawthorn Charm taken back.
+        state.GiveKeepsake(Core.Keepsakes.Lamp);
+        state.GiveKeepsake(Core.Keepsakes.Hawthorn);
+        state.TakeKeepsake(Core.Keepsakes.Hawthorn);
         string json = state.Save().ToJson();
         var data = SaveData.FromJson(json);
         Check(data != null, $"a run in week {state.Week} with {state.Gold}g, {state.OwnedCurios.Count()} curios saves");
@@ -86,6 +90,8 @@ public static class SaveTest
         var loaded = GameState.Load(data);
         Check(loaded.Owed.ContainsKey(Core.TaleBook.Wynn) && loaded.Evidence.Contains("register") && loaded.LoanOwed == 40 &&
               loaded.While(Core.TaleBook.Picket), "a favour owed, a paper, a loan and a picket at the door come back");
+        Check(loaded.Keeps(Core.Keepsakes.Lamp) && !loaded.Keeps(Core.Keepsakes.Hawthorn) && loaded.KeepsakesSeen.Contains(Core.Keepsakes.Hawthorn),
+            "a keepsake held comes back, one taken back stays gone, and both are remembered");
         string again = loaded.Save().ToJson();
         bool same = Without(json, "SavedAt") == Without(again, "SavedAt");
         Check(same, "it loads and saves again the same");

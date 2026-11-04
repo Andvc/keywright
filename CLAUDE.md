@@ -37,8 +37,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    index; `-- --sim=curiolist` prints the curio table for `docs/design.md`. `-- --sim=experience` plays 30
    learners through their first three runs (tips on, profile carried over) and reports a human's minutes, what's new
    and how much at once (load), peaks, choices and stale stretches, day by day, with what to change.
-   `-- --sim=trace --seed=N` prints one careful collector's run day by day (purse, customers, spending, upgrades,
-   curios, the Guild) for tuning the economy's pace. `-- --sim=terms [--who=a,b]` (ten minutes) plays Kit with each
+   `-- --sim=trace --seed=N [--character=KEY]` prints one careful collector's run day by day (purse, customers, spending,
+   upgrades, curios, the Guild, and each tale's lines as they happen) for tuning the economy's pace and following a tale
+   through. `-- --sim=terms [--who=a,b]` (ten minutes) plays Kit with each
    challenge term alone, then the dues alone and whole levels as drawn; `-- --sim=levels [--debtstep=S]` just the
    levels, one to eight; `-- --sim=careers` just the careers (learners at the highest level open, run by run).
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.

@@ -548,5 +548,7 @@ due if a short night comes (`Strategy.FavourWorth`), a paper a quarter of what t
 night (`LoanWorth`); the careful player never sells the Key to the Maw (a learner guessing might). On a short Guild
 night the sim and the bot call in favours before pawning anything. It sends for the Wardens on a cold chest, returns
 what it bought by mistake, accepts a tool offered at the counter when it would have bought it at the day's end, and
-buys at Nim's table every night. A blind buyer pays for stolen chests and can't open them. The sim's "Tales" section
+buys at Nim's table every night. A blind buyer pays for stolen chests and can't open them. (0.32: the careful player
+never makes an offer on a chest that's gone cold in its hands, haggled or not; and it sends for the Wardens over a Guild
+bailiff's seizure whatever the Lockless think, since that costs the Guild's goodwill, not theirs.) The sim's "Tales" section
 reports how often each tale is drawn, finished and how it ended, and what it was worth.
