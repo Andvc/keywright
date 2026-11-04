@@ -12,7 +12,9 @@ namespace Keywright.Core;
 /// <param name="Blurb">Who they are, in a sentence.</param>
 /// <param name="Rules">What's different when you play them, one line each.</param>
 /// <param name="Unlock">What unlocks them, for the character screen (null: from the start).</param>
-public sealed record CharacterDef(string Key, string Name, string Title, string Blurb, string[] Rules, string Unlock, Func<Profile, bool> Unlocked);
+/// <param name="Background">Who they are, in a sentence or two (0.32: the partners aren't Bram's family), for the character screen.</param>
+public sealed record CharacterDef(string Key, string Name, string Title, string Blurb, string[] Rules, string Unlock, Func<Profile, bool> Unlocked,
+    string Background = null);
 
 public static class Characters
 {
@@ -25,28 +27,32 @@ public static class Characters
             {
                 Loc.T("Shakes at every strength and drops a chest to hear what's under the floor."),
                 Loc.T("With tips on, Uncle Bram teaches the trade as each new seller arrives."),
-            }, null, _ => true),
-        new(Hesk, Loc.T("Hesk"), Loc.T("The Scale"), Loc.T("A grocer from Fallowford, the river town the Guild drowned. Born with the Key-mark and hid it all his life; now he's Bram's partner, with a bad back and an honest scale."),
+            }, null, _ => true,
+            Loc.T("Grew up behind Bram's counter at the Brindle crossroads. When his mark faded, it showed on her hand, and the stall was hers.")),
+        new(Hesk, Loc.T("Hesk"), Loc.T("The Scale"), Loc.T("A grocer from drowned Fallowford, now Bram's partner: a bad back and an honest scale."),
             new[]
             {
                 Loc.T("A bad back: he can't shake a chest hard, or lift it to drop it."),
                 Loc.T("Every chest sits on his scale: he knows what everything in it weighs, to the half pound."),
 Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloaks {Pounds(Category.Garb)}, potions {Pounds(Category.Potions)}, spells {Pounds(Category.Scrolls)}, gems {Pounds(Category.Gems)}. Demon gold weighs half what gold does; sand is heavier than a scroll."),
-            }, Loc.T("Pay the Guild's third due to unlock."), p => p.BestWeek >= 4),
-        new(Rosa, Loc.T("Rosa"), Loc.T("The Tongue"), Loc.T("Rosa Brightwater of Lantern Lane, born with the Key-mark into a family of traders. The Guild took her mother's stall; she's Bram's partner now. She'd haggle with a statue, and win."),
+            }, Loc.T("Pay the Guild's third due to unlock."), p => p.BestWeek >= 4,
+            Loc.T("Hid his Key-mark all his life and kept a grocer's in Fallowford, till the Guild drowned the town. Now he's Bram's partner.")),
+        new(Rosa, Loc.T("Rosa"), Loc.T("The Tongue"), Loc.T("A trader's daughter from Lantern Lane, now Bram's partner. She'd haggle with a statue, and win."),
             new[]
             {
                 Loc.T("Everybody haggles with Rosa: sellers who'd name a fixed price ask high and hear an offer instead."),
                 Loc.T("They know her: they open a little higher and come down a little less. An offer too low gets a second try."),
                 Loc.T("But word gets round: a seller who walks out on her won't come back that week."),
-            }, Loc.T("Clear Bram's debt to unlock."), p => p.Cleared >= 1),
-        new(Isolde, Loc.T("Isolde"), Loc.T("The Collection"), Loc.T("Lady Isolde Marchmont, last of a house the Guild foreclosed on. All she kept was her collection, and a Key-mark nobody in her family had seen in a century."),
+            }, Loc.T("Clear Bram's debt to unlock."), p => p.Cleared >= 1,
+            Loc.T("Her mother kept the best stall on Lantern Lane till the Guild took it. Rosa came to Bram's stall to beat the Guild at its own trade.")),
+        new(Isolde, Loc.T("Isolde"), Loc.T("The Collection"), Loc.T("The last of House Marchmont, now Bram's partner. She has never sold a thing she liked."),
             new[]
             {
                 Loc.T($"A shelf from the start: she can display {IsoldeShelf} things at Bram's stall."),
                 Loc.T($"Visitors pay to see her collection: every night, {DoorCoins}g for every {DoorPoints} points of exhibition."),
                 Loc.T("Her collection is not for pawning: on a short night, the Guild can only take her curios."),
-            }, Loc.T("Open the Crown Chest to unlock."), p => p.Vaults >= 1),
+            }, Loc.T("Open the Crown Chest to unlock."), p => p.Vaults >= 1,
+            Loc.T("The Guild foreclosed on House Marchmont and sold it chest by chest. Isolde kept her collection, her steward, and a mark nobody else had.")),
     };
 
     public static CharacterDef Get(string key) => All.FirstOrDefault(c => c.Key == key) ?? All[0];

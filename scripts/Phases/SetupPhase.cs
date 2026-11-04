@@ -90,11 +90,19 @@ public partial class SetupPhase : Phase
         _board.AddChild(panel);
         panel.AddChild(Header(Loc.T($"HOW {kin.Name.ToUpperInvariant()} PLAYS"), 24, 16));
         float y = 44;
+        // Who they are (0.32), then their rules: each as tall as its words.
+        if (kin.Background != null)
+        {
+            float h = UiKit.TextHeight(kin.Background, 600);
+            panel.AddChild(UiKit.MakeLabel(kin.Background, 16, Palette.Muted).Wrapped().Place(24, y, 600, h));
+            y += h + 10;
+        }
         foreach (string rule in kin.Rules)
         {
-            var line = UiKit.MakeLabel($"- {rule}", 16, Palette.Text).Wrapped().Place(24, y, 600, 60);
+            float h = UiKit.TextHeight($"- {rule}", 600);
+            var line = UiKit.MakeLabel($"- {rule}", 16, Palette.Text).Wrapped().Place(24, y, 600, h);
             panel.AddChild(line);
-            y += 20 * Lines(rule, 64) + 8;
+            y += h + 6;
         }
 
         const float cx = 660;

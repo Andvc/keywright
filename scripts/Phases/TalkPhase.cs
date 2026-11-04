@@ -222,21 +222,22 @@ public partial class TalkPhase : Phase
         var given = State.Keepsakes.Skip(_keepsakesBefore).Select(Keepsakes.Get).ToList();
         foreach (var keepsake in given)
         {
-            var card = Add(UiKit.MakePanel(Palette.Keepsake.Darkened(0.35f)).Place(PanelX, Math.Min(y, 560 - 112), PanelW, 112));
+            var card = Add(UiKit.MakePanel(Palette.Keepsake.Darkened(0.35f)).Place(PanelX, Math.Min(y, 560 - 136), PanelW, 136));
             card.TooltipText = UiKit.KeepsakeTooltip(keepsake);
             card.MouseFilter = Control.MouseFilterEnum.Stop;
-            card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(48, 56), 64));
+            card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(48, 68), 64));
             card.AddChild(UiKit.MakeLabel(Loc.T($"A KEEPSAKE: {keepsake.Name.ToUpperInvariant()}"), 16, Palette.Keepsake).Place(92, 10, PanelW - 104, 20));
             var blurb = UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped();
-            blurb.MaxLinesVisible = 3;
+            blurb.MaxLinesVisible = 4;
             blurb.ClipText = true;
-            card.AddChild(blurb.Place(92, 34, PanelW - 104, 72));
-            card.PivotOffset = new Vector2(PanelW / 2, 56);
+            blurb.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            card.AddChild(blurb.Place(92, 34, PanelW - 104, 96));
+            card.PivotOffset = new Vector2(PanelW / 2, 68);
             card.Scale = Vector2.One * 0.6f;
             card.CreateTween().TweenProperty(card, "scale", Vector2.One, 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-            Fx.Burst(this, new Vector2(PanelX + 48, Math.Min(y, 560 - 112) + 56), Palette.Keepsake, 40, 200f);
+            Fx.Burst(this, new Vector2(PanelX + 48, Math.Min(y, 560 - 136) + 68), Palette.Keepsake, 40, 200f);
             Sfx.Play("fanfare", 1.2f, -6);
-            y += 124;
+            y += 148;
         }
         if (given.Count > 0) Game.Moment($"32_keepsake_{given[0].Key}", 0.5);
     }

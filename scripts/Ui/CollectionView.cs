@@ -224,15 +224,23 @@ public partial class CollectionView : Node2D
         _page.AddChild(UiKit.MakeLabel(Loc.T($"What people give you to keep when you see their tale through. A keepsake works like a curio, but takes no slot and is never sold. You've been given {had} of {Keepsakes.All.Length}."),
             16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
         const float cardW = 376, cardH = 128, gap = 8;
+        // Three to a row, as the songbook's cards: more than nine scroll inside the panel (the wheel, or the right stick).
+        float top = PanelY + 118;
+        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }
+            .Place(TableX - 8, top, PanelW - 32, PanelY + PanelH - 12 - top);
+        _page.AddChild(scroll);
+        var grid = new Control { MouseFilter = Control.MouseFilterEnum.Pass };
+        grid.CustomMinimumSize = new Vector2(3 * cardW + 2 * gap, (Keepsakes.All.Length + 2) / 3 * (cardH + 4));
+        scroll.AddChild(grid);
         for (int i = 0; i < Keepsakes.All.Length; i++)
         {
             var keepsake = Keepsakes.All[i];
             bool had_ = _c.HadKeepsake(keepsake.Key), yours = _c.Keeps(keepsake.Key);
-            float x = TableX - 8 + i % 3 * (cardW + gap), y = PanelY + 118 + i / 3 * (cardH + 4);
+            float x = i % 3 * (cardW + gap), y = i / 3 * (cardH + 4);
             var card = new Panel { MouseFilter = Control.MouseFilterEnum.Pass }.Place(x, y, cardW, cardH);
             card.AddThemeStyleboxOverride("panel", UiKit.PanelBox(4));
             if (yours) card.AddChild(UiKit.MakeFrame(Palette.Keepsake));
-            _page.AddChild(card);
+            grid.AddChild(card);
             string from = TaleBook.Get(keepsake.Tale)?.Title ?? "";
             if (!had_)
             {
@@ -243,7 +251,12 @@ public partial class CollectionView : Node2D
             }
             card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(34, 44), 52));
             card.AddChild(UiKit.MakeLabel(keepsake.Name, 16, Palette.Keepsake).Place(70, 6, cardW - 78, 20));
-            card.AddChild(UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped().Place(70, 30, cardW - 78, 92));
+            // Four lines on the card (a longer language ends in "..."): the whole of it on hover.
+            var blurb = UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped().Place(70, 28, cardW - 78, 98);
+            blurb.MaxLinesVisible = 4;
+            blurb.ClipText = true;
+            blurb.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            card.AddChild(blurb);
             card.TooltipText = Loc.T($"{keepsake.Name}, from {from}: {keepsake.Blurb}");
             if (yours) card.AddChild(UiKit.MakeLabel(Loc.T("yours"), 16, Palette.Gold, HorizontalAlignment.Right).Place(cardW - 100, 6, 92, 20));
         }

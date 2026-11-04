@@ -805,7 +805,14 @@ public partial class OpeningPhase : Phase
         if (fee > 0) grade += Loc.T($" A perfect read: a valuer's fee of {fee}g.");
         if (_purchase.Rebate > 0) grade += Loc.T($" Haggler's Purse: {_purchase.Rebate}g back.");
         if (insured > 0) grade += Loc.T($" Underwriter's Bond: {insured}g back.");
-        Add(UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 96)); // up to four lines, above the chest
+        // Up to four lines, above the chest (a long story ends in "...": the whole of it on hover).
+        var told = UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 96);
+        told.MaxLinesVisible = 4;
+        told.ClipText = true;
+        told.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+        told.MouseFilter = Control.MouseFilterEnum.Stop;
+        told.TooltipText = told.Text;
+        Add(told);
         bool last = State.Queue.Count == 0;
         Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
             .Place(980, 300, 280, 52));
@@ -1019,10 +1026,22 @@ public partial class OpeningPhase : Phase
         {
             var old = shown[i];
             bool affordable = State.Gold + old.Value >= worth;
-            var choice = UiKit.MakeButton(Loc.T($"{old.Name}: +{old.Value}g, -{old.Prestige} pts"), Palette.Of(old.Rarity).Darkened(0.4f), 16,
+            // The name on the left (it ends in "..." if it's long), what the swap brings right-aligned, never cut.
+            var choice = UiKit.MakeButton("", Palette.Of(old.Rarity).Darkened(0.4f), 16,
                 () => Swap(item, worth, at, old)).Place(16 + i % columns * 320, 44 + i / columns * 48, 312, 40);
             choice.Disabled = !affordable;
+            choice.TooltipText = Loc.T($"{old.Name}: +{old.Value}g, -{old.Prestige} pts");
             choice.AddChild(UiKit.MakeItemIcon(old, new Vector2(20, 20), 32));
+            string sums = Loc.T($"+{old.Value}g, -{old.Prestige} pts");
+            float sumsW = UiKit.TextWidth(sums) + 4;
+            var name = UiKit.MakeLabel(old.Name, 16, Palette.Text).Place(40, 10, 312 - 52 - sumsW, 20);
+            name.ClipText = true;
+            name.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            name.MouseFilter = Control.MouseFilterEnum.Ignore;
+            choice.AddChild(name);
+            var price = UiKit.MakeLabel(sums, 16, Palette.Gold, HorizontalAlignment.Right).Place(312 - 8 - sumsW, 10, sumsW, 20);
+            price.MouseFilter = Control.MouseFilterEnum.Ignore;
+            choice.AddChild(price);
             panel.AddChild(choice);
         }
         panel.AddChild(UiKit.MakeButton(Loc.T("Never mind"), Palette.Text, 16, CloseSwap).Place(w / 2 - 90, h - 52, 180, 40));
