@@ -3736,8 +3736,8 @@
       "original_source_sha256": "1c0ce5d1260a7697f840af709229b72176d00cbc671fd57d583a972e243b6e37",
       "has_face_override": false,
       "override_name": null,
-      "output_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
-      "colours": 18,
+      "output_sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
+      "colours": 19,
       "crop": [
         274,
         34,
@@ -3760,7 +3760,14 @@
         1024,
         1536
       ],
-      "user_approval": "approved"
+      "user_approval": "approved",
+      "correction": {
+        "date": "2026-11-04",
+        "requested_by": "owner",
+        "cause": "The 3px conversion snapped her freckles and blush to the darkest skin tone (#bd7e5f) and let two umber tones (#c9a075, #e2c69f: wood and leather colours) into her skin and eye whites, so her near cheek and the side of her nose read as a dark, muddy patch and her eyes as dark blots.",
+        "fix": "On the figure's own 3px grid, in her face and neck only: umber tones in the skin to skin tones, the dark skin tone in her cheeks and round her nose to the middle one (kept at the corners of her smile and her nostril), the middle tone to the light one under her near eye and down the lit middle of her cheek (as in the source), and her eye whites to the parchment white (#f7ebc6). 245 cells; no new shapes, no outlines.",
+        "previous_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2"
+      }
     },
     "figure.hesk": {
       "id": "figure.hesk",

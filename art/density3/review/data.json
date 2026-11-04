@@ -2320,7 +2320,7 @@
         768,
         1280
       ],
-      "sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
       "retained": false,
       "face_edit": false,
       "face_protection": null,
@@ -2341,7 +2341,7 @@
         "note": "正式文件与首版哈希完全相同，本轮又看了真实脸部大小与 4 倍放大。双眼、鼻口及自然微笑均在，但画面左眼眼白与面部浅色相融，分离度偏弱；多个局部修复会新增眼周色圈，均未采用。此项继续交用户重点复查，不自动升 pass。",
         "qa": "watch",
         "reviewer": "face_audit_b",
-        "reviewed_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+        "reviewed_sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
         "final": "faces/figure_kit_final.png",
         "size": [
           127,

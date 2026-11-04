@@ -74,7 +74,7 @@
     "figure.hood": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
     "figure.nim": "ae0f5e1d189eb35de154d0feb3e7f0a8f49ef764b4ed114f2cd767f759a41952",
     "figure.stranger": "a51260a2cf81a765519685c2af087fd77b6f7015b6fa13c0c9677d66e9ac9cf0",
-    "figure.kit": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+    "figure.kit": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
     "figure.hesk": "6f4a3c5b757a3bcca8f6c4a6d173b58eaeec791d81fdfa9d227c870950600b8f",
     "figure.rosa": "386784abdca7db7df331c7a167c74b3cd0f1f265e9a3c53ec0b06d4e8d126133",
     "figure.isolde": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
@@ -368,7 +368,7 @@
     "res://assets/figures/hood.png": "1eb41cb871bcfa11e86c82c90d284c904731a2626661a47fc5939543b32ce866",
     "res://assets/figures/isolde.png": "7d3843a34955749898ee0bac3a5580db10a9b3c9a17ca4e41f2a9943cdf1dac0",
     "res://assets/figures/king.png": "fbf5ce3d8b74e5489ae7cb95d38aae3f96da6241c8cef15d689b6f793987bdb2",
-    "res://assets/figures/kit.png": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+    "res://assets/figures/kit.png": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
     "res://assets/figures/mags.png": "ac6beb1584edf49ddee7d0a4c508390875d747ad47fe458ee1ab8ade9de7968a",
     "res://assets/figures/malbranche.png": "d45f8c5163628b13685f517cf3b762232ca2423a22af0ffd2f4bd3551ef3f983",
     "res://assets/figures/mara.png": "c9c564a015e86e775e864b0f6b0da1d8dbc2a5d5488023a0cb6e7d89e13cd155",
@@ -536,7 +536,7 @@
     "res://assets/sprites/sellers/faces/hood.png": "2ea87b8f18d636e49ac6b1f7535c937d87e91d996a3efaca2d9817b4c37ba994",
     "res://assets/sprites/sellers/faces/isolde.png": "b66376e820d225c11b2494710a553452cf0e313ad1094d796406f3f060325184",
     "res://assets/sprites/sellers/faces/king.png": "6246ae48e16bd1b4cb6bf70d6570131d3e64a3f85f91363f20a38318d37cc611",
-    "res://assets/sprites/sellers/faces/kit.png": "b5593186a516a7cc7c7e6d942531970f1cb9351fe64cee5c8a4f34e390ee774e",
+    "res://assets/sprites/sellers/faces/kit.png": "f4611ea2cedd7db41333755e1ee80acfe57479c752a690f27f11a7d1ee30d006",
     "res://assets/sprites/sellers/faces/mags.png": "17e61a3bc17a83e5e9dd146daf2aac68ee271bc83233aeacf3448d6009f4b6a3",
     "res://assets/sprites/sellers/faces/malbranche.png": "81afba17ffcb9850998906e394e71cbfd53cd2a5698c0f4e44a5adc244271daf",
     "res://assets/sprites/sellers/faces/mara.png": "6dd34dbde32cb577a50d8e8306ebdf97f2ef4b22452705add76f6f4973708340",
@@ -566,7 +566,7 @@
     "res://assets/sprites/sellers/hood.png": "d237c370bea8ccf97264bb85a7bc2624f17c14dfebb011d48e8aa036d683d28b",
     "res://assets/sprites/sellers/isolde.png": "763d17ebe67f715c730ac56c992cd2f3efa17ee448795006e0db2759ae66c96b",
     "res://assets/sprites/sellers/king.png": "1c4e519899cd6a22116832211ed8821734c5ad89d2ae87bc3c0c00f8a4e1f303",
-    "res://assets/sprites/sellers/kit.png": "805e8ad508d99d2a45e4fa8b794cd624ae02d91e9d7579b9896453464be85f0d",
+    "res://assets/sprites/sellers/kit.png": "8fd38edc32eb9159769e8553a5f0f3ee13fc5953f377140f5876bfa729ea6bdf",
     "res://assets/sprites/sellers/mags.png": "cd7fe7d454bb2923f8644994837547ce949824c321e8bc2db2aec63fa573249f",
     "res://assets/sprites/sellers/malbranche.png": "4ebed1efffa5c3bad1a430981438ea975c053de8de54c56553c04b98c44e5ce2",
     "res://assets/sprites/sellers/mara.png": "77eec2bb324fddb94a37eb39e933c94d912f2b586ba42f7ae68acd85f3fc4471",
@@ -708,5 +708,28 @@
     "res://assets/ui/kinds/hidden.png": "23bb43155105cc59d8ee124fecd157045e760e90f6e1719fb827478c583d92bc",
     "res://assets/ui/kinds/potions.png": "b7b39304d204b9519f84b8e8ca19f1aea84a33a1a3bbf70fcce31f1512dc48ff",
     "res://assets/ui/kinds/scrolls.png": "f89812ac9561523647977bdb955c30d8149c10aebebcc58a4d7741e6da4c1cee"
-  }
+  },
+  "amendments": [
+    {
+      "date": "2026-11-04",
+      "asset": "figure.kit",
+      "requested_by": "owner",
+      "request": "Part of Kit's face appears unnaturally dark: investigate and fix it.",
+      "cause": "The 3px conversion snapped her freckles and blush to the darkest skin tone (#bd7e5f) and let two umber tones (#c9a075, #e2c69f: wood and leather colours) into her skin and eye whites, so her near cheek and the side of her nose read as a dark, muddy patch and her eyes as dark blots.",
+      "fix": "On the figure's own 3px grid, in her face and neck only: umber tones in the skin to skin tones, the dark skin tone in her cheeks and round her nose to the middle one (kept at the corners of her smile and her nostril), the middle tone to the light one under her near eye and down the lit middle of her cheek (as in the source), and her eye whites to the parchment white (#f7ebc6). 245 cells; no new shapes, no outlines.",
+      "previous_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
+      "tool": "recorded in docs/design.md (0.32)",
+      "runtime_previous": {
+        "res://assets/figures/kit.png": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+        "res://assets/sprites/sellers/kit.png": "805e8ad508d99d2a45e4fa8b794cd624ae02d91e9d7579b9896453464be85f0d",
+        "res://assets/sprites/sellers/faces/kit.png": "b5593186a516a7cc7c7e6d942531970f1cb9351fe64cee5c8a4f34e390ee774e"
+      },
+      "runtime_sha256": {
+        "res://assets/figures/kit.png": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
+        "res://assets/sprites/sellers/kit.png": "8fd38edc32eb9159769e8553a5f0f3ee13fc5953f377140f5876bfa729ea6bdf",
+        "res://assets/sprites/sellers/faces/kit.png": "f4611ea2cedd7db41333755e1ee80acfe57479c752a690f27f11a7d1ee30d006"
+      }
+    }
+  ]
 }

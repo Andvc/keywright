@@ -352,7 +352,7 @@
         1280
       ],
       "reference_scale": 4,
-      "source_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2"
+      "source_sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58"
     },
     "res://assets/figures/mags.png": {
       "asset_id": "figure.mags",
@@ -4208,7 +4208,7 @@
         76
       ],
       "reference_scale": 1,
-      "source_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "source_sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
       "derivation": {
         "kind": "head_crop",
         "native_crop": [
@@ -4928,7 +4928,7 @@
         152
       ],
       "reference_scale": 1,
-      "source_sha256": "c9a65ed9484d78b1e50b7711b89e056f2dc33088880650bfa2e4efed270251c2",
+      "source_sha256": "4e16021b884e1be622f417820452c216f30183cf3b1fd37c8c5c23423105df58",
       "derivation": {
         "kind": "head_crop",
         "native_crop": [
