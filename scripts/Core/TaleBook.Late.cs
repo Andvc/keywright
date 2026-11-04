@@ -180,7 +180,7 @@ public static partial class TaleBook
             Ending = s => !s.Did("brass.marks") ? null
                 : s.Keeps(Keepsakes.Apprentice) ? new(Tock, Loc.T("I mind the door and carry the chests, and at night I read the notebook. I am learning what things are worth. It is slow."))
                 : s.Flagged("brass.smashed") ? new(Hollis, Loc.T("We smashed the brass thing in the Emporium's yard. Its hand kept opening and closing for an hour after."))
-                : s.Flagged("brass.orme") ? new(Bram, Loc.T("Orme took his automaton home to the Arcanum. Ilse says it sits in the stores now, turning a lock over and over."))
+                : s.Flagged("brass.orme") ? new(Bram, Loc.T("Orme took her automaton home to the Arcanum. Ilse says it sits in the stores now, turning a lock over and over."))
                 : s.Flagged("brass.taken") ? new(Bram, Loc.T("The Guild took the brass apprentice. Nobody's seen it since. Locks still open by themselves sometimes, in Crownhold."))
                 : new(Hollis, Loc.T("The night openings stopped as quick as they started. I never did find out whose mark that was.")),
             Beats = new Beat[]
@@ -241,7 +241,7 @@ public static partial class TaleBook
                 {
                     Key = "brass.tock", Who = Tock, After = "brass.night", Gap = 1, Tier = 3, If = s => s.Flagged("brass.follow"),
                     Says = s => Say(Tock,
-                        Loc.T("You followed me, and you didn't shout. Archmage Orme built me to open his chests with a borrowed mark. He calls me Tock."),
+                        Loc.T("You followed me, and you didn't shout. Archmage Orme built me to open her chests with a borrowed mark. She calls me Tock."),
                         Loc.T("I opened the others to learn what is inside things. I have learned that I would rather be inside a shop. Will you take an apprentice?")),
                     Asks = s => new()
                     {
@@ -264,7 +264,7 @@ public static partial class TaleBook
                             s.Flags.Add("brass.orme");
                             s.Sway(Faction.Arcanum, 2);
                             s.Log("brass", Loc.T("You took Tock home to Archmage Orme. The Arcanum is in your debt."));
-                            return Loc.T("He will put me back on the shelf. It is a very good shelf.");
+                            return Loc.T("She will put me back on the shelf. It is a very good shelf.");
                         }, W(s, 0, (Faction.Arcanum, 2))),
                     },
                 },
@@ -278,7 +278,7 @@ public static partial class TaleBook
                     {
                         C(Loc.T($"Pay the fine ({s.Purses(2)}g)"), () =>
                         {
-                            s.Log("brass", Loc.T("The Guild demanded Tock. You paid its fine and kept him."));
+                            s.Log("brass", Loc.T("The Guild demanded Tock. You paid its fine and kept it."));
                             return Loc.T("Paid in full. Keep your toy, then. Keep it close.");
                         }, Strategy.KeepsakeWorth(s), cost: s.Purses(2)),
                         C(Loc.T("Appeal to the King"), () =>
@@ -291,7 +291,7 @@ public static partial class TaleBook
                             }
                             s.TakeKeepsake(Keepsakes.Apprentice);
                             s.Flags.Add("brass.taken");
-                            s.Log("brass", Loc.T("The Guild demanded Tock. The King wouldn't hear your appeal, and the Guild took him."));
+                            s.Log("brass", Loc.T("The Guild demanded Tock. The King wouldn't hear your appeal, and the Guild took it."));
                             return Loc.T("The King doesn't know your name, I'm afraid. We'll take the machine now.");
                         }, s.Friend(Faction.Crown) ? Strategy.KeepsakeWorth(s) + 1 : -Strategy.KeepsakeWorth(s)),
                         C(Loc.T("Hand Tock over"), () =>

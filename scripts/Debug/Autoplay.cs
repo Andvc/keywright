@@ -422,7 +422,7 @@ public partial class Autoplay : Node
         // The mark went cold: send for the Wardens (unless the Lockless would turn on us for it), or pass.
         if (visit.Chest.Stolen && visit.Handled)
         {
-            if (counter.CanSendForWardens && Strategy.CallWardens(State))
+            if (counter.CanSendForWardens && Strategy.CallWardens(State, visit))
             {
                 GD.Print($"Autoplay: {visit.Seller.Name}'s chest was cold to the mark; sent for the Wardens");
                 counter.SendForWardens();

@@ -26,7 +26,7 @@ public static class Keepsakes
     {
         new(Weights, Loc.T("Fallowford's Weights"), Loc.T($"The drowned town's assayer's weights, true to the grain. Coin and gems sell for {Pct(WeightsBonus - 1)} more."),
             "hesk", "res://assets/ui/icons/scales.png"),
-        new(StallKey, Loc.T("Mother's Stall Key"), Loc.T("Lantern Lane knows the Brightwaters deal fair: a seller who walks out on Rosa doesn't stay away the week."),
+        new(StallKey, Loc.T("Grandmother's Stall Key"), Loc.T("Lantern Lane knows the Brightwaters deal fair: a seller who walks out on Rosa doesn't stay away the week."),
             "rosa", "res://assets/ui/curios/signet.png"),
         new(Seal, Loc.T("The Marchmont Seal"), Loc.T($"House Marchmont's seal, back on Isolde's hand. Her visitors pay {Pct(SealDoor - 1)} more at the door."),
             "isolde", "res://assets/ui/curios/seal.png"),

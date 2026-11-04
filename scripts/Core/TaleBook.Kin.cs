@@ -383,8 +383,30 @@ public static partial class TaleBook
                         }, s.Purses(2.2f), cost: s.Purses(2)),
                         C(Loc.T("Not at that price"), () =>
                         {
-                            s.Log("isolde", Loc.T("Mister Vane offered you the Marchmont seal, for a price you wouldn't pay."));
-                            return Loc.T("A pity. The Guild will find a use for it.");
+                            s.Flags.Add("isolde.declined");
+                            s.Log("isolde", Loc.T("Mister Vane offered you the Marchmont seal, for a price you wouldn't pay. He'll ask again, he says."));
+                            return Loc.T("A pity. The Guild is patient, my lady. I'll ask again, once.");
+                        }, kind: true),
+                    },
+                },
+                // Once more, a few days on: the Guild is patient, and it wants the gold.
+                new()
+                {
+                    Key = "isolde.vane2", Who = Story.Vane, After = "isolde.vane", Gap = 5, Tier = 3, If = s => s.Flagged("isolde.declined"),
+                    Says = s => Say(Story.Vane,
+                        Loc.T($"Lady Marchmont. The long box is still in the Guild's vault, and the price is still {Money.Say(s.Purses(2))}. The last time I'll ask.")),
+                    Asks = s => new()
+                    {
+                        C(Loc.T($"Buy back the seal ({s.Purses(2)}g)"), () =>
+                        {
+                            s.Flags.Add("isolde.sealbox");
+                            s.Log("isolde", Loc.T("You paid Mister Vane for the long box with House Marchmont's seal."));
+                            return Loc.T("A pleasure. The Guild will have it sent round.");
+                        }, s.Purses(2.2f), cost: s.Purses(2)),
+                        C(Loc.T("The Guild can keep it"), () =>
+                        {
+                            s.Log("isolde", Loc.T("You let the Guild keep House Marchmont's seal."));
+                            return Loc.T("As you wish. It will look very well in the counting-house.");
                         }, kind: true),
                     },
                 },

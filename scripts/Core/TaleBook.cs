@@ -1093,7 +1093,7 @@ public static partial class TaleBook
         new()
         {
             Key = "unlock", Title = Loc.T("The Unlocking"), Place = TalePlace.Crownhold,
-            Blurb = Loc.T("Archmage Orme of the Arcanum is building an engine to copy the Key-mark, so that any chest would open for anyone. He " +
+            Blurb = Loc.T("Archmage Orme of the Arcanum is building an engine to copy the Key-mark, so that any chest would open for anyone. She " +
                           "needs a Keywright's blood, and Mara says it would end the Locking."),
             Ending = UnlockEnding,
             Beats = new Beat[]

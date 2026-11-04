@@ -154,7 +154,7 @@ curio's, a tool's or a thing's picture until they have their own.
 | Keepsake | From | Does |
 |---|---|---|
 | Fallowford's Weights | The Drowned Town (Hesk) | Coin and gems sell for a fifth more |
-| Mother's Stall Key | Lantern Lane (Rosa) | A seller who walks out on Rosa comes back like anyone else |
+| Grandmother's Stall Key | Lantern Lane (Rosa) | A seller who walks out on Rosa comes back like anyone else |
 | The Marchmont Seal | The Marchmont Pieces (Isolde) | Her visitors pay half as much again at the door |
 | The Brass Apprentice | The Brass Apprentice | One more customer every day |
 | Tobin's Lamp | The Deep Door | Each week's first morning, a Barrow chest from Tobin, freely given, a colour finer than the shop's |
@@ -183,7 +183,7 @@ else and came to Bram's stall as his partner, for reasons of their own (Bram is 
   chest exactly in front of the traders. (1) *Marta's letter* (night, from day 3). (2) *Vash* (Thornwick): a purse and a
   half to stay away (Guild +1: the stall's lost) or *I'll see you on the Lane*. (3) *The reading* (Crownhold): a contest
   chest; exactly right wins the stall and half a purse. (4) Wrong: *a second reading*, if your family stands the traders
-  their supper (a purse); (5) the second chest. Won: Marta gives you Mother's Stall Key that night, commons +1, a favour.
+  their supper (a purse); (5) the second chest. Won: Marta gives you Rosa's grandmother's stall key that night, commons +1, a favour.
 - **Isolde, The Marchmont Pieces.** Lady Isolde Marchmont is the last of a house the Guild foreclosed on. The Guild sold
   the house's chests; they're still the house's, so they're warm to her hand whoever paid for them. (1) *Pemberton's
   letter* (night, from day 3): he's traced three. (2) *The jewel case* (Aunt Hesper, Thornwick). (3) *The map chest*

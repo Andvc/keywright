@@ -129,7 +129,7 @@ public partial class Main : Node2D
                         Simulation.CurioTable();
                         break;
                     case "trace":
-                        Simulation.Trace(int.Parse(Arg(args, "--seed") ?? "1000"));
+                        Simulation.Trace(int.Parse(Arg(args, "--seed") ?? "1000"), Arg(args, "--character"));
                         break;
                     case "experience":
                         Simulation.ExperienceReport(N(30), int.Parse(Arg(args, "--runs") ?? "3"));

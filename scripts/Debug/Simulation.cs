@@ -885,7 +885,7 @@ public static partial class Simulation
             if (paid is not int price)
             {
                 // The mark went cold: send for the Wardens (a finder's share), unless the Lockless would turn on you for it.
-                if (state.CanCallWardens(visit) && Strategy.CallWardens(state))
+                if (state.CanCallWardens(visit) && Strategy.CallWardens(state, visit))
                 {
                     state.CallWardens(visit);
                     log.Reported++;

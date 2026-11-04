@@ -361,9 +361,12 @@ public static class Strategy
 
     /// <summary>
     /// Whether to send for the Wardens over a cold chest: for the finder's share, unless the Lockless would turn on you
-    /// for it (a foe of theirs is robbed every week).
+    /// for it (a foe of theirs is robbed every week). A Guild bailiff's seizure is the Guild's to answer for, not the
+    /// Lockless's: send unless the Guild would turn on you for it, and always for a tale's chest (Fallowford's goes home).
     /// </summary>
-    public static bool CallWardens(GameState state) => state.Standing(Faction.Lockless) > -Factions.Strong + 1;
+    public static bool CallWardens(GameState state, Visit visit = null) => visit?.Seller.Key == TaleBook.Marrow
+        ? visit.Chest.Tale != null || state.Standing(Faction.Guild) > -Factions.Strong + 1
+        : state.Standing(Faction.Lockless) > -Factions.Strong + 1;
 
     /// <summary>
     /// What changes in standing are worth to the careful player over the rest of the run, in gold: crossing into friend or

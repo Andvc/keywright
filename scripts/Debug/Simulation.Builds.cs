@@ -200,10 +200,11 @@ public static partial class Simulation
     /// One careful collector's run, day by day (`--sim=trace --seed=N`): the shop, the purse, the customers, what was bought
     /// and earned, the upgrades and curios, the Guild. For tuning the economy's pace.
     /// </summary>
-    public static void Trace(int seed, int days = Guild.Weeks * Guild.DaysPerWeek)
+    public static void Trace(int seed, string character = null, int days = Guild.Weeks * Guild.DaysPerWeek)
     {
         var style = Styles[^1];
-        var state = GameState.NewRun(seed, style.Character, style.Challenge, guided: false);
+        var state = GameState.NewRun(seed, character ?? style.Character, style.Challenge, guided: false);
+        var told = new Dictionary<string, int>();
         var log = new Log();
         var rng = new Random(seed);
         GD.Print($"Trace: the careful collector, seed {seed}");
@@ -221,6 +222,12 @@ public static partial class Simulation
             GD.Print($"{state.Day,3} {state.Week,2} {state.Tier,4} {gold,6} {customers,5} {state.Today.Bought,6} {state.Today.Spent,7} {state.Today.Earned,7} " +
                      $"{state.Today.Curios - state.Today.CurioSpent,7}  {string.Join(" ", bought)}" +
                      (state.DuesTonight ? $"   | dues {state.DueFor(state.Week)}{(alive ? "" : " LOST")}" : ""));
+            // What happened in the tales today, a line each (0.32: for following one through).
+            foreach (var (tale, lines) in state.TaleLog)
+            {
+                for (int i = told.GetValueOrDefault(tale); i < lines.Count; i++) GD.Print($"      {tale}: {lines[i]}");
+                told[tale] = lines.Count;
+            }
             if (!alive) break;
         }
     }
