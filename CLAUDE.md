@@ -94,7 +94,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    text in brackets, so anything plain is untranslated, and a third longer, so a layout too tight shows. Any run
    with `--shots` also prints `[overflow]` for each label or button whose text outgrew the box it was placed in
    (`Debug.Overflow`): after changing a screen or its words, run the shell demo and a bot run with `--lang=fr` and
-   `--lang=ja` (French runs longest, Japanese and Chinese are drawn on a 12px grid) and read those lines.
+   `--lang=ja` (French runs longest, Japanese and Chinese are drawn on a 12px grid) and read those lines. A run only
+   deals a few curios and keepsakes, so `godot --headless --path . -- --fit-test --lang=CODE` measures every curio's
+   name and description on Nim's cards (wide and narrow) and every keepsake's card, in that language's font, and exits
+   1 if one doesn't fit: run it for each language after changing a curio's or keepsake's words (or the cards).
 
 ## Conventions
 

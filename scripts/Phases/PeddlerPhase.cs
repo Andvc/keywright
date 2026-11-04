@@ -22,7 +22,30 @@ public partial class PeddlerPhase : Phase
     const float CardH = 384, CardsY = 96, CardGap = 20, AreaX = 340, AreaW = 920, CardsRight = AreaX + AreaW, RowX = 560;
 
     // One card to the right of Nim, up to four (with his upgrades), the fourth starting nearer him and a little narrower.
-    float CardW => State.PeddlerCount > 3 ? 225 : 260;
+    float CardW => CardWidth(State.PeddlerCount > 3);
+    static float CardWidth(bool narrow) => narrow ? 225 : 260;
+
+    /// <summary>
+    /// How a curio's name sits on its card: in the large size where it fits on one line of a wide card, else in the small
+    /// size (two lines at most); the box as tall as it is, so the ways of trading and the description follow right under
+    /// it and the description has the rest of the card (the fit test measures the same).
+    /// </summary>
+    public static (float W, float H, int Size) NameBox(string name, bool narrow)
+    {
+        float w = CardWidth(narrow) - 20;
+        if (!narrow)
+        {
+            float large = UiKit.TextHeight(name, w, 24);
+            if (large <= UiKit.TextHeight("A", w, 24) + 0.5f) return (w, large, 24); // loc: keys
+        }
+        return (w, Mathf.Max(UiKit.TextHeight(name, w, 16), 20), 16);
+    }
+
+    /// <summary>A card's description box under a name that tall: down to what it goes with.</summary>
+    public static (float W, float H) BlurbBox(bool narrow, float nameH) => (CardWidth(narrow) - 28, CardH - 84 - (NameY + 22) - nameH);
+
+    /// <summary>Where the name starts, just under the curio's picture; its ways of trading and its description follow.</summary>
+    const float NameY = 96;
     float CardsX => AreaX + (AreaW - (State.PeddlerCount * (CardW + CardGap) - CardGap)) / 2;
 
     SellerView _nim;
@@ -216,18 +239,19 @@ public partial class PeddlerPhase : Phase
         });
         card.AddChild(shine);
         card.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(CardW / 2, 62)));
-        // Four narrower cards: the name in the small size, so the blurb has room.
+        // Four narrower cards: the name in the small size, so the blurb has room (and a long name on a wide one).
         bool narrow = State.PeddlerCount > 3;
-        float nameH = narrow ? 40 : 60;
-        card.AddChild(UiKit.MakeLabel(curio.Name, narrow ? 16 : 24, owned ? Palette.Muted : Palette.Text, HorizontalAlignment.Center, outline: 4)
-            .Wrapped().Place(10, 100, CardW - 20, nameH));
+        var (nameW, nameH, nameSize) = NameBox(curio.Name, narrow);
+        card.AddChild(UiKit.MakeLabel(curio.Name, nameSize, owned ? Palette.Muted : Palette.Text, HorizontalAlignment.Center, outline: 4)
+            .Wrapped().Place(10, NameY, nameW, nameH));
         // Its rarity in the corner, and what it's for under its name (just the first way of trading on a narrow card).
         card.AddChild(UiKit.MakeLabel(Curios.RarityName(curio.Rarity), 16, color, HorizontalAlignment.Right).Place(CardW - 110, 8, 100, 20));
         string tags = narrow ? Curios.TagName(curio.Tags[0], curio) : Curios.Tags(curio);
         if (UiKit.TextWidth(tags) > CardW - 8) tags = Curios.TagName(curio.Tags[0], curio);
-        card.AddChild(UiKit.MakeLabel(tags, 16, color, HorizontalAlignment.Center).Place(0, 100 + nameH, CardW, 20));
+        card.AddChild(UiKit.MakeLabel(tags, 16, color, HorizontalAlignment.Center).Place(0, NameY + nameH, CardW, 20));
+        var (blurbW, blurbH) = BlurbBox(narrow, nameH);
         var blurb = UiKit.MakeLabel(curio.Blurb, 16, Palette.Muted, HorizontalAlignment.Center).Wrapped()
-            .Place(14, 124 + nameH, CardW - 28, CardH - 84 - 124 - nameH);
+            .Place(14, NameY + 22 + nameH, blurbW, blurbH);
         card.AddChild(blurb);
         // The words of the trade it leans on ("sight unseen", "Bram's word"...), said exactly: a "?" in the corner, and
         // the same over its description.

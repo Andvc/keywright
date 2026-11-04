@@ -218,12 +218,16 @@ public partial class CollectionView : Node2D
     /// The keepsakes (0.32): what tales' people gave you to keep, three by three. One you've held shows its picture and
     /// what it does; the rest say which tale gives it, so you know where to look.
     /// </summary>
+    const float KeepsakeCardW = 376;
+    /// <summary>A keepsake's description on its card (four lines; the fit test), and its name's width.</summary>
+    public static (float W, float H) KeepsakeBlurbBox => (KeepsakeCardW - 78, 98);
+
     void BuildKeepsakes()
     {
         int had = Keepsakes.All.Count(k => _c.HadKeepsake(k.Key));
         _page.AddChild(UiKit.MakeLabel(Loc.T($"What people give you to keep when you see their tale through. A keepsake works like a curio, but takes no slot and is never sold. You've been given {had} of {Keepsakes.All.Length}."),
             16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
-        const float cardW = 376, cardH = 128, gap = 8;
+        const float cardW = KeepsakeCardW, cardH = 128, gap = 8;
         // Three to a row, as the songbook's cards: more than nine scroll inside the panel (the wheel, or the right stick).
         float top = PanelY + 118;
         var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }
@@ -252,7 +256,7 @@ public partial class CollectionView : Node2D
             card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(34, 44), 52));
             card.AddChild(UiKit.MakeLabel(keepsake.Name, 16, Palette.Keepsake).Place(70, 6, cardW - 78, 20));
             // Four lines on the card (a longer language ends in "..."): the whole of it on hover.
-            var blurb = UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped().Place(70, 28, cardW - 78, 98);
+            var blurb = UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped().Place(70, 28, KeepsakeBlurbBox.W, KeepsakeBlurbBox.H);
             blurb.MaxLinesVisible = 4;
             blurb.ClipText = true;
             blurb.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;

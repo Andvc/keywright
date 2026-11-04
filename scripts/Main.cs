@@ -15,7 +15,7 @@ namespace Keywright;
 /// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the week's scene
 /// (from the second week), Nim's curios on his day, the counter, the day's end, and on the third day the Guild's due.
 /// What you've done across runs is kept in user://profile.json.
-/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --loc-test, --pseudo, --lang=CODE, --font-sheet, --export-sounds=DIR, --autoplay,
+/// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --loc-test, --fit-test, --pseudo, --lang=CODE, --font-sheet, --export-sounds=DIR, --autoplay,
 /// --shots=DIR, --quit-at-end, --days=N, --no-tutorial (no tips, no scripted first day),
 /// --start-tier=N and --gold=N (jump ahead with the tools you'd have by then), --opening-demo (opens a blue chest
 /// holding one thing of each quality, two of them better than the chest, and a Heartsong, to preview the opening's
@@ -291,6 +291,7 @@ public partial class Main : Node2D
         else if (args.Contains("--art-review")) ArtReview();
         else if (args.Contains("--shell-demo")) ShellDemo();
         else if (args.Contains("--title-test")) TitleTest();
+        else if (args.Contains("--fit-test")) FitTest();
         else if (!direct) ToTitle();
         else if (args.Contains("--opening-demo")) OpeningDemo(args.Contains("--quit-at-end"));
         else if (args.Contains("--vault-demo")) VaultDemo(args.Contains("--quit-at-end"));

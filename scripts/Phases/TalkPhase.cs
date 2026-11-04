@@ -217,6 +217,13 @@ public partial class TalkPhase : Phase
     /// A keepsake given (0.32): its own card, over the scene where the slip would be, with its picture and what it does,
     /// so the gift lands as a gift, not a line of text.
     /// </summary>
+    public static string KeptHeading(KeepsakeDef keepsake) => Loc.T($"A KEEPSAKE: {keepsake.Name.ToUpperInvariant()}");
+
+    /// <summary>A keepsake card's description box, right of its picture (four lines; the fit test).</summary>
+    public static (float W, float H) KeptBox => (PanelW - 104, 98);
+    /// <summary>Its heading's width: across the top, over the picture too, for a long name in a longer language.</summary>
+    public static float KeptHeadingW => PanelW - 24;
+
     void ShowKept(float y)
     {
         var given = State.Keepsakes.Skip(_keepsakesBefore).Select(Keepsakes.Get).ToList();
@@ -226,12 +233,12 @@ public partial class TalkPhase : Phase
             card.TooltipText = UiKit.KeepsakeTooltip(keepsake);
             card.MouseFilter = Control.MouseFilterEnum.Stop;
             card.AddChild(UiKit.MakeKeepsakeIcon(keepsake, new Vector2(48, 68), 64));
-            card.AddChild(UiKit.MakeLabel(Loc.T($"A KEEPSAKE: {keepsake.Name.ToUpperInvariant()}"), 16, Palette.Keepsake).Place(92, 10, PanelW - 104, 20));
+            card.AddChild(UiKit.MakeLabel(KeptHeading(keepsake), 16, Palette.Keepsake).Place(12, 8, KeptHeadingW, 20));
             var blurb = UiKit.MakeLabel(keepsake.Blurb, 16, Palette.Text).Wrapped();
             blurb.MaxLinesVisible = 4;
             blurb.ClipText = true;
             blurb.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
-            card.AddChild(blurb.Place(92, 34, PanelW - 104, 96));
+            card.AddChild(blurb.Place(92, 34, KeptBox.W, KeptBox.H));
             card.PivotOffset = new Vector2(PanelW / 2, 68);
             card.Scale = Vector2.One * 0.6f;
             card.CreateTween().TweenProperty(card, "scale", Vector2.One, 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);

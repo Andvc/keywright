@@ -146,7 +146,7 @@ public static class Curios
         new("coin", Loc.T("Lucky Coin"), Loc.T("The first chest you buy each day: each thing in it rolls its quality twice and keeps the better roll."), U, "coin", 1, T(Luck)),
         new("foot", Loc.T("Rabbit's Foot"), Loc.T($"Everything you open is {Pct(FootLuck)} likelier to come out a step better than its chest."), U, "foot", 1, T(Luck)),
         new("wishbone", Loc.T("Wishbone"), Loc.T("Something that comes out better than its chest sells for half as much again."), U, "wishbone", 1, T(Luck)),
-        new("horseshoe", Loc.T("Horseshoe"), Loc.T($"Each chest in a row with a surprise in it makes the next one's things {Pct(HorseshoeStep)} likelier to come out a step better (up to {Pct(HorseshoeMax)}). One without starts it again."),
+        new("horseshoe", Loc.T("Horseshoe"), Loc.T($"Each chest in a row with a surprise makes the next one's things {Pct(HorseshoeStep)} likelier to come out a step better (up to {Pct(HorseshoeMax)})."),
             U, "horseshoe", 2, T(Luck)),
         new("clover", Loc.T("Four-Leaf Clover"), Loc.T("The first chest you buy each week: everything in it comes out a step better."), R, "clover", 2, T(Luck)),
         new("star", Loc.T("Shooting Star"), Loc.T("Once a day, the first thing to come out better than its chest climbs a step further."), R, "star", 2, T(Luck)),

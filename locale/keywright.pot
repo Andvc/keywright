@@ -1054,7 +1054,7 @@ msgstr ""
 
 #: scripts/Core/Curios.cs:149
 #, csharp-format
-msgid "Each chest in a row with a surprise in it makes the next one's things {0} likelier to come out a step better (up to {1}). One without starts it again."
+msgid "Each chest in a row with a surprise makes the next one's things {0} likelier to come out a step better (up to {1})."
 msgstr ""
 
 #: scripts/Core/Curios.cs:151
@@ -2984,7 +2984,7 @@ msgstr ""
 msgid "tiny"
 msgstr ""
 
-#: scripts/Core/Items.cs:374 scripts/Phases/OpeningPhase.cs:610 scripts/Ui/CollectionView.cs:296
+#: scripts/Core/Items.cs:374 scripts/Phases/OpeningPhase.cs:612 scripts/Ui/CollectionView.cs:300
 msgid "singing"
 msgstr ""
 
@@ -4180,7 +4180,7 @@ msgstr ""
 msgid "Buy it ({0}g)"
 msgstr ""
 
-#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:314
 msgid "Not now"
 msgstr ""
 
@@ -9380,229 +9380,229 @@ msgstr ""
 msgid "She will put me back on the shelf. It is a very good shelf."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:275
+#: scripts/Core/TaleBook.Late.cs:278
 msgid "A machine that opens chests without a Keywright, minding your door. You do understand what that means for the Guild's licences? And yours?"
-msgstr ""
-
-#: scripts/Core/TaleBook.Late.cs:276
-#, csharp-format
-msgid "Hand it over, or pay the Guild's fine for keeping it: {0}. Or appeal to the King, if he likes you that much."
 msgstr ""
 
 #: scripts/Core/TaleBook.Late.cs:279
 #, csharp-format
-msgid "Pay the fine ({0}g)"
-msgstr ""
-
-#: scripts/Core/TaleBook.Late.cs:281
-msgid "The Guild demanded Tock. You paid its fine and kept it."
+msgid "Hand it over, or pay the Guild's fine for keeping it: {0}. Or appeal to the King, if he likes you that much."
 msgstr ""
 
 #: scripts/Core/TaleBook.Late.cs:282
-msgid "Paid in full. Keep your toy, then. Keep it close."
+#, csharp-format
+msgid "Pay the fine ({0}g)"
 msgstr ""
 
 #: scripts/Core/TaleBook.Late.cs:284
+msgid "The Guild demanded Tock. You paid its fine and kept it."
+msgstr ""
+
+#: scripts/Core/TaleBook.Late.cs:285
+msgid "Paid in full. Keep your toy, then. Keep it close."
+msgstr ""
+
+#: scripts/Core/TaleBook.Late.cs:287
 msgid "Appeal to the King"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:289
+#: scripts/Core/TaleBook.Late.cs:292
 msgid "The Guild demanded Tock. The King himself said Tock stays, and the Guild had to swallow it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:290
+#: scripts/Core/TaleBook.Late.cs:293
 msgid "The King, of all people. Very well. The Guild has a long memory, Keywright."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:294
+#: scripts/Core/TaleBook.Late.cs:297
 msgid "The Guild demanded Tock. The King wouldn't hear your appeal, and the Guild took it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:295
+#: scripts/Core/TaleBook.Late.cs:298
 msgid "The King doesn't know your name, I'm afraid. We'll take the machine now."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:297
+#: scripts/Core/TaleBook.Late.cs:300
 msgid "Hand Tock over"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:302
+#: scripts/Core/TaleBook.Late.cs:305
 msgid "You handed Tock over to the Guild."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:303
+#: scripts/Core/TaleBook.Late.cs:306
 msgid "Sensible. Locks should need Keywrights. It's what keeps you in business."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:313
+#: scripts/Core/TaleBook.Late.cs:316
 msgid "The Sleeper"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:314
+#: scripts/Core/TaleBook.Late.cs:317
 msgid "In the palace cellars there is a chest that breathes. The Chest Roll says a knight locked himself inside it at the Locking, and only his heir can give it away. Nobody knows who that is."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:317
+#: scripts/Core/TaleBook.Late.cs:320
 msgid "I stand at your door, Keywright, as I stood at the King's. Three hundred years late, and still on duty."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:318
+#: scripts/Core/TaleBook.Late.cs:321
 msgid "Sir Edric went off to find his own grave, he said, to see what they'd written on it. I've got his boots."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:319
+#: scripts/Core/TaleBook.Late.cs:322
 msgid "The chest in the cellars is still breathing. In, and out. I've stopped going down there."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:326
+#: scripts/Core/TaleBook.Late.cs:329
 msgid "Keywright. There is a chest in the palace cellars that breathes. In, and out, very slowly. It has done so for three hundred years."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:327
+#: scripts/Core/TaleBook.Late.cs:330
 msgid "The Chest Roll says Sir Edric Ashcombe locked himself inside it at the Locking, to guard something for the King. It is his. Only his heir could give it away, and nobody knows who that is."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:331
+#: scripts/Core/TaleBook.Late.cs:334
 msgid "I'll find the heir"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:334
+#: scripts/Core/TaleBook.Late.cs:337
 msgid "The Sleeper's heir"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:334
+#: scripts/Core/TaleBook.Late.cs:337
 msgid "Wanted: anyone of Sir Edric Ashcombe's blood. Ask at the Royal Emporium."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:335
+#: scripts/Core/TaleBook.Late.cs:338
 msgid "A chest in the palace cellars breathes: a knight has been locked inside since the Locking. You're looking for his heir."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:336
+#: scripts/Core/TaleBook.Late.cs:339
 msgid "How thrilling. I shall have the Roll's clerks look too."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:338
+#: scripts/Core/TaleBook.Late.cs:341
 msgid "Let him sleep"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:340
+#: scripts/Core/TaleBook.Late.cs:343
 msgid "A chest in the palace cellars breathes. You let its sleeper sleep."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:341
+#: scripts/Core/TaleBook.Late.cs:344
 msgid "Perhaps you're right. He sounds peaceful enough."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:349
+#: scripts/Core/TaleBook.Late.cs:352
 msgid "The Roll's clerks found him. The Ashcombes went into trade after the Locking, then down the river, then into the mud."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:350
+#: scripts/Core/TaleBook.Late.cs:353
 msgid "The last of them signs with a mark like a mudlark's hook. Your Miss Mudge, Keywright. Tilly Mudge is Sir Edric's heir."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:351
+#: scripts/Core/TaleBook.Late.cs:354
 msgid "The Chest Roll says Sir Edric's heir is Tilly Mudge, the mudlark."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:357
+#: scripts/Core/TaleBook.Late.cs:360
 msgid "Me? An Ashcombe? My nan always said we were somebody, once. I thought she meant drunk."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:358
+#: scripts/Core/TaleBook.Late.cs:361
 msgid "If he's mine to give, he's yours to open. But I want to be there when he wakes, and I want his boots."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:361
+#: scripts/Core/TaleBook.Late.cs:364
 msgid "Of course"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:364
+#: scripts/Core/TaleBook.Late.cs:367
 msgid "Tilly Mudge, Sir Edric's heir, will give you the breathing chest, so long as she can watch him wake."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:365
+#: scripts/Core/TaleBook.Late.cs:368
 msgid "Tomorrow, then. I'll bring him round in a barrow."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:367
+#: scripts/Core/TaleBook.Late.cs:370
 msgid "Some things should stay shut"
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:369
+#: scripts/Core/TaleBook.Late.cs:372
 msgid "You told Tilly to let her ancestor sleep."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:370
+#: scripts/Core/TaleBook.Late.cs:373
 msgid "Suit yourself. I'll keep my nan's stories, then."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:378
+#: scripts/Core/TaleBook.Late.cs:381
 msgid "Sir Edric's chest. Hear it breathing? It's yours, freely given, by his heir. One coin, for luck, and mind he doesn't bite."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:383
+#: scripts/Core/TaleBook.Late.cs:386
 msgid "Tilly gave you the breathing chest, and you opened it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:385
+#: scripts/Core/TaleBook.Late.cs:388
 msgid "Tilly brought you the breathing chest, and you couldn't bring yourself to open it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:391
+#: scripts/Core/TaleBook.Late.cs:394
 msgid "What year is it? No, don't tell me. Tell me the Gate held. ...Good. Then I did my duty."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:392
+#: scripts/Core/TaleBook.Late.cs:395
 msgid "I guarded the Crown's oath-book in that chest for three hundred years. Your King can have it back, with my compliments. And you let me out. An Ashcombe pays his debts: I'll stand at your door, and no thief or warrant will cross it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:399
+#: scripts/Core/TaleBook.Late.cs:402
 msgid "Sir Edric Ashcombe woke after three hundred years, returned the Crown's oath-book, and swore to guard your door."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:411
+#: scripts/Core/TaleBook.Late.cs:414
 msgid "A bell-locked chest: read it exactly, every last thing in it, and its echo sings free. Wrong, and the echo is lost."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:434
+#: scripts/Core/TaleBook.Late.cs:437
 msgid "Its echo sleeps in a purse of coin, warded: you'll never hear it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:435
+#: scripts/Core/TaleBook.Late.cs:438
 msgid "Its echo sleeps in a blade, warded: you'll never hear it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:436
+#: scripts/Core/TaleBook.Late.cs:439
 msgid "Its echo sleeps in a cloak, warded: you'll never hear it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:437
+#: scripts/Core/TaleBook.Late.cs:440
 msgid "Its echo sleeps in a potion, warded: you'll never hear it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:438
+#: scripts/Core/TaleBook.Late.cs:441
 msgid "Its echo sleeps in a spell, warded: you'll never hear it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:439
+#: scripts/Core/TaleBook.Late.cs:442
 msgid "Its echo sleeps in a gem, warded: you'll never hear it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:446
+#: scripts/Core/TaleBook.Late.cs:449
 msgid "You read a bell-locked chest wrong. Its echo slipped away, and the song with it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:460
+#: scripts/Core/TaleBook.Late.cs:463
 msgid "I sang the Keyhold's song whole, once, in the ruin of our chapel, and a Keywright carried it home. I can stop humming now."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:461
+#: scripts/Core/TaleBook.Late.cs:464
 msgid "The Keyhold's song is lost. I hum what's left of it on the abbey road. Children stop to listen."
 msgstr ""
 
-#: scripts/Core/TaleBook.Late.cs:462
+#: scripts/Core/TaleBook.Late.cs:465
 msgid "Two echoes free and one still waiting, somewhere. I'll keep looking. I've nothing but time."
 msgstr ""
 
@@ -11682,12 +11682,12 @@ msgstr ""
 msgid "Their people ask half as much again for their tools."
 msgstr ""
 
-#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:817 scripts/Phases/TalkPhase.cs:82
+#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:819 scripts/Phases/TalkPhase.cs:82
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Go on"
 msgstr ""
 
-#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:353 scripts/Phases/PeddlerPhase.cs:108
+#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:353 scripts/Phases/PeddlerPhase.cs:131
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Good night"
 msgstr ""
@@ -12339,92 +12339,92 @@ msgstr ""
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr ""
 
-#: scripts/Main.cs:518
+#: scripts/Main.cs:519
 #, csharp-format
 msgid "Achievement: {0}"
 msgstr ""
 
-#: scripts/Main.cs:543
+#: scripts/Main.cs:544
 msgid "THE NINE HEARTSONGS"
 msgstr ""
 
-#: scripts/Main.cs:639
+#: scripts/Main.cs:640
 #, csharp-format
 msgid "In the purse: {0}g."
 msgstr ""
 
-#: scripts/Main.cs:647
+#: scripts/Main.cs:648
 msgid "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 
-#: scripts/Main.cs:652
+#: scripts/Main.cs:653
 msgid "Not now: finish what's in hand first."
 msgstr ""
 
-#: scripts/Main.cs:766 scripts/Main.cs:929
+#: scripts/Main.cs:767 scripts/Main.cs:930
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr ""
 
-#: scripts/Main.cs:766 scripts/Main.cs:929
+#: scripts/Main.cs:767 scripts/Main.cs:930
 msgid "THE CROWN CHEST"
 msgstr ""
 
-#: scripts/Main.cs:797
+#: scripts/Main.cs:798
 msgid "BRAM'S STALL"
 msgstr ""
 
-#: scripts/Main.cs:797 scripts/Ui/NotebookView.cs:398 scripts/Ui/NotebookView.cs:686
+#: scripts/Main.cs:798 scripts/Ui/NotebookView.cs:398 scripts/Ui/NotebookView.cs:686
 #, csharp-format
 msgid "WEEK {0}"
 msgstr ""
 
-#: scripts/Main.cs:820
+#: scripts/Main.cs:821
 msgid "THE SEASON'S END"
 msgstr ""
 
-#: scripts/Main.cs:835
+#: scripts/Main.cs:836
 msgid "THE GILDED GUILD"
 msgstr ""
 
-#: scripts/Main.cs:838
+#: scripts/Main.cs:839
 msgid "THE ALDRIC KEY"
 msgstr ""
 
-#: scripts/Main.cs:904
+#: scripts/Main.cs:905
 msgid "FREE AND CLEAR"
 msgstr ""
 
-#: scripts/Main.cs:952 scripts/Ui/NotebookView.cs:409
+#: scripts/Main.cs:953 scripts/Ui/NotebookView.cs:409
 #, csharp-format
 msgid "DAY {0}"
 msgstr ""
 
-#: scripts/Main.cs:955
+#: scripts/Main.cs:956
 #, csharp-format
 msgid ", level {0}"
 msgstr ""
 
-#: scripts/Main.cs:956
+#: scripts/Main.cs:957
 #, csharp-format
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr ""
 
-#: scripts/Main.cs:956
+#: scripts/Main.cs:957
 #, csharp-format
 msgid " of {0}"
 msgstr ""
 
-#: scripts/Main.cs:957
+#: scripts/Main.cs:958
 #, csharp-format
 msgid "The Guild comes tonight for {0}g."
 msgstr ""
 
-#: scripts/Main.cs:958
+#: scripts/Main.cs:959
 #, csharp-format
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr ""
 
-#: scripts/Main.cs:965
+#: scripts/Main.cs:966
 #, csharp-format
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr ""
@@ -12580,13 +12580,13 @@ msgstr ""
 #: scripts/Phases/DayEndPhase.cs:82 scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84
 #: scripts/Phases/DayEndPhase.cs:86 scripts/Phases/DayEndPhase.cs:384 scripts/Phases/DuesPhase.cs:203
 #: scripts/Phases/DuesPhase.cs:210 scripts/Phases/DuesPhase.cs:218 scripts/Phases/DuesPhase.cs:265
-#: scripts/Phases/DuesPhase.cs:279 scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:925
-#: scripts/Phases/PeddlerPhase.cs:323 scripts/Phases/TalkPhase.cs:191 scripts/Phases/TalkPhase.cs:198
+#: scripts/Phases/DuesPhase.cs:279 scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:927
+#: scripts/Phases/PeddlerPhase.cs:347 scripts/Phases/TalkPhase.cs:191 scripts/Phases/TalkPhase.cs:198
 #, csharp-format
 msgid "+{0}g"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:515 scripts/Phases/TalkPhase.cs:249
+#: scripts/Phases/CounterPhase.cs:515 scripts/Phases/TalkPhase.cs:256
 msgid "Waiting"
 msgstr ""
 
@@ -12616,7 +12616,7 @@ msgstr ""
 msgid " each"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:564 scripts/Phases/OpeningPhase.cs:926
+#: scripts/Phases/CounterPhase.cs:564 scripts/Phases/OpeningPhase.cs:928
 msgid " and a shard of the Aldric Key"
 msgstr ""
 
@@ -12731,7 +12731,7 @@ msgstr ""
 msgid "Offer {0}g"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:288
 #, csharp-format
 msgid "Buy {0}g"
 msgstr ""
@@ -12877,12 +12877,12 @@ msgid "Hollis's men take the chest home to its owner, and pay you the finder's s
 msgstr ""
 
 #: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376
-#: scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/OpeningPhase.cs:819
 msgid "Close up for the day"
 msgstr ""
 
 #: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376
-#: scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/OpeningPhase.cs:819
 msgid "Next customer"
 msgstr ""
 
@@ -13240,11 +13240,11 @@ msgstr ""
 msgid "{0}g more to go"
 msgstr ""
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:310
 msgid "ARE YOU SURE?"
 msgstr ""
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:310
 msgid "Buy anyway"
 msgstr ""
 
@@ -13563,389 +13563,389 @@ msgstr ""
 msgid "The Guild's assessor -10%"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:269
+#: scripts/Phases/OpeningPhase.cs:271
 msgid "...EMPTY!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:274
+#: scripts/Phases/OpeningPhase.cs:276
 #, csharp-format
 msgid "no {0}?"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:275
+#: scripts/Phases/OpeningPhase.cs:277
 #, csharp-format
 msgid "{0} fewer {1}?"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:276
+#: scripts/Phases/OpeningPhase.cs:278
 msgid "no false bottom?"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:279
+#: scripts/Phases/OpeningPhase.cs:281
 #, csharp-format
 msgid "warded {0}: you named something that wasn't there"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:280
+#: scripts/Phases/OpeningPhase.cs:282
 #, csharp-format
 msgid "warded, never named: {0}"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:315
+#: scripts/Phases/OpeningPhase.cs:317
 msgid "...wait. The ward lets go of what you named!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:375
+#: scripts/Phases/OpeningPhase.cs:377
 msgid "WORSE..."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "BETTER!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "EVEN BETTER!!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "INCREDIBLE!!!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:575
+#: scripts/Phases/OpeningPhase.cs:577
 msgid "ENCHANTED! x2"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:580
+#: scripts/Phases/OpeningPhase.cs:582
 msgid "FAKE!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:595
+#: scripts/Phases/OpeningPhase.cs:597
 #, csharp-format
 msgid "{0}'S!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:606
+#: scripts/Phases/OpeningPhase.cs:608
 msgid "NEW!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:610
+#: scripts/Phases/OpeningPhase.cs:612
 msgid "let go"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "BETTER THAN EXPECTED!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "TWO QUALITIES UP!!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "THREE QUALITIES UP!!!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 #, csharp-format
 msgid "PROFIT +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 #, csharp-format
 msgid "LOSS {0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "BROKE EVEN"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:778
+#: scripts/Phases/OpeningPhase.cs:780
 msgid "fleeced"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:778
+#: scripts/Phases/OpeningPhase.cs:780
 msgid "a steal"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:792
+#: scripts/Phases/OpeningPhase.cs:794
 msgid "PERFECT READ"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:800
+#: scripts/Phases/OpeningPhase.cs:802
 msgid " Masterful pick: everything +25%."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:801
+#: scripts/Phases/OpeningPhase.cs:803
 msgid " Forced open: everything -10%."
-msgstr ""
-
-#: scripts/Phases/OpeningPhase.cs:805
-#, csharp-format
-msgid " A perfect read: a valuer's fee of {0}g."
-msgstr ""
-
-#: scripts/Phases/OpeningPhase.cs:806
-#, csharp-format
-msgid " Haggler's Purse: {0}g back."
 msgstr ""
 
 #: scripts/Phases/OpeningPhase.cs:807
 #, csharp-format
+msgid " A perfect read: a valuer's fee of {0}g."
+msgstr ""
+
+#: scripts/Phases/OpeningPhase.cs:808
+#, csharp-format
+msgid " Haggler's Purse: {0}g back."
+msgstr ""
+
+#: scripts/Phases/OpeningPhase.cs:809
+#, csharp-format
 msgid " Underwriter's Bond: {0}g back."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:849
+#: scripts/Phases/OpeningPhase.cs:851
 #, csharp-format
 msgid " {0} took the {1}, and paid {2}g for it."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:850
+#: scripts/Phases/OpeningPhase.cs:852
 #, csharp-format
 msgid " {0} took the {1}, as agreed."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:852
+#: scripts/Phases/OpeningPhase.cs:854
 #, csharp-format
 msgid " Read exactly: {0} hands back {1}g, as wagered."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:852
+#: scripts/Phases/OpeningPhase.cs:854
 #, csharp-format
 msgid " Not quite right: {0} keeps the whole price."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:854
+#: scripts/Phases/OpeningPhase.cs:856
 #, csharp-format
 msgid " Read exactly: {0} takes a quarter off, {1}g back."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:855
+#: scripts/Phases/OpeningPhase.cs:857
 #, csharp-format
 msgid " A wrong read: you pay {0} what it truly held, and a quarter more: {1}g."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:856
+#: scripts/Phases/OpeningPhase.cs:858
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:913
+#: scripts/Phases/OpeningPhase.cs:915
 msgid "Delivered"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:921
+#: scripts/Phases/OpeningPhase.cs:923
 msgid "Filled"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:925
+#: scripts/Phases/OpeningPhase.cs:927
 #, csharp-format
 msgid "Shard +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:925 scripts/Phases/OpeningPhase.cs:959
+#: scripts/Phases/OpeningPhase.cs:927 scripts/Phases/OpeningPhase.cs:961
 #, csharp-format
 msgid "{0}/{1}: +{2}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:925
+#: scripts/Phases/OpeningPhase.cs:927
 #, csharp-format
 msgid "Deliver +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:926
+#: scripts/Phases/OpeningPhase.cs:928
 #, csharp-format
 msgid "{0} wants {1}: {2}g{3}, instead of {4}g for selling it. A commission always pays more than selling."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:946
+#: scripts/Phases/OpeningPhase.cs:948
 #, csharp-format
 msgid "Commission! +{0}g"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:950
+#: scripts/Phases/OpeningPhase.cs:952
 #, csharp-format
 msgid "KEY SHARD {0} OF {1}!"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:978
+#: scripts/Phases/OpeningPhase.cs:980
 #, csharp-format
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:978
+#: scripts/Phases/OpeningPhase.cs:980
 #, csharp-format
 msgid "+{0} exhibition"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:990
+#: scripts/Phases/OpeningPhase.cs:992
 msgid "On display"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Swap"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Keep"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 #, csharp-format
 msgid "Swap {0} (-{1}g)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 #, csharp-format
 msgid "Keep {0} (-{1}g)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 #, csharp-format
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid " (double: it's enchanted)"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid " Your display is full: sell something on it to make room."
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1023
+#: scripts/Phases/OpeningPhase.cs:1025
 #, csharp-format
 msgid "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1033
+#: scripts/Phases/OpeningPhase.cs:1035
 #, csharp-format
 msgid "{0}: +{1}g, -{2} pts"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1035
+#: scripts/Phases/OpeningPhase.cs:1037
 #, csharp-format
 msgid "+{0}g, -{1} pts"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1047
+#: scripts/Phases/OpeningPhase.cs:1049
 msgid "Never mind"
 msgstr ""
 
-#: scripts/Phases/OpeningPhase.cs:1059
+#: scripts/Phases/OpeningPhase.cs:1061
 #, csharp-format
 msgid "Sold the {0}: +{1}g"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:49
+#: scripts/Phases/PeddlerPhase.cs:72
 msgid "NIM'S CURIOS"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:77
+#: scripts/Phases/PeddlerPhase.cs:100
 msgid "Nim's sold out: you own every curio Nim carries!"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:79
+#: scripts/Phases/PeddlerPhase.cs:102
 #, csharp-format
 msgid "Each curio costs a set sum for its rarity, plus a share of the gold you have tonight ({0}g)."
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:86
+#: scripts/Phases/PeddlerPhase.cs:109
 #, csharp-format
 msgid "YOUR CURIOS {0}/{1}"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:89
+#: scripts/Phases/PeddlerPhase.cs:112
 msgid "No room for more: click one to sell it back for half."
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:90
+#: scripts/Phases/PeddlerPhase.cs:113
 msgid "Click one to sell it back for half."
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:103
+#: scripts/Phases/PeddlerPhase.cs:126
 #, csharp-format
 msgid "{0}: {1}\nClick to sell it back for {2}g."
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:113
+#: scripts/Phases/PeddlerPhase.cs:136
 #, csharp-format
 msgid "{0} {1}g"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:131
+#: scripts/Phases/PeddlerPhase.cs:154
 #, csharp-format
 msgid "The back room ({0})"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:132
+#: scripts/Phases/PeddlerPhase.cs:155
 msgid "Chests that won't open for you: return them to their owners, or sell them to Nim's friends."
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:161
+#: scripts/Phases/PeddlerPhase.cs:184
 msgid "THE BACK ROOM"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:166
+#: scripts/Phases/PeddlerPhase.cs:189
 msgid "The duel's stakes, held for the winner"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:167
+#: scripts/Phases/PeddlerPhase.cs:190
 #, csharp-format
 msgid "{0}'s parcel, kept for collection"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:167
+#: scripts/Phases/PeddlerPhase.cs:190
 #, csharp-format
 msgid "A {0} chest: {1}'s"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:170
+#: scripts/Phases/PeddlerPhase.cs:193
 #, csharp-format
 msgid "Return it +{0}g"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:171
+#: scripts/Phases/PeddlerPhase.cs:194
 #, csharp-format
 msgid "Nim's friends +{0}g"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:173 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
+#: scripts/Phases/PeddlerPhase.cs:196 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
 #: scripts/Ui/Hud.cs:100
 msgid "Close"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:250 scripts/Phases/PeddlerPhase.cs:252
+#: scripts/Phases/PeddlerPhase.cs:274 scripts/Phases/PeddlerPhase.cs:276
 #, csharp-format
 msgid "Goes with your {0}"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:251
+#: scripts/Phases/PeddlerPhase.cs:275
 #, csharp-format
 msgid "With your {0}"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:256
+#: scripts/Phases/PeddlerPhase.cs:280
 #, csharp-format
 msgid "New at {0}"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:259
+#: scripts/Phases/PeddlerPhase.cs:283
 msgid "Yours"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/PeddlerPhase.cs:288
 msgid "Take it, free"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:267
+#: scripts/Phases/PeddlerPhase.cs:291
 #, csharp-format
 msgid "{0}g for a {1} curio, and {2} of your purse tonight."
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:268
+#: scripts/Phases/PeddlerPhase.cs:292
 #, csharp-format
 msgid "No room: sell a curio back to Nim first. {0}"
 msgstr ""
 
-#: scripts/Phases/PeddlerPhase.cs:269
+#: scripts/Phases/PeddlerPhase.cs:293
 #, csharp-format
 msgid "{0} {1}"
 msgstr ""
@@ -14159,7 +14159,7 @@ msgstr ""
 msgid "click for more"
 msgstr ""
 
-#: scripts/Phases/ScenePhase.cs:128 scripts/Ui/MentorView.cs:206
+#: scripts/Phases/ScenePhase.cs:128 scripts/Ui/MentorView.cs:209
 msgid "click to go on"
 msgstr ""
 
@@ -14283,7 +14283,7 @@ msgstr ""
 msgid "IN YOUR NOTEBOOK {0}"
 msgstr ""
 
-#: scripts/Phases/TalkPhase.cs:229
+#: scripts/Phases/TalkPhase.cs:220
 #, csharp-format
 msgid "A KEEPSAKE: {0}"
 msgstr ""
@@ -14459,48 +14459,48 @@ msgstr ""
 msgid "Locked: a {0} curio for {1}. Nim brings it {2}.{3}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:224
+#: scripts/Ui/CollectionView.cs:228
 #, csharp-format
 msgid "What people give you to keep when you see their tale through. A keepsake works like a curio, but takes no slot and is never sold. You've been given {0} of {1}."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:248
+#: scripts/Ui/CollectionView.cs:252
 #, csharp-format
 msgid "From {0}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:249
+#: scripts/Ui/CollectionView.cs:253
 #, csharp-format
 msgid "Not given yet: someone gives it at the end of {0}."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:260
+#: scripts/Ui/CollectionView.cs:264
 #, csharp-format
 msgid "{0}, from {1}: {2}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:261
+#: scripts/Ui/CollectionView.cs:265
 msgid "yours"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 #, csharp-format
 msgid "Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. The songbook holds {0} of the nine{1}"
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ": the Crown Chest can be sung whole."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ": with all nine, the Crown Chest's ending changes."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:288
+#: scripts/Ui/CollectionView.cs:292
 msgid "Not heard yet. A Heartsong sings at the gentlest shake, in any seller's chest, and the seller never knows it's there."
 msgstr ""
 
-#: scripts/Ui/CollectionView.cs:291
+#: scripts/Ui/CollectionView.cs:295
 #, csharp-format
 msgid "{0}, from {1}. {2}"
 msgstr ""
@@ -14611,28 +14611,28 @@ msgstr ""
 msgid "in {0} days"
 msgstr ""
 
-#: scripts/Ui/MentorView.cs:63
+#: scripts/Ui/MentorView.cs:65
 msgid "Skip lesson"
 msgstr ""
 
-#: scripts/Ui/MentorView.cs:166
+#: scripts/Ui/MentorView.cs:168
 msgid "[do] "
 msgstr ""
 
-#: scripts/Ui/MentorView.cs:166
+#: scripts/Ui/MentorView.cs:168
 msgid "[read] "
 msgstr ""
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "do it to go on"
 msgstr ""
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 #, csharp-format
 msgid "click for more ({0})"
 msgstr ""
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "click to close"
 msgstr ""
 

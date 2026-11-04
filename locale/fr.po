@@ -849,7 +849,7 @@ msgstr "Langue d'or"
 msgid ""
 "Everyone haggles and nobody walks out: go as low as you like, and they come down to {0} under the least they'd take."
 msgstr ""
-"Tout le monde marchande, nul ne claque la porte : offrez aussi bas que vous voulez, et ils descendent jusqu'à {0} sous le minimum qu'ils accepteraient."
+"Tout le monde marchande, nul ne s'en va : offrez aussi bas que voulu, ils descendent à {0} sous leur minimum."
 
 #: scripts/Core/Curios.cs:111
 msgid "Ear Trumpet"
@@ -972,7 +972,7 @@ msgstr "Journal de contrebandier"
 msgid ""
 "Smugglers trust a buyer who keeps quiet: each false bottom you open this run makes false bottoms {0} likelier (up to {1})."
 msgstr ""
-"Les contrebandiers aiment la discrétion : chaque double fond ouvert dans la partie donne aux doubles fonds {0} de chances en plus d'apparaître (jusqu'à {1})."
+"Chaque double fond ouvert dans la partie rend les doubles fonds {0} plus probables (jusqu'à {1})."
 
 #: scripts/Core/Curios.cs:131
 msgid "Black Market Pass"
@@ -1085,9 +1085,9 @@ msgstr "Fer à cheval"
 
 #: scripts/Core/Curios.cs:149
 msgid ""
-"Each chest in a row with a surprise in it makes the next one's things {0} likelier to come out a step better (up to {1}). One without starts it again."
+"Each chest in a row with a surprise makes the next one's things {0} likelier to come out a step better (up to {1})."
 msgstr ""
-"Chaque coffre d'affilée contenant une surprise donne aux objets du suivant {0} de chances en plus de sortir un cran au-dessus (jusqu'à {1}). Un coffre sans surprise remet tout à zéro."
+"Chaque coffre à surprise d'affilée : +{0} de chances d'un cran au-dessus pour les objets du suivant (max {1})."
 
 #: scripts/Core/Curios.cs:151
 msgid "Four-Leaf Clover"
@@ -1374,7 +1374,7 @@ msgstr "Billet à ordre de la Guilde"
 msgid ""
 "The Guild's own paper: once a run, on a Guild night you can't cover, it pays what's short (not the last week)."
 msgstr ""
-"Le propre papier de la Guilde : une fois par partie, une nuit où l'or manque, il paie le reste (sauf la dernière semaine)."
+"Une fois par partie, une nuit où l'or manque, il paie le reste (sauf la dernière semaine)."
 
 #: scripts/Core/Curios.cs:205
 msgid "Letter of Introduction"
@@ -3341,7 +3341,7 @@ msgstr "plat"
 msgid "tiny"
 msgstr "minuscule"
 
-#: scripts/Core/Items.cs:374 scripts/Phases/OpeningPhase.cs:610 scripts/Ui/CollectionView.cs:296
+#: scripts/Core/Items.cs:374 scripts/Phases/OpeningPhase.cs:612 scripts/Ui/CollectionView.cs:300
 msgid "singing"
 msgstr "chantant"
 
@@ -4741,7 +4741,7 @@ msgstr "Quelle déception. Je reviendrai peut-être à la charge."
 msgid "Buy it ({0}g)"
 msgstr "L'acheter ({0} po)"
 
-#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:314
 msgid "Not now"
 msgstr "Pas maintenant"
 
@@ -10991,291 +10991,291 @@ msgstr "Vous avez ramené Tac à l'archimage Orme. L'Arcanum vous est redevable.
 msgid "She will put me back on the shelf. It is a very good shelf."
 msgstr "Elle me remettra sur l'étagère. C'est une très bonne étagère."
 
-#: scripts/Core/TaleBook.Late.cs:275
+#: scripts/Core/TaleBook.Late.cs:278
 msgid ""
 "A machine that opens chests without a Keywright, minding your door. You do understand what that means for the Guild's licences? And yours?"
 msgstr ""
 "Une machine qui ouvre les coffres sans Clavigère, et qui garde votre porte. Vous comprenez bien ce que cela signifie pour les licences de la Guilde ? Et pour la vôtre ?"
 
-#: scripts/Core/TaleBook.Late.cs:276
+#: scripts/Core/TaleBook.Late.cs:279
 msgid ""
 "Hand it over, or pay the Guild's fine for keeping it: {0}. Or appeal to the King, if he likes you that much."
 msgstr ""
 "Livrez-la, ou payez l'amende de la Guilde pour la garder : {0}. Ou faites appel au roi, s'il vous aime à ce point."
 
-#: scripts/Core/TaleBook.Late.cs:279
+#: scripts/Core/TaleBook.Late.cs:282
 msgid "Pay the fine ({0}g)"
 msgstr "Payer l'amende ({0} po)"
 
-#: scripts/Core/TaleBook.Late.cs:281
+#: scripts/Core/TaleBook.Late.cs:284
 msgid "The Guild demanded Tock. You paid its fine and kept it."
 msgstr ""
 "La Guilde a réclamé Tac. Vous avez payé son amende et vous l'avez gardé."
 
-#: scripts/Core/TaleBook.Late.cs:282
+#: scripts/Core/TaleBook.Late.cs:285
 msgid "Paid in full. Keep your toy, then. Keep it close."
 msgstr ""
 "Payé rubis sur l'ongle. Gardez votre jouet, alors. Gardez-le bien près de vous."
 
-#: scripts/Core/TaleBook.Late.cs:284
+#: scripts/Core/TaleBook.Late.cs:287
 msgid "Appeal to the King"
 msgstr "Faire appel au roi"
 
-#: scripts/Core/TaleBook.Late.cs:289
+#: scripts/Core/TaleBook.Late.cs:292
 msgid ""
 "The Guild demanded Tock. The King himself said Tock stays, and the Guild had to swallow it."
 msgstr ""
 "La Guilde a réclamé Tac. Le roi en personne a dit que Tac restait, et la Guilde a dû avaler la pilule."
 
-#: scripts/Core/TaleBook.Late.cs:290
+#: scripts/Core/TaleBook.Late.cs:293
 msgid ""
 "The King, of all people. Very well. The Guild has a long memory, Keywright."
 msgstr ""
 "Le roi, rien que ça. Très bien. La Guilde a la mémoire longue, Clavigère."
 
-#: scripts/Core/TaleBook.Late.cs:294
+#: scripts/Core/TaleBook.Late.cs:297
 msgid ""
 "The Guild demanded Tock. The King wouldn't hear your appeal, and the Guild took it."
 msgstr ""
 "La Guilde a réclamé Tac. Le roi n'a pas voulu entendre votre appel, et la Guilde l'a emmené."
 
-#: scripts/Core/TaleBook.Late.cs:295
+#: scripts/Core/TaleBook.Late.cs:298
 msgid ""
 "The King doesn't know your name, I'm afraid. We'll take the machine now."
 msgstr ""
 "Le roi ne connaît pas votre nom, je le crains. Nous allons prendre la machine, maintenant."
 
-#: scripts/Core/TaleBook.Late.cs:297
+#: scripts/Core/TaleBook.Late.cs:300
 msgid "Hand Tock over"
 msgstr "Livrer Tac"
 
-#: scripts/Core/TaleBook.Late.cs:302
+#: scripts/Core/TaleBook.Late.cs:305
 msgid "You handed Tock over to the Guild."
 msgstr "Vous avez livré Tac à la Guilde."
 
-#: scripts/Core/TaleBook.Late.cs:303
+#: scripts/Core/TaleBook.Late.cs:306
 msgid ""
 "Sensible. Locks should need Keywrights. It's what keeps you in business."
 msgstr ""
 "Raisonnable. Les serrures doivent avoir besoin des Clavigères. C'est ce qui vous fait vivre."
 
-#: scripts/Core/TaleBook.Late.cs:313
+#: scripts/Core/TaleBook.Late.cs:316
 msgid "The Sleeper"
 msgstr "Le Dormeur"
 
-#: scripts/Core/TaleBook.Late.cs:314
+#: scripts/Core/TaleBook.Late.cs:317
 msgid ""
 "In the palace cellars there is a chest that breathes. The Chest Roll says a knight locked himself inside it at the Locking, and only his heir can give it away. Nobody knows who that is."
 msgstr ""
 "Dans les caves du palais, il y a un coffre qui respire. Le Registre des coffres dit qu'un chevalier s'y est enfermé lors du Verrouillage, et que seul son héritier peut le donner. Personne ne sait de qui il s'agit."
 
-#: scripts/Core/TaleBook.Late.cs:317
+#: scripts/Core/TaleBook.Late.cs:320
 msgid ""
 "I stand at your door, Keywright, as I stood at the King's. Three hundred years late, and still on duty."
 msgstr ""
 "Je monte la garde à votre porte, Clavigère, comme je la montais à celle du roi. Trois cents ans de retard, et toujours en service."
 
-#: scripts/Core/TaleBook.Late.cs:318
+#: scripts/Core/TaleBook.Late.cs:321
 msgid ""
 "Sir Edric went off to find his own grave, he said, to see what they'd written on it. I've got his boots."
 msgstr ""
 "Sire Edric est parti trouver sa propre tombe, qu'il a dit, pour voir ce qu'on avait écrit dessus. Moi, j'ai ses bottes."
 
-#: scripts/Core/TaleBook.Late.cs:319
+#: scripts/Core/TaleBook.Late.cs:322
 msgid ""
 "The chest in the cellars is still breathing. In, and out. I've stopped going down there."
 msgstr ""
 "Le coffre des caves respire toujours. Il inspire, il expire. J'ai cessé d'y descendre."
 
-#: scripts/Core/TaleBook.Late.cs:326
+#: scripts/Core/TaleBook.Late.cs:329
 msgid ""
 "Keywright. There is a chest in the palace cellars that breathes. In, and out, very slowly. It has done so for three hundred years."
 msgstr ""
 "Clavigère. Il y a dans les caves du palais un coffre qui respire. Il inspire, il expire, très lentement. Et cela depuis trois cents ans."
 
-#: scripts/Core/TaleBook.Late.cs:327
+#: scripts/Core/TaleBook.Late.cs:330
 msgid ""
 "The Chest Roll says Sir Edric Ashcombe locked himself inside it at the Locking, to guard something for the King. It is his. Only his heir could give it away, and nobody knows who that is."
 msgstr ""
 "Le Registre des coffres dit que Sire Edric Ashcombe s'y est enfermé lors du Verrouillage, pour garder quelque chose pour le roi. Le coffre est à lui. Seul son héritier pourrait le donner, et personne ne sait qui c'est."
 
-#: scripts/Core/TaleBook.Late.cs:331
+#: scripts/Core/TaleBook.Late.cs:334
 msgid "I'll find the heir"
 msgstr "Je trouverai l'héritier"
 
-#: scripts/Core/TaleBook.Late.cs:334
+#: scripts/Core/TaleBook.Late.cs:337
 msgid "The Sleeper's heir"
 msgstr "L'héritier du Dormeur"
 
-#: scripts/Core/TaleBook.Late.cs:334
+#: scripts/Core/TaleBook.Late.cs:337
 msgid ""
 "Wanted: anyone of Sir Edric Ashcombe's blood. Ask at the Royal Emporium."
 msgstr ""
 "Recherché : toute personne du sang de Sire Edric Ashcombe. S'adresser à l'Emporium royal."
 
-#: scripts/Core/TaleBook.Late.cs:335
+#: scripts/Core/TaleBook.Late.cs:338
 msgid ""
 "A chest in the palace cellars breathes: a knight has been locked inside since the Locking. You're looking for his heir."
 msgstr ""
 "Un coffre respire dans les caves du palais : un chevalier y est enfermé depuis le Verrouillage. Vous cherchez son héritier."
 
-#: scripts/Core/TaleBook.Late.cs:336
+#: scripts/Core/TaleBook.Late.cs:339
 msgid "How thrilling. I shall have the Roll's clerks look too."
 msgstr ""
 "Comme c'est palpitant. Je vais demander aux commis du Registre de chercher, eux aussi."
 
-#: scripts/Core/TaleBook.Late.cs:338
+#: scripts/Core/TaleBook.Late.cs:341
 msgid "Let him sleep"
 msgstr "Le laisser dormir"
 
-#: scripts/Core/TaleBook.Late.cs:340
+#: scripts/Core/TaleBook.Late.cs:343
 msgid "A chest in the palace cellars breathes. You let its sleeper sleep."
 msgstr ""
 "Un coffre respire dans les caves du palais. Vous avez laissé dormir son dormeur."
 
-#: scripts/Core/TaleBook.Late.cs:341
+#: scripts/Core/TaleBook.Late.cs:344
 msgid "Perhaps you're right. He sounds peaceful enough."
 msgstr "Vous avez peut-être raison. Il a l'air assez paisible."
 
-#: scripts/Core/TaleBook.Late.cs:349
+#: scripts/Core/TaleBook.Late.cs:352
 msgid ""
 "The Roll's clerks found him. The Ashcombes went into trade after the Locking, then down the river, then into the mud."
 msgstr ""
 "Les commis du Registre l'ont trouvé. Les Ashcombe se sont mis au commerce après le Verrouillage, puis ils ont descendu la rivière, puis ils ont fini dans la vase."
 
-#: scripts/Core/TaleBook.Late.cs:350
+#: scripts/Core/TaleBook.Late.cs:353
 msgid ""
 "The last of them signs with a mark like a mudlark's hook. Your Miss Mudge, Keywright. Tilly Mudge is Sir Edric's heir."
 msgstr ""
 "La dernière d'entre eux signe d'une marque en forme de crochet de fouilleuse de vase. Votre demoiselle Mudge, Clavigère. Tilly Mudge est l'héritière de Sire Edric."
 
-#: scripts/Core/TaleBook.Late.cs:351
+#: scripts/Core/TaleBook.Late.cs:354
 msgid "The Chest Roll says Sir Edric's heir is Tilly Mudge, the mudlark."
 msgstr ""
 "D'après le Registre des coffres, l'héritière de Sire Edric est Tilly Mudge, la fouilleuse de vase."
 
-#: scripts/Core/TaleBook.Late.cs:357
+#: scripts/Core/TaleBook.Late.cs:360
 msgid ""
 "Me? An Ashcombe? My nan always said we were somebody, once. I thought she meant drunk."
 msgstr ""
 "Moi ? Une Ashcombe ? Ma mémé disait toujours qu'on avait été quelqu'un, dans le temps. Je croyais que c'était le vin qui parlait."
 
-#: scripts/Core/TaleBook.Late.cs:358
+#: scripts/Core/TaleBook.Late.cs:361
 msgid ""
 "If he's mine to give, he's yours to open. But I want to be there when he wakes, and I want his boots."
 msgstr ""
 "S'il est à moi de le donner, il est à vous de l'ouvrir. Mais je veux être là quand il se réveillera, et je veux ses bottes."
 
-#: scripts/Core/TaleBook.Late.cs:361
+#: scripts/Core/TaleBook.Late.cs:364
 msgid "Of course"
 msgstr "Bien sûr"
 
-#: scripts/Core/TaleBook.Late.cs:364
+#: scripts/Core/TaleBook.Late.cs:367
 msgid ""
 "Tilly Mudge, Sir Edric's heir, will give you the breathing chest, so long as she can watch him wake."
 msgstr ""
 "Tilly Mudge, l'héritière de Sire Edric, vous donnera le coffre qui respire, pourvu qu'elle puisse le voir se réveiller."
 
-#: scripts/Core/TaleBook.Late.cs:365
+#: scripts/Core/TaleBook.Late.cs:368
 msgid "Tomorrow, then. I'll bring him round in a barrow."
 msgstr "Demain, alors. Je vous l'amène dans une brouette."
 
-#: scripts/Core/TaleBook.Late.cs:367
+#: scripts/Core/TaleBook.Late.cs:370
 msgid "Some things should stay shut"
 msgstr "Certaines choses doivent rester fermées"
 
-#: scripts/Core/TaleBook.Late.cs:369
+#: scripts/Core/TaleBook.Late.cs:372
 msgid "You told Tilly to let her ancestor sleep."
 msgstr "Vous avez dit à Tilly de laisser dormir son ancêtre."
 
-#: scripts/Core/TaleBook.Late.cs:370
+#: scripts/Core/TaleBook.Late.cs:373
 msgid "Suit yourself. I'll keep my nan's stories, then."
 msgstr "Comme vous voudrez. Je garderai les histoires de ma mémé, alors."
 
-#: scripts/Core/TaleBook.Late.cs:378
+#: scripts/Core/TaleBook.Late.cs:381
 msgid ""
 "Sir Edric's chest. Hear it breathing? It's yours, freely given, by his heir. One coin, for luck, and mind he doesn't bite."
 msgstr ""
 "Le coffre de Sire Edric. Vous l'entendez respirer ? Il est à vous, offert de plein gré par son héritière. Une pièce, pour la chance, et gare à ce qu'il ne vous morde pas."
 
-#: scripts/Core/TaleBook.Late.cs:383
+#: scripts/Core/TaleBook.Late.cs:386
 msgid "Tilly gave you the breathing chest, and you opened it."
 msgstr "Tilly vous a donné le coffre qui respire, et vous l'avez ouvert."
 
-#: scripts/Core/TaleBook.Late.cs:385
+#: scripts/Core/TaleBook.Late.cs:388
 msgid ""
 "Tilly brought you the breathing chest, and you couldn't bring yourself to open it."
 msgstr ""
 "Tilly vous a apporté le coffre qui respire, et vous n'avez pas pu vous résoudre à l'ouvrir."
 
-#: scripts/Core/TaleBook.Late.cs:391
+#: scripts/Core/TaleBook.Late.cs:394
 msgid ""
 "What year is it? No, don't tell me. Tell me the Gate held. ...Good. Then I did my duty."
 msgstr ""
 "En quelle année sommes-nous ? Non, ne me le dites pas. Dites-moi que la Porte a tenu. ...Bien. Alors j'ai fait mon devoir."
 
-#: scripts/Core/TaleBook.Late.cs:392
+#: scripts/Core/TaleBook.Late.cs:395
 msgid ""
 "I guarded the Crown's oath-book in that chest for three hundred years. Your King can have it back, with my compliments. And you let me out. An Ashcombe pays his debts: I'll stand at your door, and no thief or warrant will cross it."
 msgstr ""
 "J'ai gardé le livre des serments de la Couronne dans ce coffre pendant trois cents ans. Votre roi peut le reprendre, avec mes compliments. Et vous m'avez libéré. Un Ashcombe paie ses dettes : je monterai la garde à votre porte, et nul voleur ni mandat ne la franchira."
 
-#: scripts/Core/TaleBook.Late.cs:399
+#: scripts/Core/TaleBook.Late.cs:402
 msgid ""
 "Sir Edric Ashcombe woke after three hundred years, returned the Crown's oath-book, and swore to guard your door."
 msgstr ""
 "Sire Edric Ashcombe s'est réveillé après trois cents ans, a rendu le livre des serments de la Couronne, et a juré de garder votre porte."
 
-#: scripts/Core/TaleBook.Late.cs:411
+#: scripts/Core/TaleBook.Late.cs:414
 msgid ""
 "A bell-locked chest: read it exactly, every last thing in it, and its echo sings free. Wrong, and the echo is lost."
 msgstr ""
 "Un coffre à clochette : faites-en une lecture exacte, jusqu'au dernier objet, et son écho se libère en chantant. Une erreur, et l'écho est perdu."
 
-#: scripts/Core/TaleBook.Late.cs:434
+#: scripts/Core/TaleBook.Late.cs:437
 msgid "Its echo sleeps in a purse of coin, warded: you'll never hear it."
 msgstr ""
 "Son écho dort dans une bourse de pièces, scellée : vous ne l'entendrez jamais."
 
-#: scripts/Core/TaleBook.Late.cs:435
+#: scripts/Core/TaleBook.Late.cs:438
 msgid "Its echo sleeps in a blade, warded: you'll never hear it."
 msgstr "Son écho dort dans une lame, scellée : vous ne l'entendrez jamais."
 
-#: scripts/Core/TaleBook.Late.cs:436
+#: scripts/Core/TaleBook.Late.cs:439
 msgid "Its echo sleeps in a cloak, warded: you'll never hear it."
 msgstr "Son écho dort dans une cape, scellée : vous ne l'entendrez jamais."
 
-#: scripts/Core/TaleBook.Late.cs:437
+#: scripts/Core/TaleBook.Late.cs:440
 msgid "Its echo sleeps in a potion, warded: you'll never hear it."
 msgstr "Son écho dort dans une potion, scellée : vous ne l'entendrez jamais."
 
-#: scripts/Core/TaleBook.Late.cs:438
+#: scripts/Core/TaleBook.Late.cs:441
 msgid "Its echo sleeps in a spell, warded: you'll never hear it."
 msgstr "Son écho dort dans un sort, scellé : vous ne l'entendrez jamais."
 
-#: scripts/Core/TaleBook.Late.cs:439
+#: scripts/Core/TaleBook.Late.cs:442
 msgid "Its echo sleeps in a gem, warded: you'll never hear it."
 msgstr "Son écho dort dans une gemme, scellée : vous ne l'entendrez jamais."
 
-#: scripts/Core/TaleBook.Late.cs:446
+#: scripts/Core/TaleBook.Late.cs:449
 msgid ""
 "You read a bell-locked chest wrong. Its echo slipped away, and the song with it."
 msgstr ""
 "Vous avez mal lu un coffre à clochette. Son écho s'est échappé, et le chant avec."
 
-#: scripts/Core/TaleBook.Late.cs:460
+#: scripts/Core/TaleBook.Late.cs:463
 msgid ""
 "I sang the Keyhold's song whole, once, in the ruin of our chapel, and a Keywright carried it home. I can stop humming now."
 msgstr ""
 "J'ai chanté en entier le chant de la Citadelle des Clés, une fois, dans les ruines de notre chapelle, et un Clavigère l'a ramené à la maison. Je peux cesser de fredonner, maintenant."
 
-#: scripts/Core/TaleBook.Late.cs:461
+#: scripts/Core/TaleBook.Late.cs:464
 msgid ""
 "The Keyhold's song is lost. I hum what's left of it on the abbey road. Children stop to listen."
 msgstr ""
 "Le chant de la Citadelle des Clés est perdu. Je fredonne ce qu'il en reste sur la route de l'abbaye. Les enfants s'arrêtent pour écouter."
 
-#: scripts/Core/TaleBook.Late.cs:462
+#: scripts/Core/TaleBook.Late.cs:465
 msgid ""
 "Two echoes free and one still waiting, somewhere. I'll keep looking. I've nothing but time."
 msgstr ""
@@ -13822,12 +13822,12 @@ msgstr "Leurs gens vous proposent leurs outils un quart moins cher."
 msgid "Their people ask half as much again for their tools."
 msgstr "Leurs gens demandent moitié plus pour leurs outils."
 
-#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:817 scripts/Phases/TalkPhase.cs:82
+#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:819 scripts/Phases/TalkPhase.cs:82
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Go on"
 msgstr "Continuer"
 
-#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:353 scripts/Phases/PeddlerPhase.cs:108
+#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:353 scripts/Phases/PeddlerPhase.cs:131
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Good night"
 msgstr "Bonne nuit"
@@ -14503,85 +14503,85 @@ msgstr "Un vol de grand chemin. Légal, celui-là."
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "Le ciel vous sourit. Que ça ne vous monte pas à la tête."
 
-#: scripts/Main.cs:518
+#: scripts/Main.cs:519
 msgid "Achievement: {0}"
 msgstr "Succès : {0}"
 
-#: scripts/Main.cs:543
+#: scripts/Main.cs:544
 msgid "THE NINE HEARTSONGS"
 msgstr "LES NEUF CHANTS DU CŒUR"
 
-#: scripts/Main.cs:639
+#: scripts/Main.cs:640
 msgid "In the purse: {0}g."
 msgstr "Dans la bourse : {0} po."
 
-#: scripts/Main.cs:647
+#: scripts/Main.cs:648
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 "Le carnet et la collection sont complets : tous les habitués, tous les objets, toutes les curiosités et les neuf Chants du cœur."
 
-#: scripts/Main.cs:652
+#: scripts/Main.cs:653
 msgid "Not now: finish what's in hand first."
 msgstr "Pas maintenant : finissez d'abord ce que vous avez en cours."
 
-#: scripts/Main.cs:766 scripts/Main.cs:929
+#: scripts/Main.cs:767 scripts/Main.cs:930
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr "LE VERROUILLAGE, CHANTÉ EN ENTIER"
 
-#: scripts/Main.cs:766 scripts/Main.cs:929
+#: scripts/Main.cs:767 scripts/Main.cs:930
 msgid "THE CROWN CHEST"
 msgstr "LE COFFRE DE LA COURONNE"
 
-#: scripts/Main.cs:797
+#: scripts/Main.cs:798
 msgid "BRAM'S STALL"
 msgstr "L'ÉTAL DE BRAM"
 
-#: scripts/Main.cs:797 scripts/Ui/NotebookView.cs:398 scripts/Ui/NotebookView.cs:686
+#: scripts/Main.cs:798 scripts/Ui/NotebookView.cs:398 scripts/Ui/NotebookView.cs:686
 msgid "WEEK {0}"
 msgstr "SEMAINE {0}"
 
-#: scripts/Main.cs:820
+#: scripts/Main.cs:821
 msgid "THE SEASON'S END"
 msgstr "LA FIN DE LA SAISON"
 
-#: scripts/Main.cs:835
+#: scripts/Main.cs:836
 msgid "THE GILDED GUILD"
 msgstr "LA GUILDE DORÉE"
 
-#: scripts/Main.cs:838
+#: scripts/Main.cs:839
 msgid "THE ALDRIC KEY"
 msgstr "LA CLÉ D'ALDRIC"
 
-#: scripts/Main.cs:904
+#: scripts/Main.cs:905
 msgid "FREE AND CLEAR"
 msgstr "LIBRE ET QUITTE"
 
-#: scripts/Main.cs:952 scripts/Ui/NotebookView.cs:409
+#: scripts/Main.cs:953 scripts/Ui/NotebookView.cs:409
 msgid "DAY {0}"
 msgstr "JOUR {0}"
 
-#: scripts/Main.cs:955
+#: scripts/Main.cs:956
 msgid ", level {0}"
 msgstr ", niveau {0}"
 
-#: scripts/Main.cs:956
+#: scripts/Main.cs:957
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}Semaine {1}, jour {2}{3}  -  {4}"
 
-#: scripts/Main.cs:956
+#: scripts/Main.cs:957
 msgid " of {0}"
 msgstr " sur {0}"
 
-#: scripts/Main.cs:957
+#: scripts/Main.cs:958
 msgid "The Guild comes tonight for {0}g."
 msgstr "La Guilde vient ce soir chercher {0} po."
 
-#: scripts/Main.cs:958
+#: scripts/Main.cs:959
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "La Guilde viendra chercher {0} po à la fin du jour {1}."
 
-#: scripts/Main.cs:965
+#: scripts/Main.cs:966
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0} vous glisse {1} po de sa cagnotte secrète (encore {2} fois)."
 
@@ -14732,12 +14732,12 @@ msgstr "{0} retourne au Verrouillage."
 #: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:86
 #: scripts/Phases/DayEndPhase.cs:384 scripts/Phases/DuesPhase.cs:203 scripts/Phases/DuesPhase.cs:210
 #: scripts/Phases/DuesPhase.cs:218 scripts/Phases/DuesPhase.cs:265 scripts/Phases/DuesPhase.cs:279
-#: scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:925 scripts/Phases/PeddlerPhase.cs:323
+#: scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:927 scripts/Phases/PeddlerPhase.cs:347
 #: scripts/Phases/TalkPhase.cs:191 scripts/Phases/TalkPhase.cs:198
 msgid "+{0}g"
 msgstr "+{0} po"
 
-#: scripts/Phases/CounterPhase.cs:515 scripts/Phases/TalkPhase.cs:249
+#: scripts/Phases/CounterPhase.cs:515 scripts/Phases/TalkPhase.cs:256
 msgid "Waiting"
 msgstr "En attente"
 
@@ -14768,7 +14768,7 @@ msgstr ""
 msgid " each"
 msgstr " la pièce"
 
-#: scripts/Phases/CounterPhase.cs:564 scripts/Phases/OpeningPhase.cs:926
+#: scripts/Phases/CounterPhase.cs:564 scripts/Phases/OpeningPhase.cs:928
 msgid " and a shard of the Aldric Key"
 msgstr " et un éclat de la Clé d'Aldric"
 
@@ -14873,7 +14873,7 @@ msgstr "{0} demande"
 msgid "Offer {0}g"
 msgstr "Offrir {0}"
 
-#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:288
 msgid "Buy {0}g"
 msgstr "Payer {0}"
 
@@ -15017,11 +15017,11 @@ msgid ""
 msgstr ""
 "Les hommes de Hollis rapportent le coffre à son propriétaire et vous versent la part du trouveur."
 
-#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:819
 msgid "Close up for the day"
 msgstr "Fin de journée"
 
-#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:819
 msgid "Next customer"
 msgstr "Client suivant"
 
@@ -15367,11 +15367,11 @@ msgstr "Acheter : {0}. Il vous restera {1} po."
 msgid "{0}g more to go"
 msgstr "Il vous manque {0} po"
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:310
 msgid "ARE YOU SURE?"
 msgstr "VRAIMENT ?"
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:310
 msgid "Buy anyway"
 msgstr "Oui, acheter"
 
@@ -15678,280 +15678,280 @@ msgstr "Tournoi : armes, capes +50%"
 msgid "The Guild's assessor -10%"
 msgstr "Estimateur de la Guilde -10%"
 
-#: scripts/Phases/OpeningPhase.cs:269
+#: scripts/Phases/OpeningPhase.cs:271
 msgid "...EMPTY!"
 msgstr "...VIDE !"
 
-#: scripts/Phases/OpeningPhase.cs:274
+#: scripts/Phases/OpeningPhase.cs:276
 msgid "no {0}?"
 msgstr "sans {0} ?"
 
-#: scripts/Phases/OpeningPhase.cs:275
+#: scripts/Phases/OpeningPhase.cs:277
 msgid "{0} fewer {1}?"
 msgstr "{0} {1} de moins ?"
 
-#: scripts/Phases/OpeningPhase.cs:276
+#: scripts/Phases/OpeningPhase.cs:278
 msgid "no false bottom?"
 msgstr "sans double fond ?"
 
-#: scripts/Phases/OpeningPhase.cs:279
+#: scripts/Phases/OpeningPhase.cs:281
 msgid "warded {0}: you named something that wasn't there"
 msgstr "objet scellé ({0}) : un nom de trop sur la fiche"
 
-#: scripts/Phases/OpeningPhase.cs:280
+#: scripts/Phases/OpeningPhase.cs:282
 msgid "warded, never named: {0}"
 msgstr "objet scellé, jamais nommé : {0}"
 
-#: scripts/Phases/OpeningPhase.cs:315
+#: scripts/Phases/OpeningPhase.cs:317
 msgid "...wait. The ward lets go of what you named!"
 msgstr "...attendez. Le sceau cède et libère ce que vous avez nommé !"
 
-#: scripts/Phases/OpeningPhase.cs:375
+#: scripts/Phases/OpeningPhase.cs:377
 msgid "WORSE..."
 msgstr "PIRE..."
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "BETTER!"
 msgstr "MIEUX !"
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "EVEN BETTER!!"
 msgstr "ENCORE MIEUX !!"
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "INCREDIBLE!!!"
 msgstr "INCROYABLE !!!"
 
-#: scripts/Phases/OpeningPhase.cs:575
+#: scripts/Phases/OpeningPhase.cs:577
 msgid "ENCHANTED! x2"
 msgstr "ENCHANTÉ ! x2"
 
-#: scripts/Phases/OpeningPhase.cs:580
+#: scripts/Phases/OpeningPhase.cs:582
 msgid "FAKE!"
 msgstr "FAUX !"
 
-#: scripts/Phases/OpeningPhase.cs:595
+#: scripts/Phases/OpeningPhase.cs:597
 msgid "{0}'S!"
 msgstr "À {0} !"
 
-#: scripts/Phases/OpeningPhase.cs:606
+#: scripts/Phases/OpeningPhase.cs:608
 msgid "NEW!"
 msgstr "INÉDIT !"
 
-#: scripts/Phases/OpeningPhase.cs:610
+#: scripts/Phases/OpeningPhase.cs:612
 msgid "let go"
 msgstr "laissé partir"
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "BETTER THAN EXPECTED!"
 msgstr "MIEUX QUE PRÉVU !"
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "TWO QUALITIES UP!!"
 msgstr "DEUX QUALITÉS AU-DESSUS !!"
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "THREE QUALITIES UP!!!"
 msgstr "TROIS QUALITÉS AU-DESSUS !!!"
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "PROFIT +{0}g"
 msgstr "BÉNÉFICE +{0} po"
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "LOSS {0}g"
 msgstr "PERTE {0} po"
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "BROKE EVEN"
 msgstr "À L'ÉQUILIBRE"
 
-#: scripts/Phases/OpeningPhase.cs:778
+#: scripts/Phases/OpeningPhase.cs:780
 msgid "fleeced"
 msgstr "une arnaque"
 
-#: scripts/Phases/OpeningPhase.cs:778
+#: scripts/Phases/OpeningPhase.cs:780
 msgid "a steal"
 msgstr "une affaire"
 
-#: scripts/Phases/OpeningPhase.cs:792
+#: scripts/Phases/OpeningPhase.cs:794
 msgid "PERFECT READ"
 msgstr "LECTURE PARFAITE"
 
-#: scripts/Phases/OpeningPhase.cs:800
+#: scripts/Phases/OpeningPhase.cs:802
 msgid " Masterful pick: everything +25%."
 msgstr " Crochetage magistral : tout +25%."
 
-#: scripts/Phases/OpeningPhase.cs:801
+#: scripts/Phases/OpeningPhase.cs:803
 msgid " Forced open: everything -10%."
 msgstr " Ouvert de force : tout -10%."
 
-#: scripts/Phases/OpeningPhase.cs:805
+#: scripts/Phases/OpeningPhase.cs:807
 msgid " A perfect read: a valuer's fee of {0}g."
 msgstr " Une lecture parfaite : des honoraires d'expert de {0} po."
 
-#: scripts/Phases/OpeningPhase.cs:806
+#: scripts/Phases/OpeningPhase.cs:808
 msgid " Haggler's Purse: {0}g back."
 msgstr " Bourse du marchandeur : {0} po rendues."
 
-#: scripts/Phases/OpeningPhase.cs:807
+#: scripts/Phases/OpeningPhase.cs:809
 msgid " Underwriter's Bond: {0}g back."
 msgstr " Caution d'assureur : {0} po remboursées."
 
-#: scripts/Phases/OpeningPhase.cs:849
+#: scripts/Phases/OpeningPhase.cs:851
 msgid " {0} took the {1}, and paid {2}g for it."
 msgstr " {0} a repris l'objet ({1}) et vous l'a payé {2} po."
 
-#: scripts/Phases/OpeningPhase.cs:850
+#: scripts/Phases/OpeningPhase.cs:852
 msgid " {0} took the {1}, as agreed."
 msgstr " {0} a pris son dû ({1}), comme convenu."
 
-#: scripts/Phases/OpeningPhase.cs:852
+#: scripts/Phases/OpeningPhase.cs:854
 msgid " Read exactly: {0} hands back {1}g, as wagered."
 msgstr " Lecture exacte : {0} vous rend {1} po, comme parié."
 
-#: scripts/Phases/OpeningPhase.cs:852
+#: scripts/Phases/OpeningPhase.cs:854
 msgid " Not quite right: {0} keeps the whole price."
 msgstr " Pas tout à fait : {0} garde la totalité du prix."
 
-#: scripts/Phases/OpeningPhase.cs:854
+#: scripts/Phases/OpeningPhase.cs:856
 msgid " Read exactly: {0} takes a quarter off, {1}g back."
 msgstr " Lecture exacte : {0} vous fait un quart de remise, {1} po rendues."
 
-#: scripts/Phases/OpeningPhase.cs:855
+#: scripts/Phases/OpeningPhase.cs:857
 msgid ""
 " A wrong read: you pay {0} what it truly held, and a quarter more: {1}g."
 msgstr ""
 " Mauvaise lecture : vous payez à {0} ce qu'il contenait vraiment, plus un quart : {1} po."
 
-#: scripts/Phases/OpeningPhase.cs:856
+#: scripts/Phases/OpeningPhase.cs:858
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr " Mauvaise lecture, mais vous aviez déjà payé plus que son contenu."
 
-#: scripts/Phases/OpeningPhase.cs:913
+#: scripts/Phases/OpeningPhase.cs:915
 msgid "Delivered"
 msgstr "Livré"
 
-#: scripts/Phases/OpeningPhase.cs:921
+#: scripts/Phases/OpeningPhase.cs:923
 msgid "Filled"
 msgstr "Honorée"
 
-#: scripts/Phases/OpeningPhase.cs:925
+#: scripts/Phases/OpeningPhase.cs:927
 msgid "Shard +{0}g"
 msgstr "Éclat +{0} po"
 
-#: scripts/Phases/OpeningPhase.cs:925 scripts/Phases/OpeningPhase.cs:959
+#: scripts/Phases/OpeningPhase.cs:927 scripts/Phases/OpeningPhase.cs:961
 msgid "{0}/{1}: +{2}g"
 msgstr "{0}/{1} : +{2} po"
 
-#: scripts/Phases/OpeningPhase.cs:925
+#: scripts/Phases/OpeningPhase.cs:927
 msgid "Deliver +{0}g"
 msgstr "Livrer +{0} po"
 
-#: scripts/Phases/OpeningPhase.cs:926
+#: scripts/Phases/OpeningPhase.cs:928
 msgid ""
 "{0} wants {1}: {2}g{3}, instead of {4}g for selling it. A commission always pays more than selling."
 msgstr ""
 "{0} veut {1} : {2} po{3}, au lieu de {4} po à la vente. Une commande rapporte toujours plus qu'une vente."
 
-#: scripts/Phases/OpeningPhase.cs:946
+#: scripts/Phases/OpeningPhase.cs:948
 msgid "Commission! +{0}g"
 msgstr "Commande ! +{0} po"
 
-#: scripts/Phases/OpeningPhase.cs:950
+#: scripts/Phases/OpeningPhase.cs:952
 msgid "KEY SHARD {0} OF {1}!"
 msgstr "ÉCLAT DE CLÉ {0} SUR {1} !"
 
-#: scripts/Phases/OpeningPhase.cs:978
+#: scripts/Phases/OpeningPhase.cs:980
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr "+{0} pts d'exposition (x2 : enchanté !)"
 
-#: scripts/Phases/OpeningPhase.cs:978
+#: scripts/Phases/OpeningPhase.cs:980
 msgid "+{0} exhibition"
 msgstr "+{0} pts d'exposition"
 
-#: scripts/Phases/OpeningPhase.cs:990
+#: scripts/Phases/OpeningPhase.cs:992
 msgid "On display"
 msgstr "En vitrine"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Swap"
 msgstr "Troc"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Keep"
 msgstr "Garder"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Swap {0} (-{1}g)"
 msgstr "Troc {0} (-{1})"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Keep {0} (-{1}g)"
 msgstr "Garder {0} (-{1})"
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr "{0} points d'exposition pour {1} po{2}.{3}"
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid " (double: it's enchanted)"
 msgstr " (doublés par l'enchantement)"
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid " Your display is full: sell something on it to make room."
 msgstr ""
 " Votre vitrine est pleine : vendez un de ses objets pour faire de la place."
 
-#: scripts/Phases/OpeningPhase.cs:1023
+#: scripts/Phases/OpeningPhase.cs:1025
 msgid ""
 "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr ""
 "Votre vitrine est pleine. Vendez un objet pour faire de la place ({0}, +{1} points) :"
 
-#: scripts/Phases/OpeningPhase.cs:1033
+#: scripts/Phases/OpeningPhase.cs:1035
 msgid "{0}: +{1}g, -{2} pts"
 msgstr "{0} : +{1} po, -{2} pts"
 
-#: scripts/Phases/OpeningPhase.cs:1035
+#: scripts/Phases/OpeningPhase.cs:1037
 msgid "+{0}g, -{1} pts"
 msgstr "+{0} po, -{1} pts"
 
-#: scripts/Phases/OpeningPhase.cs:1047
+#: scripts/Phases/OpeningPhase.cs:1049
 msgid "Never mind"
 msgstr "Annuler"
 
-#: scripts/Phases/OpeningPhase.cs:1059
+#: scripts/Phases/OpeningPhase.cs:1061
 msgid "Sold the {0}: +{1}g"
 msgstr "Vendu : {0}, +{1} po"
 
-#: scripts/Phases/PeddlerPhase.cs:49
+#: scripts/Phases/PeddlerPhase.cs:72
 msgid "NIM'S CURIOS"
 msgstr "LES CURIOSITÉS DE NIM"
 
-#: scripts/Phases/PeddlerPhase.cs:77
+#: scripts/Phases/PeddlerPhase.cs:100
 msgid "Nim's sold out: you own every curio Nim carries!"
 msgstr "Nim n'a plus rien : vous avez toutes les curiosités de Nim !"
 
-#: scripts/Phases/PeddlerPhase.cs:79
+#: scripts/Phases/PeddlerPhase.cs:102
 msgid ""
 "Each curio costs a set sum for its rarity, plus a share of the gold you have tonight ({0}g)."
 msgstr ""
 "Chaque curiosité coûte une somme fixe selon sa rareté, plus une part de l'or que vous avez ce soir ({0} po)."
 
-#: scripts/Phases/PeddlerPhase.cs:86
+#: scripts/Phases/PeddlerPhase.cs:109
 msgid "YOUR CURIOS {0}/{1}"
 msgstr "VOS CURIOSITÉS {0}/{1}"
 
-#: scripts/Phases/PeddlerPhase.cs:89
+#: scripts/Phases/PeddlerPhase.cs:112
 msgid "No room for more: click one to sell it back for half."
 msgstr "Plus de place : cliquez-en une pour la revendre à moitié prix."
 
-#: scripts/Phases/PeddlerPhase.cs:90
+#: scripts/Phases/PeddlerPhase.cs:113
 msgid "Click one to sell it back for half."
 msgstr "Cliquez-en une pour la revendre à moitié prix."
 
-#: scripts/Phases/PeddlerPhase.cs:103
+#: scripts/Phases/PeddlerPhase.cs:126
 msgid ""
 "{0}: {1}\n"
 "Click to sell it back for {2}g."
@@ -15959,78 +15959,78 @@ msgstr ""
 "{0} : {1}\n"
 "Cliquez pour la revendre {2} po."
 
-#: scripts/Phases/PeddlerPhase.cs:113
+#: scripts/Phases/PeddlerPhase.cs:136
 msgid "{0} {1}g"
 msgstr "{0} {1} po"
 
-#: scripts/Phases/PeddlerPhase.cs:131
+#: scripts/Phases/PeddlerPhase.cs:154
 msgid "The back room ({0})"
 msgstr "L'arrière-boutique ({0})"
 
-#: scripts/Phases/PeddlerPhase.cs:132
+#: scripts/Phases/PeddlerPhase.cs:155
 msgid ""
 "Chests that won't open for you: return them to their owners, or sell them to Nim's friends."
 msgstr ""
 "Des coffres qui ne s'ouvriront pas pour vous : rendez-les à leurs propriétaires, ou vendez-les aux amis de Nim."
 
-#: scripts/Phases/PeddlerPhase.cs:161
+#: scripts/Phases/PeddlerPhase.cs:184
 msgid "THE BACK ROOM"
 msgstr "L'ARRIÈRE-BOUTIQUE"
 
-#: scripts/Phases/PeddlerPhase.cs:166
+#: scripts/Phases/PeddlerPhase.cs:189
 msgid "The duel's stakes, held for the winner"
 msgstr "Enjeux du duel, pour le vainqueur"
 
-#: scripts/Phases/PeddlerPhase.cs:167
+#: scripts/Phases/PeddlerPhase.cs:190
 msgid "{0}'s parcel, kept for collection"
 msgstr "Colis pour {0}, mis de côté"
 
-#: scripts/Phases/PeddlerPhase.cs:167
+#: scripts/Phases/PeddlerPhase.cs:190
 msgid "A {0} chest: {1}'s"
 msgstr "Coffre {0} : à {1}"
 
-#: scripts/Phases/PeddlerPhase.cs:170
+#: scripts/Phases/PeddlerPhase.cs:193
 msgid "Return it +{0}g"
 msgstr "Le rendre +{0} po"
 
-#: scripts/Phases/PeddlerPhase.cs:171
+#: scripts/Phases/PeddlerPhase.cs:194
 msgid "Nim's friends +{0}g"
 msgstr "Amis de Nim +{0} po"
 
-#: scripts/Phases/PeddlerPhase.cs:173 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
+#: scripts/Phases/PeddlerPhase.cs:196 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
 #: scripts/Ui/Hud.cs:100
 msgid "Close"
 msgstr "Fermer"
 
-#: scripts/Phases/PeddlerPhase.cs:250 scripts/Phases/PeddlerPhase.cs:252
+#: scripts/Phases/PeddlerPhase.cs:274 scripts/Phases/PeddlerPhase.cs:276
 msgid "Goes with your {0}"
 msgstr "Va avec : {0}"
 
-#: scripts/Phases/PeddlerPhase.cs:251
+#: scripts/Phases/PeddlerPhase.cs:275
 msgid "With your {0}"
 msgstr "Avec : {0}"
 
-#: scripts/Phases/PeddlerPhase.cs:256
+#: scripts/Phases/PeddlerPhase.cs:280
 msgid "New at {0}"
 msgstr "Nouveau ({0})"
 
-#: scripts/Phases/PeddlerPhase.cs:259
+#: scripts/Phases/PeddlerPhase.cs:283
 msgid "Yours"
 msgstr "À vous"
 
-#: scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/PeddlerPhase.cs:288
 msgid "Take it, free"
 msgstr "Prendre (gratuit)"
 
-#: scripts/Phases/PeddlerPhase.cs:267
+#: scripts/Phases/PeddlerPhase.cs:291
 msgid "{0}g for a {1} curio, and {2} of your purse tonight."
 msgstr "{0} po pour sa rareté ({1}), plus {2} de votre bourse ce soir."
 
-#: scripts/Phases/PeddlerPhase.cs:268
+#: scripts/Phases/PeddlerPhase.cs:292
 msgid "No room: sell a curio back to Nim first. {0}"
 msgstr "Pas de place : revendez d'abord une curiosité à Nim. {0}"
 
-#: scripts/Phases/PeddlerPhase.cs:269
+#: scripts/Phases/PeddlerPhase.cs:293
 msgid "{0} {1}"
 msgstr "{0} {1}"
 
@@ -16236,7 +16236,7 @@ msgstr "Passer"
 msgid "click for more"
 msgstr "cliquez pour la suite"
 
-#: scripts/Phases/ScenePhase.cs:128 scripts/Ui/MentorView.cs:206
+#: scripts/Phases/ScenePhase.cs:128 scripts/Ui/MentorView.cs:209
 msgid "click to go on"
 msgstr "cliquez pour continuer"
 
@@ -16351,7 +16351,7 @@ msgstr "Acheté : {0}"
 msgid "IN YOUR NOTEBOOK {0}"
 msgstr "DANS VOTRE CARNET {0}"
 
-#: scripts/Phases/TalkPhase.cs:229
+#: scripts/Phases/TalkPhase.cs:220
 msgid "A KEEPSAKE: {0}"
 msgstr "SOUVENIR : {0}"
 
@@ -16525,50 +16525,50 @@ msgstr " Pour l'instant : {0} sur {1}."
 msgid "Locked: a {0} curio for {1}. Nim brings it {2}.{3}"
 msgstr "Bloquée : une curiosité ({0} ; {1}). Nim l'apporte {2}.{3}"
 
-#: scripts/Ui/CollectionView.cs:224
+#: scripts/Ui/CollectionView.cs:228
 msgid ""
 "What people give you to keep when you see their tale through. A keepsake works like a curio, but takes no slot and is never sold. You've been given {0} of {1}."
 msgstr ""
 "Ce que les gens vous offrent en souvenir quand vous menez leur histoire à son terme. Un souvenir fonctionne comme une curiosité, mais n'occupe aucun emplacement et ne se vend jamais. Vous en avez reçu {0} sur {1}."
 
-#: scripts/Ui/CollectionView.cs:248
+#: scripts/Ui/CollectionView.cs:252
 msgid "From {0}"
 msgstr "Histoire : {0}"
 
-#: scripts/Ui/CollectionView.cs:249
+#: scripts/Ui/CollectionView.cs:253
 msgid "Not given yet: someone gives it at the end of {0}."
 msgstr ""
 "Pas encore reçu : quelqu'un vous l'offre à la fin de l'histoire « {0} »."
 
-#: scripts/Ui/CollectionView.cs:260
+#: scripts/Ui/CollectionView.cs:264
 msgid "{0}, from {1}: {2}"
 msgstr "{0}, de l'histoire « {1} » : {2}"
 
-#: scripts/Ui/CollectionView.cs:261
+#: scripts/Ui/CollectionView.cs:265
 msgid "yours"
 msgstr "à vous"
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ""
 "Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. The songbook holds {0} of the nine{1}"
 msgstr ""
 "Neuf trésors aimés plus que l'or, cachés parmi des millions de coffres. Seul un Clavigère les entend ; pour tout autre, ils ne valent rien. Survolez une carte pour son histoire. Le recueil des chants en contient {0} sur neuf{1}"
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ": the Crown Chest can be sung whole."
 msgstr " : le Coffre de la Couronne peut être chanté en entier."
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ": with all nine, the Crown Chest's ending changes."
 msgstr " : les neuf changent la fin du Coffre de la Couronne."
 
-#: scripts/Ui/CollectionView.cs:288
+#: scripts/Ui/CollectionView.cs:292
 msgid ""
 "Not heard yet. A Heartsong sings at the gentlest shake, in any seller's chest, and the seller never knows it's there."
 msgstr ""
 "Pas encore entendu. Un Chant du cœur chante à la plus douce des secousses, dans le coffre de n'importe quel vendeur, et le vendeur ne sait jamais qu'il est là."
 
-#: scripts/Ui/CollectionView.cs:291
+#: scripts/Ui/CollectionView.cs:295
 msgid "{0}, from {1}. {2}"
 msgstr "{0}, par {1}. {2}"
 
@@ -16682,27 +16682,27 @@ msgstr "demain soir"
 msgid "in {0} days"
 msgstr "dans {0} jours"
 
-#: scripts/Ui/MentorView.cs:63
+#: scripts/Ui/MentorView.cs:65
 msgid "Skip lesson"
 msgstr "Passer la leçon"
 
-#: scripts/Ui/MentorView.cs:166
+#: scripts/Ui/MentorView.cs:168
 msgid "[do] "
 msgstr "[faire] "
 
-#: scripts/Ui/MentorView.cs:166
+#: scripts/Ui/MentorView.cs:168
 msgid "[read] "
 msgstr "[lire] "
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "do it to go on"
 msgstr "faites-le pour continuer"
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "click for more ({0})"
 msgstr "cliquez pour la suite ({0})"
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "click to close"
 msgstr "cliquez pour fermer"
 

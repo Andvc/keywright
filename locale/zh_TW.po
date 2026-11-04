@@ -1042,7 +1042,7 @@ msgstr "馬蹄鐵"
 
 #: scripts/Core/Curios.cs:149
 msgid ""
-"Each chest in a row with a surprise in it makes the next one's things {0} likelier to come out a step better (up to {1}). One without starts it again."
+"Each chest in a row with a surprise makes the next one's things {0} likelier to come out a step better (up to {1})."
 msgstr "連續開出帶驚喜的寶箱時，每多一隻，下一個箱裡物品品質提升一級的機率就提高{0}（最多{1}）。開出一隻沒有驚喜的，就從頭算起。"
 
 #: scripts/Core/Curios.cs:151
@@ -3118,7 +3118,7 @@ msgstr "扁的"
 msgid "tiny"
 msgstr "小小的"
 
-#: scripts/Core/Items.cs:374 scripts/Phases/OpeningPhase.cs:610 scripts/Ui/CollectionView.cs:296
+#: scripts/Core/Items.cs:374 scripts/Phases/OpeningPhase.cs:612 scripts/Ui/CollectionView.cs:300
 msgid "singing"
 msgstr "歌唱中"
 
@@ -4394,7 +4394,7 @@ msgstr "真令人失望。我或許會再來問。"
 msgid "Buy it ({0}g)"
 msgstr "買下（{0}金）"
 
-#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:314
 msgid "Not now"
 msgstr "暫時不要"
 
@@ -10087,258 +10087,258 @@ msgstr "你把咔嗒送回了大法師奧姆那裡。秘法院欠你一份情。
 msgid "She will put me back on the shelf. It is a very good shelf."
 msgstr "大法師會把我放回架子上。那是個很好的架子。"
 
-#: scripts/Core/TaleBook.Late.cs:275
+#: scripts/Core/TaleBook.Late.cs:278
 msgid ""
 "A machine that opens chests without a Keywright, minding your door. You do understand what that means for the Guild's licences? And yours?"
 msgstr "一臺不用鑰匠就能開箱的機器，替你看著門。你該明白這對公會的執照意味著什麼吧？對你的執照又意味著什麼？"
 
-#: scripts/Core/TaleBook.Late.cs:276
+#: scripts/Core/TaleBook.Late.cs:279
 msgid ""
 "Hand it over, or pay the Guild's fine for keeping it: {0}. Or appeal to the King, if he likes you that much."
 msgstr "把它交出來，或者為留下它繳納公會的罰金：{0}。要不就去向國王申訴，前提是他真有那麼喜歡你。"
 
-#: scripts/Core/TaleBook.Late.cs:279
+#: scripts/Core/TaleBook.Late.cs:282
 msgid "Pay the fine ({0}g)"
 msgstr "繳納罰金（{0}金）"
 
-#: scripts/Core/TaleBook.Late.cs:281
+#: scripts/Core/TaleBook.Late.cs:284
 msgid "The Guild demanded Tock. You paid its fine and kept it."
 msgstr "公會要你交出咔嗒。你繳了罰金，留下了它。"
 
-#: scripts/Core/TaleBook.Late.cs:282
+#: scripts/Core/TaleBook.Late.cs:285
 msgid "Paid in full. Keep your toy, then. Keep it close."
 msgstr "全數付清。那你的玩具就留著吧。看緊點。"
 
-#: scripts/Core/TaleBook.Late.cs:284
+#: scripts/Core/TaleBook.Late.cs:287
 msgid "Appeal to the King"
 msgstr "向國王申訴"
 
-#: scripts/Core/TaleBook.Late.cs:289
+#: scripts/Core/TaleBook.Late.cs:292
 msgid ""
 "The Guild demanded Tock. The King himself said Tock stays, and the Guild had to swallow it."
 msgstr "公會要你交出咔嗒。國王親口說咔嗒留下，公會只好嚥下這口氣。"
 
-#: scripts/Core/TaleBook.Late.cs:290
+#: scripts/Core/TaleBook.Late.cs:293
 msgid ""
 "The King, of all people. Very well. The Guild has a long memory, Keywright."
 msgstr "偏偏是國王。很好。公會的記性可長著呢，鑰匠。"
 
-#: scripts/Core/TaleBook.Late.cs:294
+#: scripts/Core/TaleBook.Late.cs:297
 msgid ""
 "The Guild demanded Tock. The King wouldn't hear your appeal, and the Guild took it."
 msgstr "公會要你交出咔嗒。國王不肯受理你的申訴，公會把它帶走了。"
 
-#: scripts/Core/TaleBook.Late.cs:295
+#: scripts/Core/TaleBook.Late.cs:298
 msgid ""
 "The King doesn't know your name, I'm afraid. We'll take the machine now."
 msgstr "恐怕國王連你的名字都不知道。那我們這就把機器帶走了。"
 
-#: scripts/Core/TaleBook.Late.cs:297
+#: scripts/Core/TaleBook.Late.cs:300
 msgid "Hand Tock over"
 msgstr "交出咔嗒"
 
-#: scripts/Core/TaleBook.Late.cs:302
+#: scripts/Core/TaleBook.Late.cs:305
 msgid "You handed Tock over to the Guild."
 msgstr "你把咔嗒交給了公會。"
 
-#: scripts/Core/TaleBook.Late.cs:303
+#: scripts/Core/TaleBook.Late.cs:306
 msgid ""
 "Sensible. Locks should need Keywrights. It's what keeps you in business."
 msgstr "明智。開鎖就該離不開鑰匠。你們這行就靠這個吃飯。"
 
-#: scripts/Core/TaleBook.Late.cs:313
+#: scripts/Core/TaleBook.Late.cs:316
 msgid "The Sleeper"
 msgstr "沉睡者"
 
-#: scripts/Core/TaleBook.Late.cs:314
+#: scripts/Core/TaleBook.Late.cs:317
 msgid ""
 "In the palace cellars there is a chest that breathes. The Chest Roll says a knight locked himself inside it at the Locking, and only his heir can give it away. Nobody knows who that is."
 msgstr "王宮的地窖裡有一隻會呼吸的寶箱。寶箱名冊上說，大封鎖時有位騎士把自己鎖在了裡面，只有他的繼承人才能把它送人。沒人知道繼承人是誰。"
 
-#: scripts/Core/TaleBook.Late.cs:317
+#: scripts/Core/TaleBook.Late.cs:320
 msgid ""
 "I stand at your door, Keywright, as I stood at the King's. Three hundred years late, and still on duty."
 msgstr "我守在你的門前，鑰匠，就像當年守在國王門前一樣。遲到了三百年，依然在崗。"
 
-#: scripts/Core/TaleBook.Late.cs:318
+#: scripts/Core/TaleBook.Late.cs:321
 msgid ""
 "Sir Edric went off to find his own grave, he said, to see what they'd written on it. I've got his boots."
 msgstr "埃德里克爵士說，他要去找自己的墳，看看人家在墓碑上寫了些什麼。他的靴子歸我了。"
 
-#: scripts/Core/TaleBook.Late.cs:319
+#: scripts/Core/TaleBook.Late.cs:322
 msgid ""
 "The chest in the cellars is still breathing. In, and out. I've stopped going down there."
 msgstr "地窖裡的那個箱子還在呼吸。一吸，一呼。我已經不再下去了。"
 
-#: scripts/Core/TaleBook.Late.cs:326
+#: scripts/Core/TaleBook.Late.cs:329
 msgid ""
 "Keywright. There is a chest in the palace cellars that breathes. In, and out, very slowly. It has done so for three hundred years."
 msgstr "鑰匠。王宮的地窖裡有一隻會呼吸的寶箱。一吸，一呼，非常緩慢。它這樣呼吸已經三百年了。"
 
-#: scripts/Core/TaleBook.Late.cs:327
+#: scripts/Core/TaleBook.Late.cs:330
 msgid ""
 "The Chest Roll says Sir Edric Ashcombe locked himself inside it at the Locking, to guard something for the King. It is his. Only his heir could give it away, and nobody knows who that is."
 msgstr ""
 "寶箱名冊上說，大封鎖時，埃德里克·阿什科姆爵士把自己鎖在了裡面，替國王守護某樣東西。那箱子是他的。只有他的繼承人才能把它送人，可沒人知道繼承人是誰。"
 
-#: scripts/Core/TaleBook.Late.cs:331
+#: scripts/Core/TaleBook.Late.cs:334
 msgid "I'll find the heir"
 msgstr "我去找繼承人"
 
-#: scripts/Core/TaleBook.Late.cs:334
+#: scripts/Core/TaleBook.Late.cs:337
 msgid "The Sleeper's heir"
 msgstr "沉睡者的繼承人"
 
-#: scripts/Core/TaleBook.Late.cs:334
+#: scripts/Core/TaleBook.Late.cs:337
 msgid ""
 "Wanted: anyone of Sir Edric Ashcombe's blood. Ask at the Royal Emporium."
 msgstr "尋人：凡埃德里克·阿什科姆爵士的血親，請到皇家商行詢問。"
 
-#: scripts/Core/TaleBook.Late.cs:335
+#: scripts/Core/TaleBook.Late.cs:338
 msgid ""
 "A chest in the palace cellars breathes: a knight has been locked inside since the Locking. You're looking for his heir."
 msgstr "王宮地窖裡有一個寶箱在呼吸：自大封鎖起，就有一位騎士被鎖在裡面。你正在尋找他的繼承人。"
 
-#: scripts/Core/TaleBook.Late.cs:336
+#: scripts/Core/TaleBook.Late.cs:339
 msgid "How thrilling. I shall have the Roll's clerks look too."
 msgstr "真叫人激動。我也會讓名冊的書記員們去查一查。"
 
-#: scripts/Core/TaleBook.Late.cs:338
+#: scripts/Core/TaleBook.Late.cs:341
 msgid "Let him sleep"
 msgstr "讓他睡吧"
 
-#: scripts/Core/TaleBook.Late.cs:340
+#: scripts/Core/TaleBook.Late.cs:343
 msgid "A chest in the palace cellars breathes. You let its sleeper sleep."
 msgstr "王宮地窖裡有一個寶箱在呼吸。你讓裡面的沉睡者繼續睡去。"
 
-#: scripts/Core/TaleBook.Late.cs:341
+#: scripts/Core/TaleBook.Late.cs:344
 msgid "Perhaps you're right. He sounds peaceful enough."
 msgstr "也許你說得對。聽起來，他睡得挺安穩的。"
 
-#: scripts/Core/TaleBook.Late.cs:349
+#: scripts/Core/TaleBook.Late.cs:352
 msgid ""
 "The Roll's clerks found him. The Ashcombes went into trade after the Locking, then down the river, then into the mud."
 msgstr "名冊的書記員們找到他了。大封鎖之後，阿什科姆家先是經了商，後來一路敗落到河邊，最後淪落進了泥灘。"
 
-#: scripts/Core/TaleBook.Late.cs:350
+#: scripts/Core/TaleBook.Late.cs:353
 msgid ""
 "The last of them signs with a mark like a mudlark's hook. Your Miss Mudge, Keywright. Tilly Mudge is Sir Edric's heir."
 msgstr "他們家的最後一人簽名時，畫的是個像拾荒鉤的記號。就是你那位馬奇小姐，鑰匠。蒂莉·馬奇正是埃德里克爵士的繼承人。"
 
-#: scripts/Core/TaleBook.Late.cs:351
+#: scripts/Core/TaleBook.Late.cs:354
 msgid "The Chest Roll says Sir Edric's heir is Tilly Mudge, the mudlark."
 msgstr "寶箱名冊上說，埃德里克爵士的繼承人是河灘拾荒人蒂莉·馬奇。"
 
-#: scripts/Core/TaleBook.Late.cs:357
+#: scripts/Core/TaleBook.Late.cs:360
 msgid ""
 "Me? An Ashcombe? My nan always said we were somebody, once. I thought she meant drunk."
 msgstr "我？阿什科姆家的人？我奶奶老說咱家祖上也闊過。我還以為她是喝醉了說胡話。"
 
-#: scripts/Core/TaleBook.Late.cs:358
+#: scripts/Core/TaleBook.Late.cs:361
 msgid ""
 "If he's mine to give, he's yours to open. But I want to be there when he wakes, and I want his boots."
 msgstr "要是他歸我送，那就歸你開。不過他醒的時候我得在場，還有，我要他的靴子。"
 
-#: scripts/Core/TaleBook.Late.cs:361
+#: scripts/Core/TaleBook.Late.cs:364
 msgid "Of course"
 msgstr "當然"
 
-#: scripts/Core/TaleBook.Late.cs:364
+#: scripts/Core/TaleBook.Late.cs:367
 msgid ""
 "Tilly Mudge, Sir Edric's heir, will give you the breathing chest, so long as she can watch him wake."
 msgstr "埃德里克爵士的繼承人蒂莉·馬奇會把那隻會呼吸的寶箱送給你，條件是她要親眼看著他醒來。"
 
-#: scripts/Core/TaleBook.Late.cs:365
+#: scripts/Core/TaleBook.Late.cs:368
 msgid "Tomorrow, then. I'll bring him round in a barrow."
 msgstr "那就明天。我用獨輪車把他推過來。"
 
-#: scripts/Core/TaleBook.Late.cs:367
+#: scripts/Core/TaleBook.Late.cs:370
 msgid "Some things should stay shut"
 msgstr "有些東西還是關著好"
 
-#: scripts/Core/TaleBook.Late.cs:369
+#: scripts/Core/TaleBook.Late.cs:372
 msgid "You told Tilly to let her ancestor sleep."
 msgstr "你勸蒂莉讓她的祖先繼續沉睡。"
 
-#: scripts/Core/TaleBook.Late.cs:370
+#: scripts/Core/TaleBook.Late.cs:373
 msgid "Suit yourself. I'll keep my nan's stories, then."
 msgstr "隨你。那我就守著我奶奶的那些故事吧。"
 
-#: scripts/Core/TaleBook.Late.cs:378
+#: scripts/Core/TaleBook.Late.cs:381
 msgid ""
 "Sir Edric's chest. Hear it breathing? It's yours, freely given, by his heir. One coin, for luck, and mind he doesn't bite."
 msgstr "埃德里克爵士的箱子。聽見它在喘氣沒？它歸你了，由他的繼承人誠心相贈。一枚金幣，圖個吉利，當心他咬人。"
 
-#: scripts/Core/TaleBook.Late.cs:383
+#: scripts/Core/TaleBook.Late.cs:386
 msgid "Tilly gave you the breathing chest, and you opened it."
 msgstr "蒂莉把那隻會呼吸的寶箱送給了你，你開啟了它。"
 
-#: scripts/Core/TaleBook.Late.cs:385
+#: scripts/Core/TaleBook.Late.cs:388
 msgid ""
 "Tilly brought you the breathing chest, and you couldn't bring yourself to open it."
 msgstr "蒂莉把那隻會呼吸的寶箱帶來了，你卻下不了手開啟它。"
 
-#: scripts/Core/TaleBook.Late.cs:391
+#: scripts/Core/TaleBook.Late.cs:394
 msgid ""
 "What year is it? No, don't tell me. Tell me the Gate held. ...Good. Then I did my duty."
 msgstr "現在是哪一年？不，別告訴我。告訴我大門守住了沒有。……很好。那我就盡到了職責。"
 
-#: scripts/Core/TaleBook.Late.cs:392
+#: scripts/Core/TaleBook.Late.cs:395
 msgid ""
 "I guarded the Crown's oath-book in that chest for three hundred years. Your King can have it back, with my compliments. And you let me out. An Ashcombe pays his debts: I'll stand at your door, and no thief or warrant will cross it."
 msgstr ""
 "我在那個箱子裡守護王室的誓約書，守了三百年。你們的國王可以把它收回去了，代我致意。是你放我出來的。阿什科姆家的人有債必還：我會守在你的門前，無論竊賊還是搜查令，都休想跨過門檻。"
 
-#: scripts/Core/TaleBook.Late.cs:399
+#: scripts/Core/TaleBook.Late.cs:402
 msgid ""
 "Sir Edric Ashcombe woke after three hundred years, returned the Crown's oath-book, and swore to guard your door."
 msgstr "埃德里克·阿什科姆爵士沉睡三百年後醒來，交還了王室的誓約書，併發誓守衛你的店門。"
 
-#: scripts/Core/TaleBook.Late.cs:411
+#: scripts/Core/TaleBook.Late.cs:414
 msgid ""
 "A bell-locked chest: read it exactly, every last thing in it, and its echo sings free. Wrong, and the echo is lost."
 msgstr "鈴鎖寶箱：把它判斷得分毫不差，裡頭每一樣都說對，它的回聲就會唱著飛出來。判斷錯了，回聲就會消失。"
 
-#: scripts/Core/TaleBook.Late.cs:434
+#: scripts/Core/TaleBook.Late.cs:437
 msgid "Its echo sleeps in a purse of coin, warded: you'll never hear it."
 msgstr "它的回聲沉睡在一袋錢幣裡，被結界封住了：你永遠聽不見它。"
 
-#: scripts/Core/TaleBook.Late.cs:435
+#: scripts/Core/TaleBook.Late.cs:438
 msgid "Its echo sleeps in a blade, warded: you'll never hear it."
 msgstr "它的回聲沉睡在一把利刃裡，被結界封住了：你永遠聽不見它。"
 
-#: scripts/Core/TaleBook.Late.cs:436
+#: scripts/Core/TaleBook.Late.cs:439
 msgid "Its echo sleeps in a cloak, warded: you'll never hear it."
 msgstr "它的回聲沉睡在一件斗篷裡，被結界封住了：你永遠聽不見它。"
 
-#: scripts/Core/TaleBook.Late.cs:437
+#: scripts/Core/TaleBook.Late.cs:440
 msgid "Its echo sleeps in a potion, warded: you'll never hear it."
 msgstr "它的回聲沉睡在一瓶藥水裡，被結界封住了：你永遠聽不見它。"
 
-#: scripts/Core/TaleBook.Late.cs:438
+#: scripts/Core/TaleBook.Late.cs:441
 msgid "Its echo sleeps in a spell, warded: you'll never hear it."
 msgstr "它的回聲沉睡在一卷法術裡，被結界封住了：你永遠聽不見它。"
 
-#: scripts/Core/TaleBook.Late.cs:439
+#: scripts/Core/TaleBook.Late.cs:442
 msgid "Its echo sleeps in a gem, warded: you'll never hear it."
 msgstr "它的回聲沉睡在一顆寶石裡，被結界封住了：你永遠聽不見它。"
 
-#: scripts/Core/TaleBook.Late.cs:446
+#: scripts/Core/TaleBook.Late.cs:449
 msgid ""
 "You read a bell-locked chest wrong. Its echo slipped away, and the song with it."
 msgstr "你把一隻鈴鎖寶箱判斷錯了。它的回聲溜走了，這首歌也隨之失落。"
 
-#: scripts/Core/TaleBook.Late.cs:460
+#: scripts/Core/TaleBook.Late.cs:463
 msgid ""
 "I sang the Keyhold's song whole, once, in the ruin of our chapel, and a Keywright carried it home. I can stop humming now."
 msgstr "我在我們禮拜堂的廢墟里，把鑰堡之歌完整唱了一遍，一位鑰匠把它帶回了家。我終於可以不再哼了。"
 
-#: scripts/Core/TaleBook.Late.cs:461
+#: scripts/Core/TaleBook.Late.cs:464
 msgid ""
 "The Keyhold's song is lost. I hum what's left of it on the abbey road. Children stop to listen."
 msgstr "鑰堡之歌失落了。我在通往修道院的路上哼著殘存的旋律。孩子們會停下來聽。"
 
-#: scripts/Core/TaleBook.Late.cs:462
+#: scripts/Core/TaleBook.Late.cs:465
 msgid ""
 "Two echoes free and one still waiting, somewhere. I'll keep looking. I've nothing but time."
 msgstr "兩段回聲已得自由，還有一段在某處等著。我會繼續找。我有的是時間。"
@@ -12614,12 +12614,12 @@ msgstr "他們的人賣工具給你，便宜四分之一。"
 msgid "Their people ask half as much again for their tools."
 msgstr "他們的人賣工具給你，要貴一半。"
 
-#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:817 scripts/Phases/TalkPhase.cs:82
+#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:819 scripts/Phases/TalkPhase.cs:82
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Go on"
 msgstr "繼續"
 
-#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:353 scripts/Phases/PeddlerPhase.cs:108
+#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:353 scripts/Phases/PeddlerPhase.cs:131
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Good night"
 msgstr "晚安"
@@ -13246,84 +13246,84 @@ msgstr "簡直是攔路搶劫。合法的那種。"
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "老天在對你微笑。可別得意忘形。"
 
-#: scripts/Main.cs:518
+#: scripts/Main.cs:519
 msgid "Achievement: {0}"
 msgstr "達成成就：{0}"
 
-#: scripts/Main.cs:543
+#: scripts/Main.cs:544
 msgid "THE NINE HEARTSONGS"
 msgstr "九首心歌"
 
-#: scripts/Main.cs:639
+#: scripts/Main.cs:640
 msgid "In the purse: {0}g."
 msgstr "錢袋裡有{0}金。"
 
-#: scripts/Main.cs:647
+#: scripts/Main.cs:648
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr "筆記本和收藏都已填滿：所有常客、所有物品、所有奇物，以及全部九首心歌。"
 
-#: scripts/Main.cs:652
+#: scripts/Main.cs:653
 msgid "Not now: finish what's in hand first."
 msgstr "現在不行：先把手頭的事做完。"
 
-#: scripts/Main.cs:766 scripts/Main.cs:929
+#: scripts/Main.cs:767 scripts/Main.cs:930
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr "大封鎖，完整唱響"
 
-#: scripts/Main.cs:766 scripts/Main.cs:929
+#: scripts/Main.cs:767 scripts/Main.cs:930
 msgid "THE CROWN CHEST"
 msgstr "王冠寶箱"
 
-#: scripts/Main.cs:797
+#: scripts/Main.cs:798
 msgid "BRAM'S STALL"
 msgstr "布拉姆的攤位"
 
-#: scripts/Main.cs:797 scripts/Ui/NotebookView.cs:398 scripts/Ui/NotebookView.cs:686
+#: scripts/Main.cs:798 scripts/Ui/NotebookView.cs:398 scripts/Ui/NotebookView.cs:686
 msgid "WEEK {0}"
 msgstr "第{0}周"
 
-#: scripts/Main.cs:820
+#: scripts/Main.cs:821
 msgid "THE SEASON'S END"
 msgstr "一季終了"
 
-#: scripts/Main.cs:835
+#: scripts/Main.cs:836
 msgid "THE GILDED GUILD"
 msgstr "鍍金公會"
 
-#: scripts/Main.cs:838
+#: scripts/Main.cs:839
 msgid "THE ALDRIC KEY"
 msgstr "奧德里克之鑰"
 
-#: scripts/Main.cs:904
+#: scripts/Main.cs:905
 msgid "FREE AND CLEAR"
 msgstr "無債一身輕"
 
-#: scripts/Main.cs:952 scripts/Ui/NotebookView.cs:409
+#: scripts/Main.cs:953 scripts/Ui/NotebookView.cs:409
 msgid "DAY {0}"
 msgstr "第{0}天"
 
-#: scripts/Main.cs:955
+#: scripts/Main.cs:956
 msgid ", level {0}"
 msgstr "（挑戰等級{0}）"
 
-#: scripts/Main.cs:956
+#: scripts/Main.cs:957
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}第{1}周，第{2}天{3}  -  {4}"
 
-#: scripts/Main.cs:956
+#: scripts/Main.cs:957
 msgid " of {0}"
 msgstr "（共{0}天）"
 
-#: scripts/Main.cs:957
+#: scripts/Main.cs:958
 msgid "The Guild comes tonight for {0}g."
 msgstr "公會今晚來收{0}金。"
 
-#: scripts/Main.cs:958
+#: scripts/Main.cs:959
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "公會將在第{1}天結束時來收{0}金。"
 
-#: scripts/Main.cs:965
+#: scripts/Main.cs:966
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0}從他的私房錢裡偷偷塞給你{1}金（還剩{2}次）。"
 
@@ -13468,12 +13468,12 @@ msgstr "{0}回到了大封鎖之中。"
 #: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:86
 #: scripts/Phases/DayEndPhase.cs:384 scripts/Phases/DuesPhase.cs:203 scripts/Phases/DuesPhase.cs:210
 #: scripts/Phases/DuesPhase.cs:218 scripts/Phases/DuesPhase.cs:265 scripts/Phases/DuesPhase.cs:279
-#: scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:925 scripts/Phases/PeddlerPhase.cs:323
+#: scripts/Phases/DuesPhase.cs:289 scripts/Phases/OpeningPhase.cs:927 scripts/Phases/PeddlerPhase.cs:347
 #: scripts/Phases/TalkPhase.cs:191 scripts/Phases/TalkPhase.cs:198
 msgid "+{0}g"
 msgstr "+{0}金"
 
-#: scripts/Phases/CounterPhase.cs:515 scripts/Phases/TalkPhase.cs:249
+#: scripts/Phases/CounterPhase.cs:515 scripts/Phases/TalkPhase.cs:256
 msgid "Waiting"
 msgstr "等候中"
 
@@ -13503,7 +13503,7 @@ msgstr "{0}想要{1}：出{2}金{3}{4}；如果它的售價再加四分之一更
 msgid " each"
 msgstr "一件"
 
-#: scripts/Phases/CounterPhase.cs:564 scripts/Phases/OpeningPhase.cs:926
+#: scripts/Phases/CounterPhase.cs:564 scripts/Phases/OpeningPhase.cs:928
 msgid " and a shard of the Aldric Key"
 msgstr "，外加一塊奧德里克之鑰碎片"
 
@@ -13607,7 +13607,7 @@ msgstr "{0}要價"
 msgid "Offer {0}g"
 msgstr "出價{0}金"
 
-#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:288
 msgid "Buy {0}g"
 msgstr "{0}金買下"
 
@@ -13747,11 +13747,11 @@ msgid ""
 "Hollis's men take the chest home to its owner, and pay you the finder's share."
 msgstr "霍利斯的手下把寶箱送還失主，並付給你發現者分成。"
 
-#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:819
 msgid "Close up for the day"
 msgstr "今日打烊"
 
-#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:819
 msgid "Next customer"
 msgstr "下一位客人"
 
@@ -14083,11 +14083,11 @@ msgstr "購買{0}。之後還剩{1}金。"
 msgid "{0}g more to go"
 msgstr "還差{0}金"
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:310
 msgid "ARE YOU SURE?"
 msgstr "確定嗎？"
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:310
 msgid "Buy anyway"
 msgstr "仍然購買"
 
@@ -14382,275 +14382,275 @@ msgstr "比武大會：兵器、斗篷 +50%"
 msgid "The Guild's assessor -10%"
 msgstr "公會估稅員 -10%"
 
-#: scripts/Phases/OpeningPhase.cs:269
+#: scripts/Phases/OpeningPhase.cs:271
 msgid "...EMPTY!"
 msgstr "……空的！"
 
-#: scripts/Phases/OpeningPhase.cs:274
+#: scripts/Phases/OpeningPhase.cs:276
 msgid "no {0}?"
 msgstr "沒有{0}？"
 
-#: scripts/Phases/OpeningPhase.cs:275
+#: scripts/Phases/OpeningPhase.cs:277
 msgid "{0} fewer {1}?"
 msgstr "少了{0}件{1}？"
 
-#: scripts/Phases/OpeningPhase.cs:276
+#: scripts/Phases/OpeningPhase.cs:278
 msgid "no false bottom?"
 msgstr "沒有夾層？"
 
-#: scripts/Phases/OpeningPhase.cs:279
+#: scripts/Phases/OpeningPhase.cs:281
 msgid "warded {0}: you named something that wasn't there"
 msgstr "結界裡的{0}：你點了並不存在的東西"
 
-#: scripts/Phases/OpeningPhase.cs:280
+#: scripts/Phases/OpeningPhase.cs:282
 msgid "warded, never named: {0}"
 msgstr "被結界封住，未點名：{0}"
 
-#: scripts/Phases/OpeningPhase.cs:315
+#: scripts/Phases/OpeningPhase.cs:317
 msgid "...wait. The ward lets go of what you named!"
 msgstr "……等等。結界放開了你點名的東西！"
 
-#: scripts/Phases/OpeningPhase.cs:375
+#: scripts/Phases/OpeningPhase.cs:377
 msgid "WORSE..."
 msgstr "變差了……"
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "BETTER!"
 msgstr "更好！"
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "EVEN BETTER!!"
 msgstr "還要更好！！"
 
-#: scripts/Phases/OpeningPhase.cs:428
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "INCREDIBLE!!!"
 msgstr "難以置信！！！"
 
-#: scripts/Phases/OpeningPhase.cs:575
+#: scripts/Phases/OpeningPhase.cs:577
 msgid "ENCHANTED! x2"
 msgstr "附魔！×2"
 
-#: scripts/Phases/OpeningPhase.cs:580
+#: scripts/Phases/OpeningPhase.cs:582
 msgid "FAKE!"
 msgstr "假貨！"
 
-#: scripts/Phases/OpeningPhase.cs:595
+#: scripts/Phases/OpeningPhase.cs:597
 msgid "{0}'S!"
 msgstr "歸{0}！"
 
-#: scripts/Phases/OpeningPhase.cs:606
+#: scripts/Phases/OpeningPhase.cs:608
 msgid "NEW!"
 msgstr "新！"
 
-#: scripts/Phases/OpeningPhase.cs:610
+#: scripts/Phases/OpeningPhase.cs:612
 msgid "let go"
 msgstr "已放歸"
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "BETTER THAN EXPECTED!"
 msgstr "比預期更好！"
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "TWO QUALITIES UP!!"
 msgstr "品質連升兩級！！"
 
-#: scripts/Phases/OpeningPhase.cs:716
+#: scripts/Phases/OpeningPhase.cs:718
 msgid "THREE QUALITIES UP!!!"
 msgstr "品質連升三級！！！"
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "PROFIT +{0}g"
 msgstr "盈利 +{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "LOSS {0}g"
 msgstr "虧損 {0}金"
 
-#: scripts/Phases/OpeningPhase.cs:756
+#: scripts/Phases/OpeningPhase.cs:758
 msgid "BROKE EVEN"
 msgstr "不賺不賠"
 
-#: scripts/Phases/OpeningPhase.cs:778
+#: scripts/Phases/OpeningPhase.cs:780
 msgid "fleeced"
 msgstr "被宰了"
 
-#: scripts/Phases/OpeningPhase.cs:778
+#: scripts/Phases/OpeningPhase.cs:780
 msgid "a steal"
 msgstr "撿了便宜"
 
-#: scripts/Phases/OpeningPhase.cs:792
+#: scripts/Phases/OpeningPhase.cs:794
 msgid "PERFECT READ"
 msgstr "完美判斷"
 
-#: scripts/Phases/OpeningPhase.cs:800
+#: scripts/Phases/OpeningPhase.cs:802
 msgid " Masterful pick: everything +25%."
 msgstr "撬鎖神乎其技：所有物品+25%。"
 
-#: scripts/Phases/OpeningPhase.cs:801
+#: scripts/Phases/OpeningPhase.cs:803
 msgid " Forced open: everything -10%."
 msgstr "強行撬開：所有物品-10%。"
 
-#: scripts/Phases/OpeningPhase.cs:805
+#: scripts/Phases/OpeningPhase.cs:807
 msgid " A perfect read: a valuer's fee of {0}g."
 msgstr "完美判斷：賺得{0}金鑑定費。"
 
-#: scripts/Phases/OpeningPhase.cs:806
+#: scripts/Phases/OpeningPhase.cs:808
 msgid " Haggler's Purse: {0}g back."
 msgstr "議價錢袋：返還{0}金。"
 
-#: scripts/Phases/OpeningPhase.cs:807
+#: scripts/Phases/OpeningPhase.cs:809
 msgid " Underwriter's Bond: {0}g back."
 msgstr "承保契約：返還{0}金。"
 
-#: scripts/Phases/OpeningPhase.cs:849
+#: scripts/Phases/OpeningPhase.cs:851
 msgid " {0} took the {1}, and paid {2}g for it."
 msgstr "{0}拿走了{1}，併為此付了{2}金。"
 
-#: scripts/Phases/OpeningPhase.cs:850
+#: scripts/Phases/OpeningPhase.cs:852
 msgid " {0} took the {1}, as agreed."
 msgstr "{0}按約定拿走了{1}。"
 
-#: scripts/Phases/OpeningPhase.cs:852
+#: scripts/Phases/OpeningPhase.cs:854
 msgid " Read exactly: {0} hands back {1}g, as wagered."
 msgstr "判斷分毫不差：{0}依賭約退還{1}金。"
 
-#: scripts/Phases/OpeningPhase.cs:852
+#: scripts/Phases/OpeningPhase.cs:854
 msgid " Not quite right: {0} keeps the whole price."
 msgstr "差了一點：{0}收下了全款。"
 
-#: scripts/Phases/OpeningPhase.cs:854
+#: scripts/Phases/OpeningPhase.cs:856
 msgid " Read exactly: {0} takes a quarter off, {1}g back."
 msgstr "判斷分毫不差：{0}減價四分之一，退還{1}金。"
 
-#: scripts/Phases/OpeningPhase.cs:855
+#: scripts/Phases/OpeningPhase.cs:857
 msgid ""
 " A wrong read: you pay {0} what it truly held, and a quarter more: {1}g."
 msgstr "判斷有誤：你要按箱裡實際的價值付給{0}，再加四分之一：{1}金。"
 
-#: scripts/Phases/OpeningPhase.cs:856
+#: scripts/Phases/OpeningPhase.cs:858
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr "判斷有誤，不過你付的錢本就超過了箱裡東西的價值。"
 
-#: scripts/Phases/OpeningPhase.cs:913
+#: scripts/Phases/OpeningPhase.cs:915
 msgid "Delivered"
 msgstr "已交付"
 
-#: scripts/Phases/OpeningPhase.cs:921
+#: scripts/Phases/OpeningPhase.cs:923
 msgid "Filled"
 msgstr "委託已滿"
 
-#: scripts/Phases/OpeningPhase.cs:925
+#: scripts/Phases/OpeningPhase.cs:927
 msgid "Shard +{0}g"
 msgstr "碎片 +{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:925 scripts/Phases/OpeningPhase.cs:959
+#: scripts/Phases/OpeningPhase.cs:927 scripts/Phases/OpeningPhase.cs:961
 msgid "{0}/{1}: +{2}g"
 msgstr "{0}/{1}：+{2}金"
 
-#: scripts/Phases/OpeningPhase.cs:925
+#: scripts/Phases/OpeningPhase.cs:927
 msgid "Deliver +{0}g"
 msgstr "交付 +{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:926
+#: scripts/Phases/OpeningPhase.cs:928
 msgid ""
 "{0} wants {1}: {2}g{3}, instead of {4}g for selling it. A commission always pays more than selling."
 msgstr "{0}想要{1}：付你{2}金{3}，而賣掉它只能得到{4}金。委託的報酬總是比賣掉更高。"
 
-#: scripts/Phases/OpeningPhase.cs:946
+#: scripts/Phases/OpeningPhase.cs:948
 msgid "Commission! +{0}g"
 msgstr "委託完成！+{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:950
+#: scripts/Phases/OpeningPhase.cs:952
 msgid "KEY SHARD {0} OF {1}!"
 msgstr "鑰匙碎片 {0}/{1}！"
 
-#: scripts/Phases/OpeningPhase.cs:978
+#: scripts/Phases/OpeningPhase.cs:980
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr "+{0}展覽分（附魔，×2！）"
 
-#: scripts/Phases/OpeningPhase.cs:978
+#: scripts/Phases/OpeningPhase.cs:980
 msgid "+{0} exhibition"
 msgstr "+{0}展覽分"
 
-#: scripts/Phases/OpeningPhase.cs:990
+#: scripts/Phases/OpeningPhase.cs:992
 msgid "On display"
 msgstr "陳列中"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Swap"
 msgstr "替換"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Keep"
 msgstr "陳列"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Swap {0} (-{1}g)"
 msgstr "替換 {0}（-{1}金）"
 
-#: scripts/Phases/OpeningPhase.cs:1002
+#: scripts/Phases/OpeningPhase.cs:1004
 msgid "Keep {0} (-{1}g)"
 msgstr "陳列 {0}（-{1}金）"
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr "以{1}金換取{0}展覽分{2}。{3}"
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid " (double: it's enchanted)"
 msgstr "（附魔，翻倍）"
 
-#: scripts/Phases/OpeningPhase.cs:1003
+#: scripts/Phases/OpeningPhase.cs:1005
 msgid " Your display is full: sell something on it to make room."
 msgstr "你的陳列已滿：先賣掉一件來騰出位置。"
 
-#: scripts/Phases/OpeningPhase.cs:1023
+#: scripts/Phases/OpeningPhase.cs:1025
 msgid ""
 "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr "你的陳列已滿。賣掉一件，為{0}（+{1}分）騰出位置："
 
-#: scripts/Phases/OpeningPhase.cs:1033
+#: scripts/Phases/OpeningPhase.cs:1035
 msgid "{0}: +{1}g, -{2} pts"
 msgstr "{0}：+{1}金，-{2}分"
 
-#: scripts/Phases/OpeningPhase.cs:1035
+#: scripts/Phases/OpeningPhase.cs:1037
 msgid "+{0}g, -{1} pts"
 msgstr "+{0}金，-{1}分"
 
-#: scripts/Phases/OpeningPhase.cs:1047
+#: scripts/Phases/OpeningPhase.cs:1049
 msgid "Never mind"
 msgstr "算了"
 
-#: scripts/Phases/OpeningPhase.cs:1059
+#: scripts/Phases/OpeningPhase.cs:1061
 msgid "Sold the {0}: +{1}g"
 msgstr "賣出{0}：+{1}金"
 
-#: scripts/Phases/PeddlerPhase.cs:49
+#: scripts/Phases/PeddlerPhase.cs:72
 msgid "NIM'S CURIOS"
 msgstr "尼姆的奇物"
 
-#: scripts/Phases/PeddlerPhase.cs:77
+#: scripts/Phases/PeddlerPhase.cs:100
 msgid "Nim's sold out: you own every curio Nim carries!"
 msgstr "尼姆的貨賣光了：他帶的每件奇物你都有了！"
 
-#: scripts/Phases/PeddlerPhase.cs:79
+#: scripts/Phases/PeddlerPhase.cs:102
 msgid ""
 "Each curio costs a set sum for its rarity, plus a share of the gold you have tonight ({0}g)."
 msgstr "每件奇物的價格，是按稀有度定的固定金額，再加上你今晚所持金幣（{0}金）的一定比例。"
 
-#: scripts/Phases/PeddlerPhase.cs:86
+#: scripts/Phases/PeddlerPhase.cs:109
 msgid "YOUR CURIOS {0}/{1}"
 msgstr "你的奇物 {0}/{1}"
 
-#: scripts/Phases/PeddlerPhase.cs:89
+#: scripts/Phases/PeddlerPhase.cs:112
 msgid "No room for more: click one to sell it back for half."
 msgstr "已經放不下了：點選一件，可半價賣回。"
 
-#: scripts/Phases/PeddlerPhase.cs:90
+#: scripts/Phases/PeddlerPhase.cs:113
 msgid "Click one to sell it back for half."
 msgstr "點選一件，可半價賣回。"
 
-#: scripts/Phases/PeddlerPhase.cs:103
+#: scripts/Phases/PeddlerPhase.cs:126
 msgid ""
 "{0}: {1}\n"
 "Click to sell it back for {2}g."
@@ -14658,77 +14658,77 @@ msgstr ""
 "{0}：{1}\n"
 "點選以{2}金賣回。"
 
-#: scripts/Phases/PeddlerPhase.cs:113
+#: scripts/Phases/PeddlerPhase.cs:136
 msgid "{0} {1}g"
 msgstr "{0} {1}金"
 
-#: scripts/Phases/PeddlerPhase.cs:131
+#: scripts/Phases/PeddlerPhase.cs:154
 msgid "The back room ({0})"
 msgstr "後屋（{0}）"
 
-#: scripts/Phases/PeddlerPhase.cs:132
+#: scripts/Phases/PeddlerPhase.cs:155
 msgid ""
 "Chests that won't open for you: return them to their owners, or sell them to Nim's friends."
 msgstr "打不開的寶箱：可以還給失主，或者賣給尼姆的朋友。"
 
-#: scripts/Phases/PeddlerPhase.cs:161
+#: scripts/Phases/PeddlerPhase.cs:184
 msgid "THE BACK ROOM"
 msgstr "後屋"
 
-#: scripts/Phases/PeddlerPhase.cs:166
+#: scripts/Phases/PeddlerPhase.cs:189
 msgid "The duel's stakes, held for the winner"
 msgstr "決鬥的賭注，替勝者保管"
 
-#: scripts/Phases/PeddlerPhase.cs:167
+#: scripts/Phases/PeddlerPhase.cs:190
 msgid "{0}'s parcel, kept for collection"
 msgstr "{0}的包裹，寄存待取"
 
-#: scripts/Phases/PeddlerPhase.cs:167
+#: scripts/Phases/PeddlerPhase.cs:190
 msgid "A {0} chest: {1}'s"
 msgstr "{0}寶箱：屬於{1}"
 
-#: scripts/Phases/PeddlerPhase.cs:170
+#: scripts/Phases/PeddlerPhase.cs:193
 msgid "Return it +{0}g"
 msgstr "歸還 +{0}金"
 
-#: scripts/Phases/PeddlerPhase.cs:171
+#: scripts/Phases/PeddlerPhase.cs:194
 msgid "Nim's friends +{0}g"
 msgstr "尼姆的朋友 +{0}金"
 
-#: scripts/Phases/PeddlerPhase.cs:173 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
+#: scripts/Phases/PeddlerPhase.cs:196 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
 #: scripts/Ui/Hud.cs:100
 msgid "Close"
 msgstr "關閉"
 
-#: scripts/Phases/PeddlerPhase.cs:250 scripts/Phases/PeddlerPhase.cs:252
+#: scripts/Phases/PeddlerPhase.cs:274 scripts/Phases/PeddlerPhase.cs:276
 msgid "Goes with your {0}"
 msgstr "與你的{0}相配"
 
-#: scripts/Phases/PeddlerPhase.cs:251
+#: scripts/Phases/PeddlerPhase.cs:275
 msgid "With your {0}"
 msgstr "配{0}"
 
-#: scripts/Phases/PeddlerPhase.cs:256
+#: scripts/Phases/PeddlerPhase.cs:280
 msgid "New at {0}"
 msgstr "{0}新貨"
 
-#: scripts/Phases/PeddlerPhase.cs:259
+#: scripts/Phases/PeddlerPhase.cs:283
 msgid "Yours"
 msgstr "已擁有"
 
-#: scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/PeddlerPhase.cs:288
 msgid "Take it, free"
 msgstr "免費拿走"
 
-#: scripts/Phases/PeddlerPhase.cs:267
+#: scripts/Phases/PeddlerPhase.cs:291
 msgid "{0}g for a {1} curio, and {2} of your purse tonight."
 msgstr "{1}奇物{0}金，再加上你今晚錢袋的{2}。"
 
-#: scripts/Phases/PeddlerPhase.cs:268
+#: scripts/Phases/PeddlerPhase.cs:292
 msgid "No room: sell a curio back to Nim first. {0}"
 msgstr "沒有空位：先賣一件奇物給尼姆。{0}"
 
-#: scripts/Phases/PeddlerPhase.cs:269
+#: scripts/Phases/PeddlerPhase.cs:293
 msgid "{0} {1}"
 msgstr "{0}{1}"
 
@@ -14926,7 +14926,7 @@ msgstr "跳過"
 msgid "click for more"
 msgstr "點選檢視更多"
 
-#: scripts/Phases/ScenePhase.cs:128 scripts/Ui/MentorView.cs:206
+#: scripts/Phases/ScenePhase.cs:128 scripts/Ui/MentorView.cs:209
 msgid "click to go on"
 msgstr "點選繼續"
 
@@ -15040,7 +15040,7 @@ msgstr "已購買：{0}"
 msgid "IN YOUR NOTEBOOK {0}"
 msgstr "已記入筆記本 {0}"
 
-#: scripts/Phases/TalkPhase.cs:229
+#: scripts/Phases/TalkPhase.cs:220
 msgid "A KEEPSAKE: {0}"
 msgstr "紀念物：{0}"
 
@@ -15208,47 +15208,47 @@ msgstr "目前：{0}/{1}。"
 msgid "Locked: a {0} curio for {1}. Nim brings it {2}.{3}"
 msgstr "未解鎖：{0}奇物（{1}）。{2}，尼姆才會帶來它。{3}"
 
-#: scripts/Ui/CollectionView.cs:224
+#: scripts/Ui/CollectionView.cs:228
 msgid ""
 "What people give you to keep when you see their tale through. A keepsake works like a curio, but takes no slot and is never sold. You've been given {0} of {1}."
 msgstr "陪人們走完他們的故事，他們就會送你留作紀念的東西。紀念物和奇物一樣起作用，但不佔欄位，也永遠不會被賣掉。你已獲贈{0}件，共{1}件。"
 
-#: scripts/Ui/CollectionView.cs:248
+#: scripts/Ui/CollectionView.cs:252
 msgid "From {0}"
 msgstr "來自《{0}》"
 
-#: scripts/Ui/CollectionView.cs:249
+#: scripts/Ui/CollectionView.cs:253
 msgid "Not given yet: someone gives it at the end of {0}."
 msgstr "尚未獲贈：在《{0}》的結尾，會有人把它送給你。"
 
-#: scripts/Ui/CollectionView.cs:260
+#: scripts/Ui/CollectionView.cs:264
 msgid "{0}, from {1}: {2}"
 msgstr "{0}，來自《{1}》：{2}"
 
-#: scripts/Ui/CollectionView.cs:261
+#: scripts/Ui/CollectionView.cs:265
 msgid "yours"
 msgstr "持有中"
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ""
 "Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. The songbook holds {0} of the nine{1}"
 msgstr ""
 "九件比黃金更受珍愛的東西，被唱進了大封鎖，藏在千千萬萬只寶箱之中。只有鑰匠聽得見它們歌唱；對其他人來說，它們一文不值。滑鼠懸停在卡片上可檢視它的故事。歌集裡已收錄九首中的{0}首{1}"
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ": the Crown Chest can be sung whole."
 msgstr "：王冠寶箱之歌已可完整唱響。"
 
-#: scripts/Ui/CollectionView.cs:272
+#: scripts/Ui/CollectionView.cs:276
 msgid ": with all nine, the Crown Chest's ending changes."
 msgstr "：集齊九首，王冠寶箱的結局就會改變。"
 
-#: scripts/Ui/CollectionView.cs:288
+#: scripts/Ui/CollectionView.cs:292
 msgid ""
 "Not heard yet. A Heartsong sings at the gentlest shake, in any seller's chest, and the seller never knows it's there."
 msgstr "尚未聽過。心歌輕搖一下就會歌唱，可能藏在任何賣家的寶箱裡，而賣家永遠不知道它在裡面。"
 
-#: scripts/Ui/CollectionView.cs:291
+#: scripts/Ui/CollectionView.cs:295
 msgid "{0}, from {1}. {2}"
 msgstr "{0}，來自{1}。{2}"
 
@@ -15360,27 +15360,27 @@ msgstr "明晚"
 msgid "in {0} days"
 msgstr "{0}天后"
 
-#: scripts/Ui/MentorView.cs:63
+#: scripts/Ui/MentorView.cs:65
 msgid "Skip lesson"
 msgstr "跳過教學"
 
-#: scripts/Ui/MentorView.cs:166
+#: scripts/Ui/MentorView.cs:168
 msgid "[do] "
 msgstr "[操作] "
 
-#: scripts/Ui/MentorView.cs:166
+#: scripts/Ui/MentorView.cs:168
 msgid "[read] "
 msgstr "[閱讀] "
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "do it to go on"
 msgstr "照做即可繼續"
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "click for more ({0})"
 msgstr "點選檢視更多（{0}）"
 
-#: scripts/Ui/MentorView.cs:206
+#: scripts/Ui/MentorView.cs:209
 msgid "click to close"
 msgstr "點選關閉"
 
