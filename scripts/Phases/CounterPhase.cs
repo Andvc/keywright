@@ -581,7 +581,10 @@ public partial class CounterPhase : Phase
         panel.AddChild(_notebookButton);
         var seller = _visit.Seller;
         // Nobody says what's inside: the slip is yours to fill (or the Engine's), and how the seller priced it is the reminder.
-        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? Loc.T("Ticked: what the Bookkeeping Engine read.") : seller.Priced;
+        // A tale's gift (or contest) is given for a lucky coin: how they'd price a chest doesn't come into it.
+        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? Loc.T("Ticked: what the Bookkeeping Engine read.")
+            : _visit.Gift ? Loc.T($"{seller.Who} gives it for a lucky coin.")
+            : seller.Priced;
         string values = _visit.Chest.Sealed ? Loc.T("Sealed: nothing to hear. Go by its weight.")
             : Loc.T($"Values: as good as a {(_visit.Chest.Gilded ? Loc.T("gilded") : Categories.ColourName(_visit.Chest.Quality))} chest promises.");
         // A line each; how they priced it takes both when it's long (the chest's colour is under it anyway).

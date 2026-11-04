@@ -3173,7 +3173,7 @@ msgstr "Œil de dragon"
 msgid "Paste Gem"
 msgstr "Gemme en toc"
 
-#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:898
+#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:901
 msgid "Heartsong"
 msgstr "Chant du cœur"
 
@@ -13969,7 +13969,7 @@ msgid ""
 msgstr ""
 "Une boutique dans la capitale : clients plus riches, archimages aux objets enchantés, un nain, et des gemmes."
 
-#: scripts/Core/Upgrades.cs:53 scripts/Phases/CounterPhase.cs:609
+#: scripts/Core/Upgrades.cs:53 scripts/Phases/CounterPhase.cs:612
 msgid "Witchlight"
 msgstr "Lueur-sorcière"
 
@@ -14037,7 +14037,7 @@ msgid ""
 msgstr ""
 "Près de la Porte dorée : 5 clients par jour, la cour, des démons, et le receleur de la Gueule."
 
-#: scripts/Core/Upgrades.cs:65 scripts/Phases/CounterPhase.cs:822
+#: scripts/Core/Upgrades.cs:65 scripts/Phases/CounterPhase.cs:825
 msgid "Lodestone"
 msgstr "Pierre d'aimant"
 
@@ -14728,7 +14728,7 @@ msgstr "Vendre : +{0} po"
 msgid "{0} goes back to the Locking."
 msgstr "{0} retourne au Verrouillage."
 
-#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/CounterPhase.cs:1155 scripts/Phases/DayEndPhase.cs:82
+#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/CounterPhase.cs:1158 scripts/Phases/DayEndPhase.cs:82
 #: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:86
 #: scripts/Phases/DayEndPhase.cs:384 scripts/Phases/DuesPhase.cs:203 scripts/Phases/DuesPhase.cs:210
 #: scripts/Phases/DuesPhase.cs:218 scripts/Phases/DuesPhase.cs:265 scripts/Phases/DuesPhase.cs:279
@@ -14788,254 +14788,258 @@ msgstr "VOTRE ESTIMATION"
 msgid "Notebook {0}"
 msgstr "Carnet {0}"
 
-#: scripts/Phases/CounterPhase.cs:584
+#: scripts/Phases/CounterPhase.cs:585
 msgid "Ticked: what the Bookkeeping Engine read."
 msgstr "Coché : ce qu'a lu la Machine comptable."
 
-#: scripts/Phases/CounterPhase.cs:585
+#: scripts/Phases/CounterPhase.cs:586
+msgid "{0} gives it for a lucky coin."
+msgstr "{0} vous le cède pour un sou porte-bonheur."
+
+#: scripts/Phases/CounterPhase.cs:588
 msgid "Sealed: nothing to hear. Go by its weight."
 msgstr "Enchaîné : rien à entendre. Jugez au poids."
 
-#: scripts/Phases/CounterPhase.cs:586
+#: scripts/Phases/CounterPhase.cs:589
 msgid "Values: as good as a {0} chest promises."
 msgstr "Valeurs : ce qu'un coffre {0} promet."
 
-#: scripts/Phases/CounterPhase.cs:586
+#: scripts/Phases/CounterPhase.cs:589
 msgid "gilded"
 msgstr "doré"
 
-#: scripts/Phases/CounterPhase.cs:602
+#: scripts/Phases/CounterPhase.cs:605
 msgid "False bottom"
 msgstr "Double fond"
 
-#: scripts/Phases/CounterPhase.cs:602
+#: scripts/Phases/CounterPhase.cs:605
 msgid "boom"
 msgstr "boum"
 
-#: scripts/Phases/CounterPhase.cs:609
+#: scripts/Phases/CounterPhase.cs:612
 msgid "Starlight"
 msgstr "Lueur d'étoile"
 
-#: scripts/Phases/CounterPhase.cs:609
+#: scripts/Phases/CounterPhase.cs:612
 msgid "Witchlight lit: enchanted things glow"
 msgstr "Lueur-sorcière allumée : l'enchanté luit"
 
-#: scripts/Phases/CounterPhase.cs:634
+#: scripts/Phases/CounterPhase.cs:637
 msgid "As good as promised, it's worth"
 msgstr "Aussi bon que promis, il vaut"
 
-#: scripts/Phases/CounterPhase.cs:655
+#: scripts/Phases/CounterPhase.cs:658
 msgid "Pass"
 msgstr "Passer"
 
-#: scripts/Phases/CounterPhase.cs:690
+#: scripts/Phases/CounterPhase.cs:693
 msgid "A commission wants this kind of thing (see the board on the left)."
 msgstr ""
 "Une commande demande ce type d'objet (voir le panneau d'affichage, à gauche)."
 
-#: scripts/Phases/CounterPhase.cs:699
+#: scripts/Phases/CounterPhase.cs:702
 msgid "Mark one of them enchanted"
 msgstr "Marquer l'un d'eux comme enchanté"
 
-#: scripts/Phases/CounterPhase.cs:737
+#: scripts/Phases/CounterPhase.cs:740
 msgid "slip: {0}"
 msgstr "fiche : {0}"
 
-#: scripts/Phases/CounterPhase.cs:761
+#: scripts/Phases/CounterPhase.cs:764
 msgid "You paid"
 msgstr "Vous avez payé"
 
-#: scripts/Phases/CounterPhase.cs:762
+#: scripts/Phases/CounterPhase.cs:765
 msgid "{0} asks what your slip says"
 msgstr "{0} demande le total de votre fiche"
 
-#: scripts/Phases/CounterPhase.cs:763
+#: scripts/Phases/CounterPhase.cs:766
 msgid "{0} wants you to name a price"
 msgstr "{0} vous laisse fixer le prix"
 
-#: scripts/Phases/CounterPhase.cs:765
+#: scripts/Phases/CounterPhase.cs:768
 msgid "{0}'s final price"
 msgstr "{0} : dernier prix"
 
-#: scripts/Phases/CounterPhase.cs:766
+#: scripts/Phases/CounterPhase.cs:769
 msgid "{0} asks (make an offer?)"
 msgstr "{0} demande (marchander ?)"
 
-#: scripts/Phases/CounterPhase.cs:767
+#: scripts/Phases/CounterPhase.cs:770
 msgid "{0} asks"
 msgstr "{0} demande"
 
-#: scripts/Phases/CounterPhase.cs:775
+#: scripts/Phases/CounterPhase.cs:778
 msgid "Offer {0}g"
 msgstr "Offrir {0}"
 
-#: scripts/Phases/CounterPhase.cs:779 scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:264
 msgid "Buy {0}g"
 msgstr "Payer {0}"
 
-#: scripts/Phases/CounterPhase.cs:810
+#: scripts/Phases/CounterPhase.cs:813
 msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr "Exact : 25 % de remise. Faux : 25 % de plus."
 
-#: scripts/Phases/CounterPhase.cs:811
+#: scripts/Phases/CounterPhase.cs:814
 msgid "One coin, and nobody's waiting."
 msgstr "Une pièce, et personne n'attend."
 
-#: scripts/Phases/CounterPhase.cs:811
+#: scripts/Phases/CounterPhase.cs:814
 msgid "One coin. And {0} still waiting, at x{1}."
 msgstr "Une pièce. Et {0} encore en attente, à prix x{1}."
 
-#: scripts/Phases/CounterPhase.cs:813
+#: scripts/Phases/CounterPhase.cs:816
 msgid "Not a sound: empty, as far as you can tell."
 msgstr "Pas un bruit : vide, semble-t-il."
 
-#: scripts/Phases/CounterPhase.cs:814
+#: scripts/Phases/CounterPhase.cs:817
 msgid "Tick what you think is inside."
 msgstr "Cochez ce qu'il contient, selon vous."
 
-#: scripts/Phases/CounterPhase.cs:815
+#: scripts/Phases/CounterPhase.cs:818
 msgid "Name a price: the bar shows your odds."
 msgstr "Proposez un prix : la jauge montre vos chances."
 
-#: scripts/Phases/CounterPhase.cs:816
+#: scripts/Phases/CounterPhase.cs:819
 msgid "Worth more than {0}g? {1}"
 msgstr "Vaut plus de {0} po ? {1}"
 
-#: scripts/Phases/CounterPhase.cs:822 scripts/Ui/SettingsView.cs:104
+#: scripts/Phases/CounterPhase.cs:825 scripts/Ui/SettingsView.cs:104
 msgid "On"
 msgstr "Activé"
 
-#: scripts/Phases/CounterPhase.cs:827
+#: scripts/Phases/CounterPhase.cs:830
 msgid "Last customer today."
 msgstr "Dernier client de la journée."
 
-#: scripts/Phases/CounterPhase.cs:827
+#: scripts/Phases/CounterPhase.cs:830
 msgid "{0} more waiting today."
 msgstr "Encore {0} en attente aujourd'hui."
 
-#: scripts/Phases/CounterPhase.cs:838
+#: scripts/Phases/CounterPhase.cs:841
 msgid "under 1%"
 msgstr "moins de 1%"
 
-#: scripts/Phases/CounterPhase.cs:838
+#: scripts/Phases/CounterPhase.cs:841
 msgid "over 99%"
 msgstr "plus de 99%"
 
-#: scripts/Phases/CounterPhase.cs:901
+#: scripts/Phases/CounterPhase.cs:904
 msgid "That song... you know it. {0}!"
 msgstr "Ce chant... vous le connaissez. {0} !"
 
-#: scripts/Phases/CounterPhase.cs:901
+#: scripts/Phases/CounterPhase.cs:904
 msgid "A sound like nothing in any chest. A Heartsong!"
 msgstr "Un son comme on n'en entend dans aucun coffre. Un Chant du cœur !"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "Dropped it: it lands {0}. Heavy ones hold more."
 msgstr ""
 "Vous le laissez tomber : il atterrit {0}. Plus un coffre est lourd, plus il contient."
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "with a heavy thump"
 msgstr "avec un bruit lourd"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "light as a feather"
 msgstr "léger comme une plume"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "with a middling thud"
 msgstr "avec un toc moyen"
 
-#: scripts/Phases/CounterPhase.cs:933
+#: scripts/Phases/CounterPhase.cs:936
 msgid "BOOM..."
 msgstr "BOUM..."
 
-#: scripts/Phases/CounterPhase.cs:934
+#: scripts/Phases/CounterPhase.cs:937
 msgid "Dropped it: a hollow BOOM. Something's under the floor!"
 msgstr "Lâché : un BOUM creux. Il y a quelque chose sous le fond !"
 
-#: scripts/Phases/CounterPhase.cs:940
+#: scripts/Phases/CounterPhase.cs:943
 msgid "THUD"
 msgstr "TOC"
 
-#: scripts/Phases/CounterPhase.cs:941
+#: scripts/Phases/CounterPhase.cs:944
 msgid "Dropped it: a solid thud. No false bottom."
 msgstr "Vous le laissez tomber : un toc plein. Pas de double fond."
 
-#: scripts/Phases/CounterPhase.cs:946
+#: scripts/Phases/CounterPhase.cs:949
 msgid "CRASH!"
 msgstr "FRACAS !"
 
-#: scripts/Phases/CounterPhase.cs:947
+#: scripts/Phases/CounterPhase.cs:950
 msgid "Something made of glass broke: the {0}."
 msgstr "Du verre s'est brisé : les {0}."
 
-#: scripts/Phases/CounterPhase.cs:961
+#: scripts/Phases/CounterPhase.cs:964
 msgid "CREAK"
 msgstr "CRIIIC"
 
-#: scripts/Phases/CounterPhase.cs:964
+#: scripts/Phases/CounterPhase.cs:967
 msgid ""
 "It's coming apart in your hands: no more shaking. Go by what you heard."
 msgstr ""
 "Il se disloque entre vos mains : plus de secousses. Fiez-vous à ce que vous avez entendu."
 
-#: scripts/Phases/CounterPhase.cs:975
+#: scripts/Phases/CounterPhase.cs:978
 msgid "Price +{0}%"
 msgstr "Prix +{0}%"
 
-#: scripts/Phases/CounterPhase.cs:1038
+#: scripts/Phases/CounterPhase.cs:1041
 msgid "Full price now"
 msgstr "Plein tarif, désormais"
 
-#: scripts/Phases/CounterPhase.cs:1131
+#: scripts/Phases/CounterPhase.cs:1134
 msgid ""
 "Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."
 msgstr "La Marque reste froide : coffre volé, il ne s'ouvrira pas."
 
-#: scripts/Phases/CounterPhase.cs:1136
+#: scripts/Phases/CounterPhase.cs:1139
 msgid "Send for the Wardens (+{0}g)"
 msgstr "Appeler les Gardiens (+{0} po)"
 
-#: scripts/Phases/CounterPhase.cs:1137
+#: scripts/Phases/CounterPhase.cs:1140
 msgid ""
 "The seller runs, the chest goes home to its owner, and the Wardens pay you a finder's share. The Lockless won't thank you."
 msgstr ""
 "Le vendeur s'enfuit, le coffre retourne à son propriétaire et les Gardiens vous versent la part du trouveur. Les Sans-Serrure ne vous diront pas merci."
 
-#: scripts/Phases/CounterPhase.cs:1157
+#: scripts/Phases/CounterPhase.cs:1160
 msgid "THE WARDENS"
 msgstr "LES GARDIENS"
 
-#: scripts/Phases/CounterPhase.cs:1157
+#: scripts/Phases/CounterPhase.cs:1160
 msgid ""
 "Hollis's men take the chest home to its owner, and pay you the finder's share."
 msgstr ""
 "Les hommes de Hollis rapportent le coffre à son propriétaire et vous versent la part du trouveur."
 
-#: scripts/Phases/CounterPhase.cs:1184 scripts/Phases/CounterPhase.cs:1373 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
 msgid "Close up for the day"
 msgstr "Fin de journée"
 
-#: scripts/Phases/CounterPhase.cs:1184 scripts/Phases/CounterPhase.cs:1373 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
 msgid "Next customer"
 msgstr "Client suivant"
 
-#: scripts/Phases/CounterPhase.cs:1201
+#: scripts/Phases/CounterPhase.cs:1204
 msgid "The Bookkeeping Engine can't read through chains."
 msgstr "La Machine comptable ne lit pas à travers les chaînes."
 
-#: scripts/Phases/CounterPhase.cs:1212
+#: scripts/Phases/CounterPhase.cs:1215
 msgid ""
 "The Bookkeeping Engine whirs and clicks: everything inside is on the slip."
 msgstr ""
 "La Machine comptable ronronne et cliquette : tout le contenu est sur la fiche."
 
-#: scripts/Phases/CounterPhase.cs:1219
+#: scripts/Phases/CounterPhase.cs:1222
 msgid "The Drowned Bell is silent: nothing inside."
 msgstr "La Cloche engloutie se tait : il n'y a rien dedans."
 
-#: scripts/Phases/CounterPhase.cs:1220
+#: scripts/Phases/CounterPhase.cs:1223
 msgid ""
 "The Drowned Bell tolls {0} time: {1} thing inside, false bottom and all."
 msgid_plural ""
@@ -15045,37 +15049,37 @@ msgstr[0] ""
 msgstr[1] ""
 "La Cloche engloutie sonne {0} coups : {1} objets à l'intérieur, double fond compris."
 
-#: scripts/Phases/CounterPhase.cs:1244
+#: scripts/Phases/CounterPhase.cs:1247
 msgid "THE WARD WON'T LET GO"
 msgstr "LE SCEAU NE CÈDE PAS"
 
-#: scripts/Phases/CounterPhase.cs:1245
+#: scripts/Phases/CounterPhase.cs:1248
 msgid ""
 "It wasn't {0}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you can return it to its owner, or sell it to Nim's friends."
 msgstr ""
 "Ce n'était pas à {0} de le vendre : il n'est donc pas à vous, et ne s'ouvrira pas. Bram le range dans l'arrière-boutique. Ce soir, rendez-le à son propriétaire ou vendez-le aux amis de Nim."
 
-#: scripts/Phases/CounterPhase.cs:1271
+#: scripts/Phases/CounterPhase.cs:1274
 msgid "{0} won't be back this week. Word gets round."
 msgstr "{0} ne reviendra pas cette semaine. La rumeur court."
 
-#: scripts/Phases/CounterPhase.cs:1317
+#: scripts/Phases/CounterPhase.cs:1320
 msgid "The chest bursts open!"
 msgstr "Le coffre éclate !"
 
-#: scripts/Phases/CounterPhase.cs:1357
+#: scripts/Phases/CounterPhase.cs:1360
 msgid "YOUR GUT SAYS"
 msgstr "VOTRE INTUITION DIT"
 
-#: scripts/Phases/CounterPhase.cs:1361
+#: scripts/Phases/CounterPhase.cs:1364
 msgid "missed out"
 msgstr "manqué"
 
-#: scripts/Phases/CounterPhase.cs:1361
+#: scripts/Phases/CounterPhase.cs:1364
 msgid "right call"
 msgstr "bon choix"
 
-#: scripts/Phases/CounterPhase.cs:1362
+#: scripts/Phases/CounterPhase.cs:1365
 msgid "You'll never know for sure."
 msgstr "Vous ne le saurez jamais vraiment."
 
@@ -16381,21 +16385,21 @@ msgstr "Crédits"
 msgid "Early Access {0}"
 msgstr "Accès anticipé {0}"
 
-#: scripts/Phases/TitlePhase.cs:515
+#: scripts/Phases/TitlePhase.cs:519
 msgid "Start over?"
 msgstr "Recommencer ?"
 
-#: scripts/Phases/TitlePhase.cs:516
+#: scripts/Phases/TitlePhase.cs:520
 msgid ""
 "Your shop ({0}) will be gone for good. Its score so far is noted when the new run starts."
 msgstr ""
 "Votre boutique ({0}) disparaîtra pour de bon. Son score sera noté au début de la nouvelle partie."
 
-#: scripts/Phases/TitlePhase.cs:518
+#: scripts/Phases/TitlePhase.cs:522
 msgid "Start over"
 msgstr "Recommencer"
 
-#: scripts/Phases/TitlePhase.cs:519
+#: scripts/Phases/TitlePhase.cs:523
 msgid "Keep my shop"
 msgstr "Garder ma boutique"
 

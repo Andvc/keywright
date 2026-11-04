@@ -2956,7 +2956,7 @@ msgstr "龍之眼"
 msgid "Paste Gem"
 msgstr "仿造寶石"
 
-#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:898
+#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:901
 msgid "Heartsong"
 msgstr "心歌"
 
@@ -12747,7 +12747,7 @@ msgid ""
 "A shop in the capital: richer customers, archmages with enchanted things, a dwarf, and gems."
 msgstr "在都城開店：顧客更闊綽，有帶著附魔物品的大法師、一位矮人，還有寶石。"
 
-#: scripts/Core/Upgrades.cs:53 scripts/Phases/CounterPhase.cs:609
+#: scripts/Core/Upgrades.cs:53 scripts/Phases/CounterPhase.cs:612
 msgid "Witchlight"
 msgstr "巫燈"
 
@@ -12811,7 +12811,7 @@ msgid ""
 "By the Gilded Gate: 5 customers a day, the court, demons, and a fence for the Maw."
 msgstr "緊鄰鍍金之門：每天5位顧客，有宮廷中人、惡魔，還有替巨口銷贓的人。"
 
-#: scripts/Core/Upgrades.cs:65 scripts/Phases/CounterPhase.cs:822
+#: scripts/Core/Upgrades.cs:65 scripts/Phases/CounterPhase.cs:825
 msgid "Lodestone"
 msgstr "磁石"
 
@@ -13464,7 +13464,7 @@ msgstr "賣出：+{0}金"
 msgid "{0} goes back to the Locking."
 msgstr "{0}回到了大封鎖之中。"
 
-#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/CounterPhase.cs:1155 scripts/Phases/DayEndPhase.cs:82
+#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/CounterPhase.cs:1158 scripts/Phases/DayEndPhase.cs:82
 #: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:86
 #: scripts/Phases/DayEndPhase.cs:384 scripts/Phases/DuesPhase.cs:203 scripts/Phases/DuesPhase.cs:210
 #: scripts/Phases/DuesPhase.cs:218 scripts/Phases/DuesPhase.cs:265 scripts/Phases/DuesPhase.cs:279
@@ -13523,284 +13523,288 @@ msgstr "你的估價"
 msgid "Notebook {0}"
 msgstr "筆記本 {0}"
 
-#: scripts/Phases/CounterPhase.cs:584
+#: scripts/Phases/CounterPhase.cs:585
 msgid "Ticked: what the Bookkeeping Engine read."
 msgstr "已勾選：記賬機讀出的內容。"
 
-#: scripts/Phases/CounterPhase.cs:585
+#: scripts/Phases/CounterPhase.cs:586
+msgid "{0} gives it for a lucky coin."
+msgstr "{0}只收一枚幸運幣，就把它給你。"
+
+#: scripts/Phases/CounterPhase.cs:588
 msgid "Sealed: nothing to hear. Go by its weight."
 msgstr "密封：什麼也聽不到。只能憑重量判斷。"
 
-#: scripts/Phases/CounterPhase.cs:586
+#: scripts/Phases/CounterPhase.cs:589
 msgid "Values: as good as a {0} chest promises."
 msgstr "估值：按{0}寶箱應有的品質。"
 
-#: scripts/Phases/CounterPhase.cs:586
+#: scripts/Phases/CounterPhase.cs:589
 msgid "gilded"
 msgstr "鍍金"
 
-#: scripts/Phases/CounterPhase.cs:602
+#: scripts/Phases/CounterPhase.cs:605
 msgid "False bottom"
 msgstr "夾層"
 
-#: scripts/Phases/CounterPhase.cs:602
+#: scripts/Phases/CounterPhase.cs:605
 msgid "boom"
 msgstr "咚"
 
-#: scripts/Phases/CounterPhase.cs:609
+#: scripts/Phases/CounterPhase.cs:612
 msgid "Starlight"
 msgstr "星光"
 
-#: scripts/Phases/CounterPhase.cs:609
+#: scripts/Phases/CounterPhase.cs:612
 msgid "Witchlight lit: enchanted things glow"
 msgstr "巫燈已點亮：附魔物品會發光"
 
-#: scripts/Phases/CounterPhase.cs:634
+#: scripts/Phases/CounterPhase.cs:637
 msgid "As good as promised, it's worth"
 msgstr "按應有品質，價值"
 
-#: scripts/Phases/CounterPhase.cs:655
+#: scripts/Phases/CounterPhase.cs:658
 msgid "Pass"
 msgstr "不買"
 
-#: scripts/Phases/CounterPhase.cs:690
+#: scripts/Phases/CounterPhase.cs:693
 msgid "A commission wants this kind of thing (see the board on the left)."
 msgstr "有委託想要這類東西（見左側的告示板）。"
 
-#: scripts/Phases/CounterPhase.cs:699
+#: scripts/Phases/CounterPhase.cs:702
 msgid "Mark one of them enchanted"
 msgstr "將其中一件標為附魔"
 
-#: scripts/Phases/CounterPhase.cs:737
+#: scripts/Phases/CounterPhase.cs:740
 msgid "slip: {0}"
 msgstr "估價單：{0}"
 
-#: scripts/Phases/CounterPhase.cs:761
+#: scripts/Phases/CounterPhase.cs:764
 msgid "You paid"
 msgstr "你付了"
 
-#: scripts/Phases/CounterPhase.cs:762
+#: scripts/Phases/CounterPhase.cs:765
 msgid "{0} asks what your slip says"
 msgstr "{0}按你估價單上的數要價"
 
-#: scripts/Phases/CounterPhase.cs:763
+#: scripts/Phases/CounterPhase.cs:766
 msgid "{0} wants you to name a price"
 msgstr "{0}請你出價"
 
-#: scripts/Phases/CounterPhase.cs:765
+#: scripts/Phases/CounterPhase.cs:768
 msgid "{0}'s final price"
 msgstr "{0}的最終價格"
 
-#: scripts/Phases/CounterPhase.cs:766
+#: scripts/Phases/CounterPhase.cs:769
 msgid "{0} asks (make an offer?)"
 msgstr "{0}要價（還價嗎？）"
 
-#: scripts/Phases/CounterPhase.cs:767
+#: scripts/Phases/CounterPhase.cs:770
 msgid "{0} asks"
 msgstr "{0}要價"
 
-#: scripts/Phases/CounterPhase.cs:775
+#: scripts/Phases/CounterPhase.cs:778
 msgid "Offer {0}g"
 msgstr "出價{0}金"
 
-#: scripts/Phases/CounterPhase.cs:779 scripts/Phases/PeddlerPhase.cs:264
+#: scripts/Phases/CounterPhase.cs:782 scripts/Phases/PeddlerPhase.cs:264
 msgid "Buy {0}g"
 msgstr "{0}金買下"
 
-#: scripts/Phases/CounterPhase.cs:810
+#: scripts/Phases/CounterPhase.cs:813
 msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr "全對：減價四分之一。有誤：加價四分之一。"
 
-#: scripts/Phases/CounterPhase.cs:811
+#: scripts/Phases/CounterPhase.cs:814
 msgid "One coin, and nobody's waiting."
 msgstr "一枚金幣，而且後面沒人在等。"
 
-#: scripts/Phases/CounterPhase.cs:811
+#: scripts/Phases/CounterPhase.cs:814
 msgid "One coin. And {0} still waiting, at x{1}."
 msgstr "一枚金幣。但後面還有{0}人在等，他們都將要價×{1}。"
 
-#: scripts/Phases/CounterPhase.cs:813
+#: scripts/Phases/CounterPhase.cs:816
 msgid "Not a sound: empty, as far as you can tell."
 msgstr "毫無聲響：看來是空的。"
 
-#: scripts/Phases/CounterPhase.cs:814
+#: scripts/Phases/CounterPhase.cs:817
 msgid "Tick what you think is inside."
 msgstr "勾選你認為裡面有的東西。"
 
-#: scripts/Phases/CounterPhase.cs:815
+#: scripts/Phases/CounterPhase.cs:818
 msgid "Name a price: the bar shows your odds."
 msgstr "出個價：勝算條會顯示你的勝算。"
 
-#: scripts/Phases/CounterPhase.cs:816
+#: scripts/Phases/CounterPhase.cs:819
 msgid "Worth more than {0}g? {1}"
 msgstr "價值超過{0}金？{1}"
 
-#: scripts/Phases/CounterPhase.cs:822 scripts/Ui/SettingsView.cs:104
+#: scripts/Phases/CounterPhase.cs:825 scripts/Ui/SettingsView.cs:104
 msgid "On"
 msgstr "開啟"
 
-#: scripts/Phases/CounterPhase.cs:827
+#: scripts/Phases/CounterPhase.cs:830
 msgid "Last customer today."
 msgstr "今天的最後一位客人。"
 
-#: scripts/Phases/CounterPhase.cs:827
+#: scripts/Phases/CounterPhase.cs:830
 msgid "{0} more waiting today."
 msgstr "今天還有{0}人在等。"
 
-#: scripts/Phases/CounterPhase.cs:838
+#: scripts/Phases/CounterPhase.cs:841
 msgid "under 1%"
 msgstr "不到1%"
 
-#: scripts/Phases/CounterPhase.cs:838
+#: scripts/Phases/CounterPhase.cs:841
 msgid "over 99%"
 msgstr "超過99%"
 
-#: scripts/Phases/CounterPhase.cs:901
+#: scripts/Phases/CounterPhase.cs:904
 msgid "That song... you know it. {0}!"
 msgstr "這首歌……你聽過。是{0}！"
 
-#: scripts/Phases/CounterPhase.cs:901
+#: scripts/Phases/CounterPhase.cs:904
 msgid "A sound like nothing in any chest. A Heartsong!"
 msgstr "這聲音不像任何寶箱裡會有的。是心歌！"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "Dropped it: it lands {0}. Heavy ones hold more."
 msgstr "摔了一下：落地時{0}。越重灌得越多。"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "with a heavy thump"
 msgstr "沉沉地一聲重響"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "light as a feather"
 msgstr "輕如鴻毛"
 
-#: scripts/Phases/CounterPhase.cs:921
+#: scripts/Phases/CounterPhase.cs:924
 msgid "with a middling thud"
 msgstr "不輕不重地一聲悶響"
 
-#: scripts/Phases/CounterPhase.cs:933
+#: scripts/Phases/CounterPhase.cs:936
 msgid "BOOM..."
 msgstr "咚……"
 
-#: scripts/Phases/CounterPhase.cs:934
+#: scripts/Phases/CounterPhase.cs:937
 msgid "Dropped it: a hollow BOOM. Something's under the floor!"
 msgstr "摔了一下：空洞的一聲「咚」！箱底下藏著東西！"
 
-#: scripts/Phases/CounterPhase.cs:940
+#: scripts/Phases/CounterPhase.cs:943
 msgid "THUD"
 msgstr "悶響"
 
-#: scripts/Phases/CounterPhase.cs:941
+#: scripts/Phases/CounterPhase.cs:944
 msgid "Dropped it: a solid thud. No false bottom."
 msgstr "摔了一下：一聲結實的悶響。沒有夾層。"
 
-#: scripts/Phases/CounterPhase.cs:946
+#: scripts/Phases/CounterPhase.cs:949
 msgid "CRASH!"
 msgstr "啪嚓！"
 
-#: scripts/Phases/CounterPhase.cs:947
+#: scripts/Phases/CounterPhase.cs:950
 msgid "Something made of glass broke: the {0}."
 msgstr "有玻璃制的東西碎了：是{0}。"
 
-#: scripts/Phases/CounterPhase.cs:961
+#: scripts/Phases/CounterPhase.cs:964
 msgid "CREAK"
 msgstr "嘎吱"
 
-#: scripts/Phases/CounterPhase.cs:964
+#: scripts/Phases/CounterPhase.cs:967
 msgid ""
 "It's coming apart in your hands: no more shaking. Go by what you heard."
 msgstr "它在你手裡快散架了：不能再搖了。就憑已經聽到的來判斷吧。"
 
-#: scripts/Phases/CounterPhase.cs:975
+#: scripts/Phases/CounterPhase.cs:978
 msgid "Price +{0}%"
 msgstr "價格+{0}%"
 
-#: scripts/Phases/CounterPhase.cs:1038
+#: scripts/Phases/CounterPhase.cs:1041
 msgid "Full price now"
 msgstr "現在要全價了"
 
-#: scripts/Phases/CounterPhase.cs:1131
+#: scripts/Phases/CounterPhase.cs:1134
 msgid ""
 "Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."
 msgstr "你的鑰紋發涼了：這個寶箱不是賣家的，他們無權出售。買下了，它也不會為你開啟。"
 
-#: scripts/Phases/CounterPhase.cs:1136
+#: scripts/Phases/CounterPhase.cs:1139
 msgid "Send for the Wardens (+{0}g)"
 msgstr "報告巡守（+{0}金）"
 
-#: scripts/Phases/CounterPhase.cs:1137
+#: scripts/Phases/CounterPhase.cs:1140
 msgid ""
 "The seller runs, the chest goes home to its owner, and the Wardens pay you a finder's share. The Lockless won't thank you."
 msgstr "賣家會逃走，寶箱會物歸原主，巡守會付你發現者分成。無鎖黨可不會領你的情。"
 
-#: scripts/Phases/CounterPhase.cs:1157
+#: scripts/Phases/CounterPhase.cs:1160
 msgid "THE WARDENS"
 msgstr "巡守"
 
-#: scripts/Phases/CounterPhase.cs:1157
+#: scripts/Phases/CounterPhase.cs:1160
 msgid ""
 "Hollis's men take the chest home to its owner, and pay you the finder's share."
 msgstr "霍利斯的手下把寶箱送還失主，並付給你發現者分成。"
 
-#: scripts/Phases/CounterPhase.cs:1184 scripts/Phases/CounterPhase.cs:1373 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
 msgid "Close up for the day"
 msgstr "今日打烊"
 
-#: scripts/Phases/CounterPhase.cs:1184 scripts/Phases/CounterPhase.cs:1373 scripts/Phases/OpeningPhase.cs:817
+#: scripts/Phases/CounterPhase.cs:1187 scripts/Phases/CounterPhase.cs:1376 scripts/Phases/OpeningPhase.cs:817
 msgid "Next customer"
 msgstr "下一位客人"
 
-#: scripts/Phases/CounterPhase.cs:1201
+#: scripts/Phases/CounterPhase.cs:1204
 msgid "The Bookkeeping Engine can't read through chains."
 msgstr "記賬機隔著鎖鏈讀不出來。"
 
-#: scripts/Phases/CounterPhase.cs:1212
+#: scripts/Phases/CounterPhase.cs:1215
 msgid ""
 "The Bookkeeping Engine whirs and clicks: everything inside is on the slip."
 msgstr "記賬機嗡嗡咔噠地轉了一陣：裡面的東西全都記上了估價單。"
 
-#: scripts/Phases/CounterPhase.cs:1219
+#: scripts/Phases/CounterPhase.cs:1222
 msgid "The Drowned Bell is silent: nothing inside."
 msgstr "沉鐘寂然無聲：裡面什麼都沒有。"
 
-#: scripts/Phases/CounterPhase.cs:1220
+#: scripts/Phases/CounterPhase.cs:1223
 msgid ""
 "The Drowned Bell tolls {0} time: {1} thing inside, false bottom and all."
 msgid_plural ""
 "The Drowned Bell tolls {0} times: {1} things inside, false bottom and all."
 msgstr[0] "沉鐘敲了{0}下：裡面有{1}件東西，連夾層裡的也算上了。"
 
-#: scripts/Phases/CounterPhase.cs:1244
+#: scripts/Phases/CounterPhase.cs:1247
 msgid "THE WARD WON'T LET GO"
 msgstr "結界不肯解開"
 
-#: scripts/Phases/CounterPhase.cs:1245
+#: scripts/Phases/CounterPhase.cs:1248
 msgid ""
 "It wasn't {0}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you can return it to its owner, or sell it to Nim's friends."
 msgstr "它本不是{0}能賣的，所以也不歸你：它打不開。布拉姆把它搬進了後屋。今晚你可以把它還給失主，或者賣給尼姆的朋友。"
 
-#: scripts/Phases/CounterPhase.cs:1271
+#: scripts/Phases/CounterPhase.cs:1274
 msgid "{0} won't be back this week. Word gets round."
 msgstr "{0}這周不會再來了。訊息傳得很快。"
 
-#: scripts/Phases/CounterPhase.cs:1317
+#: scripts/Phases/CounterPhase.cs:1320
 msgid "The chest bursts open!"
 msgstr "寶箱猛然迸開！"
 
-#: scripts/Phases/CounterPhase.cs:1357
+#: scripts/Phases/CounterPhase.cs:1360
 msgid "YOUR GUT SAYS"
 msgstr "直覺告訴你"
 
-#: scripts/Phases/CounterPhase.cs:1361
+#: scripts/Phases/CounterPhase.cs:1364
 msgid "missed out"
 msgstr "錯失良機"
 
-#: scripts/Phases/CounterPhase.cs:1361
+#: scripts/Phases/CounterPhase.cs:1364
 msgid "right call"
 msgstr "明智之舉"
 
-#: scripts/Phases/CounterPhase.cs:1362
+#: scripts/Phases/CounterPhase.cs:1365
 msgid "You'll never know for sure."
 msgstr "你永遠無法確知。"
 
@@ -15069,20 +15073,20 @@ msgstr "製作人員"
 msgid "Early Access {0}"
 msgstr "搶先體驗版 {0}"
 
-#: scripts/Phases/TitlePhase.cs:515
+#: scripts/Phases/TitlePhase.cs:519
 msgid "Start over?"
 msgstr "重新開始？"
 
-#: scripts/Phases/TitlePhase.cs:516
+#: scripts/Phases/TitlePhase.cs:520
 msgid ""
 "Your shop ({0}) will be gone for good. Its score so far is noted when the new run starts."
 msgstr "你的店（{0}）將永遠消失。新的一局開始時，會記下它目前的分數。"
 
-#: scripts/Phases/TitlePhase.cs:518
+#: scripts/Phases/TitlePhase.cs:522
 msgid "Start over"
 msgstr "重新開始"
 
-#: scripts/Phases/TitlePhase.cs:519
+#: scripts/Phases/TitlePhase.cs:523
 msgid "Keep my shop"
 msgstr "保留我的店"
 

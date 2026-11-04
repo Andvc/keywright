@@ -123,16 +123,18 @@ public partial class OpeningPhase : Phase
         if (State.EventIs("tourney")) bonuses.Add(Loc.T("Tourney: weapons, cloaks +50%"));
         if (State.EventIs("assessor")) bonuses.Add(Loc.T("The Guild's assessor -10%"));
         float y = Blind ? 182 : 140;
-        var lines = bonuses.Select(b => (Text: b, Color: Palette.Magic, Height: 22f))
-            .Concat(_purchase.Luck.Take(3).Select(l => (Text: Curios.LuckLine(l.Curio, l.Changed), Color: Palette.Good, Height: 46f)));
-        // Kept to the tally's width, clear of the profit stamp; each slides in from the left.
-        foreach (var (text, color, height) in lines)
+        var lines = bonuses.Select(b => (Text: b, Color: Palette.Magic))
+            .Concat(_purchase.Luck.Take(3).Select(l => (Text: Curios.LuckLine(l.Curio, l.Changed), Color: Palette.Good)));
+        // Kept to the tally's width, clear of the profit stamp; each slides in from the left, as tall as its words need
+        // there (a bonus that's one line in English can take two in French).
+        foreach (var (text, color) in lines)
         {
-            var label = UiKit.MakeLabel(text, 16, color, outline: 4).Wrapped().Place(-300, y, 280, height - 2);
+            float height = Math.Max(20f, UiKit.TextHeight(text, 280));
+            var label = UiKit.MakeLabel(text, 16, color, outline: 4).Wrapped().Place(-300, y, 280, height);
             tally.AddChild(label);
             label.CreateTween().TweenProperty(label, "position:x", 40f, 0.25f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
             Sfx.Play("blip", 1.3f, -8);
-            y += height;
+            y += height + 2;
             await Wait(0.15);
             if (!Alive) return;
         }
