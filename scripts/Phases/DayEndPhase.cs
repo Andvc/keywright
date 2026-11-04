@@ -62,6 +62,8 @@ public partial class DayEndPhase : Phase
         Unlocked();
         Teach(State.UpgradesOpen ? "upgrades" : "dayend");
         if (State.Display.Count > 0) Teach("exhibition");
+        // A quiet evening in the first week: what to listen for, before anyone's heard one sing.
+        if (State.Day >= 3 && State.Songbook.Count == 0 && !State.Taught.Contains("heard_Heartsong")) Teach("songs_intro");
         Sfx.Play(today.Profit >= 0 ? "win" : "lose", 1f, -6);
         Game.Moment("09_dayend", 0.5);
     }
@@ -208,7 +210,7 @@ public partial class DayEndPhase : Phase
         for (int i = 0; i < State.CurioKeys.Count; i++)
         {
             var curio = Curios.Get(State.CurioKeys[i]);
-            var spot = new Control { TooltipText = Loc.T($"{curio.Name}: {curio.Blurb}"), MouseFilter = Control.MouseFilterEnum.Pass }
+            var spot = new Control { TooltipText = Glossary.Tooltip(curio), MouseFilter = Control.MouseFilterEnum.Pass }
                 .Place(120 + i * step, 6, step - 4, 62);
             spot.AddChild(UiKit.MakeCurioIcon(curio, new Vector2((step - 4) / 2, 31)));
             curios.AddChild(spot);

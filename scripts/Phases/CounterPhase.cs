@@ -529,7 +529,7 @@ public partial class CounterPhase : Phase
         Add(UiKit.MakeLabel(Loc.T("Curios"), 16, Palette.Magic, outline: 4).Place(x0, 616, 120, 20));
         for (int i = 0; i < curios.Count; i++)
         {
-            var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = Loc.T($"{curios[i].Name}: {curios[i].Blurb}") }
+            var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = Glossary.Tooltip(curios[i]) }
                 .Place(x0 + i * 40, 642, 36, 36));
             spot.AddChild(UiKit.MakeCurioIcon(curios[i], new Vector2(18, 18)));
         }

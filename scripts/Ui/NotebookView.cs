@@ -193,11 +193,13 @@ public partial class NotebookView : Node2D
             Loc.T("Light things rattle at a gentle shake, weapons at a firm one, soft things only at a hard one. Click a row to hear it."),
             Loc.T("While weapons clank, delicate things go unheard: shake gently to hear past it."),
             tier >= 2 ? Loc.T("Dropped, a chest with a false bottom booms hollow. Glass may break.") : null,
-            tier >= 3 ? Loc.T("Two or three of a kind each sound from their own spot: count them. Sand rustles like a scroll, but pours at a gentle shake.") : null,
+            tier >= 3 ? Loc.T("Two or three of a kind each sound from their own spot: count them.") : null,
+            tier >= 3 ? Loc.T("Sand rustles like a scroll, but pours at a gentle shake.") : null,
             tier >= 3 ? Loc.T($"Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{Categories.MagicMultiplier}.{((tier >= 4 ? Loc.T(" Demon gold is iron under the gilt: a lodestone silences it.") : ""))}"): null,
         }.Where(r => r != null).ToArray();
-        _page.AddChild(UiKit.MakeLabel(string.Join("\n", rules.Select(r => "- " + r)), 16, Palette.Text)
-            .Place(TableX, y + 34 + kinds.Count * RowH, PanelW - 48, 140));
+        // Six rules at most, wrapped (a longer language takes more lines): room down to the panel's foot.
+        _page.AddChild(UiKit.MakeLabel(string.Join("\n", rules.Select(r => "- " + r)), 16, Palette.Text).Wrapped()
+            .Place(TableX, y + 34 + kinds.Count * RowH, PanelW - 48, 180));
     }
 
     void Header(string text, float x, float y, float width = 200) =>
@@ -394,7 +396,7 @@ public partial class NotebookView : Node2D
             _page.AddChild(UiKit.MakeLabel(Loc.T($"WEEK {week}"), 16, Palette.Gold).Place(TableX - 6, y + 8, 116, 20));
             _page.AddChild(UiKit.MakeLabel(row == 0 ? Loc.T("this week") : row == 1 ? Loc.T("next week") : Loc.T("not planned"), 16, Palette.Muted).Place(TableX - 6, y + 28, 116, 20));
             if (week > Guild.Weeks)
-                _page.AddChild(UiKit.MakeLabel(Loc.T("after the debt"), 16, Palette.Muted).Place(TableX - 6, y + 48, 116, 20));
+                _page.AddChild(UiKit.MakeLabel(Loc.T("past the debt"), 16, Palette.Muted).Place(TableX - 6, y + 48, 116, 20));
             for (int d = 1; d <= Guild.DaysPerWeek; d++)
             {
                 int day = GameState.DayNumber(week, d);

@@ -28,6 +28,17 @@ public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false, boo
         ReadKind.MissedHidden => Loc.T("a false bottom!"),
         _ => "",
     };
+
+    /// <summary>The read in fewer words, for a crowded table (the mark beside it says whether you had it right).</summary>
+    public string Brief => Kind switch
+    {
+        ReadKind.MissedMagic => Loc.T("enchanted!"),
+        ReadKind.Lucky => Loc.T("it shone!"),
+        ReadKind.SpottedFake => Loc.T("fake"),
+        ReadKind.SpottedBroken => Loc.T("broken"),
+        ReadKind.FoundHidden or ReadKind.MissedHidden => Loc.T("false bottom!"),
+        _ => Note,
+    };
 }
 
 /// <summary>The slip checked against what was really inside.</summary>
@@ -96,6 +107,9 @@ public sealed class Appraisal
 
     /// <summary>How good a named thing of this kind is likely to come out.</summary>
     (Rarity Quality, float Chance)[] Odds(Category kind, bool hidden = false) => _model != null ? _model.Odds(kind, Chest, hidden) : Categories.Odds(Chest);
+
+    /// <summary>Nothing marked at all: a chest bought on an empty slip wasn't appraised (sight unseen, it was bought blind).</summary>
+    public bool Blank => _count.All(c => c == 0) && !_hidden;
 
     /// <summary>The most of one kind the slip counts: two or three of a kind turn up from the town shop on.</summary>
     public int MaxCount => Tier >= Market.PairsTier ? 3 : 1;

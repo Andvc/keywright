@@ -41,6 +41,8 @@ public static class Hints
         ["offer"] = Loc.T("The best tools aren't sold in shops: the people who make them bring them to the counter. Say no, and they'll ask " +
                     "again in a few days."),
         ["opened"] = Loc.T("A tick is a good read. A cross is something to listen for next time."),
+        ["unseen"] = Loc.T("You bought that one sight unseen, so there was nothing to read: a closed eye is a thing you never marked, " +
+                           "not a mistake. Handle a chest before you buy it and your slip is checked as usual."),
         ["dayend"] = Loc.T($"That's a day's trading. Every coin goes toward the stall: once it's earned {GameState.UpgradesAt}g, all told, we'll talk about Thornwick."),
 
         // From the second day: chest colours, the ways people trade, and their stories.
@@ -81,6 +83,10 @@ public static class Hints
         // The run: the Guild's dues, curios, commissions, events.
         ["dues"] = Loc.T("Paid. Next week the Guild wants more, and more again the week after. Whatever you spend on the shop has to " +
                    "earn its keep before Vane comes back."),
+        ["term_sightunseen"] = Loc.T("That curio pays on chests bought sight unseen: bought without shaking, dropping or putting the lodestone " +
+                               "to them. The witchlight's fine. A '?' on a card means it uses a word like that: hover over it to read it."),
+        ["term_bramsword"] = Loc.T("Bram's word is me vouching for you on a Guild night you can't pay: the Guild takes all your gold, and " +
+                             "what's still owed, half as much again, goes on next week's due. Once a run, and never in the last week."),
         ["peddler"] = Loc.T("Nim comes every night after closing with curios: oddments from the Locking, each bending one rule of the " +
                       "trade. One a night at first; his lantern brings more. Pick ones that work together: Nim notices what you buy and " +
                       "brings more like it. Don't ask what Nim is."),
@@ -130,6 +136,8 @@ public static class Hints
         ["song_found"] = Loc.T("A Heartsong. Nobody would pay a penny for one, but each does something for the shop that no gold can, " +
                          "for as long as it sings here. Keep it or let it go: every one you keep makes the next harder to find."),
         ["song_shown"] = Loc.T("Hear that? The whole stall's different with it singing. It'll sing as long as it's ours."),
+        ["songs_intro"] = Loc.T("One more thing. Somewhere among all these chests are nine Heartsongs: things loved so much they sing. Only " +
+                          "our family hears them, at the gentlest shake. Most seasons never hear one. If you ever do, buy that chest."),
 
         // A regular with nothing new to teach gets a tip the first time they come in after the first day; the rest have
         // a lesson (Lessons.cs). Bram's kin who come knowing the trade still get his word on each seller's terms.

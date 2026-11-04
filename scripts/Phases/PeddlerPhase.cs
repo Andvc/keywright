@@ -51,6 +51,10 @@ public partial class PeddlerPhase : Phase
         _mentor = Add(new MentorView { Position = new Vector2(24, 560), ZIndex = 20 });
         Build();
         _mentor.Teach(State, "peddler");
+        // A card that leans on Bram's word or on buying sight unseen: Bram says what it means, once.
+        var terms = State.PeddlerStock.SelectMany(Glossary.For).ToHashSet();
+        if (terms.Contains(Term.SightUnseen)) _mentor.Teach(State, "term_sightunseen");
+        if (terms.Contains(Term.BramsWord)) _mentor.Teach(State, "term_bramsword");
         Game.Hud.SetGold(State.Gold, animate: false);
         Game.Moment("22_peddler", 0.8);
     }
@@ -222,8 +226,22 @@ public partial class PeddlerPhase : Phase
         string tags = narrow ? Curios.TagName(curio.Tags[0], curio) : Curios.Tags(curio);
         if (UiKit.TextWidth(tags) > CardW - 8) tags = Curios.TagName(curio.Tags[0], curio);
         card.AddChild(UiKit.MakeLabel(tags, 16, color, HorizontalAlignment.Center).Place(0, 100 + nameH, CardW, 20));
-        card.AddChild(UiKit.MakeLabel(curio.Blurb, 16, Palette.Muted, HorizontalAlignment.Center).Wrapped()
-            .Place(14, 124 + nameH, CardW - 28, CardH - 84 - 124 - nameH));
+        var blurb = UiKit.MakeLabel(curio.Blurb, 16, Palette.Muted, HorizontalAlignment.Center).Wrapped()
+            .Place(14, 124 + nameH, CardW - 28, CardH - 84 - 124 - nameH);
+        card.AddChild(blurb);
+        // The words of the trade it leans on ("sight unseen", "Bram's word"...), said exactly: a "?" in the corner, and
+        // the same over its description.
+        if (Glossary.For(curio).Count > 0)
+        {
+            string explain = Glossary.Explain(curio);
+            var badge = UiKit.MakePanel(Palette.Magic).Place(8, 8, 28, 28);
+            badge.MouseFilter = Control.MouseFilterEnum.Stop;
+            badge.TooltipText = explain;
+            badge.AddChild(UiKit.MakeLabel("?", 16, Palette.Magic, HorizontalAlignment.Center).Place(0, 4, 28, 20)); // loc: keys
+            card.AddChild(badge);
+            blurb.MouseFilter = Control.MouseFilterEnum.Pass;
+            blurb.TooltipText = explain;
+        }
         // What it goes with: a curio you keep that shares a way of trading with it; or a way of trading this shop opens.
         if (!owned && State.OwnedCurios.FirstOrDefault(c => c.Tags.Intersect(curio.Tags).Any()) is CurioDef kin)
         {

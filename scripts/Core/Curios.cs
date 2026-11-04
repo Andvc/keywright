@@ -82,12 +82,12 @@ public static class Curios
         new("staff", Loc.T("Archmage's Staff"), Loc.T("Everything in a chest with an enchanted thing in it is enchanted."), L, "staff", 3, T(Enchantment)),
 
         // Sight unseen: buy a chest without laying a hand on it. Cheaper, luckier, insured: the build that needs no ear.
-        new("sealed", Loc.T("Sealed Bid"), Loc.T($"Take a chest on its seller's word (no shake, drop or lodestone) and they knock {Pct(1 - SealedPrice)} off."),
+        new("sealed", Loc.T("Sealed Bid"), Loc.T($"Buy a chest sight unseen and its seller knocks {Pct(1 - SealedPrice)} off."),
             C, "sealed", 1, T(Blind)),
         new("dip", Loc.T("Lucky Dip"), Loc.T($"Everything in a chest you take sight unseen is {Pct(DipLuck)} likelier to come out a step better."), U, "dip", 1, T(Blind, Luck)),
         new("bond", Loc.T("Underwriter's Bond"), Loc.T($"A chest bought sight unseen holds less than you paid? The Underwriters pay {Pct(BondShare)} of it back."),
             U, "bond", 2, T(Blind, Coffers)),
-        new("wholesale", Loc.T("Wholesaler's Tally"), Loc.T($"Every chest you buy today: the next seller asks {Pct(WholesaleStep)} less (up to {Pct(WholesaleMax)})."),
+        new("wholesale", Loc.T("Wholesaler's Tally"), Loc.T($"Each chest you buy makes every seller after it today ask {Pct(WholesaleStep)} less (up to {Pct(WholesaleMax)})."),
             U, "wholesale", 2, T(Blind, Haggling)),
         new("token", Loc.T("Gambler's Token"), Loc.T("Twice as many surprises in everything you open: good ones and bad ones."), U, "token", 1, T(Luck, Blind)),
         new("blindfold", Loc.T("Fortune's Blindfold"), Loc.T($"Sight unseen, a chest costs {Pct(1 - BlindfoldPrice)} less, and nothing in it comes out worse than promised."), L,
@@ -102,9 +102,9 @@ public static class Curios
         new("hourglass", Loc.T("Waiting Game"), Loc.T($"Every chest you pass makes the next seller ask {Pct(WaitStep)} less (up to {Pct(WaitMax)}). Buying starts it again."),
             U, "hourglass", 1, T(Haggling, Crowds)),
         new("bell", Loc.T("Closing Bell"), Loc.T($"The last customer of the day asks {Pct(1 - BellPrice)} less."), U, "bell", 1, T(Haggling)),
-        new("coffer", Loc.T("Haggler's Purse"), Loc.T($"Everyone haggles with you, and you keep {Pct(CofferShare)} of whatever you talk them down by."), R, "coffer", 2,
+        new("coffer", Loc.T("Haggler's Purse"), Loc.T($"Everyone haggles with you, and {Pct(CofferShare)} of whatever you talk them down by comes back to you as well."), R, "coffer", 2,
             T(Haggling, Coffers)),
-        new("goldentongue", Loc.T("Golden Tongue"), Loc.T($"Everyone haggles and nobody walks out: go low, and they take {Pct(1 - GoldenFloor)} under their least."),
+        new("goldentongue", Loc.T("Golden Tongue"), Loc.T($"Everyone haggles and nobody walks out: go as low as you like, and they come down to {Pct(1 - GoldenFloor)} under the least they'd take."),
             L, "goldentongue", 3, T(Haggling)),
 
         // The perfect read: count every thing, mark every glow and boom, and be paid for it.
@@ -126,7 +126,7 @@ public static class Curios
         new("crate", Loc.T("Padded Crate"), Loc.T("Glass never breaks when you drop a chest."), C, "crate", 2, T(Compartments, Rough)),
         new("hook", Loc.T("Smuggler's Hook"), Loc.T("Smugglers come your way: false bottoms turn up twice as often."), U, "hook", 2, T(Compartments)),
         new("rod", Loc.T("Hollow Rod"), Loc.T("What's under a false bottom comes out a step better: people hid their best."), U, "rod", 2, T(Compartments)),
-        new("log", Loc.T("Smuggler's Log"), Loc.T($"Smugglers trust a buyer who keeps quiet: each false bottom you open makes them {Pct(LogStep)} likelier (up to {Pct(LogMax)})."),
+        new("log", Loc.T("Smuggler's Log"), Loc.T($"Smugglers trust a buyer who keeps quiet: each false bottom you open this run makes false bottoms {Pct(LogStep)} likelier (up to {Pct(LogMax)})."),
             U, "log", 2, T(Compartments)),
         new("pass", Loc.T("Black Market Pass"), Loc.T("Thornwick's black market pays double for anything from under a false bottom."), R, "pass", 2, T(Compartments)),
         new("compass", Loc.T("Smugglers' Compass"), Loc.T("Every chest has a false bottom."), L, "compass", 3, T(Compartments)),
@@ -143,10 +143,10 @@ public static class Curios
         // Luck: what comes out better than its chest. Sellers hear of a lucky shop; the art is in which chest gets the luck.
         new("shell", Loc.T("Lucky Shell"), Loc.T($"A dry spell ends twice as soon: luck starts to turn after {ShellPityAfter} plain finds, not {GameState.PityAfter}."), C, "shell", 1,
             T(Luck)),
-        new("coin", Loc.T("Lucky Coin"), Loc.T("The first chest you buy each day: everything in it gets two tries at its quality."), U, "coin", 1, T(Luck)),
+        new("coin", Loc.T("Lucky Coin"), Loc.T("The first chest you buy each day: each thing in it rolls its quality twice and keeps the better roll."), U, "coin", 1, T(Luck)),
         new("foot", Loc.T("Rabbit's Foot"), Loc.T($"Everything you open is {Pct(FootLuck)} likelier to come out a step better than its chest."), U, "foot", 1, T(Luck)),
         new("wishbone", Loc.T("Wishbone"), Loc.T("Something that comes out better than its chest sells for half as much again."), U, "wishbone", 1, T(Luck)),
-        new("horseshoe", Loc.T("Horseshoe"), Loc.T($"Luck runs in streaks: each chest with a surprise makes the next {Pct(HorseshoeStep)} luckier (up to {Pct(HorseshoeMax)})."),
+        new("horseshoe", Loc.T("Horseshoe"), Loc.T($"Each chest in a row with a surprise in it makes the next one's things {Pct(HorseshoeStep)} likelier to come out a step better (up to {Pct(HorseshoeMax)}). One without starts it again."),
             U, "horseshoe", 2, T(Luck)),
         new("clover", Loc.T("Four-Leaf Clover"), Loc.T("The first chest you buy each week: everything in it comes out a step better."), R, "clover", 2, T(Luck)),
         new("star", Loc.T("Shooting Star"), Loc.T("Once a day, the first thing to come out better than its chest climbs a step further."), R, "star", 2, T(Luck)),
@@ -192,12 +192,12 @@ public static class Curios
             T(Fakes, Appraisal)),
 
         // Coffers: the purse, and bad nights.
-        new("purse", Loc.T("Rainy-Day Purse"), Loc.T("Bram's stash has one more dip in it."), C, "purse", 1, T(Coffers)),
+        new("purse", Loc.T("Rainy-Day Purse"), Loc.T("Bram's stash helps you out three times a run, not twice."), C, "purse", 1, T(Coffers)),
         new("ticket", Loc.T("Pawn Ticket"), Loc.T("On a short night, what you pawn fetches four-fifths of its price, not three-fifths."), C, "ticket", 1, T(Coffers)),
         new("marker", Loc.T("Guildsman's Marker"), Loc.T("Bram's word is good twice a run, not once."), C, "marker", 1, T(Coffers)),
         new("jar", Loc.T("Savings Jar"), Loc.T($"Every night: {Pct(InterestRate)} of your gold as interest (up to {InterestPerTier}g at the stall, more in a grander shop)."), U, "jar", 1,
             T(Coffers)),
-        new("lockbox", Loc.T("Miser's Lockbox"), Loc.T($"Every Guild night, once you've paid: {Pct(LockboxShare)} of what's left in your purse."), R, "lockbox", 2, T(Coffers)),
+        new("lockbox", Loc.T("Miser's Lockbox"), Loc.T($"Every Guild night, once you've paid, your purse grows by {Pct(LockboxShare)} of what's left in it."), R, "lockbox", 2, T(Coffers)),
         // Mara's favour (a talent until 0.22): the Guild honours its own paper, once.
         new("note", Loc.T("Guild Promissory Note"), Loc.T("The Guild's own paper: once a run, on a Guild night you can't cover, it pays what's short (not the last week)."), R, "note", 1, T(Coffers)),
 

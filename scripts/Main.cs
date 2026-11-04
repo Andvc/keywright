@@ -275,6 +275,7 @@ public partial class Main : Node2D
             {
                 QuitAtEnd = args.Contains("--quit-at-end"),
                 MaxDays = int.TryParse(Arg(args, "--days"), out var days) ? days : 0,
+                SightUnseen = args.Contains("--sight-unseen"),
             };
             AddChild(_bot);
         }
@@ -511,8 +512,24 @@ public partial class Main : Node2D
     public void EndRun()
     {
         WriteProfile(p => p.Bank(State));
+        // A season that ended without a Heartsong ever heard: Bram's word on them, once, before the title.
+        bool unheard = Profile.Songs.Count == 0 && State.SongsFound.Count == 0 && !Profile.Taught.Contains(SongsTold);
+        if (unheard)
+        {
+            Profile.Taught.Add(SongsTold);
+            WriteProfile();
+        }
         if (_saving) Storage.Delete(SavePath);
         _saving = false;
+        if (unheard) SwitchTo(new ScenePhase(Story.SongsUnheard(), AfterRun, Loc.T("THE NINE HEARTSONGS"), "bram"));
+        else AfterRun();
+    }
+
+    /// <summary>Bram's word on Heartsongs, said once a profile (between runs).</summary>
+    const string SongsTold = "between.songs"; // loc: keys
+
+    void AfterRun()
+    {
         if (_bot != null)
         {
             QuitGame();

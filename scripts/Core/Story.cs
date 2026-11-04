@@ -331,6 +331,24 @@ public static class Story
     };
 
     /// <summary>
+    /// Between runs, once (0.32): a season that ended without a Heartsong ever heard gets Bram's word on them, so a new
+    /// player knows what they're listening for: the rarest things in Aldmark, and what one does on display.
+    /// </summary>
+    public static List<Line> SongsUnheard() => new()
+    {
+        new(Bram, Loc.T("No Heartsong this season. Don't take it hard: most seasons never hear one.")),
+        new(Bram, Loc.T("They're the rarest things in Aldmark. Nine of them, things loved more than gold, sung into the Locking and " +
+                        "lost among millions of chests. About one season in three turns one up.")),
+        new(Bram, Loc.T("Only a Keywright hears one. At the gentlest shake it sings a tune no other thing makes, and the seller never " +
+                        "knows it's there: they price the chest as if it weren't.")),
+        new(Bram, Loc.T("Nobody would pay a penny for one. But on display, each does one great thing for the shop that no gold can " +
+                        "buy, for as long as it sings: the kind of thing a whole season can be built around.")),
+        new(Bram, Loc.T("And once our family has heard one, it's in the songbook for good. Hear all nine, over all your seasons, and " +
+                        "the Crown Chest ends another way.")),
+        new(Bram, Loc.T("So shake every chest gently first, and listen. The collection's Heartsongs page keeps a place for each of the nine.")),
+    };
+
+    /// <summary>
     /// The season's end (0.30): what became of everyone whose tale began, a line each, by what you chose (each tale's
     /// <see cref="TaleDef.Ending"/>), after the run's last scene, won or lost.
     /// </summary>

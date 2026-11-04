@@ -387,6 +387,24 @@ public static class UiKit
         }) { Position = center, Scale = Vector2.One * scale };
     }
 
+    /// <summary>
+    /// The mark for a thing nobody could have read: on a chest bought sight unseen, what you didn't mark isn't a miss.
+    /// A closed eye, on the grid <see cref="MakeCheck"/> uses, in a colour that's neither right nor wrong.
+    /// </summary>
+    public static Painter MakeUnseenMark(Vector2 center, int scale)
+    {
+        string[] rows = { ".........", "#.......#", ".##...##.", "...###...", "..#.#.#..", ".#..#..#.", "........." };
+        return new Painter(p =>
+        {
+            for (int y = 0; y < rows.Length; y++)
+            for (int x = 0; x < rows[y].Length; x++)
+                if (rows[y][x] == '#') p.DrawRect(new Rect2(x * 3 - 14, y * 3 - 11, 5, 5), new Color(0, 0, 0, 0.8f));
+            for (int y = 0; y < rows.Length; y++)
+            for (int x = 0; x < rows[y].Length; x++)
+                if (rows[y][x] == '#') p.DrawRect(new Rect2(x * 3 - 13, y * 3 - 12, 3, 3), Palette.Unseen);
+        }) { Position = center, Scale = Vector2.One * scale };
+    }
+
     /// <summary>A pixel-framed slider with a gold coin for a grabber (the offer slider, the volume).</summary>
     public static void StyleSlider(HSlider slider)
     {

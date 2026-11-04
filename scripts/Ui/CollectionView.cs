@@ -188,6 +188,7 @@ public partial class CollectionView : Node2D
                 cell.AddChild(UiKit.MakeCurioIcon(curio, new Vector2(cellW / 2, cellH / 2)));
                 if (yours) cell.AddChild(UiKit.MakeLabel("*", 24, Palette.Gold, outline: 4).Place(cellW - 20, -6, 20, 30));
                 text = $"{curio.Name} ({Curios.RarityName(curio.Rarity)}; {Curios.Tags(curio)}{(yours ? Loc.T("; yours") : "")}): {curio.Blurb}";
+                if (Glossary.For(curio).Count > 0) text += "\n\n" + Glossary.Explain(curio);
             }
             else if (carried)
             {
@@ -234,7 +235,7 @@ public partial class CollectionView : Node2D
             if (!found)
             {
                 card.AddChild(UiKit.MakeLabel("?", 32, Palette.Muted, HorizontalAlignment.Center).Place(0, 44, cardW, 40));
-                card.TooltipText = Loc.T("Not heard yet.");
+                card.TooltipText = Loc.T("Not heard yet. A Heartsong sings at the gentlest shake, in any seller's chest, and the seller never knows it's there.");
                 continue;
             }
             card.TooltipText = Loc.T($"{Loc.T(song.Name)}, from {song.From}. {song.Story}");

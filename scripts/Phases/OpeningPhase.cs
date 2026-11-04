@@ -82,9 +82,33 @@ public partial class OpeningPhase : Phase
         _worthLabel = UiKit.MakeLabel(Money.Short(0), 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 108, 120, 30);
         tally.AddChild(_worthLabel);
         _tally = tally;
+        // Bought without a shake, a drop or the lodestone: nothing was read, so nothing on the table is a miss.
+        if (Blind)
+        {
+            var tag = UiKit.MakePanel(Palette.Unseen).Place(40, 142, 280, 34);
+            tag.MouseFilter = Control.MouseFilterEnum.Stop;
+            tag.TooltipText = Glossary.Line(Term.SightUnseen);
+            tag.AddChild(UiKit.MakeUnseenMark(new Vector2(24, 17), 1));
+            tag.AddChild(UiKit.MakeLabel(Loc.T("Bought sight unseen"), 16, Palette.Unseen, outline: 4).Place(44, 7, 228, 20));
+            tally.AddChild(tag);
+        }
     }
 
     CanvasLayer _tally;
+
+    /// <summary>Taken sight unseen (not the Crown Chest, not a gift): what you didn't mark is unseen, not missed.</summary>
+    bool Blind => _purchase.SightUnseen && !_purchase.Visit.Gift && _purchase.Visit.Seller != Story.VaultSeller;
+
+    /// <summary>A thing you didn't mark on a chest you never handled: nobody could have read it, so it's no miss.</summary>
+    bool Unseen(ItemRead read) => Blind && read.Kind is ReadKind.Missed or ReadKind.MissedMagic or ReadKind.MissedHidden;
+
+    /// <summary>What's said under an unseen thing: only what it turned out to be.</summary>
+    static string UnseenNote(ItemRead read, bool brief = false) => read.Kind switch
+    {
+        ReadKind.MissedMagic => Loc.T("enchanted!"),
+        ReadKind.MissedHidden => brief ? Loc.T("false bottom!") : Loc.T("a false bottom!"),
+        _ => "",
+    };
 
     /// <summary>
     /// What's making things sell for more today, and a curio's luck with what's inside, under the tally: only once
@@ -98,7 +122,7 @@ public partial class OpeningPhase : Phase
         if (State.EventIs("buyer")) bonuses.Add(Loc.T($"Crown's Buyer: {Categories.Get(State.BuyerKind).Name.ToLowerInvariant()} x2"));
         if (State.EventIs("tourney")) bonuses.Add(Loc.T("Tourney: weapons, cloaks +50%"));
         if (State.EventIs("assessor")) bonuses.Add(Loc.T("The Guild's assessor -10%"));
-        float y = 140;
+        float y = Blind ? 182 : 140;
         var lines = bonuses.Select(b => (Text: b, Color: Palette.Magic, Height: 22f))
             .Concat(_purchase.Luck.Take(3).Select(l => (Text: Curios.LuckLine(l.Curio, l.Changed), Color: Palette.Good, Height: 46f)));
         // Kept to the tally's width, clear of the profit stamp; each slides in from the left.
@@ -244,20 +268,22 @@ public partial class OpeningPhase : Phase
             await Wait(1.0);
             if (!Alive) return;
         }
-        var ghosts = _report.Ghosts.GroupBy(c => c).Select(g => g.Count() == 1 ? Loc.T($"no {Categories.Get(g.Key).Name.ToLowerInvariant()}?")
-            : Loc.T($"{g.Count()} fewer {Categories.Get(g.Key).Name.ToLowerInvariant()}?")).ToList();
-        if (_report.GhostHidden) ghosts.Add(Loc.T("no false bottom?"));
+        var ghosts = _report.Ghosts.GroupBy(c => c).Select(g => (Text: g.Count() == 1 ? Loc.T($"no {Categories.Get(g.Key).Name.ToLowerInvariant()}?")
+            : Loc.T($"{g.Count()} fewer {Categories.Get(g.Key).Name.ToLowerInvariant()}?"), Unseen: false)).ToList();
+        if (_report.GhostHidden) ghosts.Add((Loc.T("no false bottom?"), false));
         // A warded thing you never named truly stays in the ward: you only learn what it was.
         if (_report.KeptWarded is Item kept)
-            ghosts.Add(_report.Ghosts.Count > 0 || _report.GhostHidden ? Loc.T($"warded {kept.Name}: you named something that wasn't there")
-                : Loc.T($"warded, never named: {kept.Name}"));
+            ghosts.Add(_report.Ghosts.Count > 0 || _report.GhostHidden ? (Loc.T($"warded {kept.Name}: you named something that wasn't there"), false)
+                : (Loc.T($"warded, never named: {kept.Name}"), Blind));
         for (int g = 0; g < ghosts.Count; g++)
         {
-            var ghost = UiKit.MakeLabel(ghosts[g], 16, Palette.Bad, HorizontalAlignment.Center, outline: 4)
+            var (text, unseen) = ghosts[g];
+            var ghost = UiKit.MakeLabel(text, 16, unseen ? Palette.Unseen : Palette.Bad, HorizontalAlignment.Center, outline: 4)
                 .Place(960, 380 + g * 26, 280, 20);
             Add(ghost);
-            Add(UiKit.MakeCheck(false, new Vector2(1000, 390 + g * 26), 1));
-            Sfx.Play("miss", 1f, -6);
+            var at = new Vector2(1000, 390 + g * 26);
+            Add(unseen ? UiKit.MakeUnseenMark(at, 1) : UiKit.MakeCheck(false, at, 1));
+            Sfx.Play(unseen ? "blip" : "miss", unseen ? 0.8f : 1f, -6);
             await Wait(0.3);
             if (!Alive) return;
         }
@@ -584,8 +610,10 @@ public partial class OpeningPhase : Phase
         name.Modulate = Colors.Transparent;
         name.CreateTween().TweenProperty(name, "modulate", Colors.White, 0.2f);
 
-        // The mark against the slip stamps down a moment later.
-        var mark = Add(UiKit.MakeCheck(read.Right, new Vector2(at.X + Math.Min(64f, w / 2 - 8), 603), 1));
+        // The mark against the slip stamps down a moment later: right, wrong, or (bought sight unseen, never marked) unseen.
+        bool unseen = Unseen(read);
+        var markAt = new Vector2(at.X + Math.Min(64f, w / 2 - 8), 603);
+        var mark = Add(unseen ? UiKit.MakeUnseenMark(markAt, 1) : UiKit.MakeCheck(read.Right, markAt, 1));
         mark.ZIndex = 8;
         mark.Scale = Vector2.One * 3;
         mark.Modulate = Colors.Transparent;
@@ -594,18 +622,22 @@ public partial class OpeningPhase : Phase
         stamp.TweenCallback(Callable.From(() =>
         {
             mark.Modulate = Colors.White;
-            Sfx.Play(read.Right ? "blip" : "miss", read.Right ? 1.2f : 1f, -4);
+            if (unseen) Sfx.Play("blip", 0.8f, -8);
+            else Sfx.Play(read.Right ? "blip" : "miss", read.Right ? 1.2f : 1f, -4);
         }));
         stamp.TweenProperty(mark, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
         string quality = item.Fake || item.Broken ? "" : Categories.QualityName(item.Rarity);
+        string said = unseen ? UnseenNote(read) : read.Note;
         // With many things on the table, just the read (the colour already says the quality).
-        string note = Narrow && read.Note.Length > 0 ? read.Note : Words.List(new[] { read.Note, quality }.Where(s => s.Length > 0));
+        string note = Narrow && said.Length > 0 ? said : Words.List(new[] { said, quality }.Where(s => s.Length > 0));
         // And just the read when the two don't fit under the thing ("enchanted: missed the glow" is long enough alone).
         // A note may take the room up to its neighbours' (outlines and all), where a name keeps to its 220.
         float room = Math.Max(w, spacing - 6f);
-        if (read.Note.Length > 0 && UiKit.TextWidth(note) + 8 > room) note = read.Note;
+        if (said.Length > 0 && UiKit.TextWidth(note) + 8 > room) note = said;
+        // Still too long for a crowded table: the read in fewer words.
+        if (said.Length > 0 && UiKit.TextWidth(note) + 8 > room) note = unseen ? UnseenNote(read, brief: true) : read.Brief;
         float noteW = Math.Min(room, Math.Max(w, UiKit.TextWidth(note) + 8));
-        var noteLabel = Add(UiKit.MakeLabel(note, 16, read.Right ? Palette.Good : Palette.Warn, HorizontalAlignment.Center, outline: 4)
+        var noteLabel = Add(UiKit.MakeLabel(note, 16, unseen ? Palette.Unseen : read.Right ? Palette.Good : Palette.Warn, HorizontalAlignment.Center, outline: 4)
             .Place(at.X - noteW / 2, 618, noteW, 20));
         noteLabel.ZIndex = 8;
 
@@ -704,7 +736,10 @@ public partial class OpeningPhase : Phase
         _worth += fee;
         // The Underwriters' bond: a chest taken sight unseen that held less than you paid gives some of it back.
         int insured = State.Insure(_purchase, held);
-        int profit = _worth - _purchase.Paid + _purchase.Rebate + insured;
+        // Everything the chest brought back: what's inside as it sells here, a perfect read's fees, a rebate, the bond.
+        // The stamp and your gut both judge that against what you paid, so they never disagree.
+        int back = _worth + _purchase.Rebate + insured;
+        int profit = back - _purchase.Paid;
         State.Earn(_worth);
         State.RecordRead(perfect);
         if (perfect) State.Today.PerfectReads++;
@@ -728,8 +763,8 @@ public partial class OpeningPhase : Phase
         Game.Shake(profit > 0 ? Mathf.Min(0.6f, 0.3f + profit / 600f) : 0.25f);
         Game.Flash(color, 0.25f);
         Fx.Dust(this, new Vector2(640, 180), 2f);
-        float score = Gut.BuyScore(held, _purchase.Paid);
-        var gut = Add(UiKit.MakeLabel(Gut.Bought(held, _purchase.Paid, _rng), 16, Palette.Gradient(score), HorizontalAlignment.Center, outline: 4)
+        float score = Gut.BuyScore(back, _purchase.Paid);
+        var gut = Add(UiKit.MakeLabel(Gut.Bought(back, _purchase.Paid, _rng), 16, Palette.Gradient(score), HorizontalAlignment.Center, outline: 4)
             .Place(240, 188, 640, 20));
         gut.ZIndex = 10;
         var meter = Add(UiKit.MakeGutMeter(score, 212, Loc.T("fleeced"), Loc.T("a steal")).Place(334, 212, 452, 30));
@@ -778,7 +813,9 @@ public partial class OpeningPhase : Phase
         }
 
         _mentor = Add(new MentorView { Position = new Vector2(812, 72), ZIndex = 20 });
-        Teach("opened");
+        // A blind buy's closed eyes, explained the first time; otherwise what ticks and crosses mean.
+        if (_report.Items.Any(Unseen)) Teach("unseen");
+        else Teach("opened");
         if (visit.Seller == Story.VaultSeller) Game.Moment("24_vault", 1.5);
         if (_landed.Any(l => l.Item.IsSong)) Teach("song_found");
         if (_landed.Any(l => l.Item.Quality == Rarity.Legendary && !l.Item.IsSong)) Teach("gold");

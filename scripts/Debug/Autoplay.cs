@@ -26,6 +26,11 @@ public partial class Autoplay : Node
     /// <summary>Quit when this many days have been played (0 = no limit).</summary>
     public int MaxDays;
 
+    /// <summary>Buy every other plain chest it can afford sight unseen, without a shake, to see what a blind buy shows.</summary>
+    public bool SightUnseen;
+
+    int _unseenTurn;
+
     const double ShakeSeconds = 1.6;
 
     bool _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked, _townShown;
@@ -85,6 +90,8 @@ public partial class Autoplay : Node
                          $"{State.WeeksPaid} dues paid, {State.Gold}g, {State.MapPieces} map pieces, vault {(State.VaultOpened ? "opened" : "not opened")}");
                 // With days still to play, keep trading against the Guild's interest.
                 if (end.Cleared && MaxDays > State.Day && IsInstanceValid(end)) end.KeepTrading();
+                // Otherwise retire (or back to the title), as a player would: what comes between runs plays, then it quits.
+                else if (IsInstanceValid(end)) end.Retire();
                 else Main.Instance.QuitGame();
                 break;
         }
@@ -274,6 +281,15 @@ public partial class Autoplay : Node
             if (!IsInstanceValid(counter)) return;
         }
 
+        // --sight-unseen: every other plain chest it can afford, bought as it stands, untouched.
+        if (SightUnseen && visit.Lesson == null && visit.Trade == Trade.Fixed && !visit.Chest.Stolen && State.Gold >= visit.Ask && _unseenTurn++ % 2 == 0)
+        {
+            await Wait(0.6);
+            if (!IsInstanceValid(counter) || counter.Concluded) return;
+            GD.Print($"Autoplay: bought {visit.Seller.Name}'s chest sight unseen for {visit.Ask}g");
+            counter.Buy();
+            return;
+        }
         // Every strength, but only gently and hard for an impatient seller, and never hard for one who'd mind.
         bool hurried = State.Impatient(visit.Seller) && !State.HasCurio("watch");
         // A rotten chest: one short shake, well inside what it stands.

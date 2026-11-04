@@ -16,6 +16,8 @@ public static class Palette
     public static readonly Color Bad = new("#ff6b6b");
     public static readonly Color Warn = new("#ffa94d");
     public static readonly Color Magic = new("#c792ff");
+    /// <summary>A chest bought sight unseen: what you never marked is neither right nor wrong.</summary>
+    public static readonly Color Unseen = new("#e8dcc0");
     public static readonly Color Paper = new("#f7ebc6");
     public static readonly Color Ink = new("#3b3150");
     public static readonly Color InkMuted = new("#6e3d22");
