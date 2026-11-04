@@ -389,12 +389,16 @@ public sealed partial class GameState
     }
 
     /// <summary>
-    /// The beats that could come today (or tonight), one per tale: the one that's waited longest first (so no tale starves
-    /// another), and among those, the season's own order.
+    /// The beats that could come today (or tonight), one per tale: first what was promised for now (a beat that follows
+    /// one done today with no gap: "that night", as Hollis's watch or Sir Edric's waking, which can't wait for another
+    /// night), then the one that's waited longest (so no tale starves another), and among those, the season's own order.
     /// </summary>
     public IEnumerable<Beat> ReadyBeats(bool night) =>
         TaleBook.All.Where(t => Drew(t.Key)).Select(t => t.Beats.FirstOrDefault(b => b.Night == night && Ready(b))).Where(b => b != null)
-            .OrderBy(b => ReadySince(b)).ThenBy(b => (unchecked(Seed * 31 + Day * 17 + b.Key.Length * 7) & 0xff));
+            .OrderByDescending(Continues).ThenBy(b => ReadySince(b)).ThenBy(b => (unchecked(Seed * 31 + Day * 17 + b.Key.Length * 7) & 0xff));
+
+    /// <summary>Whether a beat follows straight on from one done today ("that night").</summary>
+    bool Continues(Beat beat) => beat.Gap == 0 && beat.After != null && Did(beat.After) && DoneOn(beat.After) == Day;
 
     /// <summary>
     /// What comes next in a tale, for the notebook's Stories page (0.32): who's due, where and roughly when, from the
