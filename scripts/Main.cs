@@ -937,6 +937,12 @@ public partial class Main : Node2D
     /// The day's title card, over the first customer: "Day 5", the week and the shop's name, the Guild's due, and today's
     /// event if there is one.
     /// </summary>
+    /// <summary>
+    /// How tall a day's event's description is on the morning card: as tall as its words at the card's width (three or
+    /// four lines in French), never under two and a half; the fit test keeps every one to four lines.
+    /// </summary>
+    public static float MorningEventHeight(string text) => Mathf.Max(66, UiKit.TextHeight(text, 460));
+
     void DayCard()
     {
         var layer = new CanvasLayer { Layer = 40 };
@@ -947,7 +953,11 @@ public partial class Main : Node2D
         string note = State.DayOfWeek == 1 ? Story.WeekNote(State) : null;
         // The Guild's due shows once Vane has introduced it (the first evening).
         bool guild = State.GuildIntroduced;
-        float h = (e == null ? 136 : 238) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28) + (note == null ? 0 : 76);
+        // The note as tall as its words (the Hooded Woman's ask runs to five lines, and longer in French).
+        float noteH = note == null ? 0 : Mathf.Max(70, UiKit.TextHeight(note, 460));
+        string eventText = e == null ? null : Events.Describe(e, State.BuyerKind);
+        float eventH = e == null ? 0 : MorningEventHeight(eventText);
+        float h = (e == null ? 136 : 172 + eventH) + (stash > 0 ? 28 : 0) - (guild ? 0 : 28) + (note == null ? 0 : noteH + 6);
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(306, 130, 500, h);
         card.MouseFilter = Control.MouseFilterEnum.Ignore;
         card.AddChild(UiKit.MakeLabel(Loc.T($"DAY {State.Day}"), 48, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 12, 500, 56));
@@ -970,14 +980,14 @@ public partial class Main : Node2D
         }
         if (note != null)
         {
-            card.AddChild(UiKit.MakeLabel(note, 16, Palette.Gold, HorizontalAlignment.Center).Wrapped().Place(20, y - 4, 460, 70));
-            y += 76;
+            card.AddChild(UiKit.MakeLabel(note, 16, Palette.Gold, HorizontalAlignment.Center).Wrapped().Place(20, y - 4, 460, noteH));
+            y += noteH + 6;
         }
         if (e != null)
         {
             card.AddChild(UiKit.MakeLabel(e.Name.ToUpperInvariant(), 24, Palette.Magic, HorizontalAlignment.Center, outline: 4).Place(0, y, 500, 30));
-            card.AddChild(UiKit.MakeLabel(Events.Describe(e, State.BuyerKind), 16, Palette.Text, HorizontalAlignment.Center).Wrapped()
-                .Place(20, y + 32, 460, 66));
+            card.AddChild(UiKit.MakeLabel(eventText, 16, Palette.Text, HorizontalAlignment.Center).Wrapped()
+                .Place(20, y + 32, 460, eventH));
             Sfx.Play("chime", 1f, -6);
         }
         layer.AddChild(card);

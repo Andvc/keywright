@@ -559,12 +559,18 @@ public partial class CounterPhase : Phase
                 : $"{Categories.Get(c.Category).Name} {Categories.QualityName(c.Quality)}{(c.Quality < Rarity.Legendary ? "+" : "")}" +
                   (c.Needed > 1 ? $" {c.Delivered}/{c.Needed}" : "");
             var color = c.Story ? Palette.Magic : Palette.Text;
-            var line = UiKit.MakeLabel(what, 16, color).Place(12, 28 + i * 24, 180, 20);
+            // What it pays on the right, what's wanted in the rest of the line (ending in "..." if a language runs long:
+            // the whole of it is on hover).
+            string pays = c.Story ? Loc.T("shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : Money.Short(State.CommissionEach(c));
+            float paysW = Mathf.Ceil(UiKit.TextWidth(pays)) + 4;
+            var line = UiKit.MakeLabel(what, 16, color).Place(12, 28 + i * 24, 268 - paysW - 8, 20);
+            line.ClipText = true;
+            line.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
             line.MouseFilter = Control.MouseFilterEnum.Pass;
             line.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? Loc.T(" each") : "")}{(c.Story ? Loc.T(" and a shard of the Aldric Key") : "")}, or a quarter over what it would sell for, if that's more.");
             board.AddChild(line);
-            board.AddChild(UiKit.MakeLabel(c.Story ? Loc.T("shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : Money.Short(State.CommissionEach(c)), 16, c.Story ? Palette.Magic : Palette.Gold,
-                HorizontalAlignment.Right).Place(180, 28 + i * 24, 100, 20));
+            board.AddChild(UiKit.MakeLabel(pays, 16, c.Story ? Palette.Magic : Palette.Gold, HorizontalAlignment.Right)
+                .Place(280 - paysW, 28 + i * 24, paysW, 20));
         }
     }
 

@@ -52,6 +52,15 @@ public partial class Main
             Fits($"{keepsake.Key}, collection", keepsake.Blurb, CollectionView.KeepsakeBlurbBox.W, CollectionView.KeepsakeBlurbBox.H);
         }
 
+        // A day's event on the morning card (each kind the Crown's buyer can want): the card grows to fit, up to four lines.
+        var said = new HashSet<string>();
+        foreach (var e in Events.All)
+            foreach (var kind in Categories.Kinds)
+            {
+                string text = Events.Describe(e, kind.Category);
+                if (said.Add(text)) Fits($"{e.Key} on the morning card", text, 460, 97);
+            }
+
         foreach (string failure in failures) GD.Print($"[fit] {failure}");
         GD.Print(failures.Count == 0
             ? $"Fit test: all {checkedCount} fit ({Localization.Current})" // loc: keys

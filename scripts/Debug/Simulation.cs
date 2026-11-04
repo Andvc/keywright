@@ -103,6 +103,7 @@ public static partial class Simulation
 
         /// <summary>The tales drawn, what came of them, and where each power stood at the end.</summary>
         public List<string> Tales = new();
+        public List<string> Keepsakes = new();
         public HashSet<string> Flags = new();
         public Dictionary<Faction, int> Standing = new();
 
@@ -282,6 +283,13 @@ public static partial class Simulation
                 .GroupBy(f => f).OrderByDescending(g => g.Count()).Take(6).Select(g => $"{g.Key} {100f * g.Count() / drawn.Count:0}%");
             GD.Print($"  {tale.Title,-22} drawn {100f * drawn.Count / logs.Count,3:0}%  beats {beats:0.0}/{tale.Beats.Length}  {string.Join(", ", outcomes)}");
         }
+        // The keepsakes kept at the season's end, over the runs that drew the tale each comes from.
+        GD.Print("  keepsakes kept at the end (of the runs that drew their tale):  " + string.Join("  ", Keepsakes.All
+            .Where(k => logs.Any(l => l.Tales.Contains(k.Tale))).Select(k =>
+            {
+                var drew = logs.Where(l => l.Tales.Contains(k.Tale)).ToList();
+                return $"{k.Name} {100f * drew.Count(l => l.Keepsakes.Contains(k.Key)) / drew.Count:0}%";
+            })));
         GD.Print("  standing at the end (mean; friend / foe):  " + string.Join("  ", Factions.All.Select(f =>
             $"{f} {logs.Average(l => l.Standing.GetValueOrDefault(f)):+0.0;-0.0} ({100f * logs.Count(l => l.Standing.GetValueOrDefault(f) >= Factions.Strong) / logs.Count:0}/" +
             $"{100f * logs.Count(l => l.Standing.GetValueOrDefault(f) <= -Factions.Strong) / logs.Count:0})")));
@@ -728,6 +736,7 @@ public static partial class Simulation
         log.Curios.UnionWith(state.CurioKeys);
         log.Tales = state.TalesDrawn.ToList();
         log.Flags = state.Flags.ToHashSet();
+        log.Keepsakes = state.Keepsakes.ToList();
         foreach (var faction in Factions.All) log.Standing[faction] = state.Standing(faction);
         return (log, state);
     }
