@@ -14,6 +14,8 @@ namespace Keywright.Ui;
 public partial class MentorView : Control
 {
     public const float W = 456, H = 128;
+    /// <summary>The highest the box's top goes: just under the top bar.</summary>
+    const float TopLimit = 60;
     readonly Queue<string> _queue = new();
     Label _text, _more;
     Button _skip;
@@ -192,7 +194,8 @@ public partial class MentorView : Control
         float textHeight = lines * (UiKit.Font.GetHeight(size) + _text.GetThemeConstant("line_spacing"));
         float h = Mathf.Max(H, Mathf.Ceil(textHeight) + 48);
         Size = new Vector2(W, h);
-        Position = new Vector2(Position.X, _bottom - h);
+        // Never up under the top bar (a long tip in French at the opening's top right): past it, the box grows down.
+        Position = new Vector2(Position.X, Mathf.Max(_bottom - h, TopLimit));
         PivotOffset = new Vector2(0, h);
         _panel.Size = new Vector2(W, h);
         _text.Size = new Vector2(W - 116, h - 30);
