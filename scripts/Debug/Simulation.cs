@@ -94,6 +94,9 @@ public static partial class Simulation
         public int GoldThings, Papers, Owed;
         public bool Trial, Bargain;
 
+        /// <summary>0.33: mimics opened and kept, the gilded a grown one woke, the case's questions worked out, the season's end.</summary>
+        public int Mimics, MimicsKept, MimicsWoke, Solved, Gilded;
+
         /// <summary>The tales: talks had, tools bought at the counter and from Nim, what the tales paid or cost, the beats played.</summary>
         public int Talks, Offers, NimUpgrades, TaleGold;
         public readonly List<string> Beats = new();
@@ -196,6 +199,9 @@ public static partial class Simulation
             GD.Print($"gold things a run {logs.Average(l => l.GoldThings):0.0} (none in {100f * logs.Count(l => l.GoldThings == 0) / logs.Count:0}% of runs), " +
                      $"favours called {logs.Average(l => l.Favours):0.0}, friends made {logs.Average(l => l.Owed):0.0}, papers {logs.Average(l => l.Papers):0.0}, " +
                      $"the Guild on trial {100f * logs.Count(l => l.Trial) / logs.Count:0}%, the Maw's bargain {100f * logs.Count(l => l.Bargain) / logs.Count:0}%");
+            // 0.33: the case, the Gilding and the mimics.
+            GD.Print($"the case: {logs.Average(l => l.Solved):0.0} of {Case.Questions.Count(q => !q.Career)} questions worked out, gilded by the Guild {logs.Average(l => l.Gilded):0.00}, " +
+                     $"mimics opened {logs.Average(l => l.Mimics):0.0} (kept {logs.Average(l => l.MimicsKept):0.00}, woke {logs.Average(l => l.MimicsWoke):0.00} of the gilded)");
         }
 
         PrintMargins(all[Styles[0]], all[Styles[^1]], campaigns);
@@ -278,7 +284,8 @@ public static partial class Simulation
         {
             var drawn = logs.Where(l => l.Tales.Contains(tale.Key)).ToList();
             if (drawn.Count == 0) continue;
-            double beats = drawn.Average(l => l.Beats.Count(b => b.StartsWith(tale.Key == "defector" ? "skrae." : tale.Key == "fore" ? "fore." : tale.Key + ".")));
+            var keys = tale.Beats.Select(b => b.Key).ToHashSet();
+            double beats = drawn.Average(l => l.Beats.Count(keys.Contains));
             var outcomes = drawn.SelectMany(l => l.Flags.Where(f => f.StartsWith(tale.Key + ".") || (tale.Key == "defector" && f.StartsWith("skrae."))))
                 .GroupBy(f => f).OrderByDescending(g => g.Count()).Take(6).Select(g => $"{g.Key} {100f * g.Count() / drawn.Count:0}%");
             GD.Print($"  {tale.Title,-22} drawn {100f * drawn.Count / logs.Count,3:0}%  beats {beats:0.0}/{tale.Beats.Length}  {string.Join(", ", outcomes)}");
@@ -618,6 +625,8 @@ public static partial class Simulation
             levels = kept.Length > 0 ? kept : new[] { levels[^1] };
         }
         var hearing = Hearing.Simulate(chest, levels, lamp);
+        // Listening while it sits still, before a hand's laid on it: a mimic breathes (a learner may not wait for it).
+        if (chest.Breathing && (e <= 0 || rng.NextFloat() < skill)) hearing.HeardBreath();
         // A goblin's fee for every strength after the first.
         foreach (var level in levels) visit.Shook(level, rng);
         if (tools && (e <= 0 || rng.NextFloat() < skill)) hearing.Listen(chest, Strategy.MagnetLevels(visit, hearing, state), lamp, magnet: true);
@@ -729,6 +738,9 @@ public static partial class Simulation
         log.Stash = state.StashUsed;
         log.Pieces = state.MapPieces;
         log.Papers = state.Evidence.Count;
+        log.Solved = state.Solved.Count;
+        log.Gilded = state.Gilded.Count;
+        log.MimicsWoke = state.MimicsWoke;
         log.Owed = state.Owed.Count + state.CalledIn.Count;
         log.Trial = state.OnTrial;
         log.Bargain = state.GateOpens;
@@ -868,6 +880,8 @@ public static partial class Simulation
     {
         var rec = log.Rec;
         state.StartDay();
+        // The story morning's clues (0.33), as the scene would give them.
+        if (state.StoryToday) Story.Heard(state, Story.WeekStart(state));
         if (rec != null)
         {
             if (state.StoryToday && state.Week >= 2) rec.Scene(state, Story.WeekStart(state).Count);
@@ -1009,6 +1023,24 @@ public static partial class Simulation
                 }
                 earned += sale;
             }
+            // A mimic (0.33): kept to raise, or sold to the Arcanum's menagerie at once.
+            if (visit.Chest.Breathing)
+            {
+                state.OpenedMimic();
+                log.Mimics++;
+                if (Strategy.KeepMimic(state))
+                {
+                    state.KeepMimic();
+                    log.MimicsKept++;
+                    value += state.FreshMimicPrice;
+                }
+                else
+                {
+                    int menagerie = state.FreshMimicPrice;
+                    value += menagerie;
+                    earned += menagerie;
+                }
+            }
             int settled = state.Settle(purchase, perfect, value);
             earned += settled;
             value += settled;
@@ -1036,6 +1068,10 @@ public static partial class Simulation
             }
         }
         state.EndDay();
+        // The Guild's introduction (the second evening), and the case worked out as far as the clues allow: every day for
+        // the careful player, now and then for a learner.
+        if (state.Day == GameState.IntroDay) Story.Heard(state, Story.Intro(state));
+        if (style.Skill >= 1 || rng.NextDouble() < style.Skill * 0.5) Strategy.WorkOut(state);
         log.CurioGold += state.Today.Curios;
         log.CurioSpent += state.Today.CurioSpent;
         bool wasCleared = state.DebtCleared;
@@ -1053,6 +1089,7 @@ public static partial class Simulation
             state.VaultOpened = true;
             state.Earn(vault.Chest.Everything.Sum(i => state.SaleValue(i)));
             log.VaultDay = state.Day;
+            Story.Heard(state, Story.VaultEpilogue(state));
             rec?.Vault(state);
         }
         var owned = rec == null ? null : Upgrades.All.Where(u => state.Has(u.Key)).ToHashSet();
@@ -1080,6 +1117,8 @@ public static partial class Simulation
     {
         state.StartNight();
         foreach (var talk in state.Tonight.ToList()) Talked(state, log, talk, style, rng);
+        // The Lantern Market's night (0.33): a secret when one would close a question, a raised mimic to the menagerie.
+        if (state.MarketTonight && style.Care >= Care.Listens) Strategy.AtMarket(state);
         foreach (var held in state.BackRoom.Where(h => !h.Kept).ToList())
         {
             int got = Strategy.ReturnHeld(state, held) ? state.ReturnHeld(held) : state.FenceHeld(held);
@@ -1203,6 +1242,8 @@ public static partial class Simulation
             }
         }
         if (!state.PaidThisWeek) state.PayDues();
+        // Vane's parting line and its clue (0.33).
+        if (!state.GateOpens && Story.Parting(state) is Line parting) state.Find(parting.Clue);
         if (week <= MaxWeeks) log.Paid[week] = true;
         log.Rec?.Guild(state, gold, due, outcome);
         return true;

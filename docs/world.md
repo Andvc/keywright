@@ -10,8 +10,9 @@ that run through a season, beat by beat.
 **Why is the world full of chests?** Three hundred years ago the demon of avarice, **Avarax, the Gilded Maw**, ruled
 the realm of Aldmark through its treasure: every loose coin was his eye, every unsheathed blade his hand. King **Aldric
 the Wise** and the archmages of the **Keyhold** worked **the Locking**: every treasure in the realm, from a farmer's
-savings to the crown jewels, was shut into a warded chest. Blind and starving, the Maw was chained beneath the capital
-behind the **Gilded Gate**. The chests never went away. Three centuries on they're everywhere: in attics and
+savings to the crown jewels, was shut into a warded chest. You can't kill greed, so they starved it: the Maw was warded
+into the realm itself, under the capital, behind the seam the archmages called the **Gilded Gate**, and the Locking was
+given laws that bind him first (below). The chests never went away. Three centuries on they're everywhere: in attics and
 barrows, on old battlefields, in goblin burrows, abbey crypts and noble strongrooms. Folk trade them unopened, the way
 they'd trade a cow.
 
@@ -29,9 +30,42 @@ Guild foreclosed on). The mark isn't only Bram's family's: it turns up anywhere,
 buy a chest, it's yours, the ward lets go, and you pick the old lock underneath.
 
 **What does opening them accomplish?** For the folk who sell to you: coin in a world that's short of it. For the realm:
-treasure back in the light, three hundred years late. For the Maw: every chest opened loosens the Locking a little.
-That's what nobody tells you at first. The **Gilded Guild**, which licenses Keywrights and takes a weekly tithe "to keep
-the Gate", wants you opening chests as fast as you can, and wants its tithe in gold. Gold you can see.
+treasure back in the light, three hundred years late. For the Maw: every loose coin is his eye. That's what nobody tells
+you at first. The **Gilded Guild**, which licenses Keywrights and lends to anyone short of coin, wants you opening
+chests as fast as you can, and wants its tithe in gold. Gold you can see. And on the first morning of the season, Old
+Haddon the wheelwright is standing at the crossroads in solid gold (0.33: the Gilding, below).
+
+## The laws of the Locking (0.33)
+
+The archmages gave the Locking laws, and the laws bind everyone, the Maw first. `docs/narrative.md` has the whole truth
+behind them; this is what each is to the people of Aldmark.
+
+1. **A locked thing opens only for its rightful owner**: one who bought it fairly, was given it freely, or was left it.
+   Everybody knows this one: it's the trade, and the realm's law of chests (below).
+2. **What's pledged and not redeemed belongs to the one it was pledged to.** A pledge is a gift that waits. Lenders know
+   it, and the Guild's papers are written around it.
+3. **The Maw can't take. He can only be given, sold or pledged.** The Keyhold's secret, and the reason for everything
+   the Guild does.
+4. **Loose gold is his eye.** Folk say it as a proverb; the Unopened preach it; it's true.
+5. **Only sound passes the ward**, and the ward's own sound is song: why everybody shakes a chest, and what a Heartsong
+   is.
+
+**The Gilding.** What the Maw owns turns to gold: a door, a millstone, a widow's ring, a man. Every Guild loan is a
+pledge, and when one falls due unpaid, the pledged thing is his by the second law. Folk see the gilded (Old Haddon at
+the crossroads, three statues in Thornwick's square, whoever the Guild collects on its night) and tell each other
+stories: that they stole a Locking chest, that the Maw is waking, that it's Saint Ide's judgment on everyone who opens
+chests. The Guild carts the gilded away under sacking, down the palace road, to the Gate, and sells them down by weight.
+A gilded person isn't dead: when the Locking is sung again, every pledge to the Maw is void and they wake up, cold.
+
+**The Crown's note.** Ten years ago, to feed the realm through a famine, King Aldric IX pledged the one thing the Crown
+owned outright: the Crown Chest, the heart of the Locking. The note falls due on the last night of this season. A gift
+is rightful (the first law) and a thing given away can't be collected, so the King is looking for a Keywright he can
+give the Crown Chest to: one with the whole Aldric Key, who can open it and sing the Locking again.
+
+**Bram's hand.** Bram's mark didn't fade with age. Twenty years ago the Mark-Finders came for a marked baby, his niece
+Kit, and he pledged the only thing the Guild would take: his own hand, mark and all. This spring the Guild calls the
+pledge in (the season's debt), and the gold climbs his arm a step every other week. He wears a glove and won't talk
+about it until he has to.
 
 ## What the Locking made of Aldmark
 
@@ -162,15 +196,20 @@ life that you'll hear about. What they say is always true. Some sell what isn't 
 
 ### The story's people
 
-- **Bram** ("Uncle Bram" to Kit): an old Keywright whose mark has faded. Warm, proud, a little ashamed of the debt.
-  Your mentor, and a hedge-wright for twenty years.
-- **Mister Vane**: Collector of the Gilded Guild. Polite, pale, patient, and the Maw's.
+- **Bram** ("Uncle Bram" to Kit): an old Keywright whose mark, folk say, has faded (it's gilded: his pledge, above).
+  Warm, proud, a little ashamed of the debt, and never a liar. Your mentor, and a hedge-wright for twenty years.
+- **Mister Vane**: Collector of the Gilded Guild. Polite, pale, patient, and the Maw's. He remembers every Keywright
+  he's met, and from your second season he remembers you.
 - **Mara, the Hooded Woman**: the last archmage of the Keyhold. She's hunted the Aldric Key's shards for twenty years,
   and Bram was her partner once.
 - **Nim the Peddler**: a horned, cheerful half-something who keeps night hours and sells **curios**, oddments that come
   out of Locking chests and bend the rules of the trade. Nim trades with everyone and tells nobody anything.
 - **King Aldric IX**: old, tired, broke and worried about the Gate. He calls himself Old Aldo, and sells you chests from
-  the Royal Treasury to see if you're the Keywright the realm needs.
+  the Royal Treasury to see if you're the Keywright the realm needs: he pledged the Crown Chest, and the note falls due on
+  the season's last night.
+- **Old Haddon** and **Nell Haddon** (0.33): Brindle's wheelwright, gilded at the crossroads the day after the Guild
+  foreclosed on him, and his daughter, who keeps his yard going and brings you his last chest, the one the Guild's men
+  couldn't open.
 - **Avarax, the Gilded Maw**: the demon of greed. Weak enough to need the Guild, strong enough to visit the Emporium in
   a borrowed body dripping with rings.
 
@@ -268,6 +307,7 @@ things of you, and remember what you did. `docs/stories.md` has each one beat by
 | Tale | Begins | Who | What it's about |
 |---|---|---|---|
 | **The Key** | always | Bram, Mara, Vane, the King | the Aldric Key, the Crown Chest, and where the tithe goes |
+| **The Gilding** (0.33) | always | Nell Haddon, Bettany, Sister Agathe, Sergeant Hollis, Mara, Old Aldo | why Haddon is gold, what's under Bram's glove, where the gilded go, and what the Guild is collecting: the case's clues |
 | **The Shut Chests** | always, at Thornwick | Hollis, Brother Cadoc, Nettle, Rook, Flick, Bettany | stolen chests, the Wardens' notices, and the Magpie: who is she, and whose side are you on? |
 | **The Marked Child** | Brindle | Pip, Wynn, Mistress Aubel | a boy with the Key-mark, and the Guild's Mark-Finder |
 | **The Widow's Debt** | Brindle | Ada, Jory, Silas Brass | a son in the Guild's debt-house, and a medal in a pawn lot |

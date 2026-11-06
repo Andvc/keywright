@@ -28,7 +28,9 @@ public partial class RunEndPhase : Phase
         Add(UiKit.MakeShop(State.Tier, _cleared ? 0.65f : 0.4f, ShopHour.Evening, State));
         var color = _cleared ? Palette.Gold : Palette.Bad;
         string title = _cleared
-            ? State.GateOpens ? Loc.T("THE GATE OPENS") : State.VaultOpened ? Loc.T("THE LOCKING HOLDS") : State.OnTrial ? Loc.T("THE GUILD ON TRIAL") : Loc.T("DEBT CLEARED")
+            ? State.GateOpens ? Loc.T("THE GATE OPENS")
+            : State.VaultOpened ? State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE LOCKING HOLDS")
+            : State.OnTrial ? Loc.T("THE GUILD ON TRIAL") : Loc.T("FREE AND CLEAR")
             : Loc.T("FORECLOSED");
         var logo = Add(UiKit.MakeLabel(title, 64, color, HorizontalAlignment.Center, outline: 8).Place(0, 80, 1280, 80));
         logo.PivotOffset = new Vector2(640, 40);
@@ -42,8 +44,8 @@ public partial class RunEndPhase : Phase
             : State.VaultOpened ? Loc.T($"{paid}, the Crown Chest opened, and the Gate gone quiet.")
             : State.OnTrial ? Loc.T($"{paid}, and the Guild on trial in the King's court.")
             : State.MapGiven ? Loc.T($"{paid}. The Guild has the Key's shards; let them look for the Chest.")
-            : State.Week < Guild.Weeks && State.MapPieces > 0 ? Loc.T($"{paid}. Keep trading, and the Key may yet be whole.")
-            : Loc.T($"{paid}. The Crown Chest will have to wait.")
+            : State.Week < Guild.Weeks && State.MapPieces > 0 ? Loc.T($"{paid}. Find the rest of the Key before the season's last night.")
+            : Loc.T($"{paid}. Bram's hand is his own again, but nobody had the Key when the Crown's note fell due.")
             : State.DebtCleared ? Loc.T($"Bram's debt was paid, but the Guild's interest caught up with you in week {State.Week}.")
             : Loc.T($"The Guild took the shop in week {State.Week}.");
         Add(UiKit.MakeLabel(sub, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 168, 1280, 30));

@@ -78,6 +78,7 @@ public partial class PeddlerPhase : Phase
         var terms = State.PeddlerStock.SelectMany(Glossary.For).ToHashSet();
         if (terms.Contains(Term.SightUnseen)) _mentor.Teach(State, "term_sightunseen");
         if (terms.Contains(Term.BramsWord)) _mentor.Teach(State, "term_bramsword");
+        if (State.MarketTonight) _mentor.Teach(State, "market");
         Game.Hud.SetGold(State.Gold, animate: false);
         Game.Moment("22_peddler", 0.8);
     }
@@ -129,6 +130,13 @@ public partial class PeddlerPhase : Phase
             slot.AddChild(sell.Place(0, 0, 68, 68));
         }
         _board.AddChild(UiKit.MakeButton(Loc.T("Good night"), Palette.Gold, 24, Leave).Place(1040, 610, 220, 64));
+        // The third night of a week, from Thornwick on (0.33): Nim can take you down to the Lantern Market.
+        if (State.MarketTonight)
+        {
+            var market = UiKit.MakeButton(Loc.T("The Lantern Market"), Palette.Magic, 16, OpenMarket).Place(1040, 560, 220, 42);
+            market.TooltipText = Loc.T("Under the Barrow, at midnight: a secret for sale, buyers for anything gold, and the Arcanum's menagerie.");
+            _board.AddChild(market);
+        }
 
         // What Nim offers besides: one more curio a night (his lantern, his stool, his order), and a case for yours.
         var offers = Upgrades.AtNim(State).OrderBy(u => u.NimCards > 0 ? 0 : 1).Take(2).ToList();
@@ -155,6 +163,126 @@ public partial class PeddlerPhase : Phase
             room.TooltipText = Loc.T("Chests that won't open for you: return them to their owners, or sell them to Nim's friends.");
             _board.AddChild(room);
         }
+    }
+
+    Control _market;
+
+    public bool MarketOpen => _market != null && IsInstanceValid(_market);
+
+    /// <summary>
+    /// The Lantern Market (0.33, Core/LanternMarket.cs): under the Barrow at midnight, three stalls by lantern light: the
+    /// whisperer's secret for the case, the Maw's buyers for anything gold, and the Arcanum's menagerie for a mimic.
+    /// </summary>
+    public void OpenMarket()
+    {
+        _market?.QueueFree();
+        State.VisitMarket();
+        var root = new Control { ZIndex = 30, MouseFilter = Control.MouseFilterEnum.Stop }.Place(0, 0, 1280, 720);
+        root.AddChild(new ColorRect { Color = new Color("#07050c"), MouseFilter = Control.MouseFilterEnum.Ignore }.Place(-100, -100, 1480, 920));
+        root.AddChild(new Painter(p =>
+        {
+            foreach (float x in new[] { 120f, 330, 560, 760, 980, 1170 })
+            foreach (var (r, a) in new[] { (70f, 0.06f), (40f, 0.12f), (16f, 0.5f) })
+                p.DrawCircle(new Vector2(x, 160 + (x % 3) * 8), r, new Color(1, 0.68f, 0.28f, a));
+        }));
+        root.AddChild(UiKit.MakeLabel(Loc.T("THE LANTERN MARKET"), 32, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 52, 1280, 40));
+        root.AddChild(UiKit.MakeLabel(Loc.T("Under the Barrow, at midnight. Nim's people buy what can't be sold by daylight, and sell what can't be bought."),
+            16, Palette.Muted, HorizontalAlignment.Center).Wrapped().Place(140, 96, 1000, 40));
+        root.AddChild(Whisperer());
+        root.AddChild(GateBuyers());
+        root.AddChild(Menagerie());
+        root.AddChild(UiKit.MakeButton(Loc.T("Back up to Nim's table"), Palette.Text, 16, CloseMarket).Place(480, 650, 320, 46));
+        _market = Add(root);
+        Game.Moment("22_market", 0.4);
+    }
+
+    public void CloseMarket()
+    {
+        _market?.QueueFree();
+        _market = null;
+        Build();
+    }
+
+    /// <summary>A stall: its keeper's face over a panel, and what they say.</summary>
+    static Panel Stall(float x, string title, string look, string words, bool gilded = false)
+    {
+        var panel = UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(x, 150, 380, 480);
+        var face = UiKit.MakeSprite($"res://assets/sprites/sellers/{look}.png", new Vector2(190, 62), 1, outlined: true);
+        if (gilded) Gilt.Statue(face);
+        panel.AddChild(face);
+        panel.AddChild(UiKit.MakeLabel(title, 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 108, 380, 30));
+        panel.AddChild(UiKit.MakeLabel(words, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(20, 142, 340, 110));
+        return panel;
+    }
+
+    /// <summary>The whisperer: one secret a night, about a question you're asking.</summary>
+    Panel Whisperer()
+    {
+        var clue = State.Whisper;
+        var question = clue == null ? null : Case.Question(clue.Question);
+        var panel = Stall(40, Loc.T("THE WHISPERER"), "stranger", question == null
+            ? Loc.T("\"Nothing tonight you don't know already, Keywright. Come back when you've a new question.\"")
+            : Loc.T($"\"Something someone saw, said or found, about a question of yours: {question.Ask}\""));
+        if (clue == null) return panel;
+        var buy = UiKit.MakeButton(Loc.T($"Buy the secret ({State.SecretPrice}g)"), Palette.Magic, 16, () =>
+        {
+            if (!State.BuySecret()) return;
+            Sfx.PlayGroup("pay");
+            Game.Hud.SetGold(State.Gold);
+            OpenMarket();
+        }).Place(40, 400, 300, 50);
+        buy.Disabled = State.Gold < State.SecretPrice;
+        panel.AddChild(buy);
+        return panel;
+    }
+
+    /// <summary>The Maw's buyers: gilded men who pay over the odds for anything gold on your shelf.</summary>
+    Panel GateBuyers()
+    {
+        var panel = Stall(450, Loc.T("THE MAW'S BUYERS"), "silas",
+            Loc.T($"Gilded men in good coats. \"Anything gold, for the master: half as much again as anyone pays.\" Every coin of it is an eye for him."),
+            gilded: true);
+        var gold = State.GoldForTheGate.Take(3).ToList();
+        if (gold.Count == 0)
+            panel.AddChild(UiKit.MakeLabel(Loc.T("Nothing gold on your shelf."), 16, Palette.Muted, HorizontalAlignment.Center).Place(0, 410, 380, 20));
+        for (int i = 0; i < gold.Count; i++)
+        {
+            var item = gold[i];
+            var sell = UiKit.MakeButton(Loc.T($"+{State.GatePrice(item)}g"), Palette.Warn, 16, () =>
+            {
+                if (State.SellToGate(item) <= 0) return;
+                Sfx.PlayGroup("pay");
+                Game.Hud.SetGold(State.Gold);
+                OpenMarket();
+            }).Place(40, 270 + i * 64, 300, 56);
+            sell.Alignment = HorizontalAlignment.Right;
+            sell.TooltipText = Loc.T($"Sell the {item.Name} down the Gate");
+            sell.AddChild(UiKit.MakeItemIcon(item, new Vector2(36, 28), 48));
+            panel.AddChild(sell);
+        }
+        return panel;
+    }
+
+    /// <summary>The Arcanum's menagerie: it buys a mimic, and pays more for one you've raised.</summary>
+    Panel Menagerie()
+    {
+        if (State.Mimic is int fed)
+        {
+            var panel = Stall(860, Loc.T("THE MENAGERIE"), "wren", State.MimicGrown
+                ? Loc.Plural(fed, $"\"Your mimic's grown! Fed on {fed} Guild night: we'd pay well for that.\"", $"\"Your mimic's grown! Fed on {fed} Guild nights: we'd pay well for that.\"")
+                : Loc.Plural(fed, $"\"Your mimic's been fed on {fed} Guild night. Raise it a while longer and it's worth more.\"",
+                    $"\"Your mimic's been fed on {fed} Guild nights. Raise it a while longer and it's worth more.\""));
+            panel.AddChild(UiKit.MakeButton(Loc.T($"Sell your mimic (+{State.KeptMimicPrice}g)"), Palette.Gold, 16, () =>
+            {
+                if (State.SellKeptMimic() <= 0) return;
+                Sfx.PlayGroup("pay");
+                Game.Hud.SetGold(State.Gold);
+                OpenMarket();
+            }).Place(40, 400, 300, 50));
+            return panel;
+        }
+        return Stall(860, Loc.T("THE MENAGERIE"), "wren",
+            Loc.T($"The Arcanum's keepers. \"Mimics, Keywright: {State.FreshMimicPrice}g for one fresh out of its chest, more for one you've raised. Listen for a chest that breathes.\""));
     }
 
     /// <summary>Buys one of Nim's own upgrades (or a curio case) off him, tonight.</summary>

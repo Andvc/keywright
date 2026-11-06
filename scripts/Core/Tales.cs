@@ -639,10 +639,11 @@ public sealed partial class GameState
     public void StartNight()
     {
         Tonight.Clear();
+        GuildCollects();
         if (ReadyBeats(night: true).FirstOrDefault() is Beat beat) Tonight.Add(MakeTalk(beat));
         // Sir Edric's oath (0.32): a knight of the old Crown stands at your door, and neither the Wardens nor the Lockless cross it.
         if (DuesTonight && Foe(Faction.Wardens) && !Friend(Faction.Wardens) && !Keeps(Core.Keepsakes.Oath)) Tonight.Add(Wardens.Search(this));
-        if (DayOfWeek == Wardens.RobberyNight && Foe(Faction.Lockless) && Gold > 0 && !Keeps(Core.Keepsakes.Oath)) Tonight.Add(Wardens.Robbery(this));
+        if (DayOfWeek == Wardens.RobberyNight && Foe(Faction.Lockless) && Gold > 0 && !Keeps(Core.Keepsakes.Oath) && Mimic == null) Tonight.Add(Wardens.Robbery(this));
         PeddlerStock.Clear();
         if (PeddlerToday) StockPeddler();
     }
@@ -675,6 +676,10 @@ public sealed partial class GameState
         data.KeepsakesHeld = Keepsakes.ToList();
         data.Promises = Promises.ToList();
         data.PorterUntil = PorterUntil;
+        SaveCase(data);
+        SaveGilding(data);
+        SaveMimic(data);
+        SaveMarket(data);
     }
 
     void LoadTales(SaveData data)
@@ -695,6 +700,10 @@ public sealed partial class GameState
         foreach (string key in (data.KeepsakesHeld ?? new List<string>()).Where(Core.Keepsakes.Exists)) GiveKeepsake(key);
         Promises.AddRange(data.Promises ?? new List<Promise>());
         PorterUntil = data.PorterUntil;
+        LoadCase(data);
+        LoadGilding(data);
+        LoadMimic(data);
+        LoadMarket(data);
     }
 }
 

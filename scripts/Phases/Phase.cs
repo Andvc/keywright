@@ -46,6 +46,9 @@ public partial class Phase : Node2D
     /// </summary>
     public virtual bool ShowDebt() => false;
 
+    /// <summary>A new clue's note was clicked (0.33): show the notebook's Case page, if this screen can open it now.</summary>
+    public virtual bool ShowCase() => false;
+
     protected static Label Header(string text, float x, float y) =>
         UiKit.MakeLabel(text, 16, Palette.Gold.Darkened(0.2f)).Place(x, y, 300, 20);
 }

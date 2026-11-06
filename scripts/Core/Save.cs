@@ -150,6 +150,25 @@ public sealed class SaveData
     public List<Promise> Promises { get; set; }
     public int PorterUntil { get; set; }
 
+    // 0.33: the case (Case.cs) and the Gilding (Gilding.cs). Null in an older save, which starts them fresh.
+    public List<string> CaseClues { get; set; }
+    public List<string> CaseSolved { get; set; }
+    public Dictionary<string, int> Claims { get; set; }
+    public Dictionary<string, int> Gilded { get; set; }
+
+    /// <summary>A mimic kept in the back room: the Guild nights it's been fed (-1: none); mimics opened, and the gilded one woke.</summary>
+    public int Mimic { get; set; } = -1;
+    public int MimicsFound { get; set; }
+    public int MimicsWoke { get; set; }
+
+    /// <summary>The Lantern Market: gold things sold down the Gate, and the night a secret was last bought.</summary>
+    public int EyesSold { get; set; }
+    public int SecretNight { get; set; }
+
+    /// <summary>Seasons played before this one, and how the last one ended (<see cref="Story.End"/>), as they were when it began.</summary>
+    public int SeasonsBefore { get; set; }
+    public string LastEnd { get; set; }
+
     static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
 
     public string ToJson() => JsonSerializer.Serialize(this, Options);
@@ -373,6 +392,18 @@ public sealed class Profile
     /// <summary>Per character: the best score a run of theirs has made.</summary>
     public Dictionary<string, int> BestScore { get; set; } = new();
 
+    /// <summary>
+    /// The case's answers worked out in any season (0.33, <see cref="Case"/>): in a later season they're filled in already,
+    /// in your own hand.
+    /// </summary>
+    public List<string> Truths { get; set; } = new();
+
+    /// <summary>The clues to the career's question (why the spring comes round again), found in any season.</summary>
+    public List<string> CareerClues { get; set; } = new();
+
+    /// <summary>How the last season ended (<see cref="Story.End"/>): the next one's first morning knows.</summary>
+    public string LastEnd { get; set; }
+
     /// <summary>Who and what level the last run was, for the character screen.</summary>
     public string LastCharacter { get; set; } = Characters.Kit;
     public int LastChallenge { get; set; }
@@ -391,6 +422,7 @@ public sealed class Profile
         foreach (var feat in Enum.GetValues<Feat>()) Feats[feat.ToString()] = Done(feat) + Curios.Progress(state, feat);
         int score = Score.Final(state);
         BestScore[state.Character] = Math.Max(BestScore.GetValueOrDefault(state.Character), score);
+        LastEnd = Story.End(state);
         return score;
     }
 
@@ -415,6 +447,10 @@ public sealed class Profile
             if (profile == null || profile.Version > CurrentVersion || profile.Version < 1) return null;
             profile.Songs ??= new();
             profile.Songs.RemoveAll(s => !Heartsongs.Exists(s));
+            profile.Truths ??= new();
+            profile.Truths.RemoveAll(t => Case.Question(t) == null);
+            profile.CareerClues ??= new();
+            profile.CareerClues.RemoveAll(c => Case.Clue(c) == null);
             if (profile.Version == 1)
             {
                 profile.Met = profile.Met.Select(SaveData.Renamed).Distinct().ToList();
@@ -439,6 +475,8 @@ public sealed class Profile
         Remember(CuriosSeen, state.CuriosSeen);
         Remember(KeepsakesSeen, state.KeepsakesSeen);
         Remember(People, state.People);
+        Remember(Truths, state.Truths);
+        Remember(CareerClues, state.CareerClues);
         foreach (string key in state.Taught.Where(k => !Taught.Contains(k))) Taught.Add(key);
         BestWeek = Math.Max(BestWeek, state.Week);
         BestGold = Math.Max(BestGold, state.Gold);

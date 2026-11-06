@@ -189,6 +189,7 @@ public sealed partial class GameState
         Known.People.UnionWith(profile.People);
         Known.Tier = Math.Max(Known.Tier, profile.BestTier);
         Met.UnionWith(profile.Met);
+        RememberCase(profile);
         // What Bram has taught on this profile, in any run (even a day that's being played over): never again.
         Learned(profile.Taught, firstDay: false);
     }
@@ -740,7 +741,7 @@ public sealed partial class GameState
         fresh.Unruffled = HasCurio("goldentongue");
         ApplyGoodwill(fresh);
         Sing(fresh);
-        return fresh;
+        return Breathe(fresh);
     }
 
     /// <summary>Its own dice, so a Heartsong turning up (or not) leaves every other roll of the day as it was.</summary>

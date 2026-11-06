@@ -77,6 +77,7 @@ Then, one at a time as the shop grows, more layers of deduction, each taught by 
 | Sand | Crownhold | a scroll case of river sand rustles just like a scroll, but pours at the gentlest shake; parchment never does | a rustle at a gentle shake is sand |
 | Enchantment | Crownhold | anything you can hear can be enchanted (worth double); it sounds like anything else. A hidden thing (under a false bottom, or warded) never is: it fetches a third more instead | under the **Witchlight** it glows |
 | Demon gold | Royal Emporium | gilded iron jingles and tinkles like gold and gems | near the **Lodestone** iron can't move: a fake goes quiet |
+| Mimics (0.33) | Thornwick | a mimic ate everything in its chest; nothing rattles, so a seller who listens thinks it's empty | it **breathes** while the chest sits still (and holds its breath while it's shaken): listen before you shake |
 
 Sound-alikes (sand, demon gold) are the deductive heart of the later shops: the sound tells you the kind of thing,
 but only the rules tell you whether it's real. Soft things only sound at a hard shake, which hides them from anyone
@@ -1041,31 +1042,35 @@ evenings around it. `docs/stories.md` has every tale beat by beat; this is how i
 
 ## The story
 
-The world's story (`docs/world.md`) is told in scenes (`ScenePhase`, `Story`) on the second evening, at the start of
-some weeks, on the Guild's nights and at the end. Each scene answers one question and leaves the next one open:
+The world's story (`docs/world.md`; what's true underneath it, and why it's told this way, `docs/narrative.md`) is told
+in scenes (`ScenePhase`, `Story`) on story mornings, the second evening, Guild nights and at the end, and found at the
+counter: 0.33 rewrote it as a mystery the player works out (the notebook's Case page) rather than one they're told.
 
-- The second evening: Mister Vane of the Gilded Guild. Every Keywright pays the Guild a tithe "to keep the Gate"; Bram
-  opened chests unlicensed for twenty years, and the back-tithe comes with the stall, in eight weekly payments.
-- Week 2: Bram tells you what the chests are (the Locking, King Aldric, the Maw behind the Gilded Gate) and gives you
-  his one secret, a shard of the Aldric Key, broken in four when the Locking was made.
-- Weeks 3, 5 and 7: the Hooded Woman asks for something only a Keywright's chests hold (scrolls, a gem, something
-  enchanted; or coin or a blade while the shop is small, each with its reason) and pays a shard for it. Miss one and
-  she asks again the next week, until the debt's last week, even if the debt's already paid off.
-- Week 4: Bram knows her voice; the Guild has been buying every chest with a royal seal. Week 5: the whole Key opens
-  the Crown Chest, King Aldric's own, which holds the heart of the Locking; the debt is a leash.
-- Week 6: Vane offers to halve that night's tithe for your shards. Take it and there's no Crown Chest.
-- Week 7: she is Mara, the last archmage of the Keyhold and Bram's old partner. Every tithe goes down through the Gate:
-  the Maw is buying his way out, and every chest opened loosens the Locking. At the Royal Emporium, Bram spots the seal
-  on Old Aldo's ring: the tired old man who's been playing his game with your slip is the King.
-- Debt paid, with the Key whole: the King gives you the Crown Chest, so it opens for you (a gilded chest with the best of
-  everything inside, opened like any other), and the Locking holds: the Gate goes quiet. Then you keep trading
-  against the Guild's interest, or retire. Paid off early without the whole Key, you can keep trading: the Guild
-  leaves you alone until week 9, and if Mara's last shard comes, the Crown Chest opens that night.
-- Foreclosed: the Guild seals the shop, and your licence with it.
+- Week 1: Bram's welcome, and Old Haddon the wheelwright standing gilded at the crossroads, the day after the Guild
+  foreclosed on him. Bram has a new glove. Nell Haddon brings her father's last chest, which wouldn't open for the
+  Guild's men: his Guild paper is inside. The first Guild night, the Guild's cart takes the statue away.
+- The second evening: Mister Vane calls in Bram's pledge (twenty years of interest: the debt, in seven weekly payments)
+  and notices the glove.
+- Week 2: Bram tells what the chests are (the Locking, the Maw warded under the capital) and gives you his shard of the
+  Aldric Key; the Hooded Woman's first ask. Bettany has seen that glove before. Guild night: Bram's fingers are gold.
+- Week 3, Thornwick: three statues in the square; Sister Agathe and Sergeant Hollis (the Guild's carts go down the
+  palace road; he follows one to the Gate); the Lantern Market opens.
+- Week 4: Mara's laws of the Locking, and Bram's confession: he pledged his hand for a marked baby. A chest from the
+  Guild's strongroom holds demon gold. Guild night: Vane's offer (half the due for the shards) and "even kings pledge".
+- Week 5: Mara's letter: the King pledged the Crown Chest, and the Crown's note falls due on the season's last night;
+  at the Emporium Old Aldo says why. Bram's gilding reaches his throat.
+- Week 6: who stands with you, and the King's plan (the Key whole by the last night, or the Guild's papers to his
+  court). Guild night: Vane offers to tear up Bram's pledge, the whole debt, for the shards.
+- Week 7: the debt's last due and the Crown's note, the same night. Paid with the Key whole, the King gives you the
+  Crown Chest and the Locking holds (sung whole with all nine Heartsongs); with the court, the Guild on trial; paid
+  without either, FREE AND CLEAR, and the Gate opens at midnight; foreclosed, the Guild takes the stall and Bram; the
+  Maw's bargain or Vane's offer, THE GATE OPENS.
 
-Internally the shards are still `MapPieces` and the Crown Chest is the vault (`VaultOpened`, `--vault-demo`), so
-saves and profiles carry over. Every run is recorded in `user://profile.json` (runs, debts cleared, Crown Chests
-opened, the furthest week), shown on the title screen and at the end of a run.
+A season the Gate opened is followed by the same spring again (only the marked remember: Bram's dream, Vane's memory, a
+chest marked by your own hand); one the Locking held, by the next. Internally the shards are still `MapPieces` and the
+Crown Chest is the vault (`VaultOpened`, `--vault-demo`), so saves and profiles carry over. Every run is recorded in
+`user://profile.json` (runs, debts cleared, Crown Chests opened, the furthest week, the case's Truths and how the last
+season ended), shown on the title screen and at the end of a run.
 
 ## Across runs: who minds the stall, and challenge levels
 

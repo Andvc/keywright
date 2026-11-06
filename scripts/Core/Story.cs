@@ -3,22 +3,59 @@ using System.Linq;
 
 namespace Keywright.Core;
 
-/// <summary>One line in a scene: who says it (a portrait key) and what they say.</summary>
-public sealed record Line(string Speaker, string Text);
+/// <summary>One line in a scene: who says it (a portrait key), what they say, and the clue it gives the case, if any.</summary>
+public sealed record Line(string Speaker, string Text, string Clue = null);
 
 /// <summary>
-/// What's going on behind the counter (docs/world.md). Three hundred years ago the Locking shut every treasure in
-/// Aldmark into a warded chest, to starve Avarax, the Gilded Maw, chained behind the Gilded Gate. Only a Keywright can
-/// open one, once it's rightfully theirs, and every one opened loosens the Locking. Bram opened chests unlicensed for
-/// twenty years: the Gilded Guild, which licenses Keywrights and secretly serves the Maw, wants its back-tithe. Bram
-/// kept one shard of the Aldric Key; Mara, the last archmage of the Keyhold, trades the others for things only a
-/// Keywright's chests hold. The whole Key opens the Crown Chest, which renews the Locking. Scenes play on the story
-/// mornings (the first day of weeks 1, 2 and 4, and of the first week after the debt: <see cref="TellsOn"/>), when the
-/// Guild comes, and at the end; a week without a story morning may have a note on its first day's card.
+/// What's going on behind the counter (docs/world.md; what's underneath it, docs/narrative.md). Three hundred years ago
+/// the Locking shut every treasure in Aldmark into a warded chest, to starve Avarax, the Gilded Maw, warded under the
+/// capital behind the Gilded Gate, and gave it laws that bind him first: he can't take, only be given, sold or pledged.
+/// So the Gilded Guild lends, and every Guild paper is a pledge to him: what he owns turns to gold (the Gilding, Old
+/// Haddon at the crossroads on the first morning). Twenty years ago Bram pledged his own hand to keep a marked child
+/// from the Guild's Mark-Finders; this spring the Guild calls it in (the debt), and the gold climbs his arm. The King
+/// pledged the Crown Chest, the heart of the Locking, and the Crown's note falls due on the season's last night: given
+/// away to a Keywright with the whole Aldric Key, it can't be collected. Bram kept one shard; Mara, the last archmage of
+/// the Keyhold, trades the others. Scenes play on the story mornings (the first day of weeks 1, 2, 4 and 6, and of the
+/// first week after the debt: <see cref="TellsOn"/>), when the Guild comes (its parting line, <see cref="Parting"/>),
+/// and at the end; a week without a story morning may have a note on its first day's card. Lines can carry a clue for
+/// the case (<see cref="Line.Clue"/>, found when they're said: <see cref="Heard"/>).
 /// </summary>
 public static class Story
 {
     public const string Bram = "bram", Vane = "vane", Hood = "hood", Nim = "nim", StrangerKey = "stranger", Mara = "mara", King = "king";
+
+    /// <summary>The main story's log in the notebook (the Gilding, TaleBook.Gilding.cs), and its keys.</summary>
+    public const string Tale = "gilding", Carted = "gild.carted", Told = "bram.told"; // loc: keys
+
+    /// <summary>Old Haddon, gilded at the crossroads (wearing an old regular's figure until he's drawn), and Thornwick's three.</summary>
+    public const string HaddonLook = "pell"; // loc: keys
+    public static readonly string[] ThornwickGilded = { "hob", "gerda", "penn" }; // loc: keys
+
+    /// <summary>The week Vane offers to tear up Bram's pledge for the shards (the Key for the debt: the Gate opens).</summary>
+    public const int PledgeWeek = 6;
+
+    /// <summary>How a season ended, as the profile keeps it for the next one (<see cref="End"/>).</summary>
+    public const string Sung = "sung", Held = "held", Trial = "trial", Free = "free", Lost = "foreclosed", GateEnd = "gate"; // loc: keys
+
+    /// <summary>How this season ended (or would, now).</summary>
+    public static string End(GameState state) =>
+        state.GateOpens ? GateEnd
+        : state.VaultOpened ? state.SongWhole ? Sung : Held
+        : state.DebtCleared ? state.OnTrial ? Trial : Free
+        : Lost;
+
+    /// <summary>
+    /// The Gate opened at that season's end (it was lost, or the debt paid with no Key and no court, or by the Maw): the
+    /// Locking turned the year back to its spring, and only the marked remember.
+    /// </summary>
+    public static bool TurnedBack(string end) => end is Free or Lost or GateEnd;
+
+    /// <summary>The case's clues in lines that have just been said.</summary>
+    public static void Heard(GameState state, IEnumerable<Line> lines)
+    {
+        foreach (var line in lines)
+            if (line.Clue != null) state.Find(line.Clue);
+    }
 
     /// <summary>The story's people, for the ledger's Friends page: Uncle Bram, Nim, Mister Vane, the Hooded Woman (Mara, once she says so).</summary>
     public static readonly string[] People = { Bram, Nim, Vane, Hood, Mara };
@@ -68,17 +105,27 @@ public static class Story
         _ => Sellers.Find(speaker)?.Name ?? speaker,
     };
 
-    /// <summary>The second evening: the Guild introduces itself, and what Bram owes (on this run's terms).</summary>
-    public static List<Line> Intro(GameState state) => new()
+    /// <summary>
+    /// The second evening: the Guild calls in Bram's pledge (on this run's terms), and Vane notices his glove. From the
+    /// second season, Vane knows the Keywright: the career's question.
+    /// </summary>
+    public static List<Line> Intro(GameState state)
     {
-        state.Is(Characters.Kit)
-            ? new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Every Keywright in Aldmark pays the Guild a tithe, to keep the Gate. Your uncle never paid a penny."))
-            : new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Every Keywright in Aldmark pays the Guild a tithe, to keep the Gate. Your partner never paid a penny.")),
-        new(Bram, Loc.T("Twenty years I opened chests for folk who couldn't afford a Guild Keywright! For pennies!")),
-        new(Vane, Loc.T($"Twenty years of tithe, Bram: {Money.Say(Enumerable.Range(1, Guild.Weeks).Sum(state.DueFor))}. The Guild will be reasonable. {Capital(Sellers.Number(Guild.Weeks))} payments, one a week, starting small: {Money.Say(state.DueFor(1))}, {Sellers.Number(Guild.DaysPerWeek - GameState.IntroDay)} nights from now.")),
-        new(Vane, Loc.T("Miss one, and the Guild seals the stall. Good evening, Keywright.")),
-        new(Bram, Loc.T("Every fifth night, then. Don't look like that: a good ear pays any debt. We'll talk in the morning.")),
-    };
+        var lines = new List<Line>
+        {
+            state.Is(Characters.Kit)
+                ? new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Twenty years ago your uncle pledged the Guild something, for a favour. He's never paid a penny of interest on it."))
+                : new(Vane, Loc.T($"Good evening. {Guild.Collector}, Collector for the Gilded Guild. Twenty years ago your partner pledged the Guild something, for a favour. He's never paid a penny of interest on it.")),
+            new(Bram, Loc.T("I know what I pledged, and why. I'd pledge it again.")),
+            new(Vane, Loc.T($"Then the Guild calls the pledge in, Bram. Twenty years of interest: {Money.Say(Enumerable.Range(1, Guild.Weeks).Sum(state.DueFor))}. {Capital(Sellers.Number(Guild.Weeks))} payments, one a week, starting small: {Money.Say(state.DueFor(1))}, {Sellers.Number(Guild.DaysPerWeek - GameState.IntroDay)} nights from now.")),
+            new(Vane, Loc.T("Miss one, and the Guild collects the pledge, and the stall with it.")),
+        };
+        if (state.SeasonsBefore > 0)
+            lines.Add(new(Vane, Loc.T("And you, Keywright. We've met before, I think. You always look at my ring like that."), "vane.again"));
+        lines.Add(new(Vane, Loc.T("The interest is showing, I see, Bram. Do keep your hand warm. Good evening."), "vane.glove"));
+        lines.Add(new(Bram, Loc.T("Every fifth night, then. And don't look at the glove. A good ear pays any debt: we'll talk in the morning.")));
+        return lines;
+    }
 
     /// <summary>
     /// A story morning (<see cref="TellsOn"/>): the welcome on the first day, Bram's secret and the Hooded Woman in week
@@ -92,19 +139,28 @@ public static class Story
         switch (week)
         {
             case 1:
+                // A season after the Gate opened is the same spring again: only the marked remember, and only a little.
+                if (state.SeasonsBefore > 0 && TurnedBack(state.LastEnd))
+                    lines.Add(new(Bram, Loc.T("Strange. I dreamt we lost the stall, and I was gold, standing at the crossroads. Then I woke, and it was spring."), "dream"));
                 lines.Add(state.FirstDayTaught
                     ? new(Bram, Loc.T($"Another season at the crossroads, {state.Kin.Name}. The Guild hasn't come sniffing yet. Let's make the most of it."))
                     : Welcome(state));
+                lines.Add(new(Bram, Loc.T("Have you seen the crossroads? Old Haddon the wheelwright is standing in the middle of it, gold from his " +
+                                          "boots to his cap. Solid gold."), "statue"));
+                lines.Add(new(Bram, Loc.T("The Guild foreclosed on him yesterday, and this morning he was gold. Folk are saying he stole a Locking " +
+                                          "chest. Haddon? He wouldn't steal a nail.")));
                 lines.Add(new(Bram, Loc.T("Folk bring us chests nobody else can open. You buy one, it opens for you, and you sell what's inside. " +
                                     "So listen before you buy: that's the whole trade.")));
                 break;
             case 2:
                 lines.Add(new(Bram, Loc.T("You've a right to know what these chests are. Three hundred years ago the Maw, Avarax, ruled this " +
                                     "realm through its gold. Every coin was his eye.")));
-                lines.Add(new(Bram, Loc.T("King Aldric and the archmages locked every treasure away and chained the Maw behind the Gilded " +
-                                    "Gate. The Locking, they called it. The chests are what's left.")));
+                lines.Add(new(Bram, Loc.T("King Aldric and the archmages couldn't kill him: you can't kill greed. So they locked every treasure " +
+                                          "away, and warded the Maw under the capital, behind the Gilded Gate. The Locking, they called it.")));
                 lines.Add(new(Bram, Loc.T("And this is my one secret: a shard of the Aldric Key, broken in four when the Locking was made. " +
                                     "It's yours now. Don't let the Guild see it.")));
+                if (state.BramGloved)
+                    lines.Add(new(Bram, Loc.T("And no, I won't talk about the glove. Not yet. I'll tell you when I can.")));
                 lines.Add(state.Is(Characters.Kit)
                     ? new(Hood, Loc.T("So you're Bram's kin. You have the mark, and his ear for a chest, they say. I have something your " +
                                       "uncle has wanted for twenty years. Find me what I ask for, and it's yours."))
@@ -121,10 +177,27 @@ public static class Story
                                       "together, a long time ago."))
                     : new(Hood, Loc.T("My name is Mara. I was the last archmage of the Keyhold. Bram and I found the first shard " +
                                       "together, a long time ago.")));
+                lines.Add(new(Mara, Loc.T("The Locking has laws, and they bind the Maw first. A locked thing opens only for its rightful owner. " +
+                                          "And what's pledged and not redeemed belongs to the one it was pledged to.")));
+                lines.Add(new(Mara, Loc.T("The Maw can't take: he can only be given, sold or pledged. So the Guild lends, and every Guild paper " +
+                                          "is a pledge to him. What he owns turns to gold. Old Haddon, for one."), "mara.laws"));
+                lines.Add(new(Mara, Loc.T("And loose gold is his eye. With every tithe the Guild takes, he sees a little more of the realm he's " +
+                                          "buying."), "mara.eyes"));
+                if (!state.Clues.Contains(Told))
+                {
+                    lines.Add(state.Is(Characters.Kit)
+                        ? new(Bram, Loc.T("Then hear it from me first, Kit. Twenty years ago the Mark-Finders came for you: a baby with the mark " +
+                                          "on her palm. I had nothing they'd take but my own hand, mark and all."), Told)
+                        : new(Bram, Loc.T("Then hear it from me first. Twenty years ago the Mark-Finders came for a marked baby: my niece, Kit. " +
+                                          "I had nothing they'd take but my own hand, mark and all. She's safe in the north."), Told));
+                    // (A season you'd worked it out in before, he's worn no glove: he says the rest without it.)
+                    lines.Add(state.BramGloved
+                        ? new(Bram, Loc.T("So now you know what's under the glove. The Guild's been collecting it a finger at a time. Don't " +
+                                          "look like that: I'd do it again."))
+                        : new(Bram, Loc.T("The Guild's been collecting it a finger at a time. Don't look like that: I'd do it again.")));
+                }
                 lines.Add(new(Mara, Loc.T("The whole Key opens the Crown Chest: King Aldric's own, with the heart of the Locking inside. The " +
                                     "Guild doesn't want your gold. It wants that chest.")));
-                lines.Add(new(Mara, Loc.T("Every tithe the Guild takes goes down through the Gilded Gate. The Maw is buying his way out, a coin " +
-                                    "at a time. And every chest you open loosens the Locking.")));
                 lines.Add(state.Tier >= 4
                     ? new(Bram, Loc.T($"And that old fellow at the Emporium, the one with the ring? Look at the seal on it, {state.Kin.Name}. That's the King. He's been testing you."))
                     : new(Mara, Loc.T("The King knows. He's looking for a Keywright he can trust with the Crown Chest. Be that Keywright.")));
@@ -171,6 +244,7 @@ public static class Story
             return Loc.T("A note from the Hooded Woman: \"You gave them the shards. Now the Guild will have the Crown Chest. Pay your debt: it's all you have left.\"");
         if (state.Week == Guild.Weeks)
             return state.DebtCleared ? Loc.T("The last week of the tithe, and it's already paid: nobody's coming for anything this week.")
+                : state.Clues.Contains("vane.kings") ? Loc.T("The debt's last week, and the Crown's note falls due the same night. Pay this, and the stall is yours.")
                 : Loc.T("The debt's last week. Pay this, and the stall is yours. Truly yours.");
         return null;
     }
@@ -207,6 +281,43 @@ public static class Story
     public static string OfferTaken => Loc.T("A sensible choice. The Guild remembers its friends. So does its master.");
     public static string OfferRefused => Loc.T("Pity. The Guild remembers that too.");
 
+    /// <summary>
+    /// Vane's offer on the sixth Guild night (<see cref="PledgeWeek"/>): Bram's pledge torn up, the whole debt with it,
+    /// for the shards. Taken, the Maw has the Key and the Gate opens (<see cref="GameState.TakeMawBargain"/>).
+    /// </summary>
+    public static List<Line> PledgeOffer(GameState state) => new()
+    {
+        new(Vane, Loc.T("Before you pay. The gold's at Bram's throat, I see. The Guild could tear up his pledge tonight, and the whole debt with it.")),
+        new(Vane, Loc.T($"All it asks is the Key. {Count(state.MapPieces)}, I hear. Such a small thing, for a man's life.")),
+    };
+
+    public static string PledgeTaken => Loc.T("A sensible choice. Bram's hand is his own again, and the Key is my master's.");
+    public static string PledgeRefused => Loc.T("Then the gold goes on climbing. Do give him my regards.");
+
+    /// <summary>
+    /// What Vane says as he goes, once the night's due is settled: the week's cliffhanger (docs/narrative.md, "The
+    /// season"), or whose note the Guild is collecting tonight. Null when there's nothing more to say.
+    /// </summary>
+    public static Line Parting(GameState state)
+    {
+        // Someone the season made yours, whose note to the Guild falls due tonight, unpaid.
+        if (state.Claims.Where(c => c.Value <= state.Week).Select(c => c.Key).OrderBy(k => k, System.StringComparer.Ordinal).FirstOrDefault() is string owed)
+            return new(Vane, Loc.T($"One more thing. The Guild has a debt of its own to collect tonight: {Sellers.Person(owed).Name}. We'll send the cart."));
+        if (state.DebtCleared) return null;
+        return state.Week switch
+        {
+            1 => new(Vane, Loc.T("Don't mind the cart at the crossroads tonight. The Guild collects what it's owed. Even statues."), "cart"),
+            2 => state.BramGloved
+                ? new(Vane, Loc.T("Your glove's slipped, Bram. Gold to the knuckle already? The hand first. Then the arm."), "bram.fingers")
+                : new(Vane, Loc.T("Gold to the knuckle already, Bram? The hand first. Then the arm."), "bram.fingers"),
+            3 => new(Vane, Loc.T("Have you seen Thornwick's square? So many statues. Every one of them someone who didn't pay.")),
+            4 => new(Vane, Loc.T("A word of advice, Keywright: even kings pledge. And the Crown's note falls due on the season's last night."), "vane.kings"),
+            5 => new(Vane, Loc.T("Ten days, Keywright. Then the Guild collects the Crown Chest, in person.")),
+            PledgeWeek => new(Vane, Loc.T("Five days. The Guild will be at the palace on the last night. Do come and watch.")),
+            _ => null,
+        };
+    }
+
     /// <summary>The debt is paid: the last due, or all that's left of it at once, ahead of time.</summary>
     public static List<Line> Cleared(GameState state)
     {
@@ -232,13 +343,18 @@ public static class Story
                 new(Vane, Guild.Paid(Guild.Weeks)),
                 new(Bram, Loc.T("Free and clear! Twenty years, and the stall is ours.")),
             };
-        if (state.MapPieces >= Pieces) lines.AddRange(MapWhole(state));
+        // His pledge is redeemed: the gold's gone from his hand.
+        lines.Add(new(Bram, Loc.T("And look at my hand. It's warm. It's mine again.")));
+        if (state.MapPieces >= Pieces && state.Week <= Guild.Weeks) lines.AddRange(MapWhole(state));
         else if (state.MapGiven)
             lines.Add(new(Bram, Loc.T("And the Guild has the shards. Somewhere under the palace, they're looking for the Crown Chest. Let them look.")));
         else if (state.Week < Guild.Weeks)
+        {
             lines.Add(new(Bram, Loc.T($"And we've {Sellers.Number(state.MapPieces)} of the Key's {Sellers.Number(Pieces)} shards. Mara will keep asking: keep trading, and we may find the Crown Chest yet.")));
+            lines.Add(new(Bram, Loc.T("But the Crown's note falls due on the season's last night. If the Key isn't whole by then, the Guild collects the Crown Chest.")));
+        }
         else
-            lines.Add(new(Bram, Loc.T("The Crown Chest can wait. The Key's not going anywhere, and neither are we.")));
+            lines.Add(new(Bram, Loc.T("But we haven't the whole Key, and the Crown's note falls due at midnight. Whatever the Guild collects tonight, it won't be us.")));
         return lines;
     }
 
@@ -257,8 +373,8 @@ public static class Story
         var allies = state == null ? new List<Line>() : Allies(state, tonight: true);
         if (state != null && allies.Count == 0) lines.Add(new(Mara, Loc.T("There's nobody to hold them back. We'll have to be quick.")));
         lines.AddRange(allies.Take(4));
-        lines.Add(new(King, Loc.T("Three hundred years it's waited in my family, and not one of us could open it. It's yours by right now, Keywright. " +
-                            "It opens for nobody else.")));
+        lines.Add(new(King, Loc.T("Three hundred years it's waited in my family. My note falls due at midnight, and a thing given away can't " +
+                                  "be collected: it's yours by right now, Keywright. It opens for nobody else.")));
         return lines;
     }
 
@@ -275,6 +391,12 @@ public static class Story
                 ? Loc.T("The Guild has the shards, and it's digging under the palace for the Crown Chest. When it finds it, we'll need every friend we've got.")
                 : Loc.T("When the Key is whole, the Guild will come for it with everything it has. Who'll stand with you when it does?")),
         };
+        // The King's plan: the Key whole by the last night, or his court with the Guild's own papers.
+        if (!state.MapGiven)
+            lines.Add(new(Mara, Loc.T("The King has sent word. If the Key is whole by the season's last night, he'll give the Crown Chest to " +
+                                      "a Keywright, and a thing given away can't be collected."), "mara.key"));
+        lines.Add(new(Mara, Loc.T("Or bring his court the Guild's own papers. A pledge made to someone who hides who they are isn't given " +
+                                  "freely: prove the Guild hid its master, and every pledge it took is void."), "mara.court"));
         var allies = Allies(state, tonight: false);
         lines.AddRange(allies.Take(4));
         lines.Add(allies.Count == 0
@@ -357,6 +479,37 @@ public static class Story
     };
 
     /// <summary>
+    /// The season's end for the main story (0.33): what became of the gilded, what you worked out, and (once you know why
+    /// the spring comes round again) what an open Gate means.
+    /// </summary>
+    static IEnumerable<Line> MainEnding(GameState state)
+    {
+        string end = End(state);
+        if (end is Held or Sung)
+            yield return new(Bram, Loc.T("Old Haddon walked home from the Gate the night the Locking was sung. He's making wheels again, and he won't sign anything."));
+        else if (end == Trial)
+            yield return new(Bram, Loc.T("The King's court found every Guild pledge void: made to the Maw, in secret. Old Haddon walked home from the Gate."));
+        else
+            yield return new(Bram, Loc.T("Old Haddon never came home. Nobody's seen the Guild's cart come back from the palace road."));
+        int solved = state.Solved.Count;
+        if (solved > 0)
+            yield return new(Bram, Loc.Plural(solved, $"You worked out {solved} of the season's questions. Keep the notebook: what you know stays with you.",
+                $"You worked out {solved} of the season's questions. Keep the notebook: what you know stays with you."));
+        else if (state.OpenQuestions.Any())
+            yield return new(Bram, Loc.T("The questions in your notebook are still open. Keep it: what you learn stays with you."));
+        // What the Lantern Market and the back room saw (0.33).
+        if (state.EyesSold > 0)
+            yield return new(Bram, Loc.Plural(state.EyesSold, $"And you sold {state.EyesSold} gold thing down the Gate. Every coin of it an eye for him. I hope it was worth it.",
+                $"And you sold {state.EyesSold} gold things down the Gate. Every coin of it an eye for him. I hope it was worth it."));
+        if (state.MimicsWoke > 0)
+            yield return new(Bram, Loc.T("That mimic of yours ate the gold off the gilded, and they walked home. The Arcanum wants to know how you fed it."));
+        else if (state.Mimic != null)
+            yield return new(Bram, Loc.T("And there's still a mimic in the back room, asleep on the gold. Don't wake it."));
+        if (TurnedBack(end) && state.Truths.Contains(Case.Spring))
+            yield return new(Bram, Loc.T("And the Gate's open. You know what that means: it'll be spring again, and only the marked will remember."));
+    }
+
+    /// <summary>
     /// The season's end (0.30): what became of everyone whose tale began, a line each, by what you chose (each tale's
     /// <see cref="TaleDef.Ending"/>), after the run's last scene, won or lost.
     /// </summary>
@@ -372,15 +525,17 @@ public static class Story
                                            "mind the stall, partner, and half of it's yours when the Guild's paid.")),
         Characters.Isolde => new(Bram, Loc.T("Lady Marchmont. Your grandfather and I opened chests together, before your house was grand. My mark's " +
                                              "faded: mind my stall, and put your collection on the shelf. The Guild's paid out of the takings.")),
-        _ => new(Bram, Loc.T($"There you are, {state.Kin.Name}! My mark's faded, but look at your hand: it's yours now. And so is the stall.")),
+        _ => state.BramGloved
+            ? new(Bram, Loc.T($"There you are, {state.Kin.Name}! Don't mind the glove. Look at your hand instead: the mark's yours now. And so is the stall."))
+            : new(Bram, Loc.T($"There you are, {state.Kin.Name}! Look at your hand: the mark's yours now. And so is the stall.")),
     };
 
     public static List<Line> SeasonEnd(GameState state)
     {
         var lines = new List<Line> { new(Bram, Loc.T("So. Let me tell you what became of everyone, this season.")) };
+        lines.AddRange(MainEnding(state));
         foreach (var tale in TaleBook.All.Where(t => state.Drew(t.Key) && t.Ending != null))
             if (tale.Ending(state) is Line line) lines.Add(line);
-        if (lines.Count == 1) return new List<Line>();
         lines.Add(state.Character switch
         {
             Characters.Hesk => new(Bram, Loc.T("And you, Hesk. A grocer from a drowned town, with the mark on your hand. What becomes of you is up to you.")),
@@ -404,6 +559,7 @@ public static class Story
             {
                 new(Mara, Loc.T("The tune's in here. And your songbook has every verse: all nine Heartsongs. Then we don't renew the Locking. We finish it.")),
                 new(Mara, Loc.T("Listen. That's the Maw. Starving, with nothing left to want. The Gate's just a gate now.")),
+                new(Bram, Loc.T("And look at my hand, Mara. Warm. Every pledge to the Maw is void, and every one of the gilded is waking up.")),
                 new(Bram, Loc.T("And the chests, Mara. Every chest in Aldmark. They're opening. All of them, all at once.")),
                 new(Mara, Loc.T("The Guild has nothing to sell, and nothing to keep. Go home, Mister Vane.")),
                 new(Bram, Loc.T("Three hundred years of treasure, back in the light. We're going to need a bigger stall.")),
@@ -411,20 +567,31 @@ public static class Story
         var lines = new List<Line>
         {
             new(Mara, Loc.T("Listen. The Gate's gone quiet. The Locking holds: another three hundred years, if we're lucky.")),
+            new(Bram, Loc.T("And every pledge to the Maw is void. Old Haddon will walk home from the Gate tonight, and everyone the Guild collected with him.")),
             new(Bram, Loc.T("King Aldric's own hoard, on our counter. The old man said it's ours to keep.")),
         };
         lines.Add(known == 0
             ? new(Mara, Loc.T("The Locking was a song, in nine verses: nine Heartsongs, hidden in chests. If you ever hear one sing, keep it."))
             : new(Mara, Loc.T($"Your songbook holds {Sellers.Number(known)} of the nine Heartsongs. Find every verse, and the next Keywright won't renew the Locking. They'll finish it.")));
+        // The Keyhold's last secret, and the career's question.
+        lines.Add(new(Mara, Loc.T("And one more thing, which the Keyhold never told anyone. We wrote a clause into the Locking: if ever the Gate " +
+                                  "opens, the year turns back to its spring, and only the marked remember."), "mara.clause"));
         lines.Add(new(Bram, Loc.T("The Guild will keep coming, you know. Debts are funny things. But now we can afford to make them wait.")));
         return lines;
     }
 
-    public static List<Line> Foreclosed(GameState state) => new()
+    public static List<Line> Foreclosed(GameState state)
     {
-        new(Vane, Guild.Foreclosed),
-        new(Bram, state.DebtCleared ? Loc.T($"{state.Week} weeks, and every coin of the tithe paid. Let them have the building: they can't have the mark.")
-            : state.Week <= 2 ? Loc.T("So soon? Well. We'll start again somewhere. A good ear is never broke for long.")
-            : Loc.T($"{state.Week} weeks. You did better than I ever did. We'll start again somewhere.")),
-    };
+        var lines = new List<Line>
+        {
+            new(Vane, Guild.Foreclosed),
+            new(Bram, state.DebtCleared ? Loc.T($"{state.Week} weeks, and every coin of the tithe paid. Let them have the building: they can't have the mark.")
+                : state.Week <= 2 ? Loc.T("So soon? Well. We'll start again somewhere. A good ear is never broke for long.")
+                : Loc.T($"{state.Week} weeks. You did better than I ever did. We'll start again somewhere.")),
+        };
+        // The pledge was never redeemed: the Guild collects it.
+        if (!state.PledgeRedeemed)
+            lines.Add(new(Bram, Loc.T("And they'll collect my pledge with it, I expect. Don't look like that. I'd do it again.")));
+        return lines;
+    }
 }

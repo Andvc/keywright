@@ -225,6 +225,12 @@ public partial class OpeningPhase : Phase
         // thing you named comes out last of all, when the ward lets go of it.
         var reads = _report.Items.OrderBy(r => r.Item.IsSong).ThenBy(r => r.Warded).ThenBy(r => StepsUp(r.Item)).ThenBy(r => r.Item.Value).ToList();
         int n = reads.Count;
+        // A mimic (0.33): it ate everything, and comes out itself.
+        if (_purchase.Chest.Breathing)
+        {
+            await MimicOut();
+            if (!Alive) return;
+        }
         float spacing = n == 0 ? 0 : Math.Min(232f, 1180f / n);
         _spacing = spacing;
         LayOutNames(reads, spacing);
@@ -262,7 +268,7 @@ public partial class OpeningPhase : Phase
             }
             if (!Alive) return;
         }
-        if (n == 0)
+        if (n == 0 && !_purchase.Chest.Breathing)
         {
             // Nothing rattled because there was nothing there.
             _chest.Wobble(0.6f);
@@ -300,6 +306,112 @@ public partial class OpeningPhase : Phase
         await Wait(0.3);
         if (!Alive) return;
         Verdict();
+    }
+
+    // ---- A mimic (0.33, Core/Mimics.cs) ----
+
+    Control _mimicPanel;
+    bool? _mimicKeep;
+
+    /// <summary>What a mimic you kept would have fetched: the verdict counts it as what the chest brought back.</summary>
+    int _mimicKept;
+
+    /// <summary>The mimic's out and waiting: sell it or keep it (the bot answers as the careful player would).</summary>
+    public bool MimicChoiceOpen => _mimicPanel != null && IsInstanceValid(_mimicPanel);
+
+    public void ChooseMimic(bool keep)
+    {
+        if (!MimicChoiceOpen || _mimicKeep != null) return;
+        _mimicKeep = keep && State.CanKeepMimic;
+    }
+
+    /// <summary>
+    /// It comes up out of the box with a growl (eyes in the dark, teeth along the rim, a tongue), and waits: the Arcanum's
+    /// menagerie buys it now, or it goes in the back room, eats gold on Guild nights, and grows.
+    /// </summary>
+    async Task MimicOut()
+    {
+        State.OpenedMimic();
+        float rise = 0;
+        var creature = Add(new Painter(p => DrawMimic(p, rise)) { Position = Mouth, ZIndex = 5 });
+        creature.CreateTween().TweenMethod(Callable.From<float>(v =>
+        {
+            rise = v;
+            creature.QueueRedraw();
+        }), 0f, 1f, 0.45f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+        Sfx.Play("growl", 1f, 0);
+        Game.Shake(0.35f);
+        _chest.Wobble(1f);
+        FloatText(Loc.T("A MIMIC!"), SeamPos + new Vector2(0, -190), Palette.Magic, 40);
+        Teach("mimic");
+        await Wait(0.6);
+        if (!Alive) return;
+        Game.Moment("08_mimic", 0.2);
+        await Wait(0.6);
+        if (!Alive) return;
+
+        int price = State.FreshMimicPrice;
+        _mimicPanel = Add(UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(300, 520, 680, 150));
+        _mimicPanel.ZIndex = 12;
+        _mimicPanel.AddChild(UiKit.MakeLabel(Loc.T("It ate everything that was in the chest, and it's still hungry."), 16, Palette.Text,
+            HorizontalAlignment.Center).Wrapped().Place(20, 14, 640, 44));
+        var sell = UiKit.MakeButton(Loc.T($"Sell it to the menagerie (+{price}g)"), Palette.Gold, 16, () => ChooseMimic(false)).Place(20, 70, 310, 56);
+        sell.TooltipText = Loc.T("The Arcanum's menagerie buys every mimic it can get, and pays at once.");
+        _mimicPanel.AddChild(sell);
+        var keep = UiKit.MakeButton(Loc.T("Keep it in the back room"), Palette.Magic, 16, () => ChooseMimic(true)).Place(350, 70, 310, 56);
+        keep.TooltipText = State.CanKeepMimic
+            ? Loc.T($"It eats {State.MimicFeed}g of gold on each Guild night. No thief tries a door it's behind, and once it's eaten twice it's big enough to eat the gold off one of the gilded.")
+            : Loc.T("You keep one already, and two would eat each other.");
+        keep.Disabled = !State.CanKeepMimic;
+        _mimicPanel.AddChild(keep);
+        Game.Moment("08_mimic_choice", 0.3);
+        while (_mimicKeep == null)
+        {
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            if (!Alive) return;
+        }
+        _mimicPanel.QueueFree();
+        _mimicPanel = null;
+        if (_mimicKeep == true)
+        {
+            State.KeepMimic();
+            _mimicKept = price;
+            FloatText(Loc.T("Into the back room"), SeamPos + new Vector2(0, -120), Palette.Magic, 24);
+            Sfx.Play("growl", 1.3f, -6);
+        }
+        else
+        {
+            _worth += price;
+            _worthLabel.Text = Money.Short(_worth);
+            FloatText(Loc.T($"+{price}g"), SeamPos + new Vector2(0, -120), Palette.Gold, 32);
+            Sfx.Play("coin", 1f, -4);
+        }
+        creature.CreateTween().TweenProperty(creature, "modulate:a", 0f, 0.4f);
+        await Wait(0.5);
+    }
+
+    /// <summary>The mimic in the open box, risen by <paramref name="rise"/> (0..1): two eyes, a row of teeth along each rim, a tongue.</summary>
+    void DrawMimic(Painter p, float rise)
+    {
+        float w = _chest.Width * 0.44f, lift = -26 * rise;
+        var dark = new Color("#120a12");
+        p.DrawRect(new Rect2(-w, lift - 10, w * 2, 44), dark);
+        // Eyes: amber, with slits.
+        foreach (float ex in new[] { -w * 0.42f, w * 0.42f })
+        {
+            p.DrawCircle(new Vector2(ex, lift + 4), 11, new Color("#f2b632"));
+            p.DrawRect(new Rect2(ex - 2, lift - 5, 4, 18), dark);
+        }
+        // Teeth along the upper and lower rims.
+        var tooth = new Color("#f1ead8");
+        for (float tx = -w; tx < w - 8; tx += 16)
+        {
+            p.DrawColoredPolygon(new[] { new Vector2(tx, lift - 12), new Vector2(tx + 14, lift - 12), new Vector2(tx + 7, lift + 2) }, tooth);
+            p.DrawColoredPolygon(new[] { new Vector2(tx + 8, lift + 36), new Vector2(tx + 22, lift + 36), new Vector2(tx + 15, lift + 22) }, tooth);
+        }
+        // A tongue over the front.
+        p.DrawRect(new Rect2(-14, lift + 26, 28, 30 + 10 * rise), new Color("#b83a4b"));
+        p.DrawRect(new Rect2(-2, lift + 30, 4, 22 + 10 * rise), new Color("#8c2433"));
     }
 
     /// <summary>
@@ -748,7 +860,7 @@ public partial class OpeningPhase : Phase
         int insured = State.Insure(_purchase, held);
         // Everything the chest brought back: what's inside as it sells here, a perfect read's fees, a rebate, the bond.
         // The stamp and your gut both judge that against what you paid, so they never disagree.
-        int back = _worth + _purchase.Rebate + insured;
+        int back = _worth + _purchase.Rebate + insured + _mimicKept;
         int profit = back - _purchase.Paid;
         State.Earn(_worth);
         State.RecordRead(perfect);

@@ -33,13 +33,15 @@ public partial class Autoplay : Node
 
     const double ShakeSeconds = 1.6;
 
-    bool _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked, _townShown;
+    bool _caseShown, _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked, _townShown;
 
     static GameState State => Main.Instance.State;
 
     /// <summary>Returns false (and quits) once the day limit is reached.</summary>
     public bool OnDayStarted(int day)
     {
+        // The careful player works out what yesterday's clues allow (0.33).
+        if (day > 1) Strategy.WorkOut(State);
         if (MaxDays <= 0 || day <= MaxDays) return true;
         GD.Print($"Autoplay finished {MaxDays} days with {State.Gold}g ({ShopTiers.Name(State.Tier)})");
         Main.Instance.QuitGame();
@@ -150,6 +152,11 @@ public partial class Autoplay : Node
             await Wait(1.0);
         }
         if (!IsInstanceValid(peddler)) return;
+        if (State.MarketTonight)
+        {
+            await DriveMarket(peddler);
+            if (!IsInstanceValid(peddler)) return;
+        }
         if (State.BackRoom.Any(h => !h.Kept))
         {
             peddler.OpenBackRoom();
@@ -195,6 +202,22 @@ public partial class Autoplay : Node
         if (IsInstanceValid(peddler)) peddler.Leave();
     }
 
+    /// <summary>The Lantern Market's night (0.33): down the stair, a look at the stalls, the careful player's business, and back up.</summary>
+    async Task DriveMarket(PeddlerPhase peddler)
+    {
+        peddler.OpenMarket();
+        await Wait(1.5);
+        if (!IsInstanceValid(peddler)) return;
+        string done = Strategy.AtMarket(State);
+        if (done.Length > 0) GD.Print($"Autoplay: the Lantern Market: {done}");
+        peddler.OpenMarket();
+        await Wait(1.0);
+        if (!IsInstanceValid(peddler)) return;
+        Main.Instance.Moment("22_market_after", 0.2);
+        peddler.CloseMarket();
+        await Wait(0.5);
+    }
+
     /// <summary>The Guild's night: the map offer, then pay, pawning or asking Bram if short.</summary>
     async Task DriveDues(DuesPhase dues)
     {
@@ -202,7 +225,7 @@ public partial class Autoplay : Node
         if (!IsInstanceValid(dues)) return;
         if (dues.OfferOpen)
         {
-            dues.AnswerOffer(Strategy.TakeOffer(State));
+            dues.AnswerOffer(dues.PledgeOffer ? Strategy.TakePledgeOffer(State) : Strategy.TakeOffer(State));
             await Wait(1.5);
             if (!IsInstanceValid(dues)) return;
         }
@@ -356,6 +379,20 @@ public partial class Autoplay : Node
             counter.NotebookPage(NotebookView.StoriesPage);
             await Wait(0.3);
             Main.Instance.Moment("02_stories", 0.3);
+            await Wait(2.0);
+            if (!IsInstanceValid(counter)) return;
+            counter.CloseNotebook();
+            await Wait(0.5);
+            if (!IsInstanceValid(counter)) return;
+        }
+        // Once the case has a few questions (0.33), the careful player works out what the clues allow, and a look at the Case page.
+        else if (!_caseShown && !hurried && State.OpenQuestions.Count() >= 3)
+        {
+            _caseShown = true;
+            Strategy.WorkOut(State);
+            counter.OpenNotebook(NotebookView.CasePage);
+            await Wait(0.3);
+            Main.Instance.Moment("02_case", 0.3);
             await Wait(2.0);
             if (!IsInstanceValid(counter)) return;
             counter.CloseNotebook();
@@ -583,6 +620,13 @@ public partial class Autoplay : Node
                 await Wait(2.5);
                 if (!IsInstanceValid(opening)) return;
                 song.Keep();
+            }
+            // A mimic (0.33): kept or sold, as the careful player would.
+            if (opening.MimicChoiceOpen)
+            {
+                await Wait(2.0);
+                if (!IsInstanceValid(opening)) return;
+                opening.ChooseMimic(Strategy.KeepMimic(State));
             }
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         }

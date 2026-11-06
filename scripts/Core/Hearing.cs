@@ -18,6 +18,11 @@ public sealed class Hearing
     readonly HashSet<int> _glowed = new();
     readonly HashSet<int> _broke = new();
 
+    /// <summary>You heard it breathe while it sat still (a mimic, <see cref="Mimics"/>).</summary>
+    public bool Breathing { get; private set; }
+
+    public void HeardBreath() => Breathing = true;
+
     /// <summary>The chest has been dropped, and whether it boomed hollow.</summary>
     public bool Dropped { get; private set; }
     public bool Hollow { get; private set; }

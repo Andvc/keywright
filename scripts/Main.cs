@@ -27,7 +27,7 @@ namespace Keywright;
 /// --engine starts with the Bookkeeping Engine, to see it read every chest. --curios=a,b,c owns those curios from the start.
 /// --tales=a,b puts those tales in the season, whatever it draws.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
-/// (with --vault-demo, the Crown Chest's other ending).
+/// (with --vault-demo, the Crown Chest's other ending). --mimics=N makes one chest in N breathe (from Thornwick, 0.33).
 /// </summary>
 public partial class Main : Node2D
 {
@@ -222,6 +222,8 @@ public partial class Main : Node2D
             if (float.TryParse(Arg(args, "--heartsongs"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
                     out var songChance))
                 Heartsongs.Chance = Math.Clamp(songChance, 0f, 1f);
+            // --mimics=2: one chest in two breathes (from Thornwick), to see them at the counter and the opening.
+            if (int.TryParse(Arg(args, "--mimics"), out var mimics) && mimics > 0) Mimics.OneIn = mimics;
             if (int.TryParse(Arg(args, "--start-tier"), out var startTier))
                 State.SkipTo(Math.Clamp(startTier, 1, ShopTiers.Max), int.TryParse(Arg(args, "--gold"), out var g) ? g : 500);
             // --tales=a,b: those tales are in the season, whatever it draws (to check one on demand).
@@ -507,6 +509,40 @@ public partial class Main : Node2D
             if (!Platform.OnSteam) Announce(achievement);
         }
         Platform.Unlock(earned.Select(a => a.Key));
+    }
+
+    /// <summary>
+    /// A clue for the case, noted for a few seconds under the top bar: how it came (seen, said, found, heard) and the
+    /// question it belongs to. Clicking it opens the notebook's Case page where the screen allows.
+    /// </summary>
+    void NoteClue(CaseClue clue)
+    {
+        var question = Case.Question(clue.Question);
+        // The career's question is asked from the second season: before that a clue to it is noted quietly.
+        if (question == null || !State.Asking(question)) return;
+        var layer = new CanvasLayer { Layer = 85, ProcessMode = ProcessModeEnum.Always };
+        AddChild(layer);
+        string head = Loc.T($"New clue ({Case.WayName(clue.Way)})"), ask = question.Ask;
+        float w = Mathf.Clamp(Mathf.Max(UiKit.TextWidth(head), UiKit.TextWidth(ask)) + 72, 360, 760);
+        var panel = UiKit.MakePanel(Palette.Magic.Darkened(0.35f)).Place(640 - w / 2, 58, w, 62);
+        panel.MouseFilter = Control.MouseFilterEnum.Stop;
+        panel.MouseDefaultCursorShape = Control.CursorShape.PointingHand;
+        panel.TooltipText = Loc.T("Open the notebook's Case page");
+        panel.GuiInput += e =>
+        {
+            if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } && _phase != null && !GetTree().Paused) _phase.ShowCase();
+        };
+        layer.AddChild(panel);
+        panel.AddChild(UiKit.MakeLabel(head, 16, Palette.Magic, HorizontalAlignment.Center).Place(0, 8, w, 20));
+        panel.AddChild(UiKit.MakeLabel(ask, 16, Palette.Text, HorizontalAlignment.Center).Place(0, 32, w, 20));
+        panel.Modulate = new Color(1, 1, 1, 0);
+        Sfx.Play("sting", 1.15f, -12);
+        var tween = layer.CreateTween();
+        tween.TweenProperty(panel, "modulate:a", 1f, 0.25f);
+        tween.TweenCallback(Callable.From(() => Moment("clue")));
+        tween.TweenInterval(4.0);
+        tween.TweenProperty(panel, "modulate:a", 0f, 0.6f);
+        tween.TweenCallback(Callable.From(layer.QueueFree));
     }
 
     /// <summary>An achievement's name over the top bar's title for a few seconds (the one place no screen uses).</summary>
@@ -1075,6 +1111,12 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
+        // A clue just found (0.33): a note over the top bar, which opens the case where it can.
+        if (State?.NewClue is CaseClue clue)
+        {
+            State.NewClue = null;
+            NoteClue(clue);
+        }
         if (_camera == null) return;
         _trauma = Mathf.Max(0f, _trauma - (float)delta * 1.6f);
         float strength = _trauma * _trauma;

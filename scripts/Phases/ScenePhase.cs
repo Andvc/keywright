@@ -100,6 +100,9 @@ public partial class ScenePhase : Phase
         face.Who = key;
         face.Portrait.Texture = ArtTexture.Load($"res://assets/figures/{Sellers.LookOf(key)}.png");
         UiKit.Outline(face.Portrait, whole: true);
+        // Bram's hand, as far as the gold has climbed (0.33).
+        if (key == Story.Bram) Gilt.Bram(face.Portrait, Game.State, Gilt.Figure);
+        else face.Portrait.Material = null;
         face.Name.Text = Story.Name(key);
     }
 
@@ -123,6 +126,8 @@ public partial class ScenePhase : Phase
         }
         var line = _lines[_index];
         Trace?.Invoke($"{Story.Name(line.Speaker)}: {line.Text}");
+        // A line that gives the case a clue notes it as it's said (the top bar shows it).
+        if (line.Clue != null) State?.Find(line.Clue);
         _name.Text = Story.Name(line.Speaker);
         _text.Text = line.Text;
         _more.Text = _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
@@ -148,6 +153,8 @@ public partial class ScenePhase : Phase
     {
         if (_done) return;
         _done = true;
+        // Skipped lines still happened: their clues are noted too.
+        if (State != null) Story.Heard(State, _lines);
         _then?.Invoke();
     }
 }

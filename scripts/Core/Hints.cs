@@ -127,6 +127,14 @@ public static class Hints
                    "row to mark one enchanted."),
         ["counted"] = Loc.T("Two of a kind: each one adds its value. Sellers who don't count only price one."),
         ["glow"] = Loc.T("It glowed! That one's enchanted, and worth twice as much. Click the star on its row to mark it."),
+        // 0.33: the Lantern Market.
+        ["market"] = Loc.T("Nim's lantern is lit: the Lantern Market's open under the Barrow tonight. His people sell secrets, and buy what " +
+                           "nobody else will. Mind who you sell gold to down there."),
+        // 0.33: a mimic.
+        ["mimic"] = Loc.T("A mimic! It's eaten whatever was in there. The Arcanum's menagerie pays well for one. Or keep it: it eats gold, but no " +
+                          "thief tries a door with a mimic behind it, and a well-fed one grows."),
+        ["breathing"] = Loc.T("Hush. Hear that? Something in there is breathing. Where the Locking frays, an old ward goes hungry and eats what's in " +
+                              "its chest: a mimic. Nothing rattles, so the seller thinks it's empty. The Arcanum's menagerie pays well for one."),
         ["tier4"] = Loc.T("The Royal Emporium. Court folk, the Maw's creatures up through the cracks in the Gate, and Gilt, who sells " +
                     "demon gold: gilded iron that jingles just like the real thing. A lodestone would catch it."),
         ["magnet"] = Loc.T("The lodestone's on, so iron can't move. Weapons go quiet, and nothing drowns out the delicate things. Demon " +

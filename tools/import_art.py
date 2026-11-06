@@ -1081,13 +1081,95 @@ def pixel_icon(rows, name):
     return img
 
 
+# The Gilding (0.33, scripts/Ui/Gilt.cs): for each picture of Bram, which pixels turn to gold at which step of his
+# pledge. Steps are boxes over the picture (in its own pixels); inside a box only his skin's colours count, so the
+# shirt, the beard and the waistcoat stay as they are. The mask's red channel is the step times 64 (0: never).
+GILD_SKIN = {(225, 168, 130), (189, 126, 95), (206, 94, 0)}
+GILD_MASKS = {
+    # name: (picture, [(step, (x0, y0, x1, y1)) as fractions of its size])
+    "figure": ("figures/bram.png", [(1, (0.23, 0.648, 0.42, 0.735)), (2, (0.22, 0.538, 0.42, 0.648)), (3, (0.43, 0.367, 0.59, 0.422))]),
+    "portrait": ("sprites/sellers/bram.png", [(3, (0.40, 0.55, 0.72, 0.74))]),
+    "face": ("sprites/sellers/faces/bram.png", [(3, (0.40, 0.55, 0.72, 0.74))]),
+}
+
+
+# The gilded who stand in view of the counter (Core.GameState.Statues): their figures, gold all over, on a plinth.
+# Drawn at the 3px art's grain (100 cells tall, shown at 1.5 canvas pixels a cell). Old Haddon wears Silas Brass's
+# figure and Thornwick's three are old regulars' until they're drawn; Jory Kettle is his own.
+STATUE_LOOKS = ["pell", "hob", "gerda", "penn", "dorrin"]
+STATUE_CELLS = 100
+
+
+def gild_pixel(r, g, b):
+    l = min(1.0, (0.3 * r + 0.55 * g + 0.15 * b) / 255)
+    dark, mid, light = (102, 56, 13), (219, 153, 41), (255, 237, 148)
+    a, c, t = (dark, mid, l * 2) if l < 0.5 else (mid, light, (l - 0.5) * 2)
+    return tuple(int(a[i] + (c[i] - a[i]) * t) for i in range(3))
+
+
+def build_statues():
+    from PIL import Image
+    out = os.path.join(ASSETS, "props")
+    os.makedirs(out, exist_ok=True)
+    for look in STATUE_LOOKS:
+        src = os.path.join(ASSETS, "figures", f"{look}.png")
+        if not os.path.exists(src):
+            continue
+        im = Image.open(src).convert("RGBA")
+        im = im.crop(im.getbbox())
+        w = max(1, round(im.size[0] * STATUE_CELLS / im.size[1]))
+        im = im.resize((w, STATUE_CELLS), Image.LANCZOS)
+        px = im.load()
+        for y in range(im.size[1]):
+            for x in range(im.size[0]):
+                r, g, b, a = px[x, y]
+                px[x, y] = (*gild_pixel(r, g, b), 255) if a > 110 else (0, 0, 0, 0)
+        plinth_w, plinth_h = max(w, 40) + 6, 9
+        sheet = Image.new("RGBA", (plinth_w, STATUE_CELLS + plinth_h), (0, 0, 0, 0))
+        sheet.alpha_composite(im, ((plinth_w - w) // 2, 0))
+        sp = sheet.load()
+        for y in range(plinth_h):
+            for x in range(plinth_w):
+                edge = x in (0, plinth_w - 1) or y == plinth_h - 1
+                colour = (52, 48, 58) if edge else (150, 146, 140) if y < 2 else (112, 108, 112)
+                sp[x, STATUE_CELLS + y] = (*colour, 255)
+        sheet.save(os.path.join(out, f"statue_{look}.png"))
+    print(f"statues: {len(STATUE_LOOKS)}")
+
+
+def build_gild_masks():
+    from PIL import Image
+    build_statues()
+    out = os.path.join(ASSETS, "ui", "gild")
+    os.makedirs(out, exist_ok=True)
+    for name, (picture, steps) in GILD_MASKS.items():
+        im = Image.open(os.path.join(ASSETS, picture)).convert("RGBA")
+        w, h = im.size
+        mask = Image.new("RGB", (w, h), (0, 0, 0))
+        px, mx = im.load(), mask.load()
+        count = 0
+        for step, (fx0, fy0, fx1, fy1) in steps:
+            for y in range(int(fy0 * h), int(fy1 * h)):
+                for x in range(int(fx0 * w), int(fx1 * w)):
+                    r, g, b, a = px[x, y]
+                    if a > 128 and (r, g, b) in GILD_SKIN and mx[x, y][0] == 0:
+                        mx[x, y] = (step * 64, 0, 0)
+                        count += 1
+        mask.save(os.path.join(out, f"bram_{name}.png"))
+        print(f"gild mask bram_{name}: {count} pixels")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--cache", default=os.path.expanduser("~/.cache/keywright-art"))
     parser.add_argument("--density-only", action="store_true", help="overlay art/density3 without rebuilding Kenney or legacy assets")
     parser.add_argument("--density-check", action="store_true", help="validate the density overlay and report crops without writing files")
     parser.add_argument("--chests-only", action="store_true", help="redraw just the chests and their locks (custom_art.chest3)")
+    parser.add_argument("--gild-only", action="store_true", help="redraw just the Gilding's masks for Bram's pictures (scripts/Ui/Gilt.cs)")
     args = parser.parse_args()
+    if args.gild_only:
+        build_gild_masks()
+        return
     from import_density import apply_density, check_drawn
     if args.chests_only:
         build_chests()
@@ -1123,6 +1205,7 @@ def main():
     build_ui()
     build_icons()
     apply_density(ROOT)
+    build_gild_masks()
 
     for group, files in SOUNDS.items():
         out = os.path.join(ASSETS, "audio", group)

@@ -55,6 +55,9 @@ public sealed class Chest
     /// <summary>A tale's own chest ("reliquary", "vell"), so the tale hears what becomes of it; or null.</summary>
     public string Tale { get; set; }
 
+    /// <summary>A mimic (0.33, <see cref="Mimics"/>): it ate what was in it, and breathes while the chest sits still.</summary>
+    public bool Breathing { get; set; }
+
     public string Skin => Sealed ? "black" : Gilded ? "gold" : Categories.ChestSkin(Quality);
 
     /// <summary>Everything, including what's under the false bottom (a warded thing only once the ward has given it up).</summary>

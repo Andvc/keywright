@@ -201,10 +201,45 @@ Each beat: who, when, what happens, and the choices (with what each does). "Purs
 
 ### The Key (always)
 
-The main story, as before: Bram's welcome (week 1), his secret and the Hooded Woman (week 2), Mara's truth and the
-King (week 4), the Guild's offer on the fourth Guild night (give Vane the shards for half that due, or keep them for
-Mara), the shards for Mara's asks, the Crown Chest once the debt's paid. Two tales feed into it: the Foreclosures can
-bring the Crown's decree, and the Defector tells you what the Guild means to do.
+The main story (0.33 rewrote it around the Gilding: `docs/narrative.md` has the truth behind it and the season week by
+week). The story mornings: Bram's welcome and Old Haddon gilded at the crossroads (week 1; from the second season, after
+a season the Gate opened, Bram's dream first); the Locking and Bram's shard, and the Hooded Woman's first ask (week 2);
+Mara's laws of the Locking, and Bram's confession: he pledged his own hand for a marked baby (week 4); who stands with
+you, and the King's plan, the Key whole by the last night or the Guild's papers to his court (week 6). Vane's nights:
+the Guild calls in Bram's pledge on the second evening ("the interest is showing, I see"), and leaves a line on each
+Guild night (the cart for Haddon; Bram's gold fingers; Thornwick's statues; "even kings pledge"; ten days; five days),
+offers half the fourth night's due for the shards, and on the sixth offers to tear up Bram's pledge, the whole debt, for
+them (taken, the Maw has the Key and the Gate opens). Bram's hand gilds by the calendar (the hand, then the forearm from
+week 3, the throat from week 5) until his pledge is redeemed. The shards for Mara's asks, and the Crown Chest once the
+debt's paid and the Key whole by the season's last night (the Crown's note falls due at its midnight). Two tales feed
+into it: the Foreclosures can bring the Crown's decree, and the Defector tells you what the Guild means to do.
+
+### The Gilding (always, 0.33)
+
+The case's clues from the people who'd know. Each beat comes once, at its shop and week.
+
+1. **Haddon's chest** (Nell Haddon, from day 3, weeks 1-2): her father's last chest, which wouldn't open for the
+   Guild's men; given for a lucky coin. Taken, the Guild's paper is under his tools (found: "the borrower's own hand,
+   and all of him"); either way she's said he signed against his own hand.
+2. **The glove** (Bettany, from day 7, while Bram wears it): twenty years back Bram took a marked baby out of the
+   Guild's care, and nobody knew what he paid.
+3. **Saint Ide's bowl** (Sister Agathe, Thornwick, from day 11): what's pledged to the Guild is pledged to gold; every
+   coin out of a chest is his eye. *Give to her bowl* (abbey +1) or *I've a living to make*.
+4. **The carts** (Sergeant Hollis, Thornwick, from day 13): the Guild's carts go down the palace road every fifth night,
+   and a sack slipped: a gold man. **The Gate** (Hollis at the back door, the first night of a week after): he followed
+   one to a door under the palace with a seam of gold; they weigh the gilded, and something takes them.
+5. **The strongroom** (Silas Brass, Crownhold, from day 16): a chest from the Guild's own strongroom, with demon gold in
+   it. Bought, it's found: the Guild deals in the Maw's gilded iron.
+6. **The Crown's note** (Mara's letter, from day 21, once Vane has said "even kings pledge"): the Chest Roll says the
+   Crown Chest is pledged to the Guild; if the Crown can't pay on the last night, it opens for the Maw.
+7. **The famine** (Old Aldo, the Emporium, from day 21): he pledged the Crown Chest to feed the realm; a gift is
+   rightful, and there'd be nothing left to collect.
+8. **Your own hand** (Bailiff Marrow, Thornwick, from day 11, from the second season, after a season the Gate opened): a
+   Guild sale's chest, marked inside the lid in your own hand and dated this spring.
+
+The Foreclosures add the ledger page and Tobias's word (where the gilded go; nobody knew who they signed to) and
+Master Quire's law (a thing taken in secret was never given). The Case page (`Case.cs`) keeps the questions; working
+one out pays off once (`CaseQuestion.Payoff`) and is remembered across seasons.
 
 ### The Shut Chests (always, from Thornwick)
 
@@ -272,8 +307,10 @@ it count you a friend, and then its bailiff comes to sell (the officials, above)
    *keep it and sell it on* (its price; commons -1).
 4. **The debt-house** (Ada, three days on): the Guild wants a purse for Jory; she has half. *Pay the rest* (half a
    purse: Jory works a week for you as your porter to pay you back, one more customer a day; and he knows the Guild's
-   debt-house) or
-   *I can't* (Ada's last visit).
+   debt-house) or *I can't* (0.33: the Guild calls his note in on its next night).
+   **The note** (Ada, two days on, while it stands): one more chance to pay the rest. If nobody does, the Guild
+   collects Jory on its night: he's gilded, and stands in the debt-house yard (Ada at the back door that night) until
+   the Locking's sung again.
 5. **The tallies** (0.30, Jory, three days on, if he's free): half the debts in the debt-house were never owed. *Write it
    all down* (a paper for the case) or *put it behind you*. Jory owes you a favour either way; Ada does too if you gave
    her the sword.

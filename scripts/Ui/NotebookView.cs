@@ -23,7 +23,7 @@ public partial class NotebookView : Node2D
     const float PanelX = 40, PanelY = 66, PanelW = 1200, PanelH = 518;
     const float TableX = 64, RowH = 40;
 
-    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4, StoriesPage = 5;
+    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4, StoriesPage = 5, CasePage = 6;
 
     readonly GameState _state;
     readonly int _firstPage;
@@ -70,8 +70,9 @@ public partial class NotebookView : Node2D
         Tab(CalendarPage, Loc.T("Calendar"), PanelX + 456, 112);
         Tab(TownPage, Loc.T("Town"), PanelX + 574, 88);
         Tab(StoriesPage, Loc.T("Stories"), PanelX + 668, 104);
+        Tab(CasePage, Loc.T("Case"), PanelX + 778, 88);
         // Synergies come with Crownhold: before that, the notebook just keeps its tally.
-        if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 778, 120);
+        if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 872, 120);
         AddChild(UiKit.MakeButton(Loc.T($"Close {Controls.Tag(Controls.Notebook)}"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
         _page = new Node2D();
         AddChild(_page);
@@ -101,6 +102,7 @@ public partial class NotebookView : Node2D
         else if (page == CalendarPage) BuildCalendar();
         else if (page == TownPage) BuildTown();
         else if (page == StoriesPage) BuildStories();
+        else if (page == CasePage) BuildCase();
         else if (page == SynergiesPage) BuildSynergies();
         else BuildSounds();
     }
@@ -349,7 +351,9 @@ public partial class NotebookView : Node2D
             pulse.TweenProperty(row, "self_modulate", new Color(1.35f, 1.3f, 1f), 0.7f);
             pulse.TweenProperty(row, "self_modulate", Colors.White, 0.7f);
         }
-        row.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{Sellers.LookOf(key)}.png", new Vector2(26, h / 2), 1, outlined: true));
+        var face = UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{Sellers.LookOf(key)}.png", new Vector2(26, h / 2), 1, outlined: true);
+        if (key == Story.Bram) Gilt.Bram(face, _state, Gilt.Face);
+        row.AddChild(face);
         row.AddChild(UiKit.MakeLabel(name, 16, current ? Palette.Gold : Palette.Text).Place(52, 4, 300, 20));
         row.AddChild(UiKit.MakeLabel(current ? Loc.T("at your counter") : role, 16, current ? Palette.Gold : Palette.Muted).Place(52, 24, 500, 20));
     }
@@ -361,7 +365,9 @@ public partial class NotebookView : Node2D
         var page = UiKit.MakePanel(key == _current ? Palette.Gold.Darkened(0.2f) : Palette.PanelBorder).Place(TableX - 8, y, PanelW - 32, PanelY + PanelH - 52 - y);
         page.MouseFilter = Control.MouseFilterEnum.Ignore;
         _page.AddChild(page);
-        page.AddChild(UiKit.MakeSprite($"res://assets/sprites/sellers/{Sellers.LookOf(key)}.png", new Vector2(56, 58), 1, outlined: true));
+        var portrait = UiKit.MakeSprite($"res://assets/sprites/sellers/{Sellers.LookOf(key)}.png", new Vector2(56, 58), 1, outlined: true);
+        if (key == Story.Bram) Gilt.Bram(portrait, _state, Gilt.Portrait);
+        page.AddChild(portrait);
         page.AddChild(UiKit.MakeLabel(name, 24, Palette.Gold, outline: 4).Place(112, 10, 600, 30));
         page.AddChild(UiKit.MakeLabel(role, 16, Palette.Muted, HorizontalAlignment.Right).Place(600, 16, PanelW - 660, 20));
         page.AddChild(UiKit.MakeLabel(about, 16, Palette.Text).Wrapped().Place(112, 44, PanelW - 168, 144));
@@ -581,6 +587,144 @@ public partial class NotebookView : Node2D
     /// The Stories page (0.32): every tale begun, the ones still going first, and the one picked, whole: what it's about,
     /// everything that's happened in it so far, and what comes next (who, where, about when), or that nothing's expected.
     /// </summary>
+    // ---- The case (0.33, Core/Case.cs) ----
+
+    /// <summary>The question open on the Case page, and the words picked for each one's blanks while the notebook's open.</summary>
+    static string _question;
+    static readonly System.Collections.Generic.Dictionary<string, string[]> Picks = new();
+    string _verdict;
+
+    /// <summary>
+    /// The case: the season's questions down the side (a tick once worked out), and the one picked whole: its sentence,
+    /// a row of words for each blank (only those the clues have given, and the obvious guesses), Check, and the clues
+    /// found so far, each marked with how you came by it. A check says only how many blanks are wrong, never which.
+    /// </summary>
+    void BuildCase()
+    {
+        var open = _state.OpenQuestions.ToList();
+        float top = PanelY + 60;
+        if (open.Count == 0)
+        {
+            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing to puzzle over yet. When something doesn't add up, the question goes here, with every clue you find."),
+                16, Palette.Muted).Wrapped().Place(TableX, top, PanelW - 48, 60));
+            return;
+        }
+        var q = open.FirstOrDefault(o => o.Key == _question) ?? open.FirstOrDefault(o => !_state.Solved.Contains(o.Key)) ?? open[0];
+        _question = q.Key;
+
+        // The questions, a tick by each one worked out.
+        const float listW = 340;
+        for (int i = 0; i < open.Count; i++)
+        {
+            var o = open[i];
+            bool picked = o == q, done = _state.Solved.Contains(o.Key);
+            var row = UiKit.MakePanel(picked ? Palette.Gold : Palette.PanelBorder).Place(TableX - 8, top + i * 50, listW - 4, 46);
+            row.MouseFilter = Control.MouseFilterEnum.Stop;
+            string key = o.Key;
+            row.GuiInput += e =>
+            {
+                if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) return;
+                _question = key;
+                _verdict = null;
+                Sfx.Play("tick", 1.1f, -8);
+                ShowPage(CasePage);
+            };
+            var ask = UiKit.MakeLabel(o.Ask, 16, done ? Palette.Good : picked ? Palette.Gold : Palette.Text).Wrapped().Place(12, 4, listW - 64, 40);
+            ask.VerticalAlignment = VerticalAlignment.Center;
+            row.AddChild(ask);
+            if (done) row.AddChild(UiKit.MakeCheck(true, new Vector2(listW - 32, 23), 1));
+            _page.AddChild(row);
+        }
+
+        // The question picked: its sentence, the blanks' words, and the clues.
+        float x = TableX + listW + 8, w = PanelX + PanelW - 24 - x, y = top;
+        bool solved = _state.Solved.Contains(q.Key), known = solved || _state.Truths.Contains(q.Key);
+        if (!Picks.TryGetValue(q.Key, out var picks) || picks.Length != q.Blanks.Length) Picks[q.Key] = picks = new string[q.Blanks.Length];
+        if (known) picks = q.Answer.ToArray();
+        _page.AddChild(UiKit.MakeLabel(q.Ask.ToUpperInvariant(), 24, Palette.Gold, outline: 4).Place(x, y - 4, w, 30));
+        y += 32;
+        string sentence = Case.Fill(q, picks);
+        float sentenceH = UiKit.TextHeight(sentence, w);
+        _page.AddChild(UiKit.MakeLabel(sentence, 16, solved ? Palette.Good : known ? Palette.Magic : Palette.Text).Wrapped().Place(x, y, w, sentenceH));
+        y += sentenceH + 8;
+        if (known)
+        {
+            string note = solved ? q.Worked : Loc.T("You worked this out in an earlier season. It's written here in your own hand.");
+            float noteH = UiKit.TextHeight(note, w);
+            _page.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted).Wrapped().Place(x, y, w, noteH));
+            y += noteH + 10;
+        }
+        else
+        {
+            for (int b = 0; b < q.Blanks.Length; b++)
+            {
+                _page.AddChild(UiKit.MakeLabel(Loc.T($"Blank {b + 1}:"), 16, Palette.Muted).Place(x, y + 8, 96, 20));
+                float bx = x + 100;
+                foreach (var word in _state.Words(q, b))
+                {
+                    float bw = UiKit.TextWidth(word.Text) + 28;
+                    if (bx + bw > x + w)
+                    {
+                        bx = x + 100;
+                        y += 40;
+                    }
+                    int blank = b;
+                    string pick = word.Key;
+                    var button = UiKit.MakeButton(word.Text, picks[b] == pick ? Palette.Gold : Palette.PanelBorder.Lightened(0.2f), 16, () =>
+                    {
+                        Picks[q.Key][blank] = pick;
+                        _verdict = null;
+                        Sfx.Play("tick", 1.2f, -8);
+                        ShowPage(CasePage);
+                    }).Place(bx, y, bw, 34);
+                    if (picks[b] == pick) button.Modulate = Palette.Gold.Lightened(0.4f);
+                    _page.AddChild(button);
+                    bx += bw + 8;
+                }
+                y += 42;
+            }
+            bool ready = picks.All(p => p != null);
+            var check = UiKit.MakeButton(Loc.T("Check"), Palette.Good, 16, () =>
+            {
+                int wrong = _state.Check(q, Picks[q.Key]);
+                _verdict = wrong == 0 ? null : Loc.Plural(wrong, $"Not quite: {wrong} of the blanks is wrong.", $"Not quite: {wrong} of the blanks are wrong.");
+                Sfx.Play(wrong == 0 ? "fanfare" : "lose", 1f, -6);
+                if (wrong == 0) Main.Instance.Flash(Palette.Good, 0.2f);
+                ShowPage(CasePage);
+            }).Place(x, y + 2, 140, 36);
+            check.Disabled = !ready;
+            _page.AddChild(check);
+            if (_verdict != null) _page.AddChild(UiKit.MakeLabel(_verdict, 16, Palette.Warn).Place(x + 156, y + 10, w - 156, 20));
+            else if (!ready) _page.AddChild(UiKit.MakeLabel(Loc.T("Pick a word for each blank."), 16, Palette.Muted).Place(x + 156, y + 10, w - 156, 20));
+            y += 48;
+        }
+
+        // The clues, each with how you came by it.
+        var clues = Case.Clues.Where(c => c.Question == q.Key && _state.Clues.Contains(c.Key)).ToList();
+        _page.AddChild(UiKit.MakeLabel(Loc.T("CLUES"), 16, Palette.Gold.Darkened(0.2f)).Place(x, y, w, 20));
+        y += 24;
+        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }.Place(x, y, w, Math.Max(40, PanelY + PanelH - 16 - y));
+        _page.AddChild(scroll);
+        var list = new Control { MouseFilter = Control.MouseFilterEnum.Pass };
+        scroll.AddChild(list);
+        float ly = 0;
+        foreach (var clue in clues)
+        {
+            var tag = UiKit.MakeLabel(Case.WayName(clue.Way).ToUpperInvariant(), 16, clue.Way switch
+            {
+                ClueWay.Found => Palette.Gold,
+                ClueWay.Seen => Palette.Magic,
+                ClueWay.Heard => Palette.Good,
+                _ => Palette.Muted,
+            }).Place(0, ly, 80, 20);
+            list.AddChild(tag);
+            float textH = UiKit.TextHeight(clue.Text, w - 104);
+            list.AddChild(UiKit.MakeLabel(clue.Text, 16, Palette.Text).Wrapped().Place(88, ly, w - 104, textH));
+            ly += textH + 10;
+        }
+        list.CustomMinimumSize = new Vector2(w - 16, ly);
+    }
+
     void BuildStories()
     {
         var begun = TaleBook.All.Where(t => _state.TaleLog.ContainsKey(t.Key))

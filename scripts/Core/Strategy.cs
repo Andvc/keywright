@@ -290,6 +290,8 @@ public static class Strategy
         // A Heartsong's worth nothing in gold, but singing in the shop it's worth more than any chest: a careful player
         // pays up for one (what two of the shop's chests would cost).
         if (state != null && slip.Count(Category.Heartsong) > 0) worth += state.WorkingPurse;
+        // A mimic (0.33): heard breathing, it's worth what the Arcanum's menagerie pays for one.
+        if (state != null && hearing.Breathing) worth += state.FreshMimicPrice;
         return (int)worth;
     }
 
@@ -638,6 +640,49 @@ public static class Strategy
 
     /// <summary>The Guild's offer for the map: a careful player takes it only if it's that or the shop.</summary>
     public static bool TakeOffer(GameState state) => state.Gold < state.DueNow && state.Gold >= state.DueNow / 2;
+
+    /// <summary>
+    /// The careful player at the Lantern Market: buys tonight's secret when it gives a word a question still needs and the
+    /// purse can spare it (two working purses kept back); sells a grown mimic once there's nobody left for it to wake, or
+    /// the season's nearly out. Never sells gold down the Gate. Returns what it did, for the bot's log.
+    /// </summary>
+    public static string AtMarket(GameState state)
+    {
+        state.VisitMarket();
+        var done = new List<string>();
+        if (state.Whisper is CaseClue clue && state.Gold >= state.SecretPrice + 2 * state.WorkingPurse && state.BuySecret())
+            done.Add($"secret {clue.Key}"); // loc: keys
+        if (state.MimicGrown && (state.Week >= Guild.Weeks - 1 || (state.Gilded.Count == 0 && state.Flagged(Mimics.ThornwickWoke))))
+            done.Add($"mimic +{state.SellKeptMimic()}g"); // loc: keys
+        return string.Join(", ", done);
+    }
+
+    /// <summary>
+    /// A mimic just opened: the careful player keeps one while there's someone gilded it could grow to wake, or a thief to
+    /// keep off, and the season's long enough to raise it; otherwise it goes to the menagerie.
+    /// </summary>
+    public static bool KeepMimic(GameState state) =>
+        state.CanKeepMimic && state.Week <= Guild.Weeks - Mimics.GrowsAfter &&
+        (state.Gilded.Count > 0 || !state.Flagged(Mimics.ThornwickWoke) || state.Foe(Faction.Lockless));
+
+    /// <summary>
+    /// The careful player works out a question of the case once the clues have given the right word for every blank
+    /// (read as a player would read them: nothing guessed). Returns how many were worked out.
+    /// </summary>
+    public static int WorkOut(GameState state)
+    {
+        int done = 0;
+        foreach (var q in state.OpenQuestions.Where(q => !state.Solved.Contains(q.Key)).ToList())
+            if (Enumerable.Range(0, q.Blanks.Length).All(b => state.Words(q, b).Any(w => w.Key == q.Answer[b])) && state.Check(q, q.Answer) == 0)
+                done++;
+        return done;
+    }
+
+    /// <summary>
+    /// Vane's offer for Bram's pledge (the debt for the Key): never. It's the Maw's bargain by another door: the run ends
+    /// with the Gate open, no clear and none of the debt's points.
+    /// </summary>
+    public static bool TakePledgeOffer(GameState state) => false;
 
     /// <summary>Most a careful collector gives up, in sale price, for each exhibition point.</summary>
     public const int GoldPerPoint = 20;

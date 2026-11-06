@@ -301,8 +301,11 @@ public sealed partial class GameState
         Commissions.RemoveAll(c => c.Story);
     }
 
-    /// <summary>The vault is waiting: the debt is paid and the map is whole.</summary>
-    public bool VaultDue => DebtCleared && MapPieces >= Story.Pieces && !VaultOpened;
+    /// <summary>
+    /// The vault is waiting: the debt is paid and the Key is whole, by the season's last night (the Crown's note falls
+    /// due at its midnight, docs/narrative.md).
+    /// </summary>
+    public bool VaultDue => DebtCleared && MapPieces >= Story.Pieces && !VaultOpened && Week <= Guild.Weeks;
 
     /// <summary>
     /// King Aldric's vault: the best of everything, much of it enchanted, behind a dwarven lock. Mara and Bram bring it

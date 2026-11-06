@@ -607,10 +607,48 @@ public static partial class TaleBook
                         }, W(s, s.Purses(0.3f) * Guild.DaysPerWeek, (Faction.Commons, 1)), cost: s.Purses(0.5f), kind: true),
                         C(Loc.T("I can't"), () =>
                         {
-                            s.Log("kettle", Loc.T("You couldn't pay Jory's debt."));
-                            return Loc.T("I understand, dear. I'll keep saving.");
+                            // 0.33: the Guild calls Jory's note in on its next night (Gilding.cs).
+                            s.Claim(Jory, s.Week + 1);
+                            s.Log("kettle", Loc.T("You couldn't pay Jory's debt. The Guild has called his note in, on its next night."));
+                            return Loc.T("I understand, dear. I'll keep saving. They say they'll collect him if it's not paid. Collect. Like a parcel.");
                         }),
                     },
+                },
+                // 0.33: the Guild's night is coming for Jory: one more chance.
+                new()
+                {
+                    Key = "kettle.claim", Who = Ada, After = "kettle.debt", Gap = 2, Tier = 3, If = s => s.Claims.ContainsKey(Jory),
+                    Expect = Loc.T("Ada, about Jory's note"),
+                    Says = s => Say(Ada,
+                        Loc.T("The Guild's posted Jory's note on the debt-house door, dear. It falls due on the Guild's night. Old Haddon's went " +
+                              "the same way, and look at him."),
+                        Loc.T($"I've still half of it. {Money.Say(s.Purses(0.5f))} more and he's free. Please.")),
+                    Asks = s => new()
+                    {
+                        C(Loc.T($"Pay the rest ({s.Purses(0.5f)}g)"), () =>
+                        {
+                            s.Redeem(Jory);
+                            s.Flags.Add(Porter);
+                            s.PorterUntil = s.Day + Guild.DaysPerWeek;
+                            s.Sway(Faction.Commons, 1);
+                            s.Log("kettle", Loc.T("You paid Jory's note the week the Guild called it in. He'll carry chests in for you for a week: one more customer a day."));
+                            return Loc.T("Jory's free! Oh, dear. He'll work a week for you, and carry anything.");
+                        }, W(s, s.Purses(0.3f) * Guild.DaysPerWeek + s.Purses(0.5f), (Faction.Commons, 1)), cost: s.Purses(0.5f), kind: true),
+                        C(Loc.T("I can't"), () =>
+                        {
+                            s.Log("kettle", Loc.T("You couldn't pay Jory's note before the Guild's night."));
+                            return Loc.T("Then I'll sit with him tonight. Whatever they do, he won't be alone.");
+                        }),
+                    },
+                },
+                new()
+                {
+                    Key = "kettle.gilded", Who = Ada, Night = true, After = "kettle.debt", Gap = 0, Tier = 3, If = s => s.IsGilded(Jory),
+                    Says = s => Say(Ada,
+                        Loc.T("Ada at the back door in her shawl, shaking. \"They came for Jory with a cart. He went gold in their hands, dear, " +
+                              "like old Haddon. Gold, with his mouth open.\""),
+                        Loc.T("\"They say he's the Maw's now. I don't care whose they say he is. He's my boy.\"")),
+                    Then = s => s.Log("kettle", Loc.T("The Guild collected Jory Kettle on its night. He stands gold in the debt-house yard.")),
                 },
                 // 0.30: what Jory saw in the debt-house's books.
                 new()
@@ -1034,6 +1072,11 @@ public static partial class TaleBook
                               "Guild has seized is still in the families' names."),
                         Loc.T("By the ward's own law the Guild has been selling stolen chests for a century, and sending the ones that won't open " +
                               "down through the Gate. I've made you a copy of the Roll.")),
+                    Then = s =>
+                    {
+                        s.Find("quire.law");
+                        s.Find("roll.crown");
+                    },
                     Asks = s => new()
                     {
                         C(Loc.T("I'll take it to the King"), () =>
@@ -1066,6 +1109,8 @@ public static partial class TaleBook
                     {
                         s.Flags.Add("fore.ledger");
                         s.Gather("ledger");
+                        s.Find("ledger");
+                        s.Find("tobias.secret");
                         s.Goes(Tobias);
                         s.Log("fore", Loc.T("Tobias Fenn left Crownhold, and left you a page of the Guild's ledgers: where the tithe goes."));
                     },
@@ -1403,7 +1448,7 @@ public static partial class TaleBook
     };
 
     /// <summary>Every tale a season can draw: 0.28's, and 0.30's from Brindle, Thornwick, Crownhold and the Emporium (TaleBook.*.cs).</summary>
-    public static readonly TaleDef[] All = Season28.Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales())
+    public static readonly TaleDef[] All = GildingTales().Concat(Season28).Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales())
         .Concat(KinTales()).Concat(LateTales()).ToArray();
 
     static readonly Dictionary<string, Beat> Beats = All.SelectMany(t => t.Beats).ToDictionary(b => b.Key);

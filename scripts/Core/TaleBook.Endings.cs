@@ -36,6 +36,11 @@ public static partial class TaleBook
 
     static Line KettleEnding(GameState s)
     {
+        // 0.33: the Guild collected him.
+        if (s.Gilded.ContainsKey(Jory))
+            return s.VaultOpened
+                ? new(Ada, Loc.T("Jory woke up in the debt-house yard the night the Locking was sung, dear, and walked all the way home. He's still cold."))
+                : new(Bram, Loc.T("Jory Kettle stands gold in the debt-house yard. Ada brings him his breakfast every morning, and talks to him."));
         if (s.Flagged(Porter))
             return new(Ada, s.Owed.ContainsKey(Ada) || s.CalledIn.Contains(Ada)
                 ? Loc.T("Jory's home, and Rafe's sword is over the fire. The Kettles eat at their own table again, dear, and we owe it all to you.")

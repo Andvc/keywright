@@ -21,7 +21,7 @@ public partial class DuesPhase : Phase
     SellerView _vane;
     Control _board;
     Label _have;
-    bool _offerOpen, _paid;
+    bool _offerOpen, _paid, _pledgeOffer;
 
     public MentorView Mentor => _mentor;
 
@@ -29,6 +29,9 @@ public partial class DuesPhase : Phase
     public bool Settled => _paid || State.Foreclosed;
 
     public bool OfferOpen => _offerOpen;
+
+    /// <summary>The offer up is Vane's for Bram's pledge (the sixth night), not the one for half the due.</summary>
+    public bool PledgeOffer => _pledgeOffer;
 
     public override void _Ready()
     {
@@ -46,6 +49,7 @@ public partial class DuesPhase : Phase
         _track = Add(new Node2D());
         BuildTrack();
         if (State.OfferTonight) ShowOffer();
+        else if (State.PledgeOfferTonight) ShowPledgeOffer();
         else Build();
         Game.Moment("21_dues", 0.8);
     }
@@ -119,10 +123,38 @@ public partial class DuesPhase : Phase
         Game.Moment("21_offer", 0.6);
     }
 
+    /// <summary>
+    /// Vane's offer on the sixth Guild night (0.33): Bram's pledge torn up, and all that's left of the debt with it, for
+    /// the shards. The Maw has the Key, and the Gate opens.
+    /// </summary>
+    void ShowPledgeOffer()
+    {
+        _offerOpen = true;
+        _pledgeOffer = true;
+        var lines = Story.PledgeOffer(State);
+        _vane.Say(lines[0].Text + " " + lines[1].Text, Palette.Warn);
+        var panel = Put(UiKit.MakePanel(Palette.Bad.Darkened(0.2f)).Place(PanelX, 180, PanelW, 260));
+        panel.AddChild(UiKit.MakeLabel(Loc.T("THE GUILD'S OFFER"), 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(0, 16, PanelW, 30));
+        panel.AddChild(UiKit.MakeLabel(Loc.Plural(State.MapPieces,
+                $"Hand over your {State.MapPieces} shard of the Aldric Key and the Guild tears up Bram's pledge: all {State.DebtLeft}g of the " +
+                $"debt that's left, paid tonight. The Maw gets the Key, and the Gilded Gate opens.",
+                $"Hand over your {State.MapPieces} shards of the Aldric Key and the Guild tears up Bram's pledge: all {State.DebtLeft}g of the " +
+                $"debt that's left, paid tonight. The Maw gets the Key, and the Gilded Gate opens."),
+            16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 60, PanelW - 80, 80));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Give him the shards"), Palette.Bad, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Keep the shards"), Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
+        Game.Moment("21_pledge_offer", 0.6);
+    }
+
     public void AnswerOffer(bool give)
     {
         if (!_offerOpen) return;
         _offerOpen = false;
+        if (_pledgeOffer)
+        {
+            AnswerPledge(give);
+            return;
+        }
         if (give)
         {
             State.GiveMap();
@@ -132,6 +164,26 @@ public partial class DuesPhase : Phase
         _vane.Say(give ? Story.OfferTaken : Story.OfferRefused, give ? Palette.Text : Palette.Warn);
         Clear();
         Build();
+    }
+
+    /// <summary>Vane's offer for Bram's pledge, answered: the Key for the debt (the run ends with the Gate opening), or on to the due.</summary>
+    void AnswerPledge(bool give)
+    {
+        if (!give)
+        {
+            _vane.Say(Story.PledgeRefused, Palette.Warn);
+            Clear();
+            Build();
+            return;
+        }
+        State.TakeMawBargain();
+        _paid = true;
+        Sfx.Play("deflate", 1f, -4);
+        Game.Hud.SetGold(State.Gold);
+        Game.Hud.SetDue(State);
+        BuildTrack();
+        _vane.Say(Story.PledgeTaken, Palette.Warn);
+        AfterSettled(Loc.T("The Maw paid the debt. The Key is his."));
     }
 
     /// <summary>What's due, what you have, and the ways to make up the difference.</summary>
@@ -351,12 +403,27 @@ public partial class DuesPhase : Phase
         panel.AddChild(UiKit.MakeLabel(ahead, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 92, PanelW, 30));
         if (note != null) panel.AddChild(UiKit.MakeLabel(note, 16, Palette.Warn, HorizontalAlignment.Center).Place(0, 140, PanelW, 20));
         Put(UiKit.MakeButton(Loc.T("Good night"), Palette.Gold, 24, Next).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
+        Part();
         if (State.DebtCleared)
         {
             Sfx.Play("fanfare", 1f, -2);
             Fx.Confetti(this, new Vector2(PanelX + PanelW / 2, 240), 120);
         }
         Game.Moment("21_paid", 0.5);
+    }
+
+    /// <summary>
+    /// Vane's last word as he goes (0.33, <see cref="Story.Parting"/>): the week's cliffhanger, a moment after the due's
+    /// settled, and the clue it gives the case.
+    /// </summary>
+    async void Part()
+    {
+        if (State.GateOpens || Story.Parting(State) is not Line line) return;
+        State.Find(line.Clue);
+        await ToSignal(GetTree().CreateTimer(1.8), SceneTreeTimer.SignalName.Timeout);
+        if (!Alive) return;
+        _vane.Say(line.Text, Palette.Warn);
+        Game.Moment("21_parting", 0.4);
     }
 
     public void Foreclose()

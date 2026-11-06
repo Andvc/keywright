@@ -175,13 +175,17 @@ its clues are in: the player decides when they know enough.
 
 | Question | Answer | Clues (channel) | Worked out, it... |
 |---|---|---|---|
-| **Why is Haddon gold?** | Haddon *pledged himself* to the Guild, and what's pledged and unpaid is *the Maw's*. | Nell: "Father signed against his own hand" (said); Haddon's paper, warded in his chest (found); the Unopened, or the Lantern Market's buyers: "what's pledged to gold, gold keeps" (said) | brings Nell to thank you (commons +1) |
-| **What's under Bram's glove?** | His hand is *gold*: he pledged it for *a marked child*. | Vane's remark (said); his gold fingers on the second Guild night (seen); Aunt Hesper or Bettany: "Bram took a marked baby out of the Guild's care, twenty years back" (said); Bram's own paper (found, in a Guild chest) | Bram stops hiding it, and tells you the rest early |
-| **Where do the gilded go?** | *Down the Gate*, sold to *the Maw* by weight. | the cart on the first Guild night (seen); the Lantern Market's buyers (said); Tobias's ledger page, "H. Haddon, 14 stone" (found) | the Lantern Market's buyers won't trade with you (and the Maw hears you knew) |
-| **Whose is the Guild?** | *The Maw's*; and loose gold is *his eye*. | demon gold in a Guild bailiff's chest: the lodestone silences the "coin" (heard); the Defector (said); Mara (said); Vane's ring (seen) | the Wardens believe you (Wardens +1) |
-| **What is the Guild collecting?** | The King pledged *the Crown Chest*; if the Crown defaults, the Locking opens for *the Maw*. | the Chest Roll's line (found); Old Aldo (said); the ledger page (found); Vane's cliffhanger (said) | Old Aldo shows his hand early, and his court needs a paper fewer |
-| **How can the Locking hold?** | Open the Crown Chest with *the Aldric Key* before the note falls due, or prove the Guild's pledges were *made to the Maw in secret*. | Mara (said); Old Aldo (said); the Defector's word or Tobias's (said); the Keyhold's codex page (found) | the season's end says you knew, and the King's court counts it |
-| **Why does the spring come round again?** (from the second season) | When the Gate opens, the Locking *turns the year back*; only *the marked* remember. | Bram's dream after a lost season (said); a chest marked by your own hand at a foreclosure sale (found); Vane: "Again? You always pay on the fourth night" (said); Mara, once you've opened the Crown Chest (said) | Mara tells the Keyhold's last secret, and the songbook's purpose is plain |
+| **Why is Haddon gold?** | Haddon *pledged himself* to the Guild, and what's pledged and unpaid is *the Maw's*. | the statue, and the rumour that he stole a Locking chest (seen); Nell: "He signed their paper, against his own hand" (said); Haddon's paper in his chest (found); Sister Agathe (said); Mara's laws (said) | Nell tells the crossroads (commons +1) |
+| **What's under Bram's glove?** | His hand is *gold*: he pledged it for *a marked child*. | Vane's remark (said); his gold fingers on the second Guild night (seen); Bettany: "Bram took a marked baby out of the Guild's care, twenty years back" (said); Bram's confession (said) | Bram stops hiding it |
+| **Where do the gilded go?** | *Down the Gate*, sold to *the Maw* by weight. | the cart on the first Guild night (seen); Hollis's carts down the palace road, and the door he followed one to (said); Tobias's ledger page, "H. Haddon, fourteen stone" (found); the Lantern Market's buyers (said) | the Wardens believe you (Wardens +1) |
+| **Whose is the Guild?** | *The Maw's*; and loose gold is *his eye*. | demon gold in a chest from the Guild's strongroom (found); Sister Agathe (said); Mara (said) | the Lockless count you less of a mark (Lockless +1) |
+| **What is the Guild collecting?** | The King pledged *the Crown Chest*; if the Crown defaults, the Locking opens for *the Maw*. | Vane's "even kings pledge" (said); the Chest Roll, by Mara's letter or Master Quire (found); Old Aldo (said); Mara (said) | the Crown counts you a friend (Crown +1) |
+| **How can the Locking hold?** | Open the Crown Chest with *the Aldric Key* before the note falls due, or prove the Guild's pledges were *made to the Maw in secret*. | Mara's word from the King (said); Old Aldo (said); Mara on the court (said); Master Quire's law; Tobias Fenn (said) | the season's end says you knew |
+| **Why does the spring come round again?** (from the second season) | When the Gate opens, the Locking *turns the year back*; only *the marked* remember. | Bram's dream after a lost season (said); Vane: "We've met before, I think" (said); a chest marked by your own hand at a Guild sale (found); Mara, once you've opened the Crown Chest (said) | the season's end says what an open Gate means |
+
+(0.33 tried a paper for the King's court as the payoff for whose the Guild is: the careful player worked it out every
+season once Mara had spoken, and the Guild went on trial in a third of runs instead of one in twenty-five. The case's
+payoffs are standing now, so the court's balance is 0.32's.)
 
 The wrong words are true things that fit a partial reading: "the Guild's" for "the Maw's" until you know whose the Guild
 is; "sold his mill" for "pledged himself" until the paper turns up. Three clues for each answer, through at least two
@@ -263,8 +267,14 @@ The tales read and write a few shared qualities, so a side story is always a pie
 ## In 0.33
 
 Built in this version: the laws and the truth in the world doc; the season rewritten around the Gilding, the Crown's
-note and Bram's pledge (story mornings, Vane's nights, the counter beats as a tale, the endings); the visible clock
-(Bram's gilding, the statue outside the stall); the Case page with its questions, clues and checks, remembered across
-seasons; the turning year, lightly; breathing chests and mimics; and the Lantern Market. Next: more of the tales writing
-claims (the Crossed Keys, the Deep Door, the partners' tales), Vane's remembered lines across more facts, and art for the
-gilded and the mimic.
+note and Bram's pledge (story mornings, Vane's parting line on each Guild night and his offer for Bram's pledge on the
+sixth, the counter beats as a tale, `TaleBook.Gilding.cs`, and the endings); the visible clock (Bram's gilding by the
+calendar, a glove over the hand until he's told you, `Gilt.cs`; Haddon's statue at the crossroads until the cart, three
+in Thornwick's square, and whoever the Guild collects); the Widow's Debt's claim on Jory; the Case page with its
+questions, clues and checks, and a note under the top bar for each clue, remembered across seasons (`Case.cs`); the
+turning year, lightly (Bram's dream, Vane's memory, your own chest, Mara's clause; the profile keeps how the last season
+ended); breathing chests and mimics (`Mimics.cs`: one chest in 45 from Thornwick; the menagerie pays a working purse,
+two and a half for one raised two Guild nights; a grown one wakes one of the gilded); and the Lantern Market on the
+third night of each week from Thornwick (`LanternMarket.cs`: a secret for the case, the Maw's buyers for gold things at
+half as much again, each an eye for him, the menagerie). Next: more of the tales writing claims (the Crossed Keys, the
+Deep Door, the partners' tales), Vane's remembered lines across more facts, and art for the gilded and the mimic.

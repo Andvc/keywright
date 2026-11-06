@@ -148,6 +148,11 @@ public partial class Sfx : Node
         Add("sting", new Synth(0.6f).Tone(0, 0.6f, 784, 0.32f, 6).Tone(0.08f, 0.55f, 1175, 0.32f, 6).Tone(0, 0.6f, 1568, 0.1f, 9));
         Add("burst", new Synth(1.3f).Noise(0, 1.2f, 0.9f, 4.5f, 0.25f).Tone(0, 1.1f, 70, 0.9f, 3.5f, freqEnd: 38).Noise(0, 0.15f, 0.5f, 30, 1f));
         Add("whoosh", new Synth(0.6f).Noise(0, 0.6f, 0.6f, 6, 0.18f, attack: 0.16f));
+        // A mimic breathing in a still chest (0.33): in, and a longer, lower out, with a little wet click.
+        Add("breath", new Synth(2.1f).Noise(0, 0.8f, 0.45f, 1.2f, 0.05f, attack: 0.55f)
+            .Noise(0.9f, 1.15f, 0.55f, 2.4f, 0.035f, attack: 0.12f).Tone(0.88f, 0.05f, 210, 0.12f, 40));
+        Add("growl", new Synth(1.1f).Tone(0, 1.0f, 92, 0.5f, 2.2f, freqEnd: 70, attack: 0.05f).Noise(0, 0.9f, 0.5f, 3, 0.12f, attack: 0.04f)
+            .Tone(0.05f, 0.9f, 139, 0.22f, 2.6f, freqEnd: 101, attack: 0.05f));
         Add("fanfare", new Synth(1.6f)
             .Tone(0, 1.4f, 523, 0.25f, 2.6f).Tone(0.08f, 1.4f, 659, 0.25f, 2.6f)
             .Tone(0.16f, 1.4f, 784, 0.25f, 2.6f).Tone(0.24f, 1.3f, 1047, 0.3f, 2.4f).Tone(0.24f, 1.3f, 2093, 0.08f, 3f));

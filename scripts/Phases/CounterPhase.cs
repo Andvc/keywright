@@ -372,6 +372,7 @@ public partial class CounterPhase : Phase
                 !_busy)
                 Angered(_visit.Anger(_rng));
         }
+        Breathe((float)delta);
         CheckLesson();
         UpdateStrength();
         if (_rot != null)
@@ -882,6 +883,34 @@ public partial class CounterPhase : Phase
         }
     }
 
+    /// <summary>Until the next breath a mimic takes (0.33): it waits for the chest to sit still, and holds its breath a while when shaken.</summary>
+    float _breathIn = 2.2f;
+
+    /// <summary>
+    /// A breathing chest (<see cref="Mimics"/>): while it sits still, every few seconds, a breath you can hear (and see:
+    /// the word, and the lid lifting a hair). The first is noted on the slip, and Bram has a word about it.
+    /// </summary>
+    void Breathe(float dt)
+    {
+        if (!_visit.Chest.Breathing || Concluded) return;
+        if (_shake.Busy)
+        {
+            _breathIn = 3.2f;
+            return;
+        }
+        _breathIn -= dt;
+        if (_breathIn > 0) return;
+        _breathIn = 3.4f;
+        Sfx.Play("breath", 1f, -3);
+        _shake.Say(Loc.T("...breathing..."), Palette.Muted, 16);
+        _shake.View.Breathe();
+        if (_hearing.Breathing) return;
+        _hearing.HeardBreath();
+        Note(Loc.T("Something in that chest is breathing, and it stops when you shake it."));
+        Teach("breathing");
+        Game.Moment("01_breathing", 0.3);
+    }
+
     void OnHeard(Item item, Shake level)
     {
         bool glowed = _lamp && item.Magic;
@@ -1085,6 +1114,14 @@ public partial class CounterPhase : Phase
         };
         Game.Moment(focusDebt ? "02_debt" : "02_notebook", 0.4);
         Refresh();
+    }
+
+    /// <summary>A new clue's note was clicked: the notebook at the case.</summary>
+    public override bool ShowCase()
+    {
+        if (Busy) return false;
+        OpenNotebook(NotebookView.CasePage);
+        return true;
     }
 
     /// <summary>The top bar's due was clicked: the notebook at the Guild's debt.</summary>

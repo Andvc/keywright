@@ -112,6 +112,15 @@ public partial class ChestView : Node2D
         _bodyLock.Texture = maker == null || _open ? null : Load("body", $"lock_{maker}");
     }
 
+    /// <summary>A mimic's breath (0.33): the lid lifts a hair and settles, as something inside breathes in and out.</summary>
+    public void Breathe()
+    {
+        if (_lidDetached) return;
+        var tween = CreateTween();
+        tween.TweenMethod(Callable.From<float>(g => LidGap = g), 0f, 5f, 0.8f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+        tween.TweenMethod(Callable.From<float>(g => LidGap = g), 5f, 0f, 1.1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+    }
+
     /// <summary>A quick side-to-side rattle, e.g. when shaken.</summary>
     public void Wobble(float amount) => _wobble = Mathf.Max(_wobble, amount);
 
