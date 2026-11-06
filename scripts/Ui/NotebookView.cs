@@ -592,6 +592,9 @@ public partial class NotebookView : Node2D
     /// <summary>The question open on the Case page, and the words picked for each one's blanks while the notebook's open.</summary>
     static string _question;
     static readonly System.Collections.Generic.Dictionary<string, string[]> Picks = new();
+
+    /// <summary>The run the picks were made in: a new one starts with none (a word from last season may not be given yet).</summary>
+    static GameState _picksFor;
     string _verdict;
 
     /// <summary>
@@ -601,6 +604,11 @@ public partial class NotebookView : Node2D
     /// </summary>
     void BuildCase()
     {
+        if (_picksFor != _state)
+        {
+            Picks.Clear();
+            _picksFor = _state;
+        }
         var open = _state.OpenQuestions.ToList();
         float top = PanelY + 60;
         if (open.Count == 0)

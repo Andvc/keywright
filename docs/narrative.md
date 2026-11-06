@@ -273,8 +273,8 @@ calendar, a glove over the hand until he's told you, `Gilt.cs`; Haddon's statue 
 in Thornwick's square, and whoever the Guild collects); the Widow's Debt's claim on Jory; the Case page with its
 questions, clues and checks, and a note under the top bar for each clue, remembered across seasons (`Case.cs`); the
 turning year, lightly (Bram's dream, Vane's memory, your own chest, Mara's clause; the profile keeps how the last season
-ended); breathing chests and mimics (`Mimics.cs`: one chest in 45 from Thornwick; the menagerie pays a working purse,
-two and a half for one raised two Guild nights; a grown one wakes one of the gilded); and the Lantern Market on the
+ended); breathing chests and mimics (`Mimics.cs`: one chest in 90 from Thornwick; the menagerie pays 0.6 of a working
+purse, 1.6 for one raised two Guild nights; a grown one wakes one of the gilded); and the Lantern Market on the
 third night of each week from Thornwick (`LanternMarket.cs`: a secret for the case, the Maw's buyers for gold things at
 half as much again, each an eye for him, the menagerie). Next: more of the tales writing claims (the Crossed Keys, the
 Deep Door, the partners' tales), Vane's remembered lines across more facts, and art for the gilded and the mimic.

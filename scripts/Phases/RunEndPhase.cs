@@ -48,7 +48,8 @@ public partial class RunEndPhase : Phase
             : Loc.T($"{paid}. Bram's hand is his own again, but nobody had the Key when the Crown's note fell due.")
             : State.DebtCleared ? Loc.T($"Bram's debt was paid, but the Guild's interest caught up with you in week {State.Week}.")
             : Loc.T($"The Guild took the shop in week {State.Week}.");
-        Add(UiKit.MakeLabel(sub, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 168, 1280, 30));
+        // One line under the title: smaller when the words (a paid-early debt and what came of the Key) won't fit at 24.
+        Add(UiKit.MakeLabel(sub, UiKit.TextWidth(sub, 24) <= 1240 ? 24 : 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 168, 1280, 30));
 
         var panel = Add(UiKit.MakePanel(color.Darkened(0.3f)).Place(90, 220, 540, 300));
         var rows = new List<(string, string)>

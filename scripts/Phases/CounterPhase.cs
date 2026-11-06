@@ -884,7 +884,7 @@ public partial class CounterPhase : Phase
     }
 
     /// <summary>Until the next breath a mimic takes (0.33): it waits for the chest to sit still, and holds its breath a while when shaken.</summary>
-    float _breathIn = 2.2f;
+    float _breathIn = 1.0f;
 
     /// <summary>
     /// A breathing chest (<see cref="Mimics"/>): while it sits still, every few seconds, a breath you can hear (and see:

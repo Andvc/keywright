@@ -203,15 +203,20 @@ public partial class PeddlerPhase : Phase
         Build();
     }
 
-    /// <summary>A stall: its keeper's face over a panel, and what they say.</summary>
-    static Panel Stall(float x, string title, string look, string words, bool gilded = false)
+    /// <summary>
+    /// A stall: its keeper's face over a panel, and what they say, as tall as its words (a longer language takes more
+    /// lines). <paramref name="below"/> is where the stall's buttons can start.
+    /// </summary>
+    static Panel Stall(float x, string title, string look, string words, out float below, bool gilded = false)
     {
         var panel = UiKit.MakePanel(Palette.Gold.Darkened(0.45f)).Place(x, 150, 380, 480);
         var face = UiKit.MakeSprite($"res://assets/sprites/sellers/{look}.png", new Vector2(190, 62), 1, outlined: true);
         if (gilded) Gilt.Statue(face);
         panel.AddChild(face);
         panel.AddChild(UiKit.MakeLabel(title, 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 108, 380, 30));
-        panel.AddChild(UiKit.MakeLabel(words, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(20, 142, 340, 110));
+        float h = UiKit.TextHeight(words, 340);
+        panel.AddChild(UiKit.MakeLabel(words, 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(20, 142, 340, h));
+        below = 142 + h + 12;
         return panel;
     }
 
@@ -222,7 +227,7 @@ public partial class PeddlerPhase : Phase
         var question = clue == null ? null : Case.Question(clue.Question);
         var panel = Stall(40, Loc.T("THE WHISPERER"), "stranger", question == null
             ? Loc.T("\"Nothing tonight you don't know already, Keywright. Come back when you've a new question.\"")
-            : Loc.T($"\"Something someone saw, said or found, about a question of yours: {question.Ask}\""));
+            : Loc.T($"\"Something someone saw, said or found, about a question of yours: {question.Ask}\""), out float below);
         if (clue == null) return panel;
         var buy = UiKit.MakeButton(Loc.T($"Buy the secret ({State.SecretPrice}g)"), Palette.Magic, 16, () =>
         {
@@ -230,7 +235,7 @@ public partial class PeddlerPhase : Phase
             Sfx.PlayGroup("pay");
             Game.Hud.SetGold(State.Gold);
             OpenMarket();
-        }).Place(40, 400, 300, 50);
+        }).Place(40, Mathf.Max(below, 400), 300, 50);
         buy.Disabled = State.Gold < State.SecretPrice;
         panel.AddChild(buy);
         return panel;
@@ -241,10 +246,10 @@ public partial class PeddlerPhase : Phase
     {
         var panel = Stall(450, Loc.T("THE MAW'S BUYERS"), "silas",
             Loc.T($"Gilded men in good coats. \"Anything gold, for the master: half as much again as anyone pays.\" Every coin of it is an eye for him."),
-            gilded: true);
+            out float below, gilded: true);
         var gold = State.GoldForTheGate.Take(3).ToList();
         if (gold.Count == 0)
-            panel.AddChild(UiKit.MakeLabel(Loc.T("Nothing gold on your shelf."), 16, Palette.Muted, HorizontalAlignment.Center).Place(0, 410, 380, 20));
+            panel.AddChild(UiKit.MakeLabel(Loc.T("Nothing gold on your shelf."), 16, Palette.Muted, HorizontalAlignment.Center).Place(0, Mathf.Max(below, 410), 380, 20));
         for (int i = 0; i < gold.Count; i++)
         {
             var item = gold[i];
@@ -254,7 +259,7 @@ public partial class PeddlerPhase : Phase
                 Sfx.PlayGroup("pay");
                 Game.Hud.SetGold(State.Gold);
                 OpenMarket();
-            }).Place(40, 270 + i * 64, 300, 56);
+            }).Place(40, Mathf.Max(below, 270) + i * 64, 300, 56);
             sell.Alignment = HorizontalAlignment.Right;
             sell.TooltipText = Loc.T($"Sell the {item.Name} down the Gate");
             sell.AddChild(UiKit.MakeItemIcon(item, new Vector2(36, 28), 48));
@@ -271,18 +276,19 @@ public partial class PeddlerPhase : Phase
             var panel = Stall(860, Loc.T("THE MENAGERIE"), "wren", State.MimicGrown
                 ? Loc.Plural(fed, $"\"Your mimic's grown! Fed on {fed} Guild night: we'd pay well for that.\"", $"\"Your mimic's grown! Fed on {fed} Guild nights: we'd pay well for that.\"")
                 : Loc.Plural(fed, $"\"Your mimic's been fed on {fed} Guild night. Raise it a while longer and it's worth more.\"",
-                    $"\"Your mimic's been fed on {fed} Guild nights. Raise it a while longer and it's worth more.\""));
+                    $"\"Your mimic's been fed on {fed} Guild nights. Raise it a while longer and it's worth more.\""), out float below);
             panel.AddChild(UiKit.MakeButton(Loc.T($"Sell your mimic (+{State.KeptMimicPrice}g)"), Palette.Gold, 16, () =>
             {
                 if (State.SellKeptMimic() <= 0) return;
                 Sfx.PlayGroup("pay");
                 Game.Hud.SetGold(State.Gold);
                 OpenMarket();
-            }).Place(40, 400, 300, 50));
+            }).Place(40, Mathf.Max(below, 400), 300, 50));
             return panel;
         }
         return Stall(860, Loc.T("THE MENAGERIE"), "wren",
-            Loc.T($"The Arcanum's keepers. \"Mimics, Keywright: {State.FreshMimicPrice}g for one fresh out of its chest, more for one you've raised. Listen for a chest that breathes.\""));
+            Loc.T($"The Arcanum's keepers. \"Mimics, Keywright: {State.FreshMimicPrice}g for one fresh out of its chest, more for one you've raised. Listen for a chest that breathes.\""),
+            out _);
     }
 
     /// <summary>Buys one of Nim's own upgrades (or a curio case) off him, tonight.</summary>

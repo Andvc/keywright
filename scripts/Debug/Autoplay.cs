@@ -322,6 +322,12 @@ public partial class Autoplay : Node
         }
         // Every strength, but only gently and hard for an impatient seller, and never hard for one who'd mind.
         bool hurried = State.Impatient(visit.Seller) && !State.HasCurio("watch");
+        // From Thornwick, a careful player listens a moment before laying a hand on it: a mimic breathes while it sits still.
+        if (State.Tier >= Mimics.FromTier && !hurried && visit.Lesson == null)
+        {
+            await Wait(1.6);
+            if (!IsInstanceValid(counter) || counter.Concluded) return;
+        }
         // A rotten chest: one short shake, well inside what it stands.
         double seconds = State.ShakeLimit(visit.Seller) > 0 ? Math.Min(ShakeSeconds, State.ShakeLimit(visit.Seller) / Strategy.Levels(visit, State).Length - 0.6) : hurried ? 1.2 : ShakeSeconds;
         // The Bookkeeping Engine has marked the slip already: nothing to shake (unless a lesson asks for it).

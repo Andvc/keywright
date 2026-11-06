@@ -14,15 +14,18 @@ namespace Keywright.Core;
 /// </summary>
 public static class Mimics
 {
-    /// <summary>From Thornwick on (the old wards fray away from the crossroads), one chest a seller brings in this many breathes.</summary>
-    public static int OneIn { get; set; } = 45;
+    /// <summary>
+    /// From Thornwick on (the old wards fray away from the crossroads), one chest a seller brings in this many breathes:
+    /// two or three a season. (One in 45, at a working purse each, was six a season and a ninth more clears.)
+    /// </summary>
+    public static int OneIn { get; set; } = 90;
     public const int FromTier = 2;
 
-    /// <summary>What the menagerie pays for one, in working purses (two typical chests here); more for one you've raised.</summary>
-    public const float PursesFor = 1f, PursesGrown = 2.5f;
+    /// <summary>What the menagerie pays for one, in working purses (a purse is two typical chests here); more for one you've raised.</summary>
+    public const float PursesFor = 0.6f, PursesGrown = 1.6f;
 
     /// <summary>What a kept mimic eats on each Guild night, in purses; and the Guild nights fed before it's grown.</summary>
-    public const float FeedPurses = 0.2f;
+    public const float FeedPurses = 0.15f;
     public const int GrowsAfter = 2;
 
     /// <summary>The flag for the Thornwick statue a grown mimic woke (one of the three).</summary>

@@ -430,12 +430,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `Claims` (a tale's person owing the Guild, collected on that week's Guild night unless redeemed: Jory, from the
   Widow's Debt) and `Gilded` are saved; `GuildCollects` runs as the Guild's night starts (`StartNight`).
 - Mimics and the Lantern Market (0.33). A mimic (`Mimics.cs`) is a chest that ate what was in it: from Thornwick, one
-  ordinary chest in 45 (`Mimics.OneIn`, its own dice after the seller's priced it, `Breathe`), empty but for the mimic,
+  ordinary chest in 90 (`Mimics.OneIn`, its own dice after the seller's priced it, `Breathe`; about 2.4 a careful run;
+  one in 45 at a whole purse each was six a run and a ninth more clears), empty but for the mimic,
   priced for what the seller notices (nothing, unless they price by colour). It breathes while it sits still (the
   counter's `Breathe`: a sound, a word and the lid lifting; held when shaken), the only sound a still chest makes;
   `Hearing.HeardBreath`, and the careful player's worth adds what the menagerie pays. Opened, it's sold to the Arcanum's
-  menagerie (a working purse) or kept (one at a time): it eats a fifth of a purse each Guild night (or leaves), keeps the
-  Lockless from robbing you, and after two meals it's grown, wakes one of the gilded, and sells for two and a half purses.
+  menagerie (0.6 of a working purse) or kept (one at a time): it eats 0.15 of a purse each Guild night (or leaves), keeps
+  the Lockless from robbing you, and after two meals it's grown, wakes one of the gilded, and sells for 1.6 purses.
   `--mimics=N` makes one chest in N breathe. The Lantern Market (`LanternMarket.cs`) is at Nim's table on the third night
   of each week from Thornwick (`MarketTonight`): the whisperer's secret (one a night, a clue that gives a word a
   question still needs, `Whisper`), the Maw's buyers (gold things off the shelf at half as much again, each an eye for

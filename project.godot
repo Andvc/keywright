@@ -6,7 +6,7 @@ config_version=5
 [application]
 
 config/name="Keywright"
-config/version="0.32"
+config/version="0.33"
 config/description="Shake sealed chests, read the clues, strike a deal with each customer, and crack them open."
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")

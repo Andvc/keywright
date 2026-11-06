@@ -83,6 +83,17 @@ public static class SaveTest
         state.GiveKeepsake(Core.Keepsakes.Lamp);
         state.GiveKeepsake(Core.Keepsakes.Hawthorn);
         state.TakeKeepsake(Core.Keepsakes.Hawthorn);
+        // 0.33: the case (clues found, a question worked out), a claim on Jory and someone the Guild collected, a mimic kept.
+        state.Find("statue");
+        state.Find("nell");
+        state.Find("mara.laws");
+        var haddon = Case.Question(Case.Haddon);
+        state.Check(haddon, haddon.Answer);
+        state.Claim(Core.TaleBook.Jory, state.Week + 1);
+        state.Gilded[Core.TaleBook.Ada] = state.Tier;
+        // (The careful player may have kept one already on the way here.)
+        state.KeepMimic();
+        int? mimic = state.Mimic;
         string json = state.Save().ToJson();
         var data = SaveData.FromJson(json);
         Check(data != null, $"a run in week {state.Week} with {state.Gold}g, {state.OwnedCurios.Count()} curios saves");
@@ -92,6 +103,9 @@ public static class SaveTest
               loaded.While(Core.TaleBook.Picket), "a favour owed, a paper, a loan and a picket at the door come back");
         Check(loaded.Keeps(Core.Keepsakes.Lamp) && !loaded.Keeps(Core.Keepsakes.Hawthorn) && loaded.KeepsakesSeen.Contains(Core.Keepsakes.Hawthorn),
             "a keepsake held comes back, one taken back stays gone, and both are remembered");
+        Check(loaded.Clues.Contains("nell") && loaded.Solved.Contains(Case.Haddon) && loaded.Truths.Contains(Case.Haddon) &&
+              loaded.Claims.ContainsKey(Core.TaleBook.Jory) && loaded.IsGilded(Core.TaleBook.Ada) && mimic != null && loaded.Mimic == mimic,
+            "the case's clues and a question worked out, the Guild's claim, one it collected and a kept mimic come back");
         string again = loaded.Save().ToJson();
         bool same = Without(json, "SavedAt") == Without(again, "SavedAt");
         Check(same, "it loads and saves again the same");
