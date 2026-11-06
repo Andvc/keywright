@@ -5245,7 +5245,7 @@ msgstr "Quelle déception. Je reviendrai peut-être à la charge."
 msgid "Buy it ({0}g)"
 msgstr "L'acheter ({0} po)"
 
-#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:448
+#: scripts/Core/Offers.cs:83 scripts/Phases/DayEndPhase.cs:464 scripts/Phases/PeddlerPhase.cs:453
 msgid "Not now"
 msgstr "Pas maintenant"
 
@@ -15570,7 +15570,7 @@ msgstr "LE COFFRE DE LA COURONNE"
 msgid "BRAM'S STALL"
 msgstr "L'ÉTAL DE BRAM"
 
-#: scripts/Main.cs:834 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:830
+#: scripts/Main.cs:834 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
 msgid "WEEK {0}"
 msgstr "SEMAINE {0}"
 
@@ -15766,7 +15766,7 @@ msgstr "{0} retourne au Verrouillage."
 #: scripts/Phases/DayEndPhase.cs:384 scripts/Phases/DuesPhase.cs:255 scripts/Phases/DuesPhase.cs:262
 #: scripts/Phases/DuesPhase.cs:270 scripts/Phases/DuesPhase.cs:317 scripts/Phases/DuesPhase.cs:331
 #: scripts/Phases/DuesPhase.cs:341 scripts/Phases/OpeningPhase.cs:386 scripts/Phases/OpeningPhase.cs:1039
-#: scripts/Phases/PeddlerPhase.cs:256 scripts/Phases/PeddlerPhase.cs:481 scripts/Phases/TalkPhase.cs:191
+#: scripts/Phases/PeddlerPhase.cs:256 scripts/Phases/PeddlerPhase.cs:486 scripts/Phases/TalkPhase.cs:191
 #: scripts/Phases/TalkPhase.cs:198
 msgid "+{0}g"
 msgstr "+{0} po"
@@ -15775,7 +15775,7 @@ msgstr "+{0} po"
 msgid "Waiting"
 msgstr "En attente"
 
-#: scripts/Phases/CounterPhase.cs:531 scripts/Phases/DayEndPhase.cs:83 scripts/Phases/RunEndPhase.cs:63
+#: scripts/Phases/CounterPhase.cs:531 scripts/Phases/DayEndPhase.cs:83 scripts/Phases/RunEndPhase.cs:64
 #: scripts/Ui/CollectionView.cs:63
 msgid "Curios"
 msgstr "Curiosités"
@@ -15907,7 +15907,7 @@ msgstr "{0} demande"
 msgid "Offer {0}g"
 msgstr "Offrir {0}"
 
-#: scripts/Phases/CounterPhase.cs:789 scripts/Phases/PeddlerPhase.cs:422
+#: scripts/Phases/CounterPhase.cs:789 scripts/Phases/PeddlerPhase.cs:427
 msgid "Buy {0}g"
 msgstr "Payer {0}"
 
@@ -16410,11 +16410,11 @@ msgstr "Acheter : {0}. Il vous restera {1} po."
 msgid "{0}g more to go"
 msgstr "Il vous manque {0} po"
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:444
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:449
 msgid "ARE YOU SURE?"
 msgstr "VRAIMENT ?"
 
-#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:444
+#: scripts/Phases/DayEndPhase.cs:460 scripts/Phases/PeddlerPhase.cs:449
 msgid "Buy anyway"
 msgstr "Oui, acheter"
 
@@ -17196,27 +17196,31 @@ msgstr "Va avec : {0}"
 msgid "With your {0}"
 msgstr "Avec : {0}"
 
-#: scripts/Phases/PeddlerPhase.cs:414
+#: scripts/Phases/PeddlerPhase.cs:416
 msgid "New at {0}"
 msgstr "Nouveau ({0})"
 
 #: scripts/Phases/PeddlerPhase.cs:417
+msgid "New here"
+msgstr "Nouveau ici"
+
+#: scripts/Phases/PeddlerPhase.cs:422
 msgid "Yours"
 msgstr "À vous"
 
-#: scripts/Phases/PeddlerPhase.cs:422
+#: scripts/Phases/PeddlerPhase.cs:427
 msgid "Take it, free"
 msgstr "Prendre (gratuit)"
 
-#: scripts/Phases/PeddlerPhase.cs:425
+#: scripts/Phases/PeddlerPhase.cs:430
 msgid "{0}g for a {1} curio, and {2} of your purse tonight."
 msgstr "{0} po pour sa rareté ({1}), plus {2} de votre bourse ce soir."
 
-#: scripts/Phases/PeddlerPhase.cs:426
+#: scripts/Phases/PeddlerPhase.cs:431
 msgid "No room: sell a curio back to Nim first. {0}"
 msgstr "Pas de place : revendez d'abord une curiosité à Nim. {0}"
 
-#: scripts/Phases/PeddlerPhase.cs:427
+#: scripts/Phases/PeddlerPhase.cs:432
 msgid "{0} {1}"
 msgstr "{0} {1}"
 
@@ -17280,133 +17284,133 @@ msgstr ""
 msgid "The Guild took the shop in week {0}."
 msgstr "La Guilde a saisi la boutique en semaine {0}."
 
-#: scripts/Phases/RunEndPhase.cs:56
+#: scripts/Phases/RunEndPhase.cs:57
 msgid "Debt cleared"
 msgstr "Dette remboursée"
 
-#: scripts/Phases/RunEndPhase.cs:56
+#: scripts/Phases/RunEndPhase.cs:57
 msgid "day {0}, week {1}"
 msgstr "jour {0}, semaine {1}"
 
-#: scripts/Phases/RunEndPhase.cs:56
+#: scripts/Phases/RunEndPhase.cs:57
 msgid "no"
 msgstr "non"
 
-#: scripts/Phases/RunEndPhase.cs:57
+#: scripts/Phases/RunEndPhase.cs:58
 msgid "Days of trading"
 msgstr "Jours de commerce"
 
-#: scripts/Phases/RunEndPhase.cs:58
+#: scripts/Phases/RunEndPhase.cs:59
 msgid "The shop"
 msgstr "La boutique"
 
-#: scripts/Phases/RunEndPhase.cs:59
+#: scripts/Phases/RunEndPhase.cs:60
 msgid "The chests brought in"
 msgstr "Les coffres ont rapporté"
 
-#: scripts/Phases/RunEndPhase.cs:60
+#: scripts/Phases/RunEndPhase.cs:61
 msgid "Gold in hand"
 msgstr "Or en poche"
 
-#: scripts/Phases/RunEndPhase.cs:61 scripts/Phases/TitlePhase.cs:127 scripts/Ui/PauseMenu.cs:31
+#: scripts/Phases/RunEndPhase.cs:62 scripts/Phases/TitlePhase.cs:127 scripts/Ui/PauseMenu.cs:31
 msgid "Collection"
 msgstr "Collection"
 
-#: scripts/Phases/RunEndPhase.cs:61 scripts/Phases/RunEndPhase.cs:62 scripts/Phases/RunEndPhase.cs:65
+#: scripts/Phases/RunEndPhase.cs:62 scripts/Phases/RunEndPhase.cs:63 scripts/Phases/RunEndPhase.cs:66
 msgid "{0} of {1}"
 msgstr "{0} sur {1}"
 
-#: scripts/Phases/RunEndPhase.cs:62
+#: scripts/Phases/RunEndPhase.cs:63
 msgid "Key shards"
 msgstr "Éclats de la Clé"
 
-#: scripts/Phases/RunEndPhase.cs:62
+#: scripts/Phases/RunEndPhase.cs:63
 msgid "given to the Guild"
 msgstr "donnés à la Guilde"
 
-#: scripts/Phases/RunEndPhase.cs:65
+#: scripts/Phases/RunEndPhase.cs:66
 msgid "Tales begun"
 msgstr "Histoires commencées"
 
-#: scripts/Phases/RunEndPhase.cs:66
+#: scripts/Phases/RunEndPhase.cs:67
 msgid "Friends"
 msgstr "Amis"
 
-#: scripts/Phases/RunEndPhase.cs:66
+#: scripts/Phases/RunEndPhase.cs:67
 msgid "none"
 msgstr "aucun"
 
-#: scripts/Phases/RunEndPhase.cs:83
+#: scripts/Phases/RunEndPhase.cs:84
 msgid "Keep trading"
 msgstr "Poursuivre"
 
-#: scripts/Phases/RunEndPhase.cs:85
+#: scripts/Phases/RunEndPhase.cs:86
 msgid ""
 "Nobody's coming for anything until week {0}: then the Guild wants interest, half as much again each week."
 msgstr ""
 "Personne ne viendra rien réclamer avant la semaine {0} : ensuite, la Guilde voudra des intérêts, moitié plus chaque semaine."
 
-#: scripts/Phases/RunEndPhase.cs:86
+#: scripts/Phases/RunEndPhase.cs:87
 msgid ""
 "The Guild keeps coming, for half as much again each week. How long can you last?"
 msgstr ""
 "La Guilde revient toujours, pour moitié plus chaque semaine. Combien de temps tiendrez-vous ?"
 
-#: scripts/Phases/RunEndPhase.cs:87
+#: scripts/Phases/RunEndPhase.cs:88
 msgid "Retire"
 msgstr "Se retirer"
 
-#: scripts/Phases/RunEndPhase.cs:87
+#: scripts/Phases/RunEndPhase.cs:88
 msgid "Hang up your apron: back to the title."
 msgstr "Rendre son tablier : retour à l'écran titre."
 
-#: scripts/Phases/RunEndPhase.cs:93
+#: scripts/Phases/RunEndPhase.cs:94
 msgid "Back to the title"
 msgstr "Retour à l'écran titre"
 
-#: scripts/Phases/RunEndPhase.cs:106
+#: scripts/Phases/RunEndPhase.cs:107
 msgid "{0}'S SCORE{1}"
 msgstr "SCORE : {0}{1}"
 
-#: scripts/Phases/RunEndPhase.cs:106
+#: scripts/Phases/RunEndPhase.cs:107
 msgid ", LEVEL {0}"
 msgstr ", NIVEAU {0}"
 
-#: scripts/Phases/RunEndPhase.cs:116
+#: scripts/Phases/RunEndPhase.cs:117
 msgid "{0} x{1} = "
 msgstr "{0} x{1} = "
 
-#: scripts/Phases/RunEndPhase.cs:118
+#: scripts/Phases/RunEndPhase.cs:119
 msgid "Score: a new best!"
 msgstr "Nouveau record !"
 
-#: scripts/Phases/RunEndPhase.cs:118
+#: scripts/Phases/RunEndPhase.cs:119
 msgid "Score"
 msgstr "Score"
 
-#: scripts/Phases/RunEndPhase.cs:128
+#: scripts/Phases/RunEndPhase.cs:129
 msgid "{0} can mind the stall now!"
 msgstr "{0} peut désormais tenir l'étal !"
 
-#: scripts/Phases/RunEndPhase.cs:130
+#: scripts/Phases/RunEndPhase.cs:131
 msgid "Challenge level {0} is open for {1}."
 msgstr "Le niveau de défi {0} est ouvert pour {1}."
 
-#: scripts/Phases/RunEndPhase.cs:134
+#: scripts/Phases/RunEndPhase.cs:135
 msgid "Nim has new curios for your next run: {0}."
 msgstr "Nim a de nouvelles curiosités pour votre prochaine partie : {0}."
 
-#: scripts/Phases/RunEndPhase.cs:135
+#: scripts/Phases/RunEndPhase.cs:136
 msgid "Nim has {0} new curios for your next run, the {1} among them."
 msgstr ""
 "Nim a {0} nouvelles curiosités pour votre prochaine partie, entre autres : {1}."
 
-#: scripts/Phases/RunEndPhase.cs:136
+#: scripts/Phases/RunEndPhase.cs:137
 msgid "Keep trading and every week you keep the Guild paid adds to the score."
 msgstr ""
 "Poursuivez, et chaque semaine où vous payez la Guilde fait grimper le score."
 
-#: scripts/Phases/RunEndPhase.cs:139
+#: scripts/Phases/RunEndPhase.cs:140
 msgid ""
 "All runs: {0} started, {1} debts cleared, {2} Crown Chests opened, best week {3}."
 msgstr ""
@@ -17846,23 +17850,23 @@ msgstr "Intérêts {0} po"
 msgid "Due {0}g"
 msgstr "Échéance {0} po"
 
-#: scripts/Ui/Hud.cs:135 scripts/Ui/NotebookView.cs:849
+#: scripts/Ui/Hud.cs:135 scripts/Ui/NotebookView.cs:857
 msgid "tonight!"
 msgstr "ce soir !"
 
-#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:850
+#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:858
 msgid "in week {0}"
 msgstr "en semaine {0}"
 
-#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:405 scripts/Ui/NotebookView.cs:851
+#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:405 scripts/Ui/NotebookView.cs:859
 msgid "next week"
 msgstr "sem. suivante"
 
-#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:852
+#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:860
 msgid "tomorrow night"
 msgstr "demain soir"
 
-#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:852
+#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:860
 msgid "in {0} days"
 msgstr "dans {0} jours"
 
@@ -18261,112 +18265,112 @@ msgstr "HISTOIRES"
 msgid "Nothing's begun yet. People will come with their troubles."
 msgstr "Rien n'a encore commencé. Les gens viendront avec leurs soucis."
 
-#: scripts/Ui/NotebookView.cs:608
+#: scripts/Ui/NotebookView.cs:616
 msgid ""
 "Nothing to puzzle over yet. When something doesn't add up, the question goes here, with every clue you find."
 msgstr ""
 "Rien à élucider pour l'instant. Quand quelque chose ne colle pas, la question s'inscrit ici, avec chaque indice que vous trouvez."
 
-#: scripts/Ui/NotebookView.cs:652
+#: scripts/Ui/NotebookView.cs:660
 msgid ""
 "You worked this out in an earlier season. It's written here in your own hand."
 msgstr ""
 "Vous avez élucidé cette question lors d'une saison passée. C'est écrit ici, de votre propre main."
 
-#: scripts/Ui/NotebookView.cs:661
+#: scripts/Ui/NotebookView.cs:669
 msgid "Blank {0}:"
 msgstr "Mot {0} :"
 
-#: scripts/Ui/NotebookView.cs:687
+#: scripts/Ui/NotebookView.cs:695
 msgid "Check"
 msgstr "Vérifier"
 
-#: scripts/Ui/NotebookView.cs:690
+#: scripts/Ui/NotebookView.cs:698
 msgid "Not quite: {0} of the blanks is wrong."
 msgid_plural "Not quite: {0} of the blanks are wrong."
 msgstr[0] "Pas tout à fait : {0} mot est faux."
 msgstr[1] "Pas tout à fait : {0} mots sont faux."
 
-#: scripts/Ui/NotebookView.cs:698
+#: scripts/Ui/NotebookView.cs:706
 msgid "Pick a word for each blank."
 msgstr "Choisissez un mot pour chaque blanc."
 
-#: scripts/Ui/NotebookView.cs:704
+#: scripts/Ui/NotebookView.cs:712
 msgid "CLUES"
 msgstr "INDICES"
 
-#: scripts/Ui/NotebookView.cs:735
+#: scripts/Ui/NotebookView.cs:743
 msgid ""
 "No stories yet. People will come to the counter with their troubles, and the notebook will follow each one: what it's about, what's happened, and what comes next."
 msgstr ""
 "Aucune histoire pour l'instant. Des gens viendront au comptoir avec leurs ennuis, et le carnet suivra chaque histoire : de quoi il s'agit, ce qui s'est passé, et ce qui vient ensuite."
 
-#: scripts/Ui/NotebookView.cs:784
+#: scripts/Ui/NotebookView.cs:792
 msgid "SO FAR"
 msgstr "JUSQU'ICI"
 
-#: scripts/Ui/NotebookView.cs:796
+#: scripts/Ui/NotebookView.cs:804
 msgid "WHAT COMES NEXT"
 msgstr "LA SUITE"
 
-#: scripts/Ui/NotebookView.cs:796
+#: scripts/Ui/NotebookView.cs:804
 msgid "NOTHING MORE IS EXPECTED FOR NOW"
 msgstr "RIEN D'AUTRE N'EST PRÉVU POUR L'INSTANT"
 
-#: scripts/Ui/NotebookView.cs:814
+#: scripts/Ui/NotebookView.cs:822
 msgid ""
 "Bram's debt is cleared{0}. The Guild still comes, for its interest: {1}g {2}."
 msgstr ""
 "La dette de Bram est remboursée{0}. La Guilde revient toujours, pour ses intérêts : {1} po {2}."
 
-#: scripts/Ui/NotebookView.cs:814
+#: scripts/Ui/NotebookView.cs:822
 msgid " (day {0})"
 msgstr " (jour {0})"
 
-#: scripts/Ui/NotebookView.cs:815
+#: scripts/Ui/NotebookView.cs:823
 msgid "{0}g of Bram's debt left. Next: {1}g {2}{3}.{4}"
 msgstr ""
 "Reste {0} po de la dette de Bram. Prochaine échéance : {1} po {2}{3}.{4}"
 
-#: scripts/Ui/NotebookView.cs:815
+#: scripts/Ui/NotebookView.cs:823
 msgid " ({0}g rolled over)"
 msgstr " ({0} po reportés)"
 
-#: scripts/Ui/NotebookView.cs:815
+#: scripts/Ui/NotebookView.cs:823
 msgid " You could pay it all off at the day's end."
 msgstr " Vous pourriez tout rembourser en fin de journée."
 
-#: scripts/Ui/NotebookView.cs:815
+#: scripts/Ui/NotebookView.cs:823
 msgid " Pay it all off early from a day's end."
 msgstr " Remboursable d'avance, le soir."
 
-#: scripts/Ui/NotebookView.cs:818
+#: scripts/Ui/NotebookView.cs:826
 msgid "THE GUILD'S DEBT"
 msgstr "DETTE DE BRAM"
 
-#: scripts/Ui/NotebookView.cs:830
+#: scripts/Ui/NotebookView.cs:838
 msgid "THEN"
 msgstr "PUIS"
 
-#: scripts/Ui/NotebookView.cs:831
+#: scripts/Ui/NotebookView.cs:839
 msgid "x1.5 a week"
 msgstr "x1,5/semaine"
 
-#: scripts/Ui/NotebookView.cs:831
+#: scripts/Ui/NotebookView.cs:839
 msgid "{0}g  paid"
 msgstr "{0} po  payé"
 
-#: scripts/Ui/NotebookView.cs:836
+#: scripts/Ui/NotebookView.cs:844
 msgid ""
 "Once Bram's debt is paid, the Guild keeps coming for interest: each week half as much again as the last."
 msgstr ""
 "Une fois la dette de Bram remboursée, la Guilde revient chercher ses intérêts : chaque semaine, une fois et demie la précédente."
 
-#: scripts/Ui/NotebookView.cs:837
+#: scripts/Ui/NotebookView.cs:845
 msgid "Week {0}: paid."
 msgstr "Semaine {0} : payée."
 
-#: scripts/Ui/NotebookView.cs:837
+#: scripts/Ui/NotebookView.cs:845
 msgid "Week {0}: Mister Vane comes for {1}g on the fifth evening."
 msgstr "Semaine {0} : Monsieur Vane vient chercher {1} po le cinquième soir."
 

@@ -411,7 +411,12 @@ public partial class PeddlerPhase : Phase
             card.AddChild(UiKit.MakeLabel(with, 16, Palette.Good, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
         }
         else if (!owned && curio.MinTier == State.Tier && curio.MinTier > 1 && curio.Tags.Any(Curios.Main.Contains))
-            card.AddChild(UiKit.MakeLabel(Loc.T($"New at {ShopTiers.Name(State.Tier)}"), 16, Palette.Magic, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
+        {
+            // The shop's name, when it fits on the card (French's "Le marché de Thornwick" doesn't).
+            string fresh = Loc.T($"New at {ShopTiers.Name(State.Tier)}");
+            if (UiKit.TextWidth(fresh) > CardW - 8) fresh = Loc.T("New here");
+            card.AddChild(UiKit.MakeLabel(fresh, 16, Palette.Magic, HorizontalAlignment.Center).Place(0, CardH - 82, CardW, 20));
+        }
         if (owned)
         {
             card.AddChild(UiKit.MakeLabel(Loc.T("Yours"), 24, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, CardH - 50, CardW, 30));
