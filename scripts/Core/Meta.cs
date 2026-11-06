@@ -123,10 +123,11 @@ public static class Challenges
 
     /// <summary>
     /// Each level puts every due up by this share of what it was at level 0 (settable, for the sim's tuning). A tenth
-    /// until 0.28, whose tales carried the top levels further (Kit cleared level 8 a fifth of the time): 0.15 keeps the
-    /// curve 0.27 had.
+    /// until 0.28, whose tales carried the top levels further (Kit cleared level 8 a fifth of the time): 0.15 kept the
+    /// curve 0.27 had. 0.33's case, mimics and Lantern Market made the careful player stronger and the top levels gentler
+    /// (120 careers: level 6 cleared by 32% by run 30, level 8 by 7%, against 0.32's 23% and 4%): 0.2 keeps 0.32's curve.
     /// </summary>
-    public static float DebtStep { get; set; } = 0.15f;
+    public static float DebtStep { get; set; } = 0.2f;
 
     /// <summary>What a level does to the Guild's dues.</summary>
     public static float DebtFactor(int level) => 1 + DebtStep * Math.Clamp(level, 0, Max);

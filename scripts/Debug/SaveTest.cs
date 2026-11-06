@@ -89,6 +89,9 @@ public static class SaveTest
         state.Find("mara.laws");
         var haddon = Case.Question(Case.Haddon);
         state.Check(haddon, haddon.Answer);
+        // ...and one worked out in an earlier season (one this season can't have reached by now): known, filled in, never
+        // paid off again.
+        state.KnownBefore.Add(Case.Hold);
         state.Claim(Core.TaleBook.Jory, state.Week + 1);
         state.Gilded[Core.TaleBook.Ada] = state.Tier;
         // (The careful player may have kept one already on the way here.)
@@ -106,6 +109,9 @@ public static class SaveTest
         Check(loaded.Clues.Contains("nell") && loaded.Solved.Contains(Case.Haddon) && loaded.Truths.Contains(Case.Haddon) &&
               loaded.Claims.ContainsKey(Core.TaleBook.Jory) && loaded.IsGilded(Core.TaleBook.Ada) && mimic != null && loaded.Mimic == mimic,
             "the case's clues and a question worked out, the Guild's claim, one it collected and a kept mimic come back");
+        var hold = Case.Question(Case.Hold);
+        Check(loaded.KnownBefore.Contains(Case.Hold) && loaded.Knows(hold) && loaded.Check(hold, hold.Answer) == 0 && !loaded.Solved.Contains(Case.Hold),
+            "a question worked out in an earlier season stays known, and isn't worked out (or paid off) again");
         string again = loaded.Save().ToJson();
         bool same = Without(json, "SavedAt") == Without(again, "SavedAt");
         Check(same, "it loads and saves again the same");

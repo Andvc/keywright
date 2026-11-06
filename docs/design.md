@@ -1107,9 +1107,11 @@ signet for Rosa, no visitors' book for Isolde).
 **Challenge levels** (`Challenges`, v24). Eight, opened one at a time per character by clearing the debt at the level
 below, each a quarter more to a run's score (x3 at level 8). A level does two things:
 
-- **The Guild's dues** go up by 15% of what they were at level 0 for each level (`Challenges.DebtStep`,
-  `GameState.DueFor`): level 8's are 2.2 times as much (a tenth a level until 0.28, whose tales carried the top levels
-  further: Kit cleared level 4 a third of the time and level 8 a fifth, against 0.27's 23% and 13%).
+- **The Guild's dues** go up by 20% of what they were at level 0 for each level (`Challenges.DebtStep`,
+  `GameState.DueFor`): level 8's are 2.6 times as much (a tenth a level until 0.28, whose tales carried the top levels
+  further: Kit cleared level 4 a third of the time and level 8 a fifth, against 0.27's 23% and 13%; 15% until 0.33,
+  whose case, mimics and Lantern Market did the same: 120 careers cleared level 6 by run 30 32% of the time and level 8
+  7%, against 0.32's 23% and 4%, and at 20% a level 21% and 3%, level 4 half by run 26 against 0.32's 25).
 - **Its terms**: the run is dealt as many **banes** as the level's number and as many **boons** (`TermDef`,
   `Challenges.Draw`), from twelve of each. The deal is nested (a bane, then a boon, from one shuffle of each pool), so a
   level's terms are the level below's and one pair more, and a boon never comes with the bane it contradicts (four
@@ -1146,8 +1148,9 @@ and the few that do move it (the first morning's gifts, Thornwick's welcome) are
 doesn't change how often the careful collector clears, but ends a run that would have leaned on Bram's word a week
 sooner.
 
-Whole levels as drawn (Kit, 200 runs each): 49 (level 0), 41, 33, 29, 24, 20, 20, 17 and 16% (v22's fixed terms: 48, 48,
-42, 32, 24, -, 11, -, 4%). A step of 7% a level flattened out after level 4 (42, 36, 33, 25, 24, 25, 21, 18%); the
+Whole levels as drawn (Kit, 200 runs each; 0.33, the dues 20% up a level, `--sim=levels`): 56 (level 1), 46, 42, 32, 24,
+19, 19 and 9%. (Before 0.33, at 15%: 49 (level 0), 41, 33, 29, 24, 20, 20, 17 and 16%; v22's fixed terms: 48, 48, 42,
+32, 24, -, 11, -, 4%.) A step of 7% a level flattened out after level 4 (42, 36, 33, 25, 24, 25, 21, 18%); the
 first draft, at 15% a level and with the two strongest banes and boons as they first were, made levels 6 and 8 a wall
 again (8 and 6%).
 
@@ -1530,6 +1533,12 @@ end of the debt's last week or when the shop is lost. The pace of learning is a 
 | Lost in week (median) | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
 | Challenge level | 0 | 0 | 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.6 | 0.9 | 1.0 | 1.4 | 2.5 | 3.3 | 4.0 |
 | Score | 161 | 162 | 192 | 187 | 219 | 227 | 250 | 283 | 278 | 341 | 328 | 368 | 428 | 443 |
+
+0.33 (the dues 20% higher a level; 120 careers, `--sim=careers --n=120`): the debt is first cleared around the sixth run
+(a quarter of players by run 4, half by 6, three quarters by 9); level 1 around run 11, 2 around 15, 4 around 26 (seven
+players in ten by run 30); level 6 is cleared by one player in five by run 30 and level 8 by 3%, as in 0.32 (measured
+the same way: level 4 around 25, level 6 23%, level 8 4%). All nine Heartsongs are known by about one player in four by
+run 30, and the Crown Chest sung whole by one in six.
 
 0.30 (seven weeks, the dues 15% higher a level): a run that's lost is lost in the sixth week, a shop or two behind
 (the fifth sends most first runs to Bram's word, the sixth is the wall for them, the seventh for everyone else); the

@@ -44,7 +44,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    levels, one to eight; `-- --sim=careers` just the careers (learners at the highest level open, run by run).
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.
    Bot flags: `--seed=N --quit-at-end --days=N --no-tutorial --start-tier=N --gold=N --start-week=N --character=KEY
-   --challenge=N --terms=a,b --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm` (`--terms` plays just those
+   --challenge=N --terms=a,b --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm --season=N --knew=all` (`--terms` plays just those
    challenge boons and banes, by key, whatever the level deals; `--curios` owns those from the
    start, to see a build's screens; `--gm` turns GM mode on, for its panel beside the pause menu; `--event` makes every
    day that event, to check
@@ -61,7 +61,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine;
    `--sight-unseen` buys every other plain chest it can afford without touching it (the opening's blind-buy screen);
    `--mimics=N` makes one chest in N breathe from Thornwick on (a mimic at the counter, the opening and the market);
-   `--tales=a,b` puts those tales in the season whatever it draws (with `--start-week`, to check a late tale's beats).
+   `--tales=a,b` puts those tales in the season whatever it draws (with `--start-week`, to check a late tale's beats);
+   `--season=N` plays a later season (the last one lost, so the year turned back) and `--knew=all` as if every question of
+   the case had been worked out before (filled in, Bram's glove off, and those who'd have told you notice you know).
    At a run's end the bot retires (or goes back to the title) as a player would, so what comes between runs plays too.
    `--title-test` drives the title's burst with real input (skipping, pressing a landed button) and exits 1 on a failure.
    `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the
@@ -263,9 +265,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   buying curios as they come clears 73%, a little over 0.32's 69% for the mimics a careful ear finds and the case's
   standing; 0.30's 59% was a little low, its careful player having haggled for chests gone cold in its hands; with no
   curios 58%; with no tales 38%; with no Heartsongs 72%; a learner at 0.75 36%; a first run about one in a hundred); careers first clear around
-  the sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 25), and each level
-  after costs a few points more (the dues 15% up a level, `Challenges.DebtStep`; one career in five has cleared level 6
-  by run 30, level 8 is a wall, 3%). The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
+  the sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 26), and each level
+  after costs a few points more (the dues 20% up a level, `Challenges.DebtStep`, 15% until 0.33's case, mimics and
+  market made the top levels gentler; one career in five has cleared level 6 by run 30, level 8 is a wall, 3%: 120
+  careers, `--sim=careers --n=120`). The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
   balance: `--sim=experience` should keep a first run under two and a half hours (0.33: 147 minutes; 0.32: 143 over 30 days; 0.30:
   146, the longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to Thornwick and the
   days after it still are, just over, for about half to three in four of first runs: 0.31 57%, 0.32 73%, 0.33 57% of the 30). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
@@ -417,9 +420,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   case** (`Case.cs`, the notebook's Case page): seven questions, each a sentence with blanks; a clue (seen, said, found,
   heard) opens its question and gives words for its blanks (`Words`: the obvious guesses and what clues gave); Check
   says how many are wrong, never which; worked out, a question pays off once (`Payoff`: standing, never a court paper,
-  which tipped the trial to a third of runs) and is a Truth in the profile, known (and paid off) the moment it comes up
-  in a later season; the career's question (why the spring comes round) opens from the second season and keeps its
-  clues across seasons. Every word a blank needs must reach the player by a beat that always comes (the Gilding tale,
+  which tipped the trial to a third of runs) and is a Truth in the profile: known in every later season
+  (`GameState.KnownBefore`, saved with the run; `Knows`): filled in on the page, Bram's glove off, its clues no longer
+  news, and whoever would have told you notices (`TaleBook.Knew`), but never paid off again, since every run starts the
+  same; the career's question (why the spring comes round) opens from the second season and keeps its clues across
+  seasons. Every word a blank needs must reach the player by a beat that always comes (the Gilding tale,
   `TaleBook.Gilding.cs`, and the mornings) with other tales' clues as extra roads; the careful player works a question
   out as soon as the clues allow (`Strategy.WorkOut`), and the sim reports how many a run works out. A new clue goes in
   `Case.Clues` with text that matches the line or find that gives it. The visible clock (`Gilding.cs`, `Gilt.cs`):

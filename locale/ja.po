@@ -911,11 +911,7 @@ msgstr "証言"
 msgid "seen"
 msgstr "目撃"
 
-#: scripts/Core/Case.cs:282
-msgid "You knew this from an earlier season: {0}"
-msgstr "前の季節から知っていた：{0}"
-
-#: scripts/Core/Case.cs:307
+#: scripts/Core/Case.cs:311
 msgid "Worked out: {0}"
 msgstr "解き明かした：{0}"
 
@@ -5133,19 +5129,19 @@ msgstr "{0}ゴールド"
 msgid "The Crown Chest."
 msgstr "王冠の宝箱。"
 
-#: scripts/Core/Save.cs:272
+#: scripts/Core/Save.cs:274
 msgid "Week {0}, day {1}, {2}, {3}g"
 msgstr "{0}週目{1}日目、{2}、{3}G"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid "Best: week {0}   Debts cleared: {1}{2}   Crown Chests opened: {3}{4}"
 msgstr "最高：{0}週目　借金完済：{1}回{2}　王冠の宝箱開封：{3}回{4}"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid " (fastest: day {0})"
 msgstr "（最速：{0}日目）"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid "   Heartsongs: {0}/{1}"
 msgstr "　心歌：{0}/{1}"
 
@@ -10050,165 +10046,180 @@ msgstr "チックがスクレーを門の向こうへ連れ戻した。お前は
 msgid "Skrae still listens at the Gate, and still hates every word of it."
 msgstr "スクレーは今も門のそばで耳をそばだて、聞こえる言葉のひとつひとつを今も憎んでる。"
 
-#: scripts/Core/TaleBook.Gilding.cs:22
+#: scripts/Core/TaleBook.Gilding.cs:32
 msgid "The Gilding"
 msgstr "金箔化"
 
-#: scripts/Core/TaleBook.Gilding.cs:23
+#: scripts/Core/TaleBook.Gilding.cs:33
 msgid ""
 "Old Haddon the wheelwright turned to gold at the crossroads, the night after the Guild foreclosed on him, and Bram has started wearing a glove. The notebook's Case page keeps the questions, and what you've found."
 msgstr ""
 "ギルドに差し押さえられた翌晩、車大工のハドンじいさんが辻で金に変わった。そしてブラムは手袋をはめはじめた。手帳の「事件簿」のページに、問いと、見つけた手がかりが記されていく。"
 
-#: scripts/Core/TaleBook.Gilding.cs:32
+#: scripts/Core/TaleBook.Gilding.cs:42
 msgid ""
 "My father's last chest. Haddon, the wheelwright. The Guild's men took the rest, but this wouldn't open for them. He signed their paper for a new lathe, against his own hand. He laughed at that. One coin, for luck."
 msgstr ""
 "父の最後の宝箱よ。車大工のハドンの。ギルドの連中が残りは持っていったけど、これは開かなかったの。父は新しい旋盤ほしさに、自分の手を質にして証文に署名した。冗談みたいだって笑ってたわ。硬貨一枚、縁起かつぎに。"
 
-#: scripts/Core/TaleBook.Gilding.cs:38
+#: scripts/Core/TaleBook.Gilding.cs:48
 msgid ""
 "Nell Haddon gave you her father's last chest. Under his tools was the Guild's paper, in his hand."
 msgstr "ネル・ハドンが、父親の最後の宝箱を譲ってくれた。道具の下に、ハドン自筆のギルドの証文があった。"
 
-#: scripts/Core/TaleBook.Gilding.cs:43
+#: scripts/Core/TaleBook.Gilding.cs:53
 msgid ""
 "Nell Haddon brought her father's last chest, and you let her take it home."
 msgstr "ネル・ハドンが父親の最後の宝箱を持ってきたが、そのまま持ち帰らせた。"
 
-#: scripts/Core/TaleBook.Gilding.cs:51
+#: scripts/Core/TaleBook.Gilding.cs:61
 msgid ""
 "That glove of Bram's. I've seen it before, love. Twenty years back, the winter he took a marked baby out of the Guild's care."
 msgstr "ブラムのあの手袋。前にも見たことがあるんだよ、あんた。20年前の冬、あの人が鍵紋のある赤ん坊をギルドの保護から連れ出したときにね。"
 
-#: scripts/Core/TaleBook.Gilding.cs:53
+#: scripts/Core/TaleBook.Gilding.cs:63
 msgid ""
 "The Mark-Finders had her in a basket, and then they didn't. Nobody ever knew what Bram paid them."
 msgstr "紋探しの連中は、あの子をかごに入れてたんだ。それが、いつの間にかいなくなってた。ブラムが連中に何を払ったのか、誰も知らないのさ。"
 
-#: scripts/Core/TaleBook.Gilding.cs:57
+#: scripts/Core/TaleBook.Gilding.cs:67
 msgid ""
 "Bettany says Bram took a marked baby out of the Guild's care, twenty years ago. Nobody knows what he paid."
 msgstr "ベタニーによれば、ブラムは20年前、鍵紋のある赤ん坊をギルドの保護から連れ出した。何を払ったのかは誰も知らない。"
 
-#: scripts/Core/TaleBook.Gilding.cs:65
+#: scripts/Core/TaleBook.Gilding.cs:75
 msgid ""
 "Sister Agathe of the Unopened, with a bowl for alms. \"What's pledged to the Guild is pledged to gold, Keywright, and gold has one master. Look at Thornwick's square.\""
 msgstr ""
 "開かずの会のアガーテ修道女が、施しの鉢を手にしている。「ギルドに質入れしたものは、金に質入れしたも同じです、鍵師どの。そして金の主はただ一人。ソーンウィックの広場をご覧なさい」"
 
-#: scripts/Core/TaleBook.Gilding.cs:67
+#: scripts/Core/TaleBook.Gilding.cs:77
 msgid ""
 "\"And every coin you let out of a chest is an eye for him. You open them. He sees.\""
 msgstr "「そして宝箱から出した硬貨は、一枚一枚がその主の目となるのです。あなたが開け、主が見る」"
 
-#: scripts/Core/TaleBook.Gilding.cs:70
+#: scripts/Core/TaleBook.Gilding.cs:80
 msgid "Put something in her bowl ({0}g)"
 msgstr "鉢に施しを入れる（{0}G）"
 
-#: scripts/Core/TaleBook.Gilding.cs:73
+#: scripts/Core/TaleBook.Gilding.cs:83
 msgid ""
 "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye. You gave to her bowl."
 msgstr "アガーテ修道女によれば、ギルドへの質入れは金への質入れであり、宝箱から出た硬貨はどれもアギトの目だという。あなたは鉢に施しを入れた。"
 
-#: scripts/Core/TaleBook.Gilding.cs:74
+#: scripts/Core/TaleBook.Gilding.cs:84
 msgid "\"Saint Ide sees it too. Keep your chests shut, if you can.\""
 msgstr "「聖イデもご覧になっています。できることなら、宝箱は閉じたままに」"
 
-#: scripts/Core/TaleBook.Gilding.cs:76
+#: scripts/Core/TaleBook.Gilding.cs:86
 msgid "I've a living to make"
 msgstr "こっちにも暮らしがある"
 
-#: scripts/Core/TaleBook.Gilding.cs:78
+#: scripts/Core/TaleBook.Gilding.cs:88
 msgid ""
 "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye."
 msgstr "アガーテ修道女によれば、ギルドへの質入れは金への質入れであり、宝箱から出た硬貨はどれもアギトの目だという。"
 
-#: scripts/Core/TaleBook.Gilding.cs:79
+#: scripts/Core/TaleBook.Gilding.cs:89
 msgid "\"So did they, in the square.\""
 msgstr "「広場のあの人たちも、そうでした」"
 
-#: scripts/Core/TaleBook.Gilding.cs:93
+#: scripts/Core/TaleBook.Gilding.cs:103
 msgid ""
 "Sergeant Hollis, off duty and uneasy. \"Guild carts pass my toll every fifth night, under sacking. They don't stop at the Guild Hall: they go on down the palace road.\""
 msgstr ""
 "非番のホリス軍曹が、落ち着かない様子でいる。「5晩ごとに、麻袋をかぶせたギルドの荷車がうちの関所を通る。ギルド会館には寄らず、宮殿への道をそのまま下っていくんだ」"
 
-#: scripts/Core/TaleBook.Gilding.cs:95
+#: scripts/Core/TaleBook.Gilding.cs:105
 msgid ""
 "\"Last week a sack slipped. It was a man, Keywright. A gold man. Next Guild night, I'm going to follow one.\""
 msgstr "「先週、麻袋がずり落ちた。人だったんだよ、鍵師。金の人間だ。次のギルドの夜、一台つけてみる」"
 
-#: scripts/Core/TaleBook.Gilding.cs:99
+#: scripts/Core/TaleBook.Gilding.cs:109
 msgid ""
 "Sergeant Hollis says the Guild's carts take the gilded down the palace road every fifth night. He means to follow one."
 msgstr "ホリス軍曹によれば、ギルドの荷車は5晩ごとに、金箔化した人々を宮殿への道の先へ運んでいく。軍曹は一台つけてみるつもりだ。"
 
-#: scripts/Core/TaleBook.Gilding.cs:107
+#: scripts/Core/TaleBook.Gilding.cs:117
 msgid ""
 "Hollis at the back door, grey in the face. \"I followed the cart. Under the palace there's a door with a seam of gold down the middle. They weighed him on a great scale, by the stone.\""
 msgstr ""
 "真っ青な顔のホリスが裏口にいる。「荷車をつけた。宮殿の地下に、真ん中に金の継ぎ目が走る扉がある。連中はそいつを大きな秤に載せて、ストーン単位で目方を量った」"
 
-#: scripts/Core/TaleBook.Gilding.cs:109
+#: scripts/Core/TaleBook.Gilding.cs:119
 msgid ""
 "\"Then the seam opened a crack, and something on the other side took him. I heard it say thank you.\""
 msgstr "「すると継ぎ目がわずかに開いて、向こう側の何かがそいつを引き取った。『ありがとう』と言うのが聞こえたよ」"
 
-#: scripts/Core/TaleBook.Gilding.cs:113
+#: scripts/Core/TaleBook.Gilding.cs:120
+msgid ""
+"\"You're not surprised. You look like you've stood at that door yourself.\""
+msgstr "「驚かないんだな。まるで自分の目であの扉を見てきたような顔だ」"
+
+#: scripts/Core/TaleBook.Gilding.cs:124
 msgid ""
 "Hollis followed a Guild cart to a door under the palace with a seam of gold. The gilded are weighed, and something behind it takes them."
 msgstr "ホリスはギルドの荷車をつけ、宮殿の地下にある金の継ぎ目の扉にたどり着いた。金箔化した人々は目方を量られ、扉の向こうの何かに引き取られる。"
 
-#: scripts/Core/TaleBook.Gilding.cs:125
+#: scripts/Core/TaleBook.Gilding.cs:136
 msgid ""
 "From the Guild's own strongroom: its sale's leavings, the clerk said. Coin, mostly. {price}."
 msgstr "ギルドの宝物庫そのものから出た品だ。競売の売れ残りだと、書記は言っとった。ほとんど硬貨だ。{price}。"
 
-#: scripts/Core/TaleBook.Gilding.cs:131
+#: scripts/Core/TaleBook.Gilding.cs:142
 msgid ""
 "A chest from the Guild's own strongroom held demon gold. The Guild deals in the Maw's gilded iron."
 msgstr "ギルド自身の宝物庫から出た宝箱に、魔金が入っていた。ギルドはアギトの金箔の鉄を扱っている。"
 
-#: scripts/Core/TaleBook.Gilding.cs:139
+#: scripts/Core/TaleBook.Gilding.cs:150
 msgid ""
 "A note under the door, in Mara's hand: \"Even kings pledge, he said. So I read the Chest Roll. The Crown Chest: pledged to the Gilded Guild, against the Crown's note.\""
 msgstr ""
 "扉の下に、マーラの筆跡の書き付け：「王でさえ質を入れる、とあの男は言った。だから宝箱台帳を読んだの。王冠の宝箱。王家の手形のかたとして、金箔ギルドに質入れ」"
 
-#: scripts/Core/TaleBook.Gilding.cs:141
+#: scripts/Core/TaleBook.Gilding.cs:152
 msgid ""
 "\"The Locking is a chest like any other. It opens for its rightful owner. If the Crown can't pay on the season's last night, that's the Maw.\""
 msgstr "「大施錠も、ほかの宝箱と同じ。正当な持ち主のために開く。今季最後の夜に王家が払えなければ、その持ち主はアギトよ」"
 
-#: scripts/Core/TaleBook.Gilding.cs:147
+#: scripts/Core/TaleBook.Gilding.cs:154
+msgid ""
+"\"P.S. Someone read the Roll before me. Beside the Crown Chest, in the margin, in your hand: the season's last night.\""
+msgstr "「追伸。私より先に宝箱台帳を読んだ人がいたの。王冠の宝箱の横の余白に、あなたの筆跡で『今季最後の夜』と」"
+
+#: scripts/Core/TaleBook.Gilding.cs:159
 msgid ""
 "Mara read the Chest Roll: the King pledged the Crown Chest to the Guild, and the note falls due on the season's last night."
 msgstr "マーラが宝箱台帳を読んだ。王は王冠の宝箱をギルドに質入れしており、その手形は今季最後の夜に期日を迎える。"
 
-#: scripts/Core/TaleBook.Gilding.cs:155
+#: scripts/Core/TaleBook.Gilding.cs:167
 msgid ""
 "Ten years ago there was a famine, and the Crown had nothing it could spend. So I pledged the one thing it owned outright. You know which, I think."
 msgstr ""
 "10年前、飢饉があってな。王家には使える物が何もなかった。そこでわしは、王家が完全に所有していた、ただ一つの物を質に入れた。どれのことか、お前には分かるだろう。"
 
-#: scripts/Core/TaleBook.Gilding.cs:157
+#: scripts/Core/TaleBook.Gilding.cs:169
 msgid ""
 "A gift is rightful, Keywright. Give a thing away before the note falls due, to someone who can hold it, and there's nothing left to collect."
 msgstr "贈り物は正当なものだ、鍵師。手形の期日が来る前に、受け取れる者に贈ってしまえば、回収できる物は何も残らん。"
 
-#: scripts/Core/TaleBook.Gilding.cs:164
+#: scripts/Core/TaleBook.Gilding.cs:171
+msgid ""
+"You knew already. I can see it. I've told no one in ten years, Keywright. Who told you?"
+msgstr "もう知っておったのだな。顔に出ておる。この十年、誰にも話しておらんのに。鍵師、誰に聞いた？"
+
+#: scripts/Core/TaleBook.Gilding.cs:177
 msgid ""
 "Old Aldo pledged the Crown Chest to feed the realm through a famine. A gift is rightful, he says: there'd be nothing left to collect."
 msgstr ""
 "アルドじいさんは飢饉から国を救うため、王冠の宝箱を質に入れた。贈り物は正当なものだから、贈ってしまえば回収できる物は何も残らない、と彼は言う。"
 
-#: scripts/Core/TaleBook.Gilding.cs:175
+#: scripts/Core/TaleBook.Gilding.cs:188
 msgid ""
 "A lot from the Guild's foreclosure sale. Odd one: the lid's marked inside, in a Keywright's hand. {price}."
 msgstr "ギルドの差し押さえ競売で出たひと山です。妙な品でして、蓋の裏に鍵師の筆跡で書き込みがあります。{price}です。"
 
-#: scripts/Core/TaleBook.Gilding.cs:181
+#: scripts/Core/TaleBook.Gilding.cs:194
 msgid ""
 "A chest from a Guild sale was marked inside the lid in your own hand, dated this spring. You don't remember marking it."
 msgstr "ギルドの競売で出た宝箱の蓋の裏に、あなた自身の筆跡で書き込みがあった。日付は今年の春。書いた覚えはない。"
@@ -14364,92 +14375,92 @@ msgstr "まるで追いはぎ。合法のね。"
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "天があなたに微笑んでいる。調子に乗らないように。"
 
-#: scripts/Main.cs:525
+#: scripts/Main.cs:527
 msgid "New clue ({0})"
 msgstr "新しい手がかり（{0}）"
 
-#: scripts/Main.cs:530
+#: scripts/Main.cs:532
 msgid "Open the notebook's Case page"
 msgstr "手帳の「事件簿」のページを開く"
 
-#: scripts/Main.cs:555
+#: scripts/Main.cs:557
 msgid "Achievement: {0}"
 msgstr "実績解除：{0}"
 
-#: scripts/Main.cs:580
+#: scripts/Main.cs:582
 msgid "THE NINE HEARTSONGS"
 msgstr "九つの心歌"
 
-#: scripts/Main.cs:676
+#: scripts/Main.cs:678
 msgid "In the purse: {0}g."
 msgstr "所持金：{0}G。"
 
-#: scripts/Main.cs:684
+#: scripts/Main.cs:686
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr "手帳とコレクションがすべて埋まった：常連も、品物も、珍品も、九つの心歌もすべて。"
 
-#: scripts/Main.cs:689
+#: scripts/Main.cs:691
 msgid "Not now: finish what's in hand first."
 msgstr "今はできません。先に手元のことを済ませてください。"
 
-#: scripts/Main.cs:803 scripts/Main.cs:966 scripts/Phases/RunEndPhase.cs:32
+#: scripts/Main.cs:805 scripts/Main.cs:968 scripts/Phases/RunEndPhase.cs:32
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr "大施錠、すべてを歌いきって"
 
-#: scripts/Main.cs:803 scripts/Main.cs:966
+#: scripts/Main.cs:805 scripts/Main.cs:968
 msgid "THE CROWN CHEST"
 msgstr "王冠の宝箱"
 
-#: scripts/Main.cs:834
+#: scripts/Main.cs:836
 msgid "BRAM'S STALL"
 msgstr "ブラムの露店"
 
-#: scripts/Main.cs:834 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
+#: scripts/Main.cs:836 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
 msgid "WEEK {0}"
 msgstr "{0}週目"
 
-#: scripts/Main.cs:857
+#: scripts/Main.cs:859
 msgid "THE SEASON'S END"
 msgstr "季節の終わり"
 
-#: scripts/Main.cs:872
+#: scripts/Main.cs:874
 msgid "THE GILDED GUILD"
 msgstr "金箔ギルド"
 
-#: scripts/Main.cs:875
+#: scripts/Main.cs:877
 msgid "THE ALDRIC KEY"
 msgstr "アルドリックの鍵"
 
-#: scripts/Main.cs:941 scripts/Phases/RunEndPhase.cs:33
+#: scripts/Main.cs:943 scripts/Phases/RunEndPhase.cs:33
 msgid "FREE AND CLEAR"
 msgstr "晴れて自由の身"
 
-#: scripts/Main.cs:999 scripts/Ui/NotebookView.cs:415
+#: scripts/Main.cs:1001 scripts/Ui/NotebookView.cs:415
 msgid "DAY {0}"
 msgstr "{0}日目"
 
-#: scripts/Main.cs:1002
+#: scripts/Main.cs:1004
 msgid ", level {0}"
 msgstr "（レベル{0}）"
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}{1}週目の{2}日目{3}  -  {4}"
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 msgid " of {0}"
 msgstr "（全{0}日）"
 
-#: scripts/Main.cs:1004
+#: scripts/Main.cs:1006
 msgid "The Guild comes tonight for {0}g."
 msgstr "今夜、ギルドが{0}Gを取り立てに来る。"
 
-#: scripts/Main.cs:1005
+#: scripts/Main.cs:1007
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "{1}日目の終わりに、ギルドが{0}Gを取り立てに来る。"
 
-#: scripts/Main.cs:1012
+#: scripts/Main.cs:1014
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0}が、へそくりから{1}Gをこっそりくれた（残り{2}回）。"
 

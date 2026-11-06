@@ -239,7 +239,9 @@ The case's clues from the people who'd know. Each beat comes once, at its shop a
 
 The Foreclosures add the ledger page and Tobias's word (where the gilded go; nobody knew who they signed to) and
 Master Quire's law (a thing taken in secret was never given). The Case page (`Case.cs`) keeps the questions; working
-one out pays off once (`CaseQuestion.Payoff`) and is remembered across seasons.
+one out pays off once (`CaseQuestion.Payoff`), the first time it's ever worked out, and is remembered across seasons. In a
+later season, whoever tells you what you already worked out notices: Hollis at the back door ("You look like you've
+stood at that door yourself"), Mara's note (a P.S.: your own hand in the Roll's margin) and Old Aldo ("Who told you?").
 
 ### The Shut Chests (always, from Thornwick)
 

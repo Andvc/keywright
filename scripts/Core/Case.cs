@@ -256,8 +256,13 @@ public partial class GameState
     public HashSet<string> Clues { get; } = new();
     /// <summary>Questions worked out this season.</summary>
     public HashSet<string> Solved { get; } = new();
-    /// <summary>Questions worked out in any season (the profile's): filled in already, in your own hand.</summary>
+    /// <summary>Questions worked out in any season, this one included (what the profile keeps).</summary>
     public HashSet<string> Truths { get; } = new();
+    /// <summary>
+    /// Questions worked out in an earlier season, as this one began: filled in already, in your own hand, and never paid off
+    /// again (kept in the save, so a day played over doesn't count this season's work as an earlier one's).
+    /// </summary>
+    public HashSet<string> KnownBefore { get; } = new();
     /// <summary>The career question's clues found in earlier seasons (the profile's).</summary>
     public HashSet<string> CareerClues { get; } = new();
     /// <summary>Seasons played before this one, and how the last one ended (<see cref="Ends"/>), from the profile.</summary>
@@ -274,25 +279,23 @@ public partial class GameState
         if (clue == null || !Clues.Add(key)) return false;
         var question = Case.Question(clue.Question);
         if (question?.Career == true) CareerClues.Add(key);
-        NewClue = clue;
-        // Worked out in an earlier season: you know it the moment it comes up again, and it pays off as it did then.
-        if (question != null && Truths.Contains(question.Key) && Asking(question) && Solved.Add(question.Key))
-        {
-            question.Payoff?.Invoke(this);
-            Log(Story.Tale, Loc.T($"You knew this from an earlier season: {Case.Fill(question, question.Answer)}"));
-        }
+        // Noted on screen only while it's news: not for a question already worked out (this season or an earlier one).
+        if (question == null || !Knows(question)) NewClue = clue;
         return true;
     }
 
-    /// <summary>Whether a question is open: one of its clues has been found, or it's been worked out before.</summary>
+    /// <summary>Whether a question is open: one of its clues has been found, or it was worked out in an earlier season.</summary>
     public bool Asking(CaseQuestion q) =>
-        (!q.Career || SeasonsBefore > 0) && (Truths.Contains(q.Key) || Clues.Any(c => Case.Clue(c)?.Question == q.Key));
+        (!q.Career || SeasonsBefore > 0) && (KnownBefore.Contains(q.Key) || Clues.Any(c => Case.Clue(c)?.Question == q.Key));
+
+    /// <summary>Whether the answer's known: worked out this season, or in an earlier one.</summary>
+    public bool Knows(CaseQuestion q) => Solved.Contains(q.Key) || KnownBefore.Contains(q.Key);
 
     /// <summary>The words a blank can be filled with now: the obvious guesses, and what the clues have given.</summary>
     public List<CaseWord> Words(CaseQuestion q, int blank)
     {
         var given = Clues.Select(Case.Clue).Where(c => c?.Question == q.Key).SelectMany(c => c.Gives).ToHashSet();
-        bool known = Truths.Contains(q.Key) || Solved.Contains(q.Key);
+        bool known = Knows(q);
         return q.Blanks[blank].Where(w => known || q.Free.Contains(w.Key) || given.Contains(w.Key)).ToList();
     }
 
@@ -300,7 +303,9 @@ public partial class GameState
     public int Check(CaseQuestion q, IReadOnlyList<string> picks)
     {
         int wrong = Enumerable.Range(0, q.Answer.Length).Count(i => i >= picks.Count || picks[i] != q.Answer[i]);
-        if (wrong == 0 && Solved.Add(q.Key))
+        // It pays off the first time it's ever worked out: a truth from an earlier season is known, not rewarded again
+        // (every run starts the same; what carries over is what you know).
+        if (wrong == 0 && !KnownBefore.Contains(q.Key) && Solved.Add(q.Key))
         {
             Truths.Add(q.Key);
             q.Payoff?.Invoke(this);
@@ -316,6 +321,7 @@ public partial class GameState
     {
         data.CaseClues = Clues.ToList();
         data.CaseSolved = Solved.ToList();
+        data.CaseKnown = KnownBefore.ToList();
         data.SeasonsBefore = SeasonsBefore;
         data.LastEnd = LastEnd;
     }
@@ -324,7 +330,9 @@ public partial class GameState
     {
         Clues.UnionWith((data.CaseClues ?? new List<string>()).Where(k => Case.Clue(k) != null));
         Solved.UnionWith((data.CaseSolved ?? new List<string>()).Where(k => Case.Question(k) != null));
+        KnownBefore.UnionWith((data.CaseKnown ?? new List<string>()).Where(k => Case.Question(k) != null));
         Truths.UnionWith(Solved);
+        Truths.UnionWith(KnownBefore);
         SeasonsBefore = data.SeasonsBefore;
         LastEnd = data.LastEnd;
         Continued = true;
@@ -343,6 +351,7 @@ public partial class GameState
         CareerClues.UnionWith(profile.CareerClues.Where(c => Case.Clue(c) != null));
         Clues.UnionWith(CareerClues);
         if (Continued) return;
+        KnownBefore.UnionWith(profile.Truths.Where(t => Case.Question(t) != null));
         SeasonsBefore = profile.Runs;
         LastEnd = profile.LastEnd;
     }

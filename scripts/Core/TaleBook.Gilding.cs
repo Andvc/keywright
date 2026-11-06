@@ -15,6 +15,16 @@ public static partial class TaleBook
 {
     public const string Nell = "nell";
 
+    /// <summary>
+    /// A later season (0.33): someone telling you what you worked out in an earlier one notices that you already know, and
+    /// says so, last (the year turned back, and only the marked remember).
+    /// </summary>
+    static List<Line> Knew(GameState s, string question, List<Line> lines, string noticed)
+    {
+        if (s.KnownBefore.Contains(question)) lines.Add(new Line(lines[^1].Speaker, noticed));
+        return lines;
+    }
+
     static IEnumerable<TaleDef> GildingTales() => new[]
     {
         new TaleDef
@@ -103,10 +113,11 @@ public static partial class TaleBook
                 {
                     Key = "gild.hollis.gate", Who = Hollis, Night = true, After = "gild.hollis", Gap = 1, Tier = 2,
                     If = s => s.DayOfWeek == 1 || s.DuesTonight,
-                    Says = s => Say(Hollis,
+                    Says = s => Knew(s, Case.Gate, Say(Hollis,
                         Loc.T("Hollis at the back door, grey in the face. \"I followed the cart. Under the palace there's a door with a seam of " +
                               "gold down the middle. They weighed him on a great scale, by the stone.\""),
                         Loc.T("\"Then the seam opened a crack, and something on the other side took him. I heard it say thank you.\"")),
+                        Loc.T("\"You're not surprised. You look like you've stood at that door yourself.\"")),
                     Then = s =>
                     {
                         s.Find("hollis.gate");
@@ -135,11 +146,12 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "gild.note", Who = Story.Mara, Night = true, Letter = true, Gap = 21, If = s => s.Clues.Contains("vane.kings") && !s.MapGiven,
-                    Says = s => Say(Story.Mara,
+                    Says = s => Knew(s, Case.Crown, Say(Story.Mara,
                         Loc.T("A note under the door, in Mara's hand: \"Even kings pledge, he said. So I read the Chest Roll. The Crown Chest: " +
                               "pledged to the Gilded Guild, against the Crown's note.\""),
                         Loc.T("\"The Locking is a chest like any other. It opens for its rightful owner. If the Crown can't pay on the season's " +
                               "last night, that's the Maw.\"")),
+                        Loc.T("\"P.S. Someone read the Roll before me. Beside the Crown Chest, in the margin, in your hand: the season's last night.\"")),
                     Then = s =>
                     {
                         s.Find("roll.crown");
@@ -151,11 +163,12 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "gild.aldo", Who = Aldo, Gap = 21, Tier = 4, If = s => s.Day > s.TierSince,
-                    Says = s => Say(Aldo,
+                    Says = s => Knew(s, Case.Crown, Say(Aldo,
                         Loc.T("Ten years ago there was a famine, and the Crown had nothing it could spend. So I pledged the one thing it owned " +
                               "outright. You know which, I think."),
                         Loc.T("A gift is rightful, Keywright. Give a thing away before the note falls due, to someone who can hold it, and " +
                               "there's nothing left to collect.")),
+                        Loc.T("You knew already. I can see it. I've told no one in ten years, Keywright. Who told you?")),
                     Then = s =>
                     {
                         s.Find("aldo.note");

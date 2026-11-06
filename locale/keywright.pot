@@ -892,12 +892,7 @@ msgstr ""
 msgid "seen"
 msgstr ""
 
-#: scripts/Core/Case.cs:282
-#, csharp-format
-msgid "You knew this from an earlier season: {0}"
-msgstr ""
-
-#: scripts/Core/Case.cs:307
+#: scripts/Core/Case.cs:311
 #, csharp-format
 msgid "Worked out: {0}"
 msgstr ""
@@ -4828,22 +4823,22 @@ msgstr ""
 msgid "The Crown Chest."
 msgstr ""
 
-#: scripts/Core/Save.cs:272
+#: scripts/Core/Save.cs:274
 #, csharp-format
 msgid "Week {0}, day {1}, {2}, {3}g"
 msgstr ""
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 #, csharp-format
 msgid "Best: week {0}   Debts cleared: {1}{2}   Crown Chests opened: {3}{4}"
 msgstr ""
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 #, csharp-format
 msgid " (fastest: day {0})"
 msgstr ""
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 #, csharp-format
 msgid "   Heartsongs: {0}/{1}"
 msgstr ""
@@ -9248,132 +9243,144 @@ msgstr ""
 msgid "Skrae still listens at the Gate, and still hates every word of it."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:22
+#: scripts/Core/TaleBook.Gilding.cs:32
 msgid "The Gilding"
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:23
+#: scripts/Core/TaleBook.Gilding.cs:33
 msgid "Old Haddon the wheelwright turned to gold at the crossroads, the night after the Guild foreclosed on him, and Bram has started wearing a glove. The notebook's Case page keeps the questions, and what you've found."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:32
+#: scripts/Core/TaleBook.Gilding.cs:42
 msgid "My father's last chest. Haddon, the wheelwright. The Guild's men took the rest, but this wouldn't open for them. He signed their paper for a new lathe, against his own hand. He laughed at that. One coin, for luck."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:38
+#: scripts/Core/TaleBook.Gilding.cs:48
 msgid "Nell Haddon gave you her father's last chest. Under his tools was the Guild's paper, in his hand."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:43
+#: scripts/Core/TaleBook.Gilding.cs:53
 msgid "Nell Haddon brought her father's last chest, and you let her take it home."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:51
+#: scripts/Core/TaleBook.Gilding.cs:61
 msgid "That glove of Bram's. I've seen it before, love. Twenty years back, the winter he took a marked baby out of the Guild's care."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:53
+#: scripts/Core/TaleBook.Gilding.cs:63
 msgid "The Mark-Finders had her in a basket, and then they didn't. Nobody ever knew what Bram paid them."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:57
+#: scripts/Core/TaleBook.Gilding.cs:67
 msgid "Bettany says Bram took a marked baby out of the Guild's care, twenty years ago. Nobody knows what he paid."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:65
+#: scripts/Core/TaleBook.Gilding.cs:75
 msgid "Sister Agathe of the Unopened, with a bowl for alms. \"What's pledged to the Guild is pledged to gold, Keywright, and gold has one master. Look at Thornwick's square.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:67
+#: scripts/Core/TaleBook.Gilding.cs:77
 msgid "\"And every coin you let out of a chest is an eye for him. You open them. He sees.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:70
+#: scripts/Core/TaleBook.Gilding.cs:80
 #, csharp-format
 msgid "Put something in her bowl ({0}g)"
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:73
+#: scripts/Core/TaleBook.Gilding.cs:83
 msgid "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye. You gave to her bowl."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:74
+#: scripts/Core/TaleBook.Gilding.cs:84
 msgid "\"Saint Ide sees it too. Keep your chests shut, if you can.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:76
+#: scripts/Core/TaleBook.Gilding.cs:86
 msgid "I've a living to make"
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:78
+#: scripts/Core/TaleBook.Gilding.cs:88
 msgid "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:79
+#: scripts/Core/TaleBook.Gilding.cs:89
 msgid "\"So did they, in the square.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:93
+#: scripts/Core/TaleBook.Gilding.cs:103
 msgid "Sergeant Hollis, off duty and uneasy. \"Guild carts pass my toll every fifth night, under sacking. They don't stop at the Guild Hall: they go on down the palace road.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:95
+#: scripts/Core/TaleBook.Gilding.cs:105
 msgid "\"Last week a sack slipped. It was a man, Keywright. A gold man. Next Guild night, I'm going to follow one.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:99
+#: scripts/Core/TaleBook.Gilding.cs:109
 msgid "Sergeant Hollis says the Guild's carts take the gilded down the palace road every fifth night. He means to follow one."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:107
+#: scripts/Core/TaleBook.Gilding.cs:117
 msgid "Hollis at the back door, grey in the face. \"I followed the cart. Under the palace there's a door with a seam of gold down the middle. They weighed him on a great scale, by the stone.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:109
+#: scripts/Core/TaleBook.Gilding.cs:119
 msgid "\"Then the seam opened a crack, and something on the other side took him. I heard it say thank you.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:113
+#: scripts/Core/TaleBook.Gilding.cs:120
+msgid "\"You're not surprised. You look like you've stood at that door yourself.\""
+msgstr ""
+
+#: scripts/Core/TaleBook.Gilding.cs:124
 msgid "Hollis followed a Guild cart to a door under the palace with a seam of gold. The gilded are weighed, and something behind it takes them."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:125
+#: scripts/Core/TaleBook.Gilding.cs:136
 msgid "From the Guild's own strongroom: its sale's leavings, the clerk said. Coin, mostly. {price}."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:131
+#: scripts/Core/TaleBook.Gilding.cs:142
 msgid "A chest from the Guild's own strongroom held demon gold. The Guild deals in the Maw's gilded iron."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:139
+#: scripts/Core/TaleBook.Gilding.cs:150
 msgid "A note under the door, in Mara's hand: \"Even kings pledge, he said. So I read the Chest Roll. The Crown Chest: pledged to the Gilded Guild, against the Crown's note.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:141
+#: scripts/Core/TaleBook.Gilding.cs:152
 msgid "\"The Locking is a chest like any other. It opens for its rightful owner. If the Crown can't pay on the season's last night, that's the Maw.\""
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:147
+#: scripts/Core/TaleBook.Gilding.cs:154
+msgid "\"P.S. Someone read the Roll before me. Beside the Crown Chest, in the margin, in your hand: the season's last night.\""
+msgstr ""
+
+#: scripts/Core/TaleBook.Gilding.cs:159
 msgid "Mara read the Chest Roll: the King pledged the Crown Chest to the Guild, and the note falls due on the season's last night."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:155
+#: scripts/Core/TaleBook.Gilding.cs:167
 msgid "Ten years ago there was a famine, and the Crown had nothing it could spend. So I pledged the one thing it owned outright. You know which, I think."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:157
+#: scripts/Core/TaleBook.Gilding.cs:169
 msgid "A gift is rightful, Keywright. Give a thing away before the note falls due, to someone who can hold it, and there's nothing left to collect."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:164
+#: scripts/Core/TaleBook.Gilding.cs:171
+msgid "You knew already. I can see it. I've told no one in ten years, Keywright. Who told you?"
+msgstr ""
+
+#: scripts/Core/TaleBook.Gilding.cs:177
 msgid "Old Aldo pledged the Crown Chest to feed the realm through a famine. A gift is rightful, he says: there'd be nothing left to collect."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:175
+#: scripts/Core/TaleBook.Gilding.cs:188
 msgid "A lot from the Guild's foreclosure sale. Odd one: the lid's marked inside, in a Keywright's hand. {price}."
 msgstr ""
 
-#: scripts/Core/TaleBook.Gilding.cs:181
+#: scripts/Core/TaleBook.Gilding.cs:194
 msgid "A chest from a Guild sale was marked inside the lid in your own hand, dated this spring. You don't remember marking it."
 msgstr ""
 
@@ -13131,101 +13138,101 @@ msgstr ""
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr ""
 
-#: scripts/Main.cs:525
+#: scripts/Main.cs:527
 #, csharp-format
 msgid "New clue ({0})"
 msgstr ""
 
-#: scripts/Main.cs:530
+#: scripts/Main.cs:532
 msgid "Open the notebook's Case page"
 msgstr ""
 
-#: scripts/Main.cs:555
+#: scripts/Main.cs:557
 #, csharp-format
 msgid "Achievement: {0}"
 msgstr ""
 
-#: scripts/Main.cs:580
+#: scripts/Main.cs:582
 msgid "THE NINE HEARTSONGS"
 msgstr ""
 
-#: scripts/Main.cs:676
+#: scripts/Main.cs:678
 #, csharp-format
 msgid "In the purse: {0}g."
 msgstr ""
 
-#: scripts/Main.cs:684
+#: scripts/Main.cs:686
 msgid "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 
-#: scripts/Main.cs:689
+#: scripts/Main.cs:691
 msgid "Not now: finish what's in hand first."
 msgstr ""
 
-#: scripts/Main.cs:803 scripts/Main.cs:966 scripts/Phases/RunEndPhase.cs:32
+#: scripts/Main.cs:805 scripts/Main.cs:968 scripts/Phases/RunEndPhase.cs:32
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr ""
 
-#: scripts/Main.cs:803 scripts/Main.cs:966
+#: scripts/Main.cs:805 scripts/Main.cs:968
 msgid "THE CROWN CHEST"
 msgstr ""
 
-#: scripts/Main.cs:834
+#: scripts/Main.cs:836
 msgid "BRAM'S STALL"
 msgstr ""
 
-#: scripts/Main.cs:834 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
+#: scripts/Main.cs:836 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
 #, csharp-format
 msgid "WEEK {0}"
 msgstr ""
 
-#: scripts/Main.cs:857
+#: scripts/Main.cs:859
 msgid "THE SEASON'S END"
 msgstr ""
 
-#: scripts/Main.cs:872
+#: scripts/Main.cs:874
 msgid "THE GILDED GUILD"
 msgstr ""
 
-#: scripts/Main.cs:875
+#: scripts/Main.cs:877
 msgid "THE ALDRIC KEY"
 msgstr ""
 
-#: scripts/Main.cs:941 scripts/Phases/RunEndPhase.cs:33
+#: scripts/Main.cs:943 scripts/Phases/RunEndPhase.cs:33
 msgid "FREE AND CLEAR"
 msgstr ""
 
-#: scripts/Main.cs:999 scripts/Ui/NotebookView.cs:415
+#: scripts/Main.cs:1001 scripts/Ui/NotebookView.cs:415
 #, csharp-format
 msgid "DAY {0}"
 msgstr ""
 
-#: scripts/Main.cs:1002
+#: scripts/Main.cs:1004
 #, csharp-format
 msgid ", level {0}"
 msgstr ""
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 #, csharp-format
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr ""
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 #, csharp-format
 msgid " of {0}"
 msgstr ""
 
-#: scripts/Main.cs:1004
+#: scripts/Main.cs:1006
 #, csharp-format
 msgid "The Guild comes tonight for {0}g."
 msgstr ""
 
-#: scripts/Main.cs:1005
+#: scripts/Main.cs:1007
 #, csharp-format
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr ""
 
-#: scripts/Main.cs:1012
+#: scripts/Main.cs:1014
 #, csharp-format
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr ""

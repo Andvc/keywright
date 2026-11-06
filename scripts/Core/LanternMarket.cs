@@ -44,7 +44,7 @@ public partial class GameState
         get
         {
             if (_secretNight == Day) return null;
-            var open = OpenQuestions.Where(q => !Solved.Contains(q.Key)).ToList();
+            var open = OpenQuestions.Where(q => !Knows(q)).ToList();
             CaseClue Best(bool needed) => Case.Clues.FirstOrDefault(c => !Clues.Contains(c.Key) && c.Key != LanternBuyers &&
                 open.Any(q => q.Key == c.Question && (!needed || Enumerable.Range(0, q.Blanks.Length)
                     .Any(b => c.Gives.Contains(q.Answer[b]) && Words(q, b).All(w => w.Key != q.Answer[b])))));

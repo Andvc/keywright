@@ -153,6 +153,8 @@ public sealed class SaveData
     // 0.33: the case (Case.cs) and the Gilding (Gilding.cs). Null in an older save, which starts them fresh.
     public List<string> CaseClues { get; set; }
     public List<string> CaseSolved { get; set; }
+    /// <summary>What was worked out in earlier seasons as this one began (known, never paid off again).</summary>
+    public List<string> CaseKnown { get; set; }
     public Dictionary<string, int> Claims { get; set; }
     public Dictionary<string, int> Gilded { get; set; }
 

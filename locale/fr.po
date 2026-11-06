@@ -951,11 +951,7 @@ msgstr "dit"
 msgid "seen"
 msgstr "vu"
 
-#: scripts/Core/Case.cs:282
-msgid "You knew this from an earlier season: {0}"
-msgstr "Vous le saviez depuis une saison passée. {0}"
-
-#: scripts/Core/Case.cs:307
+#: scripts/Core/Case.cs:311
 msgid "Worked out: {0}"
 msgstr "Élucidé. {0}"
 
@@ -5468,20 +5464,20 @@ msgstr "{0} pièces d'or"
 msgid "The Crown Chest."
 msgstr "Le Coffre de la Couronne."
 
-#: scripts/Core/Save.cs:272
+#: scripts/Core/Save.cs:274
 msgid "Week {0}, day {1}, {2}, {3}g"
 msgstr "Semaine {0}, jour {1}, {2}, {3} po"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid "Best: week {0}   Debts cleared: {1}{2}   Crown Chests opened: {3}{4}"
 msgstr ""
 "Record : semaine {0}   Dettes remboursées : {1}{2}   Coffres de la Couronne ouverts : {3}{4}"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid " (fastest: day {0})"
 msgstr " (au plus vite : jour {0})"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid "   Heartsongs: {0}/{1}"
 msgstr "   Chants du cœur : {0}/{1}"
 
@@ -10799,184 +10795,202 @@ msgid "Skrae still listens at the Gate, and still hates every word of it."
 msgstr ""
 "Skrae écoute toujours à la Porte, et déteste toujours chaque mot qu'il y entend."
 
-#: scripts/Core/TaleBook.Gilding.cs:22
+#: scripts/Core/TaleBook.Gilding.cs:32
 msgid "The Gilding"
 msgstr "La Dorure"
 
-#: scripts/Core/TaleBook.Gilding.cs:23
+#: scripts/Core/TaleBook.Gilding.cs:33
 msgid ""
 "Old Haddon the wheelwright turned to gold at the crossroads, the night after the Guild foreclosed on him, and Bram has started wearing a glove. The notebook's Case page keeps the questions, and what you've found."
 msgstr ""
 "Le vieil Haddon, le charron, s'est changé en or au carrefour, la nuit qui a suivi sa saisie par la Guilde, et Bram s'est mis à porter un gant. La page « Enquête » du carnet garde les questions, et ce que vous avez trouvé."
 
-#: scripts/Core/TaleBook.Gilding.cs:32
+#: scripts/Core/TaleBook.Gilding.cs:42
 msgid ""
 "My father's last chest. Haddon, the wheelwright. The Guild's men took the rest, but this wouldn't open for them. He signed their paper for a new lathe, against his own hand. He laughed at that. One coin, for luck."
 msgstr ""
 "Le dernier coffre de mon père, Haddon le charron. Les hommes de la Guilde ont pris le reste, mais celui-ci refusait de s'ouvrir pour eux. Il a signé leur papier pour un tour neuf, sa propre main en gage. Ça le faisait rire. Une pièce, pour la chance."
 
-#: scripts/Core/TaleBook.Gilding.cs:38
+#: scripts/Core/TaleBook.Gilding.cs:48
 msgid ""
 "Nell Haddon gave you her father's last chest. Under his tools was the Guild's paper, in his hand."
 msgstr ""
 "Nell Haddon vous a donné le dernier coffre de son père. Sous ses outils se trouvait le papier de la Guilde, signé de sa main."
 
-#: scripts/Core/TaleBook.Gilding.cs:43
+#: scripts/Core/TaleBook.Gilding.cs:53
 msgid ""
 "Nell Haddon brought her father's last chest, and you let her take it home."
 msgstr ""
 "Nell Haddon vous a apporté le dernier coffre de son père, et vous l'avez laissée repartir avec."
 
-#: scripts/Core/TaleBook.Gilding.cs:51
+#: scripts/Core/TaleBook.Gilding.cs:61
 msgid ""
 "That glove of Bram's. I've seen it before, love. Twenty years back, the winter he took a marked baby out of the Guild's care."
 msgstr ""
 "Ce gant de Bram. Je l'ai déjà vu, mon chou. Il y a vingt ans, l'hiver où il a soustrait un bébé marqué aux bons soins de la Guilde."
 
-#: scripts/Core/TaleBook.Gilding.cs:53
+#: scripts/Core/TaleBook.Gilding.cs:63
 msgid ""
 "The Mark-Finders had her in a basket, and then they didn't. Nobody ever knew what Bram paid them."
 msgstr ""
 "Les Chercheurs de Marque la tenaient dans un panier, et puis plus du tout. Personne n'a jamais su ce que Bram leur avait payé."
 
-#: scripts/Core/TaleBook.Gilding.cs:57
+#: scripts/Core/TaleBook.Gilding.cs:67
 msgid ""
 "Bettany says Bram took a marked baby out of the Guild's care, twenty years ago. Nobody knows what he paid."
 msgstr ""
 "Selon Bettany, Bram a soustrait un bébé marqué aux bons soins de la Guilde, il y a vingt ans. Personne ne sait ce qu'il a payé."
 
-#: scripts/Core/TaleBook.Gilding.cs:65
+#: scripts/Core/TaleBook.Gilding.cs:75
 msgid ""
 "Sister Agathe of the Unopened, with a bowl for alms. \"What's pledged to the Guild is pledged to gold, Keywright, and gold has one master. Look at Thornwick's square.\""
 msgstr ""
 "Sœur Agathe, des Inviolés, avec un bol à aumônes. « Ce qu'on donne en gage à la Guilde, on le donne à l'or, Clavigère, et l'or n'a qu'un maître. Regardez la place de Thornwick. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:67
+#: scripts/Core/TaleBook.Gilding.cs:77
 msgid ""
 "\"And every coin you let out of a chest is an eye for him. You open them. He sees.\""
 msgstr ""
 "« Et chaque pièce que vous laissez sortir d'un coffre est un œil pour lui. Vous les ouvrez. Il voit. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:70
+#: scripts/Core/TaleBook.Gilding.cs:80
 msgid "Put something in her bowl ({0}g)"
 msgstr "Faire l'aumône ({0} po)"
 
-#: scripts/Core/TaleBook.Gilding.cs:73
+#: scripts/Core/TaleBook.Gilding.cs:83
 msgid ""
 "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye. You gave to her bowl."
 msgstr ""
 "Selon Sœur Agathe, ce qu'on donne en gage à la Guilde, on le donne à l'or, et chaque pièce sortie d'un coffre est un œil de la Gueule. Vous lui avez fait l'aumône."
 
-#: scripts/Core/TaleBook.Gilding.cs:74
+#: scripts/Core/TaleBook.Gilding.cs:84
 msgid "\"Saint Ide sees it too. Keep your chests shut, if you can.\""
 msgstr ""
 "« Saint Ide le voit aussi. Gardez vos coffres fermés, si vous le pouvez. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:76
+#: scripts/Core/TaleBook.Gilding.cs:86
 msgid "I've a living to make"
 msgstr "Je dois gagner ma vie"
 
-#: scripts/Core/TaleBook.Gilding.cs:78
+#: scripts/Core/TaleBook.Gilding.cs:88
 msgid ""
 "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye."
 msgstr ""
 "Selon Sœur Agathe, ce qu'on donne en gage à la Guilde, on le donne à l'or, et chaque pièce sortie d'un coffre est un œil de la Gueule."
 
-#: scripts/Core/TaleBook.Gilding.cs:79
+#: scripts/Core/TaleBook.Gilding.cs:89
 msgid "\"So did they, in the square.\""
 msgstr "« Eux aussi, sur la place. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:93
+#: scripts/Core/TaleBook.Gilding.cs:103
 msgid ""
 "Sergeant Hollis, off duty and uneasy. \"Guild carts pass my toll every fifth night, under sacking. They don't stop at the Guild Hall: they go on down the palace road.\""
 msgstr ""
 "Le sergent Hollis, en civil et mal à l'aise. « Tous les cinq soirs, des charrettes bâchées de la Guilde passent mon péage. Elles ne s'arrêtent pas à l'hôtel de la Guilde : elles descendent la route du palais. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:95
+#: scripts/Core/TaleBook.Gilding.cs:105
 msgid ""
 "\"Last week a sack slipped. It was a man, Keywright. A gold man. Next Guild night, I'm going to follow one.\""
 msgstr ""
 "« La semaine dernière, une bâche a glissé. C'était un homme, Clavigère. Un homme en or. À la prochaine nuit de la Guilde, je vais en suivre une. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:99
+#: scripts/Core/TaleBook.Gilding.cs:109
 msgid ""
 "Sergeant Hollis says the Guild's carts take the gilded down the palace road every fifth night. He means to follow one."
 msgstr ""
 "Selon le sergent Hollis, les charrettes de la Guilde emportent les dorés par la route du palais tous les cinq soirs. Il compte en suivre une."
 
-#: scripts/Core/TaleBook.Gilding.cs:107
+#: scripts/Core/TaleBook.Gilding.cs:117
 msgid ""
 "Hollis at the back door, grey in the face. \"I followed the cart. Under the palace there's a door with a seam of gold down the middle. They weighed him on a great scale, by the stone.\""
 msgstr ""
 "Hollis à la porte de derrière, le teint gris. « J'ai suivi la charrette. Sous le palais, il y a une porte avec une fente d'or au milieu, du haut en bas. Ils l'ont pesé sur une grande balance, à la pierre. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:109
+#: scripts/Core/TaleBook.Gilding.cs:119
 msgid ""
 "\"Then the seam opened a crack, and something on the other side took him. I heard it say thank you.\""
 msgstr ""
 "« Puis la fente s'est entrouverte, et quelque chose, de l'autre côté, l'a pris. Je l'ai entendu dire merci. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:113
+#: scripts/Core/TaleBook.Gilding.cs:120
+msgid ""
+"\"You're not surprised. You look like you've stood at that door yourself.\""
+msgstr ""
+"« Ça ne vous surprend pas. On dirait que vous avez déjà vu cette porte de vos propres yeux. »"
+
+#: scripts/Core/TaleBook.Gilding.cs:124
 msgid ""
 "Hollis followed a Guild cart to a door under the palace with a seam of gold. The gilded are weighed, and something behind it takes them."
 msgstr ""
 "Hollis a suivi une charrette de la Guilde jusqu'à une porte, sous le palais, avec une fente d'or. On y pèse les dorés, et quelque chose, derrière, les prend."
 
-#: scripts/Core/TaleBook.Gilding.cs:125
+#: scripts/Core/TaleBook.Gilding.cs:136
 msgid ""
 "From the Guild's own strongroom: its sale's leavings, the clerk said. Coin, mostly. {price}."
 msgstr ""
 "De la chambre forte de la Guilde elle-même : les restes de sa vente, d'après le commis. Surtout des pièces. {price}."
 
-#: scripts/Core/TaleBook.Gilding.cs:131
+#: scripts/Core/TaleBook.Gilding.cs:142
 msgid ""
 "A chest from the Guild's own strongroom held demon gold. The Guild deals in the Maw's gilded iron."
 msgstr ""
 "Un coffre de la chambre forte de la Guilde elle-même contenait de l'or démoniaque. La Guilde fait commerce du fer doré de la Gueule."
 
-#: scripts/Core/TaleBook.Gilding.cs:139
+#: scripts/Core/TaleBook.Gilding.cs:150
 msgid ""
 "A note under the door, in Mara's hand: \"Even kings pledge, he said. So I read the Chest Roll. The Crown Chest: pledged to the Gilded Guild, against the Crown's note.\""
 msgstr ""
 "Un mot sous la porte, de la main de Mara : « Même les rois donnent des gages, a-t-il dit. Alors j'ai lu le Registre des coffres. Le Coffre de la Couronne : donné en gage à la Guilde dorée, en garantie du billet de la Couronne. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:141
+#: scripts/Core/TaleBook.Gilding.cs:152
 msgid ""
 "\"The Locking is a chest like any other. It opens for its rightful owner. If the Crown can't pay on the season's last night, that's the Maw.\""
 msgstr ""
 "« Le Verrouillage est un coffre comme un autre. Il s'ouvre pour son propriétaire légitime. Si la Couronne ne peut pas payer la dernière nuit de la saison, ce sera la Gueule. »"
 
-#: scripts/Core/TaleBook.Gilding.cs:147
+#: scripts/Core/TaleBook.Gilding.cs:154
+msgid ""
+"\"P.S. Someone read the Roll before me. Beside the Crown Chest, in the margin, in your hand: the season's last night.\""
+msgstr ""
+"« P.-S. Quelqu'un avait lu le Registre avant moi. À côté du Coffre de la Couronne, dans la marge, de votre main : la dernière nuit de la saison. »"
+
+#: scripts/Core/TaleBook.Gilding.cs:159
 msgid ""
 "Mara read the Chest Roll: the King pledged the Crown Chest to the Guild, and the note falls due on the season's last night."
 msgstr ""
 "Mara a lu le Registre des coffres : le roi a donné le Coffre de la Couronne en gage à la Guilde, et le billet arrive à échéance la dernière nuit de la saison."
 
-#: scripts/Core/TaleBook.Gilding.cs:155
+#: scripts/Core/TaleBook.Gilding.cs:167
 msgid ""
 "Ten years ago there was a famine, and the Crown had nothing it could spend. So I pledged the one thing it owned outright. You know which, I think."
 msgstr ""
 "Il y a dix ans, la famine a frappé, et la Couronne n'avait rien qu'elle pût dépenser. Alors j'ai mis en gage la seule chose qu'elle possédait en propre. Vous savez laquelle, je crois."
 
-#: scripts/Core/TaleBook.Gilding.cs:157
+#: scripts/Core/TaleBook.Gilding.cs:169
 msgid ""
 "A gift is rightful, Keywright. Give a thing away before the note falls due, to someone who can hold it, and there's nothing left to collect."
 msgstr ""
 "Un don est légitime, Clavigère. Donnez une chose avant l'échéance du billet, à quelqu'un qui peut la garder, et il ne reste plus rien à saisir."
 
-#: scripts/Core/TaleBook.Gilding.cs:164
+#: scripts/Core/TaleBook.Gilding.cs:171
+msgid ""
+"You knew already. I can see it. I've told no one in ten years, Keywright. Who told you?"
+msgstr ""
+"Vous le saviez déjà. Je le vois bien. Je n'en ai parlé à personne en dix ans, Clavigère. Qui vous l'a dit ?"
+
+#: scripts/Core/TaleBook.Gilding.cs:177
 msgid ""
 "Old Aldo pledged the Crown Chest to feed the realm through a famine. A gift is rightful, he says: there'd be nothing left to collect."
 msgstr ""
 "Le vieil Aldo a mis le Coffre de la Couronne en gage pour nourrir le royaume pendant une famine. Un don est légitime, dit-il : il ne resterait plus rien à saisir."
 
-#: scripts/Core/TaleBook.Gilding.cs:175
+#: scripts/Core/TaleBook.Gilding.cs:188
 msgid ""
 "A lot from the Guild's foreclosure sale. Odd one: the lid's marked inside, in a Keywright's hand. {price}."
 msgstr ""
 "Un lot de la vente des saisies de la Guilde. Curieux : le couvercle est marqué à l'intérieur, de la main d'un Clavigère. {price}."
 
-#: scripts/Core/TaleBook.Gilding.cs:181
+#: scripts/Core/TaleBook.Gilding.cs:194
 msgid ""
 "A chest from a Guild sale was marked inside the lid in your own hand, dated this spring. You don't remember marking it."
 msgstr ""
@@ -15528,93 +15542,93 @@ msgstr "Un vol de grand chemin. Légal, celui-là."
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "Le ciel vous sourit. Que ça ne vous monte pas à la tête."
 
-#: scripts/Main.cs:525
+#: scripts/Main.cs:527
 msgid "New clue ({0})"
 msgstr "Nouvel indice ({0})"
 
-#: scripts/Main.cs:530
+#: scripts/Main.cs:532
 msgid "Open the notebook's Case page"
 msgstr "Ouvrir la page « Enquête » du carnet"
 
-#: scripts/Main.cs:555
+#: scripts/Main.cs:557
 msgid "Achievement: {0}"
 msgstr "Succès : {0}"
 
-#: scripts/Main.cs:580
+#: scripts/Main.cs:582
 msgid "THE NINE HEARTSONGS"
 msgstr "LES NEUF CHANTS DU CŒUR"
 
-#: scripts/Main.cs:676
+#: scripts/Main.cs:678
 msgid "In the purse: {0}g."
 msgstr "Dans la bourse : {0} po."
 
-#: scripts/Main.cs:684
+#: scripts/Main.cs:686
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr ""
 "Le carnet et la collection sont complets : tous les habitués, tous les objets, toutes les curiosités et les neuf Chants du cœur."
 
-#: scripts/Main.cs:689
+#: scripts/Main.cs:691
 msgid "Not now: finish what's in hand first."
 msgstr "Pas maintenant : finissez d'abord ce que vous avez en cours."
 
-#: scripts/Main.cs:803 scripts/Main.cs:966 scripts/Phases/RunEndPhase.cs:32
+#: scripts/Main.cs:805 scripts/Main.cs:968 scripts/Phases/RunEndPhase.cs:32
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr "LE VERROUILLAGE, CHANTÉ EN ENTIER"
 
-#: scripts/Main.cs:803 scripts/Main.cs:966
+#: scripts/Main.cs:805 scripts/Main.cs:968
 msgid "THE CROWN CHEST"
 msgstr "LE COFFRE DE LA COURONNE"
 
-#: scripts/Main.cs:834
+#: scripts/Main.cs:836
 msgid "BRAM'S STALL"
 msgstr "L'ÉTAL DE BRAM"
 
-#: scripts/Main.cs:834 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
+#: scripts/Main.cs:836 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
 msgid "WEEK {0}"
 msgstr "SEMAINE {0}"
 
-#: scripts/Main.cs:857
+#: scripts/Main.cs:859
 msgid "THE SEASON'S END"
 msgstr "LA FIN DE LA SAISON"
 
-#: scripts/Main.cs:872
+#: scripts/Main.cs:874
 msgid "THE GILDED GUILD"
 msgstr "LA GUILDE DORÉE"
 
-#: scripts/Main.cs:875
+#: scripts/Main.cs:877
 msgid "THE ALDRIC KEY"
 msgstr "LA CLÉ D'ALDRIC"
 
-#: scripts/Main.cs:941 scripts/Phases/RunEndPhase.cs:33
+#: scripts/Main.cs:943 scripts/Phases/RunEndPhase.cs:33
 msgid "FREE AND CLEAR"
 msgstr "LIBRE ET QUITTE"
 
-#: scripts/Main.cs:999 scripts/Ui/NotebookView.cs:415
+#: scripts/Main.cs:1001 scripts/Ui/NotebookView.cs:415
 msgid "DAY {0}"
 msgstr "JOUR {0}"
 
-#: scripts/Main.cs:1002
+#: scripts/Main.cs:1004
 msgid ", level {0}"
 msgstr ", niveau {0}"
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}Semaine {1}, jour {2}{3}  -  {4}"
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 msgid " of {0}"
 msgstr " sur {0}"
 
-#: scripts/Main.cs:1004
+#: scripts/Main.cs:1006
 msgid "The Guild comes tonight for {0}g."
 msgstr "La Guilde vient ce soir chercher {0} po."
 
-#: scripts/Main.cs:1005
+#: scripts/Main.cs:1007
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "La Guilde viendra chercher {0} po à la fin du jour {1}."
 
-#: scripts/Main.cs:1012
+#: scripts/Main.cs:1014
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0} vous glisse {1} po de sa cagnotte secrète (encore {2} fois)."
 

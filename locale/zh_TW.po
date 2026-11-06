@@ -908,11 +908,7 @@ msgstr "證詞"
 msgid "seen"
 msgstr "目睹"
 
-#: scripts/Core/Case.cs:282
-msgid "You knew this from an earlier season: {0}"
-msgstr "這件事，你在之前的某一季就知道了：{0}"
-
-#: scripts/Core/Case.cs:307
+#: scripts/Core/Case.cs:311
 msgid "Worked out: {0}"
 msgstr "你想通了：{0}"
 
@@ -5072,19 +5068,19 @@ msgstr "{0}金幣"
 msgid "The Crown Chest."
 msgstr "王冠寶箱。"
 
-#: scripts/Core/Save.cs:272
+#: scripts/Core/Save.cs:274
 msgid "Week {0}, day {1}, {2}, {3}g"
 msgstr "第{0}周第{1}天，{2}，{3}金"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid "Best: week {0}   Debts cleared: {1}{2}   Crown Chests opened: {3}{4}"
 msgstr "最遠：第{0}周   還清債務：{1}次{2}   開啟王冠寶箱：{3}次{4}"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid " (fastest: day {0})"
 msgstr "（最快：第{0}天）"
 
-#: scripts/Core/Save.cs:506
+#: scripts/Core/Save.cs:508
 msgid "   Heartsongs: {0}/{1}"
 msgstr "   心歌：{0}/{1}"
 
@@ -9922,158 +9918,173 @@ msgstr "嘀嗒把斯克雷押回了大門那邊。你為此拿了錢。巨口會
 msgid "Skrae still listens at the Gate, and still hates every word of it."
 msgstr "斯克雷還在大門那邊偷聽，也還是厭惡聽到的每一個字。"
 
-#: scripts/Core/TaleBook.Gilding.cs:22
+#: scripts/Core/TaleBook.Gilding.cs:32
 msgid "The Gilding"
 msgstr "鍍金之禍"
 
-#: scripts/Core/TaleBook.Gilding.cs:23
+#: scripts/Core/TaleBook.Gilding.cs:33
 msgid ""
 "Old Haddon the wheelwright turned to gold at the crossroads, the night after the Guild foreclosed on him, and Bram has started wearing a glove. The notebook's Case page keeps the questions, and what you've found."
 msgstr "公會查封車輪匠老哈登之後的那一夜，他在十字路口變成了金子；布拉姆也開始戴起了手套。筆記本的案情頁記著這些疑問，以及你查到的東西。"
 
-#: scripts/Core/TaleBook.Gilding.cs:32
+#: scripts/Core/TaleBook.Gilding.cs:42
 msgid ""
 "My father's last chest. Haddon, the wheelwright. The Guild's men took the rest, but this wouldn't open for them. He signed their paper for a new lathe, against his own hand. He laughed at that. One coin, for luck."
 msgstr ""
 "我父親的最後一個箱子。哈登，那個車輪匠。公會的人把別的都拿走了，可這只不肯為他們開啟。他為了一臺新車床簽了他們的文書，拿他自己的手作抵押。他當時還覺得好笑呢。一枚金幣，圖個吉利。"
 
-#: scripts/Core/TaleBook.Gilding.cs:38
+#: scripts/Core/TaleBook.Gilding.cs:48
 msgid ""
 "Nell Haddon gave you her father's last chest. Under his tools was the Guild's paper, in his hand."
 msgstr "內爾·哈登把她父親的最後一個箱子送給了你。他的工具底下壓著公會的文書，是他親筆籤的。"
 
-#: scripts/Core/TaleBook.Gilding.cs:43
+#: scripts/Core/TaleBook.Gilding.cs:53
 msgid ""
 "Nell Haddon brought her father's last chest, and you let her take it home."
 msgstr "內爾·哈登帶來了她父親的最後一個箱子，你讓她帶回家去了。"
 
-#: scripts/Core/TaleBook.Gilding.cs:51
+#: scripts/Core/TaleBook.Gilding.cs:61
 msgid ""
 "That glove of Bram's. I've seen it before, love. Twenty years back, the winter he took a marked baby out of the Guild's care."
 msgstr "布拉姆那隻手套。我以前見過，親愛的。二十年前，就在他把一個帶鑰紋的嬰兒從公會的照管下帶走的那個冬天。"
 
-#: scripts/Core/TaleBook.Gilding.cs:53
+#: scripts/Core/TaleBook.Gilding.cs:63
 msgid ""
 "The Mark-Finders had her in a basket, and then they didn't. Nobody ever knew what Bram paid them."
 msgstr "尋紋人本來已經把她裝進了籃子，可轉眼籃子就空了。誰也不知道布拉姆付了他們什麼。"
 
-#: scripts/Core/TaleBook.Gilding.cs:57
+#: scripts/Core/TaleBook.Gilding.cs:67
 msgid ""
 "Bettany says Bram took a marked baby out of the Guild's care, twenty years ago. Nobody knows what he paid."
 msgstr "貝塔妮說，二十年前布拉姆把一個帶鑰紋的嬰兒從公會的照管下帶走了。誰也不知道他付出了什麼。"
 
-#: scripts/Core/TaleBook.Gilding.cs:65
+#: scripts/Core/TaleBook.Gilding.cs:75
 msgid ""
 "Sister Agathe of the Unopened, with a bowl for alms. \"What's pledged to the Guild is pledged to gold, Keywright, and gold has one master. Look at Thornwick's square.\""
 msgstr "未啟派的阿加特修女，捧著一隻募捐碗。「抵押給公會的，就是抵押給了黃金，鑰匠，而黃金只有一個主人。看看荊棘鎮的廣場吧。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:67
+#: scripts/Core/TaleBook.Gilding.cs:77
 msgid ""
 "\"And every coin you let out of a chest is an eye for him. You open them. He sees.\""
 msgstr "「你從箱子裡放出來的每一枚錢幣，都是他的一隻眼睛。你開箱。他就看見。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:70
+#: scripts/Core/TaleBook.Gilding.cs:80
 msgid "Put something in her bowl ({0}g)"
 msgstr "往她碗裡放點錢（{0}金）"
 
-#: scripts/Core/TaleBook.Gilding.cs:73
+#: scripts/Core/TaleBook.Gilding.cs:83
 msgid ""
 "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye. You gave to her bowl."
 msgstr "阿加特修女說，抵押給公會的，就是抵押給了黃金，而每一枚出了箱子的錢幣，都是巨口的眼睛。你往她的碗裡捐了錢。"
 
-#: scripts/Core/TaleBook.Gilding.cs:74
+#: scripts/Core/TaleBook.Gilding.cs:84
 msgid "\"Saint Ide sees it too. Keep your chests shut, if you can.\""
 msgstr "「聖伊德也看得見。可以的話，就讓你的箱子都關著吧。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:76
+#: scripts/Core/TaleBook.Gilding.cs:86
 msgid "I've a living to make"
 msgstr "我還得討生活"
 
-#: scripts/Core/TaleBook.Gilding.cs:78
+#: scripts/Core/TaleBook.Gilding.cs:88
 msgid ""
 "Sister Agathe says what's pledged to the Guild is pledged to gold, and every coin out of a chest is the Maw's eye."
 msgstr "阿加特修女說，抵押給公會的，就是抵押給了黃金，而每一枚出了箱子的錢幣，都是巨口的眼睛。"
 
-#: scripts/Core/TaleBook.Gilding.cs:79
+#: scripts/Core/TaleBook.Gilding.cs:89
 msgid "\"So did they, in the square.\""
 msgstr "「廣場上那些人，當初也是這麼說的。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:93
+#: scripts/Core/TaleBook.Gilding.cs:103
 msgid ""
 "Sergeant Hollis, off duty and uneasy. \"Guild carts pass my toll every fifth night, under sacking. They don't stop at the Guild Hall: they go on down the palace road.\""
 msgstr "霍利斯中士下了值，神色不安。「每隔五晚，就有公會的車蓋著麻布經過我的關卡。它們不在公會大廳停下，而是沿著通往王宮的路一直往下走。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:95
+#: scripts/Core/TaleBook.Gilding.cs:105
 msgid ""
 "\"Last week a sack slipped. It was a man, Keywright. A gold man. Next Guild night, I'm going to follow one.\""
 msgstr "「上週有個麻袋滑開了。裡面是個人，鑰匠。一個金人。下個公會之夜，我要跟上一輛看看。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:99
+#: scripts/Core/TaleBook.Gilding.cs:109
 msgid ""
 "Sergeant Hollis says the Guild's carts take the gilded down the palace road every fifth night. He means to follow one."
 msgstr "霍利斯中士說，每隔五晚，公會的車就會把鍍金者沿著通往王宮的路運走。他打算跟上一輛看看。"
 
-#: scripts/Core/TaleBook.Gilding.cs:107
+#: scripts/Core/TaleBook.Gilding.cs:117
 msgid ""
 "Hollis at the back door, grey in the face. \"I followed the cart. Under the palace there's a door with a seam of gold down the middle. They weighed him on a great scale, by the stone.\""
 msgstr "霍利斯站在後門，臉色灰白。「我跟蹤了那輛車。王宮底下有一道門，正中間有一條金色的縫。他們把他放上一杆大秤，按英石稱了重量。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:109
+#: scripts/Core/TaleBook.Gilding.cs:119
 msgid ""
 "\"Then the seam opened a crack, and something on the other side took him. I heard it say thank you.\""
 msgstr "「接著那條縫裂開了一點，另一邊有個東西把他拿走了。我聽見它說了聲謝謝。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:113
+#: scripts/Core/TaleBook.Gilding.cs:120
+msgid ""
+"\"You're not surprised. You look like you've stood at that door yourself.\""
+msgstr "「你一點也不吃驚。看你的樣子，就像親眼見過那扇門似的。」"
+
+#: scripts/Core/TaleBook.Gilding.cs:124
 msgid ""
 "Hollis followed a Guild cart to a door under the palace with a seam of gold. The gilded are weighed, and something behind it takes them."
 msgstr "霍利斯跟著一輛公會的車，來到王宮底下一道帶金縫的門前。鍍金者先要稱重，然後門後有個東西把他們拿走。"
 
-#: scripts/Core/TaleBook.Gilding.cs:125
+#: scripts/Core/TaleBook.Gilding.cs:136
 msgid ""
 "From the Guild's own strongroom: its sale's leavings, the clerk said. Coin, mostly. {price}."
 msgstr "出自公會自家的密庫：書記員說，是拍賣剩下的。大多是錢幣。{price}。"
 
-#: scripts/Core/TaleBook.Gilding.cs:131
+#: scripts/Core/TaleBook.Gilding.cs:142
 msgid ""
 "A chest from the Guild's own strongroom held demon gold. The Guild deals in the Maw's gilded iron."
 msgstr "一隻出自公會自家密庫的寶箱裡裝著魔金。公會在倒賣巨口的鍍金鐵。"
 
-#: scripts/Core/TaleBook.Gilding.cs:139
+#: scripts/Core/TaleBook.Gilding.cs:150
 msgid ""
 "A note under the door, in Mara's hand: \"Even kings pledge, he said. So I read the Chest Roll. The Crown Chest: pledged to the Gilded Guild, against the Crown's note.\""
 msgstr "門縫底下塞進來一張字條，是瑪拉的筆跡：「他說，就連國王也會抵押。於是我查了寶箱名冊。王冠寶箱：已抵押給鍍金公會，作為王室借據的擔保。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:141
+#: scripts/Core/TaleBook.Gilding.cs:152
 msgid ""
 "\"The Locking is a chest like any other. It opens for its rightful owner. If the Crown can't pay on the season's last night, that's the Maw.\""
 msgstr "「大封鎖跟別的箱子沒什麼兩樣。它只為正當的主人開啟。要是王室在這一季的最後一夜還不上錢，那個主人就是巨口。」"
 
-#: scripts/Core/TaleBook.Gilding.cs:147
+#: scripts/Core/TaleBook.Gilding.cs:154
+msgid ""
+"\"P.S. Someone read the Roll before me. Beside the Crown Chest, in the margin, in your hand: the season's last night.\""
+msgstr "「附言：有人比我先讀過寶箱名冊。王冠寶箱旁邊的頁邊上，是你的筆跡：這一季的最後一夜。」"
+
+#: scripts/Core/TaleBook.Gilding.cs:159
 msgid ""
 "Mara read the Chest Roll: the King pledged the Crown Chest to the Guild, and the note falls due on the season's last night."
 msgstr "瑪拉查了寶箱名冊：國王把王冠寶箱抵押給了公會，借據會在這一季的最後一夜到期。"
 
-#: scripts/Core/TaleBook.Gilding.cs:155
+#: scripts/Core/TaleBook.Gilding.cs:167
 msgid ""
 "Ten years ago there was a famine, and the Crown had nothing it could spend. So I pledged the one thing it owned outright. You know which, I think."
 msgstr "十年前鬧過一場饑荒，而王室沒有一樣能花的東西。所以我抵押了王室唯一完全歸它所有的那樣東西。是哪一樣，我想你知道。"
 
-#: scripts/Core/TaleBook.Gilding.cs:157
+#: scripts/Core/TaleBook.Gilding.cs:169
 msgid ""
 "A gift is rightful, Keywright. Give a thing away before the note falls due, to someone who can hold it, and there's nothing left to collect."
 msgstr "贈予是正當的，鑰匠。在借據到期之前，把東西送給一個守得住它的人，就沒有東西可收了。"
 
-#: scripts/Core/TaleBook.Gilding.cs:164
+#: scripts/Core/TaleBook.Gilding.cs:171
+msgid ""
+"You knew already. I can see it. I've told no one in ten years, Keywright. Who told you?"
+msgstr "你早就知道了。我看得出來。這十年我誰也沒告訴過，鑰匠。是誰告訴你的？"
+
+#: scripts/Core/TaleBook.Gilding.cs:177
 msgid ""
 "Old Aldo pledged the Crown Chest to feed the realm through a famine. A gift is rightful, he says: there'd be nothing left to collect."
 msgstr "老奧爾多為了讓國度熬過饑荒，抵押了王冠寶箱。他說，贈予是正當的：那樣就沒有東西可收了。"
 
-#: scripts/Core/TaleBook.Gilding.cs:175
+#: scripts/Core/TaleBook.Gilding.cs:188
 msgid ""
 "A lot from the Guild's foreclosure sale. Odd one: the lid's marked inside, in a Keywright's hand. {price}."
 msgstr "公會查封甩賣會上的一件拍品。有點怪：蓋子內側有記號，是鑰匠的筆跡。{price}。"
 
-#: scripts/Core/TaleBook.Gilding.cs:181
+#: scripts/Core/TaleBook.Gilding.cs:194
 msgid ""
 "A chest from a Guild sale was marked inside the lid in your own hand, dated this spring. You don't remember marking it."
 msgstr "一隻來自公會拍賣的寶箱，蓋子內側有你親筆做的記號，日期是今年春天。你不記得做過這個記號。"
@@ -14142,92 +14153,92 @@ msgstr "簡直是攔路搶劫。合法的那種。"
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "老天在對你微笑。可別得意忘形。"
 
-#: scripts/Main.cs:525
+#: scripts/Main.cs:527
 msgid "New clue ({0})"
 msgstr "新線索（{0}）"
 
-#: scripts/Main.cs:530
+#: scripts/Main.cs:532
 msgid "Open the notebook's Case page"
 msgstr "開啟筆記本的案情頁"
 
-#: scripts/Main.cs:555
+#: scripts/Main.cs:557
 msgid "Achievement: {0}"
 msgstr "達成成就：{0}"
 
-#: scripts/Main.cs:580
+#: scripts/Main.cs:582
 msgid "THE NINE HEARTSONGS"
 msgstr "九首心歌"
 
-#: scripts/Main.cs:676
+#: scripts/Main.cs:678
 msgid "In the purse: {0}g."
 msgstr "錢袋裡有{0}金。"
 
-#: scripts/Main.cs:684
+#: scripts/Main.cs:686
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr "筆記本和收藏都已填滿：所有常客、所有物品、所有奇物，以及全部九首心歌。"
 
-#: scripts/Main.cs:689
+#: scripts/Main.cs:691
 msgid "Not now: finish what's in hand first."
 msgstr "現在不行：先把手頭的事做完。"
 
-#: scripts/Main.cs:803 scripts/Main.cs:966 scripts/Phases/RunEndPhase.cs:32
+#: scripts/Main.cs:805 scripts/Main.cs:968 scripts/Phases/RunEndPhase.cs:32
 msgid "THE LOCKING, SUNG WHOLE"
 msgstr "大封鎖，完整唱響"
 
-#: scripts/Main.cs:803 scripts/Main.cs:966
+#: scripts/Main.cs:805 scripts/Main.cs:968
 msgid "THE CROWN CHEST"
 msgstr "王冠寶箱"
 
-#: scripts/Main.cs:834
+#: scripts/Main.cs:836
 msgid "BRAM'S STALL"
 msgstr "布拉姆的攤位"
 
-#: scripts/Main.cs:834 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
+#: scripts/Main.cs:836 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:838
 msgid "WEEK {0}"
 msgstr "第{0}周"
 
-#: scripts/Main.cs:857
+#: scripts/Main.cs:859
 msgid "THE SEASON'S END"
 msgstr "一季終了"
 
-#: scripts/Main.cs:872
+#: scripts/Main.cs:874
 msgid "THE GILDED GUILD"
 msgstr "鍍金公會"
 
-#: scripts/Main.cs:875
+#: scripts/Main.cs:877
 msgid "THE ALDRIC KEY"
 msgstr "奧德里克之鑰"
 
-#: scripts/Main.cs:941 scripts/Phases/RunEndPhase.cs:33
+#: scripts/Main.cs:943 scripts/Phases/RunEndPhase.cs:33
 msgid "FREE AND CLEAR"
 msgstr "無債一身輕"
 
-#: scripts/Main.cs:999 scripts/Ui/NotebookView.cs:415
+#: scripts/Main.cs:1001 scripts/Ui/NotebookView.cs:415
 msgid "DAY {0}"
 msgstr "第{0}天"
 
-#: scripts/Main.cs:1002
+#: scripts/Main.cs:1004
 msgid ", level {0}"
 msgstr "（挑戰等級{0}）"
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}第{1}周，第{2}天{3}  -  {4}"
 
-#: scripts/Main.cs:1003
+#: scripts/Main.cs:1005
 msgid " of {0}"
 msgstr "（共{0}天）"
 
-#: scripts/Main.cs:1004
+#: scripts/Main.cs:1006
 msgid "The Guild comes tonight for {0}g."
 msgstr "公會今晚來收{0}金。"
 
-#: scripts/Main.cs:1005
+#: scripts/Main.cs:1007
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "公會將在第{1}天結束時來收{0}金。"
 
-#: scripts/Main.cs:1012
+#: scripts/Main.cs:1014
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0}從他的私房錢裡偷偷塞給你{1}金（還剩{2}次）。"
 

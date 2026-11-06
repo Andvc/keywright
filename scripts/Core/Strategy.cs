@@ -672,7 +672,7 @@ public static class Strategy
     public static int WorkOut(GameState state)
     {
         int done = 0;
-        foreach (var q in state.OpenQuestions.Where(q => !state.Solved.Contains(q.Key)).ToList())
+        foreach (var q in state.OpenQuestions.Where(q => !state.Knows(q)).ToList())
             if (Enumerable.Range(0, q.Blanks.Length).All(b => state.Words(q, b).Any(w => w.Key == q.Answer[b])) && state.Check(q, q.Answer) == 0)
                 done++;
         return done;

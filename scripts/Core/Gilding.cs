@@ -27,7 +27,7 @@ public partial class GameState
     public int BramGilt => PledgeRedeemed || Day <= 0 ? 0 : Week >= 5 ? 3 : Week >= 3 ? 2 : 1;
 
     /// <summary>Bram wears a glove over his hand until he tells you why (week 4) or you've worked it out (this season or one before).</summary>
-    public bool BramGloved => BramGilt > 0 && !Clues.Contains(Story.Told) && !Truths.Contains(Case.Glove);
+    public bool BramGloved => BramGilt > 0 && !Clues.Contains(Story.Told) && !Solved.Contains(Case.Glove) && !KnownBefore.Contains(Case.Glove);
 
     /// <summary>Vane's offer for Bram's pledge comes tonight (the sixth Guild night, with shards to give and the debt still owed).</summary>
     public bool PledgeOfferTonight => DuesTonight && Week == Story.PledgeWeek && !PaidThisWeek && MapPieces > 0 && !MapGiven && !DebtCleared;

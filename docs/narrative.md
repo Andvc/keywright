@@ -191,7 +191,8 @@ The wrong words are true things that fit a partial reading: "the Guild's" for "t
 is; "sold his mill" for "pledged himself" until the paper turns up. Three clues for each answer, through at least two
 channels, so a season that misses one tale can still close the gap. What's worked out is remembered across seasons (a
 Truth in the profile): in a later season the sentence is already filled in your hand, and people who'd have told you
-notice that you know.
+notice that you know (Hollis at the back door, Mara's note, Old Aldo: `TaleBook.Knew`). What it paid the first time isn't
+paid again: every run starts the same, and what carries over is what you know.
 
 ## The endings
 

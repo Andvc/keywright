@@ -495,7 +495,7 @@ public static class Story
         if (solved > 0)
             yield return new(Bram, Loc.Plural(solved, $"You worked out {solved} of the season's questions. Keep the notebook: what you know stays with you.",
                 $"You worked out {solved} of the season's questions. Keep the notebook: what you know stays with you."));
-        else if (state.OpenQuestions.Any())
+        else if (state.OpenQuestions.Any(q => !state.Knows(q)))
             yield return new(Bram, Loc.T("The questions in your notebook are still open. Keep it: what you learn stays with you."));
         // What the Lantern Market and the back room saw (0.33).
         if (state.EyesSold > 0)

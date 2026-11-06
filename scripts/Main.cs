@@ -28,6 +28,8 @@ namespace Keywright;
 /// --tales=a,b puts those tales in the season, whatever it draws.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
 /// (with --vault-demo, the Crown Chest's other ending). --mimics=N makes one chest in N breathe (from Thornwick, 0.33).
+/// --season=N plays a later season (the last one lost, so the year turned back); --knew=all as if every question of the
+/// case had been worked out in an earlier season.
 /// </summary>
 public partial class Main : Node2D
 {
@@ -82,6 +84,8 @@ public partial class Main : Node2D
                 if (float.TryParse(Arg(args, "--heartsongs"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
                         out var songOdds))
                     Heartsongs.Chance = songOdds;
+                // --mimics=N: one chest in N breathes (0.33; a large N all but turns them off, to measure what they're worth).
+                if (int.TryParse(Arg(args, "--mimics"), out var simMimics) && simMimics > 0) Mimics.OneIn = simMimics;
                 // --debtstep=S: try another rise in the Guild's dues a challenge level (for tuning it).
                 if (float.TryParse(Arg(args, "--debtstep"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
                         out var debtStep))
@@ -224,6 +228,19 @@ public partial class Main : Node2D
                 Heartsongs.Chance = Math.Clamp(songChance, 0f, 1f);
             // --mimics=2: one chest in two breathes (from Thornwick), to see them at the counter and the opening.
             if (int.TryParse(Arg(args, "--mimics"), out var mimics) && mimics > 0) Mimics.OneIn = mimics;
+            // --season=2: a later season, the last one lost (the year turned back: Bram's dream, Vane's "we've met before",
+            // a chest marked in your own hand). --knew=all: every question of the case worked out in an earlier season
+            // (filled in on the Case page, Bram's glove off, and the people who'd have told you notice that you know).
+            if (int.TryParse(Arg(args, "--season"), out var season) && season > 1)
+            {
+                State.SeasonsBefore = season - 1;
+                State.LastEnd = Story.Lost;
+            }
+            if (Arg(args, "--knew") == "all")
+            {
+                State.KnownBefore.UnionWith(Case.Questions.Where(q => !q.Career || State.SeasonsBefore > 0).Select(q => q.Key));
+                State.Truths.UnionWith(State.KnownBefore);
+            }
             if (int.TryParse(Arg(args, "--start-tier"), out var startTier))
                 State.SkipTo(Math.Clamp(startTier, 1, ShopTiers.Max), int.TryParse(Arg(args, "--gold"), out var g) ? g : 500);
             // --tales=a,b: those tales are in the season, whatever it draws (to check one on demand).

@@ -617,7 +617,7 @@ public partial class NotebookView : Node2D
                 16, Palette.Muted).Wrapped().Place(TableX, top, PanelW - 48, 60));
             return;
         }
-        var q = open.FirstOrDefault(o => o.Key == _question) ?? open.FirstOrDefault(o => !_state.Solved.Contains(o.Key)) ?? open[0];
+        var q = open.FirstOrDefault(o => o.Key == _question) ?? open.FirstOrDefault(o => !_state.Knows(o)) ?? open[0];
         _question = q.Key;
 
         // The questions, a tick by each one worked out.
@@ -625,8 +625,8 @@ public partial class NotebookView : Node2D
         for (int i = 0; i < open.Count; i++)
         {
             var o = open[i];
-            bool picked = o == q, done = _state.Solved.Contains(o.Key);
-            var row = UiKit.MakePanel(picked ? Palette.Gold : Palette.PanelBorder).Place(TableX - 8, top + i * 50, listW - 4, 46);
+            bool picked = o == q, done = _state.Knows(o);
+            var row = UiKit.MakePanel(picked ? Palette.Gold : Palette.PanelBorder).Place(TableX - 8, top + i * 54, listW - 4, 50);
             row.MouseFilter = Control.MouseFilterEnum.Stop;
             string key = o.Key;
             row.GuiInput += e =>
@@ -637,16 +637,16 @@ public partial class NotebookView : Node2D
                 Sfx.Play("tick", 1.1f, -8);
                 ShowPage(CasePage);
             };
-            var ask = UiKit.MakeLabel(o.Ask, 16, done ? Palette.Good : picked ? Palette.Gold : Palette.Text).Wrapped().Place(12, 4, listW - 64, 40);
+            var ask = UiKit.MakeLabel(o.Ask, 16, done ? Palette.Good : picked ? Palette.Gold : Palette.Text).Wrapped().Place(12, 3, listW - 64, 44);
             ask.VerticalAlignment = VerticalAlignment.Center;
             row.AddChild(ask);
-            if (done) row.AddChild(UiKit.MakeCheck(true, new Vector2(listW - 32, 23), 1));
+            if (done) row.AddChild(UiKit.MakeCheck(true, new Vector2(listW - 32, 25), 1));
             _page.AddChild(row);
         }
 
         // The question picked: its sentence, the blanks' words, and the clues.
         float x = TableX + listW + 8, w = PanelX + PanelW - 24 - x, y = top;
-        bool solved = _state.Solved.Contains(q.Key), known = solved || _state.Truths.Contains(q.Key);
+        bool solved = _state.Solved.Contains(q.Key), known = _state.Knows(q);
         if (!Picks.TryGetValue(q.Key, out var picks) || picks.Length != q.Blanks.Length) Picks[q.Key] = picks = new string[q.Blanks.Length];
         if (known) picks = q.Answer.ToArray();
         _page.AddChild(UiKit.MakeLabel(q.Ask.ToUpperInvariant(), 24, Palette.Gold, outline: 4).Place(x, y - 4, w, 30));
