@@ -501,6 +501,9 @@ public static class Peddler
     public static string Name => Loc.T("Nim the Peddler");
 
     // Nim talks about Nim the way other people talk about the weather: cheerfully, and as if it couldn't be helped.
+    /// <summary>The night the Guild's carriage took Bram (0.34).</summary>
+    public static string SawTheCarriage => Loc.T("Saw the Guild's carriage go by with Bram in it. He waved. Bram never waves. Well! Curios.");
+
     public static readonly string[] Greetings =
     {
         Loc.T("Psst! Keywright! Shutters down? Good. Nim's pack is full of things that came out of chests and never went back in."),

@@ -105,6 +105,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    deals a few curios and keepsakes, so `godot --headless --path . -- --fit-test --lang=CODE` measures every curio's
    name and description on Nim's cards (wide and narrow) and every keepsake's card, in that language's font, and exits
    1 if one doesn't fit: run it for each language after changing a curio's or keepsake's words (or the cards).
+8. Fresh eyes (0.34): `tools/playtest/pt` drives the game in a virtual 1280x720 screen for a playtester who plays by
+   screenshots (start, click, shake at a strength, drop, keys; a fresh profile in `PLAYTEST_DIR`; `GAME=` a frozen
+   worktree keeps the build steady while you work). For a playtest by an agent with no context, give it
+   `tools/playtest/README.md` and nothing else of the repository, and ask for a play log, what it understood of the
+   story, and its top issues with screenshots.
 
 ## Conventions
 

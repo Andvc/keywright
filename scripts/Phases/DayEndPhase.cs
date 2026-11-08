@@ -71,13 +71,16 @@ public partial class DayEndPhase : Phase
     /// <summary>The day in figures, side by side: what you bought and passed on, spent and took in, and the profit.</summary>
     void BuildSummary(DayStats today)
     {
+        // The day's profit is everything it brought in against what it spent: the chests (less what went to a commission
+        // instead of being sold), the commissions, the curios, the door money and the town (a key piece's fee too).
+        int profit = today.Profit + today.Commissions + today.Curios + today.Admission + today.Tales;
         var figures = new System.Collections.Generic.List<(string Label, string Value, Color Color)>
         {
             (Loc.T("Bought"), today.Bought.ToString(), Palette.Text),
             (Loc.T("Passed"), today.Passed.ToString(), Palette.Text),
             (Loc.T("Spent"), Money.Short(today.Spent), Palette.Text),
             (Loc.T("The chests held"), Money.Short(today.Earned), Palette.Gold),
-            (Loc.T("Profit"), (today.Profit > 0 ? "+" : "") + Money.Short(today.Profit), today.Profit > 0 ? Palette.Good : today.Profit < 0 ? Palette.Bad : Palette.Text),
+            (Loc.T("Profit"), (profit > 0 ? "+" : "") + Money.Short(profit), profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text),
         };
         if (today.Commissions > 0) figures.Add((Loc.T("Commissions"), Loc.T($"+{today.Commissions}g"), Palette.Good));
         if (today.Curios > 0) figures.Add((Loc.T("Curios"), Loc.T($"+{today.Curios}g"), Palette.Magic));
@@ -174,7 +177,8 @@ public partial class DayEndPhase : Phase
             _side.AddChild(watcher);
             watcher.AddChild(new TextureRect { Texture = ArtTexture.Load("res://assets/ui/guild.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
                 .Place(14, 14, 44, 48));
-            watcher.AddChild(UiKit.MakeLabel(Loc.T("A pale man with a gilded chain has been watching the stall all day. He's still outside."), 16, Palette.Muted)
+            watcher.AddChild(UiKit.MakeLabel(State.Day <= 1 ? Loc.T("A pale man with a gilded chain has been watching the stall all day. He's still outside.")
+                : Loc.T("The pale man with the gilded chain is back, and this time he's crossing the road to the stall."), 16, Palette.Muted)
                 .Wrapped().Place(70, 12, SideW - 84, 88));
         }
 

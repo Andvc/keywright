@@ -12,8 +12,12 @@ public sealed class LessonCheck
     public Hearing Hearing { get; init; }
     public GameState State { get; init; }
 
-    /// <summary>The chest has been shaken (without the magnet) at all these strengths.</summary>
-    public bool Tried(params Shake[] levels) => levels.All(l => Hearing.HasTried(l, false));
+    /// <summary>
+    /// The chest has been shaken (without the magnet) at all these strengths: all that can be tried here, that is (no hard
+    /// shake on a day of mourning, for a packhorse's load, or for Hesk), so a lesson never asks for what the day forbids.
+    /// </summary>
+    public bool Tried(params Shake[] levels) =>
+        levels.All(l => Hearing.HasTried(l, false) || (l == Shake.Hard && State != null && Visit != null && !State.CanShakeHardAt(Visit.Seller)));
 }
 
 /// <summary>

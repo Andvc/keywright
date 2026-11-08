@@ -92,7 +92,7 @@ public static class Story
         };
         if (state.Remembers && !state.CampaignDone)
             lines.Add(new(Vane, Loc.T("And you, Keywright. We've met before, I think. You always look at my ring like that."), "vane.again"));
-        lines.Add(new(Bram, Loc.T("Every fifth night, then. A good ear pays any debt. We'll talk in the morning.")));
+        lines.Add(new(Bram, Loc.T("Every fifth night, then. A good ear pays any debt.")));
         return lines;
     }
 
@@ -131,24 +131,25 @@ public static class Story
                     : Welcome(state));
                 lines.Add(new(Bram, Loc.T("Folk bring us chests nobody else can open. You buy one, it opens for you, and you sell what's inside. " +
                                           "So listen before you buy: that's the whole trade.")));
-                lines.Add(new(Bram, Loc.T("Bettany from the Crossed Keys will be by. Ask after her cellar: it floods every spring, and she likes to be asked.")));
+                lines.Add(new(Bram, Loc.T("Bettany from the Crossed Keys will be by. She hears everything first, and she'll tell you most of it.")));
                 lines.Add(new(Bram, Loc.T("When I want you at the counter I'll tap it, twice and once. Like that. And mind: some chests listen back.")));
                 break;
             case 2:
+                // The Guild's letter, read at the counter (yours to read out: Vane isn't there).
                 if (state.CampaignDone || state.BramHere) break;
                 if (state.Remembers)
                 {
-                    lines.Add(new(Vane, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
-                    lines.Add(new(Vane, Loc.T("\"Earn the treasury key, keep his account paid, and bring the key to the treasury on the season's last night.\""), "commission"));
+                    lines.Add(new(Self, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
+                    lines.Add(new(Self, Loc.T("\"Earn the treasury key, keep his account paid, and bring the key to the treasury on the season's last night.\""), "commission"));
                     lines.Add(new(Self, Loc.T("The same letter, word for word. Last time, the treasury breathed.")));
                     break;
                 }
-                lines.Add(new(Vane, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
-                lines.Add(new(Vane, Loc.T("\"Meanwhile the Guild's assessors will certify your work. Four marks of a master keywright earn the four pieces " +
+                lines.Add(new(Self, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
+                lines.Add(new(Self, Loc.T("\"Meanwhile the Guild's assessors will certify your work. Four marks of a master keywright earn the four pieces " +
                                           "of the treasury key, each with a master's fee: a hidden thing read true, a stolen chest settled, a commission " +
                                           "filled, an old lock picked without force.\"")));
-                lines.Add(new(Vane, Loc.T("\"Keep Bram's account paid, and bring the whole key to the treasury on the season's last night. His commission " +
-                                          "needs a second keywright. When it's done, his account is closed, and he comes home.\""), "commission"));
+                lines.Add(new(Self, Loc.T("\"Pay Bram's account as it falls due, every fifth night, and bring the whole key to the treasury on the " +
+                                          "season's last night. His commission needs a second keywright. When it's done and his account is paid, he comes home.\""), "commission"));
                 break;
             case GatheringWeek:
                 lines.AddRange(Gathering(state));
@@ -193,7 +194,7 @@ public static class Story
         if (!state.Remembers)
         {
             if (state.BramNotes)
-                lines.Add(new(Vane, Loc.T("A letter with the Guild's seal: \"The treasury opens on the season's last night. Bram looks forward to seeing you. Do bring the key.\"")));
+                lines.Add(new(Self, Loc.T("A letter with the Guild's seal: \"The treasury opens on the season's last night. Bram looks forward to seeing you. Do bring the key.\"")));
             return lines;
         }
         string teller = Narrator(state);

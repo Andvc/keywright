@@ -51,4 +51,38 @@ public static class Words
             result = result == null ? item : Loc.T($"{result}, {item}");
         return result ?? "";
     }
+
+    /// <summary>
+    /// A long text broken into lines for a tooltip (a tooltip's label doesn't wrap by itself, and a long one ran off the
+    /// screen, 0.34): at spaces, about <paramref name="width"/> letters a line; a language written without spaces
+    /// (Japanese, Chinese) every <paramref name="width"/> / 2 characters. Line breaks already in it are kept.
+    /// </summary>
+    public static string Wrap(string text, int width = 64)
+    {
+        if (string.IsNullOrEmpty(text)) return text;
+        var lines = new List<string>();
+        foreach (string paragraph in text.Split('\n'))
+        {
+            bool spaced = paragraph.Length < width || paragraph.Count(c => c == ' ') * 12 >= paragraph.Length;
+            if (!spaced)
+            {
+                int n = Math.Max(8, width / 2);
+                for (int i = 0; i < paragraph.Length; i += n) lines.Add(paragraph.Substring(i, Math.Min(n, paragraph.Length - i)));
+                continue;
+            }
+            var line = new System.Text.StringBuilder();
+            foreach (string word in paragraph.Split(' '))
+            {
+                if (line.Length > 0 && line.Length + 1 + word.Length > width)
+                {
+                    lines.Add(line.ToString());
+                    line.Clear();
+                }
+                if (line.Length > 0) line.Append(' ');
+                line.Append(word);
+            }
+            lines.Add(line.ToString());
+        }
+        return string.Join("\n", lines);
+    }
 }

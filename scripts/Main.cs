@@ -534,11 +534,12 @@ public partial class Main : Node2D
     /// An Inquiry entry just noted (0.34): a note over the top bar (how you came by it, and the question it's for), which
     /// opens the notebook's Inquiry page where it can.
     /// </summary>
-    void NoteEntry(Entry entry)
+    void NoteEntry(Entry entry, List<EntryWay> ways)
     {
         var thread = Inquiry.Threads.FirstOrDefault(t => t.Key == entry.Thread);
         if (thread == null) return;
-        string head = Loc.T($"In the notebook ({Inquiry.WayName(entry.Way)})"), ask = thread.Ask;
+        string how = Words.List(ways.Select(Inquiry.WayName));
+        string head = Loc.T($"In the notebook ({how})"), ask = thread.Ask;
         Toast(head, ask, Palette.Magic, Loc.T("Open the notebook's Inquiry page"), () => _phase?.ShowInquiry());
     }
 
@@ -1204,7 +1205,17 @@ public partial class Main : Node2D
         if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not (TreasuryPhase or ScenePhase or RunEndPhase))
         {
             if (State.NewPieces.TryDequeue(out var piece)) NotePiece(piece.Piece, piece.Fee);
-            else if (State.NewEntries.TryDequeue(out var entry)) NoteEntry(entry);
+            else if (State.NewEntries.TryDequeue(out var entry))
+            {
+                // Several for one question at once (a scene's lines): one note, with each way they came.
+                var ways = new List<EntryWay> { entry.Way };
+                while (State.NewEntries.TryPeek(out var next) && next.Thread == entry.Thread)
+                {
+                    State.NewEntries.Dequeue();
+                    if (!ways.Contains(next.Way)) ways.Add(next.Way);
+                }
+                NoteEntry(entry, ways);
+            }
         }
         if (_camera == null) return;
         _trauma = Mathf.Max(0f, _trauma - (float)delta * 1.6f);

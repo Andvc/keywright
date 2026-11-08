@@ -6,7 +6,7 @@ namespace Keywright.Core;
 
 /// <summary>
 /// The campaign's beats at the counter and the back door (0.34, docs/narrative.md), drawn every season. Before you
-/// remember: Garrick's grey chest on the second morning (the same every spring), and Nell Haddon's word about her father's
+/// remember: Garrick's old green chest on the second morning (the same every spring), and Nell Haddon's word about her father's
 /// note. Once you remember: Bram's tuning fork in a Guild sale, Sergeant Hollis and the carts, the weighhouse, the crates
 /// (Haddon's, Bram's), the first mimic, Mara and the seal, the charter (Master Quire's Roll, or the King), and Bram's
 /// homecoming. Each comes once a season, at the shop where it belongs, and none of it is a roll.
@@ -15,7 +15,7 @@ public static partial class TaleBook
 {
     public const string Nell = "nell", Haddon = Campaign.Haddon;
 
-    /// <summary>The first-morning chest: the same every spring, whatever the season's seed (Garrick's granddad's grey chest).</summary>
+    /// <summary>The first-morning chest: the same every spring, whatever the season's seed (Garrick's granddad's old green chest).</summary>
     public static Chest FirstChest() => new(new[]
     {
         new Item(Category.Coins, Rarity.Uncommon), new Item(Category.Garb, Rarity.Common), new Item(Category.Coins, Rarity.Common),
@@ -37,12 +37,12 @@ public static partial class TaleBook
                           "with him: the notebook's Inquiry page keeps what you learn, and how the treasury key is coming."),
             Beats = new Beat[]
             {
-                // The second morning, every spring: Garrick's grey chest, the same chest with the same things in it.
+                // The second morning, every spring: Garrick's old green chest, the same old green chest with the same things in it.
                 new()
                 {
                     Key = "first.chest", Who = Garrick, Gap = 2, If = s => s.Week == 1 && !s.CampaignDone,
                     Brings = (s, rng) => Market.Price(rng, Sellers.Get(Garrick), FirstChest(), s.Tier,
-                        pitch: Loc.T("My granddad's grey chest, from the attic. I've meant to sell it for years. {price}, and it's yours."), origin: Origins.Get("attic")),
+                        pitch: Loc.T("My granddad's old green chest, from the attic. I've meant to sell it for years. {price}, and it's yours."), origin: Origins.Get("attic")),
                     Bought = (s, v) => s.RecordFirstChest(v.Chest),
                 },
                 // Week 1: the Guild has Old Haddon's note, due on its first night.
@@ -70,12 +70,12 @@ public static partial class TaleBook
                             s.Note("haddon.paid");
                             s.Sway(Faction.Commons, 1);
                             s.Log(Story.Tale, Loc.T("You paid Old Haddon's note to the Guild before its first night. He's staying home."));
-                            return Loc.T("\"You'd do that? He'll pay you back in wheels. Whether you want them or not.\"");
+                            return Loc.T("You'd do that? He'll pay you back in wheels. Whether you want them or not.");
                         }, W(s, -Campaign.HaddonNote, (Faction.Commons, 1)) + (s.Remembers ? s.Purses(0.3f) : 0), cost: Campaign.HaddonNote, kind: true),
                         C(Loc.T("I can't, not this week"), () =>
                         {
                             s.Log(Story.Tale, Loc.T("Nell Haddon told you the Guild has her father's note, due on its first night. You couldn't help."));
-                            return Loc.T("\"No. Nobody can. I'll find it somewhere.\"");
+                            return Loc.T("No. Nobody can. I'll find it somewhere.");
                         }),
                     },
                     Then = s => s.Note("haddon.note"),
@@ -114,9 +114,9 @@ public static partial class TaleBook
                         C(Loc.T("Meet him at the toll on the Guild's night"), () =>
                         {
                             s.Flags.Add("follow.yes");
-                            return Loc.T("\"Bring a dark coat. And don't rattle anything.\"");
+                            return Loc.T("Bring a dark coat. And don't rattle anything.");
                         }, s.Purses(0.5f), kind: true),
-                        C(Loc.T("Not this season"), () => Loc.T("\"Suit yourself. The carts'll keep coming.\"")),
+                        C(Loc.T("Not this season"), () => Loc.T("Suit yourself. The carts'll keep coming.")),
                     },
                     Then = s => s.Note("carts"),
                 },
@@ -214,9 +214,9 @@ public static partial class TaleBook
                         C(Loc.T($"Have him copy them ({s.Purses(0.5f)}g)"), () =>
                         {
                             s.Note("register");
-                            return Loc.T("\"Every crate, by name and weight, and the night it goes down. Burn it after.\"");
+                            return Loc.T("Every crate, by name and weight, and the night it goes down. Burn it after.");
                         }, s.Purses(0.5f), cost: s.Purses(0.5f), kind: true),
-                        C(Loc.T("Not now"), () => Loc.T("\"The Roll keeps.\"")),
+                        C(Loc.T("Not now"), () => Loc.T("The Roll keeps.")),
                     },
                 },
                 // Once Bram's been brought home: Mara, on what the Maw is.

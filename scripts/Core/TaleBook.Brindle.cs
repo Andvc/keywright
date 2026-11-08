@@ -215,7 +215,7 @@ public static partial class TaleBook
                             s.Flags.Add("inn.lent");
                             // What she owes is what she borrowed, whatever the shop's grown into by the time she pays.
                             s.SetAside[InnLoan] = s.Purses(1);
-                            s.Promise(s.Day + 4, Bettany, Loc.T("Bettany, to repay you"));
+                            s.Promise(s.Day + ToNextGuildNight(s), Bettany, Loc.T("Bettany, to repay you"));
                             s.Log("inn", Loc.T("You lent Bettany what she was short for the Guild. She'll pay you back, and half again."));
                             return Loc.T("You're a love. Half again, by the next Guild night. On my mother's grave.");
                         }, W(s, s.Purses(0.5f) + Strategy.FavourWorth(s), (Faction.Commons, 1)), cost: s.Purses(1), kind: true),
@@ -229,7 +229,8 @@ public static partial class TaleBook
                 },
                 new()
                 {
-                    Key = "inn.repaid", Who = Bettany, After = "inn.tab", Gap = 4, If = s => s.Flagged("inn.lent"),
+                    // "By the next Guild night", as she promised: on the day of it.
+                    Key = "inn.repaid", Who = Bettany, After = "inn.tab", Gap = 1, If = s => s.Flagged("inn.lent") && s.DayOfWeek == Guild.DaysPerWeek,
                     Says = s => Say(Bettany, Loc.T($"{Money.Say(InnRepaid(s))}, love: what I owed and half again. The Crossed Keys is still mine. " +
                                                    $"If you ever need a room, a meal or a word in the right ear, it's yours.")),
                     Then = s =>
@@ -344,7 +345,10 @@ public static partial class TaleBook
     /// <summary>What Bettany borrowed (kept with the season's set-aside sums), and what she pays back: half again.</summary>
     const string InnLoan = "inn.loan"; // loc: keys
 
-    static int InnRepaid(GameState s) => Money.Round(1.5f * s.SetAside.GetValueOrDefault(InnLoan, s.Purses(1)));
+    static int InnRepaid(GameState s) => (int)Math.Round(1.5f * s.SetAside.GetValueOrDefault(InnLoan, s.Purses(1)));
+
+    /// <summary>Days to the next Guild night (the fifth of the week): a whole week from the night itself.</summary>
+    static int ToNextGuildNight(GameState s) => s.DayOfWeek >= Guild.DaysPerWeek ? Guild.DaysPerWeek : Guild.DaysPerWeek - s.DayOfWeek;
 
     static Line InnEnding(GameState s)
     {

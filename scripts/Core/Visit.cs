@@ -478,7 +478,7 @@ public static class Gut
     {
         (0.3f, new[] { Loc.T("Even the heavens pity you."), Loc.T("You feel like you just paid for the privilege of being robbed.") }),
         (0.7f, new[] { Loc.T("You feel like you just got fleeced."), Loc.T("Your purse feels lighter. Your heart, heavier.") }),
-        (1f, new[] { Loc.T("Maybe that wasn't the best idea."), Loc.T("Close, but the house won. You are the house.") }),
+        (1f, new[] { Loc.T("Maybe that wasn't the best idea."), Loc.T("Close, but the house won this one.") }),
         (1.5f, new[] { Loc.T("Nothing to lose sleep over."), Loc.T("A fair day's trade.") }),
         (3f, new[] { Loc.T("You have a feeling you made the right call."), Loc.T("Your gut does a little dance.") }),
         (float.MaxValue, new[] { Loc.T("Highway robbery. The legal kind."), Loc.T("The heavens smile on you. Don't let it go to your head.") }),

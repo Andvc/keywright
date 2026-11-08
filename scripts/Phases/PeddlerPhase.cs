@@ -68,7 +68,9 @@ public partial class PeddlerPhase : Phase
         _nim = Add(new SellerView(nim));
         shop.Light(_nim.Figure);
         _nim.Enter();
-        _nim.Say(Peddler.Greetings[State.Day % Peddler.Greetings.Length]);
+        // The night Bram went with Vane (0.34), Nim saw the carriage go by; otherwise his usual hello.
+        _nim.Say(State.BramAway && !State.BramHome && State.Week == 1 && !State.CampaignDone ? Peddler.SawTheCarriage
+            : Peddler.Greetings[State.Day % Peddler.Greetings.Length]);
         Sfx.PlayGroup("door_open", 1.2f, -6);
         Add(UiKit.MakeLabel(Loc.T("NIM'S CURIOS"), 32, Palette.Magic, HorizontalAlignment.Center, outline: 6).Place(AreaX, 58, AreaW, 40));
         _board = Add(new Node2D());

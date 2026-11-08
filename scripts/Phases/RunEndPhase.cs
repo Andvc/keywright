@@ -66,11 +66,13 @@ public partial class RunEndPhase : Phase
             (Loc.T("Tales begun"), Loc.T($"{State.TaleLog.Count} of {State.TalesDrawn.Count}")),
             (Loc.T("Friends"), Words.List(Factions.All.Where(State.Friend).Select(Factions.Name).DefaultIfEmpty(Loc.T("none")))),
         };
+        // The labels as wide as the longest needs (a language can run long), the values right-aligned in what's left.
+        float labelW = Mathf.Clamp(rows.Max(r => UiKit.TextWidth(r.Item1)) + 8, 200, 300);
         for (int i = 0; i < rows.Count; i++)
         {
             var (label, value) = rows[i];
-            panel.AddChild(UiKit.MakeLabel(label, 16, Palette.Muted).Place(32, 18 + i * 28, 200, 20));
-            var text = UiKit.MakeLabel(value, 16, Palette.Text, HorizontalAlignment.Right).Place(220, 18 + i * 28, 288, 20);
+            panel.AddChild(UiKit.MakeLabel(label, 16, Palette.Muted).Place(32, 18 + i * 28, labelW, 20));
+            var text = UiKit.MakeLabel(value, 16, Palette.Text, HorizontalAlignment.Right).Place(32 + labelW, 18 + i * 28, 476 - labelW, 20);
             text.ClipText = true;
             text.TooltipText = value;
             text.MouseFilter = Control.MouseFilterEnum.Pass;
@@ -123,7 +125,8 @@ public partial class RunEndPhase : Phase
         int total = Score.Total(State), final = Score.Final(State);
         string times = State.Challenge > 0 ? Loc.T($"{total} x{Challenges.Multiplier(State.Challenge):0.##} = ") : "";
         int best = Game.Profile?.BestScore.GetValueOrDefault(State.Character) ?? 0;
-        panel.AddChild(UiKit.MakeLabel(final > best ? Loc.T("Score: a new best!") : Loc.T("Score"), 24, Palette.Gold, outline: 4).Place(32, 254, 260, 30));
+        string scored = final > best ? Loc.T("Score: a new best!") : Loc.T("Score");
+        panel.AddChild(UiKit.MakeLabel(scored, UiKit.TextWidth(scored, 24) <= 256 ? 24 : 16, Palette.Gold, outline: 4).Place(32, 254, 260, 30));
         panel.AddChild(UiKit.MakeLabel($"{times}{final}", 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 254, 308, 30));
     }
 

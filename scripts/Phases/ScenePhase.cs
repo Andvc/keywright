@@ -89,7 +89,8 @@ public partial class ScenePhase : Phase
         var face = new Face { Root = new Node2D { Position = at }, Portrait = new Sprite2D
             { Scale = Vector2.One * FaceScale, Centered = false, Position = new Vector2(-192, -636), TextureFilter = CanvasItem.TextureFilterEnum.Nearest } };
         face.Root.AddChild(face.Portrait);
-        face.Name = UiKit.MakeLabel("", 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-200, -210, 400, 30);
+        // Just above the dialogue box (its top is at 500), not under it.
+        face.Name = UiKit.MakeLabel("", 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(-200, -224, 400, 30);
         face.Root.AddChild(face.Name);
         Show(face, key);
         return face;

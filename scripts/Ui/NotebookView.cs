@@ -186,7 +186,8 @@ public partial class NotebookView : Node2D
         Header(Loc.T("Shake"), TableX + 330, y);
         Header(Loc.T("Weight"), TableX + 420, y);
         Header(Loc.T("Note"), TableX + 520, y);
-        Header(Loc.T("If it's as good as the chest:"), TableX + 760, y - 20, 4 * 104);
+        // Right-aligned over its columns, so it clears the tabs above (0.34 added one).
+        Header(Loc.T("If it's as good as the chest:"), TableX + 760, y - 20, 4 * 104 - 8, HorizontalAlignment.Right);
         for (int c = 0; c < 4; c++) Header(Categories.ColourName((Rarity)c), TableX + 760 + c * 104, y);
 
         var kinds = Categories.UpTo(tier).ToList();
@@ -206,8 +207,8 @@ public partial class NotebookView : Node2D
             .Place(TableX, y + 34 + kinds.Count * RowH, PanelW - 48, 180));
     }
 
-    void Header(string text, float x, float y, float width = 200) =>
-        _page.AddChild(UiKit.MakeLabel(text, 16, Palette.Gold.Darkened(0.2f)).Place(x, y, width, 20));
+    void Header(string text, float x, float y, float width = 200, HorizontalAlignment align = HorizontalAlignment.Left) =>
+        _page.AddChild(UiKit.MakeLabel(text, 16, Palette.Gold.Darkened(0.2f), align).Place(x, y, width, 20));
 
     Control MakeRow(CategoryDef kind, float y, int tier)
     {

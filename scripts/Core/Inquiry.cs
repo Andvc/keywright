@@ -54,7 +54,7 @@ public static class Inquiry
     {
         // ---- Where is Bram? ----
         E("summons", Bram, EntryWay.Said, Loc.T("\"The Guild's treasury has asked for Bram. An old consignment needs his attention. Temporary work.\""), Story.Vane),
-        E("commission", Bram, EntryWay.Said, Loc.T("\"Keep the shop running until he returns. Earn the treasury key, bring it to the treasury on the season's last night, and his account is closed.\""), Story.Vane),
+        E("commission", Bram, EntryWay.Said, Loc.T("\"Keep the shop running until he returns, and his account paid. Earn the treasury key, and bring it to the treasury on the season's last night.\""), Story.Vane),
         E("noletter", Bram, EntryWay.Seen, Loc.T("Bram said he'd write every week. No letter has come from him. The Guild's letters come.")),
         E("haddon.note", Bram, EntryWay.Said, Loc.T("\"The Guild has father's note, due on its first night. If it isn't paid they'll take the yard, and him, to work it off.\""), TaleBook.Nell),
         E("haddon.taken", Bram, EntryWay.Seen, Loc.T("The Guild took Old Haddon on its first night, to work off his note. Nell is minding the yard alone.")),

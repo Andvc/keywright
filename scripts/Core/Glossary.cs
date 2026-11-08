@@ -65,7 +65,7 @@ public static class Glossary
     }
 
     /// <summary>"Sight unseen: A chest bought without...", for a tooltip.</summary>
-    public static string Line(Term term) => Loc.T($"{Name(term)}: {Define(term)}");
+    public static string Line(Term term) => Words.Wrap(Loc.T($"{Name(term)}: {Define(term)}"));
 
     /// <summary>The words a curio's card uses, in the order they matter (none for a card that says it all).</summary>
     public static IReadOnlyList<Term> For(CurioDef curio) => CurioTerms.TryGetValue(curio.Key, out var terms) ? terms : None;
@@ -99,7 +99,7 @@ public static class Glossary
     /// <summary>A curio as a tooltip says it: its name and description, then the words it uses, defined.</summary>
     public static string Tooltip(CurioDef curio)
     {
-        string head = Loc.T($"{curio.Name}: {curio.Blurb}");
+        string head = Words.Wrap(Loc.T($"{curio.Name}: {curio.Blurb}"));
         string terms = Explain(curio);
         return terms.Length == 0 ? head : head + "\n\n" + terms;
     }

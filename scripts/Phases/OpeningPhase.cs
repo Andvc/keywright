@@ -1050,7 +1050,8 @@ public partial class OpeningPhase : Phase
     void AddDeliverButton(Item item, Vector2 at, int worth)
     {
         if (State.WantedBy(item) == null || _purchase.IsClaimed(item)) return;
-        var button = UiKit.MakeButton("", Palette.Good.Darkened(0.35f), 16).Place(at.X - ButtonW / 2, 682, ButtonW, 32);
+        // Under the keep button, or in its place when there is no shelf yet (so it never sits at the screen's very edge).
+        var button = UiKit.MakeButton("", Palette.Good.Darkened(0.35f), 16).Place(at.X - ButtonW / 2, State.DisplayOpen ? 682 : 644, ButtonW, 32);
         button.Pressed += () => Deliver(item);
         _deliverButtons.Add((button, item, worth));
         Add(button);

@@ -1,0 +1,140 @@
+#!/bin/bash
+# Playtest helper (0.34): drives the game in a virtual 1280x720 screen (display :77), for a playtester (a person or an
+# agent) who plays by screenshots. Usage: pt <command> [args]   (see README.md)
+# GAME: the project to run (this checkout by default; point it at a frozen worktree to keep a build steady while you
+# work). PLAYTEST_DIR: where the game's own files (a fresh profile), the screenshots and the log go.
+HERE="$(cd "$(dirname "$0")" && pwd)"
+GAME="${GAME:-$(cd "$HERE/../.." && pwd)}"
+KIT="${PLAYTEST_DIR:-${TMPDIR:-/tmp}/keywright-playtest}"
+mkdir -p "$KIT"
+export DISPLAY=:77
+SHOTS="$KIT/shots"
+mkdir -p "$SHOTS"
+counter_file="$KIT/.shotcount"
+next_shot() {
+  local n=0
+  [ -f "$counter_file" ] && n=$(cat "$counter_file")
+  n=$((n+1)); echo "$n" > "$counter_file"
+  printf "%s/%04d.png" "$SHOTS" "$n"
+}
+shot() {
+  local f; f=$(next_shot)
+  import -window root "$f" 2>/dev/null
+  echo "$f"
+}
+case "$1" in
+  start)
+    shift
+    if ! pgrep -x Xvfb >/dev/null || ! xdotool getdisplaygeometry >/dev/null 2>&1; then
+      Xvfb :77 -screen 0 1280x720x24 -nolisten tcp >/dev/null 2>&1 &
+      echo $! > "$KIT/.xvfb.pid"
+      for i in $(seq 1 50); do xdotool getdisplaygeometry >/dev/null 2>&1 && break; sleep 0.1; done
+    fi
+    if [ -f "$KIT/.game.pid" ] && kill -0 "$(cat "$KIT/.game.pid")" 2>/dev/null; then
+      echo "The game is already running (pt stop first)."; exit 1
+    fi
+    mkdir -p "$KIT/data"
+    XDG_DATA_HOME="$KIT/data" godot --path "$GAME" -- "$@" > "$KIT/game.log" 2>&1 &
+    echo $! > "$KIT/.game.pid"
+    sleep 6
+    echo "started (pid $(cat "$KIT/.game.pid")) with args: $*"
+    shot
+    ;;
+  stop)
+    if [ -f "$KIT/.game.pid" ]; then kill "$(cat "$KIT/.game.pid")" 2>/dev/null; rm -f "$KIT/.game.pid"; fi
+    sleep 1
+    echo "stopped"
+    ;;
+  running)
+    if [ -f "$KIT/.game.pid" ] && kill -0 "$(cat "$KIT/.game.pid")" 2>/dev/null; then echo yes; else echo no; fi
+    ;;
+  shot)
+    shot
+    ;;
+  click)      # pt click X Y [wait-seconds]  -> clicks, waits (default 0.8 s), screenshots
+    xdotool mousemove "$2" "$3" click 1
+    sleep "${4:-0.8}"
+    shot
+    ;;
+  move)       # pt move X Y  (hover, e.g. for a tooltip), then screenshot after 1.2 s
+    xdotool mousemove "$2" "$3"
+    sleep "${4:-1.2}"
+    shot
+    ;;
+  key)        # pt key NAME [wait]  e.g. space, Escape, n, Return
+    xdotool key "$2"
+    sleep "${3:-0.8}"
+    shot
+    ;;
+  holdkey)    # pt holdkey NAME SECONDS
+    xdotool keydown "$2"; sleep "$3"; xdotool keyup "$2"
+    sleep 0.5
+    shot
+    ;;
+  type)       # pt type "text"
+    xdotool type --delay 60 "$2"
+    sleep 0.5
+    shot
+    ;;
+  drag)       # pt drag X1 Y1 X2 Y2  (slow drag, e.g. a slider)
+    xdotool mousemove "$2" "$3" mousedown 1
+    sleep 0.2
+    steps=20
+    for i in $(seq 1 $steps); do
+      x=$(( $2 + ($4 - $2) * i / steps )); y=$(( $3 + ($5 - $3) * i / steps ))
+      xdotool mousemove "$x" "$y"; sleep 0.03
+    done
+    xdotool mouseup 1
+    sleep 0.6
+    shot
+    ;;
+  shake)      # pt shake X Y gentle|firm|hard [SECONDS]  grabs the chest at X,Y and shakes it, then lets go
+    x=$2; y=$3; level=$3; level=$4; secs=${5:-2.5}
+    case "$level" in
+      gentle) amp=6; dt=0.05 ;;
+      firm)   amp=18; dt=0.05 ;;
+      hard)   amp=60; dt=0.04 ;;
+      *) echo "level must be gentle, firm or hard"; exit 1 ;;
+    esac
+    xdotool mousemove "$x" "$y" mousedown 1
+    sleep 0.15
+    end=$(echo "$(date +%s.%N) + $secs" | bc)
+    # Two screenshots while it's shaking (what it sounds like shows as words over the chest, and they fade fast).
+    s1=$(next_shot); s2=$(next_shot)
+    ( sleep "$(echo "$secs * 0.45" | bc)"; import -window root "$s1" 2>/dev/null ) &
+    ( sleep "$(echo "$secs * 0.85" | bc)"; import -window root "$s2" 2>/dev/null ) &
+    flip=1
+    while (( $(echo "$(date +%s.%N) < $end" | bc) )); do
+      xdotool mousemove $((x + flip*amp)) $((y + flip*amp/3))
+      flip=$((-flip))
+      sleep "$dt"
+    done
+    xdotool mousemove "$x" "$y"
+    sleep 0.1
+    xdotool mouseup 1
+    wait
+    echo "during: $s1"
+    echo "during: $s2"
+    sleep 0.5
+    echo -n "after:  "; shot
+    ;;
+  drop)       # pt drop X Y  lifts the chest at X,Y up 150 px and lets it fall
+    xdotool mousemove "$2" "$3" mousedown 1
+    sleep 0.15
+    for i in 1 2 3 4 5 6; do xdotool mousemove "$2" $(( $3 - i*25 )); sleep 0.03; done
+    sleep 0.2
+    xdotool mouseup 1
+    sleep 1.2
+    shot
+    ;;
+  wait)       # pt wait SECONDS  then screenshot
+    sleep "${2:-1}"
+    shot
+    ;;
+  log)        # pt log [N]  last N lines of the game's log
+    tail -n "${2:-30}" "$KIT/game.log"
+    ;;
+  *)
+    echo "commands: start [game args] | stop | running | shot | click X Y [wait] | move X Y | key NAME [wait] | holdkey NAME SECS | type TEXT | drag X1 Y1 X2 Y2 | shake X Y gentle|firm|hard [secs] | drop X Y | wait SECS | log [N]"
+    ;;
+esac

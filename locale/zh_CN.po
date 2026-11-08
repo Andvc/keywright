@@ -1587,76 +1587,81 @@ msgstr "{0}：{1}品质更佳！"
 msgid "Nim the Peddler"
 msgstr "货郎尼姆"
 
-#: scripts/Core/Curios.cs:506
+#: scripts/Core/Curios.cs:505
+msgid ""
+"Saw the Guild's carriage go by with Bram in it. He waved. Bram never waves. Well! Curios."
+msgstr "尼姆看见公会的马车经过，布拉姆就坐在里面。他挥了挥手。布拉姆从来不挥手的。好啦！看看奇物吧。"
+
+#: scripts/Core/Curios.cs:509
 msgid ""
 "Psst! Keywright! Shutters down? Good. Nim's pack is full of things that came out of chests and never went back in."
 msgstr "嘘！钥匠！关好店门了？好。尼姆的包里装满了从宝箱里出来、就再也没回去的东西。"
 
-#: scripts/Core/Curios.cs:507
+#: scripts/Core/Curios.cs:510
 msgid ""
 "Evening! Nim kept the good ones for you. Well. Nim kept some ones for you."
 msgstr "晚上好！尼姆把好东西都给你留着呢。呃……尼姆给你留了些东西。"
 
-#: scripts/Core/Curios.cs:508
+#: scripts/Core/Curios.cs:511
 msgid ""
 "Quick, before the Guild's night watch comes round the corner. Look, look, but don't point."
 msgstr "快，趁公会的巡夜人还没拐过街角。看吧看吧，就是别用手指。"
 
-#: scripts/Core/Curios.cs:509
+#: scripts/Core/Curios.cs:512
 msgid ""
 "Out of a wizard's strongroom, these, this very night. The wizard won't miss them. Nim checked."
 msgstr "这些啊，就是今晚从一位巫师的密库里出来的。那巫师不会惦记它们的。尼姆确认过了。"
 
-#: scripts/Core/Curios.cs:510
+#: scripts/Core/Curios.cs:513
 msgid "A good day? Nim heard. Nim hears everything after dark."
 msgstr "今天生意不错？尼姆听说了。天黑以后，尼姆什么都听得见。"
 
-#: scripts/Core/Curios.cs:515
+#: scripts/Core/Curios.cs:518
 msgid "Good eye. Nim would have kept that one, if Nim were the keeping sort."
 msgstr "好眼力。尼姆要是那种留得住东西的人，这件早就自己留下了。"
 
-#: scripts/Core/Curios.cs:516
+#: scripts/Core/Curios.cs:519
 msgid "Done! Treat it kindly. It's older than the Guild."
 msgstr "成交！好好待它。它比公会还老呢。"
 
-#: scripts/Core/Curios.cs:517
+#: scripts/Core/Curios.cs:520
 msgid "It likes you. Nim can always tell when they like someone."
 msgstr "它喜欢你。它们喜欢谁，尼姆总能看出来。"
 
-#: scripts/Core/Curios.cs:520
+#: scripts/Core/Curios.cs:523
 msgid "Nim's off. Tomorrow night, same back door."
 msgstr "尼姆走啦。明晚老时间，还是这扇后门。"
 
-#: scripts/Core/Curios.cs:520
+#: scripts/Core/Curios.cs:523
 msgid "Mind the Guild, Keywright. Nim always does."
 msgstr "当心公会，钥匠。尼姆一向很当心。"
 
-#: scripts/Core/Curios.cs:521
+#: scripts/Core/Curios.cs:524
 msgid "Sleep well. Nim never does."
 msgstr "睡个好觉。尼姆可从来睡不好。"
 
-#: scripts/Core/Curios.cs:524
+#: scripts/Core/Curios.cs:527
 msgid "Oh, Nim likes it here. Nim will bring more. Every night, more!"
 msgstr "哦，尼姆喜欢这儿。尼姆会带更多来。每晚都带更多！"
 
-#: scripts/Core/Curios.cs:527
+#: scripts/Core/Curios.cs:530
 msgid "Back to its owner? How honest. Nim won't tell his friends."
 msgstr "还给失主？真老实。尼姆不会告诉他的朋友们。"
 
-#: scripts/Core/Curios.cs:528
+#: scripts/Core/Curios.cs:531
 msgid ""
 "Nim's friends will see it gets back to whoever wants it most. For a price. Always a price."
 msgstr "尼姆的朋友们会让它回到最想要它的人手里。当然得收钱。总是要收钱的。"
 
-#: scripts/Core/Curios.cs:531
+#: scripts/Core/Curios.cs:534
 msgid "That would leave your purse thin, that would. Still want it?"
 msgstr "这样你的钱袋可就瘪了，瘪得很哟。还要吗？"
 
-#: scripts/Core/Curios.cs:534
+#: scripts/Core/Curios.cs:537
 msgid "Not to your taste? Nim has more. Nim always has more."
 msgstr "不合你的口味？尼姆还有。尼姆总是还有。"
 
-#: scripts/Core/Curios.cs:537
+#: scripts/Core/Curios.cs:540
 msgid "Back in the pack it goes. Half what you paid: Nim's fair, ask anyone."
 msgstr "那就回包里去喽。退你一半的钱：尼姆最公道了，不信随便问谁。"
 
@@ -2047,8 +2052,8 @@ msgid "Nothing of that kind comes out worse than its chest promised."
 msgstr "该类物品开出来绝不会低于宝箱应有的品质。"
 
 #: scripts/Core/Glossary.cs:68 scripts/Core/Glossary.cs:102 scripts/Core/Offers.cs:69
-#: scripts/Ui/NotebookView.cs:427 scripts/Ui/NotebookView.cs:568 scripts/Ui/NotebookView.cs:646
-#: scripts/Ui/NotebookView.cs:694 scripts/Ui/UiKit.cs:337
+#: scripts/Ui/NotebookView.cs:428 scripts/Ui/NotebookView.cs:569 scripts/Ui/NotebookView.cs:647
+#: scripts/Ui/NotebookView.cs:695 scripts/Ui/UiKit.cs:337
 msgid "{0}: {1}"
 msgstr "{0}：{1}"
 
@@ -2887,8 +2892,8 @@ msgstr "“公会的宝库请布拉姆过去。有一件陈年存货需要他料
 
 #: scripts/Core/Inquiry.cs:57
 msgid ""
-"\"Keep the shop running until he returns. Earn the treasury key, bring it to the treasury on the season's last night, and his account is closed.\""
-msgstr "“在他回来之前，请把店经营下去。挣到宝库钥匙，在这一季的最后一夜把它带到宝库，他的账就结清了。”"
+"\"Keep the shop running until he returns, and his account paid. Earn the treasury key, and bring it to the treasury on the season's last night.\""
+msgstr "“在他回来之前，请把店经营下去，也请按时缴清他的账。挣到宝库钥匙，在这一季的最后一夜把它带到宝库。”"
 
 #: scripts/Core/Inquiry.cs:58
 msgid ""
@@ -3676,304 +3681,304 @@ msgid ""
 "You sold {0} to the Maw's buyers at the Lantern Market, for {1}g. An eye for him."
 msgstr "你在灯笼夜市把{0}卖给了巨口的买家，得了{1}金。又是他的一只眼睛。"
 
-#: scripts/Core/Lessons.cs:72
+#: scripts/Core/Lessons.cs:76
 msgid ""
 "Pip never shakes anything and has no idea what it's worth: he'll ask you to name a price. First, shake it at every strength."
 msgstr "皮普从来不摇箱子，也完全不知道它值多少：他会请你出价。首先，每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:74
+#: scripts/Core/Lessons.cs:78
 msgid ""
 "Tick what you heard. Then set the slider to a few coins and make your offer: he'll take almost anything. You get two tries."
 msgstr "把听到的勾选上。然后把滑块拨到几枚金币，再出价：他几乎什么价都肯收。你有两次机会。"
 
-#: scripts/Core/Lessons.cs:90
+#: scripts/Core/Lessons.cs:94
 msgid ""
 "Garrick shakes hard, so a clank drowns out anything delicate for him. He haggles: he always asks about double. Shake it yourself, gently too."
 msgstr "加里克总是猛摇，所以在他听来，哐啷声会盖过一切细微的声响。他爱讨价还价：开价总在两倍左右。你自己摇一遍，轻摇也要试试。"
 
-#: scripts/Core/Lessons.cs:92
+#: scripts/Core/Lessons.cs:96
 msgid ""
 "Tick what you heard. Then use the slider to offer him about half his price. You get one offer: much lower and he storms off."
 msgstr "把听到的勾选上。然后用滑块出他要价的一半左右。你只有一次出价机会：出得比这低太多，他就会气冲冲地走掉。"
 
-#: scripts/Core/Lessons.cs:101
+#: scripts/Core/Lessons.cs:105
 msgid ""
 "A tinker paid his tab with it. One rattle, like a fish in a crate. A rattle's a rattle: {price}, love."
 msgstr "一个修补匠拿它抵了酒账。里头就一声响，像鱼在箱子里扑腾。一响算一响：{price}，亲爱的。"
 
-#: scripts/Core/Lessons.cs:104
+#: scripts/Core/Lessons.cs:108
 msgid ""
 "Bettany counts the rattles and charges the same for each, whatever's rattling: a purse of coin costs what a goblin's cleaver does. Shake it: what's rattling?"
 msgstr "贝塔妮数响声，每响一声收一样的钱，不管响的是什么：一袋钱币跟一把哥布林砍刀一个价。摇一摇：里面响的是什么？"
 
-#: scripts/Core/Lessons.cs:106
+#: scripts/Core/Lessons.cs:110
 msgid ""
 "A jingle: coin, worth more than any cleaver. At cleaver prices, that's a bargain."
 msgstr "叮当一声：是钱币，比哪把砍刀都值钱。照砍刀的价钱买，那可是捡了便宜。"
 
-#: scripts/Core/Lessons.cs:116
+#: scripts/Core/Lessons.cs:120
 msgid ""
 "The Barrow: Tobin always says where a chest came from, and the place tells you what it tends to hold. Barrow chests hold grave goods: coin, weapons, a shroud."
 msgstr "古冢：托宾总会说箱子是从哪儿来的，而从出处就能看出里面大多装着什么。古冢的箱子装的是陪葬品：钱币、兵器，还有寿衣。"
 
-#: scripts/Core/Lessons.cs:118
+#: scripts/Core/Lessons.cs:122
 msgid ""
 "His chests are rotten through: about two seconds of shaking and no more. One strength, then. Hard stirs everything, but a clank would drown the coin. Shake it hard."
 msgstr "他的箱子都朽透了：顶多能摇两秒左右。所以只能选一种力度。猛摇什么都能摇响，可要是有哐啷声，就会盖过钱币。猛摇一下。"
 
-#: scripts/Core/Lessons.cs:131
+#: scripts/Core/Lessons.cs:135
 msgid ""
 "A goblin burrow: shinies her clan dug up, mostly coin. Nettle shook it gently. Do the same: the first strength is free."
 msgstr "哥布林地洞：她的部族挖出来的亮闪闪，大多是钱币。荨麻轻摇过了。你也轻摇：第一种力度不收钱。"
 
-#: scripts/Core/Lessons.cs:133
+#: scripts/Core/Lessons.cs:137
 msgid ""
 "Every strength after that puts her price up a tenth. A gentle shake can't stir anything heavy, so pay once more for a hard one. Gentle and hard between them hear everything firm would."
 msgstr "之后每多试一种力度，她就涨价一成。轻摇摇不动沉的东西，所以再花一次钱猛摇。轻摇加猛摇，稳摇能听到的就都听到了。"
 
-#: scripts/Core/Lessons.cs:145
+#: scripts/Core/Lessons.cs:149
 msgid ""
 "Rook weighs every chest on her game scale and prices by the pound. Her mare spooks at a hard shake, so nothing gets shaken hard. Shake it gently, then firmly."
 msgstr "鲁克把每只箱子都放在她的猎物秤上称，按磅数定价。她的母马一遇猛摇就受惊，所以谁都不许猛摇。先轻摇，再稳摇。"
 
-#: scripts/Core/Lessons.cs:147
+#: scripts/Core/Lessons.cs:151
 msgid ""
 "A slosh: a potion, 3 lb. Her scale says 6 lb, so 3 lb never sounded. A cloak weighs 3, a spell 1, and wolf dens are full of cloaks. Tick a potion and a cloak."
 msgstr "哗啦一声：一瓶药水，3磅。她的秤显示6磅，所以有3磅从没出过声。斗篷重3磅，法术1磅，而狼窝里多的是斗篷。勾选一瓶药水和一件斗篷。"
 
-#: scripts/Core/Lessons.cs:163
+#: scripts/Core/Lessons.cs:167
 msgid ""
 "Everyone you've traded with has a page in your notebook: how they judge a chest, and what they're like. Click Mother Sorrel to read hers."
 msgstr "跟你做过买卖的人，在你的笔记本里都有一页：他们怎么判断箱子，又是什么样的人。点击索蕾尔婆婆，看看她那一页。"
 
-#: scripts/Core/Lessons.cs:165
+#: scripts/Core/Lessons.cs:169
 msgid ""
 "Mother Sorrel's price is a dream, but she always dreams true: of what the Wood warded in the chest, or else the dearest thing in it, as a sign. A river is a potion. Shake it at every strength."
 msgstr ""
 "索蕾尔婆婆的价钱是梦里得来的，可她的梦从来都会应验：她会以征兆梦见古林在箱中用结界封住的东西，没有的话，就梦见箱里最贵重的东西。河代表药水。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:167
+#: scripts/Core/Lessons.cs:171
 msgid ""
 "A flump and a rustle, and no slosh. The potion is warded: sealed in the ward itself, silent and weightless. Name it: tick Potions."
 msgstr "噗的一声，沙沙一声，却没有哗啦声。药水被结界封住了：它封在结界里，无声又无重。说出它：勾选药水。"
 
-#: scripts/Core/Lessons.cs:169
+#: scripts/Core/Lessons.cs:173
 msgid ""
 "A ward gives up only to the truth. Name what's there and nothing that isn't, and the warded thing comes out when you open the chest. Nobody priced it."
 msgstr "结界只向真相让步。说中箱里有的东西，一样没有的也别多说，开箱时被封住的东西就会现身。谁都没给它定过价。"
 
-#: scripts/Core/Lessons.cs:180
+#: scripts/Core/Lessons.cs:184
 msgid ""
 "Brother Cadoc shook it firmly, and won't have it shaken hard: the saints are resting. Half again if you do. Shake it gently, then firmly."
 msgstr "卡多克修士稳摇过了，也不许别人猛摇：圣徒们在安息。你若猛摇，价格涨一半。先轻摇，再稳摇。"
 
-#: scripts/Core/Lessons.cs:182
+#: scripts/Core/Lessons.cs:186
 msgid ""
 "Crypt chests are full of holy cloaks, and cloth only sounds at a hard shake, so he never prices it. Tick Cloaks on faith, or shake it hard and pay for certainty."
 msgstr "墓穴里的箱子装满了圣袍，而布料只有猛摇才会出声，所以他从不给它定价。你可以凭信仰勾选斗篷，也可以猛摇一下，花钱买个踏实。"
 
-#: scripts/Core/Lessons.cs:194
+#: scripts/Core/Lessons.cs:198
 msgid ""
 "Corvin packs his chests in straw, so nothing clinked at the Wardens' toll. Straw muffles a strength: a gentle shake stirs nothing at all. Shake it firmly."
 msgstr "科尔文用稻草把箱子塞得满满的，这样过巡守的关卡时就一声不响。稻草会闷掉一级力度：轻摇什么都摇不响。稳摇一下。"
 
-#: scripts/Core/Lessons.cs:196
+#: scripts/Core/Lessons.cs:200
 msgid ""
 "A jingle: what a gentle shake would stir, a firm one stirs through straw. That's all he heard. Now hard: weapons stir through straw only then, and cloaks and spells never."
 msgstr "叮当一声：轻摇本该摇响的东西，隔着稻草得稳摇才响。他听到的也就这些。现在猛摇：隔着稻草，兵器要到猛摇才响，而斗篷和法术怎么也摇不响。"
 
-#: scripts/Core/Lessons.cs:198
+#: scripts/Core/Lessons.cs:202
 msgid ""
 "A clank he never heard. Smugglers love a false bottom, too: lift the chest high and let go."
 msgstr "这声哐啷他可没听到。走私贩子还最爱夹层：把箱子高高举起，然后松手。"
 
-#: scripts/Core/Lessons.cs:199
+#: scripts/Core/Lessons.cs:203
 msgid ""
 "A hollow BOOM. Tick a weapon and False bottom: he priced neither. Then haggle."
 msgstr "空洞的一声“咚”！勾选一件兵器，再勾选夹层：这两样他都没算钱。然后讨价还价。"
 
-#: scripts/Core/Lessons.cs:211
+#: scripts/Core/Lessons.cs:215
 msgid ""
 "Hesper sells dowries from weddings that never were. A Thornwick dowry always holds coin for luck, a cloak for warmth and a potion for health. Shake it at every strength."
 msgstr "赫斯珀卖的是没办成的婚事留下的嫁妆。荆棘镇的嫁妆总装着求好运的钱币、保暖的斗篷和保健康的药水。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:213
+#: scripts/Core/Lessons.cs:217
 msgid ""
 "A jingle and a flump: luck and warmth. No slosh: the bride warded her potion, silent and weightless. Name it: tick Potions."
 msgstr "叮当一声，噗的一声：好运和温暖。没有哗啦声：新娘用结界封住了她的药水，无声又无重。说出它：勾选药水。"
 
-#: scripts/Core/Lessons.cs:223 scripts/Core/Sellers.cs:1065
+#: scripts/Core/Lessons.cs:227 scripts/Core/Sellers.cs:1065
 msgid "a weaver in Thornwick"
 msgstr "荆棘镇的一位织工"
 
-#: scripts/Core/Lessons.cs:228
+#: scripts/Core/Lessons.cs:232
 msgid ""
 "Flick runs chests for the Magpie: cheap, and in a hurry. Lay a hand on it: shake it, any strength."
 msgstr "弗利克替喜鹊跑腿卖箱子：便宜，还急着脱手。把手放上去：摇一摇，什么力度都行。"
 
-#: scripts/Core/Lessons.cs:230
+#: scripts/Core/Lessons.cs:234
 msgid ""
 "Your mark went cold: it isn't Flick's to sell, and if you buy it, it won't open. Send for the Wardens: Flick runs, the chest goes home, and they pay you a finder's share. Or just pass."
 msgstr ""
 "你的钥纹发凉了：这箱子轮不到弗利克来卖，你买下了也打不开。报告巡守：弗利克会逃走，箱子会物归原主，巡守还会付你一份发现者分成。要不就干脆不买。"
 
-#: scripts/Core/Lessons.cs:244
+#: scripts/Core/Lessons.cs:248
 msgid ""
 "Ilse reads the Arcanum's packing tag: it lists each kind of thing packed, and the archmages warded the most dangerous. Shake it at every strength."
 msgstr "伊尔丝会念秘法院的装箱标签：上面列着装进去的每一类东西，而大法师们把最危险的那件用结界封住了。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:246
+#: scripts/Core/Lessons.cs:250
 msgid ""
 "A flump and a rustle: the cloak and the spell. The gem on the tag never tinkled: it's warded. Name it: tick Gems."
 msgstr "噗的一声，沙沙一声：斗篷和法术。标签上的宝石却从没叮铃响过：它被结界封住了。说出它：勾选宝石。"
 
-#: scripts/Core/Lessons.cs:257
+#: scripts/Core/Lessons.cs:261
 msgid ""
 "Archmage Orme wagers on your craft: read her chest exactly (every kind, every count) and she gives back a third of the price when it's open. Shake it at every strength."
 msgstr "大法师奥姆拿你的手艺打赌：把她的箱子判断得分毫不差（每一类、每个数目都对），开箱后她就退还三分之一的价钱。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:259
+#: scripts/Core/Lessons.cs:263
 msgid ""
 "Tick exactly what you heard, no more and no less. A careful read takes a third off her price."
 msgstr "听到什么就勾选什么，不多也不少。判断得仔细，就能从她的价钱里省下三分之一。"
 
-#: scripts/Core/Lessons.cs:269
+#: scripts/Core/Lessons.cs:273
 msgid ""
 "Durgan's a dwarf: he knows weapons, prices the rest at half, and takes every tinkle for a diamond. Shake it gently yourself."
 msgstr "杜尔甘是个矮人：他懂兵器，别的东西一律算半价，每听到一声叮铃都当成钻石。你自己轻摇一下。"
 
-#: scripts/Core/Lessons.cs:271
+#: scripts/Core/Lessons.cs:275
 msgid ""
 "A tinkle: a gem, and he's priced it like the crown jewels. Offer what it's really worth, or let him keep it."
 msgstr "叮铃一声：一颗宝石，他却开出了王室珠宝的价。按它真正的价值出价，要不就让他自己留着。"
 
-#: scripts/Core/Lessons.cs:281
+#: scripts/Core/Lessons.cs:285
 msgid ""
 "Grandmother Vell left a riddle on each lid about one thing inside, and if she warded something, it's about that. Read it, then shake it at every strength."
 msgstr "维尔祖母在每个箱盖上都留了一道谜语，说的是箱里的某一样东西；要是她用结界封住了什么，谜语说的就是那样东西。先读谜语，再每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:283
+#: scripts/Core/Lessons.cs:287
 msgid ""
 "A hilt and an edge, or forged and sheathed: a weapon. And nothing clanked: grandmother warded it. Name it: tick Weapons."
 msgstr "有柄有锋，或是火中锻成、太平入鞘：是兵器。可什么都没哐啷响：祖母把它封住了。说出它：勾选兵器。"
 
-#: scripts/Core/Lessons.cs:297
+#: scripts/Core/Lessons.cs:301
 msgid ""
 "Brass sells pawn by the lot, two or three of a kind, and prices one of each kind he hears. Shake it at every strength and count: each thing sounds from its own spot."
 msgstr "布拉斯成批卖当品，同一类东西常有两三件，可他听到的每一类只算一件的钱。每种力度都摇一遍，再数一数：每样东西都会从各自的位置发出声响。"
 
-#: scripts/Core/Lessons.cs:299
+#: scripts/Core/Lessons.cs:303
 msgid ""
 "Two jingles and a rustle: three things, and he priced one purse. But the ticket counts every article pledged, and it says four. He won't have pledges dropped: the fourth is under a false bottom. Tick two Coins and False bottom."
 msgstr ""
 "两声叮当，一声沙沙：三样东西，他却只算了一袋钱。可当票上把每件当品都记着，写的是四件。他不许别人摔当品：第四件就在夹层底下。钱币勾选两份，再勾选夹层。"
 
-#: scripts/Core/Lessons.cs:311
+#: scripts/Core/Lessons.cs:315
 msgid ""
 "Quire sells the Archive's vault chests with their ward-rolls, faded by three hundred years. The roll names what was warded: 'B_o_d R_b_'."
 msgstr "奎尔卖的是档案馆地库里的箱子，附带各自的结界名录，三百年下来字迹都褪了色。名录上写着被封住的东西：“血_宝_”。"
 
-#: scripts/Core/Lessons.cs:313
+#: scripts/Core/Lessons.cs:317
 msgid ""
 "The Blood Ruby: a gem. Name it, and the ward gives it up when you open the chest: tick Gems."
 msgstr "血红宝石：是宝石。说出它，开箱时结界就会交出它：勾选宝石。"
 
-#: scripts/Core/Lessons.cs:324
+#: scripts/Core/Lessons.cs:328
 msgid ""
 "Tilly shakes hard and prices every rustle as a drowned wizard's spellbook. Shake it gently."
 msgstr "蒂莉总是猛摇，每听到一声沙沙，都按溺亡巫师的法术书定价。轻摇一下。"
 
-#: scripts/Core/Lessons.cs:325
+#: scripts/Core/Lessons.cs:329
 msgid ""
 "A rustle at a gentle shake? Parchment only rustles when it's shaken hard: that's river sand pouring, worth nothing. Tick only the slosh: Potions."
 msgstr "轻摇就有沙沙声？羊皮纸要猛摇才会沙沙响：这是河沙在流淌，一文不值。只勾选哗啦声：药水。"
 
-#: scripts/Core/Lessons.cs:336
+#: scripts/Core/Lessons.cs:340
 msgid ""
 "Sir Rowan wants his grandfather's sword. If there are weapons inside, the best of them goes back to him, for the fee he named. Shake it: is there a clank?"
 msgstr "罗文爵士想找回他祖父的剑。箱里要是有兵器，最好的那件得归还给他，他会付他说定的那笔钱。摇一摇：有哐啷声吗？"
 
-#: scripts/Core/Lessons.cs:338
+#: scripts/Core/Lessons.cs:342
 msgid ""
 "A clank: that blade is his. Count it at his fee, not its worth, and see whether the rest pays for the chest."
 msgstr "哐啷一声：那把剑归他。按他给的钱算，别按剑本身的价值算，再看看剩下的东西够不够抵箱子的价钱。"
 
-#: scripts/Core/Lessons.cs:350
+#: scripts/Core/Lessons.cs:354
 msgid ""
 "An imp, with an hourglass: twelve seconds, from when you close this. Things from the Maw's hoard often beat their colour. Shake it gently, then hard. Quick!"
 msgstr "一个拿着沙漏的小恶魔：从你关掉这条提示起，只有十二秒。巨口宝藏里的东西，品质常常胜过箱子的颜色。先轻摇，再猛摇。快！"
 
-#: scripts/Core/Lessons.cs:352
+#: scripts/Core/Lessons.cs:356
 msgid "Gently, then hard!"
 msgstr "先轻摇，再猛摇！"
 
-#: scripts/Core/Lessons.cs:364
+#: scripts/Core/Lessons.cs:368
 msgid ""
 "A devil's bargain: Sallow's price is low, but the dearest thing inside is his. Shake it at every strength: what's in there?"
 msgstr "魔鬼的交易：萨洛要价很低，但箱里最贵重的东西归他。每种力度都摇一遍：里面有什么？"
 
-#: scripts/Core/Lessons.cs:366
+#: scripts/Core/Lessons.cs:370
 msgid ""
 "Four things: he takes the best, you keep three. With many middling things his bargain is a good one; with one grand thing and little else, it's his."
 msgstr "四样东西：他拿走最好的，你留下三样。东西多而都不出挑时，他这笔交易对你划算；要是只有一样宝贝，别的寥寥无几，那就是他占便宜了。"
 
-#: scripts/Core/Lessons.cs:377
+#: scripts/Core/Lessons.cs:381
 msgid ""
 "Skrae clicks like a bat and listens to the echoes: round is coin, long a weapon, soft a cloak, hollow a potion, flat a spell, tiny a gem. Echoes come back off warded things too. Shake it at every strength."
 msgstr ""
 "斯克雷像蝙蝠那样发出咔嗒声，再听回声：圆的是钱币，长的是兵器，软的是斗篷，空心的是药水，扁的是法术，小小的是宝石。被结界封住的东西也会弹回回声。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:380
+#: scripts/Core/Lessons.cs:384
 msgid ""
 "A jingle and a clank: the round one and the long one. Nothing sloshed, so the hollow one is warded: tick Potions."
 msgstr "叮当一声，哐啷一声：圆的和长的。没有哗啦声，所以空心的那个被结界封住了：勾选药水。"
 
-#: scripts/Core/Lessons.cs:391
+#: scripts/Core/Lessons.cs:395
 msgid ""
 "Countess Vey prices only her gems, at what she paid for them. Whatever else the maid packed comes free. Shake it at every strength."
 msgstr "维伯爵夫人只给她的宝石定价，按她当初买来的价钱。女仆另外装进去的东西都白送。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:393
+#: scripts/Core/Lessons.cs:397
 msgid ""
 "Tick everything you heard: the rest is a gift. Some of her gems are paste, though, and she won't have a lodestone near them."
 msgstr "把听到的全都勾选上：宝石以外的都是白送的。不过她的宝石有些是仿造的，而且她不许磁石靠近它们。"
 
-#: scripts/Core/Lessons.cs:404
+#: scripts/Core/Lessons.cs:408
 msgid ""
 "Madame Zell draws three cards from the Locking's own deck: a suit drawn twice is what the ward holds; three different, nothing. Coins came up twice."
 msgstr "泽尔夫人从大封锁专属的那副牌里抽三张：同一花色出现两次，就是结界里封着的东西；三张各不相同，就什么也没封。钱币出现了两次。"
 
-#: scripts/Core/Lessons.cs:406
+#: scripts/Core/Lessons.cs:410
 msgid "So there's warded coin. Name it: tick Coin."
 msgstr "那就是有钱币被结界封住了。说出它：勾选钱币。"
 
-#: scripts/Core/Lessons.cs:416
+#: scripts/Core/Lessons.cs:420
 msgid ""
 "Gilt sells demon gold: gilded iron, and it jingles just like the real thing. Turn the lodestone on and shake it gently."
 msgstr "吉尔特卖魔金：镀了金的铁，叮当响起来跟真金一模一样。开启磁石，再轻摇。"
 
-#: scripts/Core/Lessons.cs:418
+#: scripts/Core/Lessons.cs:422
 msgid ""
 "The jingle went quiet: iron, gilded, worth nothing. The tinkle's real: tick Gems, and leave Coin unticked."
 msgstr "叮当声没了：是镀金的铁，一文不值。叮铃声是真的：勾选宝石，钱币别勾。"
 
-#: scripts/Core/Lessons.cs:420
+#: scripts/Core/Lessons.cs:424
 msgid ""
 "Gilt sells demon gold, gilded iron, as gold and gems, and it sounds just like the real thing. Only a lodestone can tell. Too cheap to be true, usually."
 msgstr "吉尔特把魔金，也就是镀金的铁，当作金子和宝石来卖，听起来跟真货一模一样。只有磁石分辨得出。通常便宜得离谱的，就不会是真货。"
 
-#: scripts/Core/Lessons.cs:431
+#: scripts/Core/Lessons.cs:435
 msgid ""
 "Old Aldo plays a game: his price is whatever your slip says. Read it exactly and he takes a quarter off; read it wrong and you pay what it truly holds, and a quarter more. Shake it at every strength."
 msgstr ""
 "老奥尔多爱玩个游戏：你估价单上算出多少，他就要多少。判断分毫不差，他减价四分之一；判断错了，你就得按箱里的实值付钱，再多付四分之一。每种力度都摇一遍。"
 
-#: scripts/Core/Lessons.cs:434
+#: scripts/Core/Lessons.cs:438
 msgid ""
 "Tick exactly what you heard, then buy. Funny: that ring of his has the royal seal on it."
 msgstr "听到什么就勾选什么，然后买下。真怪：他那枚戒指上竟有王室的印记。"
 
-#: scripts/Core/Lessons.cs:444
+#: scripts/Core/Lessons.cs:448
 msgid ""
 "That's no merchant, Kit. That's the Maw, in a borrowed body. One coin for the chest; but buy it, and everyone after him today asks twice as much. Count who's still waiting before you say yes."
 msgstr ""
@@ -4793,8 +4798,8 @@ msgstr "真令人失望。我或许会再来问。"
 msgid "Buy it ({0}g)"
 msgstr "买下（{0}金）"
 
-#: scripts/Core/Offers.cs:83 scripts/Core/TaleBook.Campaign.cs:219 scripts/Phases/DayEndPhase.cs:467
-#: scripts/Phases/PeddlerPhase.cs:538
+#: scripts/Core/Offers.cs:83 scripts/Core/TaleBook.Campaign.cs:219 scripts/Phases/DayEndPhase.cs:471
+#: scripts/Phases/PeddlerPhase.cs:540
 msgid "Not now"
 msgstr "暂时不要"
 
@@ -5002,7 +5007,7 @@ msgstr "巡守的库房"
 msgid "whatever thieves took and nobody came back for"
 msgstr "贼偷走后、一直没人回来认领的东西"
 
-#: scripts/Core/Random.cs:35 scripts/Phases/DayEndPhase.cs:86 scripts/Phases/TalkPhase.cs:191
+#: scripts/Core/Random.cs:35 scripts/Phases/DayEndPhase.cs:89 scripts/Phases/TalkPhase.cs:191
 #: scripts/Phases/TalkPhase.cs:198
 msgid "{0}g"
 msgstr "{0}金"
@@ -5432,8 +5437,8 @@ msgstr "有个冒险家把它留在交钥酒馆抵酒账。老规矩，一响一
 
 #: scripts/Core/Sellers.cs:413
 msgid ""
-"Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}. And I've news, if you're buying."
-msgstr "三晚的麦酒钱，外加一条坐坏的长凳，拿箱子抵的账。我按响声收钱，亲爱的：{price}。我这儿还有消息，要买尽管开口。"
+"Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}."
+msgstr "三晚的麦酒钱，外加一条坐坏的长凳，拿箱子抵的账。我按响声收钱，亲爱的：{price}。"
 
 #: scripts/Core/Sellers.cs:414
 msgid ""
@@ -7624,7 +7629,7 @@ msgstr "今天早上从磨坊池塘里捞上来的。我没摇它，怕摇坏了
 msgid "The Hooded Woman"
 msgstr "兜帽女子"
 
-#: scripts/Core/Story.cs:58 scripts/Ui/NotebookView.cs:317
+#: scripts/Core/Story.cs:58 scripts/Ui/NotebookView.cs:318
 msgid "Mara"
 msgstr "玛拉"
 
@@ -7671,9 +7676,8 @@ msgid ""
 msgstr "还有你，钥匠。我想，我们以前见过。你每次都这样盯着我的戒指。"
 
 #: scripts/Core/Story.cs:95
-msgid ""
-"Every fifth night, then. A good ear pays any debt. We'll talk in the morning."
-msgstr "那就是每五晚一回了。耳朵灵，什么债都还得上。咱们明早再说。"
+msgid "Every fifth night, then. A good ear pays any debt."
+msgstr "那就是每五晚一回了。耳朵灵，什么债都还得上。"
 
 #: scripts/Core/Story.cs:111
 msgid ""
@@ -7716,756 +7720,757 @@ msgstr "乡亲们把别人打不开的宝箱拿来找咱们。你买下一只，
 
 #: scripts/Core/Story.cs:134
 msgid ""
-"Bettany from the Crossed Keys will be by. Ask after her cellar: it floods every spring, and she likes to be asked."
-msgstr "交钥酒馆的贝塔妮待会儿会过来。问问她的地窖：每年春天都要淹水，她就喜欢别人问起。"
+"Bettany from the Crossed Keys will be by. She hears everything first, and she'll tell you most of it."
+msgstr "交钥酒馆的贝塔妮待会儿会过来。什么消息她都头一个知道，大半都会说给你听。"
 
 #: scripts/Core/Story.cs:135
 msgid ""
 "When I want you at the counter I'll tap it, twice and once. Like that. And mind: some chests listen back."
 msgstr "我要你来柜台的时候，就敲它两下，再敲一下。就像这样。还有，当心：有些箱子会反过来听你。"
 
-#: scripts/Core/Story.cs:141 scripts/Core/Story.cs:146
+#: scripts/Core/Story.cs:142 scripts/Core/Story.cs:147
 msgid ""
 "A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\""
 msgstr "一封盖着公会印记的信：“布拉姆的交接比预想的要久。在他回来之前，请把店经营下去。”"
 
-#: scripts/Core/Story.cs:142
+#: scripts/Core/Story.cs:143
 msgid ""
 "\"Earn the treasury key, keep his account paid, and bring the key to the treasury on the season's last night.\""
 msgstr "“挣到宝库钥匙，按时缴清他的账，并在这一季的最后一夜把钥匙带到宝库。”"
 
-#: scripts/Core/Story.cs:143
+#: scripts/Core/Story.cs:144
 msgid "The same letter, word for word. Last time, the treasury breathed."
 msgstr "同一封信，一字不差。上一回，宝库在呼吸。"
 
-#: scripts/Core/Story.cs:147
+#: scripts/Core/Story.cs:148
 msgid ""
 "\"Meanwhile the Guild's assessors will certify your work. Four marks of a master keywright earn the four pieces of the treasury key, each with a master's fee: a hidden thing read true, a stolen chest settled, a commission filled, an old lock picked without force.\""
 msgstr ""
 "“与此同时，公会的评估员会认证你的手艺。钥匠大师的四项本事，可换得四块宝库钥片，每块都附一笔大师酬金：准确判断出藏起的东西、了结一只赃物宝箱、完成一份委托、不强行撬锁就打开一把老锁。”"
 
-#: scripts/Core/Story.cs:150
+#: scripts/Core/Story.cs:151
 msgid ""
-"\"Keep Bram's account paid, and bring the whole key to the treasury on the season's last night. His commission needs a second keywright. When it's done, his account is closed, and he comes home.\""
-msgstr "“按时缴清布拉姆的账，并在这一季的最后一夜把完整的钥匙带到宝库。他的差事需要第二位钥匠。差事办完，他的账就结清了，他也就回家了。”"
+"\"Pay Bram's account as it falls due, every fifth night, and bring the whole key to the treasury on the season's last night. His commission needs a second keywright. When it's done and his account is paid, he comes home.\""
+msgstr ""
+"“布拉姆的账，每五晚到期一次，请按期缴清；并在这一季的最后一夜把完整的钥匙带到宝库。他的差事需要第二位钥匠。差事办完、账也缴清，他就回家了。”"
 
-#: scripts/Core/Story.cs:157
+#: scripts/Core/Story.cs:158
 msgid ""
 "The tithe is paid. But the Gate is hungry, and the Guild has decided you owe it something for its patience."
 msgstr "贡金已经付清。但大门饥饿难耐，而公会认定：它这么有耐心，你总该有所表示。"
 
-#: scripts/Core/Story.cs:158
+#: scripts/Core/Story.cs:159
 msgid ""
 "They'll keep coming, and every week they'll want half as much again. Let's see how long we can make them wait."
 msgstr "他们还会再来，而且每周要的都比上周多一半。咱们看看能让他们等多久。"
 
-#: scripts/Core/Story.cs:167
+#: scripts/Core/Story.cs:168
 msgid "Bram's welcome"
 msgstr "布拉姆的欢迎"
 
-#: scripts/Core/Story.cs:168
+#: scripts/Core/Story.cs:169
 msgid "The Guild's letter"
 msgstr "公会的来信"
 
-#: scripts/Core/Story.cs:169
+#: scripts/Core/Story.cs:170
 msgid "Who stands with you"
 msgstr "谁与你并肩"
 
-#: scripts/Core/Story.cs:170
+#: scripts/Core/Story.cs:171
 msgid "The Guild's terms"
 msgstr "公会的条件"
 
-#: scripts/Core/Story.cs:180
+#: scripts/Core/Story.cs:181
 msgid "Still no letter from Bram. The Guild's came on time."
 msgstr "布拉姆还是没来信。公会的信倒是准时到了。"
 
-#: scripts/Core/Story.cs:182
+#: scripts/Core/Story.cs:183
 msgid ""
 "The last week of the tithe, and it's already paid: nobody's coming for anything this week."
 msgstr "贡金的最后一周，而且已经付清了：这周不会有人来讨任何东西。"
 
-#: scripts/Core/Story.cs:183
+#: scripts/Core/Story.cs:184
 msgid ""
 "The debt's last week. Pay it, and the Guild's carriage takes you and the key to the treasury."
 msgstr "还债的最后一周。付清它，公会的马车就会载着你和钥匙前往宝库。"
 
-#: scripts/Core/Story.cs:184
+#: scripts/Core/Story.cs:185
 msgid "The debt's last week. Pay this, and Bram's account is closed."
 msgstr "还债的最后一周。付清这一笔，布拉姆的账就结清了。"
 
-#: scripts/Core/Story.cs:196
+#: scripts/Core/Story.cs:197
 msgid ""
 "A letter with the Guild's seal: \"The treasury opens on the season's last night. Bram looks forward to seeing you. Do bring the key.\""
 msgstr "一封盖着公会印记的信：“宝库将在这一季的最后一夜开启。布拉姆盼着见到你。请务必带上钥匙。”"
 
-#: scripts/Core/Story.cs:200
+#: scripts/Core/Story.cs:201
 msgid "Vane was at the Crossed Keys last night, asking who your friends are."
 msgstr "昨晚韦恩去了交钥酒馆，打听你的朋友都有谁。"
 
-#: scripts/Core/Story.cs:201
+#: scripts/Core/Story.cs:202
 msgid ""
 "When you go to the treasury, who'll stand at the door with you, and take in whoever comes out?"
 msgstr "等你去宝库的时候，谁会陪你守在门口，收留从里面出来的人？"
 
-#: scripts/Core/Story.cs:205
+#: scripts/Core/Story.cs:206
 msgid ""
 "Nobody, it seems. Make some friends before the last night, or hire the bargemen at the Lantern Market."
 msgstr "看来一个都没有。最后一夜之前交几个朋友吧，要么就去灯笼夜市雇船夫。"
 
-#: scripts/Core/Story.cs:206
+#: scripts/Core/Story.cs:207
 msgid ""
 "That's a crowd, that is. Whatever comes out of that treasury, it'll have somewhere to go."
 msgstr "这可真是一大帮人。不管从那宝库里出来的是什么，都有地方可去了。"
 
-#: scripts/Core/Story.cs:207
+#: scripts/Core/Story.cs:208
 msgid ""
 "It's a start. One more, before the last night, and they'll have somewhere to go."
 msgstr "算是开了个头。最后一夜之前再多一个，他们就有地方可去了。"
 
-#: scripts/Core/Story.cs:222
+#: scripts/Core/Story.cs:223
 msgid ""
 "One more thing. The Guild's treasury has asked for Bram. An old consignment needs his attention."
 msgstr "还有一件事。公会的宝库请布拉姆过去。有一件陈年存货需要他料理。"
 
-#: scripts/Core/Story.cs:223
+#: scripts/Core/Story.cs:224
 msgid "Mind the stall. I'll write every week."
 msgstr "看好摊子。我每周都会写信。"
 
-#: scripts/Core/Story.cs:224
+#: scripts/Core/Story.cs:225
 msgid ""
 "He won't write. I know where that carriage goes, and what waits at the end of the road."
 msgstr "他不会写信的。我知道那辆马车去哪儿，也知道路的尽头等着什么。"
 
-#: scripts/Core/Story.cs:228
+#: scripts/Core/Story.cs:229
 msgid ""
 "One more thing. The Guild's treasury has asked for Bram: an old consignment needs a keywright who knows it. Temporary work. The carriage is outside."
 msgstr "还有一件事。公会的宝库请布拉姆过去：有一件陈年存货，需要一位熟悉它的钥匠。临时差事。马车就在外面。"
 
-#: scripts/Core/Story.cs:229
+#: scripts/Core/Story.cs:230
 msgid ""
 "The treasury? After twenty years they want me? Well. It's honest work, and it'll pay down the account."
 msgstr "宝库？过了二十年，他们倒想起我来了？好吧。这是正经活儿，还能抵掉些账。"
 
-#: scripts/Core/Story.cs:230
+#: scripts/Core/Story.cs:231
 msgid ""
 "Mind the stall, {0}. I'll write every week. And keep my lamp lit: it's never let me down."
 msgstr "看好摊子，{0}。我每周都会写信。还有，别让我的灯灭了：它从没让我失望过。"
 
-#: scripts/Core/Story.cs:231
+#: scripts/Core/Story.cs:232
 msgid "Two taps and one, and I'll be back before you've missed me."
 msgstr "敲两下，再一下，你还没来得及想我，我就回来了。"
 
-#: scripts/Core/Story.cs:234
+#: scripts/Core/Story.cs:235
 msgid ""
 "And Old Haddon comes with us. His note fell due tonight: he'll work it off at the treasury, with Bram."
 msgstr "老哈登也跟我们走。他的借据今晚到期了：他要跟布拉姆一起，在宝库做工抵债。"
 
-#: scripts/Core/Story.cs:246
+#: scripts/Core/Story.cs:247
 msgid ""
 "One more thing. The Guild has a note to collect tonight: {0}. They'll work it off."
 msgstr "还有一件事。今晚公会有一张借据要收：{0}。欠下的，就做工来抵吧。"
 
-#: scripts/Core/Story.cs:251
+#: scripts/Core/Story.cs:252
 msgid ""
 "Bram sends his regards. The handover's slow work, but he's in good spirits."
 msgstr "布拉姆向你问好。交接的活儿慢，不过他精神很好。"
 
-#: scripts/Core/Story.cs:252
+#: scripts/Core/Story.cs:253
 msgid "Bram asked after the stall. I told him it's in good hands."
 msgstr "布拉姆问起了摊子。我告诉他，摊子交在了可靠的人手里。"
 
-#: scripts/Core/Story.cs:253
+#: scripts/Core/Story.cs:254
 msgid "No letter? Bram's very busy. The treasury keeps long hours."
 msgstr "没收到信？布拉姆忙得很。宝库里的活儿从早忙到晚。"
 
-#: scripts/Core/Story.cs:254
+#: scripts/Core/Story.cs:255
 msgid ""
 "The treasury opens on the season's last night. Bram is counting on you, and on the key."
 msgstr "宝库将在这一季的最后一夜开启。布拉姆指望着你，也指望着那把钥匙。"
 
-#: scripts/Core/Story.cs:255
+#: scripts/Core/Story.cs:256
 msgid "One more week. Do bring the key."
 msgstr "还有一周。请务必带上钥匙。"
 
-#: scripts/Core/Story.cs:260
+#: scripts/Core/Story.cs:261
 msgid ""
 "Bram is well, Keywright. Why go looking? Some doors are better left shut."
 msgstr "布拉姆好得很，钥匠。何必去找呢？有些门，还是关着为好。"
 
-#: scripts/Core/Story.cs:262
+#: scripts/Core/Story.cs:263
 msgid ""
 "You were at the toll, I hear. The palace road is no place for a shopkeeper."
 msgstr "听说你去过关卡。通往王宫的路，可不是开店的人该走的。"
 
-#: scripts/Core/Story.cs:263
+#: scripts/Core/Story.cs:264
 msgid "You remember more than you should, Keywright. So do I."
 msgstr "你记得的，比你该记得的多，钥匠。我也一样。"
 
-#: scripts/Core/Story.cs:264
+#: scripts/Core/Story.cs:265
 msgid ""
 "Every spring you get a little further. And every spring I learn a little more."
 msgstr "每年春天，你都走得更远一点。而每年春天，我也多知道一点。"
 
-#: scripts/Core/Story.cs:270
+#: scripts/Core/Story.cs:271
 msgid ""
 "Before you pay. The Guild could forget half of tonight's due, Keywright. All it asks is that your questions stop at the toll."
 msgstr "付钱之前，容我一言。公会可以把今晚的贡金忘掉一半，钥匠。它只要求你的疑问止步于关卡。"
 
-#: scripts/Core/Story.cs:271
+#: scripts/Core/Story.cs:272
 msgid ""
 "Sensible. You'll find Sergeant Hollis has nothing to say to you this season."
 msgstr "明智。你会发现，这一季霍利斯中士对你无话可说。"
 
-#: scripts/Core/Story.cs:272
+#: scripts/Core/Story.cs:273
 msgid "Then ask your questions. You'll find the answers heavy."
 msgstr "那你就问吧。你会发现，答案沉得很。"
 
-#: scripts/Core/Story.cs:276
+#: scripts/Core/Story.cs:277
 msgid ""
 "Before you pay. You want Bram home. The Guild can have him at your door tomorrow, warm and whole. All it asks is your {0} piece of the key."
 msgid_plural ""
 "Before you pay. You want Bram home. The Guild can have him at your door tomorrow, warm and whole. All it asks is your {0} pieces of the key."
 msgstr[0] "付钱之前，容我一言。你想让布拉姆回家。公会明天就能把他送到你门口，身子暖和，毫发无损。它只要你手上那{0}块钥片。"
 
-#: scripts/Core/Story.cs:279
+#: scripts/Core/Story.cs:280
 msgid ""
 "Done. He'll be home for breakfast. And you won't be at the treasury this season."
 msgstr "成交。他会回家吃早饭。而这一季，你不会去宝库了。"
 
-#: scripts/Core/Story.cs:280
+#: scripts/Core/Story.cs:281
 msgid "Then he stays where he is. Gold keeps."
 msgstr "那他就待在原地。金子是放不坏的。"
 
-#: scripts/Core/Story.cs:289
+#: scripts/Core/Story.cs:290
 msgid "{0} week early"
 msgid_plural "{0} weeks early"
 msgstr[0] "提前了{0}周"
 
-#: scripts/Core/Story.cs:290
+#: scripts/Core/Story.cs:291
 msgid "Before I've even come for it"
 msgstr "我都还没上门来收呢"
 
-#: scripts/Core/Story.cs:294
+#: scripts/Core/Story.cs:295
 msgid "All of it? Now? {0}. Then Bram's account with the Guild is closed."
 msgstr "全部？现在？{0}。那么，布拉姆在公会的账就结清了。"
 
-#: scripts/Core/Story.cs:299
+#: scripts/Core/Story.cs:300
 msgid "Free and clear, another year. Put the kettle on."
 msgstr "又是一年无债一身轻。烧壶水吧。"
 
-#: scripts/Core/Story.cs:303
+#: scripts/Core/Story.cs:304
 msgid ""
 "Free and clear! Twenty years, and the account's closed. Look at my hand: it's warm."
 msgstr "无债一身轻！二十年了，这笔账总算结清了。瞧我的手：是暖的。"
 
-#: scripts/Core/Story.cs:307
+#: scripts/Core/Story.cs:308
 msgid "The treasury, then. Tonight. I'll send the carriage."
 msgstr "那就去宝库吧。今晚。我会派马车来。"
 
-#: scripts/Core/Story.cs:308
+#: scripts/Core/Story.cs:309
 msgid ""
 "And the treasury key is whole, I see. Then the Guild's carriage will take you to the treasury tonight. Bram is waiting."
 msgstr "我看，宝库钥匙也拼完整了。那么今晚，公会的马车会送你去宝库。布拉姆在等你。"
 
-#: scripts/Core/Story.cs:310
+#: scripts/Core/Story.cs:311
 msgid ""
 "The treasury opens on the season's last night. Bring the whole key: you're {0} piece short."
 msgid_plural ""
 "The treasury opens on the season's last night. Bring the whole key: you're {0} pieces short."
 msgstr[0] "宝库将在这一季的最后一夜开启。把完整的钥匙带来：你还差{0}块。"
 
-#: scripts/Core/Story.cs:314
+#: scripts/Core/Story.cs:315
 msgid ""
 "No key? Then the Guild will open the treasury without you tonight. Bram will be so disappointed."
 msgstr "没有钥匙？那今晚公会只好不等你，自己打开宝库了。布拉姆该有多失望啊。"
 
-#: scripts/Core/Story.cs:323
+#: scripts/Core/Story.cs:324
 msgid ""
 "Cold. I'm so cold. And this is our stall. Two taps and one: I heard you knock back."
 msgstr "冷。我好冷。这是咱们的摊子。敲两下，再一下：我听见你敲回来了。"
 
-#: scripts/Core/Story.cs:325
+#: scripts/Core/Story.cs:326
 msgid ""
 "Twenty years ago the Mark-Finders came for you: a marked baby, at the crossroads. I pledged them my hand, mark and all. That was my account."
 msgstr "二十年前，寻纹人来抓你：十字路口一个带钥纹的婴儿。我把自己的手抵押给了他们，连同上面的钥纹。那就是我的那笔账。"
 
-#: scripts/Core/Story.cs:326
+#: scripts/Core/Story.cs:327
 msgid ""
 "Twenty years ago the Mark-Finders came for a marked baby, my niece Kit. I pledged them my hand, mark and all. That was my account."
 msgstr "二十年前，寻纹人来抓一个带钥纹的婴儿，是我的侄女基特。我把自己的手抵押给了他们，连同上面的钥纹。那就是我的那笔账。"
 
-#: scripts/Core/Story.cs:327
+#: scripts/Core/Story.cs:328
 msgid ""
 "This spring they called it in. The treasury was never a job. It was a scale, and a crate, and the dark."
 msgstr "今年春天，他们来追讨了。宝库从来就不是什么差事。是一杆秤，一只货箱，还有一片黑暗。"
 
-#: scripts/Core/Story.cs:328
+#: scripts/Core/Story.cs:329
 msgid ""
 "And now look: you paid it. Put the kettle on. Tonight we're just two people in a shop."
 msgstr "可现在你瞧：你把它还清了。烧壶水吧。今晚，咱们就只是店里的两个人。"
 
-#: scripts/Core/Story.cs:331
+#: scripts/Core/Story.cs:332
 msgid ""
 "I've brought him home before. He doesn't remember it. I don't want to do it again: I want it to last."
 msgstr "我以前也带他回过家。他不记得。我不想再来一遍：我想让这一回留住。"
 
-#: scripts/Core/Story.cs:341
+#: scripts/Core/Story.cs:342
 msgid ""
 "The key, whole. The register. A full mimic, asleep in a basket. And friends at the door."
 msgstr "完整的钥匙。登记簿。一只吃饱的宝箱怪，在篮子里睡着。还有守在门口的朋友们。"
 
-#: scripts/Core/Story.cs:343
+#: scripts/Core/Story.cs:344
 msgid "Whatever's in there, we take them home. All of them."
 msgstr "不管里面是谁，咱们都带他们回家。一个都不落下。"
 
-#: scripts/Core/Story.cs:344
+#: scripts/Core/Story.cs:345
 msgid "Keywright. You've brought company. No matter: the chest is waiting."
 msgstr "钥匠。你带了伴儿来。无妨：宝箱在等着。"
 
-#: scripts/Core/Story.cs:349
+#: scripts/Core/Story.cs:350
 msgid "The carriage, Keywright. You know the way."
 msgstr "马车来了，钥匠。路你认得。"
 
-#: scripts/Core/Story.cs:352
+#: scripts/Core/Story.cs:353
 msgid ""
 "The carriage, Keywright. The treasury is under the palace, and Bram's commission is waiting."
 msgstr "马车来了，钥匠。宝库在王宫底下，布拉姆的差事在等着。"
 
-#: scripts/Core/Story.cs:353
+#: scripts/Core/Story.cs:354
 msgid ""
 "Here it is: the old consignment. The treasury's great chest. The Guild has never been able to open it."
 msgstr "就是它：那件陈年存货。宝库的大宝箱。公会从来没能打开过它。"
 
-#: scripts/Core/Story.cs:354
+#: scripts/Core/Story.cs:355
 msgid "You have the key. Open it, and Bram's account is closed."
 msgstr "钥匙在你手上。打开它，布拉姆的账就结清了。"
 
-#: scripts/Core/Story.cs:360
+#: scripts/Core/Story.cs:361
 msgid ""
 "You have already saved him once. I can make this time remain. Take him home. Leave the door to me."
 msgstr "你已经救过他一次了。我能让这一回留住。带他回家吧。门，交给我。"
 
-#: scripts/Core/Story.cs:361
+#: scripts/Core/Story.cs:362
 msgid "I can make this time remain. Take them home. Leave the door to me."
 msgstr "我能让这一回留住。带他们回家吧。门，交给我。"
 
-#: scripts/Core/Story.cs:364
+#: scripts/Core/Story.cs:365
 msgid ""
 "He knows whom he came to save. But you still want to see what is inside."
 msgstr "他知道自己是来救谁的。可你，还是想看看里面有什么。"
 
-#: scripts/Core/Story.cs:369
+#: scripts/Core/Story.cs:370
 msgid ""
 "The next morning came. Bram brought the tea, and the market opened, and every chest on every stall wore the Guild's seal."
 msgstr "第二天早晨来了。布拉姆端来了茶，集市开了张，每个摊位上的每只宝箱都打着公会的印记。"
 
-#: scripts/Core/Story.cs:370
+#: scripts/Core/Story.cs:371
 msgid ""
 "By noon there was nothing anyone could buy that the treasury hadn't sold them. By evening it wanted the road, and the river, and the light."
 msgstr "到了中午，人们能买到的一切，没有一样不是宝库卖给他们的。到了傍晚，它想要那条路，那条河，还有光。"
 
-#: scripts/Core/Story.cs:371
+#: scripts/Core/Story.cs:372
 msgid ""
 "It can't keep a bargain. It can't stop wanting. It reached past the door for everything, and the seal woke."
 msgstr "它守不住约定。它停不下贪念。它越过那扇门，伸手去够一切，于是封印醒了。"
 
-#: scripts/Core/Story.cs:377
+#: scripts/Core/Story.cs:378
 msgid "Morning. Tea's hot. Here: feel my hand. Warm as the pot."
 msgstr "早啊。茶是热的。来，摸摸我的手。跟茶壶一样暖和。"
 
-#: scripts/Core/Story.cs:380
+#: scripts/Core/Story.cs:381
 msgid "Day thirty-six. I've never seen the calendar say that."
 msgstr "第三十六天。我从没见过日历上写着这一天。"
 
-#: scripts/Core/Story.cs:381
+#: scripts/Core/Story.cs:382
 msgid "The morning after the treasury, and nothing's turned back."
 msgstr "宝库之后的早晨，什么都没有倒回去。"
 
-#: scripts/Core/Story.cs:382
+#: scripts/Core/Story.cs:383
 msgid ""
 "Old Haddon's in his yard, swearing at a lathe. Half the crossroads walked home last night, and nobody can say from where."
 msgstr "老哈登在他的作坊里，冲着一台车床骂骂咧咧。昨晚十字路口有一半的人走回了家，谁也说不清是从哪儿回来的。"
 
-#: scripts/Core/Story.cs:383
+#: scripts/Core/Story.cs:384
 msgid ""
 "Keywright! The waterwheel's broken, and my father's old millwright's chest has the only tools that fit it. Open it for us?"
 msgstr "钥匠！水车坏了，只有我爹那只老磨坊匠箱子里的工具才合用。帮我们打开好吗？"
 
-#: scripts/Core/Story.cs:389
+#: scripts/Core/Story.cs:390
 msgid "That's them! The wheel will turn by noon. Bless you, Keywright."
 msgstr "就是这些！中午之前水车就能转起来了。老天保佑你，钥匠。"
 
-#: scripts/Core/Story.cs:390
+#: scripts/Core/Story.cs:391
 msgid ""
 "Treasure's still treasure. But that's the best thing we've opened all year, and I'll fight anyone who says different."
 msgstr "宝贝终归是宝贝。可这是咱们今年开过的最好的东西，谁要是不服，我跟谁急。"
 
-#: scripts/Core/Story.cs:391
+#: scripts/Core/Story.cs:392
 msgid "Two taps on the counter, and one. The next customer. The shop goes on."
 msgstr "柜台上两下轻叩，又是一下。下一位客人。店照常开着。"
 
-#: scripts/Core/Story.cs:398
+#: scripts/Core/Story.cs:399
 msgid ""
 "{0} weeks, and every coin of the tithe paid. Let them have the building: they can't have the mark."
 msgstr "{0}周，贡金一文不少，全都付清了。房子让他们拿去吧：钥纹他们可拿不走。"
 
-#: scripts/Core/Story.cs:399
+#: scripts/Core/Story.cs:400
 msgid ""
 "So soon? Well. We'll start again somewhere. A good ear is never broke for long."
 msgstr "这么快？唉，好吧。咱们找个地方从头再来。耳朵好使的人，穷不了多久。"
 
-#: scripts/Core/Story.cs:400
+#: scripts/Core/Story.cs:401
 msgid ""
 "{0} weeks. You did better than I ever did. We'll start again somewhere."
 msgstr "{0}周。你比我当年强多了。咱们找个地方从头再来。"
 
-#: scripts/Core/Story.cs:402
+#: scripts/Core/Story.cs:403
 msgid ""
 "The last night will come without me, and the treasury will open with Bram in it. And then it'll be spring."
 msgstr "最后一夜照样会来，只是没有我；宝库会打开，布拉姆就在里面。然后，又是春天。"
 
-#: scripts/Core/Story.cs:417
+#: scripts/Core/Story.cs:418
 msgid ""
 "The Wardens have the palace road. No Guild carriage gets past my toll tonight."
 msgstr "巡守把住了通往王宫的路。今晚公会的马车，一辆也别想过我的关卡。"
 
-#: scripts/Core/Story.cs:418
+#: scripts/Core/Story.cs:419
 msgid ""
 "The Wardens will hold the palace road, when it comes to it. You've sent enough chests home."
 msgstr "真到了那一步，巡守会守住通往王宫的路。你已经送回了够多的宝箱。"
 
-#: scripts/Core/Story.cs:420
+#: scripts/Core/Story.cs:421
 msgid ""
 "Half of Brindle walked to the palace to see it opened. The Guild's men can't get through the crowd."
 msgstr "半个布林德尔的人都走到王宫来看开箱了。公会的人根本挤不过人群。"
 
-#: scripts/Core/Story.cs:421
+#: scripts/Core/Story.cs:422
 msgid ""
 "Brindle's with you: half the crossroads would walk to the palace if you asked them."
 msgstr "布林德尔站在你这边：只要你开口，十字路口一半的人都会走到王宫去。"
 
-#: scripts/Core/Story.cs:423
+#: scripts/Core/Story.cs:424
 msgid ""
 "A black feather on the counter: the Guild's carriages have lost their wheels in Lantern Lane. All of them."
 msgstr "柜台上有一根黑羽毛：公会的马车在灯笼巷全丢了轮子。一辆不剩。"
 
-#: scripts/Core/Story.cs:424
+#: scripts/Core/Story.cs:425
 msgid ""
 "A black feather on the counter, and a note: \"When the Guild comes for you, the Lockless will be in its way.\""
 msgstr "柜台上有一根黑羽毛，还有一张字条：“公会来找你的时候，无锁党会挡在它前面。”"
 
-#: scripts/Core/Story.cs:426
+#: scripts/Core/Story.cs:427
 msgid ""
 "The palace guard is at the treasury door. My Guild has no business here tonight."
 msgstr "王宫卫队就守在宝库门口。今晚，我的公会休想在这里插手。"
 
-#: scripts/Core/Story.cs:427
+#: scripts/Core/Story.cs:428
 msgid ""
 "The Crown's with you, Keywright. I've a palace guard with very little to do."
 msgstr "王室站在你这边，钥匠。我手下有一队王宫卫兵正闲得发慌。"
 
-#: scripts/Core/Story.cs:429
+#: scripts/Core/Story.cs:430
 msgid ""
 "Hawthorn has grown across the Guild's road. They'll be all night cutting through it."
 msgstr "山楂树长满了公会要走的那条路。他们得砍上一整夜才开得出路来。"
 
-#: scripts/Core/Story.cs:430
+#: scripts/Core/Story.cs:431
 msgid "The Wood keeps its own. When they come for you, they'll find thorns."
 msgstr "古林不会亏待自己人。他们来找你时，等着他们的只有荆棘。"
 
-#: scripts/Core/Story.cs:432
+#: scripts/Core/Story.cs:433
 msgid ""
 "Ironroot's smiths have barred the Gate road with iron. Let the Guild try lifting it."
 msgstr "铁根的工匠用铁把通往大门的路封死了。让公会试试搬不搬得动。"
 
-#: scripts/Core/Story.cs:433
+#: scripts/Core/Story.cs:434
 msgid ""
 "Ironroot owes you a crown. Ask, and you'll have a hundred dwarves at your door."
 msgstr "铁根欠你一顶王冠的人情。开口吧，一百个矮人就会站到你门口。"
 
-#: scripts/Core/Story.cs:438
+#: scripts/Core/Story.cs:439
 msgid "I'll hold the lamp, master! I'm not scared. Much."
 msgstr "我来举灯，师父！我不怕。就怕一点点。"
 
-#: scripts/Core/Story.cs:438
+#: scripts/Core/Story.cs:439
 msgid "I'll stand with you, master. I'm small, but I'm quick."
 msgstr "我会站在你这边，师父。我个子小，可我手脚快。"
 
-#: scripts/Core/Story.cs:440
+#: scripts/Core/Story.cs:441
 msgid "Father brought his cart. Whoever comes out of there rides home."
 msgstr "我爹把他的车赶来了。不管谁从里面出来，都能坐车回家。"
 
-#: scripts/Core/Story.cs:440
+#: scripts/Core/Story.cs:441
 msgid "Father says he owes you a cart, and a wheel, and his neck. Call us."
 msgstr "我爹说，他欠你一辆车、一只轮子，还有一条命。尽管叫我们。"
 
-#: scripts/Core/Story.cs:447
+#: scripts/Core/Story.cs:448
 msgid "The whole mill's here, and every one of us has a washing paddle."
 msgstr "整个磨坊的人都来了，每人手里都拿着一根捣衣棒。"
 
-#: scripts/Core/Story.cs:447
+#: scripts/Core/Story.cs:448
 msgid "Send for me, and the whole mill comes."
 msgstr "叫我一声，整个磨坊的人都会来。"
 
-#: scripts/Core/Story.cs:448
+#: scripts/Core/Story.cs:449
 msgid "Rafe's sword's at the door, dear, and Jory's holding it."
 msgstr "雷夫的剑守在门口，孩子，握着它的是乔里。"
 
-#: scripts/Core/Story.cs:448
+#: scripts/Core/Story.cs:449
 msgid "Rafe would have stood with you. So will we, dear."
 msgstr "雷夫要是还在，也会站在你这边。我们也一样，孩子。"
 
-#: scripts/Core/Story.cs:449
+#: scripts/Core/Story.cs:450
 msgid ""
 "I've brought two delvers and a lot of rope. Nobody's getting through that door."
 msgstr "我带了两个探墓的伙计，还有一大堆绳子。谁也别想闯过那扇门。"
 
-#: scripts/Core/Story.cs:449
+#: scripts/Core/Story.cs:450
 msgid "You dug me out of the Barrow. I'll dig you out of anything."
 msgstr "你把我从古冢里挖了出来。不管你陷进什么麻烦，我都会把你挖出来。"
 
-#: scripts/Core/Story.cs:450
+#: scripts/Core/Story.cs:451
 msgid "The Crossed Keys is closed tonight. Everyone's here instead."
 msgstr "交钥酒馆今晚关门了。大伙儿全都来了这儿。"
 
-#: scripts/Core/Story.cs:450
+#: scripts/Core/Story.cs:451
 msgid "The Crossed Keys stands with you, love. Every last drunk in it."
 msgstr "交钥酒馆站在你这边，亲爱的。连店里最后一个醉鬼都算上。"
 
-#: scripts/Core/Story.cs:451
+#: scripts/Core/Story.cs:452
 msgid "A Gale at the door, with a Gale's blade. Let them come."
 msgstr "盖尔家的人守在门口，手握盖尔家的剑。让他们来吧。"
 
-#: scripts/Core/Story.cs:451
+#: scripts/Core/Story.cs:452
 msgid "The Gales pay their debts. Call, and I'll be there."
 msgstr "盖尔家有债必还。你一召唤，我就到。"
 
-#: scripts/Core/Story.cs:452
+#: scripts/Core/Story.cs:453
 msgid "Goblins in the Guild's cellar. Lots of goblins. Very busy."
 msgstr "哥布林在公会地窖里。好多哥布林。很忙。"
 
-#: scripts/Core/Story.cs:452
+#: scripts/Core/Story.cs:453
 msgid "The clan comes when you call. All of it. Even the uncles."
 msgstr "你一叫，部族就来。全部来。连叔叔们也来。"
 
-#: scripts/Core/Story.cs:453
+#: scripts/Core/Story.cs:454
 msgid "House Vell is at the palace, and so, for once, is my brother."
 msgstr "维尔家族都到王宫来了，难得一回，连我弟弟也在。"
 
-#: scripts/Core/Story.cs:453
+#: scripts/Core/Story.cs:454
 msgid "House Vell owes you. We pay our debts, Keywright."
 msgstr "维尔家族欠你的情。我们有债必还，钥匠。"
 
-#: scripts/Core/Story.cs:454
+#: scripts/Core/Story.cs:455
 msgid "Ironroot's here, Keywright, with hammers."
 msgstr "铁根的人来了，钥匠，带着锤子。"
 
-#: scripts/Core/Story.cs:454
+#: scripts/Core/Story.cs:455
 msgid "A hundred dwarves, when you need them."
 msgstr "你需要时，就有一百个矮人。"
 
-#: scripts/Core/Story.cs:455
+#: scripts/Core/Story.cs:456
 msgid ""
 "A hedge-wright at your back. Two Keywrights are harder to stop than one."
 msgstr "有个黑钥匠在背后给你撑腰。两个钥匠可比一个难拦。"
 
-#: scripts/Core/Story.cs:455
+#: scripts/Core/Story.cs:456
 msgid "When the Guild comes, send for the hedge-wright."
 msgstr "公会找上门时，就去叫那个黑钥匠。"
 
-#: scripts/Core/Story.cs:456
+#: scripts/Core/Story.cs:457
 msgid ""
 "I've brought the Roll. Whatever the Guild says tonight, the charter says otherwise."
 msgstr "我把名册带来了。不管公会今晚怎么说，特许状上写的可不一样。"
 
-#: scripts/Core/Story.cs:456
+#: scripts/Core/Story.cs:457
 msgid "The Roll will say what the Crown pledged, when it matters."
 msgstr "到了要紧关头，名册会写明王室抵押了什么。"
 
-#: scripts/Core/Story.cs:457
+#: scripts/Core/Story.cs:458
 msgid ""
 "Every lamp in the Arcanum is lit tonight. The Guild won't find a shadow to hide in."
 msgstr "今晚秘法院的每一盏灯都点亮了。公会找不到一处阴影可以藏身。"
 
-#: scripts/Core/Story.cs:457
+#: scripts/Core/Story.cs:458
 msgid ""
 "The Arcanum's apprentices will stand with you. Some of the archmages, too."
 msgstr "秘法院的学徒们会站在你这边。有些大法师也会。"
 
-#: scripts/Core/Story.cs:458
+#: scripts/Core/Story.cs:459
 msgid ""
 "Two whole families are here, dear: the ones you married off. They'd like a word with the Guild."
 msgstr "整整两家人都来了，亲爱的：就是你帮着办成婚事的那两家。他们想跟公会好好谈谈。"
 
-#: scripts/Core/Story.cs:458
+#: scripts/Core/Story.cs:459
 msgid "Two families owe you their wedding, dear. They'll come."
 msgstr "两家人的婚事都多亏了你，亲爱的。他们会来的。"
 
-#: scripts/Core/Story.cs:459
+#: scripts/Core/Story.cs:460
 msgid "Brought the plough horses. The Guild's carriages can go round."
 msgstr "犁地的马我都牵来了。公会的马车只好绕道。"
 
-#: scripts/Core/Story.cs:459
+#: scripts/Core/Story.cs:460
 msgid "Call, and the whole fair comes, horses and all."
 msgstr "你一招呼，整个集市都会来，连人带马。"
 
-#: scripts/Core/Story.cs:460
+#: scripts/Core/Story.cs:461
 msgid ""
 "I carried chests for you. Tonight I'll carry anything that tries to get past this door."
 msgstr "我替你搬过箱子。今晚，谁想闯过这扇门，我就把谁搬走。"
 
-#: scripts/Core/Story.cs:460
+#: scripts/Core/Story.cs:461
 msgid "I owe you my freedom. Call, and I'll come."
 msgstr "我的自由是你给的。你一叫，我就来。"
 
-#: scripts/Core/Story.cs:461
+#: scripts/Core/Story.cs:462
 msgid ""
 "The Wet Hen's at the river stairs, if anyone needs to leave in a hurry."
 msgstr "“湿母鸡号”就停在河边石阶下，谁要是得赶紧走，尽管上船。"
 
-#: scripts/Core/Story.cs:461
+#: scripts/Core/Story.cs:462
 msgid ""
 "Need anything carried away from the Guild quietly? Ask for the Wet Hen."
 msgstr "有什么东西要悄悄运离公会的眼皮底下？找“湿母鸡号”。"
 
-#: scripts/Core/Story.cs:477
+#: scripts/Core/Story.cs:478
 msgid ""
 "No Heartsong this season. Don't take it hard: most seasons never hear one."
 msgstr "这一季没碰上心歌。别往心里去：大多数时候，一季下来一首都听不到。"
 
-#: scripts/Core/Story.cs:478
+#: scripts/Core/Story.cs:479
 msgid ""
 "They're the rarest things in Aldmark. Nine of them, things loved more than gold, sung into the Locking and lost among millions of chests. About one season in three turns one up."
 msgstr "它们是奥德马克最稀罕的东西。一共九件，都是被人爱得胜过黄金的东西，被唱进了大封锁，散落在千千万万只宝箱里。大约每三季才会冒出一首。"
 
-#: scripts/Core/Story.cs:480
+#: scripts/Core/Story.cs:481
 msgid ""
 "Only a Keywright hears one. At the gentlest shake it sings a tune no other thing makes, and the seller never knows it's there: they price the chest as if it weren't."
 msgstr "只有钥匠听得见。轻轻一摇，它就会唱出别的东西都发不出的曲调，而卖家根本不知道它在里面：他们定价时，就当它不存在。"
 
-#: scripts/Core/Story.cs:482
+#: scripts/Core/Story.cs:483
 msgid ""
 "Nobody would pay a penny for one. But on display, each does one great thing for the shop that no gold can buy, for as long as it sings: the kind of thing a whole season can be built around."
 msgstr "没人会为它出一个铜板。可一旦陈列出来，只要它还在唱，每一首都能为店里做成一件金子买不到的大事：一整季的经营都可以围绕它来打算。"
 
-#: scripts/Core/Story.cs:484
+#: scripts/Core/Story.cs:485
 msgid ""
 "So shake every chest gently first, and listen. The collection's Heartsongs page keeps a place for each of the nine."
 msgstr "所以每只宝箱都先轻摇一下，仔细听。收藏里的心歌页给九首各留了一个位置。"
 
-#: scripts/Core/Story.cs:494
+#: scripts/Core/Story.cs:495
 msgid ""
 "So you're Hesk. A partner with the mark and an honest scale: I'll take it. Mind the stall, mind your back, and half of it's yours when the Guild's paid."
 msgstr "原来你就是赫斯克。有钥纹，还有一杆公平秤，这样的合伙人我收下了。看好摊子，当心你的腰，等公会的债还清了，这摊子就有你一半。"
 
-#: scripts/Core/Story.cs:496
+#: scripts/Core/Story.cs:497
 msgid ""
 "Rosa Brightwater, as I live. Your mother sold me my first lock-pick, forty years back. My mark's faded: mind the stall, partner, and half of it's yours when the Guild's paid."
 msgstr ""
 "哟，这不是罗莎·布莱特沃特嘛！四十年前，我的第一把撬锁器就是你母亲卖给我的。我的钥纹已经褪了：看好摊子，搭档，等公会的债还清了，这摊子就有你一半。"
 
-#: scripts/Core/Story.cs:498
+#: scripts/Core/Story.cs:499
 msgid ""
 "Lady Marchmont. Your grandfather and I opened chests together, before your house was grand. My mark's faded: mind my stall, and put your collection on the shelf. The Guild's paid out of the takings."
 msgstr ""
 "马奇蒙特小姐。你们家族还没显赫起来的时候，我和你祖父一起开过箱子。我的钥纹已经褪了：替我看好摊子，把你的收藏摆上展架。公会的钱，就从营收里出。"
 
-#: scripts/Core/Story.cs:500
+#: scripts/Core/Story.cs:501
 msgid ""
 "There you are, {0}! Look at your hand: the mark's yours now. And so is the stall."
 msgstr "你可来了，{0}！看看你的手：现在钥纹归你了。这摊位也归你了。"
 
-#: scripts/Core/Story.cs:513
+#: scripts/Core/Story.cs:514
 msgid "So. Let me tell you what became of everyone, this season."
 msgstr "好了。让我跟你说说，这一季大伙儿后来都怎么样了。"
 
-#: scripts/Core/Story.cs:514
+#: scripts/Core/Story.cs:515
 msgid "Pull up a stool, love. Here's what became of everyone this season."
 msgstr "拉张凳子坐下，亲爱的。听我说说，这一季大伙儿后来都怎么样了。"
 
-#: scripts/Core/Story.cs:521
+#: scripts/Core/Story.cs:522
 msgid ""
 "And you, Hesk. A grocer from a drowned town, with the mark on your hand. What becomes of you is up to you."
 msgstr "还有你，赫斯克。一个来自被淹小镇的杂货商，手上带着钥纹。你将来会怎样，就看你自己了。"
 
-#: scripts/Core/Story.cs:522
+#: scripts/Core/Story.cs:523
 msgid ""
 "And you, Rosa. A Brightwater of Lantern Lane, with the mark on your hand. What becomes of you is up to you."
 msgstr "还有你，罗莎。灯笼巷布莱特沃特家的女儿，手上带着钥纹。你将来会怎样，就看你自己了。"
 
-#: scripts/Core/Story.cs:523
+#: scripts/Core/Story.cs:524
 msgid ""
 "And you, my lady. The last Marchmont, with the mark on your hand. What becomes of you is up to you."
 msgstr "还有你，小姐。马奇蒙特家的最后一人，手上带着钥纹。你将来会怎样，就看你自己了。"
 
-#: scripts/Core/Story.cs:524
+#: scripts/Core/Story.cs:525
 msgid ""
 "And you, Kit. My kin, with the mark on your hand. What becomes of you is up to you."
 msgstr "还有你，基特。我的亲人，手上带着钥纹。你将来会怎样，就看你自己了。"
 
-#: scripts/Core/Story.cs:525
+#: scripts/Core/Story.cs:526
 msgid ""
 "And you. Bram's kin, with the mark on your hand. What becomes of you is up to you."
 msgstr "还有你。布拉姆的亲族，手上带着钥纹。你将来会怎样，就看你自己了。"
 
-#: scripts/Core/Story.cs:538
+#: scripts/Core/Story.cs:539
 msgid ""
 "The treasury's shut for good, and everyone who came out of it is home. Nobody can say from where, and nobody asks."
 msgstr "宝库永远关上了，从里面出来的人都回了家。谁也说不清他们是从哪儿回来的，也没人去问。"
 
-#: scripts/Core/Story.cs:539
+#: scripts/Core/Story.cs:540
 msgid ""
 "And I'm home. Feel my hand: warm. You brought me out of that chest, and I still can't say it without shaking."
 msgstr "我也回家了。摸摸我的手：暖的。是你把我从那只箱子里带出来的，到现在我一说起这事，还会发抖。"
 
-#: scripts/Core/Story.cs:543
+#: scripts/Core/Story.cs:544
 msgid ""
 "I came home on the Guild's word, warm and whole. I don't know what you gave them for it, and I jump at every tap on the counter."
 msgstr "我是凭公会一句话回的家，身子暖和，毫发无损。我不知道你拿什么跟他们换的，可柜台上每响起一声轻叩，我都会一激灵。"
 
-#: scripts/Core/Story.cs:544
+#: scripts/Core/Story.cs:545
 msgid ""
 "I'm home, and my hand is warm. You brought me out of a Guild crate, and I still can't say it without shaking."
 msgstr "我回家了，手也是暖的。是你把我从公会的货箱里带出来的，到现在我一说起这事，还会发抖。"
 
-#: scripts/Core/Story.cs:546
+#: scripts/Core/Story.cs:547
 msgid ""
 "Bram's account is closed, every coin paid, and Bram never came home. The Guild says the treasury keeps long hours."
 msgstr "布拉姆的账结清了，一个子儿都没少，可布拉姆再也没回家。公会说，宝库里的活儿从早忙到晚。"
 
-#: scripts/Core/Story.cs:548
+#: scripts/Core/Story.cs:549
 msgid ""
 "The Guild took the stall, and Bram never came home. Nobody's had a letter."
 msgstr "公会收走了摊位，布拉姆再也没回家。谁也没收到过他的信。"
 
-#: scripts/Core/Story.cs:550
+#: scripts/Core/Story.cs:551
 msgid ""
 "Old Haddon walked home from a Guild crate, cold as a well. He's making wheels again, and he won't sign anything."
 msgstr "老哈登从公会的货箱里走回了家，浑身冰得像井水。他又在做车轮了，而且什么都不肯再签。"
 
-#: scripts/Core/Story.cs:552
+#: scripts/Core/Story.cs:553
 msgid ""
 "Old Haddon kept his yard, because somebody paid his note. He's making you a wheel. You don't need one."
 msgstr "老哈登保住了作坊，因为有人替他还了借据。他正在给你做一只车轮。你又用不着。"
 
-#: scripts/Core/Story.cs:554
+#: scripts/Core/Story.cs:555
 msgid ""
 "Old Haddon never came home from working off his note. Nell keeps the yard, and a lamp in the window."
 msgstr "老哈登去做工抵债，再也没回来。内尔守着作坊，窗前总点着一盏灯。"
 
-#: scripts/Core/Story.cs:557
+#: scripts/Core/Story.cs:558
 msgid ""
 "And you sold {0} gold thing to the Maw's buyers. Every coin of it an eye for him. I hope it was worth it."
 msgid_plural ""
 "And you sold {0} gold things to the Maw's buyers. Every coin of it an eye for him. I hope it was worth it."
 msgstr[0] "你还把{0}件金色物品卖给了巨口的买家。每一枚钱币，都是他的一只眼睛。但愿值得吧。"
 
-#: scripts/Core/Story.cs:560
+#: scripts/Core/Story.cs:561
 msgid ""
 "And there's still a mimic in the back room, asleep on the gold. Don't wake it."
 msgstr "后屋里还有一只宝箱怪，趴在金子上睡着呢。别吵醒它。"
 
-#: scripts/Core/Story.cs:562
+#: scripts/Core/Story.cs:563
 msgid ""
 "And on the last night the Guild opened the treasury without me. I know what comes after: two taps, and one, and spring."
 msgstr "最后一夜，公会没等我就打开了宝库。我知道接下来会怎样：两下轻叩，又一下，然后是春天。"
@@ -8838,166 +8843,166 @@ msgstr "贝塔妮交公会还差一笔钱，你没能借给她。"
 msgid "No. No, of course. Who has, these days?"
 msgstr "不行啊。不行，当然了。这年头谁拿得出来呢？"
 
-#: scripts/Core/TaleBook.Brindle.cs:233
+#: scripts/Core/TaleBook.Brindle.cs:234
 msgid ""
 "{0}, love: what I owed and half again. The Crossed Keys is still mine. If you ever need a room, a meal or a word in the right ear, it's yours."
 msgstr "{0}，亲爱的：欠你的，再加一半。交钥酒馆还是我的。哪天你需要一间房、一顿饭，或者需要有人在要紧的人耳边替你说句话，尽管开口。"
 
-#: scripts/Core/TaleBook.Brindle.cs:241
+#: scripts/Core/TaleBook.Brindle.cs:242
 msgid ""
 "Bettany paid you back, and half again. The Crossed Keys stays open, and she owes you a favour."
 msgstr "贝塔妮把钱还给了你，还多给了一半。交钥酒馆保住了，她也欠你一个人情。"
 
-#: scripts/Core/TaleBook.Brindle.cs:247
+#: scripts/Core/TaleBook.Brindle.cs:248
 msgid ""
 "A Guild notice, nailed to the Crossed Keys' door and copied to every shop at the crossroads: \"SEALED for tithe unpaid, by order of the Gilded Guild. Marrow, Bailiff.\" Bettany's gone north to her sister's."
 msgstr ""
 "一张公会告示钉在交钥酒馆门上，十字路口的每家店铺都收到了抄件：“本店因拖欠贡金，奉镀金公会之令查封。法警马罗。”贝塔妮已经北上投奔她姐姐去了。"
 
-#: scripts/Core/TaleBook.Brindle.cs:253
+#: scripts/Core/TaleBook.Brindle.cs:254
 msgid ""
 "The Guild sealed the Crossed Keys for its tithe. Bettany has gone north, and won't be back this season."
 msgstr "公会因贡金查封了交钥酒馆。贝塔妮北上去了，这一季都不会回来了。"
 
-#: scripts/Core/TaleBook.Brindle.cs:262
+#: scripts/Core/TaleBook.Brindle.cs:263
 msgid "The Harvest Fair"
 msgstr "丰收集市"
 
-#: scripts/Core/TaleBook.Brindle.cs:263
+#: scripts/Core/TaleBook.Brindle.cs:264
 msgid ""
 "The harvest fair comes to Brindle, with a chest to be read in front of the whole county. Garrick wants the new Keywright to put up the prize, and then to read it exactly."
 msgstr "丰收集市来到布林德尔，还要当着全郡人的面鉴定一只宝箱。加里克想请新来的钥匠出奖金，再把那只箱子判断得分毫不差。"
 
-#: scripts/Core/TaleBook.Brindle.cs:273
+#: scripts/Core/TaleBook.Brindle.cs:274
 msgid ""
 "Harvest fair's the day after tomorrow, and the whole county comes. There's a reading contest: a chest nobody's opened, and a prize for whoever reads it right."
 msgstr "后天就是丰收集市，全郡的人都会来。集市上有个鉴箱比赛：一只没人开过的宝箱，谁判断对了，奖金就归谁。"
 
-#: scripts/Core/TaleBook.Brindle.cs:275
+#: scripts/Core/TaleBook.Brindle.cs:276
 msgid ""
 "Bram always put up the prize. Will you? {0}, and your name on the banner."
 msgstr "奖金一向是布拉姆出的。你来出吗？{0}，横幅上就写你的名字。"
 
-#: scripts/Core/TaleBook.Brindle.cs:278
+#: scripts/Core/TaleBook.Brindle.cs:279
 msgid "Put up the prize ({0}g)"
 msgstr "出奖金（{0}金）"
 
-#: scripts/Core/TaleBook.Brindle.cs:282
+#: scripts/Core/TaleBook.Brindle.cs:283
 msgid ""
 "You put up the harvest fair's prize. Your name's on the banner, and the county will come past the stall."
 msgstr "你出了丰收集市的奖金。横幅上写着你的名字，全郡的人都会从摊位前经过。"
 
-#: scripts/Core/TaleBook.Brindle.cs:283
+#: scripts/Core/TaleBook.Brindle.cs:284
 msgid ""
 "Bram's stall, on the banner! Half the county'll come past it on the day."
 msgstr "布拉姆的摊位上横幅啦！到那天，半个郡的人都会从摊前经过。"
 
-#: scripts/Core/TaleBook.Brindle.cs:285
+#: scripts/Core/TaleBook.Brindle.cs:286
 msgid "Not this year"
 msgstr "今年就算了"
 
-#: scripts/Core/TaleBook.Brindle.cs:287
+#: scripts/Core/TaleBook.Brindle.cs:288
 msgid "You didn't put up the harvest fair's prize. The miller did."
 msgstr "你没出丰收集市的奖金。磨坊主出了。"
 
-#: scripts/Core/TaleBook.Brindle.cs:288
+#: scripts/Core/TaleBook.Brindle.cs:289
 msgid "The miller, then. He'll want his name bigger than Bram's ever was."
 msgstr "那就磨坊主出吧。他准要把自己的名字写得比布拉姆当年的还大。"
 
-#: scripts/Core/TaleBook.Brindle.cs:297
+#: scripts/Core/TaleBook.Brindle.cs:298
 msgid ""
 "The fair's chest! Read it right in front of the whole county, and the prize is yours: your own money back, and the miller's on top. One coin to enter."
 msgstr "集市的宝箱来啦！当着全郡人的面判断对了，奖金就归你：你自己出的钱拿回去，再加上磨坊主那份。报名只要一枚金币。"
 
-#: scripts/Core/TaleBook.Brindle.cs:299
+#: scripts/Core/TaleBook.Brindle.cs:300
 msgid ""
 "The fair's chest, and the miller's prize. Read it right in front of the whole county and it's yours. One coin to enter."
 msgstr "集市的宝箱，奖金是磨坊主出的。当着全郡人的面判断对了，奖金就归你。报名只要一枚金币。"
 
-#: scripts/Core/TaleBook.Brindle.cs:308
+#: scripts/Core/TaleBook.Brindle.cs:309
 msgid ""
 "You read the fair's chest exactly right, and won the prize. The county cheered; Garrick says he owes you a pint and a favour."
 msgstr "你把集市的宝箱判断得分毫不差，赢得了奖金。全郡的人都在欢呼；加里克说他欠你一杯酒，外加一个人情。"
 
-#: scripts/Core/TaleBook.Brindle.cs:313
+#: scripts/Core/TaleBook.Brindle.cs:314
 msgid ""
 "You read the fair's chest wrong, in front of the whole county. The miller's boy won."
 msgstr "你当着全郡人的面，把集市的宝箱判断错了。磨坊主的儿子赢了。"
 
-#: scripts/Core/TaleBook.Brindle.cs:316
+#: scripts/Core/TaleBook.Brindle.cs:317
 msgid "You didn't enter the fair's reading contest."
 msgstr "你没有参加集市的鉴箱比赛。"
 
-#: scripts/Core/TaleBook.Brindle.cs:325
+#: scripts/Core/TaleBook.Brindle.cs:326
 msgid ""
 "The Guild took Jasper Wick to a counting-house, and sold his cart. He was a hedge-wright, like I was. I keep thinking that."
 msgstr "公会把贾斯珀·威克带进了一间账房，还卖掉了他的货车。他是个黑钥匠，跟我当年一样。我老是想着这件事。"
 
-#: scripts/Core/TaleBook.Brindle.cs:327
+#: scripts/Core/TaleBook.Brindle.cs:328
 msgid ""
 "I've a cellar in Crownhold now, and the Lockless bring me every chest their grandmothers ever locked. Best ear at the Crossroads? Yours, Keywright."
 msgstr "我现在在王冠堡有个地窖，无锁党把他们祖母那辈锁上的箱子全都送来给我。十字路口谁的耳朵最灵？是你，钥匠。"
 
-#: scripts/Core/TaleBook.Brindle.cs:329
+#: scripts/Core/TaleBook.Brindle.cs:330
 msgid ""
 "Still across the road, still cheaper than you, and still no licence. Come and have a drink with the competition some time."
 msgstr "还在路对面，还比你便宜，也还是没有执照。哪天过来，跟你的对手喝一杯吧。"
 
-#: scripts/Core/TaleBook.Brindle.cs:330
+#: scripts/Core/TaleBook.Brindle.cs:331
 msgid ""
 "Jasper Wick traded across the road all season. The Guild never caught him. I hope it never does."
 msgstr "贾斯珀·威克在路对面做了一整季买卖。公会始终没抓到他。但愿永远也抓不到。"
 
-#: scripts/Core/TaleBook.Brindle.cs:336
+#: scripts/Core/TaleBook.Brindle.cs:337
 msgid ""
 "Great-great-grandfather's blade hangs in the Gales' hall again, and he walks no more. The Gales don't forget a debt, Keywright."
 msgstr "高祖父的剑又挂回了盖尔家的大厅，他也不再游荡了。盖尔家不会忘记欠下的情，钥匠。"
 
-#: scripts/Core/TaleBook.Brindle.cs:338
+#: scripts/Core/TaleBook.Brindle.cs:339
 msgid ""
 "Sir Aldwin still walks Brindle Field at dusk, looking for his blade. Garrick won't plough the north end. Can't blame him."
 msgstr "每到黄昏，奥尔德温爵士还在布林德尔田上游荡，寻找他的剑。加里克再也不肯去犁北头那块地了。也怪不得他。"
 
-#: scripts/Core/TaleBook.Brindle.cs:340
+#: scripts/Core/TaleBook.Brindle.cs:341
 msgid ""
 "Sir Aldwin's blade is still in our back room, waiting for a Gale. He's patient. He's had the practice."
 msgstr "奥尔德温爵士的剑还在咱们后屋里，等着盖尔家的人。他有的是耐心。这本事他早练出来了。"
 
-#: scripts/Core/TaleBook.Brindle.cs:341
+#: scripts/Core/TaleBook.Brindle.cs:342
 msgid ""
 "Sold the knight's chest to a tinker in the end. He came back the next week, white as milk, and gave it back."
 msgstr "骑士的那只箱子，最后我卖给了一个补锅匠。第二周他就回来了，脸白得像牛奶，把箱子退给了我。"
 
-#: scripts/Core/TaleBook.Brindle.cs:352
+#: scripts/Core/TaleBook.Brindle.cs:356
 msgid ""
 "The Crossed Keys is still mine, love, and there's always a pint behind the bar with your name on it. Bram's too, the old soak."
 msgstr "交钥酒馆还是我的，亲爱的，吧台后头永远有一杯写着你名字的酒。布拉姆也有一杯，那个老酒鬼。"
 
-#: scripts/Core/TaleBook.Brindle.cs:354
+#: scripts/Core/TaleBook.Brindle.cs:358
 msgid ""
 "The Guild sealed the Crossed Keys. Bettany's up north with her sister. The crossroads is quieter than I've ever known it."
 msgstr "公会查封了交钥酒馆。贝塔妮去北边投奔她姐姐了。十字路口从没像现在这样冷清过。"
 
-#: scripts/Core/TaleBook.Brindle.cs:355
+#: scripts/Core/TaleBook.Brindle.cs:359
 msgid "I found the money in the end. Don't ask where, love."
 msgstr "最后我还是凑到了钱。别问是从哪儿来的，亲爱的。"
 
-#: scripts/Core/TaleBook.Brindle.cs:362
+#: scripts/Core/TaleBook.Brindle.cs:366
 msgid ""
 "Put up the prize and won it back! Folk are still talking about it. Best harvest fair since Bram's day."
 msgstr "自己出奖金，又自己赢回去！乡亲们到现在还津津乐道。这是布拉姆那会儿以来最棒的一届丰收集市。"
 
-#: scripts/Core/TaleBook.Brindle.cs:363
+#: scripts/Core/TaleBook.Brindle.cs:367
 msgid ""
 "The miller's still sore you won his prize. Best harvest fair since Bram's day, and that's saying something."
 msgstr "你赢走了磨坊主出的奖金，他到现在还耿耿于怀。这是布拉姆那会儿以来最棒的一届丰收集市，这话可不是随便说说的。"
 
-#: scripts/Core/TaleBook.Brindle.cs:365
+#: scripts/Core/TaleBook.Brindle.cs:369
 msgid ""
 "The miller's boy read the fair's chest better than Bram's Keywright. He'll never let you forget it, and neither will I."
 msgstr "磨坊主的儿子判断集市宝箱，比布拉姆摊上的钥匠还准。他永远不会让你忘了这件事，我也不会。"
 
-#: scripts/Core/TaleBook.Brindle.cs:366
+#: scripts/Core/TaleBook.Brindle.cs:370
 msgid ""
 "Your name was on the banner, and the county came. Next year, enter the contest too."
 msgstr "横幅上写着你的名字，全郡的人都来了。明年，你也去参加比赛吧。"
@@ -9013,8 +9018,8 @@ msgstr "布拉姆在镀金公会挂了二十年的账，这一季到期了。按
 
 #: scripts/Core/TaleBook.Campaign.cs:45
 msgid ""
-"My granddad's grey chest, from the attic. I've meant to sell it for years. {price}, and it's yours."
-msgstr "我爷爷那只灰箱子，从阁楼上翻出来的。好些年前就想卖了。{price}，归你了。"
+"My granddad's old green chest, from the attic. I've meant to sell it for years. {price}, and it's yours."
+msgstr "我爷爷那只旧绿箱子，从阁楼上翻出来的。好些年前就想卖了。{price}，归你了。"
 
 #: scripts/Core/TaleBook.Campaign.cs:55
 msgid ""
@@ -9047,8 +9052,8 @@ msgstr "你在第一个公会之夜之前，替老哈登向公会还清了借据
 
 #: scripts/Core/TaleBook.Campaign.cs:73
 msgid ""
-"\"You'd do that? He'll pay you back in wheels. Whether you want them or not.\""
-msgstr "“你肯这么做？他会用车轮还你的。不管你要不要。”"
+"You'd do that? He'll pay you back in wheels. Whether you want them or not."
+msgstr "你肯这么做？他会用车轮还你的。不管你要不要。"
 
 #: scripts/Core/TaleBook.Campaign.cs:75
 msgid "I can't, not this week"
@@ -9060,8 +9065,8 @@ msgid ""
 msgstr "内尔·哈登告诉你，公会拿着她父亲的借据，第一个公会之夜就到期。你帮不上忙。"
 
 #: scripts/Core/TaleBook.Campaign.cs:78
-msgid "\"No. Nobody can. I'll find it somewhere.\""
-msgstr "“也是。谁都帮不了。我自己想办法凑吧。”"
+msgid "No. Nobody can. I'll find it somewhere."
+msgstr "也是。谁都帮不了。我自己想办法凑吧。"
 
 #: scripts/Core/TaleBook.Campaign.cs:91
 msgid ""
@@ -9093,16 +9098,16 @@ msgid "Meet him at the toll on the Guild's night"
 msgstr "公会之夜到关卡和他会合"
 
 #: scripts/Core/TaleBook.Campaign.cs:117
-msgid "\"Bring a dark coat. And don't rattle anything.\""
-msgstr "“穿件深色外套。还有，别弄出任何响动。”"
+msgid "Bring a dark coat. And don't rattle anything."
+msgstr "穿件深色外套。还有，别弄出任何响动。"
 
 #: scripts/Core/TaleBook.Campaign.cs:119
 msgid "Not this season"
 msgstr "这一季算了"
 
 #: scripts/Core/TaleBook.Campaign.cs:119
-msgid "\"Suit yourself. The carts'll keep coming.\""
-msgstr "“随你。那些车照样会来。”"
+msgid "Suit yourself. The carts'll keep coming."
+msgstr "随你。那些车照样会来。"
 
 #: scripts/Core/TaleBook.Campaign.cs:129
 msgid ""
@@ -9199,12 +9204,12 @@ msgstr "请他抄下来（{0}金）"
 
 #: scripts/Core/TaleBook.Campaign.cs:217
 msgid ""
-"\"Every crate, by name and weight, and the night it goes down. Burn it after.\""
-msgstr "“每只货箱，名字、重量，还有它被送下去的那一夜。看完就烧了。”"
+"Every crate, by name and weight, and the night it goes down. Burn it after."
+msgstr "每只货箱，名字、重量，还有它被送下去的那一夜。看完就烧了。"
 
 #: scripts/Core/TaleBook.Campaign.cs:219
-msgid "\"The Roll keeps.\""
-msgstr "“名册放得住。”"
+msgid "The Roll keeps."
+msgstr "名册放得住。"
 
 #: scripts/Core/TaleBook.Campaign.cs:228
 msgid ""
@@ -11851,7 +11856,7 @@ msgid "Bless you. The saint will remember, and so will we."
 msgstr "愿你蒙福。圣徒会记得的，我们也会。"
 
 #: scripts/Core/TaleBook.cs:245 scripts/Core/TaleBook.cs:1347 scripts/Phases/CounterPhase.cs:481
-#: scripts/Phases/DayEndPhase.cs:375 scripts/Ui/SongReveal.cs:174
+#: scripts/Phases/DayEndPhase.cs:379 scripts/Ui/SongReveal.cs:174
 msgid "Keep it"
 msgstr "留着它"
 
@@ -13425,7 +13430,7 @@ msgstr "他们的人卖工具给你，要贵一半。"
 msgid "Go on"
 msgstr "继续"
 
-#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:375 scripts/Phases/PeddlerPhase.cs:133
+#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:375 scripts/Phases/PeddlerPhase.cs:135
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Good night"
 msgstr "晚安"
@@ -14032,8 +14037,8 @@ msgid "Your purse feels lighter. Your heart, heavier."
 msgstr "钱袋轻了。心却沉了。"
 
 #: scripts/Core/Visit.cs:481
-msgid "Close, but the house won. You are the house."
-msgstr "差一点，可惜庄家赢了。而庄家就是你。"
+msgid "Close, but the house won this one."
+msgstr "差一点，可惜这回庄家赢了。"
 
 #: scripts/Core/Visit.cs:482
 msgid "A fair day's trade."
@@ -14051,108 +14056,108 @@ msgstr "简直是拦路抢劫。合法的那种。"
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "老天在对你微笑。可别得意忘形。"
 
-#: scripts/Main.cs:541
+#: scripts/Main.cs:542
 msgid "In the notebook ({0})"
 msgstr "记入笔记本（{0}）"
 
-#: scripts/Main.cs:542 scripts/Main.cs:550
+#: scripts/Main.cs:543 scripts/Main.cs:551
 msgid "Open the notebook's Inquiry page"
 msgstr "打开笔记本的调查页"
 
-#: scripts/Main.cs:549
+#: scripts/Main.cs:550
 msgid "{0} of the treasury key"
 msgstr "宝库钥匙的{0}"
 
-#: scripts/Main.cs:549
+#: scripts/Main.cs:550
 msgid "{0} of {1}, and a master's fee: +{2}g"
 msgstr "已得{0}/{1}块，外加大师酬金：+{2}金"
 
-#: scripts/Main.cs:590
+#: scripts/Main.cs:591
 msgid "Achievement: {0}"
 msgstr "达成成就：{0}"
 
-#: scripts/Main.cs:615
+#: scripts/Main.cs:616
 msgid "THE NINE HEARTSONGS"
 msgstr "九首心歌"
 
-#: scripts/Main.cs:711
+#: scripts/Main.cs:712
 msgid "In the purse: {0}g."
 msgstr "钱袋里有{0}金。"
 
-#: scripts/Main.cs:719
+#: scripts/Main.cs:720
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr "笔记本和收藏都已填满：所有常客、所有物品、所有奇物，以及全部九首心歌。"
 
-#: scripts/Main.cs:724
+#: scripts/Main.cs:725
 msgid "Not now: finish what's in hand first."
 msgstr "现在不行：先把手头的事做完。"
 
-#: scripts/Main.cs:864
+#: scripts/Main.cs:865
 msgid "BRAM'S STALL"
 msgstr "布拉姆的摊位"
 
-#: scripts/Main.cs:864 scripts/Ui/NotebookView.cs:402 scripts/Ui/NotebookView.cs:806
+#: scripts/Main.cs:865 scripts/Ui/NotebookView.cs:403 scripts/Ui/NotebookView.cs:807
 msgid "WEEK {0}"
 msgstr "第{0}周"
 
-#: scripts/Main.cs:887
+#: scripts/Main.cs:888
 msgid "THE SEASON'S END"
 msgstr "一季终了"
 
-#: scripts/Main.cs:895
+#: scripts/Main.cs:896
 msgid "THE GILDED GUILD"
 msgstr "镀金公会"
 
-#: scripts/Main.cs:943
+#: scripts/Main.cs:944
 msgid "THE TREASURY'S SUMMONS"
 msgstr "宝库的传召"
 
-#: scripts/Main.cs:970 scripts/Phases/RunEndPhase.cs:33
+#: scripts/Main.cs:971 scripts/Phases/RunEndPhase.cs:33
 msgid "FREE AND CLEAR"
 msgstr "无债一身轻"
 
-#: scripts/Main.cs:982
+#: scripts/Main.cs:983
 msgid "TWO TAPS AND ONE"
 msgstr "敲两下，再一下"
 
-#: scripts/Main.cs:997 scripts/Phases/TreasuryPhase.cs:52
+#: scripts/Main.cs:998 scripts/Phases/TreasuryPhase.cs:52
 msgid "THE TREASURY"
 msgstr "宝库"
 
-#: scripts/Main.cs:1015
+#: scripts/Main.cs:1016
 msgid "THE LAST CHEST"
 msgstr "最后的宝箱"
 
-#: scripts/Main.cs:1026 scripts/Main.cs:1055 scripts/Phases/RunEndPhase.cs:31
+#: scripts/Main.cs:1027 scripts/Main.cs:1056 scripts/Phases/RunEndPhase.cs:31
 msgid "THE NEXT DAY"
 msgstr "翌日"
 
-#: scripts/Main.cs:1088 scripts/Ui/NotebookView.cs:413
+#: scripts/Main.cs:1089 scripts/Ui/NotebookView.cs:414
 msgid "DAY {0}"
 msgstr "第{0}天"
 
-#: scripts/Main.cs:1091
+#: scripts/Main.cs:1092
 msgid ", level {0}"
 msgstr "（挑战等级{0}）"
 
-#: scripts/Main.cs:1092
+#: scripts/Main.cs:1093
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}第{1}周，第{2}天{3}  -  {4}"
 
-#: scripts/Main.cs:1092
+#: scripts/Main.cs:1093
 msgid " of {0}"
 msgstr "（共{0}天）"
 
-#: scripts/Main.cs:1093
+#: scripts/Main.cs:1094
 msgid "The Guild comes tonight for {0}g."
 msgstr "公会今晚来收{0}金。"
 
-#: scripts/Main.cs:1094
+#: scripts/Main.cs:1095
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "公会将在第{1}天结束时来收{0}金。"
 
-#: scripts/Main.cs:1101
+#: scripts/Main.cs:1102
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0}从他的私房钱里偷偷塞给你{1}金（还剩{2}次）。"
 
@@ -14255,7 +14260,7 @@ msgstr "拖动宝箱即可摇晃。巫灯已点亮。"
 msgid "Drag the chest to shake it"
 msgstr "拖动宝箱即可摇晃"
 
-#: scripts/Phases/CounterPhase.cs:447 scripts/Phases/DayEndPhase.cs:360
+#: scripts/Phases/CounterPhase.cs:447 scripts/Phases/DayEndPhase.cs:364
 msgid "{0}, singing: {1} Click to let it go (it fetches nothing)."
 msgstr "{0}，正在歌唱：{1}点击可放它归去（换不来任何金币）。"
 
@@ -14263,46 +14268,46 @@ msgstr "{0}，正在歌唱：{1}点击可放它归去（换不来任何金币）
 msgid "{0}: {1} exhibition points{2}. Click to sell it for {3}g."
 msgstr "{0}：{1}展览分{2}。点击以{3}金卖出。"
 
-#: scripts/Phases/CounterPhase.cs:460 scripts/Phases/DayEndPhase.cs:330
+#: scripts/Phases/CounterPhase.cs:460 scripts/Phases/DayEndPhase.cs:334
 msgid " (double: enchanted)"
 msgstr "（附魔，翻倍）"
 
-#: scripts/Phases/CounterPhase.cs:478 scripts/Phases/DayEndPhase.cs:372
+#: scripts/Phases/CounterPhase.cs:478 scripts/Phases/DayEndPhase.cs:376
 msgid ""
 "{0} goes back to the Locking, and takes this with it: {1} It fetches nothing."
 msgstr "{0}会回到大封锁之中，并带走这份效果：{1}放它归去换不来任何金币。"
 
-#: scripts/Phases/CounterPhase.cs:479 scripts/Phases/DayEndPhase.cs:373
+#: scripts/Phases/CounterPhase.cs:479 scripts/Phases/DayEndPhase.cs:377
 msgid ""
 "Sell the {0} for {1}g? It comes off display: {2} exhibition points fewer."
 msgstr "以{1}金卖出{0}？它将撤下陈列：展览分减少{2}。"
 
-#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:374
+#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:378
 msgid "LET IT GO?"
 msgstr "放它归去？"
 
-#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:374
+#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:378
 msgid "SELL IT?"
 msgstr "卖掉吗？"
 
-#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:375
+#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:379
 msgid "Let it go"
 msgstr "放它归去"
 
-#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:375
+#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:379
 msgid "Sell: +{0}g"
 msgstr "卖出：+{0}金"
 
-#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/DayEndPhase.cs:387
+#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/DayEndPhase.cs:391
 msgid "{0} goes back to the Locking."
 msgstr "{0}回到了大封锁之中。"
 
-#: scripts/Phases/CounterPhase.cs:510 scripts/Phases/CounterPhase.cs:1312 scripts/Phases/DayEndPhase.cs:82
-#: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:86
-#: scripts/Phases/DayEndPhase.cs:387 scripts/Phases/DuesPhase.cs:225 scripts/Phases/DuesPhase.cs:232
+#: scripts/Phases/CounterPhase.cs:510 scripts/Phases/CounterPhase.cs:1312 scripts/Phases/DayEndPhase.cs:85
+#: scripts/Phases/DayEndPhase.cs:86 scripts/Phases/DayEndPhase.cs:87 scripts/Phases/DayEndPhase.cs:89
+#: scripts/Phases/DayEndPhase.cs:391 scripts/Phases/DuesPhase.cs:225 scripts/Phases/DuesPhase.cs:232
 #: scripts/Phases/DuesPhase.cs:240 scripts/Phases/DuesPhase.cs:287 scripts/Phases/DuesPhase.cs:301
-#: scripts/Phases/DuesPhase.cs:311 scripts/Phases/OpeningPhase.cs:418 scripts/Phases/OpeningPhase.cs:1079
-#: scripts/Phases/PeddlerPhase.cs:269 scripts/Phases/PeddlerPhase.cs:571 scripts/Phases/TalkPhase.cs:191
+#: scripts/Phases/DuesPhase.cs:311 scripts/Phases/OpeningPhase.cs:418 scripts/Phases/OpeningPhase.cs:1080
+#: scripts/Phases/PeddlerPhase.cs:271 scripts/Phases/PeddlerPhase.cs:573 scripts/Phases/TalkPhase.cs:191
 #: scripts/Phases/TalkPhase.cs:198
 msgid "+{0}g"
 msgstr "+{0}金"
@@ -14311,7 +14316,7 @@ msgstr "+{0}金"
 msgid "Waiting"
 msgstr "等候中"
 
-#: scripts/Phases/CounterPhase.cs:535 scripts/Phases/DayEndPhase.cs:83 scripts/Phases/RunEndPhase.cs:64
+#: scripts/Phases/CounterPhase.cs:535 scripts/Phases/DayEndPhase.cs:86 scripts/Phases/RunEndPhase.cs:64
 #: scripts/Ui/CollectionView.cs:63
 msgid "Curios"
 msgstr "奇物"
@@ -14433,7 +14438,7 @@ msgstr "{0}要价"
 msgid "Offer {0}g"
 msgstr "出价{0}金"
 
-#: scripts/Phases/CounterPhase.cs:793 scripts/Phases/PeddlerPhase.cs:512
+#: scripts/Phases/CounterPhase.cs:793 scripts/Phases/PeddlerPhase.cs:514
 msgid "Buy {0}g"
 msgstr "{0}金买下"
 
@@ -14707,274 +14712,279 @@ msgstr "开店：第{0}天"
 msgid "The shop's open for business!"
 msgstr "小店正式开张！"
 
-#: scripts/Phases/DayEndPhase.cs:76
+#: scripts/Phases/DayEndPhase.cs:79
 msgid "Bought"
 msgstr "买下"
 
-#: scripts/Phases/DayEndPhase.cs:77
+#: scripts/Phases/DayEndPhase.cs:80
 msgid "Passed"
 msgstr "不买"
 
-#: scripts/Phases/DayEndPhase.cs:78
+#: scripts/Phases/DayEndPhase.cs:81
 msgid "Spent"
 msgstr "花费"
 
-#: scripts/Phases/DayEndPhase.cs:79
+#: scripts/Phases/DayEndPhase.cs:82
 msgid "The chests held"
 msgstr "宝箱所值"
 
-#: scripts/Phases/DayEndPhase.cs:80 scripts/Phases/DayEndPhase.cs:100
+#: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:103
 msgid "Profit"
 msgstr "利润"
 
-#: scripts/Phases/DayEndPhase.cs:82
+#: scripts/Phases/DayEndPhase.cs:85
 msgid "Commissions"
 msgstr "委托"
 
-#: scripts/Phases/DayEndPhase.cs:84
+#: scripts/Phases/DayEndPhase.cs:87
 msgid "Visitors"
 msgstr "访客"
 
-#: scripts/Phases/DayEndPhase.cs:86 scripts/Ui/NotebookView.cs:71
+#: scripts/Phases/DayEndPhase.cs:89 scripts/Ui/NotebookView.cs:71
 msgid "Town"
 msgstr "城镇"
 
-#: scripts/Phases/DayEndPhase.cs:87
+#: scripts/Phases/DayEndPhase.cs:90
 msgid "Back room"
 msgstr "后屋"
 
-#: scripts/Phases/DayEndPhase.cs:88 scripts/Phases/DayEndPhase.cs:92
+#: scripts/Phases/DayEndPhase.cs:91 scripts/Phases/DayEndPhase.cs:95
 msgid "Perfect reads"
 msgstr "完美判断"
 
-#: scripts/Phases/DayEndPhase.cs:89 scripts/Phases/DayEndPhase.cs:92
+#: scripts/Phases/DayEndPhase.cs:92 scripts/Phases/DayEndPhase.cs:95
 msgid "New finds"
 msgstr "新发现"
 
-#: scripts/Phases/DayEndPhase.cs:135
+#: scripts/Phases/DayEndPhase.cs:138
 msgid "Keep about {0}g for tomorrow's chests."
 msgstr "留下约{0}金买明天的宝箱。"
 
-#: scripts/Phases/DayEndPhase.cs:136
+#: scripts/Phases/DayEndPhase.cs:139
 msgid "Keep about {0}g for chests ({1}g after renovating)."
 msgstr "留下约{0}金买宝箱（迁店后需{1}金）。"
 
-#: scripts/Phases/DayEndPhase.cs:137
+#: scripts/Phases/DayEndPhase.cs:140
 msgid "You have {0}g. {1}"
 msgstr "你有{0}金。{1}"
 
-#: scripts/Phases/DayEndPhase.cs:137 scripts/Phases/DuesPhase.cs:172
+#: scripts/Phases/DayEndPhase.cs:140 scripts/Phases/DuesPhase.cs:172
 msgid "You have {0}g"
 msgstr "你有{0}金"
 
-#: scripts/Phases/DayEndPhase.cs:138
+#: scripts/Phases/DayEndPhase.cs:141
 msgid "SPEND IT ON THE SHOP"
 msgstr "投资店铺"
 
-#: scripts/Phases/DayEndPhase.cs:138
+#: scripts/Phases/DayEndPhase.cs:141
 msgid "FIX UP THE STALL"
 msgstr "修缮摊位"
 
-#: scripts/Phases/DayEndPhase.cs:150
+#: scripts/Phases/DayEndPhase.cs:153
 msgid "Nothing left to buy. The shop is complete."
 msgstr "已经没什么可买的了。小店一应俱全。"
 
-#: scripts/Phases/DayEndPhase.cs:177
+#: scripts/Phases/DayEndPhase.cs:180
 msgid ""
 "A pale man with a gilded chain has been watching the stall all day. He's still outside."
 msgstr "一个戴镀金链子的苍白男人盯着摊位看了一整天。他还在外面。"
 
-#: scripts/Phases/DayEndPhase.cs:184
+#: scripts/Phases/DayEndPhase.cs:181
+msgid ""
+"The pale man with the gilded chain is back, and this time he's crossing the road to the stall."
+msgstr "那个戴镀金链子的苍白男人又来了，这回他正穿过大路，朝摊位走来。"
+
+#: scripts/Phases/DayEndPhase.cs:188
 msgid "COMMISSIONS"
 msgstr "委托"
 
-#: scripts/Phases/DayEndPhase.cs:186
+#: scripts/Phases/DayEndPhase.cs:190
 msgid "until the Guild comes"
 msgstr "截至公会到来"
 
-#: scripts/Phases/DayEndPhase.cs:188
+#: scripts/Phases/DayEndPhase.cs:192
 msgid "Regulars will start asking you for things soon."
 msgstr "常客们很快就会开始托你找东西。"
 
-#: scripts/Phases/DayEndPhase.cs:189
+#: scripts/Phases/DayEndPhase.cs:193
 msgid "Regulars start asking for things once the Guild has been."
 msgstr "公会来过之后，常客们才会开始托你找东西。"
 
-#: scripts/Phases/DayEndPhase.cs:190
+#: scripts/Phases/DayEndPhase.cs:194
 msgid "Nobody's asking for anything this week."
 msgstr "这周没人托你找东西。"
 
-#: scripts/Phases/DayEndPhase.cs:197
+#: scripts/Phases/DayEndPhase.cs:201
 msgid "DONE"
 msgstr "完成"
 
-#: scripts/Phases/DayEndPhase.cs:197
+#: scripts/Phases/DayEndPhase.cs:201
 msgid "{0}g each"
 msgstr "每件{0}金"
 
-#: scripts/Phases/DayEndPhase.cs:206
+#: scripts/Phases/DayEndPhase.cs:210
 msgid "CURIOS {0}/{1}"
 msgstr "奇物 {0}/{1}"
 
-#: scripts/Phases/DayEndPhase.cs:208
+#: scripts/Phases/DayEndPhase.cs:212
 msgid "Nim the peddler comes by tonight, after closing, with a curio."
 msgstr "货郎尼姆今晚打烊后会来，带着一件奇物。"
 
-#: scripts/Phases/DayEndPhase.cs:209
+#: scripts/Phases/DayEndPhase.cs:213
 msgid "Nim the peddler comes by every night after closing, from the third."
 msgstr "从第三天起，货郎尼姆每晚打烊后都会来。"
 
-#: scripts/Phases/DayEndPhase.cs:245
+#: scripts/Phases/DayEndPhase.cs:249
 msgid "VANE COMES TONIGHT"
 msgstr "韦恩今晚到访"
 
-#: scripts/Phases/DayEndPhase.cs:245
+#: scripts/Phases/DayEndPhase.cs:249
 msgid "THE GUILD'S INTEREST"
 msgstr "公会利息"
 
-#: scripts/Phases/DayEndPhase.cs:245
+#: scripts/Phases/DayEndPhase.cs:249
 msgid "THE GUILD'S DUE"
 msgstr "应缴贡金"
 
-#: scripts/Phases/DayEndPhase.cs:248
+#: scripts/Phases/DayEndPhase.cs:252
 msgid "tonight"
 msgstr "今晚"
 
-#: scripts/Phases/DayEndPhase.cs:248
+#: scripts/Phases/DayEndPhase.cs:252
 msgid "end of day {0}"
 msgstr "第{0}天结束时"
 
-#: scripts/Phases/DayEndPhase.cs:251
+#: scripts/Phases/DayEndPhase.cs:255
 msgid "debt left {0}g"
 msgstr "剩余债务{0}金"
 
-#: scripts/Phases/DayEndPhase.cs:256
+#: scripts/Phases/DayEndPhase.cs:260
 msgid "Pay it all off: {0}g"
 msgstr "全部还清：{0}金"
 
-#: scripts/Phases/DayEndPhase.cs:257
+#: scripts/Phases/DayEndPhase.cs:261
 msgid ""
 "Every week's due that's left of Bram's debt, to the last, all at once. The run is won; you can keep trading after."
 msgstr "把布拉姆债务中剩下的每周应缴贡金，一直到最后一笔，一次性付清。这一局就赢了；之后你还可以继续经营。"
 
-#: scripts/Phases/DayEndPhase.cs:268 scripts/Phases/RunEndPhase.cs:41
+#: scripts/Phases/DayEndPhase.cs:272 scripts/Phases/RunEndPhase.cs:41
 msgid "Bram's debt is paid"
 msgstr "布拉姆的债务已还清"
 
-#: scripts/Phases/DayEndPhase.cs:268
+#: scripts/Phases/DayEndPhase.cs:272
 msgid "Week {0} of {1}"
 msgstr "第{0}/{1}周"
 
-#: scripts/Phases/DayEndPhase.cs:268 scripts/Phases/DuesPhase.cs:75
+#: scripts/Phases/DayEndPhase.cs:272 scripts/Phases/DuesPhase.cs:75
 msgid "Week {0}"
 msgstr "第{0}周"
 
-#: scripts/Phases/DayEndPhase.cs:269
+#: scripts/Phases/DayEndPhase.cs:273
 msgid "{0}. You have it."
 msgstr "{0}。钱已备齐。"
 
-#: scripts/Phases/DayEndPhase.cs:269
+#: scripts/Phases/DayEndPhase.cs:273
 msgid "{0}. {1}g short."
 msgstr "{0}。还差{1}金。"
 
-#: scripts/Phases/DayEndPhase.cs:284
+#: scripts/Phases/DayEndPhase.cs:288
 msgid "PAY OFF THE DEBT?"
 msgstr "还清债务？"
 
-#: scripts/Phases/DayEndPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:290
 msgid ", {0} week early"
 msgid_plural ", {0} weeks early"
 msgstr[0] "，提前{0}周"
 
-#: scripts/Phases/DayEndPhase.cs:287
+#: scripts/Phases/DayEndPhase.cs:291
 msgid ""
 "Pay the Guild {0}g now: every week's due that's left, to the last. Bram's debt is cleared{1}, and you'd have {2}g left. You can keep trading after."
 msgstr "现在付给公会{0}金：剩下的每周应缴贡金，一直到最后一笔。布拉姆的债务就此还清{1}，你还会剩下{2}金。之后你还可以继续经营。"
 
-#: scripts/Phases/DayEndPhase.cs:289
+#: scripts/Phases/DayEndPhase.cs:293
 msgid "Pay it off"
 msgstr "还清"
 
-#: scripts/Phases/DayEndPhase.cs:290
+#: scripts/Phases/DayEndPhase.cs:294
 msgid "Not yet"
 msgstr "先不了"
 
-#: scripts/Phases/DayEndPhase.cs:314
+#: scripts/Phases/DayEndPhase.cs:318
 msgid "Keep grand things when you open a chest, and they'll show here."
 msgstr "开箱时把贵重的东西留下陈列，它们就会出现在这里。"
 
-#: scripts/Phases/DayEndPhase.cs:315
+#: scripts/Phases/DayEndPhase.cs:319
 msgid "{0} points: +{1} customer a day, better chests {2} of the time."
 msgid_plural "{0} points: +{1} customers a day, better chests {2} of the time."
 msgstr[0] "{0}分：每天顾客+{1}，宝箱有{2}的几率更好。"
 
-#: scripts/Phases/DayEndPhase.cs:319
+#: scripts/Phases/DayEndPhase.cs:323
 msgid "EXHIBITION {0}/{1}"
 msgstr "展览 {0}/{1}"
 
-#: scripts/Phases/DayEndPhase.cs:330
+#: scripts/Phases/DayEndPhase.cs:334
 msgid "{0}, {1} points{2}. Click to sell it for {3}g."
 msgstr "{0}，{1}展览分{2}。点击以{3}金卖出。"
 
-#: scripts/Phases/DayEndPhase.cs:334
+#: scripts/Phases/DayEndPhase.cs:338
 msgid "Collection: {0} of {1} found."
 msgstr "收藏：已发现{0}/{1}。"
 
-#: scripts/Phases/DayEndPhase.cs:335
+#: scripts/Phases/DayEndPhase.cs:339
 msgid " Visitors leave {0}g a night."
 msgstr "访客每晚留下{0}金。"
 
-#: scripts/Phases/DayEndPhase.cs:336
+#: scripts/Phases/DayEndPhase.cs:340
 msgid " Visitors pay {0}g a night at the door."
 msgstr "访客每晚在门口付{0}金。"
 
-#: scripts/Phases/DayEndPhase.cs:350
+#: scripts/Phases/DayEndPhase.cs:354
 msgid "HEARTSONGS"
 msgstr "心歌"
 
-#: scripts/Phases/DayEndPhase.cs:398
+#: scripts/Phases/DayEndPhase.cs:402
 msgid "Earn your keep"
 msgstr "积攒本钱"
 
-#: scripts/Phases/DayEndPhase.cs:399
+#: scripts/Phases/DayEndPhase.cs:403
 msgid ""
 "Once the stall has earned {0}g, all told, you can move on to Thornwick Market: more customers, richer chests and a shelf for your best finds."
 msgstr "摊位累计赚到{0}金后，你就可以迁往荆棘镇集市：顾客更多，宝箱更值钱，还有展架摆放你最好的发现。"
 
-#: scripts/Phases/DayEndPhase.cs:410
+#: scripts/Phases/DayEndPhase.cs:414
 msgid "The chests have brought in {0}g of {1}g"
 msgstr "宝箱收入已达{0}金，目标{1}金"
 
-#: scripts/Phases/DayEndPhase.cs:439
+#: scripts/Phases/DayEndPhase.cs:443
 msgid ""
 "Every chest read for you, for good. You'd still owe the Guild {0}g, and have {1}g to earn it with."
 msgstr "从此每只宝箱都由它替你读出。你仍欠公会{0}金，手头只剩{1}金来挣这笔钱。"
 
-#: scripts/Phases/DayEndPhase.cs:440
+#: scripts/Phases/DayEndPhase.cs:444
 msgid "Buy the {0}. Leaves you {1}g."
 msgstr "购买{0}。之后还剩{1}金。"
 
-#: scripts/Phases/DayEndPhase.cs:446
+#: scripts/Phases/DayEndPhase.cs:450
 msgid "{0}g more to go"
 msgstr "还差{0}金"
 
-#: scripts/Phases/DayEndPhase.cs:463 scripts/Phases/PeddlerPhase.cs:534
+#: scripts/Phases/DayEndPhase.cs:467 scripts/Phases/PeddlerPhase.cs:536
 msgid "ARE YOU SURE?"
 msgstr "确定吗？"
 
-#: scripts/Phases/DayEndPhase.cs:463 scripts/Phases/PeddlerPhase.cs:534
+#: scripts/Phases/DayEndPhase.cs:467 scripts/Phases/PeddlerPhase.cs:536
 msgid "Buy anyway"
 msgstr "仍然购买"
 
-#: scripts/Phases/DayEndPhase.cs:520
+#: scripts/Phases/DayEndPhase.cs:524
 msgid "Synergies: none reached yet"
 msgstr "羁绊：尚未达成"
 
-#: scripts/Phases/DayEndPhase.cs:520
+#: scripts/Phases/DayEndPhase.cs:524
 msgid "Synergies: {0} of {1} active"
 msgstr "羁绊：已启用{0}/{1}"
 
-#: scripts/Phases/DayEndPhase.cs:525
+#: scripts/Phases/DayEndPhase.cs:529
 msgid " (choose!)"
 msgstr "（快去选择！）"
 
@@ -15458,118 +15468,118 @@ msgstr "判断有误：你要按箱里实际的价值付给{0}，再加四分之
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr "判断有误，不过你付的钱本就超过了箱里东西的价值。"
 
-#: scripts/Phases/OpeningPhase.cs:1067
+#: scripts/Phases/OpeningPhase.cs:1068
 msgid "Delivered"
 msgstr "已交付"
 
-#: scripts/Phases/OpeningPhase.cs:1075
+#: scripts/Phases/OpeningPhase.cs:1076
 msgid "Filled"
 msgstr "委托已满"
 
-#: scripts/Phases/OpeningPhase.cs:1079 scripts/Phases/OpeningPhase.cs:1105
+#: scripts/Phases/OpeningPhase.cs:1080 scripts/Phases/OpeningPhase.cs:1106
 msgid "{0}/{1}: +{2}g"
 msgstr "{0}/{1}：+{2}金"
 
-#: scripts/Phases/OpeningPhase.cs:1079
+#: scripts/Phases/OpeningPhase.cs:1080
 msgid "Deliver +{0}g"
 msgstr "交付 +{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:1080
+#: scripts/Phases/OpeningPhase.cs:1081
 msgid ""
 "{0} wants {1}: {2}g, instead of {3}g for selling it. A commission always pays more than selling."
 msgstr "{0}想要{1}：付你{2}金，而卖掉它只能得到{3}金。委托的报酬总是比卖掉更高。"
 
-#: scripts/Phases/OpeningPhase.cs:1099
+#: scripts/Phases/OpeningPhase.cs:1100
 msgid "Commission! +{0}g"
 msgstr "委托完成！+{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:1124
+#: scripts/Phases/OpeningPhase.cs:1125
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr "+{0}展览分（附魔，×2！）"
 
-#: scripts/Phases/OpeningPhase.cs:1124
+#: scripts/Phases/OpeningPhase.cs:1125
 msgid "+{0} exhibition"
 msgstr "+{0}展览分"
 
-#: scripts/Phases/OpeningPhase.cs:1136
+#: scripts/Phases/OpeningPhase.cs:1137
 msgid "On display"
 msgstr "陈列中"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Swap"
 msgstr "替换"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Keep"
 msgstr "陈列"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Swap {0} (-{1}g)"
 msgstr "替换 {0}（-{1}金）"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Keep {0} (-{1}g)"
 msgstr "陈列 {0}（-{1}金）"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1150
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr "以{1}金换取{0}展览分{2}。{3}"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1150
 msgid " (double: it's enchanted)"
 msgstr "（附魔，翻倍）"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1150
 msgid " Your display is full: sell something on it to make room."
 msgstr "你的陈列已满：先卖掉一件来腾出位置。"
 
-#: scripts/Phases/OpeningPhase.cs:1169
+#: scripts/Phases/OpeningPhase.cs:1170
 msgid ""
 "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr "你的陈列已满。卖掉一件，为{0}（+{1}分）腾出位置："
 
-#: scripts/Phases/OpeningPhase.cs:1179
+#: scripts/Phases/OpeningPhase.cs:1180
 msgid "{0}: +{1}g, -{2} pts"
 msgstr "{0}：+{1}金，-{2}分"
 
-#: scripts/Phases/OpeningPhase.cs:1181
+#: scripts/Phases/OpeningPhase.cs:1182
 msgid "+{0}g, -{1} pts"
 msgstr "+{0}金，-{1}分"
 
-#: scripts/Phases/OpeningPhase.cs:1193
+#: scripts/Phases/OpeningPhase.cs:1194
 msgid "Never mind"
 msgstr "算了"
 
-#: scripts/Phases/OpeningPhase.cs:1205
+#: scripts/Phases/OpeningPhase.cs:1206
 msgid "Sold the {0}: +{1}g"
 msgstr "卖出{0}：+{1}金"
 
-#: scripts/Phases/PeddlerPhase.cs:73
+#: scripts/Phases/PeddlerPhase.cs:75
 msgid "NIM'S CURIOS"
 msgstr "尼姆的奇物"
 
-#: scripts/Phases/PeddlerPhase.cs:102
+#: scripts/Phases/PeddlerPhase.cs:104
 msgid "Nim's sold out: you own every curio Nim carries!"
 msgstr "尼姆的货卖光了：他带的每件奇物你都有了！"
 
-#: scripts/Phases/PeddlerPhase.cs:104
+#: scripts/Phases/PeddlerPhase.cs:106
 msgid ""
 "Each curio costs a set sum for its rarity, plus a share of the gold you have tonight ({0}g)."
 msgstr "每件奇物的价格，是按稀有度定的固定金额，再加上你今晚所持金币（{0}金）的一定比例。"
 
-#: scripts/Phases/PeddlerPhase.cs:111
+#: scripts/Phases/PeddlerPhase.cs:113
 msgid "YOUR CURIOS {0}/{1}"
 msgstr "你的奇物 {0}/{1}"
 
-#: scripts/Phases/PeddlerPhase.cs:114
+#: scripts/Phases/PeddlerPhase.cs:116
 msgid "No room for more: click one to sell it back for half."
 msgstr "已经放不下了：点击一件，可半价卖回。"
 
-#: scripts/Phases/PeddlerPhase.cs:115
+#: scripts/Phases/PeddlerPhase.cs:117
 msgid "Click one to sell it back for half."
 msgstr "点击一件，可半价卖回。"
 
-#: scripts/Phases/PeddlerPhase.cs:128
+#: scripts/Phases/PeddlerPhase.cs:130
 msgid ""
 "{0}: {1}\n"
 "Click to sell it back for {2}g."
@@ -15577,249 +15587,249 @@ msgstr ""
 "{0}：{1}\n"
 "点击以{2}金卖回。"
 
-#: scripts/Phases/PeddlerPhase.cs:137
+#: scripts/Phases/PeddlerPhase.cs:139
 msgid "The Lantern Market"
 msgstr "灯笼夜市"
 
-#: scripts/Phases/PeddlerPhase.cs:138
+#: scripts/Phases/PeddlerPhase.cs:140
 msgid ""
 "Under the Barrow, at midnight: Nim's people, buyers for anything gold, and the Arcanum's menagerie."
 msgstr "古冢底下，午夜时分：有尼姆的同伙，有收购一切金色物品的买家，还有秘法院的奇兽苑。"
 
-#: scripts/Phases/PeddlerPhase.cs:145
+#: scripts/Phases/PeddlerPhase.cs:147
 msgid "{0} {1}g"
 msgstr "{0} {1}金"
 
-#: scripts/Phases/PeddlerPhase.cs:163
+#: scripts/Phases/PeddlerPhase.cs:165
 msgid "The back room ({0})"
 msgstr "后屋（{0}）"
 
-#: scripts/Phases/PeddlerPhase.cs:164
+#: scripts/Phases/PeddlerPhase.cs:166
 msgid ""
 "Chests that won't open for you, anyone gilded you've brought in, and your mimic: what can be done tonight."
 msgstr "打不开的宝箱、你带回来的镀金者，还有你的宝箱怪：看看今晚能做些什么。"
 
-#: scripts/Phases/PeddlerPhase.cs:189
+#: scripts/Phases/PeddlerPhase.cs:191
 msgid "THE LANTERN MARKET"
 msgstr "灯笼夜市"
 
-#: scripts/Phases/PeddlerPhase.cs:190
+#: scripts/Phases/PeddlerPhase.cs:192
 msgid ""
 "Under the Barrow, at midnight. Nim's people buy what can't be sold by daylight, and sell what can't be bought."
 msgstr "古冢底下，午夜时分。尼姆的同伙收购见不得光的东西，也出售有钱都买不到的东西。"
 
-#: scripts/Phases/PeddlerPhase.cs:195
+#: scripts/Phases/PeddlerPhase.cs:197
 msgid "Back up to Nim's table"
 msgstr "回到上面尼姆的桌前"
 
-#: scripts/Phases/PeddlerPhase.cs:229
+#: scripts/Phases/PeddlerPhase.cs:231
 msgid "A night at the weighhouse ({0}g)"
 msgstr "混进秤房一晚（{0}金）"
 
-#: scripts/Phases/PeddlerPhase.cs:230
+#: scripts/Phases/PeddlerPhase.cs:232
 msgid ""
 "A Guild coat and a lantern: walk in with the carters, and copy a page of the register."
 msgstr "一件公会外套和一盏提灯：混在车夫中间走进去，抄下登记簿的一页。"
 
-#: scripts/Phases/PeddlerPhase.cs:232
+#: scripts/Phases/PeddlerPhase.cs:234
 msgid "Bram's crate, off the road ({0}g)"
 msgstr "截下布拉姆的货箱（{0}金）"
 
-#: scripts/Phases/PeddlerPhase.cs:233
+#: scripts/Phases/PeddlerPhase.cs:235
 msgid ""
 "The bargemen take a crate chalked with Bram's name off the palace road, and Corvin brings it to your counter."
 msgstr "船夫们从通往王宫的路上截下一只粉笔写着布拉姆名字的货箱，再由科尔文送到你的柜台。"
 
-#: scripts/Phases/PeddlerPhase.cs:235
+#: scripts/Phases/PeddlerPhase.cs:237
 msgid "The Wet Hen, the last night ({0}g)"
 msgstr "“湿母鸡号”，最后一夜（{0}金）"
 
-#: scripts/Phases/PeddlerPhase.cs:236
+#: scripts/Phases/PeddlerPhase.cs:238
 msgid ""
 "The bargemen wait at the river stairs on the treasury's last night, for whoever comes out."
 msgstr "宝库的最后一夜，船夫们会在河边石阶下等着，接应出来的人。"
 
-#: scripts/Phases/PeddlerPhase.cs:237
+#: scripts/Phases/PeddlerPhase.cs:239
 msgid "NIM'S PEOPLE"
 msgstr "尼姆的同伙"
 
-#: scripts/Phases/PeddlerPhase.cs:238
+#: scripts/Phases/PeddlerPhase.cs:240
 msgid ""
 "\"Every road and every cart, Keywright. Ask for what you need, when you know what it is.\""
 msgstr "“每条路，每辆车，钥匠。等你知道自己要什么了，再开口。”"
 
-#: scripts/Phases/PeddlerPhase.cs:239
+#: scripts/Phases/PeddlerPhase.cs:241
 msgid ""
 "\"Every road and every cart, Keywright. Not answers: we don't sell those. Doors, papers and boats.\""
 msgstr "“每条路，每辆车，钥匠。答案不卖：那东西我们不做。只卖门路、文书和船。”"
 
-#: scripts/Phases/PeddlerPhase.cs:260
+#: scripts/Phases/PeddlerPhase.cs:262
 msgid "THE MAW'S BUYERS"
 msgstr "巨口的买家"
 
-#: scripts/Phases/PeddlerPhase.cs:261
+#: scripts/Phases/PeddlerPhase.cs:263
 msgid ""
 "Gilded men in good coats. \"Anything gold, for the master: half as much again as anyone pays.\" Every coin of it is an eye for him."
 msgstr "穿着体面外套的镀金之人。“凡是金色的东西，都要献给主人：比谁出的价都高一半。”每一枚钱币，都是他的一只眼睛。"
 
-#: scripts/Phases/PeddlerPhase.cs:265
+#: scripts/Phases/PeddlerPhase.cs:267
 msgid "Nothing gold on your shelf."
 msgstr "你的展架上没有金色物品。"
 
-#: scripts/Phases/PeddlerPhase.cs:277
+#: scripts/Phases/PeddlerPhase.cs:279
 msgid "Sell the {0} down the Gate"
 msgstr "把{0}卖往大门之下"
 
-#: scripts/Phases/PeddlerPhase.cs:289 scripts/Phases/PeddlerPhase.cs:319
+#: scripts/Phases/PeddlerPhase.cs:291 scripts/Phases/PeddlerPhase.cs:321
 msgid "THE MENAGERIE"
 msgstr "奇兽苑"
 
-#: scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Phases/PeddlerPhase.cs:292
 msgid "\"Yours is asleep on its gold, full. We'll bring it when it's wanted.\""
 msgstr "“你那只吃饱了，正趴在金子上睡觉。需要的时候我们就送过去。”"
 
-#: scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Phases/PeddlerPhase.cs:292
 msgid "\"Yours is eating well. Another Guild night or so and it'll be full.\""
 msgstr "“你那只胃口不错。再过一个公会之夜左右，它就饱了。”"
 
-#: scripts/Phases/PeddlerPhase.cs:292
+#: scripts/Phases/PeddlerPhase.cs:294
 msgid ""
 "\"Yours is full! Fed to sleep. A full one will eat the gold off someone gilded, you know. Or we'd pay well for it.\""
 msgstr "“你那只吃饱了！都喂得睡着了。你知道吧，吃饱的宝箱怪能吃掉镀金者身上的金子。要不然，我们也愿意出高价收。”"
 
-#: scripts/Phases/PeddlerPhase.cs:293
+#: scripts/Phases/PeddlerPhase.cs:295
 msgid ""
 "\"Yours has been fed on {0} Guild night. Twice and it's full. We could keep and feed it for you.\""
 msgid_plural ""
 "\"Yours has been fed on {0} Guild nights. Twice and it's full. We could keep and feed it for you.\""
 msgstr[0] "“你那只已经喂过{0}个公会之夜了。喂两回就饱。我们可以替你养着、替你喂。”"
 
-#: scripts/Phases/PeddlerPhase.cs:298
+#: scripts/Phases/PeddlerPhase.cs:300
 msgid "Leave it with them ({0}g)"
 msgstr "寄放在他们那儿（{0}金）"
 
-#: scripts/Phases/PeddlerPhase.cs:306
+#: scripts/Phases/PeddlerPhase.cs:308
 msgid ""
 "They feed it on Guild nights (no gold from you) and bring it when it's wanted. Still yours."
 msgstr "他们会在公会之夜喂它（不用你出金子），需要时再送来。它仍然归你。"
 
-#: scripts/Phases/PeddlerPhase.cs:310
+#: scripts/Phases/PeddlerPhase.cs:312
 msgid "Sell your mimic (+{0}g)"
 msgstr "卖掉你的宝箱怪（+{0}金）"
 
-#: scripts/Phases/PeddlerPhase.cs:320
+#: scripts/Phases/PeddlerPhase.cs:322
 msgid ""
 "The Arcanum's keepers. \"Mimics, Keywright: {0}g for one fresh out of its chest, more for one fed full. Listen for a chest that breathes.\""
 msgstr "秘法院的饲养员。“宝箱怪，钥匠：刚从箱子里出来的，一只{0}金；喂饱了的，价钱更高。留意会呼吸的箱子。”"
 
-#: scripts/Phases/PeddlerPhase.cs:351
+#: scripts/Phases/PeddlerPhase.cs:353
 msgid "THE BACK ROOM"
 msgstr "后屋"
 
-#: scripts/Phases/PeddlerPhase.cs:355
+#: scripts/Phases/PeddlerPhase.cs:357
 msgid "The duel's stakes, held for the winner"
 msgstr "决斗的赌注，替胜者保管"
 
-#: scripts/Phases/PeddlerPhase.cs:356
+#: scripts/Phases/PeddlerPhase.cs:358
 msgid "{0}'s parcel, kept for collection"
 msgstr "{0}的包裹，寄存待取"
 
-#: scripts/Phases/PeddlerPhase.cs:356
+#: scripts/Phases/PeddlerPhase.cs:358
 msgid "A {0} chest: {1}'s"
 msgstr "{0}宝箱：属于{1}"
 
-#: scripts/Phases/PeddlerPhase.cs:360
+#: scripts/Phases/PeddlerPhase.cs:362
 msgid "Return it +{0}g"
 msgstr "归还 +{0}金"
 
-#: scripts/Phases/PeddlerPhase.cs:361
+#: scripts/Phases/PeddlerPhase.cs:363
 msgid "Nim's friends +{0}g"
 msgstr "尼姆的朋友 +{0}金"
 
-#: scripts/Phases/PeddlerPhase.cs:369
+#: scripts/Phases/PeddlerPhase.cs:371
 msgid "{0}: cold, and shaking, and free of the gold"
 msgstr "{0}：浑身冰凉，瑟瑟发抖，金子已经褪尽"
 
-#: scripts/Phases/PeddlerPhase.cs:369
+#: scripts/Phases/PeddlerPhase.cs:371
 msgid "{0}: gold from head to foot, knocking"
 msgstr "{0}：从头到脚都是金子，还在敲"
 
-#: scripts/Phases/PeddlerPhase.cs:373
+#: scripts/Phases/PeddlerPhase.cs:375
 msgid "Let the mimic eat the gold"
 msgstr "让宝箱怪吃掉金子"
 
-#: scripts/Phases/PeddlerPhase.cs:375
+#: scripts/Phases/PeddlerPhase.cs:377
 msgid "A full mimic eats the gold off one of the gilded, then wakes hungry."
 msgstr "吃饱的宝箱怪会吃掉一个镀金者身上的金子，然后饿着醒来。"
 
-#: scripts/Phases/PeddlerPhase.cs:376
+#: scripts/Phases/PeddlerPhase.cs:378
 msgid "You need a mimic, fed full. Listen for a chest that breathes."
 msgstr "你需要一只喂饱的宝箱怪。留意会呼吸的箱子。"
 
-#: scripts/Phases/PeddlerPhase.cs:376
+#: scripts/Phases/PeddlerPhase.cs:378
 msgid "Your mimic isn't full yet: it eats on Guild nights."
 msgstr "你的宝箱怪还没吃饱：它在公会之夜进食。"
 
-#: scripts/Phases/PeddlerPhase.cs:381
+#: scripts/Phases/PeddlerPhase.cs:383
 msgid "Pay their note to the Guild ({0}g)"
 msgstr "向公会还清借据（{0}金）"
 
-#: scripts/Phases/PeddlerPhase.cs:383
+#: scripts/Phases/PeddlerPhase.cs:385
 msgid ""
 "Freed, but the note still stands: unpaid, the Guild takes them back on its next night."
 msgstr "人救出来了，借据却还在：不还清的话，下一个公会之夜，公会还会把人带走。"
 
-#: scripts/Phases/PeddlerPhase.cs:387
+#: scripts/Phases/PeddlerPhase.cs:389
 msgid "His note is his account: pay the debt."
 msgstr "他的借据就是他那笔账：把债还清。"
 
-#: scripts/Phases/PeddlerPhase.cs:392
+#: scripts/Phases/PeddlerPhase.cs:394
 msgid "Your mimic, asleep on the gold: full."
 msgstr "你的宝箱怪睡在金子上：已经吃饱了。"
 
-#: scripts/Phases/PeddlerPhase.cs:393
+#: scripts/Phases/PeddlerPhase.cs:395
 msgid "Your mimic: fed on {0} Guild night. It eats {1}g each one."
 msgid_plural "Your mimic: fed on {0} Guild nights. It eats {1}g each one."
 msgstr[0] "你的宝箱怪：已喂过{0}个公会之夜。每次要吃{1}金。"
 
-#: scripts/Phases/PeddlerPhase.cs:395 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
+#: scripts/Phases/PeddlerPhase.cs:397 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
 #: scripts/Ui/Hud.cs:100
 msgid "Close"
 msgstr "关闭"
 
-#: scripts/Phases/PeddlerPhase.cs:493 scripts/Phases/PeddlerPhase.cs:495
+#: scripts/Phases/PeddlerPhase.cs:495 scripts/Phases/PeddlerPhase.cs:497
 msgid "Goes with your {0}"
 msgstr "与你的{0}相配"
 
-#: scripts/Phases/PeddlerPhase.cs:494
+#: scripts/Phases/PeddlerPhase.cs:496
 msgid "With your {0}"
 msgstr "配{0}"
 
-#: scripts/Phases/PeddlerPhase.cs:501
+#: scripts/Phases/PeddlerPhase.cs:503
 msgid "New at {0}"
 msgstr "{0}新货"
 
-#: scripts/Phases/PeddlerPhase.cs:502
+#: scripts/Phases/PeddlerPhase.cs:504
 msgid "New here"
 msgstr "此地新到"
 
-#: scripts/Phases/PeddlerPhase.cs:507
+#: scripts/Phases/PeddlerPhase.cs:509
 msgid "Yours"
 msgstr "已拥有"
 
-#: scripts/Phases/PeddlerPhase.cs:512
+#: scripts/Phases/PeddlerPhase.cs:514
 msgid "Take it, free"
 msgstr "免费拿走"
 
-#: scripts/Phases/PeddlerPhase.cs:515
+#: scripts/Phases/PeddlerPhase.cs:517
 msgid "{0}g for a {1} curio, and {2} of your purse tonight."
 msgstr "{1}奇物{0}金，再加上你今晚钱袋的{2}。"
 
-#: scripts/Phases/PeddlerPhase.cs:516
+#: scripts/Phases/PeddlerPhase.cs:518
 msgid "No room: sell a curio back to Nim first. {0}"
 msgstr "没有空位：先卖一件奇物给尼姆。{0}"
 
-#: scripts/Phases/PeddlerPhase.cs:517
+#: scripts/Phases/PeddlerPhase.cs:519
 msgid "{0} {1}"
 msgstr "{0}{1}"
 
@@ -15926,73 +15936,73 @@ msgstr "友好势力"
 msgid "none"
 msgstr "无"
 
-#: scripts/Phases/RunEndPhase.cs:85 scripts/Phases/RunEndPhase.cs:95
+#: scripts/Phases/RunEndPhase.cs:87 scripts/Phases/RunEndPhase.cs:97
 msgid "Retire"
 msgstr "退休"
 
-#: scripts/Phases/RunEndPhase.cs:85 scripts/Phases/RunEndPhase.cs:95
+#: scripts/Phases/RunEndPhase.cs:87 scripts/Phases/RunEndPhase.cs:97
 msgid "Hang up your apron: back to the title."
 msgstr "解下围裙：返回标题画面。"
 
-#: scripts/Phases/RunEndPhase.cs:91
+#: scripts/Phases/RunEndPhase.cs:93
 msgid "Keep trading"
 msgstr "继续经营"
 
-#: scripts/Phases/RunEndPhase.cs:93
+#: scripts/Phases/RunEndPhase.cs:95
 msgid ""
 "Nobody's coming for anything until week {0}: then the Guild wants interest, half as much again each week."
 msgstr "第{0}周之前，不会有人上门讨钱；之后公会要收利息，每周比上周多要一半。"
 
-#: scripts/Phases/RunEndPhase.cs:94
+#: scripts/Phases/RunEndPhase.cs:96
 msgid ""
 "The Guild keeps coming, for half as much again each week. How long can you last?"
 msgstr "公会会一直上门，每周要的钱都比上周多一半。你能撑多久？"
 
-#: scripts/Phases/RunEndPhase.cs:101
+#: scripts/Phases/RunEndPhase.cs:103
 msgid "Back to the title"
 msgstr "返回标题画面"
 
-#: scripts/Phases/RunEndPhase.cs:114
+#: scripts/Phases/RunEndPhase.cs:116
 msgid "{0}'S SCORE{1}"
 msgstr "{0}的分数{1}"
 
-#: scripts/Phases/RunEndPhase.cs:114
+#: scripts/Phases/RunEndPhase.cs:116
 msgid ", LEVEL {0}"
 msgstr "（挑战等级{0}）"
 
-#: scripts/Phases/RunEndPhase.cs:124
+#: scripts/Phases/RunEndPhase.cs:126
 msgid "{0} x{1} = "
 msgstr "{0} ×{1} = "
 
-#: scripts/Phases/RunEndPhase.cs:126
+#: scripts/Phases/RunEndPhase.cs:128
 msgid "Score: a new best!"
 msgstr "分数：新纪录！"
 
-#: scripts/Phases/RunEndPhase.cs:126
+#: scripts/Phases/RunEndPhase.cs:128
 msgid "Score"
 msgstr "分数"
 
-#: scripts/Phases/RunEndPhase.cs:136
+#: scripts/Phases/RunEndPhase.cs:139
 msgid "{0} can mind the stall now!"
 msgstr "{0}现在可以看摊了！"
 
-#: scripts/Phases/RunEndPhase.cs:138
+#: scripts/Phases/RunEndPhase.cs:141
 msgid "Challenge level {0} is open for {1}."
 msgstr "{1}的挑战等级{0}已开放。"
 
-#: scripts/Phases/RunEndPhase.cs:142
+#: scripts/Phases/RunEndPhase.cs:145
 msgid "Nim has new curios for your next run: {0}."
 msgstr "尼姆为你的下一局备了新奇物：{0}。"
 
-#: scripts/Phases/RunEndPhase.cs:143
+#: scripts/Phases/RunEndPhase.cs:146
 msgid "Nim has {0} new curios for your next run, the {1} among them."
 msgstr "尼姆为你的下一局备了{0}件新奇物，其中有{1}。"
 
-#: scripts/Phases/RunEndPhase.cs:144
+#: scripts/Phases/RunEndPhase.cs:147
 msgid "Keep trading and every week you keep the Guild paid adds to the score."
 msgstr "继续经营下去，每按时付清公会一周的钱，分数都会增加。"
 
-#: scripts/Phases/RunEndPhase.cs:147
+#: scripts/Phases/RunEndPhase.cs:150
 msgid "All runs: {0} started, {1} debts cleared, best week {2}."
 msgstr "累计：开局{0}次，还清债务{1}次，最远到第{2}周。"
 
@@ -16000,11 +16010,11 @@ msgstr "累计：开局{0}次，还清债务{1}次，最远到第{2}周。"
 msgid "Skip"
 msgstr "跳过"
 
-#: scripts/Phases/ScenePhase.cs:131
+#: scripts/Phases/ScenePhase.cs:132
 msgid "click for more"
 msgstr "点击查看更多"
 
-#: scripts/Phases/ScenePhase.cs:131 scripts/Ui/MentorView.cs:225
+#: scripts/Phases/ScenePhase.cs:132 scripts/Ui/MentorView.cs:225
 msgid "click to go on"
 msgstr "点击继续"
 
@@ -16538,23 +16548,23 @@ msgstr "利息{0}金"
 msgid "Due {0}g"
 msgstr "应缴{0}金"
 
-#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:825
+#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:826
 msgid "tonight!"
 msgstr "就在今晚"
 
-#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:826
+#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:827
 msgid "in week {0}"
 msgstr "第{0}周"
 
-#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:403 scripts/Ui/NotebookView.cs:827
+#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:828
 msgid "next week"
 msgstr "下周"
 
-#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:828
+#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:829
 msgid "tomorrow night"
 msgstr "明晚"
 
-#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:828
+#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:829
 msgid "in {0} days"
 msgstr "{0}天后"
 
@@ -16635,7 +16645,7 @@ msgstr "1级：{0}"
 msgid "Highest level!"
 msgstr "已达最高级！"
 
-#: scripts/Ui/NotebookView.cs:138 scripts/Ui/NotebookView.cs:455
+#: scripts/Ui/NotebookView.cs:138 scripts/Ui/NotebookView.cs:456
 msgid "Next: {0}"
 msgstr "接下来：{0}"
 
@@ -16675,78 +16685,78 @@ msgstr "重量"
 msgid "Note"
 msgstr "备注"
 
-#: scripts/Ui/NotebookView.cs:189
+#: scripts/Ui/NotebookView.cs:190
 msgid "If it's as good as the chest:"
 msgstr "按宝箱应有品质："
 
-#: scripts/Ui/NotebookView.cs:197
+#: scripts/Ui/NotebookView.cs:198
 msgid ""
 "Light things rattle at a gentle shake, weapons at a firm one, soft things only at a hard one. Click a row to hear it."
 msgstr "轻巧的东西轻摇就会响，兵器要稳摇，柔软的东西只有猛摇才响。点击一行可试听。"
 
-#: scripts/Ui/NotebookView.cs:198
+#: scripts/Ui/NotebookView.cs:199
 msgid ""
 "While weapons clank, delicate things go unheard: shake gently to hear past it."
 msgstr "兵器哐啷作响时，细微的声音会被盖过：轻摇，就能避开哐啷声听清它们。"
 
-#: scripts/Ui/NotebookView.cs:199
+#: scripts/Ui/NotebookView.cs:200
 msgid "Dropped, a chest with a false bottom booms hollow. Glass may break."
 msgstr "有夹层的宝箱摔一下，会发出空洞的“咚”声。玻璃可能会碎。"
 
-#: scripts/Ui/NotebookView.cs:200
+#: scripts/Ui/NotebookView.cs:201
 msgid "Two or three of a kind each sound from their own spot: count them."
 msgstr "同类的两三件东西会各自从不同位置发声：数一数。"
 
-#: scripts/Ui/NotebookView.cs:201
+#: scripts/Ui/NotebookView.cs:202
 msgid "Sand rustles like a scroll, but pours at a gentle shake."
 msgstr "沙子的沙沙声和卷轴一样，但轻摇就会流动。"
 
-#: scripts/Ui/NotebookView.cs:202
+#: scripts/Ui/NotebookView.cs:203
 msgid ""
 "Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{0}.{1}"
 msgstr "任何东西都可能附魔：声音一样，但在巫灯下会发光。价值×{0}。{1}"
 
-#: scripts/Ui/NotebookView.cs:202
+#: scripts/Ui/NotebookView.cs:203
 msgid " Demon gold is iron under the gilt: a lodestone silences it."
 msgstr "魔金是镀了金的铁：磁石能让它噤声。"
 
-#: scripts/Ui/NotebookView.cs:221
+#: scripts/Ui/NotebookView.cs:222
 msgid "loud: drowns delicate"
 msgstr "响亮：盖过细微声"
 
-#: scripts/Ui/NotebookView.cs:221
+#: scripts/Ui/NotebookView.cs:222
 msgid "delicate: clanks drown it"
 msgstr "细微：会被哐啷声盖过"
 
-#: scripts/Ui/NotebookView.cs:221
+#: scripts/Ui/NotebookView.cs:222
 msgid "soft: hard shake only"
 msgstr "轻软：只在猛摇时出声"
 
-#: scripts/Ui/NotebookView.cs:222
+#: scripts/Ui/NotebookView.cs:223
 msgid "delicate; demon gold apes it"
 msgstr "细微；魔金会冒充它"
 
-#: scripts/Ui/NotebookView.cs:223
+#: scripts/Ui/NotebookView.cs:224
 msgid "soft; sand sounds alike"
 msgstr "轻软；沙子听来一样"
 
-#: scripts/Ui/NotebookView.cs:261
+#: scripts/Ui/NotebookView.cs:262
 msgid "{0} of {1} met"
 msgstr "已结识{0}/{1}"
 
-#: scripts/Ui/NotebookView.cs:276
+#: scripts/Ui/NotebookView.cs:277
 msgid "Friends & foes"
 msgstr "友与敌"
 
-#: scripts/Ui/NotebookView.cs:279
+#: scripts/Ui/NotebookView.cs:280
 msgid "{0}; {1}"
 msgstr "{0}；{1}"
 
-#: scripts/Ui/NotebookView.cs:282
+#: scripts/Ui/NotebookView.cs:283
 msgid "You haven't met anyone here yet."
 msgstr "你在这里还没结识任何人。"
 
-#: scripts/Ui/NotebookView.cs:295
+#: scripts/Ui/NotebookView.cs:296
 msgid ""
 "\n"
 "Wants: {0}"
@@ -16754,7 +16764,7 @@ msgstr ""
 "\n"
 "心愿：{0}"
 
-#: scripts/Ui/NotebookView.cs:296
+#: scripts/Ui/NotebookView.cs:297
 msgid ""
 "\n"
 "You've noticed: {0}"
@@ -16762,140 +16772,140 @@ msgstr ""
 "\n"
 "你留意到：{0}"
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:301
 msgid "haggles"
 msgstr "讨价还价"
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:301
 msgid "you name the price"
 msgstr "由你出价"
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:301
 msgid "fixed price"
 msgstr "一口价"
 
-#: scripts/Ui/NotebookView.cs:307
+#: scripts/Ui/NotebookView.cs:308
 msgid "your mentor"
 msgstr "你的导师"
 
-#: scripts/Ui/NotebookView.cs:307
+#: scripts/Ui/NotebookView.cs:308
 msgid ""
 "Keywright at the Brindle crossroads for forty years, until his Key-mark faded and showed on your hand. Keeps a stash for bad days and a tip for everything. Never paid the Guild a penny."
 msgstr "在布林德尔十字路口当了四十年钥匠，直到他的钥纹褪去，出现在你的手上。为坏日子攒着私房钱，凡事都有一句提点。从没给公会交过一个子儿。"
 
-#: scripts/Ui/NotebookView.cs:311
+#: scripts/Ui/NotebookView.cs:312
 msgid "sells curios"
 msgstr "贩卖奇物"
 
-#: scripts/Ui/NotebookView.cs:311
+#: scripts/Ui/NotebookView.cs:312
 msgid ""
 "Comes by every night after the shutters are down, with oddments from the Locking, each bending one rule of the trade. Notices what you buy and brings more like it. Don't ask what Nim is."
 msgstr "每晚打烊落下护窗板后就会来，带着大封锁里的零碎玩意儿，每件都能扭转一条行规。他会留意你买了什么，再带来更多类似的东西。别问尼姆是什么。"
 
-#: scripts/Ui/NotebookView.cs:314
+#: scripts/Ui/NotebookView.cs:315
 msgid "the Gilded Guild"
 msgstr "镀金公会"
 
-#: scripts/Ui/NotebookView.cs:314
+#: scripts/Ui/NotebookView.cs:315
 msgid ""
 "Collector for the Guild that keeps the Gate. Comes at the end of every week for the tithe Bram never paid. Miss one, and the Guild seals the shop."
 msgstr "看守大门的公会派来的收账人。每周末都来收布拉姆从没交过的贡金。漏交一次，公会就会查封店铺。"
 
-#: scripts/Ui/NotebookView.cs:317
+#: scripts/Ui/NotebookView.cs:318
 msgid "the Hooded Woman"
 msgstr "兜帽女子"
 
-#: scripts/Ui/NotebookView.cs:317
+#: scripts/Ui/NotebookView.cs:318
 msgid ""
 "The last archmage of the Keyhold. She knows what the Keyhold put in the seal, and she can see on you that you remember."
 msgstr "钥堡最后一位大法师。她知道钥堡在封印里写了什么，也能从你身上看出你还记得。"
 
-#: scripts/Ui/NotebookView.cs:320
+#: scripts/Ui/NotebookView.cs:321
 msgid "knows the Keyhold"
 msgstr "熟知钥堡"
 
-#: scripts/Ui/NotebookView.cs:320
+#: scripts/Ui/NotebookView.cs:321
 msgid "Knows Bram, and the Key-mark on your hand, and won't say who she is."
 msgstr "认识布拉姆，也认得你手上的钥纹，却不肯说自己是谁。"
 
-#: scripts/Ui/NotebookView.cs:339
+#: scripts/Ui/NotebookView.cs:340
 msgid "{0}: {1}. Click for their page."
 msgstr "{0}：{1}。点击查看其页面。"
 
-#: scripts/Ui/NotebookView.cs:357
+#: scripts/Ui/NotebookView.cs:358
 msgid "at your counter"
 msgstr "正在你的柜台前"
 
-#: scripts/Ui/NotebookView.cs:386
+#: scripts/Ui/NotebookView.cs:387
 msgid "Today is day {0}: week {1}, day {2} of {3}."
 msgstr "今天是第{0}天：第{1}周的第{2}天（共{3}天）。"
 
-#: scripts/Ui/NotebookView.cs:403
+#: scripts/Ui/NotebookView.cs:404
 msgid "this week"
 msgstr "本周内"
 
-#: scripts/Ui/NotebookView.cs:403
+#: scripts/Ui/NotebookView.cs:404
 msgid "not planned"
 msgstr "尚未安排"
 
-#: scripts/Ui/NotebookView.cs:405
+#: scripts/Ui/NotebookView.cs:406
 msgid "past the debt"
 msgstr "还债期满后"
 
-#: scripts/Ui/NotebookView.cs:414
+#: scripts/Ui/NotebookView.cs:415
 msgid "today"
 msgstr "今天"
 
-#: scripts/Ui/NotebookView.cs:422
+#: scripts/Ui/NotebookView.cs:423
 msgid "A story morning: {0}, before you open."
 msgstr "故事之晨：开店前先是“{0}”。"
 
-#: scripts/Ui/NotebookView.cs:439
+#: scripts/Ui/NotebookView.cs:440
 msgid "{0}: {1} said they'd come by."
 msgstr "{0}：{1}说过会来。"
 
-#: scripts/Ui/NotebookView.cs:445
+#: scripts/Ui/NotebookView.cs:446
 msgid "Guild: paid"
 msgstr "公会：已缴"
 
-#: scripts/Ui/NotebookView.cs:445
+#: scripts/Ui/NotebookView.cs:446
 msgid "Guild: {0}g"
 msgstr "公会：{0}金"
 
-#: scripts/Ui/NotebookView.cs:448
+#: scripts/Ui/NotebookView.cs:449
 msgid "The Guild's night: this week's tithe is already paid."
 msgstr "公会之夜：本周的贡金已经付清。"
 
-#: scripts/Ui/NotebookView.cs:448
+#: scripts/Ui/NotebookView.cs:449
 msgid "The Guild's night: Mister Vane comes for {0}g after closing."
 msgstr "公会之夜：打烊后韦恩先生会来收{0}金。"
 
-#: scripts/Ui/NotebookView.cs:451
+#: scripts/Ui/NotebookView.cs:452
 msgid "The week's end"
 msgstr "一周之末"
 
-#: scripts/Ui/NotebookView.cs:453
+#: scripts/Ui/NotebookView.cs:454
 msgid ""
 "Next week's plan is made at the start of this one: its story and its days in town."
 msgstr "下周的安排在本周开始时制定：包括那一周的故事和镇上的日程。"
 
-#: scripts/Ui/NotebookView.cs:454
+#: scripts/Ui/NotebookView.cs:455
 msgid "Day {0}{1}: {2}"
 msgstr "第{0}天{1}：{2}"
 
-#: scripts/Ui/NotebookView.cs:454
+#: scripts/Ui/NotebookView.cs:455
 msgid " (today)"
 msgstr "（今天）"
 
-#: scripts/Ui/NotebookView.cs:454
+#: scripts/Ui/NotebookView.cs:455
 msgid "nothing special planned."
 msgstr "没有特别安排。"
 
-#: scripts/Ui/NotebookView.cs:473
+#: scripts/Ui/NotebookView.cs:474
 msgid "WHERE YOU STAND"
 msgstr "你的声望"
 
-#: scripts/Ui/NotebookView.cs:484
+#: scripts/Ui/NotebookView.cs:485
 msgid ""
 "{0}\n"
 "At +2: {1}\n"
@@ -16905,7 +16915,7 @@ msgstr ""
 "+2时：{1}\n"
 "-2时：{2}"
 
-#: scripts/Ui/NotebookView.cs:499
+#: scripts/Ui/NotebookView.cs:500
 msgid ""
 "{0}\n"
 "Now: {1}"
@@ -16913,134 +16923,134 @@ msgstr ""
 "{0}\n"
 "目前：{1}"
 
-#: scripts/Ui/NotebookView.cs:506
+#: scripts/Ui/NotebookView.cs:507
 msgid "The back room: {0} chest that won't open for you."
 msgid_plural "The back room: {0} chests that won't open for you."
 msgstr[0] "后屋：{0}只打不开的宝箱。"
 
-#: scripts/Ui/NotebookView.cs:513
+#: scripts/Ui/NotebookView.cs:514
 msgid "Who owes you a favour: {0}."
 msgstr "欠你人情的人：{0}。"
 
-#: scripts/Ui/NotebookView.cs:518
+#: scripts/Ui/NotebookView.cs:519
 msgid ""
 "On a Guild night you're short, call on one of them: they bring an eighth of the night's due. Once a season each."
 msgstr "公会之夜钱不够时，可以找其中一位帮忙：对方会带来当晚应缴贡金的八分之一。每人每季一次。"
 
-#: scripts/Ui/NotebookView.cs:524
+#: scripts/Ui/NotebookView.cs:525
 msgid "Papers against the Guild: {0} (the King's court tries it with {1})."
 msgstr "指控公会的证据：{0}份（凑满{1}份，御前法庭就会审判公会）。"
 
-#: scripts/Ui/NotebookView.cs:533
+#: scripts/Ui/NotebookView.cs:534
 msgid "ON THE BOARD"
 msgstr "告示板"
 
-#: scripts/Ui/NotebookView.cs:540
+#: scripts/Ui/NotebookView.cs:541
 msgid "Nothing posted."
 msgstr "没有张贴告示。"
 
-#: scripts/Ui/NotebookView.cs:557
+#: scripts/Ui/NotebookView.cs:558
 msgid "STORIES"
 msgstr "故事"
 
-#: scripts/Ui/NotebookView.cs:559
+#: scripts/Ui/NotebookView.cs:560
 msgid "Nothing's begun yet. People will come with their troubles."
 msgstr "还什么都没开始。人们会带着各自的烦恼上门的。"
 
-#: scripts/Ui/NotebookView.cs:605
+#: scripts/Ui/NotebookView.cs:606
 msgid ""
 "Nothing to follow yet. When something doesn't add up, it goes here: what you saw, what you were told, and what you tried."
 msgstr "暂时还没有要追查的事。等哪件事说不通了，就会记在这里：你看到了什么，别人告诉了你什么，你试过什么。"
 
-#: scripts/Ui/NotebookView.cs:640
+#: scripts/Ui/NotebookView.cs:641
 msgid "THE TREASURY KEY: {0} OF {1}"
 msgstr "宝库钥匙：{0}/{1}"
 
-#: scripts/Ui/NotebookView.cs:669
+#: scripts/Ui/NotebookView.cs:670
 msgid ""
 "The plan is whole. Pay the account with the key whole, and go to the treasury."
 msgstr "计划已经齐全。带着完整的钥匙把账还清，然后去宝库。"
 
-#: scripts/Ui/NotebookView.cs:670
+#: scripts/Ui/NotebookView.cs:671
 msgid "When every line is ticked, the treasury can end differently."
 msgstr "每一条都勾上之后，宝库就能有不一样的结局。"
 
-#: scripts/Ui/NotebookView.cs:695
+#: scripts/Ui/NotebookView.cs:696
 msgid "{0} (held this season)"
 msgstr "{0}（本季持有）"
 
-#: scripts/Ui/NotebookView.cs:696
+#: scripts/Ui/NotebookView.cs:697
 msgid "{0} (remembered)"
 msgstr "{0}（记忆中）"
 
-#: scripts/Ui/NotebookView.cs:711
+#: scripts/Ui/NotebookView.cs:712
 msgid ""
 "No stories yet. People will come to the counter with their troubles, and the notebook will follow each one: what it's about, what's happened, and what comes next."
 msgstr "还没有故事。人们会带着各自的烦恼来到柜台前，笔记本会跟进每一段：讲的是什么、发生了什么、接下来会怎样。"
 
-#: scripts/Ui/NotebookView.cs:760
+#: scripts/Ui/NotebookView.cs:761
 msgid "SO FAR"
 msgstr "前情"
 
-#: scripts/Ui/NotebookView.cs:772
+#: scripts/Ui/NotebookView.cs:773
 msgid "WHAT COMES NEXT"
 msgstr "后续"
 
-#: scripts/Ui/NotebookView.cs:772
+#: scripts/Ui/NotebookView.cs:773
 msgid "NOTHING MORE IS EXPECTED FOR NOW"
 msgstr "暂无后续"
 
-#: scripts/Ui/NotebookView.cs:790
+#: scripts/Ui/NotebookView.cs:791
 msgid ""
 "Bram's debt is cleared{0}. The Guild still comes, for its interest: {1}g {2}."
 msgstr "布拉姆的债务已还清{0}。公会仍会来收利息：{1}金，{2}。"
 
-#: scripts/Ui/NotebookView.cs:790
+#: scripts/Ui/NotebookView.cs:791
 msgid " (day {0})"
 msgstr "（第{0}天）"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid "{0}g of Bram's debt left. Next: {1}g {2}{3}.{4}"
 msgstr "布拉姆的债务还剩{0}金。下次：{1}金，{2}{3}。{4}"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid " ({0}g rolled over)"
 msgstr "（含结转的{0}金）"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid " You could pay it all off at the day's end."
 msgstr "你可以在一天结束时全部还清。"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid " Pay it all off early from a day's end."
 msgstr "可在一天结束时提前全部还清。"
 
-#: scripts/Ui/NotebookView.cs:794
+#: scripts/Ui/NotebookView.cs:795
 msgid "THE GUILD'S DEBT"
 msgstr "公会债务"
 
-#: scripts/Ui/NotebookView.cs:806
+#: scripts/Ui/NotebookView.cs:807
 msgid "THEN"
 msgstr "此后"
 
-#: scripts/Ui/NotebookView.cs:807
+#: scripts/Ui/NotebookView.cs:808
 msgid "x1.5 a week"
 msgstr "每周1.5倍"
 
-#: scripts/Ui/NotebookView.cs:807
+#: scripts/Ui/NotebookView.cs:808
 msgid "{0}g  paid"
 msgstr "{0}金  已缴"
 
-#: scripts/Ui/NotebookView.cs:812
+#: scripts/Ui/NotebookView.cs:813
 msgid ""
 "Once Bram's debt is paid, the Guild keeps coming for interest: each week half as much again as the last."
 msgstr "布拉姆的债务还清后，公会仍会继续来收利息：每周都是上周的1.5倍。"
 
-#: scripts/Ui/NotebookView.cs:813
+#: scripts/Ui/NotebookView.cs:814
 msgid "Week {0}: paid."
 msgstr "第{0}周：已缴。"
 
-#: scripts/Ui/NotebookView.cs:813
+#: scripts/Ui/NotebookView.cs:814
 msgid "Week {0}: Mister Vane comes for {1}g on the fifth evening."
 msgstr "第{0}周：韦恩先生会在第五天傍晚来收{1}金。"
 

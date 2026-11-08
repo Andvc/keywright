@@ -1588,76 +1588,81 @@ msgstr "{0}：{1}が一段上になった！"
 msgid "Nim the Peddler"
 msgstr "行商人ニム"
 
-#: scripts/Core/Curios.cs:506
+#: scripts/Core/Curios.cs:505
+msgid ""
+"Saw the Guild's carriage go by with Bram in it. He waved. Bram never waves. Well! Curios."
+msgstr "ニム、見たよ。ギルドの馬車がブラムを乗せて通っていった。手を振ってた。ブラムは手なんか振らないのに。さてと！珍品だよ。"
+
+#: scripts/Core/Curios.cs:509
 msgid ""
 "Psst! Keywright! Shutters down? Good. Nim's pack is full of things that came out of chests and never went back in."
 msgstr "ちょいと、鍵師さん！鎧戸は下ろした？よしよし。ニムの荷袋には、宝箱から出てきたっきり二度と戻らなかった物がぎっしりさ。"
 
-#: scripts/Core/Curios.cs:507
+#: scripts/Core/Curios.cs:510
 msgid ""
 "Evening! Nim kept the good ones for you. Well. Nim kept some ones for you."
 msgstr "こんばんは！ニム、いいのを取っといたよ。いや、まあ……ニム、何かしらは取っといたよ。"
 
-#: scripts/Core/Curios.cs:508
+#: scripts/Core/Curios.cs:511
 msgid ""
 "Quick, before the Guild's night watch comes round the corner. Look, look, but don't point."
 msgstr "急いで、ギルドの夜回りが角を曲がってくる前に。見て見て、でも指はささないでね。"
 
-#: scripts/Core/Curios.cs:509
+#: scripts/Core/Curios.cs:512
 msgid ""
 "Out of a wizard's strongroom, these, this very night. The wizard won't miss them. Nim checked."
 msgstr "魔法使いの宝物庫から、今夜出てきたばかりの品だよ。魔法使いは惜しがりゃしないさ。ニムがちゃんと確かめたもの。"
 
-#: scripts/Core/Curios.cs:510
+#: scripts/Core/Curios.cs:513
 msgid "A good day? Nim heard. Nim hears everything after dark."
 msgstr "いい一日だった？ニム、聞いたよ。日が暮れたら、ニムの耳には何でも入るのさ。"
 
-#: scripts/Core/Curios.cs:515
+#: scripts/Core/Curios.cs:518
 msgid "Good eye. Nim would have kept that one, if Nim were the keeping sort."
 msgstr "お目が高い。ニムが物を取っておく性分なら、そいつは手放さなかったね。"
 
-#: scripts/Core/Curios.cs:516
+#: scripts/Core/Curios.cs:519
 msgid "Done! Treat it kindly. It's older than the Guild."
 msgstr "毎度！大事にしてやってね。ギルドより年寄りなんだから。"
 
-#: scripts/Core/Curios.cs:517
+#: scripts/Core/Curios.cs:520
 msgid "It likes you. Nim can always tell when they like someone."
 msgstr "そいつ、あんたを気に入ってるよ。誰かを気に入ったかどうか、ニムにはいつだって分かるのさ。"
 
-#: scripts/Core/Curios.cs:520
+#: scripts/Core/Curios.cs:523
 msgid "Nim's off. Tomorrow night, same back door."
 msgstr "ニムはもう行くよ。明日の晩、いつもの裏口で。"
 
-#: scripts/Core/Curios.cs:520
+#: scripts/Core/Curios.cs:523
 msgid "Mind the Guild, Keywright. Nim always does."
 msgstr "ギルドには気をつけな、鍵師さん。ニムはいつも気をつけてる。"
 
-#: scripts/Core/Curios.cs:521
+#: scripts/Core/Curios.cs:524
 msgid "Sleep well. Nim never does."
 msgstr "ぐっすりおやすみ。ニムはいつも寝不足さ。"
 
-#: scripts/Core/Curios.cs:524
+#: scripts/Core/Curios.cs:527
 msgid "Oh, Nim likes it here. Nim will bring more. Every night, more!"
 msgstr "ああ、ニム、ここが気に入ったよ。もっと持ってくるね。毎晩、もっと！"
 
-#: scripts/Core/Curios.cs:527
+#: scripts/Core/Curios.cs:530
 msgid "Back to its owner? How honest. Nim won't tell his friends."
 msgstr "持ち主に返すの？正直だねえ。ニムの仲間には内緒にしとくよ。"
 
-#: scripts/Core/Curios.cs:528
+#: scripts/Core/Curios.cs:531
 msgid ""
 "Nim's friends will see it gets back to whoever wants it most. For a price. Always a price."
 msgstr "ニムの仲間が、いちばん欲しがってる誰かのとこへ届けてくれるさ。お代はいただくけどね。いつだってお代はいただくのさ。"
 
-#: scripts/Core/Curios.cs:531
+#: scripts/Core/Curios.cs:534
 msgid "That would leave your purse thin, that would. Still want it?"
 msgstr "そいつを買ったら財布が寂しくなるよ、ほんとにさ。それでも欲しい？"
 
-#: scripts/Core/Curios.cs:534
+#: scripts/Core/Curios.cs:537
 msgid "Not to your taste? Nim has more. Nim always has more."
 msgstr "お気に召さない？ニムにはまだあるよ。ニムにはいつだって、まだあるのさ。"
 
-#: scripts/Core/Curios.cs:537
+#: scripts/Core/Curios.cs:540
 msgid "Back in the pack it goes. Half what you paid: Nim's fair, ask anyone."
 msgstr "荷袋に戻しとくよ。払った額の半分ね。ニムは公正さ、誰にでも聞いてごらん。"
 
@@ -2056,8 +2061,8 @@ msgid "Nothing of that kind comes out worse than its chest promised."
 msgstr "その種類の品は、宝箱の約束より悪くなって出てくることがない。"
 
 #: scripts/Core/Glossary.cs:68 scripts/Core/Glossary.cs:102 scripts/Core/Offers.cs:69
-#: scripts/Ui/NotebookView.cs:427 scripts/Ui/NotebookView.cs:568 scripts/Ui/NotebookView.cs:646
-#: scripts/Ui/NotebookView.cs:694 scripts/Ui/UiKit.cs:337
+#: scripts/Ui/NotebookView.cs:428 scripts/Ui/NotebookView.cs:569 scripts/Ui/NotebookView.cs:647
+#: scripts/Ui/NotebookView.cs:695 scripts/Ui/UiKit.cs:337
 msgid "{0}: {1}"
 msgstr "{0}：{1}"
 
@@ -2914,8 +2919,8 @@ msgstr "「ギルドの宝物庫が、ブラム殿をご所望です。古い預
 
 #: scripts/Core/Inquiry.cs:57
 msgid ""
-"\"Keep the shop running until he returns. Earn the treasury key, bring it to the treasury on the season's last night, and his account is closed.\""
-msgstr "「お戻りになるまで、店をお続けください。宝物庫の鍵を手に入れ、今季最後の夜に宝物庫へお持ちいただければ、彼の勘定は清算となります」"
+"\"Keep the shop running until he returns, and his account paid. Earn the treasury key, and bring it to the treasury on the season's last night.\""
+msgstr "「お戻りになるまで、店をお続けください。勘定のお支払いもお忘れなく。宝物庫の鍵を手に入れ、今季最後の夜に宝物庫へお持ちください」"
 
 #: scripts/Core/Inquiry.cs:58
 msgid ""
@@ -3705,332 +3710,332 @@ msgid ""
 "You sold {0} to the Maw's buyers at the Lantern Market, for {1}g. An eye for him."
 msgstr "提灯市で、{0}をアギトの買い手に{1}Gで売った。アギトの目がまたひとつ増えた。"
 
-#: scripts/Core/Lessons.cs:72
+#: scripts/Core/Lessons.cs:76
 msgid ""
 "Pip never shakes anything and has no idea what it's worth: he'll ask you to name a price. First, shake it at every strength."
 msgstr "ピップは何も振らないし、値打ちもまるで分かってない。だから値段はこっちにつけさせる。まずは3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:74
+#: scripts/Core/Lessons.cs:78
 msgid ""
 "Tick what you heard. Then set the slider to a few coins and make your offer: he'll take almost anything. You get two tries."
 msgstr ""
 "聞こえたものにチェックを入れろ。それからスライダーを硬貨数枚くらいに合わせて、値をつけるんだ。あの子はたいていの値で手を打つ。チャンスは2回だ。"
 
-#: scripts/Core/Lessons.cs:90
+#: scripts/Core/Lessons.cs:94
 msgid ""
 "Garrick shakes hard, so a clank drowns out anything delicate for him. He haggles: he always asks about double. Shake it yourself, gently too."
 msgstr ""
 "ギャリックは強く振るから、ガチャンに繊細な音がかき消されちまう。それに値切りには応じるが、いつも倍くらいの値をふっかけてくる。自分でも振ってみろ。そっと振るのも忘れるなよ。"
 
-#: scripts/Core/Lessons.cs:92
+#: scripts/Core/Lessons.cs:96
 msgid ""
 "Tick what you heard. Then use the slider to offer him about half his price. You get one offer: much lower and he storms off."
 msgstr ""
 "聞こえたものにチェックを入れろ。それからスライダーで、言い値の半分くらいの値をつけてみろ。値をつけられるのは1回きりだ。それよりずっと低いと、怒って帰っちまうぞ。"
 
-#: scripts/Core/Lessons.cs:101
+#: scripts/Core/Lessons.cs:105
 msgid ""
 "A tinker paid his tab with it. One rattle, like a fish in a crate. A rattle's a rattle: {price}, love."
 msgstr "鋳掛け屋がツケの代わりに置いてったのさ。木箱の魚一匹みたいに、ひとつ鳴るだけ。何が鳴ろうと音は音。{price}だよ、あんた。"
 
-#: scripts/Core/Lessons.cs:104
+#: scripts/Core/Lessons.cs:108
 msgid ""
 "Bettany counts the rattles and charges the same for each, whatever's rattling: a purse of coin costs what a goblin's cleaver does. Shake it: what's rattling?"
 msgstr ""
 "ベタニーは鳴る音の数を数えて、何が鳴っていようと一つにつき同じ値をつける。硬貨ひと袋も、ゴブリンの鉈と同じ値段ってわけだ。振ってみろ。何が鳴ってる？"
 
-#: scripts/Core/Lessons.cs:106
+#: scripts/Core/Lessons.cs:110
 msgid ""
 "A jingle: coin, worth more than any cleaver. At cleaver prices, that's a bargain."
 msgstr "チャリン、硬貨だ。どんな鉈よりも値打ちがある。鉈の値段で買えるなら、お買い得だぞ。"
 
-#: scripts/Core/Lessons.cs:116
+#: scripts/Core/Lessons.cs:120
 msgid ""
 "The Barrow: Tobin always says where a chest came from, and the place tells you what it tends to hold. Barrow chests hold grave goods: coin, weapons, a shroud."
 msgstr ""
 "塚か。トビンはいつも宝箱の出どころを言う。場所が分かれば、何が入っていそうかも分かる。塚の宝箱には副葬品が入ってる。硬貨、武器、それに死者をくるんだ外套だ。"
 
-#: scripts/Core/Lessons.cs:118
+#: scripts/Core/Lessons.cs:122
 msgid ""
 "His chests are rotten through: about two seconds of shaking and no more. One strength, then. Hard stirs everything, but a clank would drown the coin. Shake it hard."
 msgstr ""
 "あいつの宝箱は芯まで腐ってて、振れるのはせいぜい2秒だ。試せる強さは1つだけ。強く振ればどれも鳴るが、ガチャンがあれば硬貨の音はかき消される。強く振ってみろ。"
 
-#: scripts/Core/Lessons.cs:131
+#: scripts/Core/Lessons.cs:135
 msgid ""
 "A goblin burrow: shinies her clan dug up, mostly coin. Nettle shook it gently. Do the same: the first strength is free."
 msgstr "ゴブリンの巣穴か。一族が掘り当てたピカピカで、たいていは硬貨だ。ネトルはそっと振った。同じようにやってみろ。最初の強さはタダだ。"
 
-#: scripts/Core/Lessons.cs:133
+#: scripts/Core/Lessons.cs:137
 msgid ""
 "Every strength after that puts her price up a tenth. A gentle shake can't stir anything heavy, so pay once more for a hard one. Gentle and hard between them hear everything firm would."
 msgstr ""
 "そのあとは強さを変えるたびに、値が1割上がる。そっと振っても重い物は鳴らないから、もう一度だけ払って強く振れ。そっと振るのと強く振るのを合わせれば、しっかり振って聞こえる物は全部聞こえる。"
 
-#: scripts/Core/Lessons.cs:145
+#: scripts/Core/Lessons.cs:149
 msgid ""
 "Rook weighs every chest on her game scale and prices by the pound. Her mare spooks at a hard shake, so nothing gets shaken hard. Shake it gently, then firmly."
 msgstr ""
 "ルークはどの宝箱も獲物用の秤で量って、重さで値をつける。あいつの牝馬は強く振ると驚くから、強く振るのはなしだ。そっと、それからしっかり振ってみろ。"
 
-#: scripts/Core/Lessons.cs:147
+#: scripts/Core/Lessons.cs:151
 msgid ""
 "A slosh: a potion, 3 lb. Her scale says 6 lb, so 3 lb never sounded. A cloak weighs 3, a spell 1, and wolf dens are full of cloaks. Tick a potion and a cloak."
 msgstr ""
 "チャプン、薬だ。3ポンドある。秤では6ポンドだから、3ポンド分が鳴ってない。外套は3ポンド、呪文は1ポンドで、狼の巣穴は外套だらけだ。薬と外套にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:163
+#: scripts/Core/Lessons.cs:167
 msgid ""
 "Everyone you've traded with has a page in your notebook: how they judge a chest, and what they're like. Click Mother Sorrel to read hers."
 msgstr ""
 "取引した相手には、みんな手帳にページがある。宝箱の見立て方や、どんな人柄かが書いてあるんだ。マザー・ソレルをクリックして、あの人のページを読んでみろ。"
 
-#: scripts/Core/Lessons.cs:165
+#: scripts/Core/Lessons.cs:169
 msgid ""
 "Mother Sorrel's price is a dream, but she always dreams true: of what the Wood warded in the chest, or else the dearest thing in it, as a sign. A river is a potion. Shake it at every strength."
 msgstr ""
 "マザー・ソレルの値は夢のお告げだが、あの人の夢は必ず当たる。森が宝箱に結界で封じた品か、さもなきゃ中でいちばん高価な品を、しるしとして夢に見るんだ。川は薬のしるしだ。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:167
+#: scripts/Core/Lessons.cs:171
 msgid ""
 "A flump and a rustle, and no slosh. The potion is warded: sealed in the ward itself, silent and weightless. Name it: tick Potions."
 msgstr ""
 "バサッとカサカサ、チャプンはなし。薬は結界で封じられてる。結界そのものに閉じ込められて、音も重さもないんだ。言い当てるんだ：薬にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:169
+#: scripts/Core/Lessons.cs:173
 msgid ""
 "A ward gives up only to the truth. Name what's there and nothing that isn't, and the warded thing comes out when you open the chest. Nobody priced it."
 msgstr ""
 "結界が解けるのは、真実を言い当てたときだけだ。入っている物を挙げて、入っていない物を挙げなければ、宝箱を開けたときに封じられた品が出てくる。そいつには誰も値をつけていない。"
 
-#: scripts/Core/Lessons.cs:180
+#: scripts/Core/Lessons.cs:184
 msgid ""
 "Brother Cadoc shook it firmly, and won't have it shaken hard: the saints are resting. Half again if you do. Shake it gently, then firmly."
 msgstr ""
 "カドック修道士はしっかり振った。強く振られるのは嫌がるぞ。聖人がたが眠ってるんだとさ。強く振れば値が1.5倍だ。そっと、それからしっかり振ってみろ。"
 
-#: scripts/Core/Lessons.cs:182
+#: scripts/Core/Lessons.cs:186
 msgid ""
 "Crypt chests are full of holy cloaks, and cloth only sounds at a hard shake, so he never prices it. Tick Cloaks on faith, or shake it hard and pay for certainty."
 msgstr ""
 "地下墓所の宝箱は聖なる外套だらけだ。布は強く振らないと鳴らないから、あいつはそれに値をつけない。信じて外套にチェックを入れるか、強く振って確かめて、上乗せ分を払うかだ。"
 
-#: scripts/Core/Lessons.cs:194
+#: scripts/Core/Lessons.cs:198
 msgid ""
 "Corvin packs his chests in straw, so nothing clinked at the Wardens' toll. Straw muffles a strength: a gentle shake stirs nothing at all. Shake it firmly."
 msgstr ""
 "コーヴィンは宝箱にわらを詰める。衛士の関所で何も鳴らないようにな。わらは振る強さを一段分殺す。そっと振っても何も鳴らない。しっかり振ってみろ。"
 
-#: scripts/Core/Lessons.cs:196
+#: scripts/Core/Lessons.cs:200
 msgid ""
 "A jingle: what a gentle shake would stir, a firm one stirs through straw. That's all he heard. Now hard: weapons stir through straw only then, and cloaks and spells never."
 msgstr ""
 "チャリン。そっと振れば鳴る物も、わら越しだとしっかり振ってやっと鳴る。あいつに聞こえたのはそれだけだ。次は強くだ。わら越しだと武器は強く振ったときしか鳴らないし、外套と呪文はまったく鳴らない。"
 
-#: scripts/Core/Lessons.cs:198
+#: scripts/Core/Lessons.cs:202
 msgid ""
 "A clank he never heard. Smugglers love a false bottom, too: lift the chest high and let go."
 msgstr "ガチャン、あいつには聞こえなかった音だ。それに密輸人は二重底が大好きでな。宝箱を高く持ち上げて、手を放してみろ。"
 
-#: scripts/Core/Lessons.cs:199
+#: scripts/Core/Lessons.cs:203
 msgid ""
 "A hollow BOOM. Tick a weapon and False bottom: he priced neither. Then haggle."
 msgstr "ボン！とうつろな音。武器と二重底にチェックを入れろ。どっちもあいつは値をつけてない。それから値切るんだ。"
 
-#: scripts/Core/Lessons.cs:211
+#: scripts/Core/Lessons.cs:215
 msgid ""
 "Hesper sells dowries from weddings that never were. A Thornwick dowry always holds coin for luck, a cloak for warmth and a potion for health. Shake it at every strength."
 msgstr ""
 "ヘスパーは、幻に終わった婚礼の持参金を売ってる。ソーンウィックの持参金には必ず、幸運の硬貨、ぬくもりの外套、健康の薬が入ってる。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:213
+#: scripts/Core/Lessons.cs:217
 msgid ""
 "A jingle and a flump: luck and warmth. No slosh: the bride warded her potion, silent and weightless. Name it: tick Potions."
 msgstr "チャリンとバサッ、幸運とぬくもりだ。チャプンはない。花嫁が薬を結界で封じたんだ。音も重さもない。言い当てるんだ：薬にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:223 scripts/Core/Sellers.cs:1065
+#: scripts/Core/Lessons.cs:227 scripts/Core/Sellers.cs:1065
 msgid "a weaver in Thornwick"
 msgstr "ソーンウィックの機織り"
 
-#: scripts/Core/Lessons.cs:228
+#: scripts/Core/Lessons.cs:232
 msgid ""
 "Flick runs chests for the Magpie: cheap, and in a hurry. Lay a hand on it: shake it, any strength."
 msgstr "フリックはカササギの運び屋だ。安くて、いつも急いでる。手を触れてみろ。どの強さでもいいから振るんだ。"
 
-#: scripts/Core/Lessons.cs:230
+#: scripts/Core/Lessons.cs:234
 msgid ""
 "Your mark went cold: it isn't Flick's to sell, and if you buy it, it won't open. Send for the Wardens: Flick runs, the chest goes home, and they pay you a finder's share. Or just pass."
 msgstr ""
 "鍵紋が冷えたな。フリックが売っていい物じゃない。買っても開かないぞ。衛士を呼べ。フリックは逃げ出して、宝箱は持ち主のもとへ帰り、衛士が発見者の取り分を払ってくれる。それか、ただ見送るかだ。"
 
-#: scripts/Core/Lessons.cs:244
+#: scripts/Core/Lessons.cs:248
 msgid ""
 "Ilse reads the Arcanum's packing tag: it lists each kind of thing packed, and the archmages warded the most dangerous. Shake it at every strength."
 msgstr ""
 "イルゼは魔導院の荷札を読み上げる。荷札には詰めた品の種類が全部書いてあって、いちばん危ない品は大魔導師たちが結界で封じたんだ。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:246
+#: scripts/Core/Lessons.cs:250
 msgid ""
 "A flump and a rustle: the cloak and the spell. The gem on the tag never tinkled: it's warded. Name it: tick Gems."
 msgstr "バサッとカサカサ、外套と呪文だ。荷札にある宝石は、チリンとも鳴らなかった。結界で封じられてるんだ。言い当てるんだ：宝石にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:257
+#: scripts/Core/Lessons.cs:261
 msgid ""
 "Archmage Orme wagers on your craft: read her chest exactly (every kind, every count) and she gives back a third of the price when it's open. Shake it at every strength."
 msgstr ""
 "大魔導師オームは、鍵師の腕前に賭けてくる。あの人の宝箱を種類も数もぴたりと読み当てれば、開けたときに代金の3分の1を返してくれる。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:259
+#: scripts/Core/Lessons.cs:263
 msgid ""
 "Tick exactly what you heard, no more and no less. A careful read takes a third off her price."
 msgstr "聞こえたものだけに、過不足なくチェックを入れろ。きっちり読めば、代金が3分の1安くなる。"
 
-#: scripts/Core/Lessons.cs:269
+#: scripts/Core/Lessons.cs:273
 msgid ""
 "Durgan's a dwarf: he knows weapons, prices the rest at half, and takes every tinkle for a diamond. Shake it gently yourself."
 msgstr "ダーガンはドワーフだ。武器には詳しいが、ほかの物は半値に見積もるし、チリンと鳴ればみんなダイヤモンドだと思い込む。自分でそっと振ってみろ。"
 
-#: scripts/Core/Lessons.cs:271
+#: scripts/Core/Lessons.cs:275
 msgid ""
 "A tinkle: a gem, and he's priced it like the crown jewels. Offer what it's really worth, or let him keep it."
 msgstr "チリン、宝石だ。あいつはそれに王冠の宝石並みの値をつけた。本当の値打ちぶんの値をつけるか、あいつに持って帰らせろ。"
 
-#: scripts/Core/Lessons.cs:281
+#: scripts/Core/Lessons.cs:285
 msgid ""
 "Grandmother Vell left a riddle on each lid about one thing inside, and if she warded something, it's about that. Read it, then shake it at every strength."
 msgstr ""
 "ヴェル家のお祖母さまは、どの箱の蓋にも中の品ひとつについてのなぞなぞを残した。何かを結界で封じたなら、なぞなぞはその品のことだ。読んだら、3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:283
+#: scripts/Core/Lessons.cs:287
 msgid ""
 "A hilt and an edge, or forged and sheathed: a weapon. And nothing clanked: grandmother warded it. Name it: tick Weapons."
 msgstr ""
 "ツカは柄、ハは刃。でなけりゃ、鍛えられて鞘に収まる物。どっちにしろ武器だ。なのにガチャンとも鳴らなかった。お祖母さまが結界で封じたんだ。言い当てるんだ：武器にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:297
+#: scripts/Core/Lessons.cs:301
 msgid ""
 "Brass sells pawn by the lot, two or three of a kind, and prices one of each kind he hears. Shake it at every strength and count: each thing sounds from its own spot."
 msgstr ""
 "ブラスは質流れの品をひと山いくらで売る。同じ種類が2つ3つまとまってるが、聞こえた種類ごとに1つ分しか値をつけない。3つの強さ全部で振って、数を数えろ。品物はそれぞれ別の場所から音がする。"
 
-#: scripts/Core/Lessons.cs:299
+#: scripts/Core/Lessons.cs:303
 msgid ""
 "Two jingles and a rustle: three things, and he priced one purse. But the ticket counts every article pledged, and it says four. He won't have pledges dropped: the fourth is under a false bottom. Tick two Coins and False bottom."
 msgstr ""
 "チャリンが2つにカサカサが1つ、品は3つ。なのにあいつが値をつけた硬貨はひと袋だけだ。だが質札には質入れされた品が全部数えてあって、4点とある。あいつは質草を落とさせない。4つ目は二重底の下だ。硬貨を2つと、二重底にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:311
+#: scripts/Core/Lessons.cs:315
 msgid ""
 "Quire sells the Archive's vault chests with their ward-rolls, faded by three hundred years. The roll names what was warded: 'B_o_d R_b_'."
 msgstr "クワイアは公文書館の地下庫の宝箱を、結界目録ごと売っている。目録は300年で色あせてるが、封じられた品の名が書いてある：「血_ル_ー」。"
 
-#: scripts/Core/Lessons.cs:313
+#: scripts/Core/Lessons.cs:317
 msgid ""
 "The Blood Ruby: a gem. Name it, and the ward gives it up when you open the chest: tick Gems."
 msgstr "血のルビー、宝石だ。言い当てれば、宝箱を開けたときに結界が解けて出てくる。宝石にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:324
+#: scripts/Core/Lessons.cs:328
 msgid ""
 "Tilly shakes hard and prices every rustle as a drowned wizard's spellbook. Shake it gently."
 msgstr "ティリーは強く振って、カサカサと鳴れば何でも、溺れた魔法使いの魔導書として値をつける。そっと振ってみろ。"
 
-#: scripts/Core/Lessons.cs:325
+#: scripts/Core/Lessons.cs:329
 msgid ""
 "A rustle at a gentle shake? Parchment only rustles when it's shaken hard: that's river sand pouring, worth nothing. Tick only the slosh: Potions."
 msgstr "そっと振ってカサカサ？羊皮紙は強く振らなきゃ鳴らない。そいつは川砂が流れる音で、値打ちはゼロだ。チェックを入れるのはチャプン、薬だけにしろ。"
 
-#: scripts/Core/Lessons.cs:336
+#: scripts/Core/Lessons.cs:340
 msgid ""
 "Sir Rowan wants his grandfather's sword. If there are weapons inside, the best of them goes back to him, for the fee he named. Shake it: is there a clank?"
 msgstr "ローワン卿は祖父の剣を探してる。中に武器があれば、いちばん良い物は、あの人が言った額で買い戻される。振ってみろ。ガチャンと鳴るか？"
 
-#: scripts/Core/Lessons.cs:338
+#: scripts/Core/Lessons.cs:342
 msgid ""
 "A clank: that blade is his. Count it at his fee, not its worth, and see whether the rest pays for the chest."
 msgstr "ガチャン。その剣はあの人のものだ。値打ちじゃなく、あの人が払う額で勘定して、残りの品で宝箱の代金がまかなえるか考えろ。"
 
-#: scripts/Core/Lessons.cs:350
+#: scripts/Core/Lessons.cs:354
 msgid ""
 "An imp, with an hourglass: twelve seconds, from when you close this. Things from the Maw's hoard often beat their colour. Shake it gently, then hard. Quick!"
 msgstr ""
 "砂時計を持ったインプだ。これを閉じたら12秒しかない。アギトの財宝から来た品は、宝箱の色より上等なことが多い。そっと、それから強く振れ。急げ！"
 
-#: scripts/Core/Lessons.cs:352
+#: scripts/Core/Lessons.cs:356
 msgid "Gently, then hard!"
 msgstr "そっと、それから強く！"
 
-#: scripts/Core/Lessons.cs:364
+#: scripts/Core/Lessons.cs:368
 msgid ""
 "A devil's bargain: Sallow's price is low, but the dearest thing inside is his. Shake it at every strength: what's in there?"
 msgstr "悪魔の取引だ。サロウの言い値は安いが、中でいちばん高価な品はあいつのものになる。3つの強さ全部で振ってみろ。何が入ってる？"
 
-#: scripts/Core/Lessons.cs:366
+#: scripts/Core/Lessons.cs:370
 msgid ""
 "Four things: he takes the best, you keep three. With many middling things his bargain is a good one; with one grand thing and little else, it's his."
 msgstr ""
 "品は4つ。いちばん良い物をあいつが取って、3つは手元に残る。そこそこの品がたくさんなら得な取引だが、すごい品が1つきりであとは大したことないなら、得をするのはあいつだ。"
 
-#: scripts/Core/Lessons.cs:377
+#: scripts/Core/Lessons.cs:381
 msgid ""
 "Skrae clicks like a bat and listens to the echoes: round is coin, long a weapon, soft a cloak, hollow a potion, flat a spell, tiny a gem. Echoes come back off warded things too. Shake it at every strength."
 msgstr ""
 "スクレーはコウモリみたいに舌を鳴らして、反響を聞く。丸いものは硬貨、長いものは武器、柔らかいものは外套、うつろなものは薬、平たいものは呪文、小さなものは宝石だ。反響は結界で封じた品からも返ってくる。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:380
+#: scripts/Core/Lessons.cs:384
 msgid ""
 "A jingle and a clank: the round one and the long one. Nothing sloshed, so the hollow one is warded: tick Potions."
 msgstr "チャリンとガチャン、丸いものと長いものだ。チャプンとは鳴らなかったから、うつろなものは結界で封じられてる。薬にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:391
+#: scripts/Core/Lessons.cs:395
 msgid ""
 "Countess Vey prices only her gems, at what she paid for them. Whatever else the maid packed comes free. Shake it at every strength."
 msgstr ""
 "ヴェイ伯爵夫人は自分の宝石にしか値をつけない。それも自分が買ったときの値でな。侍女がほかに何を詰めていようと、それはタダだ。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:393
+#: scripts/Core/Lessons.cs:397
 msgid ""
 "Tick everything you heard: the rest is a gift. Some of her gems are paste, though, and she won't have a lodestone near them."
 msgstr ""
 "聞こえたものに全部チェックを入れろ。宝石以外はおまけだ。ただし、あの人の宝石には模造宝石も混じってるし、天然磁石を近づけるのは許してくれない。"
 
-#: scripts/Core/Lessons.cs:404
+#: scripts/Core/Lessons.cs:408
 msgid ""
 "Madame Zell draws three cards from the Locking's own deck: a suit drawn twice is what the ward holds; three different, nothing. Coins came up twice."
 msgstr ""
 "マダム・ゼルは大施錠にまつわるカードから3枚引く。同じ絵柄が2枚出たら、それが結界の中身だ。3枚ともばらばらなら、何も封じられていない。金貨のカードが2枚出たな。"
 
-#: scripts/Core/Lessons.cs:406
+#: scripts/Core/Lessons.cs:410
 msgid "So there's warded coin. Name it: tick Coin."
 msgstr "つまり、結界で封じた硬貨がある。言い当てるんだ：硬貨にチェックを入れろ。"
 
-#: scripts/Core/Lessons.cs:416
+#: scripts/Core/Lessons.cs:420
 msgid ""
 "Gilt sells demon gold: gilded iron, and it jingles just like the real thing. Turn the lodestone on and shake it gently."
 msgstr "ギルトは魔金を売る。金箔を貼った鉄で、本物そっくりにチャリンと鳴るんだ。天然磁石をオンにして、そっと振ってみろ。"
 
-#: scripts/Core/Lessons.cs:418
+#: scripts/Core/Lessons.cs:422
 msgid ""
 "The jingle went quiet: iron, gilded, worth nothing. The tinkle's real: tick Gems, and leave Coin unticked."
 msgstr "チャリンが止んだ。金箔の鉄で、値打ちはゼロだ。チリンは本物だ。宝石にチェックを入れて、硬貨にはチェックを入れるな。"
 
-#: scripts/Core/Lessons.cs:420
+#: scripts/Core/Lessons.cs:424
 msgid ""
 "Gilt sells demon gold, gilded iron, as gold and gems, and it sounds just like the real thing. Only a lodestone can tell. Too cheap to be true, usually."
 msgstr ""
 "ギルトは魔金、つまり金箔を貼った鉄を、金や宝石として売る。音は本物そっくりだ。見分けられるのは天然磁石だけ。たいてい、本物にしちゃ安すぎるがな。"
 
-#: scripts/Core/Lessons.cs:431
+#: scripts/Core/Lessons.cs:435
 msgid ""
 "Old Aldo plays a game: his price is whatever your slip says. Read it exactly and he takes a quarter off; read it wrong and you pay what it truly holds, and a quarter more. Shake it at every strength."
 msgstr ""
 "アルドじいさんは遊びを仕掛けてくる。言い値は査定表の額そのままだ。ぴたりと読み当てれば4分の1引いてくれるが、外したら中身の本当の値打ちに、さらに4分の1上乗せして払うことになる。3つの強さ全部で振ってみろ。"
 
-#: scripts/Core/Lessons.cs:434
+#: scripts/Core/Lessons.cs:438
 msgid ""
 "Tick exactly what you heard, then buy. Funny: that ring of his has the royal seal on it."
 msgstr "聞こえたものにぴったりチェックを入れて、買え。妙だな、あのじいさんの指輪には王家の紋章がついてるぞ。"
 
-#: scripts/Core/Lessons.cs:444
+#: scripts/Core/Lessons.cs:448
 msgid ""
 "That's no merchant, Kit. That's the Maw, in a borrowed body. One coin for the chest; but buy it, and everyone after him today asks twice as much. Count who's still waiting before you say yes."
 msgstr ""
@@ -4853,8 +4858,8 @@ msgstr "残念ですこと。また伺うかもしれませんわ。"
 msgid "Buy it ({0}g)"
 msgstr "買う（{0}G）"
 
-#: scripts/Core/Offers.cs:83 scripts/Core/TaleBook.Campaign.cs:219 scripts/Phases/DayEndPhase.cs:467
-#: scripts/Phases/PeddlerPhase.cs:538
+#: scripts/Core/Offers.cs:83 scripts/Core/TaleBook.Campaign.cs:219 scripts/Phases/DayEndPhase.cs:471
+#: scripts/Phases/PeddlerPhase.cs:540
 msgid "Not now"
 msgstr "今はいい"
 
@@ -5062,7 +5067,7 @@ msgstr "衛士の倉庫"
 msgid "whatever thieves took and nobody came back for"
 msgstr "盗人が盗み、誰も取り戻しに来なかった物"
 
-#: scripts/Core/Random.cs:35 scripts/Phases/DayEndPhase.cs:86 scripts/Phases/TalkPhase.cs:191
+#: scripts/Core/Random.cs:35 scripts/Phases/DayEndPhase.cs:89 scripts/Phases/TalkPhase.cs:191
 #: scripts/Phases/TalkPhase.cs:198
 msgid "{0}g"
 msgstr "{0}G"
@@ -5494,8 +5499,8 @@ msgstr "どこぞの冒険者が、交差鍵亭のツケの代わりに置いて
 
 #: scripts/Core/Sellers.cs:413
 msgid ""
-"Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}. And I've news, if you're buying."
-msgstr "三晩分のエールと壊れた長椅子のお代を、宝箱で払っていったのさ。うちは音の数で値をつけるよ、あんた。{price}。噂話もあるよ、買うならね。"
+"Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}."
+msgstr "三晩分のエールと壊れた長椅子のお代を、宝箱で払っていったのさ。うちは音の数で値をつけるよ、あんた。{price}。"
 
 #: scripts/Core/Sellers.cs:414
 msgid ""
@@ -7694,7 +7699,7 @@ msgstr "今朝、水車池から釣り上げたんだ。振ってないよ、壊
 msgid "The Hooded Woman"
 msgstr "フードの女"
 
-#: scripts/Core/Story.cs:58 scripts/Ui/NotebookView.cs:317
+#: scripts/Core/Story.cs:58 scripts/Ui/NotebookView.cs:318
 msgid "Mara"
 msgstr "マーラ"
 
@@ -7744,9 +7749,8 @@ msgid ""
 msgstr "それから、鍵師殿。以前にもお会いしましたね、たしか。あなたはいつも、そんな目で私の指輪をご覧になる。"
 
 #: scripts/Core/Story.cs:95
-msgid ""
-"Every fifth night, then. A good ear pays any debt. We'll talk in the morning."
-msgstr "5晩ごとか。いい耳があれば、どんな借金だって返せる。続きは朝に話そう。"
+msgid "Every fifth night, then. A good ear pays any debt."
+msgstr "5晩ごとか。いい耳があれば、どんな借金だって返せる。"
 
 #: scripts/Core/Story.cs:111
 msgid ""
@@ -7790,8 +7794,8 @@ msgstr ""
 
 #: scripts/Core/Story.cs:134
 msgid ""
-"Bettany from the Crossed Keys will be by. Ask after her cellar: it floods every spring, and she likes to be asked."
-msgstr "交差鍵亭のベタニーが顔を出すはずだ。地下室のことを聞いてやれ。毎年春になると水浸しになるんでな、聞かれると喜ぶんだ。"
+"Bettany from the Crossed Keys will be by. She hears everything first, and she'll tell you most of it."
+msgstr "交差鍵亭のベタニーが顔を出すはずだ。何でも真っ先に耳に入る女でな、たいていのことは教えてくれる。"
 
 #: scripts/Core/Story.cs:135
 msgid ""
@@ -7799,207 +7803,207 @@ msgid ""
 msgstr ""
 "カウンターにお前を呼ぶときは、こう叩く。二度、それから一度。こんなふうにな。それと、気をつけろ。こっちが耳を澄ますと、耳を澄まし返してくる宝箱もあるからな。"
 
-#: scripts/Core/Story.cs:141 scripts/Core/Story.cs:146
+#: scripts/Core/Story.cs:142 scripts/Core/Story.cs:147
 msgid ""
 "A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\""
 msgstr "ギルドの封蝋が押された手紙：「ブラム殿の引き継ぎは、予定より長引いております。お戻りになるまで、店をお続けください」"
 
-#: scripts/Core/Story.cs:142
+#: scripts/Core/Story.cs:143
 msgid ""
 "\"Earn the treasury key, keep his account paid, and bring the key to the treasury on the season's last night.\""
 msgstr "「宝物庫の鍵を手に入れ、彼の勘定の支払いを続け、今季最後の夜に鍵を宝物庫へお持ちください」"
 
-#: scripts/Core/Story.cs:143
+#: scripts/Core/Story.cs:144
 msgid "The same letter, word for word. Last time, the treasury breathed."
 msgstr "一字一句、同じ手紙だ。前のときは、宝物庫が息をした。"
 
-#: scripts/Core/Story.cs:147
+#: scripts/Core/Story.cs:148
 msgid ""
 "\"Meanwhile the Guild's assessors will certify your work. Four marks of a master keywright earn the four pieces of the treasury key, each with a master's fee: a hidden thing read true, a stolen chest settled, a commission filled, an old lock picked without force.\""
 msgstr ""
 "「その間、ギルドの査定役があなたのお仕事を認定いたします。名匠たる鍵師の証を四つ立てれば、宝物庫の鍵の欠片が四つ。それぞれに名匠の謝礼をお付けします。隠された品の完璧な見立て、盗品の宝箱の始末、依頼の達成、古い錠をこじ開けずに開けること」"
 
-#: scripts/Core/Story.cs:150
+#: scripts/Core/Story.cs:151
 msgid ""
-"\"Keep Bram's account paid, and bring the whole key to the treasury on the season's last night. His commission needs a second keywright. When it's done, his account is closed, and he comes home.\""
+"\"Pay Bram's account as it falls due, every fifth night, and bring the whole key to the treasury on the season's last night. His commission needs a second keywright. When it's done and his account is paid, he comes home.\""
 msgstr ""
-"「ブラム殿の勘定の支払いを続け、今季最後の夜に、そろった鍵を宝物庫へお持ちください。彼のお仕事には、もう一人鍵師が要るのです。それが済めば勘定は清算となり、彼はお帰りになります」"
+"「ブラム殿の勘定は、五晩ごとの期日にお支払いください。そして今季最後の夜に、そろった鍵を宝物庫へお持ちください。彼のお仕事には、もう一人鍵師が要るのです。それが済み、勘定のお支払いも済めば、彼はお帰りになります」"
 
-#: scripts/Core/Story.cs:157
+#: scripts/Core/Story.cs:158
 msgid ""
 "The tithe is paid. But the Gate is hungry, and the Guild has decided you owe it something for its patience."
 msgstr ""
 "上納金は確かに完納されました。ですが、門は飢えております。そこでギルドは、これまで待ってさしあげた分の見返りを、あなたからいただくことにいたしました。"
 
-#: scripts/Core/Story.cs:158
+#: scripts/Core/Story.cs:159
 msgid ""
 "They'll keep coming, and every week they'll want half as much again. Let's see how long we can make them wait."
 msgstr "あいつらはこれからも来るぞ。しかも毎週、前の週の1.5倍を欲しがってな。どこまで待たせてやれるか、見ものだな。"
 
-#: scripts/Core/Story.cs:167
+#: scripts/Core/Story.cs:168
 msgid "Bram's welcome"
 msgstr "ブラムの歓迎"
 
-#: scripts/Core/Story.cs:168
+#: scripts/Core/Story.cs:169
 msgid "The Guild's letter"
 msgstr "ギルドからの手紙"
 
-#: scripts/Core/Story.cs:169
+#: scripts/Core/Story.cs:170
 msgid "Who stands with you"
 msgstr "味方は誰か"
 
-#: scripts/Core/Story.cs:170
+#: scripts/Core/Story.cs:171
 msgid "The Guild's terms"
 msgstr "ギルドの条件"
 
-#: scripts/Core/Story.cs:180
+#: scripts/Core/Story.cs:181
 msgid "Still no letter from Bram. The Guild's came on time."
 msgstr "ブラムからの手紙は、まだ来ない。ギルドからの手紙は、きちんと届いたのに。"
 
-#: scripts/Core/Story.cs:182
+#: scripts/Core/Story.cs:183
 msgid ""
 "The last week of the tithe, and it's already paid: nobody's coming for anything this week."
 msgstr "上納金の最後の週。だが、もう払い終えている。今週は誰も何も取り立てに来ない。"
 
-#: scripts/Core/Story.cs:183
+#: scripts/Core/Story.cs:184
 msgid ""
 "The debt's last week. Pay it, and the Guild's carriage takes you and the key to the treasury."
 msgstr "借金の最後の週。払えば、ギルドの馬車があなたと鍵を宝物庫へ運ぶ。"
 
-#: scripts/Core/Story.cs:184
+#: scripts/Core/Story.cs:185
 msgid "The debt's last week. Pay this, and Bram's account is closed."
 msgstr "借金の最後の週。これを払えば、ブラムの勘定は清算される。"
 
-#: scripts/Core/Story.cs:196
+#: scripts/Core/Story.cs:197
 msgid ""
 "A letter with the Guild's seal: \"The treasury opens on the season's last night. Bram looks forward to seeing you. Do bring the key.\""
 msgstr "ギルドの封蝋が押された手紙：「宝物庫は今季最後の夜に開きます。ブラム殿も、お会いできるのを楽しみにしておられます。鍵をお忘れなく」"
 
-#: scripts/Core/Story.cs:200
+#: scripts/Core/Story.cs:201
 msgid "Vane was at the Crossed Keys last night, asking who your friends are."
 msgstr "ゆうべ、ヴェインが交差鍵亭に来て、この店の味方は誰なのか嗅ぎ回ってたよ。"
 
-#: scripts/Core/Story.cs:201
+#: scripts/Core/Story.cs:202
 msgid ""
 "When you go to the treasury, who'll stand at the door with you, and take in whoever comes out?"
 msgstr "宝物庫へ行くとき、誰が一緒に扉の前に立って、中から出てきた人を迎え入れてくれる？"
 
-#: scripts/Core/Story.cs:205
+#: scripts/Core/Story.cs:206
 msgid ""
 "Nobody, it seems. Make some friends before the last night, or hire the bargemen at the Lantern Market."
 msgstr "誰もいないようだ。最後の夜までに味方を作るか、提灯市で船頭たちを雇うといい。"
 
-#: scripts/Core/Story.cs:206
+#: scripts/Core/Story.cs:207
 msgid ""
 "That's a crowd, that is. Whatever comes out of that treasury, it'll have somewhere to go."
 msgstr "大勢じゃないか。あの宝物庫から誰が出てこようと、行く当てには困らないさ。"
 
-#: scripts/Core/Story.cs:207
+#: scripts/Core/Story.cs:208
 msgid ""
 "It's a start. One more, before the last night, and they'll have somewhere to go."
 msgstr "手始めとしちゃ上出来だ。最後の夜までにあと一人いれば、出てきた人たちにも行く当てができる。"
 
-#: scripts/Core/Story.cs:222
+#: scripts/Core/Story.cs:223
 msgid ""
 "One more thing. The Guild's treasury has asked for Bram. An old consignment needs his attention."
 msgstr "もうひとつ。ギルドの宝物庫が、ブラム殿をご所望でして。古い預かり物に、彼の手が要るのです。"
 
-#: scripts/Core/Story.cs:223
+#: scripts/Core/Story.cs:224
 msgid "Mind the stall. I'll write every week."
 msgstr "露店を頼む。毎週、手紙を書くからな。"
 
-#: scripts/Core/Story.cs:224
+#: scripts/Core/Story.cs:225
 msgid ""
 "He won't write. I know where that carriage goes, and what waits at the end of the road."
 msgstr "手紙なんて来ない。あの馬車がどこへ行くのか、道の果てに何が待っているのか、わたしは知っている。"
 
-#: scripts/Core/Story.cs:228
+#: scripts/Core/Story.cs:229
 msgid ""
 "One more thing. The Guild's treasury has asked for Bram: an old consignment needs a keywright who knows it. Temporary work. The carriage is outside."
 msgstr ""
 "もうひとつ。ギルドの宝物庫が、ブラム殿をご所望でして。古い預かり物があり、それをよくご存じの鍵師が要るのです。一時的なお仕事です。馬車は表に待たせてあります。"
 
-#: scripts/Core/Story.cs:229
+#: scripts/Core/Story.cs:230
 msgid ""
 "The treasury? After twenty years they want me? Well. It's honest work, and it'll pay down the account."
 msgstr "宝物庫だと？20年も経って、わしに用があるってのか？まあいい。まっとうな仕事だし、勘定も減らせる。"
 
-#: scripts/Core/Story.cs:230
+#: scripts/Core/Story.cs:231
 msgid ""
 "Mind the stall, {0}. I'll write every week. And keep my lamp lit: it's never let me down."
 msgstr "露店を頼むぞ、{0}。毎週、手紙を書くからな。それと、わしのランプを灯しておいてくれ。こいつに裏切られたことは一度もないんだ。"
 
-#: scripts/Core/Story.cs:231
+#: scripts/Core/Story.cs:232
 msgid "Two taps and one, and I'll be back before you've missed me."
 msgstr "トントン、トン。お前が寂しがる前に戻ってくるさ。"
 
-#: scripts/Core/Story.cs:234
+#: scripts/Core/Story.cs:235
 msgid ""
 "And Old Haddon comes with us. His note fell due tonight: he'll work it off at the treasury, with Bram."
 msgstr "それから、ハドンじいさんにもご同行いただきます。今夜、手形が期日を迎えましたので。宝物庫で、ブラム殿と一緒に働いて返していただきましょう。"
 
-#: scripts/Core/Story.cs:246
+#: scripts/Core/Story.cs:247
 msgid ""
 "One more thing. The Guild has a note to collect tonight: {0}. They'll work it off."
 msgstr "もうひとつ。今夜はギルドにも、取り立てる手形がございましてね。{0}です。働いて返していただきます。"
 
-#: scripts/Core/Story.cs:251
+#: scripts/Core/Story.cs:252
 msgid ""
 "Bram sends his regards. The handover's slow work, but he's in good spirits."
 msgstr "ブラム殿からよろしくとのことです。引き継ぎは手間取っておりますが、お元気でいらっしゃいますよ。"
 
-#: scripts/Core/Story.cs:252
+#: scripts/Core/Story.cs:253
 msgid "Bram asked after the stall. I told him it's in good hands."
 msgstr "ブラム殿が露店のことを気にかけておられました。しっかりした方の手にあると、お伝えしておきましたよ。"
 
-#: scripts/Core/Story.cs:253
+#: scripts/Core/Story.cs:254
 msgid "No letter? Bram's very busy. The treasury keeps long hours."
 msgstr "手紙が来ない？ブラム殿はたいへんお忙しいのです。宝物庫の勤めは長いものでしてね。"
 
-#: scripts/Core/Story.cs:254
+#: scripts/Core/Story.cs:255
 msgid ""
 "The treasury opens on the season's last night. Bram is counting on you, and on the key."
 msgstr "宝物庫は今季最後の夜に開きます。ブラム殿は、あなたと鍵を当てにしておられますよ。"
 
-#: scripts/Core/Story.cs:255
+#: scripts/Core/Story.cs:256
 msgid "One more week. Do bring the key."
 msgstr "あと一週間です。鍵をお忘れなく。"
 
-#: scripts/Core/Story.cs:260
+#: scripts/Core/Story.cs:261
 msgid ""
 "Bram is well, Keywright. Why go looking? Some doors are better left shut."
 msgstr "ブラム殿はお元気ですよ、鍵師殿。なぜ探し回るのです？閉じておいたほうがよい扉もございます。"
 
-#: scripts/Core/Story.cs:262
+#: scripts/Core/Story.cs:263
 msgid ""
 "You were at the toll, I hear. The palace road is no place for a shopkeeper."
 msgstr "関所にいらしたそうですね。宮殿への道は、商人の来る所ではございませんよ。"
 
-#: scripts/Core/Story.cs:263
+#: scripts/Core/Story.cs:264
 msgid "You remember more than you should, Keywright. So do I."
 msgstr "覚えていなくていいことまで覚えておいでですね、鍵師殿。私もですが。"
 
-#: scripts/Core/Story.cs:264
+#: scripts/Core/Story.cs:265
 msgid ""
 "Every spring you get a little further. And every spring I learn a little more."
 msgstr "春が来るたびに、あなたは少しずつ先へ進まれる。そして春が来るたびに、私も少しずつ学ぶのです。"
 
-#: scripts/Core/Story.cs:270
+#: scripts/Core/Story.cs:271
 msgid ""
 "Before you pay. The Guild could forget half of tonight's due, Keywright. All it asks is that your questions stop at the toll."
 msgstr ""
 "お支払いの前に。今夜の上納金の半分を、ギルドが忘れて差し上げてもよいのですよ、鍵師殿。求めるのはただ、あなたの詮索が関所で止まること。それだけです。"
 
-#: scripts/Core/Story.cs:271
+#: scripts/Core/Story.cs:272
 msgid ""
 "Sensible. You'll find Sergeant Hollis has nothing to say to you this season."
 msgstr "賢明です。今季は、ホリス軍曹があなたに何も話さなくなるでしょう。"
 
-#: scripts/Core/Story.cs:272
+#: scripts/Core/Story.cs:273
 msgid "Then ask your questions. You'll find the answers heavy."
 msgstr "では、どうぞお尋ねなさい。答えの重さを思い知ることになりましょう。"
 
-#: scripts/Core/Story.cs:276
+#: scripts/Core/Story.cs:277
 msgid ""
 "Before you pay. You want Bram home. The Guild can have him at your door tomorrow, warm and whole. All it asks is your {0} piece of the key."
 msgid_plural ""
@@ -8007,548 +8011,548 @@ msgid_plural ""
 msgstr[0] ""
 "お支払いの前に。ブラム殿に帰ってきてほしいのでしょう。ギルドなら明日にも、温かい体のまま無事に、あなたの戸口までお届けできます。求めるのは、お持ちの鍵の欠片{0}つだけです。"
 
-#: scripts/Core/Story.cs:279
+#: scripts/Core/Story.cs:280
 msgid ""
 "Done. He'll be home for breakfast. And you won't be at the treasury this season."
 msgstr "成立です。朝食までにはお帰りになるでしょう。そして今季、あなたが宝物庫に来ることはありません。"
 
-#: scripts/Core/Story.cs:280
+#: scripts/Core/Story.cs:281
 msgid "Then he stays where he is. Gold keeps."
 msgstr "では、彼は今いる場所に留まります。金は腐りませんので。"
 
-#: scripts/Core/Story.cs:289
+#: scripts/Core/Story.cs:290
 msgid "{0} week early"
 msgid_plural "{0} weeks early"
 msgstr[0] "{0}週間も早く"
 
-#: scripts/Core/Story.cs:290
+#: scripts/Core/Story.cs:291
 msgid "Before I've even come for it"
 msgstr "こちらが取り立てに伺う前に"
 
-#: scripts/Core/Story.cs:294
+#: scripts/Core/Story.cs:295
 msgid "All of it? Now? {0}. Then Bram's account with the Guild is closed."
 msgstr "全額を？今？{0}。では、ブラム殿のギルドへの勘定は、これにて清算です。"
 
-#: scripts/Core/Story.cs:299
+#: scripts/Core/Story.cs:300
 msgid "Free and clear, another year. Put the kettle on."
 msgstr "今年も晴れて自由の身だ。湯を沸かしてくれ。"
 
-#: scripts/Core/Story.cs:303
+#: scripts/Core/Story.cs:304
 msgid ""
 "Free and clear! Twenty years, and the account's closed. Look at my hand: it's warm."
 msgstr "晴れて自由の身だ！20年かかって、ようやく勘定が片づいた。わしの手を見てくれ。温かいぞ。"
 
-#: scripts/Core/Story.cs:307
+#: scripts/Core/Story.cs:308
 msgid "The treasury, then. Tonight. I'll send the carriage."
 msgstr "では、宝物庫へ。今夜です。馬車を差し向けましょう。"
 
-#: scripts/Core/Story.cs:308
+#: scripts/Core/Story.cs:309
 msgid ""
 "And the treasury key is whole, I see. Then the Guild's carriage will take you to the treasury tonight. Bram is waiting."
 msgstr "それに、宝物庫の鍵もそろったようですね。では今夜、ギルドの馬車で宝物庫へお連れいたします。ブラム殿がお待ちですよ。"
 
-#: scripts/Core/Story.cs:310
+#: scripts/Core/Story.cs:311
 msgid ""
 "The treasury opens on the season's last night. Bring the whole key: you're {0} piece short."
 msgid_plural ""
 "The treasury opens on the season's last night. Bring the whole key: you're {0} pieces short."
 msgstr[0] "宝物庫は今季最後の夜に開きます。鍵はそろえてお持ちください。欠片があと{0}つ足りませんよ。"
 
-#: scripts/Core/Story.cs:314
+#: scripts/Core/Story.cs:315
 msgid ""
 "No key? Then the Guild will open the treasury without you tonight. Bram will be so disappointed."
 msgstr "鍵がない？では今夜、ギルドはあなた抜きで宝物庫を開けます。ブラム殿はさぞ落胆なさるでしょう。"
 
-#: scripts/Core/Story.cs:323
+#: scripts/Core/Story.cs:324
 msgid ""
 "Cold. I'm so cold. And this is our stall. Two taps and one: I heard you knock back."
 msgstr "寒い。ひどく寒い。……ここは、わしらの露店か。トントン、トン。お前がノックを返すのが聞こえたよ。"
 
-#: scripts/Core/Story.cs:325
+#: scripts/Core/Story.cs:326
 msgid ""
 "Twenty years ago the Mark-Finders came for you: a marked baby, at the crossroads. I pledged them my hand, mark and all. That was my account."
 msgstr "20年前、紋探しがお前を連れに来た。辻にいた、鍵紋のある赤ん坊のお前をな。わしは鍵紋ごと、この手を連中に質入れした。それがわしの勘定だ。"
 
-#: scripts/Core/Story.cs:326
+#: scripts/Core/Story.cs:327
 msgid ""
 "Twenty years ago the Mark-Finders came for a marked baby, my niece Kit. I pledged them my hand, mark and all. That was my account."
 msgstr "20年前、紋探しが鍵紋のある赤ん坊を連れに来た。わしの姪のキットだ。わしは鍵紋ごと、この手を連中に質入れした。それがわしの勘定だ。"
 
-#: scripts/Core/Story.cs:327
+#: scripts/Core/Story.cs:328
 msgid ""
 "This spring they called it in. The treasury was never a job. It was a scale, and a crate, and the dark."
 msgstr "この春、連中はそれを取り立てに来た。宝物庫の仕事なんて、初めからありゃしなかった。あったのは秤と、木箱と、暗闇だけだ。"
 
-#: scripts/Core/Story.cs:328
+#: scripts/Core/Story.cs:329
 msgid ""
 "And now look: you paid it. Put the kettle on. Tonight we're just two people in a shop."
 msgstr "それが今じゃどうだ。お前が払ってくれた。湯を沸かそう。今夜のわしらは、店にいるただの二人だ。"
 
-#: scripts/Core/Story.cs:331
+#: scripts/Core/Story.cs:332
 msgid ""
 "I've brought him home before. He doesn't remember it. I don't want to do it again: I want it to last."
 msgstr "前にも、ブラムを連れ帰ったことがある。本人はそれを覚えていない。また同じことをしたいんじゃない。今度こそ、続いてほしいんだ。"
 
-#: scripts/Core/Story.cs:341
+#: scripts/Core/Story.cs:342
 msgid ""
 "The key, whole. The register. A full mimic, asleep in a basket. And friends at the door."
 msgstr "そろった鍵。名簿。かごの中で眠る、満腹のミミック。そして、扉の前に仲間たち。"
 
-#: scripts/Core/Story.cs:343
+#: scripts/Core/Story.cs:344
 msgid "Whatever's in there, we take them home. All of them."
 msgstr "中に誰がいようと、家に連れて帰るぞ。一人残らずだ。"
 
-#: scripts/Core/Story.cs:344
+#: scripts/Core/Story.cs:345
 msgid "Keywright. You've brought company. No matter: the chest is waiting."
 msgstr "鍵師殿。お連れがおいでですね。かまいません。宝箱がお待ちです。"
 
-#: scripts/Core/Story.cs:349
+#: scripts/Core/Story.cs:350
 msgid "The carriage, Keywright. You know the way."
 msgstr "馬車です、鍵師殿。道はご存じでしょう。"
 
-#: scripts/Core/Story.cs:352
+#: scripts/Core/Story.cs:353
 msgid ""
 "The carriage, Keywright. The treasury is under the palace, and Bram's commission is waiting."
 msgstr "馬車です、鍵師殿。宝物庫は宮殿の地下に。ブラム殿のお仕事が待っております。"
 
-#: scripts/Core/Story.cs:353
+#: scripts/Core/Story.cs:354
 msgid ""
 "Here it is: the old consignment. The treasury's great chest. The Guild has never been able to open it."
 msgstr "こちらです。例の古い預かり物。宝物庫の大宝箱です。ギルドには、一度も開けられたためしがございません。"
 
-#: scripts/Core/Story.cs:354
+#: scripts/Core/Story.cs:355
 msgid "You have the key. Open it, and Bram's account is closed."
 msgstr "鍵はあなたがお持ちです。これを開ければ、ブラム殿の勘定は清算となります。"
 
-#: scripts/Core/Story.cs:360
+#: scripts/Core/Story.cs:361
 msgid ""
 "You have already saved him once. I can make this time remain. Take him home. Leave the door to me."
 msgstr "あなたは前にも一度、彼を救った。今度は、この時がこのまま続くようにしてあげられる。彼を連れて帰りなさい。扉は私に任せて。"
 
-#: scripts/Core/Story.cs:361
+#: scripts/Core/Story.cs:362
 msgid "I can make this time remain. Take them home. Leave the door to me."
 msgstr "この時が、このまま続くようにしてあげられる。皆を連れて帰りなさい。扉は私に任せて。"
 
-#: scripts/Core/Story.cs:364
+#: scripts/Core/Story.cs:365
 msgid ""
 "He knows whom he came to save. But you still want to see what is inside."
 msgstr "誰を救いに来たのかは、分かっている。それでも、中に何があるのか見てみたいのでしょう？"
 
-#: scripts/Core/Story.cs:369
+#: scripts/Core/Story.cs:370
 msgid ""
 "The next morning came. Bram brought the tea, and the market opened, and every chest on every stall wore the Guild's seal."
 msgstr "翌朝が来た。ブラムが茶を運び、市が開いた。どの露店のどの宝箱にも、ギルドの印が押されていた。"
 
-#: scripts/Core/Story.cs:370
+#: scripts/Core/Story.cs:371
 msgid ""
 "By noon there was nothing anyone could buy that the treasury hadn't sold them. By evening it wanted the road, and the river, and the light."
 msgstr "昼には、宝物庫が売った物のほかに、誰も何ひとつ買えなくなっていた。夕方には、あれは道を、川を、そして光を欲しがった。"
 
-#: scripts/Core/Story.cs:371
+#: scripts/Core/Story.cs:372
 msgid ""
 "It can't keep a bargain. It can't stop wanting. It reached past the door for everything, and the seal woke."
 msgstr "あれは取引を守れない。欲しがるのをやめられない。扉を越えてすべてに手を伸ばし、そして封印が目を覚ました。"
 
-#: scripts/Core/Story.cs:377
+#: scripts/Core/Story.cs:378
 msgid "Morning. Tea's hot. Here: feel my hand. Warm as the pot."
 msgstr "おはよう。茶が入ったぞ。ほら、わしの手を触ってみろ。ポットみたいに温かいだろう。"
 
-#: scripts/Core/Story.cs:380
+#: scripts/Core/Story.cs:381
 msgid "Day thirty-six. I've never seen the calendar say that."
 msgstr "36日目。暦がそう示すのを、わたしは一度も見たことがない。"
 
-#: scripts/Core/Story.cs:381
+#: scripts/Core/Story.cs:382
 msgid "The morning after the treasury, and nothing's turned back."
 msgstr "宝物庫の翌朝。何も巻き戻っていない。"
 
-#: scripts/Core/Story.cs:382
+#: scripts/Core/Story.cs:383
 msgid ""
 "Old Haddon's in his yard, swearing at a lathe. Half the crossroads walked home last night, and nobody can say from where."
 msgstr "ハドンじいさんは作業場で、旋盤に悪態をついてるよ。ゆうべは辻の半分が歩いて帰ってきた。どこから帰ってきたのか、誰にも言えやしない。"
 
-#: scripts/Core/Story.cs:383
+#: scripts/Core/Story.cs:384
 msgid ""
 "Keywright! The waterwheel's broken, and my father's old millwright's chest has the only tools that fit it. Open it for us?"
 msgstr "鍵師さん！水車が壊れてしまって。合う道具は、父の古い水車大工の宝箱にしかないんです。開けてもらえませんか？"
 
-#: scripts/Core/Story.cs:389
+#: scripts/Core/Story.cs:390
 msgid "That's them! The wheel will turn by noon. Bless you, Keywright."
 msgstr "それです！お昼までには水車が回ります。本当に恩に着ます、鍵師さん。"
 
-#: scripts/Core/Story.cs:390
+#: scripts/Core/Story.cs:391
 msgid ""
 "Treasure's still treasure. But that's the best thing we've opened all year, and I'll fight anyone who says different."
 msgstr "宝はやっぱり宝だ。だが、今年開けた中でこいつがいちばんだ。違うと言うやつがいたら、わしが相手になってやる。"
 
-#: scripts/Core/Story.cs:391
+#: scripts/Core/Story.cs:392
 msgid "Two taps on the counter, and one. The next customer. The shop goes on."
 msgstr "カウンターを叩く音が二つ、そして一つ。次のお客だ。店は続いていく。"
 
-#: scripts/Core/Story.cs:398
+#: scripts/Core/Story.cs:399
 msgid ""
 "{0} weeks, and every coin of the tithe paid. Let them have the building: they can't have the mark."
 msgstr "{0}週やり抜いて、上納金も一枚残らず払った。建物はくれてやれ。鍵紋までは奪えやしない。"
 
-#: scripts/Core/Story.cs:399
+#: scripts/Core/Story.cs:400
 msgid ""
 "So soon? Well. We'll start again somewhere. A good ear is never broke for long."
 msgstr "もう終わりか？まあいい。どこかでまた一からやり直そう。いい耳があれば、文無しもそう長くは続かん。"
 
-#: scripts/Core/Story.cs:400
+#: scripts/Core/Story.cs:401
 msgid ""
 "{0} weeks. You did better than I ever did. We'll start again somewhere."
 msgstr "{0}週か。わしよりずっとうまくやったよ。どこかでまた一からやり直そう。"
 
-#: scripts/Core/Story.cs:402
+#: scripts/Core/Story.cs:403
 msgid ""
 "The last night will come without me, and the treasury will open with Bram in it. And then it'll be spring."
 msgstr "最後の夜は、わたし抜きでやって来る。宝物庫はブラムを中に入れたまま開かれる。そして、また春になる。"
 
-#: scripts/Core/Story.cs:417
+#: scripts/Core/Story.cs:418
 msgid ""
 "The Wardens have the palace road. No Guild carriage gets past my toll tonight."
 msgstr "宮殿への道は衛士が押さえた。今夜は、ギルドの馬車を一台たりとも関所から通さん。"
 
-#: scripts/Core/Story.cs:418
+#: scripts/Core/Story.cs:419
 msgid ""
 "The Wardens will hold the palace road, when it comes to it. You've sent enough chests home."
 msgstr "いざとなったら、宮殿への道は衛士が押さえる。あんたは盗まれた宝箱を、何度も持ち主に返してくれたからな。"
 
-#: scripts/Core/Story.cs:420
+#: scripts/Core/Story.cs:421
 msgid ""
 "Half of Brindle walked to the palace to see it opened. The Guild's men can't get through the crowd."
 msgstr "ブリンドルの半分が、宝箱が開くのを見ようと宮殿まで歩いてきたぞ。ギルドの連中は人だかりを抜けられん。"
 
-#: scripts/Core/Story.cs:421
+#: scripts/Core/Story.cs:422
 msgid ""
 "Brindle's with you: half the crossroads would walk to the palace if you asked them."
 msgstr "ブリンドルはお前の味方だ。頼めば、辻の半分が宮殿まで歩いていくだろうよ。"
 
-#: scripts/Core/Story.cs:423
+#: scripts/Core/Story.cs:424
 msgid ""
 "A black feather on the counter: the Guild's carriages have lost their wheels in Lantern Lane. All of them."
 msgstr "カウンターに黒い羽根が一枚。ギルドの馬車は提灯横丁で車輪をなくしたそうだ。一台残らずな。"
 
-#: scripts/Core/Story.cs:424
+#: scripts/Core/Story.cs:425
 msgid ""
 "A black feather on the counter, and a note: \"When the Guild comes for you, the Lockless will be in its way.\""
 msgstr "カウンターに黒い羽根と書き付けがあった。「ギルドがあなたを狙って来たら、無錠党が行く手をふさぐ」だとさ。"
 
-#: scripts/Core/Story.cs:426
+#: scripts/Core/Story.cs:427
 msgid ""
 "The palace guard is at the treasury door. My Guild has no business here tonight."
 msgstr "宮殿の衛兵を宝物庫の扉に立たせておる。今夜、わしのギルドにここでの用はない。"
 
-#: scripts/Core/Story.cs:427
+#: scripts/Core/Story.cs:428
 msgid ""
 "The Crown's with you, Keywright. I've a palace guard with very little to do."
 msgstr "王家はそなたの味方だ、鍵師。宮殿の衛兵にも、暇を持て余しておる者がおるでな。"
 
-#: scripts/Core/Story.cs:429
+#: scripts/Core/Story.cs:430
 msgid ""
 "Hawthorn has grown across the Guild's road. They'll be all night cutting through it."
 msgstr "ギルドの道を、サンザシが覆い尽くしました。切り開くのに、彼らは夜通しかかるでしょう。"
 
-#: scripts/Core/Story.cs:430
+#: scripts/Core/Story.cs:431
 msgid "The Wood keeps its own. When they come for you, they'll find thorns."
 msgstr "森は身内を守ります。彼らがあなたを狙って来れば、待っているのは茨です。"
 
-#: scripts/Core/Story.cs:432
+#: scripts/Core/Story.cs:433
 msgid ""
 "Ironroot's smiths have barred the Gate road with iron. Let the Guild try lifting it."
 msgstr "鉄根の鍛冶たちが、門へ続く道を鉄で封じたぞ。ギルドめ、持ち上げられるものなら持ち上げてみろ。"
 
-#: scripts/Core/Story.cs:433
+#: scripts/Core/Story.cs:434
 msgid ""
 "Ironroot owes you a crown. Ask, and you'll have a hundred dwarves at your door."
 msgstr "鉄根には、王冠の借りがある。ひと声かけてくれりゃ、ドワーフが百人、戸口に駆けつけるぞ。"
 
-#: scripts/Core/Story.cs:438
+#: scripts/Core/Story.cs:439
 msgid "I'll hold the lamp, master! I'm not scared. Much."
 msgstr "ぼく、ランプを持ってるね、師匠！怖くなんかないよ。ちょっとしか。"
 
-#: scripts/Core/Story.cs:438
+#: scripts/Core/Story.cs:439
 msgid "I'll stand with you, master. I'm small, but I'm quick."
 msgstr "ぼくも師匠の味方だよ。小さいけど、すばしっこいんだ。"
 
-#: scripts/Core/Story.cs:440
+#: scripts/Core/Story.cs:441
 msgid "Father brought his cart. Whoever comes out of there rides home."
 msgstr "父さんが荷車を持ってきたわ。あそこから出てきた人は、誰でもこれに乗って帰れる。"
 
-#: scripts/Core/Story.cs:440
+#: scripts/Core/Story.cs:441
 msgid "Father says he owes you a cart, and a wheel, and his neck. Call us."
 msgstr "父さんが、あなたには荷車ひとつと車輪ひとつ、それに命ひとつの借りがあるって。呼んでちょうだい。"
 
-#: scripts/Core/Story.cs:447
+#: scripts/Core/Story.cs:448
 msgid "The whole mill's here, and every one of us has a washing paddle."
 msgstr "水車小屋のみんなで来ました。全員、洗濯棒を持ってます。"
 
-#: scripts/Core/Story.cs:447
+#: scripts/Core/Story.cs:448
 msgid "Send for me, and the whole mill comes."
 msgstr "呼んでくだされば、水車小屋のみんなで駆けつけます。"
 
-#: scripts/Core/Story.cs:448
+#: scripts/Core/Story.cs:449
 msgid "Rafe's sword's at the door, dear, and Jory's holding it."
 msgstr "戸口にはレイフの剣があるわ。握ってるのはジョリーよ。"
 
-#: scripts/Core/Story.cs:448
+#: scripts/Core/Story.cs:449
 msgid "Rafe would have stood with you. So will we, dear."
 msgstr "レイフなら、きっとあなたの味方をしたわ。わたしたちもそうするわよ。"
 
-#: scripts/Core/Story.cs:449
+#: scripts/Core/Story.cs:450
 msgid ""
 "I've brought two delvers and a lot of rope. Nobody's getting through that door."
 msgstr "塚潜りの仲間を2人と、ロープをどっさり持ってきた。あの戸口は誰にも通させないよ。"
 
-#: scripts/Core/Story.cs:449
+#: scripts/Core/Story.cs:450
 msgid "You dug me out of the Barrow. I'll dig you out of anything."
 msgstr "あんたは塚からおれを掘り出してくれた。今度はおれが、どんな窮地からでもあんたを掘り出してやる。"
 
-#: scripts/Core/Story.cs:450
+#: scripts/Core/Story.cs:451
 msgid "The Crossed Keys is closed tonight. Everyone's here instead."
 msgstr "今夜の交差鍵亭は休みだよ。客はみんな、代わりにここに来てる。"
 
-#: scripts/Core/Story.cs:450
+#: scripts/Core/Story.cs:451
 msgid "The Crossed Keys stands with you, love. Every last drunk in it."
 msgstr "交差鍵亭はあんたの味方だよ。酔っぱらい一人残らずね。"
 
-#: scripts/Core/Story.cs:451
+#: scripts/Core/Story.cs:452
 msgid "A Gale at the door, with a Gale's blade. Let them come."
 msgstr "戸口にはゲイル家の者が、ゲイル家の剣を携えて立つ。来るなら来い。"
 
-#: scripts/Core/Story.cs:451
+#: scripts/Core/Story.cs:452
 msgid "The Gales pay their debts. Call, and I'll be there."
 msgstr "ゲイル家は借りを必ず返す。呼ばれれば、私は駆けつけよう。"
 
-#: scripts/Core/Story.cs:452
+#: scripts/Core/Story.cs:453
 msgid "Goblins in the Guild's cellar. Lots of goblins. Very busy."
 msgstr "ギルドの地下室に、ゴブリン。ゴブリン、いっぱい。すごく忙しい。"
 
-#: scripts/Core/Story.cs:452
+#: scripts/Core/Story.cs:453
 msgid "The clan comes when you call. All of it. Even the uncles."
 msgstr "おまえが呼ぶ、一族来る。全部。おじさんたちも。"
 
-#: scripts/Core/Story.cs:453
+#: scripts/Core/Story.cs:454
 msgid "House Vell is at the palace, and so, for once, is my brother."
 msgstr "ヴェル家は宮殿に参じておりますわ。珍しく、兄もですのよ。"
 
-#: scripts/Core/Story.cs:453
+#: scripts/Core/Story.cs:454
 msgid "House Vell owes you. We pay our debts, Keywright."
 msgstr "ヴェル家はあなたに借りがありますわ。わたくしたちは借りを返しますのよ、鍵師さん。"
 
-#: scripts/Core/Story.cs:454
+#: scripts/Core/Story.cs:455
 msgid "Ironroot's here, Keywright, with hammers."
 msgstr "鉄根が来たぞ、鍵師。槌を携えてな。"
 
-#: scripts/Core/Story.cs:454
+#: scripts/Core/Story.cs:455
 msgid "A hundred dwarves, when you need them."
 msgstr "入り用なら、ドワーフを百人。"
 
-#: scripts/Core/Story.cs:455
+#: scripts/Core/Story.cs:456
 msgid ""
 "A hedge-wright at your back. Two Keywrights are harder to stop than one."
 msgstr "背中はもぐりの鍵師が守る。鍵師が二人なら、一人より止めにくいだろ。"
 
-#: scripts/Core/Story.cs:455
+#: scripts/Core/Story.cs:456
 msgid "When the Guild comes, send for the hedge-wright."
 msgstr "ギルドが来たら、もぐりの鍵師を呼びな。"
 
-#: scripts/Core/Story.cs:456
+#: scripts/Core/Story.cs:457
 msgid ""
 "I've brought the Roll. Whatever the Guild says tonight, the charter says otherwise."
 msgstr "台帳を持ってまいりました。今夜ギルドが何を言おうと、勅許状には別のことが書いてあります。"
 
-#: scripts/Core/Story.cs:456
+#: scripts/Core/Story.cs:457
 msgid "The Roll will say what the Crown pledged, when it matters."
 msgstr "いざというときには、王家が何を質に入れたのか、台帳が証言してくれます。"
 
-#: scripts/Core/Story.cs:457
+#: scripts/Core/Story.cs:458
 msgid ""
 "Every lamp in the Arcanum is lit tonight. The Guild won't find a shadow to hide in."
 msgstr "今夜は魔導院の明かりを全部灯しました。ギルドが隠れる影なんて、どこにもありません。"
 
-#: scripts/Core/Story.cs:457
+#: scripts/Core/Story.cs:458
 msgid ""
 "The Arcanum's apprentices will stand with you. Some of the archmages, too."
 msgstr "魔導院の見習いたちは、あなたの味方です。大魔導師の何人かも。"
 
-#: scripts/Core/Story.cs:458
+#: scripts/Core/Story.cs:459
 msgid ""
 "Two whole families are here, dear: the ones you married off. They'd like a word with the Guild."
 msgstr "二家族そろって来てるよ、あんた。あんたのおかげで婚礼を挙げた家さ。ギルドにひとこと言ってやりたいんだと。"
 
-#: scripts/Core/Story.cs:458
+#: scripts/Core/Story.cs:459
 msgid "Two families owe you their wedding, dear. They'll come."
 msgstr "二つの家が、婚礼の恩をあんたに感じてる。きっと来るよ。"
 
-#: scripts/Core/Story.cs:459
+#: scripts/Core/Story.cs:460
 msgid "Brought the plough horses. The Guild's carriages can go round."
 msgstr "犂馬を連れてきた。ギルドの馬車は回り道でもすりゃいい。"
 
-#: scripts/Core/Story.cs:459
+#: scripts/Core/Story.cs:460
 msgid "Call, and the whole fair comes, horses and all."
 msgstr "呼んでくれりゃ、収穫祭に来た連中が馬ごと総出で駆けつけるさ。"
 
-#: scripts/Core/Story.cs:460
+#: scripts/Core/Story.cs:461
 msgid ""
 "I carried chests for you. Tonight I'll carry anything that tries to get past this door."
 msgstr "宝箱を運ばせてもらいました。今夜は、この戸口を通ろうとするものを、何だって担ぎ出してやります。"
 
-#: scripts/Core/Story.cs:460
+#: scripts/Core/Story.cs:461
 msgid "I owe you my freedom. Call, and I'll come."
 msgstr "自由にしてもらった恩があります。呼んでくれれば、行きます。"
 
-#: scripts/Core/Story.cs:461
+#: scripts/Core/Story.cs:462
 msgid ""
 "The Wet Hen's at the river stairs, if anyone needs to leave in a hurry."
 msgstr "濡れめんどり号を川の石段につけてある。急いでずらかる奴がいたらな。"
 
-#: scripts/Core/Story.cs:461
+#: scripts/Core/Story.cs:462
 msgid ""
 "Need anything carried away from the Guild quietly? Ask for the Wet Hen."
 msgstr "ギルドの目を盗んで何か運び出したいか？濡れめんどり号を頼んな。"
 
-#: scripts/Core/Story.cs:477
+#: scripts/Core/Story.cs:478
 msgid ""
 "No Heartsong this season. Don't take it hard: most seasons never hear one."
 msgstr "今季は心歌に出会えなかったな。気に病むな。たいていの季節は、一つも聞けずに終わるもんだ。"
 
-#: scripts/Core/Story.cs:478
+#: scripts/Core/Story.cs:479
 msgid ""
 "They're the rarest things in Aldmark. Nine of them, things loved more than gold, sung into the Locking and lost among millions of chests. About one season in three turns one up."
 msgstr ""
 "アルドマークでいちばん珍しい代物だ。全部で9つ。黄金より愛された品が大施錠に歌い込められ、何百万もの宝箱のどこかに紛れちまった。見つかるのは、だいたい3季に1度ってところだ。"
 
-#: scripts/Core/Story.cs:480
+#: scripts/Core/Story.cs:481
 msgid ""
 "Only a Keywright hears one. At the gentlest shake it sings a tune no other thing makes, and the seller never knows it's there: they price the chest as if it weren't."
 msgstr ""
 "聞こえるのは鍵師だけだ。いちばんそっと振っただけで、ほかのどんな品とも違う調べを歌う。売り手は入ってることさえ知らんから、ないものとして値をつける。"
 
-#: scripts/Core/Story.cs:482
+#: scripts/Core/Story.cs:483
 msgid ""
 "Nobody would pay a penny for one. But on display, each does one great thing for the shop that no gold can buy, for as long as it sings: the kind of thing a whole season can be built around."
 msgstr ""
 "誰も一銭だって払いやしない。だが陳列すれば、歌っている限り、どれも金では買えない大きなことを店にしてくれる。まるまる一季をそれに賭けられるほどのことをな。"
 
-#: scripts/Core/Story.cs:484
+#: scripts/Core/Story.cs:485
 msgid ""
 "So shake every chest gently first, and listen. The collection's Heartsongs page keeps a place for each of the nine."
 msgstr "だから、どの宝箱もまずそっと振って、耳を澄ませろ。コレクションの心歌のページに、9つそれぞれの場所が用意してある。"
 
-#: scripts/Core/Story.cs:494
+#: scripts/Core/Story.cs:495
 msgid ""
 "So you're Hesk. A partner with the mark and an honest scale: I'll take it. Mind the stall, mind your back, and half of it's yours when the Guild's paid."
 msgstr "お前がヘスクか。鍵紋と正直な秤を持った相棒なら、文句はない。露店を頼む、腰も大事にな。ギルドに払い終えたら、半分はお前のものだ。"
 
-#: scripts/Core/Story.cs:496
+#: scripts/Core/Story.cs:497
 msgid ""
 "Rosa Brightwater, as I live. Your mother sold me my first lock-pick, forty years back. My mark's faded: mind the stall, partner, and half of it's yours when the Guild's paid."
 msgstr ""
 "驚いた、ローザ・ブライトウォーターじゃないか。40年前、わしに初めての錠前ピックを売ってくれたのは、お前の母さんだ。わしの鍵紋は消えかけでな。露店を頼むぞ、相棒。ギルドに払い終えたら、半分はお前のものだ。"
 
-#: scripts/Core/Story.cs:498
+#: scripts/Core/Story.cs:499
 msgid ""
 "Lady Marchmont. Your grandfather and I opened chests together, before your house was grand. My mark's faded: mind my stall, and put your collection on the shelf. The Guild's paid out of the takings."
 msgstr ""
 "マーチモント家のお嬢さまか。お前さんのお祖父さんとは、お家が立派になる前、一緒に宝箱を開けたもんだ。わしの鍵紋は消えかけでな。露店を頼む。コレクションは陳列棚に並べるといい。ギルドへの支払いは売り上げから出す。"
 
-#: scripts/Core/Story.cs:500
+#: scripts/Core/Story.cs:501
 msgid ""
 "There you are, {0}! Look at your hand: the mark's yours now. And so is the stall."
 msgstr "来たか、{0}！自分の手を見てみろ。鍵紋は今やお前のものだ。それに、この露店もな。"
 
-#: scripts/Core/Story.cs:513
+#: scripts/Core/Story.cs:514
 msgid "So. Let me tell you what became of everyone, this season."
 msgstr "さて。今季、みんながどうなったか話してやろう。"
 
-#: scripts/Core/Story.cs:514
+#: scripts/Core/Story.cs:515
 msgid "Pull up a stool, love. Here's what became of everyone this season."
 msgstr "まあ座りなよ、あんた。今季、みんながどうなったか話してあげる。"
 
-#: scripts/Core/Story.cs:521
+#: scripts/Core/Story.cs:522
 msgid ""
 "And you, Hesk. A grocer from a drowned town, with the mark on your hand. What becomes of you is up to you."
 msgstr "そしてお前だ、ヘスク。沈んだ町の食料品屋で、手には鍵紋。お前がこの先どうなるかは、お前次第だ。"
 
-#: scripts/Core/Story.cs:522
+#: scripts/Core/Story.cs:523
 msgid ""
 "And you, Rosa. A Brightwater of Lantern Lane, with the mark on your hand. What becomes of you is up to you."
 msgstr "そしてお前だ、ローザ。提灯横丁のブライトウォーター家の娘で、手には鍵紋。お前がこの先どうなるかは、お前次第だ。"
 
-#: scripts/Core/Story.cs:523
+#: scripts/Core/Story.cs:524
 msgid ""
 "And you, my lady. The last Marchmont, with the mark on your hand. What becomes of you is up to you."
 msgstr "そしてお前さんだ、お嬢さま。マーチモント家の最後の一人で、手には鍵紋。この先どうなるかは、お前さん次第だ。"
 
-#: scripts/Core/Story.cs:524
+#: scripts/Core/Story.cs:525
 msgid ""
 "And you, Kit. My kin, with the mark on your hand. What becomes of you is up to you."
 msgstr "そしてお前だ、キット。わしの身内で、手には鍵紋。お前がこの先どうなるかは、お前次第だ。"
 
-#: scripts/Core/Story.cs:525
+#: scripts/Core/Story.cs:526
 msgid ""
 "And you. Bram's kin, with the mark on your hand. What becomes of you is up to you."
 msgstr "そしてお前だ。手に鍵紋を持つ、ブラムの身内。お前がこの先どうなるかは、お前次第だ。"
 
-#: scripts/Core/Story.cs:538
+#: scripts/Core/Story.cs:539
 msgid ""
 "The treasury's shut for good, and everyone who came out of it is home. Nobody can say from where, and nobody asks."
 msgstr "宝物庫は永遠に閉ざされて、あそこから出てきた連中はみんな家に帰った。どこから帰ってきたのか、誰にも言えんし、誰も聞かん。"
 
-#: scripts/Core/Story.cs:539
+#: scripts/Core/Story.cs:540
 msgid ""
 "And I'm home. Feel my hand: warm. You brought me out of that chest, and I still can't say it without shaking."
 msgstr "それに、わしも家にいる。手を触ってみろ。温かいだろう。お前があの宝箱からわしを連れ出してくれた。今でも、口にすると震えちまう。"
 
-#: scripts/Core/Story.cs:543
+#: scripts/Core/Story.cs:544
 msgid ""
 "I came home on the Guild's word, warm and whole. I don't know what you gave them for it, and I jump at every tap on the counter."
 msgstr "わしはギルドの約束で、温かいまま無事に帰ってきた。お前が引き換えに何を渡したのかは知らん。カウンターを叩く音がするたびに、びくっとしちまう。"
 
-#: scripts/Core/Story.cs:544
+#: scripts/Core/Story.cs:545
 msgid ""
 "I'm home, and my hand is warm. You brought me out of a Guild crate, and I still can't say it without shaking."
 msgstr "わしは家にいて、手も温かい。お前がギルドの木箱からわしを連れ出してくれた。今でも、口にすると震えちまう。"
 
-#: scripts/Core/Story.cs:546
+#: scripts/Core/Story.cs:547
 msgid ""
 "Bram's account is closed, every coin paid, and Bram never came home. The Guild says the treasury keeps long hours."
 msgstr "ブラムの勘定は一枚残らず払って清算された。なのに、ブラムは帰ってこなかった。宝物庫の勤めは長いんだと、ギルドは言ってるよ。"
 
-#: scripts/Core/Story.cs:548
+#: scripts/Core/Story.cs:549
 msgid ""
 "The Guild took the stall, and Bram never came home. Nobody's had a letter."
 msgstr "露店はギルドに取られて、ブラムは帰ってこなかった。誰のところにも、手紙ひとつ来ちゃいない。"
 
-#: scripts/Core/Story.cs:550
+#: scripts/Core/Story.cs:551
 msgid ""
 "Old Haddon walked home from a Guild crate, cold as a well. He's making wheels again, and he won't sign anything."
 msgstr "ハドンじいさんは、井戸の水みたいに冷えきって、ギルドの木箱から歩いて帰ってきた。また車輪を作ってるが、もう何にも署名しないそうだ。"
 
-#: scripts/Core/Story.cs:552
+#: scripts/Core/Story.cs:553
 msgid ""
 "Old Haddon kept his yard, because somebody paid his note. He's making you a wheel. You don't need one."
 msgstr "誰かが手形を払ってくれたおかげで、ハドンじいさんは作業場を守れた。今、車輪をひとつ作ってくれてる。要りもしないのに。"
 
-#: scripts/Core/Story.cs:554
+#: scripts/Core/Story.cs:555
 msgid ""
 "Old Haddon never came home from working off his note. Nell keeps the yard, and a lamp in the window."
 msgstr "ハドンじいさんは、手形の分を働きに連れていかれたきり、帰ってこなかった。ネルは作業場を守りながら、窓辺にランプを灯している。"
 
-#: scripts/Core/Story.cs:557
+#: scripts/Core/Story.cs:558
 msgid ""
 "And you sold {0} gold thing to the Maw's buyers. Every coin of it an eye for him. I hope it was worth it."
 msgid_plural ""
 "And you sold {0} gold things to the Maw's buyers. Every coin of it an eye for him. I hope it was worth it."
 msgstr[0] "それに、アギトの買い手に金の品を{0}つ売った。その硬貨の一枚一枚が、あいつの目になる。それだけの値打ちがあったならいいが。"
 
-#: scripts/Core/Story.cs:560
+#: scripts/Core/Story.cs:561
 msgid ""
 "And there's still a mimic in the back room, asleep on the gold. Don't wake it."
 msgstr "それと、奥の間にはまだミミックがいる。金の上で眠ってるよ。起こすなよ。"
 
-#: scripts/Core/Story.cs:562
+#: scripts/Core/Story.cs:563
 msgid ""
 "And on the last night the Guild opened the treasury without me. I know what comes after: two taps, and one, and spring."
 msgstr "そして最後の夜、ギルドはわたし抜きで宝物庫を開けた。この先に何が来るかは知っている。トントン、トン。そして、春だ。"
@@ -8927,169 +8931,169 @@ msgstr "ギルドへの支払いに足りない分を、ベタニーに貸せな
 msgid "No. No, of course. Who has, these days?"
 msgstr "そう。そうだよね。今どき、そんな余裕のある人なんていないさ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:233
+#: scripts/Core/TaleBook.Brindle.cs:234
 msgid ""
 "{0}, love: what I owed and half again. The Crossed Keys is still mine. If you ever need a room, a meal or a word in the right ear, it's yours."
 msgstr ""
 "{0}だよ、あんた。借りた分に5割増し。交差鍵亭はまだあたしの店さ。部屋でも食事でも、しかるべき人への口添えでも、要るときはいつでも言っとくれ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:241
+#: scripts/Core/TaleBook.Brindle.cs:242
 msgid ""
 "Bettany paid you back, and half again. The Crossed Keys stays open, and she owes you a favour."
 msgstr "ベタニーが5割増しで金を返してくれた。交差鍵亭は店を続けられ、ベタニーはあなたに借りができた。"
 
-#: scripts/Core/TaleBook.Brindle.cs:247
+#: scripts/Core/TaleBook.Brindle.cs:248
 msgid ""
 "A Guild notice, nailed to the Crossed Keys' door and copied to every shop at the crossroads: \"SEALED for tithe unpaid, by order of the Gilded Guild. Marrow, Bailiff.\" Bettany's gone north to her sister's."
 msgstr ""
 "交差鍵亭の扉にギルドの告示が打ちつけられ、辻のすべての店にも写しが配られた。「上納金未納につき、金箔ギルドの命により封鎖する。マロウ執行吏」ベタニーは北の姉のもとへ去った。"
 
-#: scripts/Core/TaleBook.Brindle.cs:253
+#: scripts/Core/TaleBook.Brindle.cs:254
 msgid ""
 "The Guild sealed the Crossed Keys for its tithe. Bettany has gone north, and won't be back this season."
 msgstr "ギルドが上納金のかたに交差鍵亭を封じた。ベタニーは北へ去り、今季はもう戻らない。"
 
-#: scripts/Core/TaleBook.Brindle.cs:262
+#: scripts/Core/TaleBook.Brindle.cs:263
 msgid "The Harvest Fair"
 msgstr "収穫祭"
 
-#: scripts/Core/TaleBook.Brindle.cs:263
+#: scripts/Core/TaleBook.Brindle.cs:264
 msgid ""
 "The harvest fair comes to Brindle, with a chest to be read in front of the whole county. Garrick wants the new Keywright to put up the prize, and then to read it exactly."
 msgstr ""
 "ブリンドルに収穫祭がやって来る。郡じゅうの前で宝箱をひとつ見立てる催しつきだ。ギャリックは新しい鍵師に、賞金を出したうえで、その宝箱をぴたりと見立ててほしいと思っている。"
 
-#: scripts/Core/TaleBook.Brindle.cs:273
+#: scripts/Core/TaleBook.Brindle.cs:274
 msgid ""
 "Harvest fair's the day after tomorrow, and the whole county comes. There's a reading contest: a chest nobody's opened, and a prize for whoever reads it right."
 msgstr "あさっては収穫祭で、郡じゅうから人が来るんだ。見立て比べもある。誰も開けてない宝箱をひとつ出して、中身をぴたりと当てた者に賞金が出るのさ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:275
+#: scripts/Core/TaleBook.Brindle.cs:276
 msgid ""
 "Bram always put up the prize. Will you? {0}, and your name on the banner."
 msgstr "賞金はいつもブラムが出してたんだ。あんたも出してくれるか？{0}で、横断幕にあんたの名前が載るぞ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:278
+#: scripts/Core/TaleBook.Brindle.cs:279
 msgid "Put up the prize ({0}g)"
 msgstr "賞金を出す（{0}G）"
 
-#: scripts/Core/TaleBook.Brindle.cs:282
+#: scripts/Core/TaleBook.Brindle.cs:283
 msgid ""
 "You put up the harvest fair's prize. Your name's on the banner, and the county will come past the stall."
 msgstr "収穫祭の賞金を出した。横断幕にあなたの名前が載り、郡じゅうの人が露店の前を通るだろう。"
 
-#: scripts/Core/TaleBook.Brindle.cs:283
+#: scripts/Core/TaleBook.Brindle.cs:284
 msgid ""
 "Bram's stall, on the banner! Half the county'll come past it on the day."
 msgstr "横断幕にブラムの露店の名前だ！当日は郡の半分が露店の前を通るぞ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:285
+#: scripts/Core/TaleBook.Brindle.cs:286
 msgid "Not this year"
 msgstr "今年はやめておく"
 
-#: scripts/Core/TaleBook.Brindle.cs:287
+#: scripts/Core/TaleBook.Brindle.cs:288
 msgid "You didn't put up the harvest fair's prize. The miller did."
 msgstr "収穫祭の賞金は出さなかった。代わりに粉屋が出した。"
 
-#: scripts/Core/TaleBook.Brindle.cs:288
+#: scripts/Core/TaleBook.Brindle.cs:289
 msgid "The miller, then. He'll want his name bigger than Bram's ever was."
 msgstr "じゃあ粉屋だな。あいつ、ブラムのよりでっかく名前を書けって言うぞ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:297
+#: scripts/Core/TaleBook.Brindle.cs:298
 msgid ""
 "The fair's chest! Read it right in front of the whole county, and the prize is yours: your own money back, and the miller's on top. One coin to enter."
 msgstr "収穫祭の宝箱だ！郡じゅうの前で中身を当てりゃ、賞金はあんたのものだ。自分の出した金が戻ってきて、粉屋の分も上乗せさ。参加は硬貨一枚だ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:299
+#: scripts/Core/TaleBook.Brindle.cs:300
 msgid ""
 "The fair's chest, and the miller's prize. Read it right in front of the whole county and it's yours. One coin to enter."
 msgstr "収穫祭の宝箱と、粉屋の出した賞金だ。郡じゅうの前で中身を当てりゃ、賞金はあんたのものだ。参加は硬貨一枚。"
 
-#: scripts/Core/TaleBook.Brindle.cs:308
+#: scripts/Core/TaleBook.Brindle.cs:309
 msgid ""
 "You read the fair's chest exactly right, and won the prize. The county cheered; Garrick says he owes you a pint and a favour."
 msgstr "収穫祭の宝箱をぴたりと見立て、賞金を手にした。郡じゅうが沸いた。ギャリックは、一杯おごるうえに借りもできたと言っている。"
 
-#: scripts/Core/TaleBook.Brindle.cs:313
+#: scripts/Core/TaleBook.Brindle.cs:314
 msgid ""
 "You read the fair's chest wrong, in front of the whole county. The miller's boy won."
 msgstr "郡じゅうが見守るなか、収穫祭の宝箱の見立てを外した。勝ったのは粉屋の息子だった。"
 
-#: scripts/Core/TaleBook.Brindle.cs:316
+#: scripts/Core/TaleBook.Brindle.cs:317
 msgid "You didn't enter the fair's reading contest."
 msgstr "収穫祭の見立て比べには出なかった。"
 
-#: scripts/Core/TaleBook.Brindle.cs:325
+#: scripts/Core/TaleBook.Brindle.cs:326
 msgid ""
 "The Guild took Jasper Wick to a counting-house, and sold his cart. He was a hedge-wright, like I was. I keep thinking that."
 msgstr "ギルドはジャスパー・ウィックを勘定所へ連れていき、荷車を売り払った。あいつはもぐりの鍵師だった。わしと同じでな。そればかり考えちまう。"
 
-#: scripts/Core/TaleBook.Brindle.cs:327
+#: scripts/Core/TaleBook.Brindle.cs:328
 msgid ""
 "I've a cellar in Crownhold now, and the Lockless bring me every chest their grandmothers ever locked. Best ear at the Crossroads? Yours, Keywright."
 msgstr ""
 "今はクラウンホールドに地下室を構えててね、無錠党の連中が、ばあさんたちの代から錠の下りたままの箱をみんな持ち込んでくるのさ。辻でいちばんの耳？あんたのだよ、鍵師。"
 
-#: scripts/Core/TaleBook.Brindle.cs:329
+#: scripts/Core/TaleBook.Brindle.cs:330
 msgid ""
 "Still across the road, still cheaper than you, and still no licence. Come and have a drink with the competition some time."
 msgstr "相変わらず向かいにいて、相変わらずあんたより安くて、相変わらず許可なしさ。たまには商売敵と一杯やりに来なよ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:330
+#: scripts/Core/TaleBook.Brindle.cs:331
 msgid ""
 "Jasper Wick traded across the road all season. The Guild never caught him. I hope it never does."
 msgstr "ジャスパー・ウィックは今季ずっと、向かいで商ってた。ギルドはついに捕まえられなかった。この先も捕まらんといいがな。"
 
-#: scripts/Core/TaleBook.Brindle.cs:336
+#: scripts/Core/TaleBook.Brindle.cs:337
 msgid ""
 "Great-great-grandfather's blade hangs in the Gales' hall again, and he walks no more. The Gales don't forget a debt, Keywright."
 msgstr "高祖父の剣は再びゲイル家の広間に掛かり、もうさまようこともない。ゲイル家は恩を忘れぬ、鍵師。"
 
-#: scripts/Core/TaleBook.Brindle.cs:338
+#: scripts/Core/TaleBook.Brindle.cs:339
 msgid ""
 "Sir Aldwin still walks Brindle Field at dusk, looking for his blade. Garrick won't plough the north end. Can't blame him."
 msgstr "アルドウィン卿は今も夕暮れどきにブリンドル畑をさまよって、自分の剣を探してる。ギャリックは北の端を耕そうとせん。無理もないがな。"
 
-#: scripts/Core/TaleBook.Brindle.cs:340
+#: scripts/Core/TaleBook.Brindle.cs:341
 msgid ""
 "Sir Aldwin's blade is still in our back room, waiting for a Gale. He's patient. He's had the practice."
 msgstr "アルドウィン卿の剣は、まだうちの奥の間でゲイル家の者を待ってる。あの騎士は気が長い。なにせ、待つのには慣れっこだ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:341
+#: scripts/Core/TaleBook.Brindle.cs:342
 msgid ""
 "Sold the knight's chest to a tinker in the end. He came back the next week, white as milk, and gave it back."
 msgstr "結局、騎士の宝箱は鋳掛け屋に売ったんだ。そいつ、次の週に真っ青な顔して戻ってきて、返していったよ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:352
+#: scripts/Core/TaleBook.Brindle.cs:356
 msgid ""
 "The Crossed Keys is still mine, love, and there's always a pint behind the bar with your name on it. Bram's too, the old soak."
 msgstr "交差鍵亭はまだあたしの店さ、あんた。カウンターの奥には、いつでもあんたの名前の一杯が待ってるよ。ブラムのもね、あの飲んだくれの。"
 
-#: scripts/Core/TaleBook.Brindle.cs:354
+#: scripts/Core/TaleBook.Brindle.cs:358
 msgid ""
 "The Guild sealed the Crossed Keys. Bettany's up north with her sister. The crossroads is quieter than I've ever known it."
 msgstr "ギルドが交差鍵亭を封じた。ベタニーは北の姉のところだ。辻がこんなに静かなのは、わしも初めてだ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:355
+#: scripts/Core/TaleBook.Brindle.cs:359
 msgid "I found the money in the end. Don't ask where, love."
 msgstr "結局、金は工面できたよ。どこからかは聞かないでおくれ、あんた。"
 
-#: scripts/Core/TaleBook.Brindle.cs:362
+#: scripts/Core/TaleBook.Brindle.cs:366
 msgid ""
 "Put up the prize and won it back! Folk are still talking about it. Best harvest fair since Bram's day."
 msgstr "賞金を出して、自分で取り返しちまうとはな！みんな今でもその話で持ちきりだ。ブラムの時代以来、最高の収穫祭だったよ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:363
+#: scripts/Core/TaleBook.Brindle.cs:367
 msgid ""
 "The miller's still sore you won his prize. Best harvest fair since Bram's day, and that's saying something."
 msgstr "粉屋のやつ、あんたに賞金を取られて、まだふてくされてるよ。ブラムの時代以来、最高の収穫祭だった。こいつは大したもんだぞ。"
 
-#: scripts/Core/TaleBook.Brindle.cs:365
+#: scripts/Core/TaleBook.Brindle.cs:369
 msgid ""
 "The miller's boy read the fair's chest better than Bram's Keywright. He'll never let you forget it, and neither will I."
 msgstr "収穫祭の宝箱は、ブラムんとこの鍵師より粉屋の息子のほうがうまく見立てた。あいつは一生そのことを言い続けるぞ。おれもな。"
 
-#: scripts/Core/TaleBook.Brindle.cs:366
+#: scripts/Core/TaleBook.Brindle.cs:370
 msgid ""
 "Your name was on the banner, and the county came. Next year, enter the contest too."
 msgstr "横断幕にあんたの名前が載って、郡じゅうから人が来た。来年は見立て比べにも出てくれよ。"
@@ -9106,8 +9110,8 @@ msgstr ""
 
 #: scripts/Core/TaleBook.Campaign.cs:45
 msgid ""
-"My granddad's grey chest, from the attic. I've meant to sell it for years. {price}, and it's yours."
-msgstr "じいさんの灰色の宝箱だ。屋根裏から出してきた。何年も前から売ろうと思ってたんだよ。{price}で持ってってくれ。"
+"My granddad's old green chest, from the attic. I've meant to sell it for years. {price}, and it's yours."
+msgstr "じいさんの古い緑の宝箱だ。屋根裏から出してきた。何年も前から売ろうと思ってたんだよ。{price}で持ってってくれ。"
 
 #: scripts/Core/TaleBook.Campaign.cs:55
 msgid ""
@@ -9141,8 +9145,8 @@ msgstr "ギルドの最初の夜の前に、ハドンじいさんの手形をギ
 
 #: scripts/Core/TaleBook.Campaign.cs:73
 msgid ""
-"\"You'd do that? He'll pay you back in wheels. Whether you want them or not.\""
-msgstr "「そんなことしてくれるの？父さん、きっと車輪で返すわ。あなたが欲しくなくてもね」"
+"You'd do that? He'll pay you back in wheels. Whether you want them or not."
+msgstr "そんなことしてくれるの？父さん、きっと車輪で返すわ。あなたが欲しくなくてもね。"
 
 #: scripts/Core/TaleBook.Campaign.cs:75
 msgid "I can't, not this week"
@@ -9154,8 +9158,8 @@ msgid ""
 msgstr "ネル・ハドンから、ギルドが父親の手形を持っていて、期日はギルドの最初の夜だと聞いた。力にはなれなかった。"
 
 #: scripts/Core/TaleBook.Campaign.cs:78
-msgid "\"No. Nobody can. I'll find it somewhere.\""
-msgstr "「ううん。誰にも無理よ。どこかで工面するわ」"
+msgid "No. Nobody can. I'll find it somewhere."
+msgstr "ううん。誰にも無理よ。どこかで工面するわ。"
 
 #: scripts/Core/TaleBook.Campaign.cs:91
 msgid ""
@@ -9189,16 +9193,16 @@ msgid "Meet him at the toll on the Guild's night"
 msgstr "ギルドの夜、関所で落ち合う"
 
 #: scripts/Core/TaleBook.Campaign.cs:117
-msgid "\"Bring a dark coat. And don't rattle anything.\""
-msgstr "「黒っぽい外套を着てこい。それと、何も鳴らすなよ」"
+msgid "Bring a dark coat. And don't rattle anything."
+msgstr "黒っぽい外套を着てこい。それと、何も鳴らすなよ。"
 
 #: scripts/Core/TaleBook.Campaign.cs:119
 msgid "Not this season"
 msgstr "今季はやめておく"
 
 #: scripts/Core/TaleBook.Campaign.cs:119
-msgid "\"Suit yourself. The carts'll keep coming.\""
-msgstr "「好きにしろ。荷車はこれからも来る」"
+msgid "Suit yourself. The carts'll keep coming."
+msgstr "好きにしろ。荷車はこれからも来る。"
 
 #: scripts/Core/TaleBook.Campaign.cs:129
 msgid ""
@@ -9299,12 +9303,12 @@ msgstr "写してもらう（{0}G）"
 
 #: scripts/Core/TaleBook.Campaign.cs:217
 msgid ""
-"\"Every crate, by name and weight, and the night it goes down. Burn it after.\""
-msgstr "「木箱の一つひとつ、その名前と目方、そして下へ送られる夜。読んだら燃やしてください」"
+"Every crate, by name and weight, and the night it goes down. Burn it after."
+msgstr "木箱の一つひとつ、その名前と目方、そして下へ送られる夜。読んだら燃やしてください。"
 
 #: scripts/Core/TaleBook.Campaign.cs:219
-msgid "\"The Roll keeps.\""
-msgstr "「台帳は逃げませんよ」"
+msgid "The Roll keeps."
+msgstr "台帳は逃げませんよ。"
 
 #: scripts/Core/TaleBook.Campaign.cs:228
 msgid ""
@@ -12020,7 +12024,7 @@ msgid "Bless you. The saint will remember, and so will we."
 msgstr "神のお恵みを。聖人もお忘れにならず、私どもも忘れません。"
 
 #: scripts/Core/TaleBook.cs:245 scripts/Core/TaleBook.cs:1347 scripts/Phases/CounterPhase.cs:481
-#: scripts/Phases/DayEndPhase.cs:375 scripts/Ui/SongReveal.cs:174
+#: scripts/Phases/DayEndPhase.cs:379 scripts/Ui/SongReveal.cs:174
 msgid "Keep it"
 msgstr "手元に置く"
 
@@ -13639,7 +13643,7 @@ msgstr "彼らの仲間が、道具を1.5倍の値で売りつけてくる。"
 msgid "Go on"
 msgstr "続ける"
 
-#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:375 scripts/Phases/PeddlerPhase.cs:133
+#: scripts/Core/Tales.cs:125 scripts/Phases/DuesPhase.cs:375 scripts/Phases/PeddlerPhase.cs:135
 #: scripts/Phases/TalkPhase.cs:178
 msgid "Good night"
 msgstr "おやすみ"
@@ -14246,8 +14250,8 @@ msgid "Your purse feels lighter. Your heart, heavier."
 msgstr "財布は軽く、心は重く。"
 
 #: scripts/Core/Visit.cs:481
-msgid "Close, but the house won. You are the house."
-msgstr "惜しい、胴元の勝ちだ。で、胴元はあなただ。"
+msgid "Close, but the house won this one."
+msgstr "惜しい、今回は胴元の勝ちだ。"
 
 #: scripts/Core/Visit.cs:482
 msgid "A fair day's trade."
@@ -14265,108 +14269,108 @@ msgstr "まるで追いはぎ。合法のね。"
 msgid "The heavens smile on you. Don't let it go to your head."
 msgstr "天があなたに微笑んでいる。調子に乗らないように。"
 
-#: scripts/Main.cs:541
+#: scripts/Main.cs:542
 msgid "In the notebook ({0})"
 msgstr "手帳に記録（{0}）"
 
-#: scripts/Main.cs:542 scripts/Main.cs:550
+#: scripts/Main.cs:543 scripts/Main.cs:551
 msgid "Open the notebook's Inquiry page"
 msgstr "手帳の「調査」のページを開く"
 
-#: scripts/Main.cs:549
+#: scripts/Main.cs:550
 msgid "{0} of the treasury key"
 msgstr "宝物庫の鍵：{0}"
 
-#: scripts/Main.cs:549
+#: scripts/Main.cs:550
 msgid "{0} of {1}, and a master's fee: +{2}g"
 msgstr "{0}/{1}。名匠の謝礼：+{2}G"
 
-#: scripts/Main.cs:590
+#: scripts/Main.cs:591
 msgid "Achievement: {0}"
 msgstr "実績解除：{0}"
 
-#: scripts/Main.cs:615
+#: scripts/Main.cs:616
 msgid "THE NINE HEARTSONGS"
 msgstr "九つの心歌"
 
-#: scripts/Main.cs:711
+#: scripts/Main.cs:712
 msgid "In the purse: {0}g."
 msgstr "所持金：{0}G。"
 
-#: scripts/Main.cs:719
+#: scripts/Main.cs:720
 msgid ""
 "The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs."
 msgstr "手帳とコレクションがすべて埋まった：常連も、品物も、珍品も、九つの心歌もすべて。"
 
-#: scripts/Main.cs:724
+#: scripts/Main.cs:725
 msgid "Not now: finish what's in hand first."
 msgstr "今はできません。先に手元のことを済ませてください。"
 
-#: scripts/Main.cs:864
+#: scripts/Main.cs:865
 msgid "BRAM'S STALL"
 msgstr "ブラムの露店"
 
-#: scripts/Main.cs:864 scripts/Ui/NotebookView.cs:402 scripts/Ui/NotebookView.cs:806
+#: scripts/Main.cs:865 scripts/Ui/NotebookView.cs:403 scripts/Ui/NotebookView.cs:807
 msgid "WEEK {0}"
 msgstr "{0}週目"
 
-#: scripts/Main.cs:887
+#: scripts/Main.cs:888
 msgid "THE SEASON'S END"
 msgstr "季節の終わり"
 
-#: scripts/Main.cs:895
+#: scripts/Main.cs:896
 msgid "THE GILDED GUILD"
 msgstr "金箔ギルド"
 
-#: scripts/Main.cs:943
+#: scripts/Main.cs:944
 msgid "THE TREASURY'S SUMMONS"
 msgstr "宝物庫からの呼び出し"
 
-#: scripts/Main.cs:970 scripts/Phases/RunEndPhase.cs:33
+#: scripts/Main.cs:971 scripts/Phases/RunEndPhase.cs:33
 msgid "FREE AND CLEAR"
 msgstr "晴れて自由の身"
 
-#: scripts/Main.cs:982
+#: scripts/Main.cs:983
 msgid "TWO TAPS AND ONE"
 msgstr "トントン、トン"
 
-#: scripts/Main.cs:997 scripts/Phases/TreasuryPhase.cs:52
+#: scripts/Main.cs:998 scripts/Phases/TreasuryPhase.cs:52
 msgid "THE TREASURY"
 msgstr "宝物庫"
 
-#: scripts/Main.cs:1015
+#: scripts/Main.cs:1016
 msgid "THE LAST CHEST"
 msgstr "最後の宝箱"
 
-#: scripts/Main.cs:1026 scripts/Main.cs:1055 scripts/Phases/RunEndPhase.cs:31
+#: scripts/Main.cs:1027 scripts/Main.cs:1056 scripts/Phases/RunEndPhase.cs:31
 msgid "THE NEXT DAY"
 msgstr "明くる日"
 
-#: scripts/Main.cs:1088 scripts/Ui/NotebookView.cs:413
+#: scripts/Main.cs:1089 scripts/Ui/NotebookView.cs:414
 msgid "DAY {0}"
 msgstr "{0}日目"
 
-#: scripts/Main.cs:1091
+#: scripts/Main.cs:1092
 msgid ", level {0}"
 msgstr "（レベル{0}）"
 
-#: scripts/Main.cs:1092
+#: scripts/Main.cs:1093
 msgid "{0}Week {1}, day {2}{3}  -  {4}"
 msgstr "{0}{1}週目の{2}日目{3}  -  {4}"
 
-#: scripts/Main.cs:1092
+#: scripts/Main.cs:1093
 msgid " of {0}"
 msgstr "（全{0}日）"
 
-#: scripts/Main.cs:1093
+#: scripts/Main.cs:1094
 msgid "The Guild comes tonight for {0}g."
 msgstr "今夜、ギルドが{0}Gを取り立てに来る。"
 
-#: scripts/Main.cs:1094
+#: scripts/Main.cs:1095
 msgid "The Guild comes for {0}g at the end of day {1}."
 msgstr "{1}日目の終わりに、ギルドが{0}Gを取り立てに来る。"
 
-#: scripts/Main.cs:1101
+#: scripts/Main.cs:1102
 msgid "{0} slipped you {1}g from his secret stash ({2} left)."
 msgstr "{0}が、へそくりから{1}Gをこっそりくれた（残り{2}回）。"
 
@@ -14469,7 +14473,7 @@ msgstr "宝箱をドラッグすると振れます。魔女灯が灯っていま
 msgid "Drag the chest to shake it"
 msgstr "宝箱をドラッグすると振れます"
 
-#: scripts/Phases/CounterPhase.cs:447 scripts/Phases/DayEndPhase.cs:360
+#: scripts/Phases/CounterPhase.cs:447 scripts/Phases/DayEndPhase.cs:364
 msgid "{0}, singing: {1} Click to let it go (it fetches nothing)."
 msgstr "{0}が歌っている：{1}クリックで手放せます（売値はつきません）。"
 
@@ -14477,46 +14481,46 @@ msgstr "{0}が歌っている：{1}クリックで手放せます（売値はつ
 msgid "{0}: {1} exhibition points{2}. Click to sell it for {3}g."
 msgstr "{0}：展示点{1}{2}。クリックすると{3}Gで売れます。"
 
-#: scripts/Phases/CounterPhase.cs:460 scripts/Phases/DayEndPhase.cs:330
+#: scripts/Phases/CounterPhase.cs:460 scripts/Phases/DayEndPhase.cs:334
 msgid " (double: enchanted)"
 msgstr "（魔力で2倍）"
 
-#: scripts/Phases/CounterPhase.cs:478 scripts/Phases/DayEndPhase.cs:372
+#: scripts/Phases/CounterPhase.cs:478 scripts/Phases/DayEndPhase.cs:376
 msgid ""
 "{0} goes back to the Locking, and takes this with it: {1} It fetches nothing."
 msgstr "{0}は大施錠へ還り、この力も一緒に消えます：{1}売値はつきません。"
 
-#: scripts/Phases/CounterPhase.cs:479 scripts/Phases/DayEndPhase.cs:373
+#: scripts/Phases/CounterPhase.cs:479 scripts/Phases/DayEndPhase.cs:377
 msgid ""
 "Sell the {0} for {1}g? It comes off display: {2} exhibition points fewer."
 msgstr "{0}を{1}Gで売りますか？陳列から外れ、展示点が{2}減ります。"
 
-#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:374
+#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:378
 msgid "LET IT GO?"
 msgstr "手放しますか？"
 
-#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:374
+#: scripts/Phases/CounterPhase.cs:480 scripts/Phases/DayEndPhase.cs:378
 msgid "SELL IT?"
 msgstr "売りますか？"
 
-#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:375
+#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:379
 msgid "Let it go"
 msgstr "手放す"
 
-#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:375
+#: scripts/Phases/CounterPhase.cs:481 scripts/Phases/DayEndPhase.cs:379
 msgid "Sell: +{0}g"
 msgstr "売る：+{0}G"
 
-#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/DayEndPhase.cs:387
+#: scripts/Phases/CounterPhase.cs:505 scripts/Phases/DayEndPhase.cs:391
 msgid "{0} goes back to the Locking."
 msgstr "{0}は大施錠へ還っていった。"
 
-#: scripts/Phases/CounterPhase.cs:510 scripts/Phases/CounterPhase.cs:1312 scripts/Phases/DayEndPhase.cs:82
-#: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:84 scripts/Phases/DayEndPhase.cs:86
-#: scripts/Phases/DayEndPhase.cs:387 scripts/Phases/DuesPhase.cs:225 scripts/Phases/DuesPhase.cs:232
+#: scripts/Phases/CounterPhase.cs:510 scripts/Phases/CounterPhase.cs:1312 scripts/Phases/DayEndPhase.cs:85
+#: scripts/Phases/DayEndPhase.cs:86 scripts/Phases/DayEndPhase.cs:87 scripts/Phases/DayEndPhase.cs:89
+#: scripts/Phases/DayEndPhase.cs:391 scripts/Phases/DuesPhase.cs:225 scripts/Phases/DuesPhase.cs:232
 #: scripts/Phases/DuesPhase.cs:240 scripts/Phases/DuesPhase.cs:287 scripts/Phases/DuesPhase.cs:301
-#: scripts/Phases/DuesPhase.cs:311 scripts/Phases/OpeningPhase.cs:418 scripts/Phases/OpeningPhase.cs:1079
-#: scripts/Phases/PeddlerPhase.cs:269 scripts/Phases/PeddlerPhase.cs:571 scripts/Phases/TalkPhase.cs:191
+#: scripts/Phases/DuesPhase.cs:311 scripts/Phases/OpeningPhase.cs:418 scripts/Phases/OpeningPhase.cs:1080
+#: scripts/Phases/PeddlerPhase.cs:271 scripts/Phases/PeddlerPhase.cs:573 scripts/Phases/TalkPhase.cs:191
 #: scripts/Phases/TalkPhase.cs:198
 msgid "+{0}g"
 msgstr "+{0}G"
@@ -14525,7 +14529,7 @@ msgstr "+{0}G"
 msgid "Waiting"
 msgstr "順番待ち"
 
-#: scripts/Phases/CounterPhase.cs:535 scripts/Phases/DayEndPhase.cs:83 scripts/Phases/RunEndPhase.cs:64
+#: scripts/Phases/CounterPhase.cs:535 scripts/Phases/DayEndPhase.cs:86 scripts/Phases/RunEndPhase.cs:64
 #: scripts/Ui/CollectionView.cs:63
 msgid "Curios"
 msgstr "珍品"
@@ -14647,7 +14651,7 @@ msgstr "{0}の言い値"
 msgid "Offer {0}g"
 msgstr "{0}Gの値をつける"
 
-#: scripts/Phases/CounterPhase.cs:793 scripts/Phases/PeddlerPhase.cs:512
+#: scripts/Phases/CounterPhase.cs:793 scripts/Phases/PeddlerPhase.cs:514
 msgid "Buy {0}g"
 msgstr "{0}Gで買う"
 
@@ -14922,275 +14926,280 @@ msgstr "開店：{0}日目"
 msgid "The shop's open for business!"
 msgstr "店が軌道に乗った！"
 
-#: scripts/Phases/DayEndPhase.cs:76
+#: scripts/Phases/DayEndPhase.cs:79
 msgid "Bought"
 msgstr "購入"
 
-#: scripts/Phases/DayEndPhase.cs:77
+#: scripts/Phases/DayEndPhase.cs:80
 msgid "Passed"
 msgstr "見送り"
 
-#: scripts/Phases/DayEndPhase.cs:78
+#: scripts/Phases/DayEndPhase.cs:81
 msgid "Spent"
 msgstr "支出"
 
-#: scripts/Phases/DayEndPhase.cs:79
+#: scripts/Phases/DayEndPhase.cs:82
 msgid "The chests held"
 msgstr "宝箱の中身"
 
-#: scripts/Phases/DayEndPhase.cs:80 scripts/Phases/DayEndPhase.cs:100
+#: scripts/Phases/DayEndPhase.cs:83 scripts/Phases/DayEndPhase.cs:103
 msgid "Profit"
 msgstr "利益"
 
-#: scripts/Phases/DayEndPhase.cs:82
+#: scripts/Phases/DayEndPhase.cs:85
 msgid "Commissions"
 msgstr "依頼報酬"
 
-#: scripts/Phases/DayEndPhase.cs:84
+#: scripts/Phases/DayEndPhase.cs:87
 msgid "Visitors"
 msgstr "見物客"
 
-#: scripts/Phases/DayEndPhase.cs:86 scripts/Ui/NotebookView.cs:71
+#: scripts/Phases/DayEndPhase.cs:89 scripts/Ui/NotebookView.cs:71
 msgid "Town"
 msgstr "町"
 
-#: scripts/Phases/DayEndPhase.cs:87
+#: scripts/Phases/DayEndPhase.cs:90
 msgid "Back room"
 msgstr "奥の間"
 
-#: scripts/Phases/DayEndPhase.cs:88 scripts/Phases/DayEndPhase.cs:92
+#: scripts/Phases/DayEndPhase.cs:91 scripts/Phases/DayEndPhase.cs:95
 msgid "Perfect reads"
 msgstr "完璧な見立て"
 
-#: scripts/Phases/DayEndPhase.cs:89 scripts/Phases/DayEndPhase.cs:92
+#: scripts/Phases/DayEndPhase.cs:92 scripts/Phases/DayEndPhase.cs:95
 msgid "New finds"
 msgstr "新発見"
 
-#: scripts/Phases/DayEndPhase.cs:135
+#: scripts/Phases/DayEndPhase.cs:138
 msgid "Keep about {0}g for tomorrow's chests."
 msgstr "明日の仕入れに{0}Gほど残しておこう。"
 
-#: scripts/Phases/DayEndPhase.cs:136
+#: scripts/Phases/DayEndPhase.cs:139
 msgid "Keep about {0}g for chests ({1}g after renovating)."
 msgstr "仕入れに{0}Gほど残しておこう（改装後なら{1}G）。"
 
-#: scripts/Phases/DayEndPhase.cs:137
+#: scripts/Phases/DayEndPhase.cs:140
 msgid "You have {0}g. {1}"
 msgstr "所持金{0}G。{1}"
 
-#: scripts/Phases/DayEndPhase.cs:137 scripts/Phases/DuesPhase.cs:172
+#: scripts/Phases/DayEndPhase.cs:140 scripts/Phases/DuesPhase.cs:172
 msgid "You have {0}g"
 msgstr "所持金{0}G"
 
-#: scripts/Phases/DayEndPhase.cs:138
+#: scripts/Phases/DayEndPhase.cs:141
 msgid "SPEND IT ON THE SHOP"
 msgstr "店に投資する"
 
-#: scripts/Phases/DayEndPhase.cs:138
+#: scripts/Phases/DayEndPhase.cs:141
 msgid "FIX UP THE STALL"
 msgstr "露店を立て直す"
 
-#: scripts/Phases/DayEndPhase.cs:150
+#: scripts/Phases/DayEndPhase.cs:153
 msgid "Nothing left to buy. The shop is complete."
 msgstr "買えるものはもうない。店は完成した。"
 
-#: scripts/Phases/DayEndPhase.cs:177
+#: scripts/Phases/DayEndPhase.cs:180
 msgid ""
 "A pale man with a gilded chain has been watching the stall all day. He's still outside."
 msgstr "金の鎖を下げた青白い顔の男が、一日じゅう露店を見張っていた。まだ外にいる。"
 
-#: scripts/Phases/DayEndPhase.cs:184
+#: scripts/Phases/DayEndPhase.cs:181
+msgid ""
+"The pale man with the gilded chain is back, and this time he's crossing the road to the stall."
+msgstr "金の鎖を下げた青白い顔の男が、また来ている。今度は道を渡って、露店へ向かってくる。"
+
+#: scripts/Phases/DayEndPhase.cs:188
 msgid "COMMISSIONS"
 msgstr "依頼"
 
-#: scripts/Phases/DayEndPhase.cs:186
+#: scripts/Phases/DayEndPhase.cs:190
 msgid "until the Guild comes"
 msgstr "ギルドが来るまで"
 
-#: scripts/Phases/DayEndPhase.cs:188
+#: scripts/Phases/DayEndPhase.cs:192
 msgid "Regulars will start asking you for things soon."
 msgstr "そのうち常連から依頼が来るようになる。"
 
-#: scripts/Phases/DayEndPhase.cs:189
+#: scripts/Phases/DayEndPhase.cs:193
 msgid "Regulars start asking for things once the Guild has been."
 msgstr "ギルドが一度来てから、常連の依頼が始まる。"
 
-#: scripts/Phases/DayEndPhase.cs:190
+#: scripts/Phases/DayEndPhase.cs:194
 msgid "Nobody's asking for anything this week."
 msgstr "今週の依頼はない。"
 
-#: scripts/Phases/DayEndPhase.cs:197
+#: scripts/Phases/DayEndPhase.cs:201
 msgid "DONE"
 msgstr "完了"
 
-#: scripts/Phases/DayEndPhase.cs:197
+#: scripts/Phases/DayEndPhase.cs:201
 msgid "{0}g each"
 msgstr "各{0}G"
 
-#: scripts/Phases/DayEndPhase.cs:206
+#: scripts/Phases/DayEndPhase.cs:210
 msgid "CURIOS {0}/{1}"
 msgstr "珍品{0}/{1}"
 
-#: scripts/Phases/DayEndPhase.cs:208
+#: scripts/Phases/DayEndPhase.cs:212
 msgid "Nim the peddler comes by tonight, after closing, with a curio."
 msgstr "今夜、店じまいの後に、行商人ニムが珍品を持ってやって来る。"
 
-#: scripts/Phases/DayEndPhase.cs:209
+#: scripts/Phases/DayEndPhase.cs:213
 msgid "Nim the peddler comes by every night after closing, from the third."
 msgstr "3日目の夜からは毎晩、店じまいの後に行商人ニムがやって来る。"
 
-#: scripts/Phases/DayEndPhase.cs:245
+#: scripts/Phases/DayEndPhase.cs:249
 msgid "VANE COMES TONIGHT"
 msgstr "今夜ヴェイン氏が来る"
 
-#: scripts/Phases/DayEndPhase.cs:245
+#: scripts/Phases/DayEndPhase.cs:249
 msgid "THE GUILD'S INTEREST"
 msgstr "ギルドの利息"
 
-#: scripts/Phases/DayEndPhase.cs:245
+#: scripts/Phases/DayEndPhase.cs:249
 msgid "THE GUILD'S DUE"
 msgstr "ギルドの上納金"
 
-#: scripts/Phases/DayEndPhase.cs:248
+#: scripts/Phases/DayEndPhase.cs:252
 msgid "tonight"
 msgstr "今夜"
 
-#: scripts/Phases/DayEndPhase.cs:248
+#: scripts/Phases/DayEndPhase.cs:252
 msgid "end of day {0}"
 msgstr "{0}日目の終わり"
 
-#: scripts/Phases/DayEndPhase.cs:251
+#: scripts/Phases/DayEndPhase.cs:255
 msgid "debt left {0}g"
 msgstr "借金残り{0}G"
 
-#: scripts/Phases/DayEndPhase.cs:256
+#: scripts/Phases/DayEndPhase.cs:260
 msgid "Pay it all off: {0}g"
 msgstr "全額完済：{0}G"
 
-#: scripts/Phases/DayEndPhase.cs:257
+#: scripts/Phases/DayEndPhase.cs:261
 msgid ""
 "Every week's due that's left of Bram's debt, to the last, all at once. The run is won; you can keep trading after."
 msgstr "ブラムの借金のうち残っている週の上納金を、最後の週の分まで一度に払います。このプレイは勝利となり、その後も商いを続けられます。"
 
-#: scripts/Phases/DayEndPhase.cs:268 scripts/Phases/RunEndPhase.cs:41
+#: scripts/Phases/DayEndPhase.cs:272 scripts/Phases/RunEndPhase.cs:41
 msgid "Bram's debt is paid"
 msgstr "ブラムの借金は完済"
 
-#: scripts/Phases/DayEndPhase.cs:268
+#: scripts/Phases/DayEndPhase.cs:272
 msgid "Week {0} of {1}"
 msgstr "{0}週目（全{1}週）"
 
-#: scripts/Phases/DayEndPhase.cs:268 scripts/Phases/DuesPhase.cs:75
+#: scripts/Phases/DayEndPhase.cs:272 scripts/Phases/DuesPhase.cs:75
 msgid "Week {0}"
 msgstr "{0}週目"
 
-#: scripts/Phases/DayEndPhase.cs:269
+#: scripts/Phases/DayEndPhase.cs:273
 msgid "{0}. You have it."
 msgstr "{0}。手持ちで払える。"
 
-#: scripts/Phases/DayEndPhase.cs:269
+#: scripts/Phases/DayEndPhase.cs:273
 msgid "{0}. {1}g short."
 msgstr "{0}。{1}G足りない。"
 
-#: scripts/Phases/DayEndPhase.cs:284
+#: scripts/Phases/DayEndPhase.cs:288
 msgid "PAY OFF THE DEBT?"
 msgstr "借金を完済しますか？"
 
-#: scripts/Phases/DayEndPhase.cs:286
+#: scripts/Phases/DayEndPhase.cs:290
 msgid ", {0} week early"
 msgid_plural ", {0} weeks early"
 msgstr[0] "（期限より{0}週早く）"
 
-#: scripts/Phases/DayEndPhase.cs:287
+#: scripts/Phases/DayEndPhase.cs:291
 msgid ""
 "Pay the Guild {0}g now: every week's due that's left, to the last. Bram's debt is cleared{1}, and you'd have {2}g left. You can keep trading after."
 msgstr ""
 "今すぐギルドに{0}Gを払います：最後の週まで、残りの上納金すべてです。ブラムの借金は完済となり{1}、手元には{2}Gが残ります。その後も商いを続けられます。"
 
-#: scripts/Phases/DayEndPhase.cs:289
+#: scripts/Phases/DayEndPhase.cs:293
 msgid "Pay it off"
 msgstr "完済する"
 
-#: scripts/Phases/DayEndPhase.cs:290
+#: scripts/Phases/DayEndPhase.cs:294
 msgid "Not yet"
 msgstr "今はやめておく"
 
-#: scripts/Phases/DayEndPhase.cs:314
+#: scripts/Phases/DayEndPhase.cs:318
 msgid "Keep grand things when you open a chest, and they'll show here."
 msgstr "宝箱を開けたときに立派な品を陳列すると、ここに並びます。"
 
-#: scripts/Phases/DayEndPhase.cs:315
+#: scripts/Phases/DayEndPhase.cs:319
 msgid "{0} points: +{1} customer a day, better chests {2} of the time."
 msgid_plural "{0} points: +{1} customers a day, better chests {2} of the time."
 msgstr[0] "{0}点：1日の客+{1}人、{2}の確率で上等な宝箱。"
 
-#: scripts/Phases/DayEndPhase.cs:319
+#: scripts/Phases/DayEndPhase.cs:323
 msgid "EXHIBITION {0}/{1}"
 msgstr "展示{0}/{1}"
 
-#: scripts/Phases/DayEndPhase.cs:330
+#: scripts/Phases/DayEndPhase.cs:334
 msgid "{0}, {1} points{2}. Click to sell it for {3}g."
 msgstr "{0}：展示点{1}{2}。クリックすると{3}Gで売れます。"
 
-#: scripts/Phases/DayEndPhase.cs:334
+#: scripts/Phases/DayEndPhase.cs:338
 msgid "Collection: {0} of {1} found."
 msgstr "コレクション：{1}種中{0}種を発見。"
 
-#: scripts/Phases/DayEndPhase.cs:335
+#: scripts/Phases/DayEndPhase.cs:339
 msgid " Visitors leave {0}g a night."
 msgstr "見物客が毎晩{0}Gを置いていく。"
 
-#: scripts/Phases/DayEndPhase.cs:336
+#: scripts/Phases/DayEndPhase.cs:340
 msgid " Visitors pay {0}g a night at the door."
 msgstr "見物客が毎晩入口で{0}Gを払う。"
 
-#: scripts/Phases/DayEndPhase.cs:350
+#: scripts/Phases/DayEndPhase.cs:354
 msgid "HEARTSONGS"
 msgstr "心歌"
 
-#: scripts/Phases/DayEndPhase.cs:398
+#: scripts/Phases/DayEndPhase.cs:402
 msgid "Earn your keep"
 msgstr "食い扶持を稼ぐ"
 
-#: scripts/Phases/DayEndPhase.cs:399
+#: scripts/Phases/DayEndPhase.cs:403
 msgid ""
 "Once the stall has earned {0}g, all told, you can move on to Thornwick Market: more customers, richer chests and a shelf for your best finds."
 msgstr "露店の稼ぎが通算{0}Gに達すると、ソーンウィック市場へ移れます。客が増え、宝箱も豪華になり、選りすぐりの品を飾る棚も手に入ります。"
 
-#: scripts/Phases/DayEndPhase.cs:410
+#: scripts/Phases/DayEndPhase.cs:414
 msgid "The chests have brought in {0}g of {1}g"
 msgstr "宝箱の稼ぎ：{0}G／{1}G"
 
-#: scripts/Phases/DayEndPhase.cs:439
+#: scripts/Phases/DayEndPhase.cs:443
 msgid ""
 "Every chest read for you, for good. You'd still owe the Guild {0}g, and have {1}g to earn it with."
 msgstr "これからずっと、すべての宝箱を代わりに読み取ってくれます。それでもギルドへの借金は{0}G残り、それを稼ぐ元手は{1}Gになります。"
 
-#: scripts/Phases/DayEndPhase.cs:440
+#: scripts/Phases/DayEndPhase.cs:444
 msgid "Buy the {0}. Leaves you {1}g."
 msgstr "{0}を買います。残りは{1}Gです。"
 
-#: scripts/Phases/DayEndPhase.cs:446
+#: scripts/Phases/DayEndPhase.cs:450
 msgid "{0}g more to go"
 msgstr "あと{0}G"
 
-#: scripts/Phases/DayEndPhase.cs:463 scripts/Phases/PeddlerPhase.cs:534
+#: scripts/Phases/DayEndPhase.cs:467 scripts/Phases/PeddlerPhase.cs:536
 msgid "ARE YOU SURE?"
 msgstr "よろしいですか？"
 
-#: scripts/Phases/DayEndPhase.cs:463 scripts/Phases/PeddlerPhase.cs:534
+#: scripts/Phases/DayEndPhase.cs:467 scripts/Phases/PeddlerPhase.cs:536
 msgid "Buy anyway"
 msgstr "それでも買う"
 
-#: scripts/Phases/DayEndPhase.cs:520
+#: scripts/Phases/DayEndPhase.cs:524
 msgid "Synergies: none reached yet"
 msgstr "シナジー：まだなし"
 
-#: scripts/Phases/DayEndPhase.cs:520
+#: scripts/Phases/DayEndPhase.cs:524
 msgid "Synergies: {0} of {1} active"
 msgstr "シナジー：有効{0}/{1}"
 
-#: scripts/Phases/DayEndPhase.cs:525
+#: scripts/Phases/DayEndPhase.cs:529
 msgid " (choose!)"
 msgstr "（選ぼう！）"
 
@@ -15676,118 +15685,118 @@ msgstr "見立て違い：中身の本当の価値に25%を上乗せした{1}G�
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr "見立て違い。だが、すでに中身以上の額を払っていた。"
 
-#: scripts/Phases/OpeningPhase.cs:1067
+#: scripts/Phases/OpeningPhase.cs:1068
 msgid "Delivered"
 msgstr "納品済み"
 
-#: scripts/Phases/OpeningPhase.cs:1075
+#: scripts/Phases/OpeningPhase.cs:1076
 msgid "Filled"
 msgstr "達成済み"
 
-#: scripts/Phases/OpeningPhase.cs:1079 scripts/Phases/OpeningPhase.cs:1105
+#: scripts/Phases/OpeningPhase.cs:1080 scripts/Phases/OpeningPhase.cs:1106
 msgid "{0}/{1}: +{2}g"
 msgstr "{0}/{1}：+{2}G"
 
-#: scripts/Phases/OpeningPhase.cs:1079
+#: scripts/Phases/OpeningPhase.cs:1080
 msgid "Deliver +{0}g"
 msgstr "納品+{0}G"
 
-#: scripts/Phases/OpeningPhase.cs:1080
+#: scripts/Phases/OpeningPhase.cs:1081
 msgid ""
 "{0} wants {1}: {2}g, instead of {3}g for selling it. A commission always pays more than selling."
 msgstr "{0}の依頼：{1}。報酬は{2}G（売れば{3}G）。依頼は、いつでも売るより高く支払われます。"
 
-#: scripts/Phases/OpeningPhase.cs:1099
+#: scripts/Phases/OpeningPhase.cs:1100
 msgid "Commission! +{0}g"
 msgstr "依頼達成！+{0}G"
 
-#: scripts/Phases/OpeningPhase.cs:1124
+#: scripts/Phases/OpeningPhase.cs:1125
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr "展示点+{0}（魔力で2倍！）"
 
-#: scripts/Phases/OpeningPhase.cs:1124
+#: scripts/Phases/OpeningPhase.cs:1125
 msgid "+{0} exhibition"
 msgstr "展示点+{0}"
 
-#: scripts/Phases/OpeningPhase.cs:1136
+#: scripts/Phases/OpeningPhase.cs:1137
 msgid "On display"
 msgstr "陳列中"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Swap"
 msgstr "入れ替え"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Keep"
 msgstr "陳列"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Swap {0} (-{1}g)"
 msgstr "入れ替え{0}（-{1}G）"
 
-#: scripts/Phases/OpeningPhase.cs:1148
+#: scripts/Phases/OpeningPhase.cs:1149
 msgid "Keep {0} (-{1}g)"
 msgstr "陳列{0}（-{1}G）"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1150
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr "{1}Gで展示点{0}{2}。{3}"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1150
 msgid " (double: it's enchanted)"
 msgstr "（魔力を帯びているので2倍）"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1150
 msgid " Your display is full: sell something on it to make room."
 msgstr "陳列棚がいっぱいです：何かを売って場所を空けてください。"
 
-#: scripts/Phases/OpeningPhase.cs:1169
+#: scripts/Phases/OpeningPhase.cs:1170
 msgid ""
 "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr "陳列棚がいっぱいです。{0}（+{1}点）を置くために、何かを売ってください："
 
-#: scripts/Phases/OpeningPhase.cs:1179
+#: scripts/Phases/OpeningPhase.cs:1180
 msgid "{0}: +{1}g, -{2} pts"
 msgstr "{0}：+{1}G、-{2}点"
 
-#: scripts/Phases/OpeningPhase.cs:1181
+#: scripts/Phases/OpeningPhase.cs:1182
 msgid "+{0}g, -{1} pts"
 msgstr "+{0}G、-{1}点"
 
-#: scripts/Phases/OpeningPhase.cs:1193
+#: scripts/Phases/OpeningPhase.cs:1194
 msgid "Never mind"
 msgstr "やめておく"
 
-#: scripts/Phases/OpeningPhase.cs:1205
+#: scripts/Phases/OpeningPhase.cs:1206
 msgid "Sold the {0}: +{1}g"
 msgstr "{0}を売却：+{1}G"
 
-#: scripts/Phases/PeddlerPhase.cs:73
+#: scripts/Phases/PeddlerPhase.cs:75
 msgid "NIM'S CURIOS"
 msgstr "ニムの珍品"
 
-#: scripts/Phases/PeddlerPhase.cs:102
+#: scripts/Phases/PeddlerPhase.cs:104
 msgid "Nim's sold out: you own every curio Nim carries!"
 msgstr "ニムは品切れ：扱う珍品をすべて持っている！"
 
-#: scripts/Phases/PeddlerPhase.cs:104
+#: scripts/Phases/PeddlerPhase.cs:106
 msgid ""
 "Each curio costs a set sum for its rarity, plus a share of the gold you have tonight ({0}g)."
 msgstr "珍品の値段は、レア度ごとの決まった額に、今夜の所持金（{0}G）の一定割合を足したものです。"
 
-#: scripts/Phases/PeddlerPhase.cs:111
+#: scripts/Phases/PeddlerPhase.cs:113
 msgid "YOUR CURIOS {0}/{1}"
 msgstr "手持ちの珍品{0}/{1}"
 
-#: scripts/Phases/PeddlerPhase.cs:114
+#: scripts/Phases/PeddlerPhase.cs:116
 msgid "No room for more: click one to sell it back for half."
 msgstr "空きがありません。クリックすると半額で売り戻せます。"
 
-#: scripts/Phases/PeddlerPhase.cs:115
+#: scripts/Phases/PeddlerPhase.cs:117
 msgid "Click one to sell it back for half."
 msgstr "クリックすると半額で売り戻せます。"
 
-#: scripts/Phases/PeddlerPhase.cs:128
+#: scripts/Phases/PeddlerPhase.cs:130
 msgid ""
 "{0}: {1}\n"
 "Click to sell it back for {2}g."
@@ -15795,251 +15804,251 @@ msgstr ""
 "{0}：{1}\n"
 "クリックすると{2}Gで売り戻せます。"
 
-#: scripts/Phases/PeddlerPhase.cs:137
+#: scripts/Phases/PeddlerPhase.cs:139
 msgid "The Lantern Market"
 msgstr "提灯市"
 
-#: scripts/Phases/PeddlerPhase.cs:138
+#: scripts/Phases/PeddlerPhase.cs:140
 msgid ""
 "Under the Barrow, at midnight: Nim's people, buyers for anything gold, and the Arcanum's menagerie."
 msgstr "真夜中の塚の下：ニムの一族、金の品なら何でも買う買い手、そして魔導院の魔獣舎。"
 
-#: scripts/Phases/PeddlerPhase.cs:145
+#: scripts/Phases/PeddlerPhase.cs:147
 msgid "{0} {1}g"
 msgstr "{0}（{1}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:163
+#: scripts/Phases/PeddlerPhase.cs:165
 msgid "The back room ({0})"
 msgstr "奥の間（{0}）"
 
-#: scripts/Phases/PeddlerPhase.cs:164
+#: scripts/Phases/PeddlerPhase.cs:166
 msgid ""
 "Chests that won't open for you, anyone gilded you've brought in, and your mimic: what can be done tonight."
 msgstr "あなたには開けられない宝箱、運び込んだ金箔化した人、そしてミミック。今夜、それぞれにできること。"
 
-#: scripts/Phases/PeddlerPhase.cs:189
+#: scripts/Phases/PeddlerPhase.cs:191
 msgid "THE LANTERN MARKET"
 msgstr "提灯市"
 
-#: scripts/Phases/PeddlerPhase.cs:190
+#: scripts/Phases/PeddlerPhase.cs:192
 msgid ""
 "Under the Barrow, at midnight. Nim's people buy what can't be sold by daylight, and sell what can't be bought."
 msgstr "真夜中の塚の下。ニムの一族が、日の下では売れない物を買い、金では買えない物を売る。"
 
-#: scripts/Phases/PeddlerPhase.cs:195
+#: scripts/Phases/PeddlerPhase.cs:197
 msgid "Back up to Nim's table"
 msgstr "ニムの台へ戻る"
 
-#: scripts/Phases/PeddlerPhase.cs:229
+#: scripts/Phases/PeddlerPhase.cs:231
 msgid "A night at the weighhouse ({0}g)"
 msgstr "計量所でひと晩（{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:230
+#: scripts/Phases/PeddlerPhase.cs:232
 msgid ""
 "A Guild coat and a lantern: walk in with the carters, and copy a page of the register."
 msgstr "ギルドの外套と提灯。荷馬車屋にまぎれて入り込み、名簿を1ページ写す。"
 
-#: scripts/Phases/PeddlerPhase.cs:232
+#: scripts/Phases/PeddlerPhase.cs:234
 msgid "Bram's crate, off the road ({0}g)"
 msgstr "ブラムの木箱を横取り（{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:233
+#: scripts/Phases/PeddlerPhase.cs:235
 msgid ""
 "The bargemen take a crate chalked with Bram's name off the palace road, and Corvin brings it to your counter."
 msgstr "船頭たちが、ブラムの名がチョークで書かれた木箱を宮殿への道から横取りし、コーヴィンがカウンターまで届ける。"
 
-#: scripts/Phases/PeddlerPhase.cs:235
+#: scripts/Phases/PeddlerPhase.cs:237
 msgid "The Wet Hen, the last night ({0}g)"
 msgstr "最後の夜の濡れめんどり号（{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:236
+#: scripts/Phases/PeddlerPhase.cs:238
 msgid ""
 "The bargemen wait at the river stairs on the treasury's last night, for whoever comes out."
 msgstr "宝物庫の最後の夜、船頭たちが川の石段で、中から出てくる人を待つ。"
 
-#: scripts/Phases/PeddlerPhase.cs:237
+#: scripts/Phases/PeddlerPhase.cs:239
 msgid "NIM'S PEOPLE"
 msgstr "ニムの一族"
 
-#: scripts/Phases/PeddlerPhase.cs:238
+#: scripts/Phases/PeddlerPhase.cs:240
 msgid ""
 "\"Every road and every cart, Keywright. Ask for what you need, when you know what it is.\""
 msgstr "「道という道、荷車という荷車に顔が利くよ、鍵師さん。何が要るか分かったら、言っとくれ」"
 
-#: scripts/Phases/PeddlerPhase.cs:239
+#: scripts/Phases/PeddlerPhase.cs:241
 msgid ""
 "\"Every road and every cart, Keywright. Not answers: we don't sell those. Doors, papers and boats.\""
 msgstr "「道という道、荷車という荷車に顔が利くよ、鍵師さん。答えは売らない。そいつは扱ってないのさ。扉に、書類に、舟。それならあるよ」"
 
-#: scripts/Phases/PeddlerPhase.cs:260
+#: scripts/Phases/PeddlerPhase.cs:262
 msgid "THE MAW'S BUYERS"
 msgstr "アギトの買い手"
 
-#: scripts/Phases/PeddlerPhase.cs:261
+#: scripts/Phases/PeddlerPhase.cs:263
 msgid ""
 "Gilded men in good coats. \"Anything gold, for the master: half as much again as anyone pays.\" Every coin of it is an eye for him."
 msgstr "上等な外套を着た、金箔の男たち。「金の品なら何でも、主のために。誰よりも5割増しで買おう」その硬貨の一枚一枚が、アギトの目となる。"
 
-#: scripts/Phases/PeddlerPhase.cs:265
+#: scripts/Phases/PeddlerPhase.cs:267
 msgid "Nothing gold on your shelf."
 msgstr "陳列棚に金の品はない。"
 
-#: scripts/Phases/PeddlerPhase.cs:277
+#: scripts/Phases/PeddlerPhase.cs:279
 msgid "Sell the {0} down the Gate"
 msgstr "{0}を門の奥へ売る"
 
-#: scripts/Phases/PeddlerPhase.cs:289 scripts/Phases/PeddlerPhase.cs:319
+#: scripts/Phases/PeddlerPhase.cs:291 scripts/Phases/PeddlerPhase.cs:321
 msgid "THE MENAGERIE"
 msgstr "魔獣舎"
 
-#: scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Phases/PeddlerPhase.cs:292
 msgid "\"Yours is asleep on its gold, full. We'll bring it when it's wanted.\""
 msgstr "「お預かりのミミックは、満腹で金の上で眠っていますよ。必要なときにお連れします」"
 
-#: scripts/Phases/PeddlerPhase.cs:290
+#: scripts/Phases/PeddlerPhase.cs:292
 msgid "\"Yours is eating well. Another Guild night or so and it'll be full.\""
 msgstr "「お預かりのミミックはよく食べていますよ。あとギルドの夜を一度かそこら越せば、満腹になるでしょう」"
 
-#: scripts/Phases/PeddlerPhase.cs:292
+#: scripts/Phases/PeddlerPhase.cs:294
 msgid ""
 "\"Yours is full! Fed to sleep. A full one will eat the gold off someone gilded, you know. Or we'd pay well for it.\""
 msgstr ""
 "「満腹になりましたね！食べて眠ってしまいました。満腹のミミックは、金箔化した人の金を食べてくれるんですよ。もちろん、こちらで高く買い取ることもできます」"
 
-#: scripts/Phases/PeddlerPhase.cs:293
+#: scripts/Phases/PeddlerPhase.cs:295
 msgid ""
 "\"Yours has been fed on {0} Guild night. Twice and it's full. We could keep and feed it for you.\""
 msgid_plural ""
 "\"Yours has been fed on {0} Guild nights. Twice and it's full. We could keep and feed it for you.\""
 msgstr[0] "「ギルドの夜{0}回分の餌をもらっていますね。2回で満腹になります。こちらで預かって、餌をやることもできますよ」"
 
-#: scripts/Phases/PeddlerPhase.cs:298
+#: scripts/Phases/PeddlerPhase.cs:300
 msgid "Leave it with them ({0}g)"
 msgstr "魔獣舎に預ける（{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:306
+#: scripts/Phases/PeddlerPhase.cs:308
 msgid ""
 "They feed it on Guild nights (no gold from you) and bring it when it's wanted. Still yours."
 msgstr "ギルドの夜ごとに餌をやり（あなたの金は使わない）、必要なときに連れてきてくれる。あなたのミミックであることに変わりはない。"
 
-#: scripts/Phases/PeddlerPhase.cs:310
+#: scripts/Phases/PeddlerPhase.cs:312
 msgid "Sell your mimic (+{0}g)"
 msgstr "ミミックを売る（+{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:320
+#: scripts/Phases/PeddlerPhase.cs:322
 msgid ""
 "The Arcanum's keepers. \"Mimics, Keywright: {0}g for one fresh out of its chest, more for one fed full. Listen for a chest that breathes.\""
 msgstr ""
 "魔導院の飼育係たち。「ミミックですよ、鍵師さん。宝箱から出したてなら{0}G、満腹まで食べさせたものならもっと出します。息をする宝箱に耳をすませてください」"
 
-#: scripts/Phases/PeddlerPhase.cs:351
+#: scripts/Phases/PeddlerPhase.cs:353
 msgid "THE BACK ROOM"
 msgstr "奥の間"
 
-#: scripts/Phases/PeddlerPhase.cs:355
+#: scripts/Phases/PeddlerPhase.cs:357
 msgid "The duel's stakes, held for the winner"
 msgstr "決闘の賭け物（勝者に渡すまで預かり中）"
 
-#: scripts/Phases/PeddlerPhase.cs:356
+#: scripts/Phases/PeddlerPhase.cs:358
 msgid "{0}'s parcel, kept for collection"
 msgstr "{0}の荷物（引き取り待ち）"
 
-#: scripts/Phases/PeddlerPhase.cs:356
+#: scripts/Phases/PeddlerPhase.cs:358
 msgid "A {0} chest: {1}'s"
 msgstr "{0}の宝箱：{1}のもの"
 
-#: scripts/Phases/PeddlerPhase.cs:360
+#: scripts/Phases/PeddlerPhase.cs:362
 msgid "Return it +{0}g"
 msgstr "返す（+{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:361
+#: scripts/Phases/PeddlerPhase.cs:363
 msgid "Nim's friends +{0}g"
 msgstr "ニムの仲間へ（+{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:369
+#: scripts/Phases/PeddlerPhase.cs:371
 msgid "{0}: cold, and shaking, and free of the gold"
 msgstr "{0}：凍えて震えているが、金からは解き放たれた"
 
-#: scripts/Phases/PeddlerPhase.cs:369
+#: scripts/Phases/PeddlerPhase.cs:371
 msgid "{0}: gold from head to foot, knocking"
 msgstr "{0}：頭から爪先まで金。ノックしている"
 
-#: scripts/Phases/PeddlerPhase.cs:373
+#: scripts/Phases/PeddlerPhase.cs:375
 msgid "Let the mimic eat the gold"
 msgstr "ミミックに金を食べさせる"
 
-#: scripts/Phases/PeddlerPhase.cs:375
+#: scripts/Phases/PeddlerPhase.cs:377
 msgid "A full mimic eats the gold off one of the gilded, then wakes hungry."
 msgstr "満腹のミミックは、金箔化した人ひとりの金を食べ、また腹をすかせて目を覚ます。"
 
-#: scripts/Phases/PeddlerPhase.cs:376
+#: scripts/Phases/PeddlerPhase.cs:378
 msgid "You need a mimic, fed full. Listen for a chest that breathes."
 msgstr "満腹のミミックが必要だ。息をする宝箱に耳を澄ませよう。"
 
-#: scripts/Phases/PeddlerPhase.cs:376
+#: scripts/Phases/PeddlerPhase.cs:378
 msgid "Your mimic isn't full yet: it eats on Guild nights."
 msgstr "ミミックはまだ満腹ではない。食事はギルドの夜ごとだ。"
 
-#: scripts/Phases/PeddlerPhase.cs:381
+#: scripts/Phases/PeddlerPhase.cs:383
 msgid "Pay their note to the Guild ({0}g)"
 msgstr "ギルドに手形を払う（{0}G）"
 
-#: scripts/Phases/PeddlerPhase.cs:383
+#: scripts/Phases/PeddlerPhase.cs:385
 msgid ""
 "Freed, but the note still stands: unpaid, the Guild takes them back on its next night."
 msgstr "金からは解き放たれたが、手形はまだ有効だ。払わなければ、次のギルドの夜に連れ戻される。"
 
-#: scripts/Phases/PeddlerPhase.cs:387
+#: scripts/Phases/PeddlerPhase.cs:389
 msgid "His note is his account: pay the debt."
 msgstr "ブラムの手形は彼の勘定だ。借金を払うこと。"
 
-#: scripts/Phases/PeddlerPhase.cs:392
+#: scripts/Phases/PeddlerPhase.cs:394
 msgid "Your mimic, asleep on the gold: full."
 msgstr "ミミックは金の上で眠っている。満腹だ。"
 
-#: scripts/Phases/PeddlerPhase.cs:393
+#: scripts/Phases/PeddlerPhase.cs:395
 msgid "Your mimic: fed on {0} Guild night. It eats {1}g each one."
 msgid_plural "Your mimic: fed on {0} Guild nights. It eats {1}g each one."
 msgstr[0] "ミミック：ギルドの夜{0}回分の餌を食べた。1回につき{1}G分を食べる。"
 
-#: scripts/Phases/PeddlerPhase.cs:395 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
+#: scripts/Phases/PeddlerPhase.cs:397 scripts/Ui/CollectionView.cs:69 scripts/Ui/CreditsView.cs:34
 #: scripts/Ui/Hud.cs:100
 msgid "Close"
 msgstr "閉じる"
 
-#: scripts/Phases/PeddlerPhase.cs:493 scripts/Phases/PeddlerPhase.cs:495
+#: scripts/Phases/PeddlerPhase.cs:495 scripts/Phases/PeddlerPhase.cs:497
 msgid "Goes with your {0}"
 msgstr "手持ちの{0}と好相性"
 
-#: scripts/Phases/PeddlerPhase.cs:494
+#: scripts/Phases/PeddlerPhase.cs:496
 msgid "With your {0}"
 msgstr "{0}と好相性"
 
-#: scripts/Phases/PeddlerPhase.cs:501
+#: scripts/Phases/PeddlerPhase.cs:503
 msgid "New at {0}"
 msgstr "{0}で新登場"
 
-#: scripts/Phases/PeddlerPhase.cs:502
+#: scripts/Phases/PeddlerPhase.cs:504
 msgid "New here"
 msgstr "ここで初登場"
 
-#: scripts/Phases/PeddlerPhase.cs:507
+#: scripts/Phases/PeddlerPhase.cs:509
 msgid "Yours"
 msgstr "所持中"
 
-#: scripts/Phases/PeddlerPhase.cs:512
+#: scripts/Phases/PeddlerPhase.cs:514
 msgid "Take it, free"
 msgstr "無料でもらう"
 
-#: scripts/Phases/PeddlerPhase.cs:515
+#: scripts/Phases/PeddlerPhase.cs:517
 msgid "{0}g for a {1} curio, and {2} of your purse tonight."
 msgstr "{1}の珍品なので{0}G、さらに今夜の所持金の{2}。"
 
-#: scripts/Phases/PeddlerPhase.cs:516
+#: scripts/Phases/PeddlerPhase.cs:518
 msgid "No room: sell a curio back to Nim first. {0}"
 msgstr "空きがありません。先に珍品をニムに売り戻してください。{0}"
 
-#: scripts/Phases/PeddlerPhase.cs:517
+#: scripts/Phases/PeddlerPhase.cs:519
 msgid "{0} {1}"
 msgstr "{0}{1}"
 
@@ -16146,73 +16155,73 @@ msgstr "味方"
 msgid "none"
 msgstr "なし"
 
-#: scripts/Phases/RunEndPhase.cs:85 scripts/Phases/RunEndPhase.cs:95
+#: scripts/Phases/RunEndPhase.cs:87 scripts/Phases/RunEndPhase.cs:97
 msgid "Retire"
 msgstr "引退する"
 
-#: scripts/Phases/RunEndPhase.cs:85 scripts/Phases/RunEndPhase.cs:95
+#: scripts/Phases/RunEndPhase.cs:87 scripts/Phases/RunEndPhase.cs:97
 msgid "Hang up your apron: back to the title."
 msgstr "前掛けを外して、タイトルへ戻ります。"
 
-#: scripts/Phases/RunEndPhase.cs:91
+#: scripts/Phases/RunEndPhase.cs:93
 msgid "Keep trading"
 msgstr "商いを続ける"
 
-#: scripts/Phases/RunEndPhase.cs:93
+#: scripts/Phases/RunEndPhase.cs:95
 msgid ""
 "Nobody's coming for anything until week {0}: then the Guild wants interest, half as much again each week."
 msgstr "{0}週目までは、誰も取り立てに来ません。そこからはギルドが利息を求め、その額は毎週1.5倍になります。"
 
-#: scripts/Phases/RunEndPhase.cs:94
+#: scripts/Phases/RunEndPhase.cs:96
 msgid ""
 "The Guild keeps coming, for half as much again each week. How long can you last?"
 msgstr "ギルドは毎週、前の週の1.5倍の額を求めてやって来ます。どこまで持ちこたえられるでしょうか？"
 
-#: scripts/Phases/RunEndPhase.cs:101
+#: scripts/Phases/RunEndPhase.cs:103
 msgid "Back to the title"
 msgstr "タイトルへ戻る"
 
-#: scripts/Phases/RunEndPhase.cs:114
+#: scripts/Phases/RunEndPhase.cs:116
 msgid "{0}'S SCORE{1}"
 msgstr "{0}のスコア{1}"
 
-#: scripts/Phases/RunEndPhase.cs:114
+#: scripts/Phases/RunEndPhase.cs:116
 msgid ", LEVEL {0}"
 msgstr "（レベル{0}）"
 
-#: scripts/Phases/RunEndPhase.cs:124
+#: scripts/Phases/RunEndPhase.cs:126
 msgid "{0} x{1} = "
 msgstr "{0}×{1}＝"
 
-#: scripts/Phases/RunEndPhase.cs:126
+#: scripts/Phases/RunEndPhase.cs:128
 msgid "Score: a new best!"
 msgstr "スコア：自己ベスト更新！"
 
-#: scripts/Phases/RunEndPhase.cs:126
+#: scripts/Phases/RunEndPhase.cs:128
 msgid "Score"
 msgstr "スコア"
 
-#: scripts/Phases/RunEndPhase.cs:136
+#: scripts/Phases/RunEndPhase.cs:139
 msgid "{0} can mind the stall now!"
 msgstr "{0}も店番ができるようになった！"
 
-#: scripts/Phases/RunEndPhase.cs:138
+#: scripts/Phases/RunEndPhase.cs:141
 msgid "Challenge level {0} is open for {1}."
 msgstr "{1}の挑戦レベル{0}が解放された。"
 
-#: scripts/Phases/RunEndPhase.cs:142
+#: scripts/Phases/RunEndPhase.cs:145
 msgid "Nim has new curios for your next run: {0}."
 msgstr "次回のプレイでは、ニムが新しい珍品を持ってくる：{0}。"
 
-#: scripts/Phases/RunEndPhase.cs:143
+#: scripts/Phases/RunEndPhase.cs:146
 msgid "Nim has {0} new curios for your next run, the {1} among them."
 msgstr "次回のプレイでは、ニムが新しい珍品を{0}つ持ってくる。{1}もそのひとつだ。"
 
-#: scripts/Phases/RunEndPhase.cs:144
+#: scripts/Phases/RunEndPhase.cs:147
 msgid "Keep trading and every week you keep the Guild paid adds to the score."
 msgstr "商いを続ければ、ギルドに払い続けた週ごとにスコアが加算される。"
 
-#: scripts/Phases/RunEndPhase.cs:147
+#: scripts/Phases/RunEndPhase.cs:150
 msgid "All runs: {0} started, {1} debts cleared, best week {2}."
 msgstr "通算：開始{0}回、借金完済{1}回、最高{2}週目。"
 
@@ -16220,11 +16229,11 @@ msgstr "通算：開始{0}回、借金完済{1}回、最高{2}週目。"
 msgid "Skip"
 msgstr "スキップ"
 
-#: scripts/Phases/ScenePhase.cs:131
+#: scripts/Phases/ScenePhase.cs:132
 msgid "click for more"
 msgstr "クリックで続き"
 
-#: scripts/Phases/ScenePhase.cs:131 scripts/Ui/MentorView.cs:225
+#: scripts/Phases/ScenePhase.cs:132 scripts/Ui/MentorView.cs:225
 msgid "click to go on"
 msgstr "クリックで次へ"
 
@@ -16760,23 +16769,23 @@ msgstr "利息：{0}G"
 msgid "Due {0}g"
 msgstr "上納金：{0}G"
 
-#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:825
+#: scripts/Ui/Hud.cs:136 scripts/Ui/NotebookView.cs:826
 msgid "tonight!"
 msgstr "今夜！"
 
-#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:826
+#: scripts/Ui/Hud.cs:137 scripts/Ui/NotebookView.cs:827
 msgid "in week {0}"
 msgstr "{0}週目"
 
-#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:403 scripts/Ui/NotebookView.cs:827
+#: scripts/Ui/Hud.cs:138 scripts/Ui/NotebookView.cs:404 scripts/Ui/NotebookView.cs:828
 msgid "next week"
 msgstr "来週"
 
-#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:828
+#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:829
 msgid "tomorrow night"
 msgstr "明日の夜"
 
-#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:828
+#: scripts/Ui/Hud.cs:139 scripts/Ui/NotebookView.cs:829
 msgid "in {0} days"
 msgstr "{0}日後"
 
@@ -16857,7 +16866,7 @@ msgstr "レベル1：{0}"
 msgid "Highest level!"
 msgstr "最高レベル！"
 
-#: scripts/Ui/NotebookView.cs:138 scripts/Ui/NotebookView.cs:455
+#: scripts/Ui/NotebookView.cs:138 scripts/Ui/NotebookView.cs:456
 msgid "Next: {0}"
 msgstr "次：{0}"
 
@@ -16897,78 +16906,78 @@ msgstr "重さ"
 msgid "Note"
 msgstr "備考"
 
-#: scripts/Ui/NotebookView.cs:189
+#: scripts/Ui/NotebookView.cs:190
 msgid "If it's as good as the chest:"
 msgstr "宝箱どおりの品質なら："
 
-#: scripts/Ui/NotebookView.cs:197
+#: scripts/Ui/NotebookView.cs:198
 msgid ""
 "Light things rattle at a gentle shake, weapons at a firm one, soft things only at a hard one. Click a row to hear it."
 msgstr "軽い物はそっと、武器はしっかり振ると鳴り、柔らかい物は強く振ったときだけ鳴ります。行をクリックすると音を聞けます。"
 
-#: scripts/Ui/NotebookView.cs:198
+#: scripts/Ui/NotebookView.cs:199
 msgid ""
 "While weapons clank, delicate things go unheard: shake gently to hear past it."
 msgstr "武器がガチャンと鳴っている間は、繊細な物の音が聞こえません：そっと振れば、かき消されずに聞こえます。"
 
-#: scripts/Ui/NotebookView.cs:199
+#: scripts/Ui/NotebookView.cs:200
 msgid "Dropped, a chest with a false bottom booms hollow. Glass may break."
 msgstr "二重底の宝箱を落とすと、うつろに「ボン」と響きます。ガラスは割れることがあります。"
 
-#: scripts/Ui/NotebookView.cs:200
+#: scripts/Ui/NotebookView.cs:201
 msgid "Two or three of a kind each sound from their own spot: count them."
 msgstr "同じ種類の品が2つ3つあると、それぞれ別の場所から鳴ります：数えましょう。"
 
-#: scripts/Ui/NotebookView.cs:201
+#: scripts/Ui/NotebookView.cs:202
 msgid "Sand rustles like a scroll, but pours at a gentle shake."
 msgstr "砂は巻物と同じくカサカサ鳴りますが、そっと振っただけでも流れて鳴ります。"
 
-#: scripts/Ui/NotebookView.cs:202
+#: scripts/Ui/NotebookView.cs:203
 msgid ""
 "Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{0}.{1}"
 msgstr "どんな品も魔力を帯びることがあります：音は同じですが、魔女灯の下で光ります。価値は×{0}。{1}"
 
-#: scripts/Ui/NotebookView.cs:202
+#: scripts/Ui/NotebookView.cs:203
 msgid " Demon gold is iron under the gilt: a lodestone silences it."
 msgstr "魔金は金めっきの下が鉄：天然磁石で黙らせられます。"
 
-#: scripts/Ui/NotebookView.cs:221
+#: scripts/Ui/NotebookView.cs:222
 msgid "loud: drowns delicate"
 msgstr "大きい：繊細な音をかき消す"
 
-#: scripts/Ui/NotebookView.cs:221
+#: scripts/Ui/NotebookView.cs:222
 msgid "delicate: clanks drown it"
 msgstr "繊細：ガチャンにかき消される"
 
-#: scripts/Ui/NotebookView.cs:221
+#: scripts/Ui/NotebookView.cs:222
 msgid "soft: hard shake only"
 msgstr "柔らかい：強く振った時だけ"
 
-#: scripts/Ui/NotebookView.cs:222
+#: scripts/Ui/NotebookView.cs:223
 msgid "delicate; demon gold apes it"
 msgstr "繊細。魔金が同じ音をまねる"
 
-#: scripts/Ui/NotebookView.cs:223
+#: scripts/Ui/NotebookView.cs:224
 msgid "soft; sand sounds alike"
 msgstr "柔らかい。砂も似た音"
 
-#: scripts/Ui/NotebookView.cs:261
+#: scripts/Ui/NotebookView.cs:262
 msgid "{0} of {1} met"
 msgstr "{1}人中{0}人と面識"
 
-#: scripts/Ui/NotebookView.cs:276
+#: scripts/Ui/NotebookView.cs:277
 msgid "Friends & foes"
 msgstr "味方と敵"
 
-#: scripts/Ui/NotebookView.cs:279
+#: scripts/Ui/NotebookView.cs:280
 msgid "{0}; {1}"
 msgstr "{0}・{1}"
 
-#: scripts/Ui/NotebookView.cs:282
+#: scripts/Ui/NotebookView.cs:283
 msgid "You haven't met anyone here yet."
 msgstr "ここではまだ誰にも会っていない。"
 
-#: scripts/Ui/NotebookView.cs:295
+#: scripts/Ui/NotebookView.cs:296
 msgid ""
 "\n"
 "Wants: {0}"
@@ -16976,7 +16985,7 @@ msgstr ""
 "\n"
 "望み：{0}"
 
-#: scripts/Ui/NotebookView.cs:296
+#: scripts/Ui/NotebookView.cs:297
 msgid ""
 "\n"
 "You've noticed: {0}"
@@ -16984,142 +16993,142 @@ msgstr ""
 "\n"
 "気づいたこと：{0}"
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:301
 msgid "haggles"
 msgstr "値切りに応じる"
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:301
 msgid "you name the price"
 msgstr "こちらが値をつける"
 
-#: scripts/Ui/NotebookView.cs:300
+#: scripts/Ui/NotebookView.cs:301
 msgid "fixed price"
 msgstr "定価"
 
-#: scripts/Ui/NotebookView.cs:307
+#: scripts/Ui/NotebookView.cs:308
 msgid "your mentor"
 msgstr "師匠"
 
-#: scripts/Ui/NotebookView.cs:307
+#: scripts/Ui/NotebookView.cs:308
 msgid ""
 "Keywright at the Brindle crossroads for forty years, until his Key-mark faded and showed on your hand. Keeps a stash for bad days and a tip for everything. Never paid the Guild a penny."
 msgstr ""
 "ブリンドルの辻で40年、鍵師を務めてきた。やがて鍵紋は薄れ、あなたの手に現れた。困った日のためにへそくりを隠し持ち、何事にも助言を欠かさない。ギルドには一銭も払ったことがない。"
 
-#: scripts/Ui/NotebookView.cs:311
+#: scripts/Ui/NotebookView.cs:312
 msgid "sells curios"
 msgstr "珍品売り"
 
-#: scripts/Ui/NotebookView.cs:311
+#: scripts/Ui/NotebookView.cs:312
 msgid ""
 "Comes by every night after the shutters are down, with oddments from the Locking, each bending one rule of the trade. Notices what you buy and brings more like it. Don't ask what Nim is."
 msgstr ""
 "毎晩、店の鎧戸が下りた後にやって来る。持ってくるのは大施錠から出てきた品々で、どれも商いのルールを一つ曲げる。あなたが何を買うかを見ていて、似た品を持ってくる。ニムが何者かは、聞かないこと。"
 
-#: scripts/Ui/NotebookView.cs:314
+#: scripts/Ui/NotebookView.cs:315
 msgid "the Gilded Guild"
 msgstr "金箔ギルド"
 
-#: scripts/Ui/NotebookView.cs:314
+#: scripts/Ui/NotebookView.cs:315
 msgid ""
 "Collector for the Guild that keeps the Gate. Comes at the end of every week for the tithe Bram never paid. Miss one, and the Guild seals the shop."
 msgstr "門を守るギルドの徴収官。毎週の終わりに、ブラムが払わなかった上納金を取りに来る。一度でも払えなければ、ギルドに店を封鎖される。"
 
-#: scripts/Ui/NotebookView.cs:317
+#: scripts/Ui/NotebookView.cs:318
 msgid "the Hooded Woman"
 msgstr "フードの女"
 
-#: scripts/Ui/NotebookView.cs:317
+#: scripts/Ui/NotebookView.cs:318
 msgid ""
 "The last archmage of the Keyhold. She knows what the Keyhold put in the seal, and she can see on you that you remember."
 msgstr "鍵の砦の最後の大魔導師。鍵の砦が封印に何を込めたのかを知っていて、あなたが覚えていることを見抜いている。"
 
-#: scripts/Ui/NotebookView.cs:320
+#: scripts/Ui/NotebookView.cs:321
 msgid "knows the Keyhold"
 msgstr "鍵の砦を知る者"
 
-#: scripts/Ui/NotebookView.cs:320
+#: scripts/Ui/NotebookView.cs:321
 msgid "Knows Bram, and the Key-mark on your hand, and won't say who she is."
 msgstr "ブラムのことも、あなたの手の鍵紋のことも知っている。だが、自分が何者かは明かさない。"
 
-#: scripts/Ui/NotebookView.cs:339
+#: scripts/Ui/NotebookView.cs:340
 msgid "{0}: {1}. Click for their page."
 msgstr "{0}：{1}。クリックでページを開きます。"
 
-#: scripts/Ui/NotebookView.cs:357
+#: scripts/Ui/NotebookView.cs:358
 msgid "at your counter"
 msgstr "カウンターに来ている"
 
-#: scripts/Ui/NotebookView.cs:386
+#: scripts/Ui/NotebookView.cs:387
 msgid "Today is day {0}: week {1}, day {2} of {3}."
 msgstr "今日は{0}日目。{1}週目の{2}日目（全{3}日）。"
 
-#: scripts/Ui/NotebookView.cs:403
+#: scripts/Ui/NotebookView.cs:404
 msgid "this week"
 msgstr "今週"
 
-#: scripts/Ui/NotebookView.cs:403
+#: scripts/Ui/NotebookView.cs:404
 msgid "not planned"
 msgstr "未定"
 
-#: scripts/Ui/NotebookView.cs:405
+#: scripts/Ui/NotebookView.cs:406
 msgid "past the debt"
 msgstr "借金の期限後"
 
-#: scripts/Ui/NotebookView.cs:414
+#: scripts/Ui/NotebookView.cs:415
 msgid "today"
 msgstr "今日"
 
-#: scripts/Ui/NotebookView.cs:422
+#: scripts/Ui/NotebookView.cs:423
 msgid "A story morning: {0}, before you open."
 msgstr "物語の朝：開店前に「{0}」。"
 
-#: scripts/Ui/NotebookView.cs:439
+#: scripts/Ui/NotebookView.cs:440
 msgid "{0}: {1} said they'd come by."
 msgstr "{0}：{1}が来ると言っていた。"
 
-#: scripts/Ui/NotebookView.cs:445
+#: scripts/Ui/NotebookView.cs:446
 msgid "Guild: paid"
 msgstr "ギルド：支払済"
 
-#: scripts/Ui/NotebookView.cs:445
+#: scripts/Ui/NotebookView.cs:446
 msgid "Guild: {0}g"
 msgstr "ギルド：{0}G"
 
-#: scripts/Ui/NotebookView.cs:448
+#: scripts/Ui/NotebookView.cs:449
 msgid "The Guild's night: this week's tithe is already paid."
 msgstr "ギルドの夜：今週の上納金は支払済み。"
 
-#: scripts/Ui/NotebookView.cs:448
+#: scripts/Ui/NotebookView.cs:449
 msgid "The Guild's night: Mister Vane comes for {0}g after closing."
 msgstr "ギルドの夜：店じまいの後、ヴェイン氏が{0}Gを取り立てに来る。"
 
-#: scripts/Ui/NotebookView.cs:451
+#: scripts/Ui/NotebookView.cs:452
 msgid "The week's end"
 msgstr "週の終わり"
 
-#: scripts/Ui/NotebookView.cs:453
+#: scripts/Ui/NotebookView.cs:454
 msgid ""
 "Next week's plan is made at the start of this one: its story and its days in town."
 msgstr "来週の予定（物語と町の出来事）は、今週の始めに決まる。"
 
-#: scripts/Ui/NotebookView.cs:454
+#: scripts/Ui/NotebookView.cs:455
 msgid "Day {0}{1}: {2}"
 msgstr "{0}日目{1}：{2}"
 
-#: scripts/Ui/NotebookView.cs:454
+#: scripts/Ui/NotebookView.cs:455
 msgid " (today)"
 msgstr "（今日）"
 
-#: scripts/Ui/NotebookView.cs:454
+#: scripts/Ui/NotebookView.cs:455
 msgid "nothing special planned."
 msgstr "特に予定はない。"
 
-#: scripts/Ui/NotebookView.cs:473
+#: scripts/Ui/NotebookView.cs:474
 msgid "WHERE YOU STAND"
 msgstr "あなたの評判"
 
-#: scripts/Ui/NotebookView.cs:484
+#: scripts/Ui/NotebookView.cs:485
 msgid ""
 "{0}\n"
 "At +2: {1}\n"
@@ -17129,7 +17138,7 @@ msgstr ""
 "+2なら：{1}\n"
 "-2なら：{2}"
 
-#: scripts/Ui/NotebookView.cs:499
+#: scripts/Ui/NotebookView.cs:500
 msgid ""
 "{0}\n"
 "Now: {1}"
@@ -17137,135 +17146,135 @@ msgstr ""
 "{0}\n"
 "現在：{1}"
 
-#: scripts/Ui/NotebookView.cs:506
+#: scripts/Ui/NotebookView.cs:507
 msgid "The back room: {0} chest that won't open for you."
 msgid_plural "The back room: {0} chests that won't open for you."
 msgstr[0] "奥の間：あなたには開けられない宝箱が{0}個。"
 
-#: scripts/Ui/NotebookView.cs:513
+#: scripts/Ui/NotebookView.cs:514
 msgid "Who owes you a favour: {0}."
 msgstr "あなたに借りがある人：{0}。"
 
-#: scripts/Ui/NotebookView.cs:518
+#: scripts/Ui/NotebookView.cs:519
 msgid ""
 "On a Guild night you're short, call on one of them: they bring an eighth of the night's due. Once a season each."
 msgstr "ギルドの夜に支払いが足りなければ、このうち誰かを頼れます。その夜の上納金の8分の1を持ってきてくれます。頼れるのは今季1人1度まで。"
 
-#: scripts/Ui/NotebookView.cs:524
+#: scripts/Ui/NotebookView.cs:525
 msgid "Papers against the Guild: {0} (the King's court tries it with {1})."
 msgstr "ギルド告発の証拠：{0}件（{1}件そろえば王の法廷がギルドを裁く）。"
 
-#: scripts/Ui/NotebookView.cs:533
+#: scripts/Ui/NotebookView.cs:534
 msgid "ON THE BOARD"
 msgstr "掲示板"
 
-#: scripts/Ui/NotebookView.cs:540
+#: scripts/Ui/NotebookView.cs:541
 msgid "Nothing posted."
 msgstr "貼り紙はない。"
 
-#: scripts/Ui/NotebookView.cs:557
+#: scripts/Ui/NotebookView.cs:558
 msgid "STORIES"
 msgstr "物語"
 
-#: scripts/Ui/NotebookView.cs:559
+#: scripts/Ui/NotebookView.cs:560
 msgid "Nothing's begun yet. People will come with their troubles."
 msgstr "まだ何も始まっていない。人々が悩みを抱えてやって来るだろう。"
 
-#: scripts/Ui/NotebookView.cs:605
+#: scripts/Ui/NotebookView.cs:606
 msgid ""
 "Nothing to follow yet. When something doesn't add up, it goes here: what you saw, what you were told, and what you tried."
 msgstr "まだ追うべきことはありません。何か辻褄の合わないことがあれば、ここに書き込まれます。見たこと、聞かされたこと、試したことが。"
 
-#: scripts/Ui/NotebookView.cs:640
+#: scripts/Ui/NotebookView.cs:641
 msgid "THE TREASURY KEY: {0} OF {1}"
 msgstr "宝物庫の鍵：{0}/{1}"
 
-#: scripts/Ui/NotebookView.cs:669
+#: scripts/Ui/NotebookView.cs:670
 msgid ""
 "The plan is whole. Pay the account with the key whole, and go to the treasury."
 msgstr "計画は整った。鍵をそろえて勘定を払い、宝物庫へ向かうこと。"
 
-#: scripts/Ui/NotebookView.cs:670
+#: scripts/Ui/NotebookView.cs:671
 msgid "When every line is ticked, the treasury can end differently."
 msgstr "すべての項目にチェックが入れば、宝物庫の結末は変わりうる。"
 
-#: scripts/Ui/NotebookView.cs:695
+#: scripts/Ui/NotebookView.cs:696
 msgid "{0} (held this season)"
 msgstr "{0}（今季のみ所持）"
 
-#: scripts/Ui/NotebookView.cs:696
+#: scripts/Ui/NotebookView.cs:697
 msgid "{0} (remembered)"
 msgstr "{0}（覚えている）"
 
-#: scripts/Ui/NotebookView.cs:711
+#: scripts/Ui/NotebookView.cs:712
 msgid ""
 "No stories yet. People will come to the counter with their troubles, and the notebook will follow each one: what it's about, what's happened, and what comes next."
 msgstr ""
 "まだ物語はありません。困りごとを抱えた人々がカウンターにやって来ると、手帳がそれぞれの物語を追っていきます：どんな話か、何が起きたか、この先どうなるか。"
 
-#: scripts/Ui/NotebookView.cs:760
+#: scripts/Ui/NotebookView.cs:761
 msgid "SO FAR"
 msgstr "これまで"
 
-#: scripts/Ui/NotebookView.cs:772
+#: scripts/Ui/NotebookView.cs:773
 msgid "WHAT COMES NEXT"
 msgstr "これから"
 
-#: scripts/Ui/NotebookView.cs:772
+#: scripts/Ui/NotebookView.cs:773
 msgid "NOTHING MORE IS EXPECTED FOR NOW"
 msgstr "今のところ、続きの予定はない"
 
-#: scripts/Ui/NotebookView.cs:790
+#: scripts/Ui/NotebookView.cs:791
 msgid ""
 "Bram's debt is cleared{0}. The Guild still comes, for its interest: {1}g {2}."
 msgstr "ブラムの借金は完済{0}。それでもギルドは利息を取りに来る：{1}G（{2}）。"
 
-#: scripts/Ui/NotebookView.cs:790
+#: scripts/Ui/NotebookView.cs:791
 msgid " (day {0})"
 msgstr "（{0}日目）"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid "{0}g of Bram's debt left. Next: {1}g {2}{3}.{4}"
 msgstr "ブラムの借金は残り{0}G。次は{1}G（{2}）{3}。{4}"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid " ({0}g rolled over)"
 msgstr "、うち{0}Gは繰り越し分"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid " You could pay it all off at the day's end."
 msgstr "今なら一日の終わりに全額完済できる。"
 
-#: scripts/Ui/NotebookView.cs:791
+#: scripts/Ui/NotebookView.cs:792
 msgid " Pay it all off early from a day's end."
 msgstr "一日の終わりの画面から、前倒しで全額完済できる。"
 
-#: scripts/Ui/NotebookView.cs:794
+#: scripts/Ui/NotebookView.cs:795
 msgid "THE GUILD'S DEBT"
 msgstr "ギルドへの借金"
 
-#: scripts/Ui/NotebookView.cs:806
+#: scripts/Ui/NotebookView.cs:807
 msgid "THEN"
 msgstr "以降"
 
-#: scripts/Ui/NotebookView.cs:807
+#: scripts/Ui/NotebookView.cs:808
 msgid "x1.5 a week"
 msgstr "毎週1.5倍"
 
-#: scripts/Ui/NotebookView.cs:807
+#: scripts/Ui/NotebookView.cs:808
 msgid "{0}g  paid"
 msgstr "{0}G（支払済）"
 
-#: scripts/Ui/NotebookView.cs:812
+#: scripts/Ui/NotebookView.cs:813
 msgid ""
 "Once Bram's debt is paid, the Guild keeps coming for interest: each week half as much again as the last."
 msgstr "ブラムの借金を完済した後も、ギルドは利息を取りに来る：毎週、前の週の1.5倍。"
 
-#: scripts/Ui/NotebookView.cs:813
+#: scripts/Ui/NotebookView.cs:814
 msgid "Week {0}: paid."
 msgstr "{0}週目：支払済。"
 
-#: scripts/Ui/NotebookView.cs:813
+#: scripts/Ui/NotebookView.cs:814
 msgid "Week {0}: Mister Vane comes for {1}g on the fifth evening."
 msgstr "{0}週目：5日目の夕方に、ヴェイン氏が{1}Gを取り立てに来る。"
 

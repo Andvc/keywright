@@ -410,7 +410,7 @@ public static class Sellers
             Wants = Loc.T("To keep the Crossed Keys, and her secrets. Everyone's news passes through her taproom first."),
             Facts = new[] { Loc.T("Pulls pints left-handed."), Loc.T("Ink on her fingers from the tally."), Loc.T("Wears house slippers; never rides.") },
             Stories = Tell(("tab", new[] { Loc.T("Some adventurer left this for his tab at the Crossed Keys. So much a rattle, as ever: {price}."),
-                                           Loc.T("Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}. And I've news, if you're buying.") })),
+                                           Loc.T("Three nights' ale and a broken bench, paid in chest. I charge by the rattle, love: {price}.") })),
             Habit = Loc.T("Keeps the Crossed Keys at the crossroads, takes chests for unpaid tabs, and hears everything first. She gives one a firm " +
                     "shake, counts the rattles, and charges the same for each, whatever's rattling: a goblin cleaver costs what a purse of coin does."),
             Accepts = new[] { Loc.T("Pleasure doing business!"), Loc.T("Done, love. Come by for a pint, and the news.") },
