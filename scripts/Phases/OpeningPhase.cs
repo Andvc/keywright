@@ -901,7 +901,7 @@ public partial class OpeningPhase : Phase
         int piecesBefore = State.Pieces.Count;
         State.ReadTrue(_purchase.Chest, perfect);
         // A piece of the treasury key for this read (0.34): said here too, not only in the note over the top bar.
-        string piece = State.Pieces.Count > piecesBefore && State.NewPieces.LastOrDefault() is var (key, pieceFee) && key != null
+        string piece = State.Pieces.Count > piecesBefore && State.NewPieces.LastOrDefault() is var (key, pieceFee, _) && key != null
             ? Loc.T($" {Campaign.PieceName(key)} of the treasury key for that read, and a master's fee of {pieceFee}g.") : "";
         if (perfect) State.Today.PerfectReads++;
 

@@ -253,6 +253,9 @@ public partial class Main : Node2D
                 if (!Simulation.FastForward(State, (startWeek - 1) * Guild.DaysPerWeek))
                     GD.Print($"--start-week: this seed's shop was foreclosed in week {State.Week}; starting from there anyway");
                 State.Guided = !args.Contains("--no-tutorial");
+                // What the skipped weeks noted is in the notebook: no notes over the top bar for it.
+                State.NewPieces.Clear();
+                State.NewEntries.Clear();
                 if (int.TryParse(Arg(args, "--gold"), out var gold)) State.Gold = gold;
                 foreach (var key in new[] { "intro", "dayend", "colours", "slip", "ledger", "upgrades", "display", "synergy", "tier2", "tier3", "tier4" })
                     State.HintsSeen.Add(key);
@@ -544,15 +547,22 @@ public partial class Main : Node2D
     }
 
     /// <summary>A piece of the treasury key just earned: the Guild's courier, over the top bar.</summary>
-    void NotePiece(string piece, int fee)
+    void NotePiece(string piece, int fee, int count)
     {
         Hud.SetGold(State.Gold);
-        Toast(Loc.T($"{Campaign.PieceName(piece)} of the treasury key"), Loc.T($"{State.Pieces.Count} of {Campaign.Pieces.Length}, and a master's fee: +{fee}g"),
+        Toast(Loc.T($"{Campaign.PieceName(piece)} of the treasury key"), Loc.T($"{count} of {Campaign.Pieces.Length}, and a master's fee: +{fee}g"),
             Palette.Gold, Loc.T("Open the notebook's Inquiry page"), () => _phase?.ShowInquiry());
     }
 
     /// <summary>The note over the top bar now showing, if any (the next waits for it to go).</summary>
     CanvasLayer _toast;
+
+    /// <summary>Takes the note over the top bar away at once (the notebook it points to has just been opened).</summary>
+    public void HideNote()
+    {
+        if (_toast != null && IsInstanceValid(_toast)) _toast.QueueFree();
+        _toast = null;
+    }
 
     void Toast(string head, string text, Color color, string tooltip, System.Action click)
     {
@@ -697,6 +707,14 @@ public partial class Main : Node2D
     {
         Hud.Visible = true;
         Hud.SetGold(State.Gold, animate: false);
+        // A jump (--start-week) stopped on the night the treasury's due: that night, not another day first.
+        if (State.TreasuryDue)
+        {
+            Hud.SetDay(State.Day, State.Tier);
+            Hud.SetDue(State);
+            Treasury();
+            return;
+        }
         StartDay();
     }
 
@@ -1202,9 +1220,9 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         // An Inquiry entry just noted, or a piece of the treasury key earned (0.34): a note over the top bar, one at a time.
-        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not { HoldsNotes: true })
+        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not { HoldsNotes: true } && NotebookView.Open == 0)
         {
-            if (State.NewPieces.TryDequeue(out var piece)) NotePiece(piece.Piece, piece.Fee);
+            if (State.NewPieces.TryDequeue(out var piece)) NotePiece(piece.Piece, piece.Fee, piece.Count);
             else if (State.NewEntries.TryDequeue(out var entry))
             {
                 // Several for one question at once (a scene's lines): one note, with each way they came.

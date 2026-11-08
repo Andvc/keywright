@@ -55,8 +55,17 @@ public partial class NotebookView : Node2D
 
     static Audio.Sfx Sfx => Main.Instance.Sfx;
 
+    /// <summary>How many notebooks are open: the notes over the top bar (which would cover its tabs) wait meanwhile.</summary>
+    public static int Open { get; private set; }
+
+    public override void _EnterTree() => Open++;
+
+    public override void _ExitTree() => Open = Math.Max(0, Open - 1);
+
     public override void _Ready()
     {
+        // What a note over the top bar says is on these pages: it gives way to them.
+        Main.Instance?.HideNote();
         var blocker = new ColorRect { Color = new Color(0, 0, 0, 0.7f), MouseFilter = Control.MouseFilterEnum.Stop }.Place(-100, -100, 1480, 920);
         blocker.GuiInput += e =>
         {

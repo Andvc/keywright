@@ -87,8 +87,10 @@ public partial class GameState
 
     public bool KeyWhole => Pieces.Count >= Campaign.Pieces.Length;
 
-    /// <summary>Pieces just earned and the fee each came with, for the screen to show one at a time.</summary>
-    public Queue<(string Piece, int Fee)> NewPieces { get; } = new();
+    /// <summary>
+    /// Pieces just earned, with the fee each came with and how many the key had then, for the screen to show one at a time.
+    /// </summary>
+    public Queue<(string Piece, int Fee, int Count)> NewPieces { get; } = new();
 
     /// <summary>Bram has gone with Vane to the treasury (the first Guild night).</summary>
     public bool BramAway { get; private set; }
@@ -134,7 +136,7 @@ public partial class GameState
         if (CampaignDone || TreasuryDone || Flagged("bargained") || !Campaign.Pieces.Contains(piece) || !Pieces.Add(piece)) return false;
         int fee = Purses(Campaign.FeePurses);
         TaleGold(fee);
-        NewPieces.Enqueue((piece, fee));
+        NewPieces.Enqueue((piece, fee, Pieces.Count));
         Log(Story.Tale, Loc.T($"{Campaign.PieceName(piece)} of the treasury key came by Guild courier, with a master's fee of {fee}g and Mister Vane's compliments."));
         return true;
     }
