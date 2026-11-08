@@ -28,9 +28,9 @@ public partial class RunEndPhase : Phase
         Add(UiKit.MakeShop(State.Tier, _cleared ? 0.65f : 0.4f, ShopHour.Evening, State));
         var color = _cleared ? Palette.Gold : Palette.Bad;
         string title = _cleared
-            ? State.GateOpens ? Loc.T("THE GATE OPENS")
-            : State.VaultOpened ? State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE LOCKING HOLDS")
-            : State.OnTrial ? Loc.T("THE GUILD ON TRIAL") : Loc.T("FREE AND CLEAR")
+            ? State.TreasuryEnd == Campaign.Morning ? Loc.T("THE NEXT DAY")
+            : State.TreasuryEnd == Campaign.Stayed ? Loc.T("THE TREASURY OPENS WITHOUT YOU")
+            : Loc.T("FREE AND CLEAR")
             : Loc.T("FORECLOSED");
         var logo = Add(UiKit.MakeLabel(title, 64, color, HorizontalAlignment.Center, outline: 8).Place(0, 80, 1280, 80));
         logo.PivotOffset = new Vector2(640, 40);
@@ -40,12 +40,12 @@ public partial class RunEndPhase : Phase
         string paid = early > 0 ? Loc.Plural(early, $"Bram's debt is paid, {early} week early", $"Bram's debt is paid, {early} weeks early")
             : Loc.T("Bram's debt is paid");
         string sub = _cleared
-            ? State.GateOpens ? Loc.T("Bram's debt is paid, by the Maw. He has the Key, and the Gilded Gate stands open.")
-            : State.VaultOpened ? Loc.T($"{paid}, the Crown Chest opened, and the Gate gone quiet.")
-            : State.OnTrial ? Loc.T($"{paid}, and the Guild on trial in the King's court.")
-            : State.MapGiven ? Loc.T($"{paid}. The Guild has the Key's shards; let them look for the Chest.")
-            : State.Week < Guild.Weeks && State.MapPieces > 0 ? Loc.T($"{paid}. Find the rest of the Key before the season's last night.")
-            : Loc.T($"{paid}. Bram's hand is his own again, but nobody had the Key when the Crown's note fell due.")
+            ? State.TreasuryEnd == Campaign.Morning ? Loc.T($"{paid}, everyone brought out of the treasury, and a morning the season has never reached.")
+            : State.TreasuryEnd == Campaign.Stayed ? Loc.T($"{paid}. You stayed away, and the Guild opened the treasury with Bram.")
+            : State.CampaignDone ? Loc.T($"{paid}, another year.")
+            : State.Week < Guild.Weeks && !State.KeyWhole ? Loc.T($"{paid}. Earn the rest of the treasury key before the season's last night.")
+            : State.BramHome ? Loc.T($"{paid}, and Bram is home.")
+            : Loc.T($"{paid}, and Bram never came home.")
             : State.DebtCleared ? Loc.T($"Bram's debt was paid, but the Guild's interest caught up with you in week {State.Week}.")
             : Loc.T($"The Guild took the shop in week {State.Week}.");
         // One line under the title: smaller when the words (a paid-early debt and what came of the Key) won't fit at 24.
@@ -60,7 +60,7 @@ public partial class RunEndPhase : Phase
             (Loc.T("The chests brought in"), Money.Short(State.TotalEarned)),
             (Loc.T("Gold in hand"), Money.Short(State.Gold)),
             (Loc.T("Collection"), Loc.T($"{State.Found.Count} of {Collection.Size}")),
-            (Loc.T("Key shards"), State.MapGiven ? Loc.T("given to the Guild") : Loc.T($"{State.MapPieces} of {Story.Pieces}")),
+            (Loc.T("The treasury key"), Loc.T($"{State.Pieces.Count} of {Campaign.Pieces.Length} pieces")),
             (Loc.T("Curios"), $"{State.CurioKeys.Count}"),
             // The season's people: how many of its tales got going, and who counts you a friend.
             (Loc.T("Tales begun"), Loc.T($"{State.TaleLog.Count} of {State.TalesDrawn.Count}")),
@@ -137,7 +137,7 @@ public partial class RunEndPhase : Phase
         if (_cleared && State.Week <= Guild.Weeks) news.Add(Loc.T("Keep trading and every week you keep the Guild paid adds to the score."));
         if (news.Count > 0) return string.Join("  ", news);
         return profile is { Runs: > 0 }
-            ? Loc.T($"All runs: {profile.Runs} started, {profile.Cleared} debts cleared, {profile.Vaults} Crown Chests opened, best week {profile.BestWeek}.")
+            ? Loc.T($"All runs: {profile.Runs} started, {profile.Cleared} debts cleared, best week {profile.BestWeek}.")
             : "";
     }
 

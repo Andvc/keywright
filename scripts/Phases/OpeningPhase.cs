@@ -63,9 +63,7 @@ public partial class OpeningPhase : Phase
 
         Add(UiKit.MakeShop(State.Tier, 0.6f, ShopView.LastHour, State));
         _rays = Add(new Painter(DrawRays) { Position = SeamPos, Material = Fx.Additive() });
-        // The Crown Chest is King Aldric's own.
-        string skin = _purchase.Visit.Seller == Story.VaultSeller ? "crown" : _purchase.Chest.Skin;
-        _chest = Add(new ChestView { Position = SeamPos, Skin = skin, GlowColor = Palette.Of(_colour) });
+        _chest = Add(new ChestView { Position = SeamPos, Skin = _purchase.Chest.Skin, GlowColor = Palette.Of(_colour) });
         // The burst is in the chest's own colour: what's better than that is for the things inside to show.
         _sparks = Add(Fx.Sparks(Palette.Of(_colour), 60 + 20 * (int)_colour, 240, 720, spread: 60f, lifetime: 1.3f));
         _sparks.Position = SeamPos;
@@ -75,8 +73,7 @@ public partial class OpeningPhase : Phase
 
         // The tally stays put while the camera leans in.
         var tally = Add(new CanvasLayer { Layer = 1 });
-        bool vault = _purchase.Visit.Seller == Story.VaultSeller;
-        tally.AddChild(UiKit.MakeLabel(vault ? Loc.T("The Crown Chest") : Loc.T($"Paid {_purchase.Visit.Seller.Short}"), 16, Palette.Muted).Place(40, 80, 200, 20));
+        tally.AddChild(UiKit.MakeLabel(Loc.T($"Paid {_purchase.Visit.Seller.Short}"), 16, Palette.Muted).Place(40, 80, 200, 20));
         tally.AddChild(UiKit.MakeLabel(Money.Short(_purchase.Paid), 24, Palette.Text, HorizontalAlignment.Right, outline: 4).Place(200, 74, 120, 30));
         tally.AddChild(UiKit.MakeLabel(Loc.T("Worth"), 16, Palette.Muted).Place(40, 114, 200, 20));
         _worthLabel = UiKit.MakeLabel(Money.Short(0), 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 108, 120, 30);
@@ -96,8 +93,8 @@ public partial class OpeningPhase : Phase
 
     CanvasLayer _tally;
 
-    /// <summary>Taken sight unseen (not the Crown Chest, not a gift): what you didn't mark is unseen, not missed.</summary>
-    bool Blind => _purchase.SightUnseen && !_purchase.Visit.Gift && _purchase.Visit.Seller != Story.VaultSeller;
+    /// <summary>Taken sight unseen (not a gift, not a crate): what you didn't mark is unseen, not missed.</summary>
+    bool Blind => _purchase.SightUnseen && !_purchase.Visit.Gift && _purchase.Chest.Crate == null;
 
     /// <summary>A thing you didn't mark on a chest you never handled: nobody could have read it, so it's no miss.</summary>
     bool Unseen(ItemRead read) => Blind && read.Kind is ReadKind.Missed or ReadKind.MissedMagic or ReadKind.MissedHidden;
@@ -231,6 +228,12 @@ public partial class OpeningPhase : Phase
             await MimicOut();
             if (!Alive) return;
         }
+        // A Guild crate (0.34): someone gilded, who knocks.
+        if (_purchase.Chest.Crate is string person)
+        {
+            await CrateOut(person);
+            if (!Alive) return;
+        }
         float spacing = n == 0 ? 0 : Math.Min(232f, 1180f / n);
         _spacing = spacing;
         LayOutNames(reads, spacing);
@@ -308,6 +311,35 @@ public partial class OpeningPhase : Phase
         Verdict();
     }
 
+    // ---- A Guild crate (0.34, docs/narrative.md) ----
+
+    /// <summary>The crate's lid comes up on someone gilded from head to foot, who knocks on the inside of their gold: into the back room.</summary>
+    async Task CrateOut(string person)
+    {
+        State.TakeIn(person);
+        var figure = Add(new Sprite2D
+        {
+            Texture = ArtTexture.Load($"res://assets/figures/{Story.Look(person)}.png"), Scale = Vector2.One * 0.55f,
+            Position = SeamPos + new Vector2(0, -40), ZIndex = 5, Modulate = new Color(1, 1, 1, 0),
+        });
+        Gilt.Statue(figure);
+        var tween = figure.CreateTween().SetParallel();
+        tween.TweenProperty(figure, "modulate:a", 1f, 0.5f);
+        tween.TweenProperty(figure, "position:y", SeamPos.Y - 120, 0.8f).SetEase(Tween.EaseType.Out);
+        Sfx.Play("knock", 0.9f, -2);
+        Game.Shake(0.2f);
+        await Wait(0.9);
+        if (!Alive) return;
+        FloatText(Loc.T($"{Story.Name(person)}, gold from head to foot. And knocking."), SeamPos + new Vector2(0, -230), Palette.Gold, 24);
+        Sfx.Play("knock", 1f, -4);
+        Game.Moment("08_crate", 0.4);
+        await Wait(1.6);
+        if (!Alive) return;
+        FloatText(Loc.T("Into the back room"), SeamPos + new Vector2(0, -150), Palette.Magic, 24);
+        figure.CreateTween().TweenProperty(figure, "modulate:a", 0f, 0.5f);
+        await Wait(0.6);
+    }
+
     // ---- A mimic (0.33, Core/Mimics.cs) ----
 
     Control _mimicPanel;
@@ -360,7 +392,7 @@ public partial class OpeningPhase : Phase
         _mimicPanel.AddChild(sell);
         var keep = UiKit.MakeButton(Loc.T("Keep it in the back room"), Palette.Magic, 16, () => ChooseMimic(true)).Place(350, 70, 310, 56);
         keep.TooltipText = State.CanKeepMimic
-            ? Loc.T($"It eats {State.MimicFeed}g of gold on each Guild night. No thief tries a door it's behind, and once it's eaten twice it's big enough to eat the gold off one of the gilded.")
+            ? Loc.T($"It eats {State.MimicFeed}g of gold on each Guild night. No thief tries a door it's behind. Fed twice it's full, and a full mimic will eat the gold off someone gilded.")
             : Loc.T("You keep one already, and two would eat each other.");
         keep.Disabled = !State.CanKeepMimic;
         _mimicPanel.AddChild(keep);
@@ -864,10 +896,12 @@ public partial class OpeningPhase : Phase
         int profit = back - _purchase.Paid;
         State.Earn(_worth);
         State.RecordRead(perfect);
+        State.ReadTrue(_purchase.Chest, perfect);
         if (perfect) State.Today.PerfectReads++;
 
-        var color = profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
-        string text = profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
+        bool crate = _purchase.Chest.Crate != null;
+        var color = crate ? Palette.Magic : profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
+        string text = crate ? Loc.T("SOMEONE'S IN THE BACK ROOM") : profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
         var stamp = Add(UiKit.MakePanel(color).Place(320, 104, 480, 76));
         stamp.ZIndex = 10;
         stamp.AddChild(UiKit.MakeLabel(text, 40, color, HorizontalAlignment.Center, outline: 6).Place(0, 14, 480, 50));
@@ -928,7 +962,7 @@ public partial class OpeningPhase : Phase
         told.TooltipText = told.Text;
         Add(told);
         bool last = State.Queue.Count == 0;
-        Add(UiKit.MakeButton(visit.Seller == Story.VaultSeller ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
+        Add(UiKit.MakeButton(visit.Beat == GameState.WaterwheelBeat ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
             .Place(980, 300, 280, 52));
         foreach (var (item, at, worth) in _landed)
             if (State.DisplayOpen && !item.IsSong) AddKeepButton(item, at, worth);
@@ -945,7 +979,6 @@ public partial class OpeningPhase : Phase
         // A blind buy's closed eyes, explained the first time; otherwise what ticks and crosses mean.
         if (_report.Items.Any(Unseen)) Teach("unseen");
         else Teach("opened");
-        if (visit.Seller == Story.VaultSeller) Game.Moment("24_vault", 1.5);
         if (_landed.Any(l => l.Item.IsSong)) Teach("song_found");
         if (_landed.Any(l => l.Item.Quality == Rarity.Legendary && !l.Item.IsSong)) Teach("gold");
         else if (_landed.Any(l => l.Item.Quality != _purchase.Chest.Quality && l.Item.Displayable && !l.Item.IsSong)) Teach("quality");
@@ -1037,7 +1070,7 @@ public partial class OpeningPhase : Phase
             }
             int pay = State.CommissionPay(c, worth);
             button.Text = Narrow ? Loc.T($"+{pay}g") : c.Story ? Loc.T($"Shard +{pay}g") : c.Needed > 1 ? Loc.T($"{c.Delivered + 1}/{c.Needed}: +{pay}g") : Loc.T($"Deliver +{pay}g");
-            button.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {pay}g{(c.Story ? Loc.T(" and a shard of the Aldric Key") : "")}, instead of {worth}g for selling it. A commission always pays more than selling.");
+            button.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {pay}g, instead of {worth}g for selling it. A commission always pays more than selling.");
         }
     }
 
@@ -1047,7 +1080,6 @@ public partial class OpeningPhase : Phase
         var c = State.WantedBy(item);
         var entry = _deliverButtons.FirstOrDefault(d => d.Item == item);
         if (c == null || entry.Button == null || _delivered.Contains(item) || State.Display.Contains(item)) return 0;
-        int pieces = State.MapPieces;
         int reward = State.Deliver(item, c, entry.Worth, entry.Worth);
         _delivered.Add(item);
         var at = _landed.FirstOrDefault(l => l.Item == item).At;
@@ -1058,13 +1090,6 @@ public partial class OpeningPhase : Phase
             Sfx.PlayGroup("pay");
             Fx.Burst(this, at, Palette.Good, 60, 320f);
             FloatText(Loc.T($"Commission! +{reward}g"), at + new Vector2(0, -100), Palette.Good, 24);
-            if (State.MapPieces > pieces)
-            {
-                Fx.Confetti(this, new Vector2(640, 200), 100);
-                FloatText(Loc.T($"KEY SHARD {State.MapPieces} OF {Story.Pieces}!"), new Vector2(640, 200), Palette.Magic, 40);
-                _mentor?.Say(Story.HoodThanks(State.HoodPieces));
-                Game.Moment("08_map", 0.4);
-            }
         }
         else
         {

@@ -4,13 +4,14 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <summary>
-/// Mimics (0.33, docs/narrative.md, "The side stories"): where the Locking frays, an old ward goes hungry, eats what was
-/// in its chest and lives on gold. A mimic breathes: while the chest sits still you can hear it, the only sound a still
-/// chest ever makes, and it holds its breath while it's shaken. Nothing inside rattles, so a seller who listens thinks
-/// the chest is empty and prices it so (one who prices by colour prices it by its colour, as ever). Opened, it's a
-/// creature: the Arcanum's menagerie buys it, or you keep it in the back room and feed it on Guild nights, and one fed
-/// long enough grows big enough to eat the gold off one of the gilded. Every rule holds every time: a breathing chest
-/// always holds a mimic, and a mimic always breathes.
+/// Mimics (0.33; 0.34, docs/narrative.md): where the Locking frays, an old ward goes hungry, eats what was in its chest and
+/// lives on gold. A mimic breathes: while the chest sits still you can hear it, the only sound a still chest ever makes,
+/// and it holds its breath while it's shaken. Nothing inside rattles, so a seller who listens thinks the chest is empty
+/// and prices it so (one who prices by colour prices it by its colour, as ever). They breathe only once you remember the
+/// treasury (the first one you meet is the first you've reason to listen for). Opened, it's a creature with a finite
+/// appetite: keep it in the back room and feed it on Guild nights, leave it with the Arcanum's menagerie (they feed it),
+/// or sell it to them. Fed twice it's full and falls asleep, and a full mimic will eat the gold off one of the gilded,
+/// then wake hungry again. Every rule holds every time: a breathing chest always holds a mimic, and a mimic always breathes.
 /// </summary>
 public static class Mimics
 {
@@ -24,31 +25,37 @@ public static class Mimics
     /// <summary>What the menagerie pays for one, in working purses (a purse is two typical chests here); more for one you've raised.</summary>
     public const float PursesFor = 0.6f, PursesGrown = 1.6f;
 
-    /// <summary>What a kept mimic eats on each Guild night, in purses; and the Guild nights fed before it's grown.</summary>
+    /// <summary>What a kept mimic eats on each Guild night, in purses; and the Guild nights fed before it's full.</summary>
     public const float FeedPurses = 0.15f;
     public const int GrowsAfter = 2;
 
-    /// <summary>The flag for the Thornwick statue a grown mimic woke (one of the three).</summary>
-    public const string ThornwickWoke = "mimic.thornwick"; // loc: keys
+    /// <summary>What the menagerie asks to keep and feed one for you, in purses (once).</summary>
+    public const float KeepingPurses = 0.4f;
 }
 
 public partial class GameState
 {
-    /// <summary>A mimic kept in the back room: the Guild nights it's been fed (null: none).</summary>
+    /// <summary>A mimic in your care (the back room, or the menagerie's): the Guild nights it's been fed since it last ate a shell (null: none).</summary>
     public int? Mimic { get; private set; }
 
-    public bool MimicGrown => Mimic >= Mimics.GrowsAfter;
+    /// <summary>Your mimic is fed to its fill, asleep on the gold: it will eat the gold off one of the gilded.</summary>
+    public bool MimicFull => Mimic >= Mimics.GrowsAfter;
+
+    /// <summary>Your mimic is kept and fed at the Arcanum's menagerie, not in the back room.</summary>
+    public bool MimicAtMenagerie { get; private set; }
+
+    /// <summary>What the menagerie asks to keep yours.</summary>
+    public int KeepingPrice => Purses(Mimics.KeepingPurses);
 
     /// <summary>What the menagerie pays for a mimic just opened, and for the one you keep (more once it's grown).</summary>
     public int FreshMimicPrice => Purses(Mimics.PursesFor);
-    public int KeptMimicPrice => Purses(MimicGrown ? Mimics.PursesGrown : Mimics.PursesFor);
+    public int KeptMimicPrice => Purses(MimicFull ? Mimics.PursesGrown : Mimics.PursesFor);
 
     /// <summary>What it eats on a Guild night.</summary>
     public int MimicFeed => Purses(Mimics.FeedPurses);
 
-    /// <summary>Mimics opened this season, and the gilded a grown one has woken (the sim's tally, the season's end).</summary>
+    /// <summary>Mimics opened this season (the sim's tally).</summary>
     public int MimicsFound { get; private set; }
-    public int MimicsWoke { get; private set; }
 
     int _breaths;
 
@@ -60,8 +67,8 @@ public partial class GameState
     Visit Breathe(Visit visit)
     {
         var chest = visit.Chest;
-        if (Tier < Mimics.FromTier || visit.Gift || visit.Lesson != null || chest.Stolen || chest.Song != null || chest.Warded != null || chest.Sealed ||
-            chest.Tale != null || chest.Breathing)
+        if (!Remembers || CampaignDone || Tier < Mimics.FromTier || visit.Gift || visit.Lesson != null || chest.Stolen || chest.Song != null || chest.Warded != null ||
+            chest.Sealed || chest.Tale != null || chest.Breathing || chest.Crate != null)
             return visit;
         var rng = new Random(unchecked(Seed * 7331 + Day * 131 + ++_breaths));
         if (rng.Next(Mimics.OneIn) != 0) return visit;
@@ -74,7 +81,11 @@ public partial class GameState
     }
 
     /// <summary>A breathing chest's been opened: the mimic's out.</summary>
-    public void OpenedMimic() => MimicsFound++;
+    public void OpenedMimic()
+    {
+        MimicsFound++;
+        Note("mimic");
+    }
 
     /// <summary>Whether a mimic just opened can be kept (there's room for one in the back room).</summary>
     public bool CanKeepMimic => Mimic == null;
@@ -92,70 +103,72 @@ public partial class GameState
     {
         if (!CanKeepMimic) return false;
         Mimic = 0;
+        MimicAtMenagerie = false;
         Log(Story.Tale, Loc.T("You kept a mimic in the back room. It eats gold on Guild nights, and no thief will try a door it's behind."));
         return true;
     }
 
-    /// <summary>The kept mimic goes to the menagerie (at the Lantern Market). Returns what it paid.</summary>
+    /// <summary>
+    /// Your mimic goes to the Arcanum's menagerie to be kept and fed for you (for those who'd rather not do the feeding):
+    /// still yours, it's full after the same two Guild nights, and they'll bring it when it's wanted. False if you can't pay.
+    /// </summary>
+    public bool EntrustMimic()
+    {
+        if (Mimic == null || MimicAtMenagerie || Gold < KeepingPrice) return false;
+        Gold -= KeepingPrice;
+        MimicAtMenagerie = true;
+        Log(Story.Tale, Loc.T("You left your mimic with the Arcanum's menagerie. They'll feed it, and bring it when it's wanted."));
+        return true;
+    }
+
+    /// <summary>The kept mimic goes to the menagerie for good (at the Lantern Market). Returns what it paid.</summary>
     public int SellKeptMimic()
     {
         if (Mimic == null) return 0;
         int price = KeptMimicPrice;
         Mimic = null;
+        MimicAtMenagerie = false;
         Earn(price);
         return price;
     }
 
     /// <summary>
-    /// A Guild night, for a kept mimic (before the Guild collects): it eats, or slips away hungry; grown, it eats the gold
-    /// off one of the gilded nearest the counter, and they wake.
+    /// A Guild night, for a mimic in your care (before the Guild collects): it eats (the menagerie feeds theirs), or slips
+    /// away hungry; fed twice, it's full, and sleeps.
     /// </summary>
     void FeedMimic()
     {
         if (Mimic is not int fed) return;
-        if (Gold < MimicFeed)
+        if (!MimicAtMenagerie)
         {
-            Mimic = null;
-            Log(Story.Tale, Loc.T("Your mimic went hungry on the Guild's night, and slipped away through the back door."));
-            return;
+            if (Gold < MimicFeed)
+            {
+                Mimic = null;
+                Log(Story.Tale, Loc.T("Your mimic went hungry on the Guild's night, and slipped away through the back door."));
+                return;
+            }
+            Gold -= MimicFeed;
         }
-        Gold -= MimicFeed;
+        bool wasFull = MimicFull;
         Mimic = fed + 1;
-        if (MimicGrown && Ungild() is string who)
-            Log(Story.Tale, Loc.T($"Your mimic is grown. Tonight it ate the gold off {who}, who woke up cold, and very confused."));
-    }
-
-    /// <summary>A grown mimic's meal: whoever the Guild collected, or one of Thornwick's three. Who woke, or null.</summary>
-    string Ungild()
-    {
-        if (VaultOpened) return null;
-        if (Gilded.Keys.OrderBy(k => k, StringComparer.Ordinal).FirstOrDefault() is string person)
+        if (MimicFull && !wasFull)
         {
-            Gilded.Remove(person);
-            Gone.Remove(person);
-            Flags.Add($"ungilded.{person}"); // loc: keys
-            MimicsWoke++;
-            Sway(Faction.Commons, 1);
-            return Sellers.Person(person).Name;
+            Note("full");
+            Log(Story.Tale, Loc.T("Your mimic ate its fill tonight, curled up on the gold, and fell asleep. It wanted something. It didn't want everything."));
         }
-        if (Flagged(Mimics.ThornwickWoke)) return null;
-        Flags.Add(Mimics.ThornwickWoke);
-        MimicsWoke++;
-        Sway(Faction.Commons, 1);
-        return Loc.T("a cooper in Thornwick's square");
     }
 
     void SaveMimic(SaveData data)
     {
         data.Mimic = Mimic ?? -1;
         data.MimicsFound = MimicsFound;
-        data.MimicsWoke = MimicsWoke;
+        data.MimicAtMenagerie = MimicAtMenagerie;
     }
 
     void LoadMimic(SaveData data)
     {
         Mimic = data.Mimic >= 0 ? data.Mimic : null;
         MimicsFound = data.MimicsFound;
-        MimicsWoke = data.MimicsWoke;
+        MimicAtMenagerie = data.MimicAtMenagerie;
     }
 }

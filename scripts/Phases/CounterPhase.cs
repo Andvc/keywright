@@ -1117,10 +1117,10 @@ public partial class CounterPhase : Phase
     }
 
     /// <summary>A new clue's note was clicked: the notebook at the case.</summary>
-    public override bool ShowCase()
+    public override bool ShowInquiry()
     {
         if (Busy) return false;
-        OpenNotebook(NotebookView.CasePage);
+        OpenNotebook(NotebookView.InquiryPage);
         return true;
     }
 

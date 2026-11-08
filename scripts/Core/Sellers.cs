@@ -878,12 +878,18 @@ public static class Sellers
             Wants = Loc.T("Thieves caught and chests home; and to know why the Guild's foreclosed chests won't open for anyone."),
             Habit = Loc.T("The Wardens' sergeant at the Thornwick toll: posts the wanted notices, searches the market, pays a finder's share for a stolen chest sent home."),
         },
-        // 0.33: the Gilding's (TaleBook.Gilding.cs).
+        // 0.34: the campaign's (TaleBook.Campaign.cs).
         new()
         {
             Key = "nell", Look = "shelly", Name = Loc.T("Nell Haddon"), Short = Loc.T("Nell"), Tier = 1, Visits = 0, Of = Faction.Commons,
-            Wants = Loc.T("Her father home and warm again, and to know what he signed."),
+            Wants = Loc.T("Her father's note paid, his yard kept, and him home."),
             Habit = Loc.T("Old Haddon the wheelwright's daughter, who keeps his yard at the crossroads going with her own two hands."),
+        },
+        new()
+        {
+            Key = "haddon", Look = Story.HaddonLook, Name = Loc.T("Old Haddon"), Short = Loc.T("Haddon"), Tier = 1, Visits = 0, Of = Faction.Commons,
+            Wants = Loc.T("To make wheels, and never to sign anything again."),
+            Habit = Loc.T("Brindle's wheelwright, who signed the Guild's paper for a new lathe."),
         },
         new()
         {

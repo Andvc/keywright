@@ -10,7 +10,8 @@ namespace Keywright.Phases;
 /// The Guild's night, at the end of each week: Mister Vane comes for the due. Pay it and he's gone until next week (and
 /// says what next week's will be). Short, and you can pawn what's on display or sell back your curios at the Guild's
 /// price; once a run, Bram can vouch for you and roll the rest into next week, with interest. Otherwise the Guild takes
-/// the shop. On the sixth week Vane offers to take the map off your hands for half the due.
+/// the shop. Once you remember the treasury, the Maw speaks through him: a bribe on the fourth night (half the due, if your
+/// questions stop at the toll), and a bargain on the sixth (Bram home tomorrow, for the treasury key's pieces).
 /// </summary>
 public partial class DuesPhase : Phase
 {
@@ -30,7 +31,7 @@ public partial class DuesPhase : Phase
 
     public bool OfferOpen => _offerOpen;
 
-    /// <summary>The offer up is Vane's for Bram's pledge (the sixth night), not the one for half the due.</summary>
+    /// <summary>The offer up is the sixth night's bargain (Bram, for the key's pieces), not the fourth's bribe.</summary>
     public bool PledgeOffer => _pledgeOffer;
 
     public override void _Ready()
@@ -48,8 +49,8 @@ public partial class DuesPhase : Phase
         _board = Add(new Control { MouseFilter = Control.MouseFilterEnum.Ignore }.Place(0, 0, 1280, 720));
         _track = Add(new Node2D());
         BuildTrack();
-        if (State.OfferTonight) ShowOffer();
-        else if (State.PledgeOfferTonight) ShowPledgeOffer();
+        if (State.BribeTonight) ShowOffer();
+        else if (State.BargainTonight) ShowPledgeOffer();
         else Build();
         Game.Moment("21_dues", 0.8);
     }
@@ -77,16 +78,15 @@ public partial class DuesPhase : Phase
                 HorizontalAlignment.Center, outline: 4).Place(0, 28, w, 20));
             _track.AddChild(box);
         }
-        // The Aldric Key: Bram's shard and the Hooded Woman's three.
-        if (State.Week < 2) return;
+        // The treasury key: its four pieces, as the Guild's assessors have sent them.
+        if (State.Week < 2 || State.CampaignDone) return;
         float mx = PanelX + Guild.Weeks * (w + gap) + 12;
-        _track.AddChild(UiKit.MakeLabel(State.MapGiven ? Loc.T("KEY: THE GUILD'S") : Loc.T($"KEY {State.MapPieces}/{Story.Pieces}"), 16, Palette.Magic)
-            .Place(mx, y - 2, 220, 20));
-        // Each shard in its place in the whole key: the ones still to find in shadow.
-        for (int i = 0; i < Story.Pieces; i++)
+        _track.AddChild(UiKit.MakeLabel(Loc.T($"KEY {State.Pieces.Count}/{Campaign.Pieces.Length}"), 16, Palette.Magic).Place(mx, y - 2, 220, 20));
+        // Each piece in its place in the whole key: the ones still to earn in shadow.
+        for (int i = 0; i < Campaign.Pieces.Length; i++)
         {
             var piece = UiKit.MakeSprite($"res://assets/ui/key_{i + 1}.png", new Vector2(mx + 96, y + 44), 1);
-            if (i >= State.MapPieces) piece.Modulate = new Color(0.25f, 0.22f, 0.3f);
+            if (!State.Pieces.Contains(Campaign.Pieces[i])) piece.Modulate = new Color(0.25f, 0.22f, 0.3f);
             _track.AddChild(piece);
         }
     }
@@ -102,47 +102,34 @@ public partial class DuesPhase : Phase
         return node;
     }
 
-    /// <summary>The Guild's offer for the Key's shards: half tonight's due, and no Crown Chest.</summary>
+    /// <summary>The Maw's bribe, through Vane (the fourth night, once you remember): half tonight's due, if your questions stop at the toll.</summary>
     void ShowOffer()
     {
         _offerOpen = true;
-        var lines = Story.Offer(State.MapPieces);
-        _vane.Say(lines[0].Text + " " + lines[1].Text, Palette.Warn);
+        _vane.Say(Story.Bribe.Text, Palette.Warn);
         var panel = Put(UiKit.MakePanel(Palette.Warn.Darkened(0.2f)).Place(PanelX, 180, PanelW, 260));
         panel.AddChild(UiKit.MakeLabel(Loc.T("THE GUILD'S OFFER"), 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(0, 16, PanelW, 30));
-        panel.AddChild(UiKit.MakeLabel(Loc.Plural(State.MapPieces,
-                $"Hand over your {State.MapPieces} shard of the Aldric Key and tonight's due is halved, from {State.DueNow}g to " +
-                $"{Money.Round(State.DueNow / 2f)}g. Without the Key there's no Crown Chest.",
-                $"Hand over your {State.MapPieces} shards of the Aldric Key and tonight's due is halved, from {State.DueNow}g to " +
-                $"{Money.Round(State.DueNow / 2f)}g. Without the Key there's no Crown Chest."),
-            16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 60, PanelW - 80, 60));
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"Tonight's due is halved, from {State.DueNow}g to {Money.Round(State.DueNow / 2f)}g. Sergeant Hollis won't talk to you " +
+                                             $"for the rest of the season."), 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 60, PanelW - 80, 60));
         panel.AddChild(UiKit.MakeLabel(Loc.T($"You have {State.Gold}g."), 16, State.Gold >= State.DueNow ? Palette.Good : Palette.Bad,
             HorizontalAlignment.Center).Place(0, 130, PanelW, 20));
-        panel.AddChild(UiKit.MakeButton(Loc.T("Give him the shards"), Palette.Warn, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
-        panel.AddChild(UiKit.MakeButton(Loc.T("Keep the shards"), Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Take it"), Palette.Warn, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Ask my questions"), Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
         Game.Moment("21_offer", 0.6);
     }
 
-    /// <summary>
-    /// Vane's offer on the sixth Guild night (0.33): Bram's pledge torn up, and all that's left of the debt with it, for
-    /// the shards. The Maw has the Key, and the Gate opens.
-    /// </summary>
+    /// <summary>The Maw's bargain, through Vane (the sixth night, once you remember): Bram home tomorrow, for the treasury key's pieces.</summary>
     void ShowPledgeOffer()
     {
         _offerOpen = true;
         _pledgeOffer = true;
-        var lines = Story.PledgeOffer(State);
-        _vane.Say(lines[0].Text + " " + lines[1].Text, Palette.Warn);
+        _vane.Say(Story.Bargain(State).Text, Palette.Warn);
         var panel = Put(UiKit.MakePanel(Palette.Bad.Darkened(0.2f)).Place(PanelX, 180, PanelW, 260));
         panel.AddChild(UiKit.MakeLabel(Loc.T("THE GUILD'S OFFER"), 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(0, 16, PanelW, 30));
-        panel.AddChild(UiKit.MakeLabel(Loc.Plural(State.MapPieces,
-                $"Hand over your {State.MapPieces} shard of the Aldric Key and the Guild tears up Bram's pledge: all {State.DebtLeft}g of the " +
-                $"debt that's left, paid tonight. The Maw gets the Key, and the Gilded Gate opens.",
-                $"Hand over your {State.MapPieces} shards of the Aldric Key and the Guild tears up Bram's pledge: all {State.DebtLeft}g of the " +
-                $"debt that's left, paid tonight. The Maw gets the Key, and the Gilded Gate opens."),
-            16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 60, PanelW - 80, 80));
-        panel.AddChild(UiKit.MakeButton(Loc.T("Give him the shards"), Palette.Bad, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
-        panel.AddChild(UiKit.MakeButton(Loc.T("Keep the shards"), Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
+        panel.AddChild(UiKit.MakeLabel(Loc.T("Bram comes home tomorrow. The treasury key's pieces go to the Guild, and there's no treasury for you this " +
+                                             "season. The due is still due."), 16, Palette.Text, HorizontalAlignment.Center).Wrapped().Place(40, 60, PanelW - 80, 80));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Give him the pieces"), Palette.Bad, 16, () => AnswerOffer(true)).Place(80, 180, 280, 52));
+        panel.AddChild(UiKit.MakeButton(Loc.T("Keep the pieces"), Palette.Gold, 16, () => AnswerOffer(false)).Place(PanelW - 360, 180, 280, 52));
         Game.Moment("21_pledge_offer", 0.6);
     }
 
@@ -152,38 +139,21 @@ public partial class DuesPhase : Phase
         _offerOpen = false;
         if (_pledgeOffer)
         {
-            AnswerPledge(give);
-            return;
+            State.AnswerBargain(give);
+            if (give)
+            {
+                Sfx.Play("deflate", 1f, -4);
+                BuildTrack();
+            }
+            _vane.Say(give ? Story.BargainTaken : Story.BargainRefused, Palette.Warn);
         }
-        if (give)
+        else
         {
-            State.GiveMap();
-            Sfx.Play("deflate", 1f, -4);
-            BuildTrack();
+            State.AnswerBribe(give);
+            _vane.Say(give ? Story.BribeTaken : Story.BribeRefused, give ? Palette.Text : Palette.Warn);
         }
-        _vane.Say(give ? Story.OfferTaken : Story.OfferRefused, give ? Palette.Text : Palette.Warn);
         Clear();
         Build();
-    }
-
-    /// <summary>Vane's offer for Bram's pledge, answered: the Key for the debt (the run ends with the Gate opening), or on to the due.</summary>
-    void AnswerPledge(bool give)
-    {
-        if (!give)
-        {
-            _vane.Say(Story.PledgeRefused, Palette.Warn);
-            Clear();
-            Build();
-            return;
-        }
-        State.TakeMawBargain();
-        _paid = true;
-        Sfx.Play("deflate", 1f, -4);
-        Game.Hud.SetGold(State.Gold);
-        Game.Hud.SetDue(State);
-        BuildTrack();
-        _vane.Say(Story.PledgeTaken, Palette.Warn);
-        AfterSettled(Loc.T("The Maw paid the debt. The Key is his."));
     }
 
     /// <summary>What's due, what you have, and the ways to make up the difference.</summary>
@@ -418,8 +388,8 @@ public partial class DuesPhase : Phase
     /// </summary>
     async void Part()
     {
-        if (State.GateOpens || Story.Parting(State) is not Line line) return;
-        State.Find(line.Clue);
+        if (Story.Parting(State) is not Line line) return;
+        if (line.Clue != null) State.Note(line.Clue);
         await ToSignal(GetTree().CreateTimer(1.8), SceneTreeTimer.SignalName.Timeout);
         if (!Alive) return;
         _vane.Say(line.Text, Palette.Warn);

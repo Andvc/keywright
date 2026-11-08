@@ -1,281 +1,278 @@
-# Keywright: the narrative bible (0.33)
+# Keywright: the narrative bible (0.34)
 
-What's true in Aldmark, how the season's story is told, and how every thread feeds it. `docs/world.md` is the world as
-the people in it know it; this is what's underneath, and the plan for showing it a piece at a time. `docs/stories.md`
-has each tale beat by beat; `docs/design.md` the rules and the numbers.
+What's true in Aldmark, how the story is told across seasons, and how every thread feeds it. `docs/world.md` is the
+world as the people in it know it; this is what's underneath, and the plan for showing it a piece at a time.
+`docs/stories.md` has each tale beat by beat; `docs/design.md` the rules and the numbers.
 
-## Why the old story didn't grip
+0.34 rebuilds the main story around the owner's narrative proposal (*Keywright Narrative Design Proposal: campaign
+structure and progression across repeated runs*, 9 November 2026). Its shape, in the player's words:
 
-The owner put it plainly: no strong sense of mystery, no powerful goal beyond paying rent. Looking at 0.32's main
-story (The Key) against the research (below), the causes were:
+> First, I open chests to make a living and bring my uncle home. Then, I discover that some of the things being traded
+> are people. Finally, I open the greatest chest in the world knowing exactly whom I intend to bring out.
 
-- **It was told, not found.** Bram explained the Locking in week 2; Mara explained the Guild and the Gate in week 4. By
-  then there was nothing left to wonder about, and nothing the player did had found it out.
-- **The goal was an errand.** The shards came from Mara's commissions: bring a spellbook, get a shard. A fetch
-  quest with a cutscene at the end.
-- **The stakes were abstract.** "The Maw is buying his way out, a coin at a time" was a line, not something you could
-  see. Nobody you knew was in danger, and nothing in the shop changed as the season went on.
-- **The rent and the story didn't touch.** The loop said "earn gold for the Guild", the story said the Guild is evil,
-  and nothing made you feel the contradiction (Hocking's ludonarrative dissonance; Recettear's shape, where the plot
-  is the repayment schedule).
-- **Every season told it again.** In a game played over thirty seasons, a mystery that's fully explained in the first
-  is spent by the second.
+## What changed from 0.33, and why
 
-## What we're building on (the research)
+0.33 put a mystery on top of the season: Old Haddon gilded at the crossroads on the first morning, Bram in a glove, a
+Case page of sentences with blanks, a whisperer selling clues, mimics from Thornwick, a court that voided every pledge
+once it had four papers, and nine Heartsongs as the way out. It told too much too soon, and its answers were picked
+from a list rather than found by doing. The proposal's diagnosis, and what 0.34 does about each:
 
-Three studies (narrative and mystery, worldbuilding, and "things people want to try") are summarised in the published
-research page; these are the principles this design uses, with where they come from.
+| The proposal says | What 0.34 does |
+|---|---|
+| The mystery should grow out of the trade: *what's inside?*, then *where did it come from, and whose is it?*, then *who is still inside, and how do I get them out?* | The same verbs carry all three: listening, appraising, opening. Late in the campaign a crate knocks back when you hold still, and Bram's crate taps the way he tapped the counter. |
+| The first run should be reassuring: Bram teaches, then the Guild summons him to the treasury, and the Guild is helpful. | Bram minds the stall with you for the first week, then goes with Vane on the first Guild night. The Guild's letters are kind, and his own letter never comes. No gilding, no mimics, no glove, no royal pledge in a first run. |
+| A clear, reasonable objective: a successful shop, the treasury key from four professional accomplishments, Bram's commission, the treasury. | The key's four pieces come from the trade itself: a hidden thing read true, a stolen chest settled, a commission filled, an old lock picked without force. The Guild's assessors send each one. |
+| The first successful run ends with the player opening the Maw: nothing moves, no hollow ring, it slips, it breathes, it swallows the screen. Then Bram taps the counter, and it's the first morning. | The treasury on the last night is exactly that, played at the counter with the counter's own tools. |
+| One set of rules for time: the seal's safeguard turns the year back when the Maw breaks out without leave; you remember because you touched its core; so does he; nobody else. Knowledge persists, money and evidence don't. | The profile keeps what you've *found out* (the Inquiry's entries); every season starts the same. |
+| Run 2 must show at once that knowing changes play: a chest you recognise, a small event you change, a contradiction in the Guild's story. | The first-morning chest is the same every spring, and your notebook remembers what was in it. Old Haddon's note can be paid before the Guild takes him. Bram's tuning fork turns up in a Guild sale, tagged from the weighhouse, not the treasury. |
+| Replace answer entry with action. | The Case page is gone. The **Inquiry** keeps what you saw, who said what, what you tried and what came of it, and the leads: things you now have reason to do. |
+| Discoveries unlock actions; critical ones have more than one road; a mistake changes the cost, not the campaign. | Each discovery opens something to do (follow a cart, knock back, feed a mimic, intercept a crate, read the charter), and each has a second road (Hollis or the Lantern Market; the Roll or the King). |
+| Small mimics come after the first swallowing, as care with a finite appetite; a caretaker for players who don't want chores; ungilding has limits. | Mimics breathe only once you remember the treasury. Fed twice, one sleeps: full. A full mimic eats one gold shell, but a freed person whose note stands is taken again on the Guild's next night. The Arcanum's menagerie will keep one for you. |
+| Bram can be rescued before the true ending, and the rewind undoes it. | Find his crate, free him, redeem his pledge, and he's home for the rest of the season; on the next first morning he taps the counter, unaware. |
+| The black market sells access, documents, introductions, transport, not answers. | The Lantern Market's whisperer is gone. Nim's people sell a night at the weighhouse, a copy of the register, and a word with the bargemen. |
+| Courts for specific disputes, not a universal win from enough papers; no all-nine-Heartsongs gate; shorten what repeats. | The King's court still tries the Guild for its papers (the tithe halved), but nothing is won by a count of papers. The Heartsongs keep their display effects and lose the ending gate. Repeated scenes shrink once you remember them. |
+| The true ending is a plan before it's a spectacle: find the captives, free them, a way out and people to take them in, then open the door without giving it away. The Maw offers a private victory. The reward is the next day. | Exactly that (below). |
 
-- **Name the gaps, keep them small, give more clues than needed.** Curiosity is the feeling of a gap you can see and
-  almost close (Loewenstein; To, Ali, Kaufman and Hammer). The answer is written first, then three clues for every
-  conclusion through three channels (the Alexandrian's Three Clue Rule; Golden Idol's "Thought Path").
-- **Confirm in batches; let the player decide when they know.** Obra Dinn confirms three fates at a time; Golden Idol
-  says only how many blanks are wrong; Paradise Killer lets you accuse whenever you like.
-- **Put the mystery in the things the player handles.** Jenkins' embedded narrative (the detective's two stories: the
-  crime that happened and the investigation); Smith and Worch's "what happened here?"; FromSoftware's item lines;
-  Unpacking's objects; Heaven's Vault's inscriptions. The verbs that carry it are the ones we already have: listening,
-  marking, weighing, reading where a chest came from.
-- **Make the rent the moral problem.** Papers, Please's nightly rent under a regime you're serving; Frostpunk's book of
-  laws, read back at the end. The tithe has to be something you pay for a reason and feel the cost of.
-- **Show the clock in the shop.** Each Guild night should leave a mark you can see: a statue, a gilded door, a glove
-  on Bram's hand. (Smith and Worch; Carson; Left 4 Dead's build-up, peak and relax.)
-- **A villain who remembers you.** The Nemesis system; Valve's dynamic dialogue (the most specific line that matches
-  the world's facts).
-- **Every side story writes to the main one.** Storylets that read and write a few shared qualities (Failbetter;
-  Emily Short); a handcrafted spine with generated threads around it (Wildermyth; Hades).
-- **A season is an episode.** An A-plot with a cliffhanger each Guild night and B-plots from the tales (Abernathy and
-  Rouse: players remember characters, not plots).
-- **Make knowledge the career's progression, and lost seasons count.** Outer Wilds, Hades, Returnal, Slay the Spire's
-  hidden act. Decide what a new season *is* in the fiction.
-- **Iceberg, laws and accounts.** Write the hidden part properly (Hemingway, Tolkien's "glimpses"); give the world
-  laws the powerful must obey too (Spirited Away, the Bottle Imp, Rumpelstiltskin); let each faction tell the past in
-  the way that serves it, without lying (Frampt and Kaathe; Disco Elysium).
-- **The novel activity is a hidden quality, an instrument, and a consequence.** Probably Stolen's water trade (the game
-  the owner meant by "Deep Space Pawnshop": fish, water and a fence are three of its starting trades) has the same shape
-  as our chests: a quality you can't see, a way to test it, and a cost for getting it wrong. Fishkeeping's pull is care
-  with stakes and a slow payoff; contraband's is a forbidden trade under a search with fixed rules (and it dies when
-  the search becomes a formula).
+Left out of the proposal, because it doesn't fit the game: a *deliberate* rewind as a power (the pause menu's
+"abandon the season" already ends a run, and the safeguard stays something that happens to the Maw, not a button);
+shipments as their own map or route game (interception happens at the counter and at Nim's table, where the game
+already lives); and a moral verdict on curiosity (the Maw says it; the game never agrees).
 
 ## The truth of Aldmark
 
-Written once, here, and shown only in pieces. Everything below is true; nobody in the game says all of it.
+Written once, here, and shown only in pieces.
+
+### The first chest
+
+Before there were Locking chests there was one chest, and it was empty, and it wanted. **Avarax, the Gilded Maw**, is
+the first mimic: born of the first hunger for treasure, and wounded the way greed is wounded: it can't have enough. Its
+ambition is to be **the last chest in the world**, the one place that holds everything anyone needs, wants or hopes to
+find, so that everyone has to come to it for something.
+
+Three hundred years ago King Aldric the Wise and the archmages of the Keyhold couldn't kill it (you can't kill
+greed). So they copied it. They made chests in its likeness and shut every treasure in Aldmark into them, and they shut
+the Maw into its own: **the Crown Chest**, under the palace, behind the door they called the **Gilded Gate**. The
+Locking is that seal and its laws.
 
 ### The laws of the Locking
 
-Three hundred years ago King Aldric the Wise and the archmages of the Keyhold couldn't kill Avarax, the Gilded Maw: you
-can't kill greed. So they did what greed can't bear. They took everything off the market. They sang a ward over every
-treasure in Aldmark and over the realm itself, and gave it laws that bind everyone, the Maw first:
-
 1. **A locked thing opens only for its rightful owner**: one who bought it fairly, was given it freely, or was left it.
+   Access, inspection and ownership are different things: a keywright can be let in to look, and a ward still knows
+   whose a chest is.
 2. **What's pledged and not redeemed belongs to the one it was pledged to.** (A pledge is a gift that waits.)
 3. **The Maw can't take. He can only be given, sold or pledged.**
 4. **Loose gold is his eye.** He sees through every coin out of a chest.
 5. **Only sound passes the ward**, and the ward's own sound is song.
-
-The Maw wasn't chained in a cell. He was **warded into Aldmark** the way a seller wards one thing into a chest: he
-makes no sound, weighs nothing, can't be counted, and lies under the capital behind the seam the archmages called the
-Gilded Gate. By the first law, the realm (the Crown Chest, the heart of the Locking, its deed) opens only for its
-rightful owner. By the third, it can never be taken from Aldmark: only given, sold or pledged away.
+6. **The safeguard.** If the Maw ever breaks out of the Crown Chest without leave, the seal turns the year back to its
+   first morning. Whoever has touched the seal's core remembers. So does the Maw. Nobody else does.
 
 ### The Guild's purchase
 
-So the Maw does what greed does: he buys. The **Gilded Guild** is his broker. For a century it has lent to anyone who
-needed coin in a land whose coin is locked away, and every Guild loan is a **pledge**: a farm, a stall, a mill, a hand.
-The ward honours a pledge (law 2). When one falls due unpaid, the pledged thing is the Maw's, and **what the Maw owns
-turns to gold**: a door, a millstone, a widow's ring, a man. That's **the Gilding**. The Guild carts what it collects to
-the Gate and sells it down, by weight.
+The Maw can't take, so it buys. The **Gilded Guild** is its broker, and a genuinely useful one: it lends where coin is
+short, carts goods, buys and stores and distributes, licenses keywrights and introduces customers. People depend on it
+because it helps them. It turns predatory where it controls their alternatives. Every Guild loan is a **pledge** (law
+2): a mill, a hand, a man. When one falls due unpaid, the pledged thing is the Maw's, and what the Maw owns turns to
+gold: **the gilded**. They aren't dead. They're stock. The Guild carts them under sacking to its **weighhouse** below the
+palace, writes each down by name and weight, and crates them for the treasury.
 
-The tithe is the interest that keeps a pledge from being called. It's paid in gold, and every coin of it is an eye
-(law 4): each week the Maw sees a little more of the realm he's buying.
-
-Seizure was never enough: a foreclosed chest still opens only for its family (law 1), which is why the Guild's sales
-won't open. A pledge is different: given freely, it's the ward's own law working for him.
+Ordinary trade is good. Opening a farmer's inherited chest so she can buy seed improves a life. The wrong is the
+concentration of ownership and opportunity, not money, commerce or curiosity.
 
 ### The Crown's note
 
-King Aldric IX inherited a treasury he can't spend and a court that borrows from the Guild. Ten years ago, to feed the
-realm through a famine, the Crown pledged the one thing it owned outright: **the Crown Chest**. The note falls due on
-**the last night of this season**. If the Crown can't pay, the Crown Chest is the Maw's by the ward's own law, and the
-Locking opens for its new owner. The Guild doesn't need to break the Locking. It needs a default.
+Ten years ago, to feed the realm through a famine, King Aldric IX pledged the Crown's treasury to the Guild: its access
+and its takings, payable on the last night of this season. The pledge can't hand over the realm's people, and it can't
+surrender an independent keywright's final word. That's why the Guild needs a keywright with the treasury key at the
+opening: with access, a keywright can be *seized*, and the Maw hopes to take the authority it can't be given.
 
-The King knows. He can't raise the sum. What he can do is give the Crown Chest away before the note falls due: a gift is
-rightful (law 1), and a thing given away can't be collected. But only a Keywright can receive a chest, and only one with
-the whole **Aldric Key** can open this one and sing the Locking over again. That's why Old Aldo comes to the counter in a
-plain cloak and makes you name what's inside: he's looking for the Keywright he can give his kingdom to for one night.
+### Bram's pledge
 
-### Bram's hand
+Twenty years ago the Guild's Mark-Finders came for a marked baby at the crossroads: Bram's niece, Kit. Bram had nothing
+they'd take but his own hand, mark and all, so he pledged it. "Bram's old account" is that pledge. This spring the Guild
+calls it in: it summons him to the treasury for "an old consignment", gilds him, and crates him at the weighhouse. His
+commission is a lure. What the Guild wants at the treasury on the last night is *you*, with the key.
 
-Twenty years ago the Guild's Mark-Finders came for a marked baby at the crossroads: Bram's niece, Kit. Bram couldn't buy
-her out of "the Guild's care", so he did the only thing the Guild would take: he **pledged his own hand**, his mark
-and all, as surety for her. He never paid a coin of interest (he was a hedge-wright; he couldn't), and the hand has been
-gilding since. That's why "his mark faded". This spring the Guild called the pledge in: seven payments, one a week. Miss
-one, and the Guild forecloses on the stall, and on Bram.
+### The year that turns
 
-He's ashamed of it and proud of it, and he won't say it until he has to. He never lies about it. (For a partner minding
-the stall, the child is still Kit, safe in the north; Bram just doesn't say whose child at first.)
+On the season's last night the Guild opens the treasury. If a keywright with the key is there (you, the first time),
+the Maw reaches for them without leave, and the safeguard turns the year back. If you aren't, the Guild opens it with
+Bram, still gold, and the Maw reaches for him: the same. Every season ends that way until someone opens the door and
+gives the Maw nothing.
 
-### The year that turns back
+The first swallowing is a failure for the Maw too: it tried to seize a keywright without leave, woke the safeguard, and
+made an enemy who remembers. After that it changes tactics: reassurance, then bribes, then personal bargains, then the
+last offer (below).
 
-The archmages knew the Maw would try to buy the realm, so they wrote one more clause into the Locking: **if ever the Gate
-opens, the Locking turns the year back to its spring**, and tries again. Only the marked remember, and only a little: a
-notebook in their own hand they don't remember writing; a song they've heard before; a feeling at the crossroads. The Maw
-remembers everything. Greed never forgets a debt, and every turn of the year he's learned a little more, which is why
-the Guild asks more of a Keywright who has beaten it before (the challenge levels).
+| Rule | In the game |
+|---|---|
+| What turns the year | The Maw breaking out without leave: on every season's last night unless the true ending is reached. A foreclosure ends *your* season early; the last night still happens without you. |
+| Where it returns | The first morning: Bram behind the counter, tapping it twice and once. |
+| Who remembers | You, from your first swallowing (the profile's `Campaign.Remembers`); the Maw (Vane speaks for it); nobody else. Before the first swallowing, a new season is simply a new season. |
+| What carries over | What you've found out (the Inquiry's entries, `Profile.Known`), and how to do what you learned (leads stay open). Money, papers, the key's pieces, friends, the freed and Bram's rescue return to how they were. |
+| What doesn't turn it | Losing money, missing a chance, a wrong guess. |
 
-A season that ends with the Locking sung again goes forward into another year (and the Guild comes back: debts are funny
-things). A season that ends with the Gate open turns back. Either way it's spring at the crossroads, and Bram is at his
-stall. The way out of the turning is the one the Heartsongs were made for: **sing the Locking whole**, all nine verses,
-and it stops being a lock and becomes an ending.
+## The campaign
 
-### Three accounts, none of them false
+### Before you remember (the first run, and every run until the treasury)
 
-Each side tells the history that serves it, and leaves out what hurts:
+A season of ordinary business, told kindly:
 
-- **Bram** (the crossroads' account): the Locking starved the Maw; the Guild keeps the Gate for a fee; Keywrights open
-  chests for honest folk. True. He leaves out what he pledged.
-- **Mister Vane** (the Guild's): the Guild lends to people the Locking left poor, and collects what's owed, as any lender
-  does; every pledge was signed freely. True. He leaves out who the Guild lends for.
-- **The Unopened** (the abbey zealots'): every chest opened feeds the Maw. True: every coin out of a chest is his eye.
-  They leave out that a locked realm starves its own people.
-- **Mara** (the Keyhold's): the laws, and what the Guild is buying. True. She leaves out the clause that turns the year
-  back: it's the Keyhold's secret, and her failure.
+- **The first week, with Bram.** Day 1 is his lessons (Bram taps the counter twice, then once, to call you over: his
+  habit, and later a signature). He covers a small expense, greets a regular by her cellar, and says the one strange
+  thing: "Listen before you buy. And mind: some chests listen back." On day 2 Vane introduces the Guild and "Bram's
+  old account", seven payments, plainly a business matter. On day 3 Nell Haddon says the Guild has her father's note
+  and his yard.
+- **The summons (the first Guild night).** Vane brings a letter from the Guild's treasury: "An old consignment needs
+  his attention." Bram leaves his lamp on the counter and says he'll write every week. If Old Haddon's note wasn't
+  paid, the Guild "takes him to work it off".
+- **The commission (week 2's morning).** A Guild letter: "The handover is taking longer than expected. Keep the shop
+  running until he returns." It sets the season's goal: keep Bram's account paid, earn the **treasury key**'s four
+  pieces from the Guild's assessors, and bring it to the treasury on the season's last night: Bram's commission needs a
+  second keywright, and when it's done his account is closed and he comes home.
+- **The key's pieces** (`Campaign.Pieces`), each sent with a kind Guild letter the night it's earned:
+  - the **reader's** piece: a chest that hid something (a false bottom or a ward) read true, or any chest of five
+    things or more;
+  - the **warden's** piece: a stolen chest settled, sent home or handed to the Wardens;
+  - the **patron's** piece: a commission filled, every thing it asked for;
+  - the **locksmith's** piece: a Guild Lock picked masterfully, or a Dwarven Tumbler picked without force.
+- **Bram's notes.** With Bram away, his tips come as notes in the margins of his notebook (`MentorView`'s note style).
+  His promised letter never arrives; the Guild's updates do ("Bram sends his regards").
+- **The treasury.** On the night the account is paid with the key whole (the last night, or the night an early payment
+  clears it), the Guild's carriage takes you to the treasury: the first swallowing (below). If the season ends without
+  it (foreclosed, or paid without the whole key), it simply ends: Bram never came home.
 
-## The season (the A-plot)
+### The first swallowing
 
-Seven weeks, an episode each: a story morning or a scene, a few beats at the counter, and a cliffhanger on each Guild
-night. Weeks 1 and 2 are at Brindle, 3 at Thornwick, 4 and 5 at Crownhold, 6 and 7 at the Emporium for a strong run
-(the beats wait for the shop where they're set).
+The treasury's great chest is brought to the counter as "Bram's commission". The counter is the counter, and the
+chest is the Maw:
 
-| Week | Episode | What happens | What it opens |
-|---|---|---|---|
-| 1 | **The statue** | Old Haddon the wheelwright stands gilded at the crossroads; Bram wears a new glove. Vane, the second evening: the debt, and "the interest is showing, I see." Haddon's daughter Nell brings his last chest: the Guild's paper is warded inside it. Guild night: the Guild's cart takes the statue away. | Why is Haddon gold? What's under Bram's glove? Where do the gilded go? |
-| 2 | **The shard** | Bram's secret: the shard of the Aldric Key, and the crossroads' account of the Locking. The Hooded Woman's first ask. Guild night: Vane, softly: "The hand first, Bram. Then the arm." Bram's fingers are gold. | Whose is the Guild? |
-| 3 | **The gilded market** | Thornwick's square has three statues. The Unopened preach that every chest opened feeds the Maw. Nim takes you to the Lantern Market at midnight: the Maw's buyers ask for gilded things, "for the Gate". Guild night: the Guild collects someone the season has made yours (Jory, if the Kettles' note is still unpaid). | |
-| 4 | **The hood comes down** | Mara: the laws of the Locking, and the Guild's pledges. Bram, at last: what he pledged, and for whom. Guild night: the Guild's offer for the shards; and Vane: "Even kings pledge, Keywright." | What is the Guild collecting? |
-| 5 | **The Crown's note** | The Roll, the ledgers, the Defector and Old Aldo: the Crown Chest is pledged, and falls due on the season's last night. Bram's gilding reaches his throat; his tips grow short. Guild night: "Seven days. The Guild will collect the Crown Chest in person." | How can the Locking hold? |
-| 6 | **Who stands with you** | The gathering (0.30), and the King's plan: bring him the Key whole, or the Guild's papers to his court. Guild night: Vane offers to tear up Bram's pledge, tonight, for the shards. | |
-| 7 | **The last night** | The debt's last due, and the Crown's note, on the same night. The endings (below). | |
+1. You shake it. Nothing moves inside.
+2. A harder shake, a drop, the lodestone: no contents, and none of the wooden ring every empty chest gives.
+3. It slips out of your grip and drops.
+4. A pause. The lid rises, and falls.
+5. It's breathing.
+6. It opens towards you and swallows the slip, the counter, the screen.
 
-**The visible clock.** Bram's gilding goes up his arm a step every other week (his figure, his face in the tips; gone the
-moment his pledge is redeemed). A statue stands outside the stall while the Guild lets it (Haddon at Brindle; whoever the
-Guild collects, at the shop they knew). The Emporium's sky takes on the Gate's gold as the last night comes. None of it is
-a roll: each follows the calendar and what you've done.
+No explanation, no monologue, no blame. Darkness; the season is banked; then two taps and one on the counter. The next
+season starts at once, the same character at the same level: the first morning, again, and this time you remember.
 
-**Who's in danger is someone you know.** A tale whose person owes the Guild (the Widow's Debt's Jory, first) has a
-Guild night it falls due on; if the note's still unpaid, the Guild collects them, and they stand gilded until the
-Locking's sung again. Helping a regular is how you keep them.
+### After: the Inquiry
 
-## The case: named gaps
+From the second season the notebook's **Inquiry** page (where the Case page was) keeps the investigation. Each thread
+is a question; each entry is one of:
 
-The notebook gets a **Case** page: the season's questions, each a sentence with blanks (Golden Idol's form), the clues
-found so far under it, each marked with how you came by it (**heard**, **found**, **said**), and the words the clues
-gave you to fill the blanks with. You choose a word for each blank and **Check**: right, or how many are wrong, never
-which. Nothing is lost for a wrong check. A question opens when the story raises it, and can be worked out as soon as
-its clues are in: the player decides when they know enough.
+- **seen**: something you saw (the treasury chest breathing; crates with names and weights);
+- **said**: a statement, with who said it (Vane: "We've met before, I think");
+- **tried**: an experiment and its result (you knocked back; it answered);
+- **lead**: something you now have reason to do, with where and when (follow a Guild cart from Thornwick's toll), shown
+  until it's done this season.
 
-| Question | Answer | Clues (channel) | Worked out, it... |
-|---|---|---|---|
-| **Why is Haddon gold?** | Haddon *pledged himself* to the Guild, and what's pledged and unpaid is *the Maw's*. | the statue, and the rumour that he stole a Locking chest (seen); Nell: "He signed their paper, against his own hand" (said); Haddon's paper in his chest (found); Sister Agathe (said); Mara's laws (said) | Nell tells the crossroads (commons +1) |
-| **What's under Bram's glove?** | His hand is *gold*: he pledged it for *a marked child*. | Vane's remark (said); his gold fingers on the second Guild night (seen); Bettany: "Bram took a marked baby out of the Guild's care, twenty years back" (said); Bram's confession (said) | Bram stops hiding it |
-| **Where do the gilded go?** | *Down the Gate*, sold to *the Maw* by weight. | the cart on the first Guild night (seen); Hollis's carts down the palace road, and the door he followed one to (said); Tobias's ledger page, "H. Haddon, fourteen stone" (found); the Lantern Market's buyers (said) | the Wardens believe you (Wardens +1) |
-| **Whose is the Guild?** | *The Maw's*; and loose gold is *his eye*. | demon gold in a chest from the Guild's strongroom (found); Sister Agathe (said); Mara (said) | the Lockless count you less of a mark (Lockless +1) |
-| **What is the Guild collecting?** | The King pledged *the Crown Chest*; if the Crown defaults, the Locking opens for *the Maw*. | Vane's "even kings pledge" (said); the Chest Roll, by Mara's letter or Master Quire (found); Old Aldo (said); Mara (said) | the Crown counts you a friend (Crown +1) |
-| **How can the Locking hold?** | Open the Crown Chest with *the Aldric Key* before the note falls due, or prove the Guild's pledges were *made to the Maw in secret*. | Mara's word from the King (said); Old Aldo (said); Mara on the court (said); Master Quire's law; Tobias Fenn (said) | the season's end says you knew |
-| **Why does the spring come round again?** (from the second season) | When the Gate opens, the Locking *turns the year back*; only *the marked* remember. | Bram's dream after a lost season (said); Vane: "We've met before, I think" (said); a chest marked by your own hand at a Guild sale (found); Mara, once you've opened the Crown Chest (said) | the season's end says what an open Gate means |
+What you *know* carries across seasons; what you *hold* (a copy of the register, the key's pieces, Bram's tuning fork)
+is marked as this season's and goes at the rewind. Knowing where a paper is isn't having it.
 
-(0.33 tried a paper for the King's court as the payoff for whose the Guild is: the careful player worked it out every
-season once Mara had spoken, and the Guild went on trial in a third of runs instead of one in twenty-five. The case's
-payoffs are standing now, so the court's balance is 0.32's.)
+The threads, in the order they open:
 
-The wrong words are true things that fit a partial reading: "the Guild's" for "the Maw's" until you know whose the Guild
-is; "sold his mill" for "pledged himself" until the paper turns up. Three clues for each answer, through at least two
-channels, so a season that misses one tale can still close the gap. What's worked out is remembered across seasons (a
-Truth in the profile): in a later season the sentence is already filled in your hand, and people who'd have told you
-notice that you know (Hollis at the back door, Mara's note, Old Aldo: `TaleBook.Knew`). What it paid the first time isn't
-paid again: every run starts the same, and what carries over is what you know.
-
-## The endings
-
-The Crown's note and Bram's last due fall on the same night. What the season becomes depends on what you've done by then:
-
-| What you did | What happens | The run ends |
+| Thread | Entries (and what finds them) | What each opens |
 |---|---|---|
-| The debt paid and the Key whole | The King gives you the Crown Chest; you open it and the Locking is sung again. Every pledge to the Maw is void; the gilded wake up (Bram's hand is warm; Haddon walks home). | THE LOCKING HOLDS |
-| ... and every Heartsong in the songbook | The Locking sung whole: it stops being a lock. The Maw starves; the year will never turn back again. | THE LOCKING, SUNG WHOLE |
-| The King's court, with the case and the papers | The Guild's pledges were made to the Maw in secret, so none of them was given freely: void. The Crown keeps its chest; the gilded wake. | THE GUILD ON TRIAL |
-| The debt paid, but no Key and no court | Bram's pledge is redeemed (his hand is warm), and the stall is yours. At midnight the Crown defaults, and the Gate opens. The year will turn back. | FREE AND CLEAR (the season's end says what it cost) |
-| Foreclosed | The Guild takes the stall and Bram. The Gate opens at the season's end, and the year turns back. | FORECLOSED |
-| The Maw's bargain, or Vane's offer for Bram | Bram's free and the debt's paid, by the Maw. The Key is his. The Gate opens. | THE GATE OPENS |
+| **Where is Bram?** | the summons (said, Vane); no letter (seen, week 3); his tuning fork in a Guild sale, tagged *from the weighhouse, palace road* (found: Bailiff Marrow, week 2); the carts (said, Sergeant Hollis at Thornwick); the weighhouse: crates by name and weight, *Bram, keywright, 13 stone* (seen: follow a cart from the toll, or a night pass from the Lantern Market); a crate that knocks back (tried); Bram's tap in a crate (heard); his pledge (said, Bram, once he's home) | follow the cart; listen to crates; intercept his crate; redeem his pledge |
+| **What was the breathing chest?** | the treasury chest (seen); a chest that breathed at the counter: a mimic (heard); fed twice, it slept (tried); a full mimic ate the gold off someone, who walked out cold, but whose note still stood (tried); the first chest (said, Mara, late) | keep or entrust a mimic; feed it; free the gilded |
+| **Why did the morning come again?** | the first morning, again (seen); "We've met before" (said, Vane); the seal's last clause (said, Mara: from Crownhold, once you've been to the weighhouse); a stolen chest opening for its owner and nobody else (tried); the treasury's charter: keys and takings pledged, not people, not a keywright's word (found: Master Quire's Roll, or the King) | plan an opening that gives the Maw nothing |
+| **How do we bring them out?** | opens with the seal; it's the plan (below) | the final opening |
 
-The season's end (0.30's "what became of everyone") also reads the case: what you'd worked out, who stood gilded, and
-what the tithe you paid was spent on (Frostpunk's book of laws, read back).
+**The second season, at once.** On the first morning, the same chest comes to the counter every spring (Garrick's grey
+chest, on day 2), and once you've opened it in any season the Inquiry remembers what was in it. Nell's word about her
+father's note comes again, and now you know what the Guild night does: pay the note (about forty gold, at Brindle)
+and Haddon stays home, a friend at the crossroads. And in the second week, Bailiff Marrow's repossessed lot holds
+Bram's tuning fork, tagged from the weighhouse: the lead to follow.
 
-## Across seasons
+**What the Maw tries, once you remember** (Vane's Guild nights): reassurance ("Bram is well. Why go looking?"), a bribe
+on the fourth (half the night's due, if your questions stop at the toll: take it and Hollis won't talk to you this
+season), and on the sixth a personal bargain: Bram home tomorrow, warm and whole, for the key's pieces. Take it and he
+*is* home, and there's no treasury for you this season.
 
-What a new season is, in the fiction: **the same spring**, after the Gate opened, or **the next one**, after the Locking
-held. Bram at the stall says which, lightly, and the world shows what carried over:
+### Rescue
 
-- **The marked remember a little.** The notebook (people, sounds, finds) and the songbook already carry over; now the
-  case's Truths do too, in your own hand, and so does what you did last time (the profile keeps the last season's end).
-- **Lost seasons count.** After a foreclosure, Bram dreams he was gold; a chest marked by your own hand turns up at a
-  Guild sale; Vane knows you.
-- **Vane remembers.** His lines match the most specific fact he has: this season's (your back room, your standing, the
-  shards) and the last ones (how it ended, what you knew).
-- **The way out is the hidden act.** All nine Heartsongs, the Key whole and the debt paid in one season sing the
-  Locking whole: nothing announces it beyond Mara's word, once you've worked out why the spring comes round.
+A **crate** from the weighhouse (a Guild consignment: iron bands and the Guild's seal) makes one sound: when it sits
+still, something inside knocks, faintly. Knock back (hold still and press act) and it answers. Buy it, and opening it
+reveals a gilded person, who goes to the back room. To bring them home:
 
-## The side stories (B-plots): what suits the game
+1. **Free them**: a full mimic in your care eats the gold off one (`Mimics`: two meals, then one shell).
+2. **Resolve their note**: redeem it (pay what they owed), or, for Haddon, prove the Guild added "and all of him" after
+   he'd signed (his own paper, from his last chest, and the Roll's copy, to Sergeant Hollis): a seizure on a false note
+   is void.
 
-From the research's ranking, judged by our two rules (never tell what's in a chest or what it's worth before purchase;
-every clue follows a rule people know from real life) and by what feeds the main story:
+Freed with the note still standing, they're taken again on the Guild's next night. Crates come by Corvin ("fell off a
+Guild cart"), or by the Lantern Market's bargemen, or, with the Wardens as friends, Hollis stops a cart.
 
-1. **Breathing chests: mimics and sleepers.** *Chosen.* A living thing breaks the first rule of the trade the way it
-   would in real life: it breathes while the chest sits still, before anything's shaken. That's a new clue on the core
-   verb (listen first), and it says only "something alive". Where the Locking frays the old wards go hungry: a mimic is
-   a chest that has eaten what was in it, and lives on gold. Sellers think a breathing chest is empty (nothing rattles)
-   and price it low. Open one and it's a creature: sell it to the Arcanum's menagerie, or keep it in the back room,
-   feed it, and it keeps the Lockless off your door and (grown) eats the gold off a gilded thing, giving back what it was
-   (the story's purification). The Sleeper's breathing chest makes every breathing chest a deduction: a knight or a
-   mimic?
-2. **The Lantern Market.** *Chosen.* The otherworldly black market: Nim's people, under the Barrow at midnight, from
-   Thornwick on. It buys what can't be sold by daylight (gilded things, for the Gate; cold chests, for ransom; demon
-   gold) and sells what can't be bought (a secret: a clue for the case; a mimic; a gilded neighbour's weight in gold to
-   buy them back). Its prices aren't all coin: a customer tomorrow, your gentlest shake for a day. Every sale to the
-   Maw's buyers is an eye for him, and the case says so.
-3. **Ungilding.** *Chosen, inside the two above.* Purifying is restoring: a gilded thing made what it was again, the
-   before and after you can see. A kept mimic does it; the Locking sung again does it for everyone.
-4. **Fencing and contraband.** *Kept as it is* (the back room, Flick, Corvin, the Wardens), now with the Lantern Market
-   as the place it leads to.
-5. **Scribing spell scrolls.** *Not now.* A craft after opening at best, and weak as a clue before purchase. The
-   Keyhold's codex pages carry its lore as found clues instead.
-6. **Casting spells at a chest.** *Rejected.* The ward turns any spell, and a spell that reveals contents breaks the first
-   rule.
+**Bram** is one of them. His crate comes once you know the weighhouse this season; he taps inside it the way he taps the
+counter. His note is his account: the season's debt, cleared. Freed and redeemed, he's home for the rest of the season:
+his account of the pledge, and a quiet evening in the shop. Then the last night comes, and unless it ends the right way,
+the year turns, and on the first morning he taps the counter and doesn't remember any of it. *I don't want to rescue him
+again. I want the rescue to survive into tomorrow.*
 
-## How every thread feeds the world
+Knowing makes it faster: the leads stay open, prices you've learned are cheaper (a pass you've used is half price to a
+face Nim knows), and nothing is explained twice.
 
-The tales read and write a few shared qualities, so a side story is always a piece of the main one:
+### The true ending
 
-- **The Guild's claims**: who owes the Guild what, and the Guild night it falls due on. A claim paid off (or voided)
-  saves a person; one that falls due gilds them. (The Widow's Debt first; the Crossed Keys, the Deep Door and the
-  partners' own tales are natural next ones.)
-- **The case**: clues come from tales as much as from the main story (Tobias's ledger, the Chest Roll, the Defector, the
-  Unopened, the Lantern Market).
-- **Papers for the court** (0.30): the case against the Guild; the case's answers count toward it.
-- **The Maw's eyes**: gold sold down the Gate (gilded things to the Lantern Market's buyers) and taken in tithe. The
-  season's end reads it back.
-- **Standing** (0.30): who stands with you on the last night.
+The plan is a list in the Inquiry, each line ticked when it's true this season:
 
-## In 0.33
+1. **Find them, and know them**: you know the gilded are alive and how to hear them, and this season you hold the
+   weighhouse register (seen there yourself, bought from the Lantern Market, or copied from Quire's Roll).
+2. **Free them**: Bram's pledge is redeemed (the debt paid), and a full mimic is in your care.
+3. **A way out, and people to take them in**: two friends who'll stand with you (the season's allies), or the Wet Hen
+   hired for the night.
+4. **Open the door without giving it away**: the treasury key whole, and you know both the seal's clause and the
+   charter (access isn't ownership; the Maw can't be given what isn't yours to give).
 
-Built in this version: the laws and the truth in the world doc; the season rewritten around the Gilding, the Crown's
-note and Bram's pledge (story mornings, Vane's parting line on each Guild night and his offer for Bram's pledge on the
-sixth, the counter beats as a tale, `TaleBook.Gilding.cs`, and the endings); the visible clock (Bram's gilding by the
-calendar, a glove over the hand until he's told you, `Gilt.cs`; Haddon's statue at the crossroads until the cart, three
-in Thornwick's square, and whoever the Guild collects); the Widow's Debt's claim on Jory; the Case page with its
-questions, clues and checks, and a note under the top bar for each clue, remembered across seasons (`Case.cs`); the
-turning year, lightly (Bram's dream, Vane's memory, your own chest, Mara's clause; the profile keeps how the last season
-ended); breathing chests and mimics (`Mimics.cs`: one chest in 90 from Thornwick; the menagerie pays 0.6 of a working
-purse, 1.6 for one raised two Guild nights; a grown one wakes one of the gilded); and the Lantern Market on the
-third night of each week from Thornwick (`LanternMarket.cs`: a secret for the case, the Maw's buyers for gold things at
-half as much again, each an eye for him, the menagerie). Next: more of the tales writing claims (the Crossed Keys, the
-Deep Door, the partners' tales), Vane's remembered lines across more facts, and art for the gilded and the mimic.
+On the night the account is paid with the plan whole, the treasury is a different scene. You don't shake. You hold the
+great chest still and listen, and the people inside knock. You knock back, and you turn the key as one who's come to
+look, not to own. They come out. Then the Maw speaks:
+
+> You have already saved him once. I can make this time remain. Take him home. Leave the door to me.
+
+and, if you hesitate, the line the proposal gave it: *He knows whom he came to save. But you still want to see what is
+inside.* That's the Maw's argument, not the game's.
+
+- **Leave the door to him**: a vision of the next day going sour (every chest at the market under the Guild's seal), and
+  then the Maw reaches past the door for everything, which is breaking out without leave: the seal wakes, and it's the
+  first morning again. (The Maw can't keep a bargain. It can't stop wanting.)
+- **Close the door**: the seal holds, and nothing turns the year back.
+
+The reward is a date the campaign has never reached: **the next day**. Bram brings tea, and his hand is warm. Wynn the
+miller comes to the counter with an ordinary chest of millwright's tools for the waterwheel. You open it. The shop goes
+on.
+
+After that the campaign is done: a new season is a new year (Bram stays at the stall, the Guild is a business again,
+the treasury stays shut), and the tales, the levels and the collection go on.
+
+## Repetition
+
+- Scenes shrink once you've seen them: the summons is two lines after the first; a later swallowing skips the build-up
+  (it breathes at once); a lead never re-explains itself.
+- Bram's lessons are taught once a profile (as before); his welcome on a remembered morning is one line and two taps.
+- Every season starts the same: nothing that carries over makes a run stronger, only what you know.
+
+## Side stories in a shared world
+
+The tales stay what they are (0.28-0.32), and the main story reads and writes the same things: the Guild's claims (Old
+Haddon, Jory Kettle), the Wardens' and the Lockless's standing, allies, and the court's papers. Some stay ordinary on
+purpose: a wedding, a feud, a repaired lute. The Silent Choir still teaches that careful listening frees something
+trapped. The **King's court** still tries the Guild for the papers you bring it (half its tithe while it's tried); it
+doesn't void every pledge. The **Heartsongs** keep their display effects and their place in the songbook; nothing is
+gated on all nine.
+
+Public gilding, the royal pledge and the Guild's master are never shown before the player can investigate them: there
+are no statues at the crossroads, and the gilded are only ever seen where they're kept.
+
+## Where it lives in the code
+
+- `Campaign.cs` (Core): the profile's campaign (`Remembers`, `Known`, `Swallowed`, `Rescues`, `Done`) and the run's
+  (`BramAway`, `BramHome`, the key's `Pieces`, `Holding`, `Guests`, `Plan`).
+- `Inquiry.cs` (Core): the threads, the entries (seen, said, tried, lead) and what each needs.
+- `TaleBook.Campaign.cs`: the season's beats (Nell, the summons, the commission, the first-morning chest, the tuning
+  fork, Hollis, the weighhouse, the crates, Mara, the charter, Bram's homecoming, the Maw's tactics).
+- `Story.cs`: the mornings, Vane's nights, the treasury's lines, the endings.
+- `TreasuryPhase` (UI): the first swallowing and the final opening at the counter.
+- The sim's careful player follows the leads (`Strategy`), and the careers report says when the first swallowing, the
+  first rescue and the true ending come.

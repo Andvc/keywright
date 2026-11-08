@@ -638,51 +638,78 @@ public static class Strategy
     /// <summary>Pay off the whole debt as soon as there's enough: it's what the run is for.</summary>
     public static bool ShouldPayOff(GameState state) => state.CanPayOff;
 
-    /// <summary>The Guild's offer for the map: a careful player takes it only if it's that or the shop.</summary>
-    public static bool TakeOffer(GameState state) => state.Gold < state.DueNow && state.Gold >= state.DueNow / 2;
+    /// <summary>
+    /// The Maw's bribe on the fourth Guild night, once you remember (half the due, and Hollis stops talking to you this
+    /// season): the careful player takes it only if it's that or the shop.
+    /// </summary>
+    public static bool TakeBribe(GameState state) => state.Gold < state.DueNow && state.Gold >= state.DueNow / 2;
 
     /// <summary>
-    /// The careful player at the Lantern Market: buys tonight's secret when it gives a word a question still needs and the
-    /// purse can spare it (two working purses kept back); sells a grown mimic once there's nobody left for it to wake, or
-    /// the season's nearly out. Never sells gold down the Gate. Returns what it did, for the bot's log.
+    /// The Maw's bargain on the sixth (Bram home tomorrow, for the key's pieces, and no treasury this season): the careful
+    /// player takes it when the plan can't be whole this season anyway and Bram's crate hasn't been found.
+    /// </summary>
+    public static bool TakeBargain(GameState state) =>
+        !state.KnowsAlive || !state.Knows("seal") || (!state.KnowsInventory && !state.Guests.ContainsKey(Campaign.Bram));
+
+    /// <summary>
+    /// The careful player at the Lantern Market (once you remember): a night at the weighhouse when the register's still
+    /// wanted, Bram's crate diverted, and the bargemen for the last night once the plan could be whole; each with two working
+    /// purses kept back. Never sells gold down the Gate. Returns what it did, for the bot's log.
     /// </summary>
     public static string AtMarket(GameState state)
     {
-        state.VisitMarket();
         var done = new List<string>();
-        if (state.Whisper is CaseClue clue && state.Gold >= state.SecretPrice + 2 * state.WorkingPurse && state.BuySecret())
-            done.Add($"secret {clue.Key}"); // loc: keys
-        if (state.MimicGrown && (state.Week >= Guild.Weeks - 1 || (state.Gilded.Count == 0 && state.Flagged(Mimics.ThornwickWoke))))
-            done.Add($"mimic +{state.SellKeptMimic()}g"); // loc: keys
+        int spare = state.Gold - 2 * state.WorkingPurse;
+        if (state.PassOffered && spare >= state.PassPrice && state.BuyPass())
+        {
+            done.Add("weighhouse"); // loc: keys
+            spare -= state.PassPrice;
+        }
+        if (state.DivertOffered && spare >= state.DivertPrice && state.Divert())
+        {
+            done.Add("crate diverted"); // loc: keys
+            spare -= state.DivertPrice;
+        }
+        if (state.BargeOffered && Story.Allies(state, tonight: false).Count < Campaign.AlliesNeeded && state.KnowsAlive && spare >= state.BargePrice &&
+            state.HireBarge())
+            done.Add("barge"); // loc: keys
         return string.Join(", ", done);
     }
 
     /// <summary>
-    /// A mimic just opened: the careful player keeps one while there's someone gilded it could grow to wake, or a thief to
-    /// keep off, and the season's long enough to raise it; otherwise it goes to the menagerie.
+    /// A mimic just opened: the careful player keeps one while it could be useful this season (someone in the back room or
+    /// still to free, the plan, or a thief to keep off) and there's time to feed it full; otherwise the menagerie buys it.
     /// </summary>
     public static bool KeepMimic(GameState state) =>
         state.CanKeepMimic && state.Week <= Guild.Weeks - Mimics.GrowsAfter &&
-        (state.Gilded.Count > 0 || !state.Flagged(Mimics.ThornwickWoke) || state.Foe(Faction.Lockless));
+        (state.Guests.Count > 0 || state.KnowsInventory || state.Knows("seal") || state.Foe(Faction.Lockless));
 
     /// <summary>
-    /// The careful player works out a question of the case once the clues have given the right word for every blank
-    /// (read as a player would read them: nothing guessed). Returns how many were worked out.
+    /// The back room, each night (the sim, and the bot at Nim's table): a full mimic eats the gold off a guest (Bram
+    /// first), and a freed guest's note is paid if there's a working purse to spare. Returns what it did.
     /// </summary>
-    public static int WorkOut(GameState state)
+    public static string TendBackRoom(GameState state)
     {
-        int done = 0;
-        foreach (var q in state.OpenQuestions.Where(q => !state.Knows(q)).ToList())
-            if (Enumerable.Range(0, q.Blanks.Length).All(b => state.Words(q, b).Any(w => w.Key == q.Answer[b])) && state.Check(q, q.Answer) == 0)
-                done++;
-        return done;
+        var done = new List<string>();
+        foreach (string person in state.Guests.Keys.OrderBy(p => p == Campaign.Bram ? 0 : 1).ToList())
+        {
+            if (!state.Guests[person] && state.MimicFull && state.Ungild(person)) done.Add($"ungilded {person}"); // loc: keys
+            if (state.Guests.TryGetValue(person, out bool freed) && freed && state.NoteFor(person) > 0 &&
+                state.Gold - state.NoteFor(person) >= state.WorkingPurse && state.RedeemGuest(person))
+                done.Add($"redeemed {person}"); // loc: keys
+        }
+        return string.Join(", ", done);
     }
 
+    /// <summary>A Guild crate at the counter: the careful player buys one with someone in it when it can spare the price (two purses kept back).</summary>
+    public static bool BuyCrate(GameState state, Visit visit) =>
+        visit.Chest.Crate != null && state.Gold - visit.Ask >= state.WorkingPurse;
+
     /// <summary>
-    /// Vane's offer for Bram's pledge (the debt for the Key): never. It's the Maw's bargain by another door: the run ends
-    /// with the Gate open, no clear and none of the debt's points.
+    /// At the treasury once you remember, without the plan whole: go in (and be swallowed again) or stay away. The
+    /// careful player stays away: nothing's learned in there that it doesn't know.
     /// </summary>
-    public static bool TakePledgeOffer(GameState state) => false;
+    public static bool StayAway(GameState state) => state.Remembers;
 
     /// <summary>Most a careful collector gives up, in sale price, for each exhibition point.</summary>
     public const int GoldPerPoint = 20;

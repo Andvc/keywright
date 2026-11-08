@@ -51,15 +51,27 @@ public partial class MentorView : Control
         _panel = UiKit.MakePanel(Palette.Gold.Darkened(0.25f)).Place(0, 0, W, H);
         _panel.MouseFilter = MouseFilterEnum.Ignore;
         AddChild(_panel);
-        var bram = new Sprite2D
+        // Bram's away at the treasury (0.34): his tips are the notes he left in the margins of his notebook.
+        if (Main.Instance?.State?.BramNotes == true)
         {
-            Texture = ArtTexture.Load("res://assets/sprites/sellers/bram.png"),
-            Position = new Vector2(52, 58),
-        };
-        // As far as the gold has climbed (0.33): his throat, from the fifth week.
-        Gilt.Bram(bram, Main.Instance?.State, Gilt.Portrait);
-        AddChild(UiKit.Outline(bram));
-        AddChild(UiKit.MakeLabel(Hints.Mentor.ToUpperInvariant(), 16, Palette.Gold, HorizontalAlignment.Center).Place(4, 98, 96, 20));
+            AddChild(new Painter(p =>
+            {
+                p.DrawRect(new Rect2(18, 14, 68, 80), Palette.Paper);
+                p.DrawRect(new Rect2(18, 14, 68, 80), Palette.Ink, false, 2);
+                for (int line = 0; line < 6; line++) p.DrawRect(new Rect2(26, 26 + line * 11, line % 3 == 2 ? 34 : 52, 2), Palette.Ink.Lightened(0.35f));
+            }));
+            AddChild(UiKit.MakeLabel(Loc.T("BRAM'S NOTES"), 16, Palette.Gold, HorizontalAlignment.Center).Place(0, 98, 104, 20));
+        }
+        else
+        {
+            var bram = new Sprite2D
+            {
+                Texture = ArtTexture.Load("res://assets/sprites/sellers/bram.png"),
+                Position = new Vector2(52, 58),
+            };
+            AddChild(UiKit.Outline(bram));
+            AddChild(UiKit.MakeLabel(Hints.Mentor.ToUpperInvariant(), 16, Palette.Gold, HorizontalAlignment.Center).Place(4, 98, 96, 20));
+        }
         _text = UiKit.MakeLabel("", 16, Palette.Text).Wrapped().Place(104, 8, W - 116, H - 30);
         _text.VerticalAlignment = VerticalAlignment.Center;
         AddChild(_text);

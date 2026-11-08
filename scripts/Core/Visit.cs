@@ -331,7 +331,7 @@ public sealed class Visit
     /// </summary>
     public string Explain()
     {
-        if (Seller == Story.VaultSeller) return Loc.T("King Aldric's own chest, sealed since the Locking. The Gate's gone quiet. Every bit of it is yours.");
+        if (Chest.Crate != null) return Loc.T("A Guild crate off the palace road, with someone in it.");
         string name = Seller.Short;
         var lines = new List<string>();
         if (Chest.Items.All(i => i.IsSong) && Chest.Hidden == null)

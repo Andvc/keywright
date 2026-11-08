@@ -20,14 +20,15 @@ namespace Keywright;
 /// --start-tier=N and --gold=N (jump ahead with the tools you'd have by then), --opening-demo (opens a blue chest
 /// holding one thing of each quality, two of them better than the chest, and a Heartsong, to preview the opening's
 /// effects; quits after with --quit-at-end), --shell-demo (with --shots: the title screen, a new game, the pause menu and the
-/// settings, one screenshot each, then quits), --vault-demo (opens King Aldric's vault; quits after with --quit-at-end),
+/// settings, one screenshot each, then quits), --treasury-demo (the treasury on the last night: the first swallowing;
+/// --treasury-demo=final, the final opening with the plan whole; quits after with --quit-at-end),
 /// --start-week=N (a shop as a careful player would have it by then, played
 /// through by the balance simulation; --gold=N then sets its purse). Autoplay sets --days=N to stop after that many days.
 /// --character=KEY and --challenge=N play one of Bram's kin, at a challenge level (--terms=a,b: with just those boons and banes).
 /// --engine starts with the Bookkeeping Engine, to see it read every chest. --curios=a,b,c owns those curios from the start.
 /// --tales=a,b puts those tales in the season, whatever it draws.
 /// --heartsongs=P makes a Heartsong turn up in that share of chests; --songs=all plays as if every one had been found
-/// (with --vault-demo, the Crown Chest's other ending). --mimics=N makes one chest in N breathe (from Thornwick, 0.33).
+/// --mimics=N makes one chest in N breathe (from Thornwick, once you remember the treasury).
 /// --season=N plays a later season (the last one lost, so the year turned back); --knew=all as if every question of the
 /// case had been worked out in an earlier season.
 /// </summary>
@@ -209,7 +210,8 @@ public partial class Main : Node2D
         GetTree().Root.Theme = MakeTheme();
         _seed = int.TryParse(Arg(args, "--seed"), out var s) ? s : (int)(Time.GetUnixTimeFromSystem() % 1_000_000);
         // Straight into a day for the bot and the debugging shortcuts; everyone else gets the title screen.
-        bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--vault-demo") || args.Contains("--pad-test") ||
+        bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--treasury-demo") || Arg(args, "--treasury-demo") != null ||
+                      args.Contains("--pad-test") ||
                       Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null;
         if (direct)
         {
@@ -234,13 +236,12 @@ public partial class Main : Node2D
             if (int.TryParse(Arg(args, "--season"), out var season) && season > 1)
             {
                 State.SeasonsBefore = season - 1;
-                State.LastEnd = Story.Lost;
+                State.LastEnd = Campaign.Swallowed;
+                State.Remembers = true;
+                State.Note("again");
             }
             if (Arg(args, "--knew") == "all")
-            {
-                State.KnownBefore.UnionWith(Case.Questions.Where(q => !q.Career || State.SeasonsBefore > 0).Select(q => q.Key));
-                State.Truths.UnionWith(State.KnownBefore);
-            }
+                State.KnownBefore.UnionWith(Inquiry.Entries.Where(e => !e.Held && e.Way != EntryWay.Lead).Select(e => e.Key));
             if (int.TryParse(Arg(args, "--start-tier"), out var startTier))
                 State.SkipTo(Math.Clamp(startTier, 1, ShopTiers.Max), int.TryParse(Arg(args, "--gold"), out var g) ? g : 500);
             // --tales=a,b: those tales are in the season, whatever it draws (to check one on demand).
@@ -313,7 +314,8 @@ public partial class Main : Node2D
         else if (args.Contains("--fit-test")) FitTest();
         else if (!direct) ToTitle();
         else if (args.Contains("--opening-demo")) OpeningDemo(args.Contains("--quit-at-end"));
-        else if (args.Contains("--vault-demo")) VaultDemo(args.Contains("--quit-at-end"));
+        else if (args.Contains("--treasury-demo") || Arg(args, "--treasury-demo") != null)
+            TreasuryDemo(Arg(args, "--treasury-demo") == "final", args.Contains("--quit-at-end"));
         else BeginPlaying();
         if (args.Contains("--pad-test")) PadTest();
     }
@@ -324,7 +326,7 @@ public partial class Main : Node2D
         SignalAwaiter Wait(double s) => ToSignal(GetTree().CreateTimer(s, true), SceneTreeTimer.SignalName.Timeout);
         _demo = true;
         // A profile with some runs behind it, so the character screen has something to show.
-        Profile = new Profile { Runs = 9, Cleared = 2, Vaults = 0, BestWeek = 8, BestTier = 3, LastCharacter = Characters.Hesk };
+        Profile = new Profile { Runs = 9, Cleared = 2, BestWeek = 8, BestTier = 3, LastCharacter = Characters.Hesk };
         Profile.Challenge[Characters.Kit] = 2;
         // Hesk at the top level: the most boons and banes the setup screen and the pause menu ever list.
         Profile.Challenge[Characters.Hesk] = Challenges.Max;
@@ -529,29 +531,40 @@ public partial class Main : Node2D
     }
 
     /// <summary>
-    /// A clue for the case, noted for a few seconds under the top bar: how it came (seen, said, found, heard) and the
-    /// question it belongs to. Clicking it opens the notebook's Case page where the screen allows.
+    /// An Inquiry entry just noted (0.34): a note over the top bar (how you came by it, and the question it's for), which
+    /// opens the notebook's Inquiry page where it can.
     /// </summary>
-    void NoteClue(CaseClue clue)
+    void NoteEntry(Entry entry)
     {
-        var question = Case.Question(clue.Question);
-        // The career's question is asked from the second season: before that a clue to it is noted quietly.
-        if (question == null || !State.Asking(question)) return;
+        var thread = Inquiry.Threads.FirstOrDefault(t => t.Key == entry.Thread);
+        if (thread == null) return;
+        string head = Loc.T($"In the notebook ({Inquiry.WayName(entry.Way)})"), ask = thread.Ask;
+        Toast(head, ask, Palette.Magic, Loc.T("Open the notebook's Inquiry page"), () => _phase?.ShowInquiry());
+    }
+
+    /// <summary>A piece of the treasury key just earned: the Guild's courier, over the top bar.</summary>
+    void NotePiece(string piece)
+    {
+        Toast(Loc.T($"{Campaign.PieceName(piece)} of the treasury key"), Loc.T($"{State.Pieces.Count} of {Campaign.Pieces.Length}, with the Guild's compliments"),
+            Palette.Gold, Loc.T("Open the notebook's Inquiry page"), () => _phase?.ShowInquiry());
+    }
+
+    void Toast(string head, string text, Color color, string tooltip, System.Action click)
+    {
         var layer = new CanvasLayer { Layer = 85, ProcessMode = ProcessModeEnum.Always };
         AddChild(layer);
-        string head = Loc.T($"New clue ({Case.WayName(clue.Way)})"), ask = question.Ask;
-        float w = Mathf.Clamp(Mathf.Max(UiKit.TextWidth(head), UiKit.TextWidth(ask)) + 72, 360, 760);
-        var panel = UiKit.MakePanel(Palette.Magic.Darkened(0.35f)).Place(640 - w / 2, 58, w, 62);
+        float w = Mathf.Clamp(Mathf.Max(UiKit.TextWidth(head), UiKit.TextWidth(text)) + 72, 360, 760);
+        var panel = UiKit.MakePanel(color.Darkened(0.35f)).Place(640 - w / 2, 58, w, 62);
         panel.MouseFilter = Control.MouseFilterEnum.Stop;
         panel.MouseDefaultCursorShape = Control.CursorShape.PointingHand;
-        panel.TooltipText = Loc.T("Open the notebook's Case page");
+        panel.TooltipText = tooltip;
         panel.GuiInput += e =>
         {
-            if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } && _phase != null && !GetTree().Paused) _phase.ShowCase();
+            if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } && _phase != null && !GetTree().Paused) click();
         };
         layer.AddChild(panel);
-        panel.AddChild(UiKit.MakeLabel(head, 16, Palette.Magic, HorizontalAlignment.Center).Place(0, 8, w, 20));
-        panel.AddChild(UiKit.MakeLabel(ask, 16, Palette.Text, HorizontalAlignment.Center).Place(0, 32, w, 20));
+        panel.AddChild(UiKit.MakeLabel(head, 16, color, HorizontalAlignment.Center).Place(0, 8, w, 20));
+        panel.AddChild(UiKit.MakeLabel(text, 16, Palette.Text, HorizontalAlignment.Center).Place(0, 32, w, 20));
         panel.Modulate = new Color(1, 1, 1, 0);
         Sfx.Play("sting", 1.15f, -12);
         var tween = layer.CreateTween();
@@ -806,26 +819,21 @@ public partial class Main : Node2D
         if (quit) QuitGame();
     }
 
-    /// <summary>Opens King Aldric's vault straight away (no lock), to see the finale's opening.</summary>
-    async void VaultDemo(bool quit)
+    /// <summary>
+    /// The treasury straight away, on the season's last night with the account paid and the key whole: the first
+    /// swallowing, or (final) the final opening with the plan whole.
+    /// </summary>
+    void TreasuryDemo(bool final, bool quit)
     {
+        _demo = true;
+        _quitAfterTreasury = quit;
         State.SkipTo(ShopTiers.Max, 1000);
         Hud.SetGold(State.Gold, animate: false);
-        State.Opening = State.VaultPurchase();
-        var opening = new OpeningPhase();
-        SwitchTo(opening);
-        while (IsInstanceValid(opening) && !opening.Finished) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        await ToSignal(GetTree().CreateTimer(3.0), SceneTreeTimer.SignalName.Timeout);
-        // Then the epilogue (sung whole with --songs=all), a line every two seconds.
-        var scene = new ScenePhase(Story.VaultEpilogue(State), () => { }, State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE CROWN CHEST"), "vault");
-        SwitchTo(scene);
-        while (IsInstanceValid(scene) && !scene.Done)
-        {
-            await ToSignal(GetTree().CreateTimer(2.0), SceneTreeTimer.SignalName.Timeout);
-            if (IsInstanceValid(scene) && !scene.Done) scene.Advance();
-        }
-        if (quit) QuitGame();
+        State.DemoTreasury(final);
+        Treasury();
     }
+
+    bool _quitAfterTreasury;
 
     /// <summary>Saves the shop (a real game only), starts a new day, and plays its morning.</summary>
     public void StartDay()
@@ -879,17 +887,10 @@ public partial class Main : Node2D
     /// <summary>After the day's end: the Guild's introduction (the second evening), its due (the fifth), or the night.</summary>
     public void CloseDay()
     {
-        // The Maw paid the debt at the counter today: Vane's last visit, and the end of the run.
-        if (State.GateOpens && State.ClearedDay == State.Day && !State.Flagged("bargain.told"))
-        {
-            State.Flags.Add("bargain.told");
-            Cleared();
-            return;
-        }
         if (!State.GuildIntroduced && State.Day >= GameState.IntroDay) SwitchTo(new ScenePhase(Story.Intro(State), Night, Loc.T("THE GILDED GUILD"), "guild"));
         else if (State.DuesTonight && !State.PaidThisWeek) SwitchTo(new DuesPhase());
-        // The debt was paid off early and the last piece of the map has just come: the vault, tonight.
-        else if (State.VaultDue) SwitchTo(new ScenePhase(Story.MapWhole(State), Vault, Loc.T("THE ALDRIC KEY"), "vault"));
+        // The debt was paid off early and the key's last piece has just come: the treasury, tonight.
+        else if (State.TreasuryDue) Treasury();
         else Night();
     }
 
@@ -929,6 +930,13 @@ public partial class Main : Node2D
             Cleared();
             return;
         }
+        // The first Guild night: the treasury's summons, and Bram goes (0.34).
+        if (State.SummonsTonight)
+        {
+            State.Summon();
+            SwitchTo(new ScenePhase(Story.Summons(State), Night, Loc.T("THE TREASURY'S SUMMONS"), "guild"));
+            return;
+        }
         Night();
     }
 
@@ -948,39 +956,97 @@ public partial class Main : Node2D
     /// <summary>The debt's just been cleared: Vane's last visit and Bram's joy, then the vault or the end of the run.</summary>
     void Cleared()
     {
-        // A debt the Maw paid isn't a clear: no harder level opens for it.
-        if (!State.GateOpens)
-            WriteProfile(p =>
-            {
-                p.Cleared++;
-                p.ClearedAt(State);
-            });
-        SwitchTo(new ScenePhase(Story.Cleared(State), Vault, Loc.T("FREE AND CLEAR"), "bram"));
+        WriteProfile(p =>
+        {
+            p.Cleared++;
+            p.ClearedAt(State);
+        });
+        SwitchTo(new ScenePhase(Story.Cleared(State), AfterCleared, Loc.T("FREE AND CLEAR"), State.BramHere ? "bram" : "guild"));
     }
 
-    /// <summary>With the whole map, Mara and Bram bring King Aldric's vault to the counter: pick its lock and open it.</summary>
-    void Vault()
+    /// <summary>The debt's paid: Bram's homecoming if he's freed, then the treasury (with the key whole) or the season's end.</summary>
+    void AfterCleared()
     {
-        if (!State.VaultDue)
+        if (State.BramComesHome)
         {
-            EndRun(cleared: true);
+            SwitchTo(new ScenePhase(Story.Homecoming(State), () =>
+            {
+                State.WelcomeBram();
+                AfterCleared();
+            }, Loc.T("TWO TAPS AND ONE"), "bram"));
             return;
         }
-        State.VaultOpened = true;
-        WriteProfile(p => p.Vaults++);
-        State.Opening = State.VaultPurchase();
-        SwitchTo(new LockpickPhase());
-        Moment("24_vault_lock", 1.5);
+        if (State.TreasuryDue) Treasury();
+        else EndRun(cleared: true);
+    }
+
+    /// <summary>
+    /// The treasury (0.34, docs/narrative.md): the Guild's carriage, then the great chest at the counter. The first time
+    /// it swallows you; once you remember you can stay away; with the plan whole, it's the final opening.
+    /// </summary>
+    void Treasury()
+    {
+        var mode = State.PlanWhole ? TreasuryMode.Final : State.Remembers ? TreasuryMode.Again : TreasuryMode.First;
+        WriteProfile();
+        SwitchTo(new ScenePhase(Story.TreasuryInvite(State), () => SwitchTo(new TreasuryPhase(mode)), Loc.T("THE TREASURY"), "vault"));
+    }
+
+    /// <summary>What came of the treasury: swallowed (the year turns, and you remember), stayed away (the season ends), the door left to the Maw (it turns anyway), or the door closed (the next day).</summary>
+    public void AfterTreasury(TreasuryResult result)
+    {
+        switch (result)
+        {
+            case TreasuryResult.Swallowed:
+                State.Swallow();
+                Rewind();
+                break;
+            case TreasuryResult.Stayed:
+                State.StayAway();
+                EndRun(cleared: true);
+                break;
+            case TreasuryResult.DoorLeft:
+                State.LeaveTheDoor();
+                SwitchTo(new ScenePhase(Story.DoorLeft(State), Rewind, Loc.T("THE LAST CHEST"), "vault"));
+                break;
+            default:
+                State.CloseTheDoor();
+                WriteProfile();
+                SwitchTo(new ScenePhase(Story.NextDay(State), () =>
+                {
+                    State.BeginNextDay();
+                    Hud.SetDay(State.Day, State.Tier);
+                    Hud.SetDue(State);
+                    NextCustomer();
+                }, Loc.T("THE NEXT DAY"), "bram"));
+                break;
+        }
+    }
+
+    /// <summary>
+    /// The year turns: the season is banked, and (a real game) the next one starts at once with the same keywright at the
+    /// same level, on the first morning. The bot and the demos stop here.
+    /// </summary>
+    void Rewind()
+    {
+        WriteProfile(p => p.Bank(State));
+        if (_saving) Storage.Delete(SavePath);
+        if (_bot != null || _demo)
+        {
+            if (_bot != null || _quitAfterTreasury) QuitGame();
+            else ToTitle();
+            return;
+        }
+        _saving = false;
+        StartRun(State.Character, State.Challenge);
     }
 
     /// <summary>After a chest's been opened: the next customer, or (after the vault) the epilogue and the end of the debt.</summary>
     public void AfterOpening()
     {
-        if (State.Opening?.Visit.Seller == Story.VaultSeller)
+        // The next day's one chest, the waterwheel's tools: the shop goes on (0.34).
+        if (State.Opening?.Visit.Beat == GameState.WaterwheelBeat)
         {
-            if (State.SongWhole) WriteProfile(p => p.SungWhole++);
-            SwitchTo(new ScenePhase(Story.VaultEpilogue(State), () => EndRun(cleared: true),
-                State.SongWhole ? Loc.T("THE LOCKING, SUNG WHOLE") : Loc.T("THE CROWN CHEST"), "vault"));
+            SwitchTo(new ScenePhase(Story.ShopGoesOn(State), () => EndRun(cleared: true), Loc.T("THE NEXT DAY"), "bram"));
             return;
         }
         NextCustomer();
@@ -1128,11 +1194,16 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
-        // A clue just found (0.33): a note over the top bar, which opens the case where it can.
-        if (State?.NewClue is CaseClue clue)
+        // An Inquiry entry just noted, or a piece of the treasury key earned (0.34): a note over the top bar.
+        if (State?.NewEntry is Entry entry)
         {
-            State.NewClue = null;
-            NoteClue(clue);
+            State.NewEntry = null;
+            NoteEntry(entry);
+        }
+        else if (State?.NewPiece is string piece)
+        {
+            State.NewPiece = null;
+            NotePiece(piece);
         }
         if (_camera == null) return;
         _trauma = Mathf.Max(0f, _trauma - (float)delta * 1.6f);

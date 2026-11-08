@@ -98,11 +98,9 @@ public partial class ScenePhase : Phase
     static void Show(Face face, string key)
     {
         face.Who = key;
-        face.Portrait.Texture = ArtTexture.Load($"res://assets/figures/{Sellers.LookOf(key)}.png");
+        face.Portrait.Texture = ArtTexture.Load($"res://assets/figures/{Story.Look(key)}.png");
         UiKit.Outline(face.Portrait, whole: true);
-        // Bram's hand, as far as the gold has climbed (0.33).
-        if (key == Story.Bram) Gilt.Bram(face.Portrait, Game.State, Gilt.Figure);
-        else face.Portrait.Material = null;
+        face.Portrait.Material = null;
         face.Name.Text = Story.Name(key);
     }
 

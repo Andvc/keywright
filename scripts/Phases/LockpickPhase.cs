@@ -148,6 +148,7 @@ public partial class LockpickPhase : Phase
         Done = true;
         _crowbar.Disabled = true;
         _purchase.Grade = grade;
+        State.Picked(_purchase.Chest.Lock, grade);
         if (grade == PickGrade.Forced && _purchase.Chest.Force(State.Rng, State.ForceSturdier).Count > 0)
         {
             Sfx.Play("shatter");

@@ -51,7 +51,7 @@ Loc.T($"Coin {Pounds(Category.Coins)} lb, weapons {Pounds(Category.Arms)}, cloak
                 Loc.T($"A shelf from the start: she can display {IsoldeShelf} things at Bram's stall."),
                 Loc.T($"Visitors pay to see her collection: every night, {DoorCoins}g for every {DoorPoints} points of exhibition."),
                 Loc.T("Her collection is not for pawning: on a short night, the Guild can only take her curios."),
-            }, Loc.T("Open the Crown Chest to unlock."), p => p.Vaults >= 1,
+            }, Loc.T("Open the great chest at the Guild's treasury to unlock."), p => p.Swallowed >= 1 || p.Finished,
             Loc.T("The Guild foreclosed on House Marchmont and sold it chest by chest. Isolde kept her collection, her steward, and a mark nobody else had.")),
     };
 
@@ -265,8 +265,8 @@ public static class Challenges
 /// </summary>
 public static class Score
 {
-    public const int PerDue = 10, Cleared = 100, PerDaySpare = 5, Vault = 100, PerPiece = 10, PerRenovation = 25, PerFind = 2, PerEndlessWeek = 25,
-        PerSong = 20, SungWhole = 200, Trial = 75, PerFriend = 5;
+    public const int PerDue = 10, Cleared = 100, PerDaySpare = 5, Treasury = 100, PerPiece = 10, PerRenovation = 25, PerFind = 2, PerEndlessWeek = 25,
+        PerSong = 20, NextDay = 200, BramHome = 50, Trial = 75, PerFriend = 5;
 
     /// <summary>The run's points, line by line (lines worth nothing are left out).</summary>
     public static List<(string Label, int Points)> Lines(GameState state)
@@ -276,18 +276,19 @@ public static class Score
         {
             if (points > 0) lines.Add((label, points));
         }
-        int dues = state.GateOpens ? state.PaidBeforeMaw : Math.Min(state.WeeksPaid, Guild.Weeks);
+        int dues = Math.Min(state.WeeksPaid, Guild.Weeks);
         Add(Loc.T($"Guild dues paid ({dues} of {Guild.Weeks})"), dues * PerDue);
-        // The Maw paid the debt, not you: it scores nothing (0.30).
-        if (state.DebtCleared && !state.GateOpens)
+        if (state.DebtCleared)
         {
             Add(Loc.T("Bram's debt cleared"), Cleared);
             int spare = Math.Max(0, Guild.Weeks * Guild.DaysPerWeek - state.ClearedDay);
             Add(Loc.T($"Days to spare ({spare})"), spare * PerDaySpare);
         }
-        if (state.VaultOpened) Add(Loc.T("The Crown Chest"), Vault);
-        else Add(Loc.T($"Key shards ({state.MapPieces})"), state.MapPieces * PerPiece);
-        if (state.VaultOpened && state.SongWhole) Add(Loc.T("The Locking, sung whole"), SungWhole);
+        // The campaign (0.34): the treasury key's pieces, the treasury, Bram brought home, and the next day.
+        Add(Loc.T($"Pieces of the treasury key ({state.Pieces.Count})"), state.Pieces.Count * PerPiece);
+        if (state.TreasuryDone && state.TreasuryEnd != Campaign.Stayed) Add(Loc.T("The treasury"), Treasury);
+        if (state.BramHome && !state.Flagged("bargained")) Add(Loc.T("Bram brought home"), BramHome);
+        if (state.TreasuryEnd == Campaign.Morning) Add(Loc.T("The next day"), NextDay);
         Add(Loc.T($"Heartsongs ({state.SongsFound.Count})"), state.SongsFound.Count * PerSong);
         Add(Loc.T($"Moves ({state.Tier - 1})"), (state.Tier - 1) * PerRenovation);
         Add(Loc.T($"Collection ({state.Found.Count} of {Collection.Size})"), state.Found.Count * PerFind);

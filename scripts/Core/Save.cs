@@ -15,7 +15,7 @@ public sealed class SaveData
     /// 5: 0.28's new cast and its tales (a version 4 save's regulars are renamed, and its tales start fresh); 4: 0.21's five
     /// weeks of five days (older saves are moved onto them: <see cref="FromJson"/>).
     /// </summary>
-    public const int CurrentVersion = 6;
+    public const int CurrentVersion = 7;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -103,10 +103,6 @@ public sealed class SaveData
     public int Surprises { get; set; }
     public int HiddenFound { get; set; }
     public int Bargains { get; set; }
-    public bool BramPiece { get; set; }
-    public int HoodPieces { get; set; }
-    public bool MapGiven { get; set; }
-    public bool VaultOpened { get; set; }
     public List<string> Curios { get; set; } = new();
 
     /// <summary>What was paid for each curio, in the same order.</summary>
@@ -137,7 +133,6 @@ public sealed class SaveData
     public int LoanOwed { get; set; }
     public int LoanDue { get; set; }
     public Dictionary<string, int> Until { get; set; }
-    public int PaidBeforeMaw { get; set; }
     public Dictionary<string, int> Standing { get; set; }
     public List<Notice> Notices { get; set; }
     public List<Held> BackRoom { get; set; }
@@ -150,24 +145,31 @@ public sealed class SaveData
     public List<Promise> Promises { get; set; }
     public int PorterUntil { get; set; }
 
-    // 0.33: the case (Case.cs) and the Gilding (Gilding.cs). Null in an older save, which starts them fresh.
-    public List<string> CaseClues { get; set; }
-    public List<string> CaseSolved { get; set; }
-    /// <summary>What was worked out in earlier seasons as this one began (known, never paid off again).</summary>
-    public List<string> CaseKnown { get; set; }
+    // 0.34: the campaign (Campaign.cs) and the Inquiry (Inquiry.cs). Null in an older save, which starts them fresh.
+    public List<string> Noted { get; set; }
+    public List<string> KnownBefore { get; set; }
+    public bool Remembers { get; set; }
+    public bool CampaignDone { get; set; }
+    public bool SavedBramBefore { get; set; }
+    public List<string> FirstChest { get; set; }
+    public List<string> Pieces { get; set; }
+    public bool BramAway { get; set; }
+    public bool BramHome { get; set; }
+    public Dictionary<string, bool> Guests { get; set; }
+    public List<string> Rescued { get; set; }
     public Dictionary<string, int> Claims { get; set; }
-    public Dictionary<string, int> Gilded { get; set; }
+    public Dictionary<string, int> Taken { get; set; }
+    public string TreasuryEnd { get; set; }
 
-    /// <summary>A mimic kept in the back room: the Guild nights it's been fed (-1: none); mimics opened, and the gilded one woke.</summary>
+    /// <summary>A mimic in your care: the Guild nights it's been fed since it last ate (-1: none); mimics opened; kept at the menagerie.</summary>
     public int Mimic { get; set; } = -1;
     public int MimicsFound { get; set; }
-    public int MimicsWoke { get; set; }
+    public bool MimicAtMenagerie { get; set; }
 
-    /// <summary>The Lantern Market: gold things sold down the Gate, and the night a secret was last bought.</summary>
+    /// <summary>The Lantern Market: gold things sold down the Gate.</summary>
     public int EyesSold { get; set; }
-    public int SecretNight { get; set; }
 
-    /// <summary>Seasons played before this one, and how the last one ended (<see cref="Story.End"/>), as they were when it began.</summary>
+    /// <summary>Seasons played before this one, and how the last one ended (<see cref="Campaign"/>'s ends), as they were when it began.</summary>
     public int SeasonsBefore { get; set; }
     public string LastEnd { get; set; }
 
@@ -213,7 +215,6 @@ public sealed class SaveData
             {
                 data.Version = 2;
                 data.WeeksPaid = data.Day / OldDaysPerWeek;
-                data.BramPiece = data.Day >= OldDaysPerWeek;
                 data.Owned.Remove("warrant");
             }
             // 0.20's three-day weeks (version 3), or the five-day weeks before them (version 2), onto 0.21's five weeks of
@@ -254,6 +255,12 @@ public sealed class SaveData
                 data.Arrears = Scale(data.Arrears);
                 data.CurioPaid = (data.CurioPaid ?? new List<int>()).Select(Scale).ToList();
                 if (data.Keepsakes != null) data.Keepsakes = data.Keepsakes.ToDictionary(k => k.Key, k => Scale(k.Value));
+                data.Version = 6;
+            }
+            // 0.34's campaign: a season saved past its first Guild night has seen Bram go to the treasury.
+            if (data.Version == 6)
+            {
+                data.BramAway = data.Day > Guild.DaysPerWeek;
                 data.Version = CurrentVersion;
             }
             return data;
@@ -301,7 +308,7 @@ public sealed class Profile
     /// 2: 0.28's new cast (an older profile's regulars and lessons are renamed); 1: 0.27's, the first with a version (every
     /// profile before it reads as 1). A newer one isn't read.
     /// </summary>
-    public const int CurrentVersion = 2;
+    public const int CurrentVersion = 3;
 
     /// <summary>As read: a profile from before versions (0.26 and older) has none, and reads as 1. Written as <see cref="CurrentVersion"/>.</summary>
     public int Version { get; set; } = 1;
@@ -315,13 +322,16 @@ public sealed class Profile
     [System.Text.Json.Serialization.JsonIgnore]
     public int TermsSeed => unchecked(Runs * 7919 + 104729);
     public int Cleared { get; set; }
-    public int Vaults { get; set; }
+    /// <summary>The campaign (0.34): times you've been swallowed at the treasury (from the first, you remember), times you've brought Bram home, the last offer taken, and the true ending reached.</summary>
+    public int Swallowed { get; set; }
+    public int Rescues { get; set; }
+    public int FinalOffers { get; set; }
+    public bool Finished { get; set; }
 
     /// <summary>The Heartsongs Bram's kin have ever opened (the ledger's songbook): all nine change the Crown Chest's ending.</summary>
     public List<string> Songs { get; set; } = new();
 
     /// <summary>Crown Chests opened with all nine Heartsongs known: the Locking sung whole.</summary>
-    public int SungWhole { get; set; }
 
     /// <summary>Notes the Heartsongs a run has opened. Returns how many of them are new to the songbook.</summary>
     public int Learn(GameState state)
@@ -394,16 +404,13 @@ public sealed class Profile
     /// <summary>Per character: the best score a run of theirs has made.</summary>
     public Dictionary<string, int> BestScore { get; set; } = new();
 
-    /// <summary>
-    /// The case's answers worked out in any season (0.33, <see cref="Case"/>): in a later season they're filled in already,
-    /// in your own hand.
-    /// </summary>
-    public List<string> Truths { get; set; } = new();
+    /// <summary>What the Inquiry knows (0.34, <see cref="Inquiry"/>): found out in any season, it's known in every later one.</summary>
+    public List<string> Known { get; set; } = new();
 
-    /// <summary>The clues to the career's question (why the spring comes round again), found in any season.</summary>
-    public List<string> CareerClues { get; set; } = new();
+    /// <summary>What the first-morning chest held, the first time it was opened (item keys): remembered every spring after.</summary>
+    public List<string> FirstChest { get; set; } = new();
 
-    /// <summary>How the last season ended (<see cref="Story.End"/>): the next one's first morning knows.</summary>
+    /// <summary>How the last season ended (<see cref="Campaign"/>'s ends): the next one's first morning knows.</summary>
     public string LastEnd { get; set; }
 
     /// <summary>Who and what level the last run was, for the character screen.</summary>
@@ -424,7 +431,12 @@ public sealed class Profile
         foreach (var feat in Enum.GetValues<Feat>()) Feats[feat.ToString()] = Done(feat) + Curios.Progress(state, feat);
         int score = Score.Final(state);
         BestScore[state.Character] = Math.Max(BestScore.GetValueOrDefault(state.Character), score);
-        LastEnd = Story.End(state);
+        LastEnd = state.SeasonEndKey;
+        // The campaign: swallowed at the treasury (from the first, you remember), Bram brought home, the last offer, the true ending.
+        if (state.TreasuryEnd == Campaign.Swallowed) Swallowed++;
+        if (state.TreasuryEnd == Campaign.Bargained) FinalOffers++;
+        if (state.TreasuryEnd == Campaign.Morning) Finished = true;
+        if (state.BramHome && !state.Flagged("bargained")) Rescues++;
         return score;
     }
 
@@ -449,10 +461,9 @@ public sealed class Profile
             if (profile == null || profile.Version > CurrentVersion || profile.Version < 1) return null;
             profile.Songs ??= new();
             profile.Songs.RemoveAll(s => !Heartsongs.Exists(s));
-            profile.Truths ??= new();
-            profile.Truths.RemoveAll(t => Case.Question(t) == null);
-            profile.CareerClues ??= new();
-            profile.CareerClues.RemoveAll(c => Case.Clue(c) == null);
+            profile.Known ??= new();
+            profile.Known.RemoveAll(k => Inquiry.Get(k) == null);
+            profile.FirstChest ??= new();
             if (profile.Version == 1)
             {
                 profile.Met = profile.Met.Select(SaveData.Renamed).Distinct().ToList();
@@ -477,8 +488,8 @@ public sealed class Profile
         Remember(CuriosSeen, state.CuriosSeen);
         Remember(KeepsakesSeen, state.KeepsakesSeen);
         Remember(People, state.People);
-        Remember(Truths, state.Truths);
-        Remember(CareerClues, state.CareerClues);
+        Remember(Known, state.Noted.Where(k => Inquiry.Get(k) is Entry { Held: false }));
+        if (FirstChest.Count == 0) FirstChest.AddRange(state.FirstChest);
         foreach (string key in state.Taught.Where(k => !Taught.Contains(k))) Taught.Add(key);
         BestWeek = Math.Max(BestWeek, state.Week);
         BestGold = Math.Max(BestGold, state.Gold);
@@ -505,7 +516,7 @@ public sealed class Profile
 
     /// <summary>A line for the title screen, or null before the first run.</summary>
     public string Summary => Runs == 0 ? null
-        : Loc.T($"Best: week {BestWeek}   Debts cleared: {Cleared}{(FastestClear > 0 ? Loc.T($" (fastest: day {FastestClear})") : "")}   Crown Chests opened: {Vaults}{((Songs.Count > 0 ? Loc.T($"   Heartsongs: {Songs.Count}/{Heartsongs.All.Length}") : ""))}");
+        : Loc.T($"Best: week {BestWeek}   Debts cleared: {Cleared}{(FastestClear > 0 ? Loc.T($" (fastest: day {FastestClear})") : "")}{((Songs.Count > 0 ? Loc.T($"   Heartsongs: {Songs.Count}/{Heartsongs.All.Length}") : ""))}");
 }
 
 /// <summary>Something on display, as it's saved.</summary>

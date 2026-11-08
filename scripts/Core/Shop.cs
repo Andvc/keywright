@@ -189,7 +189,7 @@ public sealed partial class GameState
         Known.People.UnionWith(profile.People);
         Known.Tier = Math.Max(Known.Tier, profile.BestTier);
         Met.UnionWith(profile.Met);
-        RememberCase(profile);
+        RememberCampaign(profile);
         // What Bram has taught on this profile, in any run (even a day that's being played over): never again.
         Learned(profile.Taught, firstDay: false);
     }
@@ -312,7 +312,7 @@ public sealed partial class GameState
     /// <summary>A seller's told you where their chest came from: that's a place you've heard of.</summary>
     public void HeardStory(Visit visit)
     {
-        if (visit.Origin != null && visit.Seller != Story.VaultSeller) Places.Add(visit.Origin.Key);
+        if (visit.Origin != null) Places.Add(visit.Origin.Key);
     }
 
     // The shop opens up a step at a time: renovations once the stall has earned its keep, a shelf to display things
@@ -528,9 +528,9 @@ public sealed partial class GameState
             Places = Places.ToList(),
             Display = Display.Select(i => new SavedItem { Category = i.Category, Quality = i.Quality, Magic = i.Magic, Song = i.Song }).ToList(),
             SongsFound = SongsFound.ToList(), SongsKept = SongsKept,
-            WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, BramPiece = BramPiece, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek, PeddlerTier = PeddlerTier, TierSince = TierSince,
+            WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek, PeddlerTier = PeddlerTier, TierSince = TierSince,
             CurioPaid = _curios.Select(key => _curioPaid.GetValueOrDefault(key)).ToList(),
-            DrySpell = DrySpell, HoodPieces = HoodPieces, MapGiven = MapGiven, VaultOpened = VaultOpened,
+            DrySpell = DrySpell,
             PassStreak = PassStreak, LuckStreak = LuckStreak, Surprises = Surprises, HiddenFound = HiddenFound, Bargains = Bargains,
             PerfectReads = PerfectReads, BottomsOpened = BottomsOpened, WardsNamed = WardsNamed, SightUnseen = SightUnseen,
             CuriosOpen = CuriosOpen?.ToList(), Curios = _curios.ToList(), EventsSeen = _eventsSeen.ToList(), Plan = Plan, NextPlan = NextPlan,
@@ -556,10 +556,9 @@ public sealed partial class GameState
             Gold = data.Gold, Day = data.Day, Tier = Math.Clamp(data.Tier, 1, ShopTiers.Max), Guided = data.Guided,
             TotalEarned = data.TotalEarned, UpgradesOpen = data.UpgradesOpen, MagicFound = data.MagicFound,
             PerfectStreak = data.PerfectStreak, BestStreak = data.BestStreak,
-            WeeksPaid = data.WeeksPaid, Arrears = data.Arrears, GraceUsed = Math.Max(data.GraceCount, data.GraceUsed ? 1 : 0), BramPiece = data.BramPiece,
-            StashUsed = Math.Max(0, data.StashUsed), ClearedDay = data.ClearedDay, CloverWeek = data.CloverWeek, PeddlerTier = data.PeddlerTier, TierSince = data.TierSince, DrySpell = data.DrySpell, HoodPieces = data.HoodPieces,
-            MapGiven = data.MapGiven,
-            VaultOpened = data.VaultOpened, NextPlan = data.NextPlan,
+            WeeksPaid = data.WeeksPaid, Arrears = data.Arrears, GraceUsed = Math.Max(data.GraceCount, data.GraceUsed ? 1 : 0),
+            StashUsed = Math.Max(0, data.StashUsed), ClearedDay = data.ClearedDay, CloverWeek = data.CloverWeek, PeddlerTier = data.PeddlerTier, TierSince = data.TierSince, DrySpell = data.DrySpell,
+            NextPlan = data.NextPlan,
             PassStreak = data.PassStreak, LuckStreak = data.LuckStreak, Surprises = data.Surprises,
             HiddenFound = data.HiddenFound, Bargains = data.Bargains, PerfectReads = data.PerfectReads, BottomsOpened = data.BottomsOpened,
             WardsNamed = data.WardsNamed, SightUnseen = data.SightUnseen, CuriosOpen = data.CuriosOpen?.Where(Curios.Exists).ToHashSet(),
@@ -641,6 +640,7 @@ public sealed partial class GameState
         DipIntoStash();
         Today.Morning = CollectLoan();
         if (DayOfWeek == 1) StartWeek();
+        CampaignMorning();
         DrawTales();
         MeetPeople();
 
@@ -716,8 +716,7 @@ public sealed partial class GameState
     void MeetPeople()
     {
         if (GuildIntroduced) People.Add(Story.Vane);
-        if (Week >= 2) People.Add(Story.Hood);
-        if (Week >= Story.OfferWeek) People.Add(Story.Mara);
+        if (Remembers && Knows("seal")) People.Add(Story.Mara);
     }
 
     /// <summary>Their next visit would be a lesson.</summary>

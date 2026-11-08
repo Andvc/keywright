@@ -61,6 +61,7 @@ public sealed partial class GameState
         state.Guided = guided;
         state.CuriosOpen = curios?.ToHashSet();
         state.Gold = StartGold(state);
+        state.StartCampaign();
         // Bram's old picks: the fine lockpicks from the first day.
         if (state.Favoured(Challenges.OldPicks)) state._owned.Add("picks");
         return state;

@@ -40,8 +40,6 @@ public partial class Autoplay : Node
     /// <summary>Returns false (and quits) once the day limit is reached.</summary>
     public bool OnDayStarted(int day)
     {
-        // The careful player works out what yesterday's clues allow (0.33).
-        if (day > 1) Strategy.WorkOut(State);
         if (MaxDays <= 0 || day <= MaxDays) return true;
         GD.Print($"Autoplay finished {MaxDays} days with {State.Gold}g ({ShopTiers.Name(State.Tier)})");
         Main.Instance.QuitGame();
@@ -90,13 +88,16 @@ public partial class Autoplay : Node
             case TalkPhase talk:
                 await DriveTalk(talk);
                 break;
+            case TreasuryPhase treasury:
+                await DriveTreasury(treasury);
+                break;
             case DuesPhase dues:
                 await DriveDues(dues);
                 break;
             case RunEndPhase end:
                 await Wait(3.0);
                 GD.Print($"Autoplay: run over on day {State.Day}, week {State.Week}: {(end.Cleared ? "debt cleared" : "foreclosed")}, " +
-                         $"{State.WeeksPaid} dues paid, {State.Gold}g, {State.MapPieces} map pieces, vault {(State.VaultOpened ? "opened" : "not opened")}");
+                         $"{State.WeeksPaid} dues paid, {State.Gold}g, {State.Pieces.Count} key pieces, treasury {State.TreasuryEnd ?? "not opened"}");
                 // With days still to play, keep trading against the Guild's interest.
                 if (end.Cleared && MaxDays > State.Day && IsInstanceValid(end)) end.KeepTrading();
                 // Otherwise retire (or back to the title), as a player would: what comes between runs plays, then it quits.
@@ -157,6 +158,21 @@ public partial class Autoplay : Node
             await DriveMarket(peddler);
             if (!IsInstanceValid(peddler)) return;
         }
+        // The gilded in the back room (0.34): a full mimic eats the gold off one, and a freed one's note is paid.
+        if (State.Guests.Count > 0)
+        {
+            peddler.OpenBackRoom();
+            await Wait(1.2);
+            if (!IsInstanceValid(peddler)) return;
+            string tended = Strategy.TendBackRoom(State);
+            if (tended.Length > 0)
+            {
+                GD.Print($"Autoplay: the back room: {tended}");
+                peddler.OpenBackRoom();
+                await Wait(1.2);
+                if (!IsInstanceValid(peddler)) return;
+            }
+        }
         if (State.BackRoom.Any(h => !h.Kept))
         {
             peddler.OpenBackRoom();
@@ -202,6 +218,23 @@ public partial class Autoplay : Node
         if (IsInstanceValid(peddler)) peddler.Leave();
     }
 
+    /// <summary>
+    /// The treasury (0.34): the first time it shakes, drops and waits to be swallowed; once you remember, the careful
+    /// player stays away (unless --treasury-go); with the plan whole, it listens, knocks back, turns the key and closes the door.
+    /// </summary>
+    async Task DriveTreasury(TreasuryPhase treasury)
+    {
+        GD.Print($"Autoplay: the treasury ({treasury.Mode})");
+        while (IsInstanceValid(treasury) && !treasury.Finished)
+        {
+            treasury.BotStep(Strategy.StayAway(State) && !GoInAgain);
+            await Wait(0.6);
+        }
+    }
+
+    /// <summary>--treasury-go: once you remember, go into the treasury again rather than staying away (to see the second swallowing).</summary>
+    public bool GoInAgain { get; set; }
+
     /// <summary>The Lantern Market's night (0.33): down the stair, a look at the stalls, the careful player's business, and back up.</summary>
     async Task DriveMarket(PeddlerPhase peddler)
     {
@@ -225,7 +258,7 @@ public partial class Autoplay : Node
         if (!IsInstanceValid(dues)) return;
         if (dues.OfferOpen)
         {
-            dues.AnswerOffer(dues.PledgeOffer ? Strategy.TakePledgeOffer(State) : Strategy.TakeOffer(State));
+            dues.AnswerOffer(dues.PledgeOffer ? Strategy.TakeBargain(State) : Strategy.TakeBribe(State));
             await Wait(1.5);
             if (!IsInstanceValid(dues)) return;
         }
@@ -391,14 +424,13 @@ public partial class Autoplay : Node
             await Wait(0.5);
             if (!IsInstanceValid(counter)) return;
         }
-        // Once the case has a few questions (0.33), the careful player works out what the clues allow, and a look at the Case page.
-        else if (!_caseShown && !hurried && State.OpenQuestions.Count() >= 3)
+        // Once the Inquiry has something in it (0.34), a look at its page.
+        else if (!_caseShown && !hurried && Inquiry.Threads.Any(t => t.Shows(State) && State.Entries(t.Key).Any()))
         {
             _caseShown = true;
-            Strategy.WorkOut(State);
-            counter.OpenNotebook(NotebookView.CasePage);
+            counter.OpenNotebook(NotebookView.InquiryPage);
             await Wait(0.3);
-            Main.Instance.Moment("02_case", 0.3);
+            Main.Instance.Moment("02_inquiry", 0.3);
             await Wait(2.0);
             if (!IsInstanceValid(counter)) return;
             counter.CloseNotebook();
@@ -473,6 +505,20 @@ public partial class Autoplay : Node
                 if (IsInstanceValid(counter)) counter.Continue();
                 return;
             }
+        }
+        // A Guild crate (0.34): someone gilded inside. The careful player buys it when it can spare the price.
+        if (visit.Chest.Crate != null)
+        {
+            if (Strategy.BuyCrate(State, visit) && State.Gold >= visit.Ask)
+            {
+                GD.Print($"Autoplay: bought the Guild crate ({visit.Chest.Crate}) for {visit.Ask}g");
+                counter.Buy();
+                return;
+            }
+            counter.Pass();
+            await Wait(2.6);
+            if (IsInstanceValid(counter)) counter.Continue();
+            return;
         }
         int worth = Strategy.Worth(visit, counter.Slip, counter.Hearing, State);
         // Cold to the mark and not reported: it isn't theirs to sell, so it isn't worth any offer (WorthBuying says so for a

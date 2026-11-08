@@ -83,7 +83,6 @@ public partial class ShopView : Node2D
         _world = new Node2D();
         AddChild(_world);
         Layer(_world, $"place/{place}", Vector2.Zero, -90);
-        BuildStatues();
         Layer(_world, $"shelf/{place}", new Vector2(70, 15), -70);
         Layer(_world, $"frame/{place}", Vector2.Zero, -60);
         foreach (int x in new[] { 8, 311 })
@@ -109,42 +108,6 @@ public partial class ShopView : Node2D
         SetLight(_from == _hour ? 1 : 0);
         if (_from != _hour)
             CreateTween().TweenMethod(Callable.From<float>(SetLight), 0f, 1f, 0.7f).SetTrans(Tween.TransitionType.Sine);
-    }
-
-    /// <summary>
-    /// Where the gilded stand in each shop's view (0.33, <see cref="GameState.Statues"/>), nearest first: the middle of
-    /// their feet and their height on the canvas, clear of the seller, the chest and the slip. Old Haddon by the
-    /// crossroads' signpost; Thornwick's three about the well; Crownhold's in the street past the window; the Emporium's
-    /// on the palace road.
-    /// </summary>
-    static readonly (float X, float Feet, float Height)[][] StatueSpots =
-    {
-        new[] { (712f, 452f, 156f), (790f, 446f, 150f) },
-        new[] { (712f, 436f, 112f), (452f, 440f, 116f), (770f, 432f, 104f), (800f, 430f, 100f) },
-        new[] { (730f, 384f, 124f), (790f, 384f, 120f) },
-        new[] { (764f, 444f, 136f), (836f, 450f, 140f) },
-    };
-
-    /// <summary>The gilded in view: gold all over, on a plinth (tools/import_art.py's build_statues), at the 3px art's grain.</summary>
-    void BuildStatues()
-    {
-        if (_state == null) return;
-        var spots = StatueSpots[_tier - 1];
-        int i = 0;
-        foreach (string look in _state.Statues(_tier))
-        {
-            string path = $"res://assets/props/statue_{look}.png";
-            if (i >= spots.Length) break;
-            if (!ResourceLoader.Exists(path)) continue;
-            var (x, feet, height) = spots[i++];
-            var texture = ArtTexture.Load(path);
-            float scale = height / texture.GetHeight();
-            _world.AddChild(new Sprite2D
-            {
-                Texture = texture, Centered = false, Scale = Vector2.One * scale, ZIndex = -80,
-                Position = new Vector2(x - texture.GetWidth() * scale / 2, feet - height), TextureFilter = TextureFilterEnum.Nearest,
-            });
-        }
     }
 
     void BuildProps()

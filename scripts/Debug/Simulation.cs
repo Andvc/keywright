@@ -82,7 +82,7 @@ public static partial class Simulation
         public readonly int[] ReachedTier = { 1, 1, 0, 0, 0 };
 
         /// <summary>Dues paid; the week the shop was lost (0 if never); the day the debt was cleared and the vault opened.</summary>
-        public int WeeksPaid, LostWeek, ClearedDay, VaultDay, Pieces, MapGiven, PaidOffWeek;
+        public int WeeksPaid, LostWeek, ClearedDay, Pieces, PaidOffWeek;
 
         /// <summary>Per week: gold on the Guild's night before paying, the due, the shop tier, whether it was paid.</summary>
         public readonly int[] GoldAtDues = new int[MaxWeeks + 1], Due = new int[MaxWeeks + 1], TierAtDues = new int[MaxWeeks + 1];
@@ -92,10 +92,12 @@ public static partial class Simulation
 
         /// <summary>0.30: gold things opened (not the Crown Chest's), papers for the court, the Guild tried, the Maw's bargain.</summary>
         public int GoldThings, Papers, Owed;
-        public bool Trial, Bargain;
+        public bool Trial;
 
-        /// <summary>0.33: mimics opened and kept, the gilded a grown one woke, the case's questions worked out, the season's end.</summary>
-        public int Mimics, MimicsKept, MimicsWoke, Solved, Gilded;
+        /// <summary>0.34: mimics opened and kept, the Inquiry's entries noted, the gilded brought home, crates bought, and how the treasury went.</summary>
+        public int Mimics, MimicsKept, Noted, Rescued, Crates;
+        public string Treasury;
+        public bool BramHome;
 
         /// <summary>The tales: talks had, tools bought at the counter and from Nim, what the tales paid or cost, the beats played.</summary>
         public int Talks, Offers, NimUpgrades, TaleGold;
@@ -155,7 +157,7 @@ public static partial class Simulation
         GD.Print($"=== Keywright balance report ({campaigns} runs per style, up to {MaxWeeks} weeks of {Guild.DaysPerWeek} days) ===");
         var all = Styles.ToDictionary(s => s, s => Enumerable.Range(0, campaigns).Select(i => Play(s, 1000 + i).Log).ToList());
 
-        GD.Print($"\nStyle                   % still trading at each due (week 1..{Guild.Weeks})  cleared  crown  lost (median wk)  " +
+        GD.Print($"\nStyle                   % still trading at each due (week 1..{Guild.Weeks})  cleared  door   lost (median wk)  " +
                  "tier 2  tier 3  tier 4   good buys  perfect");
         foreach (var style in Styles)
         {
@@ -165,10 +167,10 @@ public static partial class Simulation
             string Reach(int tier) => Median(logs.Select(l => l.ReachedTier[tier]).ToList());
             int bought = Math.Max(1, logs.Sum(l => l.Bought));
             GD.Print($"{style.Name,-22} {string.Join(" ", alive)}   {100f * logs.Count(l => l.ClearedDay > 0) / logs.Count,6:0}% " +
-                     $"{100f * logs.Count(l => l.VaultDay > 0) / logs.Count,5:0}%  {(lost.Count == 0 ? "-" : $"{lost.Count * 100 / logs.Count}%, wk {lost[lost.Count / 2]}"),16}  " +
+                     $"{100f * logs.Count(l => l.Treasury != null) / logs.Count,5:0}%  {(lost.Count == 0 ? "-" : $"{lost.Count * 100 / logs.Count}%, wk {lost[lost.Count / 2]}"),16}  " +
                      $"{Reach(2),6}  {Reach(3),6}  {Reach(4),6}   {100f * logs.Sum(l => l.GoodBuys) / bought,8:0}%  {100f * logs.Sum(l => l.Perfect) / bought,6:0}%");
         }
-        GD.Print($"(cleared: all {Sellers.Number(Guild.Weeks)} dues paid; crown: opened the Crown Chest; lost: share of runs foreclosed, and the median week;");
+        GD.Print($"(cleared: all {Sellers.Number(Guild.Weeks)} dues paid; door: went into the Guild's treasury on the last night; lost: share of runs foreclosed, and the median week;");
         GD.Print(" tier columns: median day the renovation was bought, '-' if fewer than half got there)");
 
         foreach (var style in quick ? Styles.Skip(4) : Styles.Skip(2))
@@ -191,17 +193,17 @@ public static partial class Simulation
                      $"(paid off early: {100f * logs.Count(l => l.PaidOffWeek > 0 && l.PaidOffWeek <= Guild.Weeks) / logs.Count:0}% of runs)");
             GD.Print($"per run: {logs.Average(l => l.Commissions):0.0} commissions ({logs.Average(l => l.CommissionGold):0}g), curios earned " +
                      $"{logs.Average(l => l.CurioGold):0}g for {logs.Average(l => l.CurioSpent):0}g, pawned on {logs.Average(l => l.Short):0.0} nights, " +
-                     $"key shards {logs.Average(l => l.Pieces):0.0}, shards given {100f * logs.Count(l => l.MapGiven > 0) / logs.Count:0}%, " +
+                     $"key pieces {logs.Average(l => l.Pieces):0.0}, " +
                      $"Bram's stash opened {logs.Average(l => l.Stash):0.0} times, " +
                      $"Bram vouched in {100f * logs.Count(l => l.Grace > 0) / logs.Count:0}% (median week " +
                      $"{logs.Where(l => l.Grace > 0).Select(l => l.Grace).DefaultIfEmpty(0).OrderBy(w => w).ElementAt(logs.Count(l => l.Grace > 0) / 2)})");
             // 0.30: how rare gold is, and what the tales left behind.
             GD.Print($"gold things a run {logs.Average(l => l.GoldThings):0.0} (none in {100f * logs.Count(l => l.GoldThings == 0) / logs.Count:0}% of runs), " +
                      $"favours called {logs.Average(l => l.Favours):0.0}, friends made {logs.Average(l => l.Owed):0.0}, papers {logs.Average(l => l.Papers):0.0}, " +
-                     $"the Guild on trial {100f * logs.Count(l => l.Trial) / logs.Count:0}%, the Maw's bargain {100f * logs.Count(l => l.Bargain) / logs.Count:0}%");
-            // 0.33: the case, the Gilding and the mimics.
-            GD.Print($"the case: {logs.Average(l => l.Solved):0.0} of {Case.Questions.Count(q => !q.Career)} questions worked out, gilded by the Guild {logs.Average(l => l.Gilded):0.00}, " +
-                     $"mimics opened {logs.Average(l => l.Mimics):0.0} (kept {logs.Average(l => l.MimicsKept):0.00}, woke {logs.Average(l => l.MimicsWoke):0.00} of the gilded)");
+                     $"the Guild on trial {100f * logs.Count(l => l.Trial) / logs.Count:0}%");
+            // 0.34: the campaign, in a first season (nothing remembered): the key, and the treasury.
+            GD.Print($"the campaign (a first season): the key whole in {100f * logs.Count(l => l.Pieces >= Campaign.Pieces.Length) / logs.Count:0}% of runs, " +
+                     $"the treasury reached in {100f * logs.Count(l => l.Treasury != null) / logs.Count:0}%, Inquiry entries {logs.Average(l => l.Noted):0.0}");
         }
 
         PrintMargins(all[Styles[0]], all[Styles[^1]], campaigns);
@@ -702,11 +704,13 @@ public static partial class Simulation
     /// <param name="rec">Records the run for the experience playtest.</param>
     /// <param name="taught">What Bram taught in this career's earlier runs (tips and lessons not given again).</param>
     /// <param name="curios">What Nim carries (a career's profile: <see cref="Profile.OpenCurios"/>); null: everything.</param>
+    /// <param name="profile">A career's profile (0.34): what it remembers of the campaign.</param>
     static (Log Log, GameState State) Play(Style style, int seed, int days = Days, IEnumerable<string> songbook = null, Recorder rec = null,
-        IEnumerable<string> taught = null, IEnumerable<string> curios = null)
+        IEnumerable<string> taught = null, IEnumerable<string> curios = null, Profile profile = null)
     {
         var state = GameState.NewRun(seed, style.Character, style.Challenge, guided: style.Guided, taught: taught, curios: curios, terms: style.Terms);
         if (songbook != null) state.Songbook.UnionWith(songbook);
+        if (profile != null) state.Remember(profile);
         if (style.Shown != null && Heartsongs.Exists(style.Shown)) state.Display.Add(Heartsongs.Make(Heartsongs.Get(style.Shown), Rarity.Common));
         // Or a curio from the first day, to compare with.
         else if (style.Shown != null) state.BuyCurio(Curios.Get(style.Shown), 0);
@@ -719,6 +723,13 @@ public static partial class Simulation
             if (!PlayDay(state, style, rng, log))
             {
                 log.LostWeek = state.Week;
+                break;
+            }
+            // The treasury ends the season (0.34): swallowed, stayed away, or the next day.
+            if (state.TreasuryDone)
+            {
+                Scored(state, log);
+                log.Takings = state.TotalEarned + log.CurioGold;
                 break;
             }
             if (day == Guild.Weeks * Guild.DaysPerWeek)
@@ -736,15 +747,14 @@ public static partial class Simulation
         }
         log.WeeksPaid = state.WeeksPaid;
         log.Stash = state.StashUsed;
-        log.Pieces = state.MapPieces;
+        log.Pieces = state.Pieces.Count;
         log.Papers = state.Evidence.Count;
-        log.Solved = state.Solved.Count;
-        log.Gilded = state.Gilded.Count;
-        log.MimicsWoke = state.MimicsWoke;
+        log.Noted = state.Noted.Count;
+        log.Rescued = state.Rescued.Count;
+        log.Treasury = state.TreasuryEnd;
+        log.BramHome = state.BramHome;
         log.Owed = state.Owed.Count + state.CalledIn.Count;
         log.Trial = state.OnTrial;
-        log.Bargain = state.GateOpens;
-        log.MapGiven = state.MapGiven ? 1 : 0;
         log.Curios.UnionWith(state.CurioKeys);
         log.Tales = state.TalesDrawn.ToList();
         log.Flags = state.Flags.ToHashSet();
@@ -799,7 +809,10 @@ public static partial class Simulation
         var firstClear = new List<int>[Challenges.Max + 1];
         // The run each career first knew all nine Heartsongs, and first opened the Crown Chest with them (the other ending).
         var allNine = new List<int>();
-        var sungWhole = new List<int>();
+        // The campaign (0.34): the run each career was first swallowed at the treasury, first brought Bram home, and reached the next day.
+        var firstSwallowed = new List<int>();
+        var firstRescue = new List<int>();
+        var trueEnding = new List<int>();
         for (int l = 0; l <= Challenges.Max; l++) firstClear[l] = new List<int>();
         for (int c = 0; c < careers; c++)
         {
@@ -811,19 +824,21 @@ public static partial class Simulation
                 float skill = best - (best - start) * MathF.Exp(-pace * r);
                 int level = profile.MaxChallenge(Characters.Kit);
                 var (log, state) = Play(Learner(skill, Characters.Kit, level), 500000 + c * 1000 + r, Guild.Weeks * Guild.DaysPerWeek,
-                    profile.Songs, curios: profile.OpenCurios);
+                    profile.Songs, curios: profile.OpenCurios, profile: profile);
                 profile.Runs++;
                 bool knewAll = profile.Songs.Count >= Heartsongs.All.Length;
                 profile.Note(state);
                 if (!knewAll && profile.Songs.Count >= Heartsongs.All.Length) allNine.Add(r + 1);
-                if (state.DebtCleared && !state.GateOpens)
+                if (state.DebtCleared)
                 {
                     profile.Cleared++;
                     profile.ClearedAt(state);
                 }
-                if (state.VaultOpened) profile.Vaults++;
-                if (state.VaultOpened && state.SongWhole && profile.SungWhole++ == 0) sungWhole.Add(r + 1);
+                bool swallowed = profile.Swallowed > 0, rescued = profile.Rescues > 0, finished = profile.Finished;
                 int final = profile.Bank(state);
+                if (!swallowed && profile.Swallowed > 0) firstSwallowed.Add(r + 1);
+                if (!rescued && profile.Rescues > 0) firstRescue.Add(r + 1);
+                if (!finished && profile.Finished) trueEnding.Add(r + 1);
                 records.Add((r + 1, skill, state.DebtCleared, state.DebtCleared ? 0 : state.Week, level, final, Score.Total(state)));
             }
             // The run each level was first cleared in (by this career's own record).
@@ -853,7 +868,9 @@ public static partial class Simulation
             GD.Print($"  level {l}: {When(firstClear[l])}   ({100f * firstClear[l].Count(r => r < int.MaxValue) / careers:0}% by run {runs})");
         List<int> Padded(List<int> runsTo) => runsTo.Concat(Enumerable.Repeat(int.MaxValue, careers - runsTo.Count)).ToList();
         GD.Print($"  all nine Heartsongs known: {When(Padded(allNine))}   ({100f * allNine.Count / careers:0}% by run {runs})");
-        GD.Print($"  the Locking sung whole:    {When(Padded(sungWhole))}   ({100f * sungWhole.Count / careers:0}% by run {runs})");
+        GD.Print($"  first swallowed at the treasury: {When(Padded(firstSwallowed))}   ({100f * firstSwallowed.Count / careers:0}% by run {runs})");
+        GD.Print($"  Bram first brought home:         {When(Padded(firstRescue))}   ({100f * firstRescue.Count / careers:0}% by run {runs})");
+        GD.Print($"  the next day (the true ending):  {When(Padded(trueEnding))}   ({100f * trueEnding.Count / careers:0}% by run {runs})");
     }
 
     static void Scored(GameState state, Log log)
@@ -903,6 +920,23 @@ public static partial class Simulation
             if (visit.Chest.Song != null) log.SongsOffered++;
             if (home) log.BySeller[visit.Seller.Key] = (log.BySeller.GetValueOrDefault(visit.Seller.Key).Visits + 1, log.BySeller.GetValueOrDefault(visit.Seller.Key).Profit);
             float index = state.PowerIndex;
+            // A Guild crate (0.34): a careful ear hears the knock and knocks back; bought, someone gilded goes to the back room.
+            if (visit.Chest.Crate is string inside)
+            {
+                if (style.Care >= Care.Listens && (style.Skill >= 1 || rng.NextFloat() < style.Skill)) state.Note(inside == Campaign.Bram ? "tap" : "alive");
+                if (style.Care >= Care.Listens && Strategy.BuyCrate(state, visit) && state.Gold >= visit.Ask)
+                {
+                    state.Buy(visit, new Appraisal(visit.Chest.Quality, tier));
+                    state.TakeIn(inside);
+                    log.Crates++;
+                }
+                else
+                {
+                    if (visit.Deciding) visit.Pass(rng);
+                    state.Pass();
+                }
+                continue;
+            }
             var care = Handling(style, state);
             int? paid = Deal(visit, state, rng, care, out var slip, out var heard, out int worth, style.Skill);
             if (paid is not int price)
@@ -943,6 +977,7 @@ public static partial class Simulation
             var report = slip.Check(visit.Chest);
             bool perfect = report.Perfect;
             var grade = Pick(visit, state, rng, style.Care == Care.Unseen ? Care.Tools : care, style.Skill);
+            state.Picked(visit.Chest.Lock, grade);
             var opened = rec == null ? null : new Opened
             {
                 Paid = price, LuckChanged = purchase.Improved, Locked = visit.Chest.Lock.Locked, Forced = grade == PickGrade.Forced,
@@ -1048,6 +1083,7 @@ public static partial class Simulation
             value += state.Insure(purchase, value);
             if (perfect) earned += state.PerfectFee(value);
             state.RecordRead(perfect);
+            state.ReadTrue(visit.Chest, perfect);
             state.Earn(earned);
             log.Bought++;
             // What it really cost: a haggler's purse gives some back.
@@ -1068,10 +1104,8 @@ public static partial class Simulation
             }
         }
         state.EndDay();
-        // The Guild's introduction (the second evening), and the case worked out as far as the clues allow: every day for
-        // the careful player, now and then for a learner.
+        // The Guild's introduction (the second evening).
         if (state.Day == GameState.IntroDay) Story.Heard(state, Story.Intro(state));
-        if (style.Skill >= 1 || rng.NextDouble() < style.Skill * 0.5) Strategy.WorkOut(state);
         log.CurioGold += state.Today.Curios;
         log.CurioSpent += state.Today.CurioSpent;
         bool wasCleared = state.DebtCleared;
@@ -1081,16 +1115,20 @@ public static partial class Simulation
             state.PayOff();
             log.PaidOffWeek = state.Week;
         }
-        if (state.DebtCleared && !state.GateOpens && log.ClearedDay == 0) log.ClearedDay = state.Day;
+        if (state.DebtCleared && log.ClearedDay == 0) log.ClearedDay = state.Day;
         if (!wasCleared && state.DebtCleared) rec?.Cleared(state, state.Week < Guild.Weeks || !state.DuesTonight);
-        if (state.VaultDue)
+        // Bram, freed and redeemed, comes home (his homecoming's a night beat; the debt paid tonight can bring it).
+        if (state.BramComesHome) Story.Heard(state, Story.Homecoming(state));
+        if (state.BramComesHome) state.WelcomeBram();
+        // The treasury (0.34): with the plan whole the final opening, the door closed; once you remember, the careful
+        // player stays away; the first time, it swallows you.
+        if (state.TreasuryDue)
         {
-            var vault = state.VaultPurchase();
-            state.VaultOpened = true;
-            state.Earn(vault.Chest.Everything.Sum(i => state.SaleValue(i)));
-            log.VaultDay = state.Day;
-            Story.Heard(state, Story.VaultEpilogue(state));
+            if (state.PlanWhole) state.CloseTheDoor();
+            else if (Strategy.StayAway(state)) state.StayAway();
+            else state.Swallow();
             rec?.Vault(state);
+            return true;
         }
         var owned = rec == null ? null : Upgrades.All.Where(u => state.Has(u.Key)).ToHashSet();
         int affordable = rec == null ? 0 : Upgrades.Available(state).Count(u => Strategy.Affordable(state, u));
@@ -1117,8 +1155,10 @@ public static partial class Simulation
     {
         state.StartNight();
         foreach (var talk in state.Tonight.ToList()) Talked(state, log, talk, style, rng);
-        // The Lantern Market's night (0.33): a secret when one would close a question, a raised mimic to the menagerie.
+        // The Lantern Market's night (once you remember, 0.34): a pass to the weighhouse, a crate diverted, the bargemen.
         if (state.MarketTonight && style.Care >= Care.Listens) Strategy.AtMarket(state);
+        // The back room: a full mimic eats the gold off someone, and a freed one's note is paid.
+        if (style.Care >= Care.Listens) Strategy.TendBackRoom(state);
         foreach (var held in state.BackRoom.Where(h => !h.Kept).ToList())
         {
             int got = Strategy.ReturnHeld(state, held) ? state.ReturnHeld(held) : state.FenceHeld(held);
@@ -1196,7 +1236,9 @@ public static partial class Simulation
     static bool Dues(GameState state, Log log)
     {
         int week = state.Week;
-        if (state.OfferTonight && Strategy.TakeOffer(state)) state.GiveMap();
+        // What the Maw tries, once you remember (0.34): a bribe on the fourth night, a bargain for Bram on the sixth.
+        if (state.BribeTonight) state.AnswerBribe(Strategy.TakeBribe(state));
+        if (state.BargainTonight) state.AnswerBargain(Strategy.TakeBargain(state));
         int gold = state.Gold, due = state.DueNow;
         string outcome = "paid";
         if (week <= MaxWeeks)
@@ -1242,8 +1284,13 @@ public static partial class Simulation
             }
         }
         if (!state.PaidThisWeek) state.PayDues();
-        // Vane's parting line and its clue (0.33).
-        if (!state.GateOpens && Story.Parting(state) is Line parting) state.Find(parting.Clue);
+        // Vane's parting line, and on the first Guild night the treasury's summons (0.34).
+        if (Story.Parting(state) is Line { Clue: not null } parting) state.Note(parting.Clue);
+        if (state.SummonsTonight)
+        {
+            state.Summon();
+            Story.Heard(state, Story.Summons(state));
+        }
         if (week <= MaxWeeks) log.Paid[week] = true;
         log.Rec?.Guild(state, gold, due, outcome);
         return true;

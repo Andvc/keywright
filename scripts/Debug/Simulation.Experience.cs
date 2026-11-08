@@ -181,8 +181,8 @@ public static partial class Simulation
             if (lines == 0) return;
             Begin(s, BeatKind.Scene, $"week {s.Week}", 5 * lines);
             Meet($"story:week{s.Week}", 0.3f, 1.5f, $"week {s.Week}'s scene");
-            // The reveals: the Locking and the Hooded Woman (week 2); Mara, the King and the Crown Chest (4).
-            if (s.Week is 2 or Story.OfferWeek) Peak("a story reveal", 2.5f);
+            // The reveals: the Guild's letter (week 2) and the gathering (6).
+            if (s.Week is 2 or Story.GatheringWeek) Peak("a story reveal", 2.5f);
         }
 
         /// <summary>Someone at the counter (or the back door) to talk: a tale's beat, or a tool offered.</summary>
@@ -452,7 +452,6 @@ public static partial class Simulation
                     profile.Cleared++;
                     profile.ClearedAt(state);
                 }
-                if (state.VaultOpened) profile.Vaults++;
                 profile.Bank(state);
                 all.Add(new Played(r + 1, skill, Characters.Kit, state, rec.Beats));
             }

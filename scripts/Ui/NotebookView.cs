@@ -23,7 +23,7 @@ public partial class NotebookView : Node2D
     const float PanelX = 40, PanelY = 66, PanelW = 1200, PanelH = 518;
     const float TableX = 64, RowH = 40;
 
-    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4, StoriesPage = 5, CasePage = 6;
+    public const int SoundsPage = 0, RegularsPage = 1, CalendarPage = 2, SynergiesPage = 3, TownPage = 4, StoriesPage = 5, InquiryPage = 6;
 
     readonly GameState _state;
     readonly int _firstPage;
@@ -70,7 +70,7 @@ public partial class NotebookView : Node2D
         Tab(CalendarPage, Loc.T("Calendar"), PanelX + 456, 112);
         Tab(TownPage, Loc.T("Town"), PanelX + 574, 88);
         Tab(StoriesPage, Loc.T("Stories"), PanelX + 668, 104);
-        Tab(CasePage, Loc.T("Case"), PanelX + 778, 88);
+        Tab(InquiryPage, Loc.T("Inquiry"), PanelX + 778, 88);
         // Synergies come with Crownhold: before that, the notebook just keeps its tally.
         if (_state.SynergiesOpen) Tab(SynergiesPage, Loc.T("Synergies"), PanelX + 872, 120);
         AddChild(UiKit.MakeButton(Loc.T($"Close {Controls.Tag(Controls.Notebook)}"), Palette.Text, 16, Close).Place(PanelX + PanelW - 144, PanelY + 12, 120, 40));
@@ -102,7 +102,7 @@ public partial class NotebookView : Node2D
         else if (page == CalendarPage) BuildCalendar();
         else if (page == TownPage) BuildTown();
         else if (page == StoriesPage) BuildStories();
-        else if (page == CasePage) BuildCase();
+        else if (page == InquiryPage) BuildInquiry();
         else if (page == SynergiesPage) BuildSynergies();
         else BuildSounds();
     }
@@ -314,10 +314,10 @@ public partial class NotebookView : Node2D
             people.Add((Story.Vane, Guild.Collector, Loc.T("the Gilded Guild"), Loc.T("Collector for the Guild that keeps the Gate. Comes at the end of every week for " +
                                                                     "the tithe Bram never paid. Miss one, and the Guild seals the shop.")));
         if (_state.HasMet(Story.Mara))
-            people.Add((Story.Mara, Loc.T("Mara"), Loc.T("the Hooded Woman"), Loc.T($"{Story.VaultSeller.Habit} She trades the Key's shards for what she asks.")));
+            people.Add((Story.Mara, Loc.T("Mara"), Loc.T("the Hooded Woman"), Loc.T("The last archmage of the Keyhold. She knows what the Keyhold put in the " +
+                                                                                   "seal, and she can see on you that you remember.")));
         else if (_state.HasMet(Story.Hood))
-            people.Add((Story.Hood, Story.HoodName, Loc.T("trades shards"), Loc.T("Knows Bram, and the Key-mark on your hand. Trades shards of the Aldric Key for " +
-                                                                 "things she asks for, and won't say who she is.")));
+            people.Add((Story.Hood, Story.HoodName, Loc.T("knows the Keyhold"), Loc.T("Knows Bram, and the Key-mark on your hand, and won't say who she is.")));
         // The people the tales have brought to the counter: a Warden, a clerk, a Mark-Finder, a mother.
         foreach (var person in Sellers.People.Where(p => _state.Met.Contains(p.Key)))
             people.Add((person.Key, person.Name, person.Of is Faction f ? Factions.Name(f) : "", About(person)));
@@ -352,7 +352,6 @@ public partial class NotebookView : Node2D
             pulse.TweenProperty(row, "self_modulate", Colors.White, 0.7f);
         }
         var face = UiKit.MakeSprite($"res://assets/sprites/sellers/faces/{Sellers.LookOf(key)}.png", new Vector2(26, h / 2), 1, outlined: true);
-        if (key == Story.Bram) Gilt.Bram(face, _state, Gilt.Face);
         row.AddChild(face);
         row.AddChild(UiKit.MakeLabel(name, 16, current ? Palette.Gold : Palette.Text).Place(52, 4, 300, 20));
         row.AddChild(UiKit.MakeLabel(current ? Loc.T("at your counter") : role, 16, current ? Palette.Gold : Palette.Muted).Place(52, 24, 500, 20));
@@ -366,7 +365,6 @@ public partial class NotebookView : Node2D
         page.MouseFilter = Control.MouseFilterEnum.Ignore;
         _page.AddChild(page);
         var portrait = UiKit.MakeSprite($"res://assets/sprites/sellers/{Sellers.LookOf(key)}.png", new Vector2(56, 58), 1, outlined: true);
-        if (key == Story.Bram) Gilt.Bram(portrait, _state, Gilt.Portrait);
         page.AddChild(portrait);
         page.AddChild(UiKit.MakeLabel(name, 24, Palette.Gold, outline: 4).Place(112, 10, 600, 30));
         page.AddChild(UiKit.MakeLabel(role, 16, Palette.Muted, HorizontalAlignment.Right).Place(600, 16, PanelW - 660, 20));
@@ -587,147 +585,117 @@ public partial class NotebookView : Node2D
     /// The Stories page (0.32): every tale begun, the ones still going first, and the one picked, whole: what it's about,
     /// everything that's happened in it so far, and what comes next (who, where, about when), or that nothing's expected.
     /// </summary>
-    // ---- The case (0.33, Core/Case.cs) ----
+    // ---- The Inquiry (0.34, Core/Inquiry.cs) ----
 
-    /// <summary>The question open on the Case page, and the words picked for each one's blanks while the notebook's open.</summary>
-    static string _question;
-    static readonly System.Collections.Generic.Dictionary<string, string[]> Picks = new();
-
-    /// <summary>The run the picks were made in: a new one starts with none (a word from last season may not be given yet).</summary>
-    static GameState _picksFor;
-    string _verdict;
+    /// <summary>The thread open on the Inquiry page.</summary>
+    static string _thread;
 
     /// <summary>
-    /// The case: the season's questions down the side (a tick once worked out), and the one picked whole: its sentence,
-    /// a row of words for each blank (only those the clues have given, and the obvious guesses), Check, and the clues
-    /// found so far, each marked with how you came by it. A check says only how many blanks are wrong, never which.
+    /// The Inquiry: the questions you're following down the side, and the one picked whole: what you saw, who said what,
+    /// what you tried and what came of it, and the leads (things you now have reason to do). Bram's thread starts with
+    /// the treasury key, piece by piece and how each is earned; the plan's, with its four lines and what each still needs.
+    /// Nothing here is an answer to pick: what's known is what you've found out.
     /// </summary>
-    void BuildCase()
+    void BuildInquiry()
     {
-        if (_picksFor != _state)
-        {
-            Picks.Clear();
-            _picksFor = _state;
-        }
-        var open = _state.OpenQuestions.ToList();
+        var threads = Inquiry.Threads.Where(t => t.Shows(_state)).ToList();
         float top = PanelY + 60;
-        if (open.Count == 0)
+        if (threads.Count == 0)
         {
-            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing to puzzle over yet. When something doesn't add up, the question goes here, with every clue you find."),
+            _page.AddChild(UiKit.MakeLabel(Loc.T("Nothing to follow yet. When something doesn't add up, it goes here: what you saw, what you were told, and what you tried."),
                 16, Palette.Muted).Wrapped().Place(TableX, top, PanelW - 48, 60));
             return;
         }
-        var q = open.FirstOrDefault(o => o.Key == _question) ?? open.FirstOrDefault(o => !_state.Knows(o)) ?? open[0];
-        _question = q.Key;
+        var thread = threads.FirstOrDefault(t => t.Key == _thread) ?? threads[0];
+        _thread = thread.Key;
 
-        // The questions, a tick by each one worked out.
+        // The questions down the side.
         const float listW = 340;
-        for (int i = 0; i < open.Count; i++)
+        for (int i = 0; i < threads.Count; i++)
         {
-            var o = open[i];
-            bool picked = o == q, done = _state.Knows(o);
+            var t = threads[i];
+            bool picked = t == thread;
             var row = UiKit.MakePanel(picked ? Palette.Gold : Palette.PanelBorder).Place(TableX - 8, top + i * 54, listW - 4, 50);
             row.MouseFilter = Control.MouseFilterEnum.Stop;
-            string key = o.Key;
+            string key = t.Key;
             row.GuiInput += e =>
             {
                 if (e is not InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) return;
-                _question = key;
-                _verdict = null;
+                _thread = key;
                 Sfx.Play("tick", 1.1f, -8);
-                ShowPage(CasePage);
+                ShowPage(InquiryPage);
             };
-            var ask = UiKit.MakeLabel(o.Ask, 16, done ? Palette.Good : picked ? Palette.Gold : Palette.Text).Wrapped().Place(12, 3, listW - 64, 44);
+            var ask = UiKit.MakeLabel(t.Ask, 16, picked ? Palette.Gold : Palette.Text).Wrapped().Place(12, 3, listW - 40, 44);
             ask.VerticalAlignment = VerticalAlignment.Center;
             row.AddChild(ask);
-            if (done) row.AddChild(UiKit.MakeCheck(true, new Vector2(listW - 32, 25), 1));
             _page.AddChild(row);
         }
 
-        // The question picked: its sentence, the blanks' words, and the clues.
         float x = TableX + listW + 8, w = PanelX + PanelW - 24 - x, y = top;
-        bool solved = _state.Solved.Contains(q.Key), known = _state.Knows(q);
-        if (!Picks.TryGetValue(q.Key, out var picks) || picks.Length != q.Blanks.Length) Picks[q.Key] = picks = new string[q.Blanks.Length];
-        if (known) picks = q.Answer.ToArray();
-        _page.AddChild(UiKit.MakeLabel(q.Ask.ToUpperInvariant(), 24, Palette.Gold, outline: 4).Place(x, y - 4, w, 30));
-        y += 32;
-        string sentence = Case.Fill(q, picks);
-        float sentenceH = UiKit.TextHeight(sentence, w);
-        _page.AddChild(UiKit.MakeLabel(sentence, 16, solved ? Palette.Good : known ? Palette.Magic : Palette.Text).Wrapped().Place(x, y, w, sentenceH));
-        y += sentenceH + 8;
-        if (known)
+        _page.AddChild(UiKit.MakeLabel(thread.Ask.ToUpperInvariant(), 24, Palette.Gold, outline: 4).Place(x, y - 4, w, 30));
+        y += 34;
+        // Where is Bram: the treasury key, and how each piece is earned (the season's goal).
+        if (thread.Key == Inquiry.Bram && !_state.CampaignDone)
         {
-            string note = solved ? q.Worked : Loc.T("You worked this out in an earlier season. It's written here in your own hand.");
-            float noteH = UiKit.TextHeight(note, w);
-            _page.AddChild(UiKit.MakeLabel(note, 16, Palette.Muted).Wrapped().Place(x, y, w, noteH));
-            y += noteH + 10;
-        }
-        else
-        {
-            for (int b = 0; b < q.Blanks.Length; b++)
+            _page.AddChild(UiKit.MakeLabel(Loc.T($"THE TREASURY KEY: {_state.Pieces.Count} OF {Campaign.Pieces.Length}"), 16, Palette.Magic).Place(x, y, w, 20));
+            y += 24;
+            foreach (string piece in Campaign.Pieces)
             {
-                _page.AddChild(UiKit.MakeLabel(Loc.T($"Blank {b + 1}:"), 16, Palette.Muted).Place(x, y + 8, 96, 20));
-                float bx = x + 100;
-                foreach (var word in _state.Words(q, b))
-                {
-                    float bw = UiKit.TextWidth(word.Text) + 28;
-                    if (bx + bw > x + w)
-                    {
-                        bx = x + 100;
-                        y += 40;
-                    }
-                    int blank = b;
-                    string pick = word.Key;
-                    var button = UiKit.MakeButton(word.Text, picks[b] == pick ? Palette.Gold : Palette.PanelBorder.Lightened(0.2f), 16, () =>
-                    {
-                        Picks[q.Key][blank] = pick;
-                        _verdict = null;
-                        Sfx.Play("tick", 1.2f, -8);
-                        ShowPage(CasePage);
-                    }).Place(bx, y, bw, 34);
-                    if (picks[b] == pick) button.Modulate = Palette.Gold.Lightened(0.4f);
-                    _page.AddChild(button);
-                    bx += bw + 8;
-                }
-                y += 42;
+                bool has = _state.Pieces.Contains(piece);
+                _page.AddChild(UiKit.MakeCheck(has, new Vector2(x + 10, y + 10), 1));
+                string line = has ? Campaign.PieceName(piece) : Loc.T($"{Campaign.PieceName(piece)}: {Campaign.PieceHow(piece)}");
+                float lh = UiKit.TextHeight(line, w - 30);
+                _page.AddChild(UiKit.MakeLabel(line, 16, has ? Palette.Good : Palette.Text).Wrapped().Place(x + 28, y, w - 30, lh));
+                y += lh + 4;
             }
-            bool ready = picks.All(p => p != null);
-            var check = UiKit.MakeButton(Loc.T("Check"), Palette.Good, 16, () =>
+            y += 6;
+        }
+        // The plan: four lines, each ticked when it's true this season.
+        if (thread.Key == Inquiry.Plan)
+        {
+            foreach (var (line, done, needs) in Inquiry.PlanLines(_state))
             {
-                int wrong = _state.Check(q, Picks[q.Key]);
-                _verdict = wrong == 0 ? null : Loc.Plural(wrong, $"Not quite: {wrong} of the blanks is wrong.", $"Not quite: {wrong} of the blanks are wrong.");
-                Sfx.Play(wrong == 0 ? "fanfare" : "lose", 1f, -6);
-                if (wrong == 0) Main.Instance.Flash(Palette.Good, 0.2f);
-                ShowPage(CasePage);
-            }).Place(x, y + 2, 140, 36);
-            check.Disabled = !ready;
-            _page.AddChild(check);
-            if (_verdict != null) _page.AddChild(UiKit.MakeLabel(_verdict, 16, Palette.Warn).Place(x + 156, y + 10, w - 156, 20));
-            else if (!ready) _page.AddChild(UiKit.MakeLabel(Loc.T("Pick a word for each blank."), 16, Palette.Muted).Place(x + 156, y + 10, w - 156, 20));
+                _page.AddChild(UiKit.MakeCheck(done, new Vector2(x + 10, y + 10), 1));
+                _page.AddChild(UiKit.MakeLabel(line, 16, done ? Palette.Good : Palette.Gold).Place(x + 28, y, w - 30, 20));
+                y += 22;
+                if (!done)
+                {
+                    float nh = UiKit.TextHeight(needs, w - 30);
+                    _page.AddChild(UiKit.MakeLabel(needs, 16, Palette.Muted).Wrapped().Place(x + 28, y, w - 30, nh));
+                    y += nh;
+                }
+                y += 8;
+            }
+            _page.AddChild(UiKit.MakeLabel(_state.PlanWhole ? Loc.T("The plan is whole. Pay the account with the key whole, and go to the treasury.")
+                : Loc.T("When every line is ticked, the treasury can end differently."), 16, _state.PlanWhole ? Palette.Good : Palette.Muted)
+                .Wrapped().Place(x, y, w, 40));
             y += 48;
         }
-
-        // The clues, each with how you came by it.
-        var clues = Case.Clues.Where(c => c.Question == q.Key && _state.Clues.Contains(c.Key)).ToList();
-        _page.AddChild(UiKit.MakeLabel(Loc.T("CLUES"), 16, Palette.Gold.Darkened(0.2f)).Place(x, y, w, 20));
-        y += 24;
+        // The entries, each with how you came by it.
+        var entries = _state.Entries(thread.Key).ToList();
+        if (entries.Count == 0) return;
         var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled }.Place(x, y, w, Math.Max(40, PanelY + PanelH - 16 - y));
         _page.AddChild(scroll);
         var list = new Control { MouseFilter = Control.MouseFilterEnum.Pass };
         scroll.AddChild(list);
         float ly = 0;
-        foreach (var clue in clues)
+        foreach (var entry in entries)
         {
-            var tag = UiKit.MakeLabel(Case.WayName(clue.Way).ToUpperInvariant(), 16, clue.Way switch
+            var tag = UiKit.MakeLabel(Inquiry.WayName(entry.Way).ToUpperInvariant(), 16, entry.Way switch
             {
-                ClueWay.Found => Palette.Gold,
-                ClueWay.Seen => Palette.Magic,
-                ClueWay.Heard => Palette.Good,
+                EntryWay.Found => Palette.Gold,
+                EntryWay.Seen => Palette.Magic,
+                EntryWay.Tried or EntryWay.Heard => Palette.Good,
+                EntryWay.Lead => Palette.Warn,
                 _ => Palette.Muted,
             }).Place(0, ly, 80, 20);
             list.AddChild(tag);
-            float textH = UiKit.TextHeight(clue.Text, w - 104);
-            list.AddChild(UiKit.MakeLabel(clue.Text, 16, Palette.Text).Wrapped().Place(88, ly, w - 104, textH));
+            string text = entry.Text(_state);
+            if (entry.Way == EntryWay.Said && entry.Who != null) text = Loc.T($"{Story.Name(entry.Who)}: {text}");
+            if (entry.Held) text = Loc.T($"{text} (held this season)");
+            else if (_state.KnownBefore.Contains(entry.Key) && !_state.Noted.Contains(entry.Key)) text = Loc.T($"{text} (remembered)");
+            float textH = UiKit.TextHeight(text, w - 104);
+            list.AddChild(UiKit.MakeLabel(text, 16, entry.Way == EntryWay.Lead ? Palette.Warn.Lightened(0.3f) : Palette.Text).Wrapped().Place(88, ly, w - 104, textH));
             ly += textH + 10;
         }
         list.CustomMinimumSize = new Vector2(w - 16, ly);

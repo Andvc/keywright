@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Nodes;
@@ -83,17 +84,16 @@ public static class SaveTest
         state.GiveKeepsake(Core.Keepsakes.Lamp);
         state.GiveKeepsake(Core.Keepsakes.Hawthorn);
         state.TakeKeepsake(Core.Keepsakes.Hawthorn);
-        // 0.33: the case (clues found, a question worked out), a claim on Jory and someone the Guild collected, a mimic kept.
-        state.Find("statue");
-        state.Find("nell");
-        state.Find("mara.laws");
-        var haddon = Case.Question(Case.Haddon);
-        state.Check(haddon, haddon.Answer);
-        // ...and one worked out in an earlier season (one this season can't have reached by now): known, filled in, never
-        // paid off again.
-        state.KnownBefore.Add(Case.Hold);
+        // 0.34: the campaign (remembered, a lead noted, a paper held, a piece of the key, someone gilded in the back room,
+        // a claim on Jory and someone the Guild took) and a mimic kept.
+        state.Remembers = true;
+        state.KnownBefore.Add("seal");
+        state.Note("carts");
+        state.Note("register");
+        state.EarnPiece(Campaign.Reader);
+        state.Guests[Campaign.Haddon] = true;
         state.Claim(Core.TaleBook.Jory, state.Week + 1);
-        state.Gilded[Core.TaleBook.Ada] = state.Tier;
+        state.Taken[Core.TaleBook.Ada] = state.Week;
         // (The careful player may have kept one already on the way here.)
         state.KeepMimic();
         int? mimic = state.Mimic;
@@ -106,12 +106,10 @@ public static class SaveTest
               loaded.While(Core.TaleBook.Picket), "a favour owed, a paper, a loan and a picket at the door come back");
         Check(loaded.Keeps(Core.Keepsakes.Lamp) && !loaded.Keeps(Core.Keepsakes.Hawthorn) && loaded.KeepsakesSeen.Contains(Core.Keepsakes.Hawthorn),
             "a keepsake held comes back, one taken back stays gone, and both are remembered");
-        Check(loaded.Clues.Contains("nell") && loaded.Solved.Contains(Case.Haddon) && loaded.Truths.Contains(Case.Haddon) &&
-              loaded.Claims.ContainsKey(Core.TaleBook.Jory) && loaded.IsGilded(Core.TaleBook.Ada) && mimic != null && loaded.Mimic == mimic,
-            "the case's clues and a question worked out, the Guild's claim, one it collected and a kept mimic come back");
-        var hold = Case.Question(Case.Hold);
-        Check(loaded.KnownBefore.Contains(Case.Hold) && loaded.Knows(hold) && loaded.Check(hold, hold.Answer) == 0 && !loaded.Solved.Contains(Case.Hold),
-            "a question worked out in an earlier season stays known, and isn't worked out (or paid off) again");
+        Check(loaded.Remembers && loaded.KnownBefore.Contains("seal") && loaded.Noted.Contains("carts") && loaded.Noted.Contains("register") &&
+              loaded.Pieces.Contains(Campaign.Reader) && loaded.Guests.GetValueOrDefault(Campaign.Haddon) && loaded.Claims.ContainsKey(Core.TaleBook.Jory) &&
+              loaded.IsTaken(Core.TaleBook.Ada) && mimic != null && loaded.Mimic == mimic,
+            "the campaign (remembered, noted, held, a piece of the key, the gilded in the back room, the Guild's claims) and a kept mimic come back");
         string again = loaded.Save().ToJson();
         bool same = Without(json, "SavedAt") == Without(again, "SavedAt");
         Check(same, "it loads and saves again the same");

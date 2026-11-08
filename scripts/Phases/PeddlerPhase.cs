@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Keywright.Core;
@@ -134,7 +135,7 @@ public partial class PeddlerPhase : Phase
         if (State.MarketTonight)
         {
             var market = UiKit.MakeButton(Loc.T("The Lantern Market"), Palette.Magic, 16, OpenMarket).Place(1040, 560, 220, 42);
-            market.TooltipText = Loc.T("Under the Barrow, at midnight: a secret for sale, buyers for anything gold, and the Arcanum's menagerie.");
+            market.TooltipText = Loc.T("Under the Barrow, at midnight: Nim's people, buyers for anything gold, and the Arcanum's menagerie.");
             _board.AddChild(market);
         }
 
@@ -155,12 +156,12 @@ public partial class PeddlerPhase : Phase
             offerX += widths[i] + 8;
         }
 
-        // The back room: chests that won't open for you, and what can be done with them tonight.
-        int held = State.BackRoom.Count;
+        // The back room: chests that won't open for you, the gilded you've brought in, and your mimic.
+        int held = State.BackRoom.Count + State.Guests.Count + (State.Mimic != null && !State.MimicAtMenagerie ? 1 : 0);
         if (held > 0)
         {
             var room = UiKit.MakeButton(Loc.T($"The back room ({held})"), Palette.Warn, 16, OpenBackRoom).Place(RowX, 652, 472, 30);
-            room.TooltipText = Loc.T("Chests that won't open for you: return them to their owners, or sell them to Nim's friends.");
+            room.TooltipText = Loc.T("Chests that won't open for you, anyone gilded you've brought in, and your mimic: what can be done tonight.");
             _board.AddChild(room);
         }
     }
@@ -170,13 +171,13 @@ public partial class PeddlerPhase : Phase
     public bool MarketOpen => _market != null && IsInstanceValid(_market);
 
     /// <summary>
-    /// The Lantern Market (0.33, Core/LanternMarket.cs): under the Barrow at midnight, three stalls by lantern light: the
-    /// whisperer's secret for the case, the Maw's buyers for anything gold, and the Arcanum's menagerie for a mimic.
+    /// The Lantern Market (0.33; 0.34, Core/LanternMarket.cs): under the Barrow at midnight, three stalls by lantern light:
+    /// Nim's people (a night at the weighhouse, a crate off the palace road, the bargemen), the Maw's buyers for anything
+    /// gold, and the Arcanum's menagerie for a mimic.
     /// </summary>
     public void OpenMarket()
     {
         _market?.QueueFree();
-        State.VisitMarket();
         var root = new Control { ZIndex = 30, MouseFilter = Control.MouseFilterEnum.Stop }.Place(0, 0, 1280, 720);
         root.AddChild(new ColorRect { Color = new Color("#07050c"), MouseFilter = Control.MouseFilterEnum.Ignore }.Place(-100, -100, 1480, 920));
         root.AddChild(new Painter(p =>
@@ -188,7 +189,7 @@ public partial class PeddlerPhase : Phase
         root.AddChild(UiKit.MakeLabel(Loc.T("THE LANTERN MARKET"), 32, Palette.Gold, HorizontalAlignment.Center, outline: 6).Place(0, 52, 1280, 40));
         root.AddChild(UiKit.MakeLabel(Loc.T("Under the Barrow, at midnight. Nim's people buy what can't be sold by daylight, and sell what can't be bought."),
             16, Palette.Muted, HorizontalAlignment.Center).Wrapped().Place(140, 96, 1000, 40));
-        root.AddChild(Whisperer());
+        root.AddChild(Bargemen());
         root.AddChild(GateBuyers());
         root.AddChild(Menagerie());
         root.AddChild(UiKit.MakeButton(Loc.T("Back up to Nim's table"), Palette.Text, 16, CloseMarket).Place(480, 650, 320, 46));
@@ -220,24 +221,36 @@ public partial class PeddlerPhase : Phase
         return panel;
     }
 
-    /// <summary>The whisperer: one secret a night, about a question you're asking.</summary>
-    Panel Whisperer()
+    /// <summary>Nim's people: access, papers and transport, never an answer (once you remember what to ask for).</summary>
+    Panel Bargemen()
     {
-        var clue = State.Whisper;
-        var question = clue == null ? null : Case.Question(clue.Question);
-        var panel = Stall(40, Loc.T("THE WHISPERER"), "stranger", question == null
-            ? Loc.T("\"Nothing tonight you don't know already, Keywright. Come back when you've a new question.\"")
-            : Loc.T($"\"Something someone saw, said or found, about a question of yours: {question.Ask}\""), out float below);
-        if (clue == null) return panel;
-        var buy = UiKit.MakeButton(Loc.T($"Buy the secret ({State.SecretPrice}g)"), Palette.Magic, 16, () =>
+        var offers = new List<(string Label, int Price, System.Func<bool> Buy, string Tip)>();
+        if (State.PassOffered)
+            offers.Add((Loc.T($"A night at the weighhouse ({State.PassPrice}g)"), State.PassPrice, State.BuyPass,
+                Loc.T("A Guild coat and a lantern: walk in with the carters, and copy a page of the register.")));
+        if (State.DivertOffered)
+            offers.Add((Loc.T($"Bram's crate, off the road ({State.DivertPrice}g)"), State.DivertPrice, State.Divert,
+                Loc.T("The bargemen take a crate chalked with Bram's name off the palace road, and Corvin brings it to your counter.")));
+        if (State.BargeOffered)
+            offers.Add((Loc.T($"The Wet Hen, the last night ({State.BargePrice}g)"), State.BargePrice, State.HireBarge,
+                Loc.T("The bargemen wait at the river stairs on the treasury's last night, for whoever comes out.")));
+        var panel = Stall(40, Loc.T("NIM'S PEOPLE"), "stranger", offers.Count == 0
+            ? Loc.T("\"Every road and every cart, Keywright. Ask for what you need, when you know what it is.\"")
+            : Loc.T("\"Every road and every cart, Keywright. Not answers: we don't sell those. Doors, papers and boats.\""), out float below);
+        for (int i = 0; i < offers.Count; i++)
         {
-            if (!State.BuySecret()) return;
-            Sfx.PlayGroup("pay");
-            Game.Hud.SetGold(State.Gold);
-            OpenMarket();
-        }).Place(40, Mathf.Max(below, 400), 300, 50);
-        buy.Disabled = State.Gold < State.SecretPrice;
-        panel.AddChild(buy);
+            var (label, price, buy, tip) = offers[i];
+            var button = UiKit.MakeButton(label, Palette.Magic, 16, () =>
+            {
+                if (!buy()) return;
+                Sfx.PlayGroup("pay");
+                Game.Hud.SetGold(State.Gold);
+                OpenMarket();
+            }).Place(20, Mathf.Max(below, 300) + i * 58, 340, 50);
+            button.Disabled = State.Gold < price;
+            button.TooltipText = tip;
+            panel.AddChild(button);
+        }
         return panel;
     }
 
@@ -268,26 +281,43 @@ public partial class PeddlerPhase : Phase
         return panel;
     }
 
-    /// <summary>The Arcanum's menagerie: it buys a mimic, and pays more for one you've raised.</summary>
+    /// <summary>The Arcanum's menagerie: it buys a mimic (more for one fed full), or keeps and feeds yours.</summary>
     Panel Menagerie()
     {
         if (State.Mimic is int fed)
         {
-            var panel = Stall(860, Loc.T("THE MENAGERIE"), "wren", State.MimicGrown
-                ? Loc.Plural(fed, $"\"Your mimic's grown! Fed on {fed} Guild night: we'd pay well for that.\"", $"\"Your mimic's grown! Fed on {fed} Guild nights: we'd pay well for that.\"")
-                : Loc.Plural(fed, $"\"Your mimic's been fed on {fed} Guild night. Raise it a while longer and it's worth more.\"",
-                    $"\"Your mimic's been fed on {fed} Guild nights. Raise it a while longer and it's worth more.\""), out float below);
+            var panel = Stall(860, Loc.T("THE MENAGERIE"), "wren", State.MimicAtMenagerie
+                ? (State.MimicFull ? Loc.T("\"Yours is asleep on its gold, full. We'll bring it when it's wanted.\"") : Loc.T("\"Yours is eating well. Another Guild night or so and it'll be full.\""))
+                : State.MimicFull
+                    ? Loc.T("\"Yours is full! Fed to sleep. A full one will eat the gold off someone gilded, you know. Or we'd pay well for it.\"")
+                    : Loc.Plural(fed, $"\"Yours has been fed on {fed} Guild night. Twice and it's full. We could keep and feed it for you.\"",
+                        $"\"Yours has been fed on {fed} Guild nights. Twice and it's full. We could keep and feed it for you.\""), out float below);
+            float y = Mathf.Max(below, 340);
+            if (!State.MimicAtMenagerie)
+            {
+                var keep = UiKit.MakeButton(Loc.T($"Leave it with them ({State.KeepingPrice}g)"), Palette.Magic, 16, () =>
+                {
+                    if (!State.EntrustMimic()) return;
+                    Sfx.PlayGroup("pay");
+                    Game.Hud.SetGold(State.Gold);
+                    OpenMarket();
+                }).Place(40, y, 300, 50);
+                keep.Disabled = State.Gold < State.KeepingPrice;
+                keep.TooltipText = Loc.T("They feed it on Guild nights (no gold from you) and bring it when it's wanted. Still yours.");
+                panel.AddChild(keep);
+                y += 58;
+            }
             panel.AddChild(UiKit.MakeButton(Loc.T($"Sell your mimic (+{State.KeptMimicPrice}g)"), Palette.Gold, 16, () =>
             {
                 if (State.SellKeptMimic() <= 0) return;
                 Sfx.PlayGroup("pay");
                 Game.Hud.SetGold(State.Gold);
                 OpenMarket();
-            }).Place(40, Mathf.Max(below, 400), 300, 50));
+            }).Place(40, y, 300, 50));
             return panel;
         }
         return Stall(860, Loc.T("THE MENAGERIE"), "wren",
-            Loc.T($"The Arcanum's keepers. \"Mimics, Keywright: {State.FreshMimicPrice}g for one fresh out of its chest, more for one you've raised. Listen for a chest that breathes.\""),
+            Loc.T($"The Arcanum's keepers. \"Mimics, Keywright: {State.FreshMimicPrice}g for one fresh out of its chest, more for one fed full. Listen for a chest that breathes.\""),
             out _);
     }
 
@@ -311,22 +341,57 @@ public partial class PeddlerPhase : Phase
         _backRoom?.QueueFree();
         _backRoom = null;
         var held = State.BackRoom.ToList();
-        if (held.Count == 0) return;
-        float h = 90 + held.Count * 56;
+        var guests = State.Guests.Keys.ToList();
+        bool mimic = State.Mimic != null && !State.MimicAtMenagerie;
+        int rows = held.Count + guests.Count + (mimic ? 1 : 0);
+        if (rows == 0) return;
+        float h = 90 + rows * 56;
         var panel = UiKit.MakePanel(Palette.Warn.Darkened(0.3f)).Place(300, 120, 680, h);
         panel.ZIndex = 30;
         panel.AddChild(UiKit.MakeLabel(Loc.T("THE BACK ROOM"), 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(0, 12, 680, 30));
-        for (int i = 0; i < held.Count; i++)
+        float y = 52;
+        foreach (var chest in held)
         {
-            var chest = held[i];
-            float y = 52 + i * 56;
             string what = chest.Key == "duel" ? Loc.T("The duel's stakes, held for the winner")
                 : chest.Kept ? Loc.T($"{chest.Owner}'s parcel, kept for collection") : Loc.T($"A {Categories.ColourName(chest.Colour)} chest: {chest.Owner}'s");
             panel.AddChild(UiKit.MakeLabel(what, 16, Palette.Text).Place(20, y + 12, 300, 20));
-            if (chest.Kept) continue;
-            panel.AddChild(UiKit.MakeButton(Loc.T($"Return it +{State.FinderShare}g"), Palette.Good, 16, () => ReturnHeld(chest)).Place(330, y, 166, 44));
-            panel.AddChild(UiKit.MakeButton(Loc.T($"Nim's friends +{State.FencePay(chest)}g"), Palette.Magic, 16, () => FenceHeld(chest)).Place(504, y, 160, 44));
+            if (!chest.Kept)
+            {
+                panel.AddChild(UiKit.MakeButton(Loc.T($"Return it +{State.FinderShare}g"), Palette.Good, 16, () => ReturnHeld(chest)).Place(330, y, 166, 44));
+                panel.AddChild(UiKit.MakeButton(Loc.T($"Nim's friends +{State.FencePay(chest)}g"), Palette.Magic, 16, () => FenceHeld(chest)).Place(504, y, 160, 44));
+            }
+            y += 56;
         }
+        // The gilded: a full mimic eats the gold off them; their note must be settled, or the Guild takes them back.
+        foreach (string person in guests)
+        {
+            bool freed = State.Guests[person];
+            string what = freed ? Loc.T($"{Story.Name(person)}: cold, and shaking, and free of the gold") : Loc.T($"{Story.Name(person)}: gold from head to foot, knocking");
+            panel.AddChild(UiKit.MakeLabel(what, 16, freed ? Palette.Good : Palette.Gold).Wrapped().Place(20, y + 2, 300, 44));
+            if (!freed)
+            {
+                var eat = UiKit.MakeButton(Loc.T("Let the mimic eat the gold"), Palette.Magic, 16, () => Ungild(person)).Place(330, y, 334, 44);
+                eat.Disabled = !State.MimicFull;
+                eat.TooltipText = State.MimicFull ? Loc.T("A full mimic eats the gold off one of the gilded, then wakes hungry.")
+                    : State.Mimic == null ? Loc.T("You need a mimic, fed full. Listen for a chest that breathes.") : Loc.T("Your mimic isn't full yet: it eats on Guild nights.");
+                panel.AddChild(eat);
+            }
+            else if (State.NoteFor(person) is int note and > 0)
+            {
+                var pay = UiKit.MakeButton(Loc.T($"Pay their note to the Guild ({note}g)"), Palette.Good, 16, () => Redeem(person)).Place(330, y, 334, 44);
+                pay.Disabled = State.Gold < note;
+                pay.TooltipText = Loc.T("Freed, but the note still stands: unpaid, the Guild takes them back on its next night.");
+                panel.AddChild(pay);
+            }
+            else
+                panel.AddChild(UiKit.MakeLabel(person == Campaign.Bram ? Loc.T("His note is his account: pay the debt.") : "", 16, Palette.Muted)
+                    .Place(330, y + 12, 334, 20));
+            y += 56;
+        }
+        if (mimic)
+            panel.AddChild(UiKit.MakeLabel(State.MimicFull ? Loc.T("Your mimic, asleep on the gold: full.")
+                : Loc.Plural(State.Mimic ?? 0, $"Your mimic: fed on {State.Mimic} Guild night. It eats {State.MimicFeed}g each one.",
+                    $"Your mimic: fed on {State.Mimic} Guild nights. It eats {State.MimicFeed}g each one."), 16, Palette.Magic).Place(20, y + 12, 640, 20));
         panel.AddChild(UiKit.MakeButton(Loc.T("Close"), Palette.Text, 16, () =>
         {
             _backRoom?.QueueFree();
@@ -334,6 +399,26 @@ public partial class PeddlerPhase : Phase
         }).Place(260, h - 44, 160, 36));
         _backRoom = Add(panel);
         Game.Moment("22_backroom", 0.4);
+    }
+
+    /// <summary>A full mimic eats the gold off someone in the back room.</summary>
+    public void Ungild(string person)
+    {
+        if (!State.Ungild(person)) return;
+        Sfx.Play("growl", 1.2f, -6);
+        Game.Hud.SetGold(State.Gold);
+        Build();
+        OpenBackRoom();
+    }
+
+    /// <summary>Pays a freed guest's note to the Guild: they can go home.</summary>
+    public void Redeem(string person)
+    {
+        if (!State.RedeemGuest(person)) return;
+        Sfx.PlayGroup("pay");
+        Game.Hud.SetGold(State.Gold);
+        Build();
+        OpenBackRoom();
     }
 
     /// <summary>Returns a back-room chest to its owner: the Wardens' finder's share.</summary>

@@ -58,7 +58,7 @@ public static partial class TaleBook
                             s.Promise(s.Day + 2, Tilly, Loc.T("Tilly, with the bell"));
                             s.Log("bell", Loc.T("You hired a barge to dredge Tilly's bell out of the Aldwater."));
                             return Loc.T("Two days, and we'll have it up. Bring a towel.");
-                        }, W(s, s.Purses(1.6f) + (s.MapPieces < Story.Pieces && !s.MapGiven ? s.Purses(1.5f) : 0)), cost: s.Purses(1), kind: true),
+                        }, W(s, s.Purses(2.6f)), cost: s.Purses(1), kind: true),
                         C(Loc.T("Too dear"), () =>
                         {
                             s.Log("bell", Loc.T("You wouldn't pay to dredge Tilly's bell."));
@@ -90,27 +90,14 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "bell.shard", Who = Story.Hood, Night = true, After = "bell.raised", Gap = 0, Tier = 3,
-                    Says = s => Say(s.Week >= Story.OfferWeek ? Story.Mara : Story.Hood,
-                        s.Week >= Story.OfferWeek
-                            ? Loc.T("Mara at the back door, soaked to the knees. \"That's the Keyhold's bell. We rang it from the river stairs, and when " +
-                                    "the Locking was made we hid something in its clapper.\"")
-                            : Loc.T("The hooded woman at the back door, soaked to the knees. \"That's the Keyhold's bell. We rang it from the river stairs, " +
-                                    "and when the Locking was made we hid something in its clapper.\""),
-                        s.MapGiven || s.MapPieces >= Story.Pieces
-                            ? Loc.T("\"It's empty. Someone was there before us, long ago. Take this for the trouble: Keyhold silver, from the bell's crown.\"")
-                            : Loc.T("\"A shard of the Aldric Key. I've been looking for it for twenty years, and a mudlark heard it ring. It's yours, Keywright.\"")),
+                    Says = s => Say(Story.Hood,
+                        Loc.T("The hooded woman at the back door, soaked to the knees. \"That's the Keyhold's bell. We rang it from the river stairs, " +
+                              "and when the Locking was made we hid something in its clapper.\""),
+                        Loc.T("\"It's empty. Someone was there before us, long ago. Take this for the trouble: Keyhold silver, from the bell's crown.\"")),
                     Then = s =>
                     {
-                        if (s.GiveShard())
-                        {
-                            s.Flags.Add("bell.shard");
-                            s.Log("bell", Loc.T("A shard of the Aldric Key was hidden in the Keyhold's bell. The Hooded Woman gave it to you."));
-                        }
-                        else
-                        {
-                            s.TaleGold(s.Purses(1));
-                            s.Log("bell", Loc.T("The Keyhold's bell was empty. The Hooded Woman paid you in Keyhold silver for the trouble."));
-                        }
+                        s.TaleGold(s.Purses(1));
+                        s.Log("bell", Loc.T("The Keyhold's bell was empty. The Hooded Woman paid you in Keyhold silver for the trouble."));
                     },
                 },
             },

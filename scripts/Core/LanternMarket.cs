@@ -5,10 +5,12 @@ using System.Linq;
 namespace Keywright.Core;
 
 /// <summary>
-/// The Lantern Market (0.33, docs/narrative.md, "The side stories"): Nim's people, under the Barrow at midnight, from
-/// Thornwick on. On the third night of a week Nim can take you down instead of just laying out his table. It buys what
-/// can't be sold by daylight and sells what can't be bought: a whisperer's secret for the case; the Maw's buyers, who pay
-/// over the odds for anything gold (and every coin of it is an eye for him); the Arcanum's menagerie, for a mimic.
+/// The Lantern Market (0.33; 0.34, docs/narrative.md): Nim's people, under the Barrow at midnight, from Thornwick on. On
+/// the third night of a week Nim can take you down instead of just laying out his table. It sells what can't be bought
+/// by daylight, and never an answer: once you remember, a night at the Guild's weighhouse (and a look at its register),
+/// the bargemen of the Wet Hen for the treasury's last night, and a crate diverted off the palace road. The Maw's buyers
+/// pay over the odds for anything gold, and every coin of it is an eye for him; the Arcanum's menagerie buys a mimic, or
+/// keeps and feeds yours.
 /// </summary>
 public static class LanternMarket
 {
@@ -16,9 +18,6 @@ public static class LanternMarket
 
     /// <summary>The night of the week the lanterns are lit.</summary>
     public const int Night = 3;
-
-    /// <summary>A secret's price, in working purses.</summary>
-    public const float SecretPurses = 0.35f;
 
     /// <summary>What the Maw's buyers pay for a gold thing, against what it sells for here.</summary>
     public const float GatePremium = 1.5f;
@@ -32,44 +31,54 @@ public partial class GameState
     /// <summary>Gold things sold down the Gate this season: each an eye for the Maw (the season's end reads them back).</summary>
     public int EyesSold { get; private set; }
 
-    /// <summary>The night a secret was last bought (one a night).</summary>
-    int _secretNight;
+    // ---- Once you remember: access, papers, transport ----
 
-    /// <summary>
-    /// What the whisperer has tonight: a clue not yet found to a question you're asking, one that gives a word you still
-    /// need first. Null when there's nothing to sell (or you've bought tonight's).
-    /// </summary>
-    public CaseClue Whisper
+    /// <summary>A night at the weighhouse, with a look at its register: offered once you know the Guild carts people (or have heard of its carts).</summary>
+    public bool PassOffered => Remembers && !CampaignDone && (Knows("carts") || KnowsInventory) && !Noted.Contains("register");
+
+    /// <summary>Half price to a face Nim's people know: you've used a pass in an earlier season.</summary>
+    public int PassPrice => Purses(Campaign.PassPurses * (KnownBefore.Contains("weighhouse") ? 0.5f : 1));
+
+    public bool BuyPass()
     {
-        get
-        {
-            if (_secretNight == Day) return null;
-            var open = OpenQuestions.Where(q => !Knows(q)).ToList();
-            CaseClue Best(bool needed) => Case.Clues.FirstOrDefault(c => !Clues.Contains(c.Key) && c.Key != LanternBuyers &&
-                open.Any(q => q.Key == c.Question && (!needed || Enumerable.Range(0, q.Blanks.Length)
-                    .Any(b => c.Gives.Contains(q.Answer[b]) && Words(q, b).All(w => w.Key != q.Answer[b])))));
-            return Best(true) ?? Best(false);
-        }
-    }
-
-    public int SecretPrice => Purses(LanternMarket.SecretPurses);
-
-    /// <summary>Buys tonight's secret: the clue is yours. False if there's none or you can't pay.</summary>
-    public bool BuySecret()
-    {
-        if (Whisper is not CaseClue clue || Gold < SecretPrice) return false;
-        Gold -= SecretPrice;
-        _secretNight = Day;
-        Find(clue.Key);
-        Log(Story.Tale, Loc.T("You bought a secret at the Lantern Market."));
+        if (!PassOffered || Gold < PassPrice) return false;
+        Gold -= PassPrice;
+        Note("weighhouse");
+        Note("register");
+        Log(Story.Tale, Loc.T("You bought a night at the Guild's weighhouse from Nim's people, and copied a page of its register."));
         return true;
     }
 
-    /// <summary>The buyers' own words, the first time you walk past them: a clue to where the gilded go.</summary>
-    public const string LanternBuyers = "market.buyers"; // loc: keys
+    /// <summary>The Wet Hen's bargemen, for the treasury's last night: a way out for whoever comes out.</summary>
+    public bool BargeOffered => Remembers && !CampaignDone && Knows("seal") && !Flagged("barge.hired") && !TreasuryDone;
 
-    /// <summary>Down to the market: the Maw's buyers are the first thing you see.</summary>
-    public void VisitMarket() => Find(LanternBuyers);
+    public int BargePrice => Purses(Campaign.BargePurses);
+
+    public bool HireBarge()
+    {
+        if (!BargeOffered || Gold < BargePrice) return false;
+        Gold -= BargePrice;
+        Flags.Add("barge.hired");
+        Log(Story.Tale, Loc.T("You hired the Wet Hen's bargemen for the treasury's last night: a way out, for whoever comes out."));
+        return true;
+    }
+
+    /// <summary>A crate diverted off the palace road (Bram's, chalked with his name): it comes to the counter tomorrow.</summary>
+    public bool DivertOffered => Remembers && !CampaignDone && KnowsInventory && BramNotes && !Flagged("crate.diverted") &&
+                                 !Guests.ContainsKey(Campaign.Bram) && !Rescued.Contains(Campaign.Bram) && !TreasuryDone;
+
+    public int DivertPrice => Purses(Campaign.DivertPurses);
+
+    public bool Divert()
+    {
+        if (!DivertOffered || Gold < DivertPrice) return false;
+        Gold -= DivertPrice;
+        Flags.Add("crate.diverted");
+        Log(Story.Tale, Loc.T("You paid the bargemen to take a crate chalked with Bram's name off the palace road. Corvin will bring it."));
+        return true;
+    }
+
+    // ---- The Maw's buyers ----
 
     /// <summary>Things on display the Maw's buyers want: anything gold in colour (never a Heartsong).</summary>
     public IEnumerable<Item> GoldForTheGate => Display.Where(i => i.Quality == Rarity.Legendary && !i.IsSong && !i.Fake && !i.Broken);
@@ -87,15 +96,7 @@ public partial class GameState
         return price;
     }
 
-    void SaveMarket(SaveData data)
-    {
-        data.EyesSold = EyesSold;
-        data.SecretNight = _secretNight;
-    }
+    void SaveMarket(SaveData data) => data.EyesSold = EyesSold;
 
-    void LoadMarket(SaveData data)
-    {
-        EyesSold = data.EyesSold;
-        _secretNight = data.SecretNight;
-    }
+    void LoadMarket(SaveData data) => EyesSold = data.EyesSold;
 }

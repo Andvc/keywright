@@ -643,11 +643,11 @@ public static partial class TaleBook
                 },
                 new()
                 {
-                    Key = "kettle.gilded", Who = Ada, Night = true, After = "kettle.debt", Gap = 0, Tier = 3, If = s => s.IsGilded(Jory),
+                    Key = "kettle.gilded", Who = Ada, Night = true, After = "kettle.debt", Gap = 0, Tier = 3, If = s => s.IsTaken(Jory),
                     Says = s => Say(Ada,
-                        Loc.T("Ada at the back door in her shawl, shaking. \"They came for Jory with a cart. He went gold in their hands, dear, " +
-                              "like old Haddon. Gold, with his mouth open.\""),
-                        Loc.T("\"They say he's the Maw's now. I don't care whose they say he is. He's my boy.\"")),
+                        Loc.T("Ada at the back door in her shawl, shaking. \"They came for Jory with a cart, dear. To work off the note, they said. " +
+                              "They wouldn't say where.\""),
+                        Loc.T("\"I don't care what they say he owes. He's my boy.\"")),
                     Then = s => s.Log("kettle", Loc.T("The Guild collected Jory Kettle on its night. He stands gold in the debt-house yard.")),
                 },
                 // 0.30: what Jory saw in the debt-house's books.
@@ -1448,7 +1448,7 @@ public static partial class TaleBook
     };
 
     /// <summary>Every tale a season can draw: 0.28's, and 0.30's from Brindle, Thornwick, Crownhold and the Emporium (TaleBook.*.cs).</summary>
-    public static readonly TaleDef[] All = GildingTales().Concat(Season28).Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales())
+    public static readonly TaleDef[] All = CampaignTales().Concat(Season28).Concat(BrindleTales()).Concat(ThornwickTales()).Concat(CrownholdTales()).Concat(EmporiumTales())
         .Concat(KinTales()).Concat(LateTales()).ToArray();
 
     static readonly Dictionary<string, Beat> Beats = All.SelectMany(t => t.Beats).ToDictionary(b => b.Key);

@@ -579,6 +579,11 @@ public sealed partial class GameState
     /// </summary>
     public string CallWardens(Visit visit)
     {
+        if (CanCallWardens(visit))
+        {
+            EarnPiece(Campaign.Warden);
+            Note("owner");
+        }
         if (!CanCallWardens(visit)) return null;
         string line = visit.Report(Rng);
         int share = FinderShare;
@@ -600,6 +605,8 @@ public sealed partial class GameState
     public int ReturnHeld(Held held)
     {
         if (!BackRoom.Contains(held) || held.Kept) return 0;
+        EarnPiece(Campaign.Warden);
+        Note("owner");
         BackRoom.Remove(held);
         int pay = FinderShare;
         TaleGold(pay);
@@ -676,8 +683,8 @@ public sealed partial class GameState
         data.KeepsakesHeld = Keepsakes.ToList();
         data.Promises = Promises.ToList();
         data.PorterUntil = PorterUntil;
-        SaveCase(data);
-        SaveGilding(data);
+        SaveInquiry(data);
+        SaveCampaign(data);
         SaveMimic(data);
         SaveMarket(data);
     }
@@ -700,8 +707,8 @@ public sealed partial class GameState
         foreach (string key in (data.KeepsakesHeld ?? new List<string>()).Where(Core.Keepsakes.Exists)) GiveKeepsake(key);
         Promises.AddRange(data.Promises ?? new List<Promise>());
         PorterUntil = data.PorterUntil;
-        LoadCase(data);
-        LoadGilding(data);
+        LoadInquiry(data);
+        LoadCampaign(data);
         LoadMimic(data);
         LoadMarket(data);
     }

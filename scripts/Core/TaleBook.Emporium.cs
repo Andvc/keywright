@@ -104,56 +104,6 @@ public static partial class TaleBook
                 },
             },
         },
-
-        // The Maw's Bargain: in the debt's last week, the Maw offers to pay it all, for the Key.
-        new TaleDef
-        {
-            Key = "bargain", Title = Loc.T("The Maw's Bargain"), Place = TalePlace.Emporium,
-            Blurb = Loc.T("In the debt's last week, the Maw himself comes to the counter. He'll pay everything you owe the Guild, tonight, for " +
-                          "the shards of the Aldric Key."),
-            Ending = BargainEnding,
-            Beats = new Beat[]
-            {
-                new()
-                {
-                    Key = "bargain.offer", Who = Maw, Tier = 4, Gap = 0,
-                    If = s => s.Week == Guild.Weeks && s.Day > s.TierSince && s.MapPieces > 0 && !s.MapGiven && !s.DebtCleared && !s.Gone.Contains(Maw),
-                    Says = s => Say(Maw,
-                        Loc.T("The air goes thick and sweet. A man in a borrowed body, dripping with rings, leans on your counter. \"Avarax. You know " +
-                              "the name. Every coin you've ever touched has been my eye.\""),
-                        Loc.T($"\"You owe my Guild {Money.Say(s.DebtLeft)}. I'll pay every coin of it tonight. All I want is the Key: the shards in " +
-                              $"your strongbox. Such a small thing.\"")),
-                    Asks = s => new()
-                    {
-                        C(Loc.T("Take his bargain"), () =>
-                        {
-                            s.TakeMawBargain();
-                            s.Log("bargain", Loc.T("You gave the Maw the Aldric Key's shards, and he paid Bram's debt. Every coin."));
-                            return Loc.T("\"Done.\" He doesn't take the shards. They're simply gone, and the rings on his fingers are warmer.");
-                        }, BargainWorth(s)),
-                        C(Loc.T("Never"), () =>
-                        {
-                            s.Flags.Add("bargain.refused");
-                            s.Sway(Faction.Crown, 1);
-                            s.Log("bargain", Loc.T("The Maw offered to pay the whole debt for the Key. You told him no, to his face."));
-                            return Loc.T("\"Never is such a short word, for a mortal.\" The air clears. The sweetness stays a while.");
-                        }, W(s, s.Purses(0.5f), (Faction.Crown, 1)), kind: true),
-                    },
-                },
-                new()
-                {
-                    Key = "bargain.mara", Who = Story.Mara, Night = true, After = "bargain.offer", Gap = 0, Tier = 4, If = s => s.Flagged("bargain.refused"),
-                    Says = s => Say(Story.Mara,
-                        Loc.T("Mara at the back door, white to the lips. \"He came to you himself. And you told him no.\""),
-                        Loc.T("\"Take this. It was the Keyhold's, and it's waited three hundred years for someone who'd say no to him.\"")),
-                    Then = s =>
-                    {
-                        string gift = GiftCurio(s, new Random(unchecked(s.Seed * 61 + s.Day)), CurioRarity.Rare);
-                        s.Log("bargain", Loc.T($"Mara gave you {gift}, for refusing the Maw."));
-                    },
-                },
-            },
-        },
     };
 
     /// <summary>
@@ -162,13 +112,6 @@ public static partial class TaleBook
     /// </summary>
     static float CourtWorth(GameState s) => s.Evidence.Count >= PapersForTrial ? s.DebtLeft * GameState.Tried
         : s.Flagged(Decree) ? 0 : s.DebtLeft * (1 - GameState.Decreed);
-
-    /// <summary>
-    /// What the Maw's bargain is worth to the careful player: less than nothing, always. It pays the debt, but the run it
-    /// saves is lost another way (the Key, the Crown Chest, Aldmark: no clear, and none of the debt's points). A learner
-    /// may still take it, guessing.
-    /// </summary>
-    static float BargainWorth(GameState s) => -s.Purses(4) - s.DebtLeft;
 
     static Line CourtEnding(GameState s)
     {
@@ -179,14 +122,5 @@ public static partial class TaleBook
         if (s.Flagged("court.summoned"))
             return new(Aldo, Loc.T("Your papers weren't enough to try the Guild this time. Keep collecting, Keywright. So will I."));
         return null;
-    }
-
-    static Line BargainEnding(GameState s)
-    {
-        if (s.GateOpens)
-            return new(Story.Mara, Loc.T("You sold him the Key. The Gilded Gate stands open, and the Maw walks the palace halls in his borrowed body. The Locking won't hold another year."));
-        return s.Flagged("bargain.refused")
-            ? new(Story.Mara, Loc.T("He offered you everything you owed, and you said never. I've waited three hundred years to hear someone say that to him."))
-            : null;
     }
 }

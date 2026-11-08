@@ -162,7 +162,12 @@ public sealed partial class GameState
         WeeksPaid++;
         _halfDue = false;
         Arrears = 0;
-        if (DebtCleared && ClearedDay == 0) ClearedDay = Day;
+        if (DebtCleared && ClearedDay == 0)
+        {
+            ClearedDay = Day;
+            // Bram's pledge is his account: paid, a freed Bram can come home.
+            TryHome(Campaign.Bram);
+        }
         // A miser's lockbox: what's left after the Guild's been grows a fifth.
         Hoarded = HasCurio("lockbox") ? Money.Round(Gold * Curios.LockboxShare) : 0;
         Gold += Hoarded;
@@ -200,6 +205,7 @@ public sealed partial class GameState
         Arrears = 0;
         _halfDue = false;
         ClearedDay = Day;
+        TryHome(Campaign.Bram);
         return paid;
     }
 
@@ -276,64 +282,6 @@ public sealed partial class GameState
     public void Foreclose() => Foreclosed = true;
 
     // ---- The map ----
-
-    /// <summary>Bram's own piece of the map (from the second week).</summary>
-    public bool BramPiece { get; private set; }
-
-    /// <summary>Pieces the Hooded Woman has traded you.</summary>
-    public int HoodPieces { get; private set; }
-
-    /// <summary>You gave the map to the Guild for half a week's due.</summary>
-    public bool MapGiven { get; private set; }
-
-    public bool VaultOpened { get; set; }
-
-    public int MapPieces => MapGiven ? 0 : (BramPiece ? 1 : 0) + HoodPieces;
-
-    /// <summary>The Guild's offer for the map comes tonight.</summary>
-    public bool OfferTonight => DuesTonight && Week == Story.OfferWeek && MapPieces > 0 && !MapGiven;
-
-    /// <summary>Hands the map to Vane: half tonight's due, and no vault.</summary>
-    public void GiveMap()
-    {
-        MapGiven = true;
-        _halfDue = true;
-        Commissions.RemoveAll(c => c.Story);
-    }
-
-    /// <summary>
-    /// The vault is waiting: the debt is paid and the Key is whole, by the season's last night (the Crown's note falls
-    /// due at its midnight, docs/narrative.md).
-    /// </summary>
-    public bool VaultDue => DebtCleared && MapPieces >= Story.Pieces && !VaultOpened && Week <= Guild.Weeks;
-
-    /// <summary>
-    /// King Aldric's vault: the best of everything, much of it enchanted, behind a dwarven lock. Mara and Bram bring it
-    /// to the counter; nobody's asking a price.
-    /// </summary>
-    public Purchase VaultPurchase()
-    {
-        var visit = VaultVisit();
-        visit.Buy(Rng);
-        var chest = visit.Chest;
-        // Mara knows what's in it: the slip lists it all, magic and the false bottom included.
-        var slip = new Appraisal(chest.Quality, Tier, chest.Items.Select(i => i.Category)) { Hidden = true };
-        foreach (var kind in chest.Items.Where(i => i.Magic).Select(i => i.Category).Distinct())
-            slip.Set(kind, slip.Count(kind), magic: true);
-        return new Purchase(visit, slip);
-    }
-
-    Visit VaultVisit()
-    {
-        var items = new[]
-        {
-            new Item(Category.Coins, Rarity.Legendary, Magic: true), new Item(Category.Gems, Rarity.Legendary, Magic: true),
-            new Item(Category.Arms, Rarity.Legendary), new Item(Category.Garb, Rarity.Legendary), new Item(Category.Potions, Rarity.Epic, Magic: true),
-            new Item(Category.Scrolls, Rarity.Legendary), new Item(Category.Gems, Rarity.Epic), new Item(Category.Coins, Rarity.Epic),
-        };
-        var chest = new Chest(items, Rarity.Legendary, new Item(Category.Gems, Rarity.Legendary), LockTiers.All[3], gilded: true);
-        return new Visit(Story.VaultSeller, chest, Array.Empty<Category>(), Trade.Fixed, 0, 1, Loc.T("The Crown Chest."));
-    }
 
     // ---- Curios ----
 
@@ -453,16 +401,9 @@ public sealed partial class GameState
         Today.Delivered++;
         Gold += pay;
         Today.Commissions += pay;
-        if (commission.Story && commission.Done) HoodPieces++;
+        if (commission.Done) EarnPiece(Campaign.Patron);
         return pay;
     }
-
-    /// <summary>
-    /// When the Hooded Woman wants her next piece's price: weeks 2, 3 and 4 (or the week after, if you missed one),
-    /// until the debt's last week. After that she's gone looking on her own.
-    /// </summary>
-    /// <summary>How many shards the Hooded Woman has asked for by a week: one from the second, two from the fourth, three from the sixth.</summary>
-    static int HoodScheduled(int week) => week >= 6 ? 3 : week >= 4 ? 2 : week >= 2 ? 1 : 0;
 
     // ---- Events ----
 
@@ -507,10 +448,7 @@ public sealed partial class GameState
         NextPlan = Events.Plan(Seed, Week + 1, Tier, _eventsSeen, fair);
         if (Week < 2) return;
 
-        BramPiece = true;
         Commissions.AddRange(Patrons.Roll(rng, this));
-        if (!MapGiven && Week <= Guild.Weeks && HoodPieces < Story.Pieces - 1 && HoodPieces < HoodScheduled(Week))
-            Commissions.Insert(0, Patrons.Hood(HoodPieces + 1, Tier));
     }
 
     /// <summary>

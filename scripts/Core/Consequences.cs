@@ -187,37 +187,6 @@ public sealed partial class GameState
     /// <summary>A tale takes you out tonight: no Nim.</summary>
     public void GoOutTonight() => Until[TaleBook.Away] = Day;
 
-    // ---- The Key by another road, and the Maw's ----
-
-    /// <summary>A shard of the Aldric Key from a tale (the Keyhold's bell): Mara has it for nothing. False if there's no shard left to find.</summary>
-    public bool GiveShard()
-    {
-        if (MapGiven || MapPieces >= Story.Pieces || HoodPieces >= Story.Pieces - 1) return false;
-        HoodPieces++;
-        return true;
-    }
-
-    /// <summary>
-    /// The Maw buys your shards for your whole debt: it's paid, the run is won, and the Crown Chest is gone for good (the
-    /// run ends THE GATE OPENS, and scores half).
-    /// </summary>
-    public void TakeMawBargain()
-    {
-        PaidBeforeMaw = WeeksPaid;
-        MapGiven = true;
-        Commissions.RemoveAll(c => c.Story);
-        WeeksPaid = Guild.Weeks;
-        Arrears = 0;
-        _halfDue = false;
-        ClearedDay = Day;
-        Flags.Add(TaleBook.Bargain);
-    }
-
-    /// <summary>The Maw has the shards: the run ends with the Gate opening.</summary>
-    public bool GateOpens => Flagged(TaleBook.Bargain);
-
-    /// <summary>The Guild's dues you paid yourself before the Maw paid the rest (they score; his don't).</summary>
-    public int PaidBeforeMaw { get; private set; }
 
     // ---- Saving ----
 
@@ -229,7 +198,6 @@ public sealed partial class GameState
         data.LoanOwed = LoanOwed;
         data.LoanDue = LoanDue;
         data.Until = new Dictionary<string, int>(Until);
-        data.PaidBeforeMaw = PaidBeforeMaw;
     }
 
     void LoadConsequences(SaveData data)
@@ -240,6 +208,5 @@ public sealed partial class GameState
         LoanOwed = data.LoanOwed;
         LoanDue = data.LoanDue;
         foreach (var (key, day) in data.Until ?? new Dictionary<string, int>()) Until[key] = day;
-        PaidBeforeMaw = data.PaidBeforeMaw;
     }
 }

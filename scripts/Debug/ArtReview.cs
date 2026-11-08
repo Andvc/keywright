@@ -71,8 +71,8 @@ public partial class Main
             // In-memory fixture: show partial key progress beside week-two dues without writing a save.
             var guildReview = State.Save();
             guildReview.Day = 10;
-            guildReview.BramPiece = true;
-            guildReview.HoodPieces = 2;
+            guildReview.Pieces = new System.Collections.Generic.List<string> { Campaign.Reader, Campaign.Warden };
+            guildReview.BramAway = true;
             State = GameState.Load(guildReview);
             Hud.SetDay(State.Day, State.Tier);
             Hud.SetDue(State);

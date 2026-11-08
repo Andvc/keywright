@@ -58,7 +58,13 @@ public sealed class Chest
     /// <summary>A mimic (0.33, <see cref="Mimics"/>): it ate what was in it, and breathes while the chest sits still.</summary>
     public bool Breathing { get; set; }
 
-    public string Skin => Sealed ? "black" : Gilded ? "gold" : Categories.ChestSkin(Quality);
+    /// <summary>
+    /// A Guild crate off the palace road (0.34, docs/narrative.md): someone gilded is inside it (a person's key), and they
+    /// knock, faintly, while it sits still. Nothing else is in it. Null for a chest.
+    /// </summary>
+    public string Crate { get; set; }
+
+    public string Skin => Sealed || Crate != null ? "black" : Gilded ? "gold" : Categories.ChestSkin(Quality);
 
     /// <summary>Everything, including what's under the false bottom (a warded thing only once the ward has given it up).</summary>
     public IEnumerable<Item> Everything => Hidden == null ? _items : _items.Append(Hidden);
