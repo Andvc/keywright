@@ -311,6 +311,9 @@ public partial class CounterPhase : Phase
             Teach(_visit.Seller.Key == "pip" ? "intro" : $"first_{_visit.Seller.Key}");
             return;
         }
+        // A day that's different (an event) changes the whole day: said first, before anything about this customer (0.34:
+        // the playtest met three event days before the tip got its turn).
+        if (firstOfDay && State.TodayEvent != null) Teach("event");
         // Everyone else gets a word about their own way with a chest, the first morning.
         if (!State.Is(Characters.Kit)) Teach($"kin_{State.Character}");
         // Mother Sorrel's first visit: clicking someone opens their page in the notebook (her lesson teaches it to Kit).
@@ -328,7 +331,6 @@ public partial class CounterPhase : Phase
         Teach(_visit.Trade switch { Trade.Haggle => "haggle", Trade.Offer => "offer", _ => "fixed" });
         if (_visit.Chest.Lock.Locked) Teach("locked");
         if (_lamp) Teach("lamp");
-        if (firstOfDay && State.TodayEvent != null) Teach("event");
         if (firstOfDay && State.Today.Stash > 0) Teach("stash");
         if (State.Commissions.Any(c => !c.Done)) Teach("commissions");
         if (_visit.Chest.Sealed) Teach("stranger");
@@ -383,7 +385,9 @@ public partial class CounterPhase : Phase
             _rot.Text = Concluded ? "" : _rotten >= State.ShakeLimit(_visit.Seller) ? Loc.T("Coming apart: no more shaking")
                 : Loc.T($"Rotten: {State.ShakeLimit(_visit.Seller) - _rotten:0.0}s of shaking left");
         string tried = TriedSoFar();
-        _hint.Text = Busy || Concluded || _shake.Dragging ? ""
+        _hint.Text = Busy || Concluded ? ""
+            : _shake.HighEnough && State.CanDrop ? Loc.T("High enough: let go to drop it.")
+            : _shake.Dragging ? ""
             : _shake.Hover && tried == "" ? State.CanDrop ? Loc.T("Drag to shake it. Lift it high and let go to drop it.") : Loc.T("Drag to shake it, gently or firmly: mind your back.")
             : _magnet ? Loc.T("Lodestone on: iron can't move")
             : tried != "" ? tried
@@ -587,7 +591,8 @@ public partial class CounterPhase : Phase
         var panel = Add(new Node2D { ZIndex = 10 });
         panel.AddChild(new Sprite2D { Texture = ArtTexture.Load($"res://assets/sheet/{ShopView.Places[State.Tier - 1]}.png"), Centered = false, Position = new Vector2(820, 66), Scale = Vector2.One * 2 });
         // Clear of the sheet's pin, top left.
-        panel.AddChild(UiKit.MakeLabel(Loc.T("YOUR APPRAISAL"), 16, Palette.InkGold).Place(PanelX + 20, 80, 200, 20));
+        // Clear of the seal some shops' sheets have in that corner.
+        panel.AddChild(UiKit.MakeLabel(Loc.T("YOUR APPRAISAL"), 16, Palette.InkGold).Place(PanelX + 36, 80, 188, 20));
         _notebookButton = UiKit.MakeButton(Loc.T($"Notebook {Controls.Tag(Controls.Notebook)}"), Palette.Gold, 16, () => OpenNotebook()).Place(PanelX + 224, 72, 160, 36);
         panel.AddChild(_notebookButton);
         var seller = _visit.Seller;

@@ -25,8 +25,12 @@ public static class LanternMarket
 
 public partial class GameState
 {
-    /// <summary>Nim can take you down to the Lantern Market tonight.</summary>
-    public bool MarketTonight => Tier >= LanternMarket.FromTier && PeddlerToday && DayOfWeek == LanternMarket.Night && !Foreclosed;
+    /// <summary>
+    /// Nim can take you down to the Lantern Market tonight. Before you remember, only when there's something to do down
+    /// there (a gold thing the Maw's buyers want, or a mimic for the menagerie): a stall of nothing is noise (0.34).
+    /// </summary>
+    public bool MarketTonight => Tier >= LanternMarket.FromTier && PeddlerToday && DayOfWeek == LanternMarket.Night && !Foreclosed &&
+                                 (Remembers || GoldForTheGate.Any() || Mimic != null);
 
     /// <summary>Gold things sold down the Gate this season: each an eye for the Maw (the season's end reads them back).</summary>
     public int EyesSold { get; private set; }

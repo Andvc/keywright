@@ -127,8 +127,8 @@ public static class Hints
         ["counted"] = Loc.T("Two of a kind: each one adds its value. Sellers who don't count only price one."),
         ["glow"] = Loc.T("It glowed! That one's enchanted, and worth twice as much. Click the star on its row to mark it."),
         // 0.33: the Lantern Market (0.34: it sells a way in, a way out, a crate off a cart; never an answer).
-        ["market"] = Loc.T("Nim's lantern is lit: the Lantern Market's open under the Barrow tonight. His people sell what can't be bought " +
-                           "by daylight, and buy what nobody else will. Mind who you sell gold to down there."),
+        ["market"] = Loc.T("The Lantern Market's open under the Barrow tonight, and Nim will take you down. His people sell what can't be " +
+                           "bought by daylight, and buy what nobody else will. Mind who you sell gold to down there."),
         // 0.33: a mimic (0.34: a full one sleeps on the gold, and will eat the gold off someone gilded).
         ["mimic"] = Loc.T("A mimic! It's eaten whatever was in there. The Arcanum's menagerie pays well for one. Or keep it: it eats gold on " +
                           "Guild nights, no thief tries a door with a mimic behind it, and once it's eaten its fill it sleeps on the gold."),

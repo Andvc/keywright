@@ -82,6 +82,9 @@ public partial class ShakeBox : Node2D
 
     public bool Dragging => (_dragging && _moved) || _autoShakeLeft > 0 || _liftLeft > 0;
 
+    /// <summary>Held up high enough that letting go would be a drop (0.34: the playtest couldn't tell how high was enough).</summary>
+    public bool HighEnough => _dragging && _rest.Y - _pos.Y >= DropHeight;
+
     readonly Chest _chest;
     readonly Rect2 _dragBounds;
     readonly Random _rng = new();
