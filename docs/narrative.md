@@ -24,7 +24,7 @@ from a list rather than found by doing. The proposal's diagnosis, and what 0.34 
 | A clear, reasonable objective: a successful shop, the treasury key from four professional accomplishments, Bram's commission, the treasury. | The key's four pieces come from the trade itself: a hidden thing read true, a stolen chest settled, a commission filled, an old lock picked without force. The Guild's assessors send each one. |
 | The first successful run ends with the player opening the Maw: nothing moves, no hollow ring, it slips, it breathes, it swallows the screen. Then Bram taps the counter, and it's the first morning. | The treasury on the last night is exactly that, played at the counter with the counter's own tools. |
 | One set of rules for time: the seal's safeguard turns the year back when the Maw breaks out without leave; you remember because you touched its core; so does he; nobody else. Knowledge persists, money and evidence don't. | The profile keeps what you've *found out* (the Inquiry's entries); every season starts the same. |
-| Run 2 must show at once that knowing changes play: a chest you recognise, a small event you change, a contradiction in the Guild's story. | The first-morning chest is the same every spring, and your notebook remembers what was in it. Old Haddon's note can be paid before the Guild takes him. Bram's tuning fork turns up in a Guild sale, tagged from the weighhouse, not the treasury. |
+| Run 2 must show at once that knowing changes play: a chest you recognise, a small event you change, a contradiction in the Guild's story. | The first-morning chest is the same every spring, and the slip notes what it held when you opened it before. Old Haddon's note can be paid before the Guild takes him. Bram's tuning fork turns up in a Guild sale, tagged from the weighhouse, not the treasury. |
 | Replace answer entry with action. | The Case page is gone. The **Inquiry** keeps what you saw, who said what, what you tried and what came of it, and the leads: things you now have reason to do. |
 | Discoveries unlock actions; critical ones have more than one road; a mistake changes the cost, not the campaign. | Each discovery opens something to do (follow a cart, knock back, feed a mimic, intercept a crate, read the charter), and each has a second road (Hollis or the Lantern Market; the Roll or the King). |
 | Small mimics come after the first swallowing, as care with a finite appetite; a caretaker for players who don't want chores; ungilding has limits. | Mimics breathe only once you remember the treasury. Fed twice, one sleeps: full. A full mimic eats one gold shell, but a freed person whose note stands is taken again on the Guild's next night. The Arcanum's menagerie will keep one for you. |
@@ -107,7 +107,7 @@ last offer (below).
 |---|---|
 | What turns the year | The Maw breaking out without leave: on every season's last night unless the true ending is reached. A foreclosure ends *your* season early; the last night still happens without you. |
 | Where it returns | The first morning: Bram behind the counter, tapping it twice and once. |
-| Who remembers | You, from your first swallowing (the profile's `Campaign.Remembers`); the Maw (Vane speaks for it); nobody else. Before the first swallowing, a new season is simply a new season. |
+| Who remembers | You, from your first swallowing (the profile's `Swallowed`, the run's `GameState.Remembers`); the Maw (Vane speaks for it); nobody else. Before the first swallowing, a new season is simply a new season. |
 | What carries over | What you've found out (the Inquiry's entries, `Profile.Known`), and how to do what you learned (leads stay open). Money, papers, the key's pieces, friends, the freed and Bram's rescue return to how they were. |
 | What doesn't turn it | Losing money, missing a chance, a wrong guess. |
 
@@ -180,7 +180,7 @@ The threads, in the order they open:
 | **How do we bring them out?** | opens with the seal; it's the plan (below) | the final opening |
 
 **The second season, at once.** On the first morning, the same chest comes to the counter every spring (Garrick's grey
-chest, on day 2), and once you've opened it in any season the Inquiry remembers what was in it. Nell's word about her
+chest, on day 2), and once you've opened it in any season the slip at the counter says what it held (`Profile.FirstChest`). Nell's word about her
 father's note comes again, and now you know what the Guild night does: pay the note (about forty gold, at Brindle)
 and Haddon stays home, a friend at the crossroads. And in the second week, Bailiff Marrow's repossessed lot holds
 Bram's tuning fork, tagged from the weighhouse: the lead to follow.
@@ -197,9 +197,8 @@ still, something inside knocks, faintly. Knock back (hold still and press act) a
 reveals a gilded person, who goes to the back room. To bring them home:
 
 1. **Free them**: a full mimic in your care eats the gold off one (`Mimics`: two meals, then one shell).
-2. **Resolve their note**: redeem it (pay what they owed), or, for Haddon, prove the Guild added "and all of him" after
-   he'd signed (his own paper, from his last chest, and the Roll's copy, to Sergeant Hollis): a seizure on a false note
-   is void.
+2. **Resolve their note**: redeem it (pay what they owed: Haddon's forty gold; Bram's note is his account, so it's
+   settled when the debt is paid).
 
 Freed with the note still standing, they're taken again on the Guild's next night. Crates come by Corvin ("fell off a
 Guild cart"), or by the Lantern Market's bargemen, or, with the Wardens as friends, Hollis stops a cart.
@@ -267,9 +266,12 @@ are no statues at the crossroads, and the gilded are only ever seen where they'r
 
 ## Where it lives in the code
 
-- `Campaign.cs` (Core): the profile's campaign (`Remembers`, `Known`, `Swallowed`, `Rescues`, `Done`) and the run's
-  (`BramAway`, `BramHome`, the key's `Pieces`, `Holding`, `Guests`, `Plan`).
-- `Inquiry.cs` (Core): the threads, the entries (seen, said, tried, lead) and what each needs.
+- `Campaign.cs` (Core): the run's campaign (`Remembers`, `CampaignDone`, `BramAway`, `BramHome`, the key's `Pieces` and
+  their fee, `Guests`, `Rescued`, `Claims`, `Taken`, the plan's `PlanFind`/`PlanFree`/`PlanWayOut`/`PlanDoor`, the
+  treasury's ends), read from the profile's (`Profile.Swallowed`, `Rescues`, `Finished`, `Known`, `FirstChest`,
+  `LastEnd`) by `RememberCampaign`.
+- `Inquiry.cs` (Core): the threads, the entries (seen, said, tried, heard, found, lead), what's held this season and
+  what's known for good (`Noted`, `KnownBefore`), and the plan's lines.
 - `TaleBook.Campaign.cs`: the season's beats (Nell, the summons, the commission, the first-morning chest, the tuning
   fork, Hollis, the weighhouse, the crates, Mara, the charter, Bram's homecoming, the Maw's tactics).
 - `Story.cs`: the mornings, Vane's nights, the treasury's lines, the endings.

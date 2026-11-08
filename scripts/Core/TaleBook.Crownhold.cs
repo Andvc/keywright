@@ -313,7 +313,7 @@ public static partial class TaleBook
 
     static Line BellEnding(GameState s)
     {
-        if (s.Flagged("bell.shard"))
+        if (s.Did("bell.shard"))
             return new(Tilly, Loc.T("The Keyhold's bell hangs over the river stairs again, and I ring it for the ferry. The hooded lady paid in Keyhold silver. A mudlark heard it first!"));
         if (s.Flagged("bell.raised"))
             return new(Tilly, Loc.T("The bell came up, and I ring it for the ferry now. The posh ones call me the bell-finder. I call me rich."));

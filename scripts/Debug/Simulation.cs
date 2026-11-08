@@ -814,6 +814,9 @@ public static partial class Simulation
         var firstSwallowed = new List<int>();
         var firstRescue = new List<int>();
         var trueEnding = new List<int>();
+        // At the treasury once you remember, without the plan whole: what was missing (find, free, a way out, the door).
+        int short_ = 0;
+        var missing = new int[4];
         for (int l = 0; l <= Challenges.Max; l++) firstClear[l] = new List<int>();
         for (int c = 0; c < careers; c++)
         {
@@ -836,6 +839,14 @@ public static partial class Simulation
                     profile.ClearedAt(state);
                 }
                 bool swallowed = profile.Swallowed > 0, rescued = profile.Rescues > 0, finished = profile.Finished;
+                if (state.Remembers && !state.CampaignDone && state.TreasuryEnd is string end && end != Campaign.Morning)
+                {
+                    short_++;
+                    if (!state.PlanFind) missing[0]++;
+                    if (!state.PlanFree) missing[1]++;
+                    if (!state.PlanWayOut) missing[2]++;
+                    if (!state.PlanDoor) missing[3]++;
+                }
                 int final = profile.Bank(state);
                 if (!swallowed && profile.Swallowed > 0) firstSwallowed.Add(r + 1);
                 if (!rescued && profile.Rescues > 0) firstRescue.Add(r + 1);
@@ -872,6 +883,9 @@ public static partial class Simulation
         GD.Print($"  first swallowed at the treasury: {When(Padded(firstSwallowed))}   ({100f * firstSwallowed.Count / careers:0}% by run {runs})");
         GD.Print($"  Bram first brought home:         {When(Padded(firstRescue))}   ({100f * firstRescue.Count / careers:0}% by run {runs})");
         GD.Print($"  the next day (the true ending):  {When(Padded(trueEnding))}   ({100f * trueEnding.Count / careers:0}% by run {runs})");
+        if (short_ > 0)
+            GD.Print($"  at the treasury remembering, the plan short ({short_} seasons): find them {100 * missing[0] / short_}% missing, free them " +
+                     $"{100 * missing[1] / short_}%, a way out {100 * missing[2] / short_}%, the door {100 * missing[3] / short_}%");
     }
 
     static void Scored(GameState state, Log log)

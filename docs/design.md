@@ -17,21 +17,25 @@ cross against your slip, and now and then something far better than the chest pr
 shop's name (synergies) and its exhibition, which draw more and better customers, and the shop moves inward, from the
 crossroads to Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate. The stall comes with Bram's twenty
 years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due that climbs from 20g to
-45,000g over five weeks (25 days, about two hours of play). Curios from Nim the peddler are the run's
+12,000g over seven weeks (35 days, about two and a half hours of play). Curios from Nim the peddler are the run's
 build: each bends a rule of the trade, the ones that share a way of trading (enchantment, sight unseen, haggling, the
 perfect read, false bottoms, wards, and more beside) make each other stronger, and Nim, who notices what you buy,
 brings more of it. Whatever makes ordinary things fetch more puts up what every seller asks as well (the shop's power
 index), so the shop's growth makes the numbers bigger without making a bad buy good; the last week's due is more than
 ordinary trade can make, and a build that has come together is what carries it. Regulars pay well for commissions,
-something different happens in town two days a week, and a hooded woman trades shards of the Aldric Key for the
-finds only a good ear turns up. Pay all five dues, or the whole of what's left at once whenever you have it, and
-the stall is free (and with the Key whole, the Crown Chest opens on your counter and the Locking holds); fall short and
-the Guild seals the shop.
+and something different happens in town two days a week. Bram minds the stall with you for the first week; then the
+Guild's treasury sends for him, and the Guild's assessors send the four pieces of the treasury key for four marks of the
+trade a careful ear makes. Pay every due, or the whole of what's left at once whenever you have it, and Bram's account
+is closed; with the key whole too, the Guild's carriage takes you to its treasury, where the great chest is the Maw
+(*The story*, below). Fall short and the Guild seals the shop.
 
 Across runs, four of Bram's kin can mind the stall, each reading chests or running the shop their own way: Kit listens,
 Hesk weighs, Rosa haggles, Isolde collects. Clearing the debt with one opens the next of eight challenge levels for
 them, each adding one of the Guild's harsher terms. Every run ends with a score, times the challenge level's
-multiplier. Nothing carries over that makes the next run stronger: what grows is what you know.
+multiplier. Nothing carries over that makes the next run stronger: what grows is what you know. Since 0.34 that's
+also the story's: after the treasury first swallows you, every season is the same spring again, you remember, and the
+notebook's Inquiry keeps what you've found out, until a season ends with the treasury door closed on the Maw and
+everyone the Guild took brought out.
 
 ## The world
 
@@ -77,7 +81,7 @@ Then, one at a time as the shop grows, more layers of deduction, each taught by 
 | Sand | Crownhold | a scroll case of river sand rustles just like a scroll, but pours at the gentlest shake; parchment never does | a rustle at a gentle shake is sand |
 | Enchantment | Crownhold | anything you can hear can be enchanted (worth double); it sounds like anything else. A hidden thing (under a false bottom, or warded) never is: it fetches a third more instead | under the **Witchlight** it glows |
 | Demon gold | Royal Emporium | gilded iron jingles and tinkles like gold and gems | near the **Lodestone** iron can't move: a fake goes quiet |
-| Mimics (0.33) | Thornwick | a mimic ate everything in its chest; nothing rattles, so a seller who listens thinks it's empty | it **breathes** while the chest sits still (and holds its breath while it's shaken): listen before you shake |
+| Mimics (0.33; since 0.34 only once you remember the treasury) | Thornwick | a mimic ate everything in its chest; nothing rattles, so a seller who listens thinks it's empty | it **breathes** while the chest sits still (and holds its breath while it's shaken), and never rings the way an empty box does at a firm shake (0.34): listen before you shake |
 
 Sound-alikes (sand, demon gold) are the deductive heart of the later shops: the sound tells you the kind of thing,
 but only the rules tell you whether it's real. Soft things only sound at a hard shake, which hides them from anyone
@@ -111,8 +115,8 @@ the last. So each colour is now worth twice the one below, and gold three times 
   thing (`ShineShare`), so a luck build still pays at the Emporium. The Master Restorer mends instead of lifting
   (nothing comes out worse than its chest), and Tick's hoard is more often blue, which can come out better.
 
-A careful run finds a gold thing or two (the sim's count is on the main table's "gold things a run" line), Bram's tip
-says so the first time, and the Crown Chest still holds five.
+A careful run finds a gold thing or two (the sim's count is on the main table's "gold things a run" line), and Bram's
+tip says so the first time. (Until 0.34 the Crown Chest's nine-thing opening held five more.)
 
 Surprises: in v10 one thing in five came out better (two steps in 2%), a third of a careful player's income came from
 them, and one lucky chest could pay for a renovation; v12 to v17 cut that to one in twelve and a seventh of the income,
@@ -221,12 +225,12 @@ Drowned Bell 62% (a curio from day 1: a Lucky Coin 68%, a Letter of Introduction
 longer season brought more chests, and at 0.22's chance a chest (0.24%) half a Heartsong a run while the debt lasted;
 at 0.16% it's a third again (`--sim=songcount`: 0.33 a run, a first run 0.21), the first found around day 25.
 
-**The ending.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the collection's Heartsongs
-page). The Crown Chest holds the Locking's tune; the Heartsongs are its verses. With all nine known when it's opened,
-Mara sings the Locking whole: the Maw starves, the Gate is only a gate, every chest in Aldmark opens
-(`Story.VaultEpilogue`, worth 200 points). With fewer, she renews it and says how many verses the family knows. In the
-sim's careers, all nine are known around the sixteenth run and the first Crown Chest sung whole comes around the
-seventeenth: after the first clear, before level 4. Each Heartsong found is worth 20 points too.
+**The songbook.** Bram's kin remember every Heartsong they've opened (`Profile.Songs`, the collection's Heartsongs
+page, and the "Sung Whole" achievement for all nine), and each found is worth 20 points. Since 0.34 that's all a
+songbook is: the Heartsongs keep their display effects, and nothing is gated on all nine. Until then the Crown Chest
+held the Locking's tune and the Heartsongs its verses: opened with all nine known, Mara sang the Locking whole and every
+chest in Aldmark opened (`Story.VaultEpilogue`, worth 200 points), and in the sim's careers all nine were known around
+the sixteenth run and the first Crown Chest sung whole came around the seventeenth.
 
 ## Ways to judge a chest
 
@@ -466,7 +470,8 @@ Everything arrives when it's needed, each with a word from Bram, so the first da
 | Move to Crownhold | synergies: the journal has tallied everything from day one, so some are ready to switch on | what a synergy is and where to choose one |
 | The Royal Emporium | the biggest crowd, the lodestone, the Royal Seal | that the Gate is just down the street |
 | Week 1 | two gentle events (days 2 and 4), Nim on day 3 | a tip with each |
-| Week 2 | the Locking and the Maw; Bram's shard of the Aldric Key; the Hooded Woman's commissions, which pay in shards of the Key; the regulars' commissions; two events a week | a scene; a tip with each |
+| The first Guild night (0.34) | the treasury's summons: Bram goes with Vane (and Old Haddon, if his note wasn't paid); from then on his tips are notes in the margins of his notebook | a scene: Vane, then Bram |
+| Week 2 | the Guild's letter: keep Bram's account paid, and earn the treasury key's four pieces, each for a mark of the trade (a hidden thing read true, a stolen chest settled, a commission filled, an old lock picked without force); the notebook's Inquiry; the regulars' commissions; two events a week | a scene; a tip with each |
 | A short night | pawning, and (once a run) Bram's word | a tip |
 | A day that starts nearly broke | Bram's secret stash (twice a run) | the day card, and a tip the first time |
 | The day's event | a chip in the top bar that reopens it | a tip pointing at it |
@@ -983,6 +988,8 @@ road, and the Maw's bargain, the debt paid for the Key. The ending reads all of 
 Crown Chest night name who stands with you, the run-end title changes (THE GUILD ON TRIAL, THE GATE OPENS), the score
 counts friends made and the trial, and after the last scene the season's end tells what became of everyone whose tale
 began (`TaleDef.Ending`). `docs/stories.md` has every beat; the sim's "Tales" section reports how each tale went.
+(0.34 took the shard and the Maw's bargain out with the Key: the gathering asks who'll stand with you at the treasury,
+two friends are the plan's way out, and the run-end titles are the treasury's: *The story*, below.)
 
 The owner, after playing a shopkeeper game whose customers had lives (revolutionaries and police, thieves and wanted
 notices): the people at the counter were flat, the only progression across encounters was the Key's shards, and the
@@ -1043,34 +1050,71 @@ evenings around it. `docs/stories.md` has every tale beat by beat; this is how i
 ## The story
 
 The world's story (`docs/world.md`; what's true underneath it, and why it's told this way, `docs/narrative.md`) is told
-in scenes (`ScenePhase`, `Story`) on story mornings, the second evening, Guild nights and at the end, and found at the
-counter: 0.33 rewrote it as a mystery the player works out (the notebook's Case page) rather than one they're told.
+in scenes (`ScenePhase`, `Story`) on story mornings, the second evening, Guild nights, at the treasury and at the end,
+and found at the counter. 0.34 rebuilt it around the owner's narrative proposal as a campaign across seasons, in place
+of 0.33's mystery (the Gilding, Bram's glove, the notebook's Case page of sentences with blanks). In the player's words:
+first I open chests to make a living and bring my uncle home; then I find out that some of the things being traded are
+people; finally I open the greatest chest in the world knowing exactly whom I mean to bring out. The beats are **Bram's
+Account** in `docs/stories.md` (`TaleBook.Campaign.cs`); the campaign's state is `Campaign.cs`, the notebook's Inquiry
+`Inquiry.cs`, and the treasury `TreasuryPhase`.
 
-- Week 1: Bram's welcome, and Old Haddon the wheelwright standing gilded at the crossroads, the day after the Guild
-  foreclosed on him. Bram has a new glove. Nell Haddon brings her father's last chest, which wouldn't open for the
-  Guild's men: his Guild paper is inside. The first Guild night, the Guild's cart takes the statue away.
-- The second evening: Mister Vane calls in Bram's pledge (twenty years of interest: the debt, in seven weekly payments)
-  and notices the glove.
-- Week 2: Bram tells what the chests are (the Locking, the Maw warded under the capital) and gives you his shard of the
-  Aldric Key; the Hooded Woman's first ask. Bettany has seen that glove before. Guild night: Bram's fingers are gold.
-- Week 3, Thornwick: three statues in the square; Sister Agathe and Sergeant Hollis (the Guild's carts go down the
-  palace road; he follows one to the Gate); the Lantern Market opens.
-- Week 4: Mara's laws of the Locking, and Bram's confession: he pledged his hand for a marked baby. A chest from the
-  Guild's strongroom holds demon gold. Guild night: Vane's offer (half the due for the shards) and "even kings pledge".
-- Week 5: Mara's letter: the King pledged the Crown Chest, and the Crown's note falls due on the season's last night;
-  at the Emporium Old Aldo says why. Bram's gilding reaches his throat.
-- Week 6: who stands with you, and the King's plan (the Key whole by the last night, or the Guild's papers to his
-  court). Guild night: Vane offers to tear up Bram's pledge, the whole debt, for the shards.
-- Week 7: the debt's last due and the Crown's note, the same night. Paid with the Key whole, the King gives you the
-  Crown Chest and the Locking holds (sung whole with all nine Heartsongs); with the court, the Guild on trial; paid
-  without either, FREE AND CLEAR, and the Gate opens at midnight; foreclosed, the Guild takes the stall and Bram; the
-  Maw's bargain or Vane's offer, THE GATE OPENS.
+- **A first season** (and every season until the treasury swallows you) is ordinary business, told kindly. Bram minds
+  the stall with you for the first week (he taps the counter twice and once when he wants you); the second evening
+  Mister Vane introduces Bram's twenty-year account, the season's debt; Garrick brings a grey chest that's the same
+  every spring, and Nell Haddon says the Guild has her father's note, due on its first night (pay it, forty gold, and he
+  stays home). On the first Guild night the treasury summons Bram for "an old consignment", and he goes (Old Haddon too,
+  if his note's unpaid); from then on his tips are notes in his notebook's margins, his promised letters never come, and
+  the Guild's do ("Bram sends his regards"). In week 2 the Guild's letter sets the goal: keep his account paid, and earn
+  the **treasury key**'s four pieces, each sent by the Guild's assessors with a master's fee of one and a half working
+  purses for a mark of the trade (a hidden thing read true, or a chest of five things; a stolen chest settled; a
+  commission filled; a Guild Lock picked masterfully or a Dwarven Tumbler without force), which the notebook's Inquiry
+  lists under "Where is Bram?".
+- **The treasury.** On the night the account is paid with the key whole (the last night, the night an early payment
+  clears it, or, trading on, the night the last piece comes), the Guild's carriage takes you there and its great chest
+  comes to a counter as Bram's commission, played with the counter's own tools: shaken, nothing moves; harder, not even
+  the wooden ring every empty chest gives (0.34's empty box rings like a drum at a firm shake); dropped, nothing; it
+  slips, the lid rises and falls, it breathes, and it swallows the screen. The season is banked, and the next starts at
+  once with the same keywright at the same level: the first morning, two taps and one, and this time you remember
+  (`Profile.Swallowed`; Isolde opens with it). A season that clears the debt without the key, or is foreclosed, just
+  ends: Bram never came home.
+- **Once you remember**, the notebook's **Inquiry** is the investigation: its threads (where is Bram?, open since the
+  summons; what was the breathing chest?; why did the first morning come again?; and, later, how do we bring them out?)
+  each hold entries seen, said, tried, heard or found, and leads (what you now have reason to do, shown until it's done
+  this season). What you know carries across seasons (`Profile.Known`); what you hold (the register, Bram's tuning fork,
+  the key's pieces) goes at the rewind. Nothing is an answer to pick from a list: each discovery opens something to do,
+  and the critical ones have two roads. Garrick's chest is one you know; Bram's tuning fork turns up in a Guild sale,
+  tagged from the weighhouse; Sergeant Hollis follows the Guild's carts down the palace road (or the Lantern Market
+  sells a night there): the gilded are weighed, crated and registered by name. Guild crates come to the counter and
+  knock while they sit still; knock back and they answer. Mimics breathe only once you remember (Brother Cadoc brings
+  one every spring, and one chest in 90 breathes from Thornwick), and a full mimic eats the gold off one of the gilded;
+  a note still standing is taken again on the Guild's next night. Freed, with his account paid, Bram comes home for the
+  rest of the season. Mara, the last of the Keyhold, tells the seal's last clause (the safeguard that turns the year);
+  Master Quire's Roll or the King tells what the Crown pledged (the treasury's keys and takings, not its people, not a
+  keywright's word). Vane speaks for the Maw: reassurance, a bribe on the fourth Guild night (half the due, and Hollis
+  stops talking to you), and on the sixth a bargain (Bram home tomorrow for the key's pieces, and no treasury that
+  season). Once you remember you can stay away from the treasury (the Guild opens it with Bram, and the season ends) or
+  be swallowed again.
+- **The true ending** is a plan before it's a spectacle (`Inquiry.PlanLines`): find them (you've heard the gilded
+  answer, and hold the weighhouse register), free them (the debt paid and a full mimic in your care), a way out (two
+  friends who'll stand with you, as week 6's gathering asks, or the Wet Hen's bargemen), and open the door without
+  giving it away (the key whole, and you know the clause and the charter). With all four, the treasury is a different
+  scene: you hold still and listen, the people inside knock, you knock back, and you turn the key to look, not to own;
+  they come out, and the Maw offers a private victory ("I can make this time remain. Take him home. Leave the door to
+  me."). Leave the door to it, and it reaches past the door for everything, and the year turns; close the door, and the
+  reward is **the next day**: a date the campaign has never reached, Bram's tea, and Wynn's ordinary chest of
+  millwright's tools. After that a new season is a new year (`Profile.Finished`), and the tales, the levels and the
+  collection go on.
 
-A season the Gate opened is followed by the same spring again (only the marked remember: Bram's dream, Vane's memory, a
-chest marked by your own hand); one the Locking held, by the next. Internally the shards are still `MapPieces` and the
-Crown Chest is the vault (`VaultOpened`, `--vault-demo`), so saves and profiles carry over. Every run is recorded in
-`user://profile.json` (runs, debts cleared, Crown Chests opened, the furthest week, the case's Truths and how the last
-season ended), shown on the title screen and at the end of a run.
+Every season starts the same: what carries over is only what you know (and what Garrick's chest held). Scenes shrink
+once you've seen them, and the sim's careful player follows the leads (`Strategy`), so its careers report says when a
+career is first swallowed, first brings Bram home and first reaches the next day. The King's court still tries the Guild
+for its papers (half its tithe while it's tried), but nothing is won by a count of papers, and no ending waits on the
+Heartsongs. In code the main tale's key is still `commission`, the treasury's backdrop the vault (`scene_vault`), and
+the old Crown Chest's finish is the great chest's; `--treasury-demo` plays the first swallowing and
+`--treasury-demo=final` the final opening, `--season=N` a season you remember and `--knew=all` one in which every
+Inquiry entry is known. Every run is recorded in `user://profile.json` (runs, debts cleared, the furthest week, and the
+campaign: times swallowed, Bram brought home, the last offer taken, the true ending, what the Inquiry knows, what
+Garrick's chest held and how the last season ended), shown on the title screen and at the end of a run.
 
 ## Across runs: who minds the stall, and challenge levels
 
@@ -1094,7 +1138,7 @@ own tales"). Lines that call the player Bram's kin are Kit's alone.
 | Kit, the Ear | from the start | the game as it was: every strength, the drop, and (with tips on) Bram's lessons as each seller arrives |
 | Hesk, the Scale | paying the third week's due | a bad back: no hard shake and no drop. Every chest sits on his scale, and he knows what each kind weighs (coin 4 lb, arms 6, garb 3, potions 3, scrolls 1, gems 1); demon gold weighs half what gold does and a case of sand three times a scroll, so the weight left over once the heard things are counted is what he couldn't hear, what's under a false bottom, or a fake weighing short |
 | Rosa, the Tongue | clearing the debt | everybody haggles with her (fixed-price sellers ask high and hear one offer instead, though never more than a bit over the price they'd have named, nor holding out for more than it; a crook still names his too-good price, and nobody haggles with the King or the Maw), but they know her: they open 3% higher and come down 3% less; an offer too low gets a second try; a seller who walks out on her doesn't come back that week |
-| Isolde, the Collection | opening the Crown Chest | a two-place shelf from the stall on; visitors pay 2g for every five exhibition points every night, at any shop (`Characters.DoorCoins`, `DoorPoints`, 0.30); her collection can't be pawned, so a short night can only take her curios |
+| Isolde, the Collection | opening the great chest at the Guild's treasury (0.34; the Crown Chest until then) | a two-place shelf from the stall on; visitors pay 2g for every five exhibition points every night, at any shop (`Characters.DoorCoins`, `DoorPoints`, 0.30); her collection can't be pawned, so a short night can only take her curios |
 
 Every new judgment follows a rule people know: things weigh what they weigh, and gold is heavier than iron (the old
 test for a gilded crown). Hesk's scale shows the total and the slip shows what the ticked things would weigh; the sum
@@ -1110,8 +1154,9 @@ below, each a quarter more to a run's score (x3 at level 8). A level does two th
 - **The Guild's dues** go up by 20% of what they were at level 0 for each level (`Challenges.DebtStep`,
   `GameState.DueFor`): level 8's are 2.6 times as much (a tenth a level until 0.28, whose tales carried the top levels
   further: Kit cleared level 4 a third of the time and level 8 a fifth, against 0.27's 23% and 13%; 15% until 0.33,
-  whose case, mimics and Lantern Market did the same: 120 careers cleared level 6 by run 30 32% of the time and level 8
-  7%, against 0.32's 23% and 4%, and at 20% a level 21% and 3%, level 4 half by run 26 against 0.32's 25).
+  whose case (the Case page's payoffs, which 0.34 replaced with the Inquiry), mimics and Lantern Market did the same:
+  120 careers cleared level 6 by run 30 32% of the time and level 8 7%, against 0.32's 23% and 4%, and at 20% a level
+  21% and 3%, level 4 half by run 26 against 0.32's 25).
 - **Its terms**: the run is dealt as many **banes** as the level's number and as many **boons** (`TermDef`,
   `Challenges.Draw`), from twelve of each. The deal is nested (a bane, then a boon, from one shuffle of each pool), so a
   level's terms are the level below's and one pair more, and a boon never comes with the bane it contradicts (four
@@ -1154,11 +1199,15 @@ Whole levels as drawn (Kit, 200 runs each; 0.33, the dues 20% up a level, `--sim
 first draft, at 15% a level and with the two strongest banes and boons as they first were, made levels 6 and 8 a wall
 again (8 and 6%).
 
-**Score** (`Score`). Points for the Guild dues paid (10 each), the debt cleared (100) and every day to spare (5), the
-Crown Chest (100) or the Key's shards held (10 each), moves (25 each), the collection (2 per find), the Heartsongs
-found (20 each) and every week after the debt you kept the Guild paid (25), times the level's multiplier
-(`Score.Final`). A foreclosed run still scores what it did. Each of Bram's kin keeps their best (`Profile.BestScore`,
-on the character screen); the run's end shows the lines, the score and anything it opened.
+**Score** (`Score`). Points for the Guild dues paid (10 each), the debt cleared (100) and every day to spare (5); the
+campaign (0.34): the treasury key's pieces (10 each), the treasury (100, swallowed or at the final opening, not for
+staying away), Bram brought home (50, not by Vane's bargain on the sixth Guild night) and the next day (200); moves (25
+each), the collection (2 per find), the Heartsongs found (20 each), every week after the debt you kept the Guild paid
+(25), the Guild on trial (75) and friends made (5 for each favour owed you, called in or not); times the level's
+multiplier (`Score.Final`). (Until 0.34 the Crown Chest was worth 100, or the Key's shards 10 each, and all nine
+Heartsongs sung whole 200.) A foreclosed run still scores what it did. Each of Bram's kin keeps their best
+(`Profile.BestScore`, on the character screen); the run's end shows the lines, the score and anything it opened (a
+season the treasury swallows is banked without one, and the next begins).
 
 **Talents: retired** (v22). Until 0.21 a run's score was renown, spent between runs on 12 talents in a tree (5,500
 renown in all). They made a run stronger for having played before (the careful player cleared four runs in ten with
@@ -1186,15 +1235,18 @@ the palace at sunset; the Royal Emporium's colonnade, crimson drapes and marble 
 down the avenue. Each is one picture (`art/generated/backgrounds/`; round 2's are 320x180, which the importer doubles
 to 640x360), shown at 2x behind the counter and dimmed behind the lockpicking, opening and day-end screens
 (`UiKit.MakeShop`). What you keep stands on the shelf (the window sill in town), and a Heartsong hangs above it. The
-story's scenes have pictures of their own: Bram's back room for his welcome and his secret, the Guild's counting-house
-for Vane, the ruins of the Keyhold where Mara lowers her hood, and the vault under the Gate for the Crown Chest.
+story's scenes have pictures of their own: Bram's back room for the mornings, his homecoming, the next day and the
+season's end; the Guild's counting-house for Vane (his introduction, the summons, a foreclosure, the debt paid while
+Bram's away, and the mornings after the debt); and the vault under the Gate for the treasury (the carriage, the great
+chest itself and the door left to the Maw). The ruins of the Keyhold (`scene_keyhold`), where Mara lowered her hood
+until 0.34, are only in the art reviews now: Mara speaks at the counter.
 
 All the pictures are made for the game to one brief (`art/`: one 74-colour palette, one light from the upper left,
 one dark outline), so they follow the world rather than a pack's: every portrait stands against its place (the
 crossroads' dusk, the Old Wood's green, Crownhold's blue, the Emporium's crimson, the story's night), the Maw is a
 borrowed body gilded all over, demon gold is the real thing gone dull and greenish, the paste gem is a cut stone with no
 fire in it, and a scroll case of sand looks like the mudlark's "maps" it is. Things are 32px and all shown at one scale,
-so a purse is smaller than a sword, and a coin from Brindle and a crown from the vault sit together on a shelf.
+so a purse is smaller than a sword, and a coin from Brindle and a crown from the Royal Treasury sit together on a shelf.
 
 The art is the room the player thinks in: they sit with it for hours, reading the slip and listening, so it has to be
 comfortable to look at and never pull the eye from the chest. The first set (0.23) wasn't: a model asked for pixel art
@@ -1409,7 +1461,8 @@ five-day weeks; 0.28's, with five, are in brackets where they're quoted; earlier
 | + keeps grand things | 100 100 100 100 97 87 59% | 59% | 59% | 68% (week 7) | day 8 | day 16 | day 25 |
 
 ("Foreclosed" counts the Guild's endless interest after the debt, half as much again each week, over the four weeks
-the sim plays on.)
+the sim plays on. The "Crown Chest" column is 0.30's: 0.34's sim reports the treasury instead, as "door", the share of
+runs that went into the Guild's treasury on the last night.)
 
 Week by week for the careful collector (gold on the Guild's night, before paying):
 
@@ -1538,7 +1591,9 @@ end of the debt's last week or when the shop is lost. The pace of learning is a 
 (a quarter of players by run 4, half by 6, three quarters by 9); level 1 around run 11, 2 around 15, 4 around 26 (seven
 players in ten by run 30); level 6 is cleared by one player in five by run 30 and level 8 by 3%, as in 0.32 (measured
 the same way: level 4 around 25, level 6 23%, level 8 4%). All nine Heartsongs are known by about one player in four by
-run 30, and the Crown Chest sung whole by one in six.
+run 30, and the Crown Chest sung whole by one in six. (0.34 has no Crown Chest to sing: its careers report says
+instead in which run a career is first swallowed at the treasury, first brings Bram home and first reaches the next
+day.)
 
 0.30 (seven weeks, the dues 15% higher a level): a run that's lost is lost in the sixth week, a shop or two behind
 (the fifth sends most first runs to Bram's word, the sixth is the wall for them, the seventh for everyone else); the
@@ -1793,7 +1848,7 @@ capacity.
 - Heartsongs: is a sound you've never heard, then the reveal and its choice, the heart-racing moment it should be?
   About a third of a Heartsong a run, rarer for each kept: rare enough to cheer, and is declining one ever the right
   call? Is a find that can win a run a thrill or a fluke?
-  Is the songbook (nine, across runs) a goal people chase, and is the ending worth it?
+  Is the songbook (nine, across runs) a goal people chase now that no ending waits on it (0.34)?
 - The stories: do players read them, and use a place as a clue (a barrow's grave goods, a goblin warren's coin)? Do
   the stated clues read as puzzles (subtract the heard from Rook's weight, count against Brass's ticket, read the
   straw a strength late, decode Sorrel's dream), or as homework?
@@ -1807,8 +1862,8 @@ capacity.
 
 - Are curios still exciting next to the bigger upgrades? Which do players pick, and does anyone take the token or the
   crescent?
-- Paying off early: does a week-4 finish feel like the reward it should, or like the story ending before Mara's last
-  piece? (Keep trading, and her last ask still comes.)
+- Paying off early: does a week-4 finish feel like the reward it should, or like the story ending before the treasury
+  key is whole? (Keep trading, and the treasury comes the night its last piece does.)
 - Is drag speed a good stand-in for shake strength with a real mouse? The thresholds need playtesting; the words under
   the chest now show where you are.
 - Tick's twelve seconds: enough to shake gently and hard and decide, but is it fun or just stressful?
@@ -1848,5 +1903,10 @@ capacity.
   Thornwick when it's half price, keep the lockpicks busy, skip the drop when sellers are fussy)? Is a draw that's
   plainly kind (the first morning's gifts and Thornwick's welcome together) a treat or a flaw, and should a player be
   able to see the next draw before choosing a level, as they can now (the setup screen shows the run's own)?
-- The Crown Chest usually comes with clearing the debt for a careful player (the Hooded Woman's asks are met by volume at
-  the Emporium). Should her asks be harder, or limited to their own week?
+- The treasury key's four pieces (a hidden thing read true, a stolen chest settled, a commission filled, an old lock
+  picked without force) are marks of the trade a careful season makes anyway. Do they make the key a goal across the
+  season, or does a careful player have it without trying? And does the first swallowing land as the shock it should,
+  at the end of what felt like a won run?
+- 0.34's campaign: does a second season show at once that knowing changes play (Garrick's chest, Old Haddon's note,
+  Bram's tuning fork), do the Inquiry's leads read as things to do rather than homework, and does the plan's
+  four-line list make the true ending feel earned before it's shown?

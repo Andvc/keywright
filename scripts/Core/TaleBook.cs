@@ -624,8 +624,11 @@ public static partial class TaleBook
                     Key = "kettle.claim", Who = Ada, After = "kettle.debt", Gap = 2, Tier = 3, If = s => s.Claims.ContainsKey(Jory),
                     Expect = Loc.T("Ada, about Jory's note"),
                     Says = s => Say(Ada,
-                        Loc.T("The Guild's posted Jory's note on the debt-house door, dear. It falls due on the Guild's night. Old Haddon's went " +
-                              "the same way, and look at him."),
+                        s.IsTaken(Haddon)
+                            ? Loc.T("The Guild's posted Jory's note on the debt-house door, dear. It falls due on the Guild's night. Old Haddon's went " +
+                                    "the same way, and nobody's seen him since.")
+                            : Loc.T("The Guild's posted Jory's note on the debt-house door, dear. It falls due on the Guild's night. That's how they " +
+                                    "take people: a note on a door, and a cart on the Guild's night."),
                         Loc.T($"I've still half of it. {Money.Say(s.Purses(0.5f))} more and he's free. Please.")),
                     Asks = s => new()
                     {
@@ -652,7 +655,7 @@ public static partial class TaleBook
                         Loc.T("Ada at the back door in her shawl, shaking. \"They came for Jory with a cart, dear. To work off the note, they said. " +
                               "They wouldn't say where.\""),
                         Loc.T("\"I don't care what they say he owes. He's my boy.\"")),
-                    Then = s => s.Log("kettle", Loc.T("The Guild collected Jory Kettle on its night. He stands gold in the debt-house yard.")),
+                    Then = s => s.Log("kettle", Loc.T("The Guild collected Jory Kettle on its night, with a cart, to work off his note. Nobody will say where they took him.")),
                 },
                 // 0.30: what Jory saw in the debt-house's books.
                 new()

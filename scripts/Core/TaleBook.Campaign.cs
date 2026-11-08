@@ -54,7 +54,11 @@ public static partial class TaleBook
                         var lines = Say(Nell,
                             Loc.T("The Guild's men were at the yard. Father signed their paper for a new lathe, and it falls due on their first night: forty gold."),
                             Loc.T("If it isn't paid they'll take the yard, and him with it, to work it off. He says it's only work. I don't like how they said it."));
-                        if (s.Remembers) lines.Add(new(Story.Self, Loc.T("Last time, the Guild's carriage took him with Bram. He never came home.")));
+                        // What an earlier spring showed you (the Inquiry keeps it).
+                        if (s.KnownBefore.Contains("haddon.taken"))
+                            lines.Add(new(Story.Self, Loc.T("I've seen this before: the Guild's carriage took him with Bram, and he never came home.")));
+                        else if (s.KnownBefore.Contains("haddon.paid"))
+                            lines.Add(new(Story.Self, Loc.T("I've paid it before. He made me a wheel I didn't need, and he was home all season.")));
                         return lines;
                     },
                     Asks = s => new()

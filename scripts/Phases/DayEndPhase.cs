@@ -87,7 +87,10 @@ public partial class DayEndPhase : Phase
         if (today.Held > 0) figures.Add((Loc.T("Back room"), today.Held.ToString(), Palette.Warn));
         if (today.PerfectReads > 0) figures.Add((Loc.T("Perfect reads"), today.PerfectReads.ToString(), Palette.Gold));
         if (today.NewFinds > 0) figures.Add((Loc.T("New finds"), today.NewFinds.ToString(), Palette.Magic));
-        // Up to nine side by side: narrower when there are many, so they always fit the screen.
+        // Up to nine side by side: narrower when there are many, so they always fit the screen. Past nine (a busy day: a
+        // key piece's fee, a commission, a curio...) the least of them give way, new finds first, then perfect reads.
+        foreach (string minor in new[] { Loc.T("New finds"), Loc.T("Perfect reads") })
+            if (figures.Count > 9) figures.RemoveAll(f => f.Label == minor);
         const float gap = 8;
         float w = Math.Min(140, (1240 - (figures.Count - 1) * gap) / figures.Count);
         float x0 = 640 - (figures.Count * w + (figures.Count - 1) * gap) / 2;

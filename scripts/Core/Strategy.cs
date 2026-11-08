@@ -693,13 +693,21 @@ public static class Strategy
         var done = new List<string>();
         foreach (string person in state.Guests.Keys.OrderBy(p => p == Campaign.Bram ? 0 : 1).ToList())
         {
-            if (!state.Guests[person] && state.MimicFull && state.Ungild(person)) done.Add($"ungilded {person}"); // loc: keys
+            if (!state.Guests[person] && state.MimicFull && SpendMimic(state) && state.Ungild(person)) done.Add($"ungilded {person}"); // loc: keys
             if (state.Guests.TryGetValue(person, out bool freed) && freed && state.NoteFor(person) > 0 &&
                 state.Gold - state.NoteFor(person) >= state.WorkingPurse && state.RedeemGuest(person))
                 done.Add($"redeemed {person}"); // loc: keys
         }
         return string.Join(", ", done);
     }
+
+    /// <summary>
+    /// Whether to spend a full mimic on one of the gilded in the back room: it wakes hungry, and the final opening needs a
+    /// full one (the plan's "free them"). The careful player spends it when this season's treasury can't be the final one
+    /// anyway (something the plan needs isn't known yet), or when there are Guild nights enough left to fill it again.
+    /// </summary>
+    public static bool SpendMimic(GameState state) =>
+        !state.Knows("seal") || !state.Knows("charter") || !state.KnowsAlive || state.Week + Mimics.GrowsAfter < Guild.Weeks;
 
     /// <summary>A Guild crate at the counter: the careful player buys one with someone in it when it can spare the price (two purses kept back).</summary>
     public static bool BuyCrate(GameState state, Visit visit) =>

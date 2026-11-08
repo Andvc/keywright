@@ -612,7 +612,7 @@ public partial class Main : Node2D
         }
         if (_saving) Storage.Delete(SavePath);
         _saving = false;
-        if (unheard) SwitchTo(new ScenePhase(Story.SongsUnheard(), AfterRun, Loc.T("THE NINE HEARTSONGS"), "bram"));
+        if (unheard) SwitchTo(new ScenePhase(Story.SongsUnheard(State), AfterRun, Loc.T("THE NINE HEARTSONGS"), "bram"));
         else AfterRun();
     }
 
@@ -1201,7 +1201,7 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         // An Inquiry entry just noted, or a piece of the treasury key earned (0.34): a note over the top bar, one at a time.
-        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not (TreasuryPhase or ScenePhase))
+        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not (TreasuryPhase or ScenePhase or RunEndPhase))
         {
             if (State.NewPieces.TryDequeue(out var piece)) NotePiece(piece.Piece, piece.Fee);
             else if (State.NewEntries.TryDequeue(out var entry)) NoteEntry(entry);

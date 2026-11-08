@@ -113,7 +113,13 @@ public static class Story
                 }
                 if (state.Remembers)
                 {
-                    lines.Add(new(Self, Loc.T("Darkness. Then two taps on the counter, and one.")));
+                    // How the last season ended (the profile's): swallowed, stayed away, or the last night came without the key.
+                    lines.Add(state.LastEnd switch
+                    {
+                        Campaign.Swallowed or Campaign.Bargained => new(Self, Loc.T("Darkness. Then two taps on the counter, and one.")),
+                        Campaign.Stayed => new(Self, Loc.T("I stayed away from the treasury. The dark came anyway, and then two taps on the counter, and one.")),
+                        _ => new(Self, Loc.T("The last night came, and the dark with it. Then two taps on the counter, and one.")),
+                    });
                     lines.Add(state.FirstDayTaught
                         ? new(Bram, Loc.T($"There you are, {state.Kin.Name}. Another season at the crossroads. The Guild hasn't come sniffing yet."))
                         : Welcome(state));
@@ -462,17 +468,22 @@ public static class Story
     /// Between runs, once (0.32): a season that ended without a Heartsong ever heard gets Bram's word on them, so a new
     /// player knows what they're listening for: the rarest things in Aldmark, and what one does on display.
     /// </summary>
-    public static List<Line> SongsUnheard() => new()
+    /// <summary>Bram's word on the Heartsongs between seasons, once a profile; Bettany's, if he isn't home to give it (0.34).</summary>
+    public static List<Line> SongsUnheard(GameState state)
     {
-        new(Bram, Loc.T("No Heartsong this season. Don't take it hard: most seasons never hear one.")),
-        new(Bram, Loc.T("They're the rarest things in Aldmark. Nine of them, things loved more than gold, sung into the Locking and " +
-                        "lost among millions of chests. About one season in three turns one up.")),
-        new(Bram, Loc.T("Only a Keywright hears one. At the gentlest shake it sings a tune no other thing makes, and the seller never " +
-                        "knows it's there: they price the chest as if it weren't.")),
-        new(Bram, Loc.T("Nobody would pay a penny for one. But on display, each does one great thing for the shop that no gold can " +
-                        "buy, for as long as it sings: the kind of thing a whole season can be built around.")),
-        new(Bram, Loc.T("So shake every chest gently first, and listen. The collection's Heartsongs page keeps a place for each of the nine.")),
-    };
+        string teller = Narrator(state);
+        return new()
+        {
+            new(teller, Loc.T("No Heartsong this season. Don't take it hard: most seasons never hear one.")),
+            new(teller, Loc.T("They're the rarest things in Aldmark. Nine of them, things loved more than gold, sung into the Locking and " +
+                              "lost among millions of chests. About one season in three turns one up.")),
+            new(teller, Loc.T("Only a Keywright hears one. At the gentlest shake it sings a tune no other thing makes, and the seller never " +
+                              "knows it's there: they price the chest as if it weren't.")),
+            new(teller, Loc.T("Nobody would pay a penny for one. But on display, each does one great thing for the shop that no gold can " +
+                              "buy, for as long as it sings: the kind of thing a whole season can be built around.")),
+            new(teller, Loc.T("So shake every chest gently first, and listen. The collection's Heartsongs page keeps a place for each of the nine.")),
+        };
+    }
 
     /// <summary>
     /// Bram's welcome on the first morning (0.32): Kit's uncle hands her the stall and the mark that's passed to her; the

@@ -99,7 +99,10 @@ public partial class CollectionView : Node2D
         _page.AddChild(UiKit.MakeLabel(Loc.T($"Earned {earned} of {all.Length}, across your runs. Hover one for how to earn it."), 16, Palette.Muted)
             .Place(TableX, PanelY + 64, PanelW - 48, 20));
         const int columns = 4;
-        const float cellW = 270, cellH = 60, gap = 10;
+        const float cellW = 270, gap = 10;
+        // As tall as the rows allow (0.34 has 25: seven rows), never taller than two lines of a name need room for.
+        int rows = (all.Length + columns - 1) / columns;
+        float cellH = Mathf.Min(60, (PanelH - 96 - 14 - (rows - 1) * gap) / rows);
         for (int i = 0; i < all.Length; i++)
         {
             var achievement = all[i];
@@ -108,7 +111,7 @@ public partial class CollectionView : Node2D
                 .Place(TableX + 4 + i % columns * (cellW + gap), PanelY + 96 + i / columns * (cellH + gap), cellW, cellH);
             card.TooltipText = shown ? achievement.Text : Loc.T("A secret, until it's earned.");
             var name = UiKit.MakeLabel(shown ? achievement.Name : "???", 16, got ? Palette.Gold : Palette.Muted, HorizontalAlignment.Center)
-                .Wrapped().Place(8, 6, cellW - 16, cellH - 12);
+                .Wrapped().Place(8, 4, cellW - 16, cellH - 8);
             name.VerticalAlignment = VerticalAlignment.Center;
             card.AddChild(name);
             _page.AddChild(card);

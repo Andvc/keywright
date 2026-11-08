@@ -259,9 +259,9 @@ public static class Challenges
 }
 
 /// <summary>
-/// How a run went, in points: the Guild's dues paid, the debt cleared (and how early), the vault (sung whole, with all nine
-/// Heartsongs known), the map, the shop, the collection, the Heartsongs found, and every week after the debt you kept the
-/// Guild paid. Points times the challenge level's multiplier are the run's score (each of Bram's kin keeps their best).
+/// How a run went, in points: the Guild's dues paid, the debt cleared (and how early), the treasury key's pieces, the
+/// treasury (and Bram brought home, and the next day), the shop, the collection, the Heartsongs found, and every week after
+/// the debt you kept the Guild paid. Points times the challenge level's multiplier are the run's score (each of Bram's kin keeps their best).
 /// </summary>
 public static class Score
 {

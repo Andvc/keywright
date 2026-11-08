@@ -213,6 +213,8 @@ public static partial class TaleBook
                         C(Loc.T($"Lend her the money ({s.Purses(1)}g)"), () =>
                         {
                             s.Flags.Add("inn.lent");
+                            // What she owes is what she borrowed, whatever the shop's grown into by the time she pays.
+                            s.SetAside[InnLoan] = s.Purses(1);
                             s.Promise(s.Day + 4, Bettany, Loc.T("Bettany, to repay you"));
                             s.Log("inn", Loc.T("You lent Bettany what she was short for the Guild. She'll pay you back, and half again."));
                             return Loc.T("You're a love. Half again, by the next Guild night. On my mother's grave.");
@@ -228,12 +230,12 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "inn.repaid", Who = Bettany, After = "inn.tab", Gap = 4, If = s => s.Flagged("inn.lent"),
-                    Says = s => Say(Bettany, Loc.T($"{Money.Say(s.Purses(1.5f))}, love: what I owed and half again. The Crossed Keys is still mine. " +
+                    Says = s => Say(Bettany, Loc.T($"{Money.Say(InnRepaid(s))}, love: what I owed and half again. The Crossed Keys is still mine. " +
                                                    $"If you ever need a room, a meal or a word in the right ear, it's yours.")),
                     Then = s =>
                     {
                         s.Kept(Bettany);
-                        s.TaleGold(s.Purses(1.5f));
+                        s.TaleGold(InnRepaid(s));
                         s.Sway(Faction.Commons, 1);
                         s.Owe(Bettany, "inn");
                         s.Log("inn", Loc.T("Bettany paid you back, and half again. The Crossed Keys stays open, and she owes you a favour."));
@@ -338,6 +340,11 @@ public static partial class TaleBook
             return new(Bram, Loc.T("Sir Aldwin's blade is still in our back room, waiting for a Gale. He's patient. He's had the practice."));
         return s.Did("field.plough") ? new(Garrick, Loc.T("Sold the knight's chest to a tinker in the end. He came back the next week, white as milk, and gave it back.")) : null;
     }
+
+    /// <summary>What Bettany borrowed (kept with the season's set-aside sums), and what she pays back: half again.</summary>
+    const string InnLoan = "inn.loan"; // loc: keys
+
+    static int InnRepaid(GameState s) => Money.Round(1.5f * s.SetAside.GetValueOrDefault(InnLoan, s.Purses(1)));
 
     static Line InnEnding(GameState s)
     {

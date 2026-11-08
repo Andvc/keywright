@@ -13,11 +13,13 @@ its conditions hold (what you chose before, where you stand with someone). Some 
 what they've come to say and asks something of you, and you choose. Some bring a chest, and what you do with it (buy
 it, pass, send for the Wardens) is the choice. Some come at night, between the day's end and Nim's table.
 
-- **Which tales.** Every season has the main story (**The Key**), **The Shut Chests** (from Thornwick: it teaches
-  stolen chests), **The King's Court** (at the Emporium, if you've anything to bring it) and, for Hesk, Rosa or Isolde,
-  their own tale (0.32, below). Twelve more are drawn from the seed at the start (0.32; eleven in 0.30, six until then):
-  three of Brindle's eight, three of Thornwick's seven, three of Crownhold's nine, and all three of the Emporium's. No two seasons hold the same tales, and some tales draw their own
-  secrets (who the Magpie is, what's behind the Barrow door, whose the dowry is, who wins the duel).
+- **Which tales.** Every season has the main story (**Bram's Account**, 0.34; `commission` in code), **The Shut Chests**
+  (from Thornwick: it teaches stolen chests), **The King's Court** (at the Emporium, if you've anything to bring it)
+  and, for Hesk, Rosa or Isolde, their own tale (0.32, below). Eleven more are drawn from the seed at the start (0.34;
+  twelve in 0.32 and 0.33, until the Maw's Bargain went with the Key; eleven in 0.30, six until then): three of
+  Brindle's eight, three of Thornwick's seven, three of Crownhold's nine, and both of the Emporium's. No two seasons
+  hold the same tales, and some tales draw their own secrets (who the Magpie is, what's behind the Barrow door, whose
+  the dowry is, who wins the duel).
 - **How many at once.** At most two beats at the counter a day and one at night. A beat that brings a chest takes a
   regular's place in the queue; a talk beat comes on top (it's short). The first days are left to learning the trade.
 - **What you're told.** A person who means to come back says when, and the notebook's calendar marks it. Notices
@@ -121,26 +123,33 @@ is in the save.
 - **Favours** (`GameState.Owed`). Some people owe you one after what you did for them (the Friends & foes page lists
   them). On a Guild night you're short, call on one: they bring what they can, an eighth of the night's due, once a
   season each. And everyone who owes you is there at the end.
-- **The case against the Guild** (`GameState.Evidence`). Papers turn up in tales: the Chest Roll's copy and the
-  ledger page (the Foreclosures), the debt-house tallies (Jory), the Mark-Finder's register (Pip), the witness copy of
-  the Wood's deed, the Guild's purse in the Unopened's alms box, the Archive's ledgers saved from the fire, Orme's notes
-  (the Unlocking) and Skrae's word (the Defector). At the Emporium, with two or more, the King asks for them (**The
-  King's Court**): the Guild offers to buy them first; with four or more the court tries the Guild (the rest of the
-  debt halved, and no interest after it), with fewer it decrees a fifth off. The run ends **THE GUILD ON TRIAL**.
+- **The case against the Guild** (`GameState.Evidence`): papers for the King's court (a court case, not 0.33's Case
+  page, which 0.34 replaced with the Inquiry). Papers turn up in tales: the Chest Roll's copy and the ledger page (the
+  Foreclosures), the debt-house tallies (Jory), the Mark-Finder's register (Pip), the witness copy of the Wood's deed,
+  the Guild's purse in the Unopened's alms box, the Archive's ledgers saved from the fire, Orme's notes (the Unlocking)
+  and Skrae's word (the Defector). At the Emporium, with two or more, the King asks for them (**The King's Court**): the
+  Guild offers to buy them first; with four or more the court tries the Guild (the rest of the debt halved, and no
+  interest after it), with fewer it decrees a fifth off. A trial scores 75 points, and the Crown stands with you at the
+  treasury. Nothing else is won by a count of papers: the court voids no pledge.
 - **Contests** (`Visit.Contest`). A chest put up to be read in front of people: it's given for a lucky coin (it opens
   for you), and a perfect read wins what was staked on it. A rival hedge-wright and the harvest fair are settled that
   way.
 - **Loans** (`GameState.Loan`). Mother Tansy lends a purse against next week's first morning, a third on top. Pay it
   and she lends again on better terms; don't, and she takes the best thing on your shelf, and her men stand at your
   door a week.
-- **The Key, by another road.** The Keyhold hid one shard in its bell: dredge the Aldwater for Tilly's bell and Mara
-  has it for nothing. And the Maw will buy your shards for your whole debt (**The Maw's Bargain**): take it and the run
-  is won, the Crown Chest is gone for good, and the run ends **THE GATE OPENS** (half the score).
-- **The gathering** (week 6's story morning): Mara asks who'll stand with you when the Key is whole, and each friend
-  says so: the factions at +2, and everyone who owes you. They're there on the Crown Chest night too, holding the Guild
-  back.
-- **The season's end** (`TaleDef.Ending`): after the last scene of a run, won or lost, Bram tells what became of
-  everyone whose tale began: one line each, by what you chose.
+- **The Guild's claims** (`GameState.Claims`, 0.33). Someone a tale leaves owing the Guild is taken on that week's
+  Guild night unless the note's paid: Old Haddon every season (Bram's Account: forty gold, due on the first Guild
+  night) and Jory Kettle if nobody paid his debt (the Widow's Debt). Vane names them as he goes ("The Guild has a note
+  to collect tonight"), and they never come to the counter again; once you remember, Haddon can come back to you in a
+  Guild crate (below).
+- **The gathering** (week 6's story morning, once you remember): Bettany (or Bram, if he's home) says Vane was at the
+  Crossed Keys asking who your friends are: who'll stand at the treasury door with you, and take in whoever comes out?
+  Each friend says so: the powers at +2 (the Crown with the Guild on trial, too), everyone who owes you or came when you
+  called, Pip if he's your apprentice, and the Haddons if Old Haddon's home or his note was paid. Two of them make the
+  plan's way out (below); with fewer, hire the bargemen at the Lantern Market. With the plan whole, they're at the door
+  on the treasury night.
+- **The season's end** (`TaleDef.Ending`): after the last scene of a run, won or lost, Bram (or Bettany, if Bram isn't
+  home) tells what became of everyone whose tale began: one line each, by what you chose.
 
 ## Keepsakes (0.32)
 
@@ -170,9 +179,10 @@ Medal 61%, Sir Edric's Oath 75%, Wren's Tuning Fork 28%. The partners' three are
 
 ## Their own tales (0.32)
 
-Kit is Bram's niece, and her story is the Key's. The others aren't family: each was born with the Key-mark somewhere
-else and came to Bram's stall as his partner, for reasons of their own (Bram is "Uncle Bram" to Kit and "Bram" to them,
-`Hints.Mentor`). Each has a tale drawn every season they play (`TalePlace.Kin`, `TaleBook.Own`), ending in a keepsake.
+Kit is Bram's niece, and her story is Bram's account (he pledged his hand for her). The others aren't family: each was
+born with the Key-mark somewhere else and came to Bram's stall as his partner, for reasons of their own (Bram is "Uncle
+Bram" to Kit and "Bram" to them, `Hints.Mentor`). Each has a tale drawn every season they play (`TalePlace.Kin`,
+`TaleBook.Own`), ending in a keepsake.
 
 - **Hesk, The Drowned Town.** Hesk is a grocer from Fallowford, the river town the Guild drowned when it opened the
   Aldwater weir to flood out a smugglers' road. (1) *A letter from Mabry* (night, from day 3): the Guild's salvage barges
@@ -199,49 +209,167 @@ else and came to Bram's stall as his partner, for reasons of their own (Bram is 
 Each beat: who, when, what happens, and the choices (with what each does). "Purse" is Bram's working purse at the shop
 (two typical chests): rewards and prices scale with it, so a tale pays as much at the Emporium as at the stall.
 
-### The Key (always)
+### Bram's Account (always, 0.34)
 
-The main story (0.33 rewrote it around the Gilding: `docs/narrative.md` has the truth behind it and the season week by
-week). The story mornings: Bram's welcome and Old Haddon gilded at the crossroads (week 1; from the second season, after
-a season the Gate opened, Bram's dream first); the Locking and Bram's shard, and the Hooded Woman's first ask (week 2);
-Mara's laws of the Locking, and Bram's confession: he pledged his own hand for a marked baby (week 4); who stands with
-you, and the King's plan, the Key whole by the last night or the Guild's papers to his court (week 6). Vane's nights:
-the Guild calls in Bram's pledge on the second evening ("the interest is showing, I see"), and leaves a line on each
-Guild night (the cart for Haddon; Bram's gold fingers; Thornwick's statues; "even kings pledge"; ten days; five days),
-offers half the fourth night's due for the shards, and on the sixth offers to tear up Bram's pledge, the whole debt, for
-them (taken, the Maw has the Key and the Gate opens). Bram's hand gilds by the calendar (the hand, then the forearm from
-week 3, the throat from week 5) until his pledge is redeemed. The shards for Mara's asks, and the Crown Chest once the
-debt's paid and the Key whole by the season's last night (the Crown's note falls due at its midnight). Two tales feed
-into it: the Foreclosures can bring the Crown's decree, and the Defector tells you what the Guild means to do.
+The main story (`TaleBook.Campaign.cs`, `Story.cs`, `Campaign.cs`; in code the tale is still `commission`). 0.34 rebuilt
+it as a campaign across seasons, in place of 0.33's Gilding and its Case page: `docs/narrative.md` has the truth under
+it and why it's told this way. Until the treasury first swallows you, a season is ordinary business, told kindly; after
+that every season is the same spring again, and you remember (`GameState.Remembers`, from the profile's `Swallowed`).
+Each beat comes once a season, at the shop where it belongs, and none of it is a roll. A scene you remember plays
+shorter: the welcome is a line and two taps, the summons two lines, the swallowing has no build-up.
 
-### The Gilding (always, 0.33)
+**Every season** (until the true ending):
 
-The case's clues from the people who'd know. Each beat comes once, at its shop and week.
+1. **Bram's welcome** (the first morning): the trade in a sentence ("listen before you buy"), Bettany's cellar, and his
+   habit: when he wants you at the counter he taps it twice, then once. "And mind: some chests listen back." Once you
+   remember: darkness, two taps and one, his welcome, and your own line: "The first morning, again. I remember the
+   treasury. I remember it breathing. He doesn't."
+2. **Garrick's grey chest** (Garrick, from day 2, in week 1): his granddad's green chest from the attic, with the same
+   things in it every spring (two coin and a cloak). The profile keeps what the first one bought held
+   (`Profile.FirstChest`), and once you remember the note under it says so: "You know this chest."
+3. **Bram's account** (Mister Vane, the second evening): twenty years open, and the Guild would like it settled this
+   season, in seven payments, one every fifth night; miss one and the Guild takes the stall. The Guild introduces
+   customers, carts chests and lends where coin is short: "Do ask." Once you remember, he knows you too: "We've met
+   before, I think. You always look at my ring like that."
+4. **Old Haddon's note** (Nell Haddon, from day 3, in week 1): her father signed the Guild's paper for a new lathe,
+   forty gold, due on its first night; unpaid, the Guild takes the yard, and him with it, "to work it off". *Pay his
+   note* (40g, commons +1: he stays home, and the Haddons stand with you at the end) or *I can't, not this week* (the
+   Guild takes him on its first night). Once you remember, you say what happened to him last time.
+5. **The summons** (the first Guild night, once the due's paid): the Guild's treasury has asked for Bram, for an old
+   consignment that needs a keywright who knows it. He asks you to keep his lamp lit, says he'll write every week, and
+   goes with Vane; Old Haddon goes too if his note fell due. From now on Bram's tips are notes in the margins of his
+   notebook, and Bettany tells the season's news. Once you remember: "He won't write."
+6. **The Guild's letter** (week 2's story morning): Bram's handover is taking longer than expected; keep the shop
+   running until he returns. Four marks of a master keywright, certified by the Guild's assessors, each earn a piece of
+   the **treasury key**, sent by Guild courier with a master's fee (one and a half working purses) the night it's earned
+   (`Campaign.Pieces`, `GameState.EarnPiece`):
+   - the **reader's**: a perfect read of a chest that hid something (a false bottom or a ward), or held five things or
+     more;
+   - the **warden's**: a stolen chest settled (the Wardens sent for, or a back-room chest returned to its owner);
+   - the **patron's**: a commission filled, every thing it asked for;
+   - the **locksmith's**: a Guild Lock picked masterfully, or a Dwarven Tumbler picked without force.
 
-1. **Haddon's chest** (Nell Haddon, from day 3, weeks 1-2): her father's last chest, which wouldn't open for the
-   Guild's men; given for a lucky coin. Taken, the Guild's paper is under his tools (found: "the borrower's own hand,
-   and all of him"); either way she's said he signed against his own hand.
-2. **The glove** (Bettany, from day 7, while Bram wears it): twenty years back Bram took a marked baby out of the
-   Guild's care, and nobody knew what he paid.
-3. **Saint Ide's bowl** (Sister Agathe, Thornwick, from day 11): what's pledged to the Guild is pledged to gold; every
-   coin out of a chest is his eye. *Give to her bowl* (abbey +1) or *I've a living to make*.
-4. **The carts** (Sergeant Hollis, Thornwick, from day 13): the Guild's carts go down the palace road every fifth night,
-   and a sack slipped: a gold man. **The Gate** (Hollis at the back door, the first night of a week after): he followed
-   one to a door under the palace with a seam of gold; they weigh the gilded, and something takes them.
-5. **The strongroom** (Silas Brass, Crownhold, from day 16): a chest from the Guild's own strongroom, with demon gold in
-   it. Bought, it's found: the Guild deals in the Maw's gilded iron.
-6. **The Crown's note** (Mara's letter, from day 21, once Vane has said "even kings pledge"): the Chest Roll says the
-   Crown Chest is pledged to the Guild; if the Crown can't pay on the last night, it opens for the Maw.
-7. **The famine** (Old Aldo, the Emporium, from day 21): he pledged the Crown Chest to feed the realm; a gift is
-   rightful, and there'd be nothing left to collect.
-8. **Your own hand** (Bailiff Marrow, Thornwick, from day 11, from the second season, after a season the Gate opened): a
-   Guild sale's chest, marked inside the lid in your own hand and dated this spring.
+   Keep Bram's account paid and bring the whole key to the treasury on the season's last night: his commission needs a
+   second keywright, and when it's done his account is closed and he comes home. The Guild's night shows the key beside
+   the debt, and the notebook's Inquiry ("Where is Bram?") says how each piece is earned.
+7. **The Guild's news**: Vane's word as he goes on each Guild night (`Story.Parting`): Bram sends his regards (week 2),
+   he asked after the stall (3), "No letter? The treasury keeps long hours" (4), he's counting on you and the key (5),
+   one more week (6). Week 3's first morning: still no letter from Bram. Week 6's story morning, before you remember: a
+   letter: the treasury opens on the season's last night, "Do bring the key." Week 7's: the debt's last week.
+8. **The treasury** (below), on the night the account's paid with the key whole. A season that clears the debt without
+   it ends with Bram's account closed and Bram never home; one foreclosed ends before the last night, which comes
+   without you.
 
-The Foreclosures add the ledger page and Tobias's word (where the gilded go; nobody knew who they signed to) and
-Master Quire's law (a thing taken in secret was never given). The Case page (`Case.cs`) keeps the questions; working
-one out pays off once (`CaseQuestion.Payoff`), the first time it's ever worked out, and is remembered across seasons. In a
-later season, whoever tells you what you already worked out notices: Hollis at the back door ("You look like you've
-stood at that door yourself"), Mara's note (a P.S.: your own hand in the Roll's margin) and Old Aldo ("Who told you?").
+**Once you remember** (every season after the first swallowing, until the true ending):
+
+- **Bram's tuning fork** (Bailiff Marrow, from day 6 until week 4, while Bram's away): a lot of the Guild's repossessed
+  goods, "tools, mostly, and a tuning fork with a tag on it". Bought, it's Bram's, tagged *from the weighhouse, palace
+  road*: not the treasury (held this season only).
+- **The carts** (Sergeant Hollis, off duty, at Thornwick, from day 6, unless you took the Guild's bribe or have seen the
+  weighhouse this season): Guild carts pass his toll every fifth night under sacking and go on down the palace road; a
+  sack slipped, and it was a gold man. *Meet him at the toll on the Guild's night* or *not this season*. (Heard in an
+  earlier season, it's one line: "You've that look again.")
+- **The weighhouse** (Hollis, that Guild night; Nim doesn't come): the cart goes down the palace road to a long, low
+  hall that smells of hot metal: crates in rows, each chalked with a name and a weight ("H. Haddon, 14 stone", "Bram,
+  keywright, 13 stone"). You copy the register's page before the lamps go out. (Or buy a night there at the Lantern
+  Market; the Foreclosures' ledger page names the weighhouse too.)
+- **The first mimic** (Brother Cadoc, Thornwick, from day 11, while you've none): a chest from the crypt, "warm like
+  bread"; it breathes while it sits still. More come on their own from Thornwick, one ordinary chest in 90 (`Mimics`).
+- **The crates** (Thornwick): a Guild crate off the palace road (iron bands, the Guild's seal), with someone gilded in
+  it. **Old Haddon's** comes by Corvin ("fell off a Guild cart"; half a purse), from day 11, if the Guild took him and
+  you know of the carts or the weighhouse. **Bram's** comes once you know of the weighhouse, from day 16: by Corvin, for
+  a purse, once the Lantern Market's bargemen have diverted it or from week 5; or by Hollis, for a lucky coin, with the
+  Wardens as friends (they stopped a cart at his toll). At the counter a crate makes one sound: while it sits still,
+  whoever's in it knocks (a shake stops them). *Knock back* and they answer: the gilded are alive (Bram answers with his
+  tap, twice and once). Opened, they go to the back room, gold from head to foot.
+- **The back room** (Nim's table, each night): a full mimic eats the gold off one of the gilded, then wakes hungry. Then
+  the note: Haddon's is forty gold (paid, he walks home: commons +1); Bram's is his account, the debt. Freed while the
+  note still stands, they're taken back on the Guild's next night.
+- **Bram's homecoming** (the night he's freed with the debt paid; `Story.Homecoming`): "Cold. I'm so cold. And this is
+  our stall." He tells you his pledge (twenty years ago, his hand, mark and all, for a marked baby), and he's at the
+  stall for the rest of the season. Every season after, he taps the counter on the first morning, and doesn't remember.
+- **Mara** (Crownhold, from day 11, once you know of the weighhouse): a woman in a grey hood. "You remember a spring
+  that hasn't happened yet." She's Mara, the last of the Keyhold, and tells you the seal's last clause: if the Maw ever
+  breaks out without leave, the year turns back to its first morning; whoever has touched the seal's core remembers, so
+  does he, nobody else. The Guild doesn't own that chest: find out what the Crown pledged.
+- **The charter** (Master Quire, Crownhold, from day 11, once you know the clause; or Old Aldo at the Emporium, from day
+  16; or the Roll in the Foreclosures): the Crown pledged the treasury's keys and its takings to the Guild, ten years
+  since. Not its people, and not a keywright's word.
+- **The register** (Quire, Crownhold, from day 16, once you know the charter and the weighhouse and hold no copy this
+  season): *have him copy the weighhouse pages* (half a purse) or *not now*.
+- **What the Maw is** (Mara's note under the door, from Thornwick, once you've brought Bram home in any season and know
+  the clause): before there were Locking chests there was one chest, empty, and it wanted. "We didn't invent the
+  Locking, Keywright. We copied it."
+- **The Maw's tactics** (Vane's Guild nights, `DuesPhase`): reassurance on the second ("Bram is well, Keywright. Why go
+  looking?"), the third ("You were at the toll, I hear", or "You remember more than you should. So do I.") and the
+  fifth ("Every spring you get a little further."). **The bribe**, on the fourth, before you pay: half tonight's due, if
+  your questions stop at the toll. *Take it* (Hollis has nothing to say to you this season) or *ask my questions*. **The
+  bargain**, on the sixth, if you hold a piece and Bram isn't home: Bram at your door tomorrow, warm and whole, for the
+  key's pieces. *Give him the pieces* (Bram's home, and there's no treasury for you this season; the due is still due,
+  and he jumps at every tap on the counter) or *keep the pieces* ("Then he stays where he is. Gold keeps.").
+- **The gathering** (week 6's story morning): who'll stand at the treasury door with you (*What a tale leaves behind*,
+  above).
+
+**The Lantern Market** (`LanternMarket.cs`; Nim's table, the third night of a week from Thornwick): Nim's people sell
+access, papers and transport, never answers. Once you remember: a night at the weighhouse in a Guild coat, with a page
+of its register, once you know of the carts (half a purse; half that if you've been inside in an earlier season); Bram's
+crate off the palace road, once you know of the weighhouse (a purse: Corvin brings it); and the Wet Hen's bargemen for
+the treasury's last night, once you know the seal's clause (a purse). The Maw's buyers pay half as much again for
+anything gold on your shelf (an eye for him each; the season's end counts them); the Arcanum's menagerie buys a mimic
+(more for one fed full), or keeps and feeds yours for a fee.
+
+**The treasury** (`Main.Treasury`, `TreasuryPhase`): on the night Bram's account is paid with the key whole (the
+season's last night, the night an early payment clears it, or, trading on after one, the night the key's last piece
+comes), the Guild's carriage takes you there, and its great chest comes to a counter, with the counter's own tools.
+
+- **The first time** ("Bram's commission"): shake it (drag it, as at the counter), and nothing moves inside. Harder: not
+  even the wooden ring every empty chest gives. *Drop it*: no boom, no ring, nothing. It slips out of your hands. The
+  lid rises, and falls. It's breathing. It opens towards you and swallows the slip, the counter, the screen. Darkness;
+  two taps on the counter, and one; *Open your eyes*: the rewind (below).
+- **Again** (once you remember, without the plan): *open it again* (it's breathing already, and swallows you at once) or
+  *stay away tonight* (you leave the key on the Guild's table and walk home; the Guild opens it with Bram, and the
+  season ends: THE TREASURY OPENS WITHOUT YOU).
+- **The final opening** (the plan whole): your friends come too, and you don't shake it. Hold still and listen: a knock,
+  then another: people. *Knock back*, and they answer: everyone the Guild weighed and crated. *Turn the key: to look,
+  not to own*, and they come out into the lamplight, gold flaking off them, and your friends take them home. Then the
+  Maw speaks: "You have already saved him once. I can make this time remain. Take him home. Leave the door to me." (Or,
+  if you've never brought Bram home, "Take them home".) If you hesitate: "He knows whom he came to save. But you still
+  want to see what is inside." (its argument, not the game's). *Leave the door to it*: the next morning goes sour (every
+  chest on every stall under the Guild's seal; by evening it wants the road, the river and the light), it reaches past
+  the door for everything, the seal wakes, and it's the first morning again. *Close the door*: the seal holds, nothing
+  turns, nothing breathes, everyone the Guild took this season is out, and the next day comes.
+
+**The plan** (the Inquiry's fourth thread, "How do we bring them out?", once you know the clause and that the gilded are
+alive; `Inquiry.PlanLines`): four lines, each ticked when it's true this season.
+
+1. *Find them, and know them* (`PlanFind`): you've heard the gilded answer you (a crate knocked back, or Bram's tap),
+   and you hold the weighhouse register this season (seen there, bought at the Lantern Market, or copied from Quire's
+   Roll).
+2. *Free them* (`PlanFree`): Bram's pledge redeemed (the debt paid), and a full mimic in your care (the back room or the
+   menagerie).
+3. *A way out, and people to take them in* (`PlanWayOut`): two friends who'll stand with you, or the Wet Hen hired.
+4. *Open the door without giving it away* (`PlanDoor`): the treasury key whole, and you know both the seal's clause and
+   the charter.
+
+**The rewind** (`Main.Rewind`): when the Maw breaks out without leave (it swallowed you, or you left it the door), the
+season is banked (its score, and how it ended, `Profile.LastEnd`) and the next starts at once, the same keywright at
+the same level, on the first morning. What you've found out carries over (the Inquiry's entries, `Profile.Known`, so
+the leads stay open), and what Garrick's chest held; money, the key's pieces, the register and the tuning fork, papers,
+friends, the freed and Bram's rescue go back to how they were. A season that ends any other way (foreclosed, cleared
+without the key, or you stayed away from the treasury) ends as a run does, with the season's end and the score; its
+last night happens without you, and the next season remembers if you've ever been swallowed.
+
+**The next day** (the door closed; `Story.NextDay`, `GameState.BeginNextDay`): a date the season has never reached.
+Bram brings tea, and his hand is warm as the pot; Old Haddon's in his yard, swearing at a lathe; half the crossroads
+walked home last night, and nobody can say from where. Then one customer: Wynn, whose waterwheel won't turn without
+the tools in her father's millwright's chest, given for a coin. You open it, two taps on the counter and one, and the
+shop goes on (THE NEXT DAY, 200 points). After that the campaign's done (`Profile.Finished`): a new season is a new
+year, Bram stays at the stall, the treasury stays shut, and Garrick's chest, Nell's note, the summons, the crates and
+the mimics don't come; the tales, the levels and the collection go on.
+
+**The season's end** (its own lines, before the tales'): Bram home (and how), or his account closed and Bram never
+home, or the stall taken; Old Haddon home, kept home, or never back from working off his note; any gold sold to the
+Maw's buyers; a mimic still asleep in the back room; and, once you remember, "the Guild opened the treasury without me".
 
 ### The Shut Chests (always, from Thornwick)
 
@@ -311,8 +439,8 @@ it count you a friend, and then its bailiff comes to sell (the officials, above)
    purse: Jory works a week for you as your porter to pay you back, one more customer a day; and he knows the Guild's
    debt-house) or *I can't* (0.33: the Guild calls his note in on its next night).
    **The note** (Ada, two days on, while it stands): one more chance to pay the rest. If nobody does, the Guild
-   collects Jory on its night: he's gilded, and stands in the debt-house yard (Ada at the back door that night) until
-   the Locking's sung again.
+   collects Jory on its night with a cart, "to work off the note" (Ada at the back door that night: they wouldn't say
+   where), and he never comes to the counter again (*The Guild's claims*, above).
 5. **The tallies** (0.30, Jory, three days on, if he's free): half the debts in the debt-house were never owed. *Write it
    all down* (a paper for the case) or *put it behind you*. Jory owes you a favour either way; Ada does too if you gave
    her the sword.
@@ -369,7 +497,9 @@ paper for the case against the Guild.
    *Take it to the King* (when you're at the Emporium), *sell your copy to the Guild* (half a purse, Guild +2; Tobias
    vanishes), or *keep it*.
 4. **The ledger page** (Tobias, night): they know he talked. A page from the Guild's ledgers: where the tithe goes. (The
-   Roll's copy and the ledger page are both papers for the case against the Guild.)
+   Roll's copy and the ledger page are both papers for the case against the Guild. 0.34: the ledger page is an Inquiry
+   entry too, "H. Haddon, fourteen stone, to the weighhouse", which counts as knowing of the weighhouse; and once you
+   remember, Quire's Roll gives you the treasury's charter.)
 5. **The decree** (Old Aldo, at the Emporium, if you're taking it to him): the Crown's decree cuts the Guild's tithe
    by a fifth for the rest of the season. Crown +2, Guild -3.
 
@@ -491,14 +621,16 @@ Whose the dowry is (the Ashbys' or the Corlews') is drawn when the tale begins.
 2. **Midnight** (the toll): three of a cart's chests are cold (Corvin's, if he's still about). *Tell Hollis* (a finder's
    share, Wardens +2, Lockless -2, and Corvin's in the cells) or *say they're all warm* (Lockless +1, Corvin owes you).
 
-### The Drowned Bell (Crownhold, 0.30; the Key)
+### The Drowned Bell (Crownhold, 0.30)
 
 1. **The bell** (Tilly): a bell under the Aldwater, ringing at night. *I believe you* or *the river's full of noises*.
 2. **The dredge** (Tilly, two days on): a barge for a day, a purse. Finder's right: half each.
 3. **Raised** (Tilly, two days on): the Keyhold's bell, and a chest chained to its clapper: yours, given freely, a colour
    finer than the shop's.
-4. **The shard** (the Hooded Woman, that night): the Keyhold hid a shard of the Aldric Key in its bell: it's yours (or,
-   with no shard left to find, Keyhold silver: a purse).
+4. **The bell's crown** (the Hooded Woman, that night, soaked to the knees): it's the Keyhold's bell, and when the
+   Locking was made they hid something in its clapper. It's empty: someone was there before them, long ago. She pays you
+   for the trouble in Keyhold silver from the bell's crown (a purse). (Until 0.34 it held a shard of the Aldric Key.)
+   At the season's end Tilly rings it for the ferry.
 
 ### The Moneylender (Crownhold, 0.30)
 
@@ -529,15 +661,12 @@ Who wins is drawn when the tale begins, unless Sir Rowan has his ancestor's blad
 2. **The Guild's offer** (Mister Vane, night): two purses for the papers, and the Guild's friendship (Guild +3; he burns
    them in your grate), or *they're for the King* (Guild -2).
 3. **The court** (Old Aldo): with four papers or more, the Guild is on trial and takes half its tithe while it's tried
-   (Crown +3, Guild -3; the run ends THE GUILD ON TRIAL, and scores for it); with two or three, a decree takes a fifth
-   off its tithe (if the Roll hasn't already).
+   (Crown +3, Guild -3; the run scores for it, and the King stands with you at the treasury); with two or three, a
+   decree takes a fifth off its tithe (if the Roll hasn't already). (Until 0.34 a trial also ended the run THE GUILD ON
+   TRIAL; the run's end titles are the treasury's now.)
 
-### The Maw's Bargain (the Emporium, 0.30)
-
-1. **The offer** (the Maw himself, in the debt's last week, if you hold a shard): he'll pay every coin of the debt
-   tonight, for the Key. *Take his bargain*: the debt is paid and the run won, the shards are his, the Crown Chest is gone
-   for good, and the run ends THE GATE OPENS (the debt's points go to the Maw, not you). *Never*: Crown +1.
-2. **Mara** (that night, if you refused): a rare curio from the Keyhold, for saying no to him.
+(The Maw's Bargain, 0.30 to 0.33, went with the Key in 0.34: the Maw's bargains are Vane's now, on the fourth and sixth
+Guild nights once you remember, and its last offer is at the treasury: Bram's Account, above.)
 
 ### The Silent Choir (Brindle, 0.32; the Heartsong quest)
 
@@ -587,12 +716,20 @@ A chest passed on, misread, or the Guild's price refused loses the song: Wren's 
 
 `Strategy.Choose` picks a beat's choice the way a careful player would: by what each is worth in gold over the rest of
 the run (`ChoiceDef.Worth`), and when two are close, the kinder one. 0.30's worths: a favour is an eighth of a coming
-due if a short night comes (`Strategy.FavourWorth`), a paper a quarter of what the court would take off
-(`PaperWorth`), a customer a day what the shop would make of it (`CustomerDays`), a loan its share unless it saves the
-night (`LoanWorth`); the careful player never sells the Key to the Maw (a learner guessing might). On a short Guild
-night the sim and the bot call in favours before pawning anything. It sends for the Wardens on a cold chest, returns
-what it bought by mistake, accepts a tool offered at the counter when it would have bought it at the day's end, and
-buys at Nim's table every night. A blind buyer pays for stolen chests and can't open them. (0.32: the careful player
+due if a short night comes (`Strategy.FavourWorth`), a paper a quarter of what the court would take off (`PaperWorth`),
+a customer a day what the shop would make of it (`CustomerDays`), a loan its share unless it saves the night
+(`LoanWorth`). In Bram's Account (0.34) the careful player takes the fourth night's bribe only if it's that or the shop
+(`Strategy.TakeBribe`), and the sixth night's bargain when the plan can't be whole this season anyway and Bram's crate
+hasn't turned up (`TakeBargain`); buys a Guild crate when a working purse would be left (`BuyCrate`); keeps a mimic
+while it could be useful this season and there's time to feed it full (`KeepMimic`); tends the back room every night
+(`TendBackRoom`: Bram's gold eaten first, a freed guest's note paid); at the Lantern Market buys the night at the
+weighhouse, Bram's crate and the bargemen with two working purses kept back, and never sells gold down the Gate
+(`AtMarket`); and, once it remembers, stays away from the treasury unless the plan is whole (`StayAway`). On a short
+Guild night the sim and the bot call in favours before pawning anything. It sends for the Wardens on a cold chest,
+returns what it bought by mistake, accepts a tool offered at the counter when it would have bought it at the day's end,
+and buys at Nim's table every night. A blind buyer pays for stolen chests and can't open them. (0.32: the careful player
 never makes an offer on a chest that's gone cold in its hands, haggled or not; and it sends for the Wardens over a Guild
-bailiff's seizure whatever the Lockless think, since that costs the Guild's goodwill, not theirs.) The sim's "Tales" section
-reports how often each tale is drawn, finished and how it ended, and what it was worth.
+bailiff's seizure whatever the Lockless think, since that costs the Guild's goodwill, not theirs.) The sim's "Tales"
+section reports how often each tale is drawn, finished and how it ended, and what it was worth; its careers report
+(0.34) the run in which a career is first swallowed at the treasury, first brings Bram home, and first reaches the next
+day.

@@ -130,7 +130,8 @@ public partial class GameState
     /// </summary>
     public bool EarnPiece(string piece)
     {
-        if (CampaignDone || TreasuryDone || !Campaign.Pieces.Contains(piece) || !Pieces.Add(piece)) return false;
+        // Bram home on the Maw's bargain: no treasury for you this season, so no key either.
+        if (CampaignDone || TreasuryDone || Flagged("bargained") || !Campaign.Pieces.Contains(piece) || !Pieces.Add(piece)) return false;
         int fee = Purses(Campaign.FeePurses);
         TaleGold(fee);
         NewPieces.Enqueue((piece, fee));
@@ -207,7 +208,7 @@ public partial class GameState
     int _collectedOn;
 
     /// <summary>Whether a guest's note is settled: Bram's is his account (the debt), Haddon's his own.</summary>
-    public bool Resolved(string person) => person == Campaign.Bram ? DebtCleared : !Claims.ContainsKey(person) && Flagged($"{person}.redeemed");
+    public bool Resolved(string person) => person == Campaign.Bram ? DebtCleared : !Claims.ContainsKey(person) && Flagged($"{person}.redeemed"); // loc: keys
 
     /// <summary>What it takes to redeem a guest's note now (0 if it's settled, or can't be paid here: Bram's is the debt).</summary>
     public int NoteFor(string person) => person == Campaign.Haddon && !Resolved(person) ? Campaign.HaddonNote : 0;
@@ -240,7 +241,7 @@ public partial class GameState
         if (note <= 0 || Gold < note) return false;
         Gold -= note;
         Claims.Remove(person);
-        Flags.Add($"{person}.redeemed");
+        Flags.Add($"{person}.redeemed"); // loc: keys
         Log(Story.Tale, Loc.T($"You paid {Story.Name(person)}'s note to the Guild: {note}g."));
         TryHome(person);
         return true;
@@ -312,7 +313,7 @@ public partial class GameState
     /// The treasury tonight: the account paid with the key whole, on or before the season's last night. (A season that
     /// ends without it ends; the Guild opens the treasury without you, and the year turns.)
     /// </summary>
-    public bool TreasuryDue => !CampaignDone && !TreasuryDone && DebtCleared && KeyWhole && Week <= Guild.Weeks && !Foreclosed;
+    public bool TreasuryDue => !CampaignDone && !TreasuryDone && !Flagged("bargained") && DebtCleared && KeyWhole && Week <= Guild.Weeks && !Foreclosed;
 
     /// <summary>Opened it, and it swallowed you.</summary>
     public void Swallow()
