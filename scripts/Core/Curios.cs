@@ -110,7 +110,7 @@ public static class Curios
         // The perfect read: count every thing, mark every glow and boom, and be paid for it.
         new("trumpet", Loc.T("Ear Trumpet"), Loc.T("Nothing drowns out or muffles a sound for you: no clank, and no straw."), C, "trumpet", 1, T(Appraisal)),
         new("watch", Loc.T("Pocket Watch"), Loc.T("Impatient sellers give you twice as long, and a rotten chest stands twice the shaking."), C, "watch", 1, T(Appraisal)),
-        new("beads", Loc.T("Counting Beads"), Loc.T("Every chest comes with a tally of how many things are in it, false bottom and all."), C, "beads", 2, T(Appraisal, Compartments)),
+        new("beads", Loc.T("Counting Beads"), Loc.T("A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all."), C, "beads", 2, T(Appraisal, Compartments)),
         new("seal", Loc.T("Appraiser's Seal"), Loc.T($"A perfect read pays you a valuer's fee: {Pct(SealFee)} of what the chest held."), U, "seal", 1, T(Appraisal)),
         new("register", Loc.T("Valuer's Register"), Loc.T($"A perfect read pays {Fine(RegisterStep)} of what the chest held for each one so far this run (up to {Pct(RegisterMax)})."),
             U, "register", 2, T(Appraisal)),

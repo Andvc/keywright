@@ -107,7 +107,8 @@ public static partial class TaleBook
             {
                 new()
                 {
-                    Key = "goblins.bounty", Who = Rook, Tier = 2, Gap = 9, If = s => s.Day > s.TierSince && !s.Gone.Contains(Nettle),
+                    // Only once you've traded with Nettle: Rook asks what you'd know from her (0.34's playtest was asked it unmet).
+                    Key = "goblins.bounty", Who = Rook, Tier = 2, Gap = 9, If = s => s.Day > s.TierSince && !s.Gone.Contains(Nettle) && s.Met.Contains(Nettle),
                     Says = s => Say(Rook,
                         Loc.T("The abbey's put a bounty on the hill goblins for its crypt thefts. I'd sooner catch the Magpie, but a bounty's a bounty, " +
                               "and goblins don't run as fast."),

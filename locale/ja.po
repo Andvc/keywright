@@ -933,8 +933,8 @@ msgstr "数え玉"
 
 #: scripts/Core/Curios.cs:113
 msgid ""
-"Every chest comes with a tally of how many things are in it, false bottom and all."
-msgstr "どの宝箱にも、二重底の分まで含めた品数の集計がつく。"
+"A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all."
+msgstr "売り手が何も言い添えない宝箱には、二重底の分まで含めた品数の集計がつく。"
 
 #: scripts/Core/Curios.cs:114
 msgid "Appraiser's Seal"
@@ -11370,484 +11370,484 @@ msgid ""
 msgstr ""
 "修道院が地下墓所の盗みを丘のゴブリンのせいにして、懸賞金をかけた。女狩人のルークは、ネトルの一族がどこに巣穴を掘っているのか知りたがっている。ネトルは、一族は何ひとつ盗んでいないと誓う。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:112
+#: scripts/Core/TaleBook.Thornwick.cs:113
 msgid ""
 "The abbey's put a bounty on the hill goblins for its crypt thefts. I'd sooner catch the Magpie, but a bounty's a bounty, and goblins don't run as fast."
 msgstr ""
 "修道院が地下墓所の盗みの件で、丘のゴブリンに懸賞金をかけた。本当はカササギを捕まえたいところだが、懸賞金は懸賞金だ。それにゴブリンは、あいつほど足が速くない。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:114
+#: scripts/Core/TaleBook.Thornwick.cs:115
 msgid ""
 "You trade with Nettle. Where does her clan burrow? I'll give you a share."
 msgstr "あんた、ネトルと取引してるだろう。あいつの一族はどこに巣穴を掘ってる？分け前はやる。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:117
+#: scripts/Core/TaleBook.Thornwick.cs:118
 msgid "Under the three stones on Crow Hill"
 msgstr "カラス丘の三つ石の下だ"
 
-#: scripts/Core/TaleBook.Thornwick.cs:120
+#: scripts/Core/TaleBook.Thornwick.cs:121
 msgid "You told Rook where Nettle's clan burrows."
 msgstr "ネトルの一族の巣穴の場所を、ルークに教えた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:121
+#: scripts/Core/TaleBook.Thornwick.cs:122
 msgid "Crow Hill. I'll have your share by the end of the week."
 msgstr "カラス丘か。週末までに分け前を持ってくる。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:123
+#: scripts/Core/TaleBook.Thornwick.cs:124
 msgid "Goblins don't tell me where they sleep"
 msgstr "ゴブリンは寝床なんか教えてくれない"
 
-#: scripts/Core/TaleBook.Thornwick.cs:126
+#: scripts/Core/TaleBook.Thornwick.cs:127
 msgid "You wouldn't tell Rook where Nettle's clan burrows."
 msgstr "ネトルの一族の巣穴の場所を、ルークに教えなかった。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:127
+#: scripts/Core/TaleBook.Thornwick.cs:128
 msgid "No? Then I'll find it the slow way."
 msgstr "そうか。なら、地道に探すさ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:134
+#: scripts/Core/TaleBook.Thornwick.cs:135
 msgid ""
 "Crow Hill, as you said. The clan ran before we got there, Nettle with them, over the hills and gone. The abbey paid anyway. Here's your share: {0}."
 msgstr ""
 "言われたとおり、カラス丘だった。着く前に一族は逃げたよ。ネトルも一緒に、丘を越えて行っちまった。それでも修道院は払ってくれた。これがあんたの分け前だ。{0}。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:142
+#: scripts/Core/TaleBook.Thornwick.cs:143
 msgid ""
 "Rook raided Nettle's burrow. The clan's gone over the hills, and Nettle won't trade with you again."
 msgstr "ルークがネトルの巣穴を襲った。一族は丘を越えて去り、ネトルは二度とあなたと取引しない。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:149
+#: scripts/Core/TaleBook.Thornwick.cs:150
 msgid ""
 "Rook is sniffing at our hill. The abbey thinks goblins took its chests. Goblins get the blame for everything!"
 msgstr "ルーク、ネトルたちの丘、嗅ぎまわってる。修道院、ゴブリンが宝箱盗った思ってる。ゴブリン、なんでも悪者にされる！"
 
-#: scripts/Core/TaleBook.Thornwick.cs:150
+#: scripts/Core/TaleBook.Thornwick.cs:151
 msgid ""
 "You speak to the almoner? Brother Cadoc listens to Keywrights. He doesn't listen to goblins."
 msgstr "おまえ、施物係に話す？カドック修道士、鍵師の話は聞く。ゴブリンの話、聞かない。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:153
+#: scripts/Core/TaleBook.Thornwick.cs:154
 msgid "I'll speak for your clan"
 msgstr "一族のために口添えしよう"
 
-#: scripts/Core/TaleBook.Thornwick.cs:158
+#: scripts/Core/TaleBook.Thornwick.cs:159
 msgid "The abbey's bounty withdrawn"
 msgstr "修道院の懸賞金、撤回"
 
-#: scripts/Core/TaleBook.Thornwick.cs:158
+#: scripts/Core/TaleBook.Thornwick.cs:159
 msgid ""
 "Brother Cadoc has withdrawn the abbey's bounty on the hill goblins, on a Keywright's word."
 msgstr "鍵師の口添えにより、カドック修道士は丘のゴブリンにかけた修道院の懸賞金を撤回した。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:159
+#: scripts/Core/TaleBook.Thornwick.cs:160
 msgid ""
 "You spoke for Nettle's clan to Brother Cadoc, and the abbey withdrew its bounty. Nettle charges you nothing for shaking now, and owes you a favour."
 msgstr "カドック修道士にネトルの一族のことを口添えし、修道院は懸賞金を撤回した。これからネトルは振る代金を取らない。そして、あなたに借りができた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:160
+#: scripts/Core/TaleBook.Thornwick.cs:161
 msgid ""
 "A friend of the clan! Shake all you like. All strengths. Free! And when you need goblins, you call."
 msgstr "一族の味方！好きなだけ振る。強さ、全部。タダ！それと、ゴブリン要るとき、呼ぶ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:162
+#: scripts/Core/TaleBook.Thornwick.cs:163
 msgid "I'll stay out of it"
 msgstr "手出しはしない"
 
-#: scripts/Core/TaleBook.Thornwick.cs:165
+#: scripts/Core/TaleBook.Thornwick.cs:166
 msgid ""
 "You stayed out of the abbey's bounty. Nettle's clan has gone to ground for a week."
 msgstr "修道院の懸賞金の件には関わらなかった。ネトルの一族は1週間、地下に身を潜めた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:166
+#: scripts/Core/TaleBook.Thornwick.cs:167
 msgid "Then we go underground. Deep. A week, maybe more. Bye."
 msgstr "じゃあ、ネトルたち、地下にもぐる。深く。1週間、もっとかも。バイバイ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:176
+#: scripts/Core/TaleBook.Thornwick.cs:177
 msgid "The Unopened"
 msgstr "開かずの会"
 
-#: scripts/Core/TaleBook.Thornwick.cs:177
+#: scripts/Core/TaleBook.Thornwick.cs:178
 msgid ""
 "The Unopened, the abbey's zealots, stand at your door telling your customers that every chest you open feeds the Maw. While they stand there, fewer people come in."
 msgstr ""
 "修道院の狂信者である開かずの会が店の戸口に立ち、あなたが宝箱を開けるたびにアギトが肥えるのだと客に説いている。彼らが立っている間は、来る客が減る。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:186
+#: scripts/Core/TaleBook.Thornwick.cs:187
 msgid ""
 "Sister Agathe, of the Unopened. Every chest you open loosens the Locking. Every coin you take out of one feeds the Maw."
 msgstr "開かずの会のアガーテです。あなたが宝箱を開けるたびに、大施錠はゆるみます。宝箱から硬貨を取り出すたびに、アギトは肥え太るのです。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:187
+#: scripts/Core/TaleBook.Thornwick.cs:188
 msgid ""
 "We'll stand at your door and tell your customers so, until you stop. We are very patient."
 msgstr "あなたがやめるまで、わたくしたちは戸口に立ち、お客にそう説き続けます。わたくしたちは、とても辛抱強いのです。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:191
+#: scripts/Core/TaleBook.Thornwick.cs:192
 msgid "The Unopened stand at your door. One customer a day turns away."
 msgstr "開かずの会が店の戸口に立っている。1日に客が1人、引き返していく。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:198
+#: scripts/Core/TaleBook.Thornwick.cs:199
 msgid ""
 "They're ours, I'm afraid: the abbey's zealots. I can't order them off, but I can ask, if the abbey's had alms from you."
 msgstr ""
 "あいにく、あの者たちは私どもの修道院の狂信者でして。立ち去れと命じることはできませんが、修道院があなたから施しを受けていれば、お願いすることはできます。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:199
+#: scripts/Core/TaleBook.Thornwick.cs:200
 msgid ""
 "Or send for the Wardens, and they'll move them on. The abbey won't thank you for it."
 msgstr "あるいは衛士を呼べば、追い払ってくれるでしょう。ただ、修道院はそれを快くは思いますまい。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:202
+#: scripts/Core/TaleBook.Thornwick.cs:203
 msgid "Alms for the abbey ({0}g)"
 msgstr "修道院に施しを（{0}G）"
 
-#: scripts/Core/TaleBook.Thornwick.cs:207
+#: scripts/Core/TaleBook.Thornwick.cs:208
 msgid ""
 "You gave alms to the abbey, and Brother Cadoc asked the Unopened to leave your door."
 msgstr "修道院に施しをした。カドック修道士が、開かずの会に戸口から立ち去るよう頼んでくれた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:208
+#: scripts/Core/TaleBook.Thornwick.cs:209
 msgid "Bless you. I'll speak to Sister Agathe tonight."
 msgstr "神のお恵みを。今夜、アガーテ修道女と話しましょう。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:211
+#: scripts/Core/TaleBook.Thornwick.cs:212
 msgid "Send for the Wardens"
 msgstr "衛士を呼ぶ"
 
-#: scripts/Core/TaleBook.Thornwick.cs:217
+#: scripts/Core/TaleBook.Thornwick.cs:218
 msgid "The Wardens moved the Unopened on. The abbey wasn't pleased."
 msgstr "衛士が開かずの会を追い払った。修道院は不満げだった。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:218
+#: scripts/Core/TaleBook.Thornwick.cs:219
 msgid "If you must. I'll pray for you both."
 msgstr "どうしてもと仰るなら。双方のために祈りましょう。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:221
+#: scripts/Core/TaleBook.Thornwick.cs:222
 msgid "Let them stand"
 msgstr "立たせておく"
 
-#: scripts/Core/TaleBook.Thornwick.cs:223
+#: scripts/Core/TaleBook.Thornwick.cs:224
 msgid "You let the Unopened stand at your door."
 msgstr "開かずの会を、戸口に立たせたままにした。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:224
+#: scripts/Core/TaleBook.Thornwick.cs:225
 msgid "Patience is a virtue. Theirs, mostly."
 msgstr "忍耐は美徳です。もっぱら、あの者たちの美徳ですが。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:233
+#: scripts/Core/TaleBook.Thornwick.cs:234
 msgid ""
 "Sister Agathe at the back door, alone, with a purse. \"Every week there was one of these in our alms box. Guild silver, with the Guild's seal. We were paid to stand at hedge-wrights' doors. I didn't know.\""
 msgstr ""
 "アガーテ修道女が一人、財布を手に裏口に立っている。「毎週、わたくしたちの施し箱にこれが入っていたのです。ギルドの封印のある、ギルドの銀貨が。わたくしたちは、もぐりの鍵師の戸口に立つよう、お金で雇われていたのです。知りませんでした」"
 
-#: scripts/Core/TaleBook.Thornwick.cs:235
+#: scripts/Core/TaleBook.Thornwick.cs:236
 msgid "\"I can't keep it. I can't give it back to them. You take it.\""
 msgstr "「わたくしには持っていられません。彼らに返すこともできません。あなたが受け取ってください」"
 
-#: scripts/Core/TaleBook.Thornwick.cs:238
+#: scripts/Core/TaleBook.Thornwick.cs:239
 msgid "Keep it as proof"
 msgstr "証拠として預かる"
 
-#: scripts/Core/TaleBook.Thornwick.cs:243
+#: scripts/Core/TaleBook.Thornwick.cs:244
 msgid ""
 "Sister Agathe gave you the Guild's purse from the Unopened's alms box: proof the Guild pays them. A paper for the case against the Guild."
 msgstr "アガーテ修道女が、開かずの会の施し箱に入っていたギルドの財布をくれた。ギルドが彼らに金を払っている証拠だ。ギルド告発の証拠がひとつ増えた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:244
+#: scripts/Core/TaleBook.Thornwick.cs:245
 msgid "\"Then let it testify. I've stood at my last door.\""
 msgstr "「では、これに証言してもらいましょう。わたくしが戸口に立つのは、もうこれきりです」"
 
-#: scripts/Core/TaleBook.Thornwick.cs:246
+#: scripts/Core/TaleBook.Thornwick.cs:247
 msgid "Give it to the poor box"
 msgstr "救貧箱に入れる"
 
-#: scripts/Core/TaleBook.Thornwick.cs:249
+#: scripts/Core/TaleBook.Thornwick.cs:250
 msgid "You sent the Guild's purse to the abbey's poor box."
 msgstr "ギルドの財布を、修道院の救貧箱に入れた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:250
+#: scripts/Core/TaleBook.Thornwick.cs:251
 msgid "\"The poor box. Yes. At least it'll feed someone.\""
 msgstr "「救貧箱に。ええ。せめて誰かの糧にはなりますね」"
 
-#: scripts/Core/TaleBook.Thornwick.cs:260
+#: scripts/Core/TaleBook.Thornwick.cs:261
 msgid "The Disputed Dowry"
 msgstr "持参金争い"
 
-#: scripts/Core/TaleBook.Thornwick.cs:261
+#: scripts/Core/TaleBook.Thornwick.cs:262
 msgid ""
 "Two families, the Ashbys and the Corlews, claim the same dowry chest, and Aunt Hesper's court says: let the ward decide. A chest is warm only in the hands of the family it belongs to."
 msgstr ""
 "アシュビー家とコーリュー家が同じ持参金の宝箱を自分のものだと言い張り、ヘスパーおばさんの法廷は告げた。結界に決めさせよ、と。宝箱が温かくなるのは、それが属する家の者の手の中だけだ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:270
+#: scripts/Core/TaleBook.Thornwick.cs:271
 msgid ""
 "A wedding that never happened, dear, and two families who both say the dowry chest is theirs: the Ashbys and the Corlews. The court says let the ward decide."
 msgstr ""
 "幻に終わった婚礼の話だよ、あんた。持参金の宝箱を、どっちも自分のものだと言い張る家が二つ。アシュビー家とコーリュー家さ。法廷は、結界に決めさせろってさ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:272
+#: scripts/Core/TaleBook.Thornwick.cs:273
 msgid ""
 "Each of them will bring it to you and offer to sell it. Your mark will know which of them it belongs to. Tell me after."
 msgstr "どっちの家も、あんたのところにその宝箱を持ってきて売ろうとするよ。どっちのものかは、あんたの鍵紋が分かるはずさ。あとで教えておくれ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:275
+#: scripts/Core/TaleBook.Thornwick.cs:276
 msgid "Let the ward decide"
 msgstr "結界に決めさせよ"
 
-#: scripts/Core/TaleBook.Thornwick.cs:275
+#: scripts/Core/TaleBook.Thornwick.cs:276
 msgid ""
 "The Ashbys and the Corlews both claim a dowry chest. Each will offer it to you: lay a hand on it, and your mark knows whose it is."
 msgstr ""
 "アシュビー家とコーリュー家が、持参金の宝箱をそれぞれ自分のものだと主張している。両家ともその宝箱を売りに来る：手を触れれば、鍵紋が持ち主を教えてくれる。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:276
+#: scripts/Core/TaleBook.Thornwick.cs:277
 msgid ""
 "Two families claim one dowry chest. Each will offer it to you, and your mark will know whose it is."
 msgstr "二つの家が、一つの持参金の宝箱を自分のものだと主張している。両家ともその宝箱を売りに来るので、鍵紋が持ち主を教えてくれるだろう。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:282
+#: scripts/Core/TaleBook.Thornwick.cs:283
 msgid ""
 "The Ashby dowry. My daughter's, by every right. Let the ward decide, they say: well, here it is. Buy it, if your mark agrees. {price}."
 msgstr ""
 "アシュビー家の持参金です。どう考えても、うちの娘のものですよ。結界に決めさせろと言われましてね。ほら、このとおり。あなたの鍵紋が認めるなら、お買いなさい。{price}です。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:290
+#: scripts/Core/TaleBook.Thornwick.cs:291
 msgid ""
 "Hal Corlew. The dowry's ours: my sister packed it herself. The court's let me bring it to you. {price}, and the ward will tell you I'm right."
 msgstr ""
 "ハル・コーリューだ。持参金はうちのもんだ。妹が自分で詰めたんだからな。法廷の許しを得て持ってきた。{price}だ。おれが正しいって、結界が教えてくれるさ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:298
+#: scripts/Core/TaleBook.Thornwick.cs:299
 msgid ""
 "Well, dear? The court's waiting, and so are two very cross families. Whose is the dowry?"
 msgstr "さあ、どうだい、あんた？法廷も、カンカンの二家族も待ってるよ。持参金は誰のものだい？"
 
-#: scripts/Core/TaleBook.Thornwick.cs:301
+#: scripts/Core/TaleBook.Thornwick.cs:302
 msgid "The Ashbys'"
 msgstr "アシュビー家のものだ"
 
-#: scripts/Core/TaleBook.Thornwick.cs:302
+#: scripts/Core/TaleBook.Thornwick.cs:303
 msgid "The Corlews'"
 msgstr "コーリュー家のものだ"
 
-#: scripts/Core/TaleBook.Thornwick.cs:303
+#: scripts/Core/TaleBook.Thornwick.cs:304
 msgid "I couldn't say"
 msgstr "わたしには分からない"
 
-#: scripts/Core/TaleBook.Thornwick.cs:305
+#: scripts/Core/TaleBook.Thornwick.cs:306
 msgid "You couldn't tell the court whose the dowry was."
 msgstr "持参金が誰のものか、法廷に告げることができなかった。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:306
+#: scripts/Core/TaleBook.Thornwick.cs:307
 msgid ""
 "Then they'll go on suing each other until the chest rots. Thank you so much."
 msgstr "じゃあ、宝箱が朽ち果てるまで、あの両家は訴え合うんだろうね。そりゃどうもありがとさん。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:316
+#: scripts/Core/TaleBook.Thornwick.cs:317
 msgid "The Night Toll"
 msgstr "夜の関所"
 
-#: scripts/Core/TaleBook.Thornwick.cs:317
+#: scripts/Core/TaleBook.Thornwick.cs:318
 msgid ""
 "Half the Wardens are down with the sweats, and Sergeant Hollis needs a Keywright's hand on the carts at the forest toll tonight: a stolen chest goes cold under the mark."
 msgstr "衛士の半分が熱病で寝込み、ホリス軍曹は今夜、森の関所で荷馬車を検める鍵師の手を求めている。盗品の宝箱に手を当てれば、鍵紋が冷えるのだ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:326
+#: scripts/Core/TaleBook.Thornwick.cs:327
 msgid ""
 "Half my Wardens are down with the sweats, and the smugglers know it. Lend me your mark at the toll tonight: a hand on every cart, and tell me which chests are cold."
 msgstr ""
 "部下の半分が熱病で寝込んでて、密輸人どもはそれを知ってる。今夜、関所であんたの鍵紋を貸してくれ。荷馬車を一台残らず手で触れて、どの宝箱が冷たいか教えてほしい。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:328
+#: scripts/Core/TaleBook.Thornwick.cs:329
 msgid "You'd miss your peddler. I'd owe you."
 msgstr "行商人には会えなくなるが、恩に着る。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:331
+#: scripts/Core/TaleBook.Thornwick.cs:332
 msgid "I'll come tonight"
 msgstr "今夜行こう"
 
-#: scripts/Core/TaleBook.Thornwick.cs:336
+#: scripts/Core/TaleBook.Thornwick.cs:337
 msgid "You went to the Wardens' toll for the night, with your mark."
 msgstr "鍵紋を携えて、ひと晩、衛士の関所へ出向いた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:337
+#: scripts/Core/TaleBook.Thornwick.cs:338
 msgid "Good. Bring a coat. The forest road's cold after dark."
 msgstr "よし。外套を持ってこい。日が暮れると森の街道は冷える。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:339
+#: scripts/Core/TaleBook.Thornwick.cs:340
 msgid "I've a shop to run"
 msgstr "店があるんでね"
 
-#: scripts/Core/TaleBook.Thornwick.cs:342
+#: scripts/Core/TaleBook.Thornwick.cs:343
 msgid "You wouldn't go to the Wardens' toll."
 msgstr "衛士の関所には行かなかった。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:343
+#: scripts/Core/TaleBook.Thornwick.cs:344
 msgid "Course you have. So have the smugglers."
 msgstr "そりゃそうだろうよ。密輸人どもにも、商売があるからな。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:351
+#: scripts/Core/TaleBook.Thornwick.cs:352
 msgid ""
 "Midnight at the toll. A carter you don't know, under a tarpaulin. Your hand on his chests: three of them are as cold as the grave. Hollis is watching your face."
 msgstr "真夜中の関所。防水布をかぶせた荷馬車に、見知らぬ荷馬車屋。宝箱に手を触れると、3つが墓のように冷たい。ホリスがあなたの顔をじっと見ている。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:353
+#: scripts/Core/TaleBook.Thornwick.cs:354
 msgid ""
 "Midnight at the toll, and Corvin Tallow's cart under a tarpaulin. Your hand on his chests: three of them are as cold as the grave. Corvin's watching your face, and so is Hollis."
 msgstr ""
 "真夜中の関所。防水布をかぶせた、コーヴィン・タロウの荷馬車。宝箱に手を触れると、3つが墓のように冷たい。コーヴィンがあなたの顔を見ている。ホリスもだ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:357
+#: scripts/Core/TaleBook.Thornwick.cs:358
 msgid "Tell Hollis they're cold"
 msgstr "冷たいとホリスに告げる"
 
-#: scripts/Core/TaleBook.Thornwick.cs:365
+#: scripts/Core/TaleBook.Thornwick.cs:366
 msgid ""
 "You told Hollis which of Corvin's chests were stolen. Corvin's in the cells; the Wardens paid you a finder's share."
 msgstr "コーヴィンの宝箱のどれが盗品か、ホリスに告げた。コーヴィンは牢に入れられ、衛士はあなたに発見者の取り分を払った。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:366
+#: scripts/Core/TaleBook.Thornwick.cs:367
 msgid ""
 "You told Hollis which of the carter's chests were stolen. The Wardens paid you a finder's share."
 msgstr "荷馬車屋の宝箱のどれが盗品か、ホリスに告げた。衛士はあなたに発見者の取り分を払った。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:367
+#: scripts/Core/TaleBook.Thornwick.cs:368
 msgid ""
 "Three chests going home. That's a Keywright's work, that is. Here's your share."
 msgstr "宝箱が3つ、持ち主のもとへ帰る。これぞ鍵師の仕事ってもんだ。ほら、あんたの取り分だ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:369
+#: scripts/Core/TaleBook.Thornwick.cs:370
 msgid "Say they're all warm"
 msgstr "全部温かいと言う"
 
-#: scripts/Core/TaleBook.Thornwick.cs:375
+#: scripts/Core/TaleBook.Thornwick.cs:376
 msgid ""
 "You told Hollis Corvin's chests were warm. They weren't. Corvin owes you a favour."
 msgstr "コーヴィンの宝箱は温かいとホリスに告げた。本当は冷たかった。コーヴィンはあなたに借りができた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:376
+#: scripts/Core/TaleBook.Thornwick.cs:377
 msgid ""
 "You told Hollis the carter's chests were warm. They weren't. The Lockless heard about it."
 msgstr "荷馬車屋の宝箱は温かいとホリスに告げた。本当は冷たかった。そのことは無錠党の耳に入った。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:377
+#: scripts/Core/TaleBook.Thornwick.cs:378
 msgid "All warm? Huh. Then on you go, carter."
 msgstr "全部温かい？ふん。なら通っていいぞ、荷馬車屋。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:395
+#: scripts/Core/TaleBook.Thornwick.cs:396
 msgid "the Ashby family"
 msgstr "アシュビー家"
 
-#: scripts/Core/TaleBook.Thornwick.cs:395
+#: scripts/Core/TaleBook.Thornwick.cs:396
 msgid "the Corlew family"
 msgstr "コーリュー家"
 
-#: scripts/Core/TaleBook.Thornwick.cs:401
+#: scripts/Core/TaleBook.Thornwick.cs:402
 msgid "{0} offered you the dowry chest."
 msgstr "{0}が持参金の宝箱を売りに来た。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:418
+#: scripts/Core/TaleBook.Thornwick.cs:419
 msgid ""
 "You told the court the dowry was the Ashbys', and the ward agreed. Aunt Hesper owes you a favour."
 msgstr "持参金はアシュビー家のものだと法廷に告げ、結界もそれを認めた。ヘスパーおばさんはあなたに借りができた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:419
+#: scripts/Core/TaleBook.Thornwick.cs:420
 msgid ""
 "You told the court the dowry was the Corlews', and the ward agreed. Aunt Hesper owes you a favour."
 msgstr "持参金はコーリュー家のものだと法廷に告げ、結界もそれを認めた。ヘスパーおばさんはあなたに借りができた。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:420
+#: scripts/Core/TaleBook.Thornwick.cs:421
 msgid ""
 "The ward agrees with you, and so does the court. Here's the court's fee, dear, and I owe you one."
 msgstr "結界もあんたと同じ意見で、法廷もそれに従ったよ。これが法廷からの謝礼さ、あんた。あたしも借りができたね。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:424
+#: scripts/Core/TaleBook.Thornwick.cs:425
 msgid ""
 "You told the court the dowry was the Ashbys'. It wasn't, and the Corlews won't forget it."
 msgstr "持参金はアシュビー家のものだと法廷に告げた。だが違った。コーリュー家はこのことを忘れないだろう。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:425
+#: scripts/Core/TaleBook.Thornwick.cs:426
 msgid ""
 "You told the court the dowry was the Corlews'. It wasn't, and the Ashbys won't forget it."
 msgstr "持参金はコーリュー家のものだと法廷に告げた。だが違った。アシュビー家はこのことを忘れないだろう。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:426
+#: scripts/Core/TaleBook.Thornwick.cs:427
 msgid ""
 "Hm. The other family swears blind it opened for their girl last night. Well. The court has your word."
 msgstr "ふうん。もう一方の家は、ゆうべ自分とこの娘の手で開いたって言い張ってるよ。まあいいさ。法廷はあんたの言葉を採ったんだから。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:433
+#: scripts/Core/TaleBook.Thornwick.cs:434
 msgid ""
 "Reeve of Thornwick, with a loom in the toll-house. The market's open till the lamps go out, and the roads are free."
 msgstr "料金所に織機を持ち込んだ、ソーンウィックの町長さ。市場は明かりが消えるまで開いてるし、道は通行無料だよ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:435
+#: scripts/Core/TaleBook.Thornwick.cs:436
 msgid ""
 "Reeve Caskett, if you please. The tolls are paying for the new road to the Old Wood. The Guild's very pleased."
 msgstr "キャスケット町長と呼んでいただきましょう。通行料で、古の森への新しい道を造っておりましてね。ギルドもたいへん満足しています。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:442
+#: scripts/Core/TaleBook.Thornwick.cs:443
 msgid ""
 "Our burrow has a door now! A real door, with a lock you can open. The clan says you're an honorary goblin. It's a big honour."
 msgstr "ネトルたちの巣穴、扉ついた！本物の扉。おまえが開けられる錠つき。一族、おまえを名誉ゴブリンって言う。すごい名誉。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:444
+#: scripts/Core/TaleBook.Thornwick.cs:445
 msgid ""
 "Nettle's clan went over the hills after Rook's raid. The crypt thefts didn't stop. They were never the goblins."
 msgstr "ルークに襲われたあと、ネトルの一族は丘を越えていった。地下墓所の盗みは止まらなかった。最初からゴブリンの仕業じゃなかったのさ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:445
+#: scripts/Core/TaleBook.Thornwick.cs:446
 msgid ""
 "We came up again after a while. Rook still sniffs about. Goblins get the blame for everything."
 msgstr "しばらくして、ネトルたち、また地上に出た。ルーク、まだ嗅ぎまわってる。ゴブリン、なんでも悪者にされる。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:451
+#: scripts/Core/TaleBook.Thornwick.cs:452
 msgid ""
 "I preach on the abbey steps now, about who pays for whose bread. The Guild's very cross. The Unopened are fewer, and better."
 msgstr ""
 "今は修道院の石段で説教をしています。誰のパン代を、誰が払っているのかについて。ギルドはたいそうお怒りです。開かずの会は数こそ減りましたが、前よりよくなりました。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:453
+#: scripts/Core/TaleBook.Thornwick.cs:454
 msgid ""
 "The Unopened stand at other doors now. Sister Agathe left them. She wouldn't tell me why."
 msgstr "開かずの会は今、よその戸口に立っております。アガーテ修道女は会を離れました。理由は話してくれませんでした。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:454
+#: scripts/Core/TaleBook.Thornwick.cs:455
 msgid ""
 "We stood at your door all season, and you kept opening chests. We are very patient. So, it seems, are you."
 msgstr "わたくしたちは今季ずっとあなたの戸口に立ち、あなたは宝箱を開け続けました。わたくしたちはとても辛抱強い。どうやら、あなたもそのようですね。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:462
+#: scripts/Core/TaleBook.Thornwick.cs:463
 msgid ""
 "The Ashby girl's married now, dowry and all, and the Corlews have stopped suing. I'm never doing another one of those."
 msgstr "アシュビー家の娘は持参金ごと嫁いで、コーリュー家も訴えるのをやめたよ。あんな仕事は、もう二度とごめんだね。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:463
+#: scripts/Core/TaleBook.Thornwick.cs:464
 msgid ""
 "The Corlew girl's married now, dowry and all, and the Ashbys have stopped suing. I'm never doing another one of those."
 msgstr "コーリュー家の娘は持参金ごと嫁いで、アシュビー家も訴えるのをやめたよ。あんな仕事は、もう二度とごめんだね。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:465
+#: scripts/Core/TaleBook.Thornwick.cs:466
 msgid ""
 "The court gave the dowry to the wrong family on your word, and it won't open for them. They're suing you now, dear."
 msgstr "あんたの言葉で、法廷は持参金を違う家に渡しちまった。で、その家には開けられないときた。今度はあんたを訴えてるってさ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:466
+#: scripts/Core/TaleBook.Thornwick.cs:467
 msgid ""
 "The Ashbys and the Corlews are still at law over that dowry. The chest will outlive them all."
 msgstr "アシュビー家とコーリュー家は、あの持参金をめぐってまだ裁判中さ。宝箱のほうが、あの連中より長生きするだろうよ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:472
+#: scripts/Core/TaleBook.Thornwick.cs:473
 msgid ""
 "Three stolen chests home from one night at the toll. I've asked the Wardens' captain for a Keywright on the road for good."
 msgstr "関所でのひと晩で、盗まれた宝箱が3つ持ち主のもとへ帰った。街道に鍵師を常駐させてくれと、衛士の隊長に願い出たところだ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:474
+#: scripts/Core/TaleBook.Thornwick.cs:475
 msgid ""
 "Hollis knows those chests at the toll were cold. He hasn't said so. He doesn't have to."
 msgstr "ホリスは、関所のあの宝箱が冷たかったと分かってる。口には出さんがな。出すまでもないのさ。"
 
-#: scripts/Core/TaleBook.Thornwick.cs:475
+#: scripts/Core/TaleBook.Thornwick.cs:476
 msgid "The smugglers had a good season. I hope your shop did too."
 msgstr "密輸人どもにはいい季節だった。あんたの店もそうだったならいいがな。"
 
