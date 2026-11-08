@@ -212,7 +212,7 @@ public partial class Main : Node2D
         // Straight into a day for the bot and the debugging shortcuts; everyone else gets the title screen.
         bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--treasury-demo") || Arg(args, "--treasury-demo") != null ||
                       args.Contains("--pad-test") ||
-                      Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null;
+                      Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null || Arg(args, "--season") != null;
         if (direct)
         {
             // --terms=gifts,thin: just these boons and banes (to see a term's screens), whatever the level deals.

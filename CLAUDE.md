@@ -41,7 +41,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    upgrades, curios, the Guild, and each tale's lines as they happen) for tuning the economy's pace and following a tale
    through. `-- --sim=terms [--who=a,b]` (ten minutes) plays Kit with each
    challenge term alone, then the dues alone and whole levels as drawn; `-- --sim=levels [--debtstep=S]` just the
-   levels, one to eight; `-- --sim=careers` just the careers (learners at the highest level open, run by run).
+   levels, one to eight; `-- --sim=careers` just the careers (learners at the highest level open, run by run;
+   `--level=0` keeps them at level 0, as a player following the story would), with the campaign's milestones.
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.
    Bot flags: `--seed=N --quit-at-end --days=N --no-tutorial --start-tier=N --gold=N --start-week=N --character=KEY
    --challenge=N --terms=a,b --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm --season=N --knew=all` (`--terms` plays just those
@@ -50,20 +51,23 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    day that event, to check
    its screens; `--quit-at-end` quits after the first opening: use `--days`
    for longer runs; `--heartsongs=0.3` puts a Heartsong in that share of chests, `--songs=all` plays as if all nine were
-   known, so `--vault-demo --songs=all` shows the other ending). `--start-tier`
+   known). `--start-tier`
    jumps to a shop tier with the tools a player would own by then (use it to check later tiers' screens);
    `--start-week` fast-forwards a run with the sim's careful collector (curios, commissions, exhibition and all; `--gold`
    then sets the purse, e.g. 0 to see a short night and foreclosure; `--days` counts from day 1, so add the weeks
-   skipped). The bot plays scenes, Nim, the Guild's night and deliveries, opens the short-of-chests warning once (and
+   skipped; it stops early, on the night the treasury's due, so you play that). The bot plays scenes, Nim, the Guild's night and deliveries, opens the short-of-chests warning once (and
    says "Not now"), keeps every Heartsong (after a look at its reveal), and quits once a run has ended (below). With tips
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
-   `--vault-demo` opens the Crown Chest, the finale's nine-thing opening; `--engine` starts with the Bookkeeping Engine;
+   `--treasury-demo` plays the treasury on the season's last night (the first swallowing; `--treasury-demo=final` the
+   final opening with the plan whole, then the next day; with `--season=2`, the remembered one, where you can stay away);
+   `--engine` starts with the Bookkeeping Engine;
    `--sight-unseen` buys every other plain chest it can afford without touching it (the opening's blind-buy screen);
-   `--mimics=N` makes one chest in N breathe from Thornwick on (a mimic at the counter, the opening and the market);
+   `--mimics=N` makes one chest in N breathe from Thornwick on (a mimic at the counter, the opening and the market; they
+   only breathe in a remembered season, so add `--season=2`);
    `--tales=a,b` puts those tales in the season whatever it draws (with `--start-week`, to check a late tale's beats);
-   `--season=N` plays a later season (the last one lost, so the year turned back) and `--knew=all` as if every question of
-   the case had been worked out before (filled in, Bram's glove off, and those who'd have told you notice you know).
+   `--season=N` plays a remembered season from its first morning (as if swallowed at the treasury before) and `--knew=all` as if every Inquiry entry had been learned in an
+   earlier season (the leads it opens, the beats that need it, and those who'd have told you noticing you know).
    At a run's end the bot retires (or goes back to the title) as a player would, so what comes between runs plays too.
    `--title-test` drives the title's burst with real input (skipping, pressing a landed button) and exits 1 on a failure.
    `--shell-demo` walks the title screen and its collection (finds, curios, Heartsongs, from a made-up profile), the
@@ -261,17 +265,21 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
   a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
   `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
-  judgment pushes that later, and the run's build and its tales decide the rest (0.33, 300 runs: the careful player
-  buying curios as they come clears 73%, a little over 0.32's 69% for the mimics a careful ear finds and the case's
-  standing; 0.30's 59% was a little low, its careful player having haggled for chests gone cold in its hands; with no
-  curios 58%; with no tales 38%; with no Heartsongs 72%; a learner at 0.75 36%; a first run about one in a hundred); careers first clear around
-  the sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 26), and each level
-  after costs a few points more (the dues 20% up a level, `Challenges.DebtStep`, 15% until 0.33's case, mimics and
-  market made the top levels gentler; one career in five has cleared level 6 by run 30, level 8 is a wall, 3%: 120
-  careers, `--sim=careers --n=120`). The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
-  balance: `--sim=experience` should keep a first run under two and a half hours (0.33: 147 minutes; 0.32: 143 over 30 days; 0.30:
-  146, the longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to Thornwick and the
-  days after it still are, just over, for about half to three in four of first runs: 0.31 57%, 0.32 73%, 0.33 57% of the 30). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
+  judgment pushes that later, and the run's build and its tales decide the rest (0.34, 120 runs: the careful player
+  buying curios as they come clears 76% of first seasons, with the key's master's fees standing in for 0.33's shard
+  commissions and season-one mimics (0.33: 73%; without the fees 0.34 was 57%); with no curios 73%; with no tales 48%;
+  with no Heartsongs 72%; a learner at 0.75 42%; a first run about one in a hundred); careers first clear around the
+  sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 27), and each level
+  after costs a few points more (the dues 20% up a level, `Challenges.DebtStep`, 15% until 0.33; one career in twelve
+  has cleared level 6 by run 30, level 8 is a wall, 3%: 40 careers, `--sim=careers --n=40`). The campaign (0.34): the
+  first swallowing comes with the first clear, around the sixth run; Bram is first brought home around the thirteenth,
+  and the next day (the true ending) around the thirteenth too, 83% of careers by run 30 (at level 0 throughout,
+  `--level=0`: the eleventh, all by run 30). The careful player keeps a full mimic for the final opening unless it has
+  Guild nights enough to fill it again (`Strategy.SpendMimic`): the plan's "free them" is what a season most often lacks. The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
+  balance: `--sim=experience` should keep a first run under two and a half hours (0.34: 138 minutes; 0.33: 147; 0.32: 143
+  over 30 days; 0.30: 146, the longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to
+  Thornwick and the days after it still are, just over, for about half to three in four of first runs: 0.31 57%, 0.32
+  73%, 0.33 57%, 0.34 47% of the 30). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
   are foreclosed within a few weeks, and no early week sends careful players to Bram's word (0.30: the fourth does for
   about one in twenty-five, the fifth and sixth for about one in twelve: the ones still a shop behind). Anything added to the run goes in `SaveData` too; the profile across runs is
   `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts

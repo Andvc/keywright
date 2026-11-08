@@ -821,7 +821,8 @@ public partial class CounterPhase : Phase
         bool odds = priced && !_visit.Seller.SlipPrice && _visit.Seller.Gaze <= 0;
         _chanceShown = odds ? _slip.ChanceAbove(price) : -1;
         int waiting = State.Queue.Count;
-        _chanceText.Text = _visit.Seller.SlipPrice && !bought ? Loc.T("Exact: a quarter off. Wrong: a quarter more.")
+        _chanceText.Text = _visit.Chest.Crate != null && !bought ? Loc.T("No slip can price whoever's in there.")
+            : _visit.Seller.SlipPrice && !bought ? Loc.T("Exact: a quarter off. Wrong: a quarter more.")
             : _visit.Seller.Gaze > 0 && !bought ? waiting == 0 ? Loc.T("One coin, and nobody's waiting.") : Loc.T($"One coin. And {waiting} still waiting, at x{_visit.Seller.Gaze:0.#}.")
             : worth == 0 && !_shake.HeardAnything && _hearing.HasTried(Core.Shake.Hard, false) && _hearing.HasTried(Core.Shake.Gentle, false)
                 ? Loc.T("Not a sound: empty, as far as you can tell.")
