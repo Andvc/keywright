@@ -157,6 +157,9 @@ public partial class CounterPhase : Phase
         Note(ChestNote());
         if (State.Terms(_visit) is string terms) Note(terms);
         if (_visit.Clue != null) Note(_visit.Clue);
+        // The spring's first chest, the same every year (0.34): once you remember, you know what was in it.
+        if (_visit.Beat == "first.chest" && State.Remembers && State.FirstChest.Count > 0)
+            Note(Loc.T($"You know this chest. You opened it last spring, and it held {Words.List(State.FirstChest.Select(Loc.T))}."));
         if (_visit.PriceNote != null) Note(_priceNote = _visit.PriceNote);
         if (State.Shows(Heartsongs.Bell)) TollBell(Market.ArticleCount(_visit.Chest));
         if (State.Has(Upgrades.Engine)) Record();
@@ -328,7 +331,6 @@ public partial class CounterPhase : Phase
         if (firstOfDay && State.TodayEvent != null) Teach("event");
         if (firstOfDay && State.Today.Stash > 0) Teach("stash");
         if (State.Commissions.Any(c => !c.Done)) Teach("commissions");
-        if (State.Commissions.Any(c => c.Story && !c.Done)) Teach("hood");
         if (_visit.Chest.Sealed) Teach("stranger");
         if (_visit.Chest.Gilded) Teach("gilded");
     }
@@ -373,6 +375,8 @@ public partial class CounterPhase : Phase
                 Angered(_visit.Anger(_rng));
         }
         Breathe((float)delta);
+        KnockInside((float)delta);
+        Resonate((float)delta, level);
         CheckLesson();
         UpdateStrength();
         if (_rot != null)
@@ -559,18 +563,18 @@ public partial class CounterPhase : Phase
             string what = c.Kind == CommissionKind.Enchanted ? Loc.T("Anything enchanted")
                 : $"{Categories.Get(c.Category).Name} {Categories.QualityName(c.Quality)}{(c.Quality < Rarity.Legendary ? "+" : "")}" +
                   (c.Needed > 1 ? $" {c.Delivered}/{c.Needed}" : "");
-            var color = c.Story ? Palette.Magic : Palette.Text;
+            var color = Palette.Text;
             // What it pays on the right, what's wanted in the rest of the line (ending in "..." if a language runs long:
             // the whole of it is on hover).
-            string pays = c.Story ? Loc.T("shard") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : Money.Short(State.CommissionEach(c));
+            string pays = c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g ea") : Money.Short(State.CommissionEach(c));
             float paysW = Mathf.Ceil(UiKit.TextWidth(pays)) + 4;
             var line = UiKit.MakeLabel(what, 16, color).Place(12, 28 + i * 24, 268 - paysW - 8, 20);
             line.ClipText = true;
             line.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
             line.MouseFilter = Control.MouseFilterEnum.Pass;
-            line.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? Loc.T(" each") : "")}{(c.Story ? Loc.T(" and a shard of the Aldric Key") : "")}, or a quarter over what it would sell for, if that's more.");
+            line.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {State.CommissionEach(c)}g{(c.Needed > 1 ? Loc.T(" each") : "")}, or a quarter over what it would sell for, if that's more.");
             board.AddChild(line);
-            board.AddChild(UiKit.MakeLabel(pays, 16, c.Story ? Palette.Magic : Palette.Gold, HorizontalAlignment.Right)
+            board.AddChild(UiKit.MakeLabel(pays, 16, Palette.Gold, HorizontalAlignment.Right)
                 .Place(280 - paysW, 28 + i * 24, paysW, 20));
         }
     }
@@ -909,6 +913,112 @@ public partial class CounterPhase : Phase
         Note(Loc.T("Something in that chest is breathing, and it stops when you shake it."));
         Teach("breathing");
         Game.Moment("01_breathing", 0.3);
+    }
+
+    /// <summary>Until an empty chest rings again (0.34).</summary>
+    float _ringIn;
+
+    bool _rang;
+
+    /// <summary>
+    /// An empty chest rings like a drum when it's knocked about (0.34, docs/narrative.md): firmly or harder, with nothing
+    /// loose inside it (whatever's under a false bottom or in a ward is held fast, and straw deadens the wood). A mimic
+    /// never rings, nor a Guild crate: there's something in them, if not a thing.
+    /// </summary>
+    void Resonate(float dt, Core.Shake level)
+    {
+        var chest = _visit.Chest;
+        _ringIn -= dt;
+        if (!_shake.Dragging || level < Core.Shake.Firm || _ringIn > 0 || Concluded) return;
+        if (chest.Items.Count > 0 || chest.Breathing || chest.Crate != null || chest.Sealed || chest.Packed) return;
+        _ringIn = 1.3f;
+        Sfx.Play("hollow", level == Core.Shake.Hard ? 1f : 1.06f, level == Core.Shake.Hard ? -4 : -9);
+        if (_rang) return;
+        _rang = true;
+        _shake.Say(Loc.T("...the wood rings..."), Palette.Muted, 16);
+        Note(Loc.T("The box rings like a drum when you shake it: nothing's loose inside."));
+    }
+
+    /// <summary>Until someone in a Guild crate next knocks (0.34): they wait for the crate to sit still, as a mimic does.</summary>
+    float _knockIn = 2.2f;
+
+    Button _knockBack;
+    bool _knocked, _answered;
+
+    /// <summary>
+    /// A Guild crate (0.34, docs/narrative.md): someone gilded is inside, and while it sits still, every few seconds, they
+    /// knock on the lid from the inside (a shake stops them). The first knock is noted on the slip, and you can knock back.
+    /// </summary>
+    void KnockInside(float dt)
+    {
+        if (_visit.Chest.Crate == null || Concluded) return;
+        if (_shake.Busy)
+        {
+            _knockIn = 3.6f;
+            return;
+        }
+        _knockIn -= dt;
+        if (_knockIn > 0) return;
+        _knockIn = 4.4f;
+        Sfx.Play("knock", 1f, -2);
+        _shake.Say(Loc.T("...knock..."), Palette.Muted, 16);
+        _shake.View.Wobble(0.25f);
+        if (_knocked) return;
+        _knocked = true;
+        Note(Loc.T("Something in that crate knocked, from the inside. It stops when you shake it."));
+        if (_answered) return;
+        _knockBack = UiKit.MakeButton(Loc.T("Knock back"), Palette.Warn, 16, KnockBack).Place(PanelX, 648, PanelW, 40);
+        _knockBack.TooltipText = Loc.T("Knock on the lid, and listen for an answer.");
+        _footer.Visible = false;
+        _panel.AddChild(_knockBack);
+        Game.Moment("02_knock", 0.3);
+    }
+
+    /// <summary>Whether you can knock back on the crate now (the bot checks).</summary>
+    public bool CanKnockBack => _knocked && !_answered && !Busy && !Concluded && _visit.Chest.Crate != null;
+
+    /// <summary>
+    /// Knocks on a Guild crate's lid: whoever's inside answers, and the Inquiry has it (the gilded are alive; and Bram's
+    /// answer is his tap on the counter, twice and once).
+    /// </summary>
+    public async void KnockBack()
+    {
+        if (!CanKnockBack || _visit.Chest.Crate is not string inside) return;
+        _answered = true;
+        if (_knockBack != null) _knockBack.Visible = false;
+        _footer.Visible = true;
+        _knockIn = 6f;
+        Sfx.Play("knock", 1.2f, -4);
+        _shake.View.Wobble(0.2f);
+        await Wait(0.3);
+        if (!Alive) return;
+        Sfx.Play("knock", 1.2f, -4);
+        await Wait(1.1);
+        if (!Alive) return;
+        bool bram = inside == Campaign.Bram;
+        if (bram)
+        {
+            Sfx.Play("tap", 1f, -2);
+            await Wait(0.2);
+            if (!Alive) return;
+            Sfx.Play("tap", 1f, -2);
+            await Wait(0.55);
+            if (!Alive) return;
+            Sfx.Play("tap", 1f, -2);
+            _shake.Say(Loc.T("...tap tap... tap..."), Palette.Muted, 16);
+            Note(Loc.T("It answered: two taps, then one. The way Bram taps the counter."));
+        }
+        else
+        {
+            Sfx.Play("knock", 0.9f, -2);
+            await Wait(0.3);
+            if (!Alive) return;
+            Sfx.Play("knock", 0.9f, -2);
+            _shake.Say(Loc.T("...knock knock..."), Palette.Muted, 16);
+            Note(Loc.T("It answered. Whoever's in there is alive."));
+        }
+        State.Note(bram ? "tap" : "alive");
+        Game.Moment("02_answer", 0.3);
     }
 
     void OnHeard(Item item, Shake level)

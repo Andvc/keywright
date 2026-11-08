@@ -167,8 +167,12 @@ public static partial class TaleBook
                               "Ide's reliquary chest: green, iron-bound, the saint's key on its lid."),
                         Loc.T("If it comes to your counter, you'll know it. A Keywright's mark goes cold on a chest that isn't the seller's to " +
                               "sell. Lay a hand on any chest and feel. Send for us, and the Wardens pay a finder's share."))
-                        .Append(new Line(Story.Bram, Loc.T("He's right. Shake anything, and your mark tells you whose it is: warm, the seller's; " +
-                                                          "cold, stolen. A stolen chest won't open for whoever buys it."))).ToList(),
+                        .Append(s.BramHere
+                            ? new Line(Story.Bram, Loc.T("He's right. Shake anything, and your mark tells you whose it is: warm, the seller's; " +
+                                                         "cold, stolen. A stolen chest won't open for whoever buys it."))
+                            // Bram's at the treasury (0.34): you remember what he taught you.
+                            : new Line(Story.Self, Loc.T("Bram taught me that: shake anything, and the mark says whose it is. Warm, the seller's; " +
+                                                         "cold, stolen. A stolen chest won't open for whoever buys it."))).ToList(),
                     Then = s =>
                     {
                         s.Post("reliquary", Loc.T("Wanted: Saint Ide's reliquary"),

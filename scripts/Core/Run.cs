@@ -371,11 +371,11 @@ public sealed partial class GameState
     public bool Takes(Commission c, Item item) => c.Wants(item, LetterLeeway(c));
 
     /// <summary>How many qualities lower than asked a commission will take.</summary>
-    public int LetterLeeway(Commission c) => HasCurio("letter") && !c.Story ? 1 : 0;
+    public int LetterLeeway(Commission c) => HasCurio("letter") ? 1 : 0;
 
     /// <summary>What a commission offers, all told, before what a thing would sell for comes into it (a lot: for all of it).</summary>
     public int CommissionReward(Commission c) => (int)MathF.Round(c.Reward * (Shows(Heartsongs.Lark) ? Heartsongs.LarkPay : 1) *
-                                                                   (HasCurio("ribbon") && !c.Story ? Curios.RibbonPay : 1));
+                                                                   (HasCurio("ribbon") ? Curios.RibbonPay : 1));
 
     /// <summary>What a commission offers for each thing it takes (a lot's reward shared out).</summary>
     public int CommissionEach(Commission c) => Money.Round(CommissionReward(c) / (float)c.Needed);

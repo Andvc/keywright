@@ -767,7 +767,7 @@ public static class Wardens
             Who = TaleBook.Flick, Key = "night:robbery", Night = true, Letter = true,
             Lines =
             {
-                new(Story.Bram, Loc.T($"The back shutter's been forced. {Money.Say(lost)} gone from the strongbox, and a black feather on the counter. " +
+                new(state.BramHere ? Story.Bram : Story.Self, Loc.T($"The back shutter's been forced. {Money.Say(lost)} gone from the strongbox, and a black feather on the counter. " +
                                       $"The Lockless don't forget a Keywright who sets the Wardens on them.")),
             },
             Then = () => state.TaleGold(-Math.Min(state.Gold, lost)),

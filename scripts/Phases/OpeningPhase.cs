@@ -894,14 +894,16 @@ public partial class OpeningPhase : Phase
         // The stamp and your gut both judge that against what you paid, so they never disagree.
         int back = _worth + _purchase.Rebate + insured + _mimicKept;
         int profit = back - _purchase.Paid;
-        State.Earn(_worth);
+        // The next day's chest (0.34): Wynn's father's tools go back to the mill, for the waterwheel.
+        bool wheel = visit.Beat == GameState.WaterwheelBeat;
+        if (!wheel) State.Earn(_worth);
         State.RecordRead(perfect);
         State.ReadTrue(_purchase.Chest, perfect);
         if (perfect) State.Today.PerfectReads++;
 
         bool crate = _purchase.Chest.Crate != null;
-        var color = crate ? Palette.Magic : profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
-        string text = crate ? Loc.T("SOMEONE'S IN THE BACK ROOM") : profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
+        var color = crate ? Palette.Magic : wheel || profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
+        string text = crate ? Loc.T("SOMEONE'S IN THE BACK ROOM") : wheel ? Loc.T("FOR THE WATERWHEEL") : profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
         var stamp = Add(UiKit.MakePanel(color).Place(320, 104, 480, 76));
         stamp.ZIndex = 10;
         stamp.AddChild(UiKit.MakeLabel(text, 40, color, HorizontalAlignment.Center, outline: 6).Place(0, 14, 480, 50));
@@ -915,19 +917,23 @@ public partial class OpeningPhase : Phase
         await ToSignal(slam, Tween.SignalName.Finished);
         if (!Alive) return;
         Sfx.PlayGroup("land", 0.55f, 4);
-        Sfx.Play(profit > 0 ? "win" : "lose", 1f, -2);
-        Game.Shake(profit > 0 ? Mathf.Min(0.6f, 0.3f + profit / 600f) : 0.25f);
+        Sfx.Play(wheel || profit > 0 ? "win" : "lose", 1f, -2);
+        Game.Shake(wheel ? 0.3f : profit > 0 ? Mathf.Min(0.6f, 0.3f + profit / 600f) : 0.25f);
         Game.Flash(color, 0.25f);
         Fx.Dust(this, new Vector2(640, 180), 2f);
-        float score = Gut.BuyScore(back, _purchase.Paid);
-        var gut = Add(UiKit.MakeLabel(Gut.Bought(back, _purchase.Paid, _rng), 16, Palette.Gradient(score), HorizontalAlignment.Center, outline: 4)
-            .Place(240, 188, 640, 20));
-        gut.ZIndex = 10;
-        var meter = Add(UiKit.MakeGutMeter(score, 212, Loc.T("fleeced"), Loc.T("a steal")).Place(334, 212, 452, 30));
-        meter.ZIndex = 10;
+        // Your gut on the deal (not on a crate's or the waterwheel's: those were never deals).
+        if (!crate && !wheel)
+        {
+            float score = Gut.BuyScore(back, _purchase.Paid);
+            var gut = Add(UiKit.MakeLabel(Gut.Bought(back, _purchase.Paid, _rng), 16, Palette.Gradient(score), HorizontalAlignment.Center, outline: 4)
+                .Place(240, 188, 640, 20));
+            gut.ZIndex = 10;
+            var meter = Add(UiKit.MakeGutMeter(score, 212, Loc.T("fleeced"), Loc.T("a steal")).Place(334, 212, 452, 30));
+            meter.ZIndex = 10;
+        }
         Game.Moment("08_results", 0.3);
 
-        if (profit > 0) FlyCoins(new Vector2(640, 142), Math.Clamp(profit / 4, 4, 28));
+        if (profit > 0 && !wheel) FlyCoins(new Vector2(640, 142), Math.Clamp(profit / 4, 4, 28));
         else Game.Hud.SetGold(State.Gold);
 
         if (perfect)
@@ -965,8 +971,9 @@ public partial class OpeningPhase : Phase
         Add(UiKit.MakeButton(visit.Beat == GameState.WaterwheelBeat ? Loc.T("Go on") : last ? Loc.T("Close up for the day") : Loc.T("Next customer"), Palette.Gold, 24, Next)
             .Place(980, 300, 280, 52));
         foreach (var (item, at, worth) in _landed)
-            if (State.DisplayOpen && !item.IsSong) AddKeepButton(item, at, worth);
-        foreach (var (item, at, worth) in _landed) AddDeliverButton(item, at, worth);
+            if (State.DisplayOpen && !item.IsSong && !wheel) AddKeepButton(item, at, worth);
+        foreach (var (item, at, worth) in _landed)
+            if (!wheel) AddDeliverButton(item, at, worth);
         // Everything's out: now the day's bonuses and a curio's luck can be told.
         ShowEffects();
         if (_purchase.Luck.Count > 0)
@@ -1069,7 +1076,7 @@ public partial class OpeningPhase : Phase
                 continue;
             }
             int pay = State.CommissionPay(c, worth);
-            button.Text = Narrow ? Loc.T($"+{pay}g") : c.Story ? Loc.T($"Shard +{pay}g") : c.Needed > 1 ? Loc.T($"{c.Delivered + 1}/{c.Needed}: +{pay}g") : Loc.T($"Deliver +{pay}g");
+            button.Text = Narrow ? Loc.T($"+{pay}g") : c.Needed > 1 ? Loc.T($"{c.Delivered + 1}/{c.Needed}: +{pay}g") : Loc.T($"Deliver +{pay}g");
             button.TooltipText = Loc.T($"{c.PatronName} wants {c.Phrase}: {pay}g, instead of {worth}g for selling it. A commission always pays more than selling.");
         }
     }

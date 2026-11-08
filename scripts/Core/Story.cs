@@ -117,7 +117,7 @@ public static class Story
                     lines.Add(state.FirstDayTaught
                         ? new(Bram, Loc.T($"There you are, {state.Kin.Name}. Another season at the crossroads. The Guild hasn't come sniffing yet."))
                         : Welcome(state));
-                    lines.Add(new(Self, Loc.T("The first morning. You remember the treasury. You remember it breathing. He doesn't."), "again"));
+                    lines.Add(new(Self, Loc.T("The first morning, again. I remember the treasury. I remember it breathing. He doesn't."), "again"));
                     break;
                 }
                 lines.Add(state.FirstDayTaught
@@ -139,8 +139,8 @@ public static class Story
                 }
                 lines.Add(new(Vane, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
                 lines.Add(new(Vane, Loc.T("\"Meanwhile the Guild's assessors will certify your work. Four marks of a master keywright earn the four pieces " +
-                                          "of the treasury key: a hidden thing read true, a stolen chest settled, a commission filled, an old lock " +
-                                          "picked without force.\"")));
+                                          "of the treasury key, each with a master's fee: a hidden thing read true, a stolen chest settled, a commission " +
+                                          "filled, an old lock picked without force.\"")));
                 lines.Add(new(Vane, Loc.T("\"Keep Bram's account paid, and bring the whole key to the treasury on the season's last night. His commission " +
                                           "needs a second keywright. When it's done, his account is closed, and he comes home.\""), "commission"));
                 break;
@@ -215,7 +215,7 @@ public static class Story
         {
             lines.Add(new(Vane, Loc.T("One more thing. The Guild's treasury has asked for Bram. An old consignment needs his attention.")));
             lines.Add(new(Bram, Loc.T("Mind the stall. I'll write every week.")));
-            lines.Add(new(Self, Loc.T("He won't write. You know where the carriage goes, and what waits at the end of the road.")));
+            lines.Add(new(Self, Loc.T("He won't write. I know where that carriage goes, and what waits at the end of the road.")));
         }
         else
         {
@@ -322,7 +322,7 @@ public static class Story
             new(Bram, Loc.T("And now look: you paid it. Put the kettle on. Tonight we're just two people in a shop.")),
         };
         if (state.SavedBramBefore)
-            lines.Add(new(Self, Loc.T("You've brought him home before. He doesn't remember that. You don't want to do it again: you want it to last.")));
+            lines.Add(new(Self, Loc.T("I've brought him home before. He doesn't remember it. I don't want to do it again: I want it to last.")));
         return lines;
     }
 
@@ -369,7 +369,10 @@ public static class Story
     public static List<Line> NextDay(GameState state) => new()
     {
         new(Bram, Loc.T("Morning. Tea's hot. Here: feel my hand. Warm as the pot.")),
-        new(Self, Loc.T("Day thirty-six. You've never seen the calendar say that.")),
+        // The season's last night was as far as any spring ever got; earlier, it's still a morning nothing turned back from.
+        state.Day >= Guild.Weeks * Guild.DaysPerWeek
+            ? new(Self, Loc.T("Day thirty-six. I've never seen the calendar say that."))
+            : new(Self, Loc.T("The morning after the treasury, and nothing's turned back.")),
         new(Bram, Loc.T("Old Haddon's in his yard, swearing at a lathe. Half the crossroads walked home last night, and nobody can say from where.")),
         new(TaleBook.Wynn, Loc.T("Keywright! The waterwheel's broken, and my father's old millwright's chest has the only tools that fit it. Open it for us?")),
     };
@@ -390,7 +393,7 @@ public static class Story
                 : state.Week <= 2 ? Loc.T("So soon? Well. We'll start again somewhere. A good ear is never broke for long.")
                 : Loc.T($"{state.Week} weeks. You did better than I ever did. We'll start again somewhere.")));
         if (state.Remembers && !state.CampaignDone)
-            lines.Add(new(Self, Loc.T("The last night will come without you, and the treasury will open with Bram. And then it'll be spring.")));
+            lines.Add(new(Self, Loc.T("The last night will come without me, and the treasury will open with Bram in it. And then it'll be spring.")));
         return lines;
     }
 
@@ -444,7 +447,7 @@ public static class Story
         TaleBook.Isaura => tonight ? Loc.T("House Vell is at the palace, and so, for once, is my brother.") : Loc.T("House Vell owes you. We pay our debts, Keywright."),
         TaleBook.Durgan => tonight ? Loc.T("Ironroot's here, Keywright, with hammers.") : Loc.T("A hundred dwarves, when you need them."),
         TaleBook.Jasper => tonight ? Loc.T("A hedge-wright at your back. Two Keywrights are harder to stop than one.") : Loc.T("When the Guild comes, send for the hedge-wright."),
-        TaleBook.Quire => tonight ? Loc.T("I have the Roll, and the Roll says whose the Crown Chest is. Yours.") : Loc.T("The Roll will say whose the Key is, when it matters."),
+        TaleBook.Quire => tonight ? Loc.T("I've brought the Roll. Whatever the Guild says tonight, the charter says otherwise.") : Loc.T("The Roll will say what the Crown pledged, when it matters."),
         TaleBook.Ilse => tonight ? Loc.T("Every lamp in the Arcanum is lit tonight. The Guild won't find a shadow to hide in.") : Loc.T("The Arcanum's apprentices will stand with you. Some of the archmages, too."),
         TaleBook.Hesper => tonight ? Loc.T("Two whole families are here, dear: the ones you married off. They'd like a word with the Guild.") : Loc.T("Two families owe you their wedding, dear. They'll come."),
         TaleBook.Garrick => tonight ? Loc.T("Brought the plough horses. The Guild's carriages can go round.") : Loc.T("Call, and the whole fair comes, horses and all."),
@@ -507,6 +510,7 @@ public static class Story
             Characters.Hesk => new(teller, Loc.T("And you, Hesk. A grocer from a drowned town, with the mark on your hand. What becomes of you is up to you.")),
             Characters.Rosa => new(teller, Loc.T("And you, Rosa. A Brightwater of Lantern Lane, with the mark on your hand. What becomes of you is up to you.")),
             Characters.Isolde => new(teller, Loc.T("And you, my lady. The last Marchmont, with the mark on your hand. What becomes of you is up to you.")),
+            _ when teller == Bram => new(teller, Loc.T("And you, Kit. My kin, with the mark on your hand. What becomes of you is up to you.")),
             _ => new(teller, Loc.T("And you. Bram's kin, with the mark on your hand. What becomes of you is up to you.")),
         });
         return lines;
@@ -515,16 +519,18 @@ public static class Story
     /// <summary>The season's end for the main story: Bram, Old Haddon, the Maw's eyes, a mimic; and, once you remember, what the last night means.</summary>
     static IEnumerable<Line> MainEnding(GameState state, string teller)
     {
-        if (state.CampaignDone)
+        // After the true ending a season is a new year: the main story's told.
+        if (state.CampaignDone) yield break;
+        // Bram tells it whenever he's home (Narrator), so his own lines are his.
+        if (state.TreasuryEnd == Campaign.Morning)
         {
-            if (state.TreasuryEnd == Campaign.Morning)
-                yield return new(teller, Loc.T("The treasury's shut for good, and everyone who came out of it is home. Nobody can say from where, and nobody asks."));
-            yield break;
+            yield return new(teller, Loc.T("The treasury's shut for good, and everyone who came out of it is home. Nobody can say from where, and nobody asks."));
+            yield return new(teller, Loc.T("And I'm home. Feel my hand: warm. You brought me out of that chest, and I still can't say it without shaking."));
         }
-        if (state.BramHome)
+        else if (state.BramHome)
             yield return new(teller, state.Flagged("bargained")
-                ? Loc.T("Bram came home on the Guild's word, warm and whole, and won't say how. He jumps at every tap on the counter.")
-                : Loc.T("Bram's home, and his hand is warm. You brought him out of a Guild crate, and he still can't say it without shaking."));
+                ? Loc.T("I came home on the Guild's word, warm and whole. I don't know what you gave them for it, and I jump at every tap on the counter.")
+                : Loc.T("I'm home, and my hand is warm. You brought me out of a Guild crate, and I still can't say it without shaking."));
         else if (state.DebtCleared)
             yield return new(teller, Loc.T("Bram's account is closed, every coin paid, and Bram never came home. The Guild says the treasury keeps long hours."));
         else
@@ -542,6 +548,6 @@ public static class Story
         if (state.Mimic != null)
             yield return new(teller, Loc.T("And there's still a mimic in the back room, asleep on the gold. Don't wake it."));
         if (state.Remembers && state.TreasuryEnd != Campaign.Morning)
-            yield return new(Self, Loc.T("And on the last night the Guild opened the treasury. You know what comes after: two taps, and one, and spring."));
+            yield return new(Self, Loc.T("And on the last night the Guild opened the treasury without me. I know what comes after: two taps, and one, and spring."));
     }
 }

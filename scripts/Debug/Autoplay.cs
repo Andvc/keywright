@@ -506,9 +506,19 @@ public partial class Autoplay : Node
                 return;
             }
         }
-        // A Guild crate (0.34): someone gilded inside. The careful player buys it when it can spare the price.
+        // A Guild crate (0.34): someone gilded inside. The careful player lets it sit still until it knocks, knocks back,
+        // and buys it when it can spare the price.
         if (visit.Chest.Crate != null)
         {
+            for (int i = 0; i < 40 && IsInstanceValid(counter) && !counter.CanKnockBack; i++) await Wait(0.25);
+            if (!IsInstanceValid(counter)) return;
+            if (counter.CanKnockBack)
+            {
+                GD.Print($"Autoplay: the Guild crate knocked; knocking back");
+                counter.KnockBack();
+                await Wait(3.2);
+                if (!IsInstanceValid(counter)) return;
+            }
             if (Strategy.BuyCrate(State, visit) && State.Gold >= visit.Ask)
             {
                 GD.Print($"Autoplay: bought the Guild crate ({visit.Chest.Crate}) for {visit.Ask}g");

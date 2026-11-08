@@ -56,11 +56,12 @@ public partial class MentorView : Control
         {
             AddChild(new Painter(p =>
             {
-                p.DrawRect(new Rect2(18, 14, 68, 80), Palette.Paper);
-                p.DrawRect(new Rect2(18, 14, 68, 80), Palette.Ink, false, 2);
-                for (int line = 0; line < 6; line++) p.DrawRect(new Rect2(26, 26 + line * 11, line % 3 == 2 ? 34 : 52, 2), Palette.Ink.Lightened(0.35f));
+                p.DrawRect(new Rect2(24, 10, 56, 60), Palette.Paper);
+                p.DrawRect(new Rect2(24, 10, 56, 60), Palette.Ink, false, 2);
+                for (int line = 0; line < 5; line++) p.DrawRect(new Rect2(31, 20 + line * 10, line % 3 == 2 ? 26 : 42, 2), Palette.Ink.Lightened(0.35f));
             }));
-            AddChild(UiKit.MakeLabel(Loc.T("BRAM'S NOTES"), 16, Palette.Gold, HorizontalAlignment.Center).Place(0, 98, 104, 20));
+            // Two lines if it needs them (a language's words for it can run long).
+            AddChild(UiKit.MakeLabel(Loc.T("BRAM'S NOTES"), 16, Palette.Gold, HorizontalAlignment.Center).Wrapped().Place(4, 74, 96, 44));
         }
         else
         {

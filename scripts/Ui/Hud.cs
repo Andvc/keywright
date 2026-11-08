@@ -127,7 +127,8 @@ public partial class Hud : CanvasLayer
     /// <summary>Shows the Guild's next due: how much, and how soon.</summary>
     public void SetDue(Core.GameState state)
     {
-        _dueChip.Visible = state.GuildIntroduced;
+        // The next day (0.34): the Guild's hold is broken, and its due is nobody's business.
+        _dueChip.Visible = state.GuildIntroduced && state.TreasuryEnd != Core.Campaign.Morning;
         int due = state.NextDue, days = state.DaysToNextDue;
         _due.Text = state.DebtCleared ? Loc.T($"Interest {due}g") : Loc.T($"Due {due}g");
         _due.AddThemeColorOverride("font_color", state.Gold >= due ? Palette.Gold : Palette.Warn);

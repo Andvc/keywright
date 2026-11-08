@@ -273,7 +273,7 @@ public partial class CollectionView : Node2D
     void BuildSongs()
     {
         int known = _c.SongsKnown;
-        _page.AddChild(UiKit.MakeLabel(Loc.T($"Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. The songbook holds {known} of the nine{((known == Heartsongs.All.Length ? Loc.T(": the Crown Chest can be sung whole.") : Loc.T(": with all nine, the Crown Chest's ending changes.")))}"),
+        _page.AddChild(UiKit.MakeLabel(Loc.T($"Nine things loved more than gold, sung into the Locking and hidden in chests among millions. Only a Keywright hears one sing; to anyone else it's worth nothing. Hover a card for its story. The songbook holds {known} of the nine."),
             16, Palette.Muted).Wrapped().Place(TableX, PanelY + 56, PanelW - 48, 60));
         const float cardW = 376, cardH = 128, gap = 8;
         for (int i = 0; i < Heartsongs.All.Length; i++)

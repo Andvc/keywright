@@ -457,7 +457,7 @@ public static class Strategy
             float hit = 1 - MathF.Pow(1 - p, Math.Min(n, c.Needed - c.Delivered));
             float sale = Categories.Nominal(c.Category, c.Quality) * state.SaleMultiplier(c.Category);
             float each = Math.Max(state.CommissionEach(c), sale * Patrons.Premium) - sale;
-            extra += hit * Math.Max(0, each) * (c.Story ? 1f : 0.5f);
+            extra += hit * Math.Max(0, each) * 0.5f;
         }
         return extra;
     }

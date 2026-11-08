@@ -108,7 +108,6 @@ public static class Hints
         ["pawn"] = Loc.T("Short? Pawn what's on display, or your curios, at the Guild's price. If even that isn't enough, the Guild seals the shop."),
         ["favour"] = Loc.T("Short, and folk owe you a favour? Call on them first: each brings an eighth of the due, once a season. That's what friends are for."),
         ["gold"] = Loc.T("Gold! A legend, that. They're made, not mended: no restorer or lucky charm will ever turn a thing gold. It went into that chest gold."),
-        ["hood"] = Loc.T("The Hooded Woman pays in shards of the Aldric Key. If you can't find what she wants this week, she'll ask again next week."),
 
         // Each move brings one new thing.
         ["tier2"] = Loc.T("Thornwick folk bring two new sounds. Potions slosh at a gentle shake, like coin. Spells (scrolls and " +
@@ -127,9 +126,9 @@ public static class Hints
                    "row to mark one enchanted."),
         ["counted"] = Loc.T("Two of a kind: each one adds its value. Sellers who don't count only price one."),
         ["glow"] = Loc.T("It glowed! That one's enchanted, and worth twice as much. Click the star on its row to mark it."),
-        // 0.33: the Lantern Market.
-        ["market"] = Loc.T("Nim's lantern is lit: the Lantern Market's open under the Barrow tonight. His people sell secrets, and buy what " +
-                           "nobody else will. Mind who you sell gold to down there."),
+        // 0.33: the Lantern Market (0.34: it sells a way in, a way out, a crate off a cart; never an answer).
+        ["market"] = Loc.T("Nim's lantern is lit: the Lantern Market's open under the Barrow tonight. His people sell what can't be bought " +
+                           "by daylight, and buy what nobody else will. Mind who you sell gold to down there."),
         // 0.33: a mimic.
         ["mimic"] = Loc.T("A mimic! It's eaten whatever was in there. The Arcanum's menagerie pays well for one. Or keep it: it eats gold, but no " +
                           "thief tries a door with a mimic behind it, and a well-fed one grows."),

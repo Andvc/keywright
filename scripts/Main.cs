@@ -116,7 +116,7 @@ public partial class Main : Node2D
                         Simulation.TermLevels(N(200));
                         break;
                     case "careers":
-                        Simulation.Careers(N(40), 30);
+                        Simulation.Careers(N(40), 30, int.TryParse(Arg(args, "--level"), out var careerLevel) ? careerLevel : null);
                         break;
                     case "builds":
                         Simulation.Builds(N(60));
@@ -543,16 +543,21 @@ public partial class Main : Node2D
     }
 
     /// <summary>A piece of the treasury key just earned: the Guild's courier, over the top bar.</summary>
-    void NotePiece(string piece)
+    void NotePiece(string piece, int fee)
     {
-        Toast(Loc.T($"{Campaign.PieceName(piece)} of the treasury key"), Loc.T($"{State.Pieces.Count} of {Campaign.Pieces.Length}, with the Guild's compliments"),
+        Hud.SetGold(State.Gold);
+        Toast(Loc.T($"{Campaign.PieceName(piece)} of the treasury key"), Loc.T($"{State.Pieces.Count} of {Campaign.Pieces.Length}, and a master's fee: +{fee}g"),
             Palette.Gold, Loc.T("Open the notebook's Inquiry page"), () => _phase?.ShowInquiry());
     }
+
+    /// <summary>The note over the top bar now showing, if any (the next waits for it to go).</summary>
+    CanvasLayer _toast;
 
     void Toast(string head, string text, Color color, string tooltip, System.Action click)
     {
         var layer = new CanvasLayer { Layer = 85, ProcessMode = ProcessModeEnum.Always };
         AddChild(layer);
+        _toast = layer;
         float w = Mathf.Clamp(Mathf.Max(UiKit.TextWidth(head), UiKit.TextWidth(text)) + 72, 360, 760);
         var panel = UiKit.MakePanel(color.Darkened(0.35f)).Place(640 - w / 2, 58, w, 62);
         panel.MouseFilter = Control.MouseFilterEnum.Stop;
@@ -930,7 +935,8 @@ public partial class Main : Node2D
             Cleared();
             return;
         }
-        // The first Guild night: the treasury's summons, and Bram goes (0.34).
+        // The first Guild night: the treasury's summons, and Bram goes (0.34), with whoever's note the Guild collects tonight.
+        State.GuildCollects();
         if (State.SummonsTonight)
         {
             State.Summon();
@@ -1194,16 +1200,11 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
-        // An Inquiry entry just noted, or a piece of the treasury key earned (0.34): a note over the top bar.
-        if (State?.NewEntry is Entry entry)
+        // An Inquiry entry just noted, or a piece of the treasury key earned (0.34): a note over the top bar, one at a time.
+        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not (TreasuryPhase or ScenePhase))
         {
-            State.NewEntry = null;
-            NoteEntry(entry);
-        }
-        else if (State?.NewPiece is string piece)
-        {
-            State.NewPiece = null;
-            NotePiece(piece);
+            if (State.NewPieces.TryDequeue(out var piece)) NotePiece(piece.Piece, piece.Fee);
+            else if (State.NewEntries.TryDequeue(out var entry)) NoteEntry(entry);
         }
         if (_camera == null) return;
         _trauma = Mathf.Max(0f, _trauma - (float)delta * 1.6f);

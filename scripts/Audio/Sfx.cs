@@ -153,6 +153,9 @@ public partial class Sfx : Node
             .Noise(0.9f, 1.15f, 0.55f, 2.4f, 0.035f, attack: 0.12f).Tone(0.88f, 0.05f, 210, 0.12f, 40));
         // A knock from inside a Guild crate (0.34): knuckles on wood, muffled by gold; and a tap on the counter (Bram's, two and one).
         Add("knock", new Synth(0.32f).Tone(0, 0.18f, 118, 0.85f, 26, freqEnd: 92).Noise(0, 0.05f, 0.55f, 60, 0.22f).Tone(0, 0.12f, 236, 0.25f, 34));
+        // An empty chest knocked about (0.34): the box itself rings, low and woody, like a drum.
+        Add("hollow", new Synth(0.8f).Tone(0, 0.7f, 174, 0.45f, 6.5f, freqEnd: 166).Tone(0, 0.5f, 349, 0.16f, 9).Tone(0, 0.35f, 523, 0.07f, 13)
+            .Noise(0, 0.05f, 0.35f, 70, 0.25f));
         Add("tap", new Synth(0.2f).Tone(0, 0.12f, 420, 0.5f, 42, freqEnd: 360).Noise(0, 0.03f, 0.45f, 90, 0.5f));
         Add("growl", new Synth(1.1f).Tone(0, 1.0f, 92, 0.5f, 2.2f, freqEnd: 70, attack: 0.05f).Noise(0, 0.9f, 0.5f, 3, 0.12f, attack: 0.04f)
             .Tone(0.05f, 0.9f, 139, 0.22f, 2.6f, freqEnd: 101, attack: 0.05f));

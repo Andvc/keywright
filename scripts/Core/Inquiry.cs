@@ -154,8 +154,8 @@ public partial class GameState
     /// <summary>The gilded are alive: you've heard one knock back (or Bram's tap).</summary>
     public bool KnowsAlive => Knows("alive") || Knows("tap");
 
-    /// <summary>An entry just noted, for the screen to show once (and clear).</summary>
-    public Entry NewEntry { get; set; }
+    /// <summary>Entries just noted, for the screen to show one at a time.</summary>
+    public Queue<Entry> NewEntries { get; } = new();
 
     /// <summary>Notes an entry. True the first time this season; it's news (shown) unless it was known already.</summary>
     public bool Note(string key)
@@ -163,7 +163,7 @@ public partial class GameState
         var entry = Inquiry.Get(key);
         if (entry == null || !Noted.Add(key)) return false;
         bool shown = Inquiry.Threads.FirstOrDefault(t => t.Key == entry.Thread)?.Shows(this) ?? false;
-        if (shown && (entry.Held || !KnownBefore.Contains(key))) NewEntry = entry;
+        if (shown && (entry.Held || !KnownBefore.Contains(key))) NewEntries.Enqueue(entry);
         return true;
     }
 

@@ -537,7 +537,7 @@ public sealed partial class GameState
             Commissions = Commissions.Select(c => new SavedCommission
             {
                 Patron = c.Patron, Kind = c.Kind, Category = c.Category, Quality = c.Quality, Needed = c.Needed, Delivered = c.Delivered,
-                Reward = c.Reward, Story = c.Story, Carried = c.Carried, Lapses = c.Lapses,
+                Reward = c.Reward, Carried = c.Carried, Lapses = c.Lapses,
             }).ToList(),
         };
         foreach (int count in _acquired) data.Acquired.Add(count);
@@ -586,10 +586,11 @@ public sealed partial class GameState
         // A save from before plans: next week's is made now, as it would have been this week.
         state.NextPlan ??= Events.Plan(state.Seed, state.Plan.Week + 1, state.Tier, state._eventsSeen, state.Favoured(Challenges.FairDays));
         state._snubbed.UnionWith(data.Snubbed);
-        state.Commissions.AddRange(data.Commissions.Select(c => new Commission
+        // (The Hooded Woman's asks for shards of the Aldric Key went with the Crown Chest in 0.34.)
+        state.Commissions.AddRange(data.Commissions.Where(c => !c.Story).Select(c => new Commission
         {
             Patron = c.Patron, Kind = c.Kind, Category = c.Category, Quality = c.Quality, Needed = c.Needed, Delivered = c.Delivered,
-            Reward = c.Reward, Story = c.Story, Carried = c.Carried, Lapses = c.Lapses,
+            Reward = c.Reward, Carried = c.Carried, Lapses = c.Lapses,
         }));
         state._owned.UnionWith(data.Owned);
         state.HintsSeen.UnionWith(data.HintsSeen);

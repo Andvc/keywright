@@ -803,11 +803,12 @@ public static partial class Simulation
     /// the player gets better, the runs don't. Prints, run by run, how they fare, and when they first clear the debt at
     /// each level.
     /// </summary>
-    public static void Careers(int careers, int runs)
+    /// <param name="atLevel">Play every run at this challenge level (for the story: --level=0), instead of the highest open.</param>
+    public static void Careers(int careers, int runs, int? atLevel = null)
     {
         var records = new List<(int Run, float Skill, bool Cleared, int Lost, int Level, int Final, int Score)>();
         var firstClear = new List<int>[Challenges.Max + 1];
-        // The run each career first knew all nine Heartsongs, and first opened the Crown Chest with them (the other ending).
+        // The run each career first knew all nine Heartsongs.
         var allNine = new List<int>();
         // The campaign (0.34): the run each career was first swallowed at the treasury, first brought Bram home, and reached the next day.
         var firstSwallowed = new List<int>();
@@ -822,7 +823,7 @@ public static partial class Simulation
             for (int r = 0; r < runs; r++)
             {
                 float skill = best - (best - start) * MathF.Exp(-pace * r);
-                int level = profile.MaxChallenge(Characters.Kit);
+                int level = atLevel ?? profile.MaxChallenge(Characters.Kit);
                 var (log, state) = Play(Learner(skill, Characters.Kit, level), 500000 + c * 1000 + r, Guild.Weeks * Guild.DaysPerWeek,
                     profile.Songs, curios: profile.OpenCurios, profile: profile);
                 profile.Runs++;
@@ -850,7 +851,7 @@ public static partial class Simulation
             }
         }
 
-        GD.Print($"\nCareers ({careers} players, {runs} runs each, Kit at the highest level open)");
+        GD.Print($"\nCareers ({careers} players, {runs} runs each, Kit {(atLevel is int l0 ? $"at level {l0}" : "at the highest level open")})");
         GD.Print("run   skill   cleared   lost (median wk)   level   score   final");
         foreach (var run in records.GroupBy(x => x.Run))
         {
@@ -888,12 +889,17 @@ public static partial class Simulation
         var rng = new Random(state.Seed);
         var log = new Log();
         for (int day = 0; day < days; day++)
-            if (!PlayDay(state, Styles[^1], rng, log)) return false;
+        {
+            if (!PlayDay(state, Styles[^1], rng, log, treasury: false)) return false;
+            // The treasury's the player's to see: stop on the night it's due.
+            if (state.TreasuryDue) return true;
+        }
         return true;
     }
 
     /// <summary>One day in this style: Nim, the customers, the evening's upgrades, the Guild. False if foreclosed.</summary>
-    static bool PlayDay(GameState state, Style style, Random rng, Log log)
+    /// <param name="treasury">Whether the careful player goes to the treasury when it's due (not when fast-forwarding a game).</param>
+    static bool PlayDay(GameState state, Style style, Random rng, Log log, bool treasury = true)
     {
         var rec = log.Rec;
         state.StartDay();
@@ -1122,7 +1128,7 @@ public static partial class Simulation
         if (state.BramComesHome) state.WelcomeBram();
         // The treasury (0.34): with the plan whole the final opening, the door closed; once you remember, the careful
         // player stays away; the first time, it swallows you.
-        if (state.TreasuryDue)
+        if (treasury && state.TreasuryDue)
         {
             if (state.PlanWhole) state.CloseTheDoor();
             else if (Strategy.StayAway(state)) state.StayAway();

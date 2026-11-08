@@ -8,8 +8,8 @@ namespace Keywright.Core;
 /// What a tale leaves behind (docs/stories.md, "What a tale leaves behind", 0.30): better terms from people you've helped
 /// (<see cref="Goodwill"/>), favours owed and called in on a short Guild night (<see cref="Owed"/>), papers for the case
 /// against the Guild (<see cref="Evidence"/>), Mother Tansy's loan, effects that last a while (a rival across the road,
-/// pickets at the door, a porter, market days: <see cref="Until"/>), nights away from the shop, a shard of the Key by
-/// another road, and the Maw's bargain. Every one is stated when it happens and holds every time; all of it is saved.
+/// pickets at the door, a porter, market days: <see cref="Until"/>) and nights away from the shop. Every one is stated
+/// when it happens and holds every time; all of it is saved.
 /// </summary>
 public sealed partial class GameState
 {

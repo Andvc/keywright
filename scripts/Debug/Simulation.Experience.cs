@@ -173,7 +173,6 @@ public static partial class Simulation
             }
             if (s.Today.Stash > 0) Meet("sys:stash", 0.3f, 0.3f, "Bram's stash");
             if (s.Commissions.Count > 0 && s.DayOfWeek == 1) Meet("sys:commissions", 1, 0.8f, "commissions");
-            if (s.Commissions.Any(c => c.Story)) Meet("story:hood", 0.5f, 1, "the Hooded Woman's asks");
         }
 
         public void Scene(GameState s, int lines)

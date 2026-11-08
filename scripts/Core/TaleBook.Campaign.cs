@@ -32,9 +32,9 @@ public static partial class TaleBook
     {
         new TaleDef
         {
-            Key = Story.Tale, Title = Loc.T("Bram's Commission"), Place = TalePlace.Always,
-            Blurb = Loc.T("The Guild's treasury summoned Bram for an old consignment, and his letters never come. Keep his account paid, earn the " +
-                          "treasury key's four pieces, and bring it to the treasury on the season's last night. The notebook's Inquiry page keeps what you find."),
+            Key = Story.Tale, Title = Loc.T("Bram's Account"), Place = TalePlace.Always,
+            Blurb = Loc.T("Bram's twenty-year account with the Gilded Guild falls due this season. Keep it paid, and mind what the Guild wants " +
+                          "with him: the notebook's Inquiry page keeps what you learn, and how the treasury key is coming."),
             Beats = new Beat[]
             {
                 // The second morning, every spring: Garrick's grey chest, the same chest with the same things in it.
@@ -145,10 +145,11 @@ public static partial class TaleBook
                     Brings = (s, rng) => CrateVisit(s, rng, Corvin, Campaign.Bram,
                         Loc.T("A Guild crate off the palace road, chalked with a name. The bargemen say you were asking. {price}, and I never saw it."), 1f),
                 },
-                // The first mimic, once you know what breathing means (more come on their own, from Thornwick).
+                // A mimic, every spring once you remember (it's the same spring: the crypt gives up the same warm chest), and
+                // more come on their own, from Thornwick.
                 new()
                 {
-                    Key = "breath.first", Who = Cadoc, Gap = 11, Tier = 2, If = s => s.Remembers && !s.Knows("mimic") && s.Mimic == null && !s.CampaignDone,
+                    Key = "breath.first", Who = Cadoc, Gap = 11, Tier = 2, If = s => s.Remembers && s.Mimic == null && !s.CampaignDone,
                     Brings = (s, rng) =>
                     {
                         var chest = new Chest(Array.Empty<Item>(), ShopTiers.Typical(s.Tier), lockTier: LockTiers.For(ShopTiers.Typical(s.Tier))) { Breathing = true, Tale = Story.Tale };

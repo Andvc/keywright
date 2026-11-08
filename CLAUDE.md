@@ -409,43 +409,55 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (one borrowed until drawn) and a line on the collection page. The Silent Choir (`TaleBook.Late.cs`) is the season-long
   quest whose prize is a Heartsong: three contest chests (`Visit.ContestFor` says what an exact read wins) and the
   Guild's price; one wrong read loses it. A season draws three of each place's tales and all three of the Emporium's.
-- The main story (0.33, `docs/narrative.md` has the truth under it, `docs/world.md` "The laws of the Locking"): the
-  Gilding (what's pledged to the Guild and never redeemed is the Maw's, and what he owns turns to gold), Bram's pledge
-  (his hand, for the baby Kit: the debt is the Guild calling it in), and the Crown's note (the King pledged the Crown
-  Chest; it falls due on the season's last night, so the vault only opens by then, `VaultDue`). Story mornings, Vane's
-  parting line each Guild night (`Story.Parting`, said by `DuesPhase` a moment after the due's settled), his offer for
-  Bram's pledge on the sixth (`PledgeOfferTonight`, the Maw's bargain by another door) and the endings (`Story.End`,
-  kept in `Profile.LastEnd`: a season after the Gate opened is the same spring again, `TurnedBack`). A `Line` can carry
-  a clue (`Line.Clue`), found when it's said (`ScenePhase`, or `Story.Heard` for skipped lines and the sim). **The
-  case** (`Case.cs`, the notebook's Case page): seven questions, each a sentence with blanks; a clue (seen, said, found,
-  heard) opens its question and gives words for its blanks (`Words`: the obvious guesses and what clues gave); Check
-  says how many are wrong, never which; worked out, a question pays off once (`Payoff`: standing, never a court paper,
-  which tipped the trial to a third of runs) and is a Truth in the profile: known in every later season
-  (`GameState.KnownBefore`, saved with the run; `Knows`): filled in on the page, Bram's glove off, its clues no longer
-  news, and whoever would have told you notices (`TaleBook.Knew`), but never paid off again, since every run starts the
-  same; the career's question (why the spring comes round) opens from the second season and keeps its clues across
-  seasons. Every word a blank needs must reach the player by a beat that always comes (the Gilding tale,
-  `TaleBook.Gilding.cs`, and the mornings) with other tales' clues as extra roads; the careful player works a question
-  out as soon as the clues allow (`Strategy.WorkOut`), and the sim reports how many a run works out. A new clue goes in
-  `Case.Clues` with text that matches the line or find that gives it. The visible clock (`Gilding.cs`, `Gilt.cs`):
-  `BramGilt` by the calendar (hand, forearm from week 3, throat from week 5; none once his pledge is redeemed),
-  `BramGloved` until he's told you or you've worked it out; a shader (assets/shaders/gilded.gdshader) and a mask per
-  picture of Bram (`tools/import_art.py --gild-only`, which also draws the statues); `Statues` for the shop view
-  (Haddon at the crossroads until the first Guild night's cart, Thornwick's three, whoever the Guild collected).
-  `Claims` (a tale's person owing the Guild, collected on that week's Guild night unless redeemed: Jory, from the
-  Widow's Debt) and `Gilded` are saved; `GuildCollects` runs as the Guild's night starts (`StartNight`).
-- Mimics and the Lantern Market (0.33). A mimic (`Mimics.cs`) is a chest that ate what was in it: from Thornwick, one
-  ordinary chest in 90 (`Mimics.OneIn`, its own dice after the seller's priced it, `Breathe`; about 2.4 a careful run;
-  one in 45 at a whole purse each was six a run and a ninth more clears), empty but for the mimic,
+- The main story (0.34, after the owner's narrative proposal; `docs/narrative.md` has the truth under it and what was
+  adopted, adapted and left out, `docs/world.md` "The laws of the Locking"). It's a campaign across seasons on the profile
+  (`Campaign.cs`, `Inquiry.cs`, `TaleBook.Campaign.cs`, `Story.cs`, `Phases/TreasuryPhase.cs`). **The first season**:
+  Bram minds the stall with you for a week and teaches; on the first Guild night Vane brings the treasury's summons
+  (`SummonsTonight`, `Summon`) and Bram goes, with Old Haddon if his note to the Guild wasn't paid (`Claims`,
+  `GuildCollects`, run once a night before the summons). From then on Bram speaks through his notes (`BramNotes`;
+  `MentorView`'s "Bram's notes", `Story.Narrator` is Bettany), and a line of his in a tale is yours while he's away. The
+  Guild's letter (week 2) sets the commission: keep his account paid and earn the treasury key's four pieces
+  (`Campaign.Pieces`: a hidden thing or five things read true, a stolen chest settled, a commission filled, an old lock
+  picked without force; `EarnPiece`, each with a master's fee, `Campaign.FeePurses`, which replaced the Hooded Woman's
+  shard commissions' pay). The night the account is paid with the key whole (`TreasuryDue`) the Guild's carriage takes
+  you to the treasury, whose great chest is the Maw: the first time it swallows you (`TreasuryMode.First`, `Swallow`),
+  and the year turns back (`Main.Rewind`: the season banked, the next starts at once with the same keywright and level).
+  **Later seasons** you remember (`Profile.Swallowed`, `GameState.Remembers`): the same spring comes round (Garrick's grey
+  chest on the second morning, `TaleBook.FirstChest`, recognised from `Profile.FirstChest`; the same letters), Vane
+  speaks for something that remembers too, and the investigation is the **Inquiry** (the notebook's Inquiry page):
+  threads (where is Bram, the breathing chest, the first morning, the plan), entries seen, said, tried, heard or found,
+  and leads while they're open; what's known carries over (`Profile.Known`, `KnownBefore`), what's held (a copy of the
+  register, Bram's tuning fork) doesn't. Discoveries open actions: Hollis and the carts (follow one to the weighhouse),
+  Guild crates that knock (`Chest.Crate`: knock back at the counter, `CounterPhase.KnockBack`; bought, someone gilded in
+  the back room, `TakeIn`), a full mimic eats the gold off them (`Ungild`) and a redeemed note brings them home
+  (`RedeemGuest`, Bram's is his account: the debt), Mara (the last of the Keyhold) and the seal's clause, the charter from
+  Quire or King Aldo, the Lantern Market's passage and papers. Vane bribes on the fourth Guild night and bargains for
+  Bram on the sixth (`BribeTonight`, `BargainTonight`). Once you remember you can stay away from the treasury
+  (`TreasuryMode.Again`); with the plan whole (`PlanWhole`: find them and know them, free them, a way out, the door
+  opened without giving it away: `Inquiry.PlanLines`) it's the final opening (`TreasuryMode.Final`): hold still, knock
+  back, turn the key, they come out, and the Maw's last offer (`Story.FinalOffer`: leave the door to it and the year
+  turns anyway; close it and it's **the next day**, `BeginNextDay`: Bram's tea, Wynn's waterwheel chest, and the
+  profile's `Finished`). After that a season is a new year (`CampaignDone`: no mimics, no summons). Proposal ideas left
+  out, and why, are in `docs/narrative.md`. A `Line` can note an Inquiry entry (`Line.Clue`, noted when it's said by
+  `ScenePhase`, or `Story.Heard`); a new entry goes in `Inquiry.Entries` with text that matches what gives it, and a new
+  beat in `TaleBook.Campaign.cs` with its `If` against the campaign's state. The careful player's campaign is in
+  `Strategy` (`TakeBribe`, `TakeBargain`, `AtMarket`, `KeepMimic`, `TendBackRoom`, `BuyCrate`, `StayAway`), and the sim
+  reports how a first season goes (`--sim=quick`) and the campaign across careers (`--sim=careers [--level=0]`: the run
+  first swallowed, Bram first brought home, the next day).
+- Mimics and the Lantern Market (0.33; 0.34). A mimic (`Mimics.cs`) is a chest that ate what was in it: only once you
+  remember the treasury (0.34), from Thornwick, one ordinary chest in 90 (`Mimics.OneIn`, its own dice after the seller's
+  priced it, `Breathe`), and Brother Cadoc's warm chest from the crypt every remembered spring; empty but for the mimic,
   priced for what the seller notices (nothing, unless they price by colour). It breathes while it sits still (the
-  counter's `Breathe`: a sound, a word and the lid lifting; held when shaken), the only sound a still chest makes;
-  `Hearing.HeardBreath`, and the careful player's worth adds what the menagerie pays. Opened, it's sold to the Arcanum's
-  menagerie (0.6 of a working purse) or kept (one at a time): it eats 0.15 of a purse each Guild night (or leaves), keeps
-  the Lockless from robbing you, and after two meals it's grown, wakes one of the gilded, and sells for 1.6 purses.
-  `--mimics=N` makes one chest in N breathe. The Lantern Market (`LanternMarket.cs`) is at Nim's table on the third night
-  of each week from Thornwick (`MarketTonight`): the whisperer's secret (one a night, a clue that gives a word a
-  question still needs, `Whisper`), the Maw's buyers (gold things off the shelf at half as much again, each an eye for
-  him, `EyesSold`, read back at the season's end), and the menagerie; `Strategy.AtMarket` is the careful player there.
+  counter's `Breathe`: a sound, a word and the lid lifting; held when shaken), and an empty chest rings like a drum when
+  shaken firmly (`CounterPhase.Resonate`: a mimic or a crate never does), `Hearing.HeardBreath`. Opened, it's sold to
+  the Arcanum's menagerie (0.6 of a working purse), kept in the back room (it eats 0.15 of a purse each Guild night, keeps
+  the Lockless from robbing you) or kept by the menagerie for a fee; fed twice it's full (`MimicFull`) and eats the gold
+  off one of the gilded. `--mimics=N` makes one chest in N breathe. The Lantern Market (`LanternMarket.cs`) is at Nim's
+  table on the third night of each week from Thornwick (`MarketTonight`): once you remember it sells passage and papers,
+  never an answer (a night at the weighhouse with a look at its register, the Wet Hen's bargemen for the treasury's last
+  night, a crate diverted off the palace road), the Maw's buyers take gold things off the shelf at half as much again
+  (each an eye for him, `EyesSold`, read back at the season's end), and the menagerie; `Strategy.AtMarket` is the careful
+  player there.
 - What a tale leaves behind (0.30; `docs/stories.md`, "What a tale leaves behind"; `Consequences.cs`): who comes (and
   who never does again: `Goes`, and their tools with them), officials who come only while their masters count you a
   friend (`SellerDef.Comes`: Bailiff Marrow, a third of his seized chests cold; Quartermaster Brandt, by the pound),
@@ -455,9 +467,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Evidence`, `TaleBook.Paper`: four put the Guild on trial, half its tithe, `OnTrial`), contests (`Visit.Contest`: a
   gift chest whose perfect read wins `Prize`), Mother Tansy's loan (`Borrow`, collected the next week's first morning,
   `CollectLoan`), effects that last a while (`Until`, `While`: a rival, pickets, a haunting, a crowd; `TaleCustomers`),
-  nights away (`GoOutTonight`: no Nim), a shard of the Key by another road (`GiveShard`), and the Maw's bargain
-  (`TakeMawBargain`, `GateOpens`: the debt paid for the Key; not a clear, none of the debt's points, THE GATE OPENS).
-  The ending reads them: week 6's gathering and the Crown Chest night name your allies (`Story.Allies`), and after the
+  and nights away (`GoOutTonight`: no Nim).
+  The ending reads them: week 6's gathering and the treasury night name your allies (`Story.Allies`), and after the
   run's last scene, won or lost, the season's end tells what became of everyone (`Story.SeasonEnd`, each tale's
   `TaleDef.Ending`, shown once a run by `Main.EndRun`). 0.30's tales are in `TaleBook.Brindle.cs`, `.Thornwick.cs`,
   `.Crownhold.cs`, `.Emporium.cs` (built by methods, so the partial files' order never matters) and their endings with

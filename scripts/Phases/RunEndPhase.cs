@@ -79,7 +79,14 @@ public partial class RunEndPhase : Phase
         BuildScore(color);
         Add(UiKit.MakeLabel(News(), 16, Palette.Good, HorizontalAlignment.Center, outline: 4).Place(0, 532, 1280, 20));
 
-        if (_cleared)
+        // Once the treasury's been opened the season's story is over: no trading on into the Guild's interest.
+        if (_cleared && State.TreasuryDone)
+        {
+            Add(UiKit.MakeButton(Loc.T("Retire"), Palette.Gold, 24, Retire).Place(495, 580, 290, 64)).TooltipText = Loc.T("Hang up your apron: back to the title.");
+            Sfx.Play("fanfare", 1f, -2);
+            Fx.Confetti(this, new Vector2(640, 120), 160);
+        }
+        else if (_cleared)
         {
             Add(UiKit.MakeButton(Loc.T("Keep trading"), Palette.Gold, 24, KeepTrading).Place(340, 580, 290, 64)).TooltipText =
                 State.Week < Guild.Weeks
@@ -134,7 +141,7 @@ public partial class RunEndPhase : Phase
         if (curios.Count > 0)
             news.Add(curios.Count <= 3 ? Loc.T($"Nim has new curios for your next run: {Words.List(curios.Select(c => c.Name))}.")
                 : Loc.T($"Nim has {curios.Count} new curios for your next run, the {curios[0].Name} among them."));
-        if (_cleared && State.Week <= Guild.Weeks) news.Add(Loc.T("Keep trading and every week you keep the Guild paid adds to the score."));
+        if (_cleared && !State.TreasuryDone && State.Week <= Guild.Weeks) news.Add(Loc.T("Keep trading and every week you keep the Guild paid adds to the score."));
         if (news.Count > 0) return string.Join("  ", news);
         return profile is { Runs: > 0 }
             ? Loc.T($"All runs: {profile.Runs} started, {profile.Cleared} debts cleared, best week {profile.BestWeek}.")
@@ -143,7 +150,7 @@ public partial class RunEndPhase : Phase
 
     public void KeepTrading()
     {
-        if (!_cleared) return;
+        if (!_cleared || State.TreasuryDone) return;
         Sfx.Play("bid");
         Game.StartDay();
     }

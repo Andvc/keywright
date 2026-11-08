@@ -17,12 +17,11 @@ public enum CommissionKind
 /// <summary>
 /// Someone wants something, and will pay well over its price for it: a regular's commission, good until the Guild's
 /// next visit. Anything that comes out of a chest you open can go to it instead of being sold, and each thing pays as
-/// it's handed over, always more than it would sell for (<see cref="GameState.CommissionPay"/>). The Hooded Woman's pay
-/// in shards of the Aldric Key too, and she asks again the next week if you miss one.
+/// it's handed over, always more than it would sell for (<see cref="GameState.CommissionPay"/>).
 /// </summary>
 public sealed class Commission
 {
-    /// <summary>Who wants it: a seller's key, or <see cref="Story.Hood"/>.</summary>
+    /// <summary>Who wants it: a seller's key, or the crier's.</summary>
     public string Patron { get; init; }
 
     public CommissionKind Kind { get; init; }
@@ -34,9 +33,6 @@ public sealed class Commission
     /// <summary>What it pays, before any curio.</summary>
     public int Reward { get; init; }
 
-    /// <summary>The Hooded Woman's: it pays a shard of the Aldric Key as well.</summary>
-    public bool Story { get; init; }
-
     /// <summary>Kept open another week by the Clockwork Lark (it lapses at the next Guild's night).</summary>
     public bool Carried { get; set; }
 
@@ -45,11 +41,11 @@ public sealed class Commission
 
     public bool Done => Delivered >= Needed;
 
-    public string PatronName => Story ? Core.Story.HoodName : Patron == Events.Crier ? Loc.T("Lord Harrow's crier")
+    public string PatronName => Patron == Events.Crier ? Loc.T("Lord Harrow's crier")
         : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Name ?? Patron;
 
     /// <summary>Who wants it, as the commission board lists them.</summary>
-    public string Who => Story ? Loc.T("The Hooded Woman") : Patron == Events.Crier ? Loc.T("Lord Harrow (today)")
+    public string Who => Patron == Events.Crier ? Loc.T("Lord Harrow (today)")
         : Sellers.All.FirstOrDefault(s => s.Key == Patron)?.Who ?? Patron;
 
     /// <summary>Whether this thing would do. Fakes and broken things never do.</summary>
@@ -159,27 +155,5 @@ public static class Patrons
         int needed = tier >= 3 ? 3 : 2;
         return new Commission { Patron = patron, Kind = CommissionKind.Lot, Category = kind, Quality = quality, Needed = needed,
             Reward = Money.Round(LotReward * needed * Categories.Nominal(kind, quality)) };
-    }
-
-    /// <summary>
-    /// The Hooded Woman's request for her next shard of the Aldric Key: spells first (the Keyhold's records of where
-    /// it hid them), then a gem (the Key was set with them), then something enchanted, a step better than the regulars ask for; something simpler if your shop is small.
-    /// </summary>
-    public static Commission Hood(int piece, int tier)
-    {
-        var (kind, enchanted) = piece switch
-        {
-            1 => (tier >= 2 ? Category.Scrolls : Category.Coins, false),
-            2 => (tier >= 3 ? Category.Gems : Category.Coins, false),
-            _ => (Category.Arms, tier >= 3),
-        };
-        // A step better than the regulars ask, but never legendary: with surprises as rare as they are, that's luck, not an eye.
-        var quality = (Rarity)Math.Min((int)Rarity.Epic, (int)Asked(tier) + 1);
-        int worth = Categories.Nominal(kind, quality);
-        return new Commission
-        {
-            Patron = Story.Hood, Story = true, Kind = enchanted ? CommissionKind.Enchanted : CommissionKind.Piece, Category = kind,
-            Quality = enchanted ? Rarity.Common : quality, Reward = Money.Round(2 * worth),
-        };
     }
 }

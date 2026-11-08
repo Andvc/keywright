@@ -24,6 +24,12 @@ public static class Campaign
     /// <summary>Old Haddon's note to the Guild (his lathe): what it takes to redeem him, at any shop.</summary>
     public const int HaddonNote = 40;
 
+    /// <summary>
+    /// The master's fee the Guild pays with each piece of the key, in working purses (it wants the key whole: what the
+    /// Hooded Woman's shard commissions paid until 0.34).
+    /// </summary>
+    public const float FeePurses = 0.5f;
+
     /// <summary>Two friends who'll stand with you make a way out for the freed (or the Wet Hen, hired).</summary>
     public const int AlliesNeeded = 2;
 
@@ -81,8 +87,8 @@ public partial class GameState
 
     public bool KeyWhole => Pieces.Count >= Campaign.Pieces.Length;
 
-    /// <summary>A piece just earned, for the screen to show once (and clear).</summary>
-    public string NewPiece { get; set; }
+    /// <summary>Pieces just earned and the fee each came with, for the screen to show one at a time.</summary>
+    public Queue<(string Piece, int Fee)> NewPieces { get; } = new();
 
     /// <summary>Bram has gone with Vane to the treasury (the first Guild night).</summary>
     public bool BramAway { get; private set; }
@@ -118,12 +124,17 @@ public partial class GameState
 
     // ---- The key ----
 
-    /// <summary>A piece of the treasury key, for a mark of the trade. The Guild's assessors send it (a note on the screen). True the first time.</summary>
+    /// <summary>
+    /// A piece of the treasury key, for a mark of the trade: the Guild's assessors send it, with a master's fee (a note on
+    /// the screen). True the first time.
+    /// </summary>
     public bool EarnPiece(string piece)
     {
         if (CampaignDone || TreasuryDone || !Campaign.Pieces.Contains(piece) || !Pieces.Add(piece)) return false;
-        NewPiece = piece;
-        Log(Story.Tale, Loc.T($"{Campaign.PieceName(piece)} of the treasury key came by Guild courier, with Mister Vane's compliments."));
+        int fee = Purses(Campaign.FeePurses);
+        TaleGold(fee);
+        NewPieces.Enqueue((piece, fee));
+        Log(Story.Tale, Loc.T($"{Campaign.PieceName(piece)} of the treasury key came by Guild courier, with a master's fee of {fee}g and Mister Vane's compliments."));
         return true;
     }
 
@@ -168,9 +179,11 @@ public partial class GameState
     /// The Guild's night (as the night starts, paid or not): a kept mimic eats, every claim fallen due is taken, and anyone
     /// freed whose note still stands is taken again.
     /// </summary>
-    void GuildCollects()
+    public void GuildCollects()
     {
-        if (!DuesTonight) return;
+        // Once a night: before the summons, if that's tonight, or as the night starts.
+        if (!DuesTonight || _collectedOn == Day) return;
+        _collectedOn = Day;
         FeedMimic();
         foreach (var (person, week) in Claims.Where(c => c.Value <= Week).OrderBy(c => c.Key, StringComparer.Ordinal).ToList())
         {
@@ -190,6 +203,8 @@ public partial class GameState
             Log(Story.Tale, Loc.T($"The Guild's men came to the back door for {Story.Name(person)}. Their note still stood, and they took them back."));
         }
     }
+
+    int _collectedOn;
 
     /// <summary>Whether a guest's note is settled: Bram's is his account (the debt), Haddon's his own.</summary>
     public bool Resolved(string person) => person == Campaign.Bram ? DebtCleared : !Claims.ContainsKey(person) && Flagged($"{person}.redeemed");
@@ -316,7 +331,8 @@ public partial class GameState
     public void CloseTheDoor()
     {
         TreasuryEnd = Campaign.Morning;
-        foreach (string person in Guests.Keys.ToList()) Rescued.Add(person);
+        // Everyone the Guild took this season was in the chest, and came out with the rest.
+        foreach (string person in Guests.Keys.Concat(Taken.Keys).ToList()) Rescued.Add(person);
         Guests.Clear();
         Rescued.Add(Campaign.Bram);
         BramHome = true;
@@ -364,6 +380,7 @@ public partial class GameState
         foreach (string key in new[] { "swallowed", "again", "weighhouse", "register", "alive", "tap", "seal", "charter", "mimic", "full" }) Note(key);
         Mimic = Mimics.GrowsAfter;
         Flags.Add("barge.hired");
+        NewEntries.Clear();
         Guests[Campaign.Bram] = true;
         Rescued.Add(Campaign.Bram);
         Guests.Remove(Campaign.Bram);
