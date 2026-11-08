@@ -22,6 +22,8 @@ public enum TreasuryResult { Swallowed, Stayed, DoorLeft, DoorClosed }
 /// </summary>
 public partial class TreasuryPhase : Phase
 {
+    public override bool HoldsNotes => true;
+
     readonly TreasuryMode _mode;
     ChestView _chest;
     Label _caption, _prompt, _aside;

@@ -80,6 +80,9 @@ public partial class CounterPhase : Phase
     public bool Concluded => !_visit.Deciding;
     public bool Busy => _busy || _notebook != null || _sellConfirm != null;
 
+    /// <summary>An outcome's panel is up (the Wardens, a walkout...): the note waits for the next customer.</summary>
+    public override bool HoldsNotes => _busy;
+
     /// <summary>A lesson is under way.</summary>
     public bool InLesson => _steps != null;
 
@@ -1289,7 +1292,14 @@ public partial class CounterPhase : Phase
     /// </summary>
     void MarkAnswers()
     {
-        if (!_visit.Chest.Stolen || Concluded) return;
+        if (Concluded) return;
+        if (!_visit.Chest.Stolen)
+        {
+            // While a chest is wanted (Saint Ide's reliquary, the disputed dowry), the mark staying warm is worth saying
+            // too, or you can't tell you've checked (0.34's playtest).
+            if (State.Notices.Any(n => n.Key is "reliquary" or "dowry")) Note(Loc.T("Your mark stays warm: this chest is theirs to sell.")); // loc: keys
+            return;
+        }
         Note(Loc.T("Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."));
         Sfx.Play("strain", 1.6f, -10);
         Game.Flash(new Color(0.55f, 0.75f, 1f), 0.25f, 0.4f);

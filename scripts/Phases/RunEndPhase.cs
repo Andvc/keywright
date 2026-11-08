@@ -12,6 +12,8 @@ namespace Keywright.Phases;
 /// </summary>
 public partial class RunEndPhase : Phase
 {
+    public override bool HoldsNotes => true;
+
     readonly bool _cleared;
 
     public RunEndPhase(bool cleared)

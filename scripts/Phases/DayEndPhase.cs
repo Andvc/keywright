@@ -199,7 +199,13 @@ public partial class DayEndPhase : Phase
             var color = c.Done ? Palette.Good : Palette.Text;
             string patron = c.Who;
             string reward = c.Done ? Loc.T("DONE") : c.Needed > 1 ? Loc.T($"{State.CommissionEach(c)}g each") : Money.Short(State.CommissionEach(c));
-            board.AddChild(UiKit.MakeLabel(patron, 16, color).Place(14, y, 220, 20));
+            // Clipped short of the reward on the right (a long name in another language ends in "...", whole on hover).
+            var who = UiKit.MakeLabel(patron, 16, color).Place(14, y, 340 - UiKit.TextWidth(reward), 20);
+            who.ClipText = true;
+            who.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            who.TooltipText = patron;
+            who.MouseFilter = Control.MouseFilterEnum.Pass;
+            board.AddChild(who);
             board.AddChild(UiKit.MakeLabel(reward, 16, c.Done ? Palette.Good : Palette.Gold, HorizontalAlignment.Right).Place(180, y, 174, 20));
             board.AddChild(UiKit.MakeLabel($"{c.What} {c.Progress}", 16, Palette.Muted).Place(14, y + 18, SideW - 28, 20));
         }

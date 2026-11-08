@@ -8,6 +8,12 @@ namespace Keywright.Phases;
 /// <summary>Base for one screen of the loop (auction, lockpick, opening). Main swaps them in and out.</summary>
 public partial class Phase : Node2D
 {
+    /// <summary>
+    /// Whether the notes over the top bar (an Inquiry entry, a key piece) should wait: a scene, the treasury, the run's
+    /// end, or a panel of the phase's own up there right now (0.34).
+    /// </summary>
+    public virtual bool HoldsNotes => false;
+
     protected static Main Game => Main.Instance;
     protected static GameState State => Main.Instance.State;
     protected static Sfx Sfx => Main.Instance.Sfx;

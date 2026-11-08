@@ -14,6 +14,8 @@ namespace Keywright.Phases;
 /// </summary>
 public partial class ScenePhase : Phase
 {
+    public override bool HoldsNotes => true;
+
     const int FaceScale = 4;
     static readonly Vector2 Left = new(250, 688), Right = new(1030, 688);
 
