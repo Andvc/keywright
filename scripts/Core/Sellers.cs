@@ -360,9 +360,9 @@ public static class Sellers
                 ("attic", new[] { Loc.T("It was under Gran's bed. She says I can sell it if it buys Mum's soap. What's it worth?"),
                                   Loc.T("Found it in the hayloft, behind the cat. The cat didn't want it. How much?") })),
             Habit = Loc.T("A washerwoman's boy of nine who fishes chests out of the millpond and never shakes them: he has no idea what's in one, and " +
-                    "asks you to name a price. A few coins will do, but a millpond chest is sometimes empty."),
+                    "asks you to name a price, twice at most. A few coins will do (six is plenty), but a millpond chest is sometimes empty."),
             Accepts = new[] { Loc.T("Yes! Mum can have new soap!"), Loc.T("Really? Thanks, mister!") },
-            Refusals = new[] { Loc.T("Is that all? Um... a bit more?"), Loc.T("Mum says don't take the first offer.") },
+            Refusals = new[] { Loc.T("Is that all? Um... a bit more?"), Loc.T("Mum says it's worth more than that.") },
             Leaves = new[] { Loc.T("Aww. I'll ask at the Crossed Keys."), Loc.T("Never mind. Gran will have it back.") },
             Passes = new[] { Loc.T("Aww. Okay."), Loc.T("I'll throw it back, then.") },
             Startled = new[] { Loc.T("Hey! That's MY chest!"), Loc.T("Whoa! Do it again!") },

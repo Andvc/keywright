@@ -345,9 +345,6 @@ public partial class OpeningPhase : Phase
     Control _mimicPanel;
     bool? _mimicKeep;
 
-    /// <summary>What a mimic you kept would have fetched: the verdict counts it as what the chest brought back.</summary>
-    int _mimicKept;
-
     /// <summary>The mimic's out and waiting: sell it or keep it (the bot answers as the careful player would).</summary>
     public bool MimicChoiceOpen => _mimicPanel != null && IsInstanceValid(_mimicPanel);
 
@@ -407,7 +404,6 @@ public partial class OpeningPhase : Phase
         if (_mimicKeep == true)
         {
             State.KeepMimic();
-            _mimicKept = price;
             FloatText(Loc.T("Into the back room"), SeamPos + new Vector2(0, -120), Palette.Magic, 24);
             Sfx.Play("growl", 1.3f, -6);
         }
@@ -880,6 +876,8 @@ public partial class OpeningPhase : Phase
     {
         _step = Step.Done;
         var visit = _purchase.Visit;
+        bool crate = _purchase.Chest.Crate != null, kept = _mimicKeep == true;
+        // (A Guild crate or a mimic was never a read, Appraisal.Check: no perfect read for an empty slip.)
         bool perfect = _report.Perfect;
         // The seller's terms, settled: a wager won, or the King's game.
         int settle = State.Settle(_purchase, perfect, _worth);
@@ -892,7 +890,7 @@ public partial class OpeningPhase : Phase
         int insured = State.Insure(_purchase, held);
         // Everything the chest brought back: what's inside as it sells here, a perfect read's fees, a rebate, the bond.
         // The stamp and your gut both judge that against what you paid, so they never disagree.
-        int back = _worth + _purchase.Rebate + insured + _mimicKept;
+        int back = _worth + _purchase.Rebate + insured;
         int profit = back - _purchase.Paid;
         // The next day's chest (0.34): Wynn's father's tools go back to the mill, for the waterwheel.
         bool wheel = visit.Beat == GameState.WaterwheelBeat;
@@ -905,12 +903,14 @@ public partial class OpeningPhase : Phase
             ? Loc.T($" {Campaign.PieceName(key)} of the treasury key for that read, and a master's fee of {pieceFee}g.") : "";
         if (perfect) State.Today.PerfectReads++;
 
-        bool crate = _purchase.Chest.Crate != null;
-        var color = crate ? Palette.Magic : wheel || profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
-        string text = crate ? Loc.T("SOMEONE'S IN THE BACK ROOM") : wheel ? Loc.T("FOR THE WATERWHEEL") : profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
+        var color = crate || kept ? Palette.Magic : wheel || profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
+        string text = crate ? Loc.T("SOMEONE'S IN THE BACK ROOM") : kept ? Loc.T("A MIMIC IN THE BACK ROOM") : wheel ? Loc.T("FOR THE WATERWHEEL")
+            : profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
         var stamp = Add(UiKit.MakePanel(color).Place(320, 104, 480, 76));
         stamp.ZIndex = 10;
-        stamp.AddChild(UiKit.MakeLabel(text, 40, color, HorizontalAlignment.Center, outline: 6).Place(0, 14, 480, 50));
+        // A long stamp (someone in the back room, and any language's long words) at a size that fits the plate.
+        int stampSize = UiKit.TextWidth(text, 40) <= 456 ? 40 : UiKit.TextWidth(text, 32) <= 456 ? 32 : 24;
+        stamp.AddChild(UiKit.MakeLabel(text, stampSize, color, HorizontalAlignment.Center, outline: 6).Place(0, 14 + (40 - stampSize) / 2, 480, 50));
         stamp.PivotOffset = new Vector2(240, 38);
         stamp.Rotation = -0.06f;
         stamp.Scale = Vector2.One * 3f;
@@ -925,8 +925,8 @@ public partial class OpeningPhase : Phase
         Game.Shake(wheel ? 0.3f : profit > 0 ? Mathf.Min(0.6f, 0.3f + profit / 600f) : 0.25f);
         Game.Flash(color, 0.25f);
         Fx.Dust(this, new Vector2(640, 180), 2f);
-        // Your gut on the deal (not on a crate's or the waterwheel's: those were never deals).
-        if (!crate && !wheel)
+        // Your gut on the deal (not on a crate's, a mimic kept's or the waterwheel's: those were never deals for gold).
+        if (!crate && !kept && !wheel)
         {
             float score = Gut.BuyScore(back, _purchase.Paid);
             var gut = Add(UiKit.MakeLabel(Gut.Bought(back, _purchase.Paid, _rng), 16, Palette.Gradient(score), HorizontalAlignment.Center, outline: 4)
@@ -936,8 +936,9 @@ public partial class OpeningPhase : Phase
             meter.ZIndex = 10;
         }
         Game.Moment("08_results", 0.3);
+        if (crate || kept) Game.Moment(crate ? "08_results_crate" : "08_results_mimic", 0.6);
 
-        if (profit > 0 && !wheel) FlyCoins(new Vector2(640, 142), Math.Clamp(profit / 4, 4, 28));
+        if (profit > 0 && !wheel && !kept) FlyCoins(new Vector2(640, 142), Math.Clamp(profit / 4, 4, 28));
         else Game.Hud.SetGold(State.Gold);
 
         if (perfect)
@@ -953,7 +954,8 @@ public partial class OpeningPhase : Phase
             Fx.Burst(this, new Vector2(560, 210), Palette.Gold, 70, 360f);
         }
 
-        string grade = _purchase.Grade switch
+        // (How the lock was picked means nothing to a crate's guest or a mimic: there's nothing of value to scratch.)
+        string grade = crate || _purchase.Chest.Breathing ? "" : _purchase.Grade switch
         {
             PickGrade.Masterful => Loc.T(" Masterful pick: everything +25%."),
             PickGrade.Forced => Loc.T(" Forced open: everything -10%."),
@@ -965,7 +967,7 @@ public partial class OpeningPhase : Phase
         if (_purchase.Rebate > 0) grade += Loc.T($" Haggler's Purse: {_purchase.Rebate}g back.");
         if (insured > 0) grade += Loc.T($" Underwriter's Bond: {insured}g back.");
         // Up to four lines, above the chest (a long story ends in "...": the whole of it on hover).
-        var told = UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 246, 800, 96);
+        var told = UiKit.MakeLabel(visit.Explain() + grade, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(160, 244, 800, 104);
         told.MaxLinesVisible = 4;
         told.ClipText = true;
         told.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
@@ -1027,7 +1029,7 @@ public partial class OpeningPhase : Phase
     {
         if (!item.Displayable || _purchase.IsClaimed(item)) return;
         var button = UiKit.MakeButton("", Palette.Magic.Darkened(0.3f), 16)
-            .Place(at.X - ButtonW / 2, 644, ButtonW, 34);
+            .Place(at.X - ButtonW / 2, 642, ButtonW, 32);
         button.Pressed += () =>
         {
             if (State.DisplayFull) ShowSwap(item, worth, at);
@@ -1056,7 +1058,7 @@ public partial class OpeningPhase : Phase
     {
         if (State.WantedBy(item) == null || _purchase.IsClaimed(item)) return;
         // Under the keep button, or in its place when there is no shelf yet (so it never sits at the screen's very edge).
-        var button = UiKit.MakeButton("", Palette.Good.Darkened(0.35f), 16).Place(at.X - ButtonW / 2, State.DisplayOpen ? 682 : 644, ButtonW, 32);
+        var button = UiKit.MakeButton("", Palette.Good.Darkened(0.35f), 16).Place(at.X - ButtonW / 2, State.DisplayOpen ? 678 : 642, ButtonW, 32);
         button.Pressed += () => Deliver(item);
         _deliverButtons.Add((button, item, worth));
         Add(button);

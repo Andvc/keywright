@@ -214,6 +214,9 @@ public partial class DayEndPhase : Phase
         var curios = UiKit.MakePanel(Palette.PanelBorder).Place(SideX, 504, SideW, 78); // two lines of note under the title
         _side.AddChild(curios);
         curios.AddChild(UiKit.MakeLabel(Loc.T($"CURIOS {State.CurioKeys.Count}/{State.CurioSlots}"), 16, Palette.Magic).Place(14, 8, 120, 20));
+        // A tale's keepsakes sit after the curios, ringed in their own colour, and take no slot: said under the count.
+        if (State.Keepsakes.Count > 0 && State.CurioKeys.Count > 0)
+            curios.AddChild(UiKit.MakeLabel(Loc.T($"KEEPSAKES {State.Keepsakes.Count}"), 16, Palette.Keepsake).Place(14, 30, 104, 20));
         if (State.CurioKeys.Count == 0 && State.Keepsakes.Count == 0)
             curios.AddChild(UiKit.MakeLabel(State.PeddlerToday ? Loc.T("Nim the peddler comes by tonight, after closing, with a curio.")
                 : Loc.T("Nim the peddler comes by every night after closing, from the third."), 16, Palette.Muted)
@@ -559,6 +562,28 @@ public partial class DayEndPhase : Phase
     }
 
     public void CloseSynergies() => _notebook?.Close();
+
+    /// <summary>N opens the notebook here too, at the calendar (what's coming), as it does at the counter.</summary>
+    public override void _UnhandledInput(InputEvent e)
+    {
+        if (!e.IsActionPressed(Controls.Notebook) || _notebook != null) return;
+        GetViewport().SetInputAsHandled();
+        OpenNotebook(NotebookView.CalendarPage);
+    }
+
+    void OpenNotebook(int page)
+    {
+        _notebook = Add(new NotebookView(State, page) { ZIndex = 30 });
+        _notebook.Closed += () => _notebook = null;
+    }
+
+    /// <summary>A note over the top bar was clicked: the notebook at the Inquiry.</summary>
+    public override bool ShowInquiry()
+    {
+        if (_notebook != null) return false;
+        OpenNotebook(NotebookView.InquiryPage);
+        return true;
+    }
 
     /// <summary>The top bar's due was clicked: the notebook at the Guild's debt (where paying it off is weighed).</summary>
     public override bool ShowDebt()

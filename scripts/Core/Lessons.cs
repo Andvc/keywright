@@ -47,6 +47,23 @@ public sealed class Lesson
 
     /// <summary>The steps that apply at this shop.</summary>
     public IReadOnlyList<LessonStep> For(GameState state) => Steps.Where(s => s.When == null || s.When(state)).ToList();
+
+    /// <summary>
+    /// The visit, with its chest a colour finer (and everything in it a step better) when the day makes every chest so: a
+    /// storm, or a guest book's better sort. A rule holds for a lesson's chest too (0.34's playtest met a storm's wood chest).
+    /// </summary>
+    public Visit MakeOn(Random rng, int tier, bool brighter)
+    {
+        Lessons.Brighter = brighter;
+        try
+        {
+            return Make(rng, tier);
+        }
+        finally
+        {
+            Lessons.Brighter = false;
+        }
+    }
 }
 
 public static class Lessons
@@ -60,8 +77,14 @@ public static class Lessons
         return chest;
     }
 
-    static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, int? floor = null, string pitch = null, string from = null) =>
-        Market.Price(rng, Sellers.Get(seller), chest, tier, ask, null, pitch, null, floor, origin: from == null ? null : Origins.Get(from));
+    /// <summary>The lesson being made is on a day that makes every chest a colour finer (<see cref="Lesson.MakeOn"/>).</summary>
+    [ThreadStatic] internal static bool Brighter;
+
+    static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, int? floor = null, string pitch = null, string from = null)
+    {
+        if (Brighter) chest.Brighten();
+        return Market.Price(rng, Sellers.Get(seller), chest, tier, ask, null, pitch, null, floor, origin: from == null ? null : Origins.Get(from));
+    }
 
     static readonly Dictionary<string, Lesson> ByKey = new Lesson[]
     {

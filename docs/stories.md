@@ -224,7 +224,7 @@ shorter: the welcome is a line and two taps, the summons two lines, the swallowi
    habit: when he wants you at the counter he taps it twice, then once. "And mind: some chests listen back." Once you
    remember: darkness, two taps and one, his welcome, and your own line: "The first morning, again. I remember the
    treasury. I remember it breathing. He doesn't."
-2. **Garrick's grey chest** (Garrick, from day 2, in week 1): his granddad's green chest from the attic, with the same
+2. **Garrick's green chest** (Garrick, from day 2, in week 1): his granddad's green chest from the attic, with the same
    things in it every spring (two coin and a cloak). The profile keeps what the first one bought held
    (`Profile.FirstChest`), and once you remember the note under it says so: "You know this chest."
 3. **Bram's account** (Mister Vane, the second evening): twenty years open, and the Guild would like it settled this

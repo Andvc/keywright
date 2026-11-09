@@ -179,7 +179,7 @@ The threads, in the order they open:
 | **Why did the morning come again?** | the first morning, again (seen); "We've met before" (said, Vane); the seal's last clause (said, Mara: from Crownhold, once you've been to the weighhouse); a stolen chest opening for its owner and nobody else (tried); the treasury's charter: keys and takings pledged, not people, not a keywright's word (found: Master Quire's Roll, or the King) | plan an opening that gives the Maw nothing |
 | **How do we bring them out?** | opens with the seal; it's the plan (below) | the final opening |
 
-**The second season, at once.** On the first morning, the same chest comes to the counter every spring (Garrick's grey
+**The second season, at once.** On the first morning, the same chest comes to the counter every spring (Garrick's green
 chest, on day 2), and once you've opened it in any season the slip at the counter says what it held (`Profile.FirstChest`). Nell's word about her
 father's note comes again, and now you know what the Guild night does: pay the note (about forty gold, at Brindle)
 and Haddon stays home, a friend at the crossroads. And in the second week, Bailiff Marrow's repossessed lot holds

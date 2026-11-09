@@ -81,8 +81,8 @@ public static class Hints
                      "a calendar of what's coming."),
         ["debt"] = Loc.T("That's the Guild's next due, up top. Click it any time for the whole debt in your notebook: what's paid, " +
                    "what's left, and what each week will want."),
-        ["lockpick"] = Loc.T("The ward's let go: the chest is yours. Now for the old lock underneath. The pick sweeps round: press {act}, " +
-                       "or click, while it's in the green to set a pin. Set every pin cleanly and nothing inside gets scratched."),
+        ["lockpick"] = Loc.T("The chest is yours. Now for its old lock. The pick sweeps round: press {act}, or click, while it's in the " +
+                       "green to set a pin; each pin you set sends it back the other way. Set every pin cleanly and nothing inside gets scratched."),
 
         // The run: the Guild's dues, curios, commissions, events.
         ["dues"] = Loc.T("Paid. Next week the Guild wants more, and more again the week after. Whatever you spend on the shop has to " +

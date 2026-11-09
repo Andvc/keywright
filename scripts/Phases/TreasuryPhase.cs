@@ -222,7 +222,7 @@ public partial class TreasuryPhase : Phase
         Sfx.Play("breath", 0.8f, 0);
         Say(Loc.T("It's breathing."), null);
         Game.Moment("25_treasury_breathing", 0.5);
-        await Wait(2.0);
+        await Wait(3.0);
         if (!Alive) return;
         Swallow();
     }
@@ -359,6 +359,8 @@ public partial class TreasuryPhase : Phase
         Game.Moment("25_treasury_offer", 0.6);
         await Wait(7.0);
         if (!Alive || !Choosing) return;
+        // The Maw's whisper, in its own gold: quiet, but not lost (0.34's playtest found the muted grey hard to read).
+        _aside.AddThemeColorOverride("font_color", Palette.Gold);
         _aside.Text = Story.Hesitation;
     }
 

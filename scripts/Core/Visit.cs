@@ -331,7 +331,8 @@ public sealed class Visit
     /// </summary>
     public string Explain()
     {
-        if (Chest.Crate != null) return Loc.T("A Guild crate off the palace road, with someone in it.");
+        if (Chest.Crate is string inside) return Loc.T($"A Guild crate off the palace road, with {Story.Name(inside)} in it, gold from head to foot.");
+        if (Chest.Breathing) return Loc.T("A mimic, and it had eaten everything that was in the chest.");
         string name = Seller.Short;
         var lines = new List<string>();
         if (Chest.Items.All(i => i.IsSong) && Chest.Hidden == null)
@@ -352,8 +353,8 @@ public sealed class Visit
             lines.Add(Loc.T($"The {(sand.Count == 1 ? Loc.T("rustle was") : Loc.T("rustles were"))} sand: it pours at a gentle shake, where parchment never rustles."));
         switch (Seller.Judge)
         {
-            case Judgment.Counter:
-                lines.Add(Loc.T($"{Capital(name)} charged the same for every rattle she heard: {Noticed.Count} of them, whatever they were."));
+            case Judgment.Counter when Noticed.Count > 0:
+                lines.Add(Loc.T($"{Capital(name)} charged the same for every rattle heard: {Noticed.Count} of them, whatever they were."));
                 break;
             case Judgment.Weight:
             {
@@ -390,6 +391,9 @@ public sealed class Visit
                 lines.Add(Loc.T($"{Capital(name)} had no idea what was inside."));
                 break;
         }
+        // Nothing heard, so nothing priced: what they asked was a few coins for the box itself (Market.Price's floor).
+        if (Noticed.Count == 0 && Seller.Judge is Judgment.Ear or Judgment.Counter)
+            lines.Add(Loc.T($"With nothing heard, {name} asked a few coins for the chest itself."));
         // What a listener couldn't hear, and why; and what they heard but never counted.
         if (Seller.Judge is Judgment.Ear or Judgment.Counter or Judgment.Miner)
         {
@@ -403,7 +407,7 @@ public sealed class Visit
                     : Chest.Packed && unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? Loc.T($"Through the straw, {name}'s shake was too gentle to stir the {words}")
                     : unheard.All(i => Chest.Needs(i, plain: true) > (int)Seller.Shakes) ? Loc.T($"{Capital(name)} didn't shake hard enough to stir the {words}")
                     : Loc.T($"{Capital(name)} shook {Categories.Adverb(Seller.Shakes)} and missed the {words}");
-                lines.Add(Loc.T($"{why}: {Join(unheard.Select(i => i.Name))}, unpriced."));
+                lines.Add(Loc.T($"{why}: {Join(unheard.Select(i => i.Name).Distinct())}, unpriced."));
             }
             if (!Seller.Counts)
                 foreach (var group in noticed.Where(i => !i.Fake).GroupBy(i => i.Category).Where(g => g.Count() > 1))
@@ -422,7 +426,7 @@ public sealed class Visit
             lines.Add(Loc.T($"Only a Keywright hears a Heartsong sing: nobody knew {song.Name} was in it."));
         var magic = Chest.Everything.Where(i => i.Magic).ToList();
         if (magic.Count > 0)
-            lines.Add(Loc.T($"Nobody can hear enchantment: the {Join(magic.Select(i => i.Name))} went for the price of plain goods."));
+            lines.Add(Loc.T($"Nobody can hear enchantment: the {Join(magic.Select(i => i.Name).Distinct())} went for the price of plain goods."));
         if (lines.Count == 0)
             lines.Add(Trade == Trade.Fixed
                 ? Loc.T($"{Capital(name)} heard everything, and always asks a bit more than it's worth.")

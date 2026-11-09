@@ -373,7 +373,7 @@ public partial class ShakeBox : Node2D
         {
             _wordCooldown[index] = 0.3;
             // Each thing has its own spot above the chest, so you can count them.
-            var spot = _pos + new Vector2((index % 3 - 1) * 112f + Rand() * 6f, -128f - index / 3 * 36f + Rand() * 4f);
+            var spot = _pos + new Vector2((index % 3 - 1) * 112f + Rand() * 4f, -124f - index / 3 * 40f + Rand() * 3f);
             bool glow = Witchlight && item.Magic;
             var color = item.IsSong ? Palette.Of(Rarity.Mythic) : glow ? Palette.Magic : Palette.Word;
             PopWord(item.Word, spot, item.Def.Loud || item.IsSong ? 32 : 24, color, glow || item.IsSong);
@@ -390,7 +390,7 @@ public partial class ShakeBox : Node2D
         if (_words.GetChildCount() > 12) return;
         var label = UiKit.MakeLabel(text, size, color, HorizontalAlignment.Center, outline: 8).Place(at.X - 90, at.Y - 18, 180, 36);
         label.PivotOffset = new Vector2(90, 18);
-        label.Rotation = Rand() * 0.25f;
+        label.Rotation = Rand() * 0.12f;
         label.Scale = Vector2.One * 0.6f;
         _words.AddChild(label);
         if (glow)
@@ -400,8 +400,9 @@ public partial class ShakeBox : Node2D
         }
         var tween = label.CreateTween().SetParallel();
         tween.TweenProperty(label, "scale", Vector2.One * (glow ? 1.2f : 1f), 0.1f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-        tween.TweenProperty(label, "position:y", label.Position.Y - 36 - (float)_rng.NextDouble() * 20, 0.8f).SetEase(Tween.EaseType.Out);
-        tween.TweenProperty(label, "position:x", label.Position.X + Rand() * 30, 0.8f);
+        // A little rise and drift, no more than keeps clear of the next spot (40 above, 112 across).
+        tween.TweenProperty(label, "position:y", label.Position.Y - 12 - (float)_rng.NextDouble() * 8, 0.8f).SetEase(Tween.EaseType.Out);
+        tween.TweenProperty(label, "position:x", label.Position.X + Rand() * 8, 0.8f);
         tween.TweenProperty(label, "modulate:a", 0f, 0.3f).SetDelay(glow ? 0.8f : 0.5f);
         tween.Chain().TweenCallback(Callable.From(label.QueueFree));
     }

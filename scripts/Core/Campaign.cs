@@ -334,12 +334,16 @@ public partial class GameState
     public void CloseTheDoor()
     {
         TreasuryEnd = Campaign.Morning;
+        // Bram came out of the chest with everyone else, if he wasn't home already (the season's end says which).
+        if (!BramHome) Flags.Add(BramFromTheChest);
         // Everyone the Guild took this season was in the chest, and came out with the rest.
         foreach (string person in Guests.Keys.Concat(Taken.Keys).ToList()) Rescued.Add(person);
         Guests.Clear();
         Rescued.Add(Campaign.Bram);
         BramHome = true;
     }
+
+    public const string BramFromTheChest = "bram.door"; // loc: keys
 
     /// <summary>The next day's one chest (0.34): Wynn's father's millwright's chest, for the waterwheel, given freely.</summary>
     public const string WaterwheelBeat = "next.day"; // loc: keys

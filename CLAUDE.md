@@ -55,7 +55,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    jumps to a shop tier with the tools a player would own by then (use it to check later tiers' screens);
    `--start-week` fast-forwards a run with the sim's careful collector (curios, commissions, exhibition and all; `--gold`
    then sets the purse, e.g. 0 to see a short night and foreclosure; `--days` counts from day 1, so add the weeks
-   skipped; it stops early, on the night the treasury's due, so you play that). The bot plays scenes, Nim, the Guild's night and deliveries, opens the short-of-chests warning once (and
+   skipped; it stops early, on the night the treasury's due, and goes straight to it, so you play that; a jump's season
+   is banked in memory, so the season after its treasury remembers). The bot plays scenes, Nim, the Guild's night and deliveries, opens the short-of-chests warning once (and
    says "Not now"), keeps every Heartsong (after a look at its reveal), and quits once a run has ended (below). With tips
    on, every seller's first visit is a lesson, so a guided run at a tier shows those lessons; the bot logs any lesson
    it couldn't finish. `--opening-demo` opens a crafted chest with every quality and two surprises (record it);
@@ -146,7 +147,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   hard you must shake to hear them (`StirsAt`) and whether they drown out or get drowned out (`Loud`, `Delicate`).
   Introduce new things one at a time: by shop tier (`CategoryDef.Tier`, `SellerDef.Tier`) and with a Bram hint
   (`Hints.cs`).
-- A seller's first visit (with tips on) is a lesson (`Lessons.cs`): a chest that guarantees what it teaches, and
+- A seller's first visit (with tips on) is a lesson (`Lessons.cs`): a chest that guarantees what it teaches (and follows
+  the day's rules like any other: a storm makes it a colour finer, `Lesson.MakeOn`, `Chest.Brighten`), and
   steps whose `Done` checks run every frame on the hearing, the slip and the visit. Keep checks to things the player
   does, so they can't miss; the sim's lesson test plays each one. A lesson waits for tips already up
   (`MentorView.ShowLesson`), `CounterPhase.Teach` holds other tips back during one, and `Lesson.Covers` lists the tips
@@ -435,7 +437,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   shard commissions' pay). The night the account is paid with the key whole (`TreasuryDue`) the Guild's carriage takes
   you to the treasury, whose great chest is the Maw: the first time it swallows you (`TreasuryMode.First`, `Swallow`),
   and the year turns back (`Main.Rewind`: the season banked, the next starts at once with the same keywright and level).
-  **Later seasons** you remember (`Profile.Swallowed`, `GameState.Remembers`): the same spring comes round (Garrick's grey
+  **Later seasons** you remember (`Profile.Swallowed`, `GameState.Remembers`): the same spring comes round (Garrick's green
   chest on the second morning, `TaleBook.FirstChest`, recognised from `Profile.FirstChest`; the same letters), Vane
   speaks for something that remembers too, and the investigation is the **Inquiry** (the notebook's Inquiry page):
   threads (where is Bram, the breathing chest, the first morning, the plan), entries seen, said, tried, heard or found,
@@ -465,7 +467,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   shaken firmly (`CounterPhase.Resonate`: a mimic or a crate never does), `Hearing.HeardBreath`. Opened, it's sold to
   the Arcanum's menagerie (0.6 of a working purse), kept in the back room (it eats 0.15 of a purse each Guild night, keeps
   the Lockless from robbing you) or kept by the menagerie for a fee; fed twice it's full (`MimicFull`) and eats the gold
-  off one of the gilded. `--mimics=N` makes one chest in N breathe. The Lantern Market (`LanternMarket.cs`) is at Nim's
+  off one of the gilded. A mimic or a Guild crate is no read (`ReadReport.NoRead`: no perfect read for an empty slip), and
+  one kept is stamped as in the back room, not as a profit. `--mimics=N` makes one chest in N breathe. The Lantern Market (`LanternMarket.cs`) is at Nim's
   table on the third night of each week from Thornwick (`MarketTonight`): once you remember it sells passage and papers,
   never an answer (a night at the weighhouse with a look at its register, the Wet Hen's bargemen for the treasury's last
   night, a crate diverted off the palace road), the Maw's buyers take gold things off the shelf at half as much again

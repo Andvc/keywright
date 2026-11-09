@@ -537,7 +537,10 @@ public static class Story
         if (state.TreasuryEnd == Campaign.Morning)
         {
             yield return new(teller, Loc.T("The treasury's shut for good, and everyone who came out of it is home. Nobody can say from where, and nobody asks."));
-            yield return new(teller, Loc.T("And I'm home. Feel my hand: warm. You brought me out of that chest, and I still can't say it without shaking."));
+            // (His warm hand was the next morning's: not said twice.)
+            yield return new(teller, state.Flagged(GameState.BramFromTheChest)
+                ? Loc.T("And I'm home. You brought me out of that chest with all the rest, and I still can't say it without shaking.")
+                : Loc.T("And I'm home. You had me out of my Guild crate before that night, and I still can't say it without shaking."));
         }
         else if (state.BramHome)
             yield return new(teller, state.Flagged("bargained")

@@ -730,7 +730,7 @@ public sealed partial class GameState
         var lesson = Lessons.For(seller.Key);
         if (GivesLessons && lesson != null && Tutored.Add(seller.Key))
         {
-            var visit = lesson.Make(Rng, Tier);
+            var visit = lesson.MakeOn(Rng, Tier, finer || EventIs("storm"));
             visit.Lesson = lesson;
             return visit;
         }

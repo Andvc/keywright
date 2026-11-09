@@ -45,9 +45,10 @@ public sealed record ItemRead(Item Item, ReadKind Kind, bool Hidden = false, boo
 /// <param name="Ghosts">One entry for each thing the slip counted that wasn't in the chest.</param>
 /// <param name="GhostHidden">A false bottom marked on the slip that wasn't there.</param>
 /// <param name="KeptWarded">A warded thing the ward kept, because the slip didn't name it truly, or null.</param>
-public sealed record ReadReport(IReadOnlyList<ItemRead> Items, IReadOnlyList<Category> Ghosts, bool GhostHidden, Item KeptWarded = null)
+/// <param name="NoRead">There was nothing to read (a Guild crate, a mimic that ate it all): no slip is right or wrong about it.</param>
+public sealed record ReadReport(IReadOnlyList<ItemRead> Items, IReadOnlyList<Category> Ghosts, bool GhostHidden, Item KeptWarded = null, bool NoRead = false)
 {
-    public bool Perfect => Items.All(r => r.Right) && Ghosts.Count == 0 && !GhostHidden && KeptWarded == null;
+    public bool Perfect => !NoRead && Items.All(r => r.Right) && Ghosts.Count == 0 && !GhostHidden && KeptWarded == null;
 }
 
 /// <summary>
@@ -278,6 +279,6 @@ public sealed class Appraisal
         }
         if (chest.Hidden != null)
             reads.Add(new ItemRead(chest.Hidden, Hidden ? ReadKind.FoundHidden : ReadKind.MissedHidden, true));
-        return new ReadReport(reads, ghosts, Hidden && chest.Hidden == null, chest.Warded);
+        return new ReadReport(reads, ghosts, Hidden && chest.Hidden == null, chest.Warded, NoRead: chest.Crate != null || chest.Breathing);
     }
 }

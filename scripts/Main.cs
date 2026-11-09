@@ -1053,6 +1053,12 @@ public partial class Main : Node2D
     /// </summary>
     void Rewind()
     {
+        // A jump's season (--start-week doesn't save) is banked in memory all the same, so the next season remembers it.
+        if (!_saving && !_demo && _bot == null)
+        {
+            Profile.Bank(State);
+            Profile.Note(State);
+        }
         WriteProfile(p => p.Bank(State));
         if (_saving) Storage.Delete(SavePath);
         if (_bot != null || _demo)

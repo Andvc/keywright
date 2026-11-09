@@ -156,6 +156,7 @@ public sealed partial class GameState
         var seller = visit.Seller;
         var terms = new List<string>();
         if (seller.ShakeLimit > 0) terms.Add(Loc.T($"Rotten: it stands {ShakeLimit(seller):0} seconds of shaking, all told."));
+        if (Impatient(seller)) terms.Add(Loc.T($"In a hurry: {Patience(seller):0} seconds to decide, counting down beside them."));
         if (visit.Chest.Packed) terms.Add(Loc.T("Packed in straw: everything needs a strength harder to stir."));
         if (seller.Packhorse) terms.Add(Loc.T("On a skittish mare: no hard shake."));
         else if (EventIs("mourning") && CanShakeHard) terms.Add(Loc.T("A day of mourning: no hard shake."));

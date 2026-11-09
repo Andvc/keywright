@@ -87,6 +87,24 @@ public partial class PeddlerPhase : Phase
     }
 
     /// <summary>The top bar's due was clicked: the notebook at the Guild's debt, to weigh a curio against it.</summary>
+    /// <summary>N opens the notebook at Nim's table too, at the calendar, as it does at the counter.</summary>
+    public override void _UnhandledInput(InputEvent e)
+    {
+        if (!e.IsActionPressed(Controls.Notebook) || _notebook != null || _confirm != null || _leaving) return;
+        GetViewport().SetInputAsHandled();
+        _notebook = Add(new NotebookView(State, NotebookView.CalendarPage) { ZIndex = 30 });
+        _notebook.Closed += () => _notebook = null;
+    }
+
+    /// <summary>A note over the top bar was clicked: the notebook at the Inquiry.</summary>
+    public override bool ShowInquiry()
+    {
+        if (_notebook != null || _confirm != null || _leaving) return false;
+        _notebook = Add(new NotebookView(State, NotebookView.InquiryPage) { ZIndex = 30 });
+        _notebook.Closed += () => _notebook = null;
+        return true;
+    }
+
     public override bool ShowDebt()
     {
         if (_notebook != null || _confirm != null || _leaving) return false;

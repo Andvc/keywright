@@ -1060,7 +1060,7 @@ Account** in `docs/stories.md` (`TaleBook.Campaign.cs`); the campaign's state is
 
 - **A first season** (and every season until the treasury swallows you) is ordinary business, told kindly. Bram minds
   the stall with you for the first week (he taps the counter twice and once when he wants you); the second evening
-  Mister Vane introduces Bram's twenty-year account, the season's debt; Garrick brings a grey chest that's the same
+  Mister Vane introduces Bram's twenty-year account, the season's debt; Garrick brings a green chest that's the same
   every spring, and Nell Haddon says the Guild has her father's note, due on its first night (pay it, forty gold, and he
   stays home). On the first Guild night the treasury summons Bram for "an old consignment", and he goes (Old Haddon too,
   if his note's unpaid); from then on his tips are notes in his notebook's margins, his promised letters never come, and

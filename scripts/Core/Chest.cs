@@ -25,7 +25,7 @@ public sealed class Chest
     public IReadOnlyList<Item> Items => _items;
 
     /// <summary>The chest's colour: the quality to expect inside.</summary>
-    public Rarity Quality { get; }
+    public Rarity Quality { get; private set; }
 
     /// <summary>A thing sealed under a false bottom, or null. It never rattles; nobody but you will ever know.</summary>
     public Item Hidden { get; private set; }
@@ -75,8 +75,13 @@ public sealed class Chest
     /// </summary>
     public Item Warded { get; private set; }
 
-    /// <summary>The warded thing the ward gave up when the chest was opened (now one of <see cref="Items"/>), or null.</summary>
-    public Item Unwarded { get; private set; }
+    /// <summary>
+    /// The warded thing the ward gave up when the chest was opened (now one of <see cref="Items"/>), as it is now (luck may
+    /// have made it a step better since, or a drop broken it), or null.
+    /// </summary>
+    public Item Unwarded => _unwarded is int id ? _items.FirstOrDefault(i => i.Id == id) : null;
+
+    int? _unwarded;
 
     /// <summary>Everything that's really in it: <see cref="Everything"/> and a warded thing still sealed.</summary>
     public IEnumerable<Item> All => Warded == null ? Everything : Everything.Append(Warded);
@@ -110,7 +115,7 @@ public sealed class Chest
     public bool Open(Appraisal slip)
     {
         if (!Names(slip)) return false;
-        Unwarded = Warded;
+        _unwarded = Warded.Id;
         _items.Add(Warded);
         _items.Sort((a, b) => a.Category.CompareTo(b.Category));
         Warded = null;
@@ -227,6 +232,19 @@ public sealed class Chest
         for (int i = 0; i < _items.Count; i++)
             if (!_items[i].IsSong) _items[i] = change(_items[i]) with { Id = _items[i].Id };
         if (Hidden != null) Hidden = change(Hidden) with { Id = Hidden.Id, Magic = false };
+    }
+
+    /// <summary>
+    /// A colour finer, and everything in it a step better (never past purple, as a storm's chest is rolled): what a
+    /// lesson's chest becomes on a day that makes every chest so.
+    /// </summary>
+    public void Brighten()
+    {
+        if (Quality >= Rarity.Epic) return;
+        Quality++;
+        static Item Better(Item i) => i.Quality < Rarity.Epic ? i with { Quality = i.Quality + 1 } : i;
+        Improve(Better);
+        if (Warded != null) Warded = Better(Warded) with { Id = Warded.Id };
     }
 
     void Break(Item item)

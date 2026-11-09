@@ -132,6 +132,11 @@ public partial class CounterPhase : Phase
         _notes = Add(UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(316, 500, 484, 104));
         _notes.ZIndex = 10;
         _timer = Add(UiKit.MakeLabel("", 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(230, 222, 64, 32));
+        if (State.Impatient(_visit.Seller))
+        {
+            _timer.MouseFilter = Control.MouseFilterEnum.Stop;
+            _timer.TooltipText = Loc.T($"In a hurry: {State.Patience(_visit.Seller):0} seconds to decide, counting down beside them.");
+        }
         _timer.ZIndex = 10;
         // A rotten chest stands so much shaking, and no more: what's left, above it.
         if (State.ShakeLimit(_visit.Seller) > 0)
@@ -297,6 +302,7 @@ public partial class CounterPhase : Phase
     {
         var chest = _visit.Chest;
         if (chest.Sealed) return Loc.T("A black chest wrapped in iron chains: nothing inside can move. Drop it to feel how heavy it is.");
+        if (chest.Crate != null) return Loc.T("A Guild crate: black iron and the Guild's seal. No colour to judge it by.");
         string colour = chest.Gilded
             ? Loc.T($"Gilded, with the royal seal! A colour better than its seller thinks: expect {Categories.QualityName(chest.Quality)} things.")
             : Loc.T($"A {Categories.ColourName(chest.Quality)} chest: expect {Categories.QualityName(chest.Quality)} things.");
@@ -547,8 +553,13 @@ public partial class CounterPhase : Phase
                 .Place(x0 + i * 40, 642, 36, 36));
             spot.AddChild(UiKit.MakeCurioIcon(curios[i], new Vector2(18, 18)));
         }
-        // A tale's keepsakes after them, a little apart: they take no slot.
+        // A tale's keepsakes after them, a little apart and named apart (they take no slot), clear of the curios' word.
         float kx = x0 + curios.Count * 40 + (curios.Count > 0 ? 8 : 0);
+        if (curios.Count > 0 && keepsakes.Count > 0)
+        {
+            kx = Math.Max(kx, x0 + UiKit.TextWidth(Loc.T("Curios")) + 12);
+            Add(UiKit.MakeLabel(Loc.T("Keepsakes"), 16, Palette.Keepsake, outline: 4).Place(kx, 616, 120, 20));
+        }
         for (int i = 0; i < keepsakes.Count; i++)
         {
             var spot = Add(new Control { MouseFilter = Control.MouseFilterEnum.Stop, TooltipText = UiKit.KeepsakeTooltip(keepsakes[i]) }
@@ -756,6 +767,8 @@ public partial class CounterPhase : Phase
     void Refresh()
     {
         bool open = !Concluded && !Busy;
+        // The Wardens are no use once the seller's gone, one way or another.
+        if (_wardens != null && Concluded) _wardens.Visible = false;
         if (_slipWeight != null) _slipWeight.Text = Loc.T($"slip: {Characters.Weight(SlipPounds)}");
         foreach (var row in _rows)
         {
@@ -884,16 +897,28 @@ public partial class CounterPhase : Phase
 
     /// <summary>
     /// The last three notes under the chest, or as many of them as fit its box: a long riddle, in French, takes two lines
-    /// of its own.
+    /// of its own. What the seller stated (a tally, a dowry's custom, a riddle) is what the read turns on, so it stays
+    /// ahead of the latest notes while there's room for it (0.34's playtest lost the tally to a drop and a mark).
     /// </summary>
     void ShowNotes()
     {
-        for (int n = Math.Min(3, _noteLines.Count); n >= 0; n--)
-        {
-            _notes.Text = string.Join("\n", _noteLines.TakeLast(n));
-            int lines = _notes.GetLineCount();
-            if (n <= 1 || lines * _notes.GetLineHeight() + (lines - 1) * _notes.GetThemeConstant("line_spacing") <= _notes.Size.Y + 8) return;
-        }
+        string keep = _visit.Clue != null && _noteLines.Contains(_visit.Clue) ? _visit.Clue : null;
+        foreach (bool withClue in keep != null ? new[] { true, false } : new[] { false })
+            for (int n = Math.Min(3, _noteLines.Count); n >= 1; n--)
+            {
+                var shown = _noteLines.TakeLast(n).ToList();
+                if (withClue && !shown.Contains(keep)) shown.Insert(0, keep);
+                _notes.Text = string.Join("\n", shown);
+                if (Fits(_notes)) return;
+            }
+        // Nothing fits whole: the latest note alone.
+        _notes.Text = _noteLines.Count > 0 ? _noteLines[^1] : "";
+    }
+
+    static bool Fits(Label label)
+    {
+        int lines = label.GetLineCount();
+        return lines * label.GetLineHeight() + (lines - 1) * label.GetThemeConstant("line_spacing") <= label.Size.Y + 8;
     }
 
     /// <summary>Until the next breath a mimic takes (0.33): it waits for the chest to sit still, and holds its breath a while when shaken.</summary>
@@ -1297,7 +1322,7 @@ public partial class CounterPhase : Phase
         {
             // While a chest is wanted (Saint Ide's reliquary, the disputed dowry), the mark staying warm is worth saying
             // too, or you can't tell you've checked (0.34's playtest).
-            if (State.Notices.Any(n => n.Key is "reliquary" or "dowry")) Note(Loc.T("Your mark stays warm: this chest is theirs to sell.")); // loc: keys
+            if (_visit.Chest.Crate == null && State.Notices.Any(n => n.Key is "reliquary" or "dowry")) Note(Loc.T("Your mark stays warm: this chest is theirs to sell.")); // loc: keys
             return;
         }
         Note(Loc.T("Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."));
@@ -1518,10 +1543,12 @@ public partial class CounterPhase : Phase
         await Wait(0.5);
         if (!Alive) return;
 
-        // What it would have fetched here, everything inside counted.
-        int held = State.Fetches(_visit.Chest), price = _visit.Price;
+        // What it would have fetched here, everything inside counted; a stolen chest, nothing: it would never have opened
+        // for you, so letting it go was right whatever it held.
+        bool stolen = _visit.Chest.Stolen;
+        int held = stolen ? 0 : State.Fetches(_visit.Chest), price = _visit.Price;
         int mood = Gut.PassMood(held, price);
-        string line = Gut.Pass(held, price, _rng);
+        string line = stolen ? Loc.T("A stolen chest: it would never have opened for you.") : Gut.Pass(held, price, _rng);
         // Green for a pass that dodged a bad deal, red for one that let a bargain walk out the door.
         var color = Palette.Gradient(Gut.PassScore(held, price));
         _reveal = Add(UiKit.MakePanel(color.Darkened(0.2f)).Place(312, 96, 492, 180));

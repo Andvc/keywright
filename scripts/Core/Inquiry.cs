@@ -71,7 +71,9 @@ public static class Inquiry
         E("alive", Bram, EntryWay.Tried, Loc.T("A Guild crate knocked when it sat still. You knocked back, and it answered. The gilded are alive.")),
         E("tap", Bram, EntryWay.Heard, Loc.T("A crate tapped twice, then once: the way Bram taps the counter. He's in there.")),
         Lead("lead.crate", Bram, Loc.T("Get Bram's crate off the palace road: Corvin buys what falls off a Guild cart, and the Lantern Market's bargemen will divert one."),
-            s => s.KnowsInventory && s.BramAway && !s.Guests.ContainsKey(Campaign.Bram) && !s.BramHome && s.Week <= Guild.Weeks),
+            s => s.KnowsInventory && s.BramAway && !s.Guests.ContainsKey(Campaign.Bram) && !s.BramHome && s.Week <= Guild.Weeks && !s.Gone.Contains(TaleBook.Corvin)),
+        Lead("lead.crate.barge", Bram, Loc.T("Get Bram's crate off the palace road: with Corvin gone, the Lantern Market's bargemen are the way. They'll divert one."),
+            s => s.KnowsInventory && s.BramAway && !s.Guests.ContainsKey(Campaign.Bram) && !s.BramHome && s.Week <= Guild.Weeks && s.Gone.Contains(TaleBook.Corvin)),
         Lead("lead.free", Bram, Loc.T("Free whoever's in the back room: a full mimic eats the gold off them, and their note must be redeemed or they'll be taken again."),
             s => s.Guests.Count > 0),
         new()
