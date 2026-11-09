@@ -68,6 +68,8 @@ public static class Market
         var origin = PickOrigin(rng, seller);
         var colour = (Rarity)rng.PickWeighted(Enumerable.Range(0, 4).ToArray(), i => seller.Colours[i]);
         if (colour < Rarity.Epic && rng.NextFloat() < boosts.BetterChests) colour++;
+        // A guest book's better sort: a colour finer than they'd have brought, whatever the day did (as far as purple).
+        colour = (Rarity)Math.Min((int)Rarity.Epic, (int)colour + boosts.Finer);
 
         // For sellers who listen, whether this one holds something they can't hear is rolled first, so each one's
         // blind spot turns up about as often as their MissRate: often enough to pay for listening, not so often that
@@ -102,7 +104,9 @@ public static class Market
     {
         var likely = origin?.Kinds ?? seller.Kinds;
         var lockTier = shopTier >= 2 && rng.NextFloat() < seller.LockChance ? LockTiers.For(colour) : null;
-        if (rng.NextFloat() < seller.EmptyChance) return new Chest(Array.Empty<Item>(), colour, null, lockTier, packed: seller.Packs);
+        // An empty chest (Pip's, mostly) has a false bottom too, with the smugglers' compass.
+        if (rng.NextFloat() < seller.EmptyChance)
+            return new Chest(Array.Empty<Item>(), colour, boosts.AlwaysHidden && shopTier >= 2 ? FalseBottom(rng, shopTier, colour) : null, lockTier, packed: seller.Packs);
 
         var kinds = Categories.UpTo(shopTier).Select(c => c.Category).ToList();
         int count = Math.Min(kinds.Count, rng.PickWeighted(Counts[seller.Tier], c => c.Weight).Count);
@@ -157,15 +161,19 @@ public static class Market
         // People hide money, gems and spellbooks under a false bottom (always, with the smugglers' compass).
         Item hidden = null;
         if (shopTier >= 2 && (boosts.AlwaysHidden || rng.NextFloat() < (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor))
-        {
-            var hideable = HiddenKinds.Where(k => Categories.Get(k.Kind).Tier <= shopTier).ToArray();
-            hidden = new Item(rng.PickWeighted(hideable, k => k.Weight).Kind, Categories.RollQuality(rng, colour));
-        }
+            hidden = FalseBottom(rng, shopTier, colour);
         var chest = new Chest(items, colour, hidden, lockTier, packed: seller.Packs);
         // A seller who leaves a sign wards something half the time (always, with a warden's lantern).
         if (shopTier >= 2 && seller.Wards > 0 && (boosts.AlwaysWard || rng.NextFloat() < seller.Wards) && Warding(rng, seller, chest, kinds, likely) is Item warded)
             chest.Ward(warded);
         return chest;
+    }
+
+    /// <summary>What someone hid under a false bottom: money, gems or a spellbook, as good as the chest's colour tends to.</summary>
+    public static Item FalseBottom(Random rng, int shopTier, Rarity colour)
+    {
+        var hideable = HiddenKinds.Where(k => Categories.Get(k.Kind).Tier <= shopTier).ToArray();
+        return new Item(rng.PickWeighted(hideable, k => k.Weight).Kind, Categories.RollQuality(rng, colour));
     }
 
     /// <summary>The Thornwick dowry: coin for luck, a cloak for warmth, a potion for health.</summary>
@@ -344,8 +352,10 @@ public static class Market
         var priced = noticed?.ToList() ?? Notice(seller, chest);
         priced.Sort();
         origin ??= PickOrigin(rng, seller);
-        var visit = Price(rng, seller, chest, shopTier, priced, ask, trade, pitch, boosts ?? Boosts.None, origin);
-        if (floor is int least) visit.SetFloor(least);
+        boosts ??= Boosts.None;
+        var visit = Price(rng, seller, chest, shopTier, priced, ask, trade, pitch, boosts, origin);
+        // A floor set for them (a lesson's) comes down as any bargainer's would with a silver tongue.
+        if (floor is int least) visit.SetFloor(visit.Trade is Trade.Haggle or Trade.Offer ? Math.Max(1, (int)MathF.Floor(least * boosts.Floor + 0.001f)) : least);
         return visit;
     }
 
@@ -374,9 +384,10 @@ public static class Market
     {
         float estimate = Estimate(rng, seller, chest, noticed, shopTier) * boosts.Dearer;
         var format = trade ?? seller.Trade;
-        // Everybody haggles with Rosa: a fixed price becomes an opening ask (a crook still wants rid of his fakes quick,
-        // and nobody haggles with the King, or the Maw).
-        bool converted = trade == null && boosts.Haggles && format == Trade.Fixed && seller.Judge != Judgment.Crook && !seller.SlipPrice && seller.Gaze <= 0;
+        // Everybody haggles with Rosa (or a haggler's purse, a golden tongue): a fixed price becomes an opening ask, a
+        // crook's too (0.35: crooks kept to their price, though the cards say everyone); nobody haggles with the King,
+        // whose price is your slip, or the Maw, whose is a coin.
+        bool converted = trade == null && boosts.Haggles && format == Trade.Fixed && !seller.SlipPrice && seller.Gaze <= 0;
         if (converted) format = Trade.Haggle;
         float price, floor;
         switch (format)
@@ -385,7 +396,7 @@ public static class Market
             {
                 // Someone who'd have named a price haggles like anyone else with Rosa, but never asks more than a bit
                 // over that price, or holds out for more than it (a devil's bargain stays cheap).
-                float named = estimate * rng.Between(seller.Markup.Min, seller.Markup.Max);
+                float named = estimate * (seller.Judge == Judgment.Crook ? rng.Between(CrookMin, CrookMax) : rng.Between(seller.Markup.Min, seller.Markup.Max));
                 price = Math.Min(estimate * rng.Between(HaggleAskMin, HaggleAskMax), named * ConvertedAsk) * RosaWary;
                 floor = Math.Min(estimate * rng.Between(seller.Bottom.Min, seller.Bottom.Max), named * ConvertedFloor) * RosaWary;
                 break;
@@ -423,7 +434,7 @@ public static class Market
             .Replace("{price}", seller.SlipPrice ? Loc.T("your slip's worth") : Money.Say(asking)).Replace("{fee}", Money.Say(fee)).Replace("{origin}", origin?.Name ?? Loc.T("somewhere"));
         return new Visit(seller, chest, noticed, format, format == Trade.Offer ? 0 : asking, Money.Round(floor), line)
         {
-            Origin = origin, Fee = fee, Clue = clue?.Note, ClueKinds = clue?.Kinds ?? Array.Empty<Category>(),
+            Origin = origin, Fee = fee, Clue = clue?.Note, ClueSaid = clue?.Said, ClueKinds = clue?.Kinds ?? Array.Empty<Category>(),
             Says = clue == null ? Core.Clue.None : seller.States,
         };
     }
@@ -576,6 +587,9 @@ public sealed record Boosts(float BetterChests = 0, float Hidden = 0, float Magi
 
     /// <summary>Every chest has a false bottom (the smugglers' compass).</summary>
     public bool AlwaysHidden { get; init; }
+
+    /// <summary>How many colours finer this seller's chest is than they'd have brought (a guest book's better sort: 0.35, it was the storm's chance, not a step on top of it).</summary>
+    public int Finer { get; init; }
 
     /// <summary>A seller who leaves a sign always wards something (a warden's lantern, the Aldric Seal).</summary>
     public bool AlwaysWard { get; init; }

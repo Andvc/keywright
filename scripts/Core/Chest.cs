@@ -92,6 +92,12 @@ public sealed class Chest
     /// </summary>
     public void Ward(Item item) => Warded = item with { Magic = false };
 
+    /// <summary>Gives a chest that has none a false bottom with this under it (the smugglers' compass: every chest has one).</summary>
+    public void HideUnder(Item item)
+    {
+        if (Hidden == null && item != null) Hidden = item with { Magic = false };
+    }
+
     /// <summary>Takes a thing out (a bride's dowry thing, to ward it instead).</summary>
     public void Remove(Item item) => _items.Remove(item);
 
@@ -231,7 +237,12 @@ public sealed class Chest
     {
         for (int i = 0; i < _items.Count; i++)
             if (!_items[i].IsSong) _items[i] = change(_items[i]) with { Id = _items[i].Id };
-        if (Hidden != null) Hidden = change(Hidden) with { Id = Hidden.Id, Magic = false };
+        // What's hidden is never enchanted by its chest (nobody could see it glow), but luck can make it shine (0.35).
+        if (Hidden != null)
+        {
+            var changed = change(Hidden);
+            Hidden = changed with { Id = Hidden.Id, Magic = changed.Magic && changed.Shone };
+        }
     }
 
     /// <summary>

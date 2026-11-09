@@ -32,6 +32,9 @@ public sealed class Visit
     /// <summary>What the seller states (a count, a weight, a sign), as Bram notes it (<see cref="Market.MakeClue"/>), or null.</summary>
     public string Clue { get; set; }
 
+    /// <summary>The clue as the seller says it in their pitch (the tally, the dream, the tag's words): coloured as it's said (0.35).</summary>
+    public string ClueSaid { get; set; }
+
     /// <summary>The kinds the seller's clue names, for the careful player's read (<see cref="Strategy.Reckon"/>).</summary>
     public Category[] ClueKinds { get; set; } = Array.Empty<Category>();
 
@@ -46,13 +49,54 @@ public sealed class Visit
 
     public Trade Trade { get; }
 
-    /// <summary>The asking price; 0 while they're waiting for you to name one.</summary>
+    /// <summary>
+    /// The asking price; 0 while they're waiting for you to name one. A whole number of coins: what the exact price comes
+    /// to (<see cref="Raise"/>), rounded down when a curio or a rule has brought it below what they first set it at, up
+    /// when it's gone above, so every discount takes something off and every markup puts something on (0.35: rounding
+    /// each step to a seller's round sum swallowed a curio's few percent at the stall).
+    /// </summary>
     public int Ask { get; private set; }
+
+    /// <summary>The price, the least they'd take, and what they were before anything changed them, unrounded.</summary>
+    float _exactAsk, _exactFloor;
+    int _baseAsk, _baseFloor;
+
+    /// <summary>
+    /// An exact price in whole coins: the nearest, but a coin off at least if it's come down from where it started, and on
+    /// if it's gone up (so a few percent off a few coins still shows).
+    /// </summary>
+    public static int Rounded(float exact, int start)
+    {
+        int nearest = (int)MathF.Round(exact, MidpointRounding.AwayFromZero);
+        return exact < start - 0.001f ? Math.Max(1, Math.Min(nearest, start - 1)) : exact > start + 0.001f ? Math.Max(nearest, start + 1) : start;
+    }
+
+    static int Coins(float exact, int start) => Rounded(exact, start);
+
+    /// <summary>A new price on the table (a counter, the King's game): the start of anything that changes it after.</summary>
+    void SetAsk(int ask)
+    {
+        Ask = _baseAsk = ask;
+        _exactAsk = ask;
+    }
+
+    void SetLeast(int floor)
+    {
+        Floor = _baseFloor = Math.Max(1, floor);
+        _exactFloor = Floor;
+    }
 
     public string Pitch { get; }
     public VisitOutcome Outcome { get; private set; } = VisitOutcome.Deciding;
     public int PricePaid { get; private set; }
     public int OffersMade { get; private set; }
+
+    /// <summary>
+    /// The price on the table when you made your first offer (0 if you made none): what a haggle talked them down from
+    /// (0.35: measured from the first ask, a curio's discount counted as talking them down, and an angry seller's raised
+    /// price as nothing).
+    /// </summary>
+    public int OfferedAt { get; private set; }
     public bool Angered { get; private set; }
 
     /// <summary>Hidden: the least they'll take.</summary>
@@ -80,7 +124,7 @@ public sealed class Visit
     public void LookUp() => LookedUp = true;
 
     /// <summary>A lesson's scripted least they'll take.</summary>
-    internal void SetFloor(int floor) => Floor = Math.Max(1, floor);
+    internal void SetFloor(int floor) => SetLeast(floor);
 
     /// <summary>What they'd have sold it for: the price on the table, or the least they'd have taken.</summary>
     public int Price => Ask > 0 ? Ask : Floor;
@@ -91,8 +135,8 @@ public sealed class Visit
         Chest = chest;
         Noticed = noticed;
         Trade = trade;
-        Ask = _firstAsk = ask;
-        Floor = Math.Max(1, floor);
+        SetAsk(_firstAsk = ask);
+        SetLeast(floor);
         Pitch = pitch;
     }
 
@@ -115,7 +159,7 @@ public sealed class Visit
         return new Visit(Seller, Chest, Noticed, Trade, ask, Money.Round(Floor * factor),
             ask > 0 ? Loc.T($"I've come back. {Money.Say(ask)}, and no hard feelings.") : Loc.T("I've come back. Make me an offer, then."))
         {
-            Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Returned = true, Clue = Clue, ClueKinds = ClueKinds, Says = Says, Handled = Handled,
+            Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Returned = true, Clue = Clue, ClueSaid = ClueSaid, ClueKinds = ClueKinds, Says = Says, Handled = Handled,
         };
     }
 
@@ -130,7 +174,7 @@ public sealed class Visit
     /// <summary>The same chest, offered as a welcome gift: for a single coin, take it or leave it.</summary>
     public Visit Given(Random rng) => new(Seller, Chest, Noticed, Trade.Fixed, Challenges.GiftPrice, Challenges.GiftPrice, rng.PickOne(GiftLines))
     {
-        Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Clue = Clue, ClueKinds = ClueKinds, Says = Says,
+        Origin = Origin, Fee = Fee, HearsOut = HearsOut, Unruffled = Unruffled, Clue = Clue, ClueSaid = ClueSaid, ClueKinds = ClueKinds, Says = Says,
     };
 
     /// <summary>You've laid a hand on the chest (a shake, a drop, the lodestone): it's no longer sight unseen.</summary>
@@ -227,13 +271,14 @@ public sealed class Visit
     public Response Offer(int amount, Random rng)
     {
         if (!CanOffer) throw new InvalidOperationException("No offer to make");
+        if (OffersMade == 0) OfferedAt = Ask;
         OffersMade++;
         _retry = false;
         amount = Math.Max(1, amount);
         if (amount >= Floor) return new Response(ResponseKind.Accept, amount, Sell(amount, rng));
         if (Unruffled)
         {
-            Ask = Floor;
+            SetAsk(Floor);
             return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", Money.Say(Ask)));
         }
         if (Trade == Trade.Offer)
@@ -248,7 +293,7 @@ public sealed class Visit
             return new Response(ResponseKind.TryAgain, 0, rng.PickOne(Seller.Refusals));
         }
         // Not enough: they meet you partway, never below what they'd really take, and that's final.
-        Ask = Math.Max(Floor, Money.Round((amount + Ask) / 2f));
+        SetAsk(Math.Max(Floor, Money.Round((amount + Ask) / 2f)));
         return new Response(ResponseKind.Counter, Ask, rng.PickOne(Seller.Counters).Replace("{price}", Money.Say(Ask)));
     }
 
@@ -295,16 +340,24 @@ public sealed class Visit
     public void SetSlipPrice(int worth)
     {
         if (!Seller.SlipPrice || !Deciding) return;
-        Ask = Math.Max(1, worth);
-        Floor = Ask;
+        SetAsk(Math.Max(1, worth));
+        SetLeast(Ask);
     }
 
-    /// <summary>Puts the price up (the Maw's gaze, a goblin's fee).</summary>
+    /// <summary>
+    /// Puts the price up (the Maw's gaze, a goblin's fee), or down (a curio's doing), by a factor of the exact price: so a
+    /// price taken off and put back (a sealed bid, then a hand laid on the chest) comes back to exactly what it was.
+    /// </summary>
     public void Raise(float factor)
     {
         if (!Deciding) return;
-        if (Ask > 0) Ask = Money.Round(Ask * factor);
-        Floor = Money.Round(Floor * factor);
+        if (Ask > 0)
+        {
+            _exactAsk *= factor;
+            Ask = Coins(_exactAsk, _baseAsk);
+        }
+        _exactFloor *= factor;
+        Floor = Coins(_exactFloor, _baseFloor);
     }
 
     /// <summary>Doing what they asked you not to: up goes the price, once.</summary>
@@ -313,8 +366,7 @@ public sealed class Visit
     {
         if (Angered || !Deciding) return null;
         Angered = true;
-        if (Ask > 0) Ask = Money.Round(Ask * Market.AngerMarkup);
-        Floor = Money.Round(Floor * Market.AngerMarkup);
+        Raise(Market.AngerMarkup);
         return rng.PickOne(own ? Seller.Angry : Seller.Fussed);
     }
 

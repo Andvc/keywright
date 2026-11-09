@@ -75,7 +75,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    character screen, a new game (Hesk, at challenge level 8: the most boons and banes the character screen and the
    pause menu ever list), the pause menu and its collection, and the settings (with a look at the scene with the outlines turned off, when the art has them; with `--gm`, the GM panel too: gold, the
    notebook and the collection filled, a skip refused mid-scene). A bot run shows the notebook's pages, clicks the
-   Guild's due in the top bar once it's up (the notebook at the debt), and opens the collection over the counter.
+   Guild's due in the top bar once it's up (the notebook at the debt), opens the collection over the counter, and the
+   echo horn's history once there's a good deal in it (`02_history`).
    Keep screenshot folders named `shots*` (git- and export-ignored). Under Xvfb there's no window manager, so
    fullscreen stays at 1280x720 (the 3px art at 1.5 pixels a cell): for another size, a windowed settings.cfg in the
    user folder (below) and a screen that size. After changing art or how a picture is loaded:
@@ -106,7 +107,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    deals a few curios and keepsakes, so `godot --headless --path . -- --fit-test --lang=CODE` measures every curio's
    name and description on Nim's cards (wide and narrow) and every keepsake's card, in that language's font, and exits
    1 if one doesn't fit: run it for each language after changing a curio's or keepsake's words (or the cards).
-8. Fresh eyes (0.34): `tools/playtest/pt` drives the game in a virtual 1280x720 screen for a playtester who plays by
+8. Curios: `dotnet run --project tools/curiotest` (0.35) runs 200 checks, every curio card's promises against the game
+   (most as twins, with and without it; `--only=key,key`; `AUDIT_A/B/C.md` beside it say what each card promises and
+   where its rule lives). It compiles Core itself, so internal members are reachable. A new curio, or a change to one's
+   rule or card, needs its checks; the run must end "N of N checks passed" (it names any curio with none).
+9. Fresh eyes (0.34): `tools/playtest/pt` drives the game in a virtual 1280x720 screen for a playtester who plays by
    screenshots (start, click, shake at a strength, drop, keys; a fresh profile in `PLAYTEST_DIR`; `GAME=` a frozen
    worktree keeps the build steady while you work). For a playtest by an agent with no context, give it
    `tools/playtest/README.md` and nothing else of the repository, and ask for a play log, what it understood of the
@@ -138,7 +143,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   work only sometimes reads as a bug, and a rule people can't reason about from real life (v7's cloth padding) goes. Enchantment (`Item.Magic`) is something any
   thing you can hear can be: x2 value and exhibition, same quality, colour and sprite. A hidden thing (under a false
   bottom, or warded) never is, since nobody could see it glow and no read could be right about it: it fetches x1.3
-  instead (`Categories.HiddenMultiplier`, in `Special`; `Chest` strips magic off anything hidden).
+  instead (`Categories.HiddenMultiplier`, in `Special`; `Chest` strips magic off anything hidden); luck shines one past
+  purple only with the curio that promises it a step (a hollow rod, a ward-key: `Build.Luck`, 0.35).
 - Six kinds of thing a sword-and-sorcery realm would lock away (`Category`: Coins, Arms, Garb, Potions, Scrolls, Gems,
   shown as Coin, Weapons, Cloaks, Potions, Spells, Gems; the fakes are demon gold, paste gems and scroll cases of sand).
   Every thing is a find worth having (no letters, no rusty daggers); rename one in `Categories.Renamed` too, so saves'
@@ -148,8 +154,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   Introduce new things one at a time: by shop tier (`CategoryDef.Tier`, `SellerDef.Tier`) and with a Bram hint
   (`Hints.cs`).
 - A seller's first visit (with tips on) is a lesson (`Lessons.cs`): a chest that guarantees what it teaches (and follows
-  the day's rules like any other: a storm makes it a colour finer, `Lesson.MakeOn`, `Chest.Brighten`), and
-  steps whose `Done` checks run every frame on the hearing, the slip and the visit. Keep checks to things the player
+  the day's rules like any other: a storm makes it a colour finer, `Lesson.MakeOn`, `Chest.Brighten`; and the build,
+  priced with the shop's `Boosts` and dealt with by `GameState.Welcome`, so curios hold for it: `GameState.Lesson`), and
+  steps whose `Done` checks run every frame on the hearing, the slip and the visit, whatever Bram's box shows (0.35: a
+  step is an action, named in a tab over the box, `LessonStep.Do`; the first day is lessons too, `Lessons.FirstDay`). Keep checks to things the player
   does, so they can't miss; the sim's lesson test plays each one. A lesson waits for tips already up
   (`MentorView.ShowLesson`), `CounterPhase.Teach` holds other tips back during one, and `Lesson.Covers` lists the tips
   it makes redundant. Read a guided `--autoplay` run's `[Bram ...]` lines to check the tutorial reads in order. Bram
@@ -160,6 +168,18 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   a profile; the scripted first day (`GameState.FirstDayScripted`) teaches three customers, and Bettany (passing) opens
   the second. Clicking whoever's at the counter (or the notebook button, or N) opens the notebook on their page, framed
   (`Visit.LookedUp`); Mother Sorrel's lesson teaches it (the `lookup` tip for the others).
+- What's said is said a sentence at a time (0.35, `Words.Sentences`): Bram's box (`MentorView`: dots, "click to go on"),
+  scenes, talks and the sellers' bubbles (sized for the whole speech, filled in as it's said). What matters is coloured
+  where it's said (`Rich`, a `RichTextLabel` with BBCode, its own brackets escaped): the trade's words in tips and
+  notes (`Rich.TradeWords`; on the slip's paper `Rich.OnPaper`), a seller's price and stated clue (`SellerView.Marks`,
+  with a bob), strengths only in sellers' own words (`Rich.Strengths`: their "coin" is money), the seller's rule under
+  the chest in gold. Everything said goes into `GameState.History` (`Hear`, saved, the last 400 lines), which Bram's
+  echo horn shows (`EchoHorn` at the counter's end in the counter and talks, beside closing up at the day's end;
+  `HistoryView`, which swallows keys while open and sets `HistoryView.Open`, so notes wait and the counter is busy).
+- The chest is two layers (0.35, `ChestView`): the lid, and under it the box, shut, or (once the lid lifts at all) the
+  open box with its inside in perspective (`custom_art._chest3_open`), lit from within in the chest's colour
+  (`DrawInnerLight`, additive) with a soft spill from the crack while the lid's on; shafts only out of the open box,
+  settling to `ChestView.RestGlow`. A new opening effect lights the inside; it never draws a bar between the halves.
 - Heartsongs are introduced on a quiet first-week evening (the `songs_intro` tip), and a season that ends with none ever
   heard gets Bram's word on them between runs, once a profile (`Story.SongsUnheard`, in `Main.EndRun`).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
@@ -228,6 +248,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `art/tools/assets_curios.py`, made like the rest of `art/generated/`; a placeholder in `CURIOS`,
   `tools/custom_art.py`, until then), its effect wherever the rule lives (`Build.cs` for luck, value, prices and the counters), and
   a decision about the index. Never let a curio tell you what a chest holds.
+  A price a curio or a rule changes is kept exact and shown to the coin, at least a coin off or on (`Visit.Raise`,
+  `Visit.Rounded`); "talked down" is from the price on the table at your first offer (`Visit.OfferedAt`); a thing kept
+  on the shelf sells for at least what it would have fetched at its opening (`GameState.ShelfValue`), and screens show
+  the exhibition's own points (`GameState.Points`). The day's curios (`Curiosities`, `Compass`) run after the tales
+  have staged their chests; the opening's luck line thanks the curio whose rule reached each thing (`Build.Luck`).
 - Synergies (`Synergies.cs`) come from what's been acquired (six of a kind at a quality per level) or achieved (perfect
   reads, surprises, hidden things found, bargains, enchanted things); only active ones (one slot, more with upgrades)
   do anything, chosen at the end of a day. Each is a real power: its effect and 20% a level on what its kind sells for
@@ -278,7 +303,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   with no Heartsongs 72%; a learner at 0.75 42%; a first run about one in a hundred); careers first clear around the
   sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 27), and each level
   after costs a few points more (the dues 20% up a level, `Challenges.DebtStep`, 15% until 0.33; one career in twelve
-  has cleared level 6 by run 30, level 8 is a wall, 3%: 40 careers, `--sim=careers --n=40`). The campaign (0.34): the
+  has cleared level 6 by run 30, level 8 is a wall, 3%: 40 careers, `--sim=careers --n=40`; 0.35, after the curio audit
+  made every card deliver: the careful player 70% with curios, 73% without, 51% with no tales, 36% with neither (0.34:
+  35%, so the shop's baseline held), a learner at 0.75 55%; careers: half first clear by run 5, level 4 by run 23, level
+  6 13% by run 30, level 8 none). The campaign (0.34): the
   first swallowing comes with the first clear, around the sixth run; Bram is first brought home around the thirteenth,
   and the next day (the true ending) around the thirteenth too, 83% of careers by run 30 (at level 0 throughout,
   `--level=0`: the eleventh, all by run 30). The careful player keeps a full mimic for the final opening unless it has

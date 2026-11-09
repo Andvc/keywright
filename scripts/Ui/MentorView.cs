@@ -9,7 +9,9 @@ namespace Keywright.Ui;
 /// Uncle Bram at your elbow: a face and one short tip at a time about what's in front of you. When two tips come up
 /// at once he gives one (<see cref="Teach"/>); the other isn't marked as taught, so it comes up the next time it
 /// applies. A seller's lesson waits until the tip already up has been read; then the box shows the step to do and
-/// stays up until it's done (or skipped).
+/// stays up until it's done (or skipped). Since 0.35 a tip is said a sentence at a time (a click for the next), the
+/// trade's words coloured (<see cref="Rich"/>), a lesson step's action named in a tab over the box, and every tip goes
+/// in the run's history (<see cref="GameState.Hear"/>).
 /// </summary>
 public partial class MentorView : Control
 {
@@ -17,21 +19,45 @@ public partial class MentorView : Control
     /// <summary>The highest the box's top goes: just under the top bar.</summary>
     const float TopLimit = 60;
     readonly Queue<string> _queue = new();
-    Label _text, _more;
+    RichTextLabel _text;
+    Label _more;
     Button _skip;
     Panel _panel;
+
+    /// <summary>The text up now, cut into sentences, and the one showing.</summary>
+    List<string> _sentences = new();
+    int _at;
+
+    /// <summary>What a lesson step asks you to do, in a tab over the box (0.35).</summary>
+    Control _doTab;
+    RichTextLabel _doText;
+
+    /// <summary>Bram's face (or his notebook), which nods when a step says what to do.</summary>
+    Node2D _face;
+
+    /// <summary>The page pips under the text: how many sentences, and which one.</summary>
+    Painter _pips;
 
     /// <summary>Where the box's bottom edge sits: a long tip grows it upward from here.</summary>
     float _bottom;
     bool _lesson, _waiting, _showingTip;
 
     /// <summary>A lesson step waiting for the tips in front of it to be read.</summary>
-    (string Text, bool Waiting)? _held;
+    (string Text, bool Waiting, string Action)? _held;
 
     public bool Showing => Visible;
 
-    /// <summary>A lesson step is up that's done by doing something, not by clicking.</summary>
-    public bool WaitingForAction => Visible && _lesson && _waiting;
+    /// <summary>
+    /// A lesson step is up that's done by doing something, and it's been read to its end (a seller's clock, Tick's
+    /// hourglass, runs from then; the step can be done at any sentence).
+    /// </summary>
+    public bool WaitingForAction => Visible && _lesson && _waiting && ReadThrough;
+
+    /// <summary>The last sentence of what's up is showing.</summary>
+    bool ReadThrough => _at >= _sentences.Count - 1;
+
+    /// <summary>Something's up with sentences still to come (a talk lets Bram finish before it goes on).</summary>
+    public bool MidText => Visible && !ReadThrough;
 
     /// <summary>The player clicked on past a lesson step that's just for reading.</summary>
     public event Action LessonRead;
@@ -54,7 +80,7 @@ public partial class MentorView : Control
         // Bram's away at the treasury (0.34): his tips are the notes he left in the margins of his notebook.
         if (Main.Instance?.State?.BramNotes == true)
         {
-            AddChild(new Painter(p =>
+            AddChild(_face = new Painter(p =>
             {
                 p.DrawRect(new Rect2(24, 10, 56, 60), Palette.Paper);
                 p.DrawRect(new Rect2(24, 10, 56, 60), Palette.Ink, false, 2);
@@ -71,11 +97,14 @@ public partial class MentorView : Control
                 Position = new Vector2(52, 58),
             };
             AddChild(UiKit.Outline(bram));
+            _face = bram;
             AddChild(UiKit.MakeLabel(Hints.Mentor.ToUpperInvariant(), 16, Palette.Gold, HorizontalAlignment.Center).Place(4, 98, 96, 20));
         }
-        _text = UiKit.MakeLabel("", 16, Palette.Text).Wrapped().Place(104, 8, W - 116, H - 30);
+        _text = Rich.Make(16, Palette.Text).Place(104, 8, W - 116, H - 30);
         _text.VerticalAlignment = VerticalAlignment.Center;
         AddChild(_text);
+        _pips = new Painter(DrawPips) { Position = new Vector2(104, H - 16) };
+        AddChild(_pips);
         _more = UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(104, H - 26, W - 116, 20);
         AddChild(_more);
         string skip = Loc.T("Skip lesson");
@@ -83,6 +112,16 @@ public partial class MentorView : Control
         _skip = UiKit.MakeButton(skip, Palette.Muted, 16, () => LessonSkipped?.Invoke()).Place(W - skipW, -30, skipW, 30);
         _skip.Visible = false;
         AddChild(_skip);
+        // The action a lesson step asks for, over the box's left: gold, breathing gently, until the step's done.
+        _doTab = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(0, -34, W - skipW - 8, 32);
+        _doTab.MouseFilter = MouseFilterEnum.Ignore;
+        _doText = Rich.Make(16, Palette.Gold).Place(10, 6, W - skipW - 28, 22);
+        _doTab.AddChild(_doText);
+        _doTab.Visible = false;
+        AddChild(_doTab);
+        var breathe = _doTab.CreateTween().SetLoops();
+        breathe.TweenProperty(_doTab, "modulate:a", 0.72f, 0.8f).SetTrans(Tween.TransitionType.Sine);
+        breathe.TweenProperty(_doTab, "modulate:a", 1f, 0.8f).SetTrans(Tween.TransitionType.Sine);
         GuiInput += e =>
         {
             if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }) Next();
@@ -121,26 +160,28 @@ public partial class MentorView : Control
     }
 
     /// <summary>
-    /// Shows a lesson step: one to do (it stays up) or one to read (click on). If a tip is still up, the step waits
-    /// until it (and any after it) has been read.
+    /// Shows a lesson step: one to do (it stays up until it's done; <paramref name="action"/> says what, in the tab over
+    /// the box) or one to read (click on). If a tip is still up, the step waits until it (and any after it) has been read.
     /// </summary>
-    public void ShowLesson(string text, bool waiting)
+    public void ShowLesson(string text, bool waiting, string action = null)
     {
         if (!_lesson && Visible)
         {
-            _held = (text, waiting);
+            _held = (text, waiting, action);
             UpdateMore();
             return;
         }
-        Begin(text, waiting);
+        Begin(text, waiting, action);
     }
 
-    void Begin(string text, bool waiting)
+    void Begin(string text, bool waiting, string action)
     {
         _held = null;
         _lesson = true;
         _waiting = waiting;
         _skip.Visible = true;
+        _doTab.Visible = action != null;
+        if (action != null) _doText.Text = Rich.Colour(action, Palette.Gold);
         Show(text);
     }
 
@@ -156,23 +197,33 @@ public partial class MentorView : Control
         if (!_lesson) return;
         _lesson = false;
         _skip.Visible = false;
+        _doTab.Visible = false;
         if (_queue.Count > 0) Show(_queue.Dequeue());
         else Visible = false;
     }
 
-    /// <summary>Moves on to the next waiting tip, or puts the box away. A lesson step to do stays up.</summary>
+    /// <summary>
+    /// The next sentence of what's up; past the last, the next waiting tip, or the box put away. A lesson step to do
+    /// stays up.
+    /// </summary>
     public void Next()
     {
+        if (!ReadThrough)
+        {
+            _at++;
+            ShowSentence();
+            return;
+        }
         if (_lesson)
         {
             if (!_waiting) LessonRead?.Invoke();
             return;
         }
         if (_queue.Count > 0) Show(_queue.Dequeue(), afterClick: true);
-        else if (_held is var (text, waiting))
+        else if (_held is var (text, waiting, action))
         {
             _showingTip = false;
-            Begin(text, waiting);
+            Begin(text, waiting, action);
         }
         else Visible = false;
     }
@@ -184,19 +235,61 @@ public partial class MentorView : Control
         Trace?.Invoke((_lesson ? (_waiting ? Loc.T("[do] ") : Loc.T("[read] ")) : "") + text);
         _showingTip = !_lesson;
         Visible = true;
-        _text.Text = text;
-        Fit();
-        UpdateMore();
+        // Into the run's history whole, said a sentence at a time.
+        Main.Instance?.State?.Hear(Hints.Mentor, text, _lesson ? Heard.Lesson : Heard.Tip);
+        _sentences = Words.Sentences(text);
+        if (_sentences.Count == 0) _sentences.Add(text);
+        _at = 0;
         Scale = new Vector2(0.96f, 0.9f);
         CreateTween().TweenProperty(this, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back);
-        Main.Instance.Sfx.Play("blip", 0.8f, -10);
+        ShowSentence();
+    }
+
+    /// <summary>The sentence at <see cref="_at"/>, the trade's words coloured; the box fitted to it.</summary>
+    void ShowSentence()
+    {
+        string sentence = _sentences[_at];
+        _text.Text = Rich.Trade(sentence);
+        Fit(sentence);
+        UpdateMore();
+        _pips.QueueRedraw();
+        // Each sentence comes up a little, like a word said; the step's instruction (its last) with a nod from Bram.
+        _text.Modulate = new Color(1, 1, 1, 0);
+        _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.18f);
+        if (_lesson && _waiting && ReadThrough) Nod();
+        Main.Instance.Sfx.Play("blip", 0.8f + 0.04f * _at, -10);
+    }
+
+    /// <summary>Bram's face (or his notebook) dips and comes back: a nod at what to do.</summary>
+    void Nod()
+    {
+        if (_face == null) return;
+        var home = _face.Position;
+        var nod = _face.CreateTween();
+        nod.TweenProperty(_face, "position:y", home.Y + 4, 0.12f).SetTrans(Tween.TransitionType.Sine);
+        nod.TweenProperty(_face, "position:y", home.Y, 0.18f).SetTrans(Tween.TransitionType.Sine);
+        nod.TweenProperty(_face, "position:y", home.Y + 3, 0.12f).SetTrans(Tween.TransitionType.Sine);
+        nod.TweenProperty(_face, "position:y", home.Y, 0.18f).SetTrans(Tween.TransitionType.Sine);
+    }
+
+    /// <summary>A pip a sentence, under the text: the ones read filled, the one showing gold. None for a single sentence.</summary>
+    void DrawPips(Painter p)
+    {
+        if (_sentences.Count < 2) return;
+        for (int i = 0; i < _sentences.Count; i++)
+        {
+            var at = new Vector2(i * 12 + 4, 0);
+            if (i == _at) p.DrawCircle(at, 4, Palette.Gold);
+            else if (i < _at) p.DrawCircle(at, 3, Palette.Muted);
+            else p.DrawArc(at, 3, 0, Mathf.Tau, 12, Palette.Muted, 1.5f);
+        }
     }
 
     /// <summary>
     /// Grows the box upward (its bottom edge stays put) when the text needs more than four lines: as many lines as the
     /// label itself breaks it into (a font's own measure breaks a little later, and a longer language shows it).
     /// </summary>
-    void Fit()
+    void Fit(string sentence)
     {
         // Broken into lines the way the label breaks them (at words, a few pixels inside its width), then measured.
         var paragraph = new TextParagraph
@@ -205,7 +298,7 @@ public partial class MentorView : Control
             BreakFlags = TextServer.LineBreakFlag.Mandatory | TextServer.LineBreakFlag.WordBound | TextServer.LineBreakFlag.Adaptive,
         };
         int size = UiKit.SnapFont(16);
-        paragraph.AddString(_text.Text, UiKit.Font, size);
+        paragraph.AddString(sentence, UiKit.Font, size);
         int lines = Mathf.Max(1, paragraph.GetLineCount());
         float textHeight = lines * (UiKit.Font.GetHeight(size) + _text.GetThemeConstant("line_spacing"));
         float h = Mathf.Max(H, Mathf.Ceil(textHeight) + 48);
@@ -217,11 +310,14 @@ public partial class MentorView : Control
         _text.Size = new Vector2(W - 116, h - 30);
         UiKit.Resized(_text);
         _more.Position = new Vector2(104, h - 26);
+        _pips.Position = new Vector2(104, h - 16);
     }
 
     void UpdateMore()
     {
         int more = _queue.Count + (_held != null ? 1 : 0);
-        _more.Text = _lesson ? (_waiting ? Loc.T("do it to go on") : Loc.T("click to go on")) : more > 0 ? Loc.T($"click for more ({more})") : Loc.T("click to close");
+        _more.Text = !ReadThrough ? Loc.T("click to go on")
+            : _lesson ? (_waiting ? Loc.T("do it to go on") : Loc.T("click to go on"))
+            : more > 0 ? Loc.T($"click for more ({more})") : Loc.T("click to close");
     }
 }

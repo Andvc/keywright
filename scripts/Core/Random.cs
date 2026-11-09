@@ -40,6 +40,95 @@ public static class Money
 /// <summary>Words joined the way the player's language joins them.</summary>
 public static class Words
 {
+    const string Ends = ".!?\u2026\u3002\uff01\uff1f", Closers = "\"'\u201d\u2019)\u00bb\u300d\u300f\uff09]";
+
+    /// <summary>
+    /// A text cut into sentences, for dialogue and tips shown one at a time (0.35): at a full stop, a question or an
+    /// exclamation (with any closing quote after it) followed by a space, or by nothing in a language written without
+    /// spaces (Japanese and Chinese stops end a sentence where they stand); at line breaks too. An ellipsis or a stop
+    /// with a small letter after it doesn't end one ("That song... you know it."), and a scrap of a sentence ("Morning!",
+    /// "Quick!") goes with its neighbour rather than standing alone.
+    /// </summary>
+    public static List<string> Sentences(string text)
+    {
+        var sentences = new List<string>();
+        if (string.IsNullOrWhiteSpace(text)) return sentences;
+        foreach (string paragraph in text.Split('\n'))
+        {
+            var pieces = new List<string>();
+            int start = 0;
+            for (int i = 0; i < paragraph.Length; i++)
+            {
+                char c = paragraph[i];
+                if (Ends.IndexOf(c) < 0) continue;
+                bool wide = c >= '\u3000';
+                int end = i + 1;
+                // A run of stops ("?!", "...") is one ending.
+                while (end < paragraph.Length && Ends.IndexOf(paragraph[end]) >= 0) end++;
+                while (end < paragraph.Length && Closers.IndexOf(paragraph[end]) >= 0) end++;
+                bool ellipsis = end - i >= 3 && paragraph[i] == '.' || c == '\u2026';
+                if (!wide)
+                {
+                    // A Latin stop ends a sentence only before a space (or the end), and not before a small letter.
+                    if (end < paragraph.Length && paragraph[end] != ' ' && paragraph[end] != '\u00a0') continue;
+                    int next = end;
+                    while (next < paragraph.Length && (paragraph[next] == ' ' || paragraph[next] == '\u00a0')) next++;
+                    if (next < paragraph.Length && (char.IsLower(paragraph[next]) || ellipsis && !char.IsUpper(paragraph[next]))) continue;
+                }
+                pieces.Add(paragraph[start..end].Trim());
+                start = end;
+                i = end - 1;
+            }
+            if (start < paragraph.Length && paragraph[start..].Trim().Length > 0) pieces.Add(paragraph[start..].Trim());
+            // Scraps join a neighbour: the next sentence if it's the first, else the one before.
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                if (pieces.Count == 1 || !Scrap(pieces[i])) continue;
+                if (i == 0)
+                {
+                    pieces[1] = pieces[0] + (Spaced(pieces[0]) ? " " : "") + pieces[1];
+                    pieces.RemoveAt(0);
+                }
+                else
+                {
+                    pieces[i - 1] = pieces[i - 1] + (Spaced(pieces[i - 1]) ? " " : "") + pieces[i];
+                    pieces.RemoveAt(i);
+                }
+                i--;
+            }
+            sentences.AddRange(Balanced(pieces.Where(p => p.Length > 0).ToList()));
+        }
+        return sentences;
+    }
+
+    static readonly (char Open, char Close)[] Quotes = { ('"', '"'), ('\u201c', '\u201d'), ('\u300c', '\u300d'), ('\u00ab', '\u00bb') };
+
+    /// <summary>A quotation cut across sentences is closed at the end of each piece and opened again at the next.</summary>
+    static List<string> Balanced(List<string> pieces)
+    {
+        foreach (var (open, close) in Quotes)
+        {
+            int depth = 0;
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                string piece = pieces[i];
+                bool startsInside = depth > 0;
+                if (open == close) depth = piece.Count(ch => ch == open) % 2 == 1 ? (depth > 0 ? 0 : 1) : depth;
+                else depth = Math.Max(0, depth + piece.Count(ch => ch == open) - piece.Count(ch => ch == close));
+                if (startsInside) piece = open + piece;
+                if (depth > 0) piece += close;
+                pieces[i] = piece;
+            }
+        }
+        return pieces;
+    }
+
+    /// <summary>Too short to stand alone: a word or two ("Morning!"), or a few characters in Japanese or Chinese.</summary>
+    static bool Scrap(string sentence) => Spaced(sentence) ? sentence.Length < 10 : sentence.Length < 4;
+
+    /// <summary>Written with spaces between words (not Japanese or Chinese).</summary>
+    static bool Spaced(string text) => text.Any(c => c == ' ') || text.All(c => c < '\u3000');
+
     /// <summary>
     /// A list as the language writes one: "coin, gems, spells" in English, "硬貨、宝石、呪文" in Japanese (the
     /// translators' "{0}, {1}").

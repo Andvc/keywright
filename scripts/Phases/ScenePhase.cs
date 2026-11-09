@@ -9,8 +9,9 @@ namespace Keywright.Phases;
 
 /// <summary>
 /// A few lines between the people behind the story, over the scene's own backdrop (or the shop, dimmed): Bram on the
-/// right, whoever he's talking to on the left, the one speaking lit and the other in shadow. Click (or Space) for the next
-/// line; Skip jumps to the end. Then it hands on.
+/// right, whoever he's talking to on the left, the one speaking lit and the other in shadow. A line is said a sentence
+/// at a time (0.35), the trade's words coloured, the speaker stirring with each; click (or Space) for the next sentence,
+/// then the next line; Skip jumps to the end. Every line goes in the run's history. Then it hands on.
 /// </summary>
 public partial class ScenePhase : Phase
 {
@@ -32,9 +33,15 @@ public partial class ScenePhase : Phase
     readonly string _title, _backdrop;
     readonly Action _then;
     readonly Dictionary<string, Face> _faces = new();
-    Label _name, _text, _more;
+    Label _name, _more;
+    RichTextLabel _text;
+    Painter _pips;
     int _index = -1;
     bool _done;
+
+    /// <summary>The line being said, cut into sentences, and the one showing.</summary>
+    List<string> _sentences = new();
+    int _at;
 
     /// <summary>The bot reads the lines through.</summary>
     public static Action<string> Trace;
@@ -75,8 +82,21 @@ public partial class ScenePhase : Phase
         var box = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.3f)).Place(140, 500, 1000, 160));
         _name = UiKit.MakeLabel("", 24, Palette.Gold, outline: 4).Place(24, 14, 600, 30);
         box.AddChild(_name);
-        _text = UiKit.MakeLabel("", 16, Palette.Text).Wrapped().Place(24, 50, 952, 80);
+        _text = Rich.Make(16, Palette.Text).Place(24, 50, 952, 80);
         box.AddChild(_text);
+        // A pip a sentence, bottom left: which one of the line's is showing.
+        _pips = new Painter(p =>
+        {
+            if (_sentences.Count < 2) return;
+            for (int i = 0; i < _sentences.Count; i++)
+            {
+                var at = new Vector2(i * 12, 0);
+                if (i == _at) p.DrawCircle(at, 4, Palette.Gold);
+                else if (i < _at) p.DrawCircle(at, 3, Palette.Muted);
+                else p.DrawArc(at, 3, 0, Mathf.Tau, 12, Palette.Muted, 1.5f);
+            }
+        }) { Position = new Vector2(30, 138) };
+        box.AddChild(_pips);
         _more = UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Right).Place(600, 128, 380, 20);
         box.AddChild(_more);
         var click = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None };
@@ -116,10 +136,16 @@ public partial class ScenePhase : Phase
         }
     }
 
-    /// <summary>The next line, or on once they've all been said.</summary>
+    /// <summary>The next sentence of the line; past its last, the next line; on once they've all been said.</summary>
     public void Advance()
     {
         if (_done) return;
+        if (_index >= 0 && _at < _sentences.Count - 1)
+        {
+            _at++;
+            ShowSentence(fresh: false);
+            return;
+        }
         if (++_index >= _lines.Count)
         {
             Finish();
@@ -127,11 +153,36 @@ public partial class ScenePhase : Phase
         }
         var line = _lines[_index];
         Trace?.Invoke($"{Story.Name(line.Speaker)}: {line.Text}");
+        State?.Hear(Story.Name(line.Speaker), line.Text, Heard.Dialogue);
         // A line that gives the case a clue notes it as it's said (the top bar shows it).
         if (line.Clue != null) State?.Find(line.Clue);
         _name.Text = Story.Name(line.Speaker);
-        _text.Text = line.Text;
-        _more.Text = _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
+        _sentences = Words.Sentences(line.Text);
+        if (_sentences.Count == 0) _sentences.Add(line.Text);
+        _at = 0;
+        ShowSentence(fresh: true);
+    }
+
+    /// <summary>The sentence showing, coloured; the speaker lit (and stirring), the rest in shadow.</summary>
+    void ShowSentence(bool fresh)
+    {
+        var line = _lines[_index];
+        _text.Text = Rich.Trade(_sentences[_at]);
+        _text.Modulate = new Color(1, 1, 1, 0);
+        _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.16f);
+        _more.Text = _at < _sentences.Count - 1 || _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
+        _pips.QueueRedraw();
+        if (!fresh)
+        {
+            // Another sentence from the same mouth: a smaller stir.
+            if (_faces.GetValueOrDefault(Place(line.Speaker)) is { } speaker)
+            {
+                speaker.Root.Scale = Vector2.One * 1.02f;
+                speaker.Root.CreateTween().TweenProperty(speaker.Root, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back);
+            }
+            Sfx.Play("tick", (line.Speaker == Story.Vane ? 0.7f : line.Speaker == Story.Bram ? 1f : 1.25f) + 0.03f * _at, -10);
+            return;
+        }
         foreach (var (place, face) in _faces)
         {
             bool speaking = place == Place(line.Speaker);
@@ -154,6 +205,9 @@ public partial class ScenePhase : Phase
     {
         if (_done) return;
         _done = true;
+        // Skipped lines were still said: into the history with the rest.
+        if (State != null)
+            for (int i = Math.Max(0, _index + 1); i < _lines.Count; i++) State.Hear(Story.Name(_lines[i].Speaker), _lines[i].Text, Heard.Dialogue);
         // Skipped lines still happened: their clues are noted too.
         if (State != null) Story.Heard(State, _lines);
         _then?.Invoke();

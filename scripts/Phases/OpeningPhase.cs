@@ -151,7 +151,8 @@ public partial class OpeningPhase : Phase
 
         // Everything builds together: rumble, a widening crack of light, the hum, and the camera leaning in.
         _chest.Rumble = Progress;
-        _chest.LidGap = 14f * Progress * Progress;
+        // The lid lifts off the box, and under it the box's own inside fills with light (ChestView's two layers).
+        _chest.LidGap = 22f * Progress * Progress;
         _chest.Glow = Progress;
         Sfx.Hum(Progress);
         Game.Zoom(1f + 0.14f * Progress * Progress, SeamPos);
@@ -185,6 +186,9 @@ public partial class OpeningPhase : Phase
         _chest.GlowColor = color;
         FlingLid(_chest.DetachLid());
         _chest.ShowOpen();
+        // The light inside settles to a glow in the chest's colour as the burst passes (and its shafts with it).
+        CreateTween().TweenMethod(Callable.From<float>(g => _chest.Glow = g), 1f, ChestView.RestGlow, 1.6f).SetDelay(0.25f)
+            .SetTrans(Tween.TransitionType.Sine);
         Fx.Explosion(this, SeamPos + new Vector2(0, -28), 3, color.Lightened(0.3f));
         // The inside lights up: a glow out of the open box, fading as things come out of it.
         Fx.Flare(this, Mouth, color, 160f + 30f * tier, 1.2f, 0.5f + 0.08f * tier);
@@ -714,7 +718,8 @@ public partial class OpeningPhase : Phase
             Fx.Burst(this, at, Palette.Magic, 60, 320f);
             Fx.Aura(this, at, Palette.Magic, 56f);
             Sfx.Play("sting", 1.3f, -2);
-            FloatText(Loc.T("ENCHANTED! x2"), at + new Vector2(0, -70), Palette.Magic, 24);
+            // As much as enchantment is worth here: a spellbinder's ring makes it four times over (0.35: it said x2 all the same).
+            FloatText(State.HasCurio("ring") ? Loc.T("ENCHANTED! x4") : Loc.T("ENCHANTED! x2"), at + new Vector2(0, -70), Palette.Magic, 24);
         }
         if (item.Fake)
         {
@@ -895,7 +900,8 @@ public partial class OpeningPhase : Phase
         // The next day's chest (0.34): Wynn's father's tools go back to the mill, for the waterwheel.
         bool wheel = visit.Beat == GameState.WaterwheelBeat;
         if (!wheel) State.Earn(_worth);
-        State.RecordRead(perfect);
+        // A crate or a mimic was no read at all: it neither makes nor breaks a streak (0.35: it broke a tuning fork's).
+        State.RecordRead(_report);
         int piecesBefore = State.Pieces.Count;
         State.ReadTrue(_purchase.Chest, perfect);
         // A piece of the treasury key for this read (0.34): said here too, not only in the note over the top bar.
@@ -958,6 +964,7 @@ public partial class OpeningPhase : Phase
         string grade = crate || _purchase.Chest.Breathing ? "" : _purchase.Grade switch
         {
             PickGrade.Masterful => Loc.T(" Masterful pick: everything +25%."),
+            PickGrade.Forced when State.HasCurio("knife") => Loc.T(" Forced open with your burglar's knife: no harm done."),
             PickGrade.Forced => Loc.T(" Forced open: everything -10%."),
             _ => "",
         };
@@ -1129,7 +1136,7 @@ public partial class OpeningPhase : Phase
         RefreshDeliver();
         Sfx.Play("sting", 1.4f, -4);
         Game.Hud.SetGold(State.Gold);
-        FloatText(item.Magic ? Loc.T($"+{item.Prestige} exhibition (x2: enchanted!)") : Loc.T($"+{item.Prestige} exhibition"), at + new Vector2(0, -80),
+        FloatText(item.Magic ? Loc.T($"+{State.Points(item)} exhibition (x2: enchanted!)") : Loc.T($"+{State.Points(item)} exhibition"), at + new Vector2(0, -80),
             Palette.Magic, 16);
         Teach("kept");
         RefreshKeep();
@@ -1151,10 +1158,10 @@ public partial class OpeningPhase : Phase
                 continue;
             }
             // The points it would add, so an enchanted thing's double shows before you choose.
-            string points = item.Magic ? $"+{item.Prestige}*" : $"+{item.Prestige}";
+            string points = item.Magic ? $"+{State.Points(item)}*" : $"+{State.Points(item)}";
             button.Disabled = _swap != null || State.Gold + (State.DisplayFull ? State.Display.Max(i => i.Value) : 0) < worth;
             button.Text = Narrow ? $"{(State.DisplayFull ? Loc.T("Swap") : Loc.T("Keep"))} {points}" : State.DisplayFull ? Loc.T($"Swap {points} (-{worth}g)") : Loc.T($"Keep {points} (-{worth}g)");
-            button.TooltipText = Loc.T($"{item.Prestige} exhibition points for {worth}g{((item.Magic ? Loc.T(" (double: it's enchanted)") : ""))}.{((State.DisplayFull ? Loc.T(" Your display is full: sell something on it to make room.") : ""))}");
+            button.TooltipText = Loc.T($"{State.Points(item)} exhibition points for {worth}g{((item.Magic ? Loc.T(" (double: it's enchanted)") : ""))}.{((State.DisplayFull ? Loc.T(" Your display is full: sell something on it to make room.") : ""))}");
         }
     }
 
@@ -1174,19 +1181,21 @@ public partial class OpeningPhase : Phase
         };
         var panel = UiKit.MakePanel(Palette.Magic).Place(248, 296, w, h);
         _swap.AddChild(panel);
-        panel.AddChild(UiKit.MakeLabel(Loc.T($"Your display is full. Sell something to make room for the {item.Name} (+{item.Prestige} points):"),
+        panel.AddChild(UiKit.MakeLabel(Loc.T($"Your display is full. Sell something to make room for the {item.Name} (+{State.Points(item)} points):"),
             16, Palette.Text, HorizontalAlignment.Center).Place(0, 14, w, 20));
         for (int i = 0; i < shown.Count; i++)
         {
             var old = shown[i];
-            bool affordable = State.Gold + old.Value >= worth;
+            // What selling it fetches (as it's sold, off the shelf), not its plain worth.
+            int fetches = State.ShelfValue(old);
+            bool affordable = State.Gold + fetches >= worth;
             // The name on the left (it ends in "..." if it's long), what the swap brings right-aligned, never cut.
             var choice = UiKit.MakeButton("", Palette.Of(old.Rarity).Darkened(0.4f), 16,
                 () => Swap(item, worth, at, old)).Place(16 + i % columns * 320, 44 + i / columns * 48, 312, 40);
             choice.Disabled = !affordable;
-            choice.TooltipText = Loc.T($"{old.Name}: +{old.Value}g, -{old.Prestige} pts");
+            choice.TooltipText = Loc.T($"{old.Name}: +{fetches}g, -{State.Points(old)} pts");
             choice.AddChild(UiKit.MakeItemIcon(old, new Vector2(20, 20), 32));
-            string sums = Loc.T($"+{old.Value}g, -{old.Prestige} pts");
+            string sums = Loc.T($"+{fetches}g, -{State.Points(old)} pts");
             float sumsW = UiKit.TextWidth(sums) + 4;
             var name = UiKit.MakeLabel(old.Name, 16, Palette.Text).Place(40, 10, 312 - 52 - sumsW, 20);
             name.ClipText = true;
@@ -1207,10 +1216,11 @@ public partial class OpeningPhase : Phase
     void Swap(Item item, int worth, Vector2 at, Item old)
     {
         if (!State.Display.Contains(old)) return;
+        int fetched = State.ShelfValue(old);
         State.SellFromDisplay(old);
         CloseSwap();
         Sfx.PlayGroup("pay");
-        FloatText(Loc.T($"Sold the {old.Name}: +{old.Value}g"), new Vector2(640, 196), Palette.Gold, 16);
+        FloatText(Loc.T($"Sold the {old.Name}: +{fetched}g"), new Vector2(640, 196), Palette.Gold, 16);
         if (State.Keep(item, worth)) Kept(item, at);
         else Game.Hud.SetGold(State.Gold);
     }

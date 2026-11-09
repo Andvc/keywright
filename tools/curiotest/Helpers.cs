@@ -118,7 +118,7 @@ public static class T
         int insured = s.Insure(purchase, value);
         value += insured;
         int fee = report.Perfect ? s.PerfectFee(value) : 0;
-        s.RecordRead(report.Perfect);
+        s.RecordRead(report);
         s.ReadTrue(v.Chest, report.Perfect);
         return new Opened(purchase, report, value, settled, insured, fee, v.PricePaid);
     }

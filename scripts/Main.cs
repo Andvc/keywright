@@ -1226,7 +1226,7 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         // An Inquiry entry just noted, or a piece of the treasury key earned (0.34): a note over the top bar, one at a time.
-        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not { HoldsNotes: true } && NotebookView.Open == 0)
+        if (State != null && (_toast == null || !IsInstanceValid(_toast)) && _phase is not { HoldsNotes: true } && NotebookView.Open == 0 && HistoryView.Open == 0)
         {
             if (State.NewPieces.TryDequeue(out var piece)) NotePiece(piece.Piece, piece.Fee, piece.Count);
             else if (State.NewEntries.TryDequeue(out var entry))

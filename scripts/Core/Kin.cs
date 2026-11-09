@@ -194,10 +194,11 @@ public sealed partial class GameState
     public bool NoUse(CurioDef curio) => curio.Key switch
     {
         "crate" => !CanDrop,
-        "book" => Is(Characters.Isolde),
         "monocle" => Has("lamp") || Shows(Heartsongs.Star),
+        // Isolde never pawns her collection (0.35: Nim offered her a pawn ticket; and the visitors' book, which pays her
+        // as it does anyone, he kept from her).
+        "ticket" => Is(Characters.Isolde) || Favoured(Challenges.HonestClerk),
         // What a boon already does as well.
-        "ticket" => Favoured(Challenges.HonestClerk),
         "shell" => Favoured(Challenges.Charm),
         _ => false,
     };
@@ -208,7 +209,7 @@ public sealed partial class GameState
     public bool NoteUsed { get; private set; }
 
     /// <summary>The note would pay what's short tonight: nothing you own can cover it, and it's not the last week.</summary>
-    public bool CanCallNote => HasCurio("note") && !NoteUsed && DuesTonight && !PaidThisWeek && !CanCover && Week < Guild.Weeks;
+    public bool CanCallNote => HasCurio("note") && !NoteUsed && DuesTonight && !PaidThisWeek && !CanCover && Week != Guild.Weeks;
 
     /// <summary>The note pays what's short, and the due is paid. Returns what it paid.</summary>
     public int CallNote()

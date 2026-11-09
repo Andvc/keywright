@@ -1188,7 +1188,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "04587485da7dc284a3b205db742aa30102ea57dbcfd7b8801f83259a7cf77441"
+      "sha256": "1ac98f80b4ef1b8471747b56ee14ace6c51712e5b712fc9ecaa85ddf1bf689a0"
     },
     "res://assets/sprites/chest/blue_body.png": {
       "asset_id": "drawn.chest.blue.body",
@@ -1236,7 +1236,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "1e62cd891eb676a2e638e76e4a021d52353f6d86ec649d6e8ee0076b14191a31"
+      "sha256": "5ef13ad63d90ca2e7aed42defc8598280fe5014be6b9e5b3c540a268b1460f99"
     },
     "res://assets/sprites/chest/crown_body.png": {
       "asset_id": "drawn.chest.crown.body",
@@ -1284,7 +1284,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "e353a382f114cd82f1ebbedf0ced803d0971f544e0750df97351fe551a757cc0"
+      "sha256": "442bef92637112f96e7fcdeb01dcc92824af87ddf0a4e83cb859ad5cf1d8afc8"
     },
     "res://assets/sprites/chest/gold_body.png": {
       "asset_id": "drawn.chest.gold.body",
@@ -1332,7 +1332,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "95c9cff92867de322b8670795d71d578964f5966cfb96cf52a6930441d81ec71"
+      "sha256": "46ec47a23c5cba6f10025d3601cff73e42e89755d286041d140517853caa9cf6"
     },
     "res://assets/sprites/chest/green_body.png": {
       "asset_id": "drawn.chest.green.body",
@@ -1380,7 +1380,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "86eff67d3e989adf577afda8c793fb77cf7bda5fd158379ebde2c0659dc8b07e"
+      "sha256": "c738b7bf4c0521c06bc080ac237af22d8732bc743289cb513f02b86ba05d8c90"
     },
     "res://assets/sprites/chest/lock_dwarven_body.png": {
       "asset_id": "drawn.chest.lock_dwarven.body",
@@ -1524,7 +1524,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "35a328be4657cdf9d2485459ae4a781e80e0369ab84e144806daded21be58347"
+      "sha256": "3f4459492c2e24f52bf744b05622a46a95786486978c7c01821f3cf7acabda6a"
     },
     "res://assets/sprites/chest/wood_body.png": {
       "asset_id": "drawn.chest.wood.body",
@@ -1572,7 +1572,7 @@
       ],
       "reference_scale": 2,
       "pixel_pitch": 3,
-      "sha256": "885af83e58a1e7b3b63485edd045cf00ab36bf3d5f3b954b5084995d09ed9bd9"
+      "sha256": "5ec9f45084ca9a2d9505c1c1eadb88f2e034c92dd7c63ea74f39ea4843e95904"
     },
     "res://assets/sprites/items/ambrosia.png": {
       "asset_id": "item.ambrosia",

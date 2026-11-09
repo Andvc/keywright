@@ -60,6 +60,8 @@ public static class Hints
         ["try_again"] = Loc.T("Too low. One more try, then they'll go."),
         ["lookup"] = Loc.T("Everyone you've traded with has a page in your notebook: how they judge a chest, how they trade, what they're " +
                      "like. Click whoever's at the counter to read theirs."),
+        ["horn"] = Loc.T("Missed what someone said? My old echo horn, at the end of the counter, keeps every word said across it. " +
+                   "Click it to hear the lot again."),
         ["story"] = Loc.T("Listen to where they say it came from. A barrow holds grave goods, a goblin warren mostly coin, a dwarf-hold " +
                     "weapons and gems."),
         ["keep"] = Loc.T("Something grand? You can keep it for display instead of selling it. A good exhibition brings more customers, " +

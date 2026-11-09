@@ -46,6 +46,8 @@ public partial class DayEndPhase : Phase
         _cards = Add(new Node2D());
         _side = Add(new Node2D());
         // Bram first: building the cards can already call for a tip (the Bookkeeping Engine's, the first time it's offered).
+        // The echo horn on the counter, beside closing up: what was said today and before (0.35).
+        Add(new EchoHorn(State) { Position = new Vector2(SideX - 76, 644) });
         _mentor = Add(new MentorView { Position = new Vector2(40, 440), ZIndex = 20 });
         BuildCards();
 
@@ -340,12 +342,12 @@ public partial class DayEndPhase : Phase
             if (!filled) continue;
             var item = shown[i];
             slot.AddChild(UiKit.MakeItemIcon(item, new Vector2(25, 25), 44));
-            var sell = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = Loc.T($"{item.Name}, {item.Prestige} points{(item.Magic ? Loc.T(" (double: enchanted)") : "")}. Click to sell it for {State.SaleValue(item)}g.") };
+            var sell = new Button { Flat = true, FocusMode = Control.FocusModeEnum.None, TooltipText = Loc.T($"{item.Name}, {State.Points(item)} points{(item.Magic ? Loc.T(" (double: enchanted)") : "")}. Click to sell it for {State.ShelfValue(item)}g.") };
             sell.Pressed += () => AskSell(item);
             slot.AddChild(sell.Place(0, 0, 50, 50));
         }
         string found = Loc.T($"Collection: {State.Found.Count} of {Collection.Size} found.");
-        string book = State.HasCurio("book") && score > 0 ? Loc.T($" Visitors leave {Curios.BookPerPoint * score}g a night.")
+        string book = State.BookCoins > 0 ? Loc.T($" Visitors leave {State.BookCoins}g a night.")
             : State.Admission > 0 ? Loc.T($" Visitors pay {State.Admission}g a night at the door.") : "";
         _cards.AddChild(UiKit.MakeLabel(found + book, 16, Palette.Muted).Place(x0, y0 + 84, 816, 20));
     }
@@ -380,10 +382,10 @@ public partial class DayEndPhase : Phase
     public void AskSell(Item item)
     {
         if (_confirm != null || !State.Display.Contains(item)) return;
-        int value = State.SaleValue(item);
+        int value = State.ShelfValue(item);
         string text = item.IsSong
             ? Loc.T($"{item.Name} goes back to the Locking, and takes this with it: {item.SongDef.Effect} It fetches nothing.")
-            : Loc.T($"Sell the {item.Name} for {value}g? It comes off display: {item.Prestige} exhibition points fewer.");
+            : Loc.T($"Sell the {item.Name} for {value}g? It comes off display: {State.Points(item)} exhibition points fewer.");
         _confirm = Add(UiKit.MakeConfirm(item.IsSong ? Loc.T("LET IT GO?") : Loc.T("SELL IT?"), text, item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold,
             item.IsSong ? Loc.T("Let it go") : Loc.T($"Sell: +{value}g"), () => SellFromDisplay(item), Loc.T("Keep it"), CancelPayOff));
     }
@@ -392,7 +394,7 @@ public partial class DayEndPhase : Phase
     {
         CancelPayOff();
         if (!State.Display.Contains(item)) return;
-        int value = State.SaleValue(item);
+        int value = State.ShelfValue(item);
         State.SellFromDisplay(item);
         Game.Hud.SetGold(State.Gold);
         if (item.IsSong) Sfx.Play("deflate", 0.8f, -4);
@@ -580,7 +582,7 @@ public partial class DayEndPhase : Phase
     /// <summary>A note over the top bar was clicked: the notebook at the Inquiry.</summary>
     public override bool ShowInquiry()
     {
-        if (_notebook != null) return false;
+        if (_notebook != null || HistoryView.Open > 0) return false;
         OpenNotebook(NotebookView.InquiryPage);
         return true;
     }
@@ -588,7 +590,7 @@ public partial class DayEndPhase : Phase
     /// <summary>The top bar's due was clicked: the notebook at the Guild's debt (where paying it off is weighed).</summary>
     public override bool ShowDebt()
     {
-        if (_notebook != null) return false;
+        if (_notebook != null || HistoryView.Open > 0) return false;
         _notebook = Add(new NotebookView(State, NotebookView.CalendarPage, focusDebt: true) { ZIndex = 30 });
         _notebook.Closed += () => _notebook = null;
         Game.Moment("09_debt", 0.4);

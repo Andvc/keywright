@@ -24,6 +24,10 @@ public partial class TalkPhase : Phase
     Button _next;
     int _line = -1;
     bool _answered, _leaving;
+
+    /// <summary>The line at the counter (or on the page) cut into sentences, and how far it's been said (0.35).</summary>
+    System.Collections.Generic.List<string> _sentences = new();
+    int _at;
     int _goldBefore, _swayedBefore, _logBefore, _keepsakesBefore;
 
     /// <summary>The tale this talk belongs to, if it's a beat.</summary>
@@ -78,6 +82,8 @@ public partial class TalkPhase : Phase
         // A tale's first beat says so: a new story is starting, and the notebook will follow it.
         if (Tale != null && TaleLines == 0 && _talk.Offer == null)
             Add(UiKit.MakeLabel(Loc.T("A NEW TALE BEGINS"), 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(PanelX, 96, PanelW, 20));
+        // The echo horn at the counter's end, for what's been said so far (0.35).
+        shop.Light(Add(new EchoHorn(State) { Position = EchoHorn.AtCounter }));
         _mentor = Add(new MentorView { Position = new Vector2(322, 588), ZIndex = 40 });
         _next = Add(UiKit.MakeButton(Loc.T("Go on"), Palette.Text, 16, Advance).Place(PanelX + PanelW - 180, 620, 180, 48));
         _goldBefore = State.Gold;
@@ -106,29 +112,60 @@ public partial class TalkPhase : Phase
         else if (_panel == null) Next();
     }
 
-    /// <summary>The next line, or the choices once every line is said.</summary>
+    /// <summary>
+    /// The next sentence of the line being said (Bram finishes his in his corner first), then the next line; the choices
+    /// once every line is said (with the last sentence of the last).
+    /// </summary>
     public void Next()
     {
         if (_panel != null || _leaving) return;
-        _line++;
-        if (_line >= _talk.Lines.Count)
+        if (_mentor.MidText) _mentor.Next();
+        else if (_line >= 0 && _line < _talk.Lines.Count && _at < _sentences.Count - 1)
         {
-            Ask();
-            return;
+            _at++;
+            ShowSentence();
+            Sfx.Play("tick", 1f + 0.03f * _at, -12);
         }
-        var line = _talk.Lines[_line];
-        ScenePhase.Trace?.Invoke($"{Story.Name(line.Speaker)}: {line.Text}");
-        if (line.Speaker == Story.Bram && !_talk.Letter) _mentor.Say(line.Text);
-        else Say(line.Text);
-        Sfx.Play("tick", 1f, -10);
-        // The last line: the choices come with it.
-        if (_line == _talk.Lines.Count - 1) Ask();
+        else
+        {
+            _line++;
+            if (_line >= _talk.Lines.Count)
+            {
+                Ask();
+                return;
+            }
+            var line = _talk.Lines[_line];
+            ScenePhase.Trace?.Invoke($"{Story.Name(line.Speaker)}: {line.Text}");
+            State.Hear(Story.Name(line.Speaker), line.Text, Heard.Dialogue);
+            _at = 0;
+            if (line.Speaker == Story.Bram && !_talk.Letter)
+            {
+                _sentences = new() { line.Text };
+                _mentor.Say(line.Text);
+            }
+            else
+            {
+                _sentences = Words.Sentences(line.Text);
+                if (_sentences.Count == 0) _sentences.Add(line.Text);
+                ShowSentence();
+            }
+            Sfx.Play("tick", 1f, -10);
+        }
+        // The last line, said to its end: the choices come with it.
+        if (_line == _talk.Lines.Count - 1 && _at >= _sentences.Count - 1 && !_mentor.MidText) Ask();
+    }
+
+    /// <summary>The sentence the line's got to: in the bubble, one at a time; on a letter's page, the page so far.</summary>
+    void ShowSentence()
+    {
+        if (_letterText != null) _letterText.Text = string.Join(" ", _sentences.Take(_at + 1));
+        else _person.Say(_sentences[_at], record: false);
     }
 
     void Say(string text, Color? color = null)
     {
         if (_letterText != null) _letterText.Text = text;
-        else _person.Say(text, color);
+        else _person.Say(text, color, record: false);
     }
 
     /// <summary>
@@ -168,7 +205,13 @@ public partial class TalkPhase : Phase
         if (!_talk.Done) return false;
         _answered = true;
         ScenePhase.Trace?.Invoke($"> {choice.Label}" + (reply != null ? $" / {reply}" : ""));
-        if (reply != null) Say(reply, Palette.Good);
+        // What you said, and their answer, into the run's history.
+        State.Hear(Characters.Get(State.Character)?.Name ?? "", choice.Label, Heard.Dialogue);
+        if (reply != null)
+        {
+            State.Hear(Story.Name(Person), reply, Heard.Dialogue);
+            Say(reply, Palette.Good);
+        }
         if (_panel != null) Sfx.Play("chime", 1f, -8);
         _panel?.QueueFree();
         ShowKept(ShowNoted(ShowWhatChanged()));

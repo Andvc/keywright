@@ -181,6 +181,10 @@ ends.
 - **Dreams and cards**: Mother Sorrel dreams true, and Madame Zell's cards don't lie: each tells you something that's
   coming, if you can read it.
 - **Letters and knocks at night**: some news comes after the shutters are down.
+- **Bram's echo horn** (0.35): a brass horn on a little box at the counter's end, a Keyhold clerk's from before the
+  Locking, when the archmages took every owner's word down at the counter where the chest was sealed. It keeps every
+  word said across the counter it stands on, a season at a time, and says it back to whoever asks: Bram has had it on
+  his stall for forty years, which is how an old man remembers who promised what.
 - **The Inquiry** (0.34): what doesn't add up (where Bram is, what breathed in the treasury, why the first morning came
   again) goes in the notebook: what you saw, who said what, what you tried and what came of it, and what you now have
   reason to do. What you find out stays with you from season to season, if you remember; a paper you hold doesn't.

@@ -170,17 +170,18 @@ public static class Events
     /// <param name="ward">They've warded something, whatever the day (a sleeper's pillow's dreams).</param>
     public static Visit Restate(Random rng, Visit visit, string eventKey, int tier, bool ward = false)
     {
-        if (visit.Lesson != null || visit.Says != Clue.None || visit.Chest.Sealed || visit.Seller.SlipPrice) return visit;
+        if (visit.Lesson != null || visit.Talk != null || visit.Says != Clue.None || visit.Chest.Sealed || visit.Seller.SlipPrice) return visit;
         var says = eventKey switch { "dreaming" => Clue.Dream, "wardens" => Clue.Riddle, "census" => Clue.Tally, _ => Clue.None };
         if (says == Clue.None) return visit;
         if (ward || says == Clue.Riddle || (says == Clue.Dream && rng.NextFloat() < DreamWards)) Market.WardOne(rng, visit.Seller, visit.Chest, tier);
         // A riddle is only left for a warded thing: a chest with every kind in it already has nothing to ward.
         if (says == Clue.Riddle && visit.Chest.Warded == null) return visit;
+        // The same visit, with what they now tell you (0.35: a new visit lost a friend's waived terms, a tale's beat, a gift).
         var clue = Market.MakeClue(rng, visit.Seller, visit.Chest, says);
-        return new Visit(visit.Seller, visit.Chest, visit.Noticed, visit.Trade, visit.Ask, visit.Floor, visit.Pitch)
-        {
-            Origin = visit.Origin, Fee = visit.Fee, Clue = clue.Note, ClueKinds = clue.Kinds, Says = says, HearsOut = visit.HearsOut, Unruffled = visit.Unruffled,
-        };
+        visit.Clue = clue.Note;
+        visit.ClueKinds = clue.Kinds;
+        visit.Says = says;
+        return visit;
     }
 
     /// <summary>The crier's reward: one thing of the wanted kind, as good as the regulars ask for, today only.</summary>

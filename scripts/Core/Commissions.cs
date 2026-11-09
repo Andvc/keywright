@@ -133,8 +133,11 @@ public static class Patrons
                 });
                 continue;
             }
-            // What they want is the kind of thing they'd bring, one kind per commission.
+            // What they want is the kind of thing they'd bring, one kind per commission; once every kind is asked for, an
+            // errand book's extra ones ask for a kind a second time (0.35: the board stopped at one a kind, short of its two).
             var free = kinds.Where(k => list.All(c => c.Kind == CommissionKind.Enchanted || c.Category != k)).ToArray();
+            if (free.Length == 0 && state.HasCurio("errand"))
+                free = kinds.Where(k => list.Count(c => c.Kind != CommissionKind.Enchanted && c.Category == k) < 2).ToArray();
             if (free.Length == 0) break;
             var kind = rng.PickWeighted(free, k => patron.Kinds[(int)k] + 0.5f);
             list.Add(rng.NextFloat() < 0.4f ? Lot(kind, state.Tier, patron.Key) : Piece(kind, state.Tier, patron.Key));

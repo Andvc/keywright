@@ -439,12 +439,14 @@ public sealed partial class GameState
         int room = QuietOpening ? 1 : BeatsPerDay;
         foreach (var beat in ReadyBeats(night: false).Take(room).ToList())
             Stage(beat, rng);
-        // Bram's kin's apprentice brings a chest he's fished out, on each week's first morning.
+        // Bram's kin's apprentice brings a chest he's fished out, on each week's first morning; after the day's first
+        // customer, with a guest book (its better sort comes first).
+        int first = HasCurio("guestbook") && Queue.Count > 0 ? 1 : 0;
         if (Flagged(TaleBook.Apprentice) && DayOfWeek == 1 && !Gone.Contains(TaleBook.Pip))
-            Queue.Insert(0, TaleBook.ApprenticeChest(this, rng));
+            Queue.Insert(first, TaleBook.ApprenticeChest(this, rng));
         // Tobin's Lamp (0.32): his lads bring a chest up from under the Barrow on each week's first morning.
         if (Keeps(Core.Keepsakes.Lamp) && DayOfWeek == 1 && !Gone.Contains(TaleBook.Tobin))
-            Queue.Insert(0, TaleBook.TobinChest(this, rng));
+            Queue.Insert(first, TaleBook.TobinChest(this, rng));
         StageOffers(rng);
     }
 
@@ -454,7 +456,10 @@ public sealed partial class GameState
         {
             var visit = beat.Brings(this, rng);
             visit.Beat = beat.Key;
-            var regulars = Queue.Select((v, i) => (v, i)).Where(p => p.v.Lesson == null && p.v.Talk == null && p.v.Beat == null).ToArray();
+            if (!visit.Gift) Welcome(visit);
+            // In a regular's place (never the guest book's better sort, the day's first).
+            var regulars = Queue.Select((v, i) => (v, i)).Where(p => p.v.Lesson == null && p.v.Talk == null && p.v.Beat == null &&
+                                                                     !(p.i == 0 && HasCurio("guestbook") && Queue.Count > 1)).ToArray();
             if (regulars.Length > 0) Queue[regulars[rng.Next(regulars.Length)].i] = visit;
             else Queue.Add(visit);
             return;
@@ -687,6 +692,7 @@ public sealed partial class GameState
         SaveCampaign(data);
         SaveMimic(data);
         SaveMarket(data);
+        SaveHistory(data);
     }
 
     void LoadTales(SaveData data)
@@ -707,6 +713,7 @@ public sealed partial class GameState
         foreach (string key in (data.KeepsakesHeld ?? new List<string>()).Where(Core.Keepsakes.Exists)) GiveKeepsake(key);
         Promises.AddRange(data.Promises ?? new List<Promise>());
         PorterUntil = data.PorterUntil;
+        LoadHistory(data);
         LoadInquiry(data);
         LoadCampaign(data);
         LoadMimic(data);

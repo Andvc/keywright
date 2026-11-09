@@ -22,8 +22,9 @@ public static class Strategy
     public static Shake[] Levels(Visit visit, GameState state = null)
     {
         bool hard = (state?.CanShakeHardAt(visit.Seller) ?? !visit.Seller.Packhorse) && !(state?.MindsHardShake(visit.Seller) ?? visit.Seller.HatesHardShake);
-        // Through an ear trumpet nothing is drowned out or muffled: a hard shake hears it all.
-        if (visit.Chest.Unmasked && hard) return new[] { Shake.Hard };
+        // Through an ear trumpet nothing is drowned out or muffled: a hard shake hears it all, and a gentle one the sand
+        // pouring that a hard shake doesn't tell from a spell's rustle (0.35: the careful player marked sand as a spell).
+        if (visit.Chest.Unmasked && hard) return Rushed(visit, state) ? new[] { Shake.Hard } : new[] { Shake.Gentle, Shake.Hard };
         // A rotten chest stands one strength (two, with a pocket watch's patience).
         float limit = state?.ShakeLimit(visit.Seller) ?? visit.Seller.ShakeLimit;
         if (limit > 0 && limit < 2 * visit.Seller.ShakeLimit) return new[] { DelicateShare(visit) > 0.5f ? Shake.Gentle : hard ? Shake.Hard : Shake.Firm };
@@ -124,6 +125,8 @@ public static class Strategy
     /// </summary>
     public static void Reckon(Appraisal slip, Hearing hearing, Visit visit, GameState state = null)
     {
+        // With the smugglers' compass every chest has a false bottom: mark it, dropped or not (0.35: only a drop did).
+        if (state?.HasCurio("compass") == true && slip.Tier >= 2 && !visit.Chest.Breathing && visit.Chest.Crate == null) slip.Hidden = true;
         if (Weighed(visit, state)) Weigh(slip, hearing, visit, state);
         else if (Counted(visit, state) && HeardAll(visit, hearing, slip.Tier))
             slip.Hidden = Market.ArticleCount(visit.Chest) > slip.Marked.Where(k => k != Category.Heartsong).Sum(slip.Count) + hearing.Spotted().Count();
@@ -187,7 +190,9 @@ public static class Strategy
 
         // Under a false bottom: nothing, or one of the things people hide (a drop, if there was one, settles which).
         var hidden = new List<(Category? Kind, float Chance)>();
-        float hiddenChance = tier >= 2 ? seller.HiddenChance + (state?.Boosts.Hidden ?? 0) : 0;
+        // (A smuggler's hook makes them likelier; the smugglers' compass, certain.)
+        float hiddenChance = tier < 2 ? 0 : state?.Boosts.AlwaysHidden == true ? 1
+            : Math.Min(1, (seller.HiddenChance + (state?.Boosts.Hidden ?? 0)) * (state?.Boosts.HiddenFactor ?? 1));
         if (!hearing.Hollow) hidden.Add((null, hearing.Dropped ? 1 : 1 - hiddenChance));
         if (tier >= 2 && (!hearing.Dropped || hearing.Hollow))
             foreach (var (kind, chance) in Market.HiddenOdds(tier)) hidden.Add((kind, chance * (hearing.Hollow ? 1 : hiddenChance)));
@@ -620,7 +625,7 @@ public static class Strategy
         if (!state.CanCover) return null;
         var order = new List<object>();
         int gold = state.Gold;
-        foreach (var item in state.Display.Where(state.CanPawn).OrderBy(i => i.Prestige).ThenBy(state.PawnValue))
+        foreach (var item in state.Display.Where(state.CanPawn).OrderBy(state.Points).ThenBy(state.PawnValue))
         {
             if (gold >= state.DueNow) break;
             order.Add(item);
@@ -733,12 +738,14 @@ public static class Strategy
         // A Heartsong: worth nothing sold, a great deal singing in the shop, and it takes no room. Always kept.
         if (item.IsSong) return (true, null);
         if (state.Is(Characters.Isolde)) return Collects(state, item, value);
-        if (!item.Displayable || item.Prestige < 2 || state.Tier < 3 || (state.Exhibition >= GameState.ExhibitionCap && !state.HasCurio("book")) ||
-            value > item.Prestige * GoldPerPoint || state.Gold - value < 20 + 15 * state.Tier)
+        // Points as the exhibition counts them (a tailor's dummy's cloaks, a velvet rope), not plain prestige.
+        int points = state.Points(item);
+        if (!item.Displayable || points < 2 || state.Tier < 3 || (state.Exhibition >= GameState.ExhibitionCap && !state.HasCurio("book")) ||
+            value > points * GoldPerPoint || state.Gold - value < 20 + 15 * state.Tier)
             return (false, null);
         if (!state.DisplayFull) return (true, null);
-        var plainest = state.Display.Where(i => !i.IsSong).OrderBy(i => i.Prestige).First();
-        return plainest.Prestige < item.Prestige ? (true, plainest) : (false, null);
+        var plainest = state.Display.Where(i => !i.IsSong).OrderBy(state.Points).First();
+        return state.Points(plainest) < points ? (true, plainest) : (false, null);
     }
 
     /// <summary>Isolde keeps what her visitors will pay back in this many nights, while she can spare it.</summary>
@@ -751,14 +758,14 @@ public static class Strategy
     /// </summary>
     static (bool Keep, Item Replace) Collects(GameState state, Item item, int value)
     {
-        if (!item.Displayable || state.DisplaySlots == 0 || value > item.Prestige * PaybackNights * Characters.DoorCoins / Characters.DoorPoints) return (false, null);
+        if (!item.Displayable || state.DisplaySlots == 0 || value > state.Points(item) * PaybackNights * Characters.DoorCoins / Characters.DoorPoints) return (false, null);
         Item replace = null;
         if (state.DisplayFull)
         {
-            replace = state.Display.Where(i => !i.IsSong).OrderBy(i => i.Prestige).ThenBy(i => i.Value).First();
-            if (replace.Prestige >= item.Prestige) return (false, null);
+            replace = state.Display.Where(i => !i.IsSong).OrderBy(state.Points).ThenBy(i => i.Value).First();
+            if (state.Points(replace) >= state.Points(item)) return (false, null);
         }
-        int back = replace == null ? 0 : state.SaleValue(replace);
+        int back = replace == null ? 0 : state.ShelfValue(replace);
         return state.Gold + back - value >= Reserve(state) ? (true, replace) : (false, null);
     }
 }

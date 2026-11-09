@@ -140,6 +140,9 @@ public sealed class SaveData
     public Dictionary<string, int> OffersDeclined { get; set; }
     public Dictionary<string, int> Keepsakes { get; set; }
 
+    /// <summary>What's been said this run (0.35), for the listening horn: the last <see cref="GameState.HistoryLimit"/> lines.</summary>
+    public List<Said> History { get; set; }
+
     /// <summary>The keepsakes tales gave this run (0.32; <see cref="Core.Keepsakes"/>). Not to be confused with <see cref="Keepsakes"/>, what tales set aside.</summary>
     public List<string> KeepsakesHeld { get; set; }
     public List<Promise> Promises { get; set; }
@@ -528,6 +531,9 @@ public sealed class SavedItem
 
     /// <summary>Which Heartsong (for the Heartsong kind).</summary>
     public string Song { get; set; }
+
+    /// <summary>What it would have fetched at its opening (0.35; 0: not known), the least it sells for off the shelf.</summary>
+    public int Worth { get; set; }
 }
 
 /// <summary>

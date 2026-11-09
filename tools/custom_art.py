@@ -2086,19 +2086,50 @@ def _chest3_open(finish):
     f = CHEST3_FINISHES[finish]
     g = Cells(CHEST3_W, CHEST3_OPEN)
     w = g.w
-    # Seen from just above: the far rim (narrower for being farther), the inside's back wall and its depth, the side
-    # walls slanting out to the near rim at the seam; then the box as it always was.
-    g.poly([(5, 8), (w - 6, 8), (w - 1, 37), (0, 37)], f["D"])
-    g.poly([(5, 8), (w - 6, 8), (w - 6, 12), (5, 12)], f["T"])
-    g.fill(5, 8, w - 5, 9, f["L"])
-    g.poly([(8, 12), (w - 9, 12), (w - 6, 36), (5, 36)], f["k"])
-    g.poly([(8, 12), (w - 9, 12), (w - 9, 20), (8, 20)], f["j"])
-    g.poly([(8, 12), (w - 9, 12), (w - 9, 15), (8, 15)], f["i"])
-    # The side walls' inner faces: the right one catches the light coming in over the left rim.
-    g.poly([(w - 9, 12), (w - 6, 12), (w - 3, 36), (w - 6, 36)], f["L"])
-    g.poly([(5, 12), (8, 12), (5, 36), (2, 36)], f["S"])
-    # The near rim's top, and its edge.
-    g.fill(0, 36, w, 39, f["T"])
+    # Seen from just above (0.35): the far rim (narrower for being farther), and inside it a little room in one-point
+    # perspective: the back wall facing you, the side walls' inner faces slanting out to the near rim, and the floor's
+    # planks running side to side, each nearer one wider, so the eye reads depth. The game lights it from inside in the
+    # chest's colour (ChestView's inner light); the art is the box unlit, in its lining's colours (i j k). This is also
+    # what shows between the lid and the box while the lid lifts: one box, its inside showing, not two halves and a gap.
+    g.poly([(6, 8), (w - 7, 8), (w - 1, 37), (0, 37)], f["D"])
+    # The rims' top faces: the far one lit, the left one catching the light, the right one turning from it.
+    g.poly([(6, 8), (w - 7, 8), (w - 7, 12), (6, 12)], f["T"])
+    g.fill(6, 8, w - 6, 9, f["L"])
+    g.poly([(6, 8), (9, 12), (5, 37), (0, 37)], f["L"])
+    g.poly([(w - 7, 8), (w - 10, 12), (w - 6, 37), (w - 1, 37)], f["M"])
+    # The opening, and the room inside it.
+    g.poly([(9, 12), (w - 10, 12), (w - 6, 37), (5, 37)], f["k"])
+    bx0, bx1, by1 = 13, w - 14, 22                 # the back wall's inner face: x bx0..bx1, rows 12..by1
+    # The back wall: its lip lit under the far rim, then the board, a seam between two boards.
+    g.fill(bx0, 12, bx1, by1, f["j"])
+    g.fill(bx0, 12, bx1, 14, f["i"])
+    g.fill(bx0, 17, bx1, 18, f["k"])
+    # The floor: from the back wall's foot (as wide as the wall) out to the near rim (wider), planks side to side.
+    floor = [(bx0, by1), (bx1, by1), (w - 9, 37), (8, 37)]
+    g.poly(floor, f["i"])
+    for y in (by1, by1 + 3, by1 + 7, by1 + 12):    # seams: nearer planks wider (3, 4, 5 rows)
+        for x in range(w):
+            if g.get(x, y) == f["i"]:
+                g.set(x, y, f["k"])
+    # Where the floor meets the back wall it's in the wall's shadow; and along the left, in the left wall's.
+    for x in range(bx0, bx1):
+        if g.get(x, by1 + 1) == f["i"]:
+            g.set(x, by1 + 1, f["j"])
+    for y in range(by1, 37):
+        t = (y - by1) / (37 - by1)
+        edge = bx0 + (8 - bx0) * t                  # the floor's left edge at this row
+        for x in range(int(edge), int(edge + 3 + 5 * t)):
+            if g.get(x, y) == f["i"]:
+                g.set(x, y, f["j"])
+    # The side walls' inner faces, from the back corners out to the near rim: the left one in shade, the right one lit.
+    g.poly([(9, 12), (bx0, 12), (bx0, by1), (8, 37), (5, 37)], f["j"])
+    g.poly([(w - 10, 12), (bx1, 12), (bx1, by1), (w - 9, 37), (w - 6, 37)], f["i"])
+    # The back corners, a line of shade where wall meets wall, and the left wall's lip under its rim.
+    for y in range(12, by1):
+        g.set(bx0 - 1, y, f["k"])
+        g.set(bx1, y, f["j"])
+    # The near rim's top, and its edge: thin, so a lid lifting a little shows the inside over it.
+    g.fill(0, 37, w, 39, f["T"])
     g.fill(0, 39, w, 40, f["L"])
     g.paste(_chest3_body(finish), 0, 40)
     return g

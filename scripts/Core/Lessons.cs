@@ -21,12 +21,15 @@ public sealed class LessonCheck
 }
 
 /// <summary>
-/// One thing Bram asks you to do, and how to tell it's done. With no check, it's something to read: click on.
+/// One thing Bram asks you to do, and how to tell it's done (0.35: every step is something to do, never just to read,
+/// and doing it moves the lesson on, with the box still up).
 /// </summary>
 /// <param name="Done">Whether it's done. Checked every frame, so it can be done before it's asked.</param>
-/// <param name="Trades">The step is done by trading, so the trade buttons are open during it.</param>
+/// <param name="Trades">The step is done by trading: the trade buttons are open, and the deal (bought, passed, the
+/// Wardens sent for) ends the lesson.</param>
 /// <param name="When">Only for shops where this holds (a tool you own, or don't).</param>
-public sealed record LessonStep(string Say, Func<LessonCheck, bool> Done = null, bool Trades = false, Func<GameState, bool> When = null);
+/// <param name="Do">The action, in a few words, shown under the step and highlighted (<see cref="Lessons"/>' Do texts).</param>
+public sealed record LessonStep(string Say, Func<LessonCheck, bool> Done = null, bool Trades = false, Func<GameState, bool> When = null, string Do = null);
 
 /// <summary>
 /// The first time a seller comes in (with tips on), their visit is a lesson: a chest built to show off their habit,
@@ -52,9 +55,11 @@ public sealed class Lesson
     /// The visit, with its chest a colour finer (and everything in it a step better) when the day makes every chest so: a
     /// storm, or a guest book's better sort. A rule holds for a lesson's chest too (0.34's playtest met a storm's wood chest).
     /// </summary>
-    public Visit MakeOn(Random rng, int tier, bool brighter)
+    /// <param name="boosts">The shop's word on prices (its name, a curio's: everyone haggling, a silver tongue), as for any chest.</param>
+    public Visit MakeOn(Random rng, int tier, bool brighter, Boosts boosts = null)
     {
         Lessons.Brighter = brighter;
+        Lessons.Boost = boosts ?? Boosts.None;
         try
         {
             return Make(rng, tier);
@@ -62,6 +67,7 @@ public sealed class Lesson
         finally
         {
             Lessons.Brighter = false;
+            Lessons.Boost = Boosts.None;
         }
     }
 }
@@ -69,6 +75,32 @@ public sealed class Lesson
 public static class Lessons
 {
     static Item I(Category kind, Rarity quality, bool magic = false, bool fake = false) => new(kind, quality, magic, fake);
+
+    // ---- What a step asks you to do, in a few words (0.35): shown under it, highlighted ----
+
+    static readonly string Gentle = Loc.T("Shake it gently"), Firm = Loc.T("Shake it firmly"), Hard = Loc.T("Shake it hard"),
+        Every = Loc.T("Shake it at every strength"), GentleFirm = Loc.T("Shake it gently, then firmly"), GentleHard = Loc.T("Shake it gently, then hard"),
+        FirmOrHard = Loc.T("Shake it firmly or hard"), Any = Loc.T("Shake it, any strength"), Drop = Loc.T("Lift it high and let go"),
+        Lodestone = Loc.T("Lodestone on, then shake it gently"), LookUp = Loc.T("Click the seller"), TickHeard = Loc.T("Tick what you heard"),
+        TickExact = Loc.T("Tick exactly what you heard"), Buy = Loc.T("Buy it"), BuyOrPass = Loc.T("Buy it, or pass"), Pass = Loc.T("Pass"),
+        Offer = Loc.T("Make an offer"), OfferOrPass = Loc.T("Make an offer, or pass"), Wardens = Loc.T("Send for the Wardens, or pass");
+
+    /// <summary>"Tick Coin": a slip row by the name the slip gives it.</summary>
+    static string Tick(Category kind) => Loc.T($"Tick {Categories.Get(kind).Name}");
+
+    static string Tick(Category a, Category b) => Loc.T($"Tick {Categories.Get(a).Name} and {Categories.Get(b).Name}");
+
+    /// <summary>"Tick Weapons and False bottom".</summary>
+    static string TickWithBottom(Category kind) => Loc.T($"Tick {Categories.Get(kind).Name} and {Loc.T("False bottom")}");
+
+    static string TickTwiceWithBottom(Category kind) => Loc.T($"Tick {Categories.Get(kind).Name} twice, and {Loc.T("False bottom")}");
+
+    static string TickNot(Category tick, Category not) => Loc.T($"Tick {Categories.Get(tick).Name}, not {Categories.Get(not).Name}");
+
+    static string TickOrHard(Category kind) => Loc.T($"Tick {Categories.Get(kind).Name}, or shake it hard");
+
+    /// <summary>Two of Bram's texts said as one step, a sentence at a time.</summary>
+    static string Join(params string[] texts) => string.Join("\n", texts);
 
     /// <summary>A lesson's chest with a thing sealed in its ward.</summary>
     static Chest Warded(Chest chest, Item warded)
@@ -80,11 +112,86 @@ public static class Lessons
     /// <summary>The lesson being made is on a day that makes every chest a colour finer (<see cref="Lesson.MakeOn"/>).</summary>
     [ThreadStatic] internal static bool Brighter;
 
-    static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, int? floor = null, string pitch = null, string from = null)
+    /// <summary>The shop's word on the lesson's price, as on any chest (<see cref="Lesson.MakeOn"/>).</summary>
+    [ThreadStatic] static Boosts _boost;
+
+    internal static Boosts Boost
+    {
+        get => _boost ?? Boosts.None;
+        set => _boost = value;
+    }
+
+    static Visit Price(Random rng, string seller, Chest chest, int tier, int? ask = null, int? floor = null, string pitch = null, string from = null,
+        Trade? trade = null)
     {
         if (Brighter) chest.Brighten();
-        return Market.Price(rng, Sellers.Get(seller), chest, tier, ask, null, pitch, null, floor, origin: from == null ? null : Origins.Get(from));
+        return Market.Price(rng, Sellers.Get(seller), chest, tier, ask, trade, pitch, null, floor, Boost, origin: from == null ? null : Origins.Get(from));
     }
+
+    /// <summary>A plain wood chest of one of each of these kinds, at a fixed price (the scripted first days).</summary>
+    static Visit Scripted(Random rng, string seller, int tier, int ask, string pitch, params Category[] kinds) =>
+        Price(rng, seller, new Chest(kinds.Select(k => I(k, Rarity.Common))), tier, ask, pitch: pitch, trade: Trade.Fixed);
+
+    /// <summary>
+    /// The scripted first day (with tips on, a profile's first run, <see cref="GameState.FirstDayScripted"/>): Pip, Ada and
+    /// Garrick, each a lesson made of Bram's first tips, a step an action (0.35: Pip's gentle shake was a tip, and didn't
+    /// count while the tip was up); then Bettany, passing, to open the second morning. Their own lessons come later.
+    /// </summary>
+    public static readonly Lesson[] FirstDay =
+    {
+        new()
+        {
+            Seller = "pip",
+            Covers = new[] { "intro", "heard_Coins", "slip", "fixed" }, // loc: keys
+            // Pip names a price today, so the first lesson is only about listening; from tomorrow he asks you to name one.
+            Make = (rng, tier) => Scripted(rng, "pip", tier, 4,
+                Loc.T("Fished it out of the millpond this morning. I didn't shake it, it might break! Is {price} okay?"), Category.Coins),
+            Steps = new LessonStep[]
+            {
+                new(Hints.Get("intro"), c => c.Tried(Shake.Gentle), Do: Gentle),
+                new(Hints.Get("heard_Coins"), c => c.Slip.Count(Category.Coins) > 0, Do: Tick(Category.Coins)),
+                new(Join(Hints.Get("slip"), Hints.Get("fixed")), Trades: true, Do: Buy),
+            },
+        },
+        new()
+        {
+            Seller = "ada",
+            Covers = new[] { "first_ada", "heard_Garb" }, // loc: keys
+            Make = (rng, tier) => Scripted(rng, "ada", tier, 3, null, Category.Garb),
+            Steps = new LessonStep[]
+            {
+                new(Hints.Get("first_ada"), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
+                new(Hints.Get("heard_Garb"), c => c.Slip.Count(Category.Garb) > 0, Do: Tick(Category.Garb)),
+                new(Loc.T("She heard nothing, so she priced nothing: what she asks is for the box. The cloak comes free. Buy it."), Trades: true, Do: Buy),
+            },
+        },
+        new()
+        {
+            Seller = "garrick",
+            Covers = new[] { "first_garrick", "heard_Arms" }, // loc: keys
+            Make = (rng, tier) => Scripted(rng, "garrick", tier, 7, null, Category.Coins, Category.Arms),
+            Steps = new LessonStep[]
+            {
+                new(Hints.Get("first_garrick"), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
+                new(Loc.T("Clank: a weapon. It only stirs at a firm shake, and while it clanks you can't hear anything delicate. At a " +
+                    "gentle shake it lies still, and you heard what Garrick couldn't: a jingle. Tick Weapons and Coin."),
+                    c => c.Slip.Count(Category.Arms) > 0 && c.Slip.Count(Category.Coins) > 0, Do: Tick(Category.Arms, Category.Coins)),
+                new(Loc.T("He priced the clank and nothing else: the coin comes free. Buy it."), Trades: true, Do: Buy),
+            },
+        },
+        // The second morning's first customer: Bettany heard everything there was, and asks what it's worth. Pass.
+        new()
+        {
+            Seller = "bettany",
+            Covers = new[] { "first_bettany" },
+            Make = (rng, tier) => Scripted(rng, "bettany", tier, 7, null, Category.Arms),
+            Steps = new LessonStep[]
+            {
+                new(Hints.Get("first_bettany"), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
+                new(Loc.T("One clank, and she heard it too: she's priced everything there is, and a bit more. Pass."), Trades: true, Do: Pass),
+            },
+        },
+    };
 
     static readonly Dictionary<string, Lesson> ByKey = new Lesson[]
     {
@@ -97,9 +204,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Pip never shakes anything and has no idea what it's worth: he'll ask you to name a price. First, shake it " +
-                    "at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("Tick what you heard. Then set the slider to a few coins and make your offer: he'll take almost anything. " +
-                    "You get two tries."), c => c.Visit.OffersMade > 0, Trades: true),
+                    "You get two tries."), c => c.Visit.OffersMade > 0, Trades: true, Do: Offer),
             },
         },
         new()
@@ -109,15 +216,15 @@ public static class Lessons
             Make = (rng, tier) =>
             {
                 var visit = Price(rng, "garrick", new Chest(new[] { I(Category.Coins, 0), I(Category.Arms, 0) }), tier);
-                visit.SetFloor(Money.Round(visit.Ask * 0.45f));
+                visit.SetFloor(Money.Round(visit.Ask * 0.45f * Boost.Floor));
                 return visit;
             },
             Steps = new LessonStep[]
             {
                 new(Loc.T("Garrick shakes hard, so a clank drowns out anything delicate for him. He haggles: he always asks about double. " +
-                    "Shake it yourself, gently too."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "Shake it yourself, gently too."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("Tick what you heard. Then use the slider to offer him about half his price. You get one offer: much " +
-                    "lower and he storms off."), c => c.Visit.OffersMade > 0, Trades: true),
+                    "lower and he storms off."), c => c.Visit.OffersMade > 0, Trades: true, Do: Offer),
             },
         },
         new()
@@ -129,8 +236,8 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Bettany counts the rattles and charges the same for each, whatever's rattling: a purse of coin costs what a " +
-                    "goblin's cleaver does. Shake it: what's rattling?"), c => c.Tried(Shake.Gentle)),
-                new(Loc.T("A jingle: coin, worth more than any cleaver. At cleaver prices, that's a bargain.")),
+                    "goblin's cleaver does. Shake it: what's rattling?"), c => c.Tried(Shake.Gentle), Do: Gentle),
+                new(Loc.T("A jingle: coin, worth more than any cleaver. At cleaver prices, that's a bargain."), Trades: true, Do: Buy),
             },
         },
         new()
@@ -140,10 +247,10 @@ public static class Lessons
             Make = (rng, tier) => Price(rng, "tobin", new Chest(new[] { I(Category.Coins, 0), I(Category.Garb, 0) }), tier),
             Steps = new LessonStep[]
             {
-                new(Loc.T("The Barrow: Tobin always says where a chest came from, and the place tells you what it tends to hold. " +
-                    "Barrow chests hold grave goods: coin, weapons, a shroud.")),
-                new(Loc.T("His chests are rotten through: about two seconds of shaking and no more. One strength, then. Hard stirs " +
-                    "everything, but a clank would drown the coin. Shake it hard."), c => c.Tried(Shake.Hard)),
+                new(Join(Loc.T("The Barrow: Tobin always says where a chest came from, and the place tells you what it tends to hold. " +
+                    "Barrow chests hold grave goods: coin, weapons, a shroud."),
+                    Loc.T("His chests are rotten through: about two seconds of shaking and no more. One strength, then. Hard stirs " +
+                    "everything, but a clank would drown the coin. Shake it hard.")), c => c.Tried(Shake.Hard), Do: Hard),
             },
         },
 
@@ -156,9 +263,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("A goblin burrow: shinies her clan dug up, mostly coin. Nettle shook it gently. Do the same: the first strength " +
-                    "is free."), c => c.Tried(Shake.Gentle)),
+                    "is free."), c => c.Tried(Shake.Gentle), Do: Gentle),
                 new(Loc.T("Every strength after that puts her price up a tenth. A gentle shake can't stir anything heavy, so pay once " +
-                    "more for a hard one. Gentle and hard between them hear everything firm would."), c => c.Tried(Shake.Gentle, Shake.Hard)),
+                    "more for a hard one. Gentle and hard between them hear everything firm would."), c => c.Tried(Shake.Gentle, Shake.Hard), Do: Hard),
             },
         },
         new()
@@ -170,9 +277,10 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Rook weighs every chest on her game scale and prices by the pound. Her mare spooks at a hard shake, so " +
-                    "nothing gets shaken hard. Shake it gently, then firmly."), c => c.Tried(Shake.Gentle, Shake.Firm)),
+                    "nothing gets shaken hard. Shake it gently, then firmly."), c => c.Tried(Shake.Gentle, Shake.Firm), Do: GentleFirm),
                 new(Loc.T("A slosh: a potion, 3 lb. Her scale says 6 lb, so 3 lb never sounded. A cloak weighs 3, a spell 1, and wolf " +
-                    "dens are full of cloaks. Tick a potion and a cloak."), c => c.Slip.Count(Category.Potions) > 0 && c.Slip.Count(Category.Garb) > 0),
+                    "dens are full of cloaks. Tick a potion and a cloak."), c => c.Slip.Count(Category.Potions) > 0 && c.Slip.Count(Category.Garb) > 0,
+                    Do: Tick(Category.Potions, Category.Garb)),
             },
         },
         new()
@@ -188,13 +296,14 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Everyone you've traded with has a page in your notebook: how they judge a chest, and what they're like. Click " +
-                    "Mother Sorrel to read hers."), c => c.Visit.LookedUp),
+                    "Mother Sorrel to read hers."), c => c.Visit.LookedUp, Do: LookUp),
                 new(Loc.T("Mother Sorrel's price is a dream, but she always dreams true: of what the Wood warded in the chest, or else the " +
-                    "dearest thing in it, as a sign. A river is a potion. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "dearest thing in it, as a sign. A river is a potion. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard),
+                    Do: Every),
                 new(Loc.T("A flump and a rustle, and no slosh. The potion is warded: sealed in the ward itself, silent and weightless. " +
-                    "Name it: tick Potions."), c => c.Slip.Count(Category.Potions) > 0),
+                    "Name it: tick Potions."), c => c.Slip.Count(Category.Potions) > 0, Do: Tick(Category.Potions)),
                 new(Loc.T("A ward gives up only to the truth. Name what's there and nothing that isn't, and the warded thing comes out " +
-                    "when you open the chest. Nobody priced it.")),
+                    "when you open the chest. Nobody priced it."), Trades: true, Do: Buy),
             },
         },
         new()
@@ -205,9 +314,10 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Brother Cadoc shook it firmly, and won't have it shaken hard: the saints are resting. Half again if you do. " +
-                    "Shake it gently, then firmly."), c => c.Tried(Shake.Gentle, Shake.Firm)),
+                    "Shake it gently, then firmly."), c => c.Tried(Shake.Gentle, Shake.Firm), Do: GentleFirm),
                 new(Loc.T("Crypt chests are full of holy cloaks, and cloth only sounds at a hard shake, so he never prices it. Tick Cloaks " +
-                    "on faith, or shake it hard and pay for certainty."), c => c.Slip.Count(Category.Garb) > 0 || c.Tried(Shake.Hard)),
+                    "on faith, or shake it hard and pay for certainty."), c => c.Slip.Count(Category.Garb) > 0 || c.Tried(Shake.Hard),
+                    Do: TickOrHard(Category.Garb)),
             },
         },
         new()
@@ -219,11 +329,12 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Corvin packs his chests in straw, so nothing clinked at the Wardens' toll. Straw muffles a strength: a gentle " +
-                    "shake stirs nothing at all. Shake it firmly."), c => c.Tried(Shake.Firm)),
+                    "shake stirs nothing at all. Shake it firmly."), c => c.Tried(Shake.Firm), Do: Firm),
                 new(Loc.T("A jingle: what a gentle shake would stir, a firm one stirs through straw. That's all he heard. Now hard: " +
-                    "weapons stir through straw only then, and cloaks and spells never."), c => c.Tried(Shake.Hard)),
-                new(Loc.T("A clank he never heard. Smugglers love a false bottom, too: lift the chest high and let go."), c => c.Hearing.Dropped),
-                new(Loc.T("A hollow BOOM. Tick a weapon and False bottom: he priced neither. Then haggle."), c => c.Slip.Hidden && c.Slip.Count(Category.Arms) > 0),
+                    "weapons stir through straw only then, and cloaks and spells never."), c => c.Tried(Shake.Hard), Do: Hard),
+                new(Loc.T("A clank he never heard. Smugglers love a false bottom, too: lift the chest high and let go."), c => c.Hearing.Dropped, Do: Drop),
+                new(Loc.T("A hollow BOOM. Tick a weapon and False bottom: he priced neither. Then haggle."), c => c.Slip.Hidden && c.Slip.Count(Category.Arms) > 0,
+                    Do: TickWithBottom(Category.Arms)),
             },
         },
 
@@ -236,9 +347,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Hesper sells dowries from weddings that never were. A Thornwick dowry always holds coin for luck, a cloak for " +
-                    "warmth and a potion for health. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "warmth and a potion for health. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("A jingle and a flump: luck and warmth. No slosh: the bride warded her potion, silent and weightless. Name it: " +
-                    "tick Potions."), c => c.Slip.Count(Category.Potions) > 0),
+                    "tick Potions."), c => c.Slip.Count(Category.Potions) > 0, Do: Tick(Category.Potions)),
             },
         },
         new()
@@ -253,9 +364,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Flick runs chests for the Magpie: cheap, and in a hurry. Lay a hand on it: shake it, any strength."),
-                    c => c.Tried(Shake.Gentle) || c.Tried(Shake.Firm) || c.Tried(Shake.Hard)),
+                    c => c.Tried(Shake.Gentle) || c.Tried(Shake.Firm) || c.Tried(Shake.Hard), Do: Any),
                 new(Loc.T("Your mark went cold: it isn't Flick's to sell, and if you buy it, it won't open. Send for the Wardens: Flick runs, the " +
-                    "chest goes home, and they pay you a finder's share. Or just pass."), Trades: true),
+                    "chest goes home, and they pay you a finder's share. Or just pass."), Trades: true, Do: Wardens),
             },
             Covers = new[] { "stolen", "seller_flick" },
         },
@@ -269,9 +380,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Ilse reads the Arcanum's packing tag: it lists each kind of thing packed, and the archmages warded the most " +
-                    "dangerous. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "dangerous. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("A flump and a rustle: the cloak and the spell. The gem on the tag never tinkled: it's warded. Name it: tick Gems."),
-                    c => c.Slip.Count(Category.Gems) > 0),
+                    c => c.Slip.Count(Category.Gems) > 0, Do: Tick(Category.Gems)),
             },
         },
         new()
@@ -282,9 +393,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Archmage Orme wagers on your craft: read her chest exactly (every kind, every count) and she gives back " +
-                    "a third of the price when it's open. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "a third of the price when it's open. Shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("Tick exactly what you heard, no more and no less. A careful read takes a third off her price."),
-                    c => c.Slip.Count(Category.Coins) > 0 && c.Slip.Count(Category.Arms) > 0 && c.Slip.Count(Category.Scrolls) > 0),
+                    c => c.Slip.Count(Category.Coins) > 0 && c.Slip.Count(Category.Arms) > 0 && c.Slip.Count(Category.Scrolls) > 0, Do: TickExact),
             },
         },
         new()
@@ -294,8 +405,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Durgan's a dwarf: he knows weapons, prices the rest at half, and takes every tinkle for a diamond. Shake it " +
-                    "gently yourself."), c => c.Tried(Shake.Gentle)),
-                new(Loc.T("A tinkle: a gem, and he's priced it like the crown jewels. Offer what it's really worth, or let him keep it.")),
+                    "gently yourself."), c => c.Tried(Shake.Gentle), Do: Gentle),
+                new(Loc.T("A tinkle: a gem, and he's priced it like the crown jewels. Offer what it's really worth, or let him keep it."),
+                    Trades: true, Do: OfferOrPass),
             },
         },
         new()
@@ -306,9 +418,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Grandmother Vell left a riddle on each lid about one thing inside, and if she warded something, it's about " +
-                    "that. Read it, then shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "that. Read it, then shake it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("A hilt and an edge, or forged and sheathed: a weapon. And nothing clanked: grandmother warded it. Name it: tick " +
-                    "Weapons."), c => c.Slip.Count(Category.Arms) > 0),
+                    "Weapons."), c => c.Slip.Count(Category.Arms) > 0, Do: Tick(Category.Arms)),
             },
         },
         new()
@@ -322,10 +434,10 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Brass sells pawn by the lot, two or three of a kind, and prices one of each kind he hears. Shake it at every " +
-                    "strength and count: each thing sounds from its own spot."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "strength and count: each thing sounds from its own spot."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("Two jingles and a rustle: three things, and he priced one purse. But the ticket counts every article pledged, " +
                     "and it says four. He won't have pledges dropped: the fourth is under a false bottom. Tick two Coins and False bottom."),
-                    c => c.Slip.Count(Category.Coins) == 2 && c.Slip.Hidden),
+                    c => c.Slip.Count(Category.Coins) == 2 && c.Slip.Hidden, Do: TickTwiceWithBottom(Category.Coins)),
             },
         },
         new()
@@ -335,10 +447,10 @@ public static class Lessons
                 Rarity.Rare), I(Category.Gems, Rarity.Rare)), tier),
             Steps = new LessonStep[]
             {
-                new(Loc.T("Quire sells the Archive's vault chests with their ward-rolls, faded by three hundred years. The roll names " +
-                    "what was warded: 'B_o_d R_b_'.")),
-                new(Loc.T("The Blood Ruby: a gem. Name it, and the ward gives it up when you open the chest: tick Gems."),
-                    c => c.Slip.Count(Category.Gems) > 0),
+                new(Join(Loc.T("Quire sells the Archive's vault chests with their ward-rolls, faded by three hundred years. The roll names " +
+                    "what was warded: 'B_o_d R_b_'."),
+                    Loc.T("The Blood Ruby: a gem. Name it, and the ward gives it up when you open the chest: tick Gems.")),
+                    c => c.Slip.Count(Category.Gems) > 0, Do: Tick(Category.Gems)),
             },
         },
         new()
@@ -348,9 +460,10 @@ public static class Lessons
                 Rarity.Rare), tier),
             Steps = new LessonStep[]
             {
-                new(Loc.T("Tilly shakes hard and prices every rustle as a drowned wizard's spellbook. Shake it gently."), c => c.Tried(Shake.Gentle)),
+                new(Loc.T("Tilly shakes hard and prices every rustle as a drowned wizard's spellbook. Shake it gently."), c => c.Tried(Shake.Gentle), Do: Gentle),
                 new(Loc.T("A rustle at a gentle shake? Parchment only rustles when it's shaken hard: that's river sand pouring, worth " +
-                    "nothing. Tick only the slosh: Potions."), c => c.Slip.Count(Category.Potions) > 0 && c.Slip.Count(Category.Scrolls) == 0),
+                    "nothing. Tick only the slosh: Potions."), c => c.Slip.Count(Category.Potions) > 0 && c.Slip.Count(Category.Scrolls) == 0,
+                    Do: TickNot(Category.Potions, Category.Scrolls)),
             },
         },
         new()
@@ -361,8 +474,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Sir Rowan wants his grandfather's sword. If there are weapons inside, the best of them goes back to him, for " +
-                    "the fee he named. Shake it: is there a clank?"), c => c.Tried(Shake.Firm) || c.Tried(Shake.Hard)),
-                new(Loc.T("A clank: that blade is his. Count it at his fee, not its worth, and see whether the rest pays for the chest.")),
+                    "the fee he named. Shake it: is there a clank?"), c => c.Tried(Shake.Firm) || c.Tried(Shake.Hard), Do: FirmOrHard),
+                new(Loc.T("A clank: that blade is his. Count it at his fee, not its worth, and see whether the rest pays for the chest."),
+                    Trades: true, Do: BuyOrPass),
             },
         },
 
@@ -374,9 +488,9 @@ public static class Lessons
                 Rarity.Epic), tier),
             Steps = new LessonStep[]
             {
-                new(Loc.T("An imp, with an hourglass: twelve seconds, from when you close this. Things from the Maw's hoard often beat " +
-                    "their colour. Shake it gently, then hard. Quick!")),
-                new(Loc.T("Gently, then hard!"), c => c.Tried(Shake.Gentle, Shake.Hard)),
+                // His clock starts once this has been read through (CounterPhase: the patience runs while a step waits for you).
+                new(Loc.T("An imp, with an hourglass: twelve seconds, from when you've read this. Things from the Maw's hoard often beat " +
+                    "their colour. Shake it gently, then hard. Quick!"), c => c.Tried(Shake.Gentle, Shake.Hard), Do: GentleHard),
             },
         },
         new()
@@ -389,9 +503,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("A devil's bargain: Sallow's price is low, but the dearest thing inside is his. Shake it at every " +
-                    "strength: what's in there?"), c => c.Tried(Shake.Gentle) && (c.Tried(Shake.Firm) || c.Tried(Shake.Hard))),
+                    "strength: what's in there?"), c => c.Tried(Shake.Gentle) && (c.Tried(Shake.Firm) || c.Tried(Shake.Hard)), Do: Every),
                 new(Loc.T("Four things: he takes the best, you keep three. With many middling things his bargain is a good one; with " +
-                    "one grand thing and little else, it's his.")),
+                    "one grand thing and little else, it's his."), Trades: true, Do: BuyOrPass),
             },
         },
         new()
@@ -403,9 +517,9 @@ public static class Lessons
             {
                 new(Loc.T("Skrae clicks like a bat and listens to the echoes: round is coin, long a weapon, soft a cloak, hollow a potion, " +
                     "flat a spell, tiny a gem. Echoes come back off warded things too. Shake it at every strength."),
-                    c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("A jingle and a clank: the round one and the long one. Nothing sloshed, so the hollow one is warded: tick Potions."),
-                    c => c.Slip.Count(Category.Potions) > 0),
+                    c => c.Slip.Count(Category.Potions) > 0, Do: Tick(Category.Potions)),
             },
         },
         new()
@@ -416,9 +530,9 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Countess Vey prices only her gems, at what she paid for them. Whatever else the maid packed comes free. Shake " +
-                    "it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    "it at every strength."), c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("Tick everything you heard: the rest is a gift. Some of her gems are paste, though, and she won't have a " +
-                    "lodestone near them."), c => c.Slip.Count(Category.Scrolls) > 0 && c.Slip.Count(Category.Potions) > 0),
+                    "lodestone near them."), c => c.Slip.Count(Category.Scrolls) > 0 && c.Slip.Count(Category.Potions) > 0, Do: TickHeard),
             },
         },
         new()
@@ -428,9 +542,9 @@ public static class Lessons
                 Rarity.Epic), I(Category.Coins, Rarity.Epic)), tier),
             Steps = new LessonStep[]
             {
-                new(Loc.T("Madame Zell draws three cards from the Locking's own deck: a suit drawn twice is what the ward holds; three " +
-                    "different, nothing. Coins came up twice.")),
-                new(Loc.T("So there's warded coin. Name it: tick Coin."), c => c.Slip.Count(Category.Coins) > 0),
+                new(Join(Loc.T("Madame Zell draws three cards from the Locking's own deck: a suit drawn twice is what the ward holds; three " +
+                    "different, nothing. Coins came up twice."), Loc.T("So there's warded coin. Name it: tick Coin.")),
+                    c => c.Slip.Count(Category.Coins) > 0, Do: Tick(Category.Coins)),
             },
         },
         new()
@@ -441,11 +555,12 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("Gilt sells demon gold: gilded iron, and it jingles just like the real thing. Turn the lodestone on and " +
-                    "shake it gently."), c => c.Hearing.HasTried(Shake.Gentle, true), When: s => s.Has("magnet")),
+                    "shake it gently."), c => c.Hearing.HasTried(Shake.Gentle, true), When: s => s.Has("magnet"), Do: Lodestone),
                 new(Loc.T("The jingle went quiet: iron, gilded, worth nothing. The tinkle's real: tick Gems, and leave Coin unticked."),
-                    c => c.Slip.Count(Category.Gems) > 0 && c.Slip.Count(Category.Coins) == 0, When: s => s.Has("magnet")),
+                    c => c.Slip.Count(Category.Gems) > 0 && c.Slip.Count(Category.Coins) == 0, When: s => s.Has("magnet"),
+                    Do: TickNot(Category.Gems, Category.Coins)),
                 new(Loc.T("Gilt sells demon gold, gilded iron, as gold and gems, and it sounds just like the real thing. Only a " +
-                    "lodestone can tell. Too cheap to be true, usually."), When: s => !s.Has("magnet")),
+                    "lodestone can tell. Too cheap to be true, usually."), Trades: true, When: s => !s.Has("magnet"), Do: BuyOrPass),
             },
         },
         new()
@@ -457,9 +572,9 @@ public static class Lessons
             {
                 new(Loc.T("Old Aldo plays a game: his price is whatever your slip says. Read it exactly and he takes a quarter off; " +
                     "read it wrong and you pay what it truly holds, and a quarter more. Shake it at every strength."),
-                    c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard)),
+                    c => c.Tried(Shake.Gentle, Shake.Firm, Shake.Hard), Do: Every),
                 new(Loc.T("Tick exactly what you heard, then buy. Funny: that ring of his has the royal seal on it."),
-                    c => c.Slip.Count(Category.Coins) > 0 && c.Slip.Count(Category.Gems) > 0 && c.Slip.Count(Category.Garb) > 0),
+                    c => c.Slip.Count(Category.Coins) > 0 && c.Slip.Count(Category.Gems) > 0 && c.Slip.Count(Category.Garb) > 0, Do: TickExact),
             },
         },
         new()
@@ -469,7 +584,7 @@ public static class Lessons
             Steps = new LessonStep[]
             {
                 new(Loc.T("That's no merchant, Kit. That's the Maw, in a borrowed body. One coin for the chest; but buy it, and " +
-                    "everyone after him today asks twice as much. Count who's still waiting before you say yes.")),
+                    "everyone after him today asks twice as much. Count who's still waiting before you say yes."), Trades: true, Do: BuyOrPass),
             },
         },
     }.ToDictionary(l => l.Seller);

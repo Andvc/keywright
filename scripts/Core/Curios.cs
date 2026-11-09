@@ -102,9 +102,9 @@ public static class Curios
         new("hourglass", Loc.T("Waiting Game"), Loc.T($"Every chest you pass makes the next seller ask {Pct(WaitStep)} less (up to {Pct(WaitMax)}). Buying starts it again."),
             U, "hourglass", 1, T(Haggling, Crowds)),
         new("bell", Loc.T("Closing Bell"), Loc.T($"The last customer of the day asks {Pct(1 - BellPrice)} less."), U, "bell", 1, T(Haggling)),
-        new("coffer", Loc.T("Haggler's Purse"), Loc.T($"Everyone haggles with you, and {Pct(CofferShare)} of whatever you talk them down by comes back to you as well."), R, "coffer", 2,
+        new("coffer", Loc.T("Haggler's Purse"), Loc.T($"Everyone but Old Aldo and the Maw haggles with you, and {Pct(CofferShare)} of whatever you talk them down by comes back to you as well."), R, "coffer", 2,
             T(Haggling, Coffers)),
-        new("goldentongue", Loc.T("Golden Tongue"), Loc.T($"Everyone haggles and nobody walks out: go as low as you like, and they come down to {Pct(1 - GoldenFloor)} under the least they'd take."),
+        new("goldentongue", Loc.T("Golden Tongue"), Loc.T($"All but Old Aldo and the Maw haggle and never walk out: go as low as you like, and they come down to {Pct(1 - GoldenFloor)} under their least."),
             L, "goldentongue", 3, T(Haggling)),
 
         // The perfect read: count every thing, mark every glow and boom, and be paid for it.
@@ -134,11 +134,11 @@ public static class Curios
         // Wards: read the sign, name what never sounds, and the ward gives it up.
         new("wardlamp", Loc.T("Warden's Lantern"), Loc.T("Every sign a seller leaves (a dream, a tag, a riddle, a card...) points at a warded thing."),
             C, "wardlamp", 2, T(Wards)),
-        new("pillow", Loc.T("Sleeper's Pillow"), Loc.T($"Sellers dream true for you: {Pct(PillowShare)} of them have warded something, and tell you their dream."), U, "pillow", 2,
+        new("pillow", Loc.T("Sleeper's Pillow"), Loc.T($"Sellers dream true for you: {Pct(PillowShare)} of those with nothing else to tell you have warded something, and tell you their dream."), U, "pillow", 2,
             T(Wards)),
         new("wardtally", Loc.T("Wardbreaker's Tally"), Loc.T($"Each warded thing you name this run makes warded things sell for {Pct(WardTallyStep)} more."), U, "wardtally", 2, T(Wards)),
         new("wardkey", Loc.T("Ward-Key"), Loc.T("A warded thing you name comes out a step better."), R, "wardkey", 2, T(Wards, Appraisal)),
-        new("aldricseal", Loc.T("The Aldric Seal"), Loc.T("Every chest has a warded thing, and its seller tells you a sign for it."), L, "aldricseal", 3, T(Wards)),
+        new("aldricseal", Loc.T("The Aldric Seal"), Loc.T("Every seller with nothing else to tell you has warded a thing in their chest, and tells you a sign for it."), L, "aldricseal", 3, T(Wards)),
 
         // Luck: what comes out better than its chest. Sellers hear of a lucky shop; the art is in which chest gets the luck.
         new("shell", Loc.T("Lucky Shell"), Loc.T($"A dry spell ends twice as soon: luck starts to turn after {ShellPityAfter} plain finds, not {GameState.PityAfter}."), C, "shell", 1,
@@ -149,7 +149,7 @@ public static class Curios
         new("horseshoe", Loc.T("Horseshoe"), Loc.T($"Each chest in a row with a surprise makes the next one's things {Pct(HorseshoeStep)} likelier to come out a step better (up to {Pct(HorseshoeMax)})."),
             U, "horseshoe", 2, T(Luck)),
         new("clover", Loc.T("Four-Leaf Clover"), Loc.T("The first chest you buy each week: everything in it comes out a step better."), R, "clover", 2, T(Luck)),
-        new("star", Loc.T("Shooting Star"), Loc.T("Once a day, the first thing to come out better than its chest climbs a step further."), R, "star", 2, T(Luck)),
+        new("star", Loc.T("Shooting Star"), Loc.T("Once a day, the first thing to come out better than its chest climbs a step further (a purple thing shines)."), R, "star", 2, T(Luck)),
         new("spindle", Loc.T("Fate's Spindle"), Loc.T($"Each surprise this run makes everything {Pct(SpindleStep)} likelier to come out a step better (up to {Pct(SpindleMax)})."),
             L, "spindle", 3, T(Luck)),
 
@@ -158,7 +158,7 @@ public static class Curios
         new("queue", Loc.T("Queue Ticket"), Loc.T($"The first chest you pass each day comes back at the end of the day, asking {Pct(1 - QueuePrice)} less."), U, "queue", 1,
             T(Crowds, Haggling)),
         new("horn", Loc.T("Barker's Horn"), Loc.T($"Two more customers every day, but word's out: everyone asks {Pct(HornDearer - 1)} more."), U, "horn", 2, T(Crowds)),
-        new("guestbook", Loc.T("Guest Book"), Loc.T("The day's first customer is the better sort: their chest is a colour finer."), U, "guestbook", 2, T(Crowds, Luck)),
+        new("guestbook", Loc.T("Guest Book"), Loc.T("The day's first customer is the better sort: their chest is a colour finer (as far as purple)."), U, "guestbook", 2, T(Crowds, Luck)),
 
         // Display: what you keep.
         new("catalogue", Loc.T("Collector's Catalogue"), Loc.T($"Every new kind of find this run pays {CataloguePerTier}g (more in a grander shop)."), C, "catalogue", 1, T(Display)),
@@ -188,7 +188,7 @@ public static class Curios
 
         // The fence: fakes.
         new("loupe", Loc.T("Jeweller's Loupe"), Loc.T("Paste gems and demon gold sell as costume pieces: a quarter of the real thing."), C, "loupe", 4, T(Fakes)),
-        new("mark", Loc.T("Fence's Mark"), Loc.T("Crooks come twice as often, and the Maw's buyers pay for any fake what the real thing fetches."), R, "mark", 3,
+        new("mark", Loc.T("Fence's Mark"), Loc.T("Crooks come by more often, and the Maw's buyers pay for any fake what the real thing fetches."), R, "mark", 3,
             T(Fakes, Appraisal)),
 
         // Coffers: the purse, and bad nights.
@@ -483,11 +483,14 @@ public static class Curios
     public static string LuckLine(string key, int things)
     {
         string n = Loc.Plural(things, $"{things} thing", $"{things} things");
+        // "gauntlet+": what a mender's step made better, as against what it mended (said "mended").
+        bool mended = key is "gauntlet" or "cap" or "blindfold";
+        key = key.TrimEnd('+');
         string name = Exists(key) ? Get(key).Name : Heartsongs.Exists(key) ? Loc.T(Heartsongs.Get(key).Name) : key == "restorer" ? Loc.T("Your restorers") : key;
         return key switch
         {
             "token" => Loc.T($"{name}: {n} swung!"),
-            "gauntlet" or "cap" or "blindfold" => Loc.T($"{name}: {n} mended."),
+            _ when mended => Loc.T($"{name}: {n} mended."),
             "crescent" => Loc.T($"{name}: {n} held steady."),
             Heartsongs.Ember => Loc.T($"{name}: {n} tempered!"),
             _ => Loc.T($"{name}: {n} came out better!"),

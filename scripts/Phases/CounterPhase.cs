@@ -33,7 +33,7 @@ public partial class CounterPhase : Phase
 
     /// <summary>The slip's panel, and the line under its header that the Heartsong row takes over once one sings.</summary>
     Node2D _panel;
-    Label _ticked;
+    RichTextLabel _ticked;
     Button _songRow;
 
     sealed class Row
@@ -58,7 +58,10 @@ public partial class CounterPhase : Phase
     static readonly Core.Shake[] Levels = { Core.Shake.Gentle, Core.Shake.Firm, Core.Shake.Hard };
     readonly Label[] _strengthWords = new Label[3];
     Node2D _strength;
-    Label _hint, _notes, _worth, _askLabel, _ask, _chanceText, _footer, _timer, _scale, _slipWeight, _rot;
+    Label _hint, _worth, _askLabel, _ask, _chanceText, _footer, _timer, _scale, _slipWeight, _rot;
+
+    /// <summary>The notes under the chest, with the trade's words coloured, the seller's rule in gold and what they state in violet.</summary>
+    RichTextLabel _notes;
     Painter _chance;
     float _chanceShown;
     Button _buy, _pass, _offer, _magnetButton, _notebookButton;
@@ -78,7 +81,10 @@ public partial class CounterPhase : Phase
     public ShakeBox Shake => _shake;
     public MentorView Mentor => _mentor;
     public bool Concluded => !_visit.Deciding;
-    public bool Busy => _busy || _notebook != null || _sellConfirm != null;
+    public bool Busy => _busy || _notebook != null || _sellConfirm != null || HistoryView.Open > 0;
+
+    /// <summary>Bram's echo horn, at the counter's end: everything said this season (0.35).</summary>
+    public EchoHorn Horn { get; private set; }
 
     /// <summary>An outcome's panel is up (the Wardens, a walkout...): the note waits for the next customer.</summary>
     public override bool HoldsNotes => _busy;
@@ -129,7 +135,7 @@ public partial class CounterPhase : Phase
         BuildStrength();
         if (State.Weighs || _visit.Says == Clue.Pounds) BuildScale();
         // Four lines (a colour, a lock, a seller's rule, what the drop said) and room for a fifth before the waiting queue.
-        _notes = Add(UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(316, 500, 484, 104));
+        _notes = Add(Rich.Make(16, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(316, 500, 484, 104));
         _notes.ZIndex = 10;
         _timer = Add(UiKit.MakeLabel("", 24, Palette.Warn, HorizontalAlignment.Center, outline: 4).Place(230, 222, 64, 32));
         if (State.Impatient(_visit.Seller))
@@ -148,12 +154,21 @@ public partial class CounterPhase : Phase
         BuildQueue();
         BuildBoard();
         BuildPanel();
+        // Bram's echo horn stands at the counter's far end, clear of whoever's behind it: click it for what's been said.
+        Horn = Add(new EchoHorn(State) { Position = EchoHorn.AtCounter });
+        _shop.Light(Horn);
+        Horn.Opened += view => view.Closed += Refresh;
         _mentor = Add(new MentorView { Position = new Vector2(322, 588), ZIndex = 40 });
         _mentor.LessonRead += NextStep;
         _mentor.LessonSkipped += EndLesson;
 
         Sfx.PlayGroup("door_open", 1f, -6);
         _seller.Enter();
+        // What the seller states, coloured as they say it (0.35): their price, and any clue they give (a tally, a dream, a tag).
+        var marks = new List<(string, Color)>();
+        if (_visit.FirstAsk > 0) marks.Add((Money.Say(_visit.FirstAsk), Palette.Gold));
+        if (!string.IsNullOrWhiteSpace(_visit.ClueSaid)) marks.Add((_visit.ClueSaid, Palette.Magic));
+        _seller.Marks = marks.ToArray();
         _seller.Say(_visit.Pitch);
         State.HeardStory(_visit);
         Game.Hud.SetDay(State.Day, State.Tier);
@@ -163,7 +178,7 @@ public partial class CounterPhase : Phase
         GreetingHints();
         if (_visit.Lesson != null) StartLesson();
         Note(ChestNote());
-        if (State.Terms(_visit) is string terms) Note(terms);
+        if (State.Terms(_visit) is string terms) Note(_terms = terms);
         if (_visit.Clue != null) Note(_visit.Clue);
         // The spring's first chest, the same every year (0.34): once you remember, you know what was in it.
         if (_visit.Beat == "first.chest" && State.Remembers && State.FirstChest.Count > 0)
@@ -252,7 +267,8 @@ public partial class CounterPhase : Phase
     void ShowStep()
     {
         var step = _steps[_step];
-        _mentor.ShowLesson(step.Say, step.Done != null);
+        // Every step is something to do (0.35): a check, or the deal itself; what to do is said under it.
+        _mentor.ShowLesson(Controls.Fill(step.Say), step.Done != null || step.Trades, step.Do == null ? null : Controls.Fill(step.Do));
         Game.Moment($"1_lesson_{_visit.Seller.Key}_{_step + 1}", 0.4);
         Refresh();
     }
@@ -290,8 +306,10 @@ public partial class CounterPhase : Phase
         if (!InLesson) return;
         if (Concluded)
         {
-            // A deal struck on the last step (a lesson about trading) is the lesson done.
-            EndLesson(learned: _visit.Outcome == VisitOutcome.Bought && _steps[_step].Trades && _step == _steps.Count - 1);
+            // A deal struck on the last step (a lesson about trading: buy, pass, or send for the Wardens) is the lesson done;
+            // a seller who stormed off isn't.
+            EndLesson(learned: _visit.Outcome is VisitOutcome.Bought or VisitOutcome.Passed or VisitOutcome.Reported &&
+                               _steps[_step].Trades && _step == _steps.Count - 1);
             return;
         }
         var step = _steps[_step];
@@ -317,7 +335,8 @@ public partial class CounterPhase : Phase
         // The scripted first day, and Bettany opening the second (passing).
         if (State.Tier == 1 && State.GivesLessons && (State.Day == 1 || (State.Day == 2 && firstOfDay && State.FirstDayScripted)))
         {
-            Teach(_visit.Seller.Key == "pip" ? "intro" : $"first_{_visit.Seller.Key}");
+            // The scripted first days are lessons now (0.35: a step at a time, each done by doing it, Lessons.FirstDay).
+            if (_visit.Lesson == null) Teach(_visit.Seller.Key == "pip" ? "intro" : $"first_{_visit.Seller.Key}");
             return;
         }
         // A day that's different (an event) changes the whole day: said first, before anything about this customer (0.34:
@@ -329,6 +348,8 @@ public partial class CounterPhase : Phase
         if (_visit.Seller.Key == "sorrel") Teach("lookup");
         if (State.Day == 2) Teach("colours");
         if (!firstOfDay && State.Day >= 2) Teach("ledger");
+        // Once there's a good deal in it, Bram's echo horn at the counter's end (0.35).
+        if (!firstOfDay && State.Day >= 2 && State.History.Count >= 12) Teach("horn");
         // Once Vane's told of it, the due up top opens the notebook at the debt.
         if (State.GuildIntroduced && !State.DebtCleared && State.Day > Core.GameState.IntroDay) Teach("debt");
         if (State.Day >= 2 && _visit.Origin != null && _visit.Seller.Stories.Count > 0) Teach("story");
@@ -470,7 +491,7 @@ public partial class CounterPhase : Phase
             var icon = UiKit.MakeItemIcon(item, new Vector2(x, y), Math.Min(64, slot), standing: true);
             _shelf.AddChild(icon);
             ShelfButton(item, new Rect2(x - Math.Min(32, slot / 2), y - 62, Math.Min(64, slot), 64),
-                Loc.T($"{item.Name}: {item.Prestige} exhibition points{(item.Magic ? Loc.T(" (double: enchanted)") : "")}. Click to sell it for {State.SaleValue(item)}g."));
+                Loc.T($"{item.Name}: {State.Points(item)} exhibition points{(item.Magic ? Loc.T(" (double: enchanted)") : "")}. Click to sell it for {State.ShelfValue(item)}g."));
         }
     }
 
@@ -486,10 +507,10 @@ public partial class CounterPhase : Phase
     public void AskSell(Item item)
     {
         if (_sellConfirm != null || _busy || !State.Display.Contains(item)) return;
-        int value = State.SaleValue(item);
+        int value = State.ShelfValue(item);
         string text = item.IsSong
             ? Loc.T($"{item.Name} goes back to the Locking, and takes this with it: {item.SongDef.Effect} It fetches nothing.")
-            : Loc.T($"Sell the {item.Name} for {value}g? It comes off display: {item.Prestige} exhibition points fewer.");
+            : Loc.T($"Sell the {item.Name} for {value}g? It comes off display: {State.Points(item)} exhibition points fewer.");
         _sellConfirm = Add(UiKit.MakeConfirm(item.IsSong ? Loc.T("LET IT GO?") : Loc.T("SELL IT?"), text, item.IsSong ? Palette.Of(Rarity.Mythic) : Palette.Gold,
             item.IsSong ? Loc.T("Let it go") : Loc.T($"Sell: +{value}g"), () => SellFromDisplay(item), Loc.T("Keep it"), CloseSell));
         Game.Moment("01_sell_confirm", 0.3);
@@ -509,7 +530,7 @@ public partial class CounterPhase : Phase
     {
         CloseSell();
         if (!State.Display.Contains(item)) return;
-        int value = State.SaleValue(item);
+        int value = State.ShelfValue(item);
         State.SellFromDisplay(item);
         Game.Hud.SetGold(State.Gold);
         if (item.IsSong)
@@ -619,7 +640,10 @@ public partial class CounterPhase : Phase
             : Loc.T($"Values: as good as a {(_visit.Chest.Gilded ? Loc.T("gilded") : Categories.ColourName(_visit.Chest.Quality))} chest promises.");
         // A line each; how they priced it takes both when it's long (the chest's colour is under it anyway).
         bool longWho = UiKit.TextWidth(who) > PanelW - 8; // a label wraps a few pixels short of its width
-        _ticked = UiKit.MakeLabel(longWho ? who : $"{who}\n{values}", 16, Palette.InkMuted).Wrapped().Place(PanelX, 106, PanelW, 40);
+        // How they priced it is their way of judging, the thing to see through: in dark ink, with its strength coloured.
+        string priced = $"[color=#{Palette.Ink.ToHtml(false)}]{Rich.Mark(who, Rich.OnPaper)}[/color]";
+        _ticked = Rich.Make(16, Palette.InkMuted).Place(PanelX, 106, PanelW, 44);
+        _ticked.Text = longWho ? priced : $"{priced}\n{Rich.Escape(values)}";
         panel.AddChild(_ticked);
         _panel = panel;
 
@@ -639,7 +663,9 @@ public partial class CounterPhase : Phase
         // The tools: the witchlight is always on (a sign), the magnet is a switch.
         var signs = new List<(string Icon, string Short, string Long)>();
         if (State.Witchlight)
-            signs.Add(("lamp", State.Has("lamp") ? Loc.T("Witchlight") : Loc.T("Starlight"), Loc.T("Witchlight lit: enchanted things glow")));
+            // What's lighting it: the witchlight, else the Bottled Star, else a witch's monocle (0.35: it said "Starlight").
+            signs.Add(("lamp", State.Has("lamp") ? Loc.T("Witchlight") : State.Shows(Heartsongs.Star) ? Loc.T("Starlight") : Curios.Get("monocle").Name,
+                Loc.T("Witchlight lit: enchanted things glow")));
         bool magnet = State.Has("magnet");
         int tools = signs.Count + (magnet ? 1 : 0);
         if (tools > 0)
@@ -908,18 +934,29 @@ public partial class CounterPhase : Phase
             {
                 var shown = _noteLines.TakeLast(n).ToList();
                 if (withClue && !shown.Contains(keep)) shown.Insert(0, keep);
-                _notes.Text = string.Join("\n", shown);
+                _notes.Text = string.Join("\n", shown.Select(Coloured));
                 if (Fits(_notes)) return;
             }
         // Nothing fits whole: the latest note alone.
-        _notes.Text = _noteLines.Count > 0 ? _noteLines[^1] : "";
+        _notes.Text = _noteLines.Count > 0 ? Coloured(_noteLines[^1]) : "";
     }
 
-    static bool Fits(Label label)
+    /// <summary>
+    /// A note as it's shown (0.35): the trade's words in their colours, and what sets this seller apart standing out
+    /// whole: their rule (no hard shake, a fee, a wager) in gold, and what they state (a tally, a dream, a tag) in violet.
+    /// </summary>
+    string Coloured(string line)
     {
-        int lines = label.GetLineCount();
-        return lines * label.GetLineHeight() + (lines - 1) * label.GetThemeConstant("line_spacing") <= label.Size.Y + 8;
+        string marked = Rich.Trade(line);
+        if (line == _terms) return $"[color=#{Palette.Gold.ToHtml(false)}]{marked}[/color]";
+        if (line == _visit.Clue) return $"[color=#{Palette.Magic.Lightened(0.25f).ToHtml(false)}]{marked}[/color]";
+        return marked;
     }
+
+    /// <summary>The seller's rule as it was noted under the chest.</summary>
+    string _terms;
+
+    static bool Fits(RichTextLabel label) => label.GetContentHeight() <= label.Size.Y + 8;
 
     /// <summary>Until the next breath a mimic takes (0.33): it waits for the chest to sit still, and holds its breath a while when shaken.</summary>
     float _breathIn = 1.0f;

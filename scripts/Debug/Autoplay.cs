@@ -33,7 +33,7 @@ public partial class Autoplay : Node
 
     const double ShakeSeconds = 1.6;
 
-    bool _caseShown, _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked, _townShown;
+    bool _historyShown, _caseShown, _notebookShown, _debtShown, _collectionShown, _songsShown, _shortShown, _shortUpgradeShown, _sellAsked, _townShown;
 
     static GameState State => Main.Instance.State;
 
@@ -112,7 +112,8 @@ public partial class Autoplay : Node
     {
         while (IsInstanceValid(scene) && !scene.Done)
         {
-            await Wait(1.6);
+            // A sentence at a time now (0.35): a shorter look at each.
+            await Wait(0.9);
             if (IsInstanceValid(scene)) scene.Advance();
         }
     }
@@ -122,7 +123,7 @@ public partial class Autoplay : Node
     {
         while (IsInstanceValid(talk) && !talk.Asking && !talk.Answered)
         {
-            await Wait(1.4);
+            await Wait(0.9);
             if (IsInstanceValid(talk) && !talk.Asking && !talk.Answered) talk.Next();
         }
         if (!IsInstanceValid(talk)) return;
@@ -448,6 +449,19 @@ public partial class Autoplay : Node
         {
             _collectionShown = true;
             if (!await ShowCollection(counter, CollectionView.FindsPage, "02_collection")) return;
+        }
+
+        // Once a good deal has been said (a day or two in), a look at what the echo horn kept (0.35).
+        if (!_historyShown && !hurried && State.History.Count >= 16 && IsInstanceValid(counter) && counter.Horn.Open() is HistoryView history)
+        {
+            _historyShown = true;
+            await Wait(0.4);
+            Main.Instance.Moment("02_history", 0.3);
+            await Wait(1.6);
+            if (!IsInstanceValid(counter)) return;
+            if (IsInstanceValid(history)) history.Close();
+            await Wait(0.5);
+            if (!IsInstanceValid(counter)) return;
         }
 
         // Once the Guild's due is up top: clicked, it opens the notebook at the debt.

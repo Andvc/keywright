@@ -87,7 +87,7 @@ public partial class GameState
     /// <summary>Things on display the Maw's buyers want: anything gold in colour (never a Heartsong).</summary>
     public IEnumerable<Item> GoldForTheGate => Display.Where(i => i.Quality == Rarity.Legendary && !i.IsSong && !i.Fake && !i.Broken);
 
-    public int GatePrice(Item item) => Money.Round(SaleValue(item) * LanternMarket.GatePremium);
+    public int GatePrice(Item item) => Money.Round(ShelfValue(item) * LanternMarket.GatePremium);
 
     /// <summary>Sells a gold thing off the shelf to the Maw's buyers. Returns what they paid.</summary>
     public int SellToGate(Item item)

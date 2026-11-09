@@ -171,10 +171,16 @@ public sealed class Appraisal
     /// <summary>What the slip says this kind adds up to.</summary>
     public int ValueOf(Category category)
     {
-        int count = Count(category);
+        int count = Count(category), magic = Enchanted(category);
         if (count == 0) return 0;
-        return Magic(category) ? (count - 1) * OneValue(category) + OneValue(category, true) : count * OneValue(category);
+        return (count - magic) * OneValue(category) + magic * OneValue(category, true);
     }
+
+    /// <summary>
+    /// How many of a kind marked enchanted the slip counts as enchanted: one (it glowed), or every one of them, and every
+    /// marked thing in the chest, with an archmage's staff (anything enchanted in a chest makes everything so).
+    /// </summary>
+    int Enchanted(Category kind) => Model?.EnchantsAll == true && Marked.Any(Magic) ? Count(kind) : Magic(kind) ? Math.Min(1, Count(kind)) : 0;
 
     /// <summary>What a false bottom fetches here, on average over what people hide, as good as the colour promises.</summary>
     public int HiddenValue => (int)MathF.Round(Market.HiddenOdds(Tier).Sum(h => h.Chance * Fetch(h.Kind, Chest, false, true)));
@@ -186,7 +192,7 @@ public sealed class Appraisal
     /// What it's worth on average if the slip is right, allowing for things coming out better or worse than the colour.
     /// The careful player's model knows this; the screen doesn't show it.
     /// </summary>
-    public int ExpectedWorth => (int)MathF.Round(Marked.Sum(c => (Count(c) - (Magic(c) ? 1 : 0)) * Expected(c, false) + (Magic(c) ? Expected(c, true) : 0)) +
+    public int ExpectedWorth => (int)MathF.Round(Marked.Sum(c => (Count(c) - Enchanted(c)) * Expected(c, false) + Enchanted(c) * Expected(c, true)) +
                                                  (Hidden ? Market.HiddenOdds(Tier).Sum(h => h.Chance * Expected(h.Kind, false, true)) : 0));
 
     /// <summary>What one named thing of this kind fetches here on average, luck and all.</summary>
@@ -219,7 +225,7 @@ public sealed class Appraisal
 
         foreach (var kind in Marked)
             for (int i = 0; i < Count(kind); i++)
-                Add(One(kind, Magic(kind) && i == 0));
+                Add(One(kind, i < Enchanted(kind)));
         if (Hidden)
             Add(Market.HiddenOdds(Tier).SelectMany(h => One(h.Kind, false, true).Select(o => (o.Item1, o.Item2 * h.Chance))));
         return totals.GroupBy(t => (int)MathF.Round(t.Key)).Select(g => (g.Key, g.Sum(t => t.Value))).OrderBy(o => o.Key).ToList();
@@ -254,7 +260,10 @@ public sealed class Appraisal
             var items = chest.Items.Where(i => i.Category == kind)
                 .OrderBy(i => i.Fake ? 2 : i.Broken ? 1 : 0).ThenBy(i => Magic(kind) && i.Magic && !i.Shone ? 0 : 1).ToList();
             int marked = Count(kind);
-            bool magicLeft = Magic(kind);
+            // Marked enchanted: that kind glowed. A light shows a sound glowing, not how many of its kind glow, so every
+            // enchanted one of it is read right (0.35: only the first was, so an archmage's staff, or enchanter's chalk
+            // putting a second in one kind, made a perfect read impossible).
+            bool magicLeft = Magic(kind), glowed = Magic(kind);
             for (int i = 0; i < items.Count; i++)
             {
                 var item = items[i];
@@ -264,7 +273,7 @@ public sealed class Appraisal
                 else if (item.Broken) read = counted ? ReadKind.Broken : ReadKind.SpottedBroken;
                 else if (!counted) read = item.Magic && !item.Shone ? ReadKind.MissedMagic : ReadKind.Missed;
                 else if (item.Shone) read = ReadKind.Lucky;
-                else if (item.Magic) read = magicLeft ? ReadKind.RightMagic : ReadKind.MissedMagic;
+                else if (item.Magic) read = glowed ? ReadKind.RightMagic : ReadKind.MissedMagic;
                 else read = ReadKind.Right;
                 if (read == ReadKind.RightMagic) magicLeft = false;
                 reads.Add(new ItemRead(item, read, Warded: chest.Unwarded != null && item.Id == chest.Unwarded.Id));

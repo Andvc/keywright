@@ -79,8 +79,13 @@ public static partial class TaleBook
     static Rarity Finer(int tier, int steps) => (Rarity)Math.Min((int)Rarity.Epic, (int)ShopTiers.Typical(tier) + steps);
 
     /// <summary>A seller's visit with a tale's chest and their own words for it (with {price} and the like).</summary>
-    static Visit Brought(GameState s, Random rng, string seller, Chest chest, string pitch, string origin) =>
-        Market.Price(rng, Sellers.Get(seller), chest, s.Tier, pitch: pitch, boosts: s.Boosts, origin: Origins.Get(origin));
+    static Visit Brought(GameState s, Random rng, string seller, Chest chest, string pitch, string origin)
+    {
+        var visit = Market.Price(rng, Sellers.Get(seller), chest, s.Tier, pitch: pitch, boosts: s.Boosts, origin: Origins.Get(origin));
+        // Dealt with as any seller is (a merchant's signet, a golden tongue, a friend's terms).
+        s.Welcome(visit);
+        return visit;
+    }
 
     /// <summary>A chest given freely, for the lucky coin: it's rightfully yours, so it opens.</summary>
     static Visit Given(GameState s, Random rng, string giver, Chest chest, string pitch, string origin)

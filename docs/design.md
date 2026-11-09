@@ -286,8 +286,19 @@ crackling lightning, a boom and a lingering aura; legendary, all that with turni
 fanfare. A Heartsong comes out last, with its own reveal and a choice (above). `--opening-demo` opens a crafted chest
 with one of each to preview them.
 
+**Two layers** (0.35). The chest is its lid, drawn as it always is, over the box, and the moment the lid lifts at all
+(the opening's strain, a mimic's breath, the Maw) the box under it is the open box: its front, and above the front's
+thin rim its inside in one-point perspective, the back wall facing you, the side walls slanting out, and a planked
+floor whose nearer boards are wider (`custom_art._chest3_open`). So what shows between lid and box is the box's own
+inside, lit from within in the chest's colour (`ChestView.DrawInnerLight`: added over it, never covering it, brightest
+on the floor), with a soft wash of that light spilling from the crack; never the white bar 0.34 drew between two
+halves. At the burst the light pours up out of the open box in shafts of its colour and settles to a glow inside
+(`ChestView.RestGlow`); the bright line 0.34 left along the open box's rim is gone.
+
 What the shop's curios and the day did to the chest ("Rabbit's Foot: 2 things came out better!", "Locking Day +25%")
-slides in under the tally only once everything is out (v22: told first, it gave the surprises away). The profit's
+slides in under the tally only once everything is out (v22: told first, it gave the surprises away). Since 0.35 it
+thanks the curio whose rule reached each thing (a clover only on the week's first chest, a hollow rod only for what
+was under a false bottom, a gambler's token for what it swung either way), not the first luck curio you hold. The profit's
 coins fly into the purse one by one, and the purse counts up as they land, from the first coin to the last (v22: it
 used to wait for the last one, then count).
 
@@ -429,6 +440,15 @@ queue to count for the Maw. Day one is still the scripted stall day (three custo
 passing opens the second morning); Pip, Garrick and Bettany teach naming a price, haggling and counting rattles on their
 first visit after it.
 
+**A step is an action** (0.35). Every step names the one thing it asks for in a tab over Bram's box ("Shake it gently",
+"Tick Weapons and Coin", "Buy it": `LessonStep.Do`), and its check runs every frame whether the box is open, closed or
+mid-sentence, so doing it moves the lesson on at once. 0.34's first day was made of tips, and a tip up on the screen
+held the next one back: the playtest shook gently while the first tip was up, nothing happened, and they had to close
+it and shake again. The first day is lessons now (`Lessons.FirstDay`: Pip's gentle shake and the slip, Ada's hard
+shake, Garrick's clank, and Bettany's pass the next morning). A lesson's chest follows the build like any other
+(`GameState.Lesson`, 0.35): it's priced as any chest here is, and the curios' words on the price and the deal (a sealed
+bid, a closing bell, a signet, a golden tongue, an ear trumpet) hold for it, as players expect them to.
+
 **Taught once, across runs** (v20). What Bram has taught (his tips, each seller's lesson, the scripted first day) is
 kept in the profile (`Profile.Taught`, given to `GameState.NewRun`), so a second run with tips on doesn't teach it
 again: the experience playtest found runs 2 and 3 replaying a dozen lessons the player had already had. Since v22 it's
@@ -454,6 +474,26 @@ terms the first time they meet them (`seller_*` in `Hints.cs`), and the terms ar
 
 `--sim` ends with a lesson test: every lesson played the careful way (the same strategy the bot and the sim use),
 with and without the shop's tools, must complete every step in order.
+
+## What's said: a sentence at a time, and the echo horn (0.35)
+
+Nobody says a paragraph at once any more. Bram's tips and lessons, the scenes, the talks and the sellers' bubbles go a
+sentence at a time (`Words.Sentences`: split at a full stop with a space after it, or a CJK stop; a quotation is closed
+and reopened round the break; scraps too short to stand alone stay with their neighbour). Bram's box shows dots for
+how far through it is and "click to go on"; a seller's bubble is sized for the whole speech and fills in as it's said
+(a click shows the rest); a talk's lines come sentence by sentence before the choices.
+
+What matters is coloured where it's said (`Rich`): the kinds of thing in gold, their sounds in blue, the strengths in
+green, the trade's words in violet; a seller's price in gold and what they state (a tally, a dream, a tag) in violet,
+the seller giving a little bob as they say it. The notes under the chest colour the seller's own rule gold, and the
+slip's "how they priced it" line is in dark ink with its strength coloured: each seller's defining habit stands out
+where you read it. Sellers' own words colour only strengths (their talk is full of "coin" meaning money).
+
+**The echo horn** (`EchoHorn`, `HistoryView`): Bram's old Keyhold horn stands at the counter's end (and beside closing
+up at the day's end). It keeps everything said across the counter this season (`GameState.History`, saved with the
+run, the last 400 lines): Bram's tips and lessons, the scenes, every line of a talk and your answers, the sellers'
+words. Click it for the list, a day at a time, the newest in view, each line under who said it and coloured as it was.
+Bram mentions it on the second day (the `horn` tip).
 
 ## How the shop opens up
 
@@ -717,6 +757,38 @@ and too early, the named rule was clumsy, builds are the heart of the fun and ea
 rarities, has Nim build with you, lets the numbers do what the named rule did, and gives six ways of trading a way to
 play of their own: 78 curios in all, and 0.22's Guild Promissory Note (Mara's Favour, a talent until then) makes 79.
 
+**Every card does what it says** (0.35). The owner found curios that didn't seem to behave as described, so each of
+the 79 was audited against its card: `tools/curiotest` (a console program that compiles Core and runs 200 checks, a
+card's every promise against the game, most as twins with and without the curio; `dotnet run --project
+tools/curiotest`, `--only=key,key`) and the write-ups beside it (`AUDIT_A.md`, `_B`, `_C`). What it found, and what
+changed:
+- A curio's few percent off a price vanished in rounding (a sum is rounded to the coin up to 30g, to the 5g above), and
+  a sealed bid's price came back wrong once handled. A visit now keeps its exact price and rounds what's shown and paid
+  to the coin, at least a coin off for a discount and on for a markup (`Visit.Rounded`).
+- A seller's first visit (a lesson) and a tale's chest went without the build: a lesson's price, the Closing Bell, the
+  Waiting Game, a signet's patience, a golden tongue, an ear trumpet. They follow it now (`GameState.Lesson`,
+  `Welcome`), and the day's curios (the beads, the pillow, the seal, the compass) come after the tales have brought
+  their chests; a dreaming or tallying day restates a visit in place, keeping a friend's waived terms.
+- "Talked down" is measured from the price on the table when you made your first offer (`Visit.OfferedAt`), so a
+  curio's discount isn't a bargain and an angry seller's raised price is what you talk them down from.
+- Luck: the opening thanks the curio whose rule reached each thing; a gambler's token swings up as well as down at
+  purple (a purple thing shines); a shooting star makes a purple thing shine, and looks after the dry spell's lift; a
+  hollow rod's and a ward-key's step reaches a purple thing too (luck can make a hidden thing shine); a wishbone counts a
+  shine as a surprise; the cursed crescent stops the dry spell too, and sellers ask its 5% less, no more.
+- What a curio makes saleable (a still's broken glass, a desk's sand, a loupe's paste, the mark's fakes) sells as its
+  real kind does here, the shop's trades and lamps included; a thing kept on the shelf sells (or pawns) for at least
+  what it would have fetched at its opening (`GameState.ShelfValue`); points on the screens are the exhibition's own
+  (`GameState.Points`: a dummy's cloaks, a velvet rope).
+- The register counts the read it's paying for; a crate or a mimic is no read for a tuning fork's streak; a blank slip on
+  a chest bought sight unseen is no "wrong slip" for the ledger; a kind marked enchanted reads every enchanted one of it
+  right (an archmage's staff could never be read perfectly); "Pay it all" on a Guild night pays the due first, so a
+  miser's lockbox grows the purse; the note and Bram's word work after the debt's weeks; a patron's ribbon raises the
+  whole delivery; the letter's leeway is the regulars' (not the crier's); the errand book's extra commissions can ask
+  for a kind twice; the compass puts a false bottom in every chest, and the warden's lantern holds on a dreaming day.
+- Cards that promised what no rule could keep say what's true: Old Aldo (whose price is your slip) and the Maw don't
+  haggle (crooks do now); the pillow's fifth and the seal are of the sellers with nothing else to tell you; the mark
+  brings crooks more often (nobody comes twice a day); the guest book's colour stops at purple.
+
 **Rarity** (`CurioRarity`: common, uncommon, rare and legendary; green, blue, purple and gold on Nim's cloth,
 `Palette.Of`). Each card's rarity is rolled first, by week (`Curios.Rates`): commons and uncommons only in the first
 week; rares from the second (5% of cards, rising to 15%); legendaries from the third (2% rising to 6%). A rare needs a
@@ -787,79 +859,79 @@ read). The whole list (`--sim=curiolist`; T: the shop tier Nim brings it from):
 |---|---|---|---|---|
 | enchantment | Witch's Monocle | C, T3 | Enchanted things glow when they sound, witchlight or not. | once you've had a shop in Crownhold, or after two runs |
 |  | Witch's Draught | U, T3 | Enchanted things turn up three times as often. | from the start |
-|  | Aether Jar | U, T3 | Each enchanted thing you find this run makes every thing 2% likelier to be enchanted (up to 20%). | once you've had a shop in Crownhold, or after two runs |
+|  | Aether Jar | U, T3 | Each enchanted thing you find this run makes everything 2% likelier to be enchanted (up to 20%). | once you've had a shop in Crownhold, or after two runs |
 |  | Enchanter's Chalk | U, T3 | An enchantment spreads: a chest with an enchanted thing in it has a second one. | once you've had a shop in Crownhold, or after two runs |
 |  | Spellbinder's Ring | R, T3 | Enchanted things are worth four times as much, not twice. | once you've had the Royal Emporium, or after four runs |
 |  | Archmage's Staff | L, T3 | Everything in a chest with an enchanted thing in it is enchanted. | after 15 enchanted things found, all told |
-| sight unseen | Sealed Bid | C | Take a chest on its seller's word, without a shake, a drop or the lodestone, and they knock 15% off. | from the start |
-|  | Lucky Dip | U | Everything in a chest you take sight unseen is 8% likelier to come out a step better. | after your first run |
-|  | Underwriter's Bond | U, T2 | A chest taken sight unseen that holds less than you paid: the Underwriters pay back 40% of the difference. | after your first run |
-|  | Wholesaler's Tally | U, T2 | Every chest you buy today: the next seller asks 4% less (up to 20%). | once you've had a shop in Crownhold, or after two runs |
-|  | Fortune's Blindfold | L, T3 | A chest you take sight unseen costs 30% less, and nothing in it comes out worse than its chest. | after 20 chests taken sight unseen, all told |
+| sight unseen | Sealed Bid | C | Buy a chest sight unseen and its seller knocks 15% off. | from the start |
+|  | Lucky Dip | U | Everything in a chest you take sight unseen is 15% likelier to come out a step better. | after your first run |
+|  | Underwriter's Bond | U, T2 | A chest bought sight unseen holds less than you paid? The Underwriters pay 40% of it back. | after your first run |
+|  | Wholesaler's Tally | U, T2 | Each chest you buy makes every seller after it today ask 4% less (up to 20%). | once you've had a shop in Crownhold, or after two runs |
+|  | Fortune's Blindfold | L, T3 | Sight unseen, a chest costs 30% less, and nothing in it comes out worse than promised. | after 20 chests taken sight unseen, all told |
 | haggling | Merchant's Signet | C | Hagglers hear you out (an offer too low gets a second try), and come down 10% further. | from the start |
-|  | Silver Tongue | U | Hagglers come down a fifth further, and sellers who wait for your offer take a fifth less. | after your first run |
+|  | Silver Tongue | U | Hagglers come down a fifth further, and those who wait for an offer take a fifth less. | after your first run |
 |  | Waiting Game | U | Every chest you pass makes the next seller ask 5% less (up to 20%). Buying starts it again. | from the start |
 |  | Closing Bell | U | The last customer of the day asks 25% less. | from the start |
-|  | Haggler's Knot | U, T2 | Word gets round: each chest you've talked down this run makes every seller ask 1% less (up to 8%). | after your first run |
-|  | Haggler's Purse | R, T2 | Everyone haggles with you, and 40% of whatever you talk them down by comes back to you. | once you've had the Royal Emporium, or after four runs |
-|  | Golden Tongue | L, T3 | Everyone haggles with you, and nobody walks out on an offer: however low, they come down to the least they'd take, and 10% less than that. | after 25 chests talked down, all told |
+|  | Haggler's Knot | U, T2 | Each chest you talk down this run makes every seller ask 1% less (up to 8%). | after your first run |
+|  | Haggler's Purse | R, T2 | Everyone but Old Aldo and the Maw haggles with you, and 40% of whatever you talk them down by comes back to you as well. | once you've had the Royal Emporium, or after four runs |
+|  | Golden Tongue | L, T3 | All but Old Aldo and the Maw haggle and never walk out: go as low as you like, and they come down to 10% under their least. | after 25 chests talked down, all told |
 | the perfect read | Ear Trumpet | C | Nothing drowns out or muffles a sound for you: no clank, and no straw. | from the start |
 |  | Pocket Watch | C | Impatient sellers give you twice as long, and a rotten chest stands twice the shaking. | from the start |
-|  | Counting Beads | C, T2 | Every chest comes with a tally of how many things are in it, false bottom and all. | from the start |
+|  | Counting Beads | C, T2 | A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all. | from the start |
 |  | Appraiser's Seal | U | A perfect read pays you a valuer's fee: 8% of what the chest held. | from the start |
-|  | Cursed Crescent | U | No surprises, no letdowns: everything comes out exactly as its chest promised. Sellers sense the curse and ask 5% less. | after your first run |
-|  | Valuer's Register | U, T2 | A perfect read pays 0.5% of what the chest held for every perfect read so far this run (up to 12%). | after your first run |
-|  | Tuning Fork | R | Each perfect read in a row: everything in the next chest sells for 3% more (up to 30%). A wrong slip starts again. | once you've had the Royal Emporium, or after four runs |
+|  | Cursed Crescent | U | Everything comes out exactly as its chest promised. Sellers sense the curse and ask 5% less. | after your first run |
+|  | Valuer's Register | U, T2 | A perfect read pays 0.5% of what the chest held for each one so far this run (up to 12%). | after your first run |
+|  | Tuning Fork | R | Each perfect read in a row: the next chest's things sell for 3% more (up to 30%). | once you've had the Royal Emporium, or after four runs |
 |  | Ledger of Certainty | R, T2 | A perfect read: everything in the chest sells for 15% more. A wrong slip: 15% less. | once you've had the Royal Emporium, or after four runs |
 |  | Truthglass | L, T3 | A perfect read: everything in the chest sells for half as much again. | after 40 perfect reads, all told |
 | false bottoms | Padded Crate | C, T2 | Glass never breaks when you drop a chest. | from the start |
 |  | Smuggler's Hook | U, T2 | Smugglers come your way: false bottoms turn up twice as often. | from the start |
 |  | Hollow Rod | U, T2 | What's under a false bottom comes out a step better: people hid their best. | after your first run |
-|  | Smuggler's Log | U, T2 | Each false bottom you open this run makes them 2% likelier (up to 20%): smugglers trust a buyer who keeps quiet. | after your first run |
-|  | Black Market Pass | R, T2 | Thornwick's black market pays double for anything that came out from under a false bottom. | once you've had the Royal Emporium, or after four runs |
+|  | Smuggler's Log | U, T2 | Smugglers trust a buyer who keeps quiet: each false bottom you open this run makes false bottoms 2% likelier (up to 20%). | after your first run |
+|  | Black Market Pass | R, T2 | Thornwick's black market pays double for anything from under a false bottom. | once you've had the Royal Emporium, or after four runs |
 |  | Smugglers' Compass | L, T3 | Every chest has a false bottom. | after 15 false bottoms opened, all told |
-| wards | Warden's Lantern | C, T2 | A seller who leaves a sign always means it: every dream, dowry, tag, riddle, roll, echo and card points at a warded thing. | from the start |
-|  | Sleeper's Pillow | U, T2 | Sellers dream true for you: 20% of them have warded something, and tell you their dream. | after your first run |
+| wards | Warden's Lantern | C, T2 | Every sign a seller leaves (a dream, a tag, a riddle, a card...) points at a warded thing. | from the start |
+|  | Sleeper's Pillow | U, T2 | Sellers dream true for you: 20% of those with nothing else to tell you have warded something, and tell you their dream. | after your first run |
 |  | Wardbreaker's Tally | U, T2 | Each warded thing you name this run makes warded things sell for 10% more. | after your first run |
 |  | Ward-Key | R, T2 | A warded thing you name comes out a step better. | once you've had the Royal Emporium, or after four runs |
-|  | The Aldric Seal | L, T3 | Every chest has a warded thing, and its seller tells you a sign for it. | after 10 warded things named, all told |
+|  | The Aldric Seal | L, T3 | Every seller with nothing else to tell you has warded a thing in their chest, and tells you a sign for it. | after 10 warded things named, all told |
 | luck | Lucky Shell | C | A dry spell ends twice as soon: luck starts to turn after 5 plain finds, not 10. | from the start |
-|  | Gambler's Token | U | Luck swings both ways: twice as many surprises, good and bad, in everything you open. | after your first run |
-|  | Lucky Coin | U | The first chest you buy each day: everything in it gets two tries at its quality. | from the start |
-|  | Rabbit's Foot | U | Everything you open is 5% likelier to come out a step better than its chest. | from the start |
+|  | Gambler's Token | U | Twice as many surprises in everything you open: good ones and bad ones. | after your first run |
+|  | Lucky Coin | U | The first chest you buy each day: each thing in it rolls its quality twice and keeps the better roll. | from the start |
+|  | Rabbit's Foot | U | Everything you open is 10% likelier to come out a step better than its chest. | from the start |
 |  | Wishbone | U | Something that comes out better than its chest sells for half as much again. | after your first run |
-|  | Horseshoe | U, T2 | Luck runs in streaks: each chest with a surprise in it makes the next 6% luckier (up to 30%). | after your first run |
+|  | Horseshoe | U, T2 | Each chest in a row with a surprise makes the next one's things 10% likelier to come out a step better (up to 50%). | after your first run |
 |  | Four-Leaf Clover | R, T2 | The first chest you buy each week: everything in it comes out a step better. | from the start |
-|  | Shooting Star | R, T2 | Once a day, the first thing to come out better than its chest climbs a step further. | once you've cleared Bram's debt |
-|  | Fate's Spindle | L, T3 | Each surprise this run makes everything 1% likelier to come out a step better (up to 30%). | after 40 surprises (things better than their chest), all told |
+|  | Shooting Star | R, T2 | Once a day, the first thing to come out better than its chest climbs a step further (a purple thing shines). | once you've cleared Bram's debt |
+|  | Fate's Spindle | L, T3 | Each surprise this run makes everything 2% likelier to come out a step better (up to 50%). | after 40 surprises (things better than their chest), all told |
 | crowds | Shop Lantern | U | Open late: one more customer every day. | from the start |
 |  | Queue Ticket | U | The first chest you pass each day comes back at the end of the day, asking 20% less. | from the start |
 |  | Barker's Horn | U, T2 | Two more customers every day, but word's out: everyone asks 5% more. | once you've had a shop in Crownhold, or after two runs |
-|  | Guest Book | U, T2 | The day's first customer is the better sort: their chest is a colour finer. | after your first run |
+|  | Guest Book | U, T2 | The day's first customer is the better sort: their chest is a colour finer (as far as purple). | after your first run |
 | display | Collector's Catalogue | C | Every new kind of find this run pays 4g (more in a grander shop). | from the start |
 |  | Bell Jar | C, T2 | Room to display one more thing. | from the start |
-|  | Visitors' Book | U, T2 | Every night, visitors leave 6g for each point of your exhibition (more in a grander shop). | from the start |
+|  | Visitors' Book | U, T2 | Every night, visitors leave 6g per exhibition point (more in a grander shop). | from the start |
 |  | Velvet Rope | U, T2 | Your exhibition counts double. | once you've had a shop in Crownhold, or after two runs |
-|  | Gallery Lamps | R, T2 | Your exhibition sells for you: everything fetches 1.5% more for each point of it (up to 60%). | once you've had the Royal Emporium, or after four runs |
-| a trade | Smith's Glove | C | You mend weapons: they never come out worse than their chest promised, and are 15% likelier to come out better. | from the start |
-|  | Hatter's Cap | C | You mend cloaks: they never come out worse than their chest promised, and are 15% likelier to come out better. | from the start |
+|  | Gallery Lamps | R, T2 | Everything sells for 1.5% more per exhibition point (up to 60%). | once you've had the Royal Emporium, or after four runs |
+| a trade | Smith's Glove | C | You mend weapons: never worse than their chest promised, and 25% likelier to come out better. | from the start |
+|  | Hatter's Cap | C | You mend cloaks: never worse than their chest promised, and 25% likelier to come out better. | from the start |
 |  | Whetstone | U | Weapons sell for three-quarters more. | from the start |
 |  | Tailor's Dummy | U | Cloaks sell for half as much again, and count 3 times over on display. | after your first run |
 |  | Moneychanger's Scales | U | Coin sells for a fifth more for every purse of it in the chest. | after your first run |
 |  | Alchemist's Still | U, T2 | Potions sell for half as much again, and broken glass still sells for half. | once you've had a shop in Crownhold, or after two runs |
 |  | Scribe's Desk | U, T2 | Spells sell for half as much again, and sand sells as ink, for a third of a spell. | once you've had a shop in Crownhold, or after two runs |
-|  | Gem Cutter's Wheel | U, T3 | Gems are 33% likelier to come out a step better. | once you've had a shop in Crownhold, or after two runs |
+|  | Gem Cutter's Wheel | U, T3 | Gems are 50% likelier to come out a step better. | once you've had a shop in Crownhold, or after two runs |
 | rough hands | Locksmith's Oil | C, T2 | Every lock has one pin fewer. | from the start |
 |  | Burglar's Knife | U, T2 | Forcing a lock breaks nothing and scratches nothing. | from the start |
 |  | Kid Gloves | U, T2 | Nobody minds a hard shake, a drop or the lodestone on their chest. | from the start |
 | fakes | Jeweller's Loupe | C, T4 | Paste gems and demon gold sell as costume pieces: a quarter of the real thing. | from the start |
-|  | Fence's Mark | R, T3 | Crooks come your way twice as often, and the Maw's buyers take any fake off you for what the real thing would fetch. | once you've had the Royal Emporium, or after four runs |
-| coffers | Rainy-Day Purse | C | Bram's stash has one more dip in it. | from the start |
+|  | Fence's Mark | R, T3 | Crooks come by more often, and the Maw's buyers pay for any fake what the real thing fetches. | once you've had the Royal Emporium, or after four runs |
+| coffers | Rainy-Day Purse | C | Bram's stash helps you out three times a run, not twice. | from the start |
 |  | Pawn Ticket | C | On a short night, what you pawn fetches four-fifths of its price, not three-fifths. | from the start |
 |  | Guildsman's Marker | C | Bram's word is good twice a run, not once. | from the start |
 |  | Savings Jar | U | Every night: 3% of your gold as interest (up to 20g at the stall, more in a grander shop). | from the start |
-|  | Miser's Lockbox | R, T2 | Every Guild night, once you've paid: 25% of what's left in your purse. | once you've had the Royal Emporium, or after four runs |
-|  | Guild Promissory Note | R | The Guild's own paper, from before the Locking: once a run, on a Guild night nothing you own can cover, it pays what's short (not in the last week). | once you've had a shop in Crownhold, or after two runs |
+|  | Guild Promissory Note | R | The Guild's own paper: once a run, on a Guild night you can't cover, it pays what's short (not the last week). | once you've had a shop in Crownhold, or after two runs |
+|  | Miser's Lockbox | R, T2 | Every Guild night, once you've paid, your purse grows by 25% of what's left in it. | once you've had the Royal Emporium, or after four runs |
 | patrons | Letter of Introduction | U | Regulars take what you deliver a quality lower than they asked for. | from the start |
 |  | Patron's Ribbon | U | Commissions pay half as much again. | from the start |
 |  | Errand Book | U, T2 | The regulars post 2 more commissions every week. | once you've had a shop in Crownhold, or after two runs |

@@ -57,7 +57,7 @@ public static class Glossary
             Term.Ward => Loc.T("One thing a chest's last owner hid with a ward: it never sounds, weighs nothing and isn't counted. It " +
                                "comes out only if your slip names it: mark one more of its kind than you heard."),
             Term.FalseBottom => Loc.T("A hidden compartment under the chest's floor. Dropped from high up, the chest lands with a hollow " +
-                                      "boom; mark the false bottom on your slip and what's under it comes out."),
+                                      "boom. What's under it always comes out; mark the false bottom on your slip for a perfect read."),
             Term.Haggling => Loc.T("A seller who haggles takes an offer: pick your price on the slider. They take it, come part of the " +
                                    "way down, or walk out if you go too low."),
             _ => Loc.T("Nothing of that kind comes out worse than its chest promised."),

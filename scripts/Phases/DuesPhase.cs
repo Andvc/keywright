@@ -231,7 +231,7 @@ public partial class DuesPhase : Phase
             {
                 button = Put(UiKit.MakeButton(Loc.T($"+{State.PawnValue(item)}g"), Palette.Of(item.Rarity).Darkened(0.3f), 16, () => Pawn(item))
                     .Place(x, y, PawnW, PawnH));
-                button.TooltipText = Loc.T($"Pawn the {item.Name} ({item.Prestige} exhibition points) for {State.PawnValue(item)}g");
+                button.TooltipText = Loc.T($"Pawn the {item.Name} ({State.Points(item)} exhibition points) for {State.PawnValue(item)}g");
                 button.AddChild(UiKit.MakeItemIcon(item, new Vector2(36, PawnH / 2), 48));
             }
             else
@@ -333,7 +333,11 @@ public partial class DuesPhase : Phase
     /// <summary>Pays the whole of what's left of the debt tonight, not just the week's due.</summary>
     public void PayAll()
     {
-        if (_paid || State.PayOff() <= 0) return;
+        if (_paid || !State.CanPayOff) return;
+        // Tonight's due first, as any Guild night, then the rest of the debt (GameState.PayAll).
+        bool hoards = !State.PaidThisWeek;
+        if (State.PayAll() <= 0) return;
+        if (hoards && State.Hoarded > 0) FloatText(Loc.T($"Miser's Lockbox +{State.Hoarded}g"), new Vector2(PanelX + PanelW / 2, 400), Palette.Magic, 24);
         _paid = true;
         Sfx.PlayGroup("pay");
         Sfx.Play("coin", 0.8f, -4);

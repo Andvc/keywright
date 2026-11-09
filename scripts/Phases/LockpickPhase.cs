@@ -61,8 +61,11 @@ public partial class LockpickPhase : Phase
 
         // Your own slip says whether there's glass in there.
         bool glass = _purchase.Slip.Count(Category.Potions) > 0;
-        string warning = glass ? Loc.T("Your slip says there's glass in there. Forcing it will break it.") : Loc.T("Forcing it is quick, but it scratches everything and breaks glass.");
-        Add(UiKit.MakeLabel(warning, 16, glass ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 688, 1280, 20));
+        // A burglar's knife: forcing it does no harm (0.35: the warning said it scratched and broke glass all the same).
+        bool knife = State.HasCurio("knife");
+        string warning = knife ? Loc.T("With your burglar's knife, forcing it breaks nothing and scratches nothing.")
+            : glass ? Loc.T("Your slip says there's glass in there. Forcing it will break it.") : Loc.T("Forcing it is quick, but it scratches everything and breaks glass.");
+        Add(UiKit.MakeLabel(warning, 16, glass && !knife ? Palette.Warn : Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(0, 688, 1280, 20));
         _crowbar = Add(UiKit.MakeButton(Loc.T($"Force it with a crowbar  {Controls.Tag(Controls.Force)}"), Palette.Bad, 16, Force).Place(480, 624, 320, 52));
         _mentor = Add(new MentorView { Position = new Vector2(24, 300), ZIndex = 20 });
         _mentor.Teach(State, "lockpick");
@@ -159,6 +162,7 @@ public partial class LockpickPhase : Phase
         {
             PickGrade.Masterful => (Loc.T("MASTERFUL!"), Loc.T("Not a scratch. Everything inside is pristine: +25%."), Palette.Gold, "win"),
             PickGrade.Clean => (Loc.T("CLICK."), Loc.T("A clean pick. Everything inside is safe."), Palette.Good, "sting"),
+            _ when State.HasCurio("knife") => (Loc.T("CRACK."), Loc.T("Forced open with your burglar's knife: not a scratch, nothing broken."), Palette.Good, "crowbar"),
             _ => (Loc.T("CRACK."), Loc.T("Forced open: everything's scratched, and any glass is broken."), Palette.Bad, "crowbar"),
         };
         Sfx.Play(sound);

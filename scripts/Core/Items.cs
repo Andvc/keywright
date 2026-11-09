@@ -219,11 +219,23 @@ public static class Categories
     /// A swing away from a quality, as the spread swings: a step worse most often, sometimes better. It's luck, so it never
     /// lands on gold (<see cref="Lift"/>).
     /// </summary>
-    public static Rarity Swing(Random rng, Rarity quality)
+    public static Rarity Swing(Random rng, Rarity quality) => Swung(quality, SwingStep(rng));
+
+    /// <summary>How far a swing goes (a gambler's token): some steps up or one down, as a surprise would.</summary>
+    public static int SwingStep(Random rng) => rng.PickWeighted(Spread.Where(s => s.Steps != 0).ToArray(), s => s.Chance).Steps;
+
+    /// <summary>A swing's steps and how often each comes: the spread without staying put.</summary>
+    public static IEnumerable<(int Steps, float Chance)> SwingSteps
     {
-        var steps = rng.PickWeighted(Spread.Where(s => s.Steps != 0).ToArray(), s => s.Chance).Steps;
-        return Swung(quality, steps);
+        get
+        {
+            float moved = Spread.Where(s => s.Steps != 0).Sum(s => s.Chance);
+            return Spread.Where(s => s.Steps != 0).Select(s => (s.Steps, s.Chance / moved));
+        }
     }
+
+    /// <summary>A swing down: a step worse, never below common.</summary>
+    public static Rarity Lower(Rarity quality, int steps = 1) => (Rarity)Math.Max(0, (int)quality - steps);
 
     static Rarity Swung(Rarity quality, int steps) => steps > 0 ? Lift(quality, steps) : (Rarity)Math.Clamp((int)quality + steps, 0, 4);
 

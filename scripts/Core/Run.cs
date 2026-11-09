@@ -89,7 +89,7 @@ public sealed partial class GameState
     public const float GraceInterest = 1.5f;
 
     /// <summary>Bram's word is good for one week, but not for the last of the debt.</summary>
-    public bool CanAskGrace => GraceLeft && Gold < DueNow && Week < Guild.Weeks;
+    public bool CanAskGrace => GraceLeft && Gold < DueNow && Week != Guild.Weeks;
 
     /// <summary>
     /// Bram vouches for you: everything you have goes to the Guild, and the rest (with interest) is added to next week's
@@ -121,7 +121,7 @@ public sealed partial class GameState
     public int DaysToNextDue => (NextDueWeek - Week) * Guild.DaysPerWeek + DaysToDue;
 
     /// <summary>What pawning a displayed thing fetches tonight: the Guild's price (better for a pawnbroker's friend, better still with a pawn ticket).</summary>
-    public int PawnValue(Item item) => (int)MathF.Round(SaleValue(item) * PawnRate);
+    public int PawnValue(Item item) => (int)MathF.Round(ShelfValue(item) * PawnRate);
 
     float PawnRate => Favoured(Challenges.HonestClerk) ? 1 : HasCurio("ticket") ? Curios.TicketRate : Guild.PawnRate;
 
@@ -187,6 +187,19 @@ public sealed partial class GameState
             for (int week = Math.Max(Week, WeeksPaid) + 1; week <= Guild.Weeks; week++) left += DueFor(week);
             return left;
         }
+    }
+
+    /// <summary>
+    /// On a Guild night, the whole of what's left: tonight's due first, as any Guild night (a miser's lockbox grows what's
+    /// left in the purse), then the rest. Returns what was paid, all told (0.35: paying it all skipped the lockbox).
+    /// </summary>
+    public int PayAll()
+    {
+        if (!CanPayOff) return 0;
+        int before = Gold, hoarded = 0;
+        if (DuesTonight && !PaidThisWeek && PayDues()) hoarded = Hoarded;
+        PayOff();
+        return before + hoarded - Gold;
     }
 
     /// <summary>You could pay off the whole debt now, and finish ahead of time.</summary>
@@ -269,7 +282,8 @@ public sealed partial class GameState
     {
         var eligible = chest.Everything.Where(i => !i.Fake && !i.Broken && !i.IsSong).ToList();
         var lift = eligible.Where(i => i.Quality < Rarity.Epic).ToArray();
-        if (lift.Length > 0 && Rng.NextFloat() < PityChance)
+        // Under the cursed crescent everything comes out exactly as promised, a dry spell or not (0.35).
+        if (lift.Length > 0 && !HasCurio("crescent") && Rng.NextFloat() < PityChance)
         {
             var pick = Rng.PickOne(lift);
             chest.Improve(i => i.Id == pick.Id ? i with { Quality = Categories.Lift(i.Quality) } : i);
@@ -371,7 +385,7 @@ public sealed partial class GameState
     public bool Takes(Commission c, Item item) => c.Wants(item, LetterLeeway(c));
 
     /// <summary>How many qualities lower than asked a commission will take.</summary>
-    public int LetterLeeway(Commission c) => HasCurio("letter") ? 1 : 0;
+    public int LetterLeeway(Commission c) => HasCurio("letter") && c.Patron != Events.Crier ? 1 : 0;
 
     /// <summary>What a commission offers, all told, before what a thing would sell for comes into it (a lot: for all of it).</summary>
     public int CommissionReward(Commission c) => (int)MathF.Round(c.Reward * (Shows(Heartsongs.Lark) ? Heartsongs.LarkPay : 1) *
@@ -384,7 +398,12 @@ public sealed partial class GameState
     /// What handing over a thing that would sell for <paramref name="sale"/> pays: the commission's share for it, and
     /// never less than a quarter over the sale (<see cref="Patrons.Premium"/>). A commission always pays more than selling.
     /// </summary>
-    public int CommissionPay(Commission c, int sale) => Math.Max(CommissionEach(c), Math.Max(sale + 1, (int)MathF.Ceiling(sale * Patrons.Premium)));
+    /// (A patron's ribbon puts half as much again on the whole of it, the quarter over the sale too: 0.35, it was only the reward.)
+    public int CommissionPay(Commission c, int sale)
+    {
+        int floor = Math.Max(sale + 1, (int)MathF.Ceiling(sale * Patrons.Premium * (HasCurio("ribbon") ? Curios.RibbonPay : 1)));
+        return Math.Max(CommissionEach(c), floor);
+    }
 
     /// <summary>
     /// Hands something over for a commission instead of selling it (giving up <paramref name="forgo"/>, its sale price,
@@ -471,7 +490,7 @@ public sealed partial class GameState
         }
         if (EventIs(Events.Crier)) Commissions.Add(Events.Reward(BuyerKind, Tier, Day));
         if (TodayEvent is { Key: "dreaming" or "wardens" or "census" } e)
-            for (int i = 0; i < Queue.Count; i++) Queue[i] = Events.Restate(Rng, Queue[i], e.Key, Tier);
+            for (int i = 0; i < Queue.Count; i++) Queue[i] = Events.Restate(Rng, Queue[i], e.Key, Tier, ward: e.Key == "dreaming" && Boosts.AlwaysWard);
     }
 
     // ---- Each night ----
@@ -493,13 +512,16 @@ public sealed partial class GameState
             Gold += interest;
             Today.Curios += interest;
         }
-        if (HasCurio("book"))
+        if (BookCoins > 0)
         {
-            int coins = Curios.BookPerPoint * ShopTiers.Scale(Tier) * Exhibition;
+            int coins = BookCoins;
             Gold += coins;
             Today.Curios += coins;
         }
     }
+
+    /// <summary>What a visitors' book takes in a night: so much a point of the exhibition, more in a grander shop.</summary>
+    public int BookCoins => HasCurio("book") ? Curios.BookPerPoint * ShopTiers.Scale(Tier) * Exhibition : 0;
 
     /// <summary>A new find in the journal: a collector's catalogue pays for it.</summary>
     void Catalogue()

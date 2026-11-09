@@ -688,8 +688,8 @@ public static partial class Simulation
         {
             // A pin fewer (a locksmith's oil) or more (a wet year) moves the odds a tenth.
             float roll = rng.NextFloat(), oil = 0.1f * (visit.Chest.Lock.Pins - state.Oiled(visit.Chest.Lock).Pins);
-            grade = state.HasCurio("knife") ? PickGrade.Forced
-                : skill < 1 ? (roll < 0.3f * skill + oil ? PickGrade.Masterful : roll < 0.6f + 0.25f * skill + oil / 2 ? PickGrade.Clean : PickGrade.Forced)
+            // (A burglar's knife doesn't stop a careful hand picking: it makes a pick that fails, forced, cost nothing.)
+            grade = skill < 1 ? (roll < 0.3f * skill + oil ? PickGrade.Masterful : roll < 0.6f + 0.25f * skill + oil / 2 ? PickGrade.Clean : PickGrade.Forced)
                 : care >= Care.Listens ? (roll < 0.3f + oil ? PickGrade.Masterful : roll < 0.85f + oil / 2 ? PickGrade.Clean : PickGrade.Forced)
                 : roll < 0.6f ? PickGrade.Clean : PickGrade.Forced;
         }
@@ -1099,9 +1099,11 @@ public static partial class Simulation
             int settled = state.Settle(purchase, perfect, value);
             earned += settled;
             value += settled;
-            // The Underwriters' bond, on a chest taken sight unseen that held less than its price (straight into the purse).
+            // A perfect read's fee on what the chest held, then the Underwriters' bond on a chest taken sight unseen that held
+            // less than its price (straight into the purse), as the opening has them.
+            int fee = perfect ? state.PerfectFee(value) : 0;
             value += state.Insure(purchase, value);
-            if (perfect) earned += state.PerfectFee(value);
+            earned += fee;
             state.RecordRead(perfect);
             state.ReadTrue(visit.Chest, perfect);
             state.Earn(earned);
@@ -1336,7 +1338,8 @@ public static partial class Simulation
     {
         GD.Print("\nLessons (played the careful way, at the seller's own shop, with and without that shop's tools)");
         int failed = 0;
-        foreach (var lesson in Lessons.All)
+        // Every seller's lesson, and the scripted first days' (0.35).
+        foreach (var lesson in Lessons.All.Concat(Lessons.FirstDay))
         foreach (bool tools in new[] { true, false })
         {
             var seller = Sellers.Get(lesson.Seller);

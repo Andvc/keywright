@@ -70,6 +70,12 @@ public sealed class Purchase
     /// <summary>Whether the slip it was bought on was exactly right (once it's open: forcing may have broken glass since).</summary>
     public bool Perfect => Slip.Check(Chest).Perfect;
 
+    /// <summary>
+    /// The slip's verdict for what a read earns (a ledger's either way): right, wrong, or none at all for a chest bought
+    /// sight unseen on a blank slip (0.35: nothing was read, so nothing was wrong; the opening shows it unseen, not missed).
+    /// </summary>
+    public bool? Verdict => SightUnseen && Slip.Blank ? null : Perfect;
+
     /// <summary>What the seller claims of what's inside (an heirloom, the dearest thing), and what they pay you for it.</summary>
     public Item Claimed { get; init; }
     public int ClaimPays { get; init; }
@@ -335,8 +341,16 @@ public sealed partial class GameState
     public bool DisplayFull => Display.Count(i => !i.IsSong) >= DisplaySlots;
 
     /// <summary>The exhibition: what your displayed things are worth to visitors' eyes, not their purses.</summary>
-    public int Exhibition => (int)MathF.Round(Display.Sum(i => i.Prestige * (i.Category == Category.Garb && HasCurio("dummy") ? Curios.DummyPrestige : 1)) *
-                                              (1 + Synergies.ShowBonus(Active("tailor"))) * (HasCurio("rope") ? Curios.RopeExhibition : 1));
+    public int Exhibition => (int)MathF.Round(Display.Sum(i => i.Prestige * (i.Category == Category.Garb && HasCurio("dummy") ? Curios.DummyPrestige : 1)) * ShowFactor);
+
+    /// <summary>What the exhibition makes of every point: a tailor's name, a velvet rope.</summary>
+    float ShowFactor => (1 + Synergies.ShowBonus(Active("tailor"))) * (HasCurio("rope") ? Curios.RopeExhibition : 1);
+
+    /// <summary>
+    /// What a thing adds to the exhibition here, as the screens say it (0.35: they said its plain points, a third or a
+    /// sixth of what a tailor's dummy and a velvet rope make of a cloak).
+    /// </summary>
+    public int Points(Item item) => (int)MathF.Round(item.Prestige * (item.Category == Category.Garb && HasCurio("dummy") ? Curios.DummyPrestige : 1) * ShowFactor);
 
     // The collection journal: everything acquired, by kind and quality, and the feats synergies ask for.
     readonly int[,] _acquired = new int[Categories.All.Length, 5];
@@ -449,6 +463,12 @@ public sealed partial class GameState
         if (item.Magic) MagicFound++;
     }
 
+    /// <summary>Notes a bought chest's read: a Guild crate or a mimic was none, and neither makes nor breaks a streak (0.35).</summary>
+    public void RecordRead(ReadReport report)
+    {
+        if (!report.NoRead) RecordRead(report.Perfect);
+    }
+
     /// <summary>Notes whether a bought chest's slip was perfect, for the streak.</summary>
     public void RecordRead(bool perfect)
     {
@@ -526,7 +546,7 @@ public sealed partial class GameState
             Owned = _owned.ToList(), HintsSeen = HintsSeen.ToList(), Met = Met.ToList(), Found = Found.ToList(),
             FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(), KeepsakesSeen = KeepsakesSeen.ToList(), People = People.ToList(),
             Places = Places.ToList(),
-            Display = Display.Select(i => new SavedItem { Category = i.Category, Quality = i.Quality, Magic = i.Magic, Song = i.Song }).ToList(),
+            Display = Display.Select(i => new SavedItem { Category = i.Category, Quality = i.Quality, Magic = i.Magic, Song = i.Song, Worth = _keptFor.GetValueOrDefault(i.Id) }).ToList(),
             SongsFound = SongsFound.ToList(), SongsKept = SongsKept,
             WeeksPaid = WeeksPaid, Arrears = Arrears, GraceUsed = GraceUsed > 0, GraceCount = GraceUsed, StashUsed = StashUsed, ClearedDay = ClearedDay, CloverWeek = CloverWeek, PeddlerTier = PeddlerTier, TierSince = TierSince,
             CurioPaid = _curios.Select(key => _curioPaid.GetValueOrDefault(key)).ToList(),
@@ -607,8 +627,12 @@ public sealed partial class GameState
         state.People.UnionWith(data.People);
         state.Places.UnionWith(data.Places.Where(key => Origins.All.Any(o => o.Key == key)));
         state.ActiveSynergies.UnionWith(data.ActiveSynergies.Where(key => Synergies.All.Any(s => s.Key == key)));
-        state.Display.AddRange(data.Display.Where(i => i.Category != Category.Heartsong || Heartsongs.Exists(i.Song))
-            .Select(i => new Item(i.Category, i.Quality, i.Magic, Song: i.Song)));
+        foreach (var saved in data.Display.Where(i => i.Category != Category.Heartsong || Heartsongs.Exists(i.Song)))
+        {
+            var item = new Item(saved.Category, saved.Quality, saved.Magic, Song: saved.Song);
+            state.Display.Add(item);
+            if (saved.Worth > 0) state._keptFor[item.Id] = saved.Worth;
+        }
         state.LoadTales(data);
         int kinds = state._acquired.GetLength(0), qualities = state._acquired.GetLength(1);
         for (int i = 0; i < Math.Min(data.Acquired.Count, kinds * qualities); i++)
@@ -672,7 +696,7 @@ public sealed partial class GameState
                 var known = pool.Where(s => !Teaches(s)).ToArray();
                 if (known.Length > 0) pool = known;
             }
-            // A fence's mark draws crooks: whoever deals in fakes comes twice as often.
+            // A fence's mark draws crooks: whoever deals in fakes is twice as likely to be the next to come in (more often, then: nobody comes twice a day while there's anyone new).
             var seller = Rng.PickWeighted(pool, s => (s.Tier == Tier ? 3f : s.Tier == Tier - 1 ? 0.6f : 0.15f) * (s.Metalworker ? smiths : 1f) *
                                                      (s.Fakes.Length > 0 && HasCurio("mark") ? Curios.MarkCrooks : 1f));
             // A guest book: the day's first customer is the better sort, with a chest a colour finer.
@@ -689,7 +713,6 @@ public sealed partial class GameState
             Queue.Insert(0, Bettany(Rng));
         }
         StageEvent();
-        Curiosities();
         // Welcome gifts: on the first morning, two of Bram's old regulars hand you their chests for a lucky penny.
         if (Day == 1 && Favoured(Challenges.Gifts))
             for (int i = 0, given = 0; i < Queue.Count && given < Challenges.Gifted; i++)
@@ -699,6 +722,21 @@ public sealed partial class GameState
                     given++;
                 }
         StageTales();
+        // The build's word on the day's crowd, once the tales have brought theirs (0.35: a tale's chest that took a
+        // regular's place came after the tally was dealt, and went without).
+        Curiosities();
+        Compass();
+    }
+
+    /// <summary>
+    /// The smugglers' compass: every chest has a false bottom, whoever brings it (0.35: a seller's empty chest, a tale's,
+    /// the Stranger's and a lesson's went without). Not a mimic's (it ate everything) or a Guild crate (someone's in it).
+    /// </summary>
+    void Compass()
+    {
+        if (!HasCurio("compass") || Tier < 2) return;
+        foreach (var visit in Queue.Where(v => v.Talk == null && v.Chest.Hidden == null && v.Chest.Crate == null && !v.Chest.Breathing))
+            visit.Chest.HideUnder(Market.FalseBottom(Rng, Tier, visit.Chest.Quality));
     }
 
     /// <summary>How often someone comes in, as they're inclined.</summary>
@@ -728,20 +766,35 @@ public sealed partial class GameState
     Visit NewVisit(SellerDef seller, bool finer = false)
     {
         var lesson = Lessons.For(seller.Key);
-        if (GivesLessons && lesson != null && Tutored.Add(seller.Key))
-        {
-            var visit = lesson.MakeOn(Rng, Tier, finer || EventIs("storm"));
-            visit.Lesson = lesson;
-            return visit;
-        }
-        var fresh = Market.CreateVisit(Rng, seller, Tier, finer ? Boosts with { BetterChests = 1 } : Boosts);
-        // A merchant's signet (or Rosa's charm, or a good name): hagglers hear out an offer that's too low, instead of
-        // storming off. A golden tongue: nobody storms off at all.
-        fresh.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll || HasCurio("goldentongue") || Favoured(Challenges.GoodName);
-        fresh.Unruffled = HasCurio("goldentongue");
-        ApplyGoodwill(fresh);
+        if (GivesLessons && lesson != null && Tutored.Add(seller.Key)) return Lesson(lesson, finer);
+        var fresh = Market.CreateVisit(Rng, seller, Tier, finer ? Boosts with { Finer = 1 } : Boosts);
+        Welcome(fresh);
         Sing(fresh);
         return Breathe(fresh);
+    }
+
+    /// <summary>
+    /// A seller's lesson, priced as any chest here is (the shop's name, a curio's word on the price) and dealt with as any
+    /// seller (<see cref="Welcome"/>), so the build holds for a lesson too (0.35).
+    /// </summary>
+    internal Visit Lesson(Lesson lesson, bool finer = false, Random rng = null)
+    {
+        var visit = lesson.MakeOn(rng ?? Rng, Tier, finer || EventIs("storm"), Boosts);
+        visit.Lesson = lesson;
+        Welcome(visit);
+        return visit;
+    }
+
+    /// <summary>
+    /// How a seller deals with you, whatever brought them (a regular, a lesson, a tale's chest): with a merchant's signet
+    /// (or Rosa's charm, or a good name) a haggler hears out an offer that's too low instead of storming off, with a golden
+    /// tongue nobody storms off at all; and a friend's terms. (0.35: lessons and tales' chests went without.)
+    /// </summary>
+    internal void Welcome(Visit visit)
+    {
+        visit.HearsOut = HasCurio("signet") || HasCurio("coffer") || HagglesAll || HasCurio("goldentongue") || Favoured(Challenges.GoodName);
+        visit.Unruffled = HasCurio("goldentongue");
+        ApplyGoodwill(visit);
     }
 
     /// <summary>Its own dice, so a Heartsong turning up (or not) leaves every other roll of the day as it was.</summary>
@@ -764,20 +817,20 @@ public sealed partial class GameState
     /// shake (Ada shook hers too gently to hear the cloak), and a gentle shake under a clank (Garrick shook hard and the
     /// knife drowned out the coins). The second opens with passing (<see cref="Bettany"/>).
     /// </summary>
-    static IEnumerable<Visit> FirstDay(Random rng)
-    {
-        // Pip names a price today, so the first lesson is only about listening; from tomorrow he asks you to name one.
-        yield return Market.Price(rng, Sellers.Get(TaleBook.Pip), new Chest(new[] { new Item(Category.Coins, Rarity.Common) }), 1, 4, Trade.Fixed,
-            Loc.T("Fished it out of the millpond this morning. I didn't shake it, it might break! Is {price} okay?"));
-        yield return Scripted(rng, "ada", 3, Category.Garb);
-        yield return Scripted(rng, "garrick", 7, Category.Coins, Category.Arms);
-    }
+    /// <summary>The scripted first day: Pip, Ada and Garrick, each a lesson (<see cref="Lessons.FirstDay"/>).</summary>
+    IEnumerable<Visit> FirstDay(Random rng) => Lessons.FirstDay.Take(3).Select(lesson => Scripted(lesson, rng));
 
     /// <summary>The second morning's first customer: Bettany heard everything there was, and asks what it's worth. Pass.</summary>
-    static Visit Bettany(Random rng) => Scripted(rng, TaleBook.Bettany, 7, Category.Arms);
+    Visit Bettany(Random rng) => Scripted(Lessons.FirstDay[3], rng);
 
-    static Visit Scripted(Random rng, string seller, int ask, params Category[] kinds) =>
-        Market.Price(rng, Sellers.Get(seller), new Chest(kinds.Select(k => new Item(k, Rarity.Common))), 1, ask, Trade.Fixed);
+    /// <summary>A scripted first-days visit and its lesson (a storm makes its chest a colour finer, as it does every chest).</summary>
+    Visit Scripted(Lesson lesson, Random rng)
+    {
+        var visit = lesson.MakeOn(rng, 1, EventIs("storm"), Boosts);
+        visit.Lesson = lesson;
+        Welcome(visit);
+        return visit;
+    }
 
     /// <summary>Calls in the next customer, if anyone is waiting.</summary>
     public bool NextCustomer()
@@ -802,6 +855,8 @@ public sealed partial class GameState
         // It wasn't theirs to sell: the ward won't let go, and it goes to the back room for its owner (or Nim's friends).
         if (visit.Chest.Stolen)
         {
+            // Buying is buying: the Waiting Game starts again (0.35: a stolen chest left it running).
+            PassStreak = 0;
             Hold(visit);
             HeardStory(visit);
             BeatBought(visit);
@@ -814,6 +869,7 @@ public sealed partial class GameState
         visit.Chest.Open(slip);
         var luck = Luck(visit.Chest, !visit.Handled);
         Pity(visit.Chest);
+        if (Star(visit.Chest) is { } star) luck.Add(star);
         Counted(visit, visit.Chest, slip);
         var (claimed, pays) = Claim(visit);
         HeardStory(visit);
@@ -896,16 +952,29 @@ public sealed partial class GameState
     {
         if (!(DisplayOpen || item.IsSong) || !item.Displayable || (DisplayFull && !item.IsSong) || Gold < value) return false;
         Display.Add(item);
+        _keptFor[item.Id] = value;
         Gold -= value;
         Today.Earned -= value;
         return true;
     }
 
+    /// <summary>What each thing on display would have fetched at its opening (what keeping it cost), by its id.</summary>
+    readonly Dictionary<int, int> _keptFor = new();
+
+    /// <summary>
+    /// What a thing on display fetches when it's sold (or pawned, at the pawn rate): what it fetches here now, and never
+    /// less than it would have at its opening (0.35: what its chest earned it, a black-market pass's double, a wishbone's
+    /// half again, a perfect read's ledger, was lost on the shelf, though keeping it had cost all of it).
+    /// </summary>
+    public int ShelfValue(Item item) => Math.Max(SaleValue(item), _keptFor.GetValueOrDefault(item.Id));
+
     /// <summary>Takes something off display and sells it.</summary>
     public void SellFromDisplay(Item item)
     {
-        if (!Display.Remove(item)) return;
-        Gold += SaleValue(item);
+        if (!Display.Contains(item)) return;
+        Gold += ShelfValue(item);
+        Display.Remove(item);
+        _keptFor.Remove(item.Id);
     }
 
     /// <summary>For the GM: the rest of today skipped. The customer at the counter and everyone waiting go home.</summary>
