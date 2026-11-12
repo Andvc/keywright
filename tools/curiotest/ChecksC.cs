@@ -536,32 +536,32 @@ public static class ChecksC
         {
             var s = Calm(T.Shop(2, curios: new[] { "note" }, bare: true));
             Evening(s, 10);
-            Show(s, T.I(Category.Gems, Rarity.Epic));
+            Show(s, T.I(Category.Gems, Rarity.Legendary));
             s.Gold = 10;
-            T.True(s.CanCover, "a purple gem on the shelf covers it");
+            T.True(s.CanCover, "a gold gem on the shelf covers it");
             T.True(!s.CanCallNote, "the note isn't for a night pawning covers");
         });
 
-        yield return new("note", "not the last week (the seventh)", () =>
+        yield return new("note", "not the last week (the fourth)", () =>
         {
             var s = Calm(T.Shop(curios: new[] { "note" }));
-            Evening(s, 35);
+            Evening(s, Guild.Weeks * Guild.DaysPerWeek);
             s.Gold = 0;
             T.True(!s.CanCover && s.Week == Guild.Weeks, "short in the last week");
             T.True(!s.CanCallNote, "the note in the last week");
         });
 
-        yield return new("note", "a Guild night after the debt (the Guild's interest, week 8 on) isn't the last week: it pays", () =>
+        yield return new("note", "a Guild night after the debt (the Guild's interest, the week after the last) isn't the last week: it pays", () =>
         {
             var s = Calm(T.Shop(curios: new[] { "note" }));
-            Evening(s, 35);
+            Evening(s, Guild.Weeks * Guild.DaysPerWeek);
             PayInFull(s);
-            T.True(s.DebtCleared, "the debt cleared in week 7");
+            T.True(s.DebtCleared, "the debt cleared in its last week");
             s.StartDay();
-            Evening(s, 40);
+            Evening(s, (Guild.Weeks + 1) * Guild.DaysPerWeek);
             s.Gold = 0;
-            T.True(s.DuesTonight && !s.PaidThisWeek && !s.CanCover, "week 8: the Guild's interest, and nothing to cover it");
-            T.True(s.CanCallNote, "the note on a short night in week 8 (CanCallNote requires Week < Guild.Weeks, so it's never offered after the debt)");
+            T.True(s.DuesTonight && !s.PaidThisWeek && !s.CanCover, "the week after the debt: the Guild's interest, and nothing to cover it");
+            T.True(s.CanCallNote, "the note on a short night after the debt (CanCallNote requires Week < Guild.Weeks, so it's never offered after the debt)");
         });
 
         // ---- Patrons ----
@@ -643,17 +643,26 @@ public static class ChecksC
                 }
         });
 
-        yield return new("errand", "on the week's first morning, as the board fills (the second week, at Thornwick)", () =>
+        // (0.36: the regulars' first commissions come on the second week's third morning, Patrons.FromDay, not its first;
+        // every week after, on its first.)
+        yield return new("errand", "the morning the board first fills (the second week's third, at Thornwick), and a week's first morning after", () =>
         {
             var (without, with) = Pair("errand", 2, bare: false);
             foreach (var s in new[] { without, with })
             {
-                Evening(s, 5);
-                PayInFull(s);
+                Evening(s, Guild.DaysPerWeek + Patrons.FromDay - 1);
                 s.StartDay();
             }
             T.Eq(2, s0(without), "the regulars' commissions, week 2, without the book");
             T.Eq(4, s0(with), "the regulars' commissions, week 2, with the book");
+            foreach (var s in new[] { without, with })
+            {
+                Evening(s, 2 * Guild.DaysPerWeek);
+                PayInFull(s);
+                s.StartDay();
+            }
+            T.Eq(2, s0(without), "the regulars' commissions, week 3's first morning, without the book");
+            T.Eq(4, s0(with), "the regulars' commissions, week 3's first morning, with the book");
 
             static int s0(GameState s) => s.Commissions.Count(c => c.Patron != Events.Crier);
         });

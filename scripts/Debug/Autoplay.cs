@@ -73,6 +73,11 @@ public partial class Autoplay : Node
             case DayEndPhase dayEnd:
                 await DriveDayEnd(dayEnd);
                 break;
+            // The road inward, on a market's first morning: a look, and on.
+            case RoadPhase road:
+                await Wait(2.6);
+                if (IsInstanceValid(road)) road.Finish();
+                break;
             case LockpickPhase lockpick:
                 await DriveLockpick(lockpick);
                 break;

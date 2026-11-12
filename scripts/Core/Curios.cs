@@ -48,7 +48,7 @@ public sealed record CurioDef(string Key, string Name, string Blurb, CurioRarity
 public static class Curios
 {
     // What each effect does, for the rules (GameState, Build.cs) and the blurbs.
-    public const float InterestRate = 0.03f, TicketRate = 0.8f, LoupeFakes = 0.25f, InkFakes = 1f / 3, WatchPatience = 2f, TokenSwing = 0.25f,
+    public const float InterestRate = 0.03f, TicketRate = 0.8f, LoupeFakes = 0.25f, InkFakes = 1f / 3, WatchPatience = 2f,
         FootLuck = 0.1f, WheelLuck = 0.5f, HorseshoeStep = 0.1f, HorseshoeMax = 0.5f, WishboneBonus = 1.5f, SealFee = 0.08f, ForkStep = 0.03f,
         ForkMax = 0.3f, LedgerRight = 1.15f, LedgerWrong = 0.85f, TongueFloor = 0.8f, WaitStep = 0.05f, WaitMax = 0.2f, BellPrice = 0.75f,
         CofferShare = 0.4f, QueuePrice = 0.8f, HornDearer = 1.05f, WhetstoneBonus = 1.75f, TradeBonus = 1.5f, ScalesStep = 0.2f, StillBroken = 0.5f,
@@ -366,6 +366,18 @@ public static class Curios
         3 => new[] { 0.38f, 0.42f, 0.15f, 0.05f },
         _ => new[] { 0.32f, 0.42f, 0.18f, 0.08f },
     };
+
+    /// <summary>
+    /// How often a gambler's token swings a thing that came out as its chest promised: as often as makes surprises twice
+    /// as many in a chest of this colour, whatever the odds are (0.36; a quarter of the time, until the odds leaned up
+    /// and it tripled a purple chest's). A swing down from common shows nothing, so wood wants a few more.
+    /// </summary>
+    public static float TokenSwing(Rarity chest)
+    {
+        float stay = Categories.Odds(chest).Where(o => o.Quality == chest).Sum(o => o.Chance);
+        float shows = chest == Rarity.Common ? Categories.SwingSteps.Where(s => s.Steps > 0).Sum(s => s.Chance) : 1f;
+        return Math.Clamp((1 - stay) / Math.Max(0.01f, stay * shows), 0f, 0.6f);
+    }
 
     /// <summary>The shop tier a curio of this rarity needs before Nim lays one out: rare ones from Thornwick, legendary ones from Crownhold.</summary>
     public static int RarityTier(CurioRarity rarity) => rarity switch

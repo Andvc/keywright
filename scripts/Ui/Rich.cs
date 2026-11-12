@@ -49,6 +49,12 @@ public static class Rich
     public static string Colour(string text, Color color) => $"[color=#{color.ToHtml(false)}]{Escape(text)}[/color]";
 
     /// <summary>
+    /// Text that's already marked up (its trade words coloured, its own brackets escaped), in one colour underneath: what
+    /// was said a moment ago, a shade quieter than the sentence being said (0.36).
+    /// </summary>
+    public static string Tint(string marked, Color color) => $"[color=#{color.ToHtml(false)}]{marked}[/color]";
+
+    /// <summary>
     /// The text, escaped, with these phrases coloured wherever they appear (the longest first; never inside another). A
     /// phrase in a language written with spaces matches a whole word, ignoring case, with its own ending ("clank" in
     /// "clanking", "Cloak" in "cloaks"); one in Japanese or Chinese matches where it stands.

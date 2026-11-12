@@ -870,6 +870,8 @@ public sealed partial class GameState
         int rebate = Rebate(visit);
         Gold += rebate;
         Today.Spent -= rebate;
+        // What the checks made could have told of, for the opening: the rest was never listened for.
+        visit.NoteAudible();
         // Named truly, a warded thing comes out of the ward: it's in the chest for the luck and the opening.
         visit.Chest.Open(slip);
         var luck = Luck(visit.Chest, !visit.Handled);

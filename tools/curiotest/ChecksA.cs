@@ -374,8 +374,10 @@ public static class ChecksA
         {
             var (without, with) = T.Twins("tongue");
             int plain = T.Counter(without, LessonVisit(without, "garrick")).Floor, least = T.Counter(with, LessonVisit(with, "garrick")).Floor;
-            T.True(Money.Round(plain * 0.8f) < plain, $"premise: a fifth off shows at {plain}g");
-            T.Eq(Money.Round(plain * 0.8f), least, $"the least Garrick takes in his lesson ({plain}g without it)");
+            // A lesson's chest is a few coins, and both floors are rounded from the same exact sum: a fifth off whatever
+            // rounded to the plain one (0.36: at 4g that's 3 or 4; the tale's chest above checks the fifth exactly).
+            int low = Money.Round((plain - 0.5f) * 0.8f), high = Money.Round((plain + 0.49f) * 0.8f);
+            T.True(least >= low && least <= high && least <= plain, $"the least Garrick takes in his lesson ({plain}g without it, {least}g with: a fifth off is {low}g to {high}g)");
         });
     }
 

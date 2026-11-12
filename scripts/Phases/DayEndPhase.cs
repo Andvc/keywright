@@ -416,15 +416,15 @@ public partial class DayEndPhase : Phase
         if (!State.GuildIntroduced)
         {
             card.AddChild(UiKit.MakeLabel(Loc.T("A week at the crossroads"), 24, Palette.Gold).Place(84, 16, 600, 30));
-            card.AddChild(UiKit.MakeLabel(Loc.T($"Learn the trade here, where chests are cheap. {market} is next along the road: more customers, richer chests and a shelf for your best finds."), 16, Palette.Muted)
+            card.AddChild(UiKit.MakeLabel(Loc.T($"Learn the trade here, where chests are cheap. {market} is next along the road: finer chests, locks to pick, and a shelf for your best finds."), 16, Palette.Muted)
                 .Wrapped().Place(84, 50, w - 110, 66));
             return card;
         }
         int due = State.NextDue;
         bool paid = State.PaidThisWeek;
         card.AddChild(UiKit.MakeLabel(Loc.T($"Next: {market}"), 24, Palette.Gold).Place(84, 16, 600, 30));
-        card.AddChild(UiKit.MakeLabel(paid ? Loc.T($"The Guild's carters will have the stall at {market} by morning: more customers, richer chests and a shelf for your best finds.")
-            : Loc.T($"Pay the Guild's {due}g on the fifth night and its carters move the stall to {market}: more customers, richer chests and a shelf for your best finds."), 16, Palette.Muted)
+        card.AddChild(UiKit.MakeLabel(paid ? Loc.T($"The Guild's carters will have the stall at {market} by morning.")
+            : Loc.T($"Pay the Guild's {due}g on the fifth night and its carters move the stall to {market}: finer chests, locks to pick, and a shelf for your best finds."), 16, Palette.Muted)
             .Wrapped().Place(84, 50, w - 110, 44));
         if (paid) return card;
         float fill = Math.Clamp(State.Gold / (float)Math.Max(1, due), 0, 1);

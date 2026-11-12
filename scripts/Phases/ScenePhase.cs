@@ -184,7 +184,7 @@ public partial class ScenePhase : Phase
         var line = _lines[_index];
         // The line so far: what's been said stays, a shade quieter, and the sentence being said comes up bright.
         string said = string.Join(" ", _sentences.Take(_at).Select(sentence => Rich.Trade(sentence)));
-        _text.Text = (said.Length > 0 ? $"[color=#{Palette.Muted.Lightened(0.25f).ToHtml(false)}]{said}[/color] " : "") + Rich.Trade(_sentences[_at]);
+        _text.Text = (said.Length > 0 ? Rich.Tint(said, Palette.Muted.Lightened(0.25f)) + " " : "") + Rich.Trade(_sentences[_at]);
         _text.Modulate = new Color(1, 1, 1, fresh ? 0 : 0.8f);
         _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.16f);
         _nextIn = _at < _sentences.Count - 1 ? Words.ReadTime(_sentences[_at]) : 0;

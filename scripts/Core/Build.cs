@@ -143,7 +143,7 @@ public sealed partial class GameState : ISlipModel
         if (r.Step > 0 && Rng.NextFloat() < r.Step) q = Lucky(q);
         // A gambler's token swings a thing that came out as promised, as a surprise would: up is luck's step (a purple
         // thing shines, 0.35: up from purple was nothing, so at the Emporium it only ever swung down), down is a step worse.
-        if (r.Swing && q == chest && Rng.NextFloat() < Curios.TokenSwing)
+        if (r.Swing && q == chest && Rng.NextFloat() < Curios.TokenSwing(chest))
         {
             int steps = Categories.SwingStep(Rng);
             q = steps > 0 ? Lucky(q, steps) : Categories.Lower(q, -steps);
@@ -198,7 +198,7 @@ public sealed partial class GameState : ISlipModel
         }
         if (r.Swing)
         {
-            float moved = d[c] * Curios.TokenSwing;
+            float moved = d[c] * Curios.TokenSwing(chest);
             d[c] -= moved;
             foreach (var (steps, p) in Categories.SwingSteps)
             {

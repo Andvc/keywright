@@ -264,7 +264,7 @@ public partial class MentorView : Control
         // What's been said stays in the box, a shade quieter; the sentence being said is the bright one (0.36: until then
         // each took the last one's place, and a click).
         string said = string.Join(" ", _sentences.GetRange(0, _at).ConvertAll(earlier => Rich.Trade(earlier)));
-        _text.Text = (said.Length > 0 ? $"[color=#{Palette.Muted.Lightened(0.2f).ToHtml(false)}]{said}[/color] " : "") + Rich.Trade(sentence);
+        _text.Text = (said.Length > 0 ? Rich.Tint(said, Palette.Muted.Lightened(0.2f)) + " " : "") + Rich.Trade(sentence);
         Fit(string.Join(" ", _sentences.GetRange(0, _at + 1)));
         UpdateMore();
         _pips.QueueRedraw();

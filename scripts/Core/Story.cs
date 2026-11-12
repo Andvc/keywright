@@ -88,6 +88,7 @@ public static class Story
             new(Bram, Loc.T("Twenty years. Has it been? Well. A debt's a debt.")),
             new(Vane, Loc.T($"{Money.Say(Enumerable.Range(1, Guild.Weeks).Sum(state.DueFor))} in all. {Capital(Sellers.Number(Guild.Weeks))} payments, one every fifth night, starting small: {Money.Say(state.DueFor(1))}, {Sellers.Number(Guild.DaysPerWeek - GameState.IntroDay)} nights from now.")),
             new(Vane, Loc.T("Miss one, and the Guild takes the stall in settlement. A formality. I'm sure it won't come to that.")),
+            new(Vane, Loc.T("And each one paid, the Guild's carters move your stall a market further in: Thornwick, Crownhold, the Royal Emporium by the Gate. Richer chests pay richer dues.")),
             new(Vane, Loc.T("And the Guild is here to help, Keywright. We introduce customers, cart chests, lend where coin is short. Do ask.")),
         };
         if (state.Remembers && !state.CampaignDone)

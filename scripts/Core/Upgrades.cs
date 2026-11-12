@@ -38,7 +38,8 @@ public static class Upgrades
 {
     public static readonly Upgrade[] All =
     {
-        new("shop2", Loc.T("Move to Thornwick"), Loc.T("Thornwick Market: 6 customers a day, better chests, locks, and two new sounds: potions and spells."),
+        // The moves inward: not bought since 0.36 (a week's due paid moves the shop), but each still says what its market brings.
+        new("shop2", Loc.T("Move to Thornwick"), Loc.T("Thornwick Market: finer chests, locks to pick, false bottoms to listen for with a drop, a shelf for your best finds, and two new sounds: potions and spells."),
             80, 1, SetsTier: 2),
 
         new("sign", Loc.T("Painted Sign"), Loc.T("One more customer every day."), 40, 2, Customers: 1),
@@ -49,7 +50,7 @@ public static class Upgrades
         new("cabinet2", Loc.T("Oak Dresser"), Loc.T("Room to display one more thing."), 110, 2, Slots: 1, Requires: "cabinet1"),
         new("bench", Loc.T("Restorer's Bench"), Loc.T("Everything you buy gets cleaned and mended: each thing is 8% likelier to come out a step better than its chest."),
             135, 2, Luck: 0.08f, By: "cadoc"),
-        new("shop3", Loc.T("Move to Crownhold"), Loc.T("A shop in the capital: richer customers, archmages with enchanted things, a dwarf, and gems."),
+        new("shop3", Loc.T("Move to Crownhold"), Loc.T("A shop in the capital: richer customers, archmages with enchanted things, two or three of a kind in a chest, a dwarf, and gems."),
             300, 2, SetsTier: 3),
 
         new("lamp", Loc.T("Witchlight"), Loc.T("Always lit: anything enchanted glows when it makes a sound. Nobody else can see it."), 160, 3, By: "ilse"),
@@ -63,7 +64,7 @@ public static class Upgrades
         new("cabinet4", Loc.T("Glass Case"), Loc.T("Room to display one more thing."), 280, 3, Slots: 1, Requires: "cabinet3"),
         new("workshop", Loc.T("Restorer's Workshop"), Loc.T("A workshop and a journeyman: everything is another 10% likelier to come out a step better."), 600, 3,
             Requires: "bench", Luck: 0.1f, By: "durgan"),
-        new("shop4", Loc.T("The Royal Emporium"), Loc.T("By the Gilded Gate: 5 customers a day, the court, demons, and a fence for the Maw."), 3000, 3,
+        new("shop4", Loc.T("The Royal Emporium"), Loc.T("By the Gilded Gate: the court, demons and their gilded iron, a fence for the Maw, and the last of Bram's debt."), 3000, 3,
             SetsTier: 4),
 
         new("magnet", Loc.T("Lodestone"), Loc.T("Iron can't move near it: no clanking, and demon gold goes quiet."), 270, 4, By: "durgan"),
@@ -109,7 +110,10 @@ public static class Upgrades
                        (u.Requires == null || state.Has(u.Requires)) && (u.Key != Engine || state.EngineOffered));
 
     /// <summary>The move a market further in from this tier (its name and what it brings), or null at the Emporium.</summary>
-    public static Upgrade MoveFrom(int tier) => All.FirstOrDefault(u => u.SetsTier == tier + 1);
+    public static Upgrade MoveFrom(int tier) => MoveInto(tier + 1);
+
+    /// <summary>The move into this market (its name, and what the market brings), or null for the stall.</summary>
+    public static Upgrade MoveInto(int tier) => All.FirstOrDefault(u => u.SetsTier == tier);
 
     /// <summary>What Nim offers at his table tonight: the next of his own, and a case for your curios.</summary>
     public static IEnumerable<Upgrade> AtNim(GameState state) => Open(state).Where(u => u.By == Story.Nim);

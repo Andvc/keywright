@@ -96,8 +96,23 @@ public partial class OpeningPhase : Phase
     /// <summary>Taken sight unseen (not a gift, not a crate): what you didn't mark is unseen, not missed.</summary>
     bool Blind => _purchase.SightUnseen && !_purchase.Visit.Gift && _purchase.Chest.Crate == null;
 
-    /// <summary>A thing you didn't mark on a chest you never handled: nobody could have read it, so it's no miss.</summary>
-    bool Unseen(ItemRead read) => Blind && read.Kind is ReadKind.Missed or ReadKind.MissedMagic or ReadKind.MissedHidden;
+    /// <summary>
+    /// A thing you didn't mark that you never had the chance to read: on a chest you never handled, or (0.36) one no check
+    /// you made could have told you of. It's no miss, and it's shown with a closed eye, not a cross.
+    /// </summary>
+    bool Unseen(ItemRead read) => read.Kind is ReadKind.Missed or ReadKind.MissedMagic or ReadKind.MissedHidden && (Blind || Unheard(read));
+
+    /// <summary>
+    /// Never listened for: a thing no strength you spent a listen on would stir (or that a clank drowned at the ones you
+    /// did), or what's under a false bottom when you didn't drop the chest. Not in a lesson, a gift or a crate, where
+    /// listening was free or beside the point.
+    /// </summary>
+    bool Unheard(ItemRead read)
+    {
+        var visit = _purchase.Visit;
+        if (visit.Gift || _purchase.Chest.Crate != null || State.ListensFree(visit) || read.Warded) return false;
+        return read.Kind == ReadKind.MissedHidden || read.Hidden ? !visit.Dropped : !visit.CouldHear(read.Item);
+    }
 
     /// <summary>What's said under an unseen thing: only what it turned out to be.</summary>
     static string UnseenNote(ItemRead read, bool brief = false) => read.Kind switch
@@ -998,7 +1013,7 @@ public partial class OpeningPhase : Phase
 
         _mentor = Add(new MentorView { Position = new Vector2(812, 72), ZIndex = 20 });
         // A blind buy's closed eyes, explained the first time; otherwise what ticks and crosses mean.
-        if (_report.Items.Any(Unseen)) Teach("unseen");
+        if (_report.Items.Any(Unseen)) Teach(Blind ? "unseen" : "unheard");
         else Teach("opened");
         if (_landed.Any(l => l.Item.IsSong)) Teach("song_found");
         if (_landed.Any(l => l.Item.Quality == Rarity.Legendary && !l.Item.IsSong)) Teach("gold");

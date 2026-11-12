@@ -886,7 +886,14 @@ public partial class Main : Node2D
         Hud.SetDue(State);
         Hud.SetEvent(State);
         if (_bot != null && !_bot.OnDayStarted(State.Day)) return;
-        // A story morning: who comes by, and what they want.
+        // The first morning at a market further in (0.36): the road, and what this stop on it brings.
+        if (State.Tier > 1 && State.Day == State.TierSince) SwitchTo(new RoadPhase(Morning));
+        else Morning();
+    }
+
+    /// <summary>The morning: a story morning's scene (who comes by, and what they want), then the shop opens.</summary>
+    void Morning()
+    {
         if (State.StoryToday)
         {
             var lines = Story.WeekStart(State);

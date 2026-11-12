@@ -189,6 +189,32 @@ public sealed class Visit
     /// <summary>Listening to this chest costs nothing, whoever brought it (a chest the story puts in your hands).</summary>
     public bool FreeListens { get; set; }
 
+    /// <summary>
+    /// The things in the chest that the checks made could have told you of, noted as it's bought (by id): whatever sounds
+    /// at a strength you listened at. Anything else you didn't mark wasn't missed: you never listened for it (0.36), and
+    /// the opening shows it so (<see cref="CouldHear"/>).
+    /// </summary>
+    HashSet<int> _audible;
+
+    /// <summary>Notes what the checks made could have told of, before the chest is opened (and luck or a forced lock changes what's in it).</summary>
+    public void NoteAudible()
+    {
+        _audible = new HashSet<int>();
+        foreach (string key in Checks)
+        {
+            if (key == Check.Dropping.Key) continue;
+            bool magnet = key.EndsWith('m');
+            if (!int.TryParse(magnet ? key[..^1] : key, out int level)) continue;
+            foreach (var item in Chest.HeardAt((Shake)level, magnet)) _audible.Add(item.Id);
+        }
+    }
+
+    /// <summary>Whether a check you made on this chest could have told you of this thing (true when nothing was noted: an old save).</summary>
+    public bool CouldHear(Item item) => _audible == null || _audible.Contains(item.Id);
+
+    /// <summary>You dropped it, and listened: a false bottom would have boomed.</summary>
+    public bool Dropped => Checks.Contains(Check.Dropping.Key);
+
     float _unseen = 1;
     string _unseenNote;
 
