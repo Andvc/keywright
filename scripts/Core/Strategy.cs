@@ -560,9 +560,9 @@ public static class Strategy
     public static readonly Dictionary<string, float> CurioWorth = new()
     {
         ["monocle"] = 2, ["draught"] = 8, ["aether"] = 5, ["chalk"] = 3, ["ring"] = 7, ["staff"] = 9,
-        ["sealed"] = 0, ["dip"] = 0, ["bond"] = 0, ["wholesale"] = 0, ["token"] = 4, ["blindfold"] = 0,
+        ["sealed"] = 0, ["dip"] = 0, ["bond"] = 0, ["wholesale"] = 0, ["token"] = 4, ["blindfold"] = 0, ["plugs"] = 0,
         ["signet"] = 2, ["tongue"] = 4, ["knot"] = 13, ["hourglass"] = 12, ["bell"] = 11, ["coffer"] = 9, ["goldentongue"] = 9,
-        ["trumpet"] = 4, ["watch"] = 3, ["beads"] = 2, ["seal"] = 10, ["register"] = 10, ["crescent"] = 3, ["fork"] = 16, ["ledger"] = 20,
+        ["trumpet"] = 6, ["watch"] = 3, ["beads"] = 2, ["echo"] = 9, ["seal"] = 10, ["register"] = 10, ["crescent"] = 3, ["fork"] = 16, ["ledger"] = 20,
         ["truthglass"] = 22,
         ["crate"] = 3, ["hook"] = 14, ["rod"] = 16, ["log"] = 12, ["pass"] = 14, ["compass"] = 22,
         ["wardlamp"] = 13, ["pillow"] = 7, ["wardtally"] = 4, ["wardkey"] = 14, ["aldricseal"] = 11,

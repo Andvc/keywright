@@ -65,6 +65,11 @@ ASSETS = [
           ["gnarled dark wood on the diagonal", "a gold claw-crown", "a violet orb"],
           ["umber:1-4", "gold:3-6", "arcane:3-6"]),
     # ---- Sight unseen ----
+    curio("plugs", "Lamb's-Wool Plugs", U, "sight unseen",
+          "Buy a chest sight unseen and your ear rests: a listen back.",
+          "Two small tufts of cream lamb's wool joined by a short leather cord.",
+          ["two tufts of wool", "a leather cord"],
+          ["parchment:1-3", "umber:2-3"]),
     curio("sealed", "Sealed Bid", C, "sight unseen",
           "Take a chest on its seller's word, without a shake, a drop or the lodestone, and they knock 15% off.",
           "A folded paper envelope sealed with a red wax blob.",
@@ -132,6 +137,11 @@ ASSETS = [
           ["a gold medallion of a smiling mouth", "a golden tongue", "a red ribbon", "a ruby"],
           ["gold:2-6", "crimson:3-5"]),
     # ---- The perfect read ----
+    curio("echo", "Echo Stone", U, "the perfect read",
+          "A perfect read gives you a listen back.",
+          "A smooth grey river pebble with a spiral worn into its face, two faint blue rings of sound coming off it.",
+          ["a grey pebble", "a worn spiral", "two rings of sound"],
+          ["night:3-7", "azure:2-4"]),
     curio("trumpet", "Ear Trumpet", C, "the perfect read",
           "Nothing drowns out or muffles a sound for you: no clank, and no straw.",
           "A brass ear trumpet, the old hearing horn, its bell flaring to the right.",

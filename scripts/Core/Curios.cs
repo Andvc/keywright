@@ -84,6 +84,8 @@ public static class Curios
         // Sight unseen: buy a chest without laying a hand on it. Cheaper, luckier, insured: the build that needs no ear.
         new("sealed", Loc.T("Sealed Bid"), Loc.T($"Buy a chest sight unseen and its seller knocks {Pct(1 - SealedPrice)} off."),
             C, "sealed", 1, T(Blind)),
+        // The ear (0.36): what you don't handle, you don't have to listen to.
+        new("plugs", Loc.T("Lamb's-Wool Plugs"), Loc.T("Buy a chest sight unseen and your ear rests: a listen back."), U, "plugs", 1, T(Blind)),
         new("dip", Loc.T("Lucky Dip"), Loc.T($"Everything in a chest you take sight unseen is {Pct(DipLuck)} likelier to come out a step better."), U, "dip", 1, T(Blind, Luck)),
         new("bond", Loc.T("Underwriter's Bond"), Loc.T($"A chest bought sight unseen holds less than you paid? The Underwriters pay {Pct(BondShare)} of it back."),
             U, "bond", 2, T(Blind, Coffers)),
@@ -112,6 +114,8 @@ public static class Curios
         new("watch", Loc.T("Pocket Watch"), Loc.T("Impatient sellers give you twice as long, and a rotten chest stands twice the shaking."), C, "watch", 1, T(Appraisal)),
         new("beads", Loc.T("Counting Beads"), Loc.T("A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all."), C, "beads", 2, T(Appraisal, Compartments)),
         new("seal", Loc.T("Appraiser's Seal"), Loc.T($"A perfect read pays you a valuer's fee: {Pct(SealFee)} of what the chest held."), U, "seal", 1, T(Appraisal)),
+        // The ear (0.36): a pebble from the Keyhold's listening rooms, where a true note came back to whoever sounded it.
+        new("echo", Loc.T("Echo Stone"), Loc.T("A perfect read gives you a listen back."), U, "echo", 1, T(Appraisal)),
         new("register", Loc.T("Valuer's Register"), Loc.T($"A perfect read pays {Fine(RegisterStep)} of what the chest held for each one so far this run (up to {Pct(RegisterMax)})."),
             U, "register", 2, T(Appraisal)),
         new("crescent", Loc.T("Cursed Crescent"), Loc.T($"Everything comes out exactly as its chest promised. Sellers sense the curse and ask {Pct(1 - CrescentPrices)} less."),
@@ -225,7 +229,7 @@ public static class Curios
         ["wishbone"] = CurioUnlock.SecondRun, ["horseshoe"] = CurioUnlock.SecondRun, ["token"] = CurioUnlock.SecondRun,
         ["crescent"] = CurioUnlock.SecondRun, ["tongue"] = CurioUnlock.SecondRun, ["guestbook"] = CurioUnlock.SecondRun,
         ["dummy"] = CurioUnlock.SecondRun, ["scales"] = CurioUnlock.SecondRun, ["rod"] = CurioUnlock.SecondRun, ["pillow"] = CurioUnlock.SecondRun,
-        ["dip"] = CurioUnlock.SecondRun, ["bond"] = CurioUnlock.SecondRun, ["knot"] = CurioUnlock.SecondRun, ["register"] = CurioUnlock.SecondRun,
+        ["dip"] = CurioUnlock.SecondRun, ["bond"] = CurioUnlock.SecondRun, ["plugs"] = CurioUnlock.SecondRun, ["knot"] = CurioUnlock.SecondRun, ["register"] = CurioUnlock.SecondRun,
         ["log"] = CurioUnlock.SecondRun, ["wardtally"] = CurioUnlock.SecondRun,
         ["monocle"] = CurioUnlock.Crownhold, ["still"] = CurioUnlock.Crownhold, ["desk"] = CurioUnlock.Crownhold, ["wheel"] = CurioUnlock.Crownhold,
         ["aether"] = CurioUnlock.Crownhold, ["horn"] = CurioUnlock.Crownhold, ["rope"] = CurioUnlock.Crownhold, ["errand"] = CurioUnlock.Crownhold,

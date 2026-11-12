@@ -3430,3 +3430,57 @@ def icon3_screen():
 
 # Upgrade icons drawn here at the 3px density, by the upgrade's key (Upgrades.All).
 ICONS3 = {"kettle": icon3_kettle, "screen": icon3_screen}
+
+
+# ---- Curios drawn for 0.36 (the ear): 28 cells square, a cell four pixels at 1440p, placed as 56 like the rest ----
+
+def curio3_echo():
+    """Echo Stone: a grey river pebble with a spiral worn into it, and the rings of a sound coming off it."""
+    im = Image.new("RGBA", (28, 28), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    dk, md, lt, hi, gl = _hex("3b3150"), _hex("554b69"), _hex("766d8b"), _hex("9b92ad"), _hex("c9c4d4")
+    ring, ring2 = _hex("68c7fd"), _hex("2164a7")
+    d.arc((1, 2, 26, 25), 200, 320, fill=ring2, width=1)
+    d.arc((4, 5, 23, 22), 210, 310, fill=ring, width=1)
+    d.arc((1, 2, 26, 25), 20, 140, fill=ring2, width=1)
+    d.ellipse((6, 9, 21, 21), fill=md)
+    for y in range(9, 22):
+        for x in range(6, 22):
+            if im.getpixel((x, y)) != md:
+                continue
+            v = (x - 12) * 0.6 + (y - 14) * 0.8
+            if v > 3.6:
+                im.putpixel((x, y), dk)
+            elif v < -3.0:
+                im.putpixel((x, y), lt)
+    for x, y in [(13, 13), (14, 13), (15, 14), (15, 15), (14, 16), (13, 16), (12, 16), (11, 15), (11, 14), (11, 13), (12, 12), (13, 11), (14, 11),
+                 (15, 11), (16, 12), (17, 13), (17, 14), (17, 15)]:
+        im.putpixel((x, y), hi)
+    im.putpixel((13, 14), gl)
+    d.point((9, 12), fill=gl)
+    return im
+
+
+def curio3_plugs():
+    """Lamb's-Wool Plugs: two tufts of cream wool on a short cord."""
+    im = Image.new("RGBA", (28, 28), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    wd, wm, wl, wh = _hex("9d8872"), _hex("d2b688"), _hex("f7ebc6"), _hex("ffffff")
+    cord_d, cord = _hex("6e3d22"), _hex("8e5b37")
+    d.arc((7, 8, 20, 26), 20, 160, fill=cord, width=1)
+    d.point((7, 17), fill=cord_d)
+    d.point((20, 17), fill=cord_d)
+    for cx, cy in ((7, 11), (20, 11)):
+        for dx, dy, r in ((0, 0, 4), (-2, 2, 3), (2, 2, 3), (0, -2, 3)):
+            d.ellipse((cx + dx - r, cy + dy - r, cx + dx + r, cy + dy + r), fill=wm)
+        for dx, dy, r in ((-1, -1, 3), (1, 0, 2)):
+            d.ellipse((cx + dx - r, cy + dy - r, cx + dx + r, cy + dy + r), fill=wl)
+        d.point((cx - 2, cy - 2), fill=wh)
+        d.point((cx - 1, cy - 3), fill=wh)
+        for dx, dy in ((2, 4), (3, 3), (0, 5), (-2, 5)):
+            im.putpixel((cx + dx, cy + dy), wd)
+    return im
+
+
+# Curios drawn here until they have a picture made like the rest (art/tools/assets_curios.py has their briefs), by key.
+CURIOS3 = {"echo": curio3_echo, "plugs": curio3_plugs}

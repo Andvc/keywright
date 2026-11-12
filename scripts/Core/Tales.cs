@@ -394,7 +394,10 @@ public sealed partial class GameState
     /// this day of the run") comes at the same point of the same market's week; a later one waits about three-fifths as
     /// long as it did (a day is a day, two stay two, four become three).
     /// </summary>
-    public static int Wait(Beat beat) => beat.After == null ? SeasonDay(beat.Gap) : beat.Gap <= 2 ? beat.Gap : (int)Math.Ceiling(beat.Gap * 0.6);
+    /// (A tale that begins at the Royal Emporium has the season's last four days to be told in: a day a beat.)
+    public static int Wait(Beat beat) => beat.After == null ? SeasonDay(beat.Gap)
+        : beat.Gap >= 2 && TaleBook.Get(beat.Tale)?.Place == TalePlace.Emporium ? 1
+        : beat.Gap <= 2 ? beat.Gap : (int)Math.Ceiling(beat.Gap * 0.6);
 
     /// <summary>A day of 0.30's 35-day season (its markets from days 1, 8, 16 and 25) as a day of the four-week one (1, 6, 11 and 16).</summary>
     public static int SeasonDay(int day)

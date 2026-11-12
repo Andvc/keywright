@@ -18,7 +18,7 @@ Round 2 (0.25) redraws every category marked *redraw*, flat and quiet, in batche
 | prop | 11 | 12x20, 16x24, 20x16, 22x10... | 9, 10 | P1, P2 | redraw |
 | item | 33 | 32x32 | 9, 12 | P1 | redraw |
 | heartsong | 9 | 32x32 | 9, 12 | P1 | redraw |
-| curio | 79 | 28x28 | 9, 13 | P1 | redraw |
+| curio | 81 | 28x28 | 9, 13 | P1 | redraw |
 | icon_upgrade | 27 | 24x24 | 9, 14 | P1 | redraw |
 | icon_kind | 8 | 16x16 | 9, 14 | P1 | redraw |
 | emblem | 1 | 24x24 | 14 | P1 | redraw |
@@ -29,7 +29,7 @@ Round 2 (0.25) redraws every category marked *redraw*, flat and quiet, in batche
 | brand | 5 | 16x16, 320x72, 32x32, 48x48... | 7 | P2 | keep |
 | scene | 4 | 320x180 | 10 | P1 | redraw |
 | store | 9 | 231x87, 300x450, 374x448, 460x215... | 8 | P3 | keep |
-| **all** | **276** | | | | |
+| **all** | **278** | | | | |
 
 Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place.stall`, `frame.stall`, `shelf.stall`, `counter.stall`, `sheet.stall`, `prop.lantern_stall`, `figure.hob`, `icon.upgrade.lamp`, `icon.kind.coins`, `item.dwarf_gold_crowns`, `heartsong.lullaby_box`, `curio.monocle`.
 
@@ -217,6 +217,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 | `curio.chalk` | Enchanter's Chalk | 28x28 | P1 | `art/generated/curios/chalk.png` | `assets/ui/curios/chalk.png (the importer scales it 2x into the 56x56 slot)` | A stick of white enchanter's chalk lying on the diagonal with a few violet flecks and a little curl of chalk dust at its tip. A well-made object in a good material, still simple in shape. |
 | `curio.ring` | Spellbinder's Ring | 28x28 | P1 | `art/generated/curios/ring.png` | `assets/ui/curios/ring.png (the importer scales it 2x into the 56x56 slot)` | A silver ring set with a large faceted violet amethyst, fine rune-patterns (not letters) engraved around the band. A precious object: one fine material (silver or gold) and a single small gem or trim. |
 | `curio.staff` | Archmage's Staff | 28x28 | P1 | `art/generated/curios/staff.png` | `assets/ui/curios/staff.png (the importer scales it 2x into the 56x56 slot)` | The head of an archmage's staff on the diagonal: gnarled dark wood rising to a gold claw-crown that holds a violet orb. The finest thing of its trade: gold with one gem or rune, still a simple, bold shape. |
+| `curio.plugs` | Lamb's-Wool Plugs | 28x28 | P1 | `art/generated/curios/plugs.png` | `assets/ui/curios/plugs.png (the importer scales it 2x into the 56x56 slot)` | Two small tufts of cream lamb's wool joined by a short leather cord. A well-made object in a good material, still simple in shape. |
 | `curio.sealed` | Sealed Bid | 28x28 | P1 | `art/generated/curios/sealed.png` | `assets/ui/curios/sealed.png (the importer scales it 2x into the 56x56 slot)` | A folded paper envelope sealed with a red wax blob. A plain, honest object: simple materials, no ornament. |
 | `curio.dip` | Lucky Dip | 28x28 | P1 | `art/generated/curios/dip.png` | `assets/ui/curios/dip.png (the importer scales it 2x into the 56x56 slot)` | A fat burlap sack tied at the neck with red string, bulging with something lumpy. A well-made object in a good material, still simple in shape. |
 | `curio.bond` | Underwriter's Bond | 28x28 | P1 | `art/generated/curios/bond.png` | `assets/ui/curios/bond.png (the importer scales it 2x into the 56x56 slot)` | A rolled parchment bond tied with a red ribbon and stamped with a gold seal. A well-made object in a good material, still simple in shape. |
@@ -230,6 +231,7 @@ Style anchors (round 2: batch 9, approved before the rest): `sky.midday`, `place
 | `curio.bell` | Closing Bell | 28x28 | P1 | `art/generated/curios/bell.png` | `assets/ui/curios/bell.png (the importer scales it 2x into the 56x56 slot)` | A brass hand bell with a turned wooden handle. A well-made object in a good material, still simple in shape. |
 | `curio.coffer` | Haggler's Purse | 28x28 | P1 | `art/generated/curios/coffer.png` | `assets/ui/curios/coffer.png (the importer scales it 2x into the 56x56 slot)` | A fat leather coin purse with a drawstring, gold coins spilling from its mouth. A precious object: one fine material (silver or gold) and a single small gem or trim. |
 | `curio.goldentongue` | Golden Tongue | 28x28 | P1 | `art/generated/curios/goldentongue.png` | `assets/ui/curios/goldentongue.png (the importer scales it 2x into the 56x56 slot)` | A radiant gold medallion of a smiling mouth with a golden tongue, hung on a red ribbon, a small ruby above. The finest thing of its trade: gold with one gem or rune, still a simple, bold shape. |
+| `curio.echo` | Echo Stone | 28x28 | P1 | `art/generated/curios/echo.png` | `assets/ui/curios/echo.png (the importer scales it 2x into the 56x56 slot)` | A smooth grey river pebble with a spiral worn into its face, two faint blue rings of sound coming off it. A well-made object in a good material, still simple in shape. |
 | `curio.trumpet` | Ear Trumpet | 28x28 | P1 | `art/generated/curios/trumpet.png` | `assets/ui/curios/trumpet.png (the importer scales it 2x into the 56x56 slot)` | A brass ear trumpet, the old hearing horn, its bell flaring to the right. A plain, honest object: simple materials, no ornament. |
 | `curio.watch` | Pocket Watch | 28x28 | P1 | `art/generated/curios/watch.png` | `assets/ui/curios/watch.png (the importer scales it 2x into the 56x56 slot)` | A gold pocket watch with a white face (dots for the hours, no numerals), its chain curling away. A plain, honest object: simple materials, no ornament. |
 | `curio.beads` | Counting Beads | 28x28 | P1 | `art/generated/curios/beads.png` | `assets/ui/curios/beads.png (the importer scales it 2x into the 56x56 slot)` | A small wooden abacus with three rows of coloured beads. A plain, honest object: simple materials, no ornament. |

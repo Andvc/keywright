@@ -473,6 +473,24 @@ public sealed partial class GameState
     public EventDef TodayEvent => Day <= 0 ? null : ForcedEvent != null ? Events.Find(ForcedEvent)
         : Plan?.On(DayOfWeek) is string key ? Events.Find(key) : null;
 
+    /// <summary>
+    /// What tomorrow holds, for the day's end (0.36: a reason to open the shop again): the Guild's night, something on in
+    /// town, or someone who said they'd come by; null when it's a day like any other (or the Guild is at the door tonight,
+    /// and tomorrow is wherever its carters take the shop).
+    /// </summary>
+    public string Tomorrow()
+    {
+        if (Day <= 0 || (DuesTonight && !PaidThisWeek)) return null;
+        int next = DayOfWeek + 1;
+        var plan = next <= Guild.DaysPerWeek ? Plan : NextPlan;
+        if (next > Guild.DaysPerWeek) next = 1;
+        if (plan?.On(next) is string key && Events.Find(key) is EventDef e) return Loc.T($"Tomorrow: {e.Name}");
+        if (GuildIntroduced && next == Guild.DaysPerWeek && Week >= NextDueWeek) return Loc.T($"Tomorrow night: the Guild, for {NextDue}g");
+        foreach (var (day, who, note) in Expected())
+            if (day == Day + 1) return Loc.T($"Tomorrow: {note ?? Story.Name(who)}");
+        return null;
+    }
+
     /// <summary>For checking an event's screens (the bot's --event): it happens every day.</summary>
     public string ForcedEvent { get; set; }
 

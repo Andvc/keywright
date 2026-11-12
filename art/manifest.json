@@ -11854,6 +11854,60 @@
     "edges": 0.5
    },
    "display": "2x in 56 px slots: Nim's cards, the collection, the counter's curio row, the Guild's night",
+   "id": "curio.plugs",
+   "category": "curio",
+   "title": "Lamb's-Wool Plugs",
+   "rarity": "uncommon",
+   "trade": "sight unseen",
+   "description": "Two small tufts of cream lamb's wool joined by a short leather cord. A well-made object in a good material, still simple in shape.",
+   "details": [
+    "two tufts of wool",
+    "a leather cord"
+   ],
+   "palette": [
+    "parchment:1-3",
+    "umber:2-3"
+   ],
+   "context": "What it does in the game: Buy a chest sight unseen and your ear rests: a listen back.",
+   "replaces": "assets/ui/curios/plugs.png (the importer scales it 2x into the 56x56 slot)",
+   "reference_current": "art/reference/current/curios_2x.png",
+   "output": "art/generated/curios/plugs.png",
+   "avoid": [
+    "a background other than flat magenta",
+    "a drop shadow",
+    "a glow or aura",
+    "text or letters",
+    "more than one object unless described",
+    "outlines, contour strokes or ink linework",
+    "pixel-art style or visible pixels",
+    "all-over texture, grain, hatching or noise",
+    "airbrushed gradients",
+    "details too thin to survive reduction",
+    "highlights scattered over surfaces",
+    "unmotivated decorative clutter"
+   ],
+   "prompt": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nLamb's-Wool Plugs: a single small object, an oddment from an old warded chest, made for a trade; seen three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold shape, each material in two or three main tones, with up to three readable features. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: Two small tufts of cream lamb's wool joined by a short leather cord. A well-made object in a good material, still simple in shape.\n\nIt must show: two tufts of wool; a leather cord. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): parchment (#9d8872 #d2b688 #f7ebc6); umber 2-3 (#4b2212 #6e3d22).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter."
+  },
+  {
+   "size": [
+    28,
+    28
+   ],
+   "background": "transparent",
+   "max_colours": 16,
+   "outline": false,
+   "margin": 1,
+   "fit": "sprite",
+   "batch": 13,
+   "priority": "P1",
+   "gen_size": "1024x1024",
+   "mode": "flat",
+   "redo": true,
+   "calm": {
+    "specks": 0.06,
+    "edges": 0.5
+   },
+   "display": "2x in 56 px slots: Nim's cards, the collection, the counter's curio row, the Guild's night",
    "id": "curio.sealed",
    "category": "curio",
    "title": "Sealed Bid",
@@ -12543,6 +12597,61 @@
     "unmotivated decorative clutter"
    ],
    "prompt": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nGolden Tongue: a single small object, an oddment from an old warded chest, made for a trade; seen three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold shape, each material in two or three main tones, with up to three readable features. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A radiant gold medallion of a smiling mouth with a golden tongue, hung on a red ribbon, a small ruby above. The finest thing of its trade: gold with one gem or rune, still a simple, bold shape.\n\nIt must show: a gold medallion of a smiling mouth; a golden tongue; a red ribbon. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): gold 2-6 (#773f00 #a06500 #c29026 #f2c14e #fbeda4); crimson 3-5 (#9c1839 #c7414e #ff4058).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter."
+  },
+  {
+   "size": [
+    28,
+    28
+   ],
+   "background": "transparent",
+   "max_colours": 16,
+   "outline": false,
+   "margin": 1,
+   "fit": "sprite",
+   "batch": 13,
+   "priority": "P1",
+   "gen_size": "1024x1024",
+   "mode": "flat",
+   "redo": true,
+   "calm": {
+    "specks": 0.06,
+    "edges": 0.5
+   },
+   "display": "2x in 56 px slots: Nim's cards, the collection, the counter's curio row, the Guild's night",
+   "id": "curio.echo",
+   "category": "curio",
+   "title": "Echo Stone",
+   "rarity": "uncommon",
+   "trade": "the perfect read",
+   "description": "A smooth grey river pebble with a spiral worn into its face, two faint blue rings of sound coming off it. A well-made object in a good material, still simple in shape.",
+   "details": [
+    "a grey pebble",
+    "a worn spiral",
+    "two rings of sound"
+   ],
+   "palette": [
+    "night:3-7",
+    "azure:2-4"
+   ],
+   "context": "What it does in the game: A perfect read gives you a listen back.",
+   "replaces": "assets/ui/curios/echo.png (the importer scales it 2x into the 56x56 slot)",
+   "reference_current": "art/reference/current/curios_2x.png",
+   "output": "art/generated/curios/echo.png",
+   "avoid": [
+    "a background other than flat magenta",
+    "a drop shadow",
+    "a glow or aura",
+    "text or letters",
+    "more than one object unless described",
+    "outlines, contour strokes or ink linework",
+    "pixel-art style or visible pixels",
+    "all-over texture, grain, hatching or noise",
+    "airbrushed gradients",
+    "details too thin to survive reduction",
+    "highlights scattered over surfaces",
+    "unmotivated decorative clutter"
+   ],
+   "prompt": "A warm storybook cartoon illustration for Keywright, a cosy fantasy shop game, based on the approved C2 reference's rounded shapes, warm colours, readable faces and crafted objects, but WITHOUT ANY OUTLINES. Separate shapes with adjacent colour fills and two or three cel-shaded material tones, never inked contour strokes. No black, dark plum or other coloured line tracing around silhouettes or inside shapes; no comic linework, border strokes or dark halos. Natural eyes, small facial features, material seams and cast-shadow areas may stay dark where needed, but never form an encircling stroke. A script makes chunky 4x pixel art afterwards: draw a smooth illustration, not a pixel grid. Keep recognisable, purposeful detail: three or four bold features per figure or object where the small size permits, such as a patch, a seam, a nail head, a tied cord or a carved mark, expressed as filled shapes. Larger scenery can have grouped flowers, fences and signs of daily use at its edges. Preserve broad areas between these features; no all-over speckling, hatching, fine grain or individual hair strands. Keep details broad enough to survive reduction. Use two or three main cel-shaded tones per material and a restrained highlight; distant scenery has softer, lighter colour contrast. Soft, muted, warm colours; shadows lean violet, lights warm yellow, one gentle light from the upper left, neutral daylight. Plain writing areas stay plain. No text, letters, numbers or rune-like marks. Flat pure magenta (#FF00FF) means empty: never use magenta or hot pink in the subject itself.\n\nEcho Stone: a single small object, an oddment from an old warded chest, made for a trade; seen three-quarters from slightly above, centred, filling about ninety percent of the picture. One bold shape, each material in two or three main tones, with up to three readable features. Background: flat pure magenta #FF00FF, nothing else in the picture.\n\nSubject: A smooth grey river pebble with a spiral worn into its face, two faint blue rings of sound coming off it. A well-made object in a good material, still simple in shape.\n\nIt must show: a grey pebble; a worn spiral; two rings of sound. Keep these features readable after reduction.\n\nLean on these palette colours (dark to light; the swatch has them all): night 3-7 (#2b2236 #3b3150 #554b69 #766d8b #9b92ad); azure 2-4 (#143771 #2164a7 #4ea3ff).\n\nAvoid: a background other than flat magenta; a drop shadow; a glow or aura; text or letters; more than one object unless described; outlines, contour strokes or ink linework; pixel-art style or visible pixels; all-over texture, grain, hatching or noise; airbrushed gradients; details too thin to survive reduction; highlights scattered over surfaces; unmotivated decorative clutter."
   },
   {
    "size": [

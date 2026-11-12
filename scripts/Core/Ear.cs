@@ -89,6 +89,8 @@ public sealed partial class GameState
     public int ListenShare(Visit visit)
     {
         if (ListensFree(visit)) return int.MaxValue;
+        // A read that has to be exact (a contest in front of everyone, the King's game) gets whatever it takes.
+        if (visit.Contest || visit.Seller.SlipPrice) return ListensLeft;
         int waiting = 1 + Queue.Count(v => v.Talk == null && !ListensFree(v));
         return ListensLeft <= 0 ? 0 : Math.Max(1, (int)Math.Ceiling(ListensLeft / (double)waiting));
     }

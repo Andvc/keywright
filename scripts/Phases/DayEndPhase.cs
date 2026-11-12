@@ -40,6 +40,9 @@ public partial class DayEndPhase : Phase
         Game.Hud.SetDue(State);
         Add(UiKit.MakeLabel(Loc.T($"END OF DAY {State.Day}"), 32, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 64, 1280, 40));
         BuildSummary(today);
+        // What tomorrow holds, top right: the Guild's night, something on in town, someone due back.
+        if (State.Tomorrow() is string tomorrow)
+            Add(UiKit.MakeLabel(tomorrow, 16, Palette.Magic, HorizontalAlignment.Right, outline: 4).Place(SideX - 120, 70, SideW + 120, 20));
 
         _header = Add(Header("", CardsX, 182));
         _goldLabel = Add(UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(156, 182, 700, 20)); // right-aligned: room to the left for longer words

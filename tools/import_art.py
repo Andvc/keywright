@@ -162,6 +162,17 @@ def build_drawn_icons():
         drawn[f"res://{rel}"] = {"asset_id": f"drawn.icon.upgrade.{key}", "source": "tools/custom_art.py", "drawn": True,
                                  "logical_size": [physical.width // 2, physical.height // 2], "physical_size": list(physical.size),
                                  "reference_scale": 1, "pixel_pitch": DRAWN_PITCH, "sha256": digest}
+    # Curios drawn in code (custom_art.CURIOS3: the ear's, 0.36): 28 cells square, four pixels a cell, placed as 56.
+    for key, draw in custom_art.CURIOS3.items():
+        cells = draw()
+        physical = cells.resize((cells.width * 4, cells.height * 4), Image.NEAREST)
+        path = save(physical, "ui", "curios", f"{key}.png")
+        rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
+        with open(path, "rb") as stream:
+            digest = hashlib.sha256(stream.read()).hexdigest()
+        drawn[f"res://{rel}"] = {"asset_id": f"drawn.icon.curio.{key}", "source": "tools/custom_art.py", "drawn": True,
+                                 "logical_size": [physical.width // 2, physical.height // 2], "physical_size": list(physical.size),
+                                 "reference_scale": 1, "pixel_pitch": 4, "sha256": digest}
     register_drawn(drawn, prefix="drawn.icon.")
 
 

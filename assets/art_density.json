@@ -6170,6 +6170,22 @@
       "reference_scale": 1,
       "source_sha256": "8c7af45991e6cd27220f778cf422b5c698f750592d0a3f86afdbacb76f77e23b"
     },
+    "res://assets/ui/curios/echo.png": {
+      "asset_id": "drawn.icon.curio.echo",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 4,
+      "sha256": "61fb9f25caa65746afc4c598f3e92690f23fd4dc5cac6147ccd98fdf701aead3"
+    },
     "res://assets/ui/curios/errand.png": {
       "asset_id": "curio.errand",
       "source": "art/density3/assets/curios/errand.png",
@@ -6575,6 +6591,22 @@
       ],
       "reference_scale": 1,
       "source_sha256": "1b75acd40a65be6f940e94e502c720dc16669f5061ec5bc3edd7a9ea603c8a61"
+    },
+    "res://assets/ui/curios/plugs.png": {
+      "asset_id": "drawn.icon.curio.plugs",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 4,
+      "sha256": "c5c5ebf5cbc6e488566a8b0fe049a564db1c2058992619d1d52e3b797e8736a6"
     },
     "res://assets/ui/curios/purse.png": {
       "asset_id": "curio.purse",

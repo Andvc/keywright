@@ -476,6 +476,8 @@ public sealed partial class GameState
     {
         PerfectStreak = perfect ? PerfectStreak + 1 : 0;
         if (perfect) PerfectReads++;
+        // An echo stone: a perfect read gives a listen back.
+        if (perfect && HasCurio("echo")) RestoreListen();
         BestStreak = Math.Max(BestStreak, PerfectStreak);
     }
 
@@ -872,6 +874,8 @@ public sealed partial class GameState
         Today.Spent -= rebate;
         // What the checks made could have told of, for the opening: the rest was never listened for.
         visit.NoteAudible();
+        // Lamb's-wool plugs: a chest taken sight unseen rests the ear.
+        if (!visit.Handled && HasCurio("plugs")) RestoreListen();
         // Named truly, a warded thing comes out of the ward: it's in the chest for the luck and the opening.
         visit.Chest.Open(slip);
         var luck = Luck(visit.Chest, !visit.Handled);
