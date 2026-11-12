@@ -14,10 +14,12 @@ count the rattles, and work out what they missed, made up or misjudged. Mark wha
 appraisal slip and trade the way each customer trades: pay their price, haggle, or name your own. Pass, and your gut
 tells you whether you were right; buy, and the chest bursts open on the spot: each thing's true quality, a tick or a
 cross against your slip, and now and then something far better than the chest promised. What you acquire builds the
-shop's name (synergies) and its exhibition, which draw more and better customers, and the shop moves inward, from the
-crossroads to Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate. The stall comes with Bram's twenty
-years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due that climbs from 20g to
-12,000g over seven weeks (35 days, about two and a half hours of play). Curios from Nim the peddler are the run's
+shop's name (synergies) and its exhibition, which draw more and better customers. The stall comes with Bram's twenty
+years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due, 40g, then 170g, 650g and
+4,200g, and each one paid moves the shop a market further in: a season is four weeks, one each at the Brindle
+crossroads, Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate (twenty days, about an hour and a
+half of play; 0.36, *The run*). A keywright's ear is good for only so many careful listens a day (*The ear*), so which
+chest to shake, and how, is a choice every time. Curios from Nim the peddler are the run's
 build: each bends a rule of the trade, the ones that share a way of trading (enchantment, sight unseen, haggling, the
 perfect read, false bottoms, wards, and more beside) make each other stronger, and Nim, who notices what you buy,
 brings more of it. Whatever makes ordinary things fetch more puts up what every seller asks as well (the shop's power
@@ -99,9 +101,11 @@ agree, thing by thing, with and without the lodestone (`Magnet` in code).
 ## What a chest holds, and how good it is
 
 A chest's **colour** says what to expect: wood (common), green (uncommon), blue (rare), purple (epic). Each thing
-inside rolls its own quality around that: 77% as promised, 16% one worse, 6% one better, 0.8% two better, 0.2%
-three better (what would fall below common or above legendary stays at the end). Value is the kind's base times
-1, 2, 4, 8 or 24 by quality (0.30; v18 to 0.29: 1, 3, 10, 30, 100; v12 to v17: 1, 3, 8, 20, 50).
+inside rolls its own quality around that: 77.5% as promised, 9% one worse, 11% one better, 2% two better, 0.5%
+three better (what would fall below common or above legendary stays at the end). Until 0.36 it was 16% worse and 6%
+better, so the commonest surprise at an opening was "WORSE..."; now one thing in seven comes out better and one in
+eleven worse. Sellers price the average, so chests cost a little more and a careful buyer's margin is what it was. Value
+is the kind's base times 1, 2, 4, 8 or 24 by quality (0.30; v18 to 0.29: 1, 3, 10, 30, 100; v12 to v17: 1, 3, 8, 20, 50).
 
 **Gold is rare** (0.30). The owner found gold things too common late in a run, and every step inward three to ten times
 the last. So each colour is now worth twice the one below, and gold three times purple, but:
@@ -251,6 +255,60 @@ Hesk's way of reading a chest.
 **Lockpicking** (from Thornwick) comes after you buy a locked chest: set each pin when the pick passes the
 green. A masterful pick (no slips, mostly perfect) makes everything worth 25% more; the crowbar is quick but scratches
 everything (-10%) and breaks glass. Fine Lockpicks (50g) widen the sweet spot.
+
+## The ear: listens (0.36)
+
+Until 0.35 every way of judging a chest was free. The right play was always all of them (gently, firmly, hard, the
+drop), a careful buyer profited on nine chests in ten, and the opening confirmed what the slip already said: a
+procedure, not a decision, and the review of 0.35 (`docs/redesign-0.36.md`) found that it was why the counter felt
+flat. What each seller misses was in the notebook, and nothing made knowing it matter.
+
+**A keywright's ear is good for so many careful listens a day** (`Ear.cs`, `GameState.Listens`: eight; a rule people
+know: nobody tastes the fortieth wine as well as the first). Each new check on a chest spends one
+(`GameState.Listen`, `Check`): a strength not yet tried on it, with the lodestone or without, or a drop. Shaking again
+the way you already have is free, so counting rattles costs nothing, and so is a seller's lesson (its steps ask for
+particular shakes) and anything the Bookkeeping Engine reads. With none left, a new strength tells nothing (no sound,
+no word), a drop lands without a boom (and breaks nothing), and you trade on what you know: who's selling, how they
+priced it, where it came from, the chest's colour.
+
+So which check to make is the decision, and the sellers' habits are what decide it:
+
+- A hard shake stirs everything, so it's the shake that hears most. If nothing clanks, one listen has heard the chest.
+- If steel clanks, the delicate things are drowned: a gentle shake is worth a second listen. (Firm is for a chest
+  that can't be shaken hard: Brother Cadoc's, Rook's on her mare, Hesk's back; and for straw, where everything stirs a
+  strength late.)
+- Ada priced what a gentle shake stirs, so what she missed is whatever a hard one adds; Garrick shook hard, so what he
+  missed is under his clank. Knowing the regular tells you which single listen is worth having.
+- The drop is worth a listen where false bottoms are common (Corvin, Brass, the Maw's hoard), and the lodestone where
+  fakes are about. Sand wants a gentle shake from someone who deals in it.
+- A beginner who tries all three strengths on every chest runs out before the last customer of the day at the stall,
+  where it costs a few coins to learn; someone who knows the regulars doesn't.
+
+The counter shows the ear over the chest (a pip a listen, the spent ones hollow; the count beside who's still waiting
+on the slip's foot: the two together are the day's plan). A strength is given the ear once the chest has moved that
+fast for a moment (`CounterPhase.GiveEar`, `ListenHold`), and in one hold the ear follows the hardest shake so far:
+winding down from a hard shake never spends a gentle listen (set the chest down and pick it up again for that), and a
+stray jerk on the way to another strength costs nothing. `ShakeBox.Open` gates what sounds, so a strength that hasn't
+been paid for is silent, not just unrecorded. Bram says so the first time a listen is spent, when they run low with
+people still waiting, and when they're gone (`ear`, `ear_low`, `ear_out`).
+
+**More listens**: the Tea Kettle (70g, Thornwick: two more) and the Listening Screen (320g, Crownhold: three more) at
+the day's end, and two curios: an Echo Stone gives one back for a perfect read, and Lamb's-Wool Plugs for a chest
+bought sight unseen (what you don't handle, you don't have to listen to). The Ear Trumpet, which lets nothing drown
+or muffle a sound, now saves a listen on every chest that clanks.
+
+**At the opening** a thing you didn't mark that no check you made could have told you of (a strength you spent no
+listen on, a false bottom you didn't drop for) isn't a miss: it gets the closed eye that a sight-unseen chest's things
+get, not a cross (`OpeningPhase.Unheard`, `Visit.NoteAudible`; Bram's `unheard` tip). A cross is for what you listened
+to and got wrong. So a chest bought on one listen is a real reveal: what you heard, and whatever else was in there.
+
+**The careful player** (`Strategy.NextCheck`, for the sim and the bot) makes a check at a time, each chosen by what
+the last one told: the shake that hears most, then only what it couldn't tell, then the drop and the lodestone where
+they're worth it; up to this chest's share of what's left among everyone still waiting (`GameState.ListenShare`: what
+earlier chests didn't need rolls forward, and a read that has to be exact, a contest or the King's game, gets whatever
+it takes). A learner goes through the strengths by rote as Bram first taught them, without counting what's left for
+the queue (`Simulation.Listen`, `ByRote`). The per-seller table gives each chest a fresh ear, and still shows a careful
+player profiting from every seller and a blind one from almost none.
 
 ## Passing: your gut
 

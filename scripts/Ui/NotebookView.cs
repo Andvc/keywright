@@ -206,12 +206,13 @@ public partial class NotebookView : Node2D
         {
             Loc.T("Light things rattle at a gentle shake, weapons at a firm one, soft things only at a hard one. Click a row to hear it."),
             Loc.T("While weapons clank, delicate things go unheard: shake gently to hear past it."),
+            Loc.T("A strength you haven't tried on a chest costs a listen, and so does a drop. A hard shake stirs everything."),
             tier >= 2 ? Loc.T("Dropped, a chest with a false bottom booms hollow. Glass may break.") : null,
             tier >= 3 ? Loc.T("Two or three of a kind each sound from their own spot: count them.") : null,
             tier >= 3 ? Loc.T("Sand rustles like a scroll, but pours at a gentle shake.") : null,
             tier >= 3 ? Loc.T($"Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{Categories.MagicMultiplier}.{((tier >= 4 ? Loc.T(" Demon gold is iron under the gilt: a lodestone silences it.") : ""))}"): null,
         }.Where(r => r != null).ToArray();
-        // Six rules at most, wrapped (a longer language takes more lines): room down to the panel's foot.
+        // Seven rules at most (0.36: the ear's), wrapped (a longer language takes more lines): room down to the panel's foot.
         _page.AddChild(UiKit.MakeLabel(string.Join("\n", rules.Select(r => "- " + r)), 16, Palette.Text).Wrapped()
             .Place(TableX, y + 34 + kinds.Count * RowH, PanelW - 48, 180));
     }

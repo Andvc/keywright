@@ -134,11 +134,16 @@ public static class Challenges
 
     // The banes.
     public const string ThinCrowds = "thin", SharpSellers = "sharp", Forgers = "forgers", Hurried = "hurried", FussySellers = "fussy",
-        Stretched = "stretched", LeanStart = "lean", DearCurios = "dearcurios", Builders = "builders", Rust = "rust", Wary = "wary", Sparse = "sparse";
+        Stretched = "stretched", LeanStart = "lean", DearCurios = "dearcurios", Builders = "builders", Rust = "rust", Wary = "wary", Sparse = "sparse",
+        DullEar = "dullear";
 
     // The boons.
     public const string Gifts = "gifts", NimsFavour = "nim", Savings = "savings", OldPicks = "oldpicks", Invited = "invited", Patient = "patient",
-        Prepared = "prepared", HonestClerk = "pawn", GoodName = "goodname", Charm = "charm", FairDays = "fairdays", Drawer = "drawer";
+        Prepared = "prepared", HonestClerk = "pawn", GoodName = "goodname", Charm = "charm", FairDays = "fairdays", Drawer = "drawer",
+        KeenEar = "keenear";
+
+    /// <summary>A head cold takes this many listens off every day; a rested ear adds as many (0.36, <see cref="GameState.Listens"/>).</summary>
+    public const int EarListens = 2;
 
     /// <summary>With thin crowds: how many of the week's last days (the Guild's day, and the day its collectors ride in) are a customer short.</summary>
     public const int ThinDays = 2;
@@ -194,6 +199,8 @@ public static class Challenges
             Loc.T("A wet winter has rusted every old lock in the realm stiff.")),
         new(Wary, false, Loc.T("Wary regulars"), Loc.T("The regulars post one commission fewer each week."),
             Loc.T("Folk aren't sure your stall will last, and won't set you errands.")),
+        new(DullEar, false, Loc.T("A head cold"), Loc.T($"Your ear has {Sellers.Number(EarListens)} listens fewer every day."),
+            Loc.T("The spring cold has gone round every head in Aldmark, and yours hasn't cleared.")),
         new(Sparse, false, Loc.T("Nim's lean month"), Loc.T("Nim's lantern lays out no extra curio: he brings one fewer a night once he brings more than one."),
             Loc.T("Pickings have been slim among the Locking's oddments.")),
     };
@@ -224,6 +231,8 @@ public static class Challenges
             Loc.T("The old Duke's in good health, and the Guild's assessors have their hands full in the capital.")),
         new(Drawer, true, Loc.T("Room for more"), Loc.T("Room for one more curio, from the start."),
             Loc.T("Bram cleared out a drawer for your curios.")),
+        new(KeenEar, true, Loc.T("A rested ear"), Loc.T($"Your ear has {Sellers.Number(EarListens)} more listens every day."),
+            Loc.T("Bram made you sleep the winter through, for once, and you've never heard so well."), DullEar),
     };
 
     public static TermDef Get(string key) => Banes.FirstOrDefault(t => t.Key == key) ?? Boons.FirstOrDefault(t => t.Key == key);

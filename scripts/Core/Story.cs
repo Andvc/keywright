@@ -375,7 +375,7 @@ public static class Story
         new(Bram, Loc.T("Morning. Tea's hot. Here: feel my hand. Warm as the pot.")),
         // The season's last night was as far as any spring ever got; earlier, it's still a morning nothing turned back from.
         state.Day >= Guild.Weeks * Guild.DaysPerWeek
-            ? new(Self, Loc.T("Day thirty-six. I've never seen the calendar say that."))
+            ? new(Self, Loc.T("Day twenty-one. I've never seen the calendar say that."))
             : new(Self, Loc.T("The morning after the treasury, and nothing's turned back.")),
         new(Bram, Loc.T("Old Haddon's in his yard, swearing at a lathe. Half the crossroads walked home last night, and nobody can say from where.")),
         new(TaleBook.Wynn, Loc.T("Keywright! The waterwheel's broken, and my father's old millwright's chest has the only tools that fit it. Open it for us?")),
