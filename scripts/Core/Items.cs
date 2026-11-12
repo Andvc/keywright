@@ -192,8 +192,12 @@ public static class Categories
     /// <summary>
     /// How far a thing's quality lands from its chest's colour, and how often. A step better is a treat, two a rare
     /// event; a long dry spell is softened at purchase (<see cref="GameState.DrySpell"/>), not here.
+    ///
+    /// 0.36 leans it up: one thing in seven comes out better and one in eleven worse (until then 7% better and 16% worse,
+    /// so the opening's commonest surprise was "WORSE..."). Sellers price the average (<see cref="Expected"/>), so what a
+    /// chest costs follows, and a careful buyer's margin stays what their listening makes it.
     /// </summary>
-    static readonly (int Steps, float Chance)[] Spread = { (-1, 0.16f), (0, 0.77f), (1, 0.06f), (2, 0.008f), (3, 0.002f) };
+    static readonly (int Steps, float Chance)[] Spread = { (-1, 0.09f), (0, 0.775f), (1, 0.11f), (2, 0.02f), (3, 0.005f) };
 
     /// <summary>
     /// What's inside a chest of a given colour: mostly that quality, sometimes one worse, now and then a step better, and

@@ -27,6 +27,7 @@ public partial class MentorView : Control
     /// <summary>The text up now, cut into sentences, and the one showing.</summary>
     List<string> _sentences = new();
     int _at;
+    double _nextIn;
 
     /// <summary>What a lesson step asks you to do, in a tab over the box (0.35).</summary>
     Control _doTab;
@@ -206,11 +207,22 @@ public partial class MentorView : Control
     /// The next sentence of what's up; past the last, the next waiting tip, or the box put away. A lesson step to do
     /// stays up.
     /// </summary>
+    /// <summary>A tip says itself, a sentence after another, each once the last has had time to be read (0.36).</summary>
+    public override void _Process(double delta)
+    {
+        if (!Visible || _nextIn <= 0) return;
+        _nextIn -= delta;
+        if (_nextIn > 0 || ReadThrough) return;
+        _at++;
+        ShowSentence();
+    }
+
     public void Next()
     {
+        // Still being said: a click shows the rest at once.
         if (!ReadThrough)
         {
-            _at++;
+            _at = _sentences.Count - 1;
             ShowSentence();
             return;
         }
@@ -249,12 +261,16 @@ public partial class MentorView : Control
     void ShowSentence()
     {
         string sentence = _sentences[_at];
-        _text.Text = Rich.Trade(sentence);
-        Fit(sentence);
+        // What's been said stays in the box, a shade quieter; the sentence being said is the bright one (0.36: until then
+        // each took the last one's place, and a click).
+        string said = string.Join(" ", _sentences.GetRange(0, _at).ConvertAll(earlier => Rich.Trade(earlier)));
+        _text.Text = (said.Length > 0 ? $"[color=#{Palette.Muted.Lightened(0.2f).ToHtml(false)}]{said}[/color] " : "") + Rich.Trade(sentence);
+        Fit(string.Join(" ", _sentences.GetRange(0, _at + 1)));
         UpdateMore();
         _pips.QueueRedraw();
+        _nextIn = ReadThrough ? 0 : Words.ReadTime(sentence);
         // Each sentence comes up a little, like a word said; the step's instruction (its last) with a nod from Bram.
-        _text.Modulate = new Color(1, 1, 1, 0);
+        _text.Modulate = new Color(1, 1, 1, _at == 0 ? 0 : 0.8f);
         _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.18f);
         if (_lesson && _waiting && ReadThrough) Nod();
         Main.Instance.Sfx.Play("blip", 0.8f + 0.04f * _at, -10);
@@ -316,7 +332,7 @@ public partial class MentorView : Control
     void UpdateMore()
     {
         int more = _queue.Count + (_held != null ? 1 : 0);
-        _more.Text = !ReadThrough ? Loc.T("click to go on")
+        _more.Text = !ReadThrough ? ""
             : _lesson ? (_waiting ? Loc.T("do it to go on") : Loc.T("click to go on"))
             : more > 0 ? Loc.T($"click for more ({more})") : Loc.T("click to close");
     }

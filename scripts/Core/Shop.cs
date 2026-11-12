@@ -35,10 +35,11 @@ public static class ShopTiers
     /// (Four to seven until 0.20; 0.20's three at the stall and five after it left 0.21's working purse, two typical
     /// chests, out of reach for days after each move.)
     /// </summary>
+    /// (0.36: five at every market past the stall. A season is twenty days, a day's listens are counted, and six or seven
+    /// customers a day at Thornwick and Crownhold made a first run nearly two hours.)
     public static int Customers(int tier) => tier switch
     {
         1 => 4,
-        2 or 3 => 6,
         _ => 5,
     };
 

@@ -10,8 +10,9 @@ namespace Keywright.Phases;
 /// <summary>
 /// A few lines between the people behind the story, over the scene's own backdrop (or the shop, dimmed): Bram on the
 /// right, whoever he's talking to on the left, the one speaking lit and the other in shadow. A line is said a sentence
-/// at a time (0.35), the trade's words coloured, the speaker stirring with each; click (or Space) for the next sentence,
-/// then the next line; Skip jumps to the end. Every line goes in the run's history. Then it hands on.
+/// at a time (0.35), the trade's words coloured, the speaker stirring with each; since 0.36 the sentences follow one
+/// another by themselves and stay in the box, so a line takes one click (or Space), and a click while it's still being
+/// said shows the rest at once; Skip jumps to the end. Every line goes in the run's history. Then it hands on.
 /// </summary>
 public partial class ScenePhase : Phase
 {
@@ -39,9 +40,10 @@ public partial class ScenePhase : Phase
     int _index = -1;
     bool _done;
 
-    /// <summary>The line being said, cut into sentences, and the one showing.</summary>
+    /// <summary>The line being said, cut into sentences, the last one showing, and how long until the next says itself.</summary>
     List<string> _sentences = new();
     int _at;
+    double _nextIn;
 
     /// <summary>The bot reads the lines through.</summary>
     public static Action<string> Trace;
@@ -136,13 +138,23 @@ public partial class ScenePhase : Phase
         }
     }
 
-    /// <summary>The next sentence of the line; past its last, the next line; on once they've all been said.</summary>
+    /// <summary>A line says itself, a sentence after another, each once the last has had time to be read (0.36).</summary>
+    public override void _Process(double delta)
+    {
+        if (_done || _nextIn <= 0) return;
+        _nextIn -= delta;
+        if (_nextIn > 0 || _at >= _sentences.Count - 1) return;
+        _at++;
+        ShowSentence(fresh: false);
+    }
+
+    /// <summary>The rest of the line at once, if it's still being said; else the next line; on once they've all been said.</summary>
     public void Advance()
     {
         if (_done) return;
         if (_index >= 0 && _at < _sentences.Count - 1)
         {
-            _at++;
+            _at = _sentences.Count - 1;
             ShowSentence(fresh: false);
             return;
         }
@@ -167,10 +179,13 @@ public partial class ScenePhase : Phase
     void ShowSentence(bool fresh)
     {
         var line = _lines[_index];
-        _text.Text = Rich.Trade(_sentences[_at]);
-        _text.Modulate = new Color(1, 1, 1, 0);
+        // The line so far: what's been said stays, a shade quieter, and the sentence being said comes up bright.
+        string said = string.Join(" ", _sentences.Take(_at).Select(sentence => Rich.Trade(sentence)));
+        _text.Text = (said.Length > 0 ? $"[color=#{Palette.Muted.Lightened(0.25f).ToHtml(false)}]{said}[/color] " : "") + Rich.Trade(_sentences[_at]);
+        _text.Modulate = new Color(1, 1, 1, fresh ? 0 : 0.8f);
         _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.16f);
-        _more.Text = _at < _sentences.Count - 1 || _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
+        _nextIn = _at < _sentences.Count - 1 ? Words.ReadTime(_sentences[_at]) : 0;
+        _more.Text = _at < _sentences.Count - 1 ? "" : _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
         _pips.QueueRedraw();
         if (!fresh)
         {

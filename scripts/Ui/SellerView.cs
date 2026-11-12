@@ -146,7 +146,16 @@ public partial class SellerView : Node2D
     }
 
     /// <summary>How long a sentence takes to read before the next is said.</summary>
-    static double ReadTime(string sentence) => Math.Clamp(0.5 + 0.045 * sentence.Length, 1.0, 2.6);
+    static double ReadTime(string sentence) => Words.ReadTime(sentence);
+
+    /// <summary>Still saying it: there are sentences of the speech yet to come.</summary>
+    public bool MidSpeech => _shown < _sentences.Count;
+
+    /// <summary>The rest of the speech at once (a click, or the act key).</summary>
+    public void FinishSpeech()
+    {
+        if (MidSpeech) Reveal(_sentences.Count);
+    }
 
     public override void _Process(double delta)
     {

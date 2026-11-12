@@ -40,6 +40,17 @@ public static class Money
 /// <summary>Words joined the way the player's language joins them.</summary>
 public static class Words
 {
+    /// <summary>
+    /// How long a sentence is left to be read before the next is said by itself (0.36: a speech plays through without a
+    /// click a sentence; a click shows the rest at once). CJK text says as much in fewer characters.
+    /// </summary>
+    public static double ReadTime(string sentence)
+    {
+        int length = sentence?.Length ?? 0;
+        bool dense = sentence != null && sentence.Any(c => c >= 0x3000);
+        return Math.Clamp(0.5 + (dense ? 0.11 : 0.045) * length, 1.0, dense ? 3.4 : 2.8);
+    }
+
     const string Ends = ".!?\u2026\u3002\uff01\uff1f", Closers = "\"'\u201d\u2019)\u00bb\u300d\u300f\uff09]";
 
     /// <summary>

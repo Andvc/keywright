@@ -35,7 +35,13 @@ public static class Guild
     /// ceiling, and chests top out at purple): carrying it takes a build come together or tales gone well. (0.30 to 0.35:
     /// seven dues, 20 to 12,000, over 35 days, with the moves bought for 80, 300 and 3,000.)
     /// </summary>
-    static readonly int[] Dues = { 40, 250, 1200, 7000 };
+    static int[] Dues = { 40, 170, 650, 4200 };
+
+    /// <summary>For tuning (`--sim=quick --dues=a,b,c,d`): other dues, one a week of the debt.</summary>
+    public static void TryDues(int[] dues)
+    {
+        if (dues.Length == Weeks) Dues = dues;
+    }
 
     /// <summary>After the debt: each week half as much again, for as long as you last (twice as much until 0.30).</summary>
     const float EndlessGrowth = 1.5f;

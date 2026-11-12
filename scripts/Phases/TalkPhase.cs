@@ -120,11 +120,12 @@ public partial class TalkPhase : Phase
     {
         if (_panel != null || _leaving) return;
         if (_mentor.MidText) _mentor.Next();
-        else if (_line >= 0 && _line < _talk.Lines.Count && _at < _sentences.Count - 1)
+        // Still saying it: the rest of the line at once.
+        else if (_letterText == null && _person.MidSpeech) _person.FinishSpeech();
+        else if (_letterText != null && _line >= 0 && _line < _talk.Lines.Count && _at < _sentences.Count - 1)
         {
-            _at++;
+            _at = _sentences.Count - 1;
             ShowSentence();
-            Sfx.Play("tick", 1f + 0.03f * _at, -12);
         }
         else
         {
@@ -158,8 +159,30 @@ public partial class TalkPhase : Phase
     /// <summary>The sentence the line's got to: in the bubble, one at a time; on a letter's page, the page so far.</summary>
     void ShowSentence()
     {
-        if (_letterText != null) _letterText.Text = string.Join(" ", _sentences.Take(_at + 1));
-        else _person.Say(_sentences[_at], record: false);
+        if (_letterText != null)
+        {
+            _letterText.Text = string.Join(" ", _sentences.Take(_at + 1));
+            _nextIn = _at < _sentences.Count - 1 ? Words.ReadTime(_sentences[_at]) : 0;
+        }
+        // In the bubble the whole line, which says itself a sentence after another (0.36: no click a sentence).
+        else
+        {
+            _person.Say(string.Join(" ", _sentences), record: false);
+            _at = _sentences.Count - 1;
+        }
+    }
+
+    double _nextIn;
+
+    /// <summary>A letter's page fills in by itself, a sentence after another.</summary>
+    public override void _Process(double delta)
+    {
+        if (_nextIn <= 0 || _letterText == null || _leaving) return;
+        _nextIn -= delta;
+        if (_nextIn > 0 || _at >= _sentences.Count - 1) return;
+        _at++;
+        ShowSentence();
+        if (_line == _talk.Lines.Count - 1 && _at >= _sentences.Count - 1 && _panel == null && !_answered) Ask();
     }
 
     void Say(string text, Color? color = null)

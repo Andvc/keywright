@@ -40,7 +40,10 @@ public sealed partial class GameState
     public int ListensUsed { get; private set; }
 
     /// <summary>Listens a day: the ear's own, and what the shop and the build add.</summary>
-    public int Listens => Math.Max(1, ListensBase + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Listens));
+    public int Listens => Math.Max(1, (ListensTried > 0 ? ListensTried : ListensBase) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Listens));
+
+    /// <summary>For tuning (`--sim=quick --listens=N`): another ear to start with.</summary>
+    public static int ListensTried { get; set; }
 
     public int ListensLeft => Math.Max(0, Listens - ListensUsed);
 

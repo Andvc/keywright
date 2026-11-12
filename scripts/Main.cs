@@ -87,6 +87,9 @@ public partial class Main : Node2D
                     Heartsongs.Chance = songOdds;
                 // --mimics=N: one chest in N breathes (0.33; a large N all but turns them off, to measure what they're worth).
                 if (int.TryParse(Arg(args, "--mimics"), out var simMimics) && simMimics > 0) Mimics.OneIn = simMimics;
+                // --dues=a,b,c,d: try other dues (for tuning them), and --listens=N another ear.
+                if (Arg(args, "--dues") is string dues) Guild.TryDues(dues.Split(',').Select(int.Parse).ToArray());
+                if (int.TryParse(Arg(args, "--listens"), out var listens)) GameState.ListensTried = listens;
                 // --debtstep=S: try another rise in the Guild's dues a challenge level (for tuning it).
                 if (float.TryParse(Arg(args, "--debtstep"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
                         out var debtStep))
@@ -141,6 +144,9 @@ public partial class Main : Node2D
                         break;
                     case "quick":
                         Simulation.Run(N(120), quick: true);
+                        break;
+                    case "learners":
+                        Simulation.Learners(N(120));
                         break;
                     default:
                         Simulation.Run(N(300));
