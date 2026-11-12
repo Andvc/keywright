@@ -12,10 +12,11 @@ namespace Keywright.Core;
 public sealed class SaveData
 {
     /// <summary>
+    /// 8: 0.36's season of four weeks, a market each (a version 7 run picks up at the same market: <see cref="FromJson"/>);
     /// 5: 0.28's new cast and its tales (a version 4 save's regulars are renamed, and its tales start fresh); 4: 0.21's five
-    /// weeks of five days (older saves are moved onto them: <see cref="FromJson"/>).
+    /// weeks of five days (older saves are moved onto them).
     /// </summary>
-    public const int CurrentVersion = 7;
+    public const int CurrentVersion = 8;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -227,7 +228,7 @@ public sealed class SaveData
             {
                 int oldDays = data.Version == 2 ? OldDaysPerWeek : ShortDaysPerWeek;
                 int week = data.Day / oldDays, into = data.Day % oldDays;
-                int Weeks(int old) => (int)Math.Round(old * Guild.Weeks / (double)OldWeeks);
+                int Weeks(int old) => (int)Math.Round(old * FiveWeeks / (double)OldWeeks);
                 into = data.Version == 3 ? into * 2 : into;
                 data.Day = Weeks(week) * Guild.DaysPerWeek + Math.Min(into, Guild.DaysPerWeek - 1);
                 data.WeeksPaid = Math.Min(data.Day / Guild.DaysPerWeek, Weeks(data.WeeksPaid));
@@ -264,6 +265,43 @@ public sealed class SaveData
             if (data.Version == 6)
             {
                 data.BramAway = data.Day > Guild.DaysPerWeek;
+                data.Version = 7;
+            }
+            // 0.36: a season is four weeks, a market each, and a due paid moves the shop inward. A run saved in the season
+            // of seven weeks picks up at the market it had reached, on the same day of its week, with the dues before that
+            // market's paid; and every day the save remembers (a tale's beats, what lasts a while, the back room) moves
+            // back with it.
+            if (data.Version == 7)
+            {
+                int was = data.Day, wasWeek = was / Guild.DaysPerWeek + 1, tier = Math.Clamp(data.Tier, 1, ShopTiers.Max);
+                bool cleared = data.WeeksPaid >= SevenWeeks;
+                int week = cleared && wasWeek > SevenWeeks ? Guild.Weeks + (wasWeek - SevenWeeks) : cleared ? Math.Max(tier, Math.Min(wasWeek, Guild.Weeks)) : tier;
+                data.Day = (week - 1) * Guild.DaysPerWeek + was % Guild.DaysPerWeek;
+                data.WeeksPaid = cleared ? Guild.Weeks + Math.Max(0, data.WeeksPaid - SevenWeeks) : tier - 1;
+                int by = data.Day - was, weeks = week - wasWeek;
+                int Moved(int day) => day <= 0 ? day : Math.Max(1, day + by);
+                int MovedWeek(int w) => Math.Max(1, w + weeks);
+                data.ClearedDay = Moved(data.ClearedDay);
+                data.TierSince = Moved(data.TierSince);
+                data.LoanDue = Moved(data.LoanDue);
+                data.PorterUntil = Moved(data.PorterUntil);
+                data.CloverWeek = data.CloverWeek > 0 ? MovedWeek(data.CloverWeek) : data.CloverWeek;
+                data.BeatsDone = data.BeatsDone?.ToDictionary(b => b.Key, b => Moved(b.Value));
+                data.Until = data.Until?.ToDictionary(u => u.Key, u => Moved(u.Value));
+                data.OffersDeclined = data.OffersDeclined?.ToDictionary(o => o.Key, o => Moved(o.Value));
+                data.Claims = data.Claims?.ToDictionary(c => c.Key, c => MovedWeek(c.Value));
+                data.Taken = data.Taken?.ToDictionary(t => t.Key, t => MovedWeek(t.Value));
+                foreach (var promise in data.Promises ?? new List<Promise>()) promise.Day = Moved(promise.Day);
+                foreach (var held in data.BackRoom ?? new List<Held>()) held.Day = Moved(held.Day);
+                foreach (var notice in data.Notices ?? new List<Notice>()) notice.Day = Moved(notice.Day);
+                data.History = data.History?.Select(said => said with { Day = Moved(said.Day) }).ToList();
+                foreach (var commission in data.Commissions) commission.Lapses = Moved(commission.Lapses);
+                // The moves aren't bought any more: tools are on offer from Thornwick, and the week's plan is made again.
+                data.UpgradesOpen = tier >= 2;
+                data.Plan = null;
+                data.NextPlan = null;
+                data.EventDay = 0;
+                data.PeddlerDay = 0;
                 data.Version = CurrentVersion;
             }
             return data;
@@ -277,8 +315,8 @@ public sealed class SaveData
     /// <summary>What a shop's sums are worth in 0.30's economy against 0.29's: a typical chest there, now against then.</summary>
     static float Rescaled(int tier) => tier switch { 1 => 1f, 2 => 2f / 3, 3 => 0.4f, _ => 0.27f };
 
-    /// <summary>Days in a week before 0.20, and in 0.20's; weeks of Bram's debt before 0.21.</summary>
-    const int OldDaysPerWeek = 5, ShortDaysPerWeek = 3, OldWeeks = 8;
+    /// <summary>Days in a week before 0.20, and in 0.20's; weeks of Bram's debt before 0.21; and from 0.30 to 0.35.</summary>
+    const int OldDaysPerWeek = 5, ShortDaysPerWeek = 3, OldWeeks = 8, FiveWeeks = 5, SevenWeeks = 7;
 
     /// <summary>A line for the title screen: "Week 3, day 2, Town Shop, 840g".</summary>
     public string Summary => Loc.T($"Week {Day / Guild.DaysPerWeek + 1}, day {Day % Guild.DaysPerWeek + 1}, {ShopTiers.Name(Tier)}, {Gold}g");

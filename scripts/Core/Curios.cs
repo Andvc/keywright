@@ -357,13 +357,14 @@ public static class Curios
     /// legendary before the third, and never much of either (0.20's rares, a quarter of the cards by the sixth week and
     /// likelier still beside a curio they went with, made every run's build out of them).
     /// </summary>
+    /// (0.36: a season is four weeks, a market each, so the rare ones come with Thornwick's week and the legendary with
+    /// Crownhold's, a little oftener than over 0.30's seven: a build has eighteen nights to come together, not thirty-three.)
     public static float[] Rates(int week) => week switch
     {
-        <= 1 => new[] { 0.70f, 0.30f, 0f, 0f },
-        2 => new[] { 0.55f, 0.40f, 0.05f, 0f },
-        3 => new[] { 0.45f, 0.43f, 0.10f, 0.02f },
-        4 => new[] { 0.40f, 0.43f, 0.13f, 0.04f },
-        _ => new[] { 0.35f, 0.44f, 0.15f, 0.06f },
+        <= 1 => new[] { 0.65f, 0.35f, 0f, 0f },
+        2 => new[] { 0.46f, 0.42f, 0.12f, 0f },
+        3 => new[] { 0.38f, 0.42f, 0.15f, 0.05f },
+        _ => new[] { 0.32f, 0.42f, 0.18f, 0.08f },
     };
 
     /// <summary>The shop tier a curio of this rarity needs before Nim lays one out: rare ones from Thornwick, legendary ones from Crownhold.</summary>

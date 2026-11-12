@@ -3341,3 +3341,92 @@ def burst(frames=6, w=112, h=100):
                     d.rectangle((x - 1, y - 1, x + 1, y + 1), fill=warm)
         sheet.alpha_composite(img, (f * w, 0))
     return sheet
+
+
+# ---- Upgrade icons drawn at the 3px density (0.36) ----
+# The Tea Kettle and the Listening Screen came with the ear (GameState.Listens), after the 3px art was made from its
+# originals (art/density3), so they're drawn here a pixel a cell, 32 cells square like the rest of the upgrade icons
+# (96 pixels at 1440p, placed as 48), in the palette's ramps, flat and without outlines, lit from the upper left.
+
+def _hex(h):
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) + (255,)
+
+
+def icon3_kettle():
+    """A copper kettle on the boil: the Tea Kettle (two more listens a day)."""
+    im = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    dk, md, lt, hi, glint = _hex("613d36"), _hex("915a47"), _hex("bd7e5f"), _hex("e1a882"), _hex("fed5b3")
+    iron_m, iron_l = _hex("3b3150"), _hex("554b69")
+    gold_d, gold_m, gold_l = _hex("a06500"), _hex("c29026"), _hex("f2c14e")
+    st1, st2 = _hex("c9c4d4"), _hex("ece6f5")
+    d.arc((8, 4, 25, 22), 180, 360, fill=iron_m, width=2)
+    d.arc((8, 4, 25, 22), 200, 250, fill=iron_l, width=1)
+    d.ellipse((6, 13, 27, 29), fill=md)
+    d.rectangle((7, 21, 26, 26), fill=md)
+    d.ellipse((6, 19, 27, 30), fill=md)
+    for y in range(13, 31):
+        for x in range(5, 29):
+            if im.getpixel((x, y)) != md:
+                continue
+            v = (x - 12) * 0.55 + (y - 17) * 0.75
+            if v > 7.5:
+                im.putpixel((x, y), dk)
+            elif v < -3.2:
+                im.putpixel((x, y), lt)
+    d.line((9, 17, 11, 15), fill=hi)
+    d.line((8, 19, 8, 21), fill=hi)
+    d.point((10, 16), fill=glint)
+    d.line((8, 27, 25, 27), fill=dk)
+    d.line((10, 29, 23, 29), fill=dk)
+    d.ellipse((11, 11, 22, 15), fill=lt)
+    d.line((12, 14, 21, 14), fill=md)
+    d.line((12, 12, 16, 12), fill=hi)
+    d.rectangle((15, 8, 17, 10), fill=gold_m)
+    d.point((15, 8), fill=gold_l)
+    d.point((17, 10), fill=gold_d)
+    for x, y, c in [(5, 19, md), (4, 18, md), (3, 17, md), (3, 16, lt), (2, 15, lt), (2, 14, lt), (4, 19, dk), (5, 20, md), (6, 20, md),
+                    (4, 17, lt), (3, 15, md), (5, 18, lt), (2, 13, hi), (3, 14, md)]:
+        im.putpixel((x, y), c)
+    d.rectangle((8, 13, 9, 14), fill=iron_l)
+    d.rectangle((24, 13, 25, 14), fill=iron_m)
+    for x, y, c in [(2, 11, st1), (1, 10, st2), (1, 9, st2), (2, 8, st1), (3, 7, st2), (3, 6, st2), (2, 5, st1), (4, 10, st1), (5, 9, st2),
+                    (5, 8, st1), (1, 4, st1)]:
+        im.putpixel((x, y), c)
+    return im
+
+
+def icon3_screen():
+    """A folding screen hung with green felt and brass studs: the Listening Screen (three more listens a day)."""
+    im = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
+    wd, wm, wl = _hex("4b2212"), _hex("6e3d22"), _hex("8e5b37")
+    fd, fm, fl, fh = _hex("002511"), _hex("004e22"), _hex("0e7734"), _hex("58a04c")
+    gold, gold_d = _hex("f2c14e"), _hex("c29026")
+
+    def panel(x0, y0, x1, y1, felt, felt_hi, frame, frame_hi, slant):
+        for x in range(x0, x1 + 1):
+            t = (x - x0) / max(1, x1 - x0)
+            top, bot = y0 + round(slant * t), y1 - round(slant * t * 0.5)
+            for y in range(top, bot + 1):
+                im.putpixel((x, y), frame if x in (x0, x1) or y in (top, bot) else felt)
+            im.putpixel((x, top), frame_hi)
+        for y in range(y0 + 3, y1 - 3):
+            if im.getpixel((x0 + 2, y)) == felt:
+                im.putpixel((x0 + 2, y), felt_hi)
+
+    panel(2, 6, 10, 27, fm, fl, wm, wl, 2)
+    panel(11, 8, 19, 26, fd, fm, wd, wm, -2)
+    panel(20, 5, 29, 28, fm, fl, wm, wl, 2)
+    for x, y in [(5, 11), (7, 16), (5, 21), (23, 10), (26, 16), (23, 22), (15, 12), (15, 20)]:
+        if im.getpixel((x, y))[3]:
+            im.putpixel((x, y), gold_d if x == 15 else gold)
+    for x in range(22, 27):
+        if im.getpixel((x, 9)) == fm:
+            im.putpixel((x, 9), fh)
+    for x, y in [(2, 28), (10, 27), (11, 27), (19, 26), (20, 29), (29, 28), (2, 29), (29, 29), (20, 30)]:
+        im.putpixel((x, y), wd)
+    return im
+
+
+# Upgrade icons drawn here at the 3px density, by the upgrade's key (Upgrades.All).
+ICONS3 = {"kettle": icon3_kettle, "screen": icon3_screen}

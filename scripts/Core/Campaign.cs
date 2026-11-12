@@ -278,11 +278,14 @@ public partial class GameState
 
     // ---- The Maw's tactics, once you remember (Vane's Guild nights) ----
 
-    /// <summary>The fourth Guild night: half the due, if your questions stop at the toll.</summary>
-    public bool BribeTonight => Remembers && !CampaignDone && DuesTonight && !PaidThisWeek && Week == 4 && !DebtCleared && !Flagged("bribe.asked");
+    /// <summary>The Guild nights of the Maw's tactics (0.36: the second and third of four; the fourth and sixth of seven until then).</summary>
+    public const int BribeWeek = 2, BargainWeek = 3;
 
-    /// <summary>The sixth: Bram home tomorrow, warm and whole, for the key's pieces.</summary>
-    public bool BargainTonight => Remembers && !CampaignDone && DuesTonight && !PaidThisWeek && Week == 6 && Pieces.Count > 0 && !BramHome &&
+    /// <summary>The second Guild night: half the due, if your questions stop at the toll.</summary>
+    public bool BribeTonight => Remembers && !CampaignDone && DuesTonight && !PaidThisWeek && Week == BribeWeek && !DebtCleared && !Flagged("bribe.asked");
+
+    /// <summary>The third: Bram home tomorrow, warm and whole, for the key's pieces.</summary>
+    public bool BargainTonight => Remembers && !CampaignDone && DuesTonight && !PaidThisWeek && Week == BargainWeek && Pieces.Count > 0 && !BramHome &&
                                   !TreasuryDone && !Flagged("bargain.asked");
 
     public void AnswerBribe(bool take)

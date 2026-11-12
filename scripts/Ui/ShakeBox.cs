@@ -58,6 +58,24 @@ public partial class ShakeBox : Node2D
     /// <summary>The magnet is on: iron can't move, so it makes no sound.</summary>
     public bool Magnet;
 
+    /// <summary>
+    /// Whether a shake at this strength can be heard yet (0.36): the counter opens each strength for a listen
+    /// (<see cref="GameState.Listen"/>), and until it has, nothing inside sounds at it. Null: every strength is open.
+    /// </summary>
+    public Func<Shake, bool> Open;
+
+    /// <summary>How fast the chest is moving in the hand right now (px/s), unsmoothed: 0 when it isn't being shaken.</summary>
+    public float HandSpeed => Dragging ? _vel.Length() : 0f;
+
+    /// <summary>The speed (px/s) at which a shake of this strength starts.</summary>
+    public static float SpeedOf(Shake level) => level switch
+    {
+        Shake.Gentle => GentleSpeed,
+        Shake.Firm => FirmSpeed,
+        Shake.Hard => HardSpeed,
+        _ => 0f,
+    };
+
     /// <summary>The witchlight is lit: magic glows when it makes a sound.</summary>
     public bool Witchlight;
 
@@ -347,6 +365,8 @@ public partial class ShakeBox : Node2D
     bool Impact(int index, Item item, float strength)
     {
         var level = Level;
+        // A strength the ear hasn't been given yet: nothing's heard at it.
+        if (Open != null && !Open(level)) return false;
         // Glass that broke in a drop doesn't slosh any more.
         if (_chest.Now(item).Broken) return false;
         // Not shaken hard enough to stir it, or held still by the magnet: it makes no sound.

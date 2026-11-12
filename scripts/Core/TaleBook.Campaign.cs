@@ -83,7 +83,7 @@ public static partial class TaleBook
                 // Once you remember: Bram's tuning fork in a lot of the Guild's repossessed goods.
                 new()
                 {
-                    Key = "bram.tool", Who = Marrow, Gap = 6, If = s => s.Remembers && s.BramNotes && !s.CampaignDone && s.Week <= 4,
+                    Key = "bram.tool", Who = Marrow, Gap = 6, If = s => s.Remembers && s.BramNotes && !s.CampaignDone && s.Week < Guild.Weeks,
                     Brings = (s, rng) =>
                     {
                         var chest = Fill(rng, "seized", ShopTiers.Typical(s.Tier), s.Tier, 2);
@@ -145,7 +145,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "crate.bram", Who = Corvin, Gap = 16, Tier = 2,
-                    If = s => s.Remembers && s.KnowsInventory && WaitingForBram(s) && (s.Flagged("crate.diverted") || s.Week >= 5),
+                    If = s => s.Remembers && s.KnowsInventory && WaitingForBram(s) && (s.Flagged("crate.diverted") || s.Week >= Guild.Weeks - 1),
                     Brings = (s, rng) => CrateVisit(s, rng, Corvin, Campaign.Bram,
                         Loc.T("A Guild crate off the palace road, chalked with a name. The bargemen say you were asking. {price}, and I never saw it."), 1f),
                 },

@@ -161,6 +161,7 @@ public static partial class Simulation
             if (s.Tier != _tier)
             {
                 Meet($"place:{s.Tier}", 1, 3, ShopTiers.Name(s.Tier));
+                // (0.36: the move inward comes with the Guild's due, not as something bought at an evening.)
                 Peak("a new shop", 4);
                 _tier = s.Tier;
             }

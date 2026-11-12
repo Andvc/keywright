@@ -21,14 +21,14 @@ public static partial class Simulation
     const int Days = MaxWeeks * Guild.DaysPerWeek;
 
     /// <summary>
-    /// The order a sensible player buys things in: moves and customers first, and the restorers (half of what their luck
+    /// The order a sensible player buys things in: listens and customers first, and the restorers (half of what their luck
     /// adds no seller prices); the buyers' trades once the shop can buy every good chest it's offered, since every seller
     /// asks as much more as a trade puts on sales (the power index) and a shop still short of gold only pays more for
     /// the same chests.
     /// </summary>
     public static readonly string[] BuyOrder =
     {
-        "shop2", "sign", "bench", "shop3", "crier", "cabinet1", "picks", "cabinet2", "lamp", "workshop", "shop4", "charter", "case",
+        "kettle", "sign", "bench", "screen", "crier", "cabinet1", "picks", "cabinet2", "lamp", "workshop", "charter", "case",
         "scales", "night", "block", "master", "warrant", "cabinet3", "cabinet4", "magnet", "cabinet5", "seal", "cabinet6", "patrons", "velvet",
     };
 
@@ -470,6 +470,8 @@ public static partial class Simulation
                 var visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
                 blind += BlindValue(visit, state, rng);
                 visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
+                // The table measures a chest, read as well as a careful player would with listens for it: a fresh ear for each.
+                state.RestEar();
                 int? paid = Deal(visit, state, rng, Care.Tools, out var slip);
                 // A cold chest: the careful player sends for the Wardens, for the finder's share.
                 if (paid is null && state.CanCallWardens(visit)) profit += state.FinderShare;
@@ -539,14 +541,19 @@ public static partial class Simulation
 
         Hearing hearing;
         // Shaking it (or dropping it, or the lodestone) is laying hands on it: no sight-unseen price, luck or bond for it.
-        if (!Strategy.Recorded(visit, state)) visit.Handle();
+        // (0.36: with no listen left for it, a chest goes unhandled, and is bought, if it is, sight unseen.)
         if (care == Care.OneShake)
         {
-            hearing = Hearing.Simulate(chest, new[] { Shake.Hard });
-            if (state.MindsHardShake(visit.Seller)) visit.Anger(rng);
+            hearing = new Hearing();
             slip = new Appraisal(chest.Quality, tier);
-            foreach (var kind in chest.HeardAt(Shake.Hard).GroupBy(i => i.Category))
-                slip.Set(kind.Key, Math.Max(slip.Count(kind.Key), 1));
+            if (state.Listen(visit, Check.Shaking(Shake.Hard)))
+            {
+                visit.Handle();
+                hearing.Listen(chest, new[] { Shake.Hard }, lamp: false);
+                if (state.MindsHardShake(visit.Seller)) visit.Anger(rng);
+                foreach (var kind in chest.HeardAt(Shake.Hard).GroupBy(i => i.Category))
+                    slip.Set(kind.Key, Math.Max(slip.Count(kind.Key), 1));
+            }
         }
         else if (Strategy.Recorded(visit, state))
         {
@@ -611,35 +618,59 @@ public static partial class Simulation
     }
 
     /// <summary>
-    /// A careful player's handling of a chest: every strength the seller allows, the magnet, the drop. A learner
-    /// (<paramref name="skill"/> under 1) skips strengths, forgets the magnet, and drops when they shouldn't or doesn't
-    /// when they should.
+    /// A careful player's handling of a chest (0.36): one check at a time, each a listen (<see cref="GameState.Listen"/>),
+    /// the next chosen by what the last one told (<see cref="Strategy.NextCheck"/>), up to this chest's share of the day's
+    /// listens. A learner (<paramref name="skill"/> under 1) often goes through the strengths one after another as Bram
+    /// first taught them, gently, firmly, hard, then the drop, without counting what's left for the rest of the queue;
+    /// forgets the magnet, and drops when they shouldn't or doesn't when they should.
     /// </summary>
     static Hearing Listen(Visit visit, GameState state, Random rng, bool tools, float skill = 1)
     {
         var chest = visit.Chest;
         bool lamp = tools && state.Witchlight;
         float e = 1 - skill;
-        var levels = Strategy.Levels(visit, state);
-        if (e > 0)
-        {
-            var kept = levels.Where(_ => rng.NextFloat() >= SkipShake * e).ToArray();
-            levels = kept.Length > 0 ? kept : new[] { levels[^1] };
-        }
-        var hearing = Hearing.Simulate(chest, levels, lamp);
+        var hearing = new Hearing();
         // Listening while it sits still, before a hand's laid on it: a mimic breathes (a learner may not wait for it).
         if (chest.Breathing && (e <= 0 || rng.NextFloat() < skill)) hearing.HeardBreath();
-        // A goblin's fee for every strength after the first.
-        foreach (var level in levels) visit.Shook(level, rng);
-        if (tools && (e <= 0 || rng.NextFloat() < skill)) hearing.Listen(chest, Strategy.MagnetLevels(visit, hearing, state), lamp, magnet: true);
-        bool drop = Strategy.ShouldDrop(visit, hearing, state.Tier, state);
-        if (e > 0)
-            drop = drop ? rng.NextFloat() >= ForgetDrop * e
-                : state.Tier >= 2 && state.CanDrop && !hearing.Dropped && !state.MindsDrop(visit.Seller) && rng.NextFloat() < CarelessDrop * e;
-        if (drop)
+
+        bool Make(Check check)
         {
-            var (hollow, broke) = chest.Drop(rng, state.DropSturdier);
-            hearing.HeardDrop(hollow, broke);
+            if (!state.Listen(visit, check)) return false;
+            visit.Handle();
+            if (check.Drop)
+            {
+                var (hollow, broke) = chest.Drop(rng, state.DropSturdier);
+                hearing.HeardDrop(hollow, broke);
+                return true;
+            }
+            hearing.Listen(chest, new[] { check.Level }, lamp, check.Magnet);
+            // A goblin's fee for every strength after the first.
+            if (!check.Magnet) visit.Shook(check.Level, rng);
+            return true;
+        }
+
+        // By rote: every strength the seller allows, in the order they were taught, while the ear lasts.
+        if (e > 0 && rng.NextFloat() < ByRote * e)
+        {
+            foreach (var level in Strategy.Levels(visit, state))
+                if (rng.NextFloat() >= SkipShake * e && !Make(Check.Shaking(level))) break;
+            bool wants = Strategy.ShouldDrop(visit, hearing, state.Tier, state);
+            bool drop = wants ? rng.NextFloat() >= ForgetDrop * e
+                : state.Tier >= 2 && state.CanDrop && !hearing.Dropped && !state.MindsDrop(visit.Seller) && rng.NextFloat() < CarelessDrop * e;
+            if (drop) Make(Check.Dropping);
+            return hearing;
+        }
+
+        int share = state.ListenShare(visit), spent = 0;
+        bool magnets = tools && (e <= 0 || rng.NextFloat() < skill);
+        while (spent < share)
+        {
+            // Listens to spare: more left than two for everyone still waiting.
+            bool spare = state.ListensFree(visit) || state.ListensLeft - 1 >= 2 * state.Queue.Count(v => v.Talk == null);
+            if (Strategy.NextCheck(visit, hearing, state, magnets, spare) is not Check check) break;
+            if (check.Drop && e > 0 && rng.NextFloat() < ForgetDrop * e) break;
+            if (!Make(check)) break;
+            spent++;
         }
         return hearing;
     }
@@ -647,7 +678,7 @@ public static partial class Simulation
     // A learner's mistakes, at skill 0 (they shrink in proportion as skill grows to 1). Guesses at a first-timer who
     // has had Bram's lessons: they know the rules, but don't yet apply them every time.
     const float SkipShake = 0.4f, ForgetDrop = 0.5f, CarelessDrop = 0.25f, Miscount = 0.5f, Believe = 0.35f, MissBoom = 0.3f, MissGlow = 0.5f,
-        JudgmentNoise = 0.45f, Whim = 0.7f;
+        JudgmentNoise = 0.45f, Whim = 0.7f, ByRote = 0.9f;
 
     /// <summary>A learner's slip: a pair counted as one, the kind the place usually holds ticked unheard, a boom or a glow not ticked.</summary>
     static void Slip(Visit visit, Appraisal slip, Random rng, float e)

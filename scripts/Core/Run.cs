@@ -52,8 +52,10 @@ public sealed partial class GameState
     /// <summary>A week's due: the Guild's, a step higher for each challenge level.</summary>
     public int DueFor(int week)
     {
-        float due = Guild.Due(week) * (Challenge > 0 ? Challenges.DebtFactor(Challenge) : 1) * TaleDues;
-        return Challenge > 0 || TaleDues != 1 ? Money.Round(due) : Guild.Due(week);
+        // Thornwick wants you (a boon): its council pays half the week's due you owe at its market.
+        float invited = week == Challenges.InvitedWeek && Favoured(Challenges.Invited) ? 0.5f : 1;
+        float due = Guild.Due(week) * (Challenge > 0 ? Challenges.DebtFactor(Challenge) : 1) * TaleDues * invited;
+        return Challenge > 0 || TaleDues != 1 || invited != 1 ? Money.Round(due) : Guild.Due(week);
     }
 
     /// <summary>
@@ -104,8 +106,32 @@ public sealed partial class GameState
         WeeksPaid++;
         _halfDue = false;
         Arrears = owed;
+        MoveInward();
         return owed;
     }
+
+    /// <summary>
+    /// The road inward (0.36): a week's due settled, the Guild's carters move the shop a market further in that night, so
+    /// each week of the season is a market: Brindle, Thornwick, Crownhold, the Royal Emporium. Until 0.35 a move was
+    /// bought (80, 300 and 3,000g), and a learner who couldn't afford Crownhold spent twenty days at Thornwick. The Guild
+    /// wants its keywright at the Gate by the season's last night (docs/narrative.md), so it pays the carters.
+    /// </summary>
+    void MoveInward()
+    {
+        int tier = Math.Min(ShopTiers.Max, WeeksPaid + 1);
+        if (tier <= Tier) return;
+        for (int t = Tier + 1; t <= tier; t++) _owned.Add($"shop{t}");
+        MovedFrom = Tier;
+        Tier = tier;
+        TierSince = Day + 1;
+        UpgradesOpen = true;
+    }
+
+    /// <summary>The market the shop left tonight, when a due's just moved it inward (0 otherwise): for the night's screens.</summary>
+    public int MovedFrom { get; private set; }
+
+    /// <summary>The market the next due paid would move the shop to (0: it's as far in as it goes).</summary>
+    public int NextMarket => Tier < ShopTiers.Max && !DebtCleared ? Tier + 1 : 0;
 
     /// <summary>What a miser's lockbox added on the last Guild night paid.</summary>
     public int Hoarded { get; private set; }
@@ -168,6 +194,7 @@ public sealed partial class GameState
             // Bram's pledge is his account: paid, a freed Bram can come home.
             TryHome(Campaign.Bram);
         }
+        MoveInward();
         // A miser's lockbox: what's left after the Guild's been grows a fifth.
         Hoarded = HasCurio("lockbox") ? Money.Round(Gold * Curios.LockboxShare) : 0;
         Gold += Hoarded;
@@ -219,6 +246,7 @@ public sealed partial class GameState
         _halfDue = false;
         ClearedDay = Day;
         TryHome(Campaign.Bram);
+        MoveInward();
         return paid;
     }
 
@@ -464,10 +492,19 @@ public sealed partial class GameState
         _snubbed.Clear();
         bool fair = Favoured(Challenges.FairDays);
         Plan = NextPlan?.Week == Week ? NextPlan : Events.Plan(Seed, Week, Tier, _eventsSeen, fair);
-        NextPlan = Events.Plan(Seed, Week + 1, Tier, _eventsSeen, fair);
-        if (Week < 2) return;
+        // Next week is a market further in (0.36), while there's a due to pay: its days are planned for that market.
+        NextPlan = Events.Plan(Seed, Week + 1, Math.Max(Tier, Math.Min(ShopTiers.Max, Week + 1)), _eventsSeen, fair);
+        // The regulars' first commissions wait a day (Patrons.FromDay): the first morning at Thornwick has enough new.
+        if (Week < Patrons.FromWeek || (Week == Patrons.FromWeek && Patrons.FromDay > 1)) return;
 
         Commissions.AddRange(Patrons.Roll(rng, this));
+    }
+
+    /// <summary>The regulars' first commissions, on the second morning of the week they start asking.</summary>
+    void FirstCommissions()
+    {
+        if (Week != Patrons.FromWeek || DayOfWeek != Patrons.FromDay || Patrons.FromDay <= 1) return;
+        Commissions.AddRange(Patrons.Roll(new Random(unchecked(Seed * 104729 + Week * 7907 + 13)), this));
     }
 
     /// <summary>

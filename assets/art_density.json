@@ -7164,6 +7164,22 @@
       "reference_scale": 1,
       "source_sha256": "b52047b1b3c6177939aa36b04ce119053ff146cd02423e3d0f47b9c4032e1f46"
     },
+    "res://assets/ui/icons/kettle.png": {
+      "asset_id": "drawn.icon.upgrade.kettle",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 3,
+      "sha256": "4d93f050416e6feca70299f65c766a625c8d5d1701c75db3727ecf510e778459"
+    },
     "res://assets/ui/icons/lamp.png": {
       "asset_id": "icon.upgrade.lamp",
       "source": "art/density3/assets/icons/upgrade_lamp.png",
@@ -7261,6 +7277,22 @@
       ],
       "reference_scale": 1,
       "source_sha256": "13109aa815e7dba1749c5c45a467b3d05bf2082cb55670823b083666757ddba0"
+    },
+    "res://assets/ui/icons/screen.png": {
+      "asset_id": "drawn.icon.upgrade.screen",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        48,
+        48
+      ],
+      "physical_size": [
+        96,
+        96
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 3,
+      "sha256": "be570ce95e2fbfaa71d1d1abb3e3a136b528507e9445f0f95a7afc52d5b576a1"
     },
     "res://assets/ui/icons/seal.png": {
       "asset_id": "icon.upgrade.seal",

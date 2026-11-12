@@ -306,6 +306,18 @@ public partial class Autoplay : Node
         }
     }
 
+    /// <summary>Lifts the chest and lets it fall, and reads what Bram has to say about it. False if the counter's gone.</summary>
+    async Task<bool> Drop(CounterPhase counter)
+    {
+        while (IsInstanceValid(counter) && counter.Shake.Busy) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        if (!IsInstanceValid(counter)) return false;
+        counter.DropChest();
+        await Wait(1.8);
+        if (!IsInstanceValid(counter)) return false;
+        await ReadTips(counter.Mentor);
+        return IsInstanceValid(counter);
+    }
+
     async Task<bool> Shake(CounterPhase counter, Shake level, double seconds)
     {
         counter.Shake.AutoShake(seconds, level);
@@ -366,28 +378,44 @@ public partial class Autoplay : Node
         double seconds = State.ShakeLimit(visit.Seller) > 0 ? Math.Min(ShakeSeconds, State.ShakeLimit(visit.Seller) / Strategy.Levels(visit, State).Length - 0.6) : hurried ? 1.2 : ShakeSeconds;
         // The Bookkeeping Engine has marked the slip already: nothing to shake (unless a lesson asks for it).
         bool recorded = Strategy.Recorded(visit, State) && visit.Lesson == null;
-        if (!recorded)
+        // A lesson is free to listen to, and its steps ask for particular shakes: every strength, the magnet, the drop.
+        if (!recorded && visit.Lesson != null)
+        {
             foreach (var level in Strategy.Levels(visit, State))
                 if (!await Shake(counter, level, seconds)) return;
-        // A jingle or tinkle that goes quiet under the magnet is gilded iron: check at the strength it sounded at.
-        var magnetLevels = recorded ? Array.Empty<Shake>() : Strategy.MagnetLevels(visit, counter.Hearing, State);
-        if (magnetLevels.Length > 0)
-        {
-            counter.ToggleMagnet();
-            await Wait(0.6);
-            foreach (var level in magnetLevels)
-                if (!await Shake(counter, level, ShakeSeconds)) return;
+            // A jingle or tinkle that goes quiet under the magnet is gilded iron: check at the strength it sounded at.
+            var magnetLevels = Strategy.MagnetLevels(visit, counter.Hearing, State);
+            if (magnetLevels.Length > 0)
+            {
+                counter.ToggleMagnet();
+                await Wait(0.6);
+                foreach (var level in magnetLevels)
+                    if (!await Shake(counter, level, ShakeSeconds)) return;
+            }
+            // Drop it to listen for a false bottom, unless there's glass in there or the seller would mind.
+            if (Strategy.ShouldDrop(visit, counter.Hearing, State.Tier, State) && !await Drop(counter)) return;
         }
-        // Drop it to listen for a false bottom, unless there's glass in there or the seller would mind.
-        if (!recorded && Strategy.ShouldDrop(visit, counter.Hearing, State.Tier, State))
+        // Any other chest (0.36): a check at a time, each a listen, the next chosen by what the last one told, up to this
+        // chest's share of what's left of the day's (Strategy.NextCheck, as the sim's careful player).
+        else if (!recorded)
         {
-            while (IsInstanceValid(counter) && counter.Shake.Busy) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-            if (!IsInstanceValid(counter)) return;
-            counter.DropChest();
-            await Wait(1.8);
-            if (!IsInstanceValid(counter)) return;
-            await ReadTips(counter.Mentor);
-            if (!IsInstanceValid(counter)) return;
+            int share = State.ListenShare(visit);
+            for (int spent = 0; spent < share; spent++)
+            {
+                bool spare = State.ListensLeft - 1 >= 2 * State.Queue.Count(v => v.Talk == null);
+                if (Strategy.NextCheck(visit, counter.Hearing, State, spare: spare) is not Check check) break;
+                if (check.Drop)
+                {
+                    if (!await Drop(counter)) return;
+                    continue;
+                }
+                if (check.Magnet != counter.MagnetOn)
+                {
+                    counter.ToggleMagnet();
+                    await Wait(0.6);
+                }
+                if (!await Shake(counter, check.Level, check.Magnet ? ShakeSeconds : seconds)) return;
+            }
         }
 
         if (!_notebookShown && !hurried)

@@ -139,8 +139,6 @@ public sealed partial class GameState
     /// <summary>Past this, an exhibition draws no more customers and no better chests.</summary>
     public const int ExhibitionCap = 40;
 
-    /// <summary>Bram lets you spend on the shop once the stall has earned this much, all told.</summary>
-    public const int UpgradesAt = 50;
 
     public int Seed { get; }
     public int Gold { get; set; } = StartingGold;
@@ -327,7 +325,10 @@ public sealed partial class GameState
     /// <summary>What the chests you've bought and opened have brought in, all told.</summary>
     public int TotalEarned { get; private set; }
 
-    /// <summary>Renovations and tools are on offer: the stall has earned <see cref="UpgradesAt"/>.</summary>
+    /// <summary>
+    /// Tools and the shop's fittings are on offer: from Thornwick, whose makers sell them (0.36; until then, once the stall
+    /// had earned 50g, with the move to Thornwick the first thing to buy).
+    /// </summary>
     public bool UpgradesOpen { get; private set; }
 
     /// <summary>Keeping things for display: from the village shop, which has a shelf (Isolde brings her own).</summary>
@@ -656,6 +657,8 @@ public sealed partial class GameState
     public void StartDay()
     {
         Day++;
+        MovedFrom = 0;
+        RestEar();
         Rng = new Random(unchecked(Seed * 7919 + Day));
         Queue.Clear();
         Current = null;
@@ -665,6 +668,7 @@ public sealed partial class GameState
         DipIntoStash();
         Today.Morning = CollectLoan();
         if (DayOfWeek == 1) StartWeek();
+        FirstCommissions();
         CampaignMorning();
         DrawTales();
         MeetPeople();
@@ -1010,7 +1014,6 @@ public sealed partial class GameState
     public void EndDay()
     {
         TotalEarned += Today.Earned;
-        if (TotalEarned >= UpgradesAt) UpgradesOpen = true;
         Overnight();
     }
 }

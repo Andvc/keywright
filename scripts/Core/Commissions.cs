@@ -91,6 +91,12 @@ public static class Patrons
     /// <summary>Regulars start asking from this week (after the first visit from the Guild).</summary>
     public const int FromWeek = 2;
 
+    /// <summary>
+    /// The first commissions come on this day of that week, not its first (0.36): the first morning at Thornwick already
+    /// brings the market, the Guild's letter, locks and the drop, and the experience playtest found it the heaviest day.
+    /// </summary>
+    public const int FromDay = 2;
+
     /// <summary>Commissions the regulars post each week (a week is three days: more would mostly lapse).</summary>
     public const int PerWeek = 2;
 

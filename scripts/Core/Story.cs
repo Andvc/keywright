@@ -30,7 +30,7 @@ public static class Story
     public const string HaddonLook = "pell"; // loc: keys
 
     /// <summary>The week of the gathering: who'll stand with you at the treasury.</summary>
-    public const int GatheringWeek = 6;
+    public const int GatheringWeek = 4;
 
     /// <summary>The lines' notes for the Inquiry, once they've been said.</summary>
     public static void Heard(GameState state, IEnumerable<Line> lines)
@@ -250,10 +250,7 @@ public static class Story
             return state.Week switch
             {
                 2 => new(Vane, Loc.T("Bram sends his regards. The handover's slow work, but he's in good spirits.")),
-                3 => new(Vane, Loc.T("Bram asked after the stall. I told him it's in good hands.")),
-                4 => new(Vane, Loc.T("No letter? Bram's very busy. The treasury keeps long hours.")),
-                5 => new(Vane, Loc.T("The treasury opens on the season's last night. Bram is counting on you, and on the key.")),
-                GatheringWeek => new(Vane, Loc.T("One more week. Do bring the key.")),
+                3 => new(Vane, Loc.T("The treasury opens on the season's last night. Bram is counting on you, and on the key.")),
                 _ => null,
             };
         return state.Week switch
@@ -262,17 +259,16 @@ public static class Story
             3 => state.Knows("carts")
                 ? new(Vane, Loc.T("You were at the toll, I hear. The palace road is no place for a shopkeeper."))
                 : new(Vane, Loc.T("You remember more than you should, Keywright. So do I.")),
-            5 => new(Vane, Loc.T("Every spring you get a little further. And every spring I learn a little more.")),
             _ => null,
         };
     }
 
-    /// <summary>The fourth Guild night, once you remember: half the due, if your questions stop at the toll.</summary>
+    /// <summary>The second Guild night, once you remember: half the due, if your questions stop at the toll.</summary>
     public static Line Bribe => new(Vane, Loc.T("Before you pay. The Guild could forget half of tonight's due, Keywright. All it asks is that your questions stop at the toll."));
     public static string BribeTaken => Loc.T("Sensible. You'll find Sergeant Hollis has nothing to say to you this season.");
     public static string BribeRefused => Loc.T("Then ask your questions. You'll find the answers heavy.");
 
-    /// <summary>The sixth Guild night, once you remember: Bram home tomorrow, for the key's pieces.</summary>
+    /// <summary>The third Guild night, once you remember: Bram home tomorrow, for the key's pieces.</summary>
     public static Line Bargain(GameState state) =>
         new(Vane, Loc.Plural(state.Pieces.Count,
             $"Before you pay. You want Bram home. The Guild can have him at your door tomorrow, warm and whole. All it asks is your {state.Pieces.Count} piece of the key.",

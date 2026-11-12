@@ -47,7 +47,11 @@ public static class Hints
         ["opened"] = Loc.T("A tick is a good read. A cross is something to listen for next time."),
         ["unseen"] = Loc.T("You bought that one sight unseen, so there was nothing to read: a closed eye is a thing you never marked, " +
                            "not a mistake. Handle a chest before you buy it and your slip is checked as usual."),
-        ["dayend"] = Loc.T($"That's a day's trading. Every coin goes toward the stall: once it's earned {GameState.UpgradesAt}g, all told, we'll talk about Thornwick."),
+        // The ear (0.36): the day's listens, the first time one's spent, when they run low with people still waiting, and when they're gone.
+        ["ear"] = Loc.T("That's a listen spent. An ear's only good for so many a day: yours are counted on the slip. A strength you haven't tried on a chest costs one, and so does a drop. Shaking again the same way is free."),
+        ["ear_low"] = Loc.T("Running low, and folk still waiting. A hard shake stirs everything in a chest, so start there. If steel clanks, the delicate things are drowned: then a gentle shake is worth a listen. And think what the seller missed."),
+        ["ear_out"] = Loc.T("That's your ear done for today. You can still trade on what you know: who's selling, how they priced it, where it came from. Or pass."),
+        ["dayend"] = Loc.T("That's a day's trading. A week of them here, then Thornwick Market, a step further in: richer chests, and dearer ones. So let the purse grow."),
 
         // From the second day: chest colours, the ways people trade, and their stories.
         ["colours"] = Loc.T("Look at the chest's colour: plain wood, green, blue, purple. The Wardens painted them by what went in, so the " +
@@ -70,7 +74,7 @@ public static class Hints
         ["exhibition"] = Loc.T("Your exhibition. Click anything in it to sell it, if you need the money."),
 
         // The shop moves inward, a step at a time.
-        ["upgrades"] = Loc.T($"{GameState.UpgradesAt}g earned: the stall pays its way! Thornwick Market has more customers, richer chests and room for a shelf. But Thornwick chests cost more, so keep enough for tomorrow's. A price in red means it would leave you short: better to wait a day."),
+        ["upgrades"] = Loc.T("A proper shop, with room to grow: this is where you spend on it, and the people who make the best tools will bring them to the counter. Chests cost more here, so keep enough for tomorrow's. A price in red means it would leave you short: better to wait a day."),
         ["stash"] = Loc.T("Nearly broke? I keep a little put by for days like this. Don't tell the Guild. It won't last forever: the " +
                     "day card says how much is left."),
         ["display"] = Loc.T("A shelf behind the counter, with room for one thing! Keep something grand on display instead of selling " +

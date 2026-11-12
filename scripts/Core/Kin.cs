@@ -178,12 +178,11 @@ public sealed partial class GameState
     }
 
     /// <summary>
-    /// What an upgrade costs this run: its price (a quarter more from the Guild's builders; the move to Thornwick half,
-    /// when Thornwick wants you), and the Bookkeeping Engine whatever is left of the debt.
+    /// What an upgrade costs this run: its price (a quarter more from the Guild's builders), and the Bookkeeping Engine
+    /// whatever is left of the debt.
     /// </summary>
     public int Cost(Upgrade upgrade) => upgrade.Key == Upgrades.Engine ? DebtLeft
-        : Money.Round(upgrade.Cost * (Under(Challenges.Builders) ? Challenges.BuilderPrices : 1) *
-                      (upgrade.SetsTier == 2 && Favoured(Challenges.Invited) ? 0.5f : 1));
+        : Money.Round(upgrade.Cost * (Under(Challenges.Builders) ? Challenges.BuilderPrices : 1));
 
     /// <summary>
     /// The Guild offers its Bookkeeping Engine once you could pay off everything you owe: it would rather be paid twice.

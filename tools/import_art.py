@@ -148,6 +148,23 @@ def build_chests():
 DRAWN_PITCH, DRAWN_SCALE = 3, 2
 
 
+def build_drawn_icons():
+    """Upgrade icons drawn in code at the 3px density (custom_art.ICONS3: the Tea Kettle and the Listening Screen, which
+    came after the 3px art was made): 32 cells square, each cell 3x3 pixels at 1440p, placed as 48 like the rest."""
+    drawn = {}
+    for key, draw in custom_art.ICONS3.items():
+        cells = draw()
+        physical = cells.resize((cells.width * DRAWN_PITCH, cells.height * DRAWN_PITCH), Image.NEAREST)
+        path = save(physical, "ui", "icons", f"{key}.png")
+        rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
+        with open(path, "rb") as stream:
+            digest = hashlib.sha256(stream.read()).hexdigest()
+        drawn[f"res://{rel}"] = {"asset_id": f"drawn.icon.upgrade.{key}", "source": "tools/custom_art.py", "drawn": True,
+                                 "logical_size": [physical.width // 2, physical.height // 2], "physical_size": list(physical.size),
+                                 "reference_scale": 1, "pixel_pitch": DRAWN_PITCH, "sha256": digest}
+    register_drawn(drawn, prefix="drawn.icon.")
+
+
 def save_drawn(cells, asset, *parts):
     """Saves a picture drawn a pixel a cell at its 1440p size, and returns its art_density.json entry: the size the
     layout places it at (each cell is 3/4 of a layout pixel at 2x), and the size of the texture itself."""
@@ -1165,6 +1182,7 @@ def main():
     parser.add_argument("--density-only", action="store_true", help="overlay art/density3 without rebuilding Kenney or legacy assets")
     parser.add_argument("--density-check", action="store_true", help="validate the density overlay and report crops without writing files")
     parser.add_argument("--chests-only", action="store_true", help="redraw just the chests and their locks (custom_art.chest3)")
+    parser.add_argument("--icons-only", action="store_true", help="redraw just the upgrade icons drawn in code (custom_art.ICONS3)")
     parser.add_argument("--gild-only", action="store_true", help="redraw just the Gilding's masks for Bram's pictures (scripts/Ui/Gilt.cs)")
     args = parser.parse_args()
     if args.gild_only:
@@ -1173,6 +1191,10 @@ def main():
     from import_density import apply_density, check_drawn
     if args.chests_only:
         build_chests()
+        check_drawn(ROOT)
+        return
+    if args.icons_only:
+        build_drawn_icons()
         check_drawn(ROOT)
         return
     if args.density_only or args.density_check:
@@ -1205,6 +1227,7 @@ def main():
     build_ui()
     build_icons()
     apply_density(ROOT)
+    build_drawn_icons()
     build_gild_masks()
 
     for group, files in SOUNDS.items():

@@ -155,6 +155,9 @@ public static class Challenges
     /// <summary>What Nim asks more, when he's raised his prices; and what the Guild's builders charge more.</summary>
     public const float DearCurioPrices = 1.25f, BuilderPrices = 1.25f;
 
+    /// <summary>The week whose due Thornwick's council halves when it wants you (the one paid at its market).</summary>
+    public const int InvitedWeek = 2;
+
     /// <summary>A slow season: impatient sellers give you this much longer, and a rotten chest stands this much more.</summary>
     public const float PatientFactor = 2f;
 
@@ -185,7 +188,7 @@ public static class Challenges
             Loc.T("The stall's licence cost more than Bram thought.")),
         new(DearCurios, false, Loc.T("Nim's raised his prices"), Loc.T("Nim asks a quarter more for every curio."),
             Loc.T("The Guild is hunting Nim this season, and he charges for the risk.")),
-        new(Builders, false, Loc.T("The Guild's builders"), Loc.T("Every upgrade and move costs a quarter more."),
+        new(Builders, false, Loc.T("The Guild's builders"), Loc.T("Every upgrade costs a quarter more."),
             Loc.T("The Guild says only its own builders may work on a licensed shop, at its own rates.")),
         new(Rust, false, Loc.T("A wet year"), Loc.T("Every lock has one more pin to pick."),
             Loc.T("A wet winter has rusted every old lock in the realm stiff.")),
@@ -205,7 +208,7 @@ public static class Challenges
             Loc.T("Bram sold his old cart, and the money's yours."), LeanStart),
         new(OldPicks, true, Loc.T("Bram's old picks"), Loc.T("You start with the Fine Lockpicks: a wider sweet spot on every lock."),
             Loc.T("Bram found his old picks at the bottom of a drawer.")),
-        new(Invited, true, Loc.T("Thornwick wants you"), Loc.T("The move to Thornwick Market costs half."),
+        new(Invited, true, Loc.T("Thornwick wants you"), Loc.T("The Guild's second due, the one you pay at Thornwick Market, is halved."),
             Loc.T("Thornwick's council wants a Keywright in the market, and pays half the rent."), Builders),
         new(Patient, true, Loc.T("A slow season"), Loc.T("Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking."),
             Loc.T("Nobody's in a hurry this year."), Hurried),

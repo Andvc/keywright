@@ -384,8 +384,27 @@ public sealed partial class GameState
     {
         if (!Drew(beat.Tale) || Did(beat.Key) || Tier < beat.Tier || Gone.Contains(beat.Who)) return false;
         int since = beat.After == null ? 0 : Did(beat.After) ? DoneOn(beat.After) : -1;
-        if (since < 0 || Day < since + beat.Gap) return false;
+        if (since < 0 || Day < since + Wait(beat)) return false;
         return beat.If == null || beat.If(this);
+    }
+
+    /// <summary>
+    /// How long a beat waits, in this season's days (0.36). The beats were written for 0.30's season of seven weeks, with
+    /// the markets about days 8, 16 and 25; a season is four weeks now, a market each. A tale's first beat ("not before
+    /// this day of the run") comes at the same point of the same market's week; a later one waits about three-fifths as
+    /// long as it did (a day is a day, two stay two, four become three).
+    /// </summary>
+    public static int Wait(Beat beat) => beat.After == null ? SeasonDay(beat.Gap) : beat.Gap <= 2 ? beat.Gap : (int)Math.Ceiling(beat.Gap * 0.6);
+
+    /// <summary>A day of 0.30's 35-day season (its markets from days 1, 8, 16 and 25) as a day of the four-week one (1, 6, 11 and 16).</summary>
+    public static int SeasonDay(int day)
+    {
+        if (day <= 1) return Math.Max(0, day);
+        ReadOnlySpan<int> starts = stackalloc[] { 1, 8, 16, 25, 36 };
+        for (int market = 0; market < 4; market++)
+            if (day < starts[market + 1])
+                return 1 + market * Guild.DaysPerWeek + (day - starts[market]) * Guild.DaysPerWeek / (starts[market + 1] - starts[market]);
+        return Guild.Weeks * Guild.DaysPerWeek;
     }
 
     /// <summary>
@@ -426,7 +445,7 @@ public sealed partial class GameState
     }
 
     /// <summary>The day a beat could first have come: the day what it follows was done, and its gap.</summary>
-    int ReadySince(Beat beat) => (beat.After == null ? 0 : DoneOn(beat.After)) + beat.Gap;
+    int ReadySince(Beat beat) => (beat.After == null ? 0 : DoneOn(beat.After)) + Wait(beat);
 
     /// <summary>
     /// Today's beats into the queue: a talk at a random place among the day's customers, a trading beat instead of one of
@@ -522,7 +541,7 @@ public sealed partial class GameState
             foreach (var beat in tale.Beats.Where(b => b.Expect != null && !Did(b.Key) && b.After != null && Did(b.After) && !Gone.Contains(b.Who)))
             {
                 if (beat.Tier > Tier || (beat.If != null && !beat.If(this))) continue;
-                yield return (Math.Max(Day + 1, DoneOn(beat.After) + beat.Gap), beat.Who, beat.Expect);
+                yield return (Math.Max(Day + 1, DoneOn(beat.After) + Wait(beat)), beat.Who, beat.Expect);
             }
         foreach (var promise in Promises.Where(p => p.Day > Day)) yield return (promise.Day, promise.Who, promise.Note);
     }

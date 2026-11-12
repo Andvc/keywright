@@ -31,6 +31,13 @@ public partial class CounterPhase : Phase
     /// <summary>How long a hard shake a seller who hates them lets go before they mind.</summary>
     const double HardShakeTolerance = 0.2;
 
+    /// <summary>
+    /// A strength not yet tried on this chest is given the ear (and a listen spent on it, <see cref="GameState.Listen"/>)
+    /// once the chest has been moving that fast this long, all told, in one hold: a stray jerk on the way to another
+    /// strength costs nothing.
+    /// </summary>
+    const double ListenHold = 0.16;
+
     /// <summary>The slip's panel, and the line under its header that the Heartsong row takes over once one sings.</summary>
     Node2D _panel;
     RichTextLabel _ticked;
@@ -48,6 +55,13 @@ public partial class CounterPhase : Phase
     Appraisal _slip;
     readonly Hearing _hearing = new();
     readonly Dictionary<(Shake, bool), double> _shaken = new();
+    /// <summary>The strength being held for a listen, how long so far, and the hardest shake of this hold (a gentler one waits for the next).</summary>
+    (Shake Level, bool Magnet) _holding;
+    double _held, _earNoted = -9;
+    Shake _holdMax;
+    Label _earText, _earCount, _earNote;
+    Painter _earPips;
+    Control _ear;
     readonly List<Row> _rows = new();
     readonly Random _rng = new();
     SellerView _seller;
@@ -79,6 +93,7 @@ public partial class CounterPhase : Phase
     public Appraisal Slip => _slip;
     public Hearing Hearing => _hearing;
     public ShakeBox Shake => _shake;
+    public bool MagnetOn => _magnet;
     public MentorView Mentor => _mentor;
     public bool Concluded => !_visit.Deciding;
     public bool Busy => _busy || _notebook != null || _sellConfirm != null || HistoryView.Open > 0;
@@ -127,12 +142,15 @@ public partial class CounterPhase : Phase
         _shop.Light(_shake.View, chest: true);
         _shake.Heard += OnHeard;
         _shake.Landed += OnLanded;
+        // Each strength is heard once the ear's been given it (a listen, the first time on this chest).
+        _shake.Open = level => GameState.Listened(_visit, Check.Shaking(level, _magnet));
         // Once you own the witchlight it's always lit: anything enchanted glows when it makes a sound.
         _lamp = State.Witchlight;
         _shake.Witchlight = _lamp;
         _hint = Add(UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Center, outline: 4).Place(316, 478, 484, 20));
         _hint.ZIndex = 10;
         BuildStrength();
+        BuildEar();
         if (State.Weighs || _visit.Says == Clue.Pounds) BuildScale();
         // Four lines (a colour, a lock, a seller's rule, what the drop said) and room for a fifth before the waiting queue.
         _notes = Add(Rich.Make(16, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(316, 500, 484, 104));
@@ -208,6 +226,29 @@ public partial class CounterPhase : Phase
     }
 
     /// <summary>
+    /// The ear (0.36), beside the chest where the shaking is: what's left of the day's listens, a pip each (the spent
+    /// ones hollow). Each strength first tried on a chest spends one, and so does a drop; a lesson's chest is free.
+    /// </summary>
+    void BuildEar()
+    {
+        // Over the chest, clear of the words that pop out of it and of the scale beside it.
+        _ear = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.35f)).Place(EarX, 62, EarW, 36));
+        _ear.ZIndex = 10;
+        _ear.PivotOffset = new Vector2(EarW / 2, 18);
+        _ear.MouseFilter = Control.MouseFilterEnum.Pass;
+        _ear.TooltipText = Words.Wrap(Loc.T("Your ear is good for so many careful listens a day. Each strength you try on a chest for the first time costs one, and so does a drop; shaking again the same way is free. With none left, you trade on what you know."), 60);
+        _ear.AddChild(UiKit.MakeLabel(Loc.T("YOUR EAR"), 16, Palette.Gold.Darkened(0.15f)).Place(12, 8, 110, 20));
+        _earCount = UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Right).Place(EarW - 70, 8, 58, 20);
+        _ear.AddChild(_earCount);
+        _earNote = UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Right).Place(110, 8, EarW - 122, 20);
+        _ear.AddChild(_earNote);
+        _earPips = new Painter(DrawEar) { Position = new Vector2(104, 12) };
+        _ear.AddChild(_earPips);
+    }
+
+    const float EarX = 388, EarW = 340;
+
+    /// <summary>
     /// Hesk's scale (or what Rook's game scale read), beside the chest: what everything in it weighs, and what the things
     /// ticked on the slip would. The difference is what couldn't be heard (or a fake that weighs short).
     /// </summary>
@@ -235,23 +276,22 @@ public partial class CounterPhase : Phase
         _strength.Position = _shake.View.Position + new Vector2(0, _shake.View.Bottom + 6);
         for (int i = 0; i < Levels.Length; i++)
         {
-            var color = Levels[i] == _shake.Level ? Palette.Gold : _hearing.HasTried(Levels[i], _magnet) ? Palette.Good : Palette.Muted;
+            // Gold: the strength in hand, once the ear's on it (orange while it's still being given); green: tried already.
+            bool open = GameState.Listened(_visit, Check.Shaking(Levels[i], _magnet));
+            var color = Levels[i] == _shake.Level ? open ? Palette.Gold : Palette.Warn : _hearing.HasTried(Levels[i], _magnet) || open ? Palette.Good : Palette.Muted;
             if (_strengthWords[i].GetThemeColor("font_color") != color) _strengthWords[i].AddThemeColorOverride("font_color", color);
         }
     }
 
-    /// <summary>What you've shaken it at so far (with the magnet as it is now), and what you haven't.</summary>
+    /// <summary>
+    /// What you've shaken it at so far (with the magnet as it is now). (Until 0.36 it also said what you hadn't yet: every
+    /// strength was free then, and trying them all was the way to play. Each costs a listen now, so which to try is yours.)
+    /// </summary>
     string TriedSoFar()
     {
         var tried = Levels.Where(level => _hearing.HasTried(level, _magnet)).ToList();
         if (tried.Count == 0) return "";
-        // Not a nudge to shake a chest hard when its seller won't have it.
-        var untried = Levels.Where(level => !tried.Contains(level) && !(level == Core.Shake.Hard && (State.MindsHardShake(_visit.Seller) || !State.CanShakeHardAt(_visit.Seller))))
-            .ToList();
-        string done = Loc.T($"Shaken {string.Join(Loc.T(" and "), tried.Select(Categories.Adverb))}.");
-        // A rotten chest that's had all the shaking it stands won't be shaken again.
-        bool spent = State.ShakeLimit(_visit.Seller) > 0 && _rotten >= State.ShakeLimit(_visit.Seller);
-        return untried.Count == 0 || spent ? done : Loc.T($"{done} Not {string.Join(Loc.T(" or "), untried.Select(Categories.Adverb))} yet.");
+        return Loc.T($"Shaken {string.Join(Loc.T(" and "), tried.Select(Categories.Adverb))}.");
     }
 
     void StartLesson()
@@ -377,6 +417,10 @@ public partial class CounterPhase : Phase
     public override void _Process(double delta)
     {
         var level = _shake.Level;
+        if (!_shake.Dragging) _holdMax = Core.Shake.Still;
+        if (_shake.Dragging && level > Core.Shake.Still && !Concluded) GiveEar(level, delta);
+        // Only a strength the ear's been given tells anything: the rest of this is about what's heard.
+        if (_shake.Dragging && level > Core.Shake.Still && !GameState.Listened(_visit, Check.Shaking(level, _magnet))) level = Core.Shake.Still;
         if (_shake.Dragging && level > Core.Shake.Still)
         {
             var key = (level, _magnet);
@@ -385,7 +429,6 @@ public partial class CounterPhase : Phase
             if (before < TryTime && _shaken[key] >= TryTime)
             {
                 _hearing.Tried(level, _magnet);
-                Handled();
                 // A goblin charges for every strength after the first.
                 if (_visit.Shook(level, _rng) is string up && !Concluded)
                 {
@@ -415,9 +458,14 @@ public partial class CounterPhase : Phase
             _rot.Text = Concluded ? "" : _rotten >= State.ShakeLimit(_visit.Seller) ? Loc.T("Coming apart: no more shaking")
                 : Loc.T($"Rotten: {State.ShakeLimit(_visit.Seller) - _rotten:0.0}s of shaking left");
         string tried = TriedSoFar();
+        bool earDone = !State.ListensFree(_visit) && State.ListensLeft == 0;
         _hint.Text = Busy || Concluded ? ""
-            : _shake.HighEnough && State.CanDrop ? Loc.T("High enough: let go to drop it.")
+            : _shake.HighEnough && State.CanDrop ? earDone && !GameState.Listened(_visit, Check.Dropping) ? Loc.T("Your ear's done for today: a drop would tell you nothing.")
+                : Loc.T("High enough: let go to drop it.")
+            : _shake.Dragging && _shake.Level > Core.Shake.Still && _shake.Level < _holdMax && !GameState.Listened(_visit, Check.Shaking(_shake.Level, _magnet))
+                ? Loc.T("To listen more gently, set it down and pick it up again.")
             : _shake.Dragging ? ""
+            : earDone && tried == "" ? Loc.T("Your ear's done for today: trade on what you know.")
             : _shake.Hover && tried == "" ? State.CanDrop ? Loc.T("Drag to shake it. Lift it high and let go to drop it.") : Loc.T("Drag to shake it, gently or firmly: mind your back.")
             : _magnet ? Loc.T("Lodestone on: iron can't move")
             : tried != "" ? tried
@@ -433,6 +481,92 @@ public partial class CounterPhase : Phase
         }
         _timer.Text = State.Impatient(_visit.Seller) && !Concluded ? $"{Math.Max(0, Math.Ceiling(_patience)):0}" : "";
         _timer.Modulate = _patience <= 5 ? new Color(1, 1, 1, 0.6f + 0.4f * MathF.Sin((float)_patience * 12f)) : Colors.White;
+    }
+
+    /// <summary>
+    /// The ear (0.36): a strength not yet tried on this chest is opened for a listen once it's been held a moment. In one
+    /// hold the ear follows the hardest shake so far (winding down from a hard shake isn't a gentle one: set the chest
+    /// down and pick it up again for that), so nothing is spent by accident. With no listens left, a new strength tells
+    /// nothing.
+    /// </summary>
+    void GiveEar(Shake level, double delta)
+    {
+        var check = Check.Shaking(level, _magnet);
+        if (level > _holdMax && GameState.Listened(_visit, check)) _holdMax = level;
+        if (GameState.Listened(_visit, check) || level < _holdMax) return;
+        if (_holding != (level, _magnet))
+        {
+            _holding = (level, _magnet);
+            _held = 0;
+        }
+        if (_shake.HandSpeed >= ShakeBox.SpeedOf(level)) _held += delta;
+        if (_held < ListenHold) return;
+        _held = 0;
+        if (!State.Listen(_visit, check))
+        {
+            EarSpent();
+            return;
+        }
+        _holdMax = level;
+        Handled();
+        Listened();
+    }
+
+    /// <summary>A listen's been spent on this chest (or given freely, in a lesson): the meter, and Bram's word the first times.</summary>
+    void Listened()
+    {
+        RefreshEar();
+        if (State.ListensFree(_visit)) return;
+        Sfx.Play("tick", 0.8f, -10);
+        // The panel jumps as one goes, so it's seen from the corner of the eye while the chest is in hand.
+        _ear.Scale = Vector2.One * 1.18f;
+        _ear.CreateTween().TweenProperty(_ear, "scale", Vector2.One, 0.25f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+        FloatText("-1", new Vector2(EarX + EarW - 40, 112), Palette.Gold, 24);
+        if (State.ListensLeft == 0) Teach("ear_out");
+        else if (State.ListensLeft <= 2 && State.Queue.Count > 0) Teach("ear_low");
+        else Teach("ear");
+    }
+
+    /// <summary>No listens left, and something new was tried: say so (not over and over).</summary>
+    void EarSpent()
+    {
+        double now = Time.GetTicksMsec() / 1000.0;
+        if (now - _earNoted < 2.5) return;
+        _earNoted = now;
+        FloatText(Loc.T("No listens left today"), new Vector2(556, 250), Palette.Warn, 24);
+        Sfx.Play("lose", 1.3f, -12);
+        Teach("ear_out");
+    }
+
+    /// <summary>The ear's panel beside the chest, and its line on the slip's foot (beside who's still waiting: the two are the day's plan).</summary>
+    void RefreshEar()
+    {
+        if (_ear == null) return;
+        bool free = State.ListensFree(_visit);
+        int left = State.ListensLeft;
+        _ear.Visible = !Concluded;
+        _earCount.Text = free ? "" : $"{left}/{State.Listens}";
+        _earCount.AddThemeColorOverride("font_color", left == 0 ? Palette.Bad : left <= 2 ? Palette.Warn : Palette.Text);
+        _earNote.Text = free ? Loc.T("A lesson: listen freely") : "";
+        _earPips.Visible = !free;
+        _earPips.QueueRedraw();
+        if (_earText == null) return;
+        _earText.Text = Concluded || free ? "" : left == 0 ? Loc.T("No listens left") : Loc.Plural(left, $"{left} listen left", $"{left} listens left");
+        _earText.AddThemeColorOverride("font_color", left == 0 ? Palette.Bad.Darkened(0.35f) : Palette.InkMuted);
+    }
+
+    /// <summary>The ear's pips, in a row: gold while a listen's left (orange for the last two), hollow once it's spent.</summary>
+    void DrawEar(Painter p)
+    {
+        int all = State.Listens, left = State.ListensLeft;
+        // Thirteen at most (the kettle and the screen): closer together past ten, so the row always fits before the count.
+        float pitch = all > 10 ? 12 : 14, size = pitch - 4;
+        for (int i = 0; i < all; i++)
+        {
+            var box = new Rect2(i * pitch, 0, size, 12);
+            p.DrawRect(box, i < left ? left <= 2 ? Palette.Warn : Palette.Gold : new Color("#120e1a"));
+            p.DrawRect(box, i < left ? Palette.Gold.Darkened(0.45f) : Palette.PanelBorder, false, 2);
+        }
     }
 
     public override void _UnhandledInput(InputEvent e)
@@ -717,6 +851,9 @@ public partial class CounterPhase : Phase
         panel.AddChild(_pass);
         _footer = UiKit.MakeLabel("", 16, Palette.InkMuted).Wrapped().Place(PanelX, 648, PanelW, 44);
         panel.AddChild(_footer);
+        // The ear (0.36): what's left of the day's listens, beside who's still waiting: the two together are the day's plan.
+        _earText = UiKit.MakeLabel("", 16, Palette.InkMuted, HorizontalAlignment.Right).Place(PanelX + 170, 648, PanelW - 170, 20);
+        panel.AddChild(_earText);
 
         int guess = Math.Max(1, _visit.Ask > 0 ? Money.Round(_visit.Ask * 0.55f) : Money.Round(_slip.Worth * 0.5f));
         _slider.MaxValue = OfferCeiling(_slip.Worth);
@@ -887,6 +1024,7 @@ public partial class CounterPhase : Phase
 
         int left = State.Queue.Count;
         _footer.Text = left == 0 ? Loc.T("Last customer today.") : Loc.T($"{left} more waiting today.");
+        RefreshEar();
     }
 
     /// <summary>
@@ -1128,7 +1266,15 @@ public partial class CounterPhase : Phase
     void OnLanded(float height)
     {
         if (height < ShakeBox.DropHeight || Concluded || Busy) return;
+        // The drop is a listen too (0.36): with none left, it lands and tells you nothing (and nothing breaks).
+        if (!State.Listen(_visit, Check.Dropping))
+        {
+            Sfx.Play("thud", 0.9f, -2);
+            EarSpent();
+            return;
+        }
         Handled();
+        Listened();
         if (_visit.Chest.Sealed)
         {
             // Chained tight: no boom, nothing breaks. All it tells you is how heavy it is.

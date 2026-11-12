@@ -374,8 +374,12 @@ public partial class DuesPhase : Phase
         string ahead = State.WeeksPaid < Guild.Weeks ? Loc.T($"Next week the Guild wants {next}g: in {Guild.DaysPerWeek} days.")
             : State.NextDueWeek > State.Week + 1 ? Loc.T($"The Guild won't be back until week {State.NextDueWeek}.")
             : Loc.T($"The Guild's interest next week: {next}g.");
-        panel.AddChild(UiKit.MakeLabel(ahead, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 92, PanelW, 30));
-        if (note != null) panel.AddChild(UiKit.MakeLabel(note, 16, Palette.Warn, HorizontalAlignment.Center).Place(0, 140, PanelW, 20));
+        panel.AddChild(UiKit.MakeLabel(ahead, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 88, PanelW, 30));
+        // The road inward (0.36): the due paid, the shop trades a market further in from the morning.
+        if (State.MovedFrom > 0)
+            panel.AddChild(UiKit.MakeLabel(Loc.T($"The Guild's carters will have the shop at {ShopTiers.Name(State.Tier)} by morning."), 16, Palette.Gold,
+                HorizontalAlignment.Center, outline: 4).Place(0, 126, PanelW, 20));
+        if (note != null) panel.AddChild(UiKit.MakeLabel(note, 16, Palette.Warn, HorizontalAlignment.Center).Place(0, 156, PanelW, 20));
         Put(UiKit.MakeButton(Loc.T("Good night"), Palette.Gold, 24, Next).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
         Part();
         if (State.DebtCleared)

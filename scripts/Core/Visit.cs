@@ -180,6 +180,15 @@ public sealed class Visit
     /// <summary>You've laid a hand on the chest (a shake, a drop, the lodestone): it's no longer sight unseen.</summary>
     public bool Handled { get; private set; }
 
+    /// <summary>
+    /// The checks made on this chest so far (<see cref="Check.Key"/>): each cost a listen the first time
+    /// (<see cref="GameState.Listen"/>, 0.36), and costs nothing again.
+    /// </summary>
+    public HashSet<string> Checks { get; } = new();
+
+    /// <summary>Listening to this chest costs nothing, whoever brought it (a chest the story puts in your hands).</summary>
+    public bool FreeListens { get; set; }
+
     float _unseen = 1;
     string _unseenNote;
 

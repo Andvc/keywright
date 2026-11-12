@@ -135,22 +135,20 @@ public partial class DayEndPhase : Phase
     {
         foreach (var child in _cards.GetChildren()) child.QueueFree();
         BuildSide();
-        // Bram's working purse, and (with a renovation on offer) the bigger one its shop would need.
-        var next = Upgrades.Available(State).FirstOrDefault(u => u.IsRenovation);
-        string keep = next == null ? Loc.T($"Keep about {State.WorkingPurse}g for tomorrow's chests.")
-            : Loc.T($"Keep about {State.WorkingPurse}g for chests ({State.ReserveIf(next)}g after renovating).");
-        _goldLabel.Text = State.UpgradesOpen ? Loc.T($"You have {State.Gold}g. {keep}") : Loc.T($"You have {State.Gold}g");
-        _header.Text = State.UpgradesOpen ? Loc.T("SPEND IT ON THE SHOP") : Loc.T("FIX UP THE STALL");
-        if (!State.UpgradesOpen)
+        // Bram's working purse: what tomorrow's chests want.
+        string keep = Loc.T($"Keep about {State.WorkingPurse}g for tomorrow's chests.");
+        _goldLabel.Text = Loc.T($"You have {State.Gold}g. {keep}");
+        // The Guild's Bookkeeping Engine first, when it's offered: it's the way to finish a won run quickly.
+        var offers = Upgrades.Available(State).OrderByDescending(u => u.Key == Upgrades.Engine).ThenBy(State.Cost).Take(6).ToList();
+        _header.Text = State.UpgradesOpen ? Loc.T("SPEND IT ON THE SHOP") : Loc.T("THE ROAD INWARD");
+        // At the stall there's nothing to build: the week's due is what moves it on (0.36).
+        if (!State.UpgradesOpen && offers.Count == 0)
         {
             _cards.AddChild(MakeGoal());
-            // Isolde's shelf is up before the stall has earned its keep.
+            // Isolde's shelf is up from the first day.
             BuildExhibition();
             return;
         }
-        // The Guild's Bookkeeping Engine first, when it's offered: it's the way to finish a won run quickly.
-        var offers = Upgrades.Available(State).OrderByDescending(u => u.Key == Upgrades.Engine).ThenByDescending(u => u.IsRenovation)
-            .ThenBy(State.Cost).Take(6).ToList();
         if (offers.Count == 0)
             _cards.AddChild(UiKit.MakeLabel(Loc.T("Nothing left to buy. The shop is complete."), 24, Palette.Muted, HorizontalAlignment.Center)
                 .Place(CardsX, CardsY + 80, 2 * CardW + CardGapX, 30));
@@ -262,7 +260,10 @@ public partial class DayEndPhase : Phase
         guild.AddChild(UiKit.MakeLabel(Money.Short(due), 32, enough ? Palette.Gold : Palette.Bad, outline: 4).Place(70, 28, 200, 40));
         string when = tonight ? Loc.T("tonight") : Loc.T($"end of day {State.Day + State.DaysToNextDue}");
         guild.AddChild(UiKit.MakeLabel(when, 16, Palette.Muted, HorizontalAlignment.Right).Place(180, 32, 176, 20));
-        if (!State.DebtCleared)
+        // What paying it brings: the next market inward (0.36), or, on the last, the end of the debt.
+        if (State.NextMarket > 0 && !State.PaidThisWeek)
+            guild.AddChild(UiKit.MakeLabel(Loc.T($"then {ShopTiers.Name(State.NextMarket)}"), 16, Palette.Gold.Darkened(0.1f), HorizontalAlignment.Right).Place(130, 52, 226, 20));
+        else if (!State.DebtCleared)
             guild.AddChild(UiKit.MakeLabel(Loc.T($"debt left {State.DebtLeft}g"), 16, Palette.Muted, HorizontalAlignment.Right).Place(160, 52, 196, 20));
 
         // Enough for everything that's left: finish now, however early.
@@ -410,11 +411,24 @@ public partial class DayEndPhase : Phase
         var card = UiKit.MakePanel(Palette.Gold.Darkened(0.2f)).Place(CardsX, CardsY, w, h);
         card.AddChild(new TextureRect { Texture = ArtTexture.Load("res://assets/ui/icons/shop2.png"), MouseFilter = Control.MouseFilterEnum.Ignore }
             .Place(20, 20, 48, 48));
-        card.AddChild(UiKit.MakeLabel(Loc.T("Earn your keep"), 24, Palette.Gold).Place(84, 16, 600, 30));
-        card.AddChild(UiKit.MakeLabel(Loc.T($"Once the stall has earned {GameState.UpgradesAt}g, all told, you can move on to Thornwick Market: more customers, richer chests and a shelf for your best finds."), 16, Palette.Muted)
+        string market = ShopTiers.Name(Math.Min(ShopTiers.Max, State.Tier + 1));
+        // Before Vane's said what's owed, nothing names the due: the week at the crossroads is for learning the trade.
+        if (!State.GuildIntroduced)
+        {
+            card.AddChild(UiKit.MakeLabel(Loc.T("A week at the crossroads"), 24, Palette.Gold).Place(84, 16, 600, 30));
+            card.AddChild(UiKit.MakeLabel(Loc.T($"Learn the trade here, where chests are cheap. {market} is next along the road: more customers, richer chests and a shelf for your best finds."), 16, Palette.Muted)
+                .Wrapped().Place(84, 50, w - 110, 66));
+            return card;
+        }
+        int due = State.NextDue;
+        bool paid = State.PaidThisWeek;
+        card.AddChild(UiKit.MakeLabel(Loc.T($"Next: {market}"), 24, Palette.Gold).Place(84, 16, 600, 30));
+        card.AddChild(UiKit.MakeLabel(paid ? Loc.T($"The Guild's carters will have the stall at {market} by morning: more customers, richer chests and a shelf for your best finds.")
+            : Loc.T($"Pay the Guild's {due}g on the fifth night and its carters move the stall to {market}: more customers, richer chests and a shelf for your best finds."), 16, Palette.Muted)
             .Wrapped().Place(84, 50, w - 110, 44));
-        int earned = Math.Clamp(State.TotalEarned, 0, GameState.UpgradesAt);
-        float fill = earned / (float)GameState.UpgradesAt;
+        if (paid) return card;
+        float fill = Math.Clamp(State.Gold / (float)Math.Max(1, due), 0, 1);
+        bool enough = State.Gold >= due;
         card.AddChild(new Painter(p =>
         {
             p.DrawRect(new Rect2(0, 0, w - 104, 24), new Color("#120e1a"));
@@ -422,7 +436,7 @@ public partial class DayEndPhase : Phase
             p.DrawRect(new Rect2(0, 0, (w - 104) * fill, 5), Palette.Gold.Lightened(0.2f));
             p.DrawRect(new Rect2(0, 0, w - 104, 24), Palette.PanelBorder, false, 3);
         }) { Position = new Vector2(84, 112) });
-        card.AddChild(UiKit.MakeLabel(Loc.T($"The chests have brought in {State.TotalEarned}g of {GameState.UpgradesAt}g"), 16, Palette.Text, HorizontalAlignment.Center,
+        card.AddChild(UiKit.MakeLabel(enough ? Loc.T($"You have the {due}g") : Loc.T($"You have {State.Gold}g of the {due}g"), 16, Palette.Text, HorizontalAlignment.Center,
             outline: 4).Place(84, 114, w - 104, 20));
         return card;
     }
@@ -437,7 +451,7 @@ public partial class DayEndPhase : Phase
         bool affordable = State.Gold >= cost, engine = upgrade.Key == Upgrades.Engine;
         int left = State.Gold - cost;
         string warning = engine ? null : State.ShortNote(cost, upgrade);
-        var card = UiKit.MakePanel(upgrade.IsRenovation || engine ? Palette.Gold : Palette.PanelBorder).Place(x, y, CardW, CardH);
+        var card = UiKit.MakePanel(engine ? Palette.Gold : Palette.PanelBorder).Place(x, y, CardW, CardH);
         card.AddChild(new TextureRect
         {
             Texture = ArtTexture.Load($"res://assets/ui/icons/{upgrade.Key}.png"),
@@ -445,7 +459,7 @@ public partial class DayEndPhase : Phase
         }.Place(12, 12, 48, 48));
         // A long name steps down a size, so the price beside it never covers it.
         bool small = upgrade.Name.Length > 16 || UiKit.TextWidth(upgrade.Name, 24) > 216;
-        card.AddChild(UiKit.MakeLabel(upgrade.Name, small ? 16 : 24, upgrade.IsRenovation || engine ? Palette.Gold : Palette.Text)
+        card.AddChild(UiKit.MakeLabel(upgrade.Name, small ? 16 : 24, engine ? Palette.Gold : Palette.Text)
             .Place(70, small ? 12 : 8, 216, 30));
         card.AddChild(UiKit.MakeLabel(upgrade.Blurb, 16, Palette.Muted).Wrapped().Place(70, 40, CardW - 82, 66));
         if (affordable)
@@ -491,15 +505,7 @@ public partial class DayEndPhase : Phase
         Game.Hud.SetGold(State.Gold);
         Game.Hud.SetDay(State.Day, State.Tier);
         Sfx.PlayGroup("pay");
-        if (upgrade.IsRenovation)
-        {
-            Sfx.Play("fanfare", 1f, -4);
-            Game.Flash(Palette.Gold, 0.35f);
-            Game.Shake(0.3f);
-            FloatText($"{ShopTiers.Name(State.Tier)}!", new Vector2(640, 150), Palette.Gold, 40);
-            Unlocked();
-        }
-        else if (upgrade.SynergySlots > 0)
+        if (upgrade.SynergySlots > 0)
         {
             RefreshSynergyButton();
             if (Teach("slots")) Pulse(_synergies);

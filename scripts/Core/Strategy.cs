@@ -34,6 +34,57 @@ public static class Strategy
         return Rushed(visit, state) || visit.ShakeFee > 0 ? new[] { Shake.Gentle, Shake.Hard } : Every;
     }
 
+    /// <summary>
+    /// The next check a careful player spends a listen on (0.36, <see cref="GameState.Listen"/>), given what the chest has
+    /// told them so far; null when nothing more is worth one. The first shake is the one that hears most: hard, which
+    /// stirs everything (firmly, where a hard shake isn't to be had or straw muffles a strength; the one strength a
+    /// rotten chest stands). Then only what that shake couldn't tell: if steel clanked, the gentler shake that stirs the
+    /// delicate things without it; through straw, the hard shake that reaches the weapons; a gentle one for sand, from
+    /// someone who deals in it. Then the drop, where false bottoms are common enough to be worth it (or there are
+    /// listens to spare), and the lodestone where fakes are about.
+    /// </summary>
+    /// <param name="spare">There are listens to spare today: make the checks that only sometimes pay.</param>
+    public static Check? NextCheck(Visit visit, Hearing hearing, GameState state = null, bool tools = true, bool spare = false)
+    {
+        var seller = visit.Seller;
+        int tier = state?.Tier ?? seller.Tier;
+        bool hard = (state?.CanShakeHardAt(seller) ?? !seller.Packhorse) && !(state?.MindsHardShake(seller) ?? seller.HatesHardShake);
+        bool Tried(Shake level) => hearing.HasTried(level, false);
+        bool packed = visit.Chest.Packed && !visit.Chest.Unmasked;
+        float limit = state?.ShakeLimit(seller) ?? seller.ShakeLimit;
+        bool oneStrength = limit > 0 && limit < 2 * seller.ShakeLimit;
+        if (!Every.Any(Tried))
+        {
+            if (oneStrength) return Check.Shaking(DelicateShare(visit) > 0.5f ? Shake.Gentle : hard ? Shake.Hard : Shake.Firm);
+            return Check.Shaking(packed || !hard ? Shake.Firm : Shake.Hard);
+        }
+        if (!oneStrength)
+        {
+            // Steel clanked: the delicate things are drowned, and the shake that stirs them without it is worth a listen.
+            var quiet = packed ? Shake.Firm : Shake.Gentle;
+            if (MaybeDrowned(visit, hearing) && !Tried(quiet)) return Check.Shaking(quiet);
+            // Through straw a firm shake only reaches what a gentle one would: the weapons want a hard one.
+            if (packed && hard && !Tried(Shake.Hard)) return Check.Shaking(Shake.Hard);
+            // Sand pours at the gentlest shake, where parchment never stirs: worth a listen from someone who deals in it.
+            if (!packed && !Tried(Shake.Gentle) && hearing.HeardAny(Category.Scrolls) && seller.Fakes.Contains(Category.Scrolls))
+                return Check.Shaking(Shake.Gentle);
+        }
+        // (The King's game and a contest are won by an exact read: the drop is part of one.)
+        if (ShouldDrop(visit, hearing, tier, state) &&
+            (spare || seller.SlipPrice || visit.Contest || (state?.HiddenChance(seller) ?? seller.HiddenChance) >= DropWorth)) return Check.Dropping;
+        if (tools && state != null && (spare || FakesAbout(visit, state)))
+            foreach (var level in MagnetLevels(visit, hearing, state))
+                if (!hearing.HasTried(level, true)) return Check.Shaking(level, magnet: true);
+        return null;
+    }
+
+    /// <summary>A false bottom is likely enough in this seller's chests to be worth a listen on the drop (Corvin's, Brass's, the Maw's hoard).</summary>
+    const float DropWorth = 0.2f;
+
+    /// <summary>Gilded iron's about: this seller deals in it, or it's a season of forgers.</summary>
+    static bool FakesAbout(Visit visit, GameState state) =>
+        visit.Seller.Fakes.Any(k => Categories.Get(k).FakeIron) || state.Under(Challenges.Forgers);
+
     /// <summary>The gentlest shake that stirs this kind in this chest (straw muffles a strength; 4: never).</summary>
     static int Needs(Visit visit, Category kind) => (int)Categories.Get(kind).StirsAt + (visit.Chest.Packed && !visit.Chest.Unmasked ? 1 : 0);
 
@@ -314,7 +365,7 @@ public static class Strategy
         var seller = visit.Seller;
         // The mark went cold: it isn't the seller's to sell, and it won't open for whoever buys it.
         if (visit.Chest.Stolen && visit.Handled) return false;
-        if (seller.SlipPrice) return hearing == null || Recorded(visit, state) || (hearing.HasTried(Shake.Hard, false) && hearing.Dropped);
+        if (seller.SlipPrice) return hearing == null || Recorded(visit, state) || (HeardAll(visit, hearing, state?.Tier ?? seller.Tier) && hearing.Dropped);
         if (seller.Gaze > 0) return worth - visit.Ask > (state?.Queue.Sum(v => v.Price) ?? 0) * (seller.Gaze - 1) * GazeBuys;
         return worth > visit.Ask * (1 - seller.Wager * PerfectOdds);
     }
@@ -357,7 +408,7 @@ public static class Strategy
     /// <summary>Whether to buy a tool someone's brought to the counter, at their price: as the day's end would decide it.</summary>
     public static bool WantsOffer(GameState state, Upgrade upgrade, int price)
     {
-        int reserve = Reserve(state, upgrade) + Saving(state);
+        int reserve = Reserve(state, upgrade);
         if (price >= 1000) reserve += state.DueFor(state.Week + (state.PaidThisWeek ? 2 : 1));
         return state.Gold - price >= reserve;
     }
@@ -432,11 +483,11 @@ public static class Strategy
         return last * GameState.Tried * 0.33f / 4;
     }
 
-    /// <summary>The last day a careful player would still be trading at Thornwick (the move to Crownhold, about day 17).</summary>
-    public static int ThornwickUntil(GameState state) => state.Tier > 2 ? state.Day : Math.Max(state.Day, 16);
+    /// <summary>The last day the shop trades at Thornwick: its week's fifth (0.36: the season's second week is Thornwick's).</summary>
+    public static int ThornwickUntil(GameState state) => state.Tier > 2 ? state.Day : Math.Max(state.Day, 2 * Guild.DaysPerWeek);
 
-    /// <summary>The shop a careful player would have on a day (the sim's medians, 0.30: Thornwick by day 8, Crownhold 17, the Emporium 26).</summary>
-    static int ExpectedTier(GameState state, int day) => Math.Max(state.Tier, day >= 26 ? 4 : day >= 17 ? 3 : day >= 8 ? 2 : 1);
+    /// <summary>The market the shop trades at on a day, while the dues are paid (0.36: a week each; the Emporium from the fourth on).</summary>
+    static int ExpectedTier(GameState state, int day) => Math.Max(state.Tier, Math.Clamp((day - 1) / Guild.DaysPerWeek + 1, 1, ShopTiers.Max));
 
     /// <summary>
     /// What to do with a chest in the back room tonight: return it to its owner (the Wardens' finder's share), or sell it
@@ -485,33 +536,22 @@ public static class Strategy
     /// </remarks>
     public static int Reserve(GameState state, Upgrade upgrade = null, CurioDef curio = null)
     {
-        int tier = Math.Max(upgrade?.SetsTier ?? 0, state.Tier);
-        int day = BadDay[tier] * (curio != null ? 2 : 1);
-        return state.ReserveIf(upgrade, curio) + Math.Max(0, state.NextDue - Math.Max(0, state.DaysToNextDue - 1) * day);
+        int day = BadDay[state.Tier] * (curio != null ? 2 : 1), purse = state.ReserveIf(upgrade, curio);
+        // 0.36: the Guild's night wants the due and, past it, a working purse at the market it moves the shop to.
+        int ahead = state.NextMarket > 0 && !state.PaidThisWeek ? Math.Max(0, state.WorkingPurseAt(state.NextMarket) - purse) : 0;
+        return purse + Math.Max(0, state.NextDue + ahead - Math.Max(0, state.DaysToNextDue - 1) * day);
     }
 
     /// <summary>
-    /// Whether to buy an upgrade now: a renovation is judged by what the bigger shop will make before the Guild comes;
-    /// anything big has to leave the due after next as well (it pays back over weeks, not days).
+    /// Whether to buy an upgrade now: anything big has to leave the due after next as well (it pays back over weeks, not
+    /// days). (Until 0.36 the moves inward were bought too, and saved for before anything else.)
     /// </summary>
     public static bool Affordable(GameState state, Upgrade upgrade)
     {
-        int reserve = Reserve(state, upgrade) + (upgrade.IsRenovation ? 0 : Saving(state)), cost = state.Cost(upgrade);
-        // A move inward, when the shop as it is couldn't make the next due before the Guild comes: the move is the way to
-        // pay it, so only the bigger shop's working purse is kept back.
-        if (upgrade.IsRenovation && !CouldStay(state)) reserve = state.ReserveIf(upgrade);
-        if (!upgrade.IsRenovation && cost >= 1000) reserve += state.DueFor(state.Week + (state.PaidThisWeek ? 2 : 1));
+        int reserve = Reserve(state, upgrade), cost = state.Cost(upgrade);
+        if (cost >= 1000) reserve += state.DueFor(state.Week + (state.PaidThisWeek ? 2 : 1));
         return state.CanBuy(upgrade) && state.Gold - cost >= reserve;
     }
-
-    /// <summary>Whether the shop as it is could make the next due before the Guild comes (a usual day being twice a bad one).</summary>
-    static bool CouldStay(GameState state) => state.Gold + state.DaysToNextDue * 2 * BadDay[state.Tier] >= state.NextDue;
-
-    /// <summary>
-    /// What a careful player puts by for the next move inward before spending on anything else: each move multiplies
-    /// what a customer is worth several times over.
-    /// </summary>
-    static int Saving(GameState state) => Upgrades.Available(state).FirstOrDefault(u => u.IsRenovation) is Upgrade next ? state.Cost(next) : 0;
 
     /// <summary>
     /// About what each curio adds to a careful player's run on its own, a fifth of the hundredths it adds to what the run

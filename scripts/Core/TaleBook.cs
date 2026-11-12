@@ -1486,9 +1486,11 @@ public static partial class TaleBook
         if (!Enabled) return new List<string>();
         var rng = new Random(unchecked(seed * 31337 + 7));
         var drawn = All.Where(t => t.Place == TalePlace.Always).Select(t => t.Key).ToList();
-        // 0.30: three of each place's tales (of seven to nine) over the longer season; 0.32: all three of the Emporium's, so
-        // the late game has its own stories. The tale of whoever minds the stall is added by the run (TaleBook.Own).
-        foreach (var (place, count) in new[] { (TalePlace.Brindle, 3), (TalePlace.Thornwick, 3), (TalePlace.Crownhold, 3), (TalePlace.Emporium, 3) })
+        // 0.36: a season of four weeks holds two of Brindle's tales and two of Thornwick's (of seven or eight), one of
+        // Crownhold's nine and one of the Emporium's: about a beat a day with the campaign's, not two (0.30 to 0.35 drew
+        // three of each over seven weeks, and the fresh-eyes playtest met eight tales in ten days, most asking for money).
+        // The tale of whoever minds the stall is added by the run (TaleBook.Own).
+        foreach (var (place, count) in new[] { (TalePlace.Brindle, 2), (TalePlace.Thornwick, 2), (TalePlace.Crownhold, 1), (TalePlace.Emporium, 1) })
             drawn.AddRange(All.Where(t => t.Place == place).OrderBy(_ => rng.Next()).Take(count).Select(t => t.Key));
         drawn.AddRange(Forced.Where(k => Exists(k) && !drawn.Contains(k)));
         return drawn;
