@@ -45,6 +45,9 @@ public partial class Main : Node2D
     /// <summary>Every run so far: for the title screen and the end of a run.</summary>
     public Profile Profile { get; private set; }
     public Sfx Sfx { get; private set; }
+
+    /// <summary>The music and the ambience under it (0.36).</summary>
+    public Music Music { get; private set; }
     public Hud Hud { get; private set; }
 
     readonly Random _rng = new();
@@ -287,6 +290,8 @@ public partial class Main : Node2D
             QuitGame();
             return;
         }
+        Music = new Music();
+        AddChild(Music);
         Hud = new Hud();
         AddChild(Hud);
 
@@ -484,6 +489,7 @@ public partial class Main : Node2D
         _bot?.QueueFree();
         _bot = null;
         Sfx?.Release();
+        Music?.Release();
         GetTree().ProcessFrame -= Platform.Tick;
         Platform.Stop();
         for (int i = 0; i < 3; i++) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
@@ -1187,6 +1193,8 @@ public partial class Main : Node2D
         }
         _phase = next;
         AddChild(next);
+        // The music and the ambience for where we are now (0.36).
+        Music?.For(next, State);
         CreateTween().TweenProperty(_fade, "color:a", 0f, 0.22f);
         _bot?.OnPhase(next);
     }

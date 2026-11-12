@@ -21,6 +21,10 @@ architecture in `tools/import_art.py`); the importer still draws those for anyth
 
 ## Font and sound
 
+The music (a theme for the title and the crossroads, one for each market further in, the night, the Guild's night and
+the treasury) and the ambience under it (0.36) are written out in `tools/music/make.py` and rendered by
+`tools/music/synth.py` into `assets/audio/music/` and `assets/audio/ambience/`: nobody else's notes or recordings.
+
 The Heartsongs' songs, and the other synthesized sounds (the slosh, the hum, the opening's stings), are made in code at
 startup (`scripts/Audio/Sfx.cs`).
 

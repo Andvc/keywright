@@ -98,6 +98,9 @@ public partial class TalkPhase : Phase
         Next();
     }
 
+    /// <summary>A knock at the back door or a letter after dark: the night's music, not the market's.</summary>
+    public bool AtNight => _talk?.Night ?? false;
+
     public override void _UnhandledInput(InputEvent e)
     {
         if (!e.IsActionPressed(Controls.Act) || _leaving) return;

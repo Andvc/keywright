@@ -59,6 +59,7 @@ public partial class CreditsView : Node2D
         Heading(Loc.T("Sounds and lettering"));
         Line(Loc.T("Kenney (kenney.nl), CC0: the Kenney Mini font, and the Impact Sounds, RPG Audio, Casino Audio and Interface " +
                    "Sounds packs. The Heartsongs and the other music-box sounds are made in code."));
+        Line(Loc.T("The music and the ambience under it are written and played in code too: every note is in the game's own files."));
         Line(Loc.T("Galmuri 9 by Lee Minseo (quiple/galmuri), SIL Open Font License 1.1: the letters for translations."));
         Line(Loc.T("Fusion Pixel 12px by TakWolf (TakWolf/fusion-pixel-font), SIL Open Font License 1.1, with glyphs from Ark " +
                    "Pixel, Cubic 11 and Galmuri: the letters for Japanese and Chinese."));

@@ -49,6 +49,15 @@ public static class Settings
     public static float Volume { get; set; } = 0.8f;
     public static float Effects { get; set; } = 1f;
     public static float Songs { get; set; } = 1f;
+
+    /// <summary>0 to 1: the music and the ambience under it (0.36).</summary>
+    public static float Music { get; set; } = 0.6f;
+
+    /// <summary>How far the music has stepped back just now (a Heartsong singing): <see cref="Audio.Music.Duck"/>.</summary>
+    public static float MusicDuckDb { get; set; }
+
+    /// <summary>Whether everything's silenced just now (the window in the background, when that's asked for).</summary>
+    public static bool Muted { get; private set; }
     public static bool MuteInBackground { get; set; }
 
     /// <summary>The language, as a locale ("en", "zh_CN"...), or empty to follow the system's.</summary>
@@ -103,6 +112,7 @@ public static class Settings
             Volume = Math.Clamp(Get(file, "audio", "volume", Volume), 0f, 1f);
             Effects = Math.Clamp(Get(file, "audio", "effects", Effects), 0f, 1f);
             Songs = Math.Clamp(Get(file, "audio", "songs", Songs), 0f, 1f);
+            Music = Math.Clamp(Get(file, "audio", "music", Music), 0f, 1f);
             MuteInBackground = Get(file, "audio", "mute_in_background", MuteInBackground);
             Language = Get(file, "game", "language", Language);
             Tips = Get(file, "game", "tips", Tips);
@@ -130,6 +140,7 @@ public static class Settings
         file.SetValue("audio", "volume", Volume);
         file.SetValue("audio", "effects", Effects);
         file.SetValue("audio", "songs", Songs);
+        file.SetValue("audio", "music", Music);
         file.SetValue("audio", "mute_in_background", MuteInBackground);
         file.SetValue("game", "language", Language);
         file.SetValue("game", "tips", Tips);
@@ -149,10 +160,11 @@ public static class Settings
         ApplyDisplay();
     }
 
-    /// <summary>The buses the sounds play on (Effects and Songs, both into Master), at their volumes.</summary>
+    /// <summary>The buses the sounds play on (Effects, Songs and Music, all into Master), at their volumes.</summary>
     public static void ApplyAudio(bool muted = false)
     {
-        foreach (string bus in new[] { EffectsBus, SongsBus })
+        Muted = muted;
+        foreach (string bus in new[] { EffectsBus, SongsBus, MusicBus })
         {
             if (AudioServer.GetBusIndex(bus) >= 0) continue;
             AudioServer.AddBus();
@@ -163,9 +175,10 @@ public static class Settings
         SetBus("Master", muted ? 0 : Volume);
         SetBus(EffectsBus, Effects);
         SetBus(SongsBus, Songs);
+        SetBus(MusicBus, Music * Mathf.DbToLinear(MusicDuckDb));
     }
 
-    public const string EffectsBus = "Effects", SongsBus = "Songs";
+    public const string EffectsBus = "Effects", SongsBus = "Songs", MusicBus = "Music";
 
     static void SetBus(string name, float volume)
     {
@@ -222,6 +235,7 @@ public static class Settings
         Volume = 0.8f;
         Effects = 1f;
         Songs = 1f;
+        Music = 0.6f;
         MuteInBackground = false;
         Tips = true;
         PauseInBackground = true;

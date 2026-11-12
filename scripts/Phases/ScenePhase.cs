@@ -57,6 +57,9 @@ public partial class ScenePhase : Phase
         _backdrop = backdrop;
     }
 
+    /// <summary>The picture behind the scene ("guild", "vault"...), or null for the shop: the music goes by it.</summary>
+    public string Backdrop => _backdrop;
+
     /// <summary>Whose place a speaker takes: Mara is the Hooded Woman, with her hood down.</summary>
     static string Place(string speaker) => speaker == Story.Mara ? Story.Hood : speaker;
 

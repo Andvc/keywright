@@ -62,7 +62,9 @@ public partial class Sfx : Node
             GD.PushWarning($"Unknown sound '{name}'");
             return;
         }
-        // A Heartsong's song plays on the songs' bus, everything else on the effects' (each has its own volume).
+        // A Heartsong's song plays on the songs' bus, everything else on the effects' (each has its own volume); and the
+        // music steps back while it sings.
+        if (name.StartsWith("song_")) Main.Instance?.Music?.Duck(2.4);
         PlayStream(stream, pitch, volumeDb, name.StartsWith("song_") ? Settings.SongsBus : Settings.EffectsBus);
     }
 

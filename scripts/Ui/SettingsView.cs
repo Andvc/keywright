@@ -184,20 +184,25 @@ public partial class SettingsView : Control
             Settings.Volume = v;
             Settings.ApplyAudio();
         });
-        Slider(Loc.T("Sound effects"), 1, Settings.Effects, v =>
+        Slider(Loc.T("Music"), 1, Settings.Music, v =>
+        {
+            Settings.Music = v;
+            Settings.ApplyAudio();
+        });
+        Slider(Loc.T("Sound effects"), 2, Settings.Effects, v =>
         {
             Settings.Effects = v;
             Settings.ApplyAudio();
         });
-        Slider(Loc.T("Heartsongs' songs"), 2, Settings.Songs, v =>
+        Slider(Loc.T("Heartsongs' songs"), 3, Settings.Songs, v =>
         {
             Settings.Songs = v;
             Settings.ApplyAudio();
         });
-        Choice(Loc.T("Mute in the background"), 3, () => OnOff(Settings.MuteInBackground), () => Settings.MuteInBackground = !Settings.MuteInBackground,
+        Choice(Loc.T("Mute in the background"), 4, () => OnOff(Settings.MuteInBackground), () => Settings.MuteInBackground = !Settings.MuteInBackground,
             Loc.T("Silence while another window has the focus."));
-        Label(Loc.T("Item sounds"), 4, Loc.T("Which sound each kind of thing makes: every one is the sound you'd expect."));
-        _page.AddChild(UiKit.MakeButton(Loc.T("Choose..."), Palette.PanelBorder.Lightened(0.2f), 16, OpenSounds).Place(ControlX, Row(4), ControlW, 36));
+        Label(Loc.T("Item sounds"), 5, Loc.T("Which sound each kind of thing makes: every one is the sound you'd expect."));
+        _page.AddChild(UiKit.MakeButton(Loc.T("Choose..."), Palette.PanelBorder.Lightened(0.2f), 16, OpenSounds).Place(ControlX, Row(5), ControlW, 36));
     }
 
     void BuildControls()
@@ -320,6 +325,7 @@ public partial class SettingsView : Control
                 Settings.Volume = 0.8f;
                 Settings.Effects = 1f;
                 Settings.Songs = 1f;
+                Settings.Music = 0.6f;
                 Settings.MuteInBackground = false;
                 foreach (var kind in Enum.GetValues<Core.Category>()) Settings.SetSoundSet(kind, 0);
                 Settings.ApplyAudio();
