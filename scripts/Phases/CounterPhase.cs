@@ -31,12 +31,6 @@ public partial class CounterPhase : Phase
     /// <summary>How long a hard shake a seller who hates them lets go before they mind.</summary>
     const double HardShakeTolerance = 0.2;
 
-    /// <summary>
-    /// A strength not yet tried on this chest is given the ear (and a listen spent on it, <see cref="GameState.Listen"/>)
-    /// once the chest has been moving that fast this long, all told, in one hold: a stray jerk on the way to another
-    /// strength costs nothing.
-    /// </summary>
-    const double ListenHold = 0.16;
 
     /// <summary>The slip's panel, and the line under its header that the Heartsong row takes over once one sings.</summary>
     Node2D _panel;
@@ -56,9 +50,7 @@ public partial class CounterPhase : Phase
     readonly Hearing _hearing = new();
     readonly Dictionary<(Shake, bool), double> _shaken = new();
     /// <summary>The strength being held for a listen, how long so far, and the hardest shake of this hold (a gentler one waits for the next).</summary>
-    (Shake Level, bool Magnet) _holding;
-    double _held, _earNoted = -9;
-    Shake _holdMax;
+    double _earNoted = -9;
     Label _earText, _earCount, _earNote;
     Painter _earPips;
     Control _ear;
@@ -239,7 +231,8 @@ public partial class CounterPhase : Phase
         float pipsAt = 12 + titleW + 10;
         // The pips and the count, or (in a lesson, where there's neither) the note that listening is free.
         _earW = Mathf.Max(340, pipsAt + Mathf.Max(State.Listens * EarPitch + 8 + 58, Mathf.Ceil(UiKit.TextWidth(lesson, 16)) + 4) + 12);
-        _earX = 558 - _earW / 2;
+        // Centred over the chest, but never under a seller's bubble at its widest (it reaches 432).
+        _earX = Mathf.Max(444, 558 - _earW / 2);
         _ear = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.35f)).Place(_earX, 62, _earW, 36));
         _ear.ZIndex = 10;
         _ear.PivotOffset = new Vector2(_earW / 2, 18);
@@ -303,7 +296,7 @@ public partial class CounterPhase : Phase
     {
         var tried = Levels.Where(level => _hearing.HasTried(level, _magnet)).ToList();
         if (tried.Count == 0) return "";
-        return Loc.T($"Shaken {string.Join(Loc.T(" and "), tried.Select(Categories.Adverb))}.");
+        return Loc.T($"Shaken {Sellers.Join(tried.Select(Categories.Adverb).ToList())}.");
     }
 
     void StartLesson()
@@ -429,8 +422,7 @@ public partial class CounterPhase : Phase
     public override void _Process(double delta)
     {
         var level = _shake.Level;
-        if (!_shake.Dragging) _holdMax = Core.Shake.Still;
-        if (_shake.Dragging && level > Core.Shake.Still && !Concluded) GiveEar(level, delta);
+        if (_shake.Dragging && !Concluded) GiveEar();
         // Only a strength the ear's been given tells anything: the rest of this is about what's heard.
         if (_shake.Dragging && level > Core.Shake.Still && !GameState.Listened(_visit, Check.Shaking(level, _magnet))) level = Core.Shake.Still;
         if (_shake.Dragging && level > Core.Shake.Still)
@@ -474,8 +466,6 @@ public partial class CounterPhase : Phase
         _hint.Text = Busy || Concluded ? ""
             : _shake.HighEnough && State.CanDrop ? earDone && !GameState.Listened(_visit, Check.Dropping) ? Loc.T("Your ear's done for today: a drop would tell you nothing.")
                 : Loc.T("High enough: let go to drop it.")
-            : _shake.Dragging && _shake.Level > Core.Shake.Still && _shake.Level < _holdMax && !GameState.Listened(_visit, Check.Shaking(_shake.Level, _magnet))
-                ? Loc.T("To listen more gently, set it down and pick it up again.")
             : _shake.Dragging ? ""
             : earDone && tried == "" ? Loc.T("Your ear's done for today: trade on what you know.")
             : _shake.Hover && tried == "" ? State.CanDrop ? Loc.T("Drag to shake it. Lift it high and let go to drop it.") : Loc.T("Drag to shake it, gently or firmly: mind your back.")
@@ -496,33 +486,32 @@ public partial class CounterPhase : Phase
     }
 
     /// <summary>
-    /// The ear (0.36): a strength not yet tried on this chest is opened for a listen once it's been held a moment. In one
-    /// hold the ear follows the hardest shake so far (winding down from a hard shake isn't a gentle one: set the chest
-    /// down and pick it up again for that), so nothing is spent by accident. With no listens left, a new strength tells
-    /// nothing.
+    /// The ear (0.36): a strength not yet tried on this chest is opened for a listen once the chest has really been
+    /// shaken at it for a moment (<see cref="ShakeBox.Dwell"/>: back and forth, at that speed, with nothing harder in
+    /// the last moment), so winding up, winding down, a lift or a carry spend nothing. With no listens left, a new
+    /// strength tells nothing.
     /// </summary>
-    void GiveEar(Shake level, double delta)
+    void GiveEar()
     {
-        var check = Check.Shaking(level, _magnet);
-        if (level > _holdMax && GameState.Listened(_visit, check)) _holdMax = level;
-        if (GameState.Listened(_visit, check) || level < _holdMax) return;
-        if (_holding != (level, _magnet))
+        foreach (var level in Levels)
         {
-            _holding = (level, _magnet);
-            _held = 0;
+            var check = Check.Shaking(level, _magnet);
+            if (GameState.Listened(_visit, check) || _shake.Dwell(level) < ListenHold(level)) continue;
+            if (!State.Listen(_visit, check))
+            {
+                EarSpent();
+                continue;
+            }
+            Handled();
+            Listened();
         }
-        if (_shake.HandSpeed >= ShakeBox.SpeedOf(level)) _held += delta;
-        if (_held < ListenHold) return;
-        _held = 0;
-        if (!State.Listen(_visit, check))
-        {
-            EarSpent();
-            return;
-        }
-        _holdMax = level;
-        Handled();
-        Listened();
     }
+
+    /// <summary>
+    /// How long a chest has to be really shaken at a strength before the ear's on it (<see cref="ShakeBox.Dwell"/>):
+    /// a moment for a hard or a firm shake, longer for a gentle one, which is also just what moving a chest about is.
+    /// </summary>
+    static double ListenHold(Shake level) => level == Core.Shake.Gentle ? 0.3 : level == Core.Shake.Firm ? 0.16 : 0.12;
 
     /// <summary>A listen's been spent on this chest (or given freely, in a lesson): the meter, and Bram's word the first times.</summary>
     void Listened()
@@ -1428,6 +1417,7 @@ public partial class CounterPhase : Phase
         if (Busy || Concluded || !State.Has("magnet")) return;
         _magnet = !_magnet;
         _shake.Magnet = _magnet;
+        _shake.ResetDwell();
         Sfx.PlayGroup("clack", _magnet ? 1.2f : 0.9f, -2);
         _shake.View.Wobble(0.4f);
         if (_magnet) Teach("magnet");

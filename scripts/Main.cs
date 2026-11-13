@@ -12,8 +12,8 @@ namespace Keywright;
 
 /// <summary>
 /// Root of the game: owns the game state, audio, HUD and screen effects, and swaps between phases. It opens on the title
-/// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the week's scene
-/// (from the second week), Nim's curios on his day, the counter, the day's end, and on the third day the Guild's due.
+/// screen; the shop is saved to user://save.json at the start of each day, and Esc pauses. A day runs: the road on a
+/// market's first morning and the week's scene, the counter, the day's end, the Guild's due on the fifth night, and Nim.
 /// What you've done across runs is kept in user://profile.json.
 /// Command-line flags (after `--`): --seed=N, --sim [--n=N], --shake-test, --save-test, --loc-test, --fit-test, --pseudo, --lang=CODE, --font-sheet, --export-sounds=DIR, --autoplay,
 /// --shots=DIR, --quit-at-end, --days=N, --no-tutorial (no tips, no scripted first day),
@@ -31,6 +31,8 @@ namespace Keywright;
 /// --mimics=N makes one chest in N breathe (from Thornwick, once you remember the treasury).
 /// --season=N plays a later season (the last one lost, so the year turned back); --knew=all as if every question of the
 /// case had been worked out in an earlier season.
+/// --pad-test, --title-test and --ear-test (each in a window, under Xvfb) play the counter with a simulated controller,
+/// the title's burst with real input, and the chest with a hand's shaking (which listens it spends): exit 1 on a failure.
 /// </summary>
 public partial class Main : Node2D
 {
@@ -221,7 +223,7 @@ public partial class Main : Node2D
         _seed = int.TryParse(Arg(args, "--seed"), out var s) ? s : (int)(Time.GetUnixTimeFromSystem() % 1_000_000);
         // Straight into a day for the bot and the debugging shortcuts; everyone else gets the title screen.
         bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--treasury-demo") || Arg(args, "--treasury-demo") != null ||
-                      args.Contains("--pad-test") ||
+                      args.Contains("--pad-test") || args.Contains("--ear-test") ||
                       Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null || Arg(args, "--season") != null;
         if (direct)
         {
@@ -333,6 +335,7 @@ public partial class Main : Node2D
             TreasuryDemo(Arg(args, "--treasury-demo") == "final", args.Contains("--quit-at-end"));
         else BeginPlaying();
         if (args.Contains("--pad-test")) PadTest();
+        if (args.Contains("--ear-test")) EarTest();
     }
 
     /// <summary>Walks through the title screen, a new game's first moments, the pause menu and the settings, for screenshots.</summary>
@@ -650,14 +653,26 @@ public partial class Main : Node2D
     /// <summary>Bram's word on Heartsongs, said once a profile (between runs).</summary>
     const string SongsTold = "between.songs"; // loc: keys
 
+    /// <summary>The run is over, and it's straight on to another season (0.36): banked as <see cref="EndRun()"/>, then who minds the stall, not the title.</summary>
+    public void AnotherSeason()
+    {
+        _again = true;
+        EndRun();
+    }
+
+    bool _again;
+
     void AfterRun()
     {
+        bool again = _again;
+        _again = false;
         if (_bot != null)
         {
             QuitGame();
             return;
         }
-        ToTitle();
+        if (again) OpenSetup();
+        else ToTitle();
     }
 
     /// <summary>Back to the title screen (from the pause menu).</summary>

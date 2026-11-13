@@ -84,7 +84,7 @@ in full, with how each was measured), against the same reports on 0.35:
 |---|---|---|
 | A season | 7 weeks, 35 days | 4 weeks, 20 days, a market each |
 | A first season, played by a learner (`--sim=experience`) | 143 minutes, 169 customers, lost by all 30 | 104 minutes, 108 customers, cleared by about one in five |
-| High points an hour, seasons 1 / 2 / 3 | 5.3 / 5.1 / 5.7 | 8.6 / 9.5 / 9.9 |
+| High points an hour, seasons 1 / 2 / 3 | 5.3 / 5.1 / 5.7 | 8.5 / 9.9 / 9.9 |
 | Time in stale stretches (a first season) | 6% | none |
 | The careful player clears (`--sim=quick`) | 70% | 90% |
 | A learner at 0.75 / 0.5 / a first-timer | 55% / 13% / none | 66% / 43% / 20% |
@@ -124,12 +124,29 @@ What couldn't be checked from a cloud session, and is worth an hour of the owner
 
 1. **How the music sounds.** It was written and rendered in code and checked by its numbers (peaks, loudness, where
    its energy sits, the loops' seams) and its spectrograms. Nobody has heard it. It has its own volume (60% to start).
-2. **How the ear feels in the hand.** The bot and the playtest tool shake at exact strengths; a person winds up to a
-   hard shake through a firm one. A strength is given the ear once the chest has moved that fast for a sixth of a
-   second and a hold follows its hardest shake, so winding up shouldn't spend two listens; if it does,
-   `CounterPhase.ListenHold` is the number.
+2. **How the ear feels in the hand.** A fresh-eyes playtest (an agent with the playtest kit and nothing else) found
+   that the ear's first version often didn't register a shake at all at a low frame rate: the meter lit and nothing
+   counted. That's fixed (a shake is measured inside the shake box now, a physics step at a time) and `--ear-test`
+   drives a pointer the ways hands move, at sixty and twelve frames a second, to keep it fixed. A pointer on a path
+   still isn't a person: `CounterPhase.ListenHold` and `ShakeBox.TurnHold` are the numbers if a listen ever goes by
+   accident or a shake you meant doesn't count.
 3. **Whether level 0 is too gentle** for a player who already knows the game. It's tuned so a new player clears on a
    second or third season and meets the story; the challenge levels are where it gets hard.
+
+## The fresh-eyes playtest
+
+Run on the finished build by an agent given `tools/playtest/README.md` and nothing else (177 actions: the first three
+days from a fresh install, then the first day at Thornwick). "I would keep playing. Working out what each seller
+failed to notice is a strong core, and Thornwick is where it gets properly interesting." It worked out the ear's rule
+by itself ("the rule is fair, and it made me think. I skipped gentle on Ada's chests because she had already priced
+that, and used one hard shake because a hard shake stirs everything"), the four dues and the road, and that the
+Guild is the villain.
+
+Its top finding was the bug above ("I could not tell when a shake counted"). The others it found that were fixed:
+Bram's "Pass" lesson contradicted by a town event that made buying right; a tale's first speech bubble blank until a
+button was pressed; a wide speech bubble cutting off the ear's bar; a lost season ending on nothing but the way back
+to the title. Left for the owner's judgement (`docs/design.md`, *Playtesting the experience*): the first two days
+are very safe, nothing records what was heard once the words fade, and a handful of older wordings.
 
 ## Status
 
@@ -141,3 +158,4 @@ What couldn't be checked from a cloud session, and is worth an hour of the owner
 - [x] Rebalance (`--sim=quick`, `--sim=learners`, `--sim=experience`, `--sim=careers`, `--sim=levels`, `--sim=terms`)
 - [x] Translations (fr, ja, zh_CN, zh_TW), fit tests, bot runs in French and Japanese
 - [x] Docs (`design.md`, `world.md`, `narrative.md`, `stories.md`, README, CLAUDE.md), version 0.36
+- [x] A fresh-eyes playtest, the ear reworked for a real hand at any frame rate, and `--ear-test`

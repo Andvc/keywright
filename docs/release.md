@@ -107,10 +107,13 @@ a season with the sound on. If a theme grates or thins out over an hour, its tun
 whole approach doesn't hold up, a composer's loops dropped into `assets/audio/music` and `assets/audio/ambience`
 under the same names play with no code changed. The Music volume starts at 60%.
 
-**The ear, in the hand (0.36):** a listen is spent when the chest has moved at a strength for a sixth of a second,
-and a hold follows its hardest shake, so winding up to a hard shake shouldn't spend a firm listen on the way. The
-tests shake at exact strengths; ten minutes with a real mouse and a real controller will say whether a person's hand
-does. `CounterPhase.ListenHold` is the number to raise if listens get spent by accident.
+**The ear, in the hand (0.36):** a listen is spent once the chest has really been shaken at a strength for a moment
+(back and forth, at that speed, with nothing harder just before), so winding up to a hard shake, lifting the chest
+or carrying it shouldn't spend one. `--ear-test` checks that with a pointer driven the ways hands move, at sixty and
+at twelve frames a second, and a fresh-eyes playtest found (and got fixed) the first version's failure to register
+at all on a slow machine. A pointer on a path still isn't a person: ten minutes with a real mouse and a real
+controller will say whether listens ever go by accident, or a shake you meant doesn't count.
+`CounterPhase.ListenHold` (how long each strength takes) and `ShakeBox.TurnHold` are the numbers.
 
 **Translations:** the four languages are complete and consistent, but no native speaker has read them. Before
 release, pay one for a pass of play in each (a review, not a translation: a few days each, well under the $2,000-3,500

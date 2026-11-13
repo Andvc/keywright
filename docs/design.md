@@ -286,12 +286,32 @@ So which check to make is the decision, and the sellers' habits are what decide 
   where it costs a few coins to learn; someone who knows the regulars doesn't.
 
 The counter shows the ear over the chest (a pip a listen, the spent ones hollow; the count beside who's still waiting
-on the slip's foot: the two together are the day's plan). A strength is given the ear once the chest has moved that
-fast for a moment (`CounterPhase.GiveEar`, `ListenHold`), and in one hold the ear follows the hardest shake so far:
-winding down from a hard shake never spends a gentle listen (set the chest down and pick it up again for that), and a
-stray jerk on the way to another strength costs nothing. `ShakeBox.Open` gates what sounds, so a strength that hasn't
+on the slip's foot: the two together are the day's plan). `ShakeBox.Open` gates what sounds, so a strength that hasn't
 been paid for is silent, not just unrecorded. Bram says so the first time a listen is spent, when they run low with
 people still waiting, and when they're gone (`ear`, `ear_low`, `ear_out`).
+
+**When a shake counts.** A strength gets the ear once the chest has *really been shaken* at it for a moment
+(`ShakeBox.Dwell`, `CounterPhase.GiveEar`: 0.12 seconds of it for a hard shake, 0.16 for a firm one, 0.3 for a gentle
+one, which is also just what moving a chest about is). Really shaken means three things, each there so that nothing is
+spent by accident:
+
+- the chest is moving at least that fast *now* (not the meter's memory of a moment ago: winding down from a hard
+  shake passes back through firm and gentle speeds and spends neither);
+- that strength is the hardest it's been shaken in the last moment (the wind-up to a hard shake passes through the
+  gentler ones in less time than counts);
+- the hand has turned twice lately: a shake goes back and forth. Lifting the chest to drop it, carrying it across the
+  counter, or picking it up and setting it down is not a shake, however fast.
+
+Slowing from a hard shake to a gentle one and keeping it up is two checks and two listens, as it should be. The time
+is measured inside the shake box, a physics step at a time. 0.36's first version sampled the hand's speed once a frame
+in the counter, and reset its count whenever the meter flickered between strengths: at sixty frames a second with a
+smooth hand it worked, and at twelve, or with a mouse that reports in jumps, the samples missed every fast moment, so
+a strength lit up on the meter and never got the ear. The bot never showed it (it shakes at exact strengths, through
+`ShakeBox.AutoShake`). The fresh-eyes playtest did, at once: "I could not tell when a shake counted" was its first
+finding, and it sat locked in the first day's third lesson shaking firmly for half a minute. `--ear-test` is the
+check that would have caught it, and now does: a pointer driven through the real counter the ways hands move (smooth
+shakes at each strength, a hard one with its wind-up and wind-down, a mouse in jumps, twelve frames a second, a lift,
+a carry, an empty ear), each asserting exactly which listens were spent.
 
 **More listens**: the Tea Kettle (70g, Thornwick: two more) and the Listening Screen (320g, Crownhold: three more) at
 the day's end, and two curios: an Echo Stone gives one back for a perfect read, and Lamb's-Wool Plugs for a chest
@@ -769,8 +789,8 @@ What changed with it:
   what the Guild wants here. The day's end at the stall shows the due as the way on ("Next: Thornwick Market"), and
   the Guild's panel says where paying leads.
 - **Five customers a day** at every market past the stall (four there; six at Thornwick and Crownhold until now): a
-  day's listens are counted (*The ear*), and a first run is 104 minutes over 108 customers, a second 93 and a third 89
-  (`--sim=experience`; 0.35: 143, 140 and 132, each lost at week 6). High points come 8.6 an hour in a first run and
+  day's listens are counted (*The ear*), and a first run is 104 minutes over 108 customers, a second 94 and a third 89
+  (`--sim=experience`; 0.35: 143, 140 and 132, each lost at week 6). High points come 8.5 an hour in a first run and
   nearly ten after (5.3 and 5.1), no time is spent in stale stretches (6%), and the engagement score holds between 17
   and 50 to the last day (*Playtesting the experience*).
 - **No moves to buy**: `Upgrades` still has them (their blurbs say what each market brings, for the road), but they're
@@ -793,6 +813,11 @@ What changed with it:
   seven weeks (`Curios.Rates`): a build has eighteen nights to come together, not thirty-three.
 - **The regulars' first commissions** come on the second week's third morning, not its first, which already brings a
   market, the Guild's letter, locks and the drop.
+- **A lost season is one click from the next.** Four first seasons in five end at the last due, with every market
+  seen, so the screen they end on matters: it says how near it was ("The Guild took the shop on the season's last
+  night: 1,130g short of the last due."), what the season opened (a keywright, a level, Nim's new curios), and offers
+  **Another season** beside the way back to the title (`RunEndPhase.Again`, `Main.AnotherSeason`: straight to who
+  minds the stall).
 - **Saves**: a run saved in 0.35 picks up at the market it had reached, on the same day of its week, with the dues
   before it paid, and every day the save remembers moved back with it (`SaveData` version 8).
 
@@ -2051,11 +2076,11 @@ on both (medians over the 30 learners):
 |---|---|---|
 | Run 1: length | 143 minutes, 30 days (of 35), 169 customers | 104 minutes, 20 days, 108 customers |
 | Run 1: how it ends | lost by all 30, in week 6 | cleared by one in five (120 seasons: 20%); lost in week 4, at the last due |
-| Run 1: new things an hour; high points an hour | 30.7; 5.3 | 49.0; 8.6 |
+| Run 1: new things an hour; high points an hour | 30.7; 5.3 | 49.8; 8.5 |
 | Run 1: time in stale stretches | 6% (longest 9 minutes) | none |
 | Run 1: the heaviest day (median load) | day 9, 5.7 | day 11, 5.6; day 6, 5.4 |
 | Run 1: players with some day over capacity | 40% | 70% |
-| Run 2: length; high points an hour; stale | 140 minutes; 5.1; 5% | 93 minutes; 9.5; none |
+| Run 2: length; high points an hour; stale | 140 minutes; 5.1; 5% | 94 minutes; 9.9; none |
 | Run 3: length; high points an hour; stale | 132 minutes; 5.7; 7% | 89 minutes; 9.9; none |
 
 A high point comes every seven minutes in a first season and every six after, where it came every eleven; nothing
@@ -2070,8 +2095,32 @@ lesson is a warded thing's puzzle, and the first day is still a customer short. 
 now (5.4 on the first day at Thornwick, 4.7 on the next two, 5.6 on the first at Crownhold); seven first-timers in
 ten still have one day over it somewhere, most often the day Corvin's straw and false bottom come together, against
 four in ten in 0.35 and five to seven in ten from 0.31 to 0.34. A third season brings a fifth of what a first does
-that's new (9.1 new things an hour against 49.0), which is what the challenge levels' terms, the other keywrights and
+that's new (9.1 new things an hour against 49.8), which is what the challenge levels' terms, the other keywrights and
 the campaign's remembered seasons are for.
+
+**0.36's fresh-eyes playtest** (an agent given `tools/playtest/README.md` and nothing else; 177 actions: the first
+three days from a fresh install, then the first day at Thornwick). Its verdict: "I would keep playing. Working out
+what each seller failed to notice is a strong core, and Thornwick is where it gets properly interesting." What it
+understood without being told: the three rules, each regular's blind spot, that a new strength costs a listen and a
+repeat doesn't, the four dues and that each one paid moves the stall, the key's four pieces, and that the Guild reads
+as the villain. What it found, and what was done:
+
+- **"I could not tell when a shake counted."** The ear's first version (*The ear*, "When a shake counts"). Reworked,
+  and `--ear-test` added.
+- **Bram said "Pass" on a day the Tourney made buying right** (Bettany's 5g cleaver worth 8g against her 7g). Her
+  passing lesson now asks what the day makes its chest worth and a bit more, whatever's on in town
+  (`GameState.Bettany`, `Lessons.Dearer`).
+- **A tale's first bubble stayed blank until "Go on".** Since a speech says itself, a talk's first line has to start
+  itself too, once Bram's word has been said (`TalkPhase`).
+- **A wide speech bubble cut the ear's bar** ("R EAR"). The bar keeps clear of the widest bubble.
+- **"Shaken gently and firmly and hard."** A list, now ("gently, firmly and hard").
+- **A lost season ended on a way back to the title.** It ends on how near it was and **Another season** (*The run*).
+- Left as they are, and worth the owner's eye: the first two days are very safe (every bar "over 99%" until day
+  three, and the ear never pinches at the stall: by design, the stall is for learning, but it's a quiet hour);
+  nothing records what was heard once the words fade (a mark on the slip's row would help, and help a deaf player
+  more: it stops short of the slip filling itself in, which v22 took away on purpose); Bram's box can grow over the
+  chest's captions in a long lesson; the notebook's Weight column reads oddly beside "light things rattle"; Pip and
+  Flick call everyone "mister"; "1 exhibition points".
 
 ## What was cut, and why
 
@@ -2281,11 +2330,11 @@ the campaign's remembered seasons are for.
 - 0.34's campaign: does a second season show at once that knowing changes play (Garrick's chest, Old Haddon's note,
   Bram's tuning fork), do the Inquiry's leads read as things to do rather than homework, and does the plan's
   four-line list make the true ending feel earned before it's shown?
-- 0.36's ear, with a real hand on a real mouse: does a listen feel spent on purpose? A strength is given the ear after
-  the chest has moved that fast for a sixth of a second, and one hold follows its hardest shake; the bot and the
-  playtest tool can't say whether a person winding up to a hard shake pays for a firm one on the way. If they do, the
-  first thing to try is a longer `CounterPhase.ListenHold`. And is eight the right number: does a day's fifth chest
-  feel like a choice (which one check?) or like being told to stop playing?
+- 0.36's ear, with a real hand on a real mouse: does a listen feel spent on purpose? `--ear-test` drives a pointer
+  the ways hands move and checks what's spent (*The ear*), but a pointer on a path isn't a person: the thresholds
+  (`CounterPhase.ListenHold`, `ShakeBox.TurnHold`) want ten minutes of a human hand. And is eight the right number:
+  does a day's fifth chest feel like a choice (which one check?) or like being told to stop playing? The playtester
+  ended days two and three with six listens unspent and day six with three: at the stall the ear doesn't pinch.
 - Does running out read as a rule of the world (an ear tires) or as an energy meter from a phone game? The kettle and
   the screen are there so the answer to "I want more" is in the shop, at a price, from the second week.
 - Level 0 is the story's difficulty now (the careful player clears nine seasons in ten, a first-timer about one in

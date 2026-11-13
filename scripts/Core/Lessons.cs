@@ -56,10 +56,15 @@ public sealed class Lesson
     /// storm, or a guest book's better sort. A rule holds for a lesson's chest too (0.34's playtest met a storm's wood chest).
     /// </summary>
     /// <param name="boosts">The shop's word on prices (its name, a curio's: everyone haggling, a silver tongue), as for any chest.</param>
-    public Visit MakeOn(Random rng, int tier, bool brighter, Boosts boosts = null)
+    /// <param name="dearer">
+    /// What today puts on what the lesson's things fetch (a tourney, the Crown's buyer, a storm's finer chest), for a
+    /// scripted lesson with a price of its own: a lesson in passing has to be dear on the day it's taught.
+    /// </param>
+    public Visit MakeOn(Random rng, int tier, bool brighter, Boosts boosts = null, float dearer = 1)
     {
         Lessons.Brighter = brighter;
         Lessons.Boost = boosts ?? Boosts.None;
+        Lessons.Dearer = dearer;
         try
         {
             return Make(rng, tier);
@@ -68,6 +73,7 @@ public sealed class Lesson
         {
             Lessons.Brighter = false;
             Lessons.Boost = Boosts.None;
+            Lessons.Dearer = 1;
         }
     }
 }
@@ -130,7 +136,11 @@ public static class Lessons
 
     /// <summary>A plain wood chest of one of each of these kinds, at a fixed price (the scripted first days).</summary>
     static Visit Scripted(Random rng, string seller, int tier, int ask, string pitch, params Category[] kinds) =>
-        Price(rng, seller, new Chest(kinds.Select(k => I(k, Rarity.Common))), tier, ask, pitch: pitch, trade: Trade.Fixed);
+        Price(rng, seller, new Chest(kinds.Select(k => I(k, Rarity.Common))), tier, Dearer > 1 ? (int)MathF.Ceiling(ask * Dearer) : ask, pitch: pitch,
+            trade: Trade.Fixed);
+
+    /// <summary>What today puts on a scripted lesson's price (<see cref="Lesson.MakeOn"/>); 1, or unset: nothing.</summary>
+    [ThreadStatic] internal static float Dearer;
 
     /// <summary>
     /// The scripted first day (with tips on, a profile's first run, <see cref="GameState.FirstDayScripted"/>): Pip, Ada and

@@ -222,6 +222,7 @@ godot --headless --path . -- --loc-test                    # the language layer,
 dotnet run --project tools/loc -- check                    # every text the player reads goes through Loc
 dotnet run --project tools/loc -- extract                  # rewrite locale/keywright.pot
 xvfb-run -a godot --path . -- --pad-test --no-tutorial --seed=5  # play the counter with a simulated controller
+xvfb-run -a godot --path . -- --ear-test --no-tutorial --seed=5  # shake the chest the ways hands do: which listens are spent
 xvfb-run -a godot --path . --rendering-driver opengl3 -- \
   --autoplay --days=1 --shots=$PWD/shots                   # play the guided day, save screenshots
 # add --start-tier=3 --gold=600 to jump ahead with the tools you'd have by then,

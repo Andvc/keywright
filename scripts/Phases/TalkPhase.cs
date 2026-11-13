@@ -95,8 +95,13 @@ public partial class TalkPhase : Phase
         if (_talk.Offer != null) _mentor.Teach(State, "offer");
         else if (!_talk.Night) _mentor.Teach(State, "tales");
         Game.Hud.SetGold(State.Gold, animate: false);
-        Next();
+        // Their first line, once Bram's word (if he has one, the first time) has been said: until 0.36 a click read him
+        // out a sentence at a time and then them; now that a speech says itself, theirs has to start itself too (the
+        // fresh-eyes playtest sat at a blank bubble until it pressed Go on).
+        _opening = true;
     }
+
+    bool _opening;
 
     /// <summary>A knock at the back door or a letter after dark: the night's music, not the market's.</summary>
     public bool AtNight => _talk?.Night ?? false;
@@ -122,7 +127,10 @@ public partial class TalkPhase : Phase
     public void Next()
     {
         if (_panel != null || _leaving) return;
-        if (_mentor.MidText) _mentor.Next();
+        bool opening = _opening;
+        _opening = false;
+        // (Not on the way in: Bram's word says itself, and their first line follows it.)
+        if (_mentor.MidText && !opening) _mentor.Next();
         // Still saying it: the rest of the line at once.
         else if (_letterText == null && _person.MidSpeech) _person.FinishSpeech();
         else if (_letterText != null && _line >= 0 && _line < _talk.Lines.Count && _at < _sentences.Count - 1)
@@ -180,6 +188,7 @@ public partial class TalkPhase : Phase
     /// <summary>A letter's page fills in by itself, a sentence after another.</summary>
     public override void _Process(double delta)
     {
+        if (_opening && !_mentor.MidText && !_leaving) Next();
         if (_nextIn <= 0 || _letterText == null || _leaving) return;
         _nextIn -= delta;
         if (_nextIn > 0 || _at >= _sentences.Count - 1) return;

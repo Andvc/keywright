@@ -49,6 +49,9 @@ public partial class RunEndPhase : Phase
             : State.BramHome ? Loc.T($"{paid}, and Bram is home.")
             : Loc.T($"{paid}, and Bram never came home.")
             : State.DebtCleared ? Loc.T($"Bram's debt was paid, but the Guild's interest caught up with you in week {State.Week}.")
+            // Lost at the last due (0.36: where most lost seasons end, every market seen): how near it was.
+            : State.Week == Guild.Weeks && State.DueNow > State.Gold
+                ? Loc.T($"The Guild took the shop on the season's last night: {State.DueNow - State.Gold}g short of the last due.")
             : Loc.T($"The Guild took the shop in week {State.Week}.");
         // One line under the title: smaller when the words (a paid-early debt and what came of the Key) won't fit at 24.
         Add(UiKit.MakeLabel(sub, UiKit.TextWidth(sub, 24) <= 1240 ? 24 : 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 168, 1280, 30));
@@ -102,7 +105,10 @@ public partial class RunEndPhase : Phase
         }
         else
         {
-            Add(UiKit.MakeButton(Loc.T("Back to the title"), Palette.Gold, 24, Retire).Place(495, 580, 290, 64));
+            // A lost season is one click from the next (0.36): the same spring, and everything you now know.
+            Add(UiKit.MakeButton(Loc.T("Another season"), Palette.Gold, 24, Again).Place(340, 580, 290, 64)).TooltipText =
+                Loc.T("Start again: choose who minds the stall.");
+            Add(UiKit.MakeButton(Loc.T("Back to the title"), Palette.Text, 24, Retire).Place(650, 580, 290, 64));
             Sfx.Play("lose", 0.8f, -2);
         }
         Game.Moment(_cleared ? "23_cleared" : "23_foreclosed", 0.8);
@@ -164,5 +170,12 @@ public partial class RunEndPhase : Phase
     {
         Sfx.Play("bid");
         Game.EndRun();
+    }
+
+    /// <summary>Another season, straight away: the run is banked as on retiring, and it's on to who minds the stall.</summary>
+    public void Again()
+    {
+        Sfx.Play("bid");
+        Game.AnotherSeason();
     }
 }

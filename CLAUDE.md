@@ -96,7 +96,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    controller (the stick to the chest, A and flicks to a hard shake, Y, B, Start, then rebinding); run it in a scaled
    window too (a `[video]` `screen=0`, `window_width=1600`, `window_height=900` settings.cfg in the user folder,
    removed afterwards, under `-screen 0 1920x1080x24`), since the pointer's sums only show there. Both exit 1 on a
-   failure. The full shake test takes about eleven minutes (`--n=4` for a quick look).
+   failure. The full shake test takes about eleven minutes (`--n=4` for a quick look). The ear, or anything about how
+   a shake is read from the hand: `xvfb-run ... -- --ear-test --no-tutorial --seed=5` (0.36) drives a pointer through
+   the real counter the ways hands move (smooth shakes at each strength, a hard one with its wind-up and wind-down,
+   a mouse that reports in jumps, twelve frames a second, a lift, a carry, an empty ear) and checks exactly which
+   listens each spent; exit 1 on a failure. The bot shakes at exact strengths (`ShakeBox.AutoShake`), so it can't
+   show this: a change to `ShakeBox` or `GiveEar` isn't verified until this passes.
 7. Text: `dotnet run --project tools/loc -- check` must say every text is wrapped (it lists any new one that isn't),
    and `-- extract` rewrites locale/keywright.pot (commit it). `-- verify` checks each translation in locale/ against
    it (untranslated texts, holes and `{price}`-style names kept, plural forms, letters the language's fonts have;
@@ -165,9 +170,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Check`: a strength, with the lodestone or without, or a drop) costs one the first time it's made on a chest
   (`GameState.Listen`, kept in `Visit.Checks`); made again it's free (counting rattles is never rationed), and
   everything is free in a lesson, with the Bookkeeping Engine, or on a visit marked `FreeListens` (`ListensFree`).
-  `ShakeBox.Open` gates what sounds by it and `CounterPhase.GiveEar` spends it: a strength the chest has moved at for
-  `ListenHold`, and in one hold only the hardest shake so far (winding down from a hard shake never spends a gentle
-  listen), so a strength not paid for is silent and nothing is spent by accident. The meter sits over the chest
+  `ShakeBox.Open` gates what sounds by it and `CounterPhase.GiveEar` spends it once the chest has really been shaken
+  at a strength for a moment (`ShakeBox.Dwell`, measured a physics step at a time: moving that fast now, nothing
+  harder in the last moment, and the hand turned twice lately, so a wind-up, a wind-down, a lift or a carry spend
+  nothing; `CounterPhase.ListenHold` is how long each strength takes), so a strength not paid for is silent and
+  nothing is spent by accident. Never read the hand's speed from a frame (`_Process`): 0.36's first ear did, and at
+  twelve frames a second a firm shake lit the meter and never counted. `--ear-test` (below) is its check. The meter sits over the chest
   (`BuildEar`: a pip a listen) with the count on the slip's foot, beside who's still waiting; Bram teaches it the
   first time one is spent, when they run low with people waiting, and when they're gone (`ear`, `ear_low`,
   `ear_out`). At the opening a thing no check you made could have told you of is unheard (the closed eye,
@@ -189,7 +197,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Hints.cs`).
 - A seller's first visit (with tips on) is a lesson (`Lessons.cs`): a chest that guarantees what it teaches (and follows
   the day's rules like any other: a storm makes it a colour finer, `Lesson.MakeOn`, `Chest.Brighten`; and the build,
-  priced with the shop's `Boosts` and dealt with by `GameState.Welcome`, so curios hold for it: `GameState.Lesson`), and
+  priced with the shop's `Boosts` and dealt with by `GameState.Welcome`, so curios hold for it: `GameState.Lesson`; a
+  scripted lesson with a price of its own follows the day too, `MakeOn`'s `dearer`: Bettany's lesson in passing asks
+  what a tourney or the Crown's buyer makes her chest worth and a bit more, `GameState.Bettany`, or "Pass" would be
+  bad advice that day), and
   steps whose `Done` checks run every frame on the hearing, the slip and the visit, whatever Bram's box shows (0.35: a
   step is an action, named in a tab over the box, `LessonStep.Do`; the first day is lessons too, `Lessons.FirstDay`). Keep checks to things the player
   does, so they can't miss; the sim's lesson test plays each one. A lesson waits for tips already up
@@ -206,7 +217,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   scenes, talks and the sellers' bubbles (sized for the whole speech, filled in as it's said). A speech says itself
   (0.36): each sentence comes under the last once that one's had time to be read (`Words.ReadTime`, slower a
   character in Japanese and Chinese), a click or the act action shows the rest at once, and the next goes on: one
-  click a speech, never one a sentence. Anything new that talks does the same (`SellerView.MidSpeech`/`FinishSpeech`). What matters is coloured
+  click a speech, never one a sentence. Anything new that talks does the same (`SellerView.MidSpeech`/`FinishSpeech`),
+  and starts by itself: a talk's first line follows Bram's word without a click (`TalkPhase`'s opening; the playtest
+  sat at a blank bubble). What matters is coloured
   where it's said (`Rich`, a `RichTextLabel` with BBCode, its own brackets escaped): the trade's words in tips and
   notes (`Rich.TradeWords`; on the slip's paper `Rich.OnPaper`), a seller's price and stated clue (`SellerView.Marks`,
   with a bob), strengths only in sellers' own words (`Rich.Strengths`: their "coin" is money), the seller's rule under
@@ -353,8 +366,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   sixth run, the true ending around the thirteenth, at two and a half hours a season.) The careful player keeps a
   full mimic for the final opening unless it has Guild nights enough to fill it again (`Strategy.SpendMimic`): the
   plan's "free them" is what a season most often lacks. A run's length is part of the balance: `--sim=experience`
-  should keep a first run under two hours (0.36: 104 minutes over 20 days and 108 customers, a second 93 and a third
-  89; 0.35: 143 over 30 days), a high point every seven minutes or better (8.6 an hour, then nearly ten; 0.35: 5.3),
+  should keep a first run under two hours (0.36: 104 minutes over 20 days and 108 customers, a second 94 and a third
+  89; 0.35: 143 over 30 days), a high point every seven minutes or better (8.5 an hour, then nearly ten; 0.35: 5.3),
   no stale stretches, and every day's median load under 6: the first days at a new market are the ones to watch
   (5.4 on the first at Thornwick, 5.6 on the first at Crownhold; seven first-timers in ten still have some day just
   over), and with tips on they're quiet ones (the first a customer short and with no locked chests,
@@ -437,7 +450,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The game opens on `TitlePhase` (0.32): the chest strains and bursts open, the name rises out of the light and the
   menu's buttons fly out of the chest into place (a timeline in `_Process`; any key, button or click finishes it at
   once; shorter coming back from a run; shake, flashes and the hit stop through `Main`). `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
-  for the bot or debugging flags) and the pause action (Esc, Start) opens `PauseMenu`. A day: `Main.StartDay` (the
+  for the bot or debugging flags) and the pause action (Esc, Start) opens `PauseMenu`. A run ends on `RunEndPhase`:
+  a lost one (0.36: where most first seasons end, at the last due) says how near it was and offers Another season
+  beside the way back to the title (`RunEndPhase.Again`, `Main.AnotherSeason`: banked like any other, then straight
+  to who minds the stall). A day: `Main.StartDay` (the
   road on a market's first morning, then the week's scene), the counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening,
   `DuesPhase` on the fifth). Anything added to `GameState` that should survive a day boundary goes in `SaveData` too.
 - Files (0.27): everything the game keeps goes through `Storage` (`Read`, `Write`, `Delete`): a write goes to a temp
@@ -751,6 +767,6 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The shop saves at the start of each day only (leaving mid-day replays that day), and sellers don't remember you
   (see `docs/design.md`).
 - Nobody has heard 0.36's music: a cloud session has no sound device, so it was written, rendered and checked by its
-  numbers (`tools/music`). And the ear's listens were only ever spent by the bot and the playtest tool, which shake
-  at exact strengths: whether a real hand winding up to a hard shake spends a firm listen on the way
-  (`CounterPhase.ListenHold`) wants ten minutes of the owner's time with a mouse. Both are in `docs/release.md`.
+  numbers (`tools/music`). And the ear has been shaken by the bot, the playtest tool and `--ear-test`'s pointer, never
+  by a person: its thresholds (`CounterPhase.ListenHold`, `ShakeBox.TurnHold`) want ten minutes of the owner's hand
+  on a mouse and a controller. Both are in `docs/release.md`.

@@ -798,9 +798,14 @@ public partial class NotebookView : Node2D
         const float boxH = 44, gap = 8;
         float boxW = (PanelW - 32 - gap * Guild.Weeks) / (Guild.Weeks + 1);
         string when = When(_state.DaysToNextDue, _state.NextDueWeek);
+        // What's left and what's next, with a word on paying it all off where there's room for it (in French, with a due
+        // rolled over at a high level, there isn't).
+        string Left(string tip) =>
+            Loc.T($"{_state.DebtLeft}g of Bram's debt left. Next: {_state.NextDue}g {when}{(_state.Arrears > 0 ? Loc.T($" ({_state.Arrears}g rolled over)") : "")}.{tip}");
         string line = _state.DebtCleared
             ? Loc.T($"Bram's debt is cleared{(_state.ClearedDay > 0 ? Loc.T($" (day {_state.ClearedDay})") : "")}. The Guild still comes, for its interest: {_state.NextDue}g {when}.")
-            : Loc.T($"{_state.DebtLeft}g of Bram's debt left. Next: {_state.NextDue}g {when}{(_state.Arrears > 0 ? Loc.T($" ({_state.Arrears}g rolled over)") : "")}.{((_state.CanPayOff ? Loc.T(" You could pay it all off at the day's end.") : Loc.T(" Pay it all off early from a day's end.")))}");
+            : Left(_state.CanPayOff ? Loc.T(" You could pay it all off at the day's end.") : Loc.T(" Pay it all off early from a day's end."));
+        if (!_state.DebtCleared && UiKit.TextWidth(line, 16) > PanelW - 216) line = Left("");
         var block = new Control { MouseFilter = Control.MouseFilterEnum.Ignore }.Place(TableX - 8, y, PanelW - 32, 76);
         _page.AddChild(block);
         block.AddChild(UiKit.MakeLabel(Loc.T("THE GUILD'S DEBT"), 16, Palette.Gold).Place(8, 0, 200, 20));

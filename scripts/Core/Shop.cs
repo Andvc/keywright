@@ -841,12 +841,23 @@ public sealed partial class GameState
     IEnumerable<Visit> FirstDay(Random rng) => Lessons.FirstDay.Take(3).Select(lesson => Scripted(lesson, rng));
 
     /// <summary>The second morning's first customer: Bettany heard everything there was, and asks what it's worth. Pass.</summary>
-    Visit Bettany(Random rng) => Scripted(Lessons.FirstDay[3], rng);
+    /// <remarks>
+    /// Whatever today does to what a cleaver fetches (a tourney, the Crown's buyer, Locking Day, a storm's finer chest),
+    /// she asks that much more: "she's priced everything there is, and a bit more" has to be true on the day, or Bram's
+    /// "Pass" is bad advice (0.36's fresh-eyes playtest: a tourney made her 5g cleaver worth 8g against her 7g, and
+    /// buying it paid).
+    /// </remarks>
+    Visit Bettany(Random rng)
+    {
+        var cleaver = new Item(Category.Arms, EventIs("storm") ? Rarity.Uncommon : Rarity.Common);
+        float dearer = Math.Max(1f, SaleValue(cleaver) / (float)Categories.Nominal(Category.Arms, Rarity.Common));
+        return Scripted(Lessons.FirstDay[3], rng, dearer);
+    }
 
     /// <summary>A scripted first-days visit and its lesson (a storm makes its chest a colour finer, as it does every chest).</summary>
-    Visit Scripted(Lesson lesson, Random rng)
+    Visit Scripted(Lesson lesson, Random rng, float dearer = 1)
     {
-        var visit = lesson.MakeOn(rng, 1, EventIs("storm"), Boosts);
+        var visit = lesson.MakeOn(rng, 1, EventIs("storm"), Boosts, dearer);
         visit.Lesson = lesson;
         Welcome(visit);
         return visit;
