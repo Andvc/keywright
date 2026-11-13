@@ -223,13 +223,19 @@ public static partial class Simulation
         public void Customer(GameState s, Visit v, Hearing hearing, int worth, int? paid, Opened o, bool lesson)
         {
             var seller = v.Seller;
-            float seconds = 12 + (lesson ? 35 : 0);
+            // Their story and the decision; then the shaking (by hand four seconds a strength, on Bram's cradle a little
+            // over one: 0.37), the drop, and a click for each thing marked on the slip, unless the build writes it (an
+            // engine all of it, a quill what's heard).
+            float seconds = 9 + (lesson ? 35 : 0);
+            bool cradle = s.Cradle && !lesson;
             if (hearing != null)
             {
-                seconds += 4 * new[] { Shake.Gentle, Shake.Firm, Shake.Hard }.Count(l => hearing.HasTried(l, false));
-                seconds += 3 * new[] { Shake.Gentle, Shake.Firm, Shake.Hard }.Count(l => hearing.HasTried(l, true));
+                seconds += (cradle ? 1.3f : 4) * new[] { Shake.Gentle, Shake.Firm, Shake.Hard }.Count(l => hearing.HasTried(l, false));
+                seconds += (cradle ? 1.3f : 3) * new[] { Shake.Gentle, Shake.Firm, Shake.Hard }.Count(l => hearing.HasTried(l, true));
                 if (hearing.Dropped) seconds += 3;
             }
+            int marks = v.Chest.Items.Count(i => !i.Fake) + (v.Chest.Hidden != null ? 1 : 0);
+            seconds += Strategy.Recorded(v, s) ? 0 : s.TicksHeard ? 0.3f * marks : 1.1f * marks;
             seconds += v.Trade switch { Trade.Haggle => 6 + 4 * v.OffersMade, Trade.Offer => 8, _ => 3 };
             Begin(s, BeatKind.Customer, seller.Name, seconds);
             _guided = lesson;

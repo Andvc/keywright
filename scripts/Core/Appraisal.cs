@@ -171,6 +171,9 @@ public sealed class Appraisal
         Set(category, count, Magic(category));
     }
 
+    /// <summary>One fewer of this kind (none stays none): a right-click on its row, where a click counts one more.</summary>
+    public void Uncount(Category category) => Set(category, Math.Max(0, Count(category) - 1), Magic(category));
+
     /// <summary>Marks one of them magic, or not. Marking a kind you hadn't ticked ticks one.</summary>
     public void ToggleMagic(Category category) => Set(category, Math.Max(1, Count(category)), !Magic(category));
 

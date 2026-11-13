@@ -79,9 +79,15 @@ public partial class TreasuryPhase : Phase
         Game.Moment($"25_treasury_{_mode.ToString().ToLowerInvariant()}", 0.6);
     }
 
+    Typewriter _captionType;
+
     void Say(string caption, string prompt)
     {
-        _caption.Text = caption ?? "";
+        // The night's telling is typed out too (0.37), low and slow under the dark; the prompt under it is just there.
+        _captionType ??= new Typewriter(_caption);
+        var sentences = Words.Sentences(caption ?? "");
+        if (sentences.Count == 0) sentences.Add(caption ?? "");
+        _captionType.Begin(sentences, string.Join(" ", sentences), 0.62f, "talk", -17f); // loc: keys
         _prompt.Text = prompt ?? "";
         ScenePhase.Trace?.Invoke($"[treasury] {caption}");
     }
@@ -144,6 +150,7 @@ public partial class TreasuryPhase : Phase
 
     public override void _Process(double delta)
     {
+        _captionType?.Process(delta);
         float dt = (float)delta;
         if (_dragging && !_busy)
         {

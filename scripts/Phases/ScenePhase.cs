@@ -9,10 +9,10 @@ namespace Keywright.Phases;
 
 /// <summary>
 /// A few lines between the people behind the story, over the scene's own backdrop (or the shop, dimmed): Bram on the
-/// right, whoever he's talking to on the left, the one speaking lit and the other in shadow. A line is said a sentence
-/// at a time (0.35), the trade's words coloured, the speaker stirring with each; since 0.36 the sentences follow one
-/// another by themselves and stay in the box, so a line takes one click (or Space), and a click while it's still being
-/// said shows the rest at once; Skip jumps to the end. Every line goes in the run's history. Then it hands on.
+/// right, whoever he's talking to on the left, the one speaking lit and the other in shadow. A line is typed out a
+/// character at a time in its speaker's voice (0.37, <see cref="Typewriter"/>), a sentence after another, the trade's
+/// words coloured, the speaker stirring as each begins; a line takes one click (or Space), and a click while it's still
+/// being typed shows the rest at once; Skip jumps to the end. Every line goes in the run's history. Then it hands on.
 /// </summary>
 public partial class ScenePhase : Phase
 {
@@ -40,10 +40,10 @@ public partial class ScenePhase : Phase
     int _index = -1;
     bool _done;
 
-    /// <summary>The line being said, cut into sentences, the last one showing, and how long until the next says itself.</summary>
+    /// <summary>The line being said, cut into sentences, the one being typed, and what types it.</summary>
     List<string> _sentences = new();
     int _at;
-    double _nextIn;
+    Typewriter _type;
 
     /// <summary>The bot reads the lines through.</summary>
     public static Action<string> Trace;
@@ -89,6 +89,14 @@ public partial class ScenePhase : Phase
         box.AddChild(_name);
         _text = Rich.Make(16, Palette.Text).Place(24, 50, 952, 80);
         box.AddChild(_text);
+        _type = new Typewriter(_text);
+        _type.SegmentBegan += Began;
+        _type.Done += () =>
+        {
+            _at = Math.Max(0, _sentences.Count - 1);
+            _pips.QueueRedraw();
+            UpdateMore();
+        };
         // A pip a sentence, bottom left: which one of the line's is showing.
         _pips = new Painter(p =>
         {
@@ -141,24 +149,19 @@ public partial class ScenePhase : Phase
         }
     }
 
-    /// <summary>A line says itself, a sentence after another, each once the last has had time to be read (0.36).</summary>
+    /// <summary>A line types itself out, a sentence after another (0.37).</summary>
     public override void _Process(double delta)
     {
-        if (_done || _nextIn <= 0) return;
-        _nextIn -= delta;
-        if (_nextIn > 0 || _at >= _sentences.Count - 1) return;
-        _at++;
-        ShowSentence(fresh: false);
+        if (!_done) _type.Process(delta);
     }
 
-    /// <summary>The rest of the line at once, if it's still being said; else the next line; on once they've all been said.</summary>
+    /// <summary>The rest of the line at once, if it's still being typed; else the next line; on once they've all been said.</summary>
     public void Advance()
     {
         if (_done) return;
-        if (_index >= 0 && _at < _sentences.Count - 1)
+        if (_index >= 0 && _type.Typing)
         {
-            _at = _sentences.Count - 1;
-            ShowSentence(fresh: false);
+            _type.Finish();
             return;
         }
         if (++_index >= _lines.Count)
@@ -175,32 +178,33 @@ public partial class ScenePhase : Phase
         _sentences = Words.Sentences(line.Text);
         if (_sentences.Count == 0) _sentences.Add(line.Text);
         _at = 0;
-        ShowSentence(fresh: true);
+        // The speaker lit (and stirring), the rest in shadow; then the line, typed out in their voice.
+        Speak(line);
+        _type.Begin(_sentences, string.Join(" ", _sentences.Select(sentence => Rich.Trade(sentence))), Typewriter.Voice(line.Speaker));
+        UpdateMore();
+        _pips.QueueRedraw();
     }
 
-    /// <summary>The sentence showing, coloured; the speaker lit (and stirring), the rest in shadow.</summary>
-    void ShowSentence(bool fresh)
+    /// <summary>What a click does next, once the line's all out (nothing while it's still being typed).</summary>
+    void UpdateMore() =>
+        _more.Text = _type.Typing ? "" : _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
+
+    /// <summary>Another sentence from the same mouth: a smaller stir.</summary>
+    void Began(int segment)
     {
-        var line = _lines[_index];
-        // The line so far: what's been said stays, a shade quieter, and the sentence being said comes up bright.
-        string said = string.Join(" ", _sentences.Take(_at).Select(sentence => Rich.Trade(sentence)));
-        _text.Text = (said.Length > 0 ? Rich.Tint(said, Palette.Muted.Lightened(0.25f)) + " " : "") + Rich.Trade(_sentences[_at]);
-        _text.Modulate = new Color(1, 1, 1, fresh ? 0 : 0.8f);
-        _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.16f);
-        _nextIn = _at < _sentences.Count - 1 ? Words.ReadTime(_sentences[_at]) : 0;
-        _more.Text = _at < _sentences.Count - 1 ? "" : _index < _lines.Count - 1 ? Loc.T("click for more") : Loc.T("click to go on");
+        _at = segment;
         _pips.QueueRedraw();
-        if (!fresh)
+        if (segment == 0 || _index < 0 || _index >= _lines.Count) return;
+        if (_faces.GetValueOrDefault(Place(_lines[_index].Speaker)) is { } speaker)
         {
-            // Another sentence from the same mouth: a smaller stir.
-            if (_faces.GetValueOrDefault(Place(line.Speaker)) is { } speaker)
-            {
-                speaker.Root.Scale = Vector2.One * 1.02f;
-                speaker.Root.CreateTween().TweenProperty(speaker.Root, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back);
-            }
-            Sfx.Play("tick", (line.Speaker == Story.Vane ? 0.7f : line.Speaker == Story.Bram ? 1f : 1.25f) + 0.03f * _at, -10);
-            return;
+            speaker.Root.Scale = Vector2.One * 1.02f;
+            speaker.Root.CreateTween().TweenProperty(speaker.Root, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back);
         }
+    }
+
+    /// <summary>A new line: its speaker lit (and stirring), the rest in shadow.</summary>
+    void Speak(Line line)
+    {
         foreach (var (place, face) in _faces)
         {
             bool speaking = place == Place(line.Speaker);
@@ -215,8 +219,7 @@ public partial class ScenePhase : Phase
             face.Root.Scale = Vector2.One * 1.04f;
             face.Root.CreateTween().TweenProperty(face.Root, "scale", Vector2.One, 0.18f).SetTrans(Tween.TransitionType.Back);
         }
-        Sfx.Play("tick", line.Speaker == Story.Vane ? 0.7f : line.Speaker == Story.Bram ? 1f : 1.25f, -8);
-        Game.Moment($"20_scene_{line.Speaker}", 0.4);
+        Game.Moment($"20_scene_{line.Speaker}", 1.2);
     }
 
     void Finish()

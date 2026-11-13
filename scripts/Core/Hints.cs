@@ -128,7 +128,7 @@ public static class Hints
         ["heard_Gems"] = Loc.T("A tinkle: a gem. Delicate, and worth the most."),
         ["lamp"] = Loc.T("The witchlight's lit, and it stays lit: anything enchanted glows when it makes a sound. Click the star on a " +
                    "row to mark one enchanted."),
-        ["counted"] = Loc.T("Two of a kind: each one adds its value. Sellers who don't count only price one."),
+        ["counted"] = Loc.T("Two of a kind: each one adds its value. Sellers who don't count only price one. A click counts one more, a right-click one fewer."),
         ["glow"] = Loc.T("It glowed! That one's enchanted, and worth twice as much. Click the star on its row to mark it."),
         // 0.33: the Lantern Market (0.34: it sells a way in, a way out, a crate off a cart; never an answer).
         ["market"] = Loc.T("The Lantern Market's open under the Barrow tonight, and Nim will take you down. His people sell what can't be " +

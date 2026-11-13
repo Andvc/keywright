@@ -24,10 +24,10 @@ public partial class MentorView : Control
     Button _skip;
     Panel _panel;
 
-    /// <summary>The text up now, cut into sentences, and the one showing.</summary>
+    /// <summary>The text up now, cut into sentences, the one being typed, and what types it (0.37).</summary>
     List<string> _sentences = new();
     int _at;
-    double _nextIn;
+    Typewriter _type;
 
     /// <summary>What a lesson step asks you to do, in a tab over the box (0.35).</summary>
     Control _doTab;
@@ -54,10 +54,10 @@ public partial class MentorView : Control
     /// </summary>
     public bool WaitingForAction => Visible && _lesson && _waiting && ReadThrough;
 
-    /// <summary>The last sentence of what's up is showing.</summary>
-    bool ReadThrough => _at >= _sentences.Count - 1;
+    /// <summary>What's up has been typed out to its end.</summary>
+    bool ReadThrough => !(_type?.Typing ?? false);
 
-    /// <summary>Something's up with sentences still to come (a talk lets Bram finish before it goes on).</summary>
+    /// <summary>Something's up that's still being typed (a talk lets Bram finish before it goes on).</summary>
     public bool MidText => Visible && !ReadThrough;
 
     /// <summary>The player clicked on past a lesson step that's just for reading.</summary>
@@ -104,6 +104,20 @@ public partial class MentorView : Control
         _text = Rich.Make(16, Palette.Text).Place(104, 8, W - 116, H - 30);
         _text.VerticalAlignment = VerticalAlignment.Center;
         AddChild(_text);
+        _type = new Typewriter(_text);
+        _type.SegmentBegan += segment =>
+        {
+            _at = segment;
+            _pips.QueueRedraw();
+        };
+        // Typed to its end: what a click does now, and (a lesson's step to do) a nod from Bram at the instruction.
+        _type.Done += () =>
+        {
+            _at = Math.Max(0, _sentences.Count - 1);
+            _pips.QueueRedraw();
+            UpdateMore();
+            if (_lesson && _waiting) Nod();
+        };
         _pips = new Painter(DrawPips) { Position = new Vector2(104, H - 16) };
         AddChild(_pips);
         _more = UiKit.MakeLabel("", 16, Palette.Gold, HorizontalAlignment.Right).Place(104, H - 26, W - 116, 20);
@@ -207,23 +221,18 @@ public partial class MentorView : Control
     /// The next sentence of what's up; past the last, the next waiting tip, or the box put away. A lesson step to do
     /// stays up.
     /// </summary>
-    /// <summary>A tip says itself, a sentence after another, each once the last has had time to be read (0.36).</summary>
+    /// <summary>A tip types itself out, a sentence after another (0.37; 0.36 brought each sentence whole).</summary>
     public override void _Process(double delta)
     {
-        if (!Visible || _nextIn <= 0) return;
-        _nextIn -= delta;
-        if (_nextIn > 0 || ReadThrough) return;
-        _at++;
-        ShowSentence();
+        if (Visible) _type.Process(delta);
     }
 
     public void Next()
     {
-        // Still being said: a click shows the rest at once.
+        // Still being typed: a click shows the rest at once.
         if (!ReadThrough)
         {
-            _at = _sentences.Count - 1;
-            ShowSentence();
+            _type.Finish();
             return;
         }
         if (_lesson)
@@ -254,26 +263,14 @@ public partial class MentorView : Control
         _at = 0;
         Scale = new Vector2(0.96f, 0.9f);
         CreateTween().TweenProperty(this, "scale", Vector2.One, 0.14f).SetTrans(Tween.TransitionType.Back);
-        ShowSentence();
-    }
-
-    /// <summary>The sentence at <see cref="_at"/>, the trade's words coloured; the box fitted to it.</summary>
-    void ShowSentence()
-    {
-        string sentence = _sentences[_at];
-        // What's been said stays in the box, a shade quieter; the sentence being said is the bright one (0.36: until then
-        // each took the last one's place, and a click).
-        string said = string.Join(" ", _sentences.GetRange(0, _at).ConvertAll(earlier => Rich.Trade(earlier)));
-        _text.Text = (said.Length > 0 ? Rich.Tint(said, Palette.Muted.Lightened(0.2f)) + " " : "") + Rich.Trade(sentence);
-        Fit(string.Join(" ", _sentences.GetRange(0, _at + 1)));
+        // The box fitted to the whole of it (it doesn't grow as it's typed), the trade's words coloured, and typed out
+        // in Bram's voice: a quill's scratch when it's a note he left in the margin.
+        Fit(string.Join(" ", _sentences));
+        bool notes = Main.Instance?.State?.BramNotes == true;
+        _type.Begin(_sentences, string.Join(" ", _sentences.ConvertAll(sentence => Rich.Trade(sentence))), notes ? 1.4f : Typewriter.Voice(Story.Bram),
+            notes ? "scratch" : "talk", notes ? -17f : -15f); // loc: keys
         UpdateMore();
         _pips.QueueRedraw();
-        _nextIn = ReadThrough ? 0 : Words.ReadTime(sentence);
-        // Each sentence comes up a little, like a word said; the step's instruction (its last) with a nod from Bram.
-        _text.Modulate = new Color(1, 1, 1, _at == 0 ? 0 : 0.8f);
-        _text.CreateTween().TweenProperty(_text, "modulate:a", 1f, 0.18f);
-        if (_lesson && _waiting && ReadThrough) Nod();
-        Main.Instance.Sfx.Play("blip", 0.8f + 0.04f * _at, -10);
     }
 
     /// <summary>Bram's face (or his notebook) dips and comes back: a nod at what to do.</summary>

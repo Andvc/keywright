@@ -288,7 +288,7 @@ public partial class SettingsView : Control
         }, Loc.T("The language the game is in (System: the computer's own, when the game has it)."));
         // Everything's in the language the game started in: a new one waits for the next start.
         restart = UiKit.MakeLabel(Loc.T($"In {Localization.Name(Localization.Chosen)} from the next time the game starts."), 16, Palette.Warn)
-            .Place(LabelX, Row(5) + 8, 720, 20);
+            .Place(LabelX, Row(6) + 8, 720, 20);
         restart.Visible = Localization.Chosen != Localization.Current;
         _page.AddChild(restart);
         Choice(Loc.T("Bram's tips"), 1, () => OnOff(Settings.Tips), () =>
@@ -296,14 +296,28 @@ public partial class SettingsView : Control
             Settings.Tips = !Settings.Tips;
             if (Main.Instance.State != null) Main.Instance.State.Guided = Settings.Tips;
         });
-        Choice(Loc.T("Pause in the background"), 2, () => OnOff(Settings.PauseInBackground), () => Settings.PauseInBackground = !Settings.PauseInBackground,
+        // How speech comes (0.37): typed out a character at a time, at a pace of the player's choosing, with or without its blips.
+        Choice(Loc.T("Text speed"), 2, () => Settings.TextSpeed switch
+        {
+            TextSpeed.Slow => Loc.T("Slow"),
+            TextSpeed.Normal => Loc.T("Normal"),
+            TextSpeed.Fast => Loc.T("Fast"),
+            _ => Loc.T("A sentence at once"),
+        }, () => Settings.TextSpeed = Settings.TextSpeed switch
+        {
+            TextSpeed.Slow => TextSpeed.Normal,
+            TextSpeed.Normal => TextSpeed.Fast,
+            TextSpeed.Fast => TextSpeed.AtOnce,
+            _ => TextSpeed.Slow,
+        }, Loc.T("How fast what's said is typed out. A click always shows the rest at once."));
+        Choice(Loc.T("Text sounds"), 3, () => OnOff(Settings.TextSounds), () => Settings.TextSounds = !Settings.TextSounds,
+            Loc.T("A soft blip as speech is typed, in the speaker's own voice."));
+        Choice(Loc.T("Pause in the background"), 4, () => OnOff(Settings.PauseInBackground), () => Settings.PauseInBackground = !Settings.PauseInBackground,
             Loc.T("Opens the menu when another window takes the focus, so a waiting seller's patience doesn't run out."));
-        Label(Loc.T("Your saves and settings"), 3, OS.GetUserDataDir());
+        Label(Loc.T("Your saves and settings"), 5, OS.GetUserDataDir());
         _page.AddChild(UiKit.MakeButton(Loc.T("Open the folder"), Palette.PanelBorder.Lightened(0.2f), 16, () => OS.ShellOpen(OS.GetUserDataDir()))
-            .Place(ControlX, Row(3), ControlW, 36));
-        if (Settings.GmOffered)
-            Choice(Loc.T("GM mode (for testing)"), 4, () => OnOff(Settings.Gm), () => Settings.Gm = !Settings.Gm,
-                Loc.T("Puts gold, a skipped day and the whole journal in the pause menu."));
+            .Place(ControlX, Row(5), ControlW, 36));
+        // (GM mode isn't offered here any more: F1 opens it, 0.37.)
     }
 
     /// <summary>The page that's open, back as a new player finds it.</summary>
@@ -337,6 +351,8 @@ public partial class SettingsView : Control
             case GamePage:
                 Settings.Language = "";
                 Settings.Tips = true;
+                Settings.TextSpeed = TextSpeed.Normal;
+                Settings.TextSounds = true;
                 Settings.PauseInBackground = true;
                 break;
         }

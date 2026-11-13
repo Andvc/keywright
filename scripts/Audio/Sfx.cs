@@ -142,6 +142,10 @@ public partial class Sfx : Node
 
         Add("blip", new Synth(0.35f).Tone(0, 0.35f, 880, 0.5f, 12).Tone(0, 0.35f, 1320, 0.22f, 18));
         Add("tick", new Synth(0.05f).Tone(0, 0.05f, 1500, 0.25f, 80));
+        // Speech being typed (0.37, Typewriter): a soft, short pip a couple of letters apart, pitched by who's speaking;
+        // and a quill's scratch for a letter read off the page.
+        Add("talk", new Synth(0.05f).Tone(0, 0.05f, 440, 0.3f, 70, attack: 0.004f).Tone(0, 0.035f, 880, 0.07f, 95, attack: 0.004f));
+        Add("scratch", new Synth(0.04f).Noise(0, 0.04f, 0.22f, 70, 0.6f, highpass: true));
         Add("bid", new Synth(0.15f).Tone(0, 0.15f, 620, 0.4f, 30).Tone(0, 0.15f, 930, 0.18f, 40));
         Add("coin", new Synth(0.5f)
             .Tone(0, 0.4f, 2350, 0.3f, 11).Tone(0, 0.4f, 3520, 0.2f, 14).Tone(0, 0.4f, 4980, 0.1f, 18)

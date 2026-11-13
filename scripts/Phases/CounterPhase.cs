@@ -522,13 +522,13 @@ public partial class CounterPhase : Phase
         bool readable = !chest.Sealed && chest.Crate == null && !chest.Breathing;
         State.Premark(_slip, _visit);
         if (!readable) return;
-        if (State.MarksMagic)
-            Note(_slip.Marked.Any(_slip.Magic) ? Loc.T("Your Lantern Moth has settled on the lid: something in here is enchanted, and it's starred.")
-                : Loc.T("Your Lantern Moth doesn't stir: nothing in here is enchanted."));
-        if (State.MarksHidden && _slip.CountsHidden)
-            Note(_slip.Hidden ? Loc.T("Your Toll-man's Gauge reads short inside: a false bottom, marked.") : Loc.T("Your Toll-man's Gauge reads true: no false bottom."));
-        if (State.PrimerNames(_visit) is Category named)
-            Note(Loc.T($"Your Wardens' Primer has this sign: something's warded, and it's named on your slip under {Categories.Get(named).Name}."));
+        // One line for all of it (the notes under the chest show the last few: three curios' worth would crowd out the
+        // seller's own clue).
+        var read = new List<string>();
+        if (State.MarksMagic) read.Add(_slip.Marked.Any(_slip.Magic) ? Loc.T("something enchanted, starred") : Loc.T("nothing enchanted"));
+        if (State.MarksHidden && _slip.CountsHidden) read.Add(_slip.Hidden ? Loc.T("a false bottom, marked") : Loc.T("no false bottom"));
+        if (State.PrimerNames(_visit) is Category named) read.Add(Loc.T($"a warded thing, named under {Categories.Get(named).Name}"));
+        if (read.Count > 0) Note(Loc.T($"Your curios read it: {Words.List(read)}."));
     }
 
     /// <summary>The things the quill has ticked already (each once: what you untick stays unticked).</summary>
@@ -836,6 +836,12 @@ public partial class CounterPhase : Phase
         var row = new Row { Category = category };
         var button = UiKit.MakeButton("", Palette.PanelBorder, 16, () => Cycle(category)).Place(PanelX, y, PanelW, RowH);
         UiKit.StylePaperButton(button);
+        // A right-click takes one off (0.37: with two and three of a kind counted from a later season's first day, a
+        // count clicked one too many shouldn't have to go all the way round).
+        button.GuiInput += e =>
+        {
+            if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Right }) Uncount(category);
+        };
         row.Button = button;
         row.Box = new Painter(p => DrawBox(p, CountOf(category), category is Category k && _slip.Magic(k))) { Position = new Vector2(10, 6) };
         button.AddChild(row.Box);
@@ -1340,6 +1346,16 @@ public partial class CounterPhase : Phase
         Teach("slip");
         if (category is Category counted && _slip.Count(counted) >= 2) Teach("counted");
         Game.Moment("02_slip", 0.2);
+    }
+
+    /// <summary>A right-click on a row: one fewer of that kind (or no false bottom).</summary>
+    public void Uncount(Category? category)
+    {
+        if (Busy || Concluded || CountOf(category) == 0) return;
+        if (category is Category kind) _slip.Uncount(kind);
+        else _slip.Hidden = false;
+        Sfx.Play("tick", 0.8f, -6);
+        Refresh();
     }
 
     /// <summary>Clicking a row's star: one of them is enchanted, or not.</summary>

@@ -20,6 +20,7 @@ public partial class TalkPhase : Phase
     SellerView _person;
     MentorView _mentor;
     Label _letterText;
+    Typewriter _letterType;
     Control _panel;
     Button _next;
     int _line = -1;
@@ -67,6 +68,8 @@ public partial class TalkPhase : Phase
                 .Place(10, 20, 540, 20));
             _letterText = UiKit.MakeLabel("", 16, Palette.Ink).Wrapped();
             page.AddChild(_letterText.Place(34, 52, 492, 230));
+            // Read off the page as a quill wrote it (0.37).
+            _letterType = new Typewriter(_letterText);
         }
         else
         {
@@ -131,13 +134,9 @@ public partial class TalkPhase : Phase
         _opening = false;
         // (Not on the way in: Bram's word says itself, and their first line follows it.)
         if (_mentor.MidText && !opening) _mentor.Next();
-        // Still saying it: the rest of the line at once.
+        // Still being typed: the rest of the line at once.
         else if (_letterText == null && _person.MidSpeech) _person.FinishSpeech();
-        else if (_letterText != null && _line >= 0 && _line < _talk.Lines.Count && _at < _sentences.Count - 1)
-        {
-            _at = _sentences.Count - 1;
-            ShowSentence();
-        }
+        else if (_letterType != null && _letterType.Typing) _letterType.Finish();
         else
         {
             _line++;
@@ -159,47 +158,36 @@ public partial class TalkPhase : Phase
             {
                 _sentences = Words.Sentences(line.Text);
                 if (_sentences.Count == 0) _sentences.Add(line.Text);
-                ShowSentence();
+                // On a letter's page, typed with a quill's scratch; at the counter, in the bubble, in their own voice.
+                if (_letterType != null) _letterType.Begin(_sentences, string.Join(" ", _sentences), 1.5f, "scratch", -17f); // loc: keys
+                else _person.Say(string.Join(" ", _sentences), record: false);
             }
-            Sfx.Play("tick", 1f, -10);
-        }
-        // The last line, said to its end: the choices come with it.
-        if (_line == _talk.Lines.Count - 1 && _at >= _sentences.Count - 1 && !_mentor.MidText) Ask();
-    }
-
-    /// <summary>The sentence the line's got to: in the bubble, one at a time; on a letter's page, the page so far.</summary>
-    void ShowSentence()
-    {
-        if (_letterText != null)
-        {
-            _letterText.Text = string.Join(" ", _sentences.Take(_at + 1));
-            _nextIn = _at < _sentences.Count - 1 ? Words.ReadTime(_sentences[_at]) : 0;
-        }
-        // In the bubble the whole line, which says itself a sentence after another (0.36: no click a sentence).
-        else
-        {
-            _person.Say(string.Join(" ", _sentences), record: false);
-            _at = _sentences.Count - 1;
         }
     }
 
-    double _nextIn;
+    /// <summary>The line being said is all out: in the bubble, on the page, or in Bram's corner.</summary>
+    bool LineOut => !_mentor.MidText && (_letterType != null ? !_letterType.Typing : _person == null || !_person.MidSpeech);
 
-    /// <summary>A letter's page fills in by itself, a sentence after another.</summary>
+    /// <summary>
+    /// A talk types itself out (0.37): their first line once Bram's word (if he has one) is out, a letter's page as a
+    /// quill wrote it; and once the last line is all out, the choices come.
+    /// </summary>
     public override void _Process(double delta)
     {
-        if (_opening && !_mentor.MidText && !_leaving) Next();
-        if (_nextIn <= 0 || _letterText == null || _leaving) return;
-        _nextIn -= delta;
-        if (_nextIn > 0 || _at >= _sentences.Count - 1) return;
-        _at++;
-        ShowSentence();
-        if (_line == _talk.Lines.Count - 1 && _at >= _sentences.Count - 1 && _panel == null && !_answered) Ask();
+        if (_leaving) return;
+        if (_opening && !_mentor.MidText) Next();
+        _letterType?.Process(delta);
+        if (_line >= 0 && _line == _talk.Lines.Count - 1 && _panel == null && !_answered && LineOut) Ask();
     }
 
     void Say(string text, Color? color = null)
     {
-        if (_letterText != null) _letterText.Text = text;
+        if (_letterType != null)
+        {
+            var sentences = Words.Sentences(text);
+            if (sentences.Count == 0) sentences.Add(text);
+            _letterType.Begin(sentences, string.Join(" ", sentences), 1.5f, "scratch", -17f); // loc: keys
+        }
         else _person.Say(text, color, record: false);
     }
 

@@ -64,6 +64,10 @@ public static class Settings
     public static string Language { get; set; } = "";
     public static bool Tips { get; set; } = true;
 
+    /// <summary>How fast speech is typed out (0.37, <see cref="Ui.Typewriter"/>), and whether the letters blip as they come.</summary>
+    public static Ui.TextSpeed TextSpeed { get; set; } = Ui.TextSpeed.Normal;
+    public static bool TextSounds { get; set; } = true;
+
     /// <summary>Open the menu when the game's window loses focus (a seller's patience stops with it).</summary>
     public static bool PauseInBackground { get; set; } = true;
 
@@ -116,6 +120,8 @@ public static class Settings
             MuteInBackground = Get(file, "audio", "mute_in_background", MuteInBackground);
             Language = Get(file, "game", "language", Language);
             Tips = Get(file, "game", "tips", Tips);
+            TextSpeed = (Ui.TextSpeed)Math.Clamp(Get(file, "game", "text_speed", (int)TextSpeed), 0, 3);
+            TextSounds = Get(file, "game", "text_sounds", TextSounds);
             PauseInBackground = Get(file, "game", "pause_in_background", PauseInBackground);
             CursorSpeed = Math.Clamp(Get(file, "controls", "cursor_speed", CursorSpeed), 0.5f, 2f);
             Gm = Gm || Get(file, "game", "gm", Gm);
@@ -144,6 +150,8 @@ public static class Settings
         file.SetValue("audio", "mute_in_background", MuteInBackground);
         file.SetValue("game", "language", Language);
         file.SetValue("game", "tips", Tips);
+        file.SetValue("game", "text_speed", (int)TextSpeed);
+        file.SetValue("game", "text_sounds", TextSounds);
         file.SetValue("game", "pause_in_background", PauseInBackground);
         file.SetValue("game", "gm", Gm);
         file.SetValue("controls", "cursor_speed", CursorSpeed);
@@ -238,6 +246,8 @@ public static class Settings
         Music = 0.6f;
         MuteInBackground = false;
         Tips = true;
+        TextSpeed = Ui.TextSpeed.Normal;
+        TextSounds = true;
         PauseInBackground = true;
         CursorSpeed = 1f;
         Array.Clear(_soundSets);
