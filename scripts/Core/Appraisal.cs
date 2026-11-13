@@ -65,8 +65,14 @@ public sealed class Appraisal
     /// <summary>The chest's colour: what each thing is probably worth.</summary>
     public Rarity Chest { get; }
 
-    /// <summary>The shop tier, which decides what a false bottom might hold and whether to count.</summary>
+    /// <summary>The shop tier, which decides what a false bottom might hold.</summary>
     public int Tier { get; }
+
+    /// <summary>
+    /// The trade's ways as the slip's keeper knows them (<see cref="GameState.Ways"/>; the market's own if no more is
+    /// known): whether there's a false bottom to mark, and whether to count two or three of a kind.
+    /// </summary>
+    public int Ways { get; }
 
     /// <summary>The player thinks there's a false bottom.</summary>
     public bool Hidden
@@ -112,13 +118,17 @@ public sealed class Appraisal
     /// <summary>Nothing marked at all: a chest bought on an empty slip wasn't appraised (sight unseen, it was bought blind).</summary>
     public bool Blank => _count.All(c => c == 0) && !_hidden;
 
-    /// <summary>The most of one kind the slip counts: two or three of a kind turn up from the town shop on.</summary>
-    public int MaxCount => Tier >= Market.PairsTier ? 3 : 1;
+    /// <summary>The most of one kind the slip counts: two or three of a kind turn up once the trade's ways reach Crownhold's.</summary>
+    public int MaxCount => Ways >= Market.PairsTier ? 3 : 1;
 
-    public Appraisal(Rarity chest, int tier, IEnumerable<Category> marked = null)
+    /// <summary>The slip has a false-bottom row: once the trade's ways reach Thornwick's.</summary>
+    public bool CountsHidden => Ways >= Market.CraftTier;
+
+    public Appraisal(Rarity chest, int tier, IEnumerable<Category> marked = null, int ways = 0)
     {
         Chest = chest;
         Tier = tier;
+        Ways = Math.Max(tier, ways);
         foreach (var category in marked ?? Enumerable.Empty<Category>())
             _count[(int)category] = Math.Min(MaxCount, _count[(int)category] + 1);
     }
@@ -128,9 +138,10 @@ public sealed class Appraisal
     /// any of a kind is enchanted, and a false bottom if there is one. How good each thing is, it can't say: that's still
     /// the opening's.
     /// </summary>
-    public static Appraisal Recorded(Chest chest, int tier)
+    public static Appraisal Recorded(Chest chest, int tier, int ways = 0)
     {
-        var slip = new Appraisal(chest.Quality, tier) { Hidden = chest.Hidden != null && tier >= 2 };
+        var slip = new Appraisal(chest.Quality, tier, ways: ways);
+        slip.Hidden = chest.Hidden != null && slip.CountsHidden;
         // The Guild's assessors register warded goods too: the engine names it.
         var things = chest.Items.Where(i => !i.Fake && !i.Broken).Concat(chest.Warded == null ? Array.Empty<Item>() : new[] { chest.Warded });
         foreach (var kind in things.GroupBy(i => i.Category))
@@ -263,7 +274,7 @@ public sealed class Appraisal
             // Marked enchanted: that kind glowed. A light shows a sound glowing, not how many of its kind glow, so every
             // enchanted one of it is read right (0.35: only the first was, so an archmage's staff, or enchanter's chalk
             // putting a second in one kind, made a perfect read impossible).
-            bool magicLeft = Magic(kind), glowed = Magic(kind);
+            bool magicLeft = Magic(kind), glowed = Magic(kind), lit = Model?.Lit ?? true;
             for (int i = 0; i < items.Count; i++)
             {
                 var item = items[i];
@@ -271,9 +282,10 @@ public sealed class Appraisal
                 ReadKind read;
                 if (item.Fake) read = counted ? ReadKind.Fooled : ReadKind.SpottedFake;
                 else if (item.Broken) read = counted ? ReadKind.Broken : ReadKind.SpottedBroken;
-                else if (!counted) read = item.Magic && !item.Shone ? ReadKind.MissedMagic : ReadKind.Missed;
+                else if (!counted) read = item.Magic && !item.Shone && lit ? ReadKind.MissedMagic : ReadKind.Missed;
                 else if (item.Shone) read = ReadKind.Lucky;
-                else if (item.Magic) read = glowed ? ReadKind.RightMagic : ReadKind.MissedMagic;
+                // With no light to see a glow by, an enchanted thing counted as its kind was read as well as it could be.
+                else if (item.Magic) read = glowed || !lit ? ReadKind.RightMagic : ReadKind.MissedMagic;
                 else read = ReadKind.Right;
                 if (read == ReadKind.RightMagic) magicLeft = false;
                 reads.Add(new ItemRead(item, read, Warded: chest.Unwarded != null && item.Id == chest.Unwarded.Id));

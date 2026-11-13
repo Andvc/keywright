@@ -374,8 +374,33 @@ public sealed partial class GameState
         return true;
     }
 
-    /// <summary>Nim comes by every night (0.28), after the day's end and the Guild, from the third.</summary>
-    public bool PeddlerToday => Day >= Curios.FirstNight && !AwayTonight;
+    /// <summary>
+    /// Nim comes by every night (0.28), after the day's end and the Guild: from the third in a first season (the first
+    /// two have enough new), from the first in any later one (0.37).
+    /// </summary>
+    public bool PeddlerToday => Day >= (Veteran ? 1 : Curios.FirstNight) && !AwayTonight;
+
+    // ---- Bram's drawer (0.37) ----
+
+    /// <summary>The drawer's been offered this season (something taken from it, or nothing).</summary>
+    public bool DrawerDone { get; private set; }
+
+    /// <summary>
+    /// Bram's drawer is open (<see cref="Curios.Drawer"/>): the first morning of a season after the first, with nothing
+    /// taken from it yet.
+    /// </summary>
+    public bool DrawerOpen => Veteran && Day <= 1 && !DrawerDone && _curios.Count < CurioSlots && Curios.Drawer(this).Count > 0;
+
+    /// <summary>Takes one curio out of Bram's drawer (or none): it's yours, and worth a coin to Nim.</summary>
+    public void TakeFromDrawer(CurioDef curio)
+    {
+        if (DrawerDone) return;
+        DrawerDone = true;
+        if (curio == null || HasCurio(curio.Key)) return;
+        _curios.Add(curio.Key);
+        _curioPaid[curio.Key] = 2;
+        CuriosSeen.Add(curio.Key);
+    }
 
     /// <summary>The week's story is told this morning.</summary>
     public bool StoryToday => Plan != null && Plan.Week == Week && Plan.StoryDay > 0 && Plan.StoryDay == DayOfWeek;
@@ -513,15 +538,21 @@ public sealed partial class GameState
         // Next week is a market further in (0.36), while there's a due to pay: its days are planned for that market.
         NextPlan = Events.Plan(Seed, Week + 1, Math.Max(Tier, Math.Min(ShopTiers.Max, Week + 1)), _eventsSeen, fair);
         // The regulars' first commissions wait a day (Patrons.FromDay): the first morning at Thornwick has enough new.
-        if (Week < Patrons.FromWeek || (Week == Patrons.FromWeek && Patrons.FromDay > 1)) return;
+        if (Week < CommissionsFrom || (Week == CommissionsFrom && Patrons.FromDay > 1)) return;
 
         Commissions.AddRange(Patrons.Roll(rng, this));
     }
 
+    /// <summary>
+    /// The week the regulars start asking for things: the second in a first season (after the first visit from the Guild),
+    /// the first in any later one, whose regulars know the shop (0.37).
+    /// </summary>
+    public int CommissionsFrom => Veteran ? 1 : Patrons.FromWeek;
+
     /// <summary>The regulars' first commissions, on the second morning of the week they start asking.</summary>
     void FirstCommissions()
     {
-        if (Week != Patrons.FromWeek || DayOfWeek != Patrons.FromDay || Patrons.FromDay <= 1) return;
+        if (Week != CommissionsFrom || DayOfWeek != Patrons.FromDay || Patrons.FromDay <= 1) return;
         Commissions.AddRange(Patrons.Roll(new Random(unchecked(Seed * 104729 + Week * 7907 + 13)), this));
     }
 
@@ -533,7 +564,7 @@ public sealed partial class GameState
     {
         Commissions.RemoveAll(c => c.Lapses > 0 && c.Lapses < Day);
         if (EventIs("stranger"))
-            Queue.Insert(Rng.Next(1, Queue.Count + 1), Sing(Events.StrangerVisit(Rng, Tier, PriceFactor)));
+            Queue.Insert(Rng.Next(1, Queue.Count + 1), Sing(Events.StrangerVisit(Rng, Tier, PriceFactor, Ways)));
         if (EventIs("gilded"))
         {
             var plain = Queue.Select((v, i) => (v, i)).Where(p => p.v.Lesson == null).ToArray();

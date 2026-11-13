@@ -181,18 +181,22 @@ public sealed class Visit
     public bool Handled { get; private set; }
 
     /// <summary>
-    /// The checks made on this chest so far (<see cref="Check.Key"/>): each cost a listen the first time
-    /// (<see cref="GameState.Listen"/>, 0.36), and costs nothing again.
+    /// The checks made on this chest so far (<see cref="Check.Key"/>): each strength it's been shaken at, with the
+    /// lodestone or without, and a drop. Listening is free (0.37 took 0.36's counted listens out again): this is only
+    /// what the counter and the opening remember of what was tried.
     /// </summary>
     public HashSet<string> Checks { get; } = new();
 
-    /// <summary>Listening to this chest costs nothing, whoever brought it (a chest the story puts in your hands).</summary>
-    public bool FreeListens { get; set; }
+    /// <summary>Notes a check made on this chest (<see cref="Checks"/>).</summary>
+    public void Tried(Check check) => Checks.Add(check.Key);
+
+    /// <summary>Whether this check has been made on this chest.</summary>
+    public bool HasTried(Check check) => Checks.Contains(check.Key);
 
     /// <summary>
     /// The things in the chest that the checks made could have told you of, noted as it's bought (by id): whatever sounds
-    /// at a strength you listened at. Anything else you didn't mark wasn't missed: you never listened for it (0.36), and
-    /// the opening shows it so (<see cref="CouldHear"/>).
+    /// at a strength you shook it at. Anything else you didn't mark wasn't misread: you never listened for it, and the
+    /// opening shows it so (<see cref="CouldHear"/>).
     /// </summary>
     HashSet<int> _audible;
 
@@ -600,4 +604,18 @@ public static class Gut
 
     static string Pick((float Below, string[] Lines)[] bands, float ratio, Random rng) =>
         rng.PickOne(bands.First(b => ratio < b.Below).Lines);
+}
+
+/// <summary>
+/// One way of checking a chest that tells you something new: shaking it at a strength (with the lodestone on or off),
+/// or dropping it. A visit remembers which have been made (<see cref="Visit.Checks"/>).
+/// </summary>
+public readonly record struct Check(Shake Level, bool Magnet = false, bool Drop = false)
+{
+    public static Check Shaking(Shake level, bool magnet = false) => new(level, magnet);
+
+    public static readonly Check Dropping = new(Shake.Still, false, true);
+
+    /// <summary>As a visit remembers it (<see cref="Visit.Checks"/>).</summary>
+    public string Key => Drop ? "drop" : Magnet ? $"{(int)Level}m" : $"{(int)Level}"; // loc: keys
 }

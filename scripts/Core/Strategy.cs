@@ -34,57 +34,6 @@ public static class Strategy
         return Rushed(visit, state) || visit.ShakeFee > 0 ? new[] { Shake.Gentle, Shake.Hard } : Every;
     }
 
-    /// <summary>
-    /// The next check a careful player spends a listen on (0.36, <see cref="GameState.Listen"/>), given what the chest has
-    /// told them so far; null when nothing more is worth one. The first shake is the one that hears most: hard, which
-    /// stirs everything (firmly, where a hard shake isn't to be had or straw muffles a strength; the one strength a
-    /// rotten chest stands). Then only what that shake couldn't tell: if steel clanked, the gentler shake that stirs the
-    /// delicate things without it; through straw, the hard shake that reaches the weapons; a gentle one for sand, from
-    /// someone who deals in it. Then the drop, where false bottoms are common enough to be worth it (or there are
-    /// listens to spare), and the lodestone where fakes are about.
-    /// </summary>
-    /// <param name="spare">There are listens to spare today: make the checks that only sometimes pay.</param>
-    public static Check? NextCheck(Visit visit, Hearing hearing, GameState state = null, bool tools = true, bool spare = false)
-    {
-        var seller = visit.Seller;
-        int tier = state?.Tier ?? seller.Tier;
-        bool hard = (state?.CanShakeHardAt(seller) ?? !seller.Packhorse) && !(state?.MindsHardShake(seller) ?? seller.HatesHardShake);
-        bool Tried(Shake level) => hearing.HasTried(level, false);
-        bool packed = visit.Chest.Packed && !visit.Chest.Unmasked;
-        float limit = state?.ShakeLimit(seller) ?? seller.ShakeLimit;
-        bool oneStrength = limit > 0 && limit < 2 * seller.ShakeLimit;
-        if (!Every.Any(Tried))
-        {
-            if (oneStrength) return Check.Shaking(DelicateShare(visit) > 0.5f ? Shake.Gentle : hard ? Shake.Hard : Shake.Firm);
-            return Check.Shaking(packed || !hard ? Shake.Firm : Shake.Hard);
-        }
-        if (!oneStrength)
-        {
-            // Steel clanked: the delicate things are drowned, and the shake that stirs them without it is worth a listen.
-            var quiet = packed ? Shake.Firm : Shake.Gentle;
-            if (MaybeDrowned(visit, hearing) && !Tried(quiet)) return Check.Shaking(quiet);
-            // Through straw a firm shake only reaches what a gentle one would: the weapons want a hard one.
-            if (packed && hard && !Tried(Shake.Hard)) return Check.Shaking(Shake.Hard);
-            // Sand pours at the gentlest shake, where parchment never stirs: worth a listen from someone who deals in it.
-            if (!packed && !Tried(Shake.Gentle) && hearing.HeardAny(Category.Scrolls) && seller.Fakes.Contains(Category.Scrolls))
-                return Check.Shaking(Shake.Gentle);
-        }
-        // (The King's game and a contest are won by an exact read: the drop is part of one.)
-        if (ShouldDrop(visit, hearing, tier, state) &&
-            (spare || seller.SlipPrice || visit.Contest || (state?.HiddenChance(seller) ?? seller.HiddenChance) >= DropWorth)) return Check.Dropping;
-        if (tools && state != null && (spare || FakesAbout(visit, state)))
-            foreach (var level in MagnetLevels(visit, hearing, state))
-                if (!hearing.HasTried(level, true)) return Check.Shaking(level, magnet: true);
-        return null;
-    }
-
-    /// <summary>A false bottom is likely enough in this seller's chests to be worth a listen on the drop (Corvin's, Brass's, the Maw's hoard).</summary>
-    const float DropWorth = 0.2f;
-
-    /// <summary>Gilded iron's about: this seller deals in it, or it's a season of forgers.</summary>
-    static bool FakesAbout(Visit visit, GameState state) =>
-        visit.Seller.Fakes.Any(k => Categories.Get(k).FakeIron) || state.Under(Challenges.Forgers);
-
     /// <summary>The gentlest shake that stirs this kind in this chest (straw muffles a strength; 4: never).</summary>
     static int Needs(Visit visit, Category kind) => (int)Categories.Get(kind).StirsAt + (visit.Chest.Packed && !visit.Chest.Unmasked ? 1 : 0);
 
@@ -128,7 +77,7 @@ public static class Strategy
     /// mind (or it's Hesk, who can't lift it).
     /// </summary>
     public static bool ShouldDrop(Visit visit, Hearing hearing, int tier, GameState state = null) =>
-        tier >= 2 && (state?.CanDrop ?? true) && !(state?.MindsDrop(visit.Seller) ?? visit.Seller.HatesDrop) && !Rushed(visit, state) && !hearing.Dropped &&
+        Math.Max(tier, state?.Ways ?? 0) >= Market.CraftTier && (state?.CanDrop ?? true) && !(state?.MindsDrop(visit.Seller) ?? visit.Seller.HatesDrop) && !Rushed(visit, state) && !hearing.Dropped &&
         (state?.DropSturdier >= 1 || !Categories.All.Any(c => c.Fragile && hearing.HeardAny(c.Category)));
 
     /// <summary>
@@ -177,7 +126,7 @@ public static class Strategy
     public static void Reckon(Appraisal slip, Hearing hearing, Visit visit, GameState state = null)
     {
         // With the smugglers' compass every chest has a false bottom: mark it, dropped or not (0.35: only a drop did).
-        if (state?.HasCurio("compass") == true && slip.Tier >= 2 && !visit.Chest.Breathing && visit.Chest.Crate == null) slip.Hidden = true;
+        if (state?.HasCurio("compass") == true && slip.CountsHidden && !visit.Chest.Breathing && visit.Chest.Crate == null) slip.Hidden = true;
         if (Weighed(visit, state)) Weigh(slip, hearing, visit, state);
         else if (Counted(visit, state) && HeardAll(visit, hearing, slip.Tier))
             slip.Hidden = Market.ArticleCount(visit.Chest) > slip.Marked.Where(k => k != Category.Heartsong).Sum(slip.Count) + hearing.Spotted().Count();
@@ -242,10 +191,10 @@ public static class Strategy
         // Under a false bottom: nothing, or one of the things people hide (a drop, if there was one, settles which).
         var hidden = new List<(Category? Kind, float Chance)>();
         // (A smuggler's hook makes them likelier; the smugglers' compass, certain.)
-        float hiddenChance = tier < 2 ? 0 : state?.Boosts.AlwaysHidden == true ? 1
+        float hiddenChance = !slip.CountsHidden ? 0 : state?.Boosts.AlwaysHidden == true ? 1
             : Math.Min(1, (seller.HiddenChance + (state?.Boosts.Hidden ?? 0)) * (state?.Boosts.HiddenFactor ?? 1));
         if (!hearing.Hollow) hidden.Add((null, hearing.Dropped ? 1 : 1 - hiddenChance));
-        if (tier >= 2 && (!hearing.Dropped || hearing.Hollow))
+        if (slip.CountsHidden && (!hearing.Dropped || hearing.Hollow))
             foreach (var (kind, chance) in Market.HiddenOdds(tier)) hidden.Add((kind, chance * (hearing.Hollow ? 1 : hiddenChance)));
 
         // Gilded fakes he heard but didn't catch with the magnet: each weighs half what it should.
@@ -333,7 +282,7 @@ public static class Strategy
                 worth += likely[(int)kind.Category] / total * 2.5f * (state?.Expected(kind.Category, slip.Chest) ?? Categories.Expected(kind.Category, slip.Chest)) * 0.8f;
         // Brass's ticket settles a false bottom once everything has been heard; so does a scale.
         bool counted = Counted(visit, state) && HeardAll(visit, hearing, slip.Tier);
-        if (!hearing.Dropped && !slip.Hidden && slip.Tier >= 2 && !weighed && !counted)
+        if (!hearing.Dropped && !slip.Hidden && slip.CountsHidden && !weighed && !counted)
             worth += (state?.HiddenChance(seller) ?? seller.HiddenChance) * slip.HiddenValue;
         // A fence's mark sells a fake for what the real thing would fetch: what was caught out is worth having after all.
         if (state?.HasCurio("mark") ?? false) worth += hearing.Spotted().Sum(k => Categories.Expected(k, slip.Chest) * state.SaleMultiplier(k));
@@ -565,9 +514,9 @@ public static class Strategy
     public static readonly Dictionary<string, float> CurioWorth = new()
     {
         ["monocle"] = 2, ["draught"] = 8, ["aether"] = 5, ["chalk"] = 3, ["ring"] = 7, ["staff"] = 9,
-        ["sealed"] = 0, ["dip"] = 0, ["bond"] = 0, ["wholesale"] = 0, ["token"] = 4, ["blindfold"] = 0, ["plugs"] = 0,
+        ["sealed"] = 0, ["dip"] = 0, ["bond"] = 0, ["wholesale"] = 0, ["token"] = 4, ["blindfold"] = 0,
         ["signet"] = 2, ["tongue"] = 4, ["knot"] = 13, ["hourglass"] = 12, ["bell"] = 11, ["coffer"] = 9, ["goldentongue"] = 9,
-        ["trumpet"] = 6, ["watch"] = 3, ["beads"] = 2, ["echo"] = 9, ["seal"] = 10, ["register"] = 10, ["crescent"] = 3, ["fork"] = 16, ["ledger"] = 20,
+        ["trumpet"] = 4, ["watch"] = 3, ["beads"] = 2, ["seal"] = 10, ["register"] = 10, ["crescent"] = 3, ["fork"] = 16, ["ledger"] = 20,
         ["truthglass"] = 22,
         ["crate"] = 3, ["hook"] = 14, ["rod"] = 16, ["log"] = 12, ["pass"] = 14, ["compass"] = 22,
         ["wardlamp"] = 13, ["pillow"] = 7, ["wardtally"] = 4, ["wardkey"] = 14, ["aldricseal"] = 11,
@@ -613,7 +562,7 @@ public static class Strategy
         {
             "book" => state.Exhibition >= 10 ? 1 : 0.2f,
             "rope" or "lamps" or "dome" => display ? 1 : 0.3f,
-            "letter" or "ribbon" or "errand" => state.Week >= Patrons.FromWeek - 1 ? 1 : 0.5f,
+            "letter" or "ribbon" or "errand" => state.Week >= state.CommissionsFrom - 1 ? 1 : 0.5f,
             "catalogue" => state.Week <= 2 ? 1 : 0.4f,
             _ => 1,
         };

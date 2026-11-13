@@ -58,77 +58,6 @@ public partial class ShakeBox : Node2D
     /// <summary>The magnet is on: iron can't move, so it makes no sound.</summary>
     public bool Magnet;
 
-    /// <summary>
-    /// Whether a shake at this strength can be heard yet (0.36): the counter opens each strength for a listen
-    /// (<see cref="GameState.Listen"/>), and until it has, nothing inside sounds at it. Null: every strength is open.
-    /// </summary>
-    public Func<Shake, bool> Open;
-
-    /// <summary>How fast the chest is moving in the hand right now (px/s), unsmoothed: 0 when it isn't being shaken.</summary>
-    public float HandSpeed => Dragging ? _vel.Length() : 0f;
-
-    /// <summary>
-    /// How long, in this hold, the chest has really been shaken at a strength (0.36, for the ear: <see cref="Open"/>):
-    /// the time it has moved at least that fast while that was the hardest it was being shaken, and while it was going
-    /// back and forth. Measured here, a physics step at a time, where the speed is known: the counter used to sample
-    /// the speed once a frame, and at a low frame rate (or with a mouse that reports in jumps) the samples missed every
-    /// fast moment, so a strength lit up on the meter and never got the ear.
-    /// <para>
-    /// Winding up to a hard shake passes through the gentler ones too quickly to count; winding down doesn't count at
-    /// all (the level remembers the hardest shake of the last moment); and lifting the chest to drop it, carrying it
-    /// across the counter, or picking it up and putting it down again isn't shaking: a shake goes back and forth, so
-    /// nothing counts until the hand has turned twice.
-    /// </para>
-    /// </summary>
-    public double Dwell(Shake level) => _dwell[(int)level];
-
-    /// <summary>Starts the count again (the lodestone's been switched: the same shake is another check now).</summary>
-    public void ResetDwell() => Array.Clear(_dwell);
-
-    readonly double[] _dwell = new double[4];
-    Vector2 _strokeDir;
-    double _lastTurn = double.NegativeInfinity, _turnBefore = double.NegativeInfinity;
-
-    /// <summary>
-    /// A shake is a hand going back and forth: while its last two turns are both this recent, it's still one (a slow,
-    /// gentle shake turns about twice a second; up and down once is a lift, not a shake).
-    /// </summary>
-    const double TurnHold = 1.1;
-
-    void UpdateDwell(float dt)
-    {
-        if (!Dragging)
-        {
-            Array.Clear(_dwell);
-            _strokeDir = Vector2.Zero;
-            _lastTurn = _turnBefore = double.NegativeInfinity;
-            return;
-        }
-        float speed = _vel.Length();
-        if (speed >= GentleSpeed)
-        {
-            var dir = _vel / speed;
-            if (_strokeDir == Vector2.Zero) _strokeDir = dir;
-            else if (dir.Dot(_strokeDir) < 0)
-            {
-                _turnBefore = _lastTurn;
-                _lastTurn = _time;
-                _strokeDir = dir;
-            }
-        }
-        if (_time - _turnBefore > TurnHold) return;
-        if (Level > Shake.Still && speed >= SpeedOf(Level)) _dwell[(int)Level] += dt;
-    }
-
-    /// <summary>The speed (px/s) at which a shake of this strength starts.</summary>
-    public static float SpeedOf(Shake level) => level switch
-    {
-        Shake.Gentle => GentleSpeed,
-        Shake.Firm => FirmSpeed,
-        Shake.Hard => HardSpeed,
-        _ => 0f,
-    };
-
     /// <summary>The witchlight is lit: magic glows when it makes a sound.</summary>
     public bool Witchlight;
 
@@ -363,7 +292,6 @@ public partial class ShakeBox : Node2D
         }
         if (!_airborne) _vel = (_pos - previous) / Mathf.Max(dt, 0.0001f);
         UpdateLevel(dt);
-        UpdateDwell(dt);
 
         float tilt = Dragging ? Mathf.Clamp(_vel.X * 0.0003f, -0.3f, 0.3f) : Mathf.Lerp(_box.Rotation, 0, 0.2f);
         _box.Position = _pos;
@@ -420,7 +348,6 @@ public partial class ShakeBox : Node2D
     {
         var level = Level;
         // A strength the ear hasn't been given yet: nothing's heard at it.
-        if (Open != null && !Open(level)) return false;
         // Glass that broke in a drop doesn't slosh any more.
         if (_chest.Now(item).Broken) return false;
         // Not shaken hard enough to stir it, or held still by the magnet: it makes no sound.

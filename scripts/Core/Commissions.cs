@@ -130,7 +130,7 @@ public static class Patrons
         {
             var patron = rng.PickWeighted(crowd.ToArray(), s => s.Tier == state.Tier ? 2f : 1f);
             crowd.Remove(patron);
-            bool enchanted = state.Tier >= 3 && list.All(c => c.Kind != CommissionKind.Enchanted) && rng.NextFloat() < 0.25f;
+            bool enchanted = state.Ways >= Market.MagicTier && list.All(c => c.Kind != CommissionKind.Enchanted) && rng.NextFloat() < 0.25f;
             if (enchanted)
             {
                 list.Add(new Commission

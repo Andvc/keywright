@@ -73,6 +73,12 @@ public partial class Autoplay : Node
             case DayEndPhase dayEnd:
                 await DriveDayEnd(dayEnd);
                 break;
+            // Bram's drawer, a later season's first morning: a look, and the one worth most to the shop.
+            case DrawerPhase drawer:
+                await Wait(2.2);
+                if (IsInstanceValid(drawer) && !drawer.Done) drawer.Take(drawer.Cards.OrderByDescending(c => Strategy.CurioScore(State, c)).FirstOrDefault());
+                await Wait(1.2);
+                break;
             // The road inward, on a market's first morning: a look, and on.
             case RoadPhase road:
                 await Wait(2.6);
@@ -383,8 +389,7 @@ public partial class Autoplay : Node
         double seconds = State.ShakeLimit(visit.Seller) > 0 ? Math.Min(ShakeSeconds, State.ShakeLimit(visit.Seller) / Strategy.Levels(visit, State).Length - 0.6) : hurried ? 1.2 : ShakeSeconds;
         // The Bookkeeping Engine has marked the slip already: nothing to shake (unless a lesson asks for it).
         bool recorded = Strategy.Recorded(visit, State) && visit.Lesson == null;
-        // A lesson is free to listen to, and its steps ask for particular shakes: every strength, the magnet, the drop.
-        if (!recorded && visit.Lesson != null)
+        if (!recorded)
         {
             foreach (var level in Strategy.Levels(visit, State))
                 if (!await Shake(counter, level, seconds)) return;
@@ -399,28 +404,6 @@ public partial class Autoplay : Node
             }
             // Drop it to listen for a false bottom, unless there's glass in there or the seller would mind.
             if (Strategy.ShouldDrop(visit, counter.Hearing, State.Tier, State) && !await Drop(counter)) return;
-        }
-        // Any other chest (0.36): a check at a time, each a listen, the next chosen by what the last one told, up to this
-        // chest's share of what's left of the day's (Strategy.NextCheck, as the sim's careful player).
-        else if (!recorded)
-        {
-            int share = State.ListenShare(visit);
-            for (int spent = 0; spent < share; spent++)
-            {
-                bool spare = State.ListensLeft - 1 >= 2 * State.Queue.Count(v => v.Talk == null);
-                if (Strategy.NextCheck(visit, counter.Hearing, State, spare: spare) is not Check check) break;
-                if (check.Drop)
-                {
-                    if (!await Drop(counter)) return;
-                    continue;
-                }
-                if (check.Magnet != counter.MagnetOn)
-                {
-                    counter.ToggleMagnet();
-                    await Wait(0.6);
-                }
-                if (!await Shake(counter, check.Level, check.Magnet ? ShakeSeconds : seconds)) return;
-            }
         }
 
         if (!_notebookShown && !hurried)
@@ -509,7 +492,7 @@ public partial class Autoplay : Node
         }
 
         // The slip, corrected from what it heard (how many of each, and which glowed), one row at a time.
-        var read = recorded ? counter.Slip : counter.Hearing.Read(visit.Chest.Quality, State.Tier);
+        var read = recorded ? counter.Slip : counter.Hearing.Read(visit.Chest.Quality, State.Tier, State.Ways);
         if (!recorded)
         {
             Strategy.Reckon(read, counter.Hearing, visit, State);

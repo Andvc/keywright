@@ -23,6 +23,13 @@ public interface ISlipModel
 
     /// <summary>A chest with an enchanted thing in it has everything real in it enchanted (the archmage's staff).</summary>
     bool EnchantsAll => false;
+
+    /// <summary>
+    /// Something here shows an enchantment (a witchlight, a monocle, a moth): a glow could have been seen and marked.
+    /// With no light, an enchanted thing counted as its kind is read right (0.37: it was "missed the glow", and no read
+    /// of a chest with one in it could be perfect until the witchlight was bought).
+    /// </summary>
+    bool Lit => true;
 }
 
 /// <summary>
@@ -414,6 +421,9 @@ public sealed partial class GameState : ISlipModel
                                                           (right && HasCurio("truthglass") ? Curios.TruthglassBonus : 1) : 1);
 
     public bool EnchantsAll => HasCurio("staff");
+
+    /// <summary>A light to see a glow by (<see cref="ISlipModel.Lit"/>).</summary>
+    public bool Lit => Witchlight;
 
     public float Value(Category kind, Rarity quality, bool magic, Rarity chest, int count, bool hidden = false) =>
         Categories.Value(kind, quality, magic) * SaleMultiplier(kind) * Read(true) *

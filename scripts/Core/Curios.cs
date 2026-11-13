@@ -84,8 +84,6 @@ public static class Curios
         // Sight unseen: buy a chest without laying a hand on it. Cheaper, luckier, insured: the build that needs no ear.
         new("sealed", Loc.T("Sealed Bid"), Loc.T($"Buy a chest sight unseen and its seller knocks {Pct(1 - SealedPrice)} off."),
             C, "sealed", 1, T(Blind)),
-        // The ear (0.36): what you don't handle, you don't have to listen to.
-        new("plugs", Loc.T("Lamb's-Wool Plugs"), Loc.T("Buy a chest sight unseen and your ear rests: a listen back."), U, "plugs", 1, T(Blind)),
         new("dip", Loc.T("Lucky Dip"), Loc.T($"Everything in a chest you take sight unseen is {Pct(DipLuck)} likelier to come out a step better."), U, "dip", 1, T(Blind, Luck)),
         new("bond", Loc.T("Underwriter's Bond"), Loc.T($"A chest bought sight unseen holds less than you paid? The Underwriters pay {Pct(BondShare)} of it back."),
             U, "bond", 2, T(Blind, Coffers)),
@@ -115,7 +113,6 @@ public static class Curios
         new("beads", Loc.T("Counting Beads"), Loc.T("A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all."), C, "beads", 2, T(Appraisal, Compartments)),
         new("seal", Loc.T("Appraiser's Seal"), Loc.T($"A perfect read pays you a valuer's fee: {Pct(SealFee)} of what the chest held."), U, "seal", 1, T(Appraisal)),
         // The ear (0.36): a pebble from the Keyhold's listening rooms, where a true note came back to whoever sounded it.
-        new("echo", Loc.T("Echo Stone"), Loc.T("A perfect read gives you a listen back."), U, "echo", 1, T(Appraisal)),
         new("register", Loc.T("Valuer's Register"), Loc.T($"A perfect read pays {Fine(RegisterStep)} of what the chest held for each one so far this run (up to {Pct(RegisterMax)})."),
             U, "register", 2, T(Appraisal)),
         new("crescent", Loc.T("Cursed Crescent"), Loc.T($"Everything comes out exactly as its chest promised. Sellers sense the curse and ask {Pct(1 - CrescentPrices)} less."),
@@ -229,7 +226,7 @@ public static class Curios
         ["wishbone"] = CurioUnlock.SecondRun, ["horseshoe"] = CurioUnlock.SecondRun, ["token"] = CurioUnlock.SecondRun,
         ["crescent"] = CurioUnlock.SecondRun, ["tongue"] = CurioUnlock.SecondRun, ["guestbook"] = CurioUnlock.SecondRun,
         ["dummy"] = CurioUnlock.SecondRun, ["scales"] = CurioUnlock.SecondRun, ["rod"] = CurioUnlock.SecondRun, ["pillow"] = CurioUnlock.SecondRun,
-        ["dip"] = CurioUnlock.SecondRun, ["bond"] = CurioUnlock.SecondRun, ["plugs"] = CurioUnlock.SecondRun, ["knot"] = CurioUnlock.SecondRun, ["register"] = CurioUnlock.SecondRun,
+        ["dip"] = CurioUnlock.SecondRun, ["bond"] = CurioUnlock.SecondRun, ["knot"] = CurioUnlock.SecondRun, ["register"] = CurioUnlock.SecondRun,
         ["log"] = CurioUnlock.SecondRun, ["wardtally"] = CurioUnlock.SecondRun,
         ["monocle"] = CurioUnlock.Crownhold, ["still"] = CurioUnlock.Crownhold, ["desk"] = CurioUnlock.Crownhold, ["wheel"] = CurioUnlock.Crownhold,
         ["aether"] = CurioUnlock.Crownhold, ["horn"] = CurioUnlock.Crownhold, ["rope"] = CurioUnlock.Crownhold, ["errand"] = CurioUnlock.Crownhold,
@@ -391,9 +388,38 @@ public static class Curios
         _ => 1,
     };
 
+    /// <summary>
+    /// A curio made for one of the trade's ways (enchantment, false bottoms, locks) does something wherever chests have
+    /// that way in them: by <see cref="GameState.Ways"/>, so a later season can build on it from the stall (0.37). The
+    /// rest wait for the market whose goods or rooms they need.
+    /// </summary>
+    static bool ByWays(CurioDef curio) => curio.Tags[0] is CurioTag.Enchantment or CurioTag.Compartments or CurioTag.Rough;
+
+    /// <summary>The market a curio's own tier is measured against here: the trade's ways for one made for them, else the shop's.</summary>
+    public static int TierFor(GameState state, CurioDef curio) => ByWays(curio) ? state.Ways : state.Tier;
+
     /// <summary>Whether Nim could lay this curio out at this shop, this week (its own tier, its rarity's tier and week).</summary>
     public static bool Reachable(GameState state, CurioDef curio) =>
-        curio.MinTier <= state.Tier && RarityTier(curio.Rarity) <= state.Tier && Rates(state.Week)[(int)curio.Rarity] > 0;
+        curio.MinTier <= TierFor(state, curio) && RarityTier(curio.Rarity) <= state.Tier && Rates(state.Week)[(int)curio.Rarity] > 0;
+
+    /// <summary>How many curios Bram's drawer holds on a later season's first morning.</summary>
+    public const int DrawerCards = 3;
+
+    /// <summary>
+    /// Bram's drawer (0.37): on the first morning of a season after the first, three plain curios he's kept, one for each
+    /// of three ways of trading (the six that change how the counter's played, as far as they're open), and one of them
+    /// is yours for nothing. A build begins on the first day, and no two seasons begin alike. From the seed.
+    /// </summary>
+    public static List<CurioDef> Drawer(GameState state)
+    {
+        var rng = new Random(unchecked(state.Seed * 7349 + 11));
+        var pool = All.Where(c => c.Rarity <= CurioRarity.Uncommon && Reachable(state, c) && state.CurioOpen(c.Key) && !state.HasCurio(c.Key) && !state.NoUse(c)).ToList();
+        var picks = new List<CurioDef>();
+        var ways = Main.Where(t => pool.Any(c => c.Tags[0] == t)).OrderBy(_ => rng.Next()).Take(DrawerCards).ToList();
+        foreach (var way in ways) picks.Add(rng.PickOne(pool.Where(c => c.Tags[0] == way).ToArray()));
+        while (picks.Count < DrawerCards && pool.Except(picks).Any()) picks.Add(rng.PickOne(pool.Except(picks).ToArray()));
+        return picks;
+    }
 
     /// <summary>
     /// What Nim lays out on a visit: three curios (four for a familiar face) you don't own and could use. Each card's

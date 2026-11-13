@@ -35,7 +35,7 @@ public static class ShopTiers
     /// (Four to seven until 0.20; 0.20's three at the stall and five after it left 0.21's working purse, two typical
     /// chests, out of reach for days after each move.)
     /// </summary>
-    /// (0.36: five at every market past the stall. A season is twenty days, a day's listens are counted, and six or seven
+    /// (0.36: five at every market past the stall. A season is twenty days, and six or seven
     /// customers a day at Thornwick and Crownhold made a first run nearly two hours.)
     public static int Customers(int tier) => tier switch
     {
@@ -179,6 +179,22 @@ public sealed partial class GameState
 
     /// <summary>The grandest shop the ledger knows: this run's, or any earlier run's (what was learned there stays in it).</summary>
     public int JournalTier => Math.Max(Tier, Math.Min(ShopTiers.Max, Known.Tier));
+
+    /// <summary>
+    /// The trade's ways, as far as Bram's kin know them (0.37): the market the shop trades at, or the grandest any earlier
+    /// season reached. What a chest can hold goes by it, not by the market: locks, false bottoms and wards once
+    /// Thornwick's been traded at (<see cref="Market.CraftTier"/>), two or three of a kind and enchanted things once
+    /// Crownhold has (<see cref="Market.PairsTier"/>), and with them the slip's counting and its false-bottom row, the
+    /// drop, and the curios made for them. So a first season meets each a market at a time, with its lesson, and every
+    /// season after it has them all from its first morning. (Until 0.37 a later season went back to a stall of plain
+    /// chests for a week and waited a fortnight for an enchanted thing: the owner's "features unlocked midway through
+    /// the first run should be available from the beginning of subsequent runs".) What a market sells, who trades there
+    /// and what its chests are worth are still the market's own.
+    /// </summary>
+    public int Ways => WaysTried > 0 ? Math.Max(Tier, WaysTried) : JournalTier;
+
+    /// <summary>For the sim (`--ways=N`): a season played as if an earlier one had reached that market.</summary>
+    public static int WaysTried { get; set; }
 
     /// <summary>
     /// What Bram's kin remember from earlier runs: the profile's journal, and its regulars as people you've met (their
@@ -406,6 +422,7 @@ public sealed partial class GameState
         AlwaysWard = HasCurio("wardlamp") || HasCurio("aldricseal"),
         MagicSpreads = HasCurio("chalk"),
         MagicAll = HasCurio("staff"),
+        Ways = Ways,
     };
 
     /// <summary>How much less likely glass is to break (a vintner's packing).</summary>
@@ -476,8 +493,6 @@ public sealed partial class GameState
     {
         PerfectStreak = perfect ? PerfectStreak + 1 : 0;
         if (perfect) PerfectReads++;
-        // An echo stone: a perfect read gives a listen back.
-        if (perfect && HasCurio("echo")) RestoreListen();
         BestStreak = Math.Max(BestStreak, PerfectStreak);
     }
 
@@ -548,7 +563,7 @@ public sealed partial class GameState
             SavedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
             Seed = Seed, Gold = Gold, Day = Day, Tier = Tier, Guided = Guided, TotalEarned = TotalEarned,
             Character = Character, Challenge = Challenge, Boons = Boons.ToList(), Banes = Banes.ToList(), Snubbed = _snubbed.ToList(),
-            MaraUsed = NoteUsed, FirstDayTaught = FirstDayTaught,
+            MaraUsed = NoteUsed, FirstDayTaught = FirstDayTaught, DrawerDone = DrawerDone,
             UpgradesOpen = UpgradesOpen, MagicFound = MagicFound, PerfectStreak = PerfectStreak, BestStreak = BestStreak,
             Owned = _owned.ToList(), HintsSeen = HintsSeen.ToList(), Met = Met.ToList(), Found = Found.ToList(),
             FoundEnchanted = FoundEnchanted.ToList(), Tutored = Tutored.ToList(), ActiveSynergies = ActiveSynergies.ToList(), CuriosSeen = CuriosSeen.ToList(), KeepsakesSeen = KeepsakesSeen.ToList(), People = People.ToList(),
@@ -579,7 +594,7 @@ public sealed partial class GameState
         {
             Character = Characters.Exists(data.Character) ? data.Character : Characters.Kit,
             Challenge = Math.Clamp(data.Challenge, 0, Challenges.Max),
-            NoteUsed = data.MaraUsed, FirstDayTaught = data.FirstDayTaught,
+            NoteUsed = data.MaraUsed, FirstDayTaught = data.FirstDayTaught, DrawerDone = data.DrawerDone,
             Gold = data.Gold, Day = data.Day, Tier = Math.Clamp(data.Tier, 1, ShopTiers.Max), Guided = data.Guided,
             TotalEarned = data.TotalEarned, UpgradesOpen = data.UpgradesOpen, MagicFound = data.MagicFound,
             PerfectStreak = data.PerfectStreak, BestStreak = data.BestStreak,
@@ -664,7 +679,6 @@ public sealed partial class GameState
     {
         Day++;
         MovedFrom = 0;
-        RestEar();
         Rng = new Random(unchecked(Seed * 7919 + Day));
         Queue.Clear();
         Current = null;
@@ -754,7 +768,7 @@ public sealed partial class GameState
     /// </summary>
     void Compass()
     {
-        if (!HasCurio("compass") || Tier < 2) return;
+        if (!HasCurio("compass") || Ways < Market.CraftTier) return;
         foreach (var visit in Queue.Where(v => v.Talk == null && v.Chest.Hidden == null && v.Chest.Crate == null && !v.Chest.Breathing))
             visit.Chest.HideUnder(Market.FalseBottom(Rng, Tier, visit.Chest.Quality));
     }
@@ -898,8 +912,6 @@ public sealed partial class GameState
         Today.Spent -= rebate;
         // What the checks made could have told of, for the opening: the rest was never listened for.
         visit.NoteAudible();
-        // Lamb's-wool plugs: a chest taken sight unseen rests the ear.
-        if (!visit.Handled && HasCurio("plugs")) RestoreListen();
         // Named truly, a warded thing comes out of the ward: it's in the chest for the luck and the opening.
         visit.Chest.Open(slip);
         var luck = Luck(visit.Chest, !visit.Handled);

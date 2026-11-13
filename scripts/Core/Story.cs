@@ -80,6 +80,18 @@ public static class Story
     /// </summary>
     public static List<Line> Intro(GameState state)
     {
+        // A season after the first (0.37): everyone at the counter has heard this, so it's the figures and no more.
+        if (state.Veteran)
+        {
+            var again = new List<Line>
+            {
+                new(Vane, Loc.T($"{Guild.Collector}, for the Gilded Guild, about Bram's account. {Money.Say(Enumerable.Range(1, Guild.Weeks).Sum(state.DueFor))} in all this season: {Sellers.Number(Guild.Weeks)} payments, one every fifth night, and the first is {Money.Say(state.DueFor(1))}, {Sellers.Number(Guild.DaysPerWeek - GameState.IntroDay)} nights from now.")),
+            };
+            if (state.Remembers && !state.CampaignDone)
+                again.Add(new(Vane, Loc.T("And you, Keywright. We've met before, I think. You always look at my ring like that."), "vane.again"));
+            again.Add(new(Bram, Loc.T("Every fifth night, as ever. A good ear pays any debt.")));
+            return again;
+        }
         var lines = new List<Line>
         {
             state.Is(Characters.Kit)
@@ -127,9 +139,15 @@ public static class Story
                     lines.Add(new(Self, Loc.T("The first morning, again. I remember the treasury. I remember it breathing. He doesn't."), "again"));
                     break;
                 }
-                lines.Add(state.FirstDayTaught
+                lines.Add(state.FirstDayTaught || state.Veteran
                     ? new(Bram, Loc.T($"Another season at the crossroads, {state.Kin.Name}. The Guild hasn't come sniffing yet. Let's make the most of it."))
                     : Welcome(state));
+                // What the trade is, and Bram's tap: said once a profile (0.37: every season before the first clear began with it).
+                if (state.Veteran)
+                {
+                    lines.Add(new(Bram, Loc.T("You know the trade, and the chests know you. Two taps and one when I want you at the counter.")));
+                    break;
+                }
                 lines.Add(new(Bram, Loc.T("Folk bring us chests nobody else can open. You buy one, it opens for you, and you sell what's inside. " +
                                           "So listen before you buy: that's the whole trade.")));
                 lines.Add(new(Bram, Loc.T("Bettany from the Crossed Keys will be by. She hears everything first, and she'll tell you most of it.")));
@@ -143,6 +161,12 @@ public static class Story
                     lines.Add(new(Self, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
                     lines.Add(new(Self, Loc.T("\"Earn the treasury key, keep his account paid, and bring the key to the treasury on the season's last night.\""), "commission"));
                     lines.Add(new(Self, Loc.T("The same letter, word for word. Last time, the treasury breathed.")));
+                    break;
+                }
+                if (state.Veteran)
+                {
+                    // A season after the first, before you remember: the same terms, in a line.
+                    lines.Add(new(Self, Loc.T("A letter with the Guild's seal, and the terms it always sets: keep Bram's account paid every fifth night, earn the four pieces of the treasury key, and bring the key to the treasury on the season's last night."), "commission"));
                     break;
                 }
                 lines.Add(new(Self, Loc.T("A letter with the Guild's seal: \"Bram's handover is taking longer than expected. Keep the shop running until he returns.\"")));
@@ -226,6 +250,11 @@ public static class Story
             lines.Add(new(Vane, Loc.T("One more thing. The Guild's treasury has asked for Bram. An old consignment needs his attention.")));
             lines.Add(new(Bram, Loc.T("Mind the stall. I'll write every week.")));
             lines.Add(new(Self, Loc.T("He won't write. I know where that carriage goes, and what waits at the end of the road.")));
+        }
+        else if (state.Veteran)
+        {
+            lines.Add(new(Vane, Loc.T("One more thing. The Guild's treasury has asked for Bram: an old consignment. The carriage is outside.")));
+            lines.Add(new(Bram, Loc.T($"Mind the stall, {state.Kin.Name}. I'll write every week.")));
         }
         else
         {

@@ -98,19 +98,19 @@ public partial class OpeningPhase : Phase
 
     /// <summary>
     /// A thing you didn't mark that you never had the chance to read: on a chest you never handled, or (0.36) one no check
-    /// you made could have told you of. It's no miss, and it's shown with a closed eye, not a cross.
+    /// you made could have told you of. It's shown with a closed eye, not a cross: a cross is for a sound misread.
     /// </summary>
     bool Unseen(ItemRead read) => read.Kind is ReadKind.Missed or ReadKind.MissedMagic or ReadKind.MissedHidden && (Blind || Unheard(read));
 
     /// <summary>
-    /// Never listened for: a thing no strength you spent a listen on would stir (or that a clank drowned at the ones you
-    /// did), or what's under a false bottom when you didn't drop the chest. Not in a lesson, a gift or a crate, where
-    /// listening was free or beside the point.
+    /// Never listened for: a thing no strength you shook the chest at would stir (or that a clank drowned at the ones
+    /// you did), or what's under a false bottom when you didn't drop the chest. Not a gift or a crate, where listening
+    /// was beside the point, nor a chest the Bookkeeping Engine (or a curio) read for you.
     /// </summary>
     bool Unheard(ItemRead read)
     {
         var visit = _purchase.Visit;
-        if (visit.Gift || _purchase.Chest.Crate != null || State.ListensFree(visit) || read.Warded) return false;
+        if (visit.Gift || _purchase.Chest.Crate != null || Strategy.Recorded(visit, State) || read.Warded) return false;
         return read.Kind == ReadKind.MissedHidden || read.Hidden ? !visit.Dropped : !visit.CouldHear(read.Item);
     }
 
@@ -732,6 +732,11 @@ public partial class OpeningPhase : Phase
         {
             Fx.Burst(this, at, Palette.Magic, 60, 320f);
             Fx.Aura(this, at, Palette.Magic, 56f);
+            // It stays enchanted to look at (0.37): light flowing over it, and motes rising through the glow.
+            Enchant.Flow(sprite);
+            var motes = Enchant.Aura(46f, at, light: false);
+            motes.ZIndex = 6;
+            AddChild(motes);
             Sfx.Play("sting", 1.3f, -2);
             // As much as enchantment is worth here: a spellbinder's ring makes it four times over (0.35: it said x2 all the same).
             FloatText(State.HasCurio("ring") ? Loc.T("ENCHANTED! x4") : Loc.T("ENCHANTED! x2"), at + new Vector2(0, -70), Palette.Magic, 24);

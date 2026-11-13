@@ -16,7 +16,7 @@ public sealed class SaveData
     /// 5: 0.28's new cast and its tales (a version 4 save's regulars are renamed, and its tales start fresh); 4: 0.21's five
     /// weeks of five days (older saves are moved onto them).
     /// </summary>
-    public const int CurrentVersion = 8;
+    public const int CurrentVersion = 9;
 
     public int Version { get; set; } = CurrentVersion;
     public string SavedAt { get; set; }
@@ -49,6 +49,9 @@ public sealed class SaveData
 
     /// <summary>The scripted first day was taught in an earlier run (from the profile): this run starts like any other.</summary>
     public bool FirstDayTaught { get; set; }
+
+    /// <summary>Bram's drawer has been offered this season (0.37).</summary>
+    public bool DrawerDone { get; set; }
     public List<string> Met { get; set; } = new();
     public List<string> Found { get; set; } = new();
     public List<string> FoundEnchanted { get; set; } = new();
@@ -302,6 +305,24 @@ public sealed class SaveData
                 data.NextPlan = null;
                 data.EventDay = 0;
                 data.PeddlerDay = 0;
+                data.Version = 8;
+            }
+            // 0.37 took 0.36's counted listens out again: the Tea Kettle and the Listening Screen, the Echo Stone and
+            // the Lamb's-Wool Plugs did nothing else, so a run that had bought them gets its gold back.
+            if (data.Version == 8)
+            {
+                foreach (var (key, cost) in new[] { ("kettle", 70), ("screen", 320) }) // loc: keys
+                    if (data.Owned.Remove(key)) data.Gold += cost;
+                for (int i = data.Curios.Count - 1; i >= 0; i--)
+                {
+                    if (data.Curios[i] is not ("echo" or "plugs")) continue; // loc: keys
+                    if (i < data.CurioPaid.Count)
+                    {
+                        data.Gold += data.CurioPaid[i];
+                        data.CurioPaid.RemoveAt(i);
+                    }
+                    data.Curios.RemoveAt(i);
+                }
                 data.Version = CurrentVersion;
             }
             return data;

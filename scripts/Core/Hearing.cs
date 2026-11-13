@@ -58,6 +58,17 @@ public sealed class Hearing
 
     public bool HasTried(Shake level, bool magnet) => _tried.Contains((level, magnet));
 
+    /// <summary>Forgets everything heard and tried (a test's fresh start on the same chest).</summary>
+    public void Forget()
+    {
+        _tried.Clear();
+        _heard.Clear();
+        _kinds.Clear();
+        _glowed.Clear();
+        _broke.Clear();
+        Dropped = Hollow = Breathing = false;
+    }
+
     public bool HeardAt(Category category, Shake level, bool magnet) => _heard.Any(h => h.Level == level && h.Magnet == magnet && _kinds[h.Item] == category);
 
     public bool Glowed(Category category) => _glowed.Any(id => _kinds[id] == category);
@@ -88,9 +99,9 @@ public sealed class Hearing
     /// enchanted; a jingle or tinkle that goes quiet once the magnet is on is gilded iron, and a rustle at a gentle shake is
     /// sand, so neither counts; glass you heard break is worth nothing now; a hollow boom is a false bottom.
     /// </summary>
-    public Appraisal Read(Rarity chest, int tier)
+    public Appraisal Read(Rarity chest, int tier, int ways = 0)
     {
-        var slip = new Appraisal(chest, tier) { Hidden = Hollow };
+        var slip = new Appraisal(chest, tier, ways: ways) { Hidden = Hollow };
         var real = _heard.Select(h => h.Item).Distinct().Where(id => !Silenced(id) && !TooSoon(id) && !_broke.Contains(id)).ToList();
         foreach (var kind in real.GroupBy(id => _kinds[id]))
             slip.Set(kind.Key, kind.Count(), kind.Any(_glowed.Contains));

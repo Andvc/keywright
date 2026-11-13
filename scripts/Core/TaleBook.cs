@@ -66,13 +66,24 @@ public static partial class TaleBook
     // ---- Chests for tales ----
 
     /// <summary>A chest of the place's sort, at this colour: a few things, as that place would hold them.</summary>
-    static Chest Fill(Random rng, string origin, Rarity colour, int tier, int count, params Category[] sure)
+    /// <remarks>
+    /// Two of a kind only where the trade counts them (<see cref="GameState.Ways"/>, from Crownhold): until 0.37 a tale's
+    /// chest at the stall or at Thornwick could hold two purses, and the slip there had no way to mark the second.
+    /// </remarks>
+    static Chest Fill(Random rng, string origin, Rarity colour, GameState s, int count, params Category[] sure)
     {
+        int tier = s.Tier;
         var kinds = Categories.UpTo(tier).Select(c => c.Category).ToList();
         var likely = Origins.Get(origin).Kinds;
         var picked = sure.Where(kinds.Contains).ToList();
-        while (picked.Count < count) picked.Add(rng.PickWeighted(kinds.ToArray(), k => likely[(int)k]));
-        var lockTier = tier >= 2 && rng.NextFloat() < 0.4f ? LockTiers.For(colour) : null;
+        bool pairs = s.Ways >= Market.PairsTier;
+        while (picked.Count < count)
+        {
+            var free = pairs ? kinds : kinds.Except(picked).ToList();
+            if (free.Count == 0) break;
+            picked.Add(rng.PickWeighted(free.ToArray(), k => likely[(int)k]));
+        }
+        var lockTier = s.Ways >= 2 && rng.NextFloat() < 0.4f ? LockTiers.For(colour) : null;
         return new Chest(picked.Select(k => new Item(k, Categories.RollQuality(rng, colour))), colour, lockTier: lockTier);
     }
 
@@ -116,7 +127,7 @@ public static partial class TaleBook
 
     /// <summary>Tobin's weekly chest (Tobin's Lamp, 0.32): what he's found under the Barrow, a colour finer than the shop's, given freely.</summary>
     public static Visit TobinChest(GameState s, Random rng) =>
-        Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, rng.Next(2, 4)),
+        Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s, rng.Next(2, 4)),
             rng.PickOne(new[]
             {
                 Loc.T("From the old kings' halls, Keywright, with Tobin's compliments. One coin, for luck."),
@@ -125,7 +136,7 @@ public static partial class TaleBook
 
     /// <summary>Pip's weekly chest, once he's your apprentice: something he's fished out, at the shop's colour, given freely.</summary>
     public static Visit ApprenticeChest(GameState s, Random rng) =>
-        Given(s, rng, Pip, Fill(rng, "millpond", ShopTiers.Typical(s.Tier), s.Tier, rng.Next(1, 4)),
+        Given(s, rng, Pip, Fill(rng, "millpond", ShopTiers.Typical(s.Tier), s, rng.Next(1, 4)),
             rng.PickOne(new[]
             {
                 Loc.T("Fished it out for you, master! It's yours: you taught me the trade. One coin, for luck."),
@@ -167,7 +178,12 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "magpie.notice", Who = Hollis, Tier = 2, Gap = 3, If = s => s.Day > s.TierSince,
-                    Says = s => Say(Hollis,
+                    // A season after the first (0.37): the theft, and no lesson on the mark (this tale's in every season).
+                    Says = s => s.Veteran ? Say(Hollis,
+                        Loc.T("Sergeant Hollis, Wardens of the Road, Thornwick post. Someone broke into the abbey crypt last night and took Saint " +
+                              "Ide's reliquary chest: green, iron-bound, the saint's key on its lid."),
+                        Loc.T("If it comes to your counter, your mark will go cold on it. Send for us, and the Wardens pay a finder's share."))
+                    : Say(Hollis,
                         Loc.T("Sergeant Hollis, Wardens of the Road, Thornwick post. Someone broke into the abbey crypt last night and took Saint " +
                               "Ide's reliquary chest: green, iron-bound, the saint's key on its lid."),
                         Loc.T("If it comes to your counter, you'll know it. A Keywright's mark goes cold on a chest that isn't the seller's to " +
@@ -202,7 +218,7 @@ public static partial class TaleBook
                     Key = "magpie.reliquary", Who = Flick, After = "magpie.notice", Gap = 1, Tier = 2,
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "crypt", Rarity.Uncommon, s.Tier, 2, Category.Garb);
+                        var chest = Fill(rng, "crypt", Rarity.Uncommon, s, 2, Category.Garb);
                         chest.Owner = Loc.T("the abbey of Saint Ide");
                         chest.Tale = "reliquary";
                         return Brought(s, rng, Flick, chest, Loc.T("A green one, iron-bound, with a pretty key on the lid. It came my way. {price}, quick."), "pocket");
@@ -550,7 +566,7 @@ public static partial class TaleBook
                     Key = "kettle.pledge", Who = Brass, After = "kettle.jory", Gap = 1, Tier = 3,
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "pawn", ShopTiers.Typical(s.Tier), s.Tier, 2, Category.Arms);
+                        var chest = Fill(rng, "pawn", ShopTiers.Typical(s.Tier), s, 2, Category.Arms);
                         chest.Tale = "kettle";
                         return Brought(s, rng, Brass, chest, Loc.T("A soldier's pledge, never redeemed. The ticket says \"Kettle: one sword, and sundries\". " +
                                                                     "{articles} in all, it says. {price}."), "pawn");
@@ -727,7 +743,7 @@ public static partial class TaleBook
                     {
                         s.Flags.Remove($"away:{Tobin}");
                         s.Kept(Tobin);
-                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, 3),
+                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s, 3),
                             Loc.T("Behind the door: a vault nobody had touched since the Locking. Half's yours, like I said: this one, freely given. " +
                                   "One coin, for luck."), "barrow");
                     },
@@ -769,7 +785,7 @@ public static partial class TaleBook
                     {
                         s.Flags.Remove($"away:{Tobin}");
                         s.Kept(Tobin);
-                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, 3),
+                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s, 3),
                             Loc.T("You came for me. Half of what's behind that door is yours, freely given, and I'm never going down again. One coin, for luck."),
                             "barrow");
                     },
@@ -816,7 +832,7 @@ public static partial class TaleBook
                     {
                         s.Flags.Remove($"away:{Tobin}");
                         s.Kept(Tobin);
-                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s.Tier, 4),
+                        return Given(s, rng, Tobin, Fill(rng, "barrow", Finer(s.Tier, 1), s, 4),
                             Loc.T("Halls, Keywright, halls under halls, and the kings asleep in them with their crowns on. Your half: freely given. One coin, for luck."),
                             "barrow");
                     },
@@ -1071,7 +1087,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "fore.rowan", Who = Rowan, After = "fore.clerk", Gap = 2, Tier = 3, If = s => s.Flagged("fore.told"),
-                    Brings = (s, rng) => Brought(s, rng, Rowan, Fill(rng, "warchest", ShopTiers.Typical(s.Tier), s.Tier, 3, Category.Arms),
+                    Brings = (s, rng) => Brought(s, rng, Rowan, Fill(rng, "warchest", ShopTiers.Typical(s.Tier), s, 3, Category.Arms),
                         Loc.T("The Guild took my family's hall and sold its chests. I bought grandfather's war chest back, and it's mine to sell: it " +
                               "won't open for their Keywright. The sword's mine, for {fee}. The rest: {price}."), "warchest"),
                     Bought = (s, v) => s.Log("fore", Loc.T("Sir Rowan sold you his grandfather's war chest, bought back from the Guild: it was his, so it opened for you.")),
@@ -1266,7 +1282,7 @@ public static partial class TaleBook
                     Key = "crown.king", Who = Aldo, After = "crown.ask", Gap = 1, Tier = 4, If = s => s.Flagged("crown.asking"),
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "treasury", Rarity.Rare, s.Tier, 1);
+                        var chest = Fill(rng, "treasury", Rarity.Rare, s, 1);
                         chest = new Chest(chest.Items.Append(new Item(Category.Gems, Rarity.Legendary)), Rarity.Rare, lockTier: chest.Lock);
                         chest.Tale = "crown";
                         return Given(s, rng, Aldo, chest, Loc.T("Ironroot's crown? It's in a chest I can't open, like everything I own. Here: I give it to " +
@@ -1313,7 +1329,7 @@ public static partial class TaleBook
                     Key = "vell.box", Who = Cassian, Tier = 3, Gap = 9, If = s => s.Day > s.TierSince,
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "strongroom", ShopTiers.Typical(s.Tier), s.Tier, 3);
+                        var chest = Fill(rng, "strongroom", ShopTiers.Typical(s.Tier), s, 3);
                         chest.Owner = Loc.T("Lady Isaura Vell");
                         chest.Tale = "vell";
                         return Brought(s, rng, Cassian, chest, Loc.T("Grandmother's trick box. I need it gone before the tables open tonight: {price}, " +
@@ -1366,7 +1382,7 @@ public static partial class TaleBook
                 {
                     Key = "vell.gift", Who = Isaura, After = "vell.sister", Gap = 1, Tier = 3, If = s => s.Flagged("vell.given"),
                     Expect = Loc.T("Isaura, with grandmother's box"),
-                    Brings = (s, rng) => Given(s, rng, Isaura, Fill(rng, "strongroom", ShopTiers.Typical(s.Tier), s.Tier, 3),
+                    Brings = (s, rng) => Given(s, rng, Isaura, Fill(rng, "strongroom", ShopTiers.Typical(s.Tier), s, 3),
                         Loc.T("Grandmother's box, freely given. Now it's yours, and it will open. One coin, for luck: she'd have insisted."), "strongroom"),
                     Bought = (s, v) => s.Log("vell", Loc.T("Lady Isaura gave you grandmother's box, and it opened.")),
                 },
@@ -1376,7 +1392,7 @@ public static partial class TaleBook
                     Brings = (s, rng) =>
                     {
                         // Grandmother warded her heart in it; her riddle is about it. Given, to whoever gave the first box back.
-                        var chest = Fill(rng, "strongroom", Finer(s.Tier, 1), s.Tier, 2);
+                        var chest = Fill(rng, "strongroom", Finer(s.Tier, 1), s, 2);
                         chest.Ward(new Item(Category.Gems, Finer(s.Tier, 1)));
                         if (!s.Flagged("vell.given"))
                             return Market.Price(rng, Sellers.Get(Isaura), chest, s.Tier, boosts: s.Boosts, origin: Origins.Get("strongroom"),

@@ -82,7 +82,7 @@ public static class T
     /// <summary>A slip with these counts marked (as good as the chest's colour promises).</summary>
     public static Appraisal Slip(GameState s, Chest chest, params (Category Kind, int Count)[] marks)
     {
-        var slip = new Appraisal(chest.Quality, s.Tier) { Model = s };
+        var slip = new Appraisal(chest.Quality, s.Tier, ways: s.Ways) { Model = s };
         foreach (var (kind, count) in marks) slip.Set(kind, count, false);
         return slip;
     }
@@ -90,7 +90,7 @@ public static class T
     /// <summary>A slip that reads the chest exactly (every kind and count; magic marked; the false bottom if there's one).</summary>
     public static Appraisal Exact(GameState s, Chest chest)
     {
-        var slip = Appraisal.Recorded(chest, s.Tier);
+        var slip = Appraisal.Recorded(chest, s.Tier, s.Ways);
         slip.Model = s;
         return slip;
     }

@@ -21,14 +21,14 @@ public static partial class Simulation
     const int Days = MaxWeeks * Guild.DaysPerWeek;
 
     /// <summary>
-    /// The order a sensible player buys things in: listens and customers first, and the restorers (half of what their luck
+    /// The order a sensible player buys things in: customers first, and the restorers (half of what their luck
     /// adds no seller prices); the buyers' trades once the shop can buy every good chest it's offered, since every seller
     /// asks as much more as a trade puts on sales (the power index) and a shop still short of gold only pays more for
     /// the same chests.
     /// </summary>
     public static readonly string[] BuyOrder =
     {
-        "kettle", "sign", "bench", "screen", "crier", "cabinet1", "picks", "cabinet2", "lamp", "workshop", "charter", "case",
+        "sign", "bench", "crier", "cabinet1", "picks", "cabinet2", "lamp", "workshop", "charter", "case",
         "scales", "night", "block", "master", "warrant", "cabinet3", "cabinet4", "magnet", "cabinet5", "seal", "cabinet6", "patrons", "velvet",
     };
 
@@ -474,8 +474,6 @@ public static partial class Simulation
                 var visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
                 blind += BlindValue(visit, state, rng);
                 visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
-                // The table measures a chest, read as well as a careful player would with listens for it: a fresh ear for each.
-                state.RestEar();
                 int? paid = Deal(visit, state, rng, Care.Tools, out var slip);
                 // A cold chest: the careful player sends for the Wardens, for the finder's share.
                 if (paid is null && state.CanCallWardens(visit)) profit += state.FinderShare;
@@ -498,7 +496,7 @@ public static partial class Simulation
         {
             var visit = Market.CreateVisit(rng, seller, seller.Tier, state.Boosts);
             var hearing = Hearing.Simulate(visit.Chest, Strategy.Levels(visit, state));
-            var slip = hearing.Read(visit.Chest.Quality, state.Tier);
+            var slip = hearing.Read(visit.Chest.Quality, state.Tier, state.Ways);
             Strategy.Reckon(slip, hearing, visit, state);
             int worth = Strategy.Worth(visit, slip, hearing, state);
             GD.Print($"{string.Join(", ", visit.Chest.Items.Select(it => it.Name))}{(visit.Chest.Warded is Item w ? $" + warded {w.Name}" : "")} | " +
@@ -534,7 +532,7 @@ public static partial class Simulation
         worthOut = 0;
         if (care == Care.Blind)
         {
-            slip = new Appraisal(chest.Quality, tier);
+            slip = new Appraisal(chest.Quality, tier, ways: state.Ways);
             // Even a buyer who never shakes won't play the King's game: his price is your slip, and theirs is empty.
             if (visit.Seller.SlipPrice) return null;
             int blindPrice = visit.Trade == Trade.Offer ? tier * 6 : visit.Ask;
@@ -545,30 +543,26 @@ public static partial class Simulation
 
         Hearing hearing;
         // Shaking it (or dropping it, or the lodestone) is laying hands on it: no sight-unseen price, luck or bond for it.
-        // (0.36: with no listen left for it, a chest goes unhandled, and is bought, if it is, sight unseen.)
+        if (!Strategy.Recorded(visit, state)) visit.Handle();
         if (care == Care.OneShake)
         {
-            hearing = new Hearing();
-            slip = new Appraisal(chest.Quality, tier);
-            if (state.Listen(visit, Check.Shaking(Shake.Hard)))
-            {
-                visit.Handle();
-                hearing.Listen(chest, new[] { Shake.Hard }, lamp: false);
-                if (state.MindsHardShake(visit.Seller)) visit.Anger(rng);
-                foreach (var kind in chest.HeardAt(Shake.Hard).GroupBy(i => i.Category))
-                    slip.Set(kind.Key, Math.Max(slip.Count(kind.Key), 1));
-            }
+            hearing = Hearing.Simulate(chest, new[] { Shake.Hard });
+            visit.Tried(Check.Shaking(Shake.Hard));
+            if (state.MindsHardShake(visit.Seller)) visit.Anger(rng);
+            slip = new Appraisal(chest.Quality, tier, ways: state.Ways);
+            foreach (var kind in chest.HeardAt(Shake.Hard).GroupBy(i => i.Category))
+                slip.Set(kind.Key, Math.Max(slip.Count(kind.Key), 1));
         }
         else if (Strategy.Recorded(visit, state))
         {
             // The Bookkeeping Engine read it: nothing to shake.
             hearing = new Hearing();
-            slip = Appraisal.Recorded(chest, tier);
+            slip = Appraisal.Recorded(chest, tier, state.Ways);
         }
         else
         {
             hearing = Listen(visit, state, rng, care == Care.Tools, skill);
-            slip = hearing.Read(chest.Quality, tier);
+            slip = hearing.Read(chest.Quality, tier, state.Ways);
             if (skill >= 1 || rng.NextFloat() < skill)
             {
                 Strategy.Reckon(slip, hearing, visit, state);
@@ -622,59 +616,45 @@ public static partial class Simulation
     }
 
     /// <summary>
-    /// A careful player's handling of a chest (0.36): one check at a time, each a listen (<see cref="GameState.Listen"/>),
-    /// the next chosen by what the last one told (<see cref="Strategy.NextCheck"/>), up to this chest's share of the day's
-    /// listens. A learner (<paramref name="skill"/> under 1) often goes through the strengths one after another as Bram
-    /// first taught them, gently, firmly, hard, then the drop, without counting what's left for the rest of the queue;
-    /// forgets the magnet, and drops when they shouldn't or doesn't when they should.
+    /// A careful player's handling of a chest: every strength the seller allows, the magnet, the drop. A learner
+    /// (<paramref name="skill"/> under 1) skips strengths, forgets the magnet, and drops when they shouldn't or doesn't
+    /// when they should. What was tried is noted on the visit (<see cref="Visit.Checks"/>), as the counter does.
     /// </summary>
     static Hearing Listen(Visit visit, GameState state, Random rng, bool tools, float skill = 1)
     {
         var chest = visit.Chest;
         bool lamp = tools && state.Witchlight;
         float e = 1 - skill;
-        var hearing = new Hearing();
+        var levels = Strategy.Levels(visit, state);
+        if (e > 0)
+        {
+            var kept = levels.Where(_ => rng.NextFloat() >= SkipShake * e).ToArray();
+            levels = kept.Length > 0 ? kept : new[] { levels[^1] };
+        }
+        var hearing = Hearing.Simulate(chest, levels, lamp);
         // Listening while it sits still, before a hand's laid on it: a mimic breathes (a learner may not wait for it).
         if (chest.Breathing && (e <= 0 || rng.NextFloat() < skill)) hearing.HeardBreath();
-
-        bool Make(Check check)
+        // A goblin's fee for every strength after the first.
+        foreach (var level in levels)
         {
-            if (!state.Listen(visit, check)) return false;
-            visit.Handle();
-            if (check.Drop)
-            {
-                var (hollow, broke) = chest.Drop(rng, state.DropSturdier);
-                hearing.HeardDrop(hollow, broke);
-                return true;
-            }
-            hearing.Listen(chest, new[] { check.Level }, lamp, check.Magnet);
-            // A goblin's fee for every strength after the first.
-            if (!check.Magnet) visit.Shook(check.Level, rng);
-            return true;
+            visit.Shook(level, rng);
+            visit.Tried(Check.Shaking(level));
         }
-
-        // By rote: every strength the seller allows, in the order they were taught, while the ear lasts.
-        if (e > 0 && rng.NextFloat() < ByRote * e)
+        if (tools && (e <= 0 || rng.NextFloat() < skill))
         {
-            foreach (var level in Strategy.Levels(visit, state))
-                if (rng.NextFloat() >= SkipShake * e && !Make(Check.Shaking(level))) break;
-            bool wants = Strategy.ShouldDrop(visit, hearing, state.Tier, state);
-            bool drop = wants ? rng.NextFloat() >= ForgetDrop * e
-                : state.Tier >= 2 && state.CanDrop && !hearing.Dropped && !state.MindsDrop(visit.Seller) && rng.NextFloat() < CarelessDrop * e;
-            if (drop) Make(Check.Dropping);
-            return hearing;
+            var magnets = Strategy.MagnetLevels(visit, hearing, state);
+            hearing.Listen(chest, magnets, lamp, magnet: true);
+            foreach (var level in magnets) visit.Tried(Check.Shaking(level, magnet: true));
         }
-
-        int share = state.ListenShare(visit), spent = 0;
-        bool magnets = tools && (e <= 0 || rng.NextFloat() < skill);
-        while (spent < share)
+        bool drop = Strategy.ShouldDrop(visit, hearing, state.Tier, state);
+        if (e > 0)
+            drop = drop ? rng.NextFloat() >= ForgetDrop * e
+                : state.Ways >= Market.CraftTier && state.CanDrop && !hearing.Dropped && !state.MindsDrop(visit.Seller) && rng.NextFloat() < CarelessDrop * e;
+        if (drop)
         {
-            // Listens to spare: more left than two for everyone still waiting.
-            bool spare = state.ListensFree(visit) || state.ListensLeft - 1 >= 2 * state.Queue.Count(v => v.Talk == null);
-            if (Strategy.NextCheck(visit, hearing, state, magnets, spare) is not Check check) break;
-            if (check.Drop && e > 0 && rng.NextFloat() < ForgetDrop * e) break;
-            if (!Make(check)) break;
-            spent++;
+            var (hollow, broke) = chest.Drop(rng, state.DropSturdier);
+            hearing.HeardDrop(hollow, broke);
+            visit.Tried(Check.Dropping);
         }
         return hearing;
     }
@@ -682,7 +662,7 @@ public static partial class Simulation
     // A learner's mistakes, at skill 0 (they shrink in proportion as skill grows to 1). Guesses at a first-timer who
     // has had Bram's lessons: they know the rules, but don't yet apply them every time.
     const float SkipShake = 0.4f, ForgetDrop = 0.5f, CarelessDrop = 0.25f, Miscount = 0.5f, Believe = 0.35f, MissBoom = 0.3f, MissGlow = 0.5f,
-        JudgmentNoise = 0.45f, Whim = 0.7f, ByRote = 0.9f;
+        JudgmentNoise = 0.45f, Whim = 0.7f;
 
     /// <summary>A learner's slip: a pair counted as one, the kind the place usually holds ticked unheard, a boom or a glow not ticked.</summary>
     static void Slip(Visit visit, Appraisal slip, Random rng, float e)
@@ -705,7 +685,7 @@ public static partial class Simulation
     /// </summary>
     static int Open(Visit visit, GameState state, Random rng, Care care, Appraisal slip = null)
     {
-        slip ??= new Appraisal(visit.Chest.Quality, state.Tier);
+        slip ??= new Appraisal(visit.Chest.Quality, state.Tier, ways: state.Ways);
         // The table's purse never runs dry: it's the chest that's being measured.
         int gold = state.Gold;
         var purchase = state.Buy(visit, slip);
@@ -954,6 +934,9 @@ public static partial class Simulation
         state.StartDay();
         // The story morning's clues (0.33), as the scene would give them.
         if (state.StoryToday) Story.Heard(state, Story.WeekStart(state));
+        // Bram's drawer, a later season's first morning (0.37): the one worth most to the shop (none, for a style that keeps no curios).
+        if (state.DrawerOpen)
+            state.TakeFromDrawer(style.Curios ? Curios.Drawer(state).OrderByDescending(c => Strategy.CurioScore(state, c)).FirstOrDefault() : null);
         if (rec != null)
         {
             if (state.StoryToday && state.Week >= 2) rec.Scene(state, Story.WeekStart(state).Count);
@@ -981,7 +964,7 @@ public static partial class Simulation
                 if (style.Care >= Care.Listens && (style.Skill >= 1 || rng.NextFloat() < style.Skill)) state.Note(inside == Campaign.Bram ? "tap" : "alive");
                 if (style.Care >= Care.Listens && Strategy.BuyCrate(state, visit) && state.Gold >= visit.Ask)
                 {
-                    state.Buy(visit, new Appraisal(visit.Chest.Quality, tier));
+                    state.Buy(visit, new Appraisal(visit.Chest.Quality, tier, ways: state.Ways));
                     state.TakeIn(inside);
                     log.Crates++;
                 }
@@ -1391,7 +1374,7 @@ public static partial class Simulation
             visit.Lesson = lesson;
             var steps = lesson.For(state);
             var hearing = new Hearing();
-            var slip = new Appraisal(visit.Chest.Quality, state.Tier);
+            var slip = new Appraisal(visit.Chest.Quality, state.Tier, ways: state.Ways);
             int step = 0;
             var check = () => new LessonCheck { Visit = visit, Slip = slip, Hearing = hearing, State = state };
             // Steps are checked every frame in the game: here, after every action. Reading a tip counts as done.
@@ -1417,7 +1400,7 @@ public static partial class Simulation
                 hearing.HeardDrop(hollow, broke);
                 Advance();
             }
-            var read = hearing.Read(visit.Chest.Quality, state.Tier);
+            var read = hearing.Read(visit.Chest.Quality, state.Tier, state.Ways);
             Strategy.Reckon(read, hearing, visit, state);
             Strategy.OnFaith(visit, read, hearing, state);
             foreach (var kind in Categories.UpTo(state.Tier).Select(k => k.Category))

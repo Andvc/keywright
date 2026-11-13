@@ -69,6 +69,17 @@ public partial class GameState
 
     /// <summary>Seasons played before this one, and how the last one ended (<see cref="Campaign"/>'s ends), from the profile.</summary>
     public int SeasonsBefore { get; set; }
+
+    /// <summary>
+    /// A season's been played on this profile before (0.37): the three states a season starts in are a first-ever one
+    /// (everything taught, each of the trade's ways met a market at a time), a later one before the true ending (this:
+    /// nothing said twice, every way met so far open from the first morning, <see cref="Ways"/>), and a new year after it
+    /// (<see cref="CampaignDone"/>).
+    /// </summary>
+    public bool Veteran => SeasonsBefore > 0 || VeteranTried;
+
+    /// <summary>For the bot and the sim (`--veteran`): a season played as a later one.</summary>
+    public static bool VeteranTried { get; set; }
     public string LastEnd { get; set; }
 
     /// <summary>Bram has been brought home in an earlier season (the Maw's last offer says so).</summary>

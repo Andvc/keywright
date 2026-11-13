@@ -72,7 +72,7 @@ public static partial class TaleBook
                     Brings = (s, rng) =>
                     {
                         s.Kept(Tilly);
-                        return Given(s, rng, Tilly, Fill(rng, "river", Finer(s.Tier, 1), s.Tier, 3),
+                        return Given(s, rng, Tilly, Fill(rng, "river", Finer(s.Tier, 1), s, 3),
                             Loc.T("Up it came, a bell as big as a cart, and this chained to the clapper. Finder's right: half each, and this half's " +
                                   "yours. One coin, for luck."), "river");
                     },

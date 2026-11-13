@@ -75,7 +75,6 @@ public static class Glossary
     static readonly Dictionary<string, Term[]> CurioTerms = new() // loc: keys
     {
         ["sealed"] = new[] { Term.SightUnseen }, ["dip"] = new[] { Term.SightUnseen, Term.StepBetter }, ["bond"] = new[] { Term.SightUnseen },
-        ["plugs"] = new[] { Term.SightUnseen }, ["echo"] = new[] { Term.PerfectRead },
         ["blindfold"] = new[] { Term.SightUnseen }, ["token"] = new[] { Term.Surprise }, ["crescent"] = new[] { Term.Surprise },
         ["signet"] = new[] { Term.Haggling }, ["tongue"] = new[] { Term.Haggling }, ["knot"] = new[] { Term.Haggling },
         ["coffer"] = new[] { Term.Haggling }, ["goldentongue"] = new[] { Term.Haggling },

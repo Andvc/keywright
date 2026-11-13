@@ -86,7 +86,7 @@ public static partial class TaleBook
                     Key = "bram.tool", Who = Marrow, Gap = 6, If = s => s.Remembers && s.BramNotes && !s.CampaignDone && s.Week < Guild.Weeks,
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "seized", ShopTiers.Typical(s.Tier), s.Tier, 2);
+                        var chest = Fill(rng, "seized", ShopTiers.Typical(s.Tier), s, 2);
                         chest.Tale = Story.Tale;
                         return Brought(s, rng, Marrow, chest, Loc.T("A lot of the Guild's repossessed goods: tools, mostly, and a tuning fork with a tag on it. " +
                                                                     "Nobody's claimed them. {price}."), "seized");

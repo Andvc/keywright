@@ -94,7 +94,7 @@ public static partial class TaleBook
                     Key = "hesk.sale", Who = Marrow, After = "hesk.mabry", Gap = 2, Tier = 3, If = s => s.Flagged("hesk.witness"),
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "river", Finer(s.Tier, 1), s.Tier, 4);
+                        var chest = Fill(rng, "river", Finer(s.Tier, 1), s, 4);
                         chest.Owner = Loc.T("the people of Fallowford");
                         chest.Tale = "fallowford";
                         return Brought(s, rng, Marrow, chest,
@@ -124,7 +124,7 @@ public static partial class TaleBook
                     // Home by the Wardens, or given back from the back room at Nim's table ("returned:fallowford").
                     Key = "hesk.home", Who = Mabry, After = "hesk.sale", Gap = 1, Tier = 3,
                     If = s => s.Flagged("hesk.home") || s.Flagged("returned:fallowford"),
-                    Brings = (s, rng) => Given(s, rng, Mabry, Fill(rng, "river", Finer(s.Tier, 1), s.Tier, 4),
+                    Brings = (s, rng) => Given(s, rng, Mabry, Fill(rng, "river", Finer(s.Tier, 1), s, 4),
                         Loc.T("The town voted, Hesk: you open it for us, and every family gets its share. This is yours, freely given. One coin, for luck."),
                         "river"),
                     Bought = (s, v) =>
@@ -224,7 +224,7 @@ public static partial class TaleBook
                     Key = "rosa.reading", Who = Marta, After = "rosa.vash", Gap = 1, Tier = 3, If = s => s.Flagged("rosa.defied"),
                     Brings = (s, rng) =>
                     {
-                        var visit = Contested(s, rng, Marta, Fill(rng, "pawn", Finer(s.Tier, 1), s.Tier, 4),
+                        var visit = Contested(s, rng, Marta, Fill(rng, "pawn", Finer(s.Tier, 1), s, 4),
                             Loc.T("The traders put this up, love: read it exactly, every last thing in it, and the stall's ours again. One coin, for luck, the old way."),
                             "pawn", s.Purses(0.5f));
                         visit.ContestFor = Loc.T("The Lane's custom: read it exactly right, and the Brightwater stall is your family's again.");
@@ -276,7 +276,7 @@ public static partial class TaleBook
                     Key = "rosa.second", Who = Marta, After = "rosa.again", Gap = 1, Tier = 3, If = s => s.Flagged("rosa.second"),
                     Brings = (s, rng) =>
                     {
-                        var visit = Contested(s, rng, Marta, Fill(rng, "pawn", Finer(s.Tier, 1), s.Tier, 4),
+                        var visit = Contested(s, rng, Marta, Fill(rng, "pawn", Finer(s.Tier, 1), s, 4),
                             Loc.T("The second reading, love. The whole Lane's watching. One coin, for luck. Breathe."), "pawn", s.Purses(0.5f));
                         visit.ContestFor = Loc.T("The Lane's second reading: exactly right, and the Brightwater stall is your family's again.");
                         return visit;
@@ -344,7 +344,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "isolde.case", Who = Hesper, After = "isolde.letter", Gap = 3, Tier = 2, If = s => s.Flagged("isolde.seek"),
-                    Brings = (s, rng) => Brought(s, rng, Hesper, Fill(rng, "dowry", Finer(s.Tier, 1), s.Tier, 3, Category.Gems),
+                    Brings = (s, rng) => Brought(s, rng, Hesper, Fill(rng, "dowry", Finer(s.Tier, 1), s, 3, Category.Gems),
                         Loc.T("The Marchmont jewel case, my lady. I bought it at the Guild's sale for a dowry, and the match fell through. {price}. Warm to your hand, is it? Well, it would be."),
                         "dowry"),
                     Bought = (s, v) =>
@@ -357,7 +357,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "isolde.maps", Who = Quire, After = "isolde.letter", Gap = 6, Tier = 3, If = s => s.Flagged("isolde.seek"),
-                    Brings = (s, rng) => Brought(s, rng, Quire, Fill(rng, "archive", Finer(s.Tier, 1), s.Tier, 3, Category.Scrolls),
+                    Brings = (s, rng) => Brought(s, rng, Quire, Fill(rng, "archive", Finer(s.Tier, 1), s, 3, Category.Scrolls),
                         Loc.T("Lord Marchmont's map chest, bought for the Archive at the Guild's sale. The Roll still lists it as your house's, my lady. {price}."),
                         "archive"),
                     Bought = (s, v) =>

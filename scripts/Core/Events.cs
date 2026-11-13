@@ -214,30 +214,42 @@ public static class Events
 
     /// <summary>The Stranger's sealed chest, priced at what an ordinary chest at this shop holds, at what sellers ask here.</summary>
     /// <param name="prices">What sellers ask of this shop against anyone (<see cref="GameState.PriceFactor"/>).</param>
-    public static Visit StrangerVisit(Random rng, int tier, float prices = 1)
+    /// <param name="ways">The trade's ways (<see cref="GameState.Ways"/>): two of a kind only where the slip counts them.</param>
+    public static Visit StrangerVisit(Random rng, int tier, float prices = 1, int ways = 0)
     {
+        bool pairs = Math.Max(tier, ways) >= Market.PairsTier;
+        // Each thing a kind of its own, unless the trade counts two of a kind here.
+        List<Category> Pick(int n, Func<Category, float> weight)
+        {
+            var picked = new List<Category>();
+            while (picked.Count < n)
+            {
+                var free = pairs ? Categories.UpTo(tier).Select(c => c.Category).ToArray() : Categories.UpTo(tier).Select(c => c.Category).Except(picked).ToArray();
+                if (free.Length == 0) break;
+                picked.Add(rng.PickWeighted(free, weight));
+            }
+            return picked;
+        }
         var colour = (Rarity)Math.Clamp(tier - 1, 0, 3);
-        var kinds = Categories.UpTo(tier).Select(c => c.Category).ToArray();
         float roll = rng.NextFloat();
         List<Item> items;
         if (roll < StrangerJunk)
         {
             // Junk: a light thing or two, the worst of them.
             int n = rng.Next(1, 3);
-            items = Enumerable.Range(0, n).Select(_ => new Item(rng.PickWeighted(kinds, k => 1 / Categories.Heft(k)), Rarity.Common)).ToList();
+            items = Pick(n, k => 1 / Categories.Heft(k)).Select(k => new Item(k, Rarity.Common)).ToList();
         }
         else if (roll < 1 - StrangerTreasure)
         {
             int n = rng.Next(2, 4);
-            items = Enumerable.Range(0, n).Select(_ => new Item(rng.PickOne(kinds), Categories.RollQuality(rng, colour))).ToList();
+            items = Pick(n, _ => 1f).Select(k => new Item(k, Categories.RollQuality(rng, colour))).ToList();
         }
         else
         {
             // A fortune: heavy things, two colours better than the shop's, one of them enchanted.
             int n = rng.Next(3, 5);
             var best = (Rarity)Math.Min(4, (int)colour + 2);
-            items = Enumerable.Range(0, n).Select(i => new Item(rng.PickWeighted(kinds, Categories.Heft), Categories.RollQuality(rng, best),
-                Magic: i == 0)).ToList();
+            items = Pick(n, Categories.Heft).Select((k, i) => new Item(k, Categories.RollQuality(rng, best), Magic: i == 0)).ToList();
         }
         var chest = new Chest(items, colour, isSealed: true);
         int ask = Money.Round(Market.TypicalChest(Sellers.All.First(s => s.Tier == tier), colour, tier) * 1.1f * prices);

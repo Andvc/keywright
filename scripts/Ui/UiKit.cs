@@ -298,13 +298,12 @@ public static class UiKit
         int scale = Math.Max(1, (int)(box / ThingArt));
         var middle = standing ? new Vector2(0, -texture.GetHeight() * scale / 2f) : Vector2.Zero;
         var icon = new Node2D { Position = center };
-        if (item.Magic && !item.Broken)
-            icon.AddChild(new Painter(p =>
-            {
-                for (int i = 3; i >= 1; i--) p.DrawCircle(middle, box * 0.5f * i / 3f, Palette.Magic with { A = 0.16f });
-            }));
+        bool enchanted = item.Magic && !item.Broken;
+        // Something enchanted (0.37): a glow that breathes behind it, with motes rising, and light flowing over it.
+        if (enchanted) icon.AddChild(Enchant.Aura(box * 0.5f, middle));
         var sprite = new Sprite2D { Texture = texture, Scale = Vector2.One * scale, Position = middle };
         if (item.Fake || item.Broken) sprite.Modulate = new Color(0.6f, 0.6f, 0.65f);
+        if (enchanted) Enchant.Flow(sprite);
         icon.AddChild(sprite);
         return icon;
     }

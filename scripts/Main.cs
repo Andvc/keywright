@@ -31,8 +31,8 @@ namespace Keywright;
 /// --mimics=N makes one chest in N breathe (from Thornwick, once you remember the treasury).
 /// --season=N plays a later season (the last one lost, so the year turned back); --knew=all as if every question of the
 /// case had been worked out in an earlier season.
-/// --pad-test, --title-test and --ear-test (each in a window, under Xvfb) play the counter with a simulated controller,
-/// the title's burst with real input, and the chest with a hand's shaking (which listens it spends): exit 1 on a failure.
+/// --pad-test, --title-test and --hand-test (each in a window, under Xvfb) play the counter with a simulated controller,
+/// the title's burst with real input, and the chest with a hand's shaking (which strengths it counts): exit 1 on a failure.
 /// </summary>
 public partial class Main : Node2D
 {
@@ -92,9 +92,12 @@ public partial class Main : Node2D
                     Heartsongs.Chance = songOdds;
                 // --mimics=N: one chest in N breathes (0.33; a large N all but turns them off, to measure what they're worth).
                 if (int.TryParse(Arg(args, "--mimics"), out var simMimics) && simMimics > 0) Mimics.OneIn = simMimics;
-                // --dues=a,b,c,d: try other dues (for tuning them), and --listens=N another ear.
+                // --dues=a,b,c,d: try other dues (for tuning them).
                 if (Arg(args, "--dues") is string dues) Guild.TryDues(dues.Split(',').Select(int.Parse).ToArray());
-                if (int.TryParse(Arg(args, "--listens"), out var listens)) GameState.ListensTried = listens;
+                // --ways=N: every season as if an earlier one had reached market N (0.37: its chests' ways from the first morning).
+                if (int.TryParse(Arg(args, "--ways"), out var simWays)) GameState.WaysTried = Math.Clamp(simWays, 0, ShopTiers.Max);
+                // --veteran: every season as one after the first (Bram's drawer, Nim from the first night, commissions from the first week).
+                if (args.Contains("--veteran")) GameState.VeteranTried = true;
                 // --debtstep=S: try another rise in the Guild's dues a challenge level (for tuning it).
                 if (float.TryParse(Arg(args, "--debtstep"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture,
                         out var debtStep))
@@ -223,14 +226,27 @@ public partial class Main : Node2D
         _seed = int.TryParse(Arg(args, "--seed"), out var s) ? s : (int)(Time.GetUnixTimeFromSystem() % 1_000_000);
         // Straight into a day for the bot and the debugging shortcuts; everyone else gets the title screen.
         bool direct = args.Contains("--autoplay") || args.Contains("--opening-demo") || args.Contains("--treasury-demo") || Arg(args, "--treasury-demo") != null ||
-                      args.Contains("--pad-test") || args.Contains("--ear-test") ||
+                      args.Contains("--pad-test") || args.Contains("--hand-test") ||
                       Arg(args, "--start-tier") != null || Arg(args, "--start-week") != null || Arg(args, "--season") != null;
         if (direct)
         {
             // --terms=gifts,thin: just these boons and banes (to see a term's screens), whatever the level deals.
             var terms = Arg(args, "--terms") is string named ? Challenges.Named(named.Split(',')) : ((List<string>, List<string>)?)null;
-            State = GameState.NewRun(_seed, Arg(args, "--character") ?? Characters.Kit, int.TryParse(Arg(args, "--challenge"), out var level) ? level : 0,
-                !args.Contains("--no-tutorial"), terms: terms);
+            // --profile: on the stored profile, as a real game is (what's been taught, the journal, the campaign), and
+            // banked into it at the end: to see what a second run looks like, play two in a row (under an XDG_DATA_HOME
+            // of their own, so no real profile is touched).
+            bool kept = args.Contains("--profile");
+            int.TryParse(Arg(args, "--challenge"), out var level);
+            State = GameState.NewRun(_seed, Arg(args, "--character") ?? Characters.Kit, level, !args.Contains("--no-tutorial"),
+                kept ? Profile.Taught : null, kept ? Profile.OpenCurios : null, terms ?? (kept ? Challenges.Draw(Profile.TermsSeed, level) : null));
+            if (kept)
+            {
+                State.Songbook.UnionWith(Profile.Songs);
+                State.Remember(Profile);
+                _saving = true;
+                GD.Print($"Profile: run {Profile.Runs + 1}, {Profile.Taught.Count} things taught, best market {Profile.BestTier}, cleared {Profile.Cleared}");
+                WriteProfile(p => p.Runs++);
+            }
             if (State.Boons.Count + State.Banes.Count > 0)
                 GD.Print($"Terms: for you {(State.Boons.Count > 0 ? string.Join(", ", State.Boons) : "none")}; " +
                          $"against you {(State.Banes.Count > 0 ? string.Join(", ", State.Banes) : "none")}");
@@ -242,6 +258,10 @@ public partial class Main : Node2D
                 Heartsongs.Chance = Math.Clamp(songChance, 0f, 1f);
             // --mimics=2: one chest in two breathes (from Thornwick), to see them at the counter and the opening.
             if (int.TryParse(Arg(args, "--mimics"), out var mimics) && mimics > 0) Mimics.OneIn = mimics;
+            // --ways=3: as if an earlier season had reached that market (its chests' ways from the first morning).
+            // --veteran: a season after the first (nothing explained twice, Bram's drawer, Nim from the first night).
+            if (int.TryParse(Arg(args, "--ways"), out var ways)) GameState.WaysTried = Math.Clamp(ways, 0, ShopTiers.Max);
+            if (args.Contains("--veteran")) GameState.VeteranTried = true;
             // --season=2: a later season, the last one lost (the year turned back: Bram's dream, Vane's "we've met before",
             // a chest marked in your own hand). --knew=all: every question of the case worked out in an earlier season
             // (filled in on the Case page, Bram's glove off, and the people who'd have told you notice that you know).
@@ -335,7 +355,7 @@ public partial class Main : Node2D
             TreasuryDemo(Arg(args, "--treasury-demo") == "final", args.Contains("--quit-at-end"));
         else BeginPlaying();
         if (args.Contains("--pad-test")) PadTest();
-        if (args.Contains("--ear-test")) EarTest();
+        if (args.Contains("--hand-test")) HandTest();
     }
 
     /// <summary>Walks through the title screen, a new game's first moments, the pause menu and the settings, for screenshots.</summary>
@@ -855,7 +875,7 @@ public partial class Main : Node2D
         Hud.SetGold(State.Gold, animate: false);
         var chest = new Chest(new[]
         {
-            new Item(Category.Arms, Rarity.Common), new Item(Category.Garb, Rarity.Uncommon), new Item(Category.Potions, Rarity.Rare),
+            new Item(Category.Arms, Rarity.Common), new Item(Category.Garb, Rarity.Uncommon), new Item(Category.Potions, Rarity.Rare, Magic: true),
             new Item(Category.Coins, Rarity.Epic), new Item(Category.Gems, Rarity.Legendary),
             Heartsongs.Make(Heartsongs.Get(Heartsongs.Egg), Rarity.Rare),
         }, Rarity.Rare, new Item(Category.Scrolls, Rarity.Rare, Magic: true));
@@ -922,11 +942,18 @@ public partial class Main : Node2D
             var lines = Story.WeekStart(State);
             if (lines.Count > 0)
             {
-                SwitchTo(new ScenePhase(lines, OpenShop, State.Week == 1 ? Loc.T("BRAM'S STALL") : Loc.T($"WEEK {State.Week}"), Story.Setting(State.Week)));
+                SwitchTo(new ScenePhase(lines, AfterStory, State.Week == 1 ? Loc.T("BRAM'S STALL") : Loc.T($"WEEK {State.Week}"), Story.Setting(State.Week)));
                 return;
             }
         }
-        OpenShop();
+        AfterStory();
+    }
+
+    /// <summary>After the morning's scene: Bram's drawer, on a later season's first morning (0.37); then the shop opens.</summary>
+    void AfterStory()
+    {
+        if (State.DrawerOpen) SwitchTo(new DrawerPhase(OpenShop));
+        else OpenShop();
     }
 
     /// <summary>Opens the shop: the day's card, and the first customer.</summary>

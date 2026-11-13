@@ -244,7 +244,7 @@ public static partial class Simulation
             if (v.Chest.Items.Any(i => i.Fake && i.Category == Category.Scrolls)) Meet("mech:sand", 1, 0.8f, "sand");
             if (v.Chest.Items.Any(i => i.Fake && i.Category is Category.Coins or Category.Gems)) Meet("mech:demongold", 1, 0.8f, "demon gold");
             if (v.Chest.Items.GroupBy(i => i.Category).Any(g => g.Count() > 1)) Meet("mech:pairs", 1, 0.6f, "two of a kind");
-            if (s.Tier >= 2 && s.CanDrop) Meet("mech:drop", 1, 0.8f, "the drop");
+            if (s.Ways >= Market.CraftTier && s.CanDrop) Meet("mech:drop", 1, 0.8f, "the drop");
             if (hearing != null && hearing.Hollow) Meet("mech:falsebottom", 1, 1, "false bottoms");
             if (s.Witchlight && v.Chest.Items.Any(i => i.Magic)) Meet("mech:glow", 1, 1, "enchantment");
             if (v.Chest.Song != null) Meet("mech:song", 1, 2, "a Heartsong's song");

@@ -145,6 +145,25 @@ public static class SaveTest
             Check(loads && migrated!.Version == SaveData.CurrentVersion, $"a version {version} save is brought up to version {SaveData.CurrentVersion} and loads");
         }
 
+        // 0.37 took the counted listens out: a 0.36 save's kettle, screen, echo stone and plugs are refunded and gone.
+        {
+            var old = JsonNode.Parse(json)!.AsObject();
+            old["Version"] = 8;
+            int gold = old["Gold"]!.GetValue<int>();
+            var owned = old["Owned"]!.AsArray();
+            owned.Add("kettle");
+            owned.Add("screen");
+            var curios = old["Curios"]!.AsArray();
+            var paid = old["CurioPaid"]!.AsArray();
+            int held = curios.Count;
+            curios.Add("echo");
+            paid.Add(33);
+            var read = SaveData.FromJson(old.ToJsonString());
+            Check(read != null && read.Gold == gold + 70 + 320 + 33 && !read.Owned.Contains("kettle") && !read.Owned.Contains("screen") &&
+                  read.Curios.Count == held && read.CurioPaid.Count == Math.Min(held, read.CurioPaid.Count) && GameState.Load(read).Gold == gold + 423,
+                "a 0.36 save's Tea Kettle, Listening Screen and Echo Stone are refunded (0.37 took the counted listens out)");
+        }
+
         // 0.17's renames: an old save with the old names is brought up to the new ones; one with the new names is left be.
         string Renamed(int version, params string[] found)
         {

@@ -45,8 +45,12 @@ public static class Market
     /// <summary>Angry sellers put the price up by this much.</summary>
     public const float AngerMarkup = 1.5f;
 
-    /// <summary>Two or three of a kind turn up from this shop tier on.</summary>
-    public const int PairsTier = 3;
+    /// <summary>
+    /// Two or three of a kind turn up from this market on, and so do enchanted things; locks, false bottoms and wards from
+    /// <see cref="CraftTier"/>. Each goes by the trade's ways as Bram's kin know them (<see cref="GameState.Ways"/>, 0.37):
+    /// the market the shop trades at, or the grandest any earlier season reached.
+    /// </summary>
+    public const int PairsTier = 3, MagicTier = 3, CraftTier = 2;
 
     /// <summary>The most things in one chest, false bottom aside.</summary>
     public const int MaxItems = 6;
@@ -103,10 +107,13 @@ public static class Market
     static Chest Roll(Random rng, SellerDef seller, int shopTier, Rarity colour, Boosts boosts, OriginDef origin)
     {
         var likely = origin?.Kinds ?? seller.Kinds;
-        var lockTier = shopTier >= 2 && rng.NextFloat() < seller.LockChance ? LockTiers.For(colour) : null;
+        // What a chest can hold goes by the trade's ways (a later season has every one it's met from its first morning);
+        // which kinds of thing, by the market itself.
+        int ways = Math.Max(shopTier, boosts.Ways);
+        var lockTier = ways >= CraftTier && rng.NextFloat() < seller.LockChance ? LockTiers.For(colour) : null;
         // An empty chest (Pip's, mostly) has a false bottom too, with the smugglers' compass.
         if (rng.NextFloat() < seller.EmptyChance)
-            return new Chest(Array.Empty<Item>(), colour, boosts.AlwaysHidden && shopTier >= 2 ? FalseBottom(rng, shopTier, colour) : null, lockTier, packed: seller.Packs);
+            return new Chest(Array.Empty<Item>(), colour, boosts.AlwaysHidden && ways >= CraftTier ? FalseBottom(rng, shopTier, colour) : null, lockTier, packed: seller.Packs);
 
         var kinds = Categories.UpTo(shopTier).Select(c => c.Category).ToList();
         int count = Math.Min(kinds.Count, rng.PickWeighted(Counts[seller.Tier], c => c.Weight).Count);
@@ -130,13 +137,13 @@ public static class Market
         {
             int copies = 1;
             float pairs = seller.PairChance + boosts.Pairs;
-            if (shopTier >= PairsTier && rng.NextFloat() < pairs)
+            if (ways >= PairsTier && rng.NextFloat() < pairs)
                 copies = rng.NextFloat() < pairs * 0.5f ? 3 : 2;
             all.AddRange(Enumerable.Repeat(kind, copies));
         }
         all = all.Take(MaxItems).ToList();
 
-        float magicChance = shopTier >= 3 ? (seller.MagicChance + boosts.Magic) * boosts.MagicFactor : 0f;
+        float magicChance = ways >= MagicTier ? (seller.MagicChance + boosts.Magic) * boosts.MagicFactor : 0f;
         var items = all.Select(c =>
         {
             // Demon gold about: any coin might be gilded iron, whoever brings it.
@@ -160,11 +167,11 @@ public static class Market
 
         // People hide money, gems and spellbooks under a false bottom (always, with the smugglers' compass).
         Item hidden = null;
-        if (shopTier >= 2 && (boosts.AlwaysHidden || rng.NextFloat() < (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor))
+        if (ways >= CraftTier && (boosts.AlwaysHidden || rng.NextFloat() < (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor))
             hidden = FalseBottom(rng, shopTier, colour);
         var chest = new Chest(items, colour, hidden, lockTier, packed: seller.Packs);
         // A seller who leaves a sign wards something half the time (always, with a warden's lantern).
-        if (shopTier >= 2 && seller.Wards > 0 && (boosts.AlwaysWard || rng.NextFloat() < seller.Wards) && Warding(rng, seller, chest, kinds, likely) is Item warded)
+        if (ways >= CraftTier && seller.Wards > 0 && (boosts.AlwaysWard || rng.NextFloat() < seller.Wards) && Warding(rng, seller, chest, kinds, likely) is Item warded)
             chest.Ward(warded);
         return chest;
     }
@@ -236,10 +243,10 @@ public static class Market
     }
 
     /// <summary>How many things a seller of this tier usually brings to a shop of this tier, two-of-a-kinds included.</summary>
-    static float TypicalCount(SellerDef seller, int shopTier)
+    static float TypicalCount(SellerDef seller, int shopTier, int ways = 0)
     {
         float kinds = Counts[seller.Tier].Sum(c => c.Count * c.Weight);
-        float p = shopTier >= PairsTier ? seller.PairChance : 0f;
+        float p = Math.Max(shopTier, ways) >= PairsTier ? seller.PairChance : 0f;
         return kinds * (1 + p + p * p * 0.5f);
     }
 
@@ -251,8 +258,8 @@ public static class Market
     }
 
     /// <summary>What a chest of this colour from this seller usually holds: what someone who goes by colour asks for.</summary>
-    public static float TypicalChest(SellerDef seller, Rarity colour, int shopTier) =>
-        TypicalCount(seller, shopTier) * TypicalItem(seller, colour, shopTier);
+    public static float TypicalChest(SellerDef seller, Rarity colour, int shopTier, int ways = 0) =>
+        TypicalCount(seller, shopTier, ways) * TypicalItem(seller, colour, shopTier);
 
     /// <summary>
     /// How often each seller comes to a shop of this tier, against the others (as <see cref="GameState.StartDay"/> picks
@@ -304,17 +311,17 @@ public static class Market
     public static int TypicalAsk(int shopTier) => Asks.Value[Math.Clamp(shopTier, 1, ShopTiers.Max)];
 
     /// <summary>The weight someone who goes by weight expects of a chest from them.</summary>
-    static float TypicalHeft(SellerDef seller, int shopTier)
+    static float TypicalHeft(SellerDef seller, int shopTier, int ways = 0)
     {
         var kinds = Categories.UpTo(shopTier).Select(c => c.Category).ToArray();
-        return TypicalCount(seller, shopTier) * kinds.Sum(k => seller.Kinds[(int)k] * Categories.Heft(k)) / kinds.Sum(k => seller.Kinds[(int)k]);
+        return TypicalCount(seller, shopTier, ways) * kinds.Sum(k => seller.Kinds[(int)k] * Categories.Heft(k)) / kinds.Sum(k => seller.Kinds[(int)k]);
     }
 
     /// <summary>
     /// What the seller thinks the chest is worth, their way. Nobody prices magic they can't see, what's under a false
     /// bottom, or a warded thing.
     /// </summary>
-    static float Estimate(Random rng, SellerDef seller, Chest chest, IReadOnlyList<Category> noticed, int shopTier)
+    static float Estimate(Random rng, SellerDef seller, Chest chest, IReadOnlyList<Category> noticed, int shopTier, int ways = 0)
     {
         var colour = chest.Quality;
         float plain(Category c) => Categories.Expected(c, colour);
@@ -322,9 +329,9 @@ public static class Market
         {
             Judgment.Counter => noticed.Count * TypicalItem(seller, colour, shopTier),
             Judgment.Weight => chest.Items.Sum(i => Categories.Heft(i.Category)) * TypicalItem(seller, colour, shopTier) /
-                               (TypicalHeft(seller, shopTier) / TypicalCount(seller, shopTier)),
-            Judgment.Colour => TypicalChest(seller, colour, shopTier),
-            Judgment.Dreamer => TypicalChest(seller, colour, shopTier) * rng.Between(DreamMin, DreamMax),
+                               (TypicalHeft(seller, shopTier, ways) / TypicalCount(seller, shopTier, ways)),
+            Judgment.Colour => TypicalChest(seller, colour, shopTier, ways),
+            Judgment.Dreamer => TypicalChest(seller, colour, shopTier, ways) * rng.Between(DreamMin, DreamMax),
             Judgment.Miner => noticed.Sum(c => c switch
             {
                 Category.Arms => plain(c),
@@ -382,7 +389,7 @@ public static class Market
     static Visit Price(Random rng, SellerDef seller, Chest chest, int shopTier, List<Category> noticed, int? ask, Trade? trade, string pitch, Boosts boosts,
         OriginDef origin)
     {
-        float estimate = Estimate(rng, seller, chest, noticed, shopTier) * boosts.Dearer;
+        float estimate = Estimate(rng, seller, chest, noticed, shopTier, boosts.Ways) * boosts.Dearer;
         var format = trade ?? seller.Trade;
         // Everybody haggles with Rosa (or a haggler's purse, a golden tongue): a fixed price becomes an opening ask, a
         // crook's too (0.35: crooks kept to their price, though the cards say everyone); nobody haggles with the King,
@@ -599,6 +606,12 @@ public sealed record Boosts(float BetterChests = 0, float Hidden = 0, float Magi
 
     /// <summary>Everything real in a chest with an enchanted thing in it is enchanted (the archmage's staff).</summary>
     public bool MagicAll { get; init; }
+
+    /// <summary>
+    /// The trade's ways as Bram's kin know them (<see cref="GameState.Ways"/>): what a chest can hold goes by the grander
+    /// of this and the market it's sold at.
+    /// </summary>
+    public int Ways { get; init; }
 
     /// <summary>How likely a seller is to have put a thing of this kind in, against what they usually bring.</summary>
     public float Weight(Category category) => category is Category.Coins or Category.Gems ? 1 + MoneyKinds : 1;

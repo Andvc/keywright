@@ -58,7 +58,7 @@ public static partial class TaleBook
                     Key = "choir.first", Who = Wren, After = "choir.wren", Gap = 4, Tier = 2, If = s => s.Flagged("choir.sworn"),
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "crypt", ShopTiers.Typical(s.Tier), s.Tier, 3);
+                        var chest = Fill(rng, "crypt", ShopTiers.Typical(s.Tier), s, 3);
                         var kind = EchoKind(rng, chest, s.Tier);
                         chest.Ward(new Item(kind, Categories.RollQuality(rng, chest.Quality)));
                         return Warded(Echo(s, rng, chest, Loc.T("The first of our chests, from the abbey's crypt: see the silver bell? ") + EchoIn(kind) +
@@ -86,7 +86,7 @@ public static partial class TaleBook
                     Brings = (s, rng) =>
                     {
                         var colour = ShopTiers.Typical(s.Tier);
-                        var items = Fill(rng, "archive", colour, s.Tier, 3).Items.ToList();
+                        var items = Fill(rng, "archive", colour, s, 3).Items.ToList();
                         var hidden = new Item(rng.PickOne(new[] { Category.Coins, Category.Gems, Category.Scrolls }), Categories.RollQuality(rng, colour));
                         var chest = new Chest(items, colour, hidden);
                         var visit = Echo(s, rng, chest, Loc.T("The second, from the Archive's vaults. This echo sleeps under a false floor: listen for the hollow " +
@@ -126,7 +126,7 @@ public static partial class TaleBook
                     Key = "choir.third", Who = Wren, After = "choir.vane", Gap = 1, Tier = 3, If = s => s.Flagged("choir.bought"),
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "treasury", ShopTiers.Typical(s.Tier), s.Tier, 4);
+                        var chest = Fill(rng, "treasury", ShopTiers.Typical(s.Tier), s, 4);
                         var kind = EchoKind(rng, chest, s.Tier);
                         chest.Ward(new Item(kind, Categories.RollQuality(rng, chest.Quality)));
                         return Warded(Echo(s, rng, chest, Loc.T("The last one, out of the Guild's own vault. ") + EchoIn(kind) + Loc.T(" One coin, for luck, and God help us both.")), kind);
@@ -140,7 +140,7 @@ public static partial class TaleBook
                     Key = "choir.song", Who = Wren, After = "choir.third", Gap = 1, Tier = 3, If = s => s.Flagged("choir.echo.third"),
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "crypt", Finer(s.Tier, 1), s.Tier, 2);
+                        var chest = Fill(rng, "crypt", Finer(s.Tier, 1), s, 2);
                         var taken = s.SongsFound.Concat(s.Queue.Select(v => v.Chest.Song?.Song)).Where(k => k != null).ToHashSet();
                         // One the songbook doesn't know, if there is one: it's the family's for good.
                         var song = Heartsongs.All.Where(h => !taken.Contains(h.Key)).OrderBy(h => s.Songbook.Contains(h.Key) ? 1 : 0).ThenBy(_ => rng.Next())
@@ -377,7 +377,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "sleeper.chest", Who = Tilly, After = "sleeper.heir", Gap = 1, Tier = 4, If = s => s.Flagged("sleeper.given"),
-                    Brings = (s, rng) => Given(s, rng, Tilly, Fill(rng, "treasury", Finer(s.Tier, 1), s.Tier, 3, Category.Arms),
+                    Brings = (s, rng) => Given(s, rng, Tilly, Fill(rng, "treasury", Finer(s.Tier, 1), s, 3, Category.Arms),
                         Loc.T("Sir Edric's chest. Hear it breathing? It's yours, freely given, by his heir. One coin, for luck, and mind he doesn't bite."),
                         "treasury"),
                     Bought = (s, v) =>

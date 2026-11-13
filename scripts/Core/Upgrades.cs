@@ -15,10 +15,9 @@ namespace Keywright.Core;
 /// <param name="Luck">How much likelier everything you open is to come out a step better (a restorer: they add up).</param>
 /// <param name="By">Who brings it to the counter to offer it (<see cref="Offers"/>; Nim at his table), or null for the day's end.</param>
 /// <param name="NimCards">How many more curios Nim lays out a night.</param>
-/// <param name="Listens">How many more listens a day it gives your ear (<see cref="GameState.Listens"/>).</param>
 public sealed record Upgrade(string Key, string Name, string Blurb, int Cost, int MinTier, int SetsTier = 0, int Slots = 0,
     int SynergySlots = 0, int CurioSlots = 0, int Customers = 0, int Commissions = 0, string Requires = null, float Sales = 0, float Luck = 0,
-    string By = null, int NimCards = 0, int Listens = 0)
+    string By = null, int NimCards = 0)
 {
     public bool IsRenovation => SetsTier > 0;
 
@@ -43,7 +42,6 @@ public static class Upgrades
             80, 1, SetsTier: 2),
 
         new("sign", Loc.T("Painted Sign"), Loc.T("One more customer every day."), 40, 2, Customers: 1),
-        new("kettle", Loc.T("Tea Kettle"), Loc.T("A pot always on the hob, and a moment's quiet between customers: two more listens a day."), 70, 2, Listens: 2),
         new("scales", Loc.T("Brass Scales"), Loc.T("Honest weights, Warden-stamped, draw buyers who pay for them: everything sells for a fifth more."), 100, 2, Sales: 0.2f, By: "hollis"),
         new("cabinet1", Loc.T("Oak Cabinet"), Loc.T("Room to display one more thing. Displays draw customers."), 55, 2, Slots: 1),
         new("picks", Loc.T("Fine Lockpicks"), Loc.T("Goblin picks: a wider sweet spot when you pick a lock."), 55, 2, By: "nettle"),
@@ -55,8 +53,6 @@ public static class Upgrades
 
         new("lamp", Loc.T("Witchlight"), Loc.T("Always lit: anything enchanted glows when it makes a sound. Nobody else can see it."), 160, 3, By: "ilse"),
         new("crier", Loc.T("Town Crier"), Loc.T("Your name, shouted across Crownhold: one more customer every day."), 280, 3, Customers: 1),
-        new("screen", Loc.T("Listening Screen"), Loc.T("A folding screen hung with felt, to shut the street out: three more listens a day."), 320, 3,
-            Listens: 3, Requires: "kettle"),
         new("block", Loc.T("Auction Block"), Loc.T("Buyers bid against each other for what you sell: everything fetches a quarter more."), 480, 3, Sales: 0.25f, By: "brass"),
         new("cabinet3", Loc.T("Glass Cabinet"), Loc.T("Room to display one more thing."), 160, 3, Slots: 1, Requires: "cabinet2"),
         new("charter", Loc.T("Crownhold Charter"), Loc.T("Two synergies at once."), 240, 3, SynergySlots: 1),

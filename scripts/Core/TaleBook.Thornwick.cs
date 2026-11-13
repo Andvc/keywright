@@ -386,7 +386,7 @@ public static partial class TaleBook
     /// <summary>The dowry chest, as one family brings it: it's warm only if it's theirs (the season's secret).</summary>
     static Visit DowryChest(GameState s, Random rng, string family, string pitch)
     {
-        var chest = Fill(rng, "dowry", ShopTiers.Typical(s.Tier), s.Tier, 3, Category.Coins, Category.Garb, Category.Potions);
+        var chest = Fill(rng, "dowry", ShopTiers.Typical(s.Tier), s, 3, Category.Coins, Category.Garb, Category.Potions);
         chest.Tale = "dowry";
         if (s.Secret("dowry") != family) chest.Owner = Family(family == Ashby ? Corlew : Ashby);
         return Brought(s, rng, family, chest, pitch, "dowry");

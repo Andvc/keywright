@@ -132,7 +132,7 @@ public sealed partial class GameState
     /// </summary>
     public float HiddenChance(SellerDef seller)
     {
-        if (Tier < 2) return 0;
+        if (Ways < Market.CraftTier) return 0;
         var boosts = Boosts;
         return boosts.AlwaysHidden ? 1 : Math.Min(1, (seller.HiddenChance + boosts.Hidden) * boosts.HiddenFactor);
     }

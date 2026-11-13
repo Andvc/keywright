@@ -20,7 +20,7 @@ public static class ChecksA
         Monocle().Concat(Draught()).Concat(Aether()).Concat(Chalk()).Concat(Ring()).Concat(Staff())
             .Concat(Sealed()).Concat(Dip()).Concat(Bond()).Concat(Wholesale()).Concat(Token()).Concat(Blindfold())
             .Concat(Signet()).Concat(Tongue()).Concat(Knot()).Concat(Hourglass()).Concat(Bell()).Concat(Coffer()).Concat(GoldenTongue())
-            .Concat(Trumpet()).Concat(Watch()).Concat(Beads()).Concat(Seal()).Concat(Register()).Concat(Crescent()).Concat(Fork()).Concat(Ear());
+            .Concat(Trumpet()).Concat(Watch()).Concat(Beads()).Concat(Seal()).Concat(Register()).Concat(Crescent()).Concat(Fork());
 
     // ---- Enchantment ----
 
@@ -32,7 +32,7 @@ public static class ChecksA
             T.True(!without.Has("lamp") && !without.Witchlight, "premise: Crownhold before the lamp, nothing glows without the monocle");
             T.True(with.Witchlight, "with the monocle, the witchlight is lit (the counter and the sim both read GameState.Witchlight)");
             var chest = T.Chest(Rarity.Rare, T.I(Category.Coins, Rarity.Rare, magic: true), T.I(Category.Arms, Rarity.Rare));
-            var slip = Hearing.Simulate(chest, Every, lamp: with.Witchlight).Read(chest.Quality, with.Tier);
+            var slip = Hearing.Simulate(chest, Every, lamp: with.Witchlight).Read(chest.Quality, with.Tier, with.Ways);
             T.True(slip.Magic(Category.Coins), "the enchanted coin glowed, and a careful read marks it enchanted");
             T.True(!slip.Magic(Category.Arms), "the plain blade didn't glow");
         });
@@ -625,7 +625,7 @@ public static class ChecksA
             T.Eq(Clue.Pounds, s.Queue[1].Says, "Rook, who says what her scale reads, says only that");
             // The careful player reads it: everything heard, and one more counted, is a false bottom.
             var heard = Hearing.Simulate(chest, Every);
-            var slip = heard.Read(chest.Quality, s.Tier);
+            var slip = heard.Read(chest.Quality, s.Tier, s.Ways);
             Strategy.Reckon(slip, heard, v, s);
             T.True(slip.Hidden, "a careful read of the tally marks the false bottom");
         });
@@ -664,56 +664,6 @@ public static class ChecksA
             var wrong = T.BuyAndOpen(with, T.Counter(with, Fixed(with, 10, chest: chest)), T.Slip(with, chest, (Category.Gems, 1)));
             T.Eq(0, wrong.Fee, "the fee on a wrong slip");
             T.Eq(0, T.BuyAndOpen(without, T.Counter(without, Fixed(without, 10, chest: Rich())), T.Exact(without, Rich())).Fee, "without the seal");
-        });
-    }
-
-    /// <summary>The ear's curios (0.36): a listen back for a perfect read (an echo stone), and for a chest bought sight unseen (lamb's-wool plugs).</summary>
-    static IEnumerable<Check> Ear()
-    {
-        yield return new("echo", "a perfect read gives a listen back; a wrong one, none; never more than the day began with", () =>
-        {
-            var (without, with) = T.Twins("echo", tier: 4, bare: true);
-            foreach (var s in new[] { without, with })
-            {
-                var v = T.Counter(s, Fixed(s, 10, chest: Rich()));
-                T.True(s.Listen(v, Keywright.Core.Check.Shaking(Shake.Hard)) && s.Listen(v, Keywright.Core.Check.Shaking(Shake.Gentle)), "premise: two listens spent on it");
-                v.Handle();
-                T.True(T.BuyAndOpen(s, v, T.Exact(s, Rich())).Report.Perfect, "premise: an exact slip is a perfect read");
-            }
-            T.Eq(without.Listens - 2, without.ListensLeft, "listens left after a perfect read that cost two, without it");
-            T.Eq(with.Listens - 1, with.ListensLeft, "listens left after a perfect read that cost two, with it");
-            var chest = Rich();
-            var wrong = T.Counter(with, Fixed(with, 10, chest: chest));
-            with.Listen(wrong, Keywright.Core.Check.Shaking(Shake.Hard));
-            wrong.Handle();
-            int before = with.ListensLeft;
-            T.BuyAndOpen(with, wrong, T.Slip(with, chest, (Category.Gems, 1)));
-            T.Eq(before, with.ListensLeft, "listens left after a wrong slip");
-            with.RestEar();
-            var free = T.Counter(with, Fixed(with, 10, chest: Rich()));
-            T.BuyAndOpen(with, free, T.Exact(with, Rich()));
-            T.Eq(with.Listens, with.ListensLeft, "a perfect read with none spent: no more listens than the day's");
-        });
-        yield return new("plugs", "a chest bought sight unseen gives a listen back; one you've handled, none", () =>
-        {
-            var (without, with) = T.Twins("plugs", tier: 2, bare: true);
-            foreach (var s in new[] { without, with })
-            {
-                // One listen spent on a first chest (bought handled), then a second taken as it stands.
-                var first = T.Counter(s, Fixed(s, 10, chest: Rich()));
-                T.True(s.Listen(first, Keywright.Core.Check.Shaking(Shake.Hard)), "premise: a listen spent on the first chest");
-                first.Handle();
-                T.BuyAndOpen(s, first, T.Slip(s, Rich()));
-            }
-            T.Eq(with.Listens - 1, with.ListensLeft, "after a handled chest, with them: no listen back");
-            foreach (var s in new[] { without, with })
-            {
-                var second = T.Counter(s, Fixed(s, 10, chest: Rich()));
-                T.True(!second.Handled, "premise: the second chest is untouched");
-                T.BuyAndOpen(s, second, T.Slip(s, Rich()));
-            }
-            T.Eq(without.Listens - 1, without.ListensLeft, "after a chest bought sight unseen, without them");
-            T.Eq(with.Listens, with.ListensLeft, "after a chest bought sight unseen, with them: the listen's back");
         });
     }
 
@@ -802,7 +752,7 @@ public static class ChecksA
             var s = T.Shop(2, bare: true, curios: "fork");
             for (int i = 0; i < 3; i++) s.RecordRead(true);
             var crate = new Chest(Array.Empty<Item>(), Rarity.Uncommon) { Crate = Campaign.Bram };
-            var o = T.BuyAndOpen(s, T.Counter(s, Fixed(s, 10, chest: crate)), new Appraisal(crate.Quality, s.Tier));
+            var o = T.BuyAndOpen(s, T.Counter(s, Fixed(s, 10, chest: crate)), new Appraisal(crate.Quality, s.Tier, ways: s.Ways));
             T.True(o.Report.NoRead, "premise: a crate is no read");
             Close(1.09, Bonus(s, T.I(Category.Gems, Rarity.Legendary, magic: true)), "the next chest's gem, after three perfect reads and a crate", 0.001);
         });

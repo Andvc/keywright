@@ -193,7 +193,7 @@ public partial class DayEndPhase : Phase
             board.AddChild(UiKit.MakeLabel(Loc.T("until the Guild comes"), 16, Palette.Muted, HorizontalAlignment.Right).Place(150, 10, 204, 20));
         if (State.Commissions.Count == 0)
             board.AddChild(UiKit.MakeLabel(!State.GuildIntroduced ? Loc.T("Regulars will start asking you for things soon.")
-                : State.Week < Patrons.FromWeek ? Loc.T("Regulars start asking for things once the Guild has been.")
+                : State.Week < State.CommissionsFrom ? Loc.T("Regulars start asking for things once the Guild has been.")
                 : Loc.T("Nobody's asking for anything this week."), 16, Palette.Muted).Wrapped().Place(14, 40, SideW - 28, 60));
         for (int i = 0; i < Math.Min(4, State.Commissions.Count); i++)
         {

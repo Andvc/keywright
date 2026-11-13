@@ -67,7 +67,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "hedge.contest", Who = Jasper, After = "hedge.aubel", Gap = 1, If = s => s.Flagged("hedge.shielded"),
-                    Brings = (s, rng) => Contested(s, rng, Jasper, Fill(rng, "millpond", ShopTiers.Typical(s.Tier), s.Tier, rng.Next(2, 4)),
+                    Brings = (s, rng) => Contested(s, rng, Jasper, Fill(rng, "millpond", ShopTiers.Typical(s.Tier), s, rng.Next(2, 4)),
                         Loc.T("Let's settle it like Keywrights: one chest, read in front of the Crossed Keys. Read it right and I'll take my cart to " +
                               "Thornwick. Wrong, and I stay. One coin, and it's yours either way."),
                         "millpond", s.Purses(0.3f)),
@@ -122,7 +122,7 @@ public static partial class TaleBook
                     Key = "field.plough", Who = Garrick, Gap = 5,
                     Brings = (s, rng) =>
                     {
-                        var chest = Fill(rng, "field", ShopTiers.Typical(s.Tier), s.Tier, rng.Next(2, 4), Category.Arms);
+                        var chest = Fill(rng, "field", ShopTiers.Typical(s.Tier), s, rng.Next(2, 4), Category.Arms);
                         chest.Tale = "field";
                         return Brought(s, rng, Garrick, chest, Loc.T("My plough turned this up on the Field, deep, under a knight's shield. Finder's " +
                                                                     "right: it's mine to sell, and I'd sooner not keep it in the house. {price}."), "field");
@@ -293,7 +293,7 @@ public static partial class TaleBook
                 new()
                 {
                     Key = "fair.contest", Who = Garrick, After = "fair.prize", Gap = 2,
-                    Brings = (s, rng) => Contested(s, rng, Garrick, Fill(rng, "attic", ShopTiers.Typical(s.Tier), s.Tier, rng.Next(2, 4)),
+                    Brings = (s, rng) => Contested(s, rng, Garrick, Fill(rng, "attic", ShopTiers.Typical(s.Tier), s, rng.Next(2, 4)),
                         s.Flagged("fair.sponsor")
                             ? Loc.T("The fair's chest! Read it right in front of the whole county, and the prize is yours: your own money back, and the " +
                                     "miller's on top. One coin to enter.")
