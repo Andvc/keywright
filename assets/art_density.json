@@ -5876,6 +5876,22 @@
         "density": "fine detail retained for smaller UI slots"
       }
     },
+    "res://assets/ui/curios/abacus.png": {
+      "asset_id": "drawn.icon.curio.abacus",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 4,
+      "sha256": "e8eb3716f0f5514ab12fc299de638b95f6ca7b6bd9447035a0ea8f41f44e7cde"
+    },
     "res://assets/ui/curios/aether.png": {
       "asset_id": "curio.aether",
       "source": "art/density3/assets/curios/aether.png",
@@ -6170,8 +6186,8 @@
       "reference_scale": 1,
       "source_sha256": "8c7af45991e6cd27220f778cf422b5c698f750592d0a3f86afdbacb76f77e23b"
     },
-    "res://assets/ui/curios/echo.png": {
-      "asset_id": "drawn.icon.curio.echo",
+    "res://assets/ui/curios/engine.png": {
+      "asset_id": "drawn.icon.curio.engine",
       "source": "tools/custom_art.py",
       "drawn": true,
       "logical_size": [
@@ -6184,7 +6200,7 @@
       ],
       "reference_scale": 1,
       "pixel_pitch": 4,
-      "sha256": "61fb9f25caa65746afc4c598f3e92690f23fd4dc5cac6147ccd98fdf701aead3"
+      "sha256": "67d9ba5fa34689c9308677b863587c9b1eb2c6b4aecd4c379120ff1b8ede2b60"
     },
     "res://assets/ui/curios/errand.png": {
       "asset_id": "curio.errand",
@@ -6227,6 +6243,22 @@
       ],
       "reference_scale": 1,
       "source_sha256": "2029f79c6eff2cccc8c92ff5de2990f0f0a8b22919d5d44fd91cc5f82976ed69"
+    },
+    "res://assets/ui/curios/gauge.png": {
+      "asset_id": "drawn.icon.curio.gauge",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 4,
+      "sha256": "7d2b12a6b4d2ea41ebca6ef0260aae5278d247ea22de654e08d2c780e2f9f02f"
     },
     "res://assets/ui/curios/gauntlet.png": {
       "asset_id": "curio.gauntlet",
@@ -6522,6 +6554,22 @@
       "reference_scale": 1,
       "source_sha256": "84ae6a290941ce16661c571371161317ff9c04d38d0fd0a2b5de66e8d817a309"
     },
+    "res://assets/ui/curios/moth.png": {
+      "asset_id": "drawn.icon.curio.moth",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 4,
+      "sha256": "988b21624a44a5af2eae741c38c4d8b5cbfc10bd2d56c4330ab0aa746279b982"
+    },
     "res://assets/ui/curios/net.png": {
       "asset_id": "curio.net",
       "source": "art/density3/assets/curios/net.png",
@@ -6592,8 +6640,8 @@
       "reference_scale": 1,
       "source_sha256": "1b75acd40a65be6f940e94e502c720dc16669f5061ec5bc3edd7a9ea603c8a61"
     },
-    "res://assets/ui/curios/plugs.png": {
-      "asset_id": "drawn.icon.curio.plugs",
+    "res://assets/ui/curios/primer.png": {
+      "asset_id": "drawn.icon.curio.primer",
       "source": "tools/custom_art.py",
       "drawn": true,
       "logical_size": [
@@ -6606,7 +6654,7 @@
       ],
       "reference_scale": 1,
       "pixel_pitch": 4,
-      "sha256": "c5c5ebf5cbc6e488566a8b0fe049a564db1c2058992619d1d52e3b797e8736a6"
+      "sha256": "c8165166897d1ff2d6ec2a251e56a3fcf5e847af798b2de2f5be65a9b5da5bb4"
     },
     "res://assets/ui/curios/purse.png": {
       "asset_id": "curio.purse",
@@ -6635,6 +6683,22 @@
       ],
       "reference_scale": 1,
       "source_sha256": "93bd27b6fa1efc07f222271ccc05b4198bceb38ba9fcb86bd6ef51b91cc596ff"
+    },
+    "res://assets/ui/curios/quill.png": {
+      "asset_id": "drawn.icon.curio.quill",
+      "source": "tools/custom_art.py",
+      "drawn": true,
+      "logical_size": [
+        56,
+        56
+      ],
+      "physical_size": [
+        112,
+        112
+      ],
+      "reference_scale": 1,
+      "pixel_pitch": 4,
+      "sha256": "441edccaf067d7df259e8f96355b5bf33bf55d9edf471d4a4f457418c602ce3f"
     },
     "res://assets/ui/curios/register.png": {
       "asset_id": "curio.register",
@@ -7196,22 +7260,6 @@
       "reference_scale": 1,
       "source_sha256": "b52047b1b3c6177939aa36b04ce119053ff146cd02423e3d0f47b9c4032e1f46"
     },
-    "res://assets/ui/icons/kettle.png": {
-      "asset_id": "drawn.icon.upgrade.kettle",
-      "source": "tools/custom_art.py",
-      "drawn": true,
-      "logical_size": [
-        48,
-        48
-      ],
-      "physical_size": [
-        96,
-        96
-      ],
-      "reference_scale": 1,
-      "pixel_pitch": 3,
-      "sha256": "4d93f050416e6feca70299f65c766a625c8d5d1701c75db3727ecf510e778459"
-    },
     "res://assets/ui/icons/lamp.png": {
       "asset_id": "icon.upgrade.lamp",
       "source": "art/density3/assets/icons/upgrade_lamp.png",
@@ -7309,22 +7357,6 @@
       ],
       "reference_scale": 1,
       "source_sha256": "13109aa815e7dba1749c5c45a467b3d05bf2082cb55670823b083666757ddba0"
-    },
-    "res://assets/ui/icons/screen.png": {
-      "asset_id": "drawn.icon.upgrade.screen",
-      "source": "tools/custom_art.py",
-      "drawn": true,
-      "logical_size": [
-        48,
-        48
-      ],
-      "physical_size": [
-        96,
-        96
-      ],
-      "reference_scale": 1,
-      "pixel_pitch": 3,
-      "sha256": "be570ce95e2fbfaa71d1d1abb3e3a136b528507e9445f0f95a7afc52d5b576a1"
     },
     "res://assets/ui/icons/seal.png": {
       "asset_id": "icon.upgrade.seal",

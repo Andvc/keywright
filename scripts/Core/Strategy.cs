@@ -77,7 +77,7 @@ public static class Strategy
     /// mind (or it's Hesk, who can't lift it).
     /// </summary>
     public static bool ShouldDrop(Visit visit, Hearing hearing, int tier, GameState state = null) =>
-        Math.Max(tier, state?.Ways ?? 0) >= Market.CraftTier && (state?.CanDrop ?? true) && !(state?.MindsDrop(visit.Seller) ?? visit.Seller.HatesDrop) && !Rushed(visit, state) && !hearing.Dropped &&
+        Math.Max(tier, state?.Ways ?? 0) >= Market.CraftTier && !(state?.MarksHidden ?? false) && (state?.CanDrop ?? true) && !(state?.MindsDrop(visit.Seller) ?? visit.Seller.HatesDrop) && !Rushed(visit, state) && !hearing.Dropped &&
         (state?.DropSturdier >= 1 || !Categories.All.Any(c => c.Fragile && hearing.HeardAny(c.Category)));
 
     /// <summary>
@@ -109,7 +109,7 @@ public static class Strategy
     }
 
     /// <summary>The Bookkeeping Engine read this chest (it can't through chains).</summary>
-    public static bool Recorded(Visit visit, GameState state) => (state?.Has(Upgrades.Engine) ?? false) && !visit.Chest.Sealed;
+    public static bool Recorded(Visit visit, GameState state) => (state?.ReadsChests ?? false) && !visit.Chest.Sealed;
 
     /// <summary>Someone counted what's inside, false bottom and all: Brass's ticket, or the Drowned Bell.</summary>
     static bool Counted(Visit visit, GameState state) => visit.Says is Clue.Articles or Clue.Tally || (state?.Shows(Heartsongs.Bell) ?? false);
@@ -246,6 +246,11 @@ public static class Strategy
     /// you to name a price: half what it's worth to you, or just a few coins to someone who has no idea.
     /// </summary>
     /// <param name="floor">How much further than usual sellers come down for this shop (a silver tongue, a Haggler's name: <see cref="Boosts.Floor"/>).</param>
+    /// <remarks>With a factor's abacus the least they'd take is known: that's the offer, where the chest's worth it.</remarks>
+    public static int FirstOffer(Visit visit, int worth, GameState state) =>
+        state.KnowsFloors && visit.CanOffer && visit.Floor <= worth ? Math.Max(1, visit.Floor) : FirstOffer(visit, worth, state.Boosts.Floor);
+
+    /// <inheritdoc cref="FirstOffer(Visit, int, GameState)"/>
     public static int FirstOffer(Visit visit, int worth, float floor = 1) => visit.Trade switch
     {
         // Nobody walks out on a golden tongue: a coin, and they come down to the least they'd take.
@@ -518,6 +523,9 @@ public static class Strategy
         ["signet"] = 2, ["tongue"] = 4, ["knot"] = 13, ["hourglass"] = 12, ["bell"] = 11, ["coffer"] = 9, ["goldentongue"] = 9,
         ["trumpet"] = 4, ["watch"] = 3, ["beads"] = 2, ["seal"] = 10, ["register"] = 10, ["crescent"] = 3, ["fork"] = 16, ["ledger"] = 20,
         ["truthglass"] = 22,
+        // 0.37's hands: what each saves a careful player is little (they did the routine right already); the engine and
+        // the moth tell them what they couldn't have heard.
+        ["quill"] = 2, ["engine"] = 30, ["moth"] = 9, ["gauge"] = 8, ["primer"] = 3, ["abacus"] = 12,
         ["crate"] = 3, ["hook"] = 14, ["rod"] = 16, ["log"] = 12, ["pass"] = 14, ["compass"] = 22,
         ["wardlamp"] = 13, ["pillow"] = 7, ["wardtally"] = 4, ["wardkey"] = 14, ["aldricseal"] = 11,
         ["shell"] = 7, ["coin"] = 3, ["foot"] = 12, ["wishbone"] = 3, ["horseshoe"] = 10, ["clover"] = 6, ["star"] = 18, ["spindle"] = 12,

@@ -91,6 +91,8 @@ public static class Glossary
         ["dummy"] = new[] { Term.Exhibition }, ["gauntlet"] = new[] { Term.Mended, Term.StepBetter }, ["cap"] = new[] { Term.Mended, Term.StepBetter },
         ["ticket"] = new[] { Term.ShortNight }, ["marker"] = new[] { Term.BramsWord }, ["note"] = new[] { Term.ShortNight },
         ["purse"] = new[] { Term.Stash },
+        ["gauge"] = new[] { Term.FalseBottom }, ["primer"] = new[] { Term.Ward }, ["abacus"] = new[] { Term.Haggling },
+        ["engine"] = new[] { Term.PerfectRead },
     };
 
     /// <summary>A curio's words and what they mean, a line each, for under its description (empty if it uses none).</summary>

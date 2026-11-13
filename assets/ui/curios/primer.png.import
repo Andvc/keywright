@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3ml7ek16bjot"
-path="res://.godot/imported/kettle.png-bb021455c90193dfdfa77419c72e9c48.ctex"
+uid="uid://dmotl135efxb3"
+path="res://.godot/imported/primer.png-e61c182c8c9827431e7c3f2754bee50b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/icons/kettle.png"
-dest_files=["res://.godot/imported/kettle.png-bb021455c90193dfdfa77419c72e9c48.ctex"]
+source_file="res://assets/ui/curios/primer.png"
+dest_files=["res://.godot/imported/primer.png-e61c182c8c9827431e7c3f2754bee50b.ctex"]
 
 [params]
 

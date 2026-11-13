@@ -391,7 +391,21 @@ public partial class Autoplay : Node
         bool recorded = Strategy.Recorded(visit, State) && visit.Lesson == null;
         if (!recorded)
         {
-            foreach (var level in Strategy.Levels(visit, State))
+            var wanted = Strategy.Levels(visit, State).ToList();
+            // Bram's cradle (0.37), where it's on the counter: a press, and whatever it didn't rock at is shaken by hand.
+            // (A lesson's steps are a hand's: it asks for each shake by name.)
+            if (counter.HasCradle && visit.Lesson == null)
+            {
+                counter.Rock();
+                await Wait(0.3);
+                while (IsInstanceValid(counter) && counter.Rocking) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+                if (!IsInstanceValid(counter)) return;
+                await Wait(0.4);
+                await ReadTips(counter.Mentor);
+                if (!IsInstanceValid(counter)) return;
+                wanted.RemoveAll(level => counter.Hearing.HasTried(level, false));
+            }
+            foreach (var level in wanted)
                 if (!await Shake(counter, level, seconds)) return;
             // A jingle or tinkle that goes quiet under the magnet is gilded iron: check at the strength it sounded at.
             var magnetLevels = Strategy.MagnetLevels(visit, counter.Hearing, State);
@@ -575,7 +589,7 @@ public partial class Autoplay : Node
                 break;
             case Trade.Haggle:
             {
-                int offer = Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State.Boosts.Floor));
+                int offer = Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State));
                 if (offer <= 0 || worth <= offer) break;
                 counter.MakeOffer(offer);
                 await Wait(1.4);
@@ -585,7 +599,7 @@ public partial class Autoplay : Node
                 {
                     await ReadTips(counter.Mentor);
                     if (!IsInstanceValid(counter) || !visit.Deciding) return;
-                    counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State.Boosts.Floor)));
+                    counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State)));
                     await Wait(1.4);
                     if (!IsInstanceValid(counter) || !visit.Deciding) return;
                 }
@@ -599,7 +613,7 @@ public partial class Autoplay : Node
             default:
             {
                 if (worth <= 1) break;
-                counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State.Boosts.Floor)));
+                counter.MakeOffer(Math.Min(State.Gold, Strategy.FirstOffer(visit, worth, State)));
                 await Wait(1.4);
                 if (!IsInstanceValid(counter) || !visit.Deciding) return;
                 await ReadTips(counter.Mentor);

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emcnca0qabl8"
-path="res://.godot/imported/plugs.png-b196a701c40eae02ee8c1ef3696122b8.ctex"
+uid="uid://cjcny4conli5"
+path="res://.godot/imported/abacus.png-9db7a4f2dad6605c21aebc997c48ec47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/curios/plugs.png"
-dest_files=["res://.godot/imported/plugs.png-b196a701c40eae02ee8c1ef3696122b8.ctex"]
+source_file="res://assets/ui/curios/abacus.png"
+dest_files=["res://.godot/imported/abacus.png-9db7a4f2dad6605c21aebc997c48ec47.ctex"]
 
 [params]
 

@@ -3343,6 +3343,272 @@ def burst(frames=6, w=112, h=100):
     return sheet
 
 
+# ---- Icons drawn at the 3px density ----
+# Pictures that came after the 3px art was made from its originals (art/density3) are drawn here a pixel a cell, in the
+# palette's ramps, flat and without outlines, lit from the upper left, until they have a picture made like the rest.
+# (0.36's Tea Kettle and Listening Screen were the first, and went with the counted listens in 0.37.)
+
+def _hex(h):
+    return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+
+
+def bands(img, top, bottom, colours, dither=True):
+    """A sky or a wall in horizontal bands of colour, top to bottom, checkered where they meet."""
+    d = ImageDraw.Draw(img)
+    n = len(colours)
+    step = (bottom - top) / n
+    for i, col in enumerate(colours):
+        y0, y1 = int(top + i * step), int(top + (i + 1) * step)
+        d.rectangle((0, y0, W, y1), fill=(*col, 255))
+        if dither and i + 1 < n:
+            for y in range(y1 - 2, y1 + 2):
+                for x in range(y % 2, W, 2):
+                    if y >= y1:
+                        img.putpixel((x, y), (*col, 255))
+    return img
+
+
+def ridge(img, base, height, colour, seed, roughness=6, step=8):
+    """A line of hills: a random walk along the top, filled down to the bottom."""
+    rng = random.Random(seed)
+    d = ImageDraw.Draw(img)
+    pts, y = [], base - height // 2
+    for x in range(-step, W + step * 2, step):
+        y = max(base - height, min(base, y + rng.randint(-roughness, roughness)))
+        pts.append((x, y))
+    d.polygon(pts + [(W + step, H), (-step, H)], fill=(*colour, 255))
+    return img
+
+
+def trees(img, xs, base, colour, size=10, seed=0):
+    rng = random.Random(seed)
+    d = ImageDraw.Draw(img)
+    for x in xs:
+        s = size + rng.randint(-3, 3)
+        d.polygon([(x, base - s * 2), (x + s, base), (x - s, base)], fill=(*colour, 255))
+        d.polygon([(x, base - s * 3), (x + s * 3 // 4, base - s), (x - s * 3 // 4, base - s)], fill=(*colour, 255))
+    return img
+
+
+def clouds(img, spots, colour):
+    d = ImageDraw.Draw(img)
+    for x, y, w in spots:
+        d.ellipse((x, y, x + w, y + w // 3), fill=(*colour, 255))
+        d.ellipse((x + w // 4, y - w // 6, x + w * 3 // 4, y + w // 4), fill=(*colour, 255))
+    return img
+
+
+def crossroads():
+    """Bram's stall at the Brindle crossroads, at dusk: the river, the mill and its pond, the road north, and on the
+    far hill the Barrow's standing stones."""
+    img = Image.new("RGBA", (W, H))
+    bands(img, 0, 170, [_hex(c) for c in ("#2b2d5c", "#3e3f75", "#5b5288", "#8a6390", "#c27d86", "#e99f7a", "#f6c27c")])
+    clouds(img, [(60, 80, 90), (300, 60, 120), (500, 95, 80)], (222, 150, 140))
+    ridge(img, 160, 40, (96, 82, 120), 3)
+    d = ImageDraw.Draw(img)
+    # The Barrow: a long mound on the far hill, ringed with standing stones.
+    d.polygon([(370, 160), (420, 128), (440, 122), (490, 122), (510, 128), (560, 160)], fill=(84, 72, 108, 255))
+    for x, h in ((418, 12), (434, 16), (452, 14), (472, 17), (490, 13), (506, 11)):
+        top = 124 - h + (4 if x in (418, 506) else 0)
+        d.rectangle((x, top, x + 5, top + h), fill=(62, 54, 84, 255))
+        d.line((x, top, x + 5, top), fill=(110, 96, 136, 255))
+    ridge(img, 182, 26, (74, 96, 84), 11, roughness=4)
+    # The river, winding down to the mill.
+    d.polygon([(0, 205), (180, 196), (330, 200), (640, 192), (640, 206), (330, 214), (180, 210), (0, 218)], fill=(120, 150, 190, 255))
+    d.line((0, 206, 640, 199), fill=(170, 196, 226, 255))
+    ridge(img, 238, 22, (58, 84, 56), 23, roughness=3)
+    # The mill: a stone tower, a wheel, a roof.
+    d.rectangle((92, 150, 132, 205), fill=(120, 104, 96, 255), outline=(52, 40, 46, 255))
+    d.polygon([(86, 152), (112, 128), (138, 152)], fill=(132, 60, 50, 255), outline=(52, 40, 46, 255))
+    d.ellipse((128, 172, 160, 204), outline=(84, 60, 40, 255), width=3)
+    for a in range(0, 360, 45):
+        d.line((144, 188, 144 + 15 * math.cos(math.radians(a)), 188 + 15 * math.sin(math.radians(a))), fill=(84, 60, 40, 255), width=2)
+    d.rectangle((108, 186, 116, 205), fill=(52, 40, 46, 255))
+    # The signpost at the crossroads.
+    d.rectangle((560, 150, 564, 232), fill=(96, 64, 36, 255))
+    d.polygon([(536, 156), (586, 156), (594, 162), (586, 168), (536, 168)], fill=(150, 104, 58, 255), outline=(60, 40, 22, 255))
+    d.polygon([(590, 176), (540, 176), (532, 182), (540, 188), (590, 188)], fill=(150, 104, 58, 255), outline=(60, 40, 22, 255))
+    trees(img, (24, 210, 250, 360, 620), 226, (40, 64, 44), seed=5)
+    return img
+
+
+def thornwick_wall():
+    """Thornwick: an old stone wall, every stone a little different, with a window onto the Old Wood."""
+    img = Image.new("RGBA", (W, H), (88, 80, 76, 255))
+    rng = random.Random(9)
+    d = ImageDraw.Draw(img)
+    y = 0
+    while y < H:
+        h = rng.randint(14, 20)
+        x = -rng.randint(0, 30)
+        while x < W:
+            w = rng.randint(26, 46)
+            shade = rng.randint(-14, 14)
+            base = (150 + shade, 138 + shade, 124 + shade)
+            d.rectangle((x + 1, y + 1, x + w - 1, y + h - 1), fill=(*base, 255))
+            d.line((x + 1, y + 1, x + w - 2, y + 1), fill=(min(255, base[0] + 22), min(255, base[1] + 22), min(255, base[2] + 22), 255))
+            d.line((x + 1, y + h - 1, x + w - 1, y + h - 1), fill=(base[0] - 30, base[1] - 30, base[2] - 30, 255))
+            x += w
+        y += h
+    # A window onto the Old Wood.
+    wx = 420
+    d.rectangle((wx, 52, wx + 96, 132), fill=(52, 40, 30, 255))
+    view = Image.new("RGBA", (88, 72))
+    bands(view, 0, 72, [(150, 190, 170), (120, 170, 140), (90, 140, 110)], dither=False)
+    trees(view, (6, 24, 44, 62, 82), 76, (40, 76, 48), size=12, seed=2)
+    trees(view, (14, 34, 54, 74), 80, (28, 56, 36), size=14, seed=3)
+    img.alpha_composite(view, (wx + 4, 56))
+    d.rectangle((wx + 46, 56, wx + 49, 128), fill=(52, 40, 30, 255))
+    d.rectangle((wx + 4, 90, wx + 92, 93), fill=(52, 40, 30, 255))
+    d.rectangle((wx - 6, 132, wx + 102, 138), fill=(120, 108, 96, 255), outline=(60, 50, 44, 255))
+    return img
+
+
+def crownhold_view(w=380, h=72):
+    """Crownhold from the shop window, at sunset: roofs, chimneys, spires, and the palace on its hill."""
+    img = Image.new("RGBA", (w, h))
+    sky = [(70, 60, 110), (140, 80, 120), (220, 120, 110), (250, 180, 120)]
+    for i, col in enumerate(sky):
+        ImageDraw.Draw(img).rectangle((0, i * h // 6, w, (i + 1) * h // 6 + 1), fill=(*col, 255))
+    ImageDraw.Draw(img).rectangle((0, len(sky) * h // 6, w, h), fill=(*sky[-1], 255))
+    d = ImageDraw.Draw(img)
+    # The palace on its hill: towers and a dome, with the Gate below it glinting.
+    d.polygon([(180, 70), (220, 40), (300, 40), (340, 70)], fill=(90, 66, 100, 255))
+    for x, top in ((228, 14), (252, 22), (276, 10), (300, 18)):
+        d.rectangle((x, top, x + 10, 44), fill=(90, 66, 100, 255))
+        d.polygon([(x - 2, top), (x + 5, top - 9), (x + 12, top)], fill=(90, 66, 100, 255))
+    d.ellipse((250, 26, 276, 46), fill=(90, 66, 100, 255))
+    d.rectangle((262, 60, 274, 70), fill=(232, 186, 70, 255))
+    rng = random.Random(4)
+    x = 0
+    while x < w:
+        bw, bh = rng.randint(18, 34), rng.randint(14, 30)
+        col = rng.choice([(110, 70, 82), (96, 62, 78), (126, 82, 88)])
+        d.rectangle((x, h - bh, x + bw, h), fill=(*col, 255))
+        d.polygon([(x - 2, h - bh), (x + bw // 2, h - bh - 10), (x + bw + 2, h - bh)], fill=(150, 64, 60, 255))
+        if rng.random() < 0.5:
+            d.rectangle((x + bw - 7, h - bh - 12, x + bw - 3, h - bh - 4), fill=(*col, 255))
+        for wx in range(x + 4, x + bw - 4, 8):
+            if rng.random() < 0.4:
+                d.rectangle((wx, h - bh + 6, wx + 2, h - bh + 9), fill=(255, 214, 120, 255))
+        x += bw + rng.randint(0, 4)
+    return img
+
+
+def emporium_hall():
+    """The Royal Emporium: a marble colonnade open to the sky, and down the avenue the Gilded Gate, glowing."""
+    img = Image.new("RGBA", (W, H))
+    bands(img, 0, 240, [(104, 160, 222), (130, 182, 232), (160, 202, 240), (196, 222, 246), (226, 238, 250)])
+    clouds(img, [(120, 70, 110), (380, 50, 140), (520, 110, 90)], (246, 248, 255))
+    d = ImageDraw.Draw(img)
+    # The city's far walls, and the Gate in the middle of them, gold, with light leaking through.
+    d.rectangle((0, 168, W, 238), fill=(176, 170, 190, 255))
+    for x in range(0, W, 24):
+        d.rectangle((x, 160, x + 12, 168), fill=(176, 170, 190, 255))
+    d.rectangle((272, 120, 368, 238), fill=(150, 110, 40, 255))
+    d.ellipse((272, 96, 368, 150), fill=(150, 110, 40, 255))
+    d.rectangle((282, 130, 358, 238), fill=(222, 176, 64, 255))
+    d.ellipse((282, 108, 358, 152), fill=(222, 176, 64, 255))
+    for x in range(290, 352, 10):
+        d.rectangle((x, 120, x + 3, 238), fill=(150, 110, 40, 255))
+    d.rectangle((316, 120, 324, 238), fill=(255, 236, 160, 255))
+    # The colonnade: columns and the floor of the hall.
+    for x in (70, 170, 470, 570):
+        d.rectangle((x, 40, x + 26, 238), fill=(232, 228, 220, 255), outline=(160, 150, 140, 255))
+        for fx in range(x + 5, x + 24, 6):
+            d.line((fx, 46, fx, 232), fill=(206, 200, 192, 255))
+        d.rectangle((x - 6, 36, x + 32, 44), fill=(244, 240, 232, 255), outline=(160, 150, 140, 255))
+        d.rectangle((x - 6, 230, x + 32, 238), fill=(244, 240, 232, 255), outline=(160, 150, 140, 255))
+    d.rectangle((0, 30, W, 36), fill=(244, 240, 232, 255), outline=(160, 150, 140, 255))
+    return img
+
+
+def _prop(draw, w, h):
+    c = Canvas(w, h)
+    draw(c)
+    return c.render()
+
+
+def props():
+    """Things that stand about the shops: a crate, a barrel, jars and a bottle (drawn at 1x on the 640x360 picture)."""
+    def crate(c):
+        c.rect(1, 1, 22, 20, "wood")
+        for y in (7, 14):
+            c.line([(1, y), (22, y)], "line")
+        c.line([(1, 1), (22, 20)], "wood", 2)
+
+    def barrel(c):
+        c.ellipse(1, 0, 18, 6, "wood").rect(1, 3, 18, 24, "wood").ellipse(1, 21, 18, 26, "wood")
+        for y in (6, 20):
+            c.line([(1, y), (18, y)], "iron")
+        c.line([(9, 3), (9, 24)], "line")
+
+    def jar(c):
+        c.ellipse(1, 4, 14, 19, "clay").rect(4, 1, 11, 5, "clay").rect(3, 0, 12, 1, "clay")
+        c.line([(2, 10), (13, 10)], "royal")
+
+    def small_jar(c):
+        c.ellipse(1, 3, 10, 13, "brass").rect(3, 0, 8, 3, "brass")
+
+    def flask(c):
+        c.ellipse(1, 7, 10, 17, "glass").rect(4, 1, 7, 8, "glass").rect(4, 0, 7, 1, "cork")
+        c.rect(2, 11, 9, 16, "blood")
+
+    return {"crate": _prop(crate, 24, 22), "barrel": _prop(barrel, 20, 28), "jar": _prop(jar, 16, 21),
+            "small_jar": _prop(small_jar, 12, 15), "flask": _prop(flask, 12, 19)}
+
+
+def burst(frames=6, w=112, h=100):
+    """The ring that bursts from a chest as it opens: sparks, a flash, a ring that spreads and breaks into embers.
+    Pale, so the game can tint it with the best thing's colour (it's drawn additively)."""
+    sheet = Image.new("RGBA", (w * frames, h))
+    hot, warm, edge = (255, 250, 220, 255), (255, 214, 110, 255), (240, 140, 70, 255)
+    rng = random.Random(7)
+    cx, cy = w // 2, h // 2
+    for f in range(frames):
+        img = Image.new("RGBA", (w, h))
+        d = ImageDraw.Draw(img)
+        t = f / (frames - 1)
+        if f == 0:
+            for a in range(0, 360, 45):
+                r = 10 + (a // 45) % 2 * 6
+                x, y = cx + r * math.cos(math.radians(a)), cy + r * math.sin(math.radians(a))
+                d.rectangle((x - 2, y - 2, x + 2, y + 2), fill=warm)
+            d.rectangle((cx - 3, cy - 3, cx + 3, cy + 3), fill=hot)
+        elif f == 1:
+            d.ellipse((cx - 14, cy - 14, cx + 14, cy + 14), fill=warm)
+            d.ellipse((cx - 10, cy - 10, cx + 10, cy + 10), fill=hot)
+            for a in range(0, 360, 30):
+                x, y = cx + 20 * math.cos(math.radians(a)), cy + 20 * math.sin(math.radians(a))
+                d.rectangle((x - 1, y - 1, x + 1, y + 1), fill=warm)
+        else:
+            r = int(18 + 30 * t)
+            thick = max(2, 7 - f)
+            d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=edge, width=thick + 1)
+            d.ellipse((cx - r + 1, cy - r + 1, cx + r - 1, cy + r - 1), outline=warm, width=thick)
+            d.ellipse((cx - r + 2, cy - r + 2, cx + r - 2, cy + r - 2), outline=hot, width=max(1, thick - 3))
+            # Puffs along the ring, and gaps opening in it as it fades.
+            for i in range(10):
+                a = math.radians(i * 36 + rng.randint(-10, 10))
+                x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+                pr = rng.randint(3, 6) - (f - 2)
+                if pr > 1:
+                    d.ellipse((x - pr, y - pr, x + pr, y + pr), fill=warm if i % 2 else edge)
+            if f >= 4:
+                for i in range(6 * (f - 3)):
+                    a = math.radians(rng.randint(0, 359))
+                    x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+                    d.rectangle((x - 3, y - 3, x + 3, y + 3), fill=(0, 0, 0, 0))
+            if f == frames - 1:
+                for i in range(12):
+                    a = math.radians(rng.randint(0, 359))
+                    rr = r + rng.randint(-4, 8)
+                    x, y = cx + rr * math.cos(a), cy + rr * math.sin(a)
+                    d.rectangle((x - 1, y - 1, x + 1, y + 1), fill=warm)
+        sheet.alpha_composite(img, (f * w, 0))
+    return sheet
+
+
 # ---- Upgrade icons drawn at the 3px density (0.36) ----
 # The Tea Kettle and the Listening Screen came with the ear (GameState.Listens), after the 3px art was made from its
 # originals (art/density3), so they're drawn here a pixel a cell, 32 cells square like the rest of the upgrade icons
@@ -3352,135 +3618,228 @@ def _hex(h):
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) + (255,)
 
 
-def icon3_kettle():
-    """A copper kettle on the boil: the Tea Kettle (two more listens a day)."""
-    im = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
-    d = ImageDraw.Draw(im)
-    dk, md, lt, hi, glint = _hex("613d36"), _hex("915a47"), _hex("bd7e5f"), _hex("e1a882"), _hex("fed5b3")
-    iron_m, iron_l = _hex("3b3150"), _hex("554b69")
-    gold_d, gold_m, gold_l = _hex("a06500"), _hex("c29026"), _hex("f2c14e")
-    st1, st2 = _hex("c9c4d4"), _hex("ece6f5")
-    d.arc((8, 4, 25, 22), 180, 360, fill=iron_m, width=2)
-    d.arc((8, 4, 25, 22), 200, 250, fill=iron_l, width=1)
-    d.ellipse((6, 13, 27, 29), fill=md)
-    d.rectangle((7, 21, 26, 26), fill=md)
-    d.ellipse((6, 19, 27, 30), fill=md)
-    for y in range(13, 31):
-        for x in range(5, 29):
-            if im.getpixel((x, y)) != md:
-                continue
-            v = (x - 12) * 0.55 + (y - 17) * 0.75
-            if v > 7.5:
-                im.putpixel((x, y), dk)
-            elif v < -3.2:
-                im.putpixel((x, y), lt)
-    d.line((9, 17, 11, 15), fill=hi)
-    d.line((8, 19, 8, 21), fill=hi)
-    d.point((10, 16), fill=glint)
-    d.line((8, 27, 25, 27), fill=dk)
-    d.line((10, 29, 23, 29), fill=dk)
-    d.ellipse((11, 11, 22, 15), fill=lt)
-    d.line((12, 14, 21, 14), fill=md)
-    d.line((12, 12, 16, 12), fill=hi)
-    d.rectangle((15, 8, 17, 10), fill=gold_m)
-    d.point((15, 8), fill=gold_l)
-    d.point((17, 10), fill=gold_d)
-    for x, y, c in [(5, 19, md), (4, 18, md), (3, 17, md), (3, 16, lt), (2, 15, lt), (2, 14, lt), (4, 19, dk), (5, 20, md), (6, 20, md),
-                    (4, 17, lt), (3, 15, md), (5, 18, lt), (2, 13, hi), (3, 14, md)]:
-        im.putpixel((x, y), c)
-    d.rectangle((8, 13, 9, 14), fill=iron_l)
-    d.rectangle((24, 13, 25, 14), fill=iron_m)
-    for x, y, c in [(2, 11, st1), (1, 10, st2), (1, 9, st2), (2, 8, st1), (3, 7, st2), (3, 6, st2), (2, 5, st1), (4, 10, st1), (5, 9, st2),
-                    (5, 8, st1), (1, 4, st1)]:
-        im.putpixel((x, y), c)
-    return im
-
-
-def icon3_screen():
-    """A folding screen hung with green felt and brass studs: the Listening Screen (three more listens a day)."""
-    im = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
-    wd, wm, wl = _hex("4b2212"), _hex("6e3d22"), _hex("8e5b37")
-    fd, fm, fl, fh = _hex("002511"), _hex("004e22"), _hex("0e7734"), _hex("58a04c")
-    gold, gold_d = _hex("f2c14e"), _hex("c29026")
-
-    def panel(x0, y0, x1, y1, felt, felt_hi, frame, frame_hi, slant):
-        for x in range(x0, x1 + 1):
-            t = (x - x0) / max(1, x1 - x0)
-            top, bot = y0 + round(slant * t), y1 - round(slant * t * 0.5)
-            for y in range(top, bot + 1):
-                im.putpixel((x, y), frame if x in (x0, x1) or y in (top, bot) else felt)
-            im.putpixel((x, top), frame_hi)
-        for y in range(y0 + 3, y1 - 3):
-            if im.getpixel((x0 + 2, y)) == felt:
-                im.putpixel((x0 + 2, y), felt_hi)
-
-    panel(2, 6, 10, 27, fm, fl, wm, wl, 2)
-    panel(11, 8, 19, 26, fd, fm, wd, wm, -2)
-    panel(20, 5, 29, 28, fm, fl, wm, wl, 2)
-    for x, y in [(5, 11), (7, 16), (5, 21), (23, 10), (26, 16), (23, 22), (15, 12), (15, 20)]:
-        if im.getpixel((x, y))[3]:
-            im.putpixel((x, y), gold_d if x == 15 else gold)
-    for x in range(22, 27):
-        if im.getpixel((x, 9)) == fm:
-            im.putpixel((x, 9), fh)
-    for x, y in [(2, 28), (10, 27), (11, 27), (19, 26), (20, 29), (29, 28), (2, 29), (29, 29), (20, 30)]:
-        im.putpixel((x, y), wd)
-    return im
-
-
 # Upgrade icons drawn here at the 3px density, by the upgrade's key (Upgrades.All).
-ICONS3 = {"kettle": icon3_kettle, "screen": icon3_screen}
+ICONS3 = {}
 
 
-# ---- Curios drawn for 0.36 (the ear): 28 cells square, a cell four pixels at 1440p, placed as 56 like the rest ----
+# ---- Curios drawn for 0.37 (what a build does of the routine: Core/Hands.cs) ----
+# 28 cells square, a cell four pixels at 1440p, placed as 56 like the rest.
 
-def curio3_echo():
-    """Echo Stone: a grey river pebble with a spiral worn into it, and the rings of a sound coming off it."""
+def _curio_canvas():
     im = Image.new("RGBA", (28, 28), (0, 0, 0, 0))
-    d = ImageDraw.Draw(im)
-    dk, md, lt, hi, gl = _hex("3b3150"), _hex("554b69"), _hex("766d8b"), _hex("9b92ad"), _hex("c9c4d4")
-    ring, ring2 = _hex("68c7fd"), _hex("2164a7")
-    d.arc((1, 2, 26, 25), 200, 320, fill=ring2, width=1)
-    d.arc((4, 5, 23, 22), 210, 310, fill=ring, width=1)
-    d.arc((1, 2, 26, 25), 20, 140, fill=ring2, width=1)
-    d.ellipse((6, 9, 21, 21), fill=md)
-    for y in range(9, 22):
-        for x in range(6, 22):
-            if im.getpixel((x, y)) != md:
-                continue
-            v = (x - 12) * 0.6 + (y - 14) * 0.8
-            if v > 3.6:
-                im.putpixel((x, y), dk)
-            elif v < -3.0:
-                im.putpixel((x, y), lt)
-    for x, y in [(13, 13), (14, 13), (15, 14), (15, 15), (14, 16), (13, 16), (12, 16), (11, 15), (11, 14), (11, 13), (12, 12), (13, 11), (14, 11),
-                 (15, 11), (16, 12), (17, 13), (17, 14), (17, 15)]:
-        im.putpixel((x, y), hi)
-    im.putpixel((13, 14), gl)
-    d.point((9, 12), fill=gl)
+    return im, ImageDraw.Draw(im)
+
+
+def curio3_quill():
+    """Scrivener's Quill: a white goose feather with a brass nib, and the line it has just written."""
+    im, d = _curio_canvas()
+    sh, md, lt, hi = _hex("766d8b"), _hex("c9c4d4"), _hex("ece6f5"), _hex("ffffff")
+    quill, nib_d, nib, ink = _hex("d2b688"), _hex("773f00"), _hex("c29026"), _hex("2b2236")
+    # The vane: a leaf along the diagonal, lit on its upper side and shaded on its lower.
+    d.polygon([(10, 17), (9, 12), (13, 6), (20, 2), (24, 3), (25, 7), (21, 14), (15, 18)], fill=lt)
+    d.polygon([(11, 17), (15, 18), (21, 14), (25, 7), (24, 4), (17, 11)], fill=md)
+    d.line([(13, 6), (20, 2), (24, 3)], fill=hi)
+    d.line([(9, 12), (13, 6)], fill=hi)
+    # Barbs: a few cuts into each edge.
+    for x, y in [(12, 9), (15, 6), (18, 4), (22, 12), (19, 15), (24, 8)]:
+        im.putpixel((x, y), sh)
+    for x, y in [(11, 13), (10, 15)]:
+        im.putpixel((x, y), md)
+    # The shaft, from the feather's tip down to the nib.
+    for i in range(0, 19):
+        im.putpixel((5 + i, 22 - i), quill)
+    for i in range(6, 19):
+        im.putpixel((5 + i, 23 - i), sh if i > 7 else quill)
+    # The nib, and the line of ink.
+    im.putpixel((4, 23), nib)
+    im.putpixel((5, 23), nib)
+    im.putpixel((3, 24), nib_d)
+    for x in range(5, 15):
+        im.putpixel((x, 26), ink)
+    for x in (16, 17, 19, 20, 22):
+        im.putpixel((x, 26), ink)
+    im.putpixel((9, 25), ink)
+    im.putpixel((13, 25), ink)
     return im
 
 
-def curio3_plugs():
-    """Lamb's-Wool Plugs: two tufts of cream wool on a short cord."""
-    im = Image.new("RGBA", (28, 28), (0, 0, 0, 0))
-    d = ImageDraw.Draw(im)
+def curio3_engine():
+    """Pocket Engine: a brass clockwork the size of a snuffbox, a gear on its lid and a strip of paper coming out of it."""
+    im, d = _curio_canvas()
+    bd, bm, bl, bh, glint = _hex("773f00"), _hex("a06500"), _hex("c29026"), _hex("f2c14e"), _hex("fbeda4")
+    iron_d, iron = _hex("2b2236"), _hex("554b69")
+    paper_d, paper, paper_l = _hex("9d8872"), _hex("d2b688"), _hex("f7ebc6")
+    # The box.
+    d.rectangle((4, 10, 21, 23), fill=bm)
+    d.rectangle((4, 10, 21, 11), fill=bh)
+    d.rectangle((4, 22, 21, 23), fill=bd)
+    d.rectangle((20, 12, 21, 23), fill=bd)
+    d.rectangle((4, 12, 5, 21), fill=bl)
+    for x, y in [(4, 10), (21, 10), (4, 23), (21, 23)]:
+        im.putpixel((x, y), (0, 0, 0, 0))
+    # The gear on its face.
+    cx, cy = 11, 17
+    d.ellipse((cx - 4, cy - 4, cx + 4, cy + 4), fill=bh)
+    d.ellipse((cx - 2, cy - 2, cx + 2, cy + 2), fill=bd)
+    im.putpixel((cx, cy), glint)
+    for dx, dy in [(0, -5), (0, 5), (-5, 0), (5, 0), (-4, -4), (4, -4), (-4, 4), (4, 4)]:
+        im.putpixel((cx + dx, cy + dy), bh)
+    # A small second gear and a winding key.
+    d.ellipse((16, 13, 19, 16), fill=bl)
+    im.putpixel((17, 14), bd)
+    d.rectangle((22, 15, 24, 16), fill=iron)
+    d.rectangle((24, 13, 25, 18), fill=iron)
+    im.putpixel((25, 13), iron_d)
+    im.putpixel((25, 18), iron_d)
+    # The strip of paper it writes out, with marks on it.
+    d.rectangle((8, 4, 15, 9), fill=paper_l)
+    d.rectangle((8, 9, 15, 9), fill=paper)
+    d.rectangle((15, 4, 15, 8), fill=paper)
+    for x, y in [(10, 5), (11, 5), (13, 5), (10, 7), (12, 7), (13, 7)]:
+        im.putpixel((x, y), iron_d)
+    im.putpixel((8, 4), (0, 0, 0, 0))
+    im.putpixel((9, 3), paper_l)
+    im.putpixel((10, 3), paper_l)
+    im.putpixel((16, 9), paper_d)
+    return im
+
+
+def curio3_moth():
+    """Lantern Moth: a pale moth, wings spread, with the violet of an enchantment on them."""
+    im, d = _curio_canvas()
     wd, wm, wl, wh = _hex("9d8872"), _hex("d2b688"), _hex("f7ebc6"), _hex("ffffff")
-    cord_d, cord = _hex("6e3d22"), _hex("8e5b37")
-    d.arc((7, 8, 20, 26), 20, 160, fill=cord, width=1)
-    d.point((7, 17), fill=cord_d)
-    d.point((20, 17), fill=cord_d)
-    for cx, cy in ((7, 11), (20, 11)):
-        for dx, dy, r in ((0, 0, 4), (-2, 2, 3), (2, 2, 3), (0, -2, 3)):
-            d.ellipse((cx + dx - r, cy + dy - r, cx + dx + r, cy + dy + r), fill=wm)
-        for dx, dy, r in ((-1, -1, 3), (1, 0, 2)):
-            d.ellipse((cx + dx - r, cy + dy - r, cx + dx + r, cy + dy + r), fill=wl)
-        d.point((cx - 2, cy - 2), fill=wh)
-        d.point((cx - 1, cy - 3), fill=wh)
-        for dx, dy in ((2, 4), (3, 3), (0, 5), (-2, 5)):
-            im.putpixel((cx + dx, cy + dy), wd)
+    ad, am, al = _hex("6c48a5"), _hex("b46bff"), _hex("fdd0ff")
+    body_d, body = _hex("4b2212"), _hex("8e5b37")
+    # A faint light round it.
+    for x, y in [(3, 6), (24, 6), (2, 15), (25, 15), (6, 3), (21, 3), (13, 1), (14, 1), (5, 22), (22, 22)]:
+        im.putpixel((x, y), am)
+    # Upper wings (two triangles from the body out), then the lower.
+    for side in (-1, 1):
+        for i in range(0, 10):
+            for j in range(0, 9 - i // 2 - (0 if i < 8 else 2)):
+                x = 13 + (0 if side < 0 else 1) + side * (1 + i)
+                y = 7 + j + i // 3
+                if 0 <= x < 28 and 0 <= y < 28:
+                    im.putpixel((x, y), wl if j < 3 else wm)
+        for i in range(0, 7):
+            for j in range(0, 6 - i // 2):
+                x = 13 + (0 if side < 0 else 1) + side * (1 + i)
+                y = 16 + j + i // 2
+                if 0 <= x < 28 and 0 <= y < 28:
+                    im.putpixel((x, y), wm if j < 3 else wd)
+        # The eye-spot of violet on each upper wing, and the light catching the top edge.
+        cx = 13 + (0 if side < 0 else 1) + side * 6
+        d.ellipse((cx - 2, 9, cx + 2, 13), fill=am)
+        im.putpixel((cx, 11), al)
+        im.putpixel((cx - side, 10), ad)
+        for i in range(1, 9):
+            x = 13 + (0 if side < 0 else 1) + side * (1 + i)
+            im.putpixel((x, 7 + i // 3), wh)
+    # The body and the feelers.
+    d.rectangle((13, 8, 14, 20), fill=body)
+    d.rectangle((14, 9, 14, 20), fill=body_d)
+    im.putpixel((13, 7), body_d)
+    im.putpixel((14, 7), body_d)
+    for x, y in [(12, 6), (11, 5), (10, 4), (15, 6), (16, 5), (17, 4)]:
+        im.putpixel((x, y), body_d)
+    return im
+
+
+def curio3_gauge():
+    """Toll-man's Gauge: a brass rule with a sliding jaw, notched for honest depths."""
+    im, d = _curio_canvas()
+    bd, bm, bl, bh, glint = _hex("773f00"), _hex("a06500"), _hex("c29026"), _hex("f2c14e"), _hex("fbeda4")
+    iron_d, iron, iron_l = _hex("2b2236"), _hex("554b69"), _hex("9b92ad")
+    # The rule, upright, with its fixed jaw at the foot.
+    d.rectangle((8, 3, 12, 24), fill=bl)
+    d.rectangle((8, 3, 9, 24), fill=bh)
+    d.rectangle((12, 3, 12, 24), fill=bd)
+    im.putpixel((8, 3), glint)
+    d.rectangle((8, 22, 21, 24), fill=bm)
+    d.rectangle((8, 24, 21, 24), fill=bd)
+    d.rectangle((19, 19, 21, 22), fill=bm)
+    d.rectangle((21, 19, 21, 24), fill=bd)
+    # The notches.
+    for y in range(5, 21, 2):
+        d.rectangle((10, y, 11 if y % 4 == 1 else 10, y), fill=iron_d)
+    # The sliding jaw, with its thumbscrew.
+    d.rectangle((7, 10, 21, 13), fill=iron)
+    d.rectangle((7, 10, 21, 10), fill=iron_l)
+    d.rectangle((19, 13, 21, 16), fill=iron)
+    d.rectangle((21, 10, 21, 16), fill=iron_d)
+    d.rectangle((14, 8, 16, 9), fill=bh)
+    im.putpixel((15, 7), glint)
+    # What it measures: the gap between the jaws, dotted.
+    for y in (17, 18):
+        im.putpixel((20, y), (0, 0, 0, 0))
+    for x, y in [(24, 11), (24, 14), (24, 17), (24, 20), (24, 23)]:
+        im.putpixel((x, y), bh)
+    return im
+
+
+def curio3_primer():
+    """The Wardens' Primer: a small blue book with the Wardens' key on its cover and a ribbon to mark the place."""
+    im, d = _curio_canvas()
+    cd, cm, cl, ch = _hex("081137"), _hex("143771"), _hex("2164a7"), _hex("4ea3ff")
+    gd, gm, gl = _hex("a06500"), _hex("f2c14e"), _hex("fbeda4")
+    paper_d, paper, paper_l = _hex("9d8872"), _hex("d2b688"), _hex("f7ebc6")
+    rib_d, rib = _hex("9c1839"), _hex("ff4058")
+    # Pages, showing at the foot and the fore-edge.
+    d.rectangle((7, 5, 22, 24), fill=paper)
+    d.rectangle((7, 23, 22, 24), fill=paper_d)
+    d.rectangle((21, 6, 22, 23), fill=paper_l)
+    # The cover.
+    d.rectangle((5, 3, 20, 22), fill=cm)
+    d.rectangle((5, 3, 20, 4), fill=cl)
+    d.rectangle((5, 3, 6, 22), fill=cd)
+    d.rectangle((7, 4, 7, 22), fill=cl)
+    d.rectangle((19, 5, 20, 22), fill=cd)
+    im.putpixel((8, 3), ch)
+    im.putpixel((9, 3), ch)
+    # The key: a ring and a shaft with two teeth.
+    d.ellipse((10, 6, 16, 12), fill=gm)
+    d.ellipse((12, 8, 14, 10), fill=cm)
+    d.rectangle((13, 12, 14, 19), fill=gm)
+    d.rectangle((15, 16, 16, 17), fill=gm)
+    d.rectangle((15, 19, 17, 19), fill=gm)
+    im.putpixel((11, 7), gl)
+    im.putpixel((13, 13), gl)
+    im.putpixel((14, 19), gd)
+    im.putpixel((16, 11), gd)
+    # The ribbon.
+    d.rectangle((17, 22, 18, 26), fill=rib)
+    im.putpixel((18, 26), (0, 0, 0, 0))
+    im.putpixel((18, 25), rib_d)
+    im.putpixel((17, 26), rib_d)
+    return im
+
+
+def curio3_abacus():
+    """Factor's Abacus: a walnut frame, three wires, beads of red, gold and blue pushed where the sum left them."""
+    im, d = _curio_canvas()
+    wd, wm, wl, wh = _hex("4b2212"), _hex("6e3d22"), _hex("8e5b37"), _hex("ad7d52")
+    wire = _hex("9b92ad")
+    beads = [(_hex("9c1839"), _hex("ff4058"), _hex("ff9e92")), (_hex("a06500"), _hex("f2c14e"), _hex("fbeda4")),
+             (_hex("143771"), _hex("4ea3ff"), _hex("a7f8ff"))]
+    # The frame.
+    d.rectangle((3, 4, 24, 23), fill=wm)
+    d.rectangle((3, 4, 24, 5), fill=wh)
+    d.rectangle((3, 4, 4, 23), fill=wl)
+    d.rectangle((23, 6, 24, 23), fill=wd)
+    d.rectangle((3, 22, 24, 23), fill=wd)
+    d.rectangle((6, 7, 21, 20), fill=(0, 0, 0, 0))
+    # Three wires, and where the beads sit on each.
+    layout = [(9, [6, 9, 12, 19]), (13, [6, 9, 16, 19]), (17, [6, 13, 16, 19])]
+    for row, (y, xs) in enumerate(layout):
+        d.rectangle((5, y + 1, 22, y + 1), fill=wire)
+        dark, mid, light = beads[row]
+        for x in xs:
+            d.rectangle((x, y, x + 2, y + 2), fill=mid)
+            im.putpixel((x, y), light)
+            im.putpixel((x + 2, y + 2), dark)
     return im
 
 
 # Curios drawn here until they have a picture made like the rest (art/tools/assets_curios.py has their briefs), by key.
-CURIOS3 = {"echo": curio3_echo, "plugs": curio3_plugs}
+CURIOS3 = {"quill": curio3_quill, "engine": curio3_engine, "moth": curio3_moth, "gauge": curio3_gauge, "primer": curio3_primer,
+           "abacus": curio3_abacus}

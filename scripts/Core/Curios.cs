@@ -79,6 +79,9 @@ public static class Curios
             U, "aether", 3, T(Enchantment)),
         new("chalk", Loc.T("Enchanter's Chalk"), Loc.T("An enchantment spreads: a chest with an enchanted thing in it has a second one."), U, "chalk", 3, T(Enchantment)),
         new("ring", Loc.T("Spellbinder's Ring"), Loc.T("Enchanted things are worth four times as much, not twice."), R, "ring", 3, T(Enchantment)),
+        // What does its routine for you (0.37, Hands.cs): a moth that can't keep away from an enchantment.
+        new("moth", Loc.T("Lantern Moth"), Loc.T("Every enchanted thing in a chest is starred on your slip as the chest comes in, witchlight or not."), R, "moth", 3,
+            T(Enchantment)),
         new("staff", Loc.T("Archmage's Staff"), Loc.T("Everything in a chest with an enchanted thing in it is enchanted."), L, "staff", 3, T(Enchantment)),
 
         // Sight unseen: buy a chest without laying a hand on it. Cheaper, luckier, insured: the build that needs no ear.
@@ -102,6 +105,8 @@ public static class Curios
         new("hourglass", Loc.T("Waiting Game"), Loc.T($"Every chest you pass makes the next seller ask {Pct(WaitStep)} less (up to {Pct(WaitMax)}). Buying starts it again."),
             U, "hourglass", 1, T(Haggling, Crowds)),
         new("bell", Loc.T("Closing Bell"), Loc.T($"The last customer of the day asks {Pct(1 - BellPrice)} less."), U, "bell", 1, T(Haggling)),
+        // What does its routine for you (0.37): the least they'd take, reckoned.
+        new("abacus", Loc.T("Factor's Abacus"), Loc.T("You know the least a haggler will take: your offer starts on it, and they take it."), R, "abacus", 1, T(Haggling)),
         new("coffer", Loc.T("Haggler's Purse"), Loc.T($"Everyone but Old Aldo and the Maw haggles with you, and {Pct(CofferShare)} of whatever you talk them down by comes back to you as well."), R, "coffer", 2,
             T(Haggling, Coffers)),
         new("goldentongue", Loc.T("Golden Tongue"), Loc.T($"All but Old Aldo and the Maw haggle and never walk out: go as low as you like, and they come down to {Pct(1 - GoldenFloor)} under their least."),
@@ -112,7 +117,9 @@ public static class Curios
         new("watch", Loc.T("Pocket Watch"), Loc.T("Impatient sellers give you twice as long, and a rotten chest stands twice the shaking."), C, "watch", 1, T(Appraisal)),
         new("beads", Loc.T("Counting Beads"), Loc.T("A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all."), C, "beads", 2, T(Appraisal, Compartments)),
         new("seal", Loc.T("Appraiser's Seal"), Loc.T($"A perfect read pays you a valuer's fee: {Pct(SealFee)} of what the chest held."), U, "seal", 1, T(Appraisal)),
-        // The ear (0.36): a pebble from the Keyhold's listening rooms, where a true note came back to whoever sounded it.
+        // What does its routine for you (0.37): a quill that writes down what its keeper hears.
+        new("quill", Loc.T("Scrivener's Quill"), Loc.T("Your slip ticks each thing as you hear it, and counts them. What you work out is still yours to mark."), U, "quill", 1,
+            T(Appraisal)),
         new("register", Loc.T("Valuer's Register"), Loc.T($"A perfect read pays {Fine(RegisterStep)} of what the chest held for each one so far this run (up to {Pct(RegisterMax)})."),
             U, "register", 2, T(Appraisal)),
         new("crescent", Loc.T("Cursed Crescent"), Loc.T($"Everything comes out exactly as its chest promised. Sellers sense the curse and ask {Pct(1 - CrescentPrices)} less."),
@@ -122,6 +129,9 @@ public static class Curios
         new("ledger", Loc.T("Ledger of Certainty"), Loc.T($"A perfect read: everything in the chest sells for {Pct(LedgerRight - 1)} more. A wrong slip: {Pct(1 - LedgerWrong)} less."),
             R, "ledger", 2, T(Appraisal)),
         new("truthglass", Loc.T("Truthglass"), Loc.T("A perfect read: everything in the chest sells for half as much again."), L, "truthglass", 3, T(Appraisal)),
+        // The rarest of them: the tinkers' first engine, small enough for a counter.
+        new("engine", Loc.T("Pocket Engine"), Loc.T("Every chest is read for you: what's truly in it is on your slip as it comes in, false bottom and warded thing and all."),
+            L, "engine", 3, T(Appraisal)),
 
         // False bottoms: drop it, hear the boom, find what was hidden. Nobody prices what's under the floor.
         new("crate", Loc.T("Padded Crate"), Loc.T("Glass never breaks when you drop a chest."), C, "crate", 2, T(Compartments, Rough)),
@@ -129,6 +139,8 @@ public static class Curios
         new("rod", Loc.T("Hollow Rod"), Loc.T("What's under a false bottom comes out a step better: people hid their best."), U, "rod", 2, T(Compartments)),
         new("log", Loc.T("Smuggler's Log"), Loc.T($"Smugglers trust a buyer who keeps quiet: each false bottom you open this run makes false bottoms {Pct(LogStep)} likelier (up to {Pct(LogMax)})."),
             U, "log", 2, T(Compartments)),
+        // What does its routine for you (0.37): a toll-man measures a chest outside and in.
+        new("gauge", Loc.T("Toll-man's Gauge"), Loc.T("A false bottom is marked on your slip as the chest comes in: no drop needed."), R, "gauge", 2, T(Compartments)),
         new("pass", Loc.T("Black Market Pass"), Loc.T("Thornwick's black market pays double for anything from under a false bottom."), R, "pass", 2, T(Compartments)),
         new("compass", Loc.T("Smugglers' Compass"), Loc.T("Every chest has a false bottom."), L, "compass", 3, T(Compartments)),
 
@@ -139,6 +151,8 @@ public static class Curios
             T(Wards)),
         new("wardtally", Loc.T("Wardbreaker's Tally"), Loc.T($"Each warded thing you name this run makes warded things sell for {Pct(WardTallyStep)} more."), U, "wardtally", 2, T(Wards)),
         new("wardkey", Loc.T("Ward-Key"), Loc.T("A warded thing you name comes out a step better."), R, "wardkey", 2, T(Wards, Appraisal)),
+        // What does its routine for you (0.37): every sign the Wardens ever wrote down, with its answer.
+        new("primer", Loc.T("Wardens' Primer"), Loc.T("When a sign points at a warded thing, your slip names it for you."), R, "primer", 2, T(Wards)),
         new("aldricseal", Loc.T("The Aldric Seal"), Loc.T("Every seller with nothing else to tell you has warded a thing in their chest, and tells you a sign for it."), L, "aldricseal", 3, T(Wards)),
 
         // Luck: what comes out better than its chest. Sellers hear of a lucky shop; the art is in which chest gets the luck.
@@ -228,6 +242,10 @@ public static class Curios
         ["dummy"] = CurioUnlock.SecondRun, ["scales"] = CurioUnlock.SecondRun, ["rod"] = CurioUnlock.SecondRun, ["pillow"] = CurioUnlock.SecondRun,
         ["dip"] = CurioUnlock.SecondRun, ["bond"] = CurioUnlock.SecondRun, ["knot"] = CurioUnlock.SecondRun, ["register"] = CurioUnlock.SecondRun,
         ["log"] = CurioUnlock.SecondRun, ["wardtally"] = CurioUnlock.SecondRun,
+        // 0.37's hands: the plain ones after a first run (which learns the routine before it's taken away), the moth with
+        // the capital's curios, and the Pocket Engine by its feat.
+        ["quill"] = CurioUnlock.SecondRun, ["gauge"] = CurioUnlock.SecondRun, ["primer"] = CurioUnlock.SecondRun, ["abacus"] = CurioUnlock.SecondRun,
+        ["moth"] = CurioUnlock.Crownhold, ["engine"] = CurioUnlock.Feat,
         ["monocle"] = CurioUnlock.Crownhold, ["still"] = CurioUnlock.Crownhold, ["desk"] = CurioUnlock.Crownhold, ["wheel"] = CurioUnlock.Crownhold,
         ["aether"] = CurioUnlock.Crownhold, ["horn"] = CurioUnlock.Crownhold, ["rope"] = CurioUnlock.Crownhold, ["errand"] = CurioUnlock.Crownhold,
         ["chalk"] = CurioUnlock.Crownhold, ["wholesale"] = CurioUnlock.Crownhold,
@@ -248,6 +266,8 @@ public static class Curios
     {
         ["spindle"] = (Feat.Surprises, 40), ["truthglass"] = (Feat.PerfectReads, 40), ["goldentongue"] = (Feat.Bargains, 25),
         ["compass"] = (Feat.FalseBottoms, 15), ["aldricseal"] = (Feat.Wards, 10), ["staff"] = (Feat.Enchanted, 15), ["blindfold"] = (Feat.SightUnseen, 20),
+        // The rarest curio there is: three or four careful seasons' reading before Nim so much as hears of it.
+        ["engine"] = (Feat.PerfectReads, 100),
     };
 
     /// <summary>A feat, as the curio page says it: "chests taken sight unseen".</summary>

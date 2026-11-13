@@ -40,8 +40,8 @@ public partial class CounterPhase : Phase
     {
         public Category? Category;
         public Button Button;
-        public Label Value, Count, Star;
-        public Painter Box;
+        public Label Value, Count, Star, Word;
+        public Painter Box, Heard;
     }
 
     Visit _visit;
@@ -186,7 +186,9 @@ public partial class CounterPhase : Phase
             Note(Loc.T($"You know this chest. You opened it last spring, and it held {Words.List(State.FirstChest.Select(Loc.T))}."));
         if (_visit.PriceNote != null) Note(_priceNote = _visit.PriceNote);
         if (State.Shows(Heartsongs.Bell)) TollBell(Market.ArticleCount(_visit.Chest));
-        if (State.Has(Upgrades.Engine)) Record();
+        if (State.ReadsChests) Record();
+        else Premark();
+        BuildCradle();
         Refresh();
         Game.Moment("01_counter", 1.0);
     }
@@ -445,6 +447,104 @@ public partial class CounterPhase : Phase
             GetViewport().SetInputAsHandled();
             OpenNotebook();
         }
+        // The act key sets Bram's cradle rocking.
+        else if (e.IsActionPressed(Controls.Act) && _cradle != null && !Busy && !Concluded && !_shake.Busy)
+        {
+            GetViewport().SetInputAsHandled();
+            Rock();
+        }
+    }
+
+    // ---- Bram's cradle, and what the build does of the routine (0.37, Core/Hands.cs) ----
+
+    Button _cradle;
+    bool _rocking;
+
+    /// <summary>The cradle's rocking the chest (the bot waits on it).</summary>
+    public bool Rocking => _rocking;
+
+    /// <summary>Bram's cradle is on the counter (the bot uses it as a player would).</summary>
+    public bool HasCradle => _cradle != null;
+
+    /// <summary>
+    /// Bram's cradle (0.37), beside the chest once the trade's ways reach Thornwick's (<see cref="GameState.Cradle"/>): a
+    /// press (or the act key) and it rocks the chest gently, firmly and hard, as its seller allows, and the listening is
+    /// still yours. Not for a chest with nothing to shake (a talk, a chest chained shut).
+    /// </summary>
+    void BuildCradle()
+    {
+        if (!State.Cradle || _visit.Talk != null || _visit.Chest.Sealed) return;
+        // As wide as its words need (the key's name, a longer language), its right edge just short of the slip.
+        string label = Loc.T($"Rock it {Controls.Tag(Controls.Act)}");
+        float width = Mathf.Max(112, Mathf.Ceil(UiKit.TextWidth(label, 16)) + 28);
+        _cradle = UiKit.MakeButton(label, Palette.Gold.Darkened(0.25f), 16, Rock).Place(814 - width, 428, width, 40);
+        _cradle.ZIndex = 10;
+        var levels = State.CradleLevels(_visit);
+        _cradle.TooltipText = Words.Wrap(levels.Length > 1
+            ? Loc.T($"Bram's cradle rocks the chest for you: {Sellers.Join(levels.Select(Categories.Adverb).ToList())}. You still do the listening. Dropping it is still your hands' work.")
+            : Loc.T("Bram's cradle rocks the chest for you. Shaking this one has a price of its own, so it rocks once, gently: the rest is yours to decide."), 56);
+        Add(_cradle);
+        Teach("cradle");
+    }
+
+    /// <summary>Sets the cradle rocking: each strength in turn, a moment each, with the lodestone as it is now.</summary>
+    public async void Rock()
+    {
+        if (_cradle == null || _rocking || Busy || Concluded || _shake.Busy) return;
+        _rocking = true;
+        _cradle.Disabled = true;
+        Sfx.PlayGroup("clack", 0.8f, -6);
+        foreach (var level in State.CradleLevels(_visit))
+        {
+            if (!Alive || Concluded) break;
+            _shake.AutoShake(CradleSeconds, level);
+            while (Alive && _shake.Busy) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            if (!Alive) return;
+            await Wait(0.12);
+            if (!Alive) return;
+        }
+        _rocking = false;
+        if (_cradle != null) _cradle.Disabled = Concluded;
+        Refresh();
+    }
+
+    /// <summary>How long the cradle rocks at each strength: long enough for everything it stirs to sound, and to be told apart.</summary>
+    const double CradleSeconds = 1.0;
+
+    /// <summary>
+    /// What the build writes on the slip as the chest arrives (<see cref="GameState.Premark"/>): a Lantern Moth's stars,
+    /// a Toll-man's Gauge's false bottom, the Wardens' Primer's naming. Each says so under the chest.
+    /// </summary>
+    void Premark()
+    {
+        if (_visit.Talk != null) return;
+        var chest = _visit.Chest;
+        bool readable = !chest.Sealed && chest.Crate == null && !chest.Breathing;
+        State.Premark(_slip, _visit);
+        if (!readable) return;
+        if (State.MarksMagic)
+            Note(_slip.Marked.Any(_slip.Magic) ? Loc.T("Your Lantern Moth has settled on the lid: something in here is enchanted, and it's starred.")
+                : Loc.T("Your Lantern Moth doesn't stir: nothing in here is enchanted."));
+        if (State.MarksHidden && _slip.CountsHidden)
+            Note(_slip.Hidden ? Loc.T("Your Toll-man's Gauge reads short inside: a false bottom, marked.") : Loc.T("Your Toll-man's Gauge reads true: no false bottom."));
+        if (State.PrimerNames(_visit) is Category named)
+            Note(Loc.T($"Your Wardens' Primer has this sign: something's warded, and it's named on your slip under {Categories.Get(named).Name}."));
+    }
+
+    /// <summary>The things the quill has ticked already (each once: what you untick stays unticked).</summary>
+    readonly HashSet<int> _quilled = new();
+
+    /// <summary>
+    /// A Scrivener's Quill (<see cref="GameState.TicksHeard"/>): each thing is ticked the first time it's heard, one more
+    /// of its kind, and starred the first time it glows. It writes what's heard, not what's so: sand still gets ticked
+    /// as a spell until you strike it out, and what never sounds is still yours to work out.
+    /// </summary>
+    void Quill(Item item, bool glowed)
+    {
+        if (!State.TicksHeard || Concluded || !_quilled.Add(item.Id)) return;
+        if (!State.Tick(_slip, item, glowed)) return;
+        Sfx.Play("tick", 1.3f, -10);
+        Refresh();
     }
 
     Node2D _shelf;
@@ -635,7 +735,7 @@ public partial class CounterPhase : Phase
         var seller = _visit.Seller;
         // Nobody says what's inside: the slip is yours to fill (or the Engine's), and how the seller priced it is the reminder.
         // A tale's gift (or contest) is given for a lucky coin: how they'd price a chest doesn't come into it.
-        string who = State.Has(Upgrades.Engine) && !_visit.Chest.Sealed ? Loc.T("Ticked: what the Bookkeeping Engine read.")
+        string who = State.ReadsChests && !_visit.Chest.Sealed ? State.Has(Upgrades.Engine) ? Loc.T("Ticked: what the Bookkeeping Engine read.") : Loc.T("Ticked: what your Pocket Engine read.")
             : _visit.Gift ? Loc.T($"{seller.Who} gives it for a lucky coin.")
             : seller.Priced;
         string values = _visit.Chest.Sealed ? Loc.T("Sealed: nothing to hear. Go by its weight.")
@@ -721,7 +821,9 @@ public partial class CounterPhase : Phase
         panel.AddChild(_footer);
 
         int guess = Math.Max(1, _visit.Ask > 0 ? Money.Round(_visit.Ask * 0.55f) : Money.Round(_slip.Worth * 0.5f));
-        _slider.MaxValue = OfferCeiling(_slip.Worth);
+        // A Factor's Abacus (0.37): the least they'd take is reckoned, and the offer starts on it.
+        if (State.KnowsFloors && _visit.CanOffer) guess = Math.Max(1, _visit.Floor);
+        _slider.MaxValue = Math.Max(guess, OfferCeiling(_slip.Worth));
         _slider.Value = guess;
     }
 
@@ -751,8 +853,17 @@ public partial class CounterPhase : Phase
             button.TooltipText = Loc.T("A commission wants this kind of thing (see the board on the left).");
         }
         button.AddChild(UiKit.MakeLabel(name, 16, category == Category.Heartsong ? Palette.OnPaper(Rarity.Mythic) : Palette.Ink).Place(80, 8, 120, 20));
-        // Just a reminder of each kind's sound: the slip doesn't keep track of what you've heard.
-        button.AddChild(UiKit.MakeLabel(word, 16, Palette.InkMuted).Place(212, 8, 84, 20));
+        // Each kind's sound, and (0.37) whether you've heard it on this chest: the word goes dark with a mark beside it.
+        // (Until then the slip kept no track of what you'd heard: the playtest's "nothing records what was heard once
+        // the words fade".) It's what was heard, not what's in there: sand's rustle marks Spells like any other.
+        row.Heard = new Painter(p =>
+        {
+            p.DrawCircle(Vector2.Zero, 4, Palette.InkGold);
+            p.DrawArc(Vector2.Zero, 4, 0, Mathf.Tau, 12, Palette.Ink, 1.5f);
+        }) { Position = new Vector2(204, 18), Visible = false };
+        button.AddChild(row.Heard);
+        row.Word = UiKit.MakeLabel(word, 16, Palette.InkMuted).Place(212, 8, 84, 20);
+        button.AddChild(row.Word);
         if (category is Category magicKind && magicKind != Category.Heartsong && _lamp)
         {
             row.Star = UiKit.MakeLabel("*", 32, Palette.InkMuted, HorizontalAlignment.Center).Place(288, -3, 28, 40);
@@ -806,6 +917,9 @@ public partial class CounterPhase : Phase
             row.Value.Text = row.Category is Category kind ? Money.Short(count > 0 ? _slip.ValueOf(kind) : _slip.OneValue(kind)) : Money.Short(_slip.HiddenValue);
             row.Value.AddThemeColorOverride("font_color", count == 0 ? Palette.InkMuted : magic ? Palette.InkMagic : Palette.InkGold);
             row.Count.Text = count >= 2 ? count.ToString() : "";
+            bool heard = row.Category is Category sounded ? _hearing.HeardAny(sounded) : _hearing.Hollow;
+            if (row.Heard != null) row.Heard.Visible = heard;
+            row.Word?.AddThemeColorOverride("font_color", heard ? Palette.Ink : Palette.InkMuted);
             if (row.Star != null) row.Star.AddThemeColorOverride("font_color", magic ? Palette.InkMagic : Palette.InkMuted);
             row.Box.QueueRedraw();
             row.Button.Disabled = !open;
@@ -819,10 +933,14 @@ public partial class CounterPhase : Phase
         string who = _visit.Seller.Who;
         bool offering = _visit.CanOffer;
         bool bought = _visit.Outcome == VisitOutcome.Bought;
+        // A Factor's Abacus (0.37): the least they'd take, said where the price is.
+        int least = State.KnowsFloors && offering ? Math.Max(1, _visit.Floor) : 0;
         _askLabel.Text = _visit.Trade switch
         {
             _ when bought => Loc.T("You paid"),
             _ when _visit.Seller.SlipPrice => Loc.T($"{who} asks what your slip says"),
+            Trade.Offer when _visit.Ask == 0 && least > 0 => Loc.T($"{who} would take {least}g (your abacus)"),
+            Trade.Haggle when least > 0 && _visit.OffersMade == 0 => Loc.T($"{who} asks, and would take {least}g"),
             Trade.Offer when _visit.Ask == 0 => Loc.T($"{who} wants you to name a price"),
             // A haggler who heard you out (another try) hasn't named a final price yet.
             Trade.Haggle when _visit.OffersMade > 0 && !offering => Loc.T($"{who}'s final price"),
@@ -895,7 +1013,7 @@ public partial class CounterPhase : Phase
     /// The most the offer slider goes to: twice what the slip says (or their price), and never less than a few coins
     /// a shop tier, so there's always room to name a price, even for a chest you think is empty. No more than you have.
     /// </summary>
-    int OfferCeiling(int worth) => Math.Max(2, Math.Min(State.Gold, Math.Max(12 * State.Tier, Math.Max(_visit.Ask, worth * 2))));
+    int OfferCeiling(int worth) => Math.Max(2, Math.Min(State.Gold, Math.Max(12 * State.Tier, Math.Max(State.KnowsFloors ? _visit.Floor : 0, Math.Max(_visit.Ask, worth * 2)))));
 
     /// <summary>A chance as the bar says it: "62%", with "under 1%" and "over 99%" rather than a promise.</summary>
     static string ChanceWords(float chance) =>
@@ -1105,9 +1223,13 @@ public partial class CounterPhase : Phase
     void OnHeard(Item item, Shake level)
     {
         bool glowed = _lamp && item.Magic;
+        bool news = !_hearing.HeardAny(item.Category);
         _hearing.Heard(item, level, _magnet, glowed);
         _visit.Tried(Check.Shaking(level, _magnet));
         if (item.IsSong) SongHeard(item);
+        Quill(item, glowed);
+        // The row for its kind shows it's been heard (0.37).
+        if (news) Refresh();
         Teach($"heard_{item.Category}");
         if (glowed)
         {
@@ -1442,9 +1564,10 @@ public partial class CounterPhase : Phase
     /// <summary>The Bookkeeping Engine reads the chest the moment it's set down, and marks the slip: nothing to shake.</summary>
     void Record()
     {
+        bool guilds = State.Has(Upgrades.Engine);
         if (_visit.Chest.Sealed)
         {
-            Note(Loc.T("The Bookkeeping Engine can't read through chains."));
+            Note(guilds ? Loc.T("The Bookkeeping Engine can't read through chains.") : Loc.T("Your Pocket Engine can't read through chains."));
             return;
         }
         var record = Appraisal.Recorded(_visit.Chest, State.Tier, State.Ways);
@@ -1455,7 +1578,8 @@ public partial class CounterPhase : Phase
             _slip.Set(Category.Heartsong, 1);
             SongHeard(song);
         }
-        Note(Loc.T("The Bookkeeping Engine whirs and clicks: everything inside is on the slip."));
+        Note(guilds ? Loc.T("The Bookkeeping Engine whirs and clicks: everything inside is on the slip.")
+            : Loc.T("Your Pocket Engine ticks over: everything inside is on the slip."));
         Sfx.Play("tick", 1.4f, -4);
     }
 

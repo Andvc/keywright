@@ -423,7 +423,7 @@ public sealed partial class GameState : ISlipModel
     public bool EnchantsAll => HasCurio("staff");
 
     /// <summary>A light to see a glow by (<see cref="ISlipModel.Lit"/>).</summary>
-    public bool Lit => Witchlight;
+    public bool Lit => Witchlight || MarksMagic || ReadsChests;
 
     public float Value(Category kind, Rarity quality, bool magic, Rarity chest, int count, bool hidden = false) =>
         Categories.Value(kind, quality, magic) * SaleMultiplier(kind) * Read(true) *

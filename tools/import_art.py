@@ -149,8 +149,8 @@ DRAWN_PITCH, DRAWN_SCALE = 3, 2
 
 
 def build_drawn_icons():
-    """Upgrade icons drawn in code at the 3px density (custom_art.ICONS3: the Tea Kettle and the Listening Screen, which
-    came after the 3px art was made): 32 cells square, each cell 3x3 pixels at 1440p, placed as 48 like the rest."""
+    """Upgrade icons drawn in code at the 3px density (custom_art.ICONS3: any that came after the 3px art was made):
+    32 cells square, each cell 3x3 pixels at 1440p, placed as 48 like the rest."""
     drawn = {}
     for key, draw in custom_art.ICONS3.items():
         cells = draw()
@@ -162,7 +162,7 @@ def build_drawn_icons():
         drawn[f"res://{rel}"] = {"asset_id": f"drawn.icon.upgrade.{key}", "source": "tools/custom_art.py", "drawn": True,
                                  "logical_size": [physical.width // 2, physical.height // 2], "physical_size": list(physical.size),
                                  "reference_scale": 1, "pixel_pitch": DRAWN_PITCH, "sha256": digest}
-    # Curios drawn in code (custom_art.CURIOS3: the ear's, 0.36): 28 cells square, four pixels a cell, placed as 56.
+    # Curios drawn in code (custom_art.CURIOS3: 0.37's six): 28 cells square, four pixels a cell, placed as 56.
     for key, draw in custom_art.CURIOS3.items():
         cells = draw()
         physical = cells.resize((cells.width * 4, cells.height * 4), Image.NEAREST)

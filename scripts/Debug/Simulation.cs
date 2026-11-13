@@ -552,6 +552,8 @@ public static partial class Simulation
             slip = new Appraisal(chest.Quality, tier, ways: state.Ways);
             foreach (var kind in chest.HeardAt(Shake.Hard).GroupBy(i => i.Category))
                 slip.Set(kind.Key, Math.Max(slip.Count(kind.Key), 1));
+            // What the build writes on any slip (a moth's stars, a gauge's false bottom, the primer's naming).
+            state.Premark(slip, visit);
         }
         else if (Strategy.Recorded(visit, state))
         {
@@ -563,13 +565,21 @@ public static partial class Simulation
         {
             hearing = Listen(visit, state, rng, care == Care.Tools, skill);
             slip = hearing.Read(chest.Quality, tier, state.Ways);
+            // What the build writes on any slip (a moth's stars, a gauge's false bottom, the primer's naming).
+            state.Premark(slip, visit);
             if (skill >= 1 || rng.NextFloat() < skill)
             {
                 Strategy.Reckon(slip, hearing, visit, state);
                 Strategy.OnFaith(visit, slip, hearing, state);
             }
             else if (state.Weighs) Strategy.Weigh(slip, hearing, visit, state);
-            if (skill < 1) Slip(visit, slip, rng, 1 - skill);
+            if (skill < 1)
+            {
+                // A learner's slips of the pen; a quill that counts what's heard makes no miscount, and what the build
+                // writes itself (a moth's star, a gauge's false bottom) isn't theirs to get wrong.
+                Slip(visit, slip, rng, 1 - skill, state.TicksHeard);
+                state.Premark(slip, visit);
+            }
         }
         // The slip says what things fetch here; the King's price is whatever it says.
         slip.Model = state;
@@ -588,11 +598,11 @@ public static partial class Simulation
                 return Strategy.WorthBuying(visit, worth, state, hearing) && state.Gold >= visit.Ask ? Paid(visit, rng) : null;
             case Trade.Haggle:
             {
-                int offer = Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state.Boosts.Floor));
+                int offer = Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state));
                 if (offer <= 0 || worth <= offer) return null;
                 var response = visit.Offer(offer, rng);
                 // A haggler who hears you out lets you try again after a cheeky first offer.
-                if (response.Kind == ResponseKind.TryAgain) response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state.Boosts.Floor)), rng);
+                if (response.Kind == ResponseKind.TryAgain) response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state)), rng);
                 if (response.Kind == ResponseKind.Accept) return response.Price;
                 if (response.Kind == ResponseKind.Counter && worth > visit.Ask && state.Gold >= visit.Ask) return Paid(visit, rng);
                 return null;
@@ -600,7 +610,7 @@ public static partial class Simulation
             default:
             {
                 if (worth <= 1) return null;
-                var response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state.Boosts.Floor)), rng);
+                var response = visit.Offer(Math.Min(state.Gold, Strategy.FirstOffer(visit, worth, state)), rng);
                 if (response.Kind == ResponseKind.TryAgain) response = visit.Offer(Math.Min(state.Gold, Strategy.SecondOffer(worth, state.Boosts.Floor)), rng);
                 if (response.Kind == ResponseKind.Accept) return response.Price;
                 // Someone who never walks out (a golden tongue) names the least they'd take instead.
@@ -665,11 +675,11 @@ public static partial class Simulation
         JudgmentNoise = 0.45f, Whim = 0.7f;
 
     /// <summary>A learner's slip: a pair counted as one, the kind the place usually holds ticked unheard, a boom or a glow not ticked.</summary>
-    static void Slip(Visit visit, Appraisal slip, Random rng, float e)
+    static void Slip(Visit visit, Appraisal slip, Random rng, float e, bool counted = false)
     {
         foreach (var kind in Categories.UpTo(slip.Tier).Select(k => k.Category))
         {
-            if (slip.Count(kind) >= 2 && rng.NextFloat() < Miscount * e) slip.Set(kind, slip.Count(kind) - 1, slip.Magic(kind));
+            if (!counted && slip.Count(kind) >= 2 && rng.NextFloat() < Miscount * e) slip.Set(kind, slip.Count(kind) - 1, slip.Magic(kind));
             if (slip.Magic(kind) && rng.NextFloat() < MissGlow * e) slip.Set(kind, slip.Count(kind));
         }
         if (rng.NextFloat() < Believe * e && Strategy.MostLikely(visit, slip.Tier) is Category guess && slip.Count(guess) == 0) slip.Set(guess, 1);
@@ -1413,7 +1423,7 @@ public static partial class Simulation
             int worth = Strategy.Worth(visit, slip, hearing);
             if (visit.CanOffer)
             {
-                visit.Offer(Strategy.FirstOffer(visit, worth, state.Boosts.Floor), rng);
+                visit.Offer(Strategy.FirstOffer(visit, worth, state), rng);
                 Advance();
                 if (visit.CanOffer) visit.Offer(Strategy.SecondOffer(worth, state.Boosts.Floor), rng);
                 Advance();

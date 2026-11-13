@@ -43,6 +43,9 @@ public sealed class Hearing
 
     public bool HeardAny(Category category) => _heard.Any(h => _kinds[h.Item] == category);
 
+    /// <summary>This thing has made a sound (its own spot above the chest), at any strength.</summary>
+    public bool HasHeard(Item item) => _heard.Any(h => h.Item == item.Id);
+
     public void Tried(Shake level, bool magnet)
     {
         if (level > Shake.Still) _tried.Add((level, magnet));
