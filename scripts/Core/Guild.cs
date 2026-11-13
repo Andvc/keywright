@@ -34,8 +34,13 @@ public static class Guild
     /// enchantments, and the last, at the Royal Emporium, for more than ordinary trade makes there (the power index has a
     /// ceiling, and chests top out at purple): carrying it takes a build come together or tales gone well. (0.30 to 0.35:
     /// seven dues, 20 to 12,000, over 35 days, with the moves bought for 80, 300 and 3,000.)
+    /// <para>
+    /// 0.37: the last is 6,600 (0.36: 5,000). Listening is free again and a build does its own routine, which is worth a
+    /// third more to a learner than 0.36's counted listens left them: at 5,000 a first season cleared 30% and a careful
+    /// one 98%; at 6,600 it's 21% and 93%, where 0.36 stood (`--sim=learners`).
+    /// </para>
     /// </summary>
-    static int[] Dues = { 40, 170, 700, 5000 };
+    static int[] Dues = { 40, 170, 700, 6600 };
 
     /// <summary>For tuning (`--sim=quick --dues=a,b,c,d`): other dues, one a week of the debt.</summary>
     public static void TryDues(int[] dues)

@@ -90,7 +90,7 @@ public partial class DrawerPhase : Phase
             blurb.MouseFilter = Control.MouseFilterEnum.Pass;
             blurb.TooltipText = explain;
         }
-        card.AddChild(UiKit.MakeButton(Loc.T("Take it"), Palette.Good, 16, () => Take(curio)).Place(30, CardH - 56, CardW - 60, 44));
+        card.AddChild(UiKit.MakeButton(Loc.T("Take this one"), Palette.Good, 16, () => Take(curio)).Place(30, CardH - 56, CardW - 60, 44));
         return card;
     }
 

@@ -143,6 +143,9 @@ public static class Hints
         ["magnet"] = Loc.T("The lodestone's on, so iron can't move. Weapons go quiet, and nothing drowns out the delicate things. Demon " +
                      "gold, which is iron under the gilt, goes quiet too."),
         ["shake_limit"] = Loc.T("That's all the shaking this one will stand: it's coming apart. Go by what you heard."),
+        // A season after the first (0.37): the trade's ways as far as any season has met them, from the first morning.
+        ["ways"] = Loc.T("You've traded further in than this, and it shows in what comes to the counter: locks, false bottoms, two of a kind, " +
+                         "enchantment. Whatever an earlier season met, this one has from its first morning."),
         // Bram's cradle (0.37): the shaking done for you, once the stall's week has taught what the strengths tell.
         ["cradle"] = Loc.T("My old cradle's on the counter. Press \"Rock it\" (or {act}) and it shakes the chest for you, gently, firmly and hard: you just listen. " +
                            "It won't rock where shaking costs something, and a drop is still your own doing."),

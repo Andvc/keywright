@@ -595,29 +595,29 @@ msgstr "水車大工の宝箱です。父の道具が入っていて、それが
 #: scripts/Core/Campaign.cs:432
 msgid "The story's told on this save: {0} commission filled."
 msgid_plural "The story's told on this save: {0} commissions filled."
-msgstr[0] ""
+msgstr[0] "このセーブデータの物語はもう語り終えています：依頼を{0}件達成しました。"
 
 #: scripts/Core/Campaign.cs:452
 msgid "Bram's account is paid off."
-msgstr ""
+msgstr "ブラムの勘定は完済しました。"
 
 #: scripts/Core/Campaign.cs:452
 msgid "Bram's account couldn't be paid: the shop's been foreclosed."
-msgstr ""
+msgstr "ブラムの勘定を払えませんでした：店は差し押さえられています。"
 
 #: scripts/Core/Campaign.cs:453
 msgid ""
 "The key is whole and the plan's four lines are done: the Guild's carriage comes tonight, for the final opening."
-msgstr ""
+msgstr "鍵はそろい、計画の4行も済みました：今夜、ギルドの馬車が来て、最後の開封です。"
 
 #: scripts/Core/Campaign.cs:454
 msgid "The key is whole and the plan's lines are done, all but the debt."
-msgstr ""
+msgstr "鍵はそろい、計画の行も済みました。残るは借金だけです。"
 
 #: scripts/Core/Campaign.cs:455
 msgid "{0} commission filled. {1} {2}"
 msgid_plural "{0} commissions filled. {1} {2}"
-msgstr[0] ""
+msgstr[0] "依頼を{0}件達成しました。{1}{2}"
 
 #: scripts/Core/Chest.cs:281
 msgid "No lock"
@@ -816,12 +816,12 @@ msgstr "魔力を帯びた品の価値が、2倍ではなく4倍になる。"
 
 #: scripts/Core/Curios.cs:83
 msgid "Lantern Moth"
-msgstr ""
+msgstr "灯り蛾"
 
 #: scripts/Core/Curios.cs:83
 msgid ""
 "Every enchanted thing in a chest is starred on your slip as the chest comes in, witchlight or not."
-msgstr ""
+msgstr "宝箱が届いた時点で、中の魔力を帯びた品すべてに査定表で星がつく。魔女灯がなくてもよい。"
 
 #: scripts/Core/Curios.cs:85
 msgid "Archmage's Staff"
@@ -929,12 +929,12 @@ msgstr "その日最後の客の言い値が{0}下がる。"
 
 #: scripts/Core/Curios.cs:109
 msgid "Factor's Abacus"
-msgstr ""
+msgstr "仲買人のそろばん"
 
 #: scripts/Core/Curios.cs:109
 msgid ""
 "You know the least a haggler will take: your offer starts on it, and they take it."
-msgstr ""
+msgstr "値切りに応じる売り手が受ける最低額がわかる：付け値はそこから始まり、相手はそれで手を打つ。"
 
 #: scripts/Core/Curios.cs:110
 msgid "Haggler's Purse"
@@ -991,12 +991,12 @@ msgstr "完璧な見立てをすると鑑定料がもらえる：宝箱の中身
 
 #: scripts/Core/Curios.cs:121
 msgid "Scrivener's Quill"
-msgstr ""
+msgstr "書記の羽ペン"
 
 #: scripts/Core/Curios.cs:121
 msgid ""
 "Your slip ticks each thing as you hear it, and counts them. What you work out is still yours to mark."
-msgstr ""
+msgstr "聞こえた品が、聞こえたそばから査定表にチェックされ、数も数えられる。推理した分は自分で印をつける。"
 
 #: scripts/Core/Curios.cs:123
 msgid "Valuer's Register"
@@ -1044,12 +1044,12 @@ msgstr "完璧な見立てなら、宝箱の中身がすべて1.5倍で売れる
 
 #: scripts/Core/Curios.cs:133
 msgid "Pocket Engine"
-msgstr ""
+msgstr "懐中からくり"
 
 #: scripts/Core/Curios.cs:133
 msgid ""
 "Every chest is read for you: what's truly in it is on your slip as it comes in, false bottom and warded thing and all."
-msgstr ""
+msgstr "すべての宝箱が読み取られる：届いた時点で、二重底も結界の品も含め、本当の中身が査定表に記される。"
 
 #: scripts/Core/Curios.cs:137
 msgid "Padded Crate"
@@ -1087,12 +1087,12 @@ msgstr "密輸人は口の堅い買い手を信用する：今回のプレイで
 
 #: scripts/Core/Curios.cs:143
 msgid "Toll-man's Gauge"
-msgstr ""
+msgstr "関守の物差し"
 
 #: scripts/Core/Curios.cs:143
 msgid ""
 "A false bottom is marked on your slip as the chest comes in: no drop needed."
-msgstr ""
+msgstr "宝箱が届いた時点で、二重底が査定表に記される：落とす必要はない。"
 
 #: scripts/Core/Curios.cs:144
 msgid "Black Market Pass"
@@ -1148,11 +1148,11 @@ msgstr "言い当てた結界の品が、一段上になって出てくる。"
 
 #: scripts/Core/Curios.cs:155
 msgid "Wardens' Primer"
-msgstr ""
+msgstr "衛士の手引き書"
 
 #: scripts/Core/Curios.cs:155
 msgid "When a sign points at a warded thing, your slip names it for you."
-msgstr ""
+msgstr "しるしが結界で封じた品を指しているとき、査定表がその品を言い当ててくれる。"
 
 #: scripts/Core/Curios.cs:156
 msgid "The Aldric Seal"
@@ -2146,82 +2146,82 @@ msgstr "その種類の品は、宝箱の約束より悪くなって出てくる
 msgid "{0}: {1}"
 msgstr "{0}：{1}"
 
-#: scripts/Core/Guild.cs:63
+#: scripts/Core/Guild.cs:68
 msgid "Mister Vane"
 msgstr "ヴェイン氏"
 
-#: scripts/Core/Guild.cs:68
+#: scripts/Core/Guild.cs:73
 msgid ""
 "Good evening. The Guild's tithe, if you please. In gold: the Guild has no use for promises."
 msgstr "こんばんは。ギルドへの上納金を頂戴しに参りました。ゴールドでお願いします。ギルドは約束などに用はありませんので。"
 
-#: scripts/Core/Guild.cs:69
+#: scripts/Core/Guild.cs:74
 msgid ""
 "Still here, I see. Good. The Guild hates to see a Keywright go to waste."
 msgstr "まだいらっしゃいましたか。結構。ギルドは、鍵師が無駄になるのを何より嫌いますので。"
 
-#: scripts/Core/Guild.cs:70
+#: scripts/Core/Guild.cs:75
 msgid ""
 "My masters have begun to ask about you. That is rarely good news. One more week after this one."
 msgstr "上の方々が、あなたのことを尋ね始めましてね。めったに良い知らせではありません。今週の後、あと1週です。"
 
-#: scripts/Core/Guild.cs:71
+#: scripts/Core/Guild.cs:76
 msgid "The last of Bram's debt. Every coin of it, mind. Gold you can see."
 msgstr "ブラムの借金も、これが最後です。一枚残らず、お忘れなく。目に見えるゴールドでお願いしますよ。"
 
-#: scripts/Core/Guild.cs:76
+#: scripts/Core/Guild.cs:81
 msgid ""
 "Debts are curious things, Keywright. They grow while nobody's watching them."
 msgstr "借金とは奇妙なものでしてね、鍵師殿。誰も見ていない間に育つのです。"
 
-#: scripts/Core/Guild.cs:77
+#: scripts/Core/Guild.cs:82
 msgid ""
 "The Gate is hungry this week, and the Guild has decided you owe it something for its patience."
 msgstr "今週は門が飢えておりましてね。ギルドとしては、これまで辛抱して差し上げた分を、あなたに払っていただくことにしました。"
 
-#: scripts/Core/Guild.cs:78
+#: scripts/Core/Guild.cs:83
 msgid ""
 "Interest, you understand. Nothing personal. My master is very fond of interest."
 msgstr "利息ですよ、お分かりでしょう。他意はございません。我が主は、利息がことのほかお好きでしてね。"
 
-#: scripts/Core/Guild.cs:85
+#: scripts/Core/Guild.cs:90
 msgid "Paid in full. The Guild has no further claim on Bram's stall. For now."
 msgstr "全額、確かに。ギルドはもう、ブラムの露店に何の権利も主張しません。今のところは。"
 
-#: scripts/Core/Guild.cs:86
+#: scripts/Core/Guild.cs:91
 msgid "Paid. Until next week, Keywright."
 msgstr "確かに頂戴しました。では来週また、鍵師殿。"
 
-#: scripts/Core/Guild.cs:87
+#: scripts/Core/Guild.cs:92
 msgid "Paid, and promptly. Until next week, then."
 msgstr "迅速なお支払い、恐れ入ります。では、また来週。"
 
-#: scripts/Core/Guild.cs:90
+#: scripts/Core/Guild.cs:95
 msgid ""
 "Short? Then the Guild will take what's on your shelf instead. At the Guild's price, naturally."
 msgstr "足りない？では代わりに、陳列棚の品をギルドが頂戴しましょう。もちろん、ギルドの値でね。"
 
-#: scripts/Core/Guild.cs:93
+#: scripts/Core/Guild.cs:98
 msgid ""
 "Not enough. The Guild seals this shop tonight, and your licence with it. Your uncle will be so disappointed."
 msgstr "足りませんな。今夜、ギルドはこの店を差し押さえ、あなたの営業許可も取り上げます。叔父上はさぞ落胆なさるでしょう。"
 
-#: scripts/Core/Guild.cs:94
+#: scripts/Core/Guild.cs:99
 msgid ""
 "Not enough. The Guild seals this shop tonight, and your licence with it. Bram will be so disappointed."
 msgstr "足りませんな。今夜、ギルドはこの店を差し押さえ、あなたの営業許可も取り上げます。ブラム殿はさぞ落胆なさるでしょう。"
 
-#: scripts/Core/Guild.cs:97
+#: scripts/Core/Guild.cs:102
 msgid ""
 "A Guild note, older than the Locking? ...However did you come by that? The Guild honours its own paper. Paid."
 msgstr "大施錠より古いギルドの手形？……いったいどこでそれを？ギルドは自らの証文を重んじます。お支払い、確かに。"
 
-#: scripts/Core/Guild.cs:100
+#: scripts/Core/Guild.cs:105
 msgid ""
 "All of it, tonight? ...How very thorough of you. The Guild has no further claim on Bram's stall."
 msgstr "今夜、全額を？……実に念の入ったことで。ギルドはもう、ブラムの露店に何の権利も主張しません。"
 
-#: scripts/Core/Guild.cs:103
+#: scripts/Core/Guild.cs:108
 msgid ""
 "Bram's word? How touching. One week, then. The rest comes due next week, and half as much again."
 msgstr "ブラムの口利き？泣かせますな。では1週間だけ。残りは来週、5割増しでお支払いいただきます。"
@@ -2532,6 +2532,7 @@ msgstr ""
 msgid ""
 "A closed eye is a thing you never listened for: you never shook the chest at the strength that stirs it, or never dropped it for what's under the floor. A cross is for what you listened to and got wrong. Gently, firmly, hard: every strength tells you something the others can't."
 msgstr ""
+"閉じた目は、耳を澄ませなかった品だ：そいつが動く強さで宝箱を振らなかったか、底の下を確かめるために落とさなかったかだ。×は、聞いたうえで読み違えた分につく。そっと、しっかり、強く。どの強さも、ほかの強さじゃ分からんことを教えてくれる。"
 
 #: scripts/Core/Hints.cs:52
 msgid ""
@@ -2776,7 +2777,7 @@ msgstr "魔女灯が灯った。ずっと灯ったままだ。魔力を帯びた
 #: scripts/Core/Hints.cs:131
 msgid ""
 "Two of a kind: each one adds its value. Sellers who don't count only price one. A click counts one more, a right-click one fewer."
-msgstr ""
+msgstr "同じ物が2つだ。それぞれに価値がある。数を数えない売り手は、1つ分しか値をつけない。クリックで1つ増え、右クリックで1つ減る。"
 
 #: scripts/Core/Hints.cs:132
 msgid ""
@@ -2819,160 +2820,167 @@ msgstr "この宝箱が耐えられるのはここまでだ。壊れかけてる
 
 #: scripts/Core/Hints.cs:147
 msgid ""
+"You've traded further in than this, and it shows in what comes to the counter: locks, false bottoms, two of a kind, enchantment. Whatever an earlier season met, this one has from its first morning."
+msgstr ""
+"お前はここより奥で商いをしたことがある。カウンターに来る宝箱にもそれが出るぞ：錠前、二重底、同じ物が2つ、魔力。前の季節で出会ったものは、この季節じゃ最初の朝から出てくる。"
+
+#: scripts/Core/Hints.cs:150
+msgid ""
 "My old cradle's on the counter. Press \"Rock it\" (or {act}) and it shakes the chest for you, gently, firmly and hard: you just listen. It won't rock where shaking costs something, and a drop is still your own doing."
 msgstr ""
+"わしの古い揺りかごをカウンターに出しておいた。「揺らす」（または{act}）を押せば、宝箱をそっと、しっかり、強くと振ってくれる。お前は聞くだけでいい。振ると何かを取られる宝箱は揺らさんし、落とすのは今までどおり自分の手でやれ。"
 
-#: scripts/Core/Hints.cs:151
+#: scripts/Core/Hints.cs:154
 msgid ""
 "That sound... I've heard it once in forty years. A Heartsong! Only a Keywright hears one sing, so the seller has no idea it's there. It's worth nothing in gold and everything to the shop: buy that chest. And if you can't afford it, pass: a Heartsong won't leave with them."
 msgstr ""
 "この音……40年で一度しか聞いたことがない。心歌だ！心歌の歌声は鍵師にしか聞こえんから、売り手はそこにあるとは夢にも思ってない。金の値打ちはないが、店には何物にも代えがたい。その宝箱を買え。買えないなら見送れ。心歌は売り手と一緒には去らん。"
 
-#: scripts/Core/Hints.cs:154
+#: scripts/Core/Hints.cs:157
 msgid ""
 "A Heartsong. Nobody would pay a penny for one, but each does something for the shop that no gold can, for as long as it sings here. Keep it or let it go: every one you keep makes the next harder to find."
 msgstr ""
 "心歌だ。誰も一銭だって払いやしないが、ここで歌っている限り、どれも金ではできないことを店にしてくれる。手元に置くか手放すか、決めろ。残すたびに、次のは見つけにくくなる。"
 
-#: scripts/Core/Hints.cs:156
+#: scripts/Core/Hints.cs:159
 msgid ""
 "Hear that? The whole stall's different with it singing. It'll sing as long as it's ours."
 msgstr "聞こえるか？あれが歌ってると、露店じゅうの空気が変わる。うちにある限り、ずっと歌ってくれるさ。"
 
-#: scripts/Core/Hints.cs:157
+#: scripts/Core/Hints.cs:160
 msgid ""
 "One more thing. Somewhere among all these chests are nine Heartsongs: things loved so much they sing. Only a Keywright hears them, at the gentlest shake. Most seasons never hear one. If you ever do, buy that chest."
 msgstr ""
 "もうひとつ。ここに来る宝箱のどこかに、9つの心歌がある。愛されすぎて歌うようになった品だ。聞こえるのは鍵師だけ、それもいちばんそっと振ったときだけだ。たいていの季節は、一つも聞けずに終わる。もし聞こえたら、その宝箱は買え。"
 
-#: scripts/Core/Hints.cs:162
+#: scripts/Core/Hints.cs:165
 msgid ""
 "Ada only shakes gently, so heavy things and soft things make no sound for her."
 msgstr "エイダはそっとしか振らん。だから彼女には、重い物や柔らかい物の音は聞こえない。"
 
-#: scripts/Core/Hints.cs:163
+#: scripts/Core/Hints.cs:166
 msgid ""
 "Tobin's Barrow chests are rotten: about two seconds of shaking, all told. One strength, then: pick it well."
 msgstr "トビンが塚から持ってくる宝箱は腐りかけだ。振れるのは全部で2秒ほど。だから強さは1つだけ。よく選べ。"
 
-#: scripts/Core/Hints.cs:164
+#: scripts/Core/Hints.cs:167
 msgid ""
 "Nettle puts her price up a tenth for every strength you try after the first. Pick two: gentle and hard."
 msgstr "ネトルは、2つ目からは強さを1つ試すごとに値段を10%上げてくる。試すなら2つ、そっとと強く、だ。"
 
-#: scripts/Core/Hints.cs:165
+#: scripts/Core/Hints.cs:168
 msgid ""
 "Mother Sorrel always dreams true, in signs. If you can't hear what she dreamt of, it's warded: name it."
 msgstr "マザー・ソレルはいつも正夢を見る。夢はしるしの形で現れる。夢に出てきた物が聞こえなければ、それは結界で封じられてる。言い当てろ。"
 
-#: scripts/Core/Hints.cs:166
+#: scripts/Core/Hints.cs:169
 msgid ""
 "A Thornwick dowry always holds coin, a cloak and a potion. Whichever of the three you can't hear is warded."
 msgstr "ソーンウィックの持参金には、必ず硬貨と外套と薬が入ってる。3つのうち聞こえない物が、結界で封じられた物だ。"
 
-#: scripts/Core/Hints.cs:167
+#: scripts/Core/Hints.cs:170
 msgid ""
 "Ilse's tag lists every kind of thing packed. A kind on the tag that never makes a sound is warded: name it."
 msgstr "イルゼの荷札には、詰めた品の種類が全部書いてある。荷札にあるのに一度も鳴らない種類が、結界で封じられた物だ。言い当てろ。"
 
-#: scripts/Core/Hints.cs:168
+#: scripts/Core/Hints.cs:171
 msgid ""
 "Quire's ward-roll names the warded thing, faded. Make out the name, and tick its kind."
 msgstr "クワイアの結界目録には、封じた品の名前が色あせて書いてある。名前を読み解いて、その種類にチェックを入れろ。"
 
-#: scripts/Core/Hints.cs:169
+#: scripts/Core/Hints.cs:172
 msgid ""
 "Madame Zell's cards: a suit drawn twice is what the ward holds. Three different suits, and nothing's warded."
 msgstr "マダム・ゼルのカードは、2枚出た絵柄が結界の中身を示す。3枚とも絵柄が違えば、何も封じられてない。"
 
-#: scripts/Core/Hints.cs:170
+#: scripts/Core/Hints.cs:173
 msgid ""
 "A warded thing makes no sound and weighs nothing. Name it on your slip, and nothing that isn't there, and the ward will give it up."
 msgstr "結界で封じた品は音もしないし、重さもない。査定表でそいつを言い当てろ。ただし、ない物にはチェックを入れるな。そうすりゃ結界がそれを手放す。"
 
-#: scripts/Core/Hints.cs:172
+#: scripts/Core/Hints.cs:175
 msgid ""
 "You could pay off the Guild now. Or buy its Bookkeeping Engine for the same sum: it reads every chest for you, to finish the run quickly."
 msgstr ""
 "今ならギルドに完済できる。あるいは、同じ額でギルドの帳簿からくりを買う手もある。どの宝箱も代わりに読み取ってくれるから、手早くプレイを締めくくれるぞ。"
 
-#: scripts/Core/Hints.cs:174
+#: scripts/Core/Hints.cs:177
 msgid ""
 "Rook's scale says what her chest weighs. Take away the weight of what you heard: what's left never stirred (a cloak is 3 lb, a spell 1)."
 msgstr "ルークの秤で、彼女の宝箱の重さが分かる。そこから聞こえた物の重さを引け。残りは一度も動かなかった物だ（外套は3ポンド、呪文は1ポンド）。"
 
-#: scripts/Core/Hints.cs:176
+#: scripts/Core/Hints.cs:179
 msgid ""
 "Brass's ticket counts every article, false bottom and all. Count what you hear: one short means one under the floor."
 msgstr "ブラスの質札は、二重底の分まで品数を全部数えてる。聞こえた数を数えろ。1つ足りなければ、その1つは床下だ。"
 
-#: scripts/Core/Hints.cs:177
+#: scripts/Core/Hints.cs:180
 msgid ""
 "Flick's chests are mostly stolen. Lay a hand on each one: if your mark goes cold, send for the Wardens, or pass."
 msgstr "フリックの宝箱は、たいてい盗品だ。1つずつ手を触れてみろ。鍵紋が冷えたら、衛士を呼ぶか、見送れ。"
 
-#: scripts/Core/Hints.cs:179
+#: scripts/Core/Hints.cs:182
 msgid ""
 "The Guild's bailiff, selling what it took for tithe to its friends: cheap, by the colour alone. But a lot of what the Guild takes was never the Guild's to sell. Lay a hand on every one."
 msgstr ""
 "ギルドの執行吏だ。上納金のかたに取り上げた物を、ギルドの味方に売りに来る。色だけで値をつけるから安い。だが、ギルドが取り上げる物の多くは、もともとギルドに売る権利なんてない。どれにも手を触れてみろ。"
 
-#: scripts/Core/Hints.cs:181
+#: scripts/Core/Hints.cs:184
 msgid ""
 "The Wardens' quartermaster sells what nobody claimed, by the pound. A heavy chest comes dear and a light one cheap: take the weight of what you hear from his scale's."
 msgstr "衛士の補給官は、引き取り手のなかった物を重さで売る。重い宝箱は高く、軽いのは安い。あいつの秤の重さから、聞こえた物の重さを引いてみろ。"
 
-#: scripts/Core/Hints.cs:183
+#: scripts/Core/Hints.cs:186
 msgid ""
 "Brother Cadoc won't have his chests shaken hard: half again if you do. Crypt chests are full of holy cloaks."
 msgstr "カドック修道士は、宝箱を強く振られるのを嫌う。振ったら値が1.5倍だ。地下墓所の宝箱は、聖なる外套でいっぱいだぞ。"
 
-#: scripts/Core/Hints.cs:184
+#: scripts/Core/Hints.cs:187
 msgid ""
 "Corvin packs his chests in straw: everything needs a strength harder to stir, and cloaks and spells won't stir at all. Shake firmly, then hard, then drop it."
 msgstr ""
 "コーヴィンは宝箱にわらを詰める。どの品も、動かすには一段強く振らなきゃならんし、外套と呪文はまったく動かん。しっかり振って、強く振って、それから落としてみろ。"
 
-#: scripts/Core/Hints.cs:186
+#: scripts/Core/Hints.cs:189
 msgid ""
 "Orme likes a wager: read her chest exactly, every kind and every count, and she gives back a third of the price."
 msgstr "オームは賭けが好きだ。種類も数も全部、宝箱の中身をぴたりと読めば、代金の3分の1を返してくれる。"
 
-#: scripts/Core/Hints.cs:187
+#: scripts/Core/Hints.cs:190
 msgid ""
 "Solve grandmother's riddle. If you can't hear what it's about, it's warded: name it."
 msgstr "お祖母さまのなぞなぞを解け。答えの物が聞こえなければ、それは結界で封じられてる。言い当てろ。"
 
-#: scripts/Core/Hints.cs:188
+#: scripts/Core/Hints.cs:191
 msgid ""
 "Sir Rowan takes the best weapon in his chest, for the fee he names. Value what's left."
 msgstr "ローワン卿は、自分の言った額で、宝箱の中のいちばん良い武器を引き取っていく。残りの価値で判断しろ。"
 
-#: scripts/Core/Hints.cs:189
+#: scripts/Core/Hints.cs:192
 msgid "Tick gives you twelve seconds. Gently, then hard, and decide."
 msgstr "チックがくれるのは12秒だ。そっと、それから強く振って、決めろ。"
 
-#: scripts/Core/Hints.cs:190
+#: scripts/Core/Hints.cs:193
 msgid ""
 "Sallow is cheap, but the dearest thing inside is his. A chest of many middling things suits his bargain."
 msgstr "サロウは安いが、中でいちばん高価な品はあいつのものだ。そこそこの品がたくさん入った宝箱なら、あいつの取引でも割に合う。"
 
-#: scripts/Core/Hints.cs:191
+#: scripts/Core/Hints.cs:194
 msgid ""
 "Skrae's echoes come back off everything, warded or not. An echo with nothing to hear is warded."
 msgstr "スクレーの反響は、結界があろうとなかろうと、あらゆる物から返ってくる。反響があるのに音が聞こえなければ、それが結界の品だ。"
 
-#: scripts/Core/Hints.cs:192
+#: scripts/Core/Hints.cs:195
 msgid ""
 "Countess Vey prices only her gems; the rest comes free. Some are paste, and she won't have a lodestone near them."
 msgstr "ヴェイ伯爵夫人は自分の宝石にしか値をつけない。ほかの品はおまけだ。中には模造品もあるし、伯爵夫人は宝石に天然磁石を近づけさせない。"
 
-#: scripts/Core/Hints.cs:193
+#: scripts/Core/Hints.cs:196
 msgid ""
 "Old Aldo's price is your slip. Get it exactly right and he takes a quarter off; get it wrong and you pay what it holds, and a quarter more."
 msgstr "アルドじいさんの値段は、お前の査定表の額だ。ぴたり当てれば25%まけてくれるが、外せば中身の価値に25%上乗せした額を払うことになる。"
 
-#: scripts/Core/Hints.cs:195
+#: scripts/Core/Hints.cs:198
 msgid ""
 "The Maw sells for one coin, but everyone who comes after him today asks twice as much. Count who's still waiting."
 msgstr "アギトは硬貨一枚で売るが、今日あいつの後に来る客は皆、2倍の値を言ってくる。まだ何人待ってるか数えろ。"
@@ -3427,7 +3435,7 @@ msgstr "竜の瞳"
 msgid "Paste Gem"
 msgstr "模造宝石"
 
-#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:1256
+#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:1258
 msgid "Heartsong"
 msgstr "心歌"
 
@@ -3860,7 +3868,7 @@ msgstr "買う"
 msgid "Buy it, or pass"
 msgstr "買うか、見送る"
 
-#: scripts/Core/Lessons.cs:91 scripts/Phases/CounterPhase.cs:816
+#: scripts/Core/Lessons.cs:91 scripts/Phases/CounterPhase.cs:818
 msgid "Pass"
 msgstr "見送る"
 
@@ -3884,7 +3892,7 @@ msgstr "{0}にチェックを入れる"
 msgid "Tick {0} and {1}"
 msgstr "{0}と{1}にチェックを入れる"
 
-#: scripts/Core/Lessons.cs:100 scripts/Core/Lessons.cs:102 scripts/Phases/CounterPhase.cs:761
+#: scripts/Core/Lessons.cs:100 scripts/Core/Lessons.cs:102 scripts/Phases/CounterPhase.cs:763
 #: scripts/Ui/Rich.cs:151
 msgid "False bottom"
 msgstr "二重底"
@@ -7925,7 +7933,7 @@ msgstr "カササギ"
 #: scripts/Core/Story.cs:88
 msgid ""
 "{0}, for the Gilded Guild, about Bram's account. {1} in all this season: {2} payments, one every fifth night, and the first is {3}, {4} nights from now."
-msgstr ""
+msgstr "金箔ギルドの{0}です。ブラム殿の勘定の件で参りました。今季は総額{1}。5晩ごとに一度の{2}回払いで、初回は{3}、{4}晩後です。"
 
 #: scripts/Core/Story.cs:91 scripts/Core/Story.cs:107
 msgid ""
@@ -7934,7 +7942,7 @@ msgstr "それから、鍵師殿。以前にもお会いしましたね、たし
 
 #: scripts/Core/Story.cs:92
 msgid "Every fifth night, as ever. A good ear pays any debt."
-msgstr ""
+msgstr "いつもどおり5晩ごとか。いい耳があれば、どんな借金だって返せる。"
 
 #: scripts/Core/Story.cs:98
 msgid ""
@@ -8015,7 +8023,7 @@ msgstr "辻でまた新しい季節が始まるな、{0}。ギルドはまだ嗅
 #: scripts/Core/Story.cs:148
 msgid ""
 "You know the trade, and the chests know you. Two taps and one when I want you at the counter."
-msgstr ""
+msgstr "商いはもう分かってるな。宝箱のほうもお前を知ってる。カウンターに呼ぶときは、二度、それから一度だ。"
 
 #: scripts/Core/Story.cs:151
 msgid ""
@@ -8052,6 +8060,7 @@ msgstr "一字一句、同じ手紙だ。前のときは、宝物庫が息をし
 msgid ""
 "A letter with the Guild's seal, and the terms it always sets: keep Bram's account paid every fifth night, earn the four pieces of the treasury key, and bring the key to the treasury on the season's last night."
 msgstr ""
+"ギルドの封蝋が押された手紙。条件はいつもどおりだ：5晩ごとにブラムの勘定を払い、宝物庫の鍵の欠片を4つ集め、季節の最後の夜に鍵を宝物庫へ持っていくこと。"
 
 #: scripts/Core/Story.cs:173
 msgid ""
@@ -8156,11 +8165,11 @@ msgstr "手紙なんて来ない。あの馬車がどこへ行くのか、道の
 #: scripts/Core/Story.cs:256
 msgid ""
 "One more thing. The Guild's treasury has asked for Bram: an old consignment. The carriage is outside."
-msgstr ""
+msgstr "もうひとつ。ギルドの宝物庫が、ブラム殿をご所望でして。古い預かり物の件です。馬車は表に待たせてあります。"
 
 #: scripts/Core/Story.cs:257
 msgid "Mind the stall, {0}. I'll write every week."
-msgstr ""
+msgstr "露店を頼むぞ、{0}。毎週、手紙を書くからな。"
 
 #: scripts/Core/Story.cs:261
 msgid ""
@@ -12152,7 +12161,7 @@ msgstr ""
 #: scripts/Core/TaleBook.cs:185
 msgid ""
 "If it comes to your counter, your mark will go cold on it. Send for us, and the Wardens pay a finder's share."
-msgstr ""
+msgstr "そいつがカウンターに来れば、鍵紋が冷える。我々を呼べば、衛士が発見者の取り分を払う。"
 
 #: scripts/Core/TaleBook.cs:189
 msgid ""
@@ -12254,8 +12263,8 @@ msgstr "聖遺物箱を修道院に返した。"
 msgid "Bless you. The saint will remember, and so will we."
 msgstr "神のお恵みを。聖人もお忘れにならず、私どもも忘れません。"
 
-#: scripts/Core/TaleBook.cs:266 scripts/Core/TaleBook.cs:1368 scripts/Phases/CounterPhase.cs:617
-#: scripts/Phases/DayEndPhase.cs:395 scripts/Ui/SlotsView.cs:111 scripts/Ui/SongReveal.cs:174
+#: scripts/Core/TaleBook.cs:266 scripts/Core/TaleBook.cs:1368 scripts/Phases/CounterPhase.cs:619
+#: scripts/Phases/DayEndPhase.cs:395 scripts/Ui/SongReveal.cs:174
 msgid "Keep it"
 msgstr "手元に置く"
 
@@ -14002,7 +14011,7 @@ msgid ""
 "A shop in the capital: richer customers, archmages with enchanted things, two or three of a kind in a chest, a dwarf, and gems."
 msgstr "都の店：より裕福な客、魔力を帯びた品を持つ大魔導師、一箱に同じ種類が二つ三つ、ドワーフ、そして宝石。"
 
-#: scripts/Core/Upgrades.cs:54 scripts/Phases/CounterPhase.cs:769
+#: scripts/Core/Upgrades.cs:54 scripts/Phases/CounterPhase.cs:771
 msgid "Witchlight"
 msgstr "魔女灯"
 
@@ -14066,7 +14075,7 @@ msgid ""
 "By the Gilded Gate: the court, demons and their gilded iron, a fence for the Maw, and the last of Bram's debt."
 msgstr "金箔の門のそば：宮廷、悪魔と金箔を貼った鉄、アギトの故買屋、そしてブラムの借金の最後の一回。"
 
-#: scripts/Core/Upgrades.cs:66 scripts/Phases/CounterPhase.cs:1010
+#: scripts/Core/Upgrades.cs:66 scripts/Phases/CounterPhase.cs:1012
 msgid "Lodestone"
 msgstr "天然磁石"
 
@@ -14649,11 +14658,11 @@ msgstr "{0}振った。"
 
 #: scripts/Phases/CounterPhase.cs:257
 msgid "{0} Not {1} yet."
-msgstr ""
+msgstr "{0}{1}はまだ試していない。"
 
 #: scripts/Phases/CounterPhase.cs:257
 msgid " or "
-msgstr ""
+msgstr "・"
 
 #: scripts/Phases/CounterPhase.cs:301
 msgid "Lesson learned!"
@@ -14682,123 +14691,123 @@ msgstr "{0}の宝箱：{1}の品が期待できる。"
 msgid "{0} Locked: {1}, {2} pins."
 msgstr "{0}施錠：{1}、ピン{2}本。"
 
-#: scripts/Phases/CounterPhase.cs:397
+#: scripts/Phases/CounterPhase.cs:399
 msgid "Price +{0}"
 msgstr "値段+{0}"
 
-#: scripts/Phases/CounterPhase.cs:419
+#: scripts/Phases/CounterPhase.cs:421
 msgid "Coming apart: no more shaking"
 msgstr "壊れかけ：もう振れない"
 
-#: scripts/Phases/CounterPhase.cs:420
+#: scripts/Phases/CounterPhase.cs:422
 msgid "Rotten: {0}s of shaking left"
 msgstr "腐りかけ：あと{0}秒振れる"
 
-#: scripts/Phases/CounterPhase.cs:423
+#: scripts/Phases/CounterPhase.cs:425
 msgid "High enough: let go to drop it."
 msgstr "十分な高さです。放すと落とせます。"
 
-#: scripts/Phases/CounterPhase.cs:425
+#: scripts/Phases/CounterPhase.cs:427
 msgid "Drag to shake it. Lift it high and let go to drop it."
 msgstr "ドラッグすると振れます。高く持ち上げて放すと落とせます。"
 
-#: scripts/Phases/CounterPhase.cs:425
+#: scripts/Phases/CounterPhase.cs:427
 msgid "Drag to shake it, gently or firmly: mind your back."
 msgstr "ドラッグすると振れます。振れるのはそっとか、しっかりまで：腰に気をつけて。"
 
-#: scripts/Phases/CounterPhase.cs:426
+#: scripts/Phases/CounterPhase.cs:428
 msgid "Lodestone on: iron can't move"
 msgstr "天然磁石オン：鉄は動かない"
 
-#: scripts/Phases/CounterPhase.cs:428
+#: scripts/Phases/CounterPhase.cs:430
 msgid "Drag the chest to shake it. The witchlight's lit."
 msgstr "宝箱をドラッグすると振れます。魔女灯が灯っています。"
 
-#: scripts/Phases/CounterPhase.cs:428
+#: scripts/Phases/CounterPhase.cs:430
 msgid "Drag the chest to shake it"
 msgstr "宝箱をドラッグすると振れます"
 
-#: scripts/Phases/CounterPhase.cs:478
+#: scripts/Phases/CounterPhase.cs:480
 msgid "Rock it {0}"
-msgstr ""
+msgstr "揺らす {0}"
 
-#: scripts/Phases/CounterPhase.cs:484
+#: scripts/Phases/CounterPhase.cs:486
 msgid ""
 "Bram's cradle rocks the chest for you: {0}. You still do the listening. Dropping it is still your hands' work."
-msgstr ""
+msgstr "ブラムの揺りかごが宝箱を振ってくれます：{0}。聞き分けるのは自分の耳です。落とすのは今までどおり自分の手で。"
 
-#: scripts/Phases/CounterPhase.cs:485
+#: scripts/Phases/CounterPhase.cs:487
 msgid ""
 "Bram's cradle rocks the chest for you. Shaking this one has a price of its own, so it rocks once, gently: the rest is yours to decide."
-msgstr ""
-
-#: scripts/Phases/CounterPhase.cs:528
-msgid "something enchanted, starred"
-msgstr ""
-
-#: scripts/Phases/CounterPhase.cs:528
-msgid "nothing enchanted"
-msgstr ""
-
-#: scripts/Phases/CounterPhase.cs:529
-msgid "a false bottom, marked"
-msgstr ""
-
-#: scripts/Phases/CounterPhase.cs:529
-msgid "no false bottom"
-msgstr ""
+msgstr "ブラムの揺りかごが宝箱を振ってくれます。この宝箱は振ると代償があるので、そっと一度だけ揺らします。あとは自分で決めてください。"
 
 #: scripts/Phases/CounterPhase.cs:530
-msgid "a warded thing, named under {0}"
-msgstr ""
+msgid "something enchanted, starred"
+msgstr "魔力を帯びた品あり（星つき）"
+
+#: scripts/Phases/CounterPhase.cs:530
+msgid "nothing enchanted"
+msgstr "魔力を帯びた品なし"
 
 #: scripts/Phases/CounterPhase.cs:531
-msgid "Your curios read it: {0}."
-msgstr ""
+msgid "a false bottom, marked"
+msgstr "二重底あり（記入済み）"
 
-#: scripts/Phases/CounterPhase.cs:583 scripts/Phases/DayEndPhase.cs:380
+#: scripts/Phases/CounterPhase.cs:531
+msgid "no false bottom"
+msgstr "二重底なし"
+
+#: scripts/Phases/CounterPhase.cs:532
+msgid "a warded thing, named under {0}"
+msgstr "結界の品あり（{0}の欄に記入）"
+
+#: scripts/Phases/CounterPhase.cs:533
+msgid "Your curios read it: {0}."
+msgstr "珍品の見立て：{0}。"
+
+#: scripts/Phases/CounterPhase.cs:585 scripts/Phases/DayEndPhase.cs:380
 msgid "{0}, singing: {1} Click to let it go (it fetches nothing)."
 msgstr "{0}が歌っている：{1}クリックで手放せます（売値はつきません）。"
 
-#: scripts/Phases/CounterPhase.cs:596
+#: scripts/Phases/CounterPhase.cs:598
 msgid "{0}: {1} exhibition points{2}. Click to sell it for {3}g."
 msgstr "{0}：展示点{1}{2}。クリックすると{3}Gで売れます。"
 
-#: scripts/Phases/CounterPhase.cs:596 scripts/Phases/DayEndPhase.cs:350
+#: scripts/Phases/CounterPhase.cs:598 scripts/Phases/DayEndPhase.cs:350
 msgid " (double: enchanted)"
 msgstr "（魔力で2倍）"
 
-#: scripts/Phases/CounterPhase.cs:614 scripts/Phases/DayEndPhase.cs:392
+#: scripts/Phases/CounterPhase.cs:616 scripts/Phases/DayEndPhase.cs:392
 msgid ""
 "{0} goes back to the Locking, and takes this with it: {1} It fetches nothing."
 msgstr "{0}は大施錠へ還り、この力も一緒に消えます：{1}売値はつきません。"
 
-#: scripts/Phases/CounterPhase.cs:615 scripts/Phases/DayEndPhase.cs:393
+#: scripts/Phases/CounterPhase.cs:617 scripts/Phases/DayEndPhase.cs:393
 msgid ""
 "Sell the {0} for {1}g? It comes off display: {2} exhibition points fewer."
 msgstr "{0}を{1}Gで売りますか？陳列から外れ、展示点が{2}減ります。"
 
-#: scripts/Phases/CounterPhase.cs:616 scripts/Phases/DayEndPhase.cs:394
+#: scripts/Phases/CounterPhase.cs:618 scripts/Phases/DayEndPhase.cs:394
 msgid "LET IT GO?"
 msgstr "手放しますか？"
 
-#: scripts/Phases/CounterPhase.cs:616 scripts/Phases/DayEndPhase.cs:394
+#: scripts/Phases/CounterPhase.cs:618 scripts/Phases/DayEndPhase.cs:394
 msgid "SELL IT?"
 msgstr "売りますか？"
 
-#: scripts/Phases/CounterPhase.cs:617 scripts/Phases/DayEndPhase.cs:395
+#: scripts/Phases/CounterPhase.cs:619 scripts/Phases/DayEndPhase.cs:395
 msgid "Let it go"
 msgstr "手放す"
 
-#: scripts/Phases/CounterPhase.cs:617 scripts/Phases/DayEndPhase.cs:395
+#: scripts/Phases/CounterPhase.cs:619 scripts/Phases/DayEndPhase.cs:395
 msgid "Sell: +{0}g"
 msgstr "売る：+{0}G"
 
-#: scripts/Phases/CounterPhase.cs:641 scripts/Phases/DayEndPhase.cs:407
+#: scripts/Phases/CounterPhase.cs:643 scripts/Phases/DayEndPhase.cs:407
 msgid "{0} goes back to the Locking."
 msgstr "{0}は大施錠へ還っていった。"
 
-#: scripts/Phases/CounterPhase.cs:646 scripts/Phases/CounterPhase.cs:1539
+#: scripts/Phases/CounterPhase.cs:648 scripts/Phases/CounterPhase.cs:1541
 #: scripts/Phases/DayEndPhase.cs:90 scripts/Phases/DayEndPhase.cs:91 scripts/Phases/DayEndPhase.cs:92
 #: scripts/Phases/DayEndPhase.cs:94 scripts/Phases/DayEndPhase.cs:407 scripts/Phases/DuesPhase.cs:225
 #: scripts/Phases/DuesPhase.cs:232 scripts/Phases/DuesPhase.cs:240 scripts/Phases/DuesPhase.cs:287
@@ -14808,406 +14817,406 @@ msgstr "{0}は大施錠へ還っていった。"
 msgid "+{0}g"
 msgstr "+{0}G"
 
-#: scripts/Phases/CounterPhase.cs:656 scripts/Phases/TalkPhase.cs:322
+#: scripts/Phases/CounterPhase.cs:658 scripts/Phases/TalkPhase.cs:322
 msgid "Waiting"
 msgstr "順番待ち"
 
-#: scripts/Phases/CounterPhase.cs:671 scripts/Phases/CounterPhase.cs:683
+#: scripts/Phases/CounterPhase.cs:673 scripts/Phases/CounterPhase.cs:685
 #: scripts/Phases/DayEndPhase.cs:91 scripts/Phases/RunEndPhase.cs:69 scripts/Ui/CollectionView.cs:63
 msgid "Curios"
 msgstr "珍品"
 
-#: scripts/Phases/CounterPhase.cs:671 scripts/Phases/CounterPhase.cs:684
+#: scripts/Phases/CounterPhase.cs:673 scripts/Phases/CounterPhase.cs:686
 #: scripts/Ui/CollectionView.cs:66
 msgid "Keepsakes"
 msgstr "思い出の品"
 
-#: scripts/Phases/CounterPhase.cs:700
+#: scripts/Phases/CounterPhase.cs:702
 msgid "WANTED THIS WEEK"
 msgstr "今週の依頼"
 
-#: scripts/Phases/CounterPhase.cs:704
+#: scripts/Phases/CounterPhase.cs:706
 msgid "Anything enchanted"
 msgstr "魔力を帯びた品なら何でも"
 
-#: scripts/Phases/CounterPhase.cs:710
+#: scripts/Phases/CounterPhase.cs:712
 msgid "{0}g ea"
 msgstr "各{0}G"
 
-#: scripts/Phases/CounterPhase.cs:716
+#: scripts/Phases/CounterPhase.cs:718
 msgid ""
 "{0} wants {1}: {2}g{3}, or a quarter over what it would sell for, if that's more."
 msgstr "{0}の依頼：{1}。報酬は{2}G{3}。売値の25%増しの方が高ければ、そちらが支払われます。"
 
-#: scripts/Phases/CounterPhase.cs:716
+#: scripts/Phases/CounterPhase.cs:718
 msgid " each"
 msgstr "（1つあたり）"
 
-#: scripts/Phases/CounterPhase.cs:732
+#: scripts/Phases/CounterPhase.cs:734
 msgid "YOUR APPRAISAL"
 msgstr "あなたの査定"
 
-#: scripts/Phases/CounterPhase.cs:733
+#: scripts/Phases/CounterPhase.cs:735
 msgid "Notebook {0}"
 msgstr "手帳 {0}"
 
-#: scripts/Phases/CounterPhase.cs:738
+#: scripts/Phases/CounterPhase.cs:740
 msgid "Ticked: what the Bookkeeping Engine read."
 msgstr "チェック済み：帳簿からくりが読み取った中身。"
 
-#: scripts/Phases/CounterPhase.cs:738
+#: scripts/Phases/CounterPhase.cs:740
 msgid "Ticked: what your Pocket Engine read."
-msgstr ""
+msgstr "チェック済み：懐中からくりが読み取った中身。"
 
-#: scripts/Phases/CounterPhase.cs:739
+#: scripts/Phases/CounterPhase.cs:741
 msgid "{0} gives it for a lucky coin."
 msgstr "{0}は幸運の硬貨ひとつで譲ってくれる。"
 
-#: scripts/Phases/CounterPhase.cs:741
+#: scripts/Phases/CounterPhase.cs:743
 msgid "Sealed: nothing to hear. Go by its weight."
 msgstr "封印：音は聞こえません。重さで判断しましょう。"
 
-#: scripts/Phases/CounterPhase.cs:742
+#: scripts/Phases/CounterPhase.cs:744
 msgid "Values: as good as a {0} chest promises."
 msgstr "価値：{0}の宝箱が約束する品質で計算。"
 
-#: scripts/Phases/CounterPhase.cs:742
+#: scripts/Phases/CounterPhase.cs:744
 msgid "gilded"
 msgstr "金箔"
 
-#: scripts/Phases/CounterPhase.cs:761 scripts/Ui/Rich.cs:137
+#: scripts/Phases/CounterPhase.cs:763 scripts/Ui/Rich.cs:137
 msgid "boom"
 msgstr "ボン"
 
-#: scripts/Phases/CounterPhase.cs:769
+#: scripts/Phases/CounterPhase.cs:771
 msgid "Starlight"
 msgstr "星明かり"
 
-#: scripts/Phases/CounterPhase.cs:770
+#: scripts/Phases/CounterPhase.cs:772
 msgid "Witchlight lit: enchanted things glow"
 msgstr "魔女灯点灯：魔力を帯びた物が光る"
 
-#: scripts/Phases/CounterPhase.cs:795
+#: scripts/Phases/CounterPhase.cs:797
 msgid "As good as promised, it's worth"
 msgstr "約束どおりの品質なら価値は"
 
-#: scripts/Phases/CounterPhase.cs:859
+#: scripts/Phases/CounterPhase.cs:861
 msgid "A commission wants this kind of thing (see the board on the left)."
 msgstr "依頼でこの種類の品が求められています（左の掲示板を参照）。"
 
-#: scripts/Phases/CounterPhase.cs:877
+#: scripts/Phases/CounterPhase.cs:879
 msgid "Mark one of them enchanted"
 msgstr "うち1つに魔力の印をつける"
 
-#: scripts/Phases/CounterPhase.cs:917
+#: scripts/Phases/CounterPhase.cs:919
 msgid "slip: {0}"
 msgstr "査定表：{0}"
 
-#: scripts/Phases/CounterPhase.cs:946
+#: scripts/Phases/CounterPhase.cs:948
 msgid "You paid"
 msgstr "支払額"
 
-#: scripts/Phases/CounterPhase.cs:947
+#: scripts/Phases/CounterPhase.cs:949
 msgid "{0} asks what your slip says"
 msgstr "{0}の言い値は査定表の額"
 
-#: scripts/Phases/CounterPhase.cs:948
-msgid "{0} would take {1}g (your abacus)"
-msgstr ""
-
-#: scripts/Phases/CounterPhase.cs:949
-msgid "{0} asks, and would take {1}g"
-msgstr ""
-
 #: scripts/Phases/CounterPhase.cs:950
+msgid "{0} would take {1}g (your abacus)"
+msgstr "{0}は{1}Gで手を打つ（そろばん）"
+
+#: scripts/Phases/CounterPhase.cs:951
+msgid "{0} asks, and would take {1}g"
+msgstr "{0}の言い値。{1}Gでも手を打つ"
+
+#: scripts/Phases/CounterPhase.cs:952
 msgid "{0} wants you to name a price"
 msgstr "{0}：あなたが値をつける"
 
-#: scripts/Phases/CounterPhase.cs:952
+#: scripts/Phases/CounterPhase.cs:954
 msgid "{0}'s final price"
 msgstr "{0}の最後の言い値"
 
-#: scripts/Phases/CounterPhase.cs:953
+#: scripts/Phases/CounterPhase.cs:955
 msgid "{0} asks (make an offer?)"
 msgstr "{0}の言い値（値切る？）"
 
-#: scripts/Phases/CounterPhase.cs:954
+#: scripts/Phases/CounterPhase.cs:956
 msgid "{0} asks"
 msgstr "{0}の言い値"
 
-#: scripts/Phases/CounterPhase.cs:962
+#: scripts/Phases/CounterPhase.cs:964
 msgid "Offer {0}g"
 msgstr "{0}Gの値をつける"
 
-#: scripts/Phases/CounterPhase.cs:966 scripts/Phases/PeddlerPhase.cs:532
+#: scripts/Phases/CounterPhase.cs:968 scripts/Phases/PeddlerPhase.cs:532
 msgid "Buy {0}g"
 msgstr "{0}Gで買う"
 
-#: scripts/Phases/CounterPhase.cs:997
+#: scripts/Phases/CounterPhase.cs:999
 msgid "No slip can price whoever's in there."
 msgstr "中にいる誰かに、査定表で値はつけられない。"
 
-#: scripts/Phases/CounterPhase.cs:998
+#: scripts/Phases/CounterPhase.cs:1000
 msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr "ぴたり的中なら25%引き。外れたら25%増し。"
 
-#: scripts/Phases/CounterPhase.cs:999
+#: scripts/Phases/CounterPhase.cs:1001
 msgid "One coin, and nobody's waiting."
 msgstr "硬貨一枚。待っている客はいない。"
 
-#: scripts/Phases/CounterPhase.cs:999
+#: scripts/Phases/CounterPhase.cs:1001
 msgid "One coin. And {0} still waiting, at x{1}."
 msgstr "硬貨一枚。ただし待ち客{0}人の値段が×{1}に。"
 
-#: scripts/Phases/CounterPhase.cs:1001
+#: scripts/Phases/CounterPhase.cs:1003
 msgid "Not a sound: empty, as far as you can tell."
 msgstr "物音ひとつしない：どうやら空っぽだ。"
 
-#: scripts/Phases/CounterPhase.cs:1002
+#: scripts/Phases/CounterPhase.cs:1004
 msgid "Tick what you think is inside."
 msgstr "入っていると思うものにチェックを入れてください。"
 
-#: scripts/Phases/CounterPhase.cs:1003
+#: scripts/Phases/CounterPhase.cs:1005
 msgid "Name a price: the bar shows your odds."
 msgstr "値をつけると、バーに見込みが出ます。"
 
-#: scripts/Phases/CounterPhase.cs:1004
+#: scripts/Phases/CounterPhase.cs:1006
 msgid "Worth more than {0}g? {1}"
 msgstr "{0}Gを上回る見込み：{1}"
 
-#: scripts/Phases/CounterPhase.cs:1010 scripts/Ui/SettingsView.cs:104
+#: scripts/Phases/CounterPhase.cs:1012 scripts/Ui/SettingsView.cs:104
 msgid "On"
 msgstr "オン"
 
-#: scripts/Phases/CounterPhase.cs:1015
+#: scripts/Phases/CounterPhase.cs:1017
 msgid "Last customer today."
 msgstr "今日の客はこれで最後。"
 
-#: scripts/Phases/CounterPhase.cs:1015
+#: scripts/Phases/CounterPhase.cs:1017
 msgid "{0} more waiting today."
 msgstr "今日はあと{0}人が待っている。"
 
-#: scripts/Phases/CounterPhase.cs:1026
+#: scripts/Phases/CounterPhase.cs:1028
 msgid "under 1%"
 msgstr "1%未満"
 
-#: scripts/Phases/CounterPhase.cs:1026
+#: scripts/Phases/CounterPhase.cs:1028
 msgid "over 99%"
 msgstr "99%超"
 
-#: scripts/Phases/CounterPhase.cs:1106
+#: scripts/Phases/CounterPhase.cs:1108
 msgid "...breathing..."
 msgstr "……息づかい……"
 
-#: scripts/Phases/CounterPhase.cs:1110
+#: scripts/Phases/CounterPhase.cs:1112
 msgid "Something in that chest is breathing, and it stops when you shake it."
 msgstr "あの宝箱の中で何かが息をしている。振ると、息が止まる。"
 
-#: scripts/Phases/CounterPhase.cs:1135
+#: scripts/Phases/CounterPhase.cs:1137
 msgid "...the wood rings..."
 msgstr "……木が響く……"
 
-#: scripts/Phases/CounterPhase.cs:1136
+#: scripts/Phases/CounterPhase.cs:1138
 msgid "The box rings like a drum when you shake it: nothing's loose inside."
 msgstr "振ると、箱が太鼓のように響く。中で転がる物は何もない。"
 
-#: scripts/Phases/CounterPhase.cs:1161
+#: scripts/Phases/CounterPhase.cs:1163
 msgid "...knock..."
 msgstr "……コン……"
 
-#: scripts/Phases/CounterPhase.cs:1165
+#: scripts/Phases/CounterPhase.cs:1167
 msgid ""
 "Something in that crate knocked, from the inside. It stops when you shake it."
 msgstr "あの木箱の中で、何かが内側からノックした。振ると止まる。"
 
-#: scripts/Phases/CounterPhase.cs:1167 scripts/Phases/TreasuryPhase.cs:306
+#: scripts/Phases/CounterPhase.cs:1169 scripts/Phases/TreasuryPhase.cs:306
 msgid "Knock back"
 msgstr "ノックを返す"
 
-#: scripts/Phases/CounterPhase.cs:1168
+#: scripts/Phases/CounterPhase.cs:1170
 msgid "Knock on the lid, and listen for an answer."
 msgstr "蓋をノックして、返事に耳を澄ませる。"
 
-#: scripts/Phases/CounterPhase.cs:1205
+#: scripts/Phases/CounterPhase.cs:1207
 msgid "...tap tap... tap..."
 msgstr "……トントン……トン……"
 
-#: scripts/Phases/CounterPhase.cs:1206
+#: scripts/Phases/CounterPhase.cs:1208
 msgid "It answered: two taps, then one. The way Bram taps the counter."
 msgstr "返事があった。トントン、トン。ブラムがカウンターを叩くやり方だ。"
 
-#: scripts/Phases/CounterPhase.cs:1214
+#: scripts/Phases/CounterPhase.cs:1216
 msgid "...knock knock..."
 msgstr "……コンコン……"
 
-#: scripts/Phases/CounterPhase.cs:1215
+#: scripts/Phases/CounterPhase.cs:1217
 msgid "It answered. Whoever's in there is alive."
 msgstr "返事があった。中にいる誰かは、生きている。"
 
-#: scripts/Phases/CounterPhase.cs:1259
+#: scripts/Phases/CounterPhase.cs:1261
 msgid "That song... you know it. {0}!"
 msgstr "この歌……知っている。{0}だ！"
 
-#: scripts/Phases/CounterPhase.cs:1259
+#: scripts/Phases/CounterPhase.cs:1261
 msgid "A sound like nothing in any chest. A Heartsong!"
 msgstr "どんな宝箱でも聞いたことのない音。心歌だ！"
 
-#: scripts/Phases/CounterPhase.cs:1280
+#: scripts/Phases/CounterPhase.cs:1282
 msgid "Dropped it: it lands {0}. Heavy ones hold more."
 msgstr "落としてみると、{0}。重いほど中身は多い。"
 
-#: scripts/Phases/CounterPhase.cs:1280
+#: scripts/Phases/CounterPhase.cs:1282
 msgid "with a heavy thump"
 msgstr "ずしんと重い音がした"
 
-#: scripts/Phases/CounterPhase.cs:1280
+#: scripts/Phases/CounterPhase.cs:1282
 msgid "light as a feather"
 msgstr "羽のように軽い手応えだった"
 
-#: scripts/Phases/CounterPhase.cs:1280
+#: scripts/Phases/CounterPhase.cs:1282
 msgid "with a middling thud"
 msgstr "そこそこの重さの音がした"
 
-#: scripts/Phases/CounterPhase.cs:1292
+#: scripts/Phases/CounterPhase.cs:1294
 msgid "BOOM..."
 msgstr "ボン……"
 
-#: scripts/Phases/CounterPhase.cs:1293
+#: scripts/Phases/CounterPhase.cs:1295
 msgid "Dropped it: a hollow BOOM. Something's under the floor!"
 msgstr "落としてみると、うつろな「ボン」。底の下に何かある！"
 
-#: scripts/Phases/CounterPhase.cs:1299
+#: scripts/Phases/CounterPhase.cs:1301
 msgid "THUD"
 msgstr "ドスッ"
 
-#: scripts/Phases/CounterPhase.cs:1300
+#: scripts/Phases/CounterPhase.cs:1302
 msgid "Dropped it: a solid thud. No false bottom."
 msgstr "落としてみると、ドスッと詰まった音。二重底はない。"
 
-#: scripts/Phases/CounterPhase.cs:1305
+#: scripts/Phases/CounterPhase.cs:1307
 msgid "CRASH!"
 msgstr "ガシャン！"
 
-#: scripts/Phases/CounterPhase.cs:1306
+#: scripts/Phases/CounterPhase.cs:1308
 msgid "Something made of glass broke: the {0}."
 msgstr "ガラスの何かが割れた。{0}だ。"
 
-#: scripts/Phases/CounterPhase.cs:1320
+#: scripts/Phases/CounterPhase.cs:1322
 msgid "CREAK"
 msgstr "ギシッ"
 
-#: scripts/Phases/CounterPhase.cs:1323
+#: scripts/Phases/CounterPhase.cs:1325
 msgid "It's coming apart in your hands: no more shaking. Go by what you heard."
 msgstr "手の中でばらばらになりかけている：もう振れない。聞こえた音で判断するしかない。"
 
-#: scripts/Phases/CounterPhase.cs:1334
+#: scripts/Phases/CounterPhase.cs:1336
 msgid "Price +{0}%"
 msgstr "値段+{0}%"
 
-#: scripts/Phases/CounterPhase.cs:1407
+#: scripts/Phases/CounterPhase.cs:1409
 msgid "Full price now"
 msgstr "定価に戻った"
 
-#: scripts/Phases/CounterPhase.cs:1512
+#: scripts/Phases/CounterPhase.cs:1514
 msgid "Your mark stays warm: this chest is theirs to sell."
 msgstr "鍵紋は温かいまま：この宝箱は、売り手が売ってよい物だ。"
 
-#: scripts/Phases/CounterPhase.cs:1515
+#: scripts/Phases/CounterPhase.cs:1517
 msgid ""
 "Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."
 msgstr "鍵紋が冷えた：この宝箱は、売り手が売ってよい物ではない。買っても、あなたには開けられない。"
 
-#: scripts/Phases/CounterPhase.cs:1520
+#: scripts/Phases/CounterPhase.cs:1522
 msgid "Send for the Wardens (+{0}g)"
 msgstr "衛士を呼ぶ（+{0}G）"
 
-#: scripts/Phases/CounterPhase.cs:1521
+#: scripts/Phases/CounterPhase.cs:1523
 msgid ""
 "The seller runs, the chest goes home to its owner, and the Wardens pay you a finder's share. The Lockless won't thank you."
 msgstr "売り手は逃げ出し、宝箱は持ち主のもとへ帰り、衛士から発見者の取り分が支払われます。無錠党には恨まれるでしょう。"
 
-#: scripts/Phases/CounterPhase.cs:1541
+#: scripts/Phases/CounterPhase.cs:1543
 msgid "THE WARDENS"
 msgstr "衛士"
 
-#: scripts/Phases/CounterPhase.cs:1541
+#: scripts/Phases/CounterPhase.cs:1543
 msgid ""
 "Hollis's men take the chest home to its owner, and pay you the finder's share."
 msgstr "ホリスの部下たちが宝箱を持ち主のもとへ届け、発見者の取り分を払ってくれた。"
 
-#: scripts/Phases/CounterPhase.cs:1568 scripts/Phases/CounterPhase.cs:1761
+#: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
 #: scripts/Phases/OpeningPhase.cs:1223
 msgid "Close up for the day"
 msgstr "今日は店じまい"
 
-#: scripts/Phases/CounterPhase.cs:1568 scripts/Phases/CounterPhase.cs:1761
+#: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
 #: scripts/Phases/OpeningPhase.cs:1223
 msgid "Next customer"
 msgstr "次の客へ"
 
-#: scripts/Phases/CounterPhase.cs:1586
+#: scripts/Phases/CounterPhase.cs:1588
 msgid "The Bookkeeping Engine can't read through chains."
 msgstr "帳簿からくりでも、鎖越しには読み取れない。"
 
-#: scripts/Phases/CounterPhase.cs:1586
+#: scripts/Phases/CounterPhase.cs:1588
 msgid "Your Pocket Engine can't read through chains."
-msgstr ""
+msgstr "懐中からくりでも、鎖越しには読み取れない。"
 
-#: scripts/Phases/CounterPhase.cs:1597
+#: scripts/Phases/CounterPhase.cs:1599
 msgid ""
 "The Bookkeeping Engine whirs and clicks: everything inside is on the slip."
 msgstr "帳簿からくりがウィーンと唸り、カチカチと鳴る：中身がすべて査定表に記された。"
 
-#: scripts/Phases/CounterPhase.cs:1598
+#: scripts/Phases/CounterPhase.cs:1600
 msgid "Your Pocket Engine ticks over: everything inside is on the slip."
-msgstr ""
+msgstr "懐中からくりがカチカチと回る：中身がすべて査定表に記された。"
 
-#: scripts/Phases/CounterPhase.cs:1605
+#: scripts/Phases/CounterPhase.cs:1607
 msgid "The Drowned Bell is silent: nothing inside."
 msgstr "沈んだ鐘は鳴らない：中には何もない。"
 
-#: scripts/Phases/CounterPhase.cs:1606
+#: scripts/Phases/CounterPhase.cs:1608
 msgid ""
 "The Drowned Bell tolls {0} time: {1} thing inside, false bottom and all."
 msgid_plural ""
 "The Drowned Bell tolls {0} times: {1} things inside, false bottom and all."
 msgstr[0] "沈んだ鐘が{0}回鳴った：二重底の分も含めて、中身は{1}点。"
 
-#: scripts/Phases/CounterPhase.cs:1630
+#: scripts/Phases/CounterPhase.cs:1632
 msgid "THE WARD WON'T LET GO"
 msgstr "結界が解けない"
 
-#: scripts/Phases/CounterPhase.cs:1631
+#: scripts/Phases/CounterPhase.cs:1633
 msgid ""
 "It wasn't {0}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you can return it to its owner, or sell it to Nim's friends."
 msgstr ""
 "{0}に売る権利のない宝箱だった。だから、あなたのものにもならない：開かないのだ。ブラムが奥の間へ運んでくれた。今夜、持ち主に返すか、ニムの仲間に売ることができる。"
 
-#: scripts/Phases/CounterPhase.cs:1657
+#: scripts/Phases/CounterPhase.cs:1659
 msgid "{0} won't be back this week. Word gets round."
 msgstr "{0}は今週はもう来ない。噂は広まるものだ。"
 
-#: scripts/Phases/CounterPhase.cs:1703
+#: scripts/Phases/CounterPhase.cs:1705
 msgid "The chest bursts open!"
 msgstr "宝箱がはじけて開いた！"
 
-#: scripts/Phases/CounterPhase.cs:1740
+#: scripts/Phases/CounterPhase.cs:1742
 msgid "A stolen chest: it would never have opened for you."
 msgstr "盗まれた宝箱だった。買っても、あなたには開けられなかった。"
 
-#: scripts/Phases/CounterPhase.cs:1745
+#: scripts/Phases/CounterPhase.cs:1747
 msgid "YOUR GUT SAYS"
 msgstr "あなたの勘では"
 
-#: scripts/Phases/CounterPhase.cs:1749
+#: scripts/Phases/CounterPhase.cs:1751
 msgid "missed out"
 msgstr "逃した"
 
-#: scripts/Phases/CounterPhase.cs:1749
+#: scripts/Phases/CounterPhase.cs:1751
 msgid "right call"
 msgstr "正解"
 
-#: scripts/Phases/CounterPhase.cs:1750
+#: scripts/Phases/CounterPhase.cs:1752
 msgid "You'll never know for sure."
 msgstr "本当のところは、もうわからない。"
 
@@ -15527,25 +15536,25 @@ msgstr "（選ぼう！）"
 
 #: scripts/Phases/DrawerPhase.cs:39
 msgid "BRAM'S DRAWER"
-msgstr ""
+msgstr "ブラムの引き出し"
 
 #: scripts/Phases/DrawerPhase.cs:41
 msgid ""
 "\"Three things I've kept from the old days, {0}. Take one for the season: each suits a different way of trading.\""
-msgstr ""
+msgstr "「昔から取っておいた物が3つある、{0}。この季節用に1つ持っていけ。どれも、商いのやり方がそれぞれ違うやつ向けだ」"
 
 #: scripts/Phases/DrawerPhase.cs:42
 msgid ""
 "Three things Bram kept from the old days. Take one for the season: each suits a different way of trading."
-msgstr ""
+msgstr "ブラムが昔から取っておいた物が3つ。この季節用に1つ選びましょう。それぞれ、違う商いのやり方に向いています。"
 
 #: scripts/Phases/DrawerPhase.cs:59
 msgid "Take nothing"
-msgstr ""
+msgstr "何も取らない"
 
-#: scripts/Phases/DrawerPhase.cs:93 scripts/Phases/DuesPhase.cs:116
-msgid "Take it"
-msgstr "受け入れる"
+#: scripts/Phases/DrawerPhase.cs:93
+msgid "Take this one"
+msgstr "これをもらう"
 
 #: scripts/Phases/DuesPhase.cs:40
 msgid "THE GUILD'S DUE: WEEK {0}"
@@ -15571,6 +15580,10 @@ msgstr "今夜の上納金が、{0}Gから{1}Gへ半分になる。そのかわ�
 #: scripts/Phases/DuesPhase.cs:114
 msgid "You have {0}g."
 msgstr "所持金{0}G。"
+
+#: scripts/Phases/DuesPhase.cs:116
+msgid "Take it"
+msgstr "受け入れる"
 
 #: scripts/Phases/DuesPhase.cs:117
 msgid "Ask my questions"
@@ -15849,7 +15862,7 @@ msgstr "ギルドの査定役：-10%"
 
 #: scripts/Phases/OpeningPhase.cs:280
 msgid "PAID FOR!"
-msgstr ""
+msgstr "元が取れた！"
 
 #: scripts/Phases/OpeningPhase.cs:415
 msgid "...EMPTY!"
@@ -16007,7 +16020,7 @@ msgstr "お買い得"
 
 #: scripts/Phases/OpeningPhase.cs:1149
 msgid "x{0}"
-msgstr ""
+msgstr "{0}倍"
 
 #: scripts/Phases/OpeningPhase.cs:1195
 msgid "PERFECT READ"
@@ -16793,12 +16806,12 @@ msgstr "クレジット"
 
 #: scripts/Phases/TitlePhase.cs:148
 msgid "Save {0}"
-msgstr ""
+msgstr "セーブ{0}"
 
 #: scripts/Phases/TitlePhase.cs:151
 msgid ""
 "Three saves, each with its own seasons and story: switch to another, or start one completely fresh."
-msgstr ""
+msgstr "セーブデータは3つ。それぞれに季節と物語があります。別のデータに切り替えたり、まっさらな状態から始めたりできます。"
 
 #: scripts/Phases/TitlePhase.cs:164 scripts/Ui/CreditsView.cs:53
 msgid "Early Access {0}"
@@ -17775,12 +17788,12 @@ msgstr "記録をすべて解放"
 
 #: scripts/Ui/PauseMenu.cs:74
 msgid "Fulfil the quests"
-msgstr ""
+msgstr "クエストをすべて達成"
 
 #: scripts/Ui/PauseMenu.cs:75
 msgid ""
 "The treasury key's four pieces, this week's commissions, Bram's account paid off, and the true ending's checks: the final opening comes tonight."
-msgstr ""
+msgstr "宝物庫の鍵の欠片4つ、今週の依頼、ブラムの勘定の完済、真の結末の条件をすべて満たします：今夜、最後の開封になります。"
 
 #: scripts/Ui/PauseMenu.cs:77
 msgid "For testing: nothing here is fair."
@@ -17999,36 +18012,36 @@ msgstr "ブラムのヒント"
 
 #: scripts/Ui/SettingsView.cs:300
 msgid "Text speed"
-msgstr ""
+msgstr "テキスト速度"
 
 #: scripts/Ui/SettingsView.cs:302
 msgid "Slow"
-msgstr ""
+msgstr "遅い"
 
 #: scripts/Ui/SettingsView.cs:303
 msgid "Normal"
-msgstr ""
+msgstr "普通"
 
 #: scripts/Ui/SettingsView.cs:304
 msgid "Fast"
-msgstr ""
+msgstr "速い"
 
 #: scripts/Ui/SettingsView.cs:305
 msgid "A sentence at once"
-msgstr ""
+msgstr "一文ずつ表示"
 
 #: scripts/Ui/SettingsView.cs:312
 msgid ""
 "How fast what's said is typed out. A click always shows the rest at once."
-msgstr ""
+msgstr "セリフが表示される速さです。クリックすれば、いつでも残りが一度に表示されます。"
 
 #: scripts/Ui/SettingsView.cs:313
 msgid "Text sounds"
-msgstr ""
+msgstr "テキスト音"
 
 #: scripts/Ui/SettingsView.cs:314
 msgid "A soft blip as speech is typed, in the speaker's own voice."
-msgstr ""
+msgstr "セリフの表示に合わせて、話し手の声色で小さく鳴る音です。"
 
 #: scripts/Ui/SettingsView.cs:315
 msgid "Pause in the background"
@@ -18049,91 +18062,96 @@ msgstr "フォルダを開く"
 
 #: scripts/Ui/SlotsView.cs:33
 msgid "SAVES"
-msgstr ""
+msgstr "セーブデータ"
 
 #: scripts/Ui/SlotsView.cs:35
 msgid ""
 "Each save keeps its own seasons, what's been learned and found, and its own story."
-msgstr ""
+msgstr "セーブデータごとに、季節、学んだことや見つけた物、物語が別々に記録されます。"
 
 #: scripts/Ui/SlotsView.cs:56
 msgid "SAVE {0}"
-msgstr ""
+msgstr "セーブ{0}"
 
 #: scripts/Ui/SlotsView.cs:57
 msgid "playing"
-msgstr ""
+msgstr "プレイ中"
 
 #: scripts/Ui/SlotsView.cs:60
 msgid "Empty. A first season, with everything to learn."
-msgstr ""
+msgstr "空き。すべてを一から学ぶ、最初の季節です。"
 
 #: scripts/Ui/SlotsView.cs:63
 msgid "{0} season played"
 msgid_plural "{0} seasons played"
-msgstr[0] ""
+msgstr[0] "プレイした季節：{0}"
 
 #: scripts/Ui/SlotsView.cs:64
 msgid "The story's told: the next day came."
-msgstr ""
+msgstr "物語は語り終えた：明くる日が来た。"
 
 #: scripts/Ui/SlotsView.cs:65
 msgid "You remember the treasury."
-msgstr ""
+msgstr "宝物庫のことを覚えている。"
 
 #: scripts/Ui/SlotsView.cs:66
 msgid "Bram's debt has been cleared."
-msgstr ""
+msgstr "ブラムの借金は完済したことがある。"
 
 #: scripts/Ui/SlotsView.cs:67
 msgid "Bram's debt hasn't been cleared yet."
-msgstr ""
+msgstr "ブラムの借金はまだ完済していない。"
 
 #: scripts/Ui/SlotsView.cs:68
 msgid "As far as {0}."
-msgstr ""
+msgstr "最も奥まで進んだ店：{0}"
 
 #: scripts/Ui/SlotsView.cs:69
 msgid "In progress: {0}"
-msgstr ""
+msgstr "進行中：{0}"
 
 #: scripts/Ui/SlotsView.cs:69
 msgid "No season in progress."
-msgstr ""
+msgstr "進行中の季節はありません。"
 
 #: scripts/Ui/SlotsView.cs:79
 msgid "Start a new save"
-msgstr ""
+msgstr "新しいセーブで始める"
 
 #: scripts/Ui/SlotsView.cs:79
 msgid "Play this save"
-msgstr ""
+msgstr "このセーブで遊ぶ"
 
 #: scripts/Ui/SlotsView.cs:83
 msgid "Close this, and choose New game."
-msgstr ""
+msgstr "これを閉じて、「はじめから」を選んでください。"
 
 #: scripts/Ui/SlotsView.cs:88
 msgid "Erase, and start fresh"
-msgstr ""
+msgstr "消去して最初から"
 
 #: scripts/Ui/SlotsView.cs:89
 msgid ""
 "Everything on this save is set aside (not deleted: its files stay in the save folder under another name), and it starts from a first season."
 msgstr ""
+"このセーブデータの中身はすべて退避されます（削除はされません。ファイルは別の名前でセーブフォルダに残ります）。その後、最初の季節から始まります。"
 
 #: scripts/Ui/SlotsView.cs:109
 msgid "ERASE SAVE {0}?"
-msgstr ""
+msgstr "セーブ{0}を消去しますか？"
 
 #: scripts/Ui/SlotsView.cs:110
 msgid ""
 "Its seasons, everything learned and found on it, and its story start over from nothing. The other saves aren't touched."
-msgstr ""
+msgstr "このデータの季節、学んだことや見つけた物、物語が、すべて最初からになります。ほかのセーブデータには影響しません。"
 
 #: scripts/Ui/SlotsView.cs:111
 msgid "Erase it"
-msgstr ""
+msgstr "消去する"
+
+#: scripts/Ui/SlotsView.cs:111
+msgid "Keep this save"
+msgstr "このセーブを残す"
 
 #: scripts/Ui/SongReveal.cs:40
 msgid "...listen."

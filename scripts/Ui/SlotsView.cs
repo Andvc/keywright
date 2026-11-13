@@ -108,7 +108,7 @@ public partial class SlotsView : Node2D
         if (_confirm != null) return;
         _confirm = UiKit.MakeConfirm(Loc.T($"ERASE SAVE {slot}?"),
             Loc.T("Its seasons, everything learned and found on it, and its story start over from nothing. The other saves aren't touched."),
-            Palette.Bad, Loc.T("Erase it"), () => Erase(slot), Loc.T("Keep it"), CloseConfirm);
+            Palette.Bad, Loc.T("Erase it"), () => Erase(slot), Loc.T("Keep this save"), CloseConfirm);
         AddChild(_confirm);
     }
 

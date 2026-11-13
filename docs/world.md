@@ -475,15 +475,33 @@ by right (it was lost, buried or drowned); the rest were sold, pledged or given.
 - *A thing only sounds once the shake stirs it; clanks drown out delicate things.* The ward lets sound through and
   nothing else; things inside move and sound the way they would in any box.
 - *Sellers price only what they think is there.* Nobody but a Keywright has ever seen inside one.
-- *The ear* (0.36). Listening the way a keywright listens is work, like tasting is for a vintner: an ear is good for so
-  many careful listens a day, and then one rattle sounds like another until it's slept on. Shaking a chest again the
-  way you already have costs nothing (you know what you're listening for); a strength you haven't tried on it, or a
-  drop, is a new listen. The Keyhold's clerks listened in felt-hung rooms, a dozen chests a day and no more, with tea
-  between them: hence the **Tea Kettle** (a pot on the hob and a moment's quiet: two more listens) and the
-  **Listening Screen** (a folding screen hung with felt, to shut the street out: three more). An **Echo Stone** is a
-  river pebble from under the Keyhold's weir that rings back what was last said to it true: get a chest exactly right
-  and the ear's fresh for another. **Lamb's-Wool Plugs** are what the blind buyers of the hill fairs wear: buy a chest
-  without touching it, and the ear has had a rest.
+- *Listening is free* (0.37). A chest can be shaken as often as its seller will stand, at any strength: what's inside
+  moves the way it would in any box, and no ear wears out over it. (0.36 held that an ear was good for eight careful
+  listens a day, with a Tea Kettle, a Listening Screen, an Echo Stone and Lamb's-Wool Plugs to stretch it: all gone.
+  Counting listens made the routine dearer without making it any less a routine.)
+- *Bram's cradle* (0.37). Thornwick's coopers rock a cask on a cradle to hear what's settled in it, and Bram's father
+  built one for chests: set a chest on it, press, and it rocks it gently, firmly and hard, as its seller allows. Bram
+  keeps it under the counter for a keywright's first week ("you learn the strengths with your hands, or you never
+  learn them") and brings it out at Thornwick; anyone who's traded that far before finds it on the counter from the
+  first morning. It won't rock where rocking costs (a goblin's fee, a rotten chest, a seller in a hurry), and it has
+  no way to drop a chest.
+- *What a trade's tools do for it* (0.37). Every trade has the tool that does its drudgery: a clerk has a quill that
+  writes what it hears (a **Scrivener's Quill**, from the Keyhold's listening rooms, ticks each thing on the slip as
+  it sounds), a toll-man a gauge that measures a chest outside and in (a **Toll-man's Gauge** shows a floor that sits
+  too high: a false bottom, with no drop), a factor an abacus that reckons what the other side will settle for (a
+  **Factor's Abacus**: the least a haggler would take), a Warden the primer every recruit learns the old signs from
+  (the **Wardens' Primer**: every dream, tag, riddle and card they ever wrote down, with its answer, so a warded
+  thing a sign points at is named), and the Arcanum's keepers the moths they breed to find a lost enchantment in a
+  dark store (a **Lantern Moth** settles on a chest with anything enchanted in it, lit or not). The rarest is the
+  **Pocket Engine**: the Crownhold tinkers' first model of the Bookkeeping Engine, small enough for a coat, which the
+  Guild believes it melted down. It reads a chest the way the big one does, and Nim only hears of it once Bram's kin
+  have read a hundred chests exactly.
+- *A later season's chests* (0.37). Sellers talk, and carters carry word faster than chests: a keywright who has
+  traded at Thornwick is brought Thornwick's sort of chest wherever the stall stands (locked ones, ones with a floor
+  that sits too high), and one who's traded in the capital, the capital's (two purses to a chest, an archmage's
+  leavings). What a market sells and who trades there doesn't follow you: potions are still Thornwick's and gems the
+  capital's. And **Bram's drawer**: on the first morning of any season after the first he turns out the drawer under
+  the counter, three oddments from his own trading days, and one is yours.
 - *Stolen chests.* The ward knows whose a chest is. Lay a hand on it (any shake, drop or lodestone does) and the
   Key-mark answers: warm if the chest is the seller's to sell, cold if it isn't. A chest bought from someone it wasn't
   theirs to sell is yours in nobody's eyes but your own, and it won't open: it waits in the back room until its owner
@@ -624,8 +642,6 @@ What goes against you:
 - **A wet year**: a wet winter has rusted every old lock stiff (a pin more to pick).
 - **Wary regulars**: folk aren't sure the stall will last, and won't set you errands.
 - **Nim's lean month**: pickings have been slim among the Locking's oddments.
-- **A head cold** (0.36): the spring cold has gone round every head in Aldmark, and yours hasn't cleared (a listen
-  fewer a day).
 
 What goes your way (mostly the things that make the trade a chore: a slow start, a short night, a sweeping clock, a
 lock that slips, a curio you can't find):
@@ -644,8 +660,7 @@ lock that slips, a curio you can't find):
 - **A lucky charm**: Bram ties his mother's old lucky charm to your apron.
 - **Fair days**: the old Duke's in good health, and the Guild's assessors have their hands full in the capital.
 - **Room for more**: Bram clears out a drawer for your curios.
-- **A rested ear** (0.36): Bram made you sleep the winter through, for once, and you've never heard so well (three
-  listens more a day).
 
 A boon never comes with the bane it would contradict (savings and a lean start, Thornwick's welcome and the Guild's
-builders, a slow season and a hurried one, Bram prepared and Bram stretched thin, a rested ear and a head cold).
+builders, a slow season and a hurried one, Bram prepared and Bram stretched thin). (0.36's head cold and rested ear
+went with the counted listens in 0.37: twelve banes and twelve boons.)

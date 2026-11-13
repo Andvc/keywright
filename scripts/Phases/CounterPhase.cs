@@ -345,6 +345,8 @@ public partial class CounterPhase : Phase
         // A day that's different (an event) changes the whole day: said first, before anything about this customer (0.34:
         // the playtest met three event days before the tip got its turn).
         if (firstOfDay && State.TodayEvent != null) Teach("event");
+        // A season after the first (0.37): what earlier seasons met is in this one's chests from its first morning.
+        if (State.Veteran && State.Ways > State.Tier) Teach("ways");
         // Everyone else gets a word about their own way with a chest, the first morning.
         if (!State.Is(Characters.Kit)) Teach($"kin_{State.Character}");
         // Mother Sorrel's first visit: clicking someone opens their page in the notebook (her lesson teaches it to Kit).
