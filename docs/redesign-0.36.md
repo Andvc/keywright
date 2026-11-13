@@ -37,8 +37,8 @@ day), curios as the build, the art.
 Twenty days. The stall trades at Brindle in week 1, Thornwick Market in week 2, Crownhold in week 3 and the Royal
 Emporium in week 4. The move inward isn't bought any more: **paying the week's due moves the shop** (the Guild's
 carters come that night; the Guild wants its keywright at the Gate by the season's end, which is the story's truth
-too). Four dues, the last the wall. A season is about 80 minutes, everyone who keeps paying sees every market, and a
-season that's going to fail fails at a due, early, not after two hours at Thornwick.
+too). Four dues, the last the wall. A season is about an hour and a half, everyone who keeps paying sees every
+market, and a season that fails, fails at the last due with all four markets seen, not after two hours at Thornwick.
 
 - Level 0 is the story's difficulty: most players should clear by their second or third season, which is when the
   treasury first swallows them and the campaign starts. The eight challenge levels are where it gets hard.
