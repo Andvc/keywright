@@ -111,6 +111,34 @@ public static class Storage
     public static bool Exists(string path) => File.Exists(Full(path)) || File.Exists(Full(path) + ".bak");
 
     /// <summary>
+    /// Takes a file out of use at the player's asking (a save erased, 0.37) without destroying it: the file and its
+    /// backup are moved beside themselves as "name.erased-yyyyMMdd-HHmmss.ext", where a misclick can still be undone by
+    /// hand. True if there was anything to move.
+    /// </summary>
+    public static bool Erase(string path)
+    {
+        bool any = false;
+        string stamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
+        foreach (string full in new[] { Full(path), Full(path) + ".bak" })
+        {
+            try
+            {
+                if (!File.Exists(full)) continue;
+                bool backup = full.EndsWith(".bak");
+                string stem = backup ? full[..^4] : full;
+                string aside = Path.Combine(Path.GetDirectoryName(stem)!, $"{Path.GetFileNameWithoutExtension(stem)}.erased-{stamp}{(backup ? "-bak" : "")}{Path.GetExtension(stem)}");
+                File.Move(full, aside, overwrite: true);
+                any = true;
+            }
+            catch (Exception e)
+            {
+                GD.PushError($"Couldn't set {full} aside: {e.Message}");
+            }
+        }
+        return any;
+    }
+
+    /// <summary>
     /// Moves a file this version can't read out of the way, as "name.unreadable-yyyyMMdd-HHmmss.ext" beside it, so it's
     /// never written over and could be recovered by hand (or by the version that wrote it).
     /// </summary>

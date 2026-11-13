@@ -145,6 +145,26 @@ public static class SaveTest
             Check(loads && migrated!.Version == SaveData.CurrentVersion, $"a version {version} save is brought up to version {SaveData.CurrentVersion} and loads");
         }
 
+        // 0.37's saves: three of them, the first where the game has always kept its files, the others a folder each;
+        // one erased is set aside under another name, and nothing of another's is touched.
+        Check(Main.SlotPath(1, "profile.json") == "user://profile.json" && Main.SlotPath(1, "save.json") == "user://save.json",
+            "the first save is the files the game has always kept (nothing has to move)");
+        Check(Main.SlotPath(2, "profile.json") == "user://slot2/profile.json" && Main.SlotPath(3, "save.json") == "user://slot3/save.json",
+            "the second and third saves have a folder each");
+        {
+            string one = $"{Dir}/slots/profile.json", two = $"{Dir}/slots/slot2/profile.json";
+            Storage.Write(one, "one");
+            Storage.Write(one, "one again");
+            Storage.Write(two, "two");
+            bool erased = Storage.Erase(one);
+            string folder = ProjectSettings.GlobalizePath($"{Dir}/slots");
+            var left = System.IO.Directory.GetFiles(folder).Select(System.IO.Path.GetFileName).ToList();
+            Check(erased && !Storage.Exists(one) && left.Count(f => f.StartsWith("profile.erased-")) == 2,
+                "an erased save's file and its backup are set aside as *.erased-*, not destroyed");
+            Check(Storage.Read(two, t => t) == "two", "and another save's files aren't touched");
+            Check(!Storage.Erase(one), "erasing an empty save does nothing");
+        }
+
         // 0.37 took the counted listens out: a 0.36 save's kettle, screen, echo stone and plugs are refunded and gone.
         {
             var old = JsonNode.Parse(json)!.AsObject();

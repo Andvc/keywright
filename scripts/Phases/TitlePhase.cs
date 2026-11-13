@@ -144,6 +144,16 @@ public partial class TitlePhase : Phase
                 onLeave: () => Sfx.Play("whoosh", rush, -16),
                 onLand: () => Sfx.Play("blip", pitch, -9));
         }
+        // The saves (0.37): which one's being played, in the other corner; a click for all three.
+        string playing = Loc.T($"Save {Settings.Slot}");
+        float savesW = Mathf.Max(140, UiKit.TextWidth(playing) + 28);
+        _savesButton = Add(UiKit.MakeButton(playing, Palette.Text, 16, () => OpenSaves()).Place(24, 636, savesW, 36));
+        _savesButton.TooltipText = Loc.T("Three saves, each with its own seasons and story: switch to another, or start one completely fresh.");
+        var nearCorner = _savesButton.Position + _savesButton.Size / 2;
+        Launch(_savesButton, nearCorner, _savesButton.Size, _itemsAt + (menu.Count + 1) * stagger, flight,
+            up: new Vector2(380, 20), down: new Vector2(nearCorner.X, 540), spin: -0.4f,
+            onLeave: () => Sfx.Play("whoosh", 2.0f, -16),
+            onLand: () => Sfx.Play("blip", 1.7f, -10));
         var corner = credits.Position + credits.Size / 2;
         Launch(credits, corner, credits.Size, _itemsAt + menu.Count * stagger, flight,
             up: new Vector2(900, 20), down: new Vector2(corner.X, 560), spin: 0.4f,
@@ -449,7 +459,7 @@ public partial class TitlePhase : Phase
         }
         // Something opened over the title while the rest was still coming out (a button that had landed): whatever's
         // pressed finishes the burst and still goes to what's open.
-        bool over = _collection != null || _settings != null || _credits != null || _confirm != null;
+        bool over = _collection != null || _settings != null || _credits != null || _confirm != null || _saves != null;
         switch (e)
         {
             case InputEventMouseButton { Pressed: true } click when click.ButtonIndex is MouseButton.Left or MouseButton.Right or MouseButton.Middle:
@@ -525,6 +535,21 @@ public partial class TitlePhase : Phase
             _confirm.QueueFree();
             _confirm = null;
         }).Place(660, 392, 200, 48));
+    }
+
+    Button _savesButton;
+    SlotsView _saves;
+
+    /// <summary>The saves panel is up (the bot's shell demo looks).</summary>
+    public bool SavesOpen => _saves != null;
+
+    /// <summary>The three saves: what's on each, and switching or erasing one.</summary>
+    public SlotsView OpenSaves()
+    {
+        if (_saves != null) return _saves;
+        _saves = Add(new SlotsView());
+        _saves.Closed += () => _saves = null;
+        return _saves;
     }
 
     /// <summary>Everything Bram's kin have found, the curios they've seen and the Heartsongs they've heard, in every run.</summary>

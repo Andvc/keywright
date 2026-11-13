@@ -74,11 +74,19 @@ public static class Settings
     /// <summary>How fast a controller's stick moves the cursor: 0.5 to 2.</summary>
     public static float CursorSpeed { get; set; } = 1f;
 
-    /// <summary>GM mode, for testing: the pause menu adds 99,999 gold, skips the day, or fills the journal (--gm turns it on too).</summary>
+    /// <summary>
+    /// GM mode, for testing: the pause menu adds 99,999 gold, skips the day, fills the journal, or fulfils the season's quests.
+    /// On for the session once F1 is pressed in a run (0.37: it was a row in Settings, and a line in the settings file), or with --gm.
+    /// </summary>
     public static bool Gm { get; set; }
 
-    /// <summary>GM mode can be seen in Settings: in a debug build, or once --gm has turned it on.</summary>
-    public static bool GmOffered => OS.IsDebugBuild() || Gm;
+    /// <summary>
+    /// Which save is being played (0.37): 1 to <see cref="Slots"/>. Each has a profile and a season of its own
+    /// (<see cref="Main.SlotPath"/>); the first is the files the game has always kept.
+    /// </summary>
+    public static int Slot { get; set; } = 1;
+    public const int Slots = 3;
+
 
     /// <summary>The frame caps on offer.</summary>
     public static readonly int[] FpsCaps = { 0, 30, 60, 120, 144, 240 };
@@ -124,7 +132,8 @@ public static class Settings
             TextSounds = Get(file, "game", "text_sounds", TextSounds);
             PauseInBackground = Get(file, "game", "pause_in_background", PauseInBackground);
             CursorSpeed = Math.Clamp(Get(file, "controls", "cursor_speed", CursorSpeed), 0.5f, 2f);
-            Gm = Gm || Get(file, "game", "gm", Gm);
+            // (GM mode is no setting any more: F1 turns it on for the session, 0.37. A settings file that had it on is ignored.)
+            Slot = Math.Clamp(Get(file, "game", "slot", Slot), 1, Slots);
             foreach (var kind in Enum.GetValues<Core.Category>())
                 _soundSets[(int)kind] = Math.Max(0, Get(file, "sounds", kind.ToString().ToLowerInvariant(), 0));
         }
@@ -153,7 +162,7 @@ public static class Settings
         file.SetValue("game", "text_speed", (int)TextSpeed);
         file.SetValue("game", "text_sounds", TextSounds);
         file.SetValue("game", "pause_in_background", PauseInBackground);
-        file.SetValue("game", "gm", Gm);
+        file.SetValue("game", "slot", Slot);
         file.SetValue("controls", "cursor_speed", CursorSpeed);
         foreach (var kind in Enum.GetValues<Core.Category>())
             file.SetValue("sounds", kind.ToString().ToLowerInvariant(), _soundSets[(int)kind]);

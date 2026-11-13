@@ -49,7 +49,7 @@ public static class Localization
     /// for testing).</summary>
     public static IEnumerable<(string Code, string Name)> Languages =>
         new[] { ("", "System") }.Concat(Available.Select(code => (code, Name(code))))
-            .Concat(Settings.GmOffered ? new[] { (PseudoCode, Name(PseudoCode)) } : Array.Empty<(string, string)>());
+            .Concat(OS.IsDebugBuild() || Settings.Gm ? new[] { (PseudoCode, Name(PseudoCode)) } : Array.Empty<(string, string)>());
 
     /// <summary>A language's name in itself ("Deutsch"), or its code if it's one we've no name for.</summary>
     public static string Name(string code) => code is { Length: > 0 } ? Endonyms.GetValueOrDefault(code, code) : "System";

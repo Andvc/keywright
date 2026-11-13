@@ -40,7 +40,17 @@ public partial class Main : Node2D
 
     /// <summary>The game's version: project.godot's application/config/version, which the exports are stamped with.</summary>
     public static string Version => ProjectSettings.GetSetting("application/config/version", "0.27").AsString();
-    const string SavePath = "user://save.json", ProfilePath = "user://profile.json";
+
+    /// <summary>
+    /// Where a save's files are (0.37: three saves, each with a profile and a season of its own). The first is where the
+    /// game has always kept them (user://profile.json, user://save.json), so nothing has to move; the others have a
+    /// folder each.
+    /// </summary>
+    public static string SlotPath(int slot, string file) => slot <= 1 ? $"user://{file}" : $"user://slot{slot}/{file}";
+
+    const string SaveFile = "save.json", ProfileFile = "profile.json"; // loc: keys
+    static string SavePath => SlotPath(Settings.Slot, SaveFile);
+    static string ProfilePath => SlotPath(Settings.Slot, ProfileFile);
 
     public GameState State { get; private set; }
 
@@ -418,6 +428,13 @@ public partial class Main : Node2D
         }
         credits.Close();
         await Wait(0.5);
+        // The saves (0.37): three of them, the one being played marked.
+        var saves = title.OpenSaves();
+        await Wait(0.8);
+        Moment("08_saves");
+        await Wait(0.5);
+        saves.Close();
+        await Wait(0.4);
         OpenSetup();
         await Wait(1.2);
         var setup = (SetupPhase)_phase;
@@ -475,6 +492,8 @@ public partial class Main : Node2D
             settings.QueueFree();
             await Wait(0.3);
             GD.Print($"GM: {GmGold()} {GmUnlockJournal()} Skip: {CanSkipDay ?? "allowed"}");
+            // The season's quests at a stroke (0.37): what the panel says, and what the state says of the true ending's checks.
+            GD.Print($"GM: {GmFulfil()} [key whole {State.KeyWhole}, plan whole {State.PlanWhole}, debt cleared {State.DebtCleared}, treasury due {State.TreasuryDue}]");
             await Wait(0.5);
             Moment("14_gm");
             var collection = pause.OpenCollection(CollectionView.CuriosPage);
@@ -543,6 +562,46 @@ public partial class Main : Node2D
 
     /// <summary>The profile (or its backup); a new one if there's none this version can read (one it can't is set aside).</summary>
     static Profile ReadProfile() => Storage.Read(ProfilePath, Profile.FromJson) ?? new Profile();
+
+    // ---- Saves (0.37) ----
+
+    /// <summary>What a save holds, for the title's Saves panel: its profile (null: nothing's been played on it) and the season in progress.</summary>
+    public static (Profile Profile, SaveData Save) PeekSlot(int slot)
+    {
+        var profile = Storage.Read(SlotPath(slot, ProfileFile), Profile.FromJson);
+        var save = Storage.Read(SlotPath(slot, SaveFile), SaveData.FromJson);
+        return (profile is { Runs: > 0 } || save != null ? profile ?? new Profile() : null, save);
+    }
+
+    /// <summary>Plays another save from here on: its profile, and its season on the title's Continue.</summary>
+    public void UseSlot(int slot)
+    {
+        slot = Math.Clamp(slot, 1, Settings.Slots);
+        if (slot != Settings.Slot)
+        {
+            Settings.Slot = slot;
+            Settings.Save();
+            Profile = ReadProfile();
+            Platform.Unlock(Profile.Achievements);
+        }
+        State = null;
+        _saving = false;
+        ToTitle();
+    }
+
+    /// <summary>
+    /// Erases a save, at the player's asking: its profile and its season are set aside (<see cref="Storage.Erase"/>, never
+    /// destroyed), and the save is empty: a first season, with everything to learn.
+    /// </summary>
+    public void EraseSlot(int slot)
+    {
+        Storage.Erase(SlotPath(slot, ProfileFile));
+        Storage.Erase(SlotPath(slot, SaveFile));
+        if (slot != Settings.Slot) return;
+        Profile = new Profile();
+        State = null;
+        _saving = false;
+    }
 
     /// <summary>Notes the run's progress in the profile (a real game only) and writes it.</summary>
     void WriteProfile(System.Action<Profile> change = null)
@@ -793,6 +852,19 @@ public partial class Main : Node2D
         return Loc.T("The notebook and the collection are full: every regular, every thing, every curio, and all nine Heartsongs.");
     }
 
+    /// <summary>
+    /// GM (0.37): everything the story asks of a season, done at a stroke (<see cref="GameState.GmFulfil"/>): commissions,
+    /// the key's pieces, the debt, and the true ending's checks. Returns what the pause menu says.
+    /// </summary>
+    public string GmFulfil()
+    {
+        string done = State.GmFulfil();
+        Hud.SetGold(State.Gold, animate: false);
+        Hud.SetDue(State);
+        WriteProfile();
+        return done;
+    }
+
     /// <summary>Why the day can't be skipped now, or null: only from Nim's counter, the shop's counter or the day's end.</summary>
     public string CanSkipDay => _phase is CounterPhase or PeddlerPhase or DayEndPhase or TalkPhase { Answered: false, Talk.Night: false } ? null
         : Loc.T("Not now: finish what's in hand first.");
@@ -837,6 +909,13 @@ public partial class Main : Node2D
         if (e.IsActionPressed(Controls.Pause))
         {
             GetViewport().SetInputAsHandled();
+            OpenPause();
+        }
+        // F1: GM mode, for testing (0.37: it was a row in the settings). The pause menu comes up with its panel.
+        else if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.F1 } && State != null && _phase is not TitlePhase)
+        {
+            GetViewport().SetInputAsHandled();
+            Settings.Gm = true;
             OpenPause();
         }
     }

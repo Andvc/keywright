@@ -7,7 +7,8 @@ namespace Keywright.Ui;
 /// <summary>
 /// Esc (or the Menu button) during a day: the game stops while it's up. Resume, the collection (what Bram's kin have
 /// gathered, this run and every one before), the settings, back to the title screen, or quit. The shop is saved at the start of each day, so leaving mid-day starts that day over. In GM mode
-/// (Settings), a panel beside it adds gold, skips the day, or fills the journal.
+/// (F1, since 0.37; it was a setting), a panel beside it adds gold, skips the day, fills the journal, or fulfils
+/// everything the story asks of the season.
 /// </summary>
 public partial class PauseMenu : CanvasLayer
 {
@@ -35,9 +36,12 @@ public partial class PauseMenu : CanvasLayer
         root.AddChild(UiKit.MakeLabel(Loc.T("The shop is saved at the start of each day: leave now and today starts over."), 16, Palette.Muted,
             HorizontalAlignment.Center).Wrapped().Place(X + 24, y + 296, W - 48, 44));
         if (Main.Instance.State is { Challenge: > 0 } state) BuildTerms(root, state);
+        _root = root;
         if (Settings.Gm && Main.Instance.State != null) BuildGm(root);
         Main.Instance.Sfx.PlayGroup("book", 1.2f, -8);
     }
+
+    Control _root;
 
     /// <summary>A challenge run's level, what it does to the dues, and its boons and banes (each explained on hover).</summary>
     static void BuildTerms(Control root, Core.GameState state)
@@ -55,9 +59,10 @@ public partial class PauseMenu : CanvasLayer
 
     Label _gmNote;
 
-    /// <summary>GM mode: 99,999 gold, the rest of the day skipped, every page of the journal filled.</summary>
+    /// <summary>GM mode: 99,999 gold, the rest of the day skipped, every page of the journal filled, the season's quests fulfilled.</summary>
     void BuildGm(Control root)
     {
+        if (_gmNote != null) return;
         const float gx = X + W + 24, gw = 260;
         root.AddChild(UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(gx, Y, gw, H));
         root.AddChild(UiKit.MakeLabel(Loc.T("GM"), 32, Palette.Magic, HorizontalAlignment.Center, outline: 4).Place(gx, Y + 18, gw, 40));
@@ -65,8 +70,13 @@ public partial class PauseMenu : CanvasLayer
         root.AddChild(UiKit.MakeButton(Loc.T("+99,999 gold"), Palette.Gold, 16, () => Gm(Main.Instance.GmGold())).Place(gx + 20, y, gw - 40, 44));
         root.AddChild(UiKit.MakeButton(Loc.T("Skip the day"), Palette.Text, 16, SkipDay).Place(gx + 20, y + 58, gw - 40, 44));
         root.AddChild(UiKit.MakeButton(Loc.T("Unlock the journal"), Palette.Magic, 16, () => Gm(Main.Instance.GmUnlockJournal())).Place(gx + 20, y + 116, gw - 40, 44));
+        // One click for everything the story asks (0.37): the key, the commissions, the debt, the true ending's checks.
+        var fulfil = UiKit.MakeButton(Loc.T("Fulfil the quests"), Palette.Good, 16, () => Gm(Main.Instance.GmFulfil())).Place(gx + 20, y + 174, gw - 40, 44);
+        fulfil.TooltipText = Loc.T("The treasury key's four pieces, this week's commissions, Bram's account paid off, and the true ending's checks: the final opening comes tonight.");
+        root.AddChild(fulfil);
         _gmNote = UiKit.MakeLabel(Loc.T("For testing: nothing here is fair."), 16, Palette.Muted, HorizontalAlignment.Center).Wrapped();
-        root.AddChild(_gmNote.Place(gx + 16, y + 176, gw - 32, 120));
+        _gmNote.ClipText = true;
+        root.AddChild(_gmNote.Place(gx + 12, y + 228, gw - 24, H - 80 - 228 - 12));
     }
 
     void Gm(string done) => _gmNote.Text = done;
@@ -89,6 +99,13 @@ public partial class PauseMenu : CanvasLayer
         {
             GetViewport().SetInputAsHandled();
             Resume();
+        }
+        // F1 with the menu already up: the GM's panel beside it.
+        else if (e is InputEventKey { Pressed: true, Echo: false, Keycode: Key.F1 } && Main.Instance.State != null)
+        {
+            GetViewport().SetInputAsHandled();
+            Settings.Gm = true;
+            BuildGm(_root);
         }
     }
 

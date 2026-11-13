@@ -408,6 +408,53 @@ public partial class GameState
         BramHome = true;
     }
 
+    /// <summary>
+    /// For the GM (0.37, F1): everything the story asks of a season, at a stroke. This week's commissions are filled and
+    /// paid; the treasury key's four pieces come, with their fees; Bram's account is paid off (the gold for it is put in
+    /// the purse first, and it's paid whether or not Mister Vane has called yet); and the true ending's
+    /// checks are met: you remember, you've heard the gilded and seen the weighhouse register, you know the seal's clause
+    /// and the charter, a full mimic waits, the Wet Hen is hired, and Bram's been brought home. With the account paid,
+    /// the Guild's carriage comes tonight, and it's the final opening. Returns what was done, for the GM's panel.
+    /// </summary>
+    public string GmFulfil()
+    {
+        int filled = 0;
+        foreach (var commission in Commissions.Where(c => !c.Done).ToList())
+        {
+            while (!commission.Done)
+            {
+                commission.Delivered++;
+                Gold += CommissionEach(commission);
+            }
+            filled++;
+        }
+        if (CampaignDone)
+            return Loc.Plural(filled, $"The story's told on this save: {filled} commission filled.", $"The story's told on this save: {filled} commissions filled.");
+        Remembers = true;
+        foreach (string key in new[] { "swallowed", "again", "weighhouse", "register", "alive", "tap", "seal", "charter", "mimic", "full" }) Note(key); // loc: keys
+        Mimic = Mimics.GrowsAfter;
+        Flags.Add("barge.hired");
+        BramAway = true;
+        Rescued.Add(Campaign.Bram);
+        Guests.Remove(Campaign.Bram);
+        BramHome = true;
+        foreach (string piece in Campaign.Pieces) EarnPiece(piece);
+        bool paid = DebtCleared;
+        if (!paid && !Foreclosed)
+        {
+            Gold = Math.Max(Gold, DebtLeft + WorkingPurse);
+            SettleDebt();
+            paid = DebtCleared;
+        }
+        // The notes over the top bar would come one after another for a minute: the panel says it all instead.
+        NewEntries.Clear();
+        NewPieces.Clear();
+        string debt = paid ? Loc.T("Bram's account is paid off.") : Loc.T("Bram's account couldn't be paid: the shop's been foreclosed.");
+        string plan = PlanWhole ? Loc.T("The key is whole and the plan's four lines are done: the Guild's carriage comes tonight, for the final opening.")
+            : Loc.T("The key is whole and the plan's lines are done, all but the debt.");
+        return Loc.Plural(filled, $"{filled} commission filled. {debt} {plan}", $"{filled} commissions filled. {debt} {plan}");
+    }
+
     /// <summary>How this season ended (or would, now), for the profile and the next first morning.</summary>
     public string SeasonEndKey => TreasuryEnd ?? (DebtCleared ? Campaign.Free : Campaign.Lost);
 

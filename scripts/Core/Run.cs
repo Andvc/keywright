@@ -236,9 +236,11 @@ public sealed partial class GameState
     /// Pays off everything that's left of the debt at once: the run is won, however early. If you keep trading, the
     /// Guild leaves you alone until its interest starts, after the eighth week.
     /// </summary>
-    public int PayOff()
+    public int PayOff() => CanPayOff ? SettleDebt() : 0;
+
+    /// <summary>The whole debt paid, whatever the night (the GM's stroke pays it before Mister Vane has even called).</summary>
+    int SettleDebt()
     {
-        if (!CanPayOff) return 0;
         int paid = DebtLeft;
         Gold -= paid;
         WeeksPaid = Guild.Weeks;
