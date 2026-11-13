@@ -522,7 +522,12 @@ public static class Strategy
     public static Commission ShouldDeliver(GameState state, Item item, int saleValue) => state.WantedBy(item);
 
     /// <summary>What a careful player's shop of each tier clears in a bad day's trading (about half a usual one).</summary>
-    static readonly int[] BadDay = { 0, 20, 70, 500, 7000 };
+    /// <remarks>
+    /// 0.36's season: the sim's profit a customer at each market (about 7, 14, 80 and 160g) over its four or five
+    /// customers a day, halved. (0.35's were 20, 70, 500 and 7,000, from an Emporium that made thousands a customer:
+    /// left at that, nothing was kept for the last due until its last two days.)
+    /// </remarks>
+    static readonly int[] BadDay = { 0, 15, 40, 250, 650 };
 
     /// <summary>
     /// Gold to keep back: the working purse (two of the shop's typical chests at what sellers ask here, Bram's advice and
@@ -537,9 +542,9 @@ public static class Strategy
     public static int Reserve(GameState state, Upgrade upgrade = null, CurioDef curio = null)
     {
         int day = BadDay[state.Tier] * (curio != null ? 2 : 1), purse = state.ReserveIf(upgrade, curio);
-        // 0.36: the Guild's night wants the due and, past it, a working purse at the market it moves the shop to.
-        int ahead = state.NextMarket > 0 && !state.PaidThisWeek ? Math.Max(0, state.WorkingPurseAt(state.NextMarket) - purse) : 0;
-        return purse + Math.Max(0, state.NextDue + ahead - Math.Max(0, state.DaysToNextDue - 1) * day);
+        // (0.36 first kept the next market's working purse back too, ahead of the due that moves the shop there: it kept
+        // the careful player from fitting out a market until the week after, and cost it a season in twenty.)
+        return purse + Math.Max(0, state.NextDue - Math.Max(0, state.DaysToNextDue - 1) * day);
     }
 
     /// <summary>

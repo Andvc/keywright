@@ -520,6 +520,9 @@ public sealed partial class GameState
     /// </summary>
     bool QuietOpening => Guided && Tier > 1 && Day == TierSince;
 
+    /// <summary>With Bram's tips on, the first two days at a grander shop: still finding your feet (<see cref="StartDay"/>).</summary>
+    bool Settling => Guided && Tier > 1 && Day < TierSince + 2;
+
     public bool CanBuy(Upgrade upgrade) => UpgradesOpen && Gold >= Cost(upgrade) && Upgrades.Available(this).Contains(upgrade);
 
     public void BuyUpgrade(Upgrade upgrade)
@@ -693,6 +696,10 @@ public sealed partial class GameState
                                              (s.Comes == null || s.Comes(this)) &&
                                              (s.Visits >= 1 || Rng.NextFloat() < Visits(s))).ToArray();
         if (sellers.Count(s => !_snubbed.Contains(s.Key)) >= 2) sellers = sellers.Where(s => !_snubbed.Contains(s.Key)).ToArray();
+        // With tips on, nobody whose lesson is a warded thing's puzzle (a dream, a dowry, a tag) comes in a market's
+        // first two days (0.36): it's the heaviest thing a seller teaches, the first day has the place itself to take
+        // in, and the second its locks (no chest is locked on the first: below).
+        if (Settling && sellers.Count(s => !(s.Wards > 0 && Teaches(s))) >= 2) sellers = sellers.Where(s => !(s.Wards > 0 && Teaches(s))).ToArray();
         float smiths = Synergies.SmithVisits(Active("smith"));
         while (Queue.Count < CustomersPerDay)
         {
@@ -728,6 +735,12 @@ public sealed partial class GameState
                     Queue[i] = Queue[i].Given(Rng);
                     given++;
                 }
+        // With tips on, a market's first day brings no locked chests (0.36): the place, its people, new sounds and the
+        // drop are a day's learning, and the locks come with the next. (The experience playtest: a first-timer's first
+        // day at Thornwick asked 7.1 of a load of 6, the lock and its picking 1.5 of it.) A tale's chest keeps its lock.
+        if (QuietOpening)
+            foreach (var visit in Queue.Where(v => v.Talk == null && v.Chest.Lock.Locked))
+                visit.Chest.Unlock();
         StageTales();
         // The build's word on the day's crowd, once the tales have brought theirs (0.35: a tale's chest that took a
         // regular's place came after the tally was dealt, and went without).

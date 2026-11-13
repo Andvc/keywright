@@ -208,7 +208,13 @@ things to hear, and new trouble.
 | 3 | **A shop in Crownhold**, the capital: the Arcanum, the Royal Archive, Ironroot Street, the pawnshops of Lantern Lane, the Aldwater mud, the Guild Hall | an archmage and her apprentice, a dwarf, a noblewoman and her brother, a pawnbroker, the Archivist, a mudlark, a knight, a Guild clerk | gems; two or three of a kind; sand; enchantment and the witchlight; the shop's name (synergies) |
 | 4 | **The Royal Emporium**, in the palace's shadow, by the Gilded Gate | demons through the cracking Gate, the court, the Maw's fence, the King in disguise, and once in a while the Maw himself | demon gold (iron: the lodestone silences it); hurried, greedy and bargaining customers |
 
-Each move costs the renovation's price: "Move to Thornwick", "Move to Crownhold", "The Royal Emporium".
+**The road inward is the Guild's** (0.36). A licensed keywright trades where the Guild puts them, and the Guild puts
+them where the chests are: every week's due paid, its carters come that night and have the stall standing a market
+further in by morning (Thornwick, then Crownhold, then the Emporium by the Gate). It reads as favour, and Vane says it
+as one. The truth under it (`docs/narrative.md`) is that the Guild wants its keywright at the treasury door by the
+season's last night, with the key: the road was always going there. So a season is four weeks, a market each, and
+nobody buys a move: until 0.36 they were renovations with a price ("Move to Thornwick", "Move to Crownhold", "The
+Royal Emporium"), which made the Guild's interest in where you trade a thing you paid for yourself.
 
 ## The people
 
@@ -469,6 +475,15 @@ by right (it was lost, buried or drowned); the rest were sold, pledged or given.
 - *A thing only sounds once the shake stirs it; clanks drown out delicate things.* The ward lets sound through and
   nothing else; things inside move and sound the way they would in any box.
 - *Sellers price only what they think is there.* Nobody but a Keywright has ever seen inside one.
+- *The ear* (0.36). Listening the way a keywright listens is work, like tasting is for a vintner: an ear is good for so
+  many careful listens a day, and then one rattle sounds like another until it's slept on. Shaking a chest again the
+  way you already have costs nothing (you know what you're listening for); a strength you haven't tried on it, or a
+  drop, is a new listen. The Keyhold's clerks listened in felt-hung rooms, a dozen chests a day and no more, with tea
+  between them: hence the **Tea Kettle** (a pot on the hob and a moment's quiet: two more listens) and the
+  **Listening Screen** (a folding screen hung with felt, to shut the street out: three more). An **Echo Stone** is a
+  river pebble from under the Keyhold's weir that rings back what was last said to it true: get a chest exactly right
+  and the ear's fresh for another. **Lamb's-Wool Plugs** are what the blind buyers of the hill fairs wear: buy a chest
+  without touching it, and the ear has had a rest.
 - *Stolen chests.* The ward knows whose a chest is. Lay a hand on it (any shake, drop or lodestone does) and the
   Key-mark answers: warm if the chest is the seller's to sell, cold if it isn't. A chest bought from someone it wasn't
   theirs to sell is yours in nobody's eyes but your own, and it won't open: it waits in the back room until its owner
@@ -604,10 +619,13 @@ What goes against you:
 - **Bram's stretched thin**: he spent his savings mending the roof, and the Guild has stopped taking his word.
 - **A lean start**: the stall's licence cost more than Bram thought.
 - **Nim's raised his prices**: the Guild is hunting Nim this season, and he charges for the risk.
-- **The Guild's builders**: only the Guild's own builders may work on a licensed shop, at the Guild's rates.
+- **The Guild's builders**: only the Guild's own builders may work on a licensed shop, at the Guild's rates (every
+  upgrade a quarter dearer; until 0.36 the moves too, which the Guild's carters now make for nothing).
 - **A wet year**: a wet winter has rusted every old lock stiff (a pin more to pick).
 - **Wary regulars**: folk aren't sure the stall will last, and won't set you errands.
 - **Nim's lean month**: pickings have been slim among the Locking's oddments.
+- **A head cold** (0.36): the spring cold has gone round every head in Aldmark, and yours hasn't cleared (a listen
+  fewer a day).
 
 What goes your way (mostly the things that make the trade a chore: a slow start, a short night, a sweeping clock, a
 lock that slips, a curio you can't find):
@@ -617,7 +635,8 @@ lock that slips, a curio you can't find):
 - **Nim's soft spot**: Nim owes Bram a favour, and has decided you're it.
 - **Bram's savings**: Bram sold his old cart, and the money's yours.
 - **Bram's old picks**: his old picks turned up at the bottom of a drawer.
-- **Thornwick wants you**: the town council wants a Keywright in the market, and pays half the rent of the move.
+- **Thornwick wants you**: the town council wants a Keywright in the market, and pays half the rent: half the Guild's
+  second due, the one that falls while you trade there (until 0.36, half the price of the move).
 - **A slow season**: nobody's in a hurry this year, and a rotten chest gets gentler handling.
 - **Bram's prepared**: he's been putting a little by, and the Guild still owes him a favour.
 - **An honest clerk**: the Guild's pawn clerk was at school with your mother.
@@ -625,6 +644,8 @@ lock that slips, a curio you can't find):
 - **A lucky charm**: Bram ties his mother's old lucky charm to your apron.
 - **Fair days**: the old Duke's in good health, and the Guild's assessors have their hands full in the capital.
 - **Room for more**: Bram clears out a drawer for your curios.
+- **A rested ear** (0.36): Bram made you sleep the winter through, for once, and you've never heard so well (three
+  listens more a day).
 
 A boon never comes with the bane it would contradict (savings and a lean start, Thornwick's welcome and the Guild's
-builders, a slow season and a hurried one, Bram prepared and Bram stretched thin).
+builders, a slow season and a hurried one, Bram prepared and Bram stretched thin, a rested ear and a head cold).

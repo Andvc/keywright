@@ -43,6 +43,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    challenge term alone, then the dues alone and whole levels as drawn; `-- --sim=levels [--debtstep=S]` just the
    levels, one to eight; `-- --sim=careers` just the careers (learners at the highest level open, run by run;
    `--level=0` keeps them at level 0, as a player following the story would), with the campaign's milestones.
+   0.36: `-- --sim=learners` (two minutes) plays Kit at level 0 at six skills, a first-timer to the careful player, for
+   tuning the dues; with any sim `--dues=a,b,c,d` tries other dues and `--listens=N` another ear; `--sim=terms
+   --level=N` weighs each term at that level's dues (at level 0 the careful player clears nine seasons in ten, so a
+   bane alone doesn't show). **Never run `dotnet build` while a sim or a bot is running**: the build replaces the
+   assembly under it, and the run stops short without saying so.
 3. Visual changes: run the autoplay bot under Xvfb with `--shots=<dir>` and look at the PNGs.
    Bot flags: `--seed=N --quit-at-end --days=N --no-tutorial --start-tier=N --gold=N --start-week=N --character=KEY
    --challenge=N --terms=a,b --heartsongs=P --songs=all --event=KEY --curios=a,b,c --gm --season=N --knew=all` (`--terms` plays just those
@@ -96,7 +101,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    and `-- extract` rewrites locale/keywright.pot (commit it). `-- verify` checks each translation in locale/ against
    it (untranslated texts, holes and `{price}`-style names kept, plural forms, letters the language's fonts have;
    `--strict` fails on any of it): a text added or changed in English comes up untranslated in all four until it's
-   translated (`locale/GLOSSARY.md` has each language's words and voice). `godot --headless --path . -- --loc-test`
+   translated (`locale/GLOSSARY.md` has each language's words and voice). `python3 tools/po_merge.py` (0.36) brings
+   each translation up to the template after an `extract` (new texts untranslated, texts that have gone dropped);
+   `--new` lists what's untranslated, and `--add FILE.json` writes translations in (`{"fr": {msgid: msgstr, or a list
+   of plural forms}, "ja": ...}`). `godot --headless --path . -- --loc-test`
    runs the language layer through Godot with a made-up German translation, then loads each translation and checks
    it. `-- --sim=quick --pseudo` must print the same numbers as without (only the words change: a key that got
    translated shows up as a different number), and a bot or shell-demo run with `--pseudo` shows every translated
@@ -107,7 +115,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    deals a few curios and keepsakes, so `godot --headless --path . -- --fit-test --lang=CODE` measures every curio's
    name and description on Nim's cards (wide and narrow) and every keepsake's card, in that language's font, and exits
    1 if one doesn't fit: run it for each language after changing a curio's or keepsake's words (or the cards).
-8. Curios: `dotnet run --project tools/curiotest` (0.35) runs 200 checks, every curio card's promises against the game
+8. Curios: `dotnet run --project tools/curiotest` (0.35) runs 202 checks, every curio card's promises against the game
    (most as twins, with and without it; `--only=key,key`; `AUDIT_A/B/C.md` beside it say what each card promises and
    where its rule lives). It compiles Core itself, so internal members are reachable. A new curio, or a change to one's
    rule or card, needs its checks; the run must end "N of N checks passed" (it names any curio with none).
@@ -116,6 +124,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    worktree keeps the build steady while you work). For a playtest by an agent with no context, give it
    `tools/playtest/README.md` and nothing else of the repository, and ask for a play log, what it understood of the
    story, and its top issues with screenshots.
+10. Music (0.36): `python3 tools/music/make.py [names]` (numpy, and ffmpeg with libvorbis) writes and renders the themes
+   and the ambience into `assets/audio/music` and `assets/audio/ambience`, and prints each one's peak, loudness and
+   seam; then `godot --headless --path . --import`. A cloud session has no way to hear it (`--wav DIR` writes WAVs
+   for someone who can), so say plainly that a change to it was checked by its numbers only. Code-drawn icons and
+   curios (`ICONS3`, `CURIOS3` in `tools/custom_art.py`) are redrawn by `python3 tools/import_art.py --icons-only`.
 
 ## Conventions
 
@@ -145,6 +158,27 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   bottom, or warded) never is, since nobody could see it glow and no read could be right about it: it fetches x1.3
   instead (`Categories.HiddenMultiplier`, in `Special`; `Chest` strips magic off anything hidden); luck shines one past
   purple only with the curio that promises it a step (a hollow rod, a ward-key: `Build.Luck`, 0.35).
+- The ear (0.36, `Ear.cs`, a partial of `GameState`; `docs/design.md`, "The ear"): judging a chest costs something.
+  A day has so many listens (`ListensBase` 8; the Tea Kettle's two and the Listening Screen's three, `Upgrade.Listens`;
+  a rested ear's three more or a head cold's one fewer, `Challenges.KeenEar`/`DullEar`), fresh each morning
+  (`RestEar`). A check
+  (`Check`: a strength, with the lodestone or without, or a drop) costs one the first time it's made on a chest
+  (`GameState.Listen`, kept in `Visit.Checks`); made again it's free (counting rattles is never rationed), and
+  everything is free in a lesson, with the Bookkeeping Engine, or on a visit marked `FreeListens` (`ListensFree`).
+  `ShakeBox.Open` gates what sounds by it and `CounterPhase.GiveEar` spends it: a strength the chest has moved at for
+  `ListenHold`, and in one hold only the hardest shake so far (winding down from a hard shake never spends a gentle
+  listen), so a strength not paid for is silent and nothing is spent by accident. The meter sits over the chest
+  (`BuildEar`: a pip a listen) with the count on the slip's foot, beside who's still waiting; Bram teaches it the
+  first time one is spent, when they run low with people waiting, and when they're gone (`ear`, `ear_low`,
+  `ear_out`). At the opening a thing no check you made could have told you of is unheard (the closed eye,
+  `OpeningPhase.Unheard`, `Visit.CouldHear`, `NoteAudible`), not missed: a cross is for what you listened to and got
+  wrong. `Strategy.NextCheck` is the careful player's next check (the one that hears most, then only what it couldn't
+  tell) and `GameState.ListenShare` this chest's share of what's left among those still waiting (a contest or the
+  King's game gets whatever it takes); the sim's `Listen` and the bot's loop both use them, and a learner goes by
+  rote (`ByRote`). The Echo Stone gives a listen back for a perfect read (`Shop.RecordRead`), Lamb's-Wool Plugs for a
+  chest bought sight unseen (`Shop.Buy`). A new way of checking a chest needs a `Check`, a listen's cost and a place
+  in `NextCheck`; anything that tells the player about a chest for nothing (a tool, a curio) undoes the ear, so
+  route it through a listen or make it a stated clue.
 - Six kinds of thing a sword-and-sorcery realm would lock away (`Category`: Coins, Arms, Garb, Potions, Scrolls, Gems,
   shown as Coin, Weapons, Cloaks, Potions, Spells, Gems; the fakes are demon gold, paste gems and scroll cases of sand).
   Every thing is a find worth having (no letters, no rusty daggers); rename one in `Categories.Renamed` too, so saves'
@@ -169,7 +203,10 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the second. Clicking whoever's at the counter (or the notebook button, or N) opens the notebook on their page, framed
   (`Visit.LookedUp`); Mother Sorrel's lesson teaches it (the `lookup` tip for the others).
 - What's said is said a sentence at a time (0.35, `Words.Sentences`): Bram's box (`MentorView`: dots, "click to go on"),
-  scenes, talks and the sellers' bubbles (sized for the whole speech, filled in as it's said). What matters is coloured
+  scenes, talks and the sellers' bubbles (sized for the whole speech, filled in as it's said). A speech says itself
+  (0.36): each sentence comes under the last once that one's had time to be read (`Words.ReadTime`, slower a
+  character in Japanese and Chinese), a click or the act action shows the rest at once, and the next goes on: one
+  click a speech, never one a sentence. Anything new that talks does the same (`SellerView.MidSpeech`/`FinishSpeech`). What matters is coloured
   where it's said (`Rich`, a `RichTextLabel` with BBCode, its own brackets escaped): the trade's words in tips and
   notes (`Rich.TradeWords`; on the slip's paper `Rich.OnPaper`), a seller's price and stated clue (`SellerView.Marks`,
   with a bob), strengths only in sellers' own words (`Rich.Strengths`: their "coin" is money), the seller's rule under
@@ -183,7 +220,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - Heartsongs are introduced on a quiet first-week evening (the `songs_intro` tip), and a season that ends with none ever
   heard gets Bram's word on them between runs, once a profile (`Story.SongsUnheard`, in `Main.EndRun`).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
-  run while the debt lasts (v22; 0.30's longer season at 0.16% a chest, `--sim=songcount`), in any seller's chest
+  run while the debt lasts (v22; 0.36's twenty days at 0.32% a chest, 0.30's thirty-five at 0.16%: `--sim=songcount`,
+  and tune it again if a season's length changes), in any seller's chest
   (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
   it: no seller ever hears one, `SellerDef.Notices`); each one kept makes the next a quarter as likely (`Heartsongs.Fade`,
   `GameState.SongsKept`). Each sings its own synth song (`Sfx` "song_{key}"), at the gentlest shake, never drowned or
@@ -207,8 +245,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the estate sale, the horn and the crescent; the seller's markup, the dice and the colour stay their own), so ordinary
   growth makes the numbers bigger and leaves the careful player's margin flat (the sim's margins report: check it holds
   when anything is added to the index or left out of it), and a build's edge is what isn't priced. With every upgrade
-  it's about 2.1 at the Emporium (0.30: 2.7 when the buyers' trades were bigger); the last due (12,000g since 0.30,
-  45,000 until then) is set above what that earns on a careful margin, so carrying it takes a build or tales gone well. Bram's working purse (`GameState.WorkingPurse`: two typical chests, `Market.TypicalAsk`, at
+  it's about 2.1 at the Emporium (0.30: 2.7 when the buyers' trades were bigger); the last due (5,000g in 0.36's four weeks, where the Emporium's
+  week is the season's last and nineteen chests in twenty are bought at an index under 1.7; 12,000g over 0.30's seven) is set above what that
+  earns on a careful margin, so carrying it takes a build or tales gone well. Bram's working purse (`GameState.WorkingPurse`: two typical chests, `Market.TypicalAsk`, at
   `PriceFactor`) is the day-end advice, what `Strategy.Reserve` keeps, and the line a purchase warns before crossing:
   `ReserveIf`/`ShortNote` work out the purse after the purchase (its effect on the index; the bigger shop for a move),
   and DayEndPhase and PeddlerPhase show a red price and a confirmation. Route anything that changes prices through
@@ -223,7 +262,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the slip never marked gets a closed eye (`UiKit.MakeUnseenMark`, `OpeningPhase.Unseen`), not a cross: nothing was read,
   so nothing was missed. The gut and the profit stamp judge the same sum: everything the chest brought back (what's
   inside as it sells here, a perfect read's fee, a rebate, the bond) against what was paid.
-- Curios are the run's build (`Curios.cs`, `Build.cs`): 79 of them, each bending one rule, each tagged with the ways of
+- Curios are the run's build (`Curios.cs`, `Build.cs`): 81 of them, each bending one rule, each tagged with the ways of
   trading it rewards (`CurioTag`); six are the main builds, each a different way to play (`Curios.Main`: enchantment,
   sight unseen, haggling, the perfect read, false bottoms, wards), each with a way in, a multiplier, an engine and a
   legendary capstone. Rarities (`CurioRarity`: common, uncommon, rare, legendary) are rolled per card by week
@@ -260,7 +299,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The economy grows fast and the Guild's dues grow faster (v18: the old tight constraints made upgrades feel optional).
   Qualities are worth 1/2/4/8/24 times a common (`Categories.QualityMultiplier`; 1/3/10/30/100 until 0.30, when each
   step inward was three to ten times the last and the owner found the numbers ran away); each move inward multiplies what
-  a customer is worth a few times over (the sim's "profit per customer at each shop": about 7, 12, 70 and 490g).
+  a customer is worth a few times over (the sim's "profit per customer at each shop": about 7, 14, 85 and 150g in 0.36's season, whose
+  week at the Emporium is its last; 0.35's seven weeks made 490g there).
   **Gold is rare** (0.30): a chest's own roll makes a thing gold only `Categories.GoldShare` (6%) as often as the spread
   says, and luck never makes gold (`Categories.Lift`: restorers, curios, a dry spell, a hoard's better things stop at
   purple); luck that would have lifted a purple thing past purple makes it shine instead (enchanted, `Build.PastPurple`,
@@ -270,8 +310,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the Master Restorer mends (nothing worse than its chest) rather than lifting. buyers' trades (`Upgrade.Sales`:
   scales, auction block, royal warrant) multiply what everything sells for, and restorers (`Upgrade.Luck`: the bench,
   the workshop, the master) make everything likelier to come out a step better; both go into the power index. Flat
-  sums (door money, a catalogue's fee) grow with `ShopTiers.Scale`. The careful player saves for the next move before
-  anything else (`Strategy.Saving`), except curios. The Bookkeeping Engine (`Upgrades.Engine`) is the Guild's: offered
+  sums (door money, a catalogue's fee) grow with `ShopTiers.Scale`. The careful player keeps a working purse and what the next due needs beyond what bad
+  days would earn (`Strategy.Reserve`; until 0.36 it saved for the next move before anything else). The Bookkeeping Engine (`Upgrades.Engine`) is the Guild's: offered
   once `CanPayOff`, for exactly `DebtLeft` (`GameState.Cost`), it marks every chest's real contents on the slip as it
   comes in (`Appraisal.Recorded`, `CounterPhase.Record`), so a won run can be finished fast; the sim's careful player
   pays off instead.
@@ -284,47 +324,54 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   and the Sleepers' Moon's dreams and Wardens' Day's riddles for everyone. `Strategy.WardedKind` is the careful
   player's solution: each is a deduction (a kind named that you can't hear), never a guess. A new puzzle seller needs
   its clue there, a `Visit.WardHint` line, a lesson and a portrait.
-- The run (`Run.cs`, a partial of `GameState`): seven weeks of five days (0.30; five until then, eight of three in 0.20); every day has a
-  role (`DayRole`, `WeekPlan.Role`), planned a week ahead (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the notebook's
-  calendar (`NotebookView.BuildCalendar`, with the Guild's debt across its top): the fifth is the Gilded Guild's tithe (`Guild.Due`: 20, 60, 160, 450, 1,300,
-  4,000 and 12,000g, about three times a week with no tenfold jumps, then endless x1.5; Vane introduces it on the second
-  evening, `GameState.IntroDay`); a story week's first day is the story's (`Story.TellsOn`: weeks 1, 2, 4 and 6 (the
-  gathering: who stands with you), and the week after the debt; `GameState.StoryToday`); the moves come about days 8,
-  16 and 25 (`Upgrades`: 80, 300 and 3,000g); Nim comes
-  every night from the third (0.28); and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning, Bram's word once a run,
-  foreclosure; commissions (`Commissions.cs`) pay for each find as it's handed over, always at least a quarter over
-  what it would sell for (`GameState.CommissionPay`, `Patrons.Premium`), so delivering always beats selling; the story's scenes and the shards of the Aldric Key that open the Crown Chest
-  (`Story.cs`; in code still `MapPieces` and the vault, so saves carry over). Balance is set for a career, not
-  a run (the sim's "Learners" and "Careers" sections; learners are the careful player with mistakes that shrink as
-  `Style.Skill` goes from 0 to 1): a first-timer gets through the first weeks and loses in the middle ones; better
-  judgment pushes that later, and the run's build and its tales decide the rest (0.34, 120 runs: the careful player
-  buying curios as they come clears 76% of first seasons, with the key's master's fees standing in for 0.33's shard
-  commissions and season-one mimics (0.33: 73%; without the fees 0.34 was 57%); with no curios 73%; with no tales 48%;
-  with no Heartsongs 72%; a learner at 0.75 42%; a first run about one in a hundred); careers first clear around the
-  sixth run (a quarter of players by the fourth), clear level 4 in the late twenties (half by run 27), and each level
-  after costs a few points more (the dues 20% up a level, `Challenges.DebtStep`, 15% until 0.33; one career in twelve
-  has cleared level 6 by run 30, level 8 is a wall, 3%: 40 careers, `--sim=careers --n=40`; 0.35, after the curio audit
-  made every card deliver: the careful player 70% with curios, 73% without, 51% with no tales, 36% with neither (0.34:
-  35%, so the shop's baseline held), a learner at 0.75 55%; careers: half first clear by run 5, level 4 by run 23, level
-  6 13% by run 30, level 8 none). The campaign (0.34): the
-  first swallowing comes with the first clear, around the sixth run; Bram is first brought home around the thirteenth,
-  and the next day (the true ending) around the thirteenth too, 83% of careers by run 30 (at level 0 throughout,
-  `--level=0`: the eleventh, all by run 30). The careful player keeps a full mimic for the final opening unless it has
-  Guild nights enough to fill it again (`Strategy.SpendMimic`): the plan's "free them" is what a season most often lacks. The Silent Choir's Heartsong is won in about one season in six that takes it on. A run's length is part of the
-  balance: `--sim=experience` should keep a first run under two and a half hours (0.34: 138 minutes; 0.33: 147; 0.32: 143
-  over 30 days; 0.30: 146, the longer season and its tales; 0.28: 121 over 25) and no day over its load (6; the move to
-  Thornwick and the days after it still are, just over, for about half to three in four of first runs: 0.31 57%, 0.32
-  73%, 0.33 57%, 0.34 47% of the 30). `--sim=kin [--who=KEY]` runs just the characters' table, for tuning one. Careless styles (buying blind, one shake)
-  are foreclosed within a few weeks, and no early week sends careful players to Bram's word (0.30: the fourth does for
-  about one in twenty-five, the fifth and sixth for about one in twelve: the ones still a shop behind). Anything added to the run goes in `SaveData` too; the profile across runs is
-  `Profile` (user://profile.json). Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts
-  nearly broke. Bram's working purse (`GameState.WorkingPurse`) is the day-end advice, the purchase warning and what
-  `Strategy.Reserve` keeps, so the advice is what the sim's careful player does: tune them together. The whole debt
-  can be paid off early (`GameState.DebtLeft`, `PayOff`) from the day end or the Guild's night; the sim's careful
-  player does, and reports the week each run cleared (a strong run clears in week 6; week 7 is the wall for the rest). Surprises (`Categories.Odds`, about one thing in eight a step better; the restorers and luck curios take
-  a careful player to one in four) are worth about a sixth of what the chests hold (0.30: a step is worth twice, not
-  three times), with a pity counter
-  (`GameState.DrySpell`); the sim reports their share of income.
+- The run (`Run.cs`, a partial of `GameState`): four weeks of five days, a market each (0.36; seven weeks in 0.30 to
+  0.35, five before that, eight of three in 0.20); every day has a role (`DayRole`, `WeekPlan.Role`), planned a week
+  ahead for the market it will be played at (`Events.Plan`, `GameState.Plan`/`NextPlan`) for the notebook's calendar
+  (`NotebookView.BuildCalendar`, with the Guild's debt across its top): the fifth is the Gilded Guild's tithe
+  (`Guild.Due`: 40, 170, 700 and 5,000g, then endless x1.5; Vane introduces it on the second evening,
+  `GameState.IntroDay`), and paying it moves the shop a market further in (`MoveInward`: Thornwick from day 6,
+  Crownhold from day 11, the Emporium from day 16); a story week's first day is the story's (`Story.TellsOn`: weeks 1,
+  2 and 4 (the gathering: who stands with you), and the week after the debt; `GameState.StoryToday`); Nim comes every
+  night from the third (0.28); and two days have an event (`Events.PerWeek`; gentle ones in the first week). Pawning,
+  Bram's word once a run, foreclosure; commissions (`Commissions.cs`, from the second week's third morning,
+  `Patrons.FromDay`) pay for each find as it's handed over, always at least a quarter over what it would sell for
+  (`GameState.CommissionPay`, `Patrons.Premium`), so delivering always beats selling; the story's scenes (`Story.cs`;
+  the campaign, below). Balance is set for a career, not a run (the sim's "Learners" and "Careers" sections; learners
+  are the careful player with mistakes that shrink as `Style.Skill` goes from 0 to 1). **Level 0 is the story's
+  difficulty** (0.36): the first three dues are paid by nearly everyone (a first-timer 98%), so every season sees all
+  four markets, and the last, at the Emporium, is the wall; the challenge levels are where it gets hard. 120 runs
+  each (`--sim=quick`, `--sim=learners`): the careful player buying curios as they come clears 90% of seasons (79%
+  with no curios, 61% with no tales, 31% with neither, 88% with no Heartsongs), a learner at 0.9 81%, at 0.75 66%, at
+  0.5 43%, at 0.3 26%, and a first run 20% (14% with no Heartsongs: one found is often a first season's making).
+  Careers (`--sim=careers --n=60`): the debt is first cleared on the second or third season (a quarter of players by
+  the second, half by the third, three quarters by the fifth), level 1 around run 7, level 2 around 11, level 4 around
+  26 (two careers in three by run 30), level 6 by one in twelve by run 30 and level 8 by none; the levels as drawn
+  clear 77, 57, 43, 35, 18, 16, 9 and 6% (`--sim=levels --n=150`; the dues 20% up a level, `Challenges.DebtStep`).
+  The campaign: the first swallowing comes with the first clear, on the second to fourth season; Bram is first
+  brought home around the tenth, and the next day (the true ending) around the tenth too, by nearly every career by
+  run 30. (0.35, seven weeks: the careful player 70%, a learner at 0.75 55%, a first run none; first clear around the
+  sixth run, the true ending around the thirteenth, at two and a half hours a season.) The careful player keeps a
+  full mimic for the final opening unless it has Guild nights enough to fill it again (`Strategy.SpendMimic`): the
+  plan's "free them" is what a season most often lacks. A run's length is part of the balance: `--sim=experience`
+  should keep a first run under two hours (0.36: about 100 minutes over 20 days and 105 customers, a second and a
+  third 90; 0.35: 143 over 30 days), a high point every seven or eight minutes or better, no stale stretches, and no
+  day over its load (6): the first day at a new market is the one to watch, and with tips on it's a quiet one (a
+  customer short, and no locked chests until the day after: `GameState.QuietOpening`). `--sim=kin [--who=KEY]` runs
+  just the characters' table, for tuning one. Careless styles are foreclosed (buying at their price clears 2%, one
+  hard shake a chest 14%), and no early week sends careful players to Bram's word. The sim's evening runs in the
+  game's order (0.36: the day's end and its spending, then the Guild's night; it used to pay first, which once a due
+  moves the shop had its player fitting out the next market before trading a day there), and `Strategy.Reserve`'s
+  bad day is this season's (`BadDay`: about half what the sim's "profit per customer at each shop" times a day's
+  customers comes to; retune it when the economy's size changes, or the careful player saves for the wrong due).
+  Anything added to the run goes in `SaveData` too; the profile across runs is `Profile` (user://profile.json).
+  Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts nearly broke. Bram's working purse
+  (`GameState.WorkingPurse`) is the day-end advice, the purchase warning and what `Strategy.Reserve` keeps, so the
+  advice is what the sim's careful player does: tune them together. The whole debt can be paid off early
+  (`GameState.DebtLeft`, `PayOff`) from the day end or the Guild's night; the sim's careful player does, in two
+  seasons in three, and reports the week each run cleared (one in twelve in week 3, the rest in week 4). Surprises
+  (`Categories.Odds`: since 0.36 a thing comes out better than its chest about one time in seven and worse one in
+  eleven, where it was the other way round; the restorers and luck curios add to it), with a pity counter
+  (`GameState.DrySpell`).
 - Across runs (`Meta.cs` for the definitions and the score, `Kin.cs` for what they do to a run): four who can mind the
   stall (`Characters`), each changing one part of how chests are judged or the shop is run and paying for it (Hesk: no hard
   shake or drop, a scale; Rosa: everybody haggles, walkouts stay away a week; Isolde: a shelf and door money from day
@@ -341,7 +388,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   is a rule that holds every time, with a reason in `docs/world.md`, routed through `GameState.Under`/`Favoured` where
   its rule lives; the setup screen and the pause menu list a run's terms (`UiKit.MakeTermList`). `--sim=terms` measures
   each alone and the levels, `--sim=levels` just the levels as drawn (`--debtstep=S` tries another step): keep each
-  term within several points of the others and every level harder than the one below. Every run starts the same: nothing carries over that makes a run stronger (v22 retired the talents bought
+  term within several points of the others and every level harder than the one below. Weigh a term at a level's dues
+  (0.36, `--sim=terms --level=3 [--who=a,b] [--n=400]`: at level 0 the careful collector clears nine seasons in ten
+  and nothing shows; at level 3's, 47% with none, each bane costs one to eight points and a boon gives up to eight).
+  0.36 cut Thornwick's welcome from half the second due to a quarter and a head cold from two listens to one, and
+  gave a rested ear three. Thirteen banes and thirteen boons. Every run starts the same: nothing carries over that makes a run stronger (v22 retired the talents bought
   with renown: Bram's Kin's 10g, Familiar Face's fourth card and Second Look's reroll are everyone's now,
   `GameState.StartingGold`, `Curios.Laid`, `RerollPeddler`; Mara's Favour is the Guild Promissory Note, a curio; the
   rest were curios or upgrades already, or went), only what's known (the journal, what Bram has taught, Nim's stock and
@@ -352,9 +403,15 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `GameState.MindsDrop`/`MindsMagnet`/`MindsHardShake`/`Impatient` and upgrade prices through `GameState.Cost`, so the
   terms apply everywhere. The profile (`Profile`) keeps each character's open levels and best score.
 - The shop opens up a step at a time, moving inward (`ShopTiers.Name`: Bram's Stall, Thornwick Market, Crownhold, the
-  Royal Emporium; 4, 6, 6 and 5 customers a day, `ShopTiers.Customers`; `GameState.UpgradesOpen` once it has earned
-  `UpgradesAt`, `DisplayOpen` with Thornwick, `SynergiesOpen` with Crownhold), each introduced by a Bram tip when it
-  happens. Gate new
+  Royal Emporium; four customers a day at the stall and five further in, `ShopTiers.Customers`: a day's listens are
+  counted, so more customers is more to choose between, not more to do; `GameState.UpgradesOpen` and `DisplayOpen`
+  with Thornwick, `SynergiesOpen` with Crownhold), each introduced by a Bram tip when it happens. **Paying a week's
+  due is what moves the shop** (0.36, `GameState.MoveInward`, from `PayDues`, `AskGrace` and `PayOff`): a market a
+  week, never bought (`shop2` to `shop4` are still upgrades under the hood, owned by the move, and their blurbs are
+  what the road says of each market). On a market's first morning `RoadPhase` shows the season's road (the four
+  markets as pictures, the Gate at its end, the cart rolling in, what the place brings and what the Guild wants
+  there; `GameState.MovedFrom`, `TierSince`, `NextMarket`), the day's end at the stall shows the due as the way on,
+  and the Guild's panel says where paying leads. Gate new
   systems the same way, in Core, so the sim and the bot follow them.
 - Each shop tier is a stack of layers (`ShopView`, made by `UiKit.MakeShop`: the sky for the hour, the place, the
   shelf, the frame and its lanterns, the counter and the tools you've bought as props, each at 4x; the hour follows the
@@ -378,19 +435,22 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   menu's buttons fly out of the chest into place (a timeline in `_Process`; any key, button or click finishes it at
   once; shorter coming back from a run; shake, flashes and the hit stop through `Main`). `Main` saves `GameState.Save()` to user://save.json at the start of each day (not
   for the bot or debugging flags) and the pause action (Esc, Start) opens `PauseMenu`. A day: `Main.StartDay` (the
-  week's scene, Nim), the counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening,
+  road on a market's first morning, then the week's scene), the counter, `DayEndPhase`, then `Main.CloseDay` (Vane's introduction the second evening,
   `DuesPhase` on the fifth). Anything added to `GameState` that should survive a day boundary goes in `SaveData` too.
 - Files (0.27): everything the game keeps goes through `Storage` (`Read`, `Write`, `Delete`): a write goes to a temp
   file, flushed, then replaces the old one, which is kept as `.bak`; a read falls back to the `.bak`, and a file that
   can't be read is set aside (`name.unreadable-<time>.json`) and named on the title screen (`Storage.Notices`), never
   deleted. The user folder is `Keywright` (`config/use_custom_user_dir`: `%APPDATA%/Keywright` on Windows, so Steam
   Cloud can name one place), and `Storage.CarryOver` brings files from Godot's old app_userdata folders. `SaveData`
-  (version 4) and `Profile` (`Profile.CurrentVersion`) carry a version: a file from a newer game is left alone, an
-  older one is migrated in `FromJson` (`Categories.Renamed` only for saves up to version 2, from LootFall 0.17).
+  (version 8) and `Profile` (`Profile.CurrentVersion`) carry a version: a file from a newer game is left alone, an
+  older one is migrated in `FromJson` (`Categories.Renamed` only for saves up to version 2, from LootFall 0.17; a
+  run saved before 0.36, version 7 or older, picks up at the market it had reached, on the same day of its week,
+  with the dues before it paid and every day it remembers moved back with it: `--save-test` checks it).
 - `Settings` (user://settings.cfg; `SettingsView`'s pages Display, Sound, Controls and Game) holds the window
   (windowed, fullscreen or exclusive, a size that fits the screen, pixel-perfect or smooth scaling, vsync, a frame
   cap), screen shake and flashes (route new screen effects through `Main.Shake`/`Flash`), the outlines, the volumes
-  (the `Effects` and `Songs` buses, under Master: a Heartsong's "song_" sounds go to Songs), muting and pausing when
+  (the `Effects`, `Songs` and `Music` buses, under Master: a Heartsong's "song_" sounds go to Songs, the themes and
+  the ambience to Music), muting and pausing when
   the window loses focus, tips, language and the controls. `Settings.ApplyDisplay` changes the window through the
   root `Window` node (its `Mode`, `Size`, `Position`), never the display server alone: the node works out the
   stretch and the mouse from its own size.
@@ -451,7 +511,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   `GameState.SetAside`), remembered in `Profile.KeepsakesSeen`. A new keepsake needs its tale, its effect, a picture
   (one borrowed until drawn) and a line on the collection page. The Silent Choir (`TaleBook.Late.cs`) is the season-long
   quest whose prize is a Heartsong: three contest chests (`Visit.ContestFor` says what an exact read wins) and the
-  Guild's price; one wrong read loses it. A season draws three of each place's tales and all three of the Emporium's.
+  Guild's price; one wrong read loses it. A season draws two of Brindle's tales and two of Thornwick's, one of Crownhold's and one of the Emporium's (0.36;
+  three of each over 0.30's seven weeks).
 - The main story (0.34, after the owner's narrative proposal; `docs/narrative.md` has the truth under it and what was
   adopted, adapted and left out, `docs/world.md` "The laws of the Locking"). It's a campaign across seasons on the profile
   (`Campaign.cs`, `Inquiry.cs`, `TaleBook.Campaign.cs`, `Story.cs`, `Phases/TreasuryPhase.cs`). **The first season**:
@@ -474,8 +535,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   Guild crates that knock (`Chest.Crate`: knock back at the counter, `CounterPhase.KnockBack`; bought, someone gilded in
   the back room, `TakeIn`), a full mimic eats the gold off them (`Ungild`) and a redeemed note brings them home
   (`RedeemGuest`, Bram's is his account: the debt), Mara (the last of the Keyhold) and the seal's clause, the charter from
-  Quire or King Aldo, the Lantern Market's passage and papers. Vane bribes on the fourth Guild night and bargains for
-  Bram on the sixth (`BribeTonight`, `BargainTonight`). Once you remember you can stay away from the treasury
+  Quire or King Aldo, the Lantern Market's passage and papers. Vane bribes on the second Guild night and bargains for
+  Bram on the third (`Campaign.BribeWeek`, `BargainWeek`, `BribeTonight`, `BargainTonight`; the fourth and sixth of
+  0.34's seven). Once you remember you can stay away from the treasury
   (`TreasuryMode.Again`); with the plan whole (`PlanWhole`: find them and know them, free them, a way out, the door
   opened without giving it away: `Inquiry.PlanLines`) it's the final opening (`TreasuryMode.Final`): hold still, knock
   back, turn the key, they come out, and the Maw's last offer (`Story.FinalOffer`: leave the door to it and the year
@@ -512,12 +574,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   gift chest whose perfect read wins `Prize`), Mother Tansy's loan (`Borrow`, collected the next week's first morning,
   `CollectLoan`), effects that last a while (`Until`, `While`: a rival, pickets, a haunting, a crowd; `TaleCustomers`),
   and nights away (`GoOutTonight`: no Nim).
-  The ending reads them: week 6's gathering and the treasury night name your allies (`Story.Allies`), and after the
+  The ending reads them: week 4's gathering and the treasury night name your allies (`Story.Allies`), and after the
   run's last scene, won or lost, the season's end tells what became of everyone (`Story.SeasonEnd`, each tale's
   `TaleDef.Ending`, shown once a run by `Main.EndRun`). 0.30's tales are in `TaleBook.Brindle.cs`, `.Thornwick.cs`,
   `.Crownhold.cs`, `.Emporium.cs` (built by methods, so the partial files' order never matters) and their endings with
-  0.28's in `TaleBook.Endings.cs`; a season draws the Shut Chests and the King's Court always, three of Brindle's seven,
-  three of Thornwick's seven, three of Crownhold's eight and both of the Emporium's. A new tale needs an `Ending` too.
+  0.28's in `TaleBook.Endings.cs`; a season draws the Shut Chests and the King's Court always, and (0.36) two of Brindle's,
+  two of Thornwick's, one of Crownhold's and one of the Emporium's. A new tale needs an `Ending` too.
 - The people and their tales (0.28; `docs/world.md` has the order of things and the cast, `docs/stories.md` every tale
   beat by beat). The cast was replaced: every regular is someone with a place, a faction (`SellerDef.Of`), a want
   (`Wants`) and things you notice about them (`Facts`, the Magpie's suspects' clues), keeping an old regular's trading
@@ -527,7 +589,11 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   beats (`Beat`): who comes, after which beat and how many days, at what shop, if what (`If`), and either a talk
   (`Says`, `Asks`: `Choice`s with a cost, a doing that returns the reply, and a `Worth` for the careful player) or a
   chest (`Brings`, with `Bought`/`Passed` hooks). The engine (`Tales.cs`, a partial of `GameState`) draws a season's
-  tales from the seed (`TaleBook.Draw`, above), stages at most two beats a day (`StageTales`: a talk joins the queue as
+  tales from the seed (`TaleBook.Draw`, above), keeps each tale's shape in the four-week season (0.36,
+  `GameState.Wait`, `SeasonDay`: a beat's `Gap` is still written for 0.30's seven weeks, with the markets about days
+  8, 16 and 25, so write a new one the same way; a first beat comes at the same point of the same market's week, a
+  later one waits about three-fifths as long, and a tale that begins at the Emporium is told a beat a day), stages at
+  most two beats a day (`StageTales`: a talk joins the queue as
   a `Visit.Talking`, a chest replaces a regular) and one a night (`StartNight`), what follows today's beat with no gap
   ("that night", `Continues`) before what has waited longest, and keeps what came of them: `Flags`, `Gone` (who never
   comes again), `Notices`, `TaleLog`, `Keepsakes`, all in `SaveData`. A tale's secret (who the Magpie is) is drawn from the
@@ -569,8 +635,16 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - UI is built in code with `UiKit` and `Painter` (absolute positions on a 1280x720 canvas), not in .tscn files.
 - Buttons use `FocusMode.None`: the act action (Space) is reserved for lockpicking and holding the chest open. The
   notebook action is N (L too, as it was when it was the ledger) or Y.
-- `Hearing.Read` and `Strategy` model a careful player (what they hear, when they drop or use the magnet, what they
-  offer and keep) for the sim and the bot. Update them when a rule, tool or trade changes.
+- `Hearing.Read` and `Strategy` model a careful player (what they hear, which check they make next and how many
+  listens a chest gets, `Strategy.NextCheck` and `GameState.ListenShare`; what they offer and keep) for the sim and
+  the bot. Update them when a rule, tool or trade changes.
+- Music (0.36, `scripts/Audio/Music.cs`, `tools/music`): a theme and a bed of ambience at a time, chosen from the
+  screen and the shop whenever `Main.SwitchTo` changes phase (`Music.For`: the title and the stall `crossroads`, each
+  market further in its own, `night` for the day's end and Nim, `guild` for the Guild's night, `treasury`; the beds
+  `day`, `market`, `hall`, `night`), cross-faded, on the Music bus. A new screen with a mood of its own gets a case in
+  `Music.For`; a new theme is a function in `tools/music/make.py` (written a bar at a time, rendered by `synth.py`,
+  every loop seamless) and a line in its `TRACKS`. A Heartsong's song has the room to itself (`Music.Duck`, called
+  from `Sfx.Play`). The chests' sounds are the game: keep the music under them (it starts at 60%).
 - Phases are swapped by `Main.SwitchTo`; check `Alive` after every `await` in a phase. Quit through `Main.QuitGame`
   (it frees the phase and bot and releases the sounds first), never `GetTree().Quit()`: long runs crashed on exit
   otherwise, and short ones leaked.

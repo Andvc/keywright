@@ -376,10 +376,16 @@ public partial class DuesPhase : Phase
             : Loc.T($"The Guild's interest next week: {next}g.");
         panel.AddChild(UiKit.MakeLabel(ahead, 24, Palette.Text, HorizontalAlignment.Center, outline: 4).Place(0, 88, PanelW, 30));
         // The road inward (0.36): the due paid, the shop trades a market further in from the morning.
+        float noteY = 156;
         if (State.MovedFrom > 0)
-            panel.AddChild(UiKit.MakeLabel(Loc.T($"The Guild's carters will have the shop at {ShopTiers.Name(State.Tier)} by morning."), 16, Palette.Gold,
-                HorizontalAlignment.Center, outline: 4).Place(0, 126, PanelW, 20));
-        if (note != null) panel.AddChild(UiKit.MakeLabel(note, 16, Palette.Warn, HorizontalAlignment.Center).Place(0, 156, PanelW, 20));
+        {
+            // As tall as its words: one line in English, two in French, whose markets have longer names.
+            string carters = Loc.T($"The Guild's carters will have the shop at {ShopTiers.Name(State.Tier)} by morning.");
+            float h = Mathf.Max(20, UiKit.TextHeight(carters, PanelW - 48));
+            panel.AddChild(UiKit.MakeLabel(carters, 16, Palette.Gold, HorizontalAlignment.Center, outline: 4).Wrapped().Place(24, h > 24 ? 120 : 126, PanelW - 48, h));
+            if (h > 24) noteY = 120 + h + 6;
+        }
+        if (note != null) panel.AddChild(UiKit.MakeLabel(note, 16, Palette.Warn, HorizontalAlignment.Center).Place(0, noteY, PanelW, 20));
         Put(UiKit.MakeButton(Loc.T("Good night"), Palette.Gold, 24, Next).Place(PanelX + PanelW / 2 - 160, 404, 320, 64));
         Part();
         if (State.DebtCleared)

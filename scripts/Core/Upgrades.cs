@@ -55,7 +55,7 @@ public static class Upgrades
 
         new("lamp", Loc.T("Witchlight"), Loc.T("Always lit: anything enchanted glows when it makes a sound. Nobody else can see it."), 160, 3, By: "ilse"),
         new("crier", Loc.T("Town Crier"), Loc.T("Your name, shouted across Crownhold: one more customer every day."), 280, 3, Customers: 1),
-        new("screen", Loc.T("Listening Screen"), Loc.T("A folding screen hung with felt, as the Keyhold's listening rooms were, to shut the street out: three more listens a day."), 320, 3,
+        new("screen", Loc.T("Listening Screen"), Loc.T("A folding screen hung with felt, to shut the street out: three more listens a day."), 320, 3,
             Listens: 3, Requires: "kettle"),
         new("block", Loc.T("Auction Block"), Loc.T("Buyers bid against each other for what you sell: everything fetches a quarter more."), 480, 3, Sales: 0.25f, By: "brass"),
         new("cabinet3", Loc.T("Glass Cabinet"), Loc.T("Room to display one more thing."), 160, 3, Slots: 1, Requires: "cabinet2"),

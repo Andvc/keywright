@@ -3,49 +3,45 @@
 A small game about the satisfaction of opening treasure chests. Three hundred years ago the Locking shut every treasure
 in the realm into a warded chest, to starve the demon of greed chained behind the Gilded Gate. The chests are still
 everywhere, and only a Keywright can open one, once it's rightfully theirs; everyone else sells them unopened, and the
-ward lets nothing through but sound. You're one of Bram's kin, with the Key-mark on your hand, and he hands you his
-stall. People bring you chests and price them their own way (by what they heard, by weight, by the chest's colour, by
-a dream) and tell you where they found them. Shake each one yourself, gently, firmly and hard, find what they missed
-or misjudged, work out what their dreams, riddles and tags point at, trade for it, and open it on the spot. Move the shop inward, from the Brindle
-crossroads to Thornwick Market, the capital and the Royal Emporium by the Gate, because the stall comes with twenty
-years of Bram's unpaid tithe: every fifth evening the Gilded Guild comes for a due that climbs from 20g to 45,000g in
-five weeks (25 days: a run is an hour and a half to two hours). Pay them all (or the whole debt at once, the moment you have it) and the stall is free; find the four
-shards of the Aldric Key on the way and the Crown Chest opens on your counter. The world is in
-[docs/world.md](docs/world.md).
+ward lets nothing through but sound. You have the Key-mark on your hand, and Bram hands you his stall. People bring
+you chests and price them their own way (by what they heard, by weight, by the chest's colour, by a dream) and tell
+you where they found them. Shake each one yourself, find what they missed or misjudged, work out what their dreams,
+riddles and tags point at, trade for it, and open it on the spot.
 
-**Status:** Early Access (0.28). 0.28 gives the world an order and its people lives
-([docs/world.md](docs/world.md), [docs/stories.md](docs/stories.md)): a new cast, each with a place, a faction and a
-want; eleven **tales** that run across a season (seven drawn each run, some with a secret of their own: who the
-Magpie is, what's behind the Barrow door), told a beat at a time at the counter, at the back door after dark and in
-letters, with choices that cost and change things (gold, chests given freely, curios, people gained and lost, the
-Crown's decree on the tithe); **standing** with nine powers, the four that matter most changing the trade every day;
-**stolen chests**, which the Key-mark goes cold on, the Wardens pay a finder's share for and the back room keeps; tools
-brought to the counter by the people who make them; and **Nim every night** from the third, one curio at first and more
-with his own upgrades. 0.27 readied it for a Steam release
-([docs/release.md](docs/release.md): what's done and what's left): saves that survive crashes and come from older
-versions, a full settings menu (window modes and sizes, scaling, vsync, a frame cap, three volumes, rebindable keys
-and controller buttons), a controller that does everything the mouse does, every text ready for translation (2,100 of
-them, with the fonts for most languages), Steam (achievements, rich presence, the overlay, all inert without it),
-credits and licences, and Windows and Linux builds from CI on every push. Before that, 0.26: a rebuilt world (four places, 27 sellers with their own stories and rules, six kinds
-of things a sword-and-sorcery realm would lock away, every one a find worth having, and warded things only a solved
-puzzle brings out), runs of five five-day weeks against the Guild's dues (then endless), each day with its business
-(the Guild's night, two days with something on in town, Nim's days and the story's); one model for the economy (the
-shop's **power index**: what makes ordinary things fetch more puts every seller's price up as much, so the shop's
-growth makes the numbers bigger, not the game easier, and a purchase that would leave you unable to afford chests
-warns first); **79 curios** in four rarities that make the run's build, six of them ways to play of their own
-(enchantment, buying sight unseen, haggling, the perfect read, false bottoms and wards) with a legendary capstone
-each, with Nim bringing more of what you buy and his stock growing across runs; restorers that make things come out
-better; commissions, seventeen kinds of event, a calendar, and a story; a journal that remembers every regular, find
-and curio across runs; nine **Heartsongs**, the rarest
-things in the realm (about a third of one a run, worth nothing in gold, each with its own song, its own reveal and its
-own use on display), and an ending that needs all nine; four of Bram's kin to play and eight challenge levels each,
-every run starting the same; saves, settings and a guided start. The pixel art is made for the game to a written brief
-(`art/`: warm storybook cartoons in chunky pixels, one palette, every asset specified and checked); 0.26 puts all of
-it in the game, with each shop built from layers lit for the hour, everyone standing full length behind the counter,
-and an outline round the characters and the counter's edge that a setting turns off. The chest is drawn in code;
-recorded sounds and the font are from Kenney's CC0 packs (see
-[CREDITS.md](CREDITS.md)). Built with Godot
-4.7 (.NET / C#), targeting PC on Steam. Design rationale: [docs/design.md](docs/design.md).
+The stall comes with twenty years of Bram's unpaid tithe to the Gilded Guild. A season is four weeks of five days,
+and on every fifth night the Guild comes for a due: 40g, 170g, 700g and 5,000g. Each one paid, its carters move the
+stall a market further in: from the Brindle crossroads to Thornwick Market, to Crownhold, to the Royal Emporium by the
+Gate. Pay all four and Bram's account is closed; earn the four pieces of the treasury key on the way and the Guild's
+carriage takes you to its treasury on the last night, where the story turns. A season is about an hour and a half.
+The world is in [docs/world.md](docs/world.md).
+
+**Status:** Early Access (0.36). 0.36 is a redesign for pace and for decisions at the counter
+([docs/redesign-0.36.md](docs/redesign-0.36.md) has what a review of 0.35 found and what changed):
+
+- **A season is four weeks, a market each.** The moves inward aren't bought any more: paying the week's due moves the
+  shop (0.35's season was seven weeks and two and a half hours, and most of a first one was spent at Thornwick).
+- **The ear.** A keywright's ear is good for eight careful listens a day. A strength you haven't tried on a chest, or
+  a drop, costs one; shaking again the same way is free. So which check to make on which chest is the day's
+  decision, what a seller misses is what tells you, and a chest bought on less than everything is a real reveal.
+- **Openings delight more than they disappoint**: a thing comes out better than its chest more often than worse.
+- **A speech says itself**, a sentence after another: one click a speech, not one a sentence.
+- **Music and ambience**: a theme for each market, the night, the Guild and the treasury, written and rendered in
+  code (`tools/music`), on its own volume.
+
+Under it, what earlier versions built: four places and 27 sellers, each with one way of judging a chest, a rule of
+their own and true stories; six kinds of thing a sword-and-sorcery realm would lock away, warded things only a solved
+puzzle brings out, mimics and Guild crates; one model for the economy (the shop's **power index**: what makes ordinary
+things fetch more puts every seller's price up as much); **81 curios** in four rarities that make the season's build,
+with Nim bringing more of what you buy; **tales** that run across a season with choices that cost and change things,
+standing with nine powers, keepsakes, and a season's end that says what became of everyone; a **campaign across
+seasons** ([docs/narrative.md](docs/narrative.md)): the treasury that swallows you, the year that turns back, the
+Inquiry, and the next day; nine **Heartsongs**; four keywrights to play and eight challenge levels each, every season
+starting the same; translations into French, Japanese and Simplified and Traditional Chinese; saves that survive
+crashes, a full settings menu, a controller that does everything the mouse does, Steam achievements and rich presence,
+and Windows and Linux builds from CI on every push ([docs/release.md](docs/release.md)). The pixel art is made for the
+game to a written brief (`art/`); the chest is drawn in code; recorded sounds and the font are from Kenney's CC0 packs
+(see [CREDITS.md](CREDITS.md)). Built with Godot 4.7 (.NET / C#), targeting PC on Steam. Design rationale:
+[docs/design.md](docs/design.md).
 
 Keywright was called LootFall until 0.18, on a branch of [Andvc/LootFall](https://github.com/Andvc/LootFall); that name
 and repository now belong to a different game. Saves and the profile from then come over on the first start.
@@ -66,8 +62,11 @@ and repository now belong to a different game. Saves and the profile from then c
    Thornwick dowry (always coin, a cloak and a potion), an apprentice's packing tag, grandmother's riddle on the lid, a
    ward-roll with every other letter faded, a bat-eared demon's echoes, a cartomancer's cards. If the sign names
    something you can't hear, mark one more of it on the slip; open the chest, and the ward gives it up.
-2. **Shake it yourself.** How fast you drag is how hard you shake (the words under the chest show gentle, firm or
-   hard as you go, and which you've tried). Light things (coin jingles, potions slosh, gems
+2. **Shake it yourself, and choose how.** How fast you drag is how hard you shake (the words under the chest show
+   gentle, firm or hard as you go, and which you've tried). Your ear is good for eight careful listens a day (the
+   pips over the chest): each strength you haven't tried on this chest costs one, and so does a drop; shaking again
+   the same way is free. A hard shake stirs everything, but a clank drowns the delicate things; what the seller
+   missed tells you where a listen is worth spending. Light things (coin jingles, potions slosh, gems
    tinkle) rattle at a gentle shake; weapons only clank at a firm one, and their clanking drowns out anything delicate;
    soft things (cloaks flump, spells rustle) only sound at a hard shake. Lift it high and let go to drop it: a hollow
    boom means a false bottom (but glass may break). As the shop grows, more to work out: two or three of a kind (count
@@ -86,9 +85,9 @@ and repository now belong to a different game. Saves and the profile from then c
    would pay a coin for one, but singing in your shop each one changes the trade (two more customers a day, coin and
    gems at double, a bell that counts what's in every chest...). Find all nine, over your runs, and the Crown Chest
    ends differently.
-5. **End of day:** once the stall has earned 50g, spend your earnings on moving inward (each place brings richer
-   customers, a new look and something new), tools (the Witchlight shows what's enchanted, the Lodestone silences iron
-   and demon gold, Fine Lockpicks), cabinets, a crier and a night market for more customers, and a buyers' trade that
+5. **End of day:** from Thornwick on, spend your earnings on tools (the Witchlight shows what's enchanted, the
+   Lodestone silences iron and demon gold, Fine Lockpicks), a kettle and a listening screen for more listens,
+   cabinets, a sign and a crier for more customers, and a buyers' trade that
    puts up everything you sell (brass scales, an auction block, a royal warrant), and restorers who make everything
    likelier to come out better than its chest. From Crownhold, choose which of the shop's synergies to put to work (six
    of a kind at a quality earns one, or a feat: perfect reads, surprises, hidden things found, bargains; each puts up
@@ -97,9 +96,11 @@ and repository now belong to a different game. Saves and the profile from then c
    you less than two typical chests' worth shows its price in red and asks first. Once
    your purse could pay off everything you owe, the Guild offers its **Bookkeeping Engine** for exactly that sum: it
    reads every chest for you, so a won run can be finished fast.
-6. **The week:** five days, each with its business: on the fifth evening Mister Vane collects the Guild's tithe; on a
-   story week the first morning is the story's. Short, pawn what's on display or sell your curios back; once a run Bram
-   will vouch for you; otherwise the Guild seals the shop. Start a day nearly broke and Bram dips into his secret stash
+6. **The week:** five days at one market, each with its business: on the fifth evening Mister Vane collects the
+   Guild's tithe, and with it paid the Guild's carters have the shop at the next market by morning (the road, on the
+   first morning there, shows where you are and what the place brings); the first morning of weeks 1, 2 and 4 is the
+   story's. Short, pawn what's on display or sell your curios back; once a run Bram will vouch for you; otherwise the
+   Guild seals the shop. Start a day nearly broke and Bram dips into his secret stash
    for you (twice a run). Every night, after the shutters are down, Nim the peddler brings **curios**, the run's build
    (one a night at first, more once he has a lantern, a stool and a standing order): each
    bends one rule (a sealed bid for chests you never touch, a haggler's knot, a smuggler's hook, a truthglass that pays
@@ -110,8 +111,9 @@ and repository now belong to a different game. Saves and the profile from then c
    tourney, a foreclosure sale, a day of mourning when nobody shakes hard, the crier's reward, the Sleepers' Moon when
    every seller dreams true, Wardens' Day riddles, the Guild's count, a storm, the Stranger with a chained chest... The
    notebook's **calendar** shows the Guild's debt and this week and next, day by day: the story, the events, who said
-   they'd come back and the Guild's nights. The Hooded Woman trades shards of the Aldric Key for
-   the finds she asks for. Whenever you have all that's left of the debt, you can pay it off and finish early.
+   they'd come back and the Guild's nights. The Guild's assessors send a piece of the treasury key for
+   each of four marks of the trade (a hidden thing read true, a stolen chest settled, a commission filled, an old lock
+   picked without force). Whenever you have all that's left of the debt, you can pay it off and finish early.
 7. **The town:** not everyone comes to sell. People come with their troubles (a widow's son in the Guild's debt-house, a
    millpond boy with the Key-mark and a Mark-Finder on his trail, a sergeant hunting the Magpie), come back when they
    said they would, ask things of you and remember what you did; the best tools are offered at the counter by the
@@ -119,8 +121,9 @@ and repository now belong to a different game. Saves and the profile from then c
    your back room). The notebook's **Town** page shows where you stand with each power, the notices on the board, and
    every tale so far.
 
-**Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the Crown Chest, the shop, the
-collection, the Heartsongs), multiplied by the run's challenge level; each of Bram's kin keeps their best. Nothing
+**Between runs:** a run ends with a score (dues paid, the debt cleared and how early, the key's pieces and the
+treasury, the shop, the collection, the Heartsongs), multiplied by the run's challenge level; each keywright keeps
+their best. Nothing
 carries over that makes a run stronger (0.22 retired the talents): what grows is your judgment, the journal, and Nim's
 stock. New game asks who minds the stall:
 
@@ -129,18 +132,19 @@ stock. New game asks who minds the stall:
 | Kit, the Ear | the game as it was, with Bram's lessons |
 | Hesk, the Scale | can't shake hard or drop a chest, but weighs every one: the weight left over is what he couldn't hear (unlocked by paying the third due) |
 | Rosa, the Tongue | everybody haggles with her (though they open higher for her), and a lowball gets a second try; whoever walks out stays away that week (unlocked by clearing the debt) |
-| Isolde, the Collection | displays from the first day and visitors pay a coin a point every night, but her collection can't be pawned (unlocked by opening the Crown Chest) |
+| Isolde, the Collection | displays from the first day and visitors pay to see her collection every night, but it can't be pawned (unlocked by opening the great chest at the Guild's treasury) |
 
-The first weeks are gentle and a first run usually falls in the middle ones, with a purse that grew, just not fast
-enough; it takes a few runs of sharper judgment, and a build that comes together, to clear the debt. Clearing it with someone opens
-their next challenge level, and a quarter more to the score. Each level raises the Guild's dues, and deals the run as
-many banes as its number (thin crowds, sharp sellers, demon gold about, a wet year that rusts every lock, ...) and as
-many boons (welcome gifts on the first morning, Bram's old picks, a slow season, room for one more curio, ...), drawn
-from twelve of each for every run and shown before it starts.
+The first three dues are gentle and a first season usually falls at the last, at the Emporium, with a purse that
+grew, just not fast enough; a second or third, with sharper judgment and a build that comes together, clears it, and
+that's where the story turns. Clearing it with someone opens their next challenge level, and a quarter more to the
+score. Each level raises the Guild's dues by a fifth, and deals the run as many banes as its number (thin crowds,
+sharp sellers, demon gold about, a wet year that rusts every lock, a head cold, ...) and as many boons (welcome gifts
+on the first morning, Bram's old picks, a slow season, a rested ear, room for one more curio, ...), drawn from
+thirteen of each for every run and shown before it starts: the levels are where the game gets hard.
 
 Day one is guided: Uncle Bram, who's handing you the stall, brings in three customers with one lesson each (and a
 fourth, on passing, opens the second morning). After that, each seller's first visit is a lesson in their habit and
-their rule (taught once: a second run doesn't repeat them), and each new part of the shop (moves, lockpicking,
+their rule (taught once: a second run doesn't repeat them), and each new part of the shop (the ear, lockpicking,
 the display shelf, synergies, the Guild, curios, commissions) comes with a word from Bram when it opens up. The shop
 saves at the start of every day; your best runs are kept on the title screen.
 
@@ -191,7 +195,7 @@ The code is split so the game rules can be tested without the engine:
 | `scripts/Core` | Pure C# rules: kinds, qualities and the shaking rules, chests, where chests come from (`Origins.cs`), sellers and how they judge, trade and tell their stories, the appraisal slip, a careful player's read and strategy, sellers' lessons, synergies, upgrades, the shop's progress and exhibition, the build (`Build.cs`: naming, luck, what things fetch), the run (the Guild's dues, curios, commissions, events, the story), Bram's kin, challenge levels and the score (`Meta.cs`, `Kin.cs`), Bram's hints. No Godot types. |
 | `scripts/Phases` | The screens: title, the character screen, counter, lockpicking, opening, end of day, the Guild's night, Nim's curios, story scenes, the end of a run. |
 | `scripts/Ui` | Visuals: the shakeable chest, the notebook and the collection, Bram, the seller, HUD, particles and styling. |
-| `scripts/Audio` | Recorded sounds, the synthesized slosh, and placeholder effects. |
+| `scripts/Audio` | Recorded sounds, the synthesized slosh and Heartsongs, and the music's player (`Music`; the tracks are made by `tools/music`). |
 | `scripts/Debug` | Balance simulation (with the lesson test, the builds report and the experience playtest), the shake, save, language and controller tests, and an autoplay bot for screenshots and recordings. |
 | `scripts/` | The game's frame: `Main` (start, phases, the run's files), `Settings`, `Controls` (actions and bindings), `Localization` (languages and fonts), `Platform` (Steam), `Storage` (crash-safe files). |
 | `locale/` | The text for translators (`keywright.pot`, made by `tools/loc`) and their translations; `locale/README.md` is for them. |
@@ -210,6 +214,8 @@ godot --headless --path . -- --sim=builds                  # each curio, each wa
 godot --headless --path . -- --sim=experience              # a player's first three runs: pace, load, freshness, peaks
 godot --headless --path . -- --sim=trace --seed=1001       # one careful run, day by day
 godot --headless --path . -- --sim=terms                   # each challenge boon and bane alone, then whole levels
+godot --headless --path . -- --sim=learners                # clear rates from a first-timer to the careful player
+dotnet run --project tools/curiotest                       # every curio's card against the game
 godot --headless --path . -- --shake-test                  # check that shaking follows the rules (11 minutes)
 godot --headless --path . -- --save-test                   # saves: crash-safe writes, backups, old versions
 godot --headless --path . -- --loc-test                    # the language layer, with a made-up translation
@@ -219,11 +225,13 @@ xvfb-run -a godot --path . -- --pad-test --no-tutorial --seed=5  # play the coun
 xvfb-run -a godot --path . --rendering-driver opengl3 -- \
   --autoplay --days=1 --shots=$PWD/shots                   # play the guided day, save screenshots
 # add --start-tier=3 --gold=600 to jump ahead with the tools you'd have by then,
-# or --start-week=6 for a shop as a careful player would have it by then (--gold=N sets its purse);
+# or --start-week=3 for a shop as a careful player would have it by then (--gold=N sets its purse);
 # --character=hesk|rosa|isolde and --challenge=N play one of Bram's kin at a level (--terms=gifts,rust: just those terms);
 # --curios=foot,star,ledger starts with those curios
 xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, character screen, pause, settings
-xvfb-run -a godot --path . -- --vault-demo --quit-at-end --shots=$PWD/shots_vault  # the finale: the Crown Chest
+xvfb-run -a godot --path . -- --treasury-demo --shots=$PWD/shots_treasury  # the season's last night: the treasury
+python3 tools/music/make.py                                # write and render the music and ambience again (numpy, ffmpeg)
+python3 tools/po_merge.py --new                            # texts the translations in locale/ still lack
 godot --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe
 godot --headless --path . --export-release "Linux" build/linux/Keywright.x86_64   # then add steam/'s library
 ```

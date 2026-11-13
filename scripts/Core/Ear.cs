@@ -41,7 +41,7 @@ public sealed partial class GameState
 
     /// <summary>Listens a day: the ear's own, what the shop adds (a kettle, a screen), and a season's terms (a rested ear, a head cold).</summary>
     public int Listens => Math.Max(1, (ListensTried > 0 ? ListensTried : ListensBase) + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.Listens) +
-                                      (Favoured(Challenges.KeenEar) ? Challenges.EarListens : 0) - (Under(Challenges.DullEar) ? Challenges.EarListens : 0));
+                                      (Favoured(Challenges.KeenEar) ? Challenges.RestedListens : 0) - (Under(Challenges.DullEar) ? Challenges.ColdListens : 0));
 
     /// <summary>For tuning (`--sim=quick --listens=N`): another ear to start with.</summary>
     public static int ListensTried { get; set; }

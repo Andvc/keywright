@@ -171,7 +171,7 @@ public static partial class Simulation
                      $"{Reach(2),6}  {Reach(3),6}  {Reach(4),6}   {100f * logs.Sum(l => l.GoodBuys) / bought,8:0}%  {100f * logs.Sum(l => l.Perfect) / bought,6:0}%");
         }
         GD.Print($"(cleared: all {Sellers.Number(Guild.Weeks)} dues paid; door: went into the Guild's treasury on the last night; lost: share of runs foreclosed, and the median week;");
-        GD.Print(" tier columns: median day the renovation was bought, '-' if fewer than half got there)");
+        GD.Print(" tier columns: median day the shop moved on to that market (the night its due was paid: it trades there from the next morning), '-' if fewer than half got there)");
 
         foreach (var style in quick ? Styles.Skip(4) : Styles.Skip(2))
         {
@@ -397,19 +397,23 @@ public static partial class Simulation
     /// draws, each level is harder than the one below it.
     /// </summary>
     /// <param name="only">Just these terms, comma-separated (and no levels), to tune a few quickly.</param>
-    public static void TermsReport(int campaigns, string only = null)
+    /// <param name="level">
+    /// Whose dues to play them at (`--level=N`; 0: the usual). At level 0 the careful collector clears nine seasons in
+    /// ten (0.36), so a term alone hardly shows: at a level where half are lost, each one's weight does.
+    /// </param>
+    public static void TermsReport(int campaigns, string only = null, int level = 0)
     {
-        GD.Print($"\nChallenge terms ({campaigns} runs each, Kit, the careful collector): alone, at the usual dues");
+        GD.Print($"\nChallenge terms ({campaigns} runs each, Kit, the careful collector): alone, at {(level > 0 ? $"level {level}'s dues" : "the usual dues")}");
         GD.Print("term                       cleared   lost first   day   score  final");
         var none = (new List<string>(), new List<string>());
-        GD.Print($"{"(none)",-24}  {Trial(Characters.Kit, 0, campaigns, terms: none)}");
+        GD.Print($"{"(none)",-24}  {Trial(Characters.Kit, level, campaigns, terms: none)}");
         var keys = only?.Split(',');
         foreach (var term in Challenges.Banes.Concat(Challenges.Boons).Where(t => keys == null || keys.Contains(t.Key)))
         {
             var terms = term.Good ? (new List<string> { term.Key }, new List<string>()) : (new List<string>(), new List<string> { term.Key });
-            GD.Print($"{(term.Good ? "+ " : "- ") + term.Name,-24}  {Trial(Characters.Kit, 0, campaigns, terms: terms)}");
+            GD.Print($"{(term.Good ? "+ " : "- ") + term.Name,-24}  {Trial(Characters.Kit, level, campaigns, terms: terms)}");
         }
-        if (keys != null) return;
+        if (keys != null || level > 0) return;
         TermLevels(campaigns, true);
     }
 
@@ -1161,6 +1165,22 @@ public static partial class Simulation
         if (state.Day == GameState.IntroDay) Story.Heard(state, Story.Intro(state));
         log.CurioGold += state.Today.Curios;
         log.CurioSpent += state.Today.CurioSpent;
+        // The day's end comes before the Guild's night, as it does in the game (DayEndPhase, then DuesPhase): what's
+        // bought tonight is this market's, with tonight's due still to pay. (Until 0.36 the sim paid first; once a due
+        // paid moves the shop, that had its player buying the next market's fittings before trading a day there.)
+        var owned = rec == null ? null : Upgrades.All.Where(u => state.Has(u.Key)).ToHashSet();
+        int affordable = rec == null ? 0 : Upgrades.Available(state).Count(u => Strategy.Affordable(state, u));
+        BuyUpgrades(state, style.Care >= Care.Tools, style.Collects);
+        var before = state.ActiveSynergies.ToHashSet();
+        bool choosing = style.Care >= Care.Listens && style.Synergies;
+        if (choosing) ChooseSynergies(state);
+        if (log.FirstSynergy == 0 && Synergies.All.Any(s => s.Level(state) > 0)) log.FirstSynergy = state.Day;
+        if (rec != null)
+        {
+            var bought = Upgrades.All.Where(u => state.Has(u.Key) && !owned.Contains(u)).ToList();
+            bool synergyChoice = choosing && state.SynergiesOpen && Synergies.All.Count(s => s.Level(state) > 0) > state.SynergySlots;
+            rec.Evening(state, bought.Count, bought, synergyChoice || !before.SetEquals(state.ActiveSynergies), affordable);
+        }
         bool wasCleared = state.DebtCleared;
         if (state.DuesTonight && !Dues(state, log)) return false;
         if (Strategy.ShouldPayOff(state))
@@ -1182,19 +1202,6 @@ public static partial class Simulation
             else state.Swallow();
             rec?.Vault(state);
             return true;
-        }
-        var owned = rec == null ? null : Upgrades.All.Where(u => state.Has(u.Key)).ToHashSet();
-        int affordable = rec == null ? 0 : Upgrades.Available(state).Count(u => Strategy.Affordable(state, u));
-        BuyUpgrades(state, style.Care >= Care.Tools, style.Collects);
-        var before = state.ActiveSynergies.ToHashSet();
-        bool choosing = style.Care >= Care.Listens && style.Synergies;
-        if (choosing) ChooseSynergies(state);
-        if (log.FirstSynergy == 0 && Synergies.All.Any(s => s.Level(state) > 0)) log.FirstSynergy = state.Day;
-        if (rec != null)
-        {
-            var bought = Upgrades.All.Where(u => state.Has(u.Key) && !owned.Contains(u)).ToList();
-            bool synergyChoice = choosing && state.SynergiesOpen && Synergies.All.Count(s => s.Level(state) > 0) > state.SynergySlots;
-            rec.Evening(state, bought.Count, bought, synergyChoice || !before.SetEquals(state.ActiveSynergies), affordable);
         }
         Night(state, log, rng, style);
         return true;
@@ -1289,7 +1296,7 @@ public static partial class Simulation
     static bool Dues(GameState state, Log log)
     {
         int week = state.Week;
-        // What the Maw tries, once you remember (0.34): a bribe on the fourth night, a bargain for Bram on the sixth.
+        // What the Maw tries, once you remember (0.34): a bribe on the second Guild night, a bargain for Bram on the third.
         if (state.BribeTonight) state.AnswerBribe(Strategy.TakeBribe(state));
         if (state.BargainTonight) state.AnswerBargain(Strategy.TakeBargain(state));
         int gold = state.Gold, due = state.DueNow;

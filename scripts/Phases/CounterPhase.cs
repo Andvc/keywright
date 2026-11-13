@@ -231,22 +231,34 @@ public partial class CounterPhase : Phase
     /// </summary>
     void BuildEar()
     {
-        // Over the chest, clear of the words that pop out of it and of the scale beside it.
-        _ear = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.35f)).Place(EarX, 62, EarW, 36));
+        // Over the chest, clear of the words that pop out of it and of the scale beside it. As wide as its words and its
+        // pips need (French's label is half as long again; a kettle, a screen and a rested ear make fifteen listens),
+        // and centred on the chest whatever that comes to.
+        string title = Loc.T("YOUR EAR"), lesson = Loc.T("A lesson: listen freely");
+        float titleW = Mathf.Ceil(UiKit.TextWidth(title, 16)) + 4;
+        float pipsAt = 12 + titleW + 10;
+        // The pips and the count, or (in a lesson, where there's neither) the note that listening is free.
+        _earW = Mathf.Max(340, pipsAt + Mathf.Max(State.Listens * EarPitch + 8 + 58, Mathf.Ceil(UiKit.TextWidth(lesson, 16)) + 4) + 12);
+        _earX = 558 - _earW / 2;
+        _ear = Add(UiKit.MakePanel(Palette.Gold.Darkened(0.35f)).Place(_earX, 62, _earW, 36));
         _ear.ZIndex = 10;
-        _ear.PivotOffset = new Vector2(EarW / 2, 18);
+        _ear.PivotOffset = new Vector2(_earW / 2, 18);
         _ear.MouseFilter = Control.MouseFilterEnum.Pass;
         _ear.TooltipText = Words.Wrap(Loc.T("Your ear is good for so many careful listens a day. Each strength you try on a chest for the first time costs one, and so does a drop; shaking again the same way is free. With none left, you trade on what you know."), 60);
-        _ear.AddChild(UiKit.MakeLabel(Loc.T("YOUR EAR"), 16, Palette.Gold.Darkened(0.15f)).Place(12, 8, 110, 20));
-        _earCount = UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Right).Place(EarW - 70, 8, 58, 20);
+        _ear.AddChild(UiKit.MakeLabel(title, 16, Palette.Gold.Darkened(0.15f)).Place(12, 8, titleW, 20));
+        _earCount = UiKit.MakeLabel("", 16, Palette.Text, HorizontalAlignment.Right).Place(_earW - 70, 8, 58, 20);
         _ear.AddChild(_earCount);
-        _earNote = UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Right).Place(110, 8, EarW - 122, 20);
+        _earNote = UiKit.MakeLabel("", 16, Palette.Muted, HorizontalAlignment.Right).Place(pipsAt, 8, _earW - pipsAt - 12, 20);
         _ear.AddChild(_earNote);
-        _earPips = new Painter(DrawEar) { Position = new Vector2(104, 12) };
+        _earPips = new Painter(DrawEar) { Position = new Vector2(pipsAt, 12) };
         _ear.AddChild(_earPips);
     }
 
-    const float EarX = 388, EarW = 340;
+    /// <summary>Where the ear's bar sits (set by <see cref="BuildEar"/>: as wide as the language and the day's listens need).</summary>
+    float _earX = 388, _earW = 340;
+
+    /// <summary>From one pip to the next: closer together past ten listens (a kettle), and again past thirteen.</summary>
+    float EarPitch => State.Listens > 13 ? 10 : State.Listens > 10 ? 12 : 14;
 
     /// <summary>
     /// Hesk's scale (or what Rook's game scale read), beside the chest: what everything in it weighs, and what the things
@@ -521,7 +533,7 @@ public partial class CounterPhase : Phase
         // The panel jumps as one goes, so it's seen from the corner of the eye while the chest is in hand.
         _ear.Scale = Vector2.One * 1.18f;
         _ear.CreateTween().TweenProperty(_ear, "scale", Vector2.One, 0.25f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-        FloatText("-1", new Vector2(EarX + EarW - 40, 112), Palette.Gold, 24);
+        FloatText("-1", new Vector2(_earX + _earW - 40, 112), Palette.Gold, 24);
         if (State.ListensLeft == 0) Teach("ear_out");
         else if (State.ListensLeft <= 2 && State.Queue.Count > 0) Teach("ear_low");
         else Teach("ear");
@@ -544,7 +556,8 @@ public partial class CounterPhase : Phase
         if (_ear == null) return;
         bool free = State.ListensFree(_visit);
         int left = State.ListensLeft;
-        _ear.Visible = !Concluded;
+        // Free in a lesson, and the bar says so; free with the Bookkeeping Engine, which reads the chest for you: no bar.
+        _ear.Visible = !Concluded && (!free || _visit.Lesson != null);
         _earCount.Text = free ? "" : $"{left}/{State.Listens}";
         _earCount.AddThemeColorOverride("font_color", left == 0 ? Palette.Bad : left <= 2 ? Palette.Warn : Palette.Text);
         _earNote.Text = free ? Loc.T("A lesson: listen freely") : "";
@@ -559,8 +572,7 @@ public partial class CounterPhase : Phase
     void DrawEar(Painter p)
     {
         int all = State.Listens, left = State.ListensLeft;
-        // Thirteen at most (the kettle and the screen): closer together past ten, so the row always fits before the count.
-        float pitch = all > 10 ? 12 : 14, size = pitch - 4;
+        float pitch = EarPitch, size = pitch - 4;
         for (int i = 0; i < all; i++)
         {
             var box = new Rect2(i * pitch, 0, size, 12);

@@ -52,8 +52,8 @@ public sealed partial class GameState
     /// <summary>A week's due: the Guild's, a step higher for each challenge level.</summary>
     public int DueFor(int week)
     {
-        // Thornwick wants you (a boon): its council pays half the week's due you owe at its market.
-        float invited = week == Challenges.InvitedWeek && Favoured(Challenges.Invited) ? 0.5f : 1;
+        // Thornwick wants you (a boon): its council pays a share of the due you owe at its market.
+        float invited = week == Challenges.InvitedWeek && Favoured(Challenges.Invited) ? 1 - Challenges.InvitedShare : 1;
         float due = Guild.Due(week) * (Challenge > 0 ? Challenges.DebtFactor(Challenge) : 1) * TaleDues * invited;
         return Challenge > 0 || TaleDues != 1 || invited != 1 ? Money.Round(due) : Guild.Due(week);
     }

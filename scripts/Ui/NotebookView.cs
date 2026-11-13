@@ -209,8 +209,9 @@ public partial class NotebookView : Node2D
             Loc.T("A strength you haven't tried on a chest costs a listen, and so does a drop. A hard shake stirs everything."),
             tier >= 2 ? Loc.T("Dropped, a chest with a false bottom booms hollow. Glass may break.") : null,
             tier >= 3 ? Loc.T("Two or three of a kind each sound from their own spot: count them.") : null,
-            tier >= 3 ? Loc.T("Sand rustles like a scroll, but pours at a gentle shake.") : null,
-            tier >= 3 ? Loc.T($"Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{Categories.MagicMultiplier}.{((tier >= 4 ? Loc.T(" Demon gold is iron under the gilt: a lodestone silences it.") : ""))}"): null,
+            // The fakes share a line (0.36: with the ear's rule the page had one line too many at the Emporium).
+            tier >= 3 ? Loc.T($"Sand rustles like a scroll, but pours at a gentle shake.{((tier >= 4 ? Loc.T(" Demon gold is iron under the gilt: a lodestone silences it.") : ""))}") : null,
+            tier >= 3 ? Loc.T($"Anything can be enchanted: it sounds the same, but glows under a witchlight. Worth x{Categories.MagicMultiplier}."): null,
         }.Where(r => r != null).ToArray();
         // Seven rules at most (0.36: the ear's), wrapped (a longer language takes more lines): room down to the panel's foot.
         _page.AddChild(UiKit.MakeLabel(string.Join("\n", rules.Select(r => "- " + r)), 16, Palette.Text).Wrapped()

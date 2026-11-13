@@ -173,7 +173,8 @@ public static partial class Simulation
                 Peak("an event", 0.6f);
             }
             if (s.Today.Stash > 0) Meet("sys:stash", 0.3f, 0.3f, "Bram's stash");
-            if (s.Commissions.Count > 0 && s.DayOfWeek == 1) Meet("sys:commissions", 1, 0.8f, "commissions");
+            // (Any morning: since 0.36 the first ones are posted on the second week's third.)
+            if (s.Commissions.Count > 0) Meet("sys:commissions", 1, 0.8f, "commissions");
         }
 
         public void Scene(GameState s, int lines)

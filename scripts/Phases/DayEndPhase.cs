@@ -260,14 +260,15 @@ public partial class DayEndPhase : Phase
             .Place(14, 14, 44, 48));
         string title = tonight ? Loc.T("VANE COMES TONIGHT") : State.DebtCleared ? Loc.T("THE GUILD'S INTEREST") : Loc.T("THE GUILD'S DUE");
         guild.AddChild(UiKit.MakeLabel(title, 16, tonight ? Palette.Warn : Palette.Muted).Place(70, 10, 290, 20));
-        guild.AddChild(UiKit.MakeLabel(Money.Short(due), 32, enough ? Palette.Gold : Palette.Bad, outline: 4).Place(70, 28, 200, 40));
+        guild.AddChild(UiKit.MakeLabel(Money.Short(due), 24, enough ? Palette.Gold : Palette.Bad, outline: 4).Place(70, 28, 200, 30));
         string when = tonight ? Loc.T("tonight") : Loc.T($"end of day {State.Day + State.DaysToNextDue}");
         guild.AddChild(UiKit.MakeLabel(when, 16, Palette.Muted, HorizontalAlignment.Right).Place(180, 32, 176, 20));
-        // What paying it brings: the next market inward (0.36), or, on the last, the end of the debt.
+        // What paying it brings, on a line of its own under the sum (a market's name runs long in French): the next
+        // market inward (0.36), or, on the last, the end of the debt.
         if (State.NextMarket > 0 && !State.PaidThisWeek)
-            guild.AddChild(UiKit.MakeLabel(Loc.T($"then {ShopTiers.Name(State.NextMarket)}"), 16, Palette.Gold.Darkened(0.1f), HorizontalAlignment.Right).Place(130, 52, 226, 20));
+            guild.AddChild(UiKit.MakeLabel(Loc.T($"then {ShopTiers.Name(State.NextMarket)}"), 16, Palette.Gold.Darkened(0.1f)).Place(70, 54, SideW - 84, 20));
         else if (!State.DebtCleared)
-            guild.AddChild(UiKit.MakeLabel(Loc.T($"debt left {State.DebtLeft}g"), 16, Palette.Muted, HorizontalAlignment.Right).Place(160, 52, 196, 20));
+            guild.AddChild(UiKit.MakeLabel(Loc.T($"debt left {State.DebtLeft}g"), 16, Palette.Muted).Place(70, 54, SideW - 84, 20));
 
         // Enough for everything that's left: finish now, however early.
         if (State.CanPayOff)
@@ -420,7 +421,7 @@ public partial class DayEndPhase : Phase
         {
             card.AddChild(UiKit.MakeLabel(Loc.T("A week at the crossroads"), 24, Palette.Gold).Place(84, 16, 600, 30));
             card.AddChild(UiKit.MakeLabel(Loc.T($"Learn the trade here, where chests are cheap. {market} is next along the road: finer chests, locks to pick, and a shelf for your best finds."), 16, Palette.Muted)
-                .Wrapped().Place(84, 50, w - 110, 66));
+                .Wrapped().Place(84, 50, w - 110, 72));
             return card;
         }
         int due = State.NextDue;
@@ -428,7 +429,7 @@ public partial class DayEndPhase : Phase
         card.AddChild(UiKit.MakeLabel(Loc.T($"Next: {market}"), 24, Palette.Gold).Place(84, 16, 600, 30));
         card.AddChild(UiKit.MakeLabel(paid ? Loc.T($"The Guild's carters will have the stall at {market} by morning.")
             : Loc.T($"Pay the Guild's {due}g on the fifth night and its carters move the stall to {market}: finer chests, locks to pick, and a shelf for your best finds."), 16, Palette.Muted)
-            .Wrapped().Place(84, 50, w - 110, 44));
+            .Wrapped().Place(84, 50, w - 110, 72)); // three lines in French
         if (paid) return card;
         float fill = Math.Clamp(State.Gold / (float)Math.Max(1, due), 0, 1);
         bool enough = State.Gold >= due;
@@ -438,9 +439,9 @@ public partial class DayEndPhase : Phase
             p.DrawRect(new Rect2(0, 0, (w - 104) * fill, 24), Palette.Gold.Darkened(0.25f));
             p.DrawRect(new Rect2(0, 0, (w - 104) * fill, 5), Palette.Gold.Lightened(0.2f));
             p.DrawRect(new Rect2(0, 0, w - 104, 24), Palette.PanelBorder, false, 3);
-        }) { Position = new Vector2(84, 112) });
+        }) { Position = new Vector2(84, 128) });
         card.AddChild(UiKit.MakeLabel(enough ? Loc.T($"You have the {due}g") : Loc.T($"You have {State.Gold}g of the {due}g"), 16, Palette.Text, HorizontalAlignment.Center,
-            outline: 4).Place(84, 114, w - 104, 20));
+            outline: 4).Place(84, 130, w - 104, 20));
         return card;
     }
 

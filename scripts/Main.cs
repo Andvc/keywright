@@ -116,7 +116,7 @@ public partial class Main : Node2D
                         Simulation.Meta(N(100), Arg(args, "--who"));
                         break;
                     case "terms":
-                        Simulation.TermsReport(N(200), Arg(args, "--who"));
+                        Simulation.TermsReport(N(200), Arg(args, "--who"), int.TryParse(Arg(args, "--level"), out var termsLevel) ? termsLevel : 0);
                         break;
                     case "levels":
                         Simulation.TermLevels(N(200));
@@ -214,6 +214,7 @@ public partial class Main : Node2D
         Platform.Unlock(Profile.Achievements);
         // Steam's callbacks every frame, paused or not (the overlay that paused the game says when it's closed).
         GetTree().ProcessFrame += Platform.Tick;
+        _ticking = true;
         // A controller moves and clicks the pointer (the mouse's own, so everything it can do, a controller can).
         AddChild(new GamepadCursor());
         GetTree().Root.Theme = MakeTheme();
@@ -479,6 +480,8 @@ public partial class Main : Node2D
     /// notice, and collects what the managed side still holds, so the engine doesn't shut down around live objects (after
     /// a long session that could crash on the way out).
     /// </summary>
+    bool _ticking;
+
     public async void QuitGame(int exitCode = 0)
     {
         if (_quitting) return;
@@ -490,8 +493,13 @@ public partial class Main : Node2D
         _bot = null;
         Sfx?.Release();
         Music?.Release();
-        GetTree().ProcessFrame -= Platform.Tick;
+        // (Only if it was started: a test that quits before the game begins has nothing to disconnect.)
+        if (_ticking) GetTree().ProcessFrame -= Platform.Tick;
+        _ticking = false;
         Platform.Stop();
+        // The audio thread lets go of what was playing at its next mix, not at Stop: give it a moment of real time (three
+        // frames are no time at all in a headless run, and with music always playing something was still held at exit).
+        await ToSignal(GetTree().CreateTimer(0.15, processAlways: true, processInPhysics: false, ignoreTimeScale: true), SceneTreeTimer.SignalName.Timeout);
         for (int i = 0; i < 3; i++) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         GC.Collect();
         GC.WaitForPendingFinalizers();

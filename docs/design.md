@@ -15,8 +15,8 @@ appraisal slip and trade the way each customer trades: pay their price, haggle, 
 tells you whether you were right; buy, and the chest bursts open on the spot: each thing's true quality, a tick or a
 cross against your slip, and now and then something far better than the chest promised. What you acquire builds the
 shop's name (synergies) and its exhibition, which draw more and better customers. The stall comes with Bram's twenty
-years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due, 40g, then 170g, 650g and
-4,200g, and each one paid moves the shop a market further in: a season is four weeks, one each at the Brindle
+years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due, 40g, then 170g, 700g and
+5,000g, and each one paid moves the shop a market further in: a season is four weeks, one each at the Brindle
 crossroads, Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate (twenty days, about an hour and a
 half of play; 0.36, *The run*). A keywright's ear is good for only so many careful listens a day (*The ear*), so which
 chest to shake, and how, is a choice every time. Curios from Nim the peddler are the run's
@@ -102,7 +102,7 @@ agree, thing by thing, with and without the lodestone (`Magnet` in code).
 
 A chest's **colour** says what to expect: wood (common), green (uncommon), blue (rare), purple (epic). Each thing
 inside rolls its own quality around that: 77.5% as promised, 9% one worse, 11% one better, 2% two better, 0.5%
-three better (what would fall below common or above legendary stays at the end). Until 0.36 it was 16% worse and 6%
+three better (what would fall below common or above legendary stays at the end). Until 0.36 it was 16% worse and 7%
 better, so the commonest surprise at an opening was "WORSE..."; now one thing in seven comes out better and one in
 eleven worse. Sellers price the average, so chests cost a little more and a careful buyer's margin is what it was. Value
 is the kind's base times 1, 2, 4, 8 or 24 by quality (0.30; v18 to 0.29: 1, 3, 10, 30, 100; v12 to v17: 1, 3, 8, 20, 50).
@@ -181,7 +181,8 @@ reveal like nothing else in the game.
 - **Rare, and rarer for each one kept** (v22). Any chest a seller brings (not a lesson's or the first day's) has a
   0.24% chance (`Heartsongs.Chance`), rolled with its own dice so nothing else changes, and each one kept this run makes
   the next a quarter as likely (`Heartsongs.Fade`, `GameState.SongsKept`). That's about a third of a Heartsong a run
-  (`--sim=songcount`: 0.39 for the careful player while the debt lasts, 0.33 for a first run): a third of runs see one
+  (`--sim=songcount`; 0.36, at 0.32% a chest over a season of about a hundred: 0.37 for the careful player while the
+  debt lasts, 0.26 for a first run; the chance was 0.16% over 0.30's 35 days): a third of runs see one
   (0.21's 0.7% was nearly one a run, and they stopped feeling rare). One you've never found is three times likelier;
   never two of the same in a run. At this pace all nine take a long career (one player in eight by run 30).
 - **Worth nothing in gold** (v22). No merchant would buy one and no seller knows it's there: it adds nothing to the
@@ -541,6 +542,16 @@ and reopened round the break; scraps too short to stand alone stay with their ne
 how far through it is and "click to go on"; a seller's bubble is sized for the whole speech and fills in as it's said
 (a click shows the rest); a talk's lines come sentence by sentence before the choices.
 
+**0.36: a speech says itself.** 0.35 asked a click for every sentence: thirteen before the first chest, and on
+through every tip, scene and tale ("there's too much talk between chests" was the fresh playtester's first complaint,
+and the experience report's). A sentence at a time is right for reading; a click a sentence isn't. Now each sentence
+appears under the last once that one has had time to be read (`Words.ReadTime`: half a second and about 45ms a
+letter, 110ms a character in Japanese and Chinese, between one second and about three), so a speech plays through
+like someone talking; a click, or the act key, shows the rest of it at once, and the next click goes on. That's one
+click a speech (a scene's line, a tip, a talk's turn) where there were three or four, and nothing the player hasn't
+had time to read is hidden behind it: the whole speech stays up until they go on. A lesson's steps still wait for
+what they ask ("do it to go on"), and a seller's bubble fills in the same way.
+
 What matters is coloured where it's said (`Rich`): the kinds of thing in gold, their sounds in blue, the strengths in
 green, the trade's words in violet; a seller's price in gold and what they state (a tally, a dream, a tag) in violet,
 the seller giving a little bob as they say it. The notes under the chest colour the seller's own rule gold, and the
@@ -555,31 +566,32 @@ Bram mentions it on the second day (the `horn` tip).
 
 ## How the shop opens up
 
-Everything arrives when it's needed, each with a word from Bram, so the first days are only about listening:
+Everything arrives when it's needed, each with a word from Bram, so the first days are only about listening. Since
+0.36 a market comes with each due paid, so the season's four weeks are its four steps:
 
 | When | What opens up | Bram explains |
 |---|---|---|
 | Day 1 | shaking, the slip and the odds bar, buying | one lesson per customer (scripted) |
-| Day 2 | passing (Bettany, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N) | each seller's first visit is a lesson; the notebook and the story tip on a later customer |
-| The second evening | the Gilded Guild and Bram's twenty years of back-tithe: a due every fifth evening, the first in three nights (until then nothing shows it) | a scene: Vane, then Bram |
+| Day 2 | passing (Bettany, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N); **the ear**, the first time a listen is spent (lessons are free to listen to) | each seller's first visit is a lesson; the notebook, the horn and the ear on later customers |
+| The second evening | the Gilded Guild and Bram's twenty years of back-tithe: a due every fifth evening, the first in three nights (until then nothing shows it), and each one paid moves the stall a market further in | a scene: Vane, then Bram |
 | Day 3 | Nim's curios (his first visit) | a tip: room for three, so pick ones that go together |
-| The stall has earned 50g, all told (`GameState.UpgradesAt`) | moves and tools at the end of the day; until then the day-end screen shows how far there is to go | what Thornwick brings |
-| Move to Thornwick | locks and lockpicking; the display shelf, keeping things, the exhibition and cabinets; with tips on, a quieter first day (a customer short) at each new shop | the lock (the first time, the pick waits while he talks); the shelf and why an exhibition matters |
-| Move to Crownhold | synergies: the journal has tallied everything from day one, so some are ready to switch on | what a synergy is and where to choose one |
-| The Royal Emporium | the biggest crowd, the lodestone, the Royal Seal | that the Gate is just down the street |
-| Week 1 | two gentle events (days 2 and 4), Nim on day 3 | a tip with each |
-| The first Guild night (0.34) | the treasury's summons: Bram goes with Vane (and Old Haddon, if his note wasn't paid); from then on his tips are notes in the margins of his notebook | a scene: Vane, then Bram |
-| Week 2 | the Guild's letter: keep Bram's account paid, and earn the treasury key's four pieces, each for a mark of the trade (a hidden thing read true, a stolen chest settled, a commission filled, an old lock picked without force); the notebook's Inquiry; the regulars' commissions; two events a week | a scene; a tip with each |
+| Week 1 | two gentle events (days 2 and 4); the day's end shows the week at the crossroads and the due as the way on | a tip with each |
+| The first Guild night (day 5) | the due paid, the Guild's carters move the shop; the treasury's summons: Bram goes with Vane (and Old Haddon, if his note wasn't paid); from then on his tips are notes in the margins of his notebook | a scene: Vane, then Bram |
+| Day 6: Thornwick Market | the road (`RoadPhase`); the Guild's letter (keep Bram's account paid, and earn the treasury key's four pieces); locks and lockpicking, the drop and false bottoms, potions and spells; the display shelf, keeping things, the exhibition and cabinets; tools and the shop's fittings, at the day's end and from their makers at the counter; with tips on, a quieter first day (a customer short) at each new market | the lock (the first time, the pick waits while he talks); the shelf and why an exhibition matters; where to spend on the shop |
+| Day 8 | the regulars' commissions; the notebook's Inquiry as it fills; two events a week | a tip with each |
+| Day 11: Crownhold | gems, archmages and enchantment, two or three of a kind in a chest; synergies: the journal has tallied everything from day one, so some are ready to switch on | what a synergy is and where to choose one |
+| Day 16: the Royal Emporium | the court, demons and their gilded iron, the lodestone, the Royal Seal, the last due | that the Gate is just down the street |
+| A day's listens running out | trading on what you know | what to spend the last on (`ear_low`), and that you can still trade (`ear_out`) |
 | A short night | pawning, and (once a run) Bram's word | a tip |
 | A day that starts nearly broke | Bram's secret stash (twice a run) | the day card, and a tip the first time |
 | The day's event | a chip in the top bar that reopens it | a tip pointing at it |
 
 The moves are renovations under the hood (`shop2` to `shop4`, `ShopTiers.Name`): Bram's Stall, Thornwick Market,
-Crownhold, the Royal Emporium. `GameState.UpgradesOpen`, `DisplayOpen` and `SynergiesOpen` hold the gates, so the sim and the bot follow them too. "Earned" is what
-the chests you've bought brought in (the day end's "the chests held", added up): a careful player gets there in two or
-three days, and moves once the purse holds the move and Thornwick's working purse besides (about day 7 since v21, whose
-working purse is two of Thornwick's typical chests; with less, the move would leave nothing to buy with, and the
-warning says so). (Counting profit instead took five to eight days at the stall with nothing new, too long.)
+Crownhold, the Royal Emporium. Until 0.36 they were bought at the day's end (80, 300 and 3,000g), the first once the
+stall had earned 50g; now `GameState.MoveInward` owns them the night a due is paid (or forgiven: Bram's word, a
+favour called in, the whole debt paid off early), and they're never on offer. `GameState.UpgradesOpen` (with
+Thornwick), `DisplayOpen` and `SynergiesOpen` hold the gates, so the sim and the bot follow them too. A week at the
+stall is five days with one thing new in each: listening, then judging sellers and the ear, Nim, an event, the Guild.
 
 ## The run: the Guild's dues
 
@@ -701,6 +713,87 @@ Bram's stash is 20g/30g at the stall, 30g/40g at Thornwick, 50g/80g in Crownhold
 saved in 0.29 carries its purse into the new economy at what its shop's chests are worth now against then
 (`SaveData` version 6).
 
+**0.36: four weeks, and each week a market.** The owner: the game isn't engaging or fun enough; reconsider anything.
+The review (`docs/redesign-0.36.md`) found the season itself at the root of it. The experience playtest's own last
+line was "A first run takes about 2.4 hours: too long to want another"; its thirty first-timers all lost (in week 6,
+after 143 minutes and 169 customers), 93% lost their second run and 90% their third; a learner reached Thornwick on
+day 8 and was still there on day 30, with one new thing a day, and the report's engagement score fell from 28 on the
+first day to about 10 from the twentieth. The moves inward were bought (80, 300 and 3,000g), so whoever most needed
+something new was whoever couldn't afford it.
+
+So a season is four weeks, twenty days, and **paying a week's due is what moves the shop** (`GameState.MoveInward`):
+the Guild's carters come that night, and the next morning the stall trades a market further in. Week 1 is Bram's
+stall at the Brindle crossroads, week 2 Thornwick Market, week 3 Crownhold, week 4 the Royal Emporium by the Gate.
+It's the story's truth too: the Guild wants its keywright at the Gate by the season's last night
+(`docs/narrative.md`), so it pays the carters, and Vane says so the evening he introduces the debt. Everyone who keeps
+paying sees every market, a due is no longer only a tax (it buys the week's high point: the road, a new place, new
+people), and a season that's going to fail fails at a due, not after two hours at Thornwick.
+
+| Week | 1 | 2 | 3 | 4 | then |
+|---|---|---|---|---|---|
+| Market | Bram's Stall | Thornwick Market | Crownhold | The Royal Emporium | |
+| Day | 5 | 10 | 15 | 20 | |
+| Due | 40g | 170g | 700g | 5,000g | x1.5 a week |
+
+The first three dues take a quarter to a half of a careful purse and leave a working purse for the market they
+open; nearly everyone pays them (a first-timer 98% of the time, with Bram's word now and then), so the wall is the
+last, at the Emporium, as it was. Level 0 is the story's difficulty now: the careful player clears 90% of seasons
+(88% with no Heartsongs, 79% with no curios, 61% with no tales, 31% with neither), a learner at 0.9 81%, at 0.75 66%,
+at 0.5 43%, at 0.3 26%, and a first run 20% (120 runs each, `--sim=quick`, `--sim=learners`); the eight challenge
+levels are where it gets hard (`--sim=levels`, 150 runs each, as drawn: 77, 57, 43, 35, 18, 16, 9 and 6%). A career
+first clears the debt on its second or third season (a quarter of players on the second, half by the third, three
+quarters by the fifth; 0.35: around the sixth), which is when the treasury first swallows it; Bram is first brought
+home around the tenth season and the next day reached around the tenth too (0.35: both around the thirteenth, at
+two and a half hours a season); level 1 falls around the seventh run, level 2 around the eleventh, level 4 around
+the twenty-sixth (two careers in three by run 30), level 6 to one career in twelve by run 30 and level 8 to none
+(`--sim=careers --n=60`).
+
+**Getting there.** The dues were tuned with `--sim=learners --dues=a,b,c,d` (six skills from a first-timer to the
+careful player, 120 seasons each, two minutes). 40, 250, 1,200 and 7,000 cleared 10% at the bottom and 77% at the
+top; 30, 150, 600 and 4,000 cleared 24% and 98%: no wall at all. The
+shape wanted was a first-timer at about one in five, the middle of the learning curve at about four in ten and the
+careful player at about nine in ten, with every due before the last paid by nearly everyone.
+
+Two things in the sim had to be put right before its numbers meant that. Its careful player paid the due before the
+day's end, where the game has the day's end first: harmless while a move was something bought, but once paying moves
+the shop it had the sim's player buying the next market's fittings before trading a day there. And its saving rule
+(`Strategy.Reserve`) still measured a bad day's trading at 0.35's Emporium, which made thousands a customer, so it
+kept nothing back for the last due until its last two days. With the evening in the game's order and a bad day
+measured from this season (15, 40, 250 and 650g a market), the same player was a little richer than the dues had been
+set for, and they went from 40, 170, 650 and 4,200 to **40, 170, 700 and 5,000**.
+
+What changed with it:
+
+- **The road** (`RoadPhase`): the first morning at a market further in shows the season's road, its four stops as
+  pictures and the Gilded Gate at its end, the stall's cart rolling in from the last one, what this market brings and
+  what the Guild wants here. The day's end at the stall shows the due as the way on ("Next: Thornwick Market"), and
+  the Guild's panel says where paying leads.
+- **Five customers a day** at every market past the stall (four there; six at Thornwick and Crownhold until now): a
+  day's listens are counted (*The ear*), and a first run is 103 minutes over 104 customers, a second 94 and a third 88
+  (`--sim=experience`; 0.35: 143, 140 and 132, each lost at week 6). High points come 7.8 an hour in a first run and
+  ten in a second (5.3 and 5.1), no time is spent in stale stretches (6%), and the engagement score holds between 16
+  and 44 to the last day.
+- **No moves to buy**: `Upgrades` still has them (their blurbs say what each market brings, for the road), but they're
+  never on offer; tools and the shop's fittings open at Thornwick, where their makers are. Thornwick's welcome (a
+  boon) takes a quarter off the second due, the one paid at its market, where it used to halve the move.
+- **A market's first day is a quiet one** for a learner (tips on): a customer short, as before, and now with no
+  locked chests either (`GameState.StartDay`, `Chest.Unlock`): the place, its people, two new sounds and the drop
+  are a day's learning, and the lock and its picking come the day after. With the sim's evening put in the game's
+  order (below), a first-timer's first day at Thornwick turned out to ask 7.1 of a load of 6, the lock 1.5 of it.
+- **Fewer tales, told faster** (`TaleBook.Draw`, `GameState.Wait`): two of Brindle's and two of Thornwick's, one of
+  Crownhold's and one of the Emporium's, with the Shut Chests, the King's Court, the campaign and whoever minds the
+  stall's own: about a beat a day (21 a season) where 0.35 had 34 over its 35. The beats were written for seven weeks:
+  a tale's first beat now comes at the same point of the same market's week (`SeasonDay`), a later one waits about
+  three-fifths as long, and a tale that begins at the Emporium is told a beat a day.
+- **The campaign's nights** keep their order: the summons on the first Guild night, Vane's bribe on the second (the
+  fourth, of seven) and his bargain on the third (the sixth), the gathering on the fourth week's first morning.
+- **Curios**: rare ones come with Thornwick's week and legendary ones with Crownhold's, a little oftener than over
+  seven weeks (`Curios.Rates`): a build has eighteen nights to come together, not thirty-three.
+- **The regulars' first commissions** come on the second week's third morning, not its first, which already brings a
+  market, the Guild's letter, locks and the drop.
+- **Saves**: a run saved in 0.35 picks up at the market it had reached, on the same day of its week, with the dues
+  before it paid, and every day the save remembers moved back with it (`SaveData` version 8).
+
 **Paying it off early.** Whenever you have all that's left of the debt (`GameState.DebtLeft`: this week's due if it's
 unpaid, and every week's after it to the last), you can pay it at once: from the day-end screen's Guild panel, which
 shows what's left and turns into a "Pay it all off" button (with a confirmation), or on the Guild's night beside the
@@ -813,7 +906,8 @@ a talent another), so a run is a handful of choices that have to fit together. 0
 and the named rule, which held what they added to what your slip named). 0.21 (the owner: rare curios came too often
 and too early, the named rule was clumsy, builds are the heart of the fun and each should play differently) gives them
 rarities, has Nim build with you, lets the numbers do what the named rule did, and gives six ways of trading a way to
-play of their own: 78 curios in all, and 0.22's Guild Promissory Note (Mara's Favour, a talent until then) makes 79.
+play of their own: 78 curios in all, and 0.22's Guild Promissory Note (Mara's Favour, a talent until then) makes 79;
+0.36's two for the ear (an Echo Stone, Lamb's-Wool Plugs: *The ear*) make 81.
 
 **Every card does what it says** (0.35). The owner found curios that didn't seem to behave as described, so each of
 the 79 was audited against its card: `tools/curiotest` (a console program that compiles Core and runs 200 checks, a
@@ -922,6 +1016,7 @@ read). The whole list (`--sim=curiolist`; T: the shop tier Nim brings it from):
 |  | Spellbinder's Ring | R, T3 | Enchanted things are worth four times as much, not twice. | once you've had the Royal Emporium, or after four runs |
 |  | Archmage's Staff | L, T3 | Everything in a chest with an enchanted thing in it is enchanted. | after 15 enchanted things found, all told |
 | sight unseen | Sealed Bid | C | Buy a chest sight unseen and its seller knocks 15% off. | from the start |
+|  | Lamb's-Wool Plugs | U | Buy a chest sight unseen and your ear rests: a listen back. | after your first run |
 |  | Lucky Dip | U | Everything in a chest you take sight unseen is 15% likelier to come out a step better. | after your first run |
 |  | Underwriter's Bond | U, T2 | A chest bought sight unseen holds less than you paid? The Underwriters pay 40% of it back. | after your first run |
 |  | Wholesaler's Tally | U, T2 | Each chest you buy makes every seller after it today ask 4% less (up to 20%). | once you've had a shop in Crownhold, or after two runs |
@@ -937,6 +1032,7 @@ read). The whole list (`--sim=curiolist`; T: the shop tier Nim brings it from):
 |  | Pocket Watch | C | Impatient sellers give you twice as long, and a rotten chest stands twice the shaking. | from the start |
 |  | Counting Beads | C, T2 | A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all. | from the start |
 |  | Appraiser's Seal | U | A perfect read pays you a valuer's fee: 8% of what the chest held. | from the start |
+|  | Echo Stone | U | A perfect read gives you a listen back. | from the start |
 |  | Cursed Crescent | U | Everything comes out exactly as its chest promised. Sellers sense the curse and ask 5% less. | after your first run |
 |  | Valuer's Register | U, T2 | A perfect read pays 0.5% of what the chest held for each one so far this run (up to 12%). | after your first run |
 |  | Tuning Fork | R | Each perfect read in a row: the next chest's things sell for 3% more (up to 30%). | once you've had the Royal Emporium, or after four runs |
@@ -1288,40 +1384,53 @@ below, each a quarter more to a run's score (x3 at level 8). A level does two th
   120 careers cleared level 6 by run 30 32% of the time and level 8 7%, against 0.32's 23% and 4%, and at 20% a level
   21% and 3%, level 4 half by run 26 against 0.32's 25).
 - **Its terms**: the run is dealt as many **banes** as the level's number and as many **boons** (`TermDef`,
-  `Challenges.Draw`), from twelve of each. The deal is nested (a bane, then a boon, from one shuffle of each pool), so a
-  level's terms are the level below's and one pair more, and a boon never comes with the bane it contradicts (four
-  pairs: savings and a lean start, Thornwick's welcome and the Guild's builders, a slow season and a hurried one, Bram
-  prepared and Bram stretched thin). A real run deals from `Profile.TermsSeed` (the number of runs started), so the
+  `Challenges.Draw`), from thirteen of each (twelve until 0.36). The deal is nested (a bane, then a boon, from one
+  shuffle of each pool), so a level's terms are the level below's and one pair more, and a boon never comes with the
+  bane it contradicts (five pairs: savings and a lean start, Thornwick's welcome and the Guild's builders, a slow
+  season and a hurried one, Bram prepared and Bram stretched thin, a rested ear and a head cold). A real run deals from `Profile.TermsSeed` (the number of runs started), so the
   setup screen shows exactly what will be played; the pause menu shows them during the run, each explained on hover,
   and the save keeps them.
 
 Banes make the trade harder; boons smooth over what's most frustrating about it (a slow start, a short night, a
 sweeping clock, a lock that slips, a curio you can't find), so a harder season is never all bad, and two runs at the
 same level differ. Every term is a rule that holds every time, with a reason in `docs/world.md`, routed through
-`GameState.Under` or `Favoured` where its rule lives (so the sim and the bot play it too). What each does alone to the
-careful collector (Kit, 150 runs at the usual dues, 49% with none; `--sim=terms`; a few points either way is noise):
+`GameState.Under` or `Favoured` where its rule lives (so the sim and the bot play it too). There are thirteen of each
+since 0.36, which added a head cold and a rested ear (*The ear*).
+
+What each does alone to the careful collector, **at level 3's dues** (Kit, 150 seasons each, 47% with none;
+`--sim=terms --level=3`; six points either way is noise at that size, and the five marked * were measured again over
+400, 46% with none). At level 0 the careful collector clears nine seasons in ten whatever the terms, so a term alone
+hardly shows there, which is why 0.36 weighs them at a level where half are lost.
 
 | Bane | Rule | Cleared | | Boon | Rule | Cleared |
 |---|---|---|---|---|---|---|
-| Thin crowds | the week's last two days, a customer fewer | 42% | | Welcome gifts | the first two customers' chests for a coin each | 60% |
-| Sharp sellers | hagglers' least is 15% higher | 45% | | Nim's soft spot | Nim shows something else twice a visit | 46% |
-| Demon gold about | one coin in ten is demon gold | 43% | | Bram's savings | half as much gold again to start | 55% |
-| A hurried season | every seller gives you 20 seconds | 43% | | Bram's old picks | the Fine Lockpicks from the start | 48% |
-| Fussy sellers | everyone minds a drop | 43% | | Thornwick wants you | the move to Thornwick at half price | 59% |
-| Bram's stretched thin | a stash dip fewer, Bram's word once fewer | 49% | | A slow season | twice the patience and twice a rotten chest's shaking | 51% |
-| A lean start | half the gold to start | 45% | | Bram's prepared | a stash dip more, Bram's word once more | 49% |
-| Nim's raised his prices | curios a quarter dearer | 44% | | An honest clerk | pawning at full price | 47% |
-| The Guild's builders | upgrades and moves a quarter dearer | 41% | | A good name | hagglers hear you out | 45% |
-| A wet year | a pin more in every lock | 45% | | A lucky charm | the dry spell ends twice as soon | 52% |
-| Wary regulars | a commission fewer a week | 43% | | Fair days | no mourning, no assessors | 53% |
-| Nim's lean month | three curios on Nim's counter, not four | 45% | | Room for more | a curio slot more | 51% |
+| Thin crowds | the week's last two days, a customer fewer | 38% * | | Welcome gifts | the first two customers' chests for a coin each | 49% |
+| Sharp sellers | hagglers' least is 15% higher | 45% | | Nim's soft spot | Nim shows something else twice a visit | 48% |
+| Demon gold about | one coin in ten is demon gold | 45% | | Bram's savings | half as much gold again to start | 52% * |
+| A hurried season | every seller gives you 20 seconds | 46% | | Bram's old picks | the Fine Lockpicks from the start | 46% |
+| Fussy sellers | everyone minds a drop | 45% | | Thornwick wants you | the second due, the one paid at Thornwick, a quarter lighter | 54% * |
+| Bram's stretched thin | a stash dip fewer, Bram's word once fewer | 46% | | A slow season | twice the patience and twice a rotten chest's shaking | 51% |
+| A lean start | half the gold to start | 41% * | | Bram's prepared | a stash dip more, Bram's word once more | 47% |
+| Nim's raised his prices | curios a quarter dearer | 43% | | An honest clerk | pawning at full price | 50% |
+| The Guild's builders | every upgrade a quarter dearer | 42% | | A good name | hagglers hear you out | 48% |
+| A wet year | a pin more in every lock | 45% | | A lucky charm | the dry spell ends twice as soon | 46% |
+| Wary regulars | a commission fewer a week | 42% * | | Fair days | no mourning, no assessors | 48% |
+| Nim's lean month | a curio fewer on Nim's table | 45% | | Room for more | a curio slot more | 49% |
+| A head cold | a listen fewer every day | 44% | | A rested ear | three listens more every day | 50% |
 
-Banes are kept within a few points of each other (thin crowds over every day, and sellers asking a tenth more, cost
-a quarter of all clears on their own, and were cut down). Several boons hardly move the careful collector, who never
-needs a second look from Nim or a second try with a haggler and has a steady hand on a lock: they're there for people,
-and the few that do move it (the first morning's gifts, Thornwick's welcome) are the lucky draws. Bram stretched thin
-doesn't change how often the careful collector clears, but ends a run that would have leaned on Bram's word a week
-sooner.
+Every bane costs something (one to eight points) and no boon costs anything that isn't noise; thin crowds is the
+heaviest bane, as it was in 0.35, and Thornwick's welcome the best boon. A level's dues do most of the work (alone
+they clear 72, 59, 33, 12 and 7% at levels 1, 2, 4, 6 and 8; the levels as drawn 77, 57, 43, 35, 18, 16, 9 and 6%,
+each harder than the one below), and the terms are what makes two seasons at a level play differently.
+
+Three terms were changed in 0.36. Thornwick's welcome halved the price of the move until there was no move to buy,
+and then half the second due, which was worth thirteen points; it takes a quarter off now. A head cold took two
+listens a day and eight points, and takes one; a rested ear gave two listens and one point, and gives three. A listen
+lost is one of the eight a day was planned around; a listen more is a ninth check on a chest already read.
+
+Several boons hardly move the careful collector, who never needs a second look from Nim or a second try with a
+haggler and has a steady hand on a lock: they're there for people. Bram stretched thin doesn't change how often the
+careful collector clears, but ends a run that would have leaned on Bram's word a week sooner.
 
 Whole levels as drawn (Kit, 200 runs each; 0.33, the dues 20% up a level, `--sim=levels`): 56 (level 1), 46, 42, 32, 24,
 19, 19 and 9%. (Before 0.33, at 15%: 49 (level 0), 41, 33, 29, 24, 20, 20, 17 and 16%; v22's fixed terms: 48, 48, 42,
@@ -1443,7 +1552,7 @@ softly. (Until 0.31 a closed chest sat under the menu with coin sounds, and the 
 what unlocks them), the chosen one's rules, and the challenge level with its terms and multiplier. The shop is
 saved to `user://save.json` at the start of each day (`GameState.Save` and `Load`, plain JSON from Core), so leaving
 mid-day starts that day over; the pause menu (Esc, or Menu in the top bar) says so. Settings (`user://settings.cfg`):
-volume, fullscreen, screen shake and flashes (full, reduced or off), outlines (round everyone and along the counter's
+volume (effects, songs and, since 0.36, music), fullscreen, screen shake and flashes (full, reduced or off), outlines (round everyone and along the counter's
 edge, on whatever screen is showing, for art drawn to be outlined: see the art, above; 0.31's isn't), Uncle Bram's tips, and **item sounds**: for each
 kind of thing, which of three or four sounds it makes (`Audio.SoundSets`; recorded ones from Kenney's CC0 packs via
 `tools/import_art.py`, a few synthesized in `Sfx`). Each kind's sound stays the one you'd expect in real life (a
@@ -1454,6 +1563,40 @@ Click a kind's option to hear the next one.
 skip the rest of the day (the customers still waiting go home, and the day ends as usual, so the Guild's night still
 comes), and unlock the whole journal (every regular, every find and its enchanted star, every curio Nim could carry,
 in the run and the profile). Nothing in it is fair, and the panel says so.
+
+## Music and ambience (0.36)
+
+Until 0.36 the game had neither: hours behind one counter with nothing under the chests' sounds, which the review
+counted among the reasons a season felt long. There's no composer and nothing to download here (only GitHub is
+reachable from a cloud session), so the music is made the way the Heartsongs' songs are, in code, but offline and at
+length: `tools/music/synth.py` is a small additive synth (a plucked lute, a whistle, strings, bells, a bass, a frame
+drum; a loop that wraps whatever rings past its end and a reverb that goes round with it, so every loop is seamless),
+and `tools/music/make.py` has the tunes written out a bar at a time and renders them to
+`assets/audio/music/*.ogg` and `assets/audio/ambience/*.ogg` (about 4 MB in all; `python3 tools/music/make.py`,
+needs numpy and ffmpeg).
+
+| Theme | Where | What it is |
+|---|---|---|
+| `crossroads` | the title, the character screen, Bram's stall | a lilting air in D, six-eight, a whistle over a lute |
+| `thornwick` | Thornwick Market | a jig in E dorian, whistle, lute and a frame drum |
+| `crownhold` | Crownhold | stately, in D minor: a plucked keyboard's broken chords, strings, a slow flute |
+| `emporium` | the Royal Emporium | a slow waltz in A minor on bells and a harp, over a low note that never quite stops |
+| `night` | the day's end, Nim's table, a night's talk, a season's end | a music box over held strings, in G |
+| `guild` | the Guild's night, scenes in its counting-house | low strings marking time, a bell every other bar |
+| `treasury` | the treasury, the Keyhold | no tune: a low note that swells and sinks as if it breathed |
+
+Each market further in has its own theme, so the road is heard as well as seen: paying a due changes the music. Under
+the theme is a bed of ambience (`day`: birds and wind at the crossroads; `market`: a crowd's murmur; `hall`: the
+Emporium's hush, voices kept low; `night`: crickets and an owl), a few decibels below it. `Music` (scripts/Audio) picks both
+from the screen and the shop when `Main.SwitchTo` changes phase (`Music.For`), cross-fades, and carries a theme on
+where it was when the next screen wants the same one. Both play on the Music bus, with its own volume in Settings >
+Sound (60% to start with: it's a bed, not a performance); a Heartsong's song has the room to itself (`Music.Duck`:
+the music steps back while one sings). The chests' sounds are untouched, and louder than the music by design: the
+game is still played by ear.
+
+What can't be checked from here is how it sounds to a person: the tracks were checked by their numbers (peaks at
+half scale, loudness around -21 dB RMS, energy centred between 500 and 900 Hz so nothing sits on the chest sounds'
+band, seams far smaller than an ordinary step between samples) and their spectrograms. See *Open questions*.
 
 ## The trade's words (0.32)
 
@@ -1680,6 +1823,46 @@ steeply enough for the middle and late dues, and judgment pushing the curve up u
 levels. Since v22 only judgment, and what's known (the journal, Nim's stock, the legendaries' feats), carries from run
 to run: until then talents did half the pushing.
 
+**0.36: the story's difficulty, then the levels.** The goal above ("no easy win in the first few runs") was set
+when a run was an hour and the story's turn didn't exist. By 0.35 a season took two and a half hours, the first clear
+came around the sixth, and the treasury, the Inquiry and everything the campaign is came after it: fourteen hours of
+losing before the game showed what it was. 0.36 keeps "no pressure before the puzzles are learned" and "judgment
+pushes the curve up", and moves the wall: level 0 is the difficulty a new player meets the story at, and the eight
+challenge levels are the game for someone who has (*The run*, "0.36: four weeks, and each week a market").
+
+| Skill (Kit, level 0, 120 seasons each) | 0.35 cleared | 0.36 cleared | 0.36: still trading after the third due |
+|---|---|---|---|
+| 0.15 (a first season) | none | 20% | 98% |
+| 0.3 | | 26% | 98% |
+| 0.5 | 13% | 43% | 100% |
+| 0.75 | 55% | 66% | 100% |
+| 0.9 | | 81% | 100% |
+| 1 (the careful collector) | 70% | 90% | 100% |
+
+Nobody is lost before the Emporium to speak of: a season that fails, fails at the last due, on the twentieth night,
+having seen every market. That's the other half of the change: a lost season in 0.35 ended in week 6 at Thornwick or
+Crownhold, two shops short of anything new.
+
+Careers (`--sim=careers --n=60`, 30 seasons each at the highest level open):
+
+| First... | a quarter of players | half | three quarters | by season 30 |
+|---|---|---|---|---|
+| clear the debt (level 0) | season 2 | 3 | 5 | all |
+| swallowed at the treasury | 2 | 4 | 5 | all |
+| clear level 1 | 4 | 7 | 10 | all |
+| clear level 2 | 9 | 11 | 16 | all |
+| Bram brought home | 6 | 10 | 13 | 98% |
+| the next day (the true ending) | 7 | 10 | 13 | 98% |
+| clear level 4 | 21 | 26 | | 65% |
+| clear level 6 | | | | 8% |
+| clear level 8 | | | | none |
+| all nine Heartsongs known | | | | 17% |
+
+(0.35: the debt first cleared around season 5 or 6, level 4 around 23, level 6 by 13% and level 8 by none; Bram
+first home and the next day around season 13, by 83% of careers by season 30.) The levels as drawn clear 77, 57, 43,
+35, 18, 16, 9 and 6% for the careful collector, so the top is the wall it was and the climb to it starts from a
+kinder place. A season is an hour and a half, so the true ending is about fifteen hours in where it was over thirty.
+
 **Learners.** The sim's careful player is a perfect listener. A learner (`Style.Skill`, 0 to 1) plays the same way
 with a learner's mistakes, each shrinking as skill grows: at skill 0 they skip each strength 40% of the time, count a
 pair as one half the time, tick the kind a place usually holds without hearing it a third of the time, forget the
@@ -1856,6 +2039,32 @@ day just over capacity there (0.31: a little over half; the heaviest day's load 
 those days is the same (warded things, lockpicking, the drop, Mother Sorrel). A second and third run have no day over
 capacity.
 
+**0.36: the report that started a redesign.** Run on 0.35, the report's last line was "A first run takes about 2.4
+hours: too long to want another", and its table said why: all thirty first-timers lost, in week 6, and the engagement
+score fell from 28 on the first day to about 10 from the twentieth, with a learner still at Thornwick on day 30.
+0.36's season of four weeks, a market each, was built against it (*The run*, *The ear*), and this is the same report
+on both (medians over the 30 learners):
+
+| | 0.35 | 0.36 |
+|---|---|---|
+| Run 1: length | 143 minutes, 30 days (of 35), 169 customers | 103 minutes, 20 days, 104 customers |
+| Run 1: how it ends | lost by all 30, in week 6 | cleared by 23%; lost in week 4, at the last due |
+| Run 1: new things an hour; high points an hour | 30.7; 5.3 | 51.6; 8.5 |
+| Run 1: time in stale stretches | 6% (longest 9 minutes) | none |
+| Run 1: players with a day over capacity | 40% (heaviest day's load 5.7, day 9) | 53% (6.1, day 7) |
+| Run 2: length; high points an hour; stale | 140 minutes; 5.1; 5% | 92 minutes; 10.2; none |
+| Run 3: length; high points an hour; stale | 132 minutes; 5.7; 7% | 89 minutes; 11.1; none |
+| Runs 2 and 3: cleared | 7%, 10% | 30%, 43% |
+
+A high point comes every seven minutes in a first season and every five or six after, where it came every eleven;
+nothing is stale, because a market lasts five days; and three seasons take four and three quarter hours where they
+took seven, with a first clear likely inside them. What it still says: the first two days at Thornwick are the
+busiest of a first run, just over the load for half of first-timers, a little more than in 0.35 (the road, the
+Guild's letter, locks, the drop, potions and spells, the shelf and a first warded thing arrive together, and now the
+ear runs low there for the first time); and a third season brings a sixth of what a first does that's new (7.8 new
+things an hour against 51.6), which is what the challenge levels' terms, the other keywrights and the campaign's
+remembered seasons are for.
+
 ## What was cut, and why
 
 1. **Auction (v1).** The game did the judging, and bidding against one bot had a dominant strategy.
@@ -1973,6 +2182,30 @@ capacity.
     was the same run. v24: every level raises the dues a little and deals as many boons as banes, drawn for each run,
     so a level is harder but never all bad, and two runs at it differ.
 
+22. **The seven-week season (0.30 to 0.35), and the five-week one before it.** Thirty-five days, about two and a half
+    hours, and a first-timer lost every one of them in the sixth week; the story's turn (the treasury) came after a
+    career's sixth season. Each lengthening had a reason (room for the tales, a gentler curve), and each made a lost
+    run cost more and a won one come later. 0.36: four weeks, a market each (*The run*).
+
+23. **Buying the moves (until 0.35).** "Move to Thornwick" for 80g, Crownhold for 300, the Emporium for 3,000, at the
+    day's end, with a working purse kept back. It made the biggest thing that happens in a season (a new place, new
+    people, new sounds) something a struggling player couldn't have: the experience report's learners reached
+    Thornwick on day 8 and were still there on day 30. It also made the due purely a tax. 0.36: the due paid is the
+    move.
+
+24. **Free listening (until 0.35).** Every strength, the drop and the lodestone on every chest, for nothing. With no
+    cost the right play was all of them every time, which is a procedure; nine chests in ten were profitable for
+    whoever followed it, so an opening only confirmed the slip. 0.36: the ear (*The ear: listens*). What was kept
+    from it: shaking again the way you already have is free, so counting is never rationed, and lessons are free.
+
+25. **A click a sentence (0.35).** Dialogue a sentence at a time was right; waiting on a click for each was three or
+    four clicks a speech, all day. 0.36: a speech says itself, and a click finishes or dismisses it.
+
+26. **Odds that leaned down (v12 to 0.35).** A thing came out a step worse than its chest's colour 16% of the time and
+    better 7% (v10's one-in-five jackpots had been cut hard, and the letdowns never were), so the opening's commonest
+    event was "WORSE...". 0.36: worse 9%, better 13.5% (sellers price the average, whatever it is, so the margins
+    didn't move): *What a chest holds*.
+
 ## Open questions
 
 - Heartsongs: is a sound you've never heard, then the reveal and its choice, the heart-racing moment it should be?
@@ -2006,7 +2239,7 @@ capacity.
   for a hunch (paying a little over the odds for a chest you suspect holds more), or does everyone just follow it?
 - Enchantment is now x2 instead of x4: still exciting enough to hunt with the witchlight?
 - The shop saves at the start of each day only, and sellers don't remember you.
-- A week at the stall before the first renovation (the careful player moves on day 7): long enough to learn the three
+- A week at the stall before Thornwick (five days since 0.36, whoever you are): long enough to learn the three
   rules, or too long?
 - The sim's careful player is a perfect listener: real players will clear the debt less often. Is 45,000g in week 5
   a wall people want to climb again, or a cliff? Bram's word (once a run) and his stash (twice) are the safety nets;
@@ -2040,3 +2273,25 @@ capacity.
 - 0.34's campaign: does a second season show at once that knowing changes play (Garrick's chest, Old Haddon's note,
   Bram's tuning fork), do the Inquiry's leads read as things to do rather than homework, and does the plan's
   four-line list make the true ending feel earned before it's shown?
+- 0.36's ear, with a real hand on a real mouse: does a listen feel spent on purpose? A strength is given the ear after
+  the chest has moved that fast for a sixth of a second, and one hold follows its hardest shake; the bot and the
+  playtest tool can't say whether a person winding up to a hard shake pays for a firm one on the way. If they do, the
+  first thing to try is a longer `CounterPhase.ListenHold`. And is eight the right number: does a day's fifth chest
+  feel like a choice (which one check?) or like being told to stop playing?
+- Does running out read as a rule of the world (an ear tires) or as an energy meter from a phone game? The kettle and
+  the screen are there so the answer to "I want more" is in the shop, at a price, from the second week.
+- Level 0 is the story's difficulty now (the careful player clears nine seasons in ten, a first-timer about one in
+  five, and half of careers by their third). Is a first clear on a second or third season the hook it's meant to be,
+  with the treasury's turn straight after it, or does it make the Guild a paper tiger until the challenge levels?
+  The dues are four numbers (`Guild.Dues`) and `--sim=learners --dues=a,b,c,d` tries others in a few minutes.
+- The first three dues are paid by nearly everyone and the last is the wall. Is a season whose only real test is its
+  last night tense all the way, or only then? A stiffer third due would test Crownhold too, at the cost of seasons
+  that never see the Emporium.
+- The music was written and rendered in code and checked by its numbers; nobody has heard it. It may be pleasant,
+  thin, or wearing over an hour: it has its own volume, every theme is a function in `tools/music/make.py`, and a
+  composer's tracks would drop into the same seven file names.
+- Six tales a season instead of eleven: does a season still feel like a town with its own troubles, and do two
+  seasons still feel different? A tale that begins at Crownhold has ten days to finish; some endings will be read at
+  the season's end rather than played.
+- A speech that says itself: is the pace right for a slow reader (it never hides anything: the whole speech stays up
+  until a click), and for a fast one (a click shows the rest at once)?

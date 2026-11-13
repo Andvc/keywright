@@ -30,7 +30,10 @@ public sealed class Chest
     /// <summary>A thing sealed under a false bottom, or null. It never rattles; nobody but you will ever know.</summary>
     public Item Hidden { get; private set; }
 
-    public LockTier Lock { get; }
+    public LockTier Lock { get; private set; }
+
+    /// <summary>No lock after all (0.36: with tips on, a market's first day has none, <see cref="GameState.StartDay"/>).</summary>
+    public void Unlock() => Lock = LockTiers.All[0];
 
     /// <summary>Wrapped in iron chains (the Stranger's): nothing inside can move, so nothing makes a sound.</summary>
     public bool Sealed { get; }

@@ -70,15 +70,23 @@ public partial class RoadPhase : Phase
         Sfx.PlayGroup("door_open", 0.9f, -8);
 
         // What this market brings, and what the Guild wants here.
+        // Each as tall as its words (a market's blurb runs to three lines in French), the one under the other.
+        const float textX = 200, textW = 880;
+        float y = 452;
         if (Upgrades.MoveInto(tier) is Upgrade move)
-            Add(UiKit.MakeLabel(move.Blurb, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(240, 452, 800, 46));
+        {
+            float h = Mathf.Max(22, UiKit.TextHeight(move.Blurb, textW));
+            Add(UiKit.MakeLabel(move.Blurb, 16, Palette.Text, HorizontalAlignment.Center, outline: 4).Wrapped().Place(textX, y, textW, h));
+            y += h + 8;
+        }
         if (State.GuildIntroduced && !State.DebtCleared)
         {
             int due = State.DueNow;
             string onward = State.NextMarket > 0
                 ? Loc.T($"The Guild's due here: {due}g, on the fifth night. Paid, the road goes on to {ShopTiers.Name(State.NextMarket)}.")
                 : Loc.T($"The last of Bram's debt: {due}g, on the fifth night.");
-            Add(UiKit.MakeLabel(onward, 16, Palette.Warn, HorizontalAlignment.Center, outline: 4).Wrapped().Place(240, 506, 800, 44));
+            Add(UiKit.MakeLabel(onward, 16, Palette.Warn, HorizontalAlignment.Center, outline: 4).Wrapped()
+                .Place(textX, y, textW, Mathf.Max(22, UiKit.TextHeight(onward, textW))));
         }
         Add(UiKit.MakeButton(Loc.T("Open the shop"), Palette.Gold, 24, Finish).Place(480, 584, 320, 64));
         Game.Moment($"00_road_{tier}", 2.2);

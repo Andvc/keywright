@@ -35,7 +35,7 @@ public static class Guild
     /// ceiling, and chests top out at purple): carrying it takes a build come together or tales gone well. (0.30 to 0.35:
     /// seven dues, 20 to 12,000, over 35 days, with the moves bought for 80, 300 and 3,000.)
     /// </summary>
-    static int[] Dues = { 40, 170, 650, 4200 };
+    static int[] Dues = { 40, 170, 700, 5000 };
 
     /// <summary>For tuning (`--sim=quick --dues=a,b,c,d`): other dues, one a week of the debt.</summary>
     public static void TryDues(int[] dues)

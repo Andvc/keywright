@@ -66,21 +66,70 @@ surprise is a good one.
 
 ### 4. Less talk between chests
 
-A speech plays its sentences one after another by itself (one click a speech, a click to finish it at once), and
-the opening scene is cut to what a first chest needs.
+A speech plays its sentences one after another by itself (one click a speech, a click to finish it at once). The
+opening scene keeps its four speeches, each of which sets up something the campaign calls back to (the mark, the
+trade in a sentence, Bettany, Bram's tap): four clicks before the first chest where 0.35 took thirteen.
 
 ### 5. Music and ambience
 
 A soundtrack made in code like the Heartsongs' (a theme for the title, each market, the night, the Guild and the
 treasury) and ambience beds for each place, on their own bus with a Music volume.
 
+## Where it landed
+
+Everything above is in 0.36. The numbers are the game's own reports on the finished build (`docs/design.md` has them
+in full, with how each was measured), against the same reports on 0.35:
+
+| | 0.35 | 0.36 |
+|---|---|---|
+| A season | 7 weeks, 35 days | 4 weeks, 20 days, a market each |
+| A first season, played by a learner (`--sim=experience`) | 143 minutes, 169 customers, lost by all 30 | 103 minutes, 104 customers, cleared by about one in four |
+| High points an hour, seasons 1 / 2 / 3 | 5.3 / 5.1 / (5) | 8.5 / 10.2 / 11.1 |
+| Time in stale stretches (a first season) | 6% | none |
+| The careful player clears (`--sim=quick`) | 70% | 92% |
+| A learner at 0.75 / 0.5 / a first-timer | 55% / 13% / none | 73% / 43% / 25% |
+| A chest bought by a careful player turns a profit | about nine in ten | 86%, on fewer checks (a perfect read on 61%) |
+| A career first clears the debt (`--sim=careers`) | around the sixth season | the second or third |
+| The treasury first swallows you (the story's turn) | around the sixth season, fourteen hours in | the second or third, four or five hours in |
+| The true ending (the next day) | around the thirteenth season | around the tenth |
+| Dialogue | a click a sentence | a click a speech |
+| Music | none | seven themes and four beds of ambience |
+
+What's different from the plan above, and why:
+
+- **The dues are 40, 170, 700 and 5,000g** (a dozen tunings, `--sim=learners --dues=...`): the first three are paid
+  by nearly everyone, so everyone sees all four markets, and the last is the wall.
+- **Five customers a day past the stall** (four there), not six: with listens counted, more customers is more to
+  choose between, and a season stays an hour and a half.
+- **Six tales a season, not eleven**, and each keeps its shape in fewer days (`GameState.Wait`).
+- **The ear grew its own shelf**: a Tea Kettle and a Listening Screen for more listens, an Echo Stone and Lamb's-Wool
+  Plugs among the curios, a head cold and a rested ear among the challenge terms, and at the opening a closed eye,
+  not a cross, on what no check you made could have told you of.
+- **The road** (`RoadPhase`): a screen of its own on a market's first morning, since the move is now the week's
+  reward and not a purchase.
+- **Heartsongs are twice as likely a chest**, so a season of a hundred chests finds one as often as 0.35's did
+  (about one season in three).
+- **The challenge terms were weighed again** at a harder level's dues: in a season this short most banes cost the
+  careful player a point or two, and three terms that were far out of line were changed.
+
+What couldn't be checked from a cloud session, and is worth an hour of the owner's time before anything else:
+
+1. **How the music sounds.** It was written and rendered in code and checked by its numbers (peaks, loudness, where
+   its energy sits, the loops' seams) and its spectrograms. Nobody has heard it. It has its own volume (60% to start).
+2. **How the ear feels in the hand.** The bot and the playtest tool shake at exact strengths; a person winds up to a
+   hard shake through a firm one. A strength is given the ear once the chest has moved that fast for a sixth of a
+   second and a hold follows its hardest shake, so winding up shouldn't spend two listens; if it does,
+   `CounterPhase.ListenHold` is the number.
+3. **Whether level 0 is too gentle** for a player who already knows the game. It's tuned so a new player clears on a
+   second or third season and meets the story; the challenge levels are where it gets hard.
+
 ## Status
 
-- [ ] 1. The four-week season (Core, UI, tales, campaign, saves, sims)
-- [ ] 2. The ear (Core, counter, HUD, strategy, lessons, sims)
-- [ ] 3. Quality odds
-- [ ] 4. Dialogue pacing and the opening scene
-- [ ] 5. Music and ambience
-- [ ] Rebalance (`--sim`, `--sim=experience`, `--sim=careers`, `--sim=levels`)
-- [ ] Translations (fr, ja, zh_CN, zh_TW), fit tests, bot runs in each
-- [ ] Docs (`design.md`, `world.md`, `narrative.md`, `stories.md`, README, CLAUDE.md), version 0.36
+- [x] 1. The four-week season (Core, UI, tales, campaign, saves, sims)
+- [x] 2. The ear (Core, counter, HUD, strategy, lessons, sims)
+- [x] 3. Quality odds
+- [x] 4. Dialogue pacing
+- [x] 5. Music and ambience
+- [x] Rebalance (`--sim=quick`, `--sim=learners`, `--sim=experience`, `--sim=careers`, `--sim=levels`, `--sim=terms`)
+- [x] Translations (fr, ja, zh_CN, zh_TW), fit tests, bot runs in French and Japanese
+- [x] Docs (`design.md`, `world.md`, `narrative.md`, `stories.md`, README, CLAUDE.md), version 0.36

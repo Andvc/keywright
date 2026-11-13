@@ -1,4 +1,4 @@
-# Keywright: the narrative bible (0.34)
+# Keywright: the narrative bible (0.34; the season's shape 0.36)
 
 What's true in Aldmark, how the story is told across seasons, and how every thread feeds it. `docs/world.md` is the
 world as the people in it know it; this is what's underneath, and the plan for showing it a piece at a time.
@@ -9,6 +9,35 @@ structure and progression across repeated runs*, 9 November 2026). Its shape, in
 
 > First, I open chests to make a living and bring my uncle home. Then, I discover that some of the things being traded
 > are people. Finally, I open the greatest chest in the world knowing exactly whom I intend to bring out.
+
+## 0.36: the same story in four weeks
+
+0.36 changes none of the truth below and none of the campaign's steps. It changes how long the telling takes. In 0.34
+and 0.35 a season was seven weeks and about two and a half hours, the debt was first cleared around a career's sixth
+season, and so the first swallowing, the moment the game shows what it is, came after about fourteen hours; Bram first
+came home around the thirteenth season. The 0.35 playtester called the remembered season "far more gripping than the
+first", and almost nobody would have reached it.
+
+A season is now four weeks, a market each, about an hour and a half (`docs/design.md`, *The run*), and level 0 is
+tuned as the story's difficulty: half of careers clear the debt by their third season and are swallowed by their
+fourth (five or six hours in), and bring Bram home and reach the next day around the tenth (`--sim=careers`).
+
+What moved with it:
+
+- **The road is the Guild's doing.** Each due paid, its carters move the stall a market further in, and Vane presents
+  it as a kindness the evening he introduces the debt ("Richer chests pay richer dues"). It's the truth under the
+  season made visible: the Guild is walking its keywright to the treasury door. Nobody buys a move any more.
+- **Four Guild nights, not seven.** The summons is still the first. Once you remember, the bribe is the second night's
+  (it was the fourth) and the bargain the third's (the sixth); Vane's parting words are the second and third nights'.
+  The gathering is the fourth week's first morning, at the Emporium, with the treasury five days off.
+- **Fewer tales around it** (two of Brindle's, two of Thornwick's, one of Crownhold's, one of the Emporium's, with the
+  Shut Chests and the King's Court), told in the same shape over fewer days (`docs/stories.md`, *How a tale goes*), so
+  the main story is a larger share of what a season tells.
+- **Leads keep their order and their doors.** Hollis and the carts at Thornwick (week 2), the weighhouse on that
+  week's Guild night or at the Lantern Market, Mara and the charter at Crownhold (week 3), the crates from Thornwick
+  on, the gathering and the treasury at the Emporium (week 4). The plan still can't be made whole in the season
+  that first remembers (the careers report: "free them" is what a season at the treasury most often lacks), which is
+  what the seasons after it are for.
 
 ## What changed from 0.33, and why
 
@@ -120,7 +149,8 @@ A season of ordinary business, told kindly:
 - **The first week, with Bram.** Day 1 is his lessons (Bram taps the counter twice, then once, to call you over: his
   habit, and later a signature). He covers a small expense, greets a regular by her cellar, and says the one strange
   thing: "Listen before you buy. And mind: some chests listen back." On day 2 Vane introduces the Guild and "Bram's
-  old account", seven payments, plainly a business matter. On day 3 Nell Haddon says the Guild has her father's note
+  old account", four payments (seven until 0.36), plainly a business matter, and the Guild's carters, who'll move the
+  stall a market further in for each one paid. On day 3 Nell Haddon says the Guild has her father's note
   and his yard.
 - **The summons (the first Guild night).** Vane brings a letter from the Guild's treasury: "An old consignment needs
   his attention." Bram leaves his lamp on the counter and says he'll write every week. If Old Haddon's note wasn't
@@ -186,8 +216,8 @@ and Haddon stays home, a friend at the crossroads. And in the second week, Baili
 Bram's tuning fork, tagged from the weighhouse: the lead to follow.
 
 **What the Maw tries, once you remember** (Vane's Guild nights): reassurance ("Bram is well. Why go looking?"), a bribe
-on the fourth (half the night's due, if your questions stop at the toll: take it and Hollis won't talk to you this
-season), and on the sixth a personal bargain: Bram home tomorrow, warm and whole, for the key's pieces. Take it and he
+on the second (the fourth of seven, until 0.36: half the night's due, if your questions stop at the toll: take it and
+Hollis won't talk to you this season), and on the third (the sixth) a personal bargain: Bram home tomorrow, warm and whole, for the key's pieces. Take it and he
 *is* home, and there's no treasury for you this season.
 
 ### Rescue

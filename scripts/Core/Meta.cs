@@ -142,8 +142,17 @@ public static class Challenges
         Prepared = "prepared", HonestClerk = "pawn", GoodName = "goodname", Charm = "charm", FairDays = "fairdays", Drawer = "drawer",
         KeenEar = "keenear";
 
-    /// <summary>A head cold takes this many listens off every day; a rested ear adds as many (0.36, <see cref="GameState.Listens"/>).</summary>
-    public const int EarListens = 2;
+    /// <summary>
+    /// A head cold takes this many listens off every day, and a rested ear adds its own (0.36, <see cref="GameState.Listens"/>).
+    /// Not as many: a listen lost is one of the eight a day was planned around, and a listen more is a ninth check on a
+    /// chest already read (weighed at level 3's dues over 400 seasons, two fewer cost the careful collector eight points
+    /// where other banes cost one or two, and two more gave one back). The cold's rule is written out for one listen:
+    /// change its words with the number.
+    /// </summary>
+    public const int ColdListens = 1, RestedListens = 3;
+
+    /// <summary>Thornwick's welcome takes this share off the second due (half, until it proved worth twice any other boon).</summary>
+    public const float InvitedShare = 0.25f;
 
     /// <summary>With thin crowds: how many of the week's last days (the Guild's day, and the day its collectors ride in) are a customer short.</summary>
     public const int ThinDays = 2;
@@ -199,7 +208,7 @@ public static class Challenges
             Loc.T("A wet winter has rusted every old lock in the realm stiff.")),
         new(Wary, false, Loc.T("Wary regulars"), Loc.T("The regulars post one commission fewer each week."),
             Loc.T("Folk aren't sure your stall will last, and won't set you errands.")),
-        new(DullEar, false, Loc.T("A head cold"), Loc.T($"Your ear has {Sellers.Number(EarListens)} listens fewer every day."),
+        new(DullEar, false, Loc.T("A head cold"), Loc.T("Your ear has one listen fewer every day."),
             Loc.T("The spring cold has gone round every head in Aldmark, and yours hasn't cleared.")),
         new(Sparse, false, Loc.T("Nim's lean month"), Loc.T("Nim's lantern lays out no extra curio: he brings one fewer a night once he brings more than one."),
             Loc.T("Pickings have been slim among the Locking's oddments.")),
@@ -215,8 +224,8 @@ public static class Challenges
             Loc.T("Bram sold his old cart, and the money's yours."), LeanStart),
         new(OldPicks, true, Loc.T("Bram's old picks"), Loc.T("You start with the Fine Lockpicks: a wider sweet spot on every lock."),
             Loc.T("Bram found his old picks at the bottom of a drawer.")),
-        new(Invited, true, Loc.T("Thornwick wants you"), Loc.T("The Guild's second due, the one you pay at Thornwick Market, is halved."),
-            Loc.T("Thornwick's council wants a Keywright in the market, and pays half the rent."), Builders),
+        new(Invited, true, Loc.T("Thornwick wants you"), Loc.T("The Guild's second due, the one you pay at Thornwick Market, is a quarter lighter."),
+            Loc.T("Thornwick's council wants a Keywright in the market, and pays a quarter of the rent."), Builders),
         new(Patient, true, Loc.T("A slow season"), Loc.T("Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking."),
             Loc.T("Nobody's in a hurry this year."), Hurried),
         new(Prepared, true, Loc.T("Bram's prepared"), Loc.T("Bram's stash has one more dip in it, and his word is good once more."),
@@ -231,7 +240,7 @@ public static class Challenges
             Loc.T("The old Duke's in good health, and the Guild's assessors have their hands full in the capital.")),
         new(Drawer, true, Loc.T("Room for more"), Loc.T("Room for one more curio, from the start."),
             Loc.T("Bram cleared out a drawer for your curios.")),
-        new(KeenEar, true, Loc.T("A rested ear"), Loc.T($"Your ear has {Sellers.Number(EarListens)} more listens every day."),
+        new(KeenEar, true, Loc.T("A rested ear"), Loc.T($"Your ear has {Sellers.Number(RestedListens)} more listens every day."),
             Loc.T("Bram made you sleep the winter through, for once, and you've never heard so well."), DullEar),
     };
 

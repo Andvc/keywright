@@ -1,7 +1,7 @@
 # From early access to a Steam release
 
 Where Keywright stands against what a released PC game on Steam is expected to have, what 0.27 built for it, and what
-only the owner can do. Written for 0.27 and brought up to date for 0.29 (November 2026).
+only the owner can do. Written for 0.27 and brought up to date for 0.29 and 0.36 (November 2026).
 
 ## Where it stands
 
@@ -9,10 +9,11 @@ only the owner can do. Written for 0.27 and brought up to date for 0.29 (Novembe
 |---|---|---|
 | Saves and the profile | Ready | Crash-safe writes, backups, versions and migration, damaged files set aside and named. |
 | Display settings | Ready | Windowed, fullscreen, exclusive; window sizes that fit the screen; pixel-perfect or smooth; vsync; frame cap. |
-| Sound settings | Ready | Master, effects, the Heartsongs' songs; muting when the window loses focus. |
+| Sound settings | Ready | Master, music (0.36), effects, the Heartsongs' songs; muting when the window loses focus. |
+| Music | Written in code, unheard | Seven themes and four beds of ambience, composed and rendered by `tools/music` (0.36). Checked by their numbers only: listen before release (below). |
 | Keyboard and mouse | Ready | Every key rebindable; the mouse needs none. |
 | Controllers | Ready | Xbox, PlayStation and Switch layouts; the stick drives the pointer, so a controller does all a mouse does. |
-| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all 2,743 texts (0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
+| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all 4,056 texts (0.36; 2,743 in 0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
 | Fonts | Ready | Western European in the house font; Japanese and Chinese in Fusion Pixel 12px; the rest of Latin, Cyrillic, Greek and Korean in Galmuri. |
 | Steam | Ready to switch on | Achievements, rich presence, overlay pause, launch through Steam: needs the app ID and Steamworks set-up. |
 | Builds | Ready | CI exports Windows and Linux, smoke-tests both and keeps them as artifacts, on every push. |
@@ -100,6 +101,17 @@ collects nothing and sends nothing but what Steam does).
 
 **Credits:** set `CreditsView.Studio` to the name the game is published under.
 
+**The music (0.36):** every track was written and rendered in code in a cloud session with no way to hear it. Play
+a season with the sound on. If a theme grates or thins out over an hour, its tune is a function in
+`tools/music/make.py` (and `python3 tools/music/make.py --wav DIR` writes WAVs to judge without the game); if the
+whole approach doesn't hold up, a composer's loops dropped into `assets/audio/music` and `assets/audio/ambience`
+under the same names play with no code changed. The Music volume starts at 60%.
+
+**The ear, in the hand (0.36):** a listen is spent when the chest has moved at a strength for a sixth of a second,
+and a hold follows its hardest shake, so winding up to a hard shake shouldn't spend a firm listen on the way. The
+tests shake at exact strengths; ten minutes with a real mouse and a real controller will say whether a person's hand
+does. `CounterPhase.ListenHold` is the number to raise if listens get spent by accident.
+
 **Translations:** the four languages are complete and consistent, but no native speaker has read them. Before
 release, pay one for a pass of play in each (a review, not a translation: a few days each, well under the $2,000-3,500
 a translation from scratch costs), and list the languages on the store page. A new language is a `.po` file from
@@ -118,7 +130,8 @@ usual points: full controller support, fullscreen by default, text at least 10px
   where a player's bug report should start.
 - **macOS** isn't built: it needs signing and notarization on a Mac account, and Steam doesn't require it.
 - **Untested here:** the Steam overlay and Steam Input with a real client (only possible on a machine with Steam),
-  and a real controller (the tests send the same events one would).
+  a real controller (the tests send the same events one would), and, since 0.36, how the music sounds and how the
+  ear's listens feel under a real hand (above).
 - **A demo:** Steam Next Fest wants a separate demo app. The game would need a demo mode (the first week, say, then a
   wishlist note). That's quick to add once the store page exists.
 

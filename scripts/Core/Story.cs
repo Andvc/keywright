@@ -178,12 +178,14 @@ public static class Story
     /// </summary>
     public static string WeekNote(GameState state)
     {
-        if (TellsOn(state.Week) || state.CampaignDone) return null;
-        if (state.Week == 3 && state.BramNotes) return Loc.T("Still no letter from Bram. The Guild's came on time.");
+        if (state.CampaignDone) return null;
+        // The last week's word stands whatever the morning told (0.36: the gathering is that morning's scene).
         if (state.Week == Guild.Weeks)
             return state.DebtCleared ? Loc.T("The last week of the tithe, and it's already paid: nobody's coming for anything this week.")
                 : state.KeyWhole ? Loc.T("The debt's last week. Pay it, and the Guild's carriage takes you and the key to the treasury.")
                 : Loc.T("The debt's last week. Pay this, and Bram's account is closed.");
+        if (TellsOn(state.Week)) return null;
+        if (state.Week == 3 && state.BramNotes) return Loc.T("Still no letter from Bram. The Guild's came on time.");
         return null;
     }
 

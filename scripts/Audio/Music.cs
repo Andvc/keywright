@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Keywright.Core;
 using Keywright.Phases;
@@ -155,7 +156,10 @@ public partial class Music : Node
         _released = true;
         foreach (var player in _music) Stop(player);
         foreach (var player in _beds) Stop(player);
+        // Let go of each stream now, as Sfx does: left to the collector, they were sometimes still held at exit.
+        var streams = _streams.Values.Where(s => s != null).Distinct().ToList();
         _streams.Clear();
+        foreach (var stream in streams) stream.Dispose();
     }
 
     static void Stop(AudioStreamPlayer player)
