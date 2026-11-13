@@ -271,7 +271,9 @@ public static partial class Simulation
                 return;
             }
             // The opening, at a human's pace: the lock, every thing out of the chest, a climb for each surprise.
-            _beat.Seconds += 6 + 2.5f * o.Items + 4 * o.Surprises.Sum(x => x.Steps) + (o.WardNamed ? 5 : 0) + (o.Song ? 12 : 0) + 3 * (o.Kept + o.Delivered);
+            // (0.37: a finer chest strains longer before it bursts, and draws breath before its last thing.)
+            _beat.Seconds += 6 + 0.5f * (int)v.Chest.Quality + 2.5f * o.Items + 4 * o.Surprises.Sum(x => x.Steps) + (o.WardNamed ? 5 : 0) + (o.Song ? 12 : 0) +
+                             3 * (o.Kept + o.Delivered);
             if (o.Locked)
             {
                 _beat.Seconds += o.Forced ? 2 : 8;

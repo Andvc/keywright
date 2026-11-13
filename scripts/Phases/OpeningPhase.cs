@@ -9,8 +9,10 @@ using Keywright.Ui;
 namespace Keywright.Phases;
 
 /// <summary>
-/// The payoff, right after you buy. The chest opens by itself: it rumbles, glows in its own colour, and bursts. The lid
-/// flies off and everything comes out, worst first. Things as good as the chest promised (or worse) land quickly on the
+/// The payoff, right after you buy. The chest opens by itself: it rumbles, its lid thumps faster and faster, light in
+/// its own colour leaks from the crack (with a glint of a finer colour if something in it is better than it promised,
+/// 0.37), and it bursts. The lid flies off and everything comes out, worst first, each wrapped in light until it lands,
+/// while a bar under the tally fills towards what you paid: past the notch, the chest has paid for itself. Things as good as the chest promised (or worse) land quickly on the
 /// table; something better than its chest rises out glowing in the chest's colour and climbs, quality by quality, to
 /// what it really is before it slams down, with more fuss for every step (two or three steps up stops the clock). Each
 /// quality lands with its own effect: dust, sparkles, a pillar of light, crackling lightning, turning rays and a coin
@@ -24,8 +26,28 @@ public partial class OpeningPhase : Phase
 {
     enum Step { Build, Burst, Reveal, Done }
 
+    /// <summary>How long an everyday chest strains before it bursts; one with more at stake takes longer (<see cref="_buildSeconds"/>).</summary>
     const float BuildSeconds = 0.9f;
     const float LandY = 564;
+
+    /// <summary>
+    /// How much rides on this chest, 0 to 1 (0.37): its colour, what was paid for it against the shop's working purse,
+    /// and how much is in it. The build-up, the pause before the last thing and the verdict's fuss all go by it, so a
+    /// plain chest for a few coins opens briskly and a dear purple one makes you wait.
+    /// </summary>
+    float _stakes;
+    float _buildSeconds = BuildSeconds;
+
+    /// <summary>The lid's thumps as the chest strains: the build's progress at which each comes (closer and closer together).</summary>
+    static readonly float[] Thumps = { 0.16f, 0.36f, 0.53f, 0.67f, 0.78f, 0.87f, 0.94f };
+    int _thumped;
+    bool _told;
+
+    /// <summary>The stake bar under the tally: how far the worth shown has got towards what was paid.</summary>
+    Painter _stake;
+    float _stakeShown, _stakePulse;
+    bool _paidFor;
+    const float StakeW = 280, StakeY = 144;
 
     /// <summary>The chest's origin is its lid seam, where light and loot come out.</summary>
     static readonly Vector2 SeamPos = new(640, 400);
@@ -79,10 +101,19 @@ public partial class OpeningPhase : Phase
         _worthLabel = UiKit.MakeLabel(Money.Short(0), 24, Palette.Gold, HorizontalAlignment.Right, outline: 4).Place(200, 108, 120, 30);
         tally.AddChild(_worthLabel);
         _tally = tally;
+        // The stake bar (0.37): the worth so far, filling towards a notch at what was paid. Each thing that lands moves
+        // it, so every one of them matters until the notch is passed, and the last can be the one that decides it.
+        _stake = new Painter(DrawStake) { Position = new Vector2(40, StakeY) };
+        tally.AddChild(_stake);
+        // What rides on it: a finer chest, a dearer one (against the shop's working purse), a fuller one.
+        var chest = _purchase.Chest;
+        _stakes = Mathf.Clamp(0.22f * (int)_colour + 0.45f * Mathf.Min(1f, _purchase.Paid / (float)Math.Max(1, State.WorkingPurse)) +
+                              0.08f * Math.Max(0, chest.Items.Count - 2), 0f, 1f);
+        _buildSeconds = BuildSeconds + 0.9f * _stakes;
         // Bought without a shake, a drop or the lodestone: nothing was read, so nothing on the table is a miss.
         if (Blind)
         {
-            var tag = UiKit.MakePanel(Palette.Unseen).Place(40, 142, 280, 34);
+            var tag = UiKit.MakePanel(Palette.Unseen).Place(40, StakeY + 22, 280, 34);
             tag.MouseFilter = Control.MouseFilterEnum.Stop;
             tag.TooltipText = Glossary.Line(Term.SightUnseen);
             tag.AddChild(UiKit.MakeUnseenMark(new Vector2(24, 17), 1));
@@ -134,7 +165,7 @@ public partial class OpeningPhase : Phase
         if (State.EventIs("buyer")) bonuses.Add(Loc.T($"Crown's Buyer: {Categories.Get(State.BuyerKind).Name.ToLowerInvariant()} x2"));
         if (State.EventIs("tourney")) bonuses.Add(Loc.T("Tourney: weapons, cloaks +50%"));
         if (State.EventIs("assessor")) bonuses.Add(Loc.T("The Guild's assessor -10%"));
-        float y = Blind ? 182 : 140;
+        float y = Blind ? StakeY + 62 : StakeY + 22;
         var lines = bonuses.Select(b => (Text: b, Color: Palette.Magic))
             .Concat(_purchase.Luck.Take(3).Select(l => (Text: Curios.LuckLine(l.Curio, l.Changed), Color: Palette.Good)));
         // Kept to the tally's width, clear of the profit stamp; each slides in from the left, as tall as its words need
@@ -162,7 +193,22 @@ public partial class OpeningPhase : Phase
 
         // It opens by itself; a click or Space hurries it along.
         bool hurry = Input.IsActionPressed(Controls.Act) || Input.IsMouseButtonPressed(MouseButton.Left);
-        Progress = Mathf.Min(1f, Progress + dt / BuildSeconds * (hurry ? 3f : 1f));
+        float before = Progress;
+        Progress = Mathf.Min(1f, Progress + dt / _buildSeconds * (hurry ? 3f : 1f));
+        // The lid thumps as it strains, faster and faster: a heartbeat that runs into the burst (0.37).
+        while (_thumped < Thumps.Length && Progress >= Thumps[_thumped])
+        {
+            _chest.Wobble(0.25f + 0.5f * Thumps[_thumped]);
+            Sfx.Play("knock", 0.9f + 0.5f * Thumps[_thumped], -9 + 5 * Thumps[_thumped]);
+            Game.Shake(0.05f + 0.12f * Thumps[_thumped]);
+            _thumped++;
+        }
+        // The tell: something in there is finer than the chest promised, or enchanted, and its light gets out first.
+        if (!_told && Progress >= 0.6f)
+        {
+            _told = true;
+            Tell();
+        }
 
         // Everything builds together: rumble, a widening crack of light, the hum, and the camera leaning in.
         _chest.Rumble = Progress;
@@ -172,8 +218,71 @@ public partial class OpeningPhase : Phase
         Sfx.Hum(Progress);
         Game.Zoom(1f + 0.14f * Progress * Progress, SeamPos);
         if (Progress > 0.2f) Game.Shake(dt * 0.5f * Progress);
-        if (Progress > 0.75f && Progress - dt / BuildSeconds <= 0.75f) Game.Moment("07_build");
+        if (Progress > 0.75f && before <= 0.75f) Game.Moment("07_build");
         if (Progress >= 1f) Burst();
+    }
+
+    /// <summary>
+    /// What gets out of the crack before the lid goes (0.37): a glint in the colour of the finest thing that's better
+    /// than its chest promised, and a shimmer of violet if anything's enchanted. It says something's coming, not what
+    /// or which: the surprises still come out last, so the wait for them starts here. A plain chest gives nothing away.
+    /// </summary>
+    void Tell()
+    {
+        var things = _purchase.Chest.Items.Where(i => !i.IsSong).ToList();
+        int best = things.Count == 0 ? 0 : things.Max(StepsUp);
+        var crack = SeamPos + new Vector2(0, -6);
+        if (best > 0)
+        {
+            var color = Palette.Of((Rarity)Math.Min((int)Rarity.Legendary, (int)_colour + best));
+            Fx.Flare(this, crack, color, 110f + 40f * best, 0.55f, 0.75f);
+            Fx.Burst(this, crack, color.Lightened(0.3f), 14 + 10 * best, 240f);
+            Fx.Ring(this, crack, color, 90f + 30f * best, 0.4f, 2f);
+            Sfx.Play("chime", 1.25f + 0.1f * best, -7);
+            Game.Shake(0.12f);
+            Game.Moment("07_tell", 0.08);
+        }
+        if (things.Any(i => i.Magic && !i.Broken && !i.Fake))
+        {
+            Fx.Burst(this, crack, Palette.Magic.Lightened(0.2f), 18, 200f);
+            Fx.Flare(this, crack, Palette.Magic, 90f, 0.5f, 0.55f);
+            Sfx.Play("sting", 1.6f, -12);
+        }
+    }
+
+    /// <summary>
+    /// The stake bar: the worth so far against what was paid, the notch at its middle. Amber until it reaches the notch,
+    /// green past it (the chest has paid for itself: everything after is profit); a chest worth twice its price fills it.
+    /// </summary>
+    void DrawStake(Painter p)
+    {
+        float paid = Math.Max(1, _purchase.Paid);
+        float fill = Mathf.Clamp(_stakeShown / (paid * 2f), 0f, 1f) * StakeW;
+        bool over = _stakeShown >= paid;
+        p.DrawRect(new Rect2(-2, -2, StakeW + 4, 14), new Color("#120e1a"));
+        p.DrawRect(new Rect2(0, 0, StakeW, 10), Palette.PanelBorder.Darkened(0.35f));
+        if (fill > 0) p.DrawRect(new Rect2(0, 0, fill, 10), over ? Palette.Good : Palette.Warn);
+        if (fill > 2) p.DrawRect(new Rect2(0, 0, fill, 3), (over ? Palette.Good : Palette.Warn).Lightened(0.35f));
+        // The notch: what was paid. It swells when the next thing out could be the one that reaches it.
+        float notch = StakeW / 2, swell = 3f * _stakePulse;
+        var tick = over ? Palette.Good.Lightened(0.5f) : Colors.White;
+        p.DrawRect(new Rect2(notch - 1 - swell / 2, -4 - swell, 3 + swell, 18 + 2 * swell), tick);
+        p.DrawColoredPolygon(new[] { new Vector2(notch - 5 - swell, -6 - swell), new Vector2(notch + 6 + swell, -6 - swell), new Vector2(notch + 0.5f, -1) }, tick);
+    }
+
+    /// <summary>The worth so far has reached what was paid: the chest has paid for itself, and says so, once.</summary>
+    void PaidFor()
+    {
+        if (_paidFor || _purchase.Paid <= 1 || _purchase.Visit.Gift) return;
+        _paidFor = true;
+        var at = new Vector2(40 + StakeW / 2, StakeY + 5);
+        // Beside the bar, clear of the tally (and of the sight-unseen tag under it).
+        FloatText(Loc.T("PAID FOR!"), new Vector2(40 + StakeW + 96, StakeY + 2), Palette.Good, 24);
+        Fx.Ring(this, at, Palette.Good, 90f, 0.4f, 3f);
+        Fx.Burst(this, at, Palette.Good.Lightened(0.3f), 26, 220f);
+        Sfx.Play("win", 1.35f, -8);
+        _worthLabel.AddThemeColorOverride("font_color", Palette.Good);
+        Game.Moment("07_paid", 0.12);
     }
 
     async void Burst()
@@ -260,6 +369,13 @@ public partial class OpeningPhase : Phase
         {
             bool last = i == n - 1;
             float x = 640 + (i - (n - 1) / 2f) * spacing;
+            // The last thing out (0.37): the chest draws breath first, longer when it's the one that decides whether
+            // the chest pays for itself (the notch swells), or when a lot rides on the chest.
+            if (last && n >= 2 && !reads[i].Item.IsSong)
+            {
+                await LastBreath(decider: !_paidFor && _purchase.Paid > 1 && !_purchase.Visit.Gift);
+                if (!Alive) return;
+            }
             if (reads[i].Warded)
             {
                 await Unward();
@@ -328,6 +444,28 @@ public partial class OpeningPhase : Phase
         await Wait(0.3);
         if (!Alive) return;
         Verdict();
+    }
+
+    /// <summary>
+    /// The breath before the last thing comes out: the box glows up, the lid's light gathers, a rising note; and if the
+    /// chest hasn't paid for itself yet, the notch on the stake bar swells while you wait to see whether this one does it.
+    /// </summary>
+    async Task LastBreath(bool decider)
+    {
+        float hold = 0.22f + 0.3f * _stakes + (decider ? 0.38f : 0f);
+        _chest.Wobble(0.35f);
+        CreateTween().TweenMethod(Callable.From<float>(g => _chest.Glow = g), ChestView.RestGlow, 1f, hold * 0.8f).SetTrans(Tween.TransitionType.Sine);
+        Sfx.Play("rise", decider ? 1.5f : 1.9f, decider ? -9 : -13);
+        if (decider)
+        {
+            var pulse = CreateTween();
+            pulse.TweenMethod(Callable.From<float>(v => { _stakePulse = v; _stake.QueueRedraw(); }), 0f, 1f, hold * 0.5f);
+            pulse.TweenMethod(Callable.From<float>(v => { _stakePulse = v; _stake.QueueRedraw(); }), 1f, 0f, 0.3f).SetDelay(hold * 0.5f + 0.6f);
+            Game.Moment("07_decider", hold * 0.7);
+        }
+        await Wait(hold);
+        if (!Alive) return;
+        CreateTween().TweenMethod(Callable.From<float>(g => _chest.Glow = g), 1f, ChestView.RestGlow, 0.5f);
     }
 
     // ---- A Guild crate (0.34, docs/narrative.md) ----
@@ -503,13 +641,41 @@ public partial class OpeningPhase : Phase
         float spin = (index % 2 == 0 ? 1 : -1) * Mathf.Tau;
         Sfx.Play("whoosh", 1.4f + 0.1f * index, -12);
 
+        // Wrapped in the chest's light until it lands (0.37): what it is, and how good, is the landing's to show.
+        var shown = sprite.Modulate;
+        sprite.Modulate = new Color(shown, 0f);
+        var color = Palette.Of(_colour);
+        var orb = Add(new Sprite2D { Texture = Fx.Glow, Material = Fx.Additive(), Modulate = color.Lightened(0.35f) with { A = 0.95f }, ZIndex = 8, Position = start });
+        var core = new Sprite2D { Texture = Fx.Glow, Material = Fx.Additive(), Modulate = Colors.White with { A = 0.9f }, Scale = Vector2.One * 0.45f };
+        orb.AddChild(core);
+        var trail = Fx.Sparks(color.Lightened(0.3f), 18, 20, 70, spread: 180f, lifetime: 0.35f, gravity: 0f);
+        orb.AddChild(trail);
+        trail.Emitting = true;
+        Game.Moment("07_wrapped", 0.28);
+
         var flight = sprite.CreateTween();
         flight.TweenMethod(Callable.From<float>(t =>
         {
             sprite.Position = start.Lerp(land, t) + new Vector2(0, -height * 4 * t * (1 - t));
             sprite.Rotation = spin * (1 - t);
+            if (!IsInstanceValid(orb)) return;
+            orb.Position = sprite.Position;
+            orb.Scale = Vector2.One * (1.0f + 0.5f * MathF.Sin(t * MathF.PI));
         }), 0f, 1f, 0.55f);
-        flight.TweenCallback(Callable.From(() => Landed(read, sprite, scale, land, spacing, 0)));
+        flight.TweenCallback(Callable.From(() =>
+        {
+            // The light bursts off it as it lands, and there it is.
+            sprite.Modulate = shown;
+            if (IsInstanceValid(orb))
+            {
+                trail.Emitting = false;
+                var pop = orb.CreateTween().SetParallel();
+                pop.TweenProperty(orb, "scale", Vector2.One * 3.2f, 0.2f).SetEase(Tween.EaseType.Out);
+                pop.TweenProperty(orb, "modulate:a", 0f, 0.2f);
+                pop.Chain().TweenCallback(Callable.From(orb.QueueFree));
+            }
+            Landed(read, sprite, scale, land, spacing, 0);
+        }));
     }
 
     /// <summary>
@@ -817,9 +983,19 @@ public partial class OpeningPhase : Phase
 
         int from = _worth;
         _worth += worth;
+        // A note higher for each thing that lands with something to it (0.37): the table fills up a scale.
+        if (worth > 0) Sfx.Play("coin", 0.82f + 0.07f * Math.Min(9, _landed.Count), -12);
+        bool crossed = from < _purchase.Paid && _worth >= _purchase.Paid;
         var count = CreateTween();
-        count.TweenMethod(Callable.From<float>(v => _worthLabel.Text = Money.Short(Mathf.RoundToInt(v))), (float)from, (float)_worth, 0.4f)
+        count.TweenMethod(Callable.From<float>(v =>
+            {
+                _worthLabel.Text = Money.Short(Mathf.RoundToInt(v));
+                _stakeShown = v;
+                _stake.QueueRedraw();
+            }), (float)from, (float)_worth, 0.4f)
             .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        // Past the notch: the chest has paid for itself.
+        if (crossed) count.TweenCallback(Callable.From(PaidFor));
         _worthLabel.PivotOffset = new Vector2(120, 15);
         _worthLabel.Scale = Vector2.One * 1.3f;
         _worthLabel.CreateTween().TweenProperty(_worthLabel, "scale", Vector2.One, 0.2f);
@@ -960,6 +1136,48 @@ public partial class OpeningPhase : Phase
             gut.ZIndex = 10;
             var meter = Add(UiKit.MakeGutMeter(score, 212, Loc.T("fleeced"), Loc.T("a steal")).Place(334, 212, 452, 30));
             meter.ZIndex = 10;
+        }
+        // The stake bar settles on everything the chest brought back (a wager won, a fee, a rebate and all).
+        _stakeShown = back;
+        _stake.QueueRedraw();
+        if (back >= _purchase.Paid && !_paidFor) _worthLabel.AddThemeColorOverride("font_color", Palette.Good);
+        // How many times over it paid (0.37): from twice what was paid, said on the stamp's corner, with more fuss the
+        // more it is: a shower of coins out of the chest at three times, and the room joining in at five.
+        if (!crate && !kept && !wheel && !visit.Gift && _purchase.Paid > 1 && back >= 2 * _purchase.Paid)
+        {
+            float times = back / (float)_purchase.Paid;
+            string tag = Loc.T($"x{times.ToString(times >= 10 ? "0" : "0.#", System.Globalization.CultureInfo.InvariantCulture)}");
+            // On the stamp's near corner, clear of the perfect read's banner over it and of Bram's corner beside it.
+            var sticker = Add(UiKit.MakePanel(Palette.Gold).Place(284, 96, 92, 42));
+            sticker.ZIndex = 11;
+            sticker.AddChild(UiKit.MakeLabel(tag, 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 6, 92, 30));
+            sticker.PivotOffset = new Vector2(46, 21);
+            sticker.Rotation = -0.12f;
+            sticker.Scale = Vector2.One * 2.6f;
+            sticker.Modulate = Colors.Transparent;
+            var pop = sticker.CreateTween().SetParallel();
+            pop.TweenProperty(sticker, "scale", Vector2.One, 0.22f).SetDelay(0.18f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+            pop.TweenProperty(sticker, "modulate", Colors.White, 0.1f).SetDelay(0.18f);
+            Sfx.Play("reveal_big", 1f + 0.06f * Mathf.Min(times, 8f), -5);
+            // The fuss is for a chest that mattered: three times a few coins is a sticker, three times a working purse a shower.
+            float weight = profit / (float)Math.Max(1, State.WorkingPurse);
+            if (times >= 3 && weight >= 0.4f)
+            {
+                var coins = Fx.Coins((int)Mathf.Min(60, 14 + 6 * times));
+                coins.Position = Mouth;
+                AddChild(coins);
+                coins.Emitting = true;
+                GetTree().CreateTimer(2.4).Timeout += coins.QueueFree;
+                Fx.Ring(this, new Vector2(560, 142), Palette.Gold, 300f, 0.6f, 3f);
+            }
+            if (times >= 5 && weight >= 0.8f)
+            {
+                Fx.Confetti(this, new Vector2(640, 150), 90);
+                Fx.Rays(this, new Vector2(560, 142), Palette.Gold, 240f, 14, 0.18f);
+                Sfx.Play("fanfare", 1f, -5);
+                Game.Shake(0.5f);
+            }
+            Game.Moment("08_times", 0.5);
         }
         Game.Moment("08_results", 0.3);
         if (crate || kept) Game.Moment(crate ? "08_results_crate" : "08_results_mimic", 0.6);
