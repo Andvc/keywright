@@ -9,8 +9,8 @@ theirs: everyone else sells them unopened, and the ward lets nothing through but
 People bring you chests and price them their own way: some shake them and price what they heard, some go by the
 weight or the chest's colour, some go by a trade they know, some dream up a number, and each has a rule of their own (a rotten
 chest, a fee for every shake, a wager, a clock, a claim on what's inside). They tell you where the chest came from, and
-not all of them tell the truth. Shake each one yourself (gently, firmly, hard), drop it to listen for a false bottom,
-count the rattles, and work out what they missed, made up or misjudged. Mark what you think is inside on your
+what they tell you is always true. Shake each one yourself (gently, firmly, hard), drop it to listen for a false bottom,
+count the rattles, and work out what they missed or misjudged. Mark what you think is inside on your
 appraisal slip and trade the way each customer trades: pay their price, haggle, or name your own. Pass, and your gut
 tells you whether you were right; buy, and the chest bursts open on the spot: each thing's true quality, a tick or a
 cross against your slip, and now and then something far better than the chest promised. What you acquire builds the
@@ -769,17 +769,19 @@ What changed with it:
   what the Guild wants here. The day's end at the stall shows the due as the way on ("Next: Thornwick Market"), and
   the Guild's panel says where paying leads.
 - **Five customers a day** at every market past the stall (four there; six at Thornwick and Crownhold until now): a
-  day's listens are counted (*The ear*), and a first run is 103 minutes over 104 customers, a second 94 and a third 88
-  (`--sim=experience`; 0.35: 143, 140 and 132, each lost at week 6). High points come 7.8 an hour in a first run and
-  ten in a second (5.3 and 5.1), no time is spent in stale stretches (6%), and the engagement score holds between 16
-  and 44 to the last day.
+  day's listens are counted (*The ear*), and a first run is 104 minutes over 108 customers, a second 93 and a third 89
+  (`--sim=experience`; 0.35: 143, 140 and 132, each lost at week 6). High points come 8.6 an hour in a first run and
+  nearly ten after (5.3 and 5.1), no time is spent in stale stretches (6%), and the engagement score holds between 17
+  and 50 to the last day (*Playtesting the experience*).
 - **No moves to buy**: `Upgrades` still has them (their blurbs say what each market brings, for the road), but they're
   never on offer; tools and the shop's fittings open at Thornwick, where their makers are. Thornwick's welcome (a
   boon) takes a quarter off the second due, the one paid at its market, where it used to halve the move.
-- **A market's first day is a quiet one** for a learner (tips on): a customer short, as before, and now with no
-  locked chests either (`GameState.StartDay`, `Chest.Unlock`): the place, its people, two new sounds and the drop
-  are a day's learning, and the lock and its picking come the day after. With the sim's evening put in the game's
-  order (below), a first-timer's first day at Thornwick turned out to ask 7.1 of a load of 6, the lock 1.5 of it.
+- **A market's first days are quiet ones** for a learner (tips on): the first a customer short, as before, and now
+  with no locked chests either (`GameState.StartDay`, `Chest.Unlock`), and the first two with nobody whose lesson is
+  a warded thing's puzzle (`GameState.Settling`): the place, its people, two new sounds and the drop are a day's
+  learning, the lock and its picking the next day's, and a dream or a dowry the day after. With the sim's evening put
+  in the game's order (above), a first-timer's first day at Thornwick turned out to ask 7.1 of a load of 6; it asks
+  5.4 now (*Playtesting the experience*).
 - **Fewer tales, told faster** (`TaleBook.Draw`, `GameState.Wait`): two of Brindle's and two of Thornwick's, one of
   Crownhold's and one of the Emporium's, with the Shut Chests, the King's Court, the campaign and whoever minds the
   stall's own: about a beat a day (21 a season) where 0.35 had 34 over its 35. The beats were written for seven weeks:
@@ -2047,23 +2049,29 @@ on both (medians over the 30 learners):
 
 | | 0.35 | 0.36 |
 |---|---|---|
-| Run 1: length | 143 minutes, 30 days (of 35), 169 customers | 103 minutes, 20 days, 104 customers |
-| Run 1: how it ends | lost by all 30, in week 6 | cleared by 23%; lost in week 4, at the last due |
-| Run 1: new things an hour; high points an hour | 30.7; 5.3 | 51.6; 8.5 |
+| Run 1: length | 143 minutes, 30 days (of 35), 169 customers | 104 minutes, 20 days, 108 customers |
+| Run 1: how it ends | lost by all 30, in week 6 | cleared by one in five (120 seasons: 20%); lost in week 4, at the last due |
+| Run 1: new things an hour; high points an hour | 30.7; 5.3 | 49.0; 8.6 |
 | Run 1: time in stale stretches | 6% (longest 9 minutes) | none |
-| Run 1: players with a day over capacity | 40% (heaviest day's load 5.7, day 9) | 53% (6.1, day 7) |
-| Run 2: length; high points an hour; stale | 140 minutes; 5.1; 5% | 92 minutes; 10.2; none |
-| Run 3: length; high points an hour; stale | 132 minutes; 5.7; 7% | 89 minutes; 11.1; none |
-| Runs 2 and 3: cleared | 7%, 10% | 30%, 43% |
+| Run 1: the heaviest day (median load) | day 9, 5.7 | day 11, 5.6; day 6, 5.4 |
+| Run 1: players with some day over capacity | 40% | 70% |
+| Run 2: length; high points an hour; stale | 140 minutes; 5.1; 5% | 93 minutes; 9.5; none |
+| Run 3: length; high points an hour; stale | 132 minutes; 5.7; 7% | 89 minutes; 9.9; none |
 
-A high point comes every seven minutes in a first season and every five or six after, where it came every eleven;
-nothing is stale, because a market lasts five days; and three seasons take four and three quarter hours where they
-took seven, with a first clear likely inside them. What it still says: the first two days at Thornwick are the
-busiest of a first run, just over the load for half of first-timers, a little more than in 0.35 (the road, the
-Guild's letter, locks, the drop, potions and spells, the shelf and a first warded thing arrive together, and now the
-ear runs low there for the first time); and a third season brings a sixth of what a first does that's new (7.8 new
-things an hour against 51.6), which is what the challenge levels' terms, the other keywrights and the campaign's
-remembered seasons are for.
+A high point comes every seven minutes in a first season and every six after, where it came every eleven; nothing
+is stale, because a market lasts five days; and three seasons take four and three quarter hours where they took
+seven, with a first clear likely inside them.
+
+What the faster season costs is room: Thornwick's locks, drop, straw, warded things and eight new people have five
+days, not eight or more, and with the sim's evening in the game's order (*The run*) the report showed what a
+first-timer's first day there really asked: 7.1 of a load of 6, over for three in four. Three things spread it, all
+for a learner only (tips on): a market's first day has no locked chests, its first two days bring nobody whose
+lesson is a warded thing's puzzle, and the first day is still a customer short. Every day's median load is under 6
+now (5.4 on the first day at Thornwick, 4.7 on the next two, 5.6 on the first at Crownhold); seven first-timers in
+ten still have one day over it somewhere, most often the day Corvin's straw and false bottom come together, against
+four in ten in 0.35 and five to seven in ten from 0.31 to 0.34. A third season brings a fifth of what a first does
+that's new (9.1 new things an hour against 49.0), which is what the challenge levels' terms, the other keywrights and
+the campaign's remembered seasons are for.
 
 ## What was cut, and why
 

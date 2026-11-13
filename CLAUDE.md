@@ -353,10 +353,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   sixth run, the true ending around the thirteenth, at two and a half hours a season.) The careful player keeps a
   full mimic for the final opening unless it has Guild nights enough to fill it again (`Strategy.SpendMimic`): the
   plan's "free them" is what a season most often lacks. A run's length is part of the balance: `--sim=experience`
-  should keep a first run under two hours (0.36: about 100 minutes over 20 days and 105 customers, a second and a
-  third 90; 0.35: 143 over 30 days), a high point every seven or eight minutes or better, no stale stretches, and no
-  day over its load (6): the first day at a new market is the one to watch, and with tips on it's a quiet one (a
-  customer short, and no locked chests until the day after: `GameState.QuietOpening`). `--sim=kin [--who=KEY]` runs
+  should keep a first run under two hours (0.36: 104 minutes over 20 days and 108 customers, a second 93 and a third
+  89; 0.35: 143 over 30 days), a high point every seven minutes or better (8.6 an hour, then nearly ten; 0.35: 5.3),
+  no stale stretches, and every day's median load under 6: the first days at a new market are the ones to watch
+  (5.4 on the first at Thornwick, 5.6 on the first at Crownhold; seven first-timers in ten still have some day just
+  over), and with tips on they're quiet ones (the first a customer short and with no locked chests,
+  `GameState.QuietOpening`; the first two with nobody whose lesson is a warded thing's puzzle, `Settling`). A new
+  thing to learn at a market goes on a later day than these, in Core, so the sim sees it. `--sim=kin [--who=KEY]` runs
   just the characters' table, for tuning one. Careless styles are foreclosed (buying at their price clears 2%, one
   hard shake a chest 14%), and no early week sends careful players to Bram's word. The sim's evening runs in the
   game's order (0.36: the day's end and its spending, then the Guild's night; it used to pay first, which once a due
@@ -747,3 +750,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - Wine 9 in this container can't run the exported .exe. `.github/workflows/build.yml` checks the text and the build, then exports Windows and Linux builds and smoke-tests each on its own runner on every push; download builds from the run's artifacts.
 - The shop saves at the start of each day only (leaving mid-day replays that day), and sellers don't remember you
   (see `docs/design.md`).
+- Nobody has heard 0.36's music: a cloud session has no sound device, so it was written, rendered and checked by its
+  numbers (`tools/music`). And the ear's listens were only ever spent by the bot and the playtest tool, which shake
+  at exact strengths: whether a real hand winding up to a hard shake spends a firm listen on the way
+  (`CounterPhase.ListenHold`) wants ten minutes of the owner's time with a mouse. Both are in `docs/release.md`.

@@ -83,15 +83,16 @@ in full, with how each was measured), against the same reports on 0.35:
 | | 0.35 | 0.36 |
 |---|---|---|
 | A season | 7 weeks, 35 days | 4 weeks, 20 days, a market each |
-| A first season, played by a learner (`--sim=experience`) | 143 minutes, 169 customers, lost by all 30 | 103 minutes, 104 customers, cleared by about one in four |
-| High points an hour, seasons 1 / 2 / 3 | 5.3 / 5.1 / (5) | 8.5 / 10.2 / 11.1 |
+| A first season, played by a learner (`--sim=experience`) | 143 minutes, 169 customers, lost by all 30 | 104 minutes, 108 customers, cleared by about one in five |
+| High points an hour, seasons 1 / 2 / 3 | 5.3 / 5.1 / 5.7 | 8.6 / 9.5 / 9.9 |
 | Time in stale stretches (a first season) | 6% | none |
-| The careful player clears (`--sim=quick`) | 70% | 92% |
-| A learner at 0.75 / 0.5 / a first-timer | 55% / 13% / none | 73% / 43% / 25% |
-| A chest bought by a careful player turns a profit | about nine in ten | 86%, on fewer checks (a perfect read on 61%) |
+| The careful player clears (`--sim=quick`) | 70% | 90% |
+| A learner at 0.75 / 0.5 / a first-timer | 55% / 13% / none | 66% / 43% / 20% |
+| A chest bought by a careful player turns a profit | about nine in ten | 86%, on fewer checks (a perfect read on 63%) |
 | A career first clears the debt (`--sim=careers`) | around the sixth season | the second or third |
-| The treasury first swallows you (the story's turn) | around the sixth season, fourteen hours in | the second or third, four or five hours in |
+| The treasury first swallows you (the story's turn) | around the sixth season, fourteen hours in | the second to fourth, five or six hours in |
 | The true ending (the next day) | around the thirteenth season | around the tenth |
+| The challenge levels, as drawn (the careful player) | | 77, 57, 43, 35, 18, 16, 9 and 6% |
 | Dialogue | a click a sentence | a click a speech |
 | Music | none | seven themes and four beds of ambience |
 
@@ -109,8 +110,15 @@ What's different from the plan above, and why:
   reward and not a purchase.
 - **Heartsongs are twice as likely a chest**, so a season of a hundred chests finds one as often as 0.35's did
   (about one season in three).
-- **The challenge terms were weighed again** at a harder level's dues: in a season this short most banes cost the
-  careful player a point or two, and three terms that were far out of line were changed.
+- **The challenge terms were weighed again**, at a harder level's dues (at level 0 nothing shows): each bane costs
+  the careful player one to eight points and a boon gives up to eight, and three that were out of line were changed.
+- **The sim's careful player was put right** before the dues were settled: it paid the Guild before the day's end
+  (the game has the day's end first), which once a due moves the shop had it fitting out the next market a day
+  early, and its saving rule still measured a bad day by 0.35's Emporium. Corrected, it showed two things the old
+  order hid: the dues could stand a little higher, and a learner's first day at Thornwick was badly overloaded
+  (below).
+- **A learner's first days at a market are quieter**: no locked chests on the first, no warded-thing puzzle in the
+  first two. Five days is less room for Thornwick's lessons than 0.35's eight or more.
 
 What couldn't be checked from a cloud session, and is worth an hour of the owner's time before anything else:
 

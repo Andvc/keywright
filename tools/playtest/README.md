@@ -48,7 +48,8 @@ don't count it against the game unless the game gives no other way.
 
 ## Skipping ahead
 
-A season takes a couple of hours, so these launch options start later in the game, the shop fast-forwarded by the
-sim's careful player (things may look a little odd right at the jump): `pt start --start-week=6 --no-tutorial` (a first
-season near its end, to its last night), `pt start --season=2` (the first days of a remembered season),
-`pt start --season=2 --start-week=3 --no-tutorial`, and `pt start --treasury-demo=final` (the final opening).
+A season takes an hour and a half (four weeks of five days, a market each), so these launch options start later in
+the game, the shop fast-forwarded by the sim's careful player (things may look a little odd right at the jump):
+`pt start --start-week=2 --no-tutorial` (the first morning at the second market), `pt start --start-week=4
+--no-tutorial` (a first season's last week, to its last night), `pt start --season=2` (the first days of a remembered
+season), `pt start --season=2 --start-week=3 --no-tutorial`, and `pt start --treasury-demo=final` (the final opening).
