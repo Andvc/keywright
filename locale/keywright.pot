@@ -3210,7 +3210,7 @@ msgstr ""
 msgid "Paste Gem"
 msgstr ""
 
-#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:1258
+#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:1259
 msgid "Heartsong"
 msgstr ""
 
@@ -12828,7 +12828,7 @@ msgstr ""
 msgid "By the Gilded Gate: the court, demons and their gilded iron, a fence for the Maw, and the last of Bram's debt."
 msgstr ""
 
-#: scripts/Core/Upgrades.cs:66 scripts/Phases/CounterPhase.cs:1012
+#: scripts/Core/Upgrades.cs:66 scripts/Phases/CounterPhase.cs:1013
 msgid "Lodestone"
 msgstr ""
 
@@ -13608,7 +13608,7 @@ msgstr ""
 msgid "{0} goes back to the Locking."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:648 scripts/Phases/CounterPhase.cs:1541
+#: scripts/Phases/CounterPhase.cs:648 scripts/Phases/CounterPhase.cs:1542
 #: scripts/Phases/DayEndPhase.cs:90 scripts/Phases/DayEndPhase.cs:91 scripts/Phases/DayEndPhase.cs:92
 #: scripts/Phases/DayEndPhase.cs:94 scripts/Phases/DayEndPhase.cs:407 scripts/Phases/DuesPhase.cs:225
 #: scripts/Phases/DuesPhase.cs:232 scripts/Phases/DuesPhase.cs:240 scripts/Phases/DuesPhase.cs:287
@@ -13733,309 +13733,309 @@ msgstr ""
 msgid "{0} would take {1}g (your abacus)"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:951
+#: scripts/Phases/CounterPhase.cs:952
 #, csharp-format
-msgid "{0} asks, and would take {1}g"
+msgid "{0} asks (would take {1}g)"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:952
+#: scripts/Phases/CounterPhase.cs:953
 #, csharp-format
 msgid "{0} wants you to name a price"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:954
+#: scripts/Phases/CounterPhase.cs:955
 #, csharp-format
 msgid "{0}'s final price"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:955
+#: scripts/Phases/CounterPhase.cs:956
 #, csharp-format
 msgid "{0} asks (make an offer?)"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:956
+#: scripts/Phases/CounterPhase.cs:957
 #, csharp-format
 msgid "{0} asks"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:964
+#: scripts/Phases/CounterPhase.cs:965
 #, csharp-format
 msgid "Offer {0}g"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:968 scripts/Phases/PeddlerPhase.cs:532
+#: scripts/Phases/CounterPhase.cs:969 scripts/Phases/PeddlerPhase.cs:532
 #, csharp-format
 msgid "Buy {0}g"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:999
+#: scripts/Phases/CounterPhase.cs:1000
 msgid "No slip can price whoever's in there."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1000
+#: scripts/Phases/CounterPhase.cs:1001
 msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1001
+#: scripts/Phases/CounterPhase.cs:1002
 msgid "One coin, and nobody's waiting."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1001
+#: scripts/Phases/CounterPhase.cs:1002
 #, csharp-format
 msgid "One coin. And {0} still waiting, at x{1}."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1003
+#: scripts/Phases/CounterPhase.cs:1004
 msgid "Not a sound: empty, as far as you can tell."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1004
+#: scripts/Phases/CounterPhase.cs:1005
 msgid "Tick what you think is inside."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1005
+#: scripts/Phases/CounterPhase.cs:1006
 msgid "Name a price: the bar shows your odds."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1006
+#: scripts/Phases/CounterPhase.cs:1007
 #, csharp-format
 msgid "Worth more than {0}g? {1}"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1012 scripts/Ui/SettingsView.cs:104
+#: scripts/Phases/CounterPhase.cs:1013 scripts/Ui/SettingsView.cs:104
 msgid "On"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1017
+#: scripts/Phases/CounterPhase.cs:1018
 msgid "Last customer today."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1017
+#: scripts/Phases/CounterPhase.cs:1018
 #, csharp-format
 msgid "{0} more waiting today."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1028
+#: scripts/Phases/CounterPhase.cs:1029
 msgid "under 1%"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1028
+#: scripts/Phases/CounterPhase.cs:1029
 msgid "over 99%"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1108
+#: scripts/Phases/CounterPhase.cs:1109
 msgid "...breathing..."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1112
+#: scripts/Phases/CounterPhase.cs:1113
 msgid "Something in that chest is breathing, and it stops when you shake it."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1137
+#: scripts/Phases/CounterPhase.cs:1138
 msgid "...the wood rings..."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1138
+#: scripts/Phases/CounterPhase.cs:1139
 msgid "The box rings like a drum when you shake it: nothing's loose inside."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1163
+#: scripts/Phases/CounterPhase.cs:1164
 msgid "...knock..."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1167
+#: scripts/Phases/CounterPhase.cs:1168
 msgid "Something in that crate knocked, from the inside. It stops when you shake it."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1169 scripts/Phases/TreasuryPhase.cs:306
+#: scripts/Phases/CounterPhase.cs:1170 scripts/Phases/TreasuryPhase.cs:306
 msgid "Knock back"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1170
+#: scripts/Phases/CounterPhase.cs:1171
 msgid "Knock on the lid, and listen for an answer."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1207
+#: scripts/Phases/CounterPhase.cs:1208
 msgid "...tap tap... tap..."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1208
+#: scripts/Phases/CounterPhase.cs:1209
 msgid "It answered: two taps, then one. The way Bram taps the counter."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1216
+#: scripts/Phases/CounterPhase.cs:1217
 msgid "...knock knock..."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1217
+#: scripts/Phases/CounterPhase.cs:1218
 msgid "It answered. Whoever's in there is alive."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1261
+#: scripts/Phases/CounterPhase.cs:1262
 #, csharp-format
 msgid "That song... you know it. {0}!"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1261
+#: scripts/Phases/CounterPhase.cs:1262
 msgid "A sound like nothing in any chest. A Heartsong!"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 #, csharp-format
 msgid "Dropped it: it lands {0}. Heavy ones hold more."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "with a heavy thump"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "light as a feather"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "with a middling thud"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1294
+#: scripts/Phases/CounterPhase.cs:1295
 msgid "BOOM..."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1295
+#: scripts/Phases/CounterPhase.cs:1296
 msgid "Dropped it: a hollow BOOM. Something's under the floor!"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1301
+#: scripts/Phases/CounterPhase.cs:1302
 msgid "THUD"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1302
+#: scripts/Phases/CounterPhase.cs:1303
 msgid "Dropped it: a solid thud. No false bottom."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1307
+#: scripts/Phases/CounterPhase.cs:1308
 msgid "CRASH!"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1308
+#: scripts/Phases/CounterPhase.cs:1309
 #, csharp-format
 msgid "Something made of glass broke: the {0}."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1322
+#: scripts/Phases/CounterPhase.cs:1323
 msgid "CREAK"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1325
+#: scripts/Phases/CounterPhase.cs:1326
 msgid "It's coming apart in your hands: no more shaking. Go by what you heard."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1336
+#: scripts/Phases/CounterPhase.cs:1337
 #, csharp-format
 msgid "Price +{0}%"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1409
+#: scripts/Phases/CounterPhase.cs:1410
 msgid "Full price now"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1514
+#: scripts/Phases/CounterPhase.cs:1515
 msgid "Your mark stays warm: this chest is theirs to sell."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1517
+#: scripts/Phases/CounterPhase.cs:1518
 msgid "Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1522
+#: scripts/Phases/CounterPhase.cs:1523
 #, csharp-format
 msgid "Send for the Wardens (+{0}g)"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1523
+#: scripts/Phases/CounterPhase.cs:1524
 msgid "The seller runs, the chest goes home to its owner, and the Wardens pay you a finder's share. The Lockless won't thank you."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1543
+#: scripts/Phases/CounterPhase.cs:1544
 msgid "THE WARDENS"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1543
+#: scripts/Phases/CounterPhase.cs:1544
 msgid "Hollis's men take the chest home to its owner, and pay you the finder's share."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
+#: scripts/Phases/CounterPhase.cs:1571 scripts/Phases/CounterPhase.cs:1764
 #: scripts/Phases/OpeningPhase.cs:1231
 msgid "Close up for the day"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
+#: scripts/Phases/CounterPhase.cs:1571 scripts/Phases/CounterPhase.cs:1764
 #: scripts/Phases/OpeningPhase.cs:1231
 msgid "Next customer"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1588
+#: scripts/Phases/CounterPhase.cs:1589
 msgid "The Bookkeeping Engine can't read through chains."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1588
+#: scripts/Phases/CounterPhase.cs:1589
 msgid "Your Pocket Engine can't read through chains."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1599
+#: scripts/Phases/CounterPhase.cs:1600
 msgid "The Bookkeeping Engine whirs and clicks: everything inside is on the slip."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1600
+#: scripts/Phases/CounterPhase.cs:1601
 msgid "Your Pocket Engine ticks over: everything inside is on the slip."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1607
+#: scripts/Phases/CounterPhase.cs:1608
 msgid "The Drowned Bell is silent: nothing inside."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1608
+#: scripts/Phases/CounterPhase.cs:1609
 #, csharp-format
 msgid "The Drowned Bell tolls {0} time: {1} thing inside, false bottom and all."
 msgid_plural "The Drowned Bell tolls {0} times: {1} things inside, false bottom and all."
 msgstr[0] ""
 msgstr[1] ""
 
-#: scripts/Phases/CounterPhase.cs:1632
+#: scripts/Phases/CounterPhase.cs:1633
 msgid "THE WARD WON'T LET GO"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1633
+#: scripts/Phases/CounterPhase.cs:1634
 #, csharp-format
 msgid "It wasn't {0}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you can return it to its owner, or sell it to Nim's friends."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1659
+#: scripts/Phases/CounterPhase.cs:1660
 #, csharp-format
 msgid "{0} won't be back this week. Word gets round."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1705
+#: scripts/Phases/CounterPhase.cs:1706
 msgid "The chest bursts open!"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1742
+#: scripts/Phases/CounterPhase.cs:1743
 msgid "A stolen chest: it would never have opened for you."
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1747
+#: scripts/Phases/CounterPhase.cs:1748
 msgid "YOUR GUT SAYS"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1751
+#: scripts/Phases/CounterPhase.cs:1752
 msgid "missed out"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1751
+#: scripts/Phases/CounterPhase.cs:1752
 msgid "right call"
 msgstr ""
 
-#: scripts/Phases/CounterPhase.cs:1752
+#: scripts/Phases/CounterPhase.cs:1753
 msgid "You'll never know for sure."
 msgstr ""
 

@@ -948,7 +948,8 @@ public partial class CounterPhase : Phase
             _ when bought => Loc.T("You paid"),
             _ when _visit.Seller.SlipPrice => Loc.T($"{who} asks what your slip says"),
             Trade.Offer when _visit.Ask == 0 && least > 0 => Loc.T($"{who} would take {least}g (your abacus)"),
-            Trade.Haggle when least > 0 && _visit.OffersMade == 0 => Loc.T($"{who} asks, and would take {least}g"),
+            // (Kept short: with a long name and a four-figure floor, "asks, and would take" outgrew the label.)
+            Trade.Haggle when least > 0 && _visit.OffersMade == 0 => Loc.T($"{who} asks (would take {least}g)"),
             Trade.Offer when _visit.Ask == 0 => Loc.T($"{who} wants you to name a price"),
             // A haggler who heard you out (another try) hasn't named a final price yet.
             Trade.Haggle when _visit.OffersMade > 0 && !offering => Loc.T($"{who}'s final price"),

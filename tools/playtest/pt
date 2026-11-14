@@ -91,9 +91,11 @@ case "$1" in
   shake)      # pt shake X Y gentle|firm|hard [SECONDS]  grabs the chest at X,Y and shakes it, then lets go
     x=$2; y=$3; level=$3; level=$4; secs=${5:-2.5}
     case "$level" in
+      # How far each flip goes (0.37: the chest glides between the pointer's reports, so a flip reads as the speed of
+      # the move it is, where a lurch used to read about twice that: firm was 18 and hard 60).
       gentle) amp=6; dt=0.05 ;;
-      firm)   amp=18; dt=0.05 ;;
-      hard)   amp=60; dt=0.04 ;;
+      firm)   amp=40; dt=0.05 ;;
+      hard)   amp=95; dt=0.04 ;;
       *) echo "level must be gentle, firm or hard"; exit 1 ;;
     esac
     xdotool mousemove "$x" "$y" mousedown 1
@@ -118,10 +120,10 @@ case "$1" in
     sleep 0.5
     echo -n "after:  "; shot
     ;;
-  drop)       # pt drop X Y  lifts the chest at X,Y up 150 px and lets it fall
+  drop)       # pt drop X Y  lifts the chest at X,Y up 175 px (a drop needs 150) and lets it fall
     xdotool mousemove "$2" "$3" mousedown 1
     sleep 0.15
-    for i in 1 2 3 4 5 6; do xdotool mousemove "$2" $(( $3 - i*25 )); sleep 0.03; done
+    for i in 1 2 3 4 5 6 7; do xdotool mousemove "$2" $(( $3 - i*25 )); sleep 0.03; done
     sleep 0.2
     xdotool mouseup 1
     sleep 1.2

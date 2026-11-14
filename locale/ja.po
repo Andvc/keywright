@@ -3435,7 +3435,7 @@ msgstr "竜の瞳"
 msgid "Paste Gem"
 msgstr "模造宝石"
 
-#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:1258
+#: scripts/Core/Items.cs:180 scripts/Phases/CounterPhase.cs:1259
 msgid "Heartsong"
 msgstr "心歌"
 
@@ -14076,7 +14076,7 @@ msgid ""
 "By the Gilded Gate: the court, demons and their gilded iron, a fence for the Maw, and the last of Bram's debt."
 msgstr "金箔の門のそば：宮廷、悪魔と金箔を貼った鉄、アギトの故買屋、そしてブラムの借金の最後の一回。"
 
-#: scripts/Core/Upgrades.cs:66 scripts/Phases/CounterPhase.cs:1012
+#: scripts/Core/Upgrades.cs:66 scripts/Phases/CounterPhase.cs:1013
 msgid "Lodestone"
 msgstr "天然磁石"
 
@@ -14808,7 +14808,7 @@ msgstr "売る：+{0}G"
 msgid "{0} goes back to the Locking."
 msgstr "{0}は大施錠へ還っていった。"
 
-#: scripts/Phases/CounterPhase.cs:648 scripts/Phases/CounterPhase.cs:1541
+#: scripts/Phases/CounterPhase.cs:648 scripts/Phases/CounterPhase.cs:1542
 #: scripts/Phases/DayEndPhase.cs:90 scripts/Phases/DayEndPhase.cs:91 scripts/Phases/DayEndPhase.cs:92
 #: scripts/Phases/DayEndPhase.cs:94 scripts/Phases/DayEndPhase.cs:407 scripts/Phases/DuesPhase.cs:225
 #: scripts/Phases/DuesPhase.cs:232 scripts/Phases/DuesPhase.cs:240 scripts/Phases/DuesPhase.cs:287
@@ -14925,299 +14925,299 @@ msgstr "{0}の言い値は査定表の額"
 msgid "{0} would take {1}g (your abacus)"
 msgstr "{0}は{1}Gで手を打つ（そろばん）"
 
-#: scripts/Phases/CounterPhase.cs:951
-msgid "{0} asks, and would take {1}g"
-msgstr "{0}の言い値。{1}Gでも手を打つ"
-
 #: scripts/Phases/CounterPhase.cs:952
+msgid "{0} asks (would take {1}g)"
+msgstr "{0}の言い値（{1}Gでも手を打つ）"
+
+#: scripts/Phases/CounterPhase.cs:953
 msgid "{0} wants you to name a price"
 msgstr "{0}：あなたが値をつける"
 
-#: scripts/Phases/CounterPhase.cs:954
+#: scripts/Phases/CounterPhase.cs:955
 msgid "{0}'s final price"
 msgstr "{0}の最後の言い値"
 
-#: scripts/Phases/CounterPhase.cs:955
+#: scripts/Phases/CounterPhase.cs:956
 msgid "{0} asks (make an offer?)"
 msgstr "{0}の言い値（値切る？）"
 
-#: scripts/Phases/CounterPhase.cs:956
+#: scripts/Phases/CounterPhase.cs:957
 msgid "{0} asks"
 msgstr "{0}の言い値"
 
-#: scripts/Phases/CounterPhase.cs:964
+#: scripts/Phases/CounterPhase.cs:965
 msgid "Offer {0}g"
 msgstr "{0}Gの値をつける"
 
-#: scripts/Phases/CounterPhase.cs:968 scripts/Phases/PeddlerPhase.cs:532
+#: scripts/Phases/CounterPhase.cs:969 scripts/Phases/PeddlerPhase.cs:532
 msgid "Buy {0}g"
 msgstr "{0}Gで買う"
 
-#: scripts/Phases/CounterPhase.cs:999
+#: scripts/Phases/CounterPhase.cs:1000
 msgid "No slip can price whoever's in there."
 msgstr "中にいる誰かに、査定表で値はつけられない。"
 
-#: scripts/Phases/CounterPhase.cs:1000
+#: scripts/Phases/CounterPhase.cs:1001
 msgid "Exact: a quarter off. Wrong: a quarter more."
 msgstr "ぴたり的中なら25%引き。外れたら25%増し。"
 
-#: scripts/Phases/CounterPhase.cs:1001
+#: scripts/Phases/CounterPhase.cs:1002
 msgid "One coin, and nobody's waiting."
 msgstr "硬貨一枚。待っている客はいない。"
 
-#: scripts/Phases/CounterPhase.cs:1001
+#: scripts/Phases/CounterPhase.cs:1002
 msgid "One coin. And {0} still waiting, at x{1}."
 msgstr "硬貨一枚。ただし待ち客{0}人の値段が×{1}に。"
 
-#: scripts/Phases/CounterPhase.cs:1003
+#: scripts/Phases/CounterPhase.cs:1004
 msgid "Not a sound: empty, as far as you can tell."
 msgstr "物音ひとつしない：どうやら空っぽだ。"
 
-#: scripts/Phases/CounterPhase.cs:1004
+#: scripts/Phases/CounterPhase.cs:1005
 msgid "Tick what you think is inside."
 msgstr "入っていると思うものにチェックを入れてください。"
 
-#: scripts/Phases/CounterPhase.cs:1005
+#: scripts/Phases/CounterPhase.cs:1006
 msgid "Name a price: the bar shows your odds."
 msgstr "値をつけると、バーに見込みが出ます。"
 
-#: scripts/Phases/CounterPhase.cs:1006
+#: scripts/Phases/CounterPhase.cs:1007
 msgid "Worth more than {0}g? {1}"
 msgstr "{0}Gを上回る見込み：{1}"
 
-#: scripts/Phases/CounterPhase.cs:1012 scripts/Ui/SettingsView.cs:104
+#: scripts/Phases/CounterPhase.cs:1013 scripts/Ui/SettingsView.cs:104
 msgid "On"
 msgstr "オン"
 
-#: scripts/Phases/CounterPhase.cs:1017
+#: scripts/Phases/CounterPhase.cs:1018
 msgid "Last customer today."
 msgstr "今日の客はこれで最後。"
 
-#: scripts/Phases/CounterPhase.cs:1017
+#: scripts/Phases/CounterPhase.cs:1018
 msgid "{0} more waiting today."
 msgstr "今日はあと{0}人が待っている。"
 
-#: scripts/Phases/CounterPhase.cs:1028
+#: scripts/Phases/CounterPhase.cs:1029
 msgid "under 1%"
 msgstr "1%未満"
 
-#: scripts/Phases/CounterPhase.cs:1028
+#: scripts/Phases/CounterPhase.cs:1029
 msgid "over 99%"
 msgstr "99%超"
 
-#: scripts/Phases/CounterPhase.cs:1108
+#: scripts/Phases/CounterPhase.cs:1109
 msgid "...breathing..."
 msgstr "……息づかい……"
 
-#: scripts/Phases/CounterPhase.cs:1112
+#: scripts/Phases/CounterPhase.cs:1113
 msgid "Something in that chest is breathing, and it stops when you shake it."
 msgstr "あの宝箱の中で何かが息をしている。振ると、息が止まる。"
 
-#: scripts/Phases/CounterPhase.cs:1137
+#: scripts/Phases/CounterPhase.cs:1138
 msgid "...the wood rings..."
 msgstr "……木が響く……"
 
-#: scripts/Phases/CounterPhase.cs:1138
+#: scripts/Phases/CounterPhase.cs:1139
 msgid "The box rings like a drum when you shake it: nothing's loose inside."
 msgstr "振ると、箱が太鼓のように響く。中で転がる物は何もない。"
 
-#: scripts/Phases/CounterPhase.cs:1163
+#: scripts/Phases/CounterPhase.cs:1164
 msgid "...knock..."
 msgstr "……コン……"
 
-#: scripts/Phases/CounterPhase.cs:1167
+#: scripts/Phases/CounterPhase.cs:1168
 msgid ""
 "Something in that crate knocked, from the inside. It stops when you shake it."
 msgstr "あの木箱の中で、何かが内側からノックした。振ると止まる。"
 
-#: scripts/Phases/CounterPhase.cs:1169 scripts/Phases/TreasuryPhase.cs:306
+#: scripts/Phases/CounterPhase.cs:1170 scripts/Phases/TreasuryPhase.cs:306
 msgid "Knock back"
 msgstr "ノックを返す"
 
-#: scripts/Phases/CounterPhase.cs:1170
+#: scripts/Phases/CounterPhase.cs:1171
 msgid "Knock on the lid, and listen for an answer."
 msgstr "蓋をノックして、返事に耳を澄ませる。"
 
-#: scripts/Phases/CounterPhase.cs:1207
+#: scripts/Phases/CounterPhase.cs:1208
 msgid "...tap tap... tap..."
 msgstr "……トントン……トン……"
 
-#: scripts/Phases/CounterPhase.cs:1208
+#: scripts/Phases/CounterPhase.cs:1209
 msgid "It answered: two taps, then one. The way Bram taps the counter."
 msgstr "返事があった。トントン、トン。ブラムがカウンターを叩くやり方だ。"
 
-#: scripts/Phases/CounterPhase.cs:1216
+#: scripts/Phases/CounterPhase.cs:1217
 msgid "...knock knock..."
 msgstr "……コンコン……"
 
-#: scripts/Phases/CounterPhase.cs:1217
+#: scripts/Phases/CounterPhase.cs:1218
 msgid "It answered. Whoever's in there is alive."
 msgstr "返事があった。中にいる誰かは、生きている。"
 
-#: scripts/Phases/CounterPhase.cs:1261
+#: scripts/Phases/CounterPhase.cs:1262
 msgid "That song... you know it. {0}!"
 msgstr "この歌……知っている。{0}だ！"
 
-#: scripts/Phases/CounterPhase.cs:1261
+#: scripts/Phases/CounterPhase.cs:1262
 msgid "A sound like nothing in any chest. A Heartsong!"
 msgstr "どんな宝箱でも聞いたことのない音。心歌だ！"
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "Dropped it: it lands {0}. Heavy ones hold more."
 msgstr "落としてみると、{0}。重いほど中身は多い。"
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "with a heavy thump"
 msgstr "ずしんと重い音がした"
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "light as a feather"
 msgstr "羽のように軽い手応えだった"
 
-#: scripts/Phases/CounterPhase.cs:1282
+#: scripts/Phases/CounterPhase.cs:1283
 msgid "with a middling thud"
 msgstr "そこそこの重さの音がした"
 
-#: scripts/Phases/CounterPhase.cs:1294
+#: scripts/Phases/CounterPhase.cs:1295
 msgid "BOOM..."
 msgstr "ボン……"
 
-#: scripts/Phases/CounterPhase.cs:1295
+#: scripts/Phases/CounterPhase.cs:1296
 msgid "Dropped it: a hollow BOOM. Something's under the floor!"
 msgstr "落としてみると、うつろな「ボン」。底の下に何かある！"
 
-#: scripts/Phases/CounterPhase.cs:1301
+#: scripts/Phases/CounterPhase.cs:1302
 msgid "THUD"
 msgstr "ドスッ"
 
-#: scripts/Phases/CounterPhase.cs:1302
+#: scripts/Phases/CounterPhase.cs:1303
 msgid "Dropped it: a solid thud. No false bottom."
 msgstr "落としてみると、ドスッと詰まった音。二重底はない。"
 
-#: scripts/Phases/CounterPhase.cs:1307
+#: scripts/Phases/CounterPhase.cs:1308
 msgid "CRASH!"
 msgstr "ガシャン！"
 
-#: scripts/Phases/CounterPhase.cs:1308
+#: scripts/Phases/CounterPhase.cs:1309
 msgid "Something made of glass broke: the {0}."
 msgstr "ガラスの何かが割れた。{0}だ。"
 
-#: scripts/Phases/CounterPhase.cs:1322
+#: scripts/Phases/CounterPhase.cs:1323
 msgid "CREAK"
 msgstr "ギシッ"
 
-#: scripts/Phases/CounterPhase.cs:1325
+#: scripts/Phases/CounterPhase.cs:1326
 msgid "It's coming apart in your hands: no more shaking. Go by what you heard."
 msgstr "手の中でばらばらになりかけている：もう振れない。聞こえた音で判断するしかない。"
 
-#: scripts/Phases/CounterPhase.cs:1336
+#: scripts/Phases/CounterPhase.cs:1337
 msgid "Price +{0}%"
 msgstr "値段+{0}%"
 
-#: scripts/Phases/CounterPhase.cs:1409
+#: scripts/Phases/CounterPhase.cs:1410
 msgid "Full price now"
 msgstr "定価に戻った"
 
-#: scripts/Phases/CounterPhase.cs:1514
+#: scripts/Phases/CounterPhase.cs:1515
 msgid "Your mark stays warm: this chest is theirs to sell."
 msgstr "鍵紋は温かいまま：この宝箱は、売り手が売ってよい物だ。"
 
-#: scripts/Phases/CounterPhase.cs:1517
+#: scripts/Phases/CounterPhase.cs:1518
 msgid ""
 "Your mark goes cold: this chest isn't theirs to sell. Bought, it won't open for you."
 msgstr "鍵紋が冷えた：この宝箱は、売り手が売ってよい物ではない。買っても、あなたには開けられない。"
 
-#: scripts/Phases/CounterPhase.cs:1522
+#: scripts/Phases/CounterPhase.cs:1523
 msgid "Send for the Wardens (+{0}g)"
 msgstr "衛士を呼ぶ（+{0}G）"
 
-#: scripts/Phases/CounterPhase.cs:1523
+#: scripts/Phases/CounterPhase.cs:1524
 msgid ""
 "The seller runs, the chest goes home to its owner, and the Wardens pay you a finder's share. The Lockless won't thank you."
 msgstr "売り手は逃げ出し、宝箱は持ち主のもとへ帰り、衛士から発見者の取り分が支払われます。無錠党には恨まれるでしょう。"
 
-#: scripts/Phases/CounterPhase.cs:1543
+#: scripts/Phases/CounterPhase.cs:1544
 msgid "THE WARDENS"
 msgstr "衛士"
 
-#: scripts/Phases/CounterPhase.cs:1543
+#: scripts/Phases/CounterPhase.cs:1544
 msgid ""
 "Hollis's men take the chest home to its owner, and pay you the finder's share."
 msgstr "ホリスの部下たちが宝箱を持ち主のもとへ届け、発見者の取り分を払ってくれた。"
 
-#: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
+#: scripts/Phases/CounterPhase.cs:1571 scripts/Phases/CounterPhase.cs:1764
 #: scripts/Phases/OpeningPhase.cs:1231
 msgid "Close up for the day"
 msgstr "今日は店じまい"
 
-#: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
+#: scripts/Phases/CounterPhase.cs:1571 scripts/Phases/CounterPhase.cs:1764
 #: scripts/Phases/OpeningPhase.cs:1231
 msgid "Next customer"
 msgstr "次の客へ"
 
-#: scripts/Phases/CounterPhase.cs:1588
+#: scripts/Phases/CounterPhase.cs:1589
 msgid "The Bookkeeping Engine can't read through chains."
 msgstr "帳簿からくりでも、鎖越しには読み取れない。"
 
-#: scripts/Phases/CounterPhase.cs:1588
+#: scripts/Phases/CounterPhase.cs:1589
 msgid "Your Pocket Engine can't read through chains."
 msgstr "懐中からくりでも、鎖越しには読み取れない。"
 
-#: scripts/Phases/CounterPhase.cs:1599
+#: scripts/Phases/CounterPhase.cs:1600
 msgid ""
 "The Bookkeeping Engine whirs and clicks: everything inside is on the slip."
 msgstr "帳簿からくりがウィーンと唸り、カチカチと鳴る：中身がすべて査定表に記された。"
 
-#: scripts/Phases/CounterPhase.cs:1600
+#: scripts/Phases/CounterPhase.cs:1601
 msgid "Your Pocket Engine ticks over: everything inside is on the slip."
 msgstr "懐中からくりがカチカチと回る：中身がすべて査定表に記された。"
 
-#: scripts/Phases/CounterPhase.cs:1607
+#: scripts/Phases/CounterPhase.cs:1608
 msgid "The Drowned Bell is silent: nothing inside."
 msgstr "沈んだ鐘は鳴らない：中には何もない。"
 
-#: scripts/Phases/CounterPhase.cs:1608
+#: scripts/Phases/CounterPhase.cs:1609
 msgid ""
 "The Drowned Bell tolls {0} time: {1} thing inside, false bottom and all."
 msgid_plural ""
 "The Drowned Bell tolls {0} times: {1} things inside, false bottom and all."
 msgstr[0] "沈んだ鐘が{0}回鳴った：二重底の分も含めて、中身は{1}点。"
 
-#: scripts/Phases/CounterPhase.cs:1632
+#: scripts/Phases/CounterPhase.cs:1633
 msgid "THE WARD WON'T LET GO"
 msgstr "結界が解けない"
 
-#: scripts/Phases/CounterPhase.cs:1633
+#: scripts/Phases/CounterPhase.cs:1634
 msgid ""
 "It wasn't {0}'s to sell, so it isn't yours: it won't open. Bram carries it to the back room. Tonight you can return it to its owner, or sell it to Nim's friends."
 msgstr ""
 "{0}に売る権利のない宝箱だった。だから、あなたのものにもならない：開かないのだ。ブラムが奥の間へ運んでくれた。今夜、持ち主に返すか、ニムの仲間に売ることができる。"
 
-#: scripts/Phases/CounterPhase.cs:1659
+#: scripts/Phases/CounterPhase.cs:1660
 msgid "{0} won't be back this week. Word gets round."
 msgstr "{0}は今週はもう来ない。噂は広まるものだ。"
 
-#: scripts/Phases/CounterPhase.cs:1705
+#: scripts/Phases/CounterPhase.cs:1706
 msgid "The chest bursts open!"
 msgstr "宝箱がはじけて開いた！"
 
-#: scripts/Phases/CounterPhase.cs:1742
+#: scripts/Phases/CounterPhase.cs:1743
 msgid "A stolen chest: it would never have opened for you."
 msgstr "盗まれた宝箱だった。買っても、あなたには開けられなかった。"
 
-#: scripts/Phases/CounterPhase.cs:1747
+#: scripts/Phases/CounterPhase.cs:1748
 msgid "YOUR GUT SAYS"
 msgstr "あなたの勘では"
 
-#: scripts/Phases/CounterPhase.cs:1751
+#: scripts/Phases/CounterPhase.cs:1752
 msgid "missed out"
 msgstr "逃した"
 
-#: scripts/Phases/CounterPhase.cs:1751
+#: scripts/Phases/CounterPhase.cs:1752
 msgid "right call"
 msgstr "正解"
 
-#: scripts/Phases/CounterPhase.cs:1752
+#: scripts/Phases/CounterPhase.cs:1753
 msgid "You'll never know for sure."
 msgstr "本当のところは、もうわからない。"
 

@@ -338,14 +338,25 @@ you listened to and got wrong. The checks made on a chest are kept for that (`Vi
 
 **When a shake counts.** A strength counts as tried on a chest once it's been shaken at it for half a second in all
 (`CounterPhase.TryTime`, by `ShakeBox.Level`: the hardest the chest has moved in the last moment, worked out in the
-shake box a physics step at a time, whatever the frame rate). Nothing is spent by it any more, but three things still
-go by it: Bram's lessons wait on "shake it firmly", the hint under the chest says which strengths are left to try,
-and the opening's closed eye is for what no strength you tried could have stirred. 0.36 learned what a miscount
-costs (its first ear read the hand's speed once a frame, and at twelve frames a second a firm shake lit the meter
-and never counted: the playtester sat in a lesson shaking for half a minute), so `--hand-test` (0.36's `--ear-test`,
-kept) still drives a pointer through the real counter the ways hands move (a gentle, a firm and a hard shake, a hard
-one with its wind-up and wind-down, a mouse that reports in jumps, twelve frames a second, a lift, a carry) and checks
-which strengths each counted as.
+shake box a physics step at a time). Nothing is spent by it any more, but three things still go by it: Bram's
+lessons wait on "shake it firmly", the hint under the chest says which strengths are left to try, and the opening's
+closed eye is for what no strength you tried could have stirred; and a seller who minds a hard shake goes by the
+same reading.
+
+**The same shake at any frame rate** (0.37, `ShakeBox`'s glide). The pointer is read once a frame, and a frame can be
+several physics steps: a slow machine, a mouse or a remote screen that reports in jumps. Followed as it came, the
+chest lurched once a report, and a lurch's first step is about twice as fast as the shake that made it, so at
+twelve frames a second a firm shake read as hard: to the meter, to what counted as tried, and to Brother Cadoc. It
+had always been so; 0.36's ear hid it for the listens it counted (its own measure, `Dwell`, went with the ear) and
+`--hand-test` found it again in a scaled window, where the software renderer here drops to ten frames a second. The
+chest's target now glides from one report to the next over as many steps as the last two reports were apart, so the
+chest moves as the hand does and its speed means the same at any frame rate. At a report a step (sixty frames a
+second, and the cradle's and the bot's own rocking) nothing changes, not by a pixel. `--hand-test` (0.36's
+`--ear-test`, kept) drives a pointer through the real counter the ways hands move (a gentle, a firm and a hard
+shake, a hard one with its wind-up and wind-down, a mouse that reports in jumps, twelve frames a second, a lift, a
+carry) and checks which strengths each counted as; it passes at 1280x720 and in a 1600x900 window. The playtest
+tool's shakes (`tools/playtest/pt`) were flips sized for the lurch, and are sized for the move now (firm 40 pixels a
+flip, hard 95).
 
 **The careful player** (`Hearing.Read`, `Strategy`, for the sim and the bot) listens to everything again: every
 strength the seller allows for nothing, the drop where a false bottom is likely and nothing in the way of it (not

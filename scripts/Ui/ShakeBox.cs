@@ -94,6 +94,20 @@ public partial class ShakeBox : Node2D
     readonly Dictionary<Item, double> _sinceSound = new();
     readonly double[] _lastAtLevel = { -9, -9, -9, -9 };
     Vector2 _rest, _pos, _vel, _target, _grab, _pressAt, _shakeFrom;
+
+    /// <summary>
+    /// The pointer's reports, and the glide between them (0.37). A hand's pointer is read once a frame, and a frame can
+    /// be several physics steps (a slow machine, a mouse or a remote screen that reports in jumps): followed as it came,
+    /// the chest lurched once a report, and a lurch's first step is about twice as fast as the shake that made it, so
+    /// at twelve frames a second a firm shake read as hard (to the meter, and to a seller who minds a hard one). The
+    /// chest's target now glides from one report to the next over as many steps as the last two were apart: at a
+    /// step a report (sixty frames a second, and the cradle's own rocking) it's exactly what it was.
+    /// </summary>
+    Vector2 _reported, _glideFrom;
+    int _sinceReport, _reportEvery = 1;
+
+    /// <summary>The longest gap between reports the glide spreads a move over (eight steps: seven and a half frames a second).</summary>
+    const int MaxGlide = 8;
     AnimatableBody2D _box;
     Node2D _words;
     bool _dragging, _airborne, _moved;
@@ -190,7 +204,9 @@ public partial class ShakeBox : Node2D
             _moved = false;
             _pressAt = mouse;
             _grab = mouse - _pos;
-            _target = _pos;
+            _target = _reported = _glideFrom = _pos;
+            _sinceReport = 0;
+            _reportEvery = 1;
             GetViewport().SetInputAsHandled();
         }
         else if (!button.Pressed && _dragging)
@@ -259,9 +275,19 @@ public partial class ShakeBox : Node2D
                 _airborne = false;
             }
             var held = mouse - _grab;
-            _target = new Vector2(
+            var reported = new Vector2(
                 Mathf.Clamp(held.X, _dragBounds.Position.X, _dragBounds.End.X),
                 Mathf.Clamp(held.Y, _dragBounds.Position.Y, _dragBounds.End.Y));
+            // A new report: glide to it from wherever the target has got to, over the steps the last one took to come.
+            if (reported != _reported)
+            {
+                _reportEvery = Math.Clamp(_sinceReport, 1, MaxGlide);
+                _sinceReport = 0;
+                _glideFrom = _target;
+                _reported = reported;
+            }
+            _sinceReport++;
+            _target = _glideFrom.Lerp(_reported, Math.Min(1f, _sinceReport / (float)_reportEvery));
         }
 
         var previous = _pos;

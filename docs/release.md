@@ -119,9 +119,12 @@ these was checked by its numbers, by recorded frames or by a driven pointer, and
 - *Bram's cradle.* "Rock it" shakes the chest gently, firmly and hard, a second each. Whether that's relief or the
   game playing itself is a judgement for a hand: `CounterPhase.CradleSeconds` is how long, `GameState.Cradle` when it
   arrives (the fourth day at Thornwick in a first season, the first morning after).
-- *A hand's shake still counts.* `--hand-test` (0.36's `--ear-test`) drives a pointer the ways hands move, at sixty
-  and twelve frames a second, and checks which strengths each counted as tried. Nothing is spent by a shake any
-  more, but Bram's lessons wait on it. `CounterPhase.TryTime` and `ShakeBox.LevelHold` are the numbers.
+- *A hand's shake still counts, and the same at any frame rate.* `--hand-test` (0.36's `--ear-test`) drives a pointer
+  the ways hands move, at sixty and twelve frames a second, and checks which strengths each counted as tried. It
+  found that at ten or twelve frames a second a firm shake read as hard (it always had: the chest lurched once a
+  frame), so the chest now glides between the pointer's reports; at sixty frames a second nothing changed. On a slow
+  machine a shake needs the same hand it needs on a fast one, which is a little more than it used to: worth a minute
+  on the slowest machine to hand. `CounterPhase.TryTime`, `ShakeBox.LevelHold` and `ShakeBox.MaxGlide` are the numbers.
 - *The opening's pace.* How long a dear chest strains (up to 1.8 seconds), the breath before the last thing, and
   whether a chest with no glint at the crack feels flat now that a glint means something (`OpeningPhase._stakes`,
   `Thumps`, `LastBreath`, `Tell`). `--opening-demo` plays a crafted chest to judge by.

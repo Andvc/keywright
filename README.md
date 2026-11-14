@@ -247,7 +247,7 @@ xvfb-run -a godot --path . --rendering-driver opengl3 -- \
 # --curios=foot,star,ledger starts with those curios;
 # --veteran --ways=4 plays a later season (Bram's drawer, the cradle, every way in the chests from day 1)
 xvfb-run -a godot --path . -- --shell-demo --shots=$PWD/shots_shell  # title, saves, character screen, pause, settings (--gm: the GM panel)
-xvfb-run -a godot --path . -- --treasury-demo --shots=$PWD/shots_treasury  # the season's last night: the treasury
+xvfb-run -a godot --path . -- --autoplay --treasury-demo --quit-at-end --shots=$PWD/shots_treasury  # the season's last night: the treasury (=final: the final opening)
 python3 tools/music/make.py                                # write and render the music and ambience again (numpy, ffmpeg)
 python3 tools/po_merge.py --new                            # texts the translations in locale/ still lack
 godot --headless --path . --export-release "Windows Desktop" build/windows/Keywright.exe

@@ -80,8 +80,8 @@ routine*; `scripts/Core/Hands.cs`):
 | haggling | Factor's Abacus | rare | your offer starts on the least the seller would take, and they take it |
 | sight unseen | none | | it never touches the chest |
 
-They take a slot and come from Nim like any curio, and open after a first season (which is for learning the motions
-by hand). They are the first curios that tell you something of what a chest holds. What still holds is the rule
+They take a slot and come from Nim like any curio, and open after a first season, which is for learning the motions
+by hand (the moth once a season has traded at Crownhold, the engine by its feat). They are the first curios that tell you something of what a chest holds. What still holds is the rule
 behind that one: nothing says what a chest is *worth* before you buy it. How good each thing is stays the opening's.
 
 **Other ways the routine got shorter:**
@@ -142,6 +142,11 @@ dues are as they were.
   opens with more; at 20% half of careers had cleared level 8 by their thirtieth season, where none had.
 - **Heartsongs are 0.26% a chest** (0.32%). With no ration every chest is shaken, so none that sings goes unheard.
 
+Two challenge terms were brought back in line with the rest, each having come to be worth twelve points at a level's
+dues where no other is worth more than nine: thin crowds is a customer fewer on the Guild's day only (it was the
+week's last two days), and Nim's soft spot lays out its extra curio from the second week (it was every night, and
+nearly all of its worth was a second card on a later season's first nights).
+
 The game's own reports on the finished build, against 0.36's:
 
 | | 0.36 | 0.37 |
@@ -172,8 +177,23 @@ story now takes as long as its own steps do (two or three remembered seasons), n
 be cleared. That wasn't asked for by name, and it's the first thing for the owner to judge (`docs/design.md`, *Open
 questions*).
 
-One smaller thing the reports turned up: a newcomer's heaviest day is still the first at Thornwick, so in a first
-season the cradle comes on the quiet fourth day there, not the first.
+## Found while verifying
+
+Things the final pass of reports, bot runs and tests turned up, and what was done:
+
+- **A newcomer's heaviest day is still the first at Thornwick** (the experience report), so in a first season the
+  cradle comes on the quiet fourth day there, not the first.
+- **The "x3" sticker sat on the worth figure**, and the breath before the last thing treated a chest that had
+  already paid for itself as undecided (the bot's screenshots). The sticker is on the stamp itself now.
+- **A firm shake read as hard at ten or twelve frames a second** (`--hand-test` in a scaled window). It always had:
+  the pointer is read once a frame, so on a slow machine the chest lurched once a frame, and a lurch's first step is
+  about twice as fast as the shake that made it. The chest now glides between the pointer's reports; at sixty frames
+  a second nothing changes. The playtest tool's shakes were resized to match.
+- **The haggler's abacus label outgrew its place** in French, and could in English with a four-figure price: shorter
+  words.
+- **The experience report was playing second and third seasons as first ones**: it carries the profile now, which is
+  where its figures for later seasons come from.
+- **The bot skipped the firm shake in a lesson when it held an ear trumpet** (a false "lesson stuck" in its log).
 
 ## What couldn't be checked from here
 

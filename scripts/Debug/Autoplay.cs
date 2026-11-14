@@ -392,6 +392,10 @@ public partial class Autoplay : Node
         if (!recorded)
         {
             var wanted = Strategy.Levels(visit, State).ToList();
+            // A lesson asks for its shakes by name ("every strength"): through an ear trumpet the careful routine skips
+            // the firm one, which stranded a first-day lesson for a bot that had one from Bram's drawer.
+            if (visit.Lesson != null && visit.Chest.Unmasked && wanted.Contains(Core.Shake.Hard) && !wanted.Contains(Core.Shake.Firm))
+                wanted.Insert(wanted.IndexOf(Core.Shake.Hard), Core.Shake.Firm);
             // Bram's cradle (0.37), where it's on the counter: a press, and whatever it didn't rock at is shaken by hand.
             // (A lesson's steps are a hand's: it asks for each shake by name.)
             if (counter.HasCradle && visit.Lesson == null)

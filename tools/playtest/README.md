@@ -23,7 +23,7 @@ just after it: open that PNG to see the screen. Coordinates are screen pixels on
 | `pt holdkey NAME SECONDS` | Hold a key down that long. |
 | `pt drag X1 Y1 X2 Y2` | A slow press-move-release (for sliders). |
 | `pt shake X Y gentle\|firm\|hard [SECONDS]` | Grabs whatever is at X,Y and shakes it at that strength (default 2.5 s), then lets go. Two screenshots are taken during the shake (what's heard shows as words over the chest, and they fade fast) and one after. |
-| `pt drop X Y` | Grabs what's at X,Y, lifts it about 150 px and lets go. |
+| `pt drop X Y` | Grabs what's at X,Y, lifts it about 175 px and lets go. |
 | `pt wait SECONDS` | Waits, then a screenshot (for animations). |
 | `pt log [N]` | The last lines of the game's own log (errors show up here). |
 

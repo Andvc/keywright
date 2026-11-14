@@ -109,9 +109,12 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
    pointer through the real counter the ways hands move (smooth shakes at each strength, a hard one with its wind-up
    and wind-down, a mouse that reports in jumps, twelve frames a second, a lift, a carry) and checks which strengths
    each counted as tried (`Visit.Checks`: what Bram's lessons wait for, the hint under the chest and the opening's
-   closed eye go by); exit 1 on a failure. Run it on its own (it needs its frames). The bot and Bram's cradle shake at
+   closed eye go by); exit 1 on a failure. Run it on its own (it needs its frames), and in the scaled window too (as
+   the pad test, above: the software renderer drops to ten frames a second there, which is where 0.37 found a firm
+   shake reading as hard). The bot and Bram's cradle shake at
    exact strengths (`ShakeBox.AutoShake`), so they can't show this: a change to `ShakeBox` or to how `CounterPhase`
-   counts a strength (`TryTime`) isn't verified until this passes.
+   counts a strength (`TryTime`) isn't verified until this passes. The playtest tool's shakes (`tools/playtest/pt`:
+   flips of 6, 40 and 95 pixels) are the same motions as the test's "mouse that reports in jumps": change them together.
 7. Text: `dotnet run --project tools/loc -- check` must say every text is wrapped (it lists any new one that isn't),
    and `-- extract` rewrites locale/keywright.pot (commit it). `-- verify` checks each translation in locale/ against
    it (untranslated texts, holes and `{price}`-style names kept, plural forms, letters the language's fonts have;
@@ -187,7 +190,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   shaking has a price; never a drop), from the fourth day at Thornwick in a first season (`CradleDay`: the first three
   are a newcomer's heaviest) and from the first morning after (`Veteran`, with `Ways >= Market.CraftTier`). The slip's rows show what's been heard on this chest (a dot and a darker word), a
   click counts one more and a right-click one fewer (`Appraisal.Uncount`). Which checks a chest has had is still kept
-  (`Visit.Checks`, `Tried`, `Check`: a strength counts once shaken at for `CounterPhase.TryTime`), for Bram's lessons,
+  (`Visit.Checks`, `Tried`, `Check`: a strength counts once shaken at for `CounterPhase.TryTime`, by `ShakeBox.Level`;
+  the chest's target glides between the pointer's reports, `ShakeBox._reportEvery`, so a shake reads the same at
+  twelve frames a second as at sixty: followed as it came, a low frame rate's lurches read a firm shake as hard), for Bram's lessons,
   the hint under the chest and the opening, where a thing nothing you did could have told you of is unheard (the
   closed eye, `OpeningPhase.Unheard`, `Visit.CouldHear`, `NoteAudible`), not missed: a cross is for what you listened
   to and got wrong. `--hand-test` (above) checks a hand's shake is counted. A new curio of this sort belongs to one

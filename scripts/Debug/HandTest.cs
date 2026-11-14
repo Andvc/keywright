@@ -151,8 +151,10 @@ public partial class Main
             await Expect("a firm shake", () => Hold(firm, 1.4), "firm", "hard");
             await Expect("a hard shake, wound up to and wound down from", () => Hold(t =>
                 t < 0.25 ? Swing(110 * (float)(t / 0.25), 3.5f)(t) : t < 1.4 ? hard(t) : Vector2.Zero, 2.1), "hard");
-            await Expect("a firm shake from a mouse that reports in jumps", () => Hold(Flip(18), 2.0, 0.09), "firm", "hard");
-            await Expect("a hard shake from a mouse that reports in jumps", () => Hold(Flip(60), 1.6, 0.08), "hard");
+            // (The playtest tool's own amplitudes, tools/playtest/pt: the chest glides between reports, so a flip reads
+            // as the speed of the move it is.)
+            await Expect("a firm shake from a mouse that reports in jumps", () => Hold(Flip(40), 2.0, 0.09), "firm", "hard");
+            await Expect("a hard shake from a mouse that reports in jumps", () => Hold(Flip(95), 1.6, 0.08), "hard");
             await Expect("a gentle shake from a mouse that reports in jumps", () => Hold(Flip(6), 2.0, 0.1), "gentle", "firm+hard");
             await Expect("carrying the chest across the counter", () => Hold(t => new Vector2(110 * (float)Math.Min(t, 1.2), 0), 1.6), "", "firm+hard");
             await Expect("lifting it and setting it down again", () => Hold(t =>
@@ -165,7 +167,7 @@ public partial class Main
             needs = 9;
             await Wait(0.5);
             await Expect("a firm shake at twelve frames a second", () => Hold(firm, 2.0), "firm", "hard");
-            await Expect("a firm shake in jumps at twelve frames a second", () => Hold(Flip(18), 2.4, 0.09), "firm", "hard");
+            await Expect("a firm shake in jumps at twelve frames a second", () => Hold(Flip(40), 2.4, 0.09), "firm", "hard");
             await Expect("a hard shake at twelve frames a second", () => Hold(hard, 1.8), "hard");
             await Expect("a gentle shake at twelve frames a second", () => Hold(gentle, 2.0), "gentle", "firm+hard");
             Engine.MaxFps = fps;
