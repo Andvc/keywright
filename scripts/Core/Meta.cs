@@ -147,8 +147,12 @@ public static class Challenges
     /// <summary>Thornwick's welcome takes this share off the second due (half, until it proved worth twice any other boon).</summary>
     public const float InvitedShare = 0.25f;
 
-    /// <summary>With thin crowds: how many of the week's last days (the Guild's day, and the day its collectors ride in) are a customer short.</summary>
-    public const int ThinDays = 2;
+    /// <summary>
+    /// With thin crowds: how many of the week's last days are a customer short. The Guild's day alone since 0.37 (the day
+    /// before it too, until then): with the dues 30% up a level, two days cost the careful player twelve points at level
+    /// 3's dues, half as much again as any other bane; one costs six.
+    /// </summary>
+    public const int ThinDays = 1;
 
     /// <summary>With sharp sellers: what the least a haggler (or a boy waiting for your offer) will take is multiplied by.</summary>
     public const float SharpFloor = 1.15f;
@@ -179,8 +183,8 @@ public static class Challenges
 
     public static readonly TermDef[] Banes =
     {
-        new(ThinCrowds, false, Loc.T("Thin crowds"), Loc.T("On the last two days of every week, one customer fewer."),
-            Loc.T("The Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door while they're about.")),
+        new(ThinCrowds, false, Loc.T("Thin crowds"), Loc.T("On the last day of every week, one customer fewer."),
+            Loc.T("The Guild's collectors ride in on the day of the tithe, and nobody wants to be seen at your door while they're about.")),
         new(SharpSellers, false, Loc.T("Sharp sellers"), Loc.T($"Sellers who haggle hold out for more: the least they'll take is {Synergies.Pct(SharpFloor - 1)} higher."),
             Loc.T("Word's out that the Guild has you by the purse, and sellers think you'll pay what they ask.")),
         new(Forgers, false, Loc.T("Demon gold about"), Loc.T("One coin in ten is demon gold, whoever brings it."),
@@ -209,8 +213,8 @@ public static class Challenges
     {
         new(Gifts, true, Loc.T("Welcome gifts"), Loc.T($"Your first {Sellers.Number(Gifted)} customers hand you their chests for a coin each."),
             Loc.T("The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny.")),
-        new(NimsFavour, true, Loc.T("Nim's soft spot"), Loc.T("Nim lays out one more curio every night."),
-            Loc.T("Nim owes Bram a favour, and has decided you're it.")),
+        new(NimsFavour, true, Loc.T("Nim's soft spot"), Loc.T("From the second week, Nim lays out one more curio every night."),
+            Loc.T("Nim owes Bram a favour, and once you've lasted a week he decides you're it.")),
         new(Savings, true, Loc.T("Bram's savings"), Loc.T("You start with half as much gold again."),
             Loc.T("Bram sold his old cart, and the money's yours."), LeanStart),
         new(OldPicks, true, Loc.T("Bram's old picks"), Loc.T("You start with the Fine Lockpicks: a wider sweet spot on every lock."),

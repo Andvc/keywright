@@ -296,9 +296,11 @@ They are rare on purpose (one uncommon, four rares, a legendary), found like any
 trading you're building) and take a slot like any curio. None is in a first season, which is for learning the
 motions by hand: the quill, the gauge, the primer and the abacus open after a first season, the moth once a season
 has traded at Crownhold (or after two), the engine by its feat. Each makes its way of trading *faster to play* more
-than richer: as Nim brings them the quill adds nothing to a careful player's takings and the primer and the abacus about
-2%, the gauge and the engine about 7% and the moth 11% (`--sim=curio`, 100 seasons each against the careful player
-with no curios; the moth's is every enchanted thing a shop with no witchlight would have left unstarred). A build
+than richer: as Nim brings them the quill and the abacus add nothing to a careful player's takings (the abacus saves
+on what's paid: 86% of its seasons clear against 79% with no curios), the primer 2%, the gauge 5%, the engine 7% and
+the moth 10% (`--sim=builds`, 100 seasons each against the careful player with no curios; the moth's is every
+enchanted thing a shop with no witchlight would have left unstarred). The sim's careful player already ticks and
+counts perfectly, so for it the quill is worth nothing at all: what the quill is worth is a person's clicks. A build
 around the perfect read with the quill plays in half the clicks; with the Pocket Engine it stops being about reading
 at all and becomes about price, which is what 0.30's Bookkeeping Engine was for a run already won.
 
@@ -992,7 +994,7 @@ Where it stands (`--sim=quick`, `--sim=learners`, 120 seasons each; `--sim=level
 | A first season, by skill (0.15, 0.3, 0.5, 0.75, 0.9, 1) | 20, 26, 43, 66, 81, 90% | 18, 33, 53, 78, 85, 93% |
 | A later season, the same hands | the same | 29, 43, 66, 86, 95, 99% |
 | A first season with Bram's lessons on (120 first-timers, `--sim=experience --n=120 --runs=1`) | not measured at this size | 17% |
-| The levels as drawn, 1 to 8 (the careful player) | 77, 57, 43, 35, 18, 16, 9, 6% | 89, 80, 63, 36, 25, 13, 9, 5% |
+| The levels as drawn, 1 to 8 (the careful player) | 77, 57, 43, 35, 18, 16, 9, 6% | 89, 79, 61, 42, 25, 18, 9, 5% |
 | Paid off early | two seasons in three | four in five (18% in week 3, the rest in week 4) |
 | Profit a customer, by market | 7, 14, 85, 150g | 7, 14, 114, 151g |
 | Gold things a season | | 0.7 (none in half of seasons) |
@@ -1328,6 +1330,15 @@ adds half again for each kept curio it shares a way of trading with, and a curio
 ones, before the Guild (`Strategy.Reserve`): saving for the last week's wall otherwise kept every late build from coming
 together.
 
+0.37 (four weeks; the careful collector with no curios clears 79% of this report's 100 seasons): each curio alone,
+as Nim brings it, adds between nothing and a quarter to takings (the Ledger of Certainty and Fate's Spindle +26%,
+the Horseshoe +22%, the Gem Cutter's Wheel +20%, the Gallery Lamps +19%; the insurance ones, the quill and the abacus
+nothing; the Visitors' Book and the Haggler's Purse take a little off takings and clear more seasons, and the Cursed
+Crescent takes 11% off for its certainty), the sight-unseen pieces lose alone and win together (the sealed bid, the
+lucky dip and the bond: +152% and 93% cleared for a buyer who then never shakes), a careful player buying for one
+way of trading clears 81 to 95%, and buying whatever comes clears 94% for 19% more. A buyer who never shakes is foreclosed with any other build (luck clears one
+season in five, the rest none).
+
 What they measured, as 0.21 shipped (100 runs each; the careful collector with no curios clears about a quarter of the
 time in this report):
 
@@ -1616,36 +1627,42 @@ sweeping clock, a lock that slips, a curio you can't find), so a harder season i
 same level differ. Every term is a rule that holds every time, with a reason in `docs/world.md`, routed through
 `GameState.Under` or `Favoured` where its rule lives (so the sim and the bot play it too). There are twelve of each.
 
-What each does alone to the careful collector, **at level 3's dues** (Kit, 150 seasons each, 47% with none;
-`--sim=terms --level=3`; six points either way is noise at that size, and the five marked * were measured again over
-400, 46% with none). At level 0 the careful collector clears nine seasons in ten whatever the terms, so a term alone
-hardly shows there, which is why 0.36 weighs them at a level where half are lost.
+What each does alone to the careful collector **at level 3's dues, in a later season** (Kit, 200 seasons each, 70% with
+none; `--sim=terms --level=3 --veteran --ways=4 --n=200`; five points either way is noise at that size, and the two
+that changed, thin crowds and Nim's soft spot, were measured again over 400: 63 and 71% against 69%). At level 0 the
+careful collector clears nine seasons in ten whatever the terms, so a term alone hardly shows there, which is why
+0.36 began weighing them at a level where many are lost; and a level is always a later season, so since 0.37
+they're weighed in one.
 
 | Bane | Rule | Cleared | | Boon | Rule | Cleared |
 |---|---|---|---|---|---|---|
-| Thin crowds | the week's last two days, a customer fewer | 38% * | | Welcome gifts | the first two customers' chests for a coin each | 49% |
-| Sharp sellers | hagglers' least is 15% higher | 45% | | Nim's soft spot | Nim shows something else twice a visit | 48% |
-| Demon gold about | one coin in ten is demon gold | 45% | | Bram's savings | half as much gold again to start | 52% * |
-| A hurried season | every seller gives you 20 seconds | 46% | | Bram's old picks | the Fine Lockpicks from the start | 46% |
-| Fussy sellers | everyone minds a drop | 45% | | Thornwick wants you | the second due, the one paid at Thornwick, a quarter lighter | 54% * |
-| Bram's stretched thin | a stash dip fewer, Bram's word once fewer | 46% | | A slow season | twice the patience and twice a rotten chest's shaking | 51% |
-| A lean start | half the gold to start | 41% * | | Bram's prepared | a stash dip more, Bram's word once more | 47% |
-| Nim's raised his prices | curios a quarter dearer | 43% | | An honest clerk | pawning at full price | 50% |
-| The Guild's builders | every upgrade a quarter dearer | 42% | | A good name | hagglers hear you out | 48% |
-| A wet year | a pin more in every lock | 45% | | A lucky charm | the dry spell ends twice as soon | 46% |
-| Wary regulars | a commission fewer a week | 42% * | | Fair days | no mourning, no assessors | 48% |
-| Nim's lean month | a curio fewer on Nim's table | 45% | | Room for more | a curio slot more | 49% |
-| A head cold | a listen fewer every day | 44% | | A rested ear | three listens more every day | 50% |
+| Thin crowds | the week's last day, a customer fewer (its last two, until 0.37) | 65% | | Welcome gifts | the first two customers' chests for a coin each | 74% |
+| Sharp sellers | hagglers' least is 15% higher | 69% | | Nim's soft spot | from the second week, one more curio on Nim's table every night (every night, until 0.37) | 71% |
+| Demon gold about | one coin in ten is demon gold | 61% | | Bram's savings | half as much gold again to start | 72% |
+| A hurried season | every seller gives you 20 seconds | 61% | | Bram's old picks | the Fine Lockpicks from the start | 73% |
+| Fussy sellers | everyone minds a drop | 62% | | Thornwick wants you | the second due, the one paid at Thornwick, a quarter lighter | 73% |
+| Bram's stretched thin | a stash dip fewer, Bram's word once fewer | 69% | | A slow season | twice the patience and twice a rotten chest's shaking | 71% |
+| A lean start | half the gold to start | 71% | | Bram's prepared | a stash dip more, Bram's word once more | 70% |
+| Nim's raised his prices | curios a quarter dearer | 66% | | An honest clerk | pawning at full price | 68% |
+| The Guild's builders | every upgrade a quarter dearer | 64% | | A good name | hagglers hear you out | 70% |
+| A wet year | a pin more in every lock | 69% | | A lucky charm | the dry spell ends twice as soon | 68% |
+| Wary regulars | a commission fewer a week | 63% | | Fair days | no mourning, no assessors | 71% |
+| Nim's lean month | a curio fewer on Nim's table | 67% | | Room for more | a curio slot more | 74% |
 
-Every bane costs something (one to eight points) and no boon costs anything that isn't noise; thin crowds is the
-heaviest bane, as it was in 0.35, and Thornwick's welcome the best boon. A level's dues do most of the work (alone
-they clear 72, 59, 33, 12 and 7% at levels 1, 2, 4, 6 and 8; the levels as drawn 77, 57, 43, 35, 18, 16, 9 and 6%,
-each harder than the one below), and the terms are what makes two seasons at a level play differently.
+Every bane costs something or nothing that isn't noise (up to nine points: demon gold, a hurried season and fussy
+sellers are the heaviest now, each of them harder on a later season's chests, which have false bottoms and pairs from
+the first morning; over 400 seasons they cost eight or nine) and no boon costs anything that isn't noise (up to four
+points here, six for room for more over 400). A level's dues do most of the work, and the terms are what makes two
+seasons at a level play differently: the levels as drawn clear 89, 79, 61, 42, 25, 18, 9 and 5%, each harder than
+the one below.
 
-Three terms were changed in 0.36. Thornwick's welcome halved the price of the move until there was no move to buy,
-and then half the second due, which was worth thirteen points; it takes a quarter off now. A head cold took two
-listens a day and eight points, and takes one; a rested ear gave two listens and one point, and gives three. A listen
-lost is one of the eight a day was planned around; a listen more is a ninth check on a chest already read.
+Two terms were changed in 0.37, when a level's dues went to 30% and a later season began with Nim at the door on its
+first night. Thin crowds cost twelve points over its two days (400 seasons), half as much again as any other bane:
+it's the Guild's day alone now, and costs six. Nim's soft spot was worth twelve, twice any other boon, nearly all of
+it in a later season's first week, when one curio a night is all Nim lays out and a build is being started: its
+extra card comes from the second week, and is worth two. (0.36 changed three: Thornwick's welcome, which halved the
+price of the move until there was no move to buy and then half the second due, worth thirteen points, takes a
+quarter off; and a head cold and a rested ear, which went with the counted listens.)
 
 Several boons hardly move the careful collector, who never needs a second look from Nim or a second try with a
 haggler and has a steady hand on a lock: they're there for people. Bram stretched thin doesn't change how often the
@@ -2119,14 +2136,14 @@ finished build (`--sim=careers --n=60`):
 |---|---|---|---|---|---|
 | clear the debt (level 0) | season 2 | 2 | 3 | all | 3 |
 | swallowed at the treasury | 2 | 2 | 3 | all | 4 |
-| clear level 1 | 4 | 5 | 6 | all | 7 |
-| Bram brought home | 4 | 5 | 6 | 98% | 10 |
-| the next day (the true ending) | 4 | 5 | 6 | 98% | 10 |
-| clear level 2 | 6 | 7 | 10 | all | 11 |
-| clear level 4 | 11 | 15 | 18 | 97% | 26 |
-| clear level 6 | 21 | 28 | | 57% | (8% by season 30) |
-| clear level 8 | | | | 2% | (none) |
-| all nine Heartsongs known | | | | 18% | (17%) |
+| clear level 1 | 4 | 4 | 6 | all | 7 |
+| Bram brought home | 4 | 5 | 6 | all | 10 |
+| the next day (the true ending) | 4 | 5 | 6 | all | 10 |
+| clear level 2 | 6 | 7 | 9 | all | 11 |
+| clear level 4 | 12 | 15 | 18 | all | 26 |
+| clear level 6 | | | | 47% | (8% by season 30) |
+| clear level 8 | | | | 3% | (none) |
+| all nine Heartsongs known | | | | 22% | (17%) |
 
 A first season is cleared by about one player in six (17 or 18% by every measure), a second by half. The treasury's
 turn comes on the second or third season, as it was meant to, and the true ending around the fifth: seven or eight
@@ -2135,9 +2152,9 @@ to judge (*Open questions*): the remembered seasons were where a career used to 
 and that stall is what went. A career kept at level 0 reaches the next day on the same fifth season
 (`--sim=careers --level=0`: Bram home by the third, fifth and sixth season for a quarter, half and three quarters of
 players), so the story now takes as long as its own steps do. Level 4 is half-way up a thirty-season career where it was near
-its end, level 6 is reached by a little over half of careers, and level 8 is the wall it was: one career in fifty.
-For the careful collector the levels as drawn clear 89, 80, 63, 36, 25, 13, 9 and 5% in a later season (which every
-level is played in), against 0.36's 77, 57, 43, 35, 18, 16, 9 and 6%: kinder to level 3, the same from 4 up.
+its end, level 6 is reached by just under half of careers, and level 8 is the wall it was: one career in thirty.
+For the careful collector the levels as drawn clear 89, 79, 61, 42, 25, 18, 9 and 5% in a later season (which every
+level is played in), against 0.36's 77, 57, 43, 35, 18, 16, 9 and 6%: kinder up to level 5, the same at the top.
 
 **Learners.** The sim's careful player is a perfect listener. A learner (`Style.Skill`, 0 to 1) plays the same way
 with a learner's mistakes, each shrinking as skill grows: at skill 0 they skip each strength 40% of the time, count a
@@ -2359,7 +2376,7 @@ the report carried over only what Bram had taught, which was all a profile chang
 | Run 1: the heaviest days (median load, 30 and 120 players) | day 11, 5.6; day 6, 5.4 | day 11, 5.5 to 6.0; day 6, 5.4 to 5.8; day 8, 5.1 |
 | Run 1: players with some day over capacity | 70% | 77 to 81% |
 | Run 2: length; high points an hour; cleared | 94 minutes; 9.9 | 90 minutes; 10.1; half |
-| Run 3: length; high points an hour; cleared | 89 minutes; 9.9 | 86 minutes; 10.1; 57% |
+| Run 3: length; high points an hour; cleared | 89 minutes; 9.9 | 87 minutes; 10.0; 53% |
 | Run 2: its first day (the report's engagement measure) | 10 | 17 |
 
 A first season is the length it was: every chest is shaken at every strength again, by hand until the cradle comes

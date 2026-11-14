@@ -424,7 +424,7 @@ msgstr "高墙"
 msgid "Clear the debt at challenge level 8."
 msgstr "在挑战等级8还清债务。"
 
-#: scripts/Core/Appraisal.cs:18 scripts/Core/Appraisal.cs:35 scripts/Phases/OpeningPhase.cs:151
+#: scripts/Core/Appraisal.cs:18 scripts/Core/Appraisal.cs:35 scripts/Phases/OpeningPhase.cs:154
 msgid "enchanted!"
 msgstr "附魔！"
 
@@ -464,7 +464,7 @@ msgstr "假货"
 msgid "broken"
 msgstr "碎了"
 
-#: scripts/Core/Appraisal.cs:28 scripts/Phases/OpeningPhase.cs:152
+#: scripts/Core/Appraisal.cs:28 scripts/Phases/OpeningPhase.cs:155
 msgid "a false bottom!"
 msgstr "有夹层！"
 
@@ -476,7 +476,7 @@ msgstr "发光了！"
 msgid "fake"
 msgstr "假货"
 
-#: scripts/Core/Appraisal.cs:39 scripts/Phases/OpeningPhase.cs:152
+#: scripts/Core/Appraisal.cs:39 scripts/Phases/OpeningPhase.cs:155
 msgid "false bottom!"
 msgstr "夹层！"
 
@@ -3565,7 +3565,7 @@ msgstr "扁的"
 msgid "tiny"
 msgstr "小小的"
 
-#: scripts/Core/Items.cs:390 scripts/Phases/OpeningPhase.cs:943 scripts/Ui/CollectionView.cs:303
+#: scripts/Core/Items.cs:390 scripts/Phases/OpeningPhase.cs:947 scripts/Ui/CollectionView.cs:303
 msgid "singing"
 msgstr "歌唱中"
 
@@ -4493,358 +4493,359 @@ msgstr "钱币{0}磅，兵器{1}磅，斗篷{2}磅，药水{3}磅，法术{4}磅
 msgid "{0} lb"
 msgstr "{0}磅"
 
-#: scripts/Core/Meta.cs:182
+#: scripts/Core/Meta.cs:186
 msgid "Thin crowds"
 msgstr "门可罗雀"
 
-#: scripts/Core/Meta.cs:182
-msgid "On the last two days of every week, one customer fewer."
-msgstr "每周最后两天，每天少一位顾客。"
+#: scripts/Core/Meta.cs:186
+msgid "On the last day of every week, one customer fewer."
+msgstr "每周最后一天，少一位顾客。"
 
-#: scripts/Core/Meta.cs:183
+#: scripts/Core/Meta.cs:187
 msgid ""
-"The Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door while they're about."
-msgstr "缴贡金的前一天，公会的收账人就骑马进城了，他们在的时候，谁也不想被人看见出现在你店门口。"
+"The Guild's collectors ride in on the day of the tithe, and nobody wants to be seen at your door while they're about."
+msgstr "缴贡金的当天，公会的收账人就骑马进城了，他们在的时候，谁也不想被人看见出现在你店门口。"
 
-#: scripts/Core/Meta.cs:184
+#: scripts/Core/Meta.cs:188
 msgid "Sharp sellers"
 msgstr "精明卖家"
 
-#: scripts/Core/Meta.cs:184
+#: scripts/Core/Meta.cs:188
 msgid ""
 "Sellers who haggle hold out for more: the least they'll take is {0} higher."
 msgstr "爱讨价还价的卖家更不肯松口：他们能接受的最低价高出{0}。"
 
-#: scripts/Core/Meta.cs:185
+#: scripts/Core/Meta.cs:189
 msgid ""
 "Word's out that the Guild has you by the purse, and sellers think you'll pay what they ask."
 msgstr "风声传开了，说公会攥着你的钱袋子，卖家们都觉得他们要多少你就会给多少。"
 
-#: scripts/Core/Meta.cs:186
+#: scripts/Core/Meta.cs:190
 msgid "Demon gold about"
 msgstr "魔金横行"
 
-#: scripts/Core/Meta.cs:186
+#: scripts/Core/Meta.cs:190
 msgid "One coin in ten is demon gold, whoever brings it."
 msgstr "不管是谁带来的钱币，十枚里就有一枚是魔金。"
 
-#: scripts/Core/Meta.cs:187
+#: scripts/Core/Meta.cs:191
 msgid ""
 "The Gate's cracking wider, and the Maw's gilded iron has spread all over the realm."
 msgstr "镀金之门的裂缝越来越宽，巨口的镀金铁已经流遍了整个王国。"
 
-#: scripts/Core/Meta.cs:188
+#: scripts/Core/Meta.cs:192
 msgid "A hurried season"
 msgstr "匆忙时节"
 
-#: scripts/Core/Meta.cs:188
+#: scripts/Core/Meta.cs:192
 msgid "Every seller gives you {0} seconds to decide."
 msgstr "每位卖家只给你{0}秒做决定。"
 
-#: scripts/Core/Meta.cs:189
+#: scripts/Core/Meta.cs:193
 msgid ""
 "It's harvest time, and nobody can spare more than a moment at your counter."
 msgstr "正值收获时节，谁都没空在你的柜台前多待一会儿。"
 
-#: scripts/Core/Meta.cs:190
+#: scripts/Core/Meta.cs:194
 msgid "Fussy sellers"
 msgstr "挑剔卖家"
 
-#: scripts/Core/Meta.cs:190
+#: scripts/Core/Meta.cs:194
 msgid "Every seller minds a drop: drop their chest and they ask half again."
 msgstr "每位卖家都介意摔箱：摔了他们的箱子，价格就涨一半。"
 
-#: scripts/Core/Meta.cs:191
+#: scripts/Core/Meta.cs:195
 msgid ""
 "Old chests are the fashion this year, and everyone's precious about theirs."
 msgstr "今年时兴老箱子，人人都把自家的箱子当成宝贝。"
 
-#: scripts/Core/Meta.cs:192
+#: scripts/Core/Meta.cs:196
 msgid "Bram's stretched thin"
 msgstr "布拉姆捉襟见肘"
 
-#: scripts/Core/Meta.cs:192
+#: scripts/Core/Meta.cs:196
 msgid "Bram's stash has one dip fewer, and his word is good one time fewer."
 msgstr "布拉姆的私房钱少动用一次，他的担保也少用一次。"
 
-#: scripts/Core/Meta.cs:193
+#: scripts/Core/Meta.cs:197
 msgid ""
 "Bram spent his savings mending the roof, and the Guild has stopped taking his word."
 msgstr "布拉姆把积蓄都花在修屋顶上了，公会也不再认他的担保。"
 
-#: scripts/Core/Meta.cs:194
+#: scripts/Core/Meta.cs:198
 msgid "A lean start"
 msgstr "开局拮据"
 
-#: scripts/Core/Meta.cs:194
+#: scripts/Core/Meta.cs:198
 msgid "You start with half the gold."
 msgstr "开局金币减半。"
 
-#: scripts/Core/Meta.cs:195
+#: scripts/Core/Meta.cs:199
 msgid "The stall's licence cost more than Bram thought."
 msgstr "摊位执照比布拉姆想的还贵。"
 
-#: scripts/Core/Meta.cs:196
+#: scripts/Core/Meta.cs:200
 msgid "Nim's raised his prices"
 msgstr "尼姆涨价了"
 
-#: scripts/Core/Meta.cs:196
+#: scripts/Core/Meta.cs:200
 msgid "Nim asks a quarter more for every curio."
 msgstr "尼姆的每件奇物都要贵四分之一。"
 
-#: scripts/Core/Meta.cs:197
+#: scripts/Core/Meta.cs:201
 msgid "The Guild is hunting Nim this season, and he charges for the risk."
 msgstr "这一季公会正在追捕尼姆，他把风险也算进了价钱。"
 
-#: scripts/Core/Meta.cs:198
+#: scripts/Core/Meta.cs:202
 msgid "The Guild's builders"
 msgstr "公会的匠人"
 
-#: scripts/Core/Meta.cs:198
+#: scripts/Core/Meta.cs:202
 msgid "Every upgrade costs a quarter more."
 msgstr "每项升级都要贵四分之一。"
 
-#: scripts/Core/Meta.cs:199
+#: scripts/Core/Meta.cs:203
 msgid ""
 "The Guild says only its own builders may work on a licensed shop, at its own rates."
 msgstr "公会说，持照店铺只许公会自己的匠人施工，价钱也按公会定的来。"
 
-#: scripts/Core/Meta.cs:200
+#: scripts/Core/Meta.cs:204
 msgid "A wet year"
 msgstr "多雨之年"
 
-#: scripts/Core/Meta.cs:200
+#: scripts/Core/Meta.cs:204
 msgid "Every lock has one more pin to pick."
 msgstr "每把锁都要多撬一个锁销。"
 
-#: scripts/Core/Meta.cs:201
+#: scripts/Core/Meta.cs:205
 msgid "A wet winter has rusted every old lock in the realm stiff."
 msgstr "一个湿冷的冬天，把全国的旧锁都锈得死死的。"
 
-#: scripts/Core/Meta.cs:202
+#: scripts/Core/Meta.cs:206
 msgid "Wary regulars"
 msgstr "常客生疑"
 
-#: scripts/Core/Meta.cs:202
+#: scripts/Core/Meta.cs:206
 msgid "The regulars post one commission fewer each week."
 msgstr "常客每周少发布一个委托。"
 
-#: scripts/Core/Meta.cs:203
+#: scripts/Core/Meta.cs:207
 msgid "Folk aren't sure your stall will last, and won't set you errands."
 msgstr "大家拿不准你的摊子能不能撑下去，不愿托你办事。"
 
-#: scripts/Core/Meta.cs:204
+#: scripts/Core/Meta.cs:208
 msgid "Nim's lean month"
 msgstr "尼姆的淡季"
 
-#: scripts/Core/Meta.cs:204
+#: scripts/Core/Meta.cs:208
 msgid ""
 "Nim's lantern lays out no extra curio: he brings one fewer a night once he brings more than one."
 msgstr "尼姆的灯笼不再让他多摆奇物：一旦他每晚带来的不止一件，就会少带一件。"
 
-#: scripts/Core/Meta.cs:205
+#: scripts/Core/Meta.cs:209
 msgid "Pickings have been slim among the Locking's oddments."
 msgstr "近来，大封锁留下的零碎玩意儿里没什么好货可淘。"
 
-#: scripts/Core/Meta.cs:210
+#: scripts/Core/Meta.cs:214
 msgid "Welcome gifts"
 msgstr "见面礼"
 
-#: scripts/Core/Meta.cs:210
+#: scripts/Core/Meta.cs:214
 msgid "Your first {0} customers hand you their chests for a coin each."
 msgstr "你的头{0}位顾客各以一枚金币把箱子交给你。"
 
-#: scripts/Core/Meta.cs:211
+#: scripts/Core/Meta.cs:215
 msgid ""
 "The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny."
 msgstr "十字路口的乡亲们都爱戴布拉姆，你开张的头一个早上，他的两位老主顾只收一枚图吉利的铜板，就把箱子给了你。"
 
-#: scripts/Core/Meta.cs:212
+#: scripts/Core/Meta.cs:216
 msgid "Nim's soft spot"
 msgstr "尼姆的偏爱"
 
-#: scripts/Core/Meta.cs:212
-msgid "Nim lays out one more curio every night."
-msgstr "尼姆每晚多摆出一件奇物。"
+#: scripts/Core/Meta.cs:216
+msgid "From the second week, Nim lays out one more curio every night."
+msgstr "从第二周起，尼姆每晚多摆出一件奇物。"
 
-#: scripts/Core/Meta.cs:213
-msgid "Nim owes Bram a favour, and has decided you're it."
-msgstr "尼姆欠布拉姆一个人情，他决定还在你身上。"
+#: scripts/Core/Meta.cs:217
+msgid ""
+"Nim owes Bram a favour, and once you've lasted a week he decides you're it."
+msgstr "尼姆欠布拉姆一个人情，等你撑过一周，他就决定还在你身上。"
 
-#: scripts/Core/Meta.cs:214
+#: scripts/Core/Meta.cs:218
 msgid "Bram's savings"
 msgstr "布拉姆的积蓄"
 
-#: scripts/Core/Meta.cs:214
+#: scripts/Core/Meta.cs:218
 msgid "You start with half as much gold again."
 msgstr "开局金币多一半。"
 
-#: scripts/Core/Meta.cs:215
+#: scripts/Core/Meta.cs:219
 msgid "Bram sold his old cart, and the money's yours."
 msgstr "布拉姆卖掉了他的旧推车，这笔钱归你了。"
 
-#: scripts/Core/Meta.cs:216
+#: scripts/Core/Meta.cs:220
 msgid "Bram's old picks"
 msgstr "布拉姆的旧撬锁器"
 
-#: scripts/Core/Meta.cs:216
+#: scripts/Core/Meta.cs:220
 msgid "You start with the Fine Lockpicks: a wider sweet spot on every lock."
 msgstr "开局即拥有精良撬锁器：每把锁的绿区都更宽。"
 
-#: scripts/Core/Meta.cs:217
+#: scripts/Core/Meta.cs:221
 msgid "Bram found his old picks at the bottom of a drawer."
 msgstr "布拉姆在抽屉底下翻出了他的旧撬锁器。"
 
-#: scripts/Core/Meta.cs:218
+#: scripts/Core/Meta.cs:222
 msgid "Thornwick wants you"
 msgstr "荆棘镇有请"
 
-#: scripts/Core/Meta.cs:218
+#: scripts/Core/Meta.cs:222
 msgid ""
 "The Guild's second due, the one you pay at Thornwick Market, is a quarter lighter."
 msgstr "公会的第二笔贡金（在荆棘镇集市缴的那笔）减少四分之一。"
 
-#: scripts/Core/Meta.cs:219
+#: scripts/Core/Meta.cs:223
 msgid ""
 "Thornwick's council wants a Keywright in the market, and pays a quarter of the rent."
 msgstr "荆棘镇议会希望集市上有位钥匠，愿意替你付四分之一租金。"
 
-#: scripts/Core/Meta.cs:220
+#: scripts/Core/Meta.cs:224
 msgid "A slow season"
 msgstr "悠闲时节"
 
-#: scripts/Core/Meta.cs:220
+#: scripts/Core/Meta.cs:224
 msgid ""
 "Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking."
 msgstr "没耐心的卖家给你的时间翻倍，朽烂的箱子也能多经得住一倍的摇晃。"
 
-#: scripts/Core/Meta.cs:221
+#: scripts/Core/Meta.cs:225
 msgid "Nobody's in a hurry this year."
 msgstr "今年谁都不着急。"
 
-#: scripts/Core/Meta.cs:222
+#: scripts/Core/Meta.cs:226
 msgid "Bram's prepared"
 msgstr "布拉姆早有准备"
 
-#: scripts/Core/Meta.cs:222
+#: scripts/Core/Meta.cs:226
 msgid "Bram's stash has one more dip in it, and his word is good once more."
 msgstr "布拉姆的私房钱可以多动用一次，他的担保也能多用一次。"
 
-#: scripts/Core/Meta.cs:223
+#: scripts/Core/Meta.cs:227
 msgid "Bram's been putting a little by, and the Guild still owes him a favour."
 msgstr "布拉姆一直悄悄攒了点钱，公会也还欠他一个人情。"
 
-#: scripts/Core/Meta.cs:224
+#: scripts/Core/Meta.cs:228
 msgid "An honest clerk"
 msgstr "正直的书记员"
 
-#: scripts/Core/Meta.cs:224
+#: scripts/Core/Meta.cs:228
 msgid "On a short night, what you pawn fetches its full price."
 msgstr "缴不齐贡金的夜里，你典当的东西能换得全价。"
 
-#: scripts/Core/Meta.cs:225
+#: scripts/Core/Meta.cs:229
 msgid "The Guild's pawn clerk was at school with your mother."
 msgstr "公会管典当的书记员是你母亲的老同学。"
 
-#: scripts/Core/Meta.cs:226
+#: scripts/Core/Meta.cs:230
 msgid "A good name"
 msgstr "好名声"
 
-#: scripts/Core/Meta.cs:226
+#: scripts/Core/Meta.cs:230
 msgid ""
 "Hagglers hear you out: an offer that's too low gets a second try, not a slammed door."
 msgstr "爱讲价的卖家会耐心听你说完：出价太低还能再试一次，不会当场把门一甩走人。"
 
-#: scripts/Core/Meta.cs:227
+#: scripts/Core/Meta.cs:231
 msgid "Bram's stall has a name for fair dealing."
 msgstr "布拉姆的摊位向来以买卖公道著称。"
 
-#: scripts/Core/Meta.cs:228
+#: scripts/Core/Meta.cs:232
 msgid "A lucky charm"
 msgstr "幸运护身符"
 
-#: scripts/Core/Meta.cs:228
+#: scripts/Core/Meta.cs:232
 msgid "After a run of plain finds, your luck turns twice as soon."
 msgstr "一连开出平平无奇的东西之后，你转运会快一倍。"
 
-#: scripts/Core/Meta.cs:229
+#: scripts/Core/Meta.cs:233
 msgid "Bram tied his mother's old lucky charm to your apron."
 msgstr "布拉姆把他母亲的旧护身符拴在了你的围裙上。"
 
-#: scripts/Core/Meta.cs:230
+#: scripts/Core/Meta.cs:234
 msgid "Fair days"
 msgstr "太平日子"
 
-#: scripts/Core/Meta.cs:230
+#: scripts/Core/Meta.cs:234
 msgid "No days of mourning and no Guild assessors in town."
 msgstr "没有哀悼日，城里也没有公会估税员。"
 
-#: scripts/Core/Meta.cs:231
+#: scripts/Core/Meta.cs:235
 msgid ""
 "The old Duke's in good health, and the Guild's assessors have their hands full in the capital."
 msgstr "老公爵身体硬朗，公会的估税员们在都城忙得脱不开身。"
 
-#: scripts/Core/Meta.cs:232
+#: scripts/Core/Meta.cs:236
 msgid "Room for more"
 msgstr "还有空位"
 
-#: scripts/Core/Meta.cs:232
+#: scripts/Core/Meta.cs:236
 msgid "Room for one more curio, from the start."
 msgstr "开局就多一个奇物栏位。"
 
-#: scripts/Core/Meta.cs:233
+#: scripts/Core/Meta.cs:237
 msgid "Bram cleared out a drawer for your curios."
 msgstr "布拉姆为你的奇物腾出了一个抽屉。"
 
-#: scripts/Core/Meta.cs:290
+#: scripts/Core/Meta.cs:294
 msgid "Guild dues paid ({0} of {1})"
 msgstr "已缴公会贡金（{0}/{1}）"
 
-#: scripts/Core/Meta.cs:293
+#: scripts/Core/Meta.cs:297
 msgid "Bram's debt cleared"
 msgstr "还清布拉姆的债务"
 
-#: scripts/Core/Meta.cs:295
+#: scripts/Core/Meta.cs:299
 msgid "Days to spare ({0})"
 msgstr "提前天数（{0}）"
 
-#: scripts/Core/Meta.cs:298
+#: scripts/Core/Meta.cs:302
 msgid "Pieces of the treasury key ({0})"
 msgstr "宝库钥片（{0}）"
 
-#: scripts/Core/Meta.cs:299
+#: scripts/Core/Meta.cs:303
 msgid "The treasury"
 msgstr "宝库"
 
-#: scripts/Core/Meta.cs:300
+#: scripts/Core/Meta.cs:304
 msgid "Bram brought home"
 msgstr "带布拉姆回家"
 
-#: scripts/Core/Meta.cs:301
+#: scripts/Core/Meta.cs:305
 msgid "The next day"
 msgstr "翌日"
 
-#: scripts/Core/Meta.cs:302
+#: scripts/Core/Meta.cs:306
 msgid "Heartsongs ({0})"
 msgstr "心歌（{0}）"
 
-#: scripts/Core/Meta.cs:303
+#: scripts/Core/Meta.cs:307
 msgid "Moves ({0})"
 msgstr "迁店次数（{0}）"
 
-#: scripts/Core/Meta.cs:304
+#: scripts/Core/Meta.cs:308
 msgid "Collection ({0} of {1})"
 msgstr "收藏（{0}/{1}）"
 
-#: scripts/Core/Meta.cs:306
+#: scripts/Core/Meta.cs:310
 msgid "Weeks after the debt ({0})"
 msgstr "还清后坚持的周数（{0}）"
 
-#: scripts/Core/Meta.cs:308 scripts/Core/TaleBook.Emporium.cs:91
+#: scripts/Core/Meta.cs:312 scripts/Core/TaleBook.Emporium.cs:91
 msgid "The Guild on trial"
 msgstr "公会受审"
 
-#: scripts/Core/Meta.cs:310
+#: scripts/Core/Meta.cs:314
 msgid "Friends made ({0})"
 msgstr "结交的朋友（{0}）"
 
@@ -13660,7 +13661,7 @@ msgstr "他们的人卖工具给你，便宜四分之一。"
 msgid "Their people ask half as much again for their tools."
 msgstr "他们的人卖工具给你，要贵一半。"
 
-#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:1223 scripts/Phases/TalkPhase.cs:91
+#: scripts/Core/Tales.cs:91 scripts/Phases/OpeningPhase.cs:1231 scripts/Phases/TalkPhase.cs:91
 #: scripts/Phases/TalkPhase.cs:244
 msgid "Go on"
 msgstr "继续"
@@ -14593,8 +14594,8 @@ msgstr "{0}回到了大封锁之中。"
 #: scripts/Phases/DayEndPhase.cs:90 scripts/Phases/DayEndPhase.cs:91 scripts/Phases/DayEndPhase.cs:92
 #: scripts/Phases/DayEndPhase.cs:94 scripts/Phases/DayEndPhase.cs:407 scripts/Phases/DuesPhase.cs:225
 #: scripts/Phases/DuesPhase.cs:232 scripts/Phases/DuesPhase.cs:240 scripts/Phases/DuesPhase.cs:287
-#: scripts/Phases/DuesPhase.cs:301 scripts/Phases/DuesPhase.cs:311 scripts/Phases/OpeningPhase.cs:571
-#: scripts/Phases/OpeningPhase.cs:1332 scripts/Phases/PeddlerPhase.cs:289
+#: scripts/Phases/DuesPhase.cs:301 scripts/Phases/DuesPhase.cs:311 scripts/Phases/OpeningPhase.cs:575
+#: scripts/Phases/OpeningPhase.cs:1340 scripts/Phases/PeddlerPhase.cs:289
 #: scripts/Phases/PeddlerPhase.cs:591 scripts/Phases/TalkPhase.cs:257 scripts/Phases/TalkPhase.cs:264
 msgid "+{0}g"
 msgstr "+{0}金"
@@ -14927,12 +14928,12 @@ msgid ""
 msgstr "霍利斯的手下把宝箱送还失主，并付给你发现者分成。"
 
 #: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
-#: scripts/Phases/OpeningPhase.cs:1223
+#: scripts/Phases/OpeningPhase.cs:1231
 msgid "Close up for the day"
 msgstr "今日打烊"
 
 #: scripts/Phases/CounterPhase.cs:1570 scripts/Phases/CounterPhase.cs:1763
-#: scripts/Phases/OpeningPhase.cs:1223
+#: scripts/Phases/OpeningPhase.cs:1231
 msgid "Next customer"
 msgstr "下一位客人"
 
@@ -15611,335 +15612,335 @@ msgstr "强行撬开：所有东西都刮花了，玻璃制品全碎了。"
 msgid "slips left"
 msgstr "可失手次数"
 
-#: scripts/Phases/OpeningPhase.cs:98
+#: scripts/Phases/OpeningPhase.cs:101
 msgid "Paid {0}"
 msgstr "付给{0}"
 
-#: scripts/Phases/OpeningPhase.cs:100
+#: scripts/Phases/OpeningPhase.cs:103
 msgid "Worth"
 msgstr "价值"
 
-#: scripts/Phases/OpeningPhase.cs:120
+#: scripts/Phases/OpeningPhase.cs:123
 msgid "Bought sight unseen"
 msgstr "盲买"
 
-#: scripts/Phases/OpeningPhase.cs:164
+#: scripts/Phases/OpeningPhase.cs:167
 msgid "Locking Day +25%"
 msgstr "大封锁日 +25%"
 
-#: scripts/Phases/OpeningPhase.cs:165
+#: scripts/Phases/OpeningPhase.cs:168
 msgid "Crown's Buyer: {0} x2"
 msgstr "王室采办：{0}×2"
 
-#: scripts/Phases/OpeningPhase.cs:166
+#: scripts/Phases/OpeningPhase.cs:169
 msgid "Tourney: weapons, cloaks +50%"
 msgstr "比武大会：兵器、斗篷 +50%"
 
-#: scripts/Phases/OpeningPhase.cs:167
+#: scripts/Phases/OpeningPhase.cs:170
 msgid "The Guild's assessor -10%"
 msgstr "公会估税员 -10%"
 
-#: scripts/Phases/OpeningPhase.cs:280
+#: scripts/Phases/OpeningPhase.cs:283
 msgid "PAID FOR!"
 msgstr "回本了！"
 
-#: scripts/Phases/OpeningPhase.cs:415
+#: scripts/Phases/OpeningPhase.cs:419
 msgid "...EMPTY!"
 msgstr "……空的！"
 
-#: scripts/Phases/OpeningPhase.cs:420
+#: scripts/Phases/OpeningPhase.cs:424
 msgid "no {0}?"
 msgstr "没有{0}？"
 
-#: scripts/Phases/OpeningPhase.cs:421
+#: scripts/Phases/OpeningPhase.cs:425
 msgid "{0} fewer {1}?"
 msgstr "少了{0}件{1}？"
 
-#: scripts/Phases/OpeningPhase.cs:422
+#: scripts/Phases/OpeningPhase.cs:426
 msgid "no false bottom?"
 msgstr "没有夹层？"
 
-#: scripts/Phases/OpeningPhase.cs:425
+#: scripts/Phases/OpeningPhase.cs:429
 msgid "warded {0}: you named something that wasn't there"
 msgstr "结界里的{0}：你点了并不存在的东西"
 
-#: scripts/Phases/OpeningPhase.cs:426
+#: scripts/Phases/OpeningPhase.cs:430
 msgid "warded, never named: {0}"
 msgstr "被结界封住，未点名：{0}"
 
-#: scripts/Phases/OpeningPhase.cs:490
+#: scripts/Phases/OpeningPhase.cs:494
 msgid "{0}, gold from head to foot. And knocking."
 msgstr "{0}，从头到脚都是金子。还在敲。"
 
-#: scripts/Phases/OpeningPhase.cs:495 scripts/Phases/OpeningPhase.cs:564
+#: scripts/Phases/OpeningPhase.cs:499 scripts/Phases/OpeningPhase.cs:568
 msgid "Into the back room"
 msgstr "进后屋去"
 
-#: scripts/Phases/OpeningPhase.cs:531
+#: scripts/Phases/OpeningPhase.cs:535
 msgid "A MIMIC!"
 msgstr "宝箱怪！"
 
-#: scripts/Phases/OpeningPhase.cs:542
+#: scripts/Phases/OpeningPhase.cs:546
 msgid "It ate everything that was in the chest, and it's still hungry."
 msgstr "它把箱子里的东西全吃光了，还饿着呢。"
 
-#: scripts/Phases/OpeningPhase.cs:544
+#: scripts/Phases/OpeningPhase.cs:548
 msgid "Sell it to the menagerie (+{0}g)"
 msgstr "卖给奇兽苑（+{0}金）"
 
-#: scripts/Phases/OpeningPhase.cs:545
+#: scripts/Phases/OpeningPhase.cs:549
 msgid "The Arcanum's menagerie buys every mimic it can get, and pays at once."
 msgstr "秘法院的奇兽苑见一只宝箱怪就收一只，当场付钱。"
 
-#: scripts/Phases/OpeningPhase.cs:547
+#: scripts/Phases/OpeningPhase.cs:551
 msgid "Keep it in the back room"
 msgstr "养在后屋"
 
-#: scripts/Phases/OpeningPhase.cs:549
+#: scripts/Phases/OpeningPhase.cs:553
 msgid ""
 "It eats {0}g of gold on each Guild night. No thief tries a door it's behind. Fed twice it's full, and a full mimic will eat the gold off someone gilded."
 msgstr "每个公会之夜，它要吃掉{0}金。有它守着的门，没有贼敢撬。喂过两回就饱了，吃饱的宝箱怪能吃掉一个镀金者身上的金子。"
 
-#: scripts/Phases/OpeningPhase.cs:550
+#: scripts/Phases/OpeningPhase.cs:554
 msgid "You keep one already, and two would eat each other."
 msgstr "你已经养了一只，再养一只，两只会互相吃掉。"
 
-#: scripts/Phases/OpeningPhase.cs:614
+#: scripts/Phases/OpeningPhase.cs:618
 msgid "...wait. The ward lets go of what you named!"
 msgstr "……等等。结界放开了你点名的东西！"
 
-#: scripts/Phases/OpeningPhase.cs:702
+#: scripts/Phases/OpeningPhase.cs:706
 msgid "WORSE..."
 msgstr "变差了……"
 
-#: scripts/Phases/OpeningPhase.cs:755
+#: scripts/Phases/OpeningPhase.cs:759
 msgid "BETTER!"
 msgstr "更好！"
 
-#: scripts/Phases/OpeningPhase.cs:755
+#: scripts/Phases/OpeningPhase.cs:759
 msgid "EVEN BETTER!!"
 msgstr "还要更好！！"
 
-#: scripts/Phases/OpeningPhase.cs:755
+#: scripts/Phases/OpeningPhase.cs:759
 msgid "INCREDIBLE!!!"
 msgstr "难以置信！！！"
 
-#: scripts/Phases/OpeningPhase.cs:908
+#: scripts/Phases/OpeningPhase.cs:912
 msgid "ENCHANTED! x4"
 msgstr "附魔！×4"
 
-#: scripts/Phases/OpeningPhase.cs:908
+#: scripts/Phases/OpeningPhase.cs:912
 msgid "ENCHANTED! x2"
 msgstr "附魔！×2"
 
-#: scripts/Phases/OpeningPhase.cs:913
+#: scripts/Phases/OpeningPhase.cs:917
 msgid "FAKE!"
 msgstr "假货！"
 
-#: scripts/Phases/OpeningPhase.cs:928
+#: scripts/Phases/OpeningPhase.cs:932
 msgid "{0}'S!"
 msgstr "归{0}！"
 
-#: scripts/Phases/OpeningPhase.cs:939
+#: scripts/Phases/OpeningPhase.cs:943
 msgid "NEW!"
 msgstr "新！"
 
-#: scripts/Phases/OpeningPhase.cs:943
+#: scripts/Phases/OpeningPhase.cs:947
 msgid "let go"
 msgstr "已放归"
 
-#: scripts/Phases/OpeningPhase.cs:1059
+#: scripts/Phases/OpeningPhase.cs:1063
 msgid "BETTER THAN EXPECTED!"
 msgstr "比预期更好！"
 
-#: scripts/Phases/OpeningPhase.cs:1059
+#: scripts/Phases/OpeningPhase.cs:1063
 msgid "TWO QUALITIES UP!!"
 msgstr "品质连升两级！！"
 
-#: scripts/Phases/OpeningPhase.cs:1059
+#: scripts/Phases/OpeningPhase.cs:1063
 msgid "THREE QUALITIES UP!!!"
 msgstr "品质连升三级！！！"
 
-#: scripts/Phases/OpeningPhase.cs:1105
+#: scripts/Phases/OpeningPhase.cs:1109
 msgid " {0} of the treasury key for that read, and a master's fee of {1}g."
 msgstr " 凭这次鉴定，得到宝库钥匙的{0}，外加{1}金的大师酬金。"
 
-#: scripts/Phases/OpeningPhase.cs:1109
+#: scripts/Phases/OpeningPhase.cs:1113
 msgid "SOMEONE'S IN THE BACK ROOM"
 msgstr "后屋里有人"
 
-#: scripts/Phases/OpeningPhase.cs:1109
+#: scripts/Phases/OpeningPhase.cs:1113
 msgid "A MIMIC IN THE BACK ROOM"
 msgstr "后屋里有只宝箱怪"
 
-#: scripts/Phases/OpeningPhase.cs:1109
+#: scripts/Phases/OpeningPhase.cs:1113
 msgid "FOR THE WATERWHEEL"
 msgstr "为了水车"
 
-#: scripts/Phases/OpeningPhase.cs:1110
+#: scripts/Phases/OpeningPhase.cs:1114
 msgid "PROFIT +{0}g"
 msgstr "盈利 +{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:1110
+#: scripts/Phases/OpeningPhase.cs:1114
 msgid "LOSS {0}g"
 msgstr "亏损 {0}金"
 
-#: scripts/Phases/OpeningPhase.cs:1110
+#: scripts/Phases/OpeningPhase.cs:1114
 msgid "BROKE EVEN"
 msgstr "不赚不赔"
 
-#: scripts/Phases/OpeningPhase.cs:1137
+#: scripts/Phases/OpeningPhase.cs:1147
 msgid "fleeced"
 msgstr "被宰了"
 
-#: scripts/Phases/OpeningPhase.cs:1137
+#: scripts/Phases/OpeningPhase.cs:1147
 msgid "a steal"
 msgstr "捡了便宜"
 
-#: scripts/Phases/OpeningPhase.cs:1149
+#: scripts/Phases/OpeningPhase.cs:1158
 msgid "x{0}"
 msgstr "{0}倍"
 
-#: scripts/Phases/OpeningPhase.cs:1195
+#: scripts/Phases/OpeningPhase.cs:1203
 msgid "PERFECT READ"
 msgstr "完美判断"
 
-#: scripts/Phases/OpeningPhase.cs:1204
+#: scripts/Phases/OpeningPhase.cs:1212
 msgid " Masterful pick: everything +25%."
 msgstr "撬锁神乎其技：所有物品+25%。"
 
-#: scripts/Phases/OpeningPhase.cs:1205
+#: scripts/Phases/OpeningPhase.cs:1213
 msgid " Forced open with your burglar's knife: no harm done."
 msgstr "用窃贼小刀强行撬开：毫发无损。"
 
-#: scripts/Phases/OpeningPhase.cs:1206
+#: scripts/Phases/OpeningPhase.cs:1214
 msgid " Forced open: everything -10%."
 msgstr "强行撬开：所有物品-10%。"
 
-#: scripts/Phases/OpeningPhase.cs:1211
+#: scripts/Phases/OpeningPhase.cs:1219
 msgid " A perfect read: a valuer's fee of {0}g."
 msgstr "完美判断：赚得{0}金鉴定费。"
 
-#: scripts/Phases/OpeningPhase.cs:1212
+#: scripts/Phases/OpeningPhase.cs:1220
 msgid " Haggler's Purse: {0}g back."
 msgstr "议价钱袋：返还{0}金。"
 
-#: scripts/Phases/OpeningPhase.cs:1213
+#: scripts/Phases/OpeningPhase.cs:1221
 msgid " Underwriter's Bond: {0}g back."
 msgstr "承保契约：返还{0}金。"
 
-#: scripts/Phases/OpeningPhase.cs:1255
+#: scripts/Phases/OpeningPhase.cs:1263
 msgid " {0} took the {1}, and paid {2}g for it."
 msgstr "{0}拿走了{1}，并为此付了{2}金。"
 
-#: scripts/Phases/OpeningPhase.cs:1256
+#: scripts/Phases/OpeningPhase.cs:1264
 msgid " {0} took the {1}, as agreed."
 msgstr "{0}按约定拿走了{1}。"
 
-#: scripts/Phases/OpeningPhase.cs:1258
+#: scripts/Phases/OpeningPhase.cs:1266
 msgid " Read exactly: {0} hands back {1}g, as wagered."
 msgstr "判断分毫不差：{0}依赌约退还{1}金。"
 
-#: scripts/Phases/OpeningPhase.cs:1258
+#: scripts/Phases/OpeningPhase.cs:1266
 msgid " Not quite right: {0} keeps the whole price."
 msgstr "差了一点：{0}收下了全款。"
 
-#: scripts/Phases/OpeningPhase.cs:1260
+#: scripts/Phases/OpeningPhase.cs:1268
 msgid " Read exactly: {0} takes a quarter off, {1}g back."
 msgstr "判断分毫不差：{0}减价四分之一，退还{1}金。"
 
-#: scripts/Phases/OpeningPhase.cs:1261
+#: scripts/Phases/OpeningPhase.cs:1269
 msgid ""
 " A wrong read: you pay {0} what it truly held, and a quarter more: {1}g."
 msgstr "判断有误：你要按箱里实际的价值付给{0}，再加四分之一：{1}金。"
 
-#: scripts/Phases/OpeningPhase.cs:1262
+#: scripts/Phases/OpeningPhase.cs:1270
 msgid " A wrong read, but you'd already paid more than it held."
 msgstr "判断有误，不过你付的钱本就超过了箱里东西的价值。"
 
-#: scripts/Phases/OpeningPhase.cs:1320
+#: scripts/Phases/OpeningPhase.cs:1328
 msgid "Delivered"
 msgstr "已交付"
 
-#: scripts/Phases/OpeningPhase.cs:1328
+#: scripts/Phases/OpeningPhase.cs:1336
 msgid "Filled"
 msgstr "委托已满"
 
-#: scripts/Phases/OpeningPhase.cs:1332 scripts/Phases/OpeningPhase.cs:1358
+#: scripts/Phases/OpeningPhase.cs:1340 scripts/Phases/OpeningPhase.cs:1366
 msgid "{0}/{1}: +{2}g"
 msgstr "{0}/{1}：+{2}金"
 
-#: scripts/Phases/OpeningPhase.cs:1332
+#: scripts/Phases/OpeningPhase.cs:1340
 msgid "Deliver +{0}g"
 msgstr "交付 +{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:1333
+#: scripts/Phases/OpeningPhase.cs:1341
 msgid ""
 "{0} wants {1}: {2}g, instead of {3}g for selling it. A commission always pays more than selling."
 msgstr "{0}想要{1}：付你{2}金，而卖掉它只能得到{3}金。委托的报酬总是比卖掉更高。"
 
-#: scripts/Phases/OpeningPhase.cs:1352
+#: scripts/Phases/OpeningPhase.cs:1360
 msgid "Commission! +{0}g"
 msgstr "委托完成！+{0}金"
 
-#: scripts/Phases/OpeningPhase.cs:1377
+#: scripts/Phases/OpeningPhase.cs:1385
 msgid "+{0} exhibition (x2: enchanted!)"
 msgstr "+{0}展览分（附魔，×2！）"
 
-#: scripts/Phases/OpeningPhase.cs:1377
+#: scripts/Phases/OpeningPhase.cs:1385
 msgid "+{0} exhibition"
 msgstr "+{0}展览分"
 
-#: scripts/Phases/OpeningPhase.cs:1389
+#: scripts/Phases/OpeningPhase.cs:1397
 msgid "On display"
 msgstr "陈列中"
 
-#: scripts/Phases/OpeningPhase.cs:1401
+#: scripts/Phases/OpeningPhase.cs:1409
 msgid "Swap"
 msgstr "替换"
 
-#: scripts/Phases/OpeningPhase.cs:1401
+#: scripts/Phases/OpeningPhase.cs:1409
 msgid "Keep"
 msgstr "陈列"
 
-#: scripts/Phases/OpeningPhase.cs:1401
+#: scripts/Phases/OpeningPhase.cs:1409
 msgid "Swap {0} (-{1}g)"
 msgstr "替换 {0}（-{1}金）"
 
-#: scripts/Phases/OpeningPhase.cs:1401
+#: scripts/Phases/OpeningPhase.cs:1409
 msgid "Keep {0} (-{1}g)"
 msgstr "陈列 {0}（-{1}金）"
 
-#: scripts/Phases/OpeningPhase.cs:1402
+#: scripts/Phases/OpeningPhase.cs:1410
 msgid "{0} exhibition points for {1}g{2}.{3}"
 msgstr "以{1}金换取{0}展览分{2}。{3}"
 
-#: scripts/Phases/OpeningPhase.cs:1402
+#: scripts/Phases/OpeningPhase.cs:1410
 msgid " (double: it's enchanted)"
 msgstr "（附魔，翻倍）"
 
-#: scripts/Phases/OpeningPhase.cs:1402
+#: scripts/Phases/OpeningPhase.cs:1410
 msgid " Your display is full: sell something on it to make room."
 msgstr "你的陈列已满：先卖掉一件来腾出位置。"
 
-#: scripts/Phases/OpeningPhase.cs:1422
+#: scripts/Phases/OpeningPhase.cs:1430
 msgid ""
 "Your display is full. Sell something to make room for the {0} (+{1} points):"
 msgstr "你的陈列已满。卖掉一件，为{0}（+{1}分）腾出位置："
 
-#: scripts/Phases/OpeningPhase.cs:1434
+#: scripts/Phases/OpeningPhase.cs:1442
 msgid "{0}: +{1}g, -{2} pts"
 msgstr "{0}：+{1}金，-{2}分"
 
-#: scripts/Phases/OpeningPhase.cs:1436
+#: scripts/Phases/OpeningPhase.cs:1444
 msgid "+{0}g, -{1} pts"
 msgstr "+{0}金，-{1}分"
 
-#: scripts/Phases/OpeningPhase.cs:1448
+#: scripts/Phases/OpeningPhase.cs:1456
 msgid "Never mind"
 msgstr "算了"
 
-#: scripts/Phases/OpeningPhase.cs:1461
+#: scripts/Phases/OpeningPhase.cs:1469
 msgid "Sold the {0}: +{1}g"
 msgstr "卖出{0}：+{1}金"
 

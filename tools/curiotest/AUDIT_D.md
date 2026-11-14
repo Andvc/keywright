@@ -35,4 +35,16 @@ quality, no price, and the odds bar still only adds up the slip.
 
 ## Measured (`--sim=builds --n=100`, as Nim brings each, against the careful player with no curios)
 
-@@AUDIT_BUILDS@@
+| Curio | Takings | Seasons cleared (79% with none) |
+|---|---|---|
+| quill | +0% | 79% |
+| engine | +7% | 93% |
+| moth | +10% | 87% |
+| gauge | +5% | 82% |
+| primer | +2% | 77% |
+| abacus | 0% | 86% |
+
+The sim's careful player ticks and counts perfectly and knows a haggler's floor to within a guess, so the quill and
+the abacus add nothing to its takings (the abacus saves on what's paid): what they're worth is a person's clicks and
+a person's walkouts. `Strategy.CurioWorth` prices them for the sim's buyer at 2 (quill), 30 (engine), 9 (moth),
+8 (gauge), 3 (primer) and 12 (abacus).

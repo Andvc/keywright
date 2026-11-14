@@ -153,12 +153,12 @@ The game's own reports on the finished build, against 0.36's:
 | The same hands in a later season (`--veteran --ways=4`) | the same | 86 / 66 / 29% |
 | A first season with Bram's lessons on (120 first-timers) | | 17% |
 | A first season's length (`--sim=experience`) | 104 minutes, 108 customers | 104 minutes, 115 customers |
-| A second and a third | 94 and 89 minutes | 90 and 86 minutes |
-| High points an hour, seasons 1 / 2 / 3 | 8.5 / 9.9 / 9.9 | 8.7 / 10.1 / 10.1 |
+| A second and a third | 94 and 89 minutes | 90 and 87 minutes |
+| High points an hour, seasons 1 / 2 / 3 | 8.5 / 9.9 / 9.9 | 8.7 / 10.1 / 10.0 |
 | A career first clears the debt (`--sim=careers`) | the second or third season | the second or third (half by the second) |
 | The true ending (the next day) | around the tenth season | around the fifth |
-| Level 4 first cleared; level 6 and level 8 by season 30 | around the 26th; 8% and none | around the 15th; 57% and 2% |
-| The challenge levels as drawn, the careful player | 77, 57, 43, 35, 18, 16, 9, 6% | 89, 80, 63, 36, 25, 13, 9, 5% |
+| Level 4 first cleared; level 6 and level 8 by season 30 | around the 26th; 8% and none | around the 15th; 47% and 3% |
+| The challenge levels as drawn, the careful player | 77, 57, 43, 35, 18, 16, 9, 6% | 89, 79, 61, 42, 25, 18, 9, 5% |
 | A Heartsong found, a season (careful / a first) | 0.37 / 0.26 | 0.40 / 0.27 |
 | Curios | 81 | 85 |
 | Challenge terms | 13 banes, 13 boons | 12 and 12 |

@@ -223,8 +223,10 @@ public sealed partial class GameState
 
     /// <summary>
     /// How many curios Nim lays out tonight: one, and one more for each of his upgrades (his lantern, his stool, his
-    /// standing order) and for a soft spot; one fewer in a lean month, but never none.
+    /// standing order) and, from the second week, for a soft spot (0.37: a level is a later season, where Nim comes
+    /// from the first night, and a second card on those first nights was worth twelve points at level 3's dues, twice
+    /// any other boon; from the second week it's worth two); one fewer in a lean month, but never none.
     /// </summary>
-    public int PeddlerCount => Math.Max(1, Curios.Laid + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.NimCards) + (Favoured(Challenges.NimsFavour) ? 1 : 0) -
+    public int PeddlerCount => Math.Max(1, Curios.Laid + Upgrades.All.Where(u => Has(u.Key)).Sum(u => u.NimCards) + (Favoured(Challenges.NimsFavour) && Week >= 2 ? 1 : 0) -
                                            (Under(Challenges.Sparse) ? 1 : 0));
 }

@@ -628,8 +628,8 @@ hidden roll, and each has a reason anyone at the crossroads would give you.
 
 What goes against you:
 
-- **Thin crowds**: the Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door
-  while they're about (a customer fewer on the week's last two days).
+- **Thin crowds**: the Guild's collectors ride in on the day of the tithe, and nobody wants to be seen at your door
+  while they're about (a customer fewer on the week's last day; its last two until 0.37).
 - **Sharp sellers**: word's out that the Guild has you by the purse, so hagglers hold out for more.
 - **Demon gold about**: the Gate's cracking wider, and the Maw's gilded iron has spread all over the realm.
 - **A hurried season**: it's harvest, and nobody can spare more than a moment at your counter.
@@ -648,7 +648,8 @@ lock that slips, a curio you can't find):
 
 - **Welcome gifts**: the crossroads loved Bram, and on your first morning two of his old regulars give you their
   chests for a lucky penny (a chest only opens for its rightful owner, and a gift is as rightful as a sale).
-- **Nim's soft spot**: Nim owes Bram a favour, and has decided you're it.
+- **Nim's soft spot**: Nim owes Bram a favour, and once you've lasted a week he decides you're it (one more curio on
+  his cloth every night from the second week; every night, until 0.37 had him calling from a later season's first).
 - **Bram's savings**: Bram sold his old cart, and the money's yours.
 - **Bram's old picks**: his old picks turned up at the bottom of a drawer.
 - **Thornwick wants you**: the town council wants a Keywright in the market, and pays half the rent: half the Guild's

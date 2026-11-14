@@ -387,9 +387,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   0.5 53%, at 0.3 33%, and a first run 18% (15% with no Heartsongs: one found is often a first season's making);
   the same hands in a later season (`--sim=learners --veteran --ways=4`) clear 29, 43, 66, 86, 95 and 99%.
   Careers (`--sim=careers --n=60`): the debt is first cleared on the second or third season (half of players by the
-  second, three quarters by the third), level 1 around run 5, level 2 around 7, level 4 around 15 (nearly every
-  career by run 30), level 6 around 28 (57% of careers by run 30) and level 8 by one career in fifty; the levels as
-  drawn clear 89, 80, 63, 36, 25, 13, 9 and 5% (`--sim=levels --veteran --ways=4 --n=150`: a level is always played in
+  second, three quarters by the third), level 1 around run 4, level 2 around 7, level 4 around 15 (every
+  career by run 30), level 6 by just under half of careers by run 30 and level 8 by one in thirty; the levels as
+  drawn clear 89, 79, 61, 42, 25, 18, 9 and 5% (`--sim=levels --veteran --ways=4 --n=150`: a level is always played in
   a later season; the dues 30% up a level, `Challenges.DebtStep`, 20% until 0.37, when a later season began opening
   with more and the careful player cleared level 8 one time in five).
   The campaign: the first swallowing comes with the first clear, on the second or third season; Bram is first
@@ -399,7 +399,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   sixth run, the true ending around the thirteenth, at two and a half hours a season.) The careful player keeps a
   full mimic for the final opening unless it has Guild nights enough to fill it again (`Strategy.SpendMimic`): the
   plan's "free them" is what a season most often lacks. A run's length is part of the balance: `--sim=experience`
-  should keep a first run under two hours (0.37: 104 minutes over 20 days and 115 customers, a second 90 and a third 86; 0.36: 104, 94 and 89; 0.35: 143 over 30 days), a high point every seven minutes or better, no stale
+  should keep a first run under two hours (0.37: 104 minutes over 20 days and 115 customers, a second 90 and a third 87; 0.36: 104, 94 and 89; 0.35: 143 over 30 days), a high point every seven minutes or better, no stale
   stretches, and every day's median load under 6: the first days at a new market are the ones to watch
   (5.4 to 5.8 on the first at Thornwick, 5.5 to 6.0 on the first at Crownhold, by 30 or 120 players; eight first-timers
   in ten still have some day just over), and with tips on they're quiet ones (the first a customer short and with no locked chests,
@@ -438,7 +438,9 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   each alone and the levels, `--sim=levels` just the levels as drawn (`--debtstep=S` tries another step): keep each
   term within several points of the others and every level harder than the one below. Weigh a term at a level's dues
   (0.36, `--sim=terms --level=3 [--who=a,b] [--n=400]`: at level 0 the careful collector clears nine seasons in ten
-  and nothing shows; @@TERMS_CLAUDE@@).
+  and nothing shows; 0.37, in a later season, which every level is, `--veteran --ways=4`: at level 3's dues, 70%
+  with none, each bane costs up to nine points and a boon gives up to six; thin crowds was cut to the Guild's day and
+  Nim's soft spot to the second week on, each having been worth twelve).
   0.36 cut Thornwick's welcome from half the second due to a quarter. Twelve banes and twelve boons (0.36's head
   cold and rested ear went with the counted listens). Every first season starts the same, and nothing is bought or banked that makes a run stronger (v22 retired the talents bought
   with renown: Bram's Kin's 10g, Familiar Face's fourth card and Second Look's reroll are everyone's now,
