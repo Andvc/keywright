@@ -210,6 +210,10 @@ A cloud session has no sound device and no hand on a mouse. Worth the owner's ti
 4. **The opening's pace over a real session**: the breath before the last thing, and whether a chest with no glint
    feels flat now that a glint means something.
 5. **Whether the routine curios feel like builds.** The numbers say they cost little and save a lot of clicks.
+6. **The Windows build on a real machine.** It exports here and can't be run here; the Linux export was run (two
+   days with the bot, with and without the Steam library). CI builds and smoke-tests both on a push to `main` or a
+   `prototype/**` branch, which this work branch isn't, and this session wasn't allowed to start the workflow by hand:
+   it will run when the branch is merged or pushed under one of those names.
 
 ## Status
 
@@ -220,3 +224,9 @@ A cloud session has no sound device and no hand on a mouse. Worth the owner's ti
 - [x] 4. Three states; the trade's ways; the slip counts what chests hold; the drawer; short exposition
 - [x] 5. Three saves; GM behind F1; Fulfil the quests
 - [x] Rebalance, translations (fr, ja, zh_CN, zh_TW), tests, docs, version 0.37
+- [x] Verified on the final build: `dotnet build -warnaserror`; `tools/loc` check and `verify --strict` (4,113 texts
+  in four languages); `tools/curiotest` (217 of 217); the save, language, card-fit (five languages), lesson, title,
+  controller (two window sizes), hand (two window sizes) and shake tests; bot runs of a first season, a later one
+  on the same profile, later markets with the new curios, the treasury's final opening, and the menus, in English,
+  French and Japanese with no overflow; real mouse and key input through the playtest tool (the saves, F1, the
+  quest stroke, the three shakes); the Linux export, run
