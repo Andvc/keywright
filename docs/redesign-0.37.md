@@ -87,7 +87,8 @@ behind that one: nothing says what a chest is *worth* before you buy it. How goo
 **Other ways the routine got shorter:**
 
 - **Bram's cradle.** A button beside the chest (or the act key) rocks it gently, firmly and hard, a second each;
-  you still do the listening. From Thornwick in a first season, from the first morning in any later one. It rocks
+  you still do the listening. From the fourth day at Thornwick in a first season (the first three are a newcomer's
+  heaviest), from the first morning in any later one. It rocks
   only once, gently, where shaking has a price (a goblin's fee, a rotten chest, a seller in a hurry), and never
   drops a chest.
 - **The slip remembers what you heard**: a kind's row darkens and gets a dot once you've heard one. 0.36's playtester
@@ -132,23 +133,47 @@ first*). Found by having the bot play two seasons running on one profile (`--pro
 
 ## Balance
 
-Free listening and a minute saved a day made the careful player's season too safe at 0.36's dues (98% cleared), so
-**the last due is 6,600g** (5,000g in 0.36); the first three are as they were. The game's own reports on the finished
-build, against 0.36's:
+Three numbers moved, each because a report showed the game had got easier than it was meant to be. The first three
+dues are as they were.
+
+- **The last due is 6,600g** (5,000g in 0.36). With listening free, every hand was stronger, and a learner's most:
+  at 5,000g the careful player cleared 98% of seasons.
+- **The dues rise 30% a challenge level** (20%). A level is always played in a later season, and a later season now
+  opens with more; at 20% half of careers had cleared level 8 by their thirtieth season, where none had.
+- **Heartsongs are 0.26% a chest** (0.32%). With no ration every chest is shaken, so none that sings goes unheard.
+
+The game's own reports on the finished build, against 0.36's:
 
 | | 0.36 | 0.37 |
 |---|---|---|
-| The dues | 40, 170, 700, 5,000g | 40, 170, 700, 6,600g |
-| The careful player clears (`--sim=quick`) | 90% | 93% |
-| with no curios / no tales / neither | 79 / 61 / 31% | 86 / 73 / 49% |
-| A learner at 0.75 / 0.5 / a first-timer, first season | 66 / 43 / 20% | 78 / 53 / 21% |
-| The same hands in a later season (`--veteran --ways=4`) | the same | 86 / 66 / 33% |
-| A first season's length (`--sim=experience`) | 104 minutes, 108 customers | @@EXP1@@ |
-| A second and a third | 94 and 89 minutes | @@EXP23@@ |
-| A career first clears the debt (`--sim=careers`) | the second or third season | @@CAREERS@@ |
-| The challenge levels, as drawn | 77, 57, 43, 35, 18, 16, 9, 6% | @@LEVELS@@ |
+| The dues | 40, 170, 700, 5,000g; +20% a level | 40, 170, 700, 6,600g; +30% a level |
+| The careful player clears a first season (`--sim=quick`) | 90% | 93% |
+| ... with no curios / no tales / neither | 79 / 61 / 31% | 86 / 73 / 48% |
+| A learner at 0.75 / 0.5 / a first-timer, first season (`--sim=learners`) | 66 / 43 / 20% | 78 / 53 / 18% |
+| The same hands in a later season (`--veteran --ways=4`) | the same | 86 / 66 / 29% |
+| A first season with Bram's lessons on (120 first-timers) | | 17% |
+| A first season's length (`--sim=experience`) | 104 minutes, 108 customers | 104 minutes, 115 customers |
+| A second and a third | 94 and 89 minutes | 90 and 86 minutes |
+| High points an hour, seasons 1 / 2 / 3 | 8.5 / 9.9 / 9.9 | 8.7 / 10.1 / 10.1 |
+| A career first clears the debt (`--sim=careers`) | the second or third season | the second or third (half by the second) |
+| The true ending (the next day) | around the tenth season | around the fifth |
+| Level 4 first cleared; level 6 and level 8 by season 30 | around the 26th; 8% and none | around the 15th; 57% and 2% |
+| The challenge levels as drawn, the careful player | 77, 57, 43, 35, 18, 16, 9, 6% | 89, 80, 63, 36, 25, 13, 9, 5% |
+| A Heartsong found, a season (careful / a first) | 0.37 / 0.26 | 0.40 / 0.27 |
 | Curios | 81 | 85 |
 | Challenge terms | 13 banes, 13 boons | 12 and 12 |
+
+What that adds up to: a first season is as hard as it was (about one in six clears it), the first clear and the
+treasury's turn still come on the second or third, and the top of the challenge ladder is the wall it was. The
+middle is faster. The ear cost most to whoever was half-way to knowing the trade, and a later season opens with
+more, so the story's ending comes around the fifth season where it was the tenth, and level 4 around the fifteenth
+where it was the twenty-sixth. A career kept at level 0 reaches the ending on the same fifth season, so the
+story now takes as long as its own steps do (two or three remembered seasons), not as long as a debt that couldn't
+be cleared. That wasn't asked for by name, and it's the first thing for the owner to judge (`docs/design.md`, *Open
+questions*).
+
+One smaller thing the reports turned up: a newcomer's heaviest day is still the first at Thornwick, so in a first
+season the cradle comes on the quiet fourth day there, not the first.
 
 ## What couldn't be checked from here
 

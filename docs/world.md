@@ -481,9 +481,9 @@ by right (it was lost, buried or drowned); the rest were sold, pledged or given.
   Counting listens made the routine dearer without making it any less a routine.)
 - *Bram's cradle* (0.37). Thornwick's coopers rock a cask on a cradle to hear what's settled in it, and Bram's father
   built one for chests: set a chest on it, press, and it rocks it gently, firmly and hard, as its seller allows. Bram
-  keeps it under the counter for a keywright's first week ("you learn the strengths with your hands, or you never
-  learn them") and brings it out at Thornwick; anyone who's traded that far before finds it on the counter from the
-  first morning. It won't rock where rocking costs (a goblin's fee, a rotten chest, a seller in a hurry), and it has
+  keeps it under the counter while a keywright is learning ("you learn the strengths with your hands, or you never
+  learn them"): a first season finds it by one of his notes a few days into Thornwick, and anyone who's traded that
+  far before finds it on the counter from the first morning. It won't rock where rocking costs (a goblin's fee, a rotten chest, a seller in a hurry), and it has
   no way to drop a chest.
 - *What a trade's tools do for it* (0.37). Every trade has the tool that does its drudgery: a clerk has a quill that
   writes what it hears (a **Scrivener's Quill**, from the Keyhold's listening rooms, ticks each thing on the slip as

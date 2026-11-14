@@ -162,6 +162,13 @@ tac »). Japanese writes them in katakana, Chinese in the usual transliteration;
 | challenge level; boons, banes | niveau de défi ; faveurs, fléaux | 挑戦レベル；恩恵、試練 | 挑战等级；恩惠、磨难 |
 | score | score | スコア | 分数 |
 | an event | un événement | 出来事 | 事件 |
+| Bram's cradle; Rock it (0.37: it shakes the chest for you) | le berceau de Bram ; Bercer | ブラムの揺りかご；揺らす | 布拉姆的摇篮；摇一摇 |
+| Bram's drawer (a later season's first morning: one of three curios) | le tiroir de Bram | ブラムの引き出し | 布拉姆的抽屉 |
+| Scrivener's Quill; Pocket Engine; Lantern Moth | Plume de greffier ; Machine de poche ; Phalène des lanternes | 書記の羽ペン；懐中からくり；灯り蛾 | 书记羽毛笔；袖珍记账机；灯蛾 |
+| Toll-man's Gauge; Wardens' Primer; Factor's Abacus | Jauge de péager ; Abécédaire des Gardiens ; Abaque de courtier | 関守の物差し；衛士の手引き書；仲買人のそろばん | 关卡量尺；巡守入门手册；经纪人算盘 |
+| PAID FOR! (the opening: the chest has paid for itself) | REMBOURSÉ ! | 元が取れた！ | 回本了！ |
+| a save (three of them); Erase, and start fresh | une sauvegarde ; Effacer et repartir de zéro | セーブ；消去して最初から | 存档；清除并重新开始 |
+| Text speed; Text sounds (Settings) | Vitesse du texte ; Sons du texte | テキスト速度；テキスト音 | 文字速度；文字音效 |
 
 ## Gold, days and numbers
 

@@ -13,7 +13,7 @@ only the owner can do. Written for 0.27 and brought up to date for 0.29, 0.36 an
 | Music | Written in code, unheard | Seven themes and four beds of ambience, composed and rendered by `tools/music` (0.36). Checked by their numbers only: listen before release (below). |
 | Keyboard and mouse | Ready | Every key rebindable; the mouse needs none. |
 | Controllers | Ready | Xbox, PlayStation and Switch layouts; the stick drives the pointer, so a controller does all a mouse does. |
-| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all @@TEXTS@@ texts (0.37; 4,056 in 0.36, 2,743 in 0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
+| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all 4,113 texts (0.37; 4,056 in 0.36, 2,743 in 0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
 | Fonts | Ready | Western European in the house font; Japanese and Chinese in Fusion Pixel 12px; the rest of Latin, Cyrillic, Greek and Korean in Galmuri. |
 | Steam | Ready to switch on | Achievements, rich presence, overlay pause, launch through Steam: needs the app ID and Steamworks set-up. |
 | Builds | Ready | CI exports Windows and Linux, smoke-tests both and keeps them as artifacts, on every push. |
@@ -118,7 +118,7 @@ these was checked by its numbers, by recorded frames or by a driven pointer, and
   Settings > Game > Text speed. It reads well in recorded frames; whether it reads well is a reader's call.
 - *Bram's cradle.* "Rock it" shakes the chest gently, firmly and hard, a second each. Whether that's relief or the
   game playing itself is a judgement for a hand: `CounterPhase.CradleSeconds` is how long, `GameState.Cradle` when it
-  arrives (Thornwick in a first season, the first morning after).
+  arrives (the fourth day at Thornwick in a first season, the first morning after).
 - *A hand's shake still counts.* `--hand-test` (0.36's `--ear-test`) drives a pointer the ways hands move, at sixty
   and twelve frames a second, and checks which strengths each counted as tried. Nothing is spent by a shake any
   more, but Bram's lessons wait on it. `CounterPhase.TryTime` and `ShakeBox.LevelHold` are the numbers.

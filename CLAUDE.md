@@ -184,8 +184,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   (`Tick`, `CounterPhase.Quill`); the sim's careful player gets the same (`Simulation.Slip`, `Strategy.FirstOffer`).
   And the shaking itself goes to Bram's cradle (`GameState.Cradle`, `CradleLevels`, `CounterPhase.Rock`: a button, or
   the act key, rocks the chest at each strength its seller allows for nothing, a second each; once gently where
-  shaking has a price; never a drop), from Thornwick in a first season and from the first morning after
-  (`Ways >= Market.CraftTier`). The slip's rows show what's been heard on this chest (a dot and a darker word), a
+  shaking has a price; never a drop), from the fourth day at Thornwick in a first season (`CradleDay`: the first three
+  are a newcomer's heaviest) and from the first morning after (`Veteran`, with `Ways >= Market.CraftTier`). The slip's rows show what's been heard on this chest (a dot and a darker word), a
   click counts one more and a right-click one fewer (`Appraisal.Uncount`). Which checks a chest has had is still kept
   (`Visit.Checks`, `Tried`, `Check`: a strength counts once shaken at for `CounterPhase.TryTime`), for Bram's lessons,
   the hint under the chest and the opening, where a thing nothing you did could have told you of is unheard (the
@@ -256,7 +256,7 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - Heartsongs are introduced on a quiet first-week evening (the `songs_intro` tip), and a season that ends with none ever
   heard gets Bram's word on them between runs, once a profile (`Story.SongsUnheard`, in `Main.EndRun`).
 - Heartsongs (`Heartsongs.cs`, `Category.Heartsong`, `Rarity.Mythic`, red): nine collectibles, about a third of one a
-  run while the debt lasts (v22; @@SONGS_CLAUDE@@, 0.30's thirty-five days at 0.16%: `--sim=songcount`,
+  run while the debt lasts (v22; 0.37's season with listening free at 0.26% a chest: 0.40 a season for the careful player and 0.27 for a first; 0.36's counted listens left chests unshaken and wanted 0.32%, 0.30's thirty-five days at 0.16%: `--sim=songcount`,
   and tune it again if a season's length, or how many chests a careful player buys, changes), in any seller's chest
   (`Heartsongs.Chance`, own dice, rolled in `GameState.Sing` after the seller's priced
   it: no seller ever hears one, `SellerDef.Notices`); each one kept makes the next a quarter as likely (`Heartsongs.Fade`,
@@ -281,8 +281,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   the estate sale, the horn and the crescent; the seller's markup, the dice and the colour stay their own), so ordinary
   growth makes the numbers bigger and leaves the careful player's margin flat (the sim's margins report: check it holds
   when anything is added to the index or left out of it), and a build's edge is what isn't priced. With every upgrade
-  it's about 2.1 at the Emporium (0.30: 2.7 when the buyers' trades were bigger); the last due (5,000g in 0.36's four weeks, where the Emporium's
-  week is the season's last and nineteen chests in twenty are bought at an index under 1.7; 12,000g over 0.30's seven) is set above what that
+  it's about 2.1 at the Emporium (0.30: 2.7 when the buyers' trades were bigger); the last due (6,600g in 0.37's four weeks, where the Emporium's
+  week is the season's last and nine chests in ten are bought at an index under 1.7; 5,000g in 0.36, 12,000g over 0.30's seven) is set above what that
   earns on a careful margin, so carrying it takes a build or tales gone well. Bram's working purse (`GameState.WorkingPurse`: two typical chests, `Market.TypicalAsk`, at
   `PriceFactor`) is the day-end advice, what `Strategy.Reserve` keeps, and the line a purchase warns before crossing:
   `ReserveIf`/`ShortNote` work out the purse after the purchase (its effect on the index; the bigger shop for a move),
@@ -338,13 +338,13 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
 - The economy grows fast and the Guild's dues grow faster (v18: the old tight constraints made upgrades feel optional).
   Qualities are worth 1/2/4/8/24 times a common (`Categories.QualityMultiplier`; 1/3/10/30/100 until 0.30, when each
   step inward was three to ten times the last and the owner found the numbers ran away); each move inward multiplies what
-  a customer is worth a few times over (the sim's "profit per customer at each shop": about 7, 14, 85 and 150g in 0.36's season, whose
+  a customer is worth a few times over (the sim's "profit per customer at each shop": about 7, 14, 115 and 150g in 0.37's season, whose
   week at the Emporium is its last; 0.35's seven weeks made 490g there).
   **Gold is rare** (0.30): a chest's own roll makes a thing gold only `Categories.GoldShare` (6%) as often as the spread
   says, and luck never makes gold (`Categories.Lift`: restorers, curios, a dry spell, a hoard's better things stop at
   purple); luck that would have lifted a purple thing past purple makes it shine instead (enchanted, `Build.PastPurple`,
   `Item.Shone`: read as the plain thing it was, "luck made it shine!"), priced into the index and the slip
-  (`ShineShare`). A careful run finds about two gold things, a third of runs none (the sim's "gold things a run").
+  (`ShineShare`). A careful season finds 0.7 gold things, half of seasons none (the sim's "gold things a run"; about two over 0.30's seven weeks).
   The luck curios and restorers were made about twice as likely to step (a step is worth twice, not three times), and
   the Master Restorer mends (nothing worse than its chest) rather than lifting. buyers' trades (`Upgrade.Sales`:
   scales, auction block, royal warrant) multiply what everything sells for, and restorers (`Upgrade.Luck`: the bench,
@@ -382,22 +382,31 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   difficulty** (0.36): the first three dues are paid by nearly everyone (a first-timer 98%), so every season sees all
   four markets, and the last, at the Emporium, is the wall; the challenge levels are where it gets hard. 0.37, with
   listening free again and the last due at 6,600g, 120 runs each (`--sim=quick`, `--sim=learners`): the careful
-  player buying curios as they come clears @@Q_CAREFUL@@ of first seasons (@@Q_NOCURIOS@@
-  with no curios, @@Q_NOTALES@@ with no tales, @@Q_NEITHER@@ with neither, @@Q_NOSONGS@@ with no Heartsongs), a learner at 0.9 @@L90@@, at 0.75 @@L75@@, at
-  0.5 @@L50@@, at 0.3 @@L30@@, and a first run @@L15@@ (@@Q_FIRST_NOSONGS@@ with no Heartsongs: one found is often a first season's making);
-  the same hands in a later season (`--sim=learners --veteran --ways=4`) clear @@V15@@, @@V30@@, @@V50@@, @@V75@@, @@V90@@ and @@V100@@.
-  Careers (`--sim=careers --n=60`): @@CAREERS_CLAUDE@@
-  The campaign: @@CAMPAIGN_CLAUDE@@ (0.35, seven weeks: the careful player 70%, a learner at 0.75 55%, a first run none; first clear around the
+  player buying curios as they come clears 93% of first seasons (86%
+  with no curios, 73% with no tales, 48% with neither, 92% with no Heartsongs), a learner at 0.9 85%, at 0.75 78%, at
+  0.5 53%, at 0.3 33%, and a first run 18% (15% with no Heartsongs: one found is often a first season's making);
+  the same hands in a later season (`--sim=learners --veteran --ways=4`) clear 29, 43, 66, 86, 95 and 99%.
+  Careers (`--sim=careers --n=60`): the debt is first cleared on the second or third season (half of players by the
+  second, three quarters by the third), level 1 around run 5, level 2 around 7, level 4 around 15 (nearly every
+  career by run 30), level 6 around 28 (57% of careers by run 30) and level 8 by one career in fifty; the levels as
+  drawn clear 89, 80, 63, 36, 25, 13, 9 and 5% (`--sim=levels --veteran --ways=4 --n=150`: a level is always played in
+  a later season; the dues 30% up a level, `Challenges.DebtStep`, 20% until 0.37, when a later season began opening
+  with more and the careful player cleared level 8 one time in five).
+  The campaign: the first swallowing comes with the first clear, on the second or third season; Bram is first
+  brought home, and the next day (the true ending) reached, around the fifth (the fourth to the sixth), by nearly
+  every career by run 30. (0.36, with counted listens and every season starting from nothing: the true ending around
+  the tenth, level 4 around the twenty-sixth.) (0.35, seven weeks: the careful player 70%, a learner at 0.75 55%, a first run none; first clear around the
   sixth run, the true ending around the thirteenth, at two and a half hours a season.) The careful player keeps a
   full mimic for the final opening unless it has Guild nights enough to fill it again (`Strategy.SpendMimic`): the
   plan's "free them" is what a season most often lacks. A run's length is part of the balance: `--sim=experience`
-  should keep a first run under two hours (@@EXP_CLAUDE@@), a high point every seven minutes or better, no stale
+  should keep a first run under two hours (0.37: 104 minutes over 20 days and 115 customers, a second 90 and a third 86; 0.36: 104, 94 and 89; 0.35: 143 over 30 days), a high point every seven minutes or better, no stale
   stretches, and every day's median load under 6: the first days at a new market are the ones to watch
-  (@@LOAD_CLAUDE@@), and with tips on they're quiet ones (the first a customer short and with no locked chests,
+  (5.4 to 5.8 on the first at Thornwick, 5.5 to 6.0 on the first at Crownhold, by 30 or 120 players; eight first-timers
+  in ten still have some day just over), and with tips on they're quiet ones (the first a customer short and with no locked chests,
   `GameState.QuietOpening`; the first two with nobody whose lesson is a warded thing's puzzle, `Settling`). A new
   thing to learn at a market goes on a later day than these, in Core, so the sim sees it. `--sim=kin [--who=KEY]` runs
   just the characters' table, for tuning one. Careless styles are foreclosed (buying at their price clears 2%, one
-  hard shake a chest 14%), and no early week sends careful players to Bram's word. The sim's evening runs in the
+  hard shake a chest 13%), and no early week sends careful players to Bram's word. The sim's evening runs in the
   game's order (0.36: the day's end and its spending, then the Guild's night; it used to pay first, which once a due
   moves the shop had its player fitting out the next market before trading a day there), and `Strategy.Reserve`'s
   bad day is this season's (`BadDay`: about half what the sim's "profit per customer at each shop" times a day's
@@ -406,8 +415,8 @@ Run `tools/setup-cloud.sh` (add `--export-templates` before exporting). It insta
   Bram's stash (`GameState.Stash`, twice a run) tops up a day that starts nearly broke. Bram's working purse
   (`GameState.WorkingPurse`) is the day-end advice, the purchase warning and what `Strategy.Reserve` keeps, so the
   advice is what the sim's careful player does: tune them together. The whole debt can be paid off early
-  (`GameState.DebtLeft`, `PayOff`) from the day end or the Guild's night; the sim's careful player does, in two
-  seasons in three, and reports the week each run cleared (one in twelve in week 3, the rest in week 4). Surprises
+  (`GameState.DebtLeft`, `PayOff`) from the day end or the Guild's night; the sim's careful player does, in four
+  seasons in five, and reports the week each run cleared (about one in five in week 3, the rest in week 4). Surprises
   (`Categories.Odds`: since 0.36 a thing comes out better than its chest about one time in seven and worse one in
   eleven, where it was the other way round; the restorers and luck curios add to it), with a pity counter
   (`GameState.DrySpell`).

@@ -245,6 +245,20 @@ public static class ChecksD
             var slip = new Appraisal(Rarity.Common, later.Tier, ways: later.Ways);
             T.True(slip.CountsHidden && slip.MaxCount == 3, "its slip has a false-bottom row and counts to three");
             T.True(later.Cradle && !first.Cradle, "and Bram's cradle is on its counter from the first morning");
+            // A first season's week at Thornwick: by hand for three days (its heaviest), the cradle on the fourth.
+            var thornwick = T.Shop(2, bare: true);
+            void On(int day)
+            {
+                typeof(GameState).GetProperty("TierSince")!.SetValue(thornwick, 6);
+                typeof(GameState).GetProperty("Day")!.SetValue(thornwick, day);
+            }
+            On(6);
+            T.True(!thornwick.Cradle, "a first season's first day at Thornwick: still by hand");
+            On(8);
+            T.True(!thornwick.Cradle, "and its third");
+            On(9);
+            T.True(thornwick.Cradle, "the cradle comes out on the fourth");
+            T.True(T.Shop(3, bare: true).Cradle, "and it's on the counter at Crownhold whatever the day");
             T.True(later.Veteran && later.DrawerOpen && Curios.Drawer(later).Count == Curios.DrawerCards, "with Bram's drawer open: three curios to choose one from");
             var card = Curios.Drawer(later)[0];
             later.TakeFromDrawer(card);

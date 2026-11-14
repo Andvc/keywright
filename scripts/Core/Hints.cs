@@ -147,7 +147,7 @@ public static class Hints
         ["ways"] = Loc.T("You've traded further in than this, and it shows in what comes to the counter: locks, false bottoms, two of a kind, " +
                          "enchantment. Whatever an earlier season met, this one has from its first morning."),
         // Bram's cradle (0.37): the shaking done for you, once the stall's week has taught what the strengths tell.
-        ["cradle"] = Loc.T("My old cradle's on the counter. Press \"Rock it\" (or {act}) and it shakes the chest for you, gently, firmly and hard: you just listen. " +
+        ["cradle"] = Loc.T("You've shaken enough chests by hand: my old cradle's yours. Press \"Rock it\" (or {act}) and it shakes the chest for you, gently, firmly and hard: you just listen. " +
                            "It won't rock where shaking costs something, and a drop is still your own doing."),
 
         // Heartsongs (Heartsongs.cs): about a third of one a run, in any chest.

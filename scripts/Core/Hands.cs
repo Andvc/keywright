@@ -44,9 +44,14 @@ public sealed partial class GameState
     /// <summary>
     /// Bram's cradle is on the counter: it rocks a chest gently, firmly and hard for you. Once the trade's ways reach
     /// Thornwick's (<see cref="Ways"/>): a first season shakes by hand for its week at the stall, which is how the
-    /// strengths are learned, and any later one has the cradle from its first morning.
+    /// strengths are learned, and for its first three days at Thornwick, which bring locks, the drop, straw and eight
+    /// new people (the experience report's heaviest days: the cradle is one thing fewer to take in on them, and comes
+    /// on the quiet fourth, <see cref="CradleDay"/>); any later season has it from its first morning.
     /// </summary>
-    public bool Cradle => Ways >= Market.CraftTier;
+    public bool Cradle => Ways >= Market.CraftTier && (Veteran || Tier > Market.CraftTier || Day >= TierSince + CradleDay - 1);
+
+    /// <summary>The day of a first season's week at Thornwick on which the cradle comes out.</summary>
+    public const int CradleDay = 4;
 
     /// <summary>
     /// The strengths the cradle rocks this chest at: every one its seller lets pass for nothing (not a hard shake where

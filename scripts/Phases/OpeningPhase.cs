@@ -49,6 +49,9 @@ public partial class OpeningPhase : Phase
     bool _paidFor;
     const float StakeW = 280, StakeY = 144;
 
+    /// <summary>How wide the "x3.4" sticker on the verdict's stamp is.</summary>
+    const float StickerW = 88;
+
     /// <summary>The chest's origin is its lid seam, where light and loot come out.</summary>
     static readonly Vector2 SeamPos = new(640, 400);
 
@@ -373,7 +376,8 @@ public partial class OpeningPhase : Phase
             // the chest pays for itself (the notch swells), or when a lot rides on the chest.
             if (last && n >= 2 && !reads[i].Item.IsSong)
             {
-                await LastBreath(decider: !_paidFor && _purchase.Paid > 1 && !_purchase.Visit.Gift);
+                // (By what's landed, not by the "paid for" note, which waits for the tally to finish counting up.)
+                await LastBreath(decider: _worth < _purchase.Paid && _purchase.Paid > 1 && !_purchase.Visit.Gift);
                 if (!Alive) return;
             }
             if (reads[i].Warded)
@@ -1108,11 +1112,17 @@ public partial class OpeningPhase : Phase
         var color = crate || kept ? Palette.Magic : wheel || profit > 0 ? Palette.Good : profit < 0 ? Palette.Bad : Palette.Text;
         string text = crate ? Loc.T("SOMEONE'S IN THE BACK ROOM") : kept ? Loc.T("A MIMIC IN THE BACK ROOM") : wheel ? Loc.T("FOR THE WATERWHEEL")
             : profit > 0 ? Loc.T($"PROFIT +{profit}g") : profit < 0 ? Loc.T($"LOSS {profit}g") : Loc.T("BROKE EVEN");
+        // How many times over it paid (0.37): from twice what was paid, on a sticker at the stamp's own end (so it
+        // covers nothing: the tally's beside the stamp, the perfect read's banner over it, Bram's corner past it).
+        bool over = !crate && !kept && !wheel && !visit.Gift && _purchase.Paid > 1 && back >= 2 * _purchase.Paid;
+        float times = over ? back / (float)_purchase.Paid : 0;
         var stamp = Add(UiKit.MakePanel(color).Place(320, 104, 480, 76));
         stamp.ZIndex = 10;
-        // A long stamp (someone in the back room, and any language's long words) at a size that fits the plate.
-        int stampSize = UiKit.TextWidth(text, 40) <= 456 ? 40 : UiKit.TextWidth(text, 32) <= 456 ? 32 : 24;
-        stamp.AddChild(UiKit.MakeLabel(text, stampSize, color, HorizontalAlignment.Center, outline: 6).Place(0, 14 + (40 - stampSize) / 2, 480, 50));
+        // A long stamp (someone in the back room, and any language's long words) at a size that fits the plate, or
+        // what's left of it beside the sticker.
+        float plate = over ? 480 - StickerW - 12 : 480, room = plate - 24;
+        int stampSize = UiKit.TextWidth(text, 40) <= room ? 40 : UiKit.TextWidth(text, 32) <= room ? 32 : 24;
+        stamp.AddChild(UiKit.MakeLabel(text, stampSize, color, HorizontalAlignment.Center, outline: 6).Place(0, 14 + (40 - stampSize) / 2, plate, 50));
         stamp.PivotOffset = new Vector2(240, 38);
         stamp.Rotation = -0.06f;
         stamp.Scale = Vector2.One * 3f;
@@ -1141,18 +1151,16 @@ public partial class OpeningPhase : Phase
         _stakeShown = back;
         _stake.QueueRedraw();
         if (back >= _purchase.Paid && !_paidFor) _worthLabel.AddThemeColorOverride("font_color", Palette.Good);
-        // How many times over it paid (0.37): from twice what was paid, said on the stamp's corner, with more fuss the
-        // more it is: a shower of coins out of the chest at three times, and the room joining in at five.
-        if (!crate && !kept && !wheel && !visit.Gift && _purchase.Paid > 1 && back >= 2 * _purchase.Paid)
+        // The sticker pops onto the stamp, with more fuss the more times over it is: a shower of coins out of the chest
+        // at three times, and the room joining in at five.
+        if (over)
         {
-            float times = back / (float)_purchase.Paid;
             string tag = Loc.T($"x{times.ToString(times >= 10 ? "0" : "0.#", System.Globalization.CultureInfo.InvariantCulture)}");
-            // On the stamp's near corner, clear of the perfect read's banner over it and of Bram's corner beside it.
-            var sticker = Add(UiKit.MakePanel(Palette.Gold).Place(284, 96, 92, 42));
-            sticker.ZIndex = 11;
-            sticker.AddChild(UiKit.MakeLabel(tag, 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 6, 92, 30));
-            sticker.PivotOffset = new Vector2(46, 21);
-            sticker.Rotation = -0.12f;
+            var sticker = UiKit.MakePanel(Palette.Gold).Place(480 - StickerW - 10, 17, StickerW, 42);
+            stamp.AddChild(sticker);
+            sticker.AddChild(UiKit.MakeLabel(tag, 24, Palette.Gold, HorizontalAlignment.Center, outline: 4).Place(0, 6, StickerW, 30));
+            sticker.PivotOffset = new Vector2(StickerW / 2, 21);
+            sticker.Rotation = -0.08f;
             sticker.Scale = Vector2.One * 2.6f;
             sticker.Modulate = Colors.Transparent;
             var pop = sticker.CreateTween().SetParallel();

@@ -251,6 +251,7 @@ public static partial class Simulation
             if (v.Chest.Items.Any(i => i.Fake && i.Category is Category.Coins or Category.Gems)) Meet("mech:demongold", 1, 0.8f, "demon gold");
             if (v.Chest.Items.GroupBy(i => i.Category).Any(g => g.Count() > 1)) Meet("mech:pairs", 1, 0.6f, "two of a kind");
             if (s.Ways >= Market.CraftTier && s.CanDrop) Meet("mech:drop", 1, 0.8f, "the drop");
+            if (s.Cradle && !lesson) Meet("sys:cradle", 0.3f, 1, "Bram's cradle");
             if (hearing != null && hearing.Hollow) Meet("mech:falsebottom", 1, 1, "false bottoms");
             if (s.Witchlight && v.Chest.Items.Any(i => i.Magic)) Meet("mech:glow", 1, 1, "enchantment");
             if (v.Chest.Song != null) Meet("mech:song", 1, 2, "a Heartsong's song");
@@ -435,8 +436,8 @@ public static partial class Simulation
 
     /// <summary>
     /// The experience playtest: <paramref name="players"/> players, each starting with no knowledge and playing
-    /// <paramref name="runs"/> runs (Kit, tips on, improving as <see cref="Careers"/> does; nothing else carries over
-    /// but the journal and what Bram has taught). Prints run by run: how long it takes, where it goes stale, where it overloads, its peaks, a
+    /// <paramref name="runs"/> runs (Kit, tips on, improving as <see cref="Careers"/> does; the profile carries over as it
+    /// does in the game: the journal, what Bram has taught, Nim's stock, the campaign, and what a later season opens with). Prints run by run: how long it takes, where it goes stale, where it overloads, its peaks, a
     /// day-by-day curve, and what would improve it.
     /// </summary>
     public static void ExperienceReport(int players, int runs = 3)
@@ -453,7 +454,9 @@ public static partial class Simulation
                 float skill = best - (best - start) * MathF.Exp(-pace * r);
                 var rec = new Recorder(know);
                 var style = Learner(skill, Characters.Kit, profile.MaxChallenge(Characters.Kit)) with { Guided = true };
-                var (_, state) = Play(style, 700000 + p * 1000 + r, Guild.Weeks * Guild.DaysPerWeek, profile.Songs, rec, profile.Taught, profile.OpenCurios);
+                // The profile goes with them (0.37): a second run is a later season, with what one opens with.
+                var (_, state) = Play(style, 700000 + p * 1000 + r, Guild.Weeks * Guild.DaysPerWeek, profile.Songs, rec, profile.Taught, profile.OpenCurios,
+                    profile);
                 profile.Runs++;
                 profile.Note(state);
                 if (state.DebtCleared)

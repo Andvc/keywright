@@ -40,8 +40,10 @@ public static class Heartsongs
     /// Heartsong a run while the debt lasts, careful or not (0.22; 0.21's 0.7% was nearly one a run). 0.30's longer
     /// season brought more chests, and 0.22's 0.24% found half a Heartsong a run in it, so it went to 0.16%; 0.36's
     /// season of twenty days brings about a hundred chests, where 0.16% found one in a run in six, so it's 0.32%.
+    /// 0.37: with listening free again every chest is heard, so none that sings goes by unnoticed (0.36's careful player
+    /// left chests unshaken once the day's listens were gone): 0.32% found 0.46 a run, and 0.26% finds a third again.
     /// </summary>
-    public static float Chance { get; set; } = 0.0032f;
+    public static float Chance { get; set; } = 0.0026f;
 
     /// <summary>Each Heartsong taken in this run makes the next this much as likely (a quarter: three-quarters less).</summary>
     public const float Fade = 0.25f;

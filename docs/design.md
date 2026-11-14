@@ -315,8 +315,11 @@ press of its button or the act key. You still do the listening (the words, the c
 still your hands'. It rocks only as far as the seller allows for nothing: no hard shake where that's minded or can't
 be done, and where shaking has a price of its own (Nettle's fee for each strength, Tobin's rotten chest, a seller who
 won't wait) it rocks once, gently, and the rest is yours to decide. A first season shakes by hand for its week at the
-stall, which is how the strengths are learned (Bram's lessons ask for each by hand), and has the cradle from
-Thornwick; any later season has it from its first morning (`Ways >= Market.CraftTier`). The experience report counts
+stall, which is how the strengths are learned (Bram's lessons ask for each by hand), and for its first three days at
+Thornwick, which are a newcomer's heaviest (locks, the drop, straw, eight new people: *Playtesting the experience*);
+the cradle comes out on the quiet fourth (`GameState.CradleDay`), in one of Bram's notes ("You've shaken enough
+chests by hand: my old cradle's yours"). Any later season has it from its first morning (`GameState.Veteran`, with
+`Ways >= Market.CraftTier`). The experience report counts
 four seconds a strength by hand and 1.3 on the cradle: eight seconds a chest, ten minutes and more over a season's
 hundred chests, and every one of them the dullest seconds at the counter.
 
@@ -674,8 +677,9 @@ Everything arrives when it's needed, each with a word from Bram, so the first da
 | Day 3 | Nim's curios (his first visit) | a tip: room for three, so pick ones that go together |
 | Week 1 | two gentle events (days 2 and 4); the day's end shows the week at the crossroads and the due as the way on | a tip with each |
 | The first Guild night (day 5) | the due paid, the Guild's carters move the shop; the treasury's summons: Bram goes with Vane (and Old Haddon, if his note wasn't paid); from then on his tips are notes in the margins of his notebook | a scene: Vane, then Bram |
-| Day 6: Thornwick Market | the road (`RoadPhase`); the Guild's letter (keep Bram's account paid, and earn the treasury key's four pieces); **Bram's cradle** (0.37: it does the shaking from here on); locks and lockpicking, the drop and false bottoms, potions and spells; the display shelf, keeping things, the exhibition and cabinets; tools and the shop's fittings, at the day's end and from their makers at the counter; with tips on, a quieter first day (a customer short) at each new market | the lock (the first time, the pick waits while he talks); the shelf and why an exhibition matters; where to spend on the shop |
+| Day 6: Thornwick Market | the road (`RoadPhase`); the Guild's letter (keep Bram's account paid, and earn the treasury key's four pieces); locks and lockpicking, the drop and false bottoms, potions and spells; the display shelf, keeping things, the exhibition and cabinets; tools and the shop's fittings, at the day's end and from their makers at the counter; with tips on, a quieter first day (a customer short) at each new market | the lock (the first time, the pick waits while he talks); the shelf and why an exhibition matters; where to spend on the shop |
 | Day 8 | the regulars' commissions; the notebook's Inquiry as it fills; two events a week | a tip with each |
+| Day 9 | **Bram's cradle** (0.37): it does the shaking from here on | one of Bram's notes |
 | Day 11: Crownhold | gems, archmages and enchantment, two or three of a kind in a chest; synergies: the journal has tallied everything from day one, so some are ready to switch on | what a synergy is and where to choose one |
 | Day 16: the Royal Emporium | the court, demons and their gilded iron, the lodestone, the Royal Seal, the last due | that the Gate is just down the street |
 | A short night | pawning, and (once a run) Bram's word | a tip |
@@ -895,20 +899,18 @@ people), and a season that's going to fail fails at a due, not after two hours a
 |---|---|---|---|---|---|
 | Market | Bram's Stall | Thornwick Market | Crownhold | The Royal Emporium | |
 | Day | 5 | 10 | 15 | 20 | |
-| Due | 40g | 170g | 700g | 5,000g | x1.5 a week |
+| Due | 40g | 170g | 700g | 6,600g (0.37; 5,000g in 0.36) | x1.5 a week |
 
 The first three dues take a quarter to a half of a careful purse and leave a working purse for the market they
 open; nearly everyone pays them (a first-timer 98% of the time, with Bram's word now and then), so the wall is the
-last, at the Emporium, as it was. Level 0 is the story's difficulty now: the careful player clears 90% of seasons
-(88% with no Heartsongs, 79% with no curios, 61% with no tales, 31% with neither), a learner at 0.9 81%, at 0.75 66%,
-at 0.5 43%, at 0.3 26%, and a first run 20% (120 runs each, `--sim=quick`, `--sim=learners`); the eight challenge
-levels are where it gets hard (`--sim=levels`, 150 runs each, as drawn: 77, 57, 43, 35, 18, 16, 9 and 6%). A career
-first clears the debt on its second or third season (a quarter of players on the second, half by the third, three
-quarters by the fifth; 0.35: around the sixth), which is when the treasury first swallows it; Bram is first brought
-home around the tenth season and the next day reached around the tenth too (0.35: both around the thirteenth, at
-two and a half hours a season); level 1 falls around the seventh run, level 2 around the eleventh, level 4 around
-the twenty-sixth (two careers in three by run 30), level 6 to one career in twelve by run 30 and level 8 to none
-(`--sim=careers --n=60`).
+last, at the Emporium, as it was. Level 0 is the story's difficulty now. As 0.36 shipped: the careful player cleared
+90% of seasons (88% with no Heartsongs, 79% with no curios, 61% with no tales, 31% with neither), a learner at 0.9
+81%, at 0.75 66%, at 0.5 43%, at 0.3 26%, and a first run 20% (120 runs each, `--sim=quick`, `--sim=learners`); the
+levels as drawn 77, 57, 43, 35, 18, 16, 9 and 6% (`--sim=levels`, 150 runs each); a career first cleared the debt on
+its second or third season, brought Bram home and reached the next day around the tenth, cleared level 1 around the
+seventh run, level 2 around the eleventh, level 4 around the twenty-sixth, level 6 in one career in twelve by run 30
+and level 8 in none (`--sim=careers --n=60`). 0.37's figures are below (*0.37: listening free, and the last due at
+6,600g*).
 
 **Getting there.** The dues were tuned with `--sim=learners --dues=a,b,c,d` (six skills from a first-timer to the
 careful player, 120 seasons each, two minutes). 40, 250, 1,200 and 7,000 cleared 10% at the bottom and 77% at the
@@ -962,6 +964,44 @@ What changed with it:
   minds the stall).
 - **Saves**: a run saved in 0.35 picks up at the market it had reached, on the same day of its week, with the dues
   before it paid, and every day the save remembers moved back with it (`SaveData` version 8).
+
+**0.37: listening free, and the last due at 6,600g.** Taking the counted listens out (*Listening is free, and a build
+does the routine*) made every hand stronger, and a learner's most: at 0.36's dues the six skills cleared 30, 50, 68,
+89, 96 and 98% of seasons where they had cleared 20, 26, 43, 66, 81 and 90%: no wall at all for anyone who'd learned
+the trade. The first three dues were left alone (they're paid by nearly everyone, which is their job) and the last
+went up until a first-timer was back at about one season in five: 6,000g wasn't enough (25% and 94% at the two ends),
+and **6,600g** is where it sits. Then two things were set by what the reports showed:
+
+- **The dues go up 30% a level** (`Challenges.DebtStep`; 20% since 0.33). A challenge level is always played in a
+  later season, which 0.37 gives the trade's ways from its first morning, a curio from Bram's drawer and Nim two
+  nights sooner (*A season after the first*), so at 20% the careful player cleared the levels as drawn 93, 87, 81,
+  65, 45, 33, 31 and 19% of the time, and half of careers had cleared level 8 by their thirtieth season where none
+  had. At 30% the top half of the ladder is where 0.36 left it, and the bottom half is kinder (below).
+- **Heartsongs: 0.26% a chest** (`Heartsongs.Chance`; 0.32% in 0.36). With no ration every chest is shaken, so none
+  that sings goes by unheard: 0.32% found 0.46 a season where it had found 0.37. At 0.26% it's 0.40 for the careful
+  player and 0.27 for a first season (`--sim=songcount`).
+
+Where it stands (`--sim=quick`, `--sim=learners`, 120 seasons each; `--sim=levels --veteran --ways=4`, 150 each;
+`--sim=careers --n=60`):
+
+| | 0.36 | 0.37 |
+|---|---|---|
+| The dues | 40, 170, 700, 5,000g; +20% a level | 40, 170, 700, 6,600g; +30% a level |
+| The careful player, a first season | 90% | 93% |
+| ... with no Heartsongs / no curios / no tales / neither | 88 / 79 / 61 / 31% | 92 / 86 / 73 / 48% |
+| A first season, by skill (0.15, 0.3, 0.5, 0.75, 0.9, 1) | 20, 26, 43, 66, 81, 90% | 18, 33, 53, 78, 85, 93% |
+| A later season, the same hands | the same | 29, 43, 66, 86, 95, 99% |
+| A first season with Bram's lessons on (120 first-timers, `--sim=experience --n=120 --runs=1`) | not measured at this size | 17% |
+| The levels as drawn, 1 to 8 (the careful player) | 77, 57, 43, 35, 18, 16, 9, 6% | 89, 80, 63, 36, 25, 13, 9, 5% |
+| Paid off early | two seasons in three | four in five (18% in week 3, the rest in week 4) |
+| Profit a customer, by market | 7, 14, 85, 150g | 7, 14, 114, 151g |
+| Gold things a season | | 0.7 (none in half of seasons) |
+
+The middle of the learning curve is ten points kinder than 0.36's and the two ends are where they were: the ear cost
+most to whoever was half-way to knowing the trade, and that's who got it back. A later season is kinder again, on
+purpose. What that does to a career is in *Balance across a career*: the first clear still comes on the second or
+third season, the story's ending around the fifth where it was the tenth, and the top of the challenge ladder is
+the wall it was.
 
 **Paying it off early.** Whenever you have all that's left of the debt (`GameState.DebtLeft`: this week's due if it's
 unpaid, and every week's after it to the last), you can pay it at once: from the day-end screen's Guild panel, which
@@ -1554,25 +1594,27 @@ signet for Rosa, no visitors' book for Isolde).
 **Challenge levels** (`Challenges`, v24). Eight, opened one at a time per character by clearing the debt at the level
 below, each a quarter more to a run's score (x3 at level 8). A level does two things:
 
-- **The Guild's dues** go up by 20% of what they were at level 0 for each level (`Challenges.DebtStep`,
-  `GameState.DueFor`): level 8's are 2.6 times as much (a tenth a level until 0.28, whose tales carried the top levels
+- **The Guild's dues** go up by 30% of what they were at level 0 for each level (`Challenges.DebtStep`,
+  `GameState.DueFor`; 20% from 0.33 to 0.36): level 8's are 3.4 times as much. 0.37 put it up because a level is
+  always played in a later season, and a later season now opens with more (*The run*, "0.37": at 20% the levels as
+  drawn cleared 93 down to 19%). (A tenth a level until 0.28, whose tales carried the top levels
   further: Kit cleared level 4 a third of the time and level 8 a fifth, against 0.27's 23% and 13%; 15% until 0.33,
   whose case (the Case page's payoffs, which 0.34 replaced with the Inquiry), mimics and Lantern Market did the same:
   120 careers cleared level 6 by run 30 32% of the time and level 8 7%, against 0.32's 23% and 4%, and at 20% a level
-  21% and 3%, level 4 half by run 26 against 0.32's 25).
+  21% and 3%, level 4 half by run 26 against 0.32's 25.)
 - **Its terms**: the run is dealt as many **banes** as the level's number and as many **boons** (`TermDef`,
-  `Challenges.Draw`), from thirteen of each (twelve until 0.36). The deal is nested (a bane, then a boon, from one
+  `Challenges.Draw`), from twelve of each (thirteen in 0.36, whose head cold and rested ear went with the counted
+  listens). The deal is nested (a bane, then a boon, from one
   shuffle of each pool), so a level's terms are the level below's and one pair more, and a boon never comes with the
-  bane it contradicts (five pairs: savings and a lean start, Thornwick's welcome and the Guild's builders, a slow
-  season and a hurried one, Bram prepared and Bram stretched thin, a rested ear and a head cold). A real run deals from `Profile.TermsSeed` (the number of runs started), so the
+  bane it contradicts (four pairs: savings and a lean start, Thornwick's welcome and the Guild's builders, a slow
+  season and a hurried one, Bram prepared and Bram stretched thin). A real run deals from `Profile.TermsSeed` (the number of runs started), so the
   setup screen shows exactly what will be played; the pause menu shows them during the run, each explained on hover,
   and the save keeps them.
 
 Banes make the trade harder; boons smooth over what's most frustrating about it (a slow start, a short night, a
 sweeping clock, a lock that slips, a curio you can't find), so a harder season is never all bad, and two runs at the
 same level differ. Every term is a rule that holds every time, with a reason in `docs/world.md`, routed through
-`GameState.Under` or `Favoured` where its rule lives (so the sim and the bot play it too). There are thirteen of each
-since 0.36, which added a head cold and a rested ear (*The ear*).
+`GameState.Under` or `Favoured` where its rule lives (so the sim and the bot play it too). There are twelve of each.
 
 What each does alone to the careful collector, **at level 3's dues** (Kit, 150 seasons each, 47% with none;
 `--sim=terms --level=3`; six points either way is noise at that size, and the five marked * were measured again over
@@ -2068,6 +2110,35 @@ first home and the next day around season 13, by 83% of careers by season 30.) T
 35, 18, 16, 9 and 6% for the careful collector, so the top is the wall it was and the climb to it starts from a
 kinder place. A season is an hour and a half, so the true ending is about fifteen hours in where it was over thirty.
 
+**0.37: the same first clear, a shorter story, the same wall.** Free listening gave most to whoever was half-way to
+knowing the trade, and a later season now opens with more (*A season after the first*), so the middle of a career
+moves faster than 0.36's. The dues rise 30% a level to hold the top (*The run*, "0.37"). The same report on the
+finished build (`--sim=careers --n=60`):
+
+| First... | a quarter of players | half | three quarters | by season 30 | 0.36's half |
+|---|---|---|---|---|---|
+| clear the debt (level 0) | season 2 | 2 | 3 | all | 3 |
+| swallowed at the treasury | 2 | 2 | 3 | all | 4 |
+| clear level 1 | 4 | 5 | 6 | all | 7 |
+| Bram brought home | 4 | 5 | 6 | 98% | 10 |
+| the next day (the true ending) | 4 | 5 | 6 | 98% | 10 |
+| clear level 2 | 6 | 7 | 10 | all | 11 |
+| clear level 4 | 11 | 15 | 18 | 97% | 26 |
+| clear level 6 | 21 | 28 | | 57% | (8% by season 30) |
+| clear level 8 | | | | 2% | (none) |
+| all nine Heartsongs known | | | | 18% | (17%) |
+
+A first season is cleared by about one player in six (17 or 18% by every measure), a second by half. The treasury's
+turn comes on the second or third season, as it was meant to, and the true ending around the fifth: seven or eight
+hours in, where 0.36 had it at fifteen. That's the part of the change nobody asked for by name, and it's the owner's
+to judge (*Open questions*): the remembered seasons were where a career used to stall on a debt it couldn't clear,
+and that stall is what went. A career kept at level 0 reaches the next day on the same fifth season
+(`--sim=careers --level=0`: Bram home by the third, fifth and sixth season for a quarter, half and three quarters of
+players), so the story now takes as long as its own steps do. Level 4 is half-way up a thirty-season career where it was near
+its end, level 6 is reached by a little over half of careers, and level 8 is the wall it was: one career in fifty.
+For the careful collector the levels as drawn clear 89, 80, 63, 36, 25, 13, 9 and 5% in a later season (which every
+level is played in), against 0.36's 77, 57, 43, 35, 18, 16, 9 and 6%: kinder to level 3, the same from 4 up.
+
 **Learners.** The sim's careful player is a perfect listener. A learner (`Style.Skill`, 0 to 1) plays the same way
 with a learner's mistakes, each shrinking as skill grows: at skill 0 they skip each strength 40% of the time, count a
 pair as one half the time, tick the kind a place usually holds without hearing it a third of the time, forget the
@@ -2275,6 +2346,35 @@ ten still have one day over it somewhere, most often the day Corvin's straw and 
 four in ten in 0.35 and five to seven in ten from 0.31 to 0.34. A third season brings a fifth of what a first does
 that's new (9.1 new things an hour against 49.8), which is what the challenge levels' terms, the other keywrights and
 the campaign's remembered seasons are for.
+
+**0.37** (the same report; its second and third seasons are later seasons now, as they are in the game: until 0.37
+the report carried over only what Bram had taught, which was all a profile changed):
+
+| | 0.36 | 0.37 |
+|---|---|---|
+| Run 1: length | 104 minutes, 20 days, 108 customers | 104 minutes, 20 days, 115 customers |
+| Run 1: how it ends | cleared by about one in five | cleared by 17% (120 first-timers, `--n=120 --runs=1`); lost in week 4, at the last due |
+| Run 1: new things an hour; high points an hour | 49.8; 8.5 | 48.4; 8.7 |
+| Run 1: time in stale stretches | none | none |
+| Run 1: the heaviest days (median load, 30 and 120 players) | day 11, 5.6; day 6, 5.4 | day 11, 5.5 to 6.0; day 6, 5.4 to 5.8; day 8, 5.1 |
+| Run 1: players with some day over capacity | 70% | 77 to 81% |
+| Run 2: length; high points an hour; cleared | 94 minutes; 9.9 | 90 minutes; 10.1; half |
+| Run 3: length; high points an hour; cleared | 89 minutes; 9.9 | 86 minutes; 10.1; 57% |
+| Run 2: its first day (the report's engagement measure) | 10 | 17 |
+
+A first season is the length it was: every chest is shaken at every strength again, by hand until the cradle comes
+on the ninth day, and a second and a third season are a few minutes shorter than 0.36's. What changed most is how a
+later season starts. Run the way 0.36 ran it (nothing carried over but what Bram had taught), a second season's
+first day had nothing new, no high point and a choice and a half: the flattest day in the report, with 10 on its
+engagement measure. With Bram's drawer, Nim that night and chests that can hold a false bottom or something
+enchanted, it has a build's first choice and a first surprise, and scores 17. A first-timer's heaviest days are
+still the first at Thornwick and the first at Crownhold, a shade over where 0.36 left them and under the line of 6
+on the medians. That's why a first season's cradle waits for Thornwick's fourth day (`GameState.CradleDay`), and
+why nothing else new should land on a market's first.
+
+The report's standing advice for later seasons ("repeat runs need fresh content: builds that play differently,
+things only later runs meet") is what 0.37's routine curios are: all six open after a first season, and each
+changes what the counter asks for.
 
 **0.36's fresh-eyes playtest** (an agent given `tools/playtest/README.md` and nothing else; 177 actions: the first
 three days from a fresh install, then the first day at Thornwick). Its verdict: "I would keep playing. Working out
@@ -2539,7 +2639,8 @@ as the villain. What it found, and what was done:
   Game), and the blip is one line in `Sfx`.
 - Bram's cradle: does a button that shakes the chest feel like relief, or like the game playing itself? It's a second
   a strength and the listening is still yours, but that's a judgement only a hand can make. If it's too much, it
-  could wait for a later season; if it's welcome, it could come sooner than Thornwick.
+  could wait for a later season; if it's welcome, it could come sooner than Thornwick's fourth day
+  (`GameState.CradleDay`).
 - The routine curios: do they make a build *play* differently, as meant, or only save clicks? The quill adds nothing
   to a careful player's takings and takes a slot: will anyone keep it over a curio that pays? (If not, it wants to be
   a common, or to come without a slot.) And is the Pocket Engine, which ends the reading game for whoever finds it,
@@ -2548,8 +2649,16 @@ as the villain. What it found, and what was done:
   Brindle losing its plainness? The stall's people and prices are still the stall's.
 - The opening's tell: once a glint means something better is coming, does a chest with no glint feel decided before
   it opens? And over a hundred chests, is the breath before the last thing felt, or waited through?
+- 0.37 made the middle of a career about twice as fast: the true ending comes around the fifth season (seven or
+  eight hours) where 0.36 had the tenth, and level 4 around the fifteenth where it had the twenty-sixth; the first
+  clear and the top of the ladder are where they were. The story is now as long as its own steps take: a career
+  kept at level 0 (`--sim=careers --level=0`) reaches the next day on the same fifth season, so it's the plan's
+  four lines over two or three remembered seasons that set it, no longer a debt that couldn't be cleared. Is that the
+  right length for what the Inquiry has to show, or did the old stall give it room it needs? To lengthen it, the
+  plan would have to ask for more (a lead that takes a season to ripen); making the debt harder again would only
+  put the stall back.
 - Level 0 is the story's difficulty now (the careful player clears nine seasons in ten, a first-timer about one in
-  five, and half of careers by their third). Is a first clear on a second or third season the hook it's meant to be,
+  six, and half of careers by their second). Is a first clear on a second or third season the hook it's meant to be,
   with the treasury's turn straight after it, or does it make the Guild a paper tiger until the challenge levels?
   The dues are four numbers (`Guild.Dues`) and `--sim=learners --dues=a,b,c,d` tries others in a few minutes.
 - The first three dues are paid by nearly everyone and the last is the wall. Is a season whose only real test is its

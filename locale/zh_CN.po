@@ -2216,203 +2216,203 @@ msgid ""
 "Bram's word? How touching. One week, then. The rest comes due next week, and half as much again."
 msgstr "布拉姆的担保？真令人感动。那就宽限一周。剩下的下周到期，还要多付一半。"
 
-#: scripts/Core/Heartsongs.cs:82
+#: scripts/Core/Heartsongs.cs:84
 msgid "The Lullaby Box"
 msgstr "摇篮曲八音盒"
 
-#: scripts/Core/Heartsongs.cs:82
+#: scripts/Core/Heartsongs.cs:84
 msgid "plink"
 msgstr "叮咚"
 
-#: scripts/Core/Heartsongs.cs:82
+#: scripts/Core/Heartsongs.cs:84
 msgid "a farmer's wife at Brindle"
 msgstr "布林德尔的一位农妇"
 
-#: scripts/Core/Heartsongs.cs:83
+#: scripts/Core/Heartsongs.cs:85
 msgid ""
 "She gave the music box that sang her children to sleep. It still plays her lullaby, for a Keywright."
 msgstr "她献出了那只曾哄她的孩子们入睡的八音盒。如今，它依然会为钥匠奏响她的摇篮曲。"
 
-#: scripts/Core/Heartsongs.cs:84
+#: scripts/Core/Heartsongs.cs:86
 msgid ""
 "Calms every seller: nobody hurries you or minds what you do with their chest, and all ask a fifth less."
 msgstr "安抚每一位卖家：没人催你，也没人在意你怎么摆弄他们的宝箱，而且人人要价都低五分之一。"
 
-#: scripts/Core/Heartsongs.cs:85
+#: scripts/Core/Heartsongs.cs:87
 msgid "The Shepherd's Pipe"
 msgstr "牧人之笛"
 
-#: scripts/Core/Heartsongs.cs:85
+#: scripts/Core/Heartsongs.cs:87
 msgid "toodle"
 msgstr "嘀哩哩"
 
-#: scripts/Core/Heartsongs.cs:85
+#: scripts/Core/Heartsongs.cs:87
 msgid "a shepherd of the Brindle hills"
 msgstr "布林德尔山间的一位牧羊人"
 
-#: scripts/Core/Heartsongs.cs:86
+#: scripts/Core/Heartsongs.cs:88
 msgid "He gave the pipe whose tune could call any flock home. It still calls."
 msgstr "他献出了那支笛子，它的曲调能唤回任何羊群。如今它依然在呼唤。"
 
-#: scripts/Core/Heartsongs.cs:87
+#: scripts/Core/Heartsongs.cs:89
 msgid ""
 "Calls folk to your door: two more customers a day, and anyone who walks out comes back at their first price."
 msgstr "把人们唤到你门前：每天多两位顾客，而且掉头走掉的人都会回来，按他们最初的开价出售。"
 
-#: scripts/Core/Heartsongs.cs:88
+#: scripts/Core/Heartsongs.cs:90
 msgid "The Fey Chimes"
 msgstr "仙灵风铃"
 
-#: scripts/Core/Heartsongs.cs:88
+#: scripts/Core/Heartsongs.cs:90
 msgid "ting"
 msgstr "玎玲"
 
-#: scripts/Core/Heartsongs.cs:88
+#: scripts/Core/Heartsongs.cs:90
 msgid "the fair folk of the Old Wood"
 msgstr "古林的仙灵"
 
-#: scripts/Core/Heartsongs.cs:89
+#: scripts/Core/Heartsongs.cs:91
 msgid ""
 "They gave the chimes from over their door between the worlds. Where they ring, luck turns."
 msgstr "他们献出了挂在两界之门上的风铃。风铃响处，时来运转。"
 
-#: scripts/Core/Heartsongs.cs:90
+#: scripts/Core/Heartsongs.cs:92
 msgid ""
 "Fey luck: a third of what comes out as its chest promised comes out a step better."
 msgstr "仙灵的好运：本该符合宝箱品质的物品中，有三分之一会提升一级。"
 
-#: scripts/Core/Heartsongs.cs:91
+#: scripts/Core/Heartsongs.cs:93
 msgid "The Dragon's Egg"
 msgstr "巨龙之卵"
 
-#: scripts/Core/Heartsongs.cs:91
+#: scripts/Core/Heartsongs.cs:93
 msgid "thump"
 msgstr "怦怦"
 
-#: scripts/Core/Heartsongs.cs:91
+#: scripts/Core/Heartsongs.cs:93
 msgid "Ysolt, the last dragon of the Ember Peaks"
 msgstr "伊苏尔特，余烬峰最后的巨龙"
 
-#: scripts/Core/Heartsongs.cs:92
+#: scripts/Core/Heartsongs.cs:94
 msgid ""
 "She gave her egg, still warm. Three hundred years on, its heart still beats."
 msgstr "她献出了自己的蛋，那时还带着余温。三百年过去了，它的心依然在跳动。"
 
-#: scripts/Core/Heartsongs.cs:93
+#: scripts/Core/Heartsongs.cs:95
 msgid "Dragon-gold: coin and gems you sell fetch twice their worth."
 msgstr "龙之金：你卖出的钱币和宝石，能卖到其价值的两倍。"
 
-#: scripts/Core/Heartsongs.cs:94
+#: scripts/Core/Heartsongs.cs:96
 msgid "The Clockwork Lark"
 msgstr "发条云雀"
 
-#: scripts/Core/Heartsongs.cs:94
+#: scripts/Core/Heartsongs.cs:96
 msgid "tweet"
 msgstr "啾啾"
 
-#: scripts/Core/Heartsongs.cs:94
+#: scripts/Core/Heartsongs.cs:96
 msgid "a tinker of Crownhold"
 msgstr "王冠堡的一位修补匠"
 
-#: scripts/Core/Heartsongs.cs:95
+#: scripts/Core/Heartsongs.cs:97
 msgid ""
 "He gave the bird he built for a princess who never woke. It sings at dawn, and carries word."
 msgstr "他献出了那只为一位再也没醒来的公主打造的鸟儿。它在黎明时歌唱，还能传递消息。"
 
-#: scripts/Core/Heartsongs.cs:96
+#: scripts/Core/Heartsongs.cs:98
 msgid ""
 "Carries word across Aldmark: two more commissions a week, and every commission pays half as much again."
 msgstr "把消息传遍奥德马克：每周多两个委托，而且每个委托的报酬都提高一半。"
 
-#: scripts/Core/Heartsongs.cs:97
+#: scripts/Core/Heartsongs.cs:99
 msgid "The Hearthstone"
 msgstr "炉心石"
 
-#: scripts/Core/Heartsongs.cs:97
+#: scripts/Core/Heartsongs.cs:99
 msgid "hummm"
 msgstr "嗡——"
 
-#: scripts/Core/Heartsongs.cs:97
+#: scripts/Core/Heartsongs.cs:99
 msgid "the dwarves of Ironroot"
 msgstr "铁根的矮人"
 
-#: scripts/Core/Heartsongs.cs:98
+#: scripts/Core/Heartsongs.cs:100
 msgid ""
 "They gave a stone from their first hearth. It hums with three thousand years of warm evenings."
 msgstr "他们献出了一块取自他们第一座炉膛的石头。它嗡嗡低鸣，蕴藏着三千年来无数个温暖的夜晚。"
 
-#: scripts/Core/Heartsongs.cs:99
+#: scripts/Core/Heartsongs.cs:101
 msgid ""
 "Folk come for miles to sit by it: {0}g a night for each point of exhibition (more in a grander shop)."
 msgstr "人们从老远赶来，只为在它身旁坐一坐：每一展览分每晚带来{0}金（店铺越气派，金额越高）。"
 
-#: scripts/Core/Heartsongs.cs:100 scripts/Core/TaleBook.Crownhold.cs:18
+#: scripts/Core/Heartsongs.cs:102 scripts/Core/TaleBook.Crownhold.cs:18
 msgid "The Drowned Bell"
 msgstr "沉钟"
 
-#: scripts/Core/Heartsongs.cs:100
+#: scripts/Core/Heartsongs.cs:102
 msgid "dong"
 msgstr "铛"
 
-#: scripts/Core/Heartsongs.cs:100
+#: scripts/Core/Heartsongs.cs:102
 msgid "old Aldwater, before the river took it"
 msgstr "被河水吞没之前的旧奥德河镇"
 
-#: scripts/Core/Heartsongs.cs:101
+#: scripts/Core/Heartsongs.cs:103
 msgid ""
 "The town gave its chapel bell, which rang the hours for every soul in Aldwater. It still counts, under the water."
 msgstr "全镇献出了小教堂的钟，它曾为奥德河镇的每一个人报时。如今沉在水底，它依然在计数。"
 
-#: scripts/Core/Heartsongs.cs:102
+#: scripts/Core/Heartsongs.cs:104
 msgid ""
 "It counts for you: as a chest comes to the counter, it tolls once for each thing inside, false bottom and all."
 msgstr "它为你计数：宝箱一来到柜台，箱里每有一件东西，它就敲响一声，连夹层里的也算。"
 
-#: scripts/Core/Heartsongs.cs:103
+#: scripts/Core/Heartsongs.cs:105
 msgid "The Bottled Star"
 msgstr "瓶中星"
 
-#: scripts/Core/Heartsongs.cs:103
+#: scripts/Core/Heartsongs.cs:105
 msgid "twinkle"
 msgstr "铃铃"
 
-#: scripts/Core/Heartsongs.cs:103
+#: scripts/Core/Heartsongs.cs:105
 msgid "the archmages of the Keyhold"
 msgstr "钥堡的大法师们"
 
-#: scripts/Core/Heartsongs.cs:104
+#: scripts/Core/Heartsongs.cs:106
 msgid ""
 "They gave a star they caught as students and kept in a bottle all their lives. Things from the Locking gather round it."
 msgstr "他们献出了一颗星星，那是他们还在求学时捉到的，一生都装在瓶子里。大封锁时期的东西都会被它吸引过来。"
 
-#: scripts/Core/Heartsongs.cs:105
+#: scripts/Core/Heartsongs.cs:107
 msgid ""
 "Starlight: enchanted things glow whenever they sound, witchlight or not, and turn up far more often."
 msgstr "星光：附魔物品只要发出声响就会发光，有没有巫灯都一样，而且出现得频繁得多。"
 
-#: scripts/Core/Heartsongs.cs:106
+#: scripts/Core/Heartsongs.cs:108
 msgid "The Imp's Ember"
 msgstr "小恶魔之烬"
 
-#: scripts/Core/Heartsongs.cs:106
+#: scripts/Core/Heartsongs.cs:108
 msgid "crackle"
 msgstr "噼啪"
 
-#: scripts/Core/Heartsongs.cs:106
+#: scripts/Core/Heartsongs.cs:108
 msgid "Pib, an imp who loved a miller's daughter"
 msgstr "皮布，一个爱上了磨坊主女儿的小恶魔"
 
-#: scripts/Core/Heartsongs.cs:107
+#: scripts/Core/Heartsongs.cs:109
 msgid ""
 "He gave his own heart, a coal that never goes out, so the Maw could never have her."
 msgstr "他献出了自己的心，一块永不熄灭的炭火，好让巨口永远得不到她。"
 
-#: scripts/Core/Heartsongs.cs:108
+#: scripts/Core/Heartsongs.cs:110
 msgid ""
 "Tempers all it warms: glass never breaks, nothing comes out worse than promised, and fakes you open burn true."
 msgstr "它温暖的一切都得到淬炼：玻璃永远不碎，没有东西会低于应有的品质，你打开的假货也会炼成真货。"
 
-#: scripts/Core/Heartsongs.cs:116
+#: scripts/Core/Heartsongs.cs:118
 msgid ""
 "A lock of gold could never hold the demon of greed. So at the Locking the archmages asked the peoples of Aldmark for things they loved more than gold, and sang the Locking into nine of them: the Heartsongs. Then they hid each in an ordinary chest, among millions. Only a Keywright hears one sing. To anyone else it's worth nothing, and the Guild won't touch one: greed can't put a price on it."
 msgstr ""
@@ -2799,9 +2799,9 @@ msgstr "你在比这更靠里的地方做过买卖，送到柜台上的箱子也
 
 #: scripts/Core/Hints.cs:150
 msgid ""
-"My old cradle's on the counter. Press \"Rock it\" (or {act}) and it shakes the chest for you, gently, firmly and hard: you just listen. It won't rock where shaking costs something, and a drop is still your own doing."
+"You've shaken enough chests by hand: my old cradle's yours. Press \"Rock it\" (or {act}) and it shakes the chest for you, gently, firmly and hard: you just listen. It won't rock where shaking costs something, and a drop is still your own doing."
 msgstr ""
-"我那只旧摇篮摆在柜台上了。按“摇一摇”（或{act}），它就替你摇箱子，轻摇、稳摇、猛摇都来一遍：你只管听。摇箱子要付代价的时候它不摇，摔箱子还得你自己动手。"
+"箱子你已经亲手摇得够多了：我那只旧摇篮归你用。按“摇一摇”（或{act}），它就替你摇箱子，轻摇、稳摇、猛摇都来一遍：你只管听。摇箱子要付代价的时候它不摇，摔箱子还得你自己动手。"
 
 #: scripts/Core/Hints.cs:154
 msgid ""
@@ -4493,358 +4493,358 @@ msgstr "钱币{0}磅，兵器{1}磅，斗篷{2}磅，药水{3}磅，法术{4}磅
 msgid "{0} lb"
 msgstr "{0}磅"
 
-#: scripts/Core/Meta.cs:178
+#: scripts/Core/Meta.cs:182
 msgid "Thin crowds"
 msgstr "门可罗雀"
 
-#: scripts/Core/Meta.cs:178
+#: scripts/Core/Meta.cs:182
 msgid "On the last two days of every week, one customer fewer."
 msgstr "每周最后两天，每天少一位顾客。"
 
-#: scripts/Core/Meta.cs:179
+#: scripts/Core/Meta.cs:183
 msgid ""
 "The Guild's collectors ride in the day before the tithe, and nobody wants to be seen at your door while they're about."
 msgstr "缴贡金的前一天，公会的收账人就骑马进城了，他们在的时候，谁也不想被人看见出现在你店门口。"
 
-#: scripts/Core/Meta.cs:180
+#: scripts/Core/Meta.cs:184
 msgid "Sharp sellers"
 msgstr "精明卖家"
 
-#: scripts/Core/Meta.cs:180
+#: scripts/Core/Meta.cs:184
 msgid ""
 "Sellers who haggle hold out for more: the least they'll take is {0} higher."
 msgstr "爱讨价还价的卖家更不肯松口：他们能接受的最低价高出{0}。"
 
-#: scripts/Core/Meta.cs:181
+#: scripts/Core/Meta.cs:185
 msgid ""
 "Word's out that the Guild has you by the purse, and sellers think you'll pay what they ask."
 msgstr "风声传开了，说公会攥着你的钱袋子，卖家们都觉得他们要多少你就会给多少。"
 
-#: scripts/Core/Meta.cs:182
+#: scripts/Core/Meta.cs:186
 msgid "Demon gold about"
 msgstr "魔金横行"
 
-#: scripts/Core/Meta.cs:182
+#: scripts/Core/Meta.cs:186
 msgid "One coin in ten is demon gold, whoever brings it."
 msgstr "不管是谁带来的钱币，十枚里就有一枚是魔金。"
 
-#: scripts/Core/Meta.cs:183
+#: scripts/Core/Meta.cs:187
 msgid ""
 "The Gate's cracking wider, and the Maw's gilded iron has spread all over the realm."
 msgstr "镀金之门的裂缝越来越宽，巨口的镀金铁已经流遍了整个王国。"
 
-#: scripts/Core/Meta.cs:184
+#: scripts/Core/Meta.cs:188
 msgid "A hurried season"
 msgstr "匆忙时节"
 
-#: scripts/Core/Meta.cs:184
+#: scripts/Core/Meta.cs:188
 msgid "Every seller gives you {0} seconds to decide."
 msgstr "每位卖家只给你{0}秒做决定。"
 
-#: scripts/Core/Meta.cs:185
+#: scripts/Core/Meta.cs:189
 msgid ""
 "It's harvest time, and nobody can spare more than a moment at your counter."
 msgstr "正值收获时节，谁都没空在你的柜台前多待一会儿。"
 
-#: scripts/Core/Meta.cs:186
+#: scripts/Core/Meta.cs:190
 msgid "Fussy sellers"
 msgstr "挑剔卖家"
 
-#: scripts/Core/Meta.cs:186
+#: scripts/Core/Meta.cs:190
 msgid "Every seller minds a drop: drop their chest and they ask half again."
 msgstr "每位卖家都介意摔箱：摔了他们的箱子，价格就涨一半。"
 
-#: scripts/Core/Meta.cs:187
+#: scripts/Core/Meta.cs:191
 msgid ""
 "Old chests are the fashion this year, and everyone's precious about theirs."
 msgstr "今年时兴老箱子，人人都把自家的箱子当成宝贝。"
 
-#: scripts/Core/Meta.cs:188
+#: scripts/Core/Meta.cs:192
 msgid "Bram's stretched thin"
 msgstr "布拉姆捉襟见肘"
 
-#: scripts/Core/Meta.cs:188
+#: scripts/Core/Meta.cs:192
 msgid "Bram's stash has one dip fewer, and his word is good one time fewer."
 msgstr "布拉姆的私房钱少动用一次，他的担保也少用一次。"
 
-#: scripts/Core/Meta.cs:189
+#: scripts/Core/Meta.cs:193
 msgid ""
 "Bram spent his savings mending the roof, and the Guild has stopped taking his word."
 msgstr "布拉姆把积蓄都花在修屋顶上了，公会也不再认他的担保。"
 
-#: scripts/Core/Meta.cs:190
+#: scripts/Core/Meta.cs:194
 msgid "A lean start"
 msgstr "开局拮据"
 
-#: scripts/Core/Meta.cs:190
+#: scripts/Core/Meta.cs:194
 msgid "You start with half the gold."
 msgstr "开局金币减半。"
 
-#: scripts/Core/Meta.cs:191
+#: scripts/Core/Meta.cs:195
 msgid "The stall's licence cost more than Bram thought."
 msgstr "摊位执照比布拉姆想的还贵。"
 
-#: scripts/Core/Meta.cs:192
+#: scripts/Core/Meta.cs:196
 msgid "Nim's raised his prices"
 msgstr "尼姆涨价了"
 
-#: scripts/Core/Meta.cs:192
+#: scripts/Core/Meta.cs:196
 msgid "Nim asks a quarter more for every curio."
 msgstr "尼姆的每件奇物都要贵四分之一。"
 
-#: scripts/Core/Meta.cs:193
+#: scripts/Core/Meta.cs:197
 msgid "The Guild is hunting Nim this season, and he charges for the risk."
 msgstr "这一季公会正在追捕尼姆，他把风险也算进了价钱。"
 
-#: scripts/Core/Meta.cs:194
+#: scripts/Core/Meta.cs:198
 msgid "The Guild's builders"
 msgstr "公会的匠人"
 
-#: scripts/Core/Meta.cs:194
+#: scripts/Core/Meta.cs:198
 msgid "Every upgrade costs a quarter more."
 msgstr "每项升级都要贵四分之一。"
 
-#: scripts/Core/Meta.cs:195
+#: scripts/Core/Meta.cs:199
 msgid ""
 "The Guild says only its own builders may work on a licensed shop, at its own rates."
 msgstr "公会说，持照店铺只许公会自己的匠人施工，价钱也按公会定的来。"
 
-#: scripts/Core/Meta.cs:196
+#: scripts/Core/Meta.cs:200
 msgid "A wet year"
 msgstr "多雨之年"
 
-#: scripts/Core/Meta.cs:196
+#: scripts/Core/Meta.cs:200
 msgid "Every lock has one more pin to pick."
 msgstr "每把锁都要多撬一个锁销。"
 
-#: scripts/Core/Meta.cs:197
+#: scripts/Core/Meta.cs:201
 msgid "A wet winter has rusted every old lock in the realm stiff."
 msgstr "一个湿冷的冬天，把全国的旧锁都锈得死死的。"
 
-#: scripts/Core/Meta.cs:198
+#: scripts/Core/Meta.cs:202
 msgid "Wary regulars"
 msgstr "常客生疑"
 
-#: scripts/Core/Meta.cs:198
+#: scripts/Core/Meta.cs:202
 msgid "The regulars post one commission fewer each week."
 msgstr "常客每周少发布一个委托。"
 
-#: scripts/Core/Meta.cs:199
+#: scripts/Core/Meta.cs:203
 msgid "Folk aren't sure your stall will last, and won't set you errands."
 msgstr "大家拿不准你的摊子能不能撑下去，不愿托你办事。"
 
-#: scripts/Core/Meta.cs:200
+#: scripts/Core/Meta.cs:204
 msgid "Nim's lean month"
 msgstr "尼姆的淡季"
 
-#: scripts/Core/Meta.cs:200
+#: scripts/Core/Meta.cs:204
 msgid ""
 "Nim's lantern lays out no extra curio: he brings one fewer a night once he brings more than one."
 msgstr "尼姆的灯笼不再让他多摆奇物：一旦他每晚带来的不止一件，就会少带一件。"
 
-#: scripts/Core/Meta.cs:201
+#: scripts/Core/Meta.cs:205
 msgid "Pickings have been slim among the Locking's oddments."
 msgstr "近来，大封锁留下的零碎玩意儿里没什么好货可淘。"
 
-#: scripts/Core/Meta.cs:206
+#: scripts/Core/Meta.cs:210
 msgid "Welcome gifts"
 msgstr "见面礼"
 
-#: scripts/Core/Meta.cs:206
+#: scripts/Core/Meta.cs:210
 msgid "Your first {0} customers hand you their chests for a coin each."
 msgstr "你的头{0}位顾客各以一枚金币把箱子交给你。"
 
-#: scripts/Core/Meta.cs:207
+#: scripts/Core/Meta.cs:211
 msgid ""
 "The crossroads loved Bram, and on your first morning two of his old regulars give you their chests for a lucky penny."
 msgstr "十字路口的乡亲们都爱戴布拉姆，你开张的头一个早上，他的两位老主顾只收一枚图吉利的铜板，就把箱子给了你。"
 
-#: scripts/Core/Meta.cs:208
+#: scripts/Core/Meta.cs:212
 msgid "Nim's soft spot"
 msgstr "尼姆的偏爱"
 
-#: scripts/Core/Meta.cs:208
+#: scripts/Core/Meta.cs:212
 msgid "Nim lays out one more curio every night."
 msgstr "尼姆每晚多摆出一件奇物。"
 
-#: scripts/Core/Meta.cs:209
+#: scripts/Core/Meta.cs:213
 msgid "Nim owes Bram a favour, and has decided you're it."
 msgstr "尼姆欠布拉姆一个人情，他决定还在你身上。"
 
-#: scripts/Core/Meta.cs:210
+#: scripts/Core/Meta.cs:214
 msgid "Bram's savings"
 msgstr "布拉姆的积蓄"
 
-#: scripts/Core/Meta.cs:210
+#: scripts/Core/Meta.cs:214
 msgid "You start with half as much gold again."
 msgstr "开局金币多一半。"
 
-#: scripts/Core/Meta.cs:211
+#: scripts/Core/Meta.cs:215
 msgid "Bram sold his old cart, and the money's yours."
 msgstr "布拉姆卖掉了他的旧推车，这笔钱归你了。"
 
-#: scripts/Core/Meta.cs:212
+#: scripts/Core/Meta.cs:216
 msgid "Bram's old picks"
 msgstr "布拉姆的旧撬锁器"
 
-#: scripts/Core/Meta.cs:212
+#: scripts/Core/Meta.cs:216
 msgid "You start with the Fine Lockpicks: a wider sweet spot on every lock."
 msgstr "开局即拥有精良撬锁器：每把锁的绿区都更宽。"
 
-#: scripts/Core/Meta.cs:213
+#: scripts/Core/Meta.cs:217
 msgid "Bram found his old picks at the bottom of a drawer."
 msgstr "布拉姆在抽屉底下翻出了他的旧撬锁器。"
 
-#: scripts/Core/Meta.cs:214
+#: scripts/Core/Meta.cs:218
 msgid "Thornwick wants you"
 msgstr "荆棘镇有请"
 
-#: scripts/Core/Meta.cs:214
+#: scripts/Core/Meta.cs:218
 msgid ""
 "The Guild's second due, the one you pay at Thornwick Market, is a quarter lighter."
 msgstr "公会的第二笔贡金（在荆棘镇集市缴的那笔）减少四分之一。"
 
-#: scripts/Core/Meta.cs:215
+#: scripts/Core/Meta.cs:219
 msgid ""
 "Thornwick's council wants a Keywright in the market, and pays a quarter of the rent."
 msgstr "荆棘镇议会希望集市上有位钥匠，愿意替你付四分之一租金。"
 
-#: scripts/Core/Meta.cs:216
+#: scripts/Core/Meta.cs:220
 msgid "A slow season"
 msgstr "悠闲时节"
 
-#: scripts/Core/Meta.cs:216
+#: scripts/Core/Meta.cs:220
 msgid ""
 "Sellers who won't wait give you twice as long, and a rotten chest stands twice the shaking."
 msgstr "没耐心的卖家给你的时间翻倍，朽烂的箱子也能多经得住一倍的摇晃。"
 
-#: scripts/Core/Meta.cs:217
+#: scripts/Core/Meta.cs:221
 msgid "Nobody's in a hurry this year."
 msgstr "今年谁都不着急。"
 
-#: scripts/Core/Meta.cs:218
+#: scripts/Core/Meta.cs:222
 msgid "Bram's prepared"
 msgstr "布拉姆早有准备"
 
-#: scripts/Core/Meta.cs:218
+#: scripts/Core/Meta.cs:222
 msgid "Bram's stash has one more dip in it, and his word is good once more."
 msgstr "布拉姆的私房钱可以多动用一次，他的担保也能多用一次。"
 
-#: scripts/Core/Meta.cs:219
+#: scripts/Core/Meta.cs:223
 msgid "Bram's been putting a little by, and the Guild still owes him a favour."
 msgstr "布拉姆一直悄悄攒了点钱，公会也还欠他一个人情。"
 
-#: scripts/Core/Meta.cs:220
+#: scripts/Core/Meta.cs:224
 msgid "An honest clerk"
 msgstr "正直的书记员"
 
-#: scripts/Core/Meta.cs:220
+#: scripts/Core/Meta.cs:224
 msgid "On a short night, what you pawn fetches its full price."
 msgstr "缴不齐贡金的夜里，你典当的东西能换得全价。"
 
-#: scripts/Core/Meta.cs:221
+#: scripts/Core/Meta.cs:225
 msgid "The Guild's pawn clerk was at school with your mother."
 msgstr "公会管典当的书记员是你母亲的老同学。"
 
-#: scripts/Core/Meta.cs:222
+#: scripts/Core/Meta.cs:226
 msgid "A good name"
 msgstr "好名声"
 
-#: scripts/Core/Meta.cs:222
+#: scripts/Core/Meta.cs:226
 msgid ""
 "Hagglers hear you out: an offer that's too low gets a second try, not a slammed door."
 msgstr "爱讲价的卖家会耐心听你说完：出价太低还能再试一次，不会当场把门一甩走人。"
 
-#: scripts/Core/Meta.cs:223
+#: scripts/Core/Meta.cs:227
 msgid "Bram's stall has a name for fair dealing."
 msgstr "布拉姆的摊位向来以买卖公道著称。"
 
-#: scripts/Core/Meta.cs:224
+#: scripts/Core/Meta.cs:228
 msgid "A lucky charm"
 msgstr "幸运护身符"
 
-#: scripts/Core/Meta.cs:224
+#: scripts/Core/Meta.cs:228
 msgid "After a run of plain finds, your luck turns twice as soon."
 msgstr "一连开出平平无奇的东西之后，你转运会快一倍。"
 
-#: scripts/Core/Meta.cs:225
+#: scripts/Core/Meta.cs:229
 msgid "Bram tied his mother's old lucky charm to your apron."
 msgstr "布拉姆把他母亲的旧护身符拴在了你的围裙上。"
 
-#: scripts/Core/Meta.cs:226
+#: scripts/Core/Meta.cs:230
 msgid "Fair days"
 msgstr "太平日子"
 
-#: scripts/Core/Meta.cs:226
+#: scripts/Core/Meta.cs:230
 msgid "No days of mourning and no Guild assessors in town."
 msgstr "没有哀悼日，城里也没有公会估税员。"
 
-#: scripts/Core/Meta.cs:227
+#: scripts/Core/Meta.cs:231
 msgid ""
 "The old Duke's in good health, and the Guild's assessors have their hands full in the capital."
 msgstr "老公爵身体硬朗，公会的估税员们在都城忙得脱不开身。"
 
-#: scripts/Core/Meta.cs:228
+#: scripts/Core/Meta.cs:232
 msgid "Room for more"
 msgstr "还有空位"
 
-#: scripts/Core/Meta.cs:228
+#: scripts/Core/Meta.cs:232
 msgid "Room for one more curio, from the start."
 msgstr "开局就多一个奇物栏位。"
 
-#: scripts/Core/Meta.cs:229
+#: scripts/Core/Meta.cs:233
 msgid "Bram cleared out a drawer for your curios."
 msgstr "布拉姆为你的奇物腾出了一个抽屉。"
 
-#: scripts/Core/Meta.cs:286
+#: scripts/Core/Meta.cs:290
 msgid "Guild dues paid ({0} of {1})"
 msgstr "已缴公会贡金（{0}/{1}）"
 
-#: scripts/Core/Meta.cs:289
+#: scripts/Core/Meta.cs:293
 msgid "Bram's debt cleared"
 msgstr "还清布拉姆的债务"
 
-#: scripts/Core/Meta.cs:291
+#: scripts/Core/Meta.cs:295
 msgid "Days to spare ({0})"
 msgstr "提前天数（{0}）"
 
-#: scripts/Core/Meta.cs:294
+#: scripts/Core/Meta.cs:298
 msgid "Pieces of the treasury key ({0})"
 msgstr "宝库钥片（{0}）"
 
-#: scripts/Core/Meta.cs:295
+#: scripts/Core/Meta.cs:299
 msgid "The treasury"
 msgstr "宝库"
 
-#: scripts/Core/Meta.cs:296
+#: scripts/Core/Meta.cs:300
 msgid "Bram brought home"
 msgstr "带布拉姆回家"
 
-#: scripts/Core/Meta.cs:297
+#: scripts/Core/Meta.cs:301
 msgid "The next day"
 msgstr "翌日"
 
-#: scripts/Core/Meta.cs:298
+#: scripts/Core/Meta.cs:302
 msgid "Heartsongs ({0})"
 msgstr "心歌（{0}）"
 
-#: scripts/Core/Meta.cs:299
+#: scripts/Core/Meta.cs:303
 msgid "Moves ({0})"
 msgstr "迁店次数（{0}）"
 
-#: scripts/Core/Meta.cs:300
+#: scripts/Core/Meta.cs:304
 msgid "Collection ({0} of {1})"
 msgstr "收藏（{0}/{1}）"
 
-#: scripts/Core/Meta.cs:302
+#: scripts/Core/Meta.cs:306
 msgid "Weeks after the debt ({0})"
 msgstr "还清后坚持的周数（{0}）"
 
-#: scripts/Core/Meta.cs:304 scripts/Core/TaleBook.Emporium.cs:91
+#: scripts/Core/Meta.cs:308 scripts/Core/TaleBook.Emporium.cs:91
 msgid "The Guild on trial"
 msgstr "公会受审"
 
-#: scripts/Core/Meta.cs:306
+#: scripts/Core/Meta.cs:310
 msgid "Friends made ({0})"
 msgstr "结交的朋友（{0}）"
 

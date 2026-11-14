@@ -126,8 +126,12 @@ public static class Challenges
     /// until 0.28, whose tales carried the top levels further (Kit cleared level 8 a fifth of the time): 0.15 kept the
     /// curve 0.27 had. 0.33's case, mimics and Lantern Market made the careful player stronger and the top levels gentler
     /// (120 careers: level 6 cleared by 32% by run 30, level 8 by 7%, against 0.32's 23% and 4%): 0.2 keeps 0.32's curve.
+    /// 0.37: a level is always played in a later season, which now opens with the trade's ways, Bram's drawer and Nim
+    /// from the first night, and listening is free again; at 0.2 the careful player cleared the levels as drawn 93, 87,
+    /// 81, 65, 45, 33, 31 and 19% of the time (0.36: 77, 57, 43, 35, 18, 16, 9 and 6%) and half of careers had cleared
+    /// level 8 by their thirtieth season, where none had. 0.3 puts the top half back where it was.
     /// </summary>
-    public static float DebtStep { get; set; } = 0.2f;
+    public static float DebtStep { get; set; } = 0.3f;
 
     /// <summary>What a level does to the Guild's dues.</summary>
     public static float DebtFactor(int level) => 1 + DebtStep * Math.Clamp(level, 0, Max);

@@ -22,6 +22,16 @@ A season is now four weeks, a market each, about an hour and a half (`docs/desig
 tuned as the story's difficulty: half of careers clear the debt by their third season and are swallowed by their
 fourth (five or six hours in), and bring Bram home and reach the next day around the tenth (`--sim=careers`).
 
+0.37 changes none of the truth or the steps either, and shortens the telling again without meaning to shorten the
+story: with listening free and a later season opening with what earlier ones met (`docs/design.md`, *A season after
+the first*), half of careers clear the debt and are swallowed on their second season (three hours in), and bring
+Bram home and reach the next day around the fifth, where 0.36 had the tenth. A remembered season also says less
+twice: Vane's introduction, the summons and the Guild's letter have short forms for a keywright who's heard them
+(the lines the campaign calls back to are kept: his ring, the same letter word for word, "I'll write every week").
+The debt no longer holds the story back (a career kept at level 0 reaches the next day on the same season), so
+its length is the plan's own: two or three remembered seasons. Whether that's room enough for the Inquiry is the
+owner's to judge (`docs/design.md`, *Open questions*).
+
 What moved with it:
 
 - **The road is the Guild's doing.** Each due paid, its carters move the stall a market further in, and Vane presents

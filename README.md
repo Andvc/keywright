@@ -74,8 +74,8 @@ and repository now belong to a different game. Saves and the profile from then c
    something you can't hear, mark one more of it on the slip; open the chest, and the ward gives it up.
 2. **Shake it yourself.** How fast you drag is how hard you shake (the words under the chest show
    gentle, firm or hard as you go, and which you've tried), and you can shake as often as the seller will stand.
-   From Thornwick on (from the first morning, in any season after your first) Bram's cradle will rock the chest for
-   you at a press, gently, firmly and hard: the listening is still yours. A hard shake stirs everything, but a clank
+   A few days into Thornwick (from the first morning, in any season after your first) Bram's cradle will rock the
+   chest for you at a press, gently, firmly and hard: the listening is still yours. A hard shake stirs everything, but a clank
    drowns the delicate things; what the seller missed is where to listen. Light things (coin jingles, potions slosh, gems
    tinkle) rattle at a gentle shake; weapons only clank at a firm one, and their clanking drowns out anything delicate;
    soft things (cloaks flump, spells rustle) only sound at a hard shake. Lift it high and let go to drop it: a hollow
@@ -151,7 +151,7 @@ three saves (the title's bottom-left button), each with its own seasons and stor
 The first three dues are gentle and a first season usually falls at the last, at the Emporium, with a purse that
 grew, just not fast enough; a second or third, with sharper judgment and a build that comes together, clears it, and
 that's where the story turns. Clearing it with someone opens their next challenge level, and a quarter more to the
-score. Each level raises the Guild's dues by a fifth, and deals the run as many banes as its number (thin crowds,
+score. Each level raises the Guild's dues by three tenths, and deals the run as many banes as its number (thin crowds,
 sharp sellers, demon gold about, a wet year that rusts every lock, ...) and as many boons (welcome gifts
 on the first morning, Bram's old picks, a slow season, room for one more curio, ...), drawn from
 twelve of each for every run and shown before it starts: the levels are where the game gets hard.
