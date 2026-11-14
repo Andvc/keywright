@@ -50,7 +50,10 @@ build is the same build without the library.
    Friends see "Day 3 at Thornwick Market" or "At the title screen" in their own language.
 4. **Steam Cloud** (Auto-Cloud): on Windows, root `WinAppDataRoaming`, subdirectory `Keywright`, patterns `save.json`,
    `profile.json` and their `.bak` (not `settings.cfg`: screens and keys differ between computers). On Linux, root
-   `LinuxXdgDataHome`, same subdirectory and patterns. A quota of 10 files and 10 MB is plenty.
+   `LinuxXdgDataHome`, same subdirectory and patterns. Since 0.37 there are three saves: the first is those files, and
+   the second and third are the same file names in the subdirectories `Keywright/slot2` and `Keywright/slot3` (add
+   both, or tick "recursive" on the first rule). Which save is being played is kept in `settings.cfg`, so another
+   computer opens on Save 1 until its player picks. A quota of 20 files and 10 MB is plenty.
 5. **Depots**: the Windows and Linux builds are the CI artifacts (`Keywright-<version>-windows-x64`, `-linux-x64`),
    each a folder to upload as it is. Launch option: `Keywright.exe` on Windows, `Keywright.x86_64` on Linux.
 6. **Controllers**: the game reads controllers itself (Xbox, PlayStation and Switch layouts; the stick moves a

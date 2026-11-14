@@ -16,13 +16,15 @@ tells you whether you were right; buy, and the chest bursts open on the spot: ea
 cross against your slip, and now and then something far better than the chest promised. What you acquire builds the
 shop's name (synergies) and its exhibition, which draw more and better customers. The stall comes with Bram's twenty
 years of unpaid tithe to the Gilded Guild: every fifth evening Mister Vane collects a due, 40g, then 170g, 700g and
-5,000g, and each one paid moves the shop a market further in: a season is four weeks, one each at the Brindle
+6,600g, and each one paid moves the shop a market further in: a season is four weeks, one each at the Brindle
 crossroads, Thornwick Market, Crownhold and the Royal Emporium by the Gilded Gate (twenty days, about an hour and a
-half of play; 0.36, *The run*). A keywright's ear is good for only so many careful listens a day (*The ear*), so which
-chest to shake, and how, is a choice every time. Curios from Nim the peddler are the run's
+half of play; 0.36, *The run*). Listening costs nothing (0.37 took 0.36's counted listens out again: *Listening is
+free, and a build does the routine*). Curios from Nim the peddler are the run's
 build: each bends a rule of the trade, the ones that share a way of trading (enchantment, sight unseen, haggling, the
 perfect read, false bottoms, wards, and more beside) make each other stronger, and Nim, who notices what you buy,
-brings more of it. Whatever makes ordinary things fetch more puts up what every seller asks as well (the shop's power
+brings more of it. Since 0.37 a build also changes what the counter asks of you: each way of trading has a curio that
+does its share of the routine (a quill that ticks what's heard, a gauge that finds the false bottom), and Bram's
+cradle does the shaking once you've learned what the strengths tell. Whatever makes ordinary things fetch more puts up what every seller asks as well (the shop's power
 index), so the shop's growth makes the numbers bigger without making a bad buy good; the last week's due is more than
 ordinary trade can make, and a build that has come together is what carries it. Regulars pay well for commissions,
 and something different happens in town two days a week. Bram minds the stall with you for the first week; then the
@@ -34,7 +36,9 @@ is closed; with the key whole too, the Guild's carriage takes you to its treasur
 Across runs, four of Bram's kin can mind the stall, each reading chests or running the shop their own way: Kit listens,
 Hesk weighs, Rosa haggles, Isolde collects. Clearing the debt with one opens the next of eight challenge levels for
 them, each adding one of the Guild's harsher terms. Every run ends with a score, times the challenge level's
-multiplier. Nothing carries over that makes the next run stronger: what grows is what you know. Since 0.34 that's
+multiplier. What carries over is what you know, and since 0.37 the trade's ways with it: a later season's chests have
+every layer you've met from its first morning (locks, false bottoms, wards, two of a kind, enchantment), nothing Bram
+has told you is told again, and he turns out his drawer for you (*A season after the first*). Since 0.34 that's
 also the story's: after the treasury first swallows you, every season is the same spring again, you remember, and the
 notebook's Inquiry keeps what you've found out, until a season ends with the treasury door closed on the Maw and
 everyone the Guild took brought out.
@@ -243,8 +247,8 @@ Each answers one question by a rule you'd expect from real life. All of them are
 
 | How | From | Tells you | Cost or risk |
 |---|---|---|---|
-| Shake gently, firmly, hard | start | which kinds are inside, and how many of each | Brother Cadoc hates a hard shake; Tobin's chests stand two seconds of it; Nettle charges for every strength after the first |
-| Drop it (lift it high, let go) | Thornwick | a hollow BOOM means a false bottom | glass may break (half the time each); Brass hates it |
+| Shake gently, firmly, hard (by hand, or on Bram's cradle: below) | start | which kinds are inside, and how many of each | Brother Cadoc hates a hard shake; Tobin's chests stand two seconds of it; Nettle charges for every strength after the first |
+| Drop it (lift it high, let go) | Thornwick; the first morning of any season once one has traded there (*A season after the first*) | a hollow BOOM means a false bottom | glass may break (half the time each); Brass hates it |
 | Witchlight (200g) | Crownhold | always lit once bought: anything enchanted glows when it makes a sound | none |
 | Lodestone (400g) | Royal Emporium | iron can't move: no clanks to drown things out, and demon gold goes quiet | Countess Vey hates it |
 
@@ -257,79 +261,92 @@ Hesk's way of reading a chest.
 green. A masterful pick (no slips, mostly perfect) makes everything worth 25% more; the crowbar is quick but scratches
 everything (-10%) and breaks glass. Fine Lockpicks (50g) widen the sweet spot.
 
-## The ear: listens (0.36)
+## Listening is free, and a build does the routine (0.37)
 
-Until 0.35 every way of judging a chest was free. The right play was always all of them (gently, firmly, hard, the
-drop), a careful buyer profited on nine chests in ten, and the opening confirmed what the slip already said: a
-procedure, not a decision, and the review of 0.35 (`docs/redesign-0.36.md`) found that it was why the counter felt
-flat. What each seller misses was in the notebook, and nothing made knowing it matter.
+**The counted listens are gone.** 0.36 gave a keywright's ear eight careful listens a day: every new check on a chest
+(a strength, a drop, the lodestone) spent one, so that which check to make would be a decision. The owner played it:
+"The hearing-ability mechanic serves no meaningful purpose. Repetitive gameplay is a real issue, but restricting how
+many times players can listen is not the solution." It wasn't. At the stall it never pinched (0.36's playtester ended
+its days with listens unspent); further in it fell hardest on whoever was still learning (at the same dues the sim's
+learner at 0.5 clears 43% of seasons with the ear and 68% without), and what a player met was a meter standing
+between them and the one thing the game is about: the same routine, only dearer. So `Ear.cs` is out with everything built on it: the meter over
+the chest, the Tea Kettle and the Listening Screen (a save that had bought them gets its gold back: `SaveData` version
+9), the Echo Stone and the Lamb's-Wool Plugs, a head cold and a rested ear among the challenge terms, Bram's three
+tips on it, and the careful player's `NextCheck`. A chest can be shaken as often as its seller will stand.
 
-**A keywright's ear is good for so many careful listens a day** (`Ear.cs`, `GameState.Listens`: eight; a rule people
-know: nobody tastes the fortieth wine as well as the first). Each new check on a chest spends one
-(`GameState.Listen`, `Check`): a strength not yet tried on it, with the lodestone or without, or a drop. Shaking again
-the way you already have is free, so counting rattles costs nothing, and so is a seller's lesson (its steps ask for
-particular shakes) and anything the Bookkeeping Engine reads. With none left, a new strength tells nothing (no sound,
-no word), a drop lands without a boom (and breaks nothing), and you trade on what you know: who's selling, how they
-priced it, where it came from, the chest's colour.
+**Where the repetition comes from.** Every chest asks for the same motions: shake it gently, firmly and hard; drop it;
+tick what sounded; star what glowed; work out what a sign points at; guess what a haggler would take. In a first week
+that is the game being learned. By the third it's a procedure, the same for every chest. More distinctive sellers
+(0.28 to 0.32) treated the symptom, and a price on every motion (0.36) left the procedure as it was. The owner's other
+idea was the one to follow: **builds that play differently**. Until 0.37 a build changed which chests pay; now it also
+changes what the counter asks of your hands. Each way of trading has one curio that does that way's share of the
+routine (`Core/Hands.cs`, a partial of `GameState`):
 
-So which check to make is the decision, and the sellers' habits are what decide it:
+| Way of trading | What it asked, every chest | The curio that does it | | What's still yours |
+|---|---|---|---|---|
+| the perfect read | tick each thing as it sounds, and count them | **Scrivener's Quill**: the slip ticks each thing the first time you hear it, one more of its kind, starred if it glowed (`Tick`) | U, the stall | what never sounds (a warded thing, what's under a false bottom), and striking out what it got wrong: it writes what was heard, so sand is ticked as a spell |
+| the perfect read | all of it | **Pocket Engine**: every chest's real contents are on the slip as it comes in, false bottom and warded thing and all (`ReadsChests`, the Guild's Bookkeeping Engine in a coat pocket) | L, Crownhold; opened for good by a hundred perfect reads across seasons | the price: whether it's worth it, and what to offer |
+| enchantment | shake until everything has sounded with the witchlight lit, and star what glowed | **Lantern Moth**: every enchanted thing is starred as the chest comes in, witchlight or not (`MarksMagic`) | R, Crownhold (Thornwick, in a season that already knows Crownhold's ways) | counting the rest |
+| false bottoms | the drop, and what it breaks | **Toll-man's Gauge**: a false bottom is marked as the chest comes in (`MarksHidden`) | R, Thornwick | the glass you no longer have to risk, and Brass, who hates a drop, is no trouble |
+| wards | working out which kind the sign points at, and marking one more of it | **Wardens' Primer**: the slip names the warded thing a sign points at (`NamesWards`: one more of its kind than the chest holds) | R, Thornwick | hearing the rest, so the count it adds to is right |
+| haggling | guessing the least they'd take, and risking a walkout to find it | **Factor's Abacus**: the offer starts on the least a haggler will take, and they take it (`KnowsFloors`, `Visit.Floor`) | R, Thornwick | whether the chest is worth that |
+| sight unseen | nothing | none | | it never lays a hand on the chest to begin with |
 
-- A hard shake stirs everything, so it's the shake that hears most. If nothing clanks, one listen has heard the chest.
-- If steel clanks, the delicate things are drowned: a gentle shake is worth a second listen. (Firm is for a chest
-  that can't be shaken hard: Brother Cadoc's, Rook's on her mare, Hesk's back; and for straw, where everything stirs a
-  strength late.)
-- Ada priced what a gentle shake stirs, so what she missed is whatever a hard one adds; Garrick shook hard, so what he
-  missed is under his clank. Knowing the regular tells you which single listen is worth having.
-- The drop is worth a listen where false bottoms are common (Corvin, Brass, the Maw's hoard), and the lodestone where
-  fakes are about. Sand wants a gentle shake from someone who deals in it.
-- A beginner who tries all three strengths on every chest runs out before the last customer of the day at the stall,
-  where it costs a few coins to learn; someone who knows the regulars doesn't.
+They are rare on purpose (one uncommon, four rares, a legendary), found like any curio (Nim leans towards the way of
+trading you're building) and take a slot like any curio. None is in a first season, which is for learning the
+motions by hand: the quill, the gauge, the primer and the abacus open after a first season, the moth once a season
+has traded at Crownhold (or after two), the engine by its feat. Each makes its way of trading *faster to play* more
+than richer: as Nim brings them the quill adds nothing to a careful player's takings and the primer and the abacus about
+2%, the gauge and the engine about 7% and the moth 11% (`--sim=curio`, 100 seasons each against the careful player
+with no curios; the moth's is every enchanted thing a shop with no witchlight would have left unstarred). A build
+around the perfect read with the quill plays in half the clicks; with the Pocket Engine it stops being about reading
+at all and becomes about price, which is what 0.30's Bookkeeping Engine was for a run already won.
 
-The counter shows the ear over the chest (a pip a listen, the spent ones hollow; the count beside who's still waiting
-on the slip's foot: the two together are the day's plan). `ShakeBox.Open` gates what sounds, so a strength that hasn't
-been paid for is silent, not just unrecorded. Bram says so the first time a listen is spent, when they run low with
-people still waiting, and when they're gone (`ear`, `ear_low`, `ear_out`).
+**The rule this breaks.** "Never let a curio tell you what a chest holds" stood from 0.20: a curio bends a rule, the
+ear does the knowing. These six tell you something of what a chest holds, and that's the point of them: they are what
+a build is *for*. The line that holds now is the older one behind it: **nothing says what a chest is worth before you
+buy it.** No curio tells how good a thing is (each thing's quality is still rolled round its chest's colour and shown
+only at the opening), none prices a chest, and the odds bar still only adds up what the slip says. A new curio that
+tells what's in a chest must belong to one way of trading, do that way's routine and nothing wider, and be rare.
 
-**When a shake counts.** A strength gets the ear once the chest has *really been shaken* at it for a moment
-(`ShakeBox.Dwell`, `CounterPhase.GiveEar`: 0.12 seconds of it for a hard shake, 0.16 for a firm one, 0.3 for a gentle
-one, which is also just what moving a chest about is). Really shaken means three things, each there so that nothing is
-spent by accident:
+**Bram's cradle** (`GameState.Cradle`, `CradleLevels`, `CounterPhase.Rock`). The shaking itself goes to a tool
+everybody gets: a cooper's cradle under the counter that rocks a chest gently, firmly and hard, a second each, at a
+press of its button or the act key. You still do the listening (the words, the counting, the glow), and the drop is
+still your hands'. It rocks only as far as the seller allows for nothing: no hard shake where that's minded or can't
+be done, and where shaking has a price of its own (Nettle's fee for each strength, Tobin's rotten chest, a seller who
+won't wait) it rocks once, gently, and the rest is yours to decide. A first season shakes by hand for its week at the
+stall, which is how the strengths are learned (Bram's lessons ask for each by hand), and has the cradle from
+Thornwick; any later season has it from its first morning (`Ways >= Market.CraftTier`). The experience report counts
+four seconds a strength by hand and 1.3 on the cradle: eight seconds a chest, ten minutes and more over a season's
+hundred chests, and every one of them the dullest seconds at the counter.
 
-- the chest is moving at least that fast *now* (not the meter's memory of a moment ago: winding down from a hard
-  shake passes back through firm and gentle speeds and spends neither);
-- that strength is the hardest it's been shaken in the last moment (the wind-up to a hard shake passes through the
-  gentler ones in less time than counts);
-- the hand has turned twice lately: a shake goes back and forth. Lifting the chest to drop it, carrying it across the
-  counter, or picking it up and setting it down is not a shake, however fast.
+**The slip keeps what you heard.** A kind's row on the slip darkens and gets a dot once you've heard one of it on this
+chest (and the false-bottom row once a drop has boomed): 0.36's playtester asked for exactly this ("nothing records
+what was heard once the words fade"). A click still counts one more of a kind (and past the most a chest holds, back
+to none); a right-click now takes one off (`Appraisal.Uncount`), so a count clicked once too often doesn't have to go
+all the way round.
 
-Slowing from a hard shake to a gentle one and keeping it up is two checks and two listens, as it should be. The time
-is measured inside the shake box, a physics step at a time. 0.36's first version sampled the hand's speed once a frame
-in the counter, and reset its count whenever the meter flickered between strengths: at sixty frames a second with a
-smooth hand it worked, and at twelve, or with a mouse that reports in jumps, the samples missed every fast moment, so
-a strength lit up on the meter and never got the ear. The bot never showed it (it shakes at exact strengths, through
-`ShakeBox.AutoShake`). The fresh-eyes playtest did, at once: "I could not tell when a shake counted" was its first
-finding, and it sat locked in the first day's third lesson shaking firmly for half a minute. `--ear-test` is the
-check that would have caught it, and now does: a pointer driven through the real counter the ways hands move (smooth
-shakes at each strength, a hard one with its wind-up and wind-down, a mouse in jumps, twelve frames a second, a lift,
-a carry, an empty ear), each asserting exactly which listens were spent.
+**At the opening** a thing you didn't mark that nothing you did could have told you of (a strength you never shook
+at, a false bottom you never dropped for) still isn't a miss: it gets the closed eye a sight-unseen chest's things
+get, not a cross (`OpeningPhase.Unheard`, `Visit.Tried`, `Visit.CouldHear`; Bram's `unheard` tip). A cross is for what
+you listened to and got wrong. The checks made on a chest are kept for that (`Visit.Checks`), and cost nothing.
 
-**More listens**: the Tea Kettle (70g, Thornwick: two more) and the Listening Screen (320g, Crownhold: three more) at
-the day's end, and two curios: an Echo Stone gives one back for a perfect read, and Lamb's-Wool Plugs for a chest
-bought sight unseen (what you don't handle, you don't have to listen to). The Ear Trumpet, which lets nothing drown
-or muffle a sound, now saves a listen on every chest that clanks.
+**When a shake counts.** A strength counts as tried on a chest once it's been shaken at it for half a second in all
+(`CounterPhase.TryTime`, by `ShakeBox.Level`: the hardest the chest has moved in the last moment, worked out in the
+shake box a physics step at a time, whatever the frame rate). Nothing is spent by it any more, but three things still
+go by it: Bram's lessons wait on "shake it firmly", the hint under the chest says which strengths are left to try,
+and the opening's closed eye is for what no strength you tried could have stirred. 0.36 learned what a miscount
+costs (its first ear read the hand's speed once a frame, and at twelve frames a second a firm shake lit the meter
+and never counted: the playtester sat in a lesson shaking for half a minute), so `--hand-test` (0.36's `--ear-test`,
+kept) still drives a pointer through the real counter the ways hands move (a gentle, a firm and a hard shake, a hard
+one with its wind-up and wind-down, a mouse that reports in jumps, twelve frames a second, a lift, a carry) and checks
+which strengths each counted as.
 
-**At the opening** a thing you didn't mark that no check you made could have told you of (a strength you spent no
-listen on, a false bottom you didn't drop for) isn't a miss: it gets the closed eye that a sight-unseen chest's things
-get, not a cross (`OpeningPhase.Unheard`, `Visit.NoteAudible`; Bram's `unheard` tip). A cross is for what you listened
-to and got wrong. So a chest bought on one listen is a real reveal: what you heard, and whatever else was in there.
-
-**The careful player** (`Strategy.NextCheck`, for the sim and the bot) makes a check at a time, each chosen by what
-the last one told: the shake that hears most, then only what it couldn't tell, then the drop and the lodestone where
-they're worth it; up to this chest's share of what's left among everyone still waiting (`GameState.ListenShare`: what
-earlier chests didn't need rolls forward, and a read that has to be exact, a contest or the King's game, gets whatever
-it takes). A learner goes through the strengths by rote as Bram first taught them, without counting what's left for
-the queue (`Simulation.Listen`, `ByRote`). The per-seller table gives each chest a fresh ear, and still shows a careful
-player profiting from every seller and a blind one from almost none.
+**The careful player** (`Hearing.Read`, `Strategy`, for the sim and the bot) listens to everything again: every
+strength the seller allows for nothing, the drop where a false bottom is likely and nothing in the way of it (not
+with a gauge), the lodestone where it's owned. `GameState.Premark` writes what the build knows before it starts,
+`Strategy.FirstOffer` starts on the floor with an abacus, and the bot uses the cradle as a player would. A learner
+still makes a learner's mistakes (`Style.Skill`), not a rationed ear's.
 
 ## Passing: your gut
 
@@ -353,7 +370,8 @@ checked, and a wrong mark is still a cross. Bram explains the closed eyes the fi
 
 ## Opening a chest
 
-It opens by itself (no holding): a short rumble in the chest's own colour, then the burst. A thing **worse** than its
+It opens by itself (no holding): a rumble in the chest's own colour, longer the more that rides on it (0.37, below),
+then the burst. A thing **worse** than its
 chest comes first: it pops up in the chest's colour as if all's well, then sags with a deflating slide while the
 colour drains to what it really is ("WORSE..."), and flops onto the table. Things as good as promised land quickly.
 An enchanted thing lands in a purple glow ("ENCHANTED! x2"). A thing **better** than its chest rises out still glowing in the chest's
@@ -364,6 +382,42 @@ colour: common, a puff of dust; uncommon, rising sparkles and a chime; rare, a p
 crackling lightning, a boom and a lingering aura; legendary, all that with turning rays, a fountain of coins and a
 fanfare. A Heartsong comes out last, with its own reveal and a choice (above). `--opening-demo` opens a crafted chest
 with one of each to preview them.
+
+**Anticipation and payoff (0.37).** The owner asked for both: a reveal that builds more excitement about what's
+inside, and one that feels more impactful when it comes. What it had was the same 0.9 seconds of rumble for every
+chest and a tally that counted up: nothing in the build said this chest mattered more than the last one, and nothing
+in the payoff said by how much you'd won.
+
+- *How much rides on it* (`OpeningPhase._stakes`, 0 to 1: the chest's colour, what was paid against the shop's working
+  purse, how full it is) sets the pace. A plain chest for a few coins still strains for 0.9 seconds and opens
+  briskly; a dear purple one takes up to 1.8, and every pause after it is longer too. A hundred chests a season can't
+  all be an event, so the fuss is spent where the money is.
+- *The lid thumps* as the chest strains: seven knocks, closer and closer together, each a little harder and higher, a
+  heartbeat that runs straight into the burst (`Thumps`).
+- *The tell* (`Tell`). Just before the lid goes, a glint gets out of the crack in the colour of the finest thing
+  that's better than its chest promised, and a shimmer of violet if anything in it is enchanted. It says something is
+  coming, never what or which, and the surprises still come out last, so the wait for them starts here. A chest with
+  nothing better in it gives nothing away.
+- *Everything comes out wrapped* in the chest's light (a ball of its colour with a trail of sparks) and shows what it
+  is only as it lands: the landing is the reveal, not the flight.
+- *The stake bar* under the tally fills as each thing lands, towards a notch at what was paid: amber short of it,
+  green past it, full at twice. Crossing the notch rings out "PAID FOR!": everything after is profit. Each thing
+  that lands rings a note higher than the last, so a full table climbs a scale.
+- *The last breath* (`LastBreath`). Before the last thing comes out the chest draws breath: the box glows up and a
+  note rises, longer the more that rides on the chest, and longest when the chest hasn't paid for itself yet and this
+  is the thing that decides it, with the notch swelling while you wait.
+- *How many times over.* A chest that brought back twice what it cost or more has it stamped on the verdict's corner
+  ("x3.4"), with a shower of coins out of the box from three times and the room joining in (confetti, rays, a
+  fanfare, a shake) from five: but only when the profit is a real share of a working purse, so three times four coins
+  is a sticker and no more.
+
+**Enchanted things flow (0.37).** An enchanted thing used to burst purple as it landed and then sit there with three
+faint rings behind its icon, and the owner found its status "too difficult to notice". Now light flows over it and
+licks up off its edges for as long as it's on screen (`Enchant.Flow`, `assets/shaders/enchanted.gdshader`: two bands of
+violet light crossing the picture, a rim that hugs its silhouette and rises off the top in tongues, drawn a cell of
+the art at a time so the pixels stay pixels), over a soft glow with motes rising through it (`Enchant.Aura`).
+Everything that shows a particular thing goes through it (`UiKit.MakeItemIcon`, the opening's table), so it reads the
+same on the table, the shelf, the collection and a commission's chooser, at any size.
 
 **Two layers** (0.35). The chest is its lid, drawn as it always is, over the box, and the moment the lid lifts at all
 (the opening's strain, a mimic's breath, the Maw) the box under it is the open box: its front, and above the front's
@@ -554,7 +608,7 @@ terms the first time they meet them (`seller_*` in `Hints.cs`), and the terms ar
 `--sim` ends with a lesson test: every lesson played the careful way (the same strategy the bot and the sim use),
 with and without the shop's tools, must complete every step in order.
 
-## What's said: a sentence at a time, and the echo horn (0.35)
+## What's said: typed out, a sentence after another, and the echo horn (0.35 to 0.37)
 
 Nobody says a paragraph at once any more. Bram's tips and lessons, the scenes, the talks and the sellers' bubbles go a
 sentence at a time (`Words.Sentences`: split at a full stop with a space after it, or a CJK stop; a quotation is closed
@@ -571,6 +625,29 @@ like someone talking; a click, or the act key, shows the rest of it at once, and
 click a speech (a scene's line, a tip, a talk's turn) where there were three or four, and nothing the player hasn't
 had time to read is hidden behind it: the whole speech stays up until they go on. A lesson's steps still wait for
 what they ask ("do it to go on"), and a seller's bubble fills in the same way.
+
+**0.37: a character at a time, with a voice.** The owner: "Dialogue should appear one character at a time, accompanied
+by subtle text sounds, as in most pixel-art games. Keep the underlying text organized into segments, since
+click-to-skip and the radio system still need that structure." So the sentences stay exactly as they were
+(`Words.Sentences`: the echo horn's lines, Bram's dots, the speaker's stir and the click that shows the rest all still
+go by them), and each is now typed onto the page (`Ui/Typewriter.cs`, one class for Bram's box, the sellers'
+bubbles, scenes, talks, letters and the treasury's captions):
+
+- The whole speech is laid out first and revealed glyph by glyph (`VisibleCharactersBehavior.CharsAfterShaping`), so
+  nothing reflows as it's typed: a word never starts on one line and jumps to the next, and a bubble is still sized
+  once for all of it.
+- 52 characters a second (Settings > Game > Text speed: Slow 30, Normal 52, Fast 90, or At once, which brings each
+  sentence whole as 0.36 did); half that in Japanese and Chinese, which say as much in fewer characters. A short
+  breath at a comma, a longer one between sentences (0.3 to 0.75 seconds by the sentence's length: the typing was most
+  of the reading).
+- A soft blip every second letter, every third at the fast speed (`Sfx` "talk": 50ms, played well under the chests'
+  sounds, on the Effects bus; Settings > Game > Text sounds turns it off), pitched to the speaker (`Typewriter.Voice`:
+  Bram in the middle, Mister Vane low, everyone else somewhere between by their name, the same every time), with a
+  hair of variation so it doesn't drone. A letter, and Bram's notes while he's away, scratch like a pen instead
+  ("scratch"); the treasury's captions are said low. When two speeches are being typed at once (a seller's pitch, and
+  Bram's word on it) only the later one is heard.
+- A click, or the act key, still shows the rest of the speech at once, and the next goes on: one click a speech, as
+  0.36 had it. A talk's choices appear when its last line is out.
 
 What matters is coloured where it's said (`Rich`): the kinds of thing in gold, their sounds in blue, the strengths in
 green, the trade's words in violet; a seller's price in gold and what they state (a tally, a dream, a tag) in violet,
@@ -592,16 +669,15 @@ Everything arrives when it's needed, each with a word from Bram, so the first da
 | When | What opens up | Bram explains |
 |---|---|---|
 | Day 1 | shaking, the slip and the odds bar, buying | one lesson per customer (scripted) |
-| Day 2 | passing (Bettany, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N); **the ear**, the first time a listen is spent (lessons are free to listen to) | each seller's first visit is a lesson; the notebook, the horn and the ear on later customers |
+| Day 2 | passing (Bettany, first thing), haggling, naming a price, counting rattles; sellers' stories and the notebook (N) | each seller's first visit is a lesson; the notebook and the horn on later customers |
 | The second evening | the Gilded Guild and Bram's twenty years of back-tithe: a due every fifth evening, the first in three nights (until then nothing shows it), and each one paid moves the stall a market further in | a scene: Vane, then Bram |
 | Day 3 | Nim's curios (his first visit) | a tip: room for three, so pick ones that go together |
 | Week 1 | two gentle events (days 2 and 4); the day's end shows the week at the crossroads and the due as the way on | a tip with each |
 | The first Guild night (day 5) | the due paid, the Guild's carters move the shop; the treasury's summons: Bram goes with Vane (and Old Haddon, if his note wasn't paid); from then on his tips are notes in the margins of his notebook | a scene: Vane, then Bram |
-| Day 6: Thornwick Market | the road (`RoadPhase`); the Guild's letter (keep Bram's account paid, and earn the treasury key's four pieces); locks and lockpicking, the drop and false bottoms, potions and spells; the display shelf, keeping things, the exhibition and cabinets; tools and the shop's fittings, at the day's end and from their makers at the counter; with tips on, a quieter first day (a customer short) at each new market | the lock (the first time, the pick waits while he talks); the shelf and why an exhibition matters; where to spend on the shop |
+| Day 6: Thornwick Market | the road (`RoadPhase`); the Guild's letter (keep Bram's account paid, and earn the treasury key's four pieces); **Bram's cradle** (0.37: it does the shaking from here on); locks and lockpicking, the drop and false bottoms, potions and spells; the display shelf, keeping things, the exhibition and cabinets; tools and the shop's fittings, at the day's end and from their makers at the counter; with tips on, a quieter first day (a customer short) at each new market | the lock (the first time, the pick waits while he talks); the shelf and why an exhibition matters; where to spend on the shop |
 | Day 8 | the regulars' commissions; the notebook's Inquiry as it fills; two events a week | a tip with each |
 | Day 11: Crownhold | gems, archmages and enchantment, two or three of a kind in a chest; synergies: the journal has tallied everything from day one, so some are ready to switch on | what a synergy is and where to choose one |
 | Day 16: the Royal Emporium | the court, demons and their gilded iron, the lodestone, the Royal Seal, the last due | that the Gate is just down the street |
-| A day's listens running out | trading on what you know | what to spend the last on (`ear_low`), and that you can still trade (`ear_out`) |
 | A short night | pawning, and (once a run) Bram's word | a tip |
 | A day that starts nearly broke | Bram's secret stash (twice a run) | the day card, and a tip the first time |
 | The day's event | a chip in the top bar that reopens it | a tip pointing at it |
@@ -611,7 +687,73 @@ Crownhold, the Royal Emporium. Until 0.36 they were bought at the day's end (80,
 stall had earned 50g; now `GameState.MoveInward` owns them the night a due is paid (or forgiven: Bram's word, a
 favour called in, the whole debt paid off early), and they're never on offer. `GameState.UpgradesOpen` (with
 Thornwick), `DisplayOpen` and `SynergiesOpen` hold the gates, so the sim and the bot follow them too. A week at the
-stall is five days with one thing new in each: listening, then judging sellers and the ear, Nim, an event, the Guild.
+stall is five days with one thing new in each: listening, then judging sellers, Nim, an event, the Guild.
+
+That table is a **first** season. What a later one opens with is the next section.
+
+## A season after the first (0.37)
+
+The owner drew the line: a season starts in one of three states, and the game had been treating the second like the
+first.
+
+| | The state | What it is |
+|---|---|---|
+| 1 | the first season ever on a save (`GameState.SeasonsBefore == 0`) | everything is taught, and each of the trade's ways is met a market at a time (the table above) |
+| 2 | a later season, before the game's been beaten (`GameState.Veteran`) | most of a player's hours: the seasons spent learning to clear the debt, and then the remembered ones of the campaign |
+| 3 | a season after the true ending (`CampaignDone`) | a new year: everything of state 2, and no summons, mimics or treasury (0.34) |
+
+What was wrong in the second state, found by having the bot play two seasons running on one profile (`--profile`) and
+reading what the second one said and dealt:
+
+- **Bram's tips and lessons did not repeat** (they've been kept in the profile since v20). What repeated was the
+  story's exposition: Bram's welcome with the trade in a sentence and his tap, Vane's introduction of the debt, the
+  summons, the Guild's letter read out in full, Hollis explaining the Shut Chests. Each has a short form now for
+  anyone who's heard it (`Story.Intro`, `WeekStart`, `Summons`; Hollis's notice in `TaleBook`): the figures and
+  what's different this time, no more. Vane's introduction is two lines where it was seven. A remembered season
+  (after the treasury's first swallowing) already had lines of its own, and keeps them.
+- **Everything a first season opens a market at a time was shut again every season.** No locks or false bottoms
+  until Thornwick, one thing of each kind in a chest and no enchantment until Crownhold: so every season's first week
+  was the plainest game there is, however many seasons you'd played. Those now go by **the trade's ways**
+  (`GameState.Ways`: the grandest market any season on the save has traded at, and never less than the shop's own):
+  locks, false bottoms and wards with Thornwick's ways (`Market.CraftTier`), two or three of a kind and enchanted
+  things with Crownhold's (`Market.PairsTier`, `MagicTier`). A second season's first chest at the stall may be
+  locked, with a floor that sits too high, two cloaks in it and one of them enchanted. Bram says why, once (the `ways`
+  tip), and his cradle is on the counter from that first morning.
+- **What stays with the market**: which kinds of thing a chest holds (potions and spells are still Thornwick's, gems
+  the capital's), who trades there and how they judge (so a warded thing still comes with the Thornwick folk who ward
+  them), what things fetch, and the tools: the witchlight is still Crownhold's. Before you own it an enchanted thing
+  in a later season's chest is there and unseen: nobody priced it, it comes out "ENCHANTED! x2", and the slip doesn't
+  hold against a perfect read a star you had no light to see (`ISlipModel.Lit`, `Appraisal.Check`).
+- **The slip couldn't mark what some chests held.** "Multiple-item contents are already unlocked, but the appraisal
+  sheet does not support marking them correctly": a tale's chest (`TaleBook.Fill`) and the Stranger's
+  (`Events.StrangerVisit`) drew their kinds with replacement, so one could hold two of a kind at a market where the
+  slip ticked a kind once: no way to mark it right, and no perfect read to be had. Both ends are fixed. Those chests
+  hold one of a kind unless the trade's ways count pairs, and the slip counts by the ways too, never by the market
+  alone (`Appraisal.MaxCount`, `CountsHidden`, built with `ways:`), so the slip can always say what a chest can hold.
+  `tools/curiotest` holds both to it.
+
+And so that a later season starts as itself, not as the first one again:
+
+- **Bram's drawer** (`DrawerPhase`, `Curios.Drawer`). On the first morning Bram turns out the drawer under the
+  counter: three plain curios (common or uncommon), each for a different way of trading, drawn from the seed. Take
+  one for nothing, or none. A build begins on the first day, and no two seasons begin alike.
+- **Nim comes from the first night** (not the third: his introduction was the reason for the wait), and **the
+  regulars' commissions from the first week's third morning** (not the second week's).
+
+A later season is a little easier than a first for the same hands: a curio from the first morning, Nim two nights
+sooner, finer chests in the cheap weeks. `--sim=learners` against `--sim=learners --veteran --ways=4` (120 seasons
+each, a first-timer to the careful player):
+
+| Skill | 0.15 | 0.3 | 0.5 | 0.75 | 0.9 | 1.0 |
+|---|---|---|---|---|---|---|
+| a first season clears | 21% | 33% | 53% | 78% | 85% | 93% |
+| a later season clears | 33% | 44% | 66% | 86% | 95% | 99% |
+
+That's the one place "nothing carries over that makes a run stronger" now gives, and on purpose: the second state is
+where a player is learning to clear, it's the same for everyone (nothing is bought, banked or ground for), and the
+challenge levels are still there for whoever finds it easy. `--veteran` plays any bot or sim run as a later season,
+`--ways=N` sets the ways, and `--profile` has the bot use and keep the stored profile, so two runs in a row are a
+first season and a second.
 
 ## The run: the Guild's dues
 
@@ -933,14 +1075,16 @@ a talent another), so a run is a handful of choices that have to fit together. 0
 and the named rule, which held what they added to what your slip named). 0.21 (the owner: rare curios came too often
 and too early, the named rule was clumsy, builds are the heart of the fun and each should play differently) gives them
 rarities, has Nim build with you, lets the numbers do what the named rule did, and gives six ways of trading a way to
-play of their own: 78 curios in all, and 0.22's Guild Promissory Note (Mara's Favour, a talent until then) makes 79;
-0.36's two for the ear (an Echo Stone, Lamb's-Wool Plugs: *The ear*) make 81.
+play of their own: 78 curios in all, and 0.22's Guild Promissory Note (Mara's Favour, a talent until then) makes 79.
+0.36 added two for its counted listens (an Echo Stone, Lamb's-Wool Plugs), which went out again with them in 0.37
+(a save holding one is paid what it cost), and 0.37 adds the six that do a build's routine (*Listening is free, and a
+build does the routine*): 85.
 
 **Every card does what it says** (0.35). The owner found curios that didn't seem to behave as described, so each of
 the 79 was audited against its card: `tools/curiotest` (a console program that compiles Core and runs 200 checks, a
 card's every promise against the game, most as twins with and without the curio; `dotnet run --project
-tools/curiotest`, `--only=key,key`) and the write-ups beside it (`AUDIT_A.md`, `_B`, `_C`). What it found, and what
-changed:
+tools/curiotest`, `--only=key,key`) and the write-ups beside it (`AUDIT_A.md`, `_B`, `_C`; 0.37's six, and the
+trade's ways, are `ChecksD.cs` and `AUDIT_D.md`: 217 checks now). What it found, and what changed:
 - A curio's few percent off a price vanished in rounding (a sum is rounded to the coin up to 30g, to the 5g above), and
   a sealed bid's price came back wrong once handled. A visit now keeps its exact price and rounds what's shown and paid
   to the coin, at least a coin off for a discount and on for a markup (`Visit.Rounded`).
@@ -1000,7 +1144,9 @@ keeps the shop's growth from making buying blind pay is the power index (above):
 fetch here, or how often they come out better than their chest, puts up what every seller asks. A build's edge is in
 what no seller can price: enchantment, and what's under a false bottom or in a ward (nobody knows it's there); your eye
 (fees and bonuses for a perfect read); what you pay (a haggler's tricks); and how you buy (a chest taken sight unseen).
-Wards still need naming: that's the warded-thing puzzle itself, not a condition on a bonus.
+Wards still need naming: that's the warded-thing puzzle itself, not a condition on a bonus. (Since 0.37 each main way
+of trading but sight unseen also has a curio that does its routine at the counter: the table is in *Listening is
+free, and a build does the routine*.)
 
 **Six ways to play** (`Curios.Main`), each with a way in (a common or uncommon), a multiplier, an engine that grows over
 the run, and a legendary capstone:
@@ -1041,9 +1187,9 @@ read). The whole list (`--sim=curiolist`; T: the shop tier Nim brings it from):
 |  | Aether Jar | U, T3 | Each enchanted thing you find this run makes everything 2% likelier to be enchanted (up to 20%). | once you've had a shop in Crownhold, or after two runs |
 |  | Enchanter's Chalk | U, T3 | An enchantment spreads: a chest with an enchanted thing in it has a second one. | once you've had a shop in Crownhold, or after two runs |
 |  | Spellbinder's Ring | R, T3 | Enchanted things are worth four times as much, not twice. | once you've had the Royal Emporium, or after four runs |
+|  | Lantern Moth | R, T3 | Every enchanted thing in a chest is starred on your slip as the chest comes in, witchlight or not. | once you've had a shop in Crownhold, or after two runs |
 |  | Archmage's Staff | L, T3 | Everything in a chest with an enchanted thing in it is enchanted. | after 15 enchanted things found, all told |
 | sight unseen | Sealed Bid | C | Buy a chest sight unseen and its seller knocks 15% off. | from the start |
-|  | Lamb's-Wool Plugs | U | Buy a chest sight unseen and your ear rests: a listen back. | after your first run |
 |  | Lucky Dip | U | Everything in a chest you take sight unseen is 15% likelier to come out a step better. | after your first run |
 |  | Underwriter's Bond | U, T2 | A chest bought sight unseen holds less than you paid? The Underwriters pay 40% of it back. | after your first run |
 |  | Wholesaler's Tally | U, T2 | Each chest you buy makes every seller after it today ask 4% less (up to 20%). | once you've had a shop in Crownhold, or after two runs |
@@ -1053,28 +1199,32 @@ read). The whole list (`--sim=curiolist`; T: the shop tier Nim brings it from):
 |  | Waiting Game | U | Every chest you pass makes the next seller ask 5% less (up to 20%). Buying starts it again. | from the start |
 |  | Closing Bell | U | The last customer of the day asks 25% less. | from the start |
 |  | Haggler's Knot | U, T2 | Each chest you talk down this run makes every seller ask 1% less (up to 8%). | after your first run |
+|  | Factor's Abacus | R | You know the least a haggler will take: your offer starts on it, and they take it. | after your first run |
 |  | Haggler's Purse | R, T2 | Everyone but Old Aldo and the Maw haggles with you, and 40% of whatever you talk them down by comes back to you as well. | once you've had the Royal Emporium, or after four runs |
 |  | Golden Tongue | L, T3 | All but Old Aldo and the Maw haggle and never walk out: go as low as you like, and they come down to 10% under their least. | after 25 chests talked down, all told |
 | the perfect read | Ear Trumpet | C | Nothing drowns out or muffles a sound for you: no clank, and no straw. | from the start |
 |  | Pocket Watch | C | Impatient sellers give you twice as long, and a rotten chest stands twice the shaking. | from the start |
 |  | Counting Beads | C, T2 | A chest its seller says nothing else about comes with a tally of every thing in it, false bottom and all. | from the start |
 |  | Appraiser's Seal | U | A perfect read pays you a valuer's fee: 8% of what the chest held. | from the start |
-|  | Echo Stone | U | A perfect read gives you a listen back. | from the start |
+|  | Scrivener's Quill | U | Your slip ticks each thing as you hear it, and counts them. What you work out is still yours to mark. | after your first run |
 |  | Cursed Crescent | U | Everything comes out exactly as its chest promised. Sellers sense the curse and ask 5% less. | after your first run |
 |  | Valuer's Register | U, T2 | A perfect read pays 0.5% of what the chest held for each one so far this run (up to 12%). | after your first run |
 |  | Tuning Fork | R | Each perfect read in a row: the next chest's things sell for 3% more (up to 30%). | once you've had the Royal Emporium, or after four runs |
 |  | Ledger of Certainty | R, T2 | A perfect read: everything in the chest sells for 15% more. A wrong slip: 15% less. | once you've had the Royal Emporium, or after four runs |
 |  | Truthglass | L, T3 | A perfect read: everything in the chest sells for half as much again. | after 40 perfect reads, all told |
+|  | Pocket Engine | L, T3 | Every chest is read for you: what's truly in it is on your slip as it comes in, false bottom and warded thing and all. | after 100 perfect reads, all told |
 | false bottoms | Padded Crate | C, T2 | Glass never breaks when you drop a chest. | from the start |
 |  | Smuggler's Hook | U, T2 | Smugglers come your way: false bottoms turn up twice as often. | from the start |
 |  | Hollow Rod | U, T2 | What's under a false bottom comes out a step better: people hid their best. | after your first run |
 |  | Smuggler's Log | U, T2 | Smugglers trust a buyer who keeps quiet: each false bottom you open this run makes false bottoms 2% likelier (up to 20%). | after your first run |
+|  | Toll-man's Gauge | R, T2 | A false bottom is marked on your slip as the chest comes in: no drop needed. | after your first run |
 |  | Black Market Pass | R, T2 | Thornwick's black market pays double for anything from under a false bottom. | once you've had the Royal Emporium, or after four runs |
 |  | Smugglers' Compass | L, T3 | Every chest has a false bottom. | after 15 false bottoms opened, all told |
 | wards | Warden's Lantern | C, T2 | Every sign a seller leaves (a dream, a tag, a riddle, a card...) points at a warded thing. | from the start |
 |  | Sleeper's Pillow | U, T2 | Sellers dream true for you: 20% of those with nothing else to tell you have warded something, and tell you their dream. | after your first run |
 |  | Wardbreaker's Tally | U, T2 | Each warded thing you name this run makes warded things sell for 10% more. | after your first run |
 |  | Ward-Key | R, T2 | A warded thing you name comes out a step better. | once you've had the Royal Emporium, or after four runs |
+|  | Wardens' Primer | R, T2 | When a sign points at a warded thing, your slip names it for you. | after your first run |
 |  | The Aldric Seal | L, T3 | Every seller with nothing else to tell you has warded a thing in their chest, and tells you a sign for it. | after 10 warded things named, all told |
 | luck | Lucky Shell | C | A dry spell ends twice as soon: luck starts to turn after 5 plain finds, not 10. | from the start |
 |  | Gambler's Token | U | Twice as many surprises in everything you open: good ones and bad ones. | after your first run |
@@ -1492,6 +1642,11 @@ three ways:
 
 An old profile's renown and talents are left behind when it loads (`Profile.FromJson`).
 
+0.37's drawer (*A season after the first*) is the nearest thing to one since: a free plain curio on a later season's
+first morning. It differs from the Keepsake talent it resembles in what it's for: three to choose from, each a
+different way of trading, so it widens how a season starts as much as it speeds it; nothing is spent or ground for;
+and it's everyone's from their second season.
+
 ## The shop's look
 
 Each move changes the shop around you: Bram's trestle table under a striped awning at the Brindle crossroads, with the
@@ -1580,16 +1735,39 @@ what unlocks them), the chosen one's rules, and the challenge level with its ter
 saved to `user://save.json` at the start of each day (`GameState.Save` and `Load`, plain JSON from Core), so leaving
 mid-day starts that day over; the pause menu (Esc, or Menu in the top bar) says so. Settings (`user://settings.cfg`):
 volume (effects, songs and, since 0.36, music), fullscreen, screen shake and flashes (full, reduced or off), outlines (round everyone and along the counter's
-edge, on whatever screen is showing, for art drawn to be outlined: see the art, above; 0.31's isn't), Uncle Bram's tips, and **item sounds**: for each
+edge, on whatever screen is showing, for art drawn to be outlined: see the art, above; 0.31's isn't), Uncle Bram's tips,
+how fast speech is typed and whether it blips (0.37: *What's said*), and **item sounds**: for each
 kind of thing, which of three or four sounds it makes (`Audio.SoundSets`; recorded ones from Kenney's CC0 packs via
 `tools/import_art.py`, a few synthesized in `Sfx`). Each kind's sound stays the one you'd expect in real life (a
 purse, a pot, a thump of cloth, a bottle, pages, glass), so any set keeps the rules readable; the choice is taste.
 Click a kind's option to hear the next one.
 
-**GM mode** (v21, for testing; Settings > GM mode, or `--gm`): the pause menu gets a GM panel beside it: +99,999 gold,
-skip the rest of the day (the customers still waiting go home, and the day ends as usual, so the Guild's night still
-comes), and unlock the whole journal (every regular, every find and its enchanted star, every curio Nim could carry,
-in the run and the profile). Nothing in it is fair, and the panel says so.
+**Saves (0.37).** Three of them (`Settings.Slot`, `Main.SlotPath`). The first is the files the game always kept
+(`user://save.json`, `profile.json`), so a player who had a save has it as Save 1, untouched; the others live in
+`user://slot2/` and `slot3/`. A save is everything that's kept: its profile (what's been taught and found, the
+campaign, each keywright's levels and best scores, the legendaries' feats) and its season in progress. The title's
+bottom-left button names the one being played ("Save 1") and opens the Saves panel (`SlotsView`), a card each: how
+many seasons it has played, where its story stands (the debt not cleared yet, cleared, you remember the treasury, the
+story's told), how far in it has traded, and what's in progress. **Play this save** switches to it and the title
+begins again on it; **Start a new save** on an empty one is the completely fresh start the owner asked for, a first
+season with everything to learn; **Erase, and start fresh** empties a used one, after a question that says what
+goes. Erasing destroys nothing: `Storage.Erase` renames the files where they are (`profile.erased-<time>.json`), the
+way an unreadable file is set aside, so a slip of the hand can be put right from the save folder. Settings are the
+machine's, not a save's. `--save-test` checks the paths, the switch and the erasing.
+
+**GM mode** (v21, for testing). Since 0.37 it's behind **F1** during a season: until then it was a row in Settings,
+where a player could switch it on out of curiosity. F1 opens the pause menu with the GM panel beside it, and it lasts
+until the game is closed (it isn't saved; `--gm` still starts with it on). The panel: +99,999 gold; skip the rest of
+the day (the customers still waiting go home, and the day ends as usual, so the Guild's night still comes); unlock
+the whole journal (every regular, every find and its enchanted star, every curio Nim could carry, in the run and the
+profile); and, since 0.37, **Fulfil the quests** (`GameState.GmFulfil`): everything the story asks of a season, at a
+stroke. This week's commissions are filled and paid; the treasury key's four pieces come with their fees; Bram's
+account is paid off (the gold for it goes into the purse first, and it's paid whether or not Mister Vane has called
+yet); and the true ending's checks are met: you remember the treasury, you've heard the gilded and seen the
+weighhouse register, you know the seal's clause and the charter, a full mimic waits, the Wet Hen is hired and Bram's
+been brought home. So the Guild's carriage comes that night for the final opening, and the next day after it. The
+panel says what it did; on a save whose story is already told it fills the commissions and says so. Nothing in it is
+fair, and the panel says so.
 
 ## Music and ambience (0.36)
 
@@ -2250,10 +2428,11 @@ as the villain. What it found, and what was done:
     Thornwick on day 8 and were still there on day 30. It also made the due purely a tax. 0.36: the due paid is the
     move.
 
-24. **Free listening (until 0.35).** Every strength, the drop and the lodestone on every chest, for nothing. With no
-    cost the right play was all of them every time, which is a procedure; nine chests in ten were profitable for
-    whoever followed it, so an opening only confirmed the slip. 0.36: the ear (*The ear: listens*). What was kept
-    from it: shaking again the way you already have is free, so counting is never rationed, and lessons are free.
+24. **The whole routine by hand, every chest (until 0.35).** Every strength, the drop and the lodestone on every
+    chest, for nothing. With no cost the right play was all of them every time, which is a procedure; nine chests in
+    ten were profitable for whoever followed it, so an opening only confirmed the slip. 0.36 put a price on each check
+    (the ear: 27, below). 0.37 took the price off again and gave the procedure to the build and to Bram's cradle
+    (*Listening is free, and a build does the routine*).
 
 25. **A click a sentence (0.35).** Dialogue a sentence at a time was right; waiting on a click for each was three or
     four clicks a speech, all day. 0.36: a speech says itself, and a click finishes or dismisses it.
@@ -2262,6 +2441,30 @@ as the villain. What it found, and what was done:
     better 7% (v10's one-in-five jackpots had been cut hard, and the letdowns never were), so the opening's commonest
     event was "WORSE...". 0.36: worse 9%, better 13.5% (sellers price the average, whatever it is, so the margins
     didn't move): *What a chest holds*.
+
+27. **The ear: counted listens (0.36).** Eight careful listens a day, one for each new check on a chest, with a Tea
+    Kettle, a Listening Screen, an Echo Stone and Lamb's-Wool Plugs to stretch them and a head cold and a rested ear
+    among the challenge terms. The owner, after playing it: "The hearing-ability mechanic serves no meaningful
+    purpose... restricting how many times players can listen is not the solution." It made the routine dearer, not
+    different: it never pinched in a first week, it fell hardest on whoever was still learning, and what a player
+    met was a meter between them and the chest. Kept from it: the closed eye at the opening for what
+    nothing you did could have told you of, the record of which checks a chest has had (`Visit.Checks`), the test
+    that a hand's shake is counted at any frame rate (`--hand-test`), and five customers a day past the stall.
+
+28. **Every season starting from nothing (until 0.36).** Locks and false bottoms shut until Thornwick, two of a kind
+    and enchantment until Crownhold, Nim until the third night, commissions until the second week, and the story's
+    exposition said in full, in every season. Right for a first season and wrong for the tenth: *A season after the
+    first*.
+
+29. **Speech a sentence at once (0.35, 0.36).** Each sentence appeared whole. The owner asked for what most pixel-art
+    games do: a character at a time, with a soft sound. The sentences stayed (the horn, the dots and the click all
+    need them); how each arrives changed. "At once" is still a text speed in Settings.
+
+30. **GM mode as a row in Settings (v21 to 0.36).** Anyone could switch it on. It's behind F1 now, lasts until the
+    game closes, and isn't saved.
+
+31. **One save (until 0.36).** Starting completely fresh meant finding the save folder and deleting files. Three
+    saves now, and erasing one sets its files aside.
 
 ## Open questions
 
@@ -2330,13 +2533,21 @@ as the villain. What it found, and what was done:
 - 0.34's campaign: does a second season show at once that knowing changes play (Garrick's chest, Old Haddon's note,
   Bram's tuning fork), do the Inquiry's leads read as things to do rather than homework, and does the plan's
   four-line list make the true ending feel earned before it's shown?
-- 0.36's ear, with a real hand on a real mouse: does a listen feel spent on purpose? `--ear-test` drives a pointer
-  the ways hands move and checks what's spent (*The ear*), but a pointer on a path isn't a person: the thresholds
-  (`CounterPhase.ListenHold`, `ShakeBox.TurnHold`) want ten minutes of a human hand. And is eight the right number:
-  does a day's fifth chest feel like a choice (which one check?) or like being told to stop playing? The playtester
-  ended days two and three with six listens unspent and day six with three: at the stall the ear doesn't pinch.
-- Does running out read as a rule of the world (an ear tires) or as an energy meter from a phone game? The kettle and
-  the screen are there so the answer to "I want more" is in the shop, at a price, from the second week.
+- 0.37's typed speech: nobody has heard the blips (a cloud session has no sound device; they were checked by their
+  numbers: 50ms, played at -15dB under a peak of -12.7dBFS). Are they the subtle patter most pixel-art games have, or
+  do they wear over an hour? Is 52 characters a second the right default? Both are the player's to change (Settings >
+  Game), and the blip is one line in `Sfx`.
+- Bram's cradle: does a button that shakes the chest feel like relief, or like the game playing itself? It's a second
+  a strength and the listening is still yours, but that's a judgement only a hand can make. If it's too much, it
+  could wait for a later season; if it's welcome, it could come sooner than Thornwick.
+- The routine curios: do they make a build *play* differently, as meant, or only save clicks? The quill adds nothing
+  to a careful player's takings and takes a slot: will anyone keep it over a curio that pays? (If not, it wants to be
+  a common, or to come without a slot.) And is the Pocket Engine, which ends the reading game for whoever finds it,
+  a capstone or a spoiler?
+- A later season's first week with every way already in its chests: does it read as the game remembering you, or as
+  Brindle losing its plainness? The stall's people and prices are still the stall's.
+- The opening's tell: once a glint means something better is coming, does a chest with no glint feel decided before
+  it opens? And over a hundred chests, is the breath before the last thing felt, or waited through?
 - Level 0 is the story's difficulty now (the careful player clears nine seasons in ten, a first-timer about one in
   five, and half of careers by their third). Is a first clear on a second or third season the hook it's meant to be,
   with the treasury's turn straight after it, or does it make the Guild a paper tiger until the challenge levels?

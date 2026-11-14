@@ -1,19 +1,19 @@
 # From early access to a Steam release
 
 Where Keywright stands against what a released PC game on Steam is expected to have, what 0.27 built for it, and what
-only the owner can do. Written for 0.27 and brought up to date for 0.29 and 0.36 (November 2026).
+only the owner can do. Written for 0.27 and brought up to date for 0.29, 0.36 and 0.37 (November 2026).
 
 ## Where it stands
 
 | Area | State | Notes |
 |---|---|---|
-| Saves and the profile | Ready | Crash-safe writes, backups, versions and migration, damaged files set aside and named. |
+| Saves and the profile | Ready | Crash-safe writes, backups, versions and migration, damaged files set aside and named. Three saves, each with its own profile and season (0.37). |
 | Display settings | Ready | Windowed, fullscreen, exclusive; window sizes that fit the screen; pixel-perfect or smooth; vsync; frame cap. |
-| Sound settings | Ready | Master, music (0.36), effects, the Heartsongs' songs; muting when the window loses focus. |
+| Sound settings | Ready | Master, music (0.36), effects, the Heartsongs' songs; muting when the window loses focus; text sounds on or off (0.37). |
 | Music | Written in code, unheard | Seven themes and four beds of ambience, composed and rendered by `tools/music` (0.36). Checked by their numbers only: listen before release (below). |
 | Keyboard and mouse | Ready | Every key rebindable; the mouse needs none. |
 | Controllers | Ready | Xbox, PlayStation and Switch layouts; the stick drives the pointer, so a controller does all a mouse does. |
-| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all 4,056 texts (0.36; 2,743 in 0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
+| Languages | Translated | English, French, Japanese, Simplified and Traditional Chinese: all @@TEXTS@@ texts (0.37; 4,056 in 0.36, 2,743 in 0.29), checked and played in each. A native speaker's pass is still worth buying (below). |
 | Fonts | Ready | Western European in the house font; Japanese and Chinese in Fusion Pixel 12px; the rest of Latin, Cyrillic, Greek and Korean in Galmuri. |
 | Steam | Ready to switch on | Achievements, rich presence, overlay pause, launch through Steam: needs the app ID and Steamworks set-up. |
 | Builds | Ready | CI exports Windows and Linux, smoke-tests both and keeps them as artifacts, on every push. |
@@ -107,13 +107,26 @@ a season with the sound on. If a theme grates or thins out over an hour, its tun
 whole approach doesn't hold up, a composer's loops dropped into `assets/audio/music` and `assets/audio/ambience`
 under the same names play with no code changed. The Music volume starts at 60%.
 
-**The ear, in the hand (0.36):** a listen is spent once the chest has really been shaken at a strength for a moment
-(back and forth, at that speed, with nothing harder just before), so winding up to a hard shake, lifting the chest
-or carrying it shouldn't spend one. `--ear-test` checks that with a pointer driven the ways hands move, at sixty and
-at twelve frames a second, and a fresh-eyes playtest found (and got fixed) the first version's failure to register
-at all on a slow machine. A pointer on a path still isn't a person: ten minutes with a real mouse and a real
-controller will say whether listens ever go by accident, or a shake you meant doesn't count.
-`CounterPhase.ListenHold` (how long each strength takes) and `ShakeBox.TurnHold` are the numbers.
+**What only a person can check in 0.37.** A cloud session has no sound device and no hand on a mouse, so each of
+these was checked by its numbers, by recorded frames or by a driven pointer, and wants a few minutes of the owner's:
+
+- *The text blips.* Speech is typed with a soft blip every second letter (`Sfx` "talk": a 50ms tone at 440Hz with
+  its octave, played at -15dB, under every chest sound; a pen's "scratch" for letters and Bram's notes). Nobody has
+  heard one. If they grate, or want to be softer, higher or rarer: Settings > Game > Text sounds turns them off, and
+  the tone, its pitch by speaker (`Typewriter.Voice`) and how often it comes (`Typewriter.Step`) are a line each.
+- *The typing speed.* 52 characters a second by default (26 in Japanese and Chinese), with Slow, Fast and At once in
+  Settings > Game > Text speed. It reads well in recorded frames; whether it reads well is a reader's call.
+- *Bram's cradle.* "Rock it" shakes the chest gently, firmly and hard, a second each. Whether that's relief or the
+  game playing itself is a judgement for a hand: `CounterPhase.CradleSeconds` is how long, `GameState.Cradle` when it
+  arrives (Thornwick in a first season, the first morning after).
+- *A hand's shake still counts.* `--hand-test` (0.36's `--ear-test`) drives a pointer the ways hands move, at sixty
+  and twelve frames a second, and checks which strengths each counted as tried. Nothing is spent by a shake any
+  more, but Bram's lessons wait on it. `CounterPhase.TryTime` and `ShakeBox.LevelHold` are the numbers.
+- *The opening's pace.* How long a dear chest strains (up to 1.8 seconds), the breath before the last thing, and
+  whether a chest with no glint at the crack feels flat now that a glint means something (`OpeningPhase._stakes`,
+  `Thumps`, `LastBreath`, `Tell`). `--opening-demo` plays a crafted chest to judge by.
+- *The enchantment's light* was looked at in screenshots and frames at 720p and 1440p; in motion on a real screen it
+  may want to be calmer or stronger (`Enchant.Flow`'s `strength`, the shader's two colours).
 
 **Translations:** the four languages are complete and consistent, but no native speaker has read them. Before
 release, pay one for a pass of play in each (a review, not a translation: a few days each, well under the $2,000-3,500
@@ -133,8 +146,10 @@ usual points: full controller support, fullscreen by default, text at least 10px
   where a player's bug report should start.
 - **macOS** isn't built: it needs signing and notarization on a Mac account, and Steam doesn't require it.
 - **Untested here:** the Steam overlay and Steam Input with a real client (only possible on a machine with Steam),
-  a real controller (the tests send the same events one would), and, since 0.36, how the music sounds and how the
-  ear's listens feel under a real hand (above).
+  a real controller (the tests send the same events one would), how 0.36's music sounds, and everything about 0.37
+  that's for an ear or a hand (above).
+- **Steam Cloud and the three saves:** the second and third saves live in `slot2/` and `slot3/` under the user
+  folder, so Auto-Cloud's paths need those folders too (steam/README.md).
 - **A demo:** Steam Next Fest wants a separate demo app. The game would need a demo mode (the first week, say, then a
   wishlist note). That's quick to add once the store page exists.
 
@@ -142,8 +157,9 @@ usual points: full controller support, fullscreen by default, text at least 10px
 
 1. Bump `config/version` in project.godot and update the version in CREDITS.md if it's named there.
 2. Run the checks: `dotnet build` (0 warnings), `--sim` (compare with the last release), the lesson test,
-   `--save-test`, `--loc-test`, `--shake-test` (eleven minutes), `--pad-test`, `dotnet run --project tools/loc --
-   check`, and a bot run with `--shots` to look over.
+   `--save-test`, `--loc-test`, `--shake-test` (eleven minutes), `--pad-test`, `--hand-test`, `--title-test`,
+   `dotnet run --project tools/curiotest`, `dotnet run --project tools/loc -- check`, and a bot run with `--shots`
+   to look over.
 3. Push to `main`, or merge into it: CI builds and smoke-tests both platforms.
 4. Download the artifacts, upload them to their depots with SteamPipe, and set the build live on a beta branch first.
 5. On a machine with Steam: start it from the library, earn an achievement, open the overlay, quit, start it on
