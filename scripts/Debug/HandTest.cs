@@ -83,8 +83,9 @@ public partial class Main
             // One hold of the chest: the pointer follows a path (reported every frame, or in jumps), then lets go.
             // The frames a second it got go into `rate`: a hand's shake is only seen as often as the game draws.
             double rate = 0;
-            async Task Hold(Func<double, Vector2> path, double seconds, double every = 0)
+            async Task Hold(Func<double, Vector2> path, double seconds, double every = 0, double[] pace = null)
             {
+                int paced = 0;
                 MoveTo(chest);
                 await Frame();
                 await Frame();
@@ -94,10 +95,13 @@ public partial class Main
                 int frames = 0;
                 for (double t = 0; t < seconds; t = Now() - start)
                 {
-                    if (every <= 0 || t - last >= every)
+                    // (An uneven pace: the pointer's seen after each of these gaps in turn, as on a machine whose
+                    // frames come a short one, then a long one.)
+                    if (pace != null ? t - last >= pace[paced % pace.Length] : every <= 0 || t - last >= every)
                     {
                         MoveTo(chest + path(t));
                         last = t;
+                        paced++;
                     }
                     await Frame();
                     frames++;
@@ -153,9 +157,10 @@ public partial class Main
                 t < 0.25 ? Swing(110 * (float)(t / 0.25), 3.5f)(t) : t < 1.4 ? hard(t) : Vector2.Zero, 2.1), "hard");
             // (The playtest tool's own amplitudes, tools/playtest/pt: the chest glides between reports, so a flip reads
             // as the speed of the move it is.)
-            await Expect("a firm shake from a mouse that reports in jumps", () => Hold(Flip(40), 2.0, 0.09), "firm", "hard");
+            await Expect("a firm shake from a mouse that reports in jumps", () => Hold(Flip(38), 2.0, 0.09), "firm", "hard");
             await Expect("a hard shake from a mouse that reports in jumps", () => Hold(Flip(95), 1.6, 0.08), "hard");
             await Expect("a gentle shake from a mouse that reports in jumps", () => Hold(Flip(6), 2.0, 0.1), "gentle", "firm+hard");
+            await Expect("a firm shake seen at an uneven pace (short frames and long ones)", () => Hold(firm, 2.4, pace: new[] { 0.03, 0.13, 0.05, 0.12 }), "firm", "hard");
             await Expect("carrying the chest across the counter", () => Hold(t => new Vector2(110 * (float)Math.Min(t, 1.2), 0), 1.6), "", "firm+hard");
             await Expect("lifting it and setting it down again", () => Hold(t =>
                 new Vector2(0, -90 * (float)(t < 0.5 ? t / 0.5 : t < 0.9 ? 1 : Math.Max(0, 1 - (t - 0.9) / 0.5))), 1.6), "", "firm+hard");
@@ -167,7 +172,7 @@ public partial class Main
             needs = 9;
             await Wait(0.5);
             await Expect("a firm shake at twelve frames a second", () => Hold(firm, 2.0), "firm", "hard");
-            await Expect("a firm shake in jumps at twelve frames a second", () => Hold(Flip(40), 2.4, 0.09), "firm", "hard");
+            await Expect("a firm shake in jumps at twelve frames a second", () => Hold(Flip(38), 2.4, 0.09), "firm", "hard");
             await Expect("a hard shake at twelve frames a second", () => Hold(hard, 1.8), "hard");
             await Expect("a gentle shake at twelve frames a second", () => Hold(gentle, 2.0), "gentle", "firm+hard");
             Engine.MaxFps = fps;

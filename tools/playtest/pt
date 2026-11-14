@@ -92,9 +92,10 @@ case "$1" in
     x=$2; y=$3; level=$3; level=$4; secs=${5:-2.5}
     case "$level" in
       # How far each flip goes (0.37: the chest glides between the pointer's reports, so a flip reads as the speed of
-      # the move it is, where a lurch used to read about twice that: firm was 18 and hard 60).
+      # the move it is, where a lurch used to read about twice that: firm was 18 and hard 60. By the model in
+      # docs/design.md's "The same shake at any frame rate", firm holds from 33 to 43 across the flips' pace).
       gentle) amp=6; dt=0.05 ;;
-      firm)   amp=40; dt=0.05 ;;
+      firm)   amp=38; dt=0.05 ;;
       hard)   amp=95; dt=0.04 ;;
       *) echo "level must be gentle, firm or hard"; exit 1 ;;
     esac

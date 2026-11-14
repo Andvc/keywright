@@ -188,7 +188,10 @@ Things the final pass of reports, bot runs and tests turned up, and what was don
 - **A firm shake read as hard at ten or twelve frames a second** (`--hand-test` in a scaled window). It always had:
   the pointer is read once a frame, so on a slow machine the chest lurched once a frame, and a lurch's first step is
   about twice as fast as the shake that made it. The chest now glides between the pointer's reports; at sixty frames
-  a second nothing changes. The playtest tool's shakes were resized to match.
+  a second nothing changes. The playtest tool's shakes were resized to match, and a first version of the glide was
+  itself caught by the tool's real pointer (uneven frames) before the one that shipped.
+- **"Fulfil the quests" said more than its panel showed** (a real click through the playtest tool): the panel is
+  taller.
 - **The haggler's abacus label outgrew its place** in French, and could in English with a four-figure price: shorter
   words.
 - **The experience report was playing second and third seasons as first ones**: it carries the profile now, which is

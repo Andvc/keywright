@@ -63,8 +63,9 @@ public partial class PauseMenu : CanvasLayer
     void BuildGm(Control root)
     {
         if (_gmNote != null) return;
-        const float gx = X + W + 24, gw = 260;
-        root.AddChild(UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(gx, Y, gw, H));
+        // Taller than the menu beside it: what "Fulfil the quests" did takes eight lines to say in French.
+        const float gx = X + W + 24, gw = 260, gh = H + 96;
+        root.AddChild(UiKit.MakePanel(Palette.Magic.Darkened(0.3f)).Place(gx, Y, gw, gh));
         root.AddChild(UiKit.MakeLabel(Loc.T("GM"), 32, Palette.Magic, HorizontalAlignment.Center, outline: 4).Place(gx, Y + 18, gw, 40));
         float y = Y + 80;
         root.AddChild(UiKit.MakeButton(Loc.T("+99,999 gold"), Palette.Gold, 16, () => Gm(Main.Instance.GmGold())).Place(gx + 20, y, gw - 40, 44));
@@ -76,7 +77,7 @@ public partial class PauseMenu : CanvasLayer
         root.AddChild(fulfil);
         _gmNote = UiKit.MakeLabel(Loc.T("For testing: nothing here is fair."), 16, Palette.Muted, HorizontalAlignment.Center).Wrapped();
         _gmNote.ClipText = true;
-        root.AddChild(_gmNote.Place(gx + 12, y + 228, gw - 24, H - 80 - 228 - 12));
+        root.AddChild(_gmNote.Place(gx + 12, y + 228, gw - 24, gh - 80 - 228 - 12));
     }
 
     void Gm(string done) => _gmNote.Text = done;

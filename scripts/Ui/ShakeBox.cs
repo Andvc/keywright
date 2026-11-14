@@ -100,11 +100,13 @@ public partial class ShakeBox : Node2D
     /// be several physics steps (a slow machine, a mouse or a remote screen that reports in jumps): followed as it came,
     /// the chest lurched once a report, and a lurch's first step is about twice as fast as the shake that made it, so
     /// at twelve frames a second a firm shake read as hard (to the meter, and to a seller who minds a hard one). The
-    /// chest's target now glides from one report to the next over as many steps as the last two were apart: at a
-    /// step a report (sixty frames a second, and the cradle's own rocking) it's exactly what it was.
+    /// chest's target now glides from one report to the next over as many steps as reports have been coming apart
+    /// (the longer of the last two gaps: frames aren't evenly paced on a struggling machine, and gliding over the
+    /// last gap alone read a firm shake as hard again whenever a short frame was followed by a long one): at a step a
+    /// report (sixty frames a second, and the cradle's own rocking) it's exactly what it was.
     /// </summary>
     Vector2 _reported, _glideFrom;
-    int _sinceReport, _reportEvery = 1;
+    int _sinceReport, _reportEvery = 1, _lastGap = 1;
 
     /// <summary>The longest gap between reports the glide spreads a move over (eight steps: seven and a half frames a second).</summary>
     const int MaxGlide = 8;
@@ -206,7 +208,7 @@ public partial class ShakeBox : Node2D
             _grab = mouse - _pos;
             _target = _reported = _glideFrom = _pos;
             _sinceReport = 0;
-            _reportEvery = 1;
+            _reportEvery = _lastGap = 1;
             GetViewport().SetInputAsHandled();
         }
         else if (!button.Pressed && _dragging)
@@ -281,7 +283,9 @@ public partial class ShakeBox : Node2D
             // A new report: glide to it from wherever the target has got to, over the steps the last one took to come.
             if (reported != _reported)
             {
-                _reportEvery = Math.Clamp(_sinceReport, 1, MaxGlide);
+                int gap = Math.Clamp(_sinceReport, 1, MaxGlide);
+                _reportEvery = Math.Max(gap, _lastGap);
+                _lastGap = gap;
                 _sinceReport = 0;
                 _glideFrom = _target;
                 _reported = reported;

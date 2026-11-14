@@ -349,14 +349,20 @@ chest lurched once a report, and a lurch's first step is about twice as fast as 
 twelve frames a second a firm shake read as hard: to the meter, to what counted as tried, and to Brother Cadoc. It
 had always been so; 0.36's ear hid it for the listens it counted (its own measure, `Dwell`, went with the ear) and
 `--hand-test` found it again in a scaled window, where the software renderer here drops to ten frames a second. The
-chest's target now glides from one report to the next over as many steps as the last two reports were apart, so the
-chest moves as the hand does and its speed means the same at any frame rate. At a report a step (sixty frames a
-second, and the cradle's and the bot's own rocking) nothing changes, not by a pixel. `--hand-test` (0.36's
+chest's target now glides from one report to the next over as many steps as reports have been coming apart (the
+longer of the last two gaps: a struggling machine's frames aren't evenly paced, and gliding over the last gap alone
+read a firm shake as hard again whenever a short frame was followed by a long one, which the playtest tool's real
+pointer showed at once), so the chest moves as the hand does and its speed means the same at any frame rate. At a
+report a step (sixty frames a second, and the cradle's and the bot's own rocking) nothing changes, not by a pixel. A
+model of the follow (the pointer read at even and uneven paces, the glide, the chest's lag) put numbers on it: a
+firm swing peaks at 744 pixels a second at sixty frames a second, read 1,150 to 1,630 at ten and twelve as it was
+(hard from 1,150), and reads 560 to 710 now, 620 at an uneven pace. `--hand-test` (0.36's
 `--ear-test`, kept) drives a pointer through the real counter the ways hands move (a gentle, a firm and a hard
 shake, a hard one with its wind-up and wind-down, a mouse that reports in jumps, twelve frames a second, a lift, a
-carry) and checks which strengths each counted as; it passes at 1280x720 and in a 1600x900 window. The playtest
-tool's shakes (`tools/playtest/pt`) were flips sized for the lurch, and are sized for the move now (firm 40 pixels a
-flip, hard 95).
+carry, and since 0.37 an uneven pace of short frames and long ones) and checks which strengths each counted as; it
+passes at 1280x720 and in a 1600x900 window. The playtest tool's shakes (`tools/playtest/pt`) were flips sized for
+the lurch, and are sized for the move now (firm 38 pixels a flip, hard 95), and read gentle, firm and hard with a
+real pointer.
 
 **The careful player** (`Hearing.Read`, `Strategy`, for the sim and the bot) listens to everything again: every
 strength the seller allows for nothing, the drop where a false bottom is likely and nothing in the way of it (not
